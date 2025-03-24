@@ -6,8 +6,13 @@ option go_package = "github.com/infigaming-com/meepo-api/app/reward/service/inte
 import "google/protobuf/duration.proto";
 
 message Bootstrap {
-  Server server = 1;
-  Data data = 2;
+  Logger logger = 1;
+  Server server = 2;
+  Data data = 3;
+}
+
+message Logger {
+  string level = 1;
 }
 
 message Server {
