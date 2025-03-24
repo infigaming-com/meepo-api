@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.reward.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/api/reward/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.reward.service.v1";
+
+service Reward {
+	rpc CreateReward (CreateRewardRequest) returns (CreateRewardReply);
+	rpc UpdateReward (UpdateRewardRequest) returns (UpdateRewardReply);
+	rpc DeleteReward (DeleteRewardRequest) returns (DeleteRewardReply);
+	rpc GetReward (GetRewardRequest) returns (GetRewardReply);
+	rpc ListReward (ListRewardRequest) returns (ListRewardReply);
+}
+
+message CreateRewardRequest {}
+message CreateRewardReply {}
+
+message UpdateRewardRequest {}
+message UpdateRewardReply {}
+
+message DeleteRewardRequest {}
+message DeleteRewardReply {}
+
+message GetRewardRequest {}
+message GetRewardReply {}
+
+message ListRewardRequest {}
+message ListRewardReply {}

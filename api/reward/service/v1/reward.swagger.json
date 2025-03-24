@@ -1,0 +1,64 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "v1/reward.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Reward"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CreateRewardReply": {
+      "type": "object"
+    },
+    "v1DeleteRewardReply": {
+      "type": "object"
+    },
+    "v1GetRewardReply": {
+      "type": "object"
+    },
+    "v1ListRewardReply": {
+      "type": "object"
+    },
+    "v1UpdateRewardReply": {
+      "type": "object"
+    }
+  }
+}
