@@ -14,10 +14,25 @@ service Wallet {
 			get: "/v1/wallet/health"
 		};
 	}
+	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {
+		option (google.api.http) = {
+			get: "/v1/wallet/balance/{user_id}"
+		};
+	}
 }
 
 message HealthCheckRequest {}
 
 message HealthCheckResponse {
 	string status = 1;
+}
+
+message GetUserBalanceRequest {
+	string user_id = 1;
+}
+
+message GetUserBalanceResponse {
+	int64 cash = 1;
+	int64 operator_bonus = 2;
+	int64 provider_bonus = 3;
 }

@@ -109,6 +109,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/wallet/balance/{userId}:
+        get:
+            tags:
+                - Wallet
+            operationId: Wallet_GetUserBalance
+            parameters:
+                - name: userId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceResponse'
     /v1/wallet/health:
         get:
             tags:
@@ -182,6 +200,15 @@ components:
             type: object
             properties:
                 userId:
+                    type: string
+        api.wallet.service.v1.GetUserBalanceResponse:
+            type: object
+            properties:
+                cash:
+                    type: string
+                operatorBonus:
+                    type: string
+                providerBonus:
                     type: string
         api.wallet.service.v1.HealthCheckResponse:
             type: object
