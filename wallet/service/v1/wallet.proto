@@ -11,7 +11,7 @@ option java_package = "api.wallet.service.v1";
 service Wallet {
 	rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {
 		option (google.api.http) = {
-			get: "/v1/wallet/health"
+			get: "/v1/wallet/healthcheck"
 		};
 	}
 	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {

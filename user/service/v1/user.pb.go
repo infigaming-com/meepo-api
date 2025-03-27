@@ -639,9 +639,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\rOAuthProvider\x12\x1e\n" +
 	"\x1aOAUTH_PROVIDER_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15OAUTH_PROVIDER_GOOGLE\x10\x01\x12\x1b\n" +
-	"\x17OAUTH_PROVIDER_TELEGRAM\x10\x022\xd0\x04\n" +
-	"\x04User\x12y\n" +
-	"\vHealthCheck\x12'.api.user.service.v1.HealthCheckRequest\x1a(.api.user.service.v1.HealthCheckResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/user/health\x12u\n" +
+	"\x17OAUTH_PROVIDER_TELEGRAM\x10\x022\xd5\x04\n" +
+	"\x04User\x12~\n" +
+	"\vHealthCheck\x12'.api.user.service.v1.HealthCheckRequest\x1a(.api.user.service.v1.HealthCheckResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/v1/user/healthcheck\x12u\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a%.api.user.service.v1.RegisterResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/user/register\x12i\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a\".api.user.service.v1.LoginResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v1/user/login\x12~\n" +
 	"\n" +

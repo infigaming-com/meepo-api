@@ -25,7 +25,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/helloworld.v1.HelloReply'
-    /v1/user/health:
+    /v1/user/healthcheck:
         get:
             tags:
                 - User
@@ -127,7 +127,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceResponse'
-    /v1/wallet/health:
+    /v1/wallet/healthcheck:
         get:
             tags:
                 - Wallet

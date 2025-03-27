@@ -29,7 +29,7 @@ type WalletHTTPServer interface {
 
 func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r := s.Route("/")
-	r.GET("/v1/wallet/health", _Wallet_HealthCheck1_HTTP_Handler(srv))
+	r.GET("/v1/wallet/healthcheck", _Wallet_HealthCheck1_HTTP_Handler(srv))
 	r.GET("/v1/wallet/balance/{user_id}", _Wallet_GetUserBalance0_HTTP_Handler(srv))
 }
 
@@ -102,7 +102,7 @@ func (c *WalletHTTPClientImpl) GetUserBalance(ctx context.Context, in *GetUserBa
 
 func (c *WalletHTTPClientImpl) HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...http.CallOption) (*HealthCheckResponse, error) {
 	var out HealthCheckResponse
-	pattern := "/v1/wallet/health"
+	pattern := "/v1/wallet/healthcheck"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationWalletHealthCheck))
 	opts = append(opts, http.PathTemplate(pattern))

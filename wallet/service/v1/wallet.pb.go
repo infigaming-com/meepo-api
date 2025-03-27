@@ -219,9 +219,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x16GetUserBalanceResponse\x12\x12\n" +
 	"\x04cash\x18\x01 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x02 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x03 \x01(\x03R\rproviderBonus2\x9f\x02\n" +
-	"\x06Wallet\x12\x7f\n" +
-	"\vHealthCheck\x12).api.wallet.service.v1.HealthCheckRequest\x1a*.api.wallet.service.v1.HealthCheckResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v1/wallet/health\x12\x93\x01\n" +
+	"\x0eprovider_bonus\x18\x03 \x01(\x03R\rproviderBonus2\xa5\x02\n" +
+	"\x06Wallet\x12\x84\x01\n" +
+	"\vHealthCheck\x12).api.wallet.service.v1.HealthCheckRequest\x1a*.api.wallet.service.v1.HealthCheckResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/wallet/healthcheck\x12\x93\x01\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/v1/wallet/balance/{user_id}BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 

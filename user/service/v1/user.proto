@@ -11,7 +11,7 @@ option java_package = "api.user.service.v1";
 service User {
 	rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {
 		option (google.api.http) = {
-			get: "/v1/user/health"
+			get: "/v1/user/healthcheck"
 		};
 	}
 	rpc Register (RegisterRequest) returns (RegisterResponse) {

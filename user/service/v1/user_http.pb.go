@@ -35,7 +35,7 @@ type UserHTTPServer interface {
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
-	r.GET("/v1/user/health", _User_HealthCheck0_HTTP_Handler(srv))
+	r.GET("/v1/user/healthcheck", _User_HealthCheck0_HTTP_Handler(srv))
 	r.POST("/v1/user/register", _User_Register0_HTTP_Handler(srv))
 	r.POST("/v1/user/login", _User_Login0_HTTP_Handler(srv))
 	r.POST("/v1/user/oauth/login", _User_OAuthLogin0_HTTP_Handler(srv))
@@ -180,7 +180,7 @@ func (c *UserHTTPClientImpl) GetUser(ctx context.Context, in *GetUserRequest, op
 
 func (c *UserHTTPClientImpl) HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...http.CallOption) (*HealthCheckResponse, error) {
 	var out HealthCheckResponse
-	pattern := "/v1/user/health"
+	pattern := "/v1/user/healthcheck"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationUserHealthCheck))
 	opts = append(opts, http.PathTemplate(pattern))
