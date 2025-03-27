@@ -1,6 +1,4 @@
 GOHOSTOS:=$(shell go env GOHOSTOS)
-GOPATH:=$(shell go env GOPATH)
-VERSION=$(shell git describe --tags --always)
 
 ifeq ($(GOHOSTOS), windows)
 	#the `find.exe` is different from `find` in bash/shell.
@@ -33,9 +31,3 @@ api:
  	       --go-grpc_out=paths=source_relative:. \
 	       --openapi_out=fq_schema_naming=true,default_response=false:. \
 	       $(API_PROTO_FILES)
-
-.PHONY: generate
-# generate
-generate:
-	go generate ./...
-	go mod tidy

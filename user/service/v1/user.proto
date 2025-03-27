@@ -9,6 +9,11 @@ option java_multiple_files = true;
 option java_package = "api.user.service.v1";
 
 service User {
+	rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {
+		option (google.api.http) = {
+			get: "/v1/user/health"
+		};
+	}
 	rpc Register (RegisterRequest) returns (RegisterResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/register"
@@ -32,6 +37,12 @@ service User {
 			get: "/v1/user/{id}"
 		};
 	}
+}
+
+message HealthCheckRequest {}
+
+message HealthCheckResponse {
+	string status = 1;
 }
 
 message UserInfo {
