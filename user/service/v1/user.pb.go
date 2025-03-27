@@ -404,8 +404,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
 	"DeleteUser\x12&.api.user.service.v1.DeleteUserRequest\x1a$.api.user.service.v1.DeleteUserReply\x12Q\n" +
 	"\aGetUser\x12#.api.user.service.v1.GetUserRequest\x1a!.api.user.service.v1.GetUserReply\x12T\n" +
-	"\bListUser\x12$.api.user.service.v1.ListUserRequest\x1a\".api.user.service.v1.ListUserReplyBS\n" +
-	"\x13api.user.service.v1P\x01Z:github.com/infigaming-com/meepo-api/api/user/service/v1;v1b\x06proto3"
+	"\bListUser\x12$.api.user.service.v1.ListUserRequest\x1a\".api.user.service.v1.ListUserReplyBO\n" +
+	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
 	file_user_service_v1_user_proto_rawDescOnce sync.Once

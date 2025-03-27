@@ -74,8 +74,8 @@ const file_helloworld_v1_error_reason_proto_rawDesc = "" +
 	" helloworld/v1/error_reason.proto\x12\rhelloworld.v1*:\n" +
 	"\vErrorReason\x12\x17\n" +
 	"\x13GREETER_UNSPECIFIED\x10\x00\x12\x12\n" +
-	"\x0eUSER_NOT_FOUND\x10\x01BC\n" +
-	"\rhelloworld.v1P\x01Z\x1emeepo-api/api/helloworld/v1;v1\xa2\x02\x0fAPIHelloworldV1b\x06proto3"
+	"\x0eUSER_NOT_FOUND\x10\x01B?\n" +
+	"\rhelloworld.v1P\x01Z\x1ameepo-api/helloworld/v1;v1\xa2\x02\x0fAPIHelloworldV1b\x06proto3"
 
 var (
 	file_helloworld_v1_error_reason_proto_rawDescOnce sync.Once

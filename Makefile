@@ -1,5 +1,6 @@
 GOHOSTOS:=$(shell go env GOHOSTOS)
-GO := go
+GOPATH:=$(shell go env GOPATH)
+VERSION=$(shell git describe --tags --always)
 
 ifeq ($(GOHOSTOS), windows)
 	#the `find.exe` is different from `find` in bash/shell.
@@ -7,11 +8,9 @@ ifeq ($(GOHOSTOS), windows)
 	#changed to use git-bash.exe to run find cli or other cli friendly, caused of every developer has a Git.
 	#Git_Bash= $(subst cmd\,bin\bash.exe,$(dir $(shell where git)))
 	Git_Bash=$(subst \,/,$(subst cmd\,bin\bash.exe,$(dir $(shell where git))))
-	INTERNAL_PROTO_FILES=$(shell $(Git_Bash) -c "find internal -name *.proto")
-	API_PROTO_FILES=$(shell $(Git_Bash) -c "find api -name *.proto")
+	API_PROTO_FILES=$(shell $(Git_Bash) -c "find . -name *.proto -not -path './third_party/*'")
 else
-	INTERNAL_PROTO_FILES=$(shell find internal -name *.proto)
-	API_PROTO_FILES=$(shell find api -name *.proto)
+	API_PROTO_FILES=$(shell find . -name *.proto -not -path './third_party/*')
 endif
 
 .PHONY: init
@@ -27,11 +26,11 @@ init:
 .PHONY: api
 # generate api proto
 api:
-	protoc --proto_path=./api \
+	protoc --proto_path=. \
 	       --proto_path=./third_party \
- 	       --go_out=paths=source_relative:./api \
- 	       --go-http_out=paths=source_relative:./api \
- 	       --go-grpc_out=paths=source_relative:./api \
+ 	       --go_out=paths=source_relative:. \
+ 	       --go-http_out=paths=source_relative:. \
+ 	       --go-grpc_out=paths=source_relative:. \
 	       --openapi_out=fq_schema_naming=true,default_response=false:. \
 	       $(API_PROTO_FILES)
 
@@ -40,23 +39,3 @@ api:
 generate:
 	go generate ./...
 	go mod tidy
-
-.PHONY: upgrade
-# upgrade
-upgrade:
-	@echo "Fetching latest Go 1.23.x version..."
-	$(eval LATEST_GO_VERSION := $(shell curl -s https://go.dev/dl/?mode=json | grep -o '"version": "go1\.23\.[0-9]*"' | sort -V | tail -n1 | cut -d'"' -f4 | sed 's/go//'))
-	@if [ -z "$(LATEST_GO_VERSION)" ]; then \
-		echo "Error: No Go 1.23.x version found"; \
-		exit 1; \
-	fi
-	@echo "Latest Go 1.23.x version: $(LATEST_GO_VERSION)"
-	@if [ "$(GOHOSTOS)" = "darwin" ]; then \
-		sed -i '' 's/^go .*/go $(LATEST_GO_VERSION)/' go.mod; \
-	else \
-		sed -i 's/^go .*/go $(LATEST_GO_VERSION)/' go.mod; \
-	fi
-	@echo "Updating dependencies..."
-	@$(GO) get -u ./...
-	@$(GO) mod tidy
-	@echo "Go version and dependencies updated successfully!"
