@@ -109,6 +109,18 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/wallet/health:
+        get:
+            tags:
+                - Wallet
+            operationId: Wallet_HealthCheck
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.HealthCheckResponse'
 components:
     schemas:
         api.user.service.v1.GetUserResponse:
@@ -171,6 +183,11 @@ components:
             properties:
                 userId:
                     type: string
+        api.wallet.service.v1.HealthCheckResponse:
+            type: object
+            properties:
+                status:
+                    type: string
         helloworld.v1.HelloReply:
             type: object
             properties:
@@ -181,3 +198,4 @@ tags:
     - name: Greeter
       description: The greeting service definition.
     - name: User
+    - name: Wallet

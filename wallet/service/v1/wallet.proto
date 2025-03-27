@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package api.wallet.service.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/wallet/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.wallet.service.v1";
+
+service Wallet {
+	rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {
+		option (google.api.http) = {
+			get: "/v1/wallet/health"
+		};
+	}
+}
+
+message HealthCheckRequest {}
+
+message HealthCheckResponse {
+	string status = 1;
+}
