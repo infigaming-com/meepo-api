@@ -3,8 +3,7 @@
 
 openapi: 3.0.3
 info:
-    title: Greeter API
-    description: The greeting service definition.
+    title: ""
     version: 0.0.1
 paths:
     /helloworld/{name}:
@@ -26,8 +25,135 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/helloworld.v1.HelloReply'
+    /v1/user/login:
+        post:
+            tags:
+                - User
+            operationId: User_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.LoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.LoginResponse'
+    /v1/user/oauth/login:
+        post:
+            tags:
+                - User
+            operationId: User_OAuthLogin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.OAuthLoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.OAuthLoginResponse'
+    /v1/user/register:
+        post:
+            tags:
+                - User
+            operationId: User_Register
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.RegisterRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.RegisterResponse'
+    /v1/user/{id}:
+        get:
+            tags:
+                - User
+            operationId: User_GetUser
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
 components:
     schemas:
+        api.user.service.v1.GetUserResponse:
+            type: object
+            properties:
+                userInfo:
+                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
+        api.user.service.v1.LoginRequest:
+            type: object
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+        api.user.service.v1.LoginResponse:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+                userInfo:
+                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
+        api.user.service.v1.OAuthLoginRequest:
+            type: object
+            properties:
+                provider:
+                    type: integer
+                    format: enum
+                authCode:
+                    type: string
+                redirectUri:
+                    type: string
+        api.user.service.v1.OAuthLoginResponse:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+                userInfo:
+                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
+        api.user.service.v1.RegisterRequest:
+            type: object
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+        api.user.service.v1.RegisterResponse:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+                userInfo:
+                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
+        api.user.service.v1.UserInfo:
+            type: object
+            properties:
+                userId:
+                    type: string
         helloworld.v1.HelloReply:
             type: object
             properties:
@@ -36,3 +162,5 @@ components:
             description: The response message containing the greetings
 tags:
     - name: Greeter
+      description: The greeting service definition.
+    - name: User

@@ -2,29 +2,83 @@ syntax = "proto3";
 
 package api.user.service.v1;
 
+import "google/api/annotations.proto";
+
 option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.user.service.v1";
 
 service User {
-	rpc CreateUser (CreateUserRequest) returns (CreateUserReply);
-	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply);
-	rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply);
-	rpc GetUser (GetUserRequest) returns (GetUserReply);
-	rpc ListUser (ListUserRequest) returns (ListUserReply);
+	rpc Register (RegisterRequest) returns (RegisterResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/register"
+			body: "*"
+		};
+	}
+	rpc Login (LoginRequest) returns (LoginResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/login"
+			body: "*"
+		};
+	}
+	rpc OAuthLogin (OAuthLoginRequest) returns (OAuthLoginResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/oauth/login"
+			body: "*"
+		};
+	}
+	rpc GetUser (GetUserRequest) returns (GetUserResponse) {
+		option (google.api.http) = {
+			get: "/v1/user/{id}"
+		};
+	}
 }
 
-message CreateUserRequest {}
-message CreateUserReply {}
+message UserInfo {
+	string user_id = 1;
+}
 
-message UpdateUserRequest {}
-message UpdateUserReply {}
+message RegisterRequest {
+	string email = 1;
+	string password = 2;
+}
 
-message DeleteUserRequest {}
-message DeleteUserReply {}
+message RegisterResponse {
+	string access_token = 1;
+	UserInfo user_info = 2;
+}
 
-message GetUserRequest {}
-message GetUserReply {}
+message LoginRequest {
+	string email = 1;
+	string password = 2;
+}
 
-message ListUserRequest {}
-message ListUserReply {}
+message LoginResponse {
+	string access_token = 1;
+	UserInfo user_info = 2;
+}
+
+enum OAuthProvider {
+	OAUTH_PROVIDER_UNSPECIFIED = 0;
+	OAUTH_PROVIDER_GOOGLE = 1;
+	OAUTH_PROVIDER_TELEGRAM = 2;
+}
+
+message OAuthLoginRequest {
+	OAuthProvider provider = 1;
+	string auth_code = 2;
+	string redirect_uri = 3;
+}
+
+message OAuthLoginResponse {
+	string access_token = 1;
+	UserInfo user_info = 2;
+}
+
+message GetUserRequest {
+	string id = 1;
+}
+
+message GetUserResponse {
+	UserInfo user_info = 1;
+}
