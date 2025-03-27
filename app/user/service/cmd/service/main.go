@@ -91,7 +91,7 @@ func main() {
 	logger, close := initLogger(bc.Logger)
 	defer close()
 
-	app, cleanup, err := wireApp(bc.Server, bc.Data, logger)
+	app, cleanup, err := wireApp(bc.Server, bc.Biz, bc.Data, logger)
 	if err != nil {
 		panic(err)
 	}
