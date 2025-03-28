@@ -11,14 +11,15 @@ else
 	API_PROTO_FILES=$(shell find . -name *.proto -not -path './third_party/*')
 endif
 
-.PHONY: init
-# init env
-init:
+.PHONY: tools
+# install tools
+tools:
 	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 	go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
 	go install github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2@latest
 	go install github.com/google/gnostic/cmd/protoc-gen-openapi@latest
+	go install github.com/envoyproxy/protoc-gen-validate@latest
 	go install github.com/google/wire/cmd/wire@latest
 
 .PHONY: api
@@ -29,5 +30,6 @@ api:
  	       --go_out=paths=source_relative:. \
  	       --go-http_out=paths=source_relative:. \
  	       --go-grpc_out=paths=source_relative:. \
+		   --validate_out=paths=source_relative,lang=go:. \
 	       --openapi_out=fq_schema_naming=true,default_response=false:. \
 	       $(API_PROTO_FILES)
