@@ -22,6 +22,7 @@ const _ = http.SupportPackageIsVersion1
 const OperationUserGetUser = "/api.user.service.v1.User/GetUser"
 const OperationUserHealthCheck = "/api.user.service.v1.User/HealthCheck"
 const OperationUserLogin = "/api.user.service.v1.User/Login"
+const OperationUserLogout = "/api.user.service.v1.User/Logout"
 const OperationUserOAuthLogin = "/api.user.service.v1.User/OAuthLogin"
 const OperationUserRegister = "/api.user.service.v1.User/Register"
 
@@ -29,6 +30,7 @@ type UserHTTPServer interface {
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	OAuthLogin(context.Context, *OAuthLoginRequest) (*OAuthLoginResponse, error)
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 }
@@ -40,6 +42,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/login", _User_Login0_HTTP_Handler(srv))
 	r.POST("/v1/user/oauth/login", _User_OAuthLogin0_HTTP_Handler(srv))
 	r.GET("/v1/user/{id}", _User_GetUser0_HTTP_Handler(srv))
+	r.POST("/v1/user/logout", _User_Logout0_HTTP_Handler(srv))
 }
 
 func _User_HealthCheck0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -149,10 +152,33 @@ func _User_GetUser0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) erro
 	}
 }
 
+func _User_Logout0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in LogoutRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserLogout)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Logout(ctx, req.(*LogoutRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*LogoutResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserResponse, err error)
 	HealthCheck(ctx context.Context, req *HealthCheckRequest, opts ...http.CallOption) (rsp *HealthCheckResponse, err error)
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginResponse, err error)
+	Logout(ctx context.Context, req *LogoutRequest, opts ...http.CallOption) (rsp *LogoutResponse, err error)
 	OAuthLogin(ctx context.Context, req *OAuthLoginRequest, opts ...http.CallOption) (rsp *OAuthLoginResponse, err error)
 	Register(ctx context.Context, req *RegisterRequest, opts ...http.CallOption) (rsp *RegisterResponse, err error)
 }
@@ -196,6 +222,19 @@ func (c *UserHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts .
 	pattern := "/v1/user/login"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserLogin))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) Logout(ctx context.Context, in *LogoutRequest, opts ...http.CallOption) (*LogoutResponse, error) {
+	var out LogoutResponse
+	pattern := "/v1/user/logout"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserLogout))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -604,6 +604,78 @@ func (x *GetUserResponse) GetUserInfo() *UserInfo {
 	return nil
 }
 
+type LogoutRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LogoutRequest) Reset() {
+	*x = LogoutRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LogoutRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LogoutRequest) ProtoMessage() {}
+
+func (x *LogoutRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LogoutRequest.ProtoReflect.Descriptor instead.
+func (*LogoutRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{11}
+}
+
+type LogoutResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LogoutResponse) Reset() {
+	*x = LogoutResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LogoutResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LogoutResponse) ProtoMessage() {}
+
+func (x *LogoutResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LogoutResponse.ProtoReflect.Descriptor instead.
+func (*LogoutResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{12}
+}
+
 var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
@@ -636,18 +708,21 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0eGetUserRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"M\n" +
 	"\x0fGetUserResponse\x12:\n" +
-	"\tuser_info\x18\x01 \x01(\v2\x1d.api.user.service.v1.UserInfoR\buserInfo*g\n" +
+	"\tuser_info\x18\x01 \x01(\v2\x1d.api.user.service.v1.UserInfoR\buserInfo\"\x0f\n" +
+	"\rLogoutRequest\"\x10\n" +
+	"\x0eLogoutResponse*g\n" +
 	"\rOAuthProvider\x12\x1e\n" +
 	"\x1aOAUTH_PROVIDER_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15OAUTH_PROVIDER_GOOGLE\x10\x01\x12\x1b\n" +
-	"\x17OAUTH_PROVIDER_TELEGRAM\x10\x022\xd5\x04\n" +
+	"\x17OAUTH_PROVIDER_TELEGRAM\x10\x022\xc4\x05\n" +
 	"\x04User\x12~\n" +
 	"\vHealthCheck\x12'.api.user.service.v1.HealthCheckRequest\x1a(.api.user.service.v1.HealthCheckResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/v1/user/healthcheck\x12u\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a%.api.user.service.v1.RegisterResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/user/register\x12i\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a\".api.user.service.v1.LoginResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v1/user/login\x12~\n" +
 	"\n" +
 	"OAuthLogin\x12&.api.user.service.v1.OAuthLoginRequest\x1a'.api.user.service.v1.OAuthLoginResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1/user/oauth/login\x12k\n" +
-	"\aGetUser\x12#.api.user.service.v1.GetUserRequest\x1a$.api.user.service.v1.GetUserResponse\"\x15\x82\xd3\xe4\x93\x02\x0f\x12\r/v1/user/{id}BO\n" +
+	"\aGetUser\x12#.api.user.service.v1.GetUserRequest\x1a$.api.user.service.v1.GetUserResponse\"\x15\x82\xd3\xe4\x93\x02\x0f\x12\r/v1/user/{id}\x12m\n" +
+	"\x06Logout\x12\".api.user.service.v1.LogoutRequest\x1a#.api.user.service.v1.LogoutResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/user/logoutBO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -663,7 +738,7 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_user_service_v1_user_proto_goTypes = []any{
 	(OAuthProvider)(0),          // 0: api.user.service.v1.OAuthProvider
 	(*HealthCheckRequest)(nil),  // 1: api.user.service.v1.HealthCheckRequest
@@ -677,6 +752,8 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*OAuthLoginResponse)(nil),  // 9: api.user.service.v1.OAuthLoginResponse
 	(*GetUserRequest)(nil),      // 10: api.user.service.v1.GetUserRequest
 	(*GetUserResponse)(nil),     // 11: api.user.service.v1.GetUserResponse
+	(*LogoutRequest)(nil),       // 12: api.user.service.v1.LogoutRequest
+	(*LogoutResponse)(nil),      // 13: api.user.service.v1.LogoutResponse
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
 	3,  // 0: api.user.service.v1.RegisterResponse.user_info:type_name -> api.user.service.v1.UserInfo
@@ -689,13 +766,15 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	6,  // 7: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
 	8,  // 8: api.user.service.v1.User.OAuthLogin:input_type -> api.user.service.v1.OAuthLoginRequest
 	10, // 9: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
-	2,  // 10: api.user.service.v1.User.HealthCheck:output_type -> api.user.service.v1.HealthCheckResponse
-	5,  // 11: api.user.service.v1.User.Register:output_type -> api.user.service.v1.RegisterResponse
-	7,  // 12: api.user.service.v1.User.Login:output_type -> api.user.service.v1.LoginResponse
-	9,  // 13: api.user.service.v1.User.OAuthLogin:output_type -> api.user.service.v1.OAuthLoginResponse
-	11, // 14: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
+	12, // 10: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
+	2,  // 11: api.user.service.v1.User.HealthCheck:output_type -> api.user.service.v1.HealthCheckResponse
+	5,  // 12: api.user.service.v1.User.Register:output_type -> api.user.service.v1.RegisterResponse
+	7,  // 13: api.user.service.v1.User.Login:output_type -> api.user.service.v1.LoginResponse
+	9,  // 14: api.user.service.v1.User.OAuthLogin:output_type -> api.user.service.v1.OAuthLoginResponse
+	11, // 15: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	13, // 16: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	11, // [11:17] is the sub-list for method output_type
+	5,  // [5:11] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
 	5,  // [5:5] is the sub-list for extension extendee
 	0,  // [0:5] is the sub-list for field type_name
@@ -712,7 +791,7 @@ func file_user_service_v1_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   11,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

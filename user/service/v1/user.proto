@@ -38,6 +38,12 @@ service User {
 			get: "/v1/user/{id}"
 		};
 	}
+	rpc Logout (LogoutRequest) returns (LogoutResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/logout"
+			body: "*"
+		};
+	}
 }
 
 message HealthCheckRequest {}
@@ -94,3 +100,7 @@ message GetUserRequest {
 message GetUserResponse {
 	UserInfo user_info = 1;
 }
+
+message LogoutRequest {}
+
+message LogoutResponse {}

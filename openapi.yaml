@@ -55,6 +55,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.LoginResponse'
+    /v1/user/logout:
+        post:
+            tags:
+                - User
+            operationId: User_Logout
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.LogoutRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.LogoutResponse'
     /v1/user/oauth/login:
         post:
             tags:
@@ -165,6 +183,12 @@ components:
                     type: string
                 userInfo:
                     $ref: '#/components/schemas/api.user.service.v1.UserInfo'
+        api.user.service.v1.LogoutRequest:
+            type: object
+            properties: {}
+        api.user.service.v1.LogoutResponse:
+            type: object
+            properties: {}
         api.user.service.v1.OAuthLoginRequest:
             type: object
             properties:
