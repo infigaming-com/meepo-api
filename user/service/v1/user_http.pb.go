@@ -37,7 +37,7 @@ type UserHTTPServer interface {
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
-	r.GET("/v1/user/healthcheck", _User_HealthCheck0_HTTP_Handler(srv))
+	r.GET("/v1/user/healthcheck", _User_HealthCheck1_HTTP_Handler(srv))
 	r.POST("/v1/user/register", _User_Register0_HTTP_Handler(srv))
 	r.POST("/v1/user/login", _User_Login0_HTTP_Handler(srv))
 	r.POST("/v1/user/oauth/login", _User_OAuthLogin0_HTTP_Handler(srv))
@@ -45,7 +45,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/logout", _User_Logout0_HTTP_Handler(srv))
 }
 
-func _User_HealthCheck0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_HealthCheck1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HealthCheckRequest
 		if err := ctx.BindQuery(&in); err != nil {

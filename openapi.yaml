@@ -25,6 +25,18 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/helloworld.v1.HelloReply'
+    /v1/payment/healthcheck:
+        get:
+            tags:
+                - Payment
+            operationId: Payment_HealthCheck
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.HealthCheckResponse'
     /v1/user/healthcheck:
         get:
             tags:
@@ -245,8 +257,14 @@ components:
                 message:
                     type: string
             description: The response message containing the greetings
+        payment.service.v1.HealthCheckResponse:
+            type: object
+            properties:
+                status:
+                    type: string
 tags:
     - name: Greeter
       description: The greeting service definition.
+    - name: Payment
     - name: User
     - name: Wallet

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package payment.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/payment/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "payment.service.v1";
+
+service Payment {
+	rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {
+		option (google.api.http) = {
+			get: "/v1/payment/healthcheck"
+		};
+	};
+}
+
+message HealthCheckRequest {
+}
+
+message HealthCheckResponse {
+	string status = 1;
+}

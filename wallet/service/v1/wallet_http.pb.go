@@ -29,11 +29,11 @@ type WalletHTTPServer interface {
 
 func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r := s.Route("/")
-	r.GET("/v1/wallet/healthcheck", _Wallet_HealthCheck1_HTTP_Handler(srv))
+	r.GET("/v1/wallet/healthcheck", _Wallet_HealthCheck2_HTTP_Handler(srv))
 	r.GET("/v1/wallet/balance/{user_id}", _Wallet_GetUserBalance0_HTTP_Handler(srv))
 }
 
-func _Wallet_HealthCheck1_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+func _Wallet_HealthCheck2_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HealthCheckRequest
 		if err := ctx.BindQuery(&in); err != nil {
