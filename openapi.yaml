@@ -37,6 +37,18 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.HealthCheckResponse'
+    /v1/system/healthcheck:
+        get:
+            tags:
+                - System
+            operationId: System_HealthCheck
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/system.service.v1.HealthCheckResponse'
     /v1/user/healthcheck:
         get:
             tags:
@@ -262,9 +274,15 @@ components:
             properties:
                 status:
                     type: string
+        system.service.v1.HealthCheckResponse:
+            type: object
+            properties:
+                status:
+                    type: string
 tags:
     - name: Greeter
       description: The greeting service definition.
     - name: Payment
+    - name: System
     - name: User
     - name: Wallet
