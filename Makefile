@@ -25,4 +25,11 @@ tools:
 .PHONY: api
 # generate api proto
 api:
-	docker run --rm -v $(PWD):/workspace protoc-all:latest
+	docker run --rm -v $(PWD):/workspace europe-west1-docker.pkg.dev/robust-metrics-445612-t0/meepo-api-tool/meepo-api-tool:0.0.1 protoc --proto_path=. \
+	   --proto_path=./third_party \
+		   --go_out=paths=source_relative:. \
+		   --go-http_out=paths=source_relative:. \
+		   --go-grpc_out=paths=source_relative:. \
+	   --validate_out=paths=source_relative,lang=go:. \
+	   --openapi_out=fq_schema_naming=true,default_response=false:. \
+	   $(API_PROTO_FILES)
