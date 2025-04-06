@@ -49,18 +49,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/system.service.v1.HealthCheckResponse'
-    /v1/user/healthcheck:
-        get:
-            tags:
-                - User
-            operationId: User_HealthCheck
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.HealthCheckResponse'
     /v1/user/login:
         post:
             tags:
@@ -188,11 +176,6 @@ components:
             properties:
                 userInfo:
                     $ref: '#/components/schemas/api.user.service.v1.UserInfo'
-        api.user.service.v1.HealthCheckResponse:
-            type: object
-            properties:
-                status:
-                    type: string
         api.user.service.v1.LoginRequest:
             type: object
             properties:

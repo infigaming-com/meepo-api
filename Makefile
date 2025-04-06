@@ -6,9 +6,9 @@ ifeq ($(GOHOSTOS), windows)
 	#changed to use git-bash.exe to run find cli or other cli friendly, caused of every developer has a Git.
 	#Git_Bash= $(subst cmd\,bin\bash.exe,$(dir $(shell where git)))
 	Git_Bash=$(subst \,/,$(subst cmd\,bin\bash.exe,$(dir $(shell where git))))
-	API_PROTO_FILES=$(shell $(Git_Bash) -c "find . -name *.proto -not -path './third_party/*'")
+	API_PROTO_FILES=$(shell $(Git_Bash) -c "find . -name *.proto -not -path './third_party/*' -not -path './.git/*'")
 else
-	API_PROTO_FILES=$(shell find . -name *.proto -not -path './third_party/*')
+	API_PROTO_FILES=$(shell find . -name *.proto -not -path './third_party/*' -not -path './.git/*')
 endif
 
 .PHONY: tools
@@ -26,10 +26,10 @@ tools:
 # generate api proto
 api:
 	docker run --rm -v $(PWD):/workspace europe-west1-docker.pkg.dev/robust-metrics-445612-t0/meepo-api-tool/meepo-api-tool:0.0.1 protoc --proto_path=. \
-	   --proto_path=./third_party \
-		   --go_out=paths=source_relative:. \
-		   --go-http_out=paths=source_relative:. \
-		   --go-grpc_out=paths=source_relative:. \
-	   --validate_out=paths=source_relative,lang=go:. \
-	   --openapi_out=fq_schema_naming=true,default_response=false:. \
-	   $(API_PROTO_FILES)
+		--proto_path=./third_party \
+		--go_out=paths=source_relative:. \
+		--go-http_out=paths=source_relative:. \
+		--go-grpc_out=paths=source_relative:. \
+		--validate_out=paths=source_relative,lang=go:. \
+		--openapi_out=fq_schema_naming=true,default_response=false:. \
+		$(API_PROTO_FILES)
