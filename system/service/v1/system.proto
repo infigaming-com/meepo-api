@@ -14,6 +14,18 @@ service System {
 			get: "/v1/system/healthcheck"
 		};
 	};
+
+	rpc AddCurrency(AddCurrencyRequest) returns (AddCurrencyResponse) {
+		option (google.api.http) = {
+			post: "/v1/system/add-currency"
+			body: "*"
+		};
+	};
+}
+
+message Currency {
+	string currency = 1;
+	int32 decimal_places = 2;
 }
 
 message HealthCheckRequest {
@@ -21,4 +33,13 @@ message HealthCheckRequest {
 
 message HealthCheckResponse {
 	string status = 1;
+}
+
+message AddCurrencyRequest {
+	string currency = 1;
+	int32 decimal_places = 2;
+}
+
+message AddCurrencyResponse {
+	Currency currency = 1;
 }

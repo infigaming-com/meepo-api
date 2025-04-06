@@ -22,6 +22,58 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Currency struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	DecimalPlaces int32                  `protobuf:"varint,2,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Currency) Reset() {
+	*x = Currency{}
+	mi := &file_system_service_v1_system_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Currency) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Currency) ProtoMessage() {}
+
+func (x *Currency) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Currency.ProtoReflect.Descriptor instead.
+func (*Currency) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Currency) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *Currency) GetDecimalPlaces() int32 {
+	if x != nil {
+		return x.DecimalPlaces
+	}
+	return 0
+}
+
 type HealthCheckRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -30,7 +82,7 @@ type HealthCheckRequest struct {
 
 func (x *HealthCheckRequest) Reset() {
 	*x = HealthCheckRequest{}
-	mi := &file_system_service_v1_system_proto_msgTypes[0]
+	mi := &file_system_service_v1_system_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42,7 +94,7 @@ func (x *HealthCheckRequest) String() string {
 func (*HealthCheckRequest) ProtoMessage() {}
 
 func (x *HealthCheckRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[0]
+	mi := &file_system_service_v1_system_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,7 +107,7 @@ func (x *HealthCheckRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HealthCheckRequest.ProtoReflect.Descriptor instead.
 func (*HealthCheckRequest) Descriptor() ([]byte, []int) {
-	return file_system_service_v1_system_proto_rawDescGZIP(), []int{0}
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{1}
 }
 
 type HealthCheckResponse struct {
@@ -67,7 +119,7 @@ type HealthCheckResponse struct {
 
 func (x *HealthCheckResponse) Reset() {
 	*x = HealthCheckResponse{}
-	mi := &file_system_service_v1_system_proto_msgTypes[1]
+	mi := &file_system_service_v1_system_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -79,7 +131,7 @@ func (x *HealthCheckResponse) String() string {
 func (*HealthCheckResponse) ProtoMessage() {}
 
 func (x *HealthCheckResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[1]
+	mi := &file_system_service_v1_system_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -92,7 +144,7 @@ func (x *HealthCheckResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HealthCheckResponse.ProtoReflect.Descriptor instead.
 func (*HealthCheckResponse) Descriptor() ([]byte, []int) {
-	return file_system_service_v1_system_proto_rawDescGZIP(), []int{1}
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *HealthCheckResponse) GetStatus() string {
@@ -102,16 +154,121 @@ func (x *HealthCheckResponse) GetStatus() string {
 	return ""
 }
 
+type AddCurrencyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	DecimalPlaces int32                  `protobuf:"varint,2,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddCurrencyRequest) Reset() {
+	*x = AddCurrencyRequest{}
+	mi := &file_system_service_v1_system_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddCurrencyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddCurrencyRequest) ProtoMessage() {}
+
+func (x *AddCurrencyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddCurrencyRequest.ProtoReflect.Descriptor instead.
+func (*AddCurrencyRequest) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AddCurrencyRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *AddCurrencyRequest) GetDecimalPlaces() int32 {
+	if x != nil {
+		return x.DecimalPlaces
+	}
+	return 0
+}
+
+type AddCurrencyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      *Currency              `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddCurrencyResponse) Reset() {
+	*x = AddCurrencyResponse{}
+	mi := &file_system_service_v1_system_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddCurrencyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddCurrencyResponse) ProtoMessage() {}
+
+func (x *AddCurrencyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddCurrencyResponse.ProtoReflect.Descriptor instead.
+func (*AddCurrencyResponse) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *AddCurrencyResponse) GetCurrency() *Currency {
+	if x != nil {
+		return x.Currency
+	}
+	return nil
+}
+
 var File_system_service_v1_system_proto protoreflect.FileDescriptor
 
 const file_system_service_v1_system_proto_rawDesc = "" +
 	"\n" +
-	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x14\n" +
+	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\x1a\x1cgoogle/api/annotations.proto\"M\n" +
+	"\bCurrency\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12%\n" +
+	"\x0edecimal_places\x18\x02 \x01(\x05R\rdecimalPlaces\"\x14\n" +
 	"\x12HealthCheckRequest\"-\n" +
 	"\x13HealthCheckResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status2\x86\x01\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\"W\n" +
+	"\x12AddCurrencyRequest\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12%\n" +
+	"\x0edecimal_places\x18\x02 \x01(\x05R\rdecimalPlaces\"N\n" +
+	"\x13AddCurrencyResponse\x127\n" +
+	"\bcurrency\x18\x01 \x01(\v2\x1b.system.service.v1.CurrencyR\bcurrency2\x89\x02\n" +
 	"\x06System\x12|\n" +
-	"\vHealthCheck\x12%.system.service.v1.HealthCheckRequest\x1a&.system.service.v1.HealthCheckResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/system/healthcheckBO\n" +
+	"\vHealthCheck\x12%.system.service.v1.HealthCheckRequest\x1a&.system.service.v1.HealthCheckResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/system/healthcheck\x12\x80\x01\n" +
+	"\vAddCurrency\x12%.system.service.v1.AddCurrencyRequest\x1a&.system.service.v1.AddCurrencyResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/system/add-currencyBO\n" +
 	"\x11system.service.v1P\x01Z8github.com/infigaming-com/meepo-api/system/service/v1;v1b\x06proto3"
 
 var (
@@ -126,19 +283,25 @@ func file_system_service_v1_system_proto_rawDescGZIP() []byte {
 	return file_system_service_v1_system_proto_rawDescData
 }
 
-var file_system_service_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_system_service_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_system_service_v1_system_proto_goTypes = []any{
-	(*HealthCheckRequest)(nil),  // 0: system.service.v1.HealthCheckRequest
-	(*HealthCheckResponse)(nil), // 1: system.service.v1.HealthCheckResponse
+	(*Currency)(nil),            // 0: system.service.v1.Currency
+	(*HealthCheckRequest)(nil),  // 1: system.service.v1.HealthCheckRequest
+	(*HealthCheckResponse)(nil), // 2: system.service.v1.HealthCheckResponse
+	(*AddCurrencyRequest)(nil),  // 3: system.service.v1.AddCurrencyRequest
+	(*AddCurrencyResponse)(nil), // 4: system.service.v1.AddCurrencyResponse
 }
 var file_system_service_v1_system_proto_depIdxs = []int32{
-	0, // 0: system.service.v1.System.HealthCheck:input_type -> system.service.v1.HealthCheckRequest
-	1, // 1: system.service.v1.System.HealthCheck:output_type -> system.service.v1.HealthCheckResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: system.service.v1.AddCurrencyResponse.currency:type_name -> system.service.v1.Currency
+	1, // 1: system.service.v1.System.HealthCheck:input_type -> system.service.v1.HealthCheckRequest
+	3, // 2: system.service.v1.System.AddCurrency:input_type -> system.service.v1.AddCurrencyRequest
+	2, // 3: system.service.v1.System.HealthCheck:output_type -> system.service.v1.HealthCheckResponse
+	4, // 4: system.service.v1.System.AddCurrency:output_type -> system.service.v1.AddCurrencyResponse
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_system_service_v1_system_proto_init() }
@@ -152,7 +315,7 @@ func file_system_service_v1_system_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_service_v1_system_proto_rawDesc), len(file_system_service_v1_system_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
