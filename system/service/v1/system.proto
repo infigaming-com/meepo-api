@@ -24,7 +24,7 @@ service System {
 
 	rpc GetCurrencies(GetCurrenciesRequest) returns (GetCurrenciesResponse) {
 		option (google.api.http) = {
-			post: "/v1/system/currencies"
+			post: "/v1/system/get-currencies"
 			body: "*"
 		};
 	};

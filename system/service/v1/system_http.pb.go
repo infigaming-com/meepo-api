@@ -33,7 +33,7 @@ func RegisterSystemHTTPServer(s *http.Server, srv SystemHTTPServer) {
 	r := s.Route("/")
 	r.GET("/v1/system/healthcheck", _System_HealthCheck1_HTTP_Handler(srv))
 	r.POST("/v1/system/add-currency", _System_AddCurrency0_HTTP_Handler(srv))
-	r.POST("/v1/system/currencies", _System_GetCurrencies0_HTTP_Handler(srv))
+	r.POST("/v1/system/get-currencies", _System_GetCurrencies0_HTTP_Handler(srv))
 }
 
 func _System_HealthCheck1_HTTP_Handler(srv SystemHTTPServer) func(ctx http.Context) error {
@@ -128,7 +128,7 @@ func (c *SystemHTTPClientImpl) AddCurrency(ctx context.Context, in *AddCurrencyR
 
 func (c *SystemHTTPClientImpl) GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...http.CallOption) (*GetCurrenciesResponse, error) {
 	var out GetCurrenciesResponse
-	pattern := "/v1/system/currencies"
+	pattern := "/v1/system/get-currencies"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationSystemGetCurrencies))
 	opts = append(opts, http.PathTemplate(pattern))

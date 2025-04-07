@@ -55,7 +55,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/system.service.v1.AddCurrencyResponse'
-    /v1/system/currencies:
+    /v1/system/get-currencies:
         post:
             tags:
                 - System
