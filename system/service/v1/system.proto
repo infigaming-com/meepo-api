@@ -28,6 +28,13 @@ service System {
 			body: "*"
 		};
 	};
+
+	rpc ListCurrencies(ListCurrenciesRequest) returns (ListCurrenciesResponse) {
+		option (google.api.http) = {
+			post: "/v1/system/currencies/list"
+			body: "*"
+		};
+	};
 }
 
 message Currency {
@@ -56,5 +63,12 @@ message GetCurrenciesRequest {
 }
 
 message GetCurrenciesResponse {
+	Currency currencies = 1;
+}
+
+message ListCurrenciesRequest {
+}
+
+message ListCurrenciesResponse {
 	repeated Currency currencies = 1;
 }
