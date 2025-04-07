@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	System_HealthCheck_FullMethodName = "/system.service.v1.System/HealthCheck"
-	System_AddCurrency_FullMethodName = "/system.service.v1.System/AddCurrency"
-	System_Currencies_FullMethodName  = "/system.service.v1.System/Currencies"
+	System_HealthCheck_FullMethodName   = "/system.service.v1.System/HealthCheck"
+	System_AddCurrency_FullMethodName   = "/system.service.v1.System/AddCurrency"
+	System_GetCurrencies_FullMethodName = "/system.service.v1.System/GetCurrencies"
 )
 
 // SystemClient is the client API for System service.
@@ -30,7 +30,7 @@ const (
 type SystemClient interface {
 	HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error)
 	AddCurrency(ctx context.Context, in *AddCurrencyRequest, opts ...grpc.CallOption) (*AddCurrencyResponse, error)
-	Currencies(ctx context.Context, in *CurrenciesRequest, opts ...grpc.CallOption) (*CurrenciesResponse, error)
+	GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error)
 }
 
 type systemClient struct {
@@ -61,10 +61,10 @@ func (c *systemClient) AddCurrency(ctx context.Context, in *AddCurrencyRequest, 
 	return out, nil
 }
 
-func (c *systemClient) Currencies(ctx context.Context, in *CurrenciesRequest, opts ...grpc.CallOption) (*CurrenciesResponse, error) {
+func (c *systemClient) GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CurrenciesResponse)
-	err := c.cc.Invoke(ctx, System_Currencies_FullMethodName, in, out, cOpts...)
+	out := new(GetCurrenciesResponse)
+	err := c.cc.Invoke(ctx, System_GetCurrencies_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (c *systemClient) Currencies(ctx context.Context, in *CurrenciesRequest, op
 type SystemServer interface {
 	HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error)
 	AddCurrency(context.Context, *AddCurrencyRequest) (*AddCurrencyResponse, error)
-	Currencies(context.Context, *CurrenciesRequest) (*CurrenciesResponse, error)
+	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
 	mustEmbedUnimplementedSystemServer()
 }
 
@@ -94,8 +94,8 @@ func (UnimplementedSystemServer) HealthCheck(context.Context, *HealthCheckReques
 func (UnimplementedSystemServer) AddCurrency(context.Context, *AddCurrencyRequest) (*AddCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddCurrency not implemented")
 }
-func (UnimplementedSystemServer) Currencies(context.Context, *CurrenciesRequest) (*CurrenciesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Currencies not implemented")
+func (UnimplementedSystemServer) GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCurrencies not implemented")
 }
 func (UnimplementedSystemServer) mustEmbedUnimplementedSystemServer() {}
 func (UnimplementedSystemServer) testEmbeddedByValue()                {}
@@ -154,20 +154,20 @@ func _System_AddCurrency_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_Currencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CurrenciesRequest)
+func _System_GetCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCurrenciesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).Currencies(ctx, in)
+		return srv.(SystemServer).GetCurrencies(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: System_Currencies_FullMethodName,
+		FullMethod: System_GetCurrencies_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).Currencies(ctx, req.(*CurrenciesRequest))
+		return srv.(SystemServer).GetCurrencies(ctx, req.(*GetCurrenciesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -188,8 +188,8 @@ var System_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _System_AddCurrency_Handler,
 		},
 		{
-			MethodName: "Currencies",
-			Handler:    _System_Currencies_Handler,
+			MethodName: "GetCurrencies",
+			Handler:    _System_GetCurrencies_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
