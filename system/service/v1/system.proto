@@ -17,14 +17,14 @@ service System {
 
 	rpc AddCurrency(AddCurrencyRequest) returns (AddCurrencyResponse) {
 		option (google.api.http) = {
-			post: "/v1/system/add-currency"
+			post: "/v1/system/currencies/add"
 			body: "*"
 		};
 	};
 
 	rpc GetCurrencies(GetCurrenciesRequest) returns (GetCurrenciesResponse) {
 		option (google.api.http) = {
-			post: "/v1/system/get-currencies"
+			post: "/v1/system/currencies/get"
 			body: "*"
 		};
 	};

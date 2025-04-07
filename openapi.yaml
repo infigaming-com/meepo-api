@@ -37,7 +37,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.HealthCheckResponse'
-    /v1/system/add-currency:
+    /v1/system/currencies/add:
         post:
             tags:
                 - System
@@ -55,7 +55,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/system.service.v1.AddCurrencyResponse'
-    /v1/system/get-currencies:
+    /v1/system/currencies/get:
         post:
             tags:
                 - System

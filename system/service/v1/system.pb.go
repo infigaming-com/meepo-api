@@ -359,11 +359,11 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x15GetCurrenciesResponse\x12;\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\v2\x1b.system.service.v1.CurrencyR\n" +
-	"currencies2\x94\x03\n" +
+	"currencies2\x96\x03\n" +
 	"\x06System\x12|\n" +
-	"\vHealthCheck\x12%.system.service.v1.HealthCheckRequest\x1a&.system.service.v1.HealthCheckResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/system/healthcheck\x12\x80\x01\n" +
-	"\vAddCurrency\x12%.system.service.v1.AddCurrencyRequest\x1a&.system.service.v1.AddCurrencyResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/system/add-currency\x12\x88\x01\n" +
-	"\rGetCurrencies\x12'.system.service.v1.GetCurrenciesRequest\x1a(.system.service.v1.GetCurrenciesResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/system/get-currenciesBO\n" +
+	"\vHealthCheck\x12%.system.service.v1.HealthCheckRequest\x1a&.system.service.v1.HealthCheckResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/system/healthcheck\x12\x82\x01\n" +
+	"\vAddCurrency\x12%.system.service.v1.AddCurrencyRequest\x1a&.system.service.v1.AddCurrencyResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/system/currencies/add\x12\x88\x01\n" +
+	"\rGetCurrencies\x12'.system.service.v1.GetCurrenciesRequest\x1a(.system.service.v1.GetCurrenciesResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/system/currencies/getBO\n" +
 	"\x11system.service.v1P\x01Z8github.com/infigaming-com/meepo-api/system/service/v1;v1b\x06proto3"
 
 var (
