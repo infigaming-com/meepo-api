@@ -37,7 +37,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.HealthCheckResponse'
-    /v1/system/add-currency:
+    /v1/system/currencies/add:
         post:
             tags:
                 - System
@@ -55,6 +55,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/system.service.v1.AddCurrencyResponse'
+    /v1/system/currencies/get:
+        post:
+            tags:
+                - System
+            operationId: System_GetCurrencies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/system.service.v1.GetCurrenciesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/system.service.v1.GetCurrenciesResponse'
     /v1/system/healthcheck:
         get:
             tags:
@@ -296,6 +314,18 @@ components:
                 decimalPlaces:
                     type: integer
                     format: int32
+        system.service.v1.GetCurrenciesRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+        system.service.v1.GetCurrenciesResponse:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.Currency'
         system.service.v1.HealthCheckResponse:
             type: object
             properties:

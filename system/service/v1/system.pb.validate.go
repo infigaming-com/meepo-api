@@ -580,3 +580,243 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AddCurrencyResponseValidationError{}
+
+// Validate checks the field values on GetCurrenciesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCurrenciesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetCurrenciesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetCurrenciesRequestMultiError, or nil if none found.
+func (m *GetCurrenciesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetCurrenciesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	if len(errors) > 0 {
+		return GetCurrenciesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetCurrenciesRequestMultiError is an error wrapping multiple validation
+// errors returned by GetCurrenciesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetCurrenciesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCurrenciesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCurrenciesRequestMultiError) AllErrors() []error { return m }
+
+// GetCurrenciesRequestValidationError is the validation error returned by
+// GetCurrenciesRequest.Validate if the designated constraints aren't met.
+type GetCurrenciesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCurrenciesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCurrenciesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCurrenciesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCurrenciesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCurrenciesRequestValidationError) ErrorName() string {
+	return "GetCurrenciesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCurrenciesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCurrenciesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCurrenciesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCurrenciesRequestValidationError{}
+
+// Validate checks the field values on GetCurrenciesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCurrenciesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetCurrenciesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetCurrenciesResponseMultiError, or nil if none found.
+func (m *GetCurrenciesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetCurrenciesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetCurrencies() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetCurrenciesResponseValidationError{
+						field:  fmt.Sprintf("Currencies[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetCurrenciesResponseValidationError{
+						field:  fmt.Sprintf("Currencies[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetCurrenciesResponseValidationError{
+					field:  fmt.Sprintf("Currencies[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetCurrenciesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetCurrenciesResponseMultiError is an error wrapping multiple validation
+// errors returned by GetCurrenciesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetCurrenciesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCurrenciesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCurrenciesResponseMultiError) AllErrors() []error { return m }
+
+// GetCurrenciesResponseValidationError is the validation error returned by
+// GetCurrenciesResponse.Validate if the designated constraints aren't met.
+type GetCurrenciesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCurrenciesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCurrenciesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCurrenciesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCurrenciesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCurrenciesResponseValidationError) ErrorName() string {
+	return "GetCurrenciesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCurrenciesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCurrenciesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCurrenciesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCurrenciesResponseValidationError{}
