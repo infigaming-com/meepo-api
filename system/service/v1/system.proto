@@ -21,6 +21,13 @@ service System {
 			body: "*"
 		};
 	};
+
+	rpc Currencies(CurrenciesRequest) returns (CurrenciesResponse) {
+		option (google.api.http) = {
+			post: "/v1/system/currencies"
+			body: "*"
+		};
+	};
 }
 
 message Currency {
@@ -42,4 +49,12 @@ message AddCurrencyRequest {
 
 message AddCurrencyResponse {
 	Currency currency = 1;
+}
+
+message CurrenciesRequest {
+	string currency = 1;
+}
+
+message CurrenciesResponse {
+	repeated Currency currencies = 1;
 }
