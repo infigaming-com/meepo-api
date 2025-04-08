@@ -10,76 +10,111 @@ option java_multiple_files = true;
 option java_package = "api.user.service.v1";
 
 service User {
-	rpc Register (RegisterRequest) returns (RegisterResponse) {
+	rpc RegisterWithCredentials (RegisterRequest) returns (AuthResponse) {
 		option (google.api.http) = {
-			post: "/v1/user/register"
+			post: "/v1/user/auth/register"
 			body: "*"
 		};
 	}
-	rpc Login (LoginRequest) returns (LoginResponse) {
+	  
+	rpc LoginWithCredentials (LoginRequest) returns (AuthResponse) {
 		option (google.api.http) = {
-			post: "/v1/user/login"
+			post: "/v1/user/auth/login"
 			body: "*"
 		};
 	}
-	rpc OAuthLogin (OAuthLoginRequest) returns (OAuthLoginResponse) {
+	
+	rpc RegisterOrLoginWithOAuth (OAuthRequest) returns (AuthResponse) {
 		option (google.api.http) = {
-			post: "/v1/user/oauth/login"
+			post: "/v1/user/auth/oauth"
 			body: "*"
 		};
 	}
+	
+	rpc RegisterOrLoginWithTelegram (TelegramAuthRequest) returns (AuthResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/telegram"
+			body: "*"
+		};
+	}
+	
+	rpc RefreshToken (RefreshTokenRequest) returns (AuthResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/refresh"
+			body: "*"
+		};
+	}
+	  
 	rpc GetUser (GetUserRequest) returns (GetUserResponse) {
 		option (google.api.http) = {
 			get: "/v1/user/{id}"
 		};
 	}
+	
 	rpc Logout (LogoutRequest) returns (LogoutResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/logout"
 			body: "*"
 		};
 	}
+
 }
 
 message UserInfo {
 	string user_id = 1;
 }
 
-message RegisterRequest {
-	string email = 1 [(validate.rules).string.email = true];
-	string password = 2 [(validate.rules).string.min_len = 8];
+enum AuthType {
+	AUTH_TYPE_UNSPECIFIED = 0;
+	AUTH_TYPE_PASSWORD = 1;
+	AUTH_TYPE_GOOGLE = 2;
+	AUTH_TYPE_FACEBOOK = 3;
+	AUTH_TYPE_TELEGRAM = 4;
 }
 
-message RegisterResponse {
-	string access_token = 1;
-	UserInfo user_info = 2;
+enum IdentifierType {
+	IDENTIFIER_TYPE_UNSPECIFIED = 0;
+	IDENTIFIER_TYPE_USERNAME = 1;
+	IDENTIFIER_TYPE_EMAIL = 2;
+	IDENTIFIER_TYPE_MOBILE = 3;
+}
+
+message RegisterRequest {
+	IdentifierType identifier_type = 1;
+	string identifier = 2;
+	string password = 3;
 }
 
 message LoginRequest {
-	string email = 1 [(validate.rules).string.email = true];
-	string password = 2 [(validate.rules).string.min_len = 8];
+	IdentifierType identifier_type = 1;
+	string identifier = 2;
+	string password = 3;
 }
 
-message LoginResponse {
+message OAuthRequest {
+	AuthType auth_type = 1;
+	string token = 2;
+}
+
+message TelegramAuthRequest {
+	int64 id = 1;
+	string first_name = 2;
+	string last_name = 3;
+	string username = 4;
+	string photo_url = 5;
+	int64 auth_date = 6;
+	string hash = 7;
+}
+
+message RefreshTokenRequest {
+	string refresh_token = 1;
+}
+
+message AuthResponse {
 	string access_token = 1;
-	UserInfo user_info = 2;
-}
-
-enum OAuthProvider {
-	OAUTH_PROVIDER_UNSPECIFIED = 0;
-	OAUTH_PROVIDER_GOOGLE = 1;
-	OAUTH_PROVIDER_TELEGRAM = 2;
-}
-
-message OAuthLoginRequest {
-	OAuthProvider provider = 1;
-	string auth_code = 2;
-	string redirect_uri = 3;
-}
-
-message OAuthLoginResponse {
-	string access_token = 1;
-	UserInfo user_info = 2;
+	string refresh_token = 2;
+	int64 expires_in = 3;
+	UserInfo user_info = 4;
 }
 
 message GetUserRequest {

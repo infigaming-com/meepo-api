@@ -103,11 +103,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/system.service.v1.HealthCheckResponse'
-    /v1/user/login:
+    /v1/user/auth/login:
         post:
             tags:
                 - User
-            operationId: User_Login
+            operationId: User_LoginWithCredentials
             requestBody:
                 content:
                     application/json:
@@ -120,7 +120,79 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.user.service.v1.LoginResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/oauth:
+        post:
+            tags:
+                - User
+            operationId: User_RegisterOrLoginWithOAuth
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.OAuthRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/refresh:
+        post:
+            tags:
+                - User
+            operationId: User_RefreshToken
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.RefreshTokenRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/register:
+        post:
+            tags:
+                - User
+            operationId: User_RegisterWithCredentials
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.RegisterRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/telegram:
+        post:
+            tags:
+                - User
+            operationId: User_RegisterOrLoginWithTelegram
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.TelegramAuthRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
     /v1/user/logout:
         post:
             tags:
@@ -139,42 +211,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.LogoutResponse'
-    /v1/user/oauth/login:
-        post:
-            tags:
-                - User
-            operationId: User_OAuthLogin
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.OAuthLoginRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.OAuthLoginResponse'
-    /v1/user/register:
-        post:
-            tags:
-                - User
-            operationId: User_Register
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.RegisterRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.RegisterResponse'
     /v1/user/{id}:
         get:
             tags:
@@ -225,6 +261,17 @@ paths:
                                 $ref: '#/components/schemas/api.wallet.service.v1.HealthCheckResponse'
 components:
     schemas:
+        api.user.service.v1.AuthResponse:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+                refreshToken:
+                    type: string
+                expiresIn:
+                    type: string
+                userInfo:
+                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
         api.user.service.v1.GetUserResponse:
             type: object
             properties:
@@ -233,54 +280,59 @@ components:
         api.user.service.v1.LoginRequest:
             type: object
             properties:
-                email:
+                identifierType:
+                    type: integer
+                    format: enum
+                identifier:
                     type: string
                 password:
                     type: string
-        api.user.service.v1.LoginResponse:
-            type: object
-            properties:
-                accessToken:
-                    type: string
-                userInfo:
-                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
         api.user.service.v1.LogoutRequest:
             type: object
             properties: {}
         api.user.service.v1.LogoutResponse:
             type: object
             properties: {}
-        api.user.service.v1.OAuthLoginRequest:
+        api.user.service.v1.OAuthRequest:
             type: object
             properties:
-                provider:
+                authType:
                     type: integer
                     format: enum
-                authCode:
+                token:
                     type: string
-                redirectUri:
-                    type: string
-        api.user.service.v1.OAuthLoginResponse:
+        api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
-                accessToken:
+                refreshToken:
                     type: string
-                userInfo:
-                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
         api.user.service.v1.RegisterRequest:
             type: object
             properties:
-                email:
+                identifierType:
+                    type: integer
+                    format: enum
+                identifier:
                     type: string
                 password:
                     type: string
-        api.user.service.v1.RegisterResponse:
+        api.user.service.v1.TelegramAuthRequest:
             type: object
             properties:
-                accessToken:
+                id:
                     type: string
-                userInfo:
-                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                username:
+                    type: string
+                photoUrl:
+                    type: string
+                authDate:
+                    type: string
+                hash:
+                    type: string
         api.user.service.v1.UserInfo:
             type: object
             properties:
