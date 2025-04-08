@@ -20,27 +20,27 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationUserGetUser = "/api.user.service.v1.User/GetUser"
-const OperationUserLoginWithCredentials = "/api.user.service.v1.User/LoginWithCredentials"
+const OperationUserLogin = "/api.user.service.v1.User/Login"
 const OperationUserLogout = "/api.user.service.v1.User/Logout"
 const OperationUserRefreshToken = "/api.user.service.v1.User/RefreshToken"
+const OperationUserRegister = "/api.user.service.v1.User/Register"
 const OperationUserRegisterOrLoginWithOAuth = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
 const OperationUserRegisterOrLoginWithTelegram = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
-const OperationUserRegisterWithCredentials = "/api.user.service.v1.User/RegisterWithCredentials"
 
 type UserHTTPServer interface {
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
-	LoginWithCredentials(context.Context, *LoginRequest) (*AuthResponse, error)
+	Login(context.Context, *LoginRequest) (*AuthResponse, error)
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*AuthResponse, error)
+	Register(context.Context, *RegisterRequest) (*AuthResponse, error)
 	RegisterOrLoginWithOAuth(context.Context, *OAuthRequest) (*AuthResponse, error)
 	RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error)
-	RegisterWithCredentials(context.Context, *RegisterRequest) (*AuthResponse, error)
 }
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/user/auth/register", _User_RegisterWithCredentials0_HTTP_Handler(srv))
-	r.POST("/v1/user/auth/login", _User_LoginWithCredentials0_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/register", _User_Register0_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/login", _User_Login0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/oauth", _User_RegisterOrLoginWithOAuth0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/telegram", _User_RegisterOrLoginWithTelegram0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/refresh", _User_RefreshToken0_HTTP_Handler(srv))
@@ -48,7 +48,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/logout", _User_Logout0_HTTP_Handler(srv))
 }
 
-func _User_RegisterWithCredentials0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in RegisterRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -57,9 +57,9 @@ func _User_RegisterWithCredentials0_HTTP_Handler(srv UserHTTPServer) func(ctx ht
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationUserRegisterWithCredentials)
+		http.SetOperation(ctx, OperationUserRegister)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.RegisterWithCredentials(ctx, req.(*RegisterRequest))
+			return srv.Register(ctx, req.(*RegisterRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -70,7 +70,7 @@ func _User_RegisterWithCredentials0_HTTP_Handler(srv UserHTTPServer) func(ctx ht
 	}
 }
 
-func _User_LoginWithCredentials0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Login0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LoginRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -79,9 +79,9 @@ func _User_LoginWithCredentials0_HTTP_Handler(srv UserHTTPServer) func(ctx http.
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationUserLoginWithCredentials)
+		http.SetOperation(ctx, OperationUserLogin)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.LoginWithCredentials(ctx, req.(*LoginRequest))
+			return srv.Login(ctx, req.(*LoginRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -204,12 +204,12 @@ func _User_Logout0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error
 
 type UserHTTPClient interface {
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserResponse, err error)
-	LoginWithCredentials(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
+	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	Logout(ctx context.Context, req *LogoutRequest, opts ...http.CallOption) (rsp *LogoutResponse, err error)
 	RefreshToken(ctx context.Context, req *RefreshTokenRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
+	Register(ctx context.Context, req *RegisterRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	RegisterOrLoginWithOAuth(ctx context.Context, req *OAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	RegisterOrLoginWithTelegram(ctx context.Context, req *TelegramAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
-	RegisterWithCredentials(ctx context.Context, req *RegisterRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 }
 
 type UserHTTPClientImpl struct {
@@ -233,11 +233,11 @@ func (c *UserHTTPClientImpl) GetUser(ctx context.Context, in *GetUserRequest, op
 	return &out, nil
 }
 
-func (c *UserHTTPClientImpl) LoginWithCredentials(ctx context.Context, in *LoginRequest, opts ...http.CallOption) (*AuthResponse, error) {
+func (c *UserHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts ...http.CallOption) (*AuthResponse, error) {
 	var out AuthResponse
 	pattern := "/v1/user/auth/login"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationUserLoginWithCredentials))
+	opts = append(opts, http.Operation(OperationUserLogin))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -272,6 +272,19 @@ func (c *UserHTTPClientImpl) RefreshToken(ctx context.Context, in *RefreshTokenR
 	return &out, nil
 }
 
+func (c *UserHTTPClientImpl) Register(ctx context.Context, in *RegisterRequest, opts ...http.CallOption) (*AuthResponse, error) {
+	var out AuthResponse
+	pattern := "/v1/user/auth/register"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserRegister))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *UserHTTPClientImpl) RegisterOrLoginWithOAuth(ctx context.Context, in *OAuthRequest, opts ...http.CallOption) (*AuthResponse, error) {
 	var out AuthResponse
 	pattern := "/v1/user/auth/oauth"
@@ -290,19 +303,6 @@ func (c *UserHTTPClientImpl) RegisterOrLoginWithTelegram(ctx context.Context, in
 	pattern := "/v1/user/auth/telegram"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserRegisterOrLoginWithTelegram))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *UserHTTPClientImpl) RegisterWithCredentials(ctx context.Context, in *RegisterRequest, opts ...http.CallOption) (*AuthResponse, error) {
-	var out AuthResponse
-	pattern := "/v1/user/auth/register"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationUserRegisterWithCredentials))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

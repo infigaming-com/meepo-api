@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	User_RegisterWithCredentials_FullMethodName     = "/api.user.service.v1.User/RegisterWithCredentials"
-	User_LoginWithCredentials_FullMethodName        = "/api.user.service.v1.User/LoginWithCredentials"
+	User_Register_FullMethodName                    = "/api.user.service.v1.User/Register"
+	User_Login_FullMethodName                       = "/api.user.service.v1.User/Login"
 	User_RegisterOrLoginWithOAuth_FullMethodName    = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
 	User_RegisterOrLoginWithTelegram_FullMethodName = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
 	User_RefreshToken_FullMethodName                = "/api.user.service.v1.User/RefreshToken"
@@ -32,8 +32,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserClient interface {
-	RegisterWithCredentials(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*AuthResponse, error)
-	LoginWithCredentials(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	RegisterOrLoginWithOAuth(ctx context.Context, in *OAuthRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	RegisterOrLoginWithTelegram(ctx context.Context, in *TelegramAuthRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*AuthResponse, error)
@@ -49,20 +49,20 @@ func NewUserClient(cc grpc.ClientConnInterface) UserClient {
 	return &userClient{cc}
 }
 
-func (c *userClient) RegisterWithCredentials(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
+func (c *userClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthResponse)
-	err := c.cc.Invoke(ctx, User_RegisterWithCredentials_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, User_Register_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) LoginWithCredentials(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
+func (c *userClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthResponse)
-	err := c.cc.Invoke(ctx, User_LoginWithCredentials_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, User_Login_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -123,8 +123,8 @@ func (c *userClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
 type UserServer interface {
-	RegisterWithCredentials(context.Context, *RegisterRequest) (*AuthResponse, error)
-	LoginWithCredentials(context.Context, *LoginRequest) (*AuthResponse, error)
+	Register(context.Context, *RegisterRequest) (*AuthResponse, error)
+	Login(context.Context, *LoginRequest) (*AuthResponse, error)
 	RegisterOrLoginWithOAuth(context.Context, *OAuthRequest) (*AuthResponse, error)
 	RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*AuthResponse, error)
@@ -140,11 +140,11 @@ type UserServer interface {
 // pointer dereference when methods are called.
 type UnimplementedUserServer struct{}
 
-func (UnimplementedUserServer) RegisterWithCredentials(context.Context, *RegisterRequest) (*AuthResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RegisterWithCredentials not implemented")
+func (UnimplementedUserServer) Register(context.Context, *RegisterRequest) (*AuthResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
-func (UnimplementedUserServer) LoginWithCredentials(context.Context, *LoginRequest) (*AuthResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LoginWithCredentials not implemented")
+func (UnimplementedUserServer) Login(context.Context, *LoginRequest) (*AuthResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
 func (UnimplementedUserServer) RegisterOrLoginWithOAuth(context.Context, *OAuthRequest) (*AuthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterOrLoginWithOAuth not implemented")
@@ -182,38 +182,38 @@ func RegisterUserServer(s grpc.ServiceRegistrar, srv UserServer) {
 	s.RegisterService(&User_ServiceDesc, srv)
 }
 
-func _User_RegisterWithCredentials_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _User_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RegisterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).RegisterWithCredentials(ctx, in)
+		return srv.(UserServer).Register(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_RegisterWithCredentials_FullMethodName,
+		FullMethod: User_Register_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).RegisterWithCredentials(ctx, req.(*RegisterRequest))
+		return srv.(UserServer).Register(ctx, req.(*RegisterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_LoginWithCredentials_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _User_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LoginRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).LoginWithCredentials(ctx, in)
+		return srv.(UserServer).Login(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_LoginWithCredentials_FullMethodName,
+		FullMethod: User_Login_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).LoginWithCredentials(ctx, req.(*LoginRequest))
+		return srv.(UserServer).Login(ctx, req.(*LoginRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -316,12 +316,12 @@ var User_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*UserServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "RegisterWithCredentials",
-			Handler:    _User_RegisterWithCredentials_Handler,
+			MethodName: "Register",
+			Handler:    _User_Register_Handler,
 		},
 		{
-			MethodName: "LoginWithCredentials",
-			Handler:    _User_LoginWithCredentials_Handler,
+			MethodName: "Login",
+			Handler:    _User_Login_Handler,
 		},
 		{
 			MethodName: "RegisterOrLoginWithOAuth",
