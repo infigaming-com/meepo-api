@@ -7,7 +7,6 @@
 package v1
 
 import (
-	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -28,9 +27,8 @@ type AuthType int32
 const (
 	AuthType_AUTH_TYPE_UNSPECIFIED AuthType = 0
 	AuthType_AUTH_TYPE_PASSWORD    AuthType = 1
-	AuthType_AUTH_TYPE_GOOGLE      AuthType = 2
-	AuthType_AUTH_TYPE_FACEBOOK    AuthType = 3
-	AuthType_AUTH_TYPE_TELEGRAM    AuthType = 4
+	AuthType_AUTH_TYPE_OAUTH       AuthType = 2
+	AuthType_AUTH_TYPE_TELEGRAM    AuthType = 3
 )
 
 // Enum value maps for AuthType.
@@ -38,16 +36,14 @@ var (
 	AuthType_name = map[int32]string{
 		0: "AUTH_TYPE_UNSPECIFIED",
 		1: "AUTH_TYPE_PASSWORD",
-		2: "AUTH_TYPE_GOOGLE",
-		3: "AUTH_TYPE_FACEBOOK",
-		4: "AUTH_TYPE_TELEGRAM",
+		2: "AUTH_TYPE_OAUTH",
+		3: "AUTH_TYPE_TELEGRAM",
 	}
 	AuthType_value = map[string]int32{
 		"AUTH_TYPE_UNSPECIFIED": 0,
 		"AUTH_TYPE_PASSWORD":    1,
-		"AUTH_TYPE_GOOGLE":      2,
-		"AUTH_TYPE_FACEBOOK":    3,
-		"AUTH_TYPE_TELEGRAM":    4,
+		"AUTH_TYPE_OAUTH":       2,
+		"AUTH_TYPE_TELEGRAM":    3,
 	}
 )
 
@@ -78,56 +74,108 @@ func (AuthType) EnumDescriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{0}
 }
 
-type IdentifierType int32
+type PasswordProvider int32
 
 const (
-	IdentifierType_IDENTIFIER_TYPE_UNSPECIFIED IdentifierType = 0
-	IdentifierType_IDENTIFIER_TYPE_USERNAME    IdentifierType = 1
-	IdentifierType_IDENTIFIER_TYPE_EMAIL       IdentifierType = 2
-	IdentifierType_IDENTIFIER_TYPE_MOBILE      IdentifierType = 3
+	PasswordProvider_PASSWORD_PROVIDER_UNSPECIFIED PasswordProvider = 0
+	PasswordProvider_PASSWORD_PROVIDER_USERNAME    PasswordProvider = 1
+	PasswordProvider_PASSWORD_PROVIDER_EMAIL       PasswordProvider = 2
+	PasswordProvider_PASSWORD_PROVIDER_MOBILE      PasswordProvider = 3
 )
 
-// Enum value maps for IdentifierType.
+// Enum value maps for PasswordProvider.
 var (
-	IdentifierType_name = map[int32]string{
-		0: "IDENTIFIER_TYPE_UNSPECIFIED",
-		1: "IDENTIFIER_TYPE_USERNAME",
-		2: "IDENTIFIER_TYPE_EMAIL",
-		3: "IDENTIFIER_TYPE_MOBILE",
+	PasswordProvider_name = map[int32]string{
+		0: "PASSWORD_PROVIDER_UNSPECIFIED",
+		1: "PASSWORD_PROVIDER_USERNAME",
+		2: "PASSWORD_PROVIDER_EMAIL",
+		3: "PASSWORD_PROVIDER_MOBILE",
 	}
-	IdentifierType_value = map[string]int32{
-		"IDENTIFIER_TYPE_UNSPECIFIED": 0,
-		"IDENTIFIER_TYPE_USERNAME":    1,
-		"IDENTIFIER_TYPE_EMAIL":       2,
-		"IDENTIFIER_TYPE_MOBILE":      3,
+	PasswordProvider_value = map[string]int32{
+		"PASSWORD_PROVIDER_UNSPECIFIED": 0,
+		"PASSWORD_PROVIDER_USERNAME":    1,
+		"PASSWORD_PROVIDER_EMAIL":       2,
+		"PASSWORD_PROVIDER_MOBILE":      3,
 	}
 )
 
-func (x IdentifierType) Enum() *IdentifierType {
-	p := new(IdentifierType)
+func (x PasswordProvider) Enum() *PasswordProvider {
+	p := new(PasswordProvider)
 	*p = x
 	return p
 }
 
-func (x IdentifierType) String() string {
+func (x PasswordProvider) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (IdentifierType) Descriptor() protoreflect.EnumDescriptor {
+func (PasswordProvider) Descriptor() protoreflect.EnumDescriptor {
 	return file_user_service_v1_user_proto_enumTypes[1].Descriptor()
 }
 
-func (IdentifierType) Type() protoreflect.EnumType {
+func (PasswordProvider) Type() protoreflect.EnumType {
 	return &file_user_service_v1_user_proto_enumTypes[1]
 }
 
-func (x IdentifierType) Number() protoreflect.EnumNumber {
+func (x PasswordProvider) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use IdentifierType.Descriptor instead.
-func (IdentifierType) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use PasswordProvider.Descriptor instead.
+func (PasswordProvider) EnumDescriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{1}
+}
+
+type OAuthProvider int32
+
+const (
+	OAuthProvider_OAUTH_PROVIDER_UNSPECIFIED OAuthProvider = 0
+	OAuthProvider_OAUTH_PROVIDER_GOOGLE      OAuthProvider = 1
+	OAuthProvider_OAUTH_PROVIDER_FACEBOOK    OAuthProvider = 2
+	OAuthProvider_OAUTH_PROVIDER_TWITTER     OAuthProvider = 3
+)
+
+// Enum value maps for OAuthProvider.
+var (
+	OAuthProvider_name = map[int32]string{
+		0: "OAUTH_PROVIDER_UNSPECIFIED",
+		1: "OAUTH_PROVIDER_GOOGLE",
+		2: "OAUTH_PROVIDER_FACEBOOK",
+		3: "OAUTH_PROVIDER_TWITTER",
+	}
+	OAuthProvider_value = map[string]int32{
+		"OAUTH_PROVIDER_UNSPECIFIED": 0,
+		"OAUTH_PROVIDER_GOOGLE":      1,
+		"OAUTH_PROVIDER_FACEBOOK":    2,
+		"OAUTH_PROVIDER_TWITTER":     3,
+	}
+)
+
+func (x OAuthProvider) Enum() *OAuthProvider {
+	p := new(OAuthProvider)
+	*p = x
+	return p
+}
+
+func (x OAuthProvider) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (OAuthProvider) Descriptor() protoreflect.EnumDescriptor {
+	return file_user_service_v1_user_proto_enumTypes[2].Descriptor()
+}
+
+func (OAuthProvider) Type() protoreflect.EnumType {
+	return &file_user_service_v1_user_proto_enumTypes[2]
+}
+
+func (x OAuthProvider) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use OAuthProvider.Descriptor instead.
+func (OAuthProvider) EnumDescriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{2}
 }
 
 type UserInfo struct {
@@ -175,12 +223,12 @@ func (x *UserInfo) GetUserId() string {
 }
 
 type RegisterRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	IdentifierType IdentifierType         `protobuf:"varint,1,opt,name=identifier_type,json=identifierType,proto3,enum=api.user.service.v1.IdentifierType" json:"identifier_type,omitempty"`
-	Identifier     string                 `protobuf:"bytes,2,opt,name=identifier,proto3" json:"identifier,omitempty"`
-	Password       string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	PasswordProvider PasswordProvider       `protobuf:"varint,1,opt,name=password_provider,json=passwordProvider,proto3,enum=api.user.service.v1.PasswordProvider" json:"password_provider,omitempty"`
+	AuthId           string                 `protobuf:"bytes,2,opt,name=auth_id,json=authId,proto3" json:"auth_id,omitempty"`
+	Password         string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *RegisterRequest) Reset() {
@@ -213,16 +261,16 @@ func (*RegisterRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *RegisterRequest) GetIdentifierType() IdentifierType {
+func (x *RegisterRequest) GetPasswordProvider() PasswordProvider {
 	if x != nil {
-		return x.IdentifierType
+		return x.PasswordProvider
 	}
-	return IdentifierType_IDENTIFIER_TYPE_UNSPECIFIED
+	return PasswordProvider_PASSWORD_PROVIDER_UNSPECIFIED
 }
 
-func (x *RegisterRequest) GetIdentifier() string {
+func (x *RegisterRequest) GetAuthId() string {
 	if x != nil {
-		return x.Identifier
+		return x.AuthId
 	}
 	return ""
 }
@@ -235,12 +283,12 @@ func (x *RegisterRequest) GetPassword() string {
 }
 
 type LoginRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	IdentifierType IdentifierType         `protobuf:"varint,1,opt,name=identifier_type,json=identifierType,proto3,enum=api.user.service.v1.IdentifierType" json:"identifier_type,omitempty"`
-	Identifier     string                 `protobuf:"bytes,2,opt,name=identifier,proto3" json:"identifier,omitempty"`
-	Password       string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	PasswordProvider PasswordProvider       `protobuf:"varint,1,opt,name=password_provider,json=passwordProvider,proto3,enum=api.user.service.v1.PasswordProvider" json:"password_provider,omitempty"`
+	AuthId           string                 `protobuf:"bytes,2,opt,name=auth_id,json=authId,proto3" json:"auth_id,omitempty"`
+	Password         string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *LoginRequest) Reset() {
@@ -273,16 +321,16 @@ func (*LoginRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *LoginRequest) GetIdentifierType() IdentifierType {
+func (x *LoginRequest) GetPasswordProvider() PasswordProvider {
 	if x != nil {
-		return x.IdentifierType
+		return x.PasswordProvider
 	}
-	return IdentifierType_IDENTIFIER_TYPE_UNSPECIFIED
+	return PasswordProvider_PASSWORD_PROVIDER_UNSPECIFIED
 }
 
-func (x *LoginRequest) GetIdentifier() string {
+func (x *LoginRequest) GetAuthId() string {
 	if x != nil {
-		return x.Identifier
+		return x.AuthId
 	}
 	return ""
 }
@@ -296,7 +344,7 @@ func (x *LoginRequest) GetPassword() string {
 
 type OAuthRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AuthType      AuthType               `protobuf:"varint,1,opt,name=auth_type,json=authType,proto3,enum=api.user.service.v1.AuthType" json:"auth_type,omitempty"`
+	OauthProvider OAuthProvider          `protobuf:"varint,1,opt,name=oauth_provider,json=oauthProvider,proto3,enum=api.user.service.v1.OAuthProvider" json:"oauth_provider,omitempty"`
 	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -332,11 +380,11 @@ func (*OAuthRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *OAuthRequest) GetAuthType() AuthType {
+func (x *OAuthRequest) GetOauthProvider() OAuthProvider {
 	if x != nil {
-		return x.AuthType
+		return x.OauthProvider
 	}
-	return AuthType_AUTH_TYPE_UNSPECIFIED
+	return OAuthProvider_OAUTH_PROVIDER_UNSPECIFIED
 }
 
 func (x *OAuthRequest) GetToken() string {
@@ -714,23 +762,19 @@ var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x17validate/validate.proto\"#\n" +
+	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"#\n" +
 	"\bUserInfo\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"\x9b\x01\n" +
-	"\x0fRegisterRequest\x12L\n" +
-	"\x0fidentifier_type\x18\x01 \x01(\x0e2#.api.user.service.v1.IdentifierTypeR\x0eidentifierType\x12\x1e\n" +
-	"\n" +
-	"identifier\x18\x02 \x01(\tR\n" +
-	"identifier\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\"\x98\x01\n" +
-	"\fLoginRequest\x12L\n" +
-	"\x0fidentifier_type\x18\x01 \x01(\x0e2#.api.user.service.v1.IdentifierTypeR\x0eidentifierType\x12\x1e\n" +
-	"\n" +
-	"identifier\x18\x02 \x01(\tR\n" +
-	"identifier\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\"`\n" +
-	"\fOAuthRequest\x12:\n" +
-	"\tauth_type\x18\x01 \x01(\x0e2\x1d.api.user.service.v1.AuthTypeR\bauthType\x12\x14\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"\x9a\x01\n" +
+	"\x0fRegisterRequest\x12R\n" +
+	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
+	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\"\x97\x01\n" +
+	"\fLoginRequest\x12R\n" +
+	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
+	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\"o\n" +
+	"\fOAuthRequest\x12I\n" +
+	"\x0eoauth_provider\x18\x01 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\roauthProvider\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\"\xcb\x01\n" +
 	"\x13TelegramAuthRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1d\n" +
@@ -754,21 +798,25 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0fGetUserResponse\x12:\n" +
 	"\tuser_info\x18\x01 \x01(\v2\x1d.api.user.service.v1.UserInfoR\buserInfo\"\x0f\n" +
 	"\rLogoutRequest\"\x10\n" +
-	"\x0eLogoutResponse*\x83\x01\n" +
+	"\x0eLogoutResponse*j\n" +
 	"\bAuthType\x12\x19\n" +
 	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
-	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x14\n" +
-	"\x10AUTH_TYPE_GOOGLE\x10\x02\x12\x16\n" +
-	"\x12AUTH_TYPE_FACEBOOK\x10\x03\x12\x16\n" +
-	"\x12AUTH_TYPE_TELEGRAM\x10\x04*\x86\x01\n" +
-	"\x0eIdentifierType\x12\x1f\n" +
-	"\x1bIDENTIFIER_TYPE_UNSPECIFIED\x10\x00\x12\x1c\n" +
-	"\x18IDENTIFIER_TYPE_USERNAME\x10\x01\x12\x19\n" +
-	"\x15IDENTIFIER_TYPE_EMAIL\x10\x02\x12\x1a\n" +
-	"\x16IDENTIFIER_TYPE_MOBILE\x10\x032\xfa\x06\n" +
-	"\x04User\x12\x85\x01\n" +
-	"\x17RegisterWithCredentials\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12|\n" +
-	"\x14LoginWithCredentials\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12\x80\x01\n" +
+	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x13\n" +
+	"\x0fAUTH_TYPE_OAUTH\x10\x02\x12\x16\n" +
+	"\x12AUTH_TYPE_TELEGRAM\x10\x03*\x90\x01\n" +
+	"\x10PasswordProvider\x12!\n" +
+	"\x1dPASSWORD_PROVIDER_UNSPECIFIED\x10\x00\x12\x1e\n" +
+	"\x1aPASSWORD_PROVIDER_USERNAME\x10\x01\x12\x1b\n" +
+	"\x17PASSWORD_PROVIDER_EMAIL\x10\x02\x12\x1c\n" +
+	"\x18PASSWORD_PROVIDER_MOBILE\x10\x03*\x83\x01\n" +
+	"\rOAuthProvider\x12\x1e\n" +
+	"\x1aOAUTH_PROVIDER_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15OAUTH_PROVIDER_GOOGLE\x10\x01\x12\x1b\n" +
+	"\x17OAUTH_PROVIDER_FACEBOOK\x10\x02\x12\x1a\n" +
+	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\xdb\x06\n" +
+	"\x04User\x12v\n" +
+	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
+	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12\x80\x01\n" +
 	"\x18RegisterOrLoginWithOAuth\x12!.api.user.service.v1.OAuthRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/oauth\x12\x8d\x01\n" +
 	"\x1bRegisterOrLoginWithTelegram\x12(.api.user.service.v1.TelegramAuthRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/telegram\x12}\n" +
 	"\fRefreshToken\x12(.api.user.service.v1.RefreshTokenRequest\x1a!.api.user.service.v1.AuthResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/user/auth/refresh\x12k\n" +
@@ -788,43 +836,44 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 	return file_user_service_v1_user_proto_rawDescData
 }
 
-var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_user_service_v1_user_proto_goTypes = []any{
 	(AuthType)(0),               // 0: api.user.service.v1.AuthType
-	(IdentifierType)(0),         // 1: api.user.service.v1.IdentifierType
-	(*UserInfo)(nil),            // 2: api.user.service.v1.UserInfo
-	(*RegisterRequest)(nil),     // 3: api.user.service.v1.RegisterRequest
-	(*LoginRequest)(nil),        // 4: api.user.service.v1.LoginRequest
-	(*OAuthRequest)(nil),        // 5: api.user.service.v1.OAuthRequest
-	(*TelegramAuthRequest)(nil), // 6: api.user.service.v1.TelegramAuthRequest
-	(*RefreshTokenRequest)(nil), // 7: api.user.service.v1.RefreshTokenRequest
-	(*AuthResponse)(nil),        // 8: api.user.service.v1.AuthResponse
-	(*GetUserRequest)(nil),      // 9: api.user.service.v1.GetUserRequest
-	(*GetUserResponse)(nil),     // 10: api.user.service.v1.GetUserResponse
-	(*LogoutRequest)(nil),       // 11: api.user.service.v1.LogoutRequest
-	(*LogoutResponse)(nil),      // 12: api.user.service.v1.LogoutResponse
+	(PasswordProvider)(0),       // 1: api.user.service.v1.PasswordProvider
+	(OAuthProvider)(0),          // 2: api.user.service.v1.OAuthProvider
+	(*UserInfo)(nil),            // 3: api.user.service.v1.UserInfo
+	(*RegisterRequest)(nil),     // 4: api.user.service.v1.RegisterRequest
+	(*LoginRequest)(nil),        // 5: api.user.service.v1.LoginRequest
+	(*OAuthRequest)(nil),        // 6: api.user.service.v1.OAuthRequest
+	(*TelegramAuthRequest)(nil), // 7: api.user.service.v1.TelegramAuthRequest
+	(*RefreshTokenRequest)(nil), // 8: api.user.service.v1.RefreshTokenRequest
+	(*AuthResponse)(nil),        // 9: api.user.service.v1.AuthResponse
+	(*GetUserRequest)(nil),      // 10: api.user.service.v1.GetUserRequest
+	(*GetUserResponse)(nil),     // 11: api.user.service.v1.GetUserResponse
+	(*LogoutRequest)(nil),       // 12: api.user.service.v1.LogoutRequest
+	(*LogoutResponse)(nil),      // 13: api.user.service.v1.LogoutResponse
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
-	1,  // 0: api.user.service.v1.RegisterRequest.identifier_type:type_name -> api.user.service.v1.IdentifierType
-	1,  // 1: api.user.service.v1.LoginRequest.identifier_type:type_name -> api.user.service.v1.IdentifierType
-	0,  // 2: api.user.service.v1.OAuthRequest.auth_type:type_name -> api.user.service.v1.AuthType
-	2,  // 3: api.user.service.v1.AuthResponse.user_info:type_name -> api.user.service.v1.UserInfo
-	2,  // 4: api.user.service.v1.GetUserResponse.user_info:type_name -> api.user.service.v1.UserInfo
-	3,  // 5: api.user.service.v1.User.RegisterWithCredentials:input_type -> api.user.service.v1.RegisterRequest
-	4,  // 6: api.user.service.v1.User.LoginWithCredentials:input_type -> api.user.service.v1.LoginRequest
-	5,  // 7: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
-	6,  // 8: api.user.service.v1.User.RegisterOrLoginWithTelegram:input_type -> api.user.service.v1.TelegramAuthRequest
-	7,  // 9: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
-	9,  // 10: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
-	11, // 11: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
-	8,  // 12: api.user.service.v1.User.RegisterWithCredentials:output_type -> api.user.service.v1.AuthResponse
-	8,  // 13: api.user.service.v1.User.LoginWithCredentials:output_type -> api.user.service.v1.AuthResponse
-	8,  // 14: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
-	8,  // 15: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
-	8,  // 16: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.AuthResponse
-	10, // 17: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	12, // 18: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	1,  // 0: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
+	1,  // 1: api.user.service.v1.LoginRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
+	2,  // 2: api.user.service.v1.OAuthRequest.oauth_provider:type_name -> api.user.service.v1.OAuthProvider
+	3,  // 3: api.user.service.v1.AuthResponse.user_info:type_name -> api.user.service.v1.UserInfo
+	3,  // 4: api.user.service.v1.GetUserResponse.user_info:type_name -> api.user.service.v1.UserInfo
+	4,  // 5: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
+	5,  // 6: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
+	6,  // 7: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
+	7,  // 8: api.user.service.v1.User.RegisterOrLoginWithTelegram:input_type -> api.user.service.v1.TelegramAuthRequest
+	8,  // 9: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
+	10, // 10: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
+	12, // 11: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
+	9,  // 12: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
+	9,  // 13: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
+	9,  // 14: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
+	9,  // 15: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
+	9,  // 16: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.AuthResponse
+	11, // 17: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	13, // 18: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
 	12, // [12:19] is the sub-list for method output_type
 	5,  // [5:12] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
@@ -842,7 +891,7 @@ func file_user_service_v1_user_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,

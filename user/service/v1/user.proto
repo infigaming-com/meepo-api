@@ -3,21 +3,20 @@ syntax = "proto3";
 package api.user.service.v1;
 
 import "google/api/annotations.proto";
-import "validate/validate.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.user.service.v1";
 
 service User {
-	rpc RegisterWithCredentials (RegisterRequest) returns (AuthResponse) {
+	rpc Register (RegisterRequest) returns (AuthResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/auth/register"
 			body: "*"
 		};
 	}
 	  
-	rpc LoginWithCredentials (LoginRequest) returns (AuthResponse) {
+	rpc Login (LoginRequest) returns (AuthResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/auth/login"
 			body: "*"
@@ -67,32 +66,38 @@ message UserInfo {
 enum AuthType {
 	AUTH_TYPE_UNSPECIFIED = 0;
 	AUTH_TYPE_PASSWORD = 1;
-	AUTH_TYPE_GOOGLE = 2;
-	AUTH_TYPE_FACEBOOK = 3;
-	AUTH_TYPE_TELEGRAM = 4;
+	AUTH_TYPE_OAUTH = 2;
+	AUTH_TYPE_TELEGRAM = 3;
 }
 
-enum IdentifierType {
-	IDENTIFIER_TYPE_UNSPECIFIED = 0;
-	IDENTIFIER_TYPE_USERNAME = 1;
-	IDENTIFIER_TYPE_EMAIL = 2;
-	IDENTIFIER_TYPE_MOBILE = 3;
+enum PasswordProvider {
+	PASSWORD_PROVIDER_UNSPECIFIED = 0;
+	PASSWORD_PROVIDER_USERNAME = 1;
+	PASSWORD_PROVIDER_EMAIL = 2;
+	PASSWORD_PROVIDER_MOBILE = 3;
+}
+
+enum OAuthProvider {
+	OAUTH_PROVIDER_UNSPECIFIED = 0;
+	OAUTH_PROVIDER_GOOGLE = 1;
+	OAUTH_PROVIDER_FACEBOOK = 2;
+	OAUTH_PROVIDER_TWITTER = 3;
 }
 
 message RegisterRequest {
-	IdentifierType identifier_type = 1;
-	string identifier = 2;
+	PasswordProvider password_provider = 1;
+	string auth_id = 2;
 	string password = 3;
 }
 
 message LoginRequest {
-	IdentifierType identifier_type = 1;
-	string identifier = 2;
+	PasswordProvider password_provider = 1;
+	string auth_id = 2;
 	string password = 3;
 }
 
 message OAuthRequest {
-	AuthType auth_type = 1;
+	OAuthProvider oauth_provider = 1;
 	string token = 2;
 }
 

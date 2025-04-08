@@ -158,9 +158,9 @@ func (m *RegisterRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for IdentifierType
+	// no validation rules for PasswordProvider
 
-	// no validation rules for Identifier
+	// no validation rules for AuthId
 
 	// no validation rules for Password
 
@@ -264,9 +264,9 @@ func (m *LoginRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for IdentifierType
+	// no validation rules for PasswordProvider
 
-	// no validation rules for Identifier
+	// no validation rules for AuthId
 
 	// no validation rules for Password
 
@@ -369,7 +369,7 @@ func (m *OAuthRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for AuthType
+	// no validation rules for OauthProvider
 
 	// no validation rules for Token
 

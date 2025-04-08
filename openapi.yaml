@@ -107,7 +107,7 @@ paths:
         post:
             tags:
                 - User
-            operationId: User_LoginWithCredentials
+            operationId: User_Login
             requestBody:
                 content:
                     application/json:
@@ -161,7 +161,7 @@ paths:
         post:
             tags:
                 - User
-            operationId: User_RegisterWithCredentials
+            operationId: User_Register
             requestBody:
                 content:
                     application/json:
@@ -280,10 +280,10 @@ components:
         api.user.service.v1.LoginRequest:
             type: object
             properties:
-                identifierType:
+                passwordProvider:
                     type: integer
                     format: enum
-                identifier:
+                authId:
                     type: string
                 password:
                     type: string
@@ -296,7 +296,7 @@ components:
         api.user.service.v1.OAuthRequest:
             type: object
             properties:
-                authType:
+                oauthProvider:
                     type: integer
                     format: enum
                 token:
@@ -309,10 +309,10 @@ components:
         api.user.service.v1.RegisterRequest:
             type: object
             properties:
-                identifierType:
+                passwordProvider:
                     type: integer
                     format: enum
-                identifier:
+                authId:
                     type: string
                 password:
                     type: string
