@@ -27,4 +27,4 @@ fi
 echo "生成Redoc文档..."
 npx @redocly/cli build-docs "$OPENAPI_PATH" --output index.html
 
-echo "成功生成文档: redoc-static.html"
+echo "成功生成文档: index.html"
