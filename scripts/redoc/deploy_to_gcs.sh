@@ -22,12 +22,12 @@ gsutil ls -b "gs://$BUCKET_NAME" &>/dev/null || gsutil mb "gs://$BUCKET_NAME"
 
 # 上传文件到GCS
 echo "上传文档到GCS..."
-gsutil -h "Cache-Control:public,max-age=3600" cp index.html "gs://$BUCKET_NAME/docs/api/index.html"
+gsutil -h "Cache-Control:public,max-age=3600" cp index.html "gs://$BUCKET_NAME/index.html"
 
 # 设置访问权限
 echo "设置公共访问权限..."
-gsutil acl ch -u AllUsers:R "gs://$BUCKET_NAME/docs/api/index.html"
+gsutil acl ch -u AllUsers:R "gs://$BUCKET_NAME/index.html"
 
 # 输出访问链接
 echo "部署完成!"
-echo "访问链接: https://storage.googleapis.com/$BUCKET_NAME/docs/api/index.html"
+echo "访问链接: https://storage.googleapis.com/$BUCKET_NAME/index.html"
