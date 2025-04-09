@@ -8,7 +8,10 @@ option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.user.service.v1";
 
+// User service provides authentication and user management functionality.
 service User {
+	// Register a new user with password-based authentication.
+	// This endpoint allows users to create a new account using various identity providers.
 	rpc Register (RegisterRequest) returns (AuthResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/auth/register"
@@ -16,6 +19,8 @@ service User {
 		};
 	}
 	  
+	// Login an existing user with password-based authentication.
+	// Users can login using their registered credentials.
 	rpc Login (LoginRequest) returns (AuthResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/auth/login"
@@ -23,6 +28,8 @@ service User {
 		};
 	}
 	
+	// Register or login using OAuth provider.
+	// Supports multiple OAuth providers like Google, Facebook, and Twitter.
 	rpc RegisterOrLoginWithOAuth (OAuthRequest) returns (AuthResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/auth/oauth"
@@ -30,6 +37,8 @@ service User {
 		};
 	}
 	
+	// Register or login using Telegram authentication.
+	// Uses Telegram's login widget for authentication.
 	rpc RegisterOrLoginWithTelegram (TelegramAuthRequest) returns (AuthResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/auth/telegram"
@@ -37,6 +46,8 @@ service User {
 		};
 	}
 	
+	// Refresh the access token using a refresh token.
+	// Used to obtain a new access token when the current one expires.
 	rpc RefreshToken (RefreshTokenRequest) returns (AuthResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/auth/refresh"
@@ -44,92 +55,144 @@ service User {
 		};
 	}
 	  
+	// Get user information by user ID.
+	// Returns basic user information for the specified user.
 	rpc GetUser (GetUserRequest) returns (GetUserResponse) {
 		option (google.api.http) = {
 			get: "/v1/user/{id}"
 		};
 	}
 	
+	// Logout the current user.
+	// Invalidates the current session and refresh token.
 	rpc Logout (LogoutRequest) returns (LogoutResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/logout"
 			body: "*"
 		};
 	}
-
 }
 
+// UserInfo contains basic user information.
 message UserInfo {
+	// Unique identifier for the user.
 	string user_id = 1;
 }
 
+// AuthType defines the type of authentication method.
 enum AuthType {
+	// Default value, should not be used.
 	AUTH_TYPE_UNSPECIFIED = 0;
+	// Password-based authentication.
 	AUTH_TYPE_PASSWORD = 1;
+	// OAuth-based authentication.
 	AUTH_TYPE_OAUTH = 2;
+	// Telegram-based authentication.
 	AUTH_TYPE_TELEGRAM = 3;
 }
 
+// PasswordProvider defines the type of identity used for password authentication.
 enum PasswordProvider {
+	// Default value, should not be used.
 	PASSWORD_PROVIDER_UNSPECIFIED = 0;
+	// Username-based authentication.
 	PASSWORD_PROVIDER_USERNAME = 1;
+	// Email-based authentication.
 	PASSWORD_PROVIDER_EMAIL = 2;
+	// Mobile number-based authentication.
 	PASSWORD_PROVIDER_MOBILE = 3;
 }
 
+// OAuthProvider defines the supported OAuth providers.
 enum OAuthProvider {
+	// Default value, should not be used.
 	OAUTH_PROVIDER_UNSPECIFIED = 0;
+	// Google OAuth provider.
 	OAUTH_PROVIDER_GOOGLE = 1;
+	// Facebook OAuth provider.
 	OAUTH_PROVIDER_FACEBOOK = 2;
+	// Twitter OAuth provider.
 	OAUTH_PROVIDER_TWITTER = 3;
 }
 
+// RegisterRequest contains the information needed to register a new user.
 message RegisterRequest {
+	// The type of identity provider to use for registration.
 	PasswordProvider password_provider = 1;
+	// The identity (username, email, or mobile) to register with.
 	string auth_id = 2;
+	// The password for the new account.
 	string password = 3;
 }
 
+// LoginRequest contains the credentials for user login.
 message LoginRequest {
+	// The type of identity provider to use for login.
 	PasswordProvider password_provider = 1;
+	// The identity (username, email, or mobile) to login with.
 	string auth_id = 2;
+	// The password for the account.
 	string password = 3;
 }
 
+// OAuthRequest contains the information needed for OAuth authentication.
 message OAuthRequest {
+	// The OAuth provider to use for authentication.
 	OAuthProvider oauth_provider = 1;
+	// The OAuth token received from the provider.
 	string token = 2;
 }
 
+// TelegramAuthRequest contains the information from Telegram's login widget.
 message TelegramAuthRequest {
+	// Telegram user ID.
 	int64 id = 1;
+	// User's first name.
 	string first_name = 2;
+	// User's last name.
 	string last_name = 3;
+	// Telegram username.
 	string username = 4;
+	// URL of the user's profile photo.
 	string photo_url = 5;
+	// Unix timestamp when the authentication was performed.
 	int64 auth_date = 6;
+	// Hash for verifying the authentication data.
 	string hash = 7;
 }
 
+// RefreshTokenRequest contains the refresh token for obtaining a new access token.
 message RefreshTokenRequest {
+	// The refresh token to use for obtaining a new access token.
 	string refresh_token = 1;
 }
 
+// AuthResponse contains the authentication tokens and user information.
 message AuthResponse {
+	// JWT access token for API authentication.
 	string access_token = 1;
+	// Refresh token for obtaining new access tokens.
 	string refresh_token = 2;
+	// Number of seconds until the access token expires.
 	int64 expires_in = 3;
+	// Basic information about the authenticated user.
 	UserInfo user_info = 4;
 }
 
+// GetUserRequest contains the ID of the user to retrieve.
 message GetUserRequest {
+	// The ID of the user to retrieve.
 	string id = 1;
 }
 
+// GetUserResponse contains the requested user's information.
 message GetUserResponse {
+	// Basic information about the requested user.
 	UserInfo user_info = 1;
 }
 
+// LogoutRequest is an empty message for the logout operation.
 message LogoutRequest {}
 
+// LogoutResponse is an empty message for the logout operation.
 message LogoutResponse {}

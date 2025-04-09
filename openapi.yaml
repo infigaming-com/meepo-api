@@ -107,6 +107,9 @@ paths:
         post:
             tags:
                 - User
+            description: |-
+                Login an existing user with password-based authentication.
+                 Users can login using their registered credentials.
             operationId: User_Login
             requestBody:
                 content:
@@ -125,6 +128,9 @@ paths:
         post:
             tags:
                 - User
+            description: |-
+                Register or login using OAuth provider.
+                 Supports multiple OAuth providers like Google, Facebook, and Twitter.
             operationId: User_RegisterOrLoginWithOAuth
             requestBody:
                 content:
@@ -143,6 +149,9 @@ paths:
         post:
             tags:
                 - User
+            description: |-
+                Refresh the access token using a refresh token.
+                 Used to obtain a new access token when the current one expires.
             operationId: User_RefreshToken
             requestBody:
                 content:
@@ -161,6 +170,9 @@ paths:
         post:
             tags:
                 - User
+            description: |-
+                Register a new user with password-based authentication.
+                 This endpoint allows users to create a new account using various identity providers.
             operationId: User_Register
             requestBody:
                 content:
@@ -179,6 +191,9 @@ paths:
         post:
             tags:
                 - User
+            description: |-
+                Register or login using Telegram authentication.
+                 Uses Telegram's login widget for authentication.
             operationId: User_RegisterOrLoginWithTelegram
             requestBody:
                 content:
@@ -197,6 +212,9 @@ paths:
         post:
             tags:
                 - User
+            description: |-
+                Logout the current user.
+                 Invalidates the current session and refresh token.
             operationId: User_Logout
             requestBody:
                 content:
@@ -215,10 +233,14 @@ paths:
         get:
             tags:
                 - User
+            description: |-
+                Get user information by user ID.
+                 Returns basic user information for the specified user.
             operationId: User_GetUser
             parameters:
                 - name: id
                   in: path
+                  description: The ID of the user to retrieve.
                   required: true
                   schema:
                     type: string
@@ -266,78 +288,127 @@ components:
             properties:
                 accessToken:
                     type: string
+                    description: JWT access token for API authentication.
                 refreshToken:
                     type: string
+                    description: Refresh token for obtaining new access tokens.
                 expiresIn:
                     type: string
+                    description: Number of seconds until the access token expires.
                 userInfo:
-                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
+                    allOf:
+                        - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
+                    description: Basic information about the authenticated user.
+            description: AuthResponse contains the authentication tokens and user information.
         api.user.service.v1.GetUserResponse:
             type: object
             properties:
                 userInfo:
-                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
+                    allOf:
+                        - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
+                    description: Basic information about the requested user.
+            description: GetUserResponse contains the requested user's information.
         api.user.service.v1.LoginRequest:
             type: object
             properties:
                 passwordProvider:
-                    type: integer
+                    enum:
+                        - PASSWORD_PROVIDER_UNSPECIFIED
+                        - PASSWORD_PROVIDER_USERNAME
+                        - PASSWORD_PROVIDER_EMAIL
+                        - PASSWORD_PROVIDER_MOBILE
+                    type: string
+                    description: The type of identity provider to use for login.
                     format: enum
                 authId:
                     type: string
+                    description: The identity (username, email, or mobile) to login with.
                 password:
                     type: string
+                    description: The password for the account.
+            description: LoginRequest contains the credentials for user login.
         api.user.service.v1.LogoutRequest:
             type: object
             properties: {}
+            description: LogoutRequest is an empty message for the logout operation.
         api.user.service.v1.LogoutResponse:
             type: object
             properties: {}
+            description: LogoutResponse is an empty message for the logout operation.
         api.user.service.v1.OAuthRequest:
             type: object
             properties:
                 oauthProvider:
-                    type: integer
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                    type: string
+                    description: The OAuth provider to use for authentication.
                     format: enum
                 token:
                     type: string
+                    description: The OAuth token received from the provider.
+            description: OAuthRequest contains the information needed for OAuth authentication.
         api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
                 refreshToken:
                     type: string
+                    description: The refresh token to use for obtaining a new access token.
+            description: RefreshTokenRequest contains the refresh token for obtaining a new access token.
         api.user.service.v1.RegisterRequest:
             type: object
             properties:
                 passwordProvider:
-                    type: integer
+                    enum:
+                        - PASSWORD_PROVIDER_UNSPECIFIED
+                        - PASSWORD_PROVIDER_USERNAME
+                        - PASSWORD_PROVIDER_EMAIL
+                        - PASSWORD_PROVIDER_MOBILE
+                    type: string
+                    description: The type of identity provider to use for registration.
                     format: enum
                 authId:
                     type: string
+                    description: The identity (username, email, or mobile) to register with.
                 password:
                     type: string
+                    description: The password for the new account.
+            description: RegisterRequest contains the information needed to register a new user.
         api.user.service.v1.TelegramAuthRequest:
             type: object
             properties:
                 id:
                     type: string
+                    description: Telegram user ID.
                 firstName:
                     type: string
+                    description: User's first name.
                 lastName:
                     type: string
+                    description: User's last name.
                 username:
                     type: string
+                    description: Telegram username.
                 photoUrl:
                     type: string
+                    description: URL of the user's profile photo.
                 authDate:
                     type: string
+                    description: Unix timestamp when the authentication was performed.
                 hash:
                     type: string
+                    description: Hash for verifying the authentication data.
+            description: TelegramAuthRequest contains the information from Telegram's login widget.
         api.user.service.v1.UserInfo:
             type: object
             properties:
                 userId:
                     type: string
+                    description: Unique identifier for the user.
+            description: UserInfo contains basic user information.
         api.wallet.service.v1.GetUserBalanceResponse:
             type: object
             properties:
@@ -415,4 +486,5 @@ tags:
     - name: Payment
     - name: System
     - name: User
+      description: User service provides authentication and user management functionality.
     - name: Wallet

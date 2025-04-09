@@ -31,13 +31,29 @@ const (
 // UserClient is the client API for User service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// User service provides authentication and user management functionality.
 type UserClient interface {
+	// Register a new user with password-based authentication.
+	// This endpoint allows users to create a new account using various identity providers.
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	// Login an existing user with password-based authentication.
+	// Users can login using their registered credentials.
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	// Register or login using OAuth provider.
+	// Supports multiple OAuth providers like Google, Facebook, and Twitter.
 	RegisterOrLoginWithOAuth(ctx context.Context, in *OAuthRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	// Register or login using Telegram authentication.
+	// Uses Telegram's login widget for authentication.
 	RegisterOrLoginWithTelegram(ctx context.Context, in *TelegramAuthRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	// Refresh the access token using a refresh token.
+	// Used to obtain a new access token when the current one expires.
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	// Get user information by user ID.
+	// Returns basic user information for the specified user.
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
+	// Logout the current user.
+	// Invalidates the current session and refresh token.
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 }
 
@@ -122,13 +138,29 @@ func (c *userClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
+//
+// User service provides authentication and user management functionality.
 type UserServer interface {
+	// Register a new user with password-based authentication.
+	// This endpoint allows users to create a new account using various identity providers.
 	Register(context.Context, *RegisterRequest) (*AuthResponse, error)
+	// Login an existing user with password-based authentication.
+	// Users can login using their registered credentials.
 	Login(context.Context, *LoginRequest) (*AuthResponse, error)
+	// Register or login using OAuth provider.
+	// Supports multiple OAuth providers like Google, Facebook, and Twitter.
 	RegisterOrLoginWithOAuth(context.Context, *OAuthRequest) (*AuthResponse, error)
+	// Register or login using Telegram authentication.
+	// Uses Telegram's login widget for authentication.
 	RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error)
+	// Refresh the access token using a refresh token.
+	// Used to obtain a new access token when the current one expires.
 	RefreshToken(context.Context, *RefreshTokenRequest) (*AuthResponse, error)
+	// Get user information by user ID.
+	// Returns basic user information for the specified user.
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	// Logout the current user.
+	// Invalidates the current session and refresh token.
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
