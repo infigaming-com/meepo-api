@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package idgen.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/idgen/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "idgen.service.v1";
+
+service Idgen {
+  // 生成单个ID
+  rpc GenerateId (GenerateIdRequest) returns (GenerateIdReply);
+  // 批量生成ID
+  rpc BatchGenerateId (BatchGenerateIdRequest) returns (BatchGenerateIdReply);
+}
+
+message GenerateIdRequest {
+  string biz_type = 1;     // 业务类型，可选，用于区分不同业务场景的ID
+}
+
+message GenerateIdReply {
+  int64 id = 1;           // 生成的雪花ID
+}
+
+message BatchGenerateIdRequest {
+  string biz_type = 1;     // 业务类型，可选
+  int32 count = 2;         // 要生成的ID数量
+}
+
+message BatchGenerateIdReply {
+  repeated int64 ids = 1; // 生成的雪花ID列表
+}
