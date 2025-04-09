@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package system.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/system/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "system.service.v1";
+
+service System {
+	rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {
+		option (google.api.http) = {
+			get: "/v1/system/healthcheck"
+		};
+	};
+
+	rpc AddCurrency(AddCurrencyRequest) returns (AddCurrencyResponse) {
+		option (google.api.http) = {
+			post: "/v1/system/currencies/add"
+			body: "*"
+		};
+	};
+
+	rpc GetCurrencies(GetCurrenciesRequest) returns (GetCurrenciesResponse) {
+		option (google.api.http) = {
+			post: "/v1/system/currencies/get"
+			body: "*"
+		};
+	};
+
+	rpc ListCurrencies(ListCurrenciesRequest) returns (ListCurrenciesResponse) {
+		option (google.api.http) = {
+			post: "/v1/system/currencies/list"
+			body: "*"
+		};
+	};
+}
+
+message Currency {
+	string currency = 1;
+	int32 decimal_places = 2;
+}
+
+message HealthCheckRequest {
+}
+
+message HealthCheckResponse {
+	string status = 1;
+}
+
+message AddCurrencyRequest {
+	string currency = 1;
+	int32 decimal_places = 2;
+}
+
+message AddCurrencyResponse {
+	Currency currency = 1;
+}
+
+message GetCurrenciesRequest {
+	string currency = 1;
+}
+
+message GetCurrenciesResponse {
+	Currency currencies = 1;
+}
+
+message ListCurrenciesRequest {
+}
+
+message ListCurrenciesResponse {
+	repeated Currency currencies = 1;
+}

@@ -35,212 +35,6 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on HealthCheckRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *HealthCheckRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on HealthCheckRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// HealthCheckRequestMultiError, or nil if none found.
-func (m *HealthCheckRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *HealthCheckRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return HealthCheckRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// HealthCheckRequestMultiError is an error wrapping multiple validation errors
-// returned by HealthCheckRequest.ValidateAll() if the designated constraints
-// aren't met.
-type HealthCheckRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m HealthCheckRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m HealthCheckRequestMultiError) AllErrors() []error { return m }
-
-// HealthCheckRequestValidationError is the validation error returned by
-// HealthCheckRequest.Validate if the designated constraints aren't met.
-type HealthCheckRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e HealthCheckRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e HealthCheckRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e HealthCheckRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e HealthCheckRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e HealthCheckRequestValidationError) ErrorName() string {
-	return "HealthCheckRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e HealthCheckRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sHealthCheckRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = HealthCheckRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = HealthCheckRequestValidationError{}
-
-// Validate checks the field values on HealthCheckResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *HealthCheckResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on HealthCheckResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// HealthCheckResponseMultiError, or nil if none found.
-func (m *HealthCheckResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *HealthCheckResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Status
-
-	if len(errors) > 0 {
-		return HealthCheckResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// HealthCheckResponseMultiError is an error wrapping multiple validation
-// errors returned by HealthCheckResponse.ValidateAll() if the designated
-// constraints aren't met.
-type HealthCheckResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m HealthCheckResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m HealthCheckResponseMultiError) AllErrors() []error { return m }
-
-// HealthCheckResponseValidationError is the validation error returned by
-// HealthCheckResponse.Validate if the designated constraints aren't met.
-type HealthCheckResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e HealthCheckResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e HealthCheckResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e HealthCheckResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e HealthCheckResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e HealthCheckResponseValidationError) ErrorName() string {
-	return "HealthCheckResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e HealthCheckResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sHealthCheckResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = HealthCheckResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = HealthCheckResponseValidationError{}
-
 // Validate checks the field values on UserInfo with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -364,84 +158,17 @@ func (m *RegisterRequest) validate(all bool) error {
 
 	var errors []error
 
-	if err := m._validateEmail(m.GetEmail()); err != nil {
-		err = RegisterRequestValidationError{
-			field:  "Email",
-			reason: "value must be a valid email address",
-			cause:  err,
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for PasswordProvider
 
-	if utf8.RuneCountInString(m.GetPassword()) < 8 {
-		err := RegisterRequestValidationError{
-			field:  "Password",
-			reason: "value length must be at least 8 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for AuthId
+
+	// no validation rules for Password
 
 	if len(errors) > 0 {
 		return RegisterRequestMultiError(errors)
 	}
 
 	return nil
-}
-
-func (m *RegisterRequest) _validateHostname(host string) error {
-	s := strings.ToLower(strings.TrimSuffix(host, "."))
-
-	if len(host) > 253 {
-		return errors.New("hostname cannot exceed 253 characters")
-	}
-
-	for _, part := range strings.Split(s, ".") {
-		if l := len(part); l == 0 || l > 63 {
-			return errors.New("hostname part must be non-empty and cannot exceed 63 characters")
-		}
-
-		if part[0] == '-' {
-			return errors.New("hostname parts cannot begin with hyphens")
-		}
-
-		if part[len(part)-1] == '-' {
-			return errors.New("hostname parts cannot end with hyphens")
-		}
-
-		for _, r := range part {
-			if (r < 'a' || r > 'z') && (r < '0' || r > '9') && r != '-' {
-				return fmt.Errorf("hostname parts can only contain alphanumeric characters or hyphens, got %q", string(r))
-			}
-		}
-	}
-
-	return nil
-}
-
-func (m *RegisterRequest) _validateEmail(addr string) error {
-	a, err := mail.ParseAddress(addr)
-	if err != nil {
-		return err
-	}
-	addr = a.Address
-
-	if len(addr) > 254 {
-		return errors.New("email addresses cannot exceed 254 characters")
-	}
-
-	parts := strings.SplitN(addr, "@", 2)
-
-	if len(parts[0]) > 64 {
-		return errors.New("email address local phrase cannot exceed 64 characters")
-	}
-
-	return m._validateHostname(parts[1])
 }
 
 // RegisterRequestMultiError is an error wrapping multiple validation errors
@@ -515,137 +242,6 @@ var _ interface {
 	ErrorName() string
 } = RegisterRequestValidationError{}
 
-// Validate checks the field values on RegisterResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *RegisterResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on RegisterResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// RegisterResponseMultiError, or nil if none found.
-func (m *RegisterResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *RegisterResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for AccessToken
-
-	if all {
-		switch v := interface{}(m.GetUserInfo()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, RegisterResponseValidationError{
-					field:  "UserInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, RegisterResponseValidationError{
-					field:  "UserInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetUserInfo()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return RegisterResponseValidationError{
-				field:  "UserInfo",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return RegisterResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// RegisterResponseMultiError is an error wrapping multiple validation errors
-// returned by RegisterResponse.ValidateAll() if the designated constraints
-// aren't met.
-type RegisterResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m RegisterResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m RegisterResponseMultiError) AllErrors() []error { return m }
-
-// RegisterResponseValidationError is the validation error returned by
-// RegisterResponse.Validate if the designated constraints aren't met.
-type RegisterResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e RegisterResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e RegisterResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e RegisterResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e RegisterResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e RegisterResponseValidationError) ErrorName() string { return "RegisterResponseValidationError" }
-
-// Error satisfies the builtin error interface
-func (e RegisterResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sRegisterResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = RegisterResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = RegisterResponseValidationError{}
-
 // Validate checks the field values on LoginRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -668,84 +264,17 @@ func (m *LoginRequest) validate(all bool) error {
 
 	var errors []error
 
-	if err := m._validateEmail(m.GetEmail()); err != nil {
-		err = LoginRequestValidationError{
-			field:  "Email",
-			reason: "value must be a valid email address",
-			cause:  err,
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for PasswordProvider
 
-	if utf8.RuneCountInString(m.GetPassword()) < 8 {
-		err := LoginRequestValidationError{
-			field:  "Password",
-			reason: "value length must be at least 8 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for AuthId
+
+	// no validation rules for Password
 
 	if len(errors) > 0 {
 		return LoginRequestMultiError(errors)
 	}
 
 	return nil
-}
-
-func (m *LoginRequest) _validateHostname(host string) error {
-	s := strings.ToLower(strings.TrimSuffix(host, "."))
-
-	if len(host) > 253 {
-		return errors.New("hostname cannot exceed 253 characters")
-	}
-
-	for _, part := range strings.Split(s, ".") {
-		if l := len(part); l == 0 || l > 63 {
-			return errors.New("hostname part must be non-empty and cannot exceed 63 characters")
-		}
-
-		if part[0] == '-' {
-			return errors.New("hostname parts cannot begin with hyphens")
-		}
-
-		if part[len(part)-1] == '-' {
-			return errors.New("hostname parts cannot end with hyphens")
-		}
-
-		for _, r := range part {
-			if (r < 'a' || r > 'z') && (r < '0' || r > '9') && r != '-' {
-				return fmt.Errorf("hostname parts can only contain alphanumeric characters or hyphens, got %q", string(r))
-			}
-		}
-	}
-
-	return nil
-}
-
-func (m *LoginRequest) _validateEmail(addr string) error {
-	a, err := mail.ParseAddress(addr)
-	if err != nil {
-		return err
-	}
-	addr = a.Address
-
-	if len(addr) > 254 {
-		return errors.New("email addresses cannot exceed 254 characters")
-	}
-
-	parts := strings.SplitN(addr, "@", 2)
-
-	if len(parts[0]) > 64 {
-		return errors.New("email address local phrase cannot exceed 64 characters")
-	}
-
-	return m._validateHostname(parts[1])
 }
 
 // LoginRequestMultiError is an error wrapping multiple validation errors
@@ -818,73 +347,45 @@ var _ interface {
 	ErrorName() string
 } = LoginRequestValidationError{}
 
-// Validate checks the field values on LoginResponse with the rules defined in
+// Validate checks the field values on OAuthRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *LoginResponse) Validate() error {
+func (m *OAuthRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on LoginResponse with the rules defined
+// ValidateAll checks the field values on OAuthRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in LoginResponseMultiError, or
+// result is a list of violation errors wrapped in OAuthRequestMultiError, or
 // nil if none found.
-func (m *LoginResponse) ValidateAll() error {
+func (m *OAuthRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *LoginResponse) validate(all bool) error {
+func (m *OAuthRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for AccessToken
+	// no validation rules for OauthProvider
 
-	if all {
-		switch v := interface{}(m.GetUserInfo()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, LoginResponseValidationError{
-					field:  "UserInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, LoginResponseValidationError{
-					field:  "UserInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetUserInfo()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return LoginResponseValidationError{
-				field:  "UserInfo",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Token
 
 	if len(errors) > 0 {
-		return LoginResponseMultiError(errors)
+		return OAuthRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// LoginResponseMultiError is an error wrapping multiple validation errors
-// returned by LoginResponse.ValidateAll() if the designated constraints
-// aren't met.
-type LoginResponseMultiError []error
+// OAuthRequestMultiError is an error wrapping multiple validation errors
+// returned by OAuthRequest.ValidateAll() if the designated constraints aren't met.
+type OAuthRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m LoginResponseMultiError) Error() string {
+func (m OAuthRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -893,11 +394,11 @@ func (m LoginResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m LoginResponseMultiError) AllErrors() []error { return m }
+func (m OAuthRequestMultiError) AllErrors() []error { return m }
 
-// LoginResponseValidationError is the validation error returned by
-// LoginResponse.Validate if the designated constraints aren't met.
-type LoginResponseValidationError struct {
+// OAuthRequestValidationError is the validation error returned by
+// OAuthRequest.Validate if the designated constraints aren't met.
+type OAuthRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -905,22 +406,22 @@ type LoginResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e LoginResponseValidationError) Field() string { return e.field }
+func (e OAuthRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e LoginResponseValidationError) Reason() string { return e.reason }
+func (e OAuthRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e LoginResponseValidationError) Cause() error { return e.cause }
+func (e OAuthRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e LoginResponseValidationError) Key() bool { return e.key }
+func (e OAuthRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e LoginResponseValidationError) ErrorName() string { return "LoginResponseValidationError" }
+func (e OAuthRequestValidationError) ErrorName() string { return "OAuthRequestValidationError" }
 
 // Error satisfies the builtin error interface
-func (e LoginResponseValidationError) Error() string {
+func (e OAuthRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -932,14 +433,14 @@ func (e LoginResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sLoginResponse.%s: %s%s",
+		"invalid %sOAuthRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = LoginResponseValidationError{}
+var _ error = OAuthRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -947,183 +448,58 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = LoginResponseValidationError{}
+} = OAuthRequestValidationError{}
 
-// Validate checks the field values on OAuthLoginRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *OAuthLoginRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on OAuthLoginRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// OAuthLoginRequestMultiError, or nil if none found.
-func (m *OAuthLoginRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *OAuthLoginRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Provider
-
-	// no validation rules for AuthCode
-
-	// no validation rules for RedirectUri
-
-	if len(errors) > 0 {
-		return OAuthLoginRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// OAuthLoginRequestMultiError is an error wrapping multiple validation errors
-// returned by OAuthLoginRequest.ValidateAll() if the designated constraints
-// aren't met.
-type OAuthLoginRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m OAuthLoginRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m OAuthLoginRequestMultiError) AllErrors() []error { return m }
-
-// OAuthLoginRequestValidationError is the validation error returned by
-// OAuthLoginRequest.Validate if the designated constraints aren't met.
-type OAuthLoginRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e OAuthLoginRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e OAuthLoginRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e OAuthLoginRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e OAuthLoginRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e OAuthLoginRequestValidationError) ErrorName() string {
-	return "OAuthLoginRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e OAuthLoginRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sOAuthLoginRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = OAuthLoginRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = OAuthLoginRequestValidationError{}
-
-// Validate checks the field values on OAuthLoginResponse with the rules
+// Validate checks the field values on TelegramAuthRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *OAuthLoginResponse) Validate() error {
+func (m *TelegramAuthRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on OAuthLoginResponse with the rules
+// ValidateAll checks the field values on TelegramAuthRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// OAuthLoginResponseMultiError, or nil if none found.
-func (m *OAuthLoginResponse) ValidateAll() error {
+// TelegramAuthRequestMultiError, or nil if none found.
+func (m *TelegramAuthRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *OAuthLoginResponse) validate(all bool) error {
+func (m *TelegramAuthRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for AccessToken
+	// no validation rules for Id
 
-	if all {
-		switch v := interface{}(m.GetUserInfo()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, OAuthLoginResponseValidationError{
-					field:  "UserInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, OAuthLoginResponseValidationError{
-					field:  "UserInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetUserInfo()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return OAuthLoginResponseValidationError{
-				field:  "UserInfo",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for FirstName
+
+	// no validation rules for LastName
+
+	// no validation rules for Username
+
+	// no validation rules for PhotoUrl
+
+	// no validation rules for AuthDate
+
+	// no validation rules for Hash
 
 	if len(errors) > 0 {
-		return OAuthLoginResponseMultiError(errors)
+		return TelegramAuthRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// OAuthLoginResponseMultiError is an error wrapping multiple validation errors
-// returned by OAuthLoginResponse.ValidateAll() if the designated constraints
-// aren't met.
-type OAuthLoginResponseMultiError []error
+// TelegramAuthRequestMultiError is an error wrapping multiple validation
+// errors returned by TelegramAuthRequest.ValidateAll() if the designated
+// constraints aren't met.
+type TelegramAuthRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m OAuthLoginResponseMultiError) Error() string {
+func (m TelegramAuthRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1132,11 +508,11 @@ func (m OAuthLoginResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m OAuthLoginResponseMultiError) AllErrors() []error { return m }
+func (m TelegramAuthRequestMultiError) AllErrors() []error { return m }
 
-// OAuthLoginResponseValidationError is the validation error returned by
-// OAuthLoginResponse.Validate if the designated constraints aren't met.
-type OAuthLoginResponseValidationError struct {
+// TelegramAuthRequestValidationError is the validation error returned by
+// TelegramAuthRequest.Validate if the designated constraints aren't met.
+type TelegramAuthRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1144,24 +520,24 @@ type OAuthLoginResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e OAuthLoginResponseValidationError) Field() string { return e.field }
+func (e TelegramAuthRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e OAuthLoginResponseValidationError) Reason() string { return e.reason }
+func (e TelegramAuthRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e OAuthLoginResponseValidationError) Cause() error { return e.cause }
+func (e TelegramAuthRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e OAuthLoginResponseValidationError) Key() bool { return e.key }
+func (e TelegramAuthRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e OAuthLoginResponseValidationError) ErrorName() string {
-	return "OAuthLoginResponseValidationError"
+func (e TelegramAuthRequestValidationError) ErrorName() string {
+	return "TelegramAuthRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e OAuthLoginResponseValidationError) Error() string {
+func (e TelegramAuthRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1173,14 +549,14 @@ func (e OAuthLoginResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sOAuthLoginResponse.%s: %s%s",
+		"invalid %sTelegramAuthRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = OAuthLoginResponseValidationError{}
+var _ error = TelegramAuthRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1188,7 +564,245 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = OAuthLoginResponseValidationError{}
+} = TelegramAuthRequestValidationError{}
+
+// Validate checks the field values on RefreshTokenRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RefreshTokenRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RefreshTokenRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RefreshTokenRequestMultiError, or nil if none found.
+func (m *RefreshTokenRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RefreshTokenRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RefreshToken
+
+	if len(errors) > 0 {
+		return RefreshTokenRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RefreshTokenRequestMultiError is an error wrapping multiple validation
+// errors returned by RefreshTokenRequest.ValidateAll() if the designated
+// constraints aren't met.
+type RefreshTokenRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RefreshTokenRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RefreshTokenRequestMultiError) AllErrors() []error { return m }
+
+// RefreshTokenRequestValidationError is the validation error returned by
+// RefreshTokenRequest.Validate if the designated constraints aren't met.
+type RefreshTokenRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RefreshTokenRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RefreshTokenRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RefreshTokenRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RefreshTokenRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RefreshTokenRequestValidationError) ErrorName() string {
+	return "RefreshTokenRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RefreshTokenRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRefreshTokenRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RefreshTokenRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RefreshTokenRequestValidationError{}
+
+// Validate checks the field values on AuthResponse with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AuthResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AuthResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AuthResponseMultiError, or
+// nil if none found.
+func (m *AuthResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AuthResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AccessToken
+
+	// no validation rules for RefreshToken
+
+	// no validation rules for ExpiresIn
+
+	if all {
+		switch v := interface{}(m.GetUserInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AuthResponseValidationError{
+					field:  "UserInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AuthResponseValidationError{
+					field:  "UserInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUserInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AuthResponseValidationError{
+				field:  "UserInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AuthResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AuthResponseMultiError is an error wrapping multiple validation errors
+// returned by AuthResponse.ValidateAll() if the designated constraints aren't met.
+type AuthResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AuthResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AuthResponseMultiError) AllErrors() []error { return m }
+
+// AuthResponseValidationError is the validation error returned by
+// AuthResponse.Validate if the designated constraints aren't met.
+type AuthResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AuthResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AuthResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AuthResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AuthResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AuthResponseValidationError) ErrorName() string { return "AuthResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AuthResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAuthResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AuthResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AuthResponseValidationError{}
 
 // Validate checks the field values on GetUserRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, the first

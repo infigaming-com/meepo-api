@@ -37,19 +37,73 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.HealthCheckResponse'
-    /v1/user/healthcheck:
-        get:
+    /v1/system/currencies/add:
+        post:
             tags:
-                - User
-            operationId: User_HealthCheck
+                - System
+            operationId: System_AddCurrency
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/system.service.v1.AddCurrencyRequest'
+                required: true
             responses:
                 "200":
                     description: OK
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.user.service.v1.HealthCheckResponse'
-    /v1/user/login:
+                                $ref: '#/components/schemas/system.service.v1.AddCurrencyResponse'
+    /v1/system/currencies/get:
+        post:
+            tags:
+                - System
+            operationId: System_GetCurrencies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/system.service.v1.GetCurrenciesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/system.service.v1.GetCurrenciesResponse'
+    /v1/system/currencies/list:
+        post:
+            tags:
+                - System
+            operationId: System_ListCurrencies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/system.service.v1.ListCurrenciesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/system.service.v1.ListCurrenciesResponse'
+    /v1/system/healthcheck:
+        get:
+            tags:
+                - System
+            operationId: System_HealthCheck
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/system.service.v1.HealthCheckResponse'
+    /v1/user/auth/login:
         post:
             tags:
                 - User
@@ -66,7 +120,79 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.user.service.v1.LoginResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/oauth:
+        post:
+            tags:
+                - User
+            operationId: User_RegisterOrLoginWithOAuth
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.OAuthRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/refresh:
+        post:
+            tags:
+                - User
+            operationId: User_RefreshToken
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.RefreshTokenRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/register:
+        post:
+            tags:
+                - User
+            operationId: User_Register
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.RegisterRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/telegram:
+        post:
+            tags:
+                - User
+            operationId: User_RegisterOrLoginWithTelegram
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.TelegramAuthRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
     /v1/user/logout:
         post:
             tags:
@@ -85,42 +211,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.LogoutResponse'
-    /v1/user/oauth/login:
-        post:
-            tags:
-                - User
-            operationId: User_OAuthLogin
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.OAuthLoginRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.OAuthLoginResponse'
-    /v1/user/register:
-        post:
-            tags:
-                - User
-            operationId: User_Register
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.RegisterRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.RegisterResponse'
     /v1/user/{id}:
         get:
             tags:
@@ -171,67 +261,78 @@ paths:
                                 $ref: '#/components/schemas/api.wallet.service.v1.HealthCheckResponse'
 components:
     schemas:
+        api.user.service.v1.AuthResponse:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+                refreshToken:
+                    type: string
+                expiresIn:
+                    type: string
+                userInfo:
+                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
         api.user.service.v1.GetUserResponse:
             type: object
             properties:
                 userInfo:
                     $ref: '#/components/schemas/api.user.service.v1.UserInfo'
-        api.user.service.v1.HealthCheckResponse:
-            type: object
-            properties:
-                status:
-                    type: string
         api.user.service.v1.LoginRequest:
             type: object
             properties:
-                email:
+                passwordProvider:
+                    type: integer
+                    format: enum
+                authId:
                     type: string
                 password:
                     type: string
-        api.user.service.v1.LoginResponse:
-            type: object
-            properties:
-                accessToken:
-                    type: string
-                userInfo:
-                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
         api.user.service.v1.LogoutRequest:
             type: object
             properties: {}
         api.user.service.v1.LogoutResponse:
             type: object
             properties: {}
-        api.user.service.v1.OAuthLoginRequest:
+        api.user.service.v1.OAuthRequest:
             type: object
             properties:
-                provider:
+                oauthProvider:
                     type: integer
                     format: enum
-                authCode:
+                token:
                     type: string
-                redirectUri:
-                    type: string
-        api.user.service.v1.OAuthLoginResponse:
+        api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
-                accessToken:
+                refreshToken:
                     type: string
-                userInfo:
-                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
         api.user.service.v1.RegisterRequest:
             type: object
             properties:
-                email:
+                passwordProvider:
+                    type: integer
+                    format: enum
+                authId:
                     type: string
                 password:
                     type: string
-        api.user.service.v1.RegisterResponse:
+        api.user.service.v1.TelegramAuthRequest:
             type: object
             properties:
-                accessToken:
+                id:
                     type: string
-                userInfo:
-                    $ref: '#/components/schemas/api.user.service.v1.UserInfo'
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                username:
+                    type: string
+                photoUrl:
+                    type: string
+                authDate:
+                    type: string
+                hash:
+                    type: string
         api.user.service.v1.UserInfo:
             type: object
             properties:
@@ -262,9 +363,56 @@ components:
             properties:
                 status:
                     type: string
+        system.service.v1.AddCurrencyRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                decimalPlaces:
+                    type: integer
+                    format: int32
+        system.service.v1.AddCurrencyResponse:
+            type: object
+            properties:
+                currency:
+                    $ref: '#/components/schemas/system.service.v1.Currency'
+        system.service.v1.Currency:
+            type: object
+            properties:
+                currency:
+                    type: string
+                decimalPlaces:
+                    type: integer
+                    format: int32
+        system.service.v1.GetCurrenciesRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+        system.service.v1.GetCurrenciesResponse:
+            type: object
+            properties:
+                currencies:
+                    $ref: '#/components/schemas/system.service.v1.Currency'
+        system.service.v1.HealthCheckResponse:
+            type: object
+            properties:
+                status:
+                    type: string
+        system.service.v1.ListCurrenciesRequest:
+            type: object
+            properties: {}
+        system.service.v1.ListCurrenciesResponse:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.Currency'
 tags:
     - name: Greeter
       description: The greeting service definition.
     - name: Payment
+    - name: System
     - name: User
     - name: Wallet

@@ -3,94 +3,123 @@ syntax = "proto3";
 package api.user.service.v1;
 
 import "google/api/annotations.proto";
-import "validate/validate.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.user.service.v1";
 
 service User {
-	rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {
+	rpc Register (RegisterRequest) returns (AuthResponse) {
 		option (google.api.http) = {
-			get: "/v1/user/healthcheck"
-		};
-	}
-	rpc Register (RegisterRequest) returns (RegisterResponse) {
-		option (google.api.http) = {
-			post: "/v1/user/register"
+			post: "/v1/user/auth/register"
 			body: "*"
 		};
 	}
-	rpc Login (LoginRequest) returns (LoginResponse) {
+	  
+	rpc Login (LoginRequest) returns (AuthResponse) {
 		option (google.api.http) = {
-			post: "/v1/user/login"
+			post: "/v1/user/auth/login"
 			body: "*"
 		};
 	}
-	rpc OAuthLogin (OAuthLoginRequest) returns (OAuthLoginResponse) {
+	
+	rpc RegisterOrLoginWithOAuth (OAuthRequest) returns (AuthResponse) {
 		option (google.api.http) = {
-			post: "/v1/user/oauth/login"
+			post: "/v1/user/auth/oauth"
 			body: "*"
 		};
 	}
+	
+	rpc RegisterOrLoginWithTelegram (TelegramAuthRequest) returns (AuthResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/telegram"
+			body: "*"
+		};
+	}
+	
+	rpc RefreshToken (RefreshTokenRequest) returns (AuthResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/refresh"
+			body: "*"
+		};
+	}
+	  
 	rpc GetUser (GetUserRequest) returns (GetUserResponse) {
 		option (google.api.http) = {
 			get: "/v1/user/{id}"
 		};
 	}
+	
 	rpc Logout (LogoutRequest) returns (LogoutResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/logout"
 			body: "*"
 		};
 	}
-}
 
-message HealthCheckRequest {}
-
-message HealthCheckResponse {
-	string status = 1;
 }
 
 message UserInfo {
 	string user_id = 1;
 }
 
-message RegisterRequest {
-	string email = 1 [(validate.rules).string.email = true];
-	string password = 2 [(validate.rules).string.min_len = 8];
+enum AuthType {
+	AUTH_TYPE_UNSPECIFIED = 0;
+	AUTH_TYPE_PASSWORD = 1;
+	AUTH_TYPE_OAUTH = 2;
+	AUTH_TYPE_TELEGRAM = 3;
 }
 
-message RegisterResponse {
-	string access_token = 1;
-	UserInfo user_info = 2;
-}
-
-message LoginRequest {
-	string email = 1 [(validate.rules).string.email = true];
-	string password = 2 [(validate.rules).string.min_len = 8];
-}
-
-message LoginResponse {
-	string access_token = 1;
-	UserInfo user_info = 2;
+enum PasswordProvider {
+	PASSWORD_PROVIDER_UNSPECIFIED = 0;
+	PASSWORD_PROVIDER_USERNAME = 1;
+	PASSWORD_PROVIDER_EMAIL = 2;
+	PASSWORD_PROVIDER_MOBILE = 3;
 }
 
 enum OAuthProvider {
 	OAUTH_PROVIDER_UNSPECIFIED = 0;
 	OAUTH_PROVIDER_GOOGLE = 1;
-	OAUTH_PROVIDER_TELEGRAM = 2;
+	OAUTH_PROVIDER_FACEBOOK = 2;
+	OAUTH_PROVIDER_TWITTER = 3;
 }
 
-message OAuthLoginRequest {
-	OAuthProvider provider = 1;
-	string auth_code = 2;
-	string redirect_uri = 3;
+message RegisterRequest {
+	PasswordProvider password_provider = 1;
+	string auth_id = 2;
+	string password = 3;
 }
 
-message OAuthLoginResponse {
+message LoginRequest {
+	PasswordProvider password_provider = 1;
+	string auth_id = 2;
+	string password = 3;
+}
+
+message OAuthRequest {
+	OAuthProvider oauth_provider = 1;
+	string token = 2;
+}
+
+message TelegramAuthRequest {
+	int64 id = 1;
+	string first_name = 2;
+	string last_name = 3;
+	string username = 4;
+	string photo_url = 5;
+	int64 auth_date = 6;
+	string hash = 7;
+}
+
+message RefreshTokenRequest {
+	string refresh_token = 1;
+}
+
+message AuthResponse {
 	string access_token = 1;
-	UserInfo user_info = 2;
+	string refresh_token = 2;
+	int64 expires_in = 3;
+	UserInfo user_info = 4;
 }
 
 message GetUserRequest {
