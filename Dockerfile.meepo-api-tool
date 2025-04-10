@@ -1,14 +1,7 @@
-FROM golang:1.23.8-alpine3.20
+FROM golang:1.23-alpine
 
 # 安装必要的依赖
-RUN apk add --no-cache make unzip
-
-# 安装protoc插件和工具
-RUN go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && \
-    go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest && \
-    go install github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2@latest && \
-    go install github.com/google/gnostic/cmd/protoc-gen-openapi@latest && \
-    go install github.com/envoyproxy/protoc-gen-validate@latest
+RUN apk add --no-cache make unzip wget
 
 # 创建工作目录
 WORKDIR /tmp
@@ -16,15 +9,15 @@ WORKDIR /tmp
 # 定义版本变量
 ENV PROTOC_VERSION=25.6
 ENV PATH="/root/go/bin:${PATH}"
+RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip && \
+    unzip protoc-${PROTOC_VERSION}-linux-x86_64.zip -d /usr/local && \
+    chmod +x /usr/local/bin/protoc
 
-# 将本地的 zip 文件复制进容器
-# wget https://github.com/protocolbuffers/protobuf/releases/download/v25.6/protoc-25.6-linux-x86_64.zip
-COPY protoc-${PROTOC_VERSION}-linux-x86_64.zip /tmp/
+# 安装protoc插件和工具
+COPY Makefile ./
+RUN make tools
 
-# 解压安装
-RUN unzip /tmp/protoc-${PROTOC_VERSION}-linux-x86_64.zip -d /usr/local && \
-    chmod +x /usr/local/bin/protoc && \
-    rm -rf /tmp/*
+RUN rm -rf *
 
 # 设置工作目录
 WORKDIR /workspace
