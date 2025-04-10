@@ -26,6 +26,7 @@ const (
 	User_RefreshToken_FullMethodName                = "/api.user.service.v1.User/RefreshToken"
 	User_GetUser_FullMethodName                     = "/api.user.service.v1.User/GetUser"
 	User_Logout_FullMethodName                      = "/api.user.service.v1.User/Logout"
+	User_IsAccessTokenBlocked_FullMethodName        = "/api.user.service.v1.User/IsAccessTokenBlocked"
 )
 
 // UserClient is the client API for User service.
@@ -55,6 +56,7 @@ type UserClient interface {
 	// Logout the current user.
 	// Invalidates the current session and refresh token.
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
+	IsAccessTokenBlocked(ctx context.Context, in *IsAccessTokenBlockedRequest, opts ...grpc.CallOption) (*IsAccessTokenBlockedResponse, error)
 }
 
 type userClient struct {
@@ -135,6 +137,16 @@ func (c *userClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc
 	return out, nil
 }
 
+func (c *userClient) IsAccessTokenBlocked(ctx context.Context, in *IsAccessTokenBlockedRequest, opts ...grpc.CallOption) (*IsAccessTokenBlockedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsAccessTokenBlockedResponse)
+	err := c.cc.Invoke(ctx, User_IsAccessTokenBlocked_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -162,6 +174,7 @@ type UserServer interface {
 	// Logout the current user.
 	// Invalidates the current session and refresh token.
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
+	IsAccessTokenBlocked(context.Context, *IsAccessTokenBlockedRequest) (*IsAccessTokenBlockedResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -192,6 +205,9 @@ func (UnimplementedUserServer) GetUser(context.Context, *GetUserRequest) (*GetUs
 }
 func (UnimplementedUserServer) Logout(context.Context, *LogoutRequest) (*LogoutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
+}
+func (UnimplementedUserServer) IsAccessTokenBlocked(context.Context, *IsAccessTokenBlockedRequest) (*IsAccessTokenBlockedResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IsAccessTokenBlocked not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -340,6 +356,24 @@ func _User_Logout_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_IsAccessTokenBlocked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsAccessTokenBlockedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).IsAccessTokenBlocked(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_IsAccessTokenBlocked_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).IsAccessTokenBlocked(ctx, req.(*IsAccessTokenBlockedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -374,6 +408,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Logout",
 			Handler:    _User_Logout_Handler,
+		},
+		{
+			MethodName: "IsAccessTokenBlocked",
+			Handler:    _User_IsAccessTokenBlocked_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

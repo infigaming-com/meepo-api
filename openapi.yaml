@@ -124,6 +124,27 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/logout:
+        post:
+            tags:
+                - User
+            description: |-
+                Logout the current user.
+                 Invalidates the current session and refresh token.
+            operationId: User_Logout
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.LogoutRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.LogoutResponse'
     /v1/user/auth/oauth:
         post:
             tags:
@@ -229,27 +250,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
-    /v1/user/logout:
-        post:
-            tags:
-                - User
-            description: |-
-                Logout the current user.
-                 Invalidates the current session and refresh token.
-            operationId: User_Logout
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.LogoutRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.LogoutResponse'
     /v1/wallet/balance/{userId}:
         get:
             tags:

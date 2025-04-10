@@ -68,9 +68,12 @@ service User {
 	// Invalidates the current session and refresh token.
 	rpc Logout (LogoutRequest) returns (LogoutResponse) {
 		option (google.api.http) = {
-			post: "/v1/user/logout"
+			post: "/v1/user/auth/logout"
 			body: "*"
 		};
+	}
+
+	rpc IsAccessTokenBlocked (IsAccessTokenBlockedRequest) returns (IsAccessTokenBlockedResponse) {
 	}
 }
 
@@ -207,3 +210,11 @@ message LogoutRequest {}
 
 // LogoutResponse is an empty message for the logout operation.
 message LogoutResponse {}
+
+message IsAccessTokenBlockedRequest {
+	string access_token = 1;
+}
+
+message IsAccessTokenBlockedResponse {
+	bool is_blocked = 1;
+}
