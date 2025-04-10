@@ -1342,3 +1342,213 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = LogoutResponseValidationError{}
+
+// Validate checks the field values on IsAccessTokenBlockedRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *IsAccessTokenBlockedRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on IsAccessTokenBlockedRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// IsAccessTokenBlockedRequestMultiError, or nil if none found.
+func (m *IsAccessTokenBlockedRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *IsAccessTokenBlockedRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AccessToken
+
+	if len(errors) > 0 {
+		return IsAccessTokenBlockedRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// IsAccessTokenBlockedRequestMultiError is an error wrapping multiple
+// validation errors returned by IsAccessTokenBlockedRequest.ValidateAll() if
+// the designated constraints aren't met.
+type IsAccessTokenBlockedRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m IsAccessTokenBlockedRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m IsAccessTokenBlockedRequestMultiError) AllErrors() []error { return m }
+
+// IsAccessTokenBlockedRequestValidationError is the validation error returned
+// by IsAccessTokenBlockedRequest.Validate if the designated constraints
+// aren't met.
+type IsAccessTokenBlockedRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e IsAccessTokenBlockedRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e IsAccessTokenBlockedRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e IsAccessTokenBlockedRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e IsAccessTokenBlockedRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e IsAccessTokenBlockedRequestValidationError) ErrorName() string {
+	return "IsAccessTokenBlockedRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e IsAccessTokenBlockedRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sIsAccessTokenBlockedRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = IsAccessTokenBlockedRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = IsAccessTokenBlockedRequestValidationError{}
+
+// Validate checks the field values on IsAccessTokenBlockedResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *IsAccessTokenBlockedResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on IsAccessTokenBlockedResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// IsAccessTokenBlockedResponseMultiError, or nil if none found.
+func (m *IsAccessTokenBlockedResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *IsAccessTokenBlockedResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsBlocked
+
+	if len(errors) > 0 {
+		return IsAccessTokenBlockedResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// IsAccessTokenBlockedResponseMultiError is an error wrapping multiple
+// validation errors returned by IsAccessTokenBlockedResponse.ValidateAll() if
+// the designated constraints aren't met.
+type IsAccessTokenBlockedResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m IsAccessTokenBlockedResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m IsAccessTokenBlockedResponseMultiError) AllErrors() []error { return m }
+
+// IsAccessTokenBlockedResponseValidationError is the validation error returned
+// by IsAccessTokenBlockedResponse.Validate if the designated constraints
+// aren't met.
+type IsAccessTokenBlockedResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e IsAccessTokenBlockedResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e IsAccessTokenBlockedResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e IsAccessTokenBlockedResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e IsAccessTokenBlockedResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e IsAccessTokenBlockedResponseValidationError) ErrorName() string {
+	return "IsAccessTokenBlockedResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e IsAccessTokenBlockedResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sIsAccessTokenBlockedResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = IsAccessTokenBlockedResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = IsAccessTokenBlockedResponseValidationError{}

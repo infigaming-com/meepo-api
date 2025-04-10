@@ -871,6 +871,94 @@ func (*LogoutResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{11}
 }
 
+type IsAccessTokenBlockedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsAccessTokenBlockedRequest) Reset() {
+	*x = IsAccessTokenBlockedRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsAccessTokenBlockedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsAccessTokenBlockedRequest) ProtoMessage() {}
+
+func (x *IsAccessTokenBlockedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsAccessTokenBlockedRequest.ProtoReflect.Descriptor instead.
+func (*IsAccessTokenBlockedRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *IsAccessTokenBlockedRequest) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+type IsAccessTokenBlockedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	IsBlocked     bool                   `protobuf:"varint,1,opt,name=is_blocked,json=isBlocked,proto3" json:"is_blocked,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsAccessTokenBlockedResponse) Reset() {
+	*x = IsAccessTokenBlockedResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsAccessTokenBlockedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsAccessTokenBlockedResponse) ProtoMessage() {}
+
+func (x *IsAccessTokenBlockedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsAccessTokenBlockedResponse.ProtoReflect.Descriptor instead.
+func (*IsAccessTokenBlockedResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *IsAccessTokenBlockedResponse) GetIsBlocked() bool {
+	if x != nil {
+		return x.IsBlocked
+	}
+	return false
+}
+
 var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
@@ -916,7 +1004,12 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0fGetUserResponse\x12:\n" +
 	"\tuser_info\x18\x01 \x01(\v2\x1d.api.user.service.v1.UserInfoR\buserInfo\"\x0f\n" +
 	"\rLogoutRequest\"\x10\n" +
-	"\x0eLogoutResponse*j\n" +
+	"\x0eLogoutResponse\"@\n" +
+	"\x1bIsAccessTokenBlockedRequest\x12!\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\"=\n" +
+	"\x1cIsAccessTokenBlockedResponse\x12\x1d\n" +
+	"\n" +
+	"is_blocked\x18\x01 \x01(\bR\tisBlocked*j\n" +
 	"\bAuthType\x12\x19\n" +
 	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x13\n" +
@@ -931,15 +1024,16 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1aOAUTH_PROVIDER_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15OAUTH_PROVIDER_GOOGLE\x10\x01\x12\x1b\n" +
 	"\x17OAUTH_PROVIDER_FACEBOOK\x10\x02\x12\x1a\n" +
-	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\xe6\x06\n" +
+	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\xea\a\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12\x80\x01\n" +
 	"\x18RegisterOrLoginWithOAuth\x12!.api.user.service.v1.OAuthRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/oauth\x12\x8d\x01\n" +
 	"\x1bRegisterOrLoginWithTelegram\x12(.api.user.service.v1.TelegramAuthRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/telegram\x12\x85\x01\n" +
 	"\fRefreshToken\x12(.api.user.service.v1.RefreshTokenRequest\x1a).api.user.service.v1.RefreshTokenResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/user/auth/refresh\x12m\n" +
-	"\aGetUser\x12#.api.user.service.v1.GetUserRequest\x1a$.api.user.service.v1.GetUserResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v1/user/get\x12m\n" +
-	"\x06Logout\x12\".api.user.service.v1.LogoutRequest\x1a#.api.user.service.v1.LogoutResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/user/logoutBO\n" +
+	"\aGetUser\x12#.api.user.service.v1.GetUserRequest\x1a$.api.user.service.v1.GetUserResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v1/user/get\x12r\n" +
+	"\x06Logout\x12\".api.user.service.v1.LogoutRequest\x1a#.api.user.service.v1.LogoutResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1/user/auth/logout\x12}\n" +
+	"\x14IsAccessTokenBlocked\x120.api.user.service.v1.IsAccessTokenBlockedRequest\x1a1.api.user.service.v1.IsAccessTokenBlockedResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -955,23 +1049,25 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_user_service_v1_user_proto_goTypes = []any{
-	(AuthType)(0),                // 0: api.user.service.v1.AuthType
-	(PasswordProvider)(0),        // 1: api.user.service.v1.PasswordProvider
-	(OAuthProvider)(0),           // 2: api.user.service.v1.OAuthProvider
-	(*UserInfo)(nil),             // 3: api.user.service.v1.UserInfo
-	(*RegisterRequest)(nil),      // 4: api.user.service.v1.RegisterRequest
-	(*LoginRequest)(nil),         // 5: api.user.service.v1.LoginRequest
-	(*OAuthRequest)(nil),         // 6: api.user.service.v1.OAuthRequest
-	(*TelegramAuthRequest)(nil),  // 7: api.user.service.v1.TelegramAuthRequest
-	(*RefreshTokenRequest)(nil),  // 8: api.user.service.v1.RefreshTokenRequest
-	(*AuthResponse)(nil),         // 9: api.user.service.v1.AuthResponse
-	(*RefreshTokenResponse)(nil), // 10: api.user.service.v1.RefreshTokenResponse
-	(*GetUserRequest)(nil),       // 11: api.user.service.v1.GetUserRequest
-	(*GetUserResponse)(nil),      // 12: api.user.service.v1.GetUserResponse
-	(*LogoutRequest)(nil),        // 13: api.user.service.v1.LogoutRequest
-	(*LogoutResponse)(nil),       // 14: api.user.service.v1.LogoutResponse
+	(AuthType)(0),                        // 0: api.user.service.v1.AuthType
+	(PasswordProvider)(0),                // 1: api.user.service.v1.PasswordProvider
+	(OAuthProvider)(0),                   // 2: api.user.service.v1.OAuthProvider
+	(*UserInfo)(nil),                     // 3: api.user.service.v1.UserInfo
+	(*RegisterRequest)(nil),              // 4: api.user.service.v1.RegisterRequest
+	(*LoginRequest)(nil),                 // 5: api.user.service.v1.LoginRequest
+	(*OAuthRequest)(nil),                 // 6: api.user.service.v1.OAuthRequest
+	(*TelegramAuthRequest)(nil),          // 7: api.user.service.v1.TelegramAuthRequest
+	(*RefreshTokenRequest)(nil),          // 8: api.user.service.v1.RefreshTokenRequest
+	(*AuthResponse)(nil),                 // 9: api.user.service.v1.AuthResponse
+	(*RefreshTokenResponse)(nil),         // 10: api.user.service.v1.RefreshTokenResponse
+	(*GetUserRequest)(nil),               // 11: api.user.service.v1.GetUserRequest
+	(*GetUserResponse)(nil),              // 12: api.user.service.v1.GetUserResponse
+	(*LogoutRequest)(nil),                // 13: api.user.service.v1.LogoutRequest
+	(*LogoutResponse)(nil),               // 14: api.user.service.v1.LogoutResponse
+	(*IsAccessTokenBlockedRequest)(nil),  // 15: api.user.service.v1.IsAccessTokenBlockedRequest
+	(*IsAccessTokenBlockedResponse)(nil), // 16: api.user.service.v1.IsAccessTokenBlockedResponse
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
 	1,  // 0: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
@@ -986,15 +1082,17 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	8,  // 9: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
 	11, // 10: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
 	13, // 11: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
-	9,  // 12: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
-	9,  // 13: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
-	9,  // 14: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
-	9,  // 15: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
-	10, // 16: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
-	12, // 17: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	14, // 18: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
-	12, // [12:19] is the sub-list for method output_type
-	5,  // [5:12] is the sub-list for method input_type
+	15, // 12: api.user.service.v1.User.IsAccessTokenBlocked:input_type -> api.user.service.v1.IsAccessTokenBlockedRequest
+	9,  // 13: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
+	9,  // 14: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
+	9,  // 15: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
+	9,  // 16: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
+	10, // 17: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
+	12, // 18: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	14, // 19: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	16, // 20: api.user.service.v1.User.IsAccessTokenBlocked:output_type -> api.user.service.v1.IsAccessTokenBlockedResponse
+	13, // [13:21] is the sub-list for method output_type
+	5,  // [5:13] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
 	5,  // [5:5] is the sub-list for extension extendee
 	0,  // [0:5] is the sub-list for field type_name
@@ -1011,7 +1109,7 @@ func file_user_service_v1_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
