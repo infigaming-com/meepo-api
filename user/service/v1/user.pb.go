@@ -22,13 +22,18 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// AuthType defines the type of authentication method.
 type AuthType int32
 
 const (
+	// Default value, should not be used.
 	AuthType_AUTH_TYPE_UNSPECIFIED AuthType = 0
-	AuthType_AUTH_TYPE_PASSWORD    AuthType = 1
-	AuthType_AUTH_TYPE_OAUTH       AuthType = 2
-	AuthType_AUTH_TYPE_TELEGRAM    AuthType = 3
+	// Password-based authentication.
+	AuthType_AUTH_TYPE_PASSWORD AuthType = 1
+	// OAuth-based authentication.
+	AuthType_AUTH_TYPE_OAUTH AuthType = 2
+	// Telegram-based authentication.
+	AuthType_AUTH_TYPE_TELEGRAM AuthType = 3
 )
 
 // Enum value maps for AuthType.
@@ -74,13 +79,18 @@ func (AuthType) EnumDescriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{0}
 }
 
+// PasswordProvider defines the type of identity used for password authentication.
 type PasswordProvider int32
 
 const (
+	// Default value, should not be used.
 	PasswordProvider_PASSWORD_PROVIDER_UNSPECIFIED PasswordProvider = 0
-	PasswordProvider_PASSWORD_PROVIDER_USERNAME    PasswordProvider = 1
-	PasswordProvider_PASSWORD_PROVIDER_EMAIL       PasswordProvider = 2
-	PasswordProvider_PASSWORD_PROVIDER_MOBILE      PasswordProvider = 3
+	// Username-based authentication.
+	PasswordProvider_PASSWORD_PROVIDER_USERNAME PasswordProvider = 1
+	// Email-based authentication.
+	PasswordProvider_PASSWORD_PROVIDER_EMAIL PasswordProvider = 2
+	// Mobile number-based authentication.
+	PasswordProvider_PASSWORD_PROVIDER_MOBILE PasswordProvider = 3
 )
 
 // Enum value maps for PasswordProvider.
@@ -126,13 +136,18 @@ func (PasswordProvider) EnumDescriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{1}
 }
 
+// OAuthProvider defines the supported OAuth providers.
 type OAuthProvider int32
 
 const (
+	// Default value, should not be used.
 	OAuthProvider_OAUTH_PROVIDER_UNSPECIFIED OAuthProvider = 0
-	OAuthProvider_OAUTH_PROVIDER_GOOGLE      OAuthProvider = 1
-	OAuthProvider_OAUTH_PROVIDER_FACEBOOK    OAuthProvider = 2
-	OAuthProvider_OAUTH_PROVIDER_TWITTER     OAuthProvider = 3
+	// Google OAuth provider.
+	OAuthProvider_OAUTH_PROVIDER_GOOGLE OAuthProvider = 1
+	// Facebook OAuth provider.
+	OAuthProvider_OAUTH_PROVIDER_FACEBOOK OAuthProvider = 2
+	// Twitter OAuth provider.
+	OAuthProvider_OAUTH_PROVIDER_TWITTER OAuthProvider = 3
 )
 
 // Enum value maps for OAuthProvider.
@@ -178,9 +193,11 @@ func (OAuthProvider) EnumDescriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{2}
 }
 
+// UserInfo contains basic user information.
 type UserInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique identifier for the user.
+	UserId        string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -222,13 +239,17 @@ func (x *UserInfo) GetUserId() string {
 	return ""
 }
 
+// RegisterRequest contains the information needed to register a new user.
 type RegisterRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	PasswordProvider PasswordProvider       `protobuf:"varint,1,opt,name=password_provider,json=passwordProvider,proto3,enum=api.user.service.v1.PasswordProvider" json:"password_provider,omitempty"`
-	AuthId           string                 `protobuf:"bytes,2,opt,name=auth_id,json=authId,proto3" json:"auth_id,omitempty"`
-	Password         string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The type of identity provider to use for registration.
+	PasswordProvider PasswordProvider `protobuf:"varint,1,opt,name=password_provider,json=passwordProvider,proto3,enum=api.user.service.v1.PasswordProvider" json:"password_provider,omitempty"`
+	// The identity (username, email, or mobile) to register with.
+	AuthId string `protobuf:"bytes,2,opt,name=auth_id,json=authId,proto3" json:"auth_id,omitempty"`
+	// The password for the new account.
+	Password      string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RegisterRequest) Reset() {
@@ -282,13 +303,17 @@ func (x *RegisterRequest) GetPassword() string {
 	return ""
 }
 
+// LoginRequest contains the credentials for user login.
 type LoginRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	PasswordProvider PasswordProvider       `protobuf:"varint,1,opt,name=password_provider,json=passwordProvider,proto3,enum=api.user.service.v1.PasswordProvider" json:"password_provider,omitempty"`
-	AuthId           string                 `protobuf:"bytes,2,opt,name=auth_id,json=authId,proto3" json:"auth_id,omitempty"`
-	Password         string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The type of identity provider to use for login.
+	PasswordProvider PasswordProvider `protobuf:"varint,1,opt,name=password_provider,json=passwordProvider,proto3,enum=api.user.service.v1.PasswordProvider" json:"password_provider,omitempty"`
+	// The identity (username, email, or mobile) to login with.
+	AuthId string `protobuf:"bytes,2,opt,name=auth_id,json=authId,proto3" json:"auth_id,omitempty"`
+	// The password for the account.
+	Password      string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *LoginRequest) Reset() {
@@ -342,10 +367,13 @@ func (x *LoginRequest) GetPassword() string {
 	return ""
 }
 
+// OAuthRequest contains the information needed for OAuth authentication.
 type OAuthRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OauthProvider OAuthProvider          `protobuf:"varint,1,opt,name=oauth_provider,json=oauthProvider,proto3,enum=api.user.service.v1.OAuthProvider" json:"oauth_provider,omitempty"`
-	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The OAuth provider to use for authentication.
+	OauthProvider OAuthProvider `protobuf:"varint,1,opt,name=oauth_provider,json=oauthProvider,proto3,enum=api.user.service.v1.OAuthProvider" json:"oauth_provider,omitempty"`
+	// The OAuth token received from the provider.
+	Token         string `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -394,15 +422,23 @@ func (x *OAuthRequest) GetToken() string {
 	return ""
 }
 
+// TelegramAuthRequest contains the information from Telegram's login widget.
 type TelegramAuthRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	FirstName     string                 `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	LastName      string                 `protobuf:"bytes,3,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	Username      string                 `protobuf:"bytes,4,opt,name=username,proto3" json:"username,omitempty"`
-	PhotoUrl      string                 `protobuf:"bytes,5,opt,name=photo_url,json=photoUrl,proto3" json:"photo_url,omitempty"`
-	AuthDate      int64                  `protobuf:"varint,6,opt,name=auth_date,json=authDate,proto3" json:"auth_date,omitempty"`
-	Hash          string                 `protobuf:"bytes,7,opt,name=hash,proto3" json:"hash,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Telegram user ID.
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// User's first name.
+	FirstName string `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	// User's last name.
+	LastName string `protobuf:"bytes,3,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	// Telegram username.
+	Username string `protobuf:"bytes,4,opt,name=username,proto3" json:"username,omitempty"`
+	// URL of the user's profile photo.
+	PhotoUrl string `protobuf:"bytes,5,opt,name=photo_url,json=photoUrl,proto3" json:"photo_url,omitempty"`
+	// Unix timestamp when the authentication was performed.
+	AuthDate int64 `protobuf:"varint,6,opt,name=auth_date,json=authDate,proto3" json:"auth_date,omitempty"`
+	// Hash for verifying the authentication data.
+	Hash          string `protobuf:"bytes,7,opt,name=hash,proto3" json:"hash,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -486,9 +522,11 @@ func (x *TelegramAuthRequest) GetHash() string {
 	return ""
 }
 
+// RefreshTokenRequest contains the refresh token for obtaining a new access token.
 type RefreshTokenRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The refresh token to use for obtaining a new access token.
+	RefreshToken  string `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -530,12 +568,17 @@ func (x *RefreshTokenRequest) GetRefreshToken() string {
 	return ""
 }
 
+// AuthResponse contains the authentication tokens and user information.
 type AuthResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	ExpiresIn     int64                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
-	UserInfo      *UserInfo              `protobuf:"bytes,4,opt,name=user_info,json=userInfo,proto3" json:"user_info,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// JWT access token for API authentication.
+	AccessToken string `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	// Refresh token for obtaining new access tokens.
+	RefreshToken string `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	// Number of seconds until the access token expires.
+	ExpiresIn int64 `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
+	// Basic information about the authenticated user.
+	UserInfo      *UserInfo `protobuf:"bytes,4,opt,name=user_info,json=userInfo,proto3" json:"user_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -598,9 +641,11 @@ func (x *AuthResponse) GetUserInfo() *UserInfo {
 	return nil
 }
 
+// GetUserRequest contains the ID of the user to retrieve.
 type GetUserRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The ID of the user to retrieve.
+	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -642,9 +687,11 @@ func (x *GetUserRequest) GetId() string {
 	return ""
 }
 
+// GetUserResponse contains the requested user's information.
 type GetUserResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserInfo      *UserInfo              `protobuf:"bytes,1,opt,name=user_info,json=userInfo,proto3" json:"user_info,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Basic information about the requested user.
+	UserInfo      *UserInfo `protobuf:"bytes,1,opt,name=user_info,json=userInfo,proto3" json:"user_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -686,6 +733,7 @@ func (x *GetUserResponse) GetUserInfo() *UserInfo {
 	return nil
 }
 
+// LogoutRequest is an empty message for the logout operation.
 type LogoutRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -722,6 +770,7 @@ func (*LogoutRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{9}
 }
 
+// LogoutResponse is an empty message for the logout operation.
 type LogoutResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields

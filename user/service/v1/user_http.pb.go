@@ -28,12 +28,26 @@ const OperationUserRegisterOrLoginWithOAuth = "/api.user.service.v1.User/Registe
 const OperationUserRegisterOrLoginWithTelegram = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
 
 type UserHTTPServer interface {
+	// GetUser Get user information by user ID.
+	// Returns basic user information for the specified user.
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	// Login Login an existing user with password-based authentication.
+	// Users can login using their registered credentials.
 	Login(context.Context, *LoginRequest) (*AuthResponse, error)
+	// Logout Logout the current user.
+	// Invalidates the current session and refresh token.
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
+	// RefreshToken Refresh the access token using a refresh token.
+	// Used to obtain a new access token when the current one expires.
 	RefreshToken(context.Context, *RefreshTokenRequest) (*AuthResponse, error)
+	// Register Register a new user with password-based authentication.
+	// This endpoint allows users to create a new account using various identity providers.
 	Register(context.Context, *RegisterRequest) (*AuthResponse, error)
+	// RegisterOrLoginWithOAuth Register or login using OAuth provider.
+	// Supports multiple OAuth providers like Google, Facebook, and Twitter.
 	RegisterOrLoginWithOAuth(context.Context, *OAuthRequest) (*AuthResponse, error)
+	// RegisterOrLoginWithTelegram Register or login using Telegram authentication.
+	// Uses Telegram's login widget for authentication.
 	RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error)
 }
 
