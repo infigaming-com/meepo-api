@@ -39,7 +39,7 @@ type UserHTTPServer interface {
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	// RefreshToken Refresh the access token using a refresh token.
 	// Used to obtain a new access token when the current one expires.
-	RefreshToken(context.Context, *RefreshTokenRequest) (*AuthResponse, error)
+	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
 	// Register Register a new user with password-based authentication.
 	// This endpoint allows users to create a new account using various identity providers.
 	Register(context.Context, *RegisterRequest) (*AuthResponse, error)
@@ -58,7 +58,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/auth/oauth", _User_RegisterOrLoginWithOAuth0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/telegram", _User_RegisterOrLoginWithTelegram0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/refresh", _User_RefreshToken0_HTTP_Handler(srv))
-	r.GET("/v1/user/{id}", _User_GetUser0_HTTP_Handler(srv))
+	r.POST("/v1/user/get", _User_GetUser0_HTTP_Handler(srv))
 	r.POST("/v1/user/logout", _User_Logout0_HTTP_Handler(srv))
 }
 
@@ -167,7 +167,7 @@ func _User_RefreshToken0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context)
 		if err != nil {
 			return err
 		}
-		reply := out.(*AuthResponse)
+		reply := out.(*RefreshTokenResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -175,10 +175,10 @@ func _User_RefreshToken0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context)
 func _User_GetUser0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetUserRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		if err := ctx.BindVars(&in); err != nil {
+		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationUserGetUser)
@@ -220,7 +220,7 @@ type UserHTTPClient interface {
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserResponse, err error)
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	Logout(ctx context.Context, req *LogoutRequest, opts ...http.CallOption) (rsp *LogoutResponse, err error)
-	RefreshToken(ctx context.Context, req *RefreshTokenRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
+	RefreshToken(ctx context.Context, req *RefreshTokenRequest, opts ...http.CallOption) (rsp *RefreshTokenResponse, err error)
 	Register(ctx context.Context, req *RegisterRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	RegisterOrLoginWithOAuth(ctx context.Context, req *OAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	RegisterOrLoginWithTelegram(ctx context.Context, req *TelegramAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
@@ -236,11 +236,11 @@ func NewUserHTTPClient(client *http.Client) UserHTTPClient {
 
 func (c *UserHTTPClientImpl) GetUser(ctx context.Context, in *GetUserRequest, opts ...http.CallOption) (*GetUserResponse, error) {
 	var out GetUserResponse
-	pattern := "/v1/user/{id}"
-	path := binding.EncodeURL(pattern, in, true)
+	pattern := "/v1/user/get"
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserGetUser))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -273,8 +273,8 @@ func (c *UserHTTPClientImpl) Logout(ctx context.Context, in *LogoutRequest, opts
 	return &out, nil
 }
 
-func (c *UserHTTPClientImpl) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...http.CallOption) (*AuthResponse, error) {
-	var out AuthResponse
+func (c *UserHTTPClientImpl) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...http.CallOption) (*RefreshTokenResponse, error) {
+	var out RefreshTokenResponse
 	pattern := "/v1/user/auth/refresh"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserRefreshToken))

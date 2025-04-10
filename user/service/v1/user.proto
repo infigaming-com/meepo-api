@@ -48,7 +48,7 @@ service User {
 	
 	// Refresh the access token using a refresh token.
 	// Used to obtain a new access token when the current one expires.
-	rpc RefreshToken (RefreshTokenRequest) returns (AuthResponse) {
+	rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/auth/refresh"
 			body: "*"
@@ -59,7 +59,8 @@ service User {
 	// Returns basic user information for the specified user.
 	rpc GetUser (GetUserRequest) returns (GetUserResponse) {
 		option (google.api.http) = {
-			get: "/v1/user/{id}"
+			post: "/v1/user/get"
+			body: "*"
 		};
 	}
 	
@@ -177,6 +178,16 @@ message AuthResponse {
 	int64 expires_in = 3;
 	// Basic information about the authenticated user.
 	UserInfo user_info = 4;
+}
+
+// RefreshTokenResponse contains the authentication tokens.
+message RefreshTokenResponse {
+	// JWT access token for API authentication.
+	string access_token = 1;
+	// Refresh token for obtaining new access tokens.
+	string refresh_token = 2;
+	// Number of seconds until the access token expires.
+	int64 expires_in = 3;
 }
 
 // GetUserRequest contains the ID of the user to retrieve.

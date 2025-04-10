@@ -165,7 +165,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.RefreshTokenResponse'
     /v1/user/auth/register:
         post:
             tags:
@@ -208,6 +208,27 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/get:
+        post:
+            tags:
+                - User
+            description: |-
+                Get user information by user ID.
+                 Returns basic user information for the specified user.
+            operationId: User_GetUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
     /v1/user/logout:
         post:
             tags:
@@ -229,28 +250,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.LogoutResponse'
-    /v1/user/{id}:
-        get:
-            tags:
-                - User
-            description: |-
-                Get user information by user ID.
-                 Returns basic user information for the specified user.
-            operationId: User_GetUser
-            parameters:
-                - name: id
-                  in: path
-                  description: The ID of the user to retrieve.
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
     /v1/wallet/balance/{userId}:
         get:
             tags:
@@ -300,6 +299,13 @@ components:
                         - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
                     description: Basic information about the authenticated user.
             description: AuthResponse contains the authentication tokens and user information.
+        api.user.service.v1.GetUserRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: The ID of the user to retrieve.
+            description: GetUserRequest contains the ID of the user to retrieve.
         api.user.service.v1.GetUserResponse:
             type: object
             properties:
@@ -358,6 +364,19 @@ components:
                     type: string
                     description: The refresh token to use for obtaining a new access token.
             description: RefreshTokenRequest contains the refresh token for obtaining a new access token.
+        api.user.service.v1.RefreshTokenResponse:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+                    description: JWT access token for API authentication.
+                refreshToken:
+                    type: string
+                    description: Refresh token for obtaining new access tokens.
+                expiresIn:
+                    type: string
+                    description: Number of seconds until the access token expires.
+            description: RefreshTokenResponse contains the authentication tokens.
         api.user.service.v1.RegisterRequest:
             type: object
             properties:

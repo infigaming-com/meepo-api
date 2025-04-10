@@ -48,7 +48,7 @@ type UserClient interface {
 	RegisterOrLoginWithTelegram(ctx context.Context, in *TelegramAuthRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	// Refresh the access token using a refresh token.
 	// Used to obtain a new access token when the current one expires.
-	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
 	// Get user information by user ID.
 	// Returns basic user information for the specified user.
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
@@ -105,9 +105,9 @@ func (c *userClient) RegisterOrLoginWithTelegram(ctx context.Context, in *Telegr
 	return out, nil
 }
 
-func (c *userClient) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
+func (c *userClient) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AuthResponse)
+	out := new(RefreshTokenResponse)
 	err := c.cc.Invoke(ctx, User_RefreshToken_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -155,7 +155,7 @@ type UserServer interface {
 	RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error)
 	// Refresh the access token using a refresh token.
 	// Used to obtain a new access token when the current one expires.
-	RefreshToken(context.Context, *RefreshTokenRequest) (*AuthResponse, error)
+	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
 	// Get user information by user ID.
 	// Returns basic user information for the specified user.
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
@@ -184,7 +184,7 @@ func (UnimplementedUserServer) RegisterOrLoginWithOAuth(context.Context, *OAuthR
 func (UnimplementedUserServer) RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterOrLoginWithTelegram not implemented")
 }
-func (UnimplementedUserServer) RefreshToken(context.Context, *RefreshTokenRequest) (*AuthResponse, error) {
+func (UnimplementedUserServer) RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
 }
 func (UnimplementedUserServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
