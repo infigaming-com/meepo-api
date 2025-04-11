@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package api.user.service.v1;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.user.service.v1";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  UNSPECIFIED = 0;
+  USER_NOT_FOUND = 100000 [(errors.code) = 404];
+  USER_AUTH_NOT_FOUND = 100001 [(errors.code) = 404];
+  USER_ALREADY_EXISTS = 100002 [(errors.code) = 409];
+  REVOKE_TOKEN_FAILED = 100003;
+  GENERATE_REFRESH_TOKEN_ID_FAILED = 100004;
+  GENERATE_TOKEN_ID_FAILED = 100005;
+  SAVE_TOKEN_FAILED = 100006;
+  GET_USER_AUTH_FAILED = 100007;
+  GET_USER_FAILED = 100008;
+  LOCK_USER_AUTH_FAILED = 100009;
+  HASH_USER_PASSWORD_FAILED = 100010;
+  GENERATE_USER_ID_FAILED = 100011;
+  CREATE_USER_FAILED = 100012;
+  CREATE_USER_AUTH_FAILED = 100013;
+  USER_DISABLED = 100014 [(errors.code) = 401];
+  USER_LOGIN_BANNED = 100015 [(errors.code) = 401];
+  INVALID_USER_PASSWORD = 100016 [(errors.code) = 401];
+  GET_TOKEN_WITH_REFRESH_TOKEN_FAILED = 100017;
+  GET_UNEXPIRED_TOKEN_FOR_USER_FAILED = 100018;
+}

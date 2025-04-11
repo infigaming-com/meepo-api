@@ -73,14 +73,14 @@ service User {
 		};
 	}
 
-	rpc IsAccessTokenBlocked (IsAccessTokenBlockedRequest) returns (IsAccessTokenBlockedResponse) {
+	rpc IsTokenRevoked (IsTokenRevokedRequest) returns (IsTokenRevokedResponse) {
 	}
 }
 
 // UserInfo contains basic user information.
 message UserInfo {
 	// Unique identifier for the user.
-	string user_id = 1;
+	string id = 1;
 }
 
 // AuthType defines the type of authentication method.
@@ -211,10 +211,10 @@ message LogoutRequest {}
 // LogoutResponse is an empty message for the logout operation.
 message LogoutResponse {}
 
-message IsAccessTokenBlockedRequest {
-	string access_token = 1;
+message IsTokenRevokedRequest {
+	string token = 1;
 }
 
-message IsAccessTokenBlockedResponse {
-	bool is_blocked = 1;
+message IsTokenRevokedResponse {
+	bool revoked = 1;
 }
