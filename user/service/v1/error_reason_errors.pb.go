@@ -250,3 +250,15 @@ func IsGetUnexpiredTokenForUserFailed(err error) bool {
 func ErrorGetUnexpiredTokenForUserFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_UNEXPIRED_TOKEN_FOR_USER_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOauthProviderNotSupported(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_PROVIDER_NOT_SUPPORTED.String() && e.Code == 500
+}
+
+func ErrorOauthProviderNotSupported(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OAUTH_PROVIDER_NOT_SUPPORTED.String(), fmt.Sprintf(format, args...))
+}
