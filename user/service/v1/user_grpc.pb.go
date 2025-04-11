@@ -26,7 +26,7 @@ const (
 	User_RefreshToken_FullMethodName                = "/api.user.service.v1.User/RefreshToken"
 	User_GetUser_FullMethodName                     = "/api.user.service.v1.User/GetUser"
 	User_Logout_FullMethodName                      = "/api.user.service.v1.User/Logout"
-	User_IsAccessTokenBlocked_FullMethodName        = "/api.user.service.v1.User/IsAccessTokenBlocked"
+	User_IsTokenRevoked_FullMethodName              = "/api.user.service.v1.User/IsTokenRevoked"
 )
 
 // UserClient is the client API for User service.
@@ -56,7 +56,7 @@ type UserClient interface {
 	// Logout the current user.
 	// Invalidates the current session and refresh token.
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
-	IsAccessTokenBlocked(ctx context.Context, in *IsAccessTokenBlockedRequest, opts ...grpc.CallOption) (*IsAccessTokenBlockedResponse, error)
+	IsTokenRevoked(ctx context.Context, in *IsTokenRevokedRequest, opts ...grpc.CallOption) (*IsTokenRevokedResponse, error)
 }
 
 type userClient struct {
@@ -137,10 +137,10 @@ func (c *userClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc
 	return out, nil
 }
 
-func (c *userClient) IsAccessTokenBlocked(ctx context.Context, in *IsAccessTokenBlockedRequest, opts ...grpc.CallOption) (*IsAccessTokenBlockedResponse, error) {
+func (c *userClient) IsTokenRevoked(ctx context.Context, in *IsTokenRevokedRequest, opts ...grpc.CallOption) (*IsTokenRevokedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsAccessTokenBlockedResponse)
-	err := c.cc.Invoke(ctx, User_IsAccessTokenBlocked_FullMethodName, in, out, cOpts...)
+	out := new(IsTokenRevokedResponse)
+	err := c.cc.Invoke(ctx, User_IsTokenRevoked_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -174,7 +174,7 @@ type UserServer interface {
 	// Logout the current user.
 	// Invalidates the current session and refresh token.
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
-	IsAccessTokenBlocked(context.Context, *IsAccessTokenBlockedRequest) (*IsAccessTokenBlockedResponse, error)
+	IsTokenRevoked(context.Context, *IsTokenRevokedRequest) (*IsTokenRevokedResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -206,8 +206,8 @@ func (UnimplementedUserServer) GetUser(context.Context, *GetUserRequest) (*GetUs
 func (UnimplementedUserServer) Logout(context.Context, *LogoutRequest) (*LogoutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
 }
-func (UnimplementedUserServer) IsAccessTokenBlocked(context.Context, *IsAccessTokenBlockedRequest) (*IsAccessTokenBlockedResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method IsAccessTokenBlocked not implemented")
+func (UnimplementedUserServer) IsTokenRevoked(context.Context, *IsTokenRevokedRequest) (*IsTokenRevokedResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IsTokenRevoked not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -356,20 +356,20 @@ func _User_Logout_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_IsAccessTokenBlocked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsAccessTokenBlockedRequest)
+func _User_IsTokenRevoked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsTokenRevokedRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).IsAccessTokenBlocked(ctx, in)
+		return srv.(UserServer).IsTokenRevoked(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_IsAccessTokenBlocked_FullMethodName,
+		FullMethod: User_IsTokenRevoked_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).IsAccessTokenBlocked(ctx, req.(*IsAccessTokenBlockedRequest))
+		return srv.(UserServer).IsTokenRevoked(ctx, req.(*IsTokenRevokedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -410,8 +410,8 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_Logout_Handler,
 		},
 		{
-			MethodName: "IsAccessTokenBlocked",
-			Handler:    _User_IsAccessTokenBlocked_Handler,
+			MethodName: "IsTokenRevoked",
+			Handler:    _User_IsTokenRevoked_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

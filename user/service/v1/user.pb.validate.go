@@ -57,7 +57,7 @@ func (m *UserInfo) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for UserId
+	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return UserInfoMultiError(errors)
@@ -1343,44 +1343,44 @@ var _ interface {
 	ErrorName() string
 } = LogoutResponseValidationError{}
 
-// Validate checks the field values on IsAccessTokenBlockedRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on IsTokenRevokedRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *IsAccessTokenBlockedRequest) Validate() error {
+func (m *IsTokenRevokedRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on IsAccessTokenBlockedRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on IsTokenRevokedRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// IsAccessTokenBlockedRequestMultiError, or nil if none found.
-func (m *IsAccessTokenBlockedRequest) ValidateAll() error {
+// IsTokenRevokedRequestMultiError, or nil if none found.
+func (m *IsTokenRevokedRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *IsAccessTokenBlockedRequest) validate(all bool) error {
+func (m *IsTokenRevokedRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for AccessToken
+	// no validation rules for Token
 
 	if len(errors) > 0 {
-		return IsAccessTokenBlockedRequestMultiError(errors)
+		return IsTokenRevokedRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// IsAccessTokenBlockedRequestMultiError is an error wrapping multiple
-// validation errors returned by IsAccessTokenBlockedRequest.ValidateAll() if
-// the designated constraints aren't met.
-type IsAccessTokenBlockedRequestMultiError []error
+// IsTokenRevokedRequestMultiError is an error wrapping multiple validation
+// errors returned by IsTokenRevokedRequest.ValidateAll() if the designated
+// constraints aren't met.
+type IsTokenRevokedRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m IsAccessTokenBlockedRequestMultiError) Error() string {
+func (m IsTokenRevokedRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1389,12 +1389,11 @@ func (m IsAccessTokenBlockedRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m IsAccessTokenBlockedRequestMultiError) AllErrors() []error { return m }
+func (m IsTokenRevokedRequestMultiError) AllErrors() []error { return m }
 
-// IsAccessTokenBlockedRequestValidationError is the validation error returned
-// by IsAccessTokenBlockedRequest.Validate if the designated constraints
-// aren't met.
-type IsAccessTokenBlockedRequestValidationError struct {
+// IsTokenRevokedRequestValidationError is the validation error returned by
+// IsTokenRevokedRequest.Validate if the designated constraints aren't met.
+type IsTokenRevokedRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1402,24 +1401,24 @@ type IsAccessTokenBlockedRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e IsAccessTokenBlockedRequestValidationError) Field() string { return e.field }
+func (e IsTokenRevokedRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e IsAccessTokenBlockedRequestValidationError) Reason() string { return e.reason }
+func (e IsTokenRevokedRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e IsAccessTokenBlockedRequestValidationError) Cause() error { return e.cause }
+func (e IsTokenRevokedRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e IsAccessTokenBlockedRequestValidationError) Key() bool { return e.key }
+func (e IsTokenRevokedRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e IsAccessTokenBlockedRequestValidationError) ErrorName() string {
-	return "IsAccessTokenBlockedRequestValidationError"
+func (e IsTokenRevokedRequestValidationError) ErrorName() string {
+	return "IsTokenRevokedRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e IsAccessTokenBlockedRequestValidationError) Error() string {
+func (e IsTokenRevokedRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1431,14 +1430,14 @@ func (e IsAccessTokenBlockedRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sIsAccessTokenBlockedRequest.%s: %s%s",
+		"invalid %sIsTokenRevokedRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = IsAccessTokenBlockedRequestValidationError{}
+var _ error = IsTokenRevokedRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1446,46 +1445,46 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = IsAccessTokenBlockedRequestValidationError{}
+} = IsTokenRevokedRequestValidationError{}
 
-// Validate checks the field values on IsAccessTokenBlockedResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on IsTokenRevokedResponse with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *IsAccessTokenBlockedResponse) Validate() error {
+func (m *IsTokenRevokedResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on IsAccessTokenBlockedResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on IsTokenRevokedResponse with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// IsAccessTokenBlockedResponseMultiError, or nil if none found.
-func (m *IsAccessTokenBlockedResponse) ValidateAll() error {
+// IsTokenRevokedResponseMultiError, or nil if none found.
+func (m *IsTokenRevokedResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *IsAccessTokenBlockedResponse) validate(all bool) error {
+func (m *IsTokenRevokedResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for IsBlocked
+	// no validation rules for Revoked
 
 	if len(errors) > 0 {
-		return IsAccessTokenBlockedResponseMultiError(errors)
+		return IsTokenRevokedResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// IsAccessTokenBlockedResponseMultiError is an error wrapping multiple
-// validation errors returned by IsAccessTokenBlockedResponse.ValidateAll() if
-// the designated constraints aren't met.
-type IsAccessTokenBlockedResponseMultiError []error
+// IsTokenRevokedResponseMultiError is an error wrapping multiple validation
+// errors returned by IsTokenRevokedResponse.ValidateAll() if the designated
+// constraints aren't met.
+type IsTokenRevokedResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m IsAccessTokenBlockedResponseMultiError) Error() string {
+func (m IsTokenRevokedResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1494,12 +1493,11 @@ func (m IsAccessTokenBlockedResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m IsAccessTokenBlockedResponseMultiError) AllErrors() []error { return m }
+func (m IsTokenRevokedResponseMultiError) AllErrors() []error { return m }
 
-// IsAccessTokenBlockedResponseValidationError is the validation error returned
-// by IsAccessTokenBlockedResponse.Validate if the designated constraints
-// aren't met.
-type IsAccessTokenBlockedResponseValidationError struct {
+// IsTokenRevokedResponseValidationError is the validation error returned by
+// IsTokenRevokedResponse.Validate if the designated constraints aren't met.
+type IsTokenRevokedResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1507,24 +1505,24 @@ type IsAccessTokenBlockedResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e IsAccessTokenBlockedResponseValidationError) Field() string { return e.field }
+func (e IsTokenRevokedResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e IsAccessTokenBlockedResponseValidationError) Reason() string { return e.reason }
+func (e IsTokenRevokedResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e IsAccessTokenBlockedResponseValidationError) Cause() error { return e.cause }
+func (e IsTokenRevokedResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e IsAccessTokenBlockedResponseValidationError) Key() bool { return e.key }
+func (e IsTokenRevokedResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e IsAccessTokenBlockedResponseValidationError) ErrorName() string {
-	return "IsAccessTokenBlockedResponseValidationError"
+func (e IsTokenRevokedResponseValidationError) ErrorName() string {
+	return "IsTokenRevokedResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e IsAccessTokenBlockedResponseValidationError) Error() string {
+func (e IsTokenRevokedResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1536,14 +1534,14 @@ func (e IsAccessTokenBlockedResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sIsAccessTokenBlockedResponse.%s: %s%s",
+		"invalid %sIsTokenRevokedResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = IsAccessTokenBlockedResponseValidationError{}
+var _ error = IsTokenRevokedResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1551,4 +1549,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = IsAccessTokenBlockedResponseValidationError{}
+} = IsTokenRevokedResponseValidationError{}
