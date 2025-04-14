@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package api.operator.service.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/operator/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.operator.service.v1";
+
+// User service provides authentication and user management functionality.
+service Operator {
+	rpc AddOperator(AddOperatorRequest) returns (AddOperatorResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/add"
+			body: "*"
+		};
+	}
+	rpc UpdateOperator(UpdateOperatorRequest) returns (UpdateOperatorResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/update"
+			body: "*"
+		};
+	}
+}
+
+message AddOperatorRequest {
+	string user_id = 1;
+	string name = 2;
+	string api_key = 3;
+	string api_key_secret = 4;
+}
+
+message AddOperatorResponse {
+	string operator_id = 1;
+}
+
+message UpdateOperatorRequest {
+	string operator_id = 1;
+	optional string name = 2;
+	optional bool enabled = 3;
+	optional string api_key = 4;
+	optional string api_key_secret = 5;
+}
+
+message UpdateOperatorResponse {}
+

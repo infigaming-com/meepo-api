@@ -18,3 +18,11 @@ spec:
     - name: user-svc
       port: 8000
       weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/operator"
+    backendRefs:
+    - name: operator-svc
+      port: 8000
+      weight: 1

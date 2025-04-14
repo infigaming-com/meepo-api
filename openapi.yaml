@@ -6,6 +6,42 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /v1/operator/add:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_AddOperator
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.AddOperatorRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.AddOperatorResponse'
+    /v1/operator/update:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_UpdateOperator
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorResponse'
     /v1/payment/healthcheck:
         get:
             tags:
@@ -263,6 +299,38 @@ paths:
                                 $ref: '#/components/schemas/api.wallet.service.v1.HealthCheckResponse'
 components:
     schemas:
+        api.operator.service.v1.AddOperatorRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                name:
+                    type: string
+                apiKey:
+                    type: string
+                apiKeySecret:
+                    type: string
+        api.operator.service.v1.AddOperatorResponse:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+        api.operator.service.v1.UpdateOperatorRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                name:
+                    type: string
+                enabled:
+                    type: boolean
+                apiKey:
+                    type: string
+                apiKeySecret:
+                    type: string
+        api.operator.service.v1.UpdateOperatorResponse:
+            type: object
+            properties: {}
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -475,6 +543,8 @@ components:
                     items:
                         $ref: '#/components/schemas/system.service.v1.Currency'
 tags:
+    - name: Operator
+      description: User service provides authentication and user management functionality.
     - name: Payment
     - name: System
     - name: User
