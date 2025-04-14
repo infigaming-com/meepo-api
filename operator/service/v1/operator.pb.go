@@ -23,11 +23,17 @@ const (
 )
 
 type AddOperatorRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	ApiKey        string                 `protobuf:"bytes,3,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
-	ApiKeySecret  string                 `protobuf:"bytes,4,opt,name=api_key_secret,json=apiKeySecret,proto3" json:"api_key_secret,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// operator id allocated by game aggregator
+	ExternalId string `protobuf:"bytes,1,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	// user id who owns the operator
+	UserId string `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// operator name
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// api key
+	ApiKey string `protobuf:"bytes,4,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	// api key secret
+	ApiKeySecret  string `protobuf:"bytes,5,opt,name=api_key_secret,json=apiKeySecret,proto3" json:"api_key_secret,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -62,6 +68,13 @@ func (*AddOperatorRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{0}
 }
 
+func (x *AddOperatorRequest) GetExternalId() string {
+	if x != nil {
+		return x.ExternalId
+	}
+	return ""
+}
+
 func (x *AddOperatorRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
@@ -91,8 +104,9 @@ func (x *AddOperatorRequest) GetApiKeySecret() string {
 }
 
 type AddOperatorResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId    string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// operator id allocated by operator service
+	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -127,20 +141,25 @@ func (*AddOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *AddOperatorResponse) GetOperatorId() string {
+func (x *AddOperatorResponse) GetId() string {
 	if x != nil {
-		return x.OperatorId
+		return x.Id
 	}
 	return ""
 }
 
 type UpdateOperatorRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId    string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	Name          *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Enabled       *bool                  `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	ApiKey        *string                `protobuf:"bytes,4,opt,name=api_key,json=apiKey,proto3,oneof" json:"api_key,omitempty"`
-	ApiKeySecret  *string                `protobuf:"bytes,5,opt,name=api_key_secret,json=apiKeySecret,proto3,oneof" json:"api_key_secret,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// operator id allocated by operator service
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// operator name
+	Name *string `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// enabled
+	Enabled *bool `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	// api key
+	ApiKey *string `protobuf:"bytes,4,opt,name=api_key,json=apiKey,proto3,oneof" json:"api_key,omitempty"`
+	// api key secret
+	ApiKeySecret  *string `protobuf:"bytes,5,opt,name=api_key_secret,json=apiKeySecret,proto3,oneof" json:"api_key_secret,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -175,9 +194,9 @@ func (*UpdateOperatorRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *UpdateOperatorRequest) GetOperatorId() string {
+func (x *UpdateOperatorRequest) GetId() string {
 	if x != nil {
-		return x.OperatorId
+		return x.Id
 	}
 	return ""
 }
@@ -250,18 +269,18 @@ var File_operator_service_v1_operator_proto protoreflect.FileDescriptor
 
 const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\n" +
-	"\"operator/service/v1/operator.proto\x12\x17api.operator.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x80\x01\n" +
-	"\x12AddOperatorRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x17\n" +
-	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12$\n" +
-	"\x0eapi_key_secret\x18\x04 \x01(\tR\fapiKeySecret\"6\n" +
-	"\x13AddOperatorResponse\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
-	"operatorId\"\xed\x01\n" +
-	"\x15UpdateOperatorRequest\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
-	"operatorId\x12\x17\n" +
+	"\"operator/service/v1/operator.proto\x12\x17api.operator.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xa1\x01\n" +
+	"\x12AddOperatorRequest\x12\x1f\n" +
+	"\vexternal_id\x18\x01 \x01(\tR\n" +
+	"externalId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x17\n" +
+	"\aapi_key\x18\x04 \x01(\tR\x06apiKey\x12$\n" +
+	"\x0eapi_key_secret\x18\x05 \x01(\tR\fapiKeySecret\"%\n" +
+	"\x13AddOperatorResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"\xdc\x01\n" +
+	"\x15UpdateOperatorRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x1d\n" +
 	"\aenabled\x18\x03 \x01(\bH\x01R\aenabled\x88\x01\x01\x12\x1c\n" +
 	"\aapi_key\x18\x04 \x01(\tH\x02R\x06apiKey\x88\x01\x01\x12)\n" +

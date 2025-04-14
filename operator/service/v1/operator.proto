@@ -25,21 +25,33 @@ service Operator {
 }
 
 message AddOperatorRequest {
-	string user_id = 1;
-	string name = 2;
-	string api_key = 3;
-	string api_key_secret = 4;
+	// operator id allocated by game aggregator
+	string external_id = 1;
+	// user id who owns the operator
+	string user_id = 2;
+	// operator name
+	string name = 3;
+	// api key
+	string api_key = 4;
+	// api key secret
+	string api_key_secret = 5;
 }
 
 message AddOperatorResponse {
-	string operator_id = 1;
+	// operator id allocated by operator service
+	string id = 1;
 }
 
 message UpdateOperatorRequest {
-	string operator_id = 1;
+	// operator id allocated by operator service
+	string id = 1;
+	// operator name
 	optional string name = 2;
+	// enabled
 	optional bool enabled = 3;
+	// api key
 	optional string api_key = 4;
+	// api key secret
 	optional string api_key_secret = 5;
 }
 

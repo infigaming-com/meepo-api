@@ -22,3 +22,51 @@ func IsUnspecified(err error) bool {
 func ErrorUnspecified(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UNSPECIFIED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_NOT_FOUND.String() && e.Code == 404
+}
+
+func ErrorOperatorNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_OPERATOR_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_ALREADY_EXISTS.String() && e.Code == 409
+}
+
+func ErrorOperatorAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_OPERATOR_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsLockOperatorFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LOCK_OPERATOR_FAILED.String() && e.Code == 500
+}
+
+func ErrorLockOperatorFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LOCK_OPERATOR_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddOperatorFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_OPERATOR_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddOperatorFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_OPERATOR_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -57,6 +57,8 @@ func (m *AddOperatorRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for ExternalId
+
 	// no validation rules for UserId
 
 	// no validation rules for Name
@@ -167,7 +169,7 @@ func (m *AddOperatorResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for OperatorId
+	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return AddOperatorResponseMultiError(errors)
@@ -271,7 +273,7 @@ func (m *UpdateOperatorRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for OperatorId
+	// no validation rules for Id
 
 	if m.Name != nil {
 		// no validation rules for Name
