@@ -25,16 +25,28 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED ErrorReason = 0
+	ErrorReason_UNSPECIFIED             ErrorReason = 0
+	ErrorReason_OPERATOR_NOT_FOUND      ErrorReason = 20000
+	ErrorReason_OPERATOR_ALREADY_EXISTS ErrorReason = 20001
+	ErrorReason_LOCK_OPERATOR_FAILED    ErrorReason = 20002
+	ErrorReason_ADD_OPERATOR_FAILED     ErrorReason = 20003
 )
 
 // Enum value maps for ErrorReason.
 var (
 	ErrorReason_name = map[int32]string{
-		0: "UNSPECIFIED",
+		0:     "UNSPECIFIED",
+		20000: "OPERATOR_NOT_FOUND",
+		20001: "OPERATOR_ALREADY_EXISTS",
+		20002: "LOCK_OPERATOR_FAILED",
+		20003: "ADD_OPERATOR_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED": 0,
+		"UNSPECIFIED":             0,
+		"OPERATOR_NOT_FOUND":      20000,
+		"OPERATOR_ALREADY_EXISTS": 20001,
+		"LOCK_OPERATOR_FAILED":    20002,
+		"ADD_OPERATOR_FAILED":     20003,
 	}
 )
 
@@ -69,9 +81,13 @@ var File_operator_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_operator_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"&operator/service/v1/error_reason.proto\x12\x17api.operator.service.v1\x1a\x13errors/errors.proto*$\n" +
+	"&operator/service/v1/error_reason.proto\x12\x17api.operator.service.v1\x1a\x13errors/errors.proto*\xa0\x01\n" +
 	"\vErrorReason\x12\x0f\n" +
-	"\vUNSPECIFIED\x10\x00\x1a\x04\xa0E\xf4\x03BW\n" +
+	"\vUNSPECIFIED\x10\x00\x12\x1e\n" +
+	"\x12OPERATOR_NOT_FOUND\x10\xa0\x9c\x01\x1a\x04\xa8E\x94\x03\x12#\n" +
+	"\x17OPERATOR_ALREADY_EXISTS\x10\xa1\x9c\x01\x1a\x04\xa8E\x99\x03\x12\x1a\n" +
+	"\x14LOCK_OPERATOR_FAILED\x10\xa2\x9c\x01\x12\x19\n" +
+	"\x13ADD_OPERATOR_FAILED\x10\xa3\x9c\x01\x1a\x04\xa0E\xf4\x03BW\n" +
 	"\x17api.operator.service.v1P\x01Z:github.com/infigaming-com/meepo-api/operator/service/v1;v1b\x06proto3"
 
 var (
