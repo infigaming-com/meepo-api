@@ -9,12 +9,6 @@ option java_multiple_files = true;
 option java_package = "system.service.v1";
 
 service System {
-	rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {
-		option (google.api.http) = {
-			get: "/v1/system/healthcheck"
-		};
-	};
-
 	rpc AddCurrency(AddCurrencyRequest) returns (AddCurrencyResponse) {
 		option (google.api.http) = {
 			post: "/v1/system/currencies/add"
@@ -39,14 +33,10 @@ service System {
 
 message Currency {
 	string currency = 1;
-	int32 decimal_places = 2;
-}
-
-message HealthCheckRequest {
-}
-
-message HealthCheckResponse {
-	string status = 1;
+	string type = 2;
+	string symbol = 3;
+	string icon = 4;
+	int32 decimal_places = 5;
 }
 
 message AddCurrencyRequest {

@@ -108,18 +108,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/system.service.v1.ListCurrenciesResponse'
-    /v1/system/healthcheck:
-        get:
-            tags:
-                - System
-            operationId: System_HealthCheck
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/system.service.v1.HealthCheckResponse'
     /v1/user/auth/login:
         post:
             tags:
@@ -527,6 +515,12 @@ components:
             properties:
                 currency:
                     type: string
+                type:
+                    type: string
+                symbol:
+                    type: string
+                icon:
+                    type: string
                 decimalPlaces:
                     type: integer
                     format: int32
@@ -540,11 +534,6 @@ components:
             properties:
                 currencies:
                     $ref: '#/components/schemas/system.service.v1.Currency'
-        system.service.v1.HealthCheckResponse:
-            type: object
-            properties:
-                status:
-                    type: string
         system.service.v1.ListCurrenciesRequest:
             type: object
             properties: {}
