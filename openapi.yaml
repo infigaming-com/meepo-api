@@ -42,18 +42,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorResponse'
-    /v1/payment/healthcheck:
-        get:
-            tags:
-                - Payment
-            operationId: Payment_HealthCheck
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.HealthCheckResponse'
     /v1/system/currencies/add:
         post:
             tags:
@@ -504,11 +492,6 @@ components:
             properties:
                 status:
                     type: string
-        payment.service.v1.HealthCheckResponse:
-            type: object
-            properties:
-                status:
-                    type: string
         system.service.v1.AddCurrencyRequest:
             type: object
             properties:
@@ -558,7 +541,6 @@ components:
 tags:
     - name: Operator
       description: User service provides authentication and user management functionality.
-    - name: Payment
     - name: System
     - name: User
       description: User service provides authentication and user management functionality.
