@@ -34,3 +34,403 @@ var (
 	_ = anypb.Any{}
 	_ = sort.Sort
 )
+
+// Validate checks the field values on GetPaymentMethodListRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPaymentMethodListRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetPaymentMethodListRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetPaymentMethodListRequestMultiError, or nil if none found.
+func (m *GetPaymentMethodListRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPaymentMethodListRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetPaymentMethodListRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPaymentMethodListRequestMultiError is an error wrapping multiple
+// validation errors returned by GetPaymentMethodListRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetPaymentMethodListRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPaymentMethodListRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPaymentMethodListRequestMultiError) AllErrors() []error { return m }
+
+// GetPaymentMethodListRequestValidationError is the validation error returned
+// by GetPaymentMethodListRequest.Validate if the designated constraints
+// aren't met.
+type GetPaymentMethodListRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPaymentMethodListRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPaymentMethodListRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPaymentMethodListRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPaymentMethodListRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPaymentMethodListRequestValidationError) ErrorName() string {
+	return "GetPaymentMethodListRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPaymentMethodListRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPaymentMethodListRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPaymentMethodListRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPaymentMethodListRequestValidationError{}
+
+// Validate checks the field values on PaymentMethodInfo with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *PaymentMethodInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PaymentMethodInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PaymentMethodInfoMultiError, or nil if none found.
+func (m *PaymentMethodInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PaymentMethodInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Currency
+
+	// no validation rules for Country
+
+	// no validation rules for PaymentMethod
+
+	{
+		sorted_keys := make([]string, len(m.GetKeySchema()))
+		i := 0
+		for key := range m.GetKeySchema() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetKeySchema()[key]
+			_ = val
+
+			// no validation rules for KeySchema[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, PaymentMethodInfoValidationError{
+							field:  fmt.Sprintf("KeySchema[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, PaymentMethodInfoValidationError{
+							field:  fmt.Sprintf("KeySchema[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return PaymentMethodInfoValidationError{
+						field:  fmt.Sprintf("KeySchema[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
+	if len(errors) > 0 {
+		return PaymentMethodInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// PaymentMethodInfoMultiError is an error wrapping multiple validation errors
+// returned by PaymentMethodInfo.ValidateAll() if the designated constraints
+// aren't met.
+type PaymentMethodInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PaymentMethodInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PaymentMethodInfoMultiError) AllErrors() []error { return m }
+
+// PaymentMethodInfoValidationError is the validation error returned by
+// PaymentMethodInfo.Validate if the designated constraints aren't met.
+type PaymentMethodInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PaymentMethodInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PaymentMethodInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PaymentMethodInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PaymentMethodInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PaymentMethodInfoValidationError) ErrorName() string {
+	return "PaymentMethodInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PaymentMethodInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPaymentMethodInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PaymentMethodInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PaymentMethodInfoValidationError{}
+
+// Validate checks the field values on GetPaymentMethodListResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPaymentMethodListResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetPaymentMethodListResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetPaymentMethodListResponseMultiError, or nil if none found.
+func (m *GetPaymentMethodListResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPaymentMethodListResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Msg
+
+	// no validation rules for Code
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetPaymentMethodListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetPaymentMethodListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetPaymentMethodListResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetPaymentMethodListResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPaymentMethodListResponseMultiError is an error wrapping multiple
+// validation errors returned by GetPaymentMethodListResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetPaymentMethodListResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPaymentMethodListResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPaymentMethodListResponseMultiError) AllErrors() []error { return m }
+
+// GetPaymentMethodListResponseValidationError is the validation error returned
+// by GetPaymentMethodListResponse.Validate if the designated constraints
+// aren't met.
+type GetPaymentMethodListResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPaymentMethodListResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPaymentMethodListResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPaymentMethodListResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPaymentMethodListResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPaymentMethodListResponseValidationError) ErrorName() string {
+	return "GetPaymentMethodListResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPaymentMethodListResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPaymentMethodListResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPaymentMethodListResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPaymentMethodListResponseValidationError{}

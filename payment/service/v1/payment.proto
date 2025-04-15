@@ -1,12 +1,40 @@
 syntax = "proto3";
 
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
 
 package payment.service.v1;
 
 option go_package = "github.com/infigaming-com/meepo-api/payment/service/v1;v1";
 option java_multiple_files = true;
-option java_package = "payment.service.v1";
+option java_package = "api.payment.service.v1";
+
+// Request to get payment method list
+message GetPaymentMethodListRequest {
+}
+
+// Details of a single payment method
+message PaymentMethodInfo {
+  string id = 1;
+  string currency = 2;
+  string country = 3;
+  string payment_method = 4;
+  map<string, google.protobuf.Value> key_schema = 5; // Stores schema for required fields of the payment method
+}
+
+// Response for payment method list
+message GetPaymentMethodListResponse {
+  string msg = 1;
+  int32 code = 2;
+  repeated PaymentMethodInfo data = 3;
+}
 
 service Payment {
+  // Get list of payment methods
+  rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
+    option (google.api.http) = {
+      post: "/api/payment/method/list"
+      body: "*"
+    };
+  }
 }

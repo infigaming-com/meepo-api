@@ -6,6 +6,25 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /api/payment/method/list:
+        post:
+            tags:
+                - Payment
+            description: Get list of payment methods
+            operationId: Payment_GetPaymentMethodList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
     /v1/operator/add:
         post:
             tags:
@@ -492,6 +511,41 @@ components:
             properties:
                 status:
                     type: string
+        google.protobuf.Value:
+            description: Represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values.
+        payment.service.v1.GetPaymentMethodListRequest:
+            type: object
+            properties: {}
+            description: Request to get payment method list
+        payment.service.v1.GetPaymentMethodListResponse:
+            type: object
+            properties:
+                msg:
+                    type: string
+                code:
+                    type: integer
+                    format: int32
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
+            description: Response for payment method list
+        payment.service.v1.PaymentMethodInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                paymentMethod:
+                    type: string
+                keySchema:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/google.protobuf.Value'
+            description: Details of a single payment method
         system.service.v1.AddCurrencyRequest:
             type: object
             properties:
@@ -541,6 +595,7 @@ components:
 tags:
     - name: Operator
       description: User service provides authentication and user management functionality.
+    - name: Payment
     - name: System
     - name: User
       description: User service provides authentication and user management functionality.
