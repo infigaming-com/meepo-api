@@ -59,6 +59,10 @@ func (m *Currency) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for Type
+
+	// no validation rules for Symbol
+
 	// no validation rules for DecimalPlaces
 
 	if len(errors) > 0 {

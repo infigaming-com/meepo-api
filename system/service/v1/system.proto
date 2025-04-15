@@ -39,7 +39,9 @@ service System {
 
 message Currency {
 	string currency = 1;
-	int32 decimal_places = 2;
+	string type = 2;
+	string symbol = 3;
+	int32 decimal_places = 4;
 }
 
 message HealthCheckRequest {
