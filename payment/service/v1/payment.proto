@@ -74,6 +74,67 @@ message GetPaymentChannelListResponse {
   repeated PaymentChannelInfo data = 3;
 }
 
+// Request to initiate a deposit
+message InitiateDepositRequest {
+  double amount = 1;
+  string currency = 2;
+  string channel_id = 3;
+  string user_id = 4;
+  map<string, google.protobuf.Value> extra = 5; // Stores additional information like clientOrderId, productId, etc.
+}
+
+// Transaction information
+message TransactionInfo {
+  string transaction_id = 1;
+  double amount = 2;
+  string currency = 3;
+  string status = 4;
+  string pay_url = 5;
+  string qr_code = 6;
+  google.protobuf.Timestamp created_at = 7;
+  map<string, google.protobuf.Value> extra = 8; // Additional transaction information
+}
+
+// Response for deposit initiation
+message InitiateDepositResponse {
+  string msg = 1;
+  int32 code = 2;
+  TransactionInfo data = 3;
+}
+
+// Request to initiate a withdrawal
+message InitiateWithdrawRequest {
+  double amount = 1;
+  string operator_order_no = 2;
+  string bank_account = 3;
+  string bank_account_name = 4;
+  string bank_account_mobile = 5;
+  string bank_name = 6;
+  string bank_code = 7;
+  string bank_branch = 8;
+  string bank_id = 9;
+  string bank_ifsc = 10;
+  string bank_nation = 11;
+  string channel = 12;
+  map<string, google.protobuf.Value> extra = 13; // Stores additional information like clientId, note, etc.
+}
+
+// Withdrawal transaction information
+message WithdrawTransactionInfo {
+  string transaction_id = 1;
+  string operator_order_no = 2;
+  double amount = 3;
+  string status = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+// Response for withdrawal initiation
+message InitiateWithdrawResponse {
+  string msg = 1;
+  int32 code = 2;
+  WithdrawTransactionInfo data = 3;
+}
+
 service Payment {
   // Get list of payment methods
   rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
@@ -95,6 +156,22 @@ service Payment {
   rpc GetPaymentChannelList(GetPaymentChannelListRequest) returns (GetPaymentChannelListResponse) {
     option (google.api.http) = {
       post: "/api/payment/channel/list"
+      body: "*"
+    };
+  }
+
+  // Initiate a deposit transaction
+  rpc InitiateDeposit(InitiateDepositRequest) returns (InitiateDepositResponse) {
+    option (google.api.http) = {
+      post: "/api/payment/deposit/initiate"
+      body: "*"
+    };
+  }
+
+  // Initiate a withdrawal transaction
+  rpc InitiateWithdraw(InitiateWithdrawRequest) returns (InitiateWithdrawResponse) {
+    option (google.api.http) = {
+      post: "/api/payment/withdraw/initiate"
       body: "*"
     };
   }

@@ -44,6 +44,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListResponse'
+    /api/payment/deposit/initiate:
+        post:
+            tags:
+                - Payment
+            description: Initiate a deposit transaction
+            operationId: Payment_InitiateDeposit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.InitiateDepositRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.InitiateDepositResponse'
     /api/payment/method/list:
         post:
             tags:
@@ -63,6 +82,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /api/payment/withdraw/initiate:
+        post:
+            tags:
+                - Payment
+            description: Initiate a withdrawal transaction
+            operationId: Payment_InitiateWithdraw
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawResponse'
     /v1/operator/add:
         post:
             tags:
@@ -616,6 +654,78 @@ components:
                     items:
                         $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
             description: Response for payment method list
+        payment.service.v1.InitiateDepositRequest:
+            type: object
+            properties:
+                amount:
+                    type: number
+                    format: double
+                currency:
+                    type: string
+                channelId:
+                    type: string
+                userId:
+                    type: string
+                extra:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/google.protobuf.Value'
+            description: Request to initiate a deposit
+        payment.service.v1.InitiateDepositResponse:
+            type: object
+            properties:
+                msg:
+                    type: string
+                code:
+                    type: integer
+                    format: int32
+                data:
+                    $ref: '#/components/schemas/payment.service.v1.TransactionInfo'
+            description: Response for deposit initiation
+        payment.service.v1.InitiateWithdrawRequest:
+            type: object
+            properties:
+                amount:
+                    type: number
+                    format: double
+                operatorOrderNo:
+                    type: string
+                bankAccount:
+                    type: string
+                bankAccountName:
+                    type: string
+                bankAccountMobile:
+                    type: string
+                bankName:
+                    type: string
+                bankCode:
+                    type: string
+                bankBranch:
+                    type: string
+                bankId:
+                    type: string
+                bankIfsc:
+                    type: string
+                bankNation:
+                    type: string
+                channel:
+                    type: string
+                extra:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/google.protobuf.Value'
+            description: Request to initiate a withdrawal
+        payment.service.v1.InitiateWithdrawResponse:
+            type: object
+            properties:
+                msg:
+                    type: string
+                code:
+                    type: integer
+                    format: int32
+                data:
+                    $ref: '#/components/schemas/payment.service.v1.WithdrawTransactionInfo'
+            description: Response for withdrawal initiation
         payment.service.v1.PaymentChannelInfo:
             type: object
             properties:
@@ -657,6 +767,46 @@ components:
                     additionalProperties:
                         $ref: '#/components/schemas/google.protobuf.Value'
             description: Details of a single payment method
+        payment.service.v1.TransactionInfo:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                amount:
+                    type: number
+                    format: double
+                currency:
+                    type: string
+                status:
+                    type: string
+                payUrl:
+                    type: string
+                qrCode:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                extra:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/google.protobuf.Value'
+            description: Transaction information
+        payment.service.v1.WithdrawTransactionInfo:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                operatorOrderNo:
+                    type: string
+                amount:
+                    type: number
+                    format: double
+                status:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+            description: Withdrawal transaction information
         system.service.v1.AddCurrencyRequest:
             type: object
             properties:

@@ -22,6 +22,8 @@ const _ = http.SupportPackageIsVersion1
 const OperationPaymentCreatePaymentChannel = "/payment.service.v1.Payment/CreatePaymentChannel"
 const OperationPaymentGetPaymentChannelList = "/payment.service.v1.Payment/GetPaymentChannelList"
 const OperationPaymentGetPaymentMethodList = "/payment.service.v1.Payment/GetPaymentMethodList"
+const OperationPaymentInitiateDeposit = "/payment.service.v1.Payment/InitiateDeposit"
+const OperationPaymentInitiateWithdraw = "/payment.service.v1.Payment/InitiateWithdraw"
 
 type PaymentHTTPServer interface {
 	// CreatePaymentChannel Create payment channel
@@ -30,6 +32,10 @@ type PaymentHTTPServer interface {
 	GetPaymentChannelList(context.Context, *GetPaymentChannelListRequest) (*GetPaymentChannelListResponse, error)
 	// GetPaymentMethodList Get list of payment methods
 	GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*GetPaymentMethodListResponse, error)
+	// InitiateDeposit Initiate a deposit transaction
+	InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error)
+	// InitiateWithdraw Initiate a withdrawal transaction
+	InitiateWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error)
 }
 
 func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
@@ -37,6 +43,8 @@ func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r.POST("/api/payment/method/list", _Payment_GetPaymentMethodList0_HTTP_Handler(srv))
 	r.POST("/api/payment/channel/create", _Payment_CreatePaymentChannel0_HTTP_Handler(srv))
 	r.POST("/api/payment/channel/list", _Payment_GetPaymentChannelList0_HTTP_Handler(srv))
+	r.POST("/api/payment/deposit/initiate", _Payment_InitiateDeposit0_HTTP_Handler(srv))
+	r.POST("/api/payment/withdraw/initiate", _Payment_InitiateWithdraw0_HTTP_Handler(srv))
 }
 
 func _Payment_GetPaymentMethodList0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
@@ -105,10 +113,56 @@ func _Payment_GetPaymentChannelList0_HTTP_Handler(srv PaymentHTTPServer) func(ct
 	}
 }
 
+func _Payment_InitiateDeposit0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in InitiateDepositRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentInitiateDeposit)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.InitiateDeposit(ctx, req.(*InitiateDepositRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*InitiateDepositResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Payment_InitiateWithdraw0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in InitiateWithdrawRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentInitiateWithdraw)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.InitiateWithdraw(ctx, req.(*InitiateWithdrawRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*InitiateWithdrawResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type PaymentHTTPClient interface {
 	CreatePaymentChannel(ctx context.Context, req *CreatePaymentChannelRequest, opts ...http.CallOption) (rsp *CreatePaymentChannelResponse, err error)
 	GetPaymentChannelList(ctx context.Context, req *GetPaymentChannelListRequest, opts ...http.CallOption) (rsp *GetPaymentChannelListResponse, err error)
 	GetPaymentMethodList(ctx context.Context, req *GetPaymentMethodListRequest, opts ...http.CallOption) (rsp *GetPaymentMethodListResponse, err error)
+	InitiateDeposit(ctx context.Context, req *InitiateDepositRequest, opts ...http.CallOption) (rsp *InitiateDepositResponse, err error)
+	InitiateWithdraw(ctx context.Context, req *InitiateWithdrawRequest, opts ...http.CallOption) (rsp *InitiateWithdrawResponse, err error)
 }
 
 type PaymentHTTPClientImpl struct {
@@ -150,6 +204,32 @@ func (c *PaymentHTTPClientImpl) GetPaymentMethodList(ctx context.Context, in *Ge
 	pattern := "/api/payment/method/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentGetPaymentMethodList))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *PaymentHTTPClientImpl) InitiateDeposit(ctx context.Context, in *InitiateDepositRequest, opts ...http.CallOption) (*InitiateDepositResponse, error) {
+	var out InitiateDepositResponse
+	pattern := "/api/payment/deposit/initiate"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPaymentInitiateDeposit))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *PaymentHTTPClientImpl) InitiateWithdraw(ctx context.Context, in *InitiateWithdrawRequest, opts ...http.CallOption) (*InitiateWithdrawResponse, error) {
+	var out InitiateWithdrawResponse
+	pattern := "/api/payment/withdraw/initiate"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPaymentInitiateWithdraw))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
