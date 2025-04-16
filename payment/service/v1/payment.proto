@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 
 package payment.service.v1;
 
@@ -48,6 +49,31 @@ message ChannelData {
   string channel_id = 1;
 }
 
+// Request to get payment channel list
+message GetPaymentChannelListRequest {
+  string merchant_id = 1;
+}
+
+// Payment channel information
+message PaymentChannelInfo {
+  string channel_id = 1;
+  string merchant_id = 2;
+  string payment_method_id = 3;
+  string payment_method = 4;
+  string currency = 5;
+  string country = 6;
+  int32 status = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+// Response for payment channel list
+message GetPaymentChannelListResponse {
+  string msg = 1;
+  int32 code = 2;
+  repeated PaymentChannelInfo data = 3;
+}
+
 service Payment {
   // Get list of payment methods
   rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
@@ -61,6 +87,14 @@ service Payment {
   rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (CreatePaymentChannelResponse) {
     option (google.api.http) = {
       post: "/api/payment/channel/create"
+      body: "*"
+    };
+  }
+
+  // Get list of payment channels
+  rpc GetPaymentChannelList(GetPaymentChannelListRequest) returns (GetPaymentChannelListResponse) {
+    option (google.api.http) = {
+      post: "/api/payment/channel/list"
       body: "*"
     };
   }

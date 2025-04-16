@@ -25,6 +25,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
+    /api/payment/channel/list:
+        post:
+            tags:
+                - Payment
+            description: Get list of payment channels
+            operationId: Payment_GetPaymentChannelList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListResponse'
     /api/payment/method/list:
         post:
             tags:
@@ -561,6 +580,25 @@ components:
                 data:
                     $ref: '#/components/schemas/payment.service.v1.ChannelData'
             description: Response for channel creation
+        payment.service.v1.GetPaymentChannelListRequest:
+            type: object
+            properties:
+                merchantId:
+                    type: string
+            description: Request to get payment channel list
+        payment.service.v1.GetPaymentChannelListResponse:
+            type: object
+            properties:
+                msg:
+                    type: string
+                code:
+                    type: integer
+                    format: int32
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
+            description: Response for payment channel list
         payment.service.v1.GetPaymentMethodListRequest:
             type: object
             properties: {}
@@ -578,6 +616,31 @@ components:
                     items:
                         $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
             description: Response for payment method list
+        payment.service.v1.PaymentChannelInfo:
+            type: object
+            properties:
+                channelId:
+                    type: string
+                merchantId:
+                    type: string
+                paymentMethodId:
+                    type: string
+                paymentMethod:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                status:
+                    type: integer
+                    format: int32
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: Payment channel information
         payment.service.v1.PaymentMethodInfo:
             type: object
             properties:
