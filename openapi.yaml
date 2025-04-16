@@ -6,6 +6,25 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /api/payment/channel/create:
+        post:
+            tags:
+                - Payment
+            description: Create payment channel
+            operationId: Payment_CreatePaymentChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
     /api/payment/method/list:
         post:
             tags:
@@ -513,6 +532,35 @@ components:
                     type: string
         google.protobuf.Value:
             description: Represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values.
+        payment.service.v1.ChannelData:
+            type: object
+            properties:
+                channelId:
+                    type: string
+            description: Channel data structure
+        payment.service.v1.CreatePaymentChannelRequest:
+            type: object
+            properties:
+                merchantId:
+                    type: string
+                paymentMethodId:
+                    type: string
+                key:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/google.protobuf.Value'
+            description: Request to create a payment channel
+        payment.service.v1.CreatePaymentChannelResponse:
+            type: object
+            properties:
+                msg:
+                    type: string
+                code:
+                    type: integer
+                    format: int32
+                data:
+                    $ref: '#/components/schemas/payment.service.v1.ChannelData'
+            description: Response for channel creation
         payment.service.v1.GetPaymentMethodListRequest:
             type: object
             properties: {}

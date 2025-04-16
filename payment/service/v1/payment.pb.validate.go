@@ -434,3 +434,393 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetPaymentMethodListResponseValidationError{}
+
+// Validate checks the field values on CreatePaymentChannelRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreatePaymentChannelRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreatePaymentChannelRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreatePaymentChannelRequestMultiError, or nil if none found.
+func (m *CreatePaymentChannelRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreatePaymentChannelRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for MerchantId
+
+	// no validation rules for PaymentMethodId
+
+	{
+		sorted_keys := make([]string, len(m.GetKey()))
+		i := 0
+		for key := range m.GetKey() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetKey()[key]
+			_ = val
+
+			// no validation rules for Key[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, CreatePaymentChannelRequestValidationError{
+							field:  fmt.Sprintf("Key[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, CreatePaymentChannelRequestValidationError{
+							field:  fmt.Sprintf("Key[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return CreatePaymentChannelRequestValidationError{
+						field:  fmt.Sprintf("Key[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreatePaymentChannelRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreatePaymentChannelRequestMultiError is an error wrapping multiple
+// validation errors returned by CreatePaymentChannelRequest.ValidateAll() if
+// the designated constraints aren't met.
+type CreatePaymentChannelRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreatePaymentChannelRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreatePaymentChannelRequestMultiError) AllErrors() []error { return m }
+
+// CreatePaymentChannelRequestValidationError is the validation error returned
+// by CreatePaymentChannelRequest.Validate if the designated constraints
+// aren't met.
+type CreatePaymentChannelRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreatePaymentChannelRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreatePaymentChannelRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreatePaymentChannelRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreatePaymentChannelRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreatePaymentChannelRequestValidationError) ErrorName() string {
+	return "CreatePaymentChannelRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreatePaymentChannelRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreatePaymentChannelRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreatePaymentChannelRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreatePaymentChannelRequestValidationError{}
+
+// Validate checks the field values on CreatePaymentChannelResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreatePaymentChannelResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreatePaymentChannelResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreatePaymentChannelResponseMultiError, or nil if none found.
+func (m *CreatePaymentChannelResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreatePaymentChannelResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Msg
+
+	// no validation rules for Code
+
+	if all {
+		switch v := interface{}(m.GetData()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreatePaymentChannelResponseValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreatePaymentChannelResponseValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreatePaymentChannelResponseValidationError{
+				field:  "Data",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreatePaymentChannelResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreatePaymentChannelResponseMultiError is an error wrapping multiple
+// validation errors returned by CreatePaymentChannelResponse.ValidateAll() if
+// the designated constraints aren't met.
+type CreatePaymentChannelResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreatePaymentChannelResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreatePaymentChannelResponseMultiError) AllErrors() []error { return m }
+
+// CreatePaymentChannelResponseValidationError is the validation error returned
+// by CreatePaymentChannelResponse.Validate if the designated constraints
+// aren't met.
+type CreatePaymentChannelResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreatePaymentChannelResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreatePaymentChannelResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreatePaymentChannelResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreatePaymentChannelResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreatePaymentChannelResponseValidationError) ErrorName() string {
+	return "CreatePaymentChannelResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreatePaymentChannelResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreatePaymentChannelResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreatePaymentChannelResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreatePaymentChannelResponseValidationError{}
+
+// Validate checks the field values on ChannelData with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ChannelData) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ChannelData with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ChannelDataMultiError, or
+// nil if none found.
+func (m *ChannelData) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ChannelData) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ChannelId
+
+	if len(errors) > 0 {
+		return ChannelDataMultiError(errors)
+	}
+
+	return nil
+}
+
+// ChannelDataMultiError is an error wrapping multiple validation errors
+// returned by ChannelData.ValidateAll() if the designated constraints aren't met.
+type ChannelDataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ChannelDataMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ChannelDataMultiError) AllErrors() []error { return m }
+
+// ChannelDataValidationError is the validation error returned by
+// ChannelData.Validate if the designated constraints aren't met.
+type ChannelDataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ChannelDataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ChannelDataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ChannelDataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ChannelDataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ChannelDataValidationError) ErrorName() string { return "ChannelDataValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ChannelDataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sChannelData.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ChannelDataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ChannelDataValidationError{}

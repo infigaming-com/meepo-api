@@ -29,11 +29,38 @@ message GetPaymentMethodListResponse {
   repeated PaymentMethodInfo data = 3;
 }
 
+// Request to create a payment channel
+message CreatePaymentChannelRequest {
+  string merchant_id = 1;
+  string payment_method_id = 2;
+  map<string, google.protobuf.Value> key = 3; // Stores configuration fields for the payment channel
+}
+
+// Response for channel creation
+message CreatePaymentChannelResponse {
+  string msg = 1;
+  int32 code = 2;
+  ChannelData data = 3;
+}
+
+// Channel data structure
+message ChannelData {
+  string channel_id = 1;
+}
+
 service Payment {
   // Get list of payment methods
   rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
     option (google.api.http) = {
       post: "/api/payment/method/list"
+      body: "*"
+    };
+  }
+
+  // Create payment channel
+  rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (CreatePaymentChannelResponse) {
+    option (google.api.http) = {
+      post: "/api/payment/channel/create"
       body: "*"
     };
   }

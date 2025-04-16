@@ -19,9 +19,12 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationPaymentCreatePaymentChannel = "/payment.service.v1.Payment/CreatePaymentChannel"
 const OperationPaymentGetPaymentMethodList = "/payment.service.v1.Payment/GetPaymentMethodList"
 
 type PaymentHTTPServer interface {
+	// CreatePaymentChannel Create payment channel
+	CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error)
 	// GetPaymentMethodList Get list of payment methods
 	GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*GetPaymentMethodListResponse, error)
 }
@@ -29,6 +32,7 @@ type PaymentHTTPServer interface {
 func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r := s.Route("/")
 	r.POST("/api/payment/method/list", _Payment_GetPaymentMethodList0_HTTP_Handler(srv))
+	r.POST("/api/payment/channel/create", _Payment_CreatePaymentChannel0_HTTP_Handler(srv))
 }
 
 func _Payment_GetPaymentMethodList0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
@@ -53,7 +57,30 @@ func _Payment_GetPaymentMethodList0_HTTP_Handler(srv PaymentHTTPServer) func(ctx
 	}
 }
 
+func _Payment_CreatePaymentChannel0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreatePaymentChannelRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentCreatePaymentChannel)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreatePaymentChannel(ctx, req.(*CreatePaymentChannelRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreatePaymentChannelResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type PaymentHTTPClient interface {
+	CreatePaymentChannel(ctx context.Context, req *CreatePaymentChannelRequest, opts ...http.CallOption) (rsp *CreatePaymentChannelResponse, err error)
 	GetPaymentMethodList(ctx context.Context, req *GetPaymentMethodListRequest, opts ...http.CallOption) (rsp *GetPaymentMethodListResponse, err error)
 }
 
@@ -63,6 +90,19 @@ type PaymentHTTPClientImpl struct {
 
 func NewPaymentHTTPClient(client *http.Client) PaymentHTTPClient {
 	return &PaymentHTTPClientImpl{client}
+}
+
+func (c *PaymentHTTPClientImpl) CreatePaymentChannel(ctx context.Context, in *CreatePaymentChannelRequest, opts ...http.CallOption) (*CreatePaymentChannelResponse, error) {
+	var out CreatePaymentChannelResponse
+	pattern := "/api/payment/channel/create"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPaymentCreatePaymentChannel))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *PaymentHTTPClientImpl) GetPaymentMethodList(ctx context.Context, in *GetPaymentMethodListRequest, opts ...http.CallOption) (*GetPaymentMethodListResponse, error) {
