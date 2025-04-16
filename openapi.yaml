@@ -604,8 +604,6 @@ components:
                     type: string
                 key:
                     type: object
-                    additionalProperties:
-                        $ref: '#/components/schemas/google.protobuf.Value'
             description: Request to create a payment channel
         payment.service.v1.CreatePaymentChannelResponse:
             type: object

@@ -3,6 +3,7 @@ syntax = "proto3";
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
 
 package payment.service.v1;
 
@@ -34,7 +35,7 @@ message GetPaymentMethodListResponse {
 message CreatePaymentChannelRequest {
   string merchant_id = 1;
   string payment_method_id = 2;
-  map<string, google.protobuf.Value> key = 3; // Stores configuration fields for the payment channel
+  google.protobuf.Struct key = 3; // Stores configuration fields for the payment channel
 }
 
 // Response for channel creation
