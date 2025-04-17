@@ -168,49 +168,32 @@ func (m *PaymentMethodInfo) validate(all bool) error {
 
 	// no validation rules for PaymentMethod
 
-	{
-		sorted_keys := make([]string, len(m.GetKeySchema()))
-		i := 0
-		for key := range m.GetKeySchema() {
-			sorted_keys[i] = key
-			i++
-		}
-		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
-		for _, key := range sorted_keys {
-			val := m.GetKeySchema()[key]
-			_ = val
-
-			// no validation rules for KeySchema[key]
-
-			if all {
-				switch v := interface{}(val).(type) {
-				case interface{ ValidateAll() error }:
-					if err := v.ValidateAll(); err != nil {
-						errors = append(errors, PaymentMethodInfoValidationError{
-							field:  fmt.Sprintf("KeySchema[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				case interface{ Validate() error }:
-					if err := v.Validate(); err != nil {
-						errors = append(errors, PaymentMethodInfoValidationError{
-							field:  fmt.Sprintf("KeySchema[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				}
-			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
-				if err := v.Validate(); err != nil {
-					return PaymentMethodInfoValidationError{
-						field:  fmt.Sprintf("KeySchema[%v]", key),
-						reason: "embedded message failed validation",
-						cause:  err,
-					}
-				}
+	if all {
+		switch v := interface{}(m.GetKeySchema()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PaymentMethodInfoValidationError{
+					field:  "KeySchema",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
-
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PaymentMethodInfoValidationError{
+					field:  "KeySchema",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetKeySchema()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PaymentMethodInfoValidationError{
+				field:  "KeySchema",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
 		}
 	}
 
@@ -1258,49 +1241,32 @@ func (m *InitiateDepositRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
-	{
-		sorted_keys := make([]string, len(m.GetExtra()))
-		i := 0
-		for key := range m.GetExtra() {
-			sorted_keys[i] = key
-			i++
-		}
-		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
-		for _, key := range sorted_keys {
-			val := m.GetExtra()[key]
-			_ = val
-
-			// no validation rules for Extra[key]
-
-			if all {
-				switch v := interface{}(val).(type) {
-				case interface{ ValidateAll() error }:
-					if err := v.ValidateAll(); err != nil {
-						errors = append(errors, InitiateDepositRequestValidationError{
-							field:  fmt.Sprintf("Extra[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				case interface{ Validate() error }:
-					if err := v.Validate(); err != nil {
-						errors = append(errors, InitiateDepositRequestValidationError{
-							field:  fmt.Sprintf("Extra[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				}
-			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
-				if err := v.Validate(); err != nil {
-					return InitiateDepositRequestValidationError{
-						field:  fmt.Sprintf("Extra[%v]", key),
-						reason: "embedded message failed validation",
-						cause:  err,
-					}
-				}
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, InitiateDepositRequestValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
-
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, InitiateDepositRequestValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return InitiateDepositRequestValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
 		}
 	}
 
@@ -1447,49 +1413,32 @@ func (m *TransactionInfo) validate(all bool) error {
 		}
 	}
 
-	{
-		sorted_keys := make([]string, len(m.GetExtra()))
-		i := 0
-		for key := range m.GetExtra() {
-			sorted_keys[i] = key
-			i++
-		}
-		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
-		for _, key := range sorted_keys {
-			val := m.GetExtra()[key]
-			_ = val
-
-			// no validation rules for Extra[key]
-
-			if all {
-				switch v := interface{}(val).(type) {
-				case interface{ ValidateAll() error }:
-					if err := v.ValidateAll(); err != nil {
-						errors = append(errors, TransactionInfoValidationError{
-							field:  fmt.Sprintf("Extra[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				case interface{ Validate() error }:
-					if err := v.Validate(); err != nil {
-						errors = append(errors, TransactionInfoValidationError{
-							field:  fmt.Sprintf("Extra[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				}
-			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
-				if err := v.Validate(); err != nil {
-					return TransactionInfoValidationError{
-						field:  fmt.Sprintf("Extra[%v]", key),
-						reason: "embedded message failed validation",
-						cause:  err,
-					}
-				}
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, TransactionInfoValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
-
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, TransactionInfoValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return TransactionInfoValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
 		}
 	}
 
@@ -1752,49 +1701,32 @@ func (m *InitiateWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for Channel
 
-	{
-		sorted_keys := make([]string, len(m.GetExtra()))
-		i := 0
-		for key := range m.GetExtra() {
-			sorted_keys[i] = key
-			i++
-		}
-		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
-		for _, key := range sorted_keys {
-			val := m.GetExtra()[key]
-			_ = val
-
-			// no validation rules for Extra[key]
-
-			if all {
-				switch v := interface{}(val).(type) {
-				case interface{ ValidateAll() error }:
-					if err := v.ValidateAll(); err != nil {
-						errors = append(errors, InitiateWithdrawRequestValidationError{
-							field:  fmt.Sprintf("Extra[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				case interface{ Validate() error }:
-					if err := v.Validate(); err != nil {
-						errors = append(errors, InitiateWithdrawRequestValidationError{
-							field:  fmt.Sprintf("Extra[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				}
-			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
-				if err := v.Validate(); err != nil {
-					return InitiateWithdrawRequestValidationError{
-						field:  fmt.Sprintf("Extra[%v]", key),
-						reason: "embedded message failed validation",
-						cause:  err,
-					}
-				}
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, InitiateWithdrawRequestValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
-
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, InitiateWithdrawRequestValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return InitiateWithdrawRequestValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
 		}
 	}
 

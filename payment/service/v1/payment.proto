@@ -19,8 +19,8 @@ message PaymentMethodInfo {
   string id = 1;
   string currency = 2;
   string country = 3;
-  string payment_method = 4;
-  map<string, google.protobuf.Struct> key_schema = 5; // Stores schema for required fields of the payment method
+  string payment_method = 4 [json_name="paymentMethod"];
+  google.protobuf.Struct key_schema = 5 [json_name="keySchema"]; // Stores schema for required fields of the payment method
 }
 
 // Response for payment method list
@@ -32,8 +32,8 @@ message GetPaymentMethodListResponse {
 
 // Request to create a payment channel
 message CreatePaymentChannelRequest {
-  string merchant_id = 1;
-  string payment_method_id = 2;
+  string merchant_id = 1 [json_name="merchantId"];
+  string payment_method_id = 2 [json_name="paymentMethodId"];
   google.protobuf.Struct key = 3; // Stores configuration fields for the payment channel
 }
 
@@ -46,25 +46,25 @@ message CreatePaymentChannelResponse {
 
 // Channel data structure
 message ChannelData {
-  string channel_id = 1;
+  string channel_id = 1 [json_name="channelId"];
 }
 
 // Request to get payment channel list
 message GetPaymentChannelListRequest {
-  string merchant_id = 1;
+  string merchant_id = 1 [json_name="merchantId"];
 }
 
 // Payment channel information
 message PaymentChannelInfo {
-  string channel_id = 1;
-  string merchant_id = 2;
-  string payment_method_id = 3;
-  string payment_method = 4;
+  string channel_id = 1 [json_name="channelId"];
+  string merchant_id = 2 [json_name="merchantId"];
+  string payment_method_id = 3 [json_name="paymentMethodId"];
+  string payment_method = 4 [json_name="paymentMethod"];
   string currency = 5;
   string country = 6;
   int32 status = 7;
-  google.protobuf.Timestamp created_at = 8;
-  google.protobuf.Timestamp updated_at = 9;
+  google.protobuf.Timestamp created_at = 8 [json_name="createdAt"];
+  google.protobuf.Timestamp updated_at = 9 [json_name="updatedAt"];
 }
 
 // Response for payment channel list
@@ -78,21 +78,21 @@ message GetPaymentChannelListResponse {
 message InitiateDepositRequest {
   double amount = 1;
   string currency = 2;
-  string channel_id = 3;
-  string user_id = 4;
-  map<string, google.protobuf.Struct> extra = 5; // Stores additional information like clientOrderId, productId, etc.
+  string channel_id = 3 [json_name="channelId"];
+  string user_id = 4 [json_name="userId"];
+  google.protobuf.Struct extra = 5; // Stores additional information like clientOrderId, productId, etc.
 }
 
 // Transaction information
 message TransactionInfo {
-  string transaction_id = 1;
+  string transaction_id = 1 [json_name="transactionId"];
   double amount = 2;
   string currency = 3;
   string status = 4;
-  string pay_url = 5;
-  string qr_code = 6;
-  google.protobuf.Timestamp created_at = 7;
-  map<string, google.protobuf.Struct> extra = 8; // Additional transaction information
+  string pay_url = 5 [json_name="payUrl"];
+  string qr_code = 6 [json_name="qrCode"];
+  google.protobuf.Timestamp created_at = 7 [json_name="createdAt"];
+  google.protobuf.Struct extra = 8; // Additional transaction information
 }
 
 // Response for deposit initiation
@@ -105,27 +105,27 @@ message InitiateDepositResponse {
 // Request to initiate a withdrawal
 message InitiateWithdrawRequest {
   double amount = 1;
-  string operator_order_no = 2;
-  string bank_account = 3;
-  string bank_account_name = 4;
-  string bank_account_mobile = 5;
-  string bank_name = 6;
-  string bank_code = 7;
-  string bank_branch = 8;
-  string bank_id = 9;
-  string bank_ifsc = 10;
-  string bank_nation = 11;
+  string operator_order_no = 2 [json_name="operatorOrderNo"];
+  string bank_account = 3 [json_name="bankAccount"];
+  string bank_account_name = 4 [json_name="bankAccountName"];
+  string bank_account_mobile = 5 [json_name="bankAccountMobile"];
+  string bank_name = 6 [json_name="bankName"];
+  string bank_code = 7 [json_name="bankCode"];
+  string bank_branch = 8 [json_name="bankBranch"];
+  string bank_id = 9 [json_name="bankId"];
+  string bank_ifsc = 10 [json_name="bankIfsc"];
+  string bank_nation = 11 [json_name="bankNation"];
   string channel = 12;
-  map<string, google.protobuf.Struct> extra = 13; // Stores additional information like clientId, note, etc.
+  google.protobuf.Struct extra = 13; // Stores additional information like clientId, note, etc.
 }
 
 // Withdrawal transaction information
 message WithdrawTransactionInfo {
-  string transaction_id = 1;
-  string operator_order_no = 2;
+  string transaction_id = 1 [json_name="transactionId"];
+  string operator_order_no = 2 [json_name="operatorOrderNo"];
   double amount = 3;
   string status = 4;
-  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp created_at = 5 [json_name="createdAt"];
 }
 
 // Response for withdrawal initiation

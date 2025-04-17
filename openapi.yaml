@@ -664,8 +664,6 @@ components:
                     type: string
                 extra:
                     type: object
-                    additionalProperties:
-                        type: object
             description: Request to initiate a deposit
         payment.service.v1.InitiateDepositResponse:
             type: object
@@ -708,8 +706,6 @@ components:
                     type: string
                 extra:
                     type: object
-                    additionalProperties:
-                        type: object
             description: Request to initiate a withdrawal
         payment.service.v1.InitiateWithdrawResponse:
             type: object
@@ -760,8 +756,6 @@ components:
                     type: string
                 keySchema:
                     type: object
-                    additionalProperties:
-                        type: object
             description: Details of a single payment method
         payment.service.v1.TransactionInfo:
             type: object
@@ -784,8 +778,6 @@ components:
                     format: date-time
                 extra:
                     type: object
-                    additionalProperties:
-                        type: object
             description: Transaction information
         payment.service.v1.WithdrawTransactionInfo:
             type: object
