@@ -10,7 +10,6 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/known/anypb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
@@ -64,12 +63,12 @@ func (*GetPaymentMethodListRequest) Descriptor() ([]byte, []int) {
 
 // Details of a single payment method
 type PaymentMethodInfo struct {
-	state         protoimpl.MessageState     `protogen:"open.v1"`
-	Id            string                     `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Currency      string                     `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	Country       string                     `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	PaymentMethod string                     `protobuf:"bytes,4,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
-	KeySchema     map[string]*structpb.Value `protobuf:"bytes,5,rep,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Stores schema for required fields of the payment method
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	Id            string                      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Currency      string                      `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	Country       string                      `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
+	PaymentMethod string                      `protobuf:"bytes,4,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	KeySchema     map[string]*structpb.Struct `protobuf:"bytes,5,rep,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Stores schema for required fields of the payment method
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -132,7 +131,7 @@ func (x *PaymentMethodInfo) GetPaymentMethod() string {
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetKeySchema() map[string]*structpb.Value {
+func (x *PaymentMethodInfo) GetKeySchema() map[string]*structpb.Struct {
 	if x != nil {
 		return x.KeySchema
 	}
@@ -584,12 +583,12 @@ func (x *GetPaymentChannelListResponse) GetData() []*PaymentChannelInfo {
 
 // Request to initiate a deposit
 type InitiateDepositRequest struct {
-	state         protoimpl.MessageState     `protogen:"open.v1"`
-	Amount        float64                    `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	Currency      string                     `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	ChannelId     string                     `protobuf:"bytes,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	UserId        string                     `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Extra         map[string]*structpb.Value `protobuf:"bytes,5,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Stores additional information like clientOrderId, productId, etc.
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	Amount        float64                     `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	Currency      string                      `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	ChannelId     string                      `protobuf:"bytes,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	UserId        string                      `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Extra         map[string]*structpb.Struct `protobuf:"bytes,5,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Stores additional information like clientOrderId, productId, etc.
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -652,7 +651,7 @@ func (x *InitiateDepositRequest) GetUserId() string {
 	return ""
 }
 
-func (x *InitiateDepositRequest) GetExtra() map[string]*structpb.Value {
+func (x *InitiateDepositRequest) GetExtra() map[string]*structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -661,15 +660,15 @@ func (x *InitiateDepositRequest) GetExtra() map[string]*structpb.Value {
 
 // Transaction information
 type TransactionInfo struct {
-	state         protoimpl.MessageState     `protogen:"open.v1"`
-	TransactionId string                     `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Amount        float64                    `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
-	Currency      string                     `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	Status        string                     `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	PayUrl        string                     `protobuf:"bytes,5,opt,name=pay_url,json=payUrl,proto3" json:"pay_url,omitempty"`
-	QrCode        string                     `protobuf:"bytes,6,opt,name=qr_code,json=qrCode,proto3" json:"qr_code,omitempty"`
-	CreatedAt     *timestamppb.Timestamp     `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Extra         map[string]*structpb.Value `protobuf:"bytes,8,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Additional transaction information
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	TransactionId string                      `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Amount        float64                     `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	Currency      string                      `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	Status        string                      `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	PayUrl        string                      `protobuf:"bytes,5,opt,name=pay_url,json=payUrl,proto3" json:"pay_url,omitempty"`
+	QrCode        string                      `protobuf:"bytes,6,opt,name=qr_code,json=qrCode,proto3" json:"qr_code,omitempty"`
+	CreatedAt     *timestamppb.Timestamp      `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Extra         map[string]*structpb.Struct `protobuf:"bytes,8,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Additional transaction information
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -753,7 +752,7 @@ func (x *TransactionInfo) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *TransactionInfo) GetExtra() map[string]*structpb.Value {
+func (x *TransactionInfo) GetExtra() map[string]*structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -823,20 +822,20 @@ func (x *InitiateDepositResponse) GetData() *TransactionInfo {
 
 // Request to initiate a withdrawal
 type InitiateWithdrawRequest struct {
-	state             protoimpl.MessageState     `protogen:"open.v1"`
-	Amount            float64                    `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	OperatorOrderNo   string                     `protobuf:"bytes,2,opt,name=operator_order_no,json=operatorOrderNo,proto3" json:"operator_order_no,omitempty"`
-	BankAccount       string                     `protobuf:"bytes,3,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
-	BankAccountName   string                     `protobuf:"bytes,4,opt,name=bank_account_name,json=bankAccountName,proto3" json:"bank_account_name,omitempty"`
-	BankAccountMobile string                     `protobuf:"bytes,5,opt,name=bank_account_mobile,json=bankAccountMobile,proto3" json:"bank_account_mobile,omitempty"`
-	BankName          string                     `protobuf:"bytes,6,opt,name=bank_name,json=bankName,proto3" json:"bank_name,omitempty"`
-	BankCode          string                     `protobuf:"bytes,7,opt,name=bank_code,json=bankCode,proto3" json:"bank_code,omitempty"`
-	BankBranch        string                     `protobuf:"bytes,8,opt,name=bank_branch,json=bankBranch,proto3" json:"bank_branch,omitempty"`
-	BankId            string                     `protobuf:"bytes,9,opt,name=bank_id,json=bankId,proto3" json:"bank_id,omitempty"`
-	BankIfsc          string                     `protobuf:"bytes,10,opt,name=bank_ifsc,json=bankIfsc,proto3" json:"bank_ifsc,omitempty"`
-	BankNation        string                     `protobuf:"bytes,11,opt,name=bank_nation,json=bankNation,proto3" json:"bank_nation,omitempty"`
-	Channel           string                     `protobuf:"bytes,12,opt,name=channel,proto3" json:"channel,omitempty"`
-	Extra             map[string]*structpb.Value `protobuf:"bytes,13,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Stores additional information like clientId, note, etc.
+	state             protoimpl.MessageState      `protogen:"open.v1"`
+	Amount            float64                     `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	OperatorOrderNo   string                      `protobuf:"bytes,2,opt,name=operator_order_no,json=operatorOrderNo,proto3" json:"operator_order_no,omitempty"`
+	BankAccount       string                      `protobuf:"bytes,3,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
+	BankAccountName   string                      `protobuf:"bytes,4,opt,name=bank_account_name,json=bankAccountName,proto3" json:"bank_account_name,omitempty"`
+	BankAccountMobile string                      `protobuf:"bytes,5,opt,name=bank_account_mobile,json=bankAccountMobile,proto3" json:"bank_account_mobile,omitempty"`
+	BankName          string                      `protobuf:"bytes,6,opt,name=bank_name,json=bankName,proto3" json:"bank_name,omitempty"`
+	BankCode          string                      `protobuf:"bytes,7,opt,name=bank_code,json=bankCode,proto3" json:"bank_code,omitempty"`
+	BankBranch        string                      `protobuf:"bytes,8,opt,name=bank_branch,json=bankBranch,proto3" json:"bank_branch,omitempty"`
+	BankId            string                      `protobuf:"bytes,9,opt,name=bank_id,json=bankId,proto3" json:"bank_id,omitempty"`
+	BankIfsc          string                      `protobuf:"bytes,10,opt,name=bank_ifsc,json=bankIfsc,proto3" json:"bank_ifsc,omitempty"`
+	BankNation        string                      `protobuf:"bytes,11,opt,name=bank_nation,json=bankNation,proto3" json:"bank_nation,omitempty"`
+	Channel           string                      `protobuf:"bytes,12,opt,name=channel,proto3" json:"channel,omitempty"`
+	Extra             map[string]*structpb.Struct `protobuf:"bytes,13,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Stores additional information like clientId, note, etc.
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -955,7 +954,7 @@ func (x *InitiateWithdrawRequest) GetChannel() string {
 	return ""
 }
 
-func (x *InitiateWithdrawRequest) GetExtra() map[string]*structpb.Value {
+func (x *InitiateWithdrawRequest) GetExtra() map[string]*structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -1104,18 +1103,18 @@ var File_payment_service_v1_payment_proto protoreflect.FileDescriptor
 
 const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\n" +
-	" payment/service/v1/payment.proto\x12\x12payment.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x19google/protobuf/any.proto\"\x1d\n" +
-	"\x1bGetPaymentMethodListRequest\"\xab\x02\n" +
+	" payment/service/v1/payment.proto\x12\x12payment.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x1d\n" +
+	"\x1bGetPaymentMethodListRequest\"\xac\x02\n" +
 	"\x11PaymentMethodInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12%\n" +
 	"\x0epayment_method\x18\x04 \x01(\tR\rpaymentMethod\x12S\n" +
 	"\n" +
-	"key_schema\x18\x05 \x03(\v24.payment.service.v1.PaymentMethodInfo.KeySchemaEntryR\tkeySchema\x1aT\n" +
+	"key_schema\x18\x05 \x03(\v24.payment.service.v1.PaymentMethodInfo.KeySchemaEntryR\tkeySchema\x1aU\n" +
 	"\x0eKeySchemaEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\"\x7f\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12-\n" +
+	"\x05value\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05value:\x028\x01\"\x7f\n" +
 	"\x1cGetPaymentMethodListResponse\x12\x10\n" +
 	"\x03msg\x18\x01 \x01(\tR\x03msg\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x129\n" +
@@ -1152,18 +1151,18 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x1dGetPaymentChannelListResponse\x12\x10\n" +
 	"\x03msg\x18\x01 \x01(\tR\x03msg\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12:\n" +
-	"\x04data\x18\x03 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x04data\"\xa3\x02\n" +
+	"\x04data\x18\x03 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x04data\"\xa4\x02\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x03 \x01(\tR\tchannelId\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\tR\x06userId\x12K\n" +
-	"\x05extra\x18\x05 \x03(\v25.payment.service.v1.InitiateDepositRequest.ExtraEntryR\x05extra\x1aP\n" +
+	"\x05extra\x18\x05 \x03(\v25.payment.service.v1.InitiateDepositRequest.ExtraEntryR\x05extra\x1aQ\n" +
 	"\n" +
 	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\"\x89\x03\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12-\n" +
+	"\x05value\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05value:\x028\x01\"\x8a\x03\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\x01R\x06amount\x12\x1a\n" +
@@ -1173,15 +1172,15 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\aqr_code\x18\x06 \x01(\tR\x06qrCode\x129\n" +
 	"\n" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12D\n" +
-	"\x05extra\x18\b \x03(\v2..payment.service.v1.TransactionInfo.ExtraEntryR\x05extra\x1aP\n" +
+	"\x05extra\x18\b \x03(\v2..payment.service.v1.TransactionInfo.ExtraEntryR\x05extra\x1aQ\n" +
 	"\n" +
 	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\"x\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12-\n" +
+	"\x05value\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05value:\x028\x01\"x\n" +
 	"\x17InitiateDepositResponse\x12\x10\n" +
 	"\x03msg\x18\x01 \x01(\tR\x03msg\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x127\n" +
-	"\x04data\x18\x03 \x01(\v2#.payment.service.v1.TransactionInfoR\x04data\"\xc8\x04\n" +
+	"\x04data\x18\x03 \x01(\v2#.payment.service.v1.TransactionInfoR\x04data\"\xc9\x04\n" +
 	"\x17InitiateWithdrawRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12*\n" +
 	"\x11operator_order_no\x18\x02 \x01(\tR\x0foperatorOrderNo\x12!\n" +
@@ -1198,11 +1197,11 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\vbank_nation\x18\v \x01(\tR\n" +
 	"bankNation\x12\x18\n" +
 	"\achannel\x18\f \x01(\tR\achannel\x12L\n" +
-	"\x05extra\x18\r \x03(\v26.payment.service.v1.InitiateWithdrawRequest.ExtraEntryR\x05extra\x1aP\n" +
+	"\x05extra\x18\r \x03(\v26.payment.service.v1.InitiateWithdrawRequest.ExtraEntryR\x05extra\x1aQ\n" +
 	"\n" +
 	"ExtraEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\"\xd7\x01\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12-\n" +
+	"\x05value\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05value:\x028\x01\"\xd7\x01\n" +
 	"\x17WithdrawTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12*\n" +
 	"\x11operator_order_no\x18\x02 \x01(\tR\x0foperatorOrderNo\x12\x16\n" +
@@ -1257,7 +1256,6 @@ var file_payment_service_v1_payment_proto_goTypes = []any{
 	nil,                                   // 18: payment.service.v1.InitiateWithdrawRequest.ExtraEntry
 	(*structpb.Struct)(nil),               // 19: google.protobuf.Struct
 	(*timestamppb.Timestamp)(nil),         // 20: google.protobuf.Timestamp
-	(*structpb.Value)(nil),                // 21: google.protobuf.Value
 }
 var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	15, // 0: payment.service.v1.PaymentMethodInfo.key_schema:type_name -> payment.service.v1.PaymentMethodInfo.KeySchemaEntry
@@ -1274,10 +1272,10 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	18, // 11: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> payment.service.v1.InitiateWithdrawRequest.ExtraEntry
 	20, // 12: payment.service.v1.WithdrawTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
 	13, // 13: payment.service.v1.InitiateWithdrawResponse.data:type_name -> payment.service.v1.WithdrawTransactionInfo
-	21, // 14: payment.service.v1.PaymentMethodInfo.KeySchemaEntry.value:type_name -> google.protobuf.Value
-	21, // 15: payment.service.v1.InitiateDepositRequest.ExtraEntry.value:type_name -> google.protobuf.Value
-	21, // 16: payment.service.v1.TransactionInfo.ExtraEntry.value:type_name -> google.protobuf.Value
-	21, // 17: payment.service.v1.InitiateWithdrawRequest.ExtraEntry.value:type_name -> google.protobuf.Value
+	19, // 14: payment.service.v1.PaymentMethodInfo.KeySchemaEntry.value:type_name -> google.protobuf.Struct
+	19, // 15: payment.service.v1.InitiateDepositRequest.ExtraEntry.value:type_name -> google.protobuf.Struct
+	19, // 16: payment.service.v1.TransactionInfo.ExtraEntry.value:type_name -> google.protobuf.Struct
+	19, // 17: payment.service.v1.InitiateWithdrawRequest.ExtraEntry.value:type_name -> google.protobuf.Struct
 	0,  // 18: payment.service.v1.Payment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
 	3,  // 19: payment.service.v1.Payment.CreatePaymentChannel:input_type -> payment.service.v1.CreatePaymentChannelRequest
 	6,  // 20: payment.service.v1.Payment.GetPaymentChannelList:input_type -> payment.service.v1.GetPaymentChannelListRequest

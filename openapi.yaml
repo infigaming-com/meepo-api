@@ -587,8 +587,6 @@ components:
             properties:
                 status:
                     type: string
-        google.protobuf.Value:
-            description: Represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values.
         payment.service.v1.ChannelData:
             type: object
             properties:
@@ -667,7 +665,7 @@ components:
                 extra:
                     type: object
                     additionalProperties:
-                        $ref: '#/components/schemas/google.protobuf.Value'
+                        type: object
             description: Request to initiate a deposit
         payment.service.v1.InitiateDepositResponse:
             type: object
@@ -711,7 +709,7 @@ components:
                 extra:
                     type: object
                     additionalProperties:
-                        $ref: '#/components/schemas/google.protobuf.Value'
+                        type: object
             description: Request to initiate a withdrawal
         payment.service.v1.InitiateWithdrawResponse:
             type: object
@@ -763,7 +761,7 @@ components:
                 keySchema:
                     type: object
                     additionalProperties:
-                        $ref: '#/components/schemas/google.protobuf.Value'
+                        type: object
             description: Details of a single payment method
         payment.service.v1.TransactionInfo:
             type: object
@@ -787,7 +785,7 @@ components:
                 extra:
                     type: object
                     additionalProperties:
-                        $ref: '#/components/schemas/google.protobuf.Value'
+                        type: object
             description: Transaction information
         payment.service.v1.WithdrawTransactionInfo:
             type: object

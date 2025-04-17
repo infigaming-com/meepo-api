@@ -3,7 +3,6 @@ syntax = "proto3";
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/any.proto";
 
 package payment.service.v1;
 
@@ -21,7 +20,7 @@ message PaymentMethodInfo {
   string currency = 2;
   string country = 3;
   string payment_method = 4;
-  map<string, google.protobuf.Value> key_schema = 5; // Stores schema for required fields of the payment method
+  map<string, google.protobuf.Struct> key_schema = 5; // Stores schema for required fields of the payment method
 }
 
 // Response for payment method list
@@ -81,7 +80,7 @@ message InitiateDepositRequest {
   string currency = 2;
   string channel_id = 3;
   string user_id = 4;
-  map<string, google.protobuf.Value> extra = 5; // Stores additional information like clientOrderId, productId, etc.
+  map<string, google.protobuf.Struct> extra = 5; // Stores additional information like clientOrderId, productId, etc.
 }
 
 // Transaction information
@@ -93,7 +92,7 @@ message TransactionInfo {
   string pay_url = 5;
   string qr_code = 6;
   google.protobuf.Timestamp created_at = 7;
-  map<string, google.protobuf.Value> extra = 8; // Additional transaction information
+  map<string, google.protobuf.Struct> extra = 8; // Additional transaction information
 }
 
 // Response for deposit initiation
@@ -117,7 +116,7 @@ message InitiateWithdrawRequest {
   string bank_ifsc = 10;
   string bank_nation = 11;
   string channel = 12;
-  map<string, google.protobuf.Value> extra = 13; // Stores additional information like clientId, note, etc.
+  map<string, google.protobuf.Struct> extra = 13; // Stores additional information like clientId, note, etc.
 }
 
 // Withdrawal transaction information
