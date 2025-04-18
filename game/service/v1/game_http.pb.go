@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.8.4
 // - protoc             v4.25.6
-// source: payment/service/v1/payment.proto
+// source: game/service/v1/game.proto
 
 package v1
 
@@ -19,24 +19,24 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationPaymentHealthCheck = "/payment.service.v1.Payment/HealthCheck"
+const OperationGameHealthCheck = "/game.service.v1.Game/HealthCheck"
 
-type PaymentHTTPServer interface {
+type GameHTTPServer interface {
 	HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error)
 }
 
-func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
+func RegisterGameHTTPServer(s *http.Server, srv GameHTTPServer) {
 	r := s.Route("/")
-	r.GET("/v1/payment/healthcheck", _Payment_HealthCheck1_HTTP_Handler(srv))
+	r.GET("/v1/game/healthcheck", _Game_HealthCheck0_HTTP_Handler(srv))
 }
 
-func _Payment_HealthCheck1_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+func _Game_HealthCheck0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HealthCheckRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationPaymentHealthCheck)
+		http.SetOperation(ctx, OperationGameHealthCheck)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.HealthCheck(ctx, req.(*HealthCheckRequest))
 		})
@@ -49,23 +49,23 @@ func _Payment_HealthCheck1_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Con
 	}
 }
 
-type PaymentHTTPClient interface {
+type GameHTTPClient interface {
 	HealthCheck(ctx context.Context, req *HealthCheckRequest, opts ...http.CallOption) (rsp *HealthCheckResponse, err error)
 }
 
-type PaymentHTTPClientImpl struct {
+type GameHTTPClientImpl struct {
 	cc *http.Client
 }
 
-func NewPaymentHTTPClient(client *http.Client) PaymentHTTPClient {
-	return &PaymentHTTPClientImpl{client}
+func NewGameHTTPClient(client *http.Client) GameHTTPClient {
+	return &GameHTTPClientImpl{client}
 }
 
-func (c *PaymentHTTPClientImpl) HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...http.CallOption) (*HealthCheckResponse, error) {
+func (c *GameHTTPClientImpl) HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...http.CallOption) (*HealthCheckResponse, error) {
 	var out HealthCheckResponse
-	pattern := "/v1/payment/healthcheck"
+	pattern := "/v1/game/healthcheck"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationPaymentHealthCheck))
+	opts = append(opts, http.Operation(OperationGameHealthCheck))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

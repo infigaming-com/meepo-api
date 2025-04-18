@@ -3,7 +3,6 @@ module github.com/infigaming-com/meepo-api
 go 1.23.7
 
 require (
-	github.com/envoyproxy/protoc-gen-validate v1.2.1
 	github.com/go-kratos/kratos/v2 v2.8.4
 	go.uber.org/zap v1.27.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20250324211829-b45e905df463

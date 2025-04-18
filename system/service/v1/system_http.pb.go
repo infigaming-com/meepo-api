@@ -33,13 +33,13 @@ type SystemHTTPServer interface {
 
 func RegisterSystemHTTPServer(s *http.Server, srv SystemHTTPServer) {
 	r := s.Route("/")
-	r.GET("/v1/system/healthcheck", _System_HealthCheck1_HTTP_Handler(srv))
+	r.GET("/v1/system/healthcheck", _System_HealthCheck2_HTTP_Handler(srv))
 	r.POST("/v1/system/currencies/add", _System_AddCurrency0_HTTP_Handler(srv))
 	r.POST("/v1/system/currencies/get", _System_GetCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/system/currencies/list", _System_ListCurrencies0_HTTP_Handler(srv))
 }
 
-func _System_HealthCheck1_HTTP_Handler(srv SystemHTTPServer) func(ctx http.Context) error {
+func _System_HealthCheck2_HTTP_Handler(srv SystemHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HealthCheckRequest
 		if err := ctx.BindQuery(&in); err != nil {

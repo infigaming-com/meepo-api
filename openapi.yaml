@@ -25,6 +25,18 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/helloworld.v1.HelloReply'
+    /v1/game/healthcheck:
+        get:
+            tags:
+                - Game
+            operationId: Game_HealthCheck
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/game.service.v1.HealthCheckResponse'
     /v1/payment/healthcheck:
         get:
             tags:
@@ -442,6 +454,11 @@ components:
             properties:
                 status:
                     type: string
+        game.service.v1.HealthCheckResponse:
+            type: object
+            properties:
+                status:
+                    type: string
         helloworld.v1.HelloReply:
             type: object
             properties:
@@ -500,6 +517,7 @@ components:
                     items:
                         $ref: '#/components/schemas/system.service.v1.Currency'
 tags:
+    - name: Game
     - name: Greeter
       description: The greeting service definition.
     - name: Payment
