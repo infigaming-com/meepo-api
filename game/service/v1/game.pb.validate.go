@@ -265,6 +265,8 @@ func (m *CreateOperatorRequest) validate(all bool) error {
 
 	// no validation rules for AggregatorOperatorId
 
+	// no validation rules for OperatorId
+
 	// no validation rules for ApiKey
 
 	// no validation rules for ApiSecret
@@ -373,9 +375,9 @@ func (m *CreateOperatorResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for OperatorId
-
 	// no validation rules for AggregatorOperatorId
+
+	// no validation rules for OperatorId
 
 	// no validation rules for ApiKey
 
@@ -598,6 +600,8 @@ func (m *UpdateOperatorResponse) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for AggregatorOperatorId
+
+	// no validation rules for OperatorId
 
 	// no validation rules for ApiKey
 

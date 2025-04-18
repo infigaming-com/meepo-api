@@ -34,14 +34,15 @@ message HealthCheckResponse {
 
 message CreateOperatorRequest {
 	string aggregator_operator_id = 1;
-	string api_key = 2;
-	string api_secret = 3;
-	bool enabled = 4;
+	string operator_id = 2;
+	string api_key = 3;
+	string api_secret = 4;
+	bool enabled = 5;
 }
 
 message CreateOperatorResponse {
-	string operator_id = 1;
-	string aggregator_operator_id = 2;
+	string aggregator_operator_id = 1;
+	string operator_id = 2;
 	string api_key = 3;
 	string api_secret = 4;
 	bool enabled = 5;
@@ -57,9 +58,10 @@ message UpdateOperatorRequest {
 
 message UpdateOperatorResponse {
 	string aggregator_operator_id = 1;
-	string api_key = 2;
-	string api_secret = 3;
-	bool enabled = 4;
+	string operator_id = 2;
+	string api_key = 3;
+	string api_secret = 4;
+	bool enabled = 5;
 }
 
 message DeleteOperatorRequest {

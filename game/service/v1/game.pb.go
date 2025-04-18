@@ -105,9 +105,10 @@ func (x *HealthCheckResponse) GetStatus() string {
 type CreateOperatorRequest struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	AggregatorOperatorId string                 `protobuf:"bytes,1,opt,name=aggregator_operator_id,json=aggregatorOperatorId,proto3" json:"aggregator_operator_id,omitempty"`
-	ApiKey               string                 `protobuf:"bytes,2,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
-	ApiSecret            string                 `protobuf:"bytes,3,opt,name=api_secret,json=apiSecret,proto3" json:"api_secret,omitempty"`
-	Enabled              bool                   `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	OperatorId           string                 `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	ApiKey               string                 `protobuf:"bytes,3,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	ApiSecret            string                 `protobuf:"bytes,4,opt,name=api_secret,json=apiSecret,proto3" json:"api_secret,omitempty"`
+	Enabled              bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -149,6 +150,13 @@ func (x *CreateOperatorRequest) GetAggregatorOperatorId() string {
 	return ""
 }
 
+func (x *CreateOperatorRequest) GetOperatorId() string {
+	if x != nil {
+		return x.OperatorId
+	}
+	return ""
+}
+
 func (x *CreateOperatorRequest) GetApiKey() string {
 	if x != nil {
 		return x.ApiKey
@@ -172,8 +180,8 @@ func (x *CreateOperatorRequest) GetEnabled() bool {
 
 type CreateOperatorResponse struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId           string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	AggregatorOperatorId string                 `protobuf:"bytes,2,opt,name=aggregator_operator_id,json=aggregatorOperatorId,proto3" json:"aggregator_operator_id,omitempty"`
+	AggregatorOperatorId string                 `protobuf:"bytes,1,opt,name=aggregator_operator_id,json=aggregatorOperatorId,proto3" json:"aggregator_operator_id,omitempty"`
+	OperatorId           string                 `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	ApiKey               string                 `protobuf:"bytes,3,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
 	ApiSecret            string                 `protobuf:"bytes,4,opt,name=api_secret,json=apiSecret,proto3" json:"api_secret,omitempty"`
 	Enabled              bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
@@ -211,16 +219,16 @@ func (*CreateOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CreateOperatorResponse) GetOperatorId() string {
+func (x *CreateOperatorResponse) GetAggregatorOperatorId() string {
 	if x != nil {
-		return x.OperatorId
+		return x.AggregatorOperatorId
 	}
 	return ""
 }
 
-func (x *CreateOperatorResponse) GetAggregatorOperatorId() string {
+func (x *CreateOperatorResponse) GetOperatorId() string {
 	if x != nil {
-		return x.AggregatorOperatorId
+		return x.OperatorId
 	}
 	return ""
 }
@@ -325,9 +333,10 @@ func (x *UpdateOperatorRequest) GetEnabled() bool {
 type UpdateOperatorResponse struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	AggregatorOperatorId string                 `protobuf:"bytes,1,opt,name=aggregator_operator_id,json=aggregatorOperatorId,proto3" json:"aggregator_operator_id,omitempty"`
-	ApiKey               string                 `protobuf:"bytes,2,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
-	ApiSecret            string                 `protobuf:"bytes,3,opt,name=api_secret,json=apiSecret,proto3" json:"api_secret,omitempty"`
-	Enabled              bool                   `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	OperatorId           string                 `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	ApiKey               string                 `protobuf:"bytes,3,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	ApiSecret            string                 `protobuf:"bytes,4,opt,name=api_secret,json=apiSecret,proto3" json:"api_secret,omitempty"`
+	Enabled              bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -365,6 +374,13 @@ func (*UpdateOperatorResponse) Descriptor() ([]byte, []int) {
 func (x *UpdateOperatorResponse) GetAggregatorOperatorId() string {
 	if x != nil {
 		return x.AggregatorOperatorId
+	}
+	return ""
+}
+
+func (x *UpdateOperatorResponse) GetOperatorId() string {
+	if x != nil {
+		return x.OperatorId
 	}
 	return ""
 }
@@ -477,17 +493,19 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x1agame/service/v1/game.proto\x12\x0fgame.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x14\n" +
 	"\x12HealthCheckRequest\"-\n" +
 	"\x13HealthCheckResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status\"\x9f\x01\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\"\xc0\x01\n" +
 	"\x15CreateOperatorRequest\x124\n" +
-	"\x16aggregator_operator_id\x18\x01 \x01(\tR\x14aggregatorOperatorId\x12\x17\n" +
-	"\aapi_key\x18\x02 \x01(\tR\x06apiKey\x12\x1d\n" +
+	"\x16aggregator_operator_id\x18\x01 \x01(\tR\x14aggregatorOperatorId\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\tR\n" +
+	"operatorId\x12\x17\n" +
+	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12\x1d\n" +
 	"\n" +
-	"api_secret\x18\x03 \x01(\tR\tapiSecret\x12\x18\n" +
-	"\aenabled\x18\x04 \x01(\bR\aenabled\"\xc1\x01\n" +
-	"\x16CreateOperatorResponse\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
-	"operatorId\x124\n" +
-	"\x16aggregator_operator_id\x18\x02 \x01(\tR\x14aggregatorOperatorId\x12\x17\n" +
+	"api_secret\x18\x04 \x01(\tR\tapiSecret\x12\x18\n" +
+	"\aenabled\x18\x05 \x01(\bR\aenabled\"\xc1\x01\n" +
+	"\x16CreateOperatorResponse\x124\n" +
+	"\x16aggregator_operator_id\x18\x01 \x01(\tR\x14aggregatorOperatorId\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\tR\n" +
+	"operatorId\x12\x17\n" +
 	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12\x1d\n" +
 	"\n" +
 	"api_secret\x18\x04 \x01(\tR\tapiSecret\x12\x18\n" +
@@ -499,13 +517,15 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12\x1d\n" +
 	"\n" +
 	"api_secret\x18\x04 \x01(\tR\tapiSecret\x12\x18\n" +
-	"\aenabled\x18\x05 \x01(\bR\aenabled\"\xa0\x01\n" +
+	"\aenabled\x18\x05 \x01(\bR\aenabled\"\xc1\x01\n" +
 	"\x16UpdateOperatorResponse\x124\n" +
-	"\x16aggregator_operator_id\x18\x01 \x01(\tR\x14aggregatorOperatorId\x12\x17\n" +
-	"\aapi_key\x18\x02 \x01(\tR\x06apiKey\x12\x1d\n" +
+	"\x16aggregator_operator_id\x18\x01 \x01(\tR\x14aggregatorOperatorId\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\tR\n" +
+	"operatorId\x12\x17\n" +
+	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12\x1d\n" +
 	"\n" +
-	"api_secret\x18\x03 \x01(\tR\tapiSecret\x12\x18\n" +
-	"\aenabled\x18\x04 \x01(\bR\aenabled\"8\n" +
+	"api_secret\x18\x04 \x01(\tR\tapiSecret\x12\x18\n" +
+	"\aenabled\x18\x05 \x01(\bR\aenabled\"8\n" +
 	"\x15DeleteOperatorRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\tR\n" +
 	"operatorId\"\x18\n" +
