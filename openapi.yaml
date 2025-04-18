@@ -44,6 +44,27 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListResponse'
+    /api/payment/deposit/callback:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Deposit callback
+                 This endpoint handles callbacks from payment gateways.
+            operationId: Payment_DepositCallback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.DepositCallbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.DepositCallbackResponse'
     /api/payment/deposit/initiate:
         post:
             tags:
@@ -614,6 +635,43 @@ components:
                 data:
                     $ref: '#/components/schemas/payment.service.v1.ChannelData'
             description: Response for channel creation
+        payment.service.v1.DepositCallbackRequest:
+            type: object
+            properties:
+                transactionNo:
+                    type: string
+                gatewayOrderNo:
+                    type: string
+                operatorOrderNo:
+                    type: string
+                orderStatus:
+                    type: string
+                payTime:
+                    type: string
+                createTime:
+                    type: string
+                amount:
+                    type: string
+                money:
+                    type: string
+                sign:
+                    type: string
+                timestamp:
+                    type: string
+                nonce:
+                    type: string
+            description: Request for deposit callback
+        payment.service.v1.DepositCallbackResponse:
+            type: object
+            properties:
+                msg:
+                    type: string
+                code:
+                    type: integer
+                    format: int32
+                errorMessage:
+                    type: string
+            description: Response for deposit callback
         payment.service.v1.GetPaymentChannelListRequest:
             type: object
             properties:

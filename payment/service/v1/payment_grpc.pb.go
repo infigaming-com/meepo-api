@@ -24,6 +24,7 @@ const (
 	Payment_GetPaymentChannelList_FullMethodName = "/payment.service.v1.Payment/GetPaymentChannelList"
 	Payment_InitiateDeposit_FullMethodName       = "/payment.service.v1.Payment/InitiateDeposit"
 	Payment_InitiateWithdraw_FullMethodName      = "/payment.service.v1.Payment/InitiateWithdraw"
+	Payment_DepositCallback_FullMethodName       = "/payment.service.v1.Payment/DepositCallback"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -40,6 +41,9 @@ type PaymentClient interface {
 	InitiateDeposit(ctx context.Context, in *InitiateDepositRequest, opts ...grpc.CallOption) (*InitiateDepositResponse, error)
 	// Initiate a withdrawal transaction
 	InitiateWithdraw(ctx context.Context, in *InitiateWithdrawRequest, opts ...grpc.CallOption) (*InitiateWithdrawResponse, error)
+	// Deposit callback
+	// This endpoint handles callbacks from payment gateways.
+	DepositCallback(ctx context.Context, in *DepositCallbackRequest, opts ...grpc.CallOption) (*DepositCallbackResponse, error)
 }
 
 type paymentClient struct {
@@ -100,6 +104,16 @@ func (c *paymentClient) InitiateWithdraw(ctx context.Context, in *InitiateWithdr
 	return out, nil
 }
 
+func (c *paymentClient) DepositCallback(ctx context.Context, in *DepositCallbackRequest, opts ...grpc.CallOption) (*DepositCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DepositCallbackResponse)
+	err := c.cc.Invoke(ctx, Payment_DepositCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentServer is the server API for Payment service.
 // All implementations must embed UnimplementedPaymentServer
 // for forward compatibility.
@@ -114,6 +128,9 @@ type PaymentServer interface {
 	InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error)
 	// Initiate a withdrawal transaction
 	InitiateWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error)
+	// Deposit callback
+	// This endpoint handles callbacks from payment gateways.
+	DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -138,6 +155,9 @@ func (UnimplementedPaymentServer) InitiateDeposit(context.Context, *InitiateDepo
 }
 func (UnimplementedPaymentServer) InitiateWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InitiateWithdraw not implemented")
+}
+func (UnimplementedPaymentServer) DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DepositCallback not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -250,6 +270,24 @@ func _Payment_InitiateWithdraw_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_DepositCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DepositCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).DepositCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_DepositCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).DepositCallback(ctx, req.(*DepositCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Payment_ServiceDesc is the grpc.ServiceDesc for Payment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -276,6 +314,10 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "InitiateWithdraw",
 			Handler:    _Payment_InitiateWithdraw_Handler,
+		},
+		{
+			MethodName: "DepositCallback",
+			Handler:    _Payment_DepositCallback_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

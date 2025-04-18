@@ -10,6 +10,17 @@ option go_package = "github.com/infigaming-com/meepo-api/payment/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.payment.service.v1";
 
+// Error codes for payment API responses
+enum ErrorCode {
+  ERROR_UNSPECIFIED = 0;
+  ERROR_INVALID_PARAMETER = 1000; // Invalid parameter in request
+  ERROR_AUTHENTICATION_FAILED = 1001; // Authentication failed
+  ERROR_SIGNATURE_INVALID = 1002; // Signature verification failed
+  ERROR_TIMESTAMP_EXPIRED = 1003; // Timestamp in the request has expired
+  ERROR_MERCHANT_NOT_FOUND = 1004; // Merchant ID not found
+  ERROR_INTERNAL = 2000; // Internal server error
+}
+
 // Request to get payment method list
 message GetPaymentMethodListRequest {
 }
@@ -136,6 +147,28 @@ message InitiateWithdrawResponse {
   WithdrawTransactionInfo data = 3;
 }
 
+// Request for deposit callback
+message DepositCallbackRequest {
+  string transactionNo = 1 [json_name="transactionNo"];
+  string gatewayOrderNo = 2 [json_name="gatewayOrderNo"];
+  string operatorOrderNo = 3 [json_name="operatorOrderNo"];
+  string orderStatus = 4 [json_name="orderStatus"];
+  string payTime = 5 [json_name="payTime"];
+  string createTime = 6 [json_name="createTime"];
+  int64 amount = 7;
+  int64 money = 8;
+  string sign = 9 [json_name="sign"]; // HMAC-SHA256签名，用于验证请求的合法性
+  string timestamp = 10 [json_name="timestamp"]; // 请求时间戳，用于防止重放攻击
+  string nonce = 11 [json_name="nonce"]; // 随机字符串，确保每次请求的唯一性
+}
+
+// Response for deposit callback
+message DepositCallbackResponse {
+  string msg = 1;
+  int32 code = 2;
+  string error_message = 3 [json_name="errorMessage"]; // Detailed error message in case of authentication failure
+}
+
 service Payment {
   // Get list of payment methods
   rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
@@ -173,6 +206,15 @@ service Payment {
   rpc InitiateWithdraw(InitiateWithdrawRequest) returns (InitiateWithdrawResponse) {
     option (google.api.http) = {
       post: "/api/payment/withdraw/initiate"
+      body: "*"
+    };
+  }
+
+  // Deposit callback
+  // This endpoint handles callbacks from payment gateways.
+  rpc DepositCallback(DepositCallbackRequest) returns (DepositCallbackResponse) {
+    option (google.api.http) = {
+      post: "/api/payment/deposit/callback"
       body: "*"
     };
   }

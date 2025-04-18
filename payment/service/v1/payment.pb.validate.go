@@ -2085,3 +2085,235 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = InitiateWithdrawResponseValidationError{}
+
+// Validate checks the field values on DepositCallbackRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DepositCallbackRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DepositCallbackRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DepositCallbackRequestMultiError, or nil if none found.
+func (m *DepositCallbackRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DepositCallbackRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionNo
+
+	// no validation rules for GatewayOrderNo
+
+	// no validation rules for OperatorOrderNo
+
+	// no validation rules for OrderStatus
+
+	// no validation rules for PayTime
+
+	// no validation rules for CreateTime
+
+	// no validation rules for Amount
+
+	// no validation rules for Money
+
+	// no validation rules for Sign
+
+	// no validation rules for Timestamp
+
+	// no validation rules for Nonce
+
+	if len(errors) > 0 {
+		return DepositCallbackRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DepositCallbackRequestMultiError is an error wrapping multiple validation
+// errors returned by DepositCallbackRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DepositCallbackRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DepositCallbackRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DepositCallbackRequestMultiError) AllErrors() []error { return m }
+
+// DepositCallbackRequestValidationError is the validation error returned by
+// DepositCallbackRequest.Validate if the designated constraints aren't met.
+type DepositCallbackRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DepositCallbackRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DepositCallbackRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DepositCallbackRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DepositCallbackRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DepositCallbackRequestValidationError) ErrorName() string {
+	return "DepositCallbackRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DepositCallbackRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDepositCallbackRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DepositCallbackRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DepositCallbackRequestValidationError{}
+
+// Validate checks the field values on DepositCallbackResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DepositCallbackResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DepositCallbackResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DepositCallbackResponseMultiError, or nil if none found.
+func (m *DepositCallbackResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DepositCallbackResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Msg
+
+	// no validation rules for Code
+
+	// no validation rules for ErrorMessage
+
+	if len(errors) > 0 {
+		return DepositCallbackResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DepositCallbackResponseMultiError is an error wrapping multiple validation
+// errors returned by DepositCallbackResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DepositCallbackResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DepositCallbackResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DepositCallbackResponseMultiError) AllErrors() []error { return m }
+
+// DepositCallbackResponseValidationError is the validation error returned by
+// DepositCallbackResponse.Validate if the designated constraints aren't met.
+type DepositCallbackResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DepositCallbackResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DepositCallbackResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DepositCallbackResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DepositCallbackResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DepositCallbackResponseValidationError) ErrorName() string {
+	return "DepositCallbackResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DepositCallbackResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDepositCallbackResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DepositCallbackResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DepositCallbackResponseValidationError{}
