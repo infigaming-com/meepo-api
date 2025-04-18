@@ -6,6 +6,18 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /v1/game/healthcheck:
+        get:
+            tags:
+                - Game
+            operationId: Game_HealthCheck
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/game.service.v1.HealthCheckResponse'
     /v1/operator/add:
         post:
             tags:
@@ -492,6 +504,11 @@ components:
             properties:
                 status:
                     type: string
+        game.service.v1.HealthCheckResponse:
+            type: object
+            properties:
+                status:
+                    type: string
         payment.service.v1.HealthCheckResponse:
             type: object
             properties:
@@ -542,6 +559,7 @@ components:
                     items:
                         $ref: '#/components/schemas/system.service.v1.Currency'
 tags:
+    - name: Game
     - name: Operator
       description: User service provides authentication and user management functionality.
     - name: Payment
