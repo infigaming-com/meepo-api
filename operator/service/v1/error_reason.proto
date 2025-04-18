@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package api.operator.service.v1;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/operator/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.operator.service.v1";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  UNSPECIFIED = 0;
+  OPERATOR_NOT_FOUND = 20000 [(errors.code) = 404];
+  OPERATOR_ALREADY_EXISTS = 20001 [(errors.code) = 409];
+  LOCK_OPERATOR_FAILED = 20002;
+  ADD_OPERATOR_FAILED = 20003;
+}
