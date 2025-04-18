@@ -100,7 +100,6 @@ func (x *CreateOperatorRequest) GetEnabled() bool {
 
 type CreateOperatorResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -133,13 +132,6 @@ func (x *CreateOperatorResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateOperatorResponse.ProtoReflect.Descriptor instead.
 func (*CreateOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *CreateOperatorResponse) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
 }
 
 type UpdateOperatorRequest struct {
@@ -340,7 +332,6 @@ func (x *DeleteOperatorRequest) GetOperatorId() string {
 
 type DeleteOperatorResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -375,13 +366,6 @@ func (*DeleteOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *DeleteOperatorResponse) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
 var File_game_service_v1_game_proto protoreflect.FileDescriptor
 
 const file_game_service_v1_game_proto_rawDesc = "" +
@@ -394,9 +378,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12\x1d\n" +
 	"\n" +
 	"api_secret\x18\x04 \x01(\tR\tapiSecret\x12\x18\n" +
-	"\aenabled\x18\x05 \x01(\bR\aenabled\"0\n" +
-	"\x16CreateOperatorResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status\"\xc0\x01\n" +
+	"\aenabled\x18\x05 \x01(\bR\aenabled\"\x18\n" +
+	"\x16CreateOperatorResponse\"\xc0\x01\n" +
 	"\x15UpdateOperatorRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\tR\n" +
 	"operatorId\x124\n" +
@@ -415,9 +398,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\aenabled\x18\x05 \x01(\bR\aenabled\"8\n" +
 	"\x15DeleteOperatorRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\tR\n" +
-	"operatorId\"0\n" +
-	"\x16DeleteOperatorResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status2\xb5\x02\n" +
+	"operatorId\"\x18\n" +
+	"\x16DeleteOperatorResponse2\xb5\x02\n" +
 	"\x04Game\x12c\n" +
 	"\x0eCreateOperator\x12&.game.service.v1.CreateOperatorRequest\x1a'.game.service.v1.CreateOperatorResponse\"\x00\x12c\n" +
 	"\x0eUpdateOperator\x12&.game.service.v1.UpdateOperatorRequest\x1a'.game.service.v1.UpdateOperatorResponse\"\x00\x12c\n" +

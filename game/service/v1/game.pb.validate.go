@@ -169,8 +169,6 @@ func (m *CreateOperatorResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Status
-
 	if len(errors) > 0 {
 		return CreateOperatorResponseMultiError(errors)
 	}
@@ -600,8 +598,6 @@ func (m *DeleteOperatorResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for Status
 
 	if len(errors) > 0 {
 		return DeleteOperatorResponseMultiError(errors)

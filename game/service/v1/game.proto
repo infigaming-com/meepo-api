@@ -28,7 +28,6 @@ message CreateOperatorRequest {
 }
 
 message CreateOperatorResponse {
-	string status = 1;
 }
 
 message UpdateOperatorRequest {
@@ -52,5 +51,4 @@ message DeleteOperatorRequest {
 }
 
 message DeleteOperatorResponse {
-	string status = 1;
 }
