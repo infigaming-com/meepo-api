@@ -9,12 +9,6 @@ option java_multiple_files = true;
 option java_package = "game.service.v1";
 
 service Game {
-	rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {
-		option (google.api.http) = {
-			get: "/v1/game/healthcheck"
-		};
-	};
-
 	rpc CreateOperator(CreateOperatorRequest) returns (CreateOperatorResponse) {
 	};
 
@@ -23,13 +17,6 @@ service Game {
 
 	rpc DeleteOperator(DeleteOperatorRequest) returns (DeleteOperatorResponse) {
 	};
-}
-
-message HealthCheckRequest {
-}
-
-message HealthCheckResponse {
-	string status = 1;
 }
 
 message CreateOperatorRequest {
@@ -41,11 +28,7 @@ message CreateOperatorRequest {
 }
 
 message CreateOperatorResponse {
-	string aggregator_operator_id = 1;
-	string operator_id = 2;
-	string api_key = 3;
-	string api_secret = 4;
-	bool enabled = 5;
+	string status = 1;
 }
 
 message UpdateOperatorRequest {
@@ -69,4 +52,5 @@ message DeleteOperatorRequest {
 }
 
 message DeleteOperatorResponse {
+	string status = 1;
 }

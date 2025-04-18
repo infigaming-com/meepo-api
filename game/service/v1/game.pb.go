@@ -22,86 +22,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type HealthCheckRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *HealthCheckRequest) Reset() {
-	*x = HealthCheckRequest{}
-	mi := &file_game_service_v1_game_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *HealthCheckRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HealthCheckRequest) ProtoMessage() {}
-
-func (x *HealthCheckRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HealthCheckRequest.ProtoReflect.Descriptor instead.
-func (*HealthCheckRequest) Descriptor() ([]byte, []int) {
-	return file_game_service_v1_game_proto_rawDescGZIP(), []int{0}
-}
-
-type HealthCheckResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *HealthCheckResponse) Reset() {
-	*x = HealthCheckResponse{}
-	mi := &file_game_service_v1_game_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *HealthCheckResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HealthCheckResponse) ProtoMessage() {}
-
-func (x *HealthCheckResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HealthCheckResponse.ProtoReflect.Descriptor instead.
-func (*HealthCheckResponse) Descriptor() ([]byte, []int) {
-	return file_game_service_v1_game_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *HealthCheckResponse) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
 type CreateOperatorRequest struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	AggregatorOperatorId string                 `protobuf:"bytes,1,opt,name=aggregator_operator_id,json=aggregatorOperatorId,proto3" json:"aggregator_operator_id,omitempty"`
@@ -115,7 +35,7 @@ type CreateOperatorRequest struct {
 
 func (x *CreateOperatorRequest) Reset() {
 	*x = CreateOperatorRequest{}
-	mi := &file_game_service_v1_game_proto_msgTypes[2]
+	mi := &file_game_service_v1_game_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -127,7 +47,7 @@ func (x *CreateOperatorRequest) String() string {
 func (*CreateOperatorRequest) ProtoMessage() {}
 
 func (x *CreateOperatorRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[2]
+	mi := &file_game_service_v1_game_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -140,7 +60,7 @@ func (x *CreateOperatorRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOperatorRequest.ProtoReflect.Descriptor instead.
 func (*CreateOperatorRequest) Descriptor() ([]byte, []int) {
-	return file_game_service_v1_game_proto_rawDescGZIP(), []int{2}
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CreateOperatorRequest) GetAggregatorOperatorId() string {
@@ -179,19 +99,15 @@ func (x *CreateOperatorRequest) GetEnabled() bool {
 }
 
 type CreateOperatorResponse struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	AggregatorOperatorId string                 `protobuf:"bytes,1,opt,name=aggregator_operator_id,json=aggregatorOperatorId,proto3" json:"aggregator_operator_id,omitempty"`
-	OperatorId           string                 `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	ApiKey               string                 `protobuf:"bytes,3,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
-	ApiSecret            string                 `protobuf:"bytes,4,opt,name=api_secret,json=apiSecret,proto3" json:"api_secret,omitempty"`
-	Enabled              bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateOperatorResponse) Reset() {
 	*x = CreateOperatorResponse{}
-	mi := &file_game_service_v1_game_proto_msgTypes[3]
+	mi := &file_game_service_v1_game_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -203,7 +119,7 @@ func (x *CreateOperatorResponse) String() string {
 func (*CreateOperatorResponse) ProtoMessage() {}
 
 func (x *CreateOperatorResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[3]
+	mi := &file_game_service_v1_game_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -216,42 +132,14 @@ func (x *CreateOperatorResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOperatorResponse.ProtoReflect.Descriptor instead.
 func (*CreateOperatorResponse) Descriptor() ([]byte, []int) {
-	return file_game_service_v1_game_proto_rawDescGZIP(), []int{3}
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateOperatorResponse) GetAggregatorOperatorId() string {
+func (x *CreateOperatorResponse) GetStatus() string {
 	if x != nil {
-		return x.AggregatorOperatorId
+		return x.Status
 	}
 	return ""
-}
-
-func (x *CreateOperatorResponse) GetOperatorId() string {
-	if x != nil {
-		return x.OperatorId
-	}
-	return ""
-}
-
-func (x *CreateOperatorResponse) GetApiKey() string {
-	if x != nil {
-		return x.ApiKey
-	}
-	return ""
-}
-
-func (x *CreateOperatorResponse) GetApiSecret() string {
-	if x != nil {
-		return x.ApiSecret
-	}
-	return ""
-}
-
-func (x *CreateOperatorResponse) GetEnabled() bool {
-	if x != nil {
-		return x.Enabled
-	}
-	return false
 }
 
 type UpdateOperatorRequest struct {
@@ -267,7 +155,7 @@ type UpdateOperatorRequest struct {
 
 func (x *UpdateOperatorRequest) Reset() {
 	*x = UpdateOperatorRequest{}
-	mi := &file_game_service_v1_game_proto_msgTypes[4]
+	mi := &file_game_service_v1_game_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -279,7 +167,7 @@ func (x *UpdateOperatorRequest) String() string {
 func (*UpdateOperatorRequest) ProtoMessage() {}
 
 func (x *UpdateOperatorRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[4]
+	mi := &file_game_service_v1_game_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -292,7 +180,7 @@ func (x *UpdateOperatorRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOperatorRequest.ProtoReflect.Descriptor instead.
 func (*UpdateOperatorRequest) Descriptor() ([]byte, []int) {
-	return file_game_service_v1_game_proto_rawDescGZIP(), []int{4}
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UpdateOperatorRequest) GetOperatorId() string {
@@ -343,7 +231,7 @@ type UpdateOperatorResponse struct {
 
 func (x *UpdateOperatorResponse) Reset() {
 	*x = UpdateOperatorResponse{}
-	mi := &file_game_service_v1_game_proto_msgTypes[5]
+	mi := &file_game_service_v1_game_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -355,7 +243,7 @@ func (x *UpdateOperatorResponse) String() string {
 func (*UpdateOperatorResponse) ProtoMessage() {}
 
 func (x *UpdateOperatorResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[5]
+	mi := &file_game_service_v1_game_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -368,7 +256,7 @@ func (x *UpdateOperatorResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOperatorResponse.ProtoReflect.Descriptor instead.
 func (*UpdateOperatorResponse) Descriptor() ([]byte, []int) {
-	return file_game_service_v1_game_proto_rawDescGZIP(), []int{5}
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UpdateOperatorResponse) GetAggregatorOperatorId() string {
@@ -415,7 +303,7 @@ type DeleteOperatorRequest struct {
 
 func (x *DeleteOperatorRequest) Reset() {
 	*x = DeleteOperatorRequest{}
-	mi := &file_game_service_v1_game_proto_msgTypes[6]
+	mi := &file_game_service_v1_game_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -427,7 +315,7 @@ func (x *DeleteOperatorRequest) String() string {
 func (*DeleteOperatorRequest) ProtoMessage() {}
 
 func (x *DeleteOperatorRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[6]
+	mi := &file_game_service_v1_game_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -440,7 +328,7 @@ func (x *DeleteOperatorRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOperatorRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOperatorRequest) Descriptor() ([]byte, []int) {
-	return file_game_service_v1_game_proto_rawDescGZIP(), []int{6}
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DeleteOperatorRequest) GetOperatorId() string {
@@ -452,13 +340,14 @@ func (x *DeleteOperatorRequest) GetOperatorId() string {
 
 type DeleteOperatorResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteOperatorResponse) Reset() {
 	*x = DeleteOperatorResponse{}
-	mi := &file_game_service_v1_game_proto_msgTypes[7]
+	mi := &file_game_service_v1_game_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -470,7 +359,7 @@ func (x *DeleteOperatorResponse) String() string {
 func (*DeleteOperatorResponse) ProtoMessage() {}
 
 func (x *DeleteOperatorResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[7]
+	mi := &file_game_service_v1_game_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -483,17 +372,21 @@ func (x *DeleteOperatorResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOperatorResponse.ProtoReflect.Descriptor instead.
 func (*DeleteOperatorResponse) Descriptor() ([]byte, []int) {
-	return file_game_service_v1_game_proto_rawDescGZIP(), []int{7}
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DeleteOperatorResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
 }
 
 var File_game_service_v1_game_proto protoreflect.FileDescriptor
 
 const file_game_service_v1_game_proto_rawDesc = "" +
 	"\n" +
-	"\x1agame/service/v1/game.proto\x12\x0fgame.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x14\n" +
-	"\x12HealthCheckRequest\"-\n" +
-	"\x13HealthCheckResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status\"\xc0\x01\n" +
+	"\x1agame/service/v1/game.proto\x12\x0fgame.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xc0\x01\n" +
 	"\x15CreateOperatorRequest\x124\n" +
 	"\x16aggregator_operator_id\x18\x01 \x01(\tR\x14aggregatorOperatorId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\tR\n" +
@@ -501,15 +394,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12\x1d\n" +
 	"\n" +
 	"api_secret\x18\x04 \x01(\tR\tapiSecret\x12\x18\n" +
-	"\aenabled\x18\x05 \x01(\bR\aenabled\"\xc1\x01\n" +
-	"\x16CreateOperatorResponse\x124\n" +
-	"\x16aggregator_operator_id\x18\x01 \x01(\tR\x14aggregatorOperatorId\x12\x1f\n" +
-	"\voperator_id\x18\x02 \x01(\tR\n" +
-	"operatorId\x12\x17\n" +
-	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12\x1d\n" +
-	"\n" +
-	"api_secret\x18\x04 \x01(\tR\tapiSecret\x12\x18\n" +
-	"\aenabled\x18\x05 \x01(\bR\aenabled\"\xc0\x01\n" +
+	"\aenabled\x18\x05 \x01(\bR\aenabled\"0\n" +
+	"\x16CreateOperatorResponse\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\"\xc0\x01\n" +
 	"\x15UpdateOperatorRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\tR\n" +
 	"operatorId\x124\n" +
@@ -528,10 +415,10 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\aenabled\x18\x05 \x01(\bR\aenabled\"8\n" +
 	"\x15DeleteOperatorRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\tR\n" +
-	"operatorId\"\x18\n" +
-	"\x16DeleteOperatorResponse2\xad\x03\n" +
-	"\x04Game\x12v\n" +
-	"\vHealthCheck\x12#.game.service.v1.HealthCheckRequest\x1a$.game.service.v1.HealthCheckResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/v1/game/healthcheck\x12c\n" +
+	"operatorId\"0\n" +
+	"\x16DeleteOperatorResponse\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status2\xb5\x02\n" +
+	"\x04Game\x12c\n" +
 	"\x0eCreateOperator\x12&.game.service.v1.CreateOperatorRequest\x1a'.game.service.v1.CreateOperatorResponse\"\x00\x12c\n" +
 	"\x0eUpdateOperator\x12&.game.service.v1.UpdateOperatorRequest\x1a'.game.service.v1.UpdateOperatorResponse\"\x00\x12c\n" +
 	"\x0eDeleteOperator\x12&.game.service.v1.DeleteOperatorRequest\x1a'.game.service.v1.DeleteOperatorResponse\"\x00BK\n" +
@@ -549,28 +436,24 @@ func file_game_service_v1_game_proto_rawDescGZIP() []byte {
 	return file_game_service_v1_game_proto_rawDescData
 }
 
-var file_game_service_v1_game_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_game_service_v1_game_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_game_service_v1_game_proto_goTypes = []any{
-	(*HealthCheckRequest)(nil),     // 0: game.service.v1.HealthCheckRequest
-	(*HealthCheckResponse)(nil),    // 1: game.service.v1.HealthCheckResponse
-	(*CreateOperatorRequest)(nil),  // 2: game.service.v1.CreateOperatorRequest
-	(*CreateOperatorResponse)(nil), // 3: game.service.v1.CreateOperatorResponse
-	(*UpdateOperatorRequest)(nil),  // 4: game.service.v1.UpdateOperatorRequest
-	(*UpdateOperatorResponse)(nil), // 5: game.service.v1.UpdateOperatorResponse
-	(*DeleteOperatorRequest)(nil),  // 6: game.service.v1.DeleteOperatorRequest
-	(*DeleteOperatorResponse)(nil), // 7: game.service.v1.DeleteOperatorResponse
+	(*CreateOperatorRequest)(nil),  // 0: game.service.v1.CreateOperatorRequest
+	(*CreateOperatorResponse)(nil), // 1: game.service.v1.CreateOperatorResponse
+	(*UpdateOperatorRequest)(nil),  // 2: game.service.v1.UpdateOperatorRequest
+	(*UpdateOperatorResponse)(nil), // 3: game.service.v1.UpdateOperatorResponse
+	(*DeleteOperatorRequest)(nil),  // 4: game.service.v1.DeleteOperatorRequest
+	(*DeleteOperatorResponse)(nil), // 5: game.service.v1.DeleteOperatorResponse
 }
 var file_game_service_v1_game_proto_depIdxs = []int32{
-	0, // 0: game.service.v1.Game.HealthCheck:input_type -> game.service.v1.HealthCheckRequest
-	2, // 1: game.service.v1.Game.CreateOperator:input_type -> game.service.v1.CreateOperatorRequest
-	4, // 2: game.service.v1.Game.UpdateOperator:input_type -> game.service.v1.UpdateOperatorRequest
-	6, // 3: game.service.v1.Game.DeleteOperator:input_type -> game.service.v1.DeleteOperatorRequest
-	1, // 4: game.service.v1.Game.HealthCheck:output_type -> game.service.v1.HealthCheckResponse
-	3, // 5: game.service.v1.Game.CreateOperator:output_type -> game.service.v1.CreateOperatorResponse
-	5, // 6: game.service.v1.Game.UpdateOperator:output_type -> game.service.v1.UpdateOperatorResponse
-	7, // 7: game.service.v1.Game.DeleteOperator:output_type -> game.service.v1.DeleteOperatorResponse
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	0, // 0: game.service.v1.Game.CreateOperator:input_type -> game.service.v1.CreateOperatorRequest
+	2, // 1: game.service.v1.Game.UpdateOperator:input_type -> game.service.v1.UpdateOperatorRequest
+	4, // 2: game.service.v1.Game.DeleteOperator:input_type -> game.service.v1.DeleteOperatorRequest
+	1, // 3: game.service.v1.Game.CreateOperator:output_type -> game.service.v1.CreateOperatorResponse
+	3, // 4: game.service.v1.Game.UpdateOperator:output_type -> game.service.v1.UpdateOperatorResponse
+	5, // 5: game.service.v1.Game.DeleteOperator:output_type -> game.service.v1.DeleteOperatorResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -587,7 +470,7 @@ func file_game_service_v1_game_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_game_service_v1_game_proto_rawDesc), len(file_game_service_v1_game_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

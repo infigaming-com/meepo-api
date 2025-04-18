@@ -19,7 +19,6 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Game_HealthCheck_FullMethodName    = "/game.service.v1.Game/HealthCheck"
 	Game_CreateOperator_FullMethodName = "/game.service.v1.Game/CreateOperator"
 	Game_UpdateOperator_FullMethodName = "/game.service.v1.Game/UpdateOperator"
 	Game_DeleteOperator_FullMethodName = "/game.service.v1.Game/DeleteOperator"
@@ -29,7 +28,6 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GameClient interface {
-	HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error)
 	CreateOperator(ctx context.Context, in *CreateOperatorRequest, opts ...grpc.CallOption) (*CreateOperatorResponse, error)
 	UpdateOperator(ctx context.Context, in *UpdateOperatorRequest, opts ...grpc.CallOption) (*UpdateOperatorResponse, error)
 	DeleteOperator(ctx context.Context, in *DeleteOperatorRequest, opts ...grpc.CallOption) (*DeleteOperatorResponse, error)
@@ -41,16 +39,6 @@ type gameClient struct {
 
 func NewGameClient(cc grpc.ClientConnInterface) GameClient {
 	return &gameClient{cc}
-}
-
-func (c *gameClient) HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(HealthCheckResponse)
-	err := c.cc.Invoke(ctx, Game_HealthCheck_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *gameClient) CreateOperator(ctx context.Context, in *CreateOperatorRequest, opts ...grpc.CallOption) (*CreateOperatorResponse, error) {
@@ -87,7 +75,6 @@ func (c *gameClient) DeleteOperator(ctx context.Context, in *DeleteOperatorReque
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
 type GameServer interface {
-	HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error)
 	CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error)
 	UpdateOperator(context.Context, *UpdateOperatorRequest) (*UpdateOperatorResponse, error)
 	DeleteOperator(context.Context, *DeleteOperatorRequest) (*DeleteOperatorResponse, error)
@@ -101,9 +88,6 @@ type GameServer interface {
 // pointer dereference when methods are called.
 type UnimplementedGameServer struct{}
 
-func (UnimplementedGameServer) HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HealthCheck not implemented")
-}
 func (UnimplementedGameServer) CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOperator not implemented")
 }
@@ -132,24 +116,6 @@ func RegisterGameServer(s grpc.ServiceRegistrar, srv GameServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&Game_ServiceDesc, srv)
-}
-
-func _Game_HealthCheck_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HealthCheckRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GameServer).HealthCheck(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Game_HealthCheck_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GameServer).HealthCheck(ctx, req.(*HealthCheckRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _Game_CreateOperator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -213,10 +179,6 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "game.service.v1.Game",
 	HandlerType: (*GameServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "HealthCheck",
-			Handler:    _Game_HealthCheck_Handler,
-		},
 		{
 			MethodName: "CreateOperator",
 			Handler:    _Game_CreateOperator_Handler,
