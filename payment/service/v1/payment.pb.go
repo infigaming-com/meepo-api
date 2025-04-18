@@ -584,10 +584,10 @@ func (x *GetPaymentChannelListResponse) GetData() []*PaymentChannelInfo {
 // Request to initiate a deposit
 type InitiateDepositRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Amount        float64                `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	ChannelId     string                 `protobuf:"bytes,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	UserId        string                 `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Amount        float64                `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	Currency      string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	ChannelId     string                 `protobuf:"bytes,4,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	Extra         *structpb.Struct       `protobuf:"bytes,5,opt,name=extra,proto3" json:"extra,omitempty"` // Stores additional information like clientOrderId, productId, etc.
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -623,6 +623,13 @@ func (*InitiateDepositRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{9}
 }
 
+func (x *InitiateDepositRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
 func (x *InitiateDepositRequest) GetAmount() float64 {
 	if x != nil {
 		return x.Amount
@@ -640,13 +647,6 @@ func (x *InitiateDepositRequest) GetCurrency() string {
 func (x *InitiateDepositRequest) GetChannelId() string {
 	if x != nil {
 		return x.ChannelId
-	}
-	return ""
-}
-
-func (x *InitiateDepositRequest) GetUserId() string {
-	if x != nil {
-		return x.UserId
 	}
 	return ""
 }
@@ -823,19 +823,20 @@ func (x *InitiateDepositResponse) GetData() *TransactionInfo {
 // Request to initiate a withdrawal
 type InitiateWithdrawRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	Amount            float64                `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	OperatorOrderNo   string                 `protobuf:"bytes,2,opt,name=operator_order_no,json=operatorOrderNo,proto3" json:"operator_order_no,omitempty"`
-	BankAccount       string                 `protobuf:"bytes,3,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
-	BankAccountName   string                 `protobuf:"bytes,4,opt,name=bank_account_name,json=bankAccountName,proto3" json:"bank_account_name,omitempty"`
-	BankAccountMobile string                 `protobuf:"bytes,5,opt,name=bank_account_mobile,json=bankAccountMobile,proto3" json:"bank_account_mobile,omitempty"`
-	BankName          string                 `protobuf:"bytes,6,opt,name=bank_name,json=bankName,proto3" json:"bank_name,omitempty"`
-	BankCode          string                 `protobuf:"bytes,7,opt,name=bank_code,json=bankCode,proto3" json:"bank_code,omitempty"`
-	BankBranch        string                 `protobuf:"bytes,8,opt,name=bank_branch,json=bankBranch,proto3" json:"bank_branch,omitempty"`
-	BankId            string                 `protobuf:"bytes,9,opt,name=bank_id,json=bankId,proto3" json:"bank_id,omitempty"`
-	BankIfsc          string                 `protobuf:"bytes,10,opt,name=bank_ifsc,json=bankIfsc,proto3" json:"bank_ifsc,omitempty"`
-	BankNation        string                 `protobuf:"bytes,11,opt,name=bank_nation,json=bankNation,proto3" json:"bank_nation,omitempty"`
-	Channel           string                 `protobuf:"bytes,12,opt,name=channel,proto3" json:"channel,omitempty"`
-	Extra             *structpb.Struct       `protobuf:"bytes,13,opt,name=extra,proto3" json:"extra,omitempty"` // Stores additional information like clientId, note, etc.
+	UserId            string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Amount            float64                `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	OperatorOrderNo   string                 `protobuf:"bytes,3,opt,name=operator_order_no,json=operatorOrderNo,proto3" json:"operator_order_no,omitempty"`
+	BankAccount       string                 `protobuf:"bytes,4,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
+	BankAccountName   string                 `protobuf:"bytes,5,opt,name=bank_account_name,json=bankAccountName,proto3" json:"bank_account_name,omitempty"`
+	BankAccountMobile string                 `protobuf:"bytes,6,opt,name=bank_account_mobile,json=bankAccountMobile,proto3" json:"bank_account_mobile,omitempty"`
+	BankName          string                 `protobuf:"bytes,7,opt,name=bank_name,json=bankName,proto3" json:"bank_name,omitempty"`
+	BankCode          string                 `protobuf:"bytes,8,opt,name=bank_code,json=bankCode,proto3" json:"bank_code,omitempty"`
+	BankBranch        string                 `protobuf:"bytes,9,opt,name=bank_branch,json=bankBranch,proto3" json:"bank_branch,omitempty"`
+	BankId            string                 `protobuf:"bytes,10,opt,name=bank_id,json=bankId,proto3" json:"bank_id,omitempty"`
+	BankIfsc          string                 `protobuf:"bytes,11,opt,name=bank_ifsc,json=bankIfsc,proto3" json:"bank_ifsc,omitempty"`
+	BankNation        string                 `protobuf:"bytes,12,opt,name=bank_nation,json=bankNation,proto3" json:"bank_nation,omitempty"`
+	Channel           string                 `protobuf:"bytes,13,opt,name=channel,proto3" json:"channel,omitempty"`
+	Extra             *structpb.Struct       `protobuf:"bytes,14,opt,name=extra,proto3" json:"extra,omitempty"` // Stores additional information like clientId, note, etc.
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -868,6 +869,13 @@ func (x *InitiateWithdrawRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use InitiateWithdrawRequest.ProtoReflect.Descriptor instead.
 func (*InitiateWithdrawRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *InitiateWithdrawRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
 }
 
 func (x *InitiateWithdrawRequest) GetAmount() float64 {
@@ -1149,12 +1157,12 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03msg\x18\x01 \x01(\tR\x03msg\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12:\n" +
 	"\x04data\x18\x03 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x04data\"\xb3\x01\n" +
-	"\x16InitiateDepositRequest\x12\x16\n" +
-	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
+	"\x16InitiateDepositRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\x01R\x06amount\x12\x1a\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x03 \x01(\tR\tchannelId\x12\x17\n" +
-	"\auser_id\x18\x04 \x01(\tR\x06userId\x12-\n" +
+	"channel_id\x18\x04 \x01(\tR\tchannelId\x12-\n" +
 	"\x05extra\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xa0\x02\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x16\n" +
@@ -1169,24 +1177,25 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x17InitiateDepositResponse\x12\x10\n" +
 	"\x03msg\x18\x01 \x01(\tR\x03msg\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x127\n" +
-	"\x04data\x18\x03 \x01(\v2#.payment.service.v1.TransactionInfoR\x04data\"\xd7\x03\n" +
-	"\x17InitiateWithdrawRequest\x12\x16\n" +
-	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12*\n" +
-	"\x11operator_order_no\x18\x02 \x01(\tR\x0foperatorOrderNo\x12!\n" +
-	"\fbank_account\x18\x03 \x01(\tR\vbankAccount\x12*\n" +
-	"\x11bank_account_name\x18\x04 \x01(\tR\x0fbankAccountName\x12.\n" +
-	"\x13bank_account_mobile\x18\x05 \x01(\tR\x11bankAccountMobile\x12\x1b\n" +
-	"\tbank_name\x18\x06 \x01(\tR\bbankName\x12\x1b\n" +
-	"\tbank_code\x18\a \x01(\tR\bbankCode\x12\x1f\n" +
-	"\vbank_branch\x18\b \x01(\tR\n" +
+	"\x04data\x18\x03 \x01(\v2#.payment.service.v1.TransactionInfoR\x04data\"\xf0\x03\n" +
+	"\x17InitiateWithdrawRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\x01R\x06amount\x12*\n" +
+	"\x11operator_order_no\x18\x03 \x01(\tR\x0foperatorOrderNo\x12!\n" +
+	"\fbank_account\x18\x04 \x01(\tR\vbankAccount\x12*\n" +
+	"\x11bank_account_name\x18\x05 \x01(\tR\x0fbankAccountName\x12.\n" +
+	"\x13bank_account_mobile\x18\x06 \x01(\tR\x11bankAccountMobile\x12\x1b\n" +
+	"\tbank_name\x18\a \x01(\tR\bbankName\x12\x1b\n" +
+	"\tbank_code\x18\b \x01(\tR\bbankCode\x12\x1f\n" +
+	"\vbank_branch\x18\t \x01(\tR\n" +
 	"bankBranch\x12\x17\n" +
-	"\abank_id\x18\t \x01(\tR\x06bankId\x12\x1b\n" +
-	"\tbank_ifsc\x18\n" +
-	" \x01(\tR\bbankIfsc\x12\x1f\n" +
-	"\vbank_nation\x18\v \x01(\tR\n" +
+	"\abank_id\x18\n" +
+	" \x01(\tR\x06bankId\x12\x1b\n" +
+	"\tbank_ifsc\x18\v \x01(\tR\bbankIfsc\x12\x1f\n" +
+	"\vbank_nation\x18\f \x01(\tR\n" +
 	"bankNation\x12\x18\n" +
-	"\achannel\x18\f \x01(\tR\achannel\x12-\n" +
-	"\x05extra\x18\r \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xd7\x01\n" +
+	"\achannel\x18\r \x01(\tR\achannel\x12-\n" +
+	"\x05extra\x18\x0e \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xd7\x01\n" +
 	"\x17WithdrawTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12*\n" +
 	"\x11operator_order_no\x18\x02 \x01(\tR\x0foperatorOrderNo\x12\x16\n" +

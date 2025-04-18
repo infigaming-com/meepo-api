@@ -1233,13 +1233,13 @@ func (m *InitiateDepositRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for UserId
+
 	// no validation rules for Amount
 
 	// no validation rules for Currency
 
 	// no validation rules for ChannelId
-
-	// no validation rules for UserId
 
 	if all {
 		switch v := interface{}(m.GetExtra()).(type) {
@@ -1676,6 +1676,8 @@ func (m *InitiateWithdrawRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for UserId
 
 	// no validation rules for Amount
 

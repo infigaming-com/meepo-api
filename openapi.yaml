@@ -653,14 +653,14 @@ components:
         payment.service.v1.InitiateDepositRequest:
             type: object
             properties:
+                userId:
+                    type: string
                 amount:
                     type: number
                     format: double
                 currency:
                     type: string
                 channelId:
-                    type: string
-                userId:
                     type: string
                 extra:
                     type: object
@@ -679,6 +679,8 @@ components:
         payment.service.v1.InitiateWithdrawRequest:
             type: object
             properties:
+                userId:
+                    type: string
                 amount:
                     type: number
                     format: double
