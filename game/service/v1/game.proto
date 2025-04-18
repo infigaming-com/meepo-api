@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package game.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/game/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "game.service.v1";
+
+service Game {
+	rpc CreateOperator(CreateOperatorRequest) returns (CreateOperatorResponse) {
+	};
+
+	rpc UpdateOperator(UpdateOperatorRequest) returns (UpdateOperatorResponse) {
+	};
+
+	rpc DeleteOperator(DeleteOperatorRequest) returns (DeleteOperatorResponse) {
+	};
+}
+
+message CreateOperatorRequest {
+	string aggregator_operator_id = 1;
+	string operator_id = 2;
+	string api_key = 3;
+	string api_secret = 4;
+	bool enabled = 5;
+}
+
+message CreateOperatorResponse {
+}
+
+message UpdateOperatorRequest {
+	string operator_id = 1;
+	string aggregator_operator_id = 2;
+	string api_key = 3;
+	string api_secret = 4;
+	bool enabled = 5;
+}
+
+message UpdateOperatorResponse {
+	string aggregator_operator_id = 1;
+	string operator_id = 2;
+	string api_key = 3;
+	string api_secret = 4;
+	bool enabled = 5;
+}
+
+message DeleteOperatorRequest {
+	string operator_id = 1;
+}
+
+message DeleteOperatorResponse {
+}
