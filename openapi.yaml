@@ -6,25 +6,6 @@ info:
     title: ""
     version: 0.0.1
 paths:
-    /helloworld/{name}:
-        get:
-            tags:
-                - Greeter
-            description: Sends a greeting
-            operationId: Greeter_SayHello
-            parameters:
-                - name: name
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
     /v1/game/healthcheck:
         get:
             tags:
@@ -37,6 +18,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/game.service.v1.HealthCheckResponse'
+    /v1/operator/add:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_AddOperator
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.AddOperatorRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.AddOperatorResponse'
+    /v1/operator/update:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_UpdateOperator
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorResponse'
     /v1/payment/healthcheck:
         get:
             tags:
@@ -103,18 +120,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/system.service.v1.ListCurrenciesResponse'
-    /v1/system/healthcheck:
-        get:
-            tags:
-                - System
-            operationId: System_HealthCheck
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/system.service.v1.HealthCheckResponse'
     /v1/user/auth/login:
         post:
             tags:
@@ -294,6 +299,51 @@ paths:
                                 $ref: '#/components/schemas/api.wallet.service.v1.HealthCheckResponse'
 components:
     schemas:
+        api.operator.service.v1.AddOperatorRequest:
+            type: object
+            properties:
+                externalId:
+                    type: string
+                    description: operator id allocated by game aggregator
+                userId:
+                    type: string
+                    description: user id who owns the operator
+                name:
+                    type: string
+                    description: operator name
+                apiKey:
+                    type: string
+                    description: api key
+                apiKeySecret:
+                    type: string
+                    description: api key secret
+        api.operator.service.v1.AddOperatorResponse:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: operator id allocated by operator service
+        api.operator.service.v1.UpdateOperatorRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: operator id allocated by operator service
+                name:
+                    type: string
+                    description: operator name
+                enabled:
+                    type: boolean
+                    description: enabled
+                apiKey:
+                    type: string
+                    description: api key
+                apiKeySecret:
+                    type: string
+                    description: api key secret
+        api.operator.service.v1.UpdateOperatorResponse:
+            type: object
+            properties: {}
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -459,12 +509,6 @@ components:
             properties:
                 status:
                     type: string
-        helloworld.v1.HelloReply:
-            type: object
-            properties:
-                message:
-                    type: string
-            description: The response message containing the greetings
         payment.service.v1.HealthCheckResponse:
             type: object
             properties:
@@ -474,10 +518,7 @@ components:
             type: object
             properties:
                 currency:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
+                    $ref: '#/components/schemas/system.service.v1.Currency'
         system.service.v1.AddCurrencyResponse:
             type: object
             properties:
@@ -487,6 +528,12 @@ components:
             type: object
             properties:
                 currency:
+                    type: string
+                type:
+                    type: string
+                symbol:
+                    type: string
+                icon:
                     type: string
                 decimalPlaces:
                     type: integer
@@ -501,11 +548,6 @@ components:
             properties:
                 currencies:
                     $ref: '#/components/schemas/system.service.v1.Currency'
-        system.service.v1.HealthCheckResponse:
-            type: object
-            properties:
-                status:
-                    type: string
         system.service.v1.ListCurrenciesRequest:
             type: object
             properties: {}
@@ -518,8 +560,8 @@ components:
                         $ref: '#/components/schemas/system.service.v1.Currency'
 tags:
     - name: Game
-    - name: Greeter
-      description: The greeting service definition.
+    - name: Operator
+      description: User service provides authentication and user management functionality.
     - name: Payment
     - name: System
     - name: User
