@@ -35,17 +35,18 @@ const (
 	ErrorReason_SAVE_TOKEN_FAILED                   ErrorReason = 10006
 	ErrorReason_GET_USER_AUTH_FAILED                ErrorReason = 10007
 	ErrorReason_GET_USER_FAILED                     ErrorReason = 10008
-	ErrorReason_LOCK_USER_AUTH_FAILED               ErrorReason = 10009
-	ErrorReason_HASH_USER_PASSWORD_FAILED           ErrorReason = 10010
-	ErrorReason_GENERATE_USER_ID_FAILED             ErrorReason = 10011
-	ErrorReason_CREATE_USER_FAILED                  ErrorReason = 10012
-	ErrorReason_CREATE_USER_AUTH_FAILED             ErrorReason = 10013
-	ErrorReason_USER_DISABLED                       ErrorReason = 10014
-	ErrorReason_USER_LOGIN_BANNED                   ErrorReason = 10015
-	ErrorReason_INVALID_USER_PASSWORD               ErrorReason = 10016
-	ErrorReason_GET_TOKEN_WITH_REFRESH_TOKEN_FAILED ErrorReason = 10017
-	ErrorReason_GET_UNEXPIRED_TOKEN_FOR_USER_FAILED ErrorReason = 10018
-	ErrorReason_OAUTH_PROVIDER_NOT_SUPPORTED        ErrorReason = 10019
+	ErrorReason_UPDATE_USER_FAILED                  ErrorReason = 10009
+	ErrorReason_LOCK_USER_AUTH_FAILED               ErrorReason = 10010
+	ErrorReason_HASH_USER_PASSWORD_FAILED           ErrorReason = 10011
+	ErrorReason_GENERATE_USER_ID_FAILED             ErrorReason = 10012
+	ErrorReason_CREATE_USER_FAILED                  ErrorReason = 10013
+	ErrorReason_CREATE_USER_AUTH_FAILED             ErrorReason = 10014
+	ErrorReason_USER_DISABLED                       ErrorReason = 10015
+	ErrorReason_USER_LOGIN_BANNED                   ErrorReason = 10016
+	ErrorReason_INVALID_USER_PASSWORD               ErrorReason = 10017
+	ErrorReason_GET_TOKEN_WITH_REFRESH_TOKEN_FAILED ErrorReason = 10018
+	ErrorReason_GET_UNEXPIRED_TOKEN_FOR_USER_FAILED ErrorReason = 10019
+	ErrorReason_OAUTH_PROVIDER_NOT_SUPPORTED        ErrorReason = 10020
 )
 
 // Enum value maps for ErrorReason.
@@ -61,17 +62,18 @@ var (
 		10006: "SAVE_TOKEN_FAILED",
 		10007: "GET_USER_AUTH_FAILED",
 		10008: "GET_USER_FAILED",
-		10009: "LOCK_USER_AUTH_FAILED",
-		10010: "HASH_USER_PASSWORD_FAILED",
-		10011: "GENERATE_USER_ID_FAILED",
-		10012: "CREATE_USER_FAILED",
-		10013: "CREATE_USER_AUTH_FAILED",
-		10014: "USER_DISABLED",
-		10015: "USER_LOGIN_BANNED",
-		10016: "INVALID_USER_PASSWORD",
-		10017: "GET_TOKEN_WITH_REFRESH_TOKEN_FAILED",
-		10018: "GET_UNEXPIRED_TOKEN_FOR_USER_FAILED",
-		10019: "OAUTH_PROVIDER_NOT_SUPPORTED",
+		10009: "UPDATE_USER_FAILED",
+		10010: "LOCK_USER_AUTH_FAILED",
+		10011: "HASH_USER_PASSWORD_FAILED",
+		10012: "GENERATE_USER_ID_FAILED",
+		10013: "CREATE_USER_FAILED",
+		10014: "CREATE_USER_AUTH_FAILED",
+		10015: "USER_DISABLED",
+		10016: "USER_LOGIN_BANNED",
+		10017: "INVALID_USER_PASSWORD",
+		10018: "GET_TOKEN_WITH_REFRESH_TOKEN_FAILED",
+		10019: "GET_UNEXPIRED_TOKEN_FOR_USER_FAILED",
+		10020: "OAUTH_PROVIDER_NOT_SUPPORTED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                         0,
@@ -84,17 +86,18 @@ var (
 		"SAVE_TOKEN_FAILED":                   10006,
 		"GET_USER_AUTH_FAILED":                10007,
 		"GET_USER_FAILED":                     10008,
-		"LOCK_USER_AUTH_FAILED":               10009,
-		"HASH_USER_PASSWORD_FAILED":           10010,
-		"GENERATE_USER_ID_FAILED":             10011,
-		"CREATE_USER_FAILED":                  10012,
-		"CREATE_USER_AUTH_FAILED":             10013,
-		"USER_DISABLED":                       10014,
-		"USER_LOGIN_BANNED":                   10015,
-		"INVALID_USER_PASSWORD":               10016,
-		"GET_TOKEN_WITH_REFRESH_TOKEN_FAILED": 10017,
-		"GET_UNEXPIRED_TOKEN_FOR_USER_FAILED": 10018,
-		"OAUTH_PROVIDER_NOT_SUPPORTED":        10019,
+		"UPDATE_USER_FAILED":                  10009,
+		"LOCK_USER_AUTH_FAILED":               10010,
+		"HASH_USER_PASSWORD_FAILED":           10011,
+		"GENERATE_USER_ID_FAILED":             10012,
+		"CREATE_USER_FAILED":                  10013,
+		"CREATE_USER_AUTH_FAILED":             10014,
+		"USER_DISABLED":                       10015,
+		"USER_LOGIN_BANNED":                   10016,
+		"INVALID_USER_PASSWORD":               10017,
+		"GET_TOKEN_WITH_REFRESH_TOKEN_FAILED": 10018,
+		"GET_UNEXPIRED_TOKEN_FOR_USER_FAILED": 10019,
+		"OAUTH_PROVIDER_NOT_SUPPORTED":        10020,
 	}
 )
 
@@ -129,7 +132,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x8a\x05\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa3\x05\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x0eUSER_NOT_FOUND\x10\x90N\x1a\x04\xa8E\x94\x03\x12\x1e\n" +
@@ -140,18 +143,19 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x18GENERATE_TOKEN_ID_FAILED\x10\x95N\x12\x16\n" +
 	"\x11SAVE_TOKEN_FAILED\x10\x96N\x12\x19\n" +
 	"\x14GET_USER_AUTH_FAILED\x10\x97N\x12\x14\n" +
-	"\x0fGET_USER_FAILED\x10\x98N\x12\x1a\n" +
-	"\x15LOCK_USER_AUTH_FAILED\x10\x99N\x12\x1e\n" +
-	"\x19HASH_USER_PASSWORD_FAILED\x10\x9aN\x12\x1c\n" +
-	"\x17GENERATE_USER_ID_FAILED\x10\x9bN\x12\x17\n" +
-	"\x12CREATE_USER_FAILED\x10\x9cN\x12\x1c\n" +
-	"\x17CREATE_USER_AUTH_FAILED\x10\x9dN\x12\x18\n" +
-	"\rUSER_DISABLED\x10\x9eN\x1a\x04\xa8E\x91\x03\x12\x1c\n" +
-	"\x11USER_LOGIN_BANNED\x10\x9fN\x1a\x04\xa8E\x91\x03\x12 \n" +
-	"\x15INVALID_USER_PASSWORD\x10\xa0N\x1a\x04\xa8E\x91\x03\x12(\n" +
-	"#GET_TOKEN_WITH_REFRESH_TOKEN_FAILED\x10\xa1N\x12(\n" +
-	"#GET_UNEXPIRED_TOKEN_FOR_USER_FAILED\x10\xa2N\x12!\n" +
-	"\x1cOAUTH_PROVIDER_NOT_SUPPORTED\x10\xa3N\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x0fGET_USER_FAILED\x10\x98N\x12\x17\n" +
+	"\x12UPDATE_USER_FAILED\x10\x99N\x12\x1a\n" +
+	"\x15LOCK_USER_AUTH_FAILED\x10\x9aN\x12\x1e\n" +
+	"\x19HASH_USER_PASSWORD_FAILED\x10\x9bN\x12\x1c\n" +
+	"\x17GENERATE_USER_ID_FAILED\x10\x9cN\x12\x17\n" +
+	"\x12CREATE_USER_FAILED\x10\x9dN\x12\x1c\n" +
+	"\x17CREATE_USER_AUTH_FAILED\x10\x9eN\x12\x18\n" +
+	"\rUSER_DISABLED\x10\x9fN\x1a\x04\xa8E\x91\x03\x12\x1c\n" +
+	"\x11USER_LOGIN_BANNED\x10\xa0N\x1a\x04\xa8E\x91\x03\x12 \n" +
+	"\x15INVALID_USER_PASSWORD\x10\xa1N\x1a\x04\xa8E\x91\x03\x12(\n" +
+	"#GET_TOKEN_WITH_REFRESH_TOKEN_FAILED\x10\xa2N\x12(\n" +
+	"#GET_UNEXPIRED_TOKEN_FOR_USER_FAILED\x10\xa3N\x12!\n" +
+	"\x1cOAUTH_PROVIDER_NOT_SUPPORTED\x10\xa4N\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
