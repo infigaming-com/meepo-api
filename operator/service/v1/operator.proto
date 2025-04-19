@@ -76,14 +76,15 @@ message UpdateOperatorRequest {
 message UpdateOperatorResponse {}
 
 message AddOrUpdateCurrencyRequest {
-	string currency = 2;
-	bool enabled = 3;
+	string currency = 1;
+	bool enabled = 2;
+	bool hidden = 3;
 }
 
 message AddOrUpdateCurrencyResponse {}
 
 message UpdateOperatorCurrencyRequest {
-	string id = 1;
+	string operator_id = 1;
 	string currency = 2;
 	bool enabled = 3;
 }
@@ -91,17 +92,17 @@ message UpdateOperatorCurrencyRequest {
 message UpdateOperatorCurrencyResponse {}
 
 message GetOperatorCurrenciesRequest {
-	string id = 1;
-	// Optional filter to only return enabled or disabled currencies
-	optional bool enabled = 2;
-	// Optional list of specific currencies to return
-	repeated string currencies = 3;
+	string operator_id = 1;
+	// Filter to return specific currencies only.
+	// If not provided, all currencies will be returned
+	repeated string currencies = 2;
 }
 
 message GetOperatorCurrenciesResponse {
 	message Currency {
 		string currency = 1;
 		bool enabled = 2;
+		bool hidden = 3;
 	}
 	repeated Currency currencies = 1;
 }
