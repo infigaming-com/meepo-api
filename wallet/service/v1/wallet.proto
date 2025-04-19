@@ -10,6 +10,9 @@ option java_package = "api.wallet.service.v1";
 
 service Wallet {
 	rpc AddUser (AddUserRequest) returns (AddUserResponse) {}
+
+	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {}
+
 	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {
 		option (google.api.http) = {
 			get: "/v1/wallet/balance/{user_id}"
@@ -18,10 +21,20 @@ service Wallet {
 }
 
 message AddUserRequest {
-	string user_id = 1;
+	string id = 1;
+	string operator_id = 2;
 }
 
-message AddUserResponse {}
+message AddUserResponse {
+	string id = 1;
+}
+
+message UpdateUserRequest {
+	string id = 1;
+	bool enabled = 2;
+}
+
+message UpdateUserResponse {}
 
 message GetUserBalanceRequest {
 	string user_id = 1;

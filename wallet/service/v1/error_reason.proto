@@ -12,4 +12,6 @@ enum ErrorReason {
   option (errors.default_code) = 500;
 
   UNSPECIFIED = 0;
+  USER_NOT_FOUND = 10001 [(errors.code) = 404];
+  USER_DISABLED = 10002 [(errors.code) = 401];
 }
