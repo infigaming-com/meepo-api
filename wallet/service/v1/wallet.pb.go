@@ -211,6 +211,7 @@ type AddOrUpdateOperatorsCurrencyRequest struct {
 	OperatorIds   []string               `protobuf:"bytes,1,rep,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
 	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Hidden        bool                   `protobuf:"varint,4,opt,name=hidden,proto3" json:"hidden,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -266,6 +267,13 @@ func (x *AddOrUpdateOperatorsCurrencyRequest) GetEnabled() bool {
 	return false
 }
 
+func (x *AddOrUpdateOperatorsCurrencyRequest) GetHidden() bool {
+	if x != nil {
+		return x.Hidden
+	}
+	return false
+}
+
 type AddOrUpdateOperatorsCurrencyResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -305,8 +313,8 @@ func (*AddOrUpdateOperatorsCurrencyResponse) Descriptor() ([]byte, []int) {
 type UpdateUserCurrencyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency      string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled       bool                   `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -569,16 +577,17 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\voperator_id\x18\x02 \x01(\tR\n" +
 	"operatorId\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"\x14\n" +
-	"\x12UpdateUserResponse\"~\n" +
+	"\x12UpdateUserResponse\"\x96\x01\n" +
 	"#AddOrUpdateOperatorsCurrencyRequest\x12!\n" +
 	"\foperator_ids\x18\x01 \x03(\tR\voperatorIds\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
-	"\aenabled\x18\x03 \x01(\bR\aenabled\"&\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled\x12\x16\n" +
+	"\x06hidden\x18\x04 \x01(\bR\x06hidden\"&\n" +
 	"$AddOrUpdateOperatorsCurrencyResponse\"j\n" +
 	"\x19UpdateUserCurrencyRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
-	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x18\n" +
-	"\aenabled\x18\x04 \x01(\bR\aenabled\"\x1c\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled\"\x1c\n" +
 	"\x1aUpdateUserCurrencyResponse\"1\n" +
 	"\x16GetUserBalancesRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xf7\x01\n" +
