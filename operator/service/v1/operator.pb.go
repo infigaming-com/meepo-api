@@ -267,8 +267,9 @@ func (*UpdateOperatorResponse) Descriptor() ([]byte, []int) {
 
 type AddOrUpdateCurrencyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Enabled       bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Hidden        bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -317,6 +318,13 @@ func (x *AddOrUpdateCurrencyRequest) GetEnabled() bool {
 	return false
 }
 
+func (x *AddOrUpdateCurrencyRequest) GetHidden() bool {
+	if x != nil {
+		return x.Hidden
+	}
+	return false
+}
+
 type AddOrUpdateCurrencyResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -355,7 +363,7 @@ func (*AddOrUpdateCurrencyResponse) Descriptor() ([]byte, []int) {
 
 type UpdateOperatorCurrencyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	OperatorId    string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -392,9 +400,9 @@ func (*UpdateOperatorCurrencyRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *UpdateOperatorCurrencyRequest) GetId() string {
+func (x *UpdateOperatorCurrencyRequest) GetOperatorId() string {
 	if x != nil {
-		return x.Id
+		return x.OperatorId
 	}
 	return ""
 }
@@ -450,12 +458,15 @@ func (*UpdateOperatorCurrencyResponse) Descriptor() ([]byte, []int) {
 }
 
 type GetOperatorCurrenciesRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	Id    string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// Optional filter to only return enabled or disabled currencies
 	Enabled *bool `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	// Optional list of specific currencies to return
-	Currencies    []string `protobuf:"bytes,3,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	// Optional filter to only return hidden or visible currencies
+	Hidden *bool `protobuf:"varint,3,opt,name=hidden,proto3,oneof" json:"hidden,omitempty"`
+	// Optional filter to only return specific currencies
+	// If not provided, all currencies will be returned
+	Currencies    []string `protobuf:"bytes,4,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -490,9 +501,9 @@ func (*GetOperatorCurrenciesRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetOperatorCurrenciesRequest) GetId() string {
+func (x *GetOperatorCurrenciesRequest) GetOperatorId() string {
 	if x != nil {
-		return x.Id
+		return x.OperatorId
 	}
 	return ""
 }
@@ -500,6 +511,13 @@ func (x *GetOperatorCurrenciesRequest) GetId() string {
 func (x *GetOperatorCurrenciesRequest) GetEnabled() bool {
 	if x != nil && x.Enabled != nil {
 		return *x.Enabled
+	}
+	return false
+}
+
+func (x *GetOperatorCurrenciesRequest) GetHidden() bool {
+	if x != nil && x.Hidden != nil {
+		return *x.Hidden
 	}
 	return false
 }
@@ -633,24 +651,29 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\n" +
 	"\b_api_keyB\x11\n" +
 	"\x0f_api_key_secret\"\x18\n" +
-	"\x16UpdateOperatorResponse\"R\n" +
+	"\x16UpdateOperatorResponse\"j\n" +
 	"\x1aAddOrUpdateCurrencyRequest\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
-	"\aenabled\x18\x03 \x01(\bR\aenabled\"\x1d\n" +
-	"\x1bAddOrUpdateCurrencyResponse\"e\n" +
-	"\x1dUpdateOperatorCurrencyRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
+	"\x06hidden\x18\x03 \x01(\bR\x06hidden\"\x1d\n" +
+	"\x1bAddOrUpdateCurrencyResponse\"v\n" +
+	"\x1dUpdateOperatorCurrencyRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"operatorId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\" \n" +
-	"\x1eUpdateOperatorCurrencyResponse\"y\n" +
-	"\x1cGetOperatorCurrenciesRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
-	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01\x12\x1e\n" +
+	"\x1eUpdateOperatorCurrencyResponse\"\xb2\x01\n" +
+	"\x1cGetOperatorCurrenciesRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"operatorId\x12\x1d\n" +
+	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01\x12\x1b\n" +
+	"\x06hidden\x18\x03 \x01(\bH\x01R\x06hidden\x88\x01\x01\x12\x1e\n" +
 	"\n" +
-	"currencies\x18\x03 \x03(\tR\n" +
+	"currencies\x18\x04 \x03(\tR\n" +
 	"currenciesB\n" +
 	"\n" +
-	"\b_enabled\"\xc2\x01\n" +
+	"\b_enabledB\t\n" +
+	"\a_hidden\"\xc2\x01\n" +
 	"\x1dGetOperatorCurrenciesResponse\x12_\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\v2?.api.operator.service.v1.GetOperatorCurrenciesResponse.CurrencyR\n" +

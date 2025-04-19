@@ -499,6 +499,8 @@ func (m *AddOrUpdateCurrencyRequest) validate(all bool) error {
 
 	// no validation rules for Enabled
 
+	// no validation rules for Hidden
+
 	if len(errors) > 0 {
 		return AddOrUpdateCurrencyRequestMultiError(errors)
 	}
@@ -704,7 +706,7 @@ func (m *UpdateOperatorCurrencyRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	// no validation rules for OperatorId
 
 	// no validation rules for Currency
 
@@ -916,10 +918,14 @@ func (m *GetOperatorCurrenciesRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	// no validation rules for OperatorId
 
 	if m.Enabled != nil {
 		// no validation rules for Enabled
+	}
+
+	if m.Hidden != nil {
+		// no validation rules for Hidden
 	}
 
 	if len(errors) > 0 {
