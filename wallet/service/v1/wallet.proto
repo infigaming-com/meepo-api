@@ -9,11 +9,7 @@ option java_multiple_files = true;
 option java_package = "api.wallet.service.v1";
 
 service Wallet {
-	rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {
-		option (google.api.http) = {
-			get: "/v1/wallet/healthcheck"
-		};
-	}
+	rpc AddUser (AddUserRequest) returns (AddUserResponse) {}
 	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {
 		option (google.api.http) = {
 			get: "/v1/wallet/balance/{user_id}"
@@ -21,18 +17,22 @@ service Wallet {
 	}
 }
 
-message HealthCheckRequest {}
-
-message HealthCheckResponse {
-	string status = 1;
+message AddUserRequest {
+	string user_id = 1;
 }
+
+message AddUserResponse {}
 
 message GetUserBalanceRequest {
 	string user_id = 1;
 }
 
 message GetUserBalanceResponse {
-	int64 cash = 1;
-	int64 operator_bonus = 2;
-	int64 provider_bonus = 3;
+	message Balance {
+		string currency = 1;
+		int64 cash = 2;
+		int64 operator_bonus = 3;
+		int64 provider_bonus = 4;
+	}
+	repeated Balance balances = 1;
 }

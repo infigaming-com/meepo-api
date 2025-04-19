@@ -35,42 +35,44 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on HealthCheckRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *HealthCheckRequest) Validate() error {
+// Validate checks the field values on AddUserRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AddUserRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on HealthCheckRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// HealthCheckRequestMultiError, or nil if none found.
-func (m *HealthCheckRequest) ValidateAll() error {
+// ValidateAll checks the field values on AddUserRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AddUserRequestMultiError,
+// or nil if none found.
+func (m *AddUserRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *HealthCheckRequest) validate(all bool) error {
+func (m *AddUserRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
+	// no validation rules for UserId
+
 	if len(errors) > 0 {
-		return HealthCheckRequestMultiError(errors)
+		return AddUserRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// HealthCheckRequestMultiError is an error wrapping multiple validation errors
-// returned by HealthCheckRequest.ValidateAll() if the designated constraints
+// AddUserRequestMultiError is an error wrapping multiple validation errors
+// returned by AddUserRequest.ValidateAll() if the designated constraints
 // aren't met.
-type HealthCheckRequestMultiError []error
+type AddUserRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m HealthCheckRequestMultiError) Error() string {
+func (m AddUserRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -79,11 +81,11 @@ func (m HealthCheckRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m HealthCheckRequestMultiError) AllErrors() []error { return m }
+func (m AddUserRequestMultiError) AllErrors() []error { return m }
 
-// HealthCheckRequestValidationError is the validation error returned by
-// HealthCheckRequest.Validate if the designated constraints aren't met.
-type HealthCheckRequestValidationError struct {
+// AddUserRequestValidationError is the validation error returned by
+// AddUserRequest.Validate if the designated constraints aren't met.
+type AddUserRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -91,24 +93,22 @@ type HealthCheckRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e HealthCheckRequestValidationError) Field() string { return e.field }
+func (e AddUserRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e HealthCheckRequestValidationError) Reason() string { return e.reason }
+func (e AddUserRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e HealthCheckRequestValidationError) Cause() error { return e.cause }
+func (e AddUserRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e HealthCheckRequestValidationError) Key() bool { return e.key }
+func (e AddUserRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e HealthCheckRequestValidationError) ErrorName() string {
-	return "HealthCheckRequestValidationError"
-}
+func (e AddUserRequestValidationError) ErrorName() string { return "AddUserRequestValidationError" }
 
 // Error satisfies the builtin error interface
-func (e HealthCheckRequestValidationError) Error() string {
+func (e AddUserRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -120,14 +120,14 @@ func (e HealthCheckRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sHealthCheckRequest.%s: %s%s",
+		"invalid %sAddUserRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = HealthCheckRequestValidationError{}
+var _ error = AddUserRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -135,46 +135,44 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = HealthCheckRequestValidationError{}
+} = AddUserRequestValidationError{}
 
-// Validate checks the field values on HealthCheckResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *HealthCheckResponse) Validate() error {
+// Validate checks the field values on AddUserResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *AddUserResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on HealthCheckResponse with the rules
+// ValidateAll checks the field values on AddUserResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// HealthCheckResponseMultiError, or nil if none found.
-func (m *HealthCheckResponse) ValidateAll() error {
+// AddUserResponseMultiError, or nil if none found.
+func (m *AddUserResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *HealthCheckResponse) validate(all bool) error {
+func (m *AddUserResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Status
-
 	if len(errors) > 0 {
-		return HealthCheckResponseMultiError(errors)
+		return AddUserResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// HealthCheckResponseMultiError is an error wrapping multiple validation
-// errors returned by HealthCheckResponse.ValidateAll() if the designated
-// constraints aren't met.
-type HealthCheckResponseMultiError []error
+// AddUserResponseMultiError is an error wrapping multiple validation errors
+// returned by AddUserResponse.ValidateAll() if the designated constraints
+// aren't met.
+type AddUserResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m HealthCheckResponseMultiError) Error() string {
+func (m AddUserResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -183,11 +181,11 @@ func (m HealthCheckResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m HealthCheckResponseMultiError) AllErrors() []error { return m }
+func (m AddUserResponseMultiError) AllErrors() []error { return m }
 
-// HealthCheckResponseValidationError is the validation error returned by
-// HealthCheckResponse.Validate if the designated constraints aren't met.
-type HealthCheckResponseValidationError struct {
+// AddUserResponseValidationError is the validation error returned by
+// AddUserResponse.Validate if the designated constraints aren't met.
+type AddUserResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -195,24 +193,22 @@ type HealthCheckResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e HealthCheckResponseValidationError) Field() string { return e.field }
+func (e AddUserResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e HealthCheckResponseValidationError) Reason() string { return e.reason }
+func (e AddUserResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e HealthCheckResponseValidationError) Cause() error { return e.cause }
+func (e AddUserResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e HealthCheckResponseValidationError) Key() bool { return e.key }
+func (e AddUserResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e HealthCheckResponseValidationError) ErrorName() string {
-	return "HealthCheckResponseValidationError"
-}
+func (e AddUserResponseValidationError) ErrorName() string { return "AddUserResponseValidationError" }
 
 // Error satisfies the builtin error interface
-func (e HealthCheckResponseValidationError) Error() string {
+func (e AddUserResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -224,14 +220,14 @@ func (e HealthCheckResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sHealthCheckResponse.%s: %s%s",
+		"invalid %sAddUserResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = HealthCheckResponseValidationError{}
+var _ error = AddUserResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -239,7 +235,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = HealthCheckResponseValidationError{}
+} = AddUserResponseValidationError{}
 
 // Validate checks the field values on GetUserBalanceRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -367,11 +363,39 @@ func (m *GetUserBalanceResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Cash
+	for idx, item := range m.GetBalances() {
+		_, _ = idx, item
 
-	// no validation rules for OperatorBonus
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetUserBalanceResponseValidationError{
+						field:  fmt.Sprintf("Balances[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetUserBalanceResponseValidationError{
+						field:  fmt.Sprintf("Balances[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetUserBalanceResponseValidationError{
+					field:  fmt.Sprintf("Balances[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
 
-	// no validation rules for ProviderBonus
+	}
 
 	if len(errors) > 0 {
 		return GetUserBalanceResponseMultiError(errors)
@@ -452,3 +476,114 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetUserBalanceResponseValidationError{}
+
+// Validate checks the field values on GetUserBalanceResponse_Balance with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserBalanceResponse_Balance) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserBalanceResponse_Balance with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetUserBalanceResponse_BalanceMultiError, or nil if none found.
+func (m *GetUserBalanceResponse_Balance) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserBalanceResponse_Balance) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	// no validation rules for Cash
+
+	// no validation rules for OperatorBonus
+
+	// no validation rules for ProviderBonus
+
+	if len(errors) > 0 {
+		return GetUserBalanceResponse_BalanceMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserBalanceResponse_BalanceMultiError is an error wrapping multiple
+// validation errors returned by GetUserBalanceResponse_Balance.ValidateAll()
+// if the designated constraints aren't met.
+type GetUserBalanceResponse_BalanceMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserBalanceResponse_BalanceMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserBalanceResponse_BalanceMultiError) AllErrors() []error { return m }
+
+// GetUserBalanceResponse_BalanceValidationError is the validation error
+// returned by GetUserBalanceResponse_Balance.Validate if the designated
+// constraints aren't met.
+type GetUserBalanceResponse_BalanceValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserBalanceResponse_BalanceValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserBalanceResponse_BalanceValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserBalanceResponse_BalanceValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserBalanceResponse_BalanceValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserBalanceResponse_BalanceValidationError) ErrorName() string {
+	return "GetUserBalanceResponse_BalanceValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserBalanceResponse_BalanceValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserBalanceResponse_Balance.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserBalanceResponse_BalanceValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserBalanceResponse_BalanceValidationError{}

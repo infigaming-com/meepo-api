@@ -22,26 +22,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type HealthCheckRequest struct {
+type AddUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HealthCheckRequest) Reset() {
-	*x = HealthCheckRequest{}
+func (x *AddUserRequest) Reset() {
+	*x = AddUserRequest{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HealthCheckRequest) String() string {
+func (x *AddUserRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HealthCheckRequest) ProtoMessage() {}
+func (*AddUserRequest) ProtoMessage() {}
 
-func (x *HealthCheckRequest) ProtoReflect() protoreflect.Message {
+func (x *AddUserRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -53,32 +54,38 @@ func (x *HealthCheckRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HealthCheckRequest.ProtoReflect.Descriptor instead.
-func (*HealthCheckRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddUserRequest.ProtoReflect.Descriptor instead.
+func (*AddUserRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{0}
 }
 
-type HealthCheckResponse struct {
+func (x *AddUserRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type AddUserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HealthCheckResponse) Reset() {
-	*x = HealthCheckResponse{}
+func (x *AddUserResponse) Reset() {
+	*x = AddUserResponse{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HealthCheckResponse) String() string {
+func (x *AddUserResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HealthCheckResponse) ProtoMessage() {}
+func (*AddUserResponse) ProtoMessage() {}
 
-func (x *HealthCheckResponse) ProtoReflect() protoreflect.Message {
+func (x *AddUserResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -90,16 +97,9 @@ func (x *HealthCheckResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HealthCheckResponse.ProtoReflect.Descriptor instead.
-func (*HealthCheckResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddUserResponse.ProtoReflect.Descriptor instead.
+func (*AddUserResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *HealthCheckResponse) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
 }
 
 type GetUserBalanceRequest struct {
@@ -147,10 +147,8 @@ func (x *GetUserBalanceRequest) GetUserId() string {
 }
 
 type GetUserBalanceResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Cash          int64                  `protobuf:"varint,1,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus int64                  `protobuf:"varint,2,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus int64                  `protobuf:"varint,3,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	state         protoimpl.MessageState            `protogen:"open.v1"`
+	Balances      []*GetUserBalanceResponse_Balance `protobuf:"bytes,1,rep,name=balances,proto3" json:"balances,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -185,21 +183,75 @@ func (*GetUserBalanceResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetUserBalanceResponse) GetCash() int64 {
+func (x *GetUserBalanceResponse) GetBalances() []*GetUserBalanceResponse_Balance {
+	if x != nil {
+		return x.Balances
+	}
+	return nil
+}
+
+type GetUserBalanceResponse_Balance struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Cash          int64                  `protobuf:"varint,2,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus int64                  `protobuf:"varint,3,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus int64                  `protobuf:"varint,4,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserBalanceResponse_Balance) Reset() {
+	*x = GetUserBalanceResponse_Balance{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserBalanceResponse_Balance) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserBalanceResponse_Balance) ProtoMessage() {}
+
+func (x *GetUserBalanceResponse_Balance) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserBalanceResponse_Balance.ProtoReflect.Descriptor instead.
+func (*GetUserBalanceResponse_Balance) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{3, 0}
+}
+
+func (x *GetUserBalanceResponse_Balance) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetUserBalanceResponse_Balance) GetCash() int64 {
 	if x != nil {
 		return x.Cash
 	}
 	return 0
 }
 
-func (x *GetUserBalanceResponse) GetOperatorBonus() int64 {
+func (x *GetUserBalanceResponse_Balance) GetOperatorBonus() int64 {
 	if x != nil {
 		return x.OperatorBonus
 	}
 	return 0
 }
 
-func (x *GetUserBalanceResponse) GetProviderBonus() int64 {
+func (x *GetUserBalanceResponse_Balance) GetProviderBonus() int64 {
 	if x != nil {
 		return x.ProviderBonus
 	}
@@ -210,18 +262,21 @@ var File_wallet_service_v1_wallet_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
-	"\x1ewallet/service/v1/wallet.proto\x12\x15api.wallet.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x14\n" +
-	"\x12HealthCheckRequest\"-\n" +
-	"\x13HealthCheckResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status\"0\n" +
+	"\x1ewallet/service/v1/wallet.proto\x12\x15api.wallet.service.v1\x1a\x1cgoogle/api/annotations.proto\")\n" +
+	"\x0eAddUserRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"\x11\n" +
+	"\x0fAddUserResponse\"0\n" +
 	"\x15GetUserBalanceRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"z\n" +
-	"\x16GetUserBalanceResponse\x12\x12\n" +
-	"\x04cash\x18\x01 \x01(\x03R\x04cash\x12%\n" +
-	"\x0eoperator_bonus\x18\x02 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x03 \x01(\x03R\rproviderBonus2\xa5\x02\n" +
-	"\x06Wallet\x12\x84\x01\n" +
-	"\vHealthCheck\x12).api.wallet.service.v1.HealthCheckRequest\x1a*.api.wallet.service.v1.HealthCheckResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/wallet/healthcheck\x12\x93\x01\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xf5\x01\n" +
+	"\x16GetUserBalanceResponse\x12Q\n" +
+	"\bbalances\x18\x01 \x03(\v25.api.wallet.service.v1.GetUserBalanceResponse.BalanceR\bbalances\x1a\x87\x01\n" +
+	"\aBalance\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
+	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
+	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus2\xfa\x01\n" +
+	"\x06Wallet\x12Z\n" +
+	"\aAddUser\x12%.api.wallet.service.v1.AddUserRequest\x1a&.api.wallet.service.v1.AddUserResponse\"\x00\x12\x93\x01\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/v1/wallet/balance/{user_id}BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
@@ -237,23 +292,25 @@ func file_wallet_service_v1_wallet_proto_rawDescGZIP() []byte {
 	return file_wallet_service_v1_wallet_proto_rawDescData
 }
 
-var file_wallet_service_v1_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_wallet_service_v1_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_wallet_service_v1_wallet_proto_goTypes = []any{
-	(*HealthCheckRequest)(nil),     // 0: api.wallet.service.v1.HealthCheckRequest
-	(*HealthCheckResponse)(nil),    // 1: api.wallet.service.v1.HealthCheckResponse
-	(*GetUserBalanceRequest)(nil),  // 2: api.wallet.service.v1.GetUserBalanceRequest
-	(*GetUserBalanceResponse)(nil), // 3: api.wallet.service.v1.GetUserBalanceResponse
+	(*AddUserRequest)(nil),                 // 0: api.wallet.service.v1.AddUserRequest
+	(*AddUserResponse)(nil),                // 1: api.wallet.service.v1.AddUserResponse
+	(*GetUserBalanceRequest)(nil),          // 2: api.wallet.service.v1.GetUserBalanceRequest
+	(*GetUserBalanceResponse)(nil),         // 3: api.wallet.service.v1.GetUserBalanceResponse
+	(*GetUserBalanceResponse_Balance)(nil), // 4: api.wallet.service.v1.GetUserBalanceResponse.Balance
 }
 var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
-	0, // 0: api.wallet.service.v1.Wallet.HealthCheck:input_type -> api.wallet.service.v1.HealthCheckRequest
-	2, // 1: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
-	1, // 2: api.wallet.service.v1.Wallet.HealthCheck:output_type -> api.wallet.service.v1.HealthCheckResponse
-	3, // 3: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	4, // 0: api.wallet.service.v1.GetUserBalanceResponse.balances:type_name -> api.wallet.service.v1.GetUserBalanceResponse.Balance
+	0, // 1: api.wallet.service.v1.Wallet.AddUser:input_type -> api.wallet.service.v1.AddUserRequest
+	2, // 2: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
+	1, // 3: api.wallet.service.v1.Wallet.AddUser:output_type -> api.wallet.service.v1.AddUserResponse
+	3, // 4: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_wallet_proto_init() }
@@ -267,7 +324,7 @@ func file_wallet_service_v1_wallet_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wallet_service_v1_wallet_proto_rawDesc), len(file_wallet_service_v1_wallet_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

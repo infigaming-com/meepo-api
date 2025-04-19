@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Wallet_HealthCheck_FullMethodName    = "/api.wallet.service.v1.Wallet/HealthCheck"
+	Wallet_AddUser_FullMethodName        = "/api.wallet.service.v1.Wallet/AddUser"
 	Wallet_GetUserBalance_FullMethodName = "/api.wallet.service.v1.Wallet/GetUserBalance"
 )
 
@@ -27,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WalletClient interface {
-	HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error)
+	AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*AddUserResponse, error)
 	GetUserBalance(ctx context.Context, in *GetUserBalanceRequest, opts ...grpc.CallOption) (*GetUserBalanceResponse, error)
 }
 
@@ -39,10 +39,10 @@ func NewWalletClient(cc grpc.ClientConnInterface) WalletClient {
 	return &walletClient{cc}
 }
 
-func (c *walletClient) HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error) {
+func (c *walletClient) AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*AddUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(HealthCheckResponse)
-	err := c.cc.Invoke(ctx, Wallet_HealthCheck_FullMethodName, in, out, cOpts...)
+	out := new(AddUserResponse)
+	err := c.cc.Invoke(ctx, Wallet_AddUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ func (c *walletClient) GetUserBalance(ctx context.Context, in *GetUserBalanceReq
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
 type WalletServer interface {
-	HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error)
+	AddUser(context.Context, *AddUserRequest) (*AddUserResponse, error)
 	GetUserBalance(context.Context, *GetUserBalanceRequest) (*GetUserBalanceResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
@@ -75,8 +75,8 @@ type WalletServer interface {
 // pointer dereference when methods are called.
 type UnimplementedWalletServer struct{}
 
-func (UnimplementedWalletServer) HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HealthCheck not implemented")
+func (UnimplementedWalletServer) AddUser(context.Context, *AddUserRequest) (*AddUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddUser not implemented")
 }
 func (UnimplementedWalletServer) GetUserBalance(context.Context, *GetUserBalanceRequest) (*GetUserBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserBalance not implemented")
@@ -102,20 +102,20 @@ func RegisterWalletServer(s grpc.ServiceRegistrar, srv WalletServer) {
 	s.RegisterService(&Wallet_ServiceDesc, srv)
 }
 
-func _Wallet_HealthCheck_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HealthCheckRequest)
+func _Wallet_AddUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).HealthCheck(ctx, in)
+		return srv.(WalletServer).AddUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_HealthCheck_FullMethodName,
+		FullMethod: Wallet_AddUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).HealthCheck(ctx, req.(*HealthCheckRequest))
+		return srv.(WalletServer).AddUser(ctx, req.(*AddUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -146,8 +146,8 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*WalletServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "HealthCheck",
-			Handler:    _Wallet_HealthCheck_Handler,
+			MethodName: "AddUser",
+			Handler:    _Wallet_AddUser_Handler,
 		},
 		{
 			MethodName: "GetUserBalance",
