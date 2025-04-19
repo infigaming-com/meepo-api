@@ -499,6 +499,8 @@ func (m *AddOrUpdateCurrencyRequest) validate(all bool) error {
 
 	// no validation rules for Enabled
 
+	// no validation rules for Hidden
+
 	if len(errors) > 0 {
 		return AddOrUpdateCurrencyRequestMultiError(errors)
 	}
@@ -704,7 +706,7 @@ func (m *UpdateOperatorCurrencyRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	// no validation rules for OperatorId
 
 	// no validation rules for Currency
 
@@ -916,10 +918,39 @@ func (m *GetOperatorCurrenciesRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	// no validation rules for OperatorId
 
-	if m.Enabled != nil {
-		// no validation rules for Enabled
+	if m.Filter != nil {
+
+		if all {
+			switch v := interface{}(m.GetFilter()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetOperatorCurrenciesRequestValidationError{
+						field:  "Filter",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetOperatorCurrenciesRequestValidationError{
+						field:  "Filter",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetFilter()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetOperatorCurrenciesRequestValidationError{
+					field:  "Filter",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {
@@ -1140,6 +1171,112 @@ var _ interface {
 	ErrorName() string
 } = GetOperatorCurrenciesResponseValidationError{}
 
+// Validate checks the field values on
+// GetOperatorCurrenciesRequest_CurrencyFilter with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetOperatorCurrenciesRequest_CurrencyFilter) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetOperatorCurrenciesRequest_CurrencyFilter with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetOperatorCurrenciesRequest_CurrencyFilterMultiError, or nil if none found.
+func (m *GetOperatorCurrenciesRequest_CurrencyFilter) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorCurrenciesRequest_CurrencyFilter) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetOperatorCurrenciesRequest_CurrencyFilterMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorCurrenciesRequest_CurrencyFilterMultiError is an error wrapping
+// multiple validation errors returned by
+// GetOperatorCurrenciesRequest_CurrencyFilter.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorCurrenciesRequest_CurrencyFilterMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorCurrenciesRequest_CurrencyFilterMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorCurrenciesRequest_CurrencyFilterMultiError) AllErrors() []error { return m }
+
+// GetOperatorCurrenciesRequest_CurrencyFilterValidationError is the validation
+// error returned by GetOperatorCurrenciesRequest_CurrencyFilter.Validate if
+// the designated constraints aren't met.
+type GetOperatorCurrenciesRequest_CurrencyFilterValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorCurrenciesRequest_CurrencyFilterValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorCurrenciesRequest_CurrencyFilterValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorCurrenciesRequest_CurrencyFilterValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorCurrenciesRequest_CurrencyFilterValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorCurrenciesRequest_CurrencyFilterValidationError) ErrorName() string {
+	return "GetOperatorCurrenciesRequest_CurrencyFilterValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorCurrenciesRequest_CurrencyFilterValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorCurrenciesRequest_CurrencyFilter.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorCurrenciesRequest_CurrencyFilterValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorCurrenciesRequest_CurrencyFilterValidationError{}
+
 // Validate checks the field values on GetOperatorCurrenciesResponse_Currency
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
@@ -1167,6 +1304,8 @@ func (m *GetOperatorCurrenciesResponse_Currency) validate(all bool) error {
 	// no validation rules for Currency
 
 	// no validation rules for Enabled
+
+	// no validation rules for Hidden
 
 	if len(errors) > 0 {
 		return GetOperatorCurrenciesResponse_CurrencyMultiError(errors)

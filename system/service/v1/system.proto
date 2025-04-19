@@ -16,16 +16,16 @@ service System {
 		};
 	};
 
-	rpc GetCurrencies(GetCurrenciesRequest) returns (GetCurrenciesResponse) {
+	rpc UpdateCurrency(UpdateCurrencyRequest) returns (UpdateCurrencyResponse) {
 		option (google.api.http) = {
-			post: "/v1/system/currencies/get"
+			post: "/v1/system/currencies/update"
 			body: "*"
 		};
 	};
 
-	rpc ListCurrencies(ListCurrenciesRequest) returns (ListCurrenciesResponse) {
+	rpc GetCurrencies(GetCurrenciesRequest) returns (GetCurrenciesResponse) {
 		option (google.api.http) = {
-			post: "/v1/system/currencies/list"
+			post: "/v1/system/currencies/get"
 			body: "*"
 		};
 	};
@@ -33,30 +33,49 @@ service System {
 
 message Currency {
 	string currency = 1;
-	string type = 2;
-	string symbol = 3;
-	string icon = 4;
-	int32 decimal_places = 5;
+	bool enabled = 2;
+	bool hidden = 3;
+	string type = 4;
+	string symbol = 5;
+	string icon = 6;
+	int32 decimal_places = 7;
 }
 
 message AddCurrencyRequest {
-	Currency currency = 1;
+	string currency = 1;
+	bool enabled = 2;
+	bool hidden = 3;
+	string type = 4;
+	string symbol = 5;
+	string icon = 6;
+	int32 decimal_places = 7;
 }
 
-message AddCurrencyResponse {
+message AddCurrencyResponse {}
+
+message UpdateCurrencyRequest {
+	string currency = 1;
+	optional bool enabled = 2;
+	optional bool hidden = 3;
+	optional string type = 4;
+	optional string symbol = 5;
+	optional string icon = 6;
+	optional int32 decimal_places = 7;
+}
+
+message UpdateCurrencyResponse {
 	Currency currency = 1;
 }
 
 message GetCurrenciesRequest {
-	string currency = 1;
+	// Optional filter to return specific currencies only.
+	// If not provided, all currencies will be returned
+	message CurrencyFilter {
+		repeated string currencies = 1;
+	}
+	optional CurrencyFilter filter = 1;
 }
 
 message GetCurrenciesResponse {
-	Currency currencies = 1;
-}
-
-message ListCurrenciesRequest {}
-
-message ListCurrenciesResponse {
 	repeated Currency currencies = 1;
 }
