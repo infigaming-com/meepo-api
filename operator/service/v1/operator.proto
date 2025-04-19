@@ -16,9 +16,27 @@ service Operator {
 			body: "*"
 		};
 	}
+
 	rpc UpdateOperator(UpdateOperatorRequest) returns (UpdateOperatorResponse) {
 		option (google.api.http) = {
 			post: "/v1/operator/update"
+			body: "*"
+		};
+	}
+
+	rpc AddOrUpdateCurrency(AddOrUpdateCurrencyRequest) returns (AddOrUpdateCurrencyResponse) {
+	}
+
+	rpc UpdateOperatorCurrency(UpdateOperatorCurrencyRequest) returns (UpdateOperatorCurrencyResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/currencies/update"
+			body: "*"
+		};
+	}
+
+	rpc GetOperatorCurrencies(GetOperatorCurrenciesRequest) returns (GetOperatorCurrenciesResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/currencies/get"
 			body: "*"
 		};
 	}
@@ -57,3 +75,33 @@ message UpdateOperatorRequest {
 
 message UpdateOperatorResponse {}
 
+message AddOrUpdateCurrencyRequest {
+	string currency = 2;
+	bool enabled = 3;
+}
+
+message AddOrUpdateCurrencyResponse {}
+
+message UpdateOperatorCurrencyRequest {
+	string id = 1;
+	string currency = 2;
+	bool enabled = 3;
+}
+
+message UpdateOperatorCurrencyResponse {}
+
+message GetOperatorCurrenciesRequest {
+	string id = 1;
+	// Optional filter to only return enabled or disabled currencies
+	optional bool enabled = 2;
+	// Optional list of specific currencies to return
+	repeated string currencies = 3;
+}
+
+message GetOperatorCurrenciesResponse {
+	message Currency {
+		string currency = 1;
+		bool enabled = 2;
+	}
+	repeated Currency currencies = 1;
+}

@@ -24,6 +24,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.operator.service.v1.AddOperatorResponse'
+    /v1/operator/currencies/get:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_GetOperatorCurrencies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.GetOperatorCurrenciesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.GetOperatorCurrenciesResponse'
+    /v1/operator/currencies/update:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_UpdateOperatorCurrency
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorCurrencyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorCurrencyResponse'
     /v1/operator/update:
         post:
             tags:
@@ -311,6 +347,45 @@ components:
                 id:
                     type: string
                     description: operator id allocated by operator service
+        api.operator.service.v1.GetOperatorCurrenciesRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                enabled:
+                    type: boolean
+                    description: Optional filter to only return enabled or disabled currencies
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                    description: Optional list of specific currencies to return
+        api.operator.service.v1.GetOperatorCurrenciesResponse:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.operator.service.v1.GetOperatorCurrenciesResponse_Currency'
+        api.operator.service.v1.GetOperatorCurrenciesResponse_Currency:
+            type: object
+            properties:
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+        api.operator.service.v1.UpdateOperatorCurrencyRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+        api.operator.service.v1.UpdateOperatorCurrencyResponse:
+            type: object
+            properties: {}
         api.operator.service.v1.UpdateOperatorRequest:
             type: object
             properties:
