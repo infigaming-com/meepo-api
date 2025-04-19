@@ -645,7 +645,9 @@ components:
             type: object
             properties:
                 currencies:
-                    $ref: '#/components/schemas/system.service.v1.Currency'
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.Currency'
         system.service.v1.UpdateCurrencyRequest:
             type: object
             properties:

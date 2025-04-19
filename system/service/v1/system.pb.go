@@ -396,7 +396,7 @@ func (x *GetCurrenciesRequest) GetCurrencies() []string {
 
 type GetCurrenciesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currencies    *Currency              `protobuf:"bytes,1,opt,name=currencies,proto3" json:"currencies,omitempty"`
+	Currencies    []*Currency            `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -431,7 +431,7 @@ func (*GetCurrenciesResponse) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *GetCurrenciesResponse) GetCurrencies() *Currency {
+func (x *GetCurrenciesResponse) GetCurrencies() []*Currency {
 	if x != nil {
 		return x.Currencies
 	}
@@ -482,7 +482,7 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\a_hidden\"T\n" +
 	"\x15GetCurrenciesResponse\x12;\n" +
 	"\n" +
-	"currencies\x18\x01 \x01(\v2\x1b.system.service.v1.CurrencyR\n" +
+	"currencies\x18\x01 \x03(\v2\x1b.system.service.v1.CurrencyR\n" +
 	"currencies2\xa9\x03\n" +
 	"\x06System\x12\x82\x01\n" +
 	"\vAddCurrency\x12%.system.service.v1.AddCurrencyRequest\x1a&.system.service.v1.AddCurrencyResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/system/currencies/add\x12\x8e\x01\n" +

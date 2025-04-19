@@ -72,5 +72,5 @@ message GetCurrenciesRequest {
 }
 
 message GetCurrenciesResponse {
-	Currency currencies = 1;
+	repeated Currency currencies = 1;
 }
