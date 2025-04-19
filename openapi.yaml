@@ -126,16 +126,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/system.service.v1.GetCurrenciesResponse'
-    /v1/system/currencies/list:
+    /v1/system/currencies/update:
         post:
             tags:
                 - System
-            operationId: System_ListCurrencies
+            operationId: System_UpdateCurrency
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/system.service.v1.ListCurrenciesRequest'
+                            $ref: '#/components/schemas/system.service.v1.UpdateCurrencyRequest'
                 required: true
             responses:
                 "200":
@@ -143,7 +143,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/system.service.v1.ListCurrenciesResponse'
+                                $ref: '#/components/schemas/system.service.v1.UpdateCurrencyResponse'
     /v1/user/auth/login:
         post:
             tags:
@@ -356,16 +356,8 @@ components:
         api.operator.service.v1.GetOperatorCurrenciesRequest:
             type: object
             properties:
-                id:
+                operatorId:
                     type: string
-                enabled:
-                    type: boolean
-                    description: Optional filter to only return enabled or disabled currencies
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                    description: Optional list of specific currencies to return
         api.operator.service.v1.GetOperatorCurrenciesResponse:
             type: object
             properties:
@@ -380,10 +372,12 @@ components:
                     type: string
                 enabled:
                     type: boolean
+                hidden:
+                    type: boolean
         api.operator.service.v1.UpdateOperatorCurrencyRequest:
             type: object
             properties:
-                id:
+                operatorId:
                     type: string
                 currency:
                     type: string
@@ -598,17 +592,32 @@ components:
             type: object
             properties:
                 currency:
-                    $ref: '#/components/schemas/system.service.v1.Currency'
+                    type: string
+                enabled:
+                    type: boolean
+                hidden:
+                    type: boolean
+                type:
+                    type: string
+                symbol:
+                    type: string
+                icon:
+                    type: string
+                decimalPlaces:
+                    type: integer
+                    format: int32
         system.service.v1.AddCurrencyResponse:
             type: object
-            properties:
-                currency:
-                    $ref: '#/components/schemas/system.service.v1.Currency'
+            properties: {}
         system.service.v1.Currency:
             type: object
             properties:
                 currency:
                     type: string
+                enabled:
+                    type: boolean
+                hidden:
+                    type: boolean
                 type:
                     type: string
                 symbol:
@@ -621,23 +630,40 @@ components:
         system.service.v1.GetCurrenciesRequest:
             type: object
             properties:
-                currency:
-                    type: string
-        system.service.v1.GetCurrenciesResponse:
-            type: object
-            properties:
                 currencies:
-                    $ref: '#/components/schemas/system.service.v1.Currency'
-        system.service.v1.ListCurrenciesRequest:
-            type: object
-            properties: {}
-        system.service.v1.ListCurrenciesResponse:
+                    type: array
+                    items:
+                        type: string
+        system.service.v1.GetCurrenciesResponse:
             type: object
             properties:
                 currencies:
                     type: array
                     items:
                         $ref: '#/components/schemas/system.service.v1.Currency'
+        system.service.v1.UpdateCurrencyRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+                hidden:
+                    type: boolean
+                type:
+                    type: string
+                symbol:
+                    type: string
+                icon:
+                    type: string
+                decimalPlaces:
+                    type: integer
+                    format: int32
+        system.service.v1.UpdateCurrencyResponse:
+            type: object
+            properties:
+                currency:
+                    $ref: '#/components/schemas/system.service.v1.Currency'
 tags:
     - name: Operator
       description: User service provides authentication and user management functionality.
