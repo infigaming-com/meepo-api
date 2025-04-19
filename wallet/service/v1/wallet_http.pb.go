@@ -19,64 +19,67 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationWalletGetUserBalance = "/api.wallet.service.v1.Wallet/GetUserBalance"
-const OperationWalletHealthCheck = "/api.wallet.service.v1.Wallet/HealthCheck"
+const OperationWalletGetUserBalances = "/api.wallet.service.v1.Wallet/GetUserBalances"
+const OperationWalletUpdateUserCurrency = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
 
 type WalletHTTPServer interface {
-	GetUserBalance(context.Context, *GetUserBalanceRequest) (*GetUserBalanceResponse, error)
-	HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error)
+	GetUserBalances(context.Context, *GetUserBalancesRequest) (*GetUserBalancesResponse, error)
+	UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error)
 }
 
 func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r := s.Route("/")
-	r.GET("/v1/wallet/healthcheck", _Wallet_HealthCheck1_HTTP_Handler(srv))
-	r.GET("/v1/wallet/balance/{user_id}", _Wallet_GetUserBalance0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/currencies/update", _Wallet_UpdateUserCurrency0_HTTP_Handler(srv))
+	r.GET("/v1/wallet/balance/{user_id}", _Wallet_GetUserBalances0_HTTP_Handler(srv))
 }
 
-func _Wallet_HealthCheck1_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+func _Wallet_UpdateUserCurrency0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in HealthCheckRequest
+		var in UpdateUserCurrencyRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationWalletHealthCheck)
+		http.SetOperation(ctx, OperationWalletUpdateUserCurrency)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.HealthCheck(ctx, req.(*HealthCheckRequest))
+			return srv.UpdateUserCurrency(ctx, req.(*UpdateUserCurrencyRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*HealthCheckResponse)
+		reply := out.(*UpdateUserCurrencyResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Wallet_GetUserBalance0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+func _Wallet_GetUserBalances0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetUserBalanceRequest
+		var in GetUserBalancesRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationWalletGetUserBalance)
+		http.SetOperation(ctx, OperationWalletGetUserBalances)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetUserBalance(ctx, req.(*GetUserBalanceRequest))
+			return srv.GetUserBalances(ctx, req.(*GetUserBalancesRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetUserBalanceResponse)
+		reply := out.(*GetUserBalancesResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 type WalletHTTPClient interface {
-	GetUserBalance(ctx context.Context, req *GetUserBalanceRequest, opts ...http.CallOption) (rsp *GetUserBalanceResponse, err error)
-	HealthCheck(ctx context.Context, req *HealthCheckRequest, opts ...http.CallOption) (rsp *HealthCheckResponse, err error)
+	GetUserBalances(ctx context.Context, req *GetUserBalancesRequest, opts ...http.CallOption) (rsp *GetUserBalancesResponse, err error)
+	UpdateUserCurrency(ctx context.Context, req *UpdateUserCurrencyRequest, opts ...http.CallOption) (rsp *UpdateUserCurrencyResponse, err error)
 }
 
 type WalletHTTPClientImpl struct {
@@ -87,11 +90,11 @@ func NewWalletHTTPClient(client *http.Client) WalletHTTPClient {
 	return &WalletHTTPClientImpl{client}
 }
 
-func (c *WalletHTTPClientImpl) GetUserBalance(ctx context.Context, in *GetUserBalanceRequest, opts ...http.CallOption) (*GetUserBalanceResponse, error) {
-	var out GetUserBalanceResponse
+func (c *WalletHTTPClientImpl) GetUserBalances(ctx context.Context, in *GetUserBalancesRequest, opts ...http.CallOption) (*GetUserBalancesResponse, error) {
+	var out GetUserBalancesResponse
 	pattern := "/v1/wallet/balance/{user_id}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationWalletGetUserBalance))
+	opts = append(opts, http.Operation(OperationWalletGetUserBalances))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -100,13 +103,13 @@ func (c *WalletHTTPClientImpl) GetUserBalance(ctx context.Context, in *GetUserBa
 	return &out, nil
 }
 
-func (c *WalletHTTPClientImpl) HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...http.CallOption) (*HealthCheckResponse, error) {
-	var out HealthCheckResponse
-	pattern := "/v1/wallet/healthcheck"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationWalletHealthCheck))
+func (c *WalletHTTPClientImpl) UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...http.CallOption) (*UpdateUserCurrencyResponse, error) {
+	var out UpdateUserCurrencyResponse
+	pattern := "/v1/wallet/currencies/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletUpdateUserCurrency))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
