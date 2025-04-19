@@ -259,7 +259,7 @@ paths:
         get:
             tags:
                 - Wallet
-            operationId: Wallet_GetUserBalance
+            operationId: Wallet_GetUserBalances
             parameters:
                 - name: userId
                   in: path
@@ -272,7 +272,25 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceResponse'
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse'
+    /v1/wallet/currencies/update:
+        post:
+            tags:
+                - Wallet
+            operationId: Wallet_UpdateUserCurrency
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.UpdateUserCurrencyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.UpdateUserCurrencyResponse'
 components:
     schemas:
         api.operator.service.v1.AddOperatorRequest:
@@ -466,14 +484,14 @@ components:
                     type: string
                     description: Unique identifier for the user.
             description: UserInfo contains basic user information.
-        api.wallet.service.v1.GetUserBalanceResponse:
+        api.wallet.service.v1.GetUserBalancesResponse:
             type: object
             properties:
                 balances:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceResponse_Balance'
-        api.wallet.service.v1.GetUserBalanceResponse_Balance:
+                        $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse_Balance'
+        api.wallet.service.v1.GetUserBalancesResponse_Balance:
             type: object
             properties:
                 currency:
@@ -484,6 +502,18 @@ components:
                     type: string
                 providerBonus:
                     type: string
+        api.wallet.service.v1.UpdateUserCurrencyRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+        api.wallet.service.v1.UpdateUserCurrencyResponse:
+            type: object
+            properties: {}
         payment.service.v1.HealthCheckResponse:
             type: object
             properties:

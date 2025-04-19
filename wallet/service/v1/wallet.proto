@@ -12,8 +12,17 @@ service Wallet {
 	rpc AddUser (AddUserRequest) returns (AddUserResponse) {}
 
 	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {}
-
-	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {
+	
+	rpc AddOrUpdateOperatorsCurrency (AddOrUpdateOperatorsCurrencyRequest) returns (AddOrUpdateOperatorsCurrencyResponse) {}
+	
+	rpc UpdateUserCurrency (UpdateUserCurrencyRequest) returns (UpdateUserCurrencyResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/currencies/update"
+			body: "*"
+		};
+	}
+	
+	rpc GetUserBalances (GetUserBalancesRequest) returns (GetUserBalancesResponse) {
 		option (google.api.http) = {
 			get: "/v1/wallet/balance/{user_id}"
 		};
@@ -21,26 +30,41 @@ service Wallet {
 }
 
 message AddUserRequest {
-	string id = 1;
+	string user_id = 1;
 	string operator_id = 2;
 }
 
-message AddUserResponse {
-	string id = 1;
-}
+message AddUserResponse {}
 
 message UpdateUserRequest {
-	string id = 1;
-	bool enabled = 2;
+	string user_id = 1;
+	string operator_id = 2;
+	bool enabled = 3;
 }
 
 message UpdateUserResponse {}
 
-message GetUserBalanceRequest {
+message AddOrUpdateOperatorsCurrencyRequest {
+	repeated string operator_ids = 1;
+	string currency = 2;
+	bool enabled = 3;
+}
+
+message AddOrUpdateOperatorsCurrencyResponse {}
+
+message UpdateUserCurrencyRequest {
+	string user_id = 1;
+	string currency = 3;
+	bool enabled = 4;
+}
+
+message UpdateUserCurrencyResponse {}
+
+message GetUserBalancesRequest {
 	string user_id = 1;
 }
 
-message GetUserBalanceResponse {
+message GetUserBalancesResponse {
 	message Balance {
 		string currency = 1;
 		int64 cash = 2;
