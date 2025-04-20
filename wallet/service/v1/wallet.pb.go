@@ -113,7 +113,6 @@ func (*AddUserResponse) Descriptor() ([]byte, []int) {
 type UpdateUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorId    string                 `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -152,13 +151,6 @@ func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
 func (x *UpdateUserRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
-	}
-	return ""
-}
-
-func (x *UpdateUserRequest) GetOperatorId() string {
-	if x != nil {
-		return x.OperatorId
 	}
 	return ""
 }
@@ -571,11 +563,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\tR\n" +
 	"operatorId\"\x11\n" +
-	"\x0fAddUserResponse\"g\n" +
+	"\x0fAddUserResponse\"F\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1f\n" +
-	"\voperator_id\x18\x02 \x01(\tR\n" +
-	"operatorId\x12\x18\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"\x14\n" +
 	"\x12UpdateUserResponse\"\x96\x01\n" +
 	"#AddOrUpdateOperatorsCurrencyRequest\x12!\n" +
