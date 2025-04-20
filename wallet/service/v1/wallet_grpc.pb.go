@@ -19,16 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Wallet_HealthCheck_FullMethodName    = "/api.wallet.service.v1.Wallet/HealthCheck"
-	Wallet_GetUserBalance_FullMethodName = "/api.wallet.service.v1.Wallet/GetUserBalance"
+	Wallet_AddUser_FullMethodName                      = "/api.wallet.service.v1.Wallet/AddUser"
+	Wallet_UpdateUser_FullMethodName                   = "/api.wallet.service.v1.Wallet/UpdateUser"
+	Wallet_AddOrUpdateOperatorsCurrency_FullMethodName = "/api.wallet.service.v1.Wallet/AddOrUpdateOperatorsCurrency"
+	Wallet_UpdateUserCurrency_FullMethodName           = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
+	Wallet_GetUserBalances_FullMethodName              = "/api.wallet.service.v1.Wallet/GetUserBalances"
 )
 
 // WalletClient is the client API for Wallet service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WalletClient interface {
-	HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error)
-	GetUserBalance(ctx context.Context, in *GetUserBalanceRequest, opts ...grpc.CallOption) (*GetUserBalanceResponse, error)
+	AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*AddUserResponse, error)
+	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
+	AddOrUpdateOperatorsCurrency(ctx context.Context, in *AddOrUpdateOperatorsCurrencyRequest, opts ...grpc.CallOption) (*AddOrUpdateOperatorsCurrencyResponse, error)
+	UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error)
+	GetUserBalances(ctx context.Context, in *GetUserBalancesRequest, opts ...grpc.CallOption) (*GetUserBalancesResponse, error)
 }
 
 type walletClient struct {
@@ -39,20 +45,50 @@ func NewWalletClient(cc grpc.ClientConnInterface) WalletClient {
 	return &walletClient{cc}
 }
 
-func (c *walletClient) HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error) {
+func (c *walletClient) AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*AddUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(HealthCheckResponse)
-	err := c.cc.Invoke(ctx, Wallet_HealthCheck_FullMethodName, in, out, cOpts...)
+	out := new(AddUserResponse)
+	err := c.cc.Invoke(ctx, Wallet_AddUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *walletClient) GetUserBalance(ctx context.Context, in *GetUserBalanceRequest, opts ...grpc.CallOption) (*GetUserBalanceResponse, error) {
+func (c *walletClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserBalanceResponse)
-	err := c.cc.Invoke(ctx, Wallet_GetUserBalance_FullMethodName, in, out, cOpts...)
+	out := new(UpdateUserResponse)
+	err := c.cc.Invoke(ctx, Wallet_UpdateUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) AddOrUpdateOperatorsCurrency(ctx context.Context, in *AddOrUpdateOperatorsCurrencyRequest, opts ...grpc.CallOption) (*AddOrUpdateOperatorsCurrencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddOrUpdateOperatorsCurrencyResponse)
+	err := c.cc.Invoke(ctx, Wallet_AddOrUpdateOperatorsCurrency_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserCurrencyResponse)
+	err := c.cc.Invoke(ctx, Wallet_UpdateUserCurrency_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetUserBalances(ctx context.Context, in *GetUserBalancesRequest, opts ...grpc.CallOption) (*GetUserBalancesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserBalancesResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetUserBalances_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -63,8 +99,11 @@ func (c *walletClient) GetUserBalance(ctx context.Context, in *GetUserBalanceReq
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
 type WalletServer interface {
-	HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error)
-	GetUserBalance(context.Context, *GetUserBalanceRequest) (*GetUserBalanceResponse, error)
+	AddUser(context.Context, *AddUserRequest) (*AddUserResponse, error)
+	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	AddOrUpdateOperatorsCurrency(context.Context, *AddOrUpdateOperatorsCurrencyRequest) (*AddOrUpdateOperatorsCurrencyResponse, error)
+	UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error)
+	GetUserBalances(context.Context, *GetUserBalancesRequest) (*GetUserBalancesResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -75,11 +114,20 @@ type WalletServer interface {
 // pointer dereference when methods are called.
 type UnimplementedWalletServer struct{}
 
-func (UnimplementedWalletServer) HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HealthCheck not implemented")
+func (UnimplementedWalletServer) AddUser(context.Context, *AddUserRequest) (*AddUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddUser not implemented")
 }
-func (UnimplementedWalletServer) GetUserBalance(context.Context, *GetUserBalanceRequest) (*GetUserBalanceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserBalance not implemented")
+func (UnimplementedWalletServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedWalletServer) AddOrUpdateOperatorsCurrency(context.Context, *AddOrUpdateOperatorsCurrencyRequest) (*AddOrUpdateOperatorsCurrencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOrUpdateOperatorsCurrency not implemented")
+}
+func (UnimplementedWalletServer) UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserCurrency not implemented")
+}
+func (UnimplementedWalletServer) GetUserBalances(context.Context, *GetUserBalancesRequest) (*GetUserBalancesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserBalances not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -102,38 +150,92 @@ func RegisterWalletServer(s grpc.ServiceRegistrar, srv WalletServer) {
 	s.RegisterService(&Wallet_ServiceDesc, srv)
 }
 
-func _Wallet_HealthCheck_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HealthCheckRequest)
+func _Wallet_AddUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).HealthCheck(ctx, in)
+		return srv.(WalletServer).AddUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_HealthCheck_FullMethodName,
+		FullMethod: Wallet_AddUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).HealthCheck(ctx, req.(*HealthCheckRequest))
+		return srv.(WalletServer).AddUser(ctx, req.(*AddUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_GetUserBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserBalanceRequest)
+func _Wallet_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).GetUserBalance(ctx, in)
+		return srv.(WalletServer).UpdateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_GetUserBalance_FullMethodName,
+		FullMethod: Wallet_UpdateUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).GetUserBalance(ctx, req.(*GetUserBalanceRequest))
+		return srv.(WalletServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_AddOrUpdateOperatorsCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOrUpdateOperatorsCurrencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).AddOrUpdateOperatorsCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_AddOrUpdateOperatorsCurrency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).AddOrUpdateOperatorsCurrency(ctx, req.(*AddOrUpdateOperatorsCurrencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_UpdateUserCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserCurrencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).UpdateUserCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_UpdateUserCurrency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).UpdateUserCurrency(ctx, req.(*UpdateUserCurrencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetUserBalances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserBalancesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetUserBalances(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetUserBalances_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetUserBalances(ctx, req.(*GetUserBalancesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -146,12 +248,24 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*WalletServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "HealthCheck",
-			Handler:    _Wallet_HealthCheck_Handler,
+			MethodName: "AddUser",
+			Handler:    _Wallet_AddUser_Handler,
 		},
 		{
-			MethodName: "GetUserBalance",
-			Handler:    _Wallet_GetUserBalance_Handler,
+			MethodName: "UpdateUser",
+			Handler:    _Wallet_UpdateUser_Handler,
+		},
+		{
+			MethodName: "AddOrUpdateOperatorsCurrency",
+			Handler:    _Wallet_AddOrUpdateOperatorsCurrency_Handler,
+		},
+		{
+			MethodName: "UpdateUserCurrency",
+			Handler:    _Wallet_UpdateUserCurrency_Handler,
+		},
+		{
+			MethodName: "GetUserBalances",
+			Handler:    _Wallet_GetUserBalances_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

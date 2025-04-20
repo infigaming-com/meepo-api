@@ -16,44 +16,81 @@ service Operator {
 			body: "*"
 		};
 	}
+
 	rpc UpdateOperator(UpdateOperatorRequest) returns (UpdateOperatorResponse) {
 		option (google.api.http) = {
 			post: "/v1/operator/update"
 			body: "*"
 		};
 	}
+
+	rpc AddOrUpdateCurrency(AddOrUpdateCurrencyRequest) returns (AddOrUpdateCurrencyResponse) {
+	}
+
+	rpc UpdateOperatorCurrency(UpdateOperatorCurrencyRequest) returns (UpdateOperatorCurrencyResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/currencies/update"
+			body: "*"
+		};
+	}
+
+	rpc GetOperatorCurrencies(GetOperatorCurrenciesRequest) returns (GetOperatorCurrenciesResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/currencies/get"
+			body: "*"
+		};
+	}
 }
 
 message AddOperatorRequest {
-	// operator id allocated by game aggregator
-	string external_id = 1;
-	// user id who owns the operator
-	string user_id = 2;
 	// operator name
-	string name = 3;
-	// api key
-	string api_key = 4;
-	// api key secret
-	string api_key_secret = 5;
+	string name = 1;
+	// user id who creates the operator
+	string user_id = 2;
 }
 
 message AddOperatorResponse {
 	// operator id allocated by operator service
-	string id = 1;
+	string operator_id = 1;
 }
 
 message UpdateOperatorRequest {
 	// operator id allocated by operator service
-	string id = 1;
-	// operator name
-	optional string name = 2;
+	string operator_id = 1;
 	// enabled
-	optional bool enabled = 3;
-	// api key
-	optional string api_key = 4;
-	// api key secret
-	optional string api_key_secret = 5;
+	bool enabled = 2;
 }
 
 message UpdateOperatorResponse {}
 
+message AddOrUpdateCurrencyRequest {
+	string currency = 1;
+	bool enabled = 2;
+	bool hidden = 3;
+}
+
+message AddOrUpdateCurrencyResponse {}
+
+message UpdateOperatorCurrencyRequest {
+	string operator_id = 1;
+	string currency = 2;
+	bool enabled = 3;
+}
+
+message UpdateOperatorCurrencyResponse {}
+
+message GetOperatorCurrenciesRequest {
+	string operator_id = 1;
+	// Filter to return specific currencies only.
+	// If empty or not provided, all currencies will be returned
+	repeated string currencies = 2;
+}
+
+message GetOperatorCurrenciesResponse {
+	message Currency {
+		string currency = 1;
+		bool enabled = 2;
+		bool hidden = 3;
+	}
+	repeated Currency currencies = 1;
+}

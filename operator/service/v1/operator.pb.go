@@ -24,16 +24,10 @@ const (
 
 type AddOperatorRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// operator id allocated by game aggregator
-	ExternalId string `protobuf:"bytes,1,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	// user id who owns the operator
-	UserId string `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	// operator name
-	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	// api key
-	ApiKey string `protobuf:"bytes,4,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
-	// api key secret
-	ApiKeySecret  string `protobuf:"bytes,5,opt,name=api_key_secret,json=apiKeySecret,proto3" json:"api_key_secret,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// user id who creates the operator
+	UserId        string `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -68,9 +62,9 @@ func (*AddOperatorRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *AddOperatorRequest) GetExternalId() string {
+func (x *AddOperatorRequest) GetName() string {
 	if x != nil {
-		return x.ExternalId
+		return x.Name
 	}
 	return ""
 }
@@ -82,31 +76,10 @@ func (x *AddOperatorRequest) GetUserId() string {
 	return ""
 }
 
-func (x *AddOperatorRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *AddOperatorRequest) GetApiKey() string {
-	if x != nil {
-		return x.ApiKey
-	}
-	return ""
-}
-
-func (x *AddOperatorRequest) GetApiKeySecret() string {
-	if x != nil {
-		return x.ApiKeySecret
-	}
-	return ""
-}
-
 type AddOperatorResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// operator id allocated by operator service
-	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	OperatorId    string `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -141,9 +114,9 @@ func (*AddOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *AddOperatorResponse) GetId() string {
+func (x *AddOperatorResponse) GetOperatorId() string {
 	if x != nil {
-		return x.Id
+		return x.OperatorId
 	}
 	return ""
 }
@@ -151,15 +124,9 @@ func (x *AddOperatorResponse) GetId() string {
 type UpdateOperatorRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// operator id allocated by operator service
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// operator name
-	Name *string `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	OperatorId string `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// enabled
-	Enabled *bool `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	// api key
-	ApiKey *string `protobuf:"bytes,4,opt,name=api_key,json=apiKey,proto3,oneof" json:"api_key,omitempty"`
-	// api key secret
-	ApiKeySecret  *string `protobuf:"bytes,5,opt,name=api_key_secret,json=apiKeySecret,proto3,oneof" json:"api_key_secret,omitempty"`
+	Enabled       bool `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -194,39 +161,18 @@ func (*UpdateOperatorRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *UpdateOperatorRequest) GetId() string {
+func (x *UpdateOperatorRequest) GetOperatorId() string {
 	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *UpdateOperatorRequest) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+		return x.OperatorId
 	}
 	return ""
 }
 
 func (x *UpdateOperatorRequest) GetEnabled() bool {
-	if x != nil && x.Enabled != nil {
-		return *x.Enabled
+	if x != nil {
+		return x.Enabled
 	}
 	return false
-}
-
-func (x *UpdateOperatorRequest) GetApiKey() string {
-	if x != nil && x.ApiKey != nil {
-		return *x.ApiKey
-	}
-	return ""
-}
-
-func (x *UpdateOperatorRequest) GetApiKeySecret() string {
-	if x != nil && x.ApiKeySecret != nil {
-		return *x.ApiKeySecret
-	}
-	return ""
 }
 
 type UpdateOperatorResponse struct {
@@ -265,36 +211,403 @@ func (*UpdateOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{3}
 }
 
+type AddOrUpdateCurrencyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Enabled       bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Hidden        bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddOrUpdateCurrencyRequest) Reset() {
+	*x = AddOrUpdateCurrencyRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOrUpdateCurrencyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOrUpdateCurrencyRequest) ProtoMessage() {}
+
+func (x *AddOrUpdateCurrencyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOrUpdateCurrencyRequest.ProtoReflect.Descriptor instead.
+func (*AddOrUpdateCurrencyRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *AddOrUpdateCurrencyRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *AddOrUpdateCurrencyRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *AddOrUpdateCurrencyRequest) GetHidden() bool {
+	if x != nil {
+		return x.Hidden
+	}
+	return false
+}
+
+type AddOrUpdateCurrencyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddOrUpdateCurrencyResponse) Reset() {
+	*x = AddOrUpdateCurrencyResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOrUpdateCurrencyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOrUpdateCurrencyResponse) ProtoMessage() {}
+
+func (x *AddOrUpdateCurrencyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOrUpdateCurrencyResponse.ProtoReflect.Descriptor instead.
+func (*AddOrUpdateCurrencyResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{5}
+}
+
+type UpdateOperatorCurrencyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateOperatorCurrencyRequest) Reset() {
+	*x = UpdateOperatorCurrencyRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateOperatorCurrencyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateOperatorCurrencyRequest) ProtoMessage() {}
+
+func (x *UpdateOperatorCurrencyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateOperatorCurrencyRequest.ProtoReflect.Descriptor instead.
+func (*UpdateOperatorCurrencyRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UpdateOperatorCurrencyRequest) GetOperatorId() string {
+	if x != nil {
+		return x.OperatorId
+	}
+	return ""
+}
+
+func (x *UpdateOperatorCurrencyRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *UpdateOperatorCurrencyRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+type UpdateOperatorCurrencyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateOperatorCurrencyResponse) Reset() {
+	*x = UpdateOperatorCurrencyResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateOperatorCurrencyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateOperatorCurrencyResponse) ProtoMessage() {}
+
+func (x *UpdateOperatorCurrencyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateOperatorCurrencyResponse.ProtoReflect.Descriptor instead.
+func (*UpdateOperatorCurrencyResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{7}
+}
+
+type GetOperatorCurrenciesRequest struct {
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	// Filter to return specific currencies only.
+	// If empty or not provided, all currencies will be returned
+	Currencies    []string `protobuf:"bytes,2,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOperatorCurrenciesRequest) Reset() {
+	*x = GetOperatorCurrenciesRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorCurrenciesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorCurrenciesRequest) ProtoMessage() {}
+
+func (x *GetOperatorCurrenciesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorCurrenciesRequest.ProtoReflect.Descriptor instead.
+func (*GetOperatorCurrenciesRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetOperatorCurrenciesRequest) GetOperatorId() string {
+	if x != nil {
+		return x.OperatorId
+	}
+	return ""
+}
+
+func (x *GetOperatorCurrenciesRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
+type GetOperatorCurrenciesResponse struct {
+	state         protoimpl.MessageState                    `protogen:"open.v1"`
+	Currencies    []*GetOperatorCurrenciesResponse_Currency `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOperatorCurrenciesResponse) Reset() {
+	*x = GetOperatorCurrenciesResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorCurrenciesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorCurrenciesResponse) ProtoMessage() {}
+
+func (x *GetOperatorCurrenciesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorCurrenciesResponse.ProtoReflect.Descriptor instead.
+func (*GetOperatorCurrenciesResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetOperatorCurrenciesResponse) GetCurrencies() []*GetOperatorCurrenciesResponse_Currency {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
+type GetOperatorCurrenciesResponse_Currency struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Enabled       bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Hidden        bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOperatorCurrenciesResponse_Currency) Reset() {
+	*x = GetOperatorCurrenciesResponse_Currency{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorCurrenciesResponse_Currency) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorCurrenciesResponse_Currency) ProtoMessage() {}
+
+func (x *GetOperatorCurrenciesResponse_Currency) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorCurrenciesResponse_Currency.ProtoReflect.Descriptor instead.
+func (*GetOperatorCurrenciesResponse_Currency) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{9, 0}
+}
+
+func (x *GetOperatorCurrenciesResponse_Currency) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetOperatorCurrenciesResponse_Currency) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *GetOperatorCurrenciesResponse_Currency) GetHidden() bool {
+	if x != nil {
+		return x.Hidden
+	}
+	return false
+}
+
 var File_operator_service_v1_operator_proto protoreflect.FileDescriptor
 
 const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\n" +
-	"\"operator/service/v1/operator.proto\x12\x17api.operator.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xa1\x01\n" +
-	"\x12AddOperatorRequest\x12\x1f\n" +
-	"\vexternal_id\x18\x01 \x01(\tR\n" +
-	"externalId\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12\x17\n" +
-	"\aapi_key\x18\x04 \x01(\tR\x06apiKey\x12$\n" +
-	"\x0eapi_key_secret\x18\x05 \x01(\tR\fapiKeySecret\"%\n" +
-	"\x13AddOperatorResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\xdc\x01\n" +
-	"\x15UpdateOperatorRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
-	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x1d\n" +
-	"\aenabled\x18\x03 \x01(\bH\x01R\aenabled\x88\x01\x01\x12\x1c\n" +
-	"\aapi_key\x18\x04 \x01(\tH\x02R\x06apiKey\x88\x01\x01\x12)\n" +
-	"\x0eapi_key_secret\x18\x05 \x01(\tH\x03R\fapiKeySecret\x88\x01\x01B\a\n" +
-	"\x05_nameB\n" +
+	"\"operator/service/v1/operator.proto\x12\x17api.operator.service.v1\x1a\x1cgoogle/api/annotations.proto\"A\n" +
+	"\x12AddOperatorRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\"6\n" +
+	"\x13AddOperatorResponse\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"operatorId\"R\n" +
+	"\x15UpdateOperatorRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"operatorId\x12\x18\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled\"\x18\n" +
+	"\x16UpdateOperatorResponse\"j\n" +
+	"\x1aAddOrUpdateCurrencyRequest\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
+	"\x06hidden\x18\x03 \x01(\bR\x06hidden\"\x1d\n" +
+	"\x1bAddOrUpdateCurrencyResponse\"v\n" +
+	"\x1dUpdateOperatorCurrencyRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"operatorId\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled\" \n" +
+	"\x1eUpdateOperatorCurrencyResponse\"_\n" +
+	"\x1cGetOperatorCurrenciesRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"operatorId\x12\x1e\n" +
 	"\n" +
-	"\b_enabledB\n" +
+	"currencies\x18\x02 \x03(\tR\n" +
+	"currencies\"\xda\x01\n" +
+	"\x1dGetOperatorCurrenciesResponse\x12_\n" +
 	"\n" +
-	"\b_api_keyB\x11\n" +
-	"\x0f_api_key_secret\"\x18\n" +
-	"\x16UpdateOperatorResponse2\xa6\x02\n" +
+	"currencies\x18\x01 \x03(\v2?.api.operator.service.v1.GetOperatorCurrenciesResponse.CurrencyR\n" +
+	"currencies\x1aX\n" +
+	"\bCurrency\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
+	"\x06hidden\x18\x03 \x01(\bR\x06hidden2\x93\x06\n" +
 	"\bOperator\x12\x85\x01\n" +
 	"\vAddOperator\x12+.api.operator.service.v1.AddOperatorRequest\x1a,.api.operator.service.v1.AddOperatorResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/operator/add\x12\x91\x01\n" +
-	"\x0eUpdateOperator\x12..api.operator.service.v1.UpdateOperatorRequest\x1a/.api.operator.service.v1.UpdateOperatorResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/operator/updateBW\n" +
+	"\x0eUpdateOperator\x12..api.operator.service.v1.UpdateOperatorRequest\x1a/.api.operator.service.v1.UpdateOperatorResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/operator/update\x12\x82\x01\n" +
+	"\x13AddOrUpdateCurrency\x123.api.operator.service.v1.AddOrUpdateCurrencyRequest\x1a4.api.operator.service.v1.AddOrUpdateCurrencyResponse\"\x00\x12\xb4\x01\n" +
+	"\x16UpdateOperatorCurrency\x126.api.operator.service.v1.UpdateOperatorCurrencyRequest\x1a7.api.operator.service.v1.UpdateOperatorCurrencyResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/operator/currencies/update\x12\xae\x01\n" +
+	"\x15GetOperatorCurrencies\x125.api.operator.service.v1.GetOperatorCurrenciesRequest\x1a6.api.operator.service.v1.GetOperatorCurrenciesResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/operator/currencies/getBW\n" +
 	"\x17api.operator.service.v1P\x01Z:github.com/infigaming-com/meepo-api/operator/service/v1;v1b\x06proto3"
 
 var (
@@ -309,23 +622,37 @@ func file_operator_service_v1_operator_proto_rawDescGZIP() []byte {
 	return file_operator_service_v1_operator_proto_rawDescData
 }
 
-var file_operator_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_operator_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_operator_service_v1_operator_proto_goTypes = []any{
-	(*AddOperatorRequest)(nil),     // 0: api.operator.service.v1.AddOperatorRequest
-	(*AddOperatorResponse)(nil),    // 1: api.operator.service.v1.AddOperatorResponse
-	(*UpdateOperatorRequest)(nil),  // 2: api.operator.service.v1.UpdateOperatorRequest
-	(*UpdateOperatorResponse)(nil), // 3: api.operator.service.v1.UpdateOperatorResponse
+	(*AddOperatorRequest)(nil),                     // 0: api.operator.service.v1.AddOperatorRequest
+	(*AddOperatorResponse)(nil),                    // 1: api.operator.service.v1.AddOperatorResponse
+	(*UpdateOperatorRequest)(nil),                  // 2: api.operator.service.v1.UpdateOperatorRequest
+	(*UpdateOperatorResponse)(nil),                 // 3: api.operator.service.v1.UpdateOperatorResponse
+	(*AddOrUpdateCurrencyRequest)(nil),             // 4: api.operator.service.v1.AddOrUpdateCurrencyRequest
+	(*AddOrUpdateCurrencyResponse)(nil),            // 5: api.operator.service.v1.AddOrUpdateCurrencyResponse
+	(*UpdateOperatorCurrencyRequest)(nil),          // 6: api.operator.service.v1.UpdateOperatorCurrencyRequest
+	(*UpdateOperatorCurrencyResponse)(nil),         // 7: api.operator.service.v1.UpdateOperatorCurrencyResponse
+	(*GetOperatorCurrenciesRequest)(nil),           // 8: api.operator.service.v1.GetOperatorCurrenciesRequest
+	(*GetOperatorCurrenciesResponse)(nil),          // 9: api.operator.service.v1.GetOperatorCurrenciesResponse
+	(*GetOperatorCurrenciesResponse_Currency)(nil), // 10: api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
 }
 var file_operator_service_v1_operator_proto_depIdxs = []int32{
-	0, // 0: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
-	2, // 1: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
-	1, // 2: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
-	3, // 3: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	10, // 0: api.operator.service.v1.GetOperatorCurrenciesResponse.currencies:type_name -> api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
+	0,  // 1: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
+	2,  // 2: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
+	4,  // 3: api.operator.service.v1.Operator.AddOrUpdateCurrency:input_type -> api.operator.service.v1.AddOrUpdateCurrencyRequest
+	6,  // 4: api.operator.service.v1.Operator.UpdateOperatorCurrency:input_type -> api.operator.service.v1.UpdateOperatorCurrencyRequest
+	8,  // 5: api.operator.service.v1.Operator.GetOperatorCurrencies:input_type -> api.operator.service.v1.GetOperatorCurrenciesRequest
+	1,  // 6: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
+	3,  // 7: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
+	5,  // 8: api.operator.service.v1.Operator.AddOrUpdateCurrency:output_type -> api.operator.service.v1.AddOrUpdateCurrencyResponse
+	7,  // 9: api.operator.service.v1.Operator.UpdateOperatorCurrency:output_type -> api.operator.service.v1.UpdateOperatorCurrencyResponse
+	9,  // 10: api.operator.service.v1.Operator.GetOperatorCurrencies:output_type -> api.operator.service.v1.GetOperatorCurrenciesResponse
+	6,  // [6:11] is the sub-list for method output_type
+	1,  // [1:6] is the sub-list for method input_type
+	1,  // [1:1] is the sub-list for extension type_name
+	1,  // [1:1] is the sub-list for extension extendee
+	0,  // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_operator_service_v1_operator_proto_init() }
@@ -333,14 +660,13 @@ func file_operator_service_v1_operator_proto_init() {
 	if File_operator_service_v1_operator_proto != nil {
 		return
 	}
-	file_operator_service_v1_operator_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_operator_service_v1_operator_proto_rawDesc), len(file_operator_service_v1_operator_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
