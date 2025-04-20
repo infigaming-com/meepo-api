@@ -364,7 +364,7 @@ components:
                         type: string
                     description: |-
                         Filter to return specific currencies only.
-                         If empty, all currencies will be returned
+                         If empty or not provided, all currencies will be returned
         api.operator.service.v1.GetOperatorCurrenciesResponse:
             type: object
             properties:
@@ -643,7 +643,7 @@ components:
                         type: string
                     description: |-
                         Filter to return specific currencies only.
-                         If empty, all currencies will be returned
+                         If empty or not provided, all currencies will be returned
         system.service.v1.GetCurrenciesResponse:
             type: object
             properties:

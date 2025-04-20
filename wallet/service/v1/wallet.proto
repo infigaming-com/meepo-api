@@ -38,7 +38,6 @@ message AddUserResponse {}
 
 message UpdateUserRequest {
 	string user_id = 1;
-	string operator_id = 2;
 	bool enabled = 3;
 }
 

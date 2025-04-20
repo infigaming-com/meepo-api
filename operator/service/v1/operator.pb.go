@@ -461,7 +461,7 @@ type GetOperatorCurrenciesRequest struct {
 	state      protoimpl.MessageState `protogen:"open.v1"`
 	OperatorId string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// Filter to return specific currencies only.
-	// If empty, all currencies will be returned
+	// If empty or not provided, all currencies will be returned
 	Currencies    []string `protobuf:"bytes,2,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

@@ -14,4 +14,9 @@ enum ErrorReason {
   UNSPECIFIED = 0;
   USER_NOT_FOUND = 10001 [(errors.code) = 404];
   USER_DISABLED = 10002 [(errors.code) = 401];
+  GET_OPERATOR_CURRENCIES_FAILED = 10003 [(errors.code) = 500];
+  ADD_USER_FAILED = 10004 [(errors.code) = 500];
+  ADD_USER_BALANCES_FAILED = 10005 [(errors.code) = 500];
+  UPDATE_USER_FAILED = 10006 [(errors.code) = 500];
+  UPDATE_USER_BALANCES_FAILED = 10007 [(errors.code) = 500];
 }
