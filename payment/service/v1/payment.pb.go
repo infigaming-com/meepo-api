@@ -646,7 +646,7 @@ func (x *GetPaymentChannelListResponse) GetData() []*PaymentChannelInfo {
 // Request to initiate a deposit
 type InitiateDepositRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Amount        float64                `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	Currency      string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	ChannelId     string                 `protobuf:"bytes,4,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
@@ -685,11 +685,11 @@ func (*InitiateDepositRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *InitiateDepositRequest) GetUserId() string {
+func (x *InitiateDepositRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 func (x *InitiateDepositRequest) GetAmount() float64 {
@@ -1406,7 +1406,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12:\n" +
 	"\x04data\x18\x03 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x04data\"\xb3\x01\n" +
 	"\x16InitiateDepositRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x16\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\x01R\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
