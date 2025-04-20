@@ -71,16 +71,40 @@ func ErrorAddUserFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_ADD_USER_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsAddUserBalancesFailed(err error) bool {
+func IsAddBalancesFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_ADD_USER_BALANCES_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_ADD_BALANCES_FAILED.String() && e.Code == 500
 }
 
-func ErrorAddUserBalancesFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_ADD_USER_BALANCES_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorAddBalancesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_BALANCES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsLockUserWithUserIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LOCK_USER_WITH_USER_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorLockUserWithUserIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LOCK_USER_WITH_USER_ID_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsUpdateUserFailed(err error) bool {
@@ -95,14 +119,62 @@ func ErrorUpdateUserFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UPDATE_USER_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsUpdateUserBalancesFailed(err error) bool {
+func IsUpdateBalancesFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_UPDATE_USER_BALANCES_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_UPDATE_BALANCES_FAILED.String() && e.Code == 500
 }
 
-func ErrorUpdateUserBalancesFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_UPDATE_USER_BALANCES_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorUpdateBalancesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_BALANCES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateBalanceFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_BALANCE_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateBalanceFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_BALANCE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUsersWithOperatorIdsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USERS_WITH_OPERATOR_IDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUsersWithOperatorIdsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USERS_WITH_OPERATOR_IDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsLockBalanceWithUserIdAndCurrencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorLockBalanceWithUserIdAndCurrencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetBalanceWithUserIdAndCurrencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetBalanceWithUserIdAndCurrencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
 }

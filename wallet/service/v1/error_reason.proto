@@ -16,7 +16,13 @@ enum ErrorReason {
   USER_DISABLED = 10002 [(errors.code) = 401];
   GET_OPERATOR_CURRENCIES_FAILED = 10003 [(errors.code) = 500];
   ADD_USER_FAILED = 10004 [(errors.code) = 500];
-  ADD_USER_BALANCES_FAILED = 10005 [(errors.code) = 500];
-  UPDATE_USER_FAILED = 10006 [(errors.code) = 500];
-  UPDATE_USER_BALANCES_FAILED = 10007 [(errors.code) = 500];
+  ADD_BALANCES_FAILED = 10005 [(errors.code) = 500];
+  GET_USER_FAILED = 10006 [(errors.code) = 500];
+  LOCK_USER_WITH_USER_ID_FAILED = 10007 [(errors.code) = 500];
+  UPDATE_USER_FAILED = 10008 [(errors.code) = 500];
+  UPDATE_BALANCES_FAILED = 10009 [(errors.code) = 500];
+  UPDATE_BALANCE_FAILED = 10010 [(errors.code) = 500];
+  GET_USERS_WITH_OPERATOR_IDS_FAILED = 10011 [(errors.code) = 500];
+  LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED = 10012 [(errors.code) = 500];
+  GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED = 10013 [(errors.code) = 500];
 }

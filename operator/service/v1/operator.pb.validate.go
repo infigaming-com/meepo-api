@@ -57,15 +57,9 @@ func (m *AddOperatorRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for ExternalId
-
-	// no validation rules for UserId
-
 	// no validation rules for Name
 
-	// no validation rules for ApiKey
-
-	// no validation rules for ApiKeySecret
+	// no validation rules for UserId
 
 	if len(errors) > 0 {
 		return AddOperatorRequestMultiError(errors)
@@ -169,7 +163,7 @@ func (m *AddOperatorResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	// no validation rules for OperatorId
 
 	if len(errors) > 0 {
 		return AddOperatorResponseMultiError(errors)
@@ -273,23 +267,9 @@ func (m *UpdateOperatorRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	// no validation rules for OperatorId
 
-	if m.Name != nil {
-		// no validation rules for Name
-	}
-
-	if m.Enabled != nil {
-		// no validation rules for Enabled
-	}
-
-	if m.ApiKey != nil {
-		// no validation rules for ApiKey
-	}
-
-	if m.ApiKeySecret != nil {
-		// no validation rules for ApiKeySecret
-	}
+	// no validation rules for Enabled
 
 	if len(errors) > 0 {
 		return UpdateOperatorRequestMultiError(errors)

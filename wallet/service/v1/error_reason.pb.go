@@ -25,14 +25,20 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED                    ErrorReason = 0
-	ErrorReason_USER_NOT_FOUND                 ErrorReason = 10001
-	ErrorReason_USER_DISABLED                  ErrorReason = 10002
-	ErrorReason_GET_OPERATOR_CURRENCIES_FAILED ErrorReason = 10003
-	ErrorReason_ADD_USER_FAILED                ErrorReason = 10004
-	ErrorReason_ADD_USER_BALANCES_FAILED       ErrorReason = 10005
-	ErrorReason_UPDATE_USER_FAILED             ErrorReason = 10006
-	ErrorReason_UPDATE_USER_BALANCES_FAILED    ErrorReason = 10007
+	ErrorReason_UNSPECIFIED                                   ErrorReason = 0
+	ErrorReason_USER_NOT_FOUND                                ErrorReason = 10001
+	ErrorReason_USER_DISABLED                                 ErrorReason = 10002
+	ErrorReason_GET_OPERATOR_CURRENCIES_FAILED                ErrorReason = 10003
+	ErrorReason_ADD_USER_FAILED                               ErrorReason = 10004
+	ErrorReason_ADD_BALANCES_FAILED                           ErrorReason = 10005
+	ErrorReason_GET_USER_FAILED                               ErrorReason = 10006
+	ErrorReason_LOCK_USER_WITH_USER_ID_FAILED                 ErrorReason = 10007
+	ErrorReason_UPDATE_USER_FAILED                            ErrorReason = 10008
+	ErrorReason_UPDATE_BALANCES_FAILED                        ErrorReason = 10009
+	ErrorReason_UPDATE_BALANCE_FAILED                         ErrorReason = 10010
+	ErrorReason_GET_USERS_WITH_OPERATOR_IDS_FAILED            ErrorReason = 10011
+	ErrorReason_LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED ErrorReason = 10012
+	ErrorReason_GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 10013
 )
 
 // Enum value maps for ErrorReason.
@@ -43,19 +49,31 @@ var (
 		10002: "USER_DISABLED",
 		10003: "GET_OPERATOR_CURRENCIES_FAILED",
 		10004: "ADD_USER_FAILED",
-		10005: "ADD_USER_BALANCES_FAILED",
-		10006: "UPDATE_USER_FAILED",
-		10007: "UPDATE_USER_BALANCES_FAILED",
+		10005: "ADD_BALANCES_FAILED",
+		10006: "GET_USER_FAILED",
+		10007: "LOCK_USER_WITH_USER_ID_FAILED",
+		10008: "UPDATE_USER_FAILED",
+		10009: "UPDATE_BALANCES_FAILED",
+		10010: "UPDATE_BALANCE_FAILED",
+		10011: "GET_USERS_WITH_OPERATOR_IDS_FAILED",
+		10012: "LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED",
+		10013: "GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED":                    0,
-		"USER_NOT_FOUND":                 10001,
-		"USER_DISABLED":                  10002,
-		"GET_OPERATOR_CURRENCIES_FAILED": 10003,
-		"ADD_USER_FAILED":                10004,
-		"ADD_USER_BALANCES_FAILED":       10005,
-		"UPDATE_USER_FAILED":             10006,
-		"UPDATE_USER_BALANCES_FAILED":    10007,
+		"UNSPECIFIED":                                   0,
+		"USER_NOT_FOUND":                                10001,
+		"USER_DISABLED":                                 10002,
+		"GET_OPERATOR_CURRENCIES_FAILED":                10003,
+		"ADD_USER_FAILED":                               10004,
+		"ADD_BALANCES_FAILED":                           10005,
+		"GET_USER_FAILED":                               10006,
+		"LOCK_USER_WITH_USER_ID_FAILED":                 10007,
+		"UPDATE_USER_FAILED":                            10008,
+		"UPDATE_BALANCES_FAILED":                        10009,
+		"UPDATE_BALANCE_FAILED":                         10010,
+		"GET_USERS_WITH_OPERATOR_IDS_FAILED":            10011,
+		"LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED": 10012,
+		"GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED":  10013,
 	}
 )
 
@@ -90,16 +108,22 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x8c\x02\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x8c\x04\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x0eUSER_NOT_FOUND\x10\x91N\x1a\x04\xa8E\x94\x03\x12\x18\n" +
 	"\rUSER_DISABLED\x10\x92N\x1a\x04\xa8E\x91\x03\x12)\n" +
 	"\x1eGET_OPERATOR_CURRENCIES_FAILED\x10\x93N\x1a\x04\xa8E\xf4\x03\x12\x1a\n" +
-	"\x0fADD_USER_FAILED\x10\x94N\x1a\x04\xa8E\xf4\x03\x12#\n" +
-	"\x18ADD_USER_BALANCES_FAILED\x10\x95N\x1a\x04\xa8E\xf4\x03\x12\x1d\n" +
-	"\x12UPDATE_USER_FAILED\x10\x96N\x1a\x04\xa8E\xf4\x03\x12&\n" +
-	"\x1bUPDATE_USER_BALANCES_FAILED\x10\x97N\x1a\x04\xa8E\xf4\x03\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x0fADD_USER_FAILED\x10\x94N\x1a\x04\xa8E\xf4\x03\x12\x1e\n" +
+	"\x13ADD_BALANCES_FAILED\x10\x95N\x1a\x04\xa8E\xf4\x03\x12\x1a\n" +
+	"\x0fGET_USER_FAILED\x10\x96N\x1a\x04\xa8E\xf4\x03\x12(\n" +
+	"\x1dLOCK_USER_WITH_USER_ID_FAILED\x10\x97N\x1a\x04\xa8E\xf4\x03\x12\x1d\n" +
+	"\x12UPDATE_USER_FAILED\x10\x98N\x1a\x04\xa8E\xf4\x03\x12!\n" +
+	"\x16UPDATE_BALANCES_FAILED\x10\x99N\x1a\x04\xa8E\xf4\x03\x12 \n" +
+	"\x15UPDATE_BALANCE_FAILED\x10\x9aN\x1a\x04\xa8E\xf4\x03\x12-\n" +
+	"\"GET_USERS_WITH_OPERATOR_IDS_FAILED\x10\x9bN\x1a\x04\xa8E\xf4\x03\x128\n" +
+	"-LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED\x10\x9cN\x1a\x04\xa8E\xf4\x03\x127\n" +
+	",GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED\x10\x9dN\x1a\x04\xa8E\xf4\x03\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

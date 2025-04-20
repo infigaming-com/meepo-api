@@ -332,25 +332,16 @@ components:
         api.operator.service.v1.AddOperatorRequest:
             type: object
             properties:
-                externalId:
-                    type: string
-                    description: operator id allocated by game aggregator
-                userId:
-                    type: string
-                    description: user id who owns the operator
                 name:
                     type: string
                     description: operator name
-                apiKey:
+                userId:
                     type: string
-                    description: api key
-                apiKeySecret:
-                    type: string
-                    description: api key secret
+                    description: user id who creates the operator
         api.operator.service.v1.AddOperatorResponse:
             type: object
             properties:
-                id:
+                operatorId:
                     type: string
                     description: operator id allocated by operator service
         api.operator.service.v1.GetOperatorCurrenciesRequest:
@@ -396,21 +387,12 @@ components:
         api.operator.service.v1.UpdateOperatorRequest:
             type: object
             properties:
-                id:
+                operatorId:
                     type: string
                     description: operator id allocated by operator service
-                name:
-                    type: string
-                    description: operator name
                 enabled:
                     type: boolean
                     description: enabled
-                apiKey:
-                    type: string
-                    description: api key
-                apiKeySecret:
-                    type: string
-                    description: api key secret
         api.operator.service.v1.UpdateOperatorResponse:
             type: object
             properties: {}
