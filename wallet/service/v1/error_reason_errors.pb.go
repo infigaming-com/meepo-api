@@ -46,3 +46,27 @@ func IsUserDisabled(err error) bool {
 func ErrorUserDisabled(format string, args ...interface{}) *errors.Error {
 	return errors.New(401, ErrorReason_USER_DISABLED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetOperatorCurrenciesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_CURRENCIES_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorCurrenciesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_CURRENCIES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddUserBalancesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_USER_BALANCES_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddUserBalancesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_USER_BALANCES_FAILED.String(), fmt.Sprintf(format, args...))
+}

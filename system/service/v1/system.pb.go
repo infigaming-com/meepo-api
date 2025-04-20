@@ -381,7 +381,7 @@ func (x *UpdateCurrencyResponse) GetCurrency() *Currency {
 type GetCurrenciesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Filter to return specific currencies only.
-	// If empty, all currencies will be returned
+	// If empty or not provided, all currencies will be returned
 	Currencies    []string `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
