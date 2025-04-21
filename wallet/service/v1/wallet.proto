@@ -24,7 +24,8 @@ service Wallet {
 	
 	rpc GetUserBalances (GetUserBalancesRequest) returns (GetUserBalancesResponse) {
 		option (google.api.http) = {
-			get: "/v1/wallet/balance/{user_id}"
+			post: "/v1/wallet/balances/get"
+			body: "*"
 		};
 	}
 }

@@ -30,7 +30,7 @@ type WalletHTTPServer interface {
 func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/wallet/currencies/update", _Wallet_UpdateUserCurrency0_HTTP_Handler(srv))
-	r.GET("/v1/wallet/balance/{user_id}", _Wallet_GetUserBalances0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/balances/get", _Wallet_GetUserBalances0_HTTP_Handler(srv))
 }
 
 func _Wallet_UpdateUserCurrency0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
@@ -58,10 +58,10 @@ func _Wallet_UpdateUserCurrency0_HTTP_Handler(srv WalletHTTPServer) func(ctx htt
 func _Wallet_GetUserBalances0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetUserBalancesRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		if err := ctx.BindVars(&in); err != nil {
+		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationWalletGetUserBalances)
@@ -92,11 +92,11 @@ func NewWalletHTTPClient(client *http.Client) WalletHTTPClient {
 
 func (c *WalletHTTPClientImpl) GetUserBalances(ctx context.Context, in *GetUserBalancesRequest, opts ...http.CallOption) (*GetUserBalancesResponse, error) {
 	var out GetUserBalancesResponse
-	pattern := "/v1/wallet/balance/{user_id}"
-	path := binding.EncodeURL(pattern, in, true)
+	pattern := "/v1/wallet/balances/get"
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationWalletGetUserBalances))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
