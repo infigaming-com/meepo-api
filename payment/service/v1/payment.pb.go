@@ -1481,14 +1481,14 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x17ERROR_SIGNATURE_INVALID\x10\xea\a\x12\x1c\n" +
 	"\x17ERROR_TIMESTAMP_EXPIRED\x10\xeb\a\x12\x1d\n" +
 	"\x18ERROR_MERCHANT_NOT_FOUND\x10\xec\a\x12\x13\n" +
-	"\x0eERROR_INTERNAL\x10\xd0\x0f2\xbc\a\n" +
-	"\aPayment\x12\x9e\x01\n" +
-	"\x14GetPaymentMethodList\x12/.payment.service.v1.GetPaymentMethodListRequest\x1a0.payment.service.v1.GetPaymentMethodListResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/payment/method/list\x12\xa1\x01\n" +
-	"\x14CreatePaymentChannel\x12/.payment.service.v1.CreatePaymentChannelRequest\x1a0.payment.service.v1.CreatePaymentChannelResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/payment/channel/create\x12\xa2\x01\n" +
-	"\x15GetPaymentChannelList\x120.payment.service.v1.GetPaymentChannelListRequest\x1a1.payment.service.v1.GetPaymentChannelListResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/payment/channel/list\x12\x94\x01\n" +
-	"\x0fInitiateDeposit\x12*.payment.service.v1.InitiateDepositRequest\x1a+.payment.service.v1.InitiateDepositResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/payment/deposit/initiate\x12\x98\x01\n" +
-	"\x10InitiateWithdraw\x12+.payment.service.v1.InitiateWithdrawRequest\x1a,.payment.service.v1.InitiateWithdrawResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/payment/withdraw/initiate\x12\x94\x01\n" +
-	"\x0fDepositCallback\x12*.payment.service.v1.DepositCallbackRequest\x1a+.payment.service.v1.DepositCallbackResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/payment/deposit/callbackBU\n" +
+	"\x0eERROR_INTERNAL\x10\xd0\x0f2\xb6\a\n" +
+	"\aPayment\x12\x9d\x01\n" +
+	"\x14GetPaymentMethodList\x12/.payment.service.v1.GetPaymentMethodListRequest\x1a0.payment.service.v1.GetPaymentMethodListResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/payment/method/list\x12\xa0\x01\n" +
+	"\x14CreatePaymentChannel\x12/.payment.service.v1.CreatePaymentChannelRequest\x1a0.payment.service.v1.CreatePaymentChannelResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/payment/channel/create\x12\xa1\x01\n" +
+	"\x15GetPaymentChannelList\x120.payment.service.v1.GetPaymentChannelListRequest\x1a1.payment.service.v1.GetPaymentChannelListResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/payment/channel/list\x12\x93\x01\n" +
+	"\x0fInitiateDeposit\x12*.payment.service.v1.InitiateDepositRequest\x1a+.payment.service.v1.InitiateDepositResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/deposit/initiate\x12\x97\x01\n" +
+	"\x10InitiateWithdraw\x12+.payment.service.v1.InitiateWithdrawRequest\x1a,.payment.service.v1.InitiateWithdrawResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/payment/withdraw/initiate\x12\x93\x01\n" +
+	"\x0fDepositCallback\x12*.payment.service.v1.DepositCallbackRequest\x1a+.payment.service.v1.DepositCallbackResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/deposit/callbackBU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
 
 var (

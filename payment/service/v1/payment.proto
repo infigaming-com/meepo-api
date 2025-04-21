@@ -173,7 +173,7 @@ service Payment {
   // Get list of payment methods
   rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
     option (google.api.http) = {
-      post: "/api/payment/method/list"
+      post: "/v1/payment/method/list"
       body: "*"
     };
   }
@@ -181,7 +181,7 @@ service Payment {
   // Create payment channel
   rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (CreatePaymentChannelResponse) {
     option (google.api.http) = {
-      post: "/api/payment/channel/create"
+      post: "/v1/payment/channel/create"
       body: "*"
     };
   }
@@ -189,7 +189,7 @@ service Payment {
   // Get list of payment channels
   rpc GetPaymentChannelList(GetPaymentChannelListRequest) returns (GetPaymentChannelListResponse) {
     option (google.api.http) = {
-      post: "/api/payment/channel/list"
+      post: "/v1/payment/channel/list"
       body: "*"
     };
   }
@@ -197,7 +197,7 @@ service Payment {
   // Initiate a deposit transaction
   rpc InitiateDeposit(InitiateDepositRequest) returns (InitiateDepositResponse) {
     option (google.api.http) = {
-      post: "/api/payment/deposit/initiate"
+      post: "/v1/payment/deposit/initiate"
       body: "*"
     };
   }
@@ -205,7 +205,7 @@ service Payment {
   // Initiate a withdrawal transaction
   rpc InitiateWithdraw(InitiateWithdrawRequest) returns (InitiateWithdrawResponse) {
     option (google.api.http) = {
-      post: "/api/payment/withdraw/initiate"
+      post: "/v1/payment/withdraw/initiate"
       body: "*"
     };
   }
@@ -214,7 +214,7 @@ service Payment {
   // This endpoint handles callbacks from payment gateways.
   rpc DepositCallback(DepositCallbackRequest) returns (DepositCallbackResponse) {
     option (google.api.http) = {
-      post: "/api/payment/deposit/callback"
+      post: "/v1/payment/deposit/callback"
       body: "*"
     };
   }

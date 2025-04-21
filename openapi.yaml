@@ -6,122 +6,6 @@ info:
     title: ""
     version: 0.0.1
 paths:
-    /api/payment/channel/create:
-        post:
-            tags:
-                - Payment
-            description: Create payment channel
-            operationId: Payment_CreatePaymentChannel
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
-    /api/payment/channel/list:
-        post:
-            tags:
-                - Payment
-            description: Get list of payment channels
-            operationId: Payment_GetPaymentChannelList
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListResponse'
-    /api/payment/deposit/callback:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Deposit callback
-                 This endpoint handles callbacks from payment gateways.
-            operationId: Payment_DepositCallback
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.DepositCallbackRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.DepositCallbackResponse'
-    /api/payment/deposit/initiate:
-        post:
-            tags:
-                - Payment
-            description: Initiate a deposit transaction
-            operationId: Payment_InitiateDeposit
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.InitiateDepositRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.InitiateDepositResponse'
-    /api/payment/method/list:
-        post:
-            tags:
-                - Payment
-            description: Get list of payment methods
-            operationId: Payment_GetPaymentMethodList
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
-    /api/payment/withdraw/initiate:
-        post:
-            tags:
-                - Payment
-            description: Initiate a withdrawal transaction
-            operationId: Payment_InitiateWithdraw
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawResponse'
     /v1/operator/add:
         post:
             tags:
@@ -194,6 +78,122 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorResponse'
+    /v1/payment/channel/create:
+        post:
+            tags:
+                - Payment
+            description: Create payment channel
+            operationId: Payment_CreatePaymentChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
+    /v1/payment/channel/list:
+        post:
+            tags:
+                - Payment
+            description: Get list of payment channels
+            operationId: Payment_GetPaymentChannelList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListResponse'
+    /v1/payment/deposit/callback:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Deposit callback
+                 This endpoint handles callbacks from payment gateways.
+            operationId: Payment_DepositCallback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.DepositCallbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.DepositCallbackResponse'
+    /v1/payment/deposit/initiate:
+        post:
+            tags:
+                - Payment
+            description: Initiate a deposit transaction
+            operationId: Payment_InitiateDeposit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.InitiateDepositRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.InitiateDepositResponse'
+    /v1/payment/method/list:
+        post:
+            tags:
+                - Payment
+            description: Get list of payment methods
+            operationId: Payment_GetPaymentMethodList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /v1/payment/withdraw/initiate:
+        post:
+            tags:
+                - Payment
+            description: Initiate a withdrawal transaction
+            operationId: Payment_InitiateWithdraw
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawResponse'
     /v1/system/currencies/add:
         post:
             tags:

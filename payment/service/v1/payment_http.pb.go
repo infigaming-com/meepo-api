@@ -44,12 +44,12 @@ type PaymentHTTPServer interface {
 
 func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r := s.Route("/")
-	r.POST("/api/payment/method/list", _Payment_GetPaymentMethodList0_HTTP_Handler(srv))
-	r.POST("/api/payment/channel/create", _Payment_CreatePaymentChannel0_HTTP_Handler(srv))
-	r.POST("/api/payment/channel/list", _Payment_GetPaymentChannelList0_HTTP_Handler(srv))
-	r.POST("/api/payment/deposit/initiate", _Payment_InitiateDeposit0_HTTP_Handler(srv))
-	r.POST("/api/payment/withdraw/initiate", _Payment_InitiateWithdraw0_HTTP_Handler(srv))
-	r.POST("/api/payment/deposit/callback", _Payment_DepositCallback0_HTTP_Handler(srv))
+	r.POST("/v1/payment/method/list", _Payment_GetPaymentMethodList0_HTTP_Handler(srv))
+	r.POST("/v1/payment/channel/create", _Payment_CreatePaymentChannel0_HTTP_Handler(srv))
+	r.POST("/v1/payment/channel/list", _Payment_GetPaymentChannelList0_HTTP_Handler(srv))
+	r.POST("/v1/payment/deposit/initiate", _Payment_InitiateDeposit0_HTTP_Handler(srv))
+	r.POST("/v1/payment/withdraw/initiate", _Payment_InitiateWithdraw0_HTTP_Handler(srv))
+	r.POST("/v1/payment/deposit/callback", _Payment_DepositCallback0_HTTP_Handler(srv))
 }
 
 func _Payment_GetPaymentMethodList0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
@@ -203,7 +203,7 @@ func NewPaymentHTTPClient(client *http.Client) PaymentHTTPClient {
 
 func (c *PaymentHTTPClientImpl) CreatePaymentChannel(ctx context.Context, in *CreatePaymentChannelRequest, opts ...http.CallOption) (*CreatePaymentChannelResponse, error) {
 	var out CreatePaymentChannelResponse
-	pattern := "/api/payment/channel/create"
+	pattern := "/v1/payment/channel/create"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentCreatePaymentChannel))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -216,7 +216,7 @@ func (c *PaymentHTTPClientImpl) CreatePaymentChannel(ctx context.Context, in *Cr
 
 func (c *PaymentHTTPClientImpl) DepositCallback(ctx context.Context, in *DepositCallbackRequest, opts ...http.CallOption) (*DepositCallbackResponse, error) {
 	var out DepositCallbackResponse
-	pattern := "/api/payment/deposit/callback"
+	pattern := "/v1/payment/deposit/callback"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentDepositCallback))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -229,7 +229,7 @@ func (c *PaymentHTTPClientImpl) DepositCallback(ctx context.Context, in *Deposit
 
 func (c *PaymentHTTPClientImpl) GetPaymentChannelList(ctx context.Context, in *GetPaymentChannelListRequest, opts ...http.CallOption) (*GetPaymentChannelListResponse, error) {
 	var out GetPaymentChannelListResponse
-	pattern := "/api/payment/channel/list"
+	pattern := "/v1/payment/channel/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentGetPaymentChannelList))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -242,7 +242,7 @@ func (c *PaymentHTTPClientImpl) GetPaymentChannelList(ctx context.Context, in *G
 
 func (c *PaymentHTTPClientImpl) GetPaymentMethodList(ctx context.Context, in *GetPaymentMethodListRequest, opts ...http.CallOption) (*GetPaymentMethodListResponse, error) {
 	var out GetPaymentMethodListResponse
-	pattern := "/api/payment/method/list"
+	pattern := "/v1/payment/method/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentGetPaymentMethodList))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -255,7 +255,7 @@ func (c *PaymentHTTPClientImpl) GetPaymentMethodList(ctx context.Context, in *Ge
 
 func (c *PaymentHTTPClientImpl) InitiateDeposit(ctx context.Context, in *InitiateDepositRequest, opts ...http.CallOption) (*InitiateDepositResponse, error) {
 	var out InitiateDepositResponse
-	pattern := "/api/payment/deposit/initiate"
+	pattern := "/v1/payment/deposit/initiate"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentInitiateDeposit))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -268,7 +268,7 @@ func (c *PaymentHTTPClientImpl) InitiateDeposit(ctx context.Context, in *Initiat
 
 func (c *PaymentHTTPClientImpl) InitiateWithdraw(ctx context.Context, in *InitiateWithdrawRequest, opts ...http.CallOption) (*InitiateWithdrawResponse, error) {
 	var out InitiateWithdrawResponse
-	pattern := "/api/payment/withdraw/initiate"
+	pattern := "/v1/payment/withdraw/initiate"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentInitiateWithdraw))
 	opts = append(opts, http.PathTemplate(pattern))
