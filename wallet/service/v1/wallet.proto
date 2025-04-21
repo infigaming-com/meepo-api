@@ -28,6 +28,10 @@ service Wallet {
 			body: "*"
 		};
 	}
+
+	rpc Credit (CreditRequest) returns (CreditResponse) {}
+
+	rpc Debit (DebitRequest) returns (DebitResponse) {}
 }
 
 message AddUserRequest {
@@ -73,4 +77,48 @@ message GetUserBalancesResponse {
 		int64 provider_bonus = 4;
 	}
 	repeated Balance balances = 1;
+}
+
+message CreditRequest {
+	string user_id = 1;
+	int64 cash = 2;
+	int64 operator_bonus = 3;
+	int64 provider_bonus = 4;
+	// credit_type indicates where the credit comes from.
+	// 1. "payment" means the credit comes from a payment transaction.
+	// 2. "game" means the credit comes from a game transaction.
+	string credit_type = 5;
+	// credit_transaction_id is the transaction id of the credit.
+	// if credit_type is "payment", credit_transaction_id is the payment transaction id.
+	// if credit_type is "game", credit_transaction_id is the game transaction id.
+	string credit_transaction_id = 6;
+}
+
+message CreditResponse {
+	string transaction_id = 1;
+	int64 cash = 2;
+	int64 operator_bonus = 3;
+	int64 provider_bonus = 4;
+}
+
+message DebitRequest {
+	string user_id = 1;
+	int64 cash = 2;
+	int64 operator_bonus = 3;
+	int64 provider_bonus = 4;
+	// debit_type indicates where the debit comes from.
+	// 1. "payment" means the debit comes from a payment transaction.
+	// 2. "game" means the debit comes from a game transaction.
+	string debit_type = 5;
+	// debit_transaction_id is the transaction id of the debit.
+	// if debit_type is "payment", debit_transaction_id is the payment transaction id.
+	// if debit_type is "game", debit_transaction_id is the game transaction id.
+	string debit_transaction_id = 6;
+}
+
+message DebitResponse {
+	string transaction_id = 1;
+	int64 cash = 2;
+	int64 operator_bonus = 3;
+	int64 provider_bonus = 4;
 }
