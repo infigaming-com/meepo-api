@@ -738,7 +738,7 @@ components:
         payment.service.v1.GetPaymentChannelListResponse:
             type: object
             properties:
-                data:
+                paymentChannels:
                     type: array
                     items:
                         $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'

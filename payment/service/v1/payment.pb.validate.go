@@ -956,7 +956,7 @@ func (m *GetPaymentChannelListResponse) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetData() {
+	for idx, item := range m.GetPaymentChannels() {
 		_, _ = idx, item
 
 		if all {
@@ -964,7 +964,7 @@ func (m *GetPaymentChannelListResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GetPaymentChannelListResponseValidationError{
-						field:  fmt.Sprintf("Data[%v]", idx),
+						field:  fmt.Sprintf("PaymentChannels[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -972,7 +972,7 @@ func (m *GetPaymentChannelListResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GetPaymentChannelListResponseValidationError{
-						field:  fmt.Sprintf("Data[%v]", idx),
+						field:  fmt.Sprintf("PaymentChannels[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -981,7 +981,7 @@ func (m *GetPaymentChannelListResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GetPaymentChannelListResponseValidationError{
-					field:  fmt.Sprintf("Data[%v]", idx),
+					field:  fmt.Sprintf("PaymentChannels[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}

@@ -445,10 +445,10 @@ func (x *PaymentChannelInfo) GetUpdatedAt() *timestamppb.Timestamp {
 
 // Response for payment channel list
 type GetPaymentChannelListResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*PaymentChannelInfo  `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	PaymentChannels []*PaymentChannelInfo  `protobuf:"bytes,1,rep,name=payment_channels,json=paymentChannels,proto3" json:"payment_channels,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetPaymentChannelListResponse) Reset() {
@@ -481,9 +481,9 @@ func (*GetPaymentChannelListResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *GetPaymentChannelListResponse) GetData() []*PaymentChannelInfo {
+func (x *GetPaymentChannelListResponse) GetPaymentChannels() []*PaymentChannelInfo {
 	if x != nil {
-		return x.Data
+		return x.PaymentChannels
 	}
 	return nil
 }
@@ -1101,9 +1101,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"[\n" +
-	"\x1dGetPaymentChannelListResponse\x12:\n" +
-	"\x04data\x18\x01 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x04data\"\xb3\x01\n" +
+	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"r\n" +
+	"\x1dGetPaymentChannelListResponse\x12Q\n" +
+	"\x10payment_channels\x18\x01 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x0fpaymentChannels\"\xb3\x01\n" +
 	"\x16InitiateDepositRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\x01R\x06amount\x12\x1a\n" +
@@ -1209,7 +1209,7 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	14, // 2: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
 	15, // 3: payment.service.v1.PaymentChannelInfo.created_at:type_name -> google.protobuf.Timestamp
 	15, // 4: payment.service.v1.PaymentChannelInfo.updated_at:type_name -> google.protobuf.Timestamp
-	6,  // 5: payment.service.v1.GetPaymentChannelListResponse.data:type_name -> payment.service.v1.PaymentChannelInfo
+	6,  // 5: payment.service.v1.GetPaymentChannelListResponse.payment_channels:type_name -> payment.service.v1.PaymentChannelInfo
 	14, // 6: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
 	15, // 7: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
 	14, // 8: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct

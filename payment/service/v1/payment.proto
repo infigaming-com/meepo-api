@@ -60,7 +60,7 @@ message PaymentChannelInfo {
 
 // Response for payment channel list
 message GetPaymentChannelListResponse {
-  repeated PaymentChannelInfo data = 1;
+  repeated PaymentChannelInfo payment_channels = 1 [json_name="paymentChannels"];
 }
 
 // Request to initiate a deposit
