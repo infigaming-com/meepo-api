@@ -9,15 +9,16 @@ option java_multiple_files = true;
 option java_package = "system.service.v1";
 
 service System {
-	rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {
-		option (google.api.http) = {
-			get: "/v1/system/healthcheck"
-		};
-	};
-
 	rpc AddCurrency(AddCurrencyRequest) returns (AddCurrencyResponse) {
 		option (google.api.http) = {
 			post: "/v1/system/currencies/add"
+			body: "*"
+		};
+	};
+
+	rpc UpdateCurrency(UpdateCurrencyRequest) returns (UpdateCurrencyResponse) {
+		option (google.api.http) = {
+			post: "/v1/system/currencies/update"
 			body: "*"
 		};
 	};
@@ -28,47 +29,50 @@ service System {
 			body: "*"
 		};
 	};
-
-	rpc ListCurrencies(ListCurrenciesRequest) returns (ListCurrenciesResponse) {
-		option (google.api.http) = {
-			post: "/v1/system/currencies/list"
-			body: "*"
-		};
-	};
 }
 
 message Currency {
 	string currency = 1;
-	int32 decimal_places = 2;
-}
-
-message HealthCheckRequest {
-}
-
-message HealthCheckResponse {
-	string status = 1;
+	bool enabled = 2;
+	bool hidden = 3;
+	string type = 4;
+	string symbol = 5;
+	string icon = 6;
+	int32 decimal_places = 7;
 }
 
 message AddCurrencyRequest {
 	string currency = 1;
-	int32 decimal_places = 2;
+	bool enabled = 2;
+	bool hidden = 3;
+	string type = 4;
+	string symbol = 5;
+	string icon = 6;
+	int32 decimal_places = 7;
 }
 
-message AddCurrencyResponse {
+message AddCurrencyResponse {}
+
+message UpdateCurrencyRequest {
+	string currency = 1;
+	optional bool enabled = 2;
+	optional bool hidden = 3;
+	optional string type = 4;
+	optional string symbol = 5;
+	optional string icon = 6;
+	optional int32 decimal_places = 7;
+}
+
+message UpdateCurrencyResponse {
 	Currency currency = 1;
 }
 
 message GetCurrenciesRequest {
-	string currency = 1;
+	// Filter to return specific currencies only.
+	// If empty or not provided, all currencies will be returned
+	repeated string currencies = 1;
 }
 
 message GetCurrenciesResponse {
-	Currency currencies = 1;
-}
-
-message ListCurrenciesRequest {
-}
-
-message ListCurrenciesResponse {
 	repeated Currency currencies = 1;
 }

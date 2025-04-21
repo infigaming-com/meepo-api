@@ -21,41 +21,19 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationSystemAddCurrency = "/system.service.v1.System/AddCurrency"
 const OperationSystemGetCurrencies = "/system.service.v1.System/GetCurrencies"
-const OperationSystemHealthCheck = "/system.service.v1.System/HealthCheck"
-const OperationSystemListCurrencies = "/system.service.v1.System/ListCurrencies"
+const OperationSystemUpdateCurrency = "/system.service.v1.System/UpdateCurrency"
 
 type SystemHTTPServer interface {
 	AddCurrency(context.Context, *AddCurrencyRequest) (*AddCurrencyResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
-	HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error)
-	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
+	UpdateCurrency(context.Context, *UpdateCurrencyRequest) (*UpdateCurrencyResponse, error)
 }
 
 func RegisterSystemHTTPServer(s *http.Server, srv SystemHTTPServer) {
 	r := s.Route("/")
-	r.GET("/v1/system/healthcheck", _System_HealthCheck1_HTTP_Handler(srv))
 	r.POST("/v1/system/currencies/add", _System_AddCurrency0_HTTP_Handler(srv))
+	r.POST("/v1/system/currencies/update", _System_UpdateCurrency0_HTTP_Handler(srv))
 	r.POST("/v1/system/currencies/get", _System_GetCurrencies0_HTTP_Handler(srv))
-	r.POST("/v1/system/currencies/list", _System_ListCurrencies0_HTTP_Handler(srv))
-}
-
-func _System_HealthCheck1_HTTP_Handler(srv SystemHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in HealthCheckRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationSystemHealthCheck)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.HealthCheck(ctx, req.(*HealthCheckRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*HealthCheckResponse)
-		return ctx.Result(200, reply)
-	}
 }
 
 func _System_AddCurrency0_HTTP_Handler(srv SystemHTTPServer) func(ctx http.Context) error {
@@ -76,6 +54,28 @@ func _System_AddCurrency0_HTTP_Handler(srv SystemHTTPServer) func(ctx http.Conte
 			return err
 		}
 		reply := out.(*AddCurrencyResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _System_UpdateCurrency0_HTTP_Handler(srv SystemHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateCurrencyRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSystemUpdateCurrency)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateCurrency(ctx, req.(*UpdateCurrencyRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateCurrencyResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -102,33 +102,10 @@ func _System_GetCurrencies0_HTTP_Handler(srv SystemHTTPServer) func(ctx http.Con
 	}
 }
 
-func _System_ListCurrencies0_HTTP_Handler(srv SystemHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListCurrenciesRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationSystemListCurrencies)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListCurrencies(ctx, req.(*ListCurrenciesRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListCurrenciesResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type SystemHTTPClient interface {
 	AddCurrency(ctx context.Context, req *AddCurrencyRequest, opts ...http.CallOption) (rsp *AddCurrencyResponse, err error)
 	GetCurrencies(ctx context.Context, req *GetCurrenciesRequest, opts ...http.CallOption) (rsp *GetCurrenciesResponse, err error)
-	HealthCheck(ctx context.Context, req *HealthCheckRequest, opts ...http.CallOption) (rsp *HealthCheckResponse, err error)
-	ListCurrencies(ctx context.Context, req *ListCurrenciesRequest, opts ...http.CallOption) (rsp *ListCurrenciesResponse, err error)
+	UpdateCurrency(ctx context.Context, req *UpdateCurrencyRequest, opts ...http.CallOption) (rsp *UpdateCurrencyResponse, err error)
 }
 
 type SystemHTTPClientImpl struct {
@@ -165,24 +142,11 @@ func (c *SystemHTTPClientImpl) GetCurrencies(ctx context.Context, in *GetCurrenc
 	return &out, nil
 }
 
-func (c *SystemHTTPClientImpl) HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...http.CallOption) (*HealthCheckResponse, error) {
-	var out HealthCheckResponse
-	pattern := "/v1/system/healthcheck"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationSystemHealthCheck))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *SystemHTTPClientImpl) ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...http.CallOption) (*ListCurrenciesResponse, error) {
-	var out ListCurrenciesResponse
-	pattern := "/v1/system/currencies/list"
+func (c *SystemHTTPClientImpl) UpdateCurrency(ctx context.Context, in *UpdateCurrencyRequest, opts ...http.CallOption) (*UpdateCurrencyResponse, error) {
+	var out UpdateCurrencyResponse
+	pattern := "/v1/system/currencies/update"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationSystemListCurrencies))
+	opts = append(opts, http.Operation(OperationSystemUpdateCurrency))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
