@@ -140,10 +140,10 @@ func (x *PaymentMethodInfo) GetKeySchema() *structpb.Struct {
 
 // Response for payment method list
 type GetPaymentMethodListResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*PaymentMethodInfo   `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	PaymentMethods []*PaymentMethodInfo   `protobuf:"bytes,1,rep,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *GetPaymentMethodListResponse) Reset() {
@@ -176,9 +176,9 @@ func (*GetPaymentMethodListResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *GetPaymentMethodListResponse) GetData() []*PaymentMethodInfo {
+func (x *GetPaymentMethodListResponse) GetPaymentMethods() []*PaymentMethodInfo {
 	if x != nil {
-		return x.Data
+		return x.PaymentMethods
 	}
 	return nil
 }
@@ -1074,9 +1074,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12%\n" +
 	"\x0epayment_method\x18\x04 \x01(\tR\rpaymentMethod\x126\n" +
 	"\n" +
-	"key_schema\x18\x05 \x01(\v2\x17.google.protobuf.StructR\tkeySchema\"Y\n" +
-	"\x1cGetPaymentMethodListResponse\x129\n" +
-	"\x04data\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x04data\"\x95\x01\n" +
+	"key_schema\x18\x05 \x01(\v2\x17.google.protobuf.StructR\tkeySchema\"n\n" +
+	"\x1cGetPaymentMethodListResponse\x12N\n" +
+	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\x95\x01\n" +
 	"\x1bCreatePaymentChannelRequest\x12\x1f\n" +
 	"\vmerchant_id\x18\x01 \x01(\tR\n" +
 	"merchantId\x12*\n" +
@@ -1205,7 +1205,7 @@ var file_payment_service_v1_payment_proto_goTypes = []any{
 }
 var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	14, // 0: payment.service.v1.PaymentMethodInfo.key_schema:type_name -> google.protobuf.Struct
-	1,  // 1: payment.service.v1.GetPaymentMethodListResponse.data:type_name -> payment.service.v1.PaymentMethodInfo
+	1,  // 1: payment.service.v1.GetPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
 	14, // 2: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
 	15, // 3: payment.service.v1.PaymentChannelInfo.created_at:type_name -> google.protobuf.Timestamp
 	15, // 4: payment.service.v1.PaymentChannelInfo.updated_at:type_name -> google.protobuf.Timestamp

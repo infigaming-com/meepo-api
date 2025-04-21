@@ -25,7 +25,7 @@ message PaymentMethodInfo {
 
 // Response for payment method list
 message GetPaymentMethodListResponse {
-  repeated PaymentMethodInfo data = 1;
+  repeated PaymentMethodInfo payment_methods = 1 [json_name="paymentMethods"];
 }
 
 // Request to create a payment channel

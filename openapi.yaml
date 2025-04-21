@@ -750,7 +750,7 @@ components:
         payment.service.v1.GetPaymentMethodListResponse:
             type: object
             properties:
-                data:
+                paymentMethods:
                     type: array
                     items:
                         $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
