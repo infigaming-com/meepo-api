@@ -587,14 +587,14 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus2\xa3\x05\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus2\xa1\x05\n" +
 	"\x06Wallet\x12Z\n" +
 	"\aAddUser\x12%.api.wallet.service.v1.AddUserRequest\x1a&.api.wallet.service.v1.AddUserResponse\"\x00\x12c\n" +
 	"\n" +
 	"UpdateUser\x12(.api.wallet.service.v1.UpdateUserRequest\x1a).api.wallet.service.v1.UpdateUserResponse\"\x00\x12\x99\x01\n" +
 	"\x1cAddOrUpdateOperatorsCurrency\x12:.api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest\x1a;.api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse\"\x00\x12\xa2\x01\n" +
-	"\x12UpdateUserCurrency\x120.api.wallet.service.v1.UpdateUserCurrencyRequest\x1a1.api.wallet.service.v1.UpdateUserCurrencyResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/wallet/currencies/update\x12\x96\x01\n" +
-	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/v1/wallet/balance/{user_id}BS\n" +
+	"\x12UpdateUserCurrency\x120.api.wallet.service.v1.UpdateUserCurrencyRequest\x1a1.api.wallet.service.v1.UpdateUserCurrencyResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/wallet/currencies/update\x12\x94\x01\n" +
+	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/wallet/balances/getBS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

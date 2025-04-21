@@ -395,17 +395,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
-    /v1/wallet/balance/{userId}:
-        get:
+    /v1/wallet/balances/get:
+        post:
             tags:
                 - Wallet
             operationId: Wallet_GetUserBalances
-            parameters:
-                - name: userId
-                  in: path
-                  required: true
-                  schema:
-                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesRequest'
+                required: true
             responses:
                 "200":
                     description: OK
@@ -646,6 +646,11 @@ components:
                     type: string
                     description: Unique identifier for the user.
             description: UserInfo contains basic user information.
+        api.wallet.service.v1.GetUserBalancesRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
         api.wallet.service.v1.GetUserBalancesResponse:
             type: object
             properties:
