@@ -6,6 +6,122 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /api/payment/channel/create:
+        post:
+            tags:
+                - Payment
+            description: Create payment channel
+            operationId: Payment_CreatePaymentChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
+    /api/payment/channel/list:
+        post:
+            tags:
+                - Payment
+            description: Get list of payment channels
+            operationId: Payment_GetPaymentChannelList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListResponse'
+    /api/payment/deposit/callback:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Deposit callback
+                 This endpoint handles callbacks from payment gateways.
+            operationId: Payment_DepositCallback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.DepositCallbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.DepositCallbackResponse'
+    /api/payment/deposit/initiate:
+        post:
+            tags:
+                - Payment
+            description: Initiate a deposit transaction
+            operationId: Payment_InitiateDeposit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.InitiateDepositRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.InitiateDepositResponse'
+    /api/payment/method/list:
+        post:
+            tags:
+                - Payment
+            description: Get list of payment methods
+            operationId: Payment_GetPaymentMethodList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /api/payment/withdraw/initiate:
+        post:
+            tags:
+                - Payment
+            description: Initiate a withdrawal transaction
+            operationId: Payment_InitiateWithdraw
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawResponse'
     /v1/operator/add:
         post:
             tags:
@@ -78,18 +194,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorResponse'
-    /v1/payment/healthcheck:
-        get:
-            tags:
-                - Payment
-            operationId: Payment_HealthCheck
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.HealthCheckResponse'
     /v1/system/currencies/add:
         post:
             tags:
@@ -572,11 +676,253 @@ components:
         api.wallet.service.v1.UpdateUserCurrencyResponse:
             type: object
             properties: {}
-        payment.service.v1.HealthCheckResponse:
+        payment.service.v1.ChannelData:
             type: object
             properties:
+                channelId:
+                    type: string
+            description: Channel data structure
+        payment.service.v1.CreatePaymentChannelRequest:
+            type: object
+            properties:
+                merchantId:
+                    type: string
+                paymentMethodId:
+                    type: string
+                key:
+                    type: object
+            description: Request to create a payment channel
+        payment.service.v1.CreatePaymentChannelResponse:
+            type: object
+            properties:
+                msg:
+                    type: string
+                code:
+                    type: integer
+                    format: int32
+                data:
+                    $ref: '#/components/schemas/payment.service.v1.ChannelData'
+            description: Response for channel creation
+        payment.service.v1.DepositCallbackRequest:
+            type: object
+            properties:
+                transactionNo:
+                    type: string
+                gatewayOrderNo:
+                    type: string
+                operatorOrderNo:
+                    type: string
+                orderStatus:
+                    type: string
+                payTime:
+                    type: string
+                createTime:
+                    type: string
+                amount:
+                    type: string
+                money:
+                    type: string
+                sign:
+                    type: string
+                timestamp:
+                    type: string
+                nonce:
+                    type: string
+            description: Request for deposit callback
+        payment.service.v1.DepositCallbackResponse:
+            type: object
+            properties:
+                msg:
+                    type: string
+                code:
+                    type: integer
+                    format: int32
+                errorMessage:
+                    type: string
+            description: Response for deposit callback
+        payment.service.v1.GetPaymentChannelListRequest:
+            type: object
+            properties:
+                merchantId:
+                    type: string
+            description: Request to get payment channel list
+        payment.service.v1.GetPaymentChannelListResponse:
+            type: object
+            properties:
+                msg:
+                    type: string
+                code:
+                    type: integer
+                    format: int32
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
+            description: Response for payment channel list
+        payment.service.v1.GetPaymentMethodListRequest:
+            type: object
+            properties: {}
+            description: Request to get payment method list
+        payment.service.v1.GetPaymentMethodListResponse:
+            type: object
+            properties:
+                msg:
+                    type: string
+                code:
+                    type: integer
+                    format: int32
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
+            description: Response for payment method list
+        payment.service.v1.InitiateDepositRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                amount:
+                    type: number
+                    format: double
+                currency:
+                    type: string
+                channelId:
+                    type: string
+                extra:
+                    type: object
+            description: Request to initiate a deposit
+        payment.service.v1.InitiateDepositResponse:
+            type: object
+            properties:
+                msg:
+                    type: string
+                code:
+                    type: integer
+                    format: int32
+                data:
+                    $ref: '#/components/schemas/payment.service.v1.TransactionInfo'
+            description: Response for deposit initiation
+        payment.service.v1.InitiateWithdrawRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                amount:
+                    type: number
+                    format: double
+                operatorOrderNo:
+                    type: string
+                bankAccount:
+                    type: string
+                bankAccountName:
+                    type: string
+                bankAccountMobile:
+                    type: string
+                bankName:
+                    type: string
+                bankCode:
+                    type: string
+                bankBranch:
+                    type: string
+                bankId:
+                    type: string
+                bankIfsc:
+                    type: string
+                bankNation:
+                    type: string
+                channel:
+                    type: string
+                extra:
+                    type: object
+            description: Request to initiate a withdrawal
+        payment.service.v1.InitiateWithdrawResponse:
+            type: object
+            properties:
+                msg:
+                    type: string
+                code:
+                    type: integer
+                    format: int32
+                data:
+                    $ref: '#/components/schemas/payment.service.v1.WithdrawTransactionInfo'
+            description: Response for withdrawal initiation
+        payment.service.v1.PaymentChannelInfo:
+            type: object
+            properties:
+                channelId:
+                    type: string
+                merchantId:
+                    type: string
+                paymentMethodId:
+                    type: string
+                paymentMethod:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                status:
+                    type: integer
+                    format: int32
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: Payment channel information
+        payment.service.v1.PaymentMethodInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                paymentMethod:
+                    type: string
+                keySchema:
+                    type: object
+            description: Details of a single payment method
+        payment.service.v1.TransactionInfo:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                amount:
+                    type: number
+                    format: double
+                currency:
+                    type: string
                 status:
                     type: string
+                payUrl:
+                    type: string
+                qrCode:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                extra:
+                    type: object
+            description: Transaction information
+        payment.service.v1.WithdrawTransactionInfo:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                operatorOrderNo:
+                    type: string
+                amount:
+                    type: number
+                    format: double
+                status:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+            description: Withdrawal transaction information
         system.service.v1.AddCurrencyRequest:
             type: object
             properties:
