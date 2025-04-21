@@ -25,9 +25,7 @@ message PaymentMethodInfo {
 
 // Response for payment method list
 message GetPaymentMethodListResponse {
-  string msg = 1;
-  int32 code = 2;
-  repeated PaymentMethodInfo data = 3;
+  repeated PaymentMethodInfo data = 1;
 }
 
 // Request to create a payment channel
@@ -39,13 +37,6 @@ message CreatePaymentChannelRequest {
 
 // Response for channel creation
 message CreatePaymentChannelResponse {
-  string msg = 1;
-  int32 code = 2;
-  ChannelData data = 3;
-}
-
-// Channel data structure
-message ChannelData {
   string channel_id = 1 [json_name="channelId"];
 }
 
@@ -69,9 +60,7 @@ message PaymentChannelInfo {
 
 // Response for payment channel list
 message GetPaymentChannelListResponse {
-  string msg = 1;
-  int32 code = 2;
-  repeated PaymentChannelInfo data = 3;
+  repeated PaymentChannelInfo data = 1;
 }
 
 // Request to initiate a deposit
@@ -83,9 +72,9 @@ message InitiateDepositRequest {
   google.protobuf.Struct extra = 5; // Stores additional information like clientOrderId, productId, etc.
 }
 
-// Transaction information
-message TransactionInfo {
-  string transaction_id = 1 [json_name="transactionId"];
+// Response for deposit initiation
+message InitiateDepositResponse {
+  int64 transaction_id = 1 [json_name="transactionId"];
   double amount = 2;
   string currency = 3;
   string status = 4;
@@ -93,13 +82,6 @@ message TransactionInfo {
   string qr_code = 6 [json_name="qrCode"];
   google.protobuf.Timestamp created_at = 7 [json_name="createdAt"];
   google.protobuf.Struct extra = 8; // Additional transaction information
-}
-
-// Response for deposit initiation
-message InitiateDepositResponse {
-  string msg = 1;
-  int32 code = 2;
-  TransactionInfo data = 3;
 }
 
 // Request to initiate a withdrawal
@@ -120,20 +102,13 @@ message InitiateWithdrawRequest {
   google.protobuf.Struct extra = 14; // Stores additional information like clientId, note, etc.
 }
 
-// Withdrawal transaction information
-message WithdrawTransactionInfo {
-  string transaction_id = 1 [json_name="transactionId"];
+// Response for withdrawal initiation
+message InitiateWithdrawResponse {
+  int64 transaction_id = 1 [json_name="transactionId"];
   string operator_order_no = 2 [json_name="operatorOrderNo"];
   double amount = 3;
   string status = 4;
   google.protobuf.Timestamp created_at = 5 [json_name="createdAt"];
-}
-
-// Response for withdrawal initiation
-message InitiateWithdrawResponse {
-  string msg = 1;
-  int32 code = 2;
-  WithdrawTransactionInfo data = 3;
 }
 
 // Request for deposit callback
@@ -153,9 +128,7 @@ message DepositCallbackRequest {
 
 // Response for deposit callback
 message DepositCallbackResponse {
-  string msg = 1;
-  int32 code = 2;
-  string error_message = 3 [json_name="errorMessage"]; // Detailed error message in case of authentication failure
+  int64 transaction_id = 1 [json_name="transactionId"];
 }
 
 service Payment {

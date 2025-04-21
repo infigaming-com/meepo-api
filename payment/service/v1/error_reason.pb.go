@@ -25,16 +25,37 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED ErrorReason = 0
+	ErrorReason_UNSPECIFIED                     ErrorReason = 0
+	ErrorReason_GET_PAYMENT_METHOD_LIST_FAILED  ErrorReason = 50001
+	ErrorReason_CREATE_PAYMENT_CHANNEL_FAILED   ErrorReason = 50002
+	ErrorReason_GET_PAYMENT_CHANNEL_LIST_FAILED ErrorReason = 50003
+	ErrorReason_INITIATE_DEPOSIT_FAILED         ErrorReason = 50004
+	ErrorReason_INITIATE_WITHDRAW_FAILED        ErrorReason = 50005
+	ErrorReason_DEPOSIT_CALLBACK_FAILED         ErrorReason = 50006
+	ErrorReason_WITHDRAW_CALLBACK_FAILED        ErrorReason = 50007
 )
 
 // Enum value maps for ErrorReason.
 var (
 	ErrorReason_name = map[int32]string{
-		0: "UNSPECIFIED",
+		0:     "UNSPECIFIED",
+		50001: "GET_PAYMENT_METHOD_LIST_FAILED",
+		50002: "CREATE_PAYMENT_CHANNEL_FAILED",
+		50003: "GET_PAYMENT_CHANNEL_LIST_FAILED",
+		50004: "INITIATE_DEPOSIT_FAILED",
+		50005: "INITIATE_WITHDRAW_FAILED",
+		50006: "DEPOSIT_CALLBACK_FAILED",
+		50007: "WITHDRAW_CALLBACK_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED": 0,
+		"UNSPECIFIED":                     0,
+		"GET_PAYMENT_METHOD_LIST_FAILED":  50001,
+		"CREATE_PAYMENT_CHANNEL_FAILED":   50002,
+		"GET_PAYMENT_CHANNEL_LIST_FAILED": 50003,
+		"INITIATE_DEPOSIT_FAILED":         50004,
+		"INITIATE_WITHDRAW_FAILED":        50005,
+		"DEPOSIT_CALLBACK_FAILED":         50006,
+		"WITHDRAW_CALLBACK_FAILED":        50007,
 	}
 )
 
@@ -69,9 +90,16 @@ var File_payment_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_payment_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"%payment/service/v1/error_reason.proto\x12\x16api.payment.service.v1\x1a\x13errors/errors.proto*$\n" +
+	"%payment/service/v1/error_reason.proto\x12\x16api.payment.service.v1\x1a\x13errors/errors.proto*\x94\x02\n" +
 	"\vErrorReason\x12\x0f\n" +
-	"\vUNSPECIFIED\x10\x00\x1a\x04\xa0E\xf4\x03BU\n" +
+	"\vUNSPECIFIED\x10\x00\x12$\n" +
+	"\x1eGET_PAYMENT_METHOD_LIST_FAILED\x10ц\x03\x12#\n" +
+	"\x1dCREATE_PAYMENT_CHANNEL_FAILED\x10҆\x03\x12%\n" +
+	"\x1fGET_PAYMENT_CHANNEL_LIST_FAILED\x10ӆ\x03\x12\x1d\n" +
+	"\x17INITIATE_DEPOSIT_FAILED\x10Ԇ\x03\x12\x1e\n" +
+	"\x18INITIATE_WITHDRAW_FAILED\x10Ն\x03\x12\x1d\n" +
+	"\x17DEPOSIT_CALLBACK_FAILED\x10ֆ\x03\x12\x1e\n" +
+	"\x18WITHDRAW_CALLBACK_FAILED\x10׆\x03\x1a\x04\xa0E\xf4\x03BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
 
 var (

@@ -22,3 +22,87 @@ func IsUnspecified(err error) bool {
 func ErrorUnspecified(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UNSPECIFIED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetPaymentMethodListFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_PAYMENT_METHOD_LIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetPaymentMethodListFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_PAYMENT_METHOD_LIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreatePaymentChannelFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_PAYMENT_CHANNEL_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreatePaymentChannelFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_PAYMENT_CHANNEL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetPaymentChannelListFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_PAYMENT_CHANNEL_LIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetPaymentChannelListFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_PAYMENT_CHANNEL_LIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInitiateDepositFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INITIATE_DEPOSIT_FAILED.String() && e.Code == 500
+}
+
+func ErrorInitiateDepositFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INITIATE_DEPOSIT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInitiateWithdrawFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INITIATE_WITHDRAW_FAILED.String() && e.Code == 500
+}
+
+func ErrorInitiateWithdrawFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INITIATE_WITHDRAW_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDepositCallbackFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DEPOSIT_CALLBACK_FAILED.String() && e.Code == 500
+}
+
+func ErrorDepositCallbackFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DEPOSIT_CALLBACK_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsWithdrawCallbackFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_WITHDRAW_CALLBACK_FAILED.String() && e.Code == 500
+}
+
+func ErrorWithdrawCallbackFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WITHDRAW_CALLBACK_FAILED.String(), fmt.Sprintf(format, args...))
+}

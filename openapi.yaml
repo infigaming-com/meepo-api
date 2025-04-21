@@ -681,12 +681,6 @@ components:
         api.wallet.service.v1.UpdateUserCurrencyResponse:
             type: object
             properties: {}
-        payment.service.v1.ChannelData:
-            type: object
-            properties:
-                channelId:
-                    type: string
-            description: Channel data structure
         payment.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
@@ -700,13 +694,8 @@ components:
         payment.service.v1.CreatePaymentChannelResponse:
             type: object
             properties:
-                msg:
+                channelId:
                     type: string
-                code:
-                    type: integer
-                    format: int32
-                data:
-                    $ref: '#/components/schemas/payment.service.v1.ChannelData'
             description: Response for channel creation
         payment.service.v1.DepositCallbackRequest:
             type: object
@@ -737,12 +726,7 @@ components:
         payment.service.v1.DepositCallbackResponse:
             type: object
             properties:
-                msg:
-                    type: string
-                code:
-                    type: integer
-                    format: int32
-                errorMessage:
+                transactionId:
                     type: string
             description: Response for deposit callback
         payment.service.v1.GetPaymentChannelListRequest:
@@ -754,11 +738,6 @@ components:
         payment.service.v1.GetPaymentChannelListResponse:
             type: object
             properties:
-                msg:
-                    type: string
-                code:
-                    type: integer
-                    format: int32
                 data:
                     type: array
                     items:
@@ -771,11 +750,6 @@ components:
         payment.service.v1.GetPaymentMethodListResponse:
             type: object
             properties:
-                msg:
-                    type: string
-                code:
-                    type: integer
-                    format: int32
                 data:
                     type: array
                     items:
@@ -799,13 +773,24 @@ components:
         payment.service.v1.InitiateDepositResponse:
             type: object
             properties:
-                msg:
+                transactionId:
                     type: string
-                code:
-                    type: integer
-                    format: int32
-                data:
-                    $ref: '#/components/schemas/payment.service.v1.TransactionInfo'
+                amount:
+                    type: number
+                    format: double
+                currency:
+                    type: string
+                status:
+                    type: string
+                payUrl:
+                    type: string
+                qrCode:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                extra:
+                    type: object
             description: Response for deposit initiation
         payment.service.v1.InitiateWithdrawRequest:
             type: object
@@ -843,13 +828,18 @@ components:
         payment.service.v1.InitiateWithdrawResponse:
             type: object
             properties:
-                msg:
+                transactionId:
                     type: string
-                code:
-                    type: integer
-                    format: int32
-                data:
-                    $ref: '#/components/schemas/payment.service.v1.WithdrawTransactionInfo'
+                operatorOrderNo:
+                    type: string
+                amount:
+                    type: number
+                    format: double
+                status:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
             description: Response for withdrawal initiation
         payment.service.v1.PaymentChannelInfo:
             type: object
@@ -890,44 +880,6 @@ components:
                 keySchema:
                     type: object
             description: Details of a single payment method
-        payment.service.v1.TransactionInfo:
-            type: object
-            properties:
-                transactionId:
-                    type: string
-                amount:
-                    type: number
-                    format: double
-                currency:
-                    type: string
-                status:
-                    type: string
-                payUrl:
-                    type: string
-                qrCode:
-                    type: string
-                createdAt:
-                    type: string
-                    format: date-time
-                extra:
-                    type: object
-            description: Transaction information
-        payment.service.v1.WithdrawTransactionInfo:
-            type: object
-            properties:
-                transactionId:
-                    type: string
-                operatorOrderNo:
-                    type: string
-                amount:
-                    type: number
-                    format: double
-                status:
-                    type: string
-                createdAt:
-                    type: string
-                    format: date-time
-            description: Withdrawal transaction information
         system.service.v1.AddCurrencyRequest:
             type: object
             properties:
