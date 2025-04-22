@@ -1137,6 +1137,8 @@ func (m *CreditRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	// no validation rules for Currency
+
 	// no validation rules for Cash
 
 	// no validation rules for OperatorBonus
@@ -1356,6 +1358,8 @@ func (m *DebitRequest) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for UserId
+
+	// no validation rules for Currency
 
 	// no validation rules for Cash
 

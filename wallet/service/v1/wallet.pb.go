@@ -489,17 +489,18 @@ func (x *GetUserBalancesResponse) GetBalances() []*GetUserBalancesResponse_Balan
 type CreditRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Cash          int64                  `protobuf:"varint,2,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus int64                  `protobuf:"varint,3,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus int64                  `protobuf:"varint,4,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	Cash          int64                  `protobuf:"varint,3,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus int64                  `protobuf:"varint,4,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus int64                  `protobuf:"varint,5,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
 	// credit_type indicates where the credit comes from.
 	// 1. "payment" means the credit comes from a payment transaction.
 	// 2. "game" means the credit comes from a game transaction.
-	CreditType string `protobuf:"bytes,5,opt,name=credit_type,json=creditType,proto3" json:"credit_type,omitempty"`
+	CreditType string `protobuf:"bytes,6,opt,name=credit_type,json=creditType,proto3" json:"credit_type,omitempty"`
 	// credit_transaction_id is the transaction id of the credit.
 	// if credit_type is "payment", credit_transaction_id is the payment transaction id.
 	// if credit_type is "game", credit_transaction_id is the game transaction id.
-	CreditTransactionId string `protobuf:"bytes,6,opt,name=credit_transaction_id,json=creditTransactionId,proto3" json:"credit_transaction_id,omitempty"`
+	CreditTransactionId string `protobuf:"bytes,7,opt,name=credit_transaction_id,json=creditTransactionId,proto3" json:"credit_transaction_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -537,6 +538,13 @@ func (*CreditRequest) Descriptor() ([]byte, []int) {
 func (x *CreditRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
+	}
+	return ""
+}
+
+func (x *CreditRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
 	}
 	return ""
 }
@@ -647,17 +655,18 @@ func (x *CreditResponse) GetProviderBonus() int64 {
 type DebitRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Cash          int64                  `protobuf:"varint,2,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus int64                  `protobuf:"varint,3,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus int64                  `protobuf:"varint,4,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	Cash          int64                  `protobuf:"varint,3,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus int64                  `protobuf:"varint,4,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus int64                  `protobuf:"varint,5,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
 	// debit_type indicates where the debit comes from.
 	// 1. "payment" means the debit comes from a payment transaction.
 	// 2. "game" means the debit comes from a game transaction.
-	DebitType string `protobuf:"bytes,5,opt,name=debit_type,json=debitType,proto3" json:"debit_type,omitempty"`
+	DebitType string `protobuf:"bytes,6,opt,name=debit_type,json=debitType,proto3" json:"debit_type,omitempty"`
 	// debit_transaction_id is the transaction id of the debit.
 	// if debit_type is "payment", debit_transaction_id is the payment transaction id.
 	// if debit_type is "game", debit_transaction_id is the game transaction id.
-	DebitTransactionId string `protobuf:"bytes,6,opt,name=debit_transaction_id,json=debitTransactionId,proto3" json:"debit_transaction_id,omitempty"`
+	DebitTransactionId string `protobuf:"bytes,7,opt,name=debit_transaction_id,json=debitTransactionId,proto3" json:"debit_transaction_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -695,6 +704,13 @@ func (*DebitRequest) Descriptor() ([]byte, []int) {
 func (x *DebitRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
+	}
+	return ""
+}
+
+func (x *DebitRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
 	}
 	return ""
 }
@@ -903,28 +919,30 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\xdf\x01\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\xfb\x01\n" +
 	"\rCreditRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x12\n" +
-	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
-	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\x12\x1f\n" +
-	"\vcredit_type\x18\x05 \x01(\tR\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x12\n" +
+	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12%\n" +
+	"\x0eoperator_bonus\x18\x04 \x01(\x03R\roperatorBonus\x12%\n" +
+	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonus\x12\x1f\n" +
+	"\vcredit_type\x18\x06 \x01(\tR\n" +
 	"creditType\x122\n" +
-	"\x15credit_transaction_id\x18\x06 \x01(\tR\x13creditTransactionId\"\x99\x01\n" +
+	"\x15credit_transaction_id\x18\a \x01(\tR\x13creditTransactionId\"\x99\x01\n" +
 	"\x0eCreditResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\xda\x01\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\xf6\x01\n" +
 	"\fDebitRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x12\n" +
-	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
-	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\x12\x1d\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x12\n" +
+	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12%\n" +
+	"\x0eoperator_bonus\x18\x04 \x01(\x03R\roperatorBonus\x12%\n" +
+	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonus\x12\x1d\n" +
 	"\n" +
-	"debit_type\x18\x05 \x01(\tR\tdebitType\x120\n" +
-	"\x14debit_transaction_id\x18\x06 \x01(\tR\x12debitTransactionId\"\x98\x01\n" +
+	"debit_type\x18\x06 \x01(\tR\tdebitType\x120\n" +
+	"\x14debit_transaction_id\x18\a \x01(\tR\x12debitTransactionId\"\x98\x01\n" +
 	"\rDebitResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
