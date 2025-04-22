@@ -65,7 +65,7 @@ message GetPaymentChannelListResponse {
 
 // Request to initiate a deposit
 message InitiateDepositRequest {
-  int64 user_id = 1 [json_name="userId"];
+  string user_id = 1 [json_name="userId"];
   double amount = 2;
   string currency = 3;
   string channel_id = 4 [json_name="channelId"];
