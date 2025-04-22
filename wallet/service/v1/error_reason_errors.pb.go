@@ -190,3 +190,15 @@ func IsBalanceDisabled(err error) bool {
 func ErrorBalanceDisabled(format string, args ...interface{}) *errors.Error {
 	return errors.New(401, ErrorReason_BALANCE_DISABLED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsLockCreditWithUserIdAndCurrencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorLockCreditWithUserIdAndCurrencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
+}
