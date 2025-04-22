@@ -178,3 +178,15 @@ func IsGetBalanceWithUserIdAndCurrencyFailed(err error) bool {
 func ErrorGetBalanceWithUserIdAndCurrencyFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsBalanceDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BALANCE_DISABLED.String() && e.Code == 401
+}
+
+func ErrorBalanceDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_BALANCE_DISABLED.String(), fmt.Sprintf(format, args...))
+}
