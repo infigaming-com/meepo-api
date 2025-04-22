@@ -40,7 +40,9 @@ const (
 	ErrorReason_LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED ErrorReason = 30012
 	ErrorReason_GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30013
 	ErrorReason_BALANCE_DISABLED                              ErrorReason = 30014
-	ErrorReason_LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30015
+	ErrorReason_GENERATE_CREDIT_ID_FAILED                     ErrorReason = 30015
+	ErrorReason_LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30016
+	ErrorReason_ADD_CREDIT_FAILED                             ErrorReason = 30017
 )
 
 // Enum value maps for ErrorReason.
@@ -61,7 +63,9 @@ var (
 		30012: "LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED",
 		30013: "GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED",
 		30014: "BALANCE_DISABLED",
-		30015: "LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED",
+		30015: "GENERATE_CREDIT_ID_FAILED",
+		30016: "LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED",
+		30017: "ADD_CREDIT_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                   0,
@@ -79,7 +83,9 @@ var (
 		"LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED": 30012,
 		"GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED":  30013,
 		"BALANCE_DISABLED":                              30014,
-		"LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED":  30015,
+		"GENERATE_CREDIT_ID_FAILED":                     30015,
+		"LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED":  30016,
+		"ADD_CREDIT_FAILED":                             30017,
 	}
 )
 
@@ -114,7 +120,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xf1\x04\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xb7\x05\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x1a\x04\xa8E\x94\x03\x12\x19\n" +
@@ -130,8 +136,10 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\"GET_USERS_WITH_OPERATOR_IDS_FAILED\x10\xbb\xea\x01\x1a\x04\xa8E\xf4\x03\x129\n" +
 	"-LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xbc\xea\x01\x1a\x04\xa8E\xf4\x03\x128\n" +
 	",GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xbd\xea\x01\x1a\x04\xa8E\xf4\x03\x12\x1c\n" +
-	"\x10BALANCE_DISABLED\x10\xbe\xea\x01\x1a\x04\xa8E\x91\x03\x128\n" +
-	",LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xbf\xea\x01\x1a\x04\xa8E\xf4\x03\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x10BALANCE_DISABLED\x10\xbe\xea\x01\x1a\x04\xa8E\x91\x03\x12%\n" +
+	"\x19GENERATE_CREDIT_ID_FAILED\x10\xbf\xea\x01\x1a\x04\xa8E\xf4\x03\x128\n" +
+	",LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xc0\xea\x01\x1a\x04\xa8E\xf4\x03\x12\x1d\n" +
+	"\x11ADD_CREDIT_FAILED\x10\xc1\xea\x01\x1a\x04\xa8E\xf4\x03\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
