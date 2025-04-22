@@ -104,6 +104,8 @@ message CreditRequest {
 	int64 operator_bonus_withdraw_limit = 12;
 	int64 provider_bonus_withdraw_limit = 13;
 	Ratio cash_to_operator_bonus_ratio = 14;
+	int64 operator_bonus_expired_at = 15;
+	int64 provider_bonus_expired_at = 16;
 }
 
 message CreditResponse {

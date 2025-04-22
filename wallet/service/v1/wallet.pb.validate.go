@@ -1190,6 +1190,10 @@ func (m *CreditRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for OperatorBonusExpiredAt
+
+	// no validation rules for ProviderBonusExpiredAt
+
 	if len(errors) > 0 {
 		return CreditRequestMultiError(errors)
 	}

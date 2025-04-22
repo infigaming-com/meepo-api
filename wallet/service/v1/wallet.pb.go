@@ -508,6 +508,8 @@ type CreditRequest struct {
 	OperatorBonusWithdrawLimit     int64                `protobuf:"varint,12,opt,name=operator_bonus_withdraw_limit,json=operatorBonusWithdrawLimit,proto3" json:"operator_bonus_withdraw_limit,omitempty"`
 	ProviderBonusWithdrawLimit     int64                `protobuf:"varint,13,opt,name=provider_bonus_withdraw_limit,json=providerBonusWithdrawLimit,proto3" json:"provider_bonus_withdraw_limit,omitempty"`
 	CashToOperatorBonusRatio       *CreditRequest_Ratio `protobuf:"bytes,14,opt,name=cash_to_operator_bonus_ratio,json=cashToOperatorBonusRatio,proto3" json:"cash_to_operator_bonus_ratio,omitempty"`
+	OperatorBonusExpiredAt         int64                `protobuf:"varint,15,opt,name=operator_bonus_expired_at,json=operatorBonusExpiredAt,proto3" json:"operator_bonus_expired_at,omitempty"`
+	ProviderBonusExpiredAt         int64                `protobuf:"varint,16,opt,name=provider_bonus_expired_at,json=providerBonusExpiredAt,proto3" json:"provider_bonus_expired_at,omitempty"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -638,6 +640,20 @@ func (x *CreditRequest) GetCashToOperatorBonusRatio() *CreditRequest_Ratio {
 		return x.CashToOperatorBonusRatio
 	}
 	return nil
+}
+
+func (x *CreditRequest) GetOperatorBonusExpiredAt() int64 {
+	if x != nil {
+		return x.OperatorBonusExpiredAt
+	}
+	return 0
+}
+
+func (x *CreditRequest) GetProviderBonusExpiredAt() int64 {
+	if x != nil {
+		return x.ProviderBonusExpiredAt
+	}
+	return 0
 }
 
 type CreditResponse struct {
@@ -1027,7 +1043,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\x9a\x06\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\x90\a\n" +
 	"\rCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x12\n" +
@@ -1043,7 +1059,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x13cash_withdraw_limit\x18\v \x01(\x03R\x11cashWithdrawLimit\x12A\n" +
 	"\x1doperator_bonus_withdraw_limit\x18\f \x01(\x03R\x1aoperatorBonusWithdrawLimit\x12A\n" +
 	"\x1dprovider_bonus_withdraw_limit\x18\r \x01(\x03R\x1aproviderBonusWithdrawLimit\x12j\n" +
-	"\x1ccash_to_operator_bonus_ratio\x18\x0e \x01(\v2*.api.wallet.service.v1.CreditRequest.RatioR\x18cashToOperatorBonusRatio\x1aG\n" +
+	"\x1ccash_to_operator_bonus_ratio\x18\x0e \x01(\v2*.api.wallet.service.v1.CreditRequest.RatioR\x18cashToOperatorBonusRatio\x129\n" +
+	"\x19operator_bonus_expired_at\x18\x0f \x01(\x03R\x16operatorBonusExpiredAt\x129\n" +
+	"\x19provider_bonus_expired_at\x18\x10 \x01(\x03R\x16providerBonusExpiredAt\x1aG\n" +
 	"\x05Ratio\x12\x1c\n" +
 	"\tnumerator\x18\x01 \x01(\x03R\tnumerator\x12 \n" +
 	"\vdenominator\x18\x02 \x01(\x03R\vdenominator\"\x99\x01\n" +
