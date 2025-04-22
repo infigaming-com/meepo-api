@@ -25,7 +25,7 @@ const (
 type CreateOperatorRequest struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	AggregatorOperatorId string                 `protobuf:"bytes,1,opt,name=aggregator_operator_id,json=aggregatorOperatorId,proto3" json:"aggregator_operator_id,omitempty"`
-	OperatorId           string                 `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId           int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	ApiKey               string                 `protobuf:"bytes,3,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
 	ApiSecret            string                 `protobuf:"bytes,4,opt,name=api_secret,json=apiSecret,proto3" json:"api_secret,omitempty"`
 	Enabled              bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
@@ -70,11 +70,11 @@ func (x *CreateOperatorRequest) GetAggregatorOperatorId() string {
 	return ""
 }
 
-func (x *CreateOperatorRequest) GetOperatorId() string {
+func (x *CreateOperatorRequest) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *CreateOperatorRequest) GetApiKey() string {
@@ -136,7 +136,7 @@ func (*CreateOperatorResponse) Descriptor() ([]byte, []int) {
 
 type UpdateOperatorRequest struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId           string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId           int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	AggregatorOperatorId string                 `protobuf:"bytes,2,opt,name=aggregator_operator_id,json=aggregatorOperatorId,proto3" json:"aggregator_operator_id,omitempty"`
 	ApiKey               string                 `protobuf:"bytes,3,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
 	ApiSecret            string                 `protobuf:"bytes,4,opt,name=api_secret,json=apiSecret,proto3" json:"api_secret,omitempty"`
@@ -175,11 +175,11 @@ func (*UpdateOperatorRequest) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *UpdateOperatorRequest) GetOperatorId() string {
+func (x *UpdateOperatorRequest) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *UpdateOperatorRequest) GetAggregatorOperatorId() string {
@@ -212,8 +212,8 @@ func (x *UpdateOperatorRequest) GetEnabled() bool {
 
 type UpdateOperatorResponse struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	AggregatorOperatorId string                 `protobuf:"bytes,1,opt,name=aggregator_operator_id,json=aggregatorOperatorId,proto3" json:"aggregator_operator_id,omitempty"`
-	OperatorId           string                 `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId           int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	AggregatorOperatorId string                 `protobuf:"bytes,2,opt,name=aggregator_operator_id,json=aggregatorOperatorId,proto3" json:"aggregator_operator_id,omitempty"`
 	ApiKey               string                 `protobuf:"bytes,3,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
 	ApiSecret            string                 `protobuf:"bytes,4,opt,name=api_secret,json=apiSecret,proto3" json:"api_secret,omitempty"`
 	Enabled              bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
@@ -251,16 +251,16 @@ func (*UpdateOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{3}
 }
 
+func (x *UpdateOperatorResponse) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
 func (x *UpdateOperatorResponse) GetAggregatorOperatorId() string {
 	if x != nil {
 		return x.AggregatorOperatorId
-	}
-	return ""
-}
-
-func (x *UpdateOperatorResponse) GetOperatorId() string {
-	if x != nil {
-		return x.OperatorId
 	}
 	return ""
 }
@@ -288,7 +288,7 @@ func (x *UpdateOperatorResponse) GetEnabled() bool {
 
 type DeleteOperatorRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId    string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -323,11 +323,11 @@ func (*DeleteOperatorRequest) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *DeleteOperatorRequest) GetOperatorId() string {
+func (x *DeleteOperatorRequest) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 type DeleteOperatorResponse struct {
@@ -366,6 +366,146 @@ func (*DeleteOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{5}
 }
 
+type ListGamesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListGamesRequest) Reset() {
+	*x = ListGamesRequest{}
+	mi := &file_game_service_v1_game_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListGamesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListGamesRequest) ProtoMessage() {}
+
+func (x *ListGamesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListGamesRequest.ProtoReflect.Descriptor instead.
+func (*ListGamesRequest) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListGamesRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+type ListGamesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Games         []*GameInfo            `protobuf:"bytes,1,rep,name=games,proto3" json:"games,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListGamesResponse) Reset() {
+	*x = ListGamesResponse{}
+	mi := &file_game_service_v1_game_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListGamesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListGamesResponse) ProtoMessage() {}
+
+func (x *ListGamesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListGamesResponse.ProtoReflect.Descriptor instead.
+func (*ListGamesResponse) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListGamesResponse) GetGames() []*GameInfo {
+	if x != nil {
+		return x.Games
+	}
+	return nil
+}
+
+type GameInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	GameId        string                 `protobuf:"bytes,1,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	GameName      string                 `protobuf:"bytes,2,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GameInfo) Reset() {
+	*x = GameInfo{}
+	mi := &file_game_service_v1_game_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GameInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GameInfo) ProtoMessage() {}
+
+func (x *GameInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GameInfo.ProtoReflect.Descriptor instead.
+func (*GameInfo) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GameInfo) GetGameId() string {
+	if x != nil {
+		return x.GameId
+	}
+	return ""
+}
+
+func (x *GameInfo) GetGameName() string {
+	if x != nil {
+		return x.GameName
+	}
+	return ""
+}
+
 var File_game_service_v1_game_proto protoreflect.FileDescriptor
 
 const file_game_service_v1_game_proto_rawDesc = "" +
@@ -373,7 +513,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x1agame/service/v1/game.proto\x12\x0fgame.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xc0\x01\n" +
 	"\x15CreateOperatorRequest\x124\n" +
 	"\x16aggregator_operator_id\x18\x01 \x01(\tR\x14aggregatorOperatorId\x12\x1f\n" +
-	"\voperator_id\x18\x02 \x01(\tR\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
 	"operatorId\x12\x17\n" +
 	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12\x1d\n" +
 	"\n" +
@@ -381,29 +521,38 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\aenabled\x18\x05 \x01(\bR\aenabled\"\x18\n" +
 	"\x16CreateOperatorResponse\"\xc0\x01\n" +
 	"\x15UpdateOperatorRequest\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x124\n" +
 	"\x16aggregator_operator_id\x18\x02 \x01(\tR\x14aggregatorOperatorId\x12\x17\n" +
 	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12\x1d\n" +
 	"\n" +
 	"api_secret\x18\x04 \x01(\tR\tapiSecret\x12\x18\n" +
 	"\aenabled\x18\x05 \x01(\bR\aenabled\"\xc1\x01\n" +
-	"\x16UpdateOperatorResponse\x124\n" +
-	"\x16aggregator_operator_id\x18\x01 \x01(\tR\x14aggregatorOperatorId\x12\x1f\n" +
-	"\voperator_id\x18\x02 \x01(\tR\n" +
-	"operatorId\x12\x17\n" +
+	"\x16UpdateOperatorResponse\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x124\n" +
+	"\x16aggregator_operator_id\x18\x02 \x01(\tR\x14aggregatorOperatorId\x12\x17\n" +
 	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12\x1d\n" +
 	"\n" +
 	"api_secret\x18\x04 \x01(\tR\tapiSecret\x12\x18\n" +
 	"\aenabled\x18\x05 \x01(\bR\aenabled\"8\n" +
 	"\x15DeleteOperatorRequest\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"\x18\n" +
-	"\x16DeleteOperatorResponse2\xb5\x02\n" +
+	"\x16DeleteOperatorResponse\"3\n" +
+	"\x10ListGamesRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\"D\n" +
+	"\x11ListGamesResponse\x12/\n" +
+	"\x05games\x18\x01 \x03(\v2\x19.game.service.v1.GameInfoR\x05games\"@\n" +
+	"\bGameInfo\x12\x17\n" +
+	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x1b\n" +
+	"\tgame_name\x18\x02 \x01(\tR\bgameName2\xa4\x03\n" +
 	"\x04Game\x12c\n" +
 	"\x0eCreateOperator\x12&.game.service.v1.CreateOperatorRequest\x1a'.game.service.v1.CreateOperatorResponse\"\x00\x12c\n" +
 	"\x0eUpdateOperator\x12&.game.service.v1.UpdateOperatorRequest\x1a'.game.service.v1.UpdateOperatorResponse\"\x00\x12c\n" +
-	"\x0eDeleteOperator\x12&.game.service.v1.DeleteOperatorRequest\x1a'.game.service.v1.DeleteOperatorResponse\"\x00BK\n" +
+	"\x0eDeleteOperator\x12&.game.service.v1.DeleteOperatorRequest\x1a'.game.service.v1.DeleteOperatorResponse\"\x00\x12m\n" +
+	"\tListGames\x12!.game.service.v1.ListGamesRequest\x1a\".game.service.v1.ListGamesResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v1/games/listBK\n" +
 	"\x0fgame.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (
@@ -418,7 +567,7 @@ func file_game_service_v1_game_proto_rawDescGZIP() []byte {
 	return file_game_service_v1_game_proto_rawDescData
 }
 
-var file_game_service_v1_game_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_game_service_v1_game_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_game_service_v1_game_proto_goTypes = []any{
 	(*CreateOperatorRequest)(nil),  // 0: game.service.v1.CreateOperatorRequest
 	(*CreateOperatorResponse)(nil), // 1: game.service.v1.CreateOperatorResponse
@@ -426,19 +575,25 @@ var file_game_service_v1_game_proto_goTypes = []any{
 	(*UpdateOperatorResponse)(nil), // 3: game.service.v1.UpdateOperatorResponse
 	(*DeleteOperatorRequest)(nil),  // 4: game.service.v1.DeleteOperatorRequest
 	(*DeleteOperatorResponse)(nil), // 5: game.service.v1.DeleteOperatorResponse
+	(*ListGamesRequest)(nil),       // 6: game.service.v1.ListGamesRequest
+	(*ListGamesResponse)(nil),      // 7: game.service.v1.ListGamesResponse
+	(*GameInfo)(nil),               // 8: game.service.v1.GameInfo
 }
 var file_game_service_v1_game_proto_depIdxs = []int32{
-	0, // 0: game.service.v1.Game.CreateOperator:input_type -> game.service.v1.CreateOperatorRequest
-	2, // 1: game.service.v1.Game.UpdateOperator:input_type -> game.service.v1.UpdateOperatorRequest
-	4, // 2: game.service.v1.Game.DeleteOperator:input_type -> game.service.v1.DeleteOperatorRequest
-	1, // 3: game.service.v1.Game.CreateOperator:output_type -> game.service.v1.CreateOperatorResponse
-	3, // 4: game.service.v1.Game.UpdateOperator:output_type -> game.service.v1.UpdateOperatorResponse
-	5, // 5: game.service.v1.Game.DeleteOperator:output_type -> game.service.v1.DeleteOperatorResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	8, // 0: game.service.v1.ListGamesResponse.games:type_name -> game.service.v1.GameInfo
+	0, // 1: game.service.v1.Game.CreateOperator:input_type -> game.service.v1.CreateOperatorRequest
+	2, // 2: game.service.v1.Game.UpdateOperator:input_type -> game.service.v1.UpdateOperatorRequest
+	4, // 3: game.service.v1.Game.DeleteOperator:input_type -> game.service.v1.DeleteOperatorRequest
+	6, // 4: game.service.v1.Game.ListGames:input_type -> game.service.v1.ListGamesRequest
+	1, // 5: game.service.v1.Game.CreateOperator:output_type -> game.service.v1.CreateOperatorResponse
+	3, // 6: game.service.v1.Game.UpdateOperator:output_type -> game.service.v1.UpdateOperatorResponse
+	5, // 7: game.service.v1.Game.DeleteOperator:output_type -> game.service.v1.DeleteOperatorResponse
+	7, // 8: game.service.v1.Game.ListGames:output_type -> game.service.v1.ListGamesResponse
+	5, // [5:9] is the sub-list for method output_type
+	1, // [1:5] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_game_service_v1_game_proto_init() }
@@ -452,7 +607,7 @@ func file_game_service_v1_game_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_game_service_v1_game_proto_rawDesc), len(file_game_service_v1_game_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

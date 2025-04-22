@@ -6,6 +6,24 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /v1/games/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_ListGames
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/game.service.v1.ListGamesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/game.service.v1.ListGamesResponse'
     /v1/operator/add:
         post:
             tags:
@@ -492,6 +510,25 @@ components:
             properties:
                 status:
                     type: string
+        game.service.v1.GameInfo:
+            type: object
+            properties:
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+        game.service.v1.ListGamesRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+        game.service.v1.ListGamesResponse:
+            type: object
+            properties:
+                games:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/game.service.v1.GameInfo'
         payment.service.v1.HealthCheckResponse:
             type: object
             properties:
@@ -542,6 +579,7 @@ components:
                     items:
                         $ref: '#/components/schemas/system.service.v1.Currency'
 tags:
+    - name: Game
     - name: Operator
       description: User service provides authentication and user management functionality.
     - name: Payment

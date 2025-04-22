@@ -17,11 +17,18 @@ service Game {
 
 	rpc DeleteOperator(DeleteOperatorRequest) returns (DeleteOperatorResponse) {
 	};
+
+	rpc ListGames(ListGamesRequest) returns (ListGamesResponse) {
+		option (google.api.http) = {
+			post: "/v1/games/list"
+			body: "*"
+		};
+	};
 }
 
 message CreateOperatorRequest {
 	string aggregator_operator_id = 1;
-	string operator_id = 2;
+	int64 operator_id = 2;
 	string api_key = 3;
 	string api_secret = 4;
 	bool enabled = 5;
@@ -31,7 +38,7 @@ message CreateOperatorResponse {
 }
 
 message UpdateOperatorRequest {
-	string operator_id = 1;
+	int64 operator_id = 1;
 	string aggregator_operator_id = 2;
 	string api_key = 3;
 	string api_secret = 4;
@@ -39,16 +46,29 @@ message UpdateOperatorRequest {
 }
 
 message UpdateOperatorResponse {
-	string aggregator_operator_id = 1;
-	string operator_id = 2;
+	int64 operator_id = 1;
+	string aggregator_operator_id = 2;
 	string api_key = 3;
 	string api_secret = 4;
 	bool enabled = 5;
 }
 
 message DeleteOperatorRequest {
-	string operator_id = 1;
+	int64 operator_id = 1;
 }
 
 message DeleteOperatorResponse {
+}
+
+message ListGamesRequest {
+	int64 operator_id = 1;
+}
+
+message ListGamesResponse {
+	repeated GameInfo games = 1;
+}
+
+message GameInfo {
+	string game_id = 1;
+	string game_name = 2;
 }
