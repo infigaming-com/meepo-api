@@ -25,4 +25,5 @@ enum ErrorReason {
   GET_USERS_WITH_OPERATOR_IDS_FAILED = 30011 [(errors.code) = 500];
   LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED = 30012 [(errors.code) = 500];
   GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED = 30013 [(errors.code) = 500];
+  BALANCE_DISABLED = 30014 [(errors.code) = 401];
 }

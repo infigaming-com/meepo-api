@@ -80,19 +80,30 @@ message GetUserBalancesResponse {
 }
 
 message CreditRequest {
+	message Ratio {
+		int64 numerator = 1;
+		int64 denominator = 2;
+	}
 	int64 user_id = 1;
 	string currency = 2;
-	int64 cash = 3;
-	int64 operator_bonus = 4;
-	int64 provider_bonus = 5;
 	// type indicates where the credit comes from.
 	// 1. "payment" means the credit comes from a payment transaction.
 	// 2. "game" means the credit comes from a game transaction.
-	string type = 6;
+	string type = 3;
 	// transaction_id is the transaction id of the credit.
 	// if credit_type is "payment", transaction_id is the payment transaction id.
 	// if credit_type is "game", transaction_id is the game transaction id.
-	int64 transaction_id = 7;
+	int64 transaction_id = 4;
+	int64 cash = 5;
+	int64 operator_bonus = 6;
+	int64 provider_bonus = 7;
+	int64 cash_turnover_threshold = 8;
+	int64 operator_bonus_turnover_threshold = 9;
+	int64 provider_bonus_turnover_threshold = 10;
+	int64 cash_withdraw_limit = 11;
+	int64 operator_bonus_withdraw_limit = 12;
+	int64 provider_bonus_withdraw_limit = 13;
+	Ratio cash_to_operator_bonus_ratio = 14;
 }
 
 message CreditResponse {
@@ -105,17 +116,17 @@ message CreditResponse {
 message DebitRequest {
 	int64 user_id = 1;
 	string currency = 2;
-	int64 cash = 3;
-	int64 operator_bonus = 4;
-	int64 provider_bonus = 5;
 	// type indicates where the debit comes from.
 	// 1. "payment" means the debit comes from a payment transaction.
 	// 2. "game" means the debit comes from a game transaction.
-	string type = 6;
+	string type = 3;
 	// transaction_id is the transaction id of the debit.
 	// if debit_type is "payment", transaction_id is the payment transaction id.
 	// if debit_type is "game", transaction_id is the game transaction id.
-	int64 transaction_id = 7;
+	int64 transaction_id = 4;
+	int64 cash = 5;
+	int64 operator_bonus = 6;
+	int64 provider_bonus = 7;
 }
 
 message DebitResponse {
