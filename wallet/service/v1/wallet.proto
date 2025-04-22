@@ -31,21 +31,21 @@ service Wallet {
 }
 
 message AddUserRequest {
-	string user_id = 1;
-	string operator_id = 2;
+	int64 user_id = 1;
+	int64 operator_id = 2;
 }
 
 message AddUserResponse {}
 
 message UpdateUserRequest {
-	string user_id = 1;
+	int64 user_id = 1;
 	bool enabled = 3;
 }
 
 message UpdateUserResponse {}
 
 message AddOrUpdateOperatorsCurrencyRequest {
-	repeated string operator_ids = 1;
+	repeated int64 operator_ids = 1;
 	string currency = 2;
 	bool enabled = 3;
 	bool hidden = 4;
@@ -54,7 +54,7 @@ message AddOrUpdateOperatorsCurrencyRequest {
 message AddOrUpdateOperatorsCurrencyResponse {}
 
 message UpdateUserCurrencyRequest {
-	string user_id = 1;
+	int64 user_id = 1;
 	string currency = 2;
 	bool enabled = 3;
 }
@@ -62,7 +62,7 @@ message UpdateUserCurrencyRequest {
 message UpdateUserCurrencyResponse {}
 
 message GetUserBalancesRequest {
-	string user_id = 1;
+	int64 user_id = 1;
 }
 
 message GetUserBalancesResponse {

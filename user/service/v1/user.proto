@@ -80,7 +80,7 @@ service User {
 // UserInfo contains basic user information.
 message UserInfo {
 	// Unique identifier for the user.
-	string id = 1;
+	int64 user_id = 1;
 }
 
 // AuthType defines the type of authentication method.
@@ -149,7 +149,7 @@ message OAuthRequest {
 
 // TelegramAuthRequest contains the information from Telegram's login widget.
 message TelegramAuthRequest {
-	// Telegram user ID.
+	// Telegram user Id.
 	int64 id = 1;
 	// User's first name.
 	string first_name = 2;
@@ -196,7 +196,7 @@ message RefreshTokenResponse {
 // GetUserRequest contains the ID of the user to retrieve.
 message GetUserRequest {
 	// The ID of the user to retrieve.
-	string id = 1;
+	int64 user_id = 1;
 }
 
 // GetUserResponse contains the requested user's information.

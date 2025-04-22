@@ -57,7 +57,7 @@ func (m *UserInfo) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	// no validation rules for UserId
 
 	if len(errors) > 0 {
 		return UserInfoMultiError(errors)
@@ -934,7 +934,7 @@ func (m *GetUserRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	// no validation rules for UserId
 
 	if len(errors) > 0 {
 		return GetUserRequestMultiError(errors)
