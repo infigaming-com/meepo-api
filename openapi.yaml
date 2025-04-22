@@ -520,7 +520,7 @@ components:
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
-                id:
+                userId:
                     type: string
                     description: The ID of the user to retrieve.
             description: GetUserRequest contains the ID of the user to retrieve.
@@ -619,7 +619,7 @@ components:
             properties:
                 id:
                     type: string
-                    description: Telegram user ID.
+                    description: Telegram user Id.
                 firstName:
                     type: string
                     description: User's first name.
@@ -642,7 +642,7 @@ components:
         api.user.service.v1.UserInfo:
             type: object
             properties:
-                id:
+                userId:
                     type: string
                     description: Unique identifier for the user.
             description: UserInfo contains basic user information.
