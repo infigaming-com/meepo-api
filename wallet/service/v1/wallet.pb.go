@@ -24,8 +24,8 @@ const (
 
 type AddUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorId    string                 `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorId    int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -60,18 +60,18 @@ func (*AddUserRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *AddUserRequest) GetUserId() string {
+func (x *AddUserRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
-func (x *AddUserRequest) GetOperatorId() string {
+func (x *AddUserRequest) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 type AddUserResponse struct {
@@ -112,7 +112,7 @@ func (*AddUserResponse) Descriptor() ([]byte, []int) {
 
 type UpdateUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -148,11 +148,11 @@ func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *UpdateUserRequest) GetUserId() string {
+func (x *UpdateUserRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 func (x *UpdateUserRequest) GetEnabled() bool {
@@ -200,7 +200,7 @@ func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
 
 type AddOrUpdateOperatorsCurrencyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorIds   []string               `protobuf:"bytes,1,rep,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
+	OperatorIds   []int64                `protobuf:"varint,1,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
 	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	Hidden        bool                   `protobuf:"varint,4,opt,name=hidden,proto3" json:"hidden,omitempty"`
@@ -238,7 +238,7 @@ func (*AddOrUpdateOperatorsCurrencyRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *AddOrUpdateOperatorsCurrencyRequest) GetOperatorIds() []string {
+func (x *AddOrUpdateOperatorsCurrencyRequest) GetOperatorIds() []int64 {
 	if x != nil {
 		return x.OperatorIds
 	}
@@ -304,7 +304,7 @@ func (*AddOrUpdateOperatorsCurrencyResponse) Descriptor() ([]byte, []int) {
 
 type UpdateUserCurrencyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -341,11 +341,11 @@ func (*UpdateUserCurrencyRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *UpdateUserCurrencyRequest) GetUserId() string {
+func (x *UpdateUserCurrencyRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 func (x *UpdateUserCurrencyRequest) GetCurrency() string {
@@ -400,7 +400,7 @@ func (*UpdateUserCurrencyResponse) Descriptor() ([]byte, []int) {
 
 type GetUserBalancesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -435,11 +435,11 @@ func (*GetUserBalancesRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetUserBalancesRequest) GetUserId() string {
+func (x *GetUserBalancesRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 type GetUserBalancesResponse struct {
@@ -560,27 +560,27 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
 	"\x1ewallet/service/v1/wallet.proto\x12\x15api.wallet.service.v1\x1a\x1cgoogle/api/annotations.proto\"J\n" +
 	"\x0eAddUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1f\n" +
-	"\voperator_id\x18\x02 \x01(\tR\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
 	"operatorId\"\x11\n" +
 	"\x0fAddUserResponse\"F\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x18\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"\x14\n" +
 	"\x12UpdateUserResponse\"\x96\x01\n" +
 	"#AddOrUpdateOperatorsCurrencyRequest\x12!\n" +
-	"\foperator_ids\x18\x01 \x03(\tR\voperatorIds\x12\x1a\n" +
+	"\foperator_ids\x18\x01 \x03(\x03R\voperatorIds\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\x12\x16\n" +
 	"\x06hidden\x18\x04 \x01(\bR\x06hidden\"&\n" +
 	"$AddOrUpdateOperatorsCurrencyResponse\"j\n" +
 	"\x19UpdateUserCurrencyRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"\x1c\n" +
 	"\x1aUpdateUserCurrencyResponse\"1\n" +
 	"\x16GetUserBalancesRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xf7\x01\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xf7\x01\n" +
 	"\x17GetUserBalancesResponse\x12R\n" +
 	"\bbalances\x18\x01 \x03(\v26.api.wallet.service.v1.GetUserBalancesResponse.BalanceR\bbalances\x1a\x87\x01\n" +
 	"\aBalance\x12\x1a\n" +

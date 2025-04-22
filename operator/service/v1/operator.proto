@@ -46,17 +46,17 @@ message AddOperatorRequest {
 	// operator name
 	string name = 1;
 	// user id who creates the operator
-	string user_id = 2;
+	int64 user_id = 2;
 }
 
 message AddOperatorResponse {
 	// operator id allocated by operator service
-	string operator_id = 1;
+	int64 operator_id = 1;
 }
 
 message UpdateOperatorRequest {
 	// operator id allocated by operator service
-	string operator_id = 1;
+	int64 operator_id = 1;
 	// enabled
 	bool enabled = 2;
 }
@@ -72,7 +72,7 @@ message AddOrUpdateCurrencyRequest {
 message AddOrUpdateCurrencyResponse {}
 
 message UpdateOperatorCurrencyRequest {
-	string operator_id = 1;
+	int64 operator_id = 1;
 	string currency = 2;
 	bool enabled = 3;
 }
@@ -80,7 +80,7 @@ message UpdateOperatorCurrencyRequest {
 message UpdateOperatorCurrencyResponse {}
 
 message GetOperatorCurrenciesRequest {
-	string operator_id = 1;
+	int64 operator_id = 1;
 	// Filter to return specific currencies only.
 	// If empty or not provided, all currencies will be returned
 	repeated string currencies = 2;

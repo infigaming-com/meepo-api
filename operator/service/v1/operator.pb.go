@@ -27,7 +27,7 @@ type AddOperatorRequest struct {
 	// operator name
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// user id who creates the operator
-	UserId        string `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        int64 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -69,17 +69,17 @@ func (x *AddOperatorRequest) GetName() string {
 	return ""
 }
 
-func (x *AddOperatorRequest) GetUserId() string {
+func (x *AddOperatorRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 type AddOperatorResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// operator id allocated by operator service
-	OperatorId    string `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId    int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -114,17 +114,17 @@ func (*AddOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *AddOperatorResponse) GetOperatorId() string {
+func (x *AddOperatorResponse) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 type UpdateOperatorRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// operator id allocated by operator service
-	OperatorId string `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// enabled
 	Enabled       bool `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -161,11 +161,11 @@ func (*UpdateOperatorRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *UpdateOperatorRequest) GetOperatorId() string {
+func (x *UpdateOperatorRequest) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *UpdateOperatorRequest) GetEnabled() bool {
@@ -309,7 +309,7 @@ func (*AddOrUpdateCurrencyResponse) Descriptor() ([]byte, []int) {
 
 type UpdateOperatorCurrencyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId    string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -346,11 +346,11 @@ func (*UpdateOperatorCurrencyRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *UpdateOperatorCurrencyRequest) GetOperatorId() string {
+func (x *UpdateOperatorCurrencyRequest) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *UpdateOperatorCurrencyRequest) GetCurrency() string {
@@ -405,7 +405,7 @@ func (*UpdateOperatorCurrencyResponse) Descriptor() ([]byte, []int) {
 
 type GetOperatorCurrenciesRequest struct {
 	state      protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// Filter to return specific currencies only.
 	// If empty or not provided, all currencies will be returned
 	Currencies    []string `protobuf:"bytes,2,rep,name=currencies,proto3" json:"currencies,omitempty"`
@@ -443,11 +443,11 @@ func (*GetOperatorCurrenciesRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetOperatorCurrenciesRequest) GetOperatorId() string {
+func (x *GetOperatorCurrenciesRequest) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *GetOperatorCurrenciesRequest) GetCurrencies() []string {
@@ -568,12 +568,12 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\"operator/service/v1/operator.proto\x12\x17api.operator.service.v1\x1a\x1cgoogle/api/annotations.proto\"A\n" +
 	"\x12AddOperatorRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\tR\x06userId\"6\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\"6\n" +
 	"\x13AddOperatorResponse\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"R\n" +
 	"\x15UpdateOperatorRequest\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\"\x18\n" +
 	"\x16UpdateOperatorResponse\"j\n" +
@@ -583,13 +583,13 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x06hidden\x18\x03 \x01(\bR\x06hidden\"\x1d\n" +
 	"\x1bAddOrUpdateCurrencyResponse\"v\n" +
 	"\x1dUpdateOperatorCurrencyRequest\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\" \n" +
 	"\x1eUpdateOperatorCurrencyResponse\"_\n" +
 	"\x1cGetOperatorCurrenciesRequest\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x02 \x03(\tR\n" +
