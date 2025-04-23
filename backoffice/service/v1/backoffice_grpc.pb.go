@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	Backoffice_Event_FullMethodName                       = "/api.backoffice.service.v1.Backoffice/Event"
 	Backoffice_AddAccount_FullMethodName                  = "/api.backoffice.service.v1.Backoffice/AddAccount"
 	Backoffice_SendEmailVerification_FullMethodName       = "/api.backoffice.service.v1.Backoffice/SendEmailVerification"
 	Backoffice_VerifyEmail_FullMethodName                 = "/api.backoffice.service.v1.Backoffice/VerifyEmail"
@@ -69,6 +70,7 @@ const (
 //
 // Backoffice service provides system and account management functionality.
 type BackofficeClient interface {
+	Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error)
 	// Account
 	AddAccount(ctx context.Context, in *AddAccountRequest, opts ...grpc.CallOption) (*AddAccountResponse, error)
 	SendEmailVerification(ctx context.Context, in *SendEmailVerificationRequest, opts ...grpc.CallOption) (*SendEmailVerificationResponse, error)
@@ -127,6 +129,16 @@ type backofficeClient struct {
 
 func NewBackofficeClient(cc grpc.ClientConnInterface) BackofficeClient {
 	return &backofficeClient{cc}
+}
+
+func (c *backofficeClient) Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EventResponse)
+	err := c.cc.Invoke(ctx, Backoffice_Event_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *backofficeClient) AddAccount(ctx context.Context, in *AddAccountRequest, opts ...grpc.CallOption) (*AddAccountResponse, error) {
@@ -555,6 +567,7 @@ func (c *backofficeClient) ListWithdrawDailyDetails(ctx context.Context, in *Lis
 //
 // Backoffice service provides system and account management functionality.
 type BackofficeServer interface {
+	Event(context.Context, *EventRequest) (*EventResponse, error)
 	// Account
 	AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error)
 	SendEmailVerification(context.Context, *SendEmailVerificationRequest) (*SendEmailVerificationResponse, error)
@@ -615,6 +628,9 @@ type BackofficeServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficeServer struct{}
 
+func (UnimplementedBackofficeServer) Event(context.Context, *EventRequest) (*EventResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Event not implemented")
+}
 func (UnimplementedBackofficeServer) AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddAccount not implemented")
 }
@@ -760,6 +776,24 @@ func RegisterBackofficeServer(s grpc.ServiceRegistrar, srv BackofficeServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&Backoffice_ServiceDesc, srv)
+}
+
+func _Backoffice_Event_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeServer).Event(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Backoffice_Event_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeServer).Event(ctx, req.(*EventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Backoffice_AddAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1525,6 +1559,10 @@ var Backoffice_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.backoffice.service.v1.Backoffice",
 	HandlerType: (*BackofficeServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Event",
+			Handler:    _Backoffice_Event_Handler,
+		},
 		{
 			MethodName: "AddAccount",
 			Handler:    _Backoffice_AddAccount_Handler,

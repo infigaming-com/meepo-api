@@ -7,7 +7,6 @@
 package v1
 
 import (
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -210,7 +209,7 @@ var File_pubsub_service_v1_pubsub_proto protoreflect.FileDescriptor
 
 const file_pubsub_service_v1_pubsub_proto_rawDesc = "" +
 	"\n" +
-	"\x1epubsub/service/v1/pubsub.proto\x12\x15api.pubsub.service.v1\x1a\x1cgoogle/api/annotations.proto\"N\n" +
+	"\x1epubsub/service/v1/pubsub.proto\x12\x15api.pubsub.service.v1\"N\n" +
 	"\n" +
 	"PubRequest\x12\x14\n" +
 	"\x05topic\x18\x01 \x01(\tR\x05topic\x12\x18\n" +

@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package api.pubsub.service.v1;
 
-import "google/api/annotations.proto";
-
 option go_package = "github.com/infigaming-com/meepo-api/pubsub/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.pubsub.service.v1";
