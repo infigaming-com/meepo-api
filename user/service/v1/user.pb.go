@@ -959,6 +959,94 @@ func (x *IsTokenRevokedResponse) GetRevoked() bool {
 	return false
 }
 
+type EventRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Topic         string                 `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	EventData     []byte                 `protobuf:"bytes,2,opt,name=event_data,json=eventData,proto3" json:"event_data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EventRequest) Reset() {
+	*x = EventRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EventRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventRequest) ProtoMessage() {}
+
+func (x *EventRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventRequest.ProtoReflect.Descriptor instead.
+func (*EventRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *EventRequest) GetTopic() string {
+	if x != nil {
+		return x.Topic
+	}
+	return ""
+}
+
+func (x *EventRequest) GetEventData() []byte {
+	if x != nil {
+		return x.EventData
+	}
+	return nil
+}
+
+type EventResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EventResponse) Reset() {
+	*x = EventResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EventResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventResponse) ProtoMessage() {}
+
+func (x *EventResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventResponse.ProtoReflect.Descriptor instead.
+func (*EventResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{15}
+}
+
 var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
@@ -1008,7 +1096,12 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x15IsTokenRevokedRequest\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"2\n" +
 	"\x16IsTokenRevokedResponse\x12\x18\n" +
-	"\arevoked\x18\x01 \x01(\bR\arevoked*j\n" +
+	"\arevoked\x18\x01 \x01(\bR\arevoked\"C\n" +
+	"\fEventRequest\x12\x14\n" +
+	"\x05topic\x18\x01 \x01(\tR\x05topic\x12\x1d\n" +
+	"\n" +
+	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
+	"\rEventResponse*j\n" +
 	"\bAuthType\x12\x19\n" +
 	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x13\n" +
@@ -1023,7 +1116,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1aOAUTH_PROVIDER_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15OAUTH_PROVIDER_GOOGLE\x10\x01\x12\x1b\n" +
 	"\x17OAUTH_PROVIDER_FACEBOOK\x10\x02\x12\x1a\n" +
-	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\xd8\a\n" +
+	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\xaa\b\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12\x80\x01\n" +
@@ -1032,7 +1125,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\fRefreshToken\x12(.api.user.service.v1.RefreshTokenRequest\x1a).api.user.service.v1.RefreshTokenResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/user/auth/refresh\x12m\n" +
 	"\aGetUser\x12#.api.user.service.v1.GetUserRequest\x1a$.api.user.service.v1.GetUserResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v1/user/get\x12r\n" +
 	"\x06Logout\x12\".api.user.service.v1.LogoutRequest\x1a#.api.user.service.v1.LogoutResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1/user/auth/logout\x12k\n" +
-	"\x0eIsTokenRevoked\x12*.api.user.service.v1.IsTokenRevokedRequest\x1a+.api.user.service.v1.IsTokenRevokedResponse\"\x00BO\n" +
+	"\x0eIsTokenRevoked\x12*.api.user.service.v1.IsTokenRevokedRequest\x1a+.api.user.service.v1.IsTokenRevokedResponse\"\x00\x12P\n" +
+	"\x05Event\x12!.api.user.service.v1.EventRequest\x1a\".api.user.service.v1.EventResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -1048,7 +1142,7 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_user_service_v1_user_proto_goTypes = []any{
 	(AuthType)(0),                  // 0: api.user.service.v1.AuthType
 	(PasswordProvider)(0),          // 1: api.user.service.v1.PasswordProvider
@@ -1067,6 +1161,8 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*LogoutResponse)(nil),         // 14: api.user.service.v1.LogoutResponse
 	(*IsTokenRevokedRequest)(nil),  // 15: api.user.service.v1.IsTokenRevokedRequest
 	(*IsTokenRevokedResponse)(nil), // 16: api.user.service.v1.IsTokenRevokedResponse
+	(*EventRequest)(nil),           // 17: api.user.service.v1.EventRequest
+	(*EventResponse)(nil),          // 18: api.user.service.v1.EventResponse
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
 	1,  // 0: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
@@ -1082,16 +1178,18 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	11, // 10: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
 	13, // 11: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
 	15, // 12: api.user.service.v1.User.IsTokenRevoked:input_type -> api.user.service.v1.IsTokenRevokedRequest
-	9,  // 13: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
-	9,  // 14: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
-	9,  // 15: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
-	9,  // 16: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
-	10, // 17: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
-	12, // 18: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	14, // 19: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
-	16, // 20: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
-	13, // [13:21] is the sub-list for method output_type
-	5,  // [5:13] is the sub-list for method input_type
+	17, // 13: api.user.service.v1.User.Event:input_type -> api.user.service.v1.EventRequest
+	9,  // 14: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
+	9,  // 15: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
+	9,  // 16: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
+	9,  // 17: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
+	10, // 18: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
+	12, // 19: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	14, // 20: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	16, // 21: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
+	18, // 22: api.user.service.v1.User.Event:output_type -> api.user.service.v1.EventResponse
+	14, // [14:23] is the sub-list for method output_type
+	5,  // [5:14] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
 	5,  // [5:5] is the sub-list for extension extendee
 	0,  // [0:5] is the sub-list for field type_name
@@ -1108,7 +1206,7 @@ func file_user_service_v1_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   14,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

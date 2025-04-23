@@ -75,6 +75,8 @@ service User {
 
 	rpc IsTokenRevoked (IsTokenRevokedRequest) returns (IsTokenRevokedResponse) {
 	}
+
+	rpc Event (EventRequest) returns (EventResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -218,3 +220,10 @@ message IsTokenRevokedRequest {
 message IsTokenRevokedResponse {
 	bool revoked = 1;
 }
+
+message EventRequest {
+	string topic = 1;
+	bytes event_data = 2;
+}
+
+message EventResponse {}

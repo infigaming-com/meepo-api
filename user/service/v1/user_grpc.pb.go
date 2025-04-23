@@ -27,6 +27,7 @@ const (
 	User_GetUser_FullMethodName                     = "/api.user.service.v1.User/GetUser"
 	User_Logout_FullMethodName                      = "/api.user.service.v1.User/Logout"
 	User_IsTokenRevoked_FullMethodName              = "/api.user.service.v1.User/IsTokenRevoked"
+	User_Event_FullMethodName                       = "/api.user.service.v1.User/Event"
 )
 
 // UserClient is the client API for User service.
@@ -57,6 +58,7 @@ type UserClient interface {
 	// Invalidates the current session and refresh token.
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 	IsTokenRevoked(ctx context.Context, in *IsTokenRevokedRequest, opts ...grpc.CallOption) (*IsTokenRevokedResponse, error)
+	Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error)
 }
 
 type userClient struct {
@@ -147,6 +149,16 @@ func (c *userClient) IsTokenRevoked(ctx context.Context, in *IsTokenRevokedReque
 	return out, nil
 }
 
+func (c *userClient) Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EventResponse)
+	err := c.cc.Invoke(ctx, User_Event_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -175,6 +187,7 @@ type UserServer interface {
 	// Invalidates the current session and refresh token.
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	IsTokenRevoked(context.Context, *IsTokenRevokedRequest) (*IsTokenRevokedResponse, error)
+	Event(context.Context, *EventRequest) (*EventResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -208,6 +221,9 @@ func (UnimplementedUserServer) Logout(context.Context, *LogoutRequest) (*LogoutR
 }
 func (UnimplementedUserServer) IsTokenRevoked(context.Context, *IsTokenRevokedRequest) (*IsTokenRevokedResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IsTokenRevoked not implemented")
+}
+func (UnimplementedUserServer) Event(context.Context, *EventRequest) (*EventResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Event not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -374,6 +390,24 @@ func _User_IsTokenRevoked_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_Event_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).Event(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_Event_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).Event(ctx, req.(*EventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -412,6 +446,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "IsTokenRevoked",
 			Handler:    _User_IsTokenRevoked_Handler,
+		},
+		{
+			MethodName: "Event",
+			Handler:    _User_Event_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
