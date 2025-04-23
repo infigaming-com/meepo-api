@@ -11,7 +11,7 @@ option java_package = "api.user.service.v1";
 // User service provides authentication and user management functionality.
 service User {
 	rpc Event (EventRequest) returns (EventResponse) {}
-	
+
 	// Register a new user with password-based authentication.
 	// This endpoint allows users to create a new account using various identity providers.
 	rpc Register (RegisterRequest) returns (AuthResponse) {
