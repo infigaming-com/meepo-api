@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Pubsub_Pub_FullMethodName = "/api.user.pubsub.v1.pubsub/Pub"
+	Pubsub_Pub_FullMethodName = "/api.pubsub.service.v1.pubsub/Pub"
 )
 
 // PubsubClient is the client API for Pubsub service.
@@ -108,7 +108,7 @@ func _Pubsub_Pub_Handler(srv interface{}, ctx context.Context, dec func(interfac
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Pubsub_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.user.pubsub.v1.pubsub",
+	ServiceName: "api.pubsub.service.v1.pubsub",
 	HandlerType: (*PubsubServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

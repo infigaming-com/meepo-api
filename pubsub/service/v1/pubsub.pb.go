@@ -114,14 +114,14 @@ var File_pubsub_service_v1_pubsub_proto protoreflect.FileDescriptor
 
 const file_pubsub_service_v1_pubsub_proto_rawDesc = "" +
 	"\n" +
-	"\x1epubsub/service/v1/pubsub.proto\x12\x12api.user.pubsub.v1\x1a\x1cgoogle/api/annotations.proto\"<\n" +
+	"\x1epubsub/service/v1/pubsub.proto\x12\x15api.pubsub.service.v1\x1a\x1cgoogle/api/annotations.proto\"<\n" +
 	"\n" +
 	"PubRequest\x12\x14\n" +
 	"\x05topic\x18\x01 \x01(\tR\x05topic\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"\r\n" +
-	"\vPubResponse2R\n" +
-	"\x06pubsub\x12H\n" +
-	"\x03Pub\x12\x1e.api.user.pubsub.v1.PubRequest\x1a\x1f.api.user.pubsub.v1.PubResponse\"\x00BS\n" +
+	"\vPubResponse2X\n" +
+	"\x06pubsub\x12N\n" +
+	"\x03Pub\x12!.api.pubsub.service.v1.PubRequest\x1a\".api.pubsub.service.v1.PubResponse\"\x00BS\n" +
 	"\x15api.pubsub.service.v1P\x01Z8github.com/infigaming-com/meepo-api/pubsub/service/v1;v1b\x06proto3"
 
 var (
@@ -138,12 +138,12 @@ func file_pubsub_service_v1_pubsub_proto_rawDescGZIP() []byte {
 
 var file_pubsub_service_v1_pubsub_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_pubsub_service_v1_pubsub_proto_goTypes = []any{
-	(*PubRequest)(nil),  // 0: api.user.pubsub.v1.PubRequest
-	(*PubResponse)(nil), // 1: api.user.pubsub.v1.PubResponse
+	(*PubRequest)(nil),  // 0: api.pubsub.service.v1.PubRequest
+	(*PubResponse)(nil), // 1: api.pubsub.service.v1.PubResponse
 }
 var file_pubsub_service_v1_pubsub_proto_depIdxs = []int32{
-	0, // 0: api.user.pubsub.v1.pubsub.Pub:input_type -> api.user.pubsub.v1.PubRequest
-	1, // 1: api.user.pubsub.v1.pubsub.Pub:output_type -> api.user.pubsub.v1.PubResponse
+	0, // 0: api.pubsub.service.v1.pubsub.Pub:input_type -> api.pubsub.service.v1.PubRequest
+	1, // 1: api.pubsub.service.v1.pubsub.Pub:output_type -> api.pubsub.service.v1.PubResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
