@@ -10,6 +10,7 @@ option java_package = "api.pubsub.service.v1";
 
 service pubsub {
 	rpc Pub (PubRequest) returns (PubResponse) {}
+	rpc Evnet (EventRequest) returns (EventResponse) {}
 }
 
 message PubRequest {
@@ -19,3 +20,10 @@ message PubRequest {
 }
 
 message PubResponse {}
+
+message EventRequest {
+	string topic = 1;
+	bytes event_data = 2;
+}
+
+message EventResponse {}

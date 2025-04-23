@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Pubsub_Pub_FullMethodName = "/api.pubsub.service.v1.pubsub/Pub"
+	Pubsub_Pub_FullMethodName   = "/api.pubsub.service.v1.pubsub/Pub"
+	Pubsub_Evnet_FullMethodName = "/api.pubsub.service.v1.pubsub/Evnet"
 )
 
 // PubsubClient is the client API for Pubsub service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PubsubClient interface {
 	Pub(ctx context.Context, in *PubRequest, opts ...grpc.CallOption) (*PubResponse, error)
+	Evnet(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error)
 }
 
 type pubsubClient struct {
@@ -47,11 +49,22 @@ func (c *pubsubClient) Pub(ctx context.Context, in *PubRequest, opts ...grpc.Cal
 	return out, nil
 }
 
+func (c *pubsubClient) Evnet(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EventResponse)
+	err := c.cc.Invoke(ctx, Pubsub_Evnet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubsubServer is the server API for Pubsub service.
 // All implementations must embed UnimplementedPubsubServer
 // for forward compatibility.
 type PubsubServer interface {
 	Pub(context.Context, *PubRequest) (*PubResponse, error)
+	Evnet(context.Context, *EventRequest) (*EventResponse, error)
 	mustEmbedUnimplementedPubsubServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedPubsubServer struct{}
 
 func (UnimplementedPubsubServer) Pub(context.Context, *PubRequest) (*PubResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Pub not implemented")
+}
+func (UnimplementedPubsubServer) Evnet(context.Context, *EventRequest) (*EventResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Evnet not implemented")
 }
 func (UnimplementedPubsubServer) mustEmbedUnimplementedPubsubServer() {}
 func (UnimplementedPubsubServer) testEmbeddedByValue()                {}
@@ -104,6 +120,24 @@ func _Pubsub_Pub_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Pubsub_Evnet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubsubServer).Evnet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Pubsub_Evnet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubsubServer).Evnet(ctx, req.(*EventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Pubsub_ServiceDesc is the grpc.ServiceDesc for Pubsub service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var Pubsub_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Pub",
 			Handler:    _Pubsub_Pub_Handler,
+		},
+		{
+			MethodName: "Evnet",
+			Handler:    _Pubsub_Evnet_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

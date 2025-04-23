@@ -118,6 +118,94 @@ func (*PubResponse) Descriptor() ([]byte, []int) {
 	return file_pubsub_service_v1_pubsub_proto_rawDescGZIP(), []int{1}
 }
 
+type EventRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Topic         string                 `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	EventData     []byte                 `protobuf:"bytes,2,opt,name=event_data,json=eventData,proto3" json:"event_data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EventRequest) Reset() {
+	*x = EventRequest{}
+	mi := &file_pubsub_service_v1_pubsub_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EventRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventRequest) ProtoMessage() {}
+
+func (x *EventRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pubsub_service_v1_pubsub_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventRequest.ProtoReflect.Descriptor instead.
+func (*EventRequest) Descriptor() ([]byte, []int) {
+	return file_pubsub_service_v1_pubsub_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *EventRequest) GetTopic() string {
+	if x != nil {
+		return x.Topic
+	}
+	return ""
+}
+
+func (x *EventRequest) GetEventData() []byte {
+	if x != nil {
+		return x.EventData
+	}
+	return nil
+}
+
+type EventResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EventResponse) Reset() {
+	*x = EventResponse{}
+	mi := &file_pubsub_service_v1_pubsub_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EventResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventResponse) ProtoMessage() {}
+
+func (x *EventResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_pubsub_service_v1_pubsub_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventResponse.ProtoReflect.Descriptor instead.
+func (*EventResponse) Descriptor() ([]byte, []int) {
+	return file_pubsub_service_v1_pubsub_proto_rawDescGZIP(), []int{3}
+}
+
 var File_pubsub_service_v1_pubsub_proto protoreflect.FileDescriptor
 
 const file_pubsub_service_v1_pubsub_proto_rawDesc = "" +
@@ -128,9 +216,15 @@ const file_pubsub_service_v1_pubsub_proto_rawDesc = "" +
 	"\x05topic\x18\x01 \x01(\tR\x05topic\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x10\n" +
 	"\x03key\x18\x03 \x01(\tR\x03key\"\r\n" +
-	"\vPubResponse2X\n" +
+	"\vPubResponse\"C\n" +
+	"\fEventRequest\x12\x14\n" +
+	"\x05topic\x18\x01 \x01(\tR\x05topic\x12\x1d\n" +
+	"\n" +
+	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
+	"\rEventResponse2\xae\x01\n" +
 	"\x06pubsub\x12N\n" +
-	"\x03Pub\x12!.api.pubsub.service.v1.PubRequest\x1a\".api.pubsub.service.v1.PubResponse\"\x00BS\n" +
+	"\x03Pub\x12!.api.pubsub.service.v1.PubRequest\x1a\".api.pubsub.service.v1.PubResponse\"\x00\x12T\n" +
+	"\x05Evnet\x12#.api.pubsub.service.v1.EventRequest\x1a$.api.pubsub.service.v1.EventResponse\"\x00BS\n" +
 	"\x15api.pubsub.service.v1P\x01Z8github.com/infigaming-com/meepo-api/pubsub/service/v1;v1b\x06proto3"
 
 var (
@@ -145,16 +239,20 @@ func file_pubsub_service_v1_pubsub_proto_rawDescGZIP() []byte {
 	return file_pubsub_service_v1_pubsub_proto_rawDescData
 }
 
-var file_pubsub_service_v1_pubsub_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_pubsub_service_v1_pubsub_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_pubsub_service_v1_pubsub_proto_goTypes = []any{
-	(*PubRequest)(nil),  // 0: api.pubsub.service.v1.PubRequest
-	(*PubResponse)(nil), // 1: api.pubsub.service.v1.PubResponse
+	(*PubRequest)(nil),    // 0: api.pubsub.service.v1.PubRequest
+	(*PubResponse)(nil),   // 1: api.pubsub.service.v1.PubResponse
+	(*EventRequest)(nil),  // 2: api.pubsub.service.v1.EventRequest
+	(*EventResponse)(nil), // 3: api.pubsub.service.v1.EventResponse
 }
 var file_pubsub_service_v1_pubsub_proto_depIdxs = []int32{
 	0, // 0: api.pubsub.service.v1.pubsub.Pub:input_type -> api.pubsub.service.v1.PubRequest
-	1, // 1: api.pubsub.service.v1.pubsub.Pub:output_type -> api.pubsub.service.v1.PubResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 1: api.pubsub.service.v1.pubsub.Evnet:input_type -> api.pubsub.service.v1.EventRequest
+	1, // 2: api.pubsub.service.v1.pubsub.Pub:output_type -> api.pubsub.service.v1.PubResponse
+	3, // 3: api.pubsub.service.v1.pubsub.Evnet:output_type -> api.pubsub.service.v1.EventResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -171,7 +269,7 @@ func file_pubsub_service_v1_pubsub_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_pubsub_service_v1_pubsub_proto_rawDesc), len(file_pubsub_service_v1_pubsub_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
