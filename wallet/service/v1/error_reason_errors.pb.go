@@ -226,3 +226,15 @@ func IsAddCreditFailed(err error) bool {
 func ErrorAddCreditFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_ADD_CREDIT_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidCreditType(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_CREDIT_TYPE.String() && e.Code == 400
+}
+
+func ErrorInvalidCreditType(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_CREDIT_TYPE.String(), fmt.Sprintf(format, args...))
+}

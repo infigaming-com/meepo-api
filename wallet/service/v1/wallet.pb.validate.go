@@ -1139,7 +1139,7 @@ func (m *CreditRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for Type
+	// no validation rules for CreditType
 
 	// no validation rules for TransactionId
 
@@ -1415,6 +1415,12 @@ func (m *DebitRequest) validate(all bool) error {
 	// no validation rules for OperatorBonus
 
 	// no validation rules for ProviderBonus
+
+	// no validation rules for CashTurnover
+
+	// no validation rules for OperatorBonusTurnover
+
+	// no validation rules for ProviderBonusTurnover
 
 	if len(errors) > 0 {
 		return DebitRequestMultiError(errors)

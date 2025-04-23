@@ -79,6 +79,16 @@ message GetUserBalancesResponse {
 	repeated Balance balances = 1;
 }
 
+// CreditType defines where the credit comes from.
+enum CreditType {
+	// default value, should not be used.
+	CREDIT_TYPE_UNSPECIFIED = 0;
+	// credit comes from a payment transaction.
+	CREDIT_TYPE_PAYMENT = 1;
+	// credit comes from a game win.
+	CREDIT_TYPE_GAME_WIN = 2;
+}
+
 message CreditRequest {
 	message Ratio {
 		int64 numerator = 1;
@@ -86,10 +96,9 @@ message CreditRequest {
 	}
 	int64 user_id = 1;
 	string currency = 2;
-	// type indicates where the credit comes from.
-	// 1. "payment" means the credit comes from a payment transaction.
-	// 2. "game" means the credit comes from a game transaction.
-	string type = 3;
+	// credit_type indicates where the credit comes from.
+	// See CreditType for more details.
+	CreditType credit_type = 3;
 	// transaction_id is the transaction id of the credit.
 	// if credit_type is "payment", transaction_id is the payment transaction id.
 	// if credit_type is "game", transaction_id is the game transaction id.
@@ -129,6 +138,9 @@ message DebitRequest {
 	int64 cash = 5;
 	int64 operator_bonus = 6;
 	int64 provider_bonus = 7;
+	int64 cash_turnover = 8;
+	int64 operator_bonus_turnover = 9;
+	int64 provider_bonus_turnover = 10;
 }
 
 message DebitResponse {
