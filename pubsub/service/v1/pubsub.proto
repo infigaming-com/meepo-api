@@ -14,8 +14,8 @@ service pubsub {
 
 message PubRequest {
 	string topic = 1;
-	bytes message = 2;
-	optional string key = 3;
+	string message = 2;
+	string key = 3;
 }
 
 message PubResponse {}
