@@ -1416,6 +1416,12 @@ func (m *DebitRequest) validate(all bool) error {
 
 	// no validation rules for ProviderBonus
 
+	// no validation rules for CashTurnover
+
+	// no validation rules for OperatorBonusTurnover
+
+	// no validation rules for ProviderBonusTurnover
+
 	if len(errors) > 0 {
 		return DebitRequestMultiError(errors)
 	}

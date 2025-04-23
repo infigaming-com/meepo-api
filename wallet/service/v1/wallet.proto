@@ -129,6 +129,9 @@ message DebitRequest {
 	int64 cash = 5;
 	int64 operator_bonus = 6;
 	int64 provider_bonus = 7;
+	int64 cash_turnover = 8;
+	int64 operator_bonus_turnover = 9;
+	int64 provider_bonus_turnover = 10;
 }
 
 message DebitResponse {

@@ -735,12 +735,15 @@ type DebitRequest struct {
 	// transaction_id is the transaction id of the debit.
 	// if debit_type is "payment", transaction_id is the payment transaction id.
 	// if debit_type is "game", transaction_id is the game transaction id.
-	TransactionId int64 `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash          int64 `protobuf:"varint,5,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus int64 `protobuf:"varint,6,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus int64 `protobuf:"varint,7,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	TransactionId         int64 `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Cash                  int64 `protobuf:"varint,5,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus         int64 `protobuf:"varint,6,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus         int64 `protobuf:"varint,7,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	CashTurnover          int64 `protobuf:"varint,8,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
+	OperatorBonusTurnover int64 `protobuf:"varint,9,opt,name=operator_bonus_turnover,json=operatorBonusTurnover,proto3" json:"operator_bonus_turnover,omitempty"`
+	ProviderBonusTurnover int64 `protobuf:"varint,10,opt,name=provider_bonus_turnover,json=providerBonusTurnover,proto3" json:"provider_bonus_turnover,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *DebitRequest) Reset() {
@@ -818,6 +821,27 @@ func (x *DebitRequest) GetOperatorBonus() int64 {
 func (x *DebitRequest) GetProviderBonus() int64 {
 	if x != nil {
 		return x.ProviderBonus
+	}
+	return 0
+}
+
+func (x *DebitRequest) GetCashTurnover() int64 {
+	if x != nil {
+		return x.CashTurnover
+	}
+	return 0
+}
+
+func (x *DebitRequest) GetOperatorBonusTurnover() int64 {
+	if x != nil {
+		return x.OperatorBonusTurnover
+	}
+	return 0
+}
+
+func (x *DebitRequest) GetProviderBonusTurnover() int64 {
+	if x != nil {
+		return x.ProviderBonusTurnover
 	}
 	return 0
 }
@@ -1069,7 +1093,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\xe0\x01\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\xf5\x02\n" +
 	"\fDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x12\n" +
@@ -1077,7 +1101,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x04 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x05 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x06 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\a \x01(\x03R\rproviderBonus\"\x98\x01\n" +
+	"\x0eprovider_bonus\x18\a \x01(\x03R\rproviderBonus\x12#\n" +
+	"\rcash_turnover\x18\b \x01(\x03R\fcashTurnover\x126\n" +
+	"\x17operator_bonus_turnover\x18\t \x01(\x03R\x15operatorBonusTurnover\x126\n" +
+	"\x17provider_bonus_turnover\x18\n" +
+	" \x01(\x03R\x15providerBonusTurnover\"\x98\x01\n" +
 	"\rDebitResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
