@@ -28,6 +28,8 @@ service Wallet {
 			body: "*"
 		};
 	}
+
+	rpc Event (EventRequest) returns (EventResponse) {}
 }
 
 message AddUserRequest {
@@ -74,3 +76,10 @@ message GetUserBalancesResponse {
 	}
 	repeated Balance balances = 1;
 }
+
+message EventRequest {
+	string topic = 1;
+	bytes event_data = 2;
+}
+
+message EventResponse {}

@@ -24,6 +24,7 @@ const (
 	Wallet_AddOrUpdateOperatorsCurrency_FullMethodName = "/api.wallet.service.v1.Wallet/AddOrUpdateOperatorsCurrency"
 	Wallet_UpdateUserCurrency_FullMethodName           = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
 	Wallet_GetUserBalances_FullMethodName              = "/api.wallet.service.v1.Wallet/GetUserBalances"
+	Wallet_Event_FullMethodName                        = "/api.wallet.service.v1.Wallet/Event"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -35,6 +36,7 @@ type WalletClient interface {
 	AddOrUpdateOperatorsCurrency(ctx context.Context, in *AddOrUpdateOperatorsCurrencyRequest, opts ...grpc.CallOption) (*AddOrUpdateOperatorsCurrencyResponse, error)
 	UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error)
 	GetUserBalances(ctx context.Context, in *GetUserBalancesRequest, opts ...grpc.CallOption) (*GetUserBalancesResponse, error)
+	Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error)
 }
 
 type walletClient struct {
@@ -95,6 +97,16 @@ func (c *walletClient) GetUserBalances(ctx context.Context, in *GetUserBalancesR
 	return out, nil
 }
 
+func (c *walletClient) Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EventResponse)
+	err := c.cc.Invoke(ctx, Wallet_Event_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -104,6 +116,7 @@ type WalletServer interface {
 	AddOrUpdateOperatorsCurrency(context.Context, *AddOrUpdateOperatorsCurrencyRequest) (*AddOrUpdateOperatorsCurrencyResponse, error)
 	UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error)
 	GetUserBalances(context.Context, *GetUserBalancesRequest) (*GetUserBalancesResponse, error)
+	Event(context.Context, *EventRequest) (*EventResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -128,6 +141,9 @@ func (UnimplementedWalletServer) UpdateUserCurrency(context.Context, *UpdateUser
 }
 func (UnimplementedWalletServer) GetUserBalances(context.Context, *GetUserBalancesRequest) (*GetUserBalancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserBalances not implemented")
+}
+func (UnimplementedWalletServer) Event(context.Context, *EventRequest) (*EventResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Event not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -240,6 +256,24 @@ func _Wallet_GetUserBalances_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_Event_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).Event(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_Event_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).Event(ctx, req.(*EventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -266,6 +300,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserBalances",
 			Handler:    _Wallet_GetUserBalances_Handler,
+		},
+		{
+			MethodName: "Event",
+			Handler:    _Wallet_Event_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
