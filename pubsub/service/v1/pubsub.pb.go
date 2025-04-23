@@ -25,8 +25,8 @@ const (
 type PubRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Topic         string                 `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
-	Message       []byte                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	Key           *string                `protobuf:"bytes,3,opt,name=key,proto3,oneof" json:"key,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Key           string                 `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -68,16 +68,16 @@ func (x *PubRequest) GetTopic() string {
 	return ""
 }
 
-func (x *PubRequest) GetMessage() []byte {
+func (x *PubRequest) GetMessage() string {
 	if x != nil {
 		return x.Message
 	}
-	return nil
+	return ""
 }
 
 func (x *PubRequest) GetKey() string {
-	if x != nil && x.Key != nil {
-		return *x.Key
+	if x != nil {
+		return x.Key
 	}
 	return ""
 }
@@ -122,13 +122,12 @@ var File_pubsub_service_v1_pubsub_proto protoreflect.FileDescriptor
 
 const file_pubsub_service_v1_pubsub_proto_rawDesc = "" +
 	"\n" +
-	"\x1epubsub/service/v1/pubsub.proto\x12\x15api.pubsub.service.v1\x1a\x1cgoogle/api/annotations.proto\"[\n" +
+	"\x1epubsub/service/v1/pubsub.proto\x12\x15api.pubsub.service.v1\x1a\x1cgoogle/api/annotations.proto\"N\n" +
 	"\n" +
 	"PubRequest\x12\x14\n" +
 	"\x05topic\x18\x01 \x01(\tR\x05topic\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\fR\amessage\x12\x15\n" +
-	"\x03key\x18\x03 \x01(\tH\x00R\x03key\x88\x01\x01B\x06\n" +
-	"\x04_key\"\r\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12\x10\n" +
+	"\x03key\x18\x03 \x01(\tR\x03key\"\r\n" +
 	"\vPubResponse2X\n" +
 	"\x06pubsub\x12N\n" +
 	"\x03Pub\x12!.api.pubsub.service.v1.PubRequest\x1a\".api.pubsub.service.v1.PubResponse\"\x00BS\n" +
@@ -166,7 +165,6 @@ func file_pubsub_service_v1_pubsub_proto_init() {
 	if File_pubsub_service_v1_pubsub_proto != nil {
 		return
 	}
-	file_pubsub_service_v1_pubsub_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
