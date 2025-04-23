@@ -61,7 +61,9 @@ func (m *PubRequest) validate(all bool) error {
 
 	// no validation rules for Message
 
-	// no validation rules for Key
+	if m.Key != nil {
+		// no validation rules for Key
+	}
 
 	if len(errors) > 0 {
 		return PubRequestMultiError(errors)
