@@ -25,7 +25,7 @@ const (
 type PubRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Topic         string                 `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Message       []byte                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -67,11 +67,11 @@ func (x *PubRequest) GetTopic() string {
 	return ""
 }
 
-func (x *PubRequest) GetMessage() string {
+func (x *PubRequest) GetMessage() []byte {
 	if x != nil {
 		return x.Message
 	}
-	return ""
+	return nil
 }
 
 type PubResponse struct {
@@ -118,7 +118,7 @@ const file_pubsub_service_v1_pubsub_proto_rawDesc = "" +
 	"\n" +
 	"PubRequest\x12\x14\n" +
 	"\x05topic\x18\x01 \x01(\tR\x05topic\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\r\n" +
+	"\amessage\x18\x02 \x01(\fR\amessage\"\r\n" +
 	"\vPubResponse2X\n" +
 	"\x06pubsub\x12N\n" +
 	"\x03Pub\x12!.api.pubsub.service.v1.PubRequest\x1a\".api.pubsub.service.v1.PubResponse\"\x00BS\n" +
