@@ -29,8 +29,8 @@ type GameHTTPServer interface {
 
 func RegisterGameHTTPServer(s *http.Server, srv GameHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/games/list", _Game_ListGames0_HTTP_Handler(srv))
-	r.POST("/v1/games/create-session", _Game_CreateSession0_HTTP_Handler(srv))
+	r.POST("/v1/game/list", _Game_ListGames0_HTTP_Handler(srv))
+	r.POST("/v1/game/create-session", _Game_CreateSession0_HTTP_Handler(srv))
 }
 
 func _Game_ListGames0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
@@ -92,7 +92,7 @@ func NewGameHTTPClient(client *http.Client) GameHTTPClient {
 
 func (c *GameHTTPClientImpl) CreateSession(ctx context.Context, in *CreateSessionRequest, opts ...http.CallOption) (*CreateSessionResponse, error) {
 	var out CreateSessionResponse
-	pattern := "/v1/games/create-session"
+	pattern := "/v1/game/create-session"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameCreateSession))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -105,7 +105,7 @@ func (c *GameHTTPClientImpl) CreateSession(ctx context.Context, in *CreateSessio
 
 func (c *GameHTTPClientImpl) ListGames(ctx context.Context, in *ListGamesRequest, opts ...http.CallOption) (*ListGamesResponse, error) {
 	var out ListGamesResponse
-	pattern := "/v1/games/list"
+	pattern := "/v1/game/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameListGames))
 	opts = append(opts, http.PathTemplate(pattern))

@@ -1290,13 +1290,13 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\rregistered_at\x18\t \x01(\tR\fregisteredAt\x12\x16\n" +
 	"\x06gender\x18\n" +
 	" \x01(\tR\x06gender\x12\x18\n" +
-	"\acountry\x18\v \x01(\tR\acountry2\xaa\x04\n" +
+	"\acountry\x18\v \x01(\tR\acountry2\xa8\x04\n" +
 	"\x04Game\x12c\n" +
 	"\x0eCreateOperator\x12&.game.service.v1.CreateOperatorRequest\x1a'.game.service.v1.CreateOperatorResponse\"\x00\x12c\n" +
 	"\x0eUpdateOperator\x12&.game.service.v1.UpdateOperatorRequest\x1a'.game.service.v1.UpdateOperatorResponse\"\x00\x12c\n" +
-	"\x0eDeleteOperator\x12&.game.service.v1.DeleteOperatorRequest\x1a'.game.service.v1.DeleteOperatorResponse\"\x00\x12m\n" +
-	"\tListGames\x12!.game.service.v1.ListGamesRequest\x1a\".game.service.v1.ListGamesResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v1/games/list\x12\x83\x01\n" +
-	"\rCreateSession\x12%.game.service.v1.CreateSessionRequest\x1a&.game.service.v1.CreateSessionResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/games/create-sessionBK\n" +
+	"\x0eDeleteOperator\x12&.game.service.v1.DeleteOperatorRequest\x1a'.game.service.v1.DeleteOperatorResponse\"\x00\x12l\n" +
+	"\tListGames\x12!.game.service.v1.ListGamesRequest\x1a\".game.service.v1.ListGamesResponse\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/game/list\x12\x82\x01\n" +
+	"\rCreateSession\x12%.game.service.v1.CreateSessionRequest\x1a&.game.service.v1.CreateSessionResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/game/create-sessionBK\n" +
 	"\x0fgame.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (
