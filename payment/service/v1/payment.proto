@@ -30,7 +30,7 @@ message GetPaymentMethodListResponse {
 
 // Request to create a payment channel
 message CreatePaymentChannelRequest {
-  string merchant_id = 1 [json_name="merchantId"];
+  string operator_id = 1 [json_name="operatorId"];
   string payment_method_id = 2 [json_name="paymentMethodId"];
   google.protobuf.Struct key = 3; // Stores configuration fields for the payment channel
 }
@@ -42,20 +42,15 @@ message CreatePaymentChannelResponse {
 
 // Request to get payment channel list
 message GetPaymentChannelListRequest {
-  string merchant_id = 1 [json_name="merchantId"];
+  string operator_id = 1 [json_name="operatorId"];
 }
 
 // Payment channel information
 message PaymentChannelInfo {
   string channel_id = 1 [json_name="channelId"];
-  string merchant_id = 2 [json_name="merchantId"];
-  string payment_method_id = 3 [json_name="paymentMethodId"];
-  string payment_method = 4 [json_name="paymentMethod"];
-  string currency = 5;
-  string country = 6;
-  int32 status = 7;
-  google.protobuf.Timestamp created_at = 8 [json_name="createdAt"];
-  google.protobuf.Timestamp updated_at = 9 [json_name="updatedAt"];
+  string operator_id = 2 [json_name="operatorId"];
+  string payment_method = 3 [json_name="paymentMethod"];
+  string tag = 4;
 }
 
 // Response for payment channel list

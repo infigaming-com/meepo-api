@@ -186,7 +186,7 @@ func (x *GetPaymentMethodListResponse) GetPaymentMethods() []*PaymentMethodInfo 
 // Request to create a payment channel
 type CreatePaymentChannelRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	MerchantId      string                 `protobuf:"bytes,1,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	OperatorId      string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	PaymentMethodId string                 `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	Key             *structpb.Struct       `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"` // Stores configuration fields for the payment channel
 	unknownFields   protoimpl.UnknownFields
@@ -223,9 +223,9 @@ func (*CreatePaymentChannelRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CreatePaymentChannelRequest) GetMerchantId() string {
+func (x *CreatePaymentChannelRequest) GetOperatorId() string {
 	if x != nil {
-		return x.MerchantId
+		return x.OperatorId
 	}
 	return ""
 }
@@ -292,7 +292,7 @@ func (x *CreatePaymentChannelResponse) GetChannelId() string {
 // Request to get payment channel list
 type GetPaymentChannelListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	MerchantId    string                 `protobuf:"bytes,1,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	OperatorId    string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -327,27 +327,22 @@ func (*GetPaymentChannelListRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *GetPaymentChannelListRequest) GetMerchantId() string {
+func (x *GetPaymentChannelListRequest) GetOperatorId() string {
 	if x != nil {
-		return x.MerchantId
+		return x.OperatorId
 	}
 	return ""
 }
 
 // Payment channel information
 type PaymentChannelInfo struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	ChannelId       string                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	MerchantId      string                 `protobuf:"bytes,2,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
-	PaymentMethodId string                 `protobuf:"bytes,3,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
-	PaymentMethod   string                 `protobuf:"bytes,4,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
-	Currency        string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
-	Country         string                 `protobuf:"bytes,6,opt,name=country,proto3" json:"country,omitempty"`
-	Status          int32                  `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ChannelId     string                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	OperatorId    string                 `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	PaymentMethod string                 `protobuf:"bytes,3,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	Tag           string                 `protobuf:"bytes,4,opt,name=tag,proto3" json:"tag,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PaymentChannelInfo) Reset() {
@@ -387,16 +382,9 @@ func (x *PaymentChannelInfo) GetChannelId() string {
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetMerchantId() string {
+func (x *PaymentChannelInfo) GetOperatorId() string {
 	if x != nil {
-		return x.MerchantId
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetPaymentMethodId() string {
-	if x != nil {
-		return x.PaymentMethodId
+		return x.OperatorId
 	}
 	return ""
 }
@@ -408,39 +396,11 @@ func (x *PaymentChannelInfo) GetPaymentMethod() string {
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetCurrency() string {
+func (x *PaymentChannelInfo) GetTag() string {
 	if x != nil {
-		return x.Currency
+		return x.Tag
 	}
 	return ""
-}
-
-func (x *PaymentChannelInfo) GetCountry() string {
-	if x != nil {
-		return x.Country
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetStatus() int32 {
-	if x != nil {
-		return x.Status
-	}
-	return 0
-}
-
-func (x *PaymentChannelInfo) GetCreatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return nil
-}
-
-func (x *PaymentChannelInfo) GetUpdatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.UpdatedAt
-	}
-	return nil
 }
 
 // Response for payment channel list
@@ -1078,30 +1038,23 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x1cGetPaymentMethodListResponse\x12N\n" +
 	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\x95\x01\n" +
 	"\x1bCreatePaymentChannelRequest\x12\x1f\n" +
-	"\vmerchant_id\x18\x01 \x01(\tR\n" +
-	"merchantId\x12*\n" +
+	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"operatorId\x12*\n" +
 	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\x12)\n" +
 	"\x03key\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\"?\n" +
 	"\x1cGetPaymentChannelListRequest\x12\x1f\n" +
-	"\vmerchant_id\x18\x01 \x01(\tR\n" +
-	"merchantId\"\xeb\x02\n" +
+	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"operatorId\"\x8d\x01\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x1f\n" +
-	"\vmerchant_id\x18\x02 \x01(\tR\n" +
-	"merchantId\x12*\n" +
-	"\x11payment_method_id\x18\x03 \x01(\tR\x0fpaymentMethodId\x12%\n" +
-	"\x0epayment_method\x18\x04 \x01(\tR\rpaymentMethod\x12\x1a\n" +
-	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x18\n" +
-	"\acountry\x18\x06 \x01(\tR\acountry\x12\x16\n" +
-	"\x06status\x18\a \x01(\x05R\x06status\x129\n" +
-	"\n" +
-	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
-	"\n" +
-	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"r\n" +
+	"\voperator_id\x18\x02 \x01(\tR\n" +
+	"operatorId\x12%\n" +
+	"\x0epayment_method\x18\x03 \x01(\tR\rpaymentMethod\x12\x10\n" +
+	"\x03tag\x18\x04 \x01(\tR\x03tag\"r\n" +
 	"\x1dGetPaymentChannelListResponse\x12Q\n" +
 	"\x10payment_channels\x18\x01 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x0fpaymentChannels\"\xb3\x01\n" +
 	"\x16InitiateDepositRequest\x12\x17\n" +
@@ -1207,31 +1160,29 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	14, // 0: payment.service.v1.PaymentMethodInfo.key_schema:type_name -> google.protobuf.Struct
 	1,  // 1: payment.service.v1.GetPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
 	14, // 2: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
-	15, // 3: payment.service.v1.PaymentChannelInfo.created_at:type_name -> google.protobuf.Timestamp
-	15, // 4: payment.service.v1.PaymentChannelInfo.updated_at:type_name -> google.protobuf.Timestamp
-	6,  // 5: payment.service.v1.GetPaymentChannelListResponse.payment_channels:type_name -> payment.service.v1.PaymentChannelInfo
-	14, // 6: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
-	15, // 7: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
-	14, // 8: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
-	14, // 9: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
-	15, // 10: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 11: payment.service.v1.Payment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
-	3,  // 12: payment.service.v1.Payment.CreatePaymentChannel:input_type -> payment.service.v1.CreatePaymentChannelRequest
-	5,  // 13: payment.service.v1.Payment.GetPaymentChannelList:input_type -> payment.service.v1.GetPaymentChannelListRequest
-	8,  // 14: payment.service.v1.Payment.InitiateDeposit:input_type -> payment.service.v1.InitiateDepositRequest
-	10, // 15: payment.service.v1.Payment.InitiateWithdraw:input_type -> payment.service.v1.InitiateWithdrawRequest
-	12, // 16: payment.service.v1.Payment.DepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
-	2,  // 17: payment.service.v1.Payment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
-	4,  // 18: payment.service.v1.Payment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
-	7,  // 19: payment.service.v1.Payment.GetPaymentChannelList:output_type -> payment.service.v1.GetPaymentChannelListResponse
-	9,  // 20: payment.service.v1.Payment.InitiateDeposit:output_type -> payment.service.v1.InitiateDepositResponse
-	11, // 21: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
-	13, // 22: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
-	17, // [17:23] is the sub-list for method output_type
-	11, // [11:17] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	6,  // 3: payment.service.v1.GetPaymentChannelListResponse.payment_channels:type_name -> payment.service.v1.PaymentChannelInfo
+	14, // 4: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
+	15, // 5: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
+	14, // 6: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
+	14, // 7: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
+	15, // 8: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 9: payment.service.v1.Payment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
+	3,  // 10: payment.service.v1.Payment.CreatePaymentChannel:input_type -> payment.service.v1.CreatePaymentChannelRequest
+	5,  // 11: payment.service.v1.Payment.GetPaymentChannelList:input_type -> payment.service.v1.GetPaymentChannelListRequest
+	8,  // 12: payment.service.v1.Payment.InitiateDeposit:input_type -> payment.service.v1.InitiateDepositRequest
+	10, // 13: payment.service.v1.Payment.InitiateWithdraw:input_type -> payment.service.v1.InitiateWithdrawRequest
+	12, // 14: payment.service.v1.Payment.DepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
+	2,  // 15: payment.service.v1.Payment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
+	4,  // 16: payment.service.v1.Payment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
+	7,  // 17: payment.service.v1.Payment.GetPaymentChannelList:output_type -> payment.service.v1.GetPaymentChannelListResponse
+	9,  // 18: payment.service.v1.Payment.InitiateDeposit:output_type -> payment.service.v1.InitiateDepositResponse
+	11, // 19: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
+	13, // 20: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
+	15, // [15:21] is the sub-list for method output_type
+	9,  // [9:15] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_payment_service_v1_payment_proto_init() }
