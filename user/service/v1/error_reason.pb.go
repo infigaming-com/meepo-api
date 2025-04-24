@@ -47,6 +47,7 @@ const (
 	ErrorReason_GET_TOKEN_WITH_REFRESH_TOKEN_FAILED ErrorReason = 10018
 	ErrorReason_GET_UNEXPIRED_TOKEN_FOR_USER_FAILED ErrorReason = 10019
 	ErrorReason_OAUTH_PROVIDER_NOT_SUPPORTED        ErrorReason = 10020
+	ErrorReason_USERNAME_OR_PASSWORD_INVALID        ErrorReason = 10021
 )
 
 // Enum value maps for ErrorReason.
@@ -74,6 +75,7 @@ var (
 		10018: "GET_TOKEN_WITH_REFRESH_TOKEN_FAILED",
 		10019: "GET_UNEXPIRED_TOKEN_FOR_USER_FAILED",
 		10020: "OAUTH_PROVIDER_NOT_SUPPORTED",
+		10021: "USERNAME_OR_PASSWORD_INVALID",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                         0,
@@ -98,6 +100,7 @@ var (
 		"GET_TOKEN_WITH_REFRESH_TOKEN_FAILED": 10018,
 		"GET_UNEXPIRED_TOKEN_FOR_USER_FAILED": 10019,
 		"OAUTH_PROVIDER_NOT_SUPPORTED":        10020,
+		"USERNAME_OR_PASSWORD_INVALID":        10021,
 	}
 )
 
@@ -132,7 +135,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa3\x05\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xc6\x05\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x0eUSER_NOT_FOUND\x10\x90N\x1a\x04\xa8E\x94\x03\x12\x1e\n" +
@@ -155,7 +158,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x15INVALID_USER_PASSWORD\x10\xa1N\x1a\x04\xa8E\x91\x03\x12(\n" +
 	"#GET_TOKEN_WITH_REFRESH_TOKEN_FAILED\x10\xa2N\x12(\n" +
 	"#GET_UNEXPIRED_TOKEN_FOR_USER_FAILED\x10\xa3N\x12!\n" +
-	"\x1cOAUTH_PROVIDER_NOT_SUPPORTED\x10\xa4N\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x1cOAUTH_PROVIDER_NOT_SUPPORTED\x10\xa4N\x12!\n" +
+	"\x1cUSERNAME_OR_PASSWORD_INVALID\x10\xa5N\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
