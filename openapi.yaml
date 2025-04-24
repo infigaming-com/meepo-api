@@ -893,7 +893,7 @@ components:
         payment.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
-                merchantId:
+                operatorId:
                     type: string
                 paymentMethodId:
                     type: string
@@ -941,7 +941,7 @@ components:
         payment.service.v1.GetPaymentChannelListRequest:
             type: object
             properties:
-                merchantId:
+                operatorId:
                     type: string
             description: Request to get payment channel list
         payment.service.v1.GetPaymentChannelListResponse:
@@ -1051,25 +1051,12 @@ components:
             properties:
                 channelId:
                     type: string
-                merchantId:
-                    type: string
-                paymentMethodId:
+                operatorId:
                     type: string
                 paymentMethod:
                     type: string
-                currency:
+                tag:
                     type: string
-                country:
-                    type: string
-                status:
-                    type: integer
-                    format: int32
-                createdAt:
-                    type: string
-                    format: date-time
-                updatedAt:
-                    type: string
-                    format: date-time
             description: Payment channel information
         payment.service.v1.PaymentMethodInfo:
             type: object

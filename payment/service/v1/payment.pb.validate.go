@@ -436,7 +436,7 @@ func (m *CreatePaymentChannelRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for MerchantId
+	// no validation rules for OperatorId
 
 	// no validation rules for PaymentMethodId
 
@@ -677,7 +677,7 @@ func (m *GetPaymentChannelListRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for MerchantId
+	// no validation rules for OperatorId
 
 	if len(errors) > 0 {
 		return GetPaymentChannelListRequestMultiError(errors)
@@ -784,75 +784,11 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for ChannelId
 
-	// no validation rules for MerchantId
-
-	// no validation rules for PaymentMethodId
+	// no validation rules for OperatorId
 
 	// no validation rules for PaymentMethod
 
-	// no validation rules for Currency
-
-	// no validation rules for Country
-
-	// no validation rules for Status
-
-	if all {
-		switch v := interface{}(m.GetCreatedAt()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, PaymentChannelInfoValidationError{
-					field:  "CreatedAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, PaymentChannelInfoValidationError{
-					field:  "CreatedAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return PaymentChannelInfoValidationError{
-				field:  "CreatedAt",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetUpdatedAt()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, PaymentChannelInfoValidationError{
-					field:  "UpdatedAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, PaymentChannelInfoValidationError{
-					field:  "UpdatedAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return PaymentChannelInfoValidationError{
-				field:  "UpdatedAt",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Tag
 
 	if len(errors) > 0 {
 		return PaymentChannelInfoMultiError(errors)
