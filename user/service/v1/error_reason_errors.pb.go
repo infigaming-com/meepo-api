@@ -274,3 +274,15 @@ func IsOauthProviderNotSupported(err error) bool {
 func ErrorOauthProviderNotSupported(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_OAUTH_PROVIDER_NOT_SUPPORTED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUsernameOrPasswordInvalid(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USERNAME_OR_PASSWORD_INVALID.String() && e.Code == 500
+}
+
+func ErrorUsernameOrPasswordInvalid(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USERNAME_OR_PASSWORD_INVALID.String(), fmt.Sprintf(format, args...))
+}
