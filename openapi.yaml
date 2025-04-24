@@ -6,7 +6,7 @@ info:
     title: ""
     version: 0.0.1
 paths:
-    /v1/games/create-session:
+    /v1/game/create-session:
         post:
             tags:
                 - Game
@@ -24,7 +24,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/game.service.v1.CreateSessionResponse'
-    /v1/games/list:
+    /v1/game/list:
         post:
             tags:
                 - Game
