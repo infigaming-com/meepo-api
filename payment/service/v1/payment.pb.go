@@ -64,7 +64,7 @@ func (*GetPaymentMethodListRequest) Descriptor() ([]byte, []int) {
 // Details of a single payment method
 type PaymentMethodInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	PaymentMethod string                 `protobuf:"bytes,4,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
@@ -103,11 +103,11 @@ func (*PaymentMethodInfo) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *PaymentMethodInfo) GetId() int64 {
+func (x *PaymentMethodInfo) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 func (x *PaymentMethodInfo) GetCurrency() string {
@@ -1069,7 +1069,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	" payment/service/v1/payment.proto\x12\x12payment.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x1d\n" +
 	"\x1bGetPaymentMethodListRequest\"\xb8\x01\n" +
 	"\x11PaymentMethodInfo\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12%\n" +
 	"\x0epayment_method\x18\x04 \x01(\tR\rpaymentMethod\x126\n" +

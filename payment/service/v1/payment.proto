@@ -16,7 +16,7 @@ message GetPaymentMethodListRequest {
 
 // Details of a single payment method
 message PaymentMethodInfo {
-  int64 id = 1;
+  string id = 1;
   string currency = 2;
   string country = 3;
   string payment_method = 4 [json_name="paymentMethod"];
