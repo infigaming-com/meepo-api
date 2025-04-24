@@ -369,6 +369,8 @@ func (*DeleteOperatorResponse) Descriptor() ([]byte, []int) {
 type ListGamesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Page          int64                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int64                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -410,9 +412,26 @@ func (x *ListGamesRequest) GetOperatorId() int64 {
 	return 0
 }
 
+func (x *ListGamesRequest) GetPage() int64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListGamesRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
 type ListGamesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Games         []*GameInfo            `protobuf:"bytes,1,rep,name=games,proto3" json:"games,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int64                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int64                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -454,12 +473,66 @@ func (x *ListGamesResponse) GetGames() []*GameInfo {
 	return nil
 }
 
+func (x *ListGamesResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *ListGamesResponse) GetPage() int64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListGamesResponse) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
 type GameInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	GameId        string                 `protobuf:"bytes,1,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	GameName      string                 `protobuf:"bytes,2,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Enabled          bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Name             string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	ProviderId       string                 `protobuf:"bytes,4,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	Category         string                 `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
+	Languages        []string               `protobuf:"bytes,6,rep,name=languages,proto3" json:"languages,omitempty"`
+	Currencies       []string               `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Theme            string                 `protobuf:"bytes,8,opt,name=theme,proto3" json:"theme,omitempty"`
+	FeeGroup         string                 `protobuf:"bytes,9,opt,name=fee_group,json=feeGroup,proto3" json:"fee_group,omitempty"`
+	Customised       bool                   `protobuf:"varint,10,opt,name=customised,proto3" json:"customised,omitempty"`
+	Devices          []string               `protobuf:"bytes,11,rep,name=devices,proto3" json:"devices,omitempty"`
+	Licenses         []string               `protobuf:"bytes,12,rep,name=licenses,proto3" json:"licenses,omitempty"`
+	HasJackpot       bool                   `protobuf:"varint,13,opt,name=has_jackpot,json=hasJackpot,proto3" json:"has_jackpot,omitempty"`
+	JackpotType      string                 `protobuf:"bytes,14,opt,name=jackpot_type,json=jackpotType,proto3" json:"jackpot_type,omitempty"`
+	ForbidBonusPlay  bool                   `protobuf:"varint,15,opt,name=forbid_bonus_play,json=forbidBonusPlay,proto3" json:"forbid_bonus_play,omitempty"`
+	HasFreespins     bool                   `protobuf:"varint,16,opt,name=has_freespins,json=hasFreespins,proto3" json:"has_freespins,omitempty"`
+	Payout           float64                `protobuf:"fixed64,17,opt,name=payout,proto3" json:"payout,omitempty"`
+	HitRate          float64                `protobuf:"fixed64,18,opt,name=hit_rate,json=hitRate,proto3" json:"hit_rate,omitempty"`
+	VolatilityRating string                 `protobuf:"bytes,19,opt,name=volatility_rating,json=volatilityRating,proto3" json:"volatility_rating,omitempty"`
+	Lines            int32                  `protobuf:"varint,20,opt,name=lines,proto3" json:"lines,omitempty"`
+	Ways             int32                  `protobuf:"varint,21,opt,name=ways,proto3" json:"ways,omitempty"`
+	Description      string                 `protobuf:"bytes,22,opt,name=description,proto3" json:"description,omitempty"`
+	HasLive          bool                   `protobuf:"varint,23,opt,name=has_live,json=hasLive,proto3" json:"has_live,omitempty"`
+	Hd               bool                   `protobuf:"varint,24,opt,name=hd,proto3" json:"hd,omitempty"`
+	Accumulating     bool                   `protobuf:"varint,25,opt,name=accumulating,proto3" json:"accumulating,omitempty"`
+	Multiplier       float64                `protobuf:"fixed64,26,opt,name=multiplier,proto3" json:"multiplier,omitempty"`
+	ReleasedAt       int64                  `protobuf:"varint,27,opt,name=released_at,json=releasedAt,proto3" json:"released_at,omitempty"`
+	RecalledAt       int64                  `protobuf:"varint,28,opt,name=recalled_at,json=recalledAt,proto3" json:"recalled_at,omitempty"`
+	BonusBuy         bool                   `protobuf:"varint,29,opt,name=bonus_buy,json=bonusBuy,proto3" json:"bonus_buy,omitempty"`
+	Restrictions     string                 `protobuf:"bytes,30,opt,name=restrictions,proto3" json:"restrictions,omitempty"`
+	CreatedAt        int64                  `protobuf:"varint,31,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt        int64                  `protobuf:"varint,32,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Resources        string                 `protobuf:"bytes,33,opt,name=resources,proto3" json:"resources,omitempty"`
+	ProviderGameId   string                 `protobuf:"bytes,34,opt,name=provider_game_id,json=providerGameId,proto3" json:"provider_game_id,omitempty"`
+	Assets           string                 `protobuf:"bytes,35,opt,name=assets,proto3" json:"assets,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *GameInfo) Reset() {
@@ -492,16 +565,599 @@ func (*GameInfo) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GameInfo) GetGameId() string {
+func (x *GameInfo) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *GameInfo) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *GameInfo) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *GameInfo) GetProviderId() string {
+	if x != nil {
+		return x.ProviderId
+	}
+	return ""
+}
+
+func (x *GameInfo) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+func (x *GameInfo) GetLanguages() []string {
+	if x != nil {
+		return x.Languages
+	}
+	return nil
+}
+
+func (x *GameInfo) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
+func (x *GameInfo) GetTheme() string {
+	if x != nil {
+		return x.Theme
+	}
+	return ""
+}
+
+func (x *GameInfo) GetFeeGroup() string {
+	if x != nil {
+		return x.FeeGroup
+	}
+	return ""
+}
+
+func (x *GameInfo) GetCustomised() bool {
+	if x != nil {
+		return x.Customised
+	}
+	return false
+}
+
+func (x *GameInfo) GetDevices() []string {
+	if x != nil {
+		return x.Devices
+	}
+	return nil
+}
+
+func (x *GameInfo) GetLicenses() []string {
+	if x != nil {
+		return x.Licenses
+	}
+	return nil
+}
+
+func (x *GameInfo) GetHasJackpot() bool {
+	if x != nil {
+		return x.HasJackpot
+	}
+	return false
+}
+
+func (x *GameInfo) GetJackpotType() string {
+	if x != nil {
+		return x.JackpotType
+	}
+	return ""
+}
+
+func (x *GameInfo) GetForbidBonusPlay() bool {
+	if x != nil {
+		return x.ForbidBonusPlay
+	}
+	return false
+}
+
+func (x *GameInfo) GetHasFreespins() bool {
+	if x != nil {
+		return x.HasFreespins
+	}
+	return false
+}
+
+func (x *GameInfo) GetPayout() float64 {
+	if x != nil {
+		return x.Payout
+	}
+	return 0
+}
+
+func (x *GameInfo) GetHitRate() float64 {
+	if x != nil {
+		return x.HitRate
+	}
+	return 0
+}
+
+func (x *GameInfo) GetVolatilityRating() string {
+	if x != nil {
+		return x.VolatilityRating
+	}
+	return ""
+}
+
+func (x *GameInfo) GetLines() int32 {
+	if x != nil {
+		return x.Lines
+	}
+	return 0
+}
+
+func (x *GameInfo) GetWays() int32 {
+	if x != nil {
+		return x.Ways
+	}
+	return 0
+}
+
+func (x *GameInfo) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *GameInfo) GetHasLive() bool {
+	if x != nil {
+		return x.HasLive
+	}
+	return false
+}
+
+func (x *GameInfo) GetHd() bool {
+	if x != nil {
+		return x.Hd
+	}
+	return false
+}
+
+func (x *GameInfo) GetAccumulating() bool {
+	if x != nil {
+		return x.Accumulating
+	}
+	return false
+}
+
+func (x *GameInfo) GetMultiplier() float64 {
+	if x != nil {
+		return x.Multiplier
+	}
+	return 0
+}
+
+func (x *GameInfo) GetReleasedAt() int64 {
+	if x != nil {
+		return x.ReleasedAt
+	}
+	return 0
+}
+
+func (x *GameInfo) GetRecalledAt() int64 {
+	if x != nil {
+		return x.RecalledAt
+	}
+	return 0
+}
+
+func (x *GameInfo) GetBonusBuy() bool {
+	if x != nil {
+		return x.BonusBuy
+	}
+	return false
+}
+
+func (x *GameInfo) GetRestrictions() string {
+	if x != nil {
+		return x.Restrictions
+	}
+	return ""
+}
+
+func (x *GameInfo) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *GameInfo) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
+func (x *GameInfo) GetResources() string {
+	if x != nil {
+		return x.Resources
+	}
+	return ""
+}
+
+func (x *GameInfo) GetProviderGameId() string {
+	if x != nil {
+		return x.ProviderGameId
+	}
+	return ""
+}
+
+func (x *GameInfo) GetAssets() string {
+	if x != nil {
+		return x.Assets
+	}
+	return ""
+}
+
+type CreateSessionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	GameId        string                 `protobuf:"bytes,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	Currency      string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	Locale        string                 `protobuf:"bytes,4,opt,name=locale,proto3" json:"locale,omitempty"`
+	Ip            string                 `protobuf:"bytes,5,opt,name=ip,proto3" json:"ip,omitempty"`
+	ClientType    string                 `protobuf:"bytes,6,opt,name=client_type,json=clientType,proto3" json:"client_type,omitempty"`
+	Balance       float64                `protobuf:"fixed64,7,opt,name=balance,proto3" json:"balance,omitempty"`
+	Urls          *UrlInfo               `protobuf:"bytes,8,opt,name=urls,proto3" json:"urls,omitempty"`
+	User          *UserInfo              `protobuf:"bytes,9,opt,name=user,proto3" json:"user,omitempty"`
+	Jurisdiction  string                 `protobuf:"bytes,10,opt,name=jurisdiction,proto3" json:"jurisdiction,omitempty"`
+	Payload       string                 `protobuf:"bytes,11,opt,name=payload,proto3" json:"payload,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSessionRequest) Reset() {
+	*x = CreateSessionRequest{}
+	mi := &file_game_service_v1_game_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSessionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSessionRequest) ProtoMessage() {}
+
+func (x *CreateSessionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSessionRequest.ProtoReflect.Descriptor instead.
+func (*CreateSessionRequest) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *CreateSessionRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *CreateSessionRequest) GetGameId() string {
 	if x != nil {
 		return x.GameId
 	}
 	return ""
 }
 
-func (x *GameInfo) GetGameName() string {
+func (x *CreateSessionRequest) GetCurrency() string {
 	if x != nil {
-		return x.GameName
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *CreateSessionRequest) GetLocale() string {
+	if x != nil {
+		return x.Locale
+	}
+	return ""
+}
+
+func (x *CreateSessionRequest) GetIp() string {
+	if x != nil {
+		return x.Ip
+	}
+	return ""
+}
+
+func (x *CreateSessionRequest) GetClientType() string {
+	if x != nil {
+		return x.ClientType
+	}
+	return ""
+}
+
+func (x *CreateSessionRequest) GetBalance() float64 {
+	if x != nil {
+		return x.Balance
+	}
+	return 0
+}
+
+func (x *CreateSessionRequest) GetUrls() *UrlInfo {
+	if x != nil {
+		return x.Urls
+	}
+	return nil
+}
+
+func (x *CreateSessionRequest) GetUser() *UserInfo {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+func (x *CreateSessionRequest) GetJurisdiction() string {
+	if x != nil {
+		return x.Jurisdiction
+	}
+	return ""
+}
+
+func (x *CreateSessionRequest) GetPayload() string {
+	if x != nil {
+		return x.Payload
+	}
+	return ""
+}
+
+type CreateSessionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	GameUrl       string                 `protobuf:"bytes,1,opt,name=game_url,json=gameUrl,proto3" json:"game_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSessionResponse) Reset() {
+	*x = CreateSessionResponse{}
+	mi := &file_game_service_v1_game_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSessionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSessionResponse) ProtoMessage() {}
+
+func (x *CreateSessionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSessionResponse.ProtoReflect.Descriptor instead.
+func (*CreateSessionResponse) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CreateSessionResponse) GetGameUrl() string {
+	if x != nil {
+		return x.GameUrl
+	}
+	return ""
+}
+
+type UrlInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ReturnUrl     string                 `protobuf:"bytes,1,opt,name=return_url,json=returnUrl,proto3" json:"return_url,omitempty"`
+	DepositUrl    string                 `protobuf:"bytes,2,opt,name=deposit_url,json=depositUrl,proto3" json:"deposit_url,omitempty"`
+	LobbyUrl      string                 `protobuf:"bytes,3,opt,name=lobby_url,json=lobbyUrl,proto3" json:"lobby_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UrlInfo) Reset() {
+	*x = UrlInfo{}
+	mi := &file_game_service_v1_game_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UrlInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UrlInfo) ProtoMessage() {}
+
+func (x *UrlInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UrlInfo.ProtoReflect.Descriptor instead.
+func (*UrlInfo) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *UrlInfo) GetReturnUrl() string {
+	if x != nil {
+		return x.ReturnUrl
+	}
+	return ""
+}
+
+func (x *UrlInfo) GetDepositUrl() string {
+	if x != nil {
+		return x.DepositUrl
+	}
+	return ""
+}
+
+func (x *UrlInfo) GetLobbyUrl() string {
+	if x != nil {
+		return x.LobbyUrl
+	}
+	return ""
+}
+
+type UserInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	WalletUserId  string                 `protobuf:"bytes,1,opt,name=wallet_user_id,json=walletUserId,proto3" json:"wallet_user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Firstname     string                 `protobuf:"bytes,4,opt,name=firstname,proto3" json:"firstname,omitempty"`
+	Lastname      string                 `protobuf:"bytes,5,opt,name=lastname,proto3" json:"lastname,omitempty"`
+	Nickname      string                 `protobuf:"bytes,6,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	City          string                 `protobuf:"bytes,7,opt,name=city,proto3" json:"city,omitempty"`
+	DateOfBirth   string                 `protobuf:"bytes,8,opt,name=date_of_birth,json=dateOfBirth,proto3" json:"date_of_birth,omitempty"`
+	RegisteredAt  string                 `protobuf:"bytes,9,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	Gender        string                 `protobuf:"bytes,10,opt,name=gender,proto3" json:"gender,omitempty"`
+	Country       string                 `protobuf:"bytes,11,opt,name=country,proto3" json:"country,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserInfo) Reset() {
+	*x = UserInfo{}
+	mi := &file_game_service_v1_game_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserInfo) ProtoMessage() {}
+
+func (x *UserInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserInfo.ProtoReflect.Descriptor instead.
+func (*UserInfo) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *UserInfo) GetWalletUserId() string {
+	if x != nil {
+		return x.WalletUserId
+	}
+	return ""
+}
+
+func (x *UserInfo) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *UserInfo) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *UserInfo) GetFirstname() string {
+	if x != nil {
+		return x.Firstname
+	}
+	return ""
+}
+
+func (x *UserInfo) GetLastname() string {
+	if x != nil {
+		return x.Lastname
+	}
+	return ""
+}
+
+func (x *UserInfo) GetNickname() string {
+	if x != nil {
+		return x.Nickname
+	}
+	return ""
+}
+
+func (x *UserInfo) GetCity() string {
+	if x != nil {
+		return x.City
+	}
+	return ""
+}
+
+func (x *UserInfo) GetDateOfBirth() string {
+	if x != nil {
+		return x.DateOfBirth
+	}
+	return ""
+}
+
+func (x *UserInfo) GetRegisteredAt() string {
+	if x != nil {
+		return x.RegisteredAt
+	}
+	return ""
+}
+
+func (x *UserInfo) GetGender() string {
+	if x != nil {
+		return x.Gender
+	}
+	return ""
+}
+
+func (x *UserInfo) GetCountry() string {
+	if x != nil {
+		return x.Country
 	}
 	return ""
 }
@@ -539,20 +1195,108 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x15DeleteOperatorRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"\x18\n" +
-	"\x16DeleteOperatorResponse\"3\n" +
+	"\x16DeleteOperatorResponse\"d\n" +
 	"\x10ListGamesRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
-	"operatorId\"D\n" +
+	"operatorId\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x03R\bpageSize\"\x8b\x01\n" +
 	"\x11ListGamesResponse\x12/\n" +
-	"\x05games\x18\x01 \x03(\v2\x19.game.service.v1.GameInfoR\x05games\"@\n" +
-	"\bGameInfo\x12\x17\n" +
-	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x1b\n" +
-	"\tgame_name\x18\x02 \x01(\tR\bgameName2\xa4\x03\n" +
+	"\x05games\x18\x01 \x03(\v2\x19.game.service.v1.GameInfoR\x05games\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x03R\bpageSize\"\xa5\b\n" +
+	"\bGameInfo\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x18\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x1f\n" +
+	"\vprovider_id\x18\x04 \x01(\tR\n" +
+	"providerId\x12\x1a\n" +
+	"\bcategory\x18\x05 \x01(\tR\bcategory\x12\x1c\n" +
+	"\tlanguages\x18\x06 \x03(\tR\tlanguages\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\a \x03(\tR\n" +
+	"currencies\x12\x14\n" +
+	"\x05theme\x18\b \x01(\tR\x05theme\x12\x1b\n" +
+	"\tfee_group\x18\t \x01(\tR\bfeeGroup\x12\x1e\n" +
+	"\n" +
+	"customised\x18\n" +
+	" \x01(\bR\n" +
+	"customised\x12\x18\n" +
+	"\adevices\x18\v \x03(\tR\adevices\x12\x1a\n" +
+	"\blicenses\x18\f \x03(\tR\blicenses\x12\x1f\n" +
+	"\vhas_jackpot\x18\r \x01(\bR\n" +
+	"hasJackpot\x12!\n" +
+	"\fjackpot_type\x18\x0e \x01(\tR\vjackpotType\x12*\n" +
+	"\x11forbid_bonus_play\x18\x0f \x01(\bR\x0fforbidBonusPlay\x12#\n" +
+	"\rhas_freespins\x18\x10 \x01(\bR\fhasFreespins\x12\x16\n" +
+	"\x06payout\x18\x11 \x01(\x01R\x06payout\x12\x19\n" +
+	"\bhit_rate\x18\x12 \x01(\x01R\ahitRate\x12+\n" +
+	"\x11volatility_rating\x18\x13 \x01(\tR\x10volatilityRating\x12\x14\n" +
+	"\x05lines\x18\x14 \x01(\x05R\x05lines\x12\x12\n" +
+	"\x04ways\x18\x15 \x01(\x05R\x04ways\x12 \n" +
+	"\vdescription\x18\x16 \x01(\tR\vdescription\x12\x19\n" +
+	"\bhas_live\x18\x17 \x01(\bR\ahasLive\x12\x0e\n" +
+	"\x02hd\x18\x18 \x01(\bR\x02hd\x12\"\n" +
+	"\faccumulating\x18\x19 \x01(\bR\faccumulating\x12\x1e\n" +
+	"\n" +
+	"multiplier\x18\x1a \x01(\x01R\n" +
+	"multiplier\x12\x1f\n" +
+	"\vreleased_at\x18\x1b \x01(\x03R\n" +
+	"releasedAt\x12\x1f\n" +
+	"\vrecalled_at\x18\x1c \x01(\x03R\n" +
+	"recalledAt\x12\x1b\n" +
+	"\tbonus_buy\x18\x1d \x01(\bR\bbonusBuy\x12\"\n" +
+	"\frestrictions\x18\x1e \x01(\tR\frestrictions\x12!\n" +
+	"\n" +
+	"created_at\x18\x1f \x01(\x03B\x020\x02R\tcreatedAt\x12!\n" +
+	"\n" +
+	"updated_at\x18  \x01(\x03B\x020\x02R\tupdatedAt\x12\x1c\n" +
+	"\tresources\x18! \x01(\tR\tresources\x12(\n" +
+	"\x10provider_game_id\x18\" \x01(\tR\x0eproviderGameId\x12\x16\n" +
+	"\x06assets\x18# \x01(\tR\x06assets\"\xea\x02\n" +
+	"\x14CreateSessionRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12\x17\n" +
+	"\agame_id\x18\x02 \x01(\tR\x06gameId\x12\x1a\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x16\n" +
+	"\x06locale\x18\x04 \x01(\tR\x06locale\x12\x0e\n" +
+	"\x02ip\x18\x05 \x01(\tR\x02ip\x12\x1f\n" +
+	"\vclient_type\x18\x06 \x01(\tR\n" +
+	"clientType\x12\x18\n" +
+	"\abalance\x18\a \x01(\x01R\abalance\x12,\n" +
+	"\x04urls\x18\b \x01(\v2\x18.game.service.v1.UrlInfoR\x04urls\x12-\n" +
+	"\x04user\x18\t \x01(\v2\x19.game.service.v1.UserInfoR\x04user\x12\"\n" +
+	"\fjurisdiction\x18\n" +
+	" \x01(\tR\fjurisdiction\x12\x18\n" +
+	"\apayload\x18\v \x01(\tR\apayload\"2\n" +
+	"\x15CreateSessionResponse\x12\x19\n" +
+	"\bgame_url\x18\x01 \x01(\tR\agameUrl\"f\n" +
+	"\aUrlInfo\x12\x1d\n" +
+	"\n" +
+	"return_url\x18\x01 \x01(\tR\treturnUrl\x12\x1f\n" +
+	"\vdeposit_url\x18\x02 \x01(\tR\n" +
+	"depositUrl\x12\x1b\n" +
+	"\tlobby_url\x18\x03 \x01(\tR\blobbyUrl\"\xc4\x02\n" +
+	"\bUserInfo\x12$\n" +
+	"\x0ewallet_user_id\x18\x01 \x01(\tR\fwalletUserId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x14\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email\x12\x1c\n" +
+	"\tfirstname\x18\x04 \x01(\tR\tfirstname\x12\x1a\n" +
+	"\blastname\x18\x05 \x01(\tR\blastname\x12\x1a\n" +
+	"\bnickname\x18\x06 \x01(\tR\bnickname\x12\x12\n" +
+	"\x04city\x18\a \x01(\tR\x04city\x12\"\n" +
+	"\rdate_of_birth\x18\b \x01(\tR\vdateOfBirth\x12#\n" +
+	"\rregistered_at\x18\t \x01(\tR\fregisteredAt\x12\x16\n" +
+	"\x06gender\x18\n" +
+	" \x01(\tR\x06gender\x12\x18\n" +
+	"\acountry\x18\v \x01(\tR\acountry2\xaa\x04\n" +
 	"\x04Game\x12c\n" +
 	"\x0eCreateOperator\x12&.game.service.v1.CreateOperatorRequest\x1a'.game.service.v1.CreateOperatorResponse\"\x00\x12c\n" +
 	"\x0eUpdateOperator\x12&.game.service.v1.UpdateOperatorRequest\x1a'.game.service.v1.UpdateOperatorResponse\"\x00\x12c\n" +
 	"\x0eDeleteOperator\x12&.game.service.v1.DeleteOperatorRequest\x1a'.game.service.v1.DeleteOperatorResponse\"\x00\x12m\n" +
-	"\tListGames\x12!.game.service.v1.ListGamesRequest\x1a\".game.service.v1.ListGamesResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v1/games/listBK\n" +
+	"\tListGames\x12!.game.service.v1.ListGamesRequest\x1a\".game.service.v1.ListGamesResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v1/games/list\x12\x83\x01\n" +
+	"\rCreateSession\x12%.game.service.v1.CreateSessionRequest\x1a&.game.service.v1.CreateSessionResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/games/create-sessionBK\n" +
 	"\x0fgame.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (
@@ -567,7 +1311,7 @@ func file_game_service_v1_game_proto_rawDescGZIP() []byte {
 	return file_game_service_v1_game_proto_rawDescData
 }
 
-var file_game_service_v1_game_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_game_service_v1_game_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_game_service_v1_game_proto_goTypes = []any{
 	(*CreateOperatorRequest)(nil),  // 0: game.service.v1.CreateOperatorRequest
 	(*CreateOperatorResponse)(nil), // 1: game.service.v1.CreateOperatorResponse
@@ -578,22 +1322,30 @@ var file_game_service_v1_game_proto_goTypes = []any{
 	(*ListGamesRequest)(nil),       // 6: game.service.v1.ListGamesRequest
 	(*ListGamesResponse)(nil),      // 7: game.service.v1.ListGamesResponse
 	(*GameInfo)(nil),               // 8: game.service.v1.GameInfo
+	(*CreateSessionRequest)(nil),   // 9: game.service.v1.CreateSessionRequest
+	(*CreateSessionResponse)(nil),  // 10: game.service.v1.CreateSessionResponse
+	(*UrlInfo)(nil),                // 11: game.service.v1.UrlInfo
+	(*UserInfo)(nil),               // 12: game.service.v1.UserInfo
 }
 var file_game_service_v1_game_proto_depIdxs = []int32{
-	8, // 0: game.service.v1.ListGamesResponse.games:type_name -> game.service.v1.GameInfo
-	0, // 1: game.service.v1.Game.CreateOperator:input_type -> game.service.v1.CreateOperatorRequest
-	2, // 2: game.service.v1.Game.UpdateOperator:input_type -> game.service.v1.UpdateOperatorRequest
-	4, // 3: game.service.v1.Game.DeleteOperator:input_type -> game.service.v1.DeleteOperatorRequest
-	6, // 4: game.service.v1.Game.ListGames:input_type -> game.service.v1.ListGamesRequest
-	1, // 5: game.service.v1.Game.CreateOperator:output_type -> game.service.v1.CreateOperatorResponse
-	3, // 6: game.service.v1.Game.UpdateOperator:output_type -> game.service.v1.UpdateOperatorResponse
-	5, // 7: game.service.v1.Game.DeleteOperator:output_type -> game.service.v1.DeleteOperatorResponse
-	7, // 8: game.service.v1.Game.ListGames:output_type -> game.service.v1.ListGamesResponse
-	5, // [5:9] is the sub-list for method output_type
-	1, // [1:5] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	8,  // 0: game.service.v1.ListGamesResponse.games:type_name -> game.service.v1.GameInfo
+	11, // 1: game.service.v1.CreateSessionRequest.urls:type_name -> game.service.v1.UrlInfo
+	12, // 2: game.service.v1.CreateSessionRequest.user:type_name -> game.service.v1.UserInfo
+	0,  // 3: game.service.v1.Game.CreateOperator:input_type -> game.service.v1.CreateOperatorRequest
+	2,  // 4: game.service.v1.Game.UpdateOperator:input_type -> game.service.v1.UpdateOperatorRequest
+	4,  // 5: game.service.v1.Game.DeleteOperator:input_type -> game.service.v1.DeleteOperatorRequest
+	6,  // 6: game.service.v1.Game.ListGames:input_type -> game.service.v1.ListGamesRequest
+	9,  // 7: game.service.v1.Game.CreateSession:input_type -> game.service.v1.CreateSessionRequest
+	1,  // 8: game.service.v1.Game.CreateOperator:output_type -> game.service.v1.CreateOperatorResponse
+	3,  // 9: game.service.v1.Game.UpdateOperator:output_type -> game.service.v1.UpdateOperatorResponse
+	5,  // 10: game.service.v1.Game.DeleteOperator:output_type -> game.service.v1.DeleteOperatorResponse
+	7,  // 11: game.service.v1.Game.ListGames:output_type -> game.service.v1.ListGamesResponse
+	10, // 12: game.service.v1.Game.CreateSession:output_type -> game.service.v1.CreateSessionResponse
+	8,  // [8:13] is the sub-list for method output_type
+	3,  // [3:8] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_game_service_v1_game_proto_init() }
@@ -607,7 +1359,7 @@ func file_game_service_v1_game_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_game_service_v1_game_proto_rawDesc), len(file_game_service_v1_game_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

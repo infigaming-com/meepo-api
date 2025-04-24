@@ -19,15 +19,18 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationGameCreateSession = "/game.service.v1.Game/CreateSession"
 const OperationGameListGames = "/game.service.v1.Game/ListGames"
 
 type GameHTTPServer interface {
+	CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
 }
 
 func RegisterGameHTTPServer(s *http.Server, srv GameHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/games/list", _Game_ListGames0_HTTP_Handler(srv))
+	r.POST("/v1/games/create-session", _Game_CreateSession0_HTTP_Handler(srv))
 }
 
 func _Game_ListGames0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
@@ -52,7 +55,30 @@ func _Game_ListGames0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) er
 	}
 }
 
+func _Game_CreateSession0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateSessionRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationGameCreateSession)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateSession(ctx, req.(*CreateSessionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateSessionResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type GameHTTPClient interface {
+	CreateSession(ctx context.Context, req *CreateSessionRequest, opts ...http.CallOption) (rsp *CreateSessionResponse, err error)
 	ListGames(ctx context.Context, req *ListGamesRequest, opts ...http.CallOption) (rsp *ListGamesResponse, err error)
 }
 
@@ -62,6 +88,19 @@ type GameHTTPClientImpl struct {
 
 func NewGameHTTPClient(client *http.Client) GameHTTPClient {
 	return &GameHTTPClientImpl{client}
+}
+
+func (c *GameHTTPClientImpl) CreateSession(ctx context.Context, in *CreateSessionRequest, opts ...http.CallOption) (*CreateSessionResponse, error) {
+	var out CreateSessionResponse
+	pattern := "/v1/games/create-session"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationGameCreateSession))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *GameHTTPClientImpl) ListGames(ctx context.Context, in *ListGamesRequest, opts ...http.CallOption) (*ListGamesResponse, error) {

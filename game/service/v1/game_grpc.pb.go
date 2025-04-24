@@ -23,6 +23,7 @@ const (
 	Game_UpdateOperator_FullMethodName = "/game.service.v1.Game/UpdateOperator"
 	Game_DeleteOperator_FullMethodName = "/game.service.v1.Game/DeleteOperator"
 	Game_ListGames_FullMethodName      = "/game.service.v1.Game/ListGames"
+	Game_CreateSession_FullMethodName  = "/game.service.v1.Game/CreateSession"
 )
 
 // GameClient is the client API for Game service.
@@ -33,6 +34,7 @@ type GameClient interface {
 	UpdateOperator(ctx context.Context, in *UpdateOperatorRequest, opts ...grpc.CallOption) (*UpdateOperatorResponse, error)
 	DeleteOperator(ctx context.Context, in *DeleteOperatorRequest, opts ...grpc.CallOption) (*DeleteOperatorResponse, error)
 	ListGames(ctx context.Context, in *ListGamesRequest, opts ...grpc.CallOption) (*ListGamesResponse, error)
+	CreateSession(ctx context.Context, in *CreateSessionRequest, opts ...grpc.CallOption) (*CreateSessionResponse, error)
 }
 
 type gameClient struct {
@@ -83,6 +85,16 @@ func (c *gameClient) ListGames(ctx context.Context, in *ListGamesRequest, opts .
 	return out, nil
 }
 
+func (c *gameClient) CreateSession(ctx context.Context, in *CreateSessionRequest, opts ...grpc.CallOption) (*CreateSessionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateSessionResponse)
+	err := c.cc.Invoke(ctx, Game_CreateSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -91,6 +103,7 @@ type GameServer interface {
 	UpdateOperator(context.Context, *UpdateOperatorRequest) (*UpdateOperatorResponse, error)
 	DeleteOperator(context.Context, *DeleteOperatorRequest) (*DeleteOperatorResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
+	CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -112,6 +125,9 @@ func (UnimplementedGameServer) DeleteOperator(context.Context, *DeleteOperatorRe
 }
 func (UnimplementedGameServer) ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGames not implemented")
+}
+func (UnimplementedGameServer) CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSession not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -206,6 +222,24 @@ func _Game_ListGames_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_CreateSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).CreateSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_CreateSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).CreateSession(ctx, req.(*CreateSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +262,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListGames",
 			Handler:    _Game_ListGames_Handler,
+		},
+		{
+			MethodName: "CreateSession",
+			Handler:    _Game_CreateSession_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

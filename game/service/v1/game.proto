@@ -24,6 +24,13 @@ service Game {
 			body: "*"
 		};
 	};
+
+	rpc CreateSession(CreateSessionRequest) returns (CreateSessionResponse) {
+		option (google.api.http) = {
+			post: "/v1/games/create-session"
+			body: "*"
+		};
+	};
 }
 
 message CreateOperatorRequest {
@@ -62,13 +69,89 @@ message DeleteOperatorResponse {
 
 message ListGamesRequest {
 	int64 operator_id = 1;
+	int64 page = 2;
+	int64 page_size = 3;
 }
 
 message ListGamesResponse {
 	repeated GameInfo games = 1;
+	int64 total = 2;
+	int64 page = 3;
+	int64 page_size = 4;
 }
 
 message GameInfo {
-	string game_id = 1;
-	string game_name = 2;
+	string id = 1;
+	bool enabled = 2;
+	string name = 3;
+	string provider_id = 4;
+	string category = 5;
+	repeated string languages = 6;
+	repeated string currencies = 7;
+	string theme = 8;
+	string fee_group = 9;
+	bool customised = 10;
+	repeated string devices = 11;
+	repeated string licenses = 12;
+	bool has_jackpot = 13;
+	string jackpot_type = 14;
+	bool forbid_bonus_play = 15;
+	bool has_freespins = 16;
+	double payout = 17;
+	double hit_rate = 18;
+	string volatility_rating = 19;
+	int32 lines = 20;
+	int32 ways = 21;
+	string description = 22;
+	bool has_live = 23;
+	bool hd = 24;
+	bool accumulating = 25;
+	double multiplier = 26;
+	int64 released_at = 27;
+	int64 recalled_at = 28;
+	bool bonus_buy = 29;
+	string restrictions = 30;
+	int64 created_at = 31;
+	int64 updated_at = 32;
+	string resources = 33;
+	string provider_game_id = 34;
+	string assets = 35;
+}
+
+message CreateSessionRequest {
+	int64 operator_id = 1;
+	string game_id = 2;
+	string currency = 3;
+	string locale = 4;
+	string ip = 5;
+	string client_type = 6;
+	double balance = 7;
+	UrlInfo urls = 8;
+	UserInfo user = 9;
+	string jurisdiction = 10;
+	string payload = 11;
+}
+
+message CreateSessionResponse {
+	string game_url = 1;
+}
+
+message UrlInfo {
+	string return_url = 1;
+	string deposit_url = 2;
+	string lobby_url = 3;
+}
+
+message UserInfo {
+	string wallet_user_id = 1;
+	string user_id = 2;
+	string email = 3;
+	string firstname = 4;
+	string lastname = 5;
+	string nickname = 6;
+	string city = 7;
+	string date_of_birth = 8;
+	string registered_at = 9;
+	string gender = 10;
+	string country = 11;
 }
