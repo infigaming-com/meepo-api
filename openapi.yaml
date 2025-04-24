@@ -6,6 +6,42 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /v1/games/create-session:
+        post:
+            tags:
+                - Game
+            operationId: Game_CreateSession
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/game.service.v1.CreateSessionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/game.service.v1.CreateSessionResponse'
+    /v1/games/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_ListGames
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/game.service.v1.ListGamesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/game.service.v1.ListGamesResponse'
     /v1/operator/add:
         post:
             tags:
@@ -674,6 +710,179 @@ components:
             properties:
                 userId:
                     type: string
+        game.service.v1.CreateSessionRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                gameId:
+                    type: string
+                currency:
+                    type: string
+                locale:
+                    type: string
+                ip:
+                    type: string
+                clientType:
+                    type: string
+                balance:
+                    type: number
+                    format: double
+                urls:
+                    $ref: '#/components/schemas/game.service.v1.UrlInfo'
+                user:
+                    $ref: '#/components/schemas/game.service.v1.UserInfo'
+                jurisdiction:
+                    type: string
+                payload:
+                    type: string
+        game.service.v1.CreateSessionResponse:
+            type: object
+            properties:
+                gameUrl:
+                    type: string
+        game.service.v1.GameInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                enabled:
+                    type: boolean
+                name:
+                    type: string
+                providerId:
+                    type: string
+                category:
+                    type: string
+                languages:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                theme:
+                    type: string
+                feeGroup:
+                    type: string
+                customised:
+                    type: boolean
+                devices:
+                    type: array
+                    items:
+                        type: string
+                licenses:
+                    type: array
+                    items:
+                        type: string
+                hasJackpot:
+                    type: boolean
+                jackpotType:
+                    type: string
+                forbidBonusPlay:
+                    type: boolean
+                hasFreespins:
+                    type: boolean
+                payout:
+                    type: number
+                    format: double
+                hitRate:
+                    type: number
+                    format: double
+                volatilityRating:
+                    type: string
+                lines:
+                    type: integer
+                    format: int32
+                ways:
+                    type: integer
+                    format: int32
+                description:
+                    type: string
+                hasLive:
+                    type: boolean
+                hd:
+                    type: boolean
+                accumulating:
+                    type: boolean
+                multiplier:
+                    type: number
+                    format: double
+                releasedAt:
+                    type: string
+                recalledAt:
+                    type: string
+                bonusBuy:
+                    type: boolean
+                restrictions:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                resources:
+                    type: string
+                providerGameId:
+                    type: string
+                assets:
+                    type: string
+        game.service.v1.ListGamesRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                page:
+                    type: string
+                pageSize:
+                    type: string
+        game.service.v1.ListGamesResponse:
+            type: object
+            properties:
+                games:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/game.service.v1.GameInfo'
+                total:
+                    type: string
+                page:
+                    type: string
+                pageSize:
+                    type: string
+        game.service.v1.UrlInfo:
+            type: object
+            properties:
+                returnUrl:
+                    type: string
+                depositUrl:
+                    type: string
+                lobbyUrl:
+                    type: string
+        game.service.v1.UserInfo:
+            type: object
+            properties:
+                walletUserId:
+                    type: string
+                userId:
+                    type: string
+                email:
+                    type: string
+                firstname:
+                    type: string
+                lastname:
+                    type: string
+                nickname:
+                    type: string
+                city:
+                    type: string
+                dateOfBirth:
+                    type: string
+                registeredAt:
+                    type: string
+                gender:
+                    type: string
+                country:
+                    type: string
                 currency:
                     type: string
                 enabled:
@@ -960,6 +1169,7 @@ components:
                 currency:
                     $ref: '#/components/schemas/system.service.v1.Currency'
 tags:
+    - name: Game
     - name: Operator
       description: User service provides authentication and user management functionality.
     - name: Payment
