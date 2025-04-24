@@ -64,7 +64,7 @@ func (*GetPaymentMethodListRequest) Descriptor() ([]byte, []int) {
 // Details of a single payment method
 type PaymentMethodInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	PaymentMethod string                 `protobuf:"bytes,4,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
@@ -103,11 +103,11 @@ func (*PaymentMethodInfo) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *PaymentMethodInfo) GetId() string {
+func (x *PaymentMethodInfo) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
 func (x *PaymentMethodInfo) GetCurrency() string {
@@ -492,7 +492,7 @@ func (x *GetPaymentChannelListResponse) GetPaymentChannels() []*PaymentChannelIn
 type InitiateDepositRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Amount        float64                `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount        int64                  `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	Currency      string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	ChannelId     string                 `protobuf:"bytes,4,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	Extra         *structpb.Struct       `protobuf:"bytes,5,opt,name=extra,proto3" json:"extra,omitempty"` // Stores additional information like clientOrderId, productId, etc.
@@ -537,7 +537,7 @@ func (x *InitiateDepositRequest) GetUserId() int64 {
 	return 0
 }
 
-func (x *InitiateDepositRequest) GetAmount() float64 {
+func (x *InitiateDepositRequest) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -569,7 +569,7 @@ func (x *InitiateDepositRequest) GetExtra() *structpb.Struct {
 type InitiateDepositResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Amount        float64                `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount        int64                  `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	Currency      string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	PayUrl        string                 `protobuf:"bytes,5,opt,name=pay_url,json=payUrl,proto3" json:"pay_url,omitempty"`
@@ -617,7 +617,7 @@ func (x *InitiateDepositResponse) GetTransactionId() int64 {
 	return 0
 }
 
-func (x *InitiateDepositResponse) GetAmount() float64 {
+func (x *InitiateDepositResponse) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -669,8 +669,8 @@ func (x *InitiateDepositResponse) GetExtra() *structpb.Struct {
 // Request to initiate a withdrawal
 type InitiateWithdrawRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	UserId            string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Amount            float64                `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	UserId            int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Amount            int64                  `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	OperatorOrderNo   string                 `protobuf:"bytes,3,opt,name=operator_order_no,json=operatorOrderNo,proto3" json:"operator_order_no,omitempty"`
 	BankAccount       string                 `protobuf:"bytes,4,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
 	BankAccountName   string                 `protobuf:"bytes,5,opt,name=bank_account_name,json=bankAccountName,proto3" json:"bank_account_name,omitempty"`
@@ -717,14 +717,14 @@ func (*InitiateWithdrawRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *InitiateWithdrawRequest) GetUserId() string {
+func (x *InitiateWithdrawRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
-func (x *InitiateWithdrawRequest) GetAmount() float64 {
+func (x *InitiateWithdrawRequest) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -820,7 +820,7 @@ type InitiateWithdrawResponse struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId   int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	OperatorOrderNo string                 `protobuf:"bytes,2,opt,name=operator_order_no,json=operatorOrderNo,proto3" json:"operator_order_no,omitempty"`
-	Amount          float64                `protobuf:"fixed64,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount          int64                  `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
 	Status          string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -871,7 +871,7 @@ func (x *InitiateWithdrawResponse) GetOperatorOrderNo() string {
 	return ""
 }
 
-func (x *InitiateWithdrawResponse) GetAmount() float64 {
+func (x *InitiateWithdrawResponse) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -1069,7 +1069,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	" payment/service/v1/payment.proto\x12\x12payment.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x1d\n" +
 	"\x1bGetPaymentMethodListRequest\"\xb8\x01\n" +
 	"\x11PaymentMethodInfo\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12%\n" +
 	"\x0epayment_method\x18\x04 \x01(\tR\rpaymentMethod\x126\n" +
@@ -1106,14 +1106,14 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x10payment_channels\x18\x01 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x0fpaymentChannels\"\xb3\x01\n" +
 	"\x16InitiateDepositRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x16\n" +
-	"\x06amount\x18\x02 \x01(\x01R\x06amount\x12\x1a\n" +
+	"\x06amount\x18\x02 \x01(\x03R\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x04 \x01(\tR\tchannelId\x12-\n" +
 	"\x05extra\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xa8\x02\n" +
 	"\x17InitiateDepositResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x16\n" +
-	"\x06amount\x18\x02 \x01(\x01R\x06amount\x12\x1a\n" +
+	"\x06amount\x18\x02 \x01(\x03R\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x17\n" +
 	"\apay_url\x18\x05 \x01(\tR\x06payUrl\x12\x17\n" +
@@ -1122,8 +1122,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
 	"\x05extra\x18\b \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xf0\x03\n" +
 	"\x17InitiateWithdrawRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x16\n" +
-	"\x06amount\x18\x02 \x01(\x01R\x06amount\x12*\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\x03R\x06amount\x12*\n" +
 	"\x11operator_order_no\x18\x03 \x01(\tR\x0foperatorOrderNo\x12!\n" +
 	"\fbank_account\x18\x04 \x01(\tR\vbankAccount\x12*\n" +
 	"\x11bank_account_name\x18\x05 \x01(\tR\x0fbankAccountName\x12.\n" +
@@ -1142,7 +1142,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x18InitiateWithdrawResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11operator_order_no\x18\x02 \x01(\tR\x0foperatorOrderNo\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\x01R\x06amount\x12\x16\n" +
+	"\x06amount\x18\x03 \x01(\x03R\x06amount\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x129\n" +
 	"\n" +
 	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xe2\x02\n" +

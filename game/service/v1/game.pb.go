@@ -1205,7 +1205,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x05games\x18\x01 \x03(\v2\x19.game.service.v1.GameInfoR\x05games\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x03R\bpageSize\"\xa5\b\n" +
+	"\tpage_size\x18\x04 \x01(\x03R\bpageSize\"\x9d\b\n" +
 	"\bGameInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x12\n" +
@@ -1247,11 +1247,11 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\vrecalled_at\x18\x1c \x01(\x03R\n" +
 	"recalledAt\x12\x1b\n" +
 	"\tbonus_buy\x18\x1d \x01(\bR\bbonusBuy\x12\"\n" +
-	"\frestrictions\x18\x1e \x01(\tR\frestrictions\x12!\n" +
+	"\frestrictions\x18\x1e \x01(\tR\frestrictions\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x1f \x01(\x03B\x020\x02R\tcreatedAt\x12!\n" +
+	"created_at\x18\x1f \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18  \x01(\x03B\x020\x02R\tupdatedAt\x12\x1c\n" +
+	"updated_at\x18  \x01(\x03R\tupdatedAt\x12\x1c\n" +
 	"\tresources\x18! \x01(\tR\tresources\x12(\n" +
 	"\x10provider_game_id\x18\" \x01(\tR\x0eproviderGameId\x12\x16\n" +
 	"\x06assets\x18# \x01(\tR\x06assets\"\xea\x02\n" +

@@ -710,6 +710,13 @@ components:
             properties:
                 userId:
                     type: string
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+        api.wallet.service.v1.UpdateUserCurrencyResponse:
+            type: object
+            properties: {}
         game.service.v1.CreateSessionRequest:
             type: object
             properties:
@@ -883,13 +890,6 @@ components:
                     type: string
                 country:
                     type: string
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-        api.wallet.service.v1.UpdateUserCurrencyResponse:
-            type: object
-            properties: {}
         payment.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
@@ -970,8 +970,7 @@ components:
                 userId:
                     type: string
                 amount:
-                    type: number
-                    format: double
+                    type: string
                 currency:
                     type: string
                 channelId:
@@ -985,8 +984,7 @@ components:
                 transactionId:
                     type: string
                 amount:
-                    type: number
-                    format: double
+                    type: string
                 currency:
                     type: string
                 status:
@@ -1007,8 +1005,7 @@ components:
                 userId:
                     type: string
                 amount:
-                    type: number
-                    format: double
+                    type: string
                 operatorOrderNo:
                     type: string
                 bankAccount:
@@ -1042,8 +1039,7 @@ components:
                 operatorOrderNo:
                     type: string
                 amount:
-                    type: number
-                    format: double
+                    type: string
                 status:
                     type: string
                 createdAt:
