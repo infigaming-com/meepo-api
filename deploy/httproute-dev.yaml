@@ -42,3 +42,12 @@ spec:
     - name: game-svc
       port: 8000
       weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/payment"
+    backendRefs:
+    - name: payment-svc
+      port: 8000
+      weight: 1
+      

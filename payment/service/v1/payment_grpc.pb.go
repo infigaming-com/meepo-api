@@ -19,14 +19,31 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Payment_HealthCheck_FullMethodName = "/payment.service.v1.Payment/HealthCheck"
+	Payment_GetPaymentMethodList_FullMethodName  = "/payment.service.v1.Payment/GetPaymentMethodList"
+	Payment_CreatePaymentChannel_FullMethodName  = "/payment.service.v1.Payment/CreatePaymentChannel"
+	Payment_GetPaymentChannelList_FullMethodName = "/payment.service.v1.Payment/GetPaymentChannelList"
+	Payment_InitiateDeposit_FullMethodName       = "/payment.service.v1.Payment/InitiateDeposit"
+	Payment_InitiateWithdraw_FullMethodName      = "/payment.service.v1.Payment/InitiateWithdraw"
+	Payment_DepositCallback_FullMethodName       = "/payment.service.v1.Payment/DepositCallback"
 )
 
 // PaymentClient is the client API for Payment service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PaymentClient interface {
-	HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error)
+	// Get list of payment methods
+	GetPaymentMethodList(ctx context.Context, in *GetPaymentMethodListRequest, opts ...grpc.CallOption) (*GetPaymentMethodListResponse, error)
+	// Create payment channel
+	CreatePaymentChannel(ctx context.Context, in *CreatePaymentChannelRequest, opts ...grpc.CallOption) (*CreatePaymentChannelResponse, error)
+	// Get list of payment channels
+	GetPaymentChannelList(ctx context.Context, in *GetPaymentChannelListRequest, opts ...grpc.CallOption) (*GetPaymentChannelListResponse, error)
+	// Initiate a deposit transaction
+	InitiateDeposit(ctx context.Context, in *InitiateDepositRequest, opts ...grpc.CallOption) (*InitiateDepositResponse, error)
+	// Initiate a withdrawal transaction
+	InitiateWithdraw(ctx context.Context, in *InitiateWithdrawRequest, opts ...grpc.CallOption) (*InitiateWithdrawResponse, error)
+	// Deposit callback
+	// This endpoint handles callbacks from payment gateways.
+	DepositCallback(ctx context.Context, in *DepositCallbackRequest, opts ...grpc.CallOption) (*DepositCallbackResponse, error)
 }
 
 type paymentClient struct {
@@ -37,10 +54,60 @@ func NewPaymentClient(cc grpc.ClientConnInterface) PaymentClient {
 	return &paymentClient{cc}
 }
 
-func (c *paymentClient) HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error) {
+func (c *paymentClient) GetPaymentMethodList(ctx context.Context, in *GetPaymentMethodListRequest, opts ...grpc.CallOption) (*GetPaymentMethodListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(HealthCheckResponse)
-	err := c.cc.Invoke(ctx, Payment_HealthCheck_FullMethodName, in, out, cOpts...)
+	out := new(GetPaymentMethodListResponse)
+	err := c.cc.Invoke(ctx, Payment_GetPaymentMethodList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) CreatePaymentChannel(ctx context.Context, in *CreatePaymentChannelRequest, opts ...grpc.CallOption) (*CreatePaymentChannelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreatePaymentChannelResponse)
+	err := c.cc.Invoke(ctx, Payment_CreatePaymentChannel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetPaymentChannelList(ctx context.Context, in *GetPaymentChannelListRequest, opts ...grpc.CallOption) (*GetPaymentChannelListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPaymentChannelListResponse)
+	err := c.cc.Invoke(ctx, Payment_GetPaymentChannelList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) InitiateDeposit(ctx context.Context, in *InitiateDepositRequest, opts ...grpc.CallOption) (*InitiateDepositResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InitiateDepositResponse)
+	err := c.cc.Invoke(ctx, Payment_InitiateDeposit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) InitiateWithdraw(ctx context.Context, in *InitiateWithdrawRequest, opts ...grpc.CallOption) (*InitiateWithdrawResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InitiateWithdrawResponse)
+	err := c.cc.Invoke(ctx, Payment_InitiateWithdraw_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) DepositCallback(ctx context.Context, in *DepositCallbackRequest, opts ...grpc.CallOption) (*DepositCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DepositCallbackResponse)
+	err := c.cc.Invoke(ctx, Payment_DepositCallback_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +118,19 @@ func (c *paymentClient) HealthCheck(ctx context.Context, in *HealthCheckRequest,
 // All implementations must embed UnimplementedPaymentServer
 // for forward compatibility.
 type PaymentServer interface {
-	HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error)
+	// Get list of payment methods
+	GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*GetPaymentMethodListResponse, error)
+	// Create payment channel
+	CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error)
+	// Get list of payment channels
+	GetPaymentChannelList(context.Context, *GetPaymentChannelListRequest) (*GetPaymentChannelListResponse, error)
+	// Initiate a deposit transaction
+	InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error)
+	// Initiate a withdrawal transaction
+	InitiateWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error)
+	// Deposit callback
+	// This endpoint handles callbacks from payment gateways.
+	DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -62,8 +141,23 @@ type PaymentServer interface {
 // pointer dereference when methods are called.
 type UnimplementedPaymentServer struct{}
 
-func (UnimplementedPaymentServer) HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method HealthCheck not implemented")
+func (UnimplementedPaymentServer) GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*GetPaymentMethodListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentMethodList not implemented")
+}
+func (UnimplementedPaymentServer) CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentChannel not implemented")
+}
+func (UnimplementedPaymentServer) GetPaymentChannelList(context.Context, *GetPaymentChannelListRequest) (*GetPaymentChannelListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentChannelList not implemented")
+}
+func (UnimplementedPaymentServer) InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InitiateDeposit not implemented")
+}
+func (UnimplementedPaymentServer) InitiateWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InitiateWithdraw not implemented")
+}
+func (UnimplementedPaymentServer) DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DepositCallback not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -86,20 +180,110 @@ func RegisterPaymentServer(s grpc.ServiceRegistrar, srv PaymentServer) {
 	s.RegisterService(&Payment_ServiceDesc, srv)
 }
 
-func _Payment_HealthCheck_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HealthCheckRequest)
+func _Payment_GetPaymentMethodList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPaymentMethodListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServer).HealthCheck(ctx, in)
+		return srv.(PaymentServer).GetPaymentMethodList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Payment_HealthCheck_FullMethodName,
+		FullMethod: Payment_GetPaymentMethodList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServer).HealthCheck(ctx, req.(*HealthCheckRequest))
+		return srv.(PaymentServer).GetPaymentMethodList(ctx, req.(*GetPaymentMethodListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_CreatePaymentChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePaymentChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).CreatePaymentChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_CreatePaymentChannel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).CreatePaymentChannel(ctx, req.(*CreatePaymentChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetPaymentChannelList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPaymentChannelListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetPaymentChannelList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetPaymentChannelList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetPaymentChannelList(ctx, req.(*GetPaymentChannelListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_InitiateDeposit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitiateDepositRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).InitiateDeposit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_InitiateDeposit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).InitiateDeposit(ctx, req.(*InitiateDepositRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_InitiateWithdraw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitiateWithdrawRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).InitiateWithdraw(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_InitiateWithdraw_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).InitiateWithdraw(ctx, req.(*InitiateWithdrawRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_DepositCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DepositCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).DepositCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_DepositCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).DepositCallback(ctx, req.(*DepositCallbackRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -112,8 +296,28 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PaymentServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "HealthCheck",
-			Handler:    _Payment_HealthCheck_Handler,
+			MethodName: "GetPaymentMethodList",
+			Handler:    _Payment_GetPaymentMethodList_Handler,
+		},
+		{
+			MethodName: "CreatePaymentChannel",
+			Handler:    _Payment_CreatePaymentChannel_Handler,
+		},
+		{
+			MethodName: "GetPaymentChannelList",
+			Handler:    _Payment_GetPaymentChannelList_Handler,
+		},
+		{
+			MethodName: "InitiateDeposit",
+			Handler:    _Payment_InitiateDeposit_Handler,
+		},
+		{
+			MethodName: "InitiateWithdraw",
+			Handler:    _Payment_InitiateWithdraw_Handler,
+		},
+		{
+			MethodName: "DepositCallback",
+			Handler:    _Payment_DepositCallback_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

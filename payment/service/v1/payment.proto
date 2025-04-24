@@ -1,24 +1,183 @@
 syntax = "proto3";
 
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 
 package payment.service.v1;
 
 option go_package = "github.com/infigaming-com/meepo-api/payment/service/v1;v1";
 option java_multiple_files = true;
-option java_package = "payment.service.v1";
+option java_package = "api.payment.service.v1";
+
+// Request to get payment method list
+message GetPaymentMethodListRequest {
+}
+
+// Details of a single payment method
+message PaymentMethodInfo {
+  string id = 1;
+  string currency = 2;
+  string country = 3;
+  string payment_method = 4 [json_name="paymentMethod"];
+  google.protobuf.Struct key_schema = 5 [json_name="keySchema"]; // Stores schema for required fields of the payment method
+}
+
+// Response for payment method list
+message GetPaymentMethodListResponse {
+  repeated PaymentMethodInfo payment_methods = 1 [json_name="paymentMethods"];
+}
+
+// Request to create a payment channel
+message CreatePaymentChannelRequest {
+  string merchant_id = 1 [json_name="merchantId"];
+  string payment_method_id = 2 [json_name="paymentMethodId"];
+  google.protobuf.Struct key = 3; // Stores configuration fields for the payment channel
+}
+
+// Response for channel creation
+message CreatePaymentChannelResponse {
+  string channel_id = 1 [json_name="channelId"];
+}
+
+// Request to get payment channel list
+message GetPaymentChannelListRequest {
+  string merchant_id = 1 [json_name="merchantId"];
+}
+
+// Payment channel information
+message PaymentChannelInfo {
+  string channel_id = 1 [json_name="channelId"];
+  string merchant_id = 2 [json_name="merchantId"];
+  string payment_method_id = 3 [json_name="paymentMethodId"];
+  string payment_method = 4 [json_name="paymentMethod"];
+  string currency = 5;
+  string country = 6;
+  int32 status = 7;
+  google.protobuf.Timestamp created_at = 8 [json_name="createdAt"];
+  google.protobuf.Timestamp updated_at = 9 [json_name="updatedAt"];
+}
+
+// Response for payment channel list
+message GetPaymentChannelListResponse {
+  repeated PaymentChannelInfo payment_channels = 1 [json_name="paymentChannels"];
+}
+
+// Request to initiate a deposit
+message InitiateDepositRequest {
+  int64 user_id = 1 [json_name="userId"];
+  int64 amount = 2;
+  string currency = 3;
+  string channel_id = 4 [json_name="channelId"];
+  google.protobuf.Struct extra = 5; // Stores additional information like clientOrderId, productId, etc.
+}
+
+// Response for deposit initiation
+message InitiateDepositResponse {
+  int64 transaction_id = 1 [json_name="transactionId"];
+  int64 amount = 2;
+  string currency = 3;
+  string status = 4;
+  string pay_url = 5 [json_name="payUrl"];
+  string qr_code = 6 [json_name="qrCode"];
+  google.protobuf.Timestamp created_at = 7 [json_name="createdAt"];
+  google.protobuf.Struct extra = 8; // Additional transaction information
+}
+
+// Request to initiate a withdrawal
+message InitiateWithdrawRequest {
+  int64 user_id = 1 [json_name="userId"];
+  int64 amount = 2;
+  string operator_order_no = 3 [json_name="operatorOrderNo"];
+  string bank_account = 4 [json_name="bankAccount"];
+  string bank_account_name = 5 [json_name="bankAccountName"];
+  string bank_account_mobile = 6 [json_name="bankAccountMobile"];
+  string bank_name = 7 [json_name="bankName"];
+  string bank_code = 8 [json_name="bankCode"];
+  string bank_branch = 9 [json_name="bankBranch"];
+  string bank_id = 10 [json_name="bankId"];
+  string bank_ifsc = 11 [json_name="bankIfsc"];
+  string bank_nation = 12 [json_name="bankNation"];
+  string channel = 13;
+  google.protobuf.Struct extra = 14; // Stores additional information like clientId, note, etc.
+}
+
+// Response for withdrawal initiation
+message InitiateWithdrawResponse {
+  int64 transaction_id = 1 [json_name="transactionId"];
+  string operator_order_no = 2 [json_name="operatorOrderNo"];
+  int64 amount = 3;
+  string status = 4;
+  google.protobuf.Timestamp created_at = 5 [json_name="createdAt"];
+}
+
+// Request for deposit callback
+message DepositCallbackRequest {
+  string transactionNo = 1 [json_name="transactionNo"];
+  string gatewayOrderNo = 2 [json_name="gatewayOrderNo"];
+  string operatorOrderNo = 3 [json_name="operatorOrderNo"];
+  string orderStatus = 4 [json_name="orderStatus"];
+  string payTime = 5 [json_name="payTime"];
+  string createTime = 6 [json_name="createTime"];
+  int64 amount = 7;
+  int64 money = 8;
+  string sign = 9 [json_name="sign"]; // HMAC-SHA256签名，用于验证请求的合法性
+  string timestamp = 10 [json_name="timestamp"]; // 请求时间戳，用于防止重放攻击
+  string nonce = 11 [json_name="nonce"]; // 随机字符串，确保每次请求的唯一性
+}
+
+// Response for deposit callback
+message DepositCallbackResponse {
+  int64 transaction_id = 1 [json_name="transactionId"];
+}
 
 service Payment {
-	rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {
-		option (google.api.http) = {
-			get: "/v1/payment/healthcheck"
-		};
-	};
-}
+  // Get list of payment methods
+  rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/method/list"
+      body: "*"
+    };
+  }
 
-message HealthCheckRequest {
-}
+  // Create payment channel
+  rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (CreatePaymentChannelResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/channel/create"
+      body: "*"
+    };
+  }
 
-message HealthCheckResponse {
-	string status = 1;
+  // Get list of payment channels
+  rpc GetPaymentChannelList(GetPaymentChannelListRequest) returns (GetPaymentChannelListResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/channel/list"
+      body: "*"
+    };
+  }
+
+  // Initiate a deposit transaction
+  rpc InitiateDeposit(InitiateDepositRequest) returns (InitiateDepositResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/deposit/initiate"
+      body: "*"
+    };
+  }
+
+  // Initiate a withdrawal transaction
+  rpc InitiateWithdraw(InitiateWithdrawRequest) returns (InitiateWithdrawResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/withdraw/initiate"
+      body: "*"
+    };
+  }
+
+  // Deposit callback
+  // This endpoint handles callbacks from payment gateways.
+  rpc DepositCallback(DepositCallbackRequest) returns (DepositCallbackResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/deposit/callback"
+      body: "*"
+    };
+  }
 }
