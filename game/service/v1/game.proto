@@ -20,14 +20,14 @@ service Game {
 
 	rpc ListGames(ListGamesRequest) returns (ListGamesResponse) {
 		option (google.api.http) = {
-			post: "/v1/games/list"
+			post: "/v1/game/list"
 			body: "*"
 		};
 	};
 
 	rpc CreateSession(CreateSessionRequest) returns (CreateSessionResponse) {
 		option (google.api.http) = {
-			post: "/v1/games/create-session"
+			post: "/v1/game/create-session"
 			body: "*"
 		};
 	};
