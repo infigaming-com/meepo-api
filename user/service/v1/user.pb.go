@@ -197,7 +197,7 @@ func (OAuthProvider) EnumDescriptor() ([]byte, []int) {
 type UserInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier for the user.
-	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        int64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -232,11 +232,11 @@ func (*UserInfo) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *UserInfo) GetId() string {
+func (x *UserInfo) GetUserId() int64 {
 	if x != nil {
-		return x.Id
+		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 // RegisterRequest contains the information needed to register a new user.
@@ -425,7 +425,7 @@ func (x *OAuthRequest) GetToken() string {
 // TelegramAuthRequest contains the information from Telegram's login widget.
 type TelegramAuthRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Telegram user ID.
+	// Telegram user Id.
 	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	// User's first name.
 	FirstName string `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
@@ -709,7 +709,7 @@ func (x *RefreshTokenResponse) GetExpiresIn() int64 {
 type GetUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The ID of the user to retrieve.
-	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        int64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -744,11 +744,11 @@ func (*GetUserRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetUserRequest) GetId() string {
+func (x *GetUserRequest) GetUserId() int64 {
 	if x != nil {
-		return x.Id
+		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 // GetUserResponse contains the requested user's information.
@@ -963,9 +963,9 @@ var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x1a\n" +
-	"\bUserInfo\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\x9a\x01\n" +
+	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"#\n" +
+	"\bUserInfo\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x9a\x01\n" +
 	"\x0fRegisterRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
@@ -998,9 +998,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
 	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1d\n" +
 	"\n" +
-	"expires_in\x18\x03 \x01(\x03R\texpiresIn\" \n" +
-	"\x0eGetUserRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"M\n" +
+	"expires_in\x18\x03 \x01(\x03R\texpiresIn\")\n" +
+	"\x0eGetUserRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"M\n" +
 	"\x0fGetUserResponse\x12:\n" +
 	"\tuser_info\x18\x01 \x01(\v2\x1d.api.user.service.v1.UserInfoR\buserInfo\"\x0f\n" +
 	"\rLogoutRequest\"\x10\n" +
