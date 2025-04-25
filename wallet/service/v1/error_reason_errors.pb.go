@@ -178,3 +178,63 @@ func IsGetBalanceWithUserIdAndCurrencyFailed(err error) bool {
 func ErrorGetBalanceWithUserIdAndCurrencyFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsBalanceDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BALANCE_DISABLED.String() && e.Code == 401
+}
+
+func ErrorBalanceDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_BALANCE_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGenerateCreditIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_CREDIT_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGenerateCreditIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_CREDIT_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsLockCreditWithUserIdAndCurrencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorLockCreditWithUserIdAndCurrencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddCreditFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_CREDIT_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddCreditFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_CREDIT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidCreditType(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_CREDIT_TYPE.String() && e.Code == 400
+}
+
+func ErrorInvalidCreditType(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_CREDIT_TYPE.String(), fmt.Sprintf(format, args...))
+}

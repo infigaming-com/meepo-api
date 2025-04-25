@@ -28,6 +28,10 @@ service Wallet {
 			body: "*"
 		};
 	}
+
+	rpc Credit (CreditRequest) returns (CreditResponse) {}
+
+	rpc Debit (DebitRequest) returns (DebitResponse) {}
 }
 
 message AddUserRequest {
@@ -73,4 +77,75 @@ message GetUserBalancesResponse {
 		int64 provider_bonus = 4;
 	}
 	repeated Balance balances = 1;
+}
+
+// CreditType defines where the credit comes from.
+enum CreditType {
+	// default value, should not be used.
+	CREDIT_TYPE_UNSPECIFIED = 0;
+	// credit comes from a payment transaction.
+	CREDIT_TYPE_PAYMENT = 1;
+	// credit comes from a game win.
+	CREDIT_TYPE_GAME_WIN = 2;
+}
+
+message CreditRequest {
+	message Ratio {
+		int64 numerator = 1;
+		int64 denominator = 2;
+	}
+	int64 user_id = 1;
+	string currency = 2;
+	// credit_type indicates where the credit comes from.
+	// See CreditType for more details.
+	CreditType credit_type = 3;
+	// transaction_id is the transaction id of the credit.
+	// if credit_type is "payment", transaction_id is the payment transaction id.
+	// if credit_type is "game", transaction_id is the game transaction id.
+	int64 transaction_id = 4;
+	int64 cash = 5;
+	int64 operator_bonus = 6;
+	int64 provider_bonus = 7;
+	int64 cash_turnover_threshold = 8;
+	int64 operator_bonus_turnover_threshold = 9;
+	int64 provider_bonus_turnover_threshold = 10;
+	int64 cash_withdraw_limit = 11;
+	int64 operator_bonus_withdraw_limit = 12;
+	int64 provider_bonus_withdraw_limit = 13;
+	Ratio cash_to_operator_bonus_ratio = 14;
+	int64 operator_bonus_expired_at = 15;
+	int64 provider_bonus_expired_at = 16;
+}
+
+message CreditResponse {
+	int64 transaction_id = 1;
+	int64 cash = 2;
+	int64 operator_bonus = 3;
+	int64 provider_bonus = 4;
+}
+
+message DebitRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	// type indicates where the debit comes from.
+	// 1. "payment" means the debit comes from a payment transaction.
+	// 2. "game" means the debit comes from a game transaction.
+	string type = 3;
+	// transaction_id is the transaction id of the debit.
+	// if debit_type is "payment", transaction_id is the payment transaction id.
+	// if debit_type is "game", transaction_id is the game transaction id.
+	int64 transaction_id = 4;
+	int64 cash = 5;
+	int64 operator_bonus = 6;
+	int64 provider_bonus = 7;
+	int64 cash_turnover = 8;
+	int64 operator_bonus_turnover = 9;
+	int64 provider_bonus_turnover = 10;
+}
+
+message DebitResponse {
+	int64 transaction_id = 1;
+	int64 cash = 2;
+	int64 operator_bonus = 3;
+	int64 provider_bonus = 4;
 }
