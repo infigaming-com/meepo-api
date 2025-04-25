@@ -25,6 +25,20 @@ service Game {
 		};
 	};
 
+	rpc GetGame(GetGameRequest) returns (GetGameResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/get"
+			body: "*"
+		};
+	};
+
+	rpc ProviderList(ProviderListRequest) returns (ProviderListResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/provider/list"
+			body: "*"
+		};
+	};
+
 	rpc CreateSession(CreateSessionRequest) returns (CreateSessionResponse) {
 		option (google.api.http) = {
 			post: "/v1/game/create-session"
@@ -67,17 +81,47 @@ message DeleteOperatorRequest {
 message DeleteOperatorResponse {
 }
 
+message GameFilter {
+	// provider id: provider list api
+	string provider_id = 1;
+	// tags: hot game, live casino, slots, etc..
+	string tags = 2;
+}
+
+message GameSort {
+	enum Field {
+		ASC = 0;
+		DESC = 1;
+		POPULARITY = 2;
+		HIGHLIGHT = 3;
+	}
+	Field field = 1;
+}
+
 message ListGamesRequest {
-	int64 operator_id = 1;
-	int64 page = 2;
-	int64 page_size = 3;
+	// page number for pagination (starts from 1)
+	int64 page = 1;
+	// page size for pagination
+	int64 page_size = 2;
+	// filter
+	GameFilter filter = 3;
+	// sort
+	GameSort sort = 4;
 }
 
 message ListGamesResponse {
-	repeated GameInfo games = 1;
+	repeated string game_ids = 1;
 	int64 total = 2;
 	int64 page = 3;
 	int64 page_size = 4;
+}
+
+message GetGameRequest {
+	string game_id = 1;
+}
+
+message GetGameResponse {
+	GameInfo game = 1;
 }
 
 message GameInfo {
@@ -89,47 +133,29 @@ message GameInfo {
 	repeated string languages = 6;
 	repeated string currencies = 7;
 	string theme = 8;
-	string fee_group = 9;
-	bool customised = 10;
-	repeated string devices = 11;
-	repeated string licenses = 12;
-	bool has_jackpot = 13;
-	string jackpot_type = 14;
-	bool forbid_bonus_play = 15;
-	bool has_freespins = 16;
-	double payout = 17;
-	double hit_rate = 18;
-	string volatility_rating = 19;
-	int32 lines = 20;
-	int32 ways = 21;
-	string description = 22;
-	bool has_live = 23;
-	bool hd = 24;
-	bool accumulating = 25;
-	double multiplier = 26;
-	int64 released_at = 27;
-	int64 recalled_at = 28;
-	bool bonus_buy = 29;
-	string restrictions = 30;
-	int64 created_at = 31;
-	int64 updated_at = 32;
-	string resources = 33;
-	string provider_game_id = 34;
-	string assets = 35;
+	bool has_jackpot = 9;
+	string jackpot_type = 10;
+	bool forbid_bonus_play = 11;
+	bool has_freespins = 12;
+	double payout = 13;
+	double hit_rate = 14;
+	string volatility_rating = 15;
+	int32 lines = 16;
+	int32 ways = 17;
+	string description = 18;
+	double multiplier = 19;
+	int64 released_at = 20;
+	bool bonus_buy = 21;
+	string restrictions = 22;
 }
 
 message CreateSessionRequest {
-	int64 operator_id = 1;
-	string game_id = 2;
-	string currency = 3;
+	string game_id = 1;
+	string currency = 2;
+	string settlement_currency = 3;
 	string locale = 4;
-	string ip = 5;
-	string client_type = 6;
-	double balance = 7;
-	UrlInfo urls = 8;
-	UserInfo user = 9;
-	string jurisdiction = 10;
-	string payload = 11;
+	int64 user_id = 5;
+	UrlInfo urls = 6;
 }
 
 message CreateSessionResponse {
@@ -137,21 +163,25 @@ message CreateSessionResponse {
 }
 
 message UrlInfo {
+	// URL to redirect user after session is finished.
 	string return_url = 1;
+	// URL to redirect user to deposit.
 	string deposit_url = 2;
+	// URL to redirect user to lobby.
 	string lobby_url = 3;
 }
 
-message UserInfo {
-	string wallet_user_id = 1;
-	string user_id = 2;
-	string email = 3;
-	string firstname = 4;
-	string lastname = 5;
-	string nickname = 6;
-	string city = 7;
-	string date_of_birth = 8;
-	string registered_at = 9;
-	string gender = 10;
-	string country = 11;
+message ProviderListRequest {
+	// tags: hot game, live casino, slots, etc..
+	string tags = 1;
+}
+
+message ProviderListResponse {
+	repeated Provider providers = 1;
+}
+
+message Provider {
+	string id = 1;
+	string name = 2;
+	int32 game_count = 3;
 }

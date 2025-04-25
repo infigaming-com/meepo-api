@@ -24,6 +24,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/game.service.v1.CreateSessionResponse'
+    /v1/game/get:
+        post:
+            tags:
+                - Game
+            operationId: Game_GetGame
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/game.service.v1.GetGameRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/game.service.v1.GetGameResponse'
     /v1/game/list:
         post:
             tags:
@@ -42,6 +60,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/game.service.v1.ListGamesResponse'
+    /v1/game/provider/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_ProviderList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/game.service.v1.ProviderListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/game.service.v1.ProviderListResponse'
     /v1/operator/add:
         post:
             tags:
@@ -720,34 +756,32 @@ components:
         game.service.v1.CreateSessionRequest:
             type: object
             properties:
-                operatorId:
-                    type: string
                 gameId:
                     type: string
                 currency:
                     type: string
+                settlementCurrency:
+                    type: string
                 locale:
                     type: string
-                ip:
+                userId:
                     type: string
-                clientType:
-                    type: string
-                balance:
-                    type: number
-                    format: double
                 urls:
                     $ref: '#/components/schemas/game.service.v1.UrlInfo'
-                user:
-                    $ref: '#/components/schemas/game.service.v1.UserInfo'
-                jurisdiction:
-                    type: string
-                payload:
-                    type: string
         game.service.v1.CreateSessionResponse:
             type: object
             properties:
                 gameUrl:
                     type: string
+        game.service.v1.GameFilter:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                    description: 'provider id: provider list api'
+                tags:
+                    type: string
+                    description: 'tags: hot game, live casino, slots, etc..'
         game.service.v1.GameInfo:
             type: object
             properties:
@@ -771,18 +805,6 @@ components:
                         type: string
                 theme:
                     type: string
-                feeGroup:
-                    type: string
-                customised:
-                    type: boolean
-                devices:
-                    type: array
-                    items:
-                        type: string
-                licenses:
-                    type: array
-                    items:
-                        type: string
                 hasJackpot:
                     type: boolean
                 jackpotType:
@@ -807,89 +829,101 @@ components:
                     format: int32
                 description:
                     type: string
-                hasLive:
-                    type: boolean
-                hd:
-                    type: boolean
-                accumulating:
-                    type: boolean
                 multiplier:
                     type: number
                     format: double
                 releasedAt:
                     type: string
-                recalledAt:
-                    type: string
                 bonusBuy:
                     type: boolean
                 restrictions:
                     type: string
-                createdAt:
+        game.service.v1.GameSort:
+            type: object
+            properties:
+                field:
+                    enum:
+                        - ASC
+                        - DESC
+                        - POPULARITY
+                        - HIGHLIGHT
                     type: string
-                updatedAt:
+                    format: enum
+        game.service.v1.GetGameRequest:
+            type: object
+            properties:
+                gameId:
                     type: string
-                resources:
-                    type: string
-                providerGameId:
-                    type: string
-                assets:
-                    type: string
+        game.service.v1.GetGameResponse:
+            type: object
+            properties:
+                game:
+                    $ref: '#/components/schemas/game.service.v1.GameInfo'
         game.service.v1.ListGamesRequest:
             type: object
             properties:
-                operatorId:
-                    type: string
                 page:
                     type: string
+                    description: page number for pagination (starts from 1)
                 pageSize:
                     type: string
+                    description: page size for pagination
+                filter:
+                    allOf:
+                        - $ref: '#/components/schemas/game.service.v1.GameFilter'
+                    description: filter
+                sort:
+                    allOf:
+                        - $ref: '#/components/schemas/game.service.v1.GameSort'
+                    description: sort
         game.service.v1.ListGamesResponse:
             type: object
             properties:
-                games:
+                gameIds:
                     type: array
                     items:
-                        $ref: '#/components/schemas/game.service.v1.GameInfo'
+                        type: string
                 total:
                     type: string
                 page:
                     type: string
                 pageSize:
                     type: string
+        game.service.v1.Provider:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                gameCount:
+                    type: integer
+                    format: int32
+        game.service.v1.ProviderListRequest:
+            type: object
+            properties:
+                tags:
+                    type: string
+                    description: 'tags: hot game, live casino, slots, etc..'
+        game.service.v1.ProviderListResponse:
+            type: object
+            properties:
+                providers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/game.service.v1.Provider'
         game.service.v1.UrlInfo:
             type: object
             properties:
                 returnUrl:
                     type: string
+                    description: URL to redirect user after session is finished.
                 depositUrl:
                     type: string
+                    description: URL to redirect user to deposit.
                 lobbyUrl:
                     type: string
-        game.service.v1.UserInfo:
-            type: object
-            properties:
-                walletUserId:
-                    type: string
-                userId:
-                    type: string
-                email:
-                    type: string
-                firstname:
-                    type: string
-                lastname:
-                    type: string
-                nickname:
-                    type: string
-                city:
-                    type: string
-                dateOfBirth:
-                    type: string
-                registeredAt:
-                    type: string
-                gender:
-                    type: string
-                country:
-                    type: string
+                    description: URL to redirect user to lobby.
         payment.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
