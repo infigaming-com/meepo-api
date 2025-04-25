@@ -20,16 +20,22 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationGameCreateSession = "/game.service.v1.Game/CreateSession"
+const OperationGameGetGame = "/game.service.v1.Game/GetGame"
 const OperationGameListGames = "/game.service.v1.Game/ListGames"
+const OperationGameProviderList = "/game.service.v1.Game/ProviderList"
 
 type GameHTTPServer interface {
 	CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error)
+	GetGame(context.Context, *GetGameRequest) (*GetGameResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
+	ProviderList(context.Context, *ProviderListRequest) (*ProviderListResponse, error)
 }
 
 func RegisterGameHTTPServer(s *http.Server, srv GameHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/game/list", _Game_ListGames0_HTTP_Handler(srv))
+	r.POST("/v1/game/get", _Game_GetGame0_HTTP_Handler(srv))
+	r.POST("/v1/game/provider/list", _Game_ProviderList0_HTTP_Handler(srv))
 	r.POST("/v1/game/create-session", _Game_CreateSession0_HTTP_Handler(srv))
 }
 
@@ -51,6 +57,50 @@ func _Game_ListGames0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) er
 			return err
 		}
 		reply := out.(*ListGamesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Game_GetGame0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetGameRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationGameGetGame)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetGame(ctx, req.(*GetGameRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetGameResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Game_ProviderList0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ProviderListRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationGameProviderList)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ProviderList(ctx, req.(*ProviderListRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ProviderListResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -79,7 +129,9 @@ func _Game_CreateSession0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context
 
 type GameHTTPClient interface {
 	CreateSession(ctx context.Context, req *CreateSessionRequest, opts ...http.CallOption) (rsp *CreateSessionResponse, err error)
+	GetGame(ctx context.Context, req *GetGameRequest, opts ...http.CallOption) (rsp *GetGameResponse, err error)
 	ListGames(ctx context.Context, req *ListGamesRequest, opts ...http.CallOption) (rsp *ListGamesResponse, err error)
+	ProviderList(ctx context.Context, req *ProviderListRequest, opts ...http.CallOption) (rsp *ProviderListResponse, err error)
 }
 
 type GameHTTPClientImpl struct {
@@ -103,11 +155,37 @@ func (c *GameHTTPClientImpl) CreateSession(ctx context.Context, in *CreateSessio
 	return &out, nil
 }
 
+func (c *GameHTTPClientImpl) GetGame(ctx context.Context, in *GetGameRequest, opts ...http.CallOption) (*GetGameResponse, error) {
+	var out GetGameResponse
+	pattern := "/v1/game/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationGameGetGame))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *GameHTTPClientImpl) ListGames(ctx context.Context, in *ListGamesRequest, opts ...http.CallOption) (*ListGamesResponse, error) {
 	var out ListGamesResponse
 	pattern := "/v1/game/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameListGames))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *GameHTTPClientImpl) ProviderList(ctx context.Context, in *ProviderListRequest, opts ...http.CallOption) (*ProviderListResponse, error) {
+	var out ProviderListResponse
+	pattern := "/v1/game/provider/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationGameProviderList))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
