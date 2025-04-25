@@ -310,3 +310,15 @@ func IsUsernameOrPasswordInvalid(err error) bool {
 func ErrorUsernameOrPasswordInvalid(format string, args ...interface{}) *errors.Error {
 	return errors.New(401, ErrorReason_USERNAME_OR_PASSWORD_INVALID.String(), fmt.Sprintf(format, args...))
 }
+
+func IsAddUserToWalletFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_USER_TO_WALLET_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddUserToWalletFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_USER_TO_WALLET_FAILED.String(), fmt.Sprintf(format, args...))
+}
