@@ -19,7 +19,8 @@ var (
 )
 
 type UserInfo struct {
-	UserId int64 `json:"userId"`
+	UserId     int64 `json:"userId"`
+	OperatorId int64 `json:"operatorId"`
 }
 
 type Claims struct {
