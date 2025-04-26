@@ -723,10 +723,10 @@ func (x *RefreshTokenResponse) GetExpiresIn() int64 {
 	return 0
 }
 
-// GetUserRequest contains the ID of the user to retrieve.
+// GetUserRequest contains the userId of the user to retrieve.
 type GetUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The ID of the user to retrieve.
+	// The userId of the user to retrieve.
 	UserId        int64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
