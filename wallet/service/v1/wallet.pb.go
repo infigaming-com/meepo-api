@@ -22,56 +22,64 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// CreditType defines where the credit comes from.
-type CreditType int32
+type TransactionType int32
 
 const (
-	// default value, should not be used.
-	CreditType_CREDIT_TYPE_UNSPECIFIED CreditType = 0
-	// credit comes from a payment transaction.
-	CreditType_CREDIT_TYPE_PAYMENT CreditType = 1
-	// credit comes from a game win.
-	CreditType_CREDIT_TYPE_GAME_WIN CreditType = 2
+	TransactionType_TRANSACTION_TYPE_UNSPECIFIED TransactionType = 0
+	// Credit Transaction Types
+	// credit transaction type for payment deposit
+	TransactionType_TRANSACTION_TYPE_PAYMENT_DEPOSIT TransactionType = 1
+	// credit transaction type for game win
+	TransactionType_TRANSACTION_TYPE_GAME_WIN TransactionType = 2
+	// Debit Transaction Types
+	// debit transaction type for payment withdraw
+	TransactionType_TRANSACTION_TYPE_PAYMENT_WITHDRAW TransactionType = 1001
+	// debit transaction type for game bet
+	TransactionType_TRANSACTION_TYPE_GAME_BET TransactionType = 1002
 )
 
-// Enum value maps for CreditType.
+// Enum value maps for TransactionType.
 var (
-	CreditType_name = map[int32]string{
-		0: "CREDIT_TYPE_UNSPECIFIED",
-		1: "CREDIT_TYPE_PAYMENT",
-		2: "CREDIT_TYPE_GAME_WIN",
+	TransactionType_name = map[int32]string{
+		0:    "TRANSACTION_TYPE_UNSPECIFIED",
+		1:    "TRANSACTION_TYPE_PAYMENT_DEPOSIT",
+		2:    "TRANSACTION_TYPE_GAME_WIN",
+		1001: "TRANSACTION_TYPE_PAYMENT_WITHDRAW",
+		1002: "TRANSACTION_TYPE_GAME_BET",
 	}
-	CreditType_value = map[string]int32{
-		"CREDIT_TYPE_UNSPECIFIED": 0,
-		"CREDIT_TYPE_PAYMENT":     1,
-		"CREDIT_TYPE_GAME_WIN":    2,
+	TransactionType_value = map[string]int32{
+		"TRANSACTION_TYPE_UNSPECIFIED":      0,
+		"TRANSACTION_TYPE_PAYMENT_DEPOSIT":  1,
+		"TRANSACTION_TYPE_GAME_WIN":         2,
+		"TRANSACTION_TYPE_PAYMENT_WITHDRAW": 1001,
+		"TRANSACTION_TYPE_GAME_BET":         1002,
 	}
 )
 
-func (x CreditType) Enum() *CreditType {
-	p := new(CreditType)
+func (x TransactionType) Enum() *TransactionType {
+	p := new(TransactionType)
 	*p = x
 	return p
 }
 
-func (x CreditType) String() string {
+func (x TransactionType) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (CreditType) Descriptor() protoreflect.EnumDescriptor {
+func (TransactionType) Descriptor() protoreflect.EnumDescriptor {
 	return file_wallet_service_v1_wallet_proto_enumTypes[0].Descriptor()
 }
 
-func (CreditType) Type() protoreflect.EnumType {
+func (TransactionType) Type() protoreflect.EnumType {
 	return &file_wallet_service_v1_wallet_proto_enumTypes[0]
 }
 
-func (x CreditType) Number() protoreflect.EnumNumber {
+func (x TransactionType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use CreditType.Descriptor instead.
-func (CreditType) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use TransactionType.Descriptor instead.
+func (TransactionType) EnumDescriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{0}
 }
 
@@ -540,28 +548,23 @@ func (x *GetUserBalancesResponse) GetBalances() []*GetUserBalancesResponse_Balan
 }
 
 type CreditRequest struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	UserId   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	// credit_type indicates where the credit comes from.
-	// See CreditType for more details.
-	CreditType CreditType `protobuf:"varint,3,opt,name=credit_type,json=creditType,proto3,enum=api.wallet.service.v1.CreditType" json:"credit_type,omitempty"`
-	// transaction_id is the transaction id of the credit.
-	// if credit_type is "payment", transaction_id is the payment transaction id.
-	// if credit_type is "game", transaction_id is the game transaction id.
-	TransactionId                  int64                `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash                           int64                `protobuf:"varint,5,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus                  int64                `protobuf:"varint,6,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus                  int64                `protobuf:"varint,7,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
-	CashTurnoverThreshold          int64                `protobuf:"varint,8,opt,name=cash_turnover_threshold,json=cashTurnoverThreshold,proto3" json:"cash_turnover_threshold,omitempty"`
-	OperatorBonusTurnoverThreshold int64                `protobuf:"varint,9,opt,name=operator_bonus_turnover_threshold,json=operatorBonusTurnoverThreshold,proto3" json:"operator_bonus_turnover_threshold,omitempty"`
-	ProviderBonusTurnoverThreshold int64                `protobuf:"varint,10,opt,name=provider_bonus_turnover_threshold,json=providerBonusTurnoverThreshold,proto3" json:"provider_bonus_turnover_threshold,omitempty"`
-	CashWithdrawLimit              int64                `protobuf:"varint,11,opt,name=cash_withdraw_limit,json=cashWithdrawLimit,proto3" json:"cash_withdraw_limit,omitempty"`
-	OperatorBonusWithdrawLimit     int64                `protobuf:"varint,12,opt,name=operator_bonus_withdraw_limit,json=operatorBonusWithdrawLimit,proto3" json:"operator_bonus_withdraw_limit,omitempty"`
-	ProviderBonusWithdrawLimit     int64                `protobuf:"varint,13,opt,name=provider_bonus_withdraw_limit,json=providerBonusWithdrawLimit,proto3" json:"provider_bonus_withdraw_limit,omitempty"`
-	CashToOperatorBonusRatio       *CreditRequest_Ratio `protobuf:"bytes,14,opt,name=cash_to_operator_bonus_ratio,json=cashToOperatorBonusRatio,proto3" json:"cash_to_operator_bonus_ratio,omitempty"`
-	OperatorBonusExpiredAt         int64                `protobuf:"varint,15,opt,name=operator_bonus_expired_at,json=operatorBonusExpiredAt,proto3" json:"operator_bonus_expired_at,omitempty"`
-	ProviderBonusExpiredAt         int64                `protobuf:"varint,16,opt,name=provider_bonus_expired_at,json=providerBonusExpiredAt,proto3" json:"provider_bonus_expired_at,omitempty"`
+	state                          protoimpl.MessageState `protogen:"open.v1"`
+	UserId                         int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency                       string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	TransactionType                TransactionType        `protobuf:"varint,3,opt,name=transaction_type,json=transactionType,proto3,enum=api.wallet.service.v1.TransactionType" json:"transaction_type,omitempty"`
+	TransactionId                  int64                  `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Cash                           int64                  `protobuf:"varint,5,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus                  int64                  `protobuf:"varint,6,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus                  int64                  `protobuf:"varint,7,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	CashTurnoverThreshold          int64                  `protobuf:"varint,8,opt,name=cash_turnover_threshold,json=cashTurnoverThreshold,proto3" json:"cash_turnover_threshold,omitempty"`
+	OperatorBonusTurnoverThreshold int64                  `protobuf:"varint,9,opt,name=operator_bonus_turnover_threshold,json=operatorBonusTurnoverThreshold,proto3" json:"operator_bonus_turnover_threshold,omitempty"`
+	ProviderBonusTurnoverThreshold int64                  `protobuf:"varint,10,opt,name=provider_bonus_turnover_threshold,json=providerBonusTurnoverThreshold,proto3" json:"provider_bonus_turnover_threshold,omitempty"`
+	CashWithdrawLimit              int64                  `protobuf:"varint,11,opt,name=cash_withdraw_limit,json=cashWithdrawLimit,proto3" json:"cash_withdraw_limit,omitempty"`
+	OperatorBonusWithdrawLimit     int64                  `protobuf:"varint,12,opt,name=operator_bonus_withdraw_limit,json=operatorBonusWithdrawLimit,proto3" json:"operator_bonus_withdraw_limit,omitempty"`
+	ProviderBonusWithdrawLimit     int64                  `protobuf:"varint,13,opt,name=provider_bonus_withdraw_limit,json=providerBonusWithdrawLimit,proto3" json:"provider_bonus_withdraw_limit,omitempty"`
+	CashToOperatorBonusRatio       *CreditRequest_Ratio   `protobuf:"bytes,14,opt,name=cash_to_operator_bonus_ratio,json=cashToOperatorBonusRatio,proto3" json:"cash_to_operator_bonus_ratio,omitempty"`
+	OperatorBonusExpiredAt         int64                  `protobuf:"varint,15,opt,name=operator_bonus_expired_at,json=operatorBonusExpiredAt,proto3" json:"operator_bonus_expired_at,omitempty"`
+	ProviderBonusExpiredAt         int64                  `protobuf:"varint,16,opt,name=provider_bonus_expired_at,json=providerBonusExpiredAt,proto3" json:"provider_bonus_expired_at,omitempty"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -610,11 +613,11 @@ func (x *CreditRequest) GetCurrency() string {
 	return ""
 }
 
-func (x *CreditRequest) GetCreditType() CreditType {
+func (x *CreditRequest) GetTransactionType() TransactionType {
 	if x != nil {
-		return x.CreditType
+		return x.TransactionType
 	}
-	return CreditType_CREDIT_TYPE_UNSPECIFIED
+	return TransactionType_TRANSACTION_TYPE_UNSPECIFIED
 }
 
 func (x *CreditRequest) GetTransactionId() int64 {
@@ -777,23 +780,17 @@ func (x *CreditResponse) GetProviderBonus() int64 {
 }
 
 type DebitRequest struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	UserId   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	// type indicates where the debit comes from.
-	// 1. "payment" means the debit comes from a payment transaction.
-	// 2. "game" means the debit comes from a game transaction.
-	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	// transaction_id is the transaction id of the debit.
-	// if debit_type is "payment", transaction_id is the payment transaction id.
-	// if debit_type is "game", transaction_id is the game transaction id.
-	TransactionId         int64 `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash                  int64 `protobuf:"varint,5,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus         int64 `protobuf:"varint,6,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus         int64 `protobuf:"varint,7,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
-	CashTurnover          int64 `protobuf:"varint,8,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
-	OperatorBonusTurnover int64 `protobuf:"varint,9,opt,name=operator_bonus_turnover,json=operatorBonusTurnover,proto3" json:"operator_bonus_turnover,omitempty"`
-	ProviderBonusTurnover int64 `protobuf:"varint,10,opt,name=provider_bonus_turnover,json=providerBonusTurnover,proto3" json:"provider_bonus_turnover,omitempty"`
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	UserId                int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency              string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	TransactionType       TransactionType        `protobuf:"varint,3,opt,name=transaction_type,json=transactionType,proto3,enum=api.wallet.service.v1.TransactionType" json:"transaction_type,omitempty"`
+	TransactionId         int64                  `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Cash                  int64                  `protobuf:"varint,5,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus         int64                  `protobuf:"varint,6,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus         int64                  `protobuf:"varint,7,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	CashTurnover          int64                  `protobuf:"varint,8,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
+	OperatorBonusTurnover int64                  `protobuf:"varint,9,opt,name=operator_bonus_turnover,json=operatorBonusTurnover,proto3" json:"operator_bonus_turnover,omitempty"`
+	ProviderBonusTurnover int64                  `protobuf:"varint,10,opt,name=provider_bonus_turnover,json=providerBonusTurnover,proto3" json:"provider_bonus_turnover,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -842,11 +839,11 @@ func (x *DebitRequest) GetCurrency() string {
 	return ""
 }
 
-func (x *DebitRequest) GetType() string {
+func (x *DebitRequest) GetTransactionType() TransactionType {
 	if x != nil {
-		return x.Type
+		return x.TransactionType
 	}
-	return ""
+	return TransactionType_TRANSACTION_TYPE_UNSPECIFIED
 }
 
 func (x *DebitRequest) GetTransactionId() int64 {
@@ -1119,12 +1116,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\xc0\a\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\xcf\a\n" +
 	"\rCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12B\n" +
-	"\vcredit_type\x18\x03 \x01(\x0e2!.api.wallet.service.v1.CreditTypeR\n" +
-	"creditType\x12%\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12Q\n" +
+	"\x10transaction_type\x18\x03 \x01(\x0e2&.api.wallet.service.v1.TransactionTypeR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x04 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x05 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x06 \x01(\x03R\roperatorBonus\x12%\n" +
@@ -1146,11 +1142,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\xf5\x02\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\xb4\x03\n" +
 	"\fDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12%\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12Q\n" +
+	"\x10transaction_type\x18\x03 \x01(\x0e2&.api.wallet.service.v1.TransactionTypeR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x04 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x05 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x06 \x01(\x03R\roperatorBonus\x12%\n" +
@@ -1163,12 +1159,13 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus*\\\n" +
-	"\n" +
-	"CreditType\x12\x1b\n" +
-	"\x17CREDIT_TYPE_UNSPECIFIED\x10\x00\x12\x17\n" +
-	"\x13CREDIT_TYPE_PAYMENT\x10\x01\x12\x18\n" +
-	"\x14CREDIT_TYPE_GAME_WIN\x10\x022\xd0\x06\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus*\xc0\x01\n" +
+	"\x0fTransactionType\x12 \n" +
+	"\x1cTRANSACTION_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
+	" TRANSACTION_TYPE_PAYMENT_DEPOSIT\x10\x01\x12\x1d\n" +
+	"\x19TRANSACTION_TYPE_GAME_WIN\x10\x02\x12&\n" +
+	"!TRANSACTION_TYPE_PAYMENT_WITHDRAW\x10\xe9\a\x12\x1e\n" +
+	"\x19TRANSACTION_TYPE_GAME_BET\x10\xea\a2\xd0\x06\n" +
 	"\x06Wallet\x12Z\n" +
 	"\aAddUser\x12%.api.wallet.service.v1.AddUserRequest\x1a&.api.wallet.service.v1.AddUserResponse\"\x00\x12c\n" +
 	"\n" +
@@ -1195,7 +1192,7 @@ func file_wallet_service_v1_wallet_proto_rawDescGZIP() []byte {
 var file_wallet_service_v1_wallet_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_wallet_service_v1_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_wallet_service_v1_wallet_proto_goTypes = []any{
-	(CreditType)(0),                              // 0: api.wallet.service.v1.CreditType
+	(TransactionType)(0),                         // 0: api.wallet.service.v1.TransactionType
 	(*AddUserRequest)(nil),                       // 1: api.wallet.service.v1.AddUserRequest
 	(*AddUserResponse)(nil),                      // 2: api.wallet.service.v1.AddUserResponse
 	(*UpdateUserRequest)(nil),                    // 3: api.wallet.service.v1.UpdateUserRequest
@@ -1215,27 +1212,28 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 }
 var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	15, // 0: api.wallet.service.v1.GetUserBalancesResponse.balances:type_name -> api.wallet.service.v1.GetUserBalancesResponse.Balance
-	0,  // 1: api.wallet.service.v1.CreditRequest.credit_type:type_name -> api.wallet.service.v1.CreditType
+	0,  // 1: api.wallet.service.v1.CreditRequest.transaction_type:type_name -> api.wallet.service.v1.TransactionType
 	16, // 2: api.wallet.service.v1.CreditRequest.cash_to_operator_bonus_ratio:type_name -> api.wallet.service.v1.CreditRequest.Ratio
-	1,  // 3: api.wallet.service.v1.Wallet.AddUser:input_type -> api.wallet.service.v1.AddUserRequest
-	3,  // 4: api.wallet.service.v1.Wallet.UpdateUser:input_type -> api.wallet.service.v1.UpdateUserRequest
-	5,  // 5: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:input_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest
-	7,  // 6: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
-	9,  // 7: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
-	11, // 8: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
-	13, // 9: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
-	2,  // 10: api.wallet.service.v1.Wallet.AddUser:output_type -> api.wallet.service.v1.AddUserResponse
-	4,  // 11: api.wallet.service.v1.Wallet.UpdateUser:output_type -> api.wallet.service.v1.UpdateUserResponse
-	6,  // 12: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:output_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse
-	8,  // 13: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
-	10, // 14: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
-	12, // 15: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
-	14, // 16: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
-	10, // [10:17] is the sub-list for method output_type
-	3,  // [3:10] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	0,  // 3: api.wallet.service.v1.DebitRequest.transaction_type:type_name -> api.wallet.service.v1.TransactionType
+	1,  // 4: api.wallet.service.v1.Wallet.AddUser:input_type -> api.wallet.service.v1.AddUserRequest
+	3,  // 5: api.wallet.service.v1.Wallet.UpdateUser:input_type -> api.wallet.service.v1.UpdateUserRequest
+	5,  // 6: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:input_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest
+	7,  // 7: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
+	9,  // 8: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
+	11, // 9: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
+	13, // 10: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
+	2,  // 11: api.wallet.service.v1.Wallet.AddUser:output_type -> api.wallet.service.v1.AddUserResponse
+	4,  // 12: api.wallet.service.v1.Wallet.UpdateUser:output_type -> api.wallet.service.v1.UpdateUserResponse
+	6,  // 13: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:output_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse
+	8,  // 14: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
+	10, // 15: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
+	12, // 16: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
+	14, // 17: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
+	11, // [11:18] is the sub-list for method output_type
+	4,  // [4:11] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_wallet_proto_init() }
