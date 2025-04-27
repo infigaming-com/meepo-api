@@ -6,6 +6,24 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /v1/game/balance:
+        post:
+            tags:
+                - Game
+            operationId: Game_Balance
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/game.service.v1.BalanceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/game.service.v1.BalanceResponse'
     /v1/game/create-session:
         post:
             tags:
@@ -60,6 +78,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/game.service.v1.ListGamesResponse'
+    /v1/game/play:
+        post:
+            tags:
+                - Game
+            operationId: Game_Play
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/game.service.v1.PlayRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/game.service.v1.PlayResponse'
     /v1/game/provider/list:
         post:
             tags:
@@ -78,6 +114,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/game.service.v1.ProviderListResponse'
+    /v1/game/rollback:
+        post:
+            tags:
+                - Game
+            operationId: Game_Rollback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/game.service.v1.RollbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/game.service.v1.RollbackResponse'
     /v1/operator/add:
         post:
             tags:
@@ -753,6 +807,58 @@ components:
         api.wallet.service.v1.UpdateUserCurrencyResponse:
             type: object
             properties: {}
+        game.service.v1.Action:
+            type: object
+            properties:
+                action:
+                    type: string
+                betId:
+                    type: string
+                providerTransactionId:
+                    type: string
+                providerExternalTransactionId:
+                    type: string
+                updateBalance:
+                    type: boolean
+                takeAll:
+                    type: boolean
+                isRefund:
+                    type: boolean
+                amount:
+                    type: string
+                jackpotContribution:
+                    type: number
+                    format: float
+                jackpotWin:
+                    type: string
+                betTime:
+                    type: string
+                settleTime:
+                    type: string
+                providerTimestamp:
+                    type: string
+        game.service.v1.BalanceRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                gameId:
+                    type: string
+                roundId:
+                    type: string
+                finished:
+                    type: boolean
+        game.service.v1.BalanceResponse:
+            type: object
+            properties:
+                balance:
+                    type: string
+                bonus:
+                    type: string
+                roundId:
+                    type: string
         game.service.v1.CreateSessionRequest:
             type: object
             properties:
@@ -889,6 +995,36 @@ components:
                     type: string
                 pageSize:
                     type: string
+        game.service.v1.PlayRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                gameId:
+                    type: string
+                roundId:
+                    type: string
+                finished:
+                    type: boolean
+                smResult:
+                    type: string
+                actions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/game.service.v1.Action'
+        game.service.v1.PlayResponse:
+            type: object
+            properties:
+                balance:
+                    type: string
+                roundId:
+                    type: string
+                transactions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/game.service.v1.Transactions'
         game.service.v1.Provider:
             type: object
             properties:
@@ -912,6 +1048,73 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/game.service.v1.Provider'
+        game.service.v1.RollbackAction:
+            type: object
+            properties:
+                action:
+                    type: string
+                betId:
+                    type: string
+                providerTransactionId:
+                    type: string
+                providerExternalTransactionId:
+                    type: string
+                originalProviderTransactionId:
+                    type: string
+                originalProviderExternalTransactionId:
+                    type: string
+                providerTimestamp:
+                    type: string
+        game.service.v1.RollbackRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                gameId:
+                    type: string
+                roundId:
+                    type: string
+                finished:
+                    type: boolean
+                smResult:
+                    type: string
+                actions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/game.service.v1.RollbackAction'
+        game.service.v1.RollbackResponse:
+            type: object
+            properties:
+                balance:
+                    type: string
+                roundId:
+                    type: string
+                transactions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/game.service.v1.RollbackTransactions'
+        game.service.v1.RollbackTransactions:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                operatorTransactionId:
+                    type: string
+                processedAt:
+                    type: string
+        game.service.v1.Transactions:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                operatorTransactionId:
+                    type: string
+                processedAt:
+                    type: string
+                bonusAmount:
+                    type: string
         game.service.v1.UrlInfo:
             type: object
             properties:

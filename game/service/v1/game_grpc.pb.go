@@ -26,6 +26,9 @@ const (
 	Game_GetGame_FullMethodName        = "/game.service.v1.Game/GetGame"
 	Game_ProviderList_FullMethodName   = "/game.service.v1.Game/ProviderList"
 	Game_CreateSession_FullMethodName  = "/game.service.v1.Game/CreateSession"
+	Game_Balance_FullMethodName        = "/game.service.v1.Game/Balance"
+	Game_Play_FullMethodName           = "/game.service.v1.Game/Play"
+	Game_Rollback_FullMethodName       = "/game.service.v1.Game/Rollback"
 )
 
 // GameClient is the client API for Game service.
@@ -39,6 +42,9 @@ type GameClient interface {
 	GetGame(ctx context.Context, in *GetGameRequest, opts ...grpc.CallOption) (*GetGameResponse, error)
 	ProviderList(ctx context.Context, in *ProviderListRequest, opts ...grpc.CallOption) (*ProviderListResponse, error)
 	CreateSession(ctx context.Context, in *CreateSessionRequest, opts ...grpc.CallOption) (*CreateSessionResponse, error)
+	Balance(ctx context.Context, in *BalanceRequest, opts ...grpc.CallOption) (*BalanceResponse, error)
+	Play(ctx context.Context, in *PlayRequest, opts ...grpc.CallOption) (*PlayResponse, error)
+	Rollback(ctx context.Context, in *RollbackRequest, opts ...grpc.CallOption) (*RollbackResponse, error)
 }
 
 type gameClient struct {
@@ -119,6 +125,36 @@ func (c *gameClient) CreateSession(ctx context.Context, in *CreateSessionRequest
 	return out, nil
 }
 
+func (c *gameClient) Balance(ctx context.Context, in *BalanceRequest, opts ...grpc.CallOption) (*BalanceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BalanceResponse)
+	err := c.cc.Invoke(ctx, Game_Balance_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) Play(ctx context.Context, in *PlayRequest, opts ...grpc.CallOption) (*PlayResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PlayResponse)
+	err := c.cc.Invoke(ctx, Game_Play_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) Rollback(ctx context.Context, in *RollbackRequest, opts ...grpc.CallOption) (*RollbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RollbackResponse)
+	err := c.cc.Invoke(ctx, Game_Rollback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -130,6 +166,9 @@ type GameServer interface {
 	GetGame(context.Context, *GetGameRequest) (*GetGameResponse, error)
 	ProviderList(context.Context, *ProviderListRequest) (*ProviderListResponse, error)
 	CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error)
+	Balance(context.Context, *BalanceRequest) (*BalanceResponse, error)
+	Play(context.Context, *PlayRequest) (*PlayResponse, error)
+	Rollback(context.Context, *RollbackRequest) (*RollbackResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -160,6 +199,15 @@ func (UnimplementedGameServer) ProviderList(context.Context, *ProviderListReques
 }
 func (UnimplementedGameServer) CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSession not implemented")
+}
+func (UnimplementedGameServer) Balance(context.Context, *BalanceRequest) (*BalanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Balance not implemented")
+}
+func (UnimplementedGameServer) Play(context.Context, *PlayRequest) (*PlayResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Play not implemented")
+}
+func (UnimplementedGameServer) Rollback(context.Context, *RollbackRequest) (*RollbackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Rollback not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -308,6 +356,60 @@ func _Game_CreateSession_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_Balance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BalanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).Balance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_Balance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).Balance(ctx, req.(*BalanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_Play_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).Play(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_Play_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).Play(ctx, req.(*PlayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_Rollback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RollbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).Rollback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_Rollback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).Rollback(ctx, req.(*RollbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -342,6 +444,18 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateSession",
 			Handler:    _Game_CreateSession_Handler,
+		},
+		{
+			MethodName: "Balance",
+			Handler:    _Game_Balance_Handler,
+		},
+		{
+			MethodName: "Play",
+			Handler:    _Game_Play_Handler,
+		},
+		{
+			MethodName: "Rollback",
+			Handler:    _Game_Rollback_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
