@@ -814,9 +814,9 @@ components:
                     type: string
                 betId:
                     type: string
-                providerTransactionId:
+                txnId:
                     type: string
-                providerExternalTransactionId:
+                extTxnId:
                     type: string
                 updateBalance:
                     type: boolean
@@ -1055,13 +1055,13 @@ components:
                     type: string
                 betId:
                     type: string
-                providerTransactionId:
+                txnId:
                     type: string
-                providerExternalTransactionId:
+                extTxnId:
                     type: string
-                originalProviderTransactionId:
+                originalTxnId:
                     type: string
-                originalProviderExternalTransactionId:
+                originalExtTxnId:
                     type: string
                 providerTimestamp:
                     type: string
@@ -1098,18 +1098,18 @@ components:
         game.service.v1.RollbackTransactions:
             type: object
             properties:
-                transactionId:
+                txnId:
                     type: string
-                operatorTransactionId:
+                operatorTxnId:
                     type: string
                 processedAt:
                     type: string
         game.service.v1.Transactions:
             type: object
             properties:
-                transactionId:
+                txnId:
                     type: string
-                operatorTransactionId:
+                operatorTxnId:
                     type: string
                 processedAt:
                     type: string

@@ -1585,22 +1585,22 @@ func (x *PlayResponse) GetTransactions() []*Transactions {
 }
 
 type Action struct {
-	state                         protoimpl.MessageState `protogen:"open.v1"`
-	Action                        string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
-	BetId                         string                 `protobuf:"bytes,2,opt,name=bet_id,json=betId,proto3" json:"bet_id,omitempty"`
-	ProviderTransactionId         string                 `protobuf:"bytes,3,opt,name=provider_transaction_id,json=providerTransactionId,proto3" json:"provider_transaction_id,omitempty"`
-	ProviderExternalTransactionId string                 `protobuf:"bytes,4,opt,name=provider_external_transaction_id,json=providerExternalTransactionId,proto3" json:"provider_external_transaction_id,omitempty"`
-	UpdateBalance                 bool                   `protobuf:"varint,5,opt,name=update_balance,json=updateBalance,proto3" json:"update_balance,omitempty"`
-	TakeAll                       bool                   `protobuf:"varint,6,opt,name=take_all,json=takeAll,proto3" json:"take_all,omitempty"`
-	IsRefund                      bool                   `protobuf:"varint,7,opt,name=is_refund,json=isRefund,proto3" json:"is_refund,omitempty"`
-	Amount                        int64                  `protobuf:"varint,8,opt,name=amount,proto3" json:"amount,omitempty"`
-	JackpotContribution           float32                `protobuf:"fixed32,9,opt,name=jackpot_contribution,json=jackpotContribution,proto3" json:"jackpot_contribution,omitempty"`
-	JackpotWin                    int64                  `protobuf:"varint,10,opt,name=jackpot_win,json=jackpotWin,proto3" json:"jackpot_win,omitempty"`
-	BetTime                       int64                  `protobuf:"varint,11,opt,name=bet_time,json=betTime,proto3" json:"bet_time,omitempty"`
-	SettleTime                    int64                  `protobuf:"varint,12,opt,name=settle_time,json=settleTime,proto3" json:"settle_time,omitempty"`
-	ProviderTimestamp             int64                  `protobuf:"varint,13,opt,name=provider_timestamp,json=providerTimestamp,proto3" json:"provider_timestamp,omitempty"`
-	unknownFields                 protoimpl.UnknownFields
-	sizeCache                     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Action              string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
+	BetId               string                 `protobuf:"bytes,2,opt,name=bet_id,json=betId,proto3" json:"bet_id,omitempty"`
+	TxnId               string                 `protobuf:"bytes,3,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
+	ExtTxnId            string                 `protobuf:"bytes,4,opt,name=ext_txn_id,json=extTxnId,proto3" json:"ext_txn_id,omitempty"`
+	UpdateBalance       bool                   `protobuf:"varint,5,opt,name=update_balance,json=updateBalance,proto3" json:"update_balance,omitempty"`
+	TakeAll             bool                   `protobuf:"varint,6,opt,name=take_all,json=takeAll,proto3" json:"take_all,omitempty"`
+	IsRefund            bool                   `protobuf:"varint,7,opt,name=is_refund,json=isRefund,proto3" json:"is_refund,omitempty"`
+	Amount              int64                  `protobuf:"varint,8,opt,name=amount,proto3" json:"amount,omitempty"`
+	JackpotContribution float32                `protobuf:"fixed32,9,opt,name=jackpot_contribution,json=jackpotContribution,proto3" json:"jackpot_contribution,omitempty"`
+	JackpotWin          int64                  `protobuf:"varint,10,opt,name=jackpot_win,json=jackpotWin,proto3" json:"jackpot_win,omitempty"`
+	BetTime             int64                  `protobuf:"varint,11,opt,name=bet_time,json=betTime,proto3" json:"bet_time,omitempty"`
+	SettleTime          int64                  `protobuf:"varint,12,opt,name=settle_time,json=settleTime,proto3" json:"settle_time,omitempty"`
+	ProviderTimestamp   int64                  `protobuf:"varint,13,opt,name=provider_timestamp,json=providerTimestamp,proto3" json:"provider_timestamp,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *Action) Reset() {
@@ -1647,16 +1647,16 @@ func (x *Action) GetBetId() string {
 	return ""
 }
 
-func (x *Action) GetProviderTransactionId() string {
+func (x *Action) GetTxnId() string {
 	if x != nil {
-		return x.ProviderTransactionId
+		return x.TxnId
 	}
 	return ""
 }
 
-func (x *Action) GetProviderExternalTransactionId() string {
+func (x *Action) GetExtTxnId() string {
 	if x != nil {
-		return x.ProviderExternalTransactionId
+		return x.ExtTxnId
 	}
 	return ""
 }
@@ -1725,13 +1725,13 @@ func (x *Action) GetProviderTimestamp() int64 {
 }
 
 type Transactions struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId         string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	OperatorTransactionId string                 `protobuf:"bytes,2,opt,name=operator_transaction_id,json=operatorTransactionId,proto3" json:"operator_transaction_id,omitempty"`
-	ProcessedAt           string                 `protobuf:"bytes,3,opt,name=processed_at,json=processedAt,proto3" json:"processed_at,omitempty"`
-	BonusAmount           int64                  `protobuf:"varint,4,opt,name=bonus_amount,json=bonusAmount,proto3" json:"bonus_amount,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
+	OperatorTxnId string                 `protobuf:"bytes,2,opt,name=operator_txn_id,json=operatorTxnId,proto3" json:"operator_txn_id,omitempty"`
+	ProcessedAt   string                 `protobuf:"bytes,3,opt,name=processed_at,json=processedAt,proto3" json:"processed_at,omitempty"`
+	BonusAmount   int64                  `protobuf:"varint,4,opt,name=bonus_amount,json=bonusAmount,proto3" json:"bonus_amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Transactions) Reset() {
@@ -1764,16 +1764,16 @@ func (*Transactions) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *Transactions) GetTransactionId() string {
+func (x *Transactions) GetTxnId() string {
 	if x != nil {
-		return x.TransactionId
+		return x.TxnId
 	}
 	return ""
 }
 
-func (x *Transactions) GetOperatorTransactionId() string {
+func (x *Transactions) GetOperatorTxnId() string {
 	if x != nil {
-		return x.OperatorTransactionId
+		return x.OperatorTxnId
 	}
 	return ""
 }
@@ -1885,16 +1885,16 @@ func (x *RollbackRequest) GetActions() []*RollbackAction {
 }
 
 type RollbackAction struct {
-	state                                 protoimpl.MessageState `protogen:"open.v1"`
-	Action                                string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
-	BetId                                 string                 `protobuf:"bytes,2,opt,name=bet_id,json=betId,proto3" json:"bet_id,omitempty"`
-	ProviderTransactionId                 string                 `protobuf:"bytes,3,opt,name=provider_transaction_id,json=providerTransactionId,proto3" json:"provider_transaction_id,omitempty"`
-	ProviderExternalTransactionId         string                 `protobuf:"bytes,4,opt,name=provider_external_transaction_id,json=providerExternalTransactionId,proto3" json:"provider_external_transaction_id,omitempty"`
-	OriginalProviderTransactionId         string                 `protobuf:"bytes,5,opt,name=original_provider_transaction_id,json=originalProviderTransactionId,proto3" json:"original_provider_transaction_id,omitempty"`
-	OriginalProviderExternalTransactionId string                 `protobuf:"bytes,6,opt,name=original_provider_external_transaction_id,json=originalProviderExternalTransactionId,proto3" json:"original_provider_external_transaction_id,omitempty"`
-	ProviderTimestamp                     int64                  `protobuf:"varint,7,opt,name=provider_timestamp,json=providerTimestamp,proto3" json:"provider_timestamp,omitempty"`
-	unknownFields                         protoimpl.UnknownFields
-	sizeCache                             protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Action            string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
+	BetId             string                 `protobuf:"bytes,2,opt,name=bet_id,json=betId,proto3" json:"bet_id,omitempty"`
+	TxnId             string                 `protobuf:"bytes,3,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
+	ExtTxnId          string                 `protobuf:"bytes,4,opt,name=ext_txn_id,json=extTxnId,proto3" json:"ext_txn_id,omitempty"`
+	OriginalTxnId     string                 `protobuf:"bytes,5,opt,name=original_txn_id,json=originalTxnId,proto3" json:"original_txn_id,omitempty"`
+	OriginalExtTxnId  string                 `protobuf:"bytes,6,opt,name=original_ext_txn_id,json=originalExtTxnId,proto3" json:"original_ext_txn_id,omitempty"`
+	ProviderTimestamp int64                  `protobuf:"varint,7,opt,name=provider_timestamp,json=providerTimestamp,proto3" json:"provider_timestamp,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *RollbackAction) Reset() {
@@ -1941,30 +1941,30 @@ func (x *RollbackAction) GetBetId() string {
 	return ""
 }
 
-func (x *RollbackAction) GetProviderTransactionId() string {
+func (x *RollbackAction) GetTxnId() string {
 	if x != nil {
-		return x.ProviderTransactionId
+		return x.TxnId
 	}
 	return ""
 }
 
-func (x *RollbackAction) GetProviderExternalTransactionId() string {
+func (x *RollbackAction) GetExtTxnId() string {
 	if x != nil {
-		return x.ProviderExternalTransactionId
+		return x.ExtTxnId
 	}
 	return ""
 }
 
-func (x *RollbackAction) GetOriginalProviderTransactionId() string {
+func (x *RollbackAction) GetOriginalTxnId() string {
 	if x != nil {
-		return x.OriginalProviderTransactionId
+		return x.OriginalTxnId
 	}
 	return ""
 }
 
-func (x *RollbackAction) GetOriginalProviderExternalTransactionId() string {
+func (x *RollbackAction) GetOriginalExtTxnId() string {
 	if x != nil {
-		return x.OriginalProviderExternalTransactionId
+		return x.OriginalExtTxnId
 	}
 	return ""
 }
@@ -2037,12 +2037,12 @@ func (x *RollbackResponse) GetTransactions() []*RollbackTransactions {
 }
 
 type RollbackTransactions struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId         string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	OperatorTransactionId string                 `protobuf:"bytes,2,opt,name=operator_transaction_id,json=operatorTransactionId,proto3" json:"operator_transaction_id,omitempty"`
-	ProcessedAt           string                 `protobuf:"bytes,3,opt,name=processed_at,json=processedAt,proto3" json:"processed_at,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
+	OperatorTxnId string                 `protobuf:"bytes,2,opt,name=operator_txn_id,json=operatorTxnId,proto3" json:"operator_txn_id,omitempty"`
+	ProcessedAt   string                 `protobuf:"bytes,3,opt,name=processed_at,json=processedAt,proto3" json:"processed_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RollbackTransactions) Reset() {
@@ -2075,16 +2075,16 @@ func (*RollbackTransactions) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *RollbackTransactions) GetTransactionId() string {
+func (x *RollbackTransactions) GetTxnId() string {
 	if x != nil {
-		return x.TransactionId
+		return x.TxnId
 	}
 	return ""
 }
 
-func (x *RollbackTransactions) GetOperatorTransactionId() string {
+func (x *RollbackTransactions) GetOperatorTxnId() string {
 	if x != nil {
-		return x.OperatorTransactionId
+		return x.OperatorTxnId
 	}
 	return ""
 }
@@ -2233,12 +2233,13 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\fPlayResponse\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\x03R\abalance\x12\x19\n" +
 	"\bround_id\x18\x02 \x01(\tR\aroundId\x12A\n" +
-	"\ftransactions\x18\x03 \x03(\v2\x1d.game.service.v1.TransactionsR\ftransactions\"\xee\x03\n" +
+	"\ftransactions\x18\x03 \x03(\v2\x1d.game.service.v1.TransactionsR\ftransactions\"\xa2\x03\n" +
 	"\x06Action\x12\x16\n" +
 	"\x06action\x18\x01 \x01(\tR\x06action\x12\x15\n" +
-	"\x06bet_id\x18\x02 \x01(\tR\x05betId\x126\n" +
-	"\x17provider_transaction_id\x18\x03 \x01(\tR\x15providerTransactionId\x12G\n" +
-	" provider_external_transaction_id\x18\x04 \x01(\tR\x1dproviderExternalTransactionId\x12%\n" +
+	"\x06bet_id\x18\x02 \x01(\tR\x05betId\x12\x15\n" +
+	"\x06txn_id\x18\x03 \x01(\tR\x05txnId\x12\x1c\n" +
+	"\n" +
+	"ext_txn_id\x18\x04 \x01(\tR\bextTxnId\x12%\n" +
 	"\x0eupdate_balance\x18\x05 \x01(\bR\rupdateBalance\x12\x19\n" +
 	"\btake_all\x18\x06 \x01(\bR\atakeAll\x12\x1b\n" +
 	"\tis_refund\x18\a \x01(\bR\bisRefund\x12\x16\n" +
@@ -2250,10 +2251,10 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\bbet_time\x18\v \x01(\x03R\abetTime\x12\x1f\n" +
 	"\vsettle_time\x18\f \x01(\x03R\n" +
 	"settleTime\x12-\n" +
-	"\x12provider_timestamp\x18\r \x01(\x03R\x11providerTimestamp\"\xb3\x01\n" +
-	"\fTransactions\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x126\n" +
-	"\x17operator_transaction_id\x18\x02 \x01(\tR\x15operatorTransactionId\x12!\n" +
+	"\x12provider_timestamp\x18\r \x01(\x03R\x11providerTimestamp\"\x93\x01\n" +
+	"\fTransactions\x12\x15\n" +
+	"\x06txn_id\x18\x01 \x01(\tR\x05txnId\x12&\n" +
+	"\x0foperator_txn_id\x18\x02 \x01(\tR\roperatorTxnId\x12!\n" +
 	"\fprocessed_at\x18\x03 \x01(\tR\vprocessedAt\x12!\n" +
 	"\fbonus_amount\x18\x04 \x01(\x03R\vbonusAmount\"\xee\x01\n" +
 	"\x0fRollbackRequest\x12\x17\n" +
@@ -2263,22 +2264,23 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\bround_id\x18\x04 \x01(\tR\aroundId\x12\x1a\n" +
 	"\bfinished\x18\x05 \x01(\bR\bfinished\x12\x1b\n" +
 	"\tsm_result\x18\x06 \x01(\tR\bsmResult\x129\n" +
-	"\aactions\x18\a \x03(\v2\x1f.game.service.v1.RollbackActionR\aactions\"\x92\x03\n" +
+	"\aactions\x18\a \x03(\v2\x1f.game.service.v1.RollbackActionR\aactions\"\xfa\x01\n" +
 	"\x0eRollbackAction\x12\x16\n" +
 	"\x06action\x18\x01 \x01(\tR\x06action\x12\x15\n" +
-	"\x06bet_id\x18\x02 \x01(\tR\x05betId\x126\n" +
-	"\x17provider_transaction_id\x18\x03 \x01(\tR\x15providerTransactionId\x12G\n" +
-	" provider_external_transaction_id\x18\x04 \x01(\tR\x1dproviderExternalTransactionId\x12G\n" +
-	" original_provider_transaction_id\x18\x05 \x01(\tR\x1doriginalProviderTransactionId\x12X\n" +
-	")original_provider_external_transaction_id\x18\x06 \x01(\tR%originalProviderExternalTransactionId\x12-\n" +
+	"\x06bet_id\x18\x02 \x01(\tR\x05betId\x12\x15\n" +
+	"\x06txn_id\x18\x03 \x01(\tR\x05txnId\x12\x1c\n" +
+	"\n" +
+	"ext_txn_id\x18\x04 \x01(\tR\bextTxnId\x12&\n" +
+	"\x0foriginal_txn_id\x18\x05 \x01(\tR\roriginalTxnId\x12-\n" +
+	"\x13original_ext_txn_id\x18\x06 \x01(\tR\x10originalExtTxnId\x12-\n" +
 	"\x12provider_timestamp\x18\a \x01(\x03R\x11providerTimestamp\"\x92\x01\n" +
 	"\x10RollbackResponse\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\x03R\abalance\x12\x19\n" +
 	"\bround_id\x18\x02 \x01(\tR\aroundId\x12I\n" +
-	"\ftransactions\x18\x03 \x03(\v2%.game.service.v1.RollbackTransactionsR\ftransactions\"\x98\x01\n" +
-	"\x14RollbackTransactions\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x126\n" +
-	"\x17operator_transaction_id\x18\x02 \x01(\tR\x15operatorTransactionId\x12!\n" +
+	"\ftransactions\x18\x03 \x03(\v2%.game.service.v1.RollbackTransactionsR\ftransactions\"x\n" +
+	"\x14RollbackTransactions\x12\x15\n" +
+	"\x06txn_id\x18\x01 \x01(\tR\x05txnId\x12&\n" +
+	"\x0foperator_txn_id\x18\x02 \x01(\tR\roperatorTxnId\x12!\n" +
 	"\fprocessed_at\x18\x03 \x01(\tR\vprocessedAt2\xc8\b\n" +
 	"\x04Game\x12c\n" +
 	"\x0eCreateOperator\x12&.game.service.v1.CreateOperatorRequest\x1a'.game.service.v1.CreateOperatorResponse\"\x00\x12c\n" +

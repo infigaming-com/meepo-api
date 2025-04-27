@@ -240,8 +240,8 @@ message PlayResponse {
 message Action {
 	string action = 1;
 	string bet_id = 2;
-	string provider_transaction_id = 3;
-	string provider_external_transaction_id = 4;
+	string txn_id = 3;
+	string ext_txn_id = 4;
 	bool update_balance = 5;
 	bool take_all = 6;
 	bool is_refund = 7;
@@ -254,8 +254,8 @@ message Action {
 }
 
 message Transactions {
-	string transaction_id = 1;
-	string operator_transaction_id = 2;
+	string txn_id = 1;
+	string operator_txn_id = 2;
 	string processed_at = 3;
 	int64 bonus_amount = 4;
 }
@@ -273,10 +273,10 @@ message RollbackRequest {
 message RollbackAction {
 	string action = 1;
 	string bet_id = 2;
-	string provider_transaction_id = 3;
-	string provider_external_transaction_id = 4;
-	string original_provider_transaction_id = 5;
-	string original_provider_external_transaction_id = 6;
+	string txn_id = 3;
+	string ext_txn_id = 4;
+	string original_txn_id = 5;
+	string original_ext_txn_id = 6;
 	int64 provider_timestamp = 7;
 }
 
@@ -287,7 +287,7 @@ message RollbackResponse {
 }
 
 message RollbackTransactions {
-	string transaction_id = 1;
-	string operator_transaction_id = 2;
+	string txn_id = 1;
+	string operator_txn_id = 2;
 	string processed_at = 3;
 }

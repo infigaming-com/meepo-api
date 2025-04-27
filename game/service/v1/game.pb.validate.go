@@ -2740,9 +2740,9 @@ func (m *Action) validate(all bool) error {
 
 	// no validation rules for BetId
 
-	// no validation rules for ProviderTransactionId
+	// no validation rules for TxnId
 
-	// no validation rules for ProviderExternalTransactionId
+	// no validation rules for ExtTxnId
 
 	// no validation rules for UpdateBalance
 
@@ -2861,9 +2861,9 @@ func (m *Transactions) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TransactionId
+	// no validation rules for TxnId
 
-	// no validation rules for OperatorTransactionId
+	// no validation rules for OperatorTxnId
 
 	// no validation rules for ProcessedAt
 
@@ -3118,13 +3118,13 @@ func (m *RollbackAction) validate(all bool) error {
 
 	// no validation rules for BetId
 
-	// no validation rules for ProviderTransactionId
+	// no validation rules for TxnId
 
-	// no validation rules for ProviderExternalTransactionId
+	// no validation rules for ExtTxnId
 
-	// no validation rules for OriginalProviderTransactionId
+	// no validation rules for OriginalTxnId
 
-	// no validation rules for OriginalProviderExternalTransactionId
+	// no validation rules for OriginalExtTxnId
 
 	// no validation rules for ProviderTimestamp
 
@@ -3366,9 +3366,9 @@ func (m *RollbackTransactions) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TransactionId
+	// no validation rules for TxnId
 
-	// no validation rules for OperatorTransactionId
+	// no validation rules for OperatorTxnId
 
 	// no validation rules for ProcessedAt
 
