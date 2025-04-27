@@ -45,6 +45,27 @@ service Game {
 			body: "*"
 		};
 	};
+
+	rpc Balance(BalanceRequest) returns (BalanceResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/balance"
+			body: "*"
+		};
+	};
+
+	rpc Play(PlayRequest) returns (PlayResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/play"
+			body: "*"
+		};
+	};
+
+	rpc Rollback(RollbackRequest) returns (RollbackResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/rollback"
+			body: "*"
+		};
+	};
 }
 
 message CreateOperatorRequest {
@@ -184,4 +205,89 @@ message Provider {
 	string id = 1;
 	string name = 2;
 	int32 game_count = 3;
+}
+
+message BalanceRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string game_id = 3;
+	string round_id = 4;
+	bool finished = 5;
+}
+
+message BalanceResponse {
+	int64 balance = 1;
+	int64 bonus = 2;
+	string round_id = 3;
+}
+
+message PlayRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string game_id = 3;
+	string round_id = 4;
+	bool finished = 5;
+	string sm_result = 6;
+	repeated Action actions = 7;
+}
+
+message PlayResponse {
+	int64 balance = 1;
+	string round_id = 2;
+	repeated Transactions transactions = 3;
+}
+
+message Action {
+	string action = 1;
+	string bet_id = 2;
+	string txn_id = 3;
+	string ext_txn_id = 4;
+	bool update_balance = 5;
+	bool take_all = 6;
+	bool is_refund = 7;
+	int64 amount = 8;
+	float jackpot_contribution = 9;
+	int64 jackpot_win = 10;
+	int64 bet_time = 11;
+	int64 settle_time = 12;
+	int64 provider_timestamp = 13;
+}
+
+message Transactions {
+	string txn_id = 1;
+	string operator_txn_id = 2;
+	string processed_at = 3;
+	int64 bonus_amount = 4;
+}
+
+message RollbackRequest {
+	string user_id = 1;
+	string currency = 2;
+	string game_id = 3;
+	string round_id = 4;
+	bool finished = 5;
+	string sm_result = 6;
+	repeated RollbackAction actions = 7;
+}
+
+message RollbackAction {
+	string action = 1;
+	string bet_id = 2;
+	string txn_id = 3;
+	string ext_txn_id = 4;
+	string original_txn_id = 5;
+	string original_ext_txn_id = 6;
+	int64 provider_timestamp = 7;
+}
+
+message RollbackResponse {
+	int64 balance = 1;
+	string round_id = 2;
+	repeated RollbackTransactions transactions = 3;
+}
+
+message RollbackTransactions {
+	string txn_id = 1;
+	string operator_txn_id = 2;
+	string processed_at = 3;
 }
