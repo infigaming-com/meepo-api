@@ -186,6 +186,60 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorCurrencyResponse'
+    /v1/operator/origins/add:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_AddOriginOperatorId
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.AddOriginOperatorIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.AddOriginOperatorIdResponse'
+    /v1/operator/origins/delete:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_DeleteOriginOperatorId
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.DeleteOriginOperatorIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.DeleteOriginOperatorIdResponse'
+    /v1/operator/origins/get:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_GetOperatorIdByOrigin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.GetOperatorIdByOriginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.GetOperatorIdByOriginResponse'
     /v1/operator/update:
         post:
             tags:
@@ -574,6 +628,26 @@ components:
                 operatorId:
                     type: string
                     description: operator id allocated by operator service
+        api.operator.service.v1.AddOriginOperatorIdRequest:
+            type: object
+            properties:
+                origin:
+                    type: string
+                operatorId:
+                    type: string
+        api.operator.service.v1.AddOriginOperatorIdResponse:
+            type: object
+            properties: {}
+        api.operator.service.v1.DeleteOriginOperatorIdRequest:
+            type: object
+            properties:
+                origin:
+                    type: string
+                operatorId:
+                    type: string
+        api.operator.service.v1.DeleteOriginOperatorIdResponse:
+            type: object
+            properties: {}
         api.operator.service.v1.GetOperatorCurrenciesRequest:
             type: object
             properties:
@@ -602,6 +676,16 @@ components:
                     type: boolean
                 hidden:
                     type: boolean
+        api.operator.service.v1.GetOperatorIdByOriginRequest:
+            type: object
+            properties:
+                origin:
+                    type: string
+        api.operator.service.v1.GetOperatorIdByOriginResponse:
+            type: object
+            properties:
+                operatorId:
+                    type: string
         api.operator.service.v1.UpdateOperatorCurrencyRequest:
             type: object
             properties:
