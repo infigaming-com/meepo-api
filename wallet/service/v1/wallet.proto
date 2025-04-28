@@ -32,6 +32,10 @@ service Wallet {
 	rpc Credit (CreditRequest) returns (CreditResponse) {}
 
 	rpc Debit (DebitRequest) returns (DebitResponse) {}
+
+	rpc GameDebit (GameDebitRequest) returns (GameDebitResponse) {}
+
+	rpc GameCredit (GameCreditRequest) returns (GameCreditResponse) {}
 }
 
 message AddUserRequest {
@@ -67,14 +71,17 @@ message UpdateUserCurrencyResponse {}
 
 message GetUserBalancesRequest {
 	int64 user_id = 1;
+	optional string currency = 2;
+	optional string settlement_currency = 3;
 }
 
 message GetUserBalancesResponse {
 	message Balance {
 		string currency = 1;
-		int64 cash = 2;
-		int64 operator_bonus = 3;
-		int64 provider_bonus = 4;
+		optional string exchange_rate = 2;
+		int64 cash = 3;
+		int64 operator_bonus = 4;
+		int64 provider_bonus = 5;
 	}
 	repeated Balance balances = 1;
 }
@@ -97,8 +104,8 @@ enum TransactionType {
 
 message CreditRequest {
 	message Ratio {
-		int64 numerator = 1;
-		int64 denominator = 2;
+		int64 cash = 1;
+		int64 operator_bonus = 2;
 	}
 
 	int64 user_id = 1;
@@ -106,24 +113,10 @@ message CreditRequest {
 	TransactionType transaction_type = 3;
 	int64 transaction_id = 4;
 	int64 cash = 5;
-	int64 operator_bonus = 6;
-	int64 provider_bonus = 7;
-	int64 cash_turnover_threshold = 8;
-	int64 operator_bonus_turnover_threshold = 9;
-	int64 provider_bonus_turnover_threshold = 10;
-	int64 cash_withdraw_limit = 11;
-	int64 operator_bonus_withdraw_limit = 12;
-	int64 provider_bonus_withdraw_limit = 13;
-	Ratio cash_to_operator_bonus_ratio = 14;
-	int64 operator_bonus_expired_at = 15;
-	int64 provider_bonus_expired_at = 16;
 }
 
 message CreditResponse {
 	int64 transaction_id = 1;
-	int64 cash = 2;
-	int64 operator_bonus = 3;
-	int64 provider_bonus = 4;
 }
 
 message DebitRequest {
@@ -132,16 +125,44 @@ message DebitRequest {
 	TransactionType transaction_type = 3;
 	int64 transaction_id = 4;
 	int64 cash = 5;
-	int64 operator_bonus = 6;
-	int64 provider_bonus = 7;
-	int64 cash_turnover = 8;
-	int64 operator_bonus_turnover = 9;
-	int64 provider_bonus_turnover = 10;
 }
 
 message DebitResponse {
 	int64 transaction_id = 1;
-	int64 cash = 2;
-	int64 operator_bonus = 3;
-	int64 provider_bonus = 4;
+}
+
+message GameDebitRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	optional string settlement_currency = 3;
+	optional string exchange_rate = 4;
+	TransactionType transaction_type = 5;
+	int64 transaction_id = 6;
+	int64 cash = 7;
+}
+
+message GameDebitResponse {
+	int64 transaction_id = 1;
+	optional string exchange_rate = 2;
+	int64 cash = 3;
+	int64 operator_bonus = 4;
+	int64 provider_bonus = 5;
+}
+
+message GameCreditRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	optional string settlement_currency = 3;
+	optional string exchange_rate = 4;
+	TransactionType transaction_type = 5;
+	int64 transaction_id = 6;
+	int64 cash = 7;
+}
+
+message GameCreditResponse {
+	int64 transaction_id = 1;
+	optional string exchange_rate = 2;
+	int64 cash = 3;
+	int64 operator_bonus = 4;
+	int64 provider_bonus = 5;
 }
