@@ -63,6 +63,9 @@ service User {
 			body: "*"
 		};
 	}
+
+	// Get users by operatorIds.
+	rpc GetUsersByOperatorIds (GetUsersByOperatorIdsRequest) returns (GetUsersByOperatorIdsResponse) {}
 	
 	// Logout the current user.
 	// Invalidates the current session and refresh token.
@@ -203,6 +206,14 @@ message GetUserRequest {
 message GetUserResponse {
 	// Basic information about the requested user.
 	UserInfo user_info = 1;
+}
+
+message GetUsersByOperatorIdsRequest {
+	repeated int64 operator_ids = 1;
+}
+
+message GetUsersByOperatorIdsResponse {
+	repeated UserInfo user_infos = 1;
 }
 
 // LogoutRequest is an empty message for the logout operation.
