@@ -855,6 +855,12 @@ components:
                 userId:
                     type: string
                     description: Unique identifier for the user.
+                operatorId:
+                    type: string
+                    description: OperatorId.
+                enabled:
+                    type: boolean
+                    description: Whether the user is enabled.
             description: UserInfo contains basic user information.
         api.wallet.service.v1.GetUserBalancesRequest:
             type: object

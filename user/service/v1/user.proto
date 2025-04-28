@@ -84,6 +84,10 @@ service User {
 message UserInfo {
 	// Unique identifier for the user.
 	int64 user_id = 1;
+	// OperatorId.
+	int64 operator_id = 2;
+	// Whether the user is enabled.
+	bool enabled = 3;
 }
 
 // AuthType defines the type of authentication method.
