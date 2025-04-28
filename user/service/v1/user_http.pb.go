@@ -28,7 +28,7 @@ const OperationUserRegisterOrLoginWithOAuth = "/api.user.service.v1.User/Registe
 const OperationUserRegisterOrLoginWithTelegram = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
 
 type UserHTTPServer interface {
-	// GetUser Get user information by user ID.
+	// GetUser Get user information by userId.
 	// Returns basic user information for the specified user.
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	// Login Login an existing user with password-based authentication.

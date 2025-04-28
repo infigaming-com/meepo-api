@@ -24,6 +24,9 @@ const (
 	Operator_AddOrUpdateCurrency_FullMethodName    = "/api.operator.service.v1.Operator/AddOrUpdateCurrency"
 	Operator_UpdateOperatorCurrency_FullMethodName = "/api.operator.service.v1.Operator/UpdateOperatorCurrency"
 	Operator_GetOperatorCurrencies_FullMethodName  = "/api.operator.service.v1.Operator/GetOperatorCurrencies"
+	Operator_AddOriginOperatorId_FullMethodName    = "/api.operator.service.v1.Operator/AddOriginOperatorId"
+	Operator_GetOperatorIdByOrigin_FullMethodName  = "/api.operator.service.v1.Operator/GetOperatorIdByOrigin"
+	Operator_DeleteOriginOperatorId_FullMethodName = "/api.operator.service.v1.Operator/DeleteOriginOperatorId"
 )
 
 // OperatorClient is the client API for Operator service.
@@ -37,6 +40,9 @@ type OperatorClient interface {
 	AddOrUpdateCurrency(ctx context.Context, in *AddOrUpdateCurrencyRequest, opts ...grpc.CallOption) (*AddOrUpdateCurrencyResponse, error)
 	UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error)
 	GetOperatorCurrencies(ctx context.Context, in *GetOperatorCurrenciesRequest, opts ...grpc.CallOption) (*GetOperatorCurrenciesResponse, error)
+	AddOriginOperatorId(ctx context.Context, in *AddOriginOperatorIdRequest, opts ...grpc.CallOption) (*AddOriginOperatorIdResponse, error)
+	GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdByOriginResponse, error)
+	DeleteOriginOperatorId(ctx context.Context, in *DeleteOriginOperatorIdRequest, opts ...grpc.CallOption) (*DeleteOriginOperatorIdResponse, error)
 }
 
 type operatorClient struct {
@@ -97,6 +103,36 @@ func (c *operatorClient) GetOperatorCurrencies(ctx context.Context, in *GetOpera
 	return out, nil
 }
 
+func (c *operatorClient) AddOriginOperatorId(ctx context.Context, in *AddOriginOperatorIdRequest, opts ...grpc.CallOption) (*AddOriginOperatorIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddOriginOperatorIdResponse)
+	err := c.cc.Invoke(ctx, Operator_AddOriginOperatorId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operatorClient) GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdByOriginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorIdByOriginResponse)
+	err := c.cc.Invoke(ctx, Operator_GetOperatorIdByOrigin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operatorClient) DeleteOriginOperatorId(ctx context.Context, in *DeleteOriginOperatorIdRequest, opts ...grpc.CallOption) (*DeleteOriginOperatorIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteOriginOperatorIdResponse)
+	err := c.cc.Invoke(ctx, Operator_DeleteOriginOperatorId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OperatorServer is the server API for Operator service.
 // All implementations must embed UnimplementedOperatorServer
 // for forward compatibility.
@@ -108,6 +144,9 @@ type OperatorServer interface {
 	AddOrUpdateCurrency(context.Context, *AddOrUpdateCurrencyRequest) (*AddOrUpdateCurrencyResponse, error)
 	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
 	GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error)
+	AddOriginOperatorId(context.Context, *AddOriginOperatorIdRequest) (*AddOriginOperatorIdResponse, error)
+	GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error)
+	DeleteOriginOperatorId(context.Context, *DeleteOriginOperatorIdRequest) (*DeleteOriginOperatorIdResponse, error)
 	mustEmbedUnimplementedOperatorServer()
 }
 
@@ -132,6 +171,15 @@ func (UnimplementedOperatorServer) UpdateOperatorCurrency(context.Context, *Upda
 }
 func (UnimplementedOperatorServer) GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorCurrencies not implemented")
+}
+func (UnimplementedOperatorServer) AddOriginOperatorId(context.Context, *AddOriginOperatorIdRequest) (*AddOriginOperatorIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOriginOperatorId not implemented")
+}
+func (UnimplementedOperatorServer) GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorIdByOrigin not implemented")
+}
+func (UnimplementedOperatorServer) DeleteOriginOperatorId(context.Context, *DeleteOriginOperatorIdRequest) (*DeleteOriginOperatorIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOriginOperatorId not implemented")
 }
 func (UnimplementedOperatorServer) mustEmbedUnimplementedOperatorServer() {}
 func (UnimplementedOperatorServer) testEmbeddedByValue()                  {}
@@ -244,6 +292,60 @@ func _Operator_GetOperatorCurrencies_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_AddOriginOperatorId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOriginOperatorIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).AddOriginOperatorId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_AddOriginOperatorId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).AddOriginOperatorId(ctx, req.(*AddOriginOperatorIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Operator_GetOperatorIdByOrigin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorIdByOriginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).GetOperatorIdByOrigin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_GetOperatorIdByOrigin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).GetOperatorIdByOrigin(ctx, req.(*GetOperatorIdByOriginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Operator_DeleteOriginOperatorId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOriginOperatorIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).DeleteOriginOperatorId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_DeleteOriginOperatorId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).DeleteOriginOperatorId(ctx, req.(*DeleteOriginOperatorIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Operator_ServiceDesc is the grpc.ServiceDesc for Operator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -270,6 +372,18 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorCurrencies",
 			Handler:    _Operator_GetOperatorCurrencies_Handler,
+		},
+		{
+			MethodName: "AddOriginOperatorId",
+			Handler:    _Operator_AddOriginOperatorId_Handler,
+		},
+		{
+			MethodName: "GetOperatorIdByOrigin",
+			Handler:    _Operator_GetOperatorIdByOrigin_Handler,
+		},
+		{
+			MethodName: "DeleteOriginOperatorId",
+			Handler:    _Operator_DeleteOriginOperatorId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

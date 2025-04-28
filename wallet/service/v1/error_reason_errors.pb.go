@@ -227,14 +227,74 @@ func ErrorAddCreditFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_ADD_CREDIT_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsInvalidCreditType(err error) bool {
+func IsInvalidTransactionType(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_INVALID_CREDIT_TYPE.String() && e.Code == 400
+	return e.Reason == ErrorReason_INVALID_TRANSACTION_TYPE.String() && e.Code == 400
 }
 
-func ErrorInvalidCreditType(format string, args ...interface{}) *errors.Error {
-	return errors.New(400, ErrorReason_INVALID_CREDIT_TYPE.String(), fmt.Sprintf(format, args...))
+func ErrorInvalidTransactionType(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_TRANSACTION_TYPE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGenerateBalanceTransactionIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_BALANCE_TRANSACTION_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGenerateBalanceTransactionIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_BALANCE_TRANSACTION_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGenerateCreditTransactionIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_CREDIT_TRANSACTION_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGenerateCreditTransactionIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_CREDIT_TRANSACTION_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCreditTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_CREDIT_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCreditTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_CREDIT_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddBalanceTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_BALANCE_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddBalanceTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_BALANCE_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddCreditTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_CREDIT_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddCreditTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_CREDIT_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
 }

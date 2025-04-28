@@ -55,7 +55,7 @@ service User {
 		};
 	}
 	  
-	// Get user information by user ID.
+	// Get user information by userId.
 	// Returns basic user information for the specified user.
 	rpc GetUser (GetUserRequest) returns (GetUserResponse) {
 		option (google.api.http) = {
@@ -63,6 +63,9 @@ service User {
 			body: "*"
 		};
 	}
+
+	// Get users by operatorIds.
+	rpc GetUsersByOperatorIds (GetUsersByOperatorIdsRequest) returns (GetUsersByOperatorIdsResponse) {}
 	
 	// Logout the current user.
 	// Invalidates the current session and refresh token.
@@ -81,6 +84,10 @@ service User {
 message UserInfo {
 	// Unique identifier for the user.
 	int64 user_id = 1;
+	// OperatorId.
+	int64 operator_id = 2;
+	// Whether the user is enabled.
+	bool enabled = 3;
 }
 
 // AuthType defines the type of authentication method.
@@ -193,9 +200,9 @@ message RefreshTokenResponse {
 	int64 expires_in = 3;
 }
 
-// GetUserRequest contains the ID of the user to retrieve.
+// GetUserRequest contains the userId of the user to retrieve.
 message GetUserRequest {
-	// The ID of the user to retrieve.
+	// The userId of the user to retrieve.
 	int64 user_id = 1;
 }
 
@@ -203,6 +210,14 @@ message GetUserRequest {
 message GetUserResponse {
 	// Basic information about the requested user.
 	UserInfo user_info = 1;
+}
+
+message GetUsersByOperatorIdsRequest {
+	repeated int64 operator_ids = 1;
+}
+
+message GetUsersByOperatorIdsResponse {
+	repeated UserInfo user_infos = 1;
 }
 
 // LogoutRequest is an empty message for the logout operation.

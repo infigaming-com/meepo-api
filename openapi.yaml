@@ -186,6 +186,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorCurrencyResponse'
+    /v1/operator/origins/add:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_AddOriginOperatorId
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.AddOriginOperatorIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.AddOriginOperatorIdResponse'
+    /v1/operator/origins/delete:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_DeleteOriginOperatorId
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.DeleteOriginOperatorIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.DeleteOriginOperatorIdResponse'
     /v1/operator/update:
         post:
             tags:
@@ -505,7 +541,7 @@ paths:
             tags:
                 - User
             description: |-
-                Get user information by user ID.
+                Get user information by userId.
                  Returns basic user information for the specified user.
             operationId: User_GetUser
             requestBody:
@@ -574,6 +610,26 @@ components:
                 operatorId:
                     type: string
                     description: operator id allocated by operator service
+        api.operator.service.v1.AddOriginOperatorIdRequest:
+            type: object
+            properties:
+                origin:
+                    type: string
+                operatorId:
+                    type: string
+        api.operator.service.v1.AddOriginOperatorIdResponse:
+            type: object
+            properties: {}
+        api.operator.service.v1.DeleteOriginOperatorIdRequest:
+            type: object
+            properties:
+                origin:
+                    type: string
+                operatorId:
+                    type: string
+        api.operator.service.v1.DeleteOriginOperatorIdResponse:
+            type: object
+            properties: {}
         api.operator.service.v1.GetOperatorCurrenciesRequest:
             type: object
             properties:
@@ -648,8 +704,8 @@ components:
             properties:
                 userId:
                     type: string
-                    description: The ID of the user to retrieve.
-            description: GetUserRequest contains the ID of the user to retrieve.
+                    description: The userId of the user to retrieve.
+            description: GetUserRequest contains the userId of the user to retrieve.
         api.user.service.v1.GetUserResponse:
             type: object
             properties:
@@ -771,11 +827,21 @@ components:
                 userId:
                     type: string
                     description: Unique identifier for the user.
+                operatorId:
+                    type: string
+                    description: OperatorId.
+                enabled:
+                    type: boolean
+                    description: Whether the user is enabled.
             description: UserInfo contains basic user information.
         api.wallet.service.v1.GetUserBalancesRequest:
             type: object
             properties:
                 userId:
+                    type: string
+                currency:
+                    type: string
+                settlementCurrency:
                     type: string
         api.wallet.service.v1.GetUserBalancesResponse:
             type: object
@@ -788,6 +854,8 @@ components:
             type: object
             properties:
                 currency:
+                    type: string
+                exchangeRate:
                     type: string
                 cash:
                     type: string

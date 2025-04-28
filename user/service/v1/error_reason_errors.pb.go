@@ -322,3 +322,15 @@ func IsAddUserToWalletFailed(err error) bool {
 func ErrorAddUserToWalletFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_ADD_USER_TO_WALLET_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetUsersByOperatorIdsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USERS_BY_OPERATOR_IDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUsersByOperatorIdsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USERS_BY_OPERATOR_IDS_FAILED.String(), fmt.Sprintf(format, args...))
+}

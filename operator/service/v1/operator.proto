@@ -40,6 +40,23 @@ service Operator {
 			body: "*"
 		};
 	}
+
+	rpc AddOriginOperatorId(AddOriginOperatorIdRequest) returns (AddOriginOperatorIdResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/origins/add"
+			body: "*"
+		};
+	}
+
+	rpc GetOperatorIdByOrigin(GetOperatorIdByOriginRequest) returns (GetOperatorIdByOriginResponse) {
+	}
+	
+	rpc DeleteOriginOperatorId(DeleteOriginOperatorIdRequest) returns (DeleteOriginOperatorIdResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/origins/delete"
+			body: "*"
+		};
+	}
 }
 
 message AddOperatorRequest {
@@ -94,3 +111,25 @@ message GetOperatorCurrenciesResponse {
 	}
 	repeated Currency currencies = 1;
 }
+
+message AddOriginOperatorIdRequest {
+	string origin = 1;
+	int64 operator_id = 2;
+}
+
+message AddOriginOperatorIdResponse {}
+
+message GetOperatorIdByOriginRequest {
+	string origin = 1;
+}
+
+message GetOperatorIdByOriginResponse {
+	int64 operator_id = 1;
+}
+
+message DeleteOriginOperatorIdRequest {
+	string origin = 1;
+	int64 operator_id = 2;
+}
+
+message DeleteOriginOperatorIdResponse {}

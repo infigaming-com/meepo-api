@@ -43,7 +43,12 @@ const (
 	ErrorReason_GENERATE_CREDIT_ID_FAILED                     ErrorReason = 30015
 	ErrorReason_LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30016
 	ErrorReason_ADD_CREDIT_FAILED                             ErrorReason = 30017
-	ErrorReason_INVALID_CREDIT_TYPE                           ErrorReason = 30018
+	ErrorReason_INVALID_TRANSACTION_TYPE                      ErrorReason = 30018
+	ErrorReason_GENERATE_BALANCE_TRANSACTION_ID_FAILED        ErrorReason = 30019
+	ErrorReason_GENERATE_CREDIT_TRANSACTION_ID_FAILED         ErrorReason = 30020
+	ErrorReason_GET_CREDIT_TRANSACTION_FAILED                 ErrorReason = 30021
+	ErrorReason_ADD_BALANCE_TRANSACTION_FAILED                ErrorReason = 30022
+	ErrorReason_ADD_CREDIT_TRANSACTION_FAILED                 ErrorReason = 30023
 )
 
 // Enum value maps for ErrorReason.
@@ -67,7 +72,12 @@ var (
 		30015: "GENERATE_CREDIT_ID_FAILED",
 		30016: "LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED",
 		30017: "ADD_CREDIT_FAILED",
-		30018: "INVALID_CREDIT_TYPE",
+		30018: "INVALID_TRANSACTION_TYPE",
+		30019: "GENERATE_BALANCE_TRANSACTION_ID_FAILED",
+		30020: "GENERATE_CREDIT_TRANSACTION_ID_FAILED",
+		30021: "GET_CREDIT_TRANSACTION_FAILED",
+		30022: "ADD_BALANCE_TRANSACTION_FAILED",
+		30023: "ADD_CREDIT_TRANSACTION_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                   0,
@@ -88,7 +98,12 @@ var (
 		"GENERATE_CREDIT_ID_FAILED":                     30015,
 		"LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED":  30016,
 		"ADD_CREDIT_FAILED":                             30017,
-		"INVALID_CREDIT_TYPE":                           30018,
+		"INVALID_TRANSACTION_TYPE":                      30018,
+		"GENERATE_BALANCE_TRANSACTION_ID_FAILED":        30019,
+		"GENERATE_CREDIT_TRANSACTION_ID_FAILED":         30020,
+		"GET_CREDIT_TRANSACTION_FAILED":                 30021,
+		"ADD_BALANCE_TRANSACTION_FAILED":                30022,
+		"ADD_CREDIT_TRANSACTION_FAILED":                 30023,
 	}
 )
 
@@ -123,7 +138,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xd8\x05\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xc6\a\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x1a\x04\xa8E\x94\x03\x12\x19\n" +
@@ -142,8 +157,13 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x10BALANCE_DISABLED\x10\xbe\xea\x01\x1a\x04\xa8E\x91\x03\x12%\n" +
 	"\x19GENERATE_CREDIT_ID_FAILED\x10\xbf\xea\x01\x1a\x04\xa8E\xf4\x03\x128\n" +
 	",LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xc0\xea\x01\x1a\x04\xa8E\xf4\x03\x12\x1d\n" +
-	"\x11ADD_CREDIT_FAILED\x10\xc1\xea\x01\x1a\x04\xa8E\xf4\x03\x12\x1f\n" +
-	"\x13INVALID_CREDIT_TYPE\x10\xc2\xea\x01\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x11ADD_CREDIT_FAILED\x10\xc1\xea\x01\x1a\x04\xa8E\xf4\x03\x12$\n" +
+	"\x18INVALID_TRANSACTION_TYPE\x10\xc2\xea\x01\x1a\x04\xa8E\x90\x03\x122\n" +
+	"&GENERATE_BALANCE_TRANSACTION_ID_FAILED\x10\xc3\xea\x01\x1a\x04\xa8E\xf4\x03\x121\n" +
+	"%GENERATE_CREDIT_TRANSACTION_ID_FAILED\x10\xc4\xea\x01\x1a\x04\xa8E\xf4\x03\x12)\n" +
+	"\x1dGET_CREDIT_TRANSACTION_FAILED\x10\xc5\xea\x01\x1a\x04\xa8E\xf4\x03\x12*\n" +
+	"\x1eADD_BALANCE_TRANSACTION_FAILED\x10\xc6\xea\x01\x1a\x04\xa8E\xf4\x03\x12)\n" +
+	"\x1dADD_CREDIT_TRANSACTION_FAILED\x10\xc7\xea\x01\x1a\x04\xa8E\xf4\x03\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
