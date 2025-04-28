@@ -870,10 +870,10 @@ components:
                 enabled:
                     type: boolean
                     description: Whether the user is enabled.
-                firstName:
+                firstname:
                     type: string
                     description: First name.
-                lastName:
+                lastname:
                     type: string
                     description: Last name.
                 nickname:

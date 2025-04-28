@@ -95,9 +95,9 @@ message UserInfo {
 	// Whether the user is enabled.
 	bool enabled = 6;
 	// First name.
-	string first_name = 7;
+	string firstname = 7;
 	// Last name.
-	string last_name = 8;
+	string lastname = 8;
 	// Nickname
 	string nickname = 9;
 	// Avatar

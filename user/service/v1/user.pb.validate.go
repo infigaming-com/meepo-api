@@ -69,9 +69,9 @@ func (m *UserInfo) validate(all bool) error {
 
 	// no validation rules for Enabled
 
-	// no validation rules for FirstName
+	// no validation rules for Firstname
 
-	// no validation rules for LastName
+	// no validation rules for Lastname
 
 	// no validation rules for Nickname
 

@@ -209,9 +209,9 @@ type UserInfo struct {
 	// Whether the user is enabled.
 	Enabled bool `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// First name.
-	FirstName string `protobuf:"bytes,7,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	Firstname string `protobuf:"bytes,7,opt,name=firstname,proto3" json:"firstname,omitempty"`
 	// Last name.
-	LastName string `protobuf:"bytes,8,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	Lastname string `protobuf:"bytes,8,opt,name=lastname,proto3" json:"lastname,omitempty"`
 	// Nickname
 	Nickname string `protobuf:"bytes,9,opt,name=nickname,proto3" json:"nickname,omitempty"`
 	// Avatar
@@ -292,16 +292,16 @@ func (x *UserInfo) GetEnabled() bool {
 	return false
 }
 
-func (x *UserInfo) GetFirstName() string {
+func (x *UserInfo) GetFirstname() string {
 	if x != nil {
-		return x.FirstName
+		return x.Firstname
 	}
 	return ""
 }
 
-func (x *UserInfo) GetLastName() string {
+func (x *UserInfo) GetLastname() string {
 	if x != nil {
-		return x.LastName
+		return x.Lastname
 	}
 	return ""
 }
@@ -1132,7 +1132,7 @@ var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x98\x02\n" +
+	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x96\x02\n" +
 	"\bUserInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -1140,10 +1140,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\busername\x18\x03 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x04 \x01(\tR\x05email\x12\x16\n" +
 	"\x06mobile\x18\x05 \x01(\tR\x06mobile\x12\x18\n" +
-	"\aenabled\x18\x06 \x01(\bR\aenabled\x12\x1d\n" +
-	"\n" +
-	"first_name\x18\a \x01(\tR\tfirstName\x12\x1b\n" +
-	"\tlast_name\x18\b \x01(\tR\blastName\x12\x1a\n" +
+	"\aenabled\x18\x06 \x01(\bR\aenabled\x12\x1c\n" +
+	"\tfirstname\x18\a \x01(\tR\tfirstname\x12\x1a\n" +
+	"\blastname\x18\b \x01(\tR\blastname\x12\x1a\n" +
 	"\bnickname\x18\t \x01(\tR\bnickname\x12\x16\n" +
 	"\x06avatar\x18\n" +
 	" \x01(\tR\x06avatar\"\x9a\x01\n" +
