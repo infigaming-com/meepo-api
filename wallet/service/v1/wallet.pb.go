@@ -972,16 +972,17 @@ func (x *GameDebitResponse) GetProviderBonus() int64 {
 }
 
 type GameCreditRequest struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	UserId             int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency           string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	SettlementCurrency *string                `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3,oneof" json:"settlement_currency,omitempty"`
-	ExchangeRate       *string                `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3,oneof" json:"exchange_rate,omitempty"`
-	TransactionType    TransactionType        `protobuf:"varint,5,opt,name=transaction_type,json=transactionType,proto3,enum=api.wallet.service.v1.TransactionType" json:"transaction_type,omitempty"`
-	TransactionId      int64                  `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash               int64                  `protobuf:"varint,7,opt,name=cash,proto3" json:"cash,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	UserId                int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency              string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	SettlementCurrency    *string                `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3,oneof" json:"settlement_currency,omitempty"`
+	ExchangeRate          *string                `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3,oneof" json:"exchange_rate,omitempty"`
+	TransactionType       TransactionType        `protobuf:"varint,5,opt,name=transaction_type,json=transactionType,proto3,enum=api.wallet.service.v1.TransactionType" json:"transaction_type,omitempty"`
+	TransactionId         int64                  `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OriginalTransactionId int64                  `protobuf:"varint,7,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
+	Cash                  int64                  `protobuf:"varint,8,opt,name=cash,proto3" json:"cash,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GameCreditRequest) Reset() {
@@ -1052,6 +1053,13 @@ func (x *GameCreditRequest) GetTransactionType() TransactionType {
 func (x *GameCreditRequest) GetTransactionId() int64 {
 	if x != nil {
 		return x.TransactionId
+	}
+	return 0
+}
+
+func (x *GameCreditRequest) GetOriginalTransactionId() int64 {
+	if x != nil {
+		return x.OriginalTransactionId
 	}
 	return 0
 }
@@ -1342,15 +1350,16 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x04 \x01(\x03R\roperatorBonus\x12%\n" +
 	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonusB\x10\n" +
-	"\x0e_exchange_rate\"\xe0\x02\n" +
+	"\x0e_exchange_rate\"\x98\x03\n" +
 	"\x11GameCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x124\n" +
 	"\x13settlement_currency\x18\x03 \x01(\tH\x00R\x12settlementCurrency\x88\x01\x01\x12(\n" +
 	"\rexchange_rate\x18\x04 \x01(\tH\x01R\fexchangeRate\x88\x01\x01\x12Q\n" +
 	"\x10transaction_type\x18\x05 \x01(\x0e2&.api.wallet.service.v1.TransactionTypeR\x0ftransactionType\x12%\n" +
-	"\x0etransaction_id\x18\x06 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\a \x01(\x03R\x04cashB\x16\n" +
+	"\x0etransaction_id\x18\x06 \x01(\x03R\rtransactionId\x126\n" +
+	"\x17original_transaction_id\x18\a \x01(\x03R\x15originalTransactionId\x12\x12\n" +
+	"\x04cash\x18\b \x01(\x03R\x04cashB\x16\n" +
 	"\x14_settlement_currencyB\x10\n" +
 	"\x0e_exchange_rate\"\xd9\x01\n" +
 	"\x12GameCreditResponse\x12%\n" +
