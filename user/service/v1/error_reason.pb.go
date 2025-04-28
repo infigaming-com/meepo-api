@@ -27,7 +27,7 @@ type ErrorReason int32
 const (
 	ErrorReason_UNSPECIFIED                         ErrorReason = 0
 	ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT      ErrorReason = 10000
-	ErrorReason_OPERATOR_ID_NOT_FOUND_IN_CONTEXT    ErrorReason = 10001
+	ErrorReason_REQUEST_INFO_NOT_FOUND_IN_CONTEXT   ErrorReason = 10001
 	ErrorReason_USER_NOT_FOUND                      ErrorReason = 10002
 	ErrorReason_USER_AUTH_NOT_FOUND                 ErrorReason = 10003
 	ErrorReason_USER_ALREADY_EXISTS                 ErrorReason = 10004
@@ -52,6 +52,7 @@ const (
 	ErrorReason_USERNAME_OR_PASSWORD_INVALID        ErrorReason = 10023
 	ErrorReason_ADD_USER_TO_WALLET_FAILED           ErrorReason = 10024
 	ErrorReason_GET_USERS_BY_OPERATOR_IDS_FAILED    ErrorReason = 10025
+	ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED    ErrorReason = 10026
 )
 
 // Enum value maps for ErrorReason.
@@ -59,7 +60,7 @@ var (
 	ErrorReason_name = map[int32]string{
 		0:     "UNSPECIFIED",
 		10000: "USER_INFO_NOT_FOUND_IN_CONTEXT",
-		10001: "OPERATOR_ID_NOT_FOUND_IN_CONTEXT",
+		10001: "REQUEST_INFO_NOT_FOUND_IN_CONTEXT",
 		10002: "USER_NOT_FOUND",
 		10003: "USER_AUTH_NOT_FOUND",
 		10004: "USER_ALREADY_EXISTS",
@@ -84,11 +85,12 @@ var (
 		10023: "USERNAME_OR_PASSWORD_INVALID",
 		10024: "ADD_USER_TO_WALLET_FAILED",
 		10025: "GET_USERS_BY_OPERATOR_IDS_FAILED",
+		10026: "GET_OPERATOR_ID_BY_ORIGIN_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                         0,
 		"USER_INFO_NOT_FOUND_IN_CONTEXT":      10000,
-		"OPERATOR_ID_NOT_FOUND_IN_CONTEXT":    10001,
+		"REQUEST_INFO_NOT_FOUND_IN_CONTEXT":   10001,
 		"USER_NOT_FOUND":                      10002,
 		"USER_AUTH_NOT_FOUND":                 10003,
 		"USER_ALREADY_EXISTS":                 10004,
@@ -113,6 +115,7 @@ var (
 		"USERNAME_OR_PASSWORD_INVALID":        10023,
 		"ADD_USER_TO_WALLET_FAILED":           10024,
 		"GET_USERS_BY_OPERATOR_IDS_FAILED":    10025,
+		"GET_OPERATOR_ID_BY_ORIGIN_FAILED":    10026,
 	}
 )
 
@@ -147,11 +150,11 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xeb\x06\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x93\a\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12)\n" +
-	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x1a\x04\xa8E\x91\x03\x12+\n" +
-	" OPERATOR_ID_NOT_FOUND_IN_CONTEXT\x10\x91N\x1a\x04\xa8E\x91\x03\x12\x19\n" +
+	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x1a\x04\xa8E\x91\x03\x12,\n" +
+	"!REQUEST_INFO_NOT_FOUND_IN_CONTEXT\x10\x91N\x1a\x04\xa8E\x91\x03\x12\x19\n" +
 	"\x0eUSER_NOT_FOUND\x10\x92N\x1a\x04\xa8E\x94\x03\x12\x1e\n" +
 	"\x13USER_AUTH_NOT_FOUND\x10\x93N\x1a\x04\xa8E\x94\x03\x12\x1e\n" +
 	"\x13USER_ALREADY_EXISTS\x10\x94N\x1a\x04\xa8E\x99\x03\x12\x18\n" +
@@ -175,7 +178,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1cOAUTH_PROVIDER_NOT_SUPPORTED\x10\xa6N\x12'\n" +
 	"\x1cUSERNAME_OR_PASSWORD_INVALID\x10\xa7N\x1a\x04\xa8E\x91\x03\x12\x1e\n" +
 	"\x19ADD_USER_TO_WALLET_FAILED\x10\xa8N\x12%\n" +
-	" GET_USERS_BY_OPERATOR_IDS_FAILED\x10\xa9N\x1a\x04\xa0E\xf4\x03BO\n" +
+	" GET_USERS_BY_OPERATOR_IDS_FAILED\x10\xa9N\x12%\n" +
+	" GET_OPERATOR_ID_BY_ORIGIN_FAILED\x10\xaaN\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
