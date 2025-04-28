@@ -154,8 +154,8 @@ message TransactionInfo {
   google.protobuf.Timestamp updated_at = 9 [json_name="updatedAt"];
 }
 
-// Request to get transaction list
-message GetTransactionListRequest {
+// Request to get transaction page
+message GetTransactionPageRequest {
   // Pagination parameters
   int32 page = 1;
   int32 page_size = 2 [json_name="pageSize"];
@@ -175,8 +175,8 @@ message GetTransactionListRequest {
   string payment_method = 9 [json_name="paymentMethod"];
 }
 
-// Response for transaction list
-message GetTransactionListResponse {
+// Response for transaction page
+message GetTransactionPageResponse {
   repeated TransactionInfo transactions = 1;
   int32 total_count = 2 [json_name="totalCount"];
   int32 page = 3;
@@ -234,10 +234,10 @@ service Payment {
     };
   }
 
-  // Get transaction list with pagination and filters
-  rpc GetTransactionList(GetTransactionListRequest) returns (GetTransactionListResponse) {
+  // Get transaction page with pagination and filters
+  rpc GetTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) {
     option (google.api.http) = {
-      post: "/v1/payment/transaction/list"
+      post: "/v1/payment/transaction/page"
       body: "*"
     };
   }

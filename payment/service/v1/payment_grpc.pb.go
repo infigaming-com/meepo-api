@@ -25,6 +25,7 @@ const (
 	Payment_InitiateDeposit_FullMethodName       = "/payment.service.v1.Payment/InitiateDeposit"
 	Payment_InitiateWithdraw_FullMethodName      = "/payment.service.v1.Payment/InitiateWithdraw"
 	Payment_DepositCallback_FullMethodName       = "/payment.service.v1.Payment/DepositCallback"
+	Payment_GetTransactionPage_FullMethodName    = "/payment.service.v1.Payment/GetTransactionPage"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -44,6 +45,8 @@ type PaymentClient interface {
 	// Deposit callback
 	// This endpoint handles callbacks from payment gateways.
 	DepositCallback(ctx context.Context, in *DepositCallbackRequest, opts ...grpc.CallOption) (*DepositCallbackResponse, error)
+	// Get transaction page with pagination and filters
+	GetTransactionPage(ctx context.Context, in *GetTransactionPageRequest, opts ...grpc.CallOption) (*GetTransactionPageResponse, error)
 }
 
 type paymentClient struct {
@@ -114,6 +117,16 @@ func (c *paymentClient) DepositCallback(ctx context.Context, in *DepositCallback
 	return out, nil
 }
 
+func (c *paymentClient) GetTransactionPage(ctx context.Context, in *GetTransactionPageRequest, opts ...grpc.CallOption) (*GetTransactionPageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTransactionPageResponse)
+	err := c.cc.Invoke(ctx, Payment_GetTransactionPage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentServer is the server API for Payment service.
 // All implementations must embed UnimplementedPaymentServer
 // for forward compatibility.
@@ -131,6 +144,8 @@ type PaymentServer interface {
 	// Deposit callback
 	// This endpoint handles callbacks from payment gateways.
 	DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error)
+	// Get transaction page with pagination and filters
+	GetTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -158,6 +173,9 @@ func (UnimplementedPaymentServer) InitiateWithdraw(context.Context, *InitiateWit
 }
 func (UnimplementedPaymentServer) DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DepositCallback not implemented")
+}
+func (UnimplementedPaymentServer) GetTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionPage not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -288,6 +306,24 @@ func _Payment_DepositCallback_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_GetTransactionPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionPageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetTransactionPage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetTransactionPage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetTransactionPage(ctx, req.(*GetTransactionPageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Payment_ServiceDesc is the grpc.ServiceDesc for Payment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -318,6 +354,10 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DepositCallback",
 			Handler:    _Payment_DepositCallback_Handler,
+		},
+		{
+			MethodName: "GetTransactionPage",
+			Handler:    _Payment_GetTransactionPage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
