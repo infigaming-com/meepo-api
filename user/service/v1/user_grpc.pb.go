@@ -51,7 +51,7 @@ type UserClient interface {
 	// Refresh the access token using a refresh token.
 	// Used to obtain a new access token when the current one expires.
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
-	// Get user information by user ID.
+	// Get user information by userId.
 	// Returns basic user information for the specified user.
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	// Get users by operatorIds.
@@ -181,7 +181,7 @@ type UserServer interface {
 	// Refresh the access token using a refresh token.
 	// Used to obtain a new access token when the current one expires.
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
-	// Get user information by user ID.
+	// Get user information by userId.
 	// Returns basic user information for the specified user.
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	// Get users by operatorIds.

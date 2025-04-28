@@ -29,5 +29,5 @@ enum ErrorReason {
   GENERATE_CREDIT_ID_FAILED = 30015 [(errors.code) = 500];
   LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED = 30016 [(errors.code) = 500];
   ADD_CREDIT_FAILED = 30017 [(errors.code) = 500];
-  INVALID_CREDIT_TYPE = 30018 [(errors.code) = 400];
+  INVALID_TRANSACTION_TYPE = 30018 [(errors.code) = 400];
 }

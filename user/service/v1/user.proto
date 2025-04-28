@@ -55,7 +55,7 @@ service User {
 		};
 	}
 	  
-	// Get user information by user ID.
+	// Get user information by userId.
 	// Returns basic user information for the specified user.
 	rpc GetUser (GetUserRequest) returns (GetUserResponse) {
 		option (google.api.http) = {
@@ -200,9 +200,9 @@ message RefreshTokenResponse {
 	int64 expires_in = 3;
 }
 
-// GetUserRequest contains the ID of the user to retrieve.
+// GetUserRequest contains the userId of the user to retrieve.
 message GetUserRequest {
-	// The ID of the user to retrieve.
+	// The userId of the user to retrieve.
 	int64 user_id = 1;
 }
 

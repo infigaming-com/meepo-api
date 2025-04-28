@@ -559,7 +559,7 @@ paths:
             tags:
                 - User
             description: |-
-                Get user information by user ID.
+                Get user information by userId.
                  Returns basic user information for the specified user.
             operationId: User_GetUser
             requestBody:
@@ -732,8 +732,8 @@ components:
             properties:
                 userId:
                     type: string
-                    description: The ID of the user to retrieve.
-            description: GetUserRequest contains the ID of the user to retrieve.
+                    description: The userId of the user to retrieve.
+            description: GetUserRequest contains the userId of the user to retrieve.
         api.user.service.v1.GetUserResponse:
             type: object
             properties:
@@ -867,6 +867,10 @@ components:
             properties:
                 userId:
                     type: string
+                currency:
+                    type: string
+                settlementCurrency:
+                    type: string
         api.wallet.service.v1.GetUserBalancesResponse:
             type: object
             properties:
@@ -878,6 +882,8 @@ components:
             type: object
             properties:
                 currency:
+                    type: string
+                exchangeRate:
                     type: string
                 cash:
                     type: string
