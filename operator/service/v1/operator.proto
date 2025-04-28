@@ -49,10 +49,6 @@ service Operator {
 	}
 
 	rpc GetOperatorIdByOrigin(GetOperatorIdByOriginRequest) returns (GetOperatorIdByOriginResponse) {
-		option (google.api.http) = {
-			post: "/v1/operator/origins/get"
-			body: "*"
-		};
 	}
 	
 	rpc DeleteOriginOperatorId(DeleteOriginOperatorIdRequest) returns (DeleteOriginOperatorIdResponse) {
