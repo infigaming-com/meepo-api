@@ -31,12 +31,18 @@ func AuthMiddleware(authPaths []string, secret string, uc user.UserClient) middl
 			}
 
 			authorization := httpTr.Request().Header.Get("Authorization")
-			if authorization == "" || !strings.HasPrefix(authorization, "Bearer ") {
+			if authorization == "" {
 				return nil, errors.New(401, "UNAUTHORIZED", "no authorization")
+			}
+			if !strings.HasPrefix(authorization, "Bearer ") {
+				return nil, errors.New(401, "UNAUTHORIZED", "invalid authorization")
 			}
 
 			token, claims, err := jwt.ParseToken(authorization, secret)
 			if err != nil {
+				if errors.Is(err, jwt.ErrTokenExpired) {
+					return nil, errors.New(401, "TOKEN_EXPIRED", "token expired")
+				}
 				return nil, errors.New(401, "UNAUTHORIZED", "invalid token")
 			}
 
