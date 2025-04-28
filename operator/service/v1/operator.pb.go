@@ -880,16 +880,15 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x06origin\x18\x01 \x01(\tR\x06origin\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
 	"operatorId\" \n" +
-	"\x1eDeleteOriginOperatorIdResponse2\x9d\n" +
-	"\n" +
+	"\x1eDeleteOriginOperatorIdResponse2\xfa\t\n" +
 	"\bOperator\x12\x85\x01\n" +
 	"\vAddOperator\x12+.api.operator.service.v1.AddOperatorRequest\x1a,.api.operator.service.v1.AddOperatorResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/operator/add\x12\x91\x01\n" +
 	"\x0eUpdateOperator\x12..api.operator.service.v1.UpdateOperatorRequest\x1a/.api.operator.service.v1.UpdateOperatorResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/operator/update\x12\x82\x01\n" +
 	"\x13AddOrUpdateCurrency\x123.api.operator.service.v1.AddOrUpdateCurrencyRequest\x1a4.api.operator.service.v1.AddOrUpdateCurrencyResponse\"\x00\x12\xb4\x01\n" +
 	"\x16UpdateOperatorCurrency\x126.api.operator.service.v1.UpdateOperatorCurrencyRequest\x1a7.api.operator.service.v1.UpdateOperatorCurrencyResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/operator/currencies/update\x12\xae\x01\n" +
 	"\x15GetOperatorCurrencies\x125.api.operator.service.v1.GetOperatorCurrenciesRequest\x1a6.api.operator.service.v1.GetOperatorCurrenciesResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/operator/currencies/get\x12\xa5\x01\n" +
-	"\x13AddOriginOperatorId\x123.api.operator.service.v1.AddOriginOperatorIdRequest\x1a4.api.operator.service.v1.AddOriginOperatorIdResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/operator/origins/add\x12\xab\x01\n" +
-	"\x15GetOperatorIdByOrigin\x125.api.operator.service.v1.GetOperatorIdByOriginRequest\x1a6.api.operator.service.v1.GetOperatorIdByOriginResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/operator/origins/get\x12\xb1\x01\n" +
+	"\x13AddOriginOperatorId\x123.api.operator.service.v1.AddOriginOperatorIdRequest\x1a4.api.operator.service.v1.AddOriginOperatorIdResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/operator/origins/add\x12\x88\x01\n" +
+	"\x15GetOperatorIdByOrigin\x125.api.operator.service.v1.GetOperatorIdByOriginRequest\x1a6.api.operator.service.v1.GetOperatorIdByOriginResponse\"\x00\x12\xb1\x01\n" +
 	"\x16DeleteOriginOperatorId\x126.api.operator.service.v1.DeleteOriginOperatorIdRequest\x1a7.api.operator.service.v1.DeleteOriginOperatorIdResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/operator/origins/deleteBW\n" +
 	"\x17api.operator.service.v1P\x01Z:github.com/infigaming-com/meepo-api/operator/service/v1;v1b\x06proto3"
 

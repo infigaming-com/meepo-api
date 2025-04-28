@@ -23,7 +23,6 @@ const OperationOperatorAddOperator = "/api.operator.service.v1.Operator/AddOpera
 const OperationOperatorAddOriginOperatorId = "/api.operator.service.v1.Operator/AddOriginOperatorId"
 const OperationOperatorDeleteOriginOperatorId = "/api.operator.service.v1.Operator/DeleteOriginOperatorId"
 const OperationOperatorGetOperatorCurrencies = "/api.operator.service.v1.Operator/GetOperatorCurrencies"
-const OperationOperatorGetOperatorIdByOrigin = "/api.operator.service.v1.Operator/GetOperatorIdByOrigin"
 const OperationOperatorUpdateOperator = "/api.operator.service.v1.Operator/UpdateOperator"
 const OperationOperatorUpdateOperatorCurrency = "/api.operator.service.v1.Operator/UpdateOperatorCurrency"
 
@@ -32,7 +31,6 @@ type OperatorHTTPServer interface {
 	AddOriginOperatorId(context.Context, *AddOriginOperatorIdRequest) (*AddOriginOperatorIdResponse, error)
 	DeleteOriginOperatorId(context.Context, *DeleteOriginOperatorIdRequest) (*DeleteOriginOperatorIdResponse, error)
 	GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error)
-	GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error)
 	UpdateOperator(context.Context, *UpdateOperatorRequest) (*UpdateOperatorResponse, error)
 	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
 }
@@ -44,7 +42,6 @@ func RegisterOperatorHTTPServer(s *http.Server, srv OperatorHTTPServer) {
 	r.POST("/v1/operator/currencies/update", _Operator_UpdateOperatorCurrency0_HTTP_Handler(srv))
 	r.POST("/v1/operator/currencies/get", _Operator_GetOperatorCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/operator/origins/add", _Operator_AddOriginOperatorId0_HTTP_Handler(srv))
-	r.POST("/v1/operator/origins/get", _Operator_GetOperatorIdByOrigin0_HTTP_Handler(srv))
 	r.POST("/v1/operator/origins/delete", _Operator_DeleteOriginOperatorId0_HTTP_Handler(srv))
 }
 
@@ -158,28 +155,6 @@ func _Operator_AddOriginOperatorId0_HTTP_Handler(srv OperatorHTTPServer) func(ct
 	}
 }
 
-func _Operator_GetOperatorIdByOrigin0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetOperatorIdByOriginRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationOperatorGetOperatorIdByOrigin)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetOperatorIdByOrigin(ctx, req.(*GetOperatorIdByOriginRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetOperatorIdByOriginResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 func _Operator_DeleteOriginOperatorId0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteOriginOperatorIdRequest
@@ -207,7 +182,6 @@ type OperatorHTTPClient interface {
 	AddOriginOperatorId(ctx context.Context, req *AddOriginOperatorIdRequest, opts ...http.CallOption) (rsp *AddOriginOperatorIdResponse, err error)
 	DeleteOriginOperatorId(ctx context.Context, req *DeleteOriginOperatorIdRequest, opts ...http.CallOption) (rsp *DeleteOriginOperatorIdResponse, err error)
 	GetOperatorCurrencies(ctx context.Context, req *GetOperatorCurrenciesRequest, opts ...http.CallOption) (rsp *GetOperatorCurrenciesResponse, err error)
-	GetOperatorIdByOrigin(ctx context.Context, req *GetOperatorIdByOriginRequest, opts ...http.CallOption) (rsp *GetOperatorIdByOriginResponse, err error)
 	UpdateOperator(ctx context.Context, req *UpdateOperatorRequest, opts ...http.CallOption) (rsp *UpdateOperatorResponse, err error)
 	UpdateOperatorCurrency(ctx context.Context, req *UpdateOperatorCurrencyRequest, opts ...http.CallOption) (rsp *UpdateOperatorCurrencyResponse, err error)
 }
@@ -264,19 +238,6 @@ func (c *OperatorHTTPClientImpl) GetOperatorCurrencies(ctx context.Context, in *
 	pattern := "/v1/operator/currencies/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationOperatorGetOperatorCurrencies))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *OperatorHTTPClientImpl) GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...http.CallOption) (*GetOperatorIdByOriginResponse, error) {
-	var out GetOperatorIdByOriginResponse
-	pattern := "/v1/operator/origins/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationOperatorGetOperatorIdByOrigin))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
