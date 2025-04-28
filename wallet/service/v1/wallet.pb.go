@@ -460,12 +460,10 @@ func (*UpdateUserCurrencyResponse) Descriptor() ([]byte, []int) {
 }
 
 type GetUserBalancesRequest struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	UserId             int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency           *string                `protobuf:"bytes,2,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	SettlementCurrency *string                `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3,oneof" json:"settlement_currency,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetUserBalancesRequest) Reset() {
@@ -503,20 +501,6 @@ func (x *GetUserBalancesRequest) GetUserId() int64 {
 		return x.UserId
 	}
 	return 0
-}
-
-func (x *GetUserBalancesRequest) GetCurrency() string {
-	if x != nil && x.Currency != nil {
-		return *x.Currency
-	}
-	return ""
-}
-
-func (x *GetUserBalancesRequest) GetSettlementCurrency() string {
-	if x != nil && x.SettlementCurrency != nil {
-		return *x.SettlementCurrency
-	}
-	return ""
 }
 
 type GetUserBalancesResponse struct {
@@ -563,6 +547,136 @@ func (x *GetUserBalancesResponse) GetBalances() []*GetUserBalancesResponse_Balan
 	return nil
 }
 
+type GetUserBalanceRequest struct {
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	UserId   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	// optional target currency
+	TargetCurrency string `protobuf:"bytes,3,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetUserBalanceRequest) Reset() {
+	*x = GetUserBalanceRequest{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserBalanceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserBalanceRequest) ProtoMessage() {}
+
+func (x *GetUserBalanceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserBalanceRequest.ProtoReflect.Descriptor instead.
+func (*GetUserBalanceRequest) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *GetUserBalanceRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetUserBalanceRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetUserBalanceRequest) GetTargetCurrency() string {
+	if x != nil {
+		return x.TargetCurrency
+	}
+	return ""
+}
+
+type GetUserBalanceResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// optional exchange rate between currency and target currency
+	ExchangeRate  string `protobuf:"bytes,1,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	Cash          int64  `protobuf:"varint,2,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus int64  `protobuf:"varint,3,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus int64  `protobuf:"varint,4,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserBalanceResponse) Reset() {
+	*x = GetUserBalanceResponse{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserBalanceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserBalanceResponse) ProtoMessage() {}
+
+func (x *GetUserBalanceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserBalanceResponse.ProtoReflect.Descriptor instead.
+func (*GetUserBalanceResponse) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetUserBalanceResponse) GetExchangeRate() string {
+	if x != nil {
+		return x.ExchangeRate
+	}
+	return ""
+}
+
+func (x *GetUserBalanceResponse) GetCash() int64 {
+	if x != nil {
+		return x.Cash
+	}
+	return 0
+}
+
+func (x *GetUserBalanceResponse) GetOperatorBonus() int64 {
+	if x != nil {
+		return x.OperatorBonus
+	}
+	return 0
+}
+
+func (x *GetUserBalanceResponse) GetProviderBonus() int64 {
+	if x != nil {
+		return x.ProviderBonus
+	}
+	return 0
+}
+
 type CreditRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	UserId          int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -576,7 +690,7 @@ type CreditRequest struct {
 
 func (x *CreditRequest) Reset() {
 	*x = CreditRequest{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[10]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -588,7 +702,7 @@ func (x *CreditRequest) String() string {
 func (*CreditRequest) ProtoMessage() {}
 
 func (x *CreditRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[10]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -601,7 +715,7 @@ func (x *CreditRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditRequest.ProtoReflect.Descriptor instead.
 func (*CreditRequest) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{10}
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CreditRequest) GetUserId() int64 {
@@ -648,7 +762,7 @@ type CreditResponse struct {
 
 func (x *CreditResponse) Reset() {
 	*x = CreditResponse{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[11]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -660,7 +774,7 @@ func (x *CreditResponse) String() string {
 func (*CreditResponse) ProtoMessage() {}
 
 func (x *CreditResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[11]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -673,7 +787,7 @@ func (x *CreditResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditResponse.ProtoReflect.Descriptor instead.
 func (*CreditResponse) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{11}
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *CreditResponse) GetTransactionId() int64 {
@@ -696,7 +810,7 @@ type DebitRequest struct {
 
 func (x *DebitRequest) Reset() {
 	*x = DebitRequest{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[12]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -708,7 +822,7 @@ func (x *DebitRequest) String() string {
 func (*DebitRequest) ProtoMessage() {}
 
 func (x *DebitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[12]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -721,7 +835,7 @@ func (x *DebitRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitRequest.ProtoReflect.Descriptor instead.
 func (*DebitRequest) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{12}
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *DebitRequest) GetUserId() int64 {
@@ -768,7 +882,7 @@ type DebitResponse struct {
 
 func (x *DebitResponse) Reset() {
 	*x = DebitResponse{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[13]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -780,7 +894,7 @@ func (x *DebitResponse) String() string {
 func (*DebitResponse) ProtoMessage() {}
 
 func (x *DebitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[13]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -793,7 +907,7 @@ func (x *DebitResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DebitResponse.ProtoReflect.Descriptor instead.
 func (*DebitResponse) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{13}
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *DebitResponse) GetTransactionId() int64 {
@@ -804,21 +918,21 @@ func (x *DebitResponse) GetTransactionId() int64 {
 }
 
 type GameDebitRequest struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	UserId             int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency           string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	SettlementCurrency *string                `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3,oneof" json:"settlement_currency,omitempty"`
-	ExchangeRate       *string                `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3,oneof" json:"exchange_rate,omitempty"`
-	TransactionType    TransactionType        `protobuf:"varint,5,opt,name=transaction_type,json=transactionType,proto3,enum=api.wallet.service.v1.TransactionType" json:"transaction_type,omitempty"`
-	TransactionId      int64                  `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash               int64                  `protobuf:"varint,7,opt,name=cash,proto3" json:"cash,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	UserId          int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency        string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	TargetCurrency  string                 `protobuf:"bytes,3,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
+	ExchangeRate    string                 `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	TransactionType TransactionType        `protobuf:"varint,5,opt,name=transaction_type,json=transactionType,proto3,enum=api.wallet.service.v1.TransactionType" json:"transaction_type,omitempty"`
+	TransactionId   int64                  `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Cash            int64                  `protobuf:"varint,7,opt,name=cash,proto3" json:"cash,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GameDebitRequest) Reset() {
 	*x = GameDebitRequest{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[14]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -830,7 +944,7 @@ func (x *GameDebitRequest) String() string {
 func (*GameDebitRequest) ProtoMessage() {}
 
 func (x *GameDebitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[14]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -843,7 +957,7 @@ func (x *GameDebitRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GameDebitRequest.ProtoReflect.Descriptor instead.
 func (*GameDebitRequest) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{14}
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GameDebitRequest) GetUserId() int64 {
@@ -860,16 +974,16 @@ func (x *GameDebitRequest) GetCurrency() string {
 	return ""
 }
 
-func (x *GameDebitRequest) GetSettlementCurrency() string {
-	if x != nil && x.SettlementCurrency != nil {
-		return *x.SettlementCurrency
+func (x *GameDebitRequest) GetTargetCurrency() string {
+	if x != nil {
+		return x.TargetCurrency
 	}
 	return ""
 }
 
 func (x *GameDebitRequest) GetExchangeRate() string {
-	if x != nil && x.ExchangeRate != nil {
-		return *x.ExchangeRate
+	if x != nil {
+		return x.ExchangeRate
 	}
 	return ""
 }
@@ -898,7 +1012,7 @@ func (x *GameDebitRequest) GetCash() int64 {
 type GameDebitResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	ExchangeRate  *string                `protobuf:"bytes,2,opt,name=exchange_rate,json=exchangeRate,proto3,oneof" json:"exchange_rate,omitempty"`
+	ExchangeRate  string                 `protobuf:"bytes,2,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
 	Cash          int64                  `protobuf:"varint,3,opt,name=cash,proto3" json:"cash,omitempty"`
 	OperatorBonus int64                  `protobuf:"varint,4,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
 	ProviderBonus int64                  `protobuf:"varint,5,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
@@ -908,7 +1022,7 @@ type GameDebitResponse struct {
 
 func (x *GameDebitResponse) Reset() {
 	*x = GameDebitResponse{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[15]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -920,7 +1034,7 @@ func (x *GameDebitResponse) String() string {
 func (*GameDebitResponse) ProtoMessage() {}
 
 func (x *GameDebitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[15]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -933,7 +1047,7 @@ func (x *GameDebitResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GameDebitResponse.ProtoReflect.Descriptor instead.
 func (*GameDebitResponse) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{15}
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GameDebitResponse) GetTransactionId() int64 {
@@ -944,8 +1058,8 @@ func (x *GameDebitResponse) GetTransactionId() int64 {
 }
 
 func (x *GameDebitResponse) GetExchangeRate() string {
-	if x != nil && x.ExchangeRate != nil {
-		return *x.ExchangeRate
+	if x != nil {
+		return x.ExchangeRate
 	}
 	return ""
 }
@@ -975,8 +1089,8 @@ type GameCreditRequest struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
 	UserId                int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Currency              string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	SettlementCurrency    *string                `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3,oneof" json:"settlement_currency,omitempty"`
-	ExchangeRate          *string                `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3,oneof" json:"exchange_rate,omitempty"`
+	TargetCurrency        string                 `protobuf:"bytes,3,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
+	ExchangeRate          string                 `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
 	TransactionType       TransactionType        `protobuf:"varint,5,opt,name=transaction_type,json=transactionType,proto3,enum=api.wallet.service.v1.TransactionType" json:"transaction_type,omitempty"`
 	TransactionId         int64                  `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	OriginalTransactionId int64                  `protobuf:"varint,7,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
@@ -987,7 +1101,7 @@ type GameCreditRequest struct {
 
 func (x *GameCreditRequest) Reset() {
 	*x = GameCreditRequest{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[16]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -999,7 +1113,7 @@ func (x *GameCreditRequest) String() string {
 func (*GameCreditRequest) ProtoMessage() {}
 
 func (x *GameCreditRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[16]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1012,7 +1126,7 @@ func (x *GameCreditRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GameCreditRequest.ProtoReflect.Descriptor instead.
 func (*GameCreditRequest) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{16}
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GameCreditRequest) GetUserId() int64 {
@@ -1029,16 +1143,16 @@ func (x *GameCreditRequest) GetCurrency() string {
 	return ""
 }
 
-func (x *GameCreditRequest) GetSettlementCurrency() string {
-	if x != nil && x.SettlementCurrency != nil {
-		return *x.SettlementCurrency
+func (x *GameCreditRequest) GetTargetCurrency() string {
+	if x != nil {
+		return x.TargetCurrency
 	}
 	return ""
 }
 
 func (x *GameCreditRequest) GetExchangeRate() string {
-	if x != nil && x.ExchangeRate != nil {
-		return *x.ExchangeRate
+	if x != nil {
+		return x.ExchangeRate
 	}
 	return ""
 }
@@ -1074,7 +1188,7 @@ func (x *GameCreditRequest) GetCash() int64 {
 type GameCreditResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	ExchangeRate  *string                `protobuf:"bytes,2,opt,name=exchange_rate,json=exchangeRate,proto3,oneof" json:"exchange_rate,omitempty"`
+	ExchangeRate  string                 `protobuf:"bytes,2,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
 	Cash          int64                  `protobuf:"varint,3,opt,name=cash,proto3" json:"cash,omitempty"`
 	OperatorBonus int64                  `protobuf:"varint,4,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
 	ProviderBonus int64                  `protobuf:"varint,5,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
@@ -1084,7 +1198,7 @@ type GameCreditResponse struct {
 
 func (x *GameCreditResponse) Reset() {
 	*x = GameCreditResponse{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[17]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1096,7 +1210,7 @@ func (x *GameCreditResponse) String() string {
 func (*GameCreditResponse) ProtoMessage() {}
 
 func (x *GameCreditResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[17]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1109,7 +1223,7 @@ func (x *GameCreditResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GameCreditResponse.ProtoReflect.Descriptor instead.
 func (*GameCreditResponse) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{17}
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GameCreditResponse) GetTransactionId() int64 {
@@ -1120,8 +1234,8 @@ func (x *GameCreditResponse) GetTransactionId() int64 {
 }
 
 func (x *GameCreditResponse) GetExchangeRate() string {
-	if x != nil && x.ExchangeRate != nil {
-		return *x.ExchangeRate
+	if x != nil {
+		return x.ExchangeRate
 	}
 	return ""
 }
@@ -1150,7 +1264,6 @@ func (x *GameCreditResponse) GetProviderBonus() int64 {
 type GetUserBalancesResponse_Balance struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	ExchangeRate  *string                `protobuf:"bytes,2,opt,name=exchange_rate,json=exchangeRate,proto3,oneof" json:"exchange_rate,omitempty"`
 	Cash          int64                  `protobuf:"varint,3,opt,name=cash,proto3" json:"cash,omitempty"`
 	OperatorBonus int64                  `protobuf:"varint,4,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
 	ProviderBonus int64                  `protobuf:"varint,5,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
@@ -1160,7 +1273,7 @@ type GetUserBalancesResponse_Balance struct {
 
 func (x *GetUserBalancesResponse_Balance) Reset() {
 	*x = GetUserBalancesResponse_Balance{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[18]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1172,7 +1285,7 @@ func (x *GetUserBalancesResponse_Balance) String() string {
 func (*GetUserBalancesResponse_Balance) ProtoMessage() {}
 
 func (x *GetUserBalancesResponse_Balance) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[18]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1191,13 +1304,6 @@ func (*GetUserBalancesResponse_Balance) Descriptor() ([]byte, []int) {
 func (x *GetUserBalancesResponse_Balance) GetCurrency() string {
 	if x != nil {
 		return x.Currency
-	}
-	return ""
-}
-
-func (x *GetUserBalancesResponse_Balance) GetExchangeRate() string {
-	if x != nil && x.ExchangeRate != nil {
-		return *x.ExchangeRate
 	}
 	return ""
 }
@@ -1233,7 +1339,7 @@ type CreditRequest_Ratio struct {
 
 func (x *CreditRequest_Ratio) Reset() {
 	*x = CreditRequest_Ratio{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[19]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1245,7 +1351,7 @@ func (x *CreditRequest_Ratio) String() string {
 func (*CreditRequest_Ratio) ProtoMessage() {}
 
 func (x *CreditRequest_Ratio) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[19]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1258,7 +1364,7 @@ func (x *CreditRequest_Ratio) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreditRequest_Ratio.ProtoReflect.Descriptor instead.
 func (*CreditRequest_Ratio) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{10, 0}
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{12, 0}
 }
 
 func (x *CreditRequest_Ratio) GetCash() int64 {
@@ -1299,22 +1405,25 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"\x1c\n" +
-	"\x1aUpdateUserCurrencyResponse\"\xad\x01\n" +
+	"\x1aUpdateUserCurrencyResponse\"1\n" +
 	"\x16GetUserBalancesRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
-	"\bcurrency\x18\x02 \x01(\tH\x00R\bcurrency\x88\x01\x01\x124\n" +
-	"\x13settlement_currency\x18\x03 \x01(\tH\x01R\x12settlementCurrency\x88\x01\x01B\v\n" +
-	"\t_currencyB\x16\n" +
-	"\x14_settlement_currency\"\xb3\x02\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xf7\x01\n" +
 	"\x17GetUserBalancesResponse\x12R\n" +
-	"\bbalances\x18\x01 \x03(\v26.api.wallet.service.v1.GetUserBalancesResponse.BalanceR\bbalances\x1a\xc3\x01\n" +
+	"\bbalances\x18\x01 \x03(\v26.api.wallet.service.v1.GetUserBalancesResponse.BalanceR\bbalances\x1a\x87\x01\n" +
 	"\aBalance\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12(\n" +
-	"\rexchange_rate\x18\x02 \x01(\tH\x00R\fexchangeRate\x88\x01\x01\x12\x12\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
 	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x04 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonusB\x10\n" +
-	"\x0e_exchange_rate\"\x96\x02\n" +
+	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonus\"u\n" +
+	"\x15GetUserBalanceRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
+	"\x0ftarget_currency\x18\x03 \x01(\tR\x0etargetCurrency\"\x9f\x01\n" +
+	"\x16GetUserBalanceResponse\x12#\n" +
+	"\rexchange_rate\x18\x01 \x01(\tR\fexchangeRate\x12\x12\n" +
+	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
+	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\x96\x02\n" +
 	"\rCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12Q\n" +
@@ -1333,55 +1442,50 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x04 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x05 \x01(\x03R\x04cash\"6\n" +
 	"\rDebitResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xdf\x02\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xa3\x02\n" +
 	"\x10GameDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x124\n" +
-	"\x13settlement_currency\x18\x03 \x01(\tH\x00R\x12settlementCurrency\x88\x01\x01\x12(\n" +
-	"\rexchange_rate\x18\x04 \x01(\tH\x01R\fexchangeRate\x88\x01\x01\x12Q\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
+	"\x0ftarget_currency\x18\x03 \x01(\tR\x0etargetCurrency\x12#\n" +
+	"\rexchange_rate\x18\x04 \x01(\tR\fexchangeRate\x12Q\n" +
 	"\x10transaction_type\x18\x05 \x01(\x0e2&.api.wallet.service.v1.TransactionTypeR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x06 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\a \x01(\x03R\x04cashB\x16\n" +
-	"\x14_settlement_currencyB\x10\n" +
-	"\x0e_exchange_rate\"\xd8\x01\n" +
+	"\x04cash\x18\a \x01(\x03R\x04cash\"\xc1\x01\n" +
 	"\x11GameDebitResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12(\n" +
-	"\rexchange_rate\x18\x02 \x01(\tH\x00R\fexchangeRate\x88\x01\x01\x12\x12\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12#\n" +
+	"\rexchange_rate\x18\x02 \x01(\tR\fexchangeRate\x12\x12\n" +
 	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x04 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonusB\x10\n" +
-	"\x0e_exchange_rate\"\x98\x03\n" +
+	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonus\"\xdc\x02\n" +
 	"\x11GameCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x124\n" +
-	"\x13settlement_currency\x18\x03 \x01(\tH\x00R\x12settlementCurrency\x88\x01\x01\x12(\n" +
-	"\rexchange_rate\x18\x04 \x01(\tH\x01R\fexchangeRate\x88\x01\x01\x12Q\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
+	"\x0ftarget_currency\x18\x03 \x01(\tR\x0etargetCurrency\x12#\n" +
+	"\rexchange_rate\x18\x04 \x01(\tR\fexchangeRate\x12Q\n" +
 	"\x10transaction_type\x18\x05 \x01(\x0e2&.api.wallet.service.v1.TransactionTypeR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x06 \x01(\x03R\rtransactionId\x126\n" +
 	"\x17original_transaction_id\x18\a \x01(\x03R\x15originalTransactionId\x12\x12\n" +
-	"\x04cash\x18\b \x01(\x03R\x04cashB\x16\n" +
-	"\x14_settlement_currencyB\x10\n" +
-	"\x0e_exchange_rate\"\xd9\x01\n" +
+	"\x04cash\x18\b \x01(\x03R\x04cash\"\xc2\x01\n" +
 	"\x12GameCreditResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12(\n" +
-	"\rexchange_rate\x18\x02 \x01(\tH\x00R\fexchangeRate\x88\x01\x01\x12\x12\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12#\n" +
+	"\rexchange_rate\x18\x02 \x01(\tR\fexchangeRate\x12\x12\n" +
 	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x04 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonusB\x10\n" +
-	"\x0e_exchange_rate*\xc0\x01\n" +
+	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonus*\xc0\x01\n" +
 	"\x0fTransactionType\x12 \n" +
 	"\x1cTRANSACTION_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
 	" TRANSACTION_TYPE_PAYMENT_DEPOSIT\x10\x01\x12\x1d\n" +
 	"\x19TRANSACTION_TYPE_GAME_WIN\x10\x02\x12&\n" +
 	"!TRANSACTION_TYPE_PAYMENT_WITHDRAW\x10\xe9\a\x12\x1e\n" +
-	"\x19TRANSACTION_TYPE_GAME_BET\x10\xea\a2\x97\b\n" +
+	"\x19TRANSACTION_TYPE_GAME_BET\x10\xea\a2\xac\t\n" +
 	"\x06Wallet\x12Z\n" +
 	"\aAddUser\x12%.api.wallet.service.v1.AddUserRequest\x1a&.api.wallet.service.v1.AddUserResponse\"\x00\x12c\n" +
 	"\n" +
 	"UpdateUser\x12(.api.wallet.service.v1.UpdateUserRequest\x1a).api.wallet.service.v1.UpdateUserResponse\"\x00\x12\x99\x01\n" +
 	"\x1cAddOrUpdateOperatorsCurrency\x12:.api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest\x1a;.api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse\"\x00\x12\xa2\x01\n" +
-	"\x12UpdateUserCurrency\x120.api.wallet.service.v1.UpdateUserCurrencyRequest\x1a1.api.wallet.service.v1.UpdateUserCurrencyResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/wallet/currencies/update\x12\x94\x01\n" +
-	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/wallet/balances/get\x12W\n" +
+	"\x12UpdateUserCurrency\x120.api.wallet.service.v1.UpdateUserCurrencyRequest\x1a1.api.wallet.service.v1.UpdateUserCurrencyResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/wallet/currencies/update\x12\x95\x01\n" +
+	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12\x91\x01\n" +
+	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/wallet/balances/get\x12W\n" +
 	"\x06Credit\x12$.api.wallet.service.v1.CreditRequest\x1a%.api.wallet.service.v1.CreditResponse\"\x00\x12T\n" +
 	"\x05Debit\x12#.api.wallet.service.v1.DebitRequest\x1a$.api.wallet.service.v1.DebitResponse\"\x00\x12`\n" +
 	"\tGameDebit\x12'.api.wallet.service.v1.GameDebitRequest\x1a(.api.wallet.service.v1.GameDebitResponse\"\x00\x12c\n" +
@@ -1402,7 +1506,7 @@ func file_wallet_service_v1_wallet_proto_rawDescGZIP() []byte {
 }
 
 var file_wallet_service_v1_wallet_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_wallet_service_v1_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_wallet_service_v1_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(TransactionType)(0),                         // 0: api.wallet.service.v1.TransactionType
 	(*AddUserRequest)(nil),                       // 1: api.wallet.service.v1.AddUserRequest
@@ -1415,19 +1519,21 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*UpdateUserCurrencyResponse)(nil),           // 8: api.wallet.service.v1.UpdateUserCurrencyResponse
 	(*GetUserBalancesRequest)(nil),               // 9: api.wallet.service.v1.GetUserBalancesRequest
 	(*GetUserBalancesResponse)(nil),              // 10: api.wallet.service.v1.GetUserBalancesResponse
-	(*CreditRequest)(nil),                        // 11: api.wallet.service.v1.CreditRequest
-	(*CreditResponse)(nil),                       // 12: api.wallet.service.v1.CreditResponse
-	(*DebitRequest)(nil),                         // 13: api.wallet.service.v1.DebitRequest
-	(*DebitResponse)(nil),                        // 14: api.wallet.service.v1.DebitResponse
-	(*GameDebitRequest)(nil),                     // 15: api.wallet.service.v1.GameDebitRequest
-	(*GameDebitResponse)(nil),                    // 16: api.wallet.service.v1.GameDebitResponse
-	(*GameCreditRequest)(nil),                    // 17: api.wallet.service.v1.GameCreditRequest
-	(*GameCreditResponse)(nil),                   // 18: api.wallet.service.v1.GameCreditResponse
-	(*GetUserBalancesResponse_Balance)(nil),      // 19: api.wallet.service.v1.GetUserBalancesResponse.Balance
-	(*CreditRequest_Ratio)(nil),                  // 20: api.wallet.service.v1.CreditRequest.Ratio
+	(*GetUserBalanceRequest)(nil),                // 11: api.wallet.service.v1.GetUserBalanceRequest
+	(*GetUserBalanceResponse)(nil),               // 12: api.wallet.service.v1.GetUserBalanceResponse
+	(*CreditRequest)(nil),                        // 13: api.wallet.service.v1.CreditRequest
+	(*CreditResponse)(nil),                       // 14: api.wallet.service.v1.CreditResponse
+	(*DebitRequest)(nil),                         // 15: api.wallet.service.v1.DebitRequest
+	(*DebitResponse)(nil),                        // 16: api.wallet.service.v1.DebitResponse
+	(*GameDebitRequest)(nil),                     // 17: api.wallet.service.v1.GameDebitRequest
+	(*GameDebitResponse)(nil),                    // 18: api.wallet.service.v1.GameDebitResponse
+	(*GameCreditRequest)(nil),                    // 19: api.wallet.service.v1.GameCreditRequest
+	(*GameCreditResponse)(nil),                   // 20: api.wallet.service.v1.GameCreditResponse
+	(*GetUserBalancesResponse_Balance)(nil),      // 21: api.wallet.service.v1.GetUserBalancesResponse.Balance
+	(*CreditRequest_Ratio)(nil),                  // 22: api.wallet.service.v1.CreditRequest.Ratio
 }
 var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
-	19, // 0: api.wallet.service.v1.GetUserBalancesResponse.balances:type_name -> api.wallet.service.v1.GetUserBalancesResponse.Balance
+	21, // 0: api.wallet.service.v1.GetUserBalancesResponse.balances:type_name -> api.wallet.service.v1.GetUserBalancesResponse.Balance
 	0,  // 1: api.wallet.service.v1.CreditRequest.transaction_type:type_name -> api.wallet.service.v1.TransactionType
 	0,  // 2: api.wallet.service.v1.DebitRequest.transaction_type:type_name -> api.wallet.service.v1.TransactionType
 	0,  // 3: api.wallet.service.v1.GameDebitRequest.transaction_type:type_name -> api.wallet.service.v1.TransactionType
@@ -1437,21 +1543,23 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	5,  // 7: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:input_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest
 	7,  // 8: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
 	9,  // 9: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
-	11, // 10: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
-	13, // 11: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
-	15, // 12: api.wallet.service.v1.Wallet.GameDebit:input_type -> api.wallet.service.v1.GameDebitRequest
-	17, // 13: api.wallet.service.v1.Wallet.GameCredit:input_type -> api.wallet.service.v1.GameCreditRequest
-	2,  // 14: api.wallet.service.v1.Wallet.AddUser:output_type -> api.wallet.service.v1.AddUserResponse
-	4,  // 15: api.wallet.service.v1.Wallet.UpdateUser:output_type -> api.wallet.service.v1.UpdateUserResponse
-	6,  // 16: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:output_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse
-	8,  // 17: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
-	10, // 18: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
-	12, // 19: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
-	14, // 20: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
-	16, // 21: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
-	18, // 22: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
-	14, // [14:23] is the sub-list for method output_type
-	5,  // [5:14] is the sub-list for method input_type
+	11, // 10: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
+	13, // 11: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
+	15, // 12: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
+	17, // 13: api.wallet.service.v1.Wallet.GameDebit:input_type -> api.wallet.service.v1.GameDebitRequest
+	19, // 14: api.wallet.service.v1.Wallet.GameCredit:input_type -> api.wallet.service.v1.GameCreditRequest
+	2,  // 15: api.wallet.service.v1.Wallet.AddUser:output_type -> api.wallet.service.v1.AddUserResponse
+	4,  // 16: api.wallet.service.v1.Wallet.UpdateUser:output_type -> api.wallet.service.v1.UpdateUserResponse
+	6,  // 17: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:output_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse
+	8,  // 18: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
+	10, // 19: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
+	12, // 20: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
+	14, // 21: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
+	16, // 22: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
+	18, // 23: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
+	20, // 24: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
+	15, // [15:25] is the sub-list for method output_type
+	5,  // [5:15] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
 	5,  // [5:5] is the sub-list for extension extendee
 	0,  // [0:5] is the sub-list for field type_name
@@ -1462,19 +1570,13 @@ func file_wallet_service_v1_wallet_proto_init() {
 	if File_wallet_service_v1_wallet_proto != nil {
 		return
 	}
-	file_wallet_service_v1_wallet_proto_msgTypes[8].OneofWrappers = []any{}
-	file_wallet_service_v1_wallet_proto_msgTypes[14].OneofWrappers = []any{}
-	file_wallet_service_v1_wallet_proto_msgTypes[15].OneofWrappers = []any{}
-	file_wallet_service_v1_wallet_proto_msgTypes[16].OneofWrappers = []any{}
-	file_wallet_service_v1_wallet_proto_msgTypes[17].OneofWrappers = []any{}
-	file_wallet_service_v1_wallet_proto_msgTypes[18].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wallet_service_v1_wallet_proto_rawDesc), len(file_wallet_service_v1_wallet_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   20,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -580,6 +580,26 @@ paths:
         post:
             tags:
                 - Wallet
+            description: GetUserBalance returns the balance of specific currency of the user
+            operationId: Wallet_GetUserBalance
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceResponse'
+    /v1/wallet/balances/list:
+        post:
+            tags:
+                - Wallet
+            description: GetUserBalances returns the balances of all currencies of the user
             operationId: Wallet_GetUserBalances
             requestBody:
                 content:
@@ -874,14 +894,32 @@ components:
                     type: string
                     description: Avatar
             description: UserInfo contains basic user information.
-        api.wallet.service.v1.GetUserBalancesRequest:
+        api.wallet.service.v1.GetUserBalanceRequest:
             type: object
             properties:
                 userId:
                     type: string
                 currency:
                     type: string
-                settlementCurrency:
+                targetCurrency:
+                    type: string
+                    description: optional target currency
+        api.wallet.service.v1.GetUserBalanceResponse:
+            type: object
+            properties:
+                exchangeRate:
+                    type: string
+                    description: optional exchange rate between currency and target currency
+                cash:
+                    type: string
+                operatorBonus:
+                    type: string
+                providerBonus:
+                    type: string
+        api.wallet.service.v1.GetUserBalancesRequest:
+            type: object
+            properties:
+                userId:
                     type: string
         api.wallet.service.v1.GetUserBalancesResponse:
             type: object
@@ -894,8 +932,6 @@ components:
             type: object
             properties:
                 currency:
-                    type: string
-                exchangeRate:
                     type: string
                 cash:
                     type: string
