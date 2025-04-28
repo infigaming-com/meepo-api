@@ -8,6 +8,18 @@ import (
 
 type contextKey string
 
+type RequestInfo struct {
+	Method     string
+	Path       string
+	Host       string
+	RemoteAddr string
+	Country    string
+	Origin     string
+	Referer    string
+	UserAgent  string
+	ClientIP   string
+}
+
 func WithValue[T any](ctx context.Context, key string, value T) context.Context {
 	return context.WithValue(ctx, contextKey(key), value)
 }
@@ -36,4 +48,12 @@ func WithOperatorId(ctx context.Context, operatorId int64) context.Context {
 
 func OperatorId(ctx context.Context) (int64, bool) {
 	return Value[int64](ctx, "operatorId")
+}
+
+func WithRequestInfo(ctx context.Context, requestInfo RequestInfo) context.Context {
+	return WithValue(ctx, "requestInfo", requestInfo)
+}
+
+func GetRequestInfo(ctx context.Context) (RequestInfo, bool) {
+	return Value[RequestInfo](ctx, "requestInfo")
 }
