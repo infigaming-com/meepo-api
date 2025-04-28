@@ -337,6 +337,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /v1/payment/transaction/page:
+        post:
+            tags:
+                - Payment
+            description: Get transaction page with pagination and filters
+            operationId: Payment_GetTransactionPage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
     /v1/payment/withdraw/initiate:
         post:
             tags:
@@ -1290,6 +1309,70 @@ components:
                     items:
                         $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
             description: Response for payment method list
+        payment.service.v1.GetTransactionPageRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Pagination parameters
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                userId:
+                    type: string
+                    description: Filter parameters (all optional)
+                type:
+                    enum:
+                        - TRANSACTION_TYPE_UNSPECIFIED
+                        - TRANSACTION_TYPE_DEPOSIT
+                        - TRANSACTION_TYPE_WITHDRAW
+                    type: string
+                    description: Optional transaction type filter
+                    format: enum
+                currency:
+                    type: string
+                    description: Optional currency filter
+                status:
+                    enum:
+                        - TRANSACTION_STATUS_UNSPECIFIED
+                        - TRANSACTION_STATUS_PROCESSING
+                        - TRANSACTION_STATUS_SUCCESSFUL
+                        - TRANSACTION_STATUS_FAILED
+                    type: string
+                    description: Optional status filter
+                    format: enum
+                startTime:
+                    type: string
+                    description: Optional date range filter
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                paymentMethod:
+                    type: string
+                    description: Optional payment method filter
+            description: Request to get transaction page
+        payment.service.v1.GetTransactionPageResponse:
+            type: object
+            properties:
+                transactions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.TransactionInfo'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                totalPages:
+                    type: integer
+                    format: int32
+            description: Response for transaction page
         payment.service.v1.InitiateDepositRequest:
             type: object
             properties:
@@ -1398,6 +1481,41 @@ components:
                 keySchema:
                     type: object
             description: Details of a single payment method
+        payment.service.v1.TransactionInfo:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                userId:
+                    type: string
+                amount:
+                    type: string
+                currency:
+                    type: string
+                type:
+                    enum:
+                        - TRANSACTION_TYPE_UNSPECIFIED
+                        - TRANSACTION_TYPE_DEPOSIT
+                        - TRANSACTION_TYPE_WITHDRAW
+                    type: string
+                    format: enum
+                status:
+                    enum:
+                        - TRANSACTION_STATUS_UNSPECIFIED
+                        - TRANSACTION_STATUS_PROCESSING
+                        - TRANSACTION_STATUS_SUCCESSFUL
+                        - TRANSACTION_STATUS_FAILED
+                    type: string
+                    format: enum
+                paymentMethod:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: Transaction information
         system.service.v1.AddCurrencyRequest:
             type: object
             properties:

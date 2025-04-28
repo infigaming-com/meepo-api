@@ -126,6 +126,64 @@ message DepositCallbackResponse {
   int64 transaction_id = 1 [json_name="transactionId"];
 }
 
+// Transaction type enum
+enum TransactionType {
+  TRANSACTION_TYPE_UNSPECIFIED = 0;
+  TRANSACTION_TYPE_DEPOSIT = 1;
+  TRANSACTION_TYPE_WITHDRAW = 2;
+}
+
+// Transaction status enum
+enum TransactionStatus {
+  TRANSACTION_STATUS_UNSPECIFIED = 0;
+  TRANSACTION_STATUS_PROCESSING = 1;
+  TRANSACTION_STATUS_SUCCESSFUL = 2;
+  TRANSACTION_STATUS_FAILED = 3;
+}
+
+// Transaction information
+message TransactionInfo {
+  int64 transaction_id = 1 [json_name="transactionId"];
+  int64 user_id = 2 [json_name="userId"];
+  int64 amount = 3;
+  string currency = 4;
+  TransactionType type = 5;
+  TransactionStatus status = 6;
+  string payment_method = 7 [json_name="paymentMethod"];
+  google.protobuf.Timestamp created_at = 8 [json_name="createdAt"];
+  google.protobuf.Timestamp updated_at = 9 [json_name="updatedAt"];
+}
+
+// Request to get transaction page
+message GetTransactionPageRequest {
+  // Pagination parameters
+  int32 page = 1;
+  int32 page_size = 2 [json_name="pageSize"];
+  
+  // Filter parameters (all optional)
+  int64 user_id = 3 [json_name="userId"];
+  // Optional transaction type filter
+  TransactionType type = 4;
+  // Optional currency filter
+  string currency = 5;
+  // Optional status filter
+  TransactionStatus status = 6;
+  // Optional date range filter
+  google.protobuf.Timestamp start_time = 7 [json_name="startTime"];
+  google.protobuf.Timestamp end_time = 8 [json_name="endTime"];
+  // Optional payment method filter
+  string payment_method = 9 [json_name="paymentMethod"];
+}
+
+// Response for transaction page
+message GetTransactionPageResponse {
+  repeated TransactionInfo transactions = 1;
+  int32 total_count = 2 [json_name="totalCount"];
+  int32 page = 3;
+  int32 page_size = 4 [json_name="pageSize"];
+  int32 total_pages = 5 [json_name="totalPages"];
+}
+
 service Payment {
   // Get list of payment methods
   rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
@@ -172,6 +230,14 @@ service Payment {
   rpc DepositCallback(DepositCallbackRequest) returns (DepositCallbackResponse) {
     option (google.api.http) = {
       post: "/v1/payment/deposit/callback"
+      body: "*"
+    };
+  }
+
+  // Get transaction page with pagination and filters
+  rpc GetTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/transaction/page"
       body: "*"
     };
   }
