@@ -64,8 +64,8 @@ service User {
 		};
 	}
 
-	// Get users by operatorIds.
-	rpc GetUsersByOperatorIds (GetUsersByOperatorIdsRequest) returns (GetUsersByOperatorIdsResponse) {}
+	// Get userIds by operatorIds.
+	rpc GetUserIdsByOperatorIds (GetUserIdsByOperatorIdsRequest) returns (GetUserIdsByOperatorIdsResponse) {}
 	
 	// Logout the current user.
 	// Invalidates the current session and refresh token.
@@ -86,8 +86,22 @@ message UserInfo {
 	int64 user_id = 1;
 	// OperatorId.
 	int64 operator_id = 2;
+	// Username.
+	string username = 3;
+	// Email.
+	string email = 4;
+	// Mobile.
+	string mobile = 5;
 	// Whether the user is enabled.
-	bool enabled = 3;
+	bool enabled = 6;
+	// First name.
+	string first_name = 7;
+	// Last name.
+	string last_name = 8;
+	// Nickname
+	string nickname = 9;
+	// Avatar
+	string avatar = 10;
 }
 
 // AuthType defines the type of authentication method.
@@ -212,12 +226,12 @@ message GetUserResponse {
 	UserInfo user_info = 1;
 }
 
-message GetUsersByOperatorIdsRequest {
+message GetUserIdsByOperatorIdsRequest {
 	repeated int64 operator_ids = 1;
 }
 
-message GetUsersByOperatorIdsResponse {
-	repeated UserInfo user_infos = 1;
+message GetUserIdsByOperatorIdsResponse {
+	repeated int64 user_ids = 1;
 }
 
 // LogoutRequest is an empty message for the logout operation.

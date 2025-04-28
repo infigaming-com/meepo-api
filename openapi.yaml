@@ -858,9 +858,30 @@ components:
                 operatorId:
                     type: string
                     description: OperatorId.
+                username:
+                    type: string
+                    description: Username.
+                email:
+                    type: string
+                    description: Email.
+                mobile:
+                    type: string
+                    description: Mobile.
                 enabled:
                     type: boolean
                     description: Whether the user is enabled.
+                firstName:
+                    type: string
+                    description: First name.
+                lastName:
+                    type: string
+                    description: Last name.
+                nickname:
+                    type: string
+                    description: Nickname
+                avatar:
+                    type: string
+                    description: Avatar
             description: UserInfo contains basic user information.
         api.wallet.service.v1.GetUserBalancesRequest:
             type: object
