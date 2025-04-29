@@ -1029,8 +1029,6 @@ func (m *InitiateDepositRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for UserId
-
 	// no validation rules for Amount
 
 	// no validation rules for Currency
@@ -1339,8 +1337,6 @@ func (m *InitiateWithdrawRequest) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for UserId
 
 	// no validation rules for Amount
 
@@ -2039,8 +2035,6 @@ func (m *GetTransactionPageRequest) validate(all bool) error {
 	// no validation rules for Page
 
 	// no validation rules for PageSize
-
-	// no validation rules for UserId
 
 	// no validation rules for Type
 

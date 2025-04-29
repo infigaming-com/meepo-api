@@ -1298,16 +1298,15 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-                userId:
-                    type: string
-                    description: Filter parameters (all optional)
                 type:
                     enum:
                         - TRANSACTION_TYPE_UNSPECIFIED
                         - TRANSACTION_TYPE_DEPOSIT
                         - TRANSACTION_TYPE_WITHDRAW
                     type: string
-                    description: Optional transaction type filter
+                    description: |-
+                        Filter parameters (all optional)
+                         Optional transaction type filter
                     format: enum
                 currency:
                     type: string
@@ -1355,8 +1354,6 @@ components:
         payment.service.v1.InitiateDepositRequest:
             type: object
             properties:
-                userId:
-                    type: string
                 amount:
                     type: string
                 currency:
@@ -1390,8 +1387,6 @@ components:
         payment.service.v1.InitiateWithdrawRequest:
             type: object
             properties:
-                userId:
-                    type: string
                 amount:
                     type: string
                 operatorOrderNo:

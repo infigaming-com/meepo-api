@@ -60,11 +60,10 @@ message GetPaymentChannelListResponse {
 
 // Request to initiate a deposit
 message InitiateDepositRequest {
-  int64 user_id = 1 [json_name="userId"];
-  int64 amount = 2;
-  string currency = 3;
-  string channel_id = 4 [json_name="channelId"];
-  google.protobuf.Struct extra = 5; // Stores additional information like clientOrderId, productId, etc.
+  int64 amount = 1;
+  string currency = 2;
+  string channel_id = 3 [json_name="channelId"];
+  google.protobuf.Struct extra = 4; // Stores additional information like clientOrderId, productId, etc.
 }
 
 // Response for deposit initiation
@@ -81,20 +80,19 @@ message InitiateDepositResponse {
 
 // Request to initiate a withdrawal
 message InitiateWithdrawRequest {
-  int64 user_id = 1 [json_name="userId"];
-  int64 amount = 2;
-  string operator_order_no = 3 [json_name="operatorOrderNo"];
-  string bank_account = 4 [json_name="bankAccount"];
-  string bank_account_name = 5 [json_name="bankAccountName"];
-  string bank_account_mobile = 6 [json_name="bankAccountMobile"];
-  string bank_name = 7 [json_name="bankName"];
-  string bank_code = 8 [json_name="bankCode"];
-  string bank_branch = 9 [json_name="bankBranch"];
-  string bank_id = 10 [json_name="bankId"];
-  string bank_ifsc = 11 [json_name="bankIfsc"];
-  string bank_nation = 12 [json_name="bankNation"];
-  string channel = 13;
-  google.protobuf.Struct extra = 14; // Stores additional information like clientId, note, etc.
+  int64 amount = 1;
+  string operator_order_no = 2 [json_name="operatorOrderNo"];
+  string bank_account = 3 [json_name="bankAccount"];
+  string bank_account_name = 4 [json_name="bankAccountName"];
+  string bank_account_mobile = 5 [json_name="bankAccountMobile"];
+  string bank_name = 6 [json_name="bankName"];
+  string bank_code = 7 [json_name="bankCode"];
+  string bank_branch = 8 [json_name="bankBranch"];
+  string bank_id = 9 [json_name="bankId"];
+  string bank_ifsc = 10 [json_name="bankIfsc"];
+  string bank_nation = 11 [json_name="bankNation"];
+  string channel = 12;
+  google.protobuf.Struct extra = 13; // Stores additional information like clientId, note, etc.
 }
 
 // Response for withdrawal initiation
@@ -161,18 +159,17 @@ message GetTransactionPageRequest {
   int32 page_size = 2 [json_name="pageSize"];
   
   // Filter parameters (all optional)
-  int64 user_id = 3 [json_name="userId"];
   // Optional transaction type filter
-  TransactionType type = 4;
+  TransactionType type = 3;
   // Optional currency filter
-  string currency = 5;
+  string currency = 4;
   // Optional status filter
-  TransactionStatus status = 6;
+  TransactionStatus status = 5;
   // Optional date range filter
-  google.protobuf.Timestamp start_time = 7 [json_name="startTime"];
-  google.protobuf.Timestamp end_time = 8 [json_name="endTime"];
+  google.protobuf.Timestamp start_time = 6 [json_name="startTime"];
+  google.protobuf.Timestamp end_time = 7 [json_name="endTime"];
   // Optional payment method filter
-  string payment_method = 9 [json_name="paymentMethod"];
+  string payment_method = 8 [json_name="paymentMethod"];
 }
 
 // Response for transaction page
