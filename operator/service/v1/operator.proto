@@ -57,6 +57,9 @@ service Operator {
 			body: "*"
 		};
 	}
+
+	rpc GetParentOperatorIds(GetParentOperatorIdsRequest) returns (GetParentOperatorIdsResponse) {
+	}
 }
 
 message AddOperatorRequest {
@@ -133,3 +136,11 @@ message DeleteOriginOperatorIdRequest {
 }
 
 message DeleteOriginOperatorIdResponse {}
+
+message GetParentOperatorIdsRequest {
+	int64 operator_id = 1;
+}
+
+message GetParentOperatorIdsResponse {
+	repeated int64 parent_operator_ids = 1;
+}
