@@ -925,7 +925,8 @@ type GameDebitRequest struct {
 	ExchangeRate    string                 `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
 	TransactionType TransactionType        `protobuf:"varint,5,opt,name=transaction_type,json=transactionType,proto3,enum=api.wallet.service.v1.TransactionType" json:"transaction_type,omitempty"`
 	TransactionId   int64                  `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash            int64                  `protobuf:"varint,7,opt,name=cash,proto3" json:"cash,omitempty"`
+	Amount          int64                  `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`
+	Turnover        int64                  `protobuf:"varint,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1002,9 +1003,16 @@ func (x *GameDebitRequest) GetTransactionId() int64 {
 	return 0
 }
 
-func (x *GameDebitRequest) GetCash() int64 {
+func (x *GameDebitRequest) GetAmount() int64 {
 	if x != nil {
-		return x.Cash
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *GameDebitRequest) GetTurnover() int64 {
+	if x != nil {
+		return x.Turnover
 	}
 	return 0
 }
@@ -1094,7 +1102,7 @@ type GameCreditRequest struct {
 	TransactionType       TransactionType        `protobuf:"varint,5,opt,name=transaction_type,json=transactionType,proto3,enum=api.wallet.service.v1.TransactionType" json:"transaction_type,omitempty"`
 	TransactionId         int64                  `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	OriginalTransactionId int64                  `protobuf:"varint,7,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
-	Cash                  int64                  `protobuf:"varint,8,opt,name=cash,proto3" json:"cash,omitempty"`
+	Amount                int64                  `protobuf:"varint,8,opt,name=amount,proto3" json:"amount,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -1178,9 +1186,9 @@ func (x *GameCreditRequest) GetOriginalTransactionId() int64 {
 	return 0
 }
 
-func (x *GameCreditRequest) GetCash() int64 {
+func (x *GameCreditRequest) GetAmount() int64 {
 	if x != nil {
-		return x.Cash
+		return x.Amount
 	}
 	return 0
 }
@@ -1442,21 +1450,22 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x04 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x05 \x01(\x03R\x04cash\"6\n" +
 	"\rDebitResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xa3\x02\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xc3\x02\n" +
 	"\x10GameDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
 	"\x0ftarget_currency\x18\x03 \x01(\tR\x0etargetCurrency\x12#\n" +
 	"\rexchange_rate\x18\x04 \x01(\tR\fexchangeRate\x12Q\n" +
 	"\x10transaction_type\x18\x05 \x01(\x0e2&.api.wallet.service.v1.TransactionTypeR\x0ftransactionType\x12%\n" +
-	"\x0etransaction_id\x18\x06 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\a \x01(\x03R\x04cash\"\xc1\x01\n" +
+	"\x0etransaction_id\x18\x06 \x01(\x03R\rtransactionId\x12\x16\n" +
+	"\x06amount\x18\a \x01(\x03R\x06amount\x12\x1a\n" +
+	"\bturnover\x18\b \x01(\x03R\bturnover\"\xc1\x01\n" +
 	"\x11GameDebitResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12#\n" +
 	"\rexchange_rate\x18\x02 \x01(\tR\fexchangeRate\x12\x12\n" +
 	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x04 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonus\"\xdc\x02\n" +
+	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonus\"\xe0\x02\n" +
 	"\x11GameCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
@@ -1464,8 +1473,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\rexchange_rate\x18\x04 \x01(\tR\fexchangeRate\x12Q\n" +
 	"\x10transaction_type\x18\x05 \x01(\x0e2&.api.wallet.service.v1.TransactionTypeR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x06 \x01(\x03R\rtransactionId\x126\n" +
-	"\x17original_transaction_id\x18\a \x01(\x03R\x15originalTransactionId\x12\x12\n" +
-	"\x04cash\x18\b \x01(\x03R\x04cash\"\xc2\x01\n" +
+	"\x17original_transaction_id\x18\a \x01(\x03R\x15originalTransactionId\x12\x16\n" +
+	"\x06amount\x18\b \x01(\x03R\x06amount\"\xc2\x01\n" +
 	"\x12GameCreditResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12#\n" +
 	"\rexchange_rate\x18\x02 \x01(\tR\fexchangeRate\x12\x12\n" +
