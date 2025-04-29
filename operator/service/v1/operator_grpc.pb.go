@@ -44,6 +44,8 @@ type OperatorClient interface {
 	AddOriginOperatorId(ctx context.Context, in *AddOriginOperatorIdRequest, opts ...grpc.CallOption) (*AddOriginOperatorIdResponse, error)
 	GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdByOriginResponse, error)
 	DeleteOriginOperatorId(ctx context.Context, in *DeleteOriginOperatorIdRequest, opts ...grpc.CallOption) (*DeleteOriginOperatorIdResponse, error)
+	// GetParentOperatorIds returns parent operator IDs for the given operator ID.
+	// The response contains only the list of parent operator IDs, doesn't include the requested operator_id.
 	GetParentOperatorIds(ctx context.Context, in *GetParentOperatorIdsRequest, opts ...grpc.CallOption) (*GetParentOperatorIdsResponse, error)
 }
 
@@ -159,6 +161,8 @@ type OperatorServer interface {
 	AddOriginOperatorId(context.Context, *AddOriginOperatorIdRequest) (*AddOriginOperatorIdResponse, error)
 	GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error)
 	DeleteOriginOperatorId(context.Context, *DeleteOriginOperatorIdRequest) (*DeleteOriginOperatorIdResponse, error)
+	// GetParentOperatorIds returns parent operator IDs for the given operator ID.
+	// The response contains only the list of parent operator IDs, doesn't include the requested operator_id.
 	GetParentOperatorIds(context.Context, *GetParentOperatorIdsRequest) (*GetParentOperatorIdsResponse, error)
 	mustEmbedUnimplementedOperatorServer()
 }

@@ -766,8 +766,9 @@ func (*DeleteOriginOperatorIdResponse) Descriptor() ([]byte, []int) {
 }
 
 type GetParentOperatorIdsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The operator ID to get parent operators for
+	OperatorId    int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -810,8 +811,9 @@ func (x *GetParentOperatorIdsRequest) GetOperatorId() int64 {
 }
 
 type GetParentOperatorIdsResponse struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	ParentOperatorIds []int64                `protobuf:"varint,1,rep,packed,name=parent_operator_ids,json=parentOperatorIds,proto3" json:"parent_operator_ids,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of parent operator IDs.
+	ParentOperatorIds []int64 `protobuf:"varint,1,rep,packed,name=parent_operator_ids,json=parentOperatorIds,proto3" json:"parent_operator_ids,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
