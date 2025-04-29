@@ -58,6 +58,8 @@ service Operator {
 		};
 	}
 
+	// GetParentOperatorIds returns parent operator IDs for the given operator ID.
+	// The response contains only the list of parent operator IDs, doesn't include the requested operator_id.
 	rpc GetParentOperatorIds(GetParentOperatorIdsRequest) returns (GetParentOperatorIdsResponse) {
 	}
 }
@@ -138,9 +140,11 @@ message DeleteOriginOperatorIdRequest {
 message DeleteOriginOperatorIdResponse {}
 
 message GetParentOperatorIdsRequest {
+	// The operator ID to get parent operators for
 	int64 operator_id = 1;
 }
 
 message GetParentOperatorIdsResponse {
+	// List of parent operator IDs.
 	repeated int64 parent_operator_ids = 1;
 }
