@@ -35,16 +35,16 @@ func ErrorUserInfoNotFoundInContext(format string, args ...interface{}) *errors.
 	return errors.New(401, ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
 }
 
-func IsOperatorIdNotFoundInContext(err error) bool {
+func IsRequestInfoNotFoundInContext(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_OPERATOR_ID_NOT_FOUND_IN_CONTEXT.String() && e.Code == 401
+	return e.Reason == ErrorReason_REQUEST_INFO_NOT_FOUND_IN_CONTEXT.String() && e.Code == 401
 }
 
-func ErrorOperatorIdNotFoundInContext(format string, args ...interface{}) *errors.Error {
-	return errors.New(401, ErrorReason_OPERATOR_ID_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+func ErrorRequestInfoNotFoundInContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_REQUEST_INFO_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
 }
 
 func IsUserNotFound(err error) bool {
@@ -333,4 +333,16 @@ func IsGetUsersByOperatorIdsFailed(err error) bool {
 
 func ErrorGetUsersByOperatorIdsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_USERS_BY_OPERATOR_IDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorIdByOriginFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorIdByOriginFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED.String(), fmt.Sprintf(format, args...))
 }
