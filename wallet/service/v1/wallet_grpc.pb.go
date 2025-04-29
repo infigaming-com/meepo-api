@@ -24,6 +24,7 @@ const (
 	Wallet_AddOrUpdateOperatorsCurrency_FullMethodName = "/api.wallet.service.v1.Wallet/AddOrUpdateOperatorsCurrency"
 	Wallet_UpdateUserCurrency_FullMethodName           = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
 	Wallet_GetUserBalances_FullMethodName              = "/api.wallet.service.v1.Wallet/GetUserBalances"
+	Wallet_GetUserBalance_FullMethodName               = "/api.wallet.service.v1.Wallet/GetUserBalance"
 	Wallet_Credit_FullMethodName                       = "/api.wallet.service.v1.Wallet/Credit"
 	Wallet_Debit_FullMethodName                        = "/api.wallet.service.v1.Wallet/Debit"
 	Wallet_GameDebit_FullMethodName                    = "/api.wallet.service.v1.Wallet/GameDebit"
@@ -38,7 +39,10 @@ type WalletClient interface {
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	AddOrUpdateOperatorsCurrency(ctx context.Context, in *AddOrUpdateOperatorsCurrencyRequest, opts ...grpc.CallOption) (*AddOrUpdateOperatorsCurrencyResponse, error)
 	UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error)
+	// GetUserBalances returns the balances of all currencies of the user
 	GetUserBalances(ctx context.Context, in *GetUserBalancesRequest, opts ...grpc.CallOption) (*GetUserBalancesResponse, error)
+	// GetUserBalance returns the balance of specific currency of the user
+	GetUserBalance(ctx context.Context, in *GetUserBalanceRequest, opts ...grpc.CallOption) (*GetUserBalanceResponse, error)
 	Credit(ctx context.Context, in *CreditRequest, opts ...grpc.CallOption) (*CreditResponse, error)
 	Debit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*DebitResponse, error)
 	GameDebit(ctx context.Context, in *GameDebitRequest, opts ...grpc.CallOption) (*GameDebitResponse, error)
@@ -103,6 +107,16 @@ func (c *walletClient) GetUserBalances(ctx context.Context, in *GetUserBalancesR
 	return out, nil
 }
 
+func (c *walletClient) GetUserBalance(ctx context.Context, in *GetUserBalanceRequest, opts ...grpc.CallOption) (*GetUserBalanceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserBalanceResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetUserBalance_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) Credit(ctx context.Context, in *CreditRequest, opts ...grpc.CallOption) (*CreditResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreditResponse)
@@ -151,7 +165,10 @@ type WalletServer interface {
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	AddOrUpdateOperatorsCurrency(context.Context, *AddOrUpdateOperatorsCurrencyRequest) (*AddOrUpdateOperatorsCurrencyResponse, error)
 	UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error)
+	// GetUserBalances returns the balances of all currencies of the user
 	GetUserBalances(context.Context, *GetUserBalancesRequest) (*GetUserBalancesResponse, error)
+	// GetUserBalance returns the balance of specific currency of the user
+	GetUserBalance(context.Context, *GetUserBalanceRequest) (*GetUserBalanceResponse, error)
 	Credit(context.Context, *CreditRequest) (*CreditResponse, error)
 	Debit(context.Context, *DebitRequest) (*DebitResponse, error)
 	GameDebit(context.Context, *GameDebitRequest) (*GameDebitResponse, error)
@@ -180,6 +197,9 @@ func (UnimplementedWalletServer) UpdateUserCurrency(context.Context, *UpdateUser
 }
 func (UnimplementedWalletServer) GetUserBalances(context.Context, *GetUserBalancesRequest) (*GetUserBalancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserBalances not implemented")
+}
+func (UnimplementedWalletServer) GetUserBalance(context.Context, *GetUserBalanceRequest) (*GetUserBalanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserBalance not implemented")
 }
 func (UnimplementedWalletServer) Credit(context.Context, *CreditRequest) (*CreditResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Credit not implemented")
@@ -304,6 +324,24 @@ func _Wallet_GetUserBalances_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_GetUserBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserBalanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetUserBalance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetUserBalance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetUserBalance(ctx, req.(*GetUserBalanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_Credit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreditRequest)
 	if err := dec(in); err != nil {
@@ -402,6 +440,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserBalances",
 			Handler:    _Wallet_GetUserBalances_Handler,
+		},
+		{
+			MethodName: "GetUserBalance",
+			Handler:    _Wallet_GetUserBalance_Handler,
 		},
 		{
 			MethodName: "Credit",

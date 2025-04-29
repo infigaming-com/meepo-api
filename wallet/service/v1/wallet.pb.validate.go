@@ -897,14 +897,6 @@ func (m *GetUserBalancesRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
-	if m.Currency != nil {
-		// no validation rules for Currency
-	}
-
-	if m.SettlementCurrency != nil {
-		// no validation rules for SettlementCurrency
-	}
-
 	if len(errors) > 0 {
 		return GetUserBalancesRequestMultiError(errors)
 	}
@@ -1120,6 +1112,224 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetUserBalancesResponseValidationError{}
+
+// Validate checks the field values on GetUserBalanceRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserBalanceRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserBalanceRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetUserBalanceRequestMultiError, or nil if none found.
+func (m *GetUserBalanceRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserBalanceRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Currency
+
+	// no validation rules for TargetCurrency
+
+	if len(errors) > 0 {
+		return GetUserBalanceRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserBalanceRequestMultiError is an error wrapping multiple validation
+// errors returned by GetUserBalanceRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserBalanceRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserBalanceRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserBalanceRequestMultiError) AllErrors() []error { return m }
+
+// GetUserBalanceRequestValidationError is the validation error returned by
+// GetUserBalanceRequest.Validate if the designated constraints aren't met.
+type GetUserBalanceRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserBalanceRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserBalanceRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserBalanceRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserBalanceRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserBalanceRequestValidationError) ErrorName() string {
+	return "GetUserBalanceRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserBalanceRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserBalanceRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserBalanceRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserBalanceRequestValidationError{}
+
+// Validate checks the field values on GetUserBalanceResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserBalanceResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserBalanceResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetUserBalanceResponseMultiError, or nil if none found.
+func (m *GetUserBalanceResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserBalanceResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ExchangeRate
+
+	// no validation rules for Cash
+
+	// no validation rules for OperatorBonus
+
+	// no validation rules for ProviderBonus
+
+	if len(errors) > 0 {
+		return GetUserBalanceResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserBalanceResponseMultiError is an error wrapping multiple validation
+// errors returned by GetUserBalanceResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserBalanceResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserBalanceResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserBalanceResponseMultiError) AllErrors() []error { return m }
+
+// GetUserBalanceResponseValidationError is the validation error returned by
+// GetUserBalanceResponse.Validate if the designated constraints aren't met.
+type GetUserBalanceResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserBalanceResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserBalanceResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserBalanceResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserBalanceResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserBalanceResponseValidationError) ErrorName() string {
+	return "GetUserBalanceResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserBalanceResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserBalanceResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserBalanceResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserBalanceResponseValidationError{}
 
 // Validate checks the field values on CreditRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
@@ -1570,19 +1780,15 @@ func (m *GameDebitRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for TargetCurrency
+
+	// no validation rules for ExchangeRate
+
 	// no validation rules for TransactionType
 
 	// no validation rules for TransactionId
 
 	// no validation rules for Cash
-
-	if m.SettlementCurrency != nil {
-		// no validation rules for SettlementCurrency
-	}
-
-	if m.ExchangeRate != nil {
-		// no validation rules for ExchangeRate
-	}
 
 	if len(errors) > 0 {
 		return GameDebitRequestMultiError(errors)
@@ -1686,15 +1892,13 @@ func (m *GameDebitResponse) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
+	// no validation rules for ExchangeRate
+
 	// no validation rules for Cash
 
 	// no validation rules for OperatorBonus
 
 	// no validation rules for ProviderBonus
-
-	if m.ExchangeRate != nil {
-		// no validation rules for ExchangeRate
-	}
 
 	if len(errors) > 0 {
 		return GameDebitResponseMultiError(errors)
@@ -1802,6 +2006,10 @@ func (m *GameCreditRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for TargetCurrency
+
+	// no validation rules for ExchangeRate
+
 	// no validation rules for TransactionType
 
 	// no validation rules for TransactionId
@@ -1809,14 +2017,6 @@ func (m *GameCreditRequest) validate(all bool) error {
 	// no validation rules for OriginalTransactionId
 
 	// no validation rules for Cash
-
-	if m.SettlementCurrency != nil {
-		// no validation rules for SettlementCurrency
-	}
-
-	if m.ExchangeRate != nil {
-		// no validation rules for ExchangeRate
-	}
 
 	if len(errors) > 0 {
 		return GameCreditRequestMultiError(errors)
@@ -1922,15 +2122,13 @@ func (m *GameCreditResponse) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
+	// no validation rules for ExchangeRate
+
 	// no validation rules for Cash
 
 	// no validation rules for OperatorBonus
 
 	// no validation rules for ProviderBonus
-
-	if m.ExchangeRate != nil {
-		// no validation rules for ExchangeRate
-	}
 
 	if len(errors) > 0 {
 		return GameCreditResponseMultiError(errors)
@@ -2041,10 +2239,6 @@ func (m *GetUserBalancesResponse_Balance) validate(all bool) error {
 	// no validation rules for OperatorBonus
 
 	// no validation rules for ProviderBonus
-
-	if m.ExchangeRate != nil {
-		// no validation rules for ExchangeRate
-	}
 
 	if len(errors) > 0 {
 		return GetUserBalancesResponse_BalanceMultiError(errors)

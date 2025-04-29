@@ -49,6 +49,9 @@ const (
 	ErrorReason_GET_CREDIT_TRANSACTION_FAILED                 ErrorReason = 30021
 	ErrorReason_ADD_BALANCE_TRANSACTION_FAILED                ErrorReason = 30022
 	ErrorReason_ADD_CREDIT_TRANSACTION_FAILED                 ErrorReason = 30023
+	ErrorReason_GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30024
+	ErrorReason_NOT_ENOUGH_CASH                               ErrorReason = 30025
+	ErrorReason_GET_RATES_FAILED                              ErrorReason = 30026
 )
 
 // Enum value maps for ErrorReason.
@@ -78,6 +81,9 @@ var (
 		30021: "GET_CREDIT_TRANSACTION_FAILED",
 		30022: "ADD_BALANCE_TRANSACTION_FAILED",
 		30023: "ADD_CREDIT_TRANSACTION_FAILED",
+		30024: "GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED",
+		30025: "NOT_ENOUGH_CASH",
+		30026: "GET_RATES_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                   0,
@@ -104,6 +110,9 @@ var (
 		"GET_CREDIT_TRANSACTION_FAILED":                 30021,
 		"ADD_BALANCE_TRANSACTION_FAILED":                30022,
 		"ADD_CREDIT_TRANSACTION_FAILED":                 30023,
+		"GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED":  30024,
+		"NOT_ENOUGH_CASH":                               30025,
+		"GET_RATES_FAILED":                              30026,
 	}
 )
 
@@ -138,32 +147,35 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xc6\a\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xb7\a\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x1a\x04\xa8E\x94\x03\x12\x19\n" +
-	"\rUSER_DISABLED\x10\xb2\xea\x01\x1a\x04\xa8E\x91\x03\x12*\n" +
-	"\x1eGET_OPERATOR_CURRENCIES_FAILED\x10\xb3\xea\x01\x1a\x04\xa8E\xf4\x03\x12\x1b\n" +
-	"\x0fADD_USER_FAILED\x10\xb4\xea\x01\x1a\x04\xa8E\xf4\x03\x12\x1f\n" +
-	"\x13ADD_BALANCES_FAILED\x10\xb5\xea\x01\x1a\x04\xa8E\xf4\x03\x12\x1b\n" +
-	"\x0fGET_USER_FAILED\x10\xb6\xea\x01\x1a\x04\xa8E\xf4\x03\x12)\n" +
-	"\x1dLOCK_USER_WITH_USER_ID_FAILED\x10\xb7\xea\x01\x1a\x04\xa8E\xf4\x03\x12\x1e\n" +
-	"\x12UPDATE_USER_FAILED\x10\xb8\xea\x01\x1a\x04\xa8E\xf4\x03\x12\"\n" +
-	"\x16UPDATE_BALANCES_FAILED\x10\xb9\xea\x01\x1a\x04\xa8E\xf4\x03\x12!\n" +
-	"\x15UPDATE_BALANCE_FAILED\x10\xba\xea\x01\x1a\x04\xa8E\xf4\x03\x12.\n" +
-	"\"GET_USERS_WITH_OPERATOR_IDS_FAILED\x10\xbb\xea\x01\x1a\x04\xa8E\xf4\x03\x129\n" +
-	"-LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xbc\xea\x01\x1a\x04\xa8E\xf4\x03\x128\n" +
-	",GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xbd\xea\x01\x1a\x04\xa8E\xf4\x03\x12\x1c\n" +
-	"\x10BALANCE_DISABLED\x10\xbe\xea\x01\x1a\x04\xa8E\x91\x03\x12%\n" +
-	"\x19GENERATE_CREDIT_ID_FAILED\x10\xbf\xea\x01\x1a\x04\xa8E\xf4\x03\x128\n" +
-	",LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xc0\xea\x01\x1a\x04\xa8E\xf4\x03\x12\x1d\n" +
-	"\x11ADD_CREDIT_FAILED\x10\xc1\xea\x01\x1a\x04\xa8E\xf4\x03\x12$\n" +
-	"\x18INVALID_TRANSACTION_TYPE\x10\xc2\xea\x01\x1a\x04\xa8E\x90\x03\x122\n" +
-	"&GENERATE_BALANCE_TRANSACTION_ID_FAILED\x10\xc3\xea\x01\x1a\x04\xa8E\xf4\x03\x121\n" +
-	"%GENERATE_CREDIT_TRANSACTION_ID_FAILED\x10\xc4\xea\x01\x1a\x04\xa8E\xf4\x03\x12)\n" +
-	"\x1dGET_CREDIT_TRANSACTION_FAILED\x10\xc5\xea\x01\x1a\x04\xa8E\xf4\x03\x12*\n" +
-	"\x1eADD_BALANCE_TRANSACTION_FAILED\x10\xc6\xea\x01\x1a\x04\xa8E\xf4\x03\x12)\n" +
-	"\x1dADD_CREDIT_TRANSACTION_FAILED\x10\xc7\xea\x01\x1a\x04\xa8E\xf4\x03\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\rUSER_DISABLED\x10\xb2\xea\x01\x1a\x04\xa8E\x91\x03\x12$\n" +
+	"\x1eGET_OPERATOR_CURRENCIES_FAILED\x10\xb3\xea\x01\x12\x15\n" +
+	"\x0fADD_USER_FAILED\x10\xb4\xea\x01\x12\x19\n" +
+	"\x13ADD_BALANCES_FAILED\x10\xb5\xea\x01\x12\x15\n" +
+	"\x0fGET_USER_FAILED\x10\xb6\xea\x01\x12#\n" +
+	"\x1dLOCK_USER_WITH_USER_ID_FAILED\x10\xb7\xea\x01\x12\x18\n" +
+	"\x12UPDATE_USER_FAILED\x10\xb8\xea\x01\x12\x1c\n" +
+	"\x16UPDATE_BALANCES_FAILED\x10\xb9\xea\x01\x12\x1b\n" +
+	"\x15UPDATE_BALANCE_FAILED\x10\xba\xea\x01\x12(\n" +
+	"\"GET_USERS_WITH_OPERATOR_IDS_FAILED\x10\xbb\xea\x01\x123\n" +
+	"-LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xbc\xea\x01\x122\n" +
+	",GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xbd\xea\x01\x12\x1c\n" +
+	"\x10BALANCE_DISABLED\x10\xbe\xea\x01\x1a\x04\xa8E\x91\x03\x12\x1f\n" +
+	"\x19GENERATE_CREDIT_ID_FAILED\x10\xbf\xea\x01\x122\n" +
+	",LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xc0\xea\x01\x12\x17\n" +
+	"\x11ADD_CREDIT_FAILED\x10\xc1\xea\x01\x12$\n" +
+	"\x18INVALID_TRANSACTION_TYPE\x10\xc2\xea\x01\x1a\x04\xa8E\x90\x03\x12,\n" +
+	"&GENERATE_BALANCE_TRANSACTION_ID_FAILED\x10\xc3\xea\x01\x12+\n" +
+	"%GENERATE_CREDIT_TRANSACTION_ID_FAILED\x10\xc4\xea\x01\x12#\n" +
+	"\x1dGET_CREDIT_TRANSACTION_FAILED\x10\xc5\xea\x01\x12$\n" +
+	"\x1eADD_BALANCE_TRANSACTION_FAILED\x10\xc6\xea\x01\x12#\n" +
+	"\x1dADD_CREDIT_TRANSACTION_FAILED\x10\xc7\xea\x01\x122\n" +
+	",GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xc8\xea\x01\x12\x15\n" +
+	"\x0fNOT_ENOUGH_CASH\x10\xc9\xea\x01\x12\x16\n" +
+	"\x10GET_RATES_FAILED\x10\xca\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
