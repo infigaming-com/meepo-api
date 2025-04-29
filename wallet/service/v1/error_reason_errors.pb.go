@@ -311,16 +311,16 @@ func ErrorGetCreditsWithUserIdAndCurrencyFailed(format string, args ...interface
 	return errors.New(500, ErrorReason_GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsNotEnoughCash(err error) bool {
+func IsInsufficientBalance(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_NOT_ENOUGH_CASH.String() && e.Code == 500
+	return e.Reason == ErrorReason_INSUFFICIENT_BALANCE.String() && e.Code == 500
 }
 
-func ErrorNotEnoughCash(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_NOT_ENOUGH_CASH.String(), fmt.Sprintf(format, args...))
+func ErrorInsufficientBalance(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INSUFFICIENT_BALANCE.String(), fmt.Sprintf(format, args...))
 }
 
 func IsGetRatesFailed(err error) bool {
@@ -333,4 +333,28 @@ func IsGetRatesFailed(err error) bool {
 
 func ErrorGetRatesFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_RATES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateCreditFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_CREDIT_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateCreditFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_CREDIT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCreditTransactionsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_CREDIT_TRANSACTIONS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCreditTransactionsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_CREDIT_TRANSACTIONS_FAILED.String(), fmt.Sprintf(format, args...))
 }
