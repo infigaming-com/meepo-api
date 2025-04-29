@@ -70,3 +70,27 @@ func IsAddOperatorFailed(err error) bool {
 func ErrorAddOperatorFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_ADD_OPERATOR_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsAddOriginOperatorIdFailedWithExistingOrigin(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_ORIGIN_OPERATOR_ID_FAILED_WITH_EXISTING_ORIGIN.String() && e.Code == 500
+}
+
+func ErrorAddOriginOperatorIdFailedWithExistingOrigin(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_ORIGIN_OPERATOR_ID_FAILED_WITH_EXISTING_ORIGIN.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorIdByOriginFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorIdByOriginFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
