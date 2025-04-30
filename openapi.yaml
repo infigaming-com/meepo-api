@@ -995,6 +995,11 @@ components:
         game.service.v1.BalanceResponse:
             type: object
             properties:
+                data:
+                    $ref: '#/components/schemas/game.service.v1.BalanceResponse_Data'
+        game.service.v1.BalanceResponse_Data:
+            type: object
+            properties:
                 balance:
                     type: number
                     format: double
@@ -1161,6 +1166,11 @@ components:
         game.service.v1.PlayResponse:
             type: object
             properties:
+                data:
+                    $ref: '#/components/schemas/game.service.v1.PlayResponse_Data'
+        game.service.v1.PlayResponse_Data:
+            type: object
+            properties:
                 balance:
                     type: number
                     format: double
@@ -1230,6 +1240,11 @@ components:
                     items:
                         $ref: '#/components/schemas/game.service.v1.RollbackAction'
         game.service.v1.RollbackResponse:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/game.service.v1.RollbackResponse_Data'
+        game.service.v1.RollbackResponse_Data:
             type: object
             properties:
                 balance:
