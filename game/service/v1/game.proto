@@ -216,9 +216,12 @@ message BalanceRequest {
 }
 
 message BalanceResponse {
-	double balance = 1;
-	double bonus = 2;
-	string round_id = 3;
+	message Data {
+		double balance = 1;
+		double bonus = 2;
+		string round_id = 3;
+	}
+	Data data = 1;
 }
 
 message PlayRequest {
@@ -232,9 +235,12 @@ message PlayRequest {
 }
 
 message PlayResponse {
-	double balance = 1;
-	string round_id = 2;
-	repeated Transactions transactions = 3;
+	message Data {
+		double balance = 1;
+		string round_id = 2;
+		repeated Transactions transactions = 3;
+	}
+	Data data = 1;
 }
 
 message Action {
@@ -281,9 +287,12 @@ message RollbackAction {
 }
 
 message RollbackResponse {
-	double balance = 1;
-	string round_id = 2;
-	repeated RollbackTransactions transactions = 3;
+	message Data {
+		double balance = 1;
+		string round_id = 2;
+		repeated RollbackTransactions transactions = 3;
+	}
+	Data data = 1;
 }
 
 message RollbackTransactions {
