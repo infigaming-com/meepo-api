@@ -134,7 +134,6 @@ message GetOperatorIdByOriginResponse {
 
 message DeleteOriginOperatorIdRequest {
 	string origin = 1;
-	int64 operator_id = 2;
 }
 
 message DeleteOriginOperatorIdResponse {}

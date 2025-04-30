@@ -664,8 +664,6 @@ components:
             properties:
                 origin:
                     type: string
-                operatorId:
-                    type: string
         api.operator.service.v1.DeleteOriginOperatorIdResponse:
             type: object
             properties: {}

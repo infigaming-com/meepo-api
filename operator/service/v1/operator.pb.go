@@ -680,7 +680,6 @@ func (x *GetOperatorIdByOriginResponse) GetOperatorId() int64 {
 type DeleteOriginOperatorIdRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Origin        string                 `protobuf:"bytes,1,opt,name=origin,proto3" json:"origin,omitempty"`
-	OperatorId    int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -720,13 +719,6 @@ func (x *DeleteOriginOperatorIdRequest) GetOrigin() string {
 		return x.Origin
 	}
 	return ""
-}
-
-func (x *DeleteOriginOperatorIdRequest) GetOperatorId() int64 {
-	if x != nil {
-		return x.OperatorId
-	}
-	return 0
 }
 
 type DeleteOriginOperatorIdResponse struct {
@@ -965,11 +957,9 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x06origin\x18\x01 \x01(\tR\x06origin\"@\n" +
 	"\x1dGetOperatorIdByOriginResponse\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
-	"operatorId\"X\n" +
+	"operatorId\"7\n" +
 	"\x1dDeleteOriginOperatorIdRequest\x12\x16\n" +
-	"\x06origin\x18\x01 \x01(\tR\x06origin\x12\x1f\n" +
-	"\voperator_id\x18\x02 \x01(\x03R\n" +
-	"operatorId\" \n" +
+	"\x06origin\x18\x01 \x01(\tR\x06origin\" \n" +
 	"\x1eDeleteOriginOperatorIdResponse\">\n" +
 	"\x1bGetParentOperatorIdsRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
