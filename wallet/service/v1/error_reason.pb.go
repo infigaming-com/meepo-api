@@ -50,8 +50,10 @@ const (
 	ErrorReason_ADD_BALANCE_TRANSACTION_FAILED                ErrorReason = 30022
 	ErrorReason_ADD_CREDIT_TRANSACTION_FAILED                 ErrorReason = 30023
 	ErrorReason_GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30024
-	ErrorReason_NOT_ENOUGH_CASH                               ErrorReason = 30025
+	ErrorReason_INSUFFICIENT_BALANCE                          ErrorReason = 30025
 	ErrorReason_GET_RATES_FAILED                              ErrorReason = 30026
+	ErrorReason_UPDATE_CREDIT_FAILED                          ErrorReason = 30027
+	ErrorReason_GET_CREDIT_TRANSACTIONS_FAILED                ErrorReason = 30028
 )
 
 // Enum value maps for ErrorReason.
@@ -82,8 +84,10 @@ var (
 		30022: "ADD_BALANCE_TRANSACTION_FAILED",
 		30023: "ADD_CREDIT_TRANSACTION_FAILED",
 		30024: "GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED",
-		30025: "NOT_ENOUGH_CASH",
+		30025: "INSUFFICIENT_BALANCE",
 		30026: "GET_RATES_FAILED",
+		30027: "UPDATE_CREDIT_FAILED",
+		30028: "GET_CREDIT_TRANSACTIONS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                   0,
@@ -111,8 +115,10 @@ var (
 		"ADD_BALANCE_TRANSACTION_FAILED":                30022,
 		"ADD_CREDIT_TRANSACTION_FAILED":                 30023,
 		"GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED":  30024,
-		"NOT_ENOUGH_CASH":                               30025,
+		"INSUFFICIENT_BALANCE":                          30025,
 		"GET_RATES_FAILED":                              30026,
+		"UPDATE_CREDIT_FAILED":                          30027,
+		"GET_CREDIT_TRANSACTIONS_FAILED":                30028,
 	}
 )
 
@@ -147,7 +153,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xb7\a\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xfe\a\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x1a\x04\xa8E\x94\x03\x12\x19\n" +
@@ -173,9 +179,11 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1dGET_CREDIT_TRANSACTION_FAILED\x10\xc5\xea\x01\x12$\n" +
 	"\x1eADD_BALANCE_TRANSACTION_FAILED\x10\xc6\xea\x01\x12#\n" +
 	"\x1dADD_CREDIT_TRANSACTION_FAILED\x10\xc7\xea\x01\x122\n" +
-	",GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xc8\xea\x01\x12\x15\n" +
-	"\x0fNOT_ENOUGH_CASH\x10\xc9\xea\x01\x12\x16\n" +
-	"\x10GET_RATES_FAILED\x10\xca\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	",GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xc8\xea\x01\x12\x1a\n" +
+	"\x14INSUFFICIENT_BALANCE\x10\xc9\xea\x01\x12\x16\n" +
+	"\x10GET_RATES_FAILED\x10\xca\xea\x01\x12\x1a\n" +
+	"\x14UPDATE_CREDIT_FAILED\x10\xcb\xea\x01\x12$\n" +
+	"\x1eGET_CREDIT_TRANSACTIONS_FAILED\x10\xcc\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

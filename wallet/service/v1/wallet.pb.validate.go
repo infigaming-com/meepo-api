@@ -1788,7 +1788,9 @@ func (m *GameDebitRequest) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
-	// no validation rules for Cash
+	// no validation rules for Amount
+
+	// no validation rules for Turnover
 
 	if len(errors) > 0 {
 		return GameDebitRequestMultiError(errors)
@@ -2016,7 +2018,7 @@ func (m *GameCreditRequest) validate(all bool) error {
 
 	// no validation rules for OriginalTransactionId
 
-	// no validation rules for Cash
+	// no validation rules for Amount
 
 	if len(errors) > 0 {
 		return GameCreditRequestMultiError(errors)

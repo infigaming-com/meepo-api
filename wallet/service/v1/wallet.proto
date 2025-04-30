@@ -159,7 +159,8 @@ message GameDebitRequest {
 	string exchange_rate = 4;
 	TransactionType transaction_type = 5;
 	int64 transaction_id = 6;
-	int64 cash = 7;
+	int64 amount = 7;
+	int64 turnover = 8;
 }
 
 message GameDebitResponse {
@@ -178,7 +179,7 @@ message GameCreditRequest {
 	TransactionType transaction_type = 5;
 	int64 transaction_id = 6;
 	int64 original_transaction_id = 7;
-	int64 cash = 8;
+	int64 amount = 8;
 }
 
 message GameCreditResponse {

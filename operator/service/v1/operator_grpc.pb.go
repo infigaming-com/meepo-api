@@ -27,6 +27,7 @@ const (
 	Operator_AddOriginOperatorId_FullMethodName    = "/api.operator.service.v1.Operator/AddOriginOperatorId"
 	Operator_GetOperatorIdByOrigin_FullMethodName  = "/api.operator.service.v1.Operator/GetOperatorIdByOrigin"
 	Operator_DeleteOriginOperatorId_FullMethodName = "/api.operator.service.v1.Operator/DeleteOriginOperatorId"
+	Operator_GetParentOperatorIds_FullMethodName   = "/api.operator.service.v1.Operator/GetParentOperatorIds"
 )
 
 // OperatorClient is the client API for Operator service.
@@ -43,6 +44,9 @@ type OperatorClient interface {
 	AddOriginOperatorId(ctx context.Context, in *AddOriginOperatorIdRequest, opts ...grpc.CallOption) (*AddOriginOperatorIdResponse, error)
 	GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdByOriginResponse, error)
 	DeleteOriginOperatorId(ctx context.Context, in *DeleteOriginOperatorIdRequest, opts ...grpc.CallOption) (*DeleteOriginOperatorIdResponse, error)
+	// GetParentOperatorIds returns parent operator IDs for the given operator ID.
+	// The response contains only the list of parent operator IDs, doesn't include the requested operator_id.
+	GetParentOperatorIds(ctx context.Context, in *GetParentOperatorIdsRequest, opts ...grpc.CallOption) (*GetParentOperatorIdsResponse, error)
 }
 
 type operatorClient struct {
@@ -133,6 +137,16 @@ func (c *operatorClient) DeleteOriginOperatorId(ctx context.Context, in *DeleteO
 	return out, nil
 }
 
+func (c *operatorClient) GetParentOperatorIds(ctx context.Context, in *GetParentOperatorIdsRequest, opts ...grpc.CallOption) (*GetParentOperatorIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetParentOperatorIdsResponse)
+	err := c.cc.Invoke(ctx, Operator_GetParentOperatorIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OperatorServer is the server API for Operator service.
 // All implementations must embed UnimplementedOperatorServer
 // for forward compatibility.
@@ -147,6 +161,9 @@ type OperatorServer interface {
 	AddOriginOperatorId(context.Context, *AddOriginOperatorIdRequest) (*AddOriginOperatorIdResponse, error)
 	GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error)
 	DeleteOriginOperatorId(context.Context, *DeleteOriginOperatorIdRequest) (*DeleteOriginOperatorIdResponse, error)
+	// GetParentOperatorIds returns parent operator IDs for the given operator ID.
+	// The response contains only the list of parent operator IDs, doesn't include the requested operator_id.
+	GetParentOperatorIds(context.Context, *GetParentOperatorIdsRequest) (*GetParentOperatorIdsResponse, error)
 	mustEmbedUnimplementedOperatorServer()
 }
 
@@ -180,6 +197,9 @@ func (UnimplementedOperatorServer) GetOperatorIdByOrigin(context.Context, *GetOp
 }
 func (UnimplementedOperatorServer) DeleteOriginOperatorId(context.Context, *DeleteOriginOperatorIdRequest) (*DeleteOriginOperatorIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOriginOperatorId not implemented")
+}
+func (UnimplementedOperatorServer) GetParentOperatorIds(context.Context, *GetParentOperatorIdsRequest) (*GetParentOperatorIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetParentOperatorIds not implemented")
 }
 func (UnimplementedOperatorServer) mustEmbedUnimplementedOperatorServer() {}
 func (UnimplementedOperatorServer) testEmbeddedByValue()                  {}
@@ -346,6 +366,24 @@ func _Operator_DeleteOriginOperatorId_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_GetParentOperatorIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetParentOperatorIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).GetParentOperatorIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_GetParentOperatorIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).GetParentOperatorIds(ctx, req.(*GetParentOperatorIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Operator_ServiceDesc is the grpc.ServiceDesc for Operator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -384,6 +422,10 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteOriginOperatorId",
 			Handler:    _Operator_DeleteOriginOperatorId_Handler,
+		},
+		{
+			MethodName: "GetParentOperatorIds",
+			Handler:    _Operator_GetParentOperatorIds_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
