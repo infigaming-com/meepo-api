@@ -790,6 +790,86 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for Tag
 
+	// no validation rules for Name
+
+	// no validation rules for PaymentMethodId
+
+	// no validation rules for Currency
+
+	// no validation rules for Country
+
+	// no validation rules for Method
+
+	// no validation rules for Logo
+
+	// no validation rules for MinDepositAmount
+
+	// no validation rules for MaxDepositAmount
+
+	// no validation rules for MinWithdrawAmount
+
+	// no validation rules for MaxWithdrawAmount
+
+	// no validation rules for Eat
+
+	if all {
+		switch v := interface{}(m.GetDepositSchema()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PaymentChannelInfoValidationError{
+					field:  "DepositSchema",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PaymentChannelInfoValidationError{
+					field:  "DepositSchema",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDepositSchema()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PaymentChannelInfoValidationError{
+				field:  "DepositSchema",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetWithdrawSchema()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PaymentChannelInfoValidationError{
+					field:  "WithdrawSchema",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PaymentChannelInfoValidationError{
+					field:  "WithdrawSchema",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWithdrawSchema()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PaymentChannelInfoValidationError{
+				field:  "WithdrawSchema",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return PaymentChannelInfoMultiError(errors)
 	}

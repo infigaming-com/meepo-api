@@ -1495,6 +1495,33 @@ components:
                     type: string
                 tag:
                     type: string
+                name:
+                    type: string
+                paymentMethodId:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                method:
+                    type: string
+                logo:
+                    type: string
+                minDepositAmount:
+                    type: string
+                maxDepositAmount:
+                    type: string
+                minWithdrawAmount:
+                    type: string
+                maxWithdrawAmount:
+                    type: string
+                eat:
+                    type: integer
+                    format: int32
+                depositSchema:
+                    type: object
+                withdrawSchema:
+                    type: object
             description: Payment channel information
         payment.service.v1.PaymentMethodInfo:
             type: object
