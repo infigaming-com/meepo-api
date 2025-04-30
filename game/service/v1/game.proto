@@ -216,8 +216,8 @@ message BalanceRequest {
 }
 
 message BalanceResponse {
-	int64 balance = 1;
-	int64 bonus = 2;
+	double balance = 1;
+	double bonus = 2;
 	string round_id = 3;
 }
 
@@ -232,7 +232,7 @@ message PlayRequest {
 }
 
 message PlayResponse {
-	int64 balance = 1;
+	double balance = 1;
 	string round_id = 2;
 	repeated Transactions transactions = 3;
 }
@@ -257,7 +257,7 @@ message Transactions {
 	string txn_id = 1;
 	string operator_txn_id = 2;
 	string processed_at = 3;
-	int64 bonus_amount = 4;
+	double bonus_amount = 4;
 }
 
 message RollbackRequest {
@@ -281,7 +281,7 @@ message RollbackAction {
 }
 
 message RollbackResponse {
-	int64 balance = 1;
+	double balance = 1;
 	string round_id = 2;
 	repeated RollbackTransactions transactions = 3;
 }
