@@ -78,6 +78,22 @@ service User {
 
 	rpc IsTokenRevoked (IsTokenRevokedRequest) returns (IsTokenRevokedResponse) {
 	}
+
+	// Add a tag to a user.
+	rpc AddUserTag (AddUserTagRequest) returns (AddUserTagResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/tag/add"
+			body: "*"
+		};
+	}
+
+	// Soft delete a tag from a user.
+	rpc DeleteUserTag (DeleteUserTagRequest) returns (DeleteUserTagResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/tag/delete"
+			body: "*"
+		};
+	}
 }
 
 // UserInfo contains basic user information.
@@ -247,3 +263,17 @@ message IsTokenRevokedRequest {
 message IsTokenRevokedResponse {
 	bool revoked = 1;
 }
+
+message AddUserTagRequest {
+	int64 user_id = 1;
+	string tag = 2;
+}
+
+message AddUserTagResponse {}
+
+message DeleteUserTagRequest {
+	int64 user_id = 1;
+	string tag = 2;
+}
+
+message DeleteUserTagResponse {}

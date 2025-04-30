@@ -53,6 +53,8 @@ const (
 	ErrorReason_ADD_USER_TO_WALLET_FAILED           ErrorReason = 10024
 	ErrorReason_GET_USERS_BY_OPERATOR_IDS_FAILED    ErrorReason = 10025
 	ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED    ErrorReason = 10026
+	ErrorReason_USER_TAG_ALREADY_EXISTS             ErrorReason = 10027
+	ErrorReason_USER_TAG_NOT_EXIST                  ErrorReason = 10030
 )
 
 // Enum value maps for ErrorReason.
@@ -86,6 +88,8 @@ var (
 		10024: "ADD_USER_TO_WALLET_FAILED",
 		10025: "GET_USERS_BY_OPERATOR_IDS_FAILED",
 		10026: "GET_OPERATOR_ID_BY_ORIGIN_FAILED",
+		10027: "USER_TAG_ALREADY_EXISTS",
+		10030: "USER_TAG_NOT_EXIST",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                         0,
@@ -116,6 +120,8 @@ var (
 		"ADD_USER_TO_WALLET_FAILED":           10024,
 		"GET_USERS_BY_OPERATOR_IDS_FAILED":    10025,
 		"GET_OPERATOR_ID_BY_ORIGIN_FAILED":    10026,
+		"USER_TAG_ALREADY_EXISTS":             10027,
+		"USER_TAG_NOT_EXIST":                  10030,
 	}
 )
 
@@ -150,7 +156,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x93\a\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xd0\a\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12)\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x1a\x04\xa8E\x91\x03\x12,\n" +
@@ -179,7 +185,9 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1cUSERNAME_OR_PASSWORD_INVALID\x10\xa7N\x1a\x04\xa8E\x91\x03\x12\x1e\n" +
 	"\x19ADD_USER_TO_WALLET_FAILED\x10\xa8N\x12%\n" +
 	" GET_USERS_BY_OPERATOR_IDS_FAILED\x10\xa9N\x12%\n" +
-	" GET_OPERATOR_ID_BY_ORIGIN_FAILED\x10\xaaN\x1a\x04\xa0E\xf4\x03BO\n" +
+	" GET_OPERATOR_ID_BY_ORIGIN_FAILED\x10\xaaN\x12\"\n" +
+	"\x17USER_TAG_ALREADY_EXISTS\x10\xabN\x1a\x04\xa8E\x99\x03\x12\x17\n" +
+	"\x12USER_TAG_NOT_EXIST\x10\xaeN\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
