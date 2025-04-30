@@ -51,6 +51,19 @@ message PaymentChannelInfo {
   string operator_id = 2 [json_name="operatorId"];
   string payment_method = 3 [json_name="paymentMethod"];
   string tag = 4;
+  string name = 5;
+  string payment_method_id = 6 [json_name="paymentMethodId"];
+  string currency = 7;
+  string country = 8;
+  string method = 9;
+  string logo = 10;
+  int64 min_deposit_amount = 11 [json_name="minDepositAmount"];
+  int64 max_deposit_amount = 12 [json_name="maxDepositAmount"];
+  int64 min_withdraw_amount = 13 [json_name="minWithdrawAmount"];
+  int64 max_withdraw_amount = 14 [json_name="maxWithdrawAmount"];
+  int32 eat = 15;
+  google.protobuf.Struct deposit_schema = 16 [json_name="depositSchema"];
+  google.protobuf.Struct withdraw_schema = 17 [json_name="withdrawSchema"];
 }
 
 // Response for payment channel list
