@@ -1561,8 +1561,6 @@ func (m *DeleteOriginOperatorIdRequest) validate(all bool) error {
 
 	// no validation rules for Origin
 
-	// no validation rules for OperatorId
-
 	if len(errors) > 0 {
 		return DeleteOriginOperatorIdRequestMultiError(errors)
 	}
