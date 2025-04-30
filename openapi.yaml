@@ -576,6 +576,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/user/tag/add:
+        post:
+            tags:
+                - User
+            description: Add a tag to a user.
+            operationId: User_AddUserTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.AddUserTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddUserTagResponse'
+    /v1/user/tag/delete:
+        post:
+            tags:
+                - User
+            description: Soft delete a tag from a user.
+            operationId: User_DeleteUserTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.DeleteUserTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteUserTagResponse'
     /v1/wallet/balances/get:
         post:
             tags:
@@ -719,6 +757,16 @@ components:
         api.operator.service.v1.UpdateOperatorResponse:
             type: object
             properties: {}
+        api.user.service.v1.AddUserTagRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                tag:
+                    type: string
+        api.user.service.v1.AddUserTagResponse:
+            type: object
+            properties: {}
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -736,6 +784,16 @@ components:
                         - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
                     description: Basic information about the authenticated user.
             description: AuthResponse contains the authentication tokens and user information.
+        api.user.service.v1.DeleteUserTagRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                tag:
+                    type: string
+        api.user.service.v1.DeleteUserTagResponse:
+            type: object
+            properties: {}
         api.user.service.v1.GetUserRequest:
             type: object
             properties:

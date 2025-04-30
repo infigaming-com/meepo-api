@@ -87,22 +87,6 @@ service User {
 		};
 	}
 
-	// Get user tags by user id.
-	rpc GetTagsByUserId (GetTagsByUserIdRequest) returns (GetTagsByUserIdResponse) {
-		option (google.api.http) = {
-			post: "/v1/user/tag/get-tags-by-user-id"
-			body: "*"
-		};
-	}
-
-	// Get user ids by tag.
-	rpc GetUserIdsByTag (GetUserIdsByTagRequest) returns (GetUserIdsByTagResponse) {
-		option (google.api.http) = {
-			post: "/v1/user/tag/get-user-ids-by-tag"
-			body: "*"
-		};
-	}
-
 	// Soft delete a tag from a user.
 	rpc DeleteUserTag (DeleteUserTagRequest) returns (DeleteUserTagResponse) {
 		option (google.api.http) = {
@@ -286,22 +270,6 @@ message AddUserTagRequest {
 }
 
 message AddUserTagResponse {}
-
-message GetTagsByUserIdRequest {
-	int64 user_id = 1;
-}
-
-message GetTagsByUserIdResponse {
-	repeated string tags = 1;
-}
-
-message GetUserIdsByTagRequest {
-	string tag = 1;
-}
-
-message GetUserIdsByTagResponse {
-	repeated int64 user_ids = 1;
-}
 
 message DeleteUserTagRequest {
 	int64 user_id = 1;
