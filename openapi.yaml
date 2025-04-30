@@ -854,9 +854,11 @@ components:
             type: object
             properties:
                 balance:
-                    type: string
+                    type: number
+                    format: double
                 bonus:
-                    type: string
+                    type: number
+                    format: double
                 roundId:
                     type: string
         game.service.v1.CreateSessionRequest:
@@ -1018,7 +1020,8 @@ components:
             type: object
             properties:
                 balance:
-                    type: string
+                    type: number
+                    format: double
                 roundId:
                     type: string
                 transactions:
@@ -1088,7 +1091,8 @@ components:
             type: object
             properties:
                 balance:
-                    type: string
+                    type: number
+                    format: double
                 roundId:
                     type: string
                 transactions:
@@ -1114,7 +1118,8 @@ components:
                 processedAt:
                     type: string
                 bonusAmount:
-                    type: string
+                    type: number
+                    format: double
         game.service.v1.UrlInfo:
             type: object
             properties:
