@@ -358,3 +358,27 @@ func IsGetCreditTransactionsFailed(err error) bool {
 func ErrorGetCreditTransactionsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_CREDIT_TRANSACTIONS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsNoCreditTransactionFoundForGameBet(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET.String() && e.Code == 500
+}
+
+func ErrorNoCreditTransactionFoundForGameBet(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidGameBetTotalAmount(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_GAME_BET_TOTAL_AMOUNT.String() && e.Code == 500
+}
+
+func ErrorInvalidGameBetTotalAmount(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_GAME_BET_TOTAL_AMOUNT.String(), fmt.Sprintf(format, args...))
+}
