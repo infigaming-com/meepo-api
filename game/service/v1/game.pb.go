@@ -962,8 +962,7 @@ type CreateSessionRequest struct {
 	Currency           string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	SettlementCurrency string                 `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
 	Locale             string                 `protobuf:"bytes,4,opt,name=locale,proto3" json:"locale,omitempty"`
-	UserId             int64                  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Urls               *UrlInfo               `protobuf:"bytes,6,opt,name=urls,proto3" json:"urls,omitempty"`
+	Urls               *UrlInfo               `protobuf:"bytes,5,opt,name=urls,proto3" json:"urls,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -1024,13 +1023,6 @@ func (x *CreateSessionRequest) GetLocale() string {
 		return x.Locale
 	}
 	return ""
-}
-
-func (x *CreateSessionRequest) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
 }
 
 func (x *CreateSessionRequest) GetUrls() *UrlInfo {
@@ -1303,6 +1295,7 @@ type BalanceRequest struct {
 	GameId        string                 `protobuf:"bytes,3,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	RoundId       string                 `protobuf:"bytes,4,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
 	Finished      bool                   `protobuf:"varint,5,opt,name=finished,proto3" json:"finished,omitempty"`
+	SessionId     int64                  `protobuf:"varint,6,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1372,6 +1365,13 @@ func (x *BalanceRequest) GetFinished() bool {
 	return false
 }
 
+func (x *BalanceRequest) GetSessionId() int64 {
+	if x != nil {
+		return x.SessionId
+	}
+	return 0
+}
+
 type BalanceResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          *BalanceResponse_Data  `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
@@ -1424,7 +1424,8 @@ type PlayRequest struct {
 	RoundId       string                 `protobuf:"bytes,4,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
 	Finished      bool                   `protobuf:"varint,5,opt,name=finished,proto3" json:"finished,omitempty"`
 	SmResult      string                 `protobuf:"bytes,6,opt,name=sm_result,json=smResult,proto3" json:"sm_result,omitempty"`
-	Actions       []*Action              `protobuf:"bytes,7,rep,name=actions,proto3" json:"actions,omitempty"`
+	SessionId     int64                  `protobuf:"varint,7,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	Actions       []*Action              `protobuf:"bytes,8,rep,name=actions,proto3" json:"actions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1499,6 +1500,13 @@ func (x *PlayRequest) GetSmResult() string {
 		return x.SmResult
 	}
 	return ""
+}
+
+func (x *PlayRequest) GetSessionId() int64 {
+	if x != nil {
+		return x.SessionId
+	}
+	return 0
 }
 
 func (x *PlayRequest) GetActions() []*Action {
@@ -2319,14 +2327,13 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\vreleased_at\x18\x14 \x01(\x03R\n" +
 	"releasedAt\x12\x1b\n" +
 	"\tbonus_buy\x18\x15 \x01(\bR\bbonusBuy\x12\"\n" +
-	"\frestrictions\x18\x16 \x01(\tR\frestrictions\"\xdb\x01\n" +
+	"\frestrictions\x18\x16 \x01(\tR\frestrictions\"\xc2\x01\n" +
 	"\x14CreateSessionRequest\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
 	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\x12\x16\n" +
-	"\x06locale\x18\x04 \x01(\tR\x06locale\x12\x17\n" +
-	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12,\n" +
-	"\x04urls\x18\x06 \x01(\v2\x18.game.service.v1.UrlInfoR\x04urls\"2\n" +
+	"\x06locale\x18\x04 \x01(\tR\x06locale\x12,\n" +
+	"\x04urls\x18\x05 \x01(\v2\x18.game.service.v1.UrlInfoR\x04urls\"2\n" +
 	"\x15CreateSessionResponse\x12\x19\n" +
 	"\bgame_url\x18\x01 \x01(\tR\agameUrl\"f\n" +
 	"\aUrlInfo\x12\x1d\n" +
@@ -2343,27 +2350,31 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
-	"game_count\x18\x03 \x01(\x05R\tgameCount\"\x95\x01\n" +
+	"game_count\x18\x03 \x01(\x05R\tgameCount\"\xb4\x01\n" +
 	"\x0eBalanceRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
 	"\agame_id\x18\x03 \x01(\tR\x06gameId\x12\x19\n" +
 	"\bround_id\x18\x04 \x01(\tR\aroundId\x12\x1a\n" +
-	"\bfinished\x18\x05 \x01(\bR\bfinished\"\x9f\x01\n" +
+	"\bfinished\x18\x05 \x01(\bR\bfinished\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x06 \x01(\x03R\tsessionId\"\x9f\x01\n" +
 	"\x0fBalanceResponse\x129\n" +
 	"\x04data\x18\x01 \x01(\v2%.game.service.v1.BalanceResponse.DataR\x04data\x1aQ\n" +
 	"\x04Data\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\x01R\abalance\x12\x14\n" +
 	"\x05bonus\x18\x02 \x01(\x01R\x05bonus\x12\x19\n" +
-	"\bround_id\x18\x03 \x01(\tR\aroundId\"\xe2\x01\n" +
+	"\bround_id\x18\x03 \x01(\tR\aroundId\"\x81\x02\n" +
 	"\vPlayRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
 	"\agame_id\x18\x03 \x01(\tR\x06gameId\x12\x19\n" +
 	"\bround_id\x18\x04 \x01(\tR\aroundId\x12\x1a\n" +
 	"\bfinished\x18\x05 \x01(\bR\bfinished\x12\x1b\n" +
-	"\tsm_result\x18\x06 \x01(\tR\bsmResult\x121\n" +
-	"\aactions\x18\a \x03(\v2\x17.game.service.v1.ActionR\aactions\"\xc6\x01\n" +
+	"\tsm_result\x18\x06 \x01(\tR\bsmResult\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\a \x01(\x03R\tsessionId\x121\n" +
+	"\aactions\x18\b \x03(\v2\x17.game.service.v1.ActionR\aactions\"\xc6\x01\n" +
 	"\fPlayResponse\x126\n" +
 	"\x04data\x18\x01 \x01(\v2\".game.service.v1.PlayResponse.DataR\x04data\x1a~\n" +
 	"\x04Data\x12\x18\n" +

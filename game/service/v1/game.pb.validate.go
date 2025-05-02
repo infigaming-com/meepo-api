@@ -1553,8 +1553,6 @@ func (m *CreateSessionRequest) validate(all bool) error {
 
 	// no validation rules for Locale
 
-	// no validation rules for UserId
-
 	if all {
 		switch v := interface{}(m.GetUrls()).(type) {
 		case interface{ ValidateAll() error }:
@@ -2249,6 +2247,8 @@ func (m *BalanceRequest) validate(all bool) error {
 
 	// no validation rules for Finished
 
+	// no validation rules for SessionId
+
 	if len(errors) > 0 {
 		return BalanceRequestMultiError(errors)
 	}
@@ -2489,6 +2489,8 @@ func (m *PlayRequest) validate(all bool) error {
 	// no validation rules for Finished
 
 	// no validation rules for SmResult
+
+	// no validation rules for SessionId
 
 	for idx, item := range m.GetActions() {
 		_, _ = idx, item
