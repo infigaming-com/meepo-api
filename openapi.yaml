@@ -1469,8 +1469,8 @@ components:
                     description: Optional payment method filter
                 sort:
                     enum:
-                        - ASC
                         - DESC
+                        - ASC
                     type: string
                     description: Optional sort
                     format: enum

@@ -131,19 +131,19 @@ func (TransactionStatus) EnumDescriptor() ([]byte, []int) {
 type Sort int32
 
 const (
-	Sort_ASC  Sort = 0
-	Sort_DESC Sort = 1
+	Sort_DESC Sort = 0
+	Sort_ASC  Sort = 1
 )
 
 // Enum value maps for Sort.
 var (
 	Sort_name = map[int32]string{
-		0: "ASC",
-		1: "DESC",
+		0: "DESC",
+		1: "ASC",
 	}
 	Sort_value = map[string]int32{
-		"ASC":  0,
-		"DESC": 1,
+		"DESC": 0,
+		"ASC":  1,
 	}
 )
 
@@ -1491,7 +1491,7 @@ func (x *GetTransactionPageRequest) GetSort() Sort {
 	if x != nil {
 		return x.Sort
 	}
-	return Sort_ASC
+	return Sort_DESC
 }
 
 // Response for transaction page
@@ -1719,9 +1719,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x1dTRANSACTION_STATUS_PROCESSING\x10\x01\x12!\n" +
 	"\x1dTRANSACTION_STATUS_SUCCESSFUL\x10\x02\x12\x1d\n" +
 	"\x19TRANSACTION_STATUS_FAILED\x10\x03*\x19\n" +
-	"\x04Sort\x12\a\n" +
-	"\x03ASC\x10\x00\x12\b\n" +
-	"\x04DESC\x10\x012\xd5\b\n" +
+	"\x04Sort\x12\b\n" +
+	"\x04DESC\x10\x00\x12\a\n" +
+	"\x03ASC\x10\x012\xd5\b\n" +
 	"\aPayment\x12\x9d\x01\n" +
 	"\x14GetPaymentMethodList\x12/.payment.service.v1.GetPaymentMethodListRequest\x1a0.payment.service.v1.GetPaymentMethodListResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/payment/method/list\x12\xa0\x01\n" +
 	"\x14CreatePaymentChannel\x12/.payment.service.v1.CreatePaymentChannelRequest\x1a0.payment.service.v1.CreatePaymentChannelResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/payment/channel/create\x12\xa1\x01\n" +
