@@ -1050,6 +1050,8 @@ components:
                     type: string
                 finished:
                     type: boolean
+                sessionId:
+                    type: string
         game.service.v1.BalanceResponse:
             type: object
             properties:
@@ -1076,8 +1078,6 @@ components:
                 settlementCurrency:
                     type: string
                 locale:
-                    type: string
-                userId:
                     type: string
                 urls:
                     $ref: '#/components/schemas/game.service.v1.UrlInfo'
@@ -1216,6 +1216,8 @@ components:
                 finished:
                     type: boolean
                 smResult:
+                    type: string
+                sessionId:
                     type: string
                 actions:
                     type: array

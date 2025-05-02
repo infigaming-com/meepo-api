@@ -175,8 +175,7 @@ message CreateSessionRequest {
 	string currency = 2;
 	string settlement_currency = 3;
 	string locale = 4;
-	int64 user_id = 5;
-	UrlInfo urls = 6;
+	UrlInfo urls = 5;
 }
 
 message CreateSessionResponse {
@@ -213,6 +212,7 @@ message BalanceRequest {
 	string game_id = 3;
 	string round_id = 4;
 	bool finished = 5;
+	int64 session_id = 6;
 }
 
 message BalanceResponse {
@@ -231,7 +231,8 @@ message PlayRequest {
 	string round_id = 4;
 	bool finished = 5;
 	string sm_result = 6;
-	repeated Action actions = 7;
+	int64 session_id = 7;
+	repeated Action actions = 8;
 }
 
 message PlayResponse {
