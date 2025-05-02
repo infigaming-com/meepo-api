@@ -1171,7 +1171,8 @@ func (x *DepositCallbackRequest) GetNonce() string {
 // Response for deposit callback
 type DepositCallbackResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"` // 可选的消息，失败时返回错误原因
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1206,11 +1207,18 @@ func (*DepositCallbackResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *DepositCallbackResponse) GetTransactionId() int64 {
+func (x *DepositCallbackResponse) GetSuccess() bool {
 	if x != nil {
-		return x.TransactionId
+		return x.Success
 	}
-	return 0
+	return false
+}
+
+func (x *DepositCallbackResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
 }
 
 // Transaction information
@@ -1611,9 +1619,10 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x04sign\x18\t \x01(\tR\x04sign\x12\x1c\n" +
 	"\ttimestamp\x18\n" +
 	" \x01(\tR\ttimestamp\x12\x14\n" +
-	"\x05nonce\x18\v \x01(\tR\x05nonce\"@\n" +
-	"\x17DepositCallbackResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\x9a\x03\n" +
+	"\x05nonce\x18\v \x01(\tR\x05nonce\"M\n" +
+	"\x17DepositCallbackResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\x9a\x03\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x16\n" +

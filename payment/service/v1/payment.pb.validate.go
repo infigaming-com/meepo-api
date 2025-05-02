@@ -1836,7 +1836,9 @@ func (m *DepositCallbackResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TransactionId
+	// no validation rules for Success
+
+	// no validation rules for Message
 
 	if len(errors) > 0 {
 		return DepositCallbackResponseMultiError(errors)

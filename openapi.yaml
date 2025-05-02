@@ -1394,7 +1394,9 @@ components:
         payment.service.v1.DepositCallbackResponse:
             type: object
             properties:
-                transactionId:
+                success:
+                    type: boolean
+                message:
                     type: string
             description: Response for deposit callback
         payment.service.v1.GetPaymentChannelListRequest:

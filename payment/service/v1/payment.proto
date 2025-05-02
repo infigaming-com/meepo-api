@@ -134,7 +134,8 @@ message DepositCallbackRequest {
 
 // Response for deposit callback
 message DepositCallbackResponse {
-  int64 transaction_id = 1 [json_name="transactionId"];
+  bool success = 1;
+  string message = 2; // 可选的消息，失败时返回错误原因
 }
 
 // Transaction type enum
