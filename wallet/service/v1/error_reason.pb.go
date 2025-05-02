@@ -39,22 +39,24 @@ const (
 	ErrorReason_GET_USERS_WITH_OPERATOR_IDS_FAILED            ErrorReason = 30011
 	ErrorReason_LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED ErrorReason = 30012
 	ErrorReason_GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30013
-	ErrorReason_BALANCE_DISABLED                              ErrorReason = 30014
-	ErrorReason_GENERATE_CREDIT_ID_FAILED                     ErrorReason = 30015
-	ErrorReason_LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30016
-	ErrorReason_ADD_CREDIT_FAILED                             ErrorReason = 30017
-	ErrorReason_INVALID_TRANSACTION_TYPE                      ErrorReason = 30018
-	ErrorReason_GENERATE_BALANCE_TRANSACTION_ID_FAILED        ErrorReason = 30019
-	ErrorReason_GENERATE_CREDIT_TRANSACTION_ID_FAILED         ErrorReason = 30020
-	ErrorReason_GET_CREDIT_TRANSACTION_FAILED                 ErrorReason = 30021
-	ErrorReason_ADD_BALANCE_TRANSACTION_FAILED                ErrorReason = 30022
-	ErrorReason_ADD_CREDIT_TRANSACTION_FAILED                 ErrorReason = 30023
-	ErrorReason_GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30024
-	ErrorReason_INSUFFICIENT_BALANCE                          ErrorReason = 30025
-	ErrorReason_GET_RATES_FAILED                              ErrorReason = 30026
-	ErrorReason_UPDATE_CREDIT_FAILED                          ErrorReason = 30027
-	ErrorReason_GET_CREDIT_TRANSACTIONS_FAILED                ErrorReason = 30028
-	ErrorReason_NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET      ErrorReason = 30029
+	ErrorReason_GET_BALANCES_WITH_USER_ID_FAILED              ErrorReason = 30014
+	ErrorReason_BALANCE_DISABLED                              ErrorReason = 30015
+	ErrorReason_GENERATE_CREDIT_ID_FAILED                     ErrorReason = 30016
+	ErrorReason_LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30017
+	ErrorReason_ADD_CREDIT_FAILED                             ErrorReason = 30018
+	ErrorReason_INVALID_TRANSACTION_TYPE                      ErrorReason = 30019
+	ErrorReason_GENERATE_BALANCE_TRANSACTION_ID_FAILED        ErrorReason = 30020
+	ErrorReason_GENERATE_CREDIT_TRANSACTION_ID_FAILED         ErrorReason = 30021
+	ErrorReason_GET_CREDIT_TRANSACTION_FAILED                 ErrorReason = 30022
+	ErrorReason_ADD_BALANCE_TRANSACTION_FAILED                ErrorReason = 30023
+	ErrorReason_ADD_CREDIT_TRANSACTION_FAILED                 ErrorReason = 30024
+	ErrorReason_GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30025
+	ErrorReason_INSUFFICIENT_BALANCE                          ErrorReason = 30026
+	ErrorReason_GET_RATES_FAILED                              ErrorReason = 30027
+	ErrorReason_UPDATE_CREDIT_FAILED                          ErrorReason = 30028
+	ErrorReason_GET_CREDIT_TRANSACTIONS_FAILED                ErrorReason = 30029
+	ErrorReason_NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET      ErrorReason = 30030
+	ErrorReason_GET_CURRENCIES_FAILED                         ErrorReason = 30031
 )
 
 // Enum value maps for ErrorReason.
@@ -74,22 +76,24 @@ var (
 		30011: "GET_USERS_WITH_OPERATOR_IDS_FAILED",
 		30012: "LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED",
 		30013: "GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED",
-		30014: "BALANCE_DISABLED",
-		30015: "GENERATE_CREDIT_ID_FAILED",
-		30016: "LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED",
-		30017: "ADD_CREDIT_FAILED",
-		30018: "INVALID_TRANSACTION_TYPE",
-		30019: "GENERATE_BALANCE_TRANSACTION_ID_FAILED",
-		30020: "GENERATE_CREDIT_TRANSACTION_ID_FAILED",
-		30021: "GET_CREDIT_TRANSACTION_FAILED",
-		30022: "ADD_BALANCE_TRANSACTION_FAILED",
-		30023: "ADD_CREDIT_TRANSACTION_FAILED",
-		30024: "GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED",
-		30025: "INSUFFICIENT_BALANCE",
-		30026: "GET_RATES_FAILED",
-		30027: "UPDATE_CREDIT_FAILED",
-		30028: "GET_CREDIT_TRANSACTIONS_FAILED",
-		30029: "NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET",
+		30014: "GET_BALANCES_WITH_USER_ID_FAILED",
+		30015: "BALANCE_DISABLED",
+		30016: "GENERATE_CREDIT_ID_FAILED",
+		30017: "LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED",
+		30018: "ADD_CREDIT_FAILED",
+		30019: "INVALID_TRANSACTION_TYPE",
+		30020: "GENERATE_BALANCE_TRANSACTION_ID_FAILED",
+		30021: "GENERATE_CREDIT_TRANSACTION_ID_FAILED",
+		30022: "GET_CREDIT_TRANSACTION_FAILED",
+		30023: "ADD_BALANCE_TRANSACTION_FAILED",
+		30024: "ADD_CREDIT_TRANSACTION_FAILED",
+		30025: "GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED",
+		30026: "INSUFFICIENT_BALANCE",
+		30027: "GET_RATES_FAILED",
+		30028: "UPDATE_CREDIT_FAILED",
+		30029: "GET_CREDIT_TRANSACTIONS_FAILED",
+		30030: "NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET",
+		30031: "GET_CURRENCIES_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                   0,
@@ -106,22 +110,24 @@ var (
 		"GET_USERS_WITH_OPERATOR_IDS_FAILED":            30011,
 		"LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED": 30012,
 		"GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED":  30013,
-		"BALANCE_DISABLED":                              30014,
-		"GENERATE_CREDIT_ID_FAILED":                     30015,
-		"LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED":  30016,
-		"ADD_CREDIT_FAILED":                             30017,
-		"INVALID_TRANSACTION_TYPE":                      30018,
-		"GENERATE_BALANCE_TRANSACTION_ID_FAILED":        30019,
-		"GENERATE_CREDIT_TRANSACTION_ID_FAILED":         30020,
-		"GET_CREDIT_TRANSACTION_FAILED":                 30021,
-		"ADD_BALANCE_TRANSACTION_FAILED":                30022,
-		"ADD_CREDIT_TRANSACTION_FAILED":                 30023,
-		"GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED":  30024,
-		"INSUFFICIENT_BALANCE":                          30025,
-		"GET_RATES_FAILED":                              30026,
-		"UPDATE_CREDIT_FAILED":                          30027,
-		"GET_CREDIT_TRANSACTIONS_FAILED":                30028,
-		"NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET":      30029,
+		"GET_BALANCES_WITH_USER_ID_FAILED":              30014,
+		"BALANCE_DISABLED":                              30015,
+		"GENERATE_CREDIT_ID_FAILED":                     30016,
+		"LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED":  30017,
+		"ADD_CREDIT_FAILED":                             30018,
+		"INVALID_TRANSACTION_TYPE":                      30019,
+		"GENERATE_BALANCE_TRANSACTION_ID_FAILED":        30020,
+		"GENERATE_CREDIT_TRANSACTION_ID_FAILED":         30021,
+		"GET_CREDIT_TRANSACTION_FAILED":                 30022,
+		"ADD_BALANCE_TRANSACTION_FAILED":                30023,
+		"ADD_CREDIT_TRANSACTION_FAILED":                 30024,
+		"GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED":  30025,
+		"INSUFFICIENT_BALANCE":                          30026,
+		"GET_RATES_FAILED":                              30027,
+		"UPDATE_CREDIT_FAILED":                          30028,
+		"GET_CREDIT_TRANSACTIONS_FAILED":                30029,
+		"NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET":      30030,
+		"GET_CURRENCIES_FAILED":                         30031,
 	}
 )
 
@@ -156,7 +162,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xae\b\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xf3\b\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x1a\x04\xa8E\x94\x03\x12\x19\n" +
@@ -171,23 +177,25 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x15UPDATE_BALANCE_FAILED\x10\xba\xea\x01\x12(\n" +
 	"\"GET_USERS_WITH_OPERATOR_IDS_FAILED\x10\xbb\xea\x01\x123\n" +
 	"-LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xbc\xea\x01\x122\n" +
-	",GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xbd\xea\x01\x12\x1c\n" +
-	"\x10BALANCE_DISABLED\x10\xbe\xea\x01\x1a\x04\xa8E\x91\x03\x12\x1f\n" +
-	"\x19GENERATE_CREDIT_ID_FAILED\x10\xbf\xea\x01\x122\n" +
-	",LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xc0\xea\x01\x12\x17\n" +
-	"\x11ADD_CREDIT_FAILED\x10\xc1\xea\x01\x12$\n" +
-	"\x18INVALID_TRANSACTION_TYPE\x10\xc2\xea\x01\x1a\x04\xa8E\x90\x03\x12,\n" +
-	"&GENERATE_BALANCE_TRANSACTION_ID_FAILED\x10\xc3\xea\x01\x12+\n" +
-	"%GENERATE_CREDIT_TRANSACTION_ID_FAILED\x10\xc4\xea\x01\x12#\n" +
-	"\x1dGET_CREDIT_TRANSACTION_FAILED\x10\xc5\xea\x01\x12$\n" +
-	"\x1eADD_BALANCE_TRANSACTION_FAILED\x10\xc6\xea\x01\x12#\n" +
-	"\x1dADD_CREDIT_TRANSACTION_FAILED\x10\xc7\xea\x01\x122\n" +
-	",GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xc8\xea\x01\x12\x1a\n" +
-	"\x14INSUFFICIENT_BALANCE\x10\xc9\xea\x01\x12\x16\n" +
-	"\x10GET_RATES_FAILED\x10\xca\xea\x01\x12\x1a\n" +
-	"\x14UPDATE_CREDIT_FAILED\x10\xcb\xea\x01\x12$\n" +
-	"\x1eGET_CREDIT_TRANSACTIONS_FAILED\x10\xcc\xea\x01\x12.\n" +
-	"(NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET\x10\xcd\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	",GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xbd\xea\x01\x12&\n" +
+	" GET_BALANCES_WITH_USER_ID_FAILED\x10\xbe\xea\x01\x12\x1c\n" +
+	"\x10BALANCE_DISABLED\x10\xbf\xea\x01\x1a\x04\xa8E\x91\x03\x12\x1f\n" +
+	"\x19GENERATE_CREDIT_ID_FAILED\x10\xc0\xea\x01\x122\n" +
+	",LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xc1\xea\x01\x12\x17\n" +
+	"\x11ADD_CREDIT_FAILED\x10\xc2\xea\x01\x12$\n" +
+	"\x18INVALID_TRANSACTION_TYPE\x10\xc3\xea\x01\x1a\x04\xa8E\x90\x03\x12,\n" +
+	"&GENERATE_BALANCE_TRANSACTION_ID_FAILED\x10\xc4\xea\x01\x12+\n" +
+	"%GENERATE_CREDIT_TRANSACTION_ID_FAILED\x10\xc5\xea\x01\x12#\n" +
+	"\x1dGET_CREDIT_TRANSACTION_FAILED\x10\xc6\xea\x01\x12$\n" +
+	"\x1eADD_BALANCE_TRANSACTION_FAILED\x10\xc7\xea\x01\x12#\n" +
+	"\x1dADD_CREDIT_TRANSACTION_FAILED\x10\xc8\xea\x01\x122\n" +
+	",GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED\x10\xc9\xea\x01\x12\x1a\n" +
+	"\x14INSUFFICIENT_BALANCE\x10\xca\xea\x01\x12\x16\n" +
+	"\x10GET_RATES_FAILED\x10\xcb\xea\x01\x12\x1a\n" +
+	"\x14UPDATE_CREDIT_FAILED\x10\xcc\xea\x01\x12$\n" +
+	"\x1eGET_CREDIT_TRANSACTIONS_FAILED\x10\xcd\xea\x01\x12.\n" +
+	"(NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET\x10\xce\xea\x01\x12\x1b\n" +
+	"\x15GET_CURRENCIES_FAILED\x10\xcf\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
