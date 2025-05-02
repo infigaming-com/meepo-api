@@ -153,6 +153,12 @@ enum TransactionStatus {
   TRANSACTION_STATUS_FAILED = 3;
 }
 
+// Sort enum
+enum Sort {
+  ASC = 0;
+  DESC = 1;
+}
+
 // Transaction information
 message TransactionInfo {
   int64 transaction_id = 1 [json_name="transactionId"];
@@ -184,6 +190,8 @@ message GetTransactionPageRequest {
   google.protobuf.Timestamp end_time = 7 [json_name="endTime"];
   // Optional payment method filter
   string payment_method = 8 [json_name="paymentMethod"];
+  // Optional sort
+  Sort sort = 9 [json_name="sort"];
 }
 
 // Response for transaction page

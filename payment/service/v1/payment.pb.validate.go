@@ -2184,6 +2184,8 @@ func (m *GetTransactionPageRequest) validate(all bool) error {
 
 	// no validation rules for PaymentMethod
 
+	// no validation rules for Sort
+
 	if len(errors) > 0 {
 		return GetTransactionPageRequestMultiError(errors)
 	}

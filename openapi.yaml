@@ -1467,6 +1467,13 @@ components:
                 paymentMethod:
                     type: string
                     description: Optional payment method filter
+                sort:
+                    enum:
+                        - ASC
+                        - DESC
+                    type: string
+                    description: Optional sort
+                    format: enum
             description: Request to get transaction page
         payment.service.v1.GetTransactionPageResponse:
             type: object
