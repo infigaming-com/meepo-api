@@ -50,4 +50,11 @@ spec:
     - name: payment-svc
       port: 8000
       weight: 1
-      
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/wallet"
+    backendRefs:
+    - name: wallet-svc
+      port: 8000
+      weight: 1

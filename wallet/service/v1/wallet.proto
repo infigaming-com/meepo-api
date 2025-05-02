@@ -22,12 +22,29 @@ service Wallet {
 		};
 	}
 	
+	// GetUserBalances returns the balances of all currencies of the user
 	rpc GetUserBalances (GetUserBalancesRequest) returns (GetUserBalancesResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/balances/list"
+			body: "*"
+		};
+	}
+
+	// GetUserBalance returns the balance of specific currency of the user
+	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {
 		option (google.api.http) = {
 			post: "/v1/wallet/balances/get"
 			body: "*"
 		};
 	}
+
+	rpc Credit (CreditRequest) returns (CreditResponse) {}
+
+	rpc Debit (DebitRequest) returns (DebitResponse) {}
+
+	rpc GameDebit (GameDebitRequest) returns (GameDebitResponse) {}
+
+	rpc GameCredit (GameCreditRequest) returns (GameCreditResponse) {}
 }
 
 message AddUserRequest {
@@ -68,9 +85,107 @@ message GetUserBalancesRequest {
 message GetUserBalancesResponse {
 	message Balance {
 		string currency = 1;
-		int64 cash = 2;
-		int64 operator_bonus = 3;
-		int64 provider_bonus = 4;
+		int64 cash = 3;
+		int64 operator_bonus = 4;
+		int64 provider_bonus = 5;
 	}
 	repeated Balance balances = 1;
+}
+
+message GetUserBalanceRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	// optional target currency
+	string target_currency = 3;
+}
+
+message GetUserBalanceResponse {
+	// optional exchange rate between currency and target currency
+	string exchange_rate = 1;
+	int64 cash = 2;
+	int64 operator_bonus = 3;
+	int64 provider_bonus = 4;
+}
+
+enum TransactionType {
+	TRANSACTION_TYPE_UNSPECIFIED = 0;
+
+	// Credit Transaction Types
+	// credit transaction type for payment deposit
+	TRANSACTION_TYPE_PAYMENT_DEPOSIT = 1;
+	// credit transaction type for game win
+	TRANSACTION_TYPE_GAME_WIN = 2;
+
+	// Debit Transaction Types
+	// debit transaction type for payment withdraw
+	TRANSACTION_TYPE_PAYMENT_WITHDRAW = 1001;
+	// debit transaction type for game bet
+	TRANSACTION_TYPE_GAME_BET = 1002;
+}
+
+message CreditRequest {
+	message Ratio {
+		int64 cash = 1;
+		int64 operator_bonus = 2;
+	}
+
+	int64 user_id = 1;
+	string currency = 2;
+	TransactionType transaction_type = 3;
+	int64 transaction_id = 4;
+	int64 cash = 5;
+}
+
+message CreditResponse {
+	int64 transaction_id = 1;
+}
+
+message DebitRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	TransactionType transaction_type = 3;
+	int64 transaction_id = 4;
+	int64 cash = 5;
+}
+
+message DebitResponse {
+	int64 transaction_id = 1;
+}
+
+message GameDebitRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string target_currency = 3;
+	string exchange_rate = 4;
+	TransactionType transaction_type = 5;
+	int64 transaction_id = 6;
+	int64 amount = 7;
+	int64 turnover = 8;
+}
+
+message GameDebitResponse {
+	int64 transaction_id = 1;
+	string exchange_rate = 2;
+	int64 cash = 3;
+	int64 operator_bonus = 4;
+	int64 provider_bonus = 5;
+}
+
+message GameCreditRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string target_currency = 3;
+	string exchange_rate = 4;
+	TransactionType transaction_type = 5;
+	int64 transaction_id = 6;
+	int64 original_transaction_id = 7;
+	int64 amount = 8;
+}
+
+message GameCreditResponse {
+	int64 transaction_id = 1;
+	string exchange_rate = 2;
+	int64 cash = 3;
+	int64 operator_bonus = 4;
+	int64 provider_bonus = 5;
 }

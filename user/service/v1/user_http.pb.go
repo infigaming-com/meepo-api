@@ -19,6 +19,8 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationUserAddUserTag = "/api.user.service.v1.User/AddUserTag"
+const OperationUserDeleteUserTag = "/api.user.service.v1.User/DeleteUserTag"
 const OperationUserGetUser = "/api.user.service.v1.User/GetUser"
 const OperationUserLogin = "/api.user.service.v1.User/Login"
 const OperationUserLogout = "/api.user.service.v1.User/Logout"
@@ -28,7 +30,11 @@ const OperationUserRegisterOrLoginWithOAuth = "/api.user.service.v1.User/Registe
 const OperationUserRegisterOrLoginWithTelegram = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
 
 type UserHTTPServer interface {
-	// GetUser Get user information by user ID.
+	// AddUserTag Add a tag to a user.
+	AddUserTag(context.Context, *AddUserTagRequest) (*AddUserTagResponse, error)
+	// DeleteUserTag Soft delete a tag from a user.
+	DeleteUserTag(context.Context, *DeleteUserTagRequest) (*DeleteUserTagResponse, error)
+	// GetUser Get user information by userId.
 	// Returns basic user information for the specified user.
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	// Login Login an existing user with password-based authentication.
@@ -60,6 +66,8 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/auth/refresh", _User_RefreshToken0_HTTP_Handler(srv))
 	r.POST("/v1/user/get", _User_GetUser0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/logout", _User_Logout0_HTTP_Handler(srv))
+	r.POST("/v1/user/tag/add", _User_AddUserTag0_HTTP_Handler(srv))
+	r.POST("/v1/user/tag/delete", _User_DeleteUserTag0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -216,7 +224,53 @@ func _User_Logout0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error
 	}
 }
 
+func _User_AddUserTag0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AddUserTagRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserAddUserTag)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AddUserTag(ctx, req.(*AddUserTagRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AddUserTagResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_DeleteUserTag0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteUserTagRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserDeleteUserTag)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteUserTag(ctx, req.(*DeleteUserTagRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteUserTagResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
+	AddUserTag(ctx context.Context, req *AddUserTagRequest, opts ...http.CallOption) (rsp *AddUserTagResponse, err error)
+	DeleteUserTag(ctx context.Context, req *DeleteUserTagRequest, opts ...http.CallOption) (rsp *DeleteUserTagResponse, err error)
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserResponse, err error)
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	Logout(ctx context.Context, req *LogoutRequest, opts ...http.CallOption) (rsp *LogoutResponse, err error)
@@ -232,6 +286,32 @@ type UserHTTPClientImpl struct {
 
 func NewUserHTTPClient(client *http.Client) UserHTTPClient {
 	return &UserHTTPClientImpl{client}
+}
+
+func (c *UserHTTPClientImpl) AddUserTag(ctx context.Context, in *AddUserTagRequest, opts ...http.CallOption) (*AddUserTagResponse, error) {
+	var out AddUserTagResponse
+	pattern := "/v1/user/tag/add"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserAddUserTag))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) DeleteUserTag(ctx context.Context, in *DeleteUserTagRequest, opts ...http.CallOption) (*DeleteUserTagResponse, error) {
+	var out DeleteUserTagResponse
+	pattern := "/v1/user/tag/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserDeleteUserTag))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *UserHTTPClientImpl) GetUser(ctx context.Context, in *GetUserRequest, opts ...http.CallOption) (*GetUserResponse, error) {

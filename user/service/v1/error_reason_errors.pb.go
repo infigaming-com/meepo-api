@@ -23,6 +23,30 @@ func ErrorUnspecified(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UNSPECIFIED.String(), fmt.Sprintf(format, args...))
 }
 
+func IsUserInfoNotFoundInContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT.String() && e.Code == 401
+}
+
+func ErrorUserInfoNotFoundInContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsRequestInfoNotFoundInContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REQUEST_INFO_NOT_FOUND_IN_CONTEXT.String() && e.Code == 401
+}
+
+func ErrorRequestInfoNotFoundInContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_REQUEST_INFO_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+}
+
 func IsUserNotFound(err error) bool {
 	if err == nil {
 		return false
@@ -273,4 +297,76 @@ func IsOauthProviderNotSupported(err error) bool {
 
 func ErrorOauthProviderNotSupported(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_OAUTH_PROVIDER_NOT_SUPPORTED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUsernameOrPasswordInvalid(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USERNAME_OR_PASSWORD_INVALID.String() && e.Code == 401
+}
+
+func ErrorUsernameOrPasswordInvalid(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_USERNAME_OR_PASSWORD_INVALID.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddUserToWalletFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_USER_TO_WALLET_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddUserToWalletFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_USER_TO_WALLET_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUsersByOperatorIdsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USERS_BY_OPERATOR_IDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUsersByOperatorIdsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USERS_BY_OPERATOR_IDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorIdByOriginFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorIdByOriginFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserTagAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_TAG_ALREADY_EXISTS.String() && e.Code == 409
+}
+
+func ErrorUserTagAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_USER_TAG_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserTagNotExist(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_TAG_NOT_EXIST.String() && e.Code == 500
+}
+
+func ErrorUserTagNotExist(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_TAG_NOT_EXIST.String(), fmt.Sprintf(format, args...))
 }

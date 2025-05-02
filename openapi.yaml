@@ -186,6 +186,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorCurrencyResponse'
+    /v1/operator/origins/add:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_AddOriginOperatorId
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.AddOriginOperatorIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.AddOriginOperatorIdResponse'
+    /v1/operator/origins/delete:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_DeleteOriginOperatorId
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.DeleteOriginOperatorIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.DeleteOriginOperatorIdResponse'
     /v1/operator/update:
         post:
             tags:
@@ -301,6 +337,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /v1/payment/transaction/page:
+        post:
+            tags:
+                - Payment
+            description: Get transaction page with pagination and filters
+            operationId: Payment_GetTransactionPage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
     /v1/payment/withdraw/initiate:
         post:
             tags:
@@ -505,7 +560,7 @@ paths:
             tags:
                 - User
             description: |-
-                Get user information by user ID.
+                Get user information by userId.
                  Returns basic user information for the specified user.
             operationId: User_GetUser
             requestBody:
@@ -521,10 +576,68 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/user/tag/add:
+        post:
+            tags:
+                - User
+            description: Add a tag to a user.
+            operationId: User_AddUserTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.AddUserTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddUserTagResponse'
+    /v1/user/tag/delete:
+        post:
+            tags:
+                - User
+            description: Soft delete a tag from a user.
+            operationId: User_DeleteUserTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.DeleteUserTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteUserTagResponse'
     /v1/wallet/balances/get:
         post:
             tags:
                 - Wallet
+            description: GetUserBalance returns the balance of specific currency of the user
+            operationId: Wallet_GetUserBalance
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceResponse'
+    /v1/wallet/balances/list:
+        post:
+            tags:
+                - Wallet
+            description: GetUserBalances returns the balances of all currencies of the user
             operationId: Wallet_GetUserBalances
             requestBody:
                 content:
@@ -574,6 +687,24 @@ components:
                 operatorId:
                     type: string
                     description: operator id allocated by operator service
+        api.operator.service.v1.AddOriginOperatorIdRequest:
+            type: object
+            properties:
+                origin:
+                    type: string
+                operatorId:
+                    type: string
+        api.operator.service.v1.AddOriginOperatorIdResponse:
+            type: object
+            properties: {}
+        api.operator.service.v1.DeleteOriginOperatorIdRequest:
+            type: object
+            properties:
+                origin:
+                    type: string
+        api.operator.service.v1.DeleteOriginOperatorIdResponse:
+            type: object
+            properties: {}
         api.operator.service.v1.GetOperatorCurrenciesRequest:
             type: object
             properties:
@@ -626,6 +757,16 @@ components:
         api.operator.service.v1.UpdateOperatorResponse:
             type: object
             properties: {}
+        api.user.service.v1.AddUserTagRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                tag:
+                    type: string
+        api.user.service.v1.AddUserTagResponse:
+            type: object
+            properties: {}
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -643,13 +784,23 @@ components:
                         - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
                     description: Basic information about the authenticated user.
             description: AuthResponse contains the authentication tokens and user information.
+        api.user.service.v1.DeleteUserTagRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                tag:
+                    type: string
+        api.user.service.v1.DeleteUserTagResponse:
+            type: object
+            properties: {}
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
                 userId:
                     type: string
-                    description: The ID of the user to retrieve.
-            description: GetUserRequest contains the ID of the user to retrieve.
+                    description: The userId of the user to retrieve.
+            description: GetUserRequest contains the userId of the user to retrieve.
         api.user.service.v1.GetUserResponse:
             type: object
             properties:
@@ -771,7 +922,56 @@ components:
                 userId:
                     type: string
                     description: Unique identifier for the user.
+                operatorId:
+                    type: string
+                    description: OperatorId.
+                username:
+                    type: string
+                    description: Username.
+                email:
+                    type: string
+                    description: Email.
+                mobile:
+                    type: string
+                    description: Mobile.
+                enabled:
+                    type: boolean
+                    description: Whether the user is enabled.
+                firstname:
+                    type: string
+                    description: First name.
+                lastname:
+                    type: string
+                    description: Last name.
+                nickname:
+                    type: string
+                    description: Nickname
+                avatar:
+                    type: string
+                    description: Avatar
             description: UserInfo contains basic user information.
+        api.wallet.service.v1.GetUserBalanceRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                targetCurrency:
+                    type: string
+                    description: optional target currency
+        api.wallet.service.v1.GetUserBalanceResponse:
+            type: object
+            properties:
+                exchangeRate:
+                    type: string
+                    description: optional exchange rate between currency and target currency
+                cash:
+                    type: string
+                operatorBonus:
+                    type: string
+                providerBonus:
+                    type: string
         api.wallet.service.v1.GetUserBalancesRequest:
             type: object
             properties:
@@ -1150,7 +1350,7 @@ components:
         payment.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
-                merchantId:
+                operatorId:
                     type: string
                 paymentMethodId:
                     type: string
@@ -1198,7 +1398,7 @@ components:
         payment.service.v1.GetPaymentChannelListRequest:
             type: object
             properties:
-                merchantId:
+                operatorId:
                     type: string
             description: Request to get payment channel list
         payment.service.v1.GetPaymentChannelListResponse:
@@ -1221,6 +1421,70 @@ components:
                     items:
                         $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
             description: Response for payment method list
+        payment.service.v1.GetTransactionPageRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Pagination parameters
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                userId:
+                    type: string
+                    description: Filter parameters (all optional)
+                type:
+                    enum:
+                        - TRANSACTION_TYPE_UNSPECIFIED
+                        - TRANSACTION_TYPE_DEPOSIT
+                        - TRANSACTION_TYPE_WITHDRAW
+                    type: string
+                    description: Optional transaction type filter
+                    format: enum
+                currency:
+                    type: string
+                    description: Optional currency filter
+                status:
+                    enum:
+                        - TRANSACTION_STATUS_UNSPECIFIED
+                        - TRANSACTION_STATUS_PROCESSING
+                        - TRANSACTION_STATUS_SUCCESSFUL
+                        - TRANSACTION_STATUS_FAILED
+                    type: string
+                    description: Optional status filter
+                    format: enum
+                startTime:
+                    type: string
+                    description: Optional date range filter
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                paymentMethod:
+                    type: string
+                    description: Optional payment method filter
+            description: Request to get transaction page
+        payment.service.v1.GetTransactionPageResponse:
+            type: object
+            properties:
+                transactions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.TransactionInfo'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                totalPages:
+                    type: integer
+                    format: int32
+            description: Response for transaction page
         payment.service.v1.InitiateDepositRequest:
             type: object
             properties:
@@ -1308,25 +1572,12 @@ components:
             properties:
                 channelId:
                     type: string
-                merchantId:
-                    type: string
-                paymentMethodId:
+                operatorId:
                     type: string
                 paymentMethod:
                     type: string
-                currency:
+                tag:
                     type: string
-                country:
-                    type: string
-                status:
-                    type: integer
-                    format: int32
-                createdAt:
-                    type: string
-                    format: date-time
-                updatedAt:
-                    type: string
-                    format: date-time
             description: Payment channel information
         payment.service.v1.PaymentMethodInfo:
             type: object
@@ -1342,6 +1593,41 @@ components:
                 keySchema:
                     type: object
             description: Details of a single payment method
+        payment.service.v1.TransactionInfo:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                userId:
+                    type: string
+                amount:
+                    type: string
+                currency:
+                    type: string
+                type:
+                    enum:
+                        - TRANSACTION_TYPE_UNSPECIFIED
+                        - TRANSACTION_TYPE_DEPOSIT
+                        - TRANSACTION_TYPE_WITHDRAW
+                    type: string
+                    format: enum
+                status:
+                    enum:
+                        - TRANSACTION_STATUS_UNSPECIFIED
+                        - TRANSACTION_STATUS_PROCESSING
+                        - TRANSACTION_STATUS_SUCCESSFUL
+                        - TRANSACTION_STATUS_FAILED
+                    type: string
+                    format: enum
+                paymentMethod:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: Transaction information
         system.service.v1.AddCurrencyRequest:
             type: object
             properties:
