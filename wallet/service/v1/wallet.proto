@@ -85,9 +85,9 @@ message GetUserBalancesRequest {
 message GetUserBalancesResponse {
 	message Balance {
 		string currency = 1;
-		int64 cash = 3;
-		int64 operator_bonus = 4;
-		int64 provider_bonus = 5;
+		string cash = 2;
+		string operator_bonus = 3;
+		string provider_bonus = 4;
 	}
 	repeated Balance balances = 1;
 }
@@ -102,9 +102,9 @@ message GetUserBalanceRequest {
 message GetUserBalanceResponse {
 	// optional exchange rate between currency and target currency
 	string exchange_rate = 1;
-	int64 cash = 2;
-	int64 operator_bonus = 3;
-	int64 provider_bonus = 4;
+	string cash = 2;
+	string operator_bonus = 3;
+	string provider_bonus = 4;
 }
 
 enum TransactionType {
