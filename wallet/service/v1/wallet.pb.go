@@ -612,9 +612,9 @@ type GetUserBalanceResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// optional exchange rate between currency and target currency
 	ExchangeRate  string `protobuf:"bytes,1,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
-	Cash          string `protobuf:"bytes,2,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus string `protobuf:"bytes,3,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus string `protobuf:"bytes,4,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	Cash          int64  `protobuf:"varint,2,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus int64  `protobuf:"varint,3,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus int64  `protobuf:"varint,4,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -656,25 +656,25 @@ func (x *GetUserBalanceResponse) GetExchangeRate() string {
 	return ""
 }
 
-func (x *GetUserBalanceResponse) GetCash() string {
+func (x *GetUserBalanceResponse) GetCash() int64 {
 	if x != nil {
 		return x.Cash
 	}
-	return ""
+	return 0
 }
 
-func (x *GetUserBalanceResponse) GetOperatorBonus() string {
+func (x *GetUserBalanceResponse) GetOperatorBonus() int64 {
 	if x != nil {
 		return x.OperatorBonus
 	}
-	return ""
+	return 0
 }
 
-func (x *GetUserBalanceResponse) GetProviderBonus() string {
+func (x *GetUserBalanceResponse) GetProviderBonus() int64 {
 	if x != nil {
 		return x.ProviderBonus
 	}
-	return ""
+	return 0
 }
 
 type CreditRequest struct {
@@ -1429,9 +1429,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0ftarget_currency\x18\x03 \x01(\tR\x0etargetCurrency\"\x9f\x01\n" +
 	"\x16GetUserBalanceResponse\x12#\n" +
 	"\rexchange_rate\x18\x01 \x01(\tR\fexchangeRate\x12\x12\n" +
-	"\x04cash\x18\x02 \x01(\tR\x04cash\x12%\n" +
-	"\x0eoperator_bonus\x18\x03 \x01(\tR\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\"\x96\x02\n" +
+	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
+	"\x0eoperator_bonus\x18\x03 \x01(\x03R\roperatorBonus\x12%\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\x03R\rproviderBonus\"\x96\x02\n" +
 	"\rCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12Q\n" +
