@@ -576,6 +576,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/user/tag/add:
+        post:
+            tags:
+                - User
+            description: Add a tag to a user.
+            operationId: User_AddUserTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.AddUserTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddUserTagResponse'
+    /v1/user/tag/delete:
+        post:
+            tags:
+                - User
+            description: Soft delete a tag from a user.
+            operationId: User_DeleteUserTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.DeleteUserTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteUserTagResponse'
     /v1/wallet/balances/get:
         post:
             tags:
@@ -719,6 +757,16 @@ components:
         api.operator.service.v1.UpdateOperatorResponse:
             type: object
             properties: {}
+        api.user.service.v1.AddUserTagRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                tag:
+                    type: string
+        api.user.service.v1.AddUserTagResponse:
+            type: object
+            properties: {}
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -736,6 +784,16 @@ components:
                         - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
                     description: Basic information about the authenticated user.
             description: AuthResponse contains the authentication tokens and user information.
+        api.user.service.v1.DeleteUserTagRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                tag:
+                    type: string
+        api.user.service.v1.DeleteUserTagResponse:
+            type: object
+            properties: {}
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
@@ -992,13 +1050,22 @@ components:
                     type: string
                 finished:
                     type: boolean
+                sessionId:
+                    type: string
         game.service.v1.BalanceResponse:
             type: object
             properties:
+                data:
+                    $ref: '#/components/schemas/game.service.v1.BalanceResponse_Data'
+        game.service.v1.BalanceResponse_Data:
+            type: object
+            properties:
                 balance:
-                    type: string
+                    type: number
+                    format: double
                 bonus:
-                    type: string
+                    type: number
+                    format: double
                 roundId:
                     type: string
         game.service.v1.CreateSessionRequest:
@@ -1011,8 +1078,6 @@ components:
                 settlementCurrency:
                     type: string
                 locale:
-                    type: string
-                userId:
                     type: string
                 urls:
                     $ref: '#/components/schemas/game.service.v1.UrlInfo'
@@ -1152,6 +1217,8 @@ components:
                     type: boolean
                 smResult:
                     type: string
+                sessionId:
+                    type: string
                 actions:
                     type: array
                     items:
@@ -1159,8 +1226,14 @@ components:
         game.service.v1.PlayResponse:
             type: object
             properties:
+                data:
+                    $ref: '#/components/schemas/game.service.v1.PlayResponse_Data'
+        game.service.v1.PlayResponse_Data:
+            type: object
+            properties:
                 balance:
-                    type: string
+                    type: number
+                    format: double
                 roundId:
                     type: string
                 transactions:
@@ -1229,8 +1302,14 @@ components:
         game.service.v1.RollbackResponse:
             type: object
             properties:
+                data:
+                    $ref: '#/components/schemas/game.service.v1.RollbackResponse_Data'
+        game.service.v1.RollbackResponse_Data:
+            type: object
+            properties:
                 balance:
-                    type: string
+                    type: number
+                    format: double
                 roundId:
                     type: string
                 transactions:
@@ -1256,7 +1335,8 @@ components:
                 processedAt:
                     type: string
                 bonusAmount:
-                    type: string
+                    type: number
+                    format: double
         game.service.v1.UrlInfo:
             type: object
             properties:

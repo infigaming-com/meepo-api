@@ -346,3 +346,27 @@ func IsGetOperatorIdByOriginFailed(err error) bool {
 func ErrorGetOperatorIdByOriginFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUserTagAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_TAG_ALREADY_EXISTS.String() && e.Code == 409
+}
+
+func ErrorUserTagAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_USER_TAG_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserTagNotExist(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_TAG_NOT_EXIST.String() && e.Code == 500
+}
+
+func ErrorUserTagNotExist(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_TAG_NOT_EXIST.String(), fmt.Sprintf(format, args...))
+}

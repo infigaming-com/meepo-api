@@ -962,8 +962,7 @@ type CreateSessionRequest struct {
 	Currency           string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	SettlementCurrency string                 `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
 	Locale             string                 `protobuf:"bytes,4,opt,name=locale,proto3" json:"locale,omitempty"`
-	UserId             int64                  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Urls               *UrlInfo               `protobuf:"bytes,6,opt,name=urls,proto3" json:"urls,omitempty"`
+	Urls               *UrlInfo               `protobuf:"bytes,5,opt,name=urls,proto3" json:"urls,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -1024,13 +1023,6 @@ func (x *CreateSessionRequest) GetLocale() string {
 		return x.Locale
 	}
 	return ""
-}
-
-func (x *CreateSessionRequest) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
 }
 
 func (x *CreateSessionRequest) GetUrls() *UrlInfo {
@@ -1303,6 +1295,7 @@ type BalanceRequest struct {
 	GameId        string                 `protobuf:"bytes,3,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	RoundId       string                 `protobuf:"bytes,4,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
 	Finished      bool                   `protobuf:"varint,5,opt,name=finished,proto3" json:"finished,omitempty"`
+	SessionId     int64                  `protobuf:"varint,6,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1372,11 +1365,16 @@ func (x *BalanceRequest) GetFinished() bool {
 	return false
 }
 
+func (x *BalanceRequest) GetSessionId() int64 {
+	if x != nil {
+		return x.SessionId
+	}
+	return 0
+}
+
 type BalanceResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Balance       int64                  `protobuf:"varint,1,opt,name=balance,proto3" json:"balance,omitempty"`
-	Bonus         int64                  `protobuf:"varint,2,opt,name=bonus,proto3" json:"bonus,omitempty"`
-	RoundId       string                 `protobuf:"bytes,3,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
+	Data          *BalanceResponse_Data  `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1411,25 +1409,11 @@ func (*BalanceResponse) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *BalanceResponse) GetBalance() int64 {
+func (x *BalanceResponse) GetData() *BalanceResponse_Data {
 	if x != nil {
-		return x.Balance
+		return x.Data
 	}
-	return 0
-}
-
-func (x *BalanceResponse) GetBonus() int64 {
-	if x != nil {
-		return x.Bonus
-	}
-	return 0
-}
-
-func (x *BalanceResponse) GetRoundId() string {
-	if x != nil {
-		return x.RoundId
-	}
-	return ""
+	return nil
 }
 
 type PlayRequest struct {
@@ -1440,7 +1424,8 @@ type PlayRequest struct {
 	RoundId       string                 `protobuf:"bytes,4,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
 	Finished      bool                   `protobuf:"varint,5,opt,name=finished,proto3" json:"finished,omitempty"`
 	SmResult      string                 `protobuf:"bytes,6,opt,name=sm_result,json=smResult,proto3" json:"sm_result,omitempty"`
-	Actions       []*Action              `protobuf:"bytes,7,rep,name=actions,proto3" json:"actions,omitempty"`
+	SessionId     int64                  `protobuf:"varint,7,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	Actions       []*Action              `protobuf:"bytes,8,rep,name=actions,proto3" json:"actions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1517,6 +1502,13 @@ func (x *PlayRequest) GetSmResult() string {
 	return ""
 }
 
+func (x *PlayRequest) GetSessionId() int64 {
+	if x != nil {
+		return x.SessionId
+	}
+	return 0
+}
+
 func (x *PlayRequest) GetActions() []*Action {
 	if x != nil {
 		return x.Actions
@@ -1526,9 +1518,7 @@ func (x *PlayRequest) GetActions() []*Action {
 
 type PlayResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Balance       int64                  `protobuf:"varint,1,opt,name=balance,proto3" json:"balance,omitempty"`
-	RoundId       string                 `protobuf:"bytes,2,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
-	Transactions  []*Transactions        `protobuf:"bytes,3,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	Data          *PlayResponse_Data     `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1563,23 +1553,9 @@ func (*PlayResponse) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *PlayResponse) GetBalance() int64 {
+func (x *PlayResponse) GetData() *PlayResponse_Data {
 	if x != nil {
-		return x.Balance
-	}
-	return 0
-}
-
-func (x *PlayResponse) GetRoundId() string {
-	if x != nil {
-		return x.RoundId
-	}
-	return ""
-}
-
-func (x *PlayResponse) GetTransactions() []*Transactions {
-	if x != nil {
-		return x.Transactions
+		return x.Data
 	}
 	return nil
 }
@@ -1729,7 +1705,7 @@ type Transactions struct {
 	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
 	OperatorTxnId string                 `protobuf:"bytes,2,opt,name=operator_txn_id,json=operatorTxnId,proto3" json:"operator_txn_id,omitempty"`
 	ProcessedAt   string                 `protobuf:"bytes,3,opt,name=processed_at,json=processedAt,proto3" json:"processed_at,omitempty"`
-	BonusAmount   int64                  `protobuf:"varint,4,opt,name=bonus_amount,json=bonusAmount,proto3" json:"bonus_amount,omitempty"`
+	BonusAmount   float64                `protobuf:"fixed64,4,opt,name=bonus_amount,json=bonusAmount,proto3" json:"bonus_amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1785,7 +1761,7 @@ func (x *Transactions) GetProcessedAt() string {
 	return ""
 }
 
-func (x *Transactions) GetBonusAmount() int64 {
+func (x *Transactions) GetBonusAmount() float64 {
 	if x != nil {
 		return x.BonusAmount
 	}
@@ -1977,10 +1953,8 @@ func (x *RollbackAction) GetProviderTimestamp() int64 {
 }
 
 type RollbackResponse struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Balance       int64                   `protobuf:"varint,1,opt,name=balance,proto3" json:"balance,omitempty"`
-	RoundId       string                  `protobuf:"bytes,2,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
-	Transactions  []*RollbackTransactions `protobuf:"bytes,3,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          *RollbackResponse_Data `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2015,23 +1989,9 @@ func (*RollbackResponse) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *RollbackResponse) GetBalance() int64 {
+func (x *RollbackResponse) GetData() *RollbackResponse_Data {
 	if x != nil {
-		return x.Balance
-	}
-	return 0
-}
-
-func (x *RollbackResponse) GetRoundId() string {
-	if x != nil {
-		return x.RoundId
-	}
-	return ""
-}
-
-func (x *RollbackResponse) GetTransactions() []*RollbackTransactions {
-	if x != nil {
-		return x.Transactions
+		return x.Data
 	}
 	return nil
 }
@@ -2094,6 +2054,186 @@ func (x *RollbackTransactions) GetProcessedAt() string {
 		return x.ProcessedAt
 	}
 	return ""
+}
+
+type BalanceResponse_Data struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Balance       float64                `protobuf:"fixed64,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	Bonus         float64                `protobuf:"fixed64,2,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	RoundId       string                 `protobuf:"bytes,3,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BalanceResponse_Data) Reset() {
+	*x = BalanceResponse_Data{}
+	mi := &file_game_service_v1_game_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BalanceResponse_Data) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BalanceResponse_Data) ProtoMessage() {}
+
+func (x *BalanceResponse_Data) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BalanceResponse_Data.ProtoReflect.Descriptor instead.
+func (*BalanceResponse_Data) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{20, 0}
+}
+
+func (x *BalanceResponse_Data) GetBalance() float64 {
+	if x != nil {
+		return x.Balance
+	}
+	return 0
+}
+
+func (x *BalanceResponse_Data) GetBonus() float64 {
+	if x != nil {
+		return x.Bonus
+	}
+	return 0
+}
+
+func (x *BalanceResponse_Data) GetRoundId() string {
+	if x != nil {
+		return x.RoundId
+	}
+	return ""
+}
+
+type PlayResponse_Data struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Balance       float64                `protobuf:"fixed64,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	RoundId       string                 `protobuf:"bytes,2,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
+	Transactions  []*Transactions        `protobuf:"bytes,3,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PlayResponse_Data) Reset() {
+	*x = PlayResponse_Data{}
+	mi := &file_game_service_v1_game_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PlayResponse_Data) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PlayResponse_Data) ProtoMessage() {}
+
+func (x *PlayResponse_Data) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PlayResponse_Data.ProtoReflect.Descriptor instead.
+func (*PlayResponse_Data) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{22, 0}
+}
+
+func (x *PlayResponse_Data) GetBalance() float64 {
+	if x != nil {
+		return x.Balance
+	}
+	return 0
+}
+
+func (x *PlayResponse_Data) GetRoundId() string {
+	if x != nil {
+		return x.RoundId
+	}
+	return ""
+}
+
+func (x *PlayResponse_Data) GetTransactions() []*Transactions {
+	if x != nil {
+		return x.Transactions
+	}
+	return nil
+}
+
+type RollbackResponse_Data struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Balance       float64                 `protobuf:"fixed64,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	RoundId       string                  `protobuf:"bytes,2,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
+	Transactions  []*RollbackTransactions `protobuf:"bytes,3,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RollbackResponse_Data) Reset() {
+	*x = RollbackResponse_Data{}
+	mi := &file_game_service_v1_game_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RollbackResponse_Data) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RollbackResponse_Data) ProtoMessage() {}
+
+func (x *RollbackResponse_Data) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RollbackResponse_Data.ProtoReflect.Descriptor instead.
+func (*RollbackResponse_Data) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{27, 0}
+}
+
+func (x *RollbackResponse_Data) GetBalance() float64 {
+	if x != nil {
+		return x.Balance
+	}
+	return 0
+}
+
+func (x *RollbackResponse_Data) GetRoundId() string {
+	if x != nil {
+		return x.RoundId
+	}
+	return ""
+}
+
+func (x *RollbackResponse_Data) GetTransactions() []*RollbackTransactions {
+	if x != nil {
+		return x.Transactions
+	}
+	return nil
 }
 
 var File_game_service_v1_game_proto protoreflect.FileDescriptor
@@ -2187,14 +2327,13 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\vreleased_at\x18\x14 \x01(\x03R\n" +
 	"releasedAt\x12\x1b\n" +
 	"\tbonus_buy\x18\x15 \x01(\bR\bbonusBuy\x12\"\n" +
-	"\frestrictions\x18\x16 \x01(\tR\frestrictions\"\xdb\x01\n" +
+	"\frestrictions\x18\x16 \x01(\tR\frestrictions\"\xc2\x01\n" +
 	"\x14CreateSessionRequest\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
 	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\x12\x16\n" +
-	"\x06locale\x18\x04 \x01(\tR\x06locale\x12\x17\n" +
-	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12,\n" +
-	"\x04urls\x18\x06 \x01(\v2\x18.game.service.v1.UrlInfoR\x04urls\"2\n" +
+	"\x06locale\x18\x04 \x01(\tR\x06locale\x12,\n" +
+	"\x04urls\x18\x05 \x01(\v2\x18.game.service.v1.UrlInfoR\x04urls\"2\n" +
 	"\x15CreateSessionResponse\x12\x19\n" +
 	"\bgame_url\x18\x01 \x01(\tR\agameUrl\"f\n" +
 	"\aUrlInfo\x12\x1d\n" +
@@ -2211,27 +2350,35 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
-	"game_count\x18\x03 \x01(\x05R\tgameCount\"\x95\x01\n" +
+	"game_count\x18\x03 \x01(\x05R\tgameCount\"\xb4\x01\n" +
 	"\x0eBalanceRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
 	"\agame_id\x18\x03 \x01(\tR\x06gameId\x12\x19\n" +
 	"\bround_id\x18\x04 \x01(\tR\aroundId\x12\x1a\n" +
-	"\bfinished\x18\x05 \x01(\bR\bfinished\"\\\n" +
-	"\x0fBalanceResponse\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\x03R\abalance\x12\x14\n" +
-	"\x05bonus\x18\x02 \x01(\x03R\x05bonus\x12\x19\n" +
-	"\bround_id\x18\x03 \x01(\tR\aroundId\"\xe2\x01\n" +
+	"\bfinished\x18\x05 \x01(\bR\bfinished\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x06 \x01(\x03R\tsessionId\"\x9f\x01\n" +
+	"\x0fBalanceResponse\x129\n" +
+	"\x04data\x18\x01 \x01(\v2%.game.service.v1.BalanceResponse.DataR\x04data\x1aQ\n" +
+	"\x04Data\x12\x18\n" +
+	"\abalance\x18\x01 \x01(\x01R\abalance\x12\x14\n" +
+	"\x05bonus\x18\x02 \x01(\x01R\x05bonus\x12\x19\n" +
+	"\bround_id\x18\x03 \x01(\tR\aroundId\"\x81\x02\n" +
 	"\vPlayRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
 	"\agame_id\x18\x03 \x01(\tR\x06gameId\x12\x19\n" +
 	"\bround_id\x18\x04 \x01(\tR\aroundId\x12\x1a\n" +
 	"\bfinished\x18\x05 \x01(\bR\bfinished\x12\x1b\n" +
-	"\tsm_result\x18\x06 \x01(\tR\bsmResult\x121\n" +
-	"\aactions\x18\a \x03(\v2\x17.game.service.v1.ActionR\aactions\"\x86\x01\n" +
-	"\fPlayResponse\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\x03R\abalance\x12\x19\n" +
+	"\tsm_result\x18\x06 \x01(\tR\bsmResult\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\a \x01(\x03R\tsessionId\x121\n" +
+	"\aactions\x18\b \x03(\v2\x17.game.service.v1.ActionR\aactions\"\xc6\x01\n" +
+	"\fPlayResponse\x126\n" +
+	"\x04data\x18\x01 \x01(\v2\".game.service.v1.PlayResponse.DataR\x04data\x1a~\n" +
+	"\x04Data\x12\x18\n" +
+	"\abalance\x18\x01 \x01(\x01R\abalance\x12\x19\n" +
 	"\bround_id\x18\x02 \x01(\tR\aroundId\x12A\n" +
 	"\ftransactions\x18\x03 \x03(\v2\x1d.game.service.v1.TransactionsR\ftransactions\"\xa2\x03\n" +
 	"\x06Action\x12\x16\n" +
@@ -2256,7 +2403,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x06txn_id\x18\x01 \x01(\tR\x05txnId\x12&\n" +
 	"\x0foperator_txn_id\x18\x02 \x01(\tR\roperatorTxnId\x12!\n" +
 	"\fprocessed_at\x18\x03 \x01(\tR\vprocessedAt\x12!\n" +
-	"\fbonus_amount\x18\x04 \x01(\x03R\vbonusAmount\"\xee\x01\n" +
+	"\fbonus_amount\x18\x04 \x01(\x01R\vbonusAmount\"\xee\x01\n" +
 	"\x0fRollbackRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
@@ -2273,9 +2420,11 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"ext_txn_id\x18\x04 \x01(\tR\bextTxnId\x12&\n" +
 	"\x0foriginal_txn_id\x18\x05 \x01(\tR\roriginalTxnId\x12-\n" +
 	"\x13original_ext_txn_id\x18\x06 \x01(\tR\x10originalExtTxnId\x12-\n" +
-	"\x12provider_timestamp\x18\a \x01(\x03R\x11providerTimestamp\"\x92\x01\n" +
-	"\x10RollbackResponse\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\x03R\abalance\x12\x19\n" +
+	"\x12provider_timestamp\x18\a \x01(\x03R\x11providerTimestamp\"\xd7\x01\n" +
+	"\x10RollbackResponse\x12:\n" +
+	"\x04data\x18\x01 \x01(\v2&.game.service.v1.RollbackResponse.DataR\x04data\x1a\x86\x01\n" +
+	"\x04Data\x12\x18\n" +
+	"\abalance\x18\x01 \x01(\x01R\abalance\x12\x19\n" +
 	"\bround_id\x18\x02 \x01(\tR\aroundId\x12I\n" +
 	"\ftransactions\x18\x03 \x03(\v2%.game.service.v1.RollbackTransactionsR\ftransactions\"x\n" +
 	"\x14RollbackTransactions\x12\x15\n" +
@@ -2308,7 +2457,7 @@ func file_game_service_v1_game_proto_rawDescGZIP() []byte {
 }
 
 var file_game_service_v1_game_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_game_service_v1_game_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_game_service_v1_game_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_game_service_v1_game_proto_goTypes = []any{
 	(GameSort_Field)(0),            // 0: game.service.v1.GameSort.Field
 	(*CreateOperatorRequest)(nil),  // 1: game.service.v1.CreateOperatorRequest
@@ -2340,6 +2489,9 @@ var file_game_service_v1_game_proto_goTypes = []any{
 	(*RollbackAction)(nil),         // 27: game.service.v1.RollbackAction
 	(*RollbackResponse)(nil),       // 28: game.service.v1.RollbackResponse
 	(*RollbackTransactions)(nil),   // 29: game.service.v1.RollbackTransactions
+	(*BalanceResponse_Data)(nil),   // 30: game.service.v1.BalanceResponse.Data
+	(*PlayResponse_Data)(nil),      // 31: game.service.v1.PlayResponse.Data
+	(*RollbackResponse_Data)(nil),  // 32: game.service.v1.RollbackResponse.Data
 }
 var file_game_service_v1_game_proto_depIdxs = []int32{
 	0,  // 0: game.service.v1.GameSort.field:type_name -> game.service.v1.GameSort.Field
@@ -2348,35 +2500,38 @@ var file_game_service_v1_game_proto_depIdxs = []int32{
 	13, // 3: game.service.v1.GetGameResponse.game:type_name -> game.service.v1.GameInfo
 	16, // 4: game.service.v1.CreateSessionRequest.urls:type_name -> game.service.v1.UrlInfo
 	19, // 5: game.service.v1.ProviderListResponse.providers:type_name -> game.service.v1.Provider
-	24, // 6: game.service.v1.PlayRequest.actions:type_name -> game.service.v1.Action
-	25, // 7: game.service.v1.PlayResponse.transactions:type_name -> game.service.v1.Transactions
-	27, // 8: game.service.v1.RollbackRequest.actions:type_name -> game.service.v1.RollbackAction
-	29, // 9: game.service.v1.RollbackResponse.transactions:type_name -> game.service.v1.RollbackTransactions
-	1,  // 10: game.service.v1.Game.CreateOperator:input_type -> game.service.v1.CreateOperatorRequest
-	3,  // 11: game.service.v1.Game.UpdateOperator:input_type -> game.service.v1.UpdateOperatorRequest
-	5,  // 12: game.service.v1.Game.DeleteOperator:input_type -> game.service.v1.DeleteOperatorRequest
-	9,  // 13: game.service.v1.Game.ListGames:input_type -> game.service.v1.ListGamesRequest
-	11, // 14: game.service.v1.Game.GetGame:input_type -> game.service.v1.GetGameRequest
-	17, // 15: game.service.v1.Game.ProviderList:input_type -> game.service.v1.ProviderListRequest
-	14, // 16: game.service.v1.Game.CreateSession:input_type -> game.service.v1.CreateSessionRequest
-	20, // 17: game.service.v1.Game.Balance:input_type -> game.service.v1.BalanceRequest
-	22, // 18: game.service.v1.Game.Play:input_type -> game.service.v1.PlayRequest
-	26, // 19: game.service.v1.Game.Rollback:input_type -> game.service.v1.RollbackRequest
-	2,  // 20: game.service.v1.Game.CreateOperator:output_type -> game.service.v1.CreateOperatorResponse
-	4,  // 21: game.service.v1.Game.UpdateOperator:output_type -> game.service.v1.UpdateOperatorResponse
-	6,  // 22: game.service.v1.Game.DeleteOperator:output_type -> game.service.v1.DeleteOperatorResponse
-	10, // 23: game.service.v1.Game.ListGames:output_type -> game.service.v1.ListGamesResponse
-	12, // 24: game.service.v1.Game.GetGame:output_type -> game.service.v1.GetGameResponse
-	18, // 25: game.service.v1.Game.ProviderList:output_type -> game.service.v1.ProviderListResponse
-	15, // 26: game.service.v1.Game.CreateSession:output_type -> game.service.v1.CreateSessionResponse
-	21, // 27: game.service.v1.Game.Balance:output_type -> game.service.v1.BalanceResponse
-	23, // 28: game.service.v1.Game.Play:output_type -> game.service.v1.PlayResponse
-	28, // 29: game.service.v1.Game.Rollback:output_type -> game.service.v1.RollbackResponse
-	20, // [20:30] is the sub-list for method output_type
-	10, // [10:20] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	30, // 6: game.service.v1.BalanceResponse.data:type_name -> game.service.v1.BalanceResponse.Data
+	24, // 7: game.service.v1.PlayRequest.actions:type_name -> game.service.v1.Action
+	31, // 8: game.service.v1.PlayResponse.data:type_name -> game.service.v1.PlayResponse.Data
+	27, // 9: game.service.v1.RollbackRequest.actions:type_name -> game.service.v1.RollbackAction
+	32, // 10: game.service.v1.RollbackResponse.data:type_name -> game.service.v1.RollbackResponse.Data
+	25, // 11: game.service.v1.PlayResponse.Data.transactions:type_name -> game.service.v1.Transactions
+	29, // 12: game.service.v1.RollbackResponse.Data.transactions:type_name -> game.service.v1.RollbackTransactions
+	1,  // 13: game.service.v1.Game.CreateOperator:input_type -> game.service.v1.CreateOperatorRequest
+	3,  // 14: game.service.v1.Game.UpdateOperator:input_type -> game.service.v1.UpdateOperatorRequest
+	5,  // 15: game.service.v1.Game.DeleteOperator:input_type -> game.service.v1.DeleteOperatorRequest
+	9,  // 16: game.service.v1.Game.ListGames:input_type -> game.service.v1.ListGamesRequest
+	11, // 17: game.service.v1.Game.GetGame:input_type -> game.service.v1.GetGameRequest
+	17, // 18: game.service.v1.Game.ProviderList:input_type -> game.service.v1.ProviderListRequest
+	14, // 19: game.service.v1.Game.CreateSession:input_type -> game.service.v1.CreateSessionRequest
+	20, // 20: game.service.v1.Game.Balance:input_type -> game.service.v1.BalanceRequest
+	22, // 21: game.service.v1.Game.Play:input_type -> game.service.v1.PlayRequest
+	26, // 22: game.service.v1.Game.Rollback:input_type -> game.service.v1.RollbackRequest
+	2,  // 23: game.service.v1.Game.CreateOperator:output_type -> game.service.v1.CreateOperatorResponse
+	4,  // 24: game.service.v1.Game.UpdateOperator:output_type -> game.service.v1.UpdateOperatorResponse
+	6,  // 25: game.service.v1.Game.DeleteOperator:output_type -> game.service.v1.DeleteOperatorResponse
+	10, // 26: game.service.v1.Game.ListGames:output_type -> game.service.v1.ListGamesResponse
+	12, // 27: game.service.v1.Game.GetGame:output_type -> game.service.v1.GetGameResponse
+	18, // 28: game.service.v1.Game.ProviderList:output_type -> game.service.v1.ProviderListResponse
+	15, // 29: game.service.v1.Game.CreateSession:output_type -> game.service.v1.CreateSessionResponse
+	21, // 30: game.service.v1.Game.Balance:output_type -> game.service.v1.BalanceResponse
+	23, // 31: game.service.v1.Game.Play:output_type -> game.service.v1.PlayResponse
+	28, // 32: game.service.v1.Game.Rollback:output_type -> game.service.v1.RollbackResponse
+	23, // [23:33] is the sub-list for method output_type
+	13, // [13:23] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_game_service_v1_game_proto_init() }
@@ -2390,7 +2545,7 @@ func file_game_service_v1_game_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_game_service_v1_game_proto_rawDesc), len(file_game_service_v1_game_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   29,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

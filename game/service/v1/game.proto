@@ -175,8 +175,7 @@ message CreateSessionRequest {
 	string currency = 2;
 	string settlement_currency = 3;
 	string locale = 4;
-	int64 user_id = 5;
-	UrlInfo urls = 6;
+	UrlInfo urls = 5;
 }
 
 message CreateSessionResponse {
@@ -213,12 +212,16 @@ message BalanceRequest {
 	string game_id = 3;
 	string round_id = 4;
 	bool finished = 5;
+	int64 session_id = 6;
 }
 
 message BalanceResponse {
-	int64 balance = 1;
-	int64 bonus = 2;
-	string round_id = 3;
+	message Data {
+		double balance = 1;
+		double bonus = 2;
+		string round_id = 3;
+	}
+	Data data = 1;
 }
 
 message PlayRequest {
@@ -228,13 +231,17 @@ message PlayRequest {
 	string round_id = 4;
 	bool finished = 5;
 	string sm_result = 6;
-	repeated Action actions = 7;
+	int64 session_id = 7;
+	repeated Action actions = 8;
 }
 
 message PlayResponse {
-	int64 balance = 1;
-	string round_id = 2;
-	repeated Transactions transactions = 3;
+	message Data {
+		double balance = 1;
+		string round_id = 2;
+		repeated Transactions transactions = 3;
+	}
+	Data data = 1;
 }
 
 message Action {
@@ -257,7 +264,7 @@ message Transactions {
 	string txn_id = 1;
 	string operator_txn_id = 2;
 	string processed_at = 3;
-	int64 bonus_amount = 4;
+	double bonus_amount = 4;
 }
 
 message RollbackRequest {
@@ -281,9 +288,12 @@ message RollbackAction {
 }
 
 message RollbackResponse {
-	int64 balance = 1;
-	string round_id = 2;
-	repeated RollbackTransactions transactions = 3;
+	message Data {
+		double balance = 1;
+		string round_id = 2;
+		repeated RollbackTransactions transactions = 3;
+	}
+	Data data = 1;
 }
 
 message RollbackTransactions {

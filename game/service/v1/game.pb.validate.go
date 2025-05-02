@@ -1553,8 +1553,6 @@ func (m *CreateSessionRequest) validate(all bool) error {
 
 	// no validation rules for Locale
 
-	// no validation rules for UserId
-
 	if all {
 		switch v := interface{}(m.GetUrls()).(type) {
 		case interface{ ValidateAll() error }:
@@ -2249,6 +2247,8 @@ func (m *BalanceRequest) validate(all bool) error {
 
 	// no validation rules for Finished
 
+	// no validation rules for SessionId
+
 	if len(errors) > 0 {
 		return BalanceRequestMultiError(errors)
 	}
@@ -2349,11 +2349,34 @@ func (m *BalanceResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Balance
-
-	// no validation rules for Bonus
-
-	// no validation rules for RoundId
+	if all {
+		switch v := interface{}(m.GetData()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BalanceResponseValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BalanceResponseValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BalanceResponseValidationError{
+				field:  "Data",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return BalanceResponseMultiError(errors)
@@ -2466,6 +2489,8 @@ func (m *PlayRequest) validate(all bool) error {
 	// no validation rules for Finished
 
 	// no validation rules for SmResult
+
+	// no validation rules for SessionId
 
 	for idx, item := range m.GetActions() {
 		_, _ = idx, item
@@ -2600,42 +2625,33 @@ func (m *PlayResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Balance
-
-	// no validation rules for RoundId
-
-	for idx, item := range m.GetTransactions() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, PlayResponseValidationError{
-						field:  fmt.Sprintf("Transactions[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, PlayResponseValidationError{
-						field:  fmt.Sprintf("Transactions[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return PlayResponseValidationError{
-					field:  fmt.Sprintf("Transactions[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetData()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PlayResponseValidationError{
+					field:  "Data",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PlayResponseValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PlayResponseValidationError{
+				field:  "Data",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	if len(errors) > 0 {
@@ -3228,42 +3244,33 @@ func (m *RollbackResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Balance
-
-	// no validation rules for RoundId
-
-	for idx, item := range m.GetTransactions() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, RollbackResponseValidationError{
-						field:  fmt.Sprintf("Transactions[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, RollbackResponseValidationError{
-						field:  fmt.Sprintf("Transactions[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return RollbackResponseValidationError{
-					field:  fmt.Sprintf("Transactions[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetData()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RollbackResponseValidationError{
+					field:  "Data",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RollbackResponseValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RollbackResponseValidationError{
+				field:  "Data",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	if len(errors) > 0 {
@@ -3451,3 +3458,391 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RollbackTransactionsValidationError{}
+
+// Validate checks the field values on BalanceResponse_Data with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BalanceResponse_Data) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BalanceResponse_Data with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BalanceResponse_DataMultiError, or nil if none found.
+func (m *BalanceResponse_Data) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BalanceResponse_Data) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Balance
+
+	// no validation rules for Bonus
+
+	// no validation rules for RoundId
+
+	if len(errors) > 0 {
+		return BalanceResponse_DataMultiError(errors)
+	}
+
+	return nil
+}
+
+// BalanceResponse_DataMultiError is an error wrapping multiple validation
+// errors returned by BalanceResponse_Data.ValidateAll() if the designated
+// constraints aren't met.
+type BalanceResponse_DataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BalanceResponse_DataMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BalanceResponse_DataMultiError) AllErrors() []error { return m }
+
+// BalanceResponse_DataValidationError is the validation error returned by
+// BalanceResponse_Data.Validate if the designated constraints aren't met.
+type BalanceResponse_DataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BalanceResponse_DataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BalanceResponse_DataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BalanceResponse_DataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BalanceResponse_DataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BalanceResponse_DataValidationError) ErrorName() string {
+	return "BalanceResponse_DataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BalanceResponse_DataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBalanceResponse_Data.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BalanceResponse_DataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BalanceResponse_DataValidationError{}
+
+// Validate checks the field values on PlayResponse_Data with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *PlayResponse_Data) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PlayResponse_Data with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PlayResponse_DataMultiError, or nil if none found.
+func (m *PlayResponse_Data) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PlayResponse_Data) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Balance
+
+	// no validation rules for RoundId
+
+	for idx, item := range m.GetTransactions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PlayResponse_DataValidationError{
+						field:  fmt.Sprintf("Transactions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PlayResponse_DataValidationError{
+						field:  fmt.Sprintf("Transactions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PlayResponse_DataValidationError{
+					field:  fmt.Sprintf("Transactions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return PlayResponse_DataMultiError(errors)
+	}
+
+	return nil
+}
+
+// PlayResponse_DataMultiError is an error wrapping multiple validation errors
+// returned by PlayResponse_Data.ValidateAll() if the designated constraints
+// aren't met.
+type PlayResponse_DataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PlayResponse_DataMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PlayResponse_DataMultiError) AllErrors() []error { return m }
+
+// PlayResponse_DataValidationError is the validation error returned by
+// PlayResponse_Data.Validate if the designated constraints aren't met.
+type PlayResponse_DataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PlayResponse_DataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PlayResponse_DataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PlayResponse_DataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PlayResponse_DataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PlayResponse_DataValidationError) ErrorName() string {
+	return "PlayResponse_DataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PlayResponse_DataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPlayResponse_Data.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PlayResponse_DataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PlayResponse_DataValidationError{}
+
+// Validate checks the field values on RollbackResponse_Data with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RollbackResponse_Data) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RollbackResponse_Data with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RollbackResponse_DataMultiError, or nil if none found.
+func (m *RollbackResponse_Data) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RollbackResponse_Data) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Balance
+
+	// no validation rules for RoundId
+
+	for idx, item := range m.GetTransactions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RollbackResponse_DataValidationError{
+						field:  fmt.Sprintf("Transactions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RollbackResponse_DataValidationError{
+						field:  fmt.Sprintf("Transactions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RollbackResponse_DataValidationError{
+					field:  fmt.Sprintf("Transactions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return RollbackResponse_DataMultiError(errors)
+	}
+
+	return nil
+}
+
+// RollbackResponse_DataMultiError is an error wrapping multiple validation
+// errors returned by RollbackResponse_Data.ValidateAll() if the designated
+// constraints aren't met.
+type RollbackResponse_DataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RollbackResponse_DataMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RollbackResponse_DataMultiError) AllErrors() []error { return m }
+
+// RollbackResponse_DataValidationError is the validation error returned by
+// RollbackResponse_Data.Validate if the designated constraints aren't met.
+type RollbackResponse_DataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RollbackResponse_DataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RollbackResponse_DataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RollbackResponse_DataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RollbackResponse_DataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RollbackResponse_DataValidationError) ErrorName() string {
+	return "RollbackResponse_DataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RollbackResponse_DataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRollbackResponse_Data.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RollbackResponse_DataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RollbackResponse_DataValidationError{}
