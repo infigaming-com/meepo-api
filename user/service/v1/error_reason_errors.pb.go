@@ -370,3 +370,15 @@ func IsUserTagNotExist(err error) bool {
 func ErrorUserTagNotExist(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_USER_TAG_NOT_EXIST.String(), fmt.Sprintf(format, args...))
 }
+
+func IsVerifyGoogleTokenFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_VERIFY_GOOGLE_TOKEN_FAILED.String() && e.Code == 500
+}
+
+func ErrorVerifyGoogleTokenFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_VERIFY_GOOGLE_TOKEN_FAILED.String(), fmt.Sprintf(format, args...))
+}
