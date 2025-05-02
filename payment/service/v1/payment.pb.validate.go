@@ -1440,7 +1440,7 @@ func (m *InitiateWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for BankNation
 
-	// no validation rules for Channel
+	// no validation rules for ChannelId
 
 	if all {
 		switch v := interface{}(m.GetExtra()).(type) {

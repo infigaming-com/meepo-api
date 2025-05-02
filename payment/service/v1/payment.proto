@@ -104,7 +104,7 @@ message InitiateWithdrawRequest {
   string bank_id = 9 [json_name="bankId"];
   string bank_ifsc = 10 [json_name="bankIfsc"];
   string bank_nation = 11 [json_name="bankNation"];
-  string channel = 12;
+  string channel_id = 12 [json_name="channelId"];
   google.protobuf.Struct extra = 13; // Stores additional information like clientId, note, etc.
 }
 

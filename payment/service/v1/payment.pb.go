@@ -839,7 +839,7 @@ type InitiateWithdrawRequest struct {
 	BankId            string                 `protobuf:"bytes,9,opt,name=bank_id,json=bankId,proto3" json:"bank_id,omitempty"`
 	BankIfsc          string                 `protobuf:"bytes,10,opt,name=bank_ifsc,json=bankIfsc,proto3" json:"bank_ifsc,omitempty"`
 	BankNation        string                 `protobuf:"bytes,11,opt,name=bank_nation,json=bankNation,proto3" json:"bank_nation,omitempty"`
-	Channel           string                 `protobuf:"bytes,12,opt,name=channel,proto3" json:"channel,omitempty"`
+	ChannelId         string                 `protobuf:"bytes,12,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	Extra             *structpb.Struct       `protobuf:"bytes,13,opt,name=extra,proto3" json:"extra,omitempty"` // Stores additional information like clientId, note, etc.
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -952,9 +952,9 @@ func (x *InitiateWithdrawRequest) GetBankNation() string {
 	return ""
 }
 
-func (x *InitiateWithdrawRequest) GetChannel() string {
+func (x *InitiateWithdrawRequest) GetChannelId() string {
 	if x != nil {
-		return x.Channel
+		return x.ChannelId
 	}
 	return ""
 }
@@ -1571,7 +1571,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\aqr_code\x18\x06 \x01(\tR\x06qrCode\x129\n" +
 	"\n" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
-	"\x05extra\x18\b \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xd7\x03\n" +
+	"\x05extra\x18\b \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xdc\x03\n" +
 	"\x17InitiateWithdrawRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x03R\x06amount\x12*\n" +
 	"\x11operator_order_no\x18\x02 \x01(\tR\x0foperatorOrderNo\x12!\n" +
@@ -1586,8 +1586,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\tbank_ifsc\x18\n" +
 	" \x01(\tR\bbankIfsc\x12\x1f\n" +
 	"\vbank_nation\x18\v \x01(\tR\n" +
-	"bankNation\x12\x18\n" +
-	"\achannel\x18\f \x01(\tR\achannel\x12-\n" +
+	"bankNation\x12\x1d\n" +
+	"\n" +
+	"channel_id\x18\f \x01(\tR\tchannelId\x12-\n" +
 	"\x05extra\x18\r \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xd8\x01\n" +
 	"\x18InitiateWithdrawResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
