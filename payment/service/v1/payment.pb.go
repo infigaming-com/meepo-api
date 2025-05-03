@@ -336,7 +336,7 @@ func (x *GetPaymentMethodListResponse) GetPaymentMethods() []*PaymentMethodInfo 
 // Request to create a payment channel
 type CreatePaymentChannelRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId      string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	MerchantId      string                 `protobuf:"bytes,1,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
 	PaymentMethodId string                 `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	Key             *structpb.Struct       `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"` // Stores configuration fields for the payment channel
 	unknownFields   protoimpl.UnknownFields
@@ -373,9 +373,9 @@ func (*CreatePaymentChannelRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CreatePaymentChannelRequest) GetOperatorId() string {
+func (x *CreatePaymentChannelRequest) GetMerchantId() string {
 	if x != nil {
-		return x.OperatorId
+		return x.MerchantId
 	}
 	return ""
 }
@@ -1587,8 +1587,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x1cGetPaymentMethodListResponse\x12N\n" +
 	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\x95\x01\n" +
 	"\x1bCreatePaymentChannelRequest\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
-	"operatorId\x12*\n" +
+	"\vmerchant_id\x18\x01 \x01(\tR\n" +
+	"merchantId\x12*\n" +
 	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\x12)\n" +
 	"\x03key\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +

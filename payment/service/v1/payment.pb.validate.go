@@ -436,7 +436,7 @@ func (m *CreatePaymentChannelRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for OperatorId
+	// no validation rules for MerchantId
 
 	// no validation rules for PaymentMethodId
 

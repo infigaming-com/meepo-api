@@ -1352,7 +1352,7 @@ components:
         payment.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
-                operatorId:
+                merchantId:
                     type: string
                 paymentMethodId:
                     type: string

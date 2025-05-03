@@ -30,7 +30,7 @@ message GetPaymentMethodListResponse {
 
 // Request to create a payment channel
 message CreatePaymentChannelRequest {
-  string operator_id = 1 [json_name="operatorId"];
+  string merchant_id = 1 [json_name="merchantId"];
   string payment_method_id = 2 [json_name="paymentMethodId"];
   google.protobuf.Struct key = 3; // Stores configuration fields for the payment channel
 }
