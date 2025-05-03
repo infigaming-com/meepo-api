@@ -179,6 +179,18 @@ func ErrorGetBalanceWithUserIdAndCurrencyFailed(format string, args ...interface
 	return errors.New(500, ErrorReason_GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
+func IsGetBalancesWithUserIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_BALANCES_WITH_USER_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetBalancesWithUserIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_BALANCES_WITH_USER_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
 func IsBalanceDisabled(err error) bool {
 	if err == nil {
 		return false
@@ -371,14 +383,14 @@ func ErrorNoCreditTransactionFoundForGameBet(format string, args ...interface{})
 	return errors.New(500, ErrorReason_NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET.String(), fmt.Sprintf(format, args...))
 }
 
-func IsInvalidGameBetTotalAmount(err error) bool {
+func IsGetCurrenciesFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_INVALID_GAME_BET_TOTAL_AMOUNT.String() && e.Code == 500
+	return e.Reason == ErrorReason_GET_CURRENCIES_FAILED.String() && e.Code == 500
 }
 
-func ErrorInvalidGameBetTotalAmount(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_INVALID_GAME_BET_TOTAL_AMOUNT.String(), fmt.Sprintf(format, args...))
+func ErrorGetCurrenciesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_CURRENCIES_FAILED.String(), fmt.Sprintf(format, args...))
 }
