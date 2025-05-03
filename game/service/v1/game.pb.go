@@ -750,24 +750,25 @@ type GameInfo struct {
 	Enabled          bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	Name             string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	ProviderId       string                 `protobuf:"bytes,4,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
-	Category         string                 `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
-	Languages        []string               `protobuf:"bytes,6,rep,name=languages,proto3" json:"languages,omitempty"`
-	Currencies       []string               `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Theme            string                 `protobuf:"bytes,8,opt,name=theme,proto3" json:"theme,omitempty"`
-	HasJackpot       bool                   `protobuf:"varint,9,opt,name=has_jackpot,json=hasJackpot,proto3" json:"has_jackpot,omitempty"`
-	JackpotType      string                 `protobuf:"bytes,10,opt,name=jackpot_type,json=jackpotType,proto3" json:"jackpot_type,omitempty"`
-	ForbidBonusPlay  bool                   `protobuf:"varint,11,opt,name=forbid_bonus_play,json=forbidBonusPlay,proto3" json:"forbid_bonus_play,omitempty"`
-	HasFreespins     bool                   `protobuf:"varint,12,opt,name=has_freespins,json=hasFreespins,proto3" json:"has_freespins,omitempty"`
-	Payout           float64                `protobuf:"fixed64,13,opt,name=payout,proto3" json:"payout,omitempty"`
-	HitRate          float64                `protobuf:"fixed64,14,opt,name=hit_rate,json=hitRate,proto3" json:"hit_rate,omitempty"`
-	VolatilityRating string                 `protobuf:"bytes,15,opt,name=volatility_rating,json=volatilityRating,proto3" json:"volatility_rating,omitempty"`
-	Lines            int32                  `protobuf:"varint,16,opt,name=lines,proto3" json:"lines,omitempty"`
-	Ways             int32                  `protobuf:"varint,17,opt,name=ways,proto3" json:"ways,omitempty"`
-	Description      string                 `protobuf:"bytes,18,opt,name=description,proto3" json:"description,omitempty"`
-	Multiplier       float64                `protobuf:"fixed64,19,opt,name=multiplier,proto3" json:"multiplier,omitempty"`
-	ReleasedAt       int64                  `protobuf:"varint,20,opt,name=released_at,json=releasedAt,proto3" json:"released_at,omitempty"`
-	BonusBuy         bool                   `protobuf:"varint,21,opt,name=bonus_buy,json=bonusBuy,proto3" json:"bonus_buy,omitempty"`
-	Restrictions     string                 `protobuf:"bytes,22,opt,name=restrictions,proto3" json:"restrictions,omitempty"`
+	ProviderName     string                 `protobuf:"bytes,5,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
+	Category         string                 `protobuf:"bytes,6,opt,name=category,proto3" json:"category,omitempty"`
+	Languages        []string               `protobuf:"bytes,7,rep,name=languages,proto3" json:"languages,omitempty"`
+	Currencies       []string               `protobuf:"bytes,8,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Theme            string                 `protobuf:"bytes,9,opt,name=theme,proto3" json:"theme,omitempty"`
+	HasJackpot       bool                   `protobuf:"varint,10,opt,name=has_jackpot,json=hasJackpot,proto3" json:"has_jackpot,omitempty"`
+	JackpotType      string                 `protobuf:"bytes,11,opt,name=jackpot_type,json=jackpotType,proto3" json:"jackpot_type,omitempty"`
+	ForbidBonusPlay  bool                   `protobuf:"varint,12,opt,name=forbid_bonus_play,json=forbidBonusPlay,proto3" json:"forbid_bonus_play,omitempty"`
+	HasFreespins     bool                   `protobuf:"varint,13,opt,name=has_freespins,json=hasFreespins,proto3" json:"has_freespins,omitempty"`
+	Payout           float64                `protobuf:"fixed64,14,opt,name=payout,proto3" json:"payout,omitempty"`
+	HitRate          float64                `protobuf:"fixed64,15,opt,name=hit_rate,json=hitRate,proto3" json:"hit_rate,omitempty"`
+	VolatilityRating string                 `protobuf:"bytes,16,opt,name=volatility_rating,json=volatilityRating,proto3" json:"volatility_rating,omitempty"`
+	Lines            int32                  `protobuf:"varint,17,opt,name=lines,proto3" json:"lines,omitempty"`
+	Ways             int32                  `protobuf:"varint,18,opt,name=ways,proto3" json:"ways,omitempty"`
+	Description      string                 `protobuf:"bytes,19,opt,name=description,proto3" json:"description,omitempty"`
+	Multiplier       float64                `protobuf:"fixed64,20,opt,name=multiplier,proto3" json:"multiplier,omitempty"`
+	ReleasedAt       int64                  `protobuf:"varint,21,opt,name=released_at,json=releasedAt,proto3" json:"released_at,omitempty"`
+	BonusBuy         bool                   `protobuf:"varint,22,opt,name=bonus_buy,json=bonusBuy,proto3" json:"bonus_buy,omitempty"`
+	Restrictions     string                 `protobuf:"bytes,23,opt,name=restrictions,proto3" json:"restrictions,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -826,6 +827,13 @@ func (x *GameInfo) GetName() string {
 func (x *GameInfo) GetProviderId() string {
 	if x != nil {
 		return x.ProviderId
+	}
+	return ""
+}
+
+func (x *GameInfo) GetProviderName() string {
+	if x != nil {
+		return x.ProviderName
 	}
 	return ""
 }
@@ -2296,38 +2304,39 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x0eGetGameRequest\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\"@\n" +
 	"\x0fGetGameResponse\x12-\n" +
-	"\x04game\x18\x01 \x01(\v2\x19.game.service.v1.GameInfoR\x04game\"\x9c\x05\n" +
+	"\x04game\x18\x01 \x01(\v2\x19.game.service.v1.GameInfoR\x04game\"\xc1\x05\n" +
 	"\bGameInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x1f\n" +
 	"\vprovider_id\x18\x04 \x01(\tR\n" +
-	"providerId\x12\x1a\n" +
-	"\bcategory\x18\x05 \x01(\tR\bcategory\x12\x1c\n" +
-	"\tlanguages\x18\x06 \x03(\tR\tlanguages\x12\x1e\n" +
+	"providerId\x12#\n" +
+	"\rprovider_name\x18\x05 \x01(\tR\fproviderName\x12\x1a\n" +
+	"\bcategory\x18\x06 \x01(\tR\bcategory\x12\x1c\n" +
+	"\tlanguages\x18\a \x03(\tR\tlanguages\x12\x1e\n" +
 	"\n" +
-	"currencies\x18\a \x03(\tR\n" +
+	"currencies\x18\b \x03(\tR\n" +
 	"currencies\x12\x14\n" +
-	"\x05theme\x18\b \x01(\tR\x05theme\x12\x1f\n" +
-	"\vhas_jackpot\x18\t \x01(\bR\n" +
+	"\x05theme\x18\t \x01(\tR\x05theme\x12\x1f\n" +
+	"\vhas_jackpot\x18\n" +
+	" \x01(\bR\n" +
 	"hasJackpot\x12!\n" +
-	"\fjackpot_type\x18\n" +
-	" \x01(\tR\vjackpotType\x12*\n" +
-	"\x11forbid_bonus_play\x18\v \x01(\bR\x0fforbidBonusPlay\x12#\n" +
-	"\rhas_freespins\x18\f \x01(\bR\fhasFreespins\x12\x16\n" +
-	"\x06payout\x18\r \x01(\x01R\x06payout\x12\x19\n" +
-	"\bhit_rate\x18\x0e \x01(\x01R\ahitRate\x12+\n" +
-	"\x11volatility_rating\x18\x0f \x01(\tR\x10volatilityRating\x12\x14\n" +
-	"\x05lines\x18\x10 \x01(\x05R\x05lines\x12\x12\n" +
-	"\x04ways\x18\x11 \x01(\x05R\x04ways\x12 \n" +
-	"\vdescription\x18\x12 \x01(\tR\vdescription\x12\x1e\n" +
+	"\fjackpot_type\x18\v \x01(\tR\vjackpotType\x12*\n" +
+	"\x11forbid_bonus_play\x18\f \x01(\bR\x0fforbidBonusPlay\x12#\n" +
+	"\rhas_freespins\x18\r \x01(\bR\fhasFreespins\x12\x16\n" +
+	"\x06payout\x18\x0e \x01(\x01R\x06payout\x12\x19\n" +
+	"\bhit_rate\x18\x0f \x01(\x01R\ahitRate\x12+\n" +
+	"\x11volatility_rating\x18\x10 \x01(\tR\x10volatilityRating\x12\x14\n" +
+	"\x05lines\x18\x11 \x01(\x05R\x05lines\x12\x12\n" +
+	"\x04ways\x18\x12 \x01(\x05R\x04ways\x12 \n" +
+	"\vdescription\x18\x13 \x01(\tR\vdescription\x12\x1e\n" +
 	"\n" +
-	"multiplier\x18\x13 \x01(\x01R\n" +
+	"multiplier\x18\x14 \x01(\x01R\n" +
 	"multiplier\x12\x1f\n" +
-	"\vreleased_at\x18\x14 \x01(\x03R\n" +
+	"\vreleased_at\x18\x15 \x01(\x03R\n" +
 	"releasedAt\x12\x1b\n" +
-	"\tbonus_buy\x18\x15 \x01(\bR\bbonusBuy\x12\"\n" +
-	"\frestrictions\x18\x16 \x01(\tR\frestrictions\"\xc2\x01\n" +
+	"\tbonus_buy\x18\x16 \x01(\bR\bbonusBuy\x12\"\n" +
+	"\frestrictions\x18\x17 \x01(\tR\frestrictions\"\xc2\x01\n" +
 	"\x14CreateSessionRequest\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
