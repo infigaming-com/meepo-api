@@ -150,24 +150,25 @@ message GameInfo {
 	bool enabled = 2;
 	string name = 3;
 	string provider_id = 4;
-	string category = 5;
-	repeated string languages = 6;
-	repeated string currencies = 7;
-	string theme = 8;
-	bool has_jackpot = 9;
-	string jackpot_type = 10;
-	bool forbid_bonus_play = 11;
-	bool has_freespins = 12;
-	double payout = 13;
-	double hit_rate = 14;
-	string volatility_rating = 15;
-	int32 lines = 16;
-	int32 ways = 17;
-	string description = 18;
-	double multiplier = 19;
-	int64 released_at = 20;
-	bool bonus_buy = 21;
-	string restrictions = 22;
+	string provider_name = 5;
+	string category = 6;
+	repeated string languages = 7;
+	repeated string currencies = 8;
+	string theme = 9;
+	bool has_jackpot = 10;
+	string jackpot_type = 11;
+	bool forbid_bonus_play = 12;
+	bool has_freespins = 13;
+	double payout = 14;
+	double hit_rate = 15;
+	string volatility_rating = 16;
+	int32 lines = 17;
+	int32 ways = 18;
+	string description = 19;
+	double multiplier = 20;
+	int64 released_at = 21;
+	bool bonus_buy = 22;
+	string restrictions = 23;
 }
 
 message CreateSessionRequest {

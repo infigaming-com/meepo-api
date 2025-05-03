@@ -1414,6 +1414,8 @@ func (m *GameInfo) validate(all bool) error {
 
 	// no validation rules for ProviderId
 
+	// no validation rules for ProviderName
+
 	// no validation rules for Category
 
 	// no validation rules for Theme
