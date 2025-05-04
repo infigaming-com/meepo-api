@@ -1712,11 +1712,11 @@ func (m *DepositCallbackRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TransactionNo
+	// no validation rules for PaTransactionNo
 
 	// no validation rules for GatewayOrderNo
 
-	// no validation rules for OperatorOrderNo
+	// no validation rules for TransactionNo
 
 	// no validation rules for OrderStatus
 

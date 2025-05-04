@@ -1093,9 +1093,9 @@ func (x *InitiateWithdrawResponse) GetCreatedAt() *timestamppb.Timestamp {
 // Request for deposit callback
 type DepositCallbackRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	TransactionNo   string                 `protobuf:"bytes,1,opt,name=transaction_no,json=transactionNo,proto3" json:"transaction_no,omitempty"`
+	PaTransactionNo int64                  `protobuf:"varint,1,opt,name=pa_transaction_no,json=transactionNo,proto3" json:"pa_transaction_no,omitempty"`
 	GatewayOrderNo  string                 `protobuf:"bytes,2,opt,name=gateway_order_no,json=gatewayOrderNo,proto3" json:"gateway_order_no,omitempty"`
-	OperatorOrderNo string                 `protobuf:"bytes,3,opt,name=operator_order_no,json=operatorOrderNo,proto3" json:"operator_order_no,omitempty"`
+	TransactionNo   int64                  `protobuf:"varint,3,opt,name=transaction_no,json=operatorOrderNo,proto3" json:"transaction_no,omitempty"`
 	OrderStatus     string                 `protobuf:"bytes,4,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`
 	PayTime         string                 `protobuf:"bytes,5,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
 	CreateTime      string                 `protobuf:"bytes,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
@@ -1138,11 +1138,11 @@ func (*DepositCallbackRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *DepositCallbackRequest) GetTransactionNo() string {
+func (x *DepositCallbackRequest) GetPaTransactionNo() int64 {
 	if x != nil {
-		return x.TransactionNo
+		return x.PaTransactionNo
 	}
-	return ""
+	return 0
 }
 
 func (x *DepositCallbackRequest) GetGatewayOrderNo() string {
@@ -1152,11 +1152,11 @@ func (x *DepositCallbackRequest) GetGatewayOrderNo() string {
 	return ""
 }
 
-func (x *DepositCallbackRequest) GetOperatorOrderNo() string {
+func (x *DepositCallbackRequest) GetTransactionNo() int64 {
 	if x != nil {
-		return x.OperatorOrderNo
+		return x.TransactionNo
 	}
-	return ""
+	return 0
 }
 
 func (x *DepositCallbackRequest) GetOrderStatus() string {
@@ -1271,16 +1271,16 @@ func (x *DepositCallbackResponse) GetMessage() string {
 // Request for withdraw callback
 type WithdrawCallbackRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TransactionNo string                 `protobuf:"bytes,1,opt,name=transaction_no,json=transactionNo,proto3" json:"transaction_no,omitempty"` // Operator order number
-	OrderStatus   string                 `protobuf:"bytes,2,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`       // Order status
-	PayTime       string                 `protobuf:"bytes,3,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`                   // Transaction time. Format: yyyy-MM-dd HH:mm:ss
-	CreateTime    string                 `protobuf:"bytes,4,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`          // Creation time. Format: yyyy-MM-dd HH:mm:ss
-	Amount        int64                  `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`                                   // Order amount
-	Fee           int64                  `protobuf:"varint,6,opt,name=fee,proto3" json:"fee,omitempty"`                                         // Service fee
-	RealMoney     int64                  `protobuf:"varint,7,opt,name=real_money,json=realMoney,proto3" json:"real_money,omitempty"`            // Actual withdrawal amount
-	Sign          string                 `protobuf:"bytes,8,opt,name=sign,proto3" json:"sign,omitempty"`                                        // HMAC-SHA256签名，用于验证请求的合法性
-	Timestamp     string                 `protobuf:"bytes,9,opt,name=timestamp,proto3" json:"timestamp,omitempty"`                              // 请求时间戳，用于防止重放攻击
-	Nonce         string                 `protobuf:"bytes,10,opt,name=nonce,proto3" json:"nonce,omitempty"`                                     // 随机字符串，确保每次请求的唯一性
+	TransactionNo int64                  `protobuf:"varint,1,opt,name=transaction_no,json=transactionNo,proto3" json:"transaction_no,omitempty"` // Operator order number
+	OrderStatus   string                 `protobuf:"bytes,2,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`        // Order status
+	PayTime       string                 `protobuf:"bytes,3,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`                    // Transaction time. Format: yyyy-MM-dd HH:mm:ss
+	CreateTime    string                 `protobuf:"bytes,4,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`           // Creation time. Format: yyyy-MM-dd HH:mm:ss
+	Amount        int64                  `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`                                    // Order amount
+	Fee           int64                  `protobuf:"varint,6,opt,name=fee,proto3" json:"fee,omitempty"`                                          // Service fee
+	RealMoney     int64                  `protobuf:"varint,7,opt,name=real_money,json=realMoney,proto3" json:"real_money,omitempty"`             // Actual withdrawal amount
+	Sign          string                 `protobuf:"bytes,8,opt,name=sign,proto3" json:"sign,omitempty"`                                         // HMAC-SHA256签名，用于验证请求的合法性
+	Timestamp     string                 `protobuf:"bytes,9,opt,name=timestamp,proto3" json:"timestamp,omitempty"`                               // 请求时间戳，用于防止重放攻击
+	Nonce         string                 `protobuf:"bytes,10,opt,name=nonce,proto3" json:"nonce,omitempty"`                                      // 随机字符串，确保每次请求的唯一性
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1315,11 +1315,11 @@ func (*WithdrawCallbackRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *WithdrawCallbackRequest) GetTransactionNo() string {
+func (x *WithdrawCallbackRequest) GetTransactionNo() int64 {
 	if x != nil {
 		return x.TransactionNo
 	}
-	return ""
+	return 0
 }
 
 func (x *WithdrawCallbackRequest) GetOrderStatus() string {
@@ -1831,10 +1831,10 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x129\n" +
 	"\n" +
 	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xea\x02\n" +
-	"\x16DepositCallbackRequest\x12%\n" +
-	"\x0etransaction_no\x18\x01 \x01(\tR\rtransactionNo\x12(\n" +
-	"\x10gateway_order_no\x18\x02 \x01(\tR\x0egatewayOrderNo\x12*\n" +
-	"\x11operator_order_no\x18\x03 \x01(\tR\x0foperatorOrderNo\x12!\n" +
+	"\x16DepositCallbackRequest\x12(\n" +
+	"\x11pa_transaction_no\x18\x01 \x01(\x03R\rtransactionNo\x12(\n" +
+	"\x10gateway_order_no\x18\x02 \x01(\tR\x0egatewayOrderNo\x12'\n" +
+	"\x0etransaction_no\x18\x03 \x01(\x03R\x0foperatorOrderNo\x12!\n" +
 	"\forder_status\x18\x04 \x01(\tR\vorderStatus\x12\x19\n" +
 	"\bpay_time\x18\x05 \x01(\tR\apayTime\x12\x1f\n" +
 	"\vcreate_time\x18\x06 \x01(\tR\n" +
@@ -1849,7 +1849,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"\xb0\x02\n" +
 	"\x17WithdrawCallbackRequest\x12%\n" +
-	"\x0etransaction_no\x18\x01 \x01(\tR\rtransactionNo\x12!\n" +
+	"\x0etransaction_no\x18\x01 \x01(\x03R\rtransactionNo\x12!\n" +
 	"\forder_status\x18\x02 \x01(\tR\vorderStatus\x12\x19\n" +
 	"\bpay_time\x18\x03 \x01(\tR\apayTime\x12\x1f\n" +
 	"\vcreate_time\x18\x04 \x01(\tR\n" +

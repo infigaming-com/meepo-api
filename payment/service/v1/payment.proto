@@ -119,9 +119,9 @@ message InitiateWithdrawResponse {
 
 // Request for deposit callback
 message DepositCallbackRequest {
-  string transaction_no = 1 [json_name="transactionNo"];
+  int64 pa_transaction_no = 1 [json_name="transactionNo"];
   string gateway_order_no = 2 [json_name="gatewayOrderNo"];
-  string operator_order_no = 3 [json_name="operatorOrderNo"];
+  int64 transaction_no = 3 [json_name="operatorOrderNo"];
   string order_status = 4 [json_name="orderStatus"];
   string pay_time = 5 [json_name="payTime"];
   string create_time = 6 [json_name="createTime"];
@@ -140,7 +140,7 @@ message DepositCallbackResponse {
 
 // Request for withdraw callback
 message WithdrawCallbackRequest {
-  string transaction_no = 1 [json_name="transactionNo"]; // Operator order number
+  int64 transaction_no = 1 [json_name="transactionNo"]; // Operator order number
   string order_status = 2 [json_name="orderStatus"]; // Order status
   string pay_time = 3 [json_name="payTime"]; // Transaction time. Format: yyyy-MM-dd HH:mm:ss
   string create_time = 4 [json_name="createTime"]; // Creation time. Format: yyyy-MM-dd HH:mm:ss
