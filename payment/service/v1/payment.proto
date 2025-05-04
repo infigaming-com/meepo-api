@@ -119,12 +119,12 @@ message InitiateWithdrawResponse {
 
 // Request for deposit callback
 message DepositCallbackRequest {
-  string transactionNo = 1 [json_name="transactionNo"];
-  string gatewayOrderNo = 2 [json_name="gatewayOrderNo"];
-  string operatorOrderNo = 3 [json_name="operatorOrderNo"];
-  string orderStatus = 4 [json_name="orderStatus"];
-  string payTime = 5 [json_name="payTime"];
-  string createTime = 6 [json_name="createTime"];
+  string transaction_no = 1 [json_name="transactionNo"];
+  string gateway_order_no = 2 [json_name="gatewayOrderNo"];
+  string operator_order_no = 3 [json_name="operatorOrderNo"];
+  string order_status = 4 [json_name="orderStatus"];
+  string pay_time = 5 [json_name="payTime"];
+  string create_time = 6 [json_name="createTime"];
   int64 amount = 7;
   int64 money = 8;
   string sign = 9 [json_name="sign"]; // HMAC-SHA256签名，用于验证请求的合法性
@@ -134,6 +134,26 @@ message DepositCallbackRequest {
 
 // Response for deposit callback
 message DepositCallbackResponse {
+  bool success = 1;
+  string message = 2; // 可选的消息，失败时返回错误原因
+}
+
+// Request for withdraw callback
+message WithdrawCallbackRequest {
+  string transaction_no = 1 [json_name="transactionNo"]; // Operator order number
+  string order_status = 2 [json_name="orderStatus"]; // Order status
+  string pay_time = 3 [json_name="payTime"]; // Transaction time. Format: yyyy-MM-dd HH:mm:ss
+  string create_time = 4 [json_name="createTime"]; // Creation time. Format: yyyy-MM-dd HH:mm:ss
+  int64 amount = 5; // Order amount
+  int64 fee = 6; // Service fee
+  int64 real_money = 7 [json_name="realMoney"]; // Actual withdrawal amount
+  string sign = 8 [json_name="sign"]; // HMAC-SHA256签名，用于验证请求的合法性
+  string timestamp = 9 [json_name="timestamp"]; // 请求时间戳，用于防止重放攻击
+  string nonce = 10 [json_name="nonce"]; // 随机字符串，确保每次请求的唯一性
+}
+
+// Response for withdraw callback
+message WithdrawCallbackResponse {
   bool success = 1;
   string message = 2; // 可选的消息，失败时返回错误原因
 }
@@ -249,6 +269,15 @@ service Payment {
   rpc DepositCallback(DepositCallbackRequest) returns (DepositCallbackResponse) {
     option (google.api.http) = {
       post: "/v1/payment/deposit/callback"
+      body: "*"
+    };
+  }
+
+  // Withdraw callback
+  // This endpoint handles callbacks from payment gateways for withdrawal results.
+  rpc WithdrawCallback(WithdrawCallbackRequest) returns (WithdrawCallbackResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/withdraw/callback"
       body: "*"
     };
   }

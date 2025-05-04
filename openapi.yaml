@@ -356,6 +356,27 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
+    /v1/payment/withdraw/callback:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Withdraw callback
+                 This endpoint handles callbacks from payment gateways for withdrawal results.
+            operationId: Payment_WithdrawCallback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
     /v1/payment/withdraw/initiate:
         post:
             tags:
@@ -1663,6 +1684,38 @@ components:
                     type: string
                     format: date-time
             description: Transaction information
+        payment.service.v1.WithdrawCallbackRequest:
+            type: object
+            properties:
+                transactionNo:
+                    type: string
+                orderStatus:
+                    type: string
+                payTime:
+                    type: string
+                createTime:
+                    type: string
+                amount:
+                    type: string
+                fee:
+                    type: string
+                realMoney:
+                    type: string
+                sign:
+                    type: string
+                timestamp:
+                    type: string
+                nonce:
+                    type: string
+            description: Request for withdraw callback
+        payment.service.v1.WithdrawCallbackResponse:
+            type: object
+            properties:
+                success:
+                    type: boolean
+                message:
+                    type: string
+            description: Response for withdraw callback
         system.service.v1.AddCurrencyRequest:
             type: object
             properties:

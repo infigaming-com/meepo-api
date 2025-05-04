@@ -1093,12 +1093,12 @@ func (x *InitiateWithdrawResponse) GetCreatedAt() *timestamppb.Timestamp {
 // Request for deposit callback
 type DepositCallbackRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	TransactionNo   string                 `protobuf:"bytes,1,opt,name=transactionNo,proto3" json:"transactionNo,omitempty"`
-	GatewayOrderNo  string                 `protobuf:"bytes,2,opt,name=gatewayOrderNo,proto3" json:"gatewayOrderNo,omitempty"`
-	OperatorOrderNo string                 `protobuf:"bytes,3,opt,name=operatorOrderNo,proto3" json:"operatorOrderNo,omitempty"`
-	OrderStatus     string                 `protobuf:"bytes,4,opt,name=orderStatus,proto3" json:"orderStatus,omitempty"`
-	PayTime         string                 `protobuf:"bytes,5,opt,name=payTime,proto3" json:"payTime,omitempty"`
-	CreateTime      string                 `protobuf:"bytes,6,opt,name=createTime,proto3" json:"createTime,omitempty"`
+	TransactionNo   string                 `protobuf:"bytes,1,opt,name=transaction_no,json=transactionNo,proto3" json:"transaction_no,omitempty"`
+	GatewayOrderNo  string                 `protobuf:"bytes,2,opt,name=gateway_order_no,json=gatewayOrderNo,proto3" json:"gateway_order_no,omitempty"`
+	OperatorOrderNo string                 `protobuf:"bytes,3,opt,name=operator_order_no,json=operatorOrderNo,proto3" json:"operator_order_no,omitempty"`
+	OrderStatus     string                 `protobuf:"bytes,4,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`
+	PayTime         string                 `protobuf:"bytes,5,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
+	CreateTime      string                 `protobuf:"bytes,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	Amount          int64                  `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`
 	Money           int64                  `protobuf:"varint,8,opt,name=money,proto3" json:"money,omitempty"`
 	Sign            string                 `protobuf:"bytes,9,opt,name=sign,proto3" json:"sign,omitempty"`            // HMAC-SHA256签名，用于验证请求的合法性
@@ -1268,6 +1268,176 @@ func (x *DepositCallbackResponse) GetMessage() string {
 	return ""
 }
 
+// Request for withdraw callback
+type WithdrawCallbackRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionNo string                 `protobuf:"bytes,1,opt,name=transaction_no,json=transactionNo,proto3" json:"transaction_no,omitempty"` // Operator order number
+	OrderStatus   string                 `protobuf:"bytes,2,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`       // Order status
+	PayTime       string                 `protobuf:"bytes,3,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`                   // Transaction time. Format: yyyy-MM-dd HH:mm:ss
+	CreateTime    string                 `protobuf:"bytes,4,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`          // Creation time. Format: yyyy-MM-dd HH:mm:ss
+	Amount        int64                  `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`                                   // Order amount
+	Fee           int64                  `protobuf:"varint,6,opt,name=fee,proto3" json:"fee,omitempty"`                                         // Service fee
+	RealMoney     int64                  `protobuf:"varint,7,opt,name=real_money,json=realMoney,proto3" json:"real_money,omitempty"`            // Actual withdrawal amount
+	Sign          string                 `protobuf:"bytes,8,opt,name=sign,proto3" json:"sign,omitempty"`                                        // HMAC-SHA256签名，用于验证请求的合法性
+	Timestamp     string                 `protobuf:"bytes,9,opt,name=timestamp,proto3" json:"timestamp,omitempty"`                              // 请求时间戳，用于防止重放攻击
+	Nonce         string                 `protobuf:"bytes,10,opt,name=nonce,proto3" json:"nonce,omitempty"`                                     // 随机字符串，确保每次请求的唯一性
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WithdrawCallbackRequest) Reset() {
+	*x = WithdrawCallbackRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WithdrawCallbackRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WithdrawCallbackRequest) ProtoMessage() {}
+
+func (x *WithdrawCallbackRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WithdrawCallbackRequest.ProtoReflect.Descriptor instead.
+func (*WithdrawCallbackRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *WithdrawCallbackRequest) GetTransactionNo() string {
+	if x != nil {
+		return x.TransactionNo
+	}
+	return ""
+}
+
+func (x *WithdrawCallbackRequest) GetOrderStatus() string {
+	if x != nil {
+		return x.OrderStatus
+	}
+	return ""
+}
+
+func (x *WithdrawCallbackRequest) GetPayTime() string {
+	if x != nil {
+		return x.PayTime
+	}
+	return ""
+}
+
+func (x *WithdrawCallbackRequest) GetCreateTime() string {
+	if x != nil {
+		return x.CreateTime
+	}
+	return ""
+}
+
+func (x *WithdrawCallbackRequest) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *WithdrawCallbackRequest) GetFee() int64 {
+	if x != nil {
+		return x.Fee
+	}
+	return 0
+}
+
+func (x *WithdrawCallbackRequest) GetRealMoney() int64 {
+	if x != nil {
+		return x.RealMoney
+	}
+	return 0
+}
+
+func (x *WithdrawCallbackRequest) GetSign() string {
+	if x != nil {
+		return x.Sign
+	}
+	return ""
+}
+
+func (x *WithdrawCallbackRequest) GetTimestamp() string {
+	if x != nil {
+		return x.Timestamp
+	}
+	return ""
+}
+
+func (x *WithdrawCallbackRequest) GetNonce() string {
+	if x != nil {
+		return x.Nonce
+	}
+	return ""
+}
+
+// Response for withdraw callback
+type WithdrawCallbackResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"` // 可选的消息，失败时返回错误原因
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WithdrawCallbackResponse) Reset() {
+	*x = WithdrawCallbackResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WithdrawCallbackResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WithdrawCallbackResponse) ProtoMessage() {}
+
+func (x *WithdrawCallbackResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WithdrawCallbackResponse.ProtoReflect.Descriptor instead.
+func (*WithdrawCallbackResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *WithdrawCallbackResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *WithdrawCallbackResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 // Transaction information
 type TransactionInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1286,7 +1456,7 @@ type TransactionInfo struct {
 
 func (x *TransactionInfo) Reset() {
 	*x = TransactionInfo{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[14]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1298,7 +1468,7 @@ func (x *TransactionInfo) String() string {
 func (*TransactionInfo) ProtoMessage() {}
 
 func (x *TransactionInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[14]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1311,7 +1481,7 @@ func (x *TransactionInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransactionInfo.ProtoReflect.Descriptor instead.
 func (*TransactionInfo) Descriptor() ([]byte, []int) {
-	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{14}
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *TransactionInfo) GetTransactionId() int64 {
@@ -1403,7 +1573,7 @@ type GetTransactionPageRequest struct {
 
 func (x *GetTransactionPageRequest) Reset() {
 	*x = GetTransactionPageRequest{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[15]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1415,7 +1585,7 @@ func (x *GetTransactionPageRequest) String() string {
 func (*GetTransactionPageRequest) ProtoMessage() {}
 
 func (x *GetTransactionPageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[15]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1428,7 +1598,7 @@ func (x *GetTransactionPageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTransactionPageRequest.ProtoReflect.Descriptor instead.
 func (*GetTransactionPageRequest) Descriptor() ([]byte, []int) {
-	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{15}
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetTransactionPageRequest) GetPage() int32 {
@@ -1508,7 +1678,7 @@ type GetTransactionPageResponse struct {
 
 func (x *GetTransactionPageResponse) Reset() {
 	*x = GetTransactionPageResponse{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[16]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1520,7 +1690,7 @@ func (x *GetTransactionPageResponse) String() string {
 func (*GetTransactionPageResponse) ProtoMessage() {}
 
 func (x *GetTransactionPageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[16]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1533,7 +1703,7 @@ func (x *GetTransactionPageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTransactionPageResponse.ProtoReflect.Descriptor instead.
 func (*GetTransactionPageResponse) Descriptor() ([]byte, []int) {
-	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{16}
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetTransactionPageResponse) GetTransactions() []*TransactionInfo {
@@ -1660,15 +1830,14 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x06amount\x18\x03 \x01(\x03R\x06amount\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xe2\x02\n" +
-	"\x16DepositCallbackRequest\x12$\n" +
-	"\rtransactionNo\x18\x01 \x01(\tR\rtransactionNo\x12&\n" +
-	"\x0egatewayOrderNo\x18\x02 \x01(\tR\x0egatewayOrderNo\x12(\n" +
-	"\x0foperatorOrderNo\x18\x03 \x01(\tR\x0foperatorOrderNo\x12 \n" +
-	"\vorderStatus\x18\x04 \x01(\tR\vorderStatus\x12\x18\n" +
-	"\apayTime\x18\x05 \x01(\tR\apayTime\x12\x1e\n" +
-	"\n" +
-	"createTime\x18\x06 \x01(\tR\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xea\x02\n" +
+	"\x16DepositCallbackRequest\x12%\n" +
+	"\x0etransaction_no\x18\x01 \x01(\tR\rtransactionNo\x12(\n" +
+	"\x10gateway_order_no\x18\x02 \x01(\tR\x0egatewayOrderNo\x12*\n" +
+	"\x11operator_order_no\x18\x03 \x01(\tR\x0foperatorOrderNo\x12!\n" +
+	"\forder_status\x18\x04 \x01(\tR\vorderStatus\x12\x19\n" +
+	"\bpay_time\x18\x05 \x01(\tR\apayTime\x12\x1f\n" +
+	"\vcreate_time\x18\x06 \x01(\tR\n" +
 	"createTime\x12\x16\n" +
 	"\x06amount\x18\a \x01(\x03R\x06amount\x12\x14\n" +
 	"\x05money\x18\b \x01(\x03R\x05money\x12\x12\n" +
@@ -1677,6 +1846,23 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	" \x01(\tR\ttimestamp\x12\x14\n" +
 	"\x05nonce\x18\v \x01(\tR\x05nonce\"M\n" +
 	"\x17DepositCallbackResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xb0\x02\n" +
+	"\x17WithdrawCallbackRequest\x12%\n" +
+	"\x0etransaction_no\x18\x01 \x01(\tR\rtransactionNo\x12!\n" +
+	"\forder_status\x18\x02 \x01(\tR\vorderStatus\x12\x19\n" +
+	"\bpay_time\x18\x03 \x01(\tR\apayTime\x12\x1f\n" +
+	"\vcreate_time\x18\x04 \x01(\tR\n" +
+	"createTime\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\x03R\x06amount\x12\x10\n" +
+	"\x03fee\x18\x06 \x01(\x03R\x03fee\x12\x1d\n" +
+	"\n" +
+	"real_money\x18\a \x01(\x03R\trealMoney\x12\x12\n" +
+	"\x04sign\x18\b \x01(\tR\x04sign\x12\x1c\n" +
+	"\ttimestamp\x18\t \x01(\tR\ttimestamp\x12\x14\n" +
+	"\x05nonce\x18\n" +
+	" \x01(\tR\x05nonce\"N\n" +
+	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"\x9a\x03\n" +
 	"\x0fTransactionInfo\x12%\n" +
@@ -1721,14 +1907,15 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x19TRANSACTION_STATUS_FAILED\x10\x03*\x19\n" +
 	"\x04Sort\x12\b\n" +
 	"\x04DESC\x10\x00\x12\a\n" +
-	"\x03ASC\x10\x012\xd5\b\n" +
+	"\x03ASC\x10\x012\xef\t\n" +
 	"\aPayment\x12\x9d\x01\n" +
 	"\x14GetPaymentMethodList\x12/.payment.service.v1.GetPaymentMethodListRequest\x1a0.payment.service.v1.GetPaymentMethodListResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/payment/method/list\x12\xa0\x01\n" +
 	"\x14CreatePaymentChannel\x12/.payment.service.v1.CreatePaymentChannelRequest\x1a0.payment.service.v1.CreatePaymentChannelResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/payment/channel/create\x12\xa1\x01\n" +
 	"\x15GetPaymentChannelList\x120.payment.service.v1.GetPaymentChannelListRequest\x1a1.payment.service.v1.GetPaymentChannelListResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/payment/channel/list\x12\x93\x01\n" +
 	"\x0fInitiateDeposit\x12*.payment.service.v1.InitiateDepositRequest\x1a+.payment.service.v1.InitiateDepositResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/deposit/initiate\x12\x97\x01\n" +
 	"\x10InitiateWithdraw\x12+.payment.service.v1.InitiateWithdrawRequest\x1a,.payment.service.v1.InitiateWithdrawResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/payment/withdraw/initiate\x12\x93\x01\n" +
-	"\x0fDepositCallback\x12*.payment.service.v1.DepositCallbackRequest\x1a+.payment.service.v1.DepositCallbackResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/deposit/callback\x12\x9c\x01\n" +
+	"\x0fDepositCallback\x12*.payment.service.v1.DepositCallbackRequest\x1a+.payment.service.v1.DepositCallbackResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/deposit/callback\x12\x97\x01\n" +
+	"\x10WithdrawCallback\x12+.payment.service.v1.WithdrawCallbackRequest\x1a,.payment.service.v1.WithdrawCallbackResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/payment/withdraw/callback\x12\x9c\x01\n" +
 	"\x12GetTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/transaction/pageBU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
 
@@ -1745,7 +1932,7 @@ func file_payment_service_v1_payment_proto_rawDescGZIP() []byte {
 }
 
 var file_payment_service_v1_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_payment_service_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_payment_service_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_payment_service_v1_payment_proto_goTypes = []any{
 	(TransactionType)(0),                  // 0: payment.service.v1.TransactionType
 	(TransactionStatus)(0),                // 1: payment.service.v1.TransactionStatus
@@ -1764,50 +1951,54 @@ var file_payment_service_v1_payment_proto_goTypes = []any{
 	(*InitiateWithdrawResponse)(nil),      // 14: payment.service.v1.InitiateWithdrawResponse
 	(*DepositCallbackRequest)(nil),        // 15: payment.service.v1.DepositCallbackRequest
 	(*DepositCallbackResponse)(nil),       // 16: payment.service.v1.DepositCallbackResponse
-	(*TransactionInfo)(nil),               // 17: payment.service.v1.TransactionInfo
-	(*GetTransactionPageRequest)(nil),     // 18: payment.service.v1.GetTransactionPageRequest
-	(*GetTransactionPageResponse)(nil),    // 19: payment.service.v1.GetTransactionPageResponse
-	(*structpb.Struct)(nil),               // 20: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),         // 21: google.protobuf.Timestamp
+	(*WithdrawCallbackRequest)(nil),       // 17: payment.service.v1.WithdrawCallbackRequest
+	(*WithdrawCallbackResponse)(nil),      // 18: payment.service.v1.WithdrawCallbackResponse
+	(*TransactionInfo)(nil),               // 19: payment.service.v1.TransactionInfo
+	(*GetTransactionPageRequest)(nil),     // 20: payment.service.v1.GetTransactionPageRequest
+	(*GetTransactionPageResponse)(nil),    // 21: payment.service.v1.GetTransactionPageResponse
+	(*structpb.Struct)(nil),               // 22: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),         // 23: google.protobuf.Timestamp
 }
 var file_payment_service_v1_payment_proto_depIdxs = []int32{
-	20, // 0: payment.service.v1.PaymentMethodInfo.key_schema:type_name -> google.protobuf.Struct
+	22, // 0: payment.service.v1.PaymentMethodInfo.key_schema:type_name -> google.protobuf.Struct
 	4,  // 1: payment.service.v1.GetPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
-	20, // 2: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
-	20, // 3: payment.service.v1.PaymentChannelInfo.deposit_schema:type_name -> google.protobuf.Struct
-	20, // 4: payment.service.v1.PaymentChannelInfo.withdraw_schema:type_name -> google.protobuf.Struct
+	22, // 2: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
+	22, // 3: payment.service.v1.PaymentChannelInfo.deposit_schema:type_name -> google.protobuf.Struct
+	22, // 4: payment.service.v1.PaymentChannelInfo.withdraw_schema:type_name -> google.protobuf.Struct
 	9,  // 5: payment.service.v1.GetPaymentChannelListResponse.payment_channels:type_name -> payment.service.v1.PaymentChannelInfo
-	20, // 6: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
-	21, // 7: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
-	20, // 8: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
-	20, // 9: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
-	21, // 10: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
+	22, // 6: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
+	23, // 7: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
+	22, // 8: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
+	22, // 9: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
+	23, // 10: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 11: payment.service.v1.TransactionInfo.type:type_name -> payment.service.v1.TransactionType
 	1,  // 12: payment.service.v1.TransactionInfo.status:type_name -> payment.service.v1.TransactionStatus
-	21, // 13: payment.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
-	21, // 14: payment.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
+	23, // 13: payment.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	23, // 14: payment.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
 	0,  // 15: payment.service.v1.GetTransactionPageRequest.type:type_name -> payment.service.v1.TransactionType
 	1,  // 16: payment.service.v1.GetTransactionPageRequest.status:type_name -> payment.service.v1.TransactionStatus
-	21, // 17: payment.service.v1.GetTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
-	21, // 18: payment.service.v1.GetTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
+	23, // 17: payment.service.v1.GetTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
+	23, // 18: payment.service.v1.GetTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
 	2,  // 19: payment.service.v1.GetTransactionPageRequest.sort:type_name -> payment.service.v1.Sort
-	17, // 20: payment.service.v1.GetTransactionPageResponse.transactions:type_name -> payment.service.v1.TransactionInfo
+	19, // 20: payment.service.v1.GetTransactionPageResponse.transactions:type_name -> payment.service.v1.TransactionInfo
 	3,  // 21: payment.service.v1.Payment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
 	6,  // 22: payment.service.v1.Payment.CreatePaymentChannel:input_type -> payment.service.v1.CreatePaymentChannelRequest
 	8,  // 23: payment.service.v1.Payment.GetPaymentChannelList:input_type -> payment.service.v1.GetPaymentChannelListRequest
 	11, // 24: payment.service.v1.Payment.InitiateDeposit:input_type -> payment.service.v1.InitiateDepositRequest
 	13, // 25: payment.service.v1.Payment.InitiateWithdraw:input_type -> payment.service.v1.InitiateWithdrawRequest
 	15, // 26: payment.service.v1.Payment.DepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
-	18, // 27: payment.service.v1.Payment.GetTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
-	5,  // 28: payment.service.v1.Payment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
-	7,  // 29: payment.service.v1.Payment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
-	10, // 30: payment.service.v1.Payment.GetPaymentChannelList:output_type -> payment.service.v1.GetPaymentChannelListResponse
-	12, // 31: payment.service.v1.Payment.InitiateDeposit:output_type -> payment.service.v1.InitiateDepositResponse
-	14, // 32: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
-	16, // 33: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
-	19, // 34: payment.service.v1.Payment.GetTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
-	28, // [28:35] is the sub-list for method output_type
-	21, // [21:28] is the sub-list for method input_type
+	17, // 27: payment.service.v1.Payment.WithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
+	20, // 28: payment.service.v1.Payment.GetTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
+	5,  // 29: payment.service.v1.Payment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
+	7,  // 30: payment.service.v1.Payment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
+	10, // 31: payment.service.v1.Payment.GetPaymentChannelList:output_type -> payment.service.v1.GetPaymentChannelListResponse
+	12, // 32: payment.service.v1.Payment.InitiateDeposit:output_type -> payment.service.v1.InitiateDepositResponse
+	14, // 33: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
+	16, // 34: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
+	18, // 35: payment.service.v1.Payment.WithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
+	21, // 36: payment.service.v1.Payment.GetTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
+	29, // [29:37] is the sub-list for method output_type
+	21, // [21:29] is the sub-list for method input_type
 	21, // [21:21] is the sub-list for extension type_name
 	21, // [21:21] is the sub-list for extension extendee
 	0,  // [0:21] is the sub-list for field type_name
@@ -1824,7 +2015,7 @@ func file_payment_service_v1_payment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_payment_service_v1_payment_proto_rawDesc), len(file_payment_service_v1_payment_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   17,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
