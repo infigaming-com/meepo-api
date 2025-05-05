@@ -41,8 +41,8 @@ const (
 	ErrorReason_LOCK_USER_AUTH_FAILED               ErrorReason = 10012
 	ErrorReason_HASH_USER_PASSWORD_FAILED           ErrorReason = 10013
 	ErrorReason_GENERATE_USER_ID_FAILED             ErrorReason = 10014
-	ErrorReason_CREATE_USER_FAILED                  ErrorReason = 10015
-	ErrorReason_CREATE_USER_AUTH_FAILED             ErrorReason = 10016
+	ErrorReason_ADD_USER_FAILED                     ErrorReason = 10015
+	ErrorReason_ADD_USER_AUTH_FAILED                ErrorReason = 10016
 	ErrorReason_USER_DISABLED                       ErrorReason = 10017
 	ErrorReason_USER_LOGIN_BANNED                   ErrorReason = 10018
 	ErrorReason_INVALID_USER_PASSWORD               ErrorReason = 10019
@@ -56,6 +56,8 @@ const (
 	ErrorReason_USER_TAG_ALREADY_EXISTS             ErrorReason = 10027
 	ErrorReason_USER_TAG_NOT_EXIST                  ErrorReason = 10030
 	ErrorReason_VERIFY_GOOGLE_TOKEN_FAILED          ErrorReason = 10031
+	ErrorReason_MARSHAL_REQUEST_INFO_FAILED         ErrorReason = 10032
+	ErrorReason_ADD_USER_EVENT_FAILED               ErrorReason = 10033
 )
 
 // Enum value maps for ErrorReason.
@@ -77,8 +79,8 @@ var (
 		10012: "LOCK_USER_AUTH_FAILED",
 		10013: "HASH_USER_PASSWORD_FAILED",
 		10014: "GENERATE_USER_ID_FAILED",
-		10015: "CREATE_USER_FAILED",
-		10016: "CREATE_USER_AUTH_FAILED",
+		10015: "ADD_USER_FAILED",
+		10016: "ADD_USER_AUTH_FAILED",
 		10017: "USER_DISABLED",
 		10018: "USER_LOGIN_BANNED",
 		10019: "INVALID_USER_PASSWORD",
@@ -92,6 +94,8 @@ var (
 		10027: "USER_TAG_ALREADY_EXISTS",
 		10030: "USER_TAG_NOT_EXIST",
 		10031: "VERIFY_GOOGLE_TOKEN_FAILED",
+		10032: "MARSHAL_REQUEST_INFO_FAILED",
+		10033: "ADD_USER_EVENT_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                         0,
@@ -110,8 +114,8 @@ var (
 		"LOCK_USER_AUTH_FAILED":               10012,
 		"HASH_USER_PASSWORD_FAILED":           10013,
 		"GENERATE_USER_ID_FAILED":             10014,
-		"CREATE_USER_FAILED":                  10015,
-		"CREATE_USER_AUTH_FAILED":             10016,
+		"ADD_USER_FAILED":                     10015,
+		"ADD_USER_AUTH_FAILED":                10016,
 		"USER_DISABLED":                       10017,
 		"USER_LOGIN_BANNED":                   10018,
 		"INVALID_USER_PASSWORD":               10019,
@@ -125,6 +129,8 @@ var (
 		"USER_TAG_ALREADY_EXISTS":             10027,
 		"USER_TAG_NOT_EXIST":                  10030,
 		"VERIFY_GOOGLE_TOKEN_FAILED":          10031,
+		"MARSHAL_REQUEST_INFO_FAILED":         10032,
+		"ADD_USER_EVENT_FAILED":               10033,
 	}
 )
 
@@ -159,7 +165,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xf1\a\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa9\b\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12)\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x1a\x04\xa8E\x91\x03\x12,\n" +
@@ -176,9 +182,9 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x12UPDATE_USER_FAILED\x10\x9bN\x12\x1a\n" +
 	"\x15LOCK_USER_AUTH_FAILED\x10\x9cN\x12\x1e\n" +
 	"\x19HASH_USER_PASSWORD_FAILED\x10\x9dN\x12\x1c\n" +
-	"\x17GENERATE_USER_ID_FAILED\x10\x9eN\x12\x17\n" +
-	"\x12CREATE_USER_FAILED\x10\x9fN\x12\x1c\n" +
-	"\x17CREATE_USER_AUTH_FAILED\x10\xa0N\x12\x18\n" +
+	"\x17GENERATE_USER_ID_FAILED\x10\x9eN\x12\x14\n" +
+	"\x0fADD_USER_FAILED\x10\x9fN\x12\x19\n" +
+	"\x14ADD_USER_AUTH_FAILED\x10\xa0N\x12\x18\n" +
 	"\rUSER_DISABLED\x10\xa1N\x1a\x04\xa8E\x91\x03\x12\x1c\n" +
 	"\x11USER_LOGIN_BANNED\x10\xa2N\x1a\x04\xa8E\x91\x03\x12 \n" +
 	"\x15INVALID_USER_PASSWORD\x10\xa3N\x1a\x04\xa8E\x91\x03\x12(\n" +
@@ -191,7 +197,9 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	" GET_OPERATOR_ID_BY_ORIGIN_FAILED\x10\xaaN\x12\"\n" +
 	"\x17USER_TAG_ALREADY_EXISTS\x10\xabN\x1a\x04\xa8E\x99\x03\x12\x17\n" +
 	"\x12USER_TAG_NOT_EXIST\x10\xaeN\x12\x1f\n" +
-	"\x1aVERIFY_GOOGLE_TOKEN_FAILED\x10\xafN\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x1aVERIFY_GOOGLE_TOKEN_FAILED\x10\xafN\x12 \n" +
+	"\x1bMARSHAL_REQUEST_INFO_FAILED\x10\xb0N\x12\x1a\n" +
+	"\x15ADD_USER_EVENT_FAILED\x10\xb1N\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
