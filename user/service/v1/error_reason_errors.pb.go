@@ -382,3 +382,77 @@ func IsVerifyGoogleTokenFailed(err error) bool {
 func ErrorVerifyGoogleTokenFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_VERIFY_GOOGLE_TOKEN_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// Operator is in follow_parent=true mode
+func IsFollowParentEnabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FOLLOW_PARENT_ENABLED.String() && e.Code == 500
+}
+
+// Operator is in follow_parent=true mode
+func ErrorFollowParentEnabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FOLLOW_PARENT_ENABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorTagsAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_TAGS_ALREADY_EXISTS.String() && e.Code == 409
+}
+
+func ErrorOperatorTagsAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_OPERATOR_TAGS_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorTagNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_TAG_NOT_FOUND.String() && e.Code == 404
+}
+
+func ErrorOperatorTagNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_OPERATOR_TAG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorParentNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_PARENT_NOT_FOUND.String() && e.Code == 404
+}
+
+func ErrorOperatorParentNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_OPERATOR_PARENT_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsNonFollowParentOperatorNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND.String() && e.Code == 404
+}
+
+func ErrorNonFollowParentOperatorNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSystemOperator(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SYSTEM_OPERATOR.String() && e.Code == 500
+}
+
+func ErrorSystemOperator(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SYSTEM_OPERATOR.String(), fmt.Sprintf(format, args...))
+}

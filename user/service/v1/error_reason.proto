@@ -42,4 +42,10 @@ enum ErrorReason {
   USER_TAG_ALREADY_EXISTS = 10027 [(errors.code) = 409];
   USER_TAG_NOT_EXIST = 10030;
   VERIFY_GOOGLE_TOKEN_FAILED = 10031;
+  FOLLOW_PARENT_ENABLED = 10032;  // Operator is in follow_parent=true mode
+  OPERATOR_TAGS_ALREADY_EXISTS = 10033 [(errors.code) = 409];
+  OPERATOR_TAG_NOT_FOUND = 10034 [(errors.code) = 404];
+  OPERATOR_PARENT_NOT_FOUND = 10035 [(errors.code) = 404];
+  NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND = 10036 [(errors.code) = 404];
+  SYSTEM_OPERATOR = 10037;
 }
