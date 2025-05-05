@@ -222,104 +222,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.operator.service.v1.DeleteOriginOperatorIdResponse'
-    /v1/operator/tag-config/get:
-        post:
-            tags:
-                - User
-            description: GetOperatorTagConfig returns follow-parent flag for the given operator ID.
-            operationId: User_GetOperatorTagConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagConfigResponse'
-    /v1/operator/tag-config/set:
-        post:
-            tags:
-                - User
-            description: |-
-                SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
-                 It will reverse the follow_parent flag if the record exists.
-                 If the record doesn't exist, it will create a new one with follow_parent set to false.
-            operationId: User_SetOperatorTagConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.SetOperatorTagConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.SetOperatorTagConfigResponse'
-    /v1/operator/tags/add:
-        post:
-            tags:
-                - User
-            description: AddOperatorTag adds a new tag to an operator if follow_parent is false.
-            operationId: User_AddOperatorTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.AddOperatorTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.AddOperatorTagResponse'
-    /v1/operator/tags/delete:
-        post:
-            tags:
-                - User
-            description: DeleteOperatorTag soft deletes a specific tag from an operator.
-            operationId: User_DeleteOperatorTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorTagResponse'
-    /v1/operator/tags/get:
-        post:
-            tags:
-                - User
-            description: GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
-            operationId: User_GetOperatorTags
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagsResponse'
     /v1/operator/update:
         post:
             tags:
@@ -674,6 +576,104 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/user/operator/tag-config/get:
+        post:
+            tags:
+                - User
+            description: GetOperatorTagConfig returns follow-parent flag for the given operator ID.
+            operationId: User_GetOperatorTagConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagConfigResponse'
+    /v1/user/operator/tag-config/set:
+        post:
+            tags:
+                - User
+            description: |-
+                SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
+                 It will reverse the follow_parent flag if the record exists.
+                 If the record doesn't exist, it will create a new one with follow_parent set to false.
+            operationId: User_SetOperatorTagConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.SetOperatorTagConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.SetOperatorTagConfigResponse'
+    /v1/user/operator/tag/add:
+        post:
+            tags:
+                - User
+            description: AddOperatorTag adds a new tag to an operator if follow_parent is false.
+            operationId: User_AddOperatorTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.AddOperatorTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddOperatorTagResponse'
+    /v1/user/operator/tag/delete:
+        post:
+            tags:
+                - User
+            description: DeleteOperatorTag soft deletes a specific tag from an operator.
+            operationId: User_DeleteOperatorTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorTagResponse'
+    /v1/user/operator/tag/get:
+        post:
+            tags:
+                - User
+            description: GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
+            operationId: User_GetOperatorTags
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagsResponse'
     /v1/user/tag/add:
         post:
             tags:
@@ -712,7 +712,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.DeleteUserTagResponse'
-    /v1/user/tag/get-all:
+    /v1/user/tag/get:
         post:
             tags:
                 - User
