@@ -28,8 +28,14 @@ const (
 	User_GetUserIdsByOperatorIds_FullMethodName     = "/api.user.service.v1.User/GetUserIdsByOperatorIds"
 	User_Logout_FullMethodName                      = "/api.user.service.v1.User/Logout"
 	User_IsTokenRevoked_FullMethodName              = "/api.user.service.v1.User/IsTokenRevoked"
+	User_GetOperatorTagConfig_FullMethodName        = "/api.user.service.v1.User/GetOperatorTagConfig"
+	User_SetOperatorTagConfig_FullMethodName        = "/api.user.service.v1.User/SetOperatorTagConfig"
+	User_AddOperatorTag_FullMethodName              = "/api.user.service.v1.User/AddOperatorTag"
+	User_GetOperatorTags_FullMethodName             = "/api.user.service.v1.User/GetOperatorTags"
+	User_DeleteOperatorTag_FullMethodName           = "/api.user.service.v1.User/DeleteOperatorTag"
 	User_AddUserTag_FullMethodName                  = "/api.user.service.v1.User/AddUserTag"
 	User_DeleteUserTag_FullMethodName               = "/api.user.service.v1.User/DeleteUserTag"
+	User_GetUserTags_FullMethodName                 = "/api.user.service.v1.User/GetUserTags"
 )
 
 // UserClient is the client API for User service.
@@ -62,10 +68,24 @@ type UserClient interface {
 	// Invalidates the current session and refresh token.
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 	IsTokenRevoked(ctx context.Context, in *IsTokenRevokedRequest, opts ...grpc.CallOption) (*IsTokenRevokedResponse, error)
-	// Add a tag to a user.
+	// GetOperatorTagConfig returns follow-parent flag for the given operator ID.
+	GetOperatorTagConfig(ctx context.Context, in *GetOperatorTagConfigRequest, opts ...grpc.CallOption) (*GetOperatorTagConfigResponse, error)
+	// SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
+	// It will reverse the follow_parent flag if the record exists.
+	// If the record doesn't exist, it will create a new one with follow_parent set to false.
+	SetOperatorTagConfig(ctx context.Context, in *SetOperatorTagConfigRequest, opts ...grpc.CallOption) (*SetOperatorTagConfigResponse, error)
+	// AddOperatorTag adds a new tag to an operator if follow_parent is false.
+	AddOperatorTag(ctx context.Context, in *AddOperatorTagRequest, opts ...grpc.CallOption) (*AddOperatorTagResponse, error)
+	// GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
+	GetOperatorTags(ctx context.Context, in *GetOperatorTagsRequest, opts ...grpc.CallOption) (*GetOperatorTagsResponse, error)
+	// DeleteOperatorTag soft deletes a specific tag from an operator.
+	DeleteOperatorTag(ctx context.Context, in *DeleteOperatorTagRequest, opts ...grpc.CallOption) (*DeleteOperatorTagResponse, error)
+	// AddUserTag adds a new tag to a user.
 	AddUserTag(ctx context.Context, in *AddUserTagRequest, opts ...grpc.CallOption) (*AddUserTagResponse, error)
-	// Soft delete a tag from a user.
+	// DeleteUserTag soft deletes a tag from a user.
 	DeleteUserTag(ctx context.Context, in *DeleteUserTagRequest, opts ...grpc.CallOption) (*DeleteUserTagResponse, error)
+	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	GetUserTags(ctx context.Context, in *GetUserTagsRequest, opts ...grpc.CallOption) (*GetUserTagsResponse, error)
 }
 
 type userClient struct {
@@ -166,6 +186,56 @@ func (c *userClient) IsTokenRevoked(ctx context.Context, in *IsTokenRevokedReque
 	return out, nil
 }
 
+func (c *userClient) GetOperatorTagConfig(ctx context.Context, in *GetOperatorTagConfigRequest, opts ...grpc.CallOption) (*GetOperatorTagConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorTagConfigResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorTagConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SetOperatorTagConfig(ctx context.Context, in *SetOperatorTagConfigRequest, opts ...grpc.CallOption) (*SetOperatorTagConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOperatorTagConfigResponse)
+	err := c.cc.Invoke(ctx, User_SetOperatorTagConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) AddOperatorTag(ctx context.Context, in *AddOperatorTagRequest, opts ...grpc.CallOption) (*AddOperatorTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddOperatorTagResponse)
+	err := c.cc.Invoke(ctx, User_AddOperatorTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetOperatorTags(ctx context.Context, in *GetOperatorTagsRequest, opts ...grpc.CallOption) (*GetOperatorTagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorTagsResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorTags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) DeleteOperatorTag(ctx context.Context, in *DeleteOperatorTagRequest, opts ...grpc.CallOption) (*DeleteOperatorTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteOperatorTagResponse)
+	err := c.cc.Invoke(ctx, User_DeleteOperatorTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) AddUserTag(ctx context.Context, in *AddUserTagRequest, opts ...grpc.CallOption) (*AddUserTagResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddUserTagResponse)
@@ -180,6 +250,16 @@ func (c *userClient) DeleteUserTag(ctx context.Context, in *DeleteUserTagRequest
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteUserTagResponse)
 	err := c.cc.Invoke(ctx, User_DeleteUserTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetUserTags(ctx context.Context, in *GetUserTagsRequest, opts ...grpc.CallOption) (*GetUserTagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserTagsResponse)
+	err := c.cc.Invoke(ctx, User_GetUserTags_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -216,10 +296,24 @@ type UserServer interface {
 	// Invalidates the current session and refresh token.
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	IsTokenRevoked(context.Context, *IsTokenRevokedRequest) (*IsTokenRevokedResponse, error)
-	// Add a tag to a user.
+	// GetOperatorTagConfig returns follow-parent flag for the given operator ID.
+	GetOperatorTagConfig(context.Context, *GetOperatorTagConfigRequest) (*GetOperatorTagConfigResponse, error)
+	// SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
+	// It will reverse the follow_parent flag if the record exists.
+	// If the record doesn't exist, it will create a new one with follow_parent set to false.
+	SetOperatorTagConfig(context.Context, *SetOperatorTagConfigRequest) (*SetOperatorTagConfigResponse, error)
+	// AddOperatorTag adds a new tag to an operator if follow_parent is false.
+	AddOperatorTag(context.Context, *AddOperatorTagRequest) (*AddOperatorTagResponse, error)
+	// GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
+	GetOperatorTags(context.Context, *GetOperatorTagsRequest) (*GetOperatorTagsResponse, error)
+	// DeleteOperatorTag soft deletes a specific tag from an operator.
+	DeleteOperatorTag(context.Context, *DeleteOperatorTagRequest) (*DeleteOperatorTagResponse, error)
+	// AddUserTag adds a new tag to a user.
 	AddUserTag(context.Context, *AddUserTagRequest) (*AddUserTagResponse, error)
-	// Soft delete a tag from a user.
+	// DeleteUserTag soft deletes a tag from a user.
 	DeleteUserTag(context.Context, *DeleteUserTagRequest) (*DeleteUserTagResponse, error)
+	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -257,11 +351,29 @@ func (UnimplementedUserServer) Logout(context.Context, *LogoutRequest) (*LogoutR
 func (UnimplementedUserServer) IsTokenRevoked(context.Context, *IsTokenRevokedRequest) (*IsTokenRevokedResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IsTokenRevoked not implemented")
 }
+func (UnimplementedUserServer) GetOperatorTagConfig(context.Context, *GetOperatorTagConfigRequest) (*GetOperatorTagConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorTagConfig not implemented")
+}
+func (UnimplementedUserServer) SetOperatorTagConfig(context.Context, *SetOperatorTagConfigRequest) (*SetOperatorTagConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetOperatorTagConfig not implemented")
+}
+func (UnimplementedUserServer) AddOperatorTag(context.Context, *AddOperatorTagRequest) (*AddOperatorTagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOperatorTag not implemented")
+}
+func (UnimplementedUserServer) GetOperatorTags(context.Context, *GetOperatorTagsRequest) (*GetOperatorTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorTags not implemented")
+}
+func (UnimplementedUserServer) DeleteOperatorTag(context.Context, *DeleteOperatorTagRequest) (*DeleteOperatorTagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperatorTag not implemented")
+}
 func (UnimplementedUserServer) AddUserTag(context.Context, *AddUserTagRequest) (*AddUserTagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddUserTag not implemented")
 }
 func (UnimplementedUserServer) DeleteUserTag(context.Context, *DeleteUserTagRequest) (*DeleteUserTagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserTag not implemented")
+}
+func (UnimplementedUserServer) GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserTags not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -446,6 +558,96 @@ func _User_IsTokenRevoked_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperatorTagConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorTagConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorTagConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorTagConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorTagConfig(ctx, req.(*GetOperatorTagConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SetOperatorTagConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorTagConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetOperatorTagConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SetOperatorTagConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetOperatorTagConfig(ctx, req.(*SetOperatorTagConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_AddOperatorTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOperatorTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).AddOperatorTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_AddOperatorTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).AddOperatorTag(ctx, req.(*AddOperatorTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetOperatorTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorTags(ctx, req.(*GetOperatorTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_DeleteOperatorTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOperatorTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DeleteOperatorTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DeleteOperatorTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DeleteOperatorTag(ctx, req.(*DeleteOperatorTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_AddUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddUserTagRequest)
 	if err := dec(in); err != nil {
@@ -478,6 +680,24 @@ func _User_DeleteUserTag_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).DeleteUserTag(ctx, req.(*DeleteUserTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetUserTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUserTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserTags(ctx, req.(*GetUserTagsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -526,12 +746,36 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_IsTokenRevoked_Handler,
 		},
 		{
+			MethodName: "GetOperatorTagConfig",
+			Handler:    _User_GetOperatorTagConfig_Handler,
+		},
+		{
+			MethodName: "SetOperatorTagConfig",
+			Handler:    _User_SetOperatorTagConfig_Handler,
+		},
+		{
+			MethodName: "AddOperatorTag",
+			Handler:    _User_AddOperatorTag_Handler,
+		},
+		{
+			MethodName: "GetOperatorTags",
+			Handler:    _User_GetOperatorTags_Handler,
+		},
+		{
+			MethodName: "DeleteOperatorTag",
+			Handler:    _User_DeleteOperatorTag_Handler,
+		},
+		{
 			MethodName: "AddUserTag",
 			Handler:    _User_AddUserTag_Handler,
 		},
 		{
 			MethodName: "DeleteUserTag",
 			Handler:    _User_DeleteUserTag_Handler,
+		},
+		{
+			MethodName: "GetUserTags",
+			Handler:    _User_GetUserTags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

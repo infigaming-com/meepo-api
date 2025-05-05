@@ -79,7 +79,50 @@ service User {
 	rpc IsTokenRevoked (IsTokenRevokedRequest) returns (IsTokenRevokedResponse) {
 	}
 
-	// Add a tag to a user.
+
+	// GetOperatorTagConfig returns follow-parent flag for the given operator ID.
+	rpc GetOperatorTagConfig(GetOperatorTagConfigRequest) returns (GetOperatorTagConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/tag-config/get"
+			body: "*"
+		};
+	}
+
+	// SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
+	// It will reverse the follow_parent flag if the record exists.
+	// If the record doesn't exist, it will create a new one with follow_parent set to false.
+	rpc SetOperatorTagConfig(SetOperatorTagConfigRequest) returns (SetOperatorTagConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/tag-config/set"
+			body: "*"
+		};
+	}
+
+	// AddOperatorTag adds a new tag to an operator if follow_parent is false.
+	rpc AddOperatorTag(AddOperatorTagRequest) returns (AddOperatorTagResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/tags/add"
+			body: "*"
+		};
+	}
+
+	// GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
+	rpc GetOperatorTags(GetOperatorTagsRequest) returns (GetOperatorTagsResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/tags/get"
+			body: "*"
+		};
+	}
+
+	// DeleteOperatorTag soft deletes a specific tag from an operator.
+	rpc DeleteOperatorTag(DeleteOperatorTagRequest) returns (DeleteOperatorTagResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/tags/delete"
+			body: "*"
+		};
+	}
+
+	// AddUserTag adds a new tag to a user.
 	rpc AddUserTag (AddUserTagRequest) returns (AddUserTagResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/tag/add"
@@ -87,13 +130,22 @@ service User {
 		};
 	}
 
-	// Soft delete a tag from a user.
+	// DeleteUserTag soft deletes a tag from a user.
 	rpc DeleteUserTag (DeleteUserTagRequest) returns (DeleteUserTagResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/tag/delete"
 			body: "*"
 		};
 	}
+
+	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	rpc GetUserTags (GetUserTagsRequest) returns (GetUserTagsResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/tag/get-all"
+			body: "*"
+		};
+	}
+	
 }
 
 // UserInfo contains basic user information.
@@ -264,16 +316,94 @@ message IsTokenRevokedResponse {
 	bool revoked = 1;
 }
 
-message AddUserTagRequest {
-	int64 user_id = 1;
+// GetOperatorTagConfigRequest contains the operator ID to retrieve tag configuration.
+message GetOperatorTagConfigRequest {
+	// The ID of the operator to get tag configuration for.
+	int64 operator_id = 1;
+}
+
+// GetOperatorTagConfigResponse contains the tag configuration settings, now only follow_parent flag.
+message GetOperatorTagConfigResponse {
+	// Whether the operator should follow parent tags.
+	bool follow_parent = 1;
+}
+
+// SetOperatorTagConfigRequest contains the operator ID.
+message SetOperatorTagConfigRequest {
+	// The ID of the operator to set tag configuration for.
+	int64 operator_id = 1;
+}
+
+// SetOperatorTagConfigResponse contains the updated tag configuration, now only follow_parent flag.
+message SetOperatorTagConfigResponse {
+	// The updated follow_parent setting.
+	bool follow_parent = 1;
+}
+
+// AddOperatorTagRequest contains the operator ID and tag to add.
+message AddOperatorTagRequest {
+	// The ID of the operator to add the tag to.
+	int64 operator_id = 1;
+	// The tag to add to the operator.
 	string tag = 2;
 }
 
+// AddOperatorTagResponse is an empty message indicating successful tag addition.
+message AddOperatorTagResponse {}
+
+// GetOperatorTagsRequest contains the operator ID to retrieve tags for.
+message GetOperatorTagsRequest {
+	// The ID of the operator to get tags for.
+	int64 operator_id = 1;
+}	
+
+// GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
+message GetOperatorTagsResponse {
+	// List of tags associated with the operator.
+	repeated string tags = 1;
+}
+
+// DeleteOperatorTagRequest contains the operator ID and tag to soft delete.
+message DeleteOperatorTagRequest {
+	// The ID of the operator to delete the tag from.
+	int64 operator_id = 1;
+	// The tag to delete from the operator.
+	string tag = 2;
+}
+
+// DeleteOperatorTagResponse is an empty message indicating successful tag deletion.
+message DeleteOperatorTagResponse {}
+
+// AddUserTagRequest contains the user ID and tag to add.
+message AddUserTagRequest {
+	// The ID of the user to add the tag to.
+	int64 user_id = 1;
+	// The tag to add to the user.
+	string tag = 2;
+}
+
+// AddUserTagResponse is an empty message indicating successful tag addition.
 message AddUserTagResponse {}
 
+// DeleteUserTagRequest contains the user ID and tag to soft delete.
 message DeleteUserTagRequest {
+	// The ID of the user to delete the tag from.
 	int64 user_id = 1;
+	// The tag to delete from the user.
 	string tag = 2;
 }
 
+// DeleteUserTagResponse is an empty message indicating successful tag deletion.
 message DeleteUserTagResponse {}
+
+// GetUserTagsRequest contains the user ID to retrieve tags for.
+message GetUserTagsRequest {
+	// The ID of the user to get tags for.
+	int64 user_id = 1;
+}
+
+// GetUserTagsResponse contains the list of active tags associated with the user.
+message GetUserTagsResponse {
+	// List of active tags associated with the user.
+	repeated string tags = 1;
+}
