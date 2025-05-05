@@ -406,3 +406,15 @@ func IsAddUserEventFailed(err error) bool {
 func ErrorAddUserEventFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_ADD_USER_EVENT_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGenerateUserEventIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_USER_EVENT_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGenerateUserEventIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_USER_EVENT_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
