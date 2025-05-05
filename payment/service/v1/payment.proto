@@ -130,16 +130,18 @@ message DepositCallbackResponse {
 
 // Request for withdraw callback
 message WithdrawCallbackRequest {
-  int64 transaction_no = 1 [json_name="transactionNo"]; // Operator order number
-  string order_status = 2 [json_name="orderStatus"]; // Order status
-  string pay_time = 3 [json_name="payTime"]; // Transaction time. Format: yyyy-MM-dd HH:mm:ss
-  string create_time = 4 [json_name="createTime"]; // Creation time. Format: yyyy-MM-dd HH:mm:ss
-  int64 amount = 5; // Order amount
-  int64 fee = 6; // Service fee
-  int64 real_money = 7 [json_name="realMoney"]; // Actual withdrawal amount
-  string sign = 8 [json_name="sign"]; // HMAC-SHA256签名，用于验证请求的合法性
-  string timestamp = 9 [json_name="timestamp"]; // 请求时间戳，用于防止重放攻击
-  string nonce = 10 [json_name="nonce"]; // 随机字符串，确保每次请求的唯一性
+  int64 pa_transaction_no = 1 [json_name="transactionNo"]; // Operator order number
+  string gateway_order_no = 2 [json_name="gatewayOrderNo"]; // Gateway order number
+  int64 transaction_no = 3 [json_name="operatorOrderNo"]; // Operator order number
+  string order_status = 4 [json_name="orderStatus"]; // Order status
+  string pay_time = 5 [json_name="payTime"]; // Transaction time. Format: yyyy-MM-dd HH:mm:ss
+  string create_time = 6 [json_name="createTime"]; // Creation time. Format: yyyy-MM-dd HH:mm:ss
+  int64 amount = 7; // Order amount
+  int64 fee = 8; // Service fee
+  int64 real_money = 9 [json_name="realMoney"]; // Actual withdrawal amount
+  string sign = 10 [json_name="sign"]; // HMAC-SHA256签名，用于验证请求的合法性
+  string timestamp = 11 [json_name="timestamp"]; // 请求时间戳，用于防止重放攻击
+  string nonce = 12 [json_name="nonce"]; // 随机字符串，确保每次请求的唯一性
 }
 
 // Response for withdraw callback

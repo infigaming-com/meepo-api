@@ -1669,6 +1669,10 @@ components:
             properties:
                 transactionNo:
                     type: string
+                gatewayOrderNo:
+                    type: string
+                operatorOrderNo:
+                    type: string
                 orderStatus:
                     type: string
                 payTime:

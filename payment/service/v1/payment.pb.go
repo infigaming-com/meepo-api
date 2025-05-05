@@ -1190,19 +1190,21 @@ func (x *DepositCallbackResponse) GetMessage() string {
 
 // Request for withdraw callback
 type WithdrawCallbackRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TransactionNo int64                  `protobuf:"varint,1,opt,name=transaction_no,json=transactionNo,proto3" json:"transaction_no,omitempty"` // Operator order number
-	OrderStatus   string                 `protobuf:"bytes,2,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`        // Order status
-	PayTime       string                 `protobuf:"bytes,3,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`                    // Transaction time. Format: yyyy-MM-dd HH:mm:ss
-	CreateTime    string                 `protobuf:"bytes,4,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`           // Creation time. Format: yyyy-MM-dd HH:mm:ss
-	Amount        int64                  `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`                                    // Order amount
-	Fee           int64                  `protobuf:"varint,6,opt,name=fee,proto3" json:"fee,omitempty"`                                          // Service fee
-	RealMoney     int64                  `protobuf:"varint,7,opt,name=real_money,json=realMoney,proto3" json:"real_money,omitempty"`             // Actual withdrawal amount
-	Sign          string                 `protobuf:"bytes,8,opt,name=sign,proto3" json:"sign,omitempty"`                                         // HMAC-SHA256签名，用于验证请求的合法性
-	Timestamp     string                 `protobuf:"bytes,9,opt,name=timestamp,proto3" json:"timestamp,omitempty"`                               // 请求时间戳，用于防止重放攻击
-	Nonce         string                 `protobuf:"bytes,10,opt,name=nonce,proto3" json:"nonce,omitempty"`                                      // 随机字符串，确保每次请求的唯一性
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	PaTransactionNo int64                  `protobuf:"varint,1,opt,name=pa_transaction_no,json=transactionNo,proto3" json:"pa_transaction_no,omitempty"` // Operator order number
+	GatewayOrderNo  string                 `protobuf:"bytes,2,opt,name=gateway_order_no,json=gatewayOrderNo,proto3" json:"gateway_order_no,omitempty"`   // Gateway order number
+	TransactionNo   int64                  `protobuf:"varint,3,opt,name=transaction_no,json=operatorOrderNo,proto3" json:"transaction_no,omitempty"`     // Operator order number
+	OrderStatus     string                 `protobuf:"bytes,4,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`              // Order status
+	PayTime         string                 `protobuf:"bytes,5,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`                          // Transaction time. Format: yyyy-MM-dd HH:mm:ss
+	CreateTime      string                 `protobuf:"bytes,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`                 // Creation time. Format: yyyy-MM-dd HH:mm:ss
+	Amount          int64                  `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`                                          // Order amount
+	Fee             int64                  `protobuf:"varint,8,opt,name=fee,proto3" json:"fee,omitempty"`                                                // Service fee
+	RealMoney       int64                  `protobuf:"varint,9,opt,name=real_money,json=realMoney,proto3" json:"real_money,omitempty"`                   // Actual withdrawal amount
+	Sign            string                 `protobuf:"bytes,10,opt,name=sign,proto3" json:"sign,omitempty"`                                              // HMAC-SHA256签名，用于验证请求的合法性
+	Timestamp       string                 `protobuf:"bytes,11,opt,name=timestamp,proto3" json:"timestamp,omitempty"`                                    // 请求时间戳，用于防止重放攻击
+	Nonce           string                 `protobuf:"bytes,12,opt,name=nonce,proto3" json:"nonce,omitempty"`                                            // 随机字符串，确保每次请求的唯一性
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *WithdrawCallbackRequest) Reset() {
@@ -1233,6 +1235,20 @@ func (x *WithdrawCallbackRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use WithdrawCallbackRequest.ProtoReflect.Descriptor instead.
 func (*WithdrawCallbackRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *WithdrawCallbackRequest) GetPaTransactionNo() int64 {
+	if x != nil {
+		return x.PaTransactionNo
+	}
+	return 0
+}
+
+func (x *WithdrawCallbackRequest) GetGatewayOrderNo() string {
+	if x != nil {
+		return x.GatewayOrderNo
+	}
+	return ""
 }
 
 func (x *WithdrawCallbackRequest) GetTransactionNo() int64 {
@@ -1754,21 +1770,23 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05nonce\x18\v \x01(\tR\x05nonce\"M\n" +
 	"\x17DepositCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xb0\x02\n" +
-	"\x17WithdrawCallbackRequest\x12%\n" +
-	"\x0etransaction_no\x18\x01 \x01(\x03R\rtransactionNo\x12!\n" +
-	"\forder_status\x18\x02 \x01(\tR\vorderStatus\x12\x19\n" +
-	"\bpay_time\x18\x03 \x01(\tR\apayTime\x12\x1f\n" +
-	"\vcreate_time\x18\x04 \x01(\tR\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\x86\x03\n" +
+	"\x17WithdrawCallbackRequest\x12(\n" +
+	"\x11pa_transaction_no\x18\x01 \x01(\x03R\rtransactionNo\x12(\n" +
+	"\x10gateway_order_no\x18\x02 \x01(\tR\x0egatewayOrderNo\x12'\n" +
+	"\x0etransaction_no\x18\x03 \x01(\x03R\x0foperatorOrderNo\x12!\n" +
+	"\forder_status\x18\x04 \x01(\tR\vorderStatus\x12\x19\n" +
+	"\bpay_time\x18\x05 \x01(\tR\apayTime\x12\x1f\n" +
+	"\vcreate_time\x18\x06 \x01(\tR\n" +
 	"createTime\x12\x16\n" +
-	"\x06amount\x18\x05 \x01(\x03R\x06amount\x12\x10\n" +
-	"\x03fee\x18\x06 \x01(\x03R\x03fee\x12\x1d\n" +
+	"\x06amount\x18\a \x01(\x03R\x06amount\x12\x10\n" +
+	"\x03fee\x18\b \x01(\x03R\x03fee\x12\x1d\n" +
 	"\n" +
-	"real_money\x18\a \x01(\x03R\trealMoney\x12\x12\n" +
-	"\x04sign\x18\b \x01(\tR\x04sign\x12\x1c\n" +
-	"\ttimestamp\x18\t \x01(\tR\ttimestamp\x12\x14\n" +
-	"\x05nonce\x18\n" +
-	" \x01(\tR\x05nonce\"N\n" +
+	"real_money\x18\t \x01(\x03R\trealMoney\x12\x12\n" +
+	"\x04sign\x18\n" +
+	" \x01(\tR\x04sign\x12\x1c\n" +
+	"\ttimestamp\x18\v \x01(\tR\ttimestamp\x12\x14\n" +
+	"\x05nonce\x18\f \x01(\tR\x05nonce\"N\n" +
 	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"\x9a\x03\n" +
