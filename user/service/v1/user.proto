@@ -328,12 +328,10 @@ message GetOperatorTagConfigResponse {
 	bool follow_parent = 1;
 }
 
-// SetOperatorTagConfigRequest contains the operator ID and tag configuration settings.
+// SetOperatorTagConfigRequest contains the operator ID.
 message SetOperatorTagConfigRequest {
 	// The ID of the operator to set tag configuration for.
 	int64 operator_id = 1;
-	// Whether to copy tags from parent operators, only used when follow_parent turns from true to false.
-	bool copy_parent_tags = 2;
 }
 
 // SetOperatorTagConfigResponse contains the updated tag configuration, now only follow_parent flag.
@@ -359,7 +357,7 @@ message GetOperatorTagsRequest {
 	int64 operator_id = 1;
 }	
 
-// GetOperatorTagsResponse contains the list of tags associated with the operator, or parent operator if follow_parent is true.
+// GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
 message GetOperatorTagsResponse {
 	// List of tags associated with the operator.
 	repeated string tags = 1;

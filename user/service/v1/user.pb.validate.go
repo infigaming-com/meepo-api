@@ -2009,8 +2009,6 @@ func (m *SetOperatorTagConfigRequest) validate(all bool) error {
 
 	// no validation rules for OperatorId
 
-	// no validation rules for CopyParentTags
-
 	if len(errors) > 0 {
 		return SetOperatorTagConfigRequestMultiError(errors)
 	}

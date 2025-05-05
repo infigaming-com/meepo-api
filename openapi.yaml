@@ -976,7 +976,7 @@ components:
                     items:
                         type: string
                     description: List of tags associated with the operator.
-            description: GetOperatorTagsResponse contains the list of tags associated with the operator, or parent operator if follow_parent is true.
+            description: GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
@@ -1096,10 +1096,7 @@ components:
                 operatorId:
                     type: string
                     description: The ID of the operator to set tag configuration for.
-                copyParentTags:
-                    type: boolean
-                    description: Whether to copy tags from parent operators, only used when follow_parent turns from true to false.
-            description: SetOperatorTagConfigRequest contains the operator ID and tag configuration settings.
+            description: SetOperatorTagConfigRequest contains the operator ID.
         api.user.service.v1.SetOperatorTagConfigResponse:
             type: object
             properties:

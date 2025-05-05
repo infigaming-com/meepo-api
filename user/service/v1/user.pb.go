@@ -1220,15 +1220,13 @@ func (x *GetOperatorTagConfigResponse) GetFollowParent() bool {
 	return false
 }
 
-// SetOperatorTagConfigRequest contains the operator ID and tag configuration settings.
+// SetOperatorTagConfigRequest contains the operator ID.
 type SetOperatorTagConfigRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The ID of the operator to set tag configuration for.
-	OperatorId int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	// Whether to copy tags from parent operators, only used when follow_parent turns from true to false.
-	CopyParentTags bool `protobuf:"varint,2,opt,name=copy_parent_tags,json=copyParentTags,proto3" json:"copy_parent_tags,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	OperatorId    int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetOperatorTagConfigRequest) Reset() {
@@ -1266,13 +1264,6 @@ func (x *SetOperatorTagConfigRequest) GetOperatorId() int64 {
 		return x.OperatorId
 	}
 	return 0
-}
-
-func (x *SetOperatorTagConfigRequest) GetCopyParentTags() bool {
-	if x != nil {
-		return x.CopyParentTags
-	}
-	return false
 }
 
 // SetOperatorTagConfigResponse contains the updated tag configuration, now only follow_parent flag.
@@ -1459,7 +1450,7 @@ func (x *GetOperatorTagsRequest) GetOperatorId() int64 {
 	return 0
 }
 
-// GetOperatorTagsResponse contains the list of tags associated with the operator, or parent operator if follow_parent is true.
+// GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
 type GetOperatorTagsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of tags associated with the operator.
@@ -1942,11 +1933,10 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"C\n" +
 	"\x1cGetOperatorTagConfigResponse\x12#\n" +
-	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\"h\n" +
+	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\">\n" +
 	"\x1bSetOperatorTagConfigRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
-	"operatorId\x12(\n" +
-	"\x10copy_parent_tags\x18\x02 \x01(\bR\x0ecopyParentTags\"C\n" +
+	"operatorId\"C\n" +
 	"\x1cSetOperatorTagConfigResponse\x12#\n" +
 	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\"J\n" +
 	"\x15AddOperatorTagRequest\x12\x1f\n" +
