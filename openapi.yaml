@@ -1556,26 +1556,6 @@ components:
             properties:
                 amount:
                     type: string
-                operatorOrderNo:
-                    type: string
-                bankAccount:
-                    type: string
-                bankAccountName:
-                    type: string
-                bankAccountMobile:
-                    type: string
-                bankName:
-                    type: string
-                bankCode:
-                    type: string
-                bankBranch:
-                    type: string
-                bankId:
-                    type: string
-                bankIfsc:
-                    type: string
-                bankNation:
-                    type: string
                 channelId:
                     type: string
                 extra:

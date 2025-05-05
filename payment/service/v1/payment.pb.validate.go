@@ -1420,26 +1420,6 @@ func (m *InitiateWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for Amount
 
-	// no validation rules for OperatorOrderNo
-
-	// no validation rules for BankAccount
-
-	// no validation rules for BankAccountName
-
-	// no validation rules for BankAccountMobile
-
-	// no validation rules for BankName
-
-	// no validation rules for BankCode
-
-	// no validation rules for BankBranch
-
-	// no validation rules for BankId
-
-	// no validation rules for BankIfsc
-
-	// no validation rules for BankNation
-
 	// no validation rules for ChannelId
 
 	if all {

@@ -94,18 +94,8 @@ message InitiateDepositResponse {
 // Request to initiate a withdrawal
 message InitiateWithdrawRequest {
   int64 amount = 1;
-  string operator_order_no = 2 [json_name="operatorOrderNo"];
-  string bank_account = 3 [json_name="bankAccount"];
-  string bank_account_name = 4 [json_name="bankAccountName"];
-  string bank_account_mobile = 5 [json_name="bankAccountMobile"];
-  string bank_name = 6 [json_name="bankName"];
-  string bank_code = 7 [json_name="bankCode"];
-  string bank_branch = 8 [json_name="bankBranch"];
-  string bank_id = 9 [json_name="bankId"];
-  string bank_ifsc = 10 [json_name="bankIfsc"];
-  string bank_nation = 11 [json_name="bankNation"];
-  string channel_id = 12 [json_name="channelId"];
-  google.protobuf.Struct extra = 13; // Stores additional information like clientId, note, etc.
+  string channel_id = 2 [json_name="channelId"];
+  google.protobuf.Struct extra = 3; // Stores additional information like clientId, note, etc.
 }
 
 // Response for withdrawal initiation
