@@ -1322,6 +1322,8 @@ components:
                     type: string
                 providerId:
                     type: string
+                providerName:
+                    type: string
                 category:
                     type: string
                 languages:

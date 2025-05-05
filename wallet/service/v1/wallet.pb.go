@@ -1272,9 +1272,9 @@ func (x *GameCreditResponse) GetProviderBonus() int64 {
 type GetUserBalancesResponse_Balance struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Cash          int64                  `protobuf:"varint,3,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus int64                  `protobuf:"varint,4,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus int64                  `protobuf:"varint,5,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	Cash          string                 `protobuf:"bytes,2,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus string                 `protobuf:"bytes,3,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus string                 `protobuf:"bytes,4,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1316,25 +1316,25 @@ func (x *GetUserBalancesResponse_Balance) GetCurrency() string {
 	return ""
 }
 
-func (x *GetUserBalancesResponse_Balance) GetCash() int64 {
+func (x *GetUserBalancesResponse_Balance) GetCash() string {
 	if x != nil {
 		return x.Cash
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserBalancesResponse_Balance) GetOperatorBonus() int64 {
+func (x *GetUserBalancesResponse_Balance) GetOperatorBonus() string {
 	if x != nil {
 		return x.OperatorBonus
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserBalancesResponse_Balance) GetProviderBonus() int64 {
+func (x *GetUserBalancesResponse_Balance) GetProviderBonus() string {
 	if x != nil {
 		return x.ProviderBonus
 	}
-	return 0
+	return ""
 }
 
 type CreditRequest_Ratio struct {
@@ -1420,9 +1420,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bbalances\x18\x01 \x03(\v26.api.wallet.service.v1.GetUserBalancesResponse.BalanceR\bbalances\x1a\x87\x01\n" +
 	"\aBalance\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
-	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12%\n" +
-	"\x0eoperator_bonus\x18\x04 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonus\"u\n" +
+	"\x04cash\x18\x02 \x01(\tR\x04cash\x12%\n" +
+	"\x0eoperator_bonus\x18\x03 \x01(\tR\roperatorBonus\x12%\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\"u\n" +
 	"\x15GetUserBalanceRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +

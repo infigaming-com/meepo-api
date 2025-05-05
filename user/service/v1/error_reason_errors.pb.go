@@ -203,28 +203,28 @@ func ErrorGenerateUserIdFailed(format string, args ...interface{}) *errors.Error
 	return errors.New(500, ErrorReason_GENERATE_USER_ID_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsCreateUserFailed(err error) bool {
+func IsAddUserFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_CREATE_USER_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_ADD_USER_FAILED.String() && e.Code == 500
 }
 
-func ErrorCreateUserFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_CREATE_USER_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorAddUserFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_USER_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsCreateUserAuthFailed(err error) bool {
+func IsAddUserAuthFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_CREATE_USER_AUTH_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_ADD_USER_AUTH_FAILED.String() && e.Code == 500
 }
 
-func ErrorCreateUserAuthFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_CREATE_USER_AUTH_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorAddUserAuthFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_USER_AUTH_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsUserDisabled(err error) bool {
@@ -381,6 +381,42 @@ func IsVerifyGoogleTokenFailed(err error) bool {
 
 func ErrorVerifyGoogleTokenFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_VERIFY_GOOGLE_TOKEN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsMarshalRequestInfoFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MARSHAL_REQUEST_INFO_FAILED.String() && e.Code == 500
+}
+
+func ErrorMarshalRequestInfoFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_MARSHAL_REQUEST_INFO_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddUserEventFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_USER_EVENT_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddUserEventFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_USER_EVENT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGenerateUserEventIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_USER_EVENT_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGenerateUserEventIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_USER_EVENT_ID_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
 // Operator is in follow_parent=true mode
