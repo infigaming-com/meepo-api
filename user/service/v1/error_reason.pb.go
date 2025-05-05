@@ -58,6 +58,7 @@ const (
 	ErrorReason_VERIFY_GOOGLE_TOKEN_FAILED          ErrorReason = 10031
 	ErrorReason_MARSHAL_REQUEST_INFO_FAILED         ErrorReason = 10032
 	ErrorReason_ADD_USER_EVENT_FAILED               ErrorReason = 10033
+	ErrorReason_GENERATE_USER_EVENT_ID_FAILED       ErrorReason = 10034
 )
 
 // Enum value maps for ErrorReason.
@@ -96,6 +97,7 @@ var (
 		10031: "VERIFY_GOOGLE_TOKEN_FAILED",
 		10032: "MARSHAL_REQUEST_INFO_FAILED",
 		10033: "ADD_USER_EVENT_FAILED",
+		10034: "GENERATE_USER_EVENT_ID_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                         0,
@@ -131,6 +133,7 @@ var (
 		"VERIFY_GOOGLE_TOKEN_FAILED":          10031,
 		"MARSHAL_REQUEST_INFO_FAILED":         10032,
 		"ADD_USER_EVENT_FAILED":               10033,
+		"GENERATE_USER_EVENT_ID_FAILED":       10034,
 	}
 )
 
@@ -165,7 +168,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa9\b\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xcd\b\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12)\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x1a\x04\xa8E\x91\x03\x12,\n" +
@@ -199,7 +202,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x12USER_TAG_NOT_EXIST\x10\xaeN\x12\x1f\n" +
 	"\x1aVERIFY_GOOGLE_TOKEN_FAILED\x10\xafN\x12 \n" +
 	"\x1bMARSHAL_REQUEST_INFO_FAILED\x10\xb0N\x12\x1a\n" +
-	"\x15ADD_USER_EVENT_FAILED\x10\xb1N\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x15ADD_USER_EVENT_FAILED\x10\xb1N\x12\"\n" +
+	"\x1dGENERATE_USER_EVENT_ID_FAILED\x10\xb2N\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
