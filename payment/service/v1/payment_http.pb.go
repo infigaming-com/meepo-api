@@ -26,6 +26,7 @@ const OperationPaymentGetPaymentMethodList = "/payment.service.v1.Payment/GetPay
 const OperationPaymentGetTransactionPage = "/payment.service.v1.Payment/GetTransactionPage"
 const OperationPaymentInitiateDeposit = "/payment.service.v1.Payment/InitiateDeposit"
 const OperationPaymentInitiateWithdraw = "/payment.service.v1.Payment/InitiateWithdraw"
+const OperationPaymentWithdrawCallback = "/payment.service.v1.Payment/WithdrawCallback"
 
 type PaymentHTTPServer interface {
 	// CreatePaymentChannel Create payment channel
@@ -43,6 +44,9 @@ type PaymentHTTPServer interface {
 	InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error)
 	// InitiateWithdraw Initiate a withdrawal transaction
 	InitiateWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error)
+	// WithdrawCallback Withdraw callback
+	// This endpoint handles callbacks from payment gateways for withdrawal results.
+	WithdrawCallback(context.Context, *WithdrawCallbackRequest) (*WithdrawCallbackResponse, error)
 }
 
 func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
@@ -53,6 +57,7 @@ func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r.POST("/v1/payment/deposit/initiate", _Payment_InitiateDeposit0_HTTP_Handler(srv))
 	r.POST("/v1/payment/withdraw/initiate", _Payment_InitiateWithdraw0_HTTP_Handler(srv))
 	r.POST("/v1/payment/deposit/callback", _Payment_DepositCallback0_HTTP_Handler(srv))
+	r.POST("/v1/payment/withdraw/callback", _Payment_WithdrawCallback0_HTTP_Handler(srv))
 	r.POST("/v1/payment/transaction/page", _Payment_GetTransactionPage0_HTTP_Handler(srv))
 }
 
@@ -188,6 +193,28 @@ func _Payment_DepositCallback0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http
 	}
 }
 
+func _Payment_WithdrawCallback0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in WithdrawCallbackRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentWithdrawCallback)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.WithdrawCallback(ctx, req.(*WithdrawCallbackRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*WithdrawCallbackResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Payment_GetTransactionPage0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetTransactionPageRequest
@@ -218,6 +245,7 @@ type PaymentHTTPClient interface {
 	GetTransactionPage(ctx context.Context, req *GetTransactionPageRequest, opts ...http.CallOption) (rsp *GetTransactionPageResponse, err error)
 	InitiateDeposit(ctx context.Context, req *InitiateDepositRequest, opts ...http.CallOption) (rsp *InitiateDepositResponse, err error)
 	InitiateWithdraw(ctx context.Context, req *InitiateWithdrawRequest, opts ...http.CallOption) (rsp *InitiateWithdrawResponse, err error)
+	WithdrawCallback(ctx context.Context, req *WithdrawCallbackRequest, opts ...http.CallOption) (rsp *WithdrawCallbackResponse, err error)
 }
 
 type PaymentHTTPClientImpl struct {
@@ -311,6 +339,19 @@ func (c *PaymentHTTPClientImpl) InitiateWithdraw(ctx context.Context, in *Initia
 	pattern := "/v1/payment/withdraw/initiate"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentInitiateWithdraw))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *PaymentHTTPClientImpl) WithdrawCallback(ctx context.Context, in *WithdrawCallbackRequest, opts ...http.CallOption) (*WithdrawCallbackResponse, error) {
+	var out WithdrawCallbackResponse
+	pattern := "/v1/payment/withdraw/callback"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPaymentWithdrawCallback))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
