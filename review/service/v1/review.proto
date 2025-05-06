@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+package api.review.service.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/review/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.review.service.v1";
+
+// Review service provides review functionality.
+service Review {
+	rpc CreateWithdraw(CreateWithdrawRequest) returns (CreateWithdrawResponse) {
+		option (google.api.http) = {
+			post: "/v1/review/withdraw"
+			body: "*"
+		};
+	}
+	rpc ApproveReview(ApproveReviewRequest) returns (ApproveReviewResponse) {
+		option (google.api.http) = {
+			post: "/v1/review/approve"
+			body: "*"
+		};
+	}
+	rpc AddReviewComment(AddReviewCommentRequest) returns (AddReviewCommentResponse) {
+		option (google.api.http) = {
+			post: "/v1/review/comment"
+			body: "*"
+		};
+	}
+	rpc ListReviews(ListReviewsRequest) returns (ListReviewsResponse) {
+		option (google.api.http) = {
+			post: "/v1/review/list"
+			body: "*"
+		};
+	}
+	rpc GetReview(GetReviewRequest) returns (GetReviewResponse) {
+		option (google.api.http) = {
+			post: "/v1/review/get"
+			body: "*"
+		};
+	}
+}
+
+message CreateWithdrawRequest {
+	google.protobuf.Struct withdraw_request_data = 1;
+}
+
+message CreateWithdrawResponse {
+	google.protobuf.Struct withdraw_response_data = 1;
+}
+
+enum ReviewAction {
+	REVIEW_ACTION_UNSPECIFIED = 0;
+	REVIEW_ACTION_APPROVE = 1;
+	REVIEW_ACTION_REJECT = 2;
+	REVIEW_ACTION_MANUAL_PAYOUT = 3;
+}
+
+message ApproveReviewRequest {
+	int64 review_id = 1;
+	ReviewAction action = 2;
+	string approve_comment = 3;
+}
+
+message ApproveReviewResponse {}
+
+message AddReviewCommentRequest {
+	int64 review_id = 1;
+	int64 author_user_id = 2;
+	string content = 3;
+}
+
+message AddReviewCommentResponse {}
+
+message ListReviewsRequest {
+	optional int64 review_id = 1;
+	optional int64 user_id = 2;
+	optional int64 operator_id = 3;
+	optional string currency = 4;
+	optional string status = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9;
+}
+
+message ListReviewsResponse {}
+
+message GetReviewRequest {
+	int64 review_id = 1;
+}
+
+message GetReviewResponse {
+	message Comment {
+		int64 author_user_name = 1;
+		string content = 2;
+		google.protobuf.Timestamp created_at = 3;
+	}
+	repeated Comment comments = 1;
+}
