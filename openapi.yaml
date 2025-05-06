@@ -375,6 +375,96 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawResponse'
+    /v1/review/approve:
+        post:
+            tags:
+                - Review
+            operationId: Review_ApproveReview
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.review.service.v1.ApproveReviewRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.review.service.v1.ApproveReviewResponse'
+    /v1/review/comment:
+        post:
+            tags:
+                - Review
+            operationId: Review_AddReviewComment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.review.service.v1.AddReviewCommentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.review.service.v1.AddReviewCommentResponse'
+    /v1/review/get:
+        post:
+            tags:
+                - Review
+            operationId: Review_GetReview
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.review.service.v1.GetReviewRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.review.service.v1.GetReviewResponse'
+    /v1/review/list:
+        post:
+            tags:
+                - Review
+            operationId: Review_ListReviews
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.review.service.v1.ListReviewsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.review.service.v1.ListReviewsResponse'
+    /v1/review/withdraw:
+        post:
+            tags:
+                - Review
+            operationId: Review_CreateWithdraw
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawResponse'
     /v1/system/currencies/add:
         post:
             tags:
@@ -872,6 +962,96 @@ components:
                     type: boolean
                     description: enabled
         api.operator.service.v1.UpdateOperatorResponse:
+            type: object
+            properties: {}
+        api.review.service.v1.AddReviewCommentRequest:
+            type: object
+            properties:
+                reviewId:
+                    type: string
+                authorUserId:
+                    type: string
+                content:
+                    type: string
+        api.review.service.v1.AddReviewCommentResponse:
+            type: object
+            properties: {}
+        api.review.service.v1.ApproveReviewRequest:
+            type: object
+            properties:
+                reviewId:
+                    type: string
+                action:
+                    enum:
+                        - REVIEW_ACTION_UNSPECIFIED
+                        - REVIEW_ACTION_APPROVE
+                        - REVIEW_ACTION_REJECT
+                        - REVIEW_ACTION_MANUAL_PAYOUT
+                    type: string
+                    format: enum
+                approveComment:
+                    type: string
+        api.review.service.v1.ApproveReviewResponse:
+            type: object
+            properties: {}
+        api.review.service.v1.CreateWithdrawRequest:
+            type: object
+            properties:
+                withdrawRequestData:
+                    type: object
+        api.review.service.v1.CreateWithdrawResponse:
+            type: object
+            properties:
+                withdrawResponseData:
+                    type: object
+        api.review.service.v1.GetReviewRequest:
+            type: object
+            properties:
+                reviewId:
+                    type: string
+        api.review.service.v1.GetReviewResponse:
+            type: object
+            properties:
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.review.service.v1.GetReviewResponse_Comment'
+        api.review.service.v1.GetReviewResponse_Comment:
+            type: object
+            properties:
+                authorUserName:
+                    type: string
+                content:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+        api.review.service.v1.ListReviewsRequest:
+            type: object
+            properties:
+                reviewId:
+                    type: string
+                userId:
+                    type: string
+                operatorId:
+                    type: string
+                currency:
+                    type: string
+                status:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.review.service.v1.ListReviewsResponse:
             type: object
             properties: {}
         api.user.service.v1.AddOperatorTagRequest:
@@ -1929,6 +2109,8 @@ tags:
     - name: Operator
       description: User service provides authentication and user management functionality.
     - name: Payment
+    - name: Review
+      description: Review service provides review functionality.
     - name: System
     - name: User
       description: User service provides authentication and user management functionality.
