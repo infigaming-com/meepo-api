@@ -278,6 +278,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListResponse'
+    /v1/payment/channel/page:
+        post:
+            tags:
+                - Payment
+            description: Get payment channel page with pagination and filters
+            operationId: Payment_GetPaymentChannelPage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageResponse'
     /v1/payment/deposit/callback:
         post:
             tags:
@@ -1592,6 +1611,8 @@ components:
                     type: string
                 paymentMethodId:
                     type: string
+                type:
+                    type: string
                 key:
                     type: object
             description: Request to create a payment channel
@@ -1649,6 +1670,68 @@ components:
                     items:
                         $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
             description: Response for payment channel list
+        payment.service.v1.GetPaymentChannelPageRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Pagination parameters
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorId:
+                    type: string
+                    description: |-
+                        Filter parameters (all optional)
+                         Optional operator id filter
+                type:
+                    enum:
+                        - CHANNEL_TYPE_DEPOSIT
+                        - CHANNEL_TYPE_WITHDRAW
+                    type: string
+                    description: Optional type filter
+                    format: enum
+                category:
+                    type: string
+                    description: Optional category filter
+                paymentMethod:
+                    type: string
+                    description: Optional payment method filter
+                currency:
+                    type: string
+                    description: Optional currency filter
+                country:
+                    type: string
+                    description: Optional country filter
+                sort:
+                    enum:
+                        - DESC
+                        - ASC
+                    type: string
+                    description: Optional sort
+                    format: enum
+            description: Request to get payment channel page
+        payment.service.v1.GetPaymentChannelPageResponse:
+            type: object
+            properties:
+                paymentChannels:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                totalPages:
+                    type: integer
+                    format: int32
+            description: Response for payment channel page
         payment.service.v1.GetPaymentMethodListRequest:
             type: object
             properties: {}
@@ -1793,6 +1876,10 @@ components:
             type: object
             properties:
                 channelId:
+                    type: string
+                type:
+                    type: string
+                category:
                     type: string
                 operatorId:
                     type: string
