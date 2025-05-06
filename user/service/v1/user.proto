@@ -83,7 +83,7 @@ service User {
 	// GetOperatorTagConfig returns follow-parent flag for the given operator ID.
 	rpc GetOperatorTagConfig(GetOperatorTagConfigRequest) returns (GetOperatorTagConfigResponse) {
 		option (google.api.http) = {
-			post: "/v1/operator/tag-config/get"
+			post: "/v1/user/operators/tag-config/get"
 			body: "*"
 		};
 	}
@@ -93,7 +93,7 @@ service User {
 	// If the record doesn't exist, it will create a new one with follow_parent set to false.
 	rpc SetOperatorTagConfig(SetOperatorTagConfigRequest) returns (SetOperatorTagConfigResponse) {
 		option (google.api.http) = {
-			post: "/v1/operator/tag-config/set"
+			post: "/v1/user/operators/tag-config/set"
 			body: "*"
 		};
 	}
@@ -101,7 +101,7 @@ service User {
 	// AddOperatorTag adds a new tag to an operator if follow_parent is false.
 	rpc AddOperatorTag(AddOperatorTagRequest) returns (AddOperatorTagResponse) {
 		option (google.api.http) = {
-			post: "/v1/operator/tags/add"
+			post: "/v1/user/operators/tags/add"
 			body: "*"
 		};
 	}
@@ -109,7 +109,7 @@ service User {
 	// GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
 	rpc GetOperatorTags(GetOperatorTagsRequest) returns (GetOperatorTagsResponse) {
 		option (google.api.http) = {
-			post: "/v1/operator/tags/get"
+			post: "/v1/user/operators/tags/get"
 			body: "*"
 		};
 	}
@@ -117,7 +117,7 @@ service User {
 	// DeleteOperatorTag soft deletes a specific tag from an operator.
 	rpc DeleteOperatorTag(DeleteOperatorTagRequest) returns (DeleteOperatorTagResponse) {
 		option (google.api.http) = {
-			post: "/v1/operator/tags/delete"
+			post: "/v1/user/operators/tags/delete"
 			body: "*"
 		};
 	}
@@ -125,7 +125,7 @@ service User {
 	// AddUserTag adds a new tag to a user.
 	rpc AddUserTag (AddUserTagRequest) returns (AddUserTagResponse) {
 		option (google.api.http) = {
-			post: "/v1/user/tag/add"
+			post: "/v1/user/tags/add"
 			body: "*"
 		};
 	}
@@ -133,7 +133,7 @@ service User {
 	// DeleteUserTag soft deletes a tag from a user.
 	rpc DeleteUserTag (DeleteUserTagRequest) returns (DeleteUserTagResponse) {
 		option (google.api.http) = {
-			post: "/v1/user/tag/delete"
+			post: "/v1/user/tags/delete"
 			body: "*"
 		};
 	}
@@ -141,7 +141,7 @@ service User {
 	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
 	rpc GetUserTags (GetUserTagsRequest) returns (GetUserTagsResponse) {
 		option (google.api.http) = {
-			post: "/v1/user/tag/get-all"
+			post: "/v1/user/tags/get"
 			body: "*"
 		};
 	}
