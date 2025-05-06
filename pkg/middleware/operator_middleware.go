@@ -2,9 +2,9 @@ package middleware
 
 import (
 	"context"
+	"slices"
 
 	"github.com/go-kratos/kratos/v2/errors"
-	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware"
 	khttp "github.com/go-kratos/kratos/v2/transport/http"
 	operator "github.com/infigaming-com/meepo-api/operator/service/v1"
@@ -22,13 +22,16 @@ var (
 
 // OperatorIdMiddleware is a middleware that extract Origin and
 // get the operatorId with Origin from redis
-func OperatorIdMiddleware(lg log.Logger, operator operator.OperatorClient) middleware.Middleware {
+func OperatorIdMiddleware(path []string, operator operator.OperatorClient) middleware.Middleware {
 	return func(handler middleware.Handler) middleware.Handler {
 		return func(ctx context.Context, req any) (reply any, err error) {
 			if r, ok := khttp.RequestFromServerContext(ctx); ok {
 				origin := r.Header.Get("Origin")
 				if origin == "" {
 					return nil, errors.New(400, "BAD_REQUEST", "missing origin header")
+				}
+				if !slices.Contains(path, r.URL.Path) {
+					return handler(ctx, req)
 				}
 				// temporary use map to store origin and operatorId
 				operatorId, ok := OriginToOperatorIdMap[origin]
