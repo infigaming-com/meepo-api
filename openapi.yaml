@@ -576,7 +576,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
-    /v1/user/operator/tag-config/get:
+    /v1/user/operators/tag-config/get:
         post:
             tags:
                 - User
@@ -595,7 +595,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagConfigResponse'
-    /v1/user/operator/tag-config/set:
+    /v1/user/operators/tag-config/set:
         post:
             tags:
                 - User
@@ -617,7 +617,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.SetOperatorTagConfigResponse'
-    /v1/user/operator/tag/add:
+    /v1/user/operators/tags/add:
         post:
             tags:
                 - User
@@ -636,7 +636,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.AddOperatorTagResponse'
-    /v1/user/operator/tag/delete:
+    /v1/user/operators/tags/delete:
         post:
             tags:
                 - User
@@ -655,7 +655,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorTagResponse'
-    /v1/user/operator/tag/get:
+    /v1/user/operators/tags/get:
         post:
             tags:
                 - User
@@ -674,7 +674,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagsResponse'
-    /v1/user/tag/add:
+    /v1/user/tags/add:
         post:
             tags:
                 - User
@@ -693,7 +693,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.AddUserTagResponse'
-    /v1/user/tag/delete:
+    /v1/user/tags/delete:
         post:
             tags:
                 - User
@@ -712,7 +712,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.DeleteUserTagResponse'
-    /v1/user/tag/get:
+    /v1/user/tags/get:
         post:
             tags:
                 - User
