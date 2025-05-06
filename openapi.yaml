@@ -959,7 +959,7 @@ components:
             properties:
                 followParent:
                     type: boolean
-                    description: Whether the operator should follow parent tags.
+                    description: Whether the operator should follow parent operator's tags.
             description: GetOperatorTagConfigResponse contains the tag configuration settings, now only follow_parent flag.
         api.user.service.v1.GetOperatorTagsRequest:
             type: object
@@ -1096,6 +1096,9 @@ components:
                 operatorId:
                     type: string
                     description: The ID of the operator to set tag configuration for.
+                followParent:
+                    type: boolean
+                    description: Whether to follow parent operator's tags.
             description: SetOperatorTagConfigRequest contains the operator ID.
         api.user.service.v1.SetOperatorTagConfigResponse:
             type: object

@@ -324,7 +324,7 @@ message GetOperatorTagConfigRequest {
 
 // GetOperatorTagConfigResponse contains the tag configuration settings, now only follow_parent flag.
 message GetOperatorTagConfigResponse {
-	// Whether the operator should follow parent tags.
+	// Whether the operator should follow parent operator's tags.
 	bool follow_parent = 1;
 }
 
@@ -332,6 +332,8 @@ message GetOperatorTagConfigResponse {
 message SetOperatorTagConfigRequest {
 	// The ID of the operator to set tag configuration for.
 	int64 operator_id = 1;
+	// Whether to follow parent operator's tags.
+	bool follow_parent = 2;
 }
 
 // SetOperatorTagConfigResponse contains the updated tag configuration, now only follow_parent flag.
