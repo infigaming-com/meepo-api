@@ -4173,6 +4173,12 @@ components:
                 avatar:
                     type: string
                     description: Avatar
+                banGame:
+                    type: boolean
+                    description: BanGame
+                banWithdraw:
+                    type: boolean
+                    description: BanWithdraw
             description: UserInfo contains basic user information.
         api.wallet.service.v1.GetUserBalanceRequest:
             type: object

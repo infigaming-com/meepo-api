@@ -77,6 +77,10 @@ func (m *UserInfo) validate(all bool) error {
 
 	// no validation rules for Avatar
 
+	// no validation rules for BanGame
+
+	// no validation rules for BanWithdraw
+
 	if len(errors) > 0 {
 		return UserInfoMultiError(errors)
 	}
