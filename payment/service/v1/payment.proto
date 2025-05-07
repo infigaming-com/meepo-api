@@ -32,7 +32,8 @@ message GetPaymentMethodListResponse {
 message CreatePaymentChannelRequest {
   string merchant_id = 1 [json_name="merchantId"];
   string payment_method_id = 2 [json_name="paymentMethodId"];
-  google.protobuf.Struct key = 3; // Stores configuration fields for the payment channel
+  string type = 3;
+  google.protobuf.Struct key = 4; // Stores configuration fields for the payment channel
 }
 
 // Response for channel creation
@@ -48,22 +49,24 @@ message GetPaymentChannelListRequest {
 // Payment channel information
 message PaymentChannelInfo {
   string channel_id = 1 [json_name="channelId"];
-  string operator_id = 2 [json_name="operatorId"];
-  string payment_method = 3 [json_name="paymentMethod"];
-  string tag = 4;
-  string name = 5;
-  string payment_method_id = 6 [json_name="paymentMethodId"];
-  string currency = 7;
-  string country = 8;
-  string method = 9;
-  string logo = 10;
-  int64 min_deposit_amount = 11 [json_name="minDepositAmount"];
-  int64 max_deposit_amount = 12 [json_name="maxDepositAmount"];
-  int64 min_withdraw_amount = 13 [json_name="minWithdrawAmount"];
-  int64 max_withdraw_amount = 14 [json_name="maxWithdrawAmount"];
-  int32 eat = 15;
-  google.protobuf.Struct deposit_schema = 16 [json_name="depositSchema"];
-  google.protobuf.Struct withdraw_schema = 17 [json_name="withdrawSchema"];
+  string type = 2;
+  string category = 3;
+  string operator_id = 4 [json_name="operatorId"];
+  string payment_method = 5 [json_name="paymentMethod"];
+  string tag = 6;
+  string name = 7;
+  string payment_method_id = 8 [json_name="paymentMethodId"];
+  string currency = 9;
+  string country = 10;
+  string method = 11;
+  string logo = 12;
+  int64 min_deposit_amount = 13 [json_name="minDepositAmount"];
+  int64 max_deposit_amount = 14 [json_name="maxDepositAmount"];
+  int64 min_withdraw_amount = 15 [json_name="minWithdrawAmount"];
+  int64 max_withdraw_amount = 16 [json_name="maxWithdrawAmount"];
+  int32 eat = 17;
+  google.protobuf.Struct deposit_schema = 18 [json_name="depositSchema"];
+  google.protobuf.Struct withdraw_schema = 19 [json_name="withdrawSchema"];
 }
 
 // Response for payment channel list
@@ -171,6 +174,12 @@ enum Sort {
   ASC = 1;
 }
 
+// Channel type enum
+enum ChannelType {
+  CHANNEL_TYPE_DEPOSIT = 0;    // 充值
+  CHANNEL_TYPE_WITHDRAW = 1;   // 提现
+}
+
 // Transaction information
 message TransactionInfo {
   int64 transaction_id = 1 [json_name="transactionId"];
@@ -209,6 +218,38 @@ message GetTransactionPageRequest {
 // Response for transaction page
 message GetTransactionPageResponse {
   repeated TransactionInfo transactions = 1;
+  int32 total_count = 2 [json_name="totalCount"];
+  int32 page = 3;
+  int32 page_size = 4 [json_name="pageSize"];
+  int32 total_pages = 5 [json_name="totalPages"];
+}
+
+// Request to get payment channel page
+message GetPaymentChannelPageRequest {
+  // Pagination parameters
+  int32 page = 1;
+  int32 page_size = 2 [json_name="pageSize"];
+  
+  // Filter parameters (all optional)
+  // Optional operator id filter
+  string operator_id = 3 [json_name="operatorId"];
+  // Optional type filter
+  ChannelType type = 4;
+  // Optional category filter
+  string category = 5;
+  // Optional payment method filter
+  string payment_method = 6 [json_name="paymentMethod"];
+  // Optional currency filter
+  string currency = 7;
+  // Optional country filter
+  string country = 8;
+  // Optional sort
+  Sort sort = 9 [json_name="sort"];
+}
+
+// Response for payment channel page
+message GetPaymentChannelPageResponse {
+  repeated PaymentChannelInfo payment_channels = 1 [json_name="paymentChannels"];
   int32 total_count = 2 [json_name="totalCount"];
   int32 page = 3;
   int32 page_size = 4 [json_name="pageSize"];
@@ -278,6 +319,14 @@ service Payment {
   rpc GetTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) {
     option (google.api.http) = {
       post: "/v1/payment/transaction/page"
+      body: "*"
+    };
+  }
+
+  // Get payment channel page with pagination and filters
+  rpc GetPaymentChannelPage(GetPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/channel/page"
       body: "*"
     };
   }
