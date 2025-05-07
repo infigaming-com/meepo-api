@@ -96,7 +96,7 @@ message GetUserBalanceRequest {
 	int64 user_id = 1;
 	string currency = 2;
 	// optional target currency
-	string target_currency = 3;
+	string settlement_currency = 3;
 }
 
 message GetUserBalanceResponse {
@@ -155,7 +155,7 @@ message DebitResponse {
 message GameDebitRequest {
 	int64 user_id = 1;
 	string currency = 2;
-	string target_currency = 3;
+	string settlement_currency = 3;
 	string exchange_rate = 4;
 	TransactionType transaction_type = 5;
 	int64 transaction_id = 6;
@@ -174,7 +174,7 @@ message GameDebitResponse {
 message GameCreditRequest {
 	int64 user_id = 1;
 	string currency = 2;
-	string target_currency = 3;
+	string settlement_currency = 3;
 	string exchange_rate = 4;
 	TransactionType transaction_type = 5;
 	int64 transaction_id = 6;

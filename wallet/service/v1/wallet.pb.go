@@ -552,9 +552,9 @@ type GetUserBalanceRequest struct {
 	UserId   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	// optional target currency
-	TargetCurrency string `protobuf:"bytes,3,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	SettlementCurrency string `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *GetUserBalanceRequest) Reset() {
@@ -601,9 +601,9 @@ func (x *GetUserBalanceRequest) GetCurrency() string {
 	return ""
 }
 
-func (x *GetUserBalanceRequest) GetTargetCurrency() string {
+func (x *GetUserBalanceRequest) GetSettlementCurrency() string {
 	if x != nil {
-		return x.TargetCurrency
+		return x.SettlementCurrency
 	}
 	return ""
 }
@@ -918,17 +918,17 @@ func (x *DebitResponse) GetTransactionId() int64 {
 }
 
 type GameDebitRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	UserId          int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency        string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	TargetCurrency  string                 `protobuf:"bytes,3,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
-	ExchangeRate    string                 `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
-	TransactionType TransactionType        `protobuf:"varint,5,opt,name=transaction_type,json=transactionType,proto3,enum=api.wallet.service.v1.TransactionType" json:"transaction_type,omitempty"`
-	TransactionId   int64                  `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Amount          int64                  `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`
-	Turnover        int64                  `protobuf:"varint,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	UserId             int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency           string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	SettlementCurrency string                 `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	ExchangeRate       string                 `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	TransactionType    TransactionType        `protobuf:"varint,5,opt,name=transaction_type,json=transactionType,proto3,enum=api.wallet.service.v1.TransactionType" json:"transaction_type,omitempty"`
+	TransactionId      int64                  `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Amount             int64                  `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`
+	Turnover           int64                  `protobuf:"varint,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *GameDebitRequest) Reset() {
@@ -975,9 +975,9 @@ func (x *GameDebitRequest) GetCurrency() string {
 	return ""
 }
 
-func (x *GameDebitRequest) GetTargetCurrency() string {
+func (x *GameDebitRequest) GetSettlementCurrency() string {
 	if x != nil {
-		return x.TargetCurrency
+		return x.SettlementCurrency
 	}
 	return ""
 }
@@ -1097,7 +1097,7 @@ type GameCreditRequest struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
 	UserId                int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Currency              string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	TargetCurrency        string                 `protobuf:"bytes,3,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
+	SettlementCurrency    string                 `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
 	ExchangeRate          string                 `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
 	TransactionType       TransactionType        `protobuf:"varint,5,opt,name=transaction_type,json=transactionType,proto3,enum=api.wallet.service.v1.TransactionType" json:"transaction_type,omitempty"`
 	TransactionId         int64                  `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
@@ -1151,9 +1151,9 @@ func (x *GameCreditRequest) GetCurrency() string {
 	return ""
 }
 
-func (x *GameCreditRequest) GetTargetCurrency() string {
+func (x *GameCreditRequest) GetSettlementCurrency() string {
 	if x != nil {
-		return x.TargetCurrency
+		return x.SettlementCurrency
 	}
 	return ""
 }
@@ -1422,11 +1422,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\tR\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\"u\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\"}\n" +
 	"\x15GetUserBalanceRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
-	"\x0ftarget_currency\x18\x03 \x01(\tR\x0etargetCurrency\"\x9f\x01\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
+	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\"\x9f\x01\n" +
 	"\x16GetUserBalanceResponse\x12#\n" +
 	"\rexchange_rate\x18\x01 \x01(\tR\fexchangeRate\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12%\n" +
@@ -1450,11 +1450,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x04 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x05 \x01(\x03R\x04cash\"6\n" +
 	"\rDebitResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xc3\x02\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xcb\x02\n" +
 	"\x10GameDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
-	"\x0ftarget_currency\x18\x03 \x01(\tR\x0etargetCurrency\x12#\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
+	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\x12#\n" +
 	"\rexchange_rate\x18\x04 \x01(\tR\fexchangeRate\x12Q\n" +
 	"\x10transaction_type\x18\x05 \x01(\x0e2&.api.wallet.service.v1.TransactionTypeR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x06 \x01(\x03R\rtransactionId\x12\x16\n" +
@@ -1465,11 +1465,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\rexchange_rate\x18\x02 \x01(\tR\fexchangeRate\x12\x12\n" +
 	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x04 \x01(\x03R\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonus\"\xe0\x02\n" +
+	"\x0eprovider_bonus\x18\x05 \x01(\x03R\rproviderBonus\"\xe8\x02\n" +
 	"\x11GameCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
-	"\x0ftarget_currency\x18\x03 \x01(\tR\x0etargetCurrency\x12#\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
+	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\x12#\n" +
 	"\rexchange_rate\x18\x04 \x01(\tR\fexchangeRate\x12Q\n" +
 	"\x10transaction_type\x18\x05 \x01(\x0e2&.api.wallet.service.v1.TransactionTypeR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x06 \x01(\x03R\rtransactionId\x126\n" +

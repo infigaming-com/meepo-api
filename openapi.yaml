@@ -4181,7 +4181,7 @@ components:
                     type: string
                 currency:
                     type: string
-                targetCurrency:
+                settlementCurrency:
                     type: string
                     description: optional target currency
         api.wallet.service.v1.GetUserBalanceResponse:
