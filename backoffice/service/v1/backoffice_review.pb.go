@@ -29,8 +29,8 @@ type ListWithdrawReviewTicketsRequest struct {
 	ReviewTicketId *int64                 `protobuf:"varint,3,opt,name=review_ticket_id,json=reviewTicketId,proto3,oneof" json:"review_ticket_id,omitempty"`
 	Currency       *string                `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
 	Status         *string                `protobuf:"bytes,5,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	StartTime      *int64                 `protobuf:"varint,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime        *int64                 `protobuf:"varint,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	StartTime      *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime        *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	Page           *int64                 `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize       *int64                 `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -102,18 +102,18 @@ func (x *ListWithdrawReviewTicketsRequest) GetStatus() string {
 	return ""
 }
 
-func (x *ListWithdrawReviewTicketsRequest) GetStartTime() int64 {
-	if x != nil && x.StartTime != nil {
-		return *x.StartTime
+func (x *ListWithdrawReviewTicketsRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
 	}
-	return 0
+	return nil
 }
 
-func (x *ListWithdrawReviewTicketsRequest) GetEndTime() int64 {
-	if x != nil && x.EndTime != nil {
-		return *x.EndTime
+func (x *ListWithdrawReviewTicketsRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
 	}
-	return 0
+	return nil
 }
 
 func (x *ListWithdrawReviewTicketsRequest) GetPage() int64 {
@@ -486,17 +486,17 @@ var File_backoffice_service_v1_backoffice_review_proto protoreflect.FileDescript
 
 const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\n" +
-	"-backoffice/service/v1/backoffice_review.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xce\x03\n" +
+	"-backoffice/service/v1/backoffice_review.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x86\x04\n" +
 	" ListWithdrawReviewTicketsRequest\x12$\n" +
 	"\voperator_id\x18\x01 \x01(\x03H\x00R\n" +
 	"operatorId\x88\x01\x01\x12\x1c\n" +
 	"\auser_id\x18\x02 \x01(\x03H\x01R\x06userId\x88\x01\x01\x12-\n" +
 	"\x10review_ticket_id\x18\x03 \x01(\x03H\x02R\x0ereviewTicketId\x88\x01\x01\x12\x1f\n" +
 	"\bcurrency\x18\x04 \x01(\tH\x03R\bcurrency\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\x05 \x01(\tH\x04R\x06status\x88\x01\x01\x12\"\n" +
+	"\x06status\x18\x05 \x01(\tH\x04R\x06status\x88\x01\x01\x12>\n" +
 	"\n" +
-	"start_time\x18\x06 \x01(\x03H\x05R\tstartTime\x88\x01\x01\x12\x1e\n" +
-	"\bend_time\x18\a \x01(\x03H\x06R\aendTime\x88\x01\x01\x12\x17\n" +
+	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x05R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x06R\aendTime\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\b \x01(\x03H\aR\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\t \x01(\x03H\bR\bpageSize\x88\x01\x01B\x0e\n" +
 	"\f_operator_idB\n" +
@@ -568,13 +568,15 @@ var file_backoffice_service_v1_backoffice_review_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),                                  // 5: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_review_proto_depIdxs = []int32{
-	4, // 0: api.backoffice.service.v1.ListWithdrawReviewTicketsResponse.withdraw_review_tickets:type_name -> api.backoffice.service.v1.ListWithdrawReviewTicketsResponse.WithdrawReviewTicket
-	5, // 1: api.backoffice.service.v1.ListWithdrawReviewTicketsResponse.WithdrawReviewTicket.created_at:type_name -> google.protobuf.Timestamp
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	5, // 0: api.backoffice.service.v1.ListWithdrawReviewTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	5, // 1: api.backoffice.service.v1.ListWithdrawReviewTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	4, // 2: api.backoffice.service.v1.ListWithdrawReviewTicketsResponse.withdraw_review_tickets:type_name -> api.backoffice.service.v1.ListWithdrawReviewTicketsResponse.WithdrawReviewTicket
+	5, // 3: api.backoffice.service.v1.ListWithdrawReviewTicketsResponse.WithdrawReviewTicket.created_at:type_name -> google.protobuf.Timestamp
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_review_proto_init() }

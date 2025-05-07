@@ -31,8 +31,8 @@ type ListBetsRequest struct {
 	UserId                *int64                 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	OperatorTransactionId *int64                 `protobuf:"varint,6,opt,name=operator_transaction_id,json=operatorTransactionId,proto3,oneof" json:"operator_transaction_id,omitempty"`
 	ProviderTransactionId *string                `protobuf:"bytes,7,opt,name=provider_transaction_id,json=providerTransactionId,proto3,oneof" json:"provider_transaction_id,omitempty"`
-	StartTime             *int64                 `protobuf:"varint,8,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime               *int64                 `protobuf:"varint,9,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	StartTime             *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime               *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	MinBetAmount          *int64                 `protobuf:"varint,10,opt,name=min_bet_amount,json=minBetAmount,proto3,oneof" json:"min_bet_amount,omitempty"`
 	MaxBetAmount          *int64                 `protobuf:"varint,11,opt,name=max_bet_amount,json=maxBetAmount,proto3,oneof" json:"max_bet_amount,omitempty"`
 	Currencies            []string               `protobuf:"bytes,12,rep,name=currencies,proto3" json:"currencies,omitempty"`
@@ -122,18 +122,18 @@ func (x *ListBetsRequest) GetProviderTransactionId() string {
 	return ""
 }
 
-func (x *ListBetsRequest) GetStartTime() int64 {
-	if x != nil && x.StartTime != nil {
-		return *x.StartTime
+func (x *ListBetsRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
 	}
-	return 0
+	return nil
 }
 
-func (x *ListBetsRequest) GetEndTime() int64 {
-	if x != nil && x.EndTime != nil {
-		return *x.EndTime
+func (x *ListBetsRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
 	}
-	return 0
+	return nil
 }
 
 func (x *ListBetsRequest) GetMinBetAmount() int64 {
@@ -397,8 +397,8 @@ type GetUserBetsOverviewRequest struct {
 	BetAmountMax  *int64                 `protobuf:"varint,7,opt,name=bet_amount_max,json=betAmountMax,proto3,oneof" json:"bet_amount_max,omitempty"`
 	WinAmountMin  *int64                 `protobuf:"varint,8,opt,name=win_amount_min,json=winAmountMin,proto3,oneof" json:"win_amount_min,omitempty"`
 	WinAmountMax  *int64                 `protobuf:"varint,9,opt,name=win_amount_max,json=winAmountMax,proto3,oneof" json:"win_amount_max,omitempty"`
-	StartTime     *int64                 `protobuf:"varint,10,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime       *int64                 `protobuf:"varint,11,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	Page          *int64                 `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int64                 `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -498,18 +498,18 @@ func (x *GetUserBetsOverviewRequest) GetWinAmountMax() int64 {
 	return 0
 }
 
-func (x *GetUserBetsOverviewRequest) GetStartTime() int64 {
-	if x != nil && x.StartTime != nil {
-		return *x.StartTime
+func (x *GetUserBetsOverviewRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
 	}
-	return 0
+	return nil
 }
 
-func (x *GetUserBetsOverviewRequest) GetEndTime() int64 {
-	if x != nil && x.EndTime != nil {
-		return *x.EndTime
+func (x *GetUserBetsOverviewRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
 	}
-	return 0
+	return nil
 }
 
 func (x *GetUserBetsOverviewRequest) GetPage() int64 {
@@ -630,8 +630,8 @@ type ListUserBetsRequest struct {
 	MaxBetAmount  *int64                 `protobuf:"varint,7,opt,name=max_bet_amount,json=maxBetAmount,proto3,oneof" json:"max_bet_amount,omitempty"`
 	MinWinAmount  *int64                 `protobuf:"varint,8,opt,name=min_win_amount,json=minWinAmount,proto3,oneof" json:"min_win_amount,omitempty"`
 	MaxWinAmount  *int64                 `protobuf:"varint,9,opt,name=max_win_amount,json=maxWinAmount,proto3,oneof" json:"max_win_amount,omitempty"`
-	StartTime     *int64                 `protobuf:"varint,10,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime       *int64                 `protobuf:"varint,11,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	Page          *int64                 `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int64                 `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -731,18 +731,18 @@ func (x *ListUserBetsRequest) GetMaxWinAmount() int64 {
 	return 0
 }
 
-func (x *ListUserBetsRequest) GetStartTime() int64 {
-	if x != nil && x.StartTime != nil {
-		return *x.StartTime
+func (x *ListUserBetsRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
 	}
-	return 0
+	return nil
 }
 
-func (x *ListUserBetsRequest) GetEndTime() int64 {
-	if x != nil && x.EndTime != nil {
-		return *x.EndTime
+func (x *ListUserBetsRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
 	}
-	return 0
+	return nil
 }
 
 func (x *ListUserBetsRequest) GetPage() int64 {
@@ -1543,7 +1543,7 @@ var File_backoffice_service_v1_backoffice_game_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_game.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf0\x05\n" +
+	"+backoffice/service/v1/backoffice_game.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa8\x06\n" +
 	"\x0fListBetsRequest\x12!\n" +
 	"\foperator_ids\x18\x01 \x03(\x03R\voperatorIds\x12!\n" +
 	"\fprovider_ids\x18\x02 \x03(\tR\vproviderIds\x12\x1d\n" +
@@ -1552,10 +1552,10 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\bgame_ids\x18\x04 \x03(\tR\agameIds\x12\x1c\n" +
 	"\auser_id\x18\x05 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12;\n" +
 	"\x17operator_transaction_id\x18\x06 \x01(\x03H\x01R\x15operatorTransactionId\x88\x01\x01\x12;\n" +
-	"\x17provider_transaction_id\x18\a \x01(\tH\x02R\x15providerTransactionId\x88\x01\x01\x12\"\n" +
+	"\x17provider_transaction_id\x18\a \x01(\tH\x02R\x15providerTransactionId\x88\x01\x01\x12>\n" +
 	"\n" +
-	"start_time\x18\b \x01(\x03H\x03R\tstartTime\x88\x01\x01\x12\x1e\n" +
-	"\bend_time\x18\t \x01(\x03H\x04R\aendTime\x88\x01\x01\x12)\n" +
+	"start_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\x04R\aendTime\x88\x01\x01\x12)\n" +
 	"\x0emin_bet_amount\x18\n" +
 	" \x01(\x03H\x05R\fminBetAmount\x88\x01\x01\x12)\n" +
 	"\x0emax_bet_amount\x18\v \x01(\x03H\x06R\fmaxBetAmount\x88\x01\x01\x12\x1e\n" +
@@ -1602,7 +1602,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x04bets\x18\x01 \x03(\v2\x1e.api.backoffice.service.v1.BetR\x04bets\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x03R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\"\xd7\x04\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\"\x8f\x05\n" +
 	"\x1aGetUserBetsOverviewRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1c\n" +
 	"\tproviders\x18\x02 \x03(\tR\tproviders\x12\x1d\n" +
@@ -1615,11 +1615,11 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x0ebet_amount_min\x18\x06 \x01(\x03H\x00R\fbetAmountMin\x88\x01\x01\x12)\n" +
 	"\x0ebet_amount_max\x18\a \x01(\x03H\x01R\fbetAmountMax\x88\x01\x01\x12)\n" +
 	"\x0ewin_amount_min\x18\b \x01(\x03H\x02R\fwinAmountMin\x88\x01\x01\x12)\n" +
-	"\x0ewin_amount_max\x18\t \x01(\x03H\x03R\fwinAmountMax\x88\x01\x01\x12\"\n" +
+	"\x0ewin_amount_max\x18\t \x01(\x03H\x03R\fwinAmountMax\x88\x01\x01\x12>\n" +
 	"\n" +
 	"start_time\x18\n" +
-	" \x01(\x03H\x04R\tstartTime\x88\x01\x01\x12\x1e\n" +
-	"\bend_time\x18\v \x01(\x03H\x05R\aendTime\x88\x01\x01\x12\x17\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\f \x01(\x03H\x06R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\r \x01(\x03H\aR\bpageSize\x88\x01\x01B\x11\n" +
 	"\x0f_bet_amount_minB\x11\n" +
@@ -1640,7 +1640,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\n" +
 	"win_amount\x18\x05 \x01(\x03R\twinAmount\x12\x10\n" +
 	"\x03ggr\x18\x06 \x01(\x03R\x03ggr\x12\x10\n" +
-	"\x03ngr\x18\a \x01(\x03R\x03ngr\"\xd5\x04\n" +
+	"\x03ngr\x18\a \x01(\x03R\x03ngr\"\x8d\x05\n" +
 	"\x13ListUserBetsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12!\n" +
 	"\fprovider_ids\x18\x02 \x03(\tR\vproviderIds\x12\x1d\n" +
@@ -1653,11 +1653,11 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x0emin_bet_amount\x18\x06 \x01(\x03H\x00R\fminBetAmount\x88\x01\x01\x12)\n" +
 	"\x0emax_bet_amount\x18\a \x01(\x03H\x01R\fmaxBetAmount\x88\x01\x01\x12)\n" +
 	"\x0emin_win_amount\x18\b \x01(\x03H\x02R\fminWinAmount\x88\x01\x01\x12)\n" +
-	"\x0emax_win_amount\x18\t \x01(\x03H\x03R\fmaxWinAmount\x88\x01\x01\x12\"\n" +
+	"\x0emax_win_amount\x18\t \x01(\x03H\x03R\fmaxWinAmount\x88\x01\x01\x12>\n" +
 	"\n" +
 	"start_time\x18\n" +
-	" \x01(\x03H\x04R\tstartTime\x88\x01\x01\x12\x1e\n" +
-	"\bend_time\x18\v \x01(\x03H\x05R\aendTime\x88\x01\x01\x12\x17\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\f \x01(\x03H\x06R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\r \x01(\x03H\aR\bpageSize\x88\x01\x01B\x11\n" +
 	"\x0f_min_bet_amountB\x11\n" +
@@ -1780,22 +1780,28 @@ var file_backoffice_service_v1_backoffice_game_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),                                    // 15: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_game_proto_depIdxs = []int32{
-	15, // 0: api.backoffice.service.v1.Bet.created_at:type_name -> google.protobuf.Timestamp
-	15, // 1: api.backoffice.service.v1.Bet.updated_at:type_name -> google.protobuf.Timestamp
-	11, // 2: api.backoffice.service.v1.Bet.bet_amount:type_name -> api.backoffice.service.v1.Bet.Amount
-	11, // 3: api.backoffice.service.v1.Bet.win_amount:type_name -> api.backoffice.service.v1.Bet.Amount
-	1,  // 4: api.backoffice.service.v1.ListBetsResponse.bets:type_name -> api.backoffice.service.v1.Bet
-	1,  // 5: api.backoffice.service.v1.ListUserBetsResponse.bets:type_name -> api.backoffice.service.v1.Bet
-	12, // 6: api.backoffice.service.v1.GetGameTransactionsForBetResponse.game_transactions:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction
-	14, // 7: api.backoffice.service.v1.ListGamesResponse.games:type_name -> api.backoffice.service.v1.ListGamesResponse.Game
-	15, // 8: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.created_at:type_name -> google.protobuf.Timestamp
-	15, // 9: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.updated_at:type_name -> google.protobuf.Timestamp
-	13, // 10: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.amount:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.Amount
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	15, // 0: api.backoffice.service.v1.ListBetsRequest.start_time:type_name -> google.protobuf.Timestamp
+	15, // 1: api.backoffice.service.v1.ListBetsRequest.end_time:type_name -> google.protobuf.Timestamp
+	15, // 2: api.backoffice.service.v1.Bet.created_at:type_name -> google.protobuf.Timestamp
+	15, // 3: api.backoffice.service.v1.Bet.updated_at:type_name -> google.protobuf.Timestamp
+	11, // 4: api.backoffice.service.v1.Bet.bet_amount:type_name -> api.backoffice.service.v1.Bet.Amount
+	11, // 5: api.backoffice.service.v1.Bet.win_amount:type_name -> api.backoffice.service.v1.Bet.Amount
+	1,  // 6: api.backoffice.service.v1.ListBetsResponse.bets:type_name -> api.backoffice.service.v1.Bet
+	15, // 7: api.backoffice.service.v1.GetUserBetsOverviewRequest.start_time:type_name -> google.protobuf.Timestamp
+	15, // 8: api.backoffice.service.v1.GetUserBetsOverviewRequest.end_time:type_name -> google.protobuf.Timestamp
+	15, // 9: api.backoffice.service.v1.ListUserBetsRequest.start_time:type_name -> google.protobuf.Timestamp
+	15, // 10: api.backoffice.service.v1.ListUserBetsRequest.end_time:type_name -> google.protobuf.Timestamp
+	1,  // 11: api.backoffice.service.v1.ListUserBetsResponse.bets:type_name -> api.backoffice.service.v1.Bet
+	12, // 12: api.backoffice.service.v1.GetGameTransactionsForBetResponse.game_transactions:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction
+	14, // 13: api.backoffice.service.v1.ListGamesResponse.games:type_name -> api.backoffice.service.v1.ListGamesResponse.Game
+	15, // 14: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.created_at:type_name -> google.protobuf.Timestamp
+	15, // 15: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.updated_at:type_name -> google.protobuf.Timestamp
+	13, // 16: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.amount:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.Amount
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_game_proto_init() }

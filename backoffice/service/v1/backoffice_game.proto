@@ -16,8 +16,8 @@ message ListBetsRequest {
 	optional int64 user_id = 5;
 	optional int64 operator_transaction_id = 6;
 	optional string provider_transaction_id = 7;
-	optional int64 start_time = 8;
-	optional int64 end_time = 9;
+	optional google.protobuf.Timestamp start_time = 8;
+	optional google.protobuf.Timestamp end_time = 9;
 	optional int64 min_bet_amount = 10;
 	optional int64 max_bet_amount = 11;
 	repeated string currencies = 12;
@@ -63,8 +63,8 @@ message GetUserBetsOverviewRequest {
 	optional int64 bet_amount_max = 7;
 	optional int64 win_amount_min = 8;
 	optional int64 win_amount_max = 9;
-	optional int64 start_time = 10;
-	optional int64 end_time = 11;
+	optional google.protobuf.Timestamp start_time = 10;
+	optional google.protobuf.Timestamp end_time = 11;
 	optional int64 page = 12;
 	optional int64 page_size = 13;
 }
@@ -90,8 +90,8 @@ message ListUserBetsRequest {
 	optional int64 max_bet_amount = 7;
 	optional int64 min_win_amount = 8;
 	optional int64 max_win_amount = 9;
-	optional int64 start_time = 10;
-	optional int64 end_time = 11;
+	optional google.protobuf.Timestamp start_time = 10;
+	optional google.protobuf.Timestamp end_time = 11;
 	optional int64 page = 12;
 	optional int64 page_size = 13;
 }

@@ -13,8 +13,8 @@ option java_package = "api.backoffice.service.v1";
 
 message ListPaymentTransactionsRequest {
 	repeated int64 operator_ids = 1;
-	optional int64 start_time = 2;
-	optional int64 end_time = 3;
+	optional google.protobuf.Timestamp start_time = 2;
+	optional google.protobuf.Timestamp end_time = 3;
 	repeated int64 user_ids = 4;
 	repeated string currencies = 5;
 	repeated string payment_channels = 6;

@@ -25,8 +25,8 @@ const (
 type ListPaymentTransactionsRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	OperatorIds     []int64                `protobuf:"varint,1,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	StartTime       *int64                 `protobuf:"varint,2,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime         *int64                 `protobuf:"varint,3,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	StartTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime         *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	UserIds         []int64                `protobuf:"varint,4,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
 	Currencies      []string               `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	PaymentChannels []string               `protobuf:"bytes,6,rep,name=payment_channels,json=paymentChannels,proto3" json:"payment_channels,omitempty"`
@@ -76,18 +76,18 @@ func (x *ListPaymentTransactionsRequest) GetOperatorIds() []int64 {
 	return nil
 }
 
-func (x *ListPaymentTransactionsRequest) GetStartTime() int64 {
-	if x != nil && x.StartTime != nil {
-		return *x.StartTime
+func (x *ListPaymentTransactionsRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
 	}
-	return 0
+	return nil
 }
 
-func (x *ListPaymentTransactionsRequest) GetEndTime() int64 {
-	if x != nil && x.EndTime != nil {
-		return *x.EndTime
+func (x *ListPaymentTransactionsRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
 	}
-	return 0
+	return nil
 }
 
 func (x *ListPaymentTransactionsRequest) GetUserIds() []int64 {
@@ -398,12 +398,12 @@ var File_backoffice_service_v1_backoffice_payment_proto protoreflect.FileDescrip
 
 const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe5\x03\n" +
+	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9d\x04\n" +
 	"\x1eListPaymentTransactionsRequest\x12!\n" +
-	"\foperator_ids\x18\x01 \x03(\x03R\voperatorIds\x12\"\n" +
+	"\foperator_ids\x18\x01 \x03(\x03R\voperatorIds\x12>\n" +
 	"\n" +
-	"start_time\x18\x02 \x01(\x03H\x00R\tstartTime\x88\x01\x01\x12\x1e\n" +
-	"\bend_time\x18\x03 \x01(\x03H\x01R\aendTime\x88\x01\x01\x12\x19\n" +
+	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01\x12\x19\n" +
 	"\buser_ids\x18\x04 \x03(\x03R\auserIds\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
@@ -473,14 +473,16 @@ var file_backoffice_service_v1_backoffice_payment_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),                              // 3: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_payment_proto_depIdxs = []int32{
-	2, // 0: api.backoffice.service.v1.ListPaymentTransactionsResponse.payment_transactions:type_name -> api.backoffice.service.v1.ListPaymentTransactionsResponse.PaymentTransaction
-	3, // 1: api.backoffice.service.v1.ListPaymentTransactionsResponse.PaymentTransaction.created_at:type_name -> google.protobuf.Timestamp
-	3, // 2: api.backoffice.service.v1.ListPaymentTransactionsResponse.PaymentTransaction.updated_at:type_name -> google.protobuf.Timestamp
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	3, // 0: api.backoffice.service.v1.ListPaymentTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	3, // 1: api.backoffice.service.v1.ListPaymentTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	2, // 2: api.backoffice.service.v1.ListPaymentTransactionsResponse.payment_transactions:type_name -> api.backoffice.service.v1.ListPaymentTransactionsResponse.PaymentTransaction
+	3, // 3: api.backoffice.service.v1.ListPaymentTransactionsResponse.PaymentTransaction.created_at:type_name -> google.protobuf.Timestamp
+	3, // 4: api.backoffice.service.v1.ListPaymentTransactionsResponse.PaymentTransaction.updated_at:type_name -> google.protobuf.Timestamp
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_payment_proto_init() }
