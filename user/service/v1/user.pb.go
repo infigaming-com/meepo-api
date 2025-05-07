@@ -215,7 +215,11 @@ type UserInfo struct {
 	// Nickname
 	Nickname string `protobuf:"bytes,9,opt,name=nickname,proto3" json:"nickname,omitempty"`
 	// Avatar
-	Avatar        string `protobuf:"bytes,10,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Avatar string `protobuf:"bytes,10,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	// BanGame
+	BanGame bool `protobuf:"varint,11,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
+	// BanWithdraw
+	BanWithdraw   bool `protobuf:"varint,12,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -318,6 +322,20 @@ func (x *UserInfo) GetAvatar() string {
 		return x.Avatar
 	}
 	return ""
+}
+
+func (x *UserInfo) GetBanGame() bool {
+	if x != nil {
+		return x.BanGame
+	}
+	return false
+}
+
+func (x *UserInfo) GetBanWithdraw() bool {
+	if x != nil {
+		return x.BanWithdraw
+	}
+	return false
 }
 
 // RegisterRequest contains the information needed to register a new user.
@@ -1877,7 +1895,7 @@ var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x96\x02\n" +
+	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xd4\x02\n" +
 	"\bUserInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -1890,7 +1908,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\blastname\x18\b \x01(\tR\blastname\x12\x1a\n" +
 	"\bnickname\x18\t \x01(\tR\bnickname\x12\x16\n" +
 	"\x06avatar\x18\n" +
-	" \x01(\tR\x06avatar\"\x9a\x01\n" +
+	" \x01(\tR\x06avatar\x12\x19\n" +
+	"\bban_game\x18\v \x01(\bR\abanGame\x12!\n" +
+	"\fban_withdraw\x18\f \x01(\bR\vbanWithdraw\"\x9a\x01\n" +
 	"\x0fRegisterRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +

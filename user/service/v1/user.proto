@@ -170,6 +170,10 @@ message UserInfo {
 	string nickname = 9;
 	// Avatar
 	string avatar = 10;
+	// BanGame
+	bool ban_game = 11;
+	// BanWithdraw
+	bool ban_withdraw = 12;
 }
 
 // AuthType defines the type of authentication method.
