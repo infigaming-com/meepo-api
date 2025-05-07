@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// System related messages
+message GetOverviewDashboardRequest {}
+
+message GetOverviewDashboardResponse {
+	message RegisteredUsers {
+		int64 today = 1;
+		int64 yesterday = 2;
+	}
+	message FirstDepositUsers {
+		int64 today = 1;
+		int64 yesterday = 2;
+	}
+	message GGR {
+		int64 today = 1;
+		int64 yesterday = 2;
+	}
+	message NGR {
+		int64 today = 1;
+		int64 yesterday = 2;
+	}
+	message DepositAmount {
+		int64 today = 1;
+		int64 yesterday = 2;
+	}
+	message WithdrawalAmount {
+		int64 today = 1;
+		int64 yesterday = 2;
+	}
+	message DepositMinusWithdrawalAmount {
+		int64 today = 1;
+		int64 yesterday = 2;
+	}
+	message ActiveUsers {
+		int64 today = 1;
+		int64 yesterday = 2;
+	}
+	message ActiveDevices {
+		int64 today = 1;
+		int64 yesterday = 2;
+	}
+	RegisteredUsers registered_users = 1;
+	FirstDepositUsers first_deposit_users = 2;
+	GGR ggr = 3;
+	NGR ngr = 4;
+	DepositAmount deposit_amount = 5;
+	WithdrawalAmount withdrawal_amount = 6;
+	DepositMinusWithdrawalAmount deposit_minus_withdrawal_amount = 7;
+	ActiveUsers active_users = 8;
+	ActiveDevices active_devices = 9;
+}
+
+message GetTimeRangedDashboardRequest {
+	enum TimeRangeType {
+		TIME_RANGE_TYPE_UNSPECIFIED = 0;
+		TIME_RANGE_TYPE_THIS_MONTH = 1;
+		TIME_RANGE_TYPE_THIS_WEEK = 2;
+		TIME_RANGE_TYPE_CUSTOM_DAYS = 3;	// works with custom_days for time range within any days
+	}
+
+	TimeRangeType time_range_type = 1;
+	int32 custom_days = 2;
+}
+
+message GetTimeRangedDashboardResponse {
+	message GameData {
+		int64 ggr = 1;
+		int64 ngr = 2;
+		int64 deposit = 3;
+	}
+	message PaymentData {
+		int64 withdrawal = 1;
+		int64 deposit_minus_withdrawal = 2;
+	}
+	message ActiveUsersData {
+		int64 active_users = 1;
+	}
+	message Data {
+		GameData game_data = 1;
+		PaymentData payment_data = 2;
+		ActiveUsersData active_users_data = 3;
+	}
+	repeated Data data = 1;
+}
+
+message GetTopPaymentUsersDashboardRequest {
+	enum TimeRangeType {
+		TIME_RANGE_TYPE_UNSPECIFIED = 0;
+		TIME_RANGE_TYPE_TODAY = 1;
+		TIME_RANGE_TYPE_THIS_WEEK = 2;
+		TIME_RANGE_TYPE_THIS_MONTH = 3;
+	}
+	TimeRangeType time_range_type = 1;
+}
+
+message GetTopPaymentUsersDashboardResponse {
+	message User {
+		string user_id = 1;
+		string avatar = 2;
+		string country = 3;
+		int64 vip_level = 4;
+		double amount = 5;
+		string operator = 6;
+	}
+	repeated User top_deposit_users = 1;
+	repeated User top_withdrawal_users = 2;
+}
+
+message GetTopOperatorsDashboardRequest {
+	enum TimeRangeType {
+		TIME_RANGE_TYPE_UNSPECIFIED = 0;
+		TIME_RANGE_TYPE_TODAY = 1;
+		TIME_RANGE_TYPE_THIS_WEEK = 2;
+		TIME_RANGE_TYPE_THIS_MONTH = 3;
+	}
+	TimeRangeType time_range_type = 1;
+}
+
+message GetTopOperatorsDashboardResponse {
+	message OperatorData {
+		string operator = 1;
+		int64 amount = 2;
+	}
+	repeated OperatorData top_ggr_operators = 1;
+	repeated OperatorData top_ngr_operators = 2;
+	repeated OperatorData top_deposit_minus_withdraw_operators = 3;
+	repeated OperatorData top_ggr_group_operators = 4;
+	repeated OperatorData top_ngr_group_operators = 5;
+	repeated OperatorData top_deposit_minus_withdraw_group_operators = 6;
+	repeated OperatorData top_ggr_retailer_operators = 7;
+	repeated OperatorData top_ngr_retailer_operators = 8;
+	repeated OperatorData top_deposit_minus_withdraw_retailer_operators = 9;
+}

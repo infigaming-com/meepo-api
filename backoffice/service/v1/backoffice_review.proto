@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// !! move to payment
+// message ListWithdrawalTransactionsRequest {
+// 	optional int64 operator_id = 1;
+// 	optional int64 start_time = 2;
+// 	optional int64 end_time = 3;
+// 	optional int64 user_id = 4;
+// 	optional string currency = 5;
+// 	optional string payment_channel = 6;
+// 	optional string protocol = 7;
+// 	optional int64 min_deposit = 8;
+// 	optional int64 max_deposit = 9;
+// 	optional int64 page = 10;
+// 	optional int64 page_size = 11;
+// }
+
+// message ListWithdrawalTransactionsResponse {
+// 	message WithdrawalTransaction {
+// 		string operator = 1;
+// 		google.protobuf.Timestamp created_at = 2;
+// 		google.protobuf.Timestamp updated_at = 3;
+// 		int64 user_id = 4;
+// 		int32 vip_level = 5;
+// 		string amount = 6;
+// 		string before_balance = 7;
+// 		string after_balance = 8;
+// 		string currency = 9;
+// 		string payment_channel = 10;
+// 		string protocol = 11;
+// 		string status = 12;
+// 		int64 transaction_id = 13;
+// 		string payment_gateway_transaction_id = 14;
+// 		google.protobuf.Timestamp settled_at = 15;
+// 	}
+// 	repeated WithdrawalTransaction withdrawal_transactions = 1;
+// 	int64 page = 2;
+// 	int64 page_size = 3;
+// 	int64 total = 4;
+// 	int64 tatal_successful = 5;
+// 	int64 total_paying = 6;
+// 	int64 total_rejected = 7;
+// 	int64 total_failed = 8;
+// 	int64 total_pending = 9;	// ?? what is pending status
+// }
+
+message ListWithdrawReviewTicketsRequest {
+	optional int64 operator_id = 1;
+	optional int64 user_id = 2;
+	optional int64 review_ticket_id = 3;
+	optional string currency = 4;
+	optional string status = 5;
+	optional int64 start_time = 6;
+	optional int64 end_time = 7;
+	optional int64 page = 8;
+	optional int64 page_size = 9;
+}
+
+message ListWithdrawReviewTicketsResponse {
+	message WithdrawReviewTicket {
+		google.protobuf.Timestamp created_at = 1;
+		string operator = 2;
+		int64 review_ticket_id = 3;
+		string category = 4;	// ?? what is category
+		int32 vip_level = 5;
+		repeated string user_tags = 6;
+		int64 before_balance = 7;
+		int64 after_balance = 8;
+		string currency = 9;
+		string payment_channel = 10;
+		string protocol = 11;
+		string fee = 12;
+	}
+	repeated WithdrawReviewTicket withdraw_review_tickets = 1;
+	int64 page = 2;
+	int64 page_size = 3;
+	int64 total = 4;
+	int64 total_pending = 5;
+	int64 total_paying = 6;
+	int64 total_paid = 7;
+	int64 total_failed = 8;
+	int64 total_rejected = 9;
+	int64 average_review_time = 10;
+}
+
+message ReviewTicketRequest {
+	int64 review_ticket_id = 1;
+	int64 reviewer_user_id = 2;
+	string review_action = 3;
+	string review_comment = 4;
+}
+
+message ReviewTicketResponse {}
