@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+message GetWalletsRequest {
+	int64 user_id = 1;
+	repeated string currencies = 2;
+}
+
+message GetWalletsResponse {
+	message TotalAssets {
+		int64 balance = 1;
+		int64 deposit = 2;
+		int64 withdraw = 3;
+		int64 deposit_minus_withdraw = 4;
+		int64 valid_turnover = 5;
+	}
+	message Credit {
+		google.protobuf.Timestamp created_at = 1;
+		int64 transaction_id = 2;
+		int64 cash = 3;
+		int64 bonus = 4;
+		int64 turnover_threshold = 5;
+		int64 turnover = 6;
+		int64 cash_turnover = 7;
+		int64 bonus_turnover = 8;
+	}
+	message Wallet {
+		string currency = 1;
+		int64 cash = 2;
+		int64 bonus = 3;
+		int64 turnover_threshold = 4;
+		int64 turnover = 5;
+		int64 cash_turnover = 6;
+		int64 bonus_turnover = 7;
+		repeated Credit credits = 8;
+	}
+	TotalAssets total_assets = 1;
+	repeated Wallet wallets = 2;
+}
+
+message GetWalletCreditTransactionsRequest {
+	int64 credit_id = 1;
+	optional int64 page = 2;
+	optional int64 page_size = 3;
+}
+
+message GetWalletCreditTransactionsResponse {
+	message CreditTransaction {
+		string type = 1;
+		google.protobuf.Timestamp created_at = 2;
+		int64 cash = 3;
+		int64 bonus = 4;
+	}
+	repeated CreditTransaction credit_transactions = 1;
+	int64 page = 2;
+	int64 page_size = 3;
+	int64 total = 4;
+}
+
+message UpdateWalletRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	optional bool enabled = 3;
+}
+
+message UpdateWalletResponse {}

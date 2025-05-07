@@ -30,9 +30,10 @@ message GetPaymentMethodListResponse {
 
 // Request to create a payment channel
 message CreatePaymentChannelRequest {
-  string operator_id = 1 [json_name="operatorId"];
+  string merchant_id = 1 [json_name="merchantId"];
   string payment_method_id = 2 [json_name="paymentMethodId"];
-  google.protobuf.Struct key = 3; // Stores configuration fields for the payment channel
+  string type = 3;
+  google.protobuf.Struct key = 4; // Stores configuration fields for the payment channel
 }
 
 // Response for channel creation
@@ -48,9 +49,24 @@ message GetPaymentChannelListRequest {
 // Payment channel information
 message PaymentChannelInfo {
   string channel_id = 1 [json_name="channelId"];
-  string operator_id = 2 [json_name="operatorId"];
-  string payment_method = 3 [json_name="paymentMethod"];
-  string tag = 4;
+  string type = 2;
+  string category = 3;
+  string operator_id = 4 [json_name="operatorId"];
+  string payment_method = 5 [json_name="paymentMethod"];
+  string tag = 6;
+  string name = 7;
+  string payment_method_id = 8 [json_name="paymentMethodId"];
+  string currency = 9;
+  string country = 10;
+  string method = 11;
+  string logo = 12;
+  int64 min_deposit_amount = 13 [json_name="minDepositAmount"];
+  int64 max_deposit_amount = 14 [json_name="maxDepositAmount"];
+  int64 min_withdraw_amount = 15 [json_name="minWithdrawAmount"];
+  int64 max_withdraw_amount = 16 [json_name="maxWithdrawAmount"];
+  int32 eat = 17;
+  google.protobuf.Struct deposit_schema = 18 [json_name="depositSchema"];
+  google.protobuf.Struct withdraw_schema = 19 [json_name="withdrawSchema"];
 }
 
 // Response for payment channel list
@@ -60,11 +76,10 @@ message GetPaymentChannelListResponse {
 
 // Request to initiate a deposit
 message InitiateDepositRequest {
-  int64 user_id = 1 [json_name="userId"];
-  int64 amount = 2;
-  string currency = 3;
-  string channel_id = 4 [json_name="channelId"];
-  google.protobuf.Struct extra = 5; // Stores additional information like clientOrderId, productId, etc.
+  int64 amount = 1;
+  string currency = 2;
+  string channel_id = 3 [json_name="channelId"];
+  google.protobuf.Struct extra = 4; // Stores additional information like clientOrderId, productId, etc.
 }
 
 // Response for deposit initiation
@@ -81,20 +96,9 @@ message InitiateDepositResponse {
 
 // Request to initiate a withdrawal
 message InitiateWithdrawRequest {
-  int64 user_id = 1 [json_name="userId"];
-  int64 amount = 2;
-  string operator_order_no = 3 [json_name="operatorOrderNo"];
-  string bank_account = 4 [json_name="bankAccount"];
-  string bank_account_name = 5 [json_name="bankAccountName"];
-  string bank_account_mobile = 6 [json_name="bankAccountMobile"];
-  string bank_name = 7 [json_name="bankName"];
-  string bank_code = 8 [json_name="bankCode"];
-  string bank_branch = 9 [json_name="bankBranch"];
-  string bank_id = 10 [json_name="bankId"];
-  string bank_ifsc = 11 [json_name="bankIfsc"];
-  string bank_nation = 12 [json_name="bankNation"];
-  string channel = 13;
-  google.protobuf.Struct extra = 14; // Stores additional information like clientId, note, etc.
+  int64 amount = 1;
+  string channel_id = 2 [json_name="channelId"];
+  google.protobuf.Struct extra = 3; // Stores additional information like clientId, note, etc.
 }
 
 // Response for withdrawal initiation
@@ -108,12 +112,12 @@ message InitiateWithdrawResponse {
 
 // Request for deposit callback
 message DepositCallbackRequest {
-  string transactionNo = 1 [json_name="transactionNo"];
-  string gatewayOrderNo = 2 [json_name="gatewayOrderNo"];
-  string operatorOrderNo = 3 [json_name="operatorOrderNo"];
-  string orderStatus = 4 [json_name="orderStatus"];
-  string payTime = 5 [json_name="payTime"];
-  string createTime = 6 [json_name="createTime"];
+  int64 pa_transaction_no = 1 [json_name="transactionNo"];
+  string gateway_order_no = 2 [json_name="gatewayOrderNo"];
+  int64 transaction_no = 3 [json_name="operatorOrderNo"];
+  string order_status = 4 [json_name="orderStatus"];
+  string pay_time = 5 [json_name="payTime"];
+  string create_time = 6 [json_name="createTime"];
   int64 amount = 7;
   int64 money = 8;
   string sign = 9 [json_name="sign"]; // HMAC-SHA256签名，用于验证请求的合法性
@@ -123,7 +127,30 @@ message DepositCallbackRequest {
 
 // Response for deposit callback
 message DepositCallbackResponse {
-  int64 transaction_id = 1 [json_name="transactionId"];
+  bool success = 1;
+  string message = 2; // 可选的消息，失败时返回错误原因
+}
+
+// Request for withdraw callback
+message WithdrawCallbackRequest {
+  int64 pa_transaction_no = 1 [json_name="transactionNo"]; // Operator order number
+  string gateway_order_no = 2 [json_name="gatewayOrderNo"]; // Gateway order number
+  int64 transaction_no = 3 [json_name="operatorOrderNo"]; // Operator order number
+  string order_status = 4 [json_name="orderStatus"]; // Order status
+  string pay_time = 5 [json_name="payTime"]; // Transaction time. Format: yyyy-MM-dd HH:mm:ss
+  string create_time = 6 [json_name="createTime"]; // Creation time. Format: yyyy-MM-dd HH:mm:ss
+  int64 amount = 7; // Order amount
+  int64 fee = 8; // Service fee
+  int64 real_money = 9 [json_name="realMoney"]; // Actual withdrawal amount
+  string sign = 10 [json_name="sign"]; // HMAC-SHA256签名，用于验证请求的合法性
+  string timestamp = 11 [json_name="timestamp"]; // 请求时间戳，用于防止重放攻击
+  string nonce = 12 [json_name="nonce"]; // 随机字符串，确保每次请求的唯一性
+}
+
+// Response for withdraw callback
+message WithdrawCallbackResponse {
+  bool success = 1;
+  string message = 2; // 可选的消息，失败时返回错误原因
 }
 
 // Transaction type enum
@@ -139,6 +166,18 @@ enum TransactionStatus {
   TRANSACTION_STATUS_PROCESSING = 1;
   TRANSACTION_STATUS_SUCCESSFUL = 2;
   TRANSACTION_STATUS_FAILED = 3;
+}
+
+// Sort enum
+enum Sort {
+  DESC = 0;
+  ASC = 1;
+}
+
+// Channel type enum
+enum ChannelType {
+  CHANNEL_TYPE_DEPOSIT = 0;    // 充值
+  CHANNEL_TYPE_WITHDRAW = 1;   // 提现
 }
 
 // Transaction information
@@ -161,23 +200,56 @@ message GetTransactionPageRequest {
   int32 page_size = 2 [json_name="pageSize"];
   
   // Filter parameters (all optional)
-  int64 user_id = 3 [json_name="userId"];
   // Optional transaction type filter
-  TransactionType type = 4;
+  TransactionType type = 3;
   // Optional currency filter
-  string currency = 5;
+  string currency = 4;
   // Optional status filter
-  TransactionStatus status = 6;
+  TransactionStatus status = 5;
   // Optional date range filter
-  google.protobuf.Timestamp start_time = 7 [json_name="startTime"];
-  google.protobuf.Timestamp end_time = 8 [json_name="endTime"];
+  google.protobuf.Timestamp start_time = 6 [json_name="startTime"];
+  google.protobuf.Timestamp end_time = 7 [json_name="endTime"];
   // Optional payment method filter
-  string payment_method = 9 [json_name="paymentMethod"];
+  string payment_method = 8 [json_name="paymentMethod"];
+  // Optional sort
+  Sort sort = 9 [json_name="sort"];
 }
 
 // Response for transaction page
 message GetTransactionPageResponse {
   repeated TransactionInfo transactions = 1;
+  int32 total_count = 2 [json_name="totalCount"];
+  int32 page = 3;
+  int32 page_size = 4 [json_name="pageSize"];
+  int32 total_pages = 5 [json_name="totalPages"];
+}
+
+// Request to get payment channel page
+message GetPaymentChannelPageRequest {
+  // Pagination parameters
+  int32 page = 1;
+  int32 page_size = 2 [json_name="pageSize"];
+  
+  // Filter parameters (all optional)
+  // Optional operator id filter
+  string operator_id = 3 [json_name="operatorId"];
+  // Optional type filter
+  ChannelType type = 4;
+  // Optional category filter
+  string category = 5;
+  // Optional payment method filter
+  string payment_method = 6 [json_name="paymentMethod"];
+  // Optional currency filter
+  string currency = 7;
+  // Optional country filter
+  string country = 8;
+  // Optional sort
+  Sort sort = 9 [json_name="sort"];
+}
+
+// Response for payment channel page
+message GetPaymentChannelPageResponse {
+  repeated PaymentChannelInfo payment_channels = 1 [json_name="paymentChannels"];
   int32 total_count = 2 [json_name="totalCount"];
   int32 page = 3;
   int32 page_size = 4 [json_name="pageSize"];
@@ -234,10 +306,27 @@ service Payment {
     };
   }
 
+  // Withdraw callback
+  // This endpoint handles callbacks from payment gateways for withdrawal results.
+  rpc WithdrawCallback(WithdrawCallbackRequest) returns (WithdrawCallbackResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/withdraw/callback"
+      body: "*"
+    };
+  }
+
   // Get transaction page with pagination and filters
   rpc GetTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) {
     option (google.api.http) = {
       post: "/v1/payment/transaction/page"
+      body: "*"
+    };
+  }
+
+  // Get payment channel page with pagination and filters
+  rpc GetPaymentChannelPage(GetPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/channel/page"
       body: "*"
     };
   }

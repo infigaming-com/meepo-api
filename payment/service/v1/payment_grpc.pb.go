@@ -25,7 +25,9 @@ const (
 	Payment_InitiateDeposit_FullMethodName       = "/payment.service.v1.Payment/InitiateDeposit"
 	Payment_InitiateWithdraw_FullMethodName      = "/payment.service.v1.Payment/InitiateWithdraw"
 	Payment_DepositCallback_FullMethodName       = "/payment.service.v1.Payment/DepositCallback"
+	Payment_WithdrawCallback_FullMethodName      = "/payment.service.v1.Payment/WithdrawCallback"
 	Payment_GetTransactionPage_FullMethodName    = "/payment.service.v1.Payment/GetTransactionPage"
+	Payment_GetPaymentChannelPage_FullMethodName = "/payment.service.v1.Payment/GetPaymentChannelPage"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -45,8 +47,13 @@ type PaymentClient interface {
 	// Deposit callback
 	// This endpoint handles callbacks from payment gateways.
 	DepositCallback(ctx context.Context, in *DepositCallbackRequest, opts ...grpc.CallOption) (*DepositCallbackResponse, error)
+	// Withdraw callback
+	// This endpoint handles callbacks from payment gateways for withdrawal results.
+	WithdrawCallback(ctx context.Context, in *WithdrawCallbackRequest, opts ...grpc.CallOption) (*WithdrawCallbackResponse, error)
 	// Get transaction page with pagination and filters
 	GetTransactionPage(ctx context.Context, in *GetTransactionPageRequest, opts ...grpc.CallOption) (*GetTransactionPageResponse, error)
+	// Get payment channel page with pagination and filters
+	GetPaymentChannelPage(ctx context.Context, in *GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*GetPaymentChannelPageResponse, error)
 }
 
 type paymentClient struct {
@@ -117,10 +124,30 @@ func (c *paymentClient) DepositCallback(ctx context.Context, in *DepositCallback
 	return out, nil
 }
 
+func (c *paymentClient) WithdrawCallback(ctx context.Context, in *WithdrawCallbackRequest, opts ...grpc.CallOption) (*WithdrawCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WithdrawCallbackResponse)
+	err := c.cc.Invoke(ctx, Payment_WithdrawCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *paymentClient) GetTransactionPage(ctx context.Context, in *GetTransactionPageRequest, opts ...grpc.CallOption) (*GetTransactionPageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTransactionPageResponse)
 	err := c.cc.Invoke(ctx, Payment_GetTransactionPage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetPaymentChannelPage(ctx context.Context, in *GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*GetPaymentChannelPageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPaymentChannelPageResponse)
+	err := c.cc.Invoke(ctx, Payment_GetPaymentChannelPage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -144,8 +171,13 @@ type PaymentServer interface {
 	// Deposit callback
 	// This endpoint handles callbacks from payment gateways.
 	DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error)
+	// Withdraw callback
+	// This endpoint handles callbacks from payment gateways for withdrawal results.
+	WithdrawCallback(context.Context, *WithdrawCallbackRequest) (*WithdrawCallbackResponse, error)
 	// Get transaction page with pagination and filters
 	GetTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error)
+	// Get payment channel page with pagination and filters
+	GetPaymentChannelPage(context.Context, *GetPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -174,8 +206,14 @@ func (UnimplementedPaymentServer) InitiateWithdraw(context.Context, *InitiateWit
 func (UnimplementedPaymentServer) DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DepositCallback not implemented")
 }
+func (UnimplementedPaymentServer) WithdrawCallback(context.Context, *WithdrawCallbackRequest) (*WithdrawCallbackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method WithdrawCallback not implemented")
+}
 func (UnimplementedPaymentServer) GetTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionPage not implemented")
+}
+func (UnimplementedPaymentServer) GetPaymentChannelPage(context.Context, *GetPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentChannelPage not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -306,6 +344,24 @@ func _Payment_DepositCallback_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_WithdrawCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WithdrawCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).WithdrawCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_WithdrawCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).WithdrawCallback(ctx, req.(*WithdrawCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Payment_GetTransactionPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTransactionPageRequest)
 	if err := dec(in); err != nil {
@@ -320,6 +376,24 @@ func _Payment_GetTransactionPage_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentServer).GetTransactionPage(ctx, req.(*GetTransactionPageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetPaymentChannelPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPaymentChannelPageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetPaymentChannelPage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetPaymentChannelPage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetPaymentChannelPage(ctx, req.(*GetPaymentChannelPageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -356,8 +430,16 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Payment_DepositCallback_Handler,
 		},
 		{
+			MethodName: "WithdrawCallback",
+			Handler:    _Payment_WithdrawCallback_Handler,
+		},
+		{
 			MethodName: "GetTransactionPage",
 			Handler:    _Payment_GetTransactionPage_Handler,
+		},
+		{
+			MethodName: "GetPaymentChannelPage",
+			Handler:    _Payment_GetPaymentChannelPage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

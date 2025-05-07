@@ -1177,7 +1177,7 @@ func (x *GetOperatorTagConfigRequest) GetOperatorId() int64 {
 // GetOperatorTagConfigResponse contains the tag configuration settings, now only follow_parent flag.
 type GetOperatorTagConfigResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Whether the operator should follow parent tags.
+	// Whether the operator should follow parent operator's tags.
 	FollowParent  bool `protobuf:"varint,1,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1224,7 +1224,9 @@ func (x *GetOperatorTagConfigResponse) GetFollowParent() bool {
 type SetOperatorTagConfigRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The ID of the operator to set tag configuration for.
-	OperatorId    int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	// Whether to follow parent operator's tags.
+	FollowParent  bool `protobuf:"varint,2,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1264,6 +1266,13 @@ func (x *SetOperatorTagConfigRequest) GetOperatorId() int64 {
 		return x.OperatorId
 	}
 	return 0
+}
+
+func (x *SetOperatorTagConfigRequest) GetFollowParent() bool {
+	if x != nil {
+		return x.FollowParent
+	}
+	return false
 }
 
 // SetOperatorTagConfigResponse contains the updated tag configuration, now only follow_parent flag.
@@ -1933,10 +1942,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"C\n" +
 	"\x1cGetOperatorTagConfigResponse\x12#\n" +
-	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\">\n" +
+	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\"c\n" +
 	"\x1bSetOperatorTagConfigRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
-	"operatorId\"C\n" +
+	"operatorId\x12#\n" +
+	"\rfollow_parent\x18\x02 \x01(\bR\ffollowParent\"C\n" +
 	"\x1cSetOperatorTagConfigResponse\x12#\n" +
 	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\"J\n" +
 	"\x15AddOperatorTagRequest\x12\x1f\n" +
