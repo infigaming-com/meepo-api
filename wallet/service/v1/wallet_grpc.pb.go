@@ -29,6 +29,8 @@ const (
 	Wallet_Debit_FullMethodName                        = "/api.wallet.service.v1.Wallet/Debit"
 	Wallet_GameDebit_FullMethodName                    = "/api.wallet.service.v1.Wallet/GameDebit"
 	Wallet_GameCredit_FullMethodName                   = "/api.wallet.service.v1.Wallet/GameCredit"
+	Wallet_GetWallets_FullMethodName                   = "/api.wallet.service.v1.Wallet/GetWallets"
+	Wallet_GetWalletCreditTransactions_FullMethodName  = "/api.wallet.service.v1.Wallet/GetWalletCreditTransactions"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -47,6 +49,8 @@ type WalletClient interface {
 	Debit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*DebitResponse, error)
 	GameDebit(ctx context.Context, in *GameDebitRequest, opts ...grpc.CallOption) (*GameDebitResponse, error)
 	GameCredit(ctx context.Context, in *GameCreditRequest, opts ...grpc.CallOption) (*GameCreditResponse, error)
+	GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...grpc.CallOption) (*GetWalletsResponse, error)
+	GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...grpc.CallOption) (*GetWalletCreditTransactionsResponse, error)
 }
 
 type walletClient struct {
@@ -157,6 +161,26 @@ func (c *walletClient) GameCredit(ctx context.Context, in *GameCreditRequest, op
 	return out, nil
 }
 
+func (c *walletClient) GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...grpc.CallOption) (*GetWalletsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWalletsResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetWallets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...grpc.CallOption) (*GetWalletCreditTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWalletCreditTransactionsResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetWalletCreditTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -173,6 +197,8 @@ type WalletServer interface {
 	Debit(context.Context, *DebitRequest) (*DebitResponse, error)
 	GameDebit(context.Context, *GameDebitRequest) (*GameDebitResponse, error)
 	GameCredit(context.Context, *GameCreditRequest) (*GameCreditResponse, error)
+	GetWallets(context.Context, *GetWalletsRequest) (*GetWalletsResponse, error)
+	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -212,6 +238,12 @@ func (UnimplementedWalletServer) GameDebit(context.Context, *GameDebitRequest) (
 }
 func (UnimplementedWalletServer) GameCredit(context.Context, *GameCreditRequest) (*GameCreditResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GameCredit not implemented")
+}
+func (UnimplementedWalletServer) GetWallets(context.Context, *GetWalletsRequest) (*GetWalletsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWallets not implemented")
+}
+func (UnimplementedWalletServer) GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWalletCreditTransactions not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -414,6 +446,42 @@ func _Wallet_GameCredit_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_GetWallets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWalletsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetWallets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetWallets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetWallets(ctx, req.(*GetWalletsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetWalletCreditTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWalletCreditTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetWalletCreditTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetWalletCreditTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetWalletCreditTransactions(ctx, req.(*GetWalletCreditTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -460,6 +528,14 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GameCredit",
 			Handler:    _Wallet_GameCredit_Handler,
+		},
+		{
+			MethodName: "GetWallets",
+			Handler:    _Wallet_GetWallets_Handler,
+		},
+		{
+			MethodName: "GetWalletCreditTransactions",
+			Handler:    _Wallet_GetWalletCreditTransactions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

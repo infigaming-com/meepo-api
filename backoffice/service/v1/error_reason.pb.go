@@ -25,16 +25,19 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED ErrorReason = 0
+	ErrorReason_UNSPECIFIED                ErrorReason = 0
+	ErrorReason_CALL_WALLET_SERVICE_FAILED ErrorReason = 60000
 )
 
 // Enum value maps for ErrorReason.
 var (
 	ErrorReason_name = map[int32]string{
-		0: "UNSPECIFIED",
+		0:     "UNSPECIFIED",
+		60000: "CALL_WALLET_SERVICE_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED": 0,
+		"UNSPECIFIED":                0,
+		"CALL_WALLET_SERVICE_FAILED": 60000,
 	}
 )
 
@@ -69,9 +72,10 @@ var File_backoffice_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"(backoffice/service/v1/error_reason.proto\x12\x19api.backoffice.service.v1\x1a\x13errors/errors.proto*$\n" +
+	"(backoffice/service/v1/error_reason.proto\x12\x19api.backoffice.service.v1\x1a\x13errors/errors.proto*F\n" +
 	"\vErrorReason\x12\x0f\n" +
-	"\vUNSPECIFIED\x10\x00\x1a\x04\xa0E\xf4\x03B[\n" +
+	"\vUNSPECIFIED\x10\x00\x12 \n" +
+	"\x1aCALL_WALLET_SERVICE_FAILED\x10\xe0\xd4\x03\x1a\x04\xa0E\xf4\x03B[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

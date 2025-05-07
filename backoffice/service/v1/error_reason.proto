@@ -12,5 +12,5 @@ enum ErrorReason {
   option (errors.default_code) = 500;
 
   UNSPECIFIED = 0;
-  
+  CALL_WALLET_SERVICE_FAILED = 60000;
 }
