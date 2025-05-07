@@ -19,8 +19,8 @@ message GetSummaryRequest {
 	repeated int64 retailer_operator_ids = 2;
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
-	optional int64 start_time = 5;
-	optional int64 end_time = 6;
+	optional google.protobuf.Timestamp start_time = 5;
+	optional google.protobuf.Timestamp end_time = 6;
 	repeated string affiliate_codes = 7;
 	repeated string referral_codes = 8;
 	repeated string registration_countries = 9;
@@ -53,8 +53,8 @@ message ListDailySummariesRequest {
 	repeated int64 retailer_operator_ids = 2;
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
-	optional int64 start_time = 5;
-	optional int64 end_time = 6;
+	optional google.protobuf.Timestamp start_time = 5;
+	optional google.protobuf.Timestamp end_time = 6;
 	repeated string affiliate_codes = 7;
 	repeated string referral_codes = 8;
 	repeated string registration_countries = 9;
@@ -129,8 +129,8 @@ message GetGameDataSummaryRequest {
 	repeated string game_types = 6;
 	repeated string game_names = 7;
 	repeated string game_ids = 8;
-	optional int64 start_time = 9;
-	optional int64 end_time = 10;
+	optional google.protobuf.Timestamp start_time = 9;
+	optional google.protobuf.Timestamp end_time = 10;
 }
 
 message GetGameDataSummaryResponse {
@@ -157,8 +157,8 @@ message ListGameDataDailySummariesRequest {
 	repeated string game_types = 6;
 	repeated string game_names = 7;
 	repeated string game_ids = 8;
-	optional int64 start_time = 9;
-	optional int64 end_time = 10;
+	optional google.protobuf.Timestamp start_time = 9;
+	optional google.protobuf.Timestamp end_time = 10;
 }
 
 message ListGameDataDailySummariesResponse {
@@ -201,8 +201,8 @@ message GetPlayerGameDataSummaryRequest {
 	repeated string game_tags = 7;
 	repeated string game_names = 8;
 	repeated string game_ids = 9;
-	optional int64 start_time = 10;
-	optional int64 end_time = 11;
+	optional google.protobuf.Timestamp start_time = 10;
+	optional google.protobuf.Timestamp end_time = 11;
 }
 
 message GetPlayerGameDataSummaryResponse {
@@ -229,8 +229,8 @@ message GetPlayerGameDataDailySummariesRequest {
 	repeated string game_types = 6;
 	repeated string game_names = 7;
 	repeated string game_ids = 8;
-	optional int64 start_time = 9;
-	optional int64 end_time = 10;
+	optional google.protobuf.Timestamp start_time = 9;
+	optional google.protobuf.Timestamp end_time = 10;
 	optional int64 page = 11;
 	optional int64 page_size = 12;
 }
@@ -268,8 +268,8 @@ message ListDepositDailySummariesRequest {
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
 	repeated string currencies = 5;
-	optional int64 start_time = 6;
-	optional int64 end_time = 7;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
 }
 
 message ListDepositDailySummariesResponse {
@@ -294,8 +294,8 @@ message ListDepositDailyDetailsRequest {
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
 	repeated string currencies = 5;
-	optional int64 start_time = 6;
-	optional int64 end_time = 7;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
 	optional int64 page = 8;
 	optional int64 page_size = 9;
 }
@@ -326,24 +326,6 @@ message ListDepositDailyDetailsResponse {
 	int64 total = 4;
 }
 
-message ListWithdrawDailyDetailsRequest {
-	enum TimeRange {
-		TIME_RANGE_UNSPECIFIED = 0;
-		TIME_RANGE_TODAY = 1;
-		TIME_RANGE_THIS_WEEK = 2;
-		TIME_RANGE_THIS_MONTH = 3;
-	}
-	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
-	repeated string currencies = 5;
-	optional int64 start_time = 6;
-	optional int64 end_time = 7;
-	optional int64 page = 8;
-	optional int64 page_size = 9;
-}
-
 message ListWithdrawDailySummariesRequest {
 	enum TimeRange {
 		TIME_RANGE_UNSPECIFIED = 0;
@@ -356,8 +338,8 @@ message ListWithdrawDailySummariesRequest {
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
 	repeated string currencies = 5;
-	optional int64 start_time = 6;
-	optional int64 end_time = 7;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
 }
 
 message ListWithdrawDailySummariesResponse {
@@ -368,6 +350,24 @@ message ListWithdrawDailySummariesResponse {
 		int64 withdraw_amount = 4;
 	}
 	repeated DailySummary daily_summaries = 1;
+}
+
+message ListWithdrawDailyDetailsRequest {
+	enum TimeRange {
+		TIME_RANGE_UNSPECIFIED = 0;
+		TIME_RANGE_TODAY = 1;
+		TIME_RANGE_THIS_WEEK = 2;
+		TIME_RANGE_THIS_MONTH = 3;
+	}
+	TimeRange time_range = 1;
+	repeated int64 retailer_operator_ids = 2;
+	repeated int64 group_operator_ids = 3;
+	repeated int64 operator_ids = 4;
+	repeated string currencies = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+	optional int64 page = 8;
+	optional int64 page_size = 9;
 }
 
 message ListWithdrawDailyDetailsResponse {

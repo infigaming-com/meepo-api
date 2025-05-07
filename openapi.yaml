@@ -1832,8 +1832,10 @@ components:
                         type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
         api.backoffice.service.v1.GetGameDataSummaryResponse:
             type: object
             properties:
@@ -2036,8 +2038,10 @@ components:
                         type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
         api.backoffice.service.v1.GetPlayerGameDataSummaryResponse:
             type: object
             properties:
@@ -2079,8 +2083,10 @@ components:
                         type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
                 affiliateCodes:
                     type: array
                     items:
@@ -2262,8 +2268,10 @@ components:
                     type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
                 page:
                     type: string
                 pageSize:
@@ -2585,8 +2593,10 @@ components:
                     type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
                 minBetAmount:
                     type: string
                 maxBetAmount:
@@ -2641,8 +2651,10 @@ components:
                         type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
                 affiliateCodes:
                     type: array
                     items:
@@ -2796,8 +2808,10 @@ components:
                         type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
                 page:
                     type: string
                 pageSize:
@@ -2884,8 +2898,10 @@ components:
                         type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
         api.backoffice.service.v1.ListDepositDailySummariesResponse:
             type: object
             properties:
@@ -2947,8 +2963,10 @@ components:
                         type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
         api.backoffice.service.v1.ListGameDataDailySummariesResponse:
             type: object
             properties:
@@ -3114,8 +3132,10 @@ components:
                         type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
                 userIds:
                     type: array
                     items:
@@ -3226,8 +3246,10 @@ components:
                     type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
                 page:
                     type: string
                 pageSize:
@@ -3257,8 +3279,10 @@ components:
                         type: string
                 registrationStartTime:
                     type: string
+                    format: date-time
                 registrationEndTime:
                     type: string
+                    format: date-time
                 vipLevel:
                     type: string
                 retailerOperatorId:
@@ -3406,8 +3430,10 @@ components:
                         type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
                 page:
                     type: string
                 pageSize:
@@ -3496,8 +3522,10 @@ components:
                         type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
         api.backoffice.service.v1.ListWithdrawDailySummariesResponse:
             type: object
             properties:
@@ -3533,8 +3561,10 @@ components:
                     type: string
                 startTime:
                     type: string
+                    format: date-time
                 endTime:
                     type: string
+                    format: date-time
                 page:
                     type: string
                 pageSize:

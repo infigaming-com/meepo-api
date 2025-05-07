@@ -26,8 +26,8 @@ type ListUsersRequest struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
 	UserId                *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	Tags                  []string               `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"`
-	RegistrationStartTime *int64                 `protobuf:"varint,3,opt,name=registration_start_time,json=registrationStartTime,proto3,oneof" json:"registration_start_time,omitempty"`
-	RegistrationEndTime   *int64                 `protobuf:"varint,4,opt,name=registration_end_time,json=registrationEndTime,proto3,oneof" json:"registration_end_time,omitempty"`
+	RegistrationStartTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=registration_start_time,json=registrationStartTime,proto3,oneof" json:"registration_start_time,omitempty"`
+	RegistrationEndTime   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=registration_end_time,json=registrationEndTime,proto3,oneof" json:"registration_end_time,omitempty"`
 	VipLevel              *int64                 `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3,oneof" json:"vip_level,omitempty"`
 	RetailerOperatorId    *int64                 `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3,oneof" json:"retailer_operator_id,omitempty"`
 	GroupOperatorId       *int64                 `protobuf:"varint,7,opt,name=group_operator_id,json=groupOperatorId,proto3,oneof" json:"group_operator_id,omitempty"`
@@ -95,18 +95,18 @@ func (x *ListUsersRequest) GetTags() []string {
 	return nil
 }
 
-func (x *ListUsersRequest) GetRegistrationStartTime() int64 {
-	if x != nil && x.RegistrationStartTime != nil {
-		return *x.RegistrationStartTime
+func (x *ListUsersRequest) GetRegistrationStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RegistrationStartTime
 	}
-	return 0
+	return nil
 }
 
-func (x *ListUsersRequest) GetRegistrationEndTime() int64 {
-	if x != nil && x.RegistrationEndTime != nil {
-		return *x.RegistrationEndTime
+func (x *ListUsersRequest) GetRegistrationEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RegistrationEndTime
 	}
-	return 0
+	return nil
 }
 
 func (x *ListUsersRequest) GetVipLevel() int64 {
@@ -1898,12 +1898,13 @@ var File_backoffice_service_v1_backoffice_user_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf0\t\n" +
+	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa8\n" +
+	"\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
-	"\x04tags\x18\x02 \x03(\tR\x04tags\x12;\n" +
-	"\x17registration_start_time\x18\x03 \x01(\x03H\x01R\x15registrationStartTime\x88\x01\x01\x127\n" +
-	"\x15registration_end_time\x18\x04 \x01(\x03H\x02R\x13registrationEndTime\x88\x01\x01\x12 \n" +
+	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
+	"\x17registration_start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x15registrationStartTime\x88\x01\x01\x12S\n" +
+	"\x15registration_end_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x13registrationEndTime\x88\x01\x01\x12 \n" +
 	"\tvip_level\x18\x05 \x01(\x03H\x03R\bvipLevel\x88\x01\x01\x125\n" +
 	"\x14retailer_operator_id\x18\x06 \x01(\x03H\x04R\x12retailerOperatorId\x88\x01\x01\x12/\n" +
 	"\x11group_operator_id\x18\a \x01(\x03H\x05R\x0fgroupOperatorId\x88\x01\x01\x12$\n" +
@@ -2130,22 +2131,24 @@ var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),                     // 24: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
-	19, // 0: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
-	20, // 1: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	24, // 2: api.backoffice.service.v1.GetUserOverviewResponse.last_deposit_at:type_name -> google.protobuf.Timestamp
-	21, // 3: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	22, // 4: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	23, // 5: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
-	24, // 6: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	24, // 7: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	24, // 8: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	24, // 9: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	24, // 10: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	24, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	24, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	19, // 2: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
+	20, // 3: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
+	24, // 4: api.backoffice.service.v1.GetUserOverviewResponse.last_deposit_at:type_name -> google.protobuf.Timestamp
+	21, // 5: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
+	22, // 6: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
+	23, // 7: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
+	24, // 8: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	24, // 9: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	24, // 10: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
+	24, // 11: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
+	24, // 12: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_user_proto_init() }

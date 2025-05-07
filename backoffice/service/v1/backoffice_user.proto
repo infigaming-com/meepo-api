@@ -11,8 +11,8 @@ option java_package = "api.backoffice.service.v1";
 message ListUsersRequest {
 	optional int64 user_id = 1;
 	repeated string tags = 2;
-	optional int64 registration_start_time = 3;
-	optional int64 registration_end_time = 4;
+	optional google.protobuf.Timestamp registration_start_time = 3;
+	optional google.protobuf.Timestamp registration_end_time = 4;
 	optional int64 vip_level = 5;
 	optional int64 retailer_operator_id = 6;
 	optional int64 group_operator_id = 7;
