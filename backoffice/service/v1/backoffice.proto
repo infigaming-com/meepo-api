@@ -18,6 +18,8 @@ option java_package = "api.backoffice.service.v1";
 
 // Backoffice service provides system and account management functionality.
 service Backoffice {
+    rpc Event(EventRequest) returns (EventResponse) {}
+    
     // Account
     rpc AddAccount(AddAccountRequest) returns (AddAccountResponse) {
         option (google.api.http) = {
@@ -286,3 +288,10 @@ service Backoffice {
         };
     }
 } 
+
+message EventRequest {
+	string topic = 1;
+	bytes event_data = 2;
+}
+
+message EventResponse {}

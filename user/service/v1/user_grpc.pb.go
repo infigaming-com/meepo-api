@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	User_Event_FullMethodName                       = "/api.user.service.v1.User/Event"
 	User_Register_FullMethodName                    = "/api.user.service.v1.User/Register"
 	User_Login_FullMethodName                       = "/api.user.service.v1.User/Login"
 	User_RegisterOrLoginWithOAuth_FullMethodName    = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
@@ -44,6 +45,7 @@ const (
 //
 // User service provides authentication and user management functionality.
 type UserClient interface {
+	Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error)
 	// Register a new user with password-based authentication.
 	// This endpoint allows users to create a new account using various identity providers.
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*AuthResponse, error)
@@ -94,6 +96,16 @@ type userClient struct {
 
 func NewUserClient(cc grpc.ClientConnInterface) UserClient {
 	return &userClient{cc}
+}
+
+func (c *userClient) Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EventResponse)
+	err := c.cc.Invoke(ctx, User_Event_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *userClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
@@ -272,6 +284,7 @@ func (c *userClient) GetUserTags(ctx context.Context, in *GetUserTagsRequest, op
 //
 // User service provides authentication and user management functionality.
 type UserServer interface {
+	Event(context.Context, *EventRequest) (*EventResponse, error)
 	// Register a new user with password-based authentication.
 	// This endpoint allows users to create a new account using various identity providers.
 	Register(context.Context, *RegisterRequest) (*AuthResponse, error)
@@ -324,6 +337,9 @@ type UserServer interface {
 // pointer dereference when methods are called.
 type UnimplementedUserServer struct{}
 
+func (UnimplementedUserServer) Event(context.Context, *EventRequest) (*EventResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Event not implemented")
+}
 func (UnimplementedUserServer) Register(context.Context, *RegisterRequest) (*AuthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
@@ -394,6 +410,24 @@ func RegisterUserServer(s grpc.ServiceRegistrar, srv UserServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&User_ServiceDesc, srv)
+}
+
+func _User_Event_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).Event(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_Event_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).Event(ctx, req.(*EventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _User_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -709,6 +743,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.user.service.v1.User",
 	HandlerType: (*UserServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Event",
+			Handler:    _User_Event_Handler,
+		},
 		{
 			MethodName: "Register",
 			Handler:    _User_Register_Handler,
