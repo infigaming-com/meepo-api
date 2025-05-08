@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package api.review.service.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/review/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.review.service.v1";
+
+// Review service provides review functionality.
+service Review {
+	rpc CreateWithdraw(CreateWithdrawRequest) returns (CreateWithdrawResponse) {
+		option (google.api.http) = {
+			post: "/v1/review/withdraw"
+			body: "*"
+		};
+	}
+	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {}
+	rpc AddReviewComment(AddReviewCommentRequest) returns (AddReviewCommentResponse) {}
+	rpc ListReviewTickets(ListReviewTicketsRequest) returns (ListReviewTicketsResponse) {}
+	rpc GetReviewTicket(GetReviewTicketRequest) returns (GetReviewTicketResponse) {}
+}
+
+message CreateWithdrawRequest {
+	google.protobuf.Struct request = 1;  // JSON data for REST API
+}
+
+message CreateWithdrawResponse {}
+
+enum ReviewAction {
+	REVIEW_ACTION_UNSPECIFIED = 0;
+	REVIEW_ACTION_APPROVE = 1;
+	REVIEW_ACTION_REJECT = 2;
+	REVIEW_ACTION_MANUAL_PAYOUT = 3;
+}
+
+message ReviewTicketRequest {
+	int64 review_id = 1;
+	int64 reviewer_user_id = 2;
+	ReviewAction action = 3;
+	string review_comment = 4;
+}
+
+message ReviewTicketResponse {}
+
+message AddReviewCommentRequest {
+	int64 review_id = 1;
+	int64 author_user_id = 2;
+	string content = 3;
+}
+
+message AddReviewCommentResponse {}
+
+message ListReviewTicketsRequest {
+	optional int64 user_id = 2;
+	optional int64 operator_id = 3;
+	optional int64 review_ticket_id = 4;
+	optional string currency = 5;
+	optional string status = 6;
+	optional google.protobuf.Timestamp start_time = 7;
+	optional google.protobuf.Timestamp end_time = 8;
+	optional int32 page = 9;
+	optional int32 page_size = 10;
+}
+
+message ListReviewTicketsResponse {}
+
+message GetReviewTicketRequest {
+	int64 review_id = 1;
+}
+
+message ReviewComment {
+	int64 author_user_name = 1;
+	string content = 2;
+	google.protobuf.Timestamp created_at = 3;
+}
+
+message GetReviewTicketResponse {
+	repeated ReviewComment comments = 1;
+}

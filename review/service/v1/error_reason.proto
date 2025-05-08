@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package api.review.service.v1;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/review/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.review.service.v1";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  UNSPECIFIED = 0;
+  CONVERT_STRUCT_TO_JSON_FAILED = 70000;
+  CONVERT_JSON_TO_STRUCT_FAILED = 70001;
+  GET_USER_INFO_FROM_CONTEXT_FAILED = 70002;
+  GENERATE_REVIEW_TICKET_ID_FAILED = 70003;
+  ADD_REVIEW_TICKET_FAILED = 70004;
+  INVALID_REVIEW_ACTION = 70005;
+  INITIATE_WITHDRAW_FAILED = 70006;
+  GET_REVIEW_TICKET_FAILED = 70007;
+  UPDATE_REVIEW_TICKET_FAILED = 70008;
+  ADD_REVIEW_COMMENT_FAILED = 70009;
+  LIST_REVIEW_TICKETS_FAILED = 70010;
+  GET_REVIEW_COMMENTS_FAILED = 70011;
+}

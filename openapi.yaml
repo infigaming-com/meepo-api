@@ -375,6 +375,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawResponse'
+    /v1/review/withdraw:
+        post:
+            tags:
+                - Review
+            operationId: Review_CreateWithdraw
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawResponse'
     /v1/system/currencies/add:
         post:
             tags:
@@ -872,6 +890,14 @@ components:
                     type: boolean
                     description: enabled
         api.operator.service.v1.UpdateOperatorResponse:
+            type: object
+            properties: {}
+        api.review.service.v1.CreateWithdrawRequest:
+            type: object
+            properties:
+                request:
+                    type: object
+        api.review.service.v1.CreateWithdrawResponse:
             type: object
             properties: {}
         api.user.service.v1.AddOperatorTagRequest:
@@ -1929,6 +1955,8 @@ tags:
     - name: Operator
       description: User service provides authentication and user management functionality.
     - name: Payment
+    - name: Review
+      description: Review service provides review functionality.
     - name: System
     - name: User
       description: User service provides authentication and user management functionality.
