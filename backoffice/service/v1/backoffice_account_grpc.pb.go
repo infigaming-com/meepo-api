@@ -19,24 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeAccount_AddAccount_FullMethodName             = "/api.backoffice.service.v1.BackofficeAccount/AddAccount"
-	BackofficeAccount_SendEmailVerification_FullMethodName  = "/api.backoffice.service.v1.BackofficeAccount/SendEmailVerification"
-	BackofficeAccount_VerifyEmail_FullMethodName            = "/api.backoffice.service.v1.BackofficeAccount/VerifyEmail"
-	BackofficeAccount_SendMobileVerification_FullMethodName = "/api.backoffice.service.v1.BackofficeAccount/SendMobileVerification"
-	BackofficeAccount_VerifyMobile_FullMethodName           = "/api.backoffice.service.v1.BackofficeAccount/VerifyMobile"
-	BackofficeAccount_ResetPassword_FullMethodName          = "/api.backoffice.service.v1.BackofficeAccount/ResetPassword"
-	BackofficeAccount_Generate2Fa_FullMethodName            = "/api.backoffice.service.v1.BackofficeAccount/Generate2fa"
-	BackofficeAccount_Bind2Fa_FullMethodName                = "/api.backoffice.service.v1.BackofficeAccount/Bind2fa"
-	BackofficeAccount_Unbind2Fa_FullMethodName              = "/api.backoffice.service.v1.BackofficeAccount/Unbind2fa"
-	BackofficeAccount_UpdateAccount_FullMethodName          = "/api.backoffice.service.v1.BackofficeAccount/UpdateAccount"
+	Backoffice_Account_AddAccount_FullMethodName             = "/api.backoffice.service.v1.Backoffice_Account/AddAccount"
+	Backoffice_Account_SendEmailVerification_FullMethodName  = "/api.backoffice.service.v1.Backoffice_Account/SendEmailVerification"
+	Backoffice_Account_VerifyEmail_FullMethodName            = "/api.backoffice.service.v1.Backoffice_Account/VerifyEmail"
+	Backoffice_Account_SendMobileVerification_FullMethodName = "/api.backoffice.service.v1.Backoffice_Account/SendMobileVerification"
+	Backoffice_Account_VerifyMobile_FullMethodName           = "/api.backoffice.service.v1.Backoffice_Account/VerifyMobile"
+	Backoffice_Account_ResetPassword_FullMethodName          = "/api.backoffice.service.v1.Backoffice_Account/ResetPassword"
+	Backoffice_Account_Generate2Fa_FullMethodName            = "/api.backoffice.service.v1.Backoffice_Account/Generate2fa"
+	Backoffice_Account_Bind2Fa_FullMethodName                = "/api.backoffice.service.v1.Backoffice_Account/Bind2fa"
+	Backoffice_Account_Unbind2Fa_FullMethodName              = "/api.backoffice.service.v1.Backoffice_Account/Unbind2fa"
+	Backoffice_Account_UpdateAccount_FullMethodName          = "/api.backoffice.service.v1.Backoffice_Account/UpdateAccount"
 )
 
-// BackofficeAccountClient is the client API for BackofficeAccount service.
+// Backoffice_AccountClient is the client API for Backoffice_Account service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// Backoffice service provides authentication and user management functionality.
-type BackofficeAccountClient interface {
+type Backoffice_AccountClient interface {
 	AddAccount(ctx context.Context, in *AddAccountRequest, opts ...grpc.CallOption) (*AddAccountResponse, error)
 	SendEmailVerification(ctx context.Context, in *SendEmailVerificationRequest, opts ...grpc.CallOption) (*SendEmailVerificationResponse, error)
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
@@ -49,120 +47,118 @@ type BackofficeAccountClient interface {
 	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error)
 }
 
-type backofficeAccountClient struct {
+type backoffice_AccountClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBackofficeAccountClient(cc grpc.ClientConnInterface) BackofficeAccountClient {
-	return &backofficeAccountClient{cc}
+func NewBackoffice_AccountClient(cc grpc.ClientConnInterface) Backoffice_AccountClient {
+	return &backoffice_AccountClient{cc}
 }
 
-func (c *backofficeAccountClient) AddAccount(ctx context.Context, in *AddAccountRequest, opts ...grpc.CallOption) (*AddAccountResponse, error) {
+func (c *backoffice_AccountClient) AddAccount(ctx context.Context, in *AddAccountRequest, opts ...grpc.CallOption) (*AddAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddAccountResponse)
-	err := c.cc.Invoke(ctx, BackofficeAccount_AddAccount_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Backoffice_Account_AddAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeAccountClient) SendEmailVerification(ctx context.Context, in *SendEmailVerificationRequest, opts ...grpc.CallOption) (*SendEmailVerificationResponse, error) {
+func (c *backoffice_AccountClient) SendEmailVerification(ctx context.Context, in *SendEmailVerificationRequest, opts ...grpc.CallOption) (*SendEmailVerificationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SendEmailVerificationResponse)
-	err := c.cc.Invoke(ctx, BackofficeAccount_SendEmailVerification_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Backoffice_Account_SendEmailVerification_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeAccountClient) VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error) {
+func (c *backoffice_AccountClient) VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VerifyEmailResponse)
-	err := c.cc.Invoke(ctx, BackofficeAccount_VerifyEmail_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Backoffice_Account_VerifyEmail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeAccountClient) SendMobileVerification(ctx context.Context, in *SendMobileVerificationRequest, opts ...grpc.CallOption) (*SendMobileVerificationResponse, error) {
+func (c *backoffice_AccountClient) SendMobileVerification(ctx context.Context, in *SendMobileVerificationRequest, opts ...grpc.CallOption) (*SendMobileVerificationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SendMobileVerificationResponse)
-	err := c.cc.Invoke(ctx, BackofficeAccount_SendMobileVerification_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Backoffice_Account_SendMobileVerification_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeAccountClient) VerifyMobile(ctx context.Context, in *VerifyMobileRequest, opts ...grpc.CallOption) (*VerifyMobileResponse, error) {
+func (c *backoffice_AccountClient) VerifyMobile(ctx context.Context, in *VerifyMobileRequest, opts ...grpc.CallOption) (*VerifyMobileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VerifyMobileResponse)
-	err := c.cc.Invoke(ctx, BackofficeAccount_VerifyMobile_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Backoffice_Account_VerifyMobile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeAccountClient) ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error) {
+func (c *backoffice_AccountClient) ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ResetPasswordResponse)
-	err := c.cc.Invoke(ctx, BackofficeAccount_ResetPassword_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Backoffice_Account_ResetPassword_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeAccountClient) Generate2Fa(ctx context.Context, in *Generate2FaRequest, opts ...grpc.CallOption) (*Generate2FaResponse, error) {
+func (c *backoffice_AccountClient) Generate2Fa(ctx context.Context, in *Generate2FaRequest, opts ...grpc.CallOption) (*Generate2FaResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Generate2FaResponse)
-	err := c.cc.Invoke(ctx, BackofficeAccount_Generate2Fa_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Backoffice_Account_Generate2Fa_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeAccountClient) Bind2Fa(ctx context.Context, in *Bind2FaRequest, opts ...grpc.CallOption) (*Bind2FaResponse, error) {
+func (c *backoffice_AccountClient) Bind2Fa(ctx context.Context, in *Bind2FaRequest, opts ...grpc.CallOption) (*Bind2FaResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Bind2FaResponse)
-	err := c.cc.Invoke(ctx, BackofficeAccount_Bind2Fa_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Backoffice_Account_Bind2Fa_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeAccountClient) Unbind2Fa(ctx context.Context, in *Unbind2FaRequest, opts ...grpc.CallOption) (*Unbind2FaResponse, error) {
+func (c *backoffice_AccountClient) Unbind2Fa(ctx context.Context, in *Unbind2FaRequest, opts ...grpc.CallOption) (*Unbind2FaResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Unbind2FaResponse)
-	err := c.cc.Invoke(ctx, BackofficeAccount_Unbind2Fa_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Backoffice_Account_Unbind2Fa_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeAccountClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error) {
+func (c *backoffice_AccountClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateAccountResponse)
-	err := c.cc.Invoke(ctx, BackofficeAccount_UpdateAccount_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Backoffice_Account_UpdateAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// BackofficeAccountServer is the server API for BackofficeAccount service.
-// All implementations must embed UnimplementedBackofficeAccountServer
+// Backoffice_AccountServer is the server API for Backoffice_Account service.
+// All implementations must embed UnimplementedBackoffice_AccountServer
 // for forward compatibility.
-//
-// Backoffice service provides authentication and user management functionality.
-type BackofficeAccountServer interface {
+type Backoffice_AccountServer interface {
 	AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error)
 	SendEmailVerification(context.Context, *SendEmailVerificationRequest) (*SendEmailVerificationResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
@@ -173,293 +169,293 @@ type BackofficeAccountServer interface {
 	Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error)
 	Unbind2Fa(context.Context, *Unbind2FaRequest) (*Unbind2FaResponse, error)
 	UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error)
-	mustEmbedUnimplementedBackofficeAccountServer()
+	mustEmbedUnimplementedBackoffice_AccountServer()
 }
 
-// UnimplementedBackofficeAccountServer must be embedded to have
+// UnimplementedBackoffice_AccountServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBackofficeAccountServer struct{}
+type UnimplementedBackoffice_AccountServer struct{}
 
-func (UnimplementedBackofficeAccountServer) AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error) {
+func (UnimplementedBackoffice_AccountServer) AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddAccount not implemented")
 }
-func (UnimplementedBackofficeAccountServer) SendEmailVerification(context.Context, *SendEmailVerificationRequest) (*SendEmailVerificationResponse, error) {
+func (UnimplementedBackoffice_AccountServer) SendEmailVerification(context.Context, *SendEmailVerificationRequest) (*SendEmailVerificationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendEmailVerification not implemented")
 }
-func (UnimplementedBackofficeAccountServer) VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error) {
+func (UnimplementedBackoffice_AccountServer) VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyEmail not implemented")
 }
-func (UnimplementedBackofficeAccountServer) SendMobileVerification(context.Context, *SendMobileVerificationRequest) (*SendMobileVerificationResponse, error) {
+func (UnimplementedBackoffice_AccountServer) SendMobileVerification(context.Context, *SendMobileVerificationRequest) (*SendMobileVerificationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendMobileVerification not implemented")
 }
-func (UnimplementedBackofficeAccountServer) VerifyMobile(context.Context, *VerifyMobileRequest) (*VerifyMobileResponse, error) {
+func (UnimplementedBackoffice_AccountServer) VerifyMobile(context.Context, *VerifyMobileRequest) (*VerifyMobileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyMobile not implemented")
 }
-func (UnimplementedBackofficeAccountServer) ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error) {
+func (UnimplementedBackoffice_AccountServer) ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetPassword not implemented")
 }
-func (UnimplementedBackofficeAccountServer) Generate2Fa(context.Context, *Generate2FaRequest) (*Generate2FaResponse, error) {
+func (UnimplementedBackoffice_AccountServer) Generate2Fa(context.Context, *Generate2FaRequest) (*Generate2FaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Generate2Fa not implemented")
 }
-func (UnimplementedBackofficeAccountServer) Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error) {
+func (UnimplementedBackoffice_AccountServer) Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Bind2Fa not implemented")
 }
-func (UnimplementedBackofficeAccountServer) Unbind2Fa(context.Context, *Unbind2FaRequest) (*Unbind2FaResponse, error) {
+func (UnimplementedBackoffice_AccountServer) Unbind2Fa(context.Context, *Unbind2FaRequest) (*Unbind2FaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Unbind2Fa not implemented")
 }
-func (UnimplementedBackofficeAccountServer) UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error) {
+func (UnimplementedBackoffice_AccountServer) UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
 }
-func (UnimplementedBackofficeAccountServer) mustEmbedUnimplementedBackofficeAccountServer() {}
-func (UnimplementedBackofficeAccountServer) testEmbeddedByValue()                           {}
+func (UnimplementedBackoffice_AccountServer) mustEmbedUnimplementedBackoffice_AccountServer() {}
+func (UnimplementedBackoffice_AccountServer) testEmbeddedByValue()                            {}
 
-// UnsafeBackofficeAccountServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BackofficeAccountServer will
+// UnsafeBackoffice_AccountServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to Backoffice_AccountServer will
 // result in compilation errors.
-type UnsafeBackofficeAccountServer interface {
-	mustEmbedUnimplementedBackofficeAccountServer()
+type UnsafeBackoffice_AccountServer interface {
+	mustEmbedUnimplementedBackoffice_AccountServer()
 }
 
-func RegisterBackofficeAccountServer(s grpc.ServiceRegistrar, srv BackofficeAccountServer) {
-	// If the following call pancis, it indicates UnimplementedBackofficeAccountServer was
+func RegisterBackoffice_AccountServer(s grpc.ServiceRegistrar, srv Backoffice_AccountServer) {
+	// If the following call pancis, it indicates UnimplementedBackoffice_AccountServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&BackofficeAccount_ServiceDesc, srv)
+	s.RegisterService(&Backoffice_Account_ServiceDesc, srv)
 }
 
-func _BackofficeAccount_AddAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Backoffice_Account_AddAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeAccountServer).AddAccount(ctx, in)
+		return srv.(Backoffice_AccountServer).AddAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeAccount_AddAccount_FullMethodName,
+		FullMethod: Backoffice_Account_AddAccount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeAccountServer).AddAccount(ctx, req.(*AddAccountRequest))
+		return srv.(Backoffice_AccountServer).AddAccount(ctx, req.(*AddAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeAccount_SendEmailVerification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Backoffice_Account_SendEmailVerification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SendEmailVerificationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeAccountServer).SendEmailVerification(ctx, in)
+		return srv.(Backoffice_AccountServer).SendEmailVerification(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeAccount_SendEmailVerification_FullMethodName,
+		FullMethod: Backoffice_Account_SendEmailVerification_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeAccountServer).SendEmailVerification(ctx, req.(*SendEmailVerificationRequest))
+		return srv.(Backoffice_AccountServer).SendEmailVerification(ctx, req.(*SendEmailVerificationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeAccount_VerifyEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Backoffice_Account_VerifyEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyEmailRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeAccountServer).VerifyEmail(ctx, in)
+		return srv.(Backoffice_AccountServer).VerifyEmail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeAccount_VerifyEmail_FullMethodName,
+		FullMethod: Backoffice_Account_VerifyEmail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeAccountServer).VerifyEmail(ctx, req.(*VerifyEmailRequest))
+		return srv.(Backoffice_AccountServer).VerifyEmail(ctx, req.(*VerifyEmailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeAccount_SendMobileVerification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Backoffice_Account_SendMobileVerification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SendMobileVerificationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeAccountServer).SendMobileVerification(ctx, in)
+		return srv.(Backoffice_AccountServer).SendMobileVerification(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeAccount_SendMobileVerification_FullMethodName,
+		FullMethod: Backoffice_Account_SendMobileVerification_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeAccountServer).SendMobileVerification(ctx, req.(*SendMobileVerificationRequest))
+		return srv.(Backoffice_AccountServer).SendMobileVerification(ctx, req.(*SendMobileVerificationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeAccount_VerifyMobile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Backoffice_Account_VerifyMobile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyMobileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeAccountServer).VerifyMobile(ctx, in)
+		return srv.(Backoffice_AccountServer).VerifyMobile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeAccount_VerifyMobile_FullMethodName,
+		FullMethod: Backoffice_Account_VerifyMobile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeAccountServer).VerifyMobile(ctx, req.(*VerifyMobileRequest))
+		return srv.(Backoffice_AccountServer).VerifyMobile(ctx, req.(*VerifyMobileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeAccount_ResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Backoffice_Account_ResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResetPasswordRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeAccountServer).ResetPassword(ctx, in)
+		return srv.(Backoffice_AccountServer).ResetPassword(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeAccount_ResetPassword_FullMethodName,
+		FullMethod: Backoffice_Account_ResetPassword_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeAccountServer).ResetPassword(ctx, req.(*ResetPasswordRequest))
+		return srv.(Backoffice_AccountServer).ResetPassword(ctx, req.(*ResetPasswordRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeAccount_Generate2Fa_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Backoffice_Account_Generate2Fa_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Generate2FaRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeAccountServer).Generate2Fa(ctx, in)
+		return srv.(Backoffice_AccountServer).Generate2Fa(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeAccount_Generate2Fa_FullMethodName,
+		FullMethod: Backoffice_Account_Generate2Fa_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeAccountServer).Generate2Fa(ctx, req.(*Generate2FaRequest))
+		return srv.(Backoffice_AccountServer).Generate2Fa(ctx, req.(*Generate2FaRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeAccount_Bind2Fa_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Backoffice_Account_Bind2Fa_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Bind2FaRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeAccountServer).Bind2Fa(ctx, in)
+		return srv.(Backoffice_AccountServer).Bind2Fa(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeAccount_Bind2Fa_FullMethodName,
+		FullMethod: Backoffice_Account_Bind2Fa_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeAccountServer).Bind2Fa(ctx, req.(*Bind2FaRequest))
+		return srv.(Backoffice_AccountServer).Bind2Fa(ctx, req.(*Bind2FaRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeAccount_Unbind2Fa_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Backoffice_Account_Unbind2Fa_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Unbind2FaRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeAccountServer).Unbind2Fa(ctx, in)
+		return srv.(Backoffice_AccountServer).Unbind2Fa(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeAccount_Unbind2Fa_FullMethodName,
+		FullMethod: Backoffice_Account_Unbind2Fa_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeAccountServer).Unbind2Fa(ctx, req.(*Unbind2FaRequest))
+		return srv.(Backoffice_AccountServer).Unbind2Fa(ctx, req.(*Unbind2FaRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeAccount_UpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Backoffice_Account_UpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeAccountServer).UpdateAccount(ctx, in)
+		return srv.(Backoffice_AccountServer).UpdateAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeAccount_UpdateAccount_FullMethodName,
+		FullMethod: Backoffice_Account_UpdateAccount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeAccountServer).UpdateAccount(ctx, req.(*UpdateAccountRequest))
+		return srv.(Backoffice_AccountServer).UpdateAccount(ctx, req.(*UpdateAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// BackofficeAccount_ServiceDesc is the grpc.ServiceDesc for BackofficeAccount service.
+// Backoffice_Account_ServiceDesc is the grpc.ServiceDesc for Backoffice_Account service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var BackofficeAccount_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.backoffice.service.v1.BackofficeAccount",
-	HandlerType: (*BackofficeAccountServer)(nil),
+var Backoffice_Account_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.backoffice.service.v1.Backoffice_Account",
+	HandlerType: (*Backoffice_AccountServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "AddAccount",
-			Handler:    _BackofficeAccount_AddAccount_Handler,
+			Handler:    _Backoffice_Account_AddAccount_Handler,
 		},
 		{
 			MethodName: "SendEmailVerification",
-			Handler:    _BackofficeAccount_SendEmailVerification_Handler,
+			Handler:    _Backoffice_Account_SendEmailVerification_Handler,
 		},
 		{
 			MethodName: "VerifyEmail",
-			Handler:    _BackofficeAccount_VerifyEmail_Handler,
+			Handler:    _Backoffice_Account_VerifyEmail_Handler,
 		},
 		{
 			MethodName: "SendMobileVerification",
-			Handler:    _BackofficeAccount_SendMobileVerification_Handler,
+			Handler:    _Backoffice_Account_SendMobileVerification_Handler,
 		},
 		{
 			MethodName: "VerifyMobile",
-			Handler:    _BackofficeAccount_VerifyMobile_Handler,
+			Handler:    _Backoffice_Account_VerifyMobile_Handler,
 		},
 		{
 			MethodName: "ResetPassword",
-			Handler:    _BackofficeAccount_ResetPassword_Handler,
+			Handler:    _Backoffice_Account_ResetPassword_Handler,
 		},
 		{
 			MethodName: "Generate2fa",
-			Handler:    _BackofficeAccount_Generate2Fa_Handler,
+			Handler:    _Backoffice_Account_Generate2Fa_Handler,
 		},
 		{
 			MethodName: "Bind2fa",
-			Handler:    _BackofficeAccount_Bind2Fa_Handler,
+			Handler:    _Backoffice_Account_Bind2Fa_Handler,
 		},
 		{
 			MethodName: "Unbind2fa",
-			Handler:    _BackofficeAccount_Unbind2Fa_Handler,
+			Handler:    _Backoffice_Account_Unbind2Fa_Handler,
 		},
 		{
 			MethodName: "UpdateAccount",
-			Handler:    _BackofficeAccount_UpdateAccount_Handler,
+			Handler:    _Backoffice_Account_UpdateAccount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

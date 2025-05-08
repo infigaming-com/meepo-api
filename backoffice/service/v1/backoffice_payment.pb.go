@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -398,7 +399,7 @@ var File_backoffice_service_v1_backoffice_payment_proto protoreflect.FileDescrip
 
 const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9d\x04\n" +
+	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9d\x04\n" +
 	"\x1eListPaymentTransactionsRequest\x12!\n" +
 	"\foperator_ids\x18\x01 \x03(\x03R\voperatorIds\x12>\n" +
 	"\n" +
@@ -450,7 +451,9 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\bprotocol\x18\f \x01(\tR\bprotocol\x12\x16\n" +
 	"\x06status\x18\r \x01(\tR\x06status\x12%\n" +
 	"\x0etransaction_id\x18\x0e \x01(\x03R\rtransactionId\x12C\n" +
-	"\x1epayment_gateway_transaction_id\x18\x0f \x01(\tR\x1bpaymentGatewayTransactionIdB[\n" +
+	"\x1epayment_gateway_transaction_id\x18\x0f \x01(\tR\x1bpaymentGatewayTransactionId2\xdc\x01\n" +
+	"\x12Backoffice_Payment\x12\xc5\x01\n" +
+	"\x17ListPaymentTransactions\x129.api.backoffice.service.v1.ListPaymentTransactionsRequest\x1a:.api.backoffice.service.v1.ListPaymentTransactionsResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/payment/transactions/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -478,8 +481,10 @@ var file_backoffice_service_v1_backoffice_payment_proto_depIdxs = []int32{
 	2, // 2: api.backoffice.service.v1.ListPaymentTransactionsResponse.payment_transactions:type_name -> api.backoffice.service.v1.ListPaymentTransactionsResponse.PaymentTransaction
 	3, // 3: api.backoffice.service.v1.ListPaymentTransactionsResponse.PaymentTransaction.created_at:type_name -> google.protobuf.Timestamp
 	3, // 4: api.backoffice.service.v1.ListPaymentTransactionsResponse.PaymentTransaction.updated_at:type_name -> google.protobuf.Timestamp
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
+	0, // 5: api.backoffice.service.v1.Backoffice_Payment.ListPaymentTransactions:input_type -> api.backoffice.service.v1.ListPaymentTransactionsRequest
+	1, // 6: api.backoffice.service.v1.Backoffice_Payment.ListPaymentTransactions:output_type -> api.backoffice.service.v1.ListPaymentTransactionsResponse
+	6, // [6:7] is the sub-list for method output_type
+	5, // [5:6] is the sub-list for method input_type
 	5, // [5:5] is the sub-list for extension type_name
 	5, // [5:5] is the sub-list for extension extendee
 	0, // [0:5] is the sub-list for field type_name
@@ -499,7 +504,7 @@ func file_backoffice_service_v1_backoffice_payment_proto_init() {
 			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_backoffice_service_v1_backoffice_payment_proto_goTypes,
 		DependencyIndexes: file_backoffice_service_v1_backoffice_payment_proto_depIdxs,

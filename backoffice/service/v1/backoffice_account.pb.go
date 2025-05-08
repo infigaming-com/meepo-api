@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -858,7 +859,7 @@ var File_backoffice_service_v1_backoffice_account_proto protoreflect.FileDescrip
 
 const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_account.proto\x12\x19api.backoffice.service.v1\"\x8d\x01\n" +
+	".backoffice/service/v1/backoffice_account.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x8d\x01\n" +
 	"\x11AddAccountRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
@@ -895,7 +896,19 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\n" +
 	"\b_enabledB\a\n" +
 	"\x05_role\"\x17\n" +
-	"\x15UpdateAccountResponseB[\n" +
+	"\x15UpdateAccountResponse2\x92\r\n" +
+	"\x12Backoffice_Account\x12\x91\x01\n" +
+	"\n" +
+	"AddAccount\x12,.api.backoffice.service.v1.AddAccountRequest\x1a-.api.backoffice.service.v1.AddAccountResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/backoffice/accounts/add\x12\xc6\x01\n" +
+	"\x15SendEmailVerification\x127.api.backoffice.service.v1.SendEmailVerificationRequest\x1a8.api.backoffice.service.v1.SendEmailVerificationResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/accounts/email/verification/send\x12\x9d\x01\n" +
+	"\vVerifyEmail\x12-.api.backoffice.service.v1.VerifyEmailRequest\x1a..api.backoffice.service.v1.VerifyEmailResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/accounts/email/verify\x12\xca\x01\n" +
+	"\x16SendMobileVerification\x128.api.backoffice.service.v1.SendMobileVerificationRequest\x1a9.api.backoffice.service.v1.SendMobileVerificationResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/accounts/mobile/verification/send\x12\xa1\x01\n" +
+	"\fVerifyMobile\x12..api.backoffice.service.v1.VerifyMobileRequest\x1a/.api.backoffice.service.v1.VerifyMobileResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/accounts/mobile/verify\x12\xa5\x01\n" +
+	"\rResetPassword\x12/.api.backoffice.service.v1.ResetPasswordRequest\x1a0.api.backoffice.service.v1.ResetPasswordResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/accounts/password/reset\x12\x9d\x01\n" +
+	"\vGenerate2fa\x12-.api.backoffice.service.v1.Generate2faRequest\x1a..api.backoffice.service.v1.Generate2faResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/accounts/2fa/generate\x12\x8d\x01\n" +
+	"\aBind2fa\x12).api.backoffice.service.v1.Bind2faRequest\x1a*.api.backoffice.service.v1.Bind2faResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/accounts/2fa/bind\x12\x95\x01\n" +
+	"\tUnbind2fa\x12+.api.backoffice.service.v1.Unbind2faRequest\x1a,.api.backoffice.service.v1.Unbind2faResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/accounts/2fa/unbind\x12\x9d\x01\n" +
+	"\rUpdateAccount\x12/.api.backoffice.service.v1.UpdateAccountRequest\x1a0.api.backoffice.service.v1.UpdateAccountResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/accounts/updateB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -934,11 +947,31 @@ var file_backoffice_service_v1_backoffice_account_proto_goTypes = []any{
 	(*UpdateAccountResponse)(nil),          // 19: api.backoffice.service.v1.UpdateAccountResponse
 }
 var file_backoffice_service_v1_backoffice_account_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: api.backoffice.service.v1.Backoffice_Account.AddAccount:input_type -> api.backoffice.service.v1.AddAccountRequest
+	2,  // 1: api.backoffice.service.v1.Backoffice_Account.SendEmailVerification:input_type -> api.backoffice.service.v1.SendEmailVerificationRequest
+	4,  // 2: api.backoffice.service.v1.Backoffice_Account.VerifyEmail:input_type -> api.backoffice.service.v1.VerifyEmailRequest
+	6,  // 3: api.backoffice.service.v1.Backoffice_Account.SendMobileVerification:input_type -> api.backoffice.service.v1.SendMobileVerificationRequest
+	8,  // 4: api.backoffice.service.v1.Backoffice_Account.VerifyMobile:input_type -> api.backoffice.service.v1.VerifyMobileRequest
+	10, // 5: api.backoffice.service.v1.Backoffice_Account.ResetPassword:input_type -> api.backoffice.service.v1.ResetPasswordRequest
+	12, // 6: api.backoffice.service.v1.Backoffice_Account.Generate2fa:input_type -> api.backoffice.service.v1.Generate2faRequest
+	14, // 7: api.backoffice.service.v1.Backoffice_Account.Bind2fa:input_type -> api.backoffice.service.v1.Bind2faRequest
+	16, // 8: api.backoffice.service.v1.Backoffice_Account.Unbind2fa:input_type -> api.backoffice.service.v1.Unbind2faRequest
+	18, // 9: api.backoffice.service.v1.Backoffice_Account.UpdateAccount:input_type -> api.backoffice.service.v1.UpdateAccountRequest
+	1,  // 10: api.backoffice.service.v1.Backoffice_Account.AddAccount:output_type -> api.backoffice.service.v1.AddAccountResponse
+	3,  // 11: api.backoffice.service.v1.Backoffice_Account.SendEmailVerification:output_type -> api.backoffice.service.v1.SendEmailVerificationResponse
+	5,  // 12: api.backoffice.service.v1.Backoffice_Account.VerifyEmail:output_type -> api.backoffice.service.v1.VerifyEmailResponse
+	7,  // 13: api.backoffice.service.v1.Backoffice_Account.SendMobileVerification:output_type -> api.backoffice.service.v1.SendMobileVerificationResponse
+	9,  // 14: api.backoffice.service.v1.Backoffice_Account.VerifyMobile:output_type -> api.backoffice.service.v1.VerifyMobileResponse
+	11, // 15: api.backoffice.service.v1.Backoffice_Account.ResetPassword:output_type -> api.backoffice.service.v1.ResetPasswordResponse
+	13, // 16: api.backoffice.service.v1.Backoffice_Account.Generate2fa:output_type -> api.backoffice.service.v1.Generate2faResponse
+	15, // 17: api.backoffice.service.v1.Backoffice_Account.Bind2fa:output_type -> api.backoffice.service.v1.Bind2faResponse
+	17, // 18: api.backoffice.service.v1.Backoffice_Account.Unbind2fa:output_type -> api.backoffice.service.v1.Unbind2faResponse
+	19, // 19: api.backoffice.service.v1.Backoffice_Account.UpdateAccount:output_type -> api.backoffice.service.v1.UpdateAccountResponse
+	10, // [10:20] is the sub-list for method output_type
+	0,  // [0:10] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_account_proto_init() }
@@ -955,7 +988,7 @@ func file_backoffice_service_v1_backoffice_account_proto_init() {
 			NumEnums:      0,
 			NumMessages:   20,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_backoffice_service_v1_backoffice_account_proto_goTypes,
 		DependencyIndexes: file_backoffice_service_v1_backoffice_account_proto_depIdxs,

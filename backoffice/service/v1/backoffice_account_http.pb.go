@@ -19,18 +19,18 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackofficeAccountAddAccount = "/api.backoffice.service.v1.BackofficeAccount/AddAccount"
-const OperationBackofficeAccountBind2fa = "/api.backoffice.service.v1.BackofficeAccount/Bind2fa"
-const OperationBackofficeAccountGenerate2fa = "/api.backoffice.service.v1.BackofficeAccount/Generate2fa"
-const OperationBackofficeAccountResetPassword = "/api.backoffice.service.v1.BackofficeAccount/ResetPassword"
-const OperationBackofficeAccountSendEmailVerification = "/api.backoffice.service.v1.BackofficeAccount/SendEmailVerification"
-const OperationBackofficeAccountSendMobileVerification = "/api.backoffice.service.v1.BackofficeAccount/SendMobileVerification"
-const OperationBackofficeAccountUnbind2fa = "/api.backoffice.service.v1.BackofficeAccount/Unbind2fa"
-const OperationBackofficeAccountUpdateAccount = "/api.backoffice.service.v1.BackofficeAccount/UpdateAccount"
-const OperationBackofficeAccountVerifyEmail = "/api.backoffice.service.v1.BackofficeAccount/VerifyEmail"
-const OperationBackofficeAccountVerifyMobile = "/api.backoffice.service.v1.BackofficeAccount/VerifyMobile"
+const OperationBackoffice_AccountAddAccount = "/api.backoffice.service.v1.Backoffice_Account/AddAccount"
+const OperationBackoffice_AccountBind2fa = "/api.backoffice.service.v1.Backoffice_Account/Bind2fa"
+const OperationBackoffice_AccountGenerate2fa = "/api.backoffice.service.v1.Backoffice_Account/Generate2fa"
+const OperationBackoffice_AccountResetPassword = "/api.backoffice.service.v1.Backoffice_Account/ResetPassword"
+const OperationBackoffice_AccountSendEmailVerification = "/api.backoffice.service.v1.Backoffice_Account/SendEmailVerification"
+const OperationBackoffice_AccountSendMobileVerification = "/api.backoffice.service.v1.Backoffice_Account/SendMobileVerification"
+const OperationBackoffice_AccountUnbind2fa = "/api.backoffice.service.v1.Backoffice_Account/Unbind2fa"
+const OperationBackoffice_AccountUpdateAccount = "/api.backoffice.service.v1.Backoffice_Account/UpdateAccount"
+const OperationBackoffice_AccountVerifyEmail = "/api.backoffice.service.v1.Backoffice_Account/VerifyEmail"
+const OperationBackoffice_AccountVerifyMobile = "/api.backoffice.service.v1.Backoffice_Account/VerifyMobile"
 
-type BackofficeAccountHTTPServer interface {
+type Backoffice_AccountHTTPServer interface {
 	AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error)
 	Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error)
 	Generate2Fa(context.Context, *Generate2FaRequest) (*Generate2FaResponse, error)
@@ -43,21 +43,21 @@ type BackofficeAccountHTTPServer interface {
 	VerifyMobile(context.Context, *VerifyMobileRequest) (*VerifyMobileResponse, error)
 }
 
-func RegisterBackofficeAccountHTTPServer(s *http.Server, srv BackofficeAccountHTTPServer) {
+func RegisterBackoffice_AccountHTTPServer(s *http.Server, srv Backoffice_AccountHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/accounts/add", _BackofficeAccount_AddAccount0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/email/verification/send", _BackofficeAccount_SendEmailVerification0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/email/verify", _BackofficeAccount_VerifyEmail0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/mobile/verification/send", _BackofficeAccount_SendMobileVerification0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/mobile/verify", _BackofficeAccount_VerifyMobile0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/password/reset", _BackofficeAccount_ResetPassword0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/2fa/generate", _BackofficeAccount_Generate2Fa0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/2fa/bind", _BackofficeAccount_Bind2Fa0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/2fa/unbind", _BackofficeAccount_Unbind2Fa0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/update", _BackofficeAccount_UpdateAccount0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/add", _Backoffice_Account_AddAccount0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/email/verification/send", _Backoffice_Account_SendEmailVerification0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/email/verify", _Backoffice_Account_VerifyEmail0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/mobile/verification/send", _Backoffice_Account_SendMobileVerification0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/mobile/verify", _Backoffice_Account_VerifyMobile0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/password/reset", _Backoffice_Account_ResetPassword0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/2fa/generate", _Backoffice_Account_Generate2Fa0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/2fa/bind", _Backoffice_Account_Bind2Fa0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/2fa/unbind", _Backoffice_Account_Unbind2Fa0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/update", _Backoffice_Account_UpdateAccount0_HTTP_Handler(srv))
 }
 
-func _BackofficeAccount_AddAccount0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _Backoffice_Account_AddAccount0_HTTP_Handler(srv Backoffice_AccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddAccountRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -66,7 +66,7 @@ func _BackofficeAccount_AddAccount0_HTTP_Handler(srv BackofficeAccountHTTPServer
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeAccountAddAccount)
+		http.SetOperation(ctx, OperationBackoffice_AccountAddAccount)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.AddAccount(ctx, req.(*AddAccountRequest))
 		})
@@ -79,7 +79,7 @@ func _BackofficeAccount_AddAccount0_HTTP_Handler(srv BackofficeAccountHTTPServer
 	}
 }
 
-func _BackofficeAccount_SendEmailVerification0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _Backoffice_Account_SendEmailVerification0_HTTP_Handler(srv Backoffice_AccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SendEmailVerificationRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -88,7 +88,7 @@ func _BackofficeAccount_SendEmailVerification0_HTTP_Handler(srv BackofficeAccoun
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeAccountSendEmailVerification)
+		http.SetOperation(ctx, OperationBackoffice_AccountSendEmailVerification)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.SendEmailVerification(ctx, req.(*SendEmailVerificationRequest))
 		})
@@ -101,7 +101,7 @@ func _BackofficeAccount_SendEmailVerification0_HTTP_Handler(srv BackofficeAccoun
 	}
 }
 
-func _BackofficeAccount_VerifyEmail0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _Backoffice_Account_VerifyEmail0_HTTP_Handler(srv Backoffice_AccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in VerifyEmailRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -110,7 +110,7 @@ func _BackofficeAccount_VerifyEmail0_HTTP_Handler(srv BackofficeAccountHTTPServe
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeAccountVerifyEmail)
+		http.SetOperation(ctx, OperationBackoffice_AccountVerifyEmail)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.VerifyEmail(ctx, req.(*VerifyEmailRequest))
 		})
@@ -123,7 +123,7 @@ func _BackofficeAccount_VerifyEmail0_HTTP_Handler(srv BackofficeAccountHTTPServe
 	}
 }
 
-func _BackofficeAccount_SendMobileVerification0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _Backoffice_Account_SendMobileVerification0_HTTP_Handler(srv Backoffice_AccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SendMobileVerificationRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -132,7 +132,7 @@ func _BackofficeAccount_SendMobileVerification0_HTTP_Handler(srv BackofficeAccou
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeAccountSendMobileVerification)
+		http.SetOperation(ctx, OperationBackoffice_AccountSendMobileVerification)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.SendMobileVerification(ctx, req.(*SendMobileVerificationRequest))
 		})
@@ -145,7 +145,7 @@ func _BackofficeAccount_SendMobileVerification0_HTTP_Handler(srv BackofficeAccou
 	}
 }
 
-func _BackofficeAccount_VerifyMobile0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _Backoffice_Account_VerifyMobile0_HTTP_Handler(srv Backoffice_AccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in VerifyMobileRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -154,7 +154,7 @@ func _BackofficeAccount_VerifyMobile0_HTTP_Handler(srv BackofficeAccountHTTPServ
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeAccountVerifyMobile)
+		http.SetOperation(ctx, OperationBackoffice_AccountVerifyMobile)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.VerifyMobile(ctx, req.(*VerifyMobileRequest))
 		})
@@ -167,7 +167,7 @@ func _BackofficeAccount_VerifyMobile0_HTTP_Handler(srv BackofficeAccountHTTPServ
 	}
 }
 
-func _BackofficeAccount_ResetPassword0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _Backoffice_Account_ResetPassword0_HTTP_Handler(srv Backoffice_AccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ResetPasswordRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -176,7 +176,7 @@ func _BackofficeAccount_ResetPassword0_HTTP_Handler(srv BackofficeAccountHTTPSer
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeAccountResetPassword)
+		http.SetOperation(ctx, OperationBackoffice_AccountResetPassword)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ResetPassword(ctx, req.(*ResetPasswordRequest))
 		})
@@ -189,7 +189,7 @@ func _BackofficeAccount_ResetPassword0_HTTP_Handler(srv BackofficeAccountHTTPSer
 	}
 }
 
-func _BackofficeAccount_Generate2Fa0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _Backoffice_Account_Generate2Fa0_HTTP_Handler(srv Backoffice_AccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Generate2FaRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -198,7 +198,7 @@ func _BackofficeAccount_Generate2Fa0_HTTP_Handler(srv BackofficeAccountHTTPServe
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeAccountGenerate2fa)
+		http.SetOperation(ctx, OperationBackoffice_AccountGenerate2fa)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.Generate2Fa(ctx, req.(*Generate2FaRequest))
 		})
@@ -211,7 +211,7 @@ func _BackofficeAccount_Generate2Fa0_HTTP_Handler(srv BackofficeAccountHTTPServe
 	}
 }
 
-func _BackofficeAccount_Bind2Fa0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _Backoffice_Account_Bind2Fa0_HTTP_Handler(srv Backoffice_AccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Bind2FaRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -220,7 +220,7 @@ func _BackofficeAccount_Bind2Fa0_HTTP_Handler(srv BackofficeAccountHTTPServer) f
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeAccountBind2fa)
+		http.SetOperation(ctx, OperationBackoffice_AccountBind2fa)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.Bind2Fa(ctx, req.(*Bind2FaRequest))
 		})
@@ -233,7 +233,7 @@ func _BackofficeAccount_Bind2Fa0_HTTP_Handler(srv BackofficeAccountHTTPServer) f
 	}
 }
 
-func _BackofficeAccount_Unbind2Fa0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _Backoffice_Account_Unbind2Fa0_HTTP_Handler(srv Backoffice_AccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Unbind2FaRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -242,7 +242,7 @@ func _BackofficeAccount_Unbind2Fa0_HTTP_Handler(srv BackofficeAccountHTTPServer)
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeAccountUnbind2fa)
+		http.SetOperation(ctx, OperationBackoffice_AccountUnbind2fa)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.Unbind2Fa(ctx, req.(*Unbind2FaRequest))
 		})
@@ -255,7 +255,7 @@ func _BackofficeAccount_Unbind2Fa0_HTTP_Handler(srv BackofficeAccountHTTPServer)
 	}
 }
 
-func _BackofficeAccount_UpdateAccount0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _Backoffice_Account_UpdateAccount0_HTTP_Handler(srv Backoffice_AccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateAccountRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -264,7 +264,7 @@ func _BackofficeAccount_UpdateAccount0_HTTP_Handler(srv BackofficeAccountHTTPSer
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeAccountUpdateAccount)
+		http.SetOperation(ctx, OperationBackoffice_AccountUpdateAccount)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateAccount(ctx, req.(*UpdateAccountRequest))
 		})
@@ -277,7 +277,7 @@ func _BackofficeAccount_UpdateAccount0_HTTP_Handler(srv BackofficeAccountHTTPSer
 	}
 }
 
-type BackofficeAccountHTTPClient interface {
+type Backoffice_AccountHTTPClient interface {
 	AddAccount(ctx context.Context, req *AddAccountRequest, opts ...http.CallOption) (rsp *AddAccountResponse, err error)
 	Bind2Fa(ctx context.Context, req *Bind2FaRequest, opts ...http.CallOption) (rsp *Bind2FaResponse, err error)
 	Generate2Fa(ctx context.Context, req *Generate2FaRequest, opts ...http.CallOption) (rsp *Generate2FaResponse, err error)
@@ -290,19 +290,19 @@ type BackofficeAccountHTTPClient interface {
 	VerifyMobile(ctx context.Context, req *VerifyMobileRequest, opts ...http.CallOption) (rsp *VerifyMobileResponse, err error)
 }
 
-type BackofficeAccountHTTPClientImpl struct {
+type Backoffice_AccountHTTPClientImpl struct {
 	cc *http.Client
 }
 
-func NewBackofficeAccountHTTPClient(client *http.Client) BackofficeAccountHTTPClient {
-	return &BackofficeAccountHTTPClientImpl{client}
+func NewBackoffice_AccountHTTPClient(client *http.Client) Backoffice_AccountHTTPClient {
+	return &Backoffice_AccountHTTPClientImpl{client}
 }
 
-func (c *BackofficeAccountHTTPClientImpl) AddAccount(ctx context.Context, in *AddAccountRequest, opts ...http.CallOption) (*AddAccountResponse, error) {
+func (c *Backoffice_AccountHTTPClientImpl) AddAccount(ctx context.Context, in *AddAccountRequest, opts ...http.CallOption) (*AddAccountResponse, error) {
 	var out AddAccountResponse
 	pattern := "/v1/backoffice/accounts/add"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeAccountAddAccount))
+	opts = append(opts, http.Operation(OperationBackoffice_AccountAddAccount))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -311,11 +311,11 @@ func (c *BackofficeAccountHTTPClientImpl) AddAccount(ctx context.Context, in *Ad
 	return &out, nil
 }
 
-func (c *BackofficeAccountHTTPClientImpl) Bind2Fa(ctx context.Context, in *Bind2FaRequest, opts ...http.CallOption) (*Bind2FaResponse, error) {
+func (c *Backoffice_AccountHTTPClientImpl) Bind2Fa(ctx context.Context, in *Bind2FaRequest, opts ...http.CallOption) (*Bind2FaResponse, error) {
 	var out Bind2FaResponse
 	pattern := "/v1/backoffice/accounts/2fa/bind"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeAccountBind2fa))
+	opts = append(opts, http.Operation(OperationBackoffice_AccountBind2fa))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -324,11 +324,11 @@ func (c *BackofficeAccountHTTPClientImpl) Bind2Fa(ctx context.Context, in *Bind2
 	return &out, nil
 }
 
-func (c *BackofficeAccountHTTPClientImpl) Generate2Fa(ctx context.Context, in *Generate2FaRequest, opts ...http.CallOption) (*Generate2FaResponse, error) {
+func (c *Backoffice_AccountHTTPClientImpl) Generate2Fa(ctx context.Context, in *Generate2FaRequest, opts ...http.CallOption) (*Generate2FaResponse, error) {
 	var out Generate2FaResponse
 	pattern := "/v1/backoffice/accounts/2fa/generate"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeAccountGenerate2fa))
+	opts = append(opts, http.Operation(OperationBackoffice_AccountGenerate2fa))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -337,11 +337,11 @@ func (c *BackofficeAccountHTTPClientImpl) Generate2Fa(ctx context.Context, in *G
 	return &out, nil
 }
 
-func (c *BackofficeAccountHTTPClientImpl) ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...http.CallOption) (*ResetPasswordResponse, error) {
+func (c *Backoffice_AccountHTTPClientImpl) ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...http.CallOption) (*ResetPasswordResponse, error) {
 	var out ResetPasswordResponse
 	pattern := "/v1/backoffice/accounts/password/reset"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeAccountResetPassword))
+	opts = append(opts, http.Operation(OperationBackoffice_AccountResetPassword))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -350,11 +350,11 @@ func (c *BackofficeAccountHTTPClientImpl) ResetPassword(ctx context.Context, in 
 	return &out, nil
 }
 
-func (c *BackofficeAccountHTTPClientImpl) SendEmailVerification(ctx context.Context, in *SendEmailVerificationRequest, opts ...http.CallOption) (*SendEmailVerificationResponse, error) {
+func (c *Backoffice_AccountHTTPClientImpl) SendEmailVerification(ctx context.Context, in *SendEmailVerificationRequest, opts ...http.CallOption) (*SendEmailVerificationResponse, error) {
 	var out SendEmailVerificationResponse
 	pattern := "/v1/backoffice/accounts/email/verification/send"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeAccountSendEmailVerification))
+	opts = append(opts, http.Operation(OperationBackoffice_AccountSendEmailVerification))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -363,11 +363,11 @@ func (c *BackofficeAccountHTTPClientImpl) SendEmailVerification(ctx context.Cont
 	return &out, nil
 }
 
-func (c *BackofficeAccountHTTPClientImpl) SendMobileVerification(ctx context.Context, in *SendMobileVerificationRequest, opts ...http.CallOption) (*SendMobileVerificationResponse, error) {
+func (c *Backoffice_AccountHTTPClientImpl) SendMobileVerification(ctx context.Context, in *SendMobileVerificationRequest, opts ...http.CallOption) (*SendMobileVerificationResponse, error) {
 	var out SendMobileVerificationResponse
 	pattern := "/v1/backoffice/accounts/mobile/verification/send"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeAccountSendMobileVerification))
+	opts = append(opts, http.Operation(OperationBackoffice_AccountSendMobileVerification))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -376,11 +376,11 @@ func (c *BackofficeAccountHTTPClientImpl) SendMobileVerification(ctx context.Con
 	return &out, nil
 }
 
-func (c *BackofficeAccountHTTPClientImpl) Unbind2Fa(ctx context.Context, in *Unbind2FaRequest, opts ...http.CallOption) (*Unbind2FaResponse, error) {
+func (c *Backoffice_AccountHTTPClientImpl) Unbind2Fa(ctx context.Context, in *Unbind2FaRequest, opts ...http.CallOption) (*Unbind2FaResponse, error) {
 	var out Unbind2FaResponse
 	pattern := "/v1/backoffice/accounts/2fa/unbind"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeAccountUnbind2fa))
+	opts = append(opts, http.Operation(OperationBackoffice_AccountUnbind2fa))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -389,11 +389,11 @@ func (c *BackofficeAccountHTTPClientImpl) Unbind2Fa(ctx context.Context, in *Unb
 	return &out, nil
 }
 
-func (c *BackofficeAccountHTTPClientImpl) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...http.CallOption) (*UpdateAccountResponse, error) {
+func (c *Backoffice_AccountHTTPClientImpl) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...http.CallOption) (*UpdateAccountResponse, error) {
 	var out UpdateAccountResponse
 	pattern := "/v1/backoffice/accounts/update"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeAccountUpdateAccount))
+	opts = append(opts, http.Operation(OperationBackoffice_AccountUpdateAccount))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -402,11 +402,11 @@ func (c *BackofficeAccountHTTPClientImpl) UpdateAccount(ctx context.Context, in 
 	return &out, nil
 }
 
-func (c *BackofficeAccountHTTPClientImpl) VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...http.CallOption) (*VerifyEmailResponse, error) {
+func (c *Backoffice_AccountHTTPClientImpl) VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...http.CallOption) (*VerifyEmailResponse, error) {
 	var out VerifyEmailResponse
 	pattern := "/v1/backoffice/accounts/email/verify"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeAccountVerifyEmail))
+	opts = append(opts, http.Operation(OperationBackoffice_AccountVerifyEmail))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -415,11 +415,11 @@ func (c *BackofficeAccountHTTPClientImpl) VerifyEmail(ctx context.Context, in *V
 	return &out, nil
 }
 
-func (c *BackofficeAccountHTTPClientImpl) VerifyMobile(ctx context.Context, in *VerifyMobileRequest, opts ...http.CallOption) (*VerifyMobileResponse, error) {
+func (c *Backoffice_AccountHTTPClientImpl) VerifyMobile(ctx context.Context, in *VerifyMobileRequest, opts ...http.CallOption) (*VerifyMobileResponse, error) {
 	var out VerifyMobileResponse
 	pattern := "/v1/backoffice/accounts/mobile/verify"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeAccountVerifyMobile))
+	opts = append(opts, http.Operation(OperationBackoffice_AccountVerifyMobile))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
