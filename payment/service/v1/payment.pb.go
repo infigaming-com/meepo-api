@@ -25,12 +25,16 @@ const (
 )
 
 // Transaction type enum
+// Defines possible types of financial transactions
 type TransactionType int32
 
 const (
+	// Default unspecified value
 	TransactionType_TRANSACTION_TYPE_UNSPECIFIED TransactionType = 0
-	TransactionType_TRANSACTION_TYPE_DEPOSIT     TransactionType = 1
-	TransactionType_TRANSACTION_TYPE_WITHDRAW    TransactionType = 2
+	// Money incoming to platform
+	TransactionType_TRANSACTION_TYPE_DEPOSIT TransactionType = 1
+	// Money outgoing from platform
+	TransactionType_TRANSACTION_TYPE_WITHDRAW TransactionType = 2
 )
 
 // Enum value maps for TransactionType.
@@ -75,13 +79,18 @@ func (TransactionType) EnumDescriptor() ([]byte, []int) {
 }
 
 // Transaction status enum
+// Defines possible states of a transaction
 type TransactionStatus int32
 
 const (
+	// Default unspecified value
 	TransactionStatus_TRANSACTION_STATUS_UNSPECIFIED TransactionStatus = 0
-	TransactionStatus_TRANSACTION_STATUS_PROCESSING  TransactionStatus = 1
-	TransactionStatus_TRANSACTION_STATUS_SUCCESSFUL  TransactionStatus = 2
-	TransactionStatus_TRANSACTION_STATUS_FAILED      TransactionStatus = 3
+	// Transaction is in progress
+	TransactionStatus_TRANSACTION_STATUS_PROCESSING TransactionStatus = 1
+	// Transaction completed successfully
+	TransactionStatus_TRANSACTION_STATUS_SUCCESSFUL TransactionStatus = 2
+	// Transaction failed to complete
+	TransactionStatus_TRANSACTION_STATUS_FAILED TransactionStatus = 3
 )
 
 // Enum value maps for TransactionStatus.
@@ -128,11 +137,14 @@ func (TransactionStatus) EnumDescriptor() ([]byte, []int) {
 }
 
 // Sort enum
+// Defines sort direction for queries
 type Sort int32
 
 const (
+	// Sort in descending order (newest first)
 	Sort_DESC Sort = 0
-	Sort_ASC  Sort = 1
+	// Sort in ascending order (oldest first)
+	Sort_ASC Sort = 1
 )
 
 // Enum value maps for Sort.
@@ -175,11 +187,14 @@ func (Sort) EnumDescriptor() ([]byte, []int) {
 }
 
 // Channel type enum
+// Defines the purpose of a payment channel
 type ChannelType int32
 
 const (
-	ChannelType_CHANNEL_TYPE_DEPOSIT  ChannelType = 0 // 充值
-	ChannelType_CHANNEL_TYPE_WITHDRAW ChannelType = 1 // 提现
+	// Channel for depositing funds
+	ChannelType_CHANNEL_TYPE_DEPOSIT ChannelType = 0
+	// Channel for withdrawing funds
+	ChannelType_CHANNEL_TYPE_WITHDRAW ChannelType = 1
 )
 
 // Enum value maps for ChannelType.
@@ -222,6 +237,7 @@ func (ChannelType) EnumDescriptor() ([]byte, []int) {
 }
 
 // Request to get payment method list
+// This message is used to retrieve all available payment methods
 type GetPaymentMethodListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -259,13 +275,19 @@ func (*GetPaymentMethodListRequest) Descriptor() ([]byte, []int) {
 }
 
 // Details of a single payment method
+// Contains information about a specific payment method including its ID, currency, and required fields schema
 type PaymentMethodInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	PaymentMethod string                 `protobuf:"bytes,4,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
-	KeySchema     *structpb.Struct       `protobuf:"bytes,5,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"` // Stores schema for required fields of the payment method
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique identifier for the payment method
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Currency code supported by this payment method (e.g., USD, EUR, CNY)
+	Currency string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Country code where this payment method is available
+	Country string `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
+	// Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
+	PaymentMethod string `protobuf:"bytes,4,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	// JSON schema defining the required fields for this payment method
+	KeySchema     *structpb.Struct `protobuf:"bytes,5,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -336,9 +358,11 @@ func (x *PaymentMethodInfo) GetKeySchema() *structpb.Struct {
 }
 
 // Response for payment method list
+// Contains a list of all available payment methods
 type GetPaymentMethodListResponse struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	PaymentMethods []*PaymentMethodInfo   `protobuf:"bytes,1,rep,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of payment methods available
+	PaymentMethods []*PaymentMethodInfo `protobuf:"bytes,1,rep,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -381,14 +405,19 @@ func (x *GetPaymentMethodListResponse) GetPaymentMethods() []*PaymentMethodInfo 
 }
 
 // Request to create a payment channel
+// Used to create a new payment channel with specified merchant and method
 type CreatePaymentChannelRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	MerchantId      string                 `protobuf:"bytes,1,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
-	PaymentMethodId string                 `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
-	Type            string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	Key             *structpb.Struct       `protobuf:"bytes,4,opt,name=key,proto3" json:"key,omitempty"` // Stores configuration fields for the payment channel
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the merchant creating this channel
+	MerchantId string `protobuf:"bytes,1,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	// ID of the payment method to be used
+	PaymentMethodId string `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	// Type of channel (e.g., deposit, withdrawal)
+	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	// Configuration fields for the payment channel in JSON format
+	Key           *structpb.Struct `protobuf:"bytes,4,opt,name=key,proto3" json:"key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreatePaymentChannelRequest) Reset() {
@@ -450,9 +479,11 @@ func (x *CreatePaymentChannelRequest) GetKey() *structpb.Struct {
 }
 
 // Response for channel creation
+// Returns the ID of the newly created payment channel
 type CreatePaymentChannelResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChannelId     string                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique identifier for the created channel
+	ChannelId     string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -495,9 +526,11 @@ func (x *CreatePaymentChannelResponse) GetChannelId() string {
 }
 
 // Request to get payment channel list
+// Used to retrieve all payment channels for a specific operator
 type GetPaymentChannelListRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId    string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the operator whose channels should be retrieved
+	OperatorId    string `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -540,29 +573,49 @@ func (x *GetPaymentChannelListRequest) GetOperatorId() string {
 }
 
 // Payment channel information
+// Detailed information about a specific payment channel
 type PaymentChannelInfo struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	ChannelId         string                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	Type              string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	Category          string                 `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
-	OperatorId        string                 `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	PaymentMethod     string                 `protobuf:"bytes,5,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
-	Tag               string                 `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag,omitempty"`
-	Name              string                 `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
-	PaymentMethodId   string                 `protobuf:"bytes,8,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
-	Currency          string                 `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency,omitempty"`
-	Country           string                 `protobuf:"bytes,10,opt,name=country,proto3" json:"country,omitempty"`
-	Method            string                 `protobuf:"bytes,11,opt,name=method,proto3" json:"method,omitempty"`
-	Logo              string                 `protobuf:"bytes,12,opt,name=logo,proto3" json:"logo,omitempty"`
-	MinDepositAmount  int64                  `protobuf:"varint,13,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
-	MaxDepositAmount  int64                  `protobuf:"varint,14,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
-	MinWithdrawAmount int64                  `protobuf:"varint,15,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
-	MaxWithdrawAmount int64                  `protobuf:"varint,16,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
-	Eat               int32                  `protobuf:"varint,17,opt,name=eat,proto3" json:"eat,omitempty"`
-	DepositSchema     *structpb.Struct       `protobuf:"bytes,18,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
-	WithdrawSchema    *structpb.Struct       `protobuf:"bytes,19,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique identifier for the channel
+	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// Type of the channel (e.g., online, offline)
+	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	// Category of the channel (e.g., bank, e-wallet)
+	Category string `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
+	// ID of the operator who owns this channel
+	OperatorId string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	// Payment method used in this channel
+	PaymentMethod string `protobuf:"bytes,5,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	// Tag for categorization or filtering
+	Tag string `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag,omitempty"`
+	// Display name of the channel
+	Name string `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
+	// ID of the payment method used
+	PaymentMethodId string `protobuf:"bytes,8,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	// Currency supported by this channel
+	Currency string `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Country where this channel is available
+	Country string `protobuf:"bytes,10,opt,name=country,proto3" json:"country,omitempty"`
+	// Specific method used (might be more detailed than payment_method)
+	Method string `protobuf:"bytes,11,opt,name=method,proto3" json:"method,omitempty"`
+	// URL to the logo image for this payment channel
+	Logo string `protobuf:"bytes,12,opt,name=logo,proto3" json:"logo,omitempty"`
+	// Minimum amount allowed for deposit transactions
+	MinDepositAmount int64 `protobuf:"varint,13,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
+	// Maximum amount allowed for deposit transactions
+	MaxDepositAmount int64 `protobuf:"varint,14,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
+	// Minimum amount allowed for withdrawal transactions
+	MinWithdrawAmount int64 `protobuf:"varint,15,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
+	// Maximum amount allowed for withdrawal transactions
+	MaxWithdrawAmount int64 `protobuf:"varint,16,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
+	// Estimated arrival time in minutes
+	Eat int32 `protobuf:"varint,17,opt,name=eat,proto3" json:"eat,omitempty"`
+	// JSON schema defining deposit form fields required by this channel
+	DepositSchema *structpb.Struct `protobuf:"bytes,18,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
+	// JSON schema defining withdrawal form fields required by this channel
+	WithdrawSchema *structpb.Struct `protobuf:"bytes,19,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *PaymentChannelInfo) Reset() {
@@ -729,9 +782,11 @@ func (x *PaymentChannelInfo) GetWithdrawSchema() *structpb.Struct {
 }
 
 // Response for payment channel list
+// Contains a list of payment channels
 type GetPaymentChannelListResponse struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	PaymentChannels []*PaymentChannelInfo  `protobuf:"bytes,1,rep,name=payment_channels,json=paymentChannels,proto3" json:"payment_channels,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of payment channels
+	PaymentChannels []*PaymentChannelInfo `protobuf:"bytes,1,rep,name=payment_channels,json=paymentChannels,proto3" json:"payment_channels,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -774,12 +829,18 @@ func (x *GetPaymentChannelListResponse) GetPaymentChannels() []*PaymentChannelIn
 }
 
 // Request to initiate a deposit
+// Used to start a deposit transaction
 type InitiateDepositRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Amount        int64                  `protobuf:"varint,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	ChannelId     string                 `protobuf:"bytes,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"` // Stores additional information like clientOrderId, productId, etc.
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Amount to deposit in smallest currency unit (e.g., cents)
+	Amount int64 `protobuf:"varint,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	// Currency code for the transaction
+	Currency string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	// ID of the channel to use for this deposit
+	ChannelId string `protobuf:"bytes,3,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// Additional information needed for the deposit
+	// May include clientOrderId, productId, userInfo, etc.
+	Extra         *structpb.Struct `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -843,16 +904,25 @@ func (x *InitiateDepositRequest) GetExtra() *structpb.Struct {
 }
 
 // Response for deposit initiation
+// Contains details about the initiated deposit transaction
 type InitiateDepositResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Amount        int64                  `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
-	Currency      string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	PayUrl        string                 `protobuf:"bytes,5,opt,name=pay_url,json=payUrl,proto3" json:"pay_url,omitempty"`
-	QrCode        string                 `protobuf:"bytes,6,opt,name=qr_code,json=qrCode,proto3" json:"qr_code,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Extra         *structpb.Struct       `protobuf:"bytes,8,opt,name=extra,proto3" json:"extra,omitempty"` // Additional transaction information
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique identifier for the transaction
+	TransactionId int64 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	// Amount to be deposited in smallest currency unit
+	Amount int64 `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	// Currency code for the transaction
+	Currency string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Current status of the transaction
+	Status string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	// URL to direct the user to for payment completion
+	PayUrl string `protobuf:"bytes,5,opt,name=pay_url,json=payUrl,proto3" json:"pay_url,omitempty"`
+	// QR code image (typically base64 encoded) for mobile payment
+	QrCode string `protobuf:"bytes,6,opt,name=qr_code,json=qrCode,proto3" json:"qr_code,omitempty"`
+	// Timestamp when the transaction was created
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Additional transaction information returned by payment provider
+	Extra         *structpb.Struct `protobuf:"bytes,8,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -944,11 +1014,16 @@ func (x *InitiateDepositResponse) GetExtra() *structpb.Struct {
 }
 
 // Request to initiate a withdrawal
+// Used to start a withdrawal transaction
 type InitiateWithdrawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Amount        int64                  `protobuf:"varint,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	ChannelId     string                 `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	Extra         *structpb.Struct       `protobuf:"bytes,3,opt,name=extra,proto3" json:"extra,omitempty"` // Stores additional information like clientId, note, etc.
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Amount to withdraw in smallest currency unit (e.g., cents)
+	Amount int64 `protobuf:"varint,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	// ID of the channel to use for withdrawal
+	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// Additional information needed for the withdrawal
+	// May include account details, clientId, note, etc.
+	Extra         *structpb.Struct `protobuf:"bytes,3,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1005,15 +1080,21 @@ func (x *InitiateWithdrawRequest) GetExtra() *structpb.Struct {
 }
 
 // Response for withdrawal initiation
+// Contains details about the initiated withdrawal transaction
 type InitiateWithdrawResponse struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId   int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	OperatorOrderNo string                 `protobuf:"bytes,2,opt,name=operator_order_no,json=operatorOrderNo,proto3" json:"operator_order_no,omitempty"`
-	Amount          int64                  `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
-	Status          string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique identifier for the transaction
+	TransactionId int64 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	// Order number from the operator's system
+	OperatorOrderNo string `protobuf:"bytes,2,opt,name=operator_order_no,json=operatorOrderNo,proto3" json:"operator_order_no,omitempty"`
+	// Amount to be withdrawn in smallest currency unit
+	Amount int64 `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	// Current status of the transaction
+	Status string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	// Timestamp when the transaction was created
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *InitiateWithdrawResponse) Reset() {
@@ -1082,21 +1163,33 @@ func (x *InitiateWithdrawResponse) GetCreatedAt() *timestamppb.Timestamp {
 }
 
 // Request for deposit callback
+// Used by payment gateways to notify about deposit status changes
 type DepositCallbackRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	PaTransactionNo int64                  `protobuf:"varint,1,opt,name=pa_transaction_no,json=transactionNo,proto3" json:"pa_transaction_no,omitempty"`
-	GatewayOrderNo  string                 `protobuf:"bytes,2,opt,name=gateway_order_no,json=gatewayOrderNo,proto3" json:"gateway_order_no,omitempty"`
-	TransactionNo   int64                  `protobuf:"varint,3,opt,name=transaction_no,json=operatorOrderNo,proto3" json:"transaction_no,omitempty"`
-	OrderStatus     string                 `protobuf:"bytes,4,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`
-	PayTime         string                 `protobuf:"bytes,5,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
-	CreateTime      string                 `protobuf:"bytes,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
-	Amount          int64                  `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`
-	Money           int64                  `protobuf:"varint,8,opt,name=money,proto3" json:"money,omitempty"`
-	Sign            string                 `protobuf:"bytes,9,opt,name=sign,proto3" json:"sign,omitempty"`            // HMAC-SHA256签名，用于验证请求的合法性
-	Timestamp       string                 `protobuf:"bytes,10,opt,name=timestamp,proto3" json:"timestamp,omitempty"` // 请求时间戳，用于防止重放攻击
-	Nonce           string                 `protobuf:"bytes,11,opt,name=nonce,proto3" json:"nonce,omitempty"`         // 随机字符串，确保每次请求的唯一性
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Transaction number from the payment aggregator
+	PaTransactionNo int64 `protobuf:"varint,1,opt,name=pa_transaction_no,json=transactionNo,proto3" json:"pa_transaction_no,omitempty"`
+	// Order number from the payment gateway
+	GatewayOrderNo string `protobuf:"bytes,2,opt,name=gateway_order_no,json=gatewayOrderNo,proto3" json:"gateway_order_no,omitempty"`
+	// Transaction number from the operator
+	TransactionNo int64 `protobuf:"varint,3,opt,name=transaction_no,json=operatorOrderNo,proto3" json:"transaction_no,omitempty"`
+	// Current status of the order (e.g., SUCCESS, FAILED)
+	OrderStatus string `protobuf:"bytes,4,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`
+	// Time when payment was completed. Format: yyyy-MM-dd HH:mm:ss
+	PayTime string `protobuf:"bytes,5,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
+	// Time when order was created. Format: yyyy-MM-dd HH:mm:ss
+	CreateTime string `protobuf:"bytes,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	// Original amount of the order
+	Amount int64 `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`
+	// Actual amount paid
+	Money int64 `protobuf:"varint,8,opt,name=money,proto3" json:"money,omitempty"`
+	// HMAC-SHA256 signature to verify request authenticity
+	Sign string `protobuf:"bytes,9,opt,name=sign,proto3" json:"sign,omitempty"`
+	// Request timestamp to prevent replay attacks
+	Timestamp string `protobuf:"bytes,10,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	// Random string to ensure each request is unique
+	Nonce         string `protobuf:"bytes,11,opt,name=nonce,proto3" json:"nonce,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DepositCallbackRequest) Reset() {
@@ -1207,10 +1300,13 @@ func (x *DepositCallbackRequest) GetNonce() string {
 }
 
 // Response for deposit callback
+// Confirms receipt of callback notification
 type DepositCallbackResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"` // 可选的消息，失败时返回错误原因
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Whether the callback was processed successfully
+	Success bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	// Optional message, returns error reason on failure
+	Message       string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1260,22 +1356,35 @@ func (x *DepositCallbackResponse) GetMessage() string {
 }
 
 // Request for withdraw callback
+// Used by payment gateways to notify about withdrawal status changes
 type WithdrawCallbackRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	PaTransactionNo int64                  `protobuf:"varint,1,opt,name=pa_transaction_no,json=transactionNo,proto3" json:"pa_transaction_no,omitempty"` // Operator order number
-	GatewayOrderNo  string                 `protobuf:"bytes,2,opt,name=gateway_order_no,json=gatewayOrderNo,proto3" json:"gateway_order_no,omitempty"`   // Gateway order number
-	TransactionNo   int64                  `protobuf:"varint,3,opt,name=transaction_no,json=operatorOrderNo,proto3" json:"transaction_no,omitempty"`     // Operator order number
-	OrderStatus     string                 `protobuf:"bytes,4,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`              // Order status
-	PayTime         string                 `protobuf:"bytes,5,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`                          // Transaction time. Format: yyyy-MM-dd HH:mm:ss
-	CreateTime      string                 `protobuf:"bytes,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`                 // Creation time. Format: yyyy-MM-dd HH:mm:ss
-	Amount          int64                  `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`                                          // Order amount
-	Fee             int64                  `protobuf:"varint,8,opt,name=fee,proto3" json:"fee,omitempty"`                                                // Service fee
-	RealMoney       int64                  `protobuf:"varint,9,opt,name=real_money,json=realMoney,proto3" json:"real_money,omitempty"`                   // Actual withdrawal amount
-	Sign            string                 `protobuf:"bytes,10,opt,name=sign,proto3" json:"sign,omitempty"`                                              // HMAC-SHA256签名，用于验证请求的合法性
-	Timestamp       string                 `protobuf:"bytes,11,opt,name=timestamp,proto3" json:"timestamp,omitempty"`                                    // 请求时间戳，用于防止重放攻击
-	Nonce           string                 `protobuf:"bytes,12,opt,name=nonce,proto3" json:"nonce,omitempty"`                                            // 随机字符串，确保每次请求的唯一性
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Transaction number from the payment aggregator
+	PaTransactionNo int64 `protobuf:"varint,1,opt,name=pa_transaction_no,json=transactionNo,proto3" json:"pa_transaction_no,omitempty"`
+	// Order number from the payment gateway
+	GatewayOrderNo string `protobuf:"bytes,2,opt,name=gateway_order_no,json=gatewayOrderNo,proto3" json:"gateway_order_no,omitempty"`
+	// Transaction number from the operator
+	TransactionNo int64 `protobuf:"varint,3,opt,name=transaction_no,json=operatorOrderNo,proto3" json:"transaction_no,omitempty"`
+	// Current status of the order (e.g., SUCCESS, FAILED)
+	OrderStatus string `protobuf:"bytes,4,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`
+	// Time when withdrawal was processed. Format: yyyy-MM-dd HH:mm:ss
+	PayTime string `protobuf:"bytes,5,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
+	// Time when order was created. Format: yyyy-MM-dd HH:mm:ss
+	CreateTime string `protobuf:"bytes,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	// Original amount of the withdrawal order
+	Amount int64 `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`
+	// Service fee applied to the withdrawal
+	Fee int64 `protobuf:"varint,8,opt,name=fee,proto3" json:"fee,omitempty"`
+	// Actual amount withdrawn after fees
+	RealMoney int64 `protobuf:"varint,9,opt,name=real_money,json=realMoney,proto3" json:"real_money,omitempty"`
+	// HMAC-SHA256 signature to verify request authenticity
+	Sign string `protobuf:"bytes,10,opt,name=sign,proto3" json:"sign,omitempty"`
+	// Request timestamp to prevent replay attacks
+	Timestamp string `protobuf:"bytes,11,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	// Random string to ensure each request is unique
+	Nonce         string `protobuf:"bytes,12,opt,name=nonce,proto3" json:"nonce,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *WithdrawCallbackRequest) Reset() {
@@ -1393,10 +1502,13 @@ func (x *WithdrawCallbackRequest) GetNonce() string {
 }
 
 // Response for withdraw callback
+// Confirms receipt of callback notification
 type WithdrawCallbackResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"` // 可选的消息，失败时返回错误原因
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Whether the callback was processed successfully
+	Success bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	// Optional message, returns error reason on failure
+	Message       string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1446,16 +1558,26 @@ func (x *WithdrawCallbackResponse) GetMessage() string {
 }
 
 // Transaction information
+// Detailed information about a specific transaction
 type TransactionInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Amount        int64                  `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
-	Currency      string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	Type          TransactionType        `protobuf:"varint,5,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
-	Status        TransactionStatus      `protobuf:"varint,6,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
-	PaymentMethod string                 `protobuf:"bytes,7,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique identifier for the transaction
+	TransactionId int64 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	// ID of the user who initiated the transaction
+	UserId int64 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// Transaction amount in smallest currency unit
+	Amount int64 `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	// Currency code for the transaction
+	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Type of transaction (deposit or withdrawal)
+	Type TransactionType `protobuf:"varint,5,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
+	// Current status of the transaction
+	Status TransactionStatus `protobuf:"varint,6,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
+	// Payment method used for the transaction
+	PaymentMethod string `protobuf:"bytes,7,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	// Timestamp when the transaction was created
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Timestamp when the transaction was last updated
 	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1555,24 +1677,26 @@ func (x *TransactionInfo) GetUpdatedAt() *timestamppb.Timestamp {
 }
 
 // Request to get transaction page
+// Used to retrieve a paginated list of transactions with optional filters
 type GetTransactionPageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Pagination parameters
-	Page     int32 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	// Page number to retrieve (1-based)
+	Page int32 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
 	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Filter parameters (all optional)
 	// Optional transaction type filter
 	Type TransactionType `protobuf:"varint,3,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
 	// Optional currency filter
 	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Optional status filter
 	Status TransactionStatus `protobuf:"varint,5,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
-	// Optional date range filter
+	// Optional start time for date range filter
 	StartTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime   *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	// Optional end time for date range filter
+	EndTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	// Optional payment method filter
 	PaymentMethod string `protobuf:"bytes,8,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
-	// Optional sort
+	// Optional sort direction
 	Sort          Sort `protobuf:"varint,9,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1672,13 +1796,19 @@ func (x *GetTransactionPageRequest) GetSort() Sort {
 }
 
 // Response for transaction page
+// Contains paginated list of transactions and pagination metadata
 type GetTransactionPageResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Transactions  []*TransactionInfo     `protobuf:"bytes,1,rep,name=transactions,proto3" json:"transactions,omitempty"`
-	TotalCount    int32                  `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
-	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	TotalPages    int32                  `protobuf:"varint,5,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of transactions matching the filter criteria
+	Transactions []*TransactionInfo `protobuf:"bytes,1,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	// Total number of transactions matching the filter criteria
+	TotalCount int32 `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	// Current page number
+	Page int32 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Total number of pages available
+	TotalPages    int32 `protobuf:"varint,5,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1749,15 +1879,16 @@ func (x *GetTransactionPageResponse) GetTotalPages() int32 {
 }
 
 // Request to get payment channel page
+// Used to retrieve a paginated list of payment channels with optional filters
 type GetPaymentChannelPageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Pagination parameters
-	Page     int32 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	// Page number to retrieve (1-based)
+	Page int32 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
 	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Filter parameters (all optional)
-	// Optional operator id filter
+	// Optional operator ID filter
 	OperatorId string `protobuf:"bytes,3,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	// Optional type filter
+	// Optional channel type filter
 	Type ChannelType `protobuf:"varint,4,opt,name=type,proto3,enum=payment.service.v1.ChannelType" json:"type,omitempty"`
 	// Optional category filter
 	Category string `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
@@ -1767,7 +1898,7 @@ type GetPaymentChannelPageRequest struct {
 	Currency string `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Optional country filter
 	Country string `protobuf:"bytes,8,opt,name=country,proto3" json:"country,omitempty"`
-	// Optional sort
+	// Optional sort direction
 	Sort          Sort `protobuf:"varint,9,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1867,15 +1998,21 @@ func (x *GetPaymentChannelPageRequest) GetSort() Sort {
 }
 
 // Response for payment channel page
+// Contains paginated list of payment channels and pagination metadata
 type GetPaymentChannelPageResponse struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	PaymentChannels []*PaymentChannelInfo  `protobuf:"bytes,1,rep,name=payment_channels,json=paymentChannels,proto3" json:"payment_channels,omitempty"`
-	TotalCount      int32                  `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
-	Page            int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize        int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	TotalPages      int32                  `protobuf:"varint,5,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of payment channels matching the filter criteria
+	PaymentChannels []*PaymentChannelInfo `protobuf:"bytes,1,rep,name=payment_channels,json=paymentChannels,proto3" json:"payment_channels,omitempty"`
+	// Total number of channels matching the filter criteria
+	TotalCount int32 `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	// Current page number
+	Page int32 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Total number of pages available
+	TotalPages    int32 `protobuf:"varint,5,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetPaymentChannelPageResponse) Reset() {

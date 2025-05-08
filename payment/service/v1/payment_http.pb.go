@@ -31,24 +31,33 @@ const OperationPaymentWithdrawCallback = "/payment.service.v1.Payment/WithdrawCa
 
 type PaymentHTTPServer interface {
 	// CreatePaymentChannel Create payment channel
+	// Creates a new payment channel with specified configuration
 	CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error)
 	// DepositCallback Deposit callback
-	// This endpoint handles callbacks from payment gateways.
+	// Handles callbacks from payment gateways for deposit status updates
+	// This endpoint is called by payment providers to notify of completed or failed deposits
 	DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error)
 	// GetPaymentChannelList Get list of payment channels
+	// Retrieves all payment channels for a specific operator
 	GetPaymentChannelList(context.Context, *GetPaymentChannelListRequest) (*GetPaymentChannelListResponse, error)
 	// GetPaymentChannelPage Get payment channel page with pagination and filters
+	// Retrieves a paginated list of payment channels with optional filtering
 	GetPaymentChannelPage(context.Context, *GetPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error)
 	// GetPaymentMethodList Get list of payment methods
+	// Retrieves all available payment methods supported by the system
 	GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*GetPaymentMethodListResponse, error)
 	// GetTransactionPage Get transaction page with pagination and filters
+	// Retrieves a paginated list of transactions with optional filtering
 	GetTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error)
 	// InitiateDeposit Initiate a deposit transaction
+	// Starts a new deposit process and returns payment information
 	InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error)
 	// InitiateWithdraw Initiate a withdrawal transaction
+	// Starts a new withdrawal process
 	InitiateWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error)
 	// WithdrawCallback Withdraw callback
-	// This endpoint handles callbacks from payment gateways for withdrawal results.
+	// Handles callbacks from payment gateways for withdrawal status updates
+	// This endpoint is called by payment providers to notify of completed or failed withdrawals
 	WithdrawCallback(context.Context, *WithdrawCallbackRequest) (*WithdrawCallbackResponse, error)
 }
 

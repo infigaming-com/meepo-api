@@ -33,26 +33,38 @@ const (
 // PaymentClient is the client API for Payment service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Payment Service
+// Provides methods for managing payment methods, channels, and transactions
 type PaymentClient interface {
 	// Get list of payment methods
+	// Retrieves all available payment methods supported by the system
 	GetPaymentMethodList(ctx context.Context, in *GetPaymentMethodListRequest, opts ...grpc.CallOption) (*GetPaymentMethodListResponse, error)
 	// Create payment channel
+	// Creates a new payment channel with specified configuration
 	CreatePaymentChannel(ctx context.Context, in *CreatePaymentChannelRequest, opts ...grpc.CallOption) (*CreatePaymentChannelResponse, error)
 	// Get list of payment channels
+	// Retrieves all payment channels for a specific operator
 	GetPaymentChannelList(ctx context.Context, in *GetPaymentChannelListRequest, opts ...grpc.CallOption) (*GetPaymentChannelListResponse, error)
 	// Initiate a deposit transaction
+	// Starts a new deposit process and returns payment information
 	InitiateDeposit(ctx context.Context, in *InitiateDepositRequest, opts ...grpc.CallOption) (*InitiateDepositResponse, error)
 	// Initiate a withdrawal transaction
+	// Starts a new withdrawal process
 	InitiateWithdraw(ctx context.Context, in *InitiateWithdrawRequest, opts ...grpc.CallOption) (*InitiateWithdrawResponse, error)
 	// Deposit callback
-	// This endpoint handles callbacks from payment gateways.
+	// Handles callbacks from payment gateways for deposit status updates
+	// This endpoint is called by payment providers to notify of completed or failed deposits
 	DepositCallback(ctx context.Context, in *DepositCallbackRequest, opts ...grpc.CallOption) (*DepositCallbackResponse, error)
 	// Withdraw callback
-	// This endpoint handles callbacks from payment gateways for withdrawal results.
+	// Handles callbacks from payment gateways for withdrawal status updates
+	// This endpoint is called by payment providers to notify of completed or failed withdrawals
 	WithdrawCallback(ctx context.Context, in *WithdrawCallbackRequest, opts ...grpc.CallOption) (*WithdrawCallbackResponse, error)
 	// Get transaction page with pagination and filters
+	// Retrieves a paginated list of transactions with optional filtering
 	GetTransactionPage(ctx context.Context, in *GetTransactionPageRequest, opts ...grpc.CallOption) (*GetTransactionPageResponse, error)
 	// Get payment channel page with pagination and filters
+	// Retrieves a paginated list of payment channels with optional filtering
 	GetPaymentChannelPage(ctx context.Context, in *GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*GetPaymentChannelPageResponse, error)
 }
 
@@ -157,26 +169,38 @@ func (c *paymentClient) GetPaymentChannelPage(ctx context.Context, in *GetPaymen
 // PaymentServer is the server API for Payment service.
 // All implementations must embed UnimplementedPaymentServer
 // for forward compatibility.
+//
+// Payment Service
+// Provides methods for managing payment methods, channels, and transactions
 type PaymentServer interface {
 	// Get list of payment methods
+	// Retrieves all available payment methods supported by the system
 	GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*GetPaymentMethodListResponse, error)
 	// Create payment channel
+	// Creates a new payment channel with specified configuration
 	CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error)
 	// Get list of payment channels
+	// Retrieves all payment channels for a specific operator
 	GetPaymentChannelList(context.Context, *GetPaymentChannelListRequest) (*GetPaymentChannelListResponse, error)
 	// Initiate a deposit transaction
+	// Starts a new deposit process and returns payment information
 	InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error)
 	// Initiate a withdrawal transaction
+	// Starts a new withdrawal process
 	InitiateWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error)
 	// Deposit callback
-	// This endpoint handles callbacks from payment gateways.
+	// Handles callbacks from payment gateways for deposit status updates
+	// This endpoint is called by payment providers to notify of completed or failed deposits
 	DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error)
 	// Withdraw callback
-	// This endpoint handles callbacks from payment gateways for withdrawal results.
+	// Handles callbacks from payment gateways for withdrawal status updates
+	// This endpoint is called by payment providers to notify of completed or failed withdrawals
 	WithdrawCallback(context.Context, *WithdrawCallbackRequest) (*WithdrawCallbackResponse, error)
 	// Get transaction page with pagination and filters
+	// Retrieves a paginated list of transactions with optional filtering
 	GetTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error)
 	// Get payment channel page with pagination and filters
+	// Retrieves a paginated list of payment channels with optional filtering
 	GetPaymentChannelPage(context.Context, *GetPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
