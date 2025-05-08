@@ -600,6 +600,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.AddUserCommentResponse'
+    /v1/backoffice/user/comments/list:
+        post:
+            tags:
+                - Backoffice_User
+            operationId: Backoffice_User_ListUserComments
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListUserCommentsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListUserCommentsResponse'
     /v1/backoffice/user/list:
         post:
             tags:
@@ -3261,6 +3279,28 @@ components:
                     type: string
                 total:
                     type: string
+        api.backoffice.service.v1.ListUserCommentsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+        api.backoffice.service.v1.ListUserCommentsResponse:
+            type: object
+            properties:
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListUserCommentsResponse_Comment'
+        api.backoffice.service.v1.ListUserCommentsResponse_Comment:
+            type: object
+            properties:
+                authorUserId:
+                    type: string
+                content:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
         api.backoffice.service.v1.ListUsersRequest:
             type: object
             properties:

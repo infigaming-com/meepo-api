@@ -64,6 +64,12 @@ service Backoffice_User {
             body: "*"
         };
     }
+	rpc ListUserComments(ListUserCommentsRequest) returns (ListUserCommentsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/comments/list"
+            body: "*"
+        };
+    }
 }
 
 message ListUsersRequest {
@@ -251,6 +257,16 @@ message AddUserCommentRequest {
 
 message AddUserCommentResponse {}
 
-message GetUserWalletRequest {
-	repeated string currencies = 1;
+message ListUserCommentsRequest {
+	int64 user_id = 1;
 }
+
+message ListUserCommentsResponse {
+	message Comment {
+		int64 author_user_id = 1;
+		string content = 2;
+		google.protobuf.Timestamp created_at = 3;
+	}
+	repeated Comment comments = 1;
+}
+

@@ -28,6 +28,7 @@ const (
 	Backoffice_User_AddUserTag_FullMethodName            = "/api.backoffice.service.v1.Backoffice_User/AddUserTag"
 	Backoffice_User_DeleteUserTag_FullMethodName         = "/api.backoffice.service.v1.Backoffice_User/DeleteUserTag"
 	Backoffice_User_AddUserComment_FullMethodName        = "/api.backoffice.service.v1.Backoffice_User/AddUserComment"
+	Backoffice_User_ListUserComments_FullMethodName      = "/api.backoffice.service.v1.Backoffice_User/ListUserComments"
 )
 
 // Backoffice_UserClient is the client API for Backoffice_User service.
@@ -43,6 +44,7 @@ type Backoffice_UserClient interface {
 	AddUserTag(ctx context.Context, in *AddUserTagRequest, opts ...grpc.CallOption) (*AddUserTagResponse, error)
 	DeleteUserTag(ctx context.Context, in *DeleteUserTagRequest, opts ...grpc.CallOption) (*DeleteUserTagResponse, error)
 	AddUserComment(ctx context.Context, in *AddUserCommentRequest, opts ...grpc.CallOption) (*AddUserCommentResponse, error)
+	ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...grpc.CallOption) (*ListUserCommentsResponse, error)
 }
 
 type backoffice_UserClient struct {
@@ -143,6 +145,16 @@ func (c *backoffice_UserClient) AddUserComment(ctx context.Context, in *AddUserC
 	return out, nil
 }
 
+func (c *backoffice_UserClient) ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...grpc.CallOption) (*ListUserCommentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUserCommentsResponse)
+	err := c.cc.Invoke(ctx, Backoffice_User_ListUserComments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Backoffice_UserServer is the server API for Backoffice_User service.
 // All implementations must embed UnimplementedBackoffice_UserServer
 // for forward compatibility.
@@ -156,6 +168,7 @@ type Backoffice_UserServer interface {
 	AddUserTag(context.Context, *AddUserTagRequest) (*AddUserTagResponse, error)
 	DeleteUserTag(context.Context, *DeleteUserTagRequest) (*DeleteUserTagResponse, error)
 	AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error)
+	ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error)
 	mustEmbedUnimplementedBackoffice_UserServer()
 }
 
@@ -192,6 +205,9 @@ func (UnimplementedBackoffice_UserServer) DeleteUserTag(context.Context, *Delete
 }
 func (UnimplementedBackoffice_UserServer) AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddUserComment not implemented")
+}
+func (UnimplementedBackoffice_UserServer) ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUserComments not implemented")
 }
 func (UnimplementedBackoffice_UserServer) mustEmbedUnimplementedBackoffice_UserServer() {}
 func (UnimplementedBackoffice_UserServer) testEmbeddedByValue()                         {}
@@ -376,6 +392,24 @@ func _Backoffice_User_AddUserComment_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Backoffice_User_ListUserComments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserCommentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Backoffice_UserServer).ListUserComments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Backoffice_User_ListUserComments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Backoffice_UserServer).ListUserComments(ctx, req.(*ListUserCommentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Backoffice_User_ServiceDesc is the grpc.ServiceDesc for Backoffice_User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -418,6 +452,10 @@ var Backoffice_User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddUserComment",
 			Handler:    _Backoffice_User_AddUserComment_Handler,
+		},
+		{
+			MethodName: "ListUserComments",
+			Handler:    _Backoffice_User_ListUserComments_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
