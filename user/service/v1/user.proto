@@ -10,6 +10,8 @@ option java_package = "api.user.service.v1";
 
 // User service provides authentication and user management functionality.
 service User {
+	rpc Event (EventRequest) returns (EventResponse) {}
+
 	// Register a new user with password-based authentication.
 	// This endpoint allows users to create a new account using various identity providers.
 	rpc Register (RegisterRequest) returns (AuthResponse) {
@@ -148,6 +150,13 @@ service User {
 	
 }
 
+message EventRequest {
+	string topic = 1;
+	bytes event_data = 2;
+}
+
+message EventResponse {}
+
 // UserInfo contains basic user information.
 message UserInfo {
 	// Unique identifier for the user.
@@ -170,6 +179,10 @@ message UserInfo {
 	string nickname = 9;
 	// Avatar
 	string avatar = 10;
+	// BanGame
+	bool ban_game = 11;
+	// BanWithdraw
+	bool ban_withdraw = 12;
 }
 
 // AuthType defines the type of authentication method.

@@ -193,6 +193,94 @@ func (OAuthProvider) EnumDescriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{2}
 }
 
+type EventRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Topic         string                 `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	EventData     []byte                 `protobuf:"bytes,2,opt,name=event_data,json=eventData,proto3" json:"event_data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EventRequest) Reset() {
+	*x = EventRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EventRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventRequest) ProtoMessage() {}
+
+func (x *EventRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventRequest.ProtoReflect.Descriptor instead.
+func (*EventRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *EventRequest) GetTopic() string {
+	if x != nil {
+		return x.Topic
+	}
+	return ""
+}
+
+func (x *EventRequest) GetEventData() []byte {
+	if x != nil {
+		return x.EventData
+	}
+	return nil
+}
+
+type EventResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EventResponse) Reset() {
+	*x = EventResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EventResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventResponse) ProtoMessage() {}
+
+func (x *EventResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventResponse.ProtoReflect.Descriptor instead.
+func (*EventResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{1}
+}
+
 // UserInfo contains basic user information.
 type UserInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -215,14 +303,18 @@ type UserInfo struct {
 	// Nickname
 	Nickname string `protobuf:"bytes,9,opt,name=nickname,proto3" json:"nickname,omitempty"`
 	// Avatar
-	Avatar        string `protobuf:"bytes,10,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Avatar string `protobuf:"bytes,10,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	// BanGame
+	BanGame bool `protobuf:"varint,11,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
+	// BanWithdraw
+	BanWithdraw   bool `protobuf:"varint,12,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UserInfo) Reset() {
 	*x = UserInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[0]
+	mi := &file_user_service_v1_user_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -234,7 +326,7 @@ func (x *UserInfo) String() string {
 func (*UserInfo) ProtoMessage() {}
 
 func (x *UserInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[0]
+	mi := &file_user_service_v1_user_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -247,7 +339,7 @@ func (x *UserInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserInfo.ProtoReflect.Descriptor instead.
 func (*UserInfo) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{0}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UserInfo) GetUserId() int64 {
@@ -320,6 +412,20 @@ func (x *UserInfo) GetAvatar() string {
 	return ""
 }
 
+func (x *UserInfo) GetBanGame() bool {
+	if x != nil {
+		return x.BanGame
+	}
+	return false
+}
+
+func (x *UserInfo) GetBanWithdraw() bool {
+	if x != nil {
+		return x.BanWithdraw
+	}
+	return false
+}
+
 // RegisterRequest contains the information needed to register a new user.
 type RegisterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -335,7 +441,7 @@ type RegisterRequest struct {
 
 func (x *RegisterRequest) Reset() {
 	*x = RegisterRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[1]
+	mi := &file_user_service_v1_user_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -347,7 +453,7 @@ func (x *RegisterRequest) String() string {
 func (*RegisterRequest) ProtoMessage() {}
 
 func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[1]
+	mi := &file_user_service_v1_user_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -360,7 +466,7 @@ func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
 func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{1}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *RegisterRequest) GetPasswordProvider() PasswordProvider {
@@ -399,7 +505,7 @@ type LoginRequest struct {
 
 func (x *LoginRequest) Reset() {
 	*x = LoginRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[2]
+	mi := &file_user_service_v1_user_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -411,7 +517,7 @@ func (x *LoginRequest) String() string {
 func (*LoginRequest) ProtoMessage() {}
 
 func (x *LoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[2]
+	mi := &file_user_service_v1_user_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -424,7 +530,7 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{2}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *LoginRequest) GetPasswordProvider() PasswordProvider {
@@ -461,7 +567,7 @@ type OAuthRequest struct {
 
 func (x *OAuthRequest) Reset() {
 	*x = OAuthRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[3]
+	mi := &file_user_service_v1_user_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -473,7 +579,7 @@ func (x *OAuthRequest) String() string {
 func (*OAuthRequest) ProtoMessage() {}
 
 func (x *OAuthRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[3]
+	mi := &file_user_service_v1_user_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -486,7 +592,7 @@ func (x *OAuthRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OAuthRequest.ProtoReflect.Descriptor instead.
 func (*OAuthRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{3}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *OAuthRequest) GetOauthProvider() OAuthProvider {
@@ -526,7 +632,7 @@ type TelegramAuthRequest struct {
 
 func (x *TelegramAuthRequest) Reset() {
 	*x = TelegramAuthRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[4]
+	mi := &file_user_service_v1_user_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -538,7 +644,7 @@ func (x *TelegramAuthRequest) String() string {
 func (*TelegramAuthRequest) ProtoMessage() {}
 
 func (x *TelegramAuthRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[4]
+	mi := &file_user_service_v1_user_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -551,7 +657,7 @@ func (x *TelegramAuthRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TelegramAuthRequest.ProtoReflect.Descriptor instead.
 func (*TelegramAuthRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{4}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *TelegramAuthRequest) GetId() int64 {
@@ -614,7 +720,7 @@ type RefreshTokenRequest struct {
 
 func (x *RefreshTokenRequest) Reset() {
 	*x = RefreshTokenRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[5]
+	mi := &file_user_service_v1_user_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -626,7 +732,7 @@ func (x *RefreshTokenRequest) String() string {
 func (*RefreshTokenRequest) ProtoMessage() {}
 
 func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[5]
+	mi := &file_user_service_v1_user_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -639,7 +745,7 @@ func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RefreshTokenRequest.ProtoReflect.Descriptor instead.
 func (*RefreshTokenRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{5}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *RefreshTokenRequest) GetRefreshToken() string {
@@ -666,7 +772,7 @@ type AuthResponse struct {
 
 func (x *AuthResponse) Reset() {
 	*x = AuthResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[6]
+	mi := &file_user_service_v1_user_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -678,7 +784,7 @@ func (x *AuthResponse) String() string {
 func (*AuthResponse) ProtoMessage() {}
 
 func (x *AuthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[6]
+	mi := &file_user_service_v1_user_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -691,7 +797,7 @@ func (x *AuthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuthResponse.ProtoReflect.Descriptor instead.
 func (*AuthResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{6}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AuthResponse) GetAccessToken() string {
@@ -737,7 +843,7 @@ type RefreshTokenResponse struct {
 
 func (x *RefreshTokenResponse) Reset() {
 	*x = RefreshTokenResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[7]
+	mi := &file_user_service_v1_user_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -749,7 +855,7 @@ func (x *RefreshTokenResponse) String() string {
 func (*RefreshTokenResponse) ProtoMessage() {}
 
 func (x *RefreshTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[7]
+	mi := &file_user_service_v1_user_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -762,7 +868,7 @@ func (x *RefreshTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RefreshTokenResponse.ProtoReflect.Descriptor instead.
 func (*RefreshTokenResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{7}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *RefreshTokenResponse) GetAccessToken() string {
@@ -797,7 +903,7 @@ type GetUserRequest struct {
 
 func (x *GetUserRequest) Reset() {
 	*x = GetUserRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[8]
+	mi := &file_user_service_v1_user_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -809,7 +915,7 @@ func (x *GetUserRequest) String() string {
 func (*GetUserRequest) ProtoMessage() {}
 
 func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[8]
+	mi := &file_user_service_v1_user_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -822,7 +928,7 @@ func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
 func (*GetUserRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{8}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetUserRequest) GetUserId() int64 {
@@ -843,7 +949,7 @@ type GetUserResponse struct {
 
 func (x *GetUserResponse) Reset() {
 	*x = GetUserResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[9]
+	mi := &file_user_service_v1_user_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -855,7 +961,7 @@ func (x *GetUserResponse) String() string {
 func (*GetUserResponse) ProtoMessage() {}
 
 func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[9]
+	mi := &file_user_service_v1_user_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -868,7 +974,7 @@ func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserResponse.ProtoReflect.Descriptor instead.
 func (*GetUserResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{9}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetUserResponse) GetUserInfo() *UserInfo {
@@ -887,7 +993,7 @@ type GetUserIdsByOperatorIdsRequest struct {
 
 func (x *GetUserIdsByOperatorIdsRequest) Reset() {
 	*x = GetUserIdsByOperatorIdsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[10]
+	mi := &file_user_service_v1_user_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -899,7 +1005,7 @@ func (x *GetUserIdsByOperatorIdsRequest) String() string {
 func (*GetUserIdsByOperatorIdsRequest) ProtoMessage() {}
 
 func (x *GetUserIdsByOperatorIdsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[10]
+	mi := &file_user_service_v1_user_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -912,7 +1018,7 @@ func (x *GetUserIdsByOperatorIdsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserIdsByOperatorIdsRequest.ProtoReflect.Descriptor instead.
 func (*GetUserIdsByOperatorIdsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{10}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetUserIdsByOperatorIdsRequest) GetOperatorIds() []int64 {
@@ -931,7 +1037,7 @@ type GetUserIdsByOperatorIdsResponse struct {
 
 func (x *GetUserIdsByOperatorIdsResponse) Reset() {
 	*x = GetUserIdsByOperatorIdsResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[11]
+	mi := &file_user_service_v1_user_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -943,7 +1049,7 @@ func (x *GetUserIdsByOperatorIdsResponse) String() string {
 func (*GetUserIdsByOperatorIdsResponse) ProtoMessage() {}
 
 func (x *GetUserIdsByOperatorIdsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[11]
+	mi := &file_user_service_v1_user_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -956,7 +1062,7 @@ func (x *GetUserIdsByOperatorIdsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserIdsByOperatorIdsResponse.ProtoReflect.Descriptor instead.
 func (*GetUserIdsByOperatorIdsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{11}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetUserIdsByOperatorIdsResponse) GetUserIds() []int64 {
@@ -975,7 +1081,7 @@ type LogoutRequest struct {
 
 func (x *LogoutRequest) Reset() {
 	*x = LogoutRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[12]
+	mi := &file_user_service_v1_user_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -987,7 +1093,7 @@ func (x *LogoutRequest) String() string {
 func (*LogoutRequest) ProtoMessage() {}
 
 func (x *LogoutRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[12]
+	mi := &file_user_service_v1_user_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1000,7 +1106,7 @@ func (x *LogoutRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogoutRequest.ProtoReflect.Descriptor instead.
 func (*LogoutRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{12}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{14}
 }
 
 // LogoutResponse is an empty message for the logout operation.
@@ -1012,7 +1118,7 @@ type LogoutResponse struct {
 
 func (x *LogoutResponse) Reset() {
 	*x = LogoutResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[13]
+	mi := &file_user_service_v1_user_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1024,7 +1130,7 @@ func (x *LogoutResponse) String() string {
 func (*LogoutResponse) ProtoMessage() {}
 
 func (x *LogoutResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[13]
+	mi := &file_user_service_v1_user_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1037,7 +1143,7 @@ func (x *LogoutResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogoutResponse.ProtoReflect.Descriptor instead.
 func (*LogoutResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{13}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{15}
 }
 
 type IsTokenRevokedRequest struct {
@@ -1049,7 +1155,7 @@ type IsTokenRevokedRequest struct {
 
 func (x *IsTokenRevokedRequest) Reset() {
 	*x = IsTokenRevokedRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[14]
+	mi := &file_user_service_v1_user_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1061,7 +1167,7 @@ func (x *IsTokenRevokedRequest) String() string {
 func (*IsTokenRevokedRequest) ProtoMessage() {}
 
 func (x *IsTokenRevokedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[14]
+	mi := &file_user_service_v1_user_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1074,7 +1180,7 @@ func (x *IsTokenRevokedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsTokenRevokedRequest.ProtoReflect.Descriptor instead.
 func (*IsTokenRevokedRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{14}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *IsTokenRevokedRequest) GetToken() string {
@@ -1093,7 +1199,7 @@ type IsTokenRevokedResponse struct {
 
 func (x *IsTokenRevokedResponse) Reset() {
 	*x = IsTokenRevokedResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[15]
+	mi := &file_user_service_v1_user_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1105,7 +1211,7 @@ func (x *IsTokenRevokedResponse) String() string {
 func (*IsTokenRevokedResponse) ProtoMessage() {}
 
 func (x *IsTokenRevokedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[15]
+	mi := &file_user_service_v1_user_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1118,7 +1224,7 @@ func (x *IsTokenRevokedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsTokenRevokedResponse.ProtoReflect.Descriptor instead.
 func (*IsTokenRevokedResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{15}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *IsTokenRevokedResponse) GetRevoked() bool {
@@ -1139,7 +1245,7 @@ type GetOperatorTagConfigRequest struct {
 
 func (x *GetOperatorTagConfigRequest) Reset() {
 	*x = GetOperatorTagConfigRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[16]
+	mi := &file_user_service_v1_user_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1151,7 +1257,7 @@ func (x *GetOperatorTagConfigRequest) String() string {
 func (*GetOperatorTagConfigRequest) ProtoMessage() {}
 
 func (x *GetOperatorTagConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[16]
+	mi := &file_user_service_v1_user_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1164,7 +1270,7 @@ func (x *GetOperatorTagConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorTagConfigRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagConfigRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{16}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetOperatorTagConfigRequest) GetOperatorId() int64 {
@@ -1185,7 +1291,7 @@ type GetOperatorTagConfigResponse struct {
 
 func (x *GetOperatorTagConfigResponse) Reset() {
 	*x = GetOperatorTagConfigResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[17]
+	mi := &file_user_service_v1_user_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1197,7 +1303,7 @@ func (x *GetOperatorTagConfigResponse) String() string {
 func (*GetOperatorTagConfigResponse) ProtoMessage() {}
 
 func (x *GetOperatorTagConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[17]
+	mi := &file_user_service_v1_user_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1210,7 +1316,7 @@ func (x *GetOperatorTagConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorTagConfigResponse.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagConfigResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{17}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetOperatorTagConfigResponse) GetFollowParent() bool {
@@ -1233,7 +1339,7 @@ type SetOperatorTagConfigRequest struct {
 
 func (x *SetOperatorTagConfigRequest) Reset() {
 	*x = SetOperatorTagConfigRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[18]
+	mi := &file_user_service_v1_user_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1245,7 +1351,7 @@ func (x *SetOperatorTagConfigRequest) String() string {
 func (*SetOperatorTagConfigRequest) ProtoMessage() {}
 
 func (x *SetOperatorTagConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[18]
+	mi := &file_user_service_v1_user_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1258,7 +1364,7 @@ func (x *SetOperatorTagConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOperatorTagConfigRequest.ProtoReflect.Descriptor instead.
 func (*SetOperatorTagConfigRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{18}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *SetOperatorTagConfigRequest) GetOperatorId() int64 {
@@ -1286,7 +1392,7 @@ type SetOperatorTagConfigResponse struct {
 
 func (x *SetOperatorTagConfigResponse) Reset() {
 	*x = SetOperatorTagConfigResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[19]
+	mi := &file_user_service_v1_user_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1298,7 +1404,7 @@ func (x *SetOperatorTagConfigResponse) String() string {
 func (*SetOperatorTagConfigResponse) ProtoMessage() {}
 
 func (x *SetOperatorTagConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[19]
+	mi := &file_user_service_v1_user_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1311,7 +1417,7 @@ func (x *SetOperatorTagConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOperatorTagConfigResponse.ProtoReflect.Descriptor instead.
 func (*SetOperatorTagConfigResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{19}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *SetOperatorTagConfigResponse) GetFollowParent() bool {
@@ -1334,7 +1440,7 @@ type AddOperatorTagRequest struct {
 
 func (x *AddOperatorTagRequest) Reset() {
 	*x = AddOperatorTagRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[20]
+	mi := &file_user_service_v1_user_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1346,7 +1452,7 @@ func (x *AddOperatorTagRequest) String() string {
 func (*AddOperatorTagRequest) ProtoMessage() {}
 
 func (x *AddOperatorTagRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[20]
+	mi := &file_user_service_v1_user_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1359,7 +1465,7 @@ func (x *AddOperatorTagRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddOperatorTagRequest.ProtoReflect.Descriptor instead.
 func (*AddOperatorTagRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{20}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *AddOperatorTagRequest) GetOperatorId() int64 {
@@ -1385,7 +1491,7 @@ type AddOperatorTagResponse struct {
 
 func (x *AddOperatorTagResponse) Reset() {
 	*x = AddOperatorTagResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[21]
+	mi := &file_user_service_v1_user_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1397,7 +1503,7 @@ func (x *AddOperatorTagResponse) String() string {
 func (*AddOperatorTagResponse) ProtoMessage() {}
 
 func (x *AddOperatorTagResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[21]
+	mi := &file_user_service_v1_user_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1410,7 +1516,7 @@ func (x *AddOperatorTagResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddOperatorTagResponse.ProtoReflect.Descriptor instead.
 func (*AddOperatorTagResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{21}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{23}
 }
 
 // GetOperatorTagsRequest contains the operator ID to retrieve tags for.
@@ -1424,7 +1530,7 @@ type GetOperatorTagsRequest struct {
 
 func (x *GetOperatorTagsRequest) Reset() {
 	*x = GetOperatorTagsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[22]
+	mi := &file_user_service_v1_user_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1436,7 +1542,7 @@ func (x *GetOperatorTagsRequest) String() string {
 func (*GetOperatorTagsRequest) ProtoMessage() {}
 
 func (x *GetOperatorTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[22]
+	mi := &file_user_service_v1_user_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1449,7 +1555,7 @@ func (x *GetOperatorTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorTagsRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{22}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *GetOperatorTagsRequest) GetOperatorId() int64 {
@@ -1470,7 +1576,7 @@ type GetOperatorTagsResponse struct {
 
 func (x *GetOperatorTagsResponse) Reset() {
 	*x = GetOperatorTagsResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[23]
+	mi := &file_user_service_v1_user_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1482,7 +1588,7 @@ func (x *GetOperatorTagsResponse) String() string {
 func (*GetOperatorTagsResponse) ProtoMessage() {}
 
 func (x *GetOperatorTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[23]
+	mi := &file_user_service_v1_user_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1495,7 +1601,7 @@ func (x *GetOperatorTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorTagsResponse.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{23}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *GetOperatorTagsResponse) GetTags() []string {
@@ -1518,7 +1624,7 @@ type DeleteOperatorTagRequest struct {
 
 func (x *DeleteOperatorTagRequest) Reset() {
 	*x = DeleteOperatorTagRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[24]
+	mi := &file_user_service_v1_user_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1530,7 +1636,7 @@ func (x *DeleteOperatorTagRequest) String() string {
 func (*DeleteOperatorTagRequest) ProtoMessage() {}
 
 func (x *DeleteOperatorTagRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[24]
+	mi := &file_user_service_v1_user_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1543,7 +1649,7 @@ func (x *DeleteOperatorTagRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOperatorTagRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOperatorTagRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{24}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *DeleteOperatorTagRequest) GetOperatorId() int64 {
@@ -1569,7 +1675,7 @@ type DeleteOperatorTagResponse struct {
 
 func (x *DeleteOperatorTagResponse) Reset() {
 	*x = DeleteOperatorTagResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[25]
+	mi := &file_user_service_v1_user_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1581,7 +1687,7 @@ func (x *DeleteOperatorTagResponse) String() string {
 func (*DeleteOperatorTagResponse) ProtoMessage() {}
 
 func (x *DeleteOperatorTagResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[25]
+	mi := &file_user_service_v1_user_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1594,7 +1700,7 @@ func (x *DeleteOperatorTagResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOperatorTagResponse.ProtoReflect.Descriptor instead.
 func (*DeleteOperatorTagResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{25}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{27}
 }
 
 // AddUserTagRequest contains the user ID and tag to add.
@@ -1610,7 +1716,7 @@ type AddUserTagRequest struct {
 
 func (x *AddUserTagRequest) Reset() {
 	*x = AddUserTagRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[26]
+	mi := &file_user_service_v1_user_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1622,7 +1728,7 @@ func (x *AddUserTagRequest) String() string {
 func (*AddUserTagRequest) ProtoMessage() {}
 
 func (x *AddUserTagRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[26]
+	mi := &file_user_service_v1_user_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1635,7 +1741,7 @@ func (x *AddUserTagRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddUserTagRequest.ProtoReflect.Descriptor instead.
 func (*AddUserTagRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{26}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *AddUserTagRequest) GetUserId() int64 {
@@ -1661,7 +1767,7 @@ type AddUserTagResponse struct {
 
 func (x *AddUserTagResponse) Reset() {
 	*x = AddUserTagResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[27]
+	mi := &file_user_service_v1_user_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1673,7 +1779,7 @@ func (x *AddUserTagResponse) String() string {
 func (*AddUserTagResponse) ProtoMessage() {}
 
 func (x *AddUserTagResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[27]
+	mi := &file_user_service_v1_user_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1686,7 +1792,7 @@ func (x *AddUserTagResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddUserTagResponse.ProtoReflect.Descriptor instead.
 func (*AddUserTagResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{27}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{29}
 }
 
 // DeleteUserTagRequest contains the user ID and tag to soft delete.
@@ -1702,7 +1808,7 @@ type DeleteUserTagRequest struct {
 
 func (x *DeleteUserTagRequest) Reset() {
 	*x = DeleteUserTagRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[28]
+	mi := &file_user_service_v1_user_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1714,7 +1820,7 @@ func (x *DeleteUserTagRequest) String() string {
 func (*DeleteUserTagRequest) ProtoMessage() {}
 
 func (x *DeleteUserTagRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[28]
+	mi := &file_user_service_v1_user_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1727,7 +1833,7 @@ func (x *DeleteUserTagRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserTagRequest.ProtoReflect.Descriptor instead.
 func (*DeleteUserTagRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{28}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *DeleteUserTagRequest) GetUserId() int64 {
@@ -1753,7 +1859,7 @@ type DeleteUserTagResponse struct {
 
 func (x *DeleteUserTagResponse) Reset() {
 	*x = DeleteUserTagResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[29]
+	mi := &file_user_service_v1_user_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1765,7 +1871,7 @@ func (x *DeleteUserTagResponse) String() string {
 func (*DeleteUserTagResponse) ProtoMessage() {}
 
 func (x *DeleteUserTagResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[29]
+	mi := &file_user_service_v1_user_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1778,7 +1884,7 @@ func (x *DeleteUserTagResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserTagResponse.ProtoReflect.Descriptor instead.
 func (*DeleteUserTagResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{29}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{31}
 }
 
 // GetUserTagsRequest contains the user ID to retrieve tags for.
@@ -1792,7 +1898,7 @@ type GetUserTagsRequest struct {
 
 func (x *GetUserTagsRequest) Reset() {
 	*x = GetUserTagsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[30]
+	mi := &file_user_service_v1_user_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1804,7 +1910,7 @@ func (x *GetUserTagsRequest) String() string {
 func (*GetUserTagsRequest) ProtoMessage() {}
 
 func (x *GetUserTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[30]
+	mi := &file_user_service_v1_user_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1817,7 +1923,7 @@ func (x *GetUserTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserTagsRequest.ProtoReflect.Descriptor instead.
 func (*GetUserTagsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{30}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetUserTagsRequest) GetUserId() int64 {
@@ -1838,7 +1944,7 @@ type GetUserTagsResponse struct {
 
 func (x *GetUserTagsResponse) Reset() {
 	*x = GetUserTagsResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[31]
+	mi := &file_user_service_v1_user_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1850,7 +1956,7 @@ func (x *GetUserTagsResponse) String() string {
 func (*GetUserTagsResponse) ProtoMessage() {}
 
 func (x *GetUserTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[31]
+	mi := &file_user_service_v1_user_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1863,7 +1969,7 @@ func (x *GetUserTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserTagsResponse.ProtoReflect.Descriptor instead.
 func (*GetUserTagsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{31}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *GetUserTagsResponse) GetTags() []string {
@@ -1877,7 +1983,12 @@ var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x96\x02\n" +
+	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"C\n" +
+	"\fEventRequest\x12\x14\n" +
+	"\x05topic\x18\x01 \x01(\tR\x05topic\x12\x1d\n" +
+	"\n" +
+	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
+	"\rEventResponse\"\xd4\x02\n" +
 	"\bUserInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -1890,7 +2001,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\blastname\x18\b \x01(\tR\blastname\x12\x1a\n" +
 	"\bnickname\x18\t \x01(\tR\bnickname\x12\x16\n" +
 	"\x06avatar\x18\n" +
-	" \x01(\tR\x06avatar\"\x9a\x01\n" +
+	" \x01(\tR\x06avatar\x12\x19\n" +
+	"\bban_game\x18\v \x01(\bR\abanGame\x12!\n" +
+	"\fban_withdraw\x18\f \x01(\bR\vbanWithdraw\"\x9a\x01\n" +
 	"\x0fRegisterRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
@@ -1990,8 +2103,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1aOAUTH_PROVIDER_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15OAUTH_PROVIDER_GOOGLE\x10\x01\x12\x1b\n" +
 	"\x17OAUTH_PROVIDER_FACEBOOK\x10\x02\x12\x1a\n" +
-	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\x8b\x12\n" +
-	"\x04User\x12v\n" +
+	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\xdd\x12\n" +
+	"\x04User\x12P\n" +
+	"\x05Event\x12!.api.user.service.v1.EventRequest\x1a\".api.user.service.v1.EventResponse\"\x00\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12\x80\x01\n" +
 	"\x18RegisterOrLoginWithOAuth\x12!.api.user.service.v1.OAuthRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/oauth\x12\x8d\x01\n" +
@@ -2025,86 +2139,90 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
 var file_user_service_v1_user_proto_goTypes = []any{
 	(AuthType)(0),                           // 0: api.user.service.v1.AuthType
 	(PasswordProvider)(0),                   // 1: api.user.service.v1.PasswordProvider
 	(OAuthProvider)(0),                      // 2: api.user.service.v1.OAuthProvider
-	(*UserInfo)(nil),                        // 3: api.user.service.v1.UserInfo
-	(*RegisterRequest)(nil),                 // 4: api.user.service.v1.RegisterRequest
-	(*LoginRequest)(nil),                    // 5: api.user.service.v1.LoginRequest
-	(*OAuthRequest)(nil),                    // 6: api.user.service.v1.OAuthRequest
-	(*TelegramAuthRequest)(nil),             // 7: api.user.service.v1.TelegramAuthRequest
-	(*RefreshTokenRequest)(nil),             // 8: api.user.service.v1.RefreshTokenRequest
-	(*AuthResponse)(nil),                    // 9: api.user.service.v1.AuthResponse
-	(*RefreshTokenResponse)(nil),            // 10: api.user.service.v1.RefreshTokenResponse
-	(*GetUserRequest)(nil),                  // 11: api.user.service.v1.GetUserRequest
-	(*GetUserResponse)(nil),                 // 12: api.user.service.v1.GetUserResponse
-	(*GetUserIdsByOperatorIdsRequest)(nil),  // 13: api.user.service.v1.GetUserIdsByOperatorIdsRequest
-	(*GetUserIdsByOperatorIdsResponse)(nil), // 14: api.user.service.v1.GetUserIdsByOperatorIdsResponse
-	(*LogoutRequest)(nil),                   // 15: api.user.service.v1.LogoutRequest
-	(*LogoutResponse)(nil),                  // 16: api.user.service.v1.LogoutResponse
-	(*IsTokenRevokedRequest)(nil),           // 17: api.user.service.v1.IsTokenRevokedRequest
-	(*IsTokenRevokedResponse)(nil),          // 18: api.user.service.v1.IsTokenRevokedResponse
-	(*GetOperatorTagConfigRequest)(nil),     // 19: api.user.service.v1.GetOperatorTagConfigRequest
-	(*GetOperatorTagConfigResponse)(nil),    // 20: api.user.service.v1.GetOperatorTagConfigResponse
-	(*SetOperatorTagConfigRequest)(nil),     // 21: api.user.service.v1.SetOperatorTagConfigRequest
-	(*SetOperatorTagConfigResponse)(nil),    // 22: api.user.service.v1.SetOperatorTagConfigResponse
-	(*AddOperatorTagRequest)(nil),           // 23: api.user.service.v1.AddOperatorTagRequest
-	(*AddOperatorTagResponse)(nil),          // 24: api.user.service.v1.AddOperatorTagResponse
-	(*GetOperatorTagsRequest)(nil),          // 25: api.user.service.v1.GetOperatorTagsRequest
-	(*GetOperatorTagsResponse)(nil),         // 26: api.user.service.v1.GetOperatorTagsResponse
-	(*DeleteOperatorTagRequest)(nil),        // 27: api.user.service.v1.DeleteOperatorTagRequest
-	(*DeleteOperatorTagResponse)(nil),       // 28: api.user.service.v1.DeleteOperatorTagResponse
-	(*AddUserTagRequest)(nil),               // 29: api.user.service.v1.AddUserTagRequest
-	(*AddUserTagResponse)(nil),              // 30: api.user.service.v1.AddUserTagResponse
-	(*DeleteUserTagRequest)(nil),            // 31: api.user.service.v1.DeleteUserTagRequest
-	(*DeleteUserTagResponse)(nil),           // 32: api.user.service.v1.DeleteUserTagResponse
-	(*GetUserTagsRequest)(nil),              // 33: api.user.service.v1.GetUserTagsRequest
-	(*GetUserTagsResponse)(nil),             // 34: api.user.service.v1.GetUserTagsResponse
+	(*EventRequest)(nil),                    // 3: api.user.service.v1.EventRequest
+	(*EventResponse)(nil),                   // 4: api.user.service.v1.EventResponse
+	(*UserInfo)(nil),                        // 5: api.user.service.v1.UserInfo
+	(*RegisterRequest)(nil),                 // 6: api.user.service.v1.RegisterRequest
+	(*LoginRequest)(nil),                    // 7: api.user.service.v1.LoginRequest
+	(*OAuthRequest)(nil),                    // 8: api.user.service.v1.OAuthRequest
+	(*TelegramAuthRequest)(nil),             // 9: api.user.service.v1.TelegramAuthRequest
+	(*RefreshTokenRequest)(nil),             // 10: api.user.service.v1.RefreshTokenRequest
+	(*AuthResponse)(nil),                    // 11: api.user.service.v1.AuthResponse
+	(*RefreshTokenResponse)(nil),            // 12: api.user.service.v1.RefreshTokenResponse
+	(*GetUserRequest)(nil),                  // 13: api.user.service.v1.GetUserRequest
+	(*GetUserResponse)(nil),                 // 14: api.user.service.v1.GetUserResponse
+	(*GetUserIdsByOperatorIdsRequest)(nil),  // 15: api.user.service.v1.GetUserIdsByOperatorIdsRequest
+	(*GetUserIdsByOperatorIdsResponse)(nil), // 16: api.user.service.v1.GetUserIdsByOperatorIdsResponse
+	(*LogoutRequest)(nil),                   // 17: api.user.service.v1.LogoutRequest
+	(*LogoutResponse)(nil),                  // 18: api.user.service.v1.LogoutResponse
+	(*IsTokenRevokedRequest)(nil),           // 19: api.user.service.v1.IsTokenRevokedRequest
+	(*IsTokenRevokedResponse)(nil),          // 20: api.user.service.v1.IsTokenRevokedResponse
+	(*GetOperatorTagConfigRequest)(nil),     // 21: api.user.service.v1.GetOperatorTagConfigRequest
+	(*GetOperatorTagConfigResponse)(nil),    // 22: api.user.service.v1.GetOperatorTagConfigResponse
+	(*SetOperatorTagConfigRequest)(nil),     // 23: api.user.service.v1.SetOperatorTagConfigRequest
+	(*SetOperatorTagConfigResponse)(nil),    // 24: api.user.service.v1.SetOperatorTagConfigResponse
+	(*AddOperatorTagRequest)(nil),           // 25: api.user.service.v1.AddOperatorTagRequest
+	(*AddOperatorTagResponse)(nil),          // 26: api.user.service.v1.AddOperatorTagResponse
+	(*GetOperatorTagsRequest)(nil),          // 27: api.user.service.v1.GetOperatorTagsRequest
+	(*GetOperatorTagsResponse)(nil),         // 28: api.user.service.v1.GetOperatorTagsResponse
+	(*DeleteOperatorTagRequest)(nil),        // 29: api.user.service.v1.DeleteOperatorTagRequest
+	(*DeleteOperatorTagResponse)(nil),       // 30: api.user.service.v1.DeleteOperatorTagResponse
+	(*AddUserTagRequest)(nil),               // 31: api.user.service.v1.AddUserTagRequest
+	(*AddUserTagResponse)(nil),              // 32: api.user.service.v1.AddUserTagResponse
+	(*DeleteUserTagRequest)(nil),            // 33: api.user.service.v1.DeleteUserTagRequest
+	(*DeleteUserTagResponse)(nil),           // 34: api.user.service.v1.DeleteUserTagResponse
+	(*GetUserTagsRequest)(nil),              // 35: api.user.service.v1.GetUserTagsRequest
+	(*GetUserTagsResponse)(nil),             // 36: api.user.service.v1.GetUserTagsResponse
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
 	1,  // 0: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
 	1,  // 1: api.user.service.v1.LoginRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
 	2,  // 2: api.user.service.v1.OAuthRequest.oauth_provider:type_name -> api.user.service.v1.OAuthProvider
-	3,  // 3: api.user.service.v1.AuthResponse.user_info:type_name -> api.user.service.v1.UserInfo
-	3,  // 4: api.user.service.v1.GetUserResponse.user_info:type_name -> api.user.service.v1.UserInfo
-	4,  // 5: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
-	5,  // 6: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
-	6,  // 7: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
-	7,  // 8: api.user.service.v1.User.RegisterOrLoginWithTelegram:input_type -> api.user.service.v1.TelegramAuthRequest
-	8,  // 9: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
-	11, // 10: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
-	13, // 11: api.user.service.v1.User.GetUserIdsByOperatorIds:input_type -> api.user.service.v1.GetUserIdsByOperatorIdsRequest
-	15, // 12: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
-	17, // 13: api.user.service.v1.User.IsTokenRevoked:input_type -> api.user.service.v1.IsTokenRevokedRequest
-	19, // 14: api.user.service.v1.User.GetOperatorTagConfig:input_type -> api.user.service.v1.GetOperatorTagConfigRequest
-	21, // 15: api.user.service.v1.User.SetOperatorTagConfig:input_type -> api.user.service.v1.SetOperatorTagConfigRequest
-	23, // 16: api.user.service.v1.User.AddOperatorTag:input_type -> api.user.service.v1.AddOperatorTagRequest
-	25, // 17: api.user.service.v1.User.GetOperatorTags:input_type -> api.user.service.v1.GetOperatorTagsRequest
-	27, // 18: api.user.service.v1.User.DeleteOperatorTag:input_type -> api.user.service.v1.DeleteOperatorTagRequest
-	29, // 19: api.user.service.v1.User.AddUserTag:input_type -> api.user.service.v1.AddUserTagRequest
-	31, // 20: api.user.service.v1.User.DeleteUserTag:input_type -> api.user.service.v1.DeleteUserTagRequest
-	33, // 21: api.user.service.v1.User.GetUserTags:input_type -> api.user.service.v1.GetUserTagsRequest
-	9,  // 22: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
-	9,  // 23: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
-	9,  // 24: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
-	9,  // 25: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
-	10, // 26: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
-	12, // 27: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	14, // 28: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
-	16, // 29: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
-	18, // 30: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
-	20, // 31: api.user.service.v1.User.GetOperatorTagConfig:output_type -> api.user.service.v1.GetOperatorTagConfigResponse
-	22, // 32: api.user.service.v1.User.SetOperatorTagConfig:output_type -> api.user.service.v1.SetOperatorTagConfigResponse
-	24, // 33: api.user.service.v1.User.AddOperatorTag:output_type -> api.user.service.v1.AddOperatorTagResponse
-	26, // 34: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
-	28, // 35: api.user.service.v1.User.DeleteOperatorTag:output_type -> api.user.service.v1.DeleteOperatorTagResponse
-	30, // 36: api.user.service.v1.User.AddUserTag:output_type -> api.user.service.v1.AddUserTagResponse
-	32, // 37: api.user.service.v1.User.DeleteUserTag:output_type -> api.user.service.v1.DeleteUserTagResponse
-	34, // 38: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
-	22, // [22:39] is the sub-list for method output_type
-	5,  // [5:22] is the sub-list for method input_type
+	5,  // 3: api.user.service.v1.AuthResponse.user_info:type_name -> api.user.service.v1.UserInfo
+	5,  // 4: api.user.service.v1.GetUserResponse.user_info:type_name -> api.user.service.v1.UserInfo
+	3,  // 5: api.user.service.v1.User.Event:input_type -> api.user.service.v1.EventRequest
+	6,  // 6: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
+	7,  // 7: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
+	8,  // 8: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
+	9,  // 9: api.user.service.v1.User.RegisterOrLoginWithTelegram:input_type -> api.user.service.v1.TelegramAuthRequest
+	10, // 10: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
+	13, // 11: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
+	15, // 12: api.user.service.v1.User.GetUserIdsByOperatorIds:input_type -> api.user.service.v1.GetUserIdsByOperatorIdsRequest
+	17, // 13: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
+	19, // 14: api.user.service.v1.User.IsTokenRevoked:input_type -> api.user.service.v1.IsTokenRevokedRequest
+	21, // 15: api.user.service.v1.User.GetOperatorTagConfig:input_type -> api.user.service.v1.GetOperatorTagConfigRequest
+	23, // 16: api.user.service.v1.User.SetOperatorTagConfig:input_type -> api.user.service.v1.SetOperatorTagConfigRequest
+	25, // 17: api.user.service.v1.User.AddOperatorTag:input_type -> api.user.service.v1.AddOperatorTagRequest
+	27, // 18: api.user.service.v1.User.GetOperatorTags:input_type -> api.user.service.v1.GetOperatorTagsRequest
+	29, // 19: api.user.service.v1.User.DeleteOperatorTag:input_type -> api.user.service.v1.DeleteOperatorTagRequest
+	31, // 20: api.user.service.v1.User.AddUserTag:input_type -> api.user.service.v1.AddUserTagRequest
+	33, // 21: api.user.service.v1.User.DeleteUserTag:input_type -> api.user.service.v1.DeleteUserTagRequest
+	35, // 22: api.user.service.v1.User.GetUserTags:input_type -> api.user.service.v1.GetUserTagsRequest
+	4,  // 23: api.user.service.v1.User.Event:output_type -> api.user.service.v1.EventResponse
+	11, // 24: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
+	11, // 25: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
+	11, // 26: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
+	11, // 27: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
+	12, // 28: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
+	14, // 29: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	16, // 30: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
+	18, // 31: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	20, // 32: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
+	22, // 33: api.user.service.v1.User.GetOperatorTagConfig:output_type -> api.user.service.v1.GetOperatorTagConfigResponse
+	24, // 34: api.user.service.v1.User.SetOperatorTagConfig:output_type -> api.user.service.v1.SetOperatorTagConfigResponse
+	26, // 35: api.user.service.v1.User.AddOperatorTag:output_type -> api.user.service.v1.AddOperatorTagResponse
+	28, // 36: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
+	30, // 37: api.user.service.v1.User.DeleteOperatorTag:output_type -> api.user.service.v1.DeleteOperatorTagResponse
+	32, // 38: api.user.service.v1.User.AddUserTag:output_type -> api.user.service.v1.AddUserTagResponse
+	34, // 39: api.user.service.v1.User.DeleteUserTag:output_type -> api.user.service.v1.DeleteUserTagResponse
+	36, // 40: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
+	23, // [23:41] is the sub-list for method output_type
+	5,  // [5:23] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
 	5,  // [5:5] is the sub-list for extension extendee
 	0,  // [0:5] is the sub-list for field type_name
@@ -2121,7 +2239,7 @@ func file_user_service_v1_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   32,
+			NumMessages:   34,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -1,0 +1,173 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+message ListBetsRequest {
+	repeated int64 operator_ids = 1;
+	repeated string provider_ids = 2;
+	repeated string game_names = 3;
+	repeated string game_ids = 4;
+	optional int64 user_id = 5;
+	optional int64 operator_transaction_id = 6;
+	optional string provider_transaction_id = 7;
+	optional google.protobuf.Timestamp start_time = 8;
+	optional google.protobuf.Timestamp end_time = 9;
+	optional int64 min_bet_amount = 10;
+	optional int64 max_bet_amount = 11;
+	repeated string currencies = 12;
+	repeated string settlement_currencies = 13;
+	optional int64 page = 14;
+	optional int64 page_size = 15;
+}
+
+message Bet {
+	message Amount {
+		int64 amount_in_currency = 1;
+		int64 amount_in_settlement_currency = 2;
+	}
+	string operator = 1;
+	google.protobuf.Timestamp created_at = 2;
+	google.protobuf.Timestamp updated_at = 3;
+	string category = 4;
+	string game_id = 5;
+	string provider = 6;
+	int64 operator_transaction_id = 7;
+	string provider_transaction_id = 8;
+	int64 user_id = 9;
+	Amount bet_amount = 10;
+	Amount win_amount = 11;
+	double odds = 12;
+	int64 valid_bet_amount = 13;
+}
+
+message ListBetsResponse {
+	repeated Bet bets = 1;
+	int64 page = 2;
+	int64 page_size = 3;
+	int64 total = 4;
+}
+
+message GetUserBetsOverviewRequest {
+	int64 user_id = 1;
+	repeated string providers = 2;
+	repeated string game_names = 3;
+	repeated string game_ids = 4;
+	repeated string currencies = 5;
+	optional int64 bet_amount_min = 6;
+	optional int64 bet_amount_max = 7;
+	optional int64 win_amount_min = 8;
+	optional int64 win_amount_max = 9;
+	optional google.protobuf.Timestamp start_time = 10;
+	optional google.protobuf.Timestamp end_time = 11;
+	optional int64 page = 12;
+	optional int64 page_size = 13;
+}
+
+message GetUserBetsOverviewResponse {
+	int64 rounds = 1;
+	int64 bet_count = 2;
+	int64 turnover = 3;
+	int64 bet_amount = 4;
+	int64 win_amount = 5;
+	int64 ggr = 6;
+	int64 ngr = 7;
+}
+
+// ?? Can merge with ListBetsRequest
+message ListUserBetsRequest {
+	int64 user_id = 1;
+	repeated string provider_ids = 2;
+	repeated string game_names = 3;
+	repeated string game_ids = 4;
+	repeated string currencies = 5;
+	optional int64 min_bet_amount = 6;
+	optional int64 max_bet_amount = 7;
+	optional int64 min_win_amount = 8;
+	optional int64 max_win_amount = 9;
+	optional google.protobuf.Timestamp start_time = 10;
+	optional google.protobuf.Timestamp end_time = 11;
+	optional int64 page = 12;
+	optional int64 page_size = 13;
+}
+
+message ListUserBetsResponse {
+	repeated Bet bets = 1;
+	int64 page = 2;
+	int64 page_size = 3;
+	int64 total = 4;
+}
+
+message GetGameTransactionsForBetRequest {
+	string round_id = 1;
+	string bet_id = 2;
+}
+
+message GetGameTransactionsForBetResponse {
+	message GameTransaction {
+		message Amount {
+			int64 amount_in_currency = 1;
+			int64 amount_in_settlement_currency = 2;
+		}
+		string action = 1;
+		string operator = 2;
+		google.protobuf.Timestamp created_at = 3;
+		google.protobuf.Timestamp updated_at = 4;
+		string category = 5;
+		string game_id = 6;
+		string provider = 7;
+		int64 operator_transaction_id = 8;
+		string provider_transaction_id = 9;
+		int64 user_id = 10;
+		Amount amount = 11;
+		int64 valid_bet_amount = 12;
+	}
+	repeated GameTransaction game_transactions = 1;
+}
+
+message ListGamesRequest {
+	repeated string providers = 1;
+	repeated string categories = 2;
+	repeated string fee_groups = 3;
+	repeated string game_names = 4;
+	repeated string game_ids = 5;
+	repeated string game_tags = 6;
+	repeated string themes = 7;
+	optional bool support_bonus_buy = 8;
+	optional bool has_freespins = 9;
+	repeated string support_currencies = 10;
+	repeated string restricted_countries = 11;
+	optional int64 page = 12;
+	optional int64 page_size = 13;
+}
+
+message ListGamesResponse {
+	message Game {
+		string name = 1;
+		string provider = 2;
+		string id = 3;
+		string category = 4;
+		string theme = 5;
+		bool support_bonus_buy = 6;
+		bool has_freespins = 7;
+		repeated string tags = 8;
+		string fee_group = 9;
+		int32 rate = 10;
+		int32 rtp = 11;
+		int32 valid_bet_rate = 12;
+		repeated string support_currencies = 13;
+		repeated string restricted_countries = 14;
+		bool enabled = 15;
+	}
+	repeated Game games = 1;
+	int64 page = 2;
+	int64 page_size = 3;
+	int64 total = 4;
+	int64 total_enabled = 5;
+	int64 total_disabled = 6;
+}

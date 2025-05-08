@@ -1,0 +1,297 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "backoffice/service/v1/backoffice_dashboard.proto";
+import "backoffice/service/v1/backoffice_account.proto";
+import "backoffice/service/v1/backoffice_game.proto";
+import "backoffice/service/v1/backoffice_user.proto";
+import "backoffice/service/v1/backoffice_payment.proto";
+import "backoffice/service/v1/backoffice_wallet.proto";
+import "backoffice/service/v1/backoffice_review.proto";
+import "backoffice/service/v1/backoffice_report.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// Backoffice service provides system and account management functionality.
+service Backoffice {
+    rpc Event(EventRequest) returns (EventResponse) {}
+    
+    // Account
+    rpc AddAccount(AddAccountRequest) returns (AddAccountResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/add"
+            body: "*"
+        };
+    }
+    rpc SendEmailVerification(SendEmailVerificationRequest) returns (SendEmailVerificationResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/email/verification/send"
+            body: "*"
+        };
+    }
+    rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/email/verify"
+            body: "*"
+        };
+    }
+    rpc SendMobileVerification(SendMobileVerificationRequest) returns (SendMobileVerificationResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/mobile/verification/send"
+            body: "*"
+        };
+    }
+    rpc VerifyMobile(VerifyMobileRequest) returns (VerifyMobileResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/mobile/verify"
+            body: "*"
+        };
+    }
+    rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/password/reset"
+            body: "*"
+        };
+    }
+    rpc Generate2fa(Generate2faRequest) returns (Generate2faResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/2fa/generate"
+            body: "*"
+        };
+    }
+    rpc Bind2fa(Bind2faRequest) returns (Bind2faResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/2fa/bind"
+            body: "*"
+        };
+    }
+    rpc Unbind2fa(Unbind2faRequest) returns (Unbind2faResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/2fa/unbind"
+            body: "*"
+        };
+    }
+    rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/update"
+            body: "*"
+        };
+    }
+
+    // Dashboard
+    rpc GetOverviewDashboard(GetOverviewDashboardRequest) returns (GetOverviewDashboardResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/dashboard/get"
+            body: "*"
+        };
+    }
+    rpc GetTimeRangedDashboard(GetTimeRangedDashboardRequest) returns (GetTimeRangedDashboardResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/dashboard/time-ranged/get"
+            body: "*"
+        };
+    }
+    rpc GetTopOperatorsDashboard(GetTopOperatorsDashboardRequest) returns (GetTopOperatorsDashboardResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/dashboard/top-operators/get"
+            body: "*"
+        };
+    }
+
+    // Game
+    rpc ListBets(ListBetsRequest) returns (ListBetsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/bets/list"
+            body: "*"
+        };
+    }
+    rpc GetUserBetsOverview(GetUserBetsOverviewRequest) returns (GetUserBetsOverviewResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/bets/overview/get"
+            body: "*"
+        };
+    }
+    rpc GetGameTransactionsForBet(GetGameTransactionsForBetRequest) returns (GetGameTransactionsForBetResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/bets/transactions/get"
+            body: "*"
+        };
+    }
+    rpc ListUserBets(ListUserBetsRequest) returns (ListUserBetsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/bets/list"
+            body: "*"
+        };
+    }
+    rpc ListGames(ListGamesRequest) returns (ListGamesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/list"
+            body: "*"
+        };
+    }
+
+    // User
+    rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/list"
+            body: "*"
+        };
+    }
+    rpc GetUserOverview(GetUserOverviewRequest) returns (GetUserOverviewResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/overview/get"
+            body: "*"
+        };
+    }
+    rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/profile/get"
+            body: "*"
+        };
+    }
+    rpc AddOperatorUserTag(AddOperatorUserTagRequest) returns (AddOperatorUserTagResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/operator/user-tags/add"
+            body: "*"
+        };
+    }
+    rpc DeleteOperatorUserTag(DeleteOperatorUserTagRequest) returns (DeleteOperatorUserTagResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/operator/user-tags/delete"
+            body: "*"
+        };
+    }
+    rpc GetOperatorUserTags(GetOperatorUserTagsRequest) returns (GetOperatorUserTagsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/operator/user-tags/get"
+            body: "*"
+        };
+    }
+    rpc AddUserTag(AddUserTagRequest) returns (AddUserTagResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/tags/add"
+            body: "*"
+        };
+    }
+    rpc DeleteUserTag(DeleteUserTagRequest) returns (DeleteUserTagResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/tags/delete"
+            body: "*"
+        };
+    }
+    rpc AddUserComment(AddUserCommentRequest) returns (AddUserCommentResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/comments/add"
+            body: "*"
+        };
+    }
+
+    // Payment
+    rpc ListPaymentTransactions(ListPaymentTransactionsRequest) returns (ListPaymentTransactionsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/payment/transactions/list"
+            body: "*"
+        };
+    }
+
+    // Wallet
+    rpc GetWallets(GetWalletsRequest) returns (GetWalletsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/wallet/get"
+            body: "*"
+        };
+    }
+    rpc GetWalletCreditTransactions(GetWalletCreditTransactionsRequest) returns (GetWalletCreditTransactionsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/wallet/credit-transactions/get"
+            body: "*"
+        };
+    }
+    rpc UpdateWallet(UpdateWalletRequest) returns (UpdateWalletResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/wallet/update"
+            body: "*"
+        };
+    }
+
+    // Review
+    rpc ListWithdrawReviewTickets(ListWithdrawReviewTicketsRequest) returns (ListWithdrawReviewTicketsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/review/withdraw-review-tickets/list"
+            body: "*"
+        };
+    }
+    rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/review/ticket/review"
+            body: "*"
+        };
+    }
+
+    // Report
+    rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/summary/get"
+            body: "*"
+        };
+    }
+    rpc ListDailySummaries(ListDailySummariesRequest) returns (ListDailySummariesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/daily-summaries/list"
+            body: "*"
+        };
+    }
+    rpc GetGameDataSummary(GetGameDataSummaryRequest) returns (GetGameDataSummaryResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/game-data-summary/get"
+            body: "*"
+        };
+    }
+    rpc ListGameDataDailySummaries(ListGameDataDailySummariesRequest) returns (ListGameDataDailySummariesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/game-data-daily-summaries/list"
+            body: "*"
+        };
+    }
+    rpc GetPlayerGameDataSummary(GetPlayerGameDataSummaryRequest) returns (GetPlayerGameDataSummaryResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/player-game-data-summary/get"
+            body: "*"
+        };
+    }
+    rpc ListDepositDailySummaries(ListDepositDailySummariesRequest) returns (ListDepositDailySummariesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/deposit-daily-summaries/list"
+            body: "*"
+        };
+    }
+    rpc ListDepositDailyDetails(ListDepositDailyDetailsRequest) returns (ListDepositDailyDetailsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/deposit-daily-details/list"
+            body: "*"
+        };
+    }
+    rpc ListWithdrawDailySummaries(ListWithdrawDailySummariesRequest) returns (ListWithdrawDailySummariesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/withdraw-daily-summaries/list"
+            body: "*"
+        };
+    }
+    rpc ListWithdrawDailyDetails(ListWithdrawDailyDetailsRequest) returns (ListWithdrawDailyDetailsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/withdraw-daily-details/list"
+            body: "*"
+        };
+    }
+} 
+
+message EventRequest {
+	string topic = 1;
+	bytes event_data = 2;
+}
+
+message EventResponse {}

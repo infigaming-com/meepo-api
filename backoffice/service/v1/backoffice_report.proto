@@ -1,0 +1,398 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+message GetSummaryRequest {
+	enum TimeRange {
+		TIME_RANGE_UNSPECIFIED = 0;
+		TIME_RANGE_TODAY = 1;
+		TIME_RANGE_THIS_WEEK = 2;
+		TIME_RANGE_THIS_MONTH = 3;
+	}
+	TimeRange time_range = 1;
+	repeated int64 retailer_operator_ids = 2;
+	repeated int64 group_operator_ids = 3;
+	repeated int64 operator_ids = 4;
+	optional google.protobuf.Timestamp start_time = 5;
+	optional google.protobuf.Timestamp end_time = 6;
+	repeated string affiliate_codes = 7;
+	repeated string referral_codes = 8;
+	repeated string registration_countries = 9;
+}
+
+message GetSummaryResponse {
+	int64 visits = 1;
+	int64 registered_users = 2;
+	int64 ftd = 3;
+	int64 ftd_conversion_rate = 4;
+	int64 deposit_amount = 5;
+	int64 withdraw_amount = 6;
+	int64 deposit_minus_withdraw_amount = 7;
+	int64 average_ftd_amount = 8;
+	int32 arpu_to_arppu_percentage = 9;
+	int64 turnover = 10;
+	int64 bonus = 11;
+	int64 ggr = 12;
+	int64 ngr = 13;
+}
+
+message ListDailySummariesRequest {
+	enum TimeRange {
+		TIME_RANGE_UNSPECIFIED = 0;
+		TIME_RANGE_TODAY = 1;
+		TIME_RANGE_THIS_WEEK = 2;
+		TIME_RANGE_THIS_MONTH = 3;
+	}
+	TimeRange time_range = 1;
+	repeated int64 retailer_operator_ids = 2;
+	repeated int64 group_operator_ids = 3;
+	repeated int64 operator_ids = 4;
+	optional google.protobuf.Timestamp start_time = 5;
+	optional google.protobuf.Timestamp end_time = 6;
+	repeated string affiliate_codes = 7;
+	repeated string referral_codes = 8;
+	repeated string registration_countries = 9;
+	optional int64 page = 10;
+	optional int64 page_size = 11;
+}
+
+message ListDailySummariesResponse {
+	message DailySummary {
+		google.protobuf.Timestamp date = 1;
+		string operator = 2;
+		string country = 3;
+		int64 visits = 4;
+		int64 unique_visits = 5;
+		int64 active_users = 6;
+		int64 registered_users = 7;
+		int64 deposited_users = 8;
+		int64 ftd_users = 9;
+		int64 repeated_deposited_users = 10;
+		int64 deposit_conversion_rate = 11;
+		int64 deposit_count = 12;
+		int64 deposit_amount = 13;
+		int64 arpu = 14;
+		int64 arppu = 15;
+		int64 average_ftd_amount = 16;
+		int64 withdraw_amount = 17;
+		int64 withdrawed_users = 18;
+		int64 ftw_users = 19;
+		int64 average_withdraw_amount = 20;
+		int64 ftw_amount = 21;
+		int64 average_ftw_amount = 22;
+		int32 wu_to_au_percentage = 23;
+		int32 wu_to_du_percentage = 24;
+		int64 deposit_minus_withdraw_amount = 25;
+		int32 w_to_d_percentage = 26;
+		int64 turnover = 27;
+		int64 deposit_bonus = 28;
+		int64 rebate_bonus = 29;
+		int64 loss_rebate = 30;
+		int64 vip_bonus = 31;
+		int64 other_bonus = 32;
+		int64 referral_commission = 33;
+		int64 deposit_fee_subsidy_amount = 34;
+		int64 player_withdraw_fee = 35;
+		int64 operator_withdraw_fee = 36;
+		int64 cash_balance = 37;
+		int64 bonus_balance = 38;
+		int64 locked_balance = 39;
+		int64 ggr = 40;
+		int64 ngr = 41;
+		int32 ggr_to_ngr_percentage = 42;
+		int32 house_edge_percentage = 43;
+	}
+	repeated DailySummary daily_summaries = 1;
+	int64 page = 2;
+	int64 page_size = 3;
+	int64 total = 4;
+}
+
+message GetGameDataSummaryRequest {
+	enum TimeRange {
+		TIME_RANGE_UNSPECIFIED = 0;
+		TIME_RANGE_TODAY = 1;
+		TIME_RANGE_THIS_WEEK = 2;
+		TIME_RANGE_THIS_MONTH = 3;
+	}
+	TimeRange time_range = 1;
+	repeated int64 operator_ids = 2;
+	repeated int64 retailer_operator_ids = 3;
+	repeated int64 group_operator_ids = 4;
+	repeated string provider_ids = 5;
+	repeated string game_types = 6;
+	repeated string game_names = 7;
+	repeated string game_ids = 8;
+	optional google.protobuf.Timestamp start_time = 9;
+	optional google.protobuf.Timestamp end_time = 10;
+}
+
+message GetGameDataSummaryResponse {
+	int64 turnover = 1;
+	int64 win_amount =  2;
+	int64 ggr = 3;
+	int64 bet_count = 4;
+	int64 average_bet_amount = 5;
+	int32 rtp_percentage = 6;
+}
+
+message ListGameDataDailySummariesRequest {
+	enum TimeRange {
+		TIME_RANGE_UNSPECIFIED = 0;
+		TIME_RANGE_TODAY = 1;
+		TIME_RANGE_THIS_WEEK = 2;
+		TIME_RANGE_THIS_MONTH = 3;
+	}
+	TimeRange time_range = 1;
+	repeated int64 operator_ids = 2;
+	repeated int64 retailer_operator_ids = 3;
+	repeated int64 group_operator_ids = 4;
+	repeated string provider_ids = 5;
+	repeated string game_types = 6;
+	repeated string game_names = 7;
+	repeated string game_ids = 8;
+	optional google.protobuf.Timestamp start_time = 9;
+	optional google.protobuf.Timestamp end_time = 10;
+}
+
+message ListGameDataDailySummariesResponse {
+	message DailySummary {
+		google.protobuf.Timestamp date = 1;
+		string operator = 2;
+		string provider = 3;
+		string game_type = 4;
+		string game_name = 5;
+		string game_id = 6;
+		int64 player_count = 7;
+		int64 turnover = 8;
+		int32 turnover_percentage = 9;
+		int64 win_amount = 10;
+		int64 ggr = 11;
+		int32 ggr_percentage = 12;
+		int64 bet_count = 13;
+		int64 average_bet_amount = 14;
+		int32 rtp_percentage = 15;
+	}
+	repeated DailySummary daily_summaries = 1;
+	int64 page = 2;
+	int64 page_size = 3;
+	int64 total = 4;
+}
+
+message GetPlayerGameDataSummaryRequest {
+	enum TimeRange {
+		TIME_RANGE_UNSPECIFIED = 0;
+		TIME_RANGE_TODAY = 1;
+		TIME_RANGE_THIS_WEEK = 2;
+		TIME_RANGE_THIS_MONTH = 3;
+	}
+	TimeRange time_range = 1;
+	repeated int64 retailer_operator_ids = 2;
+	repeated int64 group_operator_ids = 3;
+	repeated int64 operator_ids = 4;
+	repeated string provider_ids = 5;
+	repeated string game_types = 6;
+	repeated string game_tags = 7;
+	repeated string game_names = 8;
+	repeated string game_ids = 9;
+	optional google.protobuf.Timestamp start_time = 10;
+	optional google.protobuf.Timestamp end_time = 11;
+}
+
+message GetPlayerGameDataSummaryResponse {
+	int64 turnover = 1;
+	int64 win_amount = 2;
+	int64 ggr = 3;
+	int64 bet_count = 4;
+	int64 average_bet_amount = 5;
+	int32 rtp_percentage = 6;
+}
+
+message GetPlayerGameDataDailySummariesRequest {
+	enum TimeRange {
+		TIME_RANGE_UNSPECIFIED = 0;
+		TIME_RANGE_TODAY = 1;
+		TIME_RANGE_THIS_WEEK = 2;
+		TIME_RANGE_THIS_MONTH = 3;
+	}
+	TimeRange time_range = 1;
+	repeated int64 retailer_operator_ids = 2;
+	repeated int64 group_operator_ids = 3;
+	repeated int64 operator_ids = 4;
+	repeated string provider_ids = 5;
+	repeated string game_types = 6;
+	repeated string game_names = 7;
+	repeated string game_ids = 8;
+	optional google.protobuf.Timestamp start_time = 9;
+	optional google.protobuf.Timestamp end_time = 10;
+	optional int64 page = 11;
+	optional int64 page_size = 12;
+}
+
+message GetPlayerGameDataDailySummariesResponse {
+	message DailySummary {
+		google.protobuf.Timestamp date = 1;
+		string operator = 2;
+		string provider = 3;
+		string game_type = 4;
+		string game_id = 5;
+		int64 user_id = 6;
+		int64 turnover = 7;
+		int64 win_amount = 8;
+		int64 ggr = 9;
+		int32 rtp_percentage = 10;
+		int64 bet_count = 11;
+		int64 average_bet_amount = 12;
+	}
+	repeated DailySummary daily_summaries = 1;
+	int64 page = 2;
+	int64 page_size = 3;
+	int64 total = 4;
+}
+
+message ListDepositDailySummariesRequest {
+	enum TimeRange {
+		TIME_RANGE_UNSPECIFIED = 0;
+		TIME_RANGE_TODAY = 1;
+		TIME_RANGE_THIS_WEEK = 2;
+		TIME_RANGE_THIS_MONTH = 3;
+	}
+	TimeRange time_range = 1;
+	repeated int64 retailer_operator_ids = 2;
+	repeated int64 group_operator_ids = 3;
+	repeated int64 operator_ids = 4;
+	repeated string currencies = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+}
+
+message ListDepositDailySummariesResponse {
+	message DailySummary {
+		google.protobuf.Timestamp date = 1;
+		string currency = 2;
+		int32 deposit_success_percentage = 3;
+		int64 deposit_amount = 4;
+	}
+	repeated DailySummary daily_summaries = 1;
+}
+
+message ListDepositDailyDetailsRequest {
+	enum TimeRange {
+		TIME_RANGE_UNSPECIFIED = 0;
+		TIME_RANGE_TODAY = 1;
+		TIME_RANGE_THIS_WEEK = 2;
+		TIME_RANGE_THIS_MONTH = 3;
+	}
+	TimeRange time_range = 1;
+	repeated int64 retailer_operator_ids = 2;
+	repeated int64 group_operator_ids = 3;
+	repeated int64 operator_ids = 4;
+	repeated string currencies = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+	optional int64 page = 8;
+	optional int64 page_size = 9;
+}
+
+message ListDepositDailyDetailsResponse {
+	message DailyDetail {
+		google.protobuf.Timestamp date = 1;
+		string operator = 2;
+		string currency = 3;
+		int64 deposit_amount = 4;
+		int64 deposit_users = 5;
+		int64 ftd_amount = 6;
+		int64 ftd_users = 7;
+		int64 same_day_ftd_amount = 8;
+		int64 same_day_ftd_users = 9;
+		int64 repeated_deposit_amount = 10;
+		int64 repeated_deposit_users = 11;
+		int64 same_day_ftd = 12;
+		int64 non_same_day_ftd = 13;
+		int64 average_ftd_amount_for_same_day_registred_users = 14;
+		int64 average_ftd_amount_for_non_same_day_registred_users = 15;
+		int32 success_percentage = 16;
+		int32 amount_proportion_percentage = 17;
+	}
+	repeated DailyDetail daily_details = 1;
+	int64 page = 2;
+	int64 page_size = 3;
+	int64 total = 4;
+}
+
+message ListWithdrawDailySummariesRequest {
+	enum TimeRange {
+		TIME_RANGE_UNSPECIFIED = 0;
+		TIME_RANGE_TODAY = 1;
+		TIME_RANGE_THIS_WEEK = 2;
+		TIME_RANGE_THIS_MONTH = 3;
+	}
+	TimeRange time_range = 1;
+	repeated int64 retailer_operator_ids = 2;
+	repeated int64 group_operator_ids = 3;
+	repeated int64 operator_ids = 4;
+	repeated string currencies = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+}
+
+message ListWithdrawDailySummariesResponse {
+	message DailySummary {
+		google.protobuf.Timestamp date = 1;
+		string currency = 2;
+		int32 withdraw_success_percentage = 3;
+		int64 withdraw_amount = 4;
+	}
+	repeated DailySummary daily_summaries = 1;
+}
+
+message ListWithdrawDailyDetailsRequest {
+	enum TimeRange {
+		TIME_RANGE_UNSPECIFIED = 0;
+		TIME_RANGE_TODAY = 1;
+		TIME_RANGE_THIS_WEEK = 2;
+		TIME_RANGE_THIS_MONTH = 3;
+	}
+	TimeRange time_range = 1;
+	repeated int64 retailer_operator_ids = 2;
+	repeated int64 group_operator_ids = 3;
+	repeated int64 operator_ids = 4;
+	repeated string currencies = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+	optional int64 page = 8;
+	optional int64 page_size = 9;
+}
+
+message ListWithdrawDailyDetailsResponse {
+	message DailyDetail {
+		google.protobuf.Timestamp date = 1;
+		string operator = 2;
+		string currency = 3;
+		int64 withdraw_amount = 4;
+		int64 withdraw_users = 5;
+		int64 ftw_amount = 6;
+		int64 ftw_users = 7;
+		int64 same_day_ftw_amount = 8;
+		int64 same_day_ftw_users = 9;
+		int64 repeated_withdraw_amount = 10;
+		int64 repeated_withdraw_users = 11;
+		int64 same_day_ftw = 12;
+		int64 non_same_day_ftw = 13;
+		int64 average_ftw_amount_for_same_day_registred_users = 14;
+		int64 average_ftw_amount_for_non_same_day_registred_users = 15;
+		int32 success_percentage = 16;
+		int64 deposit_minus_withdraw_amount = 17;
+		int32 amount_proportion_percentage = 18;
+	}
+	repeated DailyDetail daily_details = 1;
+	int64 page = 2;
+	int64 page_size = 3;
+	int64 total = 4;
+}

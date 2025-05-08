@@ -26,12 +26,12 @@ func OperatorIdMiddleware(path []string, operator operator.OperatorClient) middl
 	return func(handler middleware.Handler) middleware.Handler {
 		return func(ctx context.Context, req any) (reply any, err error) {
 			if r, ok := khttp.RequestFromServerContext(ctx); ok {
+				if !slices.Contains(path, r.URL.Path) {
+					return handler(ctx, req)
+				}
 				origin := r.Header.Get("Origin")
 				if origin == "" {
 					return nil, errors.New(400, "BAD_REQUEST", "missing origin header")
-				}
-				if !slices.Contains(path, r.URL.Path) {
-					return handler(ctx, req)
 				}
 				// temporary use map to store origin and operatorId
 				operatorId, ok := OriginToOperatorIdMap[origin]

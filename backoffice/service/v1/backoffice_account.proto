@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// Account related messages
+message AddAccountRequest {
+	string username = 1;
+	string email = 2;
+	string mobile = 3;
+	string password = 4;
+	string role = 5;
+}
+
+message AddAccountResponse {
+	int64 user_id = 1;
+}
+
+message SendEmailVerificationRequest {}
+
+message SendEmailVerificationResponse {}
+
+message VerifyEmailRequest {
+	string token = 1;
+}
+
+message VerifyEmailResponse {}
+
+message SendMobileVerificationRequest {}
+
+message SendMobileVerificationResponse {}
+
+message VerifyMobileRequest {
+	string token = 1;
+}
+
+message VerifyMobileResponse {}
+
+message ResetPasswordRequest {
+	string email = 1;
+}
+
+message ResetPasswordResponse {}
+
+message Generate2faRequest {}
+
+message Generate2faResponse {}
+
+message Bind2faRequest {
+	string token = 1;
+}
+
+message Bind2faResponse {}
+
+message Unbind2faRequest {
+	string token = 1;
+}
+
+message Unbind2faResponse {}
+
+message UpdateAccountRequest {
+	int64 user_id = 1;
+	optional bool enabled = 2;
+	optional string role = 3;
+}
+
+message UpdateAccountResponse {}
