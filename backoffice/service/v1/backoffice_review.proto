@@ -2,11 +2,27 @@ syntax = "proto3";
 
 package api.backoffice.service.v1;
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
+
+service Backoffice_Review {
+	rpc ListWithdrawReviewTickets(ListWithdrawReviewTicketsRequest) returns (ListWithdrawReviewTicketsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/review/withdraw-review-tickets/list"
+            body: "*"
+        };
+    }
+    rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/review/ticket/review"
+            body: "*"
+        };
+    }
+}
 
 message ListWithdrawReviewTicketsRequest {
 	optional int64 operator_id = 1;

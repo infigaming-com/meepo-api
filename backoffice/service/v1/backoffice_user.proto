@@ -2,11 +2,75 @@ syntax = "proto3";
 
 package api.backoffice.service.v1;
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
+
+service Backoffice_User {
+	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/list"
+            body: "*"
+        };
+    }
+    rpc GetUserOverview(GetUserOverviewRequest) returns (GetUserOverviewResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/overview/get"
+            body: "*"
+        };
+    }
+    rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/profile/get"
+            body: "*"
+        };
+    }
+    rpc AddOperatorUserTag(AddOperatorUserTagRequest) returns (AddOperatorUserTagResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/operator/user-tags/add"
+            body: "*"
+        };
+    }
+    rpc DeleteOperatorUserTag(DeleteOperatorUserTagRequest) returns (DeleteOperatorUserTagResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/operator/user-tags/delete"
+            body: "*"
+        };
+    }
+    rpc GetOperatorUserTags(GetOperatorUserTagsRequest) returns (GetOperatorUserTagsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/operator/user-tags/get"
+            body: "*"
+        };
+    }
+    rpc AddUserTag(AddUserTagRequest) returns (AddUserTagResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/tags/add"
+            body: "*"
+        };
+    }
+    rpc DeleteUserTag(DeleteUserTagRequest) returns (DeleteUserTagResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/tags/delete"
+            body: "*"
+        };
+    }
+    rpc AddUserComment(AddUserCommentRequest) returns (AddUserCommentResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/comments/add"
+            body: "*"
+        };
+    }
+	rpc ListUserComments(ListUserCommentsRequest) returns (ListUserCommentsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/comments/list"
+            body: "*"
+        };
+    }
+}
 
 message ListUsersRequest {
 	optional int64 user_id = 1;
@@ -193,6 +257,16 @@ message AddUserCommentRequest {
 
 message AddUserCommentResponse {}
 
-message GetUserWalletRequest {
-	repeated string currencies = 1;
+message ListUserCommentsRequest {
+	int64 user_id = 1;
 }
+
+message ListUserCommentsResponse {
+	message Comment {
+		int64 author_user_id = 1;
+		string content = 2;
+		google.protobuf.Timestamp created_at = 3;
+	}
+	repeated Comment comments = 1;
+}
+
