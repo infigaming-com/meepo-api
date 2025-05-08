@@ -210,30 +210,30 @@ message GetWalletsRequest {
 
 message GetWalletsResponse {
 	message TotalAssets {
-		int64 balance = 1;
-		int64 deposit = 2;
-		int64 withdraw = 3;
-		int64 deposit_minus_withdraw = 4;
-		int64 valid_turnover = 5;
+		string balance = 1;
+		string deposit = 2;
+		string withdraw = 3;
+		string deposit_minus_withdraw = 4;
+		string valid_turnover = 5;
 	}
 	message Credit {
-		google.protobuf.Timestamp created_at = 1;
+		int64 created_at = 1;
 		int64 transaction_id = 2;
-		int64 cash = 3;
-		int64 bonus = 4;
-		int64 turnover_threshold = 5;
-		int64 turnover = 6;
-		int64 cash_turnover = 7;
-		int64 bonus_turnover = 8;
+		string cash = 3;
+		string bonus = 4;
+		string turnover_threshold = 5;
+		string turnover = 6;
+		string cash_turnover = 7;
+		string bonus_turnover = 8;
 	}
 	message Wallet {
 		string currency = 1;
-		int64 cash = 2;
-		int64 bonus = 3;
-		int64 turnover_threshold = 4;
-		int64 turnover = 5;
-		int64 cash_turnover = 6;
-		int64 bonus_turnover = 7;
+		string cash = 2;
+		string bonus = 3;
+		string turnover_threshold = 4;
+		string turnover = 5;
+		string cash_turnover = 6;
+		string bonus_turnover = 7;
 		repeated Credit credits = 8;
 	}
 	TotalAssets total_assets = 1;
@@ -249,9 +249,9 @@ message GetWalletCreditTransactionsRequest {
 message GetWalletCreditTransactionsResponse {
 	message CreditTransaction {
 		string type = 1;
-		google.protobuf.Timestamp created_at = 2;
-		int64 cash = 3;
-		int64 bonus = 4;
+		int64 created_at = 2;
+		string cash = 3;
+		string bonus = 4;
 	}
 	repeated CreditTransaction credit_transactions = 1;
 	int64 page = 2;
