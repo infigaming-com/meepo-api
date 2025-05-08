@@ -1,0 +1,25 @@
+
+syntax = "proto3";
+
+package api.websocket.service.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/websocket/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.websocket.service.v1";
+
+// User service provides authentication and user management functionality.
+service Websocket {
+	rpc PushMessage(PushMessageRequest) returns (PushMessageResponse) {
+	}
+}
+
+message PushMessageRequest {
+	// The user ID who receive the message
+	int64 user_id = 1;
+	// The message content
+	bytes message = 2;
+}
+
+message PushMessageResponse { }
