@@ -217,7 +217,7 @@ message GetWalletsResponse {
 		int64 valid_turnover = 5;
 	}
 	message Credit {
-		google.protobuf.Timestamp created_at = 1;
+		int64 created_at = 1;
 		int64 transaction_id = 2;
 		int64 cash = 3;
 		int64 bonus = 4;
@@ -249,7 +249,7 @@ message GetWalletCreditTransactionsRequest {
 message GetWalletCreditTransactionsResponse {
 	message CreditTransaction {
 		string type = 1;
-		google.protobuf.Timestamp created_at = 2;
+		int64 created_at = 2;
 		int64 cash = 3;
 		int64 bonus = 4;
 	}

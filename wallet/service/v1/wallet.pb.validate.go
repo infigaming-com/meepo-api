@@ -3296,34 +3296,7 @@ func (m *GetWalletsResponse_Credit) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetCreatedAt()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetWalletsResponse_CreditValidationError{
-					field:  "CreatedAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetWalletsResponse_CreditValidationError{
-					field:  "CreatedAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetWalletsResponse_CreditValidationError{
-				field:  "CreatedAt",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for CreatedAt
 
 	// no validation rules for TransactionId
 
@@ -3596,34 +3569,7 @@ func (m *GetWalletCreditTransactionsResponse_CreditTransaction) validate(all boo
 
 	// no validation rules for Type
 
-	if all {
-		switch v := interface{}(m.GetCreatedAt()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetWalletCreditTransactionsResponse_CreditTransactionValidationError{
-					field:  "CreatedAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetWalletCreditTransactionsResponse_CreditTransactionValidationError{
-					field:  "CreatedAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetWalletCreditTransactionsResponse_CreditTransactionValidationError{
-				field:  "CreatedAt",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for CreatedAt
 
 	// no validation rules for Cash
 
