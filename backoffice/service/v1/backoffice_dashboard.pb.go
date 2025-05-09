@@ -669,8 +669,8 @@ func (x *GetTopOperatorsDashboardResponse) GetTopDepositMinusWithdrawRetailerOpe
 
 type GetOverviewDashboardResponse_RegisteredUsers struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         int64                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     int64                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
+	Today         int32                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
+	Yesterday     int32                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -705,14 +705,14 @@ func (*GetOverviewDashboardResponse_RegisteredUsers) Descriptor() ([]byte, []int
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{1, 0}
 }
 
-func (x *GetOverviewDashboardResponse_RegisteredUsers) GetToday() int64 {
+func (x *GetOverviewDashboardResponse_RegisteredUsers) GetToday() int32 {
 	if x != nil {
 		return x.Today
 	}
 	return 0
 }
 
-func (x *GetOverviewDashboardResponse_RegisteredUsers) GetYesterday() int64 {
+func (x *GetOverviewDashboardResponse_RegisteredUsers) GetYesterday() int32 {
 	if x != nil {
 		return x.Yesterday
 	}
@@ -721,8 +721,8 @@ func (x *GetOverviewDashboardResponse_RegisteredUsers) GetYesterday() int64 {
 
 type GetOverviewDashboardResponse_FirstDepositUsers struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         int64                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     int64                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
+	Today         int32                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
+	Yesterday     int32                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -757,14 +757,14 @@ func (*GetOverviewDashboardResponse_FirstDepositUsers) Descriptor() ([]byte, []i
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{1, 1}
 }
 
-func (x *GetOverviewDashboardResponse_FirstDepositUsers) GetToday() int64 {
+func (x *GetOverviewDashboardResponse_FirstDepositUsers) GetToday() int32 {
 	if x != nil {
 		return x.Today
 	}
 	return 0
 }
 
-func (x *GetOverviewDashboardResponse_FirstDepositUsers) GetYesterday() int64 {
+func (x *GetOverviewDashboardResponse_FirstDepositUsers) GetYesterday() int32 {
 	if x != nil {
 		return x.Yesterday
 	}
@@ -773,8 +773,8 @@ func (x *GetOverviewDashboardResponse_FirstDepositUsers) GetYesterday() int64 {
 
 type GetOverviewDashboardResponse_GGR struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         int64                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     int64                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
+	Today         string                 `protobuf:"bytes,1,opt,name=today,proto3" json:"today,omitempty"`
+	Yesterday     string                 `protobuf:"bytes,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -809,24 +809,24 @@ func (*GetOverviewDashboardResponse_GGR) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{1, 2}
 }
 
-func (x *GetOverviewDashboardResponse_GGR) GetToday() int64 {
+func (x *GetOverviewDashboardResponse_GGR) GetToday() string {
 	if x != nil {
 		return x.Today
 	}
-	return 0
+	return ""
 }
 
-func (x *GetOverviewDashboardResponse_GGR) GetYesterday() int64 {
+func (x *GetOverviewDashboardResponse_GGR) GetYesterday() string {
 	if x != nil {
 		return x.Yesterday
 	}
-	return 0
+	return ""
 }
 
 type GetOverviewDashboardResponse_NGR struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         int64                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     int64                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
+	Today         string                 `protobuf:"bytes,1,opt,name=today,proto3" json:"today,omitempty"`
+	Yesterday     string                 `protobuf:"bytes,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -861,24 +861,24 @@ func (*GetOverviewDashboardResponse_NGR) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{1, 3}
 }
 
-func (x *GetOverviewDashboardResponse_NGR) GetToday() int64 {
+func (x *GetOverviewDashboardResponse_NGR) GetToday() string {
 	if x != nil {
 		return x.Today
 	}
-	return 0
+	return ""
 }
 
-func (x *GetOverviewDashboardResponse_NGR) GetYesterday() int64 {
+func (x *GetOverviewDashboardResponse_NGR) GetYesterday() string {
 	if x != nil {
 		return x.Yesterday
 	}
-	return 0
+	return ""
 }
 
 type GetOverviewDashboardResponse_DepositAmount struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         int64                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     int64                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
+	Today         string                 `protobuf:"bytes,1,opt,name=today,proto3" json:"today,omitempty"`
+	Yesterday     string                 `protobuf:"bytes,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -913,24 +913,24 @@ func (*GetOverviewDashboardResponse_DepositAmount) Descriptor() ([]byte, []int) 
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{1, 4}
 }
 
-func (x *GetOverviewDashboardResponse_DepositAmount) GetToday() int64 {
+func (x *GetOverviewDashboardResponse_DepositAmount) GetToday() string {
 	if x != nil {
 		return x.Today
 	}
-	return 0
+	return ""
 }
 
-func (x *GetOverviewDashboardResponse_DepositAmount) GetYesterday() int64 {
+func (x *GetOverviewDashboardResponse_DepositAmount) GetYesterday() string {
 	if x != nil {
 		return x.Yesterday
 	}
-	return 0
+	return ""
 }
 
 type GetOverviewDashboardResponse_WithdrawalAmount struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         int64                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     int64                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
+	Today         string                 `protobuf:"bytes,1,opt,name=today,proto3" json:"today,omitempty"`
+	Yesterday     string                 `protobuf:"bytes,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -965,24 +965,24 @@ func (*GetOverviewDashboardResponse_WithdrawalAmount) Descriptor() ([]byte, []in
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{1, 5}
 }
 
-func (x *GetOverviewDashboardResponse_WithdrawalAmount) GetToday() int64 {
+func (x *GetOverviewDashboardResponse_WithdrawalAmount) GetToday() string {
 	if x != nil {
 		return x.Today
 	}
-	return 0
+	return ""
 }
 
-func (x *GetOverviewDashboardResponse_WithdrawalAmount) GetYesterday() int64 {
+func (x *GetOverviewDashboardResponse_WithdrawalAmount) GetYesterday() string {
 	if x != nil {
 		return x.Yesterday
 	}
-	return 0
+	return ""
 }
 
 type GetOverviewDashboardResponse_DepositMinusWithdrawalAmount struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         int64                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     int64                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
+	Today         string                 `protobuf:"bytes,1,opt,name=today,proto3" json:"today,omitempty"`
+	Yesterday     string                 `protobuf:"bytes,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1017,24 +1017,24 @@ func (*GetOverviewDashboardResponse_DepositMinusWithdrawalAmount) Descriptor() (
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{1, 6}
 }
 
-func (x *GetOverviewDashboardResponse_DepositMinusWithdrawalAmount) GetToday() int64 {
+func (x *GetOverviewDashboardResponse_DepositMinusWithdrawalAmount) GetToday() string {
 	if x != nil {
 		return x.Today
 	}
-	return 0
+	return ""
 }
 
-func (x *GetOverviewDashboardResponse_DepositMinusWithdrawalAmount) GetYesterday() int64 {
+func (x *GetOverviewDashboardResponse_DepositMinusWithdrawalAmount) GetYesterday() string {
 	if x != nil {
 		return x.Yesterday
 	}
-	return 0
+	return ""
 }
 
 type GetOverviewDashboardResponse_ActiveUsers struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         int64                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     int64                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
+	Today         int32                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
+	Yesterday     int32                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1069,14 +1069,14 @@ func (*GetOverviewDashboardResponse_ActiveUsers) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{1, 7}
 }
 
-func (x *GetOverviewDashboardResponse_ActiveUsers) GetToday() int64 {
+func (x *GetOverviewDashboardResponse_ActiveUsers) GetToday() int32 {
 	if x != nil {
 		return x.Today
 	}
 	return 0
 }
 
-func (x *GetOverviewDashboardResponse_ActiveUsers) GetYesterday() int64 {
+func (x *GetOverviewDashboardResponse_ActiveUsers) GetYesterday() int32 {
 	if x != nil {
 		return x.Yesterday
 	}
@@ -1085,8 +1085,8 @@ func (x *GetOverviewDashboardResponse_ActiveUsers) GetYesterday() int64 {
 
 type GetOverviewDashboardResponse_ActiveDevices struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         int64                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     int64                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
+	Today         int32                  `protobuf:"varint,1,opt,name=today,proto3" json:"today,omitempty"`
+	Yesterday     int32                  `protobuf:"varint,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1121,14 +1121,14 @@ func (*GetOverviewDashboardResponse_ActiveDevices) Descriptor() ([]byte, []int) 
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{1, 8}
 }
 
-func (x *GetOverviewDashboardResponse_ActiveDevices) GetToday() int64 {
+func (x *GetOverviewDashboardResponse_ActiveDevices) GetToday() int32 {
 	if x != nil {
 		return x.Today
 	}
 	return 0
 }
 
-func (x *GetOverviewDashboardResponse_ActiveDevices) GetYesterday() int64 {
+func (x *GetOverviewDashboardResponse_ActiveDevices) GetYesterday() int32 {
 	if x != nil {
 		return x.Yesterday
 	}
@@ -1137,9 +1137,9 @@ func (x *GetOverviewDashboardResponse_ActiveDevices) GetYesterday() int64 {
 
 type GetTimeRangedDashboardResponse_GameData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ggr           int64                  `protobuf:"varint,1,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	Ngr           int64                  `protobuf:"varint,2,opt,name=ngr,proto3" json:"ngr,omitempty"`
-	Deposit       int64                  `protobuf:"varint,3,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	Ggr           string                 `protobuf:"bytes,1,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	Ngr           string                 `protobuf:"bytes,2,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	Deposit       string                 `protobuf:"bytes,3,opt,name=deposit,proto3" json:"deposit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1174,31 +1174,31 @@ func (*GetTimeRangedDashboardResponse_GameData) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{3, 0}
 }
 
-func (x *GetTimeRangedDashboardResponse_GameData) GetGgr() int64 {
+func (x *GetTimeRangedDashboardResponse_GameData) GetGgr() string {
 	if x != nil {
 		return x.Ggr
 	}
-	return 0
+	return ""
 }
 
-func (x *GetTimeRangedDashboardResponse_GameData) GetNgr() int64 {
+func (x *GetTimeRangedDashboardResponse_GameData) GetNgr() string {
 	if x != nil {
 		return x.Ngr
 	}
-	return 0
+	return ""
 }
 
-func (x *GetTimeRangedDashboardResponse_GameData) GetDeposit() int64 {
+func (x *GetTimeRangedDashboardResponse_GameData) GetDeposit() string {
 	if x != nil {
 		return x.Deposit
 	}
-	return 0
+	return ""
 }
 
 type GetTimeRangedDashboardResponse_PaymentData struct {
 	state                  protoimpl.MessageState `protogen:"open.v1"`
-	Withdrawal             int64                  `protobuf:"varint,1,opt,name=withdrawal,proto3" json:"withdrawal,omitempty"`
-	DepositMinusWithdrawal int64                  `protobuf:"varint,2,opt,name=deposit_minus_withdrawal,json=depositMinusWithdrawal,proto3" json:"deposit_minus_withdrawal,omitempty"`
+	Withdrawal             string                 `protobuf:"bytes,1,opt,name=withdrawal,proto3" json:"withdrawal,omitempty"`
+	DepositMinusWithdrawal string                 `protobuf:"bytes,2,opt,name=deposit_minus_withdrawal,json=depositMinusWithdrawal,proto3" json:"deposit_minus_withdrawal,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1233,23 +1233,23 @@ func (*GetTimeRangedDashboardResponse_PaymentData) Descriptor() ([]byte, []int) 
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{3, 1}
 }
 
-func (x *GetTimeRangedDashboardResponse_PaymentData) GetWithdrawal() int64 {
+func (x *GetTimeRangedDashboardResponse_PaymentData) GetWithdrawal() string {
 	if x != nil {
 		return x.Withdrawal
 	}
-	return 0
+	return ""
 }
 
-func (x *GetTimeRangedDashboardResponse_PaymentData) GetDepositMinusWithdrawal() int64 {
+func (x *GetTimeRangedDashboardResponse_PaymentData) GetDepositMinusWithdrawal() string {
 	if x != nil {
 		return x.DepositMinusWithdrawal
 	}
-	return 0
+	return ""
 }
 
 type GetTimeRangedDashboardResponse_ActiveUsersData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ActiveUsers   int64                  `protobuf:"varint,1,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
+	ActiveUsers   int32                  `protobuf:"varint,1,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1284,7 +1284,7 @@ func (*GetTimeRangedDashboardResponse_ActiveUsersData) Descriptor() ([]byte, []i
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{3, 2}
 }
 
-func (x *GetTimeRangedDashboardResponse_ActiveUsersData) GetActiveUsers() int64 {
+func (x *GetTimeRangedDashboardResponse_ActiveUsersData) GetActiveUsers() int32 {
 	if x != nil {
 		return x.ActiveUsers
 	}
@@ -1356,8 +1356,8 @@ type GetTopPaymentUsersDashboardResponse_User struct {
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Avatar        string                 `protobuf:"bytes,2,opt,name=avatar,proto3" json:"avatar,omitempty"`
 	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	VipLevel      int64                  `protobuf:"varint,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	Amount        float64                `protobuf:"fixed64,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	VipLevel      int32                  `protobuf:"varint,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	Amount        string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`
 	Operator      string                 `protobuf:"bytes,6,opt,name=operator,proto3" json:"operator,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1414,18 +1414,18 @@ func (x *GetTopPaymentUsersDashboardResponse_User) GetCountry() string {
 	return ""
 }
 
-func (x *GetTopPaymentUsersDashboardResponse_User) GetVipLevel() int64 {
+func (x *GetTopPaymentUsersDashboardResponse_User) GetVipLevel() int32 {
 	if x != nil {
 		return x.VipLevel
 	}
 	return 0
 }
 
-func (x *GetTopPaymentUsersDashboardResponse_User) GetAmount() float64 {
+func (x *GetTopPaymentUsersDashboardResponse_User) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
-	return 0
+	return ""
 }
 
 func (x *GetTopPaymentUsersDashboardResponse_User) GetOperator() string {
@@ -1438,7 +1438,7 @@ func (x *GetTopPaymentUsersDashboardResponse_User) GetOperator() string {
 type GetTopOperatorsDashboardResponse_OperatorData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Operator      string                 `protobuf:"bytes,1,opt,name=operator,proto3" json:"operator,omitempty"`
-	Amount        int64                  `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount        string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1480,11 +1480,11 @@ func (x *GetTopOperatorsDashboardResponse_OperatorData) GetOperator() string {
 	return ""
 }
 
-func (x *GetTopOperatorsDashboardResponse_OperatorData) GetAmount() int64 {
+func (x *GetTopOperatorsDashboardResponse_OperatorData) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
-	return 0
+	return ""
 }
 
 var File_backoffice_service_v1_backoffice_dashboard_proto protoreflect.FileDescriptor
@@ -1504,32 +1504,32 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"\factive_users\x18\b \x01(\v2C.api.backoffice.service.v1.GetOverviewDashboardResponse.ActiveUsersR\vactiveUsers\x12l\n" +
 	"\x0eactive_devices\x18\t \x01(\v2E.api.backoffice.service.v1.GetOverviewDashboardResponse.ActiveDevicesR\ractiveDevices\x1aE\n" +
 	"\x0fRegisteredUsers\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\x03R\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\x03R\tyesterday\x1aG\n" +
+	"\x05today\x18\x01 \x01(\x05R\x05today\x12\x1c\n" +
+	"\tyesterday\x18\x02 \x01(\x05R\tyesterday\x1aG\n" +
 	"\x11FirstDepositUsers\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\x03R\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\x03R\tyesterday\x1a9\n" +
+	"\x05today\x18\x01 \x01(\x05R\x05today\x12\x1c\n" +
+	"\tyesterday\x18\x02 \x01(\x05R\tyesterday\x1a9\n" +
 	"\x03GGR\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\x03R\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\x03R\tyesterday\x1a9\n" +
+	"\x05today\x18\x01 \x01(\tR\x05today\x12\x1c\n" +
+	"\tyesterday\x18\x02 \x01(\tR\tyesterday\x1a9\n" +
 	"\x03NGR\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\x03R\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\x03R\tyesterday\x1aC\n" +
+	"\x05today\x18\x01 \x01(\tR\x05today\x12\x1c\n" +
+	"\tyesterday\x18\x02 \x01(\tR\tyesterday\x1aC\n" +
 	"\rDepositAmount\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\x03R\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\x03R\tyesterday\x1aF\n" +
+	"\x05today\x18\x01 \x01(\tR\x05today\x12\x1c\n" +
+	"\tyesterday\x18\x02 \x01(\tR\tyesterday\x1aF\n" +
 	"\x10WithdrawalAmount\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\x03R\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\x03R\tyesterday\x1aR\n" +
+	"\x05today\x18\x01 \x01(\tR\x05today\x12\x1c\n" +
+	"\tyesterday\x18\x02 \x01(\tR\tyesterday\x1aR\n" +
 	"\x1cDepositMinusWithdrawalAmount\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\x03R\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\x03R\tyesterday\x1aA\n" +
+	"\x05today\x18\x01 \x01(\tR\x05today\x12\x1c\n" +
+	"\tyesterday\x18\x02 \x01(\tR\tyesterday\x1aA\n" +
 	"\vActiveUsers\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\x03R\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\x03R\tyesterday\x1aC\n" +
+	"\x05today\x18\x01 \x01(\x05R\x05today\x12\x1c\n" +
+	"\tyesterday\x18\x02 \x01(\x05R\tyesterday\x1aC\n" +
 	"\rActiveDevices\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\x03R\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\x03R\tyesterday\"\xc3\x02\n" +
+	"\x05today\x18\x01 \x01(\x05R\x05today\x12\x1c\n" +
+	"\tyesterday\x18\x02 \x01(\x05R\tyesterday\"\xc3\x02\n" +
 	"\x1dGetTimeRangedDashboardRequest\x12n\n" +
 	"\x0ftime_range_type\x18\x01 \x01(\x0e2F.api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeTypeR\rtimeRangeType\x12\x1f\n" +
 	"\vcustom_days\x18\x02 \x01(\x05R\n" +
@@ -1542,16 +1542,16 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"\x1eGetTimeRangedDashboardResponse\x12R\n" +
 	"\x04data\x18\x01 \x03(\v2>.api.backoffice.service.v1.GetTimeRangedDashboardResponse.DataR\x04data\x1aH\n" +
 	"\bGameData\x12\x10\n" +
-	"\x03ggr\x18\x01 \x01(\x03R\x03ggr\x12\x10\n" +
-	"\x03ngr\x18\x02 \x01(\x03R\x03ngr\x12\x18\n" +
-	"\adeposit\x18\x03 \x01(\x03R\adeposit\x1ag\n" +
+	"\x03ggr\x18\x01 \x01(\tR\x03ggr\x12\x10\n" +
+	"\x03ngr\x18\x02 \x01(\tR\x03ngr\x12\x18\n" +
+	"\adeposit\x18\x03 \x01(\tR\adeposit\x1ag\n" +
 	"\vPaymentData\x12\x1e\n" +
 	"\n" +
-	"withdrawal\x18\x01 \x01(\x03R\n" +
+	"withdrawal\x18\x01 \x01(\tR\n" +
 	"withdrawal\x128\n" +
-	"\x18deposit_minus_withdrawal\x18\x02 \x01(\x03R\x16depositMinusWithdrawal\x1a4\n" +
+	"\x18deposit_minus_withdrawal\x18\x02 \x01(\tR\x16depositMinusWithdrawal\x1a4\n" +
 	"\x0fActiveUsersData\x12!\n" +
-	"\factive_users\x18\x01 \x01(\x03R\vactiveUsers\x1a\xc8\x02\n" +
+	"\factive_users\x18\x01 \x01(\x05R\vactiveUsers\x1a\xc8\x02\n" +
 	"\x04Data\x12_\n" +
 	"\tgame_data\x18\x01 \x01(\v2B.api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameDataR\bgameData\x12h\n" +
 	"\fpayment_data\x18\x02 \x01(\v2E.api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentDataR\vpaymentData\x12u\n" +
@@ -1570,8 +1570,8 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x16\n" +
 	"\x06avatar\x18\x02 \x01(\tR\x06avatar\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x1b\n" +
-	"\tvip_level\x18\x04 \x01(\x03R\bvipLevel\x12\x16\n" +
-	"\x06amount\x18\x05 \x01(\x01R\x06amount\x12\x1a\n" +
+	"\tvip_level\x18\x04 \x01(\x05R\bvipLevel\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\tR\x06amount\x12\x1a\n" +
 	"\boperator\x18\x06 \x01(\tR\boperator\"\xa0\x02\n" +
 	"\x1fGetTopOperatorsDashboardRequest\x12p\n" +
 	"\x0ftime_range_type\x18\x01 \x01(\x0e2H.api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeTypeR\rtimeRangeType\"\x8a\x01\n" +
@@ -1593,7 +1593,7 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"-top_deposit_minus_withdraw_retailer_operators\x18\t \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR(topDepositMinusWithdrawRetailerOperators\x1aB\n" +
 	"\fOperatorData\x12\x1a\n" +
 	"\boperator\x18\x01 \x01(\tR\boperator\x12\x16\n" +
-	"\x06amount\x18\x02 \x01(\x03R\x06amount2\xda\x04\n" +
+	"\x06amount\x18\x02 \x01(\tR\x06amount2\xda\x04\n" +
 	"\x13BackofficeDashboard\x12\xb0\x01\n" +
 	"\x14GetOverviewDashboard\x126.api.backoffice.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/dashboard/get\x12\xc2\x01\n" +
 	"\x16GetTimeRangedDashboard\x128.api.backoffice.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/dashboard/time-ranged/get\x12\xca\x01\n" +

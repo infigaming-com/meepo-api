@@ -1945,16 +1945,20 @@ components:
             type: object
             properties:
                 today:
-                    type: string
+                    type: integer
+                    format: int32
                 yesterday:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetOverviewDashboardResponse_ActiveUsers:
             type: object
             properties:
                 today:
-                    type: string
+                    type: integer
+                    format: int32
                 yesterday:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetOverviewDashboardResponse_DepositAmount:
             type: object
             properties:
@@ -1973,9 +1977,11 @@ components:
             type: object
             properties:
                 today:
-                    type: string
+                    type: integer
+                    format: int32
                 yesterday:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetOverviewDashboardResponse_GGR:
             type: object
             properties:
@@ -1994,9 +2000,11 @@ components:
             type: object
             properties:
                 today:
-                    type: string
+                    type: integer
+                    format: int32
                 yesterday:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetOverviewDashboardResponse_WithdrawalAmount:
             type: object
             properties:
@@ -2165,7 +2173,8 @@ components:
             type: object
             properties:
                 activeUsers:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetTimeRangedDashboardResponse_Data:
             type: object
             properties:
