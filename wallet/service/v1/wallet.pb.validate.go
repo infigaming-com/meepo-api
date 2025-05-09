@@ -1342,7 +1342,7 @@ func (m *GetUserBalanceRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for TargetCurrency
+	// no validation rules for SettlementCurrency
 
 	if len(errors) > 0 {
 		return GetUserBalanceRequestMultiError(errors)
@@ -1983,7 +1983,7 @@ func (m *GameDebitRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for TargetCurrency
+	// no validation rules for SettlementCurrency
 
 	// no validation rules for ExchangeRate
 
@@ -2211,7 +2211,7 @@ func (m *GameCreditRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for TargetCurrency
+	// no validation rules for SettlementCurrency
 
 	// no validation rules for ExchangeRate
 
