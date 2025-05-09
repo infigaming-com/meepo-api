@@ -19,21 +19,21 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Backoffice_Report_GetSummary_FullMethodName                 = "/api.backoffice.service.v1.Backoffice_Report/GetSummary"
-	Backoffice_Report_ListDailySummaries_FullMethodName         = "/api.backoffice.service.v1.Backoffice_Report/ListDailySummaries"
-	Backoffice_Report_GetGameDataSummary_FullMethodName         = "/api.backoffice.service.v1.Backoffice_Report/GetGameDataSummary"
-	Backoffice_Report_ListGameDataDailySummaries_FullMethodName = "/api.backoffice.service.v1.Backoffice_Report/ListGameDataDailySummaries"
-	Backoffice_Report_GetPlayerGameDataSummary_FullMethodName   = "/api.backoffice.service.v1.Backoffice_Report/GetPlayerGameDataSummary"
-	Backoffice_Report_ListDepositDailySummaries_FullMethodName  = "/api.backoffice.service.v1.Backoffice_Report/ListDepositDailySummaries"
-	Backoffice_Report_ListDepositDailyDetails_FullMethodName    = "/api.backoffice.service.v1.Backoffice_Report/ListDepositDailyDetails"
-	Backoffice_Report_ListWithdrawDailySummaries_FullMethodName = "/api.backoffice.service.v1.Backoffice_Report/ListWithdrawDailySummaries"
-	Backoffice_Report_ListWithdrawDailyDetails_FullMethodName   = "/api.backoffice.service.v1.Backoffice_Report/ListWithdrawDailyDetails"
+	BackofficeReport_GetSummary_FullMethodName                 = "/api.backoffice.service.v1.BackofficeReport/GetSummary"
+	BackofficeReport_ListDailySummaries_FullMethodName         = "/api.backoffice.service.v1.BackofficeReport/ListDailySummaries"
+	BackofficeReport_GetGameDataSummary_FullMethodName         = "/api.backoffice.service.v1.BackofficeReport/GetGameDataSummary"
+	BackofficeReport_ListGameDataDailySummaries_FullMethodName = "/api.backoffice.service.v1.BackofficeReport/ListGameDataDailySummaries"
+	BackofficeReport_GetPlayerGameDataSummary_FullMethodName   = "/api.backoffice.service.v1.BackofficeReport/GetPlayerGameDataSummary"
+	BackofficeReport_ListDepositDailySummaries_FullMethodName  = "/api.backoffice.service.v1.BackofficeReport/ListDepositDailySummaries"
+	BackofficeReport_ListDepositDailyDetails_FullMethodName    = "/api.backoffice.service.v1.BackofficeReport/ListDepositDailyDetails"
+	BackofficeReport_ListWithdrawDailySummaries_FullMethodName = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawDailySummaries"
+	BackofficeReport_ListWithdrawDailyDetails_FullMethodName   = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawDailyDetails"
 )
 
-// Backoffice_ReportClient is the client API for Backoffice_Report service.
+// BackofficeReportClient is the client API for BackofficeReport service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type Backoffice_ReportClient interface {
+type BackofficeReportClient interface {
 	GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...grpc.CallOption) (*GetSummaryResponse, error)
 	ListDailySummaries(ctx context.Context, in *ListDailySummariesRequest, opts ...grpc.CallOption) (*ListDailySummariesResponse, error)
 	GetGameDataSummary(ctx context.Context, in *GetGameDataSummaryRequest, opts ...grpc.CallOption) (*GetGameDataSummaryResponse, error)
@@ -45,108 +45,108 @@ type Backoffice_ReportClient interface {
 	ListWithdrawDailyDetails(ctx context.Context, in *ListWithdrawDailyDetailsRequest, opts ...grpc.CallOption) (*ListWithdrawDailyDetailsResponse, error)
 }
 
-type backoffice_ReportClient struct {
+type backofficeReportClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBackoffice_ReportClient(cc grpc.ClientConnInterface) Backoffice_ReportClient {
-	return &backoffice_ReportClient{cc}
+func NewBackofficeReportClient(cc grpc.ClientConnInterface) BackofficeReportClient {
+	return &backofficeReportClient{cc}
 }
 
-func (c *backoffice_ReportClient) GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...grpc.CallOption) (*GetSummaryResponse, error) {
+func (c *backofficeReportClient) GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...grpc.CallOption) (*GetSummaryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetSummaryResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Report_GetSummary_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeReport_GetSummary_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_ReportClient) ListDailySummaries(ctx context.Context, in *ListDailySummariesRequest, opts ...grpc.CallOption) (*ListDailySummariesResponse, error) {
+func (c *backofficeReportClient) ListDailySummaries(ctx context.Context, in *ListDailySummariesRequest, opts ...grpc.CallOption) (*ListDailySummariesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListDailySummariesResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Report_ListDailySummaries_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListDailySummaries_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_ReportClient) GetGameDataSummary(ctx context.Context, in *GetGameDataSummaryRequest, opts ...grpc.CallOption) (*GetGameDataSummaryResponse, error) {
+func (c *backofficeReportClient) GetGameDataSummary(ctx context.Context, in *GetGameDataSummaryRequest, opts ...grpc.CallOption) (*GetGameDataSummaryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetGameDataSummaryResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Report_GetGameDataSummary_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeReport_GetGameDataSummary_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_ReportClient) ListGameDataDailySummaries(ctx context.Context, in *ListGameDataDailySummariesRequest, opts ...grpc.CallOption) (*ListGameDataDailySummariesResponse, error) {
+func (c *backofficeReportClient) ListGameDataDailySummaries(ctx context.Context, in *ListGameDataDailySummariesRequest, opts ...grpc.CallOption) (*ListGameDataDailySummariesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListGameDataDailySummariesResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Report_ListGameDataDailySummaries_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListGameDataDailySummaries_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_ReportClient) GetPlayerGameDataSummary(ctx context.Context, in *GetPlayerGameDataSummaryRequest, opts ...grpc.CallOption) (*GetPlayerGameDataSummaryResponse, error) {
+func (c *backofficeReportClient) GetPlayerGameDataSummary(ctx context.Context, in *GetPlayerGameDataSummaryRequest, opts ...grpc.CallOption) (*GetPlayerGameDataSummaryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetPlayerGameDataSummaryResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Report_GetPlayerGameDataSummary_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeReport_GetPlayerGameDataSummary_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_ReportClient) ListDepositDailySummaries(ctx context.Context, in *ListDepositDailySummariesRequest, opts ...grpc.CallOption) (*ListDepositDailySummariesResponse, error) {
+func (c *backofficeReportClient) ListDepositDailySummaries(ctx context.Context, in *ListDepositDailySummariesRequest, opts ...grpc.CallOption) (*ListDepositDailySummariesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListDepositDailySummariesResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Report_ListDepositDailySummaries_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListDepositDailySummaries_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_ReportClient) ListDepositDailyDetails(ctx context.Context, in *ListDepositDailyDetailsRequest, opts ...grpc.CallOption) (*ListDepositDailyDetailsResponse, error) {
+func (c *backofficeReportClient) ListDepositDailyDetails(ctx context.Context, in *ListDepositDailyDetailsRequest, opts ...grpc.CallOption) (*ListDepositDailyDetailsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListDepositDailyDetailsResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Report_ListDepositDailyDetails_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListDepositDailyDetails_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_ReportClient) ListWithdrawDailySummaries(ctx context.Context, in *ListWithdrawDailySummariesRequest, opts ...grpc.CallOption) (*ListWithdrawDailySummariesResponse, error) {
+func (c *backofficeReportClient) ListWithdrawDailySummaries(ctx context.Context, in *ListWithdrawDailySummariesRequest, opts ...grpc.CallOption) (*ListWithdrawDailySummariesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListWithdrawDailySummariesResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Report_ListWithdrawDailySummaries_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListWithdrawDailySummaries_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_ReportClient) ListWithdrawDailyDetails(ctx context.Context, in *ListWithdrawDailyDetailsRequest, opts ...grpc.CallOption) (*ListWithdrawDailyDetailsResponse, error) {
+func (c *backofficeReportClient) ListWithdrawDailyDetails(ctx context.Context, in *ListWithdrawDailyDetailsRequest, opts ...grpc.CallOption) (*ListWithdrawDailyDetailsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListWithdrawDailyDetailsResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Report_ListWithdrawDailyDetails_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListWithdrawDailyDetails_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// Backoffice_ReportServer is the server API for Backoffice_Report service.
-// All implementations must embed UnimplementedBackoffice_ReportServer
+// BackofficeReportServer is the server API for BackofficeReport service.
+// All implementations must embed UnimplementedBackofficeReportServer
 // for forward compatibility.
-type Backoffice_ReportServer interface {
+type BackofficeReportServer interface {
 	GetSummary(context.Context, *GetSummaryRequest) (*GetSummaryResponse, error)
 	ListDailySummaries(context.Context, *ListDailySummariesRequest) (*ListDailySummariesResponse, error)
 	GetGameDataSummary(context.Context, *GetGameDataSummaryRequest) (*GetGameDataSummaryResponse, error)
@@ -156,268 +156,268 @@ type Backoffice_ReportServer interface {
 	ListDepositDailyDetails(context.Context, *ListDepositDailyDetailsRequest) (*ListDepositDailyDetailsResponse, error)
 	ListWithdrawDailySummaries(context.Context, *ListWithdrawDailySummariesRequest) (*ListWithdrawDailySummariesResponse, error)
 	ListWithdrawDailyDetails(context.Context, *ListWithdrawDailyDetailsRequest) (*ListWithdrawDailyDetailsResponse, error)
-	mustEmbedUnimplementedBackoffice_ReportServer()
+	mustEmbedUnimplementedBackofficeReportServer()
 }
 
-// UnimplementedBackoffice_ReportServer must be embedded to have
+// UnimplementedBackofficeReportServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBackoffice_ReportServer struct{}
+type UnimplementedBackofficeReportServer struct{}
 
-func (UnimplementedBackoffice_ReportServer) GetSummary(context.Context, *GetSummaryRequest) (*GetSummaryResponse, error) {
+func (UnimplementedBackofficeReportServer) GetSummary(context.Context, *GetSummaryRequest) (*GetSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSummary not implemented")
 }
-func (UnimplementedBackoffice_ReportServer) ListDailySummaries(context.Context, *ListDailySummariesRequest) (*ListDailySummariesResponse, error) {
+func (UnimplementedBackofficeReportServer) ListDailySummaries(context.Context, *ListDailySummariesRequest) (*ListDailySummariesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDailySummaries not implemented")
 }
-func (UnimplementedBackoffice_ReportServer) GetGameDataSummary(context.Context, *GetGameDataSummaryRequest) (*GetGameDataSummaryResponse, error) {
+func (UnimplementedBackofficeReportServer) GetGameDataSummary(context.Context, *GetGameDataSummaryRequest) (*GetGameDataSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGameDataSummary not implemented")
 }
-func (UnimplementedBackoffice_ReportServer) ListGameDataDailySummaries(context.Context, *ListGameDataDailySummariesRequest) (*ListGameDataDailySummariesResponse, error) {
+func (UnimplementedBackofficeReportServer) ListGameDataDailySummaries(context.Context, *ListGameDataDailySummariesRequest) (*ListGameDataDailySummariesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGameDataDailySummaries not implemented")
 }
-func (UnimplementedBackoffice_ReportServer) GetPlayerGameDataSummary(context.Context, *GetPlayerGameDataSummaryRequest) (*GetPlayerGameDataSummaryResponse, error) {
+func (UnimplementedBackofficeReportServer) GetPlayerGameDataSummary(context.Context, *GetPlayerGameDataSummaryRequest) (*GetPlayerGameDataSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlayerGameDataSummary not implemented")
 }
-func (UnimplementedBackoffice_ReportServer) ListDepositDailySummaries(context.Context, *ListDepositDailySummariesRequest) (*ListDepositDailySummariesResponse, error) {
+func (UnimplementedBackofficeReportServer) ListDepositDailySummaries(context.Context, *ListDepositDailySummariesRequest) (*ListDepositDailySummariesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDepositDailySummaries not implemented")
 }
-func (UnimplementedBackoffice_ReportServer) ListDepositDailyDetails(context.Context, *ListDepositDailyDetailsRequest) (*ListDepositDailyDetailsResponse, error) {
+func (UnimplementedBackofficeReportServer) ListDepositDailyDetails(context.Context, *ListDepositDailyDetailsRequest) (*ListDepositDailyDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDepositDailyDetails not implemented")
 }
-func (UnimplementedBackoffice_ReportServer) ListWithdrawDailySummaries(context.Context, *ListWithdrawDailySummariesRequest) (*ListWithdrawDailySummariesResponse, error) {
+func (UnimplementedBackofficeReportServer) ListWithdrawDailySummaries(context.Context, *ListWithdrawDailySummariesRequest) (*ListWithdrawDailySummariesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWithdrawDailySummaries not implemented")
 }
-func (UnimplementedBackoffice_ReportServer) ListWithdrawDailyDetails(context.Context, *ListWithdrawDailyDetailsRequest) (*ListWithdrawDailyDetailsResponse, error) {
+func (UnimplementedBackofficeReportServer) ListWithdrawDailyDetails(context.Context, *ListWithdrawDailyDetailsRequest) (*ListWithdrawDailyDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWithdrawDailyDetails not implemented")
 }
-func (UnimplementedBackoffice_ReportServer) mustEmbedUnimplementedBackoffice_ReportServer() {}
-func (UnimplementedBackoffice_ReportServer) testEmbeddedByValue()                           {}
+func (UnimplementedBackofficeReportServer) mustEmbedUnimplementedBackofficeReportServer() {}
+func (UnimplementedBackofficeReportServer) testEmbeddedByValue()                          {}
 
-// UnsafeBackoffice_ReportServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to Backoffice_ReportServer will
+// UnsafeBackofficeReportServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BackofficeReportServer will
 // result in compilation errors.
-type UnsafeBackoffice_ReportServer interface {
-	mustEmbedUnimplementedBackoffice_ReportServer()
+type UnsafeBackofficeReportServer interface {
+	mustEmbedUnimplementedBackofficeReportServer()
 }
 
-func RegisterBackoffice_ReportServer(s grpc.ServiceRegistrar, srv Backoffice_ReportServer) {
-	// If the following call pancis, it indicates UnimplementedBackoffice_ReportServer was
+func RegisterBackofficeReportServer(s grpc.ServiceRegistrar, srv BackofficeReportServer) {
+	// If the following call pancis, it indicates UnimplementedBackofficeReportServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Backoffice_Report_ServiceDesc, srv)
+	s.RegisterService(&BackofficeReport_ServiceDesc, srv)
 }
 
-func _Backoffice_Report_GetSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeReport_GetSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetSummaryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_ReportServer).GetSummary(ctx, in)
+		return srv.(BackofficeReportServer).GetSummary(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Report_GetSummary_FullMethodName,
+		FullMethod: BackofficeReport_GetSummary_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_ReportServer).GetSummary(ctx, req.(*GetSummaryRequest))
+		return srv.(BackofficeReportServer).GetSummary(ctx, req.(*GetSummaryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Report_ListDailySummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeReport_ListDailySummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListDailySummariesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_ReportServer).ListDailySummaries(ctx, in)
+		return srv.(BackofficeReportServer).ListDailySummaries(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Report_ListDailySummaries_FullMethodName,
+		FullMethod: BackofficeReport_ListDailySummaries_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_ReportServer).ListDailySummaries(ctx, req.(*ListDailySummariesRequest))
+		return srv.(BackofficeReportServer).ListDailySummaries(ctx, req.(*ListDailySummariesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Report_GetGameDataSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeReport_GetGameDataSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetGameDataSummaryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_ReportServer).GetGameDataSummary(ctx, in)
+		return srv.(BackofficeReportServer).GetGameDataSummary(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Report_GetGameDataSummary_FullMethodName,
+		FullMethod: BackofficeReport_GetGameDataSummary_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_ReportServer).GetGameDataSummary(ctx, req.(*GetGameDataSummaryRequest))
+		return srv.(BackofficeReportServer).GetGameDataSummary(ctx, req.(*GetGameDataSummaryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Report_ListGameDataDailySummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeReport_ListGameDataDailySummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListGameDataDailySummariesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_ReportServer).ListGameDataDailySummaries(ctx, in)
+		return srv.(BackofficeReportServer).ListGameDataDailySummaries(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Report_ListGameDataDailySummaries_FullMethodName,
+		FullMethod: BackofficeReport_ListGameDataDailySummaries_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_ReportServer).ListGameDataDailySummaries(ctx, req.(*ListGameDataDailySummariesRequest))
+		return srv.(BackofficeReportServer).ListGameDataDailySummaries(ctx, req.(*ListGameDataDailySummariesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Report_GetPlayerGameDataSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeReport_GetPlayerGameDataSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetPlayerGameDataSummaryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_ReportServer).GetPlayerGameDataSummary(ctx, in)
+		return srv.(BackofficeReportServer).GetPlayerGameDataSummary(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Report_GetPlayerGameDataSummary_FullMethodName,
+		FullMethod: BackofficeReport_GetPlayerGameDataSummary_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_ReportServer).GetPlayerGameDataSummary(ctx, req.(*GetPlayerGameDataSummaryRequest))
+		return srv.(BackofficeReportServer).GetPlayerGameDataSummary(ctx, req.(*GetPlayerGameDataSummaryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Report_ListDepositDailySummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeReport_ListDepositDailySummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListDepositDailySummariesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_ReportServer).ListDepositDailySummaries(ctx, in)
+		return srv.(BackofficeReportServer).ListDepositDailySummaries(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Report_ListDepositDailySummaries_FullMethodName,
+		FullMethod: BackofficeReport_ListDepositDailySummaries_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_ReportServer).ListDepositDailySummaries(ctx, req.(*ListDepositDailySummariesRequest))
+		return srv.(BackofficeReportServer).ListDepositDailySummaries(ctx, req.(*ListDepositDailySummariesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Report_ListDepositDailyDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeReport_ListDepositDailyDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListDepositDailyDetailsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_ReportServer).ListDepositDailyDetails(ctx, in)
+		return srv.(BackofficeReportServer).ListDepositDailyDetails(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Report_ListDepositDailyDetails_FullMethodName,
+		FullMethod: BackofficeReport_ListDepositDailyDetails_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_ReportServer).ListDepositDailyDetails(ctx, req.(*ListDepositDailyDetailsRequest))
+		return srv.(BackofficeReportServer).ListDepositDailyDetails(ctx, req.(*ListDepositDailyDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Report_ListWithdrawDailySummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeReport_ListWithdrawDailySummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListWithdrawDailySummariesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_ReportServer).ListWithdrawDailySummaries(ctx, in)
+		return srv.(BackofficeReportServer).ListWithdrawDailySummaries(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Report_ListWithdrawDailySummaries_FullMethodName,
+		FullMethod: BackofficeReport_ListWithdrawDailySummaries_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_ReportServer).ListWithdrawDailySummaries(ctx, req.(*ListWithdrawDailySummariesRequest))
+		return srv.(BackofficeReportServer).ListWithdrawDailySummaries(ctx, req.(*ListWithdrawDailySummariesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Report_ListWithdrawDailyDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeReport_ListWithdrawDailyDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListWithdrawDailyDetailsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_ReportServer).ListWithdrawDailyDetails(ctx, in)
+		return srv.(BackofficeReportServer).ListWithdrawDailyDetails(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Report_ListWithdrawDailyDetails_FullMethodName,
+		FullMethod: BackofficeReport_ListWithdrawDailyDetails_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_ReportServer).ListWithdrawDailyDetails(ctx, req.(*ListWithdrawDailyDetailsRequest))
+		return srv.(BackofficeReportServer).ListWithdrawDailyDetails(ctx, req.(*ListWithdrawDailyDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Backoffice_Report_ServiceDesc is the grpc.ServiceDesc for Backoffice_Report service.
+// BackofficeReport_ServiceDesc is the grpc.ServiceDesc for BackofficeReport service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Backoffice_Report_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.backoffice.service.v1.Backoffice_Report",
-	HandlerType: (*Backoffice_ReportServer)(nil),
+var BackofficeReport_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.backoffice.service.v1.BackofficeReport",
+	HandlerType: (*BackofficeReportServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetSummary",
-			Handler:    _Backoffice_Report_GetSummary_Handler,
+			Handler:    _BackofficeReport_GetSummary_Handler,
 		},
 		{
 			MethodName: "ListDailySummaries",
-			Handler:    _Backoffice_Report_ListDailySummaries_Handler,
+			Handler:    _BackofficeReport_ListDailySummaries_Handler,
 		},
 		{
 			MethodName: "GetGameDataSummary",
-			Handler:    _Backoffice_Report_GetGameDataSummary_Handler,
+			Handler:    _BackofficeReport_GetGameDataSummary_Handler,
 		},
 		{
 			MethodName: "ListGameDataDailySummaries",
-			Handler:    _Backoffice_Report_ListGameDataDailySummaries_Handler,
+			Handler:    _BackofficeReport_ListGameDataDailySummaries_Handler,
 		},
 		{
 			MethodName: "GetPlayerGameDataSummary",
-			Handler:    _Backoffice_Report_GetPlayerGameDataSummary_Handler,
+			Handler:    _BackofficeReport_GetPlayerGameDataSummary_Handler,
 		},
 		{
 			MethodName: "ListDepositDailySummaries",
-			Handler:    _Backoffice_Report_ListDepositDailySummaries_Handler,
+			Handler:    _BackofficeReport_ListDepositDailySummaries_Handler,
 		},
 		{
 			MethodName: "ListDepositDailyDetails",
-			Handler:    _Backoffice_Report_ListDepositDailyDetails_Handler,
+			Handler:    _BackofficeReport_ListDepositDailyDetails_Handler,
 		},
 		{
 			MethodName: "ListWithdrawDailySummaries",
-			Handler:    _Backoffice_Report_ListWithdrawDailySummaries_Handler,
+			Handler:    _BackofficeReport_ListWithdrawDailySummaries_Handler,
 		},
 		{
 			MethodName: "ListWithdrawDailyDetails",
-			Handler:    _Backoffice_Report_ListWithdrawDailyDetails_Handler,
+			Handler:    _BackofficeReport_ListWithdrawDailyDetails_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

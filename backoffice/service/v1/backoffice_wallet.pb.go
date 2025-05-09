@@ -757,8 +757,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\aenabled\x18\x03 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
 	"\n" +
 	"\b_enabled\"\x16\n" +
-	"\x14UpdateWalletResponse2\x99\x04\n" +
-	"\x11Backoffice_Wallet\x12\x8f\x01\n" +
+	"\x14UpdateWalletResponse2\x98\x04\n" +
+	"\x10BackofficeWallet\x12\x8f\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a-.api.backoffice.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xd6\x01\n" +
 	"\x1bGetWalletCreditTransactions\x12=.api.backoffice.service.v1.GetWalletCreditTransactionsRequest\x1a>.api.backoffice.service.v1.GetWalletCreditTransactionsResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/credit-transactions/get\x12\x98\x01\n" +
@@ -798,12 +798,12 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	10, // 3: api.backoffice.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
 	7,  // 4: api.backoffice.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.backoffice.service.v1.GetWalletsResponse.Credit
 	10, // 5: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 6: api.backoffice.service.v1.Backoffice_Wallet.GetWallets:input_type -> api.backoffice.service.v1.GetWalletsRequest
-	2,  // 7: api.backoffice.service.v1.Backoffice_Wallet.GetWalletCreditTransactions:input_type -> api.backoffice.service.v1.GetWalletCreditTransactionsRequest
-	4,  // 8: api.backoffice.service.v1.Backoffice_Wallet.UpdateWallet:input_type -> api.backoffice.service.v1.UpdateWalletRequest
-	1,  // 9: api.backoffice.service.v1.Backoffice_Wallet.GetWallets:output_type -> api.backoffice.service.v1.GetWalletsResponse
-	3,  // 10: api.backoffice.service.v1.Backoffice_Wallet.GetWalletCreditTransactions:output_type -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse
-	5,  // 11: api.backoffice.service.v1.Backoffice_Wallet.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
+	0,  // 6: api.backoffice.service.v1.BackofficeWallet.GetWallets:input_type -> api.backoffice.service.v1.GetWalletsRequest
+	2,  // 7: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:input_type -> api.backoffice.service.v1.GetWalletCreditTransactionsRequest
+	4,  // 8: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:input_type -> api.backoffice.service.v1.UpdateWalletRequest
+	1,  // 9: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.backoffice.service.v1.GetWalletsResponse
+	3,  // 10: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:output_type -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse
+	5,  // 11: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
 	9,  // [9:12] is the sub-list for method output_type
 	6,  // [6:9] is the sub-list for method input_type
 	6,  // [6:6] is the sub-list for extension type_name

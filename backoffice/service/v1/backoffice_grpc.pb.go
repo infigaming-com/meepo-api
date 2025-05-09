@@ -19,105 +19,105 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Backoffice_Event_FullMethodName = "/api.backoffice.service.v1.Backoffice/Event"
+	BackofficeEvent_Event_FullMethodName = "/api.backoffice.service.v1.BackofficeEvent/Event"
 )
 
-// BackofficeClient is the client API for Backoffice service.
+// BackofficeEventClient is the client API for BackofficeEvent service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // Backoffice service provides system and account management functionality.
-type BackofficeClient interface {
+type BackofficeEventClient interface {
 	Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error)
 }
 
-type backofficeClient struct {
+type backofficeEventClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBackofficeClient(cc grpc.ClientConnInterface) BackofficeClient {
-	return &backofficeClient{cc}
+func NewBackofficeEventClient(cc grpc.ClientConnInterface) BackofficeEventClient {
+	return &backofficeEventClient{cc}
 }
 
-func (c *backofficeClient) Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error) {
+func (c *backofficeEventClient) Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EventResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Event_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeEvent_Event_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// BackofficeServer is the server API for Backoffice service.
-// All implementations must embed UnimplementedBackofficeServer
+// BackofficeEventServer is the server API for BackofficeEvent service.
+// All implementations must embed UnimplementedBackofficeEventServer
 // for forward compatibility.
 //
 // Backoffice service provides system and account management functionality.
-type BackofficeServer interface {
+type BackofficeEventServer interface {
 	Event(context.Context, *EventRequest) (*EventResponse, error)
-	mustEmbedUnimplementedBackofficeServer()
+	mustEmbedUnimplementedBackofficeEventServer()
 }
 
-// UnimplementedBackofficeServer must be embedded to have
+// UnimplementedBackofficeEventServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBackofficeServer struct{}
+type UnimplementedBackofficeEventServer struct{}
 
-func (UnimplementedBackofficeServer) Event(context.Context, *EventRequest) (*EventResponse, error) {
+func (UnimplementedBackofficeEventServer) Event(context.Context, *EventRequest) (*EventResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Event not implemented")
 }
-func (UnimplementedBackofficeServer) mustEmbedUnimplementedBackofficeServer() {}
-func (UnimplementedBackofficeServer) testEmbeddedByValue()                    {}
+func (UnimplementedBackofficeEventServer) mustEmbedUnimplementedBackofficeEventServer() {}
+func (UnimplementedBackofficeEventServer) testEmbeddedByValue()                         {}
 
-// UnsafeBackofficeServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BackofficeServer will
+// UnsafeBackofficeEventServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BackofficeEventServer will
 // result in compilation errors.
-type UnsafeBackofficeServer interface {
-	mustEmbedUnimplementedBackofficeServer()
+type UnsafeBackofficeEventServer interface {
+	mustEmbedUnimplementedBackofficeEventServer()
 }
 
-func RegisterBackofficeServer(s grpc.ServiceRegistrar, srv BackofficeServer) {
-	// If the following call pancis, it indicates UnimplementedBackofficeServer was
+func RegisterBackofficeEventServer(s grpc.ServiceRegistrar, srv BackofficeEventServer) {
+	// If the following call pancis, it indicates UnimplementedBackofficeEventServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Backoffice_ServiceDesc, srv)
+	s.RegisterService(&BackofficeEvent_ServiceDesc, srv)
 }
 
-func _Backoffice_Event_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeEvent_Event_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EventRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeServer).Event(ctx, in)
+		return srv.(BackofficeEventServer).Event(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Event_FullMethodName,
+		FullMethod: BackofficeEvent_Event_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeServer).Event(ctx, req.(*EventRequest))
+		return srv.(BackofficeEventServer).Event(ctx, req.(*EventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Backoffice_ServiceDesc is the grpc.ServiceDesc for Backoffice service.
+// BackofficeEvent_ServiceDesc is the grpc.ServiceDesc for BackofficeEvent service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Backoffice_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.backoffice.service.v1.Backoffice",
-	HandlerType: (*BackofficeServer)(nil),
+var BackofficeEvent_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.backoffice.service.v1.BackofficeEvent",
+	HandlerType: (*BackofficeEventServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Event",
-			Handler:    _Backoffice_Event_Handler,
+			Handler:    _BackofficeEvent_Event_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

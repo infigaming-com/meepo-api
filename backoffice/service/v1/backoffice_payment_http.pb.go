@@ -19,18 +19,18 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackoffice_PaymentListPaymentTransactions = "/api.backoffice.service.v1.Backoffice_Payment/ListPaymentTransactions"
+const OperationBackofficePaymentListPaymentTransactions = "/api.backoffice.service.v1.BackofficePayment/ListPaymentTransactions"
 
-type Backoffice_PaymentHTTPServer interface {
+type BackofficePaymentHTTPServer interface {
 	ListPaymentTransactions(context.Context, *ListPaymentTransactionsRequest) (*ListPaymentTransactionsResponse, error)
 }
 
-func RegisterBackoffice_PaymentHTTPServer(s *http.Server, srv Backoffice_PaymentHTTPServer) {
+func RegisterBackofficePaymentHTTPServer(s *http.Server, srv BackofficePaymentHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/payment/transactions/list", _Backoffice_Payment_ListPaymentTransactions0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/transactions/list", _BackofficePayment_ListPaymentTransactions0_HTTP_Handler(srv))
 }
 
-func _Backoffice_Payment_ListPaymentTransactions0_HTTP_Handler(srv Backoffice_PaymentHTTPServer) func(ctx http.Context) error {
+func _BackofficePayment_ListPaymentTransactions0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListPaymentTransactionsRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -39,7 +39,7 @@ func _Backoffice_Payment_ListPaymentTransactions0_HTTP_Handler(srv Backoffice_Pa
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_PaymentListPaymentTransactions)
+		http.SetOperation(ctx, OperationBackofficePaymentListPaymentTransactions)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListPaymentTransactions(ctx, req.(*ListPaymentTransactionsRequest))
 		})
@@ -52,23 +52,23 @@ func _Backoffice_Payment_ListPaymentTransactions0_HTTP_Handler(srv Backoffice_Pa
 	}
 }
 
-type Backoffice_PaymentHTTPClient interface {
+type BackofficePaymentHTTPClient interface {
 	ListPaymentTransactions(ctx context.Context, req *ListPaymentTransactionsRequest, opts ...http.CallOption) (rsp *ListPaymentTransactionsResponse, err error)
 }
 
-type Backoffice_PaymentHTTPClientImpl struct {
+type BackofficePaymentHTTPClientImpl struct {
 	cc *http.Client
 }
 
-func NewBackoffice_PaymentHTTPClient(client *http.Client) Backoffice_PaymentHTTPClient {
-	return &Backoffice_PaymentHTTPClientImpl{client}
+func NewBackofficePaymentHTTPClient(client *http.Client) BackofficePaymentHTTPClient {
+	return &BackofficePaymentHTTPClientImpl{client}
 }
 
-func (c *Backoffice_PaymentHTTPClientImpl) ListPaymentTransactions(ctx context.Context, in *ListPaymentTransactionsRequest, opts ...http.CallOption) (*ListPaymentTransactionsResponse, error) {
+func (c *BackofficePaymentHTTPClientImpl) ListPaymentTransactions(ctx context.Context, in *ListPaymentTransactionsRequest, opts ...http.CallOption) (*ListPaymentTransactionsResponse, error) {
 	var out ListPaymentTransactionsResponse
 	pattern := "/v1/backoffice/payment/transactions/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_PaymentListPaymentTransactions))
+	opts = append(opts, http.Operation(OperationBackofficePaymentListPaymentTransactions))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

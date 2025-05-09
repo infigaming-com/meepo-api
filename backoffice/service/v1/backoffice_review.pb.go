@@ -544,8 +544,8 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x10reviewer_user_id\x18\x02 \x01(\x03R\x0ereviewerUserId\x12#\n" +
 	"\rreview_action\x18\x03 \x01(\tR\freviewAction\x12%\n" +
 	"\x0ereview_comment\x18\x04 \x01(\tR\rreviewComment\"\x16\n" +
-	"\x14ReviewTicketResponse2\x8d\x03\n" +
-	"\x11Backoffice_Review\x12\xd5\x01\n" +
+	"\x14ReviewTicketResponse2\x8c\x03\n" +
+	"\x10BackofficeReview\x12\xd5\x01\n" +
 	"\x19ListWithdrawReviewTickets\x12;.api.backoffice.service.v1.ListWithdrawReviewTicketsRequest\x1a<.api.backoffice.service.v1.ListWithdrawReviewTicketsResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/v1/backoffice/review/withdraw-review-tickets/list\x12\x9f\x01\n" +
 	"\fReviewTicket\x12..api.backoffice.service.v1.ReviewTicketRequest\x1a/.api.backoffice.service.v1.ReviewTicketResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/review/ticket/reviewB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
@@ -576,10 +576,10 @@ var file_backoffice_service_v1_backoffice_review_proto_depIdxs = []int32{
 	5, // 1: api.backoffice.service.v1.ListWithdrawReviewTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
 	4, // 2: api.backoffice.service.v1.ListWithdrawReviewTicketsResponse.withdraw_review_tickets:type_name -> api.backoffice.service.v1.ListWithdrawReviewTicketsResponse.WithdrawReviewTicket
 	5, // 3: api.backoffice.service.v1.ListWithdrawReviewTicketsResponse.WithdrawReviewTicket.created_at:type_name -> google.protobuf.Timestamp
-	0, // 4: api.backoffice.service.v1.Backoffice_Review.ListWithdrawReviewTickets:input_type -> api.backoffice.service.v1.ListWithdrawReviewTicketsRequest
-	2, // 5: api.backoffice.service.v1.Backoffice_Review.ReviewTicket:input_type -> api.backoffice.service.v1.ReviewTicketRequest
-	1, // 6: api.backoffice.service.v1.Backoffice_Review.ListWithdrawReviewTickets:output_type -> api.backoffice.service.v1.ListWithdrawReviewTicketsResponse
-	3, // 7: api.backoffice.service.v1.Backoffice_Review.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
+	0, // 4: api.backoffice.service.v1.BackofficeReview.ListWithdrawReviewTickets:input_type -> api.backoffice.service.v1.ListWithdrawReviewTicketsRequest
+	2, // 5: api.backoffice.service.v1.BackofficeReview.ReviewTicket:input_type -> api.backoffice.service.v1.ReviewTicketRequest
+	1, // 6: api.backoffice.service.v1.BackofficeReview.ListWithdrawReviewTickets:output_type -> api.backoffice.service.v1.ListWithdrawReviewTicketsResponse
+	3, // 7: api.backoffice.service.v1.BackofficeReview.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
 	6, // [6:8] is the sub-list for method output_type
 	4, // [4:6] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name

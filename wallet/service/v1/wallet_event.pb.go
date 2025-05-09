@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v4.25.6
-// source: backoffice/service/v1/backoffice.proto
+// source: wallet/service/v1/wallet_event.proto
 
 package v1
 
@@ -31,7 +31,7 @@ type EventRequest struct {
 
 func (x *EventRequest) Reset() {
 	*x = EventRequest{}
-	mi := &file_backoffice_service_v1_backoffice_proto_msgTypes[0]
+	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *EventRequest) String() string {
 func (*EventRequest) ProtoMessage() {}
 
 func (x *EventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_proto_msgTypes[0]
+	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *EventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventRequest.ProtoReflect.Descriptor instead.
 func (*EventRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_proto_rawDescGZIP(), []int{0}
+	return file_wallet_service_v1_wallet_event_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *EventRequest) GetTopic() string {
@@ -81,7 +81,7 @@ type EventResponse struct {
 
 func (x *EventResponse) Reset() {
 	*x = EventResponse{}
-	mi := &file_backoffice_service_v1_backoffice_proto_msgTypes[1]
+	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -93,7 +93,7 @@ func (x *EventResponse) String() string {
 func (*EventResponse) ProtoMessage() {}
 
 func (x *EventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_proto_msgTypes[1]
+	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -106,43 +106,43 @@ func (x *EventResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventResponse.ProtoReflect.Descriptor instead.
 func (*EventResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_proto_rawDescGZIP(), []int{1}
+	return file_wallet_service_v1_wallet_event_proto_rawDescGZIP(), []int{1}
 }
 
-var File_backoffice_service_v1_backoffice_proto protoreflect.FileDescriptor
+var File_wallet_service_v1_wallet_event_proto protoreflect.FileDescriptor
 
-const file_backoffice_service_v1_backoffice_proto_rawDesc = "" +
+const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"\n" +
-	"&backoffice/service/v1/backoffice.proto\x12\x19api.backoffice.service.v1\"C\n" +
+	"$wallet/service/v1/wallet_event.proto\x12\x15api.wallet.service.v1\"C\n" +
 	"\fEventRequest\x12\x14\n" +
 	"\x05topic\x18\x01 \x01(\tR\x05topic\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse2o\n" +
-	"\x0fBackofficeEvent\x12\\\n" +
-	"\x05Event\x12'.api.backoffice.service.v1.EventRequest\x1a(.api.backoffice.service.v1.EventResponse\"\x00B[\n" +
-	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
+	"\rEventResponse2c\n" +
+	"\vWalletEvent\x12T\n" +
+	"\x05Event\x12#.api.wallet.service.v1.EventRequest\x1a$.api.wallet.service.v1.EventResponse\"\x00BS\n" +
+	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
-	file_backoffice_service_v1_backoffice_proto_rawDescOnce sync.Once
-	file_backoffice_service_v1_backoffice_proto_rawDescData []byte
+	file_wallet_service_v1_wallet_event_proto_rawDescOnce sync.Once
+	file_wallet_service_v1_wallet_event_proto_rawDescData []byte
 )
 
-func file_backoffice_service_v1_backoffice_proto_rawDescGZIP() []byte {
-	file_backoffice_service_v1_backoffice_proto_rawDescOnce.Do(func() {
-		file_backoffice_service_v1_backoffice_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_proto_rawDesc), len(file_backoffice_service_v1_backoffice_proto_rawDesc)))
+func file_wallet_service_v1_wallet_event_proto_rawDescGZIP() []byte {
+	file_wallet_service_v1_wallet_event_proto_rawDescOnce.Do(func() {
+		file_wallet_service_v1_wallet_event_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_wallet_service_v1_wallet_event_proto_rawDesc), len(file_wallet_service_v1_wallet_event_proto_rawDesc)))
 	})
-	return file_backoffice_service_v1_backoffice_proto_rawDescData
+	return file_wallet_service_v1_wallet_event_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_backoffice_service_v1_backoffice_proto_goTypes = []any{
-	(*EventRequest)(nil),  // 0: api.backoffice.service.v1.EventRequest
-	(*EventResponse)(nil), // 1: api.backoffice.service.v1.EventResponse
+var file_wallet_service_v1_wallet_event_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_wallet_service_v1_wallet_event_proto_goTypes = []any{
+	(*EventRequest)(nil),  // 0: api.wallet.service.v1.EventRequest
+	(*EventResponse)(nil), // 1: api.wallet.service.v1.EventResponse
 }
-var file_backoffice_service_v1_backoffice_proto_depIdxs = []int32{
-	0, // 0: api.backoffice.service.v1.BackofficeEvent.Event:input_type -> api.backoffice.service.v1.EventRequest
-	1, // 1: api.backoffice.service.v1.BackofficeEvent.Event:output_type -> api.backoffice.service.v1.EventResponse
+var file_wallet_service_v1_wallet_event_proto_depIdxs = []int32{
+	0, // 0: api.wallet.service.v1.WalletEvent.Event:input_type -> api.wallet.service.v1.EventRequest
+	1, // 1: api.wallet.service.v1.WalletEvent.Event:output_type -> api.wallet.service.v1.EventResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -150,26 +150,26 @@ var file_backoffice_service_v1_backoffice_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_backoffice_service_v1_backoffice_proto_init() }
-func file_backoffice_service_v1_backoffice_proto_init() {
-	if File_backoffice_service_v1_backoffice_proto != nil {
+func init() { file_wallet_service_v1_wallet_event_proto_init() }
+func file_wallet_service_v1_wallet_event_proto_init() {
+	if File_wallet_service_v1_wallet_event_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_proto_rawDesc), len(file_backoffice_service_v1_backoffice_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wallet_service_v1_wallet_event_proto_rawDesc), len(file_wallet_service_v1_wallet_event_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_backoffice_service_v1_backoffice_proto_goTypes,
-		DependencyIndexes: file_backoffice_service_v1_backoffice_proto_depIdxs,
-		MessageInfos:      file_backoffice_service_v1_backoffice_proto_msgTypes,
+		GoTypes:           file_wallet_service_v1_wallet_event_proto_goTypes,
+		DependencyIndexes: file_wallet_service_v1_wallet_event_proto_depIdxs,
+		MessageInfos:      file_wallet_service_v1_wallet_event_proto_msgTypes,
 	}.Build()
-	File_backoffice_service_v1_backoffice_proto = out.File
-	file_backoffice_service_v1_backoffice_proto_goTypes = nil
-	file_backoffice_service_v1_backoffice_proto_depIdxs = nil
+	File_wallet_service_v1_wallet_event_proto = out.File
+	file_wallet_service_v1_wallet_event_proto_goTypes = nil
+	file_wallet_service_v1_wallet_event_proto_depIdxs = nil
 }

@@ -19,177 +19,177 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Backoffice_Dashboard_GetOverviewDashboard_FullMethodName     = "/api.backoffice.service.v1.Backoffice_Dashboard/GetOverviewDashboard"
-	Backoffice_Dashboard_GetTimeRangedDashboard_FullMethodName   = "/api.backoffice.service.v1.Backoffice_Dashboard/GetTimeRangedDashboard"
-	Backoffice_Dashboard_GetTopOperatorsDashboard_FullMethodName = "/api.backoffice.service.v1.Backoffice_Dashboard/GetTopOperatorsDashboard"
+	BackofficeDashboard_GetOverviewDashboard_FullMethodName     = "/api.backoffice.service.v1.BackofficeDashboard/GetOverviewDashboard"
+	BackofficeDashboard_GetTimeRangedDashboard_FullMethodName   = "/api.backoffice.service.v1.BackofficeDashboard/GetTimeRangedDashboard"
+	BackofficeDashboard_GetTopOperatorsDashboard_FullMethodName = "/api.backoffice.service.v1.BackofficeDashboard/GetTopOperatorsDashboard"
 )
 
-// Backoffice_DashboardClient is the client API for Backoffice_Dashboard service.
+// BackofficeDashboardClient is the client API for BackofficeDashboard service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type Backoffice_DashboardClient interface {
+type BackofficeDashboardClient interface {
 	GetOverviewDashboard(ctx context.Context, in *GetOverviewDashboardRequest, opts ...grpc.CallOption) (*GetOverviewDashboardResponse, error)
 	GetTimeRangedDashboard(ctx context.Context, in *GetTimeRangedDashboardRequest, opts ...grpc.CallOption) (*GetTimeRangedDashboardResponse, error)
 	GetTopOperatorsDashboard(ctx context.Context, in *GetTopOperatorsDashboardRequest, opts ...grpc.CallOption) (*GetTopOperatorsDashboardResponse, error)
 }
 
-type backoffice_DashboardClient struct {
+type backofficeDashboardClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBackoffice_DashboardClient(cc grpc.ClientConnInterface) Backoffice_DashboardClient {
-	return &backoffice_DashboardClient{cc}
+func NewBackofficeDashboardClient(cc grpc.ClientConnInterface) BackofficeDashboardClient {
+	return &backofficeDashboardClient{cc}
 }
 
-func (c *backoffice_DashboardClient) GetOverviewDashboard(ctx context.Context, in *GetOverviewDashboardRequest, opts ...grpc.CallOption) (*GetOverviewDashboardResponse, error) {
+func (c *backofficeDashboardClient) GetOverviewDashboard(ctx context.Context, in *GetOverviewDashboardRequest, opts ...grpc.CallOption) (*GetOverviewDashboardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOverviewDashboardResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Dashboard_GetOverviewDashboard_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeDashboard_GetOverviewDashboard_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_DashboardClient) GetTimeRangedDashboard(ctx context.Context, in *GetTimeRangedDashboardRequest, opts ...grpc.CallOption) (*GetTimeRangedDashboardResponse, error) {
+func (c *backofficeDashboardClient) GetTimeRangedDashboard(ctx context.Context, in *GetTimeRangedDashboardRequest, opts ...grpc.CallOption) (*GetTimeRangedDashboardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTimeRangedDashboardResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Dashboard_GetTimeRangedDashboard_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeDashboard_GetTimeRangedDashboard_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_DashboardClient) GetTopOperatorsDashboard(ctx context.Context, in *GetTopOperatorsDashboardRequest, opts ...grpc.CallOption) (*GetTopOperatorsDashboardResponse, error) {
+func (c *backofficeDashboardClient) GetTopOperatorsDashboard(ctx context.Context, in *GetTopOperatorsDashboardRequest, opts ...grpc.CallOption) (*GetTopOperatorsDashboardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTopOperatorsDashboardResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Dashboard_GetTopOperatorsDashboard_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeDashboard_GetTopOperatorsDashboard_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// Backoffice_DashboardServer is the server API for Backoffice_Dashboard service.
-// All implementations must embed UnimplementedBackoffice_DashboardServer
+// BackofficeDashboardServer is the server API for BackofficeDashboard service.
+// All implementations must embed UnimplementedBackofficeDashboardServer
 // for forward compatibility.
-type Backoffice_DashboardServer interface {
+type BackofficeDashboardServer interface {
 	GetOverviewDashboard(context.Context, *GetOverviewDashboardRequest) (*GetOverviewDashboardResponse, error)
 	GetTimeRangedDashboard(context.Context, *GetTimeRangedDashboardRequest) (*GetTimeRangedDashboardResponse, error)
 	GetTopOperatorsDashboard(context.Context, *GetTopOperatorsDashboardRequest) (*GetTopOperatorsDashboardResponse, error)
-	mustEmbedUnimplementedBackoffice_DashboardServer()
+	mustEmbedUnimplementedBackofficeDashboardServer()
 }
 
-// UnimplementedBackoffice_DashboardServer must be embedded to have
+// UnimplementedBackofficeDashboardServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBackoffice_DashboardServer struct{}
+type UnimplementedBackofficeDashboardServer struct{}
 
-func (UnimplementedBackoffice_DashboardServer) GetOverviewDashboard(context.Context, *GetOverviewDashboardRequest) (*GetOverviewDashboardResponse, error) {
+func (UnimplementedBackofficeDashboardServer) GetOverviewDashboard(context.Context, *GetOverviewDashboardRequest) (*GetOverviewDashboardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOverviewDashboard not implemented")
 }
-func (UnimplementedBackoffice_DashboardServer) GetTimeRangedDashboard(context.Context, *GetTimeRangedDashboardRequest) (*GetTimeRangedDashboardResponse, error) {
+func (UnimplementedBackofficeDashboardServer) GetTimeRangedDashboard(context.Context, *GetTimeRangedDashboardRequest) (*GetTimeRangedDashboardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTimeRangedDashboard not implemented")
 }
-func (UnimplementedBackoffice_DashboardServer) GetTopOperatorsDashboard(context.Context, *GetTopOperatorsDashboardRequest) (*GetTopOperatorsDashboardResponse, error) {
+func (UnimplementedBackofficeDashboardServer) GetTopOperatorsDashboard(context.Context, *GetTopOperatorsDashboardRequest) (*GetTopOperatorsDashboardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTopOperatorsDashboard not implemented")
 }
-func (UnimplementedBackoffice_DashboardServer) mustEmbedUnimplementedBackoffice_DashboardServer() {}
-func (UnimplementedBackoffice_DashboardServer) testEmbeddedByValue()                              {}
+func (UnimplementedBackofficeDashboardServer) mustEmbedUnimplementedBackofficeDashboardServer() {}
+func (UnimplementedBackofficeDashboardServer) testEmbeddedByValue()                             {}
 
-// UnsafeBackoffice_DashboardServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to Backoffice_DashboardServer will
+// UnsafeBackofficeDashboardServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BackofficeDashboardServer will
 // result in compilation errors.
-type UnsafeBackoffice_DashboardServer interface {
-	mustEmbedUnimplementedBackoffice_DashboardServer()
+type UnsafeBackofficeDashboardServer interface {
+	mustEmbedUnimplementedBackofficeDashboardServer()
 }
 
-func RegisterBackoffice_DashboardServer(s grpc.ServiceRegistrar, srv Backoffice_DashboardServer) {
-	// If the following call pancis, it indicates UnimplementedBackoffice_DashboardServer was
+func RegisterBackofficeDashboardServer(s grpc.ServiceRegistrar, srv BackofficeDashboardServer) {
+	// If the following call pancis, it indicates UnimplementedBackofficeDashboardServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Backoffice_Dashboard_ServiceDesc, srv)
+	s.RegisterService(&BackofficeDashboard_ServiceDesc, srv)
 }
 
-func _Backoffice_Dashboard_GetOverviewDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeDashboard_GetOverviewDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOverviewDashboardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_DashboardServer).GetOverviewDashboard(ctx, in)
+		return srv.(BackofficeDashboardServer).GetOverviewDashboard(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Dashboard_GetOverviewDashboard_FullMethodName,
+		FullMethod: BackofficeDashboard_GetOverviewDashboard_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_DashboardServer).GetOverviewDashboard(ctx, req.(*GetOverviewDashboardRequest))
+		return srv.(BackofficeDashboardServer).GetOverviewDashboard(ctx, req.(*GetOverviewDashboardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Dashboard_GetTimeRangedDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeDashboard_GetTimeRangedDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTimeRangedDashboardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_DashboardServer).GetTimeRangedDashboard(ctx, in)
+		return srv.(BackofficeDashboardServer).GetTimeRangedDashboard(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Dashboard_GetTimeRangedDashboard_FullMethodName,
+		FullMethod: BackofficeDashboard_GetTimeRangedDashboard_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_DashboardServer).GetTimeRangedDashboard(ctx, req.(*GetTimeRangedDashboardRequest))
+		return srv.(BackofficeDashboardServer).GetTimeRangedDashboard(ctx, req.(*GetTimeRangedDashboardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Dashboard_GetTopOperatorsDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeDashboard_GetTopOperatorsDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTopOperatorsDashboardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_DashboardServer).GetTopOperatorsDashboard(ctx, in)
+		return srv.(BackofficeDashboardServer).GetTopOperatorsDashboard(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Dashboard_GetTopOperatorsDashboard_FullMethodName,
+		FullMethod: BackofficeDashboard_GetTopOperatorsDashboard_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_DashboardServer).GetTopOperatorsDashboard(ctx, req.(*GetTopOperatorsDashboardRequest))
+		return srv.(BackofficeDashboardServer).GetTopOperatorsDashboard(ctx, req.(*GetTopOperatorsDashboardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Backoffice_Dashboard_ServiceDesc is the grpc.ServiceDesc for Backoffice_Dashboard service.
+// BackofficeDashboard_ServiceDesc is the grpc.ServiceDesc for BackofficeDashboard service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Backoffice_Dashboard_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.backoffice.service.v1.Backoffice_Dashboard",
-	HandlerType: (*Backoffice_DashboardServer)(nil),
+var BackofficeDashboard_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.backoffice.service.v1.BackofficeDashboard",
+	HandlerType: (*BackofficeDashboardServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetOverviewDashboard",
-			Handler:    _Backoffice_Dashboard_GetOverviewDashboard_Handler,
+			Handler:    _BackofficeDashboard_GetOverviewDashboard_Handler,
 		},
 		{
 			MethodName: "GetTimeRangedDashboard",
-			Handler:    _Backoffice_Dashboard_GetTimeRangedDashboard_Handler,
+			Handler:    _BackofficeDashboard_GetTimeRangedDashboard_Handler,
 		},
 		{
 			MethodName: "GetTopOperatorsDashboard",
-			Handler:    _Backoffice_Dashboard_GetTopOperatorsDashboard_Handler,
+			Handler:    _BackofficeDashboard_GetTopOperatorsDashboard_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -1746,8 +1746,8 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x0evalid_bet_rate\x18\f \x01(\x05R\fvalidBetRate\x12-\n" +
 	"\x12support_currencies\x18\r \x03(\tR\x11supportCurrencies\x121\n" +
 	"\x14restricted_countries\x18\x0e \x03(\tR\x13restrictedCountries\x12\x18\n" +
-	"\aenabled\x18\x0f \x01(\bR\aenabled2\xd3\x06\n" +
-	"\x0fBackoffice_Game\x12\x8d\x01\n" +
+	"\aenabled\x18\x0f \x01(\bR\aenabled2\xd2\x06\n" +
+	"\x0eBackofficeGame\x12\x8d\x01\n" +
 	"\bListBets\x12*.api.backoffice.service.v1.ListBetsRequest\x1a+.api.backoffice.service.v1.ListBetsResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/backoffice/game/bets/list\x12\xb6\x01\n" +
 	"\x13GetUserBetsOverview\x125.api.backoffice.service.v1.GetUserBetsOverviewRequest\x1a6.api.backoffice.service.v1.GetUserBetsOverviewResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/game/bets/overview/get\x12\xcc\x01\n" +
 	"\x19GetGameTransactionsForBet\x12;.api.backoffice.service.v1.GetGameTransactionsForBetRequest\x1a<.api.backoffice.service.v1.GetGameTransactionsForBetResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/game/bets/transactions/get\x12\x99\x01\n" +
@@ -1804,16 +1804,16 @@ var file_backoffice_service_v1_backoffice_game_proto_depIdxs = []int32{
 	15, // 14: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.created_at:type_name -> google.protobuf.Timestamp
 	15, // 15: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.updated_at:type_name -> google.protobuf.Timestamp
 	13, // 16: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.amount:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.Amount
-	0,  // 17: api.backoffice.service.v1.Backoffice_Game.ListBets:input_type -> api.backoffice.service.v1.ListBetsRequest
-	3,  // 18: api.backoffice.service.v1.Backoffice_Game.GetUserBetsOverview:input_type -> api.backoffice.service.v1.GetUserBetsOverviewRequest
-	7,  // 19: api.backoffice.service.v1.Backoffice_Game.GetGameTransactionsForBet:input_type -> api.backoffice.service.v1.GetGameTransactionsForBetRequest
-	5,  // 20: api.backoffice.service.v1.Backoffice_Game.ListUserBets:input_type -> api.backoffice.service.v1.ListUserBetsRequest
-	9,  // 21: api.backoffice.service.v1.Backoffice_Game.ListGames:input_type -> api.backoffice.service.v1.ListGamesRequest
-	2,  // 22: api.backoffice.service.v1.Backoffice_Game.ListBets:output_type -> api.backoffice.service.v1.ListBetsResponse
-	4,  // 23: api.backoffice.service.v1.Backoffice_Game.GetUserBetsOverview:output_type -> api.backoffice.service.v1.GetUserBetsOverviewResponse
-	8,  // 24: api.backoffice.service.v1.Backoffice_Game.GetGameTransactionsForBet:output_type -> api.backoffice.service.v1.GetGameTransactionsForBetResponse
-	6,  // 25: api.backoffice.service.v1.Backoffice_Game.ListUserBets:output_type -> api.backoffice.service.v1.ListUserBetsResponse
-	10, // 26: api.backoffice.service.v1.Backoffice_Game.ListGames:output_type -> api.backoffice.service.v1.ListGamesResponse
+	0,  // 17: api.backoffice.service.v1.BackofficeGame.ListBets:input_type -> api.backoffice.service.v1.ListBetsRequest
+	3,  // 18: api.backoffice.service.v1.BackofficeGame.GetUserBetsOverview:input_type -> api.backoffice.service.v1.GetUserBetsOverviewRequest
+	7,  // 19: api.backoffice.service.v1.BackofficeGame.GetGameTransactionsForBet:input_type -> api.backoffice.service.v1.GetGameTransactionsForBetRequest
+	5,  // 20: api.backoffice.service.v1.BackofficeGame.ListUserBets:input_type -> api.backoffice.service.v1.ListUserBetsRequest
+	9,  // 21: api.backoffice.service.v1.BackofficeGame.ListGames:input_type -> api.backoffice.service.v1.ListGamesRequest
+	2,  // 22: api.backoffice.service.v1.BackofficeGame.ListBets:output_type -> api.backoffice.service.v1.ListBetsResponse
+	4,  // 23: api.backoffice.service.v1.BackofficeGame.GetUserBetsOverview:output_type -> api.backoffice.service.v1.GetUserBetsOverviewResponse
+	8,  // 24: api.backoffice.service.v1.BackofficeGame.GetGameTransactionsForBet:output_type -> api.backoffice.service.v1.GetGameTransactionsForBetResponse
+	6,  // 25: api.backoffice.service.v1.BackofficeGame.ListUserBets:output_type -> api.backoffice.service.v1.ListUserBetsResponse
+	10, // 26: api.backoffice.service.v1.BackofficeGame.ListGames:output_type -> api.backoffice.service.v1.ListGamesResponse
 	22, // [22:27] is the sub-list for method output_type
 	17, // [17:22] is the sub-list for method input_type
 	17, // [17:17] is the sub-list for extension type_name

@@ -1593,8 +1593,8 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"-top_deposit_minus_withdraw_retailer_operators\x18\t \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR(topDepositMinusWithdrawRetailerOperators\x1aB\n" +
 	"\fOperatorData\x12\x1a\n" +
 	"\boperator\x18\x01 \x01(\tR\boperator\x12\x16\n" +
-	"\x06amount\x18\x02 \x01(\x03R\x06amount2\xdb\x04\n" +
-	"\x14Backoffice_Dashboard\x12\xb0\x01\n" +
+	"\x06amount\x18\x02 \x01(\x03R\x06amount2\xda\x04\n" +
+	"\x13BackofficeDashboard\x12\xb0\x01\n" +
 	"\x14GetOverviewDashboard\x126.api.backoffice.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/dashboard/get\x12\xc2\x01\n" +
 	"\x16GetTimeRangedDashboard\x128.api.backoffice.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/dashboard/time-ranged/get\x12\xca\x01\n" +
 	"\x18GetTopOperatorsDashboard\x12:.api.backoffice.service.v1.GetTopOperatorsDashboardRequest\x1a;.api.backoffice.service.v1.GetTopOperatorsDashboardResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/dashboard/top-operators/getB[\n" +
@@ -1670,12 +1670,12 @@ var file_backoffice_service_v1_backoffice_dashboard_proto_depIdxs = []int32{
 	20, // 24: api.backoffice.service.v1.GetTimeRangedDashboardResponse.Data.game_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData
 	21, // 25: api.backoffice.service.v1.GetTimeRangedDashboardResponse.Data.payment_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData
 	22, // 26: api.backoffice.service.v1.GetTimeRangedDashboardResponse.Data.active_users_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData
-	3,  // 27: api.backoffice.service.v1.Backoffice_Dashboard.GetOverviewDashboard:input_type -> api.backoffice.service.v1.GetOverviewDashboardRequest
-	5,  // 28: api.backoffice.service.v1.Backoffice_Dashboard.GetTimeRangedDashboard:input_type -> api.backoffice.service.v1.GetTimeRangedDashboardRequest
-	9,  // 29: api.backoffice.service.v1.Backoffice_Dashboard.GetTopOperatorsDashboard:input_type -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest
-	4,  // 30: api.backoffice.service.v1.Backoffice_Dashboard.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
-	6,  // 31: api.backoffice.service.v1.Backoffice_Dashboard.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	10, // 32: api.backoffice.service.v1.Backoffice_Dashboard.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
+	3,  // 27: api.backoffice.service.v1.BackofficeDashboard.GetOverviewDashboard:input_type -> api.backoffice.service.v1.GetOverviewDashboardRequest
+	5,  // 28: api.backoffice.service.v1.BackofficeDashboard.GetTimeRangedDashboard:input_type -> api.backoffice.service.v1.GetTimeRangedDashboardRequest
+	9,  // 29: api.backoffice.service.v1.BackofficeDashboard.GetTopOperatorsDashboard:input_type -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest
+	4,  // 30: api.backoffice.service.v1.BackofficeDashboard.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
+	6,  // 31: api.backoffice.service.v1.BackofficeDashboard.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
+	10, // 32: api.backoffice.service.v1.BackofficeDashboard.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
 	30, // [30:33] is the sub-list for method output_type
 	27, // [27:30] is the sub-list for method input_type
 	27, // [27:27] is the sub-list for extension type_name

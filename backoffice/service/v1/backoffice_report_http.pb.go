@@ -19,17 +19,17 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackoffice_ReportGetGameDataSummary = "/api.backoffice.service.v1.Backoffice_Report/GetGameDataSummary"
-const OperationBackoffice_ReportGetPlayerGameDataSummary = "/api.backoffice.service.v1.Backoffice_Report/GetPlayerGameDataSummary"
-const OperationBackoffice_ReportGetSummary = "/api.backoffice.service.v1.Backoffice_Report/GetSummary"
-const OperationBackoffice_ReportListDailySummaries = "/api.backoffice.service.v1.Backoffice_Report/ListDailySummaries"
-const OperationBackoffice_ReportListDepositDailyDetails = "/api.backoffice.service.v1.Backoffice_Report/ListDepositDailyDetails"
-const OperationBackoffice_ReportListDepositDailySummaries = "/api.backoffice.service.v1.Backoffice_Report/ListDepositDailySummaries"
-const OperationBackoffice_ReportListGameDataDailySummaries = "/api.backoffice.service.v1.Backoffice_Report/ListGameDataDailySummaries"
-const OperationBackoffice_ReportListWithdrawDailyDetails = "/api.backoffice.service.v1.Backoffice_Report/ListWithdrawDailyDetails"
-const OperationBackoffice_ReportListWithdrawDailySummaries = "/api.backoffice.service.v1.Backoffice_Report/ListWithdrawDailySummaries"
+const OperationBackofficeReportGetGameDataSummary = "/api.backoffice.service.v1.BackofficeReport/GetGameDataSummary"
+const OperationBackofficeReportGetPlayerGameDataSummary = "/api.backoffice.service.v1.BackofficeReport/GetPlayerGameDataSummary"
+const OperationBackofficeReportGetSummary = "/api.backoffice.service.v1.BackofficeReport/GetSummary"
+const OperationBackofficeReportListDailySummaries = "/api.backoffice.service.v1.BackofficeReport/ListDailySummaries"
+const OperationBackofficeReportListDepositDailyDetails = "/api.backoffice.service.v1.BackofficeReport/ListDepositDailyDetails"
+const OperationBackofficeReportListDepositDailySummaries = "/api.backoffice.service.v1.BackofficeReport/ListDepositDailySummaries"
+const OperationBackofficeReportListGameDataDailySummaries = "/api.backoffice.service.v1.BackofficeReport/ListGameDataDailySummaries"
+const OperationBackofficeReportListWithdrawDailyDetails = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawDailyDetails"
+const OperationBackofficeReportListWithdrawDailySummaries = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawDailySummaries"
 
-type Backoffice_ReportHTTPServer interface {
+type BackofficeReportHTTPServer interface {
 	GetGameDataSummary(context.Context, *GetGameDataSummaryRequest) (*GetGameDataSummaryResponse, error)
 	GetPlayerGameDataSummary(context.Context, *GetPlayerGameDataSummaryRequest) (*GetPlayerGameDataSummaryResponse, error)
 	GetSummary(context.Context, *GetSummaryRequest) (*GetSummaryResponse, error)
@@ -41,20 +41,20 @@ type Backoffice_ReportHTTPServer interface {
 	ListWithdrawDailySummaries(context.Context, *ListWithdrawDailySummariesRequest) (*ListWithdrawDailySummariesResponse, error)
 }
 
-func RegisterBackoffice_ReportHTTPServer(s *http.Server, srv Backoffice_ReportHTTPServer) {
+func RegisterBackofficeReportHTTPServer(s *http.Server, srv BackofficeReportHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/report/summary/get", _Backoffice_Report_GetSummary0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/daily-summaries/list", _Backoffice_Report_ListDailySummaries0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/game-data-summary/get", _Backoffice_Report_GetGameDataSummary0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/game-data-daily-summaries/list", _Backoffice_Report_ListGameDataDailySummaries0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/player-game-data-summary/get", _Backoffice_Report_GetPlayerGameDataSummary0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/deposit-daily-summaries/list", _Backoffice_Report_ListDepositDailySummaries0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/deposit-daily-details/list", _Backoffice_Report_ListDepositDailyDetails0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/withdraw-daily-summaries/list", _Backoffice_Report_ListWithdrawDailySummaries0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/withdraw-daily-details/list", _Backoffice_Report_ListWithdrawDailyDetails0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/summary/get", _BackofficeReport_GetSummary0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/daily-summaries/list", _BackofficeReport_ListDailySummaries0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/game-data-summary/get", _BackofficeReport_GetGameDataSummary0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/game-data-daily-summaries/list", _BackofficeReport_ListGameDataDailySummaries0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/player-game-data-summary/get", _BackofficeReport_GetPlayerGameDataSummary0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/deposit-daily-summaries/list", _BackofficeReport_ListDepositDailySummaries0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/deposit-daily-details/list", _BackofficeReport_ListDepositDailyDetails0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/withdraw-daily-summaries/list", _BackofficeReport_ListWithdrawDailySummaries0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/withdraw-daily-details/list", _BackofficeReport_ListWithdrawDailyDetails0_HTTP_Handler(srv))
 }
 
-func _Backoffice_Report_GetSummary0_HTTP_Handler(srv Backoffice_ReportHTTPServer) func(ctx http.Context) error {
+func _BackofficeReport_GetSummary0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetSummaryRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -63,7 +63,7 @@ func _Backoffice_Report_GetSummary0_HTTP_Handler(srv Backoffice_ReportHTTPServer
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_ReportGetSummary)
+		http.SetOperation(ctx, OperationBackofficeReportGetSummary)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetSummary(ctx, req.(*GetSummaryRequest))
 		})
@@ -76,7 +76,7 @@ func _Backoffice_Report_GetSummary0_HTTP_Handler(srv Backoffice_ReportHTTPServer
 	}
 }
 
-func _Backoffice_Report_ListDailySummaries0_HTTP_Handler(srv Backoffice_ReportHTTPServer) func(ctx http.Context) error {
+func _BackofficeReport_ListDailySummaries0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListDailySummariesRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -85,7 +85,7 @@ func _Backoffice_Report_ListDailySummaries0_HTTP_Handler(srv Backoffice_ReportHT
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_ReportListDailySummaries)
+		http.SetOperation(ctx, OperationBackofficeReportListDailySummaries)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListDailySummaries(ctx, req.(*ListDailySummariesRequest))
 		})
@@ -98,7 +98,7 @@ func _Backoffice_Report_ListDailySummaries0_HTTP_Handler(srv Backoffice_ReportHT
 	}
 }
 
-func _Backoffice_Report_GetGameDataSummary0_HTTP_Handler(srv Backoffice_ReportHTTPServer) func(ctx http.Context) error {
+func _BackofficeReport_GetGameDataSummary0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetGameDataSummaryRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -107,7 +107,7 @@ func _Backoffice_Report_GetGameDataSummary0_HTTP_Handler(srv Backoffice_ReportHT
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_ReportGetGameDataSummary)
+		http.SetOperation(ctx, OperationBackofficeReportGetGameDataSummary)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetGameDataSummary(ctx, req.(*GetGameDataSummaryRequest))
 		})
@@ -120,7 +120,7 @@ func _Backoffice_Report_GetGameDataSummary0_HTTP_Handler(srv Backoffice_ReportHT
 	}
 }
 
-func _Backoffice_Report_ListGameDataDailySummaries0_HTTP_Handler(srv Backoffice_ReportHTTPServer) func(ctx http.Context) error {
+func _BackofficeReport_ListGameDataDailySummaries0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListGameDataDailySummariesRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -129,7 +129,7 @@ func _Backoffice_Report_ListGameDataDailySummaries0_HTTP_Handler(srv Backoffice_
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_ReportListGameDataDailySummaries)
+		http.SetOperation(ctx, OperationBackofficeReportListGameDataDailySummaries)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListGameDataDailySummaries(ctx, req.(*ListGameDataDailySummariesRequest))
 		})
@@ -142,7 +142,7 @@ func _Backoffice_Report_ListGameDataDailySummaries0_HTTP_Handler(srv Backoffice_
 	}
 }
 
-func _Backoffice_Report_GetPlayerGameDataSummary0_HTTP_Handler(srv Backoffice_ReportHTTPServer) func(ctx http.Context) error {
+func _BackofficeReport_GetPlayerGameDataSummary0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetPlayerGameDataSummaryRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -151,7 +151,7 @@ func _Backoffice_Report_GetPlayerGameDataSummary0_HTTP_Handler(srv Backoffice_Re
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_ReportGetPlayerGameDataSummary)
+		http.SetOperation(ctx, OperationBackofficeReportGetPlayerGameDataSummary)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetPlayerGameDataSummary(ctx, req.(*GetPlayerGameDataSummaryRequest))
 		})
@@ -164,7 +164,7 @@ func _Backoffice_Report_GetPlayerGameDataSummary0_HTTP_Handler(srv Backoffice_Re
 	}
 }
 
-func _Backoffice_Report_ListDepositDailySummaries0_HTTP_Handler(srv Backoffice_ReportHTTPServer) func(ctx http.Context) error {
+func _BackofficeReport_ListDepositDailySummaries0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListDepositDailySummariesRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -173,7 +173,7 @@ func _Backoffice_Report_ListDepositDailySummaries0_HTTP_Handler(srv Backoffice_R
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_ReportListDepositDailySummaries)
+		http.SetOperation(ctx, OperationBackofficeReportListDepositDailySummaries)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListDepositDailySummaries(ctx, req.(*ListDepositDailySummariesRequest))
 		})
@@ -186,7 +186,7 @@ func _Backoffice_Report_ListDepositDailySummaries0_HTTP_Handler(srv Backoffice_R
 	}
 }
 
-func _Backoffice_Report_ListDepositDailyDetails0_HTTP_Handler(srv Backoffice_ReportHTTPServer) func(ctx http.Context) error {
+func _BackofficeReport_ListDepositDailyDetails0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListDepositDailyDetailsRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -195,7 +195,7 @@ func _Backoffice_Report_ListDepositDailyDetails0_HTTP_Handler(srv Backoffice_Rep
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_ReportListDepositDailyDetails)
+		http.SetOperation(ctx, OperationBackofficeReportListDepositDailyDetails)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListDepositDailyDetails(ctx, req.(*ListDepositDailyDetailsRequest))
 		})
@@ -208,7 +208,7 @@ func _Backoffice_Report_ListDepositDailyDetails0_HTTP_Handler(srv Backoffice_Rep
 	}
 }
 
-func _Backoffice_Report_ListWithdrawDailySummaries0_HTTP_Handler(srv Backoffice_ReportHTTPServer) func(ctx http.Context) error {
+func _BackofficeReport_ListWithdrawDailySummaries0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListWithdrawDailySummariesRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -217,7 +217,7 @@ func _Backoffice_Report_ListWithdrawDailySummaries0_HTTP_Handler(srv Backoffice_
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_ReportListWithdrawDailySummaries)
+		http.SetOperation(ctx, OperationBackofficeReportListWithdrawDailySummaries)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListWithdrawDailySummaries(ctx, req.(*ListWithdrawDailySummariesRequest))
 		})
@@ -230,7 +230,7 @@ func _Backoffice_Report_ListWithdrawDailySummaries0_HTTP_Handler(srv Backoffice_
 	}
 }
 
-func _Backoffice_Report_ListWithdrawDailyDetails0_HTTP_Handler(srv Backoffice_ReportHTTPServer) func(ctx http.Context) error {
+func _BackofficeReport_ListWithdrawDailyDetails0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListWithdrawDailyDetailsRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -239,7 +239,7 @@ func _Backoffice_Report_ListWithdrawDailyDetails0_HTTP_Handler(srv Backoffice_Re
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_ReportListWithdrawDailyDetails)
+		http.SetOperation(ctx, OperationBackofficeReportListWithdrawDailyDetails)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListWithdrawDailyDetails(ctx, req.(*ListWithdrawDailyDetailsRequest))
 		})
@@ -252,7 +252,7 @@ func _Backoffice_Report_ListWithdrawDailyDetails0_HTTP_Handler(srv Backoffice_Re
 	}
 }
 
-type Backoffice_ReportHTTPClient interface {
+type BackofficeReportHTTPClient interface {
 	GetGameDataSummary(ctx context.Context, req *GetGameDataSummaryRequest, opts ...http.CallOption) (rsp *GetGameDataSummaryResponse, err error)
 	GetPlayerGameDataSummary(ctx context.Context, req *GetPlayerGameDataSummaryRequest, opts ...http.CallOption) (rsp *GetPlayerGameDataSummaryResponse, err error)
 	GetSummary(ctx context.Context, req *GetSummaryRequest, opts ...http.CallOption) (rsp *GetSummaryResponse, err error)
@@ -264,19 +264,19 @@ type Backoffice_ReportHTTPClient interface {
 	ListWithdrawDailySummaries(ctx context.Context, req *ListWithdrawDailySummariesRequest, opts ...http.CallOption) (rsp *ListWithdrawDailySummariesResponse, err error)
 }
 
-type Backoffice_ReportHTTPClientImpl struct {
+type BackofficeReportHTTPClientImpl struct {
 	cc *http.Client
 }
 
-func NewBackoffice_ReportHTTPClient(client *http.Client) Backoffice_ReportHTTPClient {
-	return &Backoffice_ReportHTTPClientImpl{client}
+func NewBackofficeReportHTTPClient(client *http.Client) BackofficeReportHTTPClient {
+	return &BackofficeReportHTTPClientImpl{client}
 }
 
-func (c *Backoffice_ReportHTTPClientImpl) GetGameDataSummary(ctx context.Context, in *GetGameDataSummaryRequest, opts ...http.CallOption) (*GetGameDataSummaryResponse, error) {
+func (c *BackofficeReportHTTPClientImpl) GetGameDataSummary(ctx context.Context, in *GetGameDataSummaryRequest, opts ...http.CallOption) (*GetGameDataSummaryResponse, error) {
 	var out GetGameDataSummaryResponse
 	pattern := "/v1/backoffice/report/game-data-summary/get"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_ReportGetGameDataSummary))
+	opts = append(opts, http.Operation(OperationBackofficeReportGetGameDataSummary))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -285,11 +285,11 @@ func (c *Backoffice_ReportHTTPClientImpl) GetGameDataSummary(ctx context.Context
 	return &out, nil
 }
 
-func (c *Backoffice_ReportHTTPClientImpl) GetPlayerGameDataSummary(ctx context.Context, in *GetPlayerGameDataSummaryRequest, opts ...http.CallOption) (*GetPlayerGameDataSummaryResponse, error) {
+func (c *BackofficeReportHTTPClientImpl) GetPlayerGameDataSummary(ctx context.Context, in *GetPlayerGameDataSummaryRequest, opts ...http.CallOption) (*GetPlayerGameDataSummaryResponse, error) {
 	var out GetPlayerGameDataSummaryResponse
 	pattern := "/v1/backoffice/report/player-game-data-summary/get"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_ReportGetPlayerGameDataSummary))
+	opts = append(opts, http.Operation(OperationBackofficeReportGetPlayerGameDataSummary))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -298,11 +298,11 @@ func (c *Backoffice_ReportHTTPClientImpl) GetPlayerGameDataSummary(ctx context.C
 	return &out, nil
 }
 
-func (c *Backoffice_ReportHTTPClientImpl) GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...http.CallOption) (*GetSummaryResponse, error) {
+func (c *BackofficeReportHTTPClientImpl) GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...http.CallOption) (*GetSummaryResponse, error) {
 	var out GetSummaryResponse
 	pattern := "/v1/backoffice/report/summary/get"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_ReportGetSummary))
+	opts = append(opts, http.Operation(OperationBackofficeReportGetSummary))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -311,11 +311,11 @@ func (c *Backoffice_ReportHTTPClientImpl) GetSummary(ctx context.Context, in *Ge
 	return &out, nil
 }
 
-func (c *Backoffice_ReportHTTPClientImpl) ListDailySummaries(ctx context.Context, in *ListDailySummariesRequest, opts ...http.CallOption) (*ListDailySummariesResponse, error) {
+func (c *BackofficeReportHTTPClientImpl) ListDailySummaries(ctx context.Context, in *ListDailySummariesRequest, opts ...http.CallOption) (*ListDailySummariesResponse, error) {
 	var out ListDailySummariesResponse
 	pattern := "/v1/backoffice/report/daily-summaries/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_ReportListDailySummaries))
+	opts = append(opts, http.Operation(OperationBackofficeReportListDailySummaries))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -324,11 +324,11 @@ func (c *Backoffice_ReportHTTPClientImpl) ListDailySummaries(ctx context.Context
 	return &out, nil
 }
 
-func (c *Backoffice_ReportHTTPClientImpl) ListDepositDailyDetails(ctx context.Context, in *ListDepositDailyDetailsRequest, opts ...http.CallOption) (*ListDepositDailyDetailsResponse, error) {
+func (c *BackofficeReportHTTPClientImpl) ListDepositDailyDetails(ctx context.Context, in *ListDepositDailyDetailsRequest, opts ...http.CallOption) (*ListDepositDailyDetailsResponse, error) {
 	var out ListDepositDailyDetailsResponse
 	pattern := "/v1/backoffice/report/deposit-daily-details/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_ReportListDepositDailyDetails))
+	opts = append(opts, http.Operation(OperationBackofficeReportListDepositDailyDetails))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -337,11 +337,11 @@ func (c *Backoffice_ReportHTTPClientImpl) ListDepositDailyDetails(ctx context.Co
 	return &out, nil
 }
 
-func (c *Backoffice_ReportHTTPClientImpl) ListDepositDailySummaries(ctx context.Context, in *ListDepositDailySummariesRequest, opts ...http.CallOption) (*ListDepositDailySummariesResponse, error) {
+func (c *BackofficeReportHTTPClientImpl) ListDepositDailySummaries(ctx context.Context, in *ListDepositDailySummariesRequest, opts ...http.CallOption) (*ListDepositDailySummariesResponse, error) {
 	var out ListDepositDailySummariesResponse
 	pattern := "/v1/backoffice/report/deposit-daily-summaries/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_ReportListDepositDailySummaries))
+	opts = append(opts, http.Operation(OperationBackofficeReportListDepositDailySummaries))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -350,11 +350,11 @@ func (c *Backoffice_ReportHTTPClientImpl) ListDepositDailySummaries(ctx context.
 	return &out, nil
 }
 
-func (c *Backoffice_ReportHTTPClientImpl) ListGameDataDailySummaries(ctx context.Context, in *ListGameDataDailySummariesRequest, opts ...http.CallOption) (*ListGameDataDailySummariesResponse, error) {
+func (c *BackofficeReportHTTPClientImpl) ListGameDataDailySummaries(ctx context.Context, in *ListGameDataDailySummariesRequest, opts ...http.CallOption) (*ListGameDataDailySummariesResponse, error) {
 	var out ListGameDataDailySummariesResponse
 	pattern := "/v1/backoffice/report/game-data-daily-summaries/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_ReportListGameDataDailySummaries))
+	opts = append(opts, http.Operation(OperationBackofficeReportListGameDataDailySummaries))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -363,11 +363,11 @@ func (c *Backoffice_ReportHTTPClientImpl) ListGameDataDailySummaries(ctx context
 	return &out, nil
 }
 
-func (c *Backoffice_ReportHTTPClientImpl) ListWithdrawDailyDetails(ctx context.Context, in *ListWithdrawDailyDetailsRequest, opts ...http.CallOption) (*ListWithdrawDailyDetailsResponse, error) {
+func (c *BackofficeReportHTTPClientImpl) ListWithdrawDailyDetails(ctx context.Context, in *ListWithdrawDailyDetailsRequest, opts ...http.CallOption) (*ListWithdrawDailyDetailsResponse, error) {
 	var out ListWithdrawDailyDetailsResponse
 	pattern := "/v1/backoffice/report/withdraw-daily-details/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_ReportListWithdrawDailyDetails))
+	opts = append(opts, http.Operation(OperationBackofficeReportListWithdrawDailyDetails))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -376,11 +376,11 @@ func (c *Backoffice_ReportHTTPClientImpl) ListWithdrawDailyDetails(ctx context.C
 	return &out, nil
 }
 
-func (c *Backoffice_ReportHTTPClientImpl) ListWithdrawDailySummaries(ctx context.Context, in *ListWithdrawDailySummariesRequest, opts ...http.CallOption) (*ListWithdrawDailySummariesResponse, error) {
+func (c *BackofficeReportHTTPClientImpl) ListWithdrawDailySummaries(ctx context.Context, in *ListWithdrawDailySummariesRequest, opts ...http.CallOption) (*ListWithdrawDailySummariesResponse, error) {
 	var out ListWithdrawDailySummariesResponse
 	pattern := "/v1/backoffice/report/withdraw-daily-summaries/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_ReportListWithdrawDailySummaries))
+	opts = append(opts, http.Operation(OperationBackofficeReportListWithdrawDailySummaries))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

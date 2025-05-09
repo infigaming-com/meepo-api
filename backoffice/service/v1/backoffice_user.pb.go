@@ -2197,8 +2197,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x0fauthor_username\x18\x01 \x01(\tR\x0eauthorUsername\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x129\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt2\xa3\r\n" +
-	"\x0fBackoffice_User\x12\x8b\x01\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt2\xa2\r\n" +
+	"\x0eBackofficeUser\x12\x8b\x01\n" +
 	"\tListUsers\x12+.api.backoffice.service.v1.ListUsersRequest\x1a,.api.backoffice.service.v1.ListUsersResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/backoffice/user/list\x12\xa5\x01\n" +
 	"\x0fGetUserOverview\x121.api.backoffice.service.v1.GetUserOverviewRequest\x1a2.api.backoffice.service.v1.GetUserOverviewResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/overview/get\x12\xa1\x01\n" +
 	"\x0eGetUserProfile\x120.api.backoffice.service.v1.GetUserProfileRequest\x1a1.api.backoffice.service.v1.GetUserProfileResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/user/profile/get\x12\xb3\x01\n" +
@@ -2270,26 +2270,26 @@ var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
 	26, // 12: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
 	26, // 13: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
 	26, // 14: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 15: api.backoffice.service.v1.Backoffice_User.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
-	2,  // 16: api.backoffice.service.v1.Backoffice_User.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
-	4,  // 17: api.backoffice.service.v1.Backoffice_User.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
-	6,  // 18: api.backoffice.service.v1.Backoffice_User.AddOperatorUserTag:input_type -> api.backoffice.service.v1.AddOperatorUserTagRequest
-	8,  // 19: api.backoffice.service.v1.Backoffice_User.DeleteOperatorUserTag:input_type -> api.backoffice.service.v1.DeleteOperatorUserTagRequest
-	10, // 20: api.backoffice.service.v1.Backoffice_User.GetOperatorUserTags:input_type -> api.backoffice.service.v1.GetOperatorUserTagsRequest
-	12, // 21: api.backoffice.service.v1.Backoffice_User.AddUserTag:input_type -> api.backoffice.service.v1.AddUserTagRequest
-	14, // 22: api.backoffice.service.v1.Backoffice_User.DeleteUserTag:input_type -> api.backoffice.service.v1.DeleteUserTagRequest
-	16, // 23: api.backoffice.service.v1.Backoffice_User.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
-	18, // 24: api.backoffice.service.v1.Backoffice_User.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
-	1,  // 25: api.backoffice.service.v1.Backoffice_User.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
-	3,  // 26: api.backoffice.service.v1.Backoffice_User.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
-	5,  // 27: api.backoffice.service.v1.Backoffice_User.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
-	7,  // 28: api.backoffice.service.v1.Backoffice_User.AddOperatorUserTag:output_type -> api.backoffice.service.v1.AddOperatorUserTagResponse
-	9,  // 29: api.backoffice.service.v1.Backoffice_User.DeleteOperatorUserTag:output_type -> api.backoffice.service.v1.DeleteOperatorUserTagResponse
-	11, // 30: api.backoffice.service.v1.Backoffice_User.GetOperatorUserTags:output_type -> api.backoffice.service.v1.GetOperatorUserTagsResponse
-	13, // 31: api.backoffice.service.v1.Backoffice_User.AddUserTag:output_type -> api.backoffice.service.v1.AddUserTagResponse
-	15, // 32: api.backoffice.service.v1.Backoffice_User.DeleteUserTag:output_type -> api.backoffice.service.v1.DeleteUserTagResponse
-	17, // 33: api.backoffice.service.v1.Backoffice_User.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
-	19, // 34: api.backoffice.service.v1.Backoffice_User.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
+	0,  // 15: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
+	2,  // 16: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
+	4,  // 17: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
+	6,  // 18: api.backoffice.service.v1.BackofficeUser.AddOperatorUserTag:input_type -> api.backoffice.service.v1.AddOperatorUserTagRequest
+	8,  // 19: api.backoffice.service.v1.BackofficeUser.DeleteOperatorUserTag:input_type -> api.backoffice.service.v1.DeleteOperatorUserTagRequest
+	10, // 20: api.backoffice.service.v1.BackofficeUser.GetOperatorUserTags:input_type -> api.backoffice.service.v1.GetOperatorUserTagsRequest
+	12, // 21: api.backoffice.service.v1.BackofficeUser.AddUserTag:input_type -> api.backoffice.service.v1.AddUserTagRequest
+	14, // 22: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:input_type -> api.backoffice.service.v1.DeleteUserTagRequest
+	16, // 23: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
+	18, // 24: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
+	1,  // 25: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
+	3,  // 26: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
+	5,  // 27: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
+	7,  // 28: api.backoffice.service.v1.BackofficeUser.AddOperatorUserTag:output_type -> api.backoffice.service.v1.AddOperatorUserTagResponse
+	9,  // 29: api.backoffice.service.v1.BackofficeUser.DeleteOperatorUserTag:output_type -> api.backoffice.service.v1.DeleteOperatorUserTagResponse
+	11, // 30: api.backoffice.service.v1.BackofficeUser.GetOperatorUserTags:output_type -> api.backoffice.service.v1.GetOperatorUserTagsResponse
+	13, // 31: api.backoffice.service.v1.BackofficeUser.AddUserTag:output_type -> api.backoffice.service.v1.AddUserTagResponse
+	15, // 32: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:output_type -> api.backoffice.service.v1.DeleteUserTagResponse
+	17, // 33: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
+	19, // 34: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
 	25, // [25:35] is the sub-list for method output_type
 	15, // [15:25] is the sub-list for method input_type
 	15, // [15:15] is the sub-list for extension type_name

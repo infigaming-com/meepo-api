@@ -19,17 +19,17 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Backoffice_Game_ListBets_FullMethodName                  = "/api.backoffice.service.v1.Backoffice_Game/ListBets"
-	Backoffice_Game_GetUserBetsOverview_FullMethodName       = "/api.backoffice.service.v1.Backoffice_Game/GetUserBetsOverview"
-	Backoffice_Game_GetGameTransactionsForBet_FullMethodName = "/api.backoffice.service.v1.Backoffice_Game/GetGameTransactionsForBet"
-	Backoffice_Game_ListUserBets_FullMethodName              = "/api.backoffice.service.v1.Backoffice_Game/ListUserBets"
-	Backoffice_Game_ListGames_FullMethodName                 = "/api.backoffice.service.v1.Backoffice_Game/ListGames"
+	BackofficeGame_ListBets_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListBets"
+	BackofficeGame_GetUserBetsOverview_FullMethodName       = "/api.backoffice.service.v1.BackofficeGame/GetUserBetsOverview"
+	BackofficeGame_GetGameTransactionsForBet_FullMethodName = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
+	BackofficeGame_ListUserBets_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ListUserBets"
+	BackofficeGame_ListGames_FullMethodName                 = "/api.backoffice.service.v1.BackofficeGame/ListGames"
 )
 
-// Backoffice_GameClient is the client API for Backoffice_Game service.
+// BackofficeGameClient is the client API for BackofficeGame service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type Backoffice_GameClient interface {
+type BackofficeGameClient interface {
 	ListBets(ctx context.Context, in *ListBetsRequest, opts ...grpc.CallOption) (*ListBetsResponse, error)
 	GetUserBetsOverview(ctx context.Context, in *GetUserBetsOverviewRequest, opts ...grpc.CallOption) (*GetUserBetsOverviewResponse, error)
 	GetGameTransactionsForBet(ctx context.Context, in *GetGameTransactionsForBetRequest, opts ...grpc.CallOption) (*GetGameTransactionsForBetResponse, error)
@@ -37,235 +37,235 @@ type Backoffice_GameClient interface {
 	ListGames(ctx context.Context, in *ListGamesRequest, opts ...grpc.CallOption) (*ListGamesResponse, error)
 }
 
-type backoffice_GameClient struct {
+type backofficeGameClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBackoffice_GameClient(cc grpc.ClientConnInterface) Backoffice_GameClient {
-	return &backoffice_GameClient{cc}
+func NewBackofficeGameClient(cc grpc.ClientConnInterface) BackofficeGameClient {
+	return &backofficeGameClient{cc}
 }
 
-func (c *backoffice_GameClient) ListBets(ctx context.Context, in *ListBetsRequest, opts ...grpc.CallOption) (*ListBetsResponse, error) {
+func (c *backofficeGameClient) ListBets(ctx context.Context, in *ListBetsRequest, opts ...grpc.CallOption) (*ListBetsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListBetsResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Game_ListBets_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListBets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_GameClient) GetUserBetsOverview(ctx context.Context, in *GetUserBetsOverviewRequest, opts ...grpc.CallOption) (*GetUserBetsOverviewResponse, error) {
+func (c *backofficeGameClient) GetUserBetsOverview(ctx context.Context, in *GetUserBetsOverviewRequest, opts ...grpc.CallOption) (*GetUserBetsOverviewResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserBetsOverviewResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Game_GetUserBetsOverview_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeGame_GetUserBetsOverview_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_GameClient) GetGameTransactionsForBet(ctx context.Context, in *GetGameTransactionsForBetRequest, opts ...grpc.CallOption) (*GetGameTransactionsForBetResponse, error) {
+func (c *backofficeGameClient) GetGameTransactionsForBet(ctx context.Context, in *GetGameTransactionsForBetRequest, opts ...grpc.CallOption) (*GetGameTransactionsForBetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetGameTransactionsForBetResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Game_GetGameTransactionsForBet_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeGame_GetGameTransactionsForBet_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_GameClient) ListUserBets(ctx context.Context, in *ListUserBetsRequest, opts ...grpc.CallOption) (*ListUserBetsResponse, error) {
+func (c *backofficeGameClient) ListUserBets(ctx context.Context, in *ListUserBetsRequest, opts ...grpc.CallOption) (*ListUserBetsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUserBetsResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Game_ListUserBets_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListUserBets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_GameClient) ListGames(ctx context.Context, in *ListGamesRequest, opts ...grpc.CallOption) (*ListGamesResponse, error) {
+func (c *backofficeGameClient) ListGames(ctx context.Context, in *ListGamesRequest, opts ...grpc.CallOption) (*ListGamesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListGamesResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Game_ListGames_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListGames_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// Backoffice_GameServer is the server API for Backoffice_Game service.
-// All implementations must embed UnimplementedBackoffice_GameServer
+// BackofficeGameServer is the server API for BackofficeGame service.
+// All implementations must embed UnimplementedBackofficeGameServer
 // for forward compatibility.
-type Backoffice_GameServer interface {
+type BackofficeGameServer interface {
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
 	GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error)
 	GetGameTransactionsForBet(context.Context, *GetGameTransactionsForBetRequest) (*GetGameTransactionsForBetResponse, error)
 	ListUserBets(context.Context, *ListUserBetsRequest) (*ListUserBetsResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
-	mustEmbedUnimplementedBackoffice_GameServer()
+	mustEmbedUnimplementedBackofficeGameServer()
 }
 
-// UnimplementedBackoffice_GameServer must be embedded to have
+// UnimplementedBackofficeGameServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBackoffice_GameServer struct{}
+type UnimplementedBackofficeGameServer struct{}
 
-func (UnimplementedBackoffice_GameServer) ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error) {
+func (UnimplementedBackofficeGameServer) ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBets not implemented")
 }
-func (UnimplementedBackoffice_GameServer) GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error) {
+func (UnimplementedBackofficeGameServer) GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserBetsOverview not implemented")
 }
-func (UnimplementedBackoffice_GameServer) GetGameTransactionsForBet(context.Context, *GetGameTransactionsForBetRequest) (*GetGameTransactionsForBetResponse, error) {
+func (UnimplementedBackofficeGameServer) GetGameTransactionsForBet(context.Context, *GetGameTransactionsForBetRequest) (*GetGameTransactionsForBetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGameTransactionsForBet not implemented")
 }
-func (UnimplementedBackoffice_GameServer) ListUserBets(context.Context, *ListUserBetsRequest) (*ListUserBetsResponse, error) {
+func (UnimplementedBackofficeGameServer) ListUserBets(context.Context, *ListUserBetsRequest) (*ListUserBetsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUserBets not implemented")
 }
-func (UnimplementedBackoffice_GameServer) ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error) {
+func (UnimplementedBackofficeGameServer) ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGames not implemented")
 }
-func (UnimplementedBackoffice_GameServer) mustEmbedUnimplementedBackoffice_GameServer() {}
-func (UnimplementedBackoffice_GameServer) testEmbeddedByValue()                         {}
+func (UnimplementedBackofficeGameServer) mustEmbedUnimplementedBackofficeGameServer() {}
+func (UnimplementedBackofficeGameServer) testEmbeddedByValue()                        {}
 
-// UnsafeBackoffice_GameServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to Backoffice_GameServer will
+// UnsafeBackofficeGameServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BackofficeGameServer will
 // result in compilation errors.
-type UnsafeBackoffice_GameServer interface {
-	mustEmbedUnimplementedBackoffice_GameServer()
+type UnsafeBackofficeGameServer interface {
+	mustEmbedUnimplementedBackofficeGameServer()
 }
 
-func RegisterBackoffice_GameServer(s grpc.ServiceRegistrar, srv Backoffice_GameServer) {
-	// If the following call pancis, it indicates UnimplementedBackoffice_GameServer was
+func RegisterBackofficeGameServer(s grpc.ServiceRegistrar, srv BackofficeGameServer) {
+	// If the following call pancis, it indicates UnimplementedBackofficeGameServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Backoffice_Game_ServiceDesc, srv)
+	s.RegisterService(&BackofficeGame_ServiceDesc, srv)
 }
 
-func _Backoffice_Game_ListBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeGame_ListBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListBetsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_GameServer).ListBets(ctx, in)
+		return srv.(BackofficeGameServer).ListBets(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Game_ListBets_FullMethodName,
+		FullMethod: BackofficeGame_ListBets_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_GameServer).ListBets(ctx, req.(*ListBetsRequest))
+		return srv.(BackofficeGameServer).ListBets(ctx, req.(*ListBetsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Game_GetUserBetsOverview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeGame_GetUserBetsOverview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserBetsOverviewRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_GameServer).GetUserBetsOverview(ctx, in)
+		return srv.(BackofficeGameServer).GetUserBetsOverview(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Game_GetUserBetsOverview_FullMethodName,
+		FullMethod: BackofficeGame_GetUserBetsOverview_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_GameServer).GetUserBetsOverview(ctx, req.(*GetUserBetsOverviewRequest))
+		return srv.(BackofficeGameServer).GetUserBetsOverview(ctx, req.(*GetUserBetsOverviewRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Game_GetGameTransactionsForBet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeGame_GetGameTransactionsForBet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetGameTransactionsForBetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_GameServer).GetGameTransactionsForBet(ctx, in)
+		return srv.(BackofficeGameServer).GetGameTransactionsForBet(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Game_GetGameTransactionsForBet_FullMethodName,
+		FullMethod: BackofficeGame_GetGameTransactionsForBet_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_GameServer).GetGameTransactionsForBet(ctx, req.(*GetGameTransactionsForBetRequest))
+		return srv.(BackofficeGameServer).GetGameTransactionsForBet(ctx, req.(*GetGameTransactionsForBetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Game_ListUserBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeGame_ListUserBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListUserBetsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_GameServer).ListUserBets(ctx, in)
+		return srv.(BackofficeGameServer).ListUserBets(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Game_ListUserBets_FullMethodName,
+		FullMethod: BackofficeGame_ListUserBets_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_GameServer).ListUserBets(ctx, req.(*ListUserBetsRequest))
+		return srv.(BackofficeGameServer).ListUserBets(ctx, req.(*ListUserBetsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Game_ListGames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeGame_ListGames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListGamesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_GameServer).ListGames(ctx, in)
+		return srv.(BackofficeGameServer).ListGames(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Game_ListGames_FullMethodName,
+		FullMethod: BackofficeGame_ListGames_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_GameServer).ListGames(ctx, req.(*ListGamesRequest))
+		return srv.(BackofficeGameServer).ListGames(ctx, req.(*ListGamesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Backoffice_Game_ServiceDesc is the grpc.ServiceDesc for Backoffice_Game service.
+// BackofficeGame_ServiceDesc is the grpc.ServiceDesc for BackofficeGame service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Backoffice_Game_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.backoffice.service.v1.Backoffice_Game",
-	HandlerType: (*Backoffice_GameServer)(nil),
+var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.backoffice.service.v1.BackofficeGame",
+	HandlerType: (*BackofficeGameServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ListBets",
-			Handler:    _Backoffice_Game_ListBets_Handler,
+			Handler:    _BackofficeGame_ListBets_Handler,
 		},
 		{
 			MethodName: "GetUserBetsOverview",
-			Handler:    _Backoffice_Game_GetUserBetsOverview_Handler,
+			Handler:    _BackofficeGame_GetUserBetsOverview_Handler,
 		},
 		{
 			MethodName: "GetGameTransactionsForBet",
-			Handler:    _Backoffice_Game_GetGameTransactionsForBet_Handler,
+			Handler:    _BackofficeGame_GetGameTransactionsForBet_Handler,
 		},
 		{
 			MethodName: "ListUserBets",
-			Handler:    _Backoffice_Game_ListUserBets_Handler,
+			Handler:    _BackofficeGame_ListUserBets_Handler,
 		},
 		{
 			MethodName: "ListGames",
-			Handler:    _Backoffice_Game_ListGames_Handler,
+			Handler:    _BackofficeGame_ListGames_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
