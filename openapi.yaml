@@ -1006,27 +1006,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
-    /v1/payment/channel/list:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Get list of payment channels
-                 Retrieves all payment channels for a specific operator
-            operationId: Payment_GetPaymentChannelList
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListResponse'
     /v1/payment/channel/page:
         post:
             tags:
@@ -4675,26 +4654,6 @@ components:
             description: |-
                 Response for deposit callback
                  Confirms receipt of callback notification
-        payment.service.v1.GetPaymentChannelListRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                    description: ID of the operator whose channels should be retrieved
-            description: |-
-                Request to get payment channel list
-                 Used to retrieve all payment channels for a specific operator
-        payment.service.v1.GetPaymentChannelListResponse:
-            type: object
-            properties:
-                paymentChannels:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
-                    description: List of payment channels
-            description: |-
-                Response for payment channel list
-                 Contains a list of payment channels
         payment.service.v1.GetPaymentChannelPageRequest:
             type: object
             properties:

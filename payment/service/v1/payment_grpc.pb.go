@@ -21,7 +21,6 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Payment_GetPaymentMethodList_FullMethodName  = "/payment.service.v1.Payment/GetPaymentMethodList"
 	Payment_CreatePaymentChannel_FullMethodName  = "/payment.service.v1.Payment/CreatePaymentChannel"
-	Payment_GetPaymentChannelList_FullMethodName = "/payment.service.v1.Payment/GetPaymentChannelList"
 	Payment_InitiateDeposit_FullMethodName       = "/payment.service.v1.Payment/InitiateDeposit"
 	Payment_InitiateWithdraw_FullMethodName      = "/payment.service.v1.Payment/InitiateWithdraw"
 	Payment_DepositCallback_FullMethodName       = "/payment.service.v1.Payment/DepositCallback"
@@ -43,9 +42,6 @@ type PaymentClient interface {
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	CreatePaymentChannel(ctx context.Context, in *CreatePaymentChannelRequest, opts ...grpc.CallOption) (*CreatePaymentChannelResponse, error)
-	// Get list of payment channels
-	// Retrieves all payment channels for a specific operator
-	GetPaymentChannelList(ctx context.Context, in *GetPaymentChannelListRequest, opts ...grpc.CallOption) (*GetPaymentChannelListResponse, error)
 	// Initiate a deposit transaction
 	// Starts a new deposit process and returns payment information
 	InitiateDeposit(ctx context.Context, in *InitiateDepositRequest, opts ...grpc.CallOption) (*InitiateDepositResponse, error)
@@ -90,16 +86,6 @@ func (c *paymentClient) CreatePaymentChannel(ctx context.Context, in *CreatePaym
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreatePaymentChannelResponse)
 	err := c.cc.Invoke(ctx, Payment_CreatePaymentChannel_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *paymentClient) GetPaymentChannelList(ctx context.Context, in *GetPaymentChannelListRequest, opts ...grpc.CallOption) (*GetPaymentChannelListResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPaymentChannelListResponse)
-	err := c.cc.Invoke(ctx, Payment_GetPaymentChannelList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -179,9 +165,6 @@ type PaymentServer interface {
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error)
-	// Get list of payment channels
-	// Retrieves all payment channels for a specific operator
-	GetPaymentChannelList(context.Context, *GetPaymentChannelListRequest) (*GetPaymentChannelListResponse, error)
 	// Initiate a deposit transaction
 	// Starts a new deposit process and returns payment information
 	InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error)
@@ -217,9 +200,6 @@ func (UnimplementedPaymentServer) GetPaymentMethodList(context.Context, *GetPaym
 }
 func (UnimplementedPaymentServer) CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentChannel not implemented")
-}
-func (UnimplementedPaymentServer) GetPaymentChannelList(context.Context, *GetPaymentChannelListRequest) (*GetPaymentChannelListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentChannelList not implemented")
 }
 func (UnimplementedPaymentServer) InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InitiateDeposit not implemented")
@@ -292,24 +272,6 @@ func _Payment_CreatePaymentChannel_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentServer).CreatePaymentChannel(ctx, req.(*CreatePaymentChannelRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Payment_GetPaymentChannelList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPaymentChannelListRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PaymentServer).GetPaymentChannelList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Payment_GetPaymentChannelList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServer).GetPaymentChannelList(ctx, req.(*GetPaymentChannelListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -436,10 +398,6 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreatePaymentChannel",
 			Handler:    _Payment_CreatePaymentChannel_Handler,
-		},
-		{
-			MethodName: "GetPaymentChannelList",
-			Handler:    _Payment_GetPaymentChannelList_Handler,
 		},
 		{
 			MethodName: "InitiateDeposit",
