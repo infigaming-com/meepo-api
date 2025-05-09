@@ -1547,8 +1547,8 @@ func (x *GetExchangeRatesRequest) GetCurrencies() []string {
 }
 
 type GetExchangeRatesResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ExchangeRates map[string]string      `protobuf:"bytes,1,rep,name=exchange_rates,json=exchangeRates,proto3" json:"exchange_rates,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	state         protoimpl.MessageState                   `protogen:"open.v1"`
+	ExchangeRates []*GetExchangeRatesResponse_ExchangeRate `protobuf:"bytes,1,rep,name=exchange_rates,json=exchangeRates,proto3" json:"exchange_rates,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1583,7 +1583,7 @@ func (*GetExchangeRatesResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{25}
 }
 
-func (x *GetExchangeRatesResponse) GetExchangeRates() map[string]string {
+func (x *GetExchangeRatesResponse) GetExchangeRates() []*GetExchangeRatesResponse_ExchangeRate {
 	if x != nil {
 		return x.ExchangeRates
 	}
@@ -2054,6 +2054,58 @@ func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetBonus() strin
 	return ""
 }
 
+type GetExchangeRatesResponse_ExchangeRate struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	ExchangeRate  string                 `protobuf:"bytes,2,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetExchangeRatesResponse_ExchangeRate) Reset() {
+	*x = GetExchangeRatesResponse_ExchangeRate{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetExchangeRatesResponse_ExchangeRate) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetExchangeRatesResponse_ExchangeRate) ProtoMessage() {}
+
+func (x *GetExchangeRatesResponse_ExchangeRate) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetExchangeRatesResponse_ExchangeRate.ProtoReflect.Descriptor instead.
+func (*GetExchangeRatesResponse_ExchangeRate) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{25, 0}
+}
+
+func (x *GetExchangeRatesResponse_ExchangeRate) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetExchangeRatesResponse_ExchangeRate) GetExchangeRate() string {
+	if x != nil {
+		return x.ExchangeRate
+	}
+	return ""
+}
+
 var File_wallet_service_v1_wallet_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_wallet_proto_rawDesc = "" +
@@ -2200,12 +2252,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x17GetExchangeRatesRequest\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\tR\n" +
-	"currencies\"\xc7\x01\n" +
-	"\x18GetExchangeRatesResponse\x12i\n" +
-	"\x0eexchange_rates\x18\x01 \x03(\v2B.api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRatesEntryR\rexchangeRates\x1a@\n" +
-	"\x12ExchangeRatesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*\xc0\x01\n" +
+	"currencies\"\xd0\x01\n" +
+	"\x18GetExchangeRatesResponse\x12c\n" +
+	"\x0eexchange_rates\x18\x01 \x03(\v2<.api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRateR\rexchangeRates\x1aO\n" +
+	"\fExchangeRate\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12#\n" +
+	"\rexchange_rate\x18\x02 \x01(\tR\fexchangeRate*\xc0\x01\n" +
 	"\x0fTransactionType\x12 \n" +
 	"\x1cTRANSACTION_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
 	" TRANSACTION_TYPE_PAYMENT_DEPOSIT\x10\x01\x12\x1d\n" +
@@ -2279,8 +2331,8 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*GetWalletsResponse_Credit)(nil),                             // 30: api.wallet.service.v1.GetWalletsResponse.Credit
 	(*GetWalletsResponse_Wallet)(nil),                             // 31: api.wallet.service.v1.GetWalletsResponse.Wallet
 	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil), // 32: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
-	nil,                           // 33: api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
-	(*timestamppb.Timestamp)(nil), // 34: google.protobuf.Timestamp
+	(*GetExchangeRatesResponse_ExchangeRate)(nil),                 // 33: api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRate
+	(*timestamppb.Timestamp)(nil),                                 // 34: google.protobuf.Timestamp
 }
 var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	27, // 0: api.wallet.service.v1.GetUserBalancesResponse.balances:type_name -> api.wallet.service.v1.GetUserBalancesResponse.Balance
@@ -2291,7 +2343,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	29, // 5: api.wallet.service.v1.GetWalletsResponse.total_assets:type_name -> api.wallet.service.v1.GetWalletsResponse.TotalAssets
 	31, // 6: api.wallet.service.v1.GetWalletsResponse.wallets:type_name -> api.wallet.service.v1.GetWalletsResponse.Wallet
 	32, // 7: api.wallet.service.v1.GetWalletCreditTransactionsResponse.credit_transactions:type_name -> api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
-	33, // 8: api.wallet.service.v1.GetExchangeRatesResponse.exchange_rates:type_name -> api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
+	33, // 8: api.wallet.service.v1.GetExchangeRatesResponse.exchange_rates:type_name -> api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRate
 	34, // 9: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
 	30, // 10: api.wallet.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.wallet.service.v1.GetWalletsResponse.Credit
 	34, // 11: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
