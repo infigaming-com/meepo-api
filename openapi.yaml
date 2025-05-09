@@ -2329,7 +2329,8 @@ components:
                 lastWithdraw:
                     type: string
                 withdrawCount:
-                    type: string
+                    type: integer
+                    format: int32
                 bonus:
                     type: string
                 validTurnover:
@@ -2351,7 +2352,8 @@ components:
                     type: integer
                     format: int32
                 turnoverMultiplier:
-                    type: string
+                    type: integer
+                    format: int32
                 depositToWithdrawRatio:
                     type: integer
                     format: int32
@@ -3317,7 +3319,8 @@ components:
                     type: string
                     format: date-time
                 vipLevel:
-                    type: string
+                    type: integer
+                    format: int32
                 retailerOperatorId:
                     type: string
                 groupOperatorId:
@@ -3358,9 +3361,11 @@ components:
                 online:
                     type: boolean
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListUsersResponse:
             type: object
             properties:
@@ -3369,11 +3374,14 @@ components:
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.ListUsersResponse_User'
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
                 total:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListUsersResponse_User:
             type: object
             properties:
