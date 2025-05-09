@@ -10,7 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/known/timestamppb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -1624,11 +1624,11 @@ func (x *CreditRequest_Ratio) GetOperatorBonus() int64 {
 
 type GetWalletsResponse_TotalAssets struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	Balance              int64                  `protobuf:"varint,1,opt,name=balance,proto3" json:"balance,omitempty"`
-	Deposit              int64                  `protobuf:"varint,2,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	Withdraw             int64                  `protobuf:"varint,3,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
-	DepositMinusWithdraw int64                  `protobuf:"varint,4,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
-	ValidTurnover        int64                  `protobuf:"varint,5,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`
+	Balance              string                 `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	Deposit              string                 `protobuf:"bytes,2,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	Withdraw             string                 `protobuf:"bytes,3,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
+	DepositMinusWithdraw string                 `protobuf:"bytes,4,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
+	ValidTurnover        string                 `protobuf:"bytes,5,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -1663,51 +1663,51 @@ func (*GetWalletsResponse_TotalAssets) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{21, 0}
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetBalance() int64 {
+func (x *GetWalletsResponse_TotalAssets) GetBalance() string {
 	if x != nil {
 		return x.Balance
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetDeposit() int64 {
+func (x *GetWalletsResponse_TotalAssets) GetDeposit() string {
 	if x != nil {
 		return x.Deposit
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetWithdraw() int64 {
+func (x *GetWalletsResponse_TotalAssets) GetWithdraw() string {
 	if x != nil {
 		return x.Withdraw
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetDepositMinusWithdraw() int64 {
+func (x *GetWalletsResponse_TotalAssets) GetDepositMinusWithdraw() string {
 	if x != nil {
 		return x.DepositMinusWithdraw
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetValidTurnover() int64 {
+func (x *GetWalletsResponse_TotalAssets) GetValidTurnover() string {
 	if x != nil {
 		return x.ValidTurnover
 	}
-	return 0
+	return ""
 }
 
 type GetWalletsResponse_Credit struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	CreatedAt         int64                  `protobuf:"varint,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	TransactionId     int64                  `protobuf:"varint,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash              int64                  `protobuf:"varint,3,opt,name=cash,proto3" json:"cash,omitempty"`
-	Bonus             int64                  `protobuf:"varint,4,opt,name=bonus,proto3" json:"bonus,omitempty"`
-	TurnoverThreshold int64                  `protobuf:"varint,5,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"`
-	Turnover          int64                  `protobuf:"varint,6,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	CashTurnover      int64                  `protobuf:"varint,7,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
-	BonusTurnover     int64                  `protobuf:"varint,8,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
+	Cash              string                 `protobuf:"bytes,3,opt,name=cash,proto3" json:"cash,omitempty"`
+	Bonus             string                 `protobuf:"bytes,4,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	TurnoverThreshold string                 `protobuf:"bytes,5,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"`
+	Turnover          string                 `protobuf:"bytes,6,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	CashTurnover      string                 `protobuf:"bytes,7,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
+	BonusTurnover     string                 `protobuf:"bytes,8,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1742,11 +1742,11 @@ func (*GetWalletsResponse_Credit) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{21, 1}
 }
 
-func (x *GetWalletsResponse_Credit) GetCreatedAt() int64 {
+func (x *GetWalletsResponse_Credit) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return 0
+	return nil
 }
 
 func (x *GetWalletsResponse_Credit) GetTransactionId() int64 {
@@ -1756,57 +1756,57 @@ func (x *GetWalletsResponse_Credit) GetTransactionId() int64 {
 	return 0
 }
 
-func (x *GetWalletsResponse_Credit) GetCash() int64 {
+func (x *GetWalletsResponse_Credit) GetCash() string {
 	if x != nil {
 		return x.Cash
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Credit) GetBonus() int64 {
+func (x *GetWalletsResponse_Credit) GetBonus() string {
 	if x != nil {
 		return x.Bonus
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Credit) GetTurnoverThreshold() int64 {
+func (x *GetWalletsResponse_Credit) GetTurnoverThreshold() string {
 	if x != nil {
 		return x.TurnoverThreshold
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Credit) GetTurnover() int64 {
+func (x *GetWalletsResponse_Credit) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Credit) GetCashTurnover() int64 {
+func (x *GetWalletsResponse_Credit) GetCashTurnover() string {
 	if x != nil {
 		return x.CashTurnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Credit) GetBonusTurnover() int64 {
+func (x *GetWalletsResponse_Credit) GetBonusTurnover() string {
 	if x != nil {
 		return x.BonusTurnover
 	}
-	return 0
+	return ""
 }
 
 type GetWalletsResponse_Wallet struct {
 	state             protoimpl.MessageState       `protogen:"open.v1"`
 	Currency          string                       `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Cash              int64                        `protobuf:"varint,2,opt,name=cash,proto3" json:"cash,omitempty"`
-	Bonus             int64                        `protobuf:"varint,3,opt,name=bonus,proto3" json:"bonus,omitempty"`
-	TurnoverThreshold int64                        `protobuf:"varint,4,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"`
-	Turnover          int64                        `protobuf:"varint,5,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	CashTurnover      int64                        `protobuf:"varint,6,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
-	BonusTurnover     int64                        `protobuf:"varint,7,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
+	Cash              string                       `protobuf:"bytes,2,opt,name=cash,proto3" json:"cash,omitempty"`
+	Bonus             string                       `protobuf:"bytes,3,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	TurnoverThreshold string                       `protobuf:"bytes,4,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"`
+	Turnover          string                       `protobuf:"bytes,5,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	CashTurnover      string                       `protobuf:"bytes,6,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
+	BonusTurnover     string                       `protobuf:"bytes,7,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
 	Credits           []*GetWalletsResponse_Credit `protobuf:"bytes,8,rep,name=credits,proto3" json:"credits,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -1849,46 +1849,46 @@ func (x *GetWalletsResponse_Wallet) GetCurrency() string {
 	return ""
 }
 
-func (x *GetWalletsResponse_Wallet) GetCash() int64 {
+func (x *GetWalletsResponse_Wallet) GetCash() string {
 	if x != nil {
 		return x.Cash
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Wallet) GetBonus() int64 {
+func (x *GetWalletsResponse_Wallet) GetBonus() string {
 	if x != nil {
 		return x.Bonus
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Wallet) GetTurnoverThreshold() int64 {
+func (x *GetWalletsResponse_Wallet) GetTurnoverThreshold() string {
 	if x != nil {
 		return x.TurnoverThreshold
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Wallet) GetTurnover() int64 {
+func (x *GetWalletsResponse_Wallet) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Wallet) GetCashTurnover() int64 {
+func (x *GetWalletsResponse_Wallet) GetCashTurnover() string {
 	if x != nil {
 		return x.CashTurnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Wallet) GetBonusTurnover() int64 {
+func (x *GetWalletsResponse_Wallet) GetBonusTurnover() string {
 	if x != nil {
 		return x.BonusTurnover
 	}
-	return 0
+	return ""
 }
 
 func (x *GetWalletsResponse_Wallet) GetCredits() []*GetWalletsResponse_Credit {
@@ -1901,9 +1901,9 @@ func (x *GetWalletsResponse_Wallet) GetCredits() []*GetWalletsResponse_Credit {
 type GetWalletCreditTransactionsResponse_CreditTransaction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Cash          int64                  `protobuf:"varint,3,opt,name=cash,proto3" json:"cash,omitempty"`
-	Bonus         int64                  `protobuf:"varint,4,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Cash          string                 `protobuf:"bytes,3,opt,name=cash,proto3" json:"cash,omitempty"`
+	Bonus         string                 `protobuf:"bytes,4,opt,name=bonus,proto3" json:"bonus,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1945,25 +1945,25 @@ func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetType() string
 	return ""
 }
 
-func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetCreatedAt() int64 {
+func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return 0
+	return nil
 }
 
-func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetCash() int64 {
+func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetCash() string {
 	if x != nil {
 		return x.Cash
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetBonus() int64 {
+func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetBonus() string {
 	if x != nil {
 		return x.Bonus
 	}
-	return 0
+	return ""
 }
 
 var File_wallet_service_v1_wallet_proto protoreflect.FileDescriptor
@@ -2062,34 +2062,34 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x02 \x03(\tR\n" +
-	"currencies\"\xbd\a\n" +
+	"currencies\"\xd9\a\n" +
 	"\x12GetWalletsResponse\x12X\n" +
 	"\ftotal_assets\x18\x01 \x01(\v25.api.wallet.service.v1.GetWalletsResponse.TotalAssetsR\vtotalAssets\x12J\n" +
 	"\awallets\x18\x02 \x03(\v20.api.wallet.service.v1.GetWalletsResponse.WalletR\awallets\x1a\xba\x01\n" +
 	"\vTotalAssets\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\x03R\abalance\x12\x18\n" +
-	"\adeposit\x18\x02 \x01(\x03R\adeposit\x12\x1a\n" +
-	"\bwithdraw\x18\x03 \x01(\x03R\bwithdraw\x124\n" +
-	"\x16deposit_minus_withdraw\x18\x04 \x01(\x03R\x14depositMinusWithdraw\x12%\n" +
-	"\x0evalid_turnover\x18\x05 \x01(\x03R\rvalidTurnover\x1a\x8f\x02\n" +
-	"\x06Credit\x12\x1d\n" +
+	"\abalance\x18\x01 \x01(\tR\abalance\x12\x18\n" +
+	"\adeposit\x18\x02 \x01(\tR\adeposit\x12\x1a\n" +
+	"\bwithdraw\x18\x03 \x01(\tR\bwithdraw\x124\n" +
+	"\x16deposit_minus_withdraw\x18\x04 \x01(\tR\x14depositMinusWithdraw\x12%\n" +
+	"\x0evalid_turnover\x18\x05 \x01(\tR\rvalidTurnover\x1a\xab\x02\n" +
+	"\x06Credit\x129\n" +
 	"\n" +
-	"created_at\x18\x01 \x01(\x03R\tcreatedAt\x12%\n" +
+	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
 	"\x0etransaction_id\x18\x02 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12\x14\n" +
-	"\x05bonus\x18\x04 \x01(\x03R\x05bonus\x12-\n" +
-	"\x12turnover_threshold\x18\x05 \x01(\x03R\x11turnoverThreshold\x12\x1a\n" +
-	"\bturnover\x18\x06 \x01(\x03R\bturnover\x12#\n" +
-	"\rcash_turnover\x18\a \x01(\x03R\fcashTurnover\x12%\n" +
-	"\x0ebonus_turnover\x18\b \x01(\x03R\rbonusTurnover\x1a\xb1\x02\n" +
+	"\x04cash\x18\x03 \x01(\tR\x04cash\x12\x14\n" +
+	"\x05bonus\x18\x04 \x01(\tR\x05bonus\x12-\n" +
+	"\x12turnover_threshold\x18\x05 \x01(\tR\x11turnoverThreshold\x12\x1a\n" +
+	"\bturnover\x18\x06 \x01(\tR\bturnover\x12#\n" +
+	"\rcash_turnover\x18\a \x01(\tR\fcashTurnover\x12%\n" +
+	"\x0ebonus_turnover\x18\b \x01(\tR\rbonusTurnover\x1a\xb1\x02\n" +
 	"\x06Wallet\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
-	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12\x14\n" +
-	"\x05bonus\x18\x03 \x01(\x03R\x05bonus\x12-\n" +
-	"\x12turnover_threshold\x18\x04 \x01(\x03R\x11turnoverThreshold\x12\x1a\n" +
-	"\bturnover\x18\x05 \x01(\x03R\bturnover\x12#\n" +
-	"\rcash_turnover\x18\x06 \x01(\x03R\fcashTurnover\x12%\n" +
-	"\x0ebonus_turnover\x18\a \x01(\x03R\rbonusTurnover\x12J\n" +
+	"\x04cash\x18\x02 \x01(\tR\x04cash\x12\x14\n" +
+	"\x05bonus\x18\x03 \x01(\tR\x05bonus\x12-\n" +
+	"\x12turnover_threshold\x18\x04 \x01(\tR\x11turnoverThreshold\x12\x1a\n" +
+	"\bturnover\x18\x05 \x01(\tR\bturnover\x12#\n" +
+	"\rcash_turnover\x18\x06 \x01(\tR\fcashTurnover\x12%\n" +
+	"\x0ebonus_turnover\x18\a \x01(\tR\rbonusTurnover\x12J\n" +
 	"\acredits\x18\b \x03(\v20.api.wallet.service.v1.GetWalletsResponse.CreditR\acredits\"\x93\x01\n" +
 	"\"GetWalletCreditTransactionsRequest\x12\x1b\n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\bcreditId\x12\x17\n" +
@@ -2097,18 +2097,18 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\tpage_size\x18\x03 \x01(\x03H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xdd\x02\n" +
+	"_page_size\"\xfa\x02\n" +
 	"#GetWalletCreditTransactionsResponse\x12}\n" +
 	"\x13credit_transactions\x18\x01 \x03(\v2L.api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransactionR\x12creditTransactions\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x03R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\x1ap\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\x1a\x8c\x01\n" +
 	"\x11CreditTransaction\x12\x12\n" +
-	"\x04type\x18\x01 \x01(\tR\x04type\x12\x1d\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x129\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\x03R\tcreatedAt\x12\x12\n" +
-	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12\x14\n" +
-	"\x05bonus\x18\x04 \x01(\x03R\x05bonus*\xc0\x01\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
+	"\x04cash\x18\x03 \x01(\tR\x04cash\x12\x14\n" +
+	"\x05bonus\x18\x04 \x01(\tR\x05bonus*\xc0\x01\n" +
 	"\x0fTransactionType\x12 \n" +
 	"\x1cTRANSACTION_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
 	" TRANSACTION_TYPE_PAYMENT_DEPOSIT\x10\x01\x12\x1d\n" +
@@ -2179,6 +2179,7 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*GetWalletsResponse_Credit)(nil),                             // 28: api.wallet.service.v1.GetWalletsResponse.Credit
 	(*GetWalletsResponse_Wallet)(nil),                             // 29: api.wallet.service.v1.GetWalletsResponse.Wallet
 	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil), // 30: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
+	(*timestamppb.Timestamp)(nil),                                 // 31: google.protobuf.Timestamp
 }
 var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	25, // 0: api.wallet.service.v1.GetUserBalancesResponse.balances:type_name -> api.wallet.service.v1.GetUserBalancesResponse.Balance
@@ -2189,36 +2190,38 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	27, // 5: api.wallet.service.v1.GetWalletsResponse.total_assets:type_name -> api.wallet.service.v1.GetWalletsResponse.TotalAssets
 	29, // 6: api.wallet.service.v1.GetWalletsResponse.wallets:type_name -> api.wallet.service.v1.GetWalletsResponse.Wallet
 	30, // 7: api.wallet.service.v1.GetWalletCreditTransactionsResponse.credit_transactions:type_name -> api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
-	28, // 8: api.wallet.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.wallet.service.v1.GetWalletsResponse.Credit
-	1,  // 9: api.wallet.service.v1.Wallet.AddUser:input_type -> api.wallet.service.v1.AddUserRequest
-	3,  // 10: api.wallet.service.v1.Wallet.UpdateUser:input_type -> api.wallet.service.v1.UpdateUserRequest
-	5,  // 11: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:input_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest
-	7,  // 12: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
-	9,  // 13: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
-	11, // 14: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
-	13, // 15: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
-	15, // 16: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
-	17, // 17: api.wallet.service.v1.Wallet.GameDebit:input_type -> api.wallet.service.v1.GameDebitRequest
-	19, // 18: api.wallet.service.v1.Wallet.GameCredit:input_type -> api.wallet.service.v1.GameCreditRequest
-	21, // 19: api.wallet.service.v1.Wallet.GetWallets:input_type -> api.wallet.service.v1.GetWalletsRequest
-	23, // 20: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:input_type -> api.wallet.service.v1.GetWalletCreditTransactionsRequest
-	2,  // 21: api.wallet.service.v1.Wallet.AddUser:output_type -> api.wallet.service.v1.AddUserResponse
-	4,  // 22: api.wallet.service.v1.Wallet.UpdateUser:output_type -> api.wallet.service.v1.UpdateUserResponse
-	6,  // 23: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:output_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse
-	8,  // 24: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
-	10, // 25: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
-	12, // 26: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
-	14, // 27: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
-	16, // 28: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
-	18, // 29: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
-	20, // 30: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
-	22, // 31: api.wallet.service.v1.Wallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
-	24, // 32: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:output_type -> api.wallet.service.v1.GetWalletCreditTransactionsResponse
-	21, // [21:33] is the sub-list for method output_type
-	9,  // [9:21] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	31, // 8: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
+	28, // 9: api.wallet.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.wallet.service.v1.GetWalletsResponse.Credit
+	31, // 10: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
+	1,  // 11: api.wallet.service.v1.Wallet.AddUser:input_type -> api.wallet.service.v1.AddUserRequest
+	3,  // 12: api.wallet.service.v1.Wallet.UpdateUser:input_type -> api.wallet.service.v1.UpdateUserRequest
+	5,  // 13: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:input_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest
+	7,  // 14: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
+	9,  // 15: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
+	11, // 16: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
+	13, // 17: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
+	15, // 18: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
+	17, // 19: api.wallet.service.v1.Wallet.GameDebit:input_type -> api.wallet.service.v1.GameDebitRequest
+	19, // 20: api.wallet.service.v1.Wallet.GameCredit:input_type -> api.wallet.service.v1.GameCreditRequest
+	21, // 21: api.wallet.service.v1.Wallet.GetWallets:input_type -> api.wallet.service.v1.GetWalletsRequest
+	23, // 22: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:input_type -> api.wallet.service.v1.GetWalletCreditTransactionsRequest
+	2,  // 23: api.wallet.service.v1.Wallet.AddUser:output_type -> api.wallet.service.v1.AddUserResponse
+	4,  // 24: api.wallet.service.v1.Wallet.UpdateUser:output_type -> api.wallet.service.v1.UpdateUserResponse
+	6,  // 25: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:output_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse
+	8,  // 26: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
+	10, // 27: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
+	12, // 28: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
+	14, // 29: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
+	16, // 30: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
+	18, // 31: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
+	20, // 32: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
+	22, // 33: api.wallet.service.v1.Wallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
+	24, // 34: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:output_type -> api.wallet.service.v1.GetWalletCreditTransactionsResponse
+	23, // [23:35] is the sub-list for method output_type
+	11, // [11:23] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_wallet_proto_init() }
