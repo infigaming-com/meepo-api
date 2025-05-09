@@ -1000,7 +1000,9 @@ paths:
         post:
             tags:
                 - Payment
-            description: Create payment channel
+            description: |-
+                Create payment channel
+                 Creates a new payment channel with specified configuration
             operationId: Payment_CreatePaymentChannel
             requestBody:
                 content:
@@ -1015,30 +1017,13 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
-    /v1/payment/channel/list:
-        post:
-            tags:
-                - Payment
-            description: Get list of payment channels
-            operationId: Payment_GetPaymentChannelList
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelListResponse'
     /v1/payment/channel/page:
         post:
             tags:
                 - Payment
-            description: Get payment channel page with pagination and filters
+            description: |-
+                Get payment channel page with pagination and filters
+                 Retrieves a paginated list of payment channels with optional filtering
             operationId: Payment_GetPaymentChannelPage
             requestBody:
                 content:
@@ -1059,7 +1044,8 @@ paths:
                 - Payment
             description: |-
                 Deposit callback
-                 This endpoint handles callbacks from payment gateways.
+                 Handles callbacks from payment gateways for deposit status updates
+                 This endpoint is called by payment providers to notify of completed or failed deposits
             operationId: Payment_DepositCallback
             requestBody:
                 content:
@@ -1078,7 +1064,9 @@ paths:
         post:
             tags:
                 - Payment
-            description: Initiate a deposit transaction
+            description: |-
+                Initiate a deposit transaction
+                 Starts a new deposit process and returns payment information
             operationId: Payment_InitiateDeposit
             requestBody:
                 content:
@@ -1097,7 +1085,9 @@ paths:
         post:
             tags:
                 - Payment
-            description: Get list of payment methods
+            description: |-
+                Get list of payment methods
+                 Retrieves all available payment methods supported by the system
             operationId: Payment_GetPaymentMethodList
             requestBody:
                 content:
@@ -1116,7 +1106,9 @@ paths:
         post:
             tags:
                 - Payment
-            description: Get transaction page with pagination and filters
+            description: |-
+                Get transaction page with pagination and filters
+                 Retrieves a paginated list of transactions with optional filtering
             operationId: Payment_GetTransactionPage
             requestBody:
                 content:
@@ -1137,7 +1129,8 @@ paths:
                 - Payment
             description: |-
                 Withdraw callback
-                 This endpoint handles callbacks from payment gateways for withdrawal results.
+                 Handles callbacks from payment gateways for withdrawal status updates
+                 This endpoint is called by payment providers to notify of completed or failed withdrawals
             operationId: Payment_WithdrawCallback
             requestBody:
                 content:
@@ -1156,7 +1149,9 @@ paths:
         post:
             tags:
                 - Payment
-            description: Initiate a withdrawal transaction
+            description: |-
+                Initiate a withdrawal transaction
+                 Starts a new withdrawal process
             operationId: Payment_InitiateWithdraw
             requestBody:
                 content:
@@ -4627,88 +4622,99 @@ components:
             properties:
                 merchantId:
                     type: string
+                    description: ID of the merchant creating this channel
                 paymentMethodId:
                     type: string
+                    description: ID of the payment method to be used
                 type:
                     type: string
+                    description: Type of channel (e.g., deposit, withdrawal)
                 key:
                     type: object
-            description: Request to create a payment channel
+                    description: Configuration fields for the payment channel in JSON format
+            description: |-
+                Request to create a payment channel
+                 Used to create a new payment channel with specified merchant and method
         payment.service.v1.CreatePaymentChannelResponse:
             type: object
             properties:
                 channelId:
                     type: string
-            description: Response for channel creation
+                    description: Unique identifier for the created channel
+            description: |-
+                Response for channel creation
+                 Returns the ID of the newly created payment channel
         payment.service.v1.DepositCallbackRequest:
             type: object
             properties:
                 transactionNo:
                     type: string
+                    description: Transaction number from the payment aggregator
                 gatewayOrderNo:
                     type: string
+                    description: Order number from the payment gateway
                 operatorOrderNo:
                     type: string
+                    description: Transaction number from the operator
                 orderStatus:
                     type: string
+                    description: Current status of the order (e.g., SUCCESS, FAILED)
                 payTime:
                     type: string
+                    description: 'Time when payment was completed. Format: yyyy-MM-dd HH:mm:ss'
                 createTime:
                     type: string
+                    description: 'Time when order was created. Format: yyyy-MM-dd HH:mm:ss'
                 amount:
                     type: string
+                    description: Original amount of the order
                 money:
                     type: string
+                    description: Actual amount paid
                 sign:
                     type: string
+                    description: HMAC-SHA256 signature to verify request authenticity
                 timestamp:
                     type: string
+                    description: Request timestamp to prevent replay attacks
                 nonce:
                     type: string
-            description: Request for deposit callback
+                    description: Random string to ensure each request is unique
+            description: |-
+                Request for deposit callback
+                 Used by payment gateways to notify about deposit status changes
         payment.service.v1.DepositCallbackResponse:
             type: object
             properties:
                 success:
                     type: boolean
+                    description: Whether the callback was processed successfully
                 message:
                     type: string
-            description: Response for deposit callback
-        payment.service.v1.GetPaymentChannelListRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-            description: Request to get payment channel list
-        payment.service.v1.GetPaymentChannelListResponse:
-            type: object
-            properties:
-                paymentChannels:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
-            description: Response for payment channel list
+                    description: Optional message, returns error reason on failure
+            description: |-
+                Response for deposit callback
+                 Confirms receipt of callback notification
         payment.service.v1.GetPaymentChannelPageRequest:
             type: object
             properties:
                 page:
                     type: integer
-                    description: Pagination parameters
+                    description: Page number to retrieve (1-based)
                     format: int32
                 pageSize:
                     type: integer
+                    description: Number of items per page
                     format: int32
                 operatorId:
                     type: string
-                    description: |-
-                        Filter parameters (all optional)
-                         Optional operator id filter
+                    description: Optional operator ID filter
                 type:
                     enum:
                         - CHANNEL_TYPE_DEPOSIT
                         - CHANNEL_TYPE_WITHDRAW
                     type: string
-                    description: Optional type filter
+                    description: Optional channel type filter
                     format: enum
                 category:
                     type: string
@@ -4727,9 +4733,11 @@ components:
                         - DESC
                         - ASC
                     type: string
-                    description: Optional sort
+                    description: Optional sort direction
                     format: enum
-            description: Request to get payment channel page
+            description: |-
+                Request to get payment channel page
+                 Used to retrieve a paginated list of payment channels with optional filters
         payment.service.v1.GetPaymentChannelPageResponse:
             type: object
             properties:
@@ -4737,23 +4745,32 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
+                    description: List of payment channels matching the filter criteria
                 totalCount:
                     type: integer
+                    description: Total number of channels matching the filter criteria
                     format: int32
                 page:
                     type: integer
+                    description: Current page number
                     format: int32
                 pageSize:
                     type: integer
+                    description: Number of items per page
                     format: int32
                 totalPages:
                     type: integer
+                    description: Total number of pages available
                     format: int32
-            description: Response for payment channel page
+            description: |-
+                Response for payment channel page
+                 Contains paginated list of payment channels and pagination metadata
         payment.service.v1.GetPaymentMethodListRequest:
             type: object
             properties: {}
-            description: Request to get payment method list
+            description: |-
+                Request to get payment method list
+                 This message is used to retrieve all available payment methods
         payment.service.v1.GetPaymentMethodListResponse:
             type: object
             properties:
@@ -4761,16 +4778,20 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
-            description: Response for payment method list
+                    description: List of payment methods available
+            description: |-
+                Response for payment method list
+                 Contains a list of all available payment methods
         payment.service.v1.GetTransactionPageRequest:
             type: object
             properties:
                 page:
                     type: integer
-                    description: Pagination parameters
+                    description: Page number to retrieve (1-based)
                     format: int32
                 pageSize:
                     type: integer
+                    description: Number of items per page
                     format: int32
                 type:
                     enum:
@@ -4778,9 +4799,7 @@ components:
                         - TRANSACTION_TYPE_DEPOSIT
                         - TRANSACTION_TYPE_WITHDRAW
                     type: string
-                    description: |-
-                        Filter parameters (all optional)
-                         Optional transaction type filter
+                    description: Optional transaction type filter
                     format: enum
                 currency:
                     type: string
@@ -4796,10 +4815,11 @@ components:
                     format: enum
                 startTime:
                     type: string
-                    description: Optional date range filter
+                    description: Optional start time for date range filter
                     format: date-time
                 endTime:
                     type: string
+                    description: Optional end time for date range filter
                     format: date-time
                 paymentMethod:
                     type: string
@@ -4809,9 +4829,11 @@ components:
                         - DESC
                         - ASC
                     type: string
-                    description: Optional sort
+                    description: Optional sort direction
                     format: enum
-            description: Request to get transaction page
+            description: |-
+                Request to get transaction page
+                 Used to retrieve a paginated list of transactions with optional filters
         payment.service.v1.GetTransactionPageResponse:
             type: object
             properties:
@@ -4819,151 +4841,223 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/payment.service.v1.TransactionInfo'
+                    description: List of transactions matching the filter criteria
                 totalCount:
                     type: integer
+                    description: Total number of transactions matching the filter criteria
                     format: int32
                 page:
                     type: integer
+                    description: Current page number
                     format: int32
                 pageSize:
                     type: integer
+                    description: Number of items per page
                     format: int32
                 totalPages:
                     type: integer
+                    description: Total number of pages available
                     format: int32
-            description: Response for transaction page
+            description: |-
+                Response for transaction page
+                 Contains paginated list of transactions and pagination metadata
         payment.service.v1.InitiateDepositRequest:
             type: object
             properties:
                 amount:
                     type: string
+                    description: Amount to deposit in smallest currency unit (e.g., cents)
                 currency:
                     type: string
+                    description: Currency code for the transaction
                 channelId:
                     type: string
+                    description: ID of the channel to use for this deposit
                 extra:
                     type: object
-            description: Request to initiate a deposit
+                    description: |-
+                        Additional information needed for the deposit
+                         May include clientOrderId, productId, userInfo, etc.
+            description: |-
+                Request to initiate a deposit
+                 Used to start a deposit transaction
         payment.service.v1.InitiateDepositResponse:
             type: object
             properties:
                 transactionId:
                     type: string
+                    description: Unique identifier for the transaction
                 amount:
                     type: string
+                    description: Amount to be deposited in smallest currency unit
                 currency:
                     type: string
+                    description: Currency code for the transaction
                 status:
                     type: string
+                    description: Current status of the transaction
                 payUrl:
                     type: string
+                    description: URL to direct the user to for payment completion
                 qrCode:
                     type: string
+                    description: QR code image (typically base64 encoded) for mobile payment
                 createdAt:
                     type: string
+                    description: Timestamp when the transaction was created
                     format: date-time
                 extra:
                     type: object
-            description: Response for deposit initiation
+                    description: Additional transaction information returned by payment provider
+            description: |-
+                Response for deposit initiation
+                 Contains details about the initiated deposit transaction
         payment.service.v1.InitiateWithdrawRequest:
             type: object
             properties:
                 amount:
                     type: string
+                    description: Amount to withdraw in smallest currency unit (e.g., cents)
                 channelId:
                     type: string
+                    description: ID of the channel to use for withdrawal
                 extra:
                     type: object
-            description: Request to initiate a withdrawal
+                    description: |-
+                        Additional information needed for the withdrawal
+                         May include account details, clientId, note, etc.
+            description: |-
+                Request to initiate a withdrawal
+                 Used to start a withdrawal transaction
         payment.service.v1.InitiateWithdrawResponse:
             type: object
             properties:
                 transactionId:
                     type: string
+                    description: Unique identifier for the transaction
                 operatorOrderNo:
                     type: string
+                    description: Order number from the operator's system
                 amount:
                     type: string
+                    description: Amount to be withdrawn in smallest currency unit
                 status:
                     type: string
+                    description: Current status of the transaction
                 createdAt:
                     type: string
+                    description: Timestamp when the transaction was created
                     format: date-time
-            description: Response for withdrawal initiation
+            description: |-
+                Response for withdrawal initiation
+                 Contains details about the initiated withdrawal transaction
         payment.service.v1.PaymentChannelInfo:
             type: object
             properties:
                 channelId:
                     type: string
+                    description: Unique identifier for the channel
                 type:
                     type: string
+                    description: Type of the channel (e.g., online, offline)
                 category:
                     type: string
+                    description: Category of the channel (e.g., bank, e-wallet)
                 operatorId:
                     type: string
+                    description: ID of the operator who owns this channel
                 paymentMethod:
                     type: string
+                    description: Payment method used in this channel
                 tag:
                     type: string
+                    description: Tag for categorization or filtering
                 name:
                     type: string
+                    description: Display name of the channel
                 paymentMethodId:
                     type: string
+                    description: ID of the payment method used
                 currency:
                     type: string
+                    description: Currency supported by this channel
                 country:
                     type: string
+                    description: Country where this channel is available
                 method:
                     type: string
+                    description: Specific method used (might be more detailed than payment_method)
                 logo:
                     type: string
+                    description: URL to the logo image for this payment channel
                 minDepositAmount:
                     type: string
+                    description: Minimum amount allowed for deposit transactions
                 maxDepositAmount:
                     type: string
+                    description: Maximum amount allowed for deposit transactions
                 minWithdrawAmount:
                     type: string
+                    description: Minimum amount allowed for withdrawal transactions
                 maxWithdrawAmount:
                     type: string
+                    description: Maximum amount allowed for withdrawal transactions
                 eat:
                     type: integer
+                    description: Estimated arrival time in minutes
                     format: int32
                 depositSchema:
                     type: object
+                    description: JSON schema defining deposit form fields required by this channel
                 withdrawSchema:
                     type: object
-            description: Payment channel information
+                    description: JSON schema defining withdrawal form fields required by this channel
+            description: |-
+                Payment channel information
+                 Detailed information about a specific payment channel
         payment.service.v1.PaymentMethodInfo:
             type: object
             properties:
                 id:
                     type: string
+                    description: Unique identifier for the payment method
                 currency:
                     type: string
+                    description: Currency code supported by this payment method (e.g., USD, EUR, CNY)
                 country:
                     type: string
+                    description: Country code where this payment method is available
                 paymentMethod:
                     type: string
+                    description: Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
                 keySchema:
                     type: object
-            description: Details of a single payment method
+                    description: JSON schema defining the required fields for this payment method
+            description: |-
+                Details of a single payment method
+                 Contains information about a specific payment method including its ID, currency, and required fields schema
         payment.service.v1.TransactionInfo:
             type: object
             properties:
                 transactionId:
                     type: string
+                    description: Unique identifier for the transaction
                 userId:
                     type: string
+                    description: ID of the user who initiated the transaction
                 amount:
                     type: string
+                    description: Transaction amount in smallest currency unit
                 currency:
                     type: string
+                    description: Currency code for the transaction
                 type:
                     enum:
                         - TRANSACTION_TYPE_UNSPECIFIED
                         - TRANSACTION_TYPE_DEPOSIT
                         - TRANSACTION_TYPE_WITHDRAW
                     type: string
+                    description: Type of transaction (deposit or withdrawal)
                     format: enum
                 status:
                     enum:
@@ -4972,52 +5066,76 @@ components:
                         - TRANSACTION_STATUS_SUCCESSFUL
                         - TRANSACTION_STATUS_FAILED
                     type: string
+                    description: Current status of the transaction
                     format: enum
                 paymentMethod:
                     type: string
+                    description: Payment method used for the transaction
                 createdAt:
                     type: string
+                    description: Timestamp when the transaction was created
                     format: date-time
                 updatedAt:
                     type: string
+                    description: Timestamp when the transaction was last updated
                     format: date-time
-            description: Transaction information
+            description: |-
+                Transaction information
+                 Detailed information about a specific transaction
         payment.service.v1.WithdrawCallbackRequest:
             type: object
             properties:
                 transactionNo:
                     type: string
+                    description: Transaction number from the payment aggregator
                 gatewayOrderNo:
                     type: string
+                    description: Order number from the payment gateway
                 operatorOrderNo:
                     type: string
+                    description: Transaction number from the operator
                 orderStatus:
                     type: string
+                    description: Current status of the order (e.g., SUCCESS, FAILED)
                 payTime:
                     type: string
+                    description: 'Time when withdrawal was processed. Format: yyyy-MM-dd HH:mm:ss'
                 createTime:
                     type: string
+                    description: 'Time when order was created. Format: yyyy-MM-dd HH:mm:ss'
                 amount:
                     type: string
+                    description: Original amount of the withdrawal order
                 fee:
                     type: string
+                    description: Service fee applied to the withdrawal
                 realMoney:
                     type: string
+                    description: Actual amount withdrawn after fees
                 sign:
                     type: string
+                    description: HMAC-SHA256 signature to verify request authenticity
                 timestamp:
                     type: string
+                    description: Request timestamp to prevent replay attacks
                 nonce:
                     type: string
-            description: Request for withdraw callback
+                    description: Random string to ensure each request is unique
+            description: |-
+                Request for withdraw callback
+                 Used by payment gateways to notify about withdrawal status changes
         payment.service.v1.WithdrawCallbackResponse:
             type: object
             properties:
                 success:
                     type: boolean
+                    description: Whether the callback was processed successfully
                 message:
                     type: string
-            description: Response for withdraw callback
+                    description: Optional message, returns error reason on failure
+            description: |-
+                Response for withdraw callback
+                 Confirms receipt of callback notification
         system.service.v1.AddCurrencyRequest:
             type: object
             properties:
@@ -5110,6 +5228,9 @@ tags:
     - name: Operator
       description: User service provides authentication and user management functionality.
     - name: Payment
+      description: |-
+        Payment Service
+         Provides methods for managing payment methods, channels, and transactions
     - name: Review
       description: Review service provides review functionality.
     - name: System
