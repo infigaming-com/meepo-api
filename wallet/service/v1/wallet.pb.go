@@ -1502,6 +1502,94 @@ func (x *GetWalletCreditTransactionsResponse) GetTotal() int64 {
 	return 0
 }
 
+type GetExchangeRatesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currencies    []string               `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetExchangeRatesRequest) Reset() {
+	*x = GetExchangeRatesRequest{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetExchangeRatesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetExchangeRatesRequest) ProtoMessage() {}
+
+func (x *GetExchangeRatesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetExchangeRatesRequest.ProtoReflect.Descriptor instead.
+func (*GetExchangeRatesRequest) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *GetExchangeRatesRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
+type GetExchangeRatesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ExchangeRates map[string]string      `protobuf:"bytes,1,rep,name=exchange_rates,json=exchangeRates,proto3" json:"exchange_rates,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetExchangeRatesResponse) Reset() {
+	*x = GetExchangeRatesResponse{}
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetExchangeRatesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetExchangeRatesResponse) ProtoMessage() {}
+
+func (x *GetExchangeRatesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetExchangeRatesResponse.ProtoReflect.Descriptor instead.
+func (*GetExchangeRatesResponse) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *GetExchangeRatesResponse) GetExchangeRates() map[string]string {
+	if x != nil {
+		return x.ExchangeRates
+	}
+	return nil
+}
+
 type GetUserBalancesResponse_Balance struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
@@ -1514,7 +1602,7 @@ type GetUserBalancesResponse_Balance struct {
 
 func (x *GetUserBalancesResponse_Balance) Reset() {
 	*x = GetUserBalancesResponse_Balance{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[24]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1526,7 +1614,7 @@ func (x *GetUserBalancesResponse_Balance) String() string {
 func (*GetUserBalancesResponse_Balance) ProtoMessage() {}
 
 func (x *GetUserBalancesResponse_Balance) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[24]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1580,7 +1668,7 @@ type CreditRequest_Ratio struct {
 
 func (x *CreditRequest_Ratio) Reset() {
 	*x = CreditRequest_Ratio{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[25]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1592,7 +1680,7 @@ func (x *CreditRequest_Ratio) String() string {
 func (*CreditRequest_Ratio) ProtoMessage() {}
 
 func (x *CreditRequest_Ratio) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[25]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1635,7 +1723,7 @@ type GetWalletsResponse_TotalAssets struct {
 
 func (x *GetWalletsResponse_TotalAssets) Reset() {
 	*x = GetWalletsResponse_TotalAssets{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[26]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1647,7 +1735,7 @@ func (x *GetWalletsResponse_TotalAssets) String() string {
 func (*GetWalletsResponse_TotalAssets) ProtoMessage() {}
 
 func (x *GetWalletsResponse_TotalAssets) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[26]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1714,7 +1802,7 @@ type GetWalletsResponse_Credit struct {
 
 func (x *GetWalletsResponse_Credit) Reset() {
 	*x = GetWalletsResponse_Credit{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[27]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1726,7 +1814,7 @@ func (x *GetWalletsResponse_Credit) String() string {
 func (*GetWalletsResponse_Credit) ProtoMessage() {}
 
 func (x *GetWalletsResponse_Credit) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[27]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1814,7 +1902,7 @@ type GetWalletsResponse_Wallet struct {
 
 func (x *GetWalletsResponse_Wallet) Reset() {
 	*x = GetWalletsResponse_Wallet{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[28]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1826,7 +1914,7 @@ func (x *GetWalletsResponse_Wallet) String() string {
 func (*GetWalletsResponse_Wallet) ProtoMessage() {}
 
 func (x *GetWalletsResponse_Wallet) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[28]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1910,7 +1998,7 @@ type GetWalletCreditTransactionsResponse_CreditTransaction struct {
 
 func (x *GetWalletCreditTransactionsResponse_CreditTransaction) Reset() {
 	*x = GetWalletCreditTransactionsResponse_CreditTransaction{}
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[29]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1922,7 +2010,7 @@ func (x *GetWalletCreditTransactionsResponse_CreditTransaction) String() string 
 func (*GetWalletCreditTransactionsResponse_CreditTransaction) ProtoMessage() {}
 
 func (x *GetWalletCreditTransactionsResponse_CreditTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_proto_msgTypes[29]
+	mi := &file_wallet_service_v1_wallet_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2108,13 +2196,22 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
 	"\x04cash\x18\x03 \x01(\tR\x04cash\x12\x14\n" +
-	"\x05bonus\x18\x04 \x01(\tR\x05bonus*\xc0\x01\n" +
+	"\x05bonus\x18\x04 \x01(\tR\x05bonus\"9\n" +
+	"\x17GetExchangeRatesRequest\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\x01 \x03(\tR\n" +
+	"currencies\"\xc7\x01\n" +
+	"\x18GetExchangeRatesResponse\x12i\n" +
+	"\x0eexchange_rates\x18\x01 \x03(\v2B.api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRatesEntryR\rexchangeRates\x1a@\n" +
+	"\x12ExchangeRatesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*\xc0\x01\n" +
 	"\x0fTransactionType\x12 \n" +
 	"\x1cTRANSACTION_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
 	" TRANSACTION_TYPE_PAYMENT_DEPOSIT\x10\x01\x12\x1d\n" +
 	"\x19TRANSACTION_TYPE_GAME_WIN\x10\x02\x12&\n" +
 	"!TRANSACTION_TYPE_PAYMENT_WITHDRAW\x10\xe9\a\x12\x1e\n" +
-	"\x19TRANSACTION_TYPE_GAME_BET\x10\xea\a2\xaa\v\n" +
+	"\x19TRANSACTION_TYPE_GAME_BET\x10\xea\a2\xa1\f\n" +
 	"\x06Wallet\x12Z\n" +
 	"\aAddUser\x12%.api.wallet.service.v1.AddUserRequest\x1a&.api.wallet.service.v1.AddUserResponse\"\x00\x12c\n" +
 	"\n" +
@@ -2130,7 +2227,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"GameCredit\x12(.api.wallet.service.v1.GameCreditRequest\x1a).api.wallet.service.v1.GameCreditResponse\"\x00\x12c\n" +
 	"\n" +
 	"GetWallets\x12(.api.wallet.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"\x00\x12\x96\x01\n" +
-	"\x1bGetWalletCreditTransactions\x129.api.wallet.service.v1.GetWalletCreditTransactionsRequest\x1a:.api.wallet.service.v1.GetWalletCreditTransactionsResponse\"\x00BS\n" +
+	"\x1bGetWalletCreditTransactions\x129.api.wallet.service.v1.GetWalletCreditTransactionsRequest\x1a:.api.wallet.service.v1.GetWalletCreditTransactionsResponse\"\x00\x12u\n" +
+	"\x10GetExchangeRates\x12..api.wallet.service.v1.GetExchangeRatesRequest\x1a/.api.wallet.service.v1.GetExchangeRatesResponse\"\x00BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
@@ -2146,7 +2244,7 @@ func file_wallet_service_v1_wallet_proto_rawDescGZIP() []byte {
 }
 
 var file_wallet_service_v1_wallet_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_wallet_service_v1_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
+var file_wallet_service_v1_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(TransactionType)(0),                                          // 0: api.wallet.service.v1.TransactionType
 	(*AddUserRequest)(nil),                                        // 1: api.wallet.service.v1.AddUserRequest
@@ -2173,55 +2271,61 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*GetWalletsResponse)(nil),                                    // 22: api.wallet.service.v1.GetWalletsResponse
 	(*GetWalletCreditTransactionsRequest)(nil),                    // 23: api.wallet.service.v1.GetWalletCreditTransactionsRequest
 	(*GetWalletCreditTransactionsResponse)(nil),                   // 24: api.wallet.service.v1.GetWalletCreditTransactionsResponse
-	(*GetUserBalancesResponse_Balance)(nil),                       // 25: api.wallet.service.v1.GetUserBalancesResponse.Balance
-	(*CreditRequest_Ratio)(nil),                                   // 26: api.wallet.service.v1.CreditRequest.Ratio
-	(*GetWalletsResponse_TotalAssets)(nil),                        // 27: api.wallet.service.v1.GetWalletsResponse.TotalAssets
-	(*GetWalletsResponse_Credit)(nil),                             // 28: api.wallet.service.v1.GetWalletsResponse.Credit
-	(*GetWalletsResponse_Wallet)(nil),                             // 29: api.wallet.service.v1.GetWalletsResponse.Wallet
-	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil), // 30: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
-	(*timestamppb.Timestamp)(nil),                                 // 31: google.protobuf.Timestamp
+	(*GetExchangeRatesRequest)(nil),                               // 25: api.wallet.service.v1.GetExchangeRatesRequest
+	(*GetExchangeRatesResponse)(nil),                              // 26: api.wallet.service.v1.GetExchangeRatesResponse
+	(*GetUserBalancesResponse_Balance)(nil),                       // 27: api.wallet.service.v1.GetUserBalancesResponse.Balance
+	(*CreditRequest_Ratio)(nil),                                   // 28: api.wallet.service.v1.CreditRequest.Ratio
+	(*GetWalletsResponse_TotalAssets)(nil),                        // 29: api.wallet.service.v1.GetWalletsResponse.TotalAssets
+	(*GetWalletsResponse_Credit)(nil),                             // 30: api.wallet.service.v1.GetWalletsResponse.Credit
+	(*GetWalletsResponse_Wallet)(nil),                             // 31: api.wallet.service.v1.GetWalletsResponse.Wallet
+	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil), // 32: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
+	nil,                           // 33: api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
+	(*timestamppb.Timestamp)(nil), // 34: google.protobuf.Timestamp
 }
 var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
-	25, // 0: api.wallet.service.v1.GetUserBalancesResponse.balances:type_name -> api.wallet.service.v1.GetUserBalancesResponse.Balance
+	27, // 0: api.wallet.service.v1.GetUserBalancesResponse.balances:type_name -> api.wallet.service.v1.GetUserBalancesResponse.Balance
 	0,  // 1: api.wallet.service.v1.CreditRequest.transaction_type:type_name -> api.wallet.service.v1.TransactionType
 	0,  // 2: api.wallet.service.v1.DebitRequest.transaction_type:type_name -> api.wallet.service.v1.TransactionType
 	0,  // 3: api.wallet.service.v1.GameDebitRequest.transaction_type:type_name -> api.wallet.service.v1.TransactionType
 	0,  // 4: api.wallet.service.v1.GameCreditRequest.transaction_type:type_name -> api.wallet.service.v1.TransactionType
-	27, // 5: api.wallet.service.v1.GetWalletsResponse.total_assets:type_name -> api.wallet.service.v1.GetWalletsResponse.TotalAssets
-	29, // 6: api.wallet.service.v1.GetWalletsResponse.wallets:type_name -> api.wallet.service.v1.GetWalletsResponse.Wallet
-	30, // 7: api.wallet.service.v1.GetWalletCreditTransactionsResponse.credit_transactions:type_name -> api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
-	31, // 8: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
-	28, // 9: api.wallet.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.wallet.service.v1.GetWalletsResponse.Credit
-	31, // 10: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
-	1,  // 11: api.wallet.service.v1.Wallet.AddUser:input_type -> api.wallet.service.v1.AddUserRequest
-	3,  // 12: api.wallet.service.v1.Wallet.UpdateUser:input_type -> api.wallet.service.v1.UpdateUserRequest
-	5,  // 13: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:input_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest
-	7,  // 14: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
-	9,  // 15: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
-	11, // 16: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
-	13, // 17: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
-	15, // 18: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
-	17, // 19: api.wallet.service.v1.Wallet.GameDebit:input_type -> api.wallet.service.v1.GameDebitRequest
-	19, // 20: api.wallet.service.v1.Wallet.GameCredit:input_type -> api.wallet.service.v1.GameCreditRequest
-	21, // 21: api.wallet.service.v1.Wallet.GetWallets:input_type -> api.wallet.service.v1.GetWalletsRequest
-	23, // 22: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:input_type -> api.wallet.service.v1.GetWalletCreditTransactionsRequest
-	2,  // 23: api.wallet.service.v1.Wallet.AddUser:output_type -> api.wallet.service.v1.AddUserResponse
-	4,  // 24: api.wallet.service.v1.Wallet.UpdateUser:output_type -> api.wallet.service.v1.UpdateUserResponse
-	6,  // 25: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:output_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse
-	8,  // 26: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
-	10, // 27: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
-	12, // 28: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
-	14, // 29: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
-	16, // 30: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
-	18, // 31: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
-	20, // 32: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
-	22, // 33: api.wallet.service.v1.Wallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
-	24, // 34: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:output_type -> api.wallet.service.v1.GetWalletCreditTransactionsResponse
-	23, // [23:35] is the sub-list for method output_type
-	11, // [11:23] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	29, // 5: api.wallet.service.v1.GetWalletsResponse.total_assets:type_name -> api.wallet.service.v1.GetWalletsResponse.TotalAssets
+	31, // 6: api.wallet.service.v1.GetWalletsResponse.wallets:type_name -> api.wallet.service.v1.GetWalletsResponse.Wallet
+	32, // 7: api.wallet.service.v1.GetWalletCreditTransactionsResponse.credit_transactions:type_name -> api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
+	33, // 8: api.wallet.service.v1.GetExchangeRatesResponse.exchange_rates:type_name -> api.wallet.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
+	34, // 9: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
+	30, // 10: api.wallet.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.wallet.service.v1.GetWalletsResponse.Credit
+	34, // 11: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
+	1,  // 12: api.wallet.service.v1.Wallet.AddUser:input_type -> api.wallet.service.v1.AddUserRequest
+	3,  // 13: api.wallet.service.v1.Wallet.UpdateUser:input_type -> api.wallet.service.v1.UpdateUserRequest
+	5,  // 14: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:input_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest
+	7,  // 15: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
+	9,  // 16: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
+	11, // 17: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
+	13, // 18: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
+	15, // 19: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
+	17, // 20: api.wallet.service.v1.Wallet.GameDebit:input_type -> api.wallet.service.v1.GameDebitRequest
+	19, // 21: api.wallet.service.v1.Wallet.GameCredit:input_type -> api.wallet.service.v1.GameCreditRequest
+	21, // 22: api.wallet.service.v1.Wallet.GetWallets:input_type -> api.wallet.service.v1.GetWalletsRequest
+	23, // 23: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:input_type -> api.wallet.service.v1.GetWalletCreditTransactionsRequest
+	25, // 24: api.wallet.service.v1.Wallet.GetExchangeRates:input_type -> api.wallet.service.v1.GetExchangeRatesRequest
+	2,  // 25: api.wallet.service.v1.Wallet.AddUser:output_type -> api.wallet.service.v1.AddUserResponse
+	4,  // 26: api.wallet.service.v1.Wallet.UpdateUser:output_type -> api.wallet.service.v1.UpdateUserResponse
+	6,  // 27: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:output_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse
+	8,  // 28: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
+	10, // 29: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
+	12, // 30: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
+	14, // 31: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
+	16, // 32: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
+	18, // 33: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
+	20, // 34: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
+	22, // 35: api.wallet.service.v1.Wallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
+	24, // 36: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:output_type -> api.wallet.service.v1.GetWalletCreditTransactionsResponse
+	26, // 37: api.wallet.service.v1.Wallet.GetExchangeRates:output_type -> api.wallet.service.v1.GetExchangeRatesResponse
+	25, // [25:38] is the sub-list for method output_type
+	12, // [12:25] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_wallet_proto_init() }
@@ -2236,7 +2340,7 @@ func file_wallet_service_v1_wallet_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wallet_service_v1_wallet_proto_rawDesc), len(file_wallet_service_v1_wallet_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   30,
+			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

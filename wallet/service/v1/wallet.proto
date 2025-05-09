@@ -50,6 +50,8 @@ service Wallet {
 	rpc GetWallets (GetWalletsRequest) returns (GetWalletsResponse) {}
 
 	rpc GetWalletCreditTransactions (GetWalletCreditTransactionsRequest) returns (GetWalletCreditTransactionsResponse) {}
+
+	rpc GetExchangeRates (GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {}
 }
 
 message AddUserRequest {
@@ -249,4 +251,12 @@ message GetWalletCreditTransactionsResponse {
 	int64 page = 2;
 	int64 page_size = 3;
 	int64 total = 4;
+}
+
+message GetExchangeRatesRequest {
+	repeated string currencies = 1;
+}
+
+message GetExchangeRatesResponse {
+	map<string, string> exchange_rates = 1;
 }
