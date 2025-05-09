@@ -258,9 +258,6 @@ message GetExchangeRatesRequest {
 }
 
 message GetExchangeRatesResponse {
-	message ExchangeRate {
-		string currency = 1;
-		string exchange_rate = 2;
-	}
-	repeated ExchangeRate exchange_rates = 1;
+	// map key is source currency, value is target currency rate
+	map<string, string> exchange_rates = 1;
 }
