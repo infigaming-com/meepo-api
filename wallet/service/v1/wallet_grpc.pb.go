@@ -31,6 +31,7 @@ const (
 	Wallet_GameCredit_FullMethodName                   = "/api.wallet.service.v1.Wallet/GameCredit"
 	Wallet_GetWallets_FullMethodName                   = "/api.wallet.service.v1.Wallet/GetWallets"
 	Wallet_GetWalletCreditTransactions_FullMethodName  = "/api.wallet.service.v1.Wallet/GetWalletCreditTransactions"
+	Wallet_GetExchangeRates_FullMethodName             = "/api.wallet.service.v1.Wallet/GetExchangeRates"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -51,6 +52,7 @@ type WalletClient interface {
 	GameCredit(ctx context.Context, in *GameCreditRequest, opts ...grpc.CallOption) (*GameCreditResponse, error)
 	GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...grpc.CallOption) (*GetWalletsResponse, error)
 	GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...grpc.CallOption) (*GetWalletCreditTransactionsResponse, error)
+	GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error)
 }
 
 type walletClient struct {
@@ -181,6 +183,16 @@ func (c *walletClient) GetWalletCreditTransactions(ctx context.Context, in *GetW
 	return out, nil
 }
 
+func (c *walletClient) GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetExchangeRatesResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetExchangeRates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -199,6 +211,7 @@ type WalletServer interface {
 	GameCredit(context.Context, *GameCreditRequest) (*GameCreditResponse, error)
 	GetWallets(context.Context, *GetWalletsRequest) (*GetWalletsResponse, error)
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
+	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -244,6 +257,9 @@ func (UnimplementedWalletServer) GetWallets(context.Context, *GetWalletsRequest)
 }
 func (UnimplementedWalletServer) GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWalletCreditTransactions not implemented")
+}
+func (UnimplementedWalletServer) GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExchangeRates not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -482,6 +498,24 @@ func _Wallet_GetWalletCreditTransactions_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_GetExchangeRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExchangeRatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetExchangeRates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetExchangeRates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetExchangeRates(ctx, req.(*GetExchangeRatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -536,6 +570,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetWalletCreditTransactions",
 			Handler:    _Wallet_GetWalletCreditTransactions_Handler,
+		},
+		{
+			MethodName: "GetExchangeRates",
+			Handler:    _Wallet_GetExchangeRates_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
