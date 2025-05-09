@@ -2,9 +2,74 @@ syntax = "proto3";
 
 package api.backoffice.service.v1;
 
+import "google/api/annotations.proto";
+
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
+
+service BackofficeAccount {
+	rpc AddAccount(AddAccountRequest) returns (AddAccountResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/add"
+            body: "*"
+        };
+    }
+    rpc SendEmailVerification(SendEmailVerificationRequest) returns (SendEmailVerificationResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/email/verification/send"
+            body: "*"
+        };
+    }
+    rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/email/verify"
+            body: "*"
+        };
+    }
+    rpc SendMobileVerification(SendMobileVerificationRequest) returns (SendMobileVerificationResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/mobile/verification/send"
+            body: "*"
+        };
+    }
+    rpc VerifyMobile(VerifyMobileRequest) returns (VerifyMobileResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/mobile/verify"
+            body: "*"
+        };
+    }
+    rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/password/reset"
+            body: "*"
+        };
+    }
+    rpc Generate2fa(Generate2faRequest) returns (Generate2faResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/2fa/generate"
+            body: "*"
+        };
+    }
+    rpc Bind2fa(Bind2faRequest) returns (Bind2faResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/2fa/bind"
+            body: "*"
+        };
+    }
+    rpc Unbind2fa(Unbind2faRequest) returns (Unbind2faResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/2fa/unbind"
+            body: "*"
+        };
+    }
+    rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/update"
+            body: "*"
+        };
+    }
+}
 
 // Account related messages
 message AddAccountRequest {

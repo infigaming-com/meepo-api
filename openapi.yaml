@@ -9,8 +9,8 @@ paths:
     /v1/backoffice/accounts/2fa/bind:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_Bind2Fa
+                - BackofficeAccount
+            operationId: BackofficeAccount_Bind2Fa
             requestBody:
                 content:
                     application/json:
@@ -27,8 +27,8 @@ paths:
     /v1/backoffice/accounts/2fa/generate:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_Generate2Fa
+                - BackofficeAccount
+            operationId: BackofficeAccount_Generate2Fa
             requestBody:
                 content:
                     application/json:
@@ -45,8 +45,8 @@ paths:
     /v1/backoffice/accounts/2fa/unbind:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_Unbind2Fa
+                - BackofficeAccount
+            operationId: BackofficeAccount_Unbind2Fa
             requestBody:
                 content:
                     application/json:
@@ -63,9 +63,8 @@ paths:
     /v1/backoffice/accounts/add:
         post:
             tags:
-                - Backoffice
-            description: Account
-            operationId: Backoffice_AddAccount
+                - BackofficeAccount
+            operationId: BackofficeAccount_AddAccount
             requestBody:
                 content:
                     application/json:
@@ -82,8 +81,8 @@ paths:
     /v1/backoffice/accounts/email/verification/send:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_SendEmailVerification
+                - BackofficeAccount
+            operationId: BackofficeAccount_SendEmailVerification
             requestBody:
                 content:
                     application/json:
@@ -100,8 +99,8 @@ paths:
     /v1/backoffice/accounts/email/verify:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_VerifyEmail
+                - BackofficeAccount
+            operationId: BackofficeAccount_VerifyEmail
             requestBody:
                 content:
                     application/json:
@@ -118,8 +117,8 @@ paths:
     /v1/backoffice/accounts/mobile/verification/send:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_SendMobileVerification
+                - BackofficeAccount
+            operationId: BackofficeAccount_SendMobileVerification
             requestBody:
                 content:
                     application/json:
@@ -136,8 +135,8 @@ paths:
     /v1/backoffice/accounts/mobile/verify:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_VerifyMobile
+                - BackofficeAccount
+            operationId: BackofficeAccount_VerifyMobile
             requestBody:
                 content:
                     application/json:
@@ -154,8 +153,8 @@ paths:
     /v1/backoffice/accounts/password/reset:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_ResetPassword
+                - BackofficeAccount
+            operationId: BackofficeAccount_ResetPassword
             requestBody:
                 content:
                     application/json:
@@ -172,8 +171,8 @@ paths:
     /v1/backoffice/accounts/update:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_UpdateAccount
+                - BackofficeAccount
+            operationId: BackofficeAccount_UpdateAccount
             requestBody:
                 content:
                     application/json:
@@ -190,9 +189,8 @@ paths:
     /v1/backoffice/dashboard/get:
         post:
             tags:
-                - Backoffice
-            description: Dashboard
-            operationId: Backoffice_GetOverviewDashboard
+                - BackofficeDashboard
+            operationId: BackofficeDashboard_GetOverviewDashboard
             requestBody:
                 content:
                     application/json:
@@ -209,8 +207,8 @@ paths:
     /v1/backoffice/dashboard/time-ranged/get:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_GetTimeRangedDashboard
+                - BackofficeDashboard
+            operationId: BackofficeDashboard_GetTimeRangedDashboard
             requestBody:
                 content:
                     application/json:
@@ -227,8 +225,8 @@ paths:
     /v1/backoffice/dashboard/top-operators/get:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_GetTopOperatorsDashboard
+                - BackofficeDashboard
+            operationId: BackofficeDashboard_GetTopOperatorsDashboard
             requestBody:
                 content:
                     application/json:
@@ -245,8 +243,8 @@ paths:
     /v1/backoffice/game/bets/list:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_ListUserBets
+                - BackofficeGame
+            operationId: BackofficeGame_ListUserBets
             requestBody:
                 content:
                     application/json:
@@ -263,8 +261,8 @@ paths:
     /v1/backoffice/game/bets/overview/get:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_GetUserBetsOverview
+                - BackofficeGame
+            operationId: BackofficeGame_GetUserBetsOverview
             requestBody:
                 content:
                     application/json:
@@ -281,8 +279,8 @@ paths:
     /v1/backoffice/game/bets/transactions/get:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_GetGameTransactionsForBet
+                - BackofficeGame
+            operationId: BackofficeGame_GetGameTransactionsForBet
             requestBody:
                 content:
                     application/json:
@@ -299,8 +297,8 @@ paths:
     /v1/backoffice/game/list:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_ListGames
+                - BackofficeGame
+            operationId: BackofficeGame_ListGames
             requestBody:
                 content:
                     application/json:
@@ -317,8 +315,8 @@ paths:
     /v1/backoffice/operator/user-tags/add:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_AddOperatorUserTag
+                - BackofficeUser
+            operationId: BackofficeUser_AddOperatorUserTag
             requestBody:
                 content:
                     application/json:
@@ -335,8 +333,8 @@ paths:
     /v1/backoffice/operator/user-tags/delete:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_DeleteOperatorUserTag
+                - BackofficeUser
+            operationId: BackofficeUser_DeleteOperatorUserTag
             requestBody:
                 content:
                     application/json:
@@ -353,8 +351,8 @@ paths:
     /v1/backoffice/operator/user-tags/get:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_GetOperatorUserTags
+                - BackofficeUser
+            operationId: BackofficeUser_GetOperatorUserTags
             requestBody:
                 content:
                     application/json:
@@ -371,9 +369,8 @@ paths:
     /v1/backoffice/payment/transactions/list:
         post:
             tags:
-                - Backoffice
-            description: Payment
-            operationId: Backoffice_ListPaymentTransactions
+                - BackofficePayment
+            operationId: BackofficePayment_ListPaymentTransactions
             requestBody:
                 content:
                     application/json:
@@ -390,8 +387,8 @@ paths:
     /v1/backoffice/report/daily-summaries/list:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_ListDailySummaries
+                - BackofficeReport
+            operationId: BackofficeReport_ListDailySummaries
             requestBody:
                 content:
                     application/json:
@@ -408,8 +405,8 @@ paths:
     /v1/backoffice/report/deposit-daily-details/list:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_ListDepositDailyDetails
+                - BackofficeReport
+            operationId: BackofficeReport_ListDepositDailyDetails
             requestBody:
                 content:
                     application/json:
@@ -426,8 +423,8 @@ paths:
     /v1/backoffice/report/deposit-daily-summaries/list:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_ListDepositDailySummaries
+                - BackofficeReport
+            operationId: BackofficeReport_ListDepositDailySummaries
             requestBody:
                 content:
                     application/json:
@@ -444,8 +441,8 @@ paths:
     /v1/backoffice/report/game-data-daily-summaries/list:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_ListGameDataDailySummaries
+                - BackofficeReport
+            operationId: BackofficeReport_ListGameDataDailySummaries
             requestBody:
                 content:
                     application/json:
@@ -462,8 +459,8 @@ paths:
     /v1/backoffice/report/game-data-summary/get:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_GetGameDataSummary
+                - BackofficeReport
+            operationId: BackofficeReport_GetGameDataSummary
             requestBody:
                 content:
                     application/json:
@@ -480,8 +477,8 @@ paths:
     /v1/backoffice/report/player-game-data-summary/get:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_GetPlayerGameDataSummary
+                - BackofficeReport
+            operationId: BackofficeReport_GetPlayerGameDataSummary
             requestBody:
                 content:
                     application/json:
@@ -498,9 +495,8 @@ paths:
     /v1/backoffice/report/summary/get:
         post:
             tags:
-                - Backoffice
-            description: Report
-            operationId: Backoffice_GetSummary
+                - BackofficeReport
+            operationId: BackofficeReport_GetSummary
             requestBody:
                 content:
                     application/json:
@@ -517,8 +513,8 @@ paths:
     /v1/backoffice/report/withdraw-daily-details/list:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_ListWithdrawDailyDetails
+                - BackofficeReport
+            operationId: BackofficeReport_ListWithdrawDailyDetails
             requestBody:
                 content:
                     application/json:
@@ -535,8 +531,8 @@ paths:
     /v1/backoffice/report/withdraw-daily-summaries/list:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_ListWithdrawDailySummaries
+                - BackofficeReport
+            operationId: BackofficeReport_ListWithdrawDailySummaries
             requestBody:
                 content:
                     application/json:
@@ -553,8 +549,8 @@ paths:
     /v1/backoffice/review/ticket/review:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_ReviewTicket
+                - BackofficeReview
+            operationId: BackofficeReview_ReviewTicket
             requestBody:
                 content:
                     application/json:
@@ -571,9 +567,8 @@ paths:
     /v1/backoffice/review/withdraw-review-tickets/list:
         post:
             tags:
-                - Backoffice
-            description: Review
-            operationId: Backoffice_ListWithdrawReviewTickets
+                - BackofficeReview
+            operationId: BackofficeReview_ListWithdrawReviewTickets
             requestBody:
                 content:
                     application/json:
@@ -590,8 +585,8 @@ paths:
     /v1/backoffice/user/comments/add:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_AddUserComment
+                - BackofficeUser
+            operationId: BackofficeUser_AddUserComment
             requestBody:
                 content:
                     application/json:
@@ -605,12 +600,29 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.AddUserCommentResponse'
+    /v1/backoffice/user/comments/list:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_ListUserComments
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListUserCommentsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListUserCommentsResponse'
     /v1/backoffice/user/list:
         post:
             tags:
-                - Backoffice
-            description: User
-            operationId: Backoffice_ListUsers
+                - BackofficeUser
+            operationId: BackofficeUser_ListUsers
             requestBody:
                 content:
                     application/json:
@@ -627,8 +639,8 @@ paths:
     /v1/backoffice/user/overview/get:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_GetUserOverview
+                - BackofficeUser
+            operationId: BackofficeUser_GetUserOverview
             requestBody:
                 content:
                     application/json:
@@ -645,8 +657,8 @@ paths:
     /v1/backoffice/user/profile/get:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_GetUserProfile
+                - BackofficeUser
+            operationId: BackofficeUser_GetUserProfile
             requestBody:
                 content:
                     application/json:
@@ -663,8 +675,8 @@ paths:
     /v1/backoffice/user/tags/add:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_AddUserTag
+                - BackofficeUser
+            operationId: BackofficeUser_AddUserTag
             requestBody:
                 content:
                     application/json:
@@ -681,8 +693,8 @@ paths:
     /v1/backoffice/user/tags/delete:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_DeleteUserTag
+                - BackofficeUser
+            operationId: BackofficeUser_DeleteUserTag
             requestBody:
                 content:
                     application/json:
@@ -699,8 +711,8 @@ paths:
     /v1/backoffice/wallet/credit-transactions/get:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_GetWalletCreditTransactions
+                - BackofficeWallet
+            operationId: BackofficeWallet_GetWalletCreditTransactions
             requestBody:
                 content:
                     application/json:
@@ -717,9 +729,8 @@ paths:
     /v1/backoffice/wallet/get:
         post:
             tags:
-                - Backoffice
-            description: Wallet
-            operationId: Backoffice_GetWallets
+                - BackofficeWallet
+            operationId: BackofficeWallet_GetWallets
             requestBody:
                 content:
                     application/json:
@@ -736,8 +747,8 @@ paths:
     /v1/backoffice/wallet/update:
         post:
             tags:
-                - Backoffice
-            operationId: Backoffice_UpdateWallet
+                - BackofficeWallet
+            operationId: BackofficeWallet_UpdateWallet
             requestBody:
                 content:
                     application/json:
@@ -2313,7 +2324,8 @@ components:
                 lastWithdraw:
                     type: string
                 withdrawCount:
-                    type: string
+                    type: integer
+                    format: int32
                 bonus:
                     type: string
                 validTurnover:
@@ -2335,7 +2347,8 @@ components:
                     type: integer
                     format: int32
                 turnoverMultiplier:
-                    type: string
+                    type: integer
+                    format: int32
                 depositToWithdrawRatio:
                     type: integer
                     format: int32
@@ -2404,7 +2417,7 @@ components:
         api.backoffice.service.v1.GetUserProfileResponse_Comment:
             type: object
             properties:
-                authorUserId:
+                authorUsername:
                     type: string
                 content:
                     type: string
@@ -3263,6 +3276,28 @@ components:
                     type: string
                 total:
                     type: string
+        api.backoffice.service.v1.ListUserCommentsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+        api.backoffice.service.v1.ListUserCommentsResponse:
+            type: object
+            properties:
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListUserCommentsResponse_Comment'
+        api.backoffice.service.v1.ListUserCommentsResponse_Comment:
+            type: object
+            properties:
+                authorUsername:
+                    type: string
+                content:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
         api.backoffice.service.v1.ListUsersRequest:
             type: object
             properties:
@@ -3279,7 +3314,8 @@ components:
                     type: string
                     format: date-time
                 vipLevel:
-                    type: string
+                    type: integer
+                    format: int32
                 retailerOperatorId:
                     type: string
                 groupOperatorId:
@@ -3320,9 +3356,11 @@ components:
                 online:
                     type: boolean
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListUsersResponse:
             type: object
             properties:
@@ -3331,11 +3369,14 @@ components:
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.ListUsersResponse_User'
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
                 total:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListUsersResponse_User:
             type: object
             properties:
@@ -4182,7 +4223,7 @@ components:
                     type: string
                 currency:
                     type: string
-                targetCurrency:
+                settlementCurrency:
                     type: string
                     description: optional target currency
         api.wallet.service.v1.GetUserBalanceResponse:
@@ -5175,8 +5216,14 @@ components:
                 currency:
                     $ref: '#/components/schemas/system.service.v1.Currency'
 tags:
-    - name: Backoffice
-      description: Backoffice service provides system and account management functionality.
+    - name: BackofficeAccount
+    - name: BackofficeDashboard
+    - name: BackofficeGame
+    - name: BackofficePayment
+    - name: BackofficeReport
+    - name: BackofficeReview
+    - name: BackofficeUser
+    - name: BackofficeWallet
     - name: Game
     - name: Operator
       description: User service provides authentication and user management functionality.

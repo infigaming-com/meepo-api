@@ -2,9 +2,32 @@ syntax = "proto3";
 
 package api.backoffice.service.v1;
 
+import "google/api/annotations.proto";
+
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
+
+service BackofficeDashboard {
+	rpc GetOverviewDashboard(GetOverviewDashboardRequest) returns (GetOverviewDashboardResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/dashboard/get"
+            body: "*"
+        };
+    }
+    rpc GetTimeRangedDashboard(GetTimeRangedDashboardRequest) returns (GetTimeRangedDashboardResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/dashboard/time-ranged/get"
+            body: "*"
+        };
+    }
+    rpc GetTopOperatorsDashboard(GetTopOperatorsDashboardRequest) returns (GetTopOperatorsDashboardResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/dashboard/top-operators/get"
+            body: "*"
+        };
+    }
+}
 
 // System related messages
 message GetOverviewDashboardRequest {}

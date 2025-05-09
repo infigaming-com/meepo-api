@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -486,7 +487,7 @@ var File_backoffice_service_v1_backoffice_review_proto protoreflect.FileDescript
 
 const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\n" +
-	"-backoffice/service/v1/backoffice_review.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x86\x04\n" +
+	"-backoffice/service/v1/backoffice_review.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x86\x04\n" +
 	" ListWithdrawReviewTicketsRequest\x12$\n" +
 	"\voperator_id\x18\x01 \x01(\x03H\x00R\n" +
 	"operatorId\x88\x01\x01\x12\x1c\n" +
@@ -543,7 +544,10 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x10reviewer_user_id\x18\x02 \x01(\x03R\x0ereviewerUserId\x12#\n" +
 	"\rreview_action\x18\x03 \x01(\tR\freviewAction\x12%\n" +
 	"\x0ereview_comment\x18\x04 \x01(\tR\rreviewComment\"\x16\n" +
-	"\x14ReviewTicketResponseB[\n" +
+	"\x14ReviewTicketResponse2\x8c\x03\n" +
+	"\x10BackofficeReview\x12\xd5\x01\n" +
+	"\x19ListWithdrawReviewTickets\x12;.api.backoffice.service.v1.ListWithdrawReviewTicketsRequest\x1a<.api.backoffice.service.v1.ListWithdrawReviewTicketsResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/v1/backoffice/review/withdraw-review-tickets/list\x12\x9f\x01\n" +
+	"\fReviewTicket\x12..api.backoffice.service.v1.ReviewTicketRequest\x1a/.api.backoffice.service.v1.ReviewTicketResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/review/ticket/reviewB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -572,8 +576,12 @@ var file_backoffice_service_v1_backoffice_review_proto_depIdxs = []int32{
 	5, // 1: api.backoffice.service.v1.ListWithdrawReviewTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
 	4, // 2: api.backoffice.service.v1.ListWithdrawReviewTicketsResponse.withdraw_review_tickets:type_name -> api.backoffice.service.v1.ListWithdrawReviewTicketsResponse.WithdrawReviewTicket
 	5, // 3: api.backoffice.service.v1.ListWithdrawReviewTicketsResponse.WithdrawReviewTicket.created_at:type_name -> google.protobuf.Timestamp
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
+	0, // 4: api.backoffice.service.v1.BackofficeReview.ListWithdrawReviewTickets:input_type -> api.backoffice.service.v1.ListWithdrawReviewTicketsRequest
+	2, // 5: api.backoffice.service.v1.BackofficeReview.ReviewTicket:input_type -> api.backoffice.service.v1.ReviewTicketRequest
+	1, // 6: api.backoffice.service.v1.BackofficeReview.ListWithdrawReviewTickets:output_type -> api.backoffice.service.v1.ListWithdrawReviewTicketsResponse
+	3, // 7: api.backoffice.service.v1.BackofficeReview.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
+	6, // [6:8] is the sub-list for method output_type
+	4, // [4:6] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
 	4, // [4:4] is the sub-list for extension extendee
 	0, // [0:4] is the sub-list for field type_name
@@ -593,7 +601,7 @@ func file_backoffice_service_v1_backoffice_review_proto_init() {
 			NumEnums:      0,
 			NumMessages:   5,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_backoffice_service_v1_backoffice_review_proto_goTypes,
 		DependencyIndexes: file_backoffice_service_v1_backoffice_review_proto_depIdxs,

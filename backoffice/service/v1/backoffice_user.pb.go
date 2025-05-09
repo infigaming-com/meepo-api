@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -28,7 +29,7 @@ type ListUsersRequest struct {
 	Tags                  []string               `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"`
 	RegistrationStartTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=registration_start_time,json=registrationStartTime,proto3,oneof" json:"registration_start_time,omitempty"`
 	RegistrationEndTime   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=registration_end_time,json=registrationEndTime,proto3,oneof" json:"registration_end_time,omitempty"`
-	VipLevel              *int64                 `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3,oneof" json:"vip_level,omitempty"`
+	VipLevel              *int32                 `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3,oneof" json:"vip_level,omitempty"`
 	RetailerOperatorId    *int64                 `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3,oneof" json:"retailer_operator_id,omitempty"`
 	GroupOperatorId       *int64                 `protobuf:"varint,7,opt,name=group_operator_id,json=groupOperatorId,proto3,oneof" json:"group_operator_id,omitempty"`
 	OperatorId            *int64                 `protobuf:"varint,8,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
@@ -37,16 +38,16 @@ type ListUsersRequest struct {
 	RiskLevelMax          *int32                 `protobuf:"varint,11,opt,name=risk_level_max,json=riskLevelMax,proto3,oneof" json:"risk_level_max,omitempty"`
 	KycLevels             []int32                `protobuf:"varint,12,rep,packed,name=kyc_levels,json=kycLevels,proto3" json:"kyc_levels,omitempty"`
 	HasMadeDeposit        *bool                  `protobuf:"varint,13,opt,name=has_made_deposit,json=hasMadeDeposit,proto3,oneof" json:"has_made_deposit,omitempty"`
-	DepositMin            *int64                 `protobuf:"varint,14,opt,name=deposit_min,json=depositMin,proto3,oneof" json:"deposit_min,omitempty"`
-	DepositMax            *int64                 `protobuf:"varint,15,opt,name=deposit_max,json=depositMax,proto3,oneof" json:"deposit_max,omitempty"`
-	WithdrawalMin         *int64                 `protobuf:"varint,16,opt,name=withdrawal_min,json=withdrawalMin,proto3,oneof" json:"withdrawal_min,omitempty"`
-	WithdrawalMax         *int64                 `protobuf:"varint,17,opt,name=withdrawal_max,json=withdrawalMax,proto3,oneof" json:"withdrawal_max,omitempty"`
+	DepositMin            *string                `protobuf:"bytes,14,opt,name=deposit_min,json=depositMin,proto3,oneof" json:"deposit_min,omitempty"`
+	DepositMax            *string                `protobuf:"bytes,15,opt,name=deposit_max,json=depositMax,proto3,oneof" json:"deposit_max,omitempty"`
+	WithdrawalMin         *string                `protobuf:"bytes,16,opt,name=withdrawal_min,json=withdrawalMin,proto3,oneof" json:"withdrawal_min,omitempty"`
+	WithdrawalMax         *string                `protobuf:"bytes,17,opt,name=withdrawal_max,json=withdrawalMax,proto3,oneof" json:"withdrawal_max,omitempty"`
 	BanWithdraw           *bool                  `protobuf:"varint,18,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
 	BanGame               *bool                  `protobuf:"varint,19,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
 	BanLogin              *bool                  `protobuf:"varint,20,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
 	Online                *bool                  `protobuf:"varint,21,opt,name=online,proto3,oneof" json:"online,omitempty"`
-	Page                  *int64                 `protobuf:"varint,22,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize              *int64                 `protobuf:"varint,23,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page                  *int32                 `protobuf:"varint,22,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize              *int32                 `protobuf:"varint,23,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -109,7 +110,7 @@ func (x *ListUsersRequest) GetRegistrationEndTime() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *ListUsersRequest) GetVipLevel() int64 {
+func (x *ListUsersRequest) GetVipLevel() int32 {
 	if x != nil && x.VipLevel != nil {
 		return *x.VipLevel
 	}
@@ -172,32 +173,32 @@ func (x *ListUsersRequest) GetHasMadeDeposit() bool {
 	return false
 }
 
-func (x *ListUsersRequest) GetDepositMin() int64 {
+func (x *ListUsersRequest) GetDepositMin() string {
 	if x != nil && x.DepositMin != nil {
 		return *x.DepositMin
 	}
-	return 0
+	return ""
 }
 
-func (x *ListUsersRequest) GetDepositMax() int64 {
+func (x *ListUsersRequest) GetDepositMax() string {
 	if x != nil && x.DepositMax != nil {
 		return *x.DepositMax
 	}
-	return 0
+	return ""
 }
 
-func (x *ListUsersRequest) GetWithdrawalMin() int64 {
+func (x *ListUsersRequest) GetWithdrawalMin() string {
 	if x != nil && x.WithdrawalMin != nil {
 		return *x.WithdrawalMin
 	}
-	return 0
+	return ""
 }
 
-func (x *ListUsersRequest) GetWithdrawalMax() int64 {
+func (x *ListUsersRequest) GetWithdrawalMax() string {
 	if x != nil && x.WithdrawalMax != nil {
 		return *x.WithdrawalMax
 	}
-	return 0
+	return ""
 }
 
 func (x *ListUsersRequest) GetBanWithdraw() bool {
@@ -228,14 +229,14 @@ func (x *ListUsersRequest) GetOnline() bool {
 	return false
 }
 
-func (x *ListUsersRequest) GetPage() int64 {
+func (x *ListUsersRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListUsersRequest) GetPageSize() int64 {
+func (x *ListUsersRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
@@ -245,9 +246,9 @@ func (x *ListUsersRequest) GetPageSize() int64 {
 type ListUsersResponse struct {
 	state         protoimpl.MessageState    `protogen:"open.v1"`
 	Users         []*ListUsersResponse_User `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
-	Page          int64                     `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int64                     `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total         int64                     `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                     `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                     `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                     `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -289,21 +290,21 @@ func (x *ListUsersResponse) GetUsers() []*ListUsersResponse_User {
 	return nil
 }
 
-func (x *ListUsersResponse) GetPage() int64 {
+func (x *ListUsersResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListUsersResponse) GetPageSize() int64 {
+func (x *ListUsersResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *ListUsersResponse) GetTotal() int64 {
+func (x *ListUsersResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
 	}
@@ -348,26 +349,26 @@ func (*GetUserOverviewRequest) Descriptor() ([]byte, []int) {
 
 type GetUserOverviewResponse struct {
 	state                    protoimpl.MessageState              `protogen:"open.v1"`
-	Balance                  int64                               `protobuf:"varint,1,opt,name=balance,proto3" json:"balance,omitempty"`
-	DepositMinusWithdraw     int64                               `protobuf:"varint,2,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
-	CashTurnover             int64                               `protobuf:"varint,3,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
-	BonusTurnover            int64                               `protobuf:"varint,4,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
-	Deposit                  int64                               `protobuf:"varint,5,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	LastDeposit              int64                               `protobuf:"varint,6,opt,name=last_deposit,json=lastDeposit,proto3" json:"last_deposit,omitempty"`
-	DepositCount             int64                               `protobuf:"varint,7,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
-	Withdraw                 int64                               `protobuf:"varint,8,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
-	LastWithdraw             int64                               `protobuf:"varint,9,opt,name=last_withdraw,json=lastWithdraw,proto3" json:"last_withdraw,omitempty"`
-	WithdrawCount            int64                               `protobuf:"varint,10,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"`
-	Bonus                    int64                               `protobuf:"varint,11,opt,name=bonus,proto3" json:"bonus,omitempty"`
-	ValidTurnover            int64                               `protobuf:"varint,12,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`
-	AverageBetAmount         int64                               `protobuf:"varint,13,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
-	Ggr                      int64                               `protobuf:"varint,14,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	Balance                  string                              `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	DepositMinusWithdraw     string                              `protobuf:"bytes,2,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
+	CashTurnover             string                              `protobuf:"bytes,3,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
+	BonusTurnover            string                              `protobuf:"bytes,4,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
+	Deposit                  string                              `protobuf:"bytes,5,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	LastDeposit              string                              `protobuf:"bytes,6,opt,name=last_deposit,json=lastDeposit,proto3" json:"last_deposit,omitempty"`
+	DepositCount             string                              `protobuf:"bytes,7,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	Withdraw                 string                              `protobuf:"bytes,8,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
+	LastWithdraw             string                              `protobuf:"bytes,9,opt,name=last_withdraw,json=lastWithdraw,proto3" json:"last_withdraw,omitempty"`
+	WithdrawCount            int32                               `protobuf:"varint,10,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"`
+	Bonus                    string                              `protobuf:"bytes,11,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	ValidTurnover            string                              `protobuf:"bytes,12,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`
+	AverageBetAmount         string                              `protobuf:"bytes,13,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
+	Ggr                      string                              `protobuf:"bytes,14,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	GgrPercentage            int32                               `protobuf:"varint,15,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
-	ManuallyAddedBalance     int64                               `protobuf:"varint,16,opt,name=manually_added_balance,json=manuallyAddedBalance,proto3" json:"manually_added_balance,omitempty"`
-	BonusClaimed             int64                               `protobuf:"varint,17,opt,name=bonus_claimed,json=bonusClaimed,proto3" json:"bonus_claimed,omitempty"`
-	Ngr                      int64                               `protobuf:"varint,18,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	ManuallyAddedBalance     string                              `protobuf:"bytes,16,opt,name=manually_added_balance,json=manuallyAddedBalance,proto3" json:"manually_added_balance,omitempty"`
+	BonusClaimed             string                              `protobuf:"bytes,17,opt,name=bonus_claimed,json=bonusClaimed,proto3" json:"bonus_claimed,omitempty"`
+	Ngr                      string                              `protobuf:"bytes,18,opt,name=ngr,proto3" json:"ngr,omitempty"`
 	GgrToNgrPercentage       int32                               `protobuf:"varint,19,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`
-	TurnoverMultiplier       int64                               `protobuf:"varint,20,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`
+	TurnoverMultiplier       int32                               `protobuf:"varint,20,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`
 	DepositToWithdrawRatio   int32                               `protobuf:"varint,21,opt,name=deposit_to_withdraw_ratio,json=depositToWithdrawRatio,proto3" json:"deposit_to_withdraw_ratio,omitempty"`
 	RtpPercentage            int32                               `protobuf:"varint,22,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
 	GameData                 []*GetUserOverviewResponse_GameData `protobuf:"bytes,23,rep,name=game_data,json=gameData,proto3" json:"game_data,omitempty"`
@@ -411,102 +412,102 @@ func (*GetUserOverviewResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetUserOverviewResponse) GetBalance() int64 {
+func (x *GetUserOverviewResponse) GetBalance() string {
 	if x != nil {
 		return x.Balance
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetDepositMinusWithdraw() int64 {
+func (x *GetUserOverviewResponse) GetDepositMinusWithdraw() string {
 	if x != nil {
 		return x.DepositMinusWithdraw
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetCashTurnover() int64 {
+func (x *GetUserOverviewResponse) GetCashTurnover() string {
 	if x != nil {
 		return x.CashTurnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetBonusTurnover() int64 {
+func (x *GetUserOverviewResponse) GetBonusTurnover() string {
 	if x != nil {
 		return x.BonusTurnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetDeposit() int64 {
+func (x *GetUserOverviewResponse) GetDeposit() string {
 	if x != nil {
 		return x.Deposit
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetLastDeposit() int64 {
+func (x *GetUserOverviewResponse) GetLastDeposit() string {
 	if x != nil {
 		return x.LastDeposit
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetDepositCount() int64 {
+func (x *GetUserOverviewResponse) GetDepositCount() string {
 	if x != nil {
 		return x.DepositCount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetWithdraw() int64 {
+func (x *GetUserOverviewResponse) GetWithdraw() string {
 	if x != nil {
 		return x.Withdraw
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetLastWithdraw() int64 {
+func (x *GetUserOverviewResponse) GetLastWithdraw() string {
 	if x != nil {
 		return x.LastWithdraw
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetWithdrawCount() int64 {
+func (x *GetUserOverviewResponse) GetWithdrawCount() int32 {
 	if x != nil {
 		return x.WithdrawCount
 	}
 	return 0
 }
 
-func (x *GetUserOverviewResponse) GetBonus() int64 {
+func (x *GetUserOverviewResponse) GetBonus() string {
 	if x != nil {
 		return x.Bonus
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetValidTurnover() int64 {
+func (x *GetUserOverviewResponse) GetValidTurnover() string {
 	if x != nil {
 		return x.ValidTurnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetAverageBetAmount() int64 {
+func (x *GetUserOverviewResponse) GetAverageBetAmount() string {
 	if x != nil {
 		return x.AverageBetAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetGgr() int64 {
+func (x *GetUserOverviewResponse) GetGgr() string {
 	if x != nil {
 		return x.Ggr
 	}
-	return 0
+	return ""
 }
 
 func (x *GetUserOverviewResponse) GetGgrPercentage() int32 {
@@ -516,25 +517,25 @@ func (x *GetUserOverviewResponse) GetGgrPercentage() int32 {
 	return 0
 }
 
-func (x *GetUserOverviewResponse) GetManuallyAddedBalance() int64 {
+func (x *GetUserOverviewResponse) GetManuallyAddedBalance() string {
 	if x != nil {
 		return x.ManuallyAddedBalance
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetBonusClaimed() int64 {
+func (x *GetUserOverviewResponse) GetBonusClaimed() string {
 	if x != nil {
 		return x.BonusClaimed
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse) GetNgr() int64 {
+func (x *GetUserOverviewResponse) GetNgr() string {
 	if x != nil {
 		return x.Ngr
 	}
-	return 0
+	return ""
 }
 
 func (x *GetUserOverviewResponse) GetGgrToNgrPercentage() int32 {
@@ -544,7 +545,7 @@ func (x *GetUserOverviewResponse) GetGgrToNgrPercentage() int32 {
 	return 0
 }
 
-func (x *GetUserOverviewResponse) GetTurnoverMultiplier() int64 {
+func (x *GetUserOverviewResponse) GetTurnoverMultiplier() int32 {
 	if x != nil {
 		return x.TurnoverMultiplier
 	}
@@ -1270,27 +1271,27 @@ func (*AddUserCommentResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{17}
 }
 
-type GetUserWalletRequest struct {
+type ListUserCommentsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currencies    []string               `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetUserWalletRequest) Reset() {
-	*x = GetUserWalletRequest{}
+func (x *ListUserCommentsRequest) Reset() {
+	*x = ListUserCommentsRequest{}
 	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetUserWalletRequest) String() string {
+func (x *ListUserCommentsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetUserWalletRequest) ProtoMessage() {}
+func (*ListUserCommentsRequest) ProtoMessage() {}
 
-func (x *GetUserWalletRequest) ProtoReflect() protoreflect.Message {
+func (x *ListUserCommentsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1302,14 +1303,58 @@ func (x *GetUserWalletRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetUserWalletRequest.ProtoReflect.Descriptor instead.
-func (*GetUserWalletRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListUserCommentsRequest.ProtoReflect.Descriptor instead.
+func (*ListUserCommentsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *GetUserWalletRequest) GetCurrencies() []string {
+func (x *ListUserCommentsRequest) GetUserId() int64 {
 	if x != nil {
-		return x.Currencies
+		return x.UserId
+	}
+	return 0
+}
+
+type ListUserCommentsResponse struct {
+	state         protoimpl.MessageState              `protogen:"open.v1"`
+	Comments      []*ListUserCommentsResponse_Comment `protobuf:"bytes,1,rep,name=comments,proto3" json:"comments,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUserCommentsResponse) Reset() {
+	*x = ListUserCommentsResponse{}
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUserCommentsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserCommentsResponse) ProtoMessage() {}
+
+func (x *ListUserCommentsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserCommentsResponse.ProtoReflect.Descriptor instead.
+func (*ListUserCommentsResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ListUserCommentsResponse) GetComments() []*ListUserCommentsResponse_Comment {
+	if x != nil {
+		return x.Comments
 	}
 	return nil
 }
@@ -1325,8 +1370,8 @@ type ListUsersResponse_User struct {
 	Mobile         string                 `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
 	VipLevel       int32                  `protobuf:"varint,8,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
 	KycLevel       int32                  `protobuf:"varint,9,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
-	Deposit        int64                  `protobuf:"varint,10,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	Withdraw       int64                  `protobuf:"varint,11,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
+	Deposit        string                 `protobuf:"bytes,10,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	Withdraw       string                 `protobuf:"bytes,11,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
 	Tags           []string               `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
 	BanWithdraw    bool                   `protobuf:"varint,13,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
 	BanGame        bool                   `protobuf:"varint,14,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
@@ -1347,7 +1392,7 @@ type ListUsersResponse_User struct {
 
 func (x *ListUsersResponse_User) Reset() {
 	*x = ListUsersResponse_User{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1359,7 +1404,7 @@ func (x *ListUsersResponse_User) String() string {
 func (*ListUsersResponse_User) ProtoMessage() {}
 
 func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1438,18 +1483,18 @@ func (x *ListUsersResponse_User) GetKycLevel() int32 {
 	return 0
 }
 
-func (x *ListUsersResponse_User) GetDeposit() int64 {
+func (x *ListUsersResponse_User) GetDeposit() string {
 	if x != nil {
 		return x.Deposit
 	}
-	return 0
+	return ""
 }
 
-func (x *ListUsersResponse_User) GetWithdraw() int64 {
+func (x *ListUsersResponse_User) GetWithdraw() string {
 	if x != nil {
 		return x.Withdraw
 	}
-	return 0
+	return ""
 }
 
 func (x *ListUsersResponse_User) GetTags() []string {
@@ -1553,16 +1598,16 @@ func (x *ListUsersResponse_User) GetRegistrationIp() string {
 type GetUserOverviewResponse_GameData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	GameType      string                 `protobuf:"bytes,1,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"`
-	Ggr           int64                  `protobuf:"varint,2,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	Turnover      int64                  `protobuf:"varint,3,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	Rtp           int64                  `protobuf:"varint,4,opt,name=rtp,proto3" json:"rtp,omitempty"`
+	Ggr           string                 `protobuf:"bytes,2,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	Turnover      string                 `protobuf:"bytes,3,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	Rtp           string                 `protobuf:"bytes,4,opt,name=rtp,proto3" json:"rtp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetUserOverviewResponse_GameData) Reset() {
 	*x = GetUserOverviewResponse_GameData{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1574,7 +1619,7 @@ func (x *GetUserOverviewResponse_GameData) String() string {
 func (*GetUserOverviewResponse_GameData) ProtoMessage() {}
 
 func (x *GetUserOverviewResponse_GameData) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1597,25 +1642,25 @@ func (x *GetUserOverviewResponse_GameData) GetGameType() string {
 	return ""
 }
 
-func (x *GetUserOverviewResponse_GameData) GetGgr() int64 {
+func (x *GetUserOverviewResponse_GameData) GetGgr() string {
 	if x != nil {
 		return x.Ggr
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse_GameData) GetTurnover() int64 {
+func (x *GetUserOverviewResponse_GameData) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserOverviewResponse_GameData) GetRtp() int64 {
+func (x *GetUserOverviewResponse_GameData) GetRtp() string {
 	if x != nil {
 		return x.Rtp
 	}
-	return 0
+	return ""
 }
 
 type GetUserProfileResponse_RegistrationRecord struct {
@@ -1636,7 +1681,7 @@ type GetUserProfileResponse_RegistrationRecord struct {
 
 func (x *GetUserProfileResponse_RegistrationRecord) Reset() {
 	*x = GetUserProfileResponse_RegistrationRecord{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1648,7 +1693,7 @@ func (x *GetUserProfileResponse_RegistrationRecord) String() string {
 func (*GetUserProfileResponse_RegistrationRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_RegistrationRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1750,7 +1795,7 @@ type GetUserProfileResponse_LoginRecord struct {
 
 func (x *GetUserProfileResponse_LoginRecord) Reset() {
 	*x = GetUserProfileResponse_LoginRecord{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1762,7 +1807,7 @@ func (x *GetUserProfileResponse_LoginRecord) String() string {
 func (*GetUserProfileResponse_LoginRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_LoginRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1835,17 +1880,17 @@ func (x *GetUserProfileResponse_LoginRecord) GetMobile() string {
 }
 
 type GetUserProfileResponse_Comment struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	AuthorUserId  int64                  `protobuf:"varint,1,opt,name=author_user_id,json=authorUserId,proto3" json:"author_user_id,omitempty"`
-	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	AuthorUsername string                 `protobuf:"bytes,1,opt,name=author_username,json=authorUsername,proto3" json:"author_username,omitempty"`
+	Content        string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *GetUserProfileResponse_Comment) Reset() {
 	*x = GetUserProfileResponse_Comment{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[23]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1857,7 +1902,7 @@ func (x *GetUserProfileResponse_Comment) String() string {
 func (*GetUserProfileResponse_Comment) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[23]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1873,11 +1918,11 @@ func (*GetUserProfileResponse_Comment) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5, 2}
 }
 
-func (x *GetUserProfileResponse_Comment) GetAuthorUserId() int64 {
+func (x *GetUserProfileResponse_Comment) GetAuthorUsername() string {
 	if x != nil {
-		return x.AuthorUserId
+		return x.AuthorUsername
 	}
-	return 0
+	return ""
 }
 
 func (x *GetUserProfileResponse_Comment) GetContent() string {
@@ -1894,18 +1939,78 @@ func (x *GetUserProfileResponse_Comment) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+type ListUserCommentsResponse_Comment struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	AuthorUsername string                 `protobuf:"bytes,1,opt,name=author_username,json=authorUsername,proto3" json:"author_username,omitempty"`
+	Content        string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ListUserCommentsResponse_Comment) Reset() {
+	*x = ListUserCommentsResponse_Comment{}
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUserCommentsResponse_Comment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserCommentsResponse_Comment) ProtoMessage() {}
+
+func (x *ListUserCommentsResponse_Comment) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserCommentsResponse_Comment.ProtoReflect.Descriptor instead.
+func (*ListUserCommentsResponse_Comment) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{19, 0}
+}
+
+func (x *ListUserCommentsResponse_Comment) GetAuthorUsername() string {
+	if x != nil {
+		return x.AuthorUsername
+	}
+	return ""
+}
+
+func (x *ListUserCommentsResponse_Comment) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *ListUserCommentsResponse_Comment) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
 var File_backoffice_service_v1_backoffice_user_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa8\n" +
+	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa8\n" +
 	"\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
 	"\x17registration_start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x15registrationStartTime\x88\x01\x01\x12S\n" +
 	"\x15registration_end_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x13registrationEndTime\x88\x01\x01\x12 \n" +
-	"\tvip_level\x18\x05 \x01(\x03H\x03R\bvipLevel\x88\x01\x01\x125\n" +
+	"\tvip_level\x18\x05 \x01(\x05H\x03R\bvipLevel\x88\x01\x01\x125\n" +
 	"\x14retailer_operator_id\x18\x06 \x01(\x03H\x04R\x12retailerOperatorId\x88\x01\x01\x12/\n" +
 	"\x11group_operator_id\x18\a \x01(\x03H\x05R\x0fgroupOperatorId\x88\x01\x01\x12$\n" +
 	"\voperator_id\x18\b \x01(\x03H\x06R\n" +
@@ -1917,19 +2022,19 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
 	"kyc_levels\x18\f \x03(\x05R\tkycLevels\x12-\n" +
 	"\x10has_made_deposit\x18\r \x01(\bH\tR\x0ehasMadeDeposit\x88\x01\x01\x12$\n" +
-	"\vdeposit_min\x18\x0e \x01(\x03H\n" +
+	"\vdeposit_min\x18\x0e \x01(\tH\n" +
 	"R\n" +
 	"depositMin\x88\x01\x01\x12$\n" +
-	"\vdeposit_max\x18\x0f \x01(\x03H\vR\n" +
+	"\vdeposit_max\x18\x0f \x01(\tH\vR\n" +
 	"depositMax\x88\x01\x01\x12*\n" +
-	"\x0ewithdrawal_min\x18\x10 \x01(\x03H\fR\rwithdrawalMin\x88\x01\x01\x12*\n" +
-	"\x0ewithdrawal_max\x18\x11 \x01(\x03H\rR\rwithdrawalMax\x88\x01\x01\x12&\n" +
+	"\x0ewithdrawal_min\x18\x10 \x01(\tH\fR\rwithdrawalMin\x88\x01\x01\x12*\n" +
+	"\x0ewithdrawal_max\x18\x11 \x01(\tH\rR\rwithdrawalMax\x88\x01\x01\x12&\n" +
 	"\fban_withdraw\x18\x12 \x01(\bH\x0eR\vbanWithdraw\x88\x01\x01\x12\x1e\n" +
 	"\bban_game\x18\x13 \x01(\bH\x0fR\abanGame\x88\x01\x01\x12 \n" +
 	"\tban_login\x18\x14 \x01(\bH\x10R\bbanLogin\x88\x01\x01\x12\x1b\n" +
 	"\x06online\x18\x15 \x01(\bH\x11R\x06online\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x16 \x01(\x03H\x12R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x17 \x01(\x03H\x13R\bpageSize\x88\x01\x01B\n" +
+	"\x04page\x18\x16 \x01(\x05H\x12R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x17 \x01(\x05H\x13R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -1956,9 +2061,9 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"_page_size\"\xb3\a\n" +
 	"\x11ListUsersResponse\x12G\n" +
 	"\x05users\x18\x01 \x03(\v21.api.backoffice.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
-	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x03 \x01(\x03R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\x1a\x8d\x06\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x8d\x06\n" +
 	"\x04User\x12\x1a\n" +
 	"\bretailer\x18\x01 \x01(\tR\bretailer\x12\x14\n" +
 	"\x05group\x18\x02 \x01(\tR\x05group\x12\x1a\n" +
@@ -1970,8 +2075,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\tvip_level\x18\b \x01(\x05R\bvipLevel\x12\x1b\n" +
 	"\tkyc_level\x18\t \x01(\x05R\bkycLevel\x12\x18\n" +
 	"\adeposit\x18\n" +
-	" \x01(\x03R\adeposit\x12\x1a\n" +
-	"\bwithdraw\x18\v \x01(\x03R\bwithdraw\x12\x12\n" +
+	" \x01(\tR\adeposit\x12\x1a\n" +
+	"\bwithdraw\x18\v \x01(\tR\bwithdraw\x12\x12\n" +
 	"\x04tags\x18\f \x03(\tR\x04tags\x12!\n" +
 	"\fban_withdraw\x18\r \x01(\bR\vbanWithdraw\x12\x19\n" +
 	"\bban_game\x18\x0e \x01(\bR\abanGame\x12\x1b\n" +
@@ -1990,27 +2095,27 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x16GetUserOverviewRequest\"\xd6\n" +
 	"\n" +
 	"\x17GetUserOverviewResponse\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\x03R\abalance\x124\n" +
-	"\x16deposit_minus_withdraw\x18\x02 \x01(\x03R\x14depositMinusWithdraw\x12#\n" +
-	"\rcash_turnover\x18\x03 \x01(\x03R\fcashTurnover\x12%\n" +
-	"\x0ebonus_turnover\x18\x04 \x01(\x03R\rbonusTurnover\x12\x18\n" +
-	"\adeposit\x18\x05 \x01(\x03R\adeposit\x12!\n" +
-	"\flast_deposit\x18\x06 \x01(\x03R\vlastDeposit\x12#\n" +
-	"\rdeposit_count\x18\a \x01(\x03R\fdepositCount\x12\x1a\n" +
-	"\bwithdraw\x18\b \x01(\x03R\bwithdraw\x12#\n" +
-	"\rlast_withdraw\x18\t \x01(\x03R\flastWithdraw\x12%\n" +
+	"\abalance\x18\x01 \x01(\tR\abalance\x124\n" +
+	"\x16deposit_minus_withdraw\x18\x02 \x01(\tR\x14depositMinusWithdraw\x12#\n" +
+	"\rcash_turnover\x18\x03 \x01(\tR\fcashTurnover\x12%\n" +
+	"\x0ebonus_turnover\x18\x04 \x01(\tR\rbonusTurnover\x12\x18\n" +
+	"\adeposit\x18\x05 \x01(\tR\adeposit\x12!\n" +
+	"\flast_deposit\x18\x06 \x01(\tR\vlastDeposit\x12#\n" +
+	"\rdeposit_count\x18\a \x01(\tR\fdepositCount\x12\x1a\n" +
+	"\bwithdraw\x18\b \x01(\tR\bwithdraw\x12#\n" +
+	"\rlast_withdraw\x18\t \x01(\tR\flastWithdraw\x12%\n" +
 	"\x0ewithdraw_count\x18\n" +
-	" \x01(\x03R\rwithdrawCount\x12\x14\n" +
-	"\x05bonus\x18\v \x01(\x03R\x05bonus\x12%\n" +
-	"\x0evalid_turnover\x18\f \x01(\x03R\rvalidTurnover\x12,\n" +
-	"\x12average_bet_amount\x18\r \x01(\x03R\x10averageBetAmount\x12\x10\n" +
-	"\x03ggr\x18\x0e \x01(\x03R\x03ggr\x12%\n" +
+	" \x01(\x05R\rwithdrawCount\x12\x14\n" +
+	"\x05bonus\x18\v \x01(\tR\x05bonus\x12%\n" +
+	"\x0evalid_turnover\x18\f \x01(\tR\rvalidTurnover\x12,\n" +
+	"\x12average_bet_amount\x18\r \x01(\tR\x10averageBetAmount\x12\x10\n" +
+	"\x03ggr\x18\x0e \x01(\tR\x03ggr\x12%\n" +
 	"\x0eggr_percentage\x18\x0f \x01(\x05R\rggrPercentage\x124\n" +
-	"\x16manually_added_balance\x18\x10 \x01(\x03R\x14manuallyAddedBalance\x12#\n" +
-	"\rbonus_claimed\x18\x11 \x01(\x03R\fbonusClaimed\x12\x10\n" +
-	"\x03ngr\x18\x12 \x01(\x03R\x03ngr\x121\n" +
+	"\x16manually_added_balance\x18\x10 \x01(\tR\x14manuallyAddedBalance\x12#\n" +
+	"\rbonus_claimed\x18\x11 \x01(\tR\fbonusClaimed\x12\x10\n" +
+	"\x03ngr\x18\x12 \x01(\tR\x03ngr\x121\n" +
 	"\x15ggr_to_ngr_percentage\x18\x13 \x01(\x05R\x12ggrToNgrPercentage\x12/\n" +
-	"\x13turnover_multiplier\x18\x14 \x01(\x03R\x12turnoverMultiplier\x129\n" +
+	"\x13turnover_multiplier\x18\x14 \x01(\x05R\x12turnoverMultiplier\x129\n" +
 	"\x19deposit_to_withdraw_ratio\x18\x15 \x01(\x05R\x16depositToWithdrawRatio\x12%\n" +
 	"\x0ertp_percentage\x18\x16 \x01(\x05R\rrtpPercentage\x12X\n" +
 	"\tgame_data\x18\x17 \x03(\v2;.api.backoffice.service.v1.GetUserOverviewResponse.GameDataR\bgameData\x12\x19\n" +
@@ -2022,11 +2127,11 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x16first_deposit_on_today\x18\x1d \x01(\bR\x13firstDepositOnToday\x1ag\n" +
 	"\bGameData\x12\x1b\n" +
 	"\tgame_type\x18\x01 \x01(\tR\bgameType\x12\x10\n" +
-	"\x03ggr\x18\x02 \x01(\x03R\x03ggr\x12\x1a\n" +
-	"\bturnover\x18\x03 \x01(\x03R\bturnover\x12\x10\n" +
-	"\x03rtp\x18\x04 \x01(\x03R\x03rtp\"0\n" +
+	"\x03ggr\x18\x02 \x01(\tR\x03ggr\x12\x1a\n" +
+	"\bturnover\x18\x03 \x01(\tR\bturnover\x12\x10\n" +
+	"\x03rtp\x18\x04 \x01(\tR\x03rtp\"0\n" +
 	"\x15GetUserProfileRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xfa\b\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xfd\b\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -2056,9 +2161,9 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\abrowser\x18\x05 \x01(\tR\abrowser\x12\x10\n" +
 	"\x03app\x18\x06 \x01(\tR\x03app\x12\x14\n" +
 	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
-	"\x06mobile\x18\b \x01(\tR\x06mobile\x1a\x84\x01\n" +
-	"\aComment\x12$\n" +
-	"\x0eauthor_user_id\x18\x01 \x01(\x03R\fauthorUserId\x12\x18\n" +
+	"\x06mobile\x18\b \x01(\tR\x06mobile\x1a\x87\x01\n" +
+	"\aComment\x12'\n" +
+	"\x0fauthor_username\x18\x01 \x01(\tR\x0eauthorUsername\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"-\n" +
@@ -2083,11 +2188,28 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12$\n" +
 	"\x0eauthor_user_id\x18\x02 \x01(\x03R\fauthorUserId\x12\x18\n" +
 	"\acontent\x18\x03 \x01(\tR\acontent\"\x18\n" +
-	"\x16AddUserCommentResponse\"6\n" +
-	"\x14GetUserWalletRequest\x12\x1e\n" +
+	"\x16AddUserCommentResponse\"2\n" +
+	"\x17ListUserCommentsRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xfd\x01\n" +
+	"\x18ListUserCommentsResponse\x12W\n" +
+	"\bcomments\x18\x01 \x03(\v2;.api.backoffice.service.v1.ListUserCommentsResponse.CommentR\bcomments\x1a\x87\x01\n" +
+	"\aComment\x12'\n" +
+	"\x0fauthor_username\x18\x01 \x01(\tR\x0eauthorUsername\x12\x18\n" +
+	"\acontent\x18\x02 \x01(\tR\acontent\x129\n" +
 	"\n" +
-	"currencies\x18\x01 \x03(\tR\n" +
-	"currenciesB[\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt2\xa2\r\n" +
+	"\x0eBackofficeUser\x12\x8b\x01\n" +
+	"\tListUsers\x12+.api.backoffice.service.v1.ListUsersRequest\x1a,.api.backoffice.service.v1.ListUsersResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/backoffice/user/list\x12\xa5\x01\n" +
+	"\x0fGetUserOverview\x121.api.backoffice.service.v1.GetUserOverviewRequest\x1a2.api.backoffice.service.v1.GetUserOverviewResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/overview/get\x12\xa1\x01\n" +
+	"\x0eGetUserProfile\x120.api.backoffice.service.v1.GetUserProfileRequest\x1a1.api.backoffice.service.v1.GetUserProfileResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/user/profile/get\x12\xb3\x01\n" +
+	"\x12AddOperatorUserTag\x124.api.backoffice.service.v1.AddOperatorUserTagRequest\x1a5.api.backoffice.service.v1.AddOperatorUserTagResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/operator/user-tags/add\x12\xbf\x01\n" +
+	"\x15DeleteOperatorUserTag\x127.api.backoffice.service.v1.DeleteOperatorUserTagRequest\x1a8.api.backoffice.service.v1.DeleteOperatorUserTagResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/operator/user-tags/delete\x12\xb6\x01\n" +
+	"\x13GetOperatorUserTags\x125.api.backoffice.service.v1.GetOperatorUserTagsRequest\x1a6.api.backoffice.service.v1.GetOperatorUserTagsResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/operator/user-tags/get\x12\x92\x01\n" +
+	"\n" +
+	"AddUserTag\x12,.api.backoffice.service.v1.AddUserTagRequest\x1a-.api.backoffice.service.v1.AddUserTagResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/user/tags/add\x12\x9e\x01\n" +
+	"\rDeleteUserTag\x12/.api.backoffice.service.v1.DeleteUserTagRequest\x1a0.api.backoffice.service.v1.DeleteUserTagResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/user/tags/delete\x12\xa2\x01\n" +
+	"\x0eAddUserComment\x120.api.backoffice.service.v1.AddUserCommentRequest\x1a1.api.backoffice.service.v1.AddUserCommentResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/comments/add\x12\xa9\x01\n" +
+	"\x10ListUserComments\x122.api.backoffice.service.v1.ListUserCommentsRequest\x1a3.api.backoffice.service.v1.ListUserCommentsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/user/comments/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -2102,7 +2224,7 @@ func file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_user_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_backoffice_service_v1_backoffice_user_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*ListUsersRequest)(nil),                          // 0: api.backoffice.service.v1.ListUsersRequest
 	(*ListUsersResponse)(nil),                         // 1: api.backoffice.service.v1.ListUsersResponse
@@ -2122,33 +2244,57 @@ var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*DeleteUserTagResponse)(nil),                     // 15: api.backoffice.service.v1.DeleteUserTagResponse
 	(*AddUserCommentRequest)(nil),                     // 16: api.backoffice.service.v1.AddUserCommentRequest
 	(*AddUserCommentResponse)(nil),                    // 17: api.backoffice.service.v1.AddUserCommentResponse
-	(*GetUserWalletRequest)(nil),                      // 18: api.backoffice.service.v1.GetUserWalletRequest
-	(*ListUsersResponse_User)(nil),                    // 19: api.backoffice.service.v1.ListUsersResponse.User
-	(*GetUserOverviewResponse_GameData)(nil),          // 20: api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	(*GetUserProfileResponse_RegistrationRecord)(nil), // 21: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	(*GetUserProfileResponse_LoginRecord)(nil),        // 22: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	(*GetUserProfileResponse_Comment)(nil),            // 23: api.backoffice.service.v1.GetUserProfileResponse.Comment
-	(*timestamppb.Timestamp)(nil),                     // 24: google.protobuf.Timestamp
+	(*ListUserCommentsRequest)(nil),                   // 18: api.backoffice.service.v1.ListUserCommentsRequest
+	(*ListUserCommentsResponse)(nil),                  // 19: api.backoffice.service.v1.ListUserCommentsResponse
+	(*ListUsersResponse_User)(nil),                    // 20: api.backoffice.service.v1.ListUsersResponse.User
+	(*GetUserOverviewResponse_GameData)(nil),          // 21: api.backoffice.service.v1.GetUserOverviewResponse.GameData
+	(*GetUserProfileResponse_RegistrationRecord)(nil), // 22: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
+	(*GetUserProfileResponse_LoginRecord)(nil),        // 23: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
+	(*GetUserProfileResponse_Comment)(nil),            // 24: api.backoffice.service.v1.GetUserProfileResponse.Comment
+	(*ListUserCommentsResponse_Comment)(nil),          // 25: api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	(*timestamppb.Timestamp)(nil),                     // 26: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
-	24, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	24, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	19, // 2: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
-	20, // 3: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	24, // 4: api.backoffice.service.v1.GetUserOverviewResponse.last_deposit_at:type_name -> google.protobuf.Timestamp
-	21, // 5: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	22, // 6: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	23, // 7: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
-	24, // 8: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	24, // 9: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	24, // 10: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	24, // 11: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	24, // 12: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	26, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	26, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	20, // 2: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
+	21, // 3: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
+	26, // 4: api.backoffice.service.v1.GetUserOverviewResponse.last_deposit_at:type_name -> google.protobuf.Timestamp
+	22, // 5: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
+	23, // 6: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
+	24, // 7: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
+	25, // 8: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	26, // 9: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	26, // 10: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	26, // 11: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
+	26, // 12: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
+	26, // 13: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	26, // 14: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 15: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
+	2,  // 16: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
+	4,  // 17: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
+	6,  // 18: api.backoffice.service.v1.BackofficeUser.AddOperatorUserTag:input_type -> api.backoffice.service.v1.AddOperatorUserTagRequest
+	8,  // 19: api.backoffice.service.v1.BackofficeUser.DeleteOperatorUserTag:input_type -> api.backoffice.service.v1.DeleteOperatorUserTagRequest
+	10, // 20: api.backoffice.service.v1.BackofficeUser.GetOperatorUserTags:input_type -> api.backoffice.service.v1.GetOperatorUserTagsRequest
+	12, // 21: api.backoffice.service.v1.BackofficeUser.AddUserTag:input_type -> api.backoffice.service.v1.AddUserTagRequest
+	14, // 22: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:input_type -> api.backoffice.service.v1.DeleteUserTagRequest
+	16, // 23: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
+	18, // 24: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
+	1,  // 25: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
+	3,  // 26: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
+	5,  // 27: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
+	7,  // 28: api.backoffice.service.v1.BackofficeUser.AddOperatorUserTag:output_type -> api.backoffice.service.v1.AddOperatorUserTagResponse
+	9,  // 29: api.backoffice.service.v1.BackofficeUser.DeleteOperatorUserTag:output_type -> api.backoffice.service.v1.DeleteOperatorUserTagResponse
+	11, // 30: api.backoffice.service.v1.BackofficeUser.GetOperatorUserTags:output_type -> api.backoffice.service.v1.GetOperatorUserTagsResponse
+	13, // 31: api.backoffice.service.v1.BackofficeUser.AddUserTag:output_type -> api.backoffice.service.v1.AddUserTagResponse
+	15, // 32: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:output_type -> api.backoffice.service.v1.DeleteUserTagResponse
+	17, // 33: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
+	19, // 34: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
+	25, // [25:35] is the sub-list for method output_type
+	15, // [15:25] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_user_proto_init() }
@@ -2163,9 +2309,9 @@ func file_backoffice_service_v1_backoffice_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_user_proto_rawDesc), len(file_backoffice_service_v1_backoffice_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   26,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_backoffice_service_v1_backoffice_user_proto_goTypes,
 		DependencyIndexes: file_backoffice_service_v1_backoffice_user_proto_depIdxs,

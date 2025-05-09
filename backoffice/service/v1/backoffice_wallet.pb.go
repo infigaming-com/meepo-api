@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -352,11 +353,11 @@ func (*UpdateWalletResponse) Descriptor() ([]byte, []int) {
 
 type GetWalletsResponse_TotalAssets struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	Balance              int64                  `protobuf:"varint,1,opt,name=balance,proto3" json:"balance,omitempty"`
-	Deposit              int64                  `protobuf:"varint,2,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	Withdraw             int64                  `protobuf:"varint,3,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
-	DepositMinusWithdraw int64                  `protobuf:"varint,4,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
-	ValidTurnover        int64                  `protobuf:"varint,5,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`
+	Balance              string                 `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	Deposit              string                 `protobuf:"bytes,2,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	Withdraw             string                 `protobuf:"bytes,3,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
+	DepositMinusWithdraw string                 `protobuf:"bytes,4,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
+	ValidTurnover        string                 `protobuf:"bytes,5,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -391,51 +392,51 @@ func (*GetWalletsResponse_TotalAssets) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{1, 0}
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetBalance() int64 {
+func (x *GetWalletsResponse_TotalAssets) GetBalance() string {
 	if x != nil {
 		return x.Balance
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetDeposit() int64 {
+func (x *GetWalletsResponse_TotalAssets) GetDeposit() string {
 	if x != nil {
 		return x.Deposit
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetWithdraw() int64 {
+func (x *GetWalletsResponse_TotalAssets) GetWithdraw() string {
 	if x != nil {
 		return x.Withdraw
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetDepositMinusWithdraw() int64 {
+func (x *GetWalletsResponse_TotalAssets) GetDepositMinusWithdraw() string {
 	if x != nil {
 		return x.DepositMinusWithdraw
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetValidTurnover() int64 {
+func (x *GetWalletsResponse_TotalAssets) GetValidTurnover() string {
 	if x != nil {
 		return x.ValidTurnover
 	}
-	return 0
+	return ""
 }
 
 type GetWalletsResponse_Credit struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	TransactionId     int64                  `protobuf:"varint,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash              int64                  `protobuf:"varint,3,opt,name=cash,proto3" json:"cash,omitempty"`
-	Bonus             int64                  `protobuf:"varint,4,opt,name=bonus,proto3" json:"bonus,omitempty"`
-	TurnoverThreshold int64                  `protobuf:"varint,5,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"`
-	Turnover          int64                  `protobuf:"varint,6,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	CashTurnover      int64                  `protobuf:"varint,7,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
-	BonusTurnover     int64                  `protobuf:"varint,8,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
+	Cash              string                 `protobuf:"bytes,3,opt,name=cash,proto3" json:"cash,omitempty"`
+	Bonus             string                 `protobuf:"bytes,4,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	TurnoverThreshold string                 `protobuf:"bytes,5,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"`
+	Turnover          string                 `protobuf:"bytes,6,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	CashTurnover      string                 `protobuf:"bytes,7,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
+	BonusTurnover     string                 `protobuf:"bytes,8,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -484,57 +485,57 @@ func (x *GetWalletsResponse_Credit) GetTransactionId() int64 {
 	return 0
 }
 
-func (x *GetWalletsResponse_Credit) GetCash() int64 {
+func (x *GetWalletsResponse_Credit) GetCash() string {
 	if x != nil {
 		return x.Cash
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Credit) GetBonus() int64 {
+func (x *GetWalletsResponse_Credit) GetBonus() string {
 	if x != nil {
 		return x.Bonus
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Credit) GetTurnoverThreshold() int64 {
+func (x *GetWalletsResponse_Credit) GetTurnoverThreshold() string {
 	if x != nil {
 		return x.TurnoverThreshold
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Credit) GetTurnover() int64 {
+func (x *GetWalletsResponse_Credit) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Credit) GetCashTurnover() int64 {
+func (x *GetWalletsResponse_Credit) GetCashTurnover() string {
 	if x != nil {
 		return x.CashTurnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Credit) GetBonusTurnover() int64 {
+func (x *GetWalletsResponse_Credit) GetBonusTurnover() string {
 	if x != nil {
 		return x.BonusTurnover
 	}
-	return 0
+	return ""
 }
 
 type GetWalletsResponse_Wallet struct {
 	state             protoimpl.MessageState       `protogen:"open.v1"`
 	Currency          string                       `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Cash              int64                        `protobuf:"varint,2,opt,name=cash,proto3" json:"cash,omitempty"`
-	Bonus             int64                        `protobuf:"varint,3,opt,name=bonus,proto3" json:"bonus,omitempty"`
-	TurnoverThreshold int64                        `protobuf:"varint,4,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"`
-	Turnover          int64                        `protobuf:"varint,5,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	CashTurnover      int64                        `protobuf:"varint,6,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
-	BonusTurnover     int64                        `protobuf:"varint,7,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
+	Cash              string                       `protobuf:"bytes,2,opt,name=cash,proto3" json:"cash,omitempty"`
+	Bonus             string                       `protobuf:"bytes,3,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	TurnoverThreshold string                       `protobuf:"bytes,4,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"`
+	Turnover          string                       `protobuf:"bytes,5,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	CashTurnover      string                       `protobuf:"bytes,6,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
+	BonusTurnover     string                       `protobuf:"bytes,7,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
 	Credits           []*GetWalletsResponse_Credit `protobuf:"bytes,8,rep,name=credits,proto3" json:"credits,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -577,46 +578,46 @@ func (x *GetWalletsResponse_Wallet) GetCurrency() string {
 	return ""
 }
 
-func (x *GetWalletsResponse_Wallet) GetCash() int64 {
+func (x *GetWalletsResponse_Wallet) GetCash() string {
 	if x != nil {
 		return x.Cash
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Wallet) GetBonus() int64 {
+func (x *GetWalletsResponse_Wallet) GetBonus() string {
 	if x != nil {
 		return x.Bonus
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Wallet) GetTurnoverThreshold() int64 {
+func (x *GetWalletsResponse_Wallet) GetTurnoverThreshold() string {
 	if x != nil {
 		return x.TurnoverThreshold
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Wallet) GetTurnover() int64 {
+func (x *GetWalletsResponse_Wallet) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Wallet) GetCashTurnover() int64 {
+func (x *GetWalletsResponse_Wallet) GetCashTurnover() string {
 	if x != nil {
 		return x.CashTurnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletsResponse_Wallet) GetBonusTurnover() int64 {
+func (x *GetWalletsResponse_Wallet) GetBonusTurnover() string {
 	if x != nil {
 		return x.BonusTurnover
 	}
-	return 0
+	return ""
 }
 
 func (x *GetWalletsResponse_Wallet) GetCredits() []*GetWalletsResponse_Credit {
@@ -630,8 +631,8 @@ type GetWalletCreditTransactionsResponse_CreditTransaction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Cash          int64                  `protobuf:"varint,3,opt,name=cash,proto3" json:"cash,omitempty"`
-	Bonus         int64                  `protobuf:"varint,4,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	Cash          string                 `protobuf:"bytes,3,opt,name=cash,proto3" json:"cash,omitempty"`
+	Bonus         string                 `protobuf:"bytes,4,opt,name=bonus,proto3" json:"bonus,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -680,25 +681,25 @@ func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetCreatedAt() *
 	return nil
 }
 
-func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetCash() int64 {
+func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetCash() string {
 	if x != nil {
 		return x.Cash
 	}
-	return 0
+	return ""
 }
 
-func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetBonus() int64 {
+func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetBonus() string {
 	if x != nil {
 		return x.Bonus
 	}
-	return 0
+	return ""
 }
 
 var File_backoffice_service_v1_backoffice_wallet_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\n" +
-	"-backoffice/service/v1/backoffice_wallet.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"L\n" +
+	"-backoffice/service/v1/backoffice_wallet.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"L\n" +
 	"\x11GetWalletsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1e\n" +
 	"\n" +
@@ -708,29 +709,29 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\ftotal_assets\x18\x01 \x01(\v29.api.backoffice.service.v1.GetWalletsResponse.TotalAssetsR\vtotalAssets\x12N\n" +
 	"\awallets\x18\x02 \x03(\v24.api.backoffice.service.v1.GetWalletsResponse.WalletR\awallets\x1a\xba\x01\n" +
 	"\vTotalAssets\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\x03R\abalance\x12\x18\n" +
-	"\adeposit\x18\x02 \x01(\x03R\adeposit\x12\x1a\n" +
-	"\bwithdraw\x18\x03 \x01(\x03R\bwithdraw\x124\n" +
-	"\x16deposit_minus_withdraw\x18\x04 \x01(\x03R\x14depositMinusWithdraw\x12%\n" +
-	"\x0evalid_turnover\x18\x05 \x01(\x03R\rvalidTurnover\x1a\xab\x02\n" +
+	"\abalance\x18\x01 \x01(\tR\abalance\x12\x18\n" +
+	"\adeposit\x18\x02 \x01(\tR\adeposit\x12\x1a\n" +
+	"\bwithdraw\x18\x03 \x01(\tR\bwithdraw\x124\n" +
+	"\x16deposit_minus_withdraw\x18\x04 \x01(\tR\x14depositMinusWithdraw\x12%\n" +
+	"\x0evalid_turnover\x18\x05 \x01(\tR\rvalidTurnover\x1a\xab\x02\n" +
 	"\x06Credit\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
 	"\x0etransaction_id\x18\x02 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12\x14\n" +
-	"\x05bonus\x18\x04 \x01(\x03R\x05bonus\x12-\n" +
-	"\x12turnover_threshold\x18\x05 \x01(\x03R\x11turnoverThreshold\x12\x1a\n" +
-	"\bturnover\x18\x06 \x01(\x03R\bturnover\x12#\n" +
-	"\rcash_turnover\x18\a \x01(\x03R\fcashTurnover\x12%\n" +
-	"\x0ebonus_turnover\x18\b \x01(\x03R\rbonusTurnover\x1a\xb5\x02\n" +
+	"\x04cash\x18\x03 \x01(\tR\x04cash\x12\x14\n" +
+	"\x05bonus\x18\x04 \x01(\tR\x05bonus\x12-\n" +
+	"\x12turnover_threshold\x18\x05 \x01(\tR\x11turnoverThreshold\x12\x1a\n" +
+	"\bturnover\x18\x06 \x01(\tR\bturnover\x12#\n" +
+	"\rcash_turnover\x18\a \x01(\tR\fcashTurnover\x12%\n" +
+	"\x0ebonus_turnover\x18\b \x01(\tR\rbonusTurnover\x1a\xb5\x02\n" +
 	"\x06Wallet\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
-	"\x04cash\x18\x02 \x01(\x03R\x04cash\x12\x14\n" +
-	"\x05bonus\x18\x03 \x01(\x03R\x05bonus\x12-\n" +
-	"\x12turnover_threshold\x18\x04 \x01(\x03R\x11turnoverThreshold\x12\x1a\n" +
-	"\bturnover\x18\x05 \x01(\x03R\bturnover\x12#\n" +
-	"\rcash_turnover\x18\x06 \x01(\x03R\fcashTurnover\x12%\n" +
-	"\x0ebonus_turnover\x18\a \x01(\x03R\rbonusTurnover\x12N\n" +
+	"\x04cash\x18\x02 \x01(\tR\x04cash\x12\x14\n" +
+	"\x05bonus\x18\x03 \x01(\tR\x05bonus\x12-\n" +
+	"\x12turnover_threshold\x18\x04 \x01(\tR\x11turnoverThreshold\x12\x1a\n" +
+	"\bturnover\x18\x05 \x01(\tR\bturnover\x12#\n" +
+	"\rcash_turnover\x18\x06 \x01(\tR\fcashTurnover\x12%\n" +
+	"\x0ebonus_turnover\x18\a \x01(\tR\rbonusTurnover\x12N\n" +
 	"\acredits\x18\b \x03(\v24.api.backoffice.service.v1.GetWalletsResponse.CreditR\acredits\"\x93\x01\n" +
 	"\"GetWalletCreditTransactionsRequest\x12\x1b\n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\bcreditId\x12\x17\n" +
@@ -748,15 +749,20 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x129\n" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
-	"\x04cash\x18\x03 \x01(\x03R\x04cash\x12\x14\n" +
-	"\x05bonus\x18\x04 \x01(\x03R\x05bonus\"u\n" +
+	"\x04cash\x18\x03 \x01(\tR\x04cash\x12\x14\n" +
+	"\x05bonus\x18\x04 \x01(\tR\x05bonus\"u\n" +
 	"\x13UpdateWalletRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\aenabled\x18\x03 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
 	"\n" +
 	"\b_enabled\"\x16\n" +
-	"\x14UpdateWalletResponseB[\n" +
+	"\x14UpdateWalletResponse2\x98\x04\n" +
+	"\x10BackofficeWallet\x12\x8f\x01\n" +
+	"\n" +
+	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a-.api.backoffice.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xd6\x01\n" +
+	"\x1bGetWalletCreditTransactions\x12=.api.backoffice.service.v1.GetWalletCreditTransactionsRequest\x1a>.api.backoffice.service.v1.GetWalletCreditTransactionsResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/credit-transactions/get\x12\x98\x01\n" +
+	"\fUpdateWallet\x12..api.backoffice.service.v1.UpdateWalletRequest\x1a/.api.backoffice.service.v1.UpdateWalletResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/wallet/updateB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -792,8 +798,14 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	10, // 3: api.backoffice.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
 	7,  // 4: api.backoffice.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.backoffice.service.v1.GetWalletsResponse.Credit
 	10, // 5: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
-	6,  // [6:6] is the sub-list for method output_type
-	6,  // [6:6] is the sub-list for method input_type
+	0,  // 6: api.backoffice.service.v1.BackofficeWallet.GetWallets:input_type -> api.backoffice.service.v1.GetWalletsRequest
+	2,  // 7: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:input_type -> api.backoffice.service.v1.GetWalletCreditTransactionsRequest
+	4,  // 8: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:input_type -> api.backoffice.service.v1.UpdateWalletRequest
+	1,  // 9: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.backoffice.service.v1.GetWalletsResponse
+	3,  // 10: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:output_type -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse
+	5,  // 11: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
+	9,  // [9:12] is the sub-list for method output_type
+	6,  // [6:9] is the sub-list for method input_type
 	6,  // [6:6] is the sub-list for extension type_name
 	6,  // [6:6] is the sub-list for extension extendee
 	0,  // [0:6] is the sub-list for field type_name
@@ -814,7 +826,7 @@ func file_backoffice_service_v1_backoffice_wallet_proto_init() {
 			NumEnums:      0,
 			NumMessages:   10,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_backoffice_service_v1_backoffice_wallet_proto_goTypes,
 		DependencyIndexes: file_backoffice_service_v1_backoffice_wallet_proto_depIdxs,

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package api.websocket.service.v1;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/websocket/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.websocket.service.v1";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  UNSPECIFIED = 0;
+  USERID_NOT_FOUND = 80000;
+  USER_CONNECT_NOT_EXISTS = 80001;
+}

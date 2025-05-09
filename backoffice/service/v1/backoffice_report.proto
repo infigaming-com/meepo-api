@@ -2,11 +2,69 @@ syntax = "proto3";
 
 package api.backoffice.service.v1;
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
+
+service BackofficeReport {
+	rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/summary/get"
+            body: "*"
+        };
+    }
+    rpc ListDailySummaries(ListDailySummariesRequest) returns (ListDailySummariesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/daily-summaries/list"
+            body: "*"
+        };
+    }
+    rpc GetGameDataSummary(GetGameDataSummaryRequest) returns (GetGameDataSummaryResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/game-data-summary/get"
+            body: "*"
+        };
+    }
+    rpc ListGameDataDailySummaries(ListGameDataDailySummariesRequest) returns (ListGameDataDailySummariesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/game-data-daily-summaries/list"
+            body: "*"
+        };
+    }
+    rpc GetPlayerGameDataSummary(GetPlayerGameDataSummaryRequest) returns (GetPlayerGameDataSummaryResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/player-game-data-summary/get"
+            body: "*"
+        };
+    }
+    rpc ListDepositDailySummaries(ListDepositDailySummariesRequest) returns (ListDepositDailySummariesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/deposit-daily-summaries/list"
+            body: "*"
+        };
+    }
+    rpc ListDepositDailyDetails(ListDepositDailyDetailsRequest) returns (ListDepositDailyDetailsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/deposit-daily-details/list"
+            body: "*"
+        };
+    }
+    rpc ListWithdrawDailySummaries(ListWithdrawDailySummariesRequest) returns (ListWithdrawDailySummariesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/withdraw-daily-summaries/list"
+            body: "*"
+        };
+    }
+    rpc ListWithdrawDailyDetails(ListWithdrawDailyDetailsRequest) returns (ListWithdrawDailyDetailsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/report/withdraw-daily-details/list"
+            body: "*"
+        };
+    }
+}
 
 message GetSummaryRequest {
 	enum TimeRange {

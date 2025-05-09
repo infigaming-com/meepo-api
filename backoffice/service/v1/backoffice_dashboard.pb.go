@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1490,7 +1491,7 @@ var File_backoffice_service_v1_backoffice_dashboard_proto protoreflect.FileDescr
 
 const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"\n" +
-	"0backoffice/service/v1/backoffice_dashboard.proto\x12\x19api.backoffice.service.v1\"\x1d\n" +
+	"0backoffice/service/v1/backoffice_dashboard.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x1d\n" +
 	"\x1bGetOverviewDashboardRequest\"\xf3\f\n" +
 	"\x1cGetOverviewDashboardResponse\x12r\n" +
 	"\x10registered_users\x18\x01 \x01(\v2G.api.backoffice.service.v1.GetOverviewDashboardResponse.RegisteredUsersR\x0fregisteredUsers\x12y\n" +
@@ -1592,7 +1593,11 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"-top_deposit_minus_withdraw_retailer_operators\x18\t \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR(topDepositMinusWithdrawRetailerOperators\x1aB\n" +
 	"\fOperatorData\x12\x1a\n" +
 	"\boperator\x18\x01 \x01(\tR\boperator\x12\x16\n" +
-	"\x06amount\x18\x02 \x01(\x03R\x06amountB[\n" +
+	"\x06amount\x18\x02 \x01(\x03R\x06amount2\xda\x04\n" +
+	"\x13BackofficeDashboard\x12\xb0\x01\n" +
+	"\x14GetOverviewDashboard\x126.api.backoffice.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/dashboard/get\x12\xc2\x01\n" +
+	"\x16GetTimeRangedDashboard\x128.api.backoffice.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/dashboard/time-ranged/get\x12\xca\x01\n" +
+	"\x18GetTopOperatorsDashboard\x12:.api.backoffice.service.v1.GetTopOperatorsDashboardRequest\x1a;.api.backoffice.service.v1.GetTopOperatorsDashboardResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/dashboard/top-operators/getB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -1665,8 +1670,14 @@ var file_backoffice_service_v1_backoffice_dashboard_proto_depIdxs = []int32{
 	20, // 24: api.backoffice.service.v1.GetTimeRangedDashboardResponse.Data.game_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData
 	21, // 25: api.backoffice.service.v1.GetTimeRangedDashboardResponse.Data.payment_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData
 	22, // 26: api.backoffice.service.v1.GetTimeRangedDashboardResponse.Data.active_users_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
+	3,  // 27: api.backoffice.service.v1.BackofficeDashboard.GetOverviewDashboard:input_type -> api.backoffice.service.v1.GetOverviewDashboardRequest
+	5,  // 28: api.backoffice.service.v1.BackofficeDashboard.GetTimeRangedDashboard:input_type -> api.backoffice.service.v1.GetTimeRangedDashboardRequest
+	9,  // 29: api.backoffice.service.v1.BackofficeDashboard.GetTopOperatorsDashboard:input_type -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest
+	4,  // 30: api.backoffice.service.v1.BackofficeDashboard.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
+	6,  // 31: api.backoffice.service.v1.BackofficeDashboard.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
+	10, // 32: api.backoffice.service.v1.BackofficeDashboard.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
+	30, // [30:33] is the sub-list for method output_type
+	27, // [27:30] is the sub-list for method input_type
 	27, // [27:27] is the sub-list for extension type_name
 	27, // [27:27] is the sub-list for extension extendee
 	0,  // [0:27] is the sub-list for field type_name
@@ -1685,7 +1696,7 @@ func file_backoffice_service_v1_backoffice_dashboard_proto_init() {
 			NumEnums:      3,
 			NumMessages:   23,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_backoffice_service_v1_backoffice_dashboard_proto_goTypes,
 		DependencyIndexes: file_backoffice_service_v1_backoffice_dashboard_proto_depIdxs,

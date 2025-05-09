@@ -2,11 +2,45 @@ syntax = "proto3";
 
 package api.backoffice.service.v1;
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
+
+service BackofficeGame {
+	rpc ListBets(ListBetsRequest) returns (ListBetsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/bets/list"
+            body: "*"
+        };
+    }
+    rpc GetUserBetsOverview(GetUserBetsOverviewRequest) returns (GetUserBetsOverviewResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/bets/overview/get"
+            body: "*"
+        };
+    }
+    rpc GetGameTransactionsForBet(GetGameTransactionsForBetRequest) returns (GetGameTransactionsForBetResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/bets/transactions/get"
+            body: "*"
+        };
+    }
+    rpc ListUserBets(ListUserBetsRequest) returns (ListUserBetsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/bets/list"
+            body: "*"
+        };
+    }
+    rpc ListGames(ListGamesRequest) returns (ListGamesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/list"
+            body: "*"
+        };
+    }
+}
 
 message ListBetsRequest {
 	repeated int64 operator_ids = 1;
