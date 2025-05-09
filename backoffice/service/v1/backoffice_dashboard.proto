@@ -34,40 +34,40 @@ message GetOverviewDashboardRequest {}
 
 message GetOverviewDashboardResponse {
 	message RegisteredUsers {
-		int64 today = 1;
-		int64 yesterday = 2;
+		int32 today = 1;
+		int32 yesterday = 2;
 	}
 	message FirstDepositUsers {
-		int64 today = 1;
-		int64 yesterday = 2;
+		int32 today = 1;
+		int32 yesterday = 2;
 	}
 	message GGR {
-		int64 today = 1;
-		int64 yesterday = 2;
+		string today = 1;
+		string yesterday = 2;
 	}
 	message NGR {
-		int64 today = 1;
-		int64 yesterday = 2;
+		string today = 1;
+		string yesterday = 2;
 	}
 	message DepositAmount {
-		int64 today = 1;
-		int64 yesterday = 2;
+		string today = 1;
+		string yesterday = 2;
 	}
 	message WithdrawalAmount {
-		int64 today = 1;
-		int64 yesterday = 2;
+		string today = 1;
+		string yesterday = 2;
 	}
 	message DepositMinusWithdrawalAmount {
-		int64 today = 1;
-		int64 yesterday = 2;
+		string today = 1;
+		string yesterday = 2;
 	}
 	message ActiveUsers {
-		int64 today = 1;
-		int64 yesterday = 2;
+		int32 today = 1;
+		int32 yesterday = 2;
 	}
 	message ActiveDevices {
-		int64 today = 1;
-		int64 yesterday = 2;
+		int32 today = 1;
+		int32 yesterday = 2;
 	}
 	RegisteredUsers registered_users = 1;
 	FirstDepositUsers first_deposit_users = 2;
@@ -94,16 +94,16 @@ message GetTimeRangedDashboardRequest {
 
 message GetTimeRangedDashboardResponse {
 	message GameData {
-		int64 ggr = 1;
-		int64 ngr = 2;
-		int64 deposit = 3;
+		string ggr = 1;
+		string ngr = 2;
+		string deposit = 3;
 	}
 	message PaymentData {
-		int64 withdrawal = 1;
-		int64 deposit_minus_withdrawal = 2;
+		string withdrawal = 1;
+		string deposit_minus_withdrawal = 2;
 	}
 	message ActiveUsersData {
-		int64 active_users = 1;
+		int32 active_users = 1;
 	}
 	message Data {
 		GameData game_data = 1;
@@ -128,8 +128,8 @@ message GetTopPaymentUsersDashboardResponse {
 		string user_id = 1;
 		string avatar = 2;
 		string country = 3;
-		int64 vip_level = 4;
-		double amount = 5;
+		int32 vip_level = 4;
+		string amount = 5;
 		string operator = 6;
 	}
 	repeated User top_deposit_users = 1;
@@ -149,7 +149,7 @@ message GetTopOperatorsDashboardRequest {
 message GetTopOperatorsDashboardResponse {
 	message OperatorData {
 		string operator = 1;
-		int64 amount = 2;
+		string amount = 2;
 	}
 	repeated OperatorData top_ggr_operators = 1;
 	repeated OperatorData top_ngr_operators = 2;
