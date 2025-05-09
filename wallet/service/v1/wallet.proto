@@ -10,7 +10,6 @@ option java_multiple_files = true;
 option java_package = "api.wallet.service.v1";
 
 service Wallet {
-	rpc Event (EventRequest) returns (EventResponse) {}
 	rpc AddUser (AddUserRequest) returns (AddUserResponse) {}
 
 	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {}
@@ -52,13 +51,6 @@ service Wallet {
 
 	rpc GetWalletCreditTransactions (GetWalletCreditTransactionsRequest) returns (GetWalletCreditTransactionsResponse) {}
 }
-
-message EventRequest {
-	string topic = 1;
-	bytes event_data = 2;
-}
-
-message EventResponse {}
 
 message AddUserRequest {
 	int64 user_id = 1;

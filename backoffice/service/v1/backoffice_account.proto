@@ -8,7 +8,7 @@ option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
-service Backoffice_Account {
+service BackofficeAccount {
 	rpc AddAccount(AddAccountRequest) returns (AddAccountResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/accounts/add"

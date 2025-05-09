@@ -19,101 +19,101 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Backoffice_Payment_ListPaymentTransactions_FullMethodName = "/api.backoffice.service.v1.Backoffice_Payment/ListPaymentTransactions"
+	BackofficePayment_ListPaymentTransactions_FullMethodName = "/api.backoffice.service.v1.BackofficePayment/ListPaymentTransactions"
 )
 
-// Backoffice_PaymentClient is the client API for Backoffice_Payment service.
+// BackofficePaymentClient is the client API for BackofficePayment service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type Backoffice_PaymentClient interface {
+type BackofficePaymentClient interface {
 	ListPaymentTransactions(ctx context.Context, in *ListPaymentTransactionsRequest, opts ...grpc.CallOption) (*ListPaymentTransactionsResponse, error)
 }
 
-type backoffice_PaymentClient struct {
+type backofficePaymentClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBackoffice_PaymentClient(cc grpc.ClientConnInterface) Backoffice_PaymentClient {
-	return &backoffice_PaymentClient{cc}
+func NewBackofficePaymentClient(cc grpc.ClientConnInterface) BackofficePaymentClient {
+	return &backofficePaymentClient{cc}
 }
 
-func (c *backoffice_PaymentClient) ListPaymentTransactions(ctx context.Context, in *ListPaymentTransactionsRequest, opts ...grpc.CallOption) (*ListPaymentTransactionsResponse, error) {
+func (c *backofficePaymentClient) ListPaymentTransactions(ctx context.Context, in *ListPaymentTransactionsRequest, opts ...grpc.CallOption) (*ListPaymentTransactionsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListPaymentTransactionsResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Payment_ListPaymentTransactions_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficePayment_ListPaymentTransactions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// Backoffice_PaymentServer is the server API for Backoffice_Payment service.
-// All implementations must embed UnimplementedBackoffice_PaymentServer
+// BackofficePaymentServer is the server API for BackofficePayment service.
+// All implementations must embed UnimplementedBackofficePaymentServer
 // for forward compatibility.
-type Backoffice_PaymentServer interface {
+type BackofficePaymentServer interface {
 	ListPaymentTransactions(context.Context, *ListPaymentTransactionsRequest) (*ListPaymentTransactionsResponse, error)
-	mustEmbedUnimplementedBackoffice_PaymentServer()
+	mustEmbedUnimplementedBackofficePaymentServer()
 }
 
-// UnimplementedBackoffice_PaymentServer must be embedded to have
+// UnimplementedBackofficePaymentServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBackoffice_PaymentServer struct{}
+type UnimplementedBackofficePaymentServer struct{}
 
-func (UnimplementedBackoffice_PaymentServer) ListPaymentTransactions(context.Context, *ListPaymentTransactionsRequest) (*ListPaymentTransactionsResponse, error) {
+func (UnimplementedBackofficePaymentServer) ListPaymentTransactions(context.Context, *ListPaymentTransactionsRequest) (*ListPaymentTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPaymentTransactions not implemented")
 }
-func (UnimplementedBackoffice_PaymentServer) mustEmbedUnimplementedBackoffice_PaymentServer() {}
-func (UnimplementedBackoffice_PaymentServer) testEmbeddedByValue()                            {}
+func (UnimplementedBackofficePaymentServer) mustEmbedUnimplementedBackofficePaymentServer() {}
+func (UnimplementedBackofficePaymentServer) testEmbeddedByValue()                           {}
 
-// UnsafeBackoffice_PaymentServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to Backoffice_PaymentServer will
+// UnsafeBackofficePaymentServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BackofficePaymentServer will
 // result in compilation errors.
-type UnsafeBackoffice_PaymentServer interface {
-	mustEmbedUnimplementedBackoffice_PaymentServer()
+type UnsafeBackofficePaymentServer interface {
+	mustEmbedUnimplementedBackofficePaymentServer()
 }
 
-func RegisterBackoffice_PaymentServer(s grpc.ServiceRegistrar, srv Backoffice_PaymentServer) {
-	// If the following call pancis, it indicates UnimplementedBackoffice_PaymentServer was
+func RegisterBackofficePaymentServer(s grpc.ServiceRegistrar, srv BackofficePaymentServer) {
+	// If the following call pancis, it indicates UnimplementedBackofficePaymentServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Backoffice_Payment_ServiceDesc, srv)
+	s.RegisterService(&BackofficePayment_ServiceDesc, srv)
 }
 
-func _Backoffice_Payment_ListPaymentTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficePayment_ListPaymentTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListPaymentTransactionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_PaymentServer).ListPaymentTransactions(ctx, in)
+		return srv.(BackofficePaymentServer).ListPaymentTransactions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Payment_ListPaymentTransactions_FullMethodName,
+		FullMethod: BackofficePayment_ListPaymentTransactions_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_PaymentServer).ListPaymentTransactions(ctx, req.(*ListPaymentTransactionsRequest))
+		return srv.(BackofficePaymentServer).ListPaymentTransactions(ctx, req.(*ListPaymentTransactionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Backoffice_Payment_ServiceDesc is the grpc.ServiceDesc for Backoffice_Payment service.
+// BackofficePayment_ServiceDesc is the grpc.ServiceDesc for BackofficePayment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Backoffice_Payment_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.backoffice.service.v1.Backoffice_Payment",
-	HandlerType: (*Backoffice_PaymentServer)(nil),
+var BackofficePayment_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.backoffice.service.v1.BackofficePayment",
+	HandlerType: (*BackofficePaymentServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ListPaymentTransactions",
-			Handler:    _Backoffice_Payment_ListPaymentTransactions_Handler,
+			Handler:    _BackofficePayment_ListPaymentTransactions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

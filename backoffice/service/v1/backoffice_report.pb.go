@@ -3981,8 +3981,8 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"3average_ftw_amount_for_non_same_day_registred_users\x18\x0f \x01(\x03R+averageFtwAmountForNonSameDayRegistredUsers\x12-\n" +
 	"\x12success_percentage\x18\x10 \x01(\x05R\x11successPercentage\x12A\n" +
 	"\x1ddeposit_minus_withdraw_amount\x18\x11 \x01(\x03R\x1adepositMinusWithdrawAmount\x12@\n" +
-	"\x1camount_proportion_percentage\x18\x12 \x01(\x05R\x1aamountProportionPercentage2\xae\x0e\n" +
-	"\x11Backoffice_Report\x12\x97\x01\n" +
+	"\x1camount_proportion_percentage\x18\x12 \x01(\x05R\x1aamountProportionPercentage2\xad\x0e\n" +
+	"\x10BackofficeReport\x12\x97\x01\n" +
 	"\n" +
 	"GetSummary\x12,.api.backoffice.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/report/summary/get\x12\xb8\x01\n" +
 	"\x12ListDailySummaries\x124.api.backoffice.service.v1.ListDailySummariesRequest\x1a5.api.backoffice.service.v1.ListDailySummariesResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/report/daily-summaries/list\x12\xb9\x01\n" +
@@ -4094,24 +4094,24 @@ var file_backoffice_service_v1_backoffice_report_proto_depIdxs = []int32{
 	37, // 41: api.backoffice.service.v1.ListDepositDailyDetailsResponse.DailyDetail.date:type_name -> google.protobuf.Timestamp
 	37, // 42: api.backoffice.service.v1.ListWithdrawDailySummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
 	37, // 43: api.backoffice.service.v1.ListWithdrawDailyDetailsResponse.DailyDetail.date:type_name -> google.protobuf.Timestamp
-	10, // 44: api.backoffice.service.v1.Backoffice_Report.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
-	12, // 45: api.backoffice.service.v1.Backoffice_Report.ListDailySummaries:input_type -> api.backoffice.service.v1.ListDailySummariesRequest
-	14, // 46: api.backoffice.service.v1.Backoffice_Report.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameDataSummaryRequest
-	16, // 47: api.backoffice.service.v1.Backoffice_Report.ListGameDataDailySummaries:input_type -> api.backoffice.service.v1.ListGameDataDailySummariesRequest
-	18, // 48: api.backoffice.service.v1.Backoffice_Report.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameDataSummaryRequest
-	22, // 49: api.backoffice.service.v1.Backoffice_Report.ListDepositDailySummaries:input_type -> api.backoffice.service.v1.ListDepositDailySummariesRequest
-	24, // 50: api.backoffice.service.v1.Backoffice_Report.ListDepositDailyDetails:input_type -> api.backoffice.service.v1.ListDepositDailyDetailsRequest
-	26, // 51: api.backoffice.service.v1.Backoffice_Report.ListWithdrawDailySummaries:input_type -> api.backoffice.service.v1.ListWithdrawDailySummariesRequest
-	28, // 52: api.backoffice.service.v1.Backoffice_Report.ListWithdrawDailyDetails:input_type -> api.backoffice.service.v1.ListWithdrawDailyDetailsRequest
-	11, // 53: api.backoffice.service.v1.Backoffice_Report.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	13, // 54: api.backoffice.service.v1.Backoffice_Report.ListDailySummaries:output_type -> api.backoffice.service.v1.ListDailySummariesResponse
-	15, // 55: api.backoffice.service.v1.Backoffice_Report.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameDataSummaryResponse
-	17, // 56: api.backoffice.service.v1.Backoffice_Report.ListGameDataDailySummaries:output_type -> api.backoffice.service.v1.ListGameDataDailySummariesResponse
-	19, // 57: api.backoffice.service.v1.Backoffice_Report.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameDataSummaryResponse
-	23, // 58: api.backoffice.service.v1.Backoffice_Report.ListDepositDailySummaries:output_type -> api.backoffice.service.v1.ListDepositDailySummariesResponse
-	25, // 59: api.backoffice.service.v1.Backoffice_Report.ListDepositDailyDetails:output_type -> api.backoffice.service.v1.ListDepositDailyDetailsResponse
-	27, // 60: api.backoffice.service.v1.Backoffice_Report.ListWithdrawDailySummaries:output_type -> api.backoffice.service.v1.ListWithdrawDailySummariesResponse
-	29, // 61: api.backoffice.service.v1.Backoffice_Report.ListWithdrawDailyDetails:output_type -> api.backoffice.service.v1.ListWithdrawDailyDetailsResponse
+	10, // 44: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
+	12, // 45: api.backoffice.service.v1.BackofficeReport.ListDailySummaries:input_type -> api.backoffice.service.v1.ListDailySummariesRequest
+	14, // 46: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameDataSummaryRequest
+	16, // 47: api.backoffice.service.v1.BackofficeReport.ListGameDataDailySummaries:input_type -> api.backoffice.service.v1.ListGameDataDailySummariesRequest
+	18, // 48: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameDataSummaryRequest
+	22, // 49: api.backoffice.service.v1.BackofficeReport.ListDepositDailySummaries:input_type -> api.backoffice.service.v1.ListDepositDailySummariesRequest
+	24, // 50: api.backoffice.service.v1.BackofficeReport.ListDepositDailyDetails:input_type -> api.backoffice.service.v1.ListDepositDailyDetailsRequest
+	26, // 51: api.backoffice.service.v1.BackofficeReport.ListWithdrawDailySummaries:input_type -> api.backoffice.service.v1.ListWithdrawDailySummariesRequest
+	28, // 52: api.backoffice.service.v1.BackofficeReport.ListWithdrawDailyDetails:input_type -> api.backoffice.service.v1.ListWithdrawDailyDetailsRequest
+	11, // 53: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	13, // 54: api.backoffice.service.v1.BackofficeReport.ListDailySummaries:output_type -> api.backoffice.service.v1.ListDailySummariesResponse
+	15, // 55: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameDataSummaryResponse
+	17, // 56: api.backoffice.service.v1.BackofficeReport.ListGameDataDailySummaries:output_type -> api.backoffice.service.v1.ListGameDataDailySummariesResponse
+	19, // 57: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameDataSummaryResponse
+	23, // 58: api.backoffice.service.v1.BackofficeReport.ListDepositDailySummaries:output_type -> api.backoffice.service.v1.ListDepositDailySummariesResponse
+	25, // 59: api.backoffice.service.v1.BackofficeReport.ListDepositDailyDetails:output_type -> api.backoffice.service.v1.ListDepositDailyDetailsResponse
+	27, // 60: api.backoffice.service.v1.BackofficeReport.ListWithdrawDailySummaries:output_type -> api.backoffice.service.v1.ListWithdrawDailySummariesResponse
+	29, // 61: api.backoffice.service.v1.BackofficeReport.ListWithdrawDailyDetails:output_type -> api.backoffice.service.v1.ListWithdrawDailyDetailsResponse
 	53, // [53:62] is the sub-list for method output_type
 	44, // [44:53] is the sub-list for method input_type
 	44, // [44:44] is the sub-list for extension type_name

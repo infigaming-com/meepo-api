@@ -19,177 +19,177 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Backoffice_Wallet_GetWallets_FullMethodName                  = "/api.backoffice.service.v1.Backoffice_Wallet/GetWallets"
-	Backoffice_Wallet_GetWalletCreditTransactions_FullMethodName = "/api.backoffice.service.v1.Backoffice_Wallet/GetWalletCreditTransactions"
-	Backoffice_Wallet_UpdateWallet_FullMethodName                = "/api.backoffice.service.v1.Backoffice_Wallet/UpdateWallet"
+	BackofficeWallet_GetWallets_FullMethodName                  = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
+	BackofficeWallet_GetWalletCreditTransactions_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
+	BackofficeWallet_UpdateWallet_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/UpdateWallet"
 )
 
-// Backoffice_WalletClient is the client API for Backoffice_Wallet service.
+// BackofficeWalletClient is the client API for BackofficeWallet service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type Backoffice_WalletClient interface {
+type BackofficeWalletClient interface {
 	GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...grpc.CallOption) (*GetWalletsResponse, error)
 	GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...grpc.CallOption) (*GetWalletCreditTransactionsResponse, error)
 	UpdateWallet(ctx context.Context, in *UpdateWalletRequest, opts ...grpc.CallOption) (*UpdateWalletResponse, error)
 }
 
-type backoffice_WalletClient struct {
+type backofficeWalletClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBackoffice_WalletClient(cc grpc.ClientConnInterface) Backoffice_WalletClient {
-	return &backoffice_WalletClient{cc}
+func NewBackofficeWalletClient(cc grpc.ClientConnInterface) BackofficeWalletClient {
+	return &backofficeWalletClient{cc}
 }
 
-func (c *backoffice_WalletClient) GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...grpc.CallOption) (*GetWalletsResponse, error) {
+func (c *backofficeWalletClient) GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...grpc.CallOption) (*GetWalletsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetWalletsResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Wallet_GetWallets_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GetWallets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_WalletClient) GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...grpc.CallOption) (*GetWalletCreditTransactionsResponse, error) {
+func (c *backofficeWalletClient) GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...grpc.CallOption) (*GetWalletCreditTransactionsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetWalletCreditTransactionsResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Wallet_GetWalletCreditTransactions_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GetWalletCreditTransactions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_WalletClient) UpdateWallet(ctx context.Context, in *UpdateWalletRequest, opts ...grpc.CallOption) (*UpdateWalletResponse, error) {
+func (c *backofficeWalletClient) UpdateWallet(ctx context.Context, in *UpdateWalletRequest, opts ...grpc.CallOption) (*UpdateWalletResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateWalletResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Wallet_UpdateWallet_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeWallet_UpdateWallet_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// Backoffice_WalletServer is the server API for Backoffice_Wallet service.
-// All implementations must embed UnimplementedBackoffice_WalletServer
+// BackofficeWalletServer is the server API for BackofficeWallet service.
+// All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
-type Backoffice_WalletServer interface {
+type BackofficeWalletServer interface {
 	GetWallets(context.Context, *GetWalletsRequest) (*GetWalletsResponse, error)
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
 	UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error)
-	mustEmbedUnimplementedBackoffice_WalletServer()
+	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
-// UnimplementedBackoffice_WalletServer must be embedded to have
+// UnimplementedBackofficeWalletServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBackoffice_WalletServer struct{}
+type UnimplementedBackofficeWalletServer struct{}
 
-func (UnimplementedBackoffice_WalletServer) GetWallets(context.Context, *GetWalletsRequest) (*GetWalletsResponse, error) {
+func (UnimplementedBackofficeWalletServer) GetWallets(context.Context, *GetWalletsRequest) (*GetWalletsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWallets not implemented")
 }
-func (UnimplementedBackoffice_WalletServer) GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error) {
+func (UnimplementedBackofficeWalletServer) GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWalletCreditTransactions not implemented")
 }
-func (UnimplementedBackoffice_WalletServer) UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error) {
+func (UnimplementedBackofficeWalletServer) UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateWallet not implemented")
 }
-func (UnimplementedBackoffice_WalletServer) mustEmbedUnimplementedBackoffice_WalletServer() {}
-func (UnimplementedBackoffice_WalletServer) testEmbeddedByValue()                           {}
+func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
+func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
 
-// UnsafeBackoffice_WalletServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to Backoffice_WalletServer will
+// UnsafeBackofficeWalletServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BackofficeWalletServer will
 // result in compilation errors.
-type UnsafeBackoffice_WalletServer interface {
-	mustEmbedUnimplementedBackoffice_WalletServer()
+type UnsafeBackofficeWalletServer interface {
+	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
-func RegisterBackoffice_WalletServer(s grpc.ServiceRegistrar, srv Backoffice_WalletServer) {
-	// If the following call pancis, it indicates UnimplementedBackoffice_WalletServer was
+func RegisterBackofficeWalletServer(s grpc.ServiceRegistrar, srv BackofficeWalletServer) {
+	// If the following call pancis, it indicates UnimplementedBackofficeWalletServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Backoffice_Wallet_ServiceDesc, srv)
+	s.RegisterService(&BackofficeWallet_ServiceDesc, srv)
 }
 
-func _Backoffice_Wallet_GetWallets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeWallet_GetWallets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetWalletsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_WalletServer).GetWallets(ctx, in)
+		return srv.(BackofficeWalletServer).GetWallets(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Wallet_GetWallets_FullMethodName,
+		FullMethod: BackofficeWallet_GetWallets_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_WalletServer).GetWallets(ctx, req.(*GetWalletsRequest))
+		return srv.(BackofficeWalletServer).GetWallets(ctx, req.(*GetWalletsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Wallet_GetWalletCreditTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeWallet_GetWalletCreditTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetWalletCreditTransactionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_WalletServer).GetWalletCreditTransactions(ctx, in)
+		return srv.(BackofficeWalletServer).GetWalletCreditTransactions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Wallet_GetWalletCreditTransactions_FullMethodName,
+		FullMethod: BackofficeWallet_GetWalletCreditTransactions_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_WalletServer).GetWalletCreditTransactions(ctx, req.(*GetWalletCreditTransactionsRequest))
+		return srv.(BackofficeWalletServer).GetWalletCreditTransactions(ctx, req.(*GetWalletCreditTransactionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Wallet_UpdateWallet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeWallet_UpdateWallet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateWalletRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_WalletServer).UpdateWallet(ctx, in)
+		return srv.(BackofficeWalletServer).UpdateWallet(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Wallet_UpdateWallet_FullMethodName,
+		FullMethod: BackofficeWallet_UpdateWallet_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_WalletServer).UpdateWallet(ctx, req.(*UpdateWalletRequest))
+		return srv.(BackofficeWalletServer).UpdateWallet(ctx, req.(*UpdateWalletRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Backoffice_Wallet_ServiceDesc is the grpc.ServiceDesc for Backoffice_Wallet service.
+// BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Backoffice_Wallet_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.backoffice.service.v1.Backoffice_Wallet",
-	HandlerType: (*Backoffice_WalletServer)(nil),
+var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.backoffice.service.v1.BackofficeWallet",
+	HandlerType: (*BackofficeWalletServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetWallets",
-			Handler:    _Backoffice_Wallet_GetWallets_Handler,
+			Handler:    _BackofficeWallet_GetWallets_Handler,
 		},
 		{
 			MethodName: "GetWalletCreditTransactions",
-			Handler:    _Backoffice_Wallet_GetWalletCreditTransactions_Handler,
+			Handler:    _BackofficeWallet_GetWalletCreditTransactions_Handler,
 		},
 		{
 			MethodName: "UpdateWallet",
-			Handler:    _Backoffice_Wallet_UpdateWallet_Handler,
+			Handler:    _BackofficeWallet_UpdateWallet_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

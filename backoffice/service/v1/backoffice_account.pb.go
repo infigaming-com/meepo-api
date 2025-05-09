@@ -896,8 +896,8 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\n" +
 	"\b_enabledB\a\n" +
 	"\x05_role\"\x17\n" +
-	"\x15UpdateAccountResponse2\x92\r\n" +
-	"\x12Backoffice_Account\x12\x91\x01\n" +
+	"\x15UpdateAccountResponse2\x91\r\n" +
+	"\x11BackofficeAccount\x12\x91\x01\n" +
 	"\n" +
 	"AddAccount\x12,.api.backoffice.service.v1.AddAccountRequest\x1a-.api.backoffice.service.v1.AddAccountResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/backoffice/accounts/add\x12\xc6\x01\n" +
 	"\x15SendEmailVerification\x127.api.backoffice.service.v1.SendEmailVerificationRequest\x1a8.api.backoffice.service.v1.SendEmailVerificationResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/accounts/email/verification/send\x12\x9d\x01\n" +
@@ -947,26 +947,26 @@ var file_backoffice_service_v1_backoffice_account_proto_goTypes = []any{
 	(*UpdateAccountResponse)(nil),          // 19: api.backoffice.service.v1.UpdateAccountResponse
 }
 var file_backoffice_service_v1_backoffice_account_proto_depIdxs = []int32{
-	0,  // 0: api.backoffice.service.v1.Backoffice_Account.AddAccount:input_type -> api.backoffice.service.v1.AddAccountRequest
-	2,  // 1: api.backoffice.service.v1.Backoffice_Account.SendEmailVerification:input_type -> api.backoffice.service.v1.SendEmailVerificationRequest
-	4,  // 2: api.backoffice.service.v1.Backoffice_Account.VerifyEmail:input_type -> api.backoffice.service.v1.VerifyEmailRequest
-	6,  // 3: api.backoffice.service.v1.Backoffice_Account.SendMobileVerification:input_type -> api.backoffice.service.v1.SendMobileVerificationRequest
-	8,  // 4: api.backoffice.service.v1.Backoffice_Account.VerifyMobile:input_type -> api.backoffice.service.v1.VerifyMobileRequest
-	10, // 5: api.backoffice.service.v1.Backoffice_Account.ResetPassword:input_type -> api.backoffice.service.v1.ResetPasswordRequest
-	12, // 6: api.backoffice.service.v1.Backoffice_Account.Generate2fa:input_type -> api.backoffice.service.v1.Generate2faRequest
-	14, // 7: api.backoffice.service.v1.Backoffice_Account.Bind2fa:input_type -> api.backoffice.service.v1.Bind2faRequest
-	16, // 8: api.backoffice.service.v1.Backoffice_Account.Unbind2fa:input_type -> api.backoffice.service.v1.Unbind2faRequest
-	18, // 9: api.backoffice.service.v1.Backoffice_Account.UpdateAccount:input_type -> api.backoffice.service.v1.UpdateAccountRequest
-	1,  // 10: api.backoffice.service.v1.Backoffice_Account.AddAccount:output_type -> api.backoffice.service.v1.AddAccountResponse
-	3,  // 11: api.backoffice.service.v1.Backoffice_Account.SendEmailVerification:output_type -> api.backoffice.service.v1.SendEmailVerificationResponse
-	5,  // 12: api.backoffice.service.v1.Backoffice_Account.VerifyEmail:output_type -> api.backoffice.service.v1.VerifyEmailResponse
-	7,  // 13: api.backoffice.service.v1.Backoffice_Account.SendMobileVerification:output_type -> api.backoffice.service.v1.SendMobileVerificationResponse
-	9,  // 14: api.backoffice.service.v1.Backoffice_Account.VerifyMobile:output_type -> api.backoffice.service.v1.VerifyMobileResponse
-	11, // 15: api.backoffice.service.v1.Backoffice_Account.ResetPassword:output_type -> api.backoffice.service.v1.ResetPasswordResponse
-	13, // 16: api.backoffice.service.v1.Backoffice_Account.Generate2fa:output_type -> api.backoffice.service.v1.Generate2faResponse
-	15, // 17: api.backoffice.service.v1.Backoffice_Account.Bind2fa:output_type -> api.backoffice.service.v1.Bind2faResponse
-	17, // 18: api.backoffice.service.v1.Backoffice_Account.Unbind2fa:output_type -> api.backoffice.service.v1.Unbind2faResponse
-	19, // 19: api.backoffice.service.v1.Backoffice_Account.UpdateAccount:output_type -> api.backoffice.service.v1.UpdateAccountResponse
+	0,  // 0: api.backoffice.service.v1.BackofficeAccount.AddAccount:input_type -> api.backoffice.service.v1.AddAccountRequest
+	2,  // 1: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:input_type -> api.backoffice.service.v1.SendEmailVerificationRequest
+	4,  // 2: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:input_type -> api.backoffice.service.v1.VerifyEmailRequest
+	6,  // 3: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:input_type -> api.backoffice.service.v1.SendMobileVerificationRequest
+	8,  // 4: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:input_type -> api.backoffice.service.v1.VerifyMobileRequest
+	10, // 5: api.backoffice.service.v1.BackofficeAccount.ResetPassword:input_type -> api.backoffice.service.v1.ResetPasswordRequest
+	12, // 6: api.backoffice.service.v1.BackofficeAccount.Generate2fa:input_type -> api.backoffice.service.v1.Generate2faRequest
+	14, // 7: api.backoffice.service.v1.BackofficeAccount.Bind2fa:input_type -> api.backoffice.service.v1.Bind2faRequest
+	16, // 8: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:input_type -> api.backoffice.service.v1.Unbind2faRequest
+	18, // 9: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:input_type -> api.backoffice.service.v1.UpdateAccountRequest
+	1,  // 10: api.backoffice.service.v1.BackofficeAccount.AddAccount:output_type -> api.backoffice.service.v1.AddAccountResponse
+	3,  // 11: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:output_type -> api.backoffice.service.v1.SendEmailVerificationResponse
+	5,  // 12: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:output_type -> api.backoffice.service.v1.VerifyEmailResponse
+	7,  // 13: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:output_type -> api.backoffice.service.v1.SendMobileVerificationResponse
+	9,  // 14: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:output_type -> api.backoffice.service.v1.VerifyMobileResponse
+	11, // 15: api.backoffice.service.v1.BackofficeAccount.ResetPassword:output_type -> api.backoffice.service.v1.ResetPasswordResponse
+	13, // 16: api.backoffice.service.v1.BackofficeAccount.Generate2fa:output_type -> api.backoffice.service.v1.Generate2faResponse
+	15, // 17: api.backoffice.service.v1.BackofficeAccount.Bind2fa:output_type -> api.backoffice.service.v1.Bind2faResponse
+	17, // 18: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:output_type -> api.backoffice.service.v1.Unbind2faResponse
+	19, // 19: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:output_type -> api.backoffice.service.v1.UpdateAccountResponse
 	10, // [10:20] is the sub-list for method output_type
 	0,  // [0:10] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name

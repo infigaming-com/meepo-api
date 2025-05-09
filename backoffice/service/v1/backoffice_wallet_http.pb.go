@@ -19,24 +19,24 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackoffice_WalletGetWalletCreditTransactions = "/api.backoffice.service.v1.Backoffice_Wallet/GetWalletCreditTransactions"
-const OperationBackoffice_WalletGetWallets = "/api.backoffice.service.v1.Backoffice_Wallet/GetWallets"
-const OperationBackoffice_WalletUpdateWallet = "/api.backoffice.service.v1.Backoffice_Wallet/UpdateWallet"
+const OperationBackofficeWalletGetWalletCreditTransactions = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
+const OperationBackofficeWalletGetWallets = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
+const OperationBackofficeWalletUpdateWallet = "/api.backoffice.service.v1.BackofficeWallet/UpdateWallet"
 
-type Backoffice_WalletHTTPServer interface {
+type BackofficeWalletHTTPServer interface {
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
 	GetWallets(context.Context, *GetWalletsRequest) (*GetWalletsResponse, error)
 	UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error)
 }
 
-func RegisterBackoffice_WalletHTTPServer(s *http.Server, srv Backoffice_WalletHTTPServer) {
+func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/wallet/get", _Backoffice_Wallet_GetWallets0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/credit-transactions/get", _Backoffice_Wallet_GetWalletCreditTransactions0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/update", _Backoffice_Wallet_UpdateWallet0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/get", _BackofficeWallet_GetWallets0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/credit-transactions/get", _BackofficeWallet_GetWalletCreditTransactions0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/update", _BackofficeWallet_UpdateWallet0_HTTP_Handler(srv))
 }
 
-func _Backoffice_Wallet_GetWallets0_HTTP_Handler(srv Backoffice_WalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetWalletsRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -45,7 +45,7 @@ func _Backoffice_Wallet_GetWallets0_HTTP_Handler(srv Backoffice_WalletHTTPServer
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_WalletGetWallets)
+		http.SetOperation(ctx, OperationBackofficeWalletGetWallets)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetWallets(ctx, req.(*GetWalletsRequest))
 		})
@@ -58,7 +58,7 @@ func _Backoffice_Wallet_GetWallets0_HTTP_Handler(srv Backoffice_WalletHTTPServer
 	}
 }
 
-func _Backoffice_Wallet_GetWalletCreditTransactions0_HTTP_Handler(srv Backoffice_WalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_GetWalletCreditTransactions0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetWalletCreditTransactionsRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -67,7 +67,7 @@ func _Backoffice_Wallet_GetWalletCreditTransactions0_HTTP_Handler(srv Backoffice
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_WalletGetWalletCreditTransactions)
+		http.SetOperation(ctx, OperationBackofficeWalletGetWalletCreditTransactions)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetWalletCreditTransactions(ctx, req.(*GetWalletCreditTransactionsRequest))
 		})
@@ -80,7 +80,7 @@ func _Backoffice_Wallet_GetWalletCreditTransactions0_HTTP_Handler(srv Backoffice
 	}
 }
 
-func _Backoffice_Wallet_UpdateWallet0_HTTP_Handler(srv Backoffice_WalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_UpdateWallet0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateWalletRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -89,7 +89,7 @@ func _Backoffice_Wallet_UpdateWallet0_HTTP_Handler(srv Backoffice_WalletHTTPServ
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackoffice_WalletUpdateWallet)
+		http.SetOperation(ctx, OperationBackofficeWalletUpdateWallet)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateWallet(ctx, req.(*UpdateWalletRequest))
 		})
@@ -102,25 +102,25 @@ func _Backoffice_Wallet_UpdateWallet0_HTTP_Handler(srv Backoffice_WalletHTTPServ
 	}
 }
 
-type Backoffice_WalletHTTPClient interface {
+type BackofficeWalletHTTPClient interface {
 	GetWalletCreditTransactions(ctx context.Context, req *GetWalletCreditTransactionsRequest, opts ...http.CallOption) (rsp *GetWalletCreditTransactionsResponse, err error)
 	GetWallets(ctx context.Context, req *GetWalletsRequest, opts ...http.CallOption) (rsp *GetWalletsResponse, err error)
 	UpdateWallet(ctx context.Context, req *UpdateWalletRequest, opts ...http.CallOption) (rsp *UpdateWalletResponse, err error)
 }
 
-type Backoffice_WalletHTTPClientImpl struct {
+type BackofficeWalletHTTPClientImpl struct {
 	cc *http.Client
 }
 
-func NewBackoffice_WalletHTTPClient(client *http.Client) Backoffice_WalletHTTPClient {
-	return &Backoffice_WalletHTTPClientImpl{client}
+func NewBackofficeWalletHTTPClient(client *http.Client) BackofficeWalletHTTPClient {
+	return &BackofficeWalletHTTPClientImpl{client}
 }
 
-func (c *Backoffice_WalletHTTPClientImpl) GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...http.CallOption) (*GetWalletCreditTransactionsResponse, error) {
+func (c *BackofficeWalletHTTPClientImpl) GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...http.CallOption) (*GetWalletCreditTransactionsResponse, error) {
 	var out GetWalletCreditTransactionsResponse
 	pattern := "/v1/backoffice/wallet/credit-transactions/get"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_WalletGetWalletCreditTransactions))
+	opts = append(opts, http.Operation(OperationBackofficeWalletGetWalletCreditTransactions))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -129,11 +129,11 @@ func (c *Backoffice_WalletHTTPClientImpl) GetWalletCreditTransactions(ctx contex
 	return &out, nil
 }
 
-func (c *Backoffice_WalletHTTPClientImpl) GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...http.CallOption) (*GetWalletsResponse, error) {
+func (c *BackofficeWalletHTTPClientImpl) GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...http.CallOption) (*GetWalletsResponse, error) {
 	var out GetWalletsResponse
 	pattern := "/v1/backoffice/wallet/get"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_WalletGetWallets))
+	opts = append(opts, http.Operation(OperationBackofficeWalletGetWallets))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -142,11 +142,11 @@ func (c *Backoffice_WalletHTTPClientImpl) GetWallets(ctx context.Context, in *Ge
 	return &out, nil
 }
 
-func (c *Backoffice_WalletHTTPClientImpl) UpdateWallet(ctx context.Context, in *UpdateWalletRequest, opts ...http.CallOption) (*UpdateWalletResponse, error) {
+func (c *BackofficeWalletHTTPClientImpl) UpdateWallet(ctx context.Context, in *UpdateWalletRequest, opts ...http.CallOption) (*UpdateWalletResponse, error) {
 	var out UpdateWalletResponse
 	pattern := "/v1/backoffice/wallet/update"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackoffice_WalletUpdateWallet))
+	opts = append(opts, http.Operation(OperationBackofficeWalletUpdateWallet))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

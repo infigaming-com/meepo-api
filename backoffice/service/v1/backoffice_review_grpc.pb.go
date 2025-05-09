@@ -19,139 +19,139 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Backoffice_Review_ListWithdrawReviewTickets_FullMethodName = "/api.backoffice.service.v1.Backoffice_Review/ListWithdrawReviewTickets"
-	Backoffice_Review_ReviewTicket_FullMethodName              = "/api.backoffice.service.v1.Backoffice_Review/ReviewTicket"
+	BackofficeReview_ListWithdrawReviewTickets_FullMethodName = "/api.backoffice.service.v1.BackofficeReview/ListWithdrawReviewTickets"
+	BackofficeReview_ReviewTicket_FullMethodName              = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
 )
 
-// Backoffice_ReviewClient is the client API for Backoffice_Review service.
+// BackofficeReviewClient is the client API for BackofficeReview service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type Backoffice_ReviewClient interface {
+type BackofficeReviewClient interface {
 	ListWithdrawReviewTickets(ctx context.Context, in *ListWithdrawReviewTicketsRequest, opts ...grpc.CallOption) (*ListWithdrawReviewTicketsResponse, error)
 	ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error)
 }
 
-type backoffice_ReviewClient struct {
+type backofficeReviewClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBackoffice_ReviewClient(cc grpc.ClientConnInterface) Backoffice_ReviewClient {
-	return &backoffice_ReviewClient{cc}
+func NewBackofficeReviewClient(cc grpc.ClientConnInterface) BackofficeReviewClient {
+	return &backofficeReviewClient{cc}
 }
 
-func (c *backoffice_ReviewClient) ListWithdrawReviewTickets(ctx context.Context, in *ListWithdrawReviewTicketsRequest, opts ...grpc.CallOption) (*ListWithdrawReviewTicketsResponse, error) {
+func (c *backofficeReviewClient) ListWithdrawReviewTickets(ctx context.Context, in *ListWithdrawReviewTicketsRequest, opts ...grpc.CallOption) (*ListWithdrawReviewTicketsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListWithdrawReviewTicketsResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Review_ListWithdrawReviewTickets_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeReview_ListWithdrawReviewTickets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_ReviewClient) ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error) {
+func (c *backofficeReviewClient) ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ReviewTicketResponse)
-	err := c.cc.Invoke(ctx, Backoffice_Review_ReviewTicket_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeReview_ReviewTicket_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// Backoffice_ReviewServer is the server API for Backoffice_Review service.
-// All implementations must embed UnimplementedBackoffice_ReviewServer
+// BackofficeReviewServer is the server API for BackofficeReview service.
+// All implementations must embed UnimplementedBackofficeReviewServer
 // for forward compatibility.
-type Backoffice_ReviewServer interface {
+type BackofficeReviewServer interface {
 	ListWithdrawReviewTickets(context.Context, *ListWithdrawReviewTicketsRequest) (*ListWithdrawReviewTicketsResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
-	mustEmbedUnimplementedBackoffice_ReviewServer()
+	mustEmbedUnimplementedBackofficeReviewServer()
 }
 
-// UnimplementedBackoffice_ReviewServer must be embedded to have
+// UnimplementedBackofficeReviewServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBackoffice_ReviewServer struct{}
+type UnimplementedBackofficeReviewServer struct{}
 
-func (UnimplementedBackoffice_ReviewServer) ListWithdrawReviewTickets(context.Context, *ListWithdrawReviewTicketsRequest) (*ListWithdrawReviewTicketsResponse, error) {
+func (UnimplementedBackofficeReviewServer) ListWithdrawReviewTickets(context.Context, *ListWithdrawReviewTicketsRequest) (*ListWithdrawReviewTicketsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWithdrawReviewTickets not implemented")
 }
-func (UnimplementedBackoffice_ReviewServer) ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error) {
+func (UnimplementedBackofficeReviewServer) ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReviewTicket not implemented")
 }
-func (UnimplementedBackoffice_ReviewServer) mustEmbedUnimplementedBackoffice_ReviewServer() {}
-func (UnimplementedBackoffice_ReviewServer) testEmbeddedByValue()                           {}
+func (UnimplementedBackofficeReviewServer) mustEmbedUnimplementedBackofficeReviewServer() {}
+func (UnimplementedBackofficeReviewServer) testEmbeddedByValue()                          {}
 
-// UnsafeBackoffice_ReviewServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to Backoffice_ReviewServer will
+// UnsafeBackofficeReviewServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BackofficeReviewServer will
 // result in compilation errors.
-type UnsafeBackoffice_ReviewServer interface {
-	mustEmbedUnimplementedBackoffice_ReviewServer()
+type UnsafeBackofficeReviewServer interface {
+	mustEmbedUnimplementedBackofficeReviewServer()
 }
 
-func RegisterBackoffice_ReviewServer(s grpc.ServiceRegistrar, srv Backoffice_ReviewServer) {
-	// If the following call pancis, it indicates UnimplementedBackoffice_ReviewServer was
+func RegisterBackofficeReviewServer(s grpc.ServiceRegistrar, srv BackofficeReviewServer) {
+	// If the following call pancis, it indicates UnimplementedBackofficeReviewServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Backoffice_Review_ServiceDesc, srv)
+	s.RegisterService(&BackofficeReview_ServiceDesc, srv)
 }
 
-func _Backoffice_Review_ListWithdrawReviewTickets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeReview_ListWithdrawReviewTickets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListWithdrawReviewTicketsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_ReviewServer).ListWithdrawReviewTickets(ctx, in)
+		return srv.(BackofficeReviewServer).ListWithdrawReviewTickets(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Review_ListWithdrawReviewTickets_FullMethodName,
+		FullMethod: BackofficeReview_ListWithdrawReviewTickets_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_ReviewServer).ListWithdrawReviewTickets(ctx, req.(*ListWithdrawReviewTicketsRequest))
+		return srv.(BackofficeReviewServer).ListWithdrawReviewTickets(ctx, req.(*ListWithdrawReviewTicketsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_Review_ReviewTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeReview_ReviewTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReviewTicketRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_ReviewServer).ReviewTicket(ctx, in)
+		return srv.(BackofficeReviewServer).ReviewTicket(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_Review_ReviewTicket_FullMethodName,
+		FullMethod: BackofficeReview_ReviewTicket_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_ReviewServer).ReviewTicket(ctx, req.(*ReviewTicketRequest))
+		return srv.(BackofficeReviewServer).ReviewTicket(ctx, req.(*ReviewTicketRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Backoffice_Review_ServiceDesc is the grpc.ServiceDesc for Backoffice_Review service.
+// BackofficeReview_ServiceDesc is the grpc.ServiceDesc for BackofficeReview service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Backoffice_Review_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.backoffice.service.v1.Backoffice_Review",
-	HandlerType: (*Backoffice_ReviewServer)(nil),
+var BackofficeReview_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.backoffice.service.v1.BackofficeReview",
+	HandlerType: (*BackofficeReviewServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ListWithdrawReviewTickets",
-			Handler:    _Backoffice_Review_ListWithdrawReviewTickets_Handler,
+			Handler:    _BackofficeReview_ListWithdrawReviewTickets_Handler,
 		},
 		{
 			MethodName: "ReviewTicket",
-			Handler:    _Backoffice_Review_ReviewTicket_Handler,
+			Handler:    _BackofficeReview_ReviewTicket_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

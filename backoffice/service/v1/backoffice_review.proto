@@ -9,7 +9,7 @@ option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
-service Backoffice_Review {
+service BackofficeReview {
 	rpc ListWithdrawReviewTickets(ListWithdrawReviewTicketsRequest) returns (ListWithdrawReviewTicketsResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/review/withdraw-review-tickets/list"

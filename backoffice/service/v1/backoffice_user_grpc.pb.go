@@ -19,22 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Backoffice_User_ListUsers_FullMethodName             = "/api.backoffice.service.v1.Backoffice_User/ListUsers"
-	Backoffice_User_GetUserOverview_FullMethodName       = "/api.backoffice.service.v1.Backoffice_User/GetUserOverview"
-	Backoffice_User_GetUserProfile_FullMethodName        = "/api.backoffice.service.v1.Backoffice_User/GetUserProfile"
-	Backoffice_User_AddOperatorUserTag_FullMethodName    = "/api.backoffice.service.v1.Backoffice_User/AddOperatorUserTag"
-	Backoffice_User_DeleteOperatorUserTag_FullMethodName = "/api.backoffice.service.v1.Backoffice_User/DeleteOperatorUserTag"
-	Backoffice_User_GetOperatorUserTags_FullMethodName   = "/api.backoffice.service.v1.Backoffice_User/GetOperatorUserTags"
-	Backoffice_User_AddUserTag_FullMethodName            = "/api.backoffice.service.v1.Backoffice_User/AddUserTag"
-	Backoffice_User_DeleteUserTag_FullMethodName         = "/api.backoffice.service.v1.Backoffice_User/DeleteUserTag"
-	Backoffice_User_AddUserComment_FullMethodName        = "/api.backoffice.service.v1.Backoffice_User/AddUserComment"
-	Backoffice_User_ListUserComments_FullMethodName      = "/api.backoffice.service.v1.Backoffice_User/ListUserComments"
+	BackofficeUser_ListUsers_FullMethodName             = "/api.backoffice.service.v1.BackofficeUser/ListUsers"
+	BackofficeUser_GetUserOverview_FullMethodName       = "/api.backoffice.service.v1.BackofficeUser/GetUserOverview"
+	BackofficeUser_GetUserProfile_FullMethodName        = "/api.backoffice.service.v1.BackofficeUser/GetUserProfile"
+	BackofficeUser_AddOperatorUserTag_FullMethodName    = "/api.backoffice.service.v1.BackofficeUser/AddOperatorUserTag"
+	BackofficeUser_DeleteOperatorUserTag_FullMethodName = "/api.backoffice.service.v1.BackofficeUser/DeleteOperatorUserTag"
+	BackofficeUser_GetOperatorUserTags_FullMethodName   = "/api.backoffice.service.v1.BackofficeUser/GetOperatorUserTags"
+	BackofficeUser_AddUserTag_FullMethodName            = "/api.backoffice.service.v1.BackofficeUser/AddUserTag"
+	BackofficeUser_DeleteUserTag_FullMethodName         = "/api.backoffice.service.v1.BackofficeUser/DeleteUserTag"
+	BackofficeUser_AddUserComment_FullMethodName        = "/api.backoffice.service.v1.BackofficeUser/AddUserComment"
+	BackofficeUser_ListUserComments_FullMethodName      = "/api.backoffice.service.v1.BackofficeUser/ListUserComments"
 )
 
-// Backoffice_UserClient is the client API for Backoffice_User service.
+// BackofficeUserClient is the client API for BackofficeUser service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type Backoffice_UserClient interface {
+type BackofficeUserClient interface {
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	GetUserOverview(ctx context.Context, in *GetUserOverviewRequest, opts ...grpc.CallOption) (*GetUserOverviewResponse, error)
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
@@ -47,118 +47,118 @@ type Backoffice_UserClient interface {
 	ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...grpc.CallOption) (*ListUserCommentsResponse, error)
 }
 
-type backoffice_UserClient struct {
+type backofficeUserClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBackoffice_UserClient(cc grpc.ClientConnInterface) Backoffice_UserClient {
-	return &backoffice_UserClient{cc}
+func NewBackofficeUserClient(cc grpc.ClientConnInterface) BackofficeUserClient {
+	return &backofficeUserClient{cc}
 }
 
-func (c *backoffice_UserClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error) {
+func (c *backofficeUserClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUsersResponse)
-	err := c.cc.Invoke(ctx, Backoffice_User_ListUsers_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeUser_ListUsers_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_UserClient) GetUserOverview(ctx context.Context, in *GetUserOverviewRequest, opts ...grpc.CallOption) (*GetUserOverviewResponse, error) {
+func (c *backofficeUserClient) GetUserOverview(ctx context.Context, in *GetUserOverviewRequest, opts ...grpc.CallOption) (*GetUserOverviewResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserOverviewResponse)
-	err := c.cc.Invoke(ctx, Backoffice_User_GetUserOverview_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeUser_GetUserOverview_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_UserClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error) {
+func (c *backofficeUserClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserProfileResponse)
-	err := c.cc.Invoke(ctx, Backoffice_User_GetUserProfile_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeUser_GetUserProfile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_UserClient) AddOperatorUserTag(ctx context.Context, in *AddOperatorUserTagRequest, opts ...grpc.CallOption) (*AddOperatorUserTagResponse, error) {
+func (c *backofficeUserClient) AddOperatorUserTag(ctx context.Context, in *AddOperatorUserTagRequest, opts ...grpc.CallOption) (*AddOperatorUserTagResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddOperatorUserTagResponse)
-	err := c.cc.Invoke(ctx, Backoffice_User_AddOperatorUserTag_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeUser_AddOperatorUserTag_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_UserClient) DeleteOperatorUserTag(ctx context.Context, in *DeleteOperatorUserTagRequest, opts ...grpc.CallOption) (*DeleteOperatorUserTagResponse, error) {
+func (c *backofficeUserClient) DeleteOperatorUserTag(ctx context.Context, in *DeleteOperatorUserTagRequest, opts ...grpc.CallOption) (*DeleteOperatorUserTagResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteOperatorUserTagResponse)
-	err := c.cc.Invoke(ctx, Backoffice_User_DeleteOperatorUserTag_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeUser_DeleteOperatorUserTag_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_UserClient) GetOperatorUserTags(ctx context.Context, in *GetOperatorUserTagsRequest, opts ...grpc.CallOption) (*GetOperatorUserTagsResponse, error) {
+func (c *backofficeUserClient) GetOperatorUserTags(ctx context.Context, in *GetOperatorUserTagsRequest, opts ...grpc.CallOption) (*GetOperatorUserTagsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOperatorUserTagsResponse)
-	err := c.cc.Invoke(ctx, Backoffice_User_GetOperatorUserTags_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeUser_GetOperatorUserTags_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_UserClient) AddUserTag(ctx context.Context, in *AddUserTagRequest, opts ...grpc.CallOption) (*AddUserTagResponse, error) {
+func (c *backofficeUserClient) AddUserTag(ctx context.Context, in *AddUserTagRequest, opts ...grpc.CallOption) (*AddUserTagResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddUserTagResponse)
-	err := c.cc.Invoke(ctx, Backoffice_User_AddUserTag_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeUser_AddUserTag_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_UserClient) DeleteUserTag(ctx context.Context, in *DeleteUserTagRequest, opts ...grpc.CallOption) (*DeleteUserTagResponse, error) {
+func (c *backofficeUserClient) DeleteUserTag(ctx context.Context, in *DeleteUserTagRequest, opts ...grpc.CallOption) (*DeleteUserTagResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteUserTagResponse)
-	err := c.cc.Invoke(ctx, Backoffice_User_DeleteUserTag_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeUser_DeleteUserTag_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_UserClient) AddUserComment(ctx context.Context, in *AddUserCommentRequest, opts ...grpc.CallOption) (*AddUserCommentResponse, error) {
+func (c *backofficeUserClient) AddUserComment(ctx context.Context, in *AddUserCommentRequest, opts ...grpc.CallOption) (*AddUserCommentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddUserCommentResponse)
-	err := c.cc.Invoke(ctx, Backoffice_User_AddUserComment_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeUser_AddUserComment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backoffice_UserClient) ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...grpc.CallOption) (*ListUserCommentsResponse, error) {
+func (c *backofficeUserClient) ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...grpc.CallOption) (*ListUserCommentsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUserCommentsResponse)
-	err := c.cc.Invoke(ctx, Backoffice_User_ListUserComments_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeUser_ListUserComments_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// Backoffice_UserServer is the server API for Backoffice_User service.
-// All implementations must embed UnimplementedBackoffice_UserServer
+// BackofficeUserServer is the server API for BackofficeUser service.
+// All implementations must embed UnimplementedBackofficeUserServer
 // for forward compatibility.
-type Backoffice_UserServer interface {
+type BackofficeUserServer interface {
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	GetUserOverview(context.Context, *GetUserOverviewRequest) (*GetUserOverviewResponse, error)
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
@@ -169,293 +169,293 @@ type Backoffice_UserServer interface {
 	DeleteUserTag(context.Context, *DeleteUserTagRequest) (*DeleteUserTagResponse, error)
 	AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error)
 	ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error)
-	mustEmbedUnimplementedBackoffice_UserServer()
+	mustEmbedUnimplementedBackofficeUserServer()
 }
 
-// UnimplementedBackoffice_UserServer must be embedded to have
+// UnimplementedBackofficeUserServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBackoffice_UserServer struct{}
+type UnimplementedBackofficeUserServer struct{}
 
-func (UnimplementedBackoffice_UserServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
+func (UnimplementedBackofficeUserServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
 }
-func (UnimplementedBackoffice_UserServer) GetUserOverview(context.Context, *GetUserOverviewRequest) (*GetUserOverviewResponse, error) {
+func (UnimplementedBackofficeUserServer) GetUserOverview(context.Context, *GetUserOverviewRequest) (*GetUserOverviewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserOverview not implemented")
 }
-func (UnimplementedBackoffice_UserServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
+func (UnimplementedBackofficeUserServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserProfile not implemented")
 }
-func (UnimplementedBackoffice_UserServer) AddOperatorUserTag(context.Context, *AddOperatorUserTagRequest) (*AddOperatorUserTagResponse, error) {
+func (UnimplementedBackofficeUserServer) AddOperatorUserTag(context.Context, *AddOperatorUserTagRequest) (*AddOperatorUserTagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddOperatorUserTag not implemented")
 }
-func (UnimplementedBackoffice_UserServer) DeleteOperatorUserTag(context.Context, *DeleteOperatorUserTagRequest) (*DeleteOperatorUserTagResponse, error) {
+func (UnimplementedBackofficeUserServer) DeleteOperatorUserTag(context.Context, *DeleteOperatorUserTagRequest) (*DeleteOperatorUserTagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperatorUserTag not implemented")
 }
-func (UnimplementedBackoffice_UserServer) GetOperatorUserTags(context.Context, *GetOperatorUserTagsRequest) (*GetOperatorUserTagsResponse, error) {
+func (UnimplementedBackofficeUserServer) GetOperatorUserTags(context.Context, *GetOperatorUserTagsRequest) (*GetOperatorUserTagsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorUserTags not implemented")
 }
-func (UnimplementedBackoffice_UserServer) AddUserTag(context.Context, *AddUserTagRequest) (*AddUserTagResponse, error) {
+func (UnimplementedBackofficeUserServer) AddUserTag(context.Context, *AddUserTagRequest) (*AddUserTagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddUserTag not implemented")
 }
-func (UnimplementedBackoffice_UserServer) DeleteUserTag(context.Context, *DeleteUserTagRequest) (*DeleteUserTagResponse, error) {
+func (UnimplementedBackofficeUserServer) DeleteUserTag(context.Context, *DeleteUserTagRequest) (*DeleteUserTagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserTag not implemented")
 }
-func (UnimplementedBackoffice_UserServer) AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error) {
+func (UnimplementedBackofficeUserServer) AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddUserComment not implemented")
 }
-func (UnimplementedBackoffice_UserServer) ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error) {
+func (UnimplementedBackofficeUserServer) ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUserComments not implemented")
 }
-func (UnimplementedBackoffice_UserServer) mustEmbedUnimplementedBackoffice_UserServer() {}
-func (UnimplementedBackoffice_UserServer) testEmbeddedByValue()                         {}
+func (UnimplementedBackofficeUserServer) mustEmbedUnimplementedBackofficeUserServer() {}
+func (UnimplementedBackofficeUserServer) testEmbeddedByValue()                        {}
 
-// UnsafeBackoffice_UserServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to Backoffice_UserServer will
+// UnsafeBackofficeUserServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BackofficeUserServer will
 // result in compilation errors.
-type UnsafeBackoffice_UserServer interface {
-	mustEmbedUnimplementedBackoffice_UserServer()
+type UnsafeBackofficeUserServer interface {
+	mustEmbedUnimplementedBackofficeUserServer()
 }
 
-func RegisterBackoffice_UserServer(s grpc.ServiceRegistrar, srv Backoffice_UserServer) {
-	// If the following call pancis, it indicates UnimplementedBackoffice_UserServer was
+func RegisterBackofficeUserServer(s grpc.ServiceRegistrar, srv BackofficeUserServer) {
+	// If the following call pancis, it indicates UnimplementedBackofficeUserServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Backoffice_User_ServiceDesc, srv)
+	s.RegisterService(&BackofficeUser_ServiceDesc, srv)
 }
 
-func _Backoffice_User_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeUser_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListUsersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_UserServer).ListUsers(ctx, in)
+		return srv.(BackofficeUserServer).ListUsers(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_User_ListUsers_FullMethodName,
+		FullMethod: BackofficeUser_ListUsers_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_UserServer).ListUsers(ctx, req.(*ListUsersRequest))
+		return srv.(BackofficeUserServer).ListUsers(ctx, req.(*ListUsersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_User_GetUserOverview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeUser_GetUserOverview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserOverviewRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_UserServer).GetUserOverview(ctx, in)
+		return srv.(BackofficeUserServer).GetUserOverview(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_User_GetUserOverview_FullMethodName,
+		FullMethod: BackofficeUser_GetUserOverview_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_UserServer).GetUserOverview(ctx, req.(*GetUserOverviewRequest))
+		return srv.(BackofficeUserServer).GetUserOverview(ctx, req.(*GetUserOverviewRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_User_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeUser_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_UserServer).GetUserProfile(ctx, in)
+		return srv.(BackofficeUserServer).GetUserProfile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_User_GetUserProfile_FullMethodName,
+		FullMethod: BackofficeUser_GetUserProfile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_UserServer).GetUserProfile(ctx, req.(*GetUserProfileRequest))
+		return srv.(BackofficeUserServer).GetUserProfile(ctx, req.(*GetUserProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_User_AddOperatorUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeUser_AddOperatorUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddOperatorUserTagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_UserServer).AddOperatorUserTag(ctx, in)
+		return srv.(BackofficeUserServer).AddOperatorUserTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_User_AddOperatorUserTag_FullMethodName,
+		FullMethod: BackofficeUser_AddOperatorUserTag_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_UserServer).AddOperatorUserTag(ctx, req.(*AddOperatorUserTagRequest))
+		return srv.(BackofficeUserServer).AddOperatorUserTag(ctx, req.(*AddOperatorUserTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_User_DeleteOperatorUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeUser_DeleteOperatorUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteOperatorUserTagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_UserServer).DeleteOperatorUserTag(ctx, in)
+		return srv.(BackofficeUserServer).DeleteOperatorUserTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_User_DeleteOperatorUserTag_FullMethodName,
+		FullMethod: BackofficeUser_DeleteOperatorUserTag_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_UserServer).DeleteOperatorUserTag(ctx, req.(*DeleteOperatorUserTagRequest))
+		return srv.(BackofficeUserServer).DeleteOperatorUserTag(ctx, req.(*DeleteOperatorUserTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_User_GetOperatorUserTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeUser_GetOperatorUserTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOperatorUserTagsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_UserServer).GetOperatorUserTags(ctx, in)
+		return srv.(BackofficeUserServer).GetOperatorUserTags(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_User_GetOperatorUserTags_FullMethodName,
+		FullMethod: BackofficeUser_GetOperatorUserTags_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_UserServer).GetOperatorUserTags(ctx, req.(*GetOperatorUserTagsRequest))
+		return srv.(BackofficeUserServer).GetOperatorUserTags(ctx, req.(*GetOperatorUserTagsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_User_AddUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeUser_AddUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddUserTagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_UserServer).AddUserTag(ctx, in)
+		return srv.(BackofficeUserServer).AddUserTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_User_AddUserTag_FullMethodName,
+		FullMethod: BackofficeUser_AddUserTag_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_UserServer).AddUserTag(ctx, req.(*AddUserTagRequest))
+		return srv.(BackofficeUserServer).AddUserTag(ctx, req.(*AddUserTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_User_DeleteUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeUser_DeleteUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteUserTagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_UserServer).DeleteUserTag(ctx, in)
+		return srv.(BackofficeUserServer).DeleteUserTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_User_DeleteUserTag_FullMethodName,
+		FullMethod: BackofficeUser_DeleteUserTag_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_UserServer).DeleteUserTag(ctx, req.(*DeleteUserTagRequest))
+		return srv.(BackofficeUserServer).DeleteUserTag(ctx, req.(*DeleteUserTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_User_AddUserComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeUser_AddUserComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddUserCommentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_UserServer).AddUserComment(ctx, in)
+		return srv.(BackofficeUserServer).AddUserComment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_User_AddUserComment_FullMethodName,
+		FullMethod: BackofficeUser_AddUserComment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_UserServer).AddUserComment(ctx, req.(*AddUserCommentRequest))
+		return srv.(BackofficeUserServer).AddUserComment(ctx, req.(*AddUserCommentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backoffice_User_ListUserComments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeUser_ListUserComments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListUserCommentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Backoffice_UserServer).ListUserComments(ctx, in)
+		return srv.(BackofficeUserServer).ListUserComments(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backoffice_User_ListUserComments_FullMethodName,
+		FullMethod: BackofficeUser_ListUserComments_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Backoffice_UserServer).ListUserComments(ctx, req.(*ListUserCommentsRequest))
+		return srv.(BackofficeUserServer).ListUserComments(ctx, req.(*ListUserCommentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Backoffice_User_ServiceDesc is the grpc.ServiceDesc for Backoffice_User service.
+// BackofficeUser_ServiceDesc is the grpc.ServiceDesc for BackofficeUser service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Backoffice_User_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.backoffice.service.v1.Backoffice_User",
-	HandlerType: (*Backoffice_UserServer)(nil),
+var BackofficeUser_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.backoffice.service.v1.BackofficeUser",
+	HandlerType: (*BackofficeUserServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ListUsers",
-			Handler:    _Backoffice_User_ListUsers_Handler,
+			Handler:    _BackofficeUser_ListUsers_Handler,
 		},
 		{
 			MethodName: "GetUserOverview",
-			Handler:    _Backoffice_User_GetUserOverview_Handler,
+			Handler:    _BackofficeUser_GetUserOverview_Handler,
 		},
 		{
 			MethodName: "GetUserProfile",
-			Handler:    _Backoffice_User_GetUserProfile_Handler,
+			Handler:    _BackofficeUser_GetUserProfile_Handler,
 		},
 		{
 			MethodName: "AddOperatorUserTag",
-			Handler:    _Backoffice_User_AddOperatorUserTag_Handler,
+			Handler:    _BackofficeUser_AddOperatorUserTag_Handler,
 		},
 		{
 			MethodName: "DeleteOperatorUserTag",
-			Handler:    _Backoffice_User_DeleteOperatorUserTag_Handler,
+			Handler:    _BackofficeUser_DeleteOperatorUserTag_Handler,
 		},
 		{
 			MethodName: "GetOperatorUserTags",
-			Handler:    _Backoffice_User_GetOperatorUserTags_Handler,
+			Handler:    _BackofficeUser_GetOperatorUserTags_Handler,
 		},
 		{
 			MethodName: "AddUserTag",
-			Handler:    _Backoffice_User_AddUserTag_Handler,
+			Handler:    _BackofficeUser_AddUserTag_Handler,
 		},
 		{
 			MethodName: "DeleteUserTag",
-			Handler:    _Backoffice_User_DeleteUserTag_Handler,
+			Handler:    _BackofficeUser_DeleteUserTag_Handler,
 		},
 		{
 			MethodName: "AddUserComment",
-			Handler:    _Backoffice_User_AddUserComment_Handler,
+			Handler:    _BackofficeUser_AddUserComment_Handler,
 		},
 		{
 			MethodName: "ListUserComments",
-			Handler:    _Backoffice_User_ListUserComments_Handler,
+			Handler:    _BackofficeUser_ListUserComments_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
