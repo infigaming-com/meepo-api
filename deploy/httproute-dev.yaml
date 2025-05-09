@@ -66,3 +66,11 @@ spec:
     - name: backoffice-svc
       port: 8000
       weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/ws"
+    backendRefs:
+    - name: websocket-svc
+      port: 8000
+      weight: 1
