@@ -3172,7 +3172,7 @@ func (m *GetUserProfileResponse_Comment) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for AuthorUserId
+	// no validation rules for AuthorUsername
 
 	// no validation rules for Content
 
@@ -3309,7 +3309,7 @@ func (m *ListUserCommentsResponse_Comment) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for AuthorUserId
+	// no validation rules for AuthorUsername
 
 	// no validation rules for Content
 

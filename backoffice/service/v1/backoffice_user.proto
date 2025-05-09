@@ -203,7 +203,7 @@ message GetUserProfileResponse {
 		string mobile = 8;
 	}
 	message Comment {
-		int64 author_user_id = 1;
+		string author_username = 1;
 		string content = 2;
 		google.protobuf.Timestamp created_at = 3;
 	}
@@ -263,7 +263,7 @@ message ListUserCommentsRequest {
 
 message ListUserCommentsResponse {
 	message Comment {
-		int64 author_user_id = 1;
+		string author_username = 1;
 		string content = 2;
 		google.protobuf.Timestamp created_at = 3;
 	}

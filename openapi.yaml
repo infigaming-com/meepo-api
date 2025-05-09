@@ -2422,7 +2422,7 @@ components:
         api.backoffice.service.v1.GetUserProfileResponse_Comment:
             type: object
             properties:
-                authorUserId:
+                authorUsername:
                     type: string
                 content:
                     type: string
@@ -3296,7 +3296,7 @@ components:
         api.backoffice.service.v1.ListUserCommentsResponse_Comment:
             type: object
             properties:
-                authorUserId:
+                authorUsername:
                     type: string
                 content:
                     type: string
