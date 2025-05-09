@@ -77,7 +77,7 @@ message ListUsersRequest {
 	repeated string tags = 2;
 	optional google.protobuf.Timestamp registration_start_time = 3;
 	optional google.protobuf.Timestamp registration_end_time = 4;
-	optional int64 vip_level = 5;
+	optional int32 vip_level = 5;
 	optional int64 retailer_operator_id = 6;
 	optional int64 group_operator_id = 7;
 	optional int64 operator_id = 8;
@@ -86,16 +86,16 @@ message ListUsersRequest {
 	optional int32 risk_level_max = 11;
 	repeated int32 kyc_levels = 12;
 	optional bool has_made_deposit = 13;
-	optional int64 deposit_min = 14;
-	optional int64 deposit_max = 15;
-	optional int64 withdrawal_min = 16;
-	optional int64 withdrawal_max = 17;
+	optional string deposit_min = 14;
+	optional string deposit_max = 15;
+	optional string withdrawal_min = 16;
+	optional string withdrawal_max = 17;
 	optional bool ban_withdraw = 18;
 	optional bool ban_game = 19;
 	optional bool ban_login = 20;
 	optional bool online = 21;
-	optional int64 page = 22;
-	optional int64 page_size = 23;
+	optional int32 page = 22;
+	optional int32 page_size = 23;
 }
 
 message ListUsersResponse {
@@ -109,8 +109,8 @@ message ListUsersResponse {
 		string mobile = 7;
 		int32 vip_level = 8;
 		int32 kyc_level = 9;
-		int64 deposit = 10;
-		int64 withdraw = 11;
+		string deposit = 10;
+		string withdraw = 11;
 		repeated string tags = 12;
 		bool ban_withdraw = 13;
 		bool ban_game = 14;
@@ -127,9 +127,9 @@ message ListUsersResponse {
 		string registration_ip = 25;
 	}
 	repeated User users = 1;
-	int64 page = 2;
-	int64 page_size = 3;
-	int64 total = 4;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
 }
 
 message GetUserOverviewRequest {
@@ -140,30 +140,30 @@ message GetUserOverviewRequest {
 message GetUserOverviewResponse {
 	message GameData {
 		string game_type = 1;
-		int64 ggr = 2;
-		int64 turnover = 3;
-		int64 rtp = 4;
+		string ggr = 2;
+		string turnover = 3;
+		string rtp = 4;
 	}
-	int64 balance = 1;
-	int64 deposit_minus_withdraw = 2;
-	int64 cash_turnover = 3;
-	int64 bonus_turnover = 4;
-	int64 deposit = 5;
-	int64 last_deposit = 6;
-	int64 deposit_count = 7;
-	int64 withdraw = 8;
-	int64 last_withdraw = 9;
-	int64 withdraw_count = 10;
-	int64 bonus = 11;
-	int64 valid_turnover = 12;
-	int64 average_bet_amount = 13;
-	int64 ggr = 14;
+	string balance = 1;
+	string deposit_minus_withdraw = 2;
+	string cash_turnover = 3;
+	string bonus_turnover = 4;
+	string deposit = 5;
+	string last_deposit = 6;
+	string deposit_count = 7;
+	string withdraw = 8;
+	string last_withdraw = 9;
+	int32 withdraw_count = 10;
+	string bonus = 11;
+	string valid_turnover = 12;
+	string average_bet_amount = 13;
+	string ggr = 14;
 	int32 ggr_percentage = 15;
-	int64 manually_added_balance = 16;
-	int64 bonus_claimed = 17;
-	int64 ngr = 18;
+	string manually_added_balance = 16;
+	string bonus_claimed = 17;
+	string ngr = 18;
 	int32 ggr_to_ngr_percentage = 19;
-	int64 turnover_multiplier = 20;
+	int32 turnover_multiplier = 20;
 	int32 deposit_to_withdraw_ratio = 21;
 	int32 rtp_percentage = 22;
 	repeated GameData game_data = 23;
