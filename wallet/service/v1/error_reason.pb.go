@@ -57,6 +57,9 @@ const (
 	ErrorReason_GET_CREDIT_TRANSACTIONS_FAILED                ErrorReason = 30029
 	ErrorReason_NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET      ErrorReason = 30030
 	ErrorReason_GET_CURRENCIES_FAILED                         ErrorReason = 30031
+	ErrorReason_GET_BALANCE_TRANSACTION_FAILED                ErrorReason = 30032
+	ErrorReason_UPDATE_BALANCE_TRANSACTION_FAILED             ErrorReason = 30033
+	ErrorReason_UPDATE_CREDIT_TRANSACTION_FAILED              ErrorReason = 30034
 )
 
 // Enum value maps for ErrorReason.
@@ -94,6 +97,9 @@ var (
 		30029: "GET_CREDIT_TRANSACTIONS_FAILED",
 		30030: "NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET",
 		30031: "GET_CURRENCIES_FAILED",
+		30032: "GET_BALANCE_TRANSACTION_FAILED",
+		30033: "UPDATE_BALANCE_TRANSACTION_FAILED",
+		30034: "UPDATE_CREDIT_TRANSACTION_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                   0,
@@ -128,6 +134,9 @@ var (
 		"GET_CREDIT_TRANSACTIONS_FAILED":                30029,
 		"NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET":      30030,
 		"GET_CURRENCIES_FAILED":                         30031,
+		"GET_BALANCE_TRANSACTION_FAILED":                30032,
+		"UPDATE_BALANCE_TRANSACTION_FAILED":             30033,
+		"UPDATE_CREDIT_TRANSACTION_FAILED":              30034,
 	}
 )
 
@@ -162,7 +171,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xf3\b\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xea\t\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x1a\x04\xa8E\x94\x03\x12\x19\n" +
@@ -195,7 +204,10 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x14UPDATE_CREDIT_FAILED\x10\xcc\xea\x01\x12$\n" +
 	"\x1eGET_CREDIT_TRANSACTIONS_FAILED\x10\xcd\xea\x01\x12.\n" +
 	"(NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET\x10\xce\xea\x01\x12\x1b\n" +
-	"\x15GET_CURRENCIES_FAILED\x10\xcf\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x15GET_CURRENCIES_FAILED\x10\xcf\xea\x01\x12$\n" +
+	"\x1eGET_BALANCE_TRANSACTION_FAILED\x10\xd0\xea\x01\x12'\n" +
+	"!UPDATE_BALANCE_TRANSACTION_FAILED\x10\xd1\xea\x01\x12&\n" +
+	" UPDATE_CREDIT_TRANSACTION_FAILED\x10\xd2\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
