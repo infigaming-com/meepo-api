@@ -47,6 +47,15 @@ service Wallet {
 
 	rpc GameCredit (GameCreditRequest) returns (GameCreditResponse) {}
 
+	// Freeze is used to freeze the balance of the user
+	rpc Freeze (FreezeRequest) returns (FreezeResponse) {}
+
+	// Settle is used to settle the frozen balance of the user
+	rpc Settle (SettleRequest) returns (SettleResponse) {}
+
+	// Rollback is used to rollback the frozen balance of the user or game transactions
+	rpc Rollback (RollbackRequest) returns (RollbackResponse) {}
+
 	rpc GetWallets (GetWalletsRequest) returns (GetWalletsResponse) {}
 
 	rpc GetWalletCreditTransactions (GetWalletCreditTransactionsRequest) returns (GetWalletCreditTransactionsResponse) {}
@@ -114,21 +123,23 @@ message GetUserBalanceResponse {
 	int64 provider_bonus = 4;
 }
 
-enum TransactionType {
-	TRANSACTION_TYPE_UNSPECIFIED = 0;
-
-	// Credit Transaction Types
-	// credit transaction type for payment deposit
-	TRANSACTION_TYPE_PAYMENT_DEPOSIT = 1;
-	// credit transaction type for game win
-	TRANSACTION_TYPE_GAME_WIN = 2;
-
-	// Debit Transaction Types
-	// debit transaction type for payment withdraw
-	TRANSACTION_TYPE_PAYMENT_WITHDRAW = 1001;
-	// debit transaction type for game bet
-	TRANSACTION_TYPE_GAME_BET = 1002;
-}
+// Transaction types for different operations
+// Expected values:
+// Credit operations:
+//   - "payment_deposit"    - Payment deposit transaction
+//   - "game_win"          - Game win transaction
+//
+// Debit operations:
+//   - "payment_withdraw"   - Payment withdraw transaction
+//   - "game_bet"          - Game bet transaction
+//   - "payment_withdraw_freeze" - Payment withdraw freeze transaction
+//
+// Settlement operations:
+//   - "payment_withdraw_settle" - Payment withdraw settlement
+//
+// Rollback operations:
+//   - "game_rollback"            - Game transaction rollback
+//   - "payment_withdraw_rollback" - Payment withdraw rollback
 
 message CreditRequest {
 	message Ratio {
@@ -138,7 +149,9 @@ message CreditRequest {
 
 	int64 user_id = 1;
 	string currency = 2;
-	TransactionType transaction_type = 3;
+	// Valid credit transaction types:
+	//   - "payment_deposit"    - Payment deposit transaction
+	string transaction_type = 3;
 	int64 transaction_id = 4;
 	int64 cash = 5;
 }
@@ -150,7 +163,9 @@ message CreditResponse {
 message DebitRequest {
 	int64 user_id = 1;
 	string currency = 2;
-	TransactionType transaction_type = 3;
+	// Valid debit transaction types:
+	//   - "payment_withdraw"   - Payment withdraw transaction
+	string transaction_type = 3;
 	int64 transaction_id = 4;
 	int64 cash = 5;
 }
@@ -164,7 +179,7 @@ message GameDebitRequest {
 	string currency = 2;
 	string settlement_currency = 3;
 	string exchange_rate = 4;
-	TransactionType transaction_type = 5;
+	string transaction_type = 5;
 	int64 transaction_id = 6;
 	int64 amount = 7;
 	int64 turnover = 8;
@@ -183,7 +198,7 @@ message GameCreditRequest {
 	string currency = 2;
 	string settlement_currency = 3;
 	string exchange_rate = 4;
-	TransactionType transaction_type = 5;
+	string transaction_type = 5;
 	int64 transaction_id = 6;
 	int64 original_transaction_id = 7;
 	int64 amount = 8;
@@ -195,6 +210,45 @@ message GameCreditResponse {
 	int64 cash = 3;
 	int64 operator_bonus = 4;
 	int64 provider_bonus = 5;
+}
+
+message FreezeRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string transaction_type = 3;
+	int64 transaction_id = 4;
+	int64 cash = 5;
+}
+
+message FreezeResponse {
+	int64 transaction_id = 1;
+}
+
+message SettleRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string transaction_type = 3;
+	int64 transaction_id = 4;
+	int64 original_transaction_id = 5;
+}
+
+message SettleResponse {
+	int64 transaction_id = 1;
+}
+
+message RollbackRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string transaction_type = 3;
+	int64 transaction_id = 4;
+	int64 original_transaction_id = 5;
+}
+
+message RollbackResponse {
+	int64 transaction_id = 1;
+	int64 cash = 2;
+	int64 operator_bonus = 3;
+	int64 provider_bonus = 4;
 }
 
 message GetWalletsRequest {
