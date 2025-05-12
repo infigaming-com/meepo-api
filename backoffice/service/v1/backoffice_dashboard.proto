@@ -3,7 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
-
+import "google/protobuf/timestamp.proto";
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
@@ -18,6 +18,12 @@ service BackofficeDashboard {
     rpc GetTimeRangedDashboard(GetTimeRangedDashboardRequest) returns (GetTimeRangedDashboardResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/dashboard/time-ranged/get"
+            body: "*"
+        };
+    }
+	rpc GetTopUsersDashboard(GetTopUsersDashboardRequest) returns (GetTopUsersDashboardResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/dashboard/top-users/get"
             body: "*"
         };
     }
@@ -94,26 +100,34 @@ message GetTimeRangedDashboardRequest {
 
 message GetTimeRangedDashboardResponse {
 	message GameData {
-		string ggr = 1;
-		string ngr = 2;
-		string deposit = 3;
+		message Data {
+			string ggr = 1;
+			string ngr = 2;
+		}
+		google.protobuf.Timestamp time = 1;
+		Data data = 2;
 	}
 	message PaymentData {
-		string withdrawal = 1;
-		string deposit_minus_withdrawal = 2;
+		message Data {
+			string deposit = 1;
+			string withdrawal = 2;
+		}
+		google.protobuf.Timestamp time = 1;
+		Data data = 2;
 	}
 	message ActiveUsersData {
-		int32 active_users = 1;
+		message Data {
+			int32 active_users = 1;
+		}
+		google.protobuf.Timestamp time = 1;
+		Data data = 2;
 	}
-	message Data {
-		GameData game_data = 1;
-		PaymentData payment_data = 2;
-		ActiveUsersData active_users_data = 3;
-	}
-	repeated Data data = 1;
+	repeated GameData game_data = 1;
+	repeated PaymentData payment_data = 2;
+	repeated ActiveUsersData active_users_data = 3;
 }
 
-message GetTopPaymentUsersDashboardRequest {
+message GetTopUsersDashboardRequest {
 	enum TimeRangeType {
 		TIME_RANGE_TYPE_UNSPECIFIED = 0;
 		TIME_RANGE_TYPE_TODAY = 1;
@@ -123,7 +137,7 @@ message GetTopPaymentUsersDashboardRequest {
 	TimeRangeType time_range_type = 1;
 }
 
-message GetTopPaymentUsersDashboardResponse {
+message GetTopUsersDashboardResponse {
 	message User {
 		string user_id = 1;
 		string avatar = 2;

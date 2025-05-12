@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	BackofficeDashboard_GetOverviewDashboard_FullMethodName     = "/api.backoffice.service.v1.BackofficeDashboard/GetOverviewDashboard"
 	BackofficeDashboard_GetTimeRangedDashboard_FullMethodName   = "/api.backoffice.service.v1.BackofficeDashboard/GetTimeRangedDashboard"
+	BackofficeDashboard_GetTopUsersDashboard_FullMethodName     = "/api.backoffice.service.v1.BackofficeDashboard/GetTopUsersDashboard"
 	BackofficeDashboard_GetTopOperatorsDashboard_FullMethodName = "/api.backoffice.service.v1.BackofficeDashboard/GetTopOperatorsDashboard"
 )
 
@@ -30,6 +31,7 @@ const (
 type BackofficeDashboardClient interface {
 	GetOverviewDashboard(ctx context.Context, in *GetOverviewDashboardRequest, opts ...grpc.CallOption) (*GetOverviewDashboardResponse, error)
 	GetTimeRangedDashboard(ctx context.Context, in *GetTimeRangedDashboardRequest, opts ...grpc.CallOption) (*GetTimeRangedDashboardResponse, error)
+	GetTopUsersDashboard(ctx context.Context, in *GetTopUsersDashboardRequest, opts ...grpc.CallOption) (*GetTopUsersDashboardResponse, error)
 	GetTopOperatorsDashboard(ctx context.Context, in *GetTopOperatorsDashboardRequest, opts ...grpc.CallOption) (*GetTopOperatorsDashboardResponse, error)
 }
 
@@ -61,6 +63,16 @@ func (c *backofficeDashboardClient) GetTimeRangedDashboard(ctx context.Context, 
 	return out, nil
 }
 
+func (c *backofficeDashboardClient) GetTopUsersDashboard(ctx context.Context, in *GetTopUsersDashboardRequest, opts ...grpc.CallOption) (*GetTopUsersDashboardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTopUsersDashboardResponse)
+	err := c.cc.Invoke(ctx, BackofficeDashboard_GetTopUsersDashboard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeDashboardClient) GetTopOperatorsDashboard(ctx context.Context, in *GetTopOperatorsDashboardRequest, opts ...grpc.CallOption) (*GetTopOperatorsDashboardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTopOperatorsDashboardResponse)
@@ -77,6 +89,7 @@ func (c *backofficeDashboardClient) GetTopOperatorsDashboard(ctx context.Context
 type BackofficeDashboardServer interface {
 	GetOverviewDashboard(context.Context, *GetOverviewDashboardRequest) (*GetOverviewDashboardResponse, error)
 	GetTimeRangedDashboard(context.Context, *GetTimeRangedDashboardRequest) (*GetTimeRangedDashboardResponse, error)
+	GetTopUsersDashboard(context.Context, *GetTopUsersDashboardRequest) (*GetTopUsersDashboardResponse, error)
 	GetTopOperatorsDashboard(context.Context, *GetTopOperatorsDashboardRequest) (*GetTopOperatorsDashboardResponse, error)
 	mustEmbedUnimplementedBackofficeDashboardServer()
 }
@@ -93,6 +106,9 @@ func (UnimplementedBackofficeDashboardServer) GetOverviewDashboard(context.Conte
 }
 func (UnimplementedBackofficeDashboardServer) GetTimeRangedDashboard(context.Context, *GetTimeRangedDashboardRequest) (*GetTimeRangedDashboardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTimeRangedDashboard not implemented")
+}
+func (UnimplementedBackofficeDashboardServer) GetTopUsersDashboard(context.Context, *GetTopUsersDashboardRequest) (*GetTopUsersDashboardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTopUsersDashboard not implemented")
 }
 func (UnimplementedBackofficeDashboardServer) GetTopOperatorsDashboard(context.Context, *GetTopOperatorsDashboardRequest) (*GetTopOperatorsDashboardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTopOperatorsDashboard not implemented")
@@ -154,6 +170,24 @@ func _BackofficeDashboard_GetTimeRangedDashboard_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeDashboard_GetTopUsersDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTopUsersDashboardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeDashboardServer).GetTopUsersDashboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeDashboard_GetTopUsersDashboard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeDashboardServer).GetTopUsersDashboard(ctx, req.(*GetTopUsersDashboardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeDashboard_GetTopOperatorsDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTopOperatorsDashboardRequest)
 	if err := dec(in); err != nil {
@@ -186,6 +220,10 @@ var BackofficeDashboard_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTimeRangedDashboard",
 			Handler:    _BackofficeDashboard_GetTimeRangedDashboard_Handler,
+		},
+		{
+			MethodName: "GetTopUsersDashboard",
+			Handler:    _BackofficeDashboard_GetTopUsersDashboard_Handler,
 		},
 		{
 			MethodName: "GetTopOperatorsDashboard",
