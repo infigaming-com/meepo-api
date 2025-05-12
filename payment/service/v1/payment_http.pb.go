@@ -31,29 +31,37 @@ const OperationPaymentWithdrawCallback = "/payment.service.v1.Payment/WithdrawCa
 type PaymentHTTPServer interface {
 	// CreatePaymentChannel Create payment channel
 	// Creates a new payment channel with specified configuration
+	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
 	CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error)
 	// DepositCallback Deposit callback
 	// Handles callbacks from payment gateways for deposit status updates
 	// This endpoint is called by payment providers to notify of completed or failed deposits
+	// Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
 	DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error)
 	// GetPaymentChannelPage Get payment channel page with pagination and filters
 	// Retrieves a paginated list of payment channels with optional filtering
+	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
 	GetPaymentChannelPage(context.Context, *GetPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error)
 	// GetPaymentMethodList Get list of payment methods
 	// Retrieves all available payment methods supported by the system
+	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
 	GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*GetPaymentMethodListResponse, error)
 	// GetTransactionPage Get transaction page with pagination and filters
 	// Retrieves a paginated list of transactions with optional filtering
+	// Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
 	GetTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error)
 	// InitiateDeposit Initiate a deposit transaction
 	// Starts a new deposit process and returns payment information
+	// Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
 	InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error)
 	// InitiateWithdraw Initiate a withdrawal transaction
 	// Starts a new withdrawal process
+	// Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
 	InitiateWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error)
 	// WithdrawCallback Withdraw callback
 	// Handles callbacks from payment gateways for withdrawal status updates
 	// This endpoint is called by payment providers to notify of completed or failed withdrawals
+	// Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
 	WithdrawCallback(context.Context, *WithdrawCallbackRequest) (*WithdrawCallbackResponse, error)
 }
 

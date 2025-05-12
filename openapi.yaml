@@ -1003,6 +1003,7 @@ paths:
             description: |-
                 Create payment channel
                  Creates a new payment channel with specified configuration
+                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
             operationId: Payment_CreatePaymentChannel
             requestBody:
                 content:
@@ -1024,6 +1025,7 @@ paths:
             description: |-
                 Get payment channel page with pagination and filters
                  Retrieves a paginated list of payment channels with optional filtering
+                 Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
             operationId: Payment_GetPaymentChannelPage
             requestBody:
                 content:
@@ -1046,6 +1048,7 @@ paths:
                 Deposit callback
                  Handles callbacks from payment gateways for deposit status updates
                  This endpoint is called by payment providers to notify of completed or failed deposits
+                 Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
             operationId: Payment_DepositCallback
             requestBody:
                 content:
@@ -1067,6 +1070,7 @@ paths:
             description: |-
                 Initiate a deposit transaction
                  Starts a new deposit process and returns payment information
+                 Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
             operationId: Payment_InitiateDeposit
             requestBody:
                 content:
@@ -1088,6 +1092,7 @@ paths:
             description: |-
                 Get list of payment methods
                  Retrieves all available payment methods supported by the system
+                 Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
             operationId: Payment_GetPaymentMethodList
             requestBody:
                 content:
@@ -1109,6 +1114,7 @@ paths:
             description: |-
                 Get transaction page with pagination and filters
                  Retrieves a paginated list of transactions with optional filtering
+                 Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
             operationId: Payment_GetTransactionPage
             requestBody:
                 content:
@@ -1131,6 +1137,7 @@ paths:
                 Withdraw callback
                  Handles callbacks from payment gateways for withdrawal status updates
                  This endpoint is called by payment providers to notify of completed or failed withdrawals
+                 Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
             operationId: Payment_WithdrawCallback
             requestBody:
                 content:
@@ -1152,6 +1159,7 @@ paths:
             description: |-
                 Initiate a withdrawal transaction
                  Starts a new withdrawal process
+                 Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
             operationId: Payment_InitiateWithdraw
             requestBody:
                 content:
@@ -4802,6 +4810,30 @@ components:
                     type: integer
                     description: Number of items per page
                     format: int32
+                transactionId:
+                    type: string
+                    description: Optional transaction ID filter
+                operatorId:
+                    type: string
+                    description: Optional operator ID filter
+                userId:
+                    type: string
+                    description: Optional user ID filter
+                orderId:
+                    type: string
+                    description: Optional order ID filter
+                currency:
+                    type: string
+                    description: Optional currency filter
+                paymentMethod:
+                    type: string
+                    description: Optional payment method filter
+                paymentChannel:
+                    type: string
+                    description: Optional payment channel filter
+                protocol:
+                    type: string
+                    description: Optional protocol filter
                 type:
                     enum:
                         - TRANSACTION_TYPE_UNSPECIFIED
@@ -4810,9 +4842,6 @@ components:
                     type: string
                     description: Optional transaction type filter
                     format: enum
-                currency:
-                    type: string
-                    description: Optional currency filter
                 status:
                     enum:
                         - TRANSACTION_STATUS_UNSPECIFIED
@@ -4822,6 +4851,9 @@ components:
                     type: string
                     description: Optional status filter
                     format: enum
+                agent:
+                    type: string
+                    description: Optional agent filter
                 startTime:
                     type: string
                     description: Optional start time for date range filter
@@ -4830,9 +4862,6 @@ components:
                     type: string
                     description: Optional end time for date range filter
                     format: date-time
-                paymentMethod:
-                    type: string
-                    description: Optional payment method filter
                 sort:
                     enum:
                         - DESC
@@ -5051,15 +5080,37 @@ components:
                 transactionId:
                     type: string
                     description: Unique identifier for the transaction
+                operatorTransactionId:
+                    type: string
+                    description: Transaction ID from the operator's system
+                gatewayTransactionId:
+                    type: string
+                    description: Transaction ID from the payment gateway
+                operatorId:
+                    type: string
+                    description: Operator ID associated with the transaction
                 userId:
                     type: string
                     description: ID of the user who initiated the transaction
+                vip:
+                    type: integer
+                    description: VIP level of the user
+                    format: int32
                 amount:
                     type: string
                     description: Transaction amount in smallest currency unit
                 currency:
                     type: string
                     description: Currency code for the transaction
+                paymentMethod:
+                    type: string
+                    description: Payment method used for the transaction
+                paymentChannel:
+                    type: string
+                    description: Payment channel used for the transaction
+                protocol:
+                    type: string
+                    description: Protocol used for the transaction
                 type:
                     enum:
                         - TRANSACTION_TYPE_UNSPECIFIED
@@ -5077,9 +5128,6 @@ components:
                     type: string
                     description: Current status of the transaction
                     format: enum
-                paymentMethod:
-                    type: string
-                    description: Payment method used for the transaction
                 createdAt:
                     type: string
                     description: Timestamp when the transaction was created

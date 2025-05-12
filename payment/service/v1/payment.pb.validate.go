@@ -1920,17 +1920,29 @@ func (m *TransactionInfo) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
+	// no validation rules for OperatorTransactionId
+
+	// no validation rules for GatewayTransactionId
+
+	// no validation rules for OperatorId
+
 	// no validation rules for UserId
+
+	// no validation rules for Vip
 
 	// no validation rules for Amount
 
 	// no validation rules for Currency
 
+	// no validation rules for PaymentMethod
+
+	// no validation rules for PaymentChannel
+
+	// no validation rules for Protocol
+
 	// no validation rules for Type
 
 	// no validation rules for Status
-
-	// no validation rules for PaymentMethod
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -2094,11 +2106,27 @@ func (m *GetTransactionPageRequest) validate(all bool) error {
 
 	// no validation rules for PageSize
 
-	// no validation rules for Type
+	// no validation rules for TransactionId
+
+	// no validation rules for OperatorId
+
+	// no validation rules for UserId
+
+	// no validation rules for OrderId
 
 	// no validation rules for Currency
 
+	// no validation rules for PaymentMethod
+
+	// no validation rules for PaymentChannel
+
+	// no validation rules for Protocol
+
+	// no validation rules for Type
+
 	// no validation rules for Status
+
+	// no validation rules for Agent
 
 	if all {
 		switch v := interface{}(m.GetStartTime()).(type) {
@@ -2157,8 +2185,6 @@ func (m *GetTransactionPageRequest) validate(all bool) error {
 			}
 		}
 	}
-
-	// no validation rules for PaymentMethod
 
 	// no validation rules for Sort
 

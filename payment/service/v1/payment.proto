@@ -283,22 +283,34 @@ enum ChannelType {
 message TransactionInfo {
   // Unique identifier for the transaction
   int64 transaction_id = 1 [json_name="transactionId"];
+  // Transaction ID from the operator's system
+  string operator_transaction_id = 2 [json_name="operatorTransactionId"];
+  // Transaction ID from the payment gateway
+  string gateway_transaction_id = 3 [json_name="gatewayTransactionId"];
+  // Operator ID associated with the transaction
+  string operator_id = 4 [json_name="operatorId"];
   // ID of the user who initiated the transaction
-  int64 user_id = 2 [json_name="userId"];
+  int64 user_id = 5 [json_name="userId"];
+  // VIP level of the user
+  int32 vip = 6;
   // Transaction amount in smallest currency unit
-  int64 amount = 3;
+  int64 amount = 7;
   // Currency code for the transaction
-  string currency = 4;
-  // Type of transaction (deposit or withdrawal)
-  TransactionType type = 5;
-  // Current status of the transaction
-  TransactionStatus status = 6;
+  string currency = 8;
   // Payment method used for the transaction
-  string payment_method = 7 [json_name="paymentMethod"];
+  string payment_method = 9 [json_name="paymentMethod"];
+  // Payment channel used for the transaction
+  string payment_channel = 10 [json_name="paymentChannel"];
+  // Protocol used for the transaction
+  string protocol = 11;
+  // Type of transaction (deposit or withdrawal)
+  TransactionType type = 12;
+  // Current status of the transaction
+  TransactionStatus status = 13;
   // Timestamp when the transaction was created
-  google.protobuf.Timestamp created_at = 8 [json_name="createdAt"];
+  google.protobuf.Timestamp created_at = 14 [json_name="createdAt"];
   // Timestamp when the transaction was last updated
-  google.protobuf.Timestamp updated_at = 9 [json_name="updatedAt"];
+  google.protobuf.Timestamp updated_at = 15 [json_name="updatedAt"];
 }
 
 // Request to get transaction page
@@ -309,20 +321,34 @@ message GetTransactionPageRequest {
   // Number of items per page
   int32 page_size = 2 [json_name="pageSize"];
   
-  // Optional transaction type filter
-  TransactionType type = 3;
+  // Optional transaction ID filter
+  int64 transaction_id = 3 [json_name="transactionId"];
+  // Optional operator ID filter
+  string operator_id = 4 [json_name="operatorId"];
+  // Optional user ID filter
+  int64 user_id = 5 [json_name="userId"];
+  // Optional order ID filter
+  string order_id = 6 [json_name="orderId"];
   // Optional currency filter
-  string currency = 4;
-  // Optional status filter
-  TransactionStatus status = 5;
-  // Optional start time for date range filter
-  google.protobuf.Timestamp start_time = 6 [json_name="startTime"];
-  // Optional end time for date range filter
-  google.protobuf.Timestamp end_time = 7 [json_name="endTime"];
+  string currency = 7;
   // Optional payment method filter
   string payment_method = 8 [json_name="paymentMethod"];
+  // Optional payment channel filter
+  string payment_channel = 9 [json_name="paymentChannel"];
+  // Optional protocol filter
+  string protocol = 10;
+  // Optional transaction type filter
+  TransactionType type = 11;
+  // Optional status filter
+  TransactionStatus status = 12;
+  // Optional agent filter
+  string agent = 13;
+  // Optional start time for date range filter
+  google.protobuf.Timestamp start_time = 14 [json_name="startTime"];
+  // Optional end time for date range filter
+  google.protobuf.Timestamp end_time = 15 [json_name="endTime"];
   // Optional sort direction
-  Sort sort = 9 [json_name="sort"];
+  Sort sort = 16 [json_name="sort"];
 }
 
 // Response for transaction page
@@ -446,6 +472,7 @@ service Payment {
 
   // Get transaction page with pagination and filters
   // Retrieves a paginated list of transactions with optional filtering
+  // Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
   rpc GetTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) {
     option (google.api.http) = {
       post: "/v1/payment/transaction/page"
