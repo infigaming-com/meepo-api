@@ -5331,6 +5331,9 @@ components:
                 decimalPlaces:
                     type: integer
                     format: int32
+                currencyDecimalPlaces:
+                    type: integer
+                    format: int32
         system.service.v1.AddCurrencyResponse:
             type: object
             properties: {}
@@ -5350,6 +5353,9 @@ components:
                 icon:
                     type: string
                 decimalPlaces:
+                    type: integer
+                    format: int32
+                currencyDecimalPlaces:
                     type: integer
                     format: int32
         system.service.v1.GetCurrenciesRequest:
@@ -5385,6 +5391,9 @@ components:
                 icon:
                     type: string
                 decimalPlaces:
+                    type: integer
+                    format: int32
+                currencyDecimalPlaces:
                     type: integer
                     format: int32
         system.service.v1.UpdateCurrencyResponse:
