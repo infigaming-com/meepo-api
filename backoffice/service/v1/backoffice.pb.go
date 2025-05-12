@@ -22,11 +22,11 @@ const (
 )
 
 type EventRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Topic         string                 `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
-	EventData     []byte                 `protobuf:"bytes,2,opt,name=event_data,json=eventData,proto3" json:"event_data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
+	EventData      []byte                 `protobuf:"bytes,2,opt,name=event_data,json=eventData,proto3" json:"event_data,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *EventRequest) Reset() {
@@ -59,9 +59,9 @@ func (*EventRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *EventRequest) GetTopic() string {
+func (x *EventRequest) GetSubscriptionId() string {
 	if x != nil {
-		return x.Topic
+		return x.SubscriptionId
 	}
 	return ""
 }
@@ -113,9 +113,9 @@ var File_backoffice_service_v1_backoffice_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_proto_rawDesc = "" +
 	"\n" +
-	"&backoffice/service/v1/backoffice.proto\x12\x19api.backoffice.service.v1\"C\n" +
-	"\fEventRequest\x12\x14\n" +
-	"\x05topic\x18\x01 \x01(\tR\x05topic\x12\x1d\n" +
+	"&backoffice/service/v1/backoffice.proto\x12\x19api.backoffice.service.v1\"V\n" +
+	"\fEventRequest\x12'\n" +
+	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
 	"\rEventResponse2o\n" +
