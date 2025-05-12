@@ -780,6 +780,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/game.service.v1.BalanceResponse'
+    /v1/game/bets/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_ListBets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/game.service.v1.ListBetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/game.service.v1.ListBetsResponse'
     /v1/game/create-session:
         post:
             tags:
@@ -4343,6 +4361,45 @@ components:
                     format: double
                 roundId:
                     type: string
+        game.service.v1.Bet:
+            type: object
+            properties:
+                id:
+                    type: string
+                providerBetId:
+                    type: string
+                roundId:
+                    type: string
+                providerRoundId:
+                    type: string
+                currency:
+                    type: string
+                settlementCurrency:
+                    type: string
+                userId:
+                    type: string
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                gameCategory:
+                    type: string
+                betAmount:
+                    type: string
+                settlementBetAmount:
+                    type: string
+                winAmount:
+                    type: string
+                settlementWinAmount:
+                    type: string
+                rollbackBetAmount:
+                    type: string
+                rollbackWinAmount:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
         game.service.v1.CreateSessionRequest:
             type: object
             properties:
@@ -4449,6 +4506,40 @@ components:
             properties:
                 game:
                     $ref: '#/components/schemas/game.service.v1.GameInfo'
+        game.service.v1.ListBetsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                categories:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                startTime:
+                    type: string
+                endTime:
+                    type: string
+                page:
+                    type: string
+                pageSize:
+                    type: string
+        game.service.v1.ListBetsResponse:
+            type: object
+            properties:
+                bets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/game.service.v1.Bet'
+                total:
+                    type: string
+                page:
+                    type: string
+                pageSize:
+                    type: string
         game.service.v1.ListGamesRequest:
             type: object
             properties:
