@@ -2353,10 +2353,8 @@ components:
                     type: array
                     items:
                         type: string
-                gameIds:
-                    type: array
-                    items:
-                        type: string
+                gameId:
+                    type: string
                 currencies:
                     type: array
                     items:
@@ -3141,10 +3139,8 @@ components:
                     type: array
                     items:
                         type: string
-                gameIds:
-                    type: array
-                    items:
-                        type: string
+                gameId:
+                    type: string
                 gameTags:
                     type: array
                     items:
@@ -3333,10 +3329,8 @@ components:
                     type: array
                     items:
                         type: string
-                gameIds:
-                    type: array
-                    items:
-                        type: string
+                gameId:
+                    type: string
                 currencies:
                     type: array
                     items:

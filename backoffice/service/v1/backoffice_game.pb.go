@@ -392,7 +392,7 @@ type GetUserBetsOverviewRequest struct {
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Providers     []string               `protobuf:"bytes,2,rep,name=providers,proto3" json:"providers,omitempty"`
 	GameNames     []string               `protobuf:"bytes,3,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
-	GameIds       []string               `protobuf:"bytes,4,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	GameId        *string                `protobuf:"bytes,4,opt,name=game_id,json=gameId,proto3,oneof" json:"game_id,omitempty"`
 	Currencies    []string               `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	BetAmountMin  *int64                 `protobuf:"varint,6,opt,name=bet_amount_min,json=betAmountMin,proto3,oneof" json:"bet_amount_min,omitempty"`
 	BetAmountMax  *int64                 `protobuf:"varint,7,opt,name=bet_amount_max,json=betAmountMax,proto3,oneof" json:"bet_amount_max,omitempty"`
@@ -457,11 +457,11 @@ func (x *GetUserBetsOverviewRequest) GetGameNames() []string {
 	return nil
 }
 
-func (x *GetUserBetsOverviewRequest) GetGameIds() []string {
-	if x != nil {
-		return x.GameIds
+func (x *GetUserBetsOverviewRequest) GetGameId() string {
+	if x != nil && x.GameId != nil {
+		return *x.GameId
 	}
-	return nil
+	return ""
 }
 
 func (x *GetUserBetsOverviewRequest) GetCurrencies() []string {
@@ -625,7 +625,7 @@ type ListUserBetsRequest struct {
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	ProviderIds   []string               `protobuf:"bytes,2,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
 	GameNames     []string               `protobuf:"bytes,3,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
-	GameIds       []string               `protobuf:"bytes,4,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	GameId        *string                `protobuf:"bytes,4,opt,name=game_id,json=gameId,proto3,oneof" json:"game_id,omitempty"`
 	Currencies    []string               `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	MinBetAmount  *int64                 `protobuf:"varint,6,opt,name=min_bet_amount,json=minBetAmount,proto3,oneof" json:"min_bet_amount,omitempty"`
 	MaxBetAmount  *int64                 `protobuf:"varint,7,opt,name=max_bet_amount,json=maxBetAmount,proto3,oneof" json:"max_bet_amount,omitempty"`
@@ -690,11 +690,11 @@ func (x *ListUserBetsRequest) GetGameNames() []string {
 	return nil
 }
 
-func (x *ListUserBetsRequest) GetGameIds() []string {
-	if x != nil {
-		return x.GameIds
+func (x *ListUserBetsRequest) GetGameId() string {
+	if x != nil && x.GameId != nil {
+		return *x.GameId
 	}
-	return nil
+	return ""
 }
 
 func (x *ListUserBetsRequest) GetCurrencies() []string {
@@ -930,7 +930,7 @@ type ListGamesRequest struct {
 	Categories          []string               `protobuf:"bytes,2,rep,name=categories,proto3" json:"categories,omitempty"`
 	FeeGroups           []string               `protobuf:"bytes,3,rep,name=fee_groups,json=feeGroups,proto3" json:"fee_groups,omitempty"`
 	GameNames           []string               `protobuf:"bytes,4,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
-	GameIds             []string               `protobuf:"bytes,5,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	GameId              *string                `protobuf:"bytes,5,opt,name=game_id,json=gameId,proto3,oneof" json:"game_id,omitempty"`
 	GameTags            []string               `protobuf:"bytes,6,rep,name=game_tags,json=gameTags,proto3" json:"game_tags,omitempty"`
 	Themes              []string               `protobuf:"bytes,7,rep,name=themes,proto3" json:"themes,omitempty"`
 	SupportBonusBuy     *bool                  `protobuf:"varint,8,opt,name=support_bonus_buy,json=supportBonusBuy,proto3,oneof" json:"support_bonus_buy,omitempty"`
@@ -1001,11 +1001,11 @@ func (x *ListGamesRequest) GetGameNames() []string {
 	return nil
 }
 
-func (x *ListGamesRequest) GetGameIds() []string {
-	if x != nil {
-		return x.GameIds
+func (x *ListGamesRequest) GetGameId() string {
+	if x != nil && x.GameId != nil {
+		return *x.GameId
 	}
-	return nil
+	return ""
 }
 
 func (x *ListGamesRequest) GetGameTags() []string {
@@ -1603,26 +1603,28 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x04bets\x18\x01 \x03(\v2\x1e.api.backoffice.service.v1.BetR\x04bets\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x03R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\"\x8f\x05\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\"\x9e\x05\n" +
 	"\x1aGetUserBetsOverviewRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1c\n" +
 	"\tproviders\x18\x02 \x03(\tR\tproviders\x12\x1d\n" +
 	"\n" +
-	"game_names\x18\x03 \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\x04 \x03(\tR\agameIds\x12\x1e\n" +
+	"game_names\x18\x03 \x03(\tR\tgameNames\x12\x1c\n" +
+	"\agame_id\x18\x04 \x01(\tH\x00R\x06gameId\x88\x01\x01\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
 	"currencies\x12)\n" +
-	"\x0ebet_amount_min\x18\x06 \x01(\x03H\x00R\fbetAmountMin\x88\x01\x01\x12)\n" +
-	"\x0ebet_amount_max\x18\a \x01(\x03H\x01R\fbetAmountMax\x88\x01\x01\x12)\n" +
-	"\x0ewin_amount_min\x18\b \x01(\x03H\x02R\fwinAmountMin\x88\x01\x01\x12)\n" +
-	"\x0ewin_amount_max\x18\t \x01(\x03H\x03R\fwinAmountMax\x88\x01\x01\x12>\n" +
+	"\x0ebet_amount_min\x18\x06 \x01(\x03H\x01R\fbetAmountMin\x88\x01\x01\x12)\n" +
+	"\x0ebet_amount_max\x18\a \x01(\x03H\x02R\fbetAmountMax\x88\x01\x01\x12)\n" +
+	"\x0ewin_amount_min\x18\b \x01(\x03H\x03R\fwinAmountMin\x88\x01\x01\x12)\n" +
+	"\x0ewin_amount_max\x18\t \x01(\x03H\x04R\fwinAmountMax\x88\x01\x01\x12>\n" +
 	"\n" +
 	"start_time\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\f \x01(\x03H\x06R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\r \x01(\x03H\aR\bpageSize\x88\x01\x01B\x11\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampH\x05R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampH\x06R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\f \x01(\x03H\aR\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\r \x01(\x03H\bR\bpageSize\x88\x01\x01B\n" +
+	"\n" +
+	"\b_game_idB\x11\n" +
 	"\x0f_bet_amount_minB\x11\n" +
 	"\x0f_bet_amount_maxB\x11\n" +
 	"\x0f_win_amount_minB\x11\n" +
@@ -1641,26 +1643,28 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\n" +
 	"win_amount\x18\x05 \x01(\x03R\twinAmount\x12\x10\n" +
 	"\x03ggr\x18\x06 \x01(\x03R\x03ggr\x12\x10\n" +
-	"\x03ngr\x18\a \x01(\x03R\x03ngr\"\x8d\x05\n" +
+	"\x03ngr\x18\a \x01(\x03R\x03ngr\"\x9c\x05\n" +
 	"\x13ListUserBetsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12!\n" +
 	"\fprovider_ids\x18\x02 \x03(\tR\vproviderIds\x12\x1d\n" +
 	"\n" +
-	"game_names\x18\x03 \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\x04 \x03(\tR\agameIds\x12\x1e\n" +
+	"game_names\x18\x03 \x03(\tR\tgameNames\x12\x1c\n" +
+	"\agame_id\x18\x04 \x01(\tH\x00R\x06gameId\x88\x01\x01\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
 	"currencies\x12)\n" +
-	"\x0emin_bet_amount\x18\x06 \x01(\x03H\x00R\fminBetAmount\x88\x01\x01\x12)\n" +
-	"\x0emax_bet_amount\x18\a \x01(\x03H\x01R\fmaxBetAmount\x88\x01\x01\x12)\n" +
-	"\x0emin_win_amount\x18\b \x01(\x03H\x02R\fminWinAmount\x88\x01\x01\x12)\n" +
-	"\x0emax_win_amount\x18\t \x01(\x03H\x03R\fmaxWinAmount\x88\x01\x01\x12>\n" +
+	"\x0emin_bet_amount\x18\x06 \x01(\x03H\x01R\fminBetAmount\x88\x01\x01\x12)\n" +
+	"\x0emax_bet_amount\x18\a \x01(\x03H\x02R\fmaxBetAmount\x88\x01\x01\x12)\n" +
+	"\x0emin_win_amount\x18\b \x01(\x03H\x03R\fminWinAmount\x88\x01\x01\x12)\n" +
+	"\x0emax_win_amount\x18\t \x01(\x03H\x04R\fmaxWinAmount\x88\x01\x01\x12>\n" +
 	"\n" +
 	"start_time\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\f \x01(\x03H\x06R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\r \x01(\x03H\aR\bpageSize\x88\x01\x01B\x11\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampH\x05R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampH\x06R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\f \x01(\x03H\aR\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\r \x01(\x03H\bR\bpageSize\x88\x01\x01B\n" +
+	"\n" +
+	"\b_game_idB\x11\n" +
 	"\x0f_min_bet_amountB\x11\n" +
 	"\x0f_max_bet_amountB\x11\n" +
 	"\x0f_min_win_amountB\x11\n" +
@@ -1698,7 +1702,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x10valid_bet_amount\x18\f \x01(\x03R\x0evalidBetAmount\x1ay\n" +
 	"\x06Amount\x12,\n" +
 	"\x12amount_in_currency\x18\x01 \x01(\x03R\x10amountInCurrency\x12A\n" +
-	"\x1damount_in_settlement_currency\x18\x02 \x01(\x03R\x1aamountInSettlementCurrency\"\x95\x04\n" +
+	"\x1damount_in_settlement_currency\x18\x02 \x01(\x03R\x1aamountInSettlementCurrency\"\xa4\x04\n" +
 	"\x10ListGamesRequest\x12\x1c\n" +
 	"\tproviders\x18\x01 \x03(\tR\tproviders\x12\x1e\n" +
 	"\n" +
@@ -1707,17 +1711,19 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\n" +
 	"fee_groups\x18\x03 \x03(\tR\tfeeGroups\x12\x1d\n" +
 	"\n" +
-	"game_names\x18\x04 \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\x05 \x03(\tR\agameIds\x12\x1b\n" +
+	"game_names\x18\x04 \x03(\tR\tgameNames\x12\x1c\n" +
+	"\agame_id\x18\x05 \x01(\tH\x00R\x06gameId\x88\x01\x01\x12\x1b\n" +
 	"\tgame_tags\x18\x06 \x03(\tR\bgameTags\x12\x16\n" +
 	"\x06themes\x18\a \x03(\tR\x06themes\x12/\n" +
-	"\x11support_bonus_buy\x18\b \x01(\bH\x00R\x0fsupportBonusBuy\x88\x01\x01\x12(\n" +
-	"\rhas_freespins\x18\t \x01(\bH\x01R\fhasFreespins\x88\x01\x01\x12-\n" +
+	"\x11support_bonus_buy\x18\b \x01(\bH\x01R\x0fsupportBonusBuy\x88\x01\x01\x12(\n" +
+	"\rhas_freespins\x18\t \x01(\bH\x02R\fhasFreespins\x88\x01\x01\x12-\n" +
 	"\x12support_currencies\x18\n" +
 	" \x03(\tR\x11supportCurrencies\x121\n" +
 	"\x14restricted_countries\x18\v \x03(\tR\x13restrictedCountries\x12\x17\n" +
-	"\x04page\x18\f \x01(\x03H\x02R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\r \x01(\x03H\x03R\bpageSize\x88\x01\x01B\x14\n" +
+	"\x04page\x18\f \x01(\x03H\x03R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\r \x01(\x03H\x04R\bpageSize\x88\x01\x01B\n" +
+	"\n" +
+	"\b_game_idB\x14\n" +
 	"\x12_support_bonus_buyB\x10\n" +
 	"\x0e_has_freespinsB\a\n" +
 	"\x05_pageB\f\n" +
