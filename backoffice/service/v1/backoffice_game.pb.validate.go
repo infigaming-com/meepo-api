@@ -625,6 +625,10 @@ func (m *GetUserBetsOverviewRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	if m.GameId != nil {
+		// no validation rules for GameId
+	}
+
 	if m.BetAmountMin != nil {
 		// no validation rules for BetAmountMin
 	}
@@ -935,6 +939,10 @@ func (m *ListUserBetsRequest) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for UserId
+
+	if m.GameId != nil {
+		// no validation rules for GameId
+	}
 
 	if m.MinBetAmount != nil {
 		// no validation rules for MinBetAmount
@@ -1517,6 +1525,10 @@ func (m *ListGamesRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if m.GameId != nil {
+		// no validation rules for GameId
+	}
 
 	if m.SupportBonusBuy != nil {
 		// no validation rules for SupportBonusBuy

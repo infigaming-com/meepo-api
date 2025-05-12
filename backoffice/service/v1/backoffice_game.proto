@@ -91,7 +91,7 @@ message GetUserBetsOverviewRequest {
 	int64 user_id = 1;
 	repeated string providers = 2;
 	repeated string game_names = 3;
-	repeated string game_ids = 4;
+	optional string game_id = 4;
 	repeated string currencies = 5;
 	optional int64 bet_amount_min = 6;
 	optional int64 bet_amount_max = 7;
@@ -118,7 +118,7 @@ message ListUserBetsRequest {
 	int64 user_id = 1;
 	repeated string provider_ids = 2;
 	repeated string game_names = 3;
-	repeated string game_ids = 4;
+	optional string game_id = 4;
 	repeated string currencies = 5;
 	optional int64 min_bet_amount = 6;
 	optional int64 max_bet_amount = 7;
@@ -169,7 +169,7 @@ message ListGamesRequest {
 	repeated string categories = 2;
 	repeated string fee_groups = 3;
 	repeated string game_names = 4;
-	repeated string game_ids = 5;
+	optional string game_id = 5;
 	repeated string game_tags = 6;
 	repeated string themes = 7;
 	optional bool support_bonus_buy = 8;
