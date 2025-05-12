@@ -57,7 +57,7 @@ func (m *EventRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Topic
+	// no validation rules for SubscriptionId
 
 	// no validation rules for EventData
 

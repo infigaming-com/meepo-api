@@ -12,7 +12,7 @@ service UserEvent {
 }
 
 message EventRequest {
-	string topic = 1;
+	string subscription_id = 1;
 	bytes event_data = 2;
 }
 
