@@ -1518,6 +1518,10 @@ func (m *ListGamesRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.GameId != nil {
+		// no validation rules for GameId
+	}
+
 	if m.SupportBonusBuy != nil {
 		// no validation rules for SupportBonusBuy
 	}

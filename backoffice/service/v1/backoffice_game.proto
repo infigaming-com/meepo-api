@@ -169,7 +169,7 @@ message ListGamesRequest {
 	repeated string categories = 2;
 	repeated string fee_groups = 3;
 	repeated string game_names = 4;
-	repeated string game_ids = 5;
+	optional string game_id = 5;
 	repeated string game_tags = 6;
 	repeated string themes = 7;
 	optional bool support_bonus_buy = 8;

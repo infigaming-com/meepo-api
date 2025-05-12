@@ -3141,10 +3141,8 @@ components:
                     type: array
                     items:
                         type: string
-                gameIds:
-                    type: array
-                    items:
-                        type: string
+                gameId:
+                    type: string
                 gameTags:
                     type: array
                     items:

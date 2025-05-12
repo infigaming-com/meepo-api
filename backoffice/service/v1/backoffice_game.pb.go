@@ -930,7 +930,7 @@ type ListGamesRequest struct {
 	Categories          []string               `protobuf:"bytes,2,rep,name=categories,proto3" json:"categories,omitempty"`
 	FeeGroups           []string               `protobuf:"bytes,3,rep,name=fee_groups,json=feeGroups,proto3" json:"fee_groups,omitempty"`
 	GameNames           []string               `protobuf:"bytes,4,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
-	GameIds             []string               `protobuf:"bytes,5,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	GameId              *string                `protobuf:"bytes,5,opt,name=game_id,json=gameId,proto3,oneof" json:"game_id,omitempty"`
 	GameTags            []string               `protobuf:"bytes,6,rep,name=game_tags,json=gameTags,proto3" json:"game_tags,omitempty"`
 	Themes              []string               `protobuf:"bytes,7,rep,name=themes,proto3" json:"themes,omitempty"`
 	SupportBonusBuy     *bool                  `protobuf:"varint,8,opt,name=support_bonus_buy,json=supportBonusBuy,proto3,oneof" json:"support_bonus_buy,omitempty"`
@@ -1001,11 +1001,11 @@ func (x *ListGamesRequest) GetGameNames() []string {
 	return nil
 }
 
-func (x *ListGamesRequest) GetGameIds() []string {
-	if x != nil {
-		return x.GameIds
+func (x *ListGamesRequest) GetGameId() string {
+	if x != nil && x.GameId != nil {
+		return *x.GameId
 	}
-	return nil
+	return ""
 }
 
 func (x *ListGamesRequest) GetGameTags() []string {
@@ -1698,7 +1698,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x10valid_bet_amount\x18\f \x01(\x03R\x0evalidBetAmount\x1ay\n" +
 	"\x06Amount\x12,\n" +
 	"\x12amount_in_currency\x18\x01 \x01(\x03R\x10amountInCurrency\x12A\n" +
-	"\x1damount_in_settlement_currency\x18\x02 \x01(\x03R\x1aamountInSettlementCurrency\"\x95\x04\n" +
+	"\x1damount_in_settlement_currency\x18\x02 \x01(\x03R\x1aamountInSettlementCurrency\"\xa4\x04\n" +
 	"\x10ListGamesRequest\x12\x1c\n" +
 	"\tproviders\x18\x01 \x03(\tR\tproviders\x12\x1e\n" +
 	"\n" +
@@ -1707,17 +1707,19 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\n" +
 	"fee_groups\x18\x03 \x03(\tR\tfeeGroups\x12\x1d\n" +
 	"\n" +
-	"game_names\x18\x04 \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\x05 \x03(\tR\agameIds\x12\x1b\n" +
+	"game_names\x18\x04 \x03(\tR\tgameNames\x12\x1c\n" +
+	"\agame_id\x18\x05 \x01(\tH\x00R\x06gameId\x88\x01\x01\x12\x1b\n" +
 	"\tgame_tags\x18\x06 \x03(\tR\bgameTags\x12\x16\n" +
 	"\x06themes\x18\a \x03(\tR\x06themes\x12/\n" +
-	"\x11support_bonus_buy\x18\b \x01(\bH\x00R\x0fsupportBonusBuy\x88\x01\x01\x12(\n" +
-	"\rhas_freespins\x18\t \x01(\bH\x01R\fhasFreespins\x88\x01\x01\x12-\n" +
+	"\x11support_bonus_buy\x18\b \x01(\bH\x01R\x0fsupportBonusBuy\x88\x01\x01\x12(\n" +
+	"\rhas_freespins\x18\t \x01(\bH\x02R\fhasFreespins\x88\x01\x01\x12-\n" +
 	"\x12support_currencies\x18\n" +
 	" \x03(\tR\x11supportCurrencies\x121\n" +
 	"\x14restricted_countries\x18\v \x03(\tR\x13restrictedCountries\x12\x17\n" +
-	"\x04page\x18\f \x01(\x03H\x02R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\r \x01(\x03H\x03R\bpageSize\x88\x01\x01B\x14\n" +
+	"\x04page\x18\f \x01(\x03H\x03R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\r \x01(\x03H\x04R\bpageSize\x88\x01\x01B\n" +
+	"\n" +
+	"\b_game_idB\x14\n" +
 	"\x12_support_bonus_buyB\x10\n" +
 	"\x0e_has_freespinsB\a\n" +
 	"\x05_pageB\f\n" +
