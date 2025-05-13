@@ -22,6 +22,7 @@ const (
 	Game_CreateOperator_FullMethodName = "/game.service.v1.Game/CreateOperator"
 	Game_UpdateOperator_FullMethodName = "/game.service.v1.Game/UpdateOperator"
 	Game_DeleteOperator_FullMethodName = "/game.service.v1.Game/DeleteOperator"
+	Game_ListCategories_FullMethodName = "/game.service.v1.Game/ListCategories"
 	Game_ListGames_FullMethodName      = "/game.service.v1.Game/ListGames"
 	Game_GetGame_FullMethodName        = "/game.service.v1.Game/GetGame"
 	Game_ProviderList_FullMethodName   = "/game.service.v1.Game/ProviderList"
@@ -39,6 +40,7 @@ type GameClient interface {
 	CreateOperator(ctx context.Context, in *CreateOperatorRequest, opts ...grpc.CallOption) (*CreateOperatorResponse, error)
 	UpdateOperator(ctx context.Context, in *UpdateOperatorRequest, opts ...grpc.CallOption) (*UpdateOperatorResponse, error)
 	DeleteOperator(ctx context.Context, in *DeleteOperatorRequest, opts ...grpc.CallOption) (*DeleteOperatorResponse, error)
+	ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...grpc.CallOption) (*ListCategoriesResponse, error)
 	ListGames(ctx context.Context, in *ListGamesRequest, opts ...grpc.CallOption) (*ListGamesResponse, error)
 	GetGame(ctx context.Context, in *GetGameRequest, opts ...grpc.CallOption) (*GetGameResponse, error)
 	ProviderList(ctx context.Context, in *ProviderListRequest, opts ...grpc.CallOption) (*ProviderListResponse, error)
@@ -81,6 +83,16 @@ func (c *gameClient) DeleteOperator(ctx context.Context, in *DeleteOperatorReque
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteOperatorResponse)
 	err := c.cc.Invoke(ctx, Game_DeleteOperator_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...grpc.CallOption) (*ListCategoriesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCategoriesResponse)
+	err := c.cc.Invoke(ctx, Game_ListCategories_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -174,6 +186,7 @@ type GameServer interface {
 	CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error)
 	UpdateOperator(context.Context, *UpdateOperatorRequest) (*UpdateOperatorResponse, error)
 	DeleteOperator(context.Context, *DeleteOperatorRequest) (*DeleteOperatorResponse, error)
+	ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
 	GetGame(context.Context, *GetGameRequest) (*GetGameResponse, error)
 	ProviderList(context.Context, *ProviderListRequest) (*ProviderListResponse, error)
@@ -200,6 +213,9 @@ func (UnimplementedGameServer) UpdateOperator(context.Context, *UpdateOperatorRe
 }
 func (UnimplementedGameServer) DeleteOperator(context.Context, *DeleteOperatorRequest) (*DeleteOperatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperator not implemented")
+}
+func (UnimplementedGameServer) ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCategories not implemented")
 }
 func (UnimplementedGameServer) ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGames not implemented")
@@ -296,6 +312,24 @@ func _Game_DeleteOperator_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GameServer).DeleteOperator(ctx, req.(*DeleteOperatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCategoriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListCategories(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListCategories_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListCategories(ctx, req.(*ListCategoriesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -462,6 +496,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteOperator",
 			Handler:    _Game_DeleteOperator_Handler,
+		},
+		{
+			MethodName: "ListCategories",
+			Handler:    _Game_ListCategories_Handler,
 		},
 		{
 			MethodName: "ListGames",

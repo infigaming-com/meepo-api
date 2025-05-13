@@ -942,6 +942,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/game.service.v1.ListBetsResponse'
+    /v1/game/categories/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_ListCategories
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/game.service.v1.ListCategoriesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/game.service.v1.ListCategoriesResponse'
     /v1/game/create-session:
         post:
             tags:
@@ -4814,6 +4832,16 @@ components:
                     type: string
                 pageSize:
                     type: string
+        game.service.v1.ListCategoriesRequest:
+            type: object
+            properties: {}
+        game.service.v1.ListCategoriesResponse:
+            type: object
+            properties:
+                categories:
+                    type: array
+                    items:
+                        type: string
         game.service.v1.ListGamesRequest:
             type: object
             properties:
