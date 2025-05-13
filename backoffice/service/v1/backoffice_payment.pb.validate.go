@@ -123,12 +123,16 @@ func (m *ListPaymentTransactionsRequest) validate(all bool) error {
 
 	}
 
-	if m.MinDeposit != nil {
-		// no validation rules for MinDeposit
+	if m.Type != nil {
+		// no validation rules for Type
 	}
 
-	if m.MaxDeposit != nil {
-		// no validation rules for MaxDeposit
+	if m.MinAmount != nil {
+		// no validation rules for MinAmount
+	}
+
+	if m.MaxAmount != nil {
+		// no validation rules for MaxAmount
 	}
 
 	if m.Page != nil {
@@ -461,10 +465,6 @@ func (m *ListPaymentTransactionsResponse_PaymentTransaction) validate(all bool) 
 	// no validation rules for VipLevel
 
 	// no validation rules for Amount
-
-	// no validation rules for BeforeBalance
-
-	// no validation rules for AfterBalance
 
 	// no validation rules for Currency
 

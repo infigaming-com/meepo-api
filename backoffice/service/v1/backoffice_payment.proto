@@ -27,11 +27,12 @@ message ListPaymentTransactionsRequest {
 	optional google.protobuf.Timestamp end_time = 3;
 	repeated int64 user_ids = 4;
 	repeated string currencies = 5;
-	repeated string payment_channels = 6;
-	repeated string protocols = 7;
-	optional int64 min_deposit = 8;
-	optional int64 max_deposit = 9;
-	optional int64 page = 10;
+	optional string type = 6;	// deposit / withdraw or all if not specified
+	repeated string payment_channels = 7;
+	repeated string protocols = 8;
+	optional string min_amount = 9;
+	optional string max_amount = 10;
+	optional int64 page = 11;
 	optional int64 page_size = 12;
 }
 
@@ -44,8 +45,6 @@ message ListPaymentTransactionsResponse {
 		int64 user_id = 5;
 		int32 vip_level = 6;
 		string amount = 7;
-		string before_balance = 8;	// from wallet
-		string after_balance = 9;	// from wallet
 		string currency = 10;
 		string payment_channel = 11;
 		string protocol = 12;

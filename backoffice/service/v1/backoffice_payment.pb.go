@@ -30,11 +30,12 @@ type ListPaymentTransactionsRequest struct {
 	EndTime         *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	UserIds         []int64                `protobuf:"varint,4,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
 	Currencies      []string               `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	PaymentChannels []string               `protobuf:"bytes,6,rep,name=payment_channels,json=paymentChannels,proto3" json:"payment_channels,omitempty"`
-	Protocols       []string               `protobuf:"bytes,7,rep,name=protocols,proto3" json:"protocols,omitempty"`
-	MinDeposit      *int64                 `protobuf:"varint,8,opt,name=min_deposit,json=minDeposit,proto3,oneof" json:"min_deposit,omitempty"`
-	MaxDeposit      *int64                 `protobuf:"varint,9,opt,name=max_deposit,json=maxDeposit,proto3,oneof" json:"max_deposit,omitempty"`
-	Page            *int64                 `protobuf:"varint,10,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	Type            *string                `protobuf:"bytes,6,opt,name=type,proto3,oneof" json:"type,omitempty"` // deposit / withdraw or all if not specified
+	PaymentChannels []string               `protobuf:"bytes,7,rep,name=payment_channels,json=paymentChannels,proto3" json:"payment_channels,omitempty"`
+	Protocols       []string               `protobuf:"bytes,8,rep,name=protocols,proto3" json:"protocols,omitempty"`
+	MinAmount       *string                `protobuf:"bytes,9,opt,name=min_amount,json=minAmount,proto3,oneof" json:"min_amount,omitempty"`
+	MaxAmount       *string                `protobuf:"bytes,10,opt,name=max_amount,json=maxAmount,proto3,oneof" json:"max_amount,omitempty"`
+	Page            *int64                 `protobuf:"varint,11,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize        *int64                 `protobuf:"varint,12,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -105,6 +106,13 @@ func (x *ListPaymentTransactionsRequest) GetCurrencies() []string {
 	return nil
 }
 
+func (x *ListPaymentTransactionsRequest) GetType() string {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return ""
+}
+
 func (x *ListPaymentTransactionsRequest) GetPaymentChannels() []string {
 	if x != nil {
 		return x.PaymentChannels
@@ -119,18 +127,18 @@ func (x *ListPaymentTransactionsRequest) GetProtocols() []string {
 	return nil
 }
 
-func (x *ListPaymentTransactionsRequest) GetMinDeposit() int64 {
-	if x != nil && x.MinDeposit != nil {
-		return *x.MinDeposit
+func (x *ListPaymentTransactionsRequest) GetMinAmount() string {
+	if x != nil && x.MinAmount != nil {
+		return *x.MinAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListPaymentTransactionsRequest) GetMaxDeposit() int64 {
-	if x != nil && x.MaxDeposit != nil {
-		return *x.MaxDeposit
+func (x *ListPaymentTransactionsRequest) GetMaxAmount() string {
+	if x != nil && x.MaxAmount != nil {
+		return *x.MaxAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *ListPaymentTransactionsRequest) GetPage() int64 {
@@ -248,8 +256,6 @@ type ListPaymentTransactionsResponse_PaymentTransaction struct {
 	UserId                      int64                  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	VipLevel                    int32                  `protobuf:"varint,6,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
 	Amount                      string                 `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`
-	BeforeBalance               string                 `protobuf:"bytes,8,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"` // from wallet
-	AfterBalance                string                 `protobuf:"bytes,9,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`    // from wallet
 	Currency                    string                 `protobuf:"bytes,10,opt,name=currency,proto3" json:"currency,omitempty"`
 	PaymentChannel              string                 `protobuf:"bytes,11,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
 	Protocol                    string                 `protobuf:"bytes,12,opt,name=protocol,proto3" json:"protocol,omitempty"`
@@ -339,20 +345,6 @@ func (x *ListPaymentTransactionsResponse_PaymentTransaction) GetAmount() string 
 	return ""
 }
 
-func (x *ListPaymentTransactionsResponse_PaymentTransaction) GetBeforeBalance() string {
-	if x != nil {
-		return x.BeforeBalance
-	}
-	return ""
-}
-
-func (x *ListPaymentTransactionsResponse_PaymentTransaction) GetAfterBalance() string {
-	if x != nil {
-		return x.AfterBalance
-	}
-	return ""
-}
-
 func (x *ListPaymentTransactionsResponse_PaymentTransaction) GetCurrency() string {
 	if x != nil {
 		return x.Currency
@@ -399,7 +391,7 @@ var File_backoffice_service_v1_backoffice_payment_proto protoreflect.FileDescrip
 
 const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9d\x04\n" +
+	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb9\x04\n" +
 	"\x1eListPaymentTransactionsRequest\x12!\n" +
 	"\foperator_ids\x18\x01 \x03(\x03R\voperatorIds\x12>\n" +
 	"\n" +
@@ -408,23 +400,25 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\buser_ids\x18\x04 \x03(\x03R\auserIds\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
-	"currencies\x12)\n" +
-	"\x10payment_channels\x18\x06 \x03(\tR\x0fpaymentChannels\x12\x1c\n" +
-	"\tprotocols\x18\a \x03(\tR\tprotocols\x12$\n" +
-	"\vmin_deposit\x18\b \x01(\x03H\x02R\n" +
-	"minDeposit\x88\x01\x01\x12$\n" +
-	"\vmax_deposit\x18\t \x01(\x03H\x03R\n" +
-	"maxDeposit\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\n" +
-	" \x01(\x03H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\f \x01(\x03H\x05R\bpageSize\x88\x01\x01B\r\n" +
+	"currencies\x12\x17\n" +
+	"\x04type\x18\x06 \x01(\tH\x02R\x04type\x88\x01\x01\x12)\n" +
+	"\x10payment_channels\x18\a \x03(\tR\x0fpaymentChannels\x12\x1c\n" +
+	"\tprotocols\x18\b \x03(\tR\tprotocols\x12\"\n" +
+	"\n" +
+	"min_amount\x18\t \x01(\tH\x03R\tminAmount\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"max_amount\x18\n" +
+	" \x01(\tH\x04R\tmaxAmount\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\v \x01(\x03H\x05R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\f \x01(\x03H\x06R\bpageSize\x88\x01\x01B\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_timeB\x0e\n" +
-	"\f_min_depositB\x0e\n" +
-	"\f_max_depositB\a\n" +
+	"\t_end_timeB\a\n" +
+	"\x05_typeB\r\n" +
+	"\v_min_amountB\r\n" +
+	"\v_max_amountB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x98\a\n" +
+	"_page_size\"\xcc\x06\n" +
 	"\x1fListPaymentTransactionsResponse\x12\x80\x01\n" +
 	"\x14payment_transactions\x18\x01 \x03(\v2M.api.backoffice.service.v1.ListPaymentTransactionsResponse.PaymentTransactionR\x13paymentTransactions\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x1b\n" +
@@ -432,7 +426,7 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\x05total\x18\x04 \x01(\x03R\x05total\x12)\n" +
 	"\x10tatal_successful\x18\x05 \x01(\x03R\x0ftatalSuccessful\x12!\n" +
 	"\ftotal_paying\x18\x06 \x01(\x03R\vtotalPaying\x12!\n" +
-	"\ftotal_failed\x18\b \x01(\x03R\vtotalFailed\x1a\xb9\x04\n" +
+	"\ftotal_failed\x18\b \x01(\x03R\vtotalFailed\x1a\xed\x03\n" +
 	"\x12PaymentTransaction\x12\x1a\n" +
 	"\boperator\x18\x01 \x01(\tR\boperator\x129\n" +
 	"\n" +
@@ -442,9 +436,7 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12\x17\n" +
 	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tvip_level\x18\x06 \x01(\x05R\bvipLevel\x12\x16\n" +
-	"\x06amount\x18\a \x01(\tR\x06amount\x12%\n" +
-	"\x0ebefore_balance\x18\b \x01(\tR\rbeforeBalance\x12#\n" +
-	"\rafter_balance\x18\t \x01(\tR\fafterBalance\x12\x1a\n" +
+	"\x06amount\x18\a \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\n" +
 	" \x01(\tR\bcurrency\x12'\n" +
 	"\x0fpayment_channel\x18\v \x01(\tR\x0epaymentChannel\x12\x1a\n" +
