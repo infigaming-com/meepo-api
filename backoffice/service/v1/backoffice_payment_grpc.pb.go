@@ -25,7 +25,12 @@ const (
 // BackofficePaymentClient is the client API for BackofficePayment service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// BackofficePayment service
+// Provides methods for backoffice payment management
 type BackofficePaymentClient interface {
+	// Get payment transaction page
+	// Retrieves a paginated list of payment transactions with optional filtering
 	GetPaymentTransactionPage(ctx context.Context, in *GetPaymentTransactionPageRequest, opts ...grpc.CallOption) (*GetPaymentTransactionPageResponse, error)
 }
 
@@ -50,7 +55,12 @@ func (c *backofficePaymentClient) GetPaymentTransactionPage(ctx context.Context,
 // BackofficePaymentServer is the server API for BackofficePayment service.
 // All implementations must embed UnimplementedBackofficePaymentServer
 // for forward compatibility.
+//
+// BackofficePayment service
+// Provides methods for backoffice payment management
 type BackofficePaymentServer interface {
+	// Get payment transaction page
+	// Retrieves a paginated list of payment transactions with optional filtering
 	GetPaymentTransactionPage(context.Context, *GetPaymentTransactionPageRequest) (*GetPaymentTransactionPageResponse, error)
 	mustEmbedUnimplementedBackofficePaymentServer()
 }

@@ -24,6 +24,8 @@ const (
 )
 
 // 定义枚举类型，与payment模块保持一致
+// Transaction type enum
+// Defines the direction of money flow
 type TransactionType int32
 
 const (
@@ -180,7 +182,8 @@ func (Sort) EnumDescriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{2}
 }
 
-// 与payment.service.v1.GetTransactionPageRequest保持一致的请求参数
+// Request to get payment transaction page
+// Used to retrieve a paginated list of payment transactions with optional filters
 type GetPaymentTransactionPageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Page number to retrieve (1-based)
@@ -352,18 +355,28 @@ func (x *GetPaymentTransactionPageRequest) GetSort() Sort {
 	return Sort_DESC
 }
 
+// Response for payment transaction page
+// Contains paginated list of payment transactions and pagination metadata
 type GetPaymentTransactionPageResponse struct {
-	state               protoimpl.MessageState                                  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of payment transactions matching the filter criteria
 	PaymentTransactions []*GetPaymentTransactionPageResponse_PaymentTransaction `protobuf:"bytes,1,rep,name=payment_transactions,json=paymentTransactions,proto3" json:"payment_transactions,omitempty"`
-	TotalCount          int32                                                   `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
-	Page                int32                                                   `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize            int32                                                   `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	TotalPages          int32                                                   `protobuf:"varint,5,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
-	TotalSuccessful     int32                                                   `protobuf:"varint,6,opt,name=total_successful,json=totalSuccessful,proto3" json:"total_successful,omitempty"`
-	TotalProcessing     int32                                                   `protobuf:"varint,7,opt,name=total_processing,json=totalProcessing,proto3" json:"total_processing,omitempty"`
-	TotalFailed         int32                                                   `protobuf:"varint,8,opt,name=total_failed,json=totalFailed,proto3" json:"total_failed,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Total number of transactions matching the filter criteria
+	TotalCount int32 `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	// Current page number
+	Page int32 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Total number of pages available
+	TotalPages int32 `protobuf:"varint,5,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	// Total number of successful transactions
+	TotalSuccessful int32 `protobuf:"varint,6,opt,name=total_successful,json=totalSuccessful,proto3" json:"total_successful,omitempty"`
+	// Total number of processing transactions
+	TotalProcessing int32 `protobuf:"varint,7,opt,name=total_processing,json=totalProcessing,proto3" json:"total_processing,omitempty"`
+	// Total number of failed transactions
+	TotalFailed   int32 `protobuf:"varint,8,opt,name=total_failed,json=totalFailed,proto3" json:"total_failed,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetPaymentTransactionPageResponse) Reset() {
@@ -452,25 +465,36 @@ func (x *GetPaymentTransactionPageResponse) GetTotalFailed() int32 {
 	return 0
 }
 
+// Payment transaction information
+// Detailed information about a specific payment transaction
 type GetPaymentTransactionPageResponse_PaymentTransaction struct {
-	state                       protoimpl.MessageState `protogen:"open.v1"`
-	Operator                    string                 `protobuf:"bytes,1,opt,name=operator,proto3" json:"operator,omitempty"`
-	CreatedAt                   *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt                   *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Type                        string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"` // deposit or withdraw
-	UserId                      int64                  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	VipLevel                    int32                  `protobuf:"varint,6,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	Amount                      string                 `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`
-	BeforeBalance               string                 `protobuf:"bytes,8,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"` // from wallet
-	AfterBalance                string                 `protobuf:"bytes,9,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`    // from wallet
-	Currency                    string                 `protobuf:"bytes,10,opt,name=currency,proto3" json:"currency,omitempty"`
-	PaymentChannel              string                 `protobuf:"bytes,11,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
-	Protocol                    string                 `protobuf:"bytes,12,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	Status                      string                 `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`
-	TransactionId               int64                  `protobuf:"varint,14,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	PaymentGatewayTransactionId string                 `protobuf:"bytes,15,opt,name=payment_gateway_transaction_id,json=paymentGatewayTransactionId,proto3" json:"payment_gateway_transaction_id,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Operator ID associated with the transaction
+	Operator string `protobuf:"bytes,1,opt,name=operator,proto3" json:"operator,omitempty"`
+	// Timestamp when the transaction was created
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Timestamp when the transaction was last updated
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// ID of the user who initiated the transaction
+	UserId int64 `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// VIP level of the user
+	VipLevel int32 `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	// Transaction amount with currency unit
+	Amount string `protobuf:"bytes,6,opt,name=amount,proto3" json:"amount,omitempty"`
+	// Currency code for the transaction
+	Currency string `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Payment channel used for the transaction
+	PaymentChannel string `protobuf:"bytes,8,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	// Protocol used for the transaction
+	Protocol string `protobuf:"bytes,9,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	// Current status of the transaction
+	Status string `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
+	// Unique identifier for the transaction
+	TransactionId int64 `protobuf:"varint,11,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	// Transaction ID from the payment gateway
+	PaTransactionId string `protobuf:"bytes,12,opt,name=pa_transaction_id,json=paTransactionId,proto3" json:"pa_transaction_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetPaymentTransactionPageResponse_PaymentTransaction) Reset() {
@@ -524,13 +548,6 @@ func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetUpdatedAt() *t
 	return nil
 }
 
-func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
 func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
@@ -548,20 +565,6 @@ func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetVipLevel() int
 func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetAmount() string {
 	if x != nil {
 		return x.Amount
-	}
-	return ""
-}
-
-func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetBeforeBalance() string {
-	if x != nil {
-		return x.BeforeBalance
-	}
-	return ""
-}
-
-func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetAfterBalance() string {
-	if x != nil {
-		return x.AfterBalance
 	}
 	return ""
 }
@@ -601,9 +604,9 @@ func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetTransactionId(
 	return 0
 }
 
-func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetPaymentGatewayTransactionId() string {
+func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetPaTransactionId() string {
 	if x != nil {
-		return x.PaymentGatewayTransactionId
+		return x.PaTransactionId
 	}
 	return ""
 }
@@ -631,7 +634,7 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
 	"start_time\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x123\n" +
-	"\x04sort\x18\x0f \x01(\x0e2\x1f.api.backoffice.service.v1.SortR\x04sort\"\xd0\a\n" +
+	"\x04sort\x18\x0f \x01(\x0e2\x1f.api.backoffice.service.v1.SortR\x04sort\"\xd7\x06\n" +
 	"!GetPaymentTransactionPageResponse\x12\x82\x01\n" +
 	"\x14payment_transactions\x18\x01 \x03(\v2O.api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransactionR\x13paymentTransactions\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
@@ -642,26 +645,23 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"totalPages\x12)\n" +
 	"\x10total_successful\x18\x06 \x01(\x05R\x0ftotalSuccessful\x12)\n" +
 	"\x10total_processing\x18\a \x01(\x05R\x0ftotalProcessing\x12!\n" +
-	"\ftotal_failed\x18\b \x01(\x05R\vtotalFailed\x1a\xb9\x04\n" +
+	"\ftotal_failed\x18\b \x01(\x05R\vtotalFailed\x1a\xc0\x03\n" +
 	"\x12PaymentTransaction\x12\x1a\n" +
 	"\boperator\x18\x01 \x01(\tR\boperator\x129\n" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\tR\x04type\x12\x17\n" +
-	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12\x1b\n" +
-	"\tvip_level\x18\x06 \x01(\x05R\bvipLevel\x12\x16\n" +
-	"\x06amount\x18\a \x01(\tR\x06amount\x12%\n" +
-	"\x0ebefore_balance\x18\b \x01(\tR\rbeforeBalance\x12#\n" +
-	"\rafter_balance\x18\t \x01(\tR\fafterBalance\x12\x1a\n" +
-	"\bcurrency\x18\n" +
-	" \x01(\tR\bcurrency\x12'\n" +
-	"\x0fpayment_channel\x18\v \x01(\tR\x0epaymentChannel\x12\x1a\n" +
-	"\bprotocol\x18\f \x01(\tR\bprotocol\x12\x16\n" +
-	"\x06status\x18\r \x01(\tR\x06status\x12%\n" +
-	"\x0etransaction_id\x18\x0e \x01(\x03R\rtransactionId\x12C\n" +
-	"\x1epayment_gateway_transaction_id\x18\x0f \x01(\tR\x1bpaymentGatewayTransactionId*N\n" +
+	"updated_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1b\n" +
+	"\tvip_level\x18\x05 \x01(\x05R\bvipLevel\x12\x16\n" +
+	"\x06amount\x18\x06 \x01(\tR\x06amount\x12\x1a\n" +
+	"\bcurrency\x18\a \x01(\tR\bcurrency\x12'\n" +
+	"\x0fpayment_channel\x18\b \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bprotocol\x18\t \x01(\tR\bprotocol\x12\x16\n" +
+	"\x06status\x18\n" +
+	" \x01(\tR\x06status\x12%\n" +
+	"\x0etransaction_id\x18\v \x01(\x03R\rtransactionId\x12*\n" +
+	"\x11pa_transaction_id\x18\f \x01(\tR\x0fpaTransactionId*N\n" +
 	"\x0fTransactionType\x12\x1c\n" +
 	"\x18TRANSACTION_TYPE_DEPOSIT\x10\x00\x12\x1d\n" +
 	"\x19TRANSACTION_TYPE_WITHDRAW\x10\x01*\x9c\x01\n" +

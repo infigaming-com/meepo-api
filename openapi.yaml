@@ -514,6 +514,9 @@ paths:
         post:
             tags:
                 - BackofficePayment
+            description: |-
+                Get payment transaction page
+                 Retrieves a paginated list of payment transactions with optional filtering
             operationId: BackofficePayment_GetPaymentTransactionPage
             requestBody:
                 content:
@@ -2274,7 +2277,9 @@ components:
                     type: string
                     description: Optional sort direction
                     format: enum
-            description: 与payment.service.v1.GetTransactionPageRequest保持一致的请求参数
+            description: |-
+                Request to get payment transaction page
+                 Used to retrieve a paginated list of payment transactions with optional filters
         api.backoffice.service.v1.GetPaymentTransactionPageResponse:
             type: object
             properties:
@@ -2282,63 +2287,83 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionPageResponse_PaymentTransaction'
+                    description: List of payment transactions matching the filter criteria
                 totalCount:
                     type: integer
+                    description: Total number of transactions matching the filter criteria
                     format: int32
                 page:
                     type: integer
+                    description: Current page number
                     format: int32
                 pageSize:
                     type: integer
+                    description: Number of items per page
                     format: int32
                 totalPages:
                     type: integer
+                    description: Total number of pages available
                     format: int32
                 totalSuccessful:
                     type: integer
+                    description: Total number of successful transactions
                     format: int32
                 totalProcessing:
                     type: integer
+                    description: Total number of processing transactions
                     format: int32
                 totalFailed:
                     type: integer
+                    description: Total number of failed transactions
                     format: int32
+            description: |-
+                Response for payment transaction page
+                 Contains paginated list of payment transactions and pagination metadata
         api.backoffice.service.v1.GetPaymentTransactionPageResponse_PaymentTransaction:
             type: object
             properties:
                 operator:
                     type: string
+                    description: Operator ID associated with the transaction
                 createdAt:
                     type: string
+                    description: Timestamp when the transaction was created
                     format: date-time
                 updatedAt:
                     type: string
+                    description: Timestamp when the transaction was last updated
                     format: date-time
-                type:
-                    type: string
                 userId:
                     type: string
+                    description: ID of the user who initiated the transaction
                 vipLevel:
                     type: integer
+                    description: VIP level of the user
                     format: int32
                 amount:
                     type: string
-                beforeBalance:
-                    type: string
-                afterBalance:
-                    type: string
+                    description: Transaction amount with currency unit
                 currency:
                     type: string
+                    description: Currency code for the transaction
                 paymentChannel:
                     type: string
+                    description: Payment channel used for the transaction
                 protocol:
                     type: string
+                    description: Protocol used for the transaction
                 status:
                     type: string
+                    description: Current status of the transaction
                 transactionId:
                     type: string
-                paymentGatewayTransactionId:
+                    description: Unique identifier for the transaction
+                paTransactionId:
                     type: string
+                    description: Transaction ID from the payment gateway
+            description: |-
+                Payment transaction information
+                 Detailed information about a specific payment transaction
         api.backoffice.service.v1.GetPlayerGameDataSummaryRequest:
             type: object
             properties:
@@ -5748,6 +5773,9 @@ tags:
     - name: BackofficeDashboard
     - name: BackofficeGame
     - name: BackofficePayment
+      description: |-
+        BackofficePayment service
+         Provides methods for backoffice payment management
     - name: BackofficeReport
     - name: BackofficeReview
     - name: BackofficeUser

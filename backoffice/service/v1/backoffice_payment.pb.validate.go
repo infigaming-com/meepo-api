@@ -462,17 +462,11 @@ func (m *GetPaymentTransactionPageResponse_PaymentTransaction) validate(all bool
 		}
 	}
 
-	// no validation rules for Type
-
 	// no validation rules for UserId
 
 	// no validation rules for VipLevel
 
 	// no validation rules for Amount
-
-	// no validation rules for BeforeBalance
-
-	// no validation rules for AfterBalance
 
 	// no validation rules for Currency
 
@@ -484,7 +478,7 @@ func (m *GetPaymentTransactionPageResponse_PaymentTransaction) validate(all bool
 
 	// no validation rules for TransactionId
 
-	// no validation rules for PaymentGatewayTransactionId
+	// no validation rules for PaTransactionId
 
 	if len(errors) > 0 {
 		return GetPaymentTransactionPageResponse_PaymentTransactionMultiError(errors)

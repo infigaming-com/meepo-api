@@ -22,6 +22,8 @@ const _ = http.SupportPackageIsVersion1
 const OperationBackofficePaymentGetPaymentTransactionPage = "/api.backoffice.service.v1.BackofficePayment/GetPaymentTransactionPage"
 
 type BackofficePaymentHTTPServer interface {
+	// GetPaymentTransactionPage Get payment transaction page
+	// Retrieves a paginated list of payment transactions with optional filtering
 	GetPaymentTransactionPage(context.Context, *GetPaymentTransactionPageRequest) (*GetPaymentTransactionPageResponse, error)
 }
 
