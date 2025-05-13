@@ -10,6 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -74,24 +75,24 @@ func (GetTimeRangedDashboardRequest_TimeRangeType) EnumDescriptor() ([]byte, []i
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{2, 0}
 }
 
-type GetTopPaymentUsersDashboardRequest_TimeRangeType int32
+type GetTopUsersDashboardRequest_TimeRangeType int32
 
 const (
-	GetTopPaymentUsersDashboardRequest_TIME_RANGE_TYPE_UNSPECIFIED GetTopPaymentUsersDashboardRequest_TimeRangeType = 0
-	GetTopPaymentUsersDashboardRequest_TIME_RANGE_TYPE_TODAY       GetTopPaymentUsersDashboardRequest_TimeRangeType = 1
-	GetTopPaymentUsersDashboardRequest_TIME_RANGE_TYPE_THIS_WEEK   GetTopPaymentUsersDashboardRequest_TimeRangeType = 2
-	GetTopPaymentUsersDashboardRequest_TIME_RANGE_TYPE_THIS_MONTH  GetTopPaymentUsersDashboardRequest_TimeRangeType = 3
+	GetTopUsersDashboardRequest_TIME_RANGE_TYPE_UNSPECIFIED GetTopUsersDashboardRequest_TimeRangeType = 0
+	GetTopUsersDashboardRequest_TIME_RANGE_TYPE_TODAY       GetTopUsersDashboardRequest_TimeRangeType = 1
+	GetTopUsersDashboardRequest_TIME_RANGE_TYPE_THIS_WEEK   GetTopUsersDashboardRequest_TimeRangeType = 2
+	GetTopUsersDashboardRequest_TIME_RANGE_TYPE_THIS_MONTH  GetTopUsersDashboardRequest_TimeRangeType = 3
 )
 
-// Enum value maps for GetTopPaymentUsersDashboardRequest_TimeRangeType.
+// Enum value maps for GetTopUsersDashboardRequest_TimeRangeType.
 var (
-	GetTopPaymentUsersDashboardRequest_TimeRangeType_name = map[int32]string{
+	GetTopUsersDashboardRequest_TimeRangeType_name = map[int32]string{
 		0: "TIME_RANGE_TYPE_UNSPECIFIED",
 		1: "TIME_RANGE_TYPE_TODAY",
 		2: "TIME_RANGE_TYPE_THIS_WEEK",
 		3: "TIME_RANGE_TYPE_THIS_MONTH",
 	}
-	GetTopPaymentUsersDashboardRequest_TimeRangeType_value = map[string]int32{
+	GetTopUsersDashboardRequest_TimeRangeType_value = map[string]int32{
 		"TIME_RANGE_TYPE_UNSPECIFIED": 0,
 		"TIME_RANGE_TYPE_TODAY":       1,
 		"TIME_RANGE_TYPE_THIS_WEEK":   2,
@@ -99,30 +100,30 @@ var (
 	}
 )
 
-func (x GetTopPaymentUsersDashboardRequest_TimeRangeType) Enum() *GetTopPaymentUsersDashboardRequest_TimeRangeType {
-	p := new(GetTopPaymentUsersDashboardRequest_TimeRangeType)
+func (x GetTopUsersDashboardRequest_TimeRangeType) Enum() *GetTopUsersDashboardRequest_TimeRangeType {
+	p := new(GetTopUsersDashboardRequest_TimeRangeType)
 	*p = x
 	return p
 }
 
-func (x GetTopPaymentUsersDashboardRequest_TimeRangeType) String() string {
+func (x GetTopUsersDashboardRequest_TimeRangeType) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (GetTopPaymentUsersDashboardRequest_TimeRangeType) Descriptor() protoreflect.EnumDescriptor {
+func (GetTopUsersDashboardRequest_TimeRangeType) Descriptor() protoreflect.EnumDescriptor {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_enumTypes[1].Descriptor()
 }
 
-func (GetTopPaymentUsersDashboardRequest_TimeRangeType) Type() protoreflect.EnumType {
+func (GetTopUsersDashboardRequest_TimeRangeType) Type() protoreflect.EnumType {
 	return &file_backoffice_service_v1_backoffice_dashboard_proto_enumTypes[1]
 }
 
-func (x GetTopPaymentUsersDashboardRequest_TimeRangeType) Number() protoreflect.EnumNumber {
+func (x GetTopUsersDashboardRequest_TimeRangeType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use GetTopPaymentUsersDashboardRequest_TimeRangeType.Descriptor instead.
-func (GetTopPaymentUsersDashboardRequest_TimeRangeType) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use GetTopUsersDashboardRequest_TimeRangeType.Descriptor instead.
+func (GetTopUsersDashboardRequest_TimeRangeType) EnumDescriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{4, 0}
 }
 
@@ -376,10 +377,12 @@ func (x *GetTimeRangedDashboardRequest) GetCustomDays() int32 {
 }
 
 type GetTimeRangedDashboardResponse struct {
-	state         protoimpl.MessageState                 `protogen:"open.v1"`
-	Data          []*GetTimeRangedDashboardResponse_Data `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState                            `protogen:"open.v1"`
+	GameData        []*GetTimeRangedDashboardResponse_GameData        `protobuf:"bytes,1,rep,name=game_data,json=gameData,proto3" json:"game_data,omitempty"`
+	PaymentData     []*GetTimeRangedDashboardResponse_PaymentData     `protobuf:"bytes,2,rep,name=payment_data,json=paymentData,proto3" json:"payment_data,omitempty"`
+	ActiveUsersData []*GetTimeRangedDashboardResponse_ActiveUsersData `protobuf:"bytes,3,rep,name=active_users_data,json=activeUsersData,proto3" json:"active_users_data,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetTimeRangedDashboardResponse) Reset() {
@@ -412,34 +415,48 @@ func (*GetTimeRangedDashboardResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetTimeRangedDashboardResponse) GetData() []*GetTimeRangedDashboardResponse_Data {
+func (x *GetTimeRangedDashboardResponse) GetGameData() []*GetTimeRangedDashboardResponse_GameData {
 	if x != nil {
-		return x.Data
+		return x.GameData
 	}
 	return nil
 }
 
-type GetTopPaymentUsersDashboardRequest struct {
-	state         protoimpl.MessageState                           `protogen:"open.v1"`
-	TimeRangeType GetTopPaymentUsersDashboardRequest_TimeRangeType `protobuf:"varint,1,opt,name=time_range_type,json=timeRangeType,proto3,enum=api.backoffice.service.v1.GetTopPaymentUsersDashboardRequest_TimeRangeType" json:"time_range_type,omitempty"`
+func (x *GetTimeRangedDashboardResponse) GetPaymentData() []*GetTimeRangedDashboardResponse_PaymentData {
+	if x != nil {
+		return x.PaymentData
+	}
+	return nil
+}
+
+func (x *GetTimeRangedDashboardResponse) GetActiveUsersData() []*GetTimeRangedDashboardResponse_ActiveUsersData {
+	if x != nil {
+		return x.ActiveUsersData
+	}
+	return nil
+}
+
+type GetTopUsersDashboardRequest struct {
+	state         protoimpl.MessageState                    `protogen:"open.v1"`
+	TimeRangeType GetTopUsersDashboardRequest_TimeRangeType `protobuf:"varint,1,opt,name=time_range_type,json=timeRangeType,proto3,enum=api.backoffice.service.v1.GetTopUsersDashboardRequest_TimeRangeType" json:"time_range_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetTopPaymentUsersDashboardRequest) Reset() {
-	*x = GetTopPaymentUsersDashboardRequest{}
+func (x *GetTopUsersDashboardRequest) Reset() {
+	*x = GetTopUsersDashboardRequest{}
 	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetTopPaymentUsersDashboardRequest) String() string {
+func (x *GetTopUsersDashboardRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetTopPaymentUsersDashboardRequest) ProtoMessage() {}
+func (*GetTopUsersDashboardRequest) ProtoMessage() {}
 
-func (x *GetTopPaymentUsersDashboardRequest) ProtoReflect() protoreflect.Message {
+func (x *GetTopUsersDashboardRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -451,40 +468,40 @@ func (x *GetTopPaymentUsersDashboardRequest) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetTopPaymentUsersDashboardRequest.ProtoReflect.Descriptor instead.
-func (*GetTopPaymentUsersDashboardRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetTopUsersDashboardRequest.ProtoReflect.Descriptor instead.
+func (*GetTopUsersDashboardRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *GetTopPaymentUsersDashboardRequest) GetTimeRangeType() GetTopPaymentUsersDashboardRequest_TimeRangeType {
+func (x *GetTopUsersDashboardRequest) GetTimeRangeType() GetTopUsersDashboardRequest_TimeRangeType {
 	if x != nil {
 		return x.TimeRangeType
 	}
-	return GetTopPaymentUsersDashboardRequest_TIME_RANGE_TYPE_UNSPECIFIED
+	return GetTopUsersDashboardRequest_TIME_RANGE_TYPE_UNSPECIFIED
 }
 
-type GetTopPaymentUsersDashboardResponse struct {
-	state              protoimpl.MessageState                      `protogen:"open.v1"`
-	TopDepositUsers    []*GetTopPaymentUsersDashboardResponse_User `protobuf:"bytes,1,rep,name=top_deposit_users,json=topDepositUsers,proto3" json:"top_deposit_users,omitempty"`
-	TopWithdrawalUsers []*GetTopPaymentUsersDashboardResponse_User `protobuf:"bytes,2,rep,name=top_withdrawal_users,json=topWithdrawalUsers,proto3" json:"top_withdrawal_users,omitempty"`
+type GetTopUsersDashboardResponse struct {
+	state              protoimpl.MessageState               `protogen:"open.v1"`
+	TopDepositUsers    []*GetTopUsersDashboardResponse_User `protobuf:"bytes,1,rep,name=top_deposit_users,json=topDepositUsers,proto3" json:"top_deposit_users,omitempty"`
+	TopWithdrawalUsers []*GetTopUsersDashboardResponse_User `protobuf:"bytes,2,rep,name=top_withdrawal_users,json=topWithdrawalUsers,proto3" json:"top_withdrawal_users,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
 
-func (x *GetTopPaymentUsersDashboardResponse) Reset() {
-	*x = GetTopPaymentUsersDashboardResponse{}
+func (x *GetTopUsersDashboardResponse) Reset() {
+	*x = GetTopUsersDashboardResponse{}
 	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetTopPaymentUsersDashboardResponse) String() string {
+func (x *GetTopUsersDashboardResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetTopPaymentUsersDashboardResponse) ProtoMessage() {}
+func (*GetTopUsersDashboardResponse) ProtoMessage() {}
 
-func (x *GetTopPaymentUsersDashboardResponse) ProtoReflect() protoreflect.Message {
+func (x *GetTopUsersDashboardResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -496,19 +513,19 @@ func (x *GetTopPaymentUsersDashboardResponse) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetTopPaymentUsersDashboardResponse.ProtoReflect.Descriptor instead.
-func (*GetTopPaymentUsersDashboardResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetTopUsersDashboardResponse.ProtoReflect.Descriptor instead.
+func (*GetTopUsersDashboardResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *GetTopPaymentUsersDashboardResponse) GetTopDepositUsers() []*GetTopPaymentUsersDashboardResponse_User {
+func (x *GetTopUsersDashboardResponse) GetTopDepositUsers() []*GetTopUsersDashboardResponse_User {
 	if x != nil {
 		return x.TopDepositUsers
 	}
 	return nil
 }
 
-func (x *GetTopPaymentUsersDashboardResponse) GetTopWithdrawalUsers() []*GetTopPaymentUsersDashboardResponse_User {
+func (x *GetTopUsersDashboardResponse) GetTopWithdrawalUsers() []*GetTopUsersDashboardResponse_User {
 	if x != nil {
 		return x.TopWithdrawalUsers
 	}
@@ -1136,10 +1153,9 @@ func (x *GetOverviewDashboardResponse_ActiveDevices) GetYesterday() int32 {
 }
 
 type GetTimeRangedDashboardResponse_GameData struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ggr           string                 `protobuf:"bytes,1,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	Ngr           string                 `protobuf:"bytes,2,opt,name=ngr,proto3" json:"ngr,omitempty"`
-	Deposit       string                 `protobuf:"bytes,3,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	state         protoimpl.MessageState                        `protogen:"open.v1"`
+	Time          *timestamppb.Timestamp                        `protobuf:"bytes,1,opt,name=time,proto3" json:"time,omitempty"`
+	Data          *GetTimeRangedDashboardResponse_GameData_Data `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1174,33 +1190,26 @@ func (*GetTimeRangedDashboardResponse_GameData) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{3, 0}
 }
 
-func (x *GetTimeRangedDashboardResponse_GameData) GetGgr() string {
+func (x *GetTimeRangedDashboardResponse_GameData) GetTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Ggr
+		return x.Time
 	}
-	return ""
+	return nil
 }
 
-func (x *GetTimeRangedDashboardResponse_GameData) GetNgr() string {
+func (x *GetTimeRangedDashboardResponse_GameData) GetData() *GetTimeRangedDashboardResponse_GameData_Data {
 	if x != nil {
-		return x.Ngr
+		return x.Data
 	}
-	return ""
-}
-
-func (x *GetTimeRangedDashboardResponse_GameData) GetDeposit() string {
-	if x != nil {
-		return x.Deposit
-	}
-	return ""
+	return nil
 }
 
 type GetTimeRangedDashboardResponse_PaymentData struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	Withdrawal             string                 `protobuf:"bytes,1,opt,name=withdrawal,proto3" json:"withdrawal,omitempty"`
-	DepositMinusWithdrawal string                 `protobuf:"bytes,2,opt,name=deposit_minus_withdrawal,json=depositMinusWithdrawal,proto3" json:"deposit_minus_withdrawal,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state         protoimpl.MessageState                           `protogen:"open.v1"`
+	Time          *timestamppb.Timestamp                           `protobuf:"bytes,1,opt,name=time,proto3" json:"time,omitempty"`
+	Data          *GetTimeRangedDashboardResponse_PaymentData_Data `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetTimeRangedDashboardResponse_PaymentData) Reset() {
@@ -1233,23 +1242,24 @@ func (*GetTimeRangedDashboardResponse_PaymentData) Descriptor() ([]byte, []int) 
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{3, 1}
 }
 
-func (x *GetTimeRangedDashboardResponse_PaymentData) GetWithdrawal() string {
+func (x *GetTimeRangedDashboardResponse_PaymentData) GetTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Withdrawal
+		return x.Time
 	}
-	return ""
+	return nil
 }
 
-func (x *GetTimeRangedDashboardResponse_PaymentData) GetDepositMinusWithdrawal() string {
+func (x *GetTimeRangedDashboardResponse_PaymentData) GetData() *GetTimeRangedDashboardResponse_PaymentData_Data {
 	if x != nil {
-		return x.DepositMinusWithdrawal
+		return x.Data
 	}
-	return ""
+	return nil
 }
 
 type GetTimeRangedDashboardResponse_ActiveUsersData struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ActiveUsers   int32                  `protobuf:"varint,1,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
+	state         protoimpl.MessageState                               `protogen:"open.v1"`
+	Time          *timestamppb.Timestamp                               `protobuf:"bytes,1,opt,name=time,proto3" json:"time,omitempty"`
+	Data          *GetTimeRangedDashboardResponse_ActiveUsersData_Data `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1284,36 +1294,42 @@ func (*GetTimeRangedDashboardResponse_ActiveUsersData) Descriptor() ([]byte, []i
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{3, 2}
 }
 
-func (x *GetTimeRangedDashboardResponse_ActiveUsersData) GetActiveUsers() int32 {
+func (x *GetTimeRangedDashboardResponse_ActiveUsersData) GetTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ActiveUsers
+		return x.Time
 	}
-	return 0
+	return nil
 }
 
-type GetTimeRangedDashboardResponse_Data struct {
-	state           protoimpl.MessageState                          `protogen:"open.v1"`
-	GameData        *GetTimeRangedDashboardResponse_GameData        `protobuf:"bytes,1,opt,name=game_data,json=gameData,proto3" json:"game_data,omitempty"`
-	PaymentData     *GetTimeRangedDashboardResponse_PaymentData     `protobuf:"bytes,2,opt,name=payment_data,json=paymentData,proto3" json:"payment_data,omitempty"`
-	ActiveUsersData *GetTimeRangedDashboardResponse_ActiveUsersData `protobuf:"bytes,3,opt,name=active_users_data,json=activeUsersData,proto3" json:"active_users_data,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+func (x *GetTimeRangedDashboardResponse_ActiveUsersData) GetData() *GetTimeRangedDashboardResponse_ActiveUsersData_Data {
+	if x != nil {
+		return x.Data
+	}
+	return nil
 }
 
-func (x *GetTimeRangedDashboardResponse_Data) Reset() {
-	*x = GetTimeRangedDashboardResponse_Data{}
+type GetTimeRangedDashboardResponse_GameData_Data struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ggr           string                 `protobuf:"bytes,1,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	Ngr           string                 `protobuf:"bytes,2,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTimeRangedDashboardResponse_GameData_Data) Reset() {
+	*x = GetTimeRangedDashboardResponse_GameData_Data{}
 	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetTimeRangedDashboardResponse_Data) String() string {
+func (x *GetTimeRangedDashboardResponse_GameData_Data) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetTimeRangedDashboardResponse_Data) ProtoMessage() {}
+func (*GetTimeRangedDashboardResponse_GameData_Data) ProtoMessage() {}
 
-func (x *GetTimeRangedDashboardResponse_Data) ProtoReflect() protoreflect.Message {
+func (x *GetTimeRangedDashboardResponse_GameData_Data) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1325,33 +1341,122 @@ func (x *GetTimeRangedDashboardResponse_Data) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetTimeRangedDashboardResponse_Data.ProtoReflect.Descriptor instead.
-func (*GetTimeRangedDashboardResponse_Data) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{3, 3}
+// Deprecated: Use GetTimeRangedDashboardResponse_GameData_Data.ProtoReflect.Descriptor instead.
+func (*GetTimeRangedDashboardResponse_GameData_Data) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{3, 0, 0}
 }
 
-func (x *GetTimeRangedDashboardResponse_Data) GetGameData() *GetTimeRangedDashboardResponse_GameData {
+func (x *GetTimeRangedDashboardResponse_GameData_Data) GetGgr() string {
 	if x != nil {
-		return x.GameData
+		return x.Ggr
 	}
-	return nil
+	return ""
 }
 
-func (x *GetTimeRangedDashboardResponse_Data) GetPaymentData() *GetTimeRangedDashboardResponse_PaymentData {
+func (x *GetTimeRangedDashboardResponse_GameData_Data) GetNgr() string {
 	if x != nil {
-		return x.PaymentData
+		return x.Ngr
 	}
-	return nil
+	return ""
 }
 
-func (x *GetTimeRangedDashboardResponse_Data) GetActiveUsersData() *GetTimeRangedDashboardResponse_ActiveUsersData {
+type GetTimeRangedDashboardResponse_PaymentData_Data struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Deposit       string                 `protobuf:"bytes,1,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	Withdrawal    string                 `protobuf:"bytes,2,opt,name=withdrawal,proto3" json:"withdrawal,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTimeRangedDashboardResponse_PaymentData_Data) Reset() {
+	*x = GetTimeRangedDashboardResponse_PaymentData_Data{}
+	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTimeRangedDashboardResponse_PaymentData_Data) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTimeRangedDashboardResponse_PaymentData_Data) ProtoMessage() {}
+
+func (x *GetTimeRangedDashboardResponse_PaymentData_Data) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[21]
 	if x != nil {
-		return x.ActiveUsersData
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
 	}
-	return nil
+	return mi.MessageOf(x)
 }
 
-type GetTopPaymentUsersDashboardResponse_User struct {
+// Deprecated: Use GetTimeRangedDashboardResponse_PaymentData_Data.ProtoReflect.Descriptor instead.
+func (*GetTimeRangedDashboardResponse_PaymentData_Data) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{3, 1, 0}
+}
+
+func (x *GetTimeRangedDashboardResponse_PaymentData_Data) GetDeposit() string {
+	if x != nil {
+		return x.Deposit
+	}
+	return ""
+}
+
+func (x *GetTimeRangedDashboardResponse_PaymentData_Data) GetWithdrawal() string {
+	if x != nil {
+		return x.Withdrawal
+	}
+	return ""
+}
+
+type GetTimeRangedDashboardResponse_ActiveUsersData_Data struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ActiveUsers   int32                  `protobuf:"varint,1,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTimeRangedDashboardResponse_ActiveUsersData_Data) Reset() {
+	*x = GetTimeRangedDashboardResponse_ActiveUsersData_Data{}
+	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTimeRangedDashboardResponse_ActiveUsersData_Data) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTimeRangedDashboardResponse_ActiveUsersData_Data) ProtoMessage() {}
+
+func (x *GetTimeRangedDashboardResponse_ActiveUsersData_Data) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTimeRangedDashboardResponse_ActiveUsersData_Data.ProtoReflect.Descriptor instead.
+func (*GetTimeRangedDashboardResponse_ActiveUsersData_Data) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{3, 2, 0}
+}
+
+func (x *GetTimeRangedDashboardResponse_ActiveUsersData_Data) GetActiveUsers() int32 {
+	if x != nil {
+		return x.ActiveUsers
+	}
+	return 0
+}
+
+type GetTopUsersDashboardResponse_User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Avatar        string                 `protobuf:"bytes,2,opt,name=avatar,proto3" json:"avatar,omitempty"`
@@ -1363,21 +1468,21 @@ type GetTopPaymentUsersDashboardResponse_User struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetTopPaymentUsersDashboardResponse_User) Reset() {
-	*x = GetTopPaymentUsersDashboardResponse_User{}
-	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[21]
+func (x *GetTopUsersDashboardResponse_User) Reset() {
+	*x = GetTopUsersDashboardResponse_User{}
+	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetTopPaymentUsersDashboardResponse_User) String() string {
+func (x *GetTopUsersDashboardResponse_User) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetTopPaymentUsersDashboardResponse_User) ProtoMessage() {}
+func (*GetTopUsersDashboardResponse_User) ProtoMessage() {}
 
-func (x *GetTopPaymentUsersDashboardResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[21]
+func (x *GetTopUsersDashboardResponse_User) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1388,47 +1493,47 @@ func (x *GetTopPaymentUsersDashboardResponse_User) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetTopPaymentUsersDashboardResponse_User.ProtoReflect.Descriptor instead.
-func (*GetTopPaymentUsersDashboardResponse_User) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetTopUsersDashboardResponse_User.ProtoReflect.Descriptor instead.
+func (*GetTopUsersDashboardResponse_User) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{5, 0}
 }
 
-func (x *GetTopPaymentUsersDashboardResponse_User) GetUserId() string {
+func (x *GetTopUsersDashboardResponse_User) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *GetTopPaymentUsersDashboardResponse_User) GetAvatar() string {
+func (x *GetTopUsersDashboardResponse_User) GetAvatar() string {
 	if x != nil {
 		return x.Avatar
 	}
 	return ""
 }
 
-func (x *GetTopPaymentUsersDashboardResponse_User) GetCountry() string {
+func (x *GetTopUsersDashboardResponse_User) GetCountry() string {
 	if x != nil {
 		return x.Country
 	}
 	return ""
 }
 
-func (x *GetTopPaymentUsersDashboardResponse_User) GetVipLevel() int32 {
+func (x *GetTopUsersDashboardResponse_User) GetVipLevel() int32 {
 	if x != nil {
 		return x.VipLevel
 	}
 	return 0
 }
 
-func (x *GetTopPaymentUsersDashboardResponse_User) GetAmount() string {
+func (x *GetTopUsersDashboardResponse_User) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
 	return ""
 }
 
-func (x *GetTopPaymentUsersDashboardResponse_User) GetOperator() string {
+func (x *GetTopUsersDashboardResponse_User) GetOperator() string {
 	if x != nil {
 		return x.Operator
 	}
@@ -1445,7 +1550,7 @@ type GetTopOperatorsDashboardResponse_OperatorData struct {
 
 func (x *GetTopOperatorsDashboardResponse_OperatorData) Reset() {
 	*x = GetTopOperatorsDashboardResponse_OperatorData{}
-	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1457,7 +1562,7 @@ func (x *GetTopOperatorsDashboardResponse_OperatorData) String() string {
 func (*GetTopOperatorsDashboardResponse_OperatorData) ProtoMessage() {}
 
 func (x *GetTopOperatorsDashboardResponse_OperatorData) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1491,7 +1596,7 @@ var File_backoffice_service_v1_backoffice_dashboard_proto protoreflect.FileDescr
 
 const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"\n" +
-	"0backoffice/service/v1/backoffice_dashboard.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x1d\n" +
+	"0backoffice/service/v1/backoffice_dashboard.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x1d\n" +
 	"\x1bGetOverviewDashboardRequest\"\xf3\f\n" +
 	"\x1cGetOverviewDashboardResponse\x12r\n" +
 	"\x10registered_users\x18\x01 \x01(\v2G.api.backoffice.service.v1.GetOverviewDashboardResponse.RegisteredUsersR\x0fregisteredUsers\x12y\n" +
@@ -1538,34 +1643,40 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"\x1bTIME_RANGE_TYPE_UNSPECIFIED\x10\x00\x12\x1e\n" +
 	"\x1aTIME_RANGE_TYPE_THIS_MONTH\x10\x01\x12\x1d\n" +
 	"\x19TIME_RANGE_TYPE_THIS_WEEK\x10\x02\x12\x1f\n" +
-	"\x1bTIME_RANGE_TYPE_CUSTOM_DAYS\x10\x03\"\xa8\x05\n" +
-	"\x1eGetTimeRangedDashboardResponse\x12R\n" +
-	"\x04data\x18\x01 \x03(\v2>.api.backoffice.service.v1.GetTimeRangedDashboardResponse.DataR\x04data\x1aH\n" +
-	"\bGameData\x12\x10\n" +
+	"\x1bTIME_RANGE_TYPE_CUSTOM_DAYS\x10\x03\"\xdd\a\n" +
+	"\x1eGetTimeRangedDashboardResponse\x12_\n" +
+	"\tgame_data\x18\x01 \x03(\v2B.api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameDataR\bgameData\x12h\n" +
+	"\fpayment_data\x18\x02 \x03(\v2E.api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentDataR\vpaymentData\x12u\n" +
+	"\x11active_users_data\x18\x03 \x03(\v2I.api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersDataR\x0factiveUsersData\x1a\xc3\x01\n" +
+	"\bGameData\x12.\n" +
+	"\x04time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12[\n" +
+	"\x04data\x18\x02 \x01(\v2G.api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData.DataR\x04data\x1a*\n" +
+	"\x04Data\x12\x10\n" +
 	"\x03ggr\x18\x01 \x01(\tR\x03ggr\x12\x10\n" +
-	"\x03ngr\x18\x02 \x01(\tR\x03ngr\x12\x18\n" +
-	"\adeposit\x18\x03 \x01(\tR\adeposit\x1ag\n" +
-	"\vPaymentData\x12\x1e\n" +
+	"\x03ngr\x18\x02 \x01(\tR\x03ngr\x1a\xdf\x01\n" +
+	"\vPaymentData\x12.\n" +
+	"\x04time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12^\n" +
+	"\x04data\x18\x02 \x01(\v2J.api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData.DataR\x04data\x1a@\n" +
+	"\x04Data\x12\x18\n" +
+	"\adeposit\x18\x01 \x01(\tR\adeposit\x12\x1e\n" +
 	"\n" +
-	"withdrawal\x18\x01 \x01(\tR\n" +
-	"withdrawal\x128\n" +
-	"\x18deposit_minus_withdrawal\x18\x02 \x01(\tR\x16depositMinusWithdrawal\x1a4\n" +
-	"\x0fActiveUsersData\x12!\n" +
-	"\factive_users\x18\x01 \x01(\x05R\vactiveUsers\x1a\xc8\x02\n" +
-	"\x04Data\x12_\n" +
-	"\tgame_data\x18\x01 \x01(\v2B.api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameDataR\bgameData\x12h\n" +
-	"\fpayment_data\x18\x02 \x01(\v2E.api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentDataR\vpaymentData\x12u\n" +
-	"\x11active_users_data\x18\x03 \x01(\v2I.api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersDataR\x0factiveUsersData\"\xa6\x02\n" +
-	"\"GetTopPaymentUsersDashboardRequest\x12s\n" +
-	"\x0ftime_range_type\x18\x01 \x01(\x0e2K.api.backoffice.service.v1.GetTopPaymentUsersDashboardRequest.TimeRangeTypeR\rtimeRangeType\"\x8a\x01\n" +
+	"withdrawal\x18\x02 \x01(\tR\n" +
+	"withdrawal\x1a\xd0\x01\n" +
+	"\x0fActiveUsersData\x12.\n" +
+	"\x04time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12b\n" +
+	"\x04data\x18\x02 \x01(\v2N.api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData.DataR\x04data\x1a)\n" +
+	"\x04Data\x12!\n" +
+	"\factive_users\x18\x01 \x01(\x05R\vactiveUsers\"\x98\x02\n" +
+	"\x1bGetTopUsersDashboardRequest\x12l\n" +
+	"\x0ftime_range_type\x18\x01 \x01(\x0e2D.api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeTypeR\rtimeRangeType\"\x8a\x01\n" +
 	"\rTimeRangeType\x12\x1f\n" +
 	"\x1bTIME_RANGE_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15TIME_RANGE_TYPE_TODAY\x10\x01\x12\x1d\n" +
 	"\x19TIME_RANGE_TYPE_THIS_WEEK\x10\x02\x12\x1e\n" +
-	"\x1aTIME_RANGE_TYPE_THIS_MONTH\x10\x03\"\xb2\x03\n" +
-	"#GetTopPaymentUsersDashboardResponse\x12o\n" +
-	"\x11top_deposit_users\x18\x01 \x03(\v2C.api.backoffice.service.v1.GetTopPaymentUsersDashboardResponse.UserR\x0ftopDepositUsers\x12u\n" +
-	"\x14top_withdrawal_users\x18\x02 \x03(\v2C.api.backoffice.service.v1.GetTopPaymentUsersDashboardResponse.UserR\x12topWithdrawalUsers\x1a\xa2\x01\n" +
+	"\x1aTIME_RANGE_TYPE_THIS_MONTH\x10\x03\"\x9d\x03\n" +
+	"\x1cGetTopUsersDashboardResponse\x12h\n" +
+	"\x11top_deposit_users\x18\x01 \x03(\v2<.api.backoffice.service.v1.GetTopUsersDashboardResponse.UserR\x0ftopDepositUsers\x12n\n" +
+	"\x14top_withdrawal_users\x18\x02 \x03(\v2<.api.backoffice.service.v1.GetTopUsersDashboardResponse.UserR\x12topWithdrawalUsers\x1a\xa2\x01\n" +
 	"\x04User\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x16\n" +
 	"\x06avatar\x18\x02 \x01(\tR\x06avatar\x12\x18\n" +
@@ -1593,10 +1704,11 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"-top_deposit_minus_withdraw_retailer_operators\x18\t \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR(topDepositMinusWithdrawRetailerOperators\x1aB\n" +
 	"\fOperatorData\x12\x1a\n" +
 	"\boperator\x18\x01 \x01(\tR\boperator\x12\x16\n" +
-	"\x06amount\x18\x02 \x01(\tR\x06amount2\xda\x04\n" +
+	"\x06amount\x18\x02 \x01(\tR\x06amount2\x97\x06\n" +
 	"\x13BackofficeDashboard\x12\xb0\x01\n" +
 	"\x14GetOverviewDashboard\x126.api.backoffice.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/dashboard/get\x12\xc2\x01\n" +
-	"\x16GetTimeRangedDashboard\x128.api.backoffice.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/dashboard/time-ranged/get\x12\xca\x01\n" +
+	"\x16GetTimeRangedDashboard\x128.api.backoffice.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/dashboard/time-ranged/get\x12\xba\x01\n" +
+	"\x14GetTopUsersDashboard\x126.api.backoffice.service.v1.GetTopUsersDashboardRequest\x1a7.api.backoffice.service.v1.GetTopUsersDashboardResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/dashboard/top-users/get\x12\xca\x01\n" +
 	"\x18GetTopOperatorsDashboard\x12:.api.backoffice.service.v1.GetTopOperatorsDashboardRequest\x1a;.api.backoffice.service.v1.GetTopOperatorsDashboardResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/dashboard/top-operators/getB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
@@ -1613,17 +1725,17 @@ func file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP() []byte 
 }
 
 var file_backoffice_service_v1_backoffice_dashboard_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_backoffice_service_v1_backoffice_dashboard_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_backoffice_service_v1_backoffice_dashboard_proto_goTypes = []any{
 	(GetTimeRangedDashboardRequest_TimeRangeType)(0),                  // 0: api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
-	(GetTopPaymentUsersDashboardRequest_TimeRangeType)(0),             // 1: api.backoffice.service.v1.GetTopPaymentUsersDashboardRequest.TimeRangeType
+	(GetTopUsersDashboardRequest_TimeRangeType)(0),                    // 1: api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
 	(GetTopOperatorsDashboardRequest_TimeRangeType)(0),                // 2: api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
 	(*GetOverviewDashboardRequest)(nil),                               // 3: api.backoffice.service.v1.GetOverviewDashboardRequest
 	(*GetOverviewDashboardResponse)(nil),                              // 4: api.backoffice.service.v1.GetOverviewDashboardResponse
 	(*GetTimeRangedDashboardRequest)(nil),                             // 5: api.backoffice.service.v1.GetTimeRangedDashboardRequest
 	(*GetTimeRangedDashboardResponse)(nil),                            // 6: api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	(*GetTopPaymentUsersDashboardRequest)(nil),                        // 7: api.backoffice.service.v1.GetTopPaymentUsersDashboardRequest
-	(*GetTopPaymentUsersDashboardResponse)(nil),                       // 8: api.backoffice.service.v1.GetTopPaymentUsersDashboardResponse
+	(*GetTopUsersDashboardRequest)(nil),                               // 7: api.backoffice.service.v1.GetTopUsersDashboardRequest
+	(*GetTopUsersDashboardResponse)(nil),                              // 8: api.backoffice.service.v1.GetTopUsersDashboardResponse
 	(*GetTopOperatorsDashboardRequest)(nil),                           // 9: api.backoffice.service.v1.GetTopOperatorsDashboardRequest
 	(*GetTopOperatorsDashboardResponse)(nil),                          // 10: api.backoffice.service.v1.GetTopOperatorsDashboardResponse
 	(*GetOverviewDashboardResponse_RegisteredUsers)(nil),              // 11: api.backoffice.service.v1.GetOverviewDashboardResponse.RegisteredUsers
@@ -1638,9 +1750,12 @@ var file_backoffice_service_v1_backoffice_dashboard_proto_goTypes = []any{
 	(*GetTimeRangedDashboardResponse_GameData)(nil),                   // 20: api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData
 	(*GetTimeRangedDashboardResponse_PaymentData)(nil),                // 21: api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData
 	(*GetTimeRangedDashboardResponse_ActiveUsersData)(nil),            // 22: api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData
-	(*GetTimeRangedDashboardResponse_Data)(nil),                       // 23: api.backoffice.service.v1.GetTimeRangedDashboardResponse.Data
-	(*GetTopPaymentUsersDashboardResponse_User)(nil),                  // 24: api.backoffice.service.v1.GetTopPaymentUsersDashboardResponse.User
-	(*GetTopOperatorsDashboardResponse_OperatorData)(nil),             // 25: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	(*GetTimeRangedDashboardResponse_GameData_Data)(nil),              // 23: api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData.Data
+	(*GetTimeRangedDashboardResponse_PaymentData_Data)(nil),           // 24: api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData.Data
+	(*GetTimeRangedDashboardResponse_ActiveUsersData_Data)(nil),       // 25: api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData.Data
+	(*GetTopUsersDashboardResponse_User)(nil),                         // 26: api.backoffice.service.v1.GetTopUsersDashboardResponse.User
+	(*GetTopOperatorsDashboardResponse_OperatorData)(nil),             // 27: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	(*timestamppb.Timestamp)(nil),                                     // 28: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_dashboard_proto_depIdxs = []int32{
 	11, // 0: api.backoffice.service.v1.GetOverviewDashboardResponse.registered_users:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.RegisteredUsers
@@ -1653,34 +1768,41 @@ var file_backoffice_service_v1_backoffice_dashboard_proto_depIdxs = []int32{
 	18, // 7: api.backoffice.service.v1.GetOverviewDashboardResponse.active_users:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.ActiveUsers
 	19, // 8: api.backoffice.service.v1.GetOverviewDashboardResponse.active_devices:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.ActiveDevices
 	0,  // 9: api.backoffice.service.v1.GetTimeRangedDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
-	23, // 10: api.backoffice.service.v1.GetTimeRangedDashboardResponse.data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.Data
-	1,  // 11: api.backoffice.service.v1.GetTopPaymentUsersDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopPaymentUsersDashboardRequest.TimeRangeType
-	24, // 12: api.backoffice.service.v1.GetTopPaymentUsersDashboardResponse.top_deposit_users:type_name -> api.backoffice.service.v1.GetTopPaymentUsersDashboardResponse.User
-	24, // 13: api.backoffice.service.v1.GetTopPaymentUsersDashboardResponse.top_withdrawal_users:type_name -> api.backoffice.service.v1.GetTopPaymentUsersDashboardResponse.User
-	2,  // 14: api.backoffice.service.v1.GetTopOperatorsDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
-	25, // 15: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ggr_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	25, // 16: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ngr_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	25, // 17: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_deposit_minus_withdraw_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	25, // 18: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ggr_group_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	25, // 19: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ngr_group_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	25, // 20: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_deposit_minus_withdraw_group_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	25, // 21: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ggr_retailer_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	25, // 22: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ngr_retailer_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	25, // 23: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_deposit_minus_withdraw_retailer_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	20, // 24: api.backoffice.service.v1.GetTimeRangedDashboardResponse.Data.game_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData
-	21, // 25: api.backoffice.service.v1.GetTimeRangedDashboardResponse.Data.payment_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData
-	22, // 26: api.backoffice.service.v1.GetTimeRangedDashboardResponse.Data.active_users_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData
-	3,  // 27: api.backoffice.service.v1.BackofficeDashboard.GetOverviewDashboard:input_type -> api.backoffice.service.v1.GetOverviewDashboardRequest
-	5,  // 28: api.backoffice.service.v1.BackofficeDashboard.GetTimeRangedDashboard:input_type -> api.backoffice.service.v1.GetTimeRangedDashboardRequest
-	9,  // 29: api.backoffice.service.v1.BackofficeDashboard.GetTopOperatorsDashboard:input_type -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest
-	4,  // 30: api.backoffice.service.v1.BackofficeDashboard.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
-	6,  // 31: api.backoffice.service.v1.BackofficeDashboard.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	10, // 32: api.backoffice.service.v1.BackofficeDashboard.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
-	30, // [30:33] is the sub-list for method output_type
-	27, // [27:30] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	20, // 10: api.backoffice.service.v1.GetTimeRangedDashboardResponse.game_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData
+	21, // 11: api.backoffice.service.v1.GetTimeRangedDashboardResponse.payment_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData
+	22, // 12: api.backoffice.service.v1.GetTimeRangedDashboardResponse.active_users_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData
+	1,  // 13: api.backoffice.service.v1.GetTopUsersDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
+	26, // 14: api.backoffice.service.v1.GetTopUsersDashboardResponse.top_deposit_users:type_name -> api.backoffice.service.v1.GetTopUsersDashboardResponse.User
+	26, // 15: api.backoffice.service.v1.GetTopUsersDashboardResponse.top_withdrawal_users:type_name -> api.backoffice.service.v1.GetTopUsersDashboardResponse.User
+	2,  // 16: api.backoffice.service.v1.GetTopOperatorsDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
+	27, // 17: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ggr_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 18: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ngr_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 19: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_deposit_minus_withdraw_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 20: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ggr_group_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 21: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ngr_group_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 22: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_deposit_minus_withdraw_group_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 23: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ggr_retailer_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 24: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ngr_retailer_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 25: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_deposit_minus_withdraw_retailer_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	28, // 26: api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData.time:type_name -> google.protobuf.Timestamp
+	23, // 27: api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData.data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData.Data
+	28, // 28: api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData.time:type_name -> google.protobuf.Timestamp
+	24, // 29: api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData.data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData.Data
+	28, // 30: api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData.time:type_name -> google.protobuf.Timestamp
+	25, // 31: api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData.data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData.Data
+	3,  // 32: api.backoffice.service.v1.BackofficeDashboard.GetOverviewDashboard:input_type -> api.backoffice.service.v1.GetOverviewDashboardRequest
+	5,  // 33: api.backoffice.service.v1.BackofficeDashboard.GetTimeRangedDashboard:input_type -> api.backoffice.service.v1.GetTimeRangedDashboardRequest
+	7,  // 34: api.backoffice.service.v1.BackofficeDashboard.GetTopUsersDashboard:input_type -> api.backoffice.service.v1.GetTopUsersDashboardRequest
+	9,  // 35: api.backoffice.service.v1.BackofficeDashboard.GetTopOperatorsDashboard:input_type -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest
+	4,  // 36: api.backoffice.service.v1.BackofficeDashboard.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
+	6,  // 37: api.backoffice.service.v1.BackofficeDashboard.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
+	8,  // 38: api.backoffice.service.v1.BackofficeDashboard.GetTopUsersDashboard:output_type -> api.backoffice.service.v1.GetTopUsersDashboardResponse
+	10, // 39: api.backoffice.service.v1.BackofficeDashboard.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
+	36, // [36:40] is the sub-list for method output_type
+	32, // [32:36] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_dashboard_proto_init() }
@@ -1694,7 +1816,7 @@ func file_backoffice_service_v1_backoffice_dashboard_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc), len(file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   23,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

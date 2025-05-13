@@ -631,7 +631,7 @@ func (m *GetTimeRangedDashboardResponse) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetData() {
+	for idx, item := range m.GetGameData() {
 		_, _ = idx, item
 
 		if all {
@@ -639,7 +639,7 @@ func (m *GetTimeRangedDashboardResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GetTimeRangedDashboardResponseValidationError{
-						field:  fmt.Sprintf("Data[%v]", idx),
+						field:  fmt.Sprintf("GameData[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -647,7 +647,7 @@ func (m *GetTimeRangedDashboardResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GetTimeRangedDashboardResponseValidationError{
-						field:  fmt.Sprintf("Data[%v]", idx),
+						field:  fmt.Sprintf("GameData[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -656,7 +656,75 @@ func (m *GetTimeRangedDashboardResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GetTimeRangedDashboardResponseValidationError{
-					field:  fmt.Sprintf("Data[%v]", idx),
+					field:  fmt.Sprintf("GameData[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetPaymentData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetTimeRangedDashboardResponseValidationError{
+						field:  fmt.Sprintf("PaymentData[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetTimeRangedDashboardResponseValidationError{
+						field:  fmt.Sprintf("PaymentData[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetTimeRangedDashboardResponseValidationError{
+					field:  fmt.Sprintf("PaymentData[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetActiveUsersData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetTimeRangedDashboardResponseValidationError{
+						field:  fmt.Sprintf("ActiveUsersData[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetTimeRangedDashboardResponseValidationError{
+						field:  fmt.Sprintf("ActiveUsersData[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetTimeRangedDashboardResponseValidationError{
+					field:  fmt.Sprintf("ActiveUsersData[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -746,23 +814,22 @@ var _ interface {
 	ErrorName() string
 } = GetTimeRangedDashboardResponseValidationError{}
 
-// Validate checks the field values on GetTopPaymentUsersDashboardRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *GetTopPaymentUsersDashboardRequest) Validate() error {
+// Validate checks the field values on GetTopUsersDashboardRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetTopUsersDashboardRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetTopPaymentUsersDashboardRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// GetTopPaymentUsersDashboardRequestMultiError, or nil if none found.
-func (m *GetTopPaymentUsersDashboardRequest) ValidateAll() error {
+// ValidateAll checks the field values on GetTopUsersDashboardRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetTopUsersDashboardRequestMultiError, or nil if none found.
+func (m *GetTopUsersDashboardRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetTopPaymentUsersDashboardRequest) validate(all bool) error {
+func (m *GetTopUsersDashboardRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -772,20 +839,19 @@ func (m *GetTopPaymentUsersDashboardRequest) validate(all bool) error {
 	// no validation rules for TimeRangeType
 
 	if len(errors) > 0 {
-		return GetTopPaymentUsersDashboardRequestMultiError(errors)
+		return GetTopUsersDashboardRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetTopPaymentUsersDashboardRequestMultiError is an error wrapping multiple
-// validation errors returned by
-// GetTopPaymentUsersDashboardRequest.ValidateAll() if the designated
-// constraints aren't met.
-type GetTopPaymentUsersDashboardRequestMultiError []error
+// GetTopUsersDashboardRequestMultiError is an error wrapping multiple
+// validation errors returned by GetTopUsersDashboardRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetTopUsersDashboardRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetTopPaymentUsersDashboardRequestMultiError) Error() string {
+func (m GetTopUsersDashboardRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -794,12 +860,12 @@ func (m GetTopPaymentUsersDashboardRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetTopPaymentUsersDashboardRequestMultiError) AllErrors() []error { return m }
+func (m GetTopUsersDashboardRequestMultiError) AllErrors() []error { return m }
 
-// GetTopPaymentUsersDashboardRequestValidationError is the validation error
-// returned by GetTopPaymentUsersDashboardRequest.Validate if the designated
-// constraints aren't met.
-type GetTopPaymentUsersDashboardRequestValidationError struct {
+// GetTopUsersDashboardRequestValidationError is the validation error returned
+// by GetTopUsersDashboardRequest.Validate if the designated constraints
+// aren't met.
+type GetTopUsersDashboardRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -807,24 +873,24 @@ type GetTopPaymentUsersDashboardRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetTopPaymentUsersDashboardRequestValidationError) Field() string { return e.field }
+func (e GetTopUsersDashboardRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetTopPaymentUsersDashboardRequestValidationError) Reason() string { return e.reason }
+func (e GetTopUsersDashboardRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetTopPaymentUsersDashboardRequestValidationError) Cause() error { return e.cause }
+func (e GetTopUsersDashboardRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetTopPaymentUsersDashboardRequestValidationError) Key() bool { return e.key }
+func (e GetTopUsersDashboardRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetTopPaymentUsersDashboardRequestValidationError) ErrorName() string {
-	return "GetTopPaymentUsersDashboardRequestValidationError"
+func (e GetTopUsersDashboardRequestValidationError) ErrorName() string {
+	return "GetTopUsersDashboardRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetTopPaymentUsersDashboardRequestValidationError) Error() string {
+func (e GetTopUsersDashboardRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -836,14 +902,14 @@ func (e GetTopPaymentUsersDashboardRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetTopPaymentUsersDashboardRequest.%s: %s%s",
+		"invalid %sGetTopUsersDashboardRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetTopPaymentUsersDashboardRequestValidationError{}
+var _ error = GetTopUsersDashboardRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -851,25 +917,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetTopPaymentUsersDashboardRequestValidationError{}
+} = GetTopUsersDashboardRequestValidationError{}
 
-// Validate checks the field values on GetTopPaymentUsersDashboardResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *GetTopPaymentUsersDashboardResponse) Validate() error {
+// Validate checks the field values on GetTopUsersDashboardResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetTopUsersDashboardResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetTopPaymentUsersDashboardResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// GetTopPaymentUsersDashboardResponseMultiError, or nil if none found.
-func (m *GetTopPaymentUsersDashboardResponse) ValidateAll() error {
+// ValidateAll checks the field values on GetTopUsersDashboardResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetTopUsersDashboardResponseMultiError, or nil if none found.
+func (m *GetTopUsersDashboardResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetTopPaymentUsersDashboardResponse) validate(all bool) error {
+func (m *GetTopUsersDashboardResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -883,7 +948,7 @@ func (m *GetTopPaymentUsersDashboardResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetTopPaymentUsersDashboardResponseValidationError{
+					errors = append(errors, GetTopUsersDashboardResponseValidationError{
 						field:  fmt.Sprintf("TopDepositUsers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -891,7 +956,7 @@ func (m *GetTopPaymentUsersDashboardResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, GetTopPaymentUsersDashboardResponseValidationError{
+					errors = append(errors, GetTopUsersDashboardResponseValidationError{
 						field:  fmt.Sprintf("TopDepositUsers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -900,7 +965,7 @@ func (m *GetTopPaymentUsersDashboardResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return GetTopPaymentUsersDashboardResponseValidationError{
+				return GetTopUsersDashboardResponseValidationError{
 					field:  fmt.Sprintf("TopDepositUsers[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -917,7 +982,7 @@ func (m *GetTopPaymentUsersDashboardResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetTopPaymentUsersDashboardResponseValidationError{
+					errors = append(errors, GetTopUsersDashboardResponseValidationError{
 						field:  fmt.Sprintf("TopWithdrawalUsers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -925,7 +990,7 @@ func (m *GetTopPaymentUsersDashboardResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, GetTopPaymentUsersDashboardResponseValidationError{
+					errors = append(errors, GetTopUsersDashboardResponseValidationError{
 						field:  fmt.Sprintf("TopWithdrawalUsers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -934,7 +999,7 @@ func (m *GetTopPaymentUsersDashboardResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return GetTopPaymentUsersDashboardResponseValidationError{
+				return GetTopUsersDashboardResponseValidationError{
 					field:  fmt.Sprintf("TopWithdrawalUsers[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -945,20 +1010,19 @@ func (m *GetTopPaymentUsersDashboardResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetTopPaymentUsersDashboardResponseMultiError(errors)
+		return GetTopUsersDashboardResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetTopPaymentUsersDashboardResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// GetTopPaymentUsersDashboardResponse.ValidateAll() if the designated
-// constraints aren't met.
-type GetTopPaymentUsersDashboardResponseMultiError []error
+// GetTopUsersDashboardResponseMultiError is an error wrapping multiple
+// validation errors returned by GetTopUsersDashboardResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetTopUsersDashboardResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetTopPaymentUsersDashboardResponseMultiError) Error() string {
+func (m GetTopUsersDashboardResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -967,12 +1031,12 @@ func (m GetTopPaymentUsersDashboardResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetTopPaymentUsersDashboardResponseMultiError) AllErrors() []error { return m }
+func (m GetTopUsersDashboardResponseMultiError) AllErrors() []error { return m }
 
-// GetTopPaymentUsersDashboardResponseValidationError is the validation error
-// returned by GetTopPaymentUsersDashboardResponse.Validate if the designated
-// constraints aren't met.
-type GetTopPaymentUsersDashboardResponseValidationError struct {
+// GetTopUsersDashboardResponseValidationError is the validation error returned
+// by GetTopUsersDashboardResponse.Validate if the designated constraints
+// aren't met.
+type GetTopUsersDashboardResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -980,24 +1044,24 @@ type GetTopPaymentUsersDashboardResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetTopPaymentUsersDashboardResponseValidationError) Field() string { return e.field }
+func (e GetTopUsersDashboardResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetTopPaymentUsersDashboardResponseValidationError) Reason() string { return e.reason }
+func (e GetTopUsersDashboardResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetTopPaymentUsersDashboardResponseValidationError) Cause() error { return e.cause }
+func (e GetTopUsersDashboardResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetTopPaymentUsersDashboardResponseValidationError) Key() bool { return e.key }
+func (e GetTopUsersDashboardResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetTopPaymentUsersDashboardResponseValidationError) ErrorName() string {
-	return "GetTopPaymentUsersDashboardResponseValidationError"
+func (e GetTopUsersDashboardResponseValidationError) ErrorName() string {
+	return "GetTopUsersDashboardResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetTopPaymentUsersDashboardResponseValidationError) Error() string {
+func (e GetTopUsersDashboardResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1009,14 +1073,14 @@ func (e GetTopPaymentUsersDashboardResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetTopPaymentUsersDashboardResponse.%s: %s%s",
+		"invalid %sGetTopUsersDashboardResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetTopPaymentUsersDashboardResponseValidationError{}
+var _ error = GetTopUsersDashboardResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1024,7 +1088,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetTopPaymentUsersDashboardResponseValidationError{}
+} = GetTopUsersDashboardResponseValidationError{}
 
 // Validate checks the field values on GetTopOperatorsDashboardRequest with the
 // rules defined in the proto definition for this message. If any rules are
@@ -2573,11 +2637,63 @@ func (m *GetTimeRangedDashboardResponse_GameData) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Ggr
+	if all {
+		switch v := interface{}(m.GetTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardResponse_GameDataValidationError{
+					field:  "Time",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardResponse_GameDataValidationError{
+					field:  "Time",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTimeRangedDashboardResponse_GameDataValidationError{
+				field:  "Time",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
-	// no validation rules for Ngr
-
-	// no validation rules for Deposit
+	if all {
+		switch v := interface{}(m.GetData()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardResponse_GameDataValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardResponse_GameDataValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTimeRangedDashboardResponse_GameDataValidationError{
+				field:  "Data",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return GetTimeRangedDashboardResponse_GameDataMultiError(errors)
@@ -2685,9 +2801,63 @@ func (m *GetTimeRangedDashboardResponse_PaymentData) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Withdrawal
+	if all {
+		switch v := interface{}(m.GetTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardResponse_PaymentDataValidationError{
+					field:  "Time",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardResponse_PaymentDataValidationError{
+					field:  "Time",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTimeRangedDashboardResponse_PaymentDataValidationError{
+				field:  "Time",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
-	// no validation rules for DepositMinusWithdrawal
+	if all {
+		switch v := interface{}(m.GetData()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardResponse_PaymentDataValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardResponse_PaymentDataValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTimeRangedDashboardResponse_PaymentDataValidationError{
+				field:  "Data",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return GetTimeRangedDashboardResponse_PaymentDataMultiError(errors)
@@ -2795,7 +2965,63 @@ func (m *GetTimeRangedDashboardResponse_ActiveUsersData) validate(all bool) erro
 
 	var errors []error
 
-	// no validation rules for ActiveUsers
+	if all {
+		switch v := interface{}(m.GetTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardResponse_ActiveUsersDataValidationError{
+					field:  "Time",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardResponse_ActiveUsersDataValidationError{
+					field:  "Time",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTimeRangedDashboardResponse_ActiveUsersDataValidationError{
+				field:  "Time",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetData()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardResponse_ActiveUsersDataValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardResponse_ActiveUsersDataValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTimeRangedDashboardResponse_ActiveUsersDataValidationError{
+				field:  "Data",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return GetTimeRangedDashboardResponse_ActiveUsersDataMultiError(errors)
@@ -2882,131 +3108,49 @@ var _ interface {
 	ErrorName() string
 } = GetTimeRangedDashboardResponse_ActiveUsersDataValidationError{}
 
-// Validate checks the field values on GetTimeRangedDashboardResponse_Data with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *GetTimeRangedDashboardResponse_Data) Validate() error {
+// Validate checks the field values on
+// GetTimeRangedDashboardResponse_GameData_Data with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetTimeRangedDashboardResponse_GameData_Data) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetTimeRangedDashboardResponse_Data
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// GetTimeRangedDashboardResponse_DataMultiError, or nil if none found.
-func (m *GetTimeRangedDashboardResponse_Data) ValidateAll() error {
+// ValidateAll checks the field values on
+// GetTimeRangedDashboardResponse_GameData_Data with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetTimeRangedDashboardResponse_GameData_DataMultiError, or nil if none found.
+func (m *GetTimeRangedDashboardResponse_GameData_Data) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetTimeRangedDashboardResponse_Data) validate(all bool) error {
+func (m *GetTimeRangedDashboardResponse_GameData_Data) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetGameData()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetTimeRangedDashboardResponse_DataValidationError{
-					field:  "GameData",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetTimeRangedDashboardResponse_DataValidationError{
-					field:  "GameData",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetGameData()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetTimeRangedDashboardResponse_DataValidationError{
-				field:  "GameData",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Ggr
 
-	if all {
-		switch v := interface{}(m.GetPaymentData()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetTimeRangedDashboardResponse_DataValidationError{
-					field:  "PaymentData",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetTimeRangedDashboardResponse_DataValidationError{
-					field:  "PaymentData",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetPaymentData()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetTimeRangedDashboardResponse_DataValidationError{
-				field:  "PaymentData",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetActiveUsersData()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetTimeRangedDashboardResponse_DataValidationError{
-					field:  "ActiveUsersData",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetTimeRangedDashboardResponse_DataValidationError{
-					field:  "ActiveUsersData",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetActiveUsersData()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetTimeRangedDashboardResponse_DataValidationError{
-				field:  "ActiveUsersData",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Ngr
 
 	if len(errors) > 0 {
-		return GetTimeRangedDashboardResponse_DataMultiError(errors)
+		return GetTimeRangedDashboardResponse_GameData_DataMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetTimeRangedDashboardResponse_DataMultiError is an error wrapping multiple
-// validation errors returned by
-// GetTimeRangedDashboardResponse_Data.ValidateAll() if the designated
-// constraints aren't met.
-type GetTimeRangedDashboardResponse_DataMultiError []error
+// GetTimeRangedDashboardResponse_GameData_DataMultiError is an error wrapping
+// multiple validation errors returned by
+// GetTimeRangedDashboardResponse_GameData_Data.ValidateAll() if the
+// designated constraints aren't met.
+type GetTimeRangedDashboardResponse_GameData_DataMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetTimeRangedDashboardResponse_DataMultiError) Error() string {
+func (m GetTimeRangedDashboardResponse_GameData_DataMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3015,12 +3159,13 @@ func (m GetTimeRangedDashboardResponse_DataMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetTimeRangedDashboardResponse_DataMultiError) AllErrors() []error { return m }
+func (m GetTimeRangedDashboardResponse_GameData_DataMultiError) AllErrors() []error { return m }
 
-// GetTimeRangedDashboardResponse_DataValidationError is the validation error
-// returned by GetTimeRangedDashboardResponse_Data.Validate if the designated
+// GetTimeRangedDashboardResponse_GameData_DataValidationError is the
+// validation error returned by
+// GetTimeRangedDashboardResponse_GameData_Data.Validate if the designated
 // constraints aren't met.
-type GetTimeRangedDashboardResponse_DataValidationError struct {
+type GetTimeRangedDashboardResponse_GameData_DataValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3028,24 +3173,24 @@ type GetTimeRangedDashboardResponse_DataValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetTimeRangedDashboardResponse_DataValidationError) Field() string { return e.field }
+func (e GetTimeRangedDashboardResponse_GameData_DataValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetTimeRangedDashboardResponse_DataValidationError) Reason() string { return e.reason }
+func (e GetTimeRangedDashboardResponse_GameData_DataValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetTimeRangedDashboardResponse_DataValidationError) Cause() error { return e.cause }
+func (e GetTimeRangedDashboardResponse_GameData_DataValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetTimeRangedDashboardResponse_DataValidationError) Key() bool { return e.key }
+func (e GetTimeRangedDashboardResponse_GameData_DataValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetTimeRangedDashboardResponse_DataValidationError) ErrorName() string {
-	return "GetTimeRangedDashboardResponse_DataValidationError"
+func (e GetTimeRangedDashboardResponse_GameData_DataValidationError) ErrorName() string {
+	return "GetTimeRangedDashboardResponse_GameData_DataValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetTimeRangedDashboardResponse_DataValidationError) Error() string {
+func (e GetTimeRangedDashboardResponse_GameData_DataValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3057,14 +3202,14 @@ func (e GetTimeRangedDashboardResponse_DataValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetTimeRangedDashboardResponse_Data.%s: %s%s",
+		"invalid %sGetTimeRangedDashboardResponse_GameData_Data.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetTimeRangedDashboardResponse_DataValidationError{}
+var _ error = GetTimeRangedDashboardResponse_GameData_DataValidationError{}
 
 var _ interface {
 	Field() string
@@ -3072,26 +3217,256 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetTimeRangedDashboardResponse_DataValidationError{}
+} = GetTimeRangedDashboardResponse_GameData_DataValidationError{}
 
-// Validate checks the field values on GetTopPaymentUsersDashboardResponse_User
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *GetTopPaymentUsersDashboardResponse_User) Validate() error {
+// Validate checks the field values on
+// GetTimeRangedDashboardResponse_PaymentData_Data with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetTimeRangedDashboardResponse_PaymentData_Data) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// GetTopPaymentUsersDashboardResponse_User with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// GetTopPaymentUsersDashboardResponse_UserMultiError, or nil if none found.
-func (m *GetTopPaymentUsersDashboardResponse_User) ValidateAll() error {
+// GetTimeRangedDashboardResponse_PaymentData_Data with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// GetTimeRangedDashboardResponse_PaymentData_DataMultiError, or nil if none found.
+func (m *GetTimeRangedDashboardResponse_PaymentData_Data) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetTopPaymentUsersDashboardResponse_User) validate(all bool) error {
+func (m *GetTimeRangedDashboardResponse_PaymentData_Data) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Deposit
+
+	// no validation rules for Withdrawal
+
+	if len(errors) > 0 {
+		return GetTimeRangedDashboardResponse_PaymentData_DataMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTimeRangedDashboardResponse_PaymentData_DataMultiError is an error
+// wrapping multiple validation errors returned by
+// GetTimeRangedDashboardResponse_PaymentData_Data.ValidateAll() if the
+// designated constraints aren't met.
+type GetTimeRangedDashboardResponse_PaymentData_DataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTimeRangedDashboardResponse_PaymentData_DataMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTimeRangedDashboardResponse_PaymentData_DataMultiError) AllErrors() []error { return m }
+
+// GetTimeRangedDashboardResponse_PaymentData_DataValidationError is the
+// validation error returned by
+// GetTimeRangedDashboardResponse_PaymentData_Data.Validate if the designated
+// constraints aren't met.
+type GetTimeRangedDashboardResponse_PaymentData_DataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTimeRangedDashboardResponse_PaymentData_DataValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetTimeRangedDashboardResponse_PaymentData_DataValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetTimeRangedDashboardResponse_PaymentData_DataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTimeRangedDashboardResponse_PaymentData_DataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTimeRangedDashboardResponse_PaymentData_DataValidationError) ErrorName() string {
+	return "GetTimeRangedDashboardResponse_PaymentData_DataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTimeRangedDashboardResponse_PaymentData_DataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTimeRangedDashboardResponse_PaymentData_Data.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTimeRangedDashboardResponse_PaymentData_DataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTimeRangedDashboardResponse_PaymentData_DataValidationError{}
+
+// Validate checks the field values on
+// GetTimeRangedDashboardResponse_ActiveUsersData_Data with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetTimeRangedDashboardResponse_ActiveUsersData_Data) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetTimeRangedDashboardResponse_ActiveUsersData_Data with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// GetTimeRangedDashboardResponse_ActiveUsersData_DataMultiError, or nil if
+// none found.
+func (m *GetTimeRangedDashboardResponse_ActiveUsersData_Data) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTimeRangedDashboardResponse_ActiveUsersData_Data) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ActiveUsers
+
+	if len(errors) > 0 {
+		return GetTimeRangedDashboardResponse_ActiveUsersData_DataMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTimeRangedDashboardResponse_ActiveUsersData_DataMultiError is an error
+// wrapping multiple validation errors returned by
+// GetTimeRangedDashboardResponse_ActiveUsersData_Data.ValidateAll() if the
+// designated constraints aren't met.
+type GetTimeRangedDashboardResponse_ActiveUsersData_DataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTimeRangedDashboardResponse_ActiveUsersData_DataMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTimeRangedDashboardResponse_ActiveUsersData_DataMultiError) AllErrors() []error { return m }
+
+// GetTimeRangedDashboardResponse_ActiveUsersData_DataValidationError is the
+// validation error returned by
+// GetTimeRangedDashboardResponse_ActiveUsersData_Data.Validate if the
+// designated constraints aren't met.
+type GetTimeRangedDashboardResponse_ActiveUsersData_DataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTimeRangedDashboardResponse_ActiveUsersData_DataValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetTimeRangedDashboardResponse_ActiveUsersData_DataValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetTimeRangedDashboardResponse_ActiveUsersData_DataValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e GetTimeRangedDashboardResponse_ActiveUsersData_DataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTimeRangedDashboardResponse_ActiveUsersData_DataValidationError) ErrorName() string {
+	return "GetTimeRangedDashboardResponse_ActiveUsersData_DataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTimeRangedDashboardResponse_ActiveUsersData_DataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTimeRangedDashboardResponse_ActiveUsersData_Data.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTimeRangedDashboardResponse_ActiveUsersData_DataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTimeRangedDashboardResponse_ActiveUsersData_DataValidationError{}
+
+// Validate checks the field values on GetTopUsersDashboardResponse_User with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetTopUsersDashboardResponse_User) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetTopUsersDashboardResponse_User
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetTopUsersDashboardResponse_UserMultiError, or nil if none found.
+func (m *GetTopUsersDashboardResponse_User) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTopUsersDashboardResponse_User) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3111,20 +3486,20 @@ func (m *GetTopPaymentUsersDashboardResponse_User) validate(all bool) error {
 	// no validation rules for Operator
 
 	if len(errors) > 0 {
-		return GetTopPaymentUsersDashboardResponse_UserMultiError(errors)
+		return GetTopUsersDashboardResponse_UserMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetTopPaymentUsersDashboardResponse_UserMultiError is an error wrapping
-// multiple validation errors returned by
-// GetTopPaymentUsersDashboardResponse_User.ValidateAll() if the designated
+// GetTopUsersDashboardResponse_UserMultiError is an error wrapping multiple
+// validation errors returned by
+// GetTopUsersDashboardResponse_User.ValidateAll() if the designated
 // constraints aren't met.
-type GetTopPaymentUsersDashboardResponse_UserMultiError []error
+type GetTopUsersDashboardResponse_UserMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetTopPaymentUsersDashboardResponse_UserMultiError) Error() string {
+func (m GetTopUsersDashboardResponse_UserMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3133,12 +3508,12 @@ func (m GetTopPaymentUsersDashboardResponse_UserMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetTopPaymentUsersDashboardResponse_UserMultiError) AllErrors() []error { return m }
+func (m GetTopUsersDashboardResponse_UserMultiError) AllErrors() []error { return m }
 
-// GetTopPaymentUsersDashboardResponse_UserValidationError is the validation
-// error returned by GetTopPaymentUsersDashboardResponse_User.Validate if the
-// designated constraints aren't met.
-type GetTopPaymentUsersDashboardResponse_UserValidationError struct {
+// GetTopUsersDashboardResponse_UserValidationError is the validation error
+// returned by GetTopUsersDashboardResponse_User.Validate if the designated
+// constraints aren't met.
+type GetTopUsersDashboardResponse_UserValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3146,24 +3521,24 @@ type GetTopPaymentUsersDashboardResponse_UserValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetTopPaymentUsersDashboardResponse_UserValidationError) Field() string { return e.field }
+func (e GetTopUsersDashboardResponse_UserValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetTopPaymentUsersDashboardResponse_UserValidationError) Reason() string { return e.reason }
+func (e GetTopUsersDashboardResponse_UserValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetTopPaymentUsersDashboardResponse_UserValidationError) Cause() error { return e.cause }
+func (e GetTopUsersDashboardResponse_UserValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetTopPaymentUsersDashboardResponse_UserValidationError) Key() bool { return e.key }
+func (e GetTopUsersDashboardResponse_UserValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetTopPaymentUsersDashboardResponse_UserValidationError) ErrorName() string {
-	return "GetTopPaymentUsersDashboardResponse_UserValidationError"
+func (e GetTopUsersDashboardResponse_UserValidationError) ErrorName() string {
+	return "GetTopUsersDashboardResponse_UserValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetTopPaymentUsersDashboardResponse_UserValidationError) Error() string {
+func (e GetTopUsersDashboardResponse_UserValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3175,14 +3550,14 @@ func (e GetTopPaymentUsersDashboardResponse_UserValidationError) Error() string 
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetTopPaymentUsersDashboardResponse_User.%s: %s%s",
+		"invalid %sGetTopUsersDashboardResponse_User.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetTopPaymentUsersDashboardResponse_UserValidationError{}
+var _ error = GetTopUsersDashboardResponse_UserValidationError{}
 
 var _ interface {
 	Field() string
@@ -3190,7 +3565,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetTopPaymentUsersDashboardResponse_UserValidationError{}
+} = GetTopUsersDashboardResponse_UserValidationError{}
 
 // Validate checks the field values on
 // GetTopOperatorsDashboardResponse_OperatorData with the rules defined in the

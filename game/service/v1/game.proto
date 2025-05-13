@@ -1,12 +1,12 @@
 syntax = "proto3";
 
+package api.game.service.v1;
 import "google/api/annotations.proto";
-
-package game.service.v1;
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/game/service/v1;v1";
 option java_multiple_files = true;
-option java_package = "game.service.v1";
+option java_package = "api.game.service.v1";
 
 service Game {
 	rpc CreateOperator(CreateOperatorRequest) returns (CreateOperatorResponse) {
@@ -16,6 +16,13 @@ service Game {
 	};
 
 	rpc DeleteOperator(DeleteOperatorRequest) returns (DeleteOperatorResponse) {
+	};
+
+	rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/categories/list"
+			body: "*"
+		};
 	};
 
 	rpc ListGames(ListGamesRequest) returns (ListGamesResponse) {
@@ -63,6 +70,13 @@ service Game {
 	rpc Rollback(RollbackRequest) returns (RollbackResponse) {
 		option (google.api.http) = {
 			post: "/v1/game/rollback"
+			body: "*"
+		};
+	};
+
+	rpc ListBets(ListBetsRequest) returns (ListBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/bets/list"
 			body: "*"
 		};
 	};
@@ -117,6 +131,12 @@ message GameSort {
 		HIGHLIGHT = 3;
 	}
 	Field field = 1;
+}
+
+message ListCategoriesRequest{}
+
+message ListCategoriesResponse {
+	repeated string categories = 1;
 }
 
 message ListGamesRequest {
@@ -301,4 +321,43 @@ message RollbackTransactions {
 	string txn_id = 1;
 	string operator_txn_id = 2;
 	string processed_at = 3;
+}
+
+message ListBetsRequest {
+	int64 user_id = 1;
+	repeated string categories = 2;
+	repeated string currencies = 3;
+	optional google.protobuf.Timestamp start_time = 4;
+	optional google.protobuf.Timestamp end_time = 5;
+	optional int64 page = 6;
+	optional int64 page_size = 7;
+}
+
+message ListBetsResponse {
+	repeated Bet bets = 1;
+	int64 total = 2;
+	int64 page = 3;
+	int64 page_size = 4;
+}
+
+message Bet {
+	int64 id = 1;
+	string provider_bet_id = 2;
+	int64 round_id = 3;
+	string provider_round_id = 4;
+	string currency = 5;
+	string settlement_currency = 6;
+	string status = 7; //pending, end
+	int64 user_id = 8;
+	string game_id = 9;
+	string game_name = 10;
+	string game_category = 11;
+	string bet_amount = 12;
+	string settlement_bet_amount = 13;
+	string win_amount = 14;
+	string settlement_win_amount = 15;
+	string rollback_bet_amount = 16;
+	string rollback_win_amount = 17;
+	google.protobuf.Timestamp created_at = 18;
+	google.protobuf.Timestamp updated_at = 19;
 }

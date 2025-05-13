@@ -19,22 +19,36 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	BackofficeGame_ListProviders_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/ListProviders"
+	BackofficeGame_ListCategories_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListCategories"
+	BackofficeGame_ListFeeGroups_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/ListFeeGroups"
+	BackofficeGame_ListTags_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListTags"
+	BackofficeGame_ListThemes_FullMethodName                = "/api.backoffice.service.v1.BackofficeGame/ListThemes"
+	BackofficeGame_ListCurrencies_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListCurrencies"
 	BackofficeGame_ListBets_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListBets"
 	BackofficeGame_GetUserBetsOverview_FullMethodName       = "/api.backoffice.service.v1.BackofficeGame/GetUserBetsOverview"
 	BackofficeGame_GetGameTransactionsForBet_FullMethodName = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
 	BackofficeGame_ListUserBets_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ListUserBets"
 	BackofficeGame_ListGames_FullMethodName                 = "/api.backoffice.service.v1.BackofficeGame/ListGames"
+	BackofficeGame_UpdateGame_FullMethodName                = "/api.backoffice.service.v1.BackofficeGame/UpdateGame"
 )
 
 // BackofficeGameClient is the client API for BackofficeGame service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeGameClient interface {
+	ListProviders(ctx context.Context, in *ListProvidersRequest, opts ...grpc.CallOption) (*ListProvidersResponse, error)
+	ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...grpc.CallOption) (*ListCategoriesResponse, error)
+	ListFeeGroups(ctx context.Context, in *ListFeeGroupsRequest, opts ...grpc.CallOption) (*ListFeeGroupsResponse, error)
+	ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (*ListTagsResponse, error)
+	ListThemes(ctx context.Context, in *ListThemesRequest, opts ...grpc.CallOption) (*ListThemesResponse, error)
+	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
 	ListBets(ctx context.Context, in *ListBetsRequest, opts ...grpc.CallOption) (*ListBetsResponse, error)
 	GetUserBetsOverview(ctx context.Context, in *GetUserBetsOverviewRequest, opts ...grpc.CallOption) (*GetUserBetsOverviewResponse, error)
 	GetGameTransactionsForBet(ctx context.Context, in *GetGameTransactionsForBetRequest, opts ...grpc.CallOption) (*GetGameTransactionsForBetResponse, error)
 	ListUserBets(ctx context.Context, in *ListUserBetsRequest, opts ...grpc.CallOption) (*ListUserBetsResponse, error)
 	ListGames(ctx context.Context, in *ListGamesRequest, opts ...grpc.CallOption) (*ListGamesResponse, error)
+	UpdateGame(ctx context.Context, in *UpdateGameRequest, opts ...grpc.CallOption) (*UpdateGameResponse, error)
 }
 
 type backofficeGameClient struct {
@@ -43,6 +57,66 @@ type backofficeGameClient struct {
 
 func NewBackofficeGameClient(cc grpc.ClientConnInterface) BackofficeGameClient {
 	return &backofficeGameClient{cc}
+}
+
+func (c *backofficeGameClient) ListProviders(ctx context.Context, in *ListProvidersRequest, opts ...grpc.CallOption) (*ListProvidersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListProvidersResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListProviders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...grpc.CallOption) (*ListCategoriesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCategoriesResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListCategories_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListFeeGroups(ctx context.Context, in *ListFeeGroupsRequest, opts ...grpc.CallOption) (*ListFeeGroupsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListFeeGroupsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListFeeGroups_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (*ListTagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTagsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListTags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListThemes(ctx context.Context, in *ListThemesRequest, opts ...grpc.CallOption) (*ListThemesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListThemesResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListThemes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCurrenciesResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListCurrencies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *backofficeGameClient) ListBets(ctx context.Context, in *ListBetsRequest, opts ...grpc.CallOption) (*ListBetsResponse, error) {
@@ -95,15 +169,32 @@ func (c *backofficeGameClient) ListGames(ctx context.Context, in *ListGamesReque
 	return out, nil
 }
 
+func (c *backofficeGameClient) UpdateGame(ctx context.Context, in *UpdateGameRequest, opts ...grpc.CallOption) (*UpdateGameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateGameResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_UpdateGame_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeGameServer is the server API for BackofficeGame service.
 // All implementations must embed UnimplementedBackofficeGameServer
 // for forward compatibility.
 type BackofficeGameServer interface {
+	ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error)
+	ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error)
+	ListFeeGroups(context.Context, *ListFeeGroupsRequest) (*ListFeeGroupsResponse, error)
+	ListTags(context.Context, *ListTagsRequest) (*ListTagsResponse, error)
+	ListThemes(context.Context, *ListThemesRequest) (*ListThemesResponse, error)
+	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
 	GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error)
 	GetGameTransactionsForBet(context.Context, *GetGameTransactionsForBetRequest) (*GetGameTransactionsForBetResponse, error)
 	ListUserBets(context.Context, *ListUserBetsRequest) (*ListUserBetsResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
+	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error)
 	mustEmbedUnimplementedBackofficeGameServer()
 }
 
@@ -114,6 +205,24 @@ type BackofficeGameServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficeGameServer struct{}
 
+func (UnimplementedBackofficeGameServer) ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProviders not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCategories not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListFeeGroups(context.Context, *ListFeeGroupsRequest) (*ListFeeGroupsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListFeeGroups not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListTags(context.Context, *ListTagsRequest) (*ListTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTags not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListThemes(context.Context, *ListThemesRequest) (*ListThemesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListThemes not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCurrencies not implemented")
+}
 func (UnimplementedBackofficeGameServer) ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBets not implemented")
 }
@@ -128,6 +237,9 @@ func (UnimplementedBackofficeGameServer) ListUserBets(context.Context, *ListUser
 }
 func (UnimplementedBackofficeGameServer) ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGames not implemented")
+}
+func (UnimplementedBackofficeGameServer) UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGame not implemented")
 }
 func (UnimplementedBackofficeGameServer) mustEmbedUnimplementedBackofficeGameServer() {}
 func (UnimplementedBackofficeGameServer) testEmbeddedByValue()                        {}
@@ -148,6 +260,114 @@ func RegisterBackofficeGameServer(s grpc.ServiceRegistrar, srv BackofficeGameSer
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&BackofficeGame_ServiceDesc, srv)
+}
+
+func _BackofficeGame_ListProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProvidersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListProviders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListProviders_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListProviders(ctx, req.(*ListProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ListCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCategoriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListCategories(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListCategories_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListCategories(ctx, req.(*ListCategoriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ListFeeGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFeeGroupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListFeeGroups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListFeeGroups_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListFeeGroups(ctx, req.(*ListFeeGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ListTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListTags(ctx, req.(*ListTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ListThemes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListThemesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListThemes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListThemes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListThemes(ctx, req.(*ListThemesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ListCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCurrenciesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListCurrencies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListCurrencies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListCurrencies(ctx, req.(*ListCurrenciesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeGame_ListBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -240,6 +460,24 @@ func _BackofficeGame_ListGames_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeGame_UpdateGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateGameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).UpdateGame(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_UpdateGame_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).UpdateGame(ctx, req.(*UpdateGameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeGame_ServiceDesc is the grpc.ServiceDesc for BackofficeGame service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -247,6 +485,30 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.backoffice.service.v1.BackofficeGame",
 	HandlerType: (*BackofficeGameServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListProviders",
+			Handler:    _BackofficeGame_ListProviders_Handler,
+		},
+		{
+			MethodName: "ListCategories",
+			Handler:    _BackofficeGame_ListCategories_Handler,
+		},
+		{
+			MethodName: "ListFeeGroups",
+			Handler:    _BackofficeGame_ListFeeGroups_Handler,
+		},
+		{
+			MethodName: "ListTags",
+			Handler:    _BackofficeGame_ListTags_Handler,
+		},
+		{
+			MethodName: "ListThemes",
+			Handler:    _BackofficeGame_ListThemes_Handler,
+		},
+		{
+			MethodName: "ListCurrencies",
+			Handler:    _BackofficeGame_ListCurrencies_Handler,
+		},
 		{
 			MethodName: "ListBets",
 			Handler:    _BackofficeGame_ListBets_Handler,
@@ -266,6 +528,10 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListGames",
 			Handler:    _BackofficeGame_ListGames_Handler,
+		},
+		{
+			MethodName: "UpdateGame",
+			Handler:    _BackofficeGame_UpdateGame_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
