@@ -358,6 +358,10 @@ message GetTransactionPageRequest {
   RequestSource source = 15 [json_name="source"];
   // Optional user ID filter
   int64 user_id = 16 [json_name="userId"];
+  // Optional minimum amount filter
+  int64 min_amount = 17 [json_name="minAmount"];
+  // Optional maximum amount filter
+  int64 max_amount = 18 [json_name="maxAmount"];
 }
 
 // Response for transaction page

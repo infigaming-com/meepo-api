@@ -1721,7 +1721,11 @@ type GetTransactionPageRequest struct {
 	// Source of the request (frontend or admin)
 	Source RequestSource `protobuf:"varint,15,opt,name=source,proto3,enum=payment.service.v1.RequestSource" json:"source,omitempty"`
 	// Optional user ID filter
-	UserId        int64 `protobuf:"varint,16,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId int64 `protobuf:"varint,16,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// Optional minimum amount filter
+	MinAmount int64 `protobuf:"varint,17,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	// Optional maximum amount filter
+	MaxAmount     int64 `protobuf:"varint,18,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1864,6 +1868,20 @@ func (x *GetTransactionPageRequest) GetSource() RequestSource {
 func (x *GetTransactionPageRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetTransactionPageRequest) GetMinAmount() int64 {
+	if x != nil {
+		return x.MinAmount
+	}
+	return 0
+}
+
+func (x *GetTransactionPageRequest) GetMaxAmount() int64 {
+	if x != nil {
+		return x.MaxAmount
 	}
 	return 0
 }
@@ -2311,7 +2329,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x9e\x05\n" +
+	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xdc\x05\n" +
 	"\x19GetTransactionPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12%\n" +
@@ -2331,7 +2349,11 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bend_time\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12,\n" +
 	"\x04sort\x18\x0e \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x129\n" +
 	"\x06source\x18\x0f \x01(\x0e2!.payment.service.v1.RequestSourceR\x06source\x12\x17\n" +
-	"\auser_id\x18\x10 \x01(\x03R\x06userId\"\xd1\x02\n" +
+	"\auser_id\x18\x10 \x01(\x03R\x06userId\x12\x1d\n" +
+	"\n" +
+	"min_amount\x18\x11 \x01(\x03R\tminAmount\x12\x1d\n" +
+	"\n" +
+	"max_amount\x18\x12 \x01(\x03R\tmaxAmount\"\xd1\x02\n" +
 	"\x1aGetTransactionPageResponse\x12G\n" +
 	"\ftransactions\x18\x01 \x03(\v2#.payment.service.v1.TransactionInfoR\ftransactions\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +

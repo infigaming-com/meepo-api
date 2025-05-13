@@ -5311,6 +5311,12 @@ components:
                 userId:
                     type: string
                     description: Optional user ID filter
+                minAmount:
+                    type: string
+                    description: Optional minimum amount filter
+                maxAmount:
+                    type: string
+                    description: Optional maximum amount filter
             description: |-
                 Request to get transaction page
                  Used to retrieve a paginated list of transactions with optional filters
