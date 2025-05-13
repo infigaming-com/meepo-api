@@ -60,6 +60,7 @@ const (
 	ErrorReason_GET_BALANCE_TRANSACTION_FAILED                ErrorReason = 30032
 	ErrorReason_UPDATE_BALANCE_TRANSACTION_FAILED             ErrorReason = 30033
 	ErrorReason_UPDATE_CREDIT_TRANSACTION_FAILED              ErrorReason = 30034
+	ErrorReason_GET_CREDITS_BY_IDS_FAILED                     ErrorReason = 30035
 )
 
 // Enum value maps for ErrorReason.
@@ -100,6 +101,7 @@ var (
 		30032: "GET_BALANCE_TRANSACTION_FAILED",
 		30033: "UPDATE_BALANCE_TRANSACTION_FAILED",
 		30034: "UPDATE_CREDIT_TRANSACTION_FAILED",
+		30035: "GET_CREDITS_BY_IDS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                   0,
@@ -137,6 +139,7 @@ var (
 		"GET_BALANCE_TRANSACTION_FAILED":                30032,
 		"UPDATE_BALANCE_TRANSACTION_FAILED":             30033,
 		"UPDATE_CREDIT_TRANSACTION_FAILED":              30034,
+		"GET_CREDITS_BY_IDS_FAILED":                     30035,
 	}
 )
 
@@ -171,7 +174,8 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xea\t\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x8b\n" +
+	"\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x1a\x04\xa8E\x94\x03\x12\x19\n" +
@@ -207,7 +211,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x15GET_CURRENCIES_FAILED\x10\xcf\xea\x01\x12$\n" +
 	"\x1eGET_BALANCE_TRANSACTION_FAILED\x10\xd0\xea\x01\x12'\n" +
 	"!UPDATE_BALANCE_TRANSACTION_FAILED\x10\xd1\xea\x01\x12&\n" +
-	" UPDATE_CREDIT_TRANSACTION_FAILED\x10\xd2\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	" UPDATE_CREDIT_TRANSACTION_FAILED\x10\xd2\xea\x01\x12\x1f\n" +
+	"\x19GET_CREDITS_BY_IDS_FAILED\x10\xd3\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
