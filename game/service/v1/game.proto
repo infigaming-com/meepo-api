@@ -351,12 +351,12 @@ message Bet {
 	string game_id = 8;
 	string game_name = 9;
 	string game_category = 10;
-	int64 bet_amount = 11;
-	int64 settlement_bet_amount = 12;
-	int64 win_amount = 13;
-	int64 settlement_win_amount = 14;
-	int64 rollback_bet_amount = 15;
-	int64 rollback_win_amount = 16;
+	string bet_amount = 11;
+	string settlement_bet_amount = 12;
+	string win_amount = 13;
+	string settlement_win_amount = 14;
+	string rollback_bet_amount = 15;
+	string rollback_win_amount = 16;
 	google.protobuf.Timestamp created_at = 17;
 	google.protobuf.Timestamp updated_at = 18;
 }
