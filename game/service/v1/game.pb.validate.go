@@ -883,6 +883,210 @@ var _ interface {
 	ErrorName() string
 } = GameSortValidationError{}
 
+// Validate checks the field values on ListCategoriesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCategoriesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCategoriesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCategoriesRequestMultiError, or nil if none found.
+func (m *ListCategoriesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCategoriesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListCategoriesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCategoriesRequestMultiError is an error wrapping multiple validation
+// errors returned by ListCategoriesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListCategoriesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCategoriesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCategoriesRequestMultiError) AllErrors() []error { return m }
+
+// ListCategoriesRequestValidationError is the validation error returned by
+// ListCategoriesRequest.Validate if the designated constraints aren't met.
+type ListCategoriesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCategoriesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCategoriesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCategoriesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCategoriesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCategoriesRequestValidationError) ErrorName() string {
+	return "ListCategoriesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCategoriesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCategoriesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCategoriesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCategoriesRequestValidationError{}
+
+// Validate checks the field values on ListCategoriesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCategoriesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCategoriesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCategoriesResponseMultiError, or nil if none found.
+func (m *ListCategoriesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCategoriesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListCategoriesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCategoriesResponseMultiError is an error wrapping multiple validation
+// errors returned by ListCategoriesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListCategoriesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCategoriesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCategoriesResponseMultiError) AllErrors() []error { return m }
+
+// ListCategoriesResponseValidationError is the validation error returned by
+// ListCategoriesResponse.Validate if the designated constraints aren't met.
+type ListCategoriesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCategoriesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCategoriesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCategoriesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCategoriesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCategoriesResponseValidationError) ErrorName() string {
+	return "ListCategoriesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCategoriesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCategoriesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCategoriesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCategoriesResponseValidationError{}
+
 // Validate checks the field values on ListGamesRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.

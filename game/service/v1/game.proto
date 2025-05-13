@@ -18,6 +18,13 @@ service Game {
 	rpc DeleteOperator(DeleteOperatorRequest) returns (DeleteOperatorResponse) {
 	};
 
+	rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/categories/list"
+			body: "*"
+		};
+	};
+
 	rpc ListGames(ListGamesRequest) returns (ListGamesResponse) {
 		option (google.api.http) = {
 			post: "/v1/game/list"
@@ -124,6 +131,12 @@ message GameSort {
 		HIGHLIGHT = 3;
 	}
 	Field field = 1;
+}
+
+message ListCategoriesRequest{}
+
+message ListCategoriesResponse {
+	repeated string categories = 1;
 }
 
 message ListGamesRequest {
