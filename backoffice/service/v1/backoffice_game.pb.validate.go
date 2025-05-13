@@ -57,6 +57,10 @@ func (m *ListBetsRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.GameId != nil {
+		// no validation rules for GameId
+	}
+
 	if m.UserId != nil {
 		// no validation rules for UserId
 	}
@@ -1536,6 +1540,10 @@ func (m *ListGamesRequest) validate(all bool) error {
 
 	if m.HasFreespins != nil {
 		// no validation rules for HasFreespins
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if m.Page != nil {

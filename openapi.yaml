@@ -2684,10 +2684,8 @@ components:
                     type: array
                     items:
                         type: string
-                gameIds:
-                    type: array
-                    items:
-                        type: string
+                gameId:
+                    type: string
                 userId:
                     type: string
                 operatorTransactionId:
@@ -3161,6 +3159,8 @@ components:
                     type: array
                     items:
                         type: string
+                enabled:
+                    type: boolean
                 page:
                     type: string
                 pageSize:
