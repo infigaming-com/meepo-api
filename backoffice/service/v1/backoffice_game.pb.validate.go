@@ -159,9 +159,39 @@ func (m *ListProvidersResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for ProviderId
+	for idx, item := range m.GetProviders() {
+		_, _ = idx, item
 
-	// no validation rules for ProviderName
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListProvidersResponseValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListProvidersResponseValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListProvidersResponseValidationError{
+					field:  fmt.Sprintf("Providers[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return ListProvidersResponseMultiError(errors)
@@ -3211,6 +3241,113 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateGameResponseValidationError{}
+
+// Validate checks the field values on ListProvidersResponse_Provider with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListProvidersResponse_Provider) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListProvidersResponse_Provider with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListProvidersResponse_ProviderMultiError, or nil if none found.
+func (m *ListProvidersResponse_Provider) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListProvidersResponse_Provider) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ProviderId
+
+	// no validation rules for ProviderName
+
+	if len(errors) > 0 {
+		return ListProvidersResponse_ProviderMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListProvidersResponse_ProviderMultiError is an error wrapping multiple
+// validation errors returned by ListProvidersResponse_Provider.ValidateAll()
+// if the designated constraints aren't met.
+type ListProvidersResponse_ProviderMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListProvidersResponse_ProviderMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListProvidersResponse_ProviderMultiError) AllErrors() []error { return m }
+
+// ListProvidersResponse_ProviderValidationError is the validation error
+// returned by ListProvidersResponse_Provider.Validate if the designated
+// constraints aren't met.
+type ListProvidersResponse_ProviderValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListProvidersResponse_ProviderValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListProvidersResponse_ProviderValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListProvidersResponse_ProviderValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListProvidersResponse_ProviderValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListProvidersResponse_ProviderValidationError) ErrorName() string {
+	return "ListProvidersResponse_ProviderValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListProvidersResponse_ProviderValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListProvidersResponse_Provider.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListProvidersResponse_ProviderValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListProvidersResponse_ProviderValidationError{}
 
 // Validate checks the field values on Bet_Amount with the rules defined in the
 // proto definition for this message. If any rules are violated, the first

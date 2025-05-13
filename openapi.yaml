@@ -3478,6 +3478,13 @@ components:
         api.backoffice.service.v1.ListProvidersResponse:
             type: object
             properties:
+                providers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersResponse_Provider'
+        api.backoffice.service.v1.ListProvidersResponse_Provider:
+            type: object
+            properties:
                 providerId:
                     type: string
                 providerName:

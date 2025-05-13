@@ -87,8 +87,11 @@ service BackofficeGame {
 message ListProvidersRequest {}
 
 message ListProvidersResponse {
-	string provider_id = 1;
-	string provider_name = 2;
+	message Provider {
+		string provider_id = 1;
+		string provider_name = 2;
+	}
+	repeated Provider providers = 1;
 }
 
 message ListCategoriesRequest {}
