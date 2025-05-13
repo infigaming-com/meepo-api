@@ -46,7 +46,7 @@ message ListBetsRequest {
 	repeated int64 operator_ids = 1;
 	repeated string provider_ids = 2;
 	repeated string game_names = 3;
-	repeated string game_ids = 4;
+	optional string game_id = 4;
 	optional int64 user_id = 5;
 	optional int64 operator_transaction_id = 6;
 	optional string provider_transaction_id = 7;
@@ -176,8 +176,9 @@ message ListGamesRequest {
 	optional bool has_freespins = 9;
 	repeated string support_currencies = 10;
 	repeated string restricted_countries = 11;
-	optional int64 page = 12;
-	optional int64 page_size = 13;
+	optional bool enabled = 12;
+	optional int64 page = 13;
+	optional int64 page_size = 14;
 }
 
 message ListGamesResponse {

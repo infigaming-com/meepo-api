@@ -28,7 +28,7 @@ type ListBetsRequest struct {
 	OperatorIds           []int64                `protobuf:"varint,1,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
 	ProviderIds           []string               `protobuf:"bytes,2,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
 	GameNames             []string               `protobuf:"bytes,3,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
-	GameIds               []string               `protobuf:"bytes,4,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	GameId                *string                `protobuf:"bytes,4,opt,name=game_id,json=gameId,proto3,oneof" json:"game_id,omitempty"`
 	UserId                *int64                 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	OperatorTransactionId *int64                 `protobuf:"varint,6,opt,name=operator_transaction_id,json=operatorTransactionId,proto3,oneof" json:"operator_transaction_id,omitempty"`
 	ProviderTransactionId *string                `protobuf:"bytes,7,opt,name=provider_transaction_id,json=providerTransactionId,proto3,oneof" json:"provider_transaction_id,omitempty"`
@@ -95,11 +95,11 @@ func (x *ListBetsRequest) GetGameNames() []string {
 	return nil
 }
 
-func (x *ListBetsRequest) GetGameIds() []string {
-	if x != nil {
-		return x.GameIds
+func (x *ListBetsRequest) GetGameId() string {
+	if x != nil && x.GameId != nil {
+		return *x.GameId
 	}
-	return nil
+	return ""
 }
 
 func (x *ListBetsRequest) GetUserId() int64 {
@@ -937,8 +937,9 @@ type ListGamesRequest struct {
 	HasFreespins        *bool                  `protobuf:"varint,9,opt,name=has_freespins,json=hasFreespins,proto3,oneof" json:"has_freespins,omitempty"`
 	SupportCurrencies   []string               `protobuf:"bytes,10,rep,name=support_currencies,json=supportCurrencies,proto3" json:"support_currencies,omitempty"`
 	RestrictedCountries []string               `protobuf:"bytes,11,rep,name=restricted_countries,json=restrictedCountries,proto3" json:"restricted_countries,omitempty"`
-	Page                *int64                 `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize            *int64                 `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Enabled             *bool                  `protobuf:"varint,12,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Page                *int64                 `protobuf:"varint,13,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize            *int64                 `protobuf:"varint,14,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1048,6 +1049,13 @@ func (x *ListGamesRequest) GetRestrictedCountries() []string {
 		return x.RestrictedCountries
 	}
 	return nil
+}
+
+func (x *ListGamesRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
 }
 
 func (x *ListGamesRequest) GetPage() int64 {
@@ -1544,28 +1552,30 @@ var File_backoffice_service_v1_backoffice_game_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_game.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa8\x06\n" +
+	"+backoffice/service/v1/backoffice_game.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb7\x06\n" +
 	"\x0fListBetsRequest\x12!\n" +
 	"\foperator_ids\x18\x01 \x03(\x03R\voperatorIds\x12!\n" +
 	"\fprovider_ids\x18\x02 \x03(\tR\vproviderIds\x12\x1d\n" +
 	"\n" +
-	"game_names\x18\x03 \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\x04 \x03(\tR\agameIds\x12\x1c\n" +
-	"\auser_id\x18\x05 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12;\n" +
-	"\x17operator_transaction_id\x18\x06 \x01(\x03H\x01R\x15operatorTransactionId\x88\x01\x01\x12;\n" +
-	"\x17provider_transaction_id\x18\a \x01(\tH\x02R\x15providerTransactionId\x88\x01\x01\x12>\n" +
+	"game_names\x18\x03 \x03(\tR\tgameNames\x12\x1c\n" +
+	"\agame_id\x18\x04 \x01(\tH\x00R\x06gameId\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x05 \x01(\x03H\x01R\x06userId\x88\x01\x01\x12;\n" +
+	"\x17operator_transaction_id\x18\x06 \x01(\x03H\x02R\x15operatorTransactionId\x88\x01\x01\x12;\n" +
+	"\x17provider_transaction_id\x18\a \x01(\tH\x03R\x15providerTransactionId\x88\x01\x01\x12>\n" +
 	"\n" +
-	"start_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\x04R\aendTime\x88\x01\x01\x12)\n" +
+	"start_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12)\n" +
 	"\x0emin_bet_amount\x18\n" +
-	" \x01(\x03H\x05R\fminBetAmount\x88\x01\x01\x12)\n" +
-	"\x0emax_bet_amount\x18\v \x01(\x03H\x06R\fmaxBetAmount\x88\x01\x01\x12\x1e\n" +
+	" \x01(\x03H\x06R\fminBetAmount\x88\x01\x01\x12)\n" +
+	"\x0emax_bet_amount\x18\v \x01(\x03H\aR\fmaxBetAmount\x88\x01\x01\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\f \x03(\tR\n" +
 	"currencies\x123\n" +
 	"\x15settlement_currencies\x18\r \x03(\tR\x14settlementCurrencies\x12\x17\n" +
-	"\x04page\x18\x0e \x01(\x03H\aR\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x0f \x01(\x03H\bR\bpageSize\x88\x01\x01B\n" +
+	"\x04page\x18\x0e \x01(\x03H\bR\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x0f \x01(\x03H\tR\bpageSize\x88\x01\x01B\n" +
+	"\n" +
+	"\b_game_idB\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_operator_transaction_idB\x1a\n" +
@@ -1702,7 +1712,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x10valid_bet_amount\x18\f \x01(\x03R\x0evalidBetAmount\x1ay\n" +
 	"\x06Amount\x12,\n" +
 	"\x12amount_in_currency\x18\x01 \x01(\x03R\x10amountInCurrency\x12A\n" +
-	"\x1damount_in_settlement_currency\x18\x02 \x01(\x03R\x1aamountInSettlementCurrency\"\xa4\x04\n" +
+	"\x1damount_in_settlement_currency\x18\x02 \x01(\x03R\x1aamountInSettlementCurrency\"\xcf\x04\n" +
 	"\x10ListGamesRequest\x12\x1c\n" +
 	"\tproviders\x18\x01 \x03(\tR\tproviders\x12\x1e\n" +
 	"\n" +
@@ -1719,13 +1729,16 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\rhas_freespins\x18\t \x01(\bH\x02R\fhasFreespins\x88\x01\x01\x12-\n" +
 	"\x12support_currencies\x18\n" +
 	" \x03(\tR\x11supportCurrencies\x121\n" +
-	"\x14restricted_countries\x18\v \x03(\tR\x13restrictedCountries\x12\x17\n" +
-	"\x04page\x18\f \x01(\x03H\x03R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\r \x01(\x03H\x04R\bpageSize\x88\x01\x01B\n" +
+	"\x14restricted_countries\x18\v \x03(\tR\x13restrictedCountries\x12\x1d\n" +
+	"\aenabled\x18\f \x01(\bH\x03R\aenabled\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\r \x01(\x03H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x0e \x01(\x03H\x05R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_game_idB\x14\n" +
 	"\x12_support_bonus_buyB\x10\n" +
-	"\x0e_has_freespinsB\a\n" +
+	"\x0e_has_freespinsB\n" +
+	"\n" +
+	"\b_enabledB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xb4\x05\n" +
