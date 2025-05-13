@@ -2313,18 +2313,19 @@ type Bet struct {
 	ProviderRoundId     string                 `protobuf:"bytes,4,opt,name=provider_round_id,json=providerRoundId,proto3" json:"provider_round_id,omitempty"`
 	Currency            string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
 	SettlementCurrency  string                 `protobuf:"bytes,6,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
-	UserId              int64                  `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	GameId              string                 `protobuf:"bytes,8,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	GameName            string                 `protobuf:"bytes,9,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
-	GameCategory        string                 `protobuf:"bytes,10,opt,name=game_category,json=gameCategory,proto3" json:"game_category,omitempty"`
-	BetAmount           string                 `protobuf:"bytes,11,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
-	SettlementBetAmount string                 `protobuf:"bytes,12,opt,name=settlement_bet_amount,json=settlementBetAmount,proto3" json:"settlement_bet_amount,omitempty"`
-	WinAmount           string                 `protobuf:"bytes,13,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
-	SettlementWinAmount string                 `protobuf:"bytes,14,opt,name=settlement_win_amount,json=settlementWinAmount,proto3" json:"settlement_win_amount,omitempty"`
-	RollbackBetAmount   string                 `protobuf:"bytes,15,opt,name=rollback_bet_amount,json=rollbackBetAmount,proto3" json:"rollback_bet_amount,omitempty"`
-	RollbackWinAmount   string                 `protobuf:"bytes,16,opt,name=rollback_win_amount,json=rollbackWinAmount,proto3" json:"rollback_win_amount,omitempty"`
-	CreatedAt           *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt           *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Status              string                 `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"` //pending, end
+	UserId              int64                  `protobuf:"varint,8,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	GameId              string                 `protobuf:"bytes,9,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	GameName            string                 `protobuf:"bytes,10,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
+	GameCategory        string                 `protobuf:"bytes,11,opt,name=game_category,json=gameCategory,proto3" json:"game_category,omitempty"`
+	BetAmount           string                 `protobuf:"bytes,12,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
+	SettlementBetAmount string                 `protobuf:"bytes,13,opt,name=settlement_bet_amount,json=settlementBetAmount,proto3" json:"settlement_bet_amount,omitempty"`
+	WinAmount           string                 `protobuf:"bytes,14,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	SettlementWinAmount string                 `protobuf:"bytes,15,opt,name=settlement_win_amount,json=settlementWinAmount,proto3" json:"settlement_win_amount,omitempty"`
+	RollbackBetAmount   string                 `protobuf:"bytes,16,opt,name=rollback_bet_amount,json=rollbackBetAmount,proto3" json:"rollback_bet_amount,omitempty"`
+	RollbackWinAmount   string                 `protobuf:"bytes,17,opt,name=rollback_win_amount,json=rollbackWinAmount,proto3" json:"rollback_win_amount,omitempty"`
+	CreatedAt           *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt           *timestamppb.Timestamp `protobuf:"bytes,19,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -2397,6 +2398,13 @@ func (x *Bet) GetCurrency() string {
 func (x *Bet) GetSettlementCurrency() string {
 	if x != nil {
 		return x.SettlementCurrency
+	}
+	return ""
+}
+
+func (x *Bet) GetStatus() string {
+	if x != nil {
+		return x.Status
 	}
 	return ""
 }
@@ -2888,31 +2896,32 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x04bets\x18\x01 \x03(\v2\x18.api.game.service.v1.BetR\x04bets\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x03R\bpageSize\"\xc1\x05\n" +
+	"\tpage_size\x18\x04 \x01(\x03R\bpageSize\"\xd9\x05\n" +
 	"\x03Bet\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12&\n" +
 	"\x0fprovider_bet_id\x18\x02 \x01(\tR\rproviderBetId\x12\x19\n" +
 	"\bround_id\x18\x03 \x01(\x03R\aroundId\x12*\n" +
 	"\x11provider_round_id\x18\x04 \x01(\tR\x0fproviderRoundId\x12\x1a\n" +
 	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12/\n" +
-	"\x13settlement_currency\x18\x06 \x01(\tR\x12settlementCurrency\x12\x17\n" +
-	"\auser_id\x18\a \x01(\x03R\x06userId\x12\x17\n" +
-	"\agame_id\x18\b \x01(\tR\x06gameId\x12\x1b\n" +
-	"\tgame_name\x18\t \x01(\tR\bgameName\x12#\n" +
-	"\rgame_category\x18\n" +
-	" \x01(\tR\fgameCategory\x12\x1d\n" +
+	"\x13settlement_currency\x18\x06 \x01(\tR\x12settlementCurrency\x12\x16\n" +
+	"\x06status\x18\a \x01(\tR\x06status\x12\x17\n" +
+	"\auser_id\x18\b \x01(\x03R\x06userId\x12\x17\n" +
+	"\agame_id\x18\t \x01(\tR\x06gameId\x12\x1b\n" +
+	"\tgame_name\x18\n" +
+	" \x01(\tR\bgameName\x12#\n" +
+	"\rgame_category\x18\v \x01(\tR\fgameCategory\x12\x1d\n" +
 	"\n" +
-	"bet_amount\x18\v \x01(\tR\tbetAmount\x122\n" +
-	"\x15settlement_bet_amount\x18\f \x01(\tR\x13settlementBetAmount\x12\x1d\n" +
+	"bet_amount\x18\f \x01(\tR\tbetAmount\x122\n" +
+	"\x15settlement_bet_amount\x18\r \x01(\tR\x13settlementBetAmount\x12\x1d\n" +
 	"\n" +
-	"win_amount\x18\r \x01(\tR\twinAmount\x122\n" +
-	"\x15settlement_win_amount\x18\x0e \x01(\tR\x13settlementWinAmount\x12.\n" +
-	"\x13rollback_bet_amount\x18\x0f \x01(\tR\x11rollbackBetAmount\x12.\n" +
-	"\x13rollback_win_amount\x18\x10 \x01(\tR\x11rollbackWinAmount\x129\n" +
+	"win_amount\x18\x0e \x01(\tR\twinAmount\x122\n" +
+	"\x15settlement_win_amount\x18\x0f \x01(\tR\x13settlementWinAmount\x12.\n" +
+	"\x13rollback_bet_amount\x18\x10 \x01(\tR\x11rollbackBetAmount\x12.\n" +
+	"\x13rollback_win_amount\x18\x11 \x01(\tR\x11rollbackWinAmount\x129\n" +
 	"\n" +
-	"created_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xa2\v\n" +
+	"updated_at\x18\x13 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xa2\v\n" +
 	"\x04Game\x12k\n" +
 	"\x0eCreateOperator\x12*.api.game.service.v1.CreateOperatorRequest\x1a+.api.game.service.v1.CreateOperatorResponse\"\x00\x12k\n" +
 	"\x0eUpdateOperator\x12*.api.game.service.v1.UpdateOperatorRequest\x1a+.api.game.service.v1.UpdateOperatorResponse\"\x00\x12k\n" +

@@ -4014,6 +4014,8 @@ func (m *Bet) validate(all bool) error {
 
 	// no validation rules for SettlementCurrency
 
+	// no validation rules for Status
+
 	// no validation rules for UserId
 
 	// no validation rules for GameId

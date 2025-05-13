@@ -4138,6 +4138,8 @@ components:
                     type: string
                 settlementCurrency:
                     type: string
+                status:
+                    type: string
                 userId:
                     type: string
                 gameId:
