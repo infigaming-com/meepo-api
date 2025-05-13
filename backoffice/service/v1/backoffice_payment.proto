@@ -10,32 +10,80 @@ option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficePayment {
-	rpc ListPaymentTransactions(ListPaymentTransactionsRequest) returns (ListPaymentTransactionsResponse) {
+	rpc GetPaymentTransactionPage(GetPaymentTransactionPageRequest) returns (GetPaymentTransactionPageResponse) {
         option (google.api.http) = {
-            post: "/v1/backoffice/payment/transactions/list"
+            post: "/v1/backoffice/payment/transaction/page"
             body: "*"
         };
     }
 }
 
-// TODO:
-// Add Payment channel configuration
-
-message ListPaymentTransactionsRequest {
-	repeated int64 operator_ids = 1;
-	optional google.protobuf.Timestamp start_time = 2;
-	optional google.protobuf.Timestamp end_time = 3;
-	repeated int64 user_ids = 4;
-	repeated string currencies = 5;
-	repeated string payment_channels = 6;
-	repeated string protocols = 7;
-	optional int64 min_deposit = 8;
-	optional int64 max_deposit = 9;
-	optional int64 page = 10;
-	optional int64 page_size = 12;
+// 定义枚举类型，与payment模块保持一致
+enum TransactionType {
+  // Money incoming to platform
+  TRANSACTION_TYPE_DEPOSIT = 0;
+  // Money outgoing from platform
+  TRANSACTION_TYPE_WITHDRAW = 1;
 }
 
-message ListPaymentTransactionsResponse {
+// Transaction status enum
+// Defines possible states of a transaction
+enum TransactionStatus {
+  // Default unspecified value
+  TRANSACTION_STATUS_UNSPECIFIED = 0;
+  // Transaction is in progress
+  TRANSACTION_STATUS_PROCESSING = 1;
+  // Transaction completed successfully
+  TRANSACTION_STATUS_SUCCESSFUL = 2;
+  // Transaction failed to complete
+  TRANSACTION_STATUS_FAILED = 3;
+}
+
+// Sort enum
+// Defines sort direction for queries
+enum Sort {
+  // Sort in descending order (newest first)
+  DESC = 0;
+  // Sort in ascending order (oldest first)
+  ASC = 1;
+}
+
+// 与payment.service.v1.GetTransactionPageRequest保持一致的请求参数
+message GetPaymentTransactionPageRequest {
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2 [json_name="pageSize"];
+  
+  // Optional transaction ID filter
+  int64 transaction_id = 3 [json_name="transactionId"];
+  // Optional operator ID filter
+  string operator_id = 4 [json_name="operatorId"];
+  // Optional user ID filter
+  int64 user_id = 5 [json_name="userId"];
+  // Optional currency filter
+  string currency = 6;
+  // Optional payment method filter
+  string payment_method = 7 [json_name="paymentMethod"];
+  // Optional payment channel filter
+  string payment_channel = 8 [json_name="paymentChannel"];
+  // Optional protocol filter
+  string protocol = 9;
+  // Optional transaction type filter
+  TransactionType type = 10;
+  // Optional status filter
+  TransactionStatus status = 11;
+  // Optional agent filter
+  string agent = 12;
+  // Optional start time for date range filter
+  google.protobuf.Timestamp start_time = 13 [json_name="startTime"];
+  // Optional end time for date range filter
+  google.protobuf.Timestamp end_time = 14 [json_name="endTime"];
+  // Optional sort direction
+  Sort sort = 15 [json_name="sort"];
+}
+
+message GetPaymentTransactionPageResponse {
 	message PaymentTransaction {
 		string operator = 1;
 		google.protobuf.Timestamp created_at = 2;
@@ -54,10 +102,11 @@ message ListPaymentTransactionsResponse {
 		string payment_gateway_transaction_id = 15;
 	}
 	repeated PaymentTransaction payment_transactions = 1;
-	int64 page = 2;
-	int64 page_size = 3;
-	int64 total = 4;
-	int64 tatal_successful = 5;
-	int64 total_paying = 6;
-	int64 total_failed = 8;
+	int32 total_count = 2 [json_name="totalCount"];
+	int32 page = 3;
+	int32 page_size = 4 [json_name="pageSize"];
+	int32 total_pages = 5 [json_name="totalPages"];
+	int32 total_successful = 6 [json_name="totalSuccessful"];
+	int32 total_processing = 7 [json_name="totalProcessing"];
+	int32 total_failed = 8 [json_name="totalFailed"];
 }

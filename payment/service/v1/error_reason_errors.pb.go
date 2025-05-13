@@ -106,3 +106,15 @@ func IsWithdrawCallbackFailed(err error) bool {
 func ErrorWithdrawCallbackFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_WITHDRAW_CALLBACK_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetTransactionPageFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_TRANSACTION_PAGE_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetTransactionPageFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_TRANSACTION_PAGE_FAILED.String(), fmt.Sprintf(format, args...))
+}

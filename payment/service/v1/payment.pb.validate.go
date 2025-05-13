@@ -2110,10 +2110,6 @@ func (m *GetTransactionPageRequest) validate(all bool) error {
 
 	// no validation rules for OperatorId
 
-	// no validation rules for UserId
-
-	// no validation rules for OrderId
-
 	// no validation rules for Currency
 
 	// no validation rules for PaymentMethod
@@ -2187,6 +2183,10 @@ func (m *GetTransactionPageRequest) validate(all bool) error {
 	}
 
 	// no validation rules for Sort
+
+	// no validation rules for Source
+
+	// no validation rules for UserId
 
 	if len(errors) > 0 {
 		return GetTransactionPageRequestMultiError(errors)
@@ -2331,6 +2331,12 @@ func (m *GetTransactionPageResponse) validate(all bool) error {
 	// no validation rules for PageSize
 
 	// no validation rules for TotalPages
+
+	// no validation rules for TotalSuccessful
+
+	// no validation rules for TotalProcessing
+
+	// no validation rules for TotalFailed
 
 	if len(errors) > 0 {
 		return GetTransactionPageResponseMultiError(errors)

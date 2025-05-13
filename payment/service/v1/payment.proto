@@ -269,6 +269,15 @@ enum Sort {
   ASC = 1;
 }
 
+// Request source enum
+// Defines the source of the request
+enum RequestSource {
+  // Request from frontend user
+  REQUEST_SOURCE_FRONTEND = 0;
+  // Request from admin backend
+  REQUEST_SOURCE_ADMIN = 1;
+}
+
 // Channel type enum
 // Defines the purpose of a payment channel
 enum ChannelType {
@@ -325,30 +334,30 @@ message GetTransactionPageRequest {
   int64 transaction_id = 3 [json_name="transactionId"];
   // Optional operator ID filter
   string operator_id = 4 [json_name="operatorId"];
-  // Optional user ID filter
-  int64 user_id = 5 [json_name="userId"];
-  // Optional order ID filter
-  string order_id = 6 [json_name="orderId"];
   // Optional currency filter
-  string currency = 7;
+  string currency = 5;
   // Optional payment method filter
-  string payment_method = 8 [json_name="paymentMethod"];
+  string payment_method = 6 [json_name="paymentMethod"];
   // Optional payment channel filter
-  string payment_channel = 9 [json_name="paymentChannel"];
+  string payment_channel = 7 [json_name="paymentChannel"];
   // Optional protocol filter
-  string protocol = 10;
+  string protocol = 8;
   // Optional transaction type filter
-  TransactionType type = 11;
+  TransactionType type = 9;
   // Optional status filter
-  TransactionStatus status = 12;
+  TransactionStatus status = 10;
   // Optional agent filter
-  string agent = 13;
+  string agent = 11;
   // Optional start time for date range filter
-  google.protobuf.Timestamp start_time = 14 [json_name="startTime"];
+  google.protobuf.Timestamp start_time = 12 [json_name="startTime"];
   // Optional end time for date range filter
-  google.protobuf.Timestamp end_time = 15 [json_name="endTime"];
+  google.protobuf.Timestamp end_time = 13 [json_name="endTime"];
   // Optional sort direction
-  Sort sort = 16 [json_name="sort"];
+  Sort sort = 14 [json_name="sort"];
+  // Source of the request (frontend or admin)
+  RequestSource source = 15 [json_name="source"];
+  // Optional user ID filter
+  int64 user_id = 16 [json_name="userId"];
 }
 
 // Response for transaction page
@@ -364,6 +373,13 @@ message GetTransactionPageResponse {
   int32 page_size = 4 [json_name="pageSize"];
   // Total number of pages available
   int32 total_pages = 5 [json_name="totalPages"];
+  // The following fields are only populated for admin requests
+  // Total number of successful transactions
+  int32 total_successful = 6 [json_name="totalSuccessful"];
+  // Total number of processing transactions
+  int32 total_processing = 7 [json_name="totalProcessing"];
+  // Total number of failed transactions
+  int32 total_failed = 8 [json_name="totalFailed"];
 }
 
 // Request to get payment channel page
