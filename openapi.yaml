@@ -312,6 +312,60 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionsForBetResponse'
+    /v1/backoffice/game/categories/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListCategories
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCategoriesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListCategoriesResponse'
+    /v1/backoffice/game/currencies/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListCurrencies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCurrenciesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListCurrenciesResponse'
+    /v1/backoffice/game/fee-groups/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListFeeGroups
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListFeeGroupsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListFeeGroupsResponse'
     /v1/backoffice/game/list:
         post:
             tags:
@@ -330,6 +384,78 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListGamesResponse'
+    /v1/backoffice/game/providers/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListProviders
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersResponse'
+    /v1/backoffice/game/tags/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListTags
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListTagsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTagsResponse'
+    /v1/backoffice/game/themes/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListThemes
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListThemesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListThemesResponse'
+    /v1/backoffice/game/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateGame
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
     /v1/backoffice/operator/user-tags/add:
         post:
             tags:
@@ -2727,6 +2853,26 @@ components:
                     type: string
                 total:
                     type: string
+        api.backoffice.service.v1.ListCategoriesRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.ListCategoriesResponse:
+            type: object
+            properties:
+                categories:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.ListCurrenciesRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.ListCurrenciesResponse:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.ListDailySummariesRequest:
             type: object
             properties:
@@ -3023,6 +3169,16 @@ components:
                     format: int32
                 depositAmount:
                     type: string
+        api.backoffice.service.v1.ListFeeGroupsRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.ListFeeGroupsResponse:
+            type: object
+            properties:
+                feeGroups:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.ListGameDataDailySummariesRequest:
             type: object
             properties:
@@ -3316,6 +3472,36 @@ components:
                     type: string
                 paymentGatewayTransactionId:
                     type: string
+        api.backoffice.service.v1.ListProvidersRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.ListProvidersResponse:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+        api.backoffice.service.v1.ListTagsRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.ListTagsResponse:
+            type: object
+            properties:
+                tags:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.ListThemesRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.ListThemesResponse:
+            type: object
+            properties:
+                themes:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.ListUserBetsRequest:
             type: object
             properties:
@@ -3811,6 +3997,16 @@ components:
                 role:
                     type: string
         api.backoffice.service.v1.UpdateAccountResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.UpdateGameRequest:
+            type: object
+            properties:
+                gameId:
+                    type: string
+                enabled:
+                    type: boolean
+        api.backoffice.service.v1.UpdateGameResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.UpdateWalletRequest:
