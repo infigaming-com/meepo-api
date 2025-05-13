@@ -10,6 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -474,7 +475,7 @@ func (x *GameFilter) GetTags() string {
 
 type GameSort struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Field         GameSort_Field         `protobuf:"varint,1,opt,name=field,proto3,enum=game.service.v1.GameSort_Field" json:"field,omitempty"`
+	Field         GameSort_Field         `protobuf:"varint,1,opt,name=field,proto3,enum=api.game.service.v1.GameSort_Field" json:"field,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2149,8 +2150,8 @@ type ListBetsRequest struct {
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Categories    []string               `protobuf:"bytes,2,rep,name=categories,proto3" json:"categories,omitempty"`
 	Currencies    []string               `protobuf:"bytes,3,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	StartTime     *int64                 `protobuf:"varint,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime       *int64                 `protobuf:"varint,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	Page          *int64                 `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int64                 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2208,18 +2209,18 @@ func (x *ListBetsRequest) GetCurrencies() []string {
 	return nil
 }
 
-func (x *ListBetsRequest) GetStartTime() int64 {
-	if x != nil && x.StartTime != nil {
-		return *x.StartTime
+func (x *ListBetsRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
 	}
-	return 0
+	return nil
 }
 
-func (x *ListBetsRequest) GetEndTime() int64 {
-	if x != nil && x.EndTime != nil {
-		return *x.EndTime
+func (x *ListBetsRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
 	}
-	return 0
+	return nil
 }
 
 func (x *ListBetsRequest) GetPage() int64 {
@@ -2322,8 +2323,8 @@ type Bet struct {
 	SettlementWinAmount int64                  `protobuf:"varint,14,opt,name=settlement_win_amount,json=settlementWinAmount,proto3" json:"settlement_win_amount,omitempty"`
 	RollbackBetAmount   int64                  `protobuf:"varint,15,opt,name=rollback_bet_amount,json=rollbackBetAmount,proto3" json:"rollback_bet_amount,omitempty"`
 	RollbackWinAmount   int64                  `protobuf:"varint,16,opt,name=rollback_win_amount,json=rollbackWinAmount,proto3" json:"rollback_win_amount,omitempty"`
-	CreatedAt           int64                  `protobuf:"varint,17,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt           int64                  `protobuf:"varint,18,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedAt           *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt           *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -2470,18 +2471,18 @@ func (x *Bet) GetRollbackWinAmount() int64 {
 	return 0
 }
 
-func (x *Bet) GetCreatedAt() int64 {
+func (x *Bet) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return 0
+	return nil
 }
 
-func (x *Bet) GetUpdatedAt() int64 {
+func (x *Bet) GetUpdatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return 0
+	return nil
 }
 
 type BalanceResponse_Data struct {
@@ -2668,7 +2669,7 @@ var File_game_service_v1_game_proto protoreflect.FileDescriptor
 
 const file_game_service_v1_game_proto_rawDesc = "" +
 	"\n" +
-	"\x1agame/service/v1/game.proto\x12\x0fgame.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xc0\x01\n" +
+	"\x1agame/service/v1/game.proto\x12\x13api.game.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc0\x01\n" +
 	"\x15CreateOperatorRequest\x124\n" +
 	"\x16aggregator_operator_id\x18\x01 \x01(\tR\x14aggregatorOperatorId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -2702,9 +2703,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"GameFilter\x12\x1f\n" +
 	"\vprovider_id\x18\x01 \x01(\tR\n" +
 	"providerId\x12\x12\n" +
-	"\x04tags\x18\x02 \x01(\tR\x04tags\"|\n" +
-	"\bGameSort\x125\n" +
-	"\x05field\x18\x01 \x01(\x0e2\x1f.game.service.v1.GameSort.FieldR\x05field\"9\n" +
+	"\x04tags\x18\x02 \x01(\tR\x04tags\"\x80\x01\n" +
+	"\bGameSort\x129\n" +
+	"\x05field\x18\x01 \x01(\x0e2#.api.game.service.v1.GameSort.FieldR\x05field\"9\n" +
 	"\x05Field\x12\a\n" +
 	"\x03ASC\x10\x00\x12\b\n" +
 	"\x04DESC\x10\x01\x12\x0e\n" +
@@ -2715,21 +2716,21 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x16ListCategoriesResponse\x12\x1e\n" +
 	"\n" +
 	"categories\x18\x01 \x03(\tR\n" +
-	"categories\"\xa7\x01\n" +
+	"categories\"\xaf\x01\n" +
 	"\x10ListGamesRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x123\n" +
-	"\x06filter\x18\x03 \x01(\v2\x1b.game.service.v1.GameFilterR\x06filter\x12-\n" +
-	"\x04sort\x18\x04 \x01(\v2\x19.game.service.v1.GameSortR\x04sort\"u\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x127\n" +
+	"\x06filter\x18\x03 \x01(\v2\x1f.api.game.service.v1.GameFilterR\x06filter\x121\n" +
+	"\x04sort\x18\x04 \x01(\v2\x1d.api.game.service.v1.GameSortR\x04sort\"u\n" +
 	"\x11ListGamesResponse\x12\x19\n" +
 	"\bgame_ids\x18\x01 \x03(\tR\agameIds\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x04 \x01(\x03R\bpageSize\")\n" +
 	"\x0eGetGameRequest\x12\x17\n" +
-	"\agame_id\x18\x01 \x01(\tR\x06gameId\"@\n" +
-	"\x0fGetGameResponse\x12-\n" +
-	"\x04game\x18\x01 \x01(\v2\x19.game.service.v1.GameInfoR\x04game\"\xc1\x05\n" +
+	"\agame_id\x18\x01 \x01(\tR\x06gameId\"D\n" +
+	"\x0fGetGameResponse\x121\n" +
+	"\x04game\x18\x01 \x01(\v2\x1d.api.game.service.v1.GameInfoR\x04game\"\xc1\x05\n" +
 	"\bGameInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x12\n" +
@@ -2761,13 +2762,13 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\vreleased_at\x18\x15 \x01(\x03R\n" +
 	"releasedAt\x12\x1b\n" +
 	"\tbonus_buy\x18\x16 \x01(\bR\bbonusBuy\x12\"\n" +
-	"\frestrictions\x18\x17 \x01(\tR\frestrictions\"\xc2\x01\n" +
+	"\frestrictions\x18\x17 \x01(\tR\frestrictions\"\xc6\x01\n" +
 	"\x14CreateSessionRequest\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
 	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\x12\x16\n" +
-	"\x06locale\x18\x04 \x01(\tR\x06locale\x12,\n" +
-	"\x04urls\x18\x05 \x01(\v2\x18.game.service.v1.UrlInfoR\x04urls\"2\n" +
+	"\x06locale\x18\x04 \x01(\tR\x06locale\x120\n" +
+	"\x04urls\x18\x05 \x01(\v2\x1c.api.game.service.v1.UrlInfoR\x04urls\"2\n" +
 	"\x15CreateSessionResponse\x12\x19\n" +
 	"\bgame_url\x18\x01 \x01(\tR\agameUrl\"f\n" +
 	"\aUrlInfo\x12\x1d\n" +
@@ -2777,9 +2778,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"depositUrl\x12\x1b\n" +
 	"\tlobby_url\x18\x03 \x01(\tR\blobbyUrl\")\n" +
 	"\x13ProviderListRequest\x12\x12\n" +
-	"\x04tags\x18\x01 \x01(\tR\x04tags\"O\n" +
-	"\x14ProviderListResponse\x127\n" +
-	"\tproviders\x18\x01 \x03(\v2\x19.game.service.v1.ProviderR\tproviders\"M\n" +
+	"\x04tags\x18\x01 \x01(\tR\x04tags\"S\n" +
+	"\x14ProviderListResponse\x12;\n" +
+	"\tproviders\x18\x01 \x03(\v2\x1d.api.game.service.v1.ProviderR\tproviders\"M\n" +
 	"\bProvider\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
@@ -2792,13 +2793,13 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\bround_id\x18\x04 \x01(\tR\aroundId\x12\x1a\n" +
 	"\bfinished\x18\x05 \x01(\bR\bfinished\x12\x1d\n" +
 	"\n" +
-	"session_id\x18\x06 \x01(\x03R\tsessionId\"\x9f\x01\n" +
-	"\x0fBalanceResponse\x129\n" +
-	"\x04data\x18\x01 \x01(\v2%.game.service.v1.BalanceResponse.DataR\x04data\x1aQ\n" +
+	"session_id\x18\x06 \x01(\x03R\tsessionId\"\xa3\x01\n" +
+	"\x0fBalanceResponse\x12=\n" +
+	"\x04data\x18\x01 \x01(\v2).api.game.service.v1.BalanceResponse.DataR\x04data\x1aQ\n" +
 	"\x04Data\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\x01R\abalance\x12\x14\n" +
 	"\x05bonus\x18\x02 \x01(\x01R\x05bonus\x12\x19\n" +
-	"\bround_id\x18\x03 \x01(\tR\aroundId\"\x81\x02\n" +
+	"\bround_id\x18\x03 \x01(\tR\aroundId\"\x85\x02\n" +
 	"\vPlayRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
@@ -2807,14 +2808,14 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\bfinished\x18\x05 \x01(\bR\bfinished\x12\x1b\n" +
 	"\tsm_result\x18\x06 \x01(\tR\bsmResult\x12\x1d\n" +
 	"\n" +
-	"session_id\x18\a \x01(\x03R\tsessionId\x121\n" +
-	"\aactions\x18\b \x03(\v2\x17.game.service.v1.ActionR\aactions\"\xc6\x01\n" +
-	"\fPlayResponse\x126\n" +
-	"\x04data\x18\x01 \x01(\v2\".game.service.v1.PlayResponse.DataR\x04data\x1a~\n" +
+	"session_id\x18\a \x01(\x03R\tsessionId\x125\n" +
+	"\aactions\x18\b \x03(\v2\x1b.api.game.service.v1.ActionR\aactions\"\xcf\x01\n" +
+	"\fPlayResponse\x12:\n" +
+	"\x04data\x18\x01 \x01(\v2&.api.game.service.v1.PlayResponse.DataR\x04data\x1a\x82\x01\n" +
 	"\x04Data\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\x01R\abalance\x12\x19\n" +
-	"\bround_id\x18\x02 \x01(\tR\aroundId\x12A\n" +
-	"\ftransactions\x18\x03 \x03(\v2\x1d.game.service.v1.TransactionsR\ftransactions\"\xa2\x03\n" +
+	"\bround_id\x18\x02 \x01(\tR\aroundId\x12E\n" +
+	"\ftransactions\x18\x03 \x03(\v2!.api.game.service.v1.TransactionsR\ftransactions\"\xa2\x03\n" +
 	"\x06Action\x12\x16\n" +
 	"\x06action\x18\x01 \x01(\tR\x06action\x12\x15\n" +
 	"\x06bet_id\x18\x02 \x01(\tR\x05betId\x12\x15\n" +
@@ -2837,15 +2838,15 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x06txn_id\x18\x01 \x01(\tR\x05txnId\x12&\n" +
 	"\x0foperator_txn_id\x18\x02 \x01(\tR\roperatorTxnId\x12!\n" +
 	"\fprocessed_at\x18\x03 \x01(\tR\vprocessedAt\x12!\n" +
-	"\fbonus_amount\x18\x04 \x01(\x01R\vbonusAmount\"\xee\x01\n" +
+	"\fbonus_amount\x18\x04 \x01(\x01R\vbonusAmount\"\xf2\x01\n" +
 	"\x0fRollbackRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
 	"\agame_id\x18\x03 \x01(\tR\x06gameId\x12\x19\n" +
 	"\bround_id\x18\x04 \x01(\tR\aroundId\x12\x1a\n" +
 	"\bfinished\x18\x05 \x01(\bR\bfinished\x12\x1b\n" +
-	"\tsm_result\x18\x06 \x01(\tR\bsmResult\x129\n" +
-	"\aactions\x18\a \x03(\v2\x1f.game.service.v1.RollbackActionR\aactions\"\xfa\x01\n" +
+	"\tsm_result\x18\x06 \x01(\tR\bsmResult\x12=\n" +
+	"\aactions\x18\a \x03(\v2#.api.game.service.v1.RollbackActionR\aactions\"\xfa\x01\n" +
 	"\x0eRollbackAction\x12\x16\n" +
 	"\x06action\x18\x01 \x01(\tR\x06action\x12\x15\n" +
 	"\x06bet_id\x18\x02 \x01(\tR\x05betId\x12\x15\n" +
@@ -2854,17 +2855,17 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"ext_txn_id\x18\x04 \x01(\tR\bextTxnId\x12&\n" +
 	"\x0foriginal_txn_id\x18\x05 \x01(\tR\roriginalTxnId\x12-\n" +
 	"\x13original_ext_txn_id\x18\x06 \x01(\tR\x10originalExtTxnId\x12-\n" +
-	"\x12provider_timestamp\x18\a \x01(\x03R\x11providerTimestamp\"\xd7\x01\n" +
-	"\x10RollbackResponse\x12:\n" +
-	"\x04data\x18\x01 \x01(\v2&.game.service.v1.RollbackResponse.DataR\x04data\x1a\x86\x01\n" +
+	"\x12provider_timestamp\x18\a \x01(\x03R\x11providerTimestamp\"\xdf\x01\n" +
+	"\x10RollbackResponse\x12>\n" +
+	"\x04data\x18\x01 \x01(\v2*.api.game.service.v1.RollbackResponse.DataR\x04data\x1a\x8a\x01\n" +
 	"\x04Data\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\x01R\abalance\x12\x19\n" +
-	"\bround_id\x18\x02 \x01(\tR\aroundId\x12I\n" +
-	"\ftransactions\x18\x03 \x03(\v2%.game.service.v1.RollbackTransactionsR\ftransactions\"x\n" +
+	"\bround_id\x18\x02 \x01(\tR\aroundId\x12M\n" +
+	"\ftransactions\x18\x03 \x03(\v2).api.game.service.v1.RollbackTransactionsR\ftransactions\"x\n" +
 	"\x14RollbackTransactions\x12\x15\n" +
 	"\x06txn_id\x18\x01 \x01(\tR\x05txnId\x12&\n" +
 	"\x0foperator_txn_id\x18\x02 \x01(\tR\roperatorTxnId\x12!\n" +
-	"\fprocessed_at\x18\x03 \x01(\tR\vprocessedAt\"\x9c\x02\n" +
+	"\fprocessed_at\x18\x03 \x01(\tR\vprocessedAt\"\xd4\x02\n" +
 	"\x0fListBetsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1e\n" +
 	"\n" +
@@ -2872,22 +2873,22 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"categories\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x03 \x03(\tR\n" +
-	"currencies\x12\"\n" +
+	"currencies\x12>\n" +
 	"\n" +
-	"start_time\x18\x04 \x01(\x03H\x00R\tstartTime\x88\x01\x01\x12\x1e\n" +
-	"\bend_time\x18\x05 \x01(\x03H\x01R\aendTime\x88\x01\x01\x12\x17\n" +
+	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x06 \x01(\x03H\x02R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\a \x01(\x03H\x03R\bpageSize\x88\x01\x01B\r\n" +
 	"\v_start_timeB\v\n" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x83\x01\n" +
-	"\x10ListBetsResponse\x12(\n" +
-	"\x04bets\x18\x01 \x03(\v2\x14.game.service.v1.BetR\x04bets\x12\x14\n" +
+	"_page_size\"\x87\x01\n" +
+	"\x10ListBetsResponse\x12,\n" +
+	"\x04bets\x18\x01 \x03(\v2\x18.api.game.service.v1.BetR\x04bets\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x03R\bpageSize\"\x89\x05\n" +
+	"\tpage_size\x18\x04 \x01(\x03R\bpageSize\"\xc1\x05\n" +
 	"\x03Bet\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12&\n" +
 	"\x0fprovider_bet_id\x18\x02 \x01(\tR\rproviderBetId\x12\x19\n" +
@@ -2907,26 +2908,25 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"win_amount\x18\r \x01(\x03R\twinAmount\x122\n" +
 	"\x15settlement_win_amount\x18\x0e \x01(\x03R\x13settlementWinAmount\x12.\n" +
 	"\x13rollback_bet_amount\x18\x0f \x01(\x03R\x11rollbackBetAmount\x12.\n" +
-	"\x13rollback_win_amount\x18\x10 \x01(\x03R\x11rollbackWinAmount\x12\x1d\n" +
+	"\x13rollback_win_amount\x18\x10 \x01(\x03R\x11rollbackWinAmount\x129\n" +
 	"\n" +
-	"created_at\x18\x11 \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x12 \x01(\x03R\tupdatedAt2\xc1\n" +
-	"\n" +
-	"\x04Game\x12c\n" +
-	"\x0eCreateOperator\x12&.game.service.v1.CreateOperatorRequest\x1a'.game.service.v1.CreateOperatorResponse\"\x00\x12c\n" +
-	"\x0eUpdateOperator\x12&.game.service.v1.UpdateOperatorRequest\x1a'.game.service.v1.UpdateOperatorResponse\"\x00\x12c\n" +
-	"\x0eDeleteOperator\x12&.game.service.v1.DeleteOperatorRequest\x1a'.game.service.v1.DeleteOperatorResponse\"\x00\x12\x86\x01\n" +
-	"\x0eListCategories\x12&.game.service.v1.ListCategoriesRequest\x1a'.game.service.v1.ListCategoriesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/game/categories/list\x12l\n" +
-	"\tListGames\x12!.game.service.v1.ListGamesRequest\x1a\".game.service.v1.ListGamesResponse\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/game/list\x12e\n" +
-	"\aGetGame\x12\x1f.game.service.v1.GetGameRequest\x1a .game.service.v1.GetGameResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v1/game/get\x12~\n" +
-	"\fProviderList\x12$.game.service.v1.ProviderListRequest\x1a%.game.service.v1.ProviderListResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/game/provider/list\x12\x82\x01\n" +
-	"\rCreateSession\x12%.game.service.v1.CreateSessionRequest\x1a&.game.service.v1.CreateSessionResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/game/create-session\x12i\n" +
-	"\aBalance\x12\x1f.game.service.v1.BalanceRequest\x1a .game.service.v1.BalanceResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/game/balance\x12]\n" +
-	"\x04Play\x12\x1c.game.service.v1.PlayRequest\x1a\x1d.game.service.v1.PlayResponse\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/game/play\x12m\n" +
-	"\bRollback\x12 .game.service.v1.RollbackRequest\x1a!.game.service.v1.RollbackResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/game/rollback\x12n\n" +
-	"\bListBets\x12 .game.service.v1.ListBetsRequest\x1a!.game.service.v1.ListBetsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1/game/bets/listBK\n" +
-	"\x0fgame.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
+	"updated_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xa2\v\n" +
+	"\x04Game\x12k\n" +
+	"\x0eCreateOperator\x12*.api.game.service.v1.CreateOperatorRequest\x1a+.api.game.service.v1.CreateOperatorResponse\"\x00\x12k\n" +
+	"\x0eUpdateOperator\x12*.api.game.service.v1.UpdateOperatorRequest\x1a+.api.game.service.v1.UpdateOperatorResponse\"\x00\x12k\n" +
+	"\x0eDeleteOperator\x12*.api.game.service.v1.DeleteOperatorRequest\x1a+.api.game.service.v1.DeleteOperatorResponse\"\x00\x12\x8e\x01\n" +
+	"\x0eListCategories\x12*.api.game.service.v1.ListCategoriesRequest\x1a+.api.game.service.v1.ListCategoriesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/game/categories/list\x12t\n" +
+	"\tListGames\x12%.api.game.service.v1.ListGamesRequest\x1a&.api.game.service.v1.ListGamesResponse\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/game/list\x12m\n" +
+	"\aGetGame\x12#.api.game.service.v1.GetGameRequest\x1a$.api.game.service.v1.GetGameResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v1/game/get\x12\x86\x01\n" +
+	"\fProviderList\x12(.api.game.service.v1.ProviderListRequest\x1a).api.game.service.v1.ProviderListResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/game/provider/list\x12\x8a\x01\n" +
+	"\rCreateSession\x12).api.game.service.v1.CreateSessionRequest\x1a*.api.game.service.v1.CreateSessionResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/game/create-session\x12q\n" +
+	"\aBalance\x12#.api.game.service.v1.BalanceRequest\x1a$.api.game.service.v1.BalanceResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/game/balance\x12e\n" +
+	"\x04Play\x12 .api.game.service.v1.PlayRequest\x1a!.api.game.service.v1.PlayResponse\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/game/play\x12u\n" +
+	"\bRollback\x12$.api.game.service.v1.RollbackRequest\x1a%.api.game.service.v1.RollbackResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/game/rollback\x12v\n" +
+	"\bListBets\x12$.api.game.service.v1.ListBetsRequest\x1a%.api.game.service.v1.ListBetsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1/game/bets/listBO\n" +
+	"\x13api.game.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (
 	file_game_service_v1_game_proto_rawDescOnce sync.Once
@@ -2943,89 +2943,94 @@ func file_game_service_v1_game_proto_rawDescGZIP() []byte {
 var file_game_service_v1_game_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_game_service_v1_game_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
 var file_game_service_v1_game_proto_goTypes = []any{
-	(GameSort_Field)(0),            // 0: game.service.v1.GameSort.Field
-	(*CreateOperatorRequest)(nil),  // 1: game.service.v1.CreateOperatorRequest
-	(*CreateOperatorResponse)(nil), // 2: game.service.v1.CreateOperatorResponse
-	(*UpdateOperatorRequest)(nil),  // 3: game.service.v1.UpdateOperatorRequest
-	(*UpdateOperatorResponse)(nil), // 4: game.service.v1.UpdateOperatorResponse
-	(*DeleteOperatorRequest)(nil),  // 5: game.service.v1.DeleteOperatorRequest
-	(*DeleteOperatorResponse)(nil), // 6: game.service.v1.DeleteOperatorResponse
-	(*GameFilter)(nil),             // 7: game.service.v1.GameFilter
-	(*GameSort)(nil),               // 8: game.service.v1.GameSort
-	(*ListCategoriesRequest)(nil),  // 9: game.service.v1.ListCategoriesRequest
-	(*ListCategoriesResponse)(nil), // 10: game.service.v1.ListCategoriesResponse
-	(*ListGamesRequest)(nil),       // 11: game.service.v1.ListGamesRequest
-	(*ListGamesResponse)(nil),      // 12: game.service.v1.ListGamesResponse
-	(*GetGameRequest)(nil),         // 13: game.service.v1.GetGameRequest
-	(*GetGameResponse)(nil),        // 14: game.service.v1.GetGameResponse
-	(*GameInfo)(nil),               // 15: game.service.v1.GameInfo
-	(*CreateSessionRequest)(nil),   // 16: game.service.v1.CreateSessionRequest
-	(*CreateSessionResponse)(nil),  // 17: game.service.v1.CreateSessionResponse
-	(*UrlInfo)(nil),                // 18: game.service.v1.UrlInfo
-	(*ProviderListRequest)(nil),    // 19: game.service.v1.ProviderListRequest
-	(*ProviderListResponse)(nil),   // 20: game.service.v1.ProviderListResponse
-	(*Provider)(nil),               // 21: game.service.v1.Provider
-	(*BalanceRequest)(nil),         // 22: game.service.v1.BalanceRequest
-	(*BalanceResponse)(nil),        // 23: game.service.v1.BalanceResponse
-	(*PlayRequest)(nil),            // 24: game.service.v1.PlayRequest
-	(*PlayResponse)(nil),           // 25: game.service.v1.PlayResponse
-	(*Action)(nil),                 // 26: game.service.v1.Action
-	(*Transactions)(nil),           // 27: game.service.v1.Transactions
-	(*RollbackRequest)(nil),        // 28: game.service.v1.RollbackRequest
-	(*RollbackAction)(nil),         // 29: game.service.v1.RollbackAction
-	(*RollbackResponse)(nil),       // 30: game.service.v1.RollbackResponse
-	(*RollbackTransactions)(nil),   // 31: game.service.v1.RollbackTransactions
-	(*ListBetsRequest)(nil),        // 32: game.service.v1.ListBetsRequest
-	(*ListBetsResponse)(nil),       // 33: game.service.v1.ListBetsResponse
-	(*Bet)(nil),                    // 34: game.service.v1.Bet
-	(*BalanceResponse_Data)(nil),   // 35: game.service.v1.BalanceResponse.Data
-	(*PlayResponse_Data)(nil),      // 36: game.service.v1.PlayResponse.Data
-	(*RollbackResponse_Data)(nil),  // 37: game.service.v1.RollbackResponse.Data
+	(GameSort_Field)(0),            // 0: api.game.service.v1.GameSort.Field
+	(*CreateOperatorRequest)(nil),  // 1: api.game.service.v1.CreateOperatorRequest
+	(*CreateOperatorResponse)(nil), // 2: api.game.service.v1.CreateOperatorResponse
+	(*UpdateOperatorRequest)(nil),  // 3: api.game.service.v1.UpdateOperatorRequest
+	(*UpdateOperatorResponse)(nil), // 4: api.game.service.v1.UpdateOperatorResponse
+	(*DeleteOperatorRequest)(nil),  // 5: api.game.service.v1.DeleteOperatorRequest
+	(*DeleteOperatorResponse)(nil), // 6: api.game.service.v1.DeleteOperatorResponse
+	(*GameFilter)(nil),             // 7: api.game.service.v1.GameFilter
+	(*GameSort)(nil),               // 8: api.game.service.v1.GameSort
+	(*ListCategoriesRequest)(nil),  // 9: api.game.service.v1.ListCategoriesRequest
+	(*ListCategoriesResponse)(nil), // 10: api.game.service.v1.ListCategoriesResponse
+	(*ListGamesRequest)(nil),       // 11: api.game.service.v1.ListGamesRequest
+	(*ListGamesResponse)(nil),      // 12: api.game.service.v1.ListGamesResponse
+	(*GetGameRequest)(nil),         // 13: api.game.service.v1.GetGameRequest
+	(*GetGameResponse)(nil),        // 14: api.game.service.v1.GetGameResponse
+	(*GameInfo)(nil),               // 15: api.game.service.v1.GameInfo
+	(*CreateSessionRequest)(nil),   // 16: api.game.service.v1.CreateSessionRequest
+	(*CreateSessionResponse)(nil),  // 17: api.game.service.v1.CreateSessionResponse
+	(*UrlInfo)(nil),                // 18: api.game.service.v1.UrlInfo
+	(*ProviderListRequest)(nil),    // 19: api.game.service.v1.ProviderListRequest
+	(*ProviderListResponse)(nil),   // 20: api.game.service.v1.ProviderListResponse
+	(*Provider)(nil),               // 21: api.game.service.v1.Provider
+	(*BalanceRequest)(nil),         // 22: api.game.service.v1.BalanceRequest
+	(*BalanceResponse)(nil),        // 23: api.game.service.v1.BalanceResponse
+	(*PlayRequest)(nil),            // 24: api.game.service.v1.PlayRequest
+	(*PlayResponse)(nil),           // 25: api.game.service.v1.PlayResponse
+	(*Action)(nil),                 // 26: api.game.service.v1.Action
+	(*Transactions)(nil),           // 27: api.game.service.v1.Transactions
+	(*RollbackRequest)(nil),        // 28: api.game.service.v1.RollbackRequest
+	(*RollbackAction)(nil),         // 29: api.game.service.v1.RollbackAction
+	(*RollbackResponse)(nil),       // 30: api.game.service.v1.RollbackResponse
+	(*RollbackTransactions)(nil),   // 31: api.game.service.v1.RollbackTransactions
+	(*ListBetsRequest)(nil),        // 32: api.game.service.v1.ListBetsRequest
+	(*ListBetsResponse)(nil),       // 33: api.game.service.v1.ListBetsResponse
+	(*Bet)(nil),                    // 34: api.game.service.v1.Bet
+	(*BalanceResponse_Data)(nil),   // 35: api.game.service.v1.BalanceResponse.Data
+	(*PlayResponse_Data)(nil),      // 36: api.game.service.v1.PlayResponse.Data
+	(*RollbackResponse_Data)(nil),  // 37: api.game.service.v1.RollbackResponse.Data
+	(*timestamppb.Timestamp)(nil),  // 38: google.protobuf.Timestamp
 }
 var file_game_service_v1_game_proto_depIdxs = []int32{
-	0,  // 0: game.service.v1.GameSort.field:type_name -> game.service.v1.GameSort.Field
-	7,  // 1: game.service.v1.ListGamesRequest.filter:type_name -> game.service.v1.GameFilter
-	8,  // 2: game.service.v1.ListGamesRequest.sort:type_name -> game.service.v1.GameSort
-	15, // 3: game.service.v1.GetGameResponse.game:type_name -> game.service.v1.GameInfo
-	18, // 4: game.service.v1.CreateSessionRequest.urls:type_name -> game.service.v1.UrlInfo
-	21, // 5: game.service.v1.ProviderListResponse.providers:type_name -> game.service.v1.Provider
-	35, // 6: game.service.v1.BalanceResponse.data:type_name -> game.service.v1.BalanceResponse.Data
-	26, // 7: game.service.v1.PlayRequest.actions:type_name -> game.service.v1.Action
-	36, // 8: game.service.v1.PlayResponse.data:type_name -> game.service.v1.PlayResponse.Data
-	29, // 9: game.service.v1.RollbackRequest.actions:type_name -> game.service.v1.RollbackAction
-	37, // 10: game.service.v1.RollbackResponse.data:type_name -> game.service.v1.RollbackResponse.Data
-	34, // 11: game.service.v1.ListBetsResponse.bets:type_name -> game.service.v1.Bet
-	27, // 12: game.service.v1.PlayResponse.Data.transactions:type_name -> game.service.v1.Transactions
-	31, // 13: game.service.v1.RollbackResponse.Data.transactions:type_name -> game.service.v1.RollbackTransactions
-	1,  // 14: game.service.v1.Game.CreateOperator:input_type -> game.service.v1.CreateOperatorRequest
-	3,  // 15: game.service.v1.Game.UpdateOperator:input_type -> game.service.v1.UpdateOperatorRequest
-	5,  // 16: game.service.v1.Game.DeleteOperator:input_type -> game.service.v1.DeleteOperatorRequest
-	9,  // 17: game.service.v1.Game.ListCategories:input_type -> game.service.v1.ListCategoriesRequest
-	11, // 18: game.service.v1.Game.ListGames:input_type -> game.service.v1.ListGamesRequest
-	13, // 19: game.service.v1.Game.GetGame:input_type -> game.service.v1.GetGameRequest
-	19, // 20: game.service.v1.Game.ProviderList:input_type -> game.service.v1.ProviderListRequest
-	16, // 21: game.service.v1.Game.CreateSession:input_type -> game.service.v1.CreateSessionRequest
-	22, // 22: game.service.v1.Game.Balance:input_type -> game.service.v1.BalanceRequest
-	24, // 23: game.service.v1.Game.Play:input_type -> game.service.v1.PlayRequest
-	28, // 24: game.service.v1.Game.Rollback:input_type -> game.service.v1.RollbackRequest
-	32, // 25: game.service.v1.Game.ListBets:input_type -> game.service.v1.ListBetsRequest
-	2,  // 26: game.service.v1.Game.CreateOperator:output_type -> game.service.v1.CreateOperatorResponse
-	4,  // 27: game.service.v1.Game.UpdateOperator:output_type -> game.service.v1.UpdateOperatorResponse
-	6,  // 28: game.service.v1.Game.DeleteOperator:output_type -> game.service.v1.DeleteOperatorResponse
-	10, // 29: game.service.v1.Game.ListCategories:output_type -> game.service.v1.ListCategoriesResponse
-	12, // 30: game.service.v1.Game.ListGames:output_type -> game.service.v1.ListGamesResponse
-	14, // 31: game.service.v1.Game.GetGame:output_type -> game.service.v1.GetGameResponse
-	20, // 32: game.service.v1.Game.ProviderList:output_type -> game.service.v1.ProviderListResponse
-	17, // 33: game.service.v1.Game.CreateSession:output_type -> game.service.v1.CreateSessionResponse
-	23, // 34: game.service.v1.Game.Balance:output_type -> game.service.v1.BalanceResponse
-	25, // 35: game.service.v1.Game.Play:output_type -> game.service.v1.PlayResponse
-	30, // 36: game.service.v1.Game.Rollback:output_type -> game.service.v1.RollbackResponse
-	33, // 37: game.service.v1.Game.ListBets:output_type -> game.service.v1.ListBetsResponse
-	26, // [26:38] is the sub-list for method output_type
-	14, // [14:26] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	0,  // 0: api.game.service.v1.GameSort.field:type_name -> api.game.service.v1.GameSort.Field
+	7,  // 1: api.game.service.v1.ListGamesRequest.filter:type_name -> api.game.service.v1.GameFilter
+	8,  // 2: api.game.service.v1.ListGamesRequest.sort:type_name -> api.game.service.v1.GameSort
+	15, // 3: api.game.service.v1.GetGameResponse.game:type_name -> api.game.service.v1.GameInfo
+	18, // 4: api.game.service.v1.CreateSessionRequest.urls:type_name -> api.game.service.v1.UrlInfo
+	21, // 5: api.game.service.v1.ProviderListResponse.providers:type_name -> api.game.service.v1.Provider
+	35, // 6: api.game.service.v1.BalanceResponse.data:type_name -> api.game.service.v1.BalanceResponse.Data
+	26, // 7: api.game.service.v1.PlayRequest.actions:type_name -> api.game.service.v1.Action
+	36, // 8: api.game.service.v1.PlayResponse.data:type_name -> api.game.service.v1.PlayResponse.Data
+	29, // 9: api.game.service.v1.RollbackRequest.actions:type_name -> api.game.service.v1.RollbackAction
+	37, // 10: api.game.service.v1.RollbackResponse.data:type_name -> api.game.service.v1.RollbackResponse.Data
+	38, // 11: api.game.service.v1.ListBetsRequest.start_time:type_name -> google.protobuf.Timestamp
+	38, // 12: api.game.service.v1.ListBetsRequest.end_time:type_name -> google.protobuf.Timestamp
+	34, // 13: api.game.service.v1.ListBetsResponse.bets:type_name -> api.game.service.v1.Bet
+	38, // 14: api.game.service.v1.Bet.created_at:type_name -> google.protobuf.Timestamp
+	38, // 15: api.game.service.v1.Bet.updated_at:type_name -> google.protobuf.Timestamp
+	27, // 16: api.game.service.v1.PlayResponse.Data.transactions:type_name -> api.game.service.v1.Transactions
+	31, // 17: api.game.service.v1.RollbackResponse.Data.transactions:type_name -> api.game.service.v1.RollbackTransactions
+	1,  // 18: api.game.service.v1.Game.CreateOperator:input_type -> api.game.service.v1.CreateOperatorRequest
+	3,  // 19: api.game.service.v1.Game.UpdateOperator:input_type -> api.game.service.v1.UpdateOperatorRequest
+	5,  // 20: api.game.service.v1.Game.DeleteOperator:input_type -> api.game.service.v1.DeleteOperatorRequest
+	9,  // 21: api.game.service.v1.Game.ListCategories:input_type -> api.game.service.v1.ListCategoriesRequest
+	11, // 22: api.game.service.v1.Game.ListGames:input_type -> api.game.service.v1.ListGamesRequest
+	13, // 23: api.game.service.v1.Game.GetGame:input_type -> api.game.service.v1.GetGameRequest
+	19, // 24: api.game.service.v1.Game.ProviderList:input_type -> api.game.service.v1.ProviderListRequest
+	16, // 25: api.game.service.v1.Game.CreateSession:input_type -> api.game.service.v1.CreateSessionRequest
+	22, // 26: api.game.service.v1.Game.Balance:input_type -> api.game.service.v1.BalanceRequest
+	24, // 27: api.game.service.v1.Game.Play:input_type -> api.game.service.v1.PlayRequest
+	28, // 28: api.game.service.v1.Game.Rollback:input_type -> api.game.service.v1.RollbackRequest
+	32, // 29: api.game.service.v1.Game.ListBets:input_type -> api.game.service.v1.ListBetsRequest
+	2,  // 30: api.game.service.v1.Game.CreateOperator:output_type -> api.game.service.v1.CreateOperatorResponse
+	4,  // 31: api.game.service.v1.Game.UpdateOperator:output_type -> api.game.service.v1.UpdateOperatorResponse
+	6,  // 32: api.game.service.v1.Game.DeleteOperator:output_type -> api.game.service.v1.DeleteOperatorResponse
+	10, // 33: api.game.service.v1.Game.ListCategories:output_type -> api.game.service.v1.ListCategoriesResponse
+	12, // 34: api.game.service.v1.Game.ListGames:output_type -> api.game.service.v1.ListGamesResponse
+	14, // 35: api.game.service.v1.Game.GetGame:output_type -> api.game.service.v1.GetGameResponse
+	20, // 36: api.game.service.v1.Game.ProviderList:output_type -> api.game.service.v1.ProviderListResponse
+	17, // 37: api.game.service.v1.Game.CreateSession:output_type -> api.game.service.v1.CreateSessionResponse
+	23, // 38: api.game.service.v1.Game.Balance:output_type -> api.game.service.v1.BalanceResponse
+	25, // 39: api.game.service.v1.Game.Play:output_type -> api.game.service.v1.PlayResponse
+	30, // 40: api.game.service.v1.Game.Rollback:output_type -> api.game.service.v1.RollbackResponse
+	33, // 41: api.game.service.v1.Game.ListBets:output_type -> api.game.service.v1.ListBetsResponse
+	30, // [30:42] is the sub-list for method output_type
+	18, // [18:30] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_game_service_v1_game_proto_init() }
