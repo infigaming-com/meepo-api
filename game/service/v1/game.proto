@@ -1,12 +1,12 @@
 syntax = "proto3";
 
+package api.game.service.v1;
 import "google/api/annotations.proto";
-
-package game.service.v1;
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/game/service/v1;v1";
 option java_multiple_files = true;
-option java_package = "game.service.v1";
+option java_package = "api.game.service.v1";
 
 service Game {
 	rpc CreateOperator(CreateOperatorRequest) returns (CreateOperatorResponse) {
@@ -327,8 +327,8 @@ message ListBetsRequest {
 	int64 user_id = 1;
 	repeated string categories = 2;
 	repeated string currencies = 3;
-	optional int64 start_time = 4;
-	optional int64 end_time = 5;
+	optional google.protobuf.Timestamp start_time = 4;
+	optional google.protobuf.Timestamp end_time = 5;
 	optional int64 page = 6;
 	optional int64 page_size = 7;
 }
@@ -357,6 +357,6 @@ message Bet {
 	int64 settlement_win_amount = 14;
 	int64 rollback_bet_amount = 15;
 	int64 rollback_win_amount = 16;
-	int64 created_at = 17;
-	int64 updated_at = 18;
+	google.protobuf.Timestamp created_at = 17;
+	google.protobuf.Timestamp updated_at = 18;
 }

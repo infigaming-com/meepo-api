@@ -19,15 +19,15 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationGameBalance = "/game.service.v1.Game/Balance"
-const OperationGameCreateSession = "/game.service.v1.Game/CreateSession"
-const OperationGameGetGame = "/game.service.v1.Game/GetGame"
-const OperationGameListBets = "/game.service.v1.Game/ListBets"
-const OperationGameListCategories = "/game.service.v1.Game/ListCategories"
-const OperationGameListGames = "/game.service.v1.Game/ListGames"
-const OperationGamePlay = "/game.service.v1.Game/Play"
-const OperationGameProviderList = "/game.service.v1.Game/ProviderList"
-const OperationGameRollback = "/game.service.v1.Game/Rollback"
+const OperationGameBalance = "/api.game.service.v1.Game/Balance"
+const OperationGameCreateSession = "/api.game.service.v1.Game/CreateSession"
+const OperationGameGetGame = "/api.game.service.v1.Game/GetGame"
+const OperationGameListBets = "/api.game.service.v1.Game/ListBets"
+const OperationGameListCategories = "/api.game.service.v1.Game/ListCategories"
+const OperationGameListGames = "/api.game.service.v1.Game/ListGames"
+const OperationGamePlay = "/api.game.service.v1.Game/Play"
+const OperationGameProviderList = "/api.game.service.v1.Game/ProviderList"
+const OperationGameRollback = "/api.game.service.v1.Game/Rollback"
 
 type GameHTTPServer interface {
 	Balance(context.Context, *BalanceRequest) (*BalanceResponse, error)

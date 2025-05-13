@@ -915,7 +915,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/game.service.v1.BalanceRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.BalanceRequest'
                 required: true
             responses:
                 "200":
@@ -923,7 +923,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/game.service.v1.BalanceResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.BalanceResponse'
     /v1/game/bets/list:
         post:
             tags:
@@ -933,7 +933,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/game.service.v1.ListBetsRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.ListBetsRequest'
                 required: true
             responses:
                 "200":
@@ -941,7 +941,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/game.service.v1.ListBetsResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.ListBetsResponse'
     /v1/game/categories/list:
         post:
             tags:
@@ -951,7 +951,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/game.service.v1.ListCategoriesRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.ListCategoriesRequest'
                 required: true
             responses:
                 "200":
@@ -959,7 +959,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/game.service.v1.ListCategoriesResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.ListCategoriesResponse'
     /v1/game/create-session:
         post:
             tags:
@@ -969,7 +969,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/game.service.v1.CreateSessionRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.CreateSessionRequest'
                 required: true
             responses:
                 "200":
@@ -977,7 +977,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/game.service.v1.CreateSessionResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.CreateSessionResponse'
     /v1/game/get:
         post:
             tags:
@@ -987,7 +987,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/game.service.v1.GetGameRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.GetGameRequest'
                 required: true
             responses:
                 "200":
@@ -995,7 +995,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/game.service.v1.GetGameResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.GetGameResponse'
     /v1/game/list:
         post:
             tags:
@@ -1005,7 +1005,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/game.service.v1.ListGamesRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.ListGamesRequest'
                 required: true
             responses:
                 "200":
@@ -1013,7 +1013,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/game.service.v1.ListGamesResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.ListGamesResponse'
     /v1/game/play:
         post:
             tags:
@@ -1023,7 +1023,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/game.service.v1.PlayRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.PlayRequest'
                 required: true
             responses:
                 "200":
@@ -1031,7 +1031,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/game.service.v1.PlayResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.PlayResponse'
     /v1/game/provider/list:
         post:
             tags:
@@ -1041,7 +1041,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/game.service.v1.ProviderListRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.ProviderListRequest'
                 required: true
             responses:
                 "200":
@@ -1049,7 +1049,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/game.service.v1.ProviderListResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.ProviderListResponse'
     /v1/game/rollback:
         post:
             tags:
@@ -1059,7 +1059,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/game.service.v1.RollbackRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.RollbackRequest'
                 required: true
             responses:
                 "200":
@@ -1067,7 +1067,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/game.service.v1.RollbackResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
     /v1/operator/add:
         post:
             tags:
@@ -4062,6 +4062,437 @@ components:
         api.backoffice.service.v1.VerifyMobileResponse:
             type: object
             properties: {}
+        api.game.service.v1.Action:
+            type: object
+            properties:
+                action:
+                    type: string
+                betId:
+                    type: string
+                txnId:
+                    type: string
+                extTxnId:
+                    type: string
+                updateBalance:
+                    type: boolean
+                takeAll:
+                    type: boolean
+                isRefund:
+                    type: boolean
+                amount:
+                    type: string
+                jackpotContribution:
+                    type: number
+                    format: float
+                jackpotWin:
+                    type: string
+                betTime:
+                    type: string
+                settleTime:
+                    type: string
+                providerTimestamp:
+                    type: string
+        api.game.service.v1.BalanceRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                gameId:
+                    type: string
+                roundId:
+                    type: string
+                finished:
+                    type: boolean
+                sessionId:
+                    type: string
+        api.game.service.v1.BalanceResponse:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.game.service.v1.BalanceResponse_Data'
+        api.game.service.v1.BalanceResponse_Data:
+            type: object
+            properties:
+                balance:
+                    type: number
+                    format: double
+                bonus:
+                    type: number
+                    format: double
+                roundId:
+                    type: string
+        api.game.service.v1.Bet:
+            type: object
+            properties:
+                id:
+                    type: string
+                providerBetId:
+                    type: string
+                roundId:
+                    type: string
+                providerRoundId:
+                    type: string
+                currency:
+                    type: string
+                settlementCurrency:
+                    type: string
+                userId:
+                    type: string
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                gameCategory:
+                    type: string
+                betAmount:
+                    type: string
+                settlementBetAmount:
+                    type: string
+                winAmount:
+                    type: string
+                settlementWinAmount:
+                    type: string
+                rollbackBetAmount:
+                    type: string
+                rollbackWinAmount:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+        api.game.service.v1.CreateSessionRequest:
+            type: object
+            properties:
+                gameId:
+                    type: string
+                currency:
+                    type: string
+                settlementCurrency:
+                    type: string
+                locale:
+                    type: string
+                urls:
+                    $ref: '#/components/schemas/api.game.service.v1.UrlInfo'
+        api.game.service.v1.CreateSessionResponse:
+            type: object
+            properties:
+                gameUrl:
+                    type: string
+        api.game.service.v1.GameFilter:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                    description: 'provider id: provider list api'
+                tags:
+                    type: string
+                    description: 'tags: hot game, live casino, slots, etc..'
+        api.game.service.v1.GameInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                enabled:
+                    type: boolean
+                name:
+                    type: string
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                category:
+                    type: string
+                languages:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                theme:
+                    type: string
+                hasJackpot:
+                    type: boolean
+                jackpotType:
+                    type: string
+                forbidBonusPlay:
+                    type: boolean
+                hasFreespins:
+                    type: boolean
+                payout:
+                    type: number
+                    format: double
+                hitRate:
+                    type: number
+                    format: double
+                volatilityRating:
+                    type: string
+                lines:
+                    type: integer
+                    format: int32
+                ways:
+                    type: integer
+                    format: int32
+                description:
+                    type: string
+                multiplier:
+                    type: number
+                    format: double
+                releasedAt:
+                    type: string
+                bonusBuy:
+                    type: boolean
+                restrictions:
+                    type: string
+        api.game.service.v1.GameSort:
+            type: object
+            properties:
+                field:
+                    enum:
+                        - ASC
+                        - DESC
+                        - POPULARITY
+                        - HIGHLIGHT
+                    type: string
+                    format: enum
+        api.game.service.v1.GetGameRequest:
+            type: object
+            properties:
+                gameId:
+                    type: string
+        api.game.service.v1.GetGameResponse:
+            type: object
+            properties:
+                game:
+                    $ref: '#/components/schemas/api.game.service.v1.GameInfo'
+        api.game.service.v1.ListBetsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                categories:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: string
+                pageSize:
+                    type: string
+        api.game.service.v1.ListBetsResponse:
+            type: object
+            properties:
+                bets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.Bet'
+                total:
+                    type: string
+                page:
+                    type: string
+                pageSize:
+                    type: string
+        api.game.service.v1.ListCategoriesRequest:
+            type: object
+            properties: {}
+        api.game.service.v1.ListCategoriesResponse:
+            type: object
+            properties:
+                categories:
+                    type: array
+                    items:
+                        type: string
+        api.game.service.v1.ListGamesRequest:
+            type: object
+            properties:
+                page:
+                    type: string
+                    description: page number for pagination (starts from 1)
+                pageSize:
+                    type: string
+                    description: page size for pagination
+                filter:
+                    allOf:
+                        - $ref: '#/components/schemas/api.game.service.v1.GameFilter'
+                    description: filter
+                sort:
+                    allOf:
+                        - $ref: '#/components/schemas/api.game.service.v1.GameSort'
+                    description: sort
+        api.game.service.v1.ListGamesResponse:
+            type: object
+            properties:
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                total:
+                    type: string
+                page:
+                    type: string
+                pageSize:
+                    type: string
+        api.game.service.v1.PlayRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                gameId:
+                    type: string
+                roundId:
+                    type: string
+                finished:
+                    type: boolean
+                smResult:
+                    type: string
+                sessionId:
+                    type: string
+                actions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.Action'
+        api.game.service.v1.PlayResponse:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.game.service.v1.PlayResponse_Data'
+        api.game.service.v1.PlayResponse_Data:
+            type: object
+            properties:
+                balance:
+                    type: number
+                    format: double
+                roundId:
+                    type: string
+                transactions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.Transactions'
+        api.game.service.v1.Provider:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                gameCount:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ProviderListRequest:
+            type: object
+            properties:
+                tags:
+                    type: string
+                    description: 'tags: hot game, live casino, slots, etc..'
+        api.game.service.v1.ProviderListResponse:
+            type: object
+            properties:
+                providers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.Provider'
+        api.game.service.v1.RollbackAction:
+            type: object
+            properties:
+                action:
+                    type: string
+                betId:
+                    type: string
+                txnId:
+                    type: string
+                extTxnId:
+                    type: string
+                originalTxnId:
+                    type: string
+                originalExtTxnId:
+                    type: string
+                providerTimestamp:
+                    type: string
+        api.game.service.v1.RollbackRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                gameId:
+                    type: string
+                roundId:
+                    type: string
+                finished:
+                    type: boolean
+                smResult:
+                    type: string
+                actions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.RollbackAction'
+        api.game.service.v1.RollbackResponse:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.game.service.v1.RollbackResponse_Data'
+        api.game.service.v1.RollbackResponse_Data:
+            type: object
+            properties:
+                balance:
+                    type: number
+                    format: double
+                roundId:
+                    type: string
+                transactions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.RollbackTransactions'
+        api.game.service.v1.RollbackTransactions:
+            type: object
+            properties:
+                txnId:
+                    type: string
+                operatorTxnId:
+                    type: string
+                processedAt:
+                    type: string
+        api.game.service.v1.Transactions:
+            type: object
+            properties:
+                txnId:
+                    type: string
+                operatorTxnId:
+                    type: string
+                processedAt:
+                    type: string
+                bonusAmount:
+                    type: number
+                    format: double
+        api.game.service.v1.UrlInfo:
+            type: object
+            properties:
+                returnUrl:
+                    type: string
+                    description: URL to redirect user after session is finished.
+                depositUrl:
+                    type: string
+                    description: URL to redirect user to deposit.
+                lobbyUrl:
+                    type: string
+                    description: URL to redirect user to lobby.
         api.operator.service.v1.AddOperatorRequest:
             type: object
             properties:
@@ -4592,433 +5023,6 @@ components:
         api.wallet.service.v1.UpdateUserCurrencyResponse:
             type: object
             properties: {}
-        game.service.v1.Action:
-            type: object
-            properties:
-                action:
-                    type: string
-                betId:
-                    type: string
-                txnId:
-                    type: string
-                extTxnId:
-                    type: string
-                updateBalance:
-                    type: boolean
-                takeAll:
-                    type: boolean
-                isRefund:
-                    type: boolean
-                amount:
-                    type: string
-                jackpotContribution:
-                    type: number
-                    format: float
-                jackpotWin:
-                    type: string
-                betTime:
-                    type: string
-                settleTime:
-                    type: string
-                providerTimestamp:
-                    type: string
-        game.service.v1.BalanceRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                currency:
-                    type: string
-                gameId:
-                    type: string
-                roundId:
-                    type: string
-                finished:
-                    type: boolean
-                sessionId:
-                    type: string
-        game.service.v1.BalanceResponse:
-            type: object
-            properties:
-                data:
-                    $ref: '#/components/schemas/game.service.v1.BalanceResponse_Data'
-        game.service.v1.BalanceResponse_Data:
-            type: object
-            properties:
-                balance:
-                    type: number
-                    format: double
-                bonus:
-                    type: number
-                    format: double
-                roundId:
-                    type: string
-        game.service.v1.Bet:
-            type: object
-            properties:
-                id:
-                    type: string
-                providerBetId:
-                    type: string
-                roundId:
-                    type: string
-                providerRoundId:
-                    type: string
-                currency:
-                    type: string
-                settlementCurrency:
-                    type: string
-                userId:
-                    type: string
-                gameId:
-                    type: string
-                gameName:
-                    type: string
-                gameCategory:
-                    type: string
-                betAmount:
-                    type: string
-                settlementBetAmount:
-                    type: string
-                winAmount:
-                    type: string
-                settlementWinAmount:
-                    type: string
-                rollbackBetAmount:
-                    type: string
-                rollbackWinAmount:
-                    type: string
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
-        game.service.v1.CreateSessionRequest:
-            type: object
-            properties:
-                gameId:
-                    type: string
-                currency:
-                    type: string
-                settlementCurrency:
-                    type: string
-                locale:
-                    type: string
-                urls:
-                    $ref: '#/components/schemas/game.service.v1.UrlInfo'
-        game.service.v1.CreateSessionResponse:
-            type: object
-            properties:
-                gameUrl:
-                    type: string
-        game.service.v1.GameFilter:
-            type: object
-            properties:
-                providerId:
-                    type: string
-                    description: 'provider id: provider list api'
-                tags:
-                    type: string
-                    description: 'tags: hot game, live casino, slots, etc..'
-        game.service.v1.GameInfo:
-            type: object
-            properties:
-                id:
-                    type: string
-                enabled:
-                    type: boolean
-                name:
-                    type: string
-                providerId:
-                    type: string
-                providerName:
-                    type: string
-                category:
-                    type: string
-                languages:
-                    type: array
-                    items:
-                        type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                theme:
-                    type: string
-                hasJackpot:
-                    type: boolean
-                jackpotType:
-                    type: string
-                forbidBonusPlay:
-                    type: boolean
-                hasFreespins:
-                    type: boolean
-                payout:
-                    type: number
-                    format: double
-                hitRate:
-                    type: number
-                    format: double
-                volatilityRating:
-                    type: string
-                lines:
-                    type: integer
-                    format: int32
-                ways:
-                    type: integer
-                    format: int32
-                description:
-                    type: string
-                multiplier:
-                    type: number
-                    format: double
-                releasedAt:
-                    type: string
-                bonusBuy:
-                    type: boolean
-                restrictions:
-                    type: string
-        game.service.v1.GameSort:
-            type: object
-            properties:
-                field:
-                    enum:
-                        - ASC
-                        - DESC
-                        - POPULARITY
-                        - HIGHLIGHT
-                    type: string
-                    format: enum
-        game.service.v1.GetGameRequest:
-            type: object
-            properties:
-                gameId:
-                    type: string
-        game.service.v1.GetGameResponse:
-            type: object
-            properties:
-                game:
-                    $ref: '#/components/schemas/game.service.v1.GameInfo'
-        game.service.v1.ListBetsRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                categories:
-                    type: array
-                    items:
-                        type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                startTime:
-                    type: string
-                endTime:
-                    type: string
-                page:
-                    type: string
-                pageSize:
-                    type: string
-        game.service.v1.ListBetsResponse:
-            type: object
-            properties:
-                bets:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/game.service.v1.Bet'
-                total:
-                    type: string
-                page:
-                    type: string
-                pageSize:
-                    type: string
-        game.service.v1.ListCategoriesRequest:
-            type: object
-            properties: {}
-        game.service.v1.ListCategoriesResponse:
-            type: object
-            properties:
-                categories:
-                    type: array
-                    items:
-                        type: string
-        game.service.v1.ListGamesRequest:
-            type: object
-            properties:
-                page:
-                    type: string
-                    description: page number for pagination (starts from 1)
-                pageSize:
-                    type: string
-                    description: page size for pagination
-                filter:
-                    allOf:
-                        - $ref: '#/components/schemas/game.service.v1.GameFilter'
-                    description: filter
-                sort:
-                    allOf:
-                        - $ref: '#/components/schemas/game.service.v1.GameSort'
-                    description: sort
-        game.service.v1.ListGamesResponse:
-            type: object
-            properties:
-                gameIds:
-                    type: array
-                    items:
-                        type: string
-                total:
-                    type: string
-                page:
-                    type: string
-                pageSize:
-                    type: string
-        game.service.v1.PlayRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                currency:
-                    type: string
-                gameId:
-                    type: string
-                roundId:
-                    type: string
-                finished:
-                    type: boolean
-                smResult:
-                    type: string
-                sessionId:
-                    type: string
-                actions:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/game.service.v1.Action'
-        game.service.v1.PlayResponse:
-            type: object
-            properties:
-                data:
-                    $ref: '#/components/schemas/game.service.v1.PlayResponse_Data'
-        game.service.v1.PlayResponse_Data:
-            type: object
-            properties:
-                balance:
-                    type: number
-                    format: double
-                roundId:
-                    type: string
-                transactions:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/game.service.v1.Transactions'
-        game.service.v1.Provider:
-            type: object
-            properties:
-                id:
-                    type: string
-                name:
-                    type: string
-                gameCount:
-                    type: integer
-                    format: int32
-        game.service.v1.ProviderListRequest:
-            type: object
-            properties:
-                tags:
-                    type: string
-                    description: 'tags: hot game, live casino, slots, etc..'
-        game.service.v1.ProviderListResponse:
-            type: object
-            properties:
-                providers:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/game.service.v1.Provider'
-        game.service.v1.RollbackAction:
-            type: object
-            properties:
-                action:
-                    type: string
-                betId:
-                    type: string
-                txnId:
-                    type: string
-                extTxnId:
-                    type: string
-                originalTxnId:
-                    type: string
-                originalExtTxnId:
-                    type: string
-                providerTimestamp:
-                    type: string
-        game.service.v1.RollbackRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                currency:
-                    type: string
-                gameId:
-                    type: string
-                roundId:
-                    type: string
-                finished:
-                    type: boolean
-                smResult:
-                    type: string
-                actions:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/game.service.v1.RollbackAction'
-        game.service.v1.RollbackResponse:
-            type: object
-            properties:
-                data:
-                    $ref: '#/components/schemas/game.service.v1.RollbackResponse_Data'
-        game.service.v1.RollbackResponse_Data:
-            type: object
-            properties:
-                balance:
-                    type: number
-                    format: double
-                roundId:
-                    type: string
-                transactions:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/game.service.v1.RollbackTransactions'
-        game.service.v1.RollbackTransactions:
-            type: object
-            properties:
-                txnId:
-                    type: string
-                operatorTxnId:
-                    type: string
-                processedAt:
-                    type: string
-        game.service.v1.Transactions:
-            type: object
-            properties:
-                txnId:
-                    type: string
-                operatorTxnId:
-                    type: string
-                processedAt:
-                    type: string
-                bonusAmount:
-                    type: number
-                    format: double
-        game.service.v1.UrlInfo:
-            type: object
-            properties:
-                returnUrl:
-                    type: string
-                    description: URL to redirect user after session is finished.
-                depositUrl:
-                    type: string
-                    description: URL to redirect user to deposit.
-                lobbyUrl:
-                    type: string
-                    description: URL to redirect user to lobby.
         payment.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:

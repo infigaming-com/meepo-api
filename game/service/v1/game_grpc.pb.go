@@ -19,18 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Game_CreateOperator_FullMethodName = "/game.service.v1.Game/CreateOperator"
-	Game_UpdateOperator_FullMethodName = "/game.service.v1.Game/UpdateOperator"
-	Game_DeleteOperator_FullMethodName = "/game.service.v1.Game/DeleteOperator"
-	Game_ListCategories_FullMethodName = "/game.service.v1.Game/ListCategories"
-	Game_ListGames_FullMethodName      = "/game.service.v1.Game/ListGames"
-	Game_GetGame_FullMethodName        = "/game.service.v1.Game/GetGame"
-	Game_ProviderList_FullMethodName   = "/game.service.v1.Game/ProviderList"
-	Game_CreateSession_FullMethodName  = "/game.service.v1.Game/CreateSession"
-	Game_Balance_FullMethodName        = "/game.service.v1.Game/Balance"
-	Game_Play_FullMethodName           = "/game.service.v1.Game/Play"
-	Game_Rollback_FullMethodName       = "/game.service.v1.Game/Rollback"
-	Game_ListBets_FullMethodName       = "/game.service.v1.Game/ListBets"
+	Game_CreateOperator_FullMethodName = "/api.game.service.v1.Game/CreateOperator"
+	Game_UpdateOperator_FullMethodName = "/api.game.service.v1.Game/UpdateOperator"
+	Game_DeleteOperator_FullMethodName = "/api.game.service.v1.Game/DeleteOperator"
+	Game_ListCategories_FullMethodName = "/api.game.service.v1.Game/ListCategories"
+	Game_ListGames_FullMethodName      = "/api.game.service.v1.Game/ListGames"
+	Game_GetGame_FullMethodName        = "/api.game.service.v1.Game/GetGame"
+	Game_ProviderList_FullMethodName   = "/api.game.service.v1.Game/ProviderList"
+	Game_CreateSession_FullMethodName  = "/api.game.service.v1.Game/CreateSession"
+	Game_Balance_FullMethodName        = "/api.game.service.v1.Game/Balance"
+	Game_Play_FullMethodName           = "/api.game.service.v1.Game/Play"
+	Game_Rollback_FullMethodName       = "/api.game.service.v1.Game/Rollback"
+	Game_ListBets_FullMethodName       = "/api.game.service.v1.Game/ListBets"
 )
 
 // GameClient is the client API for Game service.
@@ -482,7 +482,7 @@ func _Game_ListBets_Handler(srv interface{}, ctx context.Context, dec func(inter
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Game_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "game.service.v1.Game",
+	ServiceName: "api.game.service.v1.Game",
 	HandlerType: (*GameServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
