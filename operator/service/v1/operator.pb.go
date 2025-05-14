@@ -211,6 +211,94 @@ func (*UpdateOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{3}
 }
 
+type GetOperatorRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOperatorRequest) Reset() {
+	*x = GetOperatorRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorRequest) ProtoMessage() {}
+
+func (x *GetOperatorRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorRequest.ProtoReflect.Descriptor instead.
+func (*GetOperatorRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetOperatorRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+type GetOperatorResponse struct {
+	state         protoimpl.MessageState        `protogen:"open.v1"`
+	Operator      *GetOperatorResponse_Operator `protobuf:"bytes,1,opt,name=operator,proto3" json:"operator,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOperatorResponse) Reset() {
+	*x = GetOperatorResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorResponse) ProtoMessage() {}
+
+func (x *GetOperatorResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorResponse.ProtoReflect.Descriptor instead.
+func (*GetOperatorResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetOperatorResponse) GetOperator() *GetOperatorResponse_Operator {
+	if x != nil {
+		return x.Operator
+	}
+	return nil
+}
+
 type AddOrUpdateCurrencyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
@@ -222,7 +310,7 @@ type AddOrUpdateCurrencyRequest struct {
 
 func (x *AddOrUpdateCurrencyRequest) Reset() {
 	*x = AddOrUpdateCurrencyRequest{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[4]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -234,7 +322,7 @@ func (x *AddOrUpdateCurrencyRequest) String() string {
 func (*AddOrUpdateCurrencyRequest) ProtoMessage() {}
 
 func (x *AddOrUpdateCurrencyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[4]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -247,7 +335,7 @@ func (x *AddOrUpdateCurrencyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddOrUpdateCurrencyRequest.ProtoReflect.Descriptor instead.
 func (*AddOrUpdateCurrencyRequest) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{4}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AddOrUpdateCurrencyRequest) GetCurrency() string {
@@ -279,7 +367,7 @@ type AddOrUpdateCurrencyResponse struct {
 
 func (x *AddOrUpdateCurrencyResponse) Reset() {
 	*x = AddOrUpdateCurrencyResponse{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[5]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -291,7 +379,7 @@ func (x *AddOrUpdateCurrencyResponse) String() string {
 func (*AddOrUpdateCurrencyResponse) ProtoMessage() {}
 
 func (x *AddOrUpdateCurrencyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[5]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -304,7 +392,7 @@ func (x *AddOrUpdateCurrencyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddOrUpdateCurrencyResponse.ProtoReflect.Descriptor instead.
 func (*AddOrUpdateCurrencyResponse) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{5}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{7}
 }
 
 type UpdateOperatorCurrencyRequest struct {
@@ -318,7 +406,7 @@ type UpdateOperatorCurrencyRequest struct {
 
 func (x *UpdateOperatorCurrencyRequest) Reset() {
 	*x = UpdateOperatorCurrencyRequest{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[6]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -330,7 +418,7 @@ func (x *UpdateOperatorCurrencyRequest) String() string {
 func (*UpdateOperatorCurrencyRequest) ProtoMessage() {}
 
 func (x *UpdateOperatorCurrencyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[6]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -343,7 +431,7 @@ func (x *UpdateOperatorCurrencyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOperatorCurrencyRequest.ProtoReflect.Descriptor instead.
 func (*UpdateOperatorCurrencyRequest) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{6}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UpdateOperatorCurrencyRequest) GetOperatorId() int64 {
@@ -375,7 +463,7 @@ type UpdateOperatorCurrencyResponse struct {
 
 func (x *UpdateOperatorCurrencyResponse) Reset() {
 	*x = UpdateOperatorCurrencyResponse{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[7]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -387,7 +475,7 @@ func (x *UpdateOperatorCurrencyResponse) String() string {
 func (*UpdateOperatorCurrencyResponse) ProtoMessage() {}
 
 func (x *UpdateOperatorCurrencyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[7]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -400,7 +488,7 @@ func (x *UpdateOperatorCurrencyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOperatorCurrencyResponse.ProtoReflect.Descriptor instead.
 func (*UpdateOperatorCurrencyResponse) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{7}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{9}
 }
 
 type GetOperatorCurrenciesRequest struct {
@@ -415,7 +503,7 @@ type GetOperatorCurrenciesRequest struct {
 
 func (x *GetOperatorCurrenciesRequest) Reset() {
 	*x = GetOperatorCurrenciesRequest{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[8]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -427,7 +515,7 @@ func (x *GetOperatorCurrenciesRequest) String() string {
 func (*GetOperatorCurrenciesRequest) ProtoMessage() {}
 
 func (x *GetOperatorCurrenciesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[8]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -440,7 +528,7 @@ func (x *GetOperatorCurrenciesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorCurrenciesRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorCurrenciesRequest) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{8}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetOperatorCurrenciesRequest) GetOperatorId() int64 {
@@ -466,7 +554,7 @@ type GetOperatorCurrenciesResponse struct {
 
 func (x *GetOperatorCurrenciesResponse) Reset() {
 	*x = GetOperatorCurrenciesResponse{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[9]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -478,7 +566,7 @@ func (x *GetOperatorCurrenciesResponse) String() string {
 func (*GetOperatorCurrenciesResponse) ProtoMessage() {}
 
 func (x *GetOperatorCurrenciesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[9]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -491,7 +579,7 @@ func (x *GetOperatorCurrenciesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorCurrenciesResponse.ProtoReflect.Descriptor instead.
 func (*GetOperatorCurrenciesResponse) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{9}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetOperatorCurrenciesResponse) GetCurrencies() []*GetOperatorCurrenciesResponse_Currency {
@@ -511,7 +599,7 @@ type AddOriginOperatorIdRequest struct {
 
 func (x *AddOriginOperatorIdRequest) Reset() {
 	*x = AddOriginOperatorIdRequest{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[10]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -523,7 +611,7 @@ func (x *AddOriginOperatorIdRequest) String() string {
 func (*AddOriginOperatorIdRequest) ProtoMessage() {}
 
 func (x *AddOriginOperatorIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[10]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -536,7 +624,7 @@ func (x *AddOriginOperatorIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddOriginOperatorIdRequest.ProtoReflect.Descriptor instead.
 func (*AddOriginOperatorIdRequest) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{10}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *AddOriginOperatorIdRequest) GetOrigin() string {
@@ -561,7 +649,7 @@ type AddOriginOperatorIdResponse struct {
 
 func (x *AddOriginOperatorIdResponse) Reset() {
 	*x = AddOriginOperatorIdResponse{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[11]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -573,7 +661,7 @@ func (x *AddOriginOperatorIdResponse) String() string {
 func (*AddOriginOperatorIdResponse) ProtoMessage() {}
 
 func (x *AddOriginOperatorIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[11]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -586,7 +674,7 @@ func (x *AddOriginOperatorIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddOriginOperatorIdResponse.ProtoReflect.Descriptor instead.
 func (*AddOriginOperatorIdResponse) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{11}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{13}
 }
 
 type GetOperatorIdByOriginRequest struct {
@@ -598,7 +686,7 @@ type GetOperatorIdByOriginRequest struct {
 
 func (x *GetOperatorIdByOriginRequest) Reset() {
 	*x = GetOperatorIdByOriginRequest{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[12]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -610,7 +698,7 @@ func (x *GetOperatorIdByOriginRequest) String() string {
 func (*GetOperatorIdByOriginRequest) ProtoMessage() {}
 
 func (x *GetOperatorIdByOriginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[12]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -623,7 +711,7 @@ func (x *GetOperatorIdByOriginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorIdByOriginRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorIdByOriginRequest) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{12}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetOperatorIdByOriginRequest) GetOrigin() string {
@@ -642,7 +730,7 @@ type GetOperatorIdByOriginResponse struct {
 
 func (x *GetOperatorIdByOriginResponse) Reset() {
 	*x = GetOperatorIdByOriginResponse{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[13]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -654,7 +742,7 @@ func (x *GetOperatorIdByOriginResponse) String() string {
 func (*GetOperatorIdByOriginResponse) ProtoMessage() {}
 
 func (x *GetOperatorIdByOriginResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[13]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -667,7 +755,7 @@ func (x *GetOperatorIdByOriginResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorIdByOriginResponse.ProtoReflect.Descriptor instead.
 func (*GetOperatorIdByOriginResponse) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{13}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetOperatorIdByOriginResponse) GetOperatorId() int64 {
@@ -686,7 +774,7 @@ type DeleteOriginOperatorIdRequest struct {
 
 func (x *DeleteOriginOperatorIdRequest) Reset() {
 	*x = DeleteOriginOperatorIdRequest{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[14]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -698,7 +786,7 @@ func (x *DeleteOriginOperatorIdRequest) String() string {
 func (*DeleteOriginOperatorIdRequest) ProtoMessage() {}
 
 func (x *DeleteOriginOperatorIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[14]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -711,7 +799,7 @@ func (x *DeleteOriginOperatorIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOriginOperatorIdRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOriginOperatorIdRequest) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{14}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *DeleteOriginOperatorIdRequest) GetOrigin() string {
@@ -729,7 +817,7 @@ type DeleteOriginOperatorIdResponse struct {
 
 func (x *DeleteOriginOperatorIdResponse) Reset() {
 	*x = DeleteOriginOperatorIdResponse{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[15]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -741,7 +829,7 @@ func (x *DeleteOriginOperatorIdResponse) String() string {
 func (*DeleteOriginOperatorIdResponse) ProtoMessage() {}
 
 func (x *DeleteOriginOperatorIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[15]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -754,7 +842,7 @@ func (x *DeleteOriginOperatorIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOriginOperatorIdResponse.ProtoReflect.Descriptor instead.
 func (*DeleteOriginOperatorIdResponse) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{15}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{17}
 }
 
 type GetParentOperatorIdsRequest struct {
@@ -767,7 +855,7 @@ type GetParentOperatorIdsRequest struct {
 
 func (x *GetParentOperatorIdsRequest) Reset() {
 	*x = GetParentOperatorIdsRequest{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[16]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -779,7 +867,7 @@ func (x *GetParentOperatorIdsRequest) String() string {
 func (*GetParentOperatorIdsRequest) ProtoMessage() {}
 
 func (x *GetParentOperatorIdsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[16]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -792,7 +880,7 @@ func (x *GetParentOperatorIdsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetParentOperatorIdsRequest.ProtoReflect.Descriptor instead.
 func (*GetParentOperatorIdsRequest) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{16}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetParentOperatorIdsRequest) GetOperatorId() int64 {
@@ -812,7 +900,7 @@ type GetParentOperatorIdsResponse struct {
 
 func (x *GetParentOperatorIdsResponse) Reset() {
 	*x = GetParentOperatorIdsResponse{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[17]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -824,7 +912,7 @@ func (x *GetParentOperatorIdsResponse) String() string {
 func (*GetParentOperatorIdsResponse) ProtoMessage() {}
 
 func (x *GetParentOperatorIdsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[17]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -837,7 +925,7 @@ func (x *GetParentOperatorIdsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetParentOperatorIdsResponse.ProtoReflect.Descriptor instead.
 func (*GetParentOperatorIdsResponse) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{17}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetParentOperatorIdsResponse) GetParentOperatorIds() []int64 {
@@ -845,6 +933,66 @@ func (x *GetParentOperatorIdsResponse) GetParentOperatorIds() []int64 {
 		return x.ParentOperatorIds
 	}
 	return nil
+}
+
+type GetOperatorResponse_Operator struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOperatorResponse_Operator) Reset() {
+	*x = GetOperatorResponse_Operator{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorResponse_Operator) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorResponse_Operator) ProtoMessage() {}
+
+func (x *GetOperatorResponse_Operator) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorResponse_Operator.ProtoReflect.Descriptor instead.
+func (*GetOperatorResponse_Operator) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{5, 0}
+}
+
+func (x *GetOperatorResponse_Operator) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *GetOperatorResponse_Operator) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *GetOperatorResponse_Operator) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
 }
 
 type GetOperatorCurrenciesResponse_Currency struct {
@@ -858,7 +1006,7 @@ type GetOperatorCurrenciesResponse_Currency struct {
 
 func (x *GetOperatorCurrenciesResponse_Currency) Reset() {
 	*x = GetOperatorCurrenciesResponse_Currency{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[18]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -870,7 +1018,7 @@ func (x *GetOperatorCurrenciesResponse_Currency) String() string {
 func (*GetOperatorCurrenciesResponse_Currency) ProtoMessage() {}
 
 func (x *GetOperatorCurrenciesResponse_Currency) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[18]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -883,7 +1031,7 @@ func (x *GetOperatorCurrenciesResponse_Currency) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use GetOperatorCurrenciesResponse_Currency.ProtoReflect.Descriptor instead.
 func (*GetOperatorCurrenciesResponse_Currency) Descriptor() ([]byte, []int) {
-	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{9, 0}
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{11, 0}
 }
 
 func (x *GetOperatorCurrenciesResponse_Currency) GetCurrency() string {
@@ -922,7 +1070,17 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\"\x18\n" +
-	"\x16UpdateOperatorResponse\"j\n" +
+	"\x16UpdateOperatorResponse\"5\n" +
+	"\x12GetOperatorRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\"\xc3\x01\n" +
+	"\x13GetOperatorResponse\x12Q\n" +
+	"\boperator\x18\x01 \x01(\v25.api.operator.service.v1.GetOperatorResponse.OperatorR\boperator\x1aY\n" +
+	"\bOperator\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled\"j\n" +
 	"\x1aAddOrUpdateCurrencyRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
@@ -965,10 +1123,11 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"N\n" +
 	"\x1cGetParentOperatorIdsResponse\x12.\n" +
-	"\x13parent_operator_ids\x18\x01 \x03(\x03R\x11parentOperatorIds2\x82\v\n" +
+	"\x13parent_operator_ids\x18\x01 \x03(\x03R\x11parentOperatorIds2\xee\v\n" +
 	"\bOperator\x12\x85\x01\n" +
 	"\vAddOperator\x12+.api.operator.service.v1.AddOperatorRequest\x1a,.api.operator.service.v1.AddOperatorResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/operator/add\x12\x91\x01\n" +
-	"\x0eUpdateOperator\x12..api.operator.service.v1.UpdateOperatorRequest\x1a/.api.operator.service.v1.UpdateOperatorResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/operator/update\x12\x82\x01\n" +
+	"\x0eUpdateOperator\x12..api.operator.service.v1.UpdateOperatorRequest\x1a/.api.operator.service.v1.UpdateOperatorResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/operator/update\x12j\n" +
+	"\vGetOperator\x12+.api.operator.service.v1.GetOperatorRequest\x1a,.api.operator.service.v1.GetOperatorResponse\"\x00\x12\x82\x01\n" +
 	"\x13AddOrUpdateCurrency\x123.api.operator.service.v1.AddOrUpdateCurrencyRequest\x1a4.api.operator.service.v1.AddOrUpdateCurrencyResponse\"\x00\x12\xb4\x01\n" +
 	"\x16UpdateOperatorCurrency\x126.api.operator.service.v1.UpdateOperatorCurrencyRequest\x1a7.api.operator.service.v1.UpdateOperatorCurrencyResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/operator/currencies/update\x12\xae\x01\n" +
 	"\x15GetOperatorCurrencies\x125.api.operator.service.v1.GetOperatorCurrenciesRequest\x1a6.api.operator.service.v1.GetOperatorCurrenciesResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/operator/currencies/get\x12\xa5\x01\n" +
@@ -990,53 +1149,59 @@ func file_operator_service_v1_operator_proto_rawDescGZIP() []byte {
 	return file_operator_service_v1_operator_proto_rawDescData
 }
 
-var file_operator_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_operator_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_operator_service_v1_operator_proto_goTypes = []any{
 	(*AddOperatorRequest)(nil),                     // 0: api.operator.service.v1.AddOperatorRequest
 	(*AddOperatorResponse)(nil),                    // 1: api.operator.service.v1.AddOperatorResponse
 	(*UpdateOperatorRequest)(nil),                  // 2: api.operator.service.v1.UpdateOperatorRequest
 	(*UpdateOperatorResponse)(nil),                 // 3: api.operator.service.v1.UpdateOperatorResponse
-	(*AddOrUpdateCurrencyRequest)(nil),             // 4: api.operator.service.v1.AddOrUpdateCurrencyRequest
-	(*AddOrUpdateCurrencyResponse)(nil),            // 5: api.operator.service.v1.AddOrUpdateCurrencyResponse
-	(*UpdateOperatorCurrencyRequest)(nil),          // 6: api.operator.service.v1.UpdateOperatorCurrencyRequest
-	(*UpdateOperatorCurrencyResponse)(nil),         // 7: api.operator.service.v1.UpdateOperatorCurrencyResponse
-	(*GetOperatorCurrenciesRequest)(nil),           // 8: api.operator.service.v1.GetOperatorCurrenciesRequest
-	(*GetOperatorCurrenciesResponse)(nil),          // 9: api.operator.service.v1.GetOperatorCurrenciesResponse
-	(*AddOriginOperatorIdRequest)(nil),             // 10: api.operator.service.v1.AddOriginOperatorIdRequest
-	(*AddOriginOperatorIdResponse)(nil),            // 11: api.operator.service.v1.AddOriginOperatorIdResponse
-	(*GetOperatorIdByOriginRequest)(nil),           // 12: api.operator.service.v1.GetOperatorIdByOriginRequest
-	(*GetOperatorIdByOriginResponse)(nil),          // 13: api.operator.service.v1.GetOperatorIdByOriginResponse
-	(*DeleteOriginOperatorIdRequest)(nil),          // 14: api.operator.service.v1.DeleteOriginOperatorIdRequest
-	(*DeleteOriginOperatorIdResponse)(nil),         // 15: api.operator.service.v1.DeleteOriginOperatorIdResponse
-	(*GetParentOperatorIdsRequest)(nil),            // 16: api.operator.service.v1.GetParentOperatorIdsRequest
-	(*GetParentOperatorIdsResponse)(nil),           // 17: api.operator.service.v1.GetParentOperatorIdsResponse
-	(*GetOperatorCurrenciesResponse_Currency)(nil), // 18: api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
+	(*GetOperatorRequest)(nil),                     // 4: api.operator.service.v1.GetOperatorRequest
+	(*GetOperatorResponse)(nil),                    // 5: api.operator.service.v1.GetOperatorResponse
+	(*AddOrUpdateCurrencyRequest)(nil),             // 6: api.operator.service.v1.AddOrUpdateCurrencyRequest
+	(*AddOrUpdateCurrencyResponse)(nil),            // 7: api.operator.service.v1.AddOrUpdateCurrencyResponse
+	(*UpdateOperatorCurrencyRequest)(nil),          // 8: api.operator.service.v1.UpdateOperatorCurrencyRequest
+	(*UpdateOperatorCurrencyResponse)(nil),         // 9: api.operator.service.v1.UpdateOperatorCurrencyResponse
+	(*GetOperatorCurrenciesRequest)(nil),           // 10: api.operator.service.v1.GetOperatorCurrenciesRequest
+	(*GetOperatorCurrenciesResponse)(nil),          // 11: api.operator.service.v1.GetOperatorCurrenciesResponse
+	(*AddOriginOperatorIdRequest)(nil),             // 12: api.operator.service.v1.AddOriginOperatorIdRequest
+	(*AddOriginOperatorIdResponse)(nil),            // 13: api.operator.service.v1.AddOriginOperatorIdResponse
+	(*GetOperatorIdByOriginRequest)(nil),           // 14: api.operator.service.v1.GetOperatorIdByOriginRequest
+	(*GetOperatorIdByOriginResponse)(nil),          // 15: api.operator.service.v1.GetOperatorIdByOriginResponse
+	(*DeleteOriginOperatorIdRequest)(nil),          // 16: api.operator.service.v1.DeleteOriginOperatorIdRequest
+	(*DeleteOriginOperatorIdResponse)(nil),         // 17: api.operator.service.v1.DeleteOriginOperatorIdResponse
+	(*GetParentOperatorIdsRequest)(nil),            // 18: api.operator.service.v1.GetParentOperatorIdsRequest
+	(*GetParentOperatorIdsResponse)(nil),           // 19: api.operator.service.v1.GetParentOperatorIdsResponse
+	(*GetOperatorResponse_Operator)(nil),           // 20: api.operator.service.v1.GetOperatorResponse.Operator
+	(*GetOperatorCurrenciesResponse_Currency)(nil), // 21: api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
 }
 var file_operator_service_v1_operator_proto_depIdxs = []int32{
-	18, // 0: api.operator.service.v1.GetOperatorCurrenciesResponse.currencies:type_name -> api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
-	0,  // 1: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
-	2,  // 2: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
-	4,  // 3: api.operator.service.v1.Operator.AddOrUpdateCurrency:input_type -> api.operator.service.v1.AddOrUpdateCurrencyRequest
-	6,  // 4: api.operator.service.v1.Operator.UpdateOperatorCurrency:input_type -> api.operator.service.v1.UpdateOperatorCurrencyRequest
-	8,  // 5: api.operator.service.v1.Operator.GetOperatorCurrencies:input_type -> api.operator.service.v1.GetOperatorCurrenciesRequest
-	10, // 6: api.operator.service.v1.Operator.AddOriginOperatorId:input_type -> api.operator.service.v1.AddOriginOperatorIdRequest
-	12, // 7: api.operator.service.v1.Operator.GetOperatorIdByOrigin:input_type -> api.operator.service.v1.GetOperatorIdByOriginRequest
-	14, // 8: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
-	16, // 9: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
-	1,  // 10: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
-	3,  // 11: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
-	5,  // 12: api.operator.service.v1.Operator.AddOrUpdateCurrency:output_type -> api.operator.service.v1.AddOrUpdateCurrencyResponse
-	7,  // 13: api.operator.service.v1.Operator.UpdateOperatorCurrency:output_type -> api.operator.service.v1.UpdateOperatorCurrencyResponse
-	9,  // 14: api.operator.service.v1.Operator.GetOperatorCurrencies:output_type -> api.operator.service.v1.GetOperatorCurrenciesResponse
-	11, // 15: api.operator.service.v1.Operator.AddOriginOperatorId:output_type -> api.operator.service.v1.AddOriginOperatorIdResponse
-	13, // 16: api.operator.service.v1.Operator.GetOperatorIdByOrigin:output_type -> api.operator.service.v1.GetOperatorIdByOriginResponse
-	15, // 17: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
-	17, // 18: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
-	10, // [10:19] is the sub-list for method output_type
-	1,  // [1:10] is the sub-list for method input_type
-	1,  // [1:1] is the sub-list for extension type_name
-	1,  // [1:1] is the sub-list for extension extendee
-	0,  // [0:1] is the sub-list for field type_name
+	20, // 0: api.operator.service.v1.GetOperatorResponse.operator:type_name -> api.operator.service.v1.GetOperatorResponse.Operator
+	21, // 1: api.operator.service.v1.GetOperatorCurrenciesResponse.currencies:type_name -> api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
+	0,  // 2: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
+	2,  // 3: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
+	4,  // 4: api.operator.service.v1.Operator.GetOperator:input_type -> api.operator.service.v1.GetOperatorRequest
+	6,  // 5: api.operator.service.v1.Operator.AddOrUpdateCurrency:input_type -> api.operator.service.v1.AddOrUpdateCurrencyRequest
+	8,  // 6: api.operator.service.v1.Operator.UpdateOperatorCurrency:input_type -> api.operator.service.v1.UpdateOperatorCurrencyRequest
+	10, // 7: api.operator.service.v1.Operator.GetOperatorCurrencies:input_type -> api.operator.service.v1.GetOperatorCurrenciesRequest
+	12, // 8: api.operator.service.v1.Operator.AddOriginOperatorId:input_type -> api.operator.service.v1.AddOriginOperatorIdRequest
+	14, // 9: api.operator.service.v1.Operator.GetOperatorIdByOrigin:input_type -> api.operator.service.v1.GetOperatorIdByOriginRequest
+	16, // 10: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
+	18, // 11: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
+	1,  // 12: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
+	3,  // 13: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
+	5,  // 14: api.operator.service.v1.Operator.GetOperator:output_type -> api.operator.service.v1.GetOperatorResponse
+	7,  // 15: api.operator.service.v1.Operator.AddOrUpdateCurrency:output_type -> api.operator.service.v1.AddOrUpdateCurrencyResponse
+	9,  // 16: api.operator.service.v1.Operator.UpdateOperatorCurrency:output_type -> api.operator.service.v1.UpdateOperatorCurrencyResponse
+	11, // 17: api.operator.service.v1.Operator.GetOperatorCurrencies:output_type -> api.operator.service.v1.GetOperatorCurrenciesResponse
+	13, // 18: api.operator.service.v1.Operator.AddOriginOperatorId:output_type -> api.operator.service.v1.AddOriginOperatorIdResponse
+	15, // 19: api.operator.service.v1.Operator.GetOperatorIdByOrigin:output_type -> api.operator.service.v1.GetOperatorIdByOriginResponse
+	17, // 20: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
+	19, // 21: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
+	12, // [12:22] is the sub-list for method output_type
+	2,  // [2:12] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_operator_service_v1_operator_proto_init() }
@@ -1050,7 +1215,7 @@ func file_operator_service_v1_operator_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_operator_service_v1_operator_proto_rawDesc), len(file_operator_service_v1_operator_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   19,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

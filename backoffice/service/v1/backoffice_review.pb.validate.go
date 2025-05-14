@@ -35,23 +35,22 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on ListWithdrawReviewTicketsRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *ListWithdrawReviewTicketsRequest) Validate() error {
+// Validate checks the field values on ListTicketsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListTicketsRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListWithdrawReviewTicketsRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// ListWithdrawReviewTicketsRequestMultiError, or nil if none found.
-func (m *ListWithdrawReviewTicketsRequest) ValidateAll() error {
+// ValidateAll checks the field values on ListTicketsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTicketsRequestMultiError, or nil if none found.
+func (m *ListTicketsRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListWithdrawReviewTicketsRequest) validate(all bool) error {
+func (m *ListTicketsRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -66,8 +65,8 @@ func (m *ListWithdrawReviewTicketsRequest) validate(all bool) error {
 		// no validation rules for UserId
 	}
 
-	if m.ReviewTicketId != nil {
-		// no validation rules for ReviewTicketId
+	if m.TicketId != nil {
+		// no validation rules for TicketId
 	}
 
 	if m.Currency != nil {
@@ -84,7 +83,7 @@ func (m *ListWithdrawReviewTicketsRequest) validate(all bool) error {
 			switch v := interface{}(m.GetStartTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListWithdrawReviewTicketsRequestValidationError{
+					errors = append(errors, ListTicketsRequestValidationError{
 						field:  "StartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -92,7 +91,7 @@ func (m *ListWithdrawReviewTicketsRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListWithdrawReviewTicketsRequestValidationError{
+					errors = append(errors, ListTicketsRequestValidationError{
 						field:  "StartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -101,7 +100,7 @@ func (m *ListWithdrawReviewTicketsRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListWithdrawReviewTicketsRequestValidationError{
+				return ListTicketsRequestValidationError{
 					field:  "StartTime",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -117,7 +116,7 @@ func (m *ListWithdrawReviewTicketsRequest) validate(all bool) error {
 			switch v := interface{}(m.GetEndTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListWithdrawReviewTicketsRequestValidationError{
+					errors = append(errors, ListTicketsRequestValidationError{
 						field:  "EndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -125,7 +124,7 @@ func (m *ListWithdrawReviewTicketsRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListWithdrawReviewTicketsRequestValidationError{
+					errors = append(errors, ListTicketsRequestValidationError{
 						field:  "EndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -134,7 +133,7 @@ func (m *ListWithdrawReviewTicketsRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListWithdrawReviewTicketsRequestValidationError{
+				return ListTicketsRequestValidationError{
 					field:  "EndTime",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -153,20 +152,19 @@ func (m *ListWithdrawReviewTicketsRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListWithdrawReviewTicketsRequestMultiError(errors)
+		return ListTicketsRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListWithdrawReviewTicketsRequestMultiError is an error wrapping multiple
-// validation errors returned by
-// ListWithdrawReviewTicketsRequest.ValidateAll() if the designated
-// constraints aren't met.
-type ListWithdrawReviewTicketsRequestMultiError []error
+// ListTicketsRequestMultiError is an error wrapping multiple validation errors
+// returned by ListTicketsRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ListTicketsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListWithdrawReviewTicketsRequestMultiError) Error() string {
+func (m ListTicketsRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -175,12 +173,11 @@ func (m ListWithdrawReviewTicketsRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListWithdrawReviewTicketsRequestMultiError) AllErrors() []error { return m }
+func (m ListTicketsRequestMultiError) AllErrors() []error { return m }
 
-// ListWithdrawReviewTicketsRequestValidationError is the validation error
-// returned by ListWithdrawReviewTicketsRequest.Validate if the designated
-// constraints aren't met.
-type ListWithdrawReviewTicketsRequestValidationError struct {
+// ListTicketsRequestValidationError is the validation error returned by
+// ListTicketsRequest.Validate if the designated constraints aren't met.
+type ListTicketsRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -188,24 +185,24 @@ type ListWithdrawReviewTicketsRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListWithdrawReviewTicketsRequestValidationError) Field() string { return e.field }
+func (e ListTicketsRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListWithdrawReviewTicketsRequestValidationError) Reason() string { return e.reason }
+func (e ListTicketsRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListWithdrawReviewTicketsRequestValidationError) Cause() error { return e.cause }
+func (e ListTicketsRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListWithdrawReviewTicketsRequestValidationError) Key() bool { return e.key }
+func (e ListTicketsRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListWithdrawReviewTicketsRequestValidationError) ErrorName() string {
-	return "ListWithdrawReviewTicketsRequestValidationError"
+func (e ListTicketsRequestValidationError) ErrorName() string {
+	return "ListTicketsRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListWithdrawReviewTicketsRequestValidationError) Error() string {
+func (e ListTicketsRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -217,14 +214,14 @@ func (e ListWithdrawReviewTicketsRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListWithdrawReviewTicketsRequest.%s: %s%s",
+		"invalid %sListTicketsRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListWithdrawReviewTicketsRequestValidationError{}
+var _ error = ListTicketsRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -232,48 +229,47 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListWithdrawReviewTicketsRequestValidationError{}
+} = ListTicketsRequestValidationError{}
 
-// Validate checks the field values on ListWithdrawReviewTicketsResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *ListWithdrawReviewTicketsResponse) Validate() error {
+// Validate checks the field values on ListTicketsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListTicketsResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListWithdrawReviewTicketsResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// ListWithdrawReviewTicketsResponseMultiError, or nil if none found.
-func (m *ListWithdrawReviewTicketsResponse) ValidateAll() error {
+// ValidateAll checks the field values on ListTicketsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTicketsResponseMultiError, or nil if none found.
+func (m *ListTicketsResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListWithdrawReviewTicketsResponse) validate(all bool) error {
+func (m *ListTicketsResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	for idx, item := range m.GetWithdrawReviewTickets() {
+	for idx, item := range m.GetTickets() {
 		_, _ = idx, item
 
 		if all {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListWithdrawReviewTicketsResponseValidationError{
-						field:  fmt.Sprintf("WithdrawReviewTickets[%v]", idx),
+					errors = append(errors, ListTicketsResponseValidationError{
+						field:  fmt.Sprintf("Tickets[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListWithdrawReviewTicketsResponseValidationError{
-						field:  fmt.Sprintf("WithdrawReviewTickets[%v]", idx),
+					errors = append(errors, ListTicketsResponseValidationError{
+						field:  fmt.Sprintf("Tickets[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -281,8 +277,8 @@ func (m *ListWithdrawReviewTicketsResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListWithdrawReviewTicketsResponseValidationError{
-					field:  fmt.Sprintf("WithdrawReviewTickets[%v]", idx),
+				return ListTicketsResponseValidationError{
+					field:  fmt.Sprintf("Tickets[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -310,20 +306,19 @@ func (m *ListWithdrawReviewTicketsResponse) validate(all bool) error {
 	// no validation rules for AverageReviewTime
 
 	if len(errors) > 0 {
-		return ListWithdrawReviewTicketsResponseMultiError(errors)
+		return ListTicketsResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListWithdrawReviewTicketsResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// ListWithdrawReviewTicketsResponse.ValidateAll() if the designated
+// ListTicketsResponseMultiError is an error wrapping multiple validation
+// errors returned by ListTicketsResponse.ValidateAll() if the designated
 // constraints aren't met.
-type ListWithdrawReviewTicketsResponseMultiError []error
+type ListTicketsResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListWithdrawReviewTicketsResponseMultiError) Error() string {
+func (m ListTicketsResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -332,12 +327,11 @@ func (m ListWithdrawReviewTicketsResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListWithdrawReviewTicketsResponseMultiError) AllErrors() []error { return m }
+func (m ListTicketsResponseMultiError) AllErrors() []error { return m }
 
-// ListWithdrawReviewTicketsResponseValidationError is the validation error
-// returned by ListWithdrawReviewTicketsResponse.Validate if the designated
-// constraints aren't met.
-type ListWithdrawReviewTicketsResponseValidationError struct {
+// ListTicketsResponseValidationError is the validation error returned by
+// ListTicketsResponse.Validate if the designated constraints aren't met.
+type ListTicketsResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -345,24 +339,24 @@ type ListWithdrawReviewTicketsResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListWithdrawReviewTicketsResponseValidationError) Field() string { return e.field }
+func (e ListTicketsResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListWithdrawReviewTicketsResponseValidationError) Reason() string { return e.reason }
+func (e ListTicketsResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListWithdrawReviewTicketsResponseValidationError) Cause() error { return e.cause }
+func (e ListTicketsResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListWithdrawReviewTicketsResponseValidationError) Key() bool { return e.key }
+func (e ListTicketsResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListWithdrawReviewTicketsResponseValidationError) ErrorName() string {
-	return "ListWithdrawReviewTicketsResponseValidationError"
+func (e ListTicketsResponseValidationError) ErrorName() string {
+	return "ListTicketsResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListWithdrawReviewTicketsResponseValidationError) Error() string {
+func (e ListTicketsResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -374,14 +368,14 @@ func (e ListWithdrawReviewTicketsResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListWithdrawReviewTicketsResponse.%s: %s%s",
+		"invalid %sListTicketsResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListWithdrawReviewTicketsResponseValidationError{}
+var _ error = ListTicketsResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -389,7 +383,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListWithdrawReviewTicketsResponseValidationError{}
+} = ListTicketsResponseValidationError{}
 
 // Validate checks the field values on ReviewTicketRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -413,11 +407,11 @@ func (m *ReviewTicketRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for ReviewTicketId
+	// no validation rules for TicketId
 
 	// no validation rules for ReviewerUserId
 
-	// no validation rules for ReviewAction
+	// no validation rules for Action
 
 	// no validation rules for ReviewComment
 
@@ -603,25 +597,22 @@ var _ interface {
 	ErrorName() string
 } = ReviewTicketResponseValidationError{}
 
-// Validate checks the field values on
-// ListWithdrawReviewTicketsResponse_WithdrawReviewTicket with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on ListTicketsResponse_Ticket with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListWithdrawReviewTicketsResponse_WithdrawReviewTicket) Validate() error {
+func (m *ListTicketsResponse_Ticket) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on
-// ListWithdrawReviewTicketsResponse_WithdrawReviewTicket with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on ListTicketsResponse_Ticket with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListWithdrawReviewTicketsResponse_WithdrawReviewTicketMultiError, or nil if
-// none found.
-func (m *ListWithdrawReviewTicketsResponse_WithdrawReviewTicket) ValidateAll() error {
+// ListTicketsResponse_TicketMultiError, or nil if none found.
+func (m *ListTicketsResponse_Ticket) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListWithdrawReviewTicketsResponse_WithdrawReviewTicket) validate(all bool) error {
+func (m *ListTicketsResponse_Ticket) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -632,7 +623,7 @@ func (m *ListWithdrawReviewTicketsResponse_WithdrawReviewTicket) validate(all bo
 		switch v := interface{}(m.GetCreatedAt()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError{
+				errors = append(errors, ListTicketsResponse_TicketValidationError{
 					field:  "CreatedAt",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -640,7 +631,7 @@ func (m *ListWithdrawReviewTicketsResponse_WithdrawReviewTicket) validate(all bo
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError{
+				errors = append(errors, ListTicketsResponse_TicketValidationError{
 					field:  "CreatedAt",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -649,7 +640,7 @@ func (m *ListWithdrawReviewTicketsResponse_WithdrawReviewTicket) validate(all bo
 		}
 	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError{
+			return ListTicketsResponse_TicketValidationError{
 				field:  "CreatedAt",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -659,7 +650,7 @@ func (m *ListWithdrawReviewTicketsResponse_WithdrawReviewTicket) validate(all bo
 
 	// no validation rules for Operator
 
-	// no validation rules for ReviewTicketId
+	// no validation rules for TicketId
 
 	// no validation rules for Category
 
@@ -678,20 +669,19 @@ func (m *ListWithdrawReviewTicketsResponse_WithdrawReviewTicket) validate(all bo
 	// no validation rules for Fee
 
 	if len(errors) > 0 {
-		return ListWithdrawReviewTicketsResponse_WithdrawReviewTicketMultiError(errors)
+		return ListTicketsResponse_TicketMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListWithdrawReviewTicketsResponse_WithdrawReviewTicketMultiError is an error
-// wrapping multiple validation errors returned by
-// ListWithdrawReviewTicketsResponse_WithdrawReviewTicket.ValidateAll() if the
-// designated constraints aren't met.
-type ListWithdrawReviewTicketsResponse_WithdrawReviewTicketMultiError []error
+// ListTicketsResponse_TicketMultiError is an error wrapping multiple
+// validation errors returned by ListTicketsResponse_Ticket.ValidateAll() if
+// the designated constraints aren't met.
+type ListTicketsResponse_TicketMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListWithdrawReviewTicketsResponse_WithdrawReviewTicketMultiError) Error() string {
+func (m ListTicketsResponse_TicketMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -700,15 +690,11 @@ func (m ListWithdrawReviewTicketsResponse_WithdrawReviewTicketMultiError) Error(
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListWithdrawReviewTicketsResponse_WithdrawReviewTicketMultiError) AllErrors() []error {
-	return m
-}
+func (m ListTicketsResponse_TicketMultiError) AllErrors() []error { return m }
 
-// ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError is the
-// validation error returned by
-// ListWithdrawReviewTicketsResponse_WithdrawReviewTicket.Validate if the
-// designated constraints aren't met.
-type ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError struct {
+// ListTicketsResponse_TicketValidationError is the validation error returned
+// by ListTicketsResponse_Ticket.Validate if the designated constraints aren't met.
+type ListTicketsResponse_TicketValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -716,32 +702,24 @@ type ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError struc
 }
 
 // Field function returns field value.
-func (e ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError) Field() string {
-	return e.field
-}
+func (e ListTicketsResponse_TicketValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError) Reason() string {
-	return e.reason
-}
+func (e ListTicketsResponse_TicketValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError) Cause() error {
-	return e.cause
-}
+func (e ListTicketsResponse_TicketValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError) Key() bool {
-	return e.key
-}
+func (e ListTicketsResponse_TicketValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError) ErrorName() string {
-	return "ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError"
+func (e ListTicketsResponse_TicketValidationError) ErrorName() string {
+	return "ListTicketsResponse_TicketValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError) Error() string {
+func (e ListTicketsResponse_TicketValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -753,14 +731,14 @@ func (e ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError) E
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListWithdrawReviewTicketsResponse_WithdrawReviewTicket.%s: %s%s",
+		"invalid %sListTicketsResponse_Ticket.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError{}
+var _ error = ListTicketsResponse_TicketValidationError{}
 
 var _ interface {
 	Field() string
@@ -768,4 +746,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListWithdrawReviewTicketsResponse_WithdrawReviewTicketValidationError{}
+} = ListTicketsResponse_TicketValidationError{}

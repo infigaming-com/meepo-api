@@ -711,16 +711,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
-    /v1/backoffice/review/withdraw-review-tickets/list:
+    /v1/backoffice/review/tickets/list:
         post:
             tags:
                 - BackofficeReview
-            operationId: BackofficeReview_ListWithdrawReviewTickets
+            operationId: BackofficeReview_ListTickets
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawReviewTicketsRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsRequest'
                 required: true
             responses:
                 "200":
@@ -728,7 +728,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawReviewTicketsResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse'
     /v1/backoffice/user/comments/add:
         post:
             tags:
@@ -3534,6 +3534,85 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListTicketsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                userId:
+                    type: string
+                ticketId:
+                    type: string
+                currency:
+                    type: string
+                status:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: string
+                pageSize:
+                    type: string
+        api.backoffice.service.v1.ListTicketsResponse:
+            type: object
+            properties:
+                tickets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse_Ticket'
+                page:
+                    type: string
+                pageSize:
+                    type: string
+                total:
+                    type: string
+                totalPending:
+                    type: string
+                totalPaying:
+                    type: string
+                totalPaid:
+                    type: string
+                totalFailed:
+                    type: string
+                totalRejected:
+                    type: string
+                averageReviewTime:
+                    type: string
+        api.backoffice.service.v1.ListTicketsResponse_Ticket:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    format: date-time
+                operator:
+                    type: string
+                ticketId:
+                    type: string
+                category:
+                    type: string
+                vipLevel:
+                    type: integer
+                    format: int32
+                userTags:
+                    type: array
+                    items:
+                        type: string
+                beforeBalance:
+                    type: string
+                afterBalance:
+                    type: string
+                currency:
+                    type: string
+                paymentChannel:
+                    type: string
+                protocol:
+                    type: string
+                fee:
+                    type: string
         api.backoffice.service.v1.ListUserBetsRequest:
             type: object
             properties:
@@ -3891,85 +3970,6 @@ components:
                     format: int32
                 withdrawAmount:
                     type: string
-        api.backoffice.service.v1.ListWithdrawReviewTicketsRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                userId:
-                    type: string
-                reviewTicketId:
-                    type: string
-                currency:
-                    type: string
-                status:
-                    type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-                page:
-                    type: string
-                pageSize:
-                    type: string
-        api.backoffice.service.v1.ListWithdrawReviewTicketsResponse:
-            type: object
-            properties:
-                withdrawReviewTickets:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawReviewTicketsResponse_WithdrawReviewTicket'
-                page:
-                    type: string
-                pageSize:
-                    type: string
-                total:
-                    type: string
-                totalPending:
-                    type: string
-                totalPaying:
-                    type: string
-                totalPaid:
-                    type: string
-                totalFailed:
-                    type: string
-                totalRejected:
-                    type: string
-                averageReviewTime:
-                    type: string
-        api.backoffice.service.v1.ListWithdrawReviewTicketsResponse_WithdrawReviewTicket:
-            type: object
-            properties:
-                createdAt:
-                    type: string
-                    format: date-time
-                operator:
-                    type: string
-                reviewTicketId:
-                    type: string
-                category:
-                    type: string
-                vipLevel:
-                    type: integer
-                    format: int32
-                userTags:
-                    type: array
-                    items:
-                        type: string
-                beforeBalance:
-                    type: string
-                afterBalance:
-                    type: string
-                currency:
-                    type: string
-                paymentChannel:
-                    type: string
-                protocol:
-                    type: string
-                fee:
-                    type: string
         api.backoffice.service.v1.PaymentData_Data:
             type: object
             properties:
@@ -3988,11 +3988,11 @@ components:
         api.backoffice.service.v1.ReviewTicketRequest:
             type: object
             properties:
-                reviewTicketId:
+                ticketId:
                     type: string
                 reviewerUserId:
                     type: string
-                reviewAction:
+                action:
                     type: string
                 reviewComment:
                     type: string
