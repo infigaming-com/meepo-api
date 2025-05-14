@@ -3689,6 +3689,10 @@ func (m *ListBetsRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
 	if m.StartTime != nil {
 
 		if all {
