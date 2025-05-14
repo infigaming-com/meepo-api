@@ -2258,7 +2258,7 @@ components:
                         - TRANSACTION_STATUS_SUCCESSFUL
                         - TRANSACTION_STATUS_FAILED
                     type: string
-                    description: Optional status filter，使用 payment 模块中的 TransactionStatus 枚举
+                    description: Optional status filter
                     format: enum
                 agent:
                     type: string
@@ -2360,7 +2360,7 @@ components:
                         - TRANSACTION_STATUS_SUCCESSFUL
                         - TRANSACTION_STATUS_FAILED
                     type: string
-                    description: Current status of the transaction，使用 payment 模块中的 TransactionStatus 枚举
+                    description: Current status of the transaction
                     format: enum
                 transactionId:
                     type: string
@@ -5450,6 +5450,15 @@ components:
                 amount:
                     type: string
                     description: Amount to withdraw in smallest currency unit (e.g., cents)
+                currency:
+                    type: string
+                    description: Currency code for the transaction
+                userId:
+                    type: string
+                    description: ID of the user who initiated the withdrawal
+                operatorId:
+                    type: string
+                    description: ID of the operator who owns this channel
                 channelId:
                     type: string
                     description: ID of the channel to use for withdrawal

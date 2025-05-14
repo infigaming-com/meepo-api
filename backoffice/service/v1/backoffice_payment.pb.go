@@ -48,7 +48,7 @@ type GetPaymentTransactionPageRequest struct {
 	Protocol string `protobuf:"bytes,9,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Optional transaction type filter
 	Type v1.TransactionType `protobuf:"varint,10,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
-	// Optional status filter，使用 payment 模块中的 TransactionStatus 枚举
+	// Optional status filter
 	Status v1.TransactionStatus `protobuf:"varint,11,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
 	// Optional agent filter
 	Agent string `protobuf:"bytes,12,opt,name=agent,proto3" json:"agent,omitempty"`
@@ -329,7 +329,7 @@ type GetPaymentTransactionPageResponse_PaymentTransaction struct {
 	PaymentChannel string `protobuf:"bytes,8,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
 	// Protocol used for the transaction
 	Protocol string `protobuf:"bytes,9,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	// Current status of the transaction，使用 payment 模块中的 TransactionStatus 枚举
+	// Current status of the transaction
 	Status v1.TransactionStatus `protobuf:"varint,10,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
 	// Unique identifier for the transaction
 	TransactionId int64 `protobuf:"varint,11,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`

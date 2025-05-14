@@ -140,11 +140,17 @@ message InitiateDepositResponse {
 message InitiateWithdrawRequest {
   // Amount to withdraw in smallest currency unit (e.g., cents)
   int64 amount = 1;
+  // Currency code for the transaction
+  string currency = 2;
+  // ID of the user who initiated the withdrawal
+  int64 user_id = 3 [json_name="userId"];
+  // ID of the operator who owns this channel
+  int64 operator_id = 4 [json_name="operatorId"];
   // ID of the channel to use for withdrawal
-  string channel_id = 2 [json_name="channelId"];
+  string channel_id = 5 [json_name="channelId"];
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
-  google.protobuf.Struct extra = 3;
+  google.protobuf.Struct extra = 6;
 }
 
 // Response for withdrawal initiation
