@@ -522,7 +522,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionPageRequest'
+                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
                 required: true
             responses:
                 "200":
@@ -530,7 +530,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionPageResponse'
+                                $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
     /v1/backoffice/report/daily-summaries/list:
         post:
             tags:
@@ -2211,166 +2211,6 @@ components:
                     type: string
                 yesterday:
                     type: string
-        api.backoffice.service.v1.GetPaymentTransactionPageRequest:
-            type: object
-            properties:
-                page:
-                    type: integer
-                    description: Page number to retrieve (1-based)
-                    format: int32
-                pageSize:
-                    type: integer
-                    description: Number of items per page
-                    format: int32
-                transactionId:
-                    type: string
-                    description: Optional transaction ID filter
-                operatorId:
-                    type: string
-                    description: Optional operator ID filter
-                userId:
-                    type: string
-                    description: Optional user ID filter
-                currency:
-                    type: string
-                    description: Optional currency filter
-                paymentMethod:
-                    type: string
-                    description: Optional payment method filter
-                paymentChannel:
-                    type: string
-                    description: Optional payment channel filter
-                protocol:
-                    type: string
-                    description: Optional protocol filter
-                type:
-                    enum:
-                        - TRANSACTION_TYPE_UNSPECIFIED
-                        - TRANSACTION_TYPE_DEPOSIT
-                        - TRANSACTION_TYPE_WITHDRAW
-                    type: string
-                    description: Optional transaction type filter
-                    format: enum
-                status:
-                    enum:
-                        - TRANSACTION_STATUS_UNSPECIFIED
-                        - TRANSACTION_STATUS_PROCESSING
-                        - TRANSACTION_STATUS_SUCCESSFUL
-                        - TRANSACTION_STATUS_FAILED
-                    type: string
-                    description: Optional status filter
-                    format: enum
-                agent:
-                    type: string
-                    description: Optional agent filter
-                startTime:
-                    type: string
-                    description: Optional start time for date range filter
-                    format: date-time
-                endTime:
-                    type: string
-                    description: Optional end time for date range filter
-                    format: date-time
-                sort:
-                    enum:
-                        - DESC
-                        - ASC
-                    type: string
-                    description: Optional sort direction
-                    format: enum
-            description: |-
-                Request to get payment transaction page
-                 Used to retrieve a paginated list of payment transactions with optional filters
-        api.backoffice.service.v1.GetPaymentTransactionPageResponse:
-            type: object
-            properties:
-                paymentTransactions:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionPageResponse_PaymentTransaction'
-                    description: List of payment transactions matching the filter criteria
-                totalCount:
-                    type: integer
-                    description: Total number of transactions matching the filter criteria
-                    format: int32
-                page:
-                    type: integer
-                    description: Current page number
-                    format: int32
-                pageSize:
-                    type: integer
-                    description: Number of items per page
-                    format: int32
-                totalPages:
-                    type: integer
-                    description: Total number of pages available
-                    format: int32
-                totalSuccessful:
-                    type: integer
-                    description: Total number of successful transactions
-                    format: int32
-                totalProcessing:
-                    type: integer
-                    description: Total number of processing transactions
-                    format: int32
-                totalFailed:
-                    type: integer
-                    description: Total number of failed transactions
-                    format: int32
-            description: |-
-                Response for payment transaction page
-                 Contains paginated list of payment transactions and pagination metadata
-        api.backoffice.service.v1.GetPaymentTransactionPageResponse_PaymentTransaction:
-            type: object
-            properties:
-                operator:
-                    type: string
-                    description: Operator ID associated with the transaction
-                createdAt:
-                    type: string
-                    description: Timestamp when the transaction was created
-                    format: date-time
-                updatedAt:
-                    type: string
-                    description: Timestamp when the transaction was last updated
-                    format: date-time
-                userId:
-                    type: string
-                    description: ID of the user who initiated the transaction
-                vipLevel:
-                    type: integer
-                    description: VIP level of the user
-                    format: int32
-                amount:
-                    type: string
-                    description: Transaction amount with currency unit
-                currency:
-                    type: string
-                    description: Currency code for the transaction
-                paymentChannel:
-                    type: string
-                    description: Payment channel used for the transaction
-                protocol:
-                    type: string
-                    description: Protocol used for the transaction
-                status:
-                    enum:
-                        - TRANSACTION_STATUS_UNSPECIFIED
-                        - TRANSACTION_STATUS_PROCESSING
-                        - TRANSACTION_STATUS_SUCCESSFUL
-                        - TRANSACTION_STATUS_FAILED
-                    type: string
-                    description: Current status of the transaction
-                    format: enum
-                transactionId:
-                    type: string
-                    description: Unique identifier for the transaction
-                paTransactionId:
-                    type: string
-                    description: Transaction ID from the payment gateway
-            description: |-
-                Payment transaction information
-                 Detailed information about a specific payment transaction
         api.backoffice.service.v1.GetPlayerGameDataSummaryRequest:
             type: object
             properties:
