@@ -4285,6 +4285,8 @@ components:
                     type: array
                     items:
                         type: string
+                status:
+                    type: string
                 startTime:
                     type: string
                     format: date-time
