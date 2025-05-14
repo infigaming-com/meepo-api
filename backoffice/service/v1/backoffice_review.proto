@@ -29,7 +29,7 @@ message ListWithdrawReviewTicketsRequest {
 	optional int64 user_id = 2;
 	optional int64 review_ticket_id = 3;
 	optional string currency = 4;
-	optional string status = 5;
+	optional string status = 5;	// pending, approved, rejected, manual_payout
 	optional google.protobuf.Timestamp start_time = 6;
 	optional google.protobuf.Timestamp end_time = 7;
 	optional int64 page = 8;

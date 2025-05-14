@@ -19,11 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Review_CreateWithdraw_FullMethodName   = "/api.review.service.v1.Review/CreateWithdraw"
-	Review_ApproveReview_FullMethodName    = "/api.review.service.v1.Review/ApproveReview"
-	Review_AddReviewComment_FullMethodName = "/api.review.service.v1.Review/AddReviewComment"
-	Review_ListReviews_FullMethodName      = "/api.review.service.v1.Review/ListReviews"
-	Review_GetReview_FullMethodName        = "/api.review.service.v1.Review/GetReview"
+	Review_CreateWithdraw_FullMethodName = "/api.review.service.v1.Review/CreateWithdraw"
+	Review_ReviewTicket_FullMethodName   = "/api.review.service.v1.Review/ReviewTicket"
+	Review_AddComment_FullMethodName     = "/api.review.service.v1.Review/AddComment"
+	Review_ListTickets_FullMethodName    = "/api.review.service.v1.Review/ListTickets"
+	Review_GetTicket_FullMethodName      = "/api.review.service.v1.Review/GetTicket"
 )
 
 // ReviewClient is the client API for Review service.
@@ -33,10 +33,10 @@ const (
 // Review service provides review functionality.
 type ReviewClient interface {
 	CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
-	ApproveReview(ctx context.Context, in *ApproveReviewRequest, opts ...grpc.CallOption) (*ApproveReviewResponse, error)
-	AddReviewComment(ctx context.Context, in *AddReviewCommentRequest, opts ...grpc.CallOption) (*AddReviewCommentResponse, error)
-	ListReviews(ctx context.Context, in *ListReviewsRequest, opts ...grpc.CallOption) (*ListReviewsResponse, error)
-	GetReview(ctx context.Context, in *GetReviewRequest, opts ...grpc.CallOption) (*GetReviewResponse, error)
+	ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error)
+	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
+	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
+	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error)
 }
 
 type reviewClient struct {
@@ -57,40 +57,40 @@ func (c *reviewClient) CreateWithdraw(ctx context.Context, in *CreateWithdrawReq
 	return out, nil
 }
 
-func (c *reviewClient) ApproveReview(ctx context.Context, in *ApproveReviewRequest, opts ...grpc.CallOption) (*ApproveReviewResponse, error) {
+func (c *reviewClient) ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ApproveReviewResponse)
-	err := c.cc.Invoke(ctx, Review_ApproveReview_FullMethodName, in, out, cOpts...)
+	out := new(ReviewTicketResponse)
+	err := c.cc.Invoke(ctx, Review_ReviewTicket_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *reviewClient) AddReviewComment(ctx context.Context, in *AddReviewCommentRequest, opts ...grpc.CallOption) (*AddReviewCommentResponse, error) {
+func (c *reviewClient) AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddReviewCommentResponse)
-	err := c.cc.Invoke(ctx, Review_AddReviewComment_FullMethodName, in, out, cOpts...)
+	out := new(AddCommentResponse)
+	err := c.cc.Invoke(ctx, Review_AddComment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *reviewClient) ListReviews(ctx context.Context, in *ListReviewsRequest, opts ...grpc.CallOption) (*ListReviewsResponse, error) {
+func (c *reviewClient) ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListReviewsResponse)
-	err := c.cc.Invoke(ctx, Review_ListReviews_FullMethodName, in, out, cOpts...)
+	out := new(ListTicketsResponse)
+	err := c.cc.Invoke(ctx, Review_ListTickets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *reviewClient) GetReview(ctx context.Context, in *GetReviewRequest, opts ...grpc.CallOption) (*GetReviewResponse, error) {
+func (c *reviewClient) GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetReviewResponse)
-	err := c.cc.Invoke(ctx, Review_GetReview_FullMethodName, in, out, cOpts...)
+	out := new(GetTicketResponse)
+	err := c.cc.Invoke(ctx, Review_GetTicket_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -104,10 +104,10 @@ func (c *reviewClient) GetReview(ctx context.Context, in *GetReviewRequest, opts
 // Review service provides review functionality.
 type ReviewServer interface {
 	CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
-	ApproveReview(context.Context, *ApproveReviewRequest) (*ApproveReviewResponse, error)
-	AddReviewComment(context.Context, *AddReviewCommentRequest) (*AddReviewCommentResponse, error)
-	ListReviews(context.Context, *ListReviewsRequest) (*ListReviewsResponse, error)
-	GetReview(context.Context, *GetReviewRequest) (*GetReviewResponse, error)
+	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
+	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
+	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
+	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
 	mustEmbedUnimplementedReviewServer()
 }
 
@@ -121,17 +121,17 @@ type UnimplementedReviewServer struct{}
 func (UnimplementedReviewServer) CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateWithdraw not implemented")
 }
-func (UnimplementedReviewServer) ApproveReview(context.Context, *ApproveReviewRequest) (*ApproveReviewResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ApproveReview not implemented")
+func (UnimplementedReviewServer) ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReviewTicket not implemented")
 }
-func (UnimplementedReviewServer) AddReviewComment(context.Context, *AddReviewCommentRequest) (*AddReviewCommentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddReviewComment not implemented")
+func (UnimplementedReviewServer) AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddComment not implemented")
 }
-func (UnimplementedReviewServer) ListReviews(context.Context, *ListReviewsRequest) (*ListReviewsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListReviews not implemented")
+func (UnimplementedReviewServer) ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTickets not implemented")
 }
-func (UnimplementedReviewServer) GetReview(context.Context, *GetReviewRequest) (*GetReviewResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetReview not implemented")
+func (UnimplementedReviewServer) GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTicket not implemented")
 }
 func (UnimplementedReviewServer) mustEmbedUnimplementedReviewServer() {}
 func (UnimplementedReviewServer) testEmbeddedByValue()                {}
@@ -172,74 +172,74 @@ func _Review_CreateWithdraw_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Review_ApproveReview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ApproveReviewRequest)
+func _Review_ReviewTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReviewTicketRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReviewServer).ApproveReview(ctx, in)
+		return srv.(ReviewServer).ReviewTicket(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Review_ApproveReview_FullMethodName,
+		FullMethod: Review_ReviewTicket_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReviewServer).ApproveReview(ctx, req.(*ApproveReviewRequest))
+		return srv.(ReviewServer).ReviewTicket(ctx, req.(*ReviewTicketRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Review_AddReviewComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddReviewCommentRequest)
+func _Review_AddComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCommentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReviewServer).AddReviewComment(ctx, in)
+		return srv.(ReviewServer).AddComment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Review_AddReviewComment_FullMethodName,
+		FullMethod: Review_AddComment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReviewServer).AddReviewComment(ctx, req.(*AddReviewCommentRequest))
+		return srv.(ReviewServer).AddComment(ctx, req.(*AddCommentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Review_ListReviews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListReviewsRequest)
+func _Review_ListTickets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTicketsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReviewServer).ListReviews(ctx, in)
+		return srv.(ReviewServer).ListTickets(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Review_ListReviews_FullMethodName,
+		FullMethod: Review_ListTickets_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReviewServer).ListReviews(ctx, req.(*ListReviewsRequest))
+		return srv.(ReviewServer).ListTickets(ctx, req.(*ListTicketsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Review_GetReview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetReviewRequest)
+func _Review_GetTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTicketRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReviewServer).GetReview(ctx, in)
+		return srv.(ReviewServer).GetTicket(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Review_GetReview_FullMethodName,
+		FullMethod: Review_GetTicket_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReviewServer).GetReview(ctx, req.(*GetReviewRequest))
+		return srv.(ReviewServer).GetTicket(ctx, req.(*GetTicketRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -256,20 +256,20 @@ var Review_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Review_CreateWithdraw_Handler,
 		},
 		{
-			MethodName: "ApproveReview",
-			Handler:    _Review_ApproveReview_Handler,
+			MethodName: "ReviewTicket",
+			Handler:    _Review_ReviewTicket_Handler,
 		},
 		{
-			MethodName: "AddReviewComment",
-			Handler:    _Review_AddReviewComment_Handler,
+			MethodName: "AddComment",
+			Handler:    _Review_AddComment_Handler,
 		},
 		{
-			MethodName: "ListReviews",
-			Handler:    _Review_ListReviews_Handler,
+			MethodName: "ListTickets",
+			Handler:    _Review_ListTickets_Handler,
 		},
 		{
-			MethodName: "GetReview",
-			Handler:    _Review_GetReview_Handler,
+			MethodName: "GetTicket",
+			Handler:    _Review_GetTicket_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

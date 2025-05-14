@@ -29,7 +29,7 @@ type ListWithdrawReviewTicketsRequest struct {
 	UserId         *int64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	ReviewTicketId *int64                 `protobuf:"varint,3,opt,name=review_ticket_id,json=reviewTicketId,proto3,oneof" json:"review_ticket_id,omitempty"`
 	Currency       *string                `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	Status         *string                `protobuf:"bytes,5,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Status         *string                `protobuf:"bytes,5,opt,name=status,proto3,oneof" json:"status,omitempty"` // pending, approved, rejected, manual_payout
 	StartTime      *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime        *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	Page           *int64                 `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
