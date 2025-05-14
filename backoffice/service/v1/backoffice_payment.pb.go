@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "github.com/infigaming-com/meepo-api/payment/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -488,7 +489,7 @@ type GetPaymentTransactionPageResponse_PaymentTransaction struct {
 	// Protocol used for the transaction
 	Protocol string `protobuf:"bytes,9,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Current status of the transaction
-	Status string `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
+	Status TransactionStatus `protobuf:"varint,10,opt,name=status,proto3,enum=api.backoffice.service.v1.TransactionStatus" json:"status,omitempty"`
 	// Unique identifier for the transaction
 	TransactionId int64 `protobuf:"varint,11,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	// Transaction ID from the payment gateway
@@ -590,11 +591,11 @@ func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetProtocol() str
 	return ""
 }
 
-func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetStatus() string {
+func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetStatus() TransactionStatus {
 	if x != nil {
 		return x.Status
 	}
-	return ""
+	return TransactionStatus_TRANSACTION_STATUS_UNSPECIFIED
 }
 
 func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetTransactionId() int64 {
@@ -615,7 +616,7 @@ var File_backoffice_service_v1_backoffice_payment_proto protoreflect.FileDescrip
 
 const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xff\x04\n" +
+	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a payment/service/v1/payment.proto\"\xff\x04\n" +
 	" GetPaymentTransactionPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12%\n" +
@@ -634,7 +635,7 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
 	"start_time\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x123\n" +
-	"\x04sort\x18\x0f \x01(\x0e2\x1f.api.backoffice.service.v1.SortR\x04sort\"\xd7\x06\n" +
+	"\x04sort\x18\x0f \x01(\x0e2\x1f.api.backoffice.service.v1.SortR\x04sort\"\x85\a\n" +
 	"!GetPaymentTransactionPageResponse\x12\x82\x01\n" +
 	"\x14payment_transactions\x18\x01 \x03(\v2O.api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransactionR\x13paymentTransactions\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
@@ -645,7 +646,7 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"totalPages\x12)\n" +
 	"\x10total_successful\x18\x06 \x01(\x05R\x0ftotalSuccessful\x12)\n" +
 	"\x10total_processing\x18\a \x01(\x05R\x0ftotalProcessing\x12!\n" +
-	"\ftotal_failed\x18\b \x01(\x05R\vtotalFailed\x1a\xc0\x03\n" +
+	"\ftotal_failed\x18\b \x01(\x05R\vtotalFailed\x1a\xee\x03\n" +
 	"\x12PaymentTransaction\x12\x1a\n" +
 	"\boperator\x18\x01 \x01(\tR\boperator\x129\n" +
 	"\n" +
@@ -657,9 +658,9 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\x06amount\x18\x06 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\a \x01(\tR\bcurrency\x12'\n" +
 	"\x0fpayment_channel\x18\b \x01(\tR\x0epaymentChannel\x12\x1a\n" +
-	"\bprotocol\x18\t \x01(\tR\bprotocol\x12\x16\n" +
+	"\bprotocol\x18\t \x01(\tR\bprotocol\x12D\n" +
 	"\x06status\x18\n" +
-	" \x01(\tR\x06status\x12%\n" +
+	" \x01(\x0e2,.api.backoffice.service.v1.TransactionStatusR\x06status\x12%\n" +
 	"\x0etransaction_id\x18\v \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\f \x01(\tR\x0fpaTransactionId*N\n" +
 	"\x0fTransactionType\x12\x1c\n" +
@@ -701,21 +702,22 @@ var file_backoffice_service_v1_backoffice_payment_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),                                // 6: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_payment_proto_depIdxs = []int32{
-	0, // 0: api.backoffice.service.v1.GetPaymentTransactionPageRequest.type:type_name -> api.backoffice.service.v1.TransactionType
-	1, // 1: api.backoffice.service.v1.GetPaymentTransactionPageRequest.status:type_name -> api.backoffice.service.v1.TransactionStatus
-	6, // 2: api.backoffice.service.v1.GetPaymentTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
-	6, // 3: api.backoffice.service.v1.GetPaymentTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
-	2, // 4: api.backoffice.service.v1.GetPaymentTransactionPageRequest.sort:type_name -> api.backoffice.service.v1.Sort
-	5, // 5: api.backoffice.service.v1.GetPaymentTransactionPageResponse.payment_transactions:type_name -> api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction
-	6, // 6: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction.created_at:type_name -> google.protobuf.Timestamp
-	6, // 7: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction.updated_at:type_name -> google.protobuf.Timestamp
-	3, // 8: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:input_type -> api.backoffice.service.v1.GetPaymentTransactionPageRequest
-	4, // 9: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:output_type -> api.backoffice.service.v1.GetPaymentTransactionPageResponse
-	9, // [9:10] is the sub-list for method output_type
-	8, // [8:9] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	0,  // 0: api.backoffice.service.v1.GetPaymentTransactionPageRequest.type:type_name -> api.backoffice.service.v1.TransactionType
+	1,  // 1: api.backoffice.service.v1.GetPaymentTransactionPageRequest.status:type_name -> api.backoffice.service.v1.TransactionStatus
+	6,  // 2: api.backoffice.service.v1.GetPaymentTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
+	6,  // 3: api.backoffice.service.v1.GetPaymentTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
+	2,  // 4: api.backoffice.service.v1.GetPaymentTransactionPageRequest.sort:type_name -> api.backoffice.service.v1.Sort
+	5,  // 5: api.backoffice.service.v1.GetPaymentTransactionPageResponse.payment_transactions:type_name -> api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction
+	6,  // 6: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 7: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction.updated_at:type_name -> google.protobuf.Timestamp
+	1,  // 8: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction.status:type_name -> api.backoffice.service.v1.TransactionStatus
+	3,  // 9: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:input_type -> api.backoffice.service.v1.GetPaymentTransactionPageRequest
+	4,  // 10: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:output_type -> api.backoffice.service.v1.GetPaymentTransactionPageResponse
+	10, // [10:11] is the sub-list for method output_type
+	9,  // [9:10] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_payment_proto_init() }

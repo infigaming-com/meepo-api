@@ -4,6 +4,7 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "payment/service/v1/payment.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -115,7 +116,7 @@ message GetPaymentTransactionPageResponse {
 		// Protocol used for the transaction
 		string protocol = 9;
 		// Current status of the transaction
-		string status = 10;
+		TransactionStatus status = 10;
 		// Unique identifier for the transaction
 		int64 transaction_id = 11 [json_name="transactionId"];
 		// Transaction ID from the payment gateway

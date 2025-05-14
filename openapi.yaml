@@ -2353,8 +2353,14 @@ components:
                     type: string
                     description: Protocol used for the transaction
                 status:
+                    enum:
+                        - TRANSACTION_STATUS_UNSPECIFIED
+                        - TRANSACTION_STATUS_PROCESSING
+                        - TRANSACTION_STATUS_SUCCESSFUL
+                        - TRANSACTION_STATUS_FAILED
                     type: string
                     description: Current status of the transaction
+                    format: enum
                 transactionId:
                     type: string
                     description: Unique identifier for the transaction
