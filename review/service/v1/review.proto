@@ -28,7 +28,9 @@ message CreateWithdrawRequest {
 	google.protobuf.Struct request = 1;  // JSON data for REST API
 }
 
-message CreateWithdrawResponse {}
+message CreateWithdrawResponse {
+	int64 ticket_id = 1;
+}
 
 message ReviewTicketRequest {
 	int64 ticket_id = 1;
@@ -46,7 +48,9 @@ message AddCommentRequest {
 	string content = 3;
 }
 
-message AddCommentResponse {}
+message AddCommentResponse {
+	int64 comment_id = 1;
+}
 
 message ListTicketsRequest {
 	optional int64 user_id = 2;
@@ -60,18 +64,85 @@ message ListTicketsRequest {
 	optional int32 page_size = 10;
 }
 
-message ListTicketsResponse {}
+message ListTicketsResponse {
+	message Ticket {
+		google.protobuf.Timestamp created_at = 1;
+		string operator = 2;
+		int64 ticket_id = 3;
+		int64 user_id = 4;
+		int32 vip_level = 5;
+		repeated string user_tags = 6;
+		string before_balance = 7;
+		string after_balance = 8;
+		string currency = 9;
+		string payment_channel = 10;
+		string protocol = 11;
+		string fee = 12;
+		string status = 13;	// pending, approved, rejected, manual_payout, paying, paid, failed
+		string reviewer_username = 14;
+		int32 review_duration = 15;
+	}
+	repeated Ticket tickets = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total_count = 4;
+	string total_amount = 5;
+	int32 total_pending_count = 6;
+	string total_pending_amount = 7;
+	int32 total_paying_count = 8;
+	string total_paying_amount = 9;
+	int32 total_paid_count = 10;
+	string total_paid_amount = 11;
+	int32 total_failed_count = 12;
+	string total_failed_amount = 13;
+	int32 total_rejected_count = 14;
+	string total_rejected_amount = 15;
+	int32 average_review_time = 16;
+}
 
 message GetTicketRequest {
 	int64 ticket_id = 1;
 }
 
-message Comment {
-	int64 author_user_name = 1;
-	string content = 2;
-	google.protobuf.Timestamp created_at = 3;
-}
-
 message GetTicketResponse {
-	repeated Comment comments = 1;
+	message UserInfo {
+		string operator = 1;
+		int64 user_id = 2;
+		int32 vip_level = 3;
+		int64 ticket_id = 4;
+		string status = 5;	// pending, approved, rejected, manual_payout, paying, paid, failed
+	}
+	message WithdrawInfo {
+		google.protobuf.Struct created_at = 1;
+		string currency = 2;
+		string amount = 3;
+		string amount_usd = 4;
+		string before_balance = 5;
+		string after_balance = 6;
+		string payment_channel = 7;
+		string protocol = 8;
+		string fee = 9;
+		string recipient = 10;
+		string id_type = 11;
+		string account_number = 12;
+		repeated string linked_accounts = 13;
+	}
+	message UserStatus {
+		string deposit_usd = 1;
+		string deposit_withdraw = 2;
+		string deposit_minus_withdraw_usd = 3;
+		string valid_turnover = 4;
+		int32 deposit_count = 5;
+		int32 withdraw_count = 6;
+		int32 today_withdraw_count = 7;
+	}
+	message Comment {
+		int64 author_user_name = 1;
+		string content = 2;
+		google.protobuf.Timestamp created_at = 3;
+	}
+	UserInfo user_info = 1;
+	WithdrawInfo withdraw_info = 2;
+	UserStatus user_status = 3;
+	repeated Comment comments = 4;
 }

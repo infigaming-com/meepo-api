@@ -3537,9 +3537,9 @@ components:
         api.backoffice.service.v1.ListTicketsRequest:
             type: object
             properties:
-                operatorId:
-                    type: string
                 userId:
+                    type: string
+                operatorId:
                     type: string
                 ticketId:
                     type: string
@@ -3554,9 +3554,11 @@ components:
                     type: string
                     format: date-time
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListTicketsResponse:
             type: object
             properties:
@@ -3565,23 +3567,44 @@ components:
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse_Ticket'
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
+                    type: integer
+                    format: int32
+                totalCount:
+                    type: integer
+                    format: int32
+                totalAmount:
                     type: string
-                total:
+                totalPendingCount:
+                    type: integer
+                    format: int32
+                totalPendingAmount:
                     type: string
-                totalPending:
+                totalPayingCount:
+                    type: integer
+                    format: int32
+                totalPayingAmount:
                     type: string
-                totalPaying:
+                totalPaidCount:
+                    type: integer
+                    format: int32
+                totalPaidAmount:
                     type: string
-                totalPaid:
+                totalFailedCount:
+                    type: integer
+                    format: int32
+                totalFailedAmount:
                     type: string
-                totalFailed:
-                    type: string
-                totalRejected:
+                totalRejectedCount:
+                    type: integer
+                    format: int32
+                totalRejectedAmount:
                     type: string
                 averageReviewTime:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListTicketsResponse_Ticket:
             type: object
             properties:
@@ -3592,7 +3615,7 @@ components:
                     type: string
                 ticketId:
                     type: string
-                category:
+                userId:
                     type: string
                 vipLevel:
                     type: integer
@@ -3613,6 +3636,13 @@ components:
                     type: string
                 fee:
                     type: string
+                status:
+                    type: string
+                reviewerUsername:
+                    type: string
+                reviewDuration:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListUserBetsRequest:
             type: object
             properties:
@@ -4604,7 +4634,9 @@ components:
                     type: object
         api.review.service.v1.CreateWithdrawResponse:
             type: object
-            properties: {}
+            properties:
+                ticketId:
+                    type: string
         api.user.service.v1.AddOperatorTagRequest:
             type: object
             properties:

@@ -70,6 +70,7 @@ func (x *CreateWithdrawRequest) GetRequest() *structpb.Struct {
 
 type CreateWithdrawResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -102,6 +103,13 @@ func (x *CreateWithdrawResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateWithdrawResponse.ProtoReflect.Descriptor instead.
 func (*CreateWithdrawResponse) Descriptor() ([]byte, []int) {
 	return file_review_service_v1_review_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateWithdrawResponse) GetTicketId() int64 {
+	if x != nil {
+		return x.TicketId
+	}
+	return 0
 }
 
 type ReviewTicketRequest struct {
@@ -271,6 +279,7 @@ func (x *AddCommentRequest) GetContent() string {
 
 type AddCommentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	CommentId     int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -303,6 +312,13 @@ func (x *AddCommentResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AddCommentResponse.ProtoReflect.Descriptor instead.
 func (*AddCommentResponse) Descriptor() ([]byte, []int) {
 	return file_review_service_v1_review_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *AddCommentResponse) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
 }
 
 type ListTicketsRequest struct {
@@ -414,9 +430,25 @@ func (x *ListTicketsRequest) GetPageSize() int32 {
 }
 
 type ListTicketsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState        `protogen:"open.v1"`
+	Tickets             []*ListTicketsResponse_Ticket `protobuf:"bytes,1,rep,name=tickets,proto3" json:"tickets,omitempty"`
+	Page                int32                         `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize            int32                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	TotalCount          int32                         `protobuf:"varint,4,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	TotalAmount         string                        `protobuf:"bytes,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	TotalPendingCount   int32                         `protobuf:"varint,6,opt,name=total_pending_count,json=totalPendingCount,proto3" json:"total_pending_count,omitempty"`
+	TotalPendingAmount  string                        `protobuf:"bytes,7,opt,name=total_pending_amount,json=totalPendingAmount,proto3" json:"total_pending_amount,omitempty"`
+	TotalPayingCount    int32                         `protobuf:"varint,8,opt,name=total_paying_count,json=totalPayingCount,proto3" json:"total_paying_count,omitempty"`
+	TotalPayingAmount   string                        `protobuf:"bytes,9,opt,name=total_paying_amount,json=totalPayingAmount,proto3" json:"total_paying_amount,omitempty"`
+	TotalPaidCount      int32                         `protobuf:"varint,10,opt,name=total_paid_count,json=totalPaidCount,proto3" json:"total_paid_count,omitempty"`
+	TotalPaidAmount     string                        `protobuf:"bytes,11,opt,name=total_paid_amount,json=totalPaidAmount,proto3" json:"total_paid_amount,omitempty"`
+	TotalFailedCount    int32                         `protobuf:"varint,12,opt,name=total_failed_count,json=totalFailedCount,proto3" json:"total_failed_count,omitempty"`
+	TotalFailedAmount   string                        `protobuf:"bytes,13,opt,name=total_failed_amount,json=totalFailedAmount,proto3" json:"total_failed_amount,omitempty"`
+	TotalRejectedCount  int32                         `protobuf:"varint,14,opt,name=total_rejected_count,json=totalRejectedCount,proto3" json:"total_rejected_count,omitempty"`
+	TotalRejectedAmount string                        `protobuf:"bytes,15,opt,name=total_rejected_amount,json=totalRejectedAmount,proto3" json:"total_rejected_amount,omitempty"`
+	AverageReviewTime   int32                         `protobuf:"varint,16,opt,name=average_review_time,json=averageReviewTime,proto3" json:"average_review_time,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ListTicketsResponse) Reset() {
@@ -447,6 +479,118 @@ func (x *ListTicketsResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListTicketsResponse.ProtoReflect.Descriptor instead.
 func (*ListTicketsResponse) Descriptor() ([]byte, []int) {
 	return file_review_service_v1_review_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListTicketsResponse) GetTickets() []*ListTicketsResponse_Ticket {
+	if x != nil {
+		return x.Tickets
+	}
+	return nil
+}
+
+func (x *ListTicketsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListTicketsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListTicketsResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *ListTicketsResponse) GetTotalAmount() string {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalPendingCount() int32 {
+	if x != nil {
+		return x.TotalPendingCount
+	}
+	return 0
+}
+
+func (x *ListTicketsResponse) GetTotalPendingAmount() string {
+	if x != nil {
+		return x.TotalPendingAmount
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalPayingCount() int32 {
+	if x != nil {
+		return x.TotalPayingCount
+	}
+	return 0
+}
+
+func (x *ListTicketsResponse) GetTotalPayingAmount() string {
+	if x != nil {
+		return x.TotalPayingAmount
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalPaidCount() int32 {
+	if x != nil {
+		return x.TotalPaidCount
+	}
+	return 0
+}
+
+func (x *ListTicketsResponse) GetTotalPaidAmount() string {
+	if x != nil {
+		return x.TotalPaidAmount
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalFailedCount() int32 {
+	if x != nil {
+		return x.TotalFailedCount
+	}
+	return 0
+}
+
+func (x *ListTicketsResponse) GetTotalFailedAmount() string {
+	if x != nil {
+		return x.TotalFailedAmount
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalRejectedCount() int32 {
+	if x != nil {
+		return x.TotalRejectedCount
+	}
+	return 0
+}
+
+func (x *ListTicketsResponse) GetTotalRejectedAmount() string {
+	if x != nil {
+		return x.TotalRejectedAmount
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetAverageReviewTime() int32 {
+	if x != nil {
+		return x.AverageReviewTime
+	}
+	return 0
 }
 
 type GetTicketRequest struct {
@@ -493,76 +637,19 @@ func (x *GetTicketRequest) GetTicketId() int64 {
 	return 0
 }
 
-type Comment struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	AuthorUserName int64                  `protobuf:"varint,1,opt,name=author_user_name,json=authorUserName,proto3" json:"author_user_name,omitempty"`
-	Content        string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *Comment) Reset() {
-	*x = Comment{}
-	mi := &file_review_service_v1_review_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Comment) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Comment) ProtoMessage() {}
-
-func (x *Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Comment.ProtoReflect.Descriptor instead.
-func (*Comment) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *Comment) GetAuthorUserName() int64 {
-	if x != nil {
-		return x.AuthorUserName
-	}
-	return 0
-}
-
-func (x *Comment) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-func (x *Comment) GetCreatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return nil
-}
-
 type GetTicketResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Comments      []*Comment             `protobuf:"bytes,1,rep,name=comments,proto3" json:"comments,omitempty"`
+	state         protoimpl.MessageState          `protogen:"open.v1"`
+	UserInfo      *GetTicketResponse_UserInfo     `protobuf:"bytes,1,opt,name=user_info,json=userInfo,proto3" json:"user_info,omitempty"`
+	WithdrawInfo  *GetTicketResponse_WithdrawInfo `protobuf:"bytes,2,opt,name=withdraw_info,json=withdrawInfo,proto3" json:"withdraw_info,omitempty"`
+	UserStatus    *GetTicketResponse_UserStatus   `protobuf:"bytes,3,opt,name=user_status,json=userStatus,proto3" json:"user_status,omitempty"`
+	Comments      []*GetTicketResponse_Comment    `protobuf:"bytes,4,rep,name=comments,proto3" json:"comments,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetTicketResponse) Reset() {
 	*x = GetTicketResponse{}
-	mi := &file_review_service_v1_review_proto_msgTypes[10]
+	mi := &file_review_service_v1_review_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -574,7 +661,7 @@ func (x *GetTicketResponse) String() string {
 func (*GetTicketResponse) ProtoMessage() {}
 
 func (x *GetTicketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[10]
+	mi := &file_review_service_v1_review_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -587,12 +674,557 @@ func (x *GetTicketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketResponse.ProtoReflect.Descriptor instead.
 func (*GetTicketResponse) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{10}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *GetTicketResponse) GetComments() []*Comment {
+func (x *GetTicketResponse) GetUserInfo() *GetTicketResponse_UserInfo {
+	if x != nil {
+		return x.UserInfo
+	}
+	return nil
+}
+
+func (x *GetTicketResponse) GetWithdrawInfo() *GetTicketResponse_WithdrawInfo {
+	if x != nil {
+		return x.WithdrawInfo
+	}
+	return nil
+}
+
+func (x *GetTicketResponse) GetUserStatus() *GetTicketResponse_UserStatus {
+	if x != nil {
+		return x.UserStatus
+	}
+	return nil
+}
+
+func (x *GetTicketResponse) GetComments() []*GetTicketResponse_Comment {
 	if x != nil {
 		return x.Comments
+	}
+	return nil
+}
+
+type ListTicketsResponse_Ticket struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Operator         string                 `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
+	TicketId         int64                  `protobuf:"varint,3,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	UserId           int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	VipLevel         int32                  `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	UserTags         []string               `protobuf:"bytes,6,rep,name=user_tags,json=userTags,proto3" json:"user_tags,omitempty"`
+	BeforeBalance    string                 `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	AfterBalance     string                 `protobuf:"bytes,8,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	Currency         string                 `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency,omitempty"`
+	PaymentChannel   string                 `protobuf:"bytes,10,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	Protocol         string                 `protobuf:"bytes,11,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Fee              string                 `protobuf:"bytes,12,opt,name=fee,proto3" json:"fee,omitempty"`
+	Status           string                 `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"` // pending, approved, rejected, manual_payout, paying, paid, failed
+	ReviewerUsername string                 `protobuf:"bytes,14,opt,name=reviewer_username,json=reviewerUsername,proto3" json:"reviewer_username,omitempty"`
+	ReviewDuration   int32                  `protobuf:"varint,15,opt,name=review_duration,json=reviewDuration,proto3" json:"review_duration,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ListTicketsResponse_Ticket) Reset() {
+	*x = ListTicketsResponse_Ticket{}
+	mi := &file_review_service_v1_review_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTicketsResponse_Ticket) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTicketsResponse_Ticket) ProtoMessage() {}
+
+func (x *ListTicketsResponse_Ticket) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTicketsResponse_Ticket.ProtoReflect.Descriptor instead.
+func (*ListTicketsResponse_Ticket) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{7, 0}
+}
+
+func (x *ListTicketsResponse_Ticket) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *ListTicketsResponse_Ticket) GetOperator() string {
+	if x != nil {
+		return x.Operator
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetTicketId() int64 {
+	if x != nil {
+		return x.TicketId
+	}
+	return 0
+}
+
+func (x *ListTicketsResponse_Ticket) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ListTicketsResponse_Ticket) GetVipLevel() int32 {
+	if x != nil {
+		return x.VipLevel
+	}
+	return 0
+}
+
+func (x *ListTicketsResponse_Ticket) GetUserTags() []string {
+	if x != nil {
+		return x.UserTags
+	}
+	return nil
+}
+
+func (x *ListTicketsResponse_Ticket) GetBeforeBalance() string {
+	if x != nil {
+		return x.BeforeBalance
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetAfterBalance() string {
+	if x != nil {
+		return x.AfterBalance
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetPaymentChannel() string {
+	if x != nil {
+		return x.PaymentChannel
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetProtocol() string {
+	if x != nil {
+		return x.Protocol
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetFee() string {
+	if x != nil {
+		return x.Fee
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetReviewerUsername() string {
+	if x != nil {
+		return x.ReviewerUsername
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetReviewDuration() int32 {
+	if x != nil {
+		return x.ReviewDuration
+	}
+	return 0
+}
+
+type GetTicketResponse_UserInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Operator      string                 `protobuf:"bytes,1,opt,name=operator,proto3" json:"operator,omitempty"`
+	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	VipLevel      int32                  `protobuf:"varint,3,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	TicketId      int64                  `protobuf:"varint,4,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"` // pending, approved, rejected, manual_payout, paying, paid, failed
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTicketResponse_UserInfo) Reset() {
+	*x = GetTicketResponse_UserInfo{}
+	mi := &file_review_service_v1_review_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTicketResponse_UserInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTicketResponse_UserInfo) ProtoMessage() {}
+
+func (x *GetTicketResponse_UserInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTicketResponse_UserInfo.ProtoReflect.Descriptor instead.
+func (*GetTicketResponse_UserInfo) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9, 0}
+}
+
+func (x *GetTicketResponse_UserInfo) GetOperator() string {
+	if x != nil {
+		return x.Operator
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_UserInfo) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetTicketResponse_UserInfo) GetVipLevel() int32 {
+	if x != nil {
+		return x.VipLevel
+	}
+	return 0
+}
+
+func (x *GetTicketResponse_UserInfo) GetTicketId() int64 {
+	if x != nil {
+		return x.TicketId
+	}
+	return 0
+}
+
+func (x *GetTicketResponse_UserInfo) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+type GetTicketResponse_WithdrawInfo struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	CreatedAt      *structpb.Struct       `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Currency       string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	Amount         string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd      string                 `protobuf:"bytes,4,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	BeforeBalance  string                 `protobuf:"bytes,5,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	AfterBalance   string                 `protobuf:"bytes,6,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	PaymentChannel string                 `protobuf:"bytes,7,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	Protocol       string                 `protobuf:"bytes,8,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Fee            string                 `protobuf:"bytes,9,opt,name=fee,proto3" json:"fee,omitempty"`
+	Recipient      string                 `protobuf:"bytes,10,opt,name=recipient,proto3" json:"recipient,omitempty"`
+	IdType         string                 `protobuf:"bytes,11,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
+	AccountNumber  string                 `protobuf:"bytes,12,opt,name=account_number,json=accountNumber,proto3" json:"account_number,omitempty"`
+	LinkedAccounts []string               `protobuf:"bytes,13,rep,name=linked_accounts,json=linkedAccounts,proto3" json:"linked_accounts,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetTicketResponse_WithdrawInfo) Reset() {
+	*x = GetTicketResponse_WithdrawInfo{}
+	mi := &file_review_service_v1_review_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTicketResponse_WithdrawInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTicketResponse_WithdrawInfo) ProtoMessage() {}
+
+func (x *GetTicketResponse_WithdrawInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTicketResponse_WithdrawInfo.ProtoReflect.Descriptor instead.
+func (*GetTicketResponse_WithdrawInfo) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9, 1}
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetCreatedAt() *structpb.Struct {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetBeforeBalance() string {
+	if x != nil {
+		return x.BeforeBalance
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetAfterBalance() string {
+	if x != nil {
+		return x.AfterBalance
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetPaymentChannel() string {
+	if x != nil {
+		return x.PaymentChannel
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetProtocol() string {
+	if x != nil {
+		return x.Protocol
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetFee() string {
+	if x != nil {
+		return x.Fee
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetRecipient() string {
+	if x != nil {
+		return x.Recipient
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetIdType() string {
+	if x != nil {
+		return x.IdType
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetAccountNumber() string {
+	if x != nil {
+		return x.AccountNumber
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WithdrawInfo) GetLinkedAccounts() []string {
+	if x != nil {
+		return x.LinkedAccounts
+	}
+	return nil
+}
+
+type GetTicketResponse_UserStatus struct {
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	DepositUsd              string                 `protobuf:"bytes,1,opt,name=deposit_usd,json=depositUsd,proto3" json:"deposit_usd,omitempty"`
+	DepositWithdraw         string                 `protobuf:"bytes,2,opt,name=deposit_withdraw,json=depositWithdraw,proto3" json:"deposit_withdraw,omitempty"`
+	DepositMinusWithdrawUsd string                 `protobuf:"bytes,3,opt,name=deposit_minus_withdraw_usd,json=depositMinusWithdrawUsd,proto3" json:"deposit_minus_withdraw_usd,omitempty"`
+	ValidTurnover           string                 `protobuf:"bytes,4,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`
+	DepositCount            int32                  `protobuf:"varint,5,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	WithdrawCount           int32                  `protobuf:"varint,6,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"`
+	TodayWithdrawCount      int32                  `protobuf:"varint,7,opt,name=today_withdraw_count,json=todayWithdrawCount,proto3" json:"today_withdraw_count,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *GetTicketResponse_UserStatus) Reset() {
+	*x = GetTicketResponse_UserStatus{}
+	mi := &file_review_service_v1_review_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTicketResponse_UserStatus) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTicketResponse_UserStatus) ProtoMessage() {}
+
+func (x *GetTicketResponse_UserStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTicketResponse_UserStatus.ProtoReflect.Descriptor instead.
+func (*GetTicketResponse_UserStatus) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9, 2}
+}
+
+func (x *GetTicketResponse_UserStatus) GetDepositUsd() string {
+	if x != nil {
+		return x.DepositUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_UserStatus) GetDepositWithdraw() string {
+	if x != nil {
+		return x.DepositWithdraw
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_UserStatus) GetDepositMinusWithdrawUsd() string {
+	if x != nil {
+		return x.DepositMinusWithdrawUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_UserStatus) GetValidTurnover() string {
+	if x != nil {
+		return x.ValidTurnover
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_UserStatus) GetDepositCount() int32 {
+	if x != nil {
+		return x.DepositCount
+	}
+	return 0
+}
+
+func (x *GetTicketResponse_UserStatus) GetWithdrawCount() int32 {
+	if x != nil {
+		return x.WithdrawCount
+	}
+	return 0
+}
+
+func (x *GetTicketResponse_UserStatus) GetTodayWithdrawCount() int32 {
+	if x != nil {
+		return x.TodayWithdrawCount
+	}
+	return 0
+}
+
+type GetTicketResponse_Comment struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	AuthorUserName int64                  `protobuf:"varint,1,opt,name=author_user_name,json=authorUserName,proto3" json:"author_user_name,omitempty"`
+	Content        string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetTicketResponse_Comment) Reset() {
+	*x = GetTicketResponse_Comment{}
+	mi := &file_review_service_v1_review_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTicketResponse_Comment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTicketResponse_Comment) ProtoMessage() {}
+
+func (x *GetTicketResponse_Comment) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTicketResponse_Comment.ProtoReflect.Descriptor instead.
+func (*GetTicketResponse_Comment) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9, 3}
+}
+
+func (x *GetTicketResponse_Comment) GetAuthorUserName() int64 {
+	if x != nil {
+		return x.AuthorUserName
+	}
+	return 0
+}
+
+func (x *GetTicketResponse_Comment) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_Comment) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
 	}
 	return nil
 }
@@ -603,8 +1235,9 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\n" +
 	"\x1ereview/service/v1/review.proto\x12\x15api.review.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"J\n" +
 	"\x15CreateWithdrawRequest\x121\n" +
-	"\arequest\x18\x01 \x01(\v2\x17.google.protobuf.StructR\arequest\"\x18\n" +
-	"\x16CreateWithdrawResponse\"\x9b\x01\n" +
+	"\arequest\x18\x01 \x01(\v2\x17.google.protobuf.StructR\arequest\"5\n" +
+	"\x16CreateWithdrawResponse\x12\x1b\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x9b\x01\n" +
 	"\x13ReviewTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12(\n" +
 	"\x10reviewer_user_id\x18\x02 \x01(\x03R\x0ereviewerUserId\x12\x16\n" +
@@ -614,8 +1247,10 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x11AddCommentRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12$\n" +
 	"\x0eauthor_user_id\x18\x02 \x01(\x03R\fauthorUserId\x12\x18\n" +
-	"\acontent\x18\x03 \x01(\tR\acontent\"\x14\n" +
-	"\x12AddCommentResponse\"\xe4\x03\n" +
+	"\acontent\x18\x03 \x01(\tR\acontent\"3\n" +
+	"\x12AddCommentResponse\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId\"\xe4\x03\n" +
 	"\x12ListTicketsRequest\x12\x1c\n" +
 	"\auser_id\x18\x02 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12$\n" +
 	"\voperator_id\x18\x03 \x01(\x03H\x01R\n" +
@@ -640,17 +1275,90 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x15\n" +
-	"\x13ListTicketsResponse\"/\n" +
+	"_page_size\"\xe0\t\n" +
+	"\x13ListTicketsResponse\x12K\n" +
+	"\atickets\x18\x01 \x03(\v21.api.review.service.v1.ListTicketsResponse.TicketR\atickets\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1f\n" +
+	"\vtotal_count\x18\x04 \x01(\x05R\n" +
+	"totalCount\x12!\n" +
+	"\ftotal_amount\x18\x05 \x01(\tR\vtotalAmount\x12.\n" +
+	"\x13total_pending_count\x18\x06 \x01(\x05R\x11totalPendingCount\x120\n" +
+	"\x14total_pending_amount\x18\a \x01(\tR\x12totalPendingAmount\x12,\n" +
+	"\x12total_paying_count\x18\b \x01(\x05R\x10totalPayingCount\x12.\n" +
+	"\x13total_paying_amount\x18\t \x01(\tR\x11totalPayingAmount\x12(\n" +
+	"\x10total_paid_count\x18\n" +
+	" \x01(\x05R\x0etotalPaidCount\x12*\n" +
+	"\x11total_paid_amount\x18\v \x01(\tR\x0ftotalPaidAmount\x12,\n" +
+	"\x12total_failed_count\x18\f \x01(\x05R\x10totalFailedCount\x12.\n" +
+	"\x13total_failed_amount\x18\r \x01(\tR\x11totalFailedAmount\x120\n" +
+	"\x14total_rejected_count\x18\x0e \x01(\x05R\x12totalRejectedCount\x122\n" +
+	"\x15total_rejected_amount\x18\x0f \x01(\tR\x13totalRejectedAmount\x12.\n" +
+	"\x13average_review_time\x18\x10 \x01(\x05R\x11averageReviewTime\x1a\xfc\x03\n" +
+	"\x06Ticket\x129\n" +
+	"\n" +
+	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1a\n" +
+	"\boperator\x18\x02 \x01(\tR\boperator\x12\x1b\n" +
+	"\tticket_id\x18\x03 \x01(\x03R\bticketId\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1b\n" +
+	"\tvip_level\x18\x05 \x01(\x05R\bvipLevel\x12\x1b\n" +
+	"\tuser_tags\x18\x06 \x03(\tR\buserTags\x12%\n" +
+	"\x0ebefore_balance\x18\a \x01(\tR\rbeforeBalance\x12#\n" +
+	"\rafter_balance\x18\b \x01(\tR\fafterBalance\x12\x1a\n" +
+	"\bcurrency\x18\t \x01(\tR\bcurrency\x12'\n" +
+	"\x0fpayment_channel\x18\n" +
+	" \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bprotocol\x18\v \x01(\tR\bprotocol\x12\x10\n" +
+	"\x03fee\x18\f \x01(\tR\x03fee\x12\x16\n" +
+	"\x06status\x18\r \x01(\tR\x06status\x12+\n" +
+	"\x11reviewer_username\x18\x0e \x01(\tR\x10reviewerUsername\x12'\n" +
+	"\x0freview_duration\x18\x0f \x01(\x05R\x0ereviewDuration\"/\n" +
 	"\x10GetTicketRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x88\x01\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x85\v\n" +
+	"\x11GetTicketResponse\x12N\n" +
+	"\tuser_info\x18\x01 \x01(\v21.api.review.service.v1.GetTicketResponse.UserInfoR\buserInfo\x12Z\n" +
+	"\rwithdraw_info\x18\x02 \x01(\v25.api.review.service.v1.GetTicketResponse.WithdrawInfoR\fwithdrawInfo\x12T\n" +
+	"\vuser_status\x18\x03 \x01(\v23.api.review.service.v1.GetTicketResponse.UserStatusR\n" +
+	"userStatus\x12L\n" +
+	"\bcomments\x18\x04 \x03(\v20.api.review.service.v1.GetTicketResponse.CommentR\bcomments\x1a\x91\x01\n" +
+	"\bUserInfo\x12\x1a\n" +
+	"\boperator\x18\x01 \x01(\tR\boperator\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
+	"\tvip_level\x18\x03 \x01(\x05R\bvipLevel\x12\x1b\n" +
+	"\tticket_id\x18\x04 \x01(\x03R\bticketId\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\tR\x06status\x1a\xc3\x03\n" +
+	"\fWithdrawInfo\x126\n" +
+	"\n" +
+	"created_at\x18\x01 \x01(\v2\x17.google.protobuf.StructR\tcreatedAt\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x16\n" +
+	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x1d\n" +
+	"\n" +
+	"amount_usd\x18\x04 \x01(\tR\tamountUsd\x12%\n" +
+	"\x0ebefore_balance\x18\x05 \x01(\tR\rbeforeBalance\x12#\n" +
+	"\rafter_balance\x18\x06 \x01(\tR\fafterBalance\x12'\n" +
+	"\x0fpayment_channel\x18\a \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bprotocol\x18\b \x01(\tR\bprotocol\x12\x10\n" +
+	"\x03fee\x18\t \x01(\tR\x03fee\x12\x1c\n" +
+	"\trecipient\x18\n" +
+	" \x01(\tR\trecipient\x12\x17\n" +
+	"\aid_type\x18\v \x01(\tR\x06idType\x12%\n" +
+	"\x0eaccount_number\x18\f \x01(\tR\raccountNumber\x12'\n" +
+	"\x0flinked_accounts\x18\r \x03(\tR\x0elinkedAccounts\x1a\xba\x02\n" +
+	"\n" +
+	"UserStatus\x12\x1f\n" +
+	"\vdeposit_usd\x18\x01 \x01(\tR\n" +
+	"depositUsd\x12)\n" +
+	"\x10deposit_withdraw\x18\x02 \x01(\tR\x0fdepositWithdraw\x12;\n" +
+	"\x1adeposit_minus_withdraw_usd\x18\x03 \x01(\tR\x17depositMinusWithdrawUsd\x12%\n" +
+	"\x0evalid_turnover\x18\x04 \x01(\tR\rvalidTurnover\x12#\n" +
+	"\rdeposit_count\x18\x05 \x01(\x05R\fdepositCount\x12%\n" +
+	"\x0ewithdraw_count\x18\x06 \x01(\x05R\rwithdrawCount\x120\n" +
+	"\x14today_withdraw_count\x18\a \x01(\x05R\x12todayWithdrawCount\x1a\x88\x01\n" +
 	"\aComment\x12(\n" +
 	"\x10author_user_name\x18\x01 \x01(\x03R\x0eauthorUserName\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x129\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"O\n" +
-	"\x11GetTicketResponse\x12:\n" +
-	"\bcomments\x18\x01 \x03(\v2\x1e.api.review.service.v1.CommentR\bcomments2\xb2\x04\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt2\xb2\x04\n" +
 	"\x06Review\x12\x8d\x01\n" +
 	"\x0eCreateWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/review/withdraw\x12i\n" +
 	"\fReviewTicket\x12*.api.review.service.v1.ReviewTicketRequest\x1a+.api.review.service.v1.ReviewTicketResponse\"\x00\x12c\n" +
@@ -672,43 +1380,53 @@ func file_review_service_v1_review_proto_rawDescGZIP() []byte {
 	return file_review_service_v1_review_proto_rawDescData
 }
 
-var file_review_service_v1_review_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_review_service_v1_review_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_review_service_v1_review_proto_goTypes = []any{
-	(*CreateWithdrawRequest)(nil),  // 0: api.review.service.v1.CreateWithdrawRequest
-	(*CreateWithdrawResponse)(nil), // 1: api.review.service.v1.CreateWithdrawResponse
-	(*ReviewTicketRequest)(nil),    // 2: api.review.service.v1.ReviewTicketRequest
-	(*ReviewTicketResponse)(nil),   // 3: api.review.service.v1.ReviewTicketResponse
-	(*AddCommentRequest)(nil),      // 4: api.review.service.v1.AddCommentRequest
-	(*AddCommentResponse)(nil),     // 5: api.review.service.v1.AddCommentResponse
-	(*ListTicketsRequest)(nil),     // 6: api.review.service.v1.ListTicketsRequest
-	(*ListTicketsResponse)(nil),    // 7: api.review.service.v1.ListTicketsResponse
-	(*GetTicketRequest)(nil),       // 8: api.review.service.v1.GetTicketRequest
-	(*Comment)(nil),                // 9: api.review.service.v1.Comment
-	(*GetTicketResponse)(nil),      // 10: api.review.service.v1.GetTicketResponse
-	(*structpb.Struct)(nil),        // 11: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),  // 12: google.protobuf.Timestamp
+	(*CreateWithdrawRequest)(nil),          // 0: api.review.service.v1.CreateWithdrawRequest
+	(*CreateWithdrawResponse)(nil),         // 1: api.review.service.v1.CreateWithdrawResponse
+	(*ReviewTicketRequest)(nil),            // 2: api.review.service.v1.ReviewTicketRequest
+	(*ReviewTicketResponse)(nil),           // 3: api.review.service.v1.ReviewTicketResponse
+	(*AddCommentRequest)(nil),              // 4: api.review.service.v1.AddCommentRequest
+	(*AddCommentResponse)(nil),             // 5: api.review.service.v1.AddCommentResponse
+	(*ListTicketsRequest)(nil),             // 6: api.review.service.v1.ListTicketsRequest
+	(*ListTicketsResponse)(nil),            // 7: api.review.service.v1.ListTicketsResponse
+	(*GetTicketRequest)(nil),               // 8: api.review.service.v1.GetTicketRequest
+	(*GetTicketResponse)(nil),              // 9: api.review.service.v1.GetTicketResponse
+	(*ListTicketsResponse_Ticket)(nil),     // 10: api.review.service.v1.ListTicketsResponse.Ticket
+	(*GetTicketResponse_UserInfo)(nil),     // 11: api.review.service.v1.GetTicketResponse.UserInfo
+	(*GetTicketResponse_WithdrawInfo)(nil), // 12: api.review.service.v1.GetTicketResponse.WithdrawInfo
+	(*GetTicketResponse_UserStatus)(nil),   // 13: api.review.service.v1.GetTicketResponse.UserStatus
+	(*GetTicketResponse_Comment)(nil),      // 14: api.review.service.v1.GetTicketResponse.Comment
+	(*structpb.Struct)(nil),                // 15: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),          // 16: google.protobuf.Timestamp
 }
 var file_review_service_v1_review_proto_depIdxs = []int32{
-	11, // 0: api.review.service.v1.CreateWithdrawRequest.request:type_name -> google.protobuf.Struct
-	12, // 1: api.review.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	12, // 2: api.review.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
-	12, // 3: api.review.service.v1.Comment.created_at:type_name -> google.protobuf.Timestamp
-	9,  // 4: api.review.service.v1.GetTicketResponse.comments:type_name -> api.review.service.v1.Comment
-	0,  // 5: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
-	2,  // 6: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
-	4,  // 7: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
-	6,  // 8: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
-	8,  // 9: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
-	1,  // 10: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	3,  // 11: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
-	5,  // 12: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
-	7,  // 13: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	10, // 14: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	15, // 0: api.review.service.v1.CreateWithdrawRequest.request:type_name -> google.protobuf.Struct
+	16, // 1: api.review.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	16, // 2: api.review.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	10, // 3: api.review.service.v1.ListTicketsResponse.tickets:type_name -> api.review.service.v1.ListTicketsResponse.Ticket
+	11, // 4: api.review.service.v1.GetTicketResponse.user_info:type_name -> api.review.service.v1.GetTicketResponse.UserInfo
+	12, // 5: api.review.service.v1.GetTicketResponse.withdraw_info:type_name -> api.review.service.v1.GetTicketResponse.WithdrawInfo
+	13, // 6: api.review.service.v1.GetTicketResponse.user_status:type_name -> api.review.service.v1.GetTicketResponse.UserStatus
+	14, // 7: api.review.service.v1.GetTicketResponse.comments:type_name -> api.review.service.v1.GetTicketResponse.Comment
+	16, // 8: api.review.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	15, // 9: api.review.service.v1.GetTicketResponse.WithdrawInfo.created_at:type_name -> google.protobuf.Struct
+	16, // 10: api.review.service.v1.GetTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 11: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
+	2,  // 12: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
+	4,  // 13: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
+	6,  // 14: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
+	8,  // 15: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
+	1,  // 16: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	3,  // 17: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
+	5,  // 18: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
+	7,  // 19: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	9,  // 20: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
+	16, // [16:21] is the sub-list for method output_type
+	11, // [11:16] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_review_service_v1_review_proto_init() }
@@ -723,7 +1441,7 @@ func file_review_service_v1_review_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_review_service_v1_review_proto_rawDesc), len(file_review_service_v1_review_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
