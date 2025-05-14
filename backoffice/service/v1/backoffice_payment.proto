@@ -4,60 +4,106 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "payment/service/v1/payment.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
+// BackofficePayment service
+// Provides methods for backoffice payment management
 service BackofficePayment {
-	rpc ListPaymentTransactions(ListPaymentTransactionsRequest) returns (ListPaymentTransactionsResponse) {
+	// Get payment transaction page
+	// Retrieves a paginated list of payment transactions with optional filtering
+	rpc GetPaymentTransactionPage(GetPaymentTransactionPageRequest) returns (GetPaymentTransactionPageResponse) {
         option (google.api.http) = {
-            post: "/v1/backoffice/payment/transactions/list"
+            post: "/v1/backoffice/payment/transaction/page"
             body: "*"
         };
     }
 }
 
-// TODO:
-// Add Payment channel configuration
-
-message ListPaymentTransactionsRequest {
-	repeated int64 operator_ids = 1;
-	optional google.protobuf.Timestamp start_time = 2;
-	optional google.protobuf.Timestamp end_time = 3;
-	repeated int64 user_ids = 4;
-	repeated string currencies = 5;
-	repeated string payment_channels = 6;
-	repeated string protocols = 7;
-	optional int64 min_deposit = 8;
-	optional int64 max_deposit = 9;
-	optional int64 page = 10;
-	optional int64 page_size = 12;
+// Request to get payment transaction page
+// Used to retrieve a paginated list of payment transactions with optional filters
+message GetPaymentTransactionPageRequest {
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2 [json_name="pageSize"];
+  
+  // Optional transaction ID filter
+  int64 transaction_id = 3 [json_name="transactionId"];
+  // Optional operator ID filter
+  string operator_id = 4 [json_name="operatorId"];
+  // Optional user ID filter
+  int64 user_id = 5 [json_name="userId"];
+  // Optional currency filter
+  string currency = 6;
+  // Optional payment method filter
+  string payment_method = 7 [json_name="paymentMethod"];
+  // Optional payment channel filter
+  string payment_channel = 8 [json_name="paymentChannel"];
+  // Optional protocol filter
+  string protocol = 9;
+  // Optional transaction type filter
+  payment.service.v1.TransactionType type = 10;
+  // Optional status filter
+  payment.service.v1.TransactionStatus status = 11;
+  // Optional agent filter
+  string agent = 12;
+  // Optional start time for date range filter
+  google.protobuf.Timestamp start_time = 13 [json_name="startTime"];
+  // Optional end time for date range filter
+  google.protobuf.Timestamp end_time = 14 [json_name="endTime"];
+  // Optional sort direction
+  payment.service.v1.Sort sort = 15 [json_name="sort"];
 }
 
-message ListPaymentTransactionsResponse {
+// Response for payment transaction page
+// Contains paginated list of payment transactions and pagination metadata
+message GetPaymentTransactionPageResponse {
+	// Payment transaction information
+	// Detailed information about a specific payment transaction
 	message PaymentTransaction {
+		// Operator ID associated with the transaction
 		string operator = 1;
-		google.protobuf.Timestamp created_at = 2;
-		google.protobuf.Timestamp updated_at = 3;
-		string type = 4;	// deposit or withdraw
-		int64 user_id = 5;
-		int32 vip_level = 6;
-		string amount = 7;
-		string before_balance = 8;	// from wallet
-		string after_balance = 9;	// from wallet
-		string currency = 10;
-		string payment_channel = 11;
-		string protocol = 12;
-		string status = 13;
-		int64 transaction_id = 14;
-		string payment_gateway_transaction_id = 15;
+		// Timestamp when the transaction was created
+		google.protobuf.Timestamp created_at = 2 [json_name="createdAt"];
+		// Timestamp when the transaction was last updated
+		google.protobuf.Timestamp updated_at = 3 [json_name="updatedAt"];
+		// ID of the user who initiated the transaction
+		int64 user_id = 4 [json_name="userId"];
+		// VIP level of the user
+		int32 vip_level = 5 [json_name="vipLevel"];
+		// Transaction amount with currency unit
+		string amount = 6;
+		// Currency code for the transaction
+		string currency = 7;
+		// Payment channel used for the transaction
+		string payment_channel = 8 [json_name="paymentChannel"];
+		// Protocol used for the transaction
+		string protocol = 9;
+		// Current status of the transaction
+		payment.service.v1.TransactionStatus status = 10;
+		// Unique identifier for the transaction
+		int64 transaction_id = 11 [json_name="transactionId"];
+		// Transaction ID from the payment gateway
+		string pa_transaction_id = 12 [json_name="paTransactionId"];
 	}
+	// List of payment transactions matching the filter criteria
 	repeated PaymentTransaction payment_transactions = 1;
-	int64 page = 2;
-	int64 page_size = 3;
-	int64 total = 4;
-	int64 tatal_successful = 5;
-	int64 total_paying = 6;
-	int64 total_failed = 8;
+	// Total number of transactions matching the filter criteria
+	int32 total_count = 2 [json_name="totalCount"];
+	// Current page number
+	int32 page = 3;
+	// Number of items per page
+	int32 page_size = 4 [json_name="pageSize"];
+	// Total number of pages available
+	int32 total_pages = 5 [json_name="totalPages"];
+	// Total number of successful transactions
+	int32 total_successful = 6 [json_name="totalSuccessful"];
+	// Total number of processing transactions
+	int32 total_processing = 7 [json_name="totalProcessing"];
+	// Total number of failed transactions
+	int32 total_failed = 8 [json_name="totalFailed"];
 }

@@ -510,16 +510,19 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorUserTagsResponse'
-    /v1/backoffice/payment/transactions/list:
+    /v1/backoffice/payment/transaction/page:
         post:
             tags:
                 - BackofficePayment
-            operationId: BackofficePayment_ListPaymentTransactions
+            description: |-
+                Get payment transaction page
+                 Retrieves a paginated list of payment transactions with optional filtering
+            operationId: BackofficePayment_GetPaymentTransactionPage
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListPaymentTransactionsRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionPageRequest'
                 required: true
             responses:
                 "200":
@@ -527,7 +530,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListPaymentTransactionsResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionPageResponse'
     /v1/backoffice/report/daily-summaries/list:
         post:
             tags:
@@ -1183,6 +1186,7 @@ paths:
             description: |-
                 Create payment channel
                  Creates a new payment channel with specified configuration
+                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
             operationId: Payment_CreatePaymentChannel
             requestBody:
                 content:
@@ -1204,6 +1208,7 @@ paths:
             description: |-
                 Get payment channel page with pagination and filters
                  Retrieves a paginated list of payment channels with optional filtering
+                 Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
             operationId: Payment_GetPaymentChannelPage
             requestBody:
                 content:
@@ -1226,6 +1231,7 @@ paths:
                 Deposit callback
                  Handles callbacks from payment gateways for deposit status updates
                  This endpoint is called by payment providers to notify of completed or failed deposits
+                 Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
             operationId: Payment_DepositCallback
             requestBody:
                 content:
@@ -1247,6 +1253,7 @@ paths:
             description: |-
                 Initiate a deposit transaction
                  Starts a new deposit process and returns payment information
+                 Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
             operationId: Payment_InitiateDeposit
             requestBody:
                 content:
@@ -1268,6 +1275,7 @@ paths:
             description: |-
                 Get list of payment methods
                  Retrieves all available payment methods supported by the system
+                 Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
             operationId: Payment_GetPaymentMethodList
             requestBody:
                 content:
@@ -1289,6 +1297,7 @@ paths:
             description: |-
                 Get transaction page with pagination and filters
                  Retrieves a paginated list of transactions with optional filtering
+                 Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
             operationId: Payment_GetTransactionPage
             requestBody:
                 content:
@@ -1311,6 +1320,7 @@ paths:
                 Withdraw callback
                  Handles callbacks from payment gateways for withdrawal status updates
                  This endpoint is called by payment providers to notify of completed or failed withdrawals
+                 Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
             operationId: Payment_WithdrawCallback
             requestBody:
                 content:
@@ -1332,6 +1342,7 @@ paths:
             description: |-
                 Initiate a withdrawal transaction
                  Starts a new withdrawal process
+                 Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
             operationId: Payment_InitiateWithdraw
             requestBody:
                 content:
@@ -2200,6 +2211,166 @@ components:
                     type: string
                 yesterday:
                     type: string
+        api.backoffice.service.v1.GetPaymentTransactionPageRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                transactionId:
+                    type: string
+                    description: Optional transaction ID filter
+                operatorId:
+                    type: string
+                    description: Optional operator ID filter
+                userId:
+                    type: string
+                    description: Optional user ID filter
+                currency:
+                    type: string
+                    description: Optional currency filter
+                paymentMethod:
+                    type: string
+                    description: Optional payment method filter
+                paymentChannel:
+                    type: string
+                    description: Optional payment channel filter
+                protocol:
+                    type: string
+                    description: Optional protocol filter
+                type:
+                    enum:
+                        - TRANSACTION_TYPE_UNSPECIFIED
+                        - TRANSACTION_TYPE_DEPOSIT
+                        - TRANSACTION_TYPE_WITHDRAW
+                    type: string
+                    description: Optional transaction type filter
+                    format: enum
+                status:
+                    enum:
+                        - TRANSACTION_STATUS_UNSPECIFIED
+                        - TRANSACTION_STATUS_PROCESSING
+                        - TRANSACTION_STATUS_SUCCESSFUL
+                        - TRANSACTION_STATUS_FAILED
+                    type: string
+                    description: Optional status filter
+                    format: enum
+                agent:
+                    type: string
+                    description: Optional agent filter
+                startTime:
+                    type: string
+                    description: Optional start time for date range filter
+                    format: date-time
+                endTime:
+                    type: string
+                    description: Optional end time for date range filter
+                    format: date-time
+                sort:
+                    enum:
+                        - DESC
+                        - ASC
+                    type: string
+                    description: Optional sort direction
+                    format: enum
+            description: |-
+                Request to get payment transaction page
+                 Used to retrieve a paginated list of payment transactions with optional filters
+        api.backoffice.service.v1.GetPaymentTransactionPageResponse:
+            type: object
+            properties:
+                paymentTransactions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionPageResponse_PaymentTransaction'
+                    description: List of payment transactions matching the filter criteria
+                totalCount:
+                    type: integer
+                    description: Total number of transactions matching the filter criteria
+                    format: int32
+                page:
+                    type: integer
+                    description: Current page number
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                totalPages:
+                    type: integer
+                    description: Total number of pages available
+                    format: int32
+                totalSuccessful:
+                    type: integer
+                    description: Total number of successful transactions
+                    format: int32
+                totalProcessing:
+                    type: integer
+                    description: Total number of processing transactions
+                    format: int32
+                totalFailed:
+                    type: integer
+                    description: Total number of failed transactions
+                    format: int32
+            description: |-
+                Response for payment transaction page
+                 Contains paginated list of payment transactions and pagination metadata
+        api.backoffice.service.v1.GetPaymentTransactionPageResponse_PaymentTransaction:
+            type: object
+            properties:
+                operator:
+                    type: string
+                    description: Operator ID associated with the transaction
+                createdAt:
+                    type: string
+                    description: Timestamp when the transaction was created
+                    format: date-time
+                updatedAt:
+                    type: string
+                    description: Timestamp when the transaction was last updated
+                    format: date-time
+                userId:
+                    type: string
+                    description: ID of the user who initiated the transaction
+                vipLevel:
+                    type: integer
+                    description: VIP level of the user
+                    format: int32
+                amount:
+                    type: string
+                    description: Transaction amount with currency unit
+                currency:
+                    type: string
+                    description: Currency code for the transaction
+                paymentChannel:
+                    type: string
+                    description: Payment channel used for the transaction
+                protocol:
+                    type: string
+                    description: Protocol used for the transaction
+                status:
+                    enum:
+                        - TRANSACTION_STATUS_UNSPECIFIED
+                        - TRANSACTION_STATUS_PROCESSING
+                        - TRANSACTION_STATUS_SUCCESSFUL
+                        - TRANSACTION_STATUS_FAILED
+                    type: string
+                    description: Current status of the transaction
+                    format: enum
+                transactionId:
+                    type: string
+                    description: Unique identifier for the transaction
+                paTransactionId:
+                    type: string
+                    description: Transaction ID from the payment gateway
+            description: |-
+                Payment transaction information
+                 Detailed information about a specific payment transaction
         api.backoffice.service.v1.GetPlayerGameDataSummaryRequest:
             type: object
             properties:
@@ -3398,98 +3569,6 @@ components:
                         type: string
                 enabled:
                     type: boolean
-        api.backoffice.service.v1.ListPaymentTransactionsRequest:
-            type: object
-            properties:
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-                userIds:
-                    type: array
-                    items:
-                        type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                paymentChannels:
-                    type: array
-                    items:
-                        type: string
-                protocols:
-                    type: array
-                    items:
-                        type: string
-                minDeposit:
-                    type: string
-                maxDeposit:
-                    type: string
-                page:
-                    type: string
-                pageSize:
-                    type: string
-        api.backoffice.service.v1.ListPaymentTransactionsResponse:
-            type: object
-            properties:
-                paymentTransactions:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListPaymentTransactionsResponse_PaymentTransaction'
-                page:
-                    type: string
-                pageSize:
-                    type: string
-                total:
-                    type: string
-                tatalSuccessful:
-                    type: string
-                totalPaying:
-                    type: string
-                totalFailed:
-                    type: string
-        api.backoffice.service.v1.ListPaymentTransactionsResponse_PaymentTransaction:
-            type: object
-            properties:
-                operator:
-                    type: string
-                createdAt:
-                    type: string
-                    format: date-time
-                updatedAt:
-                    type: string
-                    format: date-time
-                type:
-                    type: string
-                userId:
-                    type: string
-                vipLevel:
-                    type: integer
-                    format: int32
-                amount:
-                    type: string
-                beforeBalance:
-                    type: string
-                afterBalance:
-                    type: string
-                currency:
-                    type: string
-                paymentChannel:
-                    type: string
-                protocol:
-                    type: string
-                status:
-                    type: string
-                transactionId:
-                    type: string
-                paymentGatewayTransactionId:
-                    type: string
         api.backoffice.service.v1.ListProvidersRequest:
             type: object
             properties: {}
@@ -5203,6 +5282,24 @@ components:
                     type: integer
                     description: Number of items per page
                     format: int32
+                transactionId:
+                    type: string
+                    description: Optional transaction ID filter
+                operatorId:
+                    type: string
+                    description: Optional operator ID filter
+                currency:
+                    type: string
+                    description: Optional currency filter
+                paymentMethod:
+                    type: string
+                    description: Optional payment method filter
+                paymentChannel:
+                    type: string
+                    description: Optional payment channel filter
+                protocol:
+                    type: string
+                    description: Optional protocol filter
                 type:
                     enum:
                         - TRANSACTION_TYPE_UNSPECIFIED
@@ -5211,9 +5308,6 @@ components:
                     type: string
                     description: Optional transaction type filter
                     format: enum
-                currency:
-                    type: string
-                    description: Optional currency filter
                 status:
                     enum:
                         - TRANSACTION_STATUS_UNSPECIFIED
@@ -5223,6 +5317,9 @@ components:
                     type: string
                     description: Optional status filter
                     format: enum
+                agent:
+                    type: string
+                    description: Optional agent filter
                 startTime:
                     type: string
                     description: Optional start time for date range filter
@@ -5231,9 +5328,6 @@ components:
                     type: string
                     description: Optional end time for date range filter
                     format: date-time
-                paymentMethod:
-                    type: string
-                    description: Optional payment method filter
                 sort:
                     enum:
                         - DESC
@@ -5241,6 +5335,22 @@ components:
                     type: string
                     description: Optional sort direction
                     format: enum
+                source:
+                    enum:
+                        - REQUEST_SOURCE_FRONTEND
+                        - REQUEST_SOURCE_ADMIN
+                    type: string
+                    description: Source of the request (frontend or admin)
+                    format: enum
+                userId:
+                    type: string
+                    description: Optional user ID filter
+                minAmount:
+                    type: string
+                    description: Optional minimum amount filter
+                maxAmount:
+                    type: string
+                    description: Optional maximum amount filter
             description: |-
                 Request to get transaction page
                  Used to retrieve a paginated list of transactions with optional filters
@@ -5267,6 +5377,20 @@ components:
                 totalPages:
                     type: integer
                     description: Total number of pages available
+                    format: int32
+                totalSuccessful:
+                    type: integer
+                    description: |-
+                        The following fields are only populated for admin requests
+                         Total number of successful transactions
+                    format: int32
+                totalProcessing:
+                    type: integer
+                    description: Total number of processing transactions
+                    format: int32
+                totalFailed:
+                    type: integer
+                    description: Total number of failed transactions
                     format: int32
             description: |-
                 Response for transaction page
@@ -5328,6 +5452,15 @@ components:
                 amount:
                     type: string
                     description: Amount to withdraw in smallest currency unit (e.g., cents)
+                currency:
+                    type: string
+                    description: Currency code for the transaction
+                userId:
+                    type: string
+                    description: ID of the user who initiated the withdrawal
+                operatorId:
+                    type: string
+                    description: ID of the operator who owns this channel
                 channelId:
                     type: string
                     description: ID of the channel to use for withdrawal
@@ -5452,15 +5585,37 @@ components:
                 transactionId:
                     type: string
                     description: Unique identifier for the transaction
+                operatorTransactionId:
+                    type: string
+                    description: Transaction ID from the operator's system
+                gatewayTransactionId:
+                    type: string
+                    description: Transaction ID from the payment gateway
+                operatorId:
+                    type: string
+                    description: Operator ID associated with the transaction
                 userId:
                     type: string
                     description: ID of the user who initiated the transaction
+                vip:
+                    type: integer
+                    description: VIP level of the user
+                    format: int32
                 amount:
                     type: string
                     description: Transaction amount in smallest currency unit
                 currency:
                     type: string
                     description: Currency code for the transaction
+                paymentMethod:
+                    type: string
+                    description: Payment method used for the transaction
+                paymentChannel:
+                    type: string
+                    description: Payment channel used for the transaction
+                protocol:
+                    type: string
+                    description: Protocol used for the transaction
                 type:
                     enum:
                         - TRANSACTION_TYPE_UNSPECIFIED
@@ -5478,9 +5633,6 @@ components:
                     type: string
                     description: Current status of the transaction
                     format: enum
-                paymentMethod:
-                    type: string
-                    description: Payment method used for the transaction
                 createdAt:
                     type: string
                     description: Timestamp when the transaction was created
@@ -5639,6 +5791,9 @@ tags:
     - name: BackofficeDashboard
     - name: BackofficeGame
     - name: BackofficePayment
+      description: |-
+        BackofficePayment service
+         Provides methods for backoffice payment management
     - name: BackofficeReport
     - name: BackofficeReview
     - name: BackofficeUser

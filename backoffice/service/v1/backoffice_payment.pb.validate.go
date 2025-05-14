@@ -17,6 +17,8 @@ import (
 	"unicode/utf8"
 
 	"google.golang.org/protobuf/types/known/anypb"
+
+	v1 "github.com/infigaming-com/meepo-api/payment/service/v1"
 )
 
 // ensure the imports are used
@@ -33,126 +35,132 @@ var (
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
 	_ = sort.Sort
+
+	_ = v1.TransactionType(0)
 )
 
-// Validate checks the field values on ListPaymentTransactionsRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListPaymentTransactionsRequest) Validate() error {
+// Validate checks the field values on GetPaymentTransactionPageRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetPaymentTransactionPageRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListPaymentTransactionsRequest with
+// ValidateAll checks the field values on GetPaymentTransactionPageRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the result is a list of violation errors wrapped in
-// ListPaymentTransactionsRequestMultiError, or nil if none found.
-func (m *ListPaymentTransactionsRequest) ValidateAll() error {
+// GetPaymentTransactionPageRequestMultiError, or nil if none found.
+func (m *GetPaymentTransactionPageRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListPaymentTransactionsRequest) validate(all bool) error {
+func (m *GetPaymentTransactionPageRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	if m.StartTime != nil {
+	// no validation rules for Page
 
-		if all {
-			switch v := interface{}(m.GetStartTime()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListPaymentTransactionsRequestValidationError{
-						field:  "StartTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListPaymentTransactionsRequestValidationError{
-						field:  "StartTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListPaymentTransactionsRequestValidationError{
+	// no validation rules for PageSize
+
+	// no validation rules for TransactionId
+
+	// no validation rules for OperatorId
+
+	// no validation rules for UserId
+
+	// no validation rules for Currency
+
+	// no validation rules for PaymentMethod
+
+	// no validation rules for PaymentChannel
+
+	// no validation rules for Protocol
+
+	// no validation rules for Type
+
+	// no validation rules for Status
+
+	// no validation rules for Agent
+
+	if all {
+		switch v := interface{}(m.GetStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetPaymentTransactionPageRequestValidationError{
 					field:  "StartTime",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetPaymentTransactionPageRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetPaymentTransactionPageRequestValidationError{
+				field:  "StartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	if m.EndTime != nil {
-
-		if all {
-			switch v := interface{}(m.GetEndTime()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListPaymentTransactionsRequestValidationError{
-						field:  "EndTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListPaymentTransactionsRequestValidationError{
-						field:  "EndTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListPaymentTransactionsRequestValidationError{
+	if all {
+		switch v := interface{}(m.GetEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetPaymentTransactionPageRequestValidationError{
 					field:  "EndTime",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetPaymentTransactionPageRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetPaymentTransactionPageRequestValidationError{
+				field:  "EndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	if m.MinDeposit != nil {
-		// no validation rules for MinDeposit
-	}
-
-	if m.MaxDeposit != nil {
-		// no validation rules for MaxDeposit
-	}
-
-	if m.Page != nil {
-		// no validation rules for Page
-	}
-
-	if m.PageSize != nil {
-		// no validation rules for PageSize
-	}
+	// no validation rules for Sort
 
 	if len(errors) > 0 {
-		return ListPaymentTransactionsRequestMultiError(errors)
+		return GetPaymentTransactionPageRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListPaymentTransactionsRequestMultiError is an error wrapping multiple
-// validation errors returned by ListPaymentTransactionsRequest.ValidateAll()
-// if the designated constraints aren't met.
-type ListPaymentTransactionsRequestMultiError []error
+// GetPaymentTransactionPageRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetPaymentTransactionPageRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetPaymentTransactionPageRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListPaymentTransactionsRequestMultiError) Error() string {
+func (m GetPaymentTransactionPageRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -161,12 +169,12 @@ func (m ListPaymentTransactionsRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListPaymentTransactionsRequestMultiError) AllErrors() []error { return m }
+func (m GetPaymentTransactionPageRequestMultiError) AllErrors() []error { return m }
 
-// ListPaymentTransactionsRequestValidationError is the validation error
-// returned by ListPaymentTransactionsRequest.Validate if the designated
+// GetPaymentTransactionPageRequestValidationError is the validation error
+// returned by GetPaymentTransactionPageRequest.Validate if the designated
 // constraints aren't met.
-type ListPaymentTransactionsRequestValidationError struct {
+type GetPaymentTransactionPageRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -174,24 +182,24 @@ type ListPaymentTransactionsRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListPaymentTransactionsRequestValidationError) Field() string { return e.field }
+func (e GetPaymentTransactionPageRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListPaymentTransactionsRequestValidationError) Reason() string { return e.reason }
+func (e GetPaymentTransactionPageRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListPaymentTransactionsRequestValidationError) Cause() error { return e.cause }
+func (e GetPaymentTransactionPageRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListPaymentTransactionsRequestValidationError) Key() bool { return e.key }
+func (e GetPaymentTransactionPageRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListPaymentTransactionsRequestValidationError) ErrorName() string {
-	return "ListPaymentTransactionsRequestValidationError"
+func (e GetPaymentTransactionPageRequestValidationError) ErrorName() string {
+	return "GetPaymentTransactionPageRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListPaymentTransactionsRequestValidationError) Error() string {
+func (e GetPaymentTransactionPageRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -203,14 +211,14 @@ func (e ListPaymentTransactionsRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListPaymentTransactionsRequest.%s: %s%s",
+		"invalid %sGetPaymentTransactionPageRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListPaymentTransactionsRequestValidationError{}
+var _ error = GetPaymentTransactionPageRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -218,24 +226,25 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListPaymentTransactionsRequestValidationError{}
+} = GetPaymentTransactionPageRequestValidationError{}
 
-// Validate checks the field values on ListPaymentTransactionsResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListPaymentTransactionsResponse) Validate() error {
+// Validate checks the field values on GetPaymentTransactionPageResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetPaymentTransactionPageResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListPaymentTransactionsResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// ListPaymentTransactionsResponseMultiError, or nil if none found.
-func (m *ListPaymentTransactionsResponse) ValidateAll() error {
+// ValidateAll checks the field values on GetPaymentTransactionPageResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetPaymentTransactionPageResponseMultiError, or nil if none found.
+func (m *GetPaymentTransactionPageResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListPaymentTransactionsResponse) validate(all bool) error {
+func (m *GetPaymentTransactionPageResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -249,7 +258,7 @@ func (m *ListPaymentTransactionsResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListPaymentTransactionsResponseValidationError{
+					errors = append(errors, GetPaymentTransactionPageResponseValidationError{
 						field:  fmt.Sprintf("PaymentTransactions[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -257,7 +266,7 @@ func (m *ListPaymentTransactionsResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListPaymentTransactionsResponseValidationError{
+					errors = append(errors, GetPaymentTransactionPageResponseValidationError{
 						field:  fmt.Sprintf("PaymentTransactions[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -266,7 +275,7 @@ func (m *ListPaymentTransactionsResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListPaymentTransactionsResponseValidationError{
+				return GetPaymentTransactionPageResponseValidationError{
 					field:  fmt.Sprintf("PaymentTransactions[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -276,32 +285,35 @@ func (m *ListPaymentTransactionsResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for TotalCount
+
 	// no validation rules for Page
 
 	// no validation rules for PageSize
 
-	// no validation rules for Total
+	// no validation rules for TotalPages
 
-	// no validation rules for TatalSuccessful
+	// no validation rules for TotalSuccessful
 
-	// no validation rules for TotalPaying
+	// no validation rules for TotalProcessing
 
 	// no validation rules for TotalFailed
 
 	if len(errors) > 0 {
-		return ListPaymentTransactionsResponseMultiError(errors)
+		return GetPaymentTransactionPageResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListPaymentTransactionsResponseMultiError is an error wrapping multiple
-// validation errors returned by ListPaymentTransactionsResponse.ValidateAll()
-// if the designated constraints aren't met.
-type ListPaymentTransactionsResponseMultiError []error
+// GetPaymentTransactionPageResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetPaymentTransactionPageResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetPaymentTransactionPageResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListPaymentTransactionsResponseMultiError) Error() string {
+func (m GetPaymentTransactionPageResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -310,12 +322,12 @@ func (m ListPaymentTransactionsResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListPaymentTransactionsResponseMultiError) AllErrors() []error { return m }
+func (m GetPaymentTransactionPageResponseMultiError) AllErrors() []error { return m }
 
-// ListPaymentTransactionsResponseValidationError is the validation error
-// returned by ListPaymentTransactionsResponse.Validate if the designated
+// GetPaymentTransactionPageResponseValidationError is the validation error
+// returned by GetPaymentTransactionPageResponse.Validate if the designated
 // constraints aren't met.
-type ListPaymentTransactionsResponseValidationError struct {
+type GetPaymentTransactionPageResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -323,24 +335,24 @@ type ListPaymentTransactionsResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListPaymentTransactionsResponseValidationError) Field() string { return e.field }
+func (e GetPaymentTransactionPageResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListPaymentTransactionsResponseValidationError) Reason() string { return e.reason }
+func (e GetPaymentTransactionPageResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListPaymentTransactionsResponseValidationError) Cause() error { return e.cause }
+func (e GetPaymentTransactionPageResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListPaymentTransactionsResponseValidationError) Key() bool { return e.key }
+func (e GetPaymentTransactionPageResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListPaymentTransactionsResponseValidationError) ErrorName() string {
-	return "ListPaymentTransactionsResponseValidationError"
+func (e GetPaymentTransactionPageResponseValidationError) ErrorName() string {
+	return "GetPaymentTransactionPageResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListPaymentTransactionsResponseValidationError) Error() string {
+func (e GetPaymentTransactionPageResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -352,14 +364,14 @@ func (e ListPaymentTransactionsResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListPaymentTransactionsResponse.%s: %s%s",
+		"invalid %sGetPaymentTransactionPageResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListPaymentTransactionsResponseValidationError{}
+var _ error = GetPaymentTransactionPageResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -367,27 +379,27 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListPaymentTransactionsResponseValidationError{}
+} = GetPaymentTransactionPageResponseValidationError{}
 
 // Validate checks the field values on
-// ListPaymentTransactionsResponse_PaymentTransaction with the rules defined
+// GetPaymentTransactionPageResponse_PaymentTransaction with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
-func (m *ListPaymentTransactionsResponse_PaymentTransaction) Validate() error {
+func (m *GetPaymentTransactionPageResponse_PaymentTransaction) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// ListPaymentTransactionsResponse_PaymentTransaction with the rules defined
+// GetPaymentTransactionPageResponse_PaymentTransaction with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // result is a list of violation errors wrapped in
-// ListPaymentTransactionsResponse_PaymentTransactionMultiError, or nil if
+// GetPaymentTransactionPageResponse_PaymentTransactionMultiError, or nil if
 // none found.
-func (m *ListPaymentTransactionsResponse_PaymentTransaction) ValidateAll() error {
+func (m *GetPaymentTransactionPageResponse_PaymentTransaction) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListPaymentTransactionsResponse_PaymentTransaction) validate(all bool) error {
+func (m *GetPaymentTransactionPageResponse_PaymentTransaction) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -400,7 +412,7 @@ func (m *ListPaymentTransactionsResponse_PaymentTransaction) validate(all bool) 
 		switch v := interface{}(m.GetCreatedAt()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListPaymentTransactionsResponse_PaymentTransactionValidationError{
+				errors = append(errors, GetPaymentTransactionPageResponse_PaymentTransactionValidationError{
 					field:  "CreatedAt",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -408,7 +420,7 @@ func (m *ListPaymentTransactionsResponse_PaymentTransaction) validate(all bool) 
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListPaymentTransactionsResponse_PaymentTransactionValidationError{
+				errors = append(errors, GetPaymentTransactionPageResponse_PaymentTransactionValidationError{
 					field:  "CreatedAt",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -417,7 +429,7 @@ func (m *ListPaymentTransactionsResponse_PaymentTransaction) validate(all bool) 
 		}
 	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListPaymentTransactionsResponse_PaymentTransactionValidationError{
+			return GetPaymentTransactionPageResponse_PaymentTransactionValidationError{
 				field:  "CreatedAt",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -429,7 +441,7 @@ func (m *ListPaymentTransactionsResponse_PaymentTransaction) validate(all bool) 
 		switch v := interface{}(m.GetUpdatedAt()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListPaymentTransactionsResponse_PaymentTransactionValidationError{
+				errors = append(errors, GetPaymentTransactionPageResponse_PaymentTransactionValidationError{
 					field:  "UpdatedAt",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -437,7 +449,7 @@ func (m *ListPaymentTransactionsResponse_PaymentTransaction) validate(all bool) 
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListPaymentTransactionsResponse_PaymentTransactionValidationError{
+				errors = append(errors, GetPaymentTransactionPageResponse_PaymentTransactionValidationError{
 					field:  "UpdatedAt",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -446,7 +458,7 @@ func (m *ListPaymentTransactionsResponse_PaymentTransaction) validate(all bool) 
 		}
 	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListPaymentTransactionsResponse_PaymentTransactionValidationError{
+			return GetPaymentTransactionPageResponse_PaymentTransactionValidationError{
 				field:  "UpdatedAt",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -454,17 +466,11 @@ func (m *ListPaymentTransactionsResponse_PaymentTransaction) validate(all bool) 
 		}
 	}
 
-	// no validation rules for Type
-
 	// no validation rules for UserId
 
 	// no validation rules for VipLevel
 
 	// no validation rules for Amount
-
-	// no validation rules for BeforeBalance
-
-	// no validation rules for AfterBalance
 
 	// no validation rules for Currency
 
@@ -476,23 +482,23 @@ func (m *ListPaymentTransactionsResponse_PaymentTransaction) validate(all bool) 
 
 	// no validation rules for TransactionId
 
-	// no validation rules for PaymentGatewayTransactionId
+	// no validation rules for PaTransactionId
 
 	if len(errors) > 0 {
-		return ListPaymentTransactionsResponse_PaymentTransactionMultiError(errors)
+		return GetPaymentTransactionPageResponse_PaymentTransactionMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListPaymentTransactionsResponse_PaymentTransactionMultiError is an error
+// GetPaymentTransactionPageResponse_PaymentTransactionMultiError is an error
 // wrapping multiple validation errors returned by
-// ListPaymentTransactionsResponse_PaymentTransaction.ValidateAll() if the
+// GetPaymentTransactionPageResponse_PaymentTransaction.ValidateAll() if the
 // designated constraints aren't met.
-type ListPaymentTransactionsResponse_PaymentTransactionMultiError []error
+type GetPaymentTransactionPageResponse_PaymentTransactionMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListPaymentTransactionsResponse_PaymentTransactionMultiError) Error() string {
+func (m GetPaymentTransactionPageResponse_PaymentTransactionMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -501,13 +507,13 @@ func (m ListPaymentTransactionsResponse_PaymentTransactionMultiError) Error() st
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListPaymentTransactionsResponse_PaymentTransactionMultiError) AllErrors() []error { return m }
+func (m GetPaymentTransactionPageResponse_PaymentTransactionMultiError) AllErrors() []error { return m }
 
-// ListPaymentTransactionsResponse_PaymentTransactionValidationError is the
+// GetPaymentTransactionPageResponse_PaymentTransactionValidationError is the
 // validation error returned by
-// ListPaymentTransactionsResponse_PaymentTransaction.Validate if the
+// GetPaymentTransactionPageResponse_PaymentTransaction.Validate if the
 // designated constraints aren't met.
-type ListPaymentTransactionsResponse_PaymentTransactionValidationError struct {
+type GetPaymentTransactionPageResponse_PaymentTransactionValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -515,30 +521,30 @@ type ListPaymentTransactionsResponse_PaymentTransactionValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListPaymentTransactionsResponse_PaymentTransactionValidationError) Field() string {
+func (e GetPaymentTransactionPageResponse_PaymentTransactionValidationError) Field() string {
 	return e.field
 }
 
 // Reason function returns reason value.
-func (e ListPaymentTransactionsResponse_PaymentTransactionValidationError) Reason() string {
+func (e GetPaymentTransactionPageResponse_PaymentTransactionValidationError) Reason() string {
 	return e.reason
 }
 
 // Cause function returns cause value.
-func (e ListPaymentTransactionsResponse_PaymentTransactionValidationError) Cause() error {
+func (e GetPaymentTransactionPageResponse_PaymentTransactionValidationError) Cause() error {
 	return e.cause
 }
 
 // Key function returns key value.
-func (e ListPaymentTransactionsResponse_PaymentTransactionValidationError) Key() bool { return e.key }
+func (e GetPaymentTransactionPageResponse_PaymentTransactionValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListPaymentTransactionsResponse_PaymentTransactionValidationError) ErrorName() string {
-	return "ListPaymentTransactionsResponse_PaymentTransactionValidationError"
+func (e GetPaymentTransactionPageResponse_PaymentTransactionValidationError) ErrorName() string {
+	return "GetPaymentTransactionPageResponse_PaymentTransactionValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListPaymentTransactionsResponse_PaymentTransactionValidationError) Error() string {
+func (e GetPaymentTransactionPageResponse_PaymentTransactionValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -550,14 +556,14 @@ func (e ListPaymentTransactionsResponse_PaymentTransactionValidationError) Error
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListPaymentTransactionsResponse_PaymentTransaction.%s: %s%s",
+		"invalid %sGetPaymentTransactionPageResponse_PaymentTransaction.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListPaymentTransactionsResponse_PaymentTransactionValidationError{}
+var _ error = GetPaymentTransactionPageResponse_PaymentTransactionValidationError{}
 
 var _ interface {
 	Field() string
@@ -565,4 +571,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListPaymentTransactionsResponse_PaymentTransactionValidationError{}
+} = GetPaymentTransactionPageResponse_PaymentTransactionValidationError{}

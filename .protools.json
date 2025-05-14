@@ -1,0 +1,6 @@
+{
+  "importPaths": [
+    ".",
+    "./third_party"
+  ]
+} 

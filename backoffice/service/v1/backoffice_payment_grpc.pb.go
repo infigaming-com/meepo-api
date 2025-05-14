@@ -19,14 +19,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficePayment_ListPaymentTransactions_FullMethodName = "/api.backoffice.service.v1.BackofficePayment/ListPaymentTransactions"
+	BackofficePayment_GetPaymentTransactionPage_FullMethodName = "/api.backoffice.service.v1.BackofficePayment/GetPaymentTransactionPage"
 )
 
 // BackofficePaymentClient is the client API for BackofficePayment service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// BackofficePayment service
+// Provides methods for backoffice payment management
 type BackofficePaymentClient interface {
-	ListPaymentTransactions(ctx context.Context, in *ListPaymentTransactionsRequest, opts ...grpc.CallOption) (*ListPaymentTransactionsResponse, error)
+	// Get payment transaction page
+	// Retrieves a paginated list of payment transactions with optional filtering
+	GetPaymentTransactionPage(ctx context.Context, in *GetPaymentTransactionPageRequest, opts ...grpc.CallOption) (*GetPaymentTransactionPageResponse, error)
 }
 
 type backofficePaymentClient struct {
@@ -37,10 +42,10 @@ func NewBackofficePaymentClient(cc grpc.ClientConnInterface) BackofficePaymentCl
 	return &backofficePaymentClient{cc}
 }
 
-func (c *backofficePaymentClient) ListPaymentTransactions(ctx context.Context, in *ListPaymentTransactionsRequest, opts ...grpc.CallOption) (*ListPaymentTransactionsResponse, error) {
+func (c *backofficePaymentClient) GetPaymentTransactionPage(ctx context.Context, in *GetPaymentTransactionPageRequest, opts ...grpc.CallOption) (*GetPaymentTransactionPageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListPaymentTransactionsResponse)
-	err := c.cc.Invoke(ctx, BackofficePayment_ListPaymentTransactions_FullMethodName, in, out, cOpts...)
+	out := new(GetPaymentTransactionPageResponse)
+	err := c.cc.Invoke(ctx, BackofficePayment_GetPaymentTransactionPage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -50,8 +55,13 @@ func (c *backofficePaymentClient) ListPaymentTransactions(ctx context.Context, i
 // BackofficePaymentServer is the server API for BackofficePayment service.
 // All implementations must embed UnimplementedBackofficePaymentServer
 // for forward compatibility.
+//
+// BackofficePayment service
+// Provides methods for backoffice payment management
 type BackofficePaymentServer interface {
-	ListPaymentTransactions(context.Context, *ListPaymentTransactionsRequest) (*ListPaymentTransactionsResponse, error)
+	// Get payment transaction page
+	// Retrieves a paginated list of payment transactions with optional filtering
+	GetPaymentTransactionPage(context.Context, *GetPaymentTransactionPageRequest) (*GetPaymentTransactionPageResponse, error)
 	mustEmbedUnimplementedBackofficePaymentServer()
 }
 
@@ -62,8 +72,8 @@ type BackofficePaymentServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficePaymentServer struct{}
 
-func (UnimplementedBackofficePaymentServer) ListPaymentTransactions(context.Context, *ListPaymentTransactionsRequest) (*ListPaymentTransactionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPaymentTransactions not implemented")
+func (UnimplementedBackofficePaymentServer) GetPaymentTransactionPage(context.Context, *GetPaymentTransactionPageRequest) (*GetPaymentTransactionPageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentTransactionPage not implemented")
 }
 func (UnimplementedBackofficePaymentServer) mustEmbedUnimplementedBackofficePaymentServer() {}
 func (UnimplementedBackofficePaymentServer) testEmbeddedByValue()                           {}
@@ -86,20 +96,20 @@ func RegisterBackofficePaymentServer(s grpc.ServiceRegistrar, srv BackofficePaym
 	s.RegisterService(&BackofficePayment_ServiceDesc, srv)
 }
 
-func _BackofficePayment_ListPaymentTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListPaymentTransactionsRequest)
+func _BackofficePayment_GetPaymentTransactionPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPaymentTransactionPageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficePaymentServer).ListPaymentTransactions(ctx, in)
+		return srv.(BackofficePaymentServer).GetPaymentTransactionPage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficePayment_ListPaymentTransactions_FullMethodName,
+		FullMethod: BackofficePayment_GetPaymentTransactionPage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).ListPaymentTransactions(ctx, req.(*ListPaymentTransactionsRequest))
+		return srv.(BackofficePaymentServer).GetPaymentTransactionPage(ctx, req.(*GetPaymentTransactionPageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -112,8 +122,8 @@ var BackofficePayment_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*BackofficePaymentServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListPaymentTransactions",
-			Handler:    _BackofficePayment_ListPaymentTransactions_Handler,
+			MethodName: "GetPaymentTransactionPage",
+			Handler:    _BackofficePayment_GetPaymentTransactionPage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

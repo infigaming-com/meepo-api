@@ -140,11 +140,17 @@ message InitiateDepositResponse {
 message InitiateWithdrawRequest {
   // Amount to withdraw in smallest currency unit (e.g., cents)
   int64 amount = 1;
+  // Currency code for the transaction
+  string currency = 2;
+  // ID of the user who initiated the withdrawal
+  int64 user_id = 3 [json_name="userId"];
+  // ID of the operator who owns this channel
+  int64 operator_id = 4 [json_name="operatorId"];
   // ID of the channel to use for withdrawal
-  string channel_id = 2 [json_name="channelId"];
+  string channel_id = 5 [json_name="channelId"];
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
-  google.protobuf.Struct extra = 3;
+  google.protobuf.Struct extra = 6;
 }
 
 // Response for withdrawal initiation
@@ -269,6 +275,15 @@ enum Sort {
   ASC = 1;
 }
 
+// Request source enum
+// Defines the source of the request
+enum RequestSource {
+  // Request from frontend user
+  REQUEST_SOURCE_FRONTEND = 0;
+  // Request from admin backend
+  REQUEST_SOURCE_ADMIN = 1;
+}
+
 // Channel type enum
 // Defines the purpose of a payment channel
 enum ChannelType {
@@ -283,22 +298,34 @@ enum ChannelType {
 message TransactionInfo {
   // Unique identifier for the transaction
   int64 transaction_id = 1 [json_name="transactionId"];
+  // Transaction ID from the operator's system
+  string operator_transaction_id = 2 [json_name="operatorTransactionId"];
+  // Transaction ID from the payment gateway
+  string gateway_transaction_id = 3 [json_name="gatewayTransactionId"];
+  // Operator ID associated with the transaction
+  string operator_id = 4 [json_name="operatorId"];
   // ID of the user who initiated the transaction
-  int64 user_id = 2 [json_name="userId"];
+  int64 user_id = 5 [json_name="userId"];
+  // VIP level of the user
+  int32 vip = 6;
   // Transaction amount in smallest currency unit
-  int64 amount = 3;
+  int64 amount = 7;
   // Currency code for the transaction
-  string currency = 4;
-  // Type of transaction (deposit or withdrawal)
-  TransactionType type = 5;
-  // Current status of the transaction
-  TransactionStatus status = 6;
+  string currency = 8;
   // Payment method used for the transaction
-  string payment_method = 7 [json_name="paymentMethod"];
+  string payment_method = 9 [json_name="paymentMethod"];
+  // Payment channel used for the transaction
+  string payment_channel = 10 [json_name="paymentChannel"];
+  // Protocol used for the transaction
+  string protocol = 11;
+  // Type of transaction (deposit or withdrawal)
+  TransactionType type = 12;
+  // Current status of the transaction
+  TransactionStatus status = 13;
   // Timestamp when the transaction was created
-  google.protobuf.Timestamp created_at = 8 [json_name="createdAt"];
+  google.protobuf.Timestamp created_at = 14 [json_name="createdAt"];
   // Timestamp when the transaction was last updated
-  google.protobuf.Timestamp updated_at = 9 [json_name="updatedAt"];
+  google.protobuf.Timestamp updated_at = 15 [json_name="updatedAt"];
 }
 
 // Request to get transaction page
@@ -309,20 +336,38 @@ message GetTransactionPageRequest {
   // Number of items per page
   int32 page_size = 2 [json_name="pageSize"];
   
-  // Optional transaction type filter
-  TransactionType type = 3;
+  // Optional transaction ID filter
+  int64 transaction_id = 3 [json_name="transactionId"];
+  // Optional operator ID filter
+  string operator_id = 4 [json_name="operatorId"];
   // Optional currency filter
-  string currency = 4;
-  // Optional status filter
-  TransactionStatus status = 5;
-  // Optional start time for date range filter
-  google.protobuf.Timestamp start_time = 6 [json_name="startTime"];
-  // Optional end time for date range filter
-  google.protobuf.Timestamp end_time = 7 [json_name="endTime"];
+  string currency = 5;
   // Optional payment method filter
-  string payment_method = 8 [json_name="paymentMethod"];
+  string payment_method = 6 [json_name="paymentMethod"];
+  // Optional payment channel filter
+  string payment_channel = 7 [json_name="paymentChannel"];
+  // Optional protocol filter
+  string protocol = 8;
+  // Optional transaction type filter
+  TransactionType type = 9;
+  // Optional status filter
+  TransactionStatus status = 10;
+  // Optional agent filter
+  string agent = 11;
+  // Optional start time for date range filter
+  google.protobuf.Timestamp start_time = 12 [json_name="startTime"];
+  // Optional end time for date range filter
+  google.protobuf.Timestamp end_time = 13 [json_name="endTime"];
   // Optional sort direction
-  Sort sort = 9 [json_name="sort"];
+  Sort sort = 14 [json_name="sort"];
+  // Source of the request (frontend or admin)
+  RequestSource source = 15 [json_name="source"];
+  // Optional user ID filter
+  int64 user_id = 16 [json_name="userId"];
+  // Optional minimum amount filter
+  int64 min_amount = 17 [json_name="minAmount"];
+  // Optional maximum amount filter
+  int64 max_amount = 18 [json_name="maxAmount"];
 }
 
 // Response for transaction page
@@ -338,6 +383,13 @@ message GetTransactionPageResponse {
   int32 page_size = 4 [json_name="pageSize"];
   // Total number of pages available
   int32 total_pages = 5 [json_name="totalPages"];
+  // The following fields are only populated for admin requests
+  // Total number of successful transactions
+  int32 total_successful = 6 [json_name="totalSuccessful"];
+  // Total number of processing transactions
+  int32 total_processing = 7 [json_name="totalProcessing"];
+  // Total number of failed transactions
+  int32 total_failed = 8 [json_name="totalFailed"];
 }
 
 // Request to get payment channel page
@@ -384,6 +436,7 @@ message GetPaymentChannelPageResponse {
 service Payment {
   // Get list of payment methods
   // Retrieves all available payment methods supported by the system
+  // Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
   rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
     option (google.api.http) = {
       post: "/v1/payment/method/list"
@@ -393,6 +446,7 @@ service Payment {
 
   // Create payment channel
   // Creates a new payment channel with specified configuration
+  // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
   rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (CreatePaymentChannelResponse) {
     option (google.api.http) = {
       post: "/v1/payment/channel/create"
@@ -402,6 +456,7 @@ service Payment {
 
   // Initiate a deposit transaction
   // Starts a new deposit process and returns payment information
+  // Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
   rpc InitiateDeposit(InitiateDepositRequest) returns (InitiateDepositResponse) {
     option (google.api.http) = {
       post: "/v1/payment/deposit/initiate"
@@ -411,6 +466,7 @@ service Payment {
 
   // Initiate a withdrawal transaction
   // Starts a new withdrawal process
+  // Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
   rpc InitiateWithdraw(InitiateWithdrawRequest) returns (InitiateWithdrawResponse) {
     option (google.api.http) = {
       post: "/v1/payment/withdraw/initiate"
@@ -421,6 +477,7 @@ service Payment {
   // Deposit callback
   // Handles callbacks from payment gateways for deposit status updates
   // This endpoint is called by payment providers to notify of completed or failed deposits
+  // Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
   rpc DepositCallback(DepositCallbackRequest) returns (DepositCallbackResponse) {
     option (google.api.http) = {
       post: "/v1/payment/deposit/callback"
@@ -431,6 +488,7 @@ service Payment {
   // Withdraw callback
   // Handles callbacks from payment gateways for withdrawal status updates
   // This endpoint is called by payment providers to notify of completed or failed withdrawals
+  // Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
   rpc WithdrawCallback(WithdrawCallbackRequest) returns (WithdrawCallbackResponse) {
     option (google.api.http) = {
       post: "/v1/payment/withdraw/callback"
@@ -440,6 +498,7 @@ service Payment {
 
   // Get transaction page with pagination and filters
   // Retrieves a paginated list of transactions with optional filtering
+  // Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
   rpc GetTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) {
     option (google.api.http) = {
       post: "/v1/payment/transaction/page"
@@ -449,6 +508,7 @@ service Payment {
 
   // Get payment channel page with pagination and filters
   // Retrieves a paginated list of payment channels with optional filtering
+  // Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
   rpc GetPaymentChannelPage(GetPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) {
     option (google.api.http) = {
       post: "/v1/payment/channel/page"

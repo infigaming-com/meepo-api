@@ -1,0 +1,8 @@
+{
+  "protobuf": {
+    "importPaths": [
+      ".",
+      "./third_party"
+    ]
+  }
+} 
