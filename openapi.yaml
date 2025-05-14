@@ -4165,11 +4165,15 @@ components:
                     type: string
                 betAmount:
                     type: string
+                validBetAmount:
+                    type: string
                 settlementBetAmount:
                     type: string
                 winAmount:
                     type: string
                 settlementWinAmount:
+                    type: string
+                odds:
                     type: string
                 rollbackBetAmount:
                     type: string
