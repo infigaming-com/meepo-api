@@ -4213,6 +4213,10 @@ components:
                     type: string
                 providerRoundId:
                     type: string
+                providerId:
+                    type: string
+                providerName:
+                    type: string
                 currency:
                     type: string
                 settlementCurrency:
