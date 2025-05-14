@@ -4145,6 +4145,10 @@ components:
                     type: string
                 providerName:
                     type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
                 currency:
                     type: string
                 settlementCurrency:
