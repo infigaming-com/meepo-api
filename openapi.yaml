@@ -2245,6 +2245,7 @@ components:
                     description: Optional protocol filter
                 type:
                     enum:
+                        - TRANSACTION_TYPE_UNSPECIFIED
                         - TRANSACTION_TYPE_DEPOSIT
                         - TRANSACTION_TYPE_WITHDRAW
                     type: string
@@ -2257,7 +2258,7 @@ components:
                         - TRANSACTION_STATUS_SUCCESSFUL
                         - TRANSACTION_STATUS_FAILED
                     type: string
-                    description: Optional status filter
+                    description: Optional status filter，使用 payment 模块中的 TransactionStatus 枚举
                     format: enum
                 agent:
                     type: string
@@ -2359,7 +2360,7 @@ components:
                         - TRANSACTION_STATUS_SUCCESSFUL
                         - TRANSACTION_STATUS_FAILED
                     type: string
-                    description: Current status of the transaction
+                    description: Current status of the transaction，使用 payment 模块中的 TransactionStatus 枚举
                     format: enum
                 transactionId:
                     type: string

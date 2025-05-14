@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/infigaming-com/meepo-api/payment/service/v1"
+	v1 "github.com/infigaming-com/meepo-api/payment/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -23,165 +23,6 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
-
-// 定义枚举类型，与payment模块保持一致
-// Transaction type enum
-// Defines the direction of money flow
-type TransactionType int32
-
-const (
-	// Money incoming to platform
-	TransactionType_TRANSACTION_TYPE_DEPOSIT TransactionType = 0
-	// Money outgoing from platform
-	TransactionType_TRANSACTION_TYPE_WITHDRAW TransactionType = 1
-)
-
-// Enum value maps for TransactionType.
-var (
-	TransactionType_name = map[int32]string{
-		0: "TRANSACTION_TYPE_DEPOSIT",
-		1: "TRANSACTION_TYPE_WITHDRAW",
-	}
-	TransactionType_value = map[string]int32{
-		"TRANSACTION_TYPE_DEPOSIT":  0,
-		"TRANSACTION_TYPE_WITHDRAW": 1,
-	}
-)
-
-func (x TransactionType) Enum() *TransactionType {
-	p := new(TransactionType)
-	*p = x
-	return p
-}
-
-func (x TransactionType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (TransactionType) Descriptor() protoreflect.EnumDescriptor {
-	return file_backoffice_service_v1_backoffice_payment_proto_enumTypes[0].Descriptor()
-}
-
-func (TransactionType) Type() protoreflect.EnumType {
-	return &file_backoffice_service_v1_backoffice_payment_proto_enumTypes[0]
-}
-
-func (x TransactionType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use TransactionType.Descriptor instead.
-func (TransactionType) EnumDescriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{0}
-}
-
-// Transaction status enum
-// Defines possible states of a transaction
-type TransactionStatus int32
-
-const (
-	// Default unspecified value
-	TransactionStatus_TRANSACTION_STATUS_UNSPECIFIED TransactionStatus = 0
-	// Transaction is in progress
-	TransactionStatus_TRANSACTION_STATUS_PROCESSING TransactionStatus = 1
-	// Transaction completed successfully
-	TransactionStatus_TRANSACTION_STATUS_SUCCESSFUL TransactionStatus = 2
-	// Transaction failed to complete
-	TransactionStatus_TRANSACTION_STATUS_FAILED TransactionStatus = 3
-)
-
-// Enum value maps for TransactionStatus.
-var (
-	TransactionStatus_name = map[int32]string{
-		0: "TRANSACTION_STATUS_UNSPECIFIED",
-		1: "TRANSACTION_STATUS_PROCESSING",
-		2: "TRANSACTION_STATUS_SUCCESSFUL",
-		3: "TRANSACTION_STATUS_FAILED",
-	}
-	TransactionStatus_value = map[string]int32{
-		"TRANSACTION_STATUS_UNSPECIFIED": 0,
-		"TRANSACTION_STATUS_PROCESSING":  1,
-		"TRANSACTION_STATUS_SUCCESSFUL":  2,
-		"TRANSACTION_STATUS_FAILED":      3,
-	}
-)
-
-func (x TransactionStatus) Enum() *TransactionStatus {
-	p := new(TransactionStatus)
-	*p = x
-	return p
-}
-
-func (x TransactionStatus) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (TransactionStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_backoffice_service_v1_backoffice_payment_proto_enumTypes[1].Descriptor()
-}
-
-func (TransactionStatus) Type() protoreflect.EnumType {
-	return &file_backoffice_service_v1_backoffice_payment_proto_enumTypes[1]
-}
-
-func (x TransactionStatus) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use TransactionStatus.Descriptor instead.
-func (TransactionStatus) EnumDescriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{1}
-}
-
-// Sort enum
-// Defines sort direction for queries
-type Sort int32
-
-const (
-	// Sort in descending order (newest first)
-	Sort_DESC Sort = 0
-	// Sort in ascending order (oldest first)
-	Sort_ASC Sort = 1
-)
-
-// Enum value maps for Sort.
-var (
-	Sort_name = map[int32]string{
-		0: "DESC",
-		1: "ASC",
-	}
-	Sort_value = map[string]int32{
-		"DESC": 0,
-		"ASC":  1,
-	}
-)
-
-func (x Sort) Enum() *Sort {
-	p := new(Sort)
-	*p = x
-	return p
-}
-
-func (x Sort) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Sort) Descriptor() protoreflect.EnumDescriptor {
-	return file_backoffice_service_v1_backoffice_payment_proto_enumTypes[2].Descriptor()
-}
-
-func (Sort) Type() protoreflect.EnumType {
-	return &file_backoffice_service_v1_backoffice_payment_proto_enumTypes[2]
-}
-
-func (x Sort) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use Sort.Descriptor instead.
-func (Sort) EnumDescriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{2}
-}
 
 // Request to get payment transaction page
 // Used to retrieve a paginated list of payment transactions with optional filters
@@ -206,9 +47,9 @@ type GetPaymentTransactionPageRequest struct {
 	// Optional protocol filter
 	Protocol string `protobuf:"bytes,9,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Optional transaction type filter
-	Type TransactionType `protobuf:"varint,10,opt,name=type,proto3,enum=api.backoffice.service.v1.TransactionType" json:"type,omitempty"`
-	// Optional status filter
-	Status TransactionStatus `protobuf:"varint,11,opt,name=status,proto3,enum=api.backoffice.service.v1.TransactionStatus" json:"status,omitempty"`
+	Type v1.TransactionType `protobuf:"varint,10,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
+	// Optional status filter，使用 payment 模块中的 TransactionStatus 枚举
+	Status v1.TransactionStatus `protobuf:"varint,11,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
 	// Optional agent filter
 	Agent string `protobuf:"bytes,12,opt,name=agent,proto3" json:"agent,omitempty"`
 	// Optional start time for date range filter
@@ -216,7 +57,7 @@ type GetPaymentTransactionPageRequest struct {
 	// Optional end time for date range filter
 	EndTime *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	// Optional sort direction
-	Sort          Sort `protobuf:"varint,15,opt,name=sort,proto3,enum=api.backoffice.service.v1.Sort" json:"sort,omitempty"`
+	Sort          v1.Sort `protobuf:"varint,15,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -314,18 +155,18 @@ func (x *GetPaymentTransactionPageRequest) GetProtocol() string {
 	return ""
 }
 
-func (x *GetPaymentTransactionPageRequest) GetType() TransactionType {
+func (x *GetPaymentTransactionPageRequest) GetType() v1.TransactionType {
 	if x != nil {
 		return x.Type
 	}
-	return TransactionType_TRANSACTION_TYPE_DEPOSIT
+	return v1.TransactionType(0)
 }
 
-func (x *GetPaymentTransactionPageRequest) GetStatus() TransactionStatus {
+func (x *GetPaymentTransactionPageRequest) GetStatus() v1.TransactionStatus {
 	if x != nil {
 		return x.Status
 	}
-	return TransactionStatus_TRANSACTION_STATUS_UNSPECIFIED
+	return v1.TransactionStatus(0)
 }
 
 func (x *GetPaymentTransactionPageRequest) GetAgent() string {
@@ -349,11 +190,11 @@ func (x *GetPaymentTransactionPageRequest) GetEndTime() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *GetPaymentTransactionPageRequest) GetSort() Sort {
+func (x *GetPaymentTransactionPageRequest) GetSort() v1.Sort {
 	if x != nil {
 		return x.Sort
 	}
-	return Sort_DESC
+	return v1.Sort(0)
 }
 
 // Response for payment transaction page
@@ -488,8 +329,8 @@ type GetPaymentTransactionPageResponse_PaymentTransaction struct {
 	PaymentChannel string `protobuf:"bytes,8,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
 	// Protocol used for the transaction
 	Protocol string `protobuf:"bytes,9,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	// Current status of the transaction
-	Status TransactionStatus `protobuf:"varint,10,opt,name=status,proto3,enum=api.backoffice.service.v1.TransactionStatus" json:"status,omitempty"`
+	// Current status of the transaction，使用 payment 模块中的 TransactionStatus 枚举
+	Status v1.TransactionStatus `protobuf:"varint,10,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
 	// Unique identifier for the transaction
 	TransactionId int64 `protobuf:"varint,11,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	// Transaction ID from the payment gateway
@@ -591,11 +432,11 @@ func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetProtocol() str
 	return ""
 }
 
-func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetStatus() TransactionStatus {
+func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetStatus() v1.TransactionStatus {
 	if x != nil {
 		return x.Status
 	}
-	return TransactionStatus_TRANSACTION_STATUS_UNSPECIFIED
+	return v1.TransactionStatus(0)
 }
 
 func (x *GetPaymentTransactionPageResponse_PaymentTransaction) GetTransactionId() int64 {
@@ -616,7 +457,7 @@ var File_backoffice_service_v1_backoffice_payment_proto protoreflect.FileDescrip
 
 const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a payment/service/v1/payment.proto\"\xff\x04\n" +
+	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a payment/service/v1/payment.proto\"\xea\x04\n" +
 	" GetPaymentTransactionPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12%\n" +
@@ -627,15 +468,15 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12%\n" +
 	"\x0epayment_method\x18\a \x01(\tR\rpaymentMethod\x12'\n" +
 	"\x0fpayment_channel\x18\b \x01(\tR\x0epaymentChannel\x12\x1a\n" +
-	"\bprotocol\x18\t \x01(\tR\bprotocol\x12>\n" +
+	"\bprotocol\x18\t \x01(\tR\bprotocol\x127\n" +
 	"\x04type\x18\n" +
-	" \x01(\x0e2*.api.backoffice.service.v1.TransactionTypeR\x04type\x12D\n" +
-	"\x06status\x18\v \x01(\x0e2,.api.backoffice.service.v1.TransactionStatusR\x06status\x12\x14\n" +
+	" \x01(\x0e2#.payment.service.v1.TransactionTypeR\x04type\x12=\n" +
+	"\x06status\x18\v \x01(\x0e2%.payment.service.v1.TransactionStatusR\x06status\x12\x14\n" +
 	"\x05agent\x18\f \x01(\tR\x05agent\x129\n" +
 	"\n" +
 	"start_time\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x123\n" +
-	"\x04sort\x18\x0f \x01(\x0e2\x1f.api.backoffice.service.v1.SortR\x04sort\"\x85\a\n" +
+	"\bend_time\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12,\n" +
+	"\x04sort\x18\x0f \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\"\xfe\x06\n" +
 	"!GetPaymentTransactionPageResponse\x12\x82\x01\n" +
 	"\x14payment_transactions\x18\x01 \x03(\v2O.api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransactionR\x13paymentTransactions\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
@@ -646,7 +487,7 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"totalPages\x12)\n" +
 	"\x10total_successful\x18\x06 \x01(\x05R\x0ftotalSuccessful\x12)\n" +
 	"\x10total_processing\x18\a \x01(\x05R\x0ftotalProcessing\x12!\n" +
-	"\ftotal_failed\x18\b \x01(\x05R\vtotalFailed\x1a\xee\x03\n" +
+	"\ftotal_failed\x18\b \x01(\x05R\vtotalFailed\x1a\xe7\x03\n" +
 	"\x12PaymentTransaction\x12\x1a\n" +
 	"\boperator\x18\x01 \x01(\tR\boperator\x129\n" +
 	"\n" +
@@ -658,22 +499,11 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\x06amount\x18\x06 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\a \x01(\tR\bcurrency\x12'\n" +
 	"\x0fpayment_channel\x18\b \x01(\tR\x0epaymentChannel\x12\x1a\n" +
-	"\bprotocol\x18\t \x01(\tR\bprotocol\x12D\n" +
+	"\bprotocol\x18\t \x01(\tR\bprotocol\x12=\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e2,.api.backoffice.service.v1.TransactionStatusR\x06status\x12%\n" +
+	" \x01(\x0e2%.payment.service.v1.TransactionStatusR\x06status\x12%\n" +
 	"\x0etransaction_id\x18\v \x01(\x03R\rtransactionId\x12*\n" +
-	"\x11pa_transaction_id\x18\f \x01(\tR\x0fpaTransactionId*N\n" +
-	"\x0fTransactionType\x12\x1c\n" +
-	"\x18TRANSACTION_TYPE_DEPOSIT\x10\x00\x12\x1d\n" +
-	"\x19TRANSACTION_TYPE_WITHDRAW\x10\x01*\x9c\x01\n" +
-	"\x11TransactionStatus\x12\"\n" +
-	"\x1eTRANSACTION_STATUS_UNSPECIFIED\x10\x00\x12!\n" +
-	"\x1dTRANSACTION_STATUS_PROCESSING\x10\x01\x12!\n" +
-	"\x1dTRANSACTION_STATUS_SUCCESSFUL\x10\x02\x12\x1d\n" +
-	"\x19TRANSACTION_STATUS_FAILED\x10\x03*\x19\n" +
-	"\x04Sort\x12\b\n" +
-	"\x04DESC\x10\x00\x12\a\n" +
-	"\x03ASC\x10\x012\xe0\x01\n" +
+	"\x11pa_transaction_id\x18\f \x01(\tR\x0fpaTransactionId2\xe0\x01\n" +
 	"\x11BackofficePayment\x12\xca\x01\n" +
 	"\x19GetPaymentTransactionPage\x12;.api.backoffice.service.v1.GetPaymentTransactionPageRequest\x1a<.api.backoffice.service.v1.GetPaymentTransactionPageResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/payment/transaction/pageB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
@@ -690,29 +520,28 @@ func file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_payment_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_backoffice_service_v1_backoffice_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_backoffice_service_v1_backoffice_payment_proto_goTypes = []any{
-	(TransactionType)(0),                      // 0: api.backoffice.service.v1.TransactionType
-	(TransactionStatus)(0),                    // 1: api.backoffice.service.v1.TransactionStatus
-	(Sort)(0),                                 // 2: api.backoffice.service.v1.Sort
-	(*GetPaymentTransactionPageRequest)(nil),  // 3: api.backoffice.service.v1.GetPaymentTransactionPageRequest
-	(*GetPaymentTransactionPageResponse)(nil), // 4: api.backoffice.service.v1.GetPaymentTransactionPageResponse
-	(*GetPaymentTransactionPageResponse_PaymentTransaction)(nil), // 5: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction
-	(*timestamppb.Timestamp)(nil),                                // 6: google.protobuf.Timestamp
+	(*GetPaymentTransactionPageRequest)(nil),                     // 0: api.backoffice.service.v1.GetPaymentTransactionPageRequest
+	(*GetPaymentTransactionPageResponse)(nil),                    // 1: api.backoffice.service.v1.GetPaymentTransactionPageResponse
+	(*GetPaymentTransactionPageResponse_PaymentTransaction)(nil), // 2: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction
+	(v1.TransactionType)(0),                                      // 3: payment.service.v1.TransactionType
+	(v1.TransactionStatus)(0),                                    // 4: payment.service.v1.TransactionStatus
+	(*timestamppb.Timestamp)(nil),                                // 5: google.protobuf.Timestamp
+	(v1.Sort)(0),                                                 // 6: payment.service.v1.Sort
 }
 var file_backoffice_service_v1_backoffice_payment_proto_depIdxs = []int32{
-	0,  // 0: api.backoffice.service.v1.GetPaymentTransactionPageRequest.type:type_name -> api.backoffice.service.v1.TransactionType
-	1,  // 1: api.backoffice.service.v1.GetPaymentTransactionPageRequest.status:type_name -> api.backoffice.service.v1.TransactionStatus
-	6,  // 2: api.backoffice.service.v1.GetPaymentTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
-	6,  // 3: api.backoffice.service.v1.GetPaymentTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
-	2,  // 4: api.backoffice.service.v1.GetPaymentTransactionPageRequest.sort:type_name -> api.backoffice.service.v1.Sort
-	5,  // 5: api.backoffice.service.v1.GetPaymentTransactionPageResponse.payment_transactions:type_name -> api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction
-	6,  // 6: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 7: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction.updated_at:type_name -> google.protobuf.Timestamp
-	1,  // 8: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction.status:type_name -> api.backoffice.service.v1.TransactionStatus
-	3,  // 9: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:input_type -> api.backoffice.service.v1.GetPaymentTransactionPageRequest
-	4,  // 10: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:output_type -> api.backoffice.service.v1.GetPaymentTransactionPageResponse
+	3,  // 0: api.backoffice.service.v1.GetPaymentTransactionPageRequest.type:type_name -> payment.service.v1.TransactionType
+	4,  // 1: api.backoffice.service.v1.GetPaymentTransactionPageRequest.status:type_name -> payment.service.v1.TransactionStatus
+	5,  // 2: api.backoffice.service.v1.GetPaymentTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
+	5,  // 3: api.backoffice.service.v1.GetPaymentTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
+	6,  // 4: api.backoffice.service.v1.GetPaymentTransactionPageRequest.sort:type_name -> payment.service.v1.Sort
+	2,  // 5: api.backoffice.service.v1.GetPaymentTransactionPageResponse.payment_transactions:type_name -> api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction
+	5,  // 6: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction.created_at:type_name -> google.protobuf.Timestamp
+	5,  // 7: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction.updated_at:type_name -> google.protobuf.Timestamp
+	4,  // 8: api.backoffice.service.v1.GetPaymentTransactionPageResponse.PaymentTransaction.status:type_name -> payment.service.v1.TransactionStatus
+	0,  // 9: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:input_type -> api.backoffice.service.v1.GetPaymentTransactionPageRequest
+	1,  // 10: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:output_type -> api.backoffice.service.v1.GetPaymentTransactionPageResponse
 	10, // [10:11] is the sub-list for method output_type
 	9,  // [9:10] is the sub-list for method input_type
 	9,  // [9:9] is the sub-list for extension type_name
@@ -730,14 +559,13 @@ func file_backoffice_service_v1_backoffice_payment_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_payment_proto_rawDesc), len(file_backoffice_service_v1_backoffice_payment_proto_rawDesc)),
-			NumEnums:      3,
+			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_backoffice_service_v1_backoffice_payment_proto_goTypes,
 		DependencyIndexes: file_backoffice_service_v1_backoffice_payment_proto_depIdxs,
-		EnumInfos:         file_backoffice_service_v1_backoffice_payment_proto_enumTypes,
 		MessageInfos:      file_backoffice_service_v1_backoffice_payment_proto_msgTypes,
 	}.Build()
 	File_backoffice_service_v1_backoffice_payment_proto = out.File

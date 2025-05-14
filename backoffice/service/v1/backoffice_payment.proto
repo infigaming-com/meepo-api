@@ -23,38 +23,6 @@ service BackofficePayment {
     }
 }
 
-// 定义枚举类型，与payment模块保持一致
-// Transaction type enum
-// Defines the direction of money flow
-enum TransactionType {
-  // Money incoming to platform
-  TRANSACTION_TYPE_DEPOSIT = 0;
-  // Money outgoing from platform
-  TRANSACTION_TYPE_WITHDRAW = 1;
-}
-
-// Transaction status enum
-// Defines possible states of a transaction
-enum TransactionStatus {
-  // Default unspecified value
-  TRANSACTION_STATUS_UNSPECIFIED = 0;
-  // Transaction is in progress
-  TRANSACTION_STATUS_PROCESSING = 1;
-  // Transaction completed successfully
-  TRANSACTION_STATUS_SUCCESSFUL = 2;
-  // Transaction failed to complete
-  TRANSACTION_STATUS_FAILED = 3;
-}
-
-// Sort enum
-// Defines sort direction for queries
-enum Sort {
-  // Sort in descending order (newest first)
-  DESC = 0;
-  // Sort in ascending order (oldest first)
-  ASC = 1;
-}
-
 // Request to get payment transaction page
 // Used to retrieve a paginated list of payment transactions with optional filters
 message GetPaymentTransactionPageRequest {
@@ -78,9 +46,9 @@ message GetPaymentTransactionPageRequest {
   // Optional protocol filter
   string protocol = 9;
   // Optional transaction type filter
-  TransactionType type = 10;
+  payment.service.v1.TransactionType type = 10;
   // Optional status filter
-  TransactionStatus status = 11;
+  payment.service.v1.TransactionStatus status = 11;
   // Optional agent filter
   string agent = 12;
   // Optional start time for date range filter
@@ -88,7 +56,7 @@ message GetPaymentTransactionPageRequest {
   // Optional end time for date range filter
   google.protobuf.Timestamp end_time = 14 [json_name="endTime"];
   // Optional sort direction
-  Sort sort = 15 [json_name="sort"];
+  payment.service.v1.Sort sort = 15 [json_name="sort"];
 }
 
 // Response for payment transaction page
@@ -116,7 +84,7 @@ message GetPaymentTransactionPageResponse {
 		// Protocol used for the transaction
 		string protocol = 9;
 		// Current status of the transaction
-		TransactionStatus status = 10;
+		payment.service.v1.TransactionStatus status = 10;
 		// Unique identifier for the transaction
 		int64 transaction_id = 11 [json_name="transactionId"];
 		// Transaction ID from the payment gateway

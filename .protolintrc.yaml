@@ -1,0 +1,10 @@
+protoc:
+  imports:
+    - .
+    - ./third_party
+
+lint:
+  rules:
+    all_default: true
+    except:
+      - IMPORT_NOT_FOUND 
