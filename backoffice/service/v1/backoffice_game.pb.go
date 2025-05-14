@@ -1783,11 +1783,12 @@ func (*UpdateGameResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListProvidersResponse_Provider struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProviderId    string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
-	ProviderName  string                 `protobuf:"bytes,2,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
-	GameCount     *int32                 `protobuf:"varint,3,opt,name=game_count,json=gameCount,proto3,oneof" json:"game_count,omitempty"`
-	Enabled       bool                   `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	ProviderId   string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	ProviderName string                 `protobuf:"bytes,2,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
+	// Only available when include_game_count is true
+	GameCount     *int32 `protobuf:"varint,3,opt,name=game_count,json=gameCount,proto3,oneof" json:"game_count,omitempty"`
+	Enabled       bool   `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

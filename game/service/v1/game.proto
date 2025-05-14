@@ -18,12 +18,22 @@ service Game {
 	rpc DeleteOperator(DeleteOperatorRequest) returns (DeleteOperatorResponse) {
 	};
 
+	rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse) {}
+
 	rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse) {
 		option (google.api.http) = {
 			post: "/v1/game/categories/list"
 			body: "*"
 		};
 	};
+
+	rpc ListFeeGroups(ListFeeGroupsRequest) returns (ListFeeGroupsResponse) {}
+
+	rpc ListTags(ListTagsRequest) returns (ListTagsResponse) {}
+
+	rpc ListThemes(ListThemesRequest) returns (ListThemesResponse) {}
+
+	rpc ListCurrencies(ListCurrenciesRequest) returns (ListCurrenciesResponse) {}
 
 	rpc ListGames(ListGamesRequest) returns (ListGamesResponse) {
 		option (google.api.http) = {
@@ -140,10 +150,51 @@ message GameSort {
 	Field field = 1;
 }
 
+message ListProvidersRequest {
+	// Include game count in response, false by default.
+	// Only enable it for ListProviders page which game_count is needed
+	optional bool include_game_count = 1;
+}
+
+message ListProvidersResponse {
+	message Provider {
+		string provider_id = 1;
+		string provider_name = 2;
+		// Only available when include_game_count is true
+		optional int32 game_count = 3;
+		bool enabled = 4;
+	}
+	repeated Provider providers = 1;
+}
+
 message ListCategoriesRequest{}
 
 message ListCategoriesResponse {
 	repeated string categories = 1;
+}
+
+message ListFeeGroupsRequest {}
+
+message ListFeeGroupsResponse {
+	repeated string fee_groups = 1;
+}
+
+message ListTagsRequest {}
+
+message ListTagsResponse {
+	repeated string tags = 1;
+}
+
+message ListThemesRequest {}
+
+message ListThemesResponse {
+	repeated string themes = 1;
+}
+
+message ListCurrenciesRequest {}
+
+message ListCurrenciesResponse {
+	repeated string currencies = 1;
 }
 
 message ListGamesRequest {

@@ -94,6 +94,7 @@ message ListProvidersResponse {
 	message Provider {
 		string provider_id = 1;
 		string provider_name = 2;
+		// Only available when include_game_count is true
 		optional int32 game_count = 3;
 		bool enabled = 4;
 	}

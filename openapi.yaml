@@ -3478,6 +3478,7 @@ components:
                     type: string
                 gameCount:
                     type: integer
+                    description: Only available when include_game_count is true
                     format: int32
                 enabled:
                     type: boolean
