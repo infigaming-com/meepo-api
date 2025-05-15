@@ -172,7 +172,7 @@ message GetUserOverviewResponse {
 	bool more_than_2_deposits = 26;
 	bool account_older_than_3_months = 27;
 	google.protobuf.Timestamp last_deposit_at = 28;	// ?? Is this time since last deposit
-	bool first_deposit_on_today = 29;
+	bool first_withdraw_on_today = 29;
 }
 
 message GetUserProfileRequest {

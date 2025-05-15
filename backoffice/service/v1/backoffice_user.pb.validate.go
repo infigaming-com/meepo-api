@@ -654,7 +654,7 @@ func (m *GetUserOverviewResponse) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for FirstDepositOnToday
+	// no validation rules for FirstWithdrawOnToday
 
 	if len(errors) > 0 {
 		return GetUserOverviewResponseMultiError(errors)

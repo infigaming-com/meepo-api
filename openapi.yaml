@@ -2570,7 +2570,7 @@ components:
                 lastDepositAt:
                     type: string
                     format: date-time
-                firstDepositOnToday:
+                firstWithdrawOnToday:
                     type: boolean
         api.backoffice.service.v1.GetUserOverviewResponse_GameData:
             type: object
