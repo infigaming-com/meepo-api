@@ -1311,6 +1311,10 @@ func (m *ListBetsRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.GameName != nil {
+		// no validation rules for GameName
+	}
+
 	if m.GameId != nil {
 		// no validation rules for GameId
 	}
@@ -1319,12 +1323,12 @@ func (m *ListBetsRequest) validate(all bool) error {
 		// no validation rules for UserId
 	}
 
-	if m.OperatorTransactionId != nil {
-		// no validation rules for OperatorTransactionId
+	if m.OperatorBetId != nil {
+		// no validation rules for OperatorBetId
 	}
 
-	if m.ProviderTransactionId != nil {
-		// no validation rules for ProviderTransactionId
+	if m.ProviderBetId != nil {
+		// no validation rules for ProviderBetId
 	}
 
 	if m.StartTime != nil {

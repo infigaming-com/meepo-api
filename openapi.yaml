@@ -2923,17 +2923,15 @@ components:
                     type: array
                     items:
                         type: string
-                gameNames:
-                    type: array
-                    items:
-                        type: string
+                gameName:
+                    type: string
                 gameId:
                     type: string
                 userId:
                     type: string
-                operatorTransactionId:
+                operatorBetId:
                     type: string
-                providerTransactionId:
+                providerBetId:
                     type: string
                 startTime:
                     type: string
@@ -4324,17 +4322,23 @@ components:
         api.game.service.v1.ListBetsRequest:
             type: object
             properties:
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameName:
+                    type: string
+                gameId:
+                    type: string
                 userId:
                     type: string
-                categories:
-                    type: array
-                    items:
-                        type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                status:
+                operatorBetId:
+                    type: string
+                providerBetId:
                     type: string
                 startTime:
                     type: string
@@ -4342,6 +4346,24 @@ components:
                 endTime:
                     type: string
                     format: date-time
+                minBetAmount:
+                    type: string
+                maxBetAmount:
+                    type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                settlementCurrencies:
+                    type: array
+                    items:
+                        type: string
+                categories:
+                    type: array
+                    items:
+                        type: string
+                status:
+                    type: string
                 page:
                     type: string
                 pageSize:

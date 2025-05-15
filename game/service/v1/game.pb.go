@@ -2146,17 +2146,26 @@ func (x *RollbackTransactions) GetProcessedAt() string {
 }
 
 type ListBetsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Categories    []string               `protobuf:"bytes,2,rep,name=categories,proto3" json:"categories,omitempty"`
-	Currencies    []string               `protobuf:"bytes,3,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Status        *string                `protobuf:"bytes,4,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime       *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page          *int64                 `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int64                 `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	OperatorIds          []int64                `protobuf:"varint,1,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
+	ProviderIds          []string               `protobuf:"bytes,2,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
+	GameName             *string                `protobuf:"bytes,3,opt,name=game_name,json=gameName,proto3,oneof" json:"game_name,omitempty"`
+	GameId               *string                `protobuf:"bytes,4,opt,name=game_id,json=gameId,proto3,oneof" json:"game_id,omitempty"`
+	UserId               *int64                 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	OperatorBetId        *int64                 `protobuf:"varint,6,opt,name=operator_bet_id,json=operatorBetId,proto3,oneof" json:"operator_bet_id,omitempty"`
+	ProviderBetId        *string                `protobuf:"bytes,7,opt,name=provider_bet_id,json=providerBetId,proto3,oneof" json:"provider_bet_id,omitempty"`
+	StartTime            *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime              *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	MinBetAmount         *int64                 `protobuf:"varint,10,opt,name=min_bet_amount,json=minBetAmount,proto3,oneof" json:"min_bet_amount,omitempty"`
+	MaxBetAmount         *int64                 `protobuf:"varint,11,opt,name=max_bet_amount,json=maxBetAmount,proto3,oneof" json:"max_bet_amount,omitempty"`
+	Currencies           []string               `protobuf:"bytes,12,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	SettlementCurrencies []string               `protobuf:"bytes,13,rep,name=settlement_currencies,json=settlementCurrencies,proto3" json:"settlement_currencies,omitempty"`
+	Categories           []string               `protobuf:"bytes,14,rep,name=categories,proto3" json:"categories,omitempty"`
+	Status               *string                `protobuf:"bytes,15,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Page                 *int64                 `protobuf:"varint,16,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize             *int64                 `protobuf:"varint,17,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListBetsRequest) Reset() {
@@ -2189,30 +2198,51 @@ func (*ListBetsRequest) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{31}
 }
 
-func (x *ListBetsRequest) GetUserId() int64 {
+func (x *ListBetsRequest) GetOperatorIds() []int64 {
 	if x != nil {
-		return x.UserId
+		return x.OperatorIds
+	}
+	return nil
+}
+
+func (x *ListBetsRequest) GetProviderIds() []string {
+	if x != nil {
+		return x.ProviderIds
+	}
+	return nil
+}
+
+func (x *ListBetsRequest) GetGameName() string {
+	if x != nil && x.GameName != nil {
+		return *x.GameName
+	}
+	return ""
+}
+
+func (x *ListBetsRequest) GetGameId() string {
+	if x != nil && x.GameId != nil {
+		return *x.GameId
+	}
+	return ""
+}
+
+func (x *ListBetsRequest) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
 	}
 	return 0
 }
 
-func (x *ListBetsRequest) GetCategories() []string {
-	if x != nil {
-		return x.Categories
+func (x *ListBetsRequest) GetOperatorBetId() int64 {
+	if x != nil && x.OperatorBetId != nil {
+		return *x.OperatorBetId
 	}
-	return nil
+	return 0
 }
 
-func (x *ListBetsRequest) GetCurrencies() []string {
-	if x != nil {
-		return x.Currencies
-	}
-	return nil
-}
-
-func (x *ListBetsRequest) GetStatus() string {
-	if x != nil && x.Status != nil {
-		return *x.Status
+func (x *ListBetsRequest) GetProviderBetId() string {
+	if x != nil && x.ProviderBetId != nil {
+		return *x.ProviderBetId
 	}
 	return ""
 }
@@ -2229,6 +2259,48 @@ func (x *ListBetsRequest) GetEndTime() *timestamppb.Timestamp {
 		return x.EndTime
 	}
 	return nil
+}
+
+func (x *ListBetsRequest) GetMinBetAmount() int64 {
+	if x != nil && x.MinBetAmount != nil {
+		return *x.MinBetAmount
+	}
+	return 0
+}
+
+func (x *ListBetsRequest) GetMaxBetAmount() int64 {
+	if x != nil && x.MaxBetAmount != nil {
+		return *x.MaxBetAmount
+	}
+	return 0
+}
+
+func (x *ListBetsRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
+func (x *ListBetsRequest) GetSettlementCurrencies() []string {
+	if x != nil {
+		return x.SettlementCurrencies
+	}
+	return nil
+}
+
+func (x *ListBetsRequest) GetCategories() []string {
+	if x != nil {
+		return x.Categories
+	}
+	return nil
+}
+
+func (x *ListBetsRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
 }
 
 func (x *ListBetsRequest) GetPage() int64 {
@@ -2929,24 +3001,45 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x14RollbackTransactions\x12\x15\n" +
 	"\x06txn_id\x18\x01 \x01(\tR\x05txnId\x12&\n" +
 	"\x0foperator_txn_id\x18\x02 \x01(\tR\roperatorTxnId\x12!\n" +
-	"\fprocessed_at\x18\x03 \x01(\tR\vprocessedAt\"\xfc\x02\n" +
-	"\x0fListBetsRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1e\n" +
+	"\fprocessed_at\x18\x03 \x01(\tR\vprocessedAt\"\xe0\x06\n" +
+	"\x0fListBetsRequest\x12!\n" +
+	"\foperator_ids\x18\x01 \x03(\x03R\voperatorIds\x12!\n" +
+	"\fprovider_ids\x18\x02 \x03(\tR\vproviderIds\x12 \n" +
+	"\tgame_name\x18\x03 \x01(\tH\x00R\bgameName\x88\x01\x01\x12\x1c\n" +
+	"\agame_id\x18\x04 \x01(\tH\x01R\x06gameId\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x05 \x01(\x03H\x02R\x06userId\x88\x01\x01\x12+\n" +
+	"\x0foperator_bet_id\x18\x06 \x01(\x03H\x03R\roperatorBetId\x88\x01\x01\x12+\n" +
+	"\x0fprovider_bet_id\x18\a \x01(\tH\x04R\rproviderBetId\x88\x01\x01\x12>\n" +
 	"\n" +
-	"categories\x18\x02 \x03(\tR\n" +
-	"categories\x12\x1e\n" +
+	"start_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x05R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\x06R\aendTime\x88\x01\x01\x12)\n" +
+	"\x0emin_bet_amount\x18\n" +
+	" \x01(\x03H\aR\fminBetAmount\x88\x01\x01\x12)\n" +
+	"\x0emax_bet_amount\x18\v \x01(\x03H\bR\fmaxBetAmount\x88\x01\x01\x12\x1e\n" +
 	"\n" +
-	"currencies\x18\x03 \x03(\tR\n" +
-	"currencies\x12\x1b\n" +
-	"\x06status\x18\x04 \x01(\tH\x00R\x06status\x88\x01\x01\x12>\n" +
+	"currencies\x18\f \x03(\tR\n" +
+	"currencies\x123\n" +
+	"\x15settlement_currencies\x18\r \x03(\tR\x14settlementCurrencies\x12\x1e\n" +
 	"\n" +
-	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\a \x01(\x03H\x03R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\b \x01(\x03H\x04R\bpageSize\x88\x01\x01B\t\n" +
-	"\a_statusB\r\n" +
+	"categories\x18\x0e \x03(\tR\n" +
+	"categories\x12\x1b\n" +
+	"\x06status\x18\x0f \x01(\tH\tR\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x10 \x01(\x03H\n" +
+	"R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x11 \x01(\x03H\vR\bpageSize\x88\x01\x01B\f\n" +
+	"\n" +
+	"_game_nameB\n" +
+	"\n" +
+	"\b_game_idB\n" +
+	"\n" +
+	"\b_user_idB\x12\n" +
+	"\x10_operator_bet_idB\x12\n" +
+	"\x10_provider_bet_idB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_timeB\a\n" +
+	"\t_end_timeB\x11\n" +
+	"\x0f_min_bet_amountB\x11\n" +
+	"\x0f_max_bet_amountB\t\n" +
+	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\x87\x01\n" +

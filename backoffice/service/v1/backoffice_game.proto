@@ -127,11 +127,11 @@ message ListCurrenciesResponse {
 message ListBetsRequest {
 	repeated int64 operator_ids = 1;
 	repeated string provider_ids = 2;
-	repeated string game_names = 3;
+	optional string game_name = 3;
 	optional string game_id = 4;
 	optional int64 user_id = 5;
-	optional int64 operator_transaction_id = 6;
-	optional string provider_transaction_id = 7;
+	optional int64 operator_bet_id = 6;
+	optional string provider_bet_id = 7;
 	optional google.protobuf.Timestamp start_time = 8;
 	optional google.protobuf.Timestamp end_time = 9;
 	optional int64 min_bet_amount = 10;
