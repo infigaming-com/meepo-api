@@ -9,7 +9,7 @@ on:
   # 当main分支有推送时触发
   push:
     branches:
-      - main
+      - '*'
     paths:
       - '**/*error_reason.proto'
 
