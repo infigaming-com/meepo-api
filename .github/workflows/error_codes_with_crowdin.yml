@@ -28,7 +28,7 @@ jobs:
 
           # 下载翻译
           crowdin download sources --no-progress
-      
+
       # 3. 设置Python环境
       - name: 设置Python
         uses: actions/setup-python@v4
