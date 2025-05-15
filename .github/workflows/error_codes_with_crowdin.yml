@@ -3,6 +3,9 @@ name: 生成错误码JSON文件
 on:
   # 手动触发
   workflow_dispatch:
+  push:
+    branches:
+      - dev/payment-service
 
 jobs:
   generate-error-codes:
