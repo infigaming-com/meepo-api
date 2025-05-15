@@ -256,14 +256,12 @@ enum TransactionType {
 // Transaction status enum
 // Defines possible states of a transaction
 enum TransactionStatus {
-  // Default unspecified value
-  TRANSACTION_STATUS_UNSPECIFIED = 0;
   // Transaction is in progress
-  TRANSACTION_STATUS_PROCESSING = 1;
+  TRANSACTION_STATUS_PROCESSING = 0;
   // Transaction completed successfully
-  TRANSACTION_STATUS_SUCCESSFUL = 2;
+  TRANSACTION_STATUS_SUCCESSFUL = 1;
   // Transaction failed to complete
-  TRANSACTION_STATUS_FAILED = 3;
+  TRANSACTION_STATUS_FAILED = 2;
 }
 
 // Sort enum
@@ -326,6 +324,13 @@ message TransactionInfo {
   google.protobuf.Timestamp created_at = 14 [json_name="createdAt"];
   // Timestamp when the transaction was last updated
   google.protobuf.Timestamp updated_at = 15 [json_name="updatedAt"];
+}
+
+message TransactionDetail {
+  // Transaction information
+  TransactionInfo transaction = 1;
+  // Channel information
+  PaymentChannelInfo channel = 2;
 }
 
 // Request to get transaction page
@@ -431,6 +436,22 @@ message GetPaymentChannelPageResponse {
   int32 total_pages = 5 [json_name="totalPages"];
 }
 
+// Request to get transaction detail by ID
+// Used to retrieve detailed information about a specific transaction
+message GetTransactionDetailByIdRequest {
+  // Unique identifier for the transaction
+  int64 transaction_id = 1 [json_name="transactionId"];
+  // Source of the request (frontend or admin)
+  RequestSource source = 2 [json_name="source"];
+}
+
+// Response for transaction detail
+// Contains detailed information about the requested transaction
+message GetTransactionDetailByIdResponse {
+  // Detailed transaction information including channel data
+  TransactionDetail detail = 1;
+}
+
 // Payment Service
 // Provides methods for managing payment methods, channels, and transactions
 service Payment {
@@ -512,6 +533,16 @@ service Payment {
   rpc GetPaymentChannelPage(GetPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) {
     option (google.api.http) = {
       post: "/v1/payment/channel/page"
+      body: "*"
+    };
+  }
+
+  // Get transaction detail
+  // Retrieves detailed information about a specific transaction
+  // Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+  rpc GetTransactionDetailById(GetTransactionDetailByIdRequest) returns (GetTransactionDetailByIdResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/transaction/detail"
       body: "*"
     };
   }
