@@ -3687,10 +3687,24 @@ func (m *ListBetsRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for UserId
+	if m.GameName != nil {
+		// no validation rules for GameName
+	}
 
-	if m.Status != nil {
-		// no validation rules for Status
+	if m.GameId != nil {
+		// no validation rules for GameId
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.OperatorBetId != nil {
+		// no validation rules for OperatorBetId
+	}
+
+	if m.ProviderBetId != nil {
+		// no validation rules for ProviderBetId
 	}
 
 	if m.StartTime != nil {
@@ -3757,6 +3771,18 @@ func (m *ListBetsRequest) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.MinBetAmount != nil {
+		// no validation rules for MinBetAmount
+	}
+
+	if m.MaxBetAmount != nil {
+		// no validation rules for MaxBetAmount
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
 	}
 
 	if m.Page != nil {
