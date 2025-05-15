@@ -335,8 +335,8 @@ message ListBetsRequest {
 	optional google.protobuf.Timestamp end_time = 9;
 	optional int64 min_bet_amount = 10;
 	optional int64 max_bet_amount = 11;
-	repeated string currencies = 12;
-	repeated string settlement_currencies = 13;
+	repeated string currencies = 12; // For bet history, don't use this field. Use this in backoffice for amount currency.
+	repeated string settlement_currencies = 13; // For bet history, it's the currency of the bet. Use this in backoffice for bet settlement currency.
 	repeated string categories = 14;
 	optional string status = 15;
 	optional int64 page = 16;

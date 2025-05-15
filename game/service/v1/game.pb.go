@@ -2158,8 +2158,8 @@ type ListBetsRequest struct {
 	EndTime              *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	MinBetAmount         *int64                 `protobuf:"varint,10,opt,name=min_bet_amount,json=minBetAmount,proto3,oneof" json:"min_bet_amount,omitempty"`
 	MaxBetAmount         *int64                 `protobuf:"varint,11,opt,name=max_bet_amount,json=maxBetAmount,proto3,oneof" json:"max_bet_amount,omitempty"`
-	Currencies           []string               `protobuf:"bytes,12,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	SettlementCurrencies []string               `protobuf:"bytes,13,rep,name=settlement_currencies,json=settlementCurrencies,proto3" json:"settlement_currencies,omitempty"`
+	Currencies           []string               `protobuf:"bytes,12,rep,name=currencies,proto3" json:"currencies,omitempty"`                                                 // For bet history, don't use this field. Use this in backoffice for amount currency.
+	SettlementCurrencies []string               `protobuf:"bytes,13,rep,name=settlement_currencies,json=settlementCurrencies,proto3" json:"settlement_currencies,omitempty"` // For bet history, it's the currency of the bet. Use this in backoffice for bet settlement currency.
 	Categories           []string               `protobuf:"bytes,14,rep,name=categories,proto3" json:"categories,omitempty"`
 	Status               *string                `protobuf:"bytes,15,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	Page                 *int64                 `protobuf:"varint,16,opt,name=page,proto3,oneof" json:"page,omitempty"`
