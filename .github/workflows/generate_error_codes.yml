@@ -9,7 +9,7 @@ on:
   # 当main分支有推送时触发
   push:
     branches:
-      - '*'
+      - main
     paths:
       - '**/*error_reason.proto'
 
@@ -22,7 +22,8 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v3
         with:
-          ref: main
+          # 对于手动触发的workflow，使用当前分支；对于自动触发的，使用main分支
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || 'main' }}
           fetch-depth: 1
       
       # 2. 设置Python环境
