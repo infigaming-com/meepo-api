@@ -1,0 +1,50 @@
+#
+# Basic Crowdin CLI configuration
+# See https://crowdin.github.io/crowdin-cli/configuration for more information
+# See https://support.crowdin.com/developer/configuration-file/ for all available options
+#
+
+#
+# Your Crowdin credentials
+#
+"project_id": "789048"
+"api_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ3UUVxdmhVM3ZMT2EyWGljbVV5VCIsImp0aSI6Ijk5NzZlODkyZTI1YjA0OTRjYzBjNTA2ZjVjM2Q1YWRlNDVmNGFhMDQyMzdkYjBjYWMzMzRlM2Q4NDFkOWEwMjc5NDUwYjEyZjdmOTAxNDJmIiwiaWF0IjoxNzQ1Mzg3NDQyLjE3MDg3MywibmJmIjoxNzQ1Mzg3NDQyLjE3MDg3NiwiZXhwIjoxNzc2OTIzNDQyLjEwODgxNCwic3ViIjoiMTcwMjM2ODYiLCJzY29wZXMiOlsicHJvamVjdCJdLCJkb21haW4iOm51bGwsImFzc29jaWF0aW9ucyI6WyIqIl0sImxvZ2luX21ldGhvZCI6bnVsbCwic2Vzc2lvbiI6MH0.YFa4i10zD9--9AsnK-afuQbw9EsNiQRteoW1OP_2PpwxJIjjJFTFMLig1Xdq9LANAn6kcO4oeHVWy9Q4-SYA1wzUf2Q8NI8cIGHkSF9Jw-Hvlu4sbcR3t2kipWnJ1GLUi8WuHkN0ggEghwxIxBf2gYXpSNDPrNR2d96VWR0HMPL8VWzhZt933CI3mZmNG_--z0urI9XW4fWj0VfvT3yzuYFdrcIj_HoAEFCph4ie8fEcCOg0cruTqHtlzGcGZsGAtec7-72L-1emNVhmPe8QkSbfUXvHWsiXiMvoCvK7fDd0dlWTlTr0uproP89yXRAvlxzUBt4Fdu4giNPEszR99iZ_vPcQgBZOemY_qfFk3zLO7bT2kEdB8az8Y279y7gwB5wsM6NBiTIavr0aWCRfkb1lftsq1nlQD43mzLAqblWre0BVdsev-EFsDSZXsCNLGl4epzudJMX2PxsdFf6Rf9cvsYRdMqIBpEo6F_UkpdTtbLZAVgst3Fs_v-iYHnjDebX3NH7aZ2cmd116Ntmtk9iTm55LtXCCvJ0OV2msohFUlk6M4pJVmQE2Pw91RAZS1YjZXNbnn4RQ8ZvjBBdiT4TZ63-n_0l6q7BrFsyQHEW0Bm-6t6jFbHIsWBKr-nD2RXKtcIORC-ECN8_Npkra_tiSr6lK1V9QhdqYPsH0wfw"
+"base_path": "."
+"base_url": "https://api.crowdin.com"
+
+#
+# Defines whether to preserve the original directory structure in the Crowdin project
+# Recommended to set to true
+#
+"preserve_hierarchy": true
+
+#
+# Files configuration.
+# See https://support.crowdin.com/developer/configuration-file/ for all available options
+#
+files: [
+  {
+    #
+    # Source files filter
+    # e.g. "/resources/en/*.json"
+    #
+    "source": "locales/en/*.json",
+
+    #
+    # Translation files filter
+    # e.g. "/resources/%two_letters_code%/%original_file_name%"
+    #
+    "translation": "locales/%two_letters_code%/%original_file_name%",
+    
+    # Content segmentation
+    "content_segmentation": false,
+    
+    # Translatable elements
+    "translatable_elements": [
+      "texts"
+    ],
+    
+    # File type
+    "type": "json"
+  }
+]

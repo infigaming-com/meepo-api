@@ -1,0 +1,55 @@
+name: 生成错误码JSON文件
+
+on:
+  # 手动触发
+  workflow_dispatch:
+  # 当PR合并到main分支时触发
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-error-codes:
+    runs-on: ubuntu-latest
+    
+    # 只有当PR被合并时才执行
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
+    
+    steps:
+      # 1. 检出仓库代码
+      - name: 检出代码
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          fetch-depth: 1
+
+      # 2. 从Crowdin下载最新翻译
+      - name: 从Crowdin下载最新翻译
+        run: |
+          # 安装Crowdin CLI
+          curl -L https://artifacts.crowdin.com/repo/deb/crowdin3.deb -o crowdin.deb
+          sudo dpkg -i crowdin.deb
+
+          # 下载翻译
+          crowdin download sources --no-progress
+
+      # 3. 设置Python环境
+      - name: 设置Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      # 4. 执行脚本生成错误码JSON
+      - name: 生成错误码JSON
+        run: python3 scripts/extract_error_codes.py
+
+      # 5. 上传错误码JSON到Crowdin
+      - name: 上传错误码JSON到Crowdin
+        run: |
+          # 上传错误码JSON
+          crowdin upload sources --no-progress
+
