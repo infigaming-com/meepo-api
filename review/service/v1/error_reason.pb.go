@@ -41,6 +41,8 @@ const (
 	ErrorReason_LOCK_TICKET_FAILED                        ErrorReason = 70012
 	ErrorReason_UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED ErrorReason = 70013
 	ErrorReason_MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED  ErrorReason = 70014
+	ErrorReason_FREEZE_BALANCE_FAILED                     ErrorReason = 70015
+	ErrorReason_ROLLBACK_FREEZE_FAILED                    ErrorReason = 70016
 )
 
 // Enum value maps for ErrorReason.
@@ -62,6 +64,8 @@ var (
 		70012: "LOCK_TICKET_FAILED",
 		70013: "UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED",
 		70014: "MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED",
+		70015: "FREEZE_BALANCE_FAILED",
+		70016: "ROLLBACK_FREEZE_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                               0,
@@ -80,6 +84,8 @@ var (
 		"LOCK_TICKET_FAILED":                        70012,
 		"UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED": 70013,
 		"MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED":  70014,
+		"FREEZE_BALANCE_FAILED":                     70015,
+		"ROLLBACK_FREEZE_FAILED":                    70016,
 	}
 )
 
@@ -114,7 +120,7 @@ var File_review_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\x8e\x04\n" +
+	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\xc9\x04\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCONVERT_STRUCT_TO_JSON_FAILED\x10\xf0\xa2\x04\x12#\n" +
@@ -131,7 +137,9 @@ const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\x13GET_COMMENTS_FAILED\x10\xfb\xa2\x04\x12\x18\n" +
 	"\x12LOCK_TICKET_FAILED\x10\xfc\xa2\x04\x12/\n" +
 	")UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED\x10\xfd\xa2\x04\x12.\n" +
-	"(MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED\x10\xfe\xa2\x04\x1a\x04\xa0E\xf4\x03BS\n" +
+	"(MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED\x10\xfe\xa2\x04\x12\x1b\n" +
+	"\x15FREEZE_BALANCE_FAILED\x10\xff\xa2\x04\x12\x1c\n" +
+	"\x16ROLLBACK_FREEZE_FAILED\x10\x80\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"
 
 var (
