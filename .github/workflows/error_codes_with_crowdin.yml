@@ -42,5 +42,6 @@ jobs:
           skip_untranslated_files: true
           export_only_approved: false
         env:
+          GITHUB_TOKEN: ${{ vars.GH_PAT }}
           CROWDIN_PROJECT_ID: ${{ vars.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ vars.CROWDIN_PERSONAL_TOKEN }}
