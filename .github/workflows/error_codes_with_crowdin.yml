@@ -37,10 +37,7 @@ jobs:
           sudo dpkg -i crowdin.deb
 
           # 下载翻译
-          crowdin download \
-            --branch dev/payment-service \
-            --skip-untranslated-files \
-            --no-progress
+          crowdin download
           
           # 列出下载的翻译文件
           echo "已下载的翻译文件列表："
