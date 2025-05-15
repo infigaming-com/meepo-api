@@ -202,3 +202,27 @@ func IsMarshalPaymentWithdrawResponseFailed(err error) bool {
 func ErrorMarshalPaymentWithdrawResponseFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsFreezeBalanceFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FREEZE_BALANCE_FAILED.String() && e.Code == 500
+}
+
+func ErrorFreezeBalanceFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FREEZE_BALANCE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsRollbackFreezeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ROLLBACK_FREEZE_FAILED.String() && e.Code == 500
+}
+
+func ErrorRollbackFreezeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ROLLBACK_FREEZE_FAILED.String(), fmt.Sprintf(format, args...))
+}
