@@ -18,18 +18,8 @@ jobs:
         with:
           ref: dev/payment-service
           fetch-depth: 1
-      
-      # 2. 设置Python环境
-      - name: 设置Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-      
-      # 3. 执行脚本生成错误码JSON
-      - name: 生成错误码JSON
-        run: python3 scripts/extract_error_codes.py
 
-      # 4. 从Crowdin下载最新翻译
+      # 2. 从Crowdin下载最新翻译
       - name: 从Crowdin下载最新翻译
         run: |
           # 安装Crowdin CLI
@@ -37,8 +27,21 @@ jobs:
           sudo dpkg -i crowdin.deb
 
           # 下载翻译
-          crowdin download
-          
-          # 列出下载的翻译文件
-          echo "已下载的翻译文件列表："
-          find . -type f -name "*.json" | grep -v "node_modules" | sort
+          crowdin download sources --no-progress
+      
+      # 3. 设置Python环境
+      - name: 设置Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      # 4. 执行脚本生成错误码JSON
+      - name: 生成错误码JSON
+        run: python3 scripts/extract_error_codes.py
+
+      # 5. 上传错误码JSON到Crowdin
+      - name: 上传错误码JSON到Crowdin
+        run: |
+          # 上传错误码JSON
+          crowdin upload sources --no-progress
+

@@ -36,6 +36,11 @@ def extract_error_codes(file_path):
     
     return error_codes
 
+# 确保目录存在
+def ensure_dir_exists(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
 # 主函数
 def main():
     all_error_codes = {}
@@ -51,15 +56,33 @@ def main():
     # 按错误码排序
     sorted_error_codes = {str(k): v for k, v in sorted(all_error_codes.items())}
     
-    # 输出为JSON格式
-    print(json.dumps(sorted_error_codes, indent=2))
+    # 定义local目录和错误码文件路径
+    local_dir = os.path.join(root_dir, "local", "en")
+    error_codes_file = os.path.join(local_dir, "error_codes.json")
+    
+    # 确保local目录存在
+    ensure_dir_exists(local_dir)
+    
+    # 读取已存在的错误码文件（如果存在）
+    existing_error_codes = {}
+    if os.path.exists(error_codes_file):
+        try:
+            with open(error_codes_file, 'r') as f:
+                existing_error_codes = json.load(f)
+            print(f"已读取现有错误码文件: {error_codes_file}")
+        except Exception as e:
+            print(f"读取现有错误码文件失败: {str(e)}")
+    
+    # 合并错误码，优先保留已存在的数据
+    merged_error_codes = sorted_error_codes.copy()
+    for code, message in existing_error_codes.items():
+        merged_error_codes[code] = message  # 已存在的错误码优先
     
     # 保存到文件
-    output_path = os.path.join(root_dir, 'error_codes.json')
-    with open(output_path, 'w') as f:
-        json.dump(sorted_error_codes, f, indent=2)
+    with open(error_codes_file, 'w', encoding='utf-8') as f:
+        json.dump(merged_error_codes, f, indent=2, ensure_ascii=False)
     
-    print(f"已提取 {len(sorted_error_codes)} 个错误码并保存到 error_codes.json")
+    print(f"已生成错误码文件: {error_codes_file}")
 
 if __name__ == "__main__":
     main() 
