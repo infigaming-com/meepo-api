@@ -3,15 +3,6 @@ name: 生成错误码JSON文件
 on:
   # 手动触发
   workflow_dispatch:
-  # 定时任务，每周一早上8点执行
-  schedule:
-    - cron: '0 0 * * 1'
-  # 当main分支有推送时触发
-  push:
-    branches:
-      - main
-    paths:
-      - '**/*error_reason.proto'
 
 jobs:
   generate-error-codes:
@@ -22,8 +13,7 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v3
         with:
-          # 对于手动触发的workflow，使用当前分支；对于自动触发的，使用main分支
-          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || 'main' }}
+          ref: main
           fetch-depth: 1
       
       # 2. 设置Python环境
