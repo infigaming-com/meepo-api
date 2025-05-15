@@ -377,7 +377,7 @@ type GetUserOverviewResponse struct {
 	MoreThan_2Deposits       bool                                `protobuf:"varint,26,opt,name=more_than_2_deposits,json=moreThan2Deposits,proto3" json:"more_than_2_deposits,omitempty"`
 	AccountOlderThan_3Months bool                                `protobuf:"varint,27,opt,name=account_older_than_3_months,json=accountOlderThan3Months,proto3" json:"account_older_than_3_months,omitempty"`
 	LastDepositAt            *timestamppb.Timestamp              `protobuf:"bytes,28,opt,name=last_deposit_at,json=lastDepositAt,proto3" json:"last_deposit_at,omitempty"` // ?? Is this time since last deposit
-	FirstDepositOnToday      bool                                `protobuf:"varint,29,opt,name=first_deposit_on_today,json=firstDepositOnToday,proto3" json:"first_deposit_on_today,omitempty"`
+	FirstWithdrawOnToday     bool                                `protobuf:"varint,29,opt,name=first_withdraw_on_today,json=firstWithdrawOnToday,proto3" json:"first_withdraw_on_today,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -608,9 +608,9 @@ func (x *GetUserOverviewResponse) GetLastDepositAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *GetUserOverviewResponse) GetFirstDepositOnToday() bool {
+func (x *GetUserOverviewResponse) GetFirstWithdrawOnToday() bool {
 	if x != nil {
-		return x.FirstDepositOnToday
+		return x.FirstWithdrawOnToday
 	}
 	return false
 }
@@ -2092,7 +2092,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x06device\x18\x17 \x01(\tR\x06device\x12\x16\n" +
 	"\x06source\x18\x18 \x01(\tR\x06source\x12'\n" +
 	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\"\x18\n" +
-	"\x16GetUserOverviewRequest\"\xd6\n" +
+	"\x16GetUserOverviewRequest\"\xd8\n" +
 	"\n" +
 	"\x17GetUserOverviewResponse\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\tR\abalance\x124\n" +
@@ -2123,8 +2123,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x19has_1x_deposits_before_wd\x18\x19 \x01(\bR\x15has1xDepositsBeforeWd\x12/\n" +
 	"\x14more_than_2_deposits\x18\x1a \x01(\bR\x11moreThan2Deposits\x12<\n" +
 	"\x1baccount_older_than_3_months\x18\x1b \x01(\bR\x17accountOlderThan3Months\x12B\n" +
-	"\x0flast_deposit_at\x18\x1c \x01(\v2\x1a.google.protobuf.TimestampR\rlastDepositAt\x123\n" +
-	"\x16first_deposit_on_today\x18\x1d \x01(\bR\x13firstDepositOnToday\x1ag\n" +
+	"\x0flast_deposit_at\x18\x1c \x01(\v2\x1a.google.protobuf.TimestampR\rlastDepositAt\x125\n" +
+	"\x17first_withdraw_on_today\x18\x1d \x01(\bR\x14firstWithdrawOnToday\x1ag\n" +
 	"\bGameData\x12\x1b\n" +
 	"\tgame_type\x18\x01 \x01(\tR\bgameType\x12\x10\n" +
 	"\x03ggr\x18\x02 \x01(\tR\x03ggr\x12\x1a\n" +
