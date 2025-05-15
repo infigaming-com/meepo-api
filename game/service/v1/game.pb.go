@@ -2320,9 +2320,13 @@ func (x *ListBetsRequest) GetPageSize() int64 {
 type ListBetsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Bets          []*Bet                 `protobuf:"bytes,1,rep,name=bets,proto3" json:"bets,omitempty"`
-	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	Page          int64                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int64                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Turnover      string                 `protobuf:"bytes,2,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	WinAmount     string                 `protobuf:"bytes,3,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	BetCount      int32                  `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	RtpPercentage int32                  `protobuf:"varint,5,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"` // value is multiplied by 100 to show 2 decimal places (e.g. 9850 means 98.50%)
+	Total         int64                  `protobuf:"varint,6,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int64                  `protobuf:"varint,7,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int64                  `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2362,6 +2366,34 @@ func (x *ListBetsResponse) GetBets() []*Bet {
 		return x.Bets
 	}
 	return nil
+}
+
+func (x *ListBetsResponse) GetTurnover() string {
+	if x != nil {
+		return x.Turnover
+	}
+	return ""
+}
+
+func (x *ListBetsResponse) GetWinAmount() string {
+	if x != nil {
+		return x.WinAmount
+	}
+	return ""
+}
+
+func (x *ListBetsResponse) GetBetCount() int32 {
+	if x != nil {
+		return x.BetCount
+	}
+	return 0
+}
+
+func (x *ListBetsResponse) GetRtpPercentage() int32 {
+	if x != nil {
+		return x.RtpPercentage
+	}
+	return 0
 }
 
 func (x *ListBetsResponse) GetTotal() int64 {
@@ -3042,12 +3074,17 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x87\x01\n" +
+	"_page_size\"\x86\x02\n" +
 	"\x10ListBetsResponse\x12,\n" +
-	"\x04bets\x18\x01 \x03(\v2\x18.api.game.service.v1.BetR\x04bets\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
-	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x03R\bpageSize\"\xa3\a\n" +
+	"\x04bets\x18\x01 \x03(\v2\x18.api.game.service.v1.BetR\x04bets\x12\x1a\n" +
+	"\bturnover\x18\x02 \x01(\tR\bturnover\x12\x1d\n" +
+	"\n" +
+	"win_amount\x18\x03 \x01(\tR\twinAmount\x12\x1b\n" +
+	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12%\n" +
+	"\x0ertp_percentage\x18\x05 \x01(\x05R\rrtpPercentage\x12\x14\n" +
+	"\x05total\x18\x06 \x01(\x03R\x05total\x12\x12\n" +
+	"\x04page\x18\a \x01(\x03R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\b \x01(\x03R\bpageSize\"\xa3\a\n" +
 	"\x03Bet\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12&\n" +
 	"\x0fprovider_bet_id\x18\x02 \x01(\tR\rproviderBetId\x12\x19\n" +
