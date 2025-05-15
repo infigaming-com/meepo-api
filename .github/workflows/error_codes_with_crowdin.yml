@@ -30,18 +30,18 @@ jobs:
         run: python3 scripts/extract_error_codes.py
 
       # 4. 从Crowdin下载最新翻译
-      - name: Download Translations from Crowdin
-        uses: crowdin/github-action@v2
-        with:
-          upload_sources: false
-          upload_translations: false
-          download_translations: true
-          localization_branch_name: dev/payment-service
-          create_pull_request: false
-          commit_message: 'Update translations from Crowdin [skip ci]'
-          skip_untranslated_files: true
-          export_only_approved: false
-        env:
-          GITHUB_TOKEN: ${{ vars.GH_PAT }}
-          CROWDIN_PROJECT_ID: ${{ vars.CROWDIN_PROJECT_ID }}
-          CROWDIN_PERSONAL_TOKEN: ${{ vars.CROWDIN_PERSONAL_TOKEN }}
+      - name: 从Crowdin下载最新翻译
+        run: |
+          # 安装Crowdin CLI
+          curl -L https://artifacts.crowdin.com/repo/deb/crowdin3.deb -o crowdin.deb
+          sudo dpkg -i crowdin.deb
+
+          # 下载翻译
+          crowdin download \
+            --branch dev/payment-service \
+            --skip-untranslated-files \
+            --no-progress
+          
+          # 列出下载的翻译文件
+          echo "已下载的翻译文件列表："
+          find . -type f -name "*.json" | grep -v "node_modules" | sort
