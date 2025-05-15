@@ -370,14 +370,16 @@ message Bet {
 	string game_id = 13;
 	string game_name = 14;
 	string game_category = 15;
-	string bet_amount = 16;
-	string valid_bet_amount = 17;
-	string settlement_bet_amount = 18;
-	string win_amount = 19;
-	string settlement_win_amount = 20;
-	string odds = 21;
-	string rollback_bet_amount = 22;
-	string rollback_win_amount = 23;
-	google.protobuf.Timestamp created_at = 24;
-	google.protobuf.Timestamp updated_at = 25;
+	int32 win_count = 16;
+	string bet_amount = 17;
+	string valid_bet_amount = 18;
+	string settlement_bet_amount = 19;
+	string win_amount = 20;
+	string settlement_win_amount = 21;
+	string turnover = 22;
+	string odds = 23;
+	string rollback_bet_amount = 24;
+	string rollback_win_amount = 25;
+	google.protobuf.Timestamp created_at = 26;
+	google.protobuf.Timestamp updated_at = 27;
 }

@@ -4070,6 +4070,8 @@ func (m *Bet) validate(all bool) error {
 
 	// no validation rules for GameCategory
 
+	// no validation rules for WinCount
+
 	// no validation rules for BetAmount
 
 	// no validation rules for ValidBetAmount
@@ -4079,6 +4081,8 @@ func (m *Bet) validate(all bool) error {
 	// no validation rules for WinAmount
 
 	// no validation rules for SettlementWinAmount
+
+	// no validation rules for Turnover
 
 	// no validation rules for Odds
 

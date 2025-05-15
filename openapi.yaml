@@ -4053,6 +4053,9 @@ components:
                     type: string
                 gameCategory:
                     type: string
+                winCount:
+                    type: integer
+                    format: int32
                 betAmount:
                     type: string
                 validBetAmount:
@@ -4062,6 +4065,8 @@ components:
                 winAmount:
                     type: string
                 settlementWinAmount:
+                    type: string
+                turnover:
                     type: string
                 odds:
                     type: string
