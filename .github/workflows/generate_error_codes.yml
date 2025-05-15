@@ -1,0 +1,36 @@
+name: 生成错误码JSON文件
+
+on:
+  # 手动触发
+  workflow_dispatch:
+  # 定时任务，每周一早上8点执行
+  schedule:
+    - cron: '0 0 * * 1'
+  # 当main分支有推送时触发
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*error_reason.proto'
+
+jobs:
+  generate-error-codes:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. 检出仓库代码
+      - name: 检出代码
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          fetch-depth: 1
+      
+      # 2. 设置Python环境
+      - name: 设置Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      # 3. 执行脚本生成错误码JSON
+      - name: 生成错误码JSON
+        run: python3 scripts/extract_error_codes.py
