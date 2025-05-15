@@ -4375,6 +4375,16 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.game.service.v1.Bet'
+                turnover:
+                    type: string
+                winAmount:
+                    type: string
+                betCount:
+                    type: integer
+                    format: int32
+                rtpPercentage:
+                    type: integer
+                    format: int32
                 total:
                     type: string
                 page:

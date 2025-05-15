@@ -3927,6 +3927,14 @@ func (m *ListBetsResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for Turnover
+
+	// no validation rules for WinAmount
+
+	// no validation rules for BetCount
+
+	// no validation rules for RtpPercentage
+
 	// no validation rules for Total
 
 	// no validation rules for Page
