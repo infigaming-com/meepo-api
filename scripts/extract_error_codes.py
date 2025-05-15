@@ -57,7 +57,7 @@ def main():
     sorted_error_codes = {str(k): v for k, v in sorted(all_error_codes.items())}
     
     # 定义local目录和错误码文件路径
-    local_dir = os.path.join(root_dir, "local", "en")
+    local_dir = os.path.join(root_dir, "locales", "en")
     error_codes_file = os.path.join(local_dir, "error_codes.json")
     
     # 确保local目录存在
