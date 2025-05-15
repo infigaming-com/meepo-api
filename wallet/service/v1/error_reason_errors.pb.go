@@ -442,3 +442,27 @@ func IsGetCreditsByIdsFailed(err error) bool {
 func ErrorGetCreditsByIdsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_CREDITS_BY_IDS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetCreditByIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_CREDIT_BY_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCreditByIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_CREDIT_BY_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetExchangeRateFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_EXCHANGE_RATE_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetExchangeRateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_EXCHANGE_RATE_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -4014,6 +4014,14 @@ func (m *Bet) validate(all bool) error {
 
 	// no validation rules for ProviderRoundId
 
+	// no validation rules for ProviderId
+
+	// no validation rules for ProviderName
+
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorName
+
 	// no validation rules for Currency
 
 	// no validation rules for SettlementCurrency
@@ -4030,11 +4038,15 @@ func (m *Bet) validate(all bool) error {
 
 	// no validation rules for BetAmount
 
+	// no validation rules for ValidBetAmount
+
 	// no validation rules for SettlementBetAmount
 
 	// no validation rules for WinAmount
 
 	// no validation rules for SettlementWinAmount
+
+	// no validation rules for Odds
 
 	// no validation rules for RollbackBetAmount
 

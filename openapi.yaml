@@ -711,16 +711,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
-    /v1/backoffice/review/withdraw-review-tickets/list:
+    /v1/backoffice/review/tickets/list:
         post:
             tags:
                 - BackofficeReview
-            operationId: BackofficeReview_ListWithdrawReviewTickets
+            operationId: BackofficeReview_ListTickets
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawReviewTicketsRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsRequest'
                 required: true
             responses:
                 "200":
@@ -728,7 +728,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawReviewTicketsResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse'
     /v1/backoffice/user/comments/add:
         post:
             tags:
@@ -1379,78 +1379,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawResponse'
-    /v1/review/approve:
-        post:
-            tags:
-                - Review
-            operationId: Review_ApproveReview
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.review.service.v1.ApproveReviewRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.review.service.v1.ApproveReviewResponse'
-    /v1/review/comment:
-        post:
-            tags:
-                - Review
-            operationId: Review_AddReviewComment
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.review.service.v1.AddReviewCommentRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.review.service.v1.AddReviewCommentResponse'
-    /v1/review/get:
-        post:
-            tags:
-                - Review
-            operationId: Review_GetReview
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.review.service.v1.GetReviewRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.review.service.v1.GetReviewResponse'
-    /v1/review/list:
-        post:
-            tags:
-                - Review
-            operationId: Review_ListReviews
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.review.service.v1.ListReviewsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.review.service.v1.ListReviewsResponse'
     /v1/review/withdraw:
         post:
             tags:
@@ -3468,6 +3396,115 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListTicketsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                operatorId:
+                    type: string
+                ticketId:
+                    type: string
+                currency:
+                    type: string
+                status:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListTicketsResponse:
+            type: object
+            properties:
+                tickets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse_Ticket'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                totalCount:
+                    type: integer
+                    format: int32
+                totalAmount:
+                    type: string
+                totalPendingCount:
+                    type: integer
+                    format: int32
+                totalPendingAmount:
+                    type: string
+                totalPayingCount:
+                    type: integer
+                    format: int32
+                totalPayingAmount:
+                    type: string
+                totalPaidCount:
+                    type: integer
+                    format: int32
+                totalPaidAmount:
+                    type: string
+                totalFailedCount:
+                    type: integer
+                    format: int32
+                totalFailedAmount:
+                    type: string
+                totalRejectedCount:
+                    type: integer
+                    format: int32
+                totalRejectedAmount:
+                    type: string
+                averageReviewTime:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListTicketsResponse_Ticket:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    format: date-time
+                operator:
+                    type: string
+                ticketId:
+                    type: string
+                userId:
+                    type: string
+                vipLevel:
+                    type: integer
+                    format: int32
+                userTags:
+                    type: array
+                    items:
+                        type: string
+                beforeBalance:
+                    type: string
+                afterBalance:
+                    type: string
+                currency:
+                    type: string
+                paymentChannel:
+                    type: string
+                protocol:
+                    type: string
+                fee:
+                    type: string
+                status:
+                    type: string
+                reviewerUsername:
+                    type: string
+                reviewDuration:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListUserBetsRequest:
             type: object
             properties:
@@ -3825,85 +3862,6 @@ components:
                     format: int32
                 withdrawAmount:
                     type: string
-        api.backoffice.service.v1.ListWithdrawReviewTicketsRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                userId:
-                    type: string
-                reviewTicketId:
-                    type: string
-                currency:
-                    type: string
-                status:
-                    type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-                page:
-                    type: string
-                pageSize:
-                    type: string
-        api.backoffice.service.v1.ListWithdrawReviewTicketsResponse:
-            type: object
-            properties:
-                withdrawReviewTickets:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawReviewTicketsResponse_WithdrawReviewTicket'
-                page:
-                    type: string
-                pageSize:
-                    type: string
-                total:
-                    type: string
-                totalPending:
-                    type: string
-                totalPaying:
-                    type: string
-                totalPaid:
-                    type: string
-                totalFailed:
-                    type: string
-                totalRejected:
-                    type: string
-                averageReviewTime:
-                    type: string
-        api.backoffice.service.v1.ListWithdrawReviewTicketsResponse_WithdrawReviewTicket:
-            type: object
-            properties:
-                createdAt:
-                    type: string
-                    format: date-time
-                operator:
-                    type: string
-                reviewTicketId:
-                    type: string
-                category:
-                    type: string
-                vipLevel:
-                    type: integer
-                    format: int32
-                userTags:
-                    type: array
-                    items:
-                        type: string
-                beforeBalance:
-                    type: string
-                afterBalance:
-                    type: string
-                currency:
-                    type: string
-                paymentChannel:
-                    type: string
-                protocol:
-                    type: string
-                fee:
-                    type: string
         api.backoffice.service.v1.PaymentData_Data:
             type: object
             properties:
@@ -3922,11 +3880,11 @@ components:
         api.backoffice.service.v1.ReviewTicketRequest:
             type: object
             properties:
-                reviewTicketId:
+                ticketId:
                     type: string
                 reviewerUserId:
                     type: string
-                reviewAction:
+                action:
                     type: string
                 reviewComment:
                     type: string
@@ -4075,6 +4033,14 @@ components:
                     type: string
                 providerRoundId:
                     type: string
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
                 currency:
                     type: string
                 settlementCurrency:
@@ -4091,11 +4057,15 @@ components:
                     type: string
                 betAmount:
                     type: string
+                validBetAmount:
+                    type: string
                 settlementBetAmount:
                     type: string
                 winAmount:
                     type: string
                 settlementWinAmount:
+                    type: string
+                odds:
                     type: string
                 rollbackBetAmount:
                     type: string
@@ -4523,96 +4493,16 @@ components:
         api.operator.service.v1.UpdateOperatorResponse:
             type: object
             properties: {}
-        api.review.service.v1.AddReviewCommentRequest:
-            type: object
-            properties:
-                reviewId:
-                    type: string
-                authorUserId:
-                    type: string
-                content:
-                    type: string
-        api.review.service.v1.AddReviewCommentResponse:
-            type: object
-            properties: {}
-        api.review.service.v1.ApproveReviewRequest:
-            type: object
-            properties:
-                reviewId:
-                    type: string
-                action:
-                    enum:
-                        - REVIEW_ACTION_UNSPECIFIED
-                        - REVIEW_ACTION_APPROVE
-                        - REVIEW_ACTION_REJECT
-                        - REVIEW_ACTION_MANUAL_PAYOUT
-                    type: string
-                    format: enum
-                approveComment:
-                    type: string
-        api.review.service.v1.ApproveReviewResponse:
-            type: object
-            properties: {}
         api.review.service.v1.CreateWithdrawRequest:
             type: object
             properties:
-                withdrawRequestData:
+                request:
                     type: object
         api.review.service.v1.CreateWithdrawResponse:
             type: object
             properties:
-                withdrawResponseData:
-                    type: object
-        api.review.service.v1.GetReviewRequest:
-            type: object
-            properties:
-                reviewId:
+                ticketId:
                     type: string
-        api.review.service.v1.GetReviewResponse:
-            type: object
-            properties:
-                comments:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.review.service.v1.GetReviewResponse_Comment'
-        api.review.service.v1.GetReviewResponse_Comment:
-            type: object
-            properties:
-                authorUserName:
-                    type: string
-                content:
-                    type: string
-                createdAt:
-                    type: string
-                    format: date-time
-        api.review.service.v1.ListReviewsRequest:
-            type: object
-            properties:
-                reviewId:
-                    type: string
-                userId:
-                    type: string
-                operatorId:
-                    type: string
-                currency:
-                    type: string
-                status:
-                    type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.review.service.v1.ListReviewsResponse:
-            type: object
-            properties: {}
         api.user.service.v1.AddOperatorTagRequest:
             type: object
             properties:
