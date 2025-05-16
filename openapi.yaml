@@ -2271,13 +2271,17 @@ components:
             type: object
             properties:
                 visits:
-                    type: string
+                    type: integer
+                    format: int32
                 registeredUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 ftd:
-                    type: string
+                    type: integer
+                    format: int32
                 ftdConversionRate:
-                    type: string
+                    type: integer
+                    format: int32
                 depositAmount:
                     type: string
                 withdrawAmount:
@@ -2898,9 +2902,11 @@ components:
                     items:
                         type: string
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListDailySummariesResponse:
             type: object
             properties:
@@ -2909,37 +2915,48 @@ components:
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.ListDailySummariesResponse_DailySummary'
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
                 total:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListDailySummariesResponse_DailySummary:
             type: object
             properties:
                 date:
                     type: string
                     format: date-time
-                operator:
+                operatorName:
                     type: string
                 country:
                     type: string
                 visits:
-                    type: string
+                    type: integer
+                    format: int32
                 uniqueVisits:
-                    type: string
+                    type: integer
+                    format: int32
                 activeUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 registeredUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 depositedUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 ftdUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 repeatedDepositedUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 depositConversionRate:
-                    type: string
+                    type: integer
+                    format: int32
                 depositCount:
                     type: string
                 depositAmount:
@@ -2949,14 +2966,17 @@ components:
                 arppu:
                     type: string
                 averageFtdAmount:
+                    type: integer
+                    format: int32
+                withdrawalAmount:
                     type: string
-                withdrawAmount:
-                    type: string
-                withdrawedUsers:
-                    type: string
+                withdrawalUsers:
+                    type: integer
+                    format: int32
                 ftwUsers:
-                    type: string
-                averageWithdrawAmount:
+                    type: integer
+                    format: int32
+                averageWithdrawalAmount:
                     type: string
                 ftwAmount:
                     type: string
@@ -2989,9 +3009,9 @@ components:
                     type: string
                 depositFeeSubsidyAmount:
                     type: string
-                playerWithdrawFee:
+                playerWithdrawalFee:
                     type: string
-                operatorWithdrawFee:
+                operatorWithdrawalFee:
                     type: string
                 cashBalance:
                     type: string
