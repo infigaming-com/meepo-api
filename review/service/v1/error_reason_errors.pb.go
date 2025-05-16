@@ -250,3 +250,27 @@ func IsGetCurrenciesFailed(err error) bool {
 func ErrorGetCurrenciesFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_CURRENCIES_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidTicketStatus(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_TICKET_STATUS.String() && e.Code == 500
+}
+
+func ErrorInvalidTicketStatus(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_TICKET_STATUS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSettleFreezeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SETTLE_FREEZE_FAILED.String() && e.Code == 500
+}
+
+func ErrorSettleFreezeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SETTLE_FREEZE_FAILED.String(), fmt.Sprintf(format, args...))
+}
