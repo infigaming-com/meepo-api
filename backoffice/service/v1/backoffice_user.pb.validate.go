@@ -2106,8 +2106,6 @@ func (m *AddUserCommentRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
-	// no validation rules for AuthorUserId
-
 	// no validation rules for Content
 
 	if len(errors) > 0 {
@@ -2211,6 +2209,8 @@ func (m *AddUserCommentResponse) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for CommentId
 
 	if len(errors) > 0 {
 		return AddUserCommentResponseMultiError(errors)
@@ -3309,7 +3309,7 @@ func (m *ListUserCommentsResponse_Comment) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for AuthorUsername
+	// no validation rules for Author
 
 	// no validation rules for Content
 

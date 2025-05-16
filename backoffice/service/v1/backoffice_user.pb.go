@@ -1178,7 +1178,6 @@ func (*DeleteUserTagResponse) Descriptor() ([]byte, []int) {
 type AddUserCommentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	AuthorUserId  int64                  `protobuf:"varint,2,opt,name=author_user_id,json=authorUserId,proto3" json:"author_user_id,omitempty"`
 	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1221,13 +1220,6 @@ func (x *AddUserCommentRequest) GetUserId() int64 {
 	return 0
 }
 
-func (x *AddUserCommentRequest) GetAuthorUserId() int64 {
-	if x != nil {
-		return x.AuthorUserId
-	}
-	return 0
-}
-
 func (x *AddUserCommentRequest) GetContent() string {
 	if x != nil {
 		return x.Content
@@ -1237,6 +1229,7 @@ func (x *AddUserCommentRequest) GetContent() string {
 
 type AddUserCommentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	CommentId     int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1269,6 +1262,13 @@ func (x *AddUserCommentResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AddUserCommentResponse.ProtoReflect.Descriptor instead.
 func (*AddUserCommentResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *AddUserCommentResponse) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
 }
 
 type ListUserCommentsRequest struct {
@@ -1940,12 +1940,12 @@ func (x *GetUserProfileResponse_Comment) GetCreatedAt() *timestamppb.Timestamp {
 }
 
 type ListUserCommentsResponse_Comment struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	AuthorUsername string                 `protobuf:"bytes,1,opt,name=author_username,json=authorUsername,proto3" json:"author_username,omitempty"`
-	Content        string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Author        string                 `protobuf:"bytes,1,opt,name=author,proto3" json:"author,omitempty"`
+	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListUserCommentsResponse_Comment) Reset() {
@@ -1978,9 +1978,9 @@ func (*ListUserCommentsResponse_Comment) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{19, 0}
 }
 
-func (x *ListUserCommentsResponse_Comment) GetAuthorUsername() string {
+func (x *ListUserCommentsResponse_Comment) GetAuthor() string {
 	if x != nil {
-		return x.AuthorUsername
+		return x.Author
 	}
 	return ""
 }
@@ -2183,18 +2183,19 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x14DeleteUserTagRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x10\n" +
 	"\x03tag\x18\x02 \x01(\tR\x03tag\"\x17\n" +
-	"\x15DeleteUserTagResponse\"p\n" +
+	"\x15DeleteUserTagResponse\"J\n" +
 	"\x15AddUserCommentRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12$\n" +
-	"\x0eauthor_user_id\x18\x02 \x01(\x03R\fauthorUserId\x12\x18\n" +
-	"\acontent\x18\x03 \x01(\tR\acontent\"\x18\n" +
-	"\x16AddUserCommentResponse\"2\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
+	"\acontent\x18\x03 \x01(\tR\acontent\"7\n" +
+	"\x16AddUserCommentResponse\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId\"2\n" +
 	"\x17ListUserCommentsRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xfd\x01\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xeb\x01\n" +
 	"\x18ListUserCommentsResponse\x12W\n" +
-	"\bcomments\x18\x01 \x03(\v2;.api.backoffice.service.v1.ListUserCommentsResponse.CommentR\bcomments\x1a\x87\x01\n" +
-	"\aComment\x12'\n" +
-	"\x0fauthor_username\x18\x01 \x01(\tR\x0eauthorUsername\x12\x18\n" +
+	"\bcomments\x18\x01 \x03(\v2;.api.backoffice.service.v1.ListUserCommentsResponse.CommentR\bcomments\x1av\n" +
+	"\aComment\x12\x16\n" +
+	"\x06author\x18\x01 \x01(\tR\x06author\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt2\xa2\r\n" +
