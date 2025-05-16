@@ -2323,7 +2323,7 @@ type ListBetsResponse struct {
 	Turnover      string                 `protobuf:"bytes,2,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	WinAmount     string                 `protobuf:"bytes,3,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
 	BetCount      int32                  `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	RtpPercentage int32                  `protobuf:"varint,5,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"` // value is multiplied by 100 to show 2 decimal places (e.g. 9850 means 98.50%)
+	RtpPercentage int32                  `protobuf:"varint,5,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"` // value from 0 to 100
 	Total         int64                  `protobuf:"varint,6,opt,name=total,proto3" json:"total,omitempty"`
 	Page          int64                  `protobuf:"varint,7,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int64                  `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`

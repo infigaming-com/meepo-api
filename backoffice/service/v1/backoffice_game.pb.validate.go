@@ -1512,7 +1512,7 @@ func (m *Bet) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -1572,75 +1572,27 @@ func (m *Bet) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Category
+	// no validation rules for GameCategory
+
+	// no validation rules for GameName
 
 	// no validation rules for GameId
 
-	// no validation rules for Provider
+	// no validation rules for ProviderName
 
-	// no validation rules for OperatorTransactionId
+	// no validation rules for Id
 
-	// no validation rules for ProviderTransactionId
+	// no validation rules for ProviderBetId
 
 	// no validation rules for UserId
 
-	if all {
-		switch v := interface{}(m.GetBetAmount()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, BetValidationError{
-					field:  "BetAmount",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, BetValidationError{
-					field:  "BetAmount",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetBetAmount()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return BetValidationError{
-				field:  "BetAmount",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for BetAmount
 
-	if all {
-		switch v := interface{}(m.GetWinAmount()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, BetValidationError{
-					field:  "WinAmount",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, BetValidationError{
-					field:  "WinAmount",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetWinAmount()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return BetValidationError{
-				field:  "WinAmount",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for SettlementBetAmount
+
+	// no validation rules for WinAmount
+
+	// no validation rules for SettlementWinAmount
 
 	// no validation rules for Odds
 
@@ -1778,6 +1730,14 @@ func (m *ListBetsResponse) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for Turnover
+
+	// no validation rules for WinAmount
+
+	// no validation rules for BetCount
+
+	// no validation rules for RtpPercentage
 
 	// no validation rules for Page
 
@@ -3352,109 +3312,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListProvidersResponse_ProviderValidationError{}
-
-// Validate checks the field values on Bet_Amount with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *Bet_Amount) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on Bet_Amount with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in Bet_AmountMultiError, or
-// nil if none found.
-func (m *Bet_Amount) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *Bet_Amount) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for AmountInCurrency
-
-	// no validation rules for AmountInSettlementCurrency
-
-	if len(errors) > 0 {
-		return Bet_AmountMultiError(errors)
-	}
-
-	return nil
-}
-
-// Bet_AmountMultiError is an error wrapping multiple validation errors
-// returned by Bet_Amount.ValidateAll() if the designated constraints aren't met.
-type Bet_AmountMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m Bet_AmountMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m Bet_AmountMultiError) AllErrors() []error { return m }
-
-// Bet_AmountValidationError is the validation error returned by
-// Bet_Amount.Validate if the designated constraints aren't met.
-type Bet_AmountValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e Bet_AmountValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e Bet_AmountValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e Bet_AmountValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e Bet_AmountValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e Bet_AmountValidationError) ErrorName() string { return "Bet_AmountValidationError" }
-
-// Error satisfies the builtin error interface
-func (e Bet_AmountValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sBet_Amount.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = Bet_AmountValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = Bet_AmountValidationError{}
 
 // Validate checks the field values on
 // GetGameTransactionsForBetResponse_GameTransaction with the rules defined in
