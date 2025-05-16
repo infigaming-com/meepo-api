@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v4.25.6
-// source: websocket/service/v1/websocket_event.proto
+// source: push/service/v1/push_event.proto
 
 package v1
 
@@ -31,7 +31,7 @@ type EventRequest struct {
 
 func (x *EventRequest) Reset() {
 	*x = EventRequest{}
-	mi := &file_websocket_service_v1_websocket_event_proto_msgTypes[0]
+	mi := &file_push_service_v1_push_event_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *EventRequest) String() string {
 func (*EventRequest) ProtoMessage() {}
 
 func (x *EventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_websocket_service_v1_websocket_event_proto_msgTypes[0]
+	mi := &file_push_service_v1_push_event_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *EventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventRequest.ProtoReflect.Descriptor instead.
 func (*EventRequest) Descriptor() ([]byte, []int) {
-	return file_websocket_service_v1_websocket_event_proto_rawDescGZIP(), []int{0}
+	return file_push_service_v1_push_event_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *EventRequest) GetSubscriptionId() string {
@@ -81,7 +81,7 @@ type EventResponse struct {
 
 func (x *EventResponse) Reset() {
 	*x = EventResponse{}
-	mi := &file_websocket_service_v1_websocket_event_proto_msgTypes[1]
+	mi := &file_push_service_v1_push_event_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -93,7 +93,7 @@ func (x *EventResponse) String() string {
 func (*EventResponse) ProtoMessage() {}
 
 func (x *EventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_websocket_service_v1_websocket_event_proto_msgTypes[1]
+	mi := &file_push_service_v1_push_event_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -106,43 +106,43 @@ func (x *EventResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventResponse.ProtoReflect.Descriptor instead.
 func (*EventResponse) Descriptor() ([]byte, []int) {
-	return file_websocket_service_v1_websocket_event_proto_rawDescGZIP(), []int{1}
+	return file_push_service_v1_push_event_proto_rawDescGZIP(), []int{1}
 }
 
-var File_websocket_service_v1_websocket_event_proto protoreflect.FileDescriptor
+var File_push_service_v1_push_event_proto protoreflect.FileDescriptor
 
-const file_websocket_service_v1_websocket_event_proto_rawDesc = "" +
+const file_push_service_v1_push_event_proto_rawDesc = "" +
 	"\n" +
-	"*websocket/service/v1/websocket_event.proto\x12\x18api.websocket.service.v1\"V\n" +
+	" push/service/v1/push_event.proto\x12\x13api.push.service.v1\"V\n" +
 	"\fEventRequest\x12'\n" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse2l\n" +
-	"\x0eWebsocketEvent\x12Z\n" +
-	"\x05Event\x12&.api.websocket.service.v1.EventRequest\x1a'.api.websocket.service.v1.EventResponse\"\x00BY\n" +
-	"\x18api.websocket.service.v1P\x01Z;github.com/infigaming-com/meepo-api/websocket/service/v1;v1b\x06proto3"
+	"\rEventResponse2]\n" +
+	"\tPushEvent\x12P\n" +
+	"\x05Event\x12!.api.push.service.v1.EventRequest\x1a\".api.push.service.v1.EventResponse\"\x00BO\n" +
+	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
 
 var (
-	file_websocket_service_v1_websocket_event_proto_rawDescOnce sync.Once
-	file_websocket_service_v1_websocket_event_proto_rawDescData []byte
+	file_push_service_v1_push_event_proto_rawDescOnce sync.Once
+	file_push_service_v1_push_event_proto_rawDescData []byte
 )
 
-func file_websocket_service_v1_websocket_event_proto_rawDescGZIP() []byte {
-	file_websocket_service_v1_websocket_event_proto_rawDescOnce.Do(func() {
-		file_websocket_service_v1_websocket_event_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_websocket_service_v1_websocket_event_proto_rawDesc), len(file_websocket_service_v1_websocket_event_proto_rawDesc)))
+func file_push_service_v1_push_event_proto_rawDescGZIP() []byte {
+	file_push_service_v1_push_event_proto_rawDescOnce.Do(func() {
+		file_push_service_v1_push_event_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_push_service_v1_push_event_proto_rawDesc), len(file_push_service_v1_push_event_proto_rawDesc)))
 	})
-	return file_websocket_service_v1_websocket_event_proto_rawDescData
+	return file_push_service_v1_push_event_proto_rawDescData
 }
 
-var file_websocket_service_v1_websocket_event_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_websocket_service_v1_websocket_event_proto_goTypes = []any{
-	(*EventRequest)(nil),  // 0: api.websocket.service.v1.EventRequest
-	(*EventResponse)(nil), // 1: api.websocket.service.v1.EventResponse
+var file_push_service_v1_push_event_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_push_service_v1_push_event_proto_goTypes = []any{
+	(*EventRequest)(nil),  // 0: api.push.service.v1.EventRequest
+	(*EventResponse)(nil), // 1: api.push.service.v1.EventResponse
 }
-var file_websocket_service_v1_websocket_event_proto_depIdxs = []int32{
-	0, // 0: api.websocket.service.v1.WebsocketEvent.Event:input_type -> api.websocket.service.v1.EventRequest
-	1, // 1: api.websocket.service.v1.WebsocketEvent.Event:output_type -> api.websocket.service.v1.EventResponse
+var file_push_service_v1_push_event_proto_depIdxs = []int32{
+	0, // 0: api.push.service.v1.PushEvent.Event:input_type -> api.push.service.v1.EventRequest
+	1, // 1: api.push.service.v1.PushEvent.Event:output_type -> api.push.service.v1.EventResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -150,26 +150,26 @@ var file_websocket_service_v1_websocket_event_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_websocket_service_v1_websocket_event_proto_init() }
-func file_websocket_service_v1_websocket_event_proto_init() {
-	if File_websocket_service_v1_websocket_event_proto != nil {
+func init() { file_push_service_v1_push_event_proto_init() }
+func file_push_service_v1_push_event_proto_init() {
+	if File_push_service_v1_push_event_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_websocket_service_v1_websocket_event_proto_rawDesc), len(file_websocket_service_v1_websocket_event_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_push_service_v1_push_event_proto_rawDesc), len(file_push_service_v1_push_event_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_websocket_service_v1_websocket_event_proto_goTypes,
-		DependencyIndexes: file_websocket_service_v1_websocket_event_proto_depIdxs,
-		MessageInfos:      file_websocket_service_v1_websocket_event_proto_msgTypes,
+		GoTypes:           file_push_service_v1_push_event_proto_goTypes,
+		DependencyIndexes: file_push_service_v1_push_event_proto_depIdxs,
+		MessageInfos:      file_push_service_v1_push_event_proto_msgTypes,
 	}.Build()
-	File_websocket_service_v1_websocket_event_proto = out.File
-	file_websocket_service_v1_websocket_event_proto_goTypes = nil
-	file_websocket_service_v1_websocket_event_proto_depIdxs = nil
+	File_push_service_v1_push_event_proto = out.File
+	file_push_service_v1_push_event_proto_goTypes = nil
+	file_push_service_v1_push_event_proto_depIdxs = nil
 }

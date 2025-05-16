@@ -327,7 +327,7 @@ func (m *GetWalletCreditTransactionsRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for CreditId
+	// no validation rules for UserId
 
 	if m.Page != nil {
 		// no validation rules for Page

@@ -129,7 +129,7 @@ func (x *GetWalletsResponse) GetWallets() []*GetWalletsResponse_Wallet {
 
 type GetWalletCreditTransactionsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CreditId      int64                  `protobuf:"varint,1,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Page          *int64                 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int64                 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -166,9 +166,9 @@ func (*GetWalletCreditTransactionsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *GetWalletCreditTransactionsRequest) GetCreditId() int64 {
+func (x *GetWalletCreditTransactionsRequest) GetUserId() int64 {
 	if x != nil {
-		return x.CreditId
+		return x.UserId
 	}
 	return 0
 }
@@ -732,9 +732,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\bturnover\x18\x05 \x01(\tR\bturnover\x12#\n" +
 	"\rcash_turnover\x18\x06 \x01(\tR\fcashTurnover\x12%\n" +
 	"\x0ebonus_turnover\x18\a \x01(\tR\rbonusTurnover\x12N\n" +
-	"\acredits\x18\b \x03(\v24.api.backoffice.service.v1.GetWalletsResponse.CreditR\acredits\"\x93\x01\n" +
-	"\"GetWalletCreditTransactionsRequest\x12\x1b\n" +
-	"\tcredit_id\x18\x01 \x01(\x03R\bcreditId\x12\x17\n" +
+	"\acredits\x18\b \x03(\v24.api.backoffice.service.v1.GetWalletsResponse.CreditR\acredits\"\x8f\x01\n" +
+	"\"GetWalletCreditTransactionsRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x17\n" +
 	"\x04page\x18\x02 \x01(\x03H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x03 \x01(\x03H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +

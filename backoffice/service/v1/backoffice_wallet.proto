@@ -68,7 +68,7 @@ message GetWalletsResponse {
 }
 
 message GetWalletCreditTransactionsRequest {
-	int64 credit_id = 1;
+	int64 user_id = 1;
 	optional int64 page = 2;
 	optional int64 page_size = 3;
 }

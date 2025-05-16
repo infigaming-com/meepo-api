@@ -665,6 +665,9 @@ type GetUserProfileResponse struct {
 	UserId             int64                                      `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	VipLevel           int32                                      `protobuf:"varint,3,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
 	Online             bool                                       `protobuf:"varint,4,opt,name=online,proto3" json:"online,omitempty"`
+	BanWithdraw        bool                                       `protobuf:"varint,11,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
+	BanGame            bool                                       `protobuf:"varint,12,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
+	BanLogin           bool                                       `protobuf:"varint,13,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
 	RegistrationRecord *GetUserProfileResponse_RegistrationRecord `protobuf:"bytes,5,opt,name=registration_record,json=registrationRecord,proto3" json:"registration_record,omitempty"`
 	LoginRecords       []*GetUserProfileResponse_LoginRecord      `protobuf:"bytes,6,rep,name=login_records,json=loginRecords,proto3" json:"login_records,omitempty"`
 	Tags               []string                                   `protobuf:"bytes,7,rep,name=tags,proto3" json:"tags,omitempty"`
@@ -727,6 +730,27 @@ func (x *GetUserProfileResponse) GetVipLevel() int32 {
 func (x *GetUserProfileResponse) GetOnline() bool {
 	if x != nil {
 		return x.Online
+	}
+	return false
+}
+
+func (x *GetUserProfileResponse) GetBanWithdraw() bool {
+	if x != nil {
+		return x.BanWithdraw
+	}
+	return false
+}
+
+func (x *GetUserProfileResponse) GetBanGame() bool {
+	if x != nil {
+		return x.BanGame
+	}
+	return false
+}
+
+func (x *GetUserProfileResponse) GetBanLogin() bool {
+	if x != nil {
+		return x.BanLogin
 	}
 	return false
 }
@@ -2131,12 +2155,15 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\bturnover\x18\x03 \x01(\tR\bturnover\x12\x10\n" +
 	"\x03rtp\x18\x04 \x01(\tR\x03rtp\"0\n" +
 	"\x15GetUserProfileRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xfd\b\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xd8\t\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tvip_level\x18\x03 \x01(\x05R\bvipLevel\x12\x16\n" +
-	"\x06online\x18\x04 \x01(\bR\x06online\x12u\n" +
+	"\x06online\x18\x04 \x01(\bR\x06online\x12!\n" +
+	"\fban_withdraw\x18\v \x01(\bR\vbanWithdraw\x12\x19\n" +
+	"\bban_game\x18\f \x01(\bR\abanGame\x12\x1b\n" +
+	"\tban_login\x18\r \x01(\bR\bbanLogin\x12u\n" +
 	"\x13registration_record\x18\x05 \x01(\v2D.api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecordR\x12registrationRecord\x12b\n" +
 	"\rlogin_records\x18\x06 \x03(\v2=.api.backoffice.service.v1.GetUserProfileResponse.LoginRecordR\floginRecords\x12\x12\n" +
 	"\x04tags\x18\a \x03(\tR\x04tags\x12U\n" +
