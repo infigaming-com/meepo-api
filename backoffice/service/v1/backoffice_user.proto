@@ -211,6 +211,9 @@ message GetUserProfileResponse {
 	int64 user_id = 2;
 	int32 vip_level = 3;
 	bool online = 4;
+	bool ban_withdraw = 11;
+	bool ban_game = 12;
+	bool ban_login = 13;
 	RegistrationRecord registration_record = 5;
 	repeated LoginRecord login_records = 6;
 	repeated string tags = 7;

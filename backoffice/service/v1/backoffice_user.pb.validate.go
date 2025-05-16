@@ -870,6 +870,12 @@ func (m *GetUserProfileResponse) validate(all bool) error {
 
 	// no validation rules for Online
 
+	// no validation rules for BanWithdraw
+
+	// no validation rules for BanGame
+
+	// no validation rules for BanLogin
+
 	if all {
 		switch v := interface{}(m.GetRegistrationRecord()).(type) {
 		case interface{ ValidateAll() error }:

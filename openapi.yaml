@@ -2600,6 +2600,12 @@ components:
                     format: int32
                 online:
                     type: boolean
+                banWithdraw:
+                    type: boolean
+                banGame:
+                    type: boolean
+                banLogin:
+                    type: boolean
                 registrationRecord:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_RegistrationRecord'
                 loginRecords:
@@ -2671,7 +2677,7 @@ components:
         api.backoffice.service.v1.GetWalletCreditTransactionsRequest:
             type: object
             properties:
-                creditId:
+                userId:
                     type: string
                 page:
                     type: string
