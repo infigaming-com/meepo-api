@@ -143,30 +143,33 @@ message ListBetsRequest {
 }
 
 message Bet {
-	message Amount {
-		int64 amount_in_currency = 1;
-		int64 amount_in_settlement_currency = 2;
-	}
-	string operator = 1;
+	string operator_name = 1;
 	google.protobuf.Timestamp created_at = 2;
 	google.protobuf.Timestamp updated_at = 3;
-	string category = 4;
-	string game_id = 5;
-	string provider = 6;
-	int64 operator_transaction_id = 7;
-	string provider_transaction_id = 8;
-	int64 user_id = 9;
-	Amount bet_amount = 10;
-	Amount win_amount = 11;
-	double odds = 12;
-	int64 valid_bet_amount = 13;
+	string game_category = 4;
+	string game_name = 5;
+	string game_id = 6;
+	string provider_name = 7;
+	int64 id = 8	 [json_name="operatorBetId"];
+	string provider_bet_id = 9;
+	int64 user_id = 10;
+	string bet_amount = 17;
+	string settlement_bet_amount = 19;
+	string win_amount = 20;
+	string settlement_win_amount = 21;
+	string odds = 13;
+	string valid_bet_amount = 14;
 }
 
 message ListBetsResponse {
 	repeated Bet bets = 1;
-	int64 page = 2;
-	int64 page_size = 3;
-	int64 total = 4;
+	string turnover = 2;
+	string win_amount = 3;
+	int32 bet_count = 4;
+	int32 rtp_percentage = 5; // value from 0 to 100
+	int64 page = 6;
+	int64 page_size = 7;
+	int64 total = 8;
 }
 
 message GetUserBetsOverviewRequest {
@@ -247,20 +250,19 @@ message GetGameTransactionsForBetResponse {
 }
 
 message ListGamesRequest {
-	repeated string providers = 1;
+	repeated string provider_ids = 1;
 	repeated string categories = 2;
 	repeated string fee_groups = 3;
-	repeated string game_names = 4;
-	optional string game_id = 5;
-	repeated string game_tags = 6;
-	repeated string themes = 7;
-	optional bool support_bonus_buy = 8;
-	optional bool has_freespins = 9;
-	repeated string support_currencies = 10;
-	repeated string restricted_countries = 11;
-	optional bool enabled = 12;
-	optional int64 page = 13;
-	optional int64 page_size = 14;
+	optional string game_id = 4;
+	repeated string game_tags = 5;
+	repeated string themes = 6;
+	optional bool support_bonus_buy = 7;
+	optional bool has_freespins = 8;
+	repeated string support_currencies = 9;
+	repeated string restricted_countries = 10;
+	optional bool enabled = 11;
+	optional int64 page = 12;
+	optional int64 page_size = 13;
 }
 
 message ListGamesResponse {

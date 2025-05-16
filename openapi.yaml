@@ -1869,7 +1869,7 @@ components:
         api.backoffice.service.v1.Bet:
             type: object
             properties:
-                operator:
+                operatorName:
                     type: string
                 createdAt:
                     type: string
@@ -1877,33 +1877,31 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
-                category:
+                gameCategory:
+                    type: string
+                gameName:
                     type: string
                 gameId:
                     type: string
-                provider:
+                providerName:
                     type: string
-                operatorTransactionId:
+                operatorBetId:
                     type: string
-                providerTransactionId:
+                providerBetId:
                     type: string
                 userId:
                     type: string
                 betAmount:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.Bet_Amount'
+                    type: string
+                settlementBetAmount:
+                    type: string
                 winAmount:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.Bet_Amount'
+                    type: string
+                settlementWinAmount:
+                    type: string
                 odds:
-                    type: number
-                    format: double
+                    type: string
                 validBetAmount:
-                    type: string
-        api.backoffice.service.v1.Bet_Amount:
-            type: object
-            properties:
-                amountInCurrency:
-                    type: string
-                amountInSettlementCurrency:
                     type: string
         api.backoffice.service.v1.Bind2faRequest:
             type: object
@@ -2830,6 +2828,16 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.Bet'
+                turnover:
+                    type: string
+                winAmount:
+                    type: string
+                betCount:
+                    type: integer
+                    format: int32
+                rtpPercentage:
+                    type: integer
+                    format: int32
                 page:
                     type: string
                 pageSize:
@@ -3260,7 +3268,7 @@ components:
         api.backoffice.service.v1.ListGamesRequest:
             type: object
             properties:
-                providers:
+                providerIds:
                     type: array
                     items:
                         type: string
@@ -3269,10 +3277,6 @@ components:
                     items:
                         type: string
                 feeGroups:
-                    type: array
-                    items:
-                        type: string
-                gameNames:
                     type: array
                     items:
                         type: string
