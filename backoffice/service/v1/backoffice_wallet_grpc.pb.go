@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	BackofficeWallet_GetWallets_FullMethodName                  = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
+	BackofficeWallet_GetWalletCredits_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCredits"
 	BackofficeWallet_GetWalletCreditTransactions_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
 	BackofficeWallet_UpdateWallet_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/UpdateWallet"
 )
@@ -29,6 +30,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeWalletClient interface {
 	GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...grpc.CallOption) (*GetWalletsResponse, error)
+	GetWalletCredits(ctx context.Context, in *GetWalletCreditsRequest, opts ...grpc.CallOption) (*GetWalletCreditsResponse, error)
 	GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...grpc.CallOption) (*GetWalletCreditTransactionsResponse, error)
 	UpdateWallet(ctx context.Context, in *UpdateWalletRequest, opts ...grpc.CallOption) (*UpdateWalletResponse, error)
 }
@@ -45,6 +47,16 @@ func (c *backofficeWalletClient) GetWallets(ctx context.Context, in *GetWalletsR
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetWalletsResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_GetWallets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) GetWalletCredits(ctx context.Context, in *GetWalletCreditsRequest, opts ...grpc.CallOption) (*GetWalletCreditsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWalletCreditsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GetWalletCredits_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,6 +88,7 @@ func (c *backofficeWalletClient) UpdateWallet(ctx context.Context, in *UpdateWal
 // for forward compatibility.
 type BackofficeWalletServer interface {
 	GetWallets(context.Context, *GetWalletsRequest) (*GetWalletsResponse, error)
+	GetWalletCredits(context.Context, *GetWalletCreditsRequest) (*GetWalletCreditsResponse, error)
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
 	UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
@@ -90,6 +103,9 @@ type UnimplementedBackofficeWalletServer struct{}
 
 func (UnimplementedBackofficeWalletServer) GetWallets(context.Context, *GetWalletsRequest) (*GetWalletsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWallets not implemented")
+}
+func (UnimplementedBackofficeWalletServer) GetWalletCredits(context.Context, *GetWalletCreditsRequest) (*GetWalletCreditsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWalletCredits not implemented")
 }
 func (UnimplementedBackofficeWalletServer) GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWalletCreditTransactions not implemented")
@@ -132,6 +148,24 @@ func _BackofficeWallet_GetWallets_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeWalletServer).GetWallets(ctx, req.(*GetWalletsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_GetWalletCredits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWalletCreditsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).GetWalletCredits(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_GetWalletCredits_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).GetWalletCredits(ctx, req.(*GetWalletCreditsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -182,6 +216,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetWallets",
 			Handler:    _BackofficeWallet_GetWallets_Handler,
+		},
+		{
+			MethodName: "GetWalletCredits",
+			Handler:    _BackofficeWallet_GetWalletCredits_Handler,
 		},
 		{
 			MethodName: "GetWalletCreditTransactions",
