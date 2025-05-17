@@ -873,6 +873,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditTransactionsResponse'
+    /v1/backoffice/wallet/credits/get:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_GetWalletCredits
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditsResponse'
     /v1/backoffice/wallet/get:
         post:
             tags:
@@ -2693,11 +2711,7 @@ components:
         api.backoffice.service.v1.GetWalletCreditTransactionsRequest:
             type: object
             properties:
-                userId:
-                    type: string
-                page:
-                    type: string
-                pageSize:
+                transactionId:
                     type: string
         api.backoffice.service.v1.GetWalletCreditTransactionsResponse:
             type: object
@@ -2707,22 +2721,77 @@ components:
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditTransactionsResponse_CreditTransaction'
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
                 total:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetWalletCreditTransactionsResponse_CreditTransaction:
             type: object
             properties:
-                type:
-                    type: string
                 createdAt:
                     type: string
                     format: date-time
-                cash:
+                type:
                     type: string
-                bonus:
+        api.backoffice.service.v1.GetWalletCreditsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                transactionType:
+                    type: string
+                currency:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetWalletCreditsResponse:
+            type: object
+            properties:
+                credits:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditsResponse_Credit'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetWalletCreditsResponse_Credit:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    format: date-time
+                transactionId:
+                    type: string
+                type:
+                    type: string
+                vipLevel:
+                    type: integer
+                    format: int32
+                beforeBlanace:
+                    type: string
+                afterBalance:
+                    type: string
+                currency:
                     type: string
         api.backoffice.service.v1.GetWalletsRequest:
             type: object

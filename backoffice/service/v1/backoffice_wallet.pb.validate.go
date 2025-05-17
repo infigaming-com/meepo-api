@@ -304,6 +304,334 @@ var _ interface {
 	ErrorName() string
 } = GetWalletsResponseValidationError{}
 
+// Validate checks the field values on GetWalletCreditsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetWalletCreditsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetWalletCreditsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetWalletCreditsRequestMultiError, or nil if none found.
+func (m *GetWalletCreditsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetWalletCreditsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if m.TransactionType != nil {
+		// no validation rules for TransactionType
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetWalletCreditsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetWalletCreditsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWalletCreditsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetWalletCreditsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetWalletCreditsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWalletCreditsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return GetWalletCreditsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetWalletCreditsRequestMultiError is an error wrapping multiple validation
+// errors returned by GetWalletCreditsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetWalletCreditsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetWalletCreditsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetWalletCreditsRequestMultiError) AllErrors() []error { return m }
+
+// GetWalletCreditsRequestValidationError is the validation error returned by
+// GetWalletCreditsRequest.Validate if the designated constraints aren't met.
+type GetWalletCreditsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWalletCreditsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWalletCreditsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWalletCreditsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWalletCreditsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWalletCreditsRequestValidationError) ErrorName() string {
+	return "GetWalletCreditsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWalletCreditsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWalletCreditsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWalletCreditsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWalletCreditsRequestValidationError{}
+
+// Validate checks the field values on GetWalletCreditsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetWalletCreditsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetWalletCreditsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetWalletCreditsResponseMultiError, or nil if none found.
+func (m *GetWalletCreditsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetWalletCreditsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetCredits() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetWalletCreditsResponseValidationError{
+						field:  fmt.Sprintf("Credits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetWalletCreditsResponseValidationError{
+						field:  fmt.Sprintf("Credits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWalletCreditsResponseValidationError{
+					field:  fmt.Sprintf("Credits[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for Total
+
+	if len(errors) > 0 {
+		return GetWalletCreditsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetWalletCreditsResponseMultiError is an error wrapping multiple validation
+// errors returned by GetWalletCreditsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetWalletCreditsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetWalletCreditsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetWalletCreditsResponseMultiError) AllErrors() []error { return m }
+
+// GetWalletCreditsResponseValidationError is the validation error returned by
+// GetWalletCreditsResponse.Validate if the designated constraints aren't met.
+type GetWalletCreditsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWalletCreditsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWalletCreditsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWalletCreditsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWalletCreditsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWalletCreditsResponseValidationError) ErrorName() string {
+	return "GetWalletCreditsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWalletCreditsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWalletCreditsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWalletCreditsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWalletCreditsResponseValidationError{}
+
 // Validate checks the field values on GetWalletCreditTransactionsRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
@@ -327,15 +655,7 @@ func (m *GetWalletCreditTransactionsRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for UserId
-
-	if m.Page != nil {
-		// no validation rules for Page
-	}
-
-	if m.PageSize != nil {
-		// no validation rules for PageSize
-	}
+	// no validation rules for CreditId
 
 	if len(errors) > 0 {
 		return GetWalletCreditTransactionsRequestMultiError(errors)
@@ -1184,6 +1504,150 @@ var _ interface {
 	ErrorName() string
 } = GetWalletsResponse_WalletValidationError{}
 
+// Validate checks the field values on GetWalletCreditsResponse_Credit with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetWalletCreditsResponse_Credit) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetWalletCreditsResponse_Credit with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetWalletCreditsResponse_CreditMultiError, or nil if none found.
+func (m *GetWalletCreditsResponse_Credit) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetWalletCreditsResponse_Credit) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetWalletCreditsResponse_CreditValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetWalletCreditsResponse_CreditValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetWalletCreditsResponse_CreditValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for CreditId
+
+	// no validation rules for Type
+
+	// no validation rules for VipLevel
+
+	// no validation rules for BeforeBlanace
+
+	// no validation rules for AfterBalance
+
+	// no validation rules for Currency
+
+	if len(errors) > 0 {
+		return GetWalletCreditsResponse_CreditMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetWalletCreditsResponse_CreditMultiError is an error wrapping multiple
+// validation errors returned by GetWalletCreditsResponse_Credit.ValidateAll()
+// if the designated constraints aren't met.
+type GetWalletCreditsResponse_CreditMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetWalletCreditsResponse_CreditMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetWalletCreditsResponse_CreditMultiError) AllErrors() []error { return m }
+
+// GetWalletCreditsResponse_CreditValidationError is the validation error
+// returned by GetWalletCreditsResponse_Credit.Validate if the designated
+// constraints aren't met.
+type GetWalletCreditsResponse_CreditValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWalletCreditsResponse_CreditValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWalletCreditsResponse_CreditValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWalletCreditsResponse_CreditValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWalletCreditsResponse_CreditValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWalletCreditsResponse_CreditValidationError) ErrorName() string {
+	return "GetWalletCreditsResponse_CreditValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWalletCreditsResponse_CreditValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWalletCreditsResponse_Credit.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWalletCreditsResponse_CreditValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWalletCreditsResponse_CreditValidationError{}
+
 // Validate checks the field values on
 // GetWalletCreditTransactionsResponse_CreditTransaction with the rules
 // defined in the proto definition for this message. If any rules are
@@ -1208,8 +1672,6 @@ func (m *GetWalletCreditTransactionsResponse_CreditTransaction) validate(all boo
 	}
 
 	var errors []error
-
-	// no validation rules for Type
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -1240,9 +1702,7 @@ func (m *GetWalletCreditTransactionsResponse_CreditTransaction) validate(all boo
 		}
 	}
 
-	// no validation rules for Cash
-
-	// no validation rules for Bonus
+	// no validation rules for Type
 
 	if len(errors) > 0 {
 		return GetWalletCreditTransactionsResponse_CreditTransactionMultiError(errors)
