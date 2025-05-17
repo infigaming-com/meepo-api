@@ -3456,7 +3456,12 @@ components:
                     type: boolean
         api.backoffice.service.v1.ListProvidersRequest:
             type: object
-            properties: {}
+            properties:
+                includeGameCount:
+                    type: boolean
+                    description: |-
+                        Include game count in response, false by default.
+                         Only enable it for ListProviders page which game_count is needed
         api.backoffice.service.v1.ListProvidersResponse:
             type: object
             properties:
@@ -3471,6 +3476,11 @@ components:
                     type: string
                 providerName:
                     type: string
+                gameCount:
+                    type: integer
+                    format: int32
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.ListTagsRequest:
             type: object
             properties: {}

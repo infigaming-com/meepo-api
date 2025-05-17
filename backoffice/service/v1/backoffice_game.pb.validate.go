@@ -57,6 +57,10 @@ func (m *ListProvidersRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.IncludeGameCount != nil {
+		// no validation rules for IncludeGameCount
+	}
+
 	if len(errors) > 0 {
 		return ListProvidersRequestMultiError(errors)
 	}
@@ -3235,6 +3239,12 @@ func (m *ListProvidersResponse_Provider) validate(all bool) error {
 	// no validation rules for ProviderId
 
 	// no validation rules for ProviderName
+
+	// no validation rules for Enabled
+
+	if m.GameCount != nil {
+		// no validation rules for GameCount
+	}
 
 	if len(errors) > 0 {
 		return ListProvidersResponse_ProviderMultiError(errors)
