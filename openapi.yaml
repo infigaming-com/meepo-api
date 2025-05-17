@@ -3522,10 +3522,8 @@ components:
                     type: array
                     items:
                         type: string
-                gameNames:
-                    type: array
-                    items:
-                        type: string
+                gameName:
+                    type: string
                 gameId:
                     type: string
                 currencies:

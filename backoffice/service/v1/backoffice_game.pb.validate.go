@@ -2162,6 +2162,10 @@ func (m *ListUserBetsRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	if m.GameName != nil {
+		// no validation rules for GameName
+	}
+
 	if m.GameId != nil {
 		// no validation rules for GameId
 	}
