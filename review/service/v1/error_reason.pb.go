@@ -45,6 +45,8 @@ const (
 	ErrorReason_FREEZE_BALANCE_FAILED                     ErrorReason = 70016
 	ErrorReason_ROLLBACK_FREEZE_FAILED                    ErrorReason = 70017
 	ErrorReason_GET_CURRENCIES_FAILED                     ErrorReason = 70018
+	ErrorReason_INVALID_TICKET_STATUS                     ErrorReason = 70019
+	ErrorReason_SETTLE_FREEZE_FAILED                      ErrorReason = 70020
 )
 
 // Enum value maps for ErrorReason.
@@ -70,6 +72,8 @@ var (
 		70016: "FREEZE_BALANCE_FAILED",
 		70017: "ROLLBACK_FREEZE_FAILED",
 		70018: "GET_CURRENCIES_FAILED",
+		70019: "INVALID_TICKET_STATUS",
+		70020: "SETTLE_FREEZE_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                               0,
@@ -92,6 +96,8 @@ var (
 		"FREEZE_BALANCE_FAILED":                     70016,
 		"ROLLBACK_FREEZE_FAILED":                    70017,
 		"GET_CURRENCIES_FAILED":                     70018,
+		"INVALID_TICKET_STATUS":                     70019,
+		"SETTLE_FREEZE_FAILED":                      70020,
 	}
 )
 
@@ -126,7 +132,7 @@ var File_review_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\x85\x05\n" +
+	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\xbe\x05\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCONVERT_STRUCT_TO_JSON_FAILED\x10\xf0\xa2\x04\x12#\n" +
@@ -147,7 +153,9 @@ const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\x17TICKET_ALREADY_REVIEWED\x10\xff\xa2\x04\x12\x1b\n" +
 	"\x15FREEZE_BALANCE_FAILED\x10\x80\xa3\x04\x12\x1c\n" +
 	"\x16ROLLBACK_FREEZE_FAILED\x10\x81\xa3\x04\x12\x1b\n" +
-	"\x15GET_CURRENCIES_FAILED\x10\x82\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x15GET_CURRENCIES_FAILED\x10\x82\xa3\x04\x12\x1b\n" +
+	"\x15INVALID_TICKET_STATUS\x10\x83\xa3\x04\x12\x1a\n" +
+	"\x14SETTLE_FREEZE_FAILED\x10\x84\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"
 
 var (
