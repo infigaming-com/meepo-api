@@ -202,7 +202,7 @@ message GetUserBetsOverviewResponse {
 message ListUserBetsRequest {
 	int64 user_id = 1;
 	repeated string provider_ids = 2;
-	repeated string game_names = 3;
+	optional string game_name = 3;
 	optional string game_id = 4;
 	repeated string currencies = 5;
 	optional int64 min_bet_amount = 6;
