@@ -80,6 +80,13 @@ service Game {
 			body: "*"
 		};
 	};
+
+	rpc BackofficeListGames(BackofficeListGamesRequest) returns (BackofficeListGamesResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/backoffice/games/list"
+			body: "*"
+		};
+	};
 }
 
 message CreateOperatorRequest {
@@ -382,4 +389,46 @@ message Bet {
 	string rollback_win_amount = 25;
 	google.protobuf.Timestamp created_at = 26;
 	google.protobuf.Timestamp updated_at = 27;
+}
+
+message BackofficeListGamesRequest {
+	repeated string provider_ids = 1;
+	repeated string categories = 2;
+	repeated string fee_groups = 3;
+	optional string game_id = 4;
+	repeated string game_tags = 5;
+	repeated string themes = 6;
+	optional bool support_bonus_buy = 7;
+	optional bool has_freespins = 8;
+	repeated string support_currencies = 9;
+	repeated string restricted_countries = 10;
+	optional bool enabled = 11;
+	optional int64 page = 12;
+	optional int64 page_size = 13;
+}
+
+message BackofficeListGamesResponse {
+	message Game {
+		string name = 1;
+		string provider = 2;
+		string id = 3;
+		string category = 4;
+		string theme = 5;
+		bool support_bonus_buy = 6;
+		bool has_freespins = 7;
+		repeated string tags = 8;
+		string fee_group = 9;
+		int32 rate = 10;
+		int32 rtp = 11;
+		int32 valid_bet_rate = 12;
+		repeated string support_currencies = 13;
+		repeated string restricted_countries = 14;
+		bool enabled = 15;
+	}
+	repeated Game games = 1;
+	int64 page = 2;
+	int64 page_size = 3;
+	int64 total = 4;
+	int64 total_enabled = 5;
+	int64 total_disabled = 6;
 }
