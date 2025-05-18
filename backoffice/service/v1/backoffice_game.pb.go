@@ -24,9 +24,12 @@ const (
 )
 
 type ListProvidersRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Include game count in response, false by default.
+	// Only enable it for ListProviders page which game_count is needed
+	IncludeGameCount *bool `protobuf:"varint,1,opt,name=include_game_count,json=includeGameCount,proto3,oneof" json:"include_game_count,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ListProvidersRequest) Reset() {
@@ -57,6 +60,13 @@ func (x *ListProvidersRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListProvidersRequest.ProtoReflect.Descriptor instead.
 func (*ListProvidersRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_game_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ListProvidersRequest) GetIncludeGameCount() bool {
+	if x != nil && x.IncludeGameCount != nil {
+		return *x.IncludeGameCount
+	}
+	return false
 }
 
 type ListProvidersResponse struct {
@@ -1773,9 +1783,12 @@ func (*UpdateGameResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListProvidersResponse_Provider struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProviderId    string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
-	ProviderName  string                 `protobuf:"bytes,2,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	ProviderId   string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	ProviderName string                 `protobuf:"bytes,2,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
+	// Only available when include_game_count is true
+	GameCount     *int32 `protobuf:"varint,3,opt,name=game_count,json=gameCount,proto3,oneof" json:"game_count,omitempty"`
+	Enabled       bool   `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1822,6 +1835,20 @@ func (x *ListProvidersResponse_Provider) GetProviderName() string {
 		return x.ProviderName
 	}
 	return ""
+}
+
+func (x *ListProvidersResponse_Provider) GetGameCount() int32 {
+	if x != nil && x.GameCount != nil {
+		return *x.GameCount
+	}
+	return 0
+}
+
+func (x *ListProvidersResponse_Provider) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
 }
 
 type GetGameTransactionsForBetResponse_GameTransaction struct {
@@ -2168,14 +2195,20 @@ var File_backoffice_service_v1_backoffice_game_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_game.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x16\n" +
-	"\x14ListProvidersRequest\"\xc2\x01\n" +
+	"+backoffice/service/v1/backoffice_game.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"`\n" +
+	"\x14ListProvidersRequest\x121\n" +
+	"\x12include_game_count\x18\x01 \x01(\bH\x00R\x10includeGameCount\x88\x01\x01B\x15\n" +
+	"\x13_include_game_count\"\x90\x02\n" +
 	"\x15ListProvidersResponse\x12W\n" +
-	"\tproviders\x18\x01 \x03(\v29.api.backoffice.service.v1.ListProvidersResponse.ProviderR\tproviders\x1aP\n" +
+	"\tproviders\x18\x01 \x03(\v29.api.backoffice.service.v1.ListProvidersResponse.ProviderR\tproviders\x1a\x9d\x01\n" +
 	"\bProvider\x12\x1f\n" +
 	"\vprovider_id\x18\x01 \x01(\tR\n" +
 	"providerId\x12#\n" +
-	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\"\x17\n" +
+	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\x12\"\n" +
+	"\n" +
+	"game_count\x18\x03 \x01(\x05H\x00R\tgameCount\x88\x01\x01\x12\x18\n" +
+	"\aenabled\x18\x04 \x01(\bR\aenabledB\r\n" +
+	"\v_game_count\"\x17\n" +
 	"\x15ListCategoriesRequest\"8\n" +
 	"\x16ListCategoriesResponse\x12\x1e\n" +
 	"\n" +
@@ -2536,11 +2569,13 @@ func file_backoffice_service_v1_backoffice_game_proto_init() {
 	if File_backoffice_service_v1_backoffice_game_proto != nil {
 		return
 	}
+	file_backoffice_service_v1_backoffice_game_proto_msgTypes[0].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[12].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[15].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[17].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[21].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[23].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_game_proto_msgTypes[25].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
