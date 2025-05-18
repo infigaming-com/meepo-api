@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	BackofficeGame_ListProviders_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/ListProviders"
+	BackofficeGame_ListProvidersWithDetail_FullMethodName   = "/api.backoffice.service.v1.BackofficeGame/ListProvidersWithDetail"
 	BackofficeGame_ListCategories_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListCategories"
 	BackofficeGame_ListFeeGroups_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/ListFeeGroups"
 	BackofficeGame_ListTags_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListTags"
@@ -37,7 +38,14 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeGameClient interface {
+	// ListProviders returns all providers with optional filter for enabled status.
+	// If not provided, all providers will be returned.
+	// ListProviders is used for the providers drop down list and provider search.
 	ListProviders(ctx context.Context, in *ListProvidersRequest, opts ...grpc.CallOption) (*ListProvidersResponse, error)
+	// ListProvidersWithDetail returns all providers with detailed information,
+	// including game count and enabled status.
+	// ListProvidersWithDetail is used for the providers page.
+	ListProvidersWithDetail(ctx context.Context, in *ListProvidersWithDetailRequest, opts ...grpc.CallOption) (*ListProvidersWithDetailResponse, error)
 	ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...grpc.CallOption) (*ListCategoriesResponse, error)
 	ListFeeGroups(ctx context.Context, in *ListFeeGroupsRequest, opts ...grpc.CallOption) (*ListFeeGroupsResponse, error)
 	ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (*ListTagsResponse, error)
@@ -63,6 +71,16 @@ func (c *backofficeGameClient) ListProviders(ctx context.Context, in *ListProvid
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListProvidersResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_ListProviders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListProvidersWithDetail(ctx context.Context, in *ListProvidersWithDetailRequest, opts ...grpc.CallOption) (*ListProvidersWithDetailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListProvidersWithDetailResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListProvidersWithDetail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -183,7 +201,14 @@ func (c *backofficeGameClient) UpdateGame(ctx context.Context, in *UpdateGameReq
 // All implementations must embed UnimplementedBackofficeGameServer
 // for forward compatibility.
 type BackofficeGameServer interface {
+	// ListProviders returns all providers with optional filter for enabled status.
+	// If not provided, all providers will be returned.
+	// ListProviders is used for the providers drop down list and provider search.
 	ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error)
+	// ListProvidersWithDetail returns all providers with detailed information,
+	// including game count and enabled status.
+	// ListProvidersWithDetail is used for the providers page.
+	ListProvidersWithDetail(context.Context, *ListProvidersWithDetailRequest) (*ListProvidersWithDetailResponse, error)
 	ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error)
 	ListFeeGroups(context.Context, *ListFeeGroupsRequest) (*ListFeeGroupsResponse, error)
 	ListTags(context.Context, *ListTagsRequest) (*ListTagsResponse, error)
@@ -207,6 +232,9 @@ type UnimplementedBackofficeGameServer struct{}
 
 func (UnimplementedBackofficeGameServer) ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProviders not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListProvidersWithDetail(context.Context, *ListProvidersWithDetailRequest) (*ListProvidersWithDetailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProvidersWithDetail not implemented")
 }
 func (UnimplementedBackofficeGameServer) ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCategories not implemented")
@@ -276,6 +304,24 @@ func _BackofficeGame_ListProviders_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeGameServer).ListProviders(ctx, req.(*ListProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ListProvidersWithDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProvidersWithDetailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListProvidersWithDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListProvidersWithDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListProvidersWithDetail(ctx, req.(*ListProvidersWithDetailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -488,6 +534,10 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListProviders",
 			Handler:    _BackofficeGame_ListProviders_Handler,
+		},
+		{
+			MethodName: "ListProvidersWithDetail",
+			Handler:    _BackofficeGame_ListProvidersWithDetail_Handler,
 		},
 		{
 			MethodName: "ListCategories",

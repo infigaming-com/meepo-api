@@ -905,8 +905,24 @@ func (m *ListProvidersRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
 	if m.IncludeGameCount != nil {
 		// no validation rules for IncludeGameCount
+	}
+
+	if m.PaginationEnabled != nil {
+		// no validation rules for PaginationEnabled
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
 	}
 
 	if len(errors) > 0 {
@@ -1043,6 +1059,18 @@ func (m *ListProvidersResponse) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.Total != nil {
+		// no validation rules for Total
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
 	}
 
 	if len(errors) > 0 {
