@@ -110,7 +110,7 @@ message ListProvidersResponse {
 
 message ListProvidersWithDetailRequest {
 	optional string provider_id = 1;
-	optional string enabled = 2;
+	optional bool enabled = 2;
 	optional int32 page = 3;
 	optional int32 page_size = 4;
 }

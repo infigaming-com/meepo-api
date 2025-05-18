@@ -3523,7 +3523,7 @@ components:
                 providerId:
                     type: string
                 enabled:
-                    type: string
+                    type: boolean
                 page:
                     type: integer
                     format: int32
