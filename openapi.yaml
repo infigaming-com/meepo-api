@@ -881,6 +881,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.DeleteUserTagResponse'
+    /v1/backoffice/wallet/balance-transactions/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
+            operationId: BackofficeWallet_ListWalletBalanceTransactions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsResponse'
     /v1/backoffice/wallet/credit-transactions/get:
         post:
             tags:
@@ -3902,6 +3921,94 @@ components:
                 source:
                     type: string
                 registrationIp:
+                    type: string
+        api.backoffice.service.v1.ListWalletBalanceTransactionsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                transactionType:
+                    type: string
+                    description: |-
+                        Transaction types for different operations
+                         Expected values:
+                         Credit operations:
+                           - "payment_deposit"    - Payment deposit transaction
+                           - "game_win"          - Game win transaction
+
+                         Debit operations:
+                           - "payment_withdraw"   - Payment withdraw transaction
+                           - "game_bet"          - Game bet transaction
+                           - "payment_withdraw_freeze" - Payment withdraw freeze transaction
+
+                         Settlement operations:
+                           - "payment_withdraw_settle" - Payment withdraw settlement
+
+                         Rollback operations:
+                           - "game_bet_rollback"            - Game bet transaction rollback
+                           - "game_win_rollback"            - Game win transaction rollback
+                           - "payment_withdraw_rollback" - Payment withdraw transaction rollback
+                currency:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+        api.backoffice.service.v1.ListWalletBalanceTransactionsResponse:
+            type: object
+            properties:
+                balanceTransactions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsResponse_BalanceTransaction'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListWalletBalanceTransactionsResponse_BalanceTransaction:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    format: date-time
+                transactionType:
+                    type: string
+                    description: |-
+                        Transaction types for different operations
+                         Expected values:
+                         Credit operations:
+                           - "payment_deposit"    - Payment deposit transaction
+                           - "game_win"          - Game win transaction
+
+                         Debit operations:
+                           - "payment_withdraw"   - Payment withdraw transaction
+                           - "game_bet"          - Game bet transaction
+                           - "payment_withdraw_freeze" - Payment withdraw freeze transaction
+
+                         Settlement operations:
+                           - "payment_withdraw_settle" - Payment withdraw settlement
+
+                         Rollback operations:
+                           - "game_bet_rollback"            - Game bet transaction rollback
+                           - "game_win_rollback"            - Game win transaction rollback
+                           - "payment_withdraw_rollback" - Payment withdraw transaction rollback
+                vipLevel:
+                    type: integer
+                    format: int32
+                change:
+                    type: string
+                beforeBalance:
+                    type: string
+                afterBalance:
+                    type: string
+                currency:
                     type: string
         api.backoffice.service.v1.ListWithdrawDailyDetailsRequest:
             type: object
