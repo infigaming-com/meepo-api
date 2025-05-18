@@ -905,6 +905,10 @@ func (m *ListProvidersRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.ProviderId != nil {
+		// no validation rules for ProviderId
+	}
+
 	if m.Enabled != nil {
 		// no validation rules for Enabled
 	}

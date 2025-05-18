@@ -158,17 +158,20 @@ message GameSort {
 }
 
 message ListProvidersRequest {
+	// Optional filter for provider's id.
+	// If not provided, all providers will be returned.
+	optional string provider_id = 1;
 	// Optional filter for provider's enabled status.
 	// If not provided, all providers will be returned.
-	optional bool enabled = 1;
+	optional bool enabled = 2;
 	// Include game count in response, false by default.
 	// Only enable it for ListProviders page which game_count is needed.
-	optional bool include_game_count = 2;
+	optional bool include_game_count = 3;
 	// Enable pagination, false by default.
 	// Only enable it for ListProviders page.
-	optional bool pagination_enabled = 3;
-	optional int32 page = 4;
-	optional int32 page_size = 5;
+	optional bool pagination_enabled = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
 }
 
 message ListProvidersResponse {
