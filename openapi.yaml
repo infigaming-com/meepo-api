@@ -1107,6 +1107,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
+    /v1/game/update:
+        post:
+            tags:
+                - Game
+            operationId: Game_UpdateGame
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.UpdateGameRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.UpdateGameResponse'
     /v1/operator/add:
         post:
             tags:
@@ -4641,6 +4659,16 @@ components:
                 bonusAmount:
                     type: number
                     format: double
+        api.game.service.v1.UpdateGameRequest:
+            type: object
+            properties:
+                gameId:
+                    type: string
+                enabled:
+                    type: boolean
+        api.game.service.v1.UpdateGameResponse:
+            type: object
+            properties: {}
         api.game.service.v1.UrlInfo:
             type: object
             properties:

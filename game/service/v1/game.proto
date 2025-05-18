@@ -97,6 +97,13 @@ service Game {
 			body: "*"
 		};
 	};
+
+	rpc UpdateGame(UpdateGameRequest) returns (UpdateGameResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/update"
+			body: "*"
+		};
+	};
 }
 
 message CreateOperatorRequest {
@@ -482,4 +489,12 @@ message BackofficeListGamesResponse {
 	int64 total = 4;
 	int64 total_enabled = 5;
 	int64 total_disabled = 6;
+}
+
+message UpdateGameRequest {
+	string game_id = 1;
+	optional bool enabled = 2;
+}
+
+message UpdateGameResponse {
 }
