@@ -327,6 +327,8 @@ message ListWalletBalanceTransactionsRequest {
 	optional string currency = 3;
 	optional google.protobuf.Timestamp start_time = 4;
 	optional google.protobuf.Timestamp end_time = 5;
+	optional int64 page = 6;
+	optional int64 page_size = 7;
 }
 
 message ListWalletBalanceTransactionsResponse {
@@ -352,7 +354,7 @@ message ListWalletBalanceTransactionsResponse {
 		//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
 		string transaction_type = 2;
 		int32 vip_level = 3;
-		string change = 4;
+		string change_balance = 4;
 		string before_balance = 5;
 		string after_balance = 6;
 		string currency = 7;

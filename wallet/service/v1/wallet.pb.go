@@ -1736,6 +1736,8 @@ type ListWalletBalanceTransactionsRequest struct {
 	Currency        *string                `protobuf:"bytes,3,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
 	StartTime       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime         *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page            *int64                 `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize        *int64                 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1803,6 +1805,20 @@ func (x *ListWalletBalanceTransactionsRequest) GetEndTime() *timestamppb.Timesta
 		return x.EndTime
 	}
 	return nil
+}
+
+func (x *ListWalletBalanceTransactionsRequest) GetPage() int64 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListWalletBalanceTransactionsRequest) GetPageSize() int64 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
 }
 
 type ListWalletBalanceTransactionsResponse struct {
@@ -2509,7 +2525,7 @@ type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
 	//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
 	TransactionType string `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
 	VipLevel        int32  `protobuf:"varint,3,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	Change          string `protobuf:"bytes,4,opt,name=change,proto3" json:"change,omitempty"`
+	ChangeBalance   string `protobuf:"bytes,4,opt,name=change_balance,json=changeBalance,proto3" json:"change_balance,omitempty"`
 	BeforeBalance   string `protobuf:"bytes,5,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
 	AfterBalance    string `protobuf:"bytes,6,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
 	Currency        string `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
@@ -2568,9 +2584,9 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetVipLevel()
 	return 0
 }
 
-func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetChange() string {
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetChangeBalance() string {
 	if x != nil {
-		return x.Change
+		return x.ChangeBalance
 	}
 	return ""
 }
@@ -2815,29 +2831,34 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bturnover\x18\x05 \x01(\tR\bturnover\x12#\n" +
 	"\rcash_turnover\x18\x06 \x01(\tR\fcashTurnover\x12%\n" +
 	"\x0ebonus_turnover\x18\a \x01(\tR\rbonusTurnover\x12J\n" +
-	"\acredits\x18\b \x03(\v20.api.wallet.service.v1.GetWalletsResponse.CreditR\acredits\"\xca\x02\n" +
+	"\acredits\x18\b \x03(\v20.api.wallet.service.v1.GetWalletsResponse.CreditR\acredits\"\x9c\x03\n" +
 	"$ListWalletBalanceTransactionsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12.\n" +
 	"\x10transaction_type\x18\x02 \x01(\tH\x00R\x0ftransactionType\x88\x01\x01\x12\x1f\n" +
 	"\bcurrency\x18\x03 \x01(\tH\x01R\bcurrency\x88\x01\x01\x12>\n" +
 	"\n" +
 	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\aendTime\x88\x01\x01B\x13\n" +
+	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x06 \x01(\x03H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\a \x01(\x03H\x05R\bpageSize\x88\x01\x01B\x13\n" +
 	"\x11_transaction_typeB\v\n" +
 	"\t_currencyB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\x8d\x04\n" +
+	"\t_end_timeB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\x9c\x04\n" +
 	"%ListWalletBalanceTransactionsResponse\x12\x82\x01\n" +
 	"\x14balance_transactions\x18\x01 \x03(\v2O.api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransactionR\x13balanceTransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x97\x02\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xa6\x02\n" +
 	"\x12BalanceTransaction\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12)\n" +
 	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12\x1b\n" +
-	"\tvip_level\x18\x03 \x01(\x05R\bvipLevel\x12\x16\n" +
-	"\x06change\x18\x04 \x01(\tR\x06change\x12%\n" +
+	"\tvip_level\x18\x03 \x01(\x05R\bvipLevel\x12%\n" +
+	"\x0echange_balance\x18\x04 \x01(\tR\rchangeBalance\x12%\n" +
 	"\x0ebefore_balance\x18\x05 \x01(\tR\rbeforeBalance\x12#\n" +
 	"\rafter_balance\x18\x06 \x01(\tR\fafterBalance\x12\x1a\n" +
 	"\bcurrency\x18\a \x01(\tR\bcurrency\"\x93\x01\n" +
