@@ -114,7 +114,7 @@ func (x *ListProvidersResponse) GetProviders() []*ListProvidersResponse_Provider
 type ListProvidersWithDetailRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ProviderId    *string                `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"`
-	Enabled       *string                `protobuf:"bytes,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Enabled       *bool                  `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	Page          *int32                 `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int32                 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -158,11 +158,11 @@ func (x *ListProvidersWithDetailRequest) GetProviderId() string {
 	return ""
 }
 
-func (x *ListProvidersWithDetailRequest) GetEnabled() string {
+func (x *ListProvidersWithDetailRequest) GetEnabled() bool {
 	if x != nil && x.Enabled != nil {
 		return *x.Enabled
 	}
-	return ""
+	return false
 }
 
 func (x *ListProvidersWithDetailRequest) GetPage() int32 {
@@ -2410,7 +2410,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x1eListProvidersWithDetailRequest\x12$\n" +
 	"\vprovider_id\x18\x01 \x01(\tH\x00R\n" +
 	"providerId\x88\x01\x01\x12\x1d\n" +
-	"\aenabled\x18\x02 \x01(\tH\x01R\aenabled\x88\x01\x01\x12\x17\n" +
+	"\aenabled\x18\x02 \x01(\bH\x01R\aenabled\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x03 \x01(\x05H\x02R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x04 \x01(\x05H\x03R\bpageSize\x88\x01\x01B\x0e\n" +
 	"\f_provider_idB\n" +
