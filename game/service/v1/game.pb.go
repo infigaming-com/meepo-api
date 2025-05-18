@@ -519,17 +519,20 @@ func (x *GameSort) GetField() GameSort_Field {
 
 type ListProvidersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Optional filter for provider's id.
+	// If not provided, all providers will be returned.
+	ProviderId *string `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"`
 	// Optional filter for provider's enabled status.
 	// If not provided, all providers will be returned.
-	Enabled *bool `protobuf:"varint,1,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Enabled *bool `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	// Include game count in response, false by default.
 	// Only enable it for ListProviders page which game_count is needed.
-	IncludeGameCount *bool `protobuf:"varint,2,opt,name=include_game_count,json=includeGameCount,proto3,oneof" json:"include_game_count,omitempty"`
+	IncludeGameCount *bool `protobuf:"varint,3,opt,name=include_game_count,json=includeGameCount,proto3,oneof" json:"include_game_count,omitempty"`
 	// Enable pagination, false by default.
 	// Only enable it for ListProviders page.
-	PaginationEnabled *bool  `protobuf:"varint,3,opt,name=pagination_enabled,json=paginationEnabled,proto3,oneof" json:"pagination_enabled,omitempty"`
-	Page              *int32 `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize          *int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	PaginationEnabled *bool  `protobuf:"varint,4,opt,name=pagination_enabled,json=paginationEnabled,proto3,oneof" json:"pagination_enabled,omitempty"`
+	Page              *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize          *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -562,6 +565,13 @@ func (x *ListProvidersRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListProvidersRequest.ProtoReflect.Descriptor instead.
 func (*ListProvidersRequest) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListProvidersRequest) GetProviderId() string {
+	if x != nil && x.ProviderId != nil {
+		return *x.ProviderId
+	}
+	return ""
 }
 
 func (x *ListProvidersRequest) GetEnabled() bool {
@@ -3918,13 +3928,16 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x04DESC\x10\x01\x12\x0e\n" +
 	"\n" +
 	"POPULARITY\x10\x02\x12\r\n" +
-	"\tHIGHLIGHT\x10\x03\"\xa8\x02\n" +
-	"\x14ListProvidersRequest\x12\x1d\n" +
-	"\aenabled\x18\x01 \x01(\bH\x00R\aenabled\x88\x01\x01\x121\n" +
-	"\x12include_game_count\x18\x02 \x01(\bH\x01R\x10includeGameCount\x88\x01\x01\x122\n" +
-	"\x12pagination_enabled\x18\x03 \x01(\bH\x02R\x11paginationEnabled\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x04 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x05 \x01(\x05H\x04R\bpageSize\x88\x01\x01B\n" +
+	"\tHIGHLIGHT\x10\x03\"\xde\x02\n" +
+	"\x14ListProvidersRequest\x12$\n" +
+	"\vprovider_id\x18\x01 \x01(\tH\x00R\n" +
+	"providerId\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x02 \x01(\bH\x01R\aenabled\x88\x01\x01\x121\n" +
+	"\x12include_game_count\x18\x03 \x01(\bH\x02R\x10includeGameCount\x88\x01\x01\x122\n" +
+	"\x12pagination_enabled\x18\x04 \x01(\bH\x03R\x11paginationEnabled\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\x0e\n" +
+	"\f_provider_idB\n" +
 	"\n" +
 	"\b_enabledB\x15\n" +
 	"\x13_include_game_countB\x15\n" +
