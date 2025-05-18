@@ -927,6 +927,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletResponse'
+    /v1/game/backoffice/game/update:
+        post:
+            tags:
+                - Game
+            operationId: Game_BackofficeUpdateGame
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.BackofficeUpdateGameRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.BackofficeUpdateGameResponse'
     /v1/game/backoffice/games/list:
         post:
             tags:
@@ -4197,6 +4215,16 @@ components:
                         type: string
                 enabled:
                     type: boolean
+        api.game.service.v1.BackofficeUpdateGameRequest:
+            type: object
+            properties:
+                gameId:
+                    type: string
+                enabled:
+                    type: boolean
+        api.game.service.v1.BackofficeUpdateGameResponse:
+            type: object
+            properties: {}
         api.game.service.v1.BalanceRequest:
             type: object
             properties:
