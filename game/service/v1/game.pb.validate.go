@@ -1065,6 +1065,14 @@ func (m *ListProvidersResponse) validate(all bool) error {
 		// no validation rules for Total
 	}
 
+	if m.TotalEnabled != nil {
+		// no validation rules for TotalEnabled
+	}
+
+	if m.TotalDisabled != nil {
+		// no validation rules for TotalDisabled
+	}
+
 	if m.Page != nil {
 		// no validation rules for Page
 	}

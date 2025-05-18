@@ -181,8 +181,10 @@ message ListProvidersResponse {
 	}
 	repeated Provider providers = 1;
 	optional int32 total = 2;
-	optional int32 page = 3;
-	optional int32 page_size = 4;
+	optional int32 total_enabled = 3;
+	optional int32 total_disabled = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
 }
 
 message ListCategoriesRequest{}
