@@ -3303,7 +3303,7 @@ func (x *BackofficeListGamesResponse) GetTotalDisabled() int64 {
 	return 0
 }
 
-type BackofficeUpdateGameRequest struct {
+type UpdateGameRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	GameId        string                 `protobuf:"bytes,1,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	Enabled       *bool                  `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
@@ -3311,20 +3311,20 @@ type BackofficeUpdateGameRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *BackofficeUpdateGameRequest) Reset() {
-	*x = BackofficeUpdateGameRequest{}
+func (x *UpdateGameRequest) Reset() {
+	*x = UpdateGameRequest{}
 	mi := &file_game_service_v1_game_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *BackofficeUpdateGameRequest) String() string {
+func (x *UpdateGameRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BackofficeUpdateGameRequest) ProtoMessage() {}
+func (*UpdateGameRequest) ProtoMessage() {}
 
-func (x *BackofficeUpdateGameRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateGameRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_game_service_v1_game_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3336,45 +3336,45 @@ func (x *BackofficeUpdateGameRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BackofficeUpdateGameRequest.ProtoReflect.Descriptor instead.
-func (*BackofficeUpdateGameRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateGameRequest.ProtoReflect.Descriptor instead.
+func (*UpdateGameRequest) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{46}
 }
 
-func (x *BackofficeUpdateGameRequest) GetGameId() string {
+func (x *UpdateGameRequest) GetGameId() string {
 	if x != nil {
 		return x.GameId
 	}
 	return ""
 }
 
-func (x *BackofficeUpdateGameRequest) GetEnabled() bool {
+func (x *UpdateGameRequest) GetEnabled() bool {
 	if x != nil && x.Enabled != nil {
 		return *x.Enabled
 	}
 	return false
 }
 
-type BackofficeUpdateGameResponse struct {
+type UpdateGameResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *BackofficeUpdateGameResponse) Reset() {
-	*x = BackofficeUpdateGameResponse{}
+func (x *UpdateGameResponse) Reset() {
+	*x = UpdateGameResponse{}
 	mi := &file_game_service_v1_game_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *BackofficeUpdateGameResponse) String() string {
+func (x *UpdateGameResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BackofficeUpdateGameResponse) ProtoMessage() {}
+func (*UpdateGameResponse) ProtoMessage() {}
 
-func (x *BackofficeUpdateGameResponse) ProtoReflect() protoreflect.Message {
+func (x *UpdateGameResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_game_service_v1_game_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3386,8 +3386,8 @@ func (x *BackofficeUpdateGameResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BackofficeUpdateGameResponse.ProtoReflect.Descriptor instead.
-func (*BackofficeUpdateGameResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateGameResponse.ProtoReflect.Descriptor instead.
+func (*UpdateGameResponse) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{47}
 }
 
@@ -4161,13 +4161,13 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x0evalid_bet_rate\x18\f \x01(\x05R\fvalidBetRate\x12-\n" +
 	"\x12support_currencies\x18\r \x03(\tR\x11supportCurrencies\x121\n" +
 	"\x14restricted_countries\x18\x0e \x03(\tR\x13restrictedCountries\x12\x18\n" +
-	"\aenabled\x18\x0f \x01(\bR\aenabled\"a\n" +
-	"\x1bBackofficeUpdateGameRequest\x12\x17\n" +
+	"\aenabled\x18\x0f \x01(\bR\aenabled\"W\n" +
+	"\x11UpdateGameRequest\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x1d\n" +
 	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
 	"\n" +
-	"\b_enabled\"\x1e\n" +
-	"\x1cBackofficeUpdateGameResponse2\xef\x11\n" +
+	"\b_enabled\"\x14\n" +
+	"\x12UpdateGameResponse2\xc0\x11\n" +
 	"\x04Game\x12k\n" +
 	"\x0eCreateOperator\x12*.api.game.service.v1.CreateOperatorRequest\x1a+.api.game.service.v1.CreateOperatorResponse\"\x00\x12k\n" +
 	"\x0eUpdateOperator\x12*.api.game.service.v1.UpdateOperatorRequest\x1a+.api.game.service.v1.UpdateOperatorResponse\"\x00\x12k\n" +
@@ -4187,8 +4187,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x04Play\x12 .api.game.service.v1.PlayRequest\x1a!.api.game.service.v1.PlayResponse\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/game/play\x12u\n" +
 	"\bRollback\x12$.api.game.service.v1.RollbackRequest\x1a%.api.game.service.v1.RollbackResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/game/rollback\x12v\n" +
 	"\bListBets\x12$.api.game.service.v1.ListBetsRequest\x1a%.api.game.service.v1.ListBetsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1/game/bets/list\x12\xa3\x01\n" +
-	"\x13BackofficeListGames\x12/.api.game.service.v1.BackofficeListGamesRequest\x1a0.api.game.service.v1.BackofficeListGamesResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/game/backoffice/games/list\x12\xa7\x01\n" +
-	"\x14BackofficeUpdateGame\x120.api.game.service.v1.BackofficeUpdateGameRequest\x1a1.api.game.service.v1.BackofficeUpdateGameResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/game/backoffice/game/updateBO\n" +
+	"\x13BackofficeListGames\x12/.api.game.service.v1.BackofficeListGamesRequest\x1a0.api.game.service.v1.BackofficeListGamesResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/game/backoffice/games/list\x12y\n" +
+	"\n" +
+	"UpdateGame\x12&.api.game.service.v1.UpdateGameRequest\x1a'.api.game.service.v1.UpdateGameResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/game/updateBO\n" +
 	"\x13api.game.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (
@@ -4253,8 +4254,8 @@ var file_game_service_v1_game_proto_goTypes = []any{
 	(*Bet)(nil),                              // 44: api.game.service.v1.Bet
 	(*BackofficeListGamesRequest)(nil),       // 45: api.game.service.v1.BackofficeListGamesRequest
 	(*BackofficeListGamesResponse)(nil),      // 46: api.game.service.v1.BackofficeListGamesResponse
-	(*BackofficeUpdateGameRequest)(nil),      // 47: api.game.service.v1.BackofficeUpdateGameRequest
-	(*BackofficeUpdateGameResponse)(nil),     // 48: api.game.service.v1.BackofficeUpdateGameResponse
+	(*UpdateGameRequest)(nil),                // 47: api.game.service.v1.UpdateGameRequest
+	(*UpdateGameResponse)(nil),               // 48: api.game.service.v1.UpdateGameResponse
 	(*ListProvidersResponse_Provider)(nil),   // 49: api.game.service.v1.ListProvidersResponse.Provider
 	(*BalanceResponse_Data)(nil),             // 50: api.game.service.v1.BalanceResponse.Data
 	(*PlayResponse_Data)(nil),                // 51: api.game.service.v1.PlayResponse.Data
@@ -4301,7 +4302,7 @@ var file_game_service_v1_game_proto_depIdxs = []int32{
 	38, // 35: api.game.service.v1.Game.Rollback:input_type -> api.game.service.v1.RollbackRequest
 	42, // 36: api.game.service.v1.Game.ListBets:input_type -> api.game.service.v1.ListBetsRequest
 	45, // 37: api.game.service.v1.Game.BackofficeListGames:input_type -> api.game.service.v1.BackofficeListGamesRequest
-	47, // 38: api.game.service.v1.Game.BackofficeUpdateGame:input_type -> api.game.service.v1.BackofficeUpdateGameRequest
+	47, // 38: api.game.service.v1.Game.UpdateGame:input_type -> api.game.service.v1.UpdateGameRequest
 	2,  // 39: api.game.service.v1.Game.CreateOperator:output_type -> api.game.service.v1.CreateOperatorResponse
 	4,  // 40: api.game.service.v1.Game.UpdateOperator:output_type -> api.game.service.v1.UpdateOperatorResponse
 	6,  // 41: api.game.service.v1.Game.DeleteOperator:output_type -> api.game.service.v1.DeleteOperatorResponse
@@ -4320,7 +4321,7 @@ var file_game_service_v1_game_proto_depIdxs = []int32{
 	40, // 54: api.game.service.v1.Game.Rollback:output_type -> api.game.service.v1.RollbackResponse
 	43, // 55: api.game.service.v1.Game.ListBets:output_type -> api.game.service.v1.ListBetsResponse
 	46, // 56: api.game.service.v1.Game.BackofficeListGames:output_type -> api.game.service.v1.BackofficeListGamesResponse
-	48, // 57: api.game.service.v1.Game.BackofficeUpdateGame:output_type -> api.game.service.v1.BackofficeUpdateGameResponse
+	48, // 57: api.game.service.v1.Game.UpdateGame:output_type -> api.game.service.v1.UpdateGameResponse
 	39, // [39:58] is the sub-list for method output_type
 	20, // [20:39] is the sub-list for method input_type
 	20, // [20:20] is the sub-list for extension type_name

@@ -60,7 +60,7 @@ func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServ
 	r.POST("/v1/backoffice/game/bets/transactions/get", _BackofficeGame_GetGameTransactionsForBet0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/bets/list", _BackofficeGame_ListUserBets0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/list", _BackofficeGame_ListGames1_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/game/update", _BackofficeGame_UpdateGame0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/update", _BackofficeGame_UpdateGame1_HTTP_Handler(srv))
 }
 
 func _BackofficeGame_ListProviders0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
@@ -305,7 +305,7 @@ func _BackofficeGame_ListGames1_HTTP_Handler(srv BackofficeGameHTTPServer) func(
 	}
 }
 
-func _BackofficeGame_UpdateGame0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+func _BackofficeGame_UpdateGame1_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateGameRequest
 		if err := ctx.Bind(&in); err != nil {

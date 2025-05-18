@@ -19,25 +19,25 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Game_CreateOperator_FullMethodName       = "/api.game.service.v1.Game/CreateOperator"
-	Game_UpdateOperator_FullMethodName       = "/api.game.service.v1.Game/UpdateOperator"
-	Game_DeleteOperator_FullMethodName       = "/api.game.service.v1.Game/DeleteOperator"
-	Game_ListProviders_FullMethodName        = "/api.game.service.v1.Game/ListProviders"
-	Game_ListCategories_FullMethodName       = "/api.game.service.v1.Game/ListCategories"
-	Game_ListFeeGroups_FullMethodName        = "/api.game.service.v1.Game/ListFeeGroups"
-	Game_ListTags_FullMethodName             = "/api.game.service.v1.Game/ListTags"
-	Game_ListThemes_FullMethodName           = "/api.game.service.v1.Game/ListThemes"
-	Game_ListCurrencies_FullMethodName       = "/api.game.service.v1.Game/ListCurrencies"
-	Game_ListGames_FullMethodName            = "/api.game.service.v1.Game/ListGames"
-	Game_GetGame_FullMethodName              = "/api.game.service.v1.Game/GetGame"
-	Game_ProviderList_FullMethodName         = "/api.game.service.v1.Game/ProviderList"
-	Game_CreateSession_FullMethodName        = "/api.game.service.v1.Game/CreateSession"
-	Game_Balance_FullMethodName              = "/api.game.service.v1.Game/Balance"
-	Game_Play_FullMethodName                 = "/api.game.service.v1.Game/Play"
-	Game_Rollback_FullMethodName             = "/api.game.service.v1.Game/Rollback"
-	Game_ListBets_FullMethodName             = "/api.game.service.v1.Game/ListBets"
-	Game_BackofficeListGames_FullMethodName  = "/api.game.service.v1.Game/BackofficeListGames"
-	Game_BackofficeUpdateGame_FullMethodName = "/api.game.service.v1.Game/BackofficeUpdateGame"
+	Game_CreateOperator_FullMethodName      = "/api.game.service.v1.Game/CreateOperator"
+	Game_UpdateOperator_FullMethodName      = "/api.game.service.v1.Game/UpdateOperator"
+	Game_DeleteOperator_FullMethodName      = "/api.game.service.v1.Game/DeleteOperator"
+	Game_ListProviders_FullMethodName       = "/api.game.service.v1.Game/ListProviders"
+	Game_ListCategories_FullMethodName      = "/api.game.service.v1.Game/ListCategories"
+	Game_ListFeeGroups_FullMethodName       = "/api.game.service.v1.Game/ListFeeGroups"
+	Game_ListTags_FullMethodName            = "/api.game.service.v1.Game/ListTags"
+	Game_ListThemes_FullMethodName          = "/api.game.service.v1.Game/ListThemes"
+	Game_ListCurrencies_FullMethodName      = "/api.game.service.v1.Game/ListCurrencies"
+	Game_ListGames_FullMethodName           = "/api.game.service.v1.Game/ListGames"
+	Game_GetGame_FullMethodName             = "/api.game.service.v1.Game/GetGame"
+	Game_ProviderList_FullMethodName        = "/api.game.service.v1.Game/ProviderList"
+	Game_CreateSession_FullMethodName       = "/api.game.service.v1.Game/CreateSession"
+	Game_Balance_FullMethodName             = "/api.game.service.v1.Game/Balance"
+	Game_Play_FullMethodName                = "/api.game.service.v1.Game/Play"
+	Game_Rollback_FullMethodName            = "/api.game.service.v1.Game/Rollback"
+	Game_ListBets_FullMethodName            = "/api.game.service.v1.Game/ListBets"
+	Game_BackofficeListGames_FullMethodName = "/api.game.service.v1.Game/BackofficeListGames"
+	Game_UpdateGame_FullMethodName          = "/api.game.service.v1.Game/UpdateGame"
 )
 
 // GameClient is the client API for Game service.
@@ -62,7 +62,7 @@ type GameClient interface {
 	Rollback(ctx context.Context, in *RollbackRequest, opts ...grpc.CallOption) (*RollbackResponse, error)
 	ListBets(ctx context.Context, in *ListBetsRequest, opts ...grpc.CallOption) (*ListBetsResponse, error)
 	BackofficeListGames(ctx context.Context, in *BackofficeListGamesRequest, opts ...grpc.CallOption) (*BackofficeListGamesResponse, error)
-	BackofficeUpdateGame(ctx context.Context, in *BackofficeUpdateGameRequest, opts ...grpc.CallOption) (*BackofficeUpdateGameResponse, error)
+	UpdateGame(ctx context.Context, in *UpdateGameRequest, opts ...grpc.CallOption) (*UpdateGameResponse, error)
 }
 
 type gameClient struct {
@@ -253,10 +253,10 @@ func (c *gameClient) BackofficeListGames(ctx context.Context, in *BackofficeList
 	return out, nil
 }
 
-func (c *gameClient) BackofficeUpdateGame(ctx context.Context, in *BackofficeUpdateGameRequest, opts ...grpc.CallOption) (*BackofficeUpdateGameResponse, error) {
+func (c *gameClient) UpdateGame(ctx context.Context, in *UpdateGameRequest, opts ...grpc.CallOption) (*UpdateGameResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BackofficeUpdateGameResponse)
-	err := c.cc.Invoke(ctx, Game_BackofficeUpdateGame_FullMethodName, in, out, cOpts...)
+	out := new(UpdateGameResponse)
+	err := c.cc.Invoke(ctx, Game_UpdateGame_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -285,7 +285,7 @@ type GameServer interface {
 	Rollback(context.Context, *RollbackRequest) (*RollbackResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
 	BackofficeListGames(context.Context, *BackofficeListGamesRequest) (*BackofficeListGamesResponse, error)
-	BackofficeUpdateGame(context.Context, *BackofficeUpdateGameRequest) (*BackofficeUpdateGameResponse, error)
+	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -350,8 +350,8 @@ func (UnimplementedGameServer) ListBets(context.Context, *ListBetsRequest) (*Lis
 func (UnimplementedGameServer) BackofficeListGames(context.Context, *BackofficeListGamesRequest) (*BackofficeListGamesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BackofficeListGames not implemented")
 }
-func (UnimplementedGameServer) BackofficeUpdateGame(context.Context, *BackofficeUpdateGameRequest) (*BackofficeUpdateGameResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BackofficeUpdateGame not implemented")
+func (UnimplementedGameServer) UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGame not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -698,20 +698,20 @@ func _Game_BackofficeListGames_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Game_BackofficeUpdateGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BackofficeUpdateGameRequest)
+func _Game_UpdateGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateGameRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GameServer).BackofficeUpdateGame(ctx, in)
+		return srv.(GameServer).UpdateGame(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Game_BackofficeUpdateGame_FullMethodName,
+		FullMethod: Game_UpdateGame_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GameServer).BackofficeUpdateGame(ctx, req.(*BackofficeUpdateGameRequest))
+		return srv.(GameServer).UpdateGame(ctx, req.(*UpdateGameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -796,8 +796,8 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Game_BackofficeListGames_Handler,
 		},
 		{
-			MethodName: "BackofficeUpdateGame",
-			Handler:    _Game_BackofficeUpdateGame_Handler,
+			MethodName: "UpdateGame",
+			Handler:    _Game_UpdateGame_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

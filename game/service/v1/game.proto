@@ -98,9 +98,9 @@ service Game {
 		};
 	};
 
-	rpc BackofficeUpdateGame(BackofficeUpdateGameRequest) returns (BackofficeUpdateGameResponse) {
+	rpc UpdateGame(UpdateGameRequest) returns (UpdateGameResponse) {
 		option (google.api.http) = {
-			post: "/v1/game/backoffice/game/update"
+			post: "/v1/game/update"
 			body: "*"
 		};
 	};
@@ -491,10 +491,10 @@ message BackofficeListGamesResponse {
 	int64 total_disabled = 6;
 }
 
-message BackofficeUpdateGameRequest {
+message UpdateGameRequest {
 	string game_id = 1;
 	optional bool enabled = 2;
 }
 
-message BackofficeUpdateGameResponse {
+message UpdateGameResponse {
 }

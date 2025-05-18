@@ -5552,22 +5552,22 @@ var _ interface {
 	ErrorName() string
 } = BackofficeListGamesResponseValidationError{}
 
-// Validate checks the field values on BackofficeUpdateGameRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *BackofficeUpdateGameRequest) Validate() error {
+// Validate checks the field values on UpdateGameRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *UpdateGameRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on BackofficeUpdateGameRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on UpdateGameRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// BackofficeUpdateGameRequestMultiError, or nil if none found.
-func (m *BackofficeUpdateGameRequest) ValidateAll() error {
+// UpdateGameRequestMultiError, or nil if none found.
+func (m *UpdateGameRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *BackofficeUpdateGameRequest) validate(all bool) error {
+func (m *UpdateGameRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -5581,19 +5581,19 @@ func (m *BackofficeUpdateGameRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return BackofficeUpdateGameRequestMultiError(errors)
+		return UpdateGameRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// BackofficeUpdateGameRequestMultiError is an error wrapping multiple
-// validation errors returned by BackofficeUpdateGameRequest.ValidateAll() if
-// the designated constraints aren't met.
-type BackofficeUpdateGameRequestMultiError []error
+// UpdateGameRequestMultiError is an error wrapping multiple validation errors
+// returned by UpdateGameRequest.ValidateAll() if the designated constraints
+// aren't met.
+type UpdateGameRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m BackofficeUpdateGameRequestMultiError) Error() string {
+func (m UpdateGameRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5602,12 +5602,11 @@ func (m BackofficeUpdateGameRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m BackofficeUpdateGameRequestMultiError) AllErrors() []error { return m }
+func (m UpdateGameRequestMultiError) AllErrors() []error { return m }
 
-// BackofficeUpdateGameRequestValidationError is the validation error returned
-// by BackofficeUpdateGameRequest.Validate if the designated constraints
-// aren't met.
-type BackofficeUpdateGameRequestValidationError struct {
+// UpdateGameRequestValidationError is the validation error returned by
+// UpdateGameRequest.Validate if the designated constraints aren't met.
+type UpdateGameRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5615,24 +5614,24 @@ type BackofficeUpdateGameRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e BackofficeUpdateGameRequestValidationError) Field() string { return e.field }
+func (e UpdateGameRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e BackofficeUpdateGameRequestValidationError) Reason() string { return e.reason }
+func (e UpdateGameRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e BackofficeUpdateGameRequestValidationError) Cause() error { return e.cause }
+func (e UpdateGameRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e BackofficeUpdateGameRequestValidationError) Key() bool { return e.key }
+func (e UpdateGameRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e BackofficeUpdateGameRequestValidationError) ErrorName() string {
-	return "BackofficeUpdateGameRequestValidationError"
+func (e UpdateGameRequestValidationError) ErrorName() string {
+	return "UpdateGameRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e BackofficeUpdateGameRequestValidationError) Error() string {
+func (e UpdateGameRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5644,14 +5643,14 @@ func (e BackofficeUpdateGameRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sBackofficeUpdateGameRequest.%s: %s%s",
+		"invalid %sUpdateGameRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = BackofficeUpdateGameRequestValidationError{}
+var _ error = UpdateGameRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -5659,24 +5658,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = BackofficeUpdateGameRequestValidationError{}
+} = UpdateGameRequestValidationError{}
 
-// Validate checks the field values on BackofficeUpdateGameResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on UpdateGameResponse with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *BackofficeUpdateGameResponse) Validate() error {
+func (m *UpdateGameResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on BackofficeUpdateGameResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on UpdateGameResponse with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// BackofficeUpdateGameResponseMultiError, or nil if none found.
-func (m *BackofficeUpdateGameResponse) ValidateAll() error {
+// UpdateGameResponseMultiError, or nil if none found.
+func (m *UpdateGameResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *BackofficeUpdateGameResponse) validate(all bool) error {
+func (m *UpdateGameResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -5684,19 +5683,19 @@ func (m *BackofficeUpdateGameResponse) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return BackofficeUpdateGameResponseMultiError(errors)
+		return UpdateGameResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// BackofficeUpdateGameResponseMultiError is an error wrapping multiple
-// validation errors returned by BackofficeUpdateGameResponse.ValidateAll() if
-// the designated constraints aren't met.
-type BackofficeUpdateGameResponseMultiError []error
+// UpdateGameResponseMultiError is an error wrapping multiple validation errors
+// returned by UpdateGameResponse.ValidateAll() if the designated constraints
+// aren't met.
+type UpdateGameResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m BackofficeUpdateGameResponseMultiError) Error() string {
+func (m UpdateGameResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5705,12 +5704,11 @@ func (m BackofficeUpdateGameResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m BackofficeUpdateGameResponseMultiError) AllErrors() []error { return m }
+func (m UpdateGameResponseMultiError) AllErrors() []error { return m }
 
-// BackofficeUpdateGameResponseValidationError is the validation error returned
-// by BackofficeUpdateGameResponse.Validate if the designated constraints
-// aren't met.
-type BackofficeUpdateGameResponseValidationError struct {
+// UpdateGameResponseValidationError is the validation error returned by
+// UpdateGameResponse.Validate if the designated constraints aren't met.
+type UpdateGameResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5718,24 +5716,24 @@ type BackofficeUpdateGameResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e BackofficeUpdateGameResponseValidationError) Field() string { return e.field }
+func (e UpdateGameResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e BackofficeUpdateGameResponseValidationError) Reason() string { return e.reason }
+func (e UpdateGameResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e BackofficeUpdateGameResponseValidationError) Cause() error { return e.cause }
+func (e UpdateGameResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e BackofficeUpdateGameResponseValidationError) Key() bool { return e.key }
+func (e UpdateGameResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e BackofficeUpdateGameResponseValidationError) ErrorName() string {
-	return "BackofficeUpdateGameResponseValidationError"
+func (e UpdateGameResponseValidationError) ErrorName() string {
+	return "UpdateGameResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e BackofficeUpdateGameResponseValidationError) Error() string {
+func (e UpdateGameResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5747,14 +5745,14 @@ func (e BackofficeUpdateGameResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sBackofficeUpdateGameResponse.%s: %s%s",
+		"invalid %sUpdateGameResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = BackofficeUpdateGameResponseValidationError{}
+var _ error = UpdateGameResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -5762,7 +5760,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = BackofficeUpdateGameResponseValidationError{}
+} = UpdateGameResponseValidationError{}
 
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
