@@ -603,8 +603,10 @@ type ListProvidersResponse struct {
 	state         protoimpl.MessageState            `protogen:"open.v1"`
 	Providers     []*ListProvidersResponse_Provider `protobuf:"bytes,1,rep,name=providers,proto3" json:"providers,omitempty"`
 	Total         *int32                            `protobuf:"varint,2,opt,name=total,proto3,oneof" json:"total,omitempty"`
-	Page          *int32                            `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                            `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	TotalEnabled  *int32                            `protobuf:"varint,3,opt,name=total_enabled,json=totalEnabled,proto3,oneof" json:"total_enabled,omitempty"`
+	TotalDisabled *int32                            `protobuf:"varint,4,opt,name=total_disabled,json=totalDisabled,proto3,oneof" json:"total_disabled,omitempty"`
+	Page          *int32                            `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                            `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -649,6 +651,20 @@ func (x *ListProvidersResponse) GetProviders() []*ListProvidersResponse_Provider
 func (x *ListProvidersResponse) GetTotal() int32 {
 	if x != nil && x.Total != nil {
 		return *x.Total
+	}
+	return 0
+}
+
+func (x *ListProvidersResponse) GetTotalEnabled() int32 {
+	if x != nil && x.TotalEnabled != nil {
+		return *x.TotalEnabled
+	}
+	return 0
+}
+
+func (x *ListProvidersResponse) GetTotalDisabled() int32 {
+	if x != nil && x.TotalDisabled != nil {
+		return *x.TotalDisabled
 	}
 	return 0
 }
@@ -3915,12 +3931,14 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x13_pagination_enabledB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x81\x03\n" +
+	"_page_size\"\xfc\x03\n" +
 	"\x15ListProvidersResponse\x12Q\n" +
 	"\tproviders\x18\x01 \x03(\v23.api.game.service.v1.ListProvidersResponse.ProviderR\tproviders\x12\x19\n" +
-	"\x05total\x18\x02 \x01(\x05H\x00R\x05total\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x03 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x04 \x01(\x05H\x02R\bpageSize\x88\x01\x01\x1a\x9d\x01\n" +
+	"\x05total\x18\x02 \x01(\x05H\x00R\x05total\x88\x01\x01\x12(\n" +
+	"\rtotal_enabled\x18\x03 \x01(\x05H\x01R\ftotalEnabled\x88\x01\x01\x12*\n" +
+	"\x0etotal_disabled\x18\x04 \x01(\x05H\x02R\rtotalDisabled\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x04R\bpageSize\x88\x01\x01\x1a\x9d\x01\n" +
 	"\bProvider\x12\x1f\n" +
 	"\vprovider_id\x18\x01 \x01(\tR\n" +
 	"providerId\x12#\n" +
@@ -3929,7 +3947,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"game_count\x18\x03 \x01(\x05H\x00R\tgameCount\x88\x01\x01\x12\x18\n" +
 	"\aenabled\x18\x04 \x01(\bR\aenabledB\r\n" +
 	"\v_game_countB\b\n" +
-	"\x06_totalB\a\n" +
+	"\x06_totalB\x10\n" +
+	"\x0e_total_enabledB\x11\n" +
+	"\x0f_total_disabledB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\x17\n" +
