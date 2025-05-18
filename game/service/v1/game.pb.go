@@ -519,11 +519,19 @@ func (x *GameSort) GetField() GameSort_Field {
 
 type ListProvidersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Optional filter for provider's enabled status.
+	// If not provided, all providers will be returned.
+	Enabled *bool `protobuf:"varint,1,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	// Include game count in response, false by default.
-	// Only enable it for ListProviders page which game_count is needed
-	IncludeGameCount *bool `protobuf:"varint,1,opt,name=include_game_count,json=includeGameCount,proto3,oneof" json:"include_game_count,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Only enable it for ListProviders page which game_count is needed.
+	IncludeGameCount *bool `protobuf:"varint,2,opt,name=include_game_count,json=includeGameCount,proto3,oneof" json:"include_game_count,omitempty"`
+	// Enable pagination, false by default.
+	// Only enable it for ListProviders page.
+	PaginationEnabled *bool  `protobuf:"varint,3,opt,name=pagination_enabled,json=paginationEnabled,proto3,oneof" json:"pagination_enabled,omitempty"`
+	Page              *int32 `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize          *int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ListProvidersRequest) Reset() {
@@ -556,6 +564,13 @@ func (*ListProvidersRequest) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{8}
 }
 
+func (x *ListProvidersRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
 func (x *ListProvidersRequest) GetIncludeGameCount() bool {
 	if x != nil && x.IncludeGameCount != nil {
 		return *x.IncludeGameCount
@@ -563,9 +578,33 @@ func (x *ListProvidersRequest) GetIncludeGameCount() bool {
 	return false
 }
 
+func (x *ListProvidersRequest) GetPaginationEnabled() bool {
+	if x != nil && x.PaginationEnabled != nil {
+		return *x.PaginationEnabled
+	}
+	return false
+}
+
+func (x *ListProvidersRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListProvidersRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
 type ListProvidersResponse struct {
 	state         protoimpl.MessageState            `protogen:"open.v1"`
 	Providers     []*ListProvidersResponse_Provider `protobuf:"bytes,1,rep,name=providers,proto3" json:"providers,omitempty"`
+	Total         *int32                            `protobuf:"varint,2,opt,name=total,proto3,oneof" json:"total,omitempty"`
+	Page          *int32                            `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                            `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -605,6 +644,27 @@ func (x *ListProvidersResponse) GetProviders() []*ListProvidersResponse_Provider
 		return x.Providers
 	}
 	return nil
+}
+
+func (x *ListProvidersResponse) GetTotal() int32 {
+	if x != nil && x.Total != nil {
+		return *x.Total
+	}
+	return 0
+}
+
+func (x *ListProvidersResponse) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListProvidersResponse) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
 }
 
 type ListCategoriesRequest struct {
@@ -3842,12 +3902,25 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x04DESC\x10\x01\x12\x0e\n" +
 	"\n" +
 	"POPULARITY\x10\x02\x12\r\n" +
-	"\tHIGHLIGHT\x10\x03\"`\n" +
-	"\x14ListProvidersRequest\x121\n" +
-	"\x12include_game_count\x18\x01 \x01(\bH\x00R\x10includeGameCount\x88\x01\x01B\x15\n" +
-	"\x13_include_game_count\"\x8a\x02\n" +
+	"\tHIGHLIGHT\x10\x03\"\xa8\x02\n" +
+	"\x14ListProvidersRequest\x12\x1d\n" +
+	"\aenabled\x18\x01 \x01(\bH\x00R\aenabled\x88\x01\x01\x121\n" +
+	"\x12include_game_count\x18\x02 \x01(\bH\x01R\x10includeGameCount\x88\x01\x01\x122\n" +
+	"\x12pagination_enabled\x18\x03 \x01(\bH\x02R\x11paginationEnabled\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x04 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x05 \x01(\x05H\x04R\bpageSize\x88\x01\x01B\n" +
+	"\n" +
+	"\b_enabledB\x15\n" +
+	"\x13_include_game_countB\x15\n" +
+	"\x13_pagination_enabledB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\x81\x03\n" +
 	"\x15ListProvidersResponse\x12Q\n" +
-	"\tproviders\x18\x01 \x03(\v23.api.game.service.v1.ListProvidersResponse.ProviderR\tproviders\x1a\x9d\x01\n" +
+	"\tproviders\x18\x01 \x03(\v23.api.game.service.v1.ListProvidersResponse.ProviderR\tproviders\x12\x19\n" +
+	"\x05total\x18\x02 \x01(\x05H\x00R\x05total\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x03 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x04 \x01(\x05H\x02R\bpageSize\x88\x01\x01\x1a\x9d\x01\n" +
 	"\bProvider\x12\x1f\n" +
 	"\vprovider_id\x18\x01 \x01(\tR\n" +
 	"providerId\x12#\n" +
@@ -3855,7 +3928,11 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\n" +
 	"game_count\x18\x03 \x01(\x05H\x00R\tgameCount\x88\x01\x01\x12\x18\n" +
 	"\aenabled\x18\x04 \x01(\bR\aenabledB\r\n" +
-	"\v_game_count\"\x17\n" +
+	"\v_game_countB\b\n" +
+	"\x06_totalB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\x17\n" +
 	"\x15ListCategoriesRequest\"8\n" +
 	"\x16ListCategoriesResponse\x12\x1e\n" +
 	"\n" +
@@ -4335,6 +4412,7 @@ func file_game_service_v1_game_proto_init() {
 		return
 	}
 	file_game_service_v1_game_proto_msgTypes[8].OneofWrappers = []any{}
+	file_game_service_v1_game_proto_msgTypes[9].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[41].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[44].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[46].OneofWrappers = []any{}
