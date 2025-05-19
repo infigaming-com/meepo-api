@@ -118,3 +118,15 @@ func IsGetTransactionPageFailed(err error) bool {
 func ErrorGetTransactionPageFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_TRANSACTION_PAGE_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetTransactionDetailFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_TRANSACTION_DETAIL_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetTransactionDetailFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_TRANSACTION_DETAIL_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -172,7 +172,7 @@ message GetUserOverviewResponse {
 	bool more_than_2_deposits = 26;
 	bool account_older_than_3_months = 27;
 	google.protobuf.Timestamp last_deposit_at = 28;	// ?? Is this time since last deposit
-	bool first_deposit_on_today = 29;
+	bool first_withdraw_on_today = 29;
 }
 
 message GetUserProfileRequest {
@@ -211,6 +211,9 @@ message GetUserProfileResponse {
 	int64 user_id = 2;
 	int32 vip_level = 3;
 	bool online = 4;
+	bool ban_withdraw = 11;
+	bool ban_game = 12;
+	bool ban_login = 13;
 	RegistrationRecord registration_record = 5;
 	repeated LoginRecord login_records = 6;
 	repeated string tags = 7;
@@ -251,11 +254,12 @@ message DeleteUserTagResponse {}
 
 message AddUserCommentRequest {
 	int64 user_id = 1;
-	int64 author_user_id = 2;
 	string content = 3;
 }
 
-message AddUserCommentResponse {}
+message AddUserCommentResponse {
+	int64 comment_id = 1;
+}
 
 message ListUserCommentsRequest {
 	int64 user_id = 1;
@@ -263,7 +267,7 @@ message ListUserCommentsRequest {
 
 message ListUserCommentsResponse {
 	message Comment {
-		string author_username = 1;
+		string author = 1;
 		string content = 2;
 		google.protobuf.Timestamp created_at = 3;
 	}

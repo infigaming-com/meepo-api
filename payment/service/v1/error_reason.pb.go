@@ -34,6 +34,7 @@ const (
 	ErrorReason_DEPOSIT_CALLBACK_FAILED         ErrorReason = 50006
 	ErrorReason_WITHDRAW_CALLBACK_FAILED        ErrorReason = 50007
 	ErrorReason_GET_TRANSACTION_PAGE_FAILED     ErrorReason = 50008
+	ErrorReason_GET_TRANSACTION_DETAIL_FAILED   ErrorReason = 50009
 )
 
 // Enum value maps for ErrorReason.
@@ -48,6 +49,7 @@ var (
 		50006: "DEPOSIT_CALLBACK_FAILED",
 		50007: "WITHDRAW_CALLBACK_FAILED",
 		50008: "GET_TRANSACTION_PAGE_FAILED",
+		50009: "GET_TRANSACTION_DETAIL_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                     0,
@@ -59,6 +61,7 @@ var (
 		"DEPOSIT_CALLBACK_FAILED":         50006,
 		"WITHDRAW_CALLBACK_FAILED":        50007,
 		"GET_TRANSACTION_PAGE_FAILED":     50008,
+		"GET_TRANSACTION_DETAIL_FAILED":   50009,
 	}
 )
 
@@ -93,7 +96,7 @@ var File_payment_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_payment_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"%payment/service/v1/error_reason.proto\x12\x16api.payment.service.v1\x1a\x13errors/errors.proto*\xb7\x02\n" +
+	"%payment/service/v1/error_reason.proto\x12\x16api.payment.service.v1\x1a\x13errors/errors.proto*\xdc\x02\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12$\n" +
 	"\x1eGET_PAYMENT_METHOD_LIST_FAILED\x10ц\x03\x12#\n" +
@@ -103,7 +106,8 @@ const file_payment_service_v1_error_reason_proto_rawDesc = "" +
 	"\x18INITIATE_WITHDRAW_FAILED\x10Ն\x03\x12\x1d\n" +
 	"\x17DEPOSIT_CALLBACK_FAILED\x10ֆ\x03\x12\x1e\n" +
 	"\x18WITHDRAW_CALLBACK_FAILED\x10׆\x03\x12!\n" +
-	"\x1bGET_TRANSACTION_PAGE_FAILED\x10؆\x03\x1a\x04\xa0E\xf4\x03BU\n" +
+	"\x1bGET_TRANSACTION_PAGE_FAILED\x10؆\x03\x12#\n" +
+	"\x1dGET_TRANSACTION_DETAIL_FAILED\x10ن\x03\x1a\x04\xa0E\xf4\x03BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
 
 var (

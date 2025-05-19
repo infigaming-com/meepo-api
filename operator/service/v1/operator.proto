@@ -24,6 +24,8 @@ service Operator {
 		};
 	}
 
+	rpc GetOperator(GetOperatorRequest) returns (GetOperatorResponse) {}
+
 	rpc AddOrUpdateCurrency(AddOrUpdateCurrencyRequest) returns (AddOrUpdateCurrencyResponse) {
 	}
 
@@ -48,8 +50,7 @@ service Operator {
 		};
 	}
 
-	rpc GetOperatorIdByOrigin(GetOperatorIdByOriginRequest) returns (GetOperatorIdByOriginResponse) {
-	}
+	rpc GetOperatorIdByOrigin(GetOperatorIdByOriginRequest) returns (GetOperatorIdByOriginResponse) {}
 	
 	rpc DeleteOriginOperatorId(DeleteOriginOperatorIdRequest) returns (DeleteOriginOperatorIdResponse) {
 		option (google.api.http) = {
@@ -84,6 +85,19 @@ message UpdateOperatorRequest {
 }
 
 message UpdateOperatorResponse {}
+
+message GetOperatorRequest {
+	int64 operator_id = 1;
+}
+
+message GetOperatorResponse {
+	message Operator {
+		int64 operator_id = 1;
+		string name = 2;
+		bool enabled = 3;
+	}
+	Operator operator = 1;
+}
 
 message AddOrUpdateCurrencyRequest {
 	string currency = 1;

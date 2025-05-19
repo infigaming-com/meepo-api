@@ -384,10 +384,36 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListGamesResponse'
+    /v1/backoffice/game/providers-with-detail/list:
+        post:
+            tags:
+                - BackofficeGame
+            description: |-
+                ListProvidersWithDetail returns all providers with detailed information,
+                 including game count and enabled status.
+                 ListProvidersWithDetail is used for the providers page.
+            operationId: BackofficeGame_ListProvidersWithDetail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersWithDetailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersWithDetailResponse'
     /v1/backoffice/game/providers/list:
         post:
             tags:
                 - BackofficeGame
+            description: |-
+                ListProviders returns all providers with optional filter for enabled status.
+                 If not provided, all providers will be returned.
+                 ListProviders is used for the providers drop down list and provider search.
             operationId: BackofficeGame_ListProviders
             requestBody:
                 content:
@@ -522,7 +548,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionPageRequest'
+                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
                 required: true
             responses:
                 "200":
@@ -530,7 +556,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionPageResponse'
+                                $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
     /v1/backoffice/report/daily-summaries/list:
         post:
             tags:
@@ -711,16 +737,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
-    /v1/backoffice/review/withdraw-review-tickets/list:
+    /v1/backoffice/review/tickets/list:
         post:
             tags:
                 - BackofficeReview
-            operationId: BackofficeReview_ListWithdrawReviewTickets
+            operationId: BackofficeReview_ListTickets
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawReviewTicketsRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsRequest'
                 required: true
             responses:
                 "200":
@@ -728,7 +754,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawReviewTicketsResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse'
     /v1/backoffice/user/comments/add:
         post:
             tags:
@@ -855,6 +881,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.DeleteUserTagResponse'
+    /v1/backoffice/wallet/balance-transactions/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
+            operationId: BackofficeWallet_ListWalletBalanceTransactions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsResponse'
     /v1/backoffice/wallet/credit-transactions/get:
         post:
             tags:
@@ -873,6 +918,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditTransactionsResponse'
+    /v1/backoffice/wallet/credits/get:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_GetWalletCredits
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditsResponse'
     /v1/backoffice/wallet/get:
         post:
             tags:
@@ -909,6 +972,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletResponse'
+    /v1/game/backoffice/games/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_BackofficeListGames
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.BackofficeListGamesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.BackofficeListGamesResponse'
     /v1/game/balance:
         post:
             tags:
@@ -1071,6 +1152,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
+    /v1/game/update:
+        post:
+            tags:
+                - Game
+            operationId: Game_UpdateGame
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.UpdateGameRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.UpdateGameResponse'
     /v1/operator/add:
         post:
             tags:
@@ -1290,6 +1389,28 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /v1/payment/transaction/detail:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Get transaction detail
+                 Retrieves detailed information about a specific transaction
+                 Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+            operationId: Payment_GetTransactionDetailById
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetTransactionDetailByIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetTransactionDetailByIdResponse'
     /v1/payment/transaction/page:
         post:
             tags:
@@ -1357,78 +1478,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawResponse'
-    /v1/review/approve:
-        post:
-            tags:
-                - Review
-            operationId: Review_ApproveReview
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.review.service.v1.ApproveReviewRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.review.service.v1.ApproveReviewResponse'
-    /v1/review/comment:
-        post:
-            tags:
-                - Review
-            operationId: Review_AddReviewComment
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.review.service.v1.AddReviewCommentRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.review.service.v1.AddReviewCommentResponse'
-    /v1/review/get:
-        post:
-            tags:
-                - Review
-            operationId: Review_GetReview
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.review.service.v1.GetReviewRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.review.service.v1.GetReviewResponse'
-    /v1/review/list:
-        post:
-            tags:
-                - Review
-            operationId: Review_ListReviews
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.review.service.v1.ListReviewsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.review.service.v1.ListReviewsResponse'
     /v1/review/withdraw:
         post:
             tags:
@@ -1917,13 +1966,13 @@ components:
             properties:
                 userId:
                     type: string
-                authorUserId:
-                    type: string
                 content:
                     type: string
         api.backoffice.service.v1.AddUserCommentResponse:
             type: object
-            properties: {}
+            properties:
+                commentId:
+                    type: string
         api.backoffice.service.v1.AddUserTagRequest:
             type: object
             properties:
@@ -1937,7 +1986,7 @@ components:
         api.backoffice.service.v1.Bet:
             type: object
             properties:
-                operator:
+                operatorName:
                     type: string
                 createdAt:
                     type: string
@@ -1945,33 +1994,31 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
-                category:
+                gameCategory:
+                    type: string
+                gameName:
                     type: string
                 gameId:
                     type: string
-                provider:
+                providerName:
                     type: string
-                operatorTransactionId:
+                operatorBetId:
                     type: string
-                providerTransactionId:
+                providerBetId:
                     type: string
                 userId:
                     type: string
                 betAmount:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.Bet_Amount'
+                    type: string
+                settlementBetAmount:
+                    type: string
                 winAmount:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.Bet_Amount'
+                    type: string
+                settlementWinAmount:
+                    type: string
                 odds:
-                    type: number
-                    format: double
+                    type: string
                 validBetAmount:
-                    type: string
-        api.backoffice.service.v1.Bet_Amount:
-            type: object
-            properties:
-                amountInCurrency:
-                    type: string
-                amountInSettlementCurrency:
                     type: string
         api.backoffice.service.v1.Bind2faRequest:
             type: object
@@ -2229,166 +2276,6 @@ components:
                     type: string
                 yesterday:
                     type: string
-        api.backoffice.service.v1.GetPaymentTransactionPageRequest:
-            type: object
-            properties:
-                page:
-                    type: integer
-                    description: Page number to retrieve (1-based)
-                    format: int32
-                pageSize:
-                    type: integer
-                    description: Number of items per page
-                    format: int32
-                transactionId:
-                    type: string
-                    description: Optional transaction ID filter
-                operatorId:
-                    type: string
-                    description: Optional operator ID filter
-                userId:
-                    type: string
-                    description: Optional user ID filter
-                currency:
-                    type: string
-                    description: Optional currency filter
-                paymentMethod:
-                    type: string
-                    description: Optional payment method filter
-                paymentChannel:
-                    type: string
-                    description: Optional payment channel filter
-                protocol:
-                    type: string
-                    description: Optional protocol filter
-                type:
-                    enum:
-                        - TRANSACTION_TYPE_UNSPECIFIED
-                        - TRANSACTION_TYPE_DEPOSIT
-                        - TRANSACTION_TYPE_WITHDRAW
-                    type: string
-                    description: Optional transaction type filter
-                    format: enum
-                status:
-                    enum:
-                        - TRANSACTION_STATUS_UNSPECIFIED
-                        - TRANSACTION_STATUS_PROCESSING
-                        - TRANSACTION_STATUS_SUCCESSFUL
-                        - TRANSACTION_STATUS_FAILED
-                    type: string
-                    description: Optional status filter
-                    format: enum
-                agent:
-                    type: string
-                    description: Optional agent filter
-                startTime:
-                    type: string
-                    description: Optional start time for date range filter
-                    format: date-time
-                endTime:
-                    type: string
-                    description: Optional end time for date range filter
-                    format: date-time
-                sort:
-                    enum:
-                        - DESC
-                        - ASC
-                    type: string
-                    description: Optional sort direction
-                    format: enum
-            description: |-
-                Request to get payment transaction page
-                 Used to retrieve a paginated list of payment transactions with optional filters
-        api.backoffice.service.v1.GetPaymentTransactionPageResponse:
-            type: object
-            properties:
-                paymentTransactions:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionPageResponse_PaymentTransaction'
-                    description: List of payment transactions matching the filter criteria
-                totalCount:
-                    type: integer
-                    description: Total number of transactions matching the filter criteria
-                    format: int32
-                page:
-                    type: integer
-                    description: Current page number
-                    format: int32
-                pageSize:
-                    type: integer
-                    description: Number of items per page
-                    format: int32
-                totalPages:
-                    type: integer
-                    description: Total number of pages available
-                    format: int32
-                totalSuccessful:
-                    type: integer
-                    description: Total number of successful transactions
-                    format: int32
-                totalProcessing:
-                    type: integer
-                    description: Total number of processing transactions
-                    format: int32
-                totalFailed:
-                    type: integer
-                    description: Total number of failed transactions
-                    format: int32
-            description: |-
-                Response for payment transaction page
-                 Contains paginated list of payment transactions and pagination metadata
-        api.backoffice.service.v1.GetPaymentTransactionPageResponse_PaymentTransaction:
-            type: object
-            properties:
-                operator:
-                    type: string
-                    description: Operator ID associated with the transaction
-                createdAt:
-                    type: string
-                    description: Timestamp when the transaction was created
-                    format: date-time
-                updatedAt:
-                    type: string
-                    description: Timestamp when the transaction was last updated
-                    format: date-time
-                userId:
-                    type: string
-                    description: ID of the user who initiated the transaction
-                vipLevel:
-                    type: integer
-                    description: VIP level of the user
-                    format: int32
-                amount:
-                    type: string
-                    description: Transaction amount with currency unit
-                currency:
-                    type: string
-                    description: Currency code for the transaction
-                paymentChannel:
-                    type: string
-                    description: Payment channel used for the transaction
-                protocol:
-                    type: string
-                    description: Protocol used for the transaction
-                status:
-                    enum:
-                        - TRANSACTION_STATUS_UNSPECIFIED
-                        - TRANSACTION_STATUS_PROCESSING
-                        - TRANSACTION_STATUS_SUCCESSFUL
-                        - TRANSACTION_STATUS_FAILED
-                    type: string
-                    description: Current status of the transaction
-                    format: enum
-                transactionId:
-                    type: string
-                    description: Unique identifier for the transaction
-                paTransactionId:
-                    type: string
-                    description: Transaction ID from the payment gateway
-            description: |-
-                Payment transaction information
-                 Detailed information about a specific payment transaction
         api.backoffice.service.v1.GetPlayerGameDataSummaryRequest:
             type: object
             properties:
@@ -2798,7 +2685,7 @@ components:
                 lastDepositAt:
                     type: string
                     format: date-time
-                firstDepositOnToday:
+                firstWithdrawOnToday:
                     type: boolean
         api.backoffice.service.v1.GetUserOverviewResponse_GameData:
             type: object
@@ -2827,6 +2714,12 @@ components:
                     type: integer
                     format: int32
                 online:
+                    type: boolean
+                banWithdraw:
+                    type: boolean
+                banGame:
+                    type: boolean
+                banLogin:
                     type: boolean
                 registrationRecord:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_RegistrationRecord'
@@ -2899,11 +2792,7 @@ components:
         api.backoffice.service.v1.GetWalletCreditTransactionsRequest:
             type: object
             properties:
-                creditId:
-                    type: string
-                page:
-                    type: string
-                pageSize:
+                transactionId:
                     type: string
         api.backoffice.service.v1.GetWalletCreditTransactionsResponse:
             type: object
@@ -2913,22 +2802,77 @@ components:
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditTransactionsResponse_CreditTransaction'
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
                 total:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetWalletCreditTransactionsResponse_CreditTransaction:
             type: object
             properties:
-                type:
-                    type: string
                 createdAt:
                     type: string
                     format: date-time
-                cash:
+                type:
                     type: string
-                bonus:
+        api.backoffice.service.v1.GetWalletCreditsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                transactionType:
+                    type: string
+                currency:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetWalletCreditsResponse:
+            type: object
+            properties:
+                credits:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditsResponse_Credit'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetWalletCreditsResponse_Credit:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    format: date-time
+                transactionId:
+                    type: string
+                type:
+                    type: string
+                vipLevel:
+                    type: integer
+                    format: int32
+                beforeBlanace:
+                    type: string
+                afterBalance:
+                    type: string
+                currency:
                     type: string
         api.backoffice.service.v1.GetWalletsRequest:
             type: object
@@ -3013,17 +2957,15 @@ components:
                     type: array
                     items:
                         type: string
-                gameNames:
-                    type: array
-                    items:
-                        type: string
+                gameName:
+                    type: string
                 gameId:
                     type: string
                 userId:
                     type: string
-                operatorTransactionId:
+                operatorBetId:
                     type: string
-                providerTransactionId:
+                providerBetId:
                     type: string
                 startTime:
                     type: string
@@ -3054,6 +2996,16 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.Bet'
+                turnover:
+                    type: string
+                winAmount:
+                    type: string
+                betCount:
+                    type: integer
+                    format: int32
+                rtpPercentage:
+                    type: integer
+                    format: int32
                 page:
                     type: string
                 pageSize:
@@ -3484,7 +3436,7 @@ components:
         api.backoffice.service.v1.ListGamesRequest:
             type: object
             properties:
-                providers:
+                providerIds:
                     type: array
                     items:
                         type: string
@@ -3493,10 +3445,6 @@ components:
                     items:
                         type: string
                 feeGroups:
-                    type: array
-                    items:
-                        type: string
-                gameNames:
                     type: array
                     items:
                         type: string
@@ -3589,7 +3537,9 @@ components:
                     type: boolean
         api.backoffice.service.v1.ListProvidersRequest:
             type: object
-            properties: {}
+            properties:
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.ListProvidersResponse:
             type: object
             properties:
@@ -3604,6 +3554,53 @@ components:
                     type: string
                 providerName:
                     type: string
+        api.backoffice.service.v1.ListProvidersWithDetailRequest:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                enabled:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListProvidersWithDetailResponse:
+            type: object
+            properties:
+                providers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersWithDetailResponse_Provider'
+                total:
+                    type: integer
+                    format: int32
+                totalEnabled:
+                    type: integer
+                    format: int32
+                totalDisabled:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListProvidersWithDetailResponse_Provider:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                gameCount:
+                    type: integer
+                    format: int32
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.ListTagsRequest:
             type: object
             properties: {}
@@ -3624,6 +3621,115 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListTicketsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                operatorId:
+                    type: string
+                ticketId:
+                    type: string
+                currency:
+                    type: string
+                status:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListTicketsResponse:
+            type: object
+            properties:
+                tickets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse_Ticket'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                totalCount:
+                    type: integer
+                    format: int32
+                totalAmount:
+                    type: string
+                totalPendingCount:
+                    type: integer
+                    format: int32
+                totalPendingAmount:
+                    type: string
+                totalPayingCount:
+                    type: integer
+                    format: int32
+                totalPayingAmount:
+                    type: string
+                totalPaidCount:
+                    type: integer
+                    format: int32
+                totalPaidAmount:
+                    type: string
+                totalFailedCount:
+                    type: integer
+                    format: int32
+                totalFailedAmount:
+                    type: string
+                totalRejectedCount:
+                    type: integer
+                    format: int32
+                totalRejectedAmount:
+                    type: string
+                averageReviewTime:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListTicketsResponse_Ticket:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    format: date-time
+                operator:
+                    type: string
+                ticketId:
+                    type: string
+                userId:
+                    type: string
+                vipLevel:
+                    type: integer
+                    format: int32
+                userTags:
+                    type: array
+                    items:
+                        type: string
+                beforeBalance:
+                    type: string
+                afterBalance:
+                    type: string
+                currency:
+                    type: string
+                paymentChannel:
+                    type: string
+                protocol:
+                    type: string
+                fee:
+                    type: string
+                status:
+                    type: string
+                reviewerUsername:
+                    type: string
+                reviewDuration:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListUserBetsRequest:
             type: object
             properties:
@@ -3633,10 +3739,8 @@ components:
                     type: array
                     items:
                         type: string
-                gameNames:
-                    type: array
-                    items:
-                        type: string
+                gameName:
+                    type: string
                 gameId:
                     type: string
                 currencies:
@@ -3690,7 +3794,7 @@ components:
         api.backoffice.service.v1.ListUserCommentsResponse_Comment:
             type: object
             properties:
-                authorUsername:
+                author:
                     type: string
                 content:
                     type: string
@@ -3835,6 +3939,94 @@ components:
                 source:
                     type: string
                 registrationIp:
+                    type: string
+        api.backoffice.service.v1.ListWalletBalanceTransactionsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                transactionType:
+                    type: string
+                    description: |-
+                        Transaction types for different operations
+                         Expected values:
+                         Credit operations:
+                           - "payment_deposit"    - Payment deposit transaction
+                           - "game_win"          - Game win transaction
+
+                         Debit operations:
+                           - "payment_withdraw"   - Payment withdraw transaction
+                           - "game_bet"          - Game bet transaction
+                           - "payment_withdraw_freeze" - Payment withdraw freeze transaction
+
+                         Settlement operations:
+                           - "payment_withdraw_settle" - Payment withdraw settlement
+
+                         Rollback operations:
+                           - "game_bet_rollback"            - Game bet transaction rollback
+                           - "game_win_rollback"            - Game win transaction rollback
+                           - "payment_withdraw_rollback" - Payment withdraw transaction rollback
+                currency:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+        api.backoffice.service.v1.ListWalletBalanceTransactionsResponse:
+            type: object
+            properties:
+                balanceTransactions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsResponse_BalanceTransaction'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListWalletBalanceTransactionsResponse_BalanceTransaction:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    format: date-time
+                transactionType:
+                    type: string
+                    description: |-
+                        Transaction types for different operations
+                         Expected values:
+                         Credit operations:
+                           - "payment_deposit"    - Payment deposit transaction
+                           - "game_win"          - Game win transaction
+
+                         Debit operations:
+                           - "payment_withdraw"   - Payment withdraw transaction
+                           - "game_bet"          - Game bet transaction
+                           - "payment_withdraw_freeze" - Payment withdraw freeze transaction
+
+                         Settlement operations:
+                           - "payment_withdraw_settle" - Payment withdraw settlement
+
+                         Rollback operations:
+                           - "game_bet_rollback"            - Game bet transaction rollback
+                           - "game_win_rollback"            - Game win transaction rollback
+                           - "payment_withdraw_rollback" - Payment withdraw transaction rollback
+                vipLevel:
+                    type: integer
+                    format: int32
+                change:
+                    type: string
+                beforeBalance:
+                    type: string
+                afterBalance:
+                    type: string
+                currency:
                     type: string
         api.backoffice.service.v1.ListWithdrawDailyDetailsRequest:
             type: object
@@ -3981,85 +4173,6 @@ components:
                     format: int32
                 withdrawAmount:
                     type: string
-        api.backoffice.service.v1.ListWithdrawReviewTicketsRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                userId:
-                    type: string
-                reviewTicketId:
-                    type: string
-                currency:
-                    type: string
-                status:
-                    type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-                page:
-                    type: string
-                pageSize:
-                    type: string
-        api.backoffice.service.v1.ListWithdrawReviewTicketsResponse:
-            type: object
-            properties:
-                withdrawReviewTickets:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawReviewTicketsResponse_WithdrawReviewTicket'
-                page:
-                    type: string
-                pageSize:
-                    type: string
-                total:
-                    type: string
-                totalPending:
-                    type: string
-                totalPaying:
-                    type: string
-                totalPaid:
-                    type: string
-                totalFailed:
-                    type: string
-                totalRejected:
-                    type: string
-                averageReviewTime:
-                    type: string
-        api.backoffice.service.v1.ListWithdrawReviewTicketsResponse_WithdrawReviewTicket:
-            type: object
-            properties:
-                createdAt:
-                    type: string
-                    format: date-time
-                operator:
-                    type: string
-                reviewTicketId:
-                    type: string
-                category:
-                    type: string
-                vipLevel:
-                    type: integer
-                    format: int32
-                userTags:
-                    type: array
-                    items:
-                        type: string
-                beforeBalance:
-                    type: string
-                afterBalance:
-                    type: string
-                currency:
-                    type: string
-                paymentChannel:
-                    type: string
-                protocol:
-                    type: string
-                fee:
-                    type: string
         api.backoffice.service.v1.PaymentData_Data:
             type: object
             properties:
@@ -4078,11 +4191,11 @@ components:
         api.backoffice.service.v1.ReviewTicketRequest:
             type: object
             properties:
-                reviewTicketId:
+                ticketId:
                     type: string
                 reviewerUserId:
                     type: string
-                reviewAction:
+                action:
                     type: string
                 reviewComment:
                     type: string
@@ -4189,6 +4302,108 @@ components:
                     type: string
                 providerTimestamp:
                     type: string
+        api.game.service.v1.BackofficeListGamesRequest:
+            type: object
+            properties:
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                categories:
+                    type: array
+                    items:
+                        type: string
+                feeGroups:
+                    type: array
+                    items:
+                        type: string
+                gameId:
+                    type: string
+                gameTags:
+                    type: array
+                    items:
+                        type: string
+                themes:
+                    type: array
+                    items:
+                        type: string
+                supportBonusBuy:
+                    type: boolean
+                hasFreespins:
+                    type: boolean
+                supportCurrencies:
+                    type: array
+                    items:
+                        type: string
+                restrictedCountries:
+                    type: array
+                    items:
+                        type: string
+                enabled:
+                    type: boolean
+                page:
+                    type: string
+                pageSize:
+                    type: string
+        api.game.service.v1.BackofficeListGamesResponse:
+            type: object
+            properties:
+                games:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.BackofficeListGamesResponse_Game'
+                page:
+                    type: string
+                pageSize:
+                    type: string
+                total:
+                    type: string
+                totalEnabled:
+                    type: string
+                totalDisabled:
+                    type: string
+        api.game.service.v1.BackofficeListGamesResponse_Game:
+            type: object
+            properties:
+                name:
+                    type: string
+                provider:
+                    type: string
+                id:
+                    type: string
+                category:
+                    type: string
+                theme:
+                    type: string
+                supportBonusBuy:
+                    type: boolean
+                hasFreespins:
+                    type: boolean
+                tags:
+                    type: array
+                    items:
+                        type: string
+                feeGroup:
+                    type: string
+                rate:
+                    type: integer
+                    format: int32
+                rtp:
+                    type: integer
+                    format: int32
+                validBetRate:
+                    type: integer
+                    format: int32
+                supportCurrencies:
+                    type: array
+                    items:
+                        type: string
+                restrictedCountries:
+                    type: array
+                    items:
+                        type: string
+                enabled:
+                    type: boolean
         api.game.service.v1.BalanceRequest:
             type: object
             properties:
@@ -4235,6 +4450,10 @@ components:
                     type: string
                 providerName:
                     type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
                 currency:
                     type: string
                 settlementCurrency:
@@ -4249,13 +4468,22 @@ components:
                     type: string
                 gameCategory:
                     type: string
+                winCount:
+                    type: integer
+                    format: int32
                 betAmount:
+                    type: string
+                validBetAmount:
                     type: string
                 settlementBetAmount:
                     type: string
                 winAmount:
                     type: string
                 settlementWinAmount:
+                    type: string
+                turnover:
+                    type: string
+                odds:
                     type: string
                 rollbackBetAmount:
                     type: string
@@ -4376,17 +4604,23 @@ components:
         api.game.service.v1.ListBetsRequest:
             type: object
             properties:
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameName:
+                    type: string
+                gameId:
+                    type: string
                 userId:
                     type: string
-                categories:
-                    type: array
-                    items:
-                        type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                status:
+                operatorBetId:
+                    type: string
+                providerBetId:
                     type: string
                 startTime:
                     type: string
@@ -4394,6 +4628,24 @@ components:
                 endTime:
                     type: string
                     format: date-time
+                minBetAmount:
+                    type: string
+                maxBetAmount:
+                    type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                settlementCurrencies:
+                    type: array
+                    items:
+                        type: string
+                categories:
+                    type: array
+                    items:
+                        type: string
+                status:
+                    type: string
                 page:
                     type: string
                 pageSize:
@@ -4405,6 +4657,16 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.game.service.v1.Bet'
+                turnover:
+                    type: string
+                winAmount:
+                    type: string
+                betCount:
+                    type: integer
+                    format: int32
+                rtpPercentage:
+                    type: integer
+                    format: int32
                 total:
                     type: string
                 page:
@@ -4586,6 +4848,16 @@ components:
                 bonusAmount:
                     type: number
                     format: double
+        api.game.service.v1.UpdateGameRequest:
+            type: object
+            properties:
+                gameId:
+                    type: string
+                enabled:
+                    type: boolean
+        api.game.service.v1.UpdateGameResponse:
+            type: object
+            properties: {}
         api.game.service.v1.UrlInfo:
             type: object
             properties:
@@ -4683,96 +4955,16 @@ components:
         api.operator.service.v1.UpdateOperatorResponse:
             type: object
             properties: {}
-        api.review.service.v1.AddReviewCommentRequest:
-            type: object
-            properties:
-                reviewId:
-                    type: string
-                authorUserId:
-                    type: string
-                content:
-                    type: string
-        api.review.service.v1.AddReviewCommentResponse:
-            type: object
-            properties: {}
-        api.review.service.v1.ApproveReviewRequest:
-            type: object
-            properties:
-                reviewId:
-                    type: string
-                action:
-                    enum:
-                        - REVIEW_ACTION_UNSPECIFIED
-                        - REVIEW_ACTION_APPROVE
-                        - REVIEW_ACTION_REJECT
-                        - REVIEW_ACTION_MANUAL_PAYOUT
-                    type: string
-                    format: enum
-                approveComment:
-                    type: string
-        api.review.service.v1.ApproveReviewResponse:
-            type: object
-            properties: {}
         api.review.service.v1.CreateWithdrawRequest:
             type: object
             properties:
-                withdrawRequestData:
+                request:
                     type: object
         api.review.service.v1.CreateWithdrawResponse:
             type: object
             properties:
-                withdrawResponseData:
-                    type: object
-        api.review.service.v1.GetReviewRequest:
-            type: object
-            properties:
-                reviewId:
+                ticketId:
                     type: string
-        api.review.service.v1.GetReviewResponse:
-            type: object
-            properties:
-                comments:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.review.service.v1.GetReviewResponse_Comment'
-        api.review.service.v1.GetReviewResponse_Comment:
-            type: object
-            properties:
-                authorUserName:
-                    type: string
-                content:
-                    type: string
-                createdAt:
-                    type: string
-                    format: date-time
-        api.review.service.v1.ListReviewsRequest:
-            type: object
-            properties:
-                reviewId:
-                    type: string
-                userId:
-                    type: string
-                operatorId:
-                    type: string
-                currency:
-                    type: string
-                status:
-                    type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.review.service.v1.ListReviewsResponse:
-            type: object
-            properties: {}
         api.user.service.v1.AddOperatorRequest:
             type: object
             properties:
@@ -5301,6 +5493,32 @@ components:
             description: |-
                 Response for payment method list
                  Contains a list of all available payment methods
+        payment.service.v1.GetTransactionDetailByIdRequest:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                    description: Unique identifier for the transaction
+                source:
+                    enum:
+                        - REQUEST_SOURCE_FRONTEND
+                        - REQUEST_SOURCE_ADMIN
+                    type: string
+                    description: Source of the request (frontend or admin)
+                    format: enum
+            description: |-
+                Request to get transaction detail by ID
+                 Used to retrieve detailed information about a specific transaction
+        payment.service.v1.GetTransactionDetailByIdResponse:
+            type: object
+            properties:
+                detail:
+                    allOf:
+                        - $ref: '#/components/schemas/payment.service.v1.TransactionDetail'
+                    description: Detailed transaction information including channel data
+            description: |-
+                Response for transaction detail
+                 Contains detailed information about the requested transaction
         payment.service.v1.GetTransactionPageRequest:
             type: object
             properties:
@@ -5340,7 +5558,6 @@ components:
                     format: enum
                 status:
                     enum:
-                        - TRANSACTION_STATUS_UNSPECIFIED
                         - TRANSACTION_STATUS_PROCESSING
                         - TRANSACTION_STATUS_SUCCESSFUL
                         - TRANSACTION_STATUS_FAILED
@@ -5609,6 +5826,17 @@ components:
             description: |-
                 Details of a single payment method
                  Contains information about a specific payment method including its ID, currency, and required fields schema
+        payment.service.v1.TransactionDetail:
+            type: object
+            properties:
+                transaction:
+                    allOf:
+                        - $ref: '#/components/schemas/payment.service.v1.TransactionInfo'
+                    description: Transaction information
+                channel:
+                    allOf:
+                        - $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
+                    description: Channel information
         payment.service.v1.TransactionInfo:
             type: object
             properties:
@@ -5656,7 +5884,6 @@ components:
                     format: enum
                 status:
                     enum:
-                        - TRANSACTION_STATUS_UNSPECIFIED
                         - TRANSACTION_STATUS_PROCESSING
                         - TRANSACTION_STATUS_SUCCESSFUL
                         - TRANSACTION_STATUS_FAILED

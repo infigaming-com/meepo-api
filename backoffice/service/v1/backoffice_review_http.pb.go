@@ -19,38 +19,38 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackofficeReviewListWithdrawReviewTickets = "/api.backoffice.service.v1.BackofficeReview/ListWithdrawReviewTickets"
+const OperationBackofficeReviewListTickets = "/api.backoffice.service.v1.BackofficeReview/ListTickets"
 const OperationBackofficeReviewReviewTicket = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
 
 type BackofficeReviewHTTPServer interface {
-	ListWithdrawReviewTickets(context.Context, *ListWithdrawReviewTicketsRequest) (*ListWithdrawReviewTicketsResponse, error)
+	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
 }
 
 func RegisterBackofficeReviewHTTPServer(s *http.Server, srv BackofficeReviewHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/review/withdraw-review-tickets/list", _BackofficeReview_ListWithdrawReviewTickets0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/review/tickets/list", _BackofficeReview_ListTickets0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/review/ticket/review", _BackofficeReview_ReviewTicket0_HTTP_Handler(srv))
 }
 
-func _BackofficeReview_ListWithdrawReviewTickets0_HTTP_Handler(srv BackofficeReviewHTTPServer) func(ctx http.Context) error {
+func _BackofficeReview_ListTickets0_HTTP_Handler(srv BackofficeReviewHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in ListWithdrawReviewTicketsRequest
+		var in ListTicketsRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeReviewListWithdrawReviewTickets)
+		http.SetOperation(ctx, OperationBackofficeReviewListTickets)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListWithdrawReviewTickets(ctx, req.(*ListWithdrawReviewTicketsRequest))
+			return srv.ListTickets(ctx, req.(*ListTicketsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListWithdrawReviewTicketsResponse)
+		reply := out.(*ListTicketsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -78,7 +78,7 @@ func _BackofficeReview_ReviewTicket0_HTTP_Handler(srv BackofficeReviewHTTPServer
 }
 
 type BackofficeReviewHTTPClient interface {
-	ListWithdrawReviewTickets(ctx context.Context, req *ListWithdrawReviewTicketsRequest, opts ...http.CallOption) (rsp *ListWithdrawReviewTicketsResponse, err error)
+	ListTickets(ctx context.Context, req *ListTicketsRequest, opts ...http.CallOption) (rsp *ListTicketsResponse, err error)
 	ReviewTicket(ctx context.Context, req *ReviewTicketRequest, opts ...http.CallOption) (rsp *ReviewTicketResponse, err error)
 }
 
@@ -90,11 +90,11 @@ func NewBackofficeReviewHTTPClient(client *http.Client) BackofficeReviewHTTPClie
 	return &BackofficeReviewHTTPClientImpl{client}
 }
 
-func (c *BackofficeReviewHTTPClientImpl) ListWithdrawReviewTickets(ctx context.Context, in *ListWithdrawReviewTicketsRequest, opts ...http.CallOption) (*ListWithdrawReviewTicketsResponse, error) {
-	var out ListWithdrawReviewTicketsResponse
-	pattern := "/v1/backoffice/review/withdraw-review-tickets/list"
+func (c *BackofficeReviewHTTPClientImpl) ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...http.CallOption) (*ListTicketsResponse, error) {
+	var out ListTicketsResponse
+	pattern := "/v1/backoffice/review/tickets/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeReviewListWithdrawReviewTickets))
+	opts = append(opts, http.Operation(OperationBackofficeReviewListTickets))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

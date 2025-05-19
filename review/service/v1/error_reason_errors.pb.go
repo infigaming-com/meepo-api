@@ -22,3 +22,255 @@ func IsUnspecified(err error) bool {
 func ErrorUnspecified(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UNSPECIFIED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsConvertStructToJsonFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CONVERT_STRUCT_TO_JSON_FAILED.String() && e.Code == 500
+}
+
+func ErrorConvertStructToJsonFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CONVERT_STRUCT_TO_JSON_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsConvertJsonToStructFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CONVERT_JSON_TO_STRUCT_FAILED.String() && e.Code == 500
+}
+
+func ErrorConvertJsonToStructFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CONVERT_JSON_TO_STRUCT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserInfoFromContextFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_INFO_FROM_CONTEXT_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserInfoFromContextFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_INFO_FROM_CONTEXT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGenerateTicketIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_TICKET_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGenerateTicketIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_TICKET_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddTicketFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_TICKET_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddTicketFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_TICKET_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidReviewAction(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_REVIEW_ACTION.String() && e.Code == 500
+}
+
+func ErrorInvalidReviewAction(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_REVIEW_ACTION.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInitiateWithdrawFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INITIATE_WITHDRAW_FAILED.String() && e.Code == 500
+}
+
+func ErrorInitiateWithdrawFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INITIATE_WITHDRAW_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetTicketFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_TICKET_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetTicketFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_TICKET_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateTicketFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_TICKET_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateTicketFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_TICKET_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddCommentFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_COMMENT_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddCommentFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_COMMENT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListTicketsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_TICKETS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListTicketsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_TICKETS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCommentsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_COMMENTS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCommentsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_COMMENTS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsLockTicketFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LOCK_TICKET_FAILED.String() && e.Code == 500
+}
+
+func ErrorLockTicketFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LOCK_TICKET_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUnmarshalPaymentWithdrawRequestFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED.String() && e.Code == 500
+}
+
+func ErrorUnmarshalPaymentWithdrawRequestFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsMarshalPaymentWithdrawResponseFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED.String() && e.Code == 500
+}
+
+func ErrorMarshalPaymentWithdrawResponseFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsTicketAlreadyReviewed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TICKET_ALREADY_REVIEWED.String() && e.Code == 500
+}
+
+func ErrorTicketAlreadyReviewed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_TICKET_ALREADY_REVIEWED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFreezeBalanceFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FREEZE_BALANCE_FAILED.String() && e.Code == 500
+}
+
+func ErrorFreezeBalanceFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FREEZE_BALANCE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsRollbackFreezeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ROLLBACK_FREEZE_FAILED.String() && e.Code == 500
+}
+
+func ErrorRollbackFreezeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ROLLBACK_FREEZE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCurrenciesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_CURRENCIES_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCurrenciesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_CURRENCIES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidTicketStatus(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_TICKET_STATUS.String() && e.Code == 500
+}
+
+func ErrorInvalidTicketStatus(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_TICKET_STATUS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSettleFreezeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SETTLE_FREEZE_FAILED.String() && e.Code == 500
+}
+
+func ErrorSettleFreezeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SETTLE_FREEZE_FAILED.String(), fmt.Sprintf(format, args...))
+}

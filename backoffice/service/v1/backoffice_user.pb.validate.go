@@ -654,7 +654,7 @@ func (m *GetUserOverviewResponse) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for FirstDepositOnToday
+	// no validation rules for FirstWithdrawOnToday
 
 	if len(errors) > 0 {
 		return GetUserOverviewResponseMultiError(errors)
@@ -869,6 +869,12 @@ func (m *GetUserProfileResponse) validate(all bool) error {
 	// no validation rules for VipLevel
 
 	// no validation rules for Online
+
+	// no validation rules for BanWithdraw
+
+	// no validation rules for BanGame
+
+	// no validation rules for BanLogin
 
 	if all {
 		switch v := interface{}(m.GetRegistrationRecord()).(type) {
@@ -2106,8 +2112,6 @@ func (m *AddUserCommentRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
-	// no validation rules for AuthorUserId
-
 	// no validation rules for Content
 
 	if len(errors) > 0 {
@@ -2211,6 +2215,8 @@ func (m *AddUserCommentResponse) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for CommentId
 
 	if len(errors) > 0 {
 		return AddUserCommentResponseMultiError(errors)
@@ -3309,7 +3315,7 @@ func (m *ListUserCommentsResponse_Comment) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for AuthorUsername
+	// no validation rules for Author
 
 	// no validation rules for Content
 

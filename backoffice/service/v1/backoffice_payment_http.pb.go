@@ -10,6 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	v1 "github.com/infigaming-com/meepo-api/payment/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -24,7 +25,7 @@ const OperationBackofficePaymentGetPaymentTransactionPage = "/api.backoffice.ser
 type BackofficePaymentHTTPServer interface {
 	// GetPaymentTransactionPage Get payment transaction page
 	// Retrieves a paginated list of payment transactions with optional filtering
-	GetPaymentTransactionPage(context.Context, *GetPaymentTransactionPageRequest) (*GetPaymentTransactionPageResponse, error)
+	GetPaymentTransactionPage(context.Context, *v1.GetTransactionPageRequest) (*v1.GetTransactionPageResponse, error)
 }
 
 func RegisterBackofficePaymentHTTPServer(s *http.Server, srv BackofficePaymentHTTPServer) {
@@ -34,7 +35,7 @@ func RegisterBackofficePaymentHTTPServer(s *http.Server, srv BackofficePaymentHT
 
 func _BackofficePayment_GetPaymentTransactionPage0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetPaymentTransactionPageRequest
+		var in v1.GetTransactionPageRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -43,19 +44,19 @@ func _BackofficePayment_GetPaymentTransactionPage0_HTTP_Handler(srv BackofficePa
 		}
 		http.SetOperation(ctx, OperationBackofficePaymentGetPaymentTransactionPage)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetPaymentTransactionPage(ctx, req.(*GetPaymentTransactionPageRequest))
+			return srv.GetPaymentTransactionPage(ctx, req.(*v1.GetTransactionPageRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetPaymentTransactionPageResponse)
+		reply := out.(*v1.GetTransactionPageResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 type BackofficePaymentHTTPClient interface {
-	GetPaymentTransactionPage(ctx context.Context, req *GetPaymentTransactionPageRequest, opts ...http.CallOption) (rsp *GetPaymentTransactionPageResponse, err error)
+	GetPaymentTransactionPage(ctx context.Context, req *v1.GetTransactionPageRequest, opts ...http.CallOption) (rsp *v1.GetTransactionPageResponse, err error)
 }
 
 type BackofficePaymentHTTPClientImpl struct {
@@ -66,8 +67,8 @@ func NewBackofficePaymentHTTPClient(client *http.Client) BackofficePaymentHTTPCl
 	return &BackofficePaymentHTTPClientImpl{client}
 }
 
-func (c *BackofficePaymentHTTPClientImpl) GetPaymentTransactionPage(ctx context.Context, in *GetPaymentTransactionPageRequest, opts ...http.CallOption) (*GetPaymentTransactionPageResponse, error) {
-	var out GetPaymentTransactionPageResponse
+func (c *BackofficePaymentHTTPClientImpl) GetPaymentTransactionPage(ctx context.Context, in *v1.GetTransactionPageRequest, opts ...http.CallOption) (*v1.GetTransactionPageResponse, error) {
+	var out v1.GetTransactionPageResponse
 	pattern := "/v1/backoffice/payment/transaction/page"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficePaymentGetPaymentTransactionPage))

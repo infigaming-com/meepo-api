@@ -883,6 +883,288 @@ var _ interface {
 	ErrorName() string
 } = GameSortValidationError{}
 
+// Validate checks the field values on ListProvidersRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListProvidersRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListProvidersRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListProvidersRequestMultiError, or nil if none found.
+func (m *ListProvidersRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListProvidersRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.ProviderId != nil {
+		// no validation rules for ProviderId
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if m.IncludeGameCount != nil {
+		// no validation rules for IncludeGameCount
+	}
+
+	if m.PaginationEnabled != nil {
+		// no validation rules for PaginationEnabled
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListProvidersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListProvidersRequestMultiError is an error wrapping multiple validation
+// errors returned by ListProvidersRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListProvidersRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListProvidersRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListProvidersRequestMultiError) AllErrors() []error { return m }
+
+// ListProvidersRequestValidationError is the validation error returned by
+// ListProvidersRequest.Validate if the designated constraints aren't met.
+type ListProvidersRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListProvidersRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListProvidersRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListProvidersRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListProvidersRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListProvidersRequestValidationError) ErrorName() string {
+	return "ListProvidersRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListProvidersRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListProvidersRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListProvidersRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListProvidersRequestValidationError{}
+
+// Validate checks the field values on ListProvidersResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListProvidersResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListProvidersResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListProvidersResponseMultiError, or nil if none found.
+func (m *ListProvidersResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListProvidersResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetProviders() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListProvidersResponseValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListProvidersResponseValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListProvidersResponseValidationError{
+					field:  fmt.Sprintf("Providers[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Total != nil {
+		// no validation rules for Total
+	}
+
+	if m.TotalEnabled != nil {
+		// no validation rules for TotalEnabled
+	}
+
+	if m.TotalDisabled != nil {
+		// no validation rules for TotalDisabled
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListProvidersResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListProvidersResponseMultiError is an error wrapping multiple validation
+// errors returned by ListProvidersResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListProvidersResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListProvidersResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListProvidersResponseMultiError) AllErrors() []error { return m }
+
+// ListProvidersResponseValidationError is the validation error returned by
+// ListProvidersResponse.Validate if the designated constraints aren't met.
+type ListProvidersResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListProvidersResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListProvidersResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListProvidersResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListProvidersResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListProvidersResponseValidationError) ErrorName() string {
+	return "ListProvidersResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListProvidersResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListProvidersResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListProvidersResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListProvidersResponseValidationError{}
+
 // Validate checks the field values on ListCategoriesRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -1086,6 +1368,818 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListCategoriesResponseValidationError{}
+
+// Validate checks the field values on ListFeeGroupsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListFeeGroupsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListFeeGroupsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListFeeGroupsRequestMultiError, or nil if none found.
+func (m *ListFeeGroupsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListFeeGroupsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListFeeGroupsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListFeeGroupsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListFeeGroupsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListFeeGroupsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListFeeGroupsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListFeeGroupsRequestMultiError) AllErrors() []error { return m }
+
+// ListFeeGroupsRequestValidationError is the validation error returned by
+// ListFeeGroupsRequest.Validate if the designated constraints aren't met.
+type ListFeeGroupsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListFeeGroupsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListFeeGroupsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListFeeGroupsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListFeeGroupsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListFeeGroupsRequestValidationError) ErrorName() string {
+	return "ListFeeGroupsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListFeeGroupsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListFeeGroupsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListFeeGroupsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListFeeGroupsRequestValidationError{}
+
+// Validate checks the field values on ListFeeGroupsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListFeeGroupsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListFeeGroupsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListFeeGroupsResponseMultiError, or nil if none found.
+func (m *ListFeeGroupsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListFeeGroupsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListFeeGroupsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListFeeGroupsResponseMultiError is an error wrapping multiple validation
+// errors returned by ListFeeGroupsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListFeeGroupsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListFeeGroupsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListFeeGroupsResponseMultiError) AllErrors() []error { return m }
+
+// ListFeeGroupsResponseValidationError is the validation error returned by
+// ListFeeGroupsResponse.Validate if the designated constraints aren't met.
+type ListFeeGroupsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListFeeGroupsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListFeeGroupsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListFeeGroupsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListFeeGroupsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListFeeGroupsResponseValidationError) ErrorName() string {
+	return "ListFeeGroupsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListFeeGroupsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListFeeGroupsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListFeeGroupsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListFeeGroupsResponseValidationError{}
+
+// Validate checks the field values on ListTagsRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListTagsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTagsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTagsRequestMultiError, or nil if none found.
+func (m *ListTagsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTagsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListTagsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTagsRequestMultiError is an error wrapping multiple validation errors
+// returned by ListTagsRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ListTagsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTagsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTagsRequestMultiError) AllErrors() []error { return m }
+
+// ListTagsRequestValidationError is the validation error returned by
+// ListTagsRequest.Validate if the designated constraints aren't met.
+type ListTagsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTagsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTagsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTagsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTagsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTagsRequestValidationError) ErrorName() string { return "ListTagsRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListTagsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTagsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTagsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTagsRequestValidationError{}
+
+// Validate checks the field values on ListTagsResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListTagsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTagsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTagsResponseMultiError, or nil if none found.
+func (m *ListTagsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTagsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListTagsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTagsResponseMultiError is an error wrapping multiple validation errors
+// returned by ListTagsResponse.ValidateAll() if the designated constraints
+// aren't met.
+type ListTagsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTagsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTagsResponseMultiError) AllErrors() []error { return m }
+
+// ListTagsResponseValidationError is the validation error returned by
+// ListTagsResponse.Validate if the designated constraints aren't met.
+type ListTagsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTagsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTagsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTagsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTagsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTagsResponseValidationError) ErrorName() string { return "ListTagsResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListTagsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTagsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTagsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTagsResponseValidationError{}
+
+// Validate checks the field values on ListThemesRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListThemesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListThemesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListThemesRequestMultiError, or nil if none found.
+func (m *ListThemesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListThemesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListThemesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListThemesRequestMultiError is an error wrapping multiple validation errors
+// returned by ListThemesRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ListThemesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListThemesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListThemesRequestMultiError) AllErrors() []error { return m }
+
+// ListThemesRequestValidationError is the validation error returned by
+// ListThemesRequest.Validate if the designated constraints aren't met.
+type ListThemesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListThemesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListThemesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListThemesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListThemesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListThemesRequestValidationError) ErrorName() string {
+	return "ListThemesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListThemesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListThemesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListThemesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListThemesRequestValidationError{}
+
+// Validate checks the field values on ListThemesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListThemesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListThemesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListThemesResponseMultiError, or nil if none found.
+func (m *ListThemesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListThemesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListThemesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListThemesResponseMultiError is an error wrapping multiple validation errors
+// returned by ListThemesResponse.ValidateAll() if the designated constraints
+// aren't met.
+type ListThemesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListThemesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListThemesResponseMultiError) AllErrors() []error { return m }
+
+// ListThemesResponseValidationError is the validation error returned by
+// ListThemesResponse.Validate if the designated constraints aren't met.
+type ListThemesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListThemesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListThemesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListThemesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListThemesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListThemesResponseValidationError) ErrorName() string {
+	return "ListThemesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListThemesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListThemesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListThemesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListThemesResponseValidationError{}
+
+// Validate checks the field values on ListCurrenciesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCurrenciesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCurrenciesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCurrenciesRequestMultiError, or nil if none found.
+func (m *ListCurrenciesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCurrenciesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListCurrenciesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCurrenciesRequestMultiError is an error wrapping multiple validation
+// errors returned by ListCurrenciesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListCurrenciesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCurrenciesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCurrenciesRequestMultiError) AllErrors() []error { return m }
+
+// ListCurrenciesRequestValidationError is the validation error returned by
+// ListCurrenciesRequest.Validate if the designated constraints aren't met.
+type ListCurrenciesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCurrenciesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCurrenciesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCurrenciesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCurrenciesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCurrenciesRequestValidationError) ErrorName() string {
+	return "ListCurrenciesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCurrenciesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCurrenciesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCurrenciesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCurrenciesRequestValidationError{}
+
+// Validate checks the field values on ListCurrenciesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCurrenciesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCurrenciesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCurrenciesResponseMultiError, or nil if none found.
+func (m *ListCurrenciesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCurrenciesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListCurrenciesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCurrenciesResponseMultiError is an error wrapping multiple validation
+// errors returned by ListCurrenciesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListCurrenciesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCurrenciesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCurrenciesResponseMultiError) AllErrors() []error { return m }
+
+// ListCurrenciesResponseValidationError is the validation error returned by
+// ListCurrenciesResponse.Validate if the designated constraints aren't met.
+type ListCurrenciesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCurrenciesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCurrenciesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCurrenciesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCurrenciesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCurrenciesResponseValidationError) ErrorName() string {
+	return "ListCurrenciesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCurrenciesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCurrenciesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCurrenciesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCurrenciesResponseValidationError{}
 
 // Validate checks the field values on ListGamesRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
@@ -3687,10 +4781,24 @@ func (m *ListBetsRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for UserId
+	if m.GameName != nil {
+		// no validation rules for GameName
+	}
 
-	if m.Status != nil {
-		// no validation rules for Status
+	if m.GameId != nil {
+		// no validation rules for GameId
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.OperatorBetId != nil {
+		// no validation rules for OperatorBetId
+	}
+
+	if m.ProviderBetId != nil {
+		// no validation rules for ProviderBetId
 	}
 
 	if m.StartTime != nil {
@@ -3757,6 +4865,18 @@ func (m *ListBetsRequest) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.MinBetAmount != nil {
+		// no validation rules for MinBetAmount
+	}
+
+	if m.MaxBetAmount != nil {
+		// no validation rules for MaxBetAmount
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
 	}
 
 	if m.Page != nil {
@@ -3901,6 +5021,14 @@ func (m *ListBetsResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for Turnover
+
+	// no validation rules for WinAmount
+
+	// no validation rules for BetCount
+
+	// no validation rules for RtpPercentage
+
 	// no validation rules for Total
 
 	// no validation rules for Page
@@ -4018,6 +5146,10 @@ func (m *Bet) validate(all bool) error {
 
 	// no validation rules for ProviderName
 
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorName
+
 	// no validation rules for Currency
 
 	// no validation rules for SettlementCurrency
@@ -4032,13 +5164,21 @@ func (m *Bet) validate(all bool) error {
 
 	// no validation rules for GameCategory
 
+	// no validation rules for WinCount
+
 	// no validation rules for BetAmount
+
+	// no validation rules for ValidBetAmount
 
 	// no validation rules for SettlementBetAmount
 
 	// no validation rules for WinAmount
 
 	// no validation rules for SettlementWinAmount
+
+	// no validation rules for Turnover
+
+	// no validation rules for Odds
 
 	// no validation rules for RollbackBetAmount
 
@@ -4178,6 +5318,602 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = BetValidationError{}
+
+// Validate checks the field values on BackofficeListGamesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BackofficeListGamesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BackofficeListGamesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BackofficeListGamesRequestMultiError, or nil if none found.
+func (m *BackofficeListGamesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackofficeListGamesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GameId != nil {
+		// no validation rules for GameId
+	}
+
+	if m.SupportBonusBuy != nil {
+		// no validation rules for SupportBonusBuy
+	}
+
+	if m.HasFreespins != nil {
+		// no validation rules for HasFreespins
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return BackofficeListGamesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackofficeListGamesRequestMultiError is an error wrapping multiple
+// validation errors returned by BackofficeListGamesRequest.ValidateAll() if
+// the designated constraints aren't met.
+type BackofficeListGamesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackofficeListGamesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackofficeListGamesRequestMultiError) AllErrors() []error { return m }
+
+// BackofficeListGamesRequestValidationError is the validation error returned
+// by BackofficeListGamesRequest.Validate if the designated constraints aren't met.
+type BackofficeListGamesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackofficeListGamesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackofficeListGamesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackofficeListGamesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackofficeListGamesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackofficeListGamesRequestValidationError) ErrorName() string {
+	return "BackofficeListGamesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackofficeListGamesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackofficeListGamesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackofficeListGamesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackofficeListGamesRequestValidationError{}
+
+// Validate checks the field values on BackofficeListGamesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BackofficeListGamesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BackofficeListGamesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BackofficeListGamesResponseMultiError, or nil if none found.
+func (m *BackofficeListGamesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackofficeListGamesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetGames() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BackofficeListGamesResponseValidationError{
+						field:  fmt.Sprintf("Games[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BackofficeListGamesResponseValidationError{
+						field:  fmt.Sprintf("Games[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BackofficeListGamesResponseValidationError{
+					field:  fmt.Sprintf("Games[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for Total
+
+	// no validation rules for TotalEnabled
+
+	// no validation rules for TotalDisabled
+
+	if len(errors) > 0 {
+		return BackofficeListGamesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackofficeListGamesResponseMultiError is an error wrapping multiple
+// validation errors returned by BackofficeListGamesResponse.ValidateAll() if
+// the designated constraints aren't met.
+type BackofficeListGamesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackofficeListGamesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackofficeListGamesResponseMultiError) AllErrors() []error { return m }
+
+// BackofficeListGamesResponseValidationError is the validation error returned
+// by BackofficeListGamesResponse.Validate if the designated constraints
+// aren't met.
+type BackofficeListGamesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackofficeListGamesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackofficeListGamesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackofficeListGamesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackofficeListGamesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackofficeListGamesResponseValidationError) ErrorName() string {
+	return "BackofficeListGamesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackofficeListGamesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackofficeListGamesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackofficeListGamesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackofficeListGamesResponseValidationError{}
+
+// Validate checks the field values on UpdateGameRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *UpdateGameRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateGameRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateGameRequestMultiError, or nil if none found.
+func (m *UpdateGameRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateGameRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GameId
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if len(errors) > 0 {
+		return UpdateGameRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateGameRequestMultiError is an error wrapping multiple validation errors
+// returned by UpdateGameRequest.ValidateAll() if the designated constraints
+// aren't met.
+type UpdateGameRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateGameRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateGameRequestMultiError) AllErrors() []error { return m }
+
+// UpdateGameRequestValidationError is the validation error returned by
+// UpdateGameRequest.Validate if the designated constraints aren't met.
+type UpdateGameRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateGameRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateGameRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateGameRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateGameRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateGameRequestValidationError) ErrorName() string {
+	return "UpdateGameRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateGameRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateGameRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateGameRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateGameRequestValidationError{}
+
+// Validate checks the field values on UpdateGameResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateGameResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateGameResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateGameResponseMultiError, or nil if none found.
+func (m *UpdateGameResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateGameResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateGameResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateGameResponseMultiError is an error wrapping multiple validation errors
+// returned by UpdateGameResponse.ValidateAll() if the designated constraints
+// aren't met.
+type UpdateGameResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateGameResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateGameResponseMultiError) AllErrors() []error { return m }
+
+// UpdateGameResponseValidationError is the validation error returned by
+// UpdateGameResponse.Validate if the designated constraints aren't met.
+type UpdateGameResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateGameResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateGameResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateGameResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateGameResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateGameResponseValidationError) ErrorName() string {
+	return "UpdateGameResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateGameResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateGameResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateGameResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateGameResponseValidationError{}
+
+// Validate checks the field values on ListProvidersResponse_Provider with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListProvidersResponse_Provider) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListProvidersResponse_Provider with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListProvidersResponse_ProviderMultiError, or nil if none found.
+func (m *ListProvidersResponse_Provider) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListProvidersResponse_Provider) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ProviderId
+
+	// no validation rules for ProviderName
+
+	// no validation rules for Enabled
+
+	if m.GameCount != nil {
+		// no validation rules for GameCount
+	}
+
+	if len(errors) > 0 {
+		return ListProvidersResponse_ProviderMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListProvidersResponse_ProviderMultiError is an error wrapping multiple
+// validation errors returned by ListProvidersResponse_Provider.ValidateAll()
+// if the designated constraints aren't met.
+type ListProvidersResponse_ProviderMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListProvidersResponse_ProviderMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListProvidersResponse_ProviderMultiError) AllErrors() []error { return m }
+
+// ListProvidersResponse_ProviderValidationError is the validation error
+// returned by ListProvidersResponse_Provider.Validate if the designated
+// constraints aren't met.
+type ListProvidersResponse_ProviderValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListProvidersResponse_ProviderValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListProvidersResponse_ProviderValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListProvidersResponse_ProviderValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListProvidersResponse_ProviderValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListProvidersResponse_ProviderValidationError) ErrorName() string {
+	return "ListProvidersResponse_ProviderValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListProvidersResponse_ProviderValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListProvidersResponse_Provider.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListProvidersResponse_ProviderValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListProvidersResponse_ProviderValidationError{}
 
 // Validate checks the field values on BalanceResponse_Data with the rules
 // defined in the proto definition for this message. If any rules are
@@ -4566,3 +6302,132 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RollbackResponse_DataValidationError{}
+
+// Validate checks the field values on BackofficeListGamesResponse_Game with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *BackofficeListGamesResponse_Game) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BackofficeListGamesResponse_Game with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// BackofficeListGamesResponse_GameMultiError, or nil if none found.
+func (m *BackofficeListGamesResponse_Game) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackofficeListGamesResponse_Game) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for Provider
+
+	// no validation rules for Id
+
+	// no validation rules for Category
+
+	// no validation rules for Theme
+
+	// no validation rules for SupportBonusBuy
+
+	// no validation rules for HasFreespins
+
+	// no validation rules for FeeGroup
+
+	// no validation rules for Rate
+
+	// no validation rules for Rtp
+
+	// no validation rules for ValidBetRate
+
+	// no validation rules for Enabled
+
+	if len(errors) > 0 {
+		return BackofficeListGamesResponse_GameMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackofficeListGamesResponse_GameMultiError is an error wrapping multiple
+// validation errors returned by
+// BackofficeListGamesResponse_Game.ValidateAll() if the designated
+// constraints aren't met.
+type BackofficeListGamesResponse_GameMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackofficeListGamesResponse_GameMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackofficeListGamesResponse_GameMultiError) AllErrors() []error { return m }
+
+// BackofficeListGamesResponse_GameValidationError is the validation error
+// returned by BackofficeListGamesResponse_Game.Validate if the designated
+// constraints aren't met.
+type BackofficeListGamesResponse_GameValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackofficeListGamesResponse_GameValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackofficeListGamesResponse_GameValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackofficeListGamesResponse_GameValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackofficeListGamesResponse_GameValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackofficeListGamesResponse_GameValidationError) ErrorName() string {
+	return "BackofficeListGamesResponse_GameValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackofficeListGamesResponse_GameValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackofficeListGamesResponse_Game.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackofficeListGamesResponse_GameValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackofficeListGamesResponse_GameValidationError{}

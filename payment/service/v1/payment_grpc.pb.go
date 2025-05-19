@@ -19,14 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Payment_GetPaymentMethodList_FullMethodName  = "/payment.service.v1.Payment/GetPaymentMethodList"
-	Payment_CreatePaymentChannel_FullMethodName  = "/payment.service.v1.Payment/CreatePaymentChannel"
-	Payment_InitiateDeposit_FullMethodName       = "/payment.service.v1.Payment/InitiateDeposit"
-	Payment_InitiateWithdraw_FullMethodName      = "/payment.service.v1.Payment/InitiateWithdraw"
-	Payment_DepositCallback_FullMethodName       = "/payment.service.v1.Payment/DepositCallback"
-	Payment_WithdrawCallback_FullMethodName      = "/payment.service.v1.Payment/WithdrawCallback"
-	Payment_GetTransactionPage_FullMethodName    = "/payment.service.v1.Payment/GetTransactionPage"
-	Payment_GetPaymentChannelPage_FullMethodName = "/payment.service.v1.Payment/GetPaymentChannelPage"
+	Payment_GetPaymentMethodList_FullMethodName     = "/payment.service.v1.Payment/GetPaymentMethodList"
+	Payment_CreatePaymentChannel_FullMethodName     = "/payment.service.v1.Payment/CreatePaymentChannel"
+	Payment_InitiateDeposit_FullMethodName          = "/payment.service.v1.Payment/InitiateDeposit"
+	Payment_InitiateWithdraw_FullMethodName         = "/payment.service.v1.Payment/InitiateWithdraw"
+	Payment_DepositCallback_FullMethodName          = "/payment.service.v1.Payment/DepositCallback"
+	Payment_WithdrawCallback_FullMethodName         = "/payment.service.v1.Payment/WithdrawCallback"
+	Payment_GetTransactionPage_FullMethodName       = "/payment.service.v1.Payment/GetTransactionPage"
+	Payment_GetPaymentChannelPage_FullMethodName    = "/payment.service.v1.Payment/GetPaymentChannelPage"
+	Payment_GetTransactionDetailById_FullMethodName = "/payment.service.v1.Payment/GetTransactionDetailById"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -70,6 +71,10 @@ type PaymentClient interface {
 	// Retrieves a paginated list of payment channels with optional filtering
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
 	GetPaymentChannelPage(ctx context.Context, in *GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*GetPaymentChannelPageResponse, error)
+	// Get transaction detail
+	// Retrieves detailed information about a specific transaction
+	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+	GetTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error)
 }
 
 type paymentClient struct {
@@ -160,6 +165,16 @@ func (c *paymentClient) GetPaymentChannelPage(ctx context.Context, in *GetPaymen
 	return out, nil
 }
 
+func (c *paymentClient) GetTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTransactionDetailByIdResponse)
+	err := c.cc.Invoke(ctx, Payment_GetTransactionDetailById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentServer is the server API for Payment service.
 // All implementations must embed UnimplementedPaymentServer
 // for forward compatibility.
@@ -201,6 +216,10 @@ type PaymentServer interface {
 	// Retrieves a paginated list of payment channels with optional filtering
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
 	GetPaymentChannelPage(context.Context, *GetPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error)
+	// Get transaction detail
+	// Retrieves detailed information about a specific transaction
+	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+	GetTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -234,6 +253,9 @@ func (UnimplementedPaymentServer) GetTransactionPage(context.Context, *GetTransa
 }
 func (UnimplementedPaymentServer) GetPaymentChannelPage(context.Context, *GetPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentChannelPage not implemented")
+}
+func (UnimplementedPaymentServer) GetTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionDetailById not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -400,6 +422,24 @@ func _Payment_GetPaymentChannelPage_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_GetTransactionDetailById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionDetailByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetTransactionDetailById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetTransactionDetailById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetTransactionDetailById(ctx, req.(*GetTransactionDetailByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Payment_ServiceDesc is the grpc.ServiceDesc for Payment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -438,6 +478,10 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPaymentChannelPage",
 			Handler:    _Payment_GetPaymentChannelPage_Handler,
+		},
+		{
+			MethodName: "GetTransactionDetailById",
+			Handler:    _Payment_GetTransactionDetailById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

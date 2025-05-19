@@ -7,7 +7,6 @@
 package v1
 
 import (
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -116,7 +115,7 @@ var File_websocket_service_v1_websocket_proto protoreflect.FileDescriptor
 
 const file_websocket_service_v1_websocket_proto_rawDesc = "" +
 	"\n" +
-	"$websocket/service/v1/websocket.proto\x12\x18api.websocket.service.v1\x1a\x1cgoogle/api/annotations.proto\"G\n" +
+	"$websocket/service/v1/websocket.proto\x12\x18api.websocket.service.v1\"G\n" +
 	"\x12PushMessageRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\fR\amessage\"\x15\n" +

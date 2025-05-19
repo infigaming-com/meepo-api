@@ -377,7 +377,7 @@ type GetUserOverviewResponse struct {
 	MoreThan_2Deposits       bool                                `protobuf:"varint,26,opt,name=more_than_2_deposits,json=moreThan2Deposits,proto3" json:"more_than_2_deposits,omitempty"`
 	AccountOlderThan_3Months bool                                `protobuf:"varint,27,opt,name=account_older_than_3_months,json=accountOlderThan3Months,proto3" json:"account_older_than_3_months,omitempty"`
 	LastDepositAt            *timestamppb.Timestamp              `protobuf:"bytes,28,opt,name=last_deposit_at,json=lastDepositAt,proto3" json:"last_deposit_at,omitempty"` // ?? Is this time since last deposit
-	FirstDepositOnToday      bool                                `protobuf:"varint,29,opt,name=first_deposit_on_today,json=firstDepositOnToday,proto3" json:"first_deposit_on_today,omitempty"`
+	FirstWithdrawOnToday     bool                                `protobuf:"varint,29,opt,name=first_withdraw_on_today,json=firstWithdrawOnToday,proto3" json:"first_withdraw_on_today,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -608,9 +608,9 @@ func (x *GetUserOverviewResponse) GetLastDepositAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *GetUserOverviewResponse) GetFirstDepositOnToday() bool {
+func (x *GetUserOverviewResponse) GetFirstWithdrawOnToday() bool {
 	if x != nil {
-		return x.FirstDepositOnToday
+		return x.FirstWithdrawOnToday
 	}
 	return false
 }
@@ -665,6 +665,9 @@ type GetUserProfileResponse struct {
 	UserId             int64                                      `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	VipLevel           int32                                      `protobuf:"varint,3,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
 	Online             bool                                       `protobuf:"varint,4,opt,name=online,proto3" json:"online,omitempty"`
+	BanWithdraw        bool                                       `protobuf:"varint,11,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
+	BanGame            bool                                       `protobuf:"varint,12,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
+	BanLogin           bool                                       `protobuf:"varint,13,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
 	RegistrationRecord *GetUserProfileResponse_RegistrationRecord `protobuf:"bytes,5,opt,name=registration_record,json=registrationRecord,proto3" json:"registration_record,omitempty"`
 	LoginRecords       []*GetUserProfileResponse_LoginRecord      `protobuf:"bytes,6,rep,name=login_records,json=loginRecords,proto3" json:"login_records,omitempty"`
 	Tags               []string                                   `protobuf:"bytes,7,rep,name=tags,proto3" json:"tags,omitempty"`
@@ -727,6 +730,27 @@ func (x *GetUserProfileResponse) GetVipLevel() int32 {
 func (x *GetUserProfileResponse) GetOnline() bool {
 	if x != nil {
 		return x.Online
+	}
+	return false
+}
+
+func (x *GetUserProfileResponse) GetBanWithdraw() bool {
+	if x != nil {
+		return x.BanWithdraw
+	}
+	return false
+}
+
+func (x *GetUserProfileResponse) GetBanGame() bool {
+	if x != nil {
+		return x.BanGame
+	}
+	return false
+}
+
+func (x *GetUserProfileResponse) GetBanLogin() bool {
+	if x != nil {
+		return x.BanLogin
 	}
 	return false
 }
@@ -1178,7 +1202,6 @@ func (*DeleteUserTagResponse) Descriptor() ([]byte, []int) {
 type AddUserCommentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	AuthorUserId  int64                  `protobuf:"varint,2,opt,name=author_user_id,json=authorUserId,proto3" json:"author_user_id,omitempty"`
 	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1221,13 +1244,6 @@ func (x *AddUserCommentRequest) GetUserId() int64 {
 	return 0
 }
 
-func (x *AddUserCommentRequest) GetAuthorUserId() int64 {
-	if x != nil {
-		return x.AuthorUserId
-	}
-	return 0
-}
-
 func (x *AddUserCommentRequest) GetContent() string {
 	if x != nil {
 		return x.Content
@@ -1237,6 +1253,7 @@ func (x *AddUserCommentRequest) GetContent() string {
 
 type AddUserCommentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	CommentId     int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1269,6 +1286,13 @@ func (x *AddUserCommentResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AddUserCommentResponse.ProtoReflect.Descriptor instead.
 func (*AddUserCommentResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *AddUserCommentResponse) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
 }
 
 type ListUserCommentsRequest struct {
@@ -1940,12 +1964,12 @@ func (x *GetUserProfileResponse_Comment) GetCreatedAt() *timestamppb.Timestamp {
 }
 
 type ListUserCommentsResponse_Comment struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	AuthorUsername string                 `protobuf:"bytes,1,opt,name=author_username,json=authorUsername,proto3" json:"author_username,omitempty"`
-	Content        string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Author        string                 `protobuf:"bytes,1,opt,name=author,proto3" json:"author,omitempty"`
+	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListUserCommentsResponse_Comment) Reset() {
@@ -1978,9 +2002,9 @@ func (*ListUserCommentsResponse_Comment) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{19, 0}
 }
 
-func (x *ListUserCommentsResponse_Comment) GetAuthorUsername() string {
+func (x *ListUserCommentsResponse_Comment) GetAuthor() string {
 	if x != nil {
-		return x.AuthorUsername
+		return x.Author
 	}
 	return ""
 }
@@ -2092,7 +2116,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x06device\x18\x17 \x01(\tR\x06device\x12\x16\n" +
 	"\x06source\x18\x18 \x01(\tR\x06source\x12'\n" +
 	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\"\x18\n" +
-	"\x16GetUserOverviewRequest\"\xd6\n" +
+	"\x16GetUserOverviewRequest\"\xd8\n" +
 	"\n" +
 	"\x17GetUserOverviewResponse\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\tR\abalance\x124\n" +
@@ -2123,20 +2147,23 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x19has_1x_deposits_before_wd\x18\x19 \x01(\bR\x15has1xDepositsBeforeWd\x12/\n" +
 	"\x14more_than_2_deposits\x18\x1a \x01(\bR\x11moreThan2Deposits\x12<\n" +
 	"\x1baccount_older_than_3_months\x18\x1b \x01(\bR\x17accountOlderThan3Months\x12B\n" +
-	"\x0flast_deposit_at\x18\x1c \x01(\v2\x1a.google.protobuf.TimestampR\rlastDepositAt\x123\n" +
-	"\x16first_deposit_on_today\x18\x1d \x01(\bR\x13firstDepositOnToday\x1ag\n" +
+	"\x0flast_deposit_at\x18\x1c \x01(\v2\x1a.google.protobuf.TimestampR\rlastDepositAt\x125\n" +
+	"\x17first_withdraw_on_today\x18\x1d \x01(\bR\x14firstWithdrawOnToday\x1ag\n" +
 	"\bGameData\x12\x1b\n" +
 	"\tgame_type\x18\x01 \x01(\tR\bgameType\x12\x10\n" +
 	"\x03ggr\x18\x02 \x01(\tR\x03ggr\x12\x1a\n" +
 	"\bturnover\x18\x03 \x01(\tR\bturnover\x12\x10\n" +
 	"\x03rtp\x18\x04 \x01(\tR\x03rtp\"0\n" +
 	"\x15GetUserProfileRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xfd\b\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xd8\t\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tvip_level\x18\x03 \x01(\x05R\bvipLevel\x12\x16\n" +
-	"\x06online\x18\x04 \x01(\bR\x06online\x12u\n" +
+	"\x06online\x18\x04 \x01(\bR\x06online\x12!\n" +
+	"\fban_withdraw\x18\v \x01(\bR\vbanWithdraw\x12\x19\n" +
+	"\bban_game\x18\f \x01(\bR\abanGame\x12\x1b\n" +
+	"\tban_login\x18\r \x01(\bR\bbanLogin\x12u\n" +
 	"\x13registration_record\x18\x05 \x01(\v2D.api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecordR\x12registrationRecord\x12b\n" +
 	"\rlogin_records\x18\x06 \x03(\v2=.api.backoffice.service.v1.GetUserProfileResponse.LoginRecordR\floginRecords\x12\x12\n" +
 	"\x04tags\x18\a \x03(\tR\x04tags\x12U\n" +
@@ -2183,18 +2210,19 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x14DeleteUserTagRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x10\n" +
 	"\x03tag\x18\x02 \x01(\tR\x03tag\"\x17\n" +
-	"\x15DeleteUserTagResponse\"p\n" +
+	"\x15DeleteUserTagResponse\"J\n" +
 	"\x15AddUserCommentRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12$\n" +
-	"\x0eauthor_user_id\x18\x02 \x01(\x03R\fauthorUserId\x12\x18\n" +
-	"\acontent\x18\x03 \x01(\tR\acontent\"\x18\n" +
-	"\x16AddUserCommentResponse\"2\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
+	"\acontent\x18\x03 \x01(\tR\acontent\"7\n" +
+	"\x16AddUserCommentResponse\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId\"2\n" +
 	"\x17ListUserCommentsRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xfd\x01\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xeb\x01\n" +
 	"\x18ListUserCommentsResponse\x12W\n" +
-	"\bcomments\x18\x01 \x03(\v2;.api.backoffice.service.v1.ListUserCommentsResponse.CommentR\bcomments\x1a\x87\x01\n" +
-	"\aComment\x12'\n" +
-	"\x0fauthor_username\x18\x01 \x01(\tR\x0eauthorUsername\x12\x18\n" +
+	"\bcomments\x18\x01 \x03(\v2;.api.backoffice.service.v1.ListUserCommentsResponse.CommentR\bcomments\x1av\n" +
+	"\aComment\x12\x16\n" +
+	"\x06author\x18\x01 \x01(\tR\x06author\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt2\xa2\r\n" +

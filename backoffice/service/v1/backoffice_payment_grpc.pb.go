@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/payment/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -31,7 +32,7 @@ const (
 type BackofficePaymentClient interface {
 	// Get payment transaction page
 	// Retrieves a paginated list of payment transactions with optional filtering
-	GetPaymentTransactionPage(ctx context.Context, in *GetPaymentTransactionPageRequest, opts ...grpc.CallOption) (*GetPaymentTransactionPageResponse, error)
+	GetPaymentTransactionPage(ctx context.Context, in *v1.GetTransactionPageRequest, opts ...grpc.CallOption) (*v1.GetTransactionPageResponse, error)
 }
 
 type backofficePaymentClient struct {
@@ -42,9 +43,9 @@ func NewBackofficePaymentClient(cc grpc.ClientConnInterface) BackofficePaymentCl
 	return &backofficePaymentClient{cc}
 }
 
-func (c *backofficePaymentClient) GetPaymentTransactionPage(ctx context.Context, in *GetPaymentTransactionPageRequest, opts ...grpc.CallOption) (*GetPaymentTransactionPageResponse, error) {
+func (c *backofficePaymentClient) GetPaymentTransactionPage(ctx context.Context, in *v1.GetTransactionPageRequest, opts ...grpc.CallOption) (*v1.GetTransactionPageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPaymentTransactionPageResponse)
+	out := new(v1.GetTransactionPageResponse)
 	err := c.cc.Invoke(ctx, BackofficePayment_GetPaymentTransactionPage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -61,7 +62,7 @@ func (c *backofficePaymentClient) GetPaymentTransactionPage(ctx context.Context,
 type BackofficePaymentServer interface {
 	// Get payment transaction page
 	// Retrieves a paginated list of payment transactions with optional filtering
-	GetPaymentTransactionPage(context.Context, *GetPaymentTransactionPageRequest) (*GetPaymentTransactionPageResponse, error)
+	GetPaymentTransactionPage(context.Context, *v1.GetTransactionPageRequest) (*v1.GetTransactionPageResponse, error)
 	mustEmbedUnimplementedBackofficePaymentServer()
 }
 
@@ -72,7 +73,7 @@ type BackofficePaymentServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficePaymentServer struct{}
 
-func (UnimplementedBackofficePaymentServer) GetPaymentTransactionPage(context.Context, *GetPaymentTransactionPageRequest) (*GetPaymentTransactionPageResponse, error) {
+func (UnimplementedBackofficePaymentServer) GetPaymentTransactionPage(context.Context, *v1.GetTransactionPageRequest) (*v1.GetTransactionPageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentTransactionPage not implemented")
 }
 func (UnimplementedBackofficePaymentServer) mustEmbedUnimplementedBackofficePaymentServer() {}
@@ -97,7 +98,7 @@ func RegisterBackofficePaymentServer(s grpc.ServiceRegistrar, srv BackofficePaym
 }
 
 func _BackofficePayment_GetPaymentTransactionPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPaymentTransactionPageRequest)
+	in := new(v1.GetTransactionPageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -109,7 +110,7 @@ func _BackofficePayment_GetPaymentTransactionPage_Handler(srv interface{}, ctx c
 		FullMethod: BackofficePayment_GetPaymentTransactionPage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).GetPaymentTransactionPage(ctx, req.(*GetPaymentTransactionPageRequest))
+		return srv.(BackofficePaymentServer).GetPaymentTransactionPage(ctx, req.(*v1.GetTransactionPageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

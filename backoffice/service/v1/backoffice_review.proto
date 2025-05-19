@@ -10,9 +10,9 @@ option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficeReview {
-	rpc ListWithdrawReviewTickets(ListWithdrawReviewTicketsRequest) returns (ListWithdrawReviewTicketsResponse) {
+	rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {
         option (google.api.http) = {
-            post: "/v1/backoffice/review/withdraw-review-tickets/list"
+            post: "/v1/backoffice/review/tickets/list"
             body: "*"
         };
     }
@@ -24,50 +24,73 @@ service BackofficeReview {
     }
 }
 
-message ListWithdrawReviewTicketsRequest {
-	optional int64 operator_id = 1;
+message ListTicketsRequest {
 	optional int64 user_id = 2;
-	optional int64 review_ticket_id = 3;
-	optional string currency = 4;
-	optional string status = 5;
-	optional google.protobuf.Timestamp start_time = 6;
-	optional google.protobuf.Timestamp end_time = 7;
-	optional int64 page = 8;
-	optional int64 page_size = 9;
+	optional int64 operator_id = 3;
+	optional int64 ticket_id = 4;
+	optional string currency = 5;
+	optional string status = 6;	// pending, approved, rejected, manual_payout, paying, paid, failed
+	optional google.protobuf.Timestamp start_time = 7;
+	optional google.protobuf.Timestamp end_time = 8;
+	optional int32 page = 9;
+	optional int32 page_size = 10;
 }
 
-message ListWithdrawReviewTicketsResponse {
-	message WithdrawReviewTicket {
+message ListTicketsResponse {
+	message Ticket {
 		google.protobuf.Timestamp created_at = 1;
 		string operator = 2;
-		int64 review_ticket_id = 3;
-		string category = 4;	// ?? what is category
+		int64 ticket_id = 3;
+		int64 user_id = 4;
 		int32 vip_level = 5;
 		repeated string user_tags = 6;
-		int64 before_balance = 7;
-		int64 after_balance = 8;
+		string before_balance = 7;
+		string after_balance = 8;
 		string currency = 9;
 		string payment_channel = 10;
 		string protocol = 11;
 		string fee = 12;
+		string status = 13;	// pending, approved, rejected, manual_payout, paying, paid, failed
+		string reviewer_username = 14;
+		int32 review_duration = 15;
 	}
-	repeated WithdrawReviewTicket withdraw_review_tickets = 1;
-	int64 page = 2;
-	int64 page_size = 3;
-	int64 total = 4;
-	int64 total_pending = 5;
-	int64 total_paying = 6;
-	int64 total_paid = 7;
-	int64 total_failed = 8;
-	int64 total_rejected = 9;
-	int64 average_review_time = 10;
+	repeated Ticket tickets = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total_count = 4;
+	string total_amount = 5;
+	int32 total_pending_count = 6;
+	string total_pending_amount = 7;
+	int32 total_paying_count = 8;
+	string total_paying_amount = 9;
+	int32 total_paid_count = 10;
+	string total_paid_amount = 11;
+	int32 total_failed_count = 12;
+	string total_failed_amount = 13;
+	int32 total_rejected_count = 14;
+	string total_rejected_amount = 15;
+	int32 average_review_time = 16;
 }
 
 message ReviewTicketRequest {
-	int64 review_ticket_id = 1;
+	int64 ticket_id = 1;
 	int64 reviewer_user_id = 2;
-	string review_action = 3;
+	string action = 3;	// approve, reject, manual_payout
 	string review_comment = 4;
 }
 
 message ReviewTicketResponse {}
+
+message AddCommentRequest {
+	// review ticket id
+	int64 ticket_id = 1;
+	// user id of the reviewer
+	int64 reviewer_user_id = 2;
+	// review comment
+	string review_comment = 3;
+}
+
+message AddCommentResponse {
+	// id of the comment added
+	int64 comment_id = 1;
+}
