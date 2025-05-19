@@ -3716,7 +3716,7 @@ components:
                 createdAt:
                     type: string
                     format: date-time
-                operator:
+                operatorName:
                     type: string
                 ticketId:
                     type: string

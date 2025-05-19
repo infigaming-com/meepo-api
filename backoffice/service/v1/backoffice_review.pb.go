@@ -510,7 +510,7 @@ func (x *AddCommentResponse) GetCommentId() int64 {
 type ListTicketsResponse_Ticket struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Operator         string                 `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
+	OperatorName     string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	TicketId         int64                  `protobuf:"varint,3,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
 	UserId           int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	VipLevel         int32                  `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
@@ -565,9 +565,9 @@ func (x *ListTicketsResponse_Ticket) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *ListTicketsResponse_Ticket) GetOperator() string {
+func (x *ListTicketsResponse_Ticket) GetOperatorName() string {
 	if x != nil {
-		return x.Operator
+		return x.OperatorName
 	}
 	return ""
 }
@@ -692,7 +692,7 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xe4\t\n" +
+	"_page_size\"\xed\t\n" +
 	"\x13ListTicketsResponse\x12O\n" +
 	"\atickets\x18\x01 \x03(\v25.api.backoffice.service.v1.ListTicketsResponse.TicketR\atickets\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -711,11 +711,11 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x13total_failed_amount\x18\r \x01(\tR\x11totalFailedAmount\x120\n" +
 	"\x14total_rejected_count\x18\x0e \x01(\x05R\x12totalRejectedCount\x122\n" +
 	"\x15total_rejected_amount\x18\x0f \x01(\tR\x13totalRejectedAmount\x12.\n" +
-	"\x13average_review_time\x18\x10 \x01(\x05R\x11averageReviewTime\x1a\xfc\x03\n" +
+	"\x13average_review_time\x18\x10 \x01(\x05R\x11averageReviewTime\x1a\x85\x04\n" +
 	"\x06Ticket\x129\n" +
 	"\n" +
-	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1a\n" +
-	"\boperator\x18\x02 \x01(\tR\boperator\x12\x1b\n" +
+	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x1b\n" +
 	"\tticket_id\x18\x03 \x01(\x03R\bticketId\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tvip_level\x18\x05 \x01(\x05R\bvipLevel\x12\x1b\n" +
