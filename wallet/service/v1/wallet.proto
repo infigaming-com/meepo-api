@@ -305,7 +305,6 @@ message GetWalletsResponse {
 
 message ListWalletBalanceTransactionsRequest {
 	int64 user_id = 1;
-	int64 transaction_id = 2;
 	// Transaction types for different operations
 	// Expected values:
 	// Credit operations:
@@ -335,6 +334,7 @@ message ListWalletBalanceTransactionsRequest {
 message ListWalletBalanceTransactionsResponse {
 	message BalanceTransaction {
 		google.protobuf.Timestamp created_at = 1;
+		int64 transaction_id = 2;
 		// Transaction types for different operations
 		// Expected values:
 		// Credit operations:
@@ -353,12 +353,12 @@ message ListWalletBalanceTransactionsResponse {
 		//   - "game_bet_rollback"            - Game bet transaction rollback
 		//   - "game_win_rollback"            - Game win transaction rollback
 		//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
-		string transaction_type = 2;
-		int32 vip_level = 3;
-		string change_balance = 4;
-		string before_balance = 5;
-		string after_balance = 6;
-		string currency = 7;
+		string transaction_type = 3;
+		int32 vip_level = 4;
+		string change_balance = 5;
+		string before_balance = 6;
+		string after_balance = 7;
+		string currency = 8;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 	int32 total = 2;
