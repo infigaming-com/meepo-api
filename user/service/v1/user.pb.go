@@ -2075,6 +2075,110 @@ func (*AddOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{35}
 }
 
+type UpdateUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	BanLogin      *bool                  `protobuf:"varint,2,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
+	BanGame       *bool                  `protobuf:"varint,3,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
+	BanWithdraw   *bool                  `protobuf:"varint,4,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserRequest) Reset() {
+	*x = UpdateUserRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserRequest) ProtoMessage() {}
+
+func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *UpdateUserRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UpdateUserRequest) GetBanLogin() bool {
+	if x != nil && x.BanLogin != nil {
+		return *x.BanLogin
+	}
+	return false
+}
+
+func (x *UpdateUserRequest) GetBanGame() bool {
+	if x != nil && x.BanGame != nil {
+		return *x.BanGame
+	}
+	return false
+}
+
+func (x *UpdateUserRequest) GetBanWithdraw() bool {
+	if x != nil && x.BanWithdraw != nil {
+		return *x.BanWithdraw
+	}
+	return false
+}
+
+type UpdateUserResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserResponse) Reset() {
+	*x = UpdateUserResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserResponse) ProtoMessage() {}
+
+func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserResponse.ProtoReflect.Descriptor instead.
+func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{37}
+}
+
 var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
@@ -2190,7 +2294,17 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x12AddOperatorRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\tR\n" +
 	"operatorId\"\x15\n" +
-	"\x13AddOperatorResponse*j\n" +
+	"\x13AddOperatorResponse\"\xc2\x01\n" +
+	"\x11UpdateUserRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12 \n" +
+	"\tban_login\x18\x02 \x01(\bH\x00R\bbanLogin\x88\x01\x01\x12\x1e\n" +
+	"\bban_game\x18\x03 \x01(\bH\x01R\abanGame\x88\x01\x01\x12&\n" +
+	"\fban_withdraw\x18\x04 \x01(\bH\x02R\vbanWithdraw\x88\x01\x01B\f\n" +
+	"\n" +
+	"_ban_loginB\v\n" +
+	"\t_ban_gameB\x0f\n" +
+	"\r_ban_withdraw\"\x14\n" +
+	"\x12UpdateUserResponse*j\n" +
 	"\bAuthType\x12\x19\n" +
 	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x13\n" +
@@ -2205,7 +2319,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1aOAUTH_PROVIDER_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15OAUTH_PROVIDER_GOOGLE\x10\x01\x12\x1b\n" +
 	"\x17OAUTH_PROVIDER_FACEBOOK\x10\x02\x12\x1a\n" +
-	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\x81\x14\n" +
+	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\xe2\x14\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12\x80\x01\n" +
@@ -2226,7 +2340,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\rDeleteUserTag\x12).api.user.service.v1.DeleteUserTagRequest\x1a*.api.user.service.v1.DeleteUserTagResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1/user/tags/delete\x12~\n" +
 	"\vGetUserTags\x12'.api.user.service.v1.GetUserTagsRequest\x1a(.api.user.service.v1.GetUserTagsResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/user/tags/get\x12n\n" +
 	"\x0fCheckPermission\x12+.api.user.service.v1.CheckPermissionRequest\x1a,.api.user.service.v1.CheckPermissionResponse\"\x00\x12\x83\x01\n" +
-	"\vAddOperator\x12'.api.user.service.v1.AddOperatorRequest\x1a(.api.user.service.v1.AddOperatorResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/operators/addBO\n" +
+	"\vAddOperator\x12'.api.user.service.v1.AddOperatorRequest\x1a(.api.user.service.v1.AddOperatorResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/operators/add\x12_\n" +
+	"\n" +
+	"UpdateUser\x12&.api.user.service.v1.UpdateUserRequest\x1a'.api.user.service.v1.UpdateUserResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -2242,7 +2358,7 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
+var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
 var file_user_service_v1_user_proto_goTypes = []any{
 	(AuthType)(0),                           // 0: api.user.service.v1.AuthType
 	(PasswordProvider)(0),                   // 1: api.user.service.v1.PasswordProvider
@@ -2283,6 +2399,8 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*CheckPermissionResponse)(nil),         // 36: api.user.service.v1.CheckPermissionResponse
 	(*AddOperatorRequest)(nil),              // 37: api.user.service.v1.AddOperatorRequest
 	(*AddOperatorResponse)(nil),             // 38: api.user.service.v1.AddOperatorResponse
+	(*UpdateUserRequest)(nil),               // 39: api.user.service.v1.UpdateUserRequest
+	(*UpdateUserResponse)(nil),              // 40: api.user.service.v1.UpdateUserResponse
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
 	1,  // 0: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
@@ -2309,27 +2427,29 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	33, // 21: api.user.service.v1.User.GetUserTags:input_type -> api.user.service.v1.GetUserTagsRequest
 	35, // 22: api.user.service.v1.User.CheckPermission:input_type -> api.user.service.v1.CheckPermissionRequest
 	37, // 23: api.user.service.v1.User.AddOperator:input_type -> api.user.service.v1.AddOperatorRequest
-	9,  // 24: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
-	9,  // 25: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
-	9,  // 26: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
-	9,  // 27: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
-	10, // 28: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
-	12, // 29: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	14, // 30: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
-	16, // 31: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
-	18, // 32: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
-	20, // 33: api.user.service.v1.User.GetOperatorTagConfig:output_type -> api.user.service.v1.GetOperatorTagConfigResponse
-	22, // 34: api.user.service.v1.User.SetOperatorTagConfig:output_type -> api.user.service.v1.SetOperatorTagConfigResponse
-	24, // 35: api.user.service.v1.User.AddOperatorTag:output_type -> api.user.service.v1.AddOperatorTagResponse
-	26, // 36: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
-	28, // 37: api.user.service.v1.User.DeleteOperatorTag:output_type -> api.user.service.v1.DeleteOperatorTagResponse
-	30, // 38: api.user.service.v1.User.AddUserTag:output_type -> api.user.service.v1.AddUserTagResponse
-	32, // 39: api.user.service.v1.User.DeleteUserTag:output_type -> api.user.service.v1.DeleteUserTagResponse
-	34, // 40: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
-	36, // 41: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
-	38, // 42: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
-	24, // [24:43] is the sub-list for method output_type
-	5,  // [5:24] is the sub-list for method input_type
+	39, // 24: api.user.service.v1.User.UpdateUser:input_type -> api.user.service.v1.UpdateUserRequest
+	9,  // 25: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
+	9,  // 26: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
+	9,  // 27: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
+	9,  // 28: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
+	10, // 29: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
+	12, // 30: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	14, // 31: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
+	16, // 32: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	18, // 33: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
+	20, // 34: api.user.service.v1.User.GetOperatorTagConfig:output_type -> api.user.service.v1.GetOperatorTagConfigResponse
+	22, // 35: api.user.service.v1.User.SetOperatorTagConfig:output_type -> api.user.service.v1.SetOperatorTagConfigResponse
+	24, // 36: api.user.service.v1.User.AddOperatorTag:output_type -> api.user.service.v1.AddOperatorTagResponse
+	26, // 37: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
+	28, // 38: api.user.service.v1.User.DeleteOperatorTag:output_type -> api.user.service.v1.DeleteOperatorTagResponse
+	30, // 39: api.user.service.v1.User.AddUserTag:output_type -> api.user.service.v1.AddUserTagResponse
+	32, // 40: api.user.service.v1.User.DeleteUserTag:output_type -> api.user.service.v1.DeleteUserTagResponse
+	34, // 41: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
+	36, // 42: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
+	38, // 43: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
+	40, // 44: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
+	25, // [25:45] is the sub-list for method output_type
+	5,  // [5:25] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
 	5,  // [5:5] is the sub-list for extension extendee
 	0,  // [0:5] is the sub-list for field type_name
@@ -2340,13 +2460,14 @@ func file_user_service_v1_user_proto_init() {
 	if File_user_service_v1_user_proto != nil {
 		return
 	}
+	file_user_service_v1_user_proto_msgTypes[36].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   36,
+			NumMessages:   38,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

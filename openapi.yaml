@@ -384,6 +384,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListGamesResponse'
+    /v1/backoffice/game/provider/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateProvider
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateProviderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateProviderResponse'
     /v1/backoffice/game/providers-with-detail/list:
         post:
             tags:
@@ -881,6 +899,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.DeleteUserTagResponse'
+    /v1/backoffice/user/update:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_UpdateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateUserResponse'
     /v1/backoffice/wallet/balance-transactions/list:
         post:
             tags:
@@ -1152,24 +1188,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
-    /v1/game/update:
-        post:
-            tags:
-                - Game
-            operationId: Game_UpdateGame
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.UpdateGameRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.UpdateGameResponse'
     /v1/operator/add:
         post:
             tags:
@@ -4246,6 +4264,30 @@ components:
         api.backoffice.service.v1.UpdateGameResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateProviderRequest:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                enabled:
+                    type: boolean
+        api.backoffice.service.v1.UpdateProviderResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.UpdateUserRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                banLogin:
+                    type: boolean
+                banGame:
+                    type: boolean
+                banWithdraw:
+                    type: boolean
+        api.backoffice.service.v1.UpdateUserResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.UpdateWalletRequest:
             type: object
             properties:
@@ -4850,16 +4892,6 @@ components:
                 bonusAmount:
                     type: number
                     format: double
-        api.game.service.v1.UpdateGameRequest:
-            type: object
-            properties:
-                gameId:
-                    type: string
-                enabled:
-                    type: boolean
-        api.game.service.v1.UpdateGameResponse:
-            type: object
-            properties: {}
         api.game.service.v1.UrlInfo:
             type: object
             properties:
