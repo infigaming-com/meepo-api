@@ -94,6 +94,12 @@ service BackofficeGame {
 			body: "*"
 		};
 	}
+	rpc UpdateProvider(UpdateProviderRequest) returns (UpdateProviderResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/provider/update"
+			body: "*"
+		};
+	}
 }
 
 message ListProvidersRequest {
@@ -333,3 +339,10 @@ message UpdateGameRequest {
 }
 
 message UpdateGameResponse {}
+
+message UpdateProviderRequest {
+	string provider_id = 1;
+	optional bool enabled = 2;
+}
+
+message UpdateProviderResponse {}

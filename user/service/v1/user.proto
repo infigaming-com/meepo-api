@@ -155,6 +155,9 @@ service User {
 			body: "*"
 		};
 	}
+
+	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -438,4 +441,14 @@ message AddOperatorRequest {
 }
 
 message AddOperatorResponse {
+}
+
+message UpdateUserRequest {
+	int64 user_id = 1;
+	optional bool ban_login = 2;
+	optional bool ban_game = 3;
+	optional bool ban_withdraw = 4;
+}
+
+message UpdateUserResponse {
 }

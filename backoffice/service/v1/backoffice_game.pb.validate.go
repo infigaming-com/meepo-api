@@ -3480,6 +3480,216 @@ var _ interface {
 	ErrorName() string
 } = UpdateGameResponseValidationError{}
 
+// Validate checks the field values on UpdateProviderRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateProviderRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateProviderRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateProviderRequestMultiError, or nil if none found.
+func (m *UpdateProviderRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateProviderRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ProviderId
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if len(errors) > 0 {
+		return UpdateProviderRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateProviderRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateProviderRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateProviderRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateProviderRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateProviderRequestMultiError) AllErrors() []error { return m }
+
+// UpdateProviderRequestValidationError is the validation error returned by
+// UpdateProviderRequest.Validate if the designated constraints aren't met.
+type UpdateProviderRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateProviderRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateProviderRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateProviderRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateProviderRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateProviderRequestValidationError) ErrorName() string {
+	return "UpdateProviderRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateProviderRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateProviderRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateProviderRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateProviderRequestValidationError{}
+
+// Validate checks the field values on UpdateProviderResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateProviderResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateProviderResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateProviderResponseMultiError, or nil if none found.
+func (m *UpdateProviderResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateProviderResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateProviderResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateProviderResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateProviderResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateProviderResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateProviderResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateProviderResponseMultiError) AllErrors() []error { return m }
+
+// UpdateProviderResponseValidationError is the validation error returned by
+// UpdateProviderResponse.Validate if the designated constraints aren't met.
+type UpdateProviderResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateProviderResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateProviderResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateProviderResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateProviderResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateProviderResponseValidationError) ErrorName() string {
+	return "UpdateProviderResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateProviderResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateProviderResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateProviderResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateProviderResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

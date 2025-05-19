@@ -70,6 +70,12 @@ service BackofficeUser {
             body: "*"
         };
     }
+	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/update"
+            body: "*"
+        };
+    }
 }
 
 message ListUsersRequest {
@@ -274,3 +280,11 @@ message ListUserCommentsResponse {
 	repeated Comment comments = 1;
 }
 
+message UpdateUserRequest {
+	int64 user_id = 1;
+	optional bool ban_login = 2;
+	optional bool ban_game = 3;
+	optional bool ban_withdraw = 4;
+}
+
+message UpdateUserResponse {}
