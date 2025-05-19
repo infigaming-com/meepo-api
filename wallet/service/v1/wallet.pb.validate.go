@@ -3148,6 +3148,8 @@ func (m *ListWalletBalanceTransactionsRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	// no validation rules for TransactionId
+
 	if m.TransactionType != nil {
 		// no validation rules for TransactionType
 	}
