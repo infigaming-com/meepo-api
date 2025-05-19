@@ -1712,9 +1712,8 @@ func (x *GetWalletsResponse) GetWallets() []*GetWalletsResponse_Wallet {
 }
 
 type ListWalletBalanceTransactionsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	TransactionId int64                  `protobuf:"varint,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	UserId int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	// Transaction types for different operations
 	// Expected values:
 	// Credit operations:
@@ -1776,13 +1775,6 @@ func (*ListWalletBalanceTransactionsRequest) Descriptor() ([]byte, []int) {
 func (x *ListWalletBalanceTransactionsRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
-	}
-	return 0
-}
-
-func (x *ListWalletBalanceTransactionsRequest) GetTransactionId() int64 {
-	if x != nil {
-		return x.TransactionId
 	}
 	return 0
 }
@@ -2511,8 +2503,9 @@ func (x *GetWalletsResponse_Wallet) GetCredits() []*GetWalletsResponse_Credit {
 }
 
 type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	TransactionId int64                  `protobuf:"varint,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	// Transaction types for different operations
 	// Expected values:
 	// Credit operations:
@@ -2531,12 +2524,12 @@ type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
 	//   - "game_bet_rollback"            - Game bet transaction rollback
 	//   - "game_win_rollback"            - Game win transaction rollback
 	//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
-	TransactionType string `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	VipLevel        int32  `protobuf:"varint,3,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	ChangeBalance   string `protobuf:"bytes,4,opt,name=change_balance,json=changeBalance,proto3" json:"change_balance,omitempty"`
-	BeforeBalance   string `protobuf:"bytes,5,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	AfterBalance    string `protobuf:"bytes,6,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	Currency        string `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
+	TransactionType string `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	VipLevel        int32  `protobuf:"varint,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	ChangeBalance   string `protobuf:"bytes,5,opt,name=change_balance,json=changeBalance,proto3" json:"change_balance,omitempty"`
+	BeforeBalance   string `protobuf:"bytes,6,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	AfterBalance    string `protobuf:"bytes,7,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	Currency        string `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2576,6 +2569,13 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetCreatedAt(
 		return x.CreatedAt
 	}
 	return nil
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetTransactionId() int64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
 }
 
 func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetTransactionType() string {
@@ -2839,10 +2839,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bturnover\x18\x05 \x01(\tR\bturnover\x12#\n" +
 	"\rcash_turnover\x18\x06 \x01(\tR\fcashTurnover\x12%\n" +
 	"\x0ebonus_turnover\x18\a \x01(\tR\rbonusTurnover\x12J\n" +
-	"\acredits\x18\b \x03(\v20.api.wallet.service.v1.GetWalletsResponse.CreditR\acredits\"\xc3\x03\n" +
+	"\acredits\x18\b \x03(\v20.api.wallet.service.v1.GetWalletsResponse.CreditR\acredits\"\x9c\x03\n" +
 	"$ListWalletBalanceTransactionsRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12%\n" +
-	"\x0etransaction_id\x18\x02 \x01(\x03R\rtransactionId\x12.\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12.\n" +
 	"\x10transaction_type\x18\x03 \x01(\tH\x00R\x0ftransactionType\x88\x01\x01\x12\x1f\n" +
 	"\bcurrency\x18\x04 \x01(\tH\x01R\bcurrency\x88\x01\x01\x12>\n" +
 	"\n" +
@@ -2856,21 +2855,22 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x9c\x04\n" +
+	"_page_size\"\xc3\x04\n" +
 	"%ListWalletBalanceTransactionsResponse\x12\x82\x01\n" +
 	"\x14balance_transactions\x18\x01 \x03(\v2O.api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransactionR\x13balanceTransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xa6\x02\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xcd\x02\n" +
 	"\x12BalanceTransaction\x129\n" +
 	"\n" +
-	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12)\n" +
-	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12\x1b\n" +
-	"\tvip_level\x18\x03 \x01(\x05R\bvipLevel\x12%\n" +
-	"\x0echange_balance\x18\x04 \x01(\tR\rchangeBalance\x12%\n" +
-	"\x0ebefore_balance\x18\x05 \x01(\tR\rbeforeBalance\x12#\n" +
-	"\rafter_balance\x18\x06 \x01(\tR\fafterBalance\x12\x1a\n" +
-	"\bcurrency\x18\a \x01(\tR\bcurrency\"\x93\x01\n" +
+	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
+	"\x0etransaction_id\x18\x02 \x01(\x03R\rtransactionId\x12)\n" +
+	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12\x1b\n" +
+	"\tvip_level\x18\x04 \x01(\x05R\bvipLevel\x12%\n" +
+	"\x0echange_balance\x18\x05 \x01(\tR\rchangeBalance\x12%\n" +
+	"\x0ebefore_balance\x18\x06 \x01(\tR\rbeforeBalance\x12#\n" +
+	"\rafter_balance\x18\a \x01(\tR\fafterBalance\x12\x1a\n" +
+	"\bcurrency\x18\b \x01(\tR\bcurrency\"\x93\x01\n" +
 	"\"GetWalletCreditTransactionsRequest\x12\x1b\n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\bcreditId\x12\x17\n" +
 	"\x04page\x18\x02 \x01(\x03H\x00R\x04page\x88\x01\x01\x12 \n" +
