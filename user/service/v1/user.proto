@@ -145,7 +145,16 @@ service User {
 			body: "*"
 		};
 	}
-	
+
+	rpc CheckPermission (CheckPermissionRequest) returns (CheckPermissionResponse) {
+	}
+
+	rpc AddOperator (AddOperatorRequest) returns (AddOperatorResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/operators/add"
+			body: "*"
+		};
+	}
 }
 
 // UserInfo contains basic user information.
@@ -412,4 +421,21 @@ message GetUserTagsRequest {
 message GetUserTagsResponse {
 	// List of active tags associated with the user.
 	repeated string tags = 1;
+}
+
+message CheckPermissionRequest {
+	string path = 1;
+	int64 role_id = 2;
+	int64 operator_id = 3;
+}
+
+message CheckPermissionResponse {
+	bool allowed = 1;
+}
+
+message AddOperatorRequest {
+	string operator_id = 1;
+}
+
+message AddOperatorResponse {
 }

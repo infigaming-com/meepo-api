@@ -1648,6 +1648,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/user/operators/add:
+        post:
+            tags:
+                - User
+            operationId: User_AddOperator
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.AddOperatorRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddOperatorResponse'
     /v1/user/operators/tag-config/get:
         post:
             tags:
@@ -4753,6 +4771,14 @@ components:
                     type: integer
                     format: int32
         api.review.service.v1.ListReviewsResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.AddOperatorRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+        api.user.service.v1.AddOperatorResponse:
             type: object
             properties: {}
         api.user.service.v1.AddOperatorTagRequest:
