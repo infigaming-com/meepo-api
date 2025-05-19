@@ -3444,3 +3444,421 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetUserTagsResponseValidationError{}
+
+// Validate checks the field values on CheckPermissionRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CheckPermissionRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CheckPermissionRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CheckPermissionRequestMultiError, or nil if none found.
+func (m *CheckPermissionRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CheckPermissionRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Path
+
+	// no validation rules for RoleId
+
+	// no validation rules for OperatorId
+
+	if len(errors) > 0 {
+		return CheckPermissionRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CheckPermissionRequestMultiError is an error wrapping multiple validation
+// errors returned by CheckPermissionRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CheckPermissionRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CheckPermissionRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CheckPermissionRequestMultiError) AllErrors() []error { return m }
+
+// CheckPermissionRequestValidationError is the validation error returned by
+// CheckPermissionRequest.Validate if the designated constraints aren't met.
+type CheckPermissionRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CheckPermissionRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CheckPermissionRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CheckPermissionRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CheckPermissionRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CheckPermissionRequestValidationError) ErrorName() string {
+	return "CheckPermissionRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CheckPermissionRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCheckPermissionRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CheckPermissionRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CheckPermissionRequestValidationError{}
+
+// Validate checks the field values on CheckPermissionResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CheckPermissionResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CheckPermissionResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CheckPermissionResponseMultiError, or nil if none found.
+func (m *CheckPermissionResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CheckPermissionResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Allowed
+
+	if len(errors) > 0 {
+		return CheckPermissionResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CheckPermissionResponseMultiError is an error wrapping multiple validation
+// errors returned by CheckPermissionResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CheckPermissionResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CheckPermissionResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CheckPermissionResponseMultiError) AllErrors() []error { return m }
+
+// CheckPermissionResponseValidationError is the validation error returned by
+// CheckPermissionResponse.Validate if the designated constraints aren't met.
+type CheckPermissionResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CheckPermissionResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CheckPermissionResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CheckPermissionResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CheckPermissionResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CheckPermissionResponseValidationError) ErrorName() string {
+	return "CheckPermissionResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CheckPermissionResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCheckPermissionResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CheckPermissionResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CheckPermissionResponseValidationError{}
+
+// Validate checks the field values on AddOperatorRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddOperatorRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddOperatorRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddOperatorRequestMultiError, or nil if none found.
+func (m *AddOperatorRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddOperatorRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	if len(errors) > 0 {
+		return AddOperatorRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddOperatorRequestMultiError is an error wrapping multiple validation errors
+// returned by AddOperatorRequest.ValidateAll() if the designated constraints
+// aren't met.
+type AddOperatorRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddOperatorRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddOperatorRequestMultiError) AllErrors() []error { return m }
+
+// AddOperatorRequestValidationError is the validation error returned by
+// AddOperatorRequest.Validate if the designated constraints aren't met.
+type AddOperatorRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddOperatorRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddOperatorRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddOperatorRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddOperatorRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddOperatorRequestValidationError) ErrorName() string {
+	return "AddOperatorRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddOperatorRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddOperatorRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddOperatorRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddOperatorRequestValidationError{}
+
+// Validate checks the field values on AddOperatorResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddOperatorResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddOperatorResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddOperatorResponseMultiError, or nil if none found.
+func (m *AddOperatorResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddOperatorResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AddOperatorResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddOperatorResponseMultiError is an error wrapping multiple validation
+// errors returned by AddOperatorResponse.ValidateAll() if the designated
+// constraints aren't met.
+type AddOperatorResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddOperatorResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddOperatorResponseMultiError) AllErrors() []error { return m }
+
+// AddOperatorResponseValidationError is the validation error returned by
+// AddOperatorResponse.Validate if the designated constraints aren't met.
+type AddOperatorResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddOperatorResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddOperatorResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddOperatorResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddOperatorResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddOperatorResponseValidationError) ErrorName() string {
+	return "AddOperatorResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddOperatorResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddOperatorResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddOperatorResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddOperatorResponseValidationError{}

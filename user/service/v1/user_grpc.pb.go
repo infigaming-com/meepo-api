@@ -36,6 +36,8 @@ const (
 	User_AddUserTag_FullMethodName                  = "/api.user.service.v1.User/AddUserTag"
 	User_DeleteUserTag_FullMethodName               = "/api.user.service.v1.User/DeleteUserTag"
 	User_GetUserTags_FullMethodName                 = "/api.user.service.v1.User/GetUserTags"
+	User_CheckPermission_FullMethodName             = "/api.user.service.v1.User/CheckPermission"
+	User_AddOperator_FullMethodName                 = "/api.user.service.v1.User/AddOperator"
 )
 
 // UserClient is the client API for User service.
@@ -86,6 +88,8 @@ type UserClient interface {
 	DeleteUserTag(ctx context.Context, in *DeleteUserTagRequest, opts ...grpc.CallOption) (*DeleteUserTagResponse, error)
 	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
 	GetUserTags(ctx context.Context, in *GetUserTagsRequest, opts ...grpc.CallOption) (*GetUserTagsResponse, error)
+	CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error)
+	AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...grpc.CallOption) (*AddOperatorResponse, error)
 }
 
 type userClient struct {
@@ -266,6 +270,26 @@ func (c *userClient) GetUserTags(ctx context.Context, in *GetUserTagsRequest, op
 	return out, nil
 }
 
+func (c *userClient) CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckPermissionResponse)
+	err := c.cc.Invoke(ctx, User_CheckPermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...grpc.CallOption) (*AddOperatorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddOperatorResponse)
+	err := c.cc.Invoke(ctx, User_AddOperator_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -314,6 +338,8 @@ type UserServer interface {
 	DeleteUserTag(context.Context, *DeleteUserTagRequest) (*DeleteUserTagResponse, error)
 	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
+	CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error)
+	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -374,6 +400,12 @@ func (UnimplementedUserServer) DeleteUserTag(context.Context, *DeleteUserTagRequ
 }
 func (UnimplementedUserServer) GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserTags not implemented")
+}
+func (UnimplementedUserServer) CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckPermission not implemented")
+}
+func (UnimplementedUserServer) AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOperator not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -702,6 +734,42 @@ func _User_GetUserTags_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_CheckPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckPermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CheckPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CheckPermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CheckPermission(ctx, req.(*CheckPermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_AddOperator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOperatorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).AddOperator(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_AddOperator_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).AddOperator(ctx, req.(*AddOperatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -776,6 +844,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserTags",
 			Handler:    _User_GetUserTags_Handler,
+		},
+		{
+			MethodName: "CheckPermission",
+			Handler:    _User_CheckPermission_Handler,
+		},
+		{
+			MethodName: "AddOperator",
+			Handler:    _User_AddOperator_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
