@@ -26,6 +26,8 @@ service Operator {
 
 	rpc GetOperator(GetOperatorRequest) returns (GetOperatorResponse) {}
 
+	rpc GetOperatorsByIds(GetOperatorsByIdsRequest) returns (GetOperatorsByIdsResponse) {}
+
 	rpc AddOrUpdateCurrency(AddOrUpdateCurrencyRequest) returns (AddOrUpdateCurrencyResponse) {
 	}
 
@@ -97,6 +99,19 @@ message GetOperatorResponse {
 		bool enabled = 3;
 	}
 	Operator operator = 1;
+}
+
+message GetOperatorsByIdsRequest {
+	repeated int64 operator_ids = 1;
+}
+
+message GetOperatorsByIdsResponse {
+	message Operator {
+		int64 operator_id = 1;
+		string name = 2;
+		bool enabled = 3;
+	}
+	repeated Operator operators = 1;
 }
 
 message AddOrUpdateCurrencyRequest {

@@ -62,6 +62,8 @@ service Wallet {
 	// It's called by ListWalletBalanceTransactions in backoffice service for the information in user transactions page.
 	rpc ListWalletBalanceTransactions (ListWalletBalanceTransactionsRequest) returns (ListWalletBalanceTransactionsResponse) {}
 
+	rpc GetWalletBalanceTransactionsByIds (GetWalletBalanceTransactionsByIdsRequest) returns (GetWalletBalanceTransactionsByIdsResponse) {}
+
 	rpc GetWalletCreditTransactions (GetWalletCreditTransactionsRequest) returns (GetWalletCreditTransactionsResponse) {}
 
 	rpc GetExchangeRates (GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {}
@@ -364,6 +366,38 @@ message ListWalletBalanceTransactionsResponse {
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message GetWalletBalanceTransactionsByIdsRequest {
+	repeated int64 transaction_ids = 1;
+}
+
+message GetWalletBalanceTransactionsByIdsResponse {
+	message BalanceTransaction {
+		int64 id = 1;
+		int64 user_id = 2;
+		string settlement_currency = 3;
+		string currency = 4;
+		string exchange_rate = 5;
+		string transaction_type = 6;
+		int64 external_transaction_id = 7;
+		int64 related_transaction_id = 8;
+		int64 original_cash = 9;
+		int64 cash = 10;
+		int64 cash_amount = 11;
+		int64 cash_usd_amount = 12;
+		int64 original_operator_bonus = 13;
+		int64 operator_bonus = 14;
+		int64 operator_bonus_amount = 15;
+		int64 operator_bonus_usd_amount = 16;
+		int64 original_provider_bonus = 17;
+		int64 provider_bonus = 18;
+		int64 provider_bonus_amount = 19;
+		int64 provider_bonus_usd_amount = 20;
+		int64 created_at = 21;
+		int64 updated_at = 22;
+	}
+	repeated BalanceTransaction balance_transactions = 1;
 }
 
 message GetWalletCreditTransactionsRequest {

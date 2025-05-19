@@ -22,6 +22,7 @@ const (
 	Operator_AddOperator_FullMethodName            = "/api.operator.service.v1.Operator/AddOperator"
 	Operator_UpdateOperator_FullMethodName         = "/api.operator.service.v1.Operator/UpdateOperator"
 	Operator_GetOperator_FullMethodName            = "/api.operator.service.v1.Operator/GetOperator"
+	Operator_GetOperatorsByIds_FullMethodName      = "/api.operator.service.v1.Operator/GetOperatorsByIds"
 	Operator_AddOrUpdateCurrency_FullMethodName    = "/api.operator.service.v1.Operator/AddOrUpdateCurrency"
 	Operator_UpdateOperatorCurrency_FullMethodName = "/api.operator.service.v1.Operator/UpdateOperatorCurrency"
 	Operator_GetOperatorCurrencies_FullMethodName  = "/api.operator.service.v1.Operator/GetOperatorCurrencies"
@@ -40,6 +41,7 @@ type OperatorClient interface {
 	AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...grpc.CallOption) (*AddOperatorResponse, error)
 	UpdateOperator(ctx context.Context, in *UpdateOperatorRequest, opts ...grpc.CallOption) (*UpdateOperatorResponse, error)
 	GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error)
+	GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error)
 	AddOrUpdateCurrency(ctx context.Context, in *AddOrUpdateCurrencyRequest, opts ...grpc.CallOption) (*AddOrUpdateCurrencyResponse, error)
 	UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error)
 	GetOperatorCurrencies(ctx context.Context, in *GetOperatorCurrenciesRequest, opts ...grpc.CallOption) (*GetOperatorCurrenciesResponse, error)
@@ -83,6 +85,16 @@ func (c *operatorClient) GetOperator(ctx context.Context, in *GetOperatorRequest
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOperatorResponse)
 	err := c.cc.Invoke(ctx, Operator_GetOperator_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operatorClient) GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorsByIdsResponse)
+	err := c.cc.Invoke(ctx, Operator_GetOperatorsByIds_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -168,6 +180,7 @@ type OperatorServer interface {
 	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
 	UpdateOperator(context.Context, *UpdateOperatorRequest) (*UpdateOperatorResponse, error)
 	GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error)
+	GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error)
 	AddOrUpdateCurrency(context.Context, *AddOrUpdateCurrencyRequest) (*AddOrUpdateCurrencyResponse, error)
 	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
 	GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error)
@@ -195,6 +208,9 @@ func (UnimplementedOperatorServer) UpdateOperator(context.Context, *UpdateOperat
 }
 func (UnimplementedOperatorServer) GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperator not implemented")
+}
+func (UnimplementedOperatorServer) GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorsByIds not implemented")
 }
 func (UnimplementedOperatorServer) AddOrUpdateCurrency(context.Context, *AddOrUpdateCurrencyRequest) (*AddOrUpdateCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddOrUpdateCurrency not implemented")
@@ -288,6 +304,24 @@ func _Operator_GetOperator_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OperatorServer).GetOperator(ctx, req.(*GetOperatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Operator_GetOperatorsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorsByIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).GetOperatorsByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_GetOperatorsByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).GetOperatorsByIds(ctx, req.(*GetOperatorsByIdsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -436,6 +470,10 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperator",
 			Handler:    _Operator_GetOperator_Handler,
+		},
+		{
+			MethodName: "GetOperatorsByIds",
+			Handler:    _Operator_GetOperatorsByIds_Handler,
 		},
 		{
 			MethodName: "AddOrUpdateCurrency",

@@ -64,6 +64,8 @@ service User {
 		};
 	}
 
+	rpc GetUsersByIds (GetUsersByIdsRequest) returns (GetUsersByIdsResponse) {}
+
 	// Get userIds by operatorIds.
 	rpc GetUserIdsByOperatorIds (GetUserIdsByOperatorIdsRequest) returns (GetUserIdsByOperatorIdsResponse) {}
 	
@@ -78,7 +80,6 @@ service User {
 
 	rpc IsTokenRevoked (IsTokenRevokedRequest) returns (IsTokenRevokedResponse) {
 	}
-
 
 	// GetOperatorTagConfig returns follow-parent flag for the given operator ID.
 	rpc GetOperatorTagConfig(GetOperatorTagConfigRequest) returns (GetOperatorTagConfigResponse) {
@@ -308,6 +309,14 @@ message GetUserRequest {
 message GetUserResponse {
 	// Basic information about the requested user.
 	UserInfo user_info = 1;
+}
+
+message GetUsersByIdsRequest {
+	repeated int64 user_ids = 1;
+}
+
+message GetUsersByIdsResponse {
+	repeated UserInfo users = 1;
 }
 
 message GetUserIdsByOperatorIdsRequest {

@@ -25,6 +25,7 @@ const (
 	User_RegisterOrLoginWithTelegram_FullMethodName = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
 	User_RefreshToken_FullMethodName                = "/api.user.service.v1.User/RefreshToken"
 	User_GetUser_FullMethodName                     = "/api.user.service.v1.User/GetUser"
+	User_GetUsersByIds_FullMethodName               = "/api.user.service.v1.User/GetUsersByIds"
 	User_GetUserIdsByOperatorIds_FullMethodName     = "/api.user.service.v1.User/GetUserIdsByOperatorIds"
 	User_Logout_FullMethodName                      = "/api.user.service.v1.User/Logout"
 	User_IsTokenRevoked_FullMethodName              = "/api.user.service.v1.User/IsTokenRevoked"
@@ -65,6 +66,7 @@ type UserClient interface {
 	// Get user information by userId.
 	// Returns basic user information for the specified user.
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
+	GetUsersByIds(ctx context.Context, in *GetUsersByIdsRequest, opts ...grpc.CallOption) (*GetUsersByIdsResponse, error)
 	// Get userIds by operatorIds.
 	GetUserIdsByOperatorIds(ctx context.Context, in *GetUserIdsByOperatorIdsRequest, opts ...grpc.CallOption) (*GetUserIdsByOperatorIdsResponse, error)
 	// Logout the current user.
@@ -156,6 +158,16 @@ func (c *userClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...gr
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserResponse)
 	err := c.cc.Invoke(ctx, User_GetUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetUsersByIds(ctx context.Context, in *GetUsersByIdsRequest, opts ...grpc.CallOption) (*GetUsersByIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUsersByIdsResponse)
+	err := c.cc.Invoke(ctx, User_GetUsersByIds_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -326,6 +338,7 @@ type UserServer interface {
 	// Get user information by userId.
 	// Returns basic user information for the specified user.
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	GetUsersByIds(context.Context, *GetUsersByIdsRequest) (*GetUsersByIdsResponse, error)
 	// Get userIds by operatorIds.
 	GetUserIdsByOperatorIds(context.Context, *GetUserIdsByOperatorIdsRequest) (*GetUserIdsByOperatorIdsResponse, error)
 	// Logout the current user.
@@ -380,6 +393,9 @@ func (UnimplementedUserServer) RefreshToken(context.Context, *RefreshTokenReques
 }
 func (UnimplementedUserServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
+}
+func (UnimplementedUserServer) GetUsersByIds(context.Context, *GetUsersByIdsRequest) (*GetUsersByIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUsersByIds not implemented")
 }
 func (UnimplementedUserServer) GetUserIdsByOperatorIds(context.Context, *GetUserIdsByOperatorIdsRequest) (*GetUserIdsByOperatorIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserIdsByOperatorIds not implemented")
@@ -548,6 +564,24 @@ func _User_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).GetUser(ctx, req.(*GetUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetUsersByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUsersByIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUsersByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUsersByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUsersByIds(ctx, req.(*GetUsersByIdsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -834,6 +868,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUser",
 			Handler:    _User_GetUser_Handler,
+		},
+		{
+			MethodName: "GetUsersByIds",
+			Handler:    _User_GetUsersByIds_Handler,
 		},
 		{
 			MethodName: "GetUserIdsByOperatorIds",
