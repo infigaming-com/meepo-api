@@ -3712,6 +3712,10 @@ func (m *ListOperatorsRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
 	if len(errors) > 0 {
 		return ListOperatorsRequestMultiError(errors)
 	}

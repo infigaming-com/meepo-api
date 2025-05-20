@@ -3573,7 +3573,9 @@ components:
                     type: boolean
         api.backoffice.service.v1.ListOperatorsRequest:
             type: object
-            properties: {}
+            properties:
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.ListOperatorsResponse:
             type: object
             properties:

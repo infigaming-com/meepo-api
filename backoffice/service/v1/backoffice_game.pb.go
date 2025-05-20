@@ -2022,6 +2022,7 @@ func (*UpdateProviderResponse) Descriptor() ([]byte, []int) {
 
 type ListOperatorsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Enabled       *bool                  `protobuf:"varint,1,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2054,6 +2055,13 @@ func (x *ListOperatorsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListOperatorsRequest.ProtoReflect.Descriptor instead.
 func (*ListOperatorsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_game_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *ListOperatorsRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
 }
 
 type ListOperatorsResponse struct {
@@ -2904,8 +2912,11 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
 	"\n" +
 	"\b_enabled\"\x18\n" +
-	"\x16UpdateProviderResponse\"\x16\n" +
-	"\x14ListOperatorsRequest\"\xc2\x01\n" +
+	"\x16UpdateProviderResponse\"A\n" +
+	"\x14ListOperatorsRequest\x12\x1d\n" +
+	"\aenabled\x18\x01 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
+	"\n" +
+	"\b_enabled\"\xc2\x01\n" +
 	"\x15ListOperatorsResponse\x12W\n" +
 	"\toperators\x18\x01 \x03(\v29.api.backoffice.service.v1.ListOperatorsResponse.OperatorR\toperators\x1aP\n" +
 	"\bOperator\x12\x1f\n" +
@@ -3054,6 +3065,7 @@ func file_backoffice_service_v1_backoffice_game_proto_init() {
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[23].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[25].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[27].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_game_proto_msgTypes[29].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

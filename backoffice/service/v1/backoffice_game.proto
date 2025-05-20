@@ -355,7 +355,9 @@ message UpdateProviderRequest {
 
 message UpdateProviderResponse {}
 
-message ListOperatorsRequest {}
+message ListOperatorsRequest {
+	optional bool enabled = 1;
+}
 
 message ListOperatorsResponse {
 	message Operator {
