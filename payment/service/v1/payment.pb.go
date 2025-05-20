@@ -83,25 +83,29 @@ func (TransactionType) EnumDescriptor() ([]byte, []int) {
 type TransactionStatus int32
 
 const (
+	// Default unspecified value
+	TransactionStatus_TRANSACTION_STATUS_UNSPECIFIED TransactionStatus = 0
 	// Transaction is in progress
-	TransactionStatus_TRANSACTION_STATUS_PROCESSING TransactionStatus = 0
+	TransactionStatus_TRANSACTION_STATUS_PROCESSING TransactionStatus = 1
 	// Transaction completed successfully
-	TransactionStatus_TRANSACTION_STATUS_SUCCESSFUL TransactionStatus = 1
+	TransactionStatus_TRANSACTION_STATUS_SUCCESSFUL TransactionStatus = 2
 	// Transaction failed to complete
-	TransactionStatus_TRANSACTION_STATUS_FAILED TransactionStatus = 2
+	TransactionStatus_TRANSACTION_STATUS_FAILED TransactionStatus = 3
 )
 
 // Enum value maps for TransactionStatus.
 var (
 	TransactionStatus_name = map[int32]string{
-		0: "TRANSACTION_STATUS_PROCESSING",
-		1: "TRANSACTION_STATUS_SUCCESSFUL",
-		2: "TRANSACTION_STATUS_FAILED",
+		0: "TRANSACTION_STATUS_UNSPECIFIED",
+		1: "TRANSACTION_STATUS_PROCESSING",
+		2: "TRANSACTION_STATUS_SUCCESSFUL",
+		3: "TRANSACTION_STATUS_FAILED",
 	}
 	TransactionStatus_value = map[string]int32{
-		"TRANSACTION_STATUS_PROCESSING": 0,
-		"TRANSACTION_STATUS_SUCCESSFUL": 1,
-		"TRANSACTION_STATUS_FAILED":     2,
+		"TRANSACTION_STATUS_UNSPECIFIED": 0,
+		"TRANSACTION_STATUS_PROCESSING":  1,
+		"TRANSACTION_STATUS_SUCCESSFUL":  2,
+		"TRANSACTION_STATUS_FAILED":      3,
 	}
 )
 
@@ -1692,7 +1696,7 @@ func (x *TransactionInfo) GetStatus() TransactionStatus {
 	if x != nil {
 		return x.Status
 	}
-	return TransactionStatus_TRANSACTION_STATUS_PROCESSING
+	return TransactionStatus_TRANSACTION_STATUS_UNSPECIFIED
 }
 
 func (x *TransactionInfo) GetCreatedAt() *timestamppb.Timestamp {
@@ -1904,7 +1908,7 @@ func (x *GetTransactionPageRequest) GetStatus() TransactionStatus {
 	if x != nil {
 		return x.Status
 	}
-	return TransactionStatus_TRANSACTION_STATUS_PROCESSING
+	return TransactionStatus_TRANSACTION_STATUS_UNSPECIFIED
 }
 
 func (x *GetTransactionPageRequest) GetAgent() string {
@@ -2579,11 +2583,12 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x0fTransactionType\x12 \n" +
 	"\x1cTRANSACTION_TYPE_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18TRANSACTION_TYPE_DEPOSIT\x10\x01\x12\x1d\n" +
-	"\x19TRANSACTION_TYPE_WITHDRAW\x10\x02*x\n" +
-	"\x11TransactionStatus\x12!\n" +
-	"\x1dTRANSACTION_STATUS_PROCESSING\x10\x00\x12!\n" +
-	"\x1dTRANSACTION_STATUS_SUCCESSFUL\x10\x01\x12\x1d\n" +
-	"\x19TRANSACTION_STATUS_FAILED\x10\x02*\x19\n" +
+	"\x19TRANSACTION_TYPE_WITHDRAW\x10\x02*\x9c\x01\n" +
+	"\x11TransactionStatus\x12\"\n" +
+	"\x1eTRANSACTION_STATUS_UNSPECIFIED\x10\x00\x12!\n" +
+	"\x1dTRANSACTION_STATUS_PROCESSING\x10\x01\x12!\n" +
+	"\x1dTRANSACTION_STATUS_SUCCESSFUL\x10\x02\x12\x1d\n" +
+	"\x19TRANSACTION_STATUS_FAILED\x10\x03*\x19\n" +
 	"\x04Sort\x12\b\n" +
 	"\x04DESC\x10\x00\x12\a\n" +
 	"\x03ASC\x10\x01*F\n" +

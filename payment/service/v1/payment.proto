@@ -256,12 +256,14 @@ enum TransactionType {
 // Transaction status enum
 // Defines possible states of a transaction
 enum TransactionStatus {
+  // Default unspecified value
+  TRANSACTION_STATUS_UNSPECIFIED = 0;
   // Transaction is in progress
-  TRANSACTION_STATUS_PROCESSING = 0;
+  TRANSACTION_STATUS_PROCESSING = 1;
   // Transaction completed successfully
-  TRANSACTION_STATUS_SUCCESSFUL = 1;
+  TRANSACTION_STATUS_SUCCESSFUL = 2;
   // Transaction failed to complete
-  TRANSACTION_STATUS_FAILED = 2;
+  TRANSACTION_STATUS_FAILED = 3;
 }
 
 // Sort enum
