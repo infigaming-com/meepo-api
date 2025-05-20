@@ -755,7 +755,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDailySummariesResponse'
-    /v1/backoffice/review/ticket/get:
+    /v1/backoffice/review/tickets/get:
         post:
             tags:
                 - BackofficeReview
@@ -773,24 +773,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketResponse'
-    /v1/backoffice/review/ticket/review:
-        post:
-            tags:
-                - BackofficeReview
-            operationId: BackofficeReview_ReviewTicket
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
     /v1/backoffice/review/tickets/list:
         post:
             tags:
@@ -809,6 +791,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse'
+    /v1/backoffice/review/tickets/review:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_ReviewTicket
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
     /v1/backoffice/user/comments/add:
         post:
             tags:

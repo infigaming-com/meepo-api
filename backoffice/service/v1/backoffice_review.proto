@@ -18,13 +18,13 @@ service BackofficeReview {
     }
 	rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {
         option (google.api.http) = {
-            post: "/v1/backoffice/review/ticket/get"
+            post: "/v1/backoffice/review/tickets/get"
             body: "*"
         };
     }
     rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {
         option (google.api.http) = {
-            post: "/v1/backoffice/review/ticket/review"
+            post: "/v1/backoffice/review/tickets/review"
             body: "*"
         };
     }
