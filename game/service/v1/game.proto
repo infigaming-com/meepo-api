@@ -103,6 +103,9 @@ service Game {
 
 	rpc UpdateProvider(UpdateProviderRequest) returns (UpdateProviderResponse) {
 	};
+
+	rpc ListOperators(ListOperatorsRequest) returns (ListOperatorsResponse) {
+	};
 }
 
 message CreateOperatorRequest {
@@ -520,4 +523,16 @@ message UpdateProviderRequest {
 }
 
 message UpdateProviderResponse {
+}
+
+message ListOperatorsRequest {
+	optional bool enabled = 1;
+}
+
+message ListOperatorsResponse {
+	message Operator {
+		string operator_id = 1;
+		string operator_name = 2;
+	}
+	repeated Operator operators = 1;
 }

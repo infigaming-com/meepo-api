@@ -39,6 +39,7 @@ const (
 	Game_BackofficeListGames_FullMethodName = "/api.game.service.v1.Game/BackofficeListGames"
 	Game_UpdateGame_FullMethodName          = "/api.game.service.v1.Game/UpdateGame"
 	Game_UpdateProvider_FullMethodName      = "/api.game.service.v1.Game/UpdateProvider"
+	Game_ListOperators_FullMethodName       = "/api.game.service.v1.Game/ListOperators"
 )
 
 // GameClient is the client API for Game service.
@@ -65,6 +66,7 @@ type GameClient interface {
 	BackofficeListGames(ctx context.Context, in *BackofficeListGamesRequest, opts ...grpc.CallOption) (*BackofficeListGamesResponse, error)
 	UpdateGame(ctx context.Context, in *UpdateGameRequest, opts ...grpc.CallOption) (*UpdateGameResponse, error)
 	UpdateProvider(ctx context.Context, in *UpdateProviderRequest, opts ...grpc.CallOption) (*UpdateProviderResponse, error)
+	ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...grpc.CallOption) (*ListOperatorsResponse, error)
 }
 
 type gameClient struct {
@@ -275,6 +277,16 @@ func (c *gameClient) UpdateProvider(ctx context.Context, in *UpdateProviderReque
 	return out, nil
 }
 
+func (c *gameClient) ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...grpc.CallOption) (*ListOperatorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorsResponse)
+	err := c.cc.Invoke(ctx, Game_ListOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -299,6 +311,7 @@ type GameServer interface {
 	BackofficeListGames(context.Context, *BackofficeListGamesRequest) (*BackofficeListGamesResponse, error)
 	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error)
 	UpdateProvider(context.Context, *UpdateProviderRequest) (*UpdateProviderResponse, error)
+	ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -368,6 +381,9 @@ func (UnimplementedGameServer) UpdateGame(context.Context, *UpdateGameRequest) (
 }
 func (UnimplementedGameServer) UpdateProvider(context.Context, *UpdateProviderRequest) (*UpdateProviderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProvider not implemented")
+}
+func (UnimplementedGameServer) ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperators not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -750,6 +766,24 @@ func _Game_UpdateProvider_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_ListOperators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListOperators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListOperators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListOperators(ctx, req.(*ListOperatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -836,6 +870,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateProvider",
 			Handler:    _Game_UpdateProvider_Handler,
+		},
+		{
+			MethodName: "ListOperators",
+			Handler:    _Game_ListOperators_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
