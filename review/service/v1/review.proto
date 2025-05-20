@@ -73,7 +73,7 @@ message ListTicketsResponse {
 		int32 vip_level = 5;
 		repeated string user_tags = 6;
 		string before_balance = 7;
-		string bofore_balance_in_usd = 8;
+		string before_balance_in_usd = 8;
 		string amount = 9;
 		string amount_in_usd = 10;
 		string after_balance = 11;

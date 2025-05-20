@@ -714,7 +714,7 @@ type ListTicketsResponse_Ticket struct {
 	VipLevel           int32                  `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
 	UserTags           []string               `protobuf:"bytes,6,rep,name=user_tags,json=userTags,proto3" json:"user_tags,omitempty"`
 	BeforeBalance      string                 `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	BoforeBalanceInUsd string                 `protobuf:"bytes,8,opt,name=bofore_balance_in_usd,json=boforeBalanceInUsd,proto3" json:"bofore_balance_in_usd,omitempty"`
+	BeforeBalanceInUsd string                 `protobuf:"bytes,8,opt,name=before_balance_in_usd,json=beforeBalanceInUsd,proto3" json:"before_balance_in_usd,omitempty"`
 	Amount             string                 `protobuf:"bytes,9,opt,name=amount,proto3" json:"amount,omitempty"`
 	AmountInUsd        string                 `protobuf:"bytes,10,opt,name=amount_in_usd,json=amountInUsd,proto3" json:"amount_in_usd,omitempty"`
 	AfterBalance       string                 `protobuf:"bytes,11,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
@@ -809,9 +809,9 @@ func (x *ListTicketsResponse_Ticket) GetBeforeBalance() string {
 	return ""
 }
 
-func (x *ListTicketsResponse_Ticket) GetBoforeBalanceInUsd() string {
+func (x *ListTicketsResponse_Ticket) GetBeforeBalanceInUsd() string {
 	if x != nil {
-		return x.BoforeBalanceInUsd
+		return x.BeforeBalanceInUsd
 	}
 	return ""
 }
@@ -1336,7 +1336,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\tvip_level\x18\x05 \x01(\x05R\bvipLevel\x12\x1b\n" +
 	"\tuser_tags\x18\x06 \x03(\tR\buserTags\x12%\n" +
 	"\x0ebefore_balance\x18\a \x01(\tR\rbeforeBalance\x121\n" +
-	"\x15bofore_balance_in_usd\x18\b \x01(\tR\x12boforeBalanceInUsd\x12\x16\n" +
+	"\x15before_balance_in_usd\x18\b \x01(\tR\x12beforeBalanceInUsd\x12\x16\n" +
 	"\x06amount\x18\t \x01(\tR\x06amount\x12\"\n" +
 	"\ramount_in_usd\x18\n" +
 	" \x01(\tR\vamountInUsd\x12#\n" +
