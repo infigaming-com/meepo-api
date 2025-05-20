@@ -26,30 +26,30 @@ const (
 type ListUsersRequest struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
 	UserId                *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	Tags                  []string               `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"`
+	Tags                  []string               `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"` // not available for now
 	RegistrationStartTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=registration_start_time,json=registrationStartTime,proto3,oneof" json:"registration_start_time,omitempty"`
 	RegistrationEndTime   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=registration_end_time,json=registrationEndTime,proto3,oneof" json:"registration_end_time,omitempty"`
 	VipLevel              *int32                 `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3,oneof" json:"vip_level,omitempty"`
 	RetailerOperatorId    *int64                 `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3,oneof" json:"retailer_operator_id,omitempty"`
 	GroupOperatorId       *int64                 `protobuf:"varint,7,opt,name=group_operator_id,json=groupOperatorId,proto3,oneof" json:"group_operator_id,omitempty"`
 	OperatorId            *int64                 `protobuf:"varint,8,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
-	Countries             []string               `protobuf:"bytes,9,rep,name=countries,proto3" json:"countries,omitempty"`
-	RiskLevelMin          *int32                 `protobuf:"varint,10,opt,name=risk_level_min,json=riskLevelMin,proto3,oneof" json:"risk_level_min,omitempty"`
-	RiskLevelMax          *int32                 `protobuf:"varint,11,opt,name=risk_level_max,json=riskLevelMax,proto3,oneof" json:"risk_level_max,omitempty"`
-	KycLevels             []int32                `protobuf:"varint,12,rep,packed,name=kyc_levels,json=kycLevels,proto3" json:"kyc_levels,omitempty"`
-	HasMadeDeposit        *bool                  `protobuf:"varint,13,opt,name=has_made_deposit,json=hasMadeDeposit,proto3,oneof" json:"has_made_deposit,omitempty"`
-	DepositMin            *string                `protobuf:"bytes,14,opt,name=deposit_min,json=depositMin,proto3,oneof" json:"deposit_min,omitempty"`
-	DepositMax            *string                `protobuf:"bytes,15,opt,name=deposit_max,json=depositMax,proto3,oneof" json:"deposit_max,omitempty"`
-	WithdrawalMin         *string                `protobuf:"bytes,16,opt,name=withdrawal_min,json=withdrawalMin,proto3,oneof" json:"withdrawal_min,omitempty"`
-	WithdrawalMax         *string                `protobuf:"bytes,17,opt,name=withdrawal_max,json=withdrawalMax,proto3,oneof" json:"withdrawal_max,omitempty"`
-	BanWithdraw           *bool                  `protobuf:"varint,18,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
-	BanGame               *bool                  `protobuf:"varint,19,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
-	BanLogin              *bool                  `protobuf:"varint,20,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
-	Online                *bool                  `protobuf:"varint,21,opt,name=online,proto3,oneof" json:"online,omitempty"`
-	Page                  *int32                 `protobuf:"varint,22,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize              *int32                 `protobuf:"varint,23,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	Country               *string                `protobuf:"bytes,9,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	// optional int32 risk_level_min = 10;
+	// optional int32 risk_level_max = 11;
+	KycLevel *int32 `protobuf:"varint,12,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
+	// optional bool has_made_deposit = 13;
+	DepositMin    *string `protobuf:"bytes,14,opt,name=deposit_min,json=depositMin,proto3,oneof" json:"deposit_min,omitempty"`
+	DepositMax    *string `protobuf:"bytes,15,opt,name=deposit_max,json=depositMax,proto3,oneof" json:"deposit_max,omitempty"`
+	WithdrawalMin *string `protobuf:"bytes,16,opt,name=withdrawal_min,json=withdrawalMin,proto3,oneof" json:"withdrawal_min,omitempty"`
+	WithdrawalMax *string `protobuf:"bytes,17,opt,name=withdrawal_max,json=withdrawalMax,proto3,oneof" json:"withdrawal_max,omitempty"`
+	BanWithdraw   *bool   `protobuf:"varint,18,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
+	BanGame       *bool   `protobuf:"varint,19,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
+	BanLogin      *bool   `protobuf:"varint,20,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
+	// optional bool online = 21;
+	Page          *int32 `protobuf:"varint,22,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,23,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListUsersRequest) Reset() {
@@ -138,39 +138,18 @@ func (x *ListUsersRequest) GetOperatorId() int64 {
 	return 0
 }
 
-func (x *ListUsersRequest) GetCountries() []string {
-	if x != nil {
-		return x.Countries
+func (x *ListUsersRequest) GetCountry() string {
+	if x != nil && x.Country != nil {
+		return *x.Country
 	}
-	return nil
+	return ""
 }
 
-func (x *ListUsersRequest) GetRiskLevelMin() int32 {
-	if x != nil && x.RiskLevelMin != nil {
-		return *x.RiskLevelMin
+func (x *ListUsersRequest) GetKycLevel() int32 {
+	if x != nil && x.KycLevel != nil {
+		return *x.KycLevel
 	}
 	return 0
-}
-
-func (x *ListUsersRequest) GetRiskLevelMax() int32 {
-	if x != nil && x.RiskLevelMax != nil {
-		return *x.RiskLevelMax
-	}
-	return 0
-}
-
-func (x *ListUsersRequest) GetKycLevels() []int32 {
-	if x != nil {
-		return x.KycLevels
-	}
-	return nil
-}
-
-func (x *ListUsersRequest) GetHasMadeDeposit() bool {
-	if x != nil && x.HasMadeDeposit != nil {
-		return *x.HasMadeDeposit
-	}
-	return false
 }
 
 func (x *ListUsersRequest) GetDepositMin() string {
@@ -218,13 +197,6 @@ func (x *ListUsersRequest) GetBanGame() bool {
 func (x *ListUsersRequest) GetBanLogin() bool {
 	if x != nil && x.BanLogin != nil {
 		return *x.BanLogin
-	}
-	return false
-}
-
-func (x *ListUsersRequest) GetOnline() bool {
-	if x != nil && x.Online != nil {
-		return *x.Online
 	}
 	return false
 }
@@ -1488,32 +1460,32 @@ func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListUsersResponse_User struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Retailer       string                 `protobuf:"bytes,1,opt,name=retailer,proto3" json:"retailer,omitempty"`
-	Group          string                 `protobuf:"bytes,2,opt,name=group,proto3" json:"group,omitempty"`
-	Operator       string                 `protobuf:"bytes,3,opt,name=operator,proto3" json:"operator,omitempty"`
-	UserId         int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Username       string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
-	Email          string                 `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile         string                 `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	VipLevel       int32                  `protobuf:"varint,8,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	KycLevel       int32                  `protobuf:"varint,9,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
-	Deposit        string                 `protobuf:"bytes,10,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	Withdraw       string                 `protobuf:"bytes,11,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
-	Tags           []string               `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
-	BanWithdraw    bool                   `protobuf:"varint,13,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
-	BanGame        bool                   `protobuf:"varint,14,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
-	BanLogin       bool                   `protobuf:"varint,15,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
-	Online         bool                   `protobuf:"varint,16,opt,name=online,proto3" json:"online,omitempty"`
-	LastLoginAt    *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
-	RegisteredAt   *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
-	RiskLevel      int32                  `protobuf:"varint,19,opt,name=risk_level,json=riskLevel,proto3" json:"risk_level,omitempty"`
-	ReferralCode   string                 `protobuf:"bytes,20,opt,name=referral_code,json=referralCode,proto3" json:"referral_code,omitempty"`
-	AffiliateCode  string                 `protobuf:"bytes,21,opt,name=affiliate_code,json=affiliateCode,proto3" json:"affiliate_code,omitempty"`
-	Country        string                 `protobuf:"bytes,22,opt,name=country,proto3" json:"country,omitempty"`
-	Device         string                 `protobuf:"bytes,23,opt,name=device,proto3" json:"device,omitempty"`
-	Source         string                 `protobuf:"bytes,24,opt,name=source,proto3" json:"source,omitempty"`
-	RegistrationIp string                 `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Retailer    string                 `protobuf:"bytes,1,opt,name=retailer,proto3" json:"retailer,omitempty"`
+	Group       string                 `protobuf:"bytes,2,opt,name=group,proto3" json:"group,omitempty"`
+	Operator    string                 `protobuf:"bytes,3,opt,name=operator,proto3" json:"operator,omitempty"` // Operator name
+	UserId      int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Username    string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
+	Email       string                 `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile      string                 `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	VipLevel    int32                  `protobuf:"varint,8,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	KycLevel    int32                  `protobuf:"varint,9,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
+	Deposit     string                 `protobuf:"bytes,10,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	Withdraw    string                 `protobuf:"bytes,11,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
+	Tags        []string               `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
+	BanWithdraw bool                   `protobuf:"varint,13,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
+	BanGame     bool                   `protobuf:"varint,14,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
+	BanLogin    bool                   `protobuf:"varint,15,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
+	// bool online = 16;
+	LastLoginAt  *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
+	RegisteredAt *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	// int32 risk_level = 19;
+	// string referral_code = 20;
+	// string affiliate_code = 21;
+	Country string `protobuf:"bytes,22,opt,name=country,proto3" json:"country,omitempty"`
+	// string device = 23;
+	// string source = 24;
+	RegistrationIp string `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1653,13 +1625,6 @@ func (x *ListUsersResponse_User) GetBanLogin() bool {
 	return false
 }
 
-func (x *ListUsersResponse_User) GetOnline() bool {
-	if x != nil {
-		return x.Online
-	}
-	return false
-}
-
 func (x *ListUsersResponse_User) GetLastLoginAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.LastLoginAt
@@ -1674,44 +1639,9 @@ func (x *ListUsersResponse_User) GetRegisteredAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *ListUsersResponse_User) GetRiskLevel() int32 {
-	if x != nil {
-		return x.RiskLevel
-	}
-	return 0
-}
-
-func (x *ListUsersResponse_User) GetReferralCode() string {
-	if x != nil {
-		return x.ReferralCode
-	}
-	return ""
-}
-
-func (x *ListUsersResponse_User) GetAffiliateCode() string {
-	if x != nil {
-		return x.AffiliateCode
-	}
-	return ""
-}
-
 func (x *ListUsersResponse_User) GetCountry() string {
 	if x != nil {
 		return x.Country
-	}
-	return ""
-}
-
-func (x *ListUsersResponse_User) GetDevice() string {
-	if x != nil {
-		return x.Device
-	}
-	return ""
-}
-
-func (x *ListUsersResponse_User) GetSource() string {
-	if x != nil {
-		return x.Source
 	}
 	return ""
 }
@@ -2131,8 +2061,7 @@ var File_backoffice_service_v1_backoffice_user_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa8\n" +
-	"\n" +
+	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xde\b\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -2142,27 +2071,21 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x14retailer_operator_id\x18\x06 \x01(\x03H\x04R\x12retailerOperatorId\x88\x01\x01\x12/\n" +
 	"\x11group_operator_id\x18\a \x01(\x03H\x05R\x0fgroupOperatorId\x88\x01\x01\x12$\n" +
 	"\voperator_id\x18\b \x01(\x03H\x06R\n" +
-	"operatorId\x88\x01\x01\x12\x1c\n" +
-	"\tcountries\x18\t \x03(\tR\tcountries\x12)\n" +
-	"\x0erisk_level_min\x18\n" +
-	" \x01(\x05H\aR\friskLevelMin\x88\x01\x01\x12)\n" +
-	"\x0erisk_level_max\x18\v \x01(\x05H\bR\friskLevelMax\x88\x01\x01\x12\x1d\n" +
-	"\n" +
-	"kyc_levels\x18\f \x03(\x05R\tkycLevels\x12-\n" +
-	"\x10has_made_deposit\x18\r \x01(\bH\tR\x0ehasMadeDeposit\x88\x01\x01\x12$\n" +
-	"\vdeposit_min\x18\x0e \x01(\tH\n" +
-	"R\n" +
+	"operatorId\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\t \x01(\tH\aR\acountry\x88\x01\x01\x12 \n" +
+	"\tkyc_level\x18\f \x01(\x05H\bR\bkycLevel\x88\x01\x01\x12$\n" +
+	"\vdeposit_min\x18\x0e \x01(\tH\tR\n" +
 	"depositMin\x88\x01\x01\x12$\n" +
-	"\vdeposit_max\x18\x0f \x01(\tH\vR\n" +
+	"\vdeposit_max\x18\x0f \x01(\tH\n" +
+	"R\n" +
 	"depositMax\x88\x01\x01\x12*\n" +
-	"\x0ewithdrawal_min\x18\x10 \x01(\tH\fR\rwithdrawalMin\x88\x01\x01\x12*\n" +
-	"\x0ewithdrawal_max\x18\x11 \x01(\tH\rR\rwithdrawalMax\x88\x01\x01\x12&\n" +
-	"\fban_withdraw\x18\x12 \x01(\bH\x0eR\vbanWithdraw\x88\x01\x01\x12\x1e\n" +
-	"\bban_game\x18\x13 \x01(\bH\x0fR\abanGame\x88\x01\x01\x12 \n" +
-	"\tban_login\x18\x14 \x01(\bH\x10R\bbanLogin\x88\x01\x01\x12\x1b\n" +
-	"\x06online\x18\x15 \x01(\bH\x11R\x06online\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x16 \x01(\x05H\x12R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x17 \x01(\x05H\x13R\bpageSize\x88\x01\x01B\n" +
+	"\x0ewithdrawal_min\x18\x10 \x01(\tH\vR\rwithdrawalMin\x88\x01\x01\x12*\n" +
+	"\x0ewithdrawal_max\x18\x11 \x01(\tH\fR\rwithdrawalMax\x88\x01\x01\x12&\n" +
+	"\fban_withdraw\x18\x12 \x01(\bH\rR\vbanWithdraw\x88\x01\x01\x12\x1e\n" +
+	"\bban_game\x18\x13 \x01(\bH\x0eR\abanGame\x88\x01\x01\x12 \n" +
+	"\tban_login\x18\x14 \x01(\bH\x0fR\bbanLogin\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x16 \x01(\x05H\x10R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x17 \x01(\x05H\x11R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -2171,10 +2094,11 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"_vip_levelB\x17\n" +
 	"\x15_retailer_operator_idB\x14\n" +
 	"\x12_group_operator_idB\x0e\n" +
-	"\f_operator_idB\x11\n" +
-	"\x0f_risk_level_minB\x11\n" +
-	"\x0f_risk_level_maxB\x13\n" +
-	"\x11_has_made_depositB\x0e\n" +
+	"\f_operator_idB\n" +
+	"\n" +
+	"\b_countryB\f\n" +
+	"\n" +
+	"_kyc_levelB\x0e\n" +
 	"\f_deposit_minB\x0e\n" +
 	"\f_deposit_maxB\x11\n" +
 	"\x0f_withdrawal_minB\x11\n" +
@@ -2182,16 +2106,15 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\r_ban_withdrawB\v\n" +
 	"\t_ban_gameB\f\n" +
 	"\n" +
-	"_ban_loginB\t\n" +
-	"\a_onlineB\a\n" +
+	"_ban_loginB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xb3\a\n" +
+	"_page_size\"\x80\x06\n" +
 	"\x11ListUsersResponse\x12G\n" +
 	"\x05users\x18\x01 \x03(\v21.api.backoffice.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x8d\x06\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xda\x04\n" +
 	"\x04User\x12\x1a\n" +
 	"\bretailer\x18\x01 \x01(\tR\bretailer\x12\x14\n" +
 	"\x05group\x18\x02 \x01(\tR\x05group\x12\x1a\n" +
@@ -2208,17 +2131,10 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x04tags\x18\f \x03(\tR\x04tags\x12!\n" +
 	"\fban_withdraw\x18\r \x01(\bR\vbanWithdraw\x12\x19\n" +
 	"\bban_game\x18\x0e \x01(\bR\abanGame\x12\x1b\n" +
-	"\tban_login\x18\x0f \x01(\bR\bbanLogin\x12\x16\n" +
-	"\x06online\x18\x10 \x01(\bR\x06online\x12>\n" +
+	"\tban_login\x18\x0f \x01(\bR\bbanLogin\x12>\n" +
 	"\rlast_login_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
-	"\rregistered_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x1d\n" +
-	"\n" +
-	"risk_level\x18\x13 \x01(\x05R\triskLevel\x12#\n" +
-	"\rreferral_code\x18\x14 \x01(\tR\freferralCode\x12%\n" +
-	"\x0eaffiliate_code\x18\x15 \x01(\tR\raffiliateCode\x12\x18\n" +
-	"\acountry\x18\x16 \x01(\tR\acountry\x12\x16\n" +
-	"\x06device\x18\x17 \x01(\tR\x06device\x12\x16\n" +
-	"\x06source\x18\x18 \x01(\tR\x06source\x12'\n" +
+	"\rregistered_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
+	"\acountry\x18\x16 \x01(\tR\acountry\x12'\n" +
 	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\"\x18\n" +
 	"\x16GetUserOverviewRequest\"\xd8\n" +
 	"\n" +

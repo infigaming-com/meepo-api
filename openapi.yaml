@@ -3843,25 +3843,17 @@ components:
                     type: string
                 operatorId:
                     type: string
-                countries:
-                    type: array
-                    items:
-                        type: string
-                riskLevelMin:
+                country:
+                    type: string
+                kycLevel:
                     type: integer
+                    description: |-
+                        optional int32 risk_level_min = 10;
+                         optional int32 risk_level_max = 11;
                     format: int32
-                riskLevelMax:
-                    type: integer
-                    format: int32
-                kycLevels:
-                    type: array
-                    items:
-                        type: integer
-                        format: int32
-                hasMadeDeposit:
-                    type: boolean
                 depositMin:
                     type: string
+                    description: optional bool has_made_deposit = 13;
                 depositMax:
                     type: string
                 withdrawalMin:
@@ -3874,10 +3866,9 @@ components:
                     type: boolean
                 banLogin:
                     type: boolean
-                online:
-                    type: boolean
                 page:
                     type: integer
+                    description: optional bool online = 21;
                     format: int32
                 pageSize:
                     type: integer
@@ -3935,29 +3926,24 @@ components:
                     type: boolean
                 banLogin:
                     type: boolean
-                online:
-                    type: boolean
                 lastLoginAt:
                     type: string
+                    description: bool online = 16;
                     format: date-time
                 registeredAt:
                     type: string
                     format: date-time
-                riskLevel:
-                    type: integer
-                    format: int32
-                referralCode:
-                    type: string
-                affiliateCode:
-                    type: string
                 country:
                     type: string
-                device:
-                    type: string
-                source:
-                    type: string
+                    description: |-
+                        int32 risk_level = 19;
+                         string referral_code = 20;
+                         string affiliate_code = 21;
                 registrationIp:
                     type: string
+                    description: |-
+                        string device = 23;
+                         string source = 24;
         api.backoffice.service.v1.ListWalletBalanceTransactionsRequest:
             type: object
             properties:

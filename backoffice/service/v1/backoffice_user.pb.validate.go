@@ -143,16 +143,12 @@ func (m *ListUsersRequest) validate(all bool) error {
 		// no validation rules for OperatorId
 	}
 
-	if m.RiskLevelMin != nil {
-		// no validation rules for RiskLevelMin
+	if m.Country != nil {
+		// no validation rules for Country
 	}
 
-	if m.RiskLevelMax != nil {
-		// no validation rules for RiskLevelMax
-	}
-
-	if m.HasMadeDeposit != nil {
-		// no validation rules for HasMadeDeposit
+	if m.KycLevel != nil {
+		// no validation rules for KycLevel
 	}
 
 	if m.DepositMin != nil {
@@ -181,10 +177,6 @@ func (m *ListUsersRequest) validate(all bool) error {
 
 	if m.BanLogin != nil {
 		// no validation rules for BanLogin
-	}
-
-	if m.Online != nil {
-		// no validation rules for Online
 	}
 
 	if m.Page != nil {
@@ -2806,8 +2798,6 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 
 	// no validation rules for BanLogin
 
-	// no validation rules for Online
-
 	if all {
 		switch v := interface{}(m.GetLastLoginAt()).(type) {
 		case interface{ ValidateAll() error }:
@@ -2866,17 +2856,7 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for RiskLevel
-
-	// no validation rules for ReferralCode
-
-	// no validation rules for AffiliateCode
-
 	// no validation rules for Country
-
-	// no validation rules for Device
-
-	// no validation rules for Source
 
 	// no validation rules for RegistrationIp
 
