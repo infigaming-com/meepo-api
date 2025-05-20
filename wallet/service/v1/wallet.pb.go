@@ -2723,19 +2723,19 @@ type GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction struct {
 	Cash                     int64                  `protobuf:"varint,11,opt,name=cash,proto3" json:"cash,omitempty"`
 	CashUsd                  int64                  `protobuf:"varint,12,opt,name=cash_usd,json=cashUsd,proto3" json:"cash_usd,omitempty"`
 	CashAmount               int64                  `protobuf:"varint,13,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	CashUsdAmount            int64                  `protobuf:"varint,14,opt,name=cash_usd_amount,json=cashUsdAmount,proto3" json:"cash_usd_amount,omitempty"`
+	CashAmountUsd            int64                  `protobuf:"varint,14,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
 	OriginalOperatorBonus    int64                  `protobuf:"varint,15,opt,name=original_operator_bonus,json=originalOperatorBonus,proto3" json:"original_operator_bonus,omitempty"`
 	OriginalOperatorBonusUsd int64                  `protobuf:"varint,16,opt,name=original_operator_bonus_usd,json=originalOperatorBonusUsd,proto3" json:"original_operator_bonus_usd,omitempty"`
 	OperatorBonus            int64                  `protobuf:"varint,17,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
 	OperatorBonusUsd         int64                  `protobuf:"varint,18,opt,name=operator_bonus_usd,json=operatorBonusUsd,proto3" json:"operator_bonus_usd,omitempty"`
 	OperatorBonusAmount      int64                  `protobuf:"varint,19,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
-	OperatorBonusUsdAmount   int64                  `protobuf:"varint,20,opt,name=operator_bonus_usd_amount,json=operatorBonusUsdAmount,proto3" json:"operator_bonus_usd_amount,omitempty"`
+	OperatorBonusAmountUsd   int64                  `protobuf:"varint,20,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
 	OriginalProviderBonus    int64                  `protobuf:"varint,21,opt,name=original_provider_bonus,json=originalProviderBonus,proto3" json:"original_provider_bonus,omitempty"`
 	OriginalProviderBonusUsd int64                  `protobuf:"varint,22,opt,name=original_provider_bonus_usd,json=originalProviderBonusUsd,proto3" json:"original_provider_bonus_usd,omitempty"`
 	ProviderBonus            int64                  `protobuf:"varint,23,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
 	ProviderBonusUsd         int64                  `protobuf:"varint,24,opt,name=provider_bonus_usd,json=providerBonusUsd,proto3" json:"provider_bonus_usd,omitempty"`
 	ProviderBonusAmount      int64                  `protobuf:"varint,25,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
-	ProviderBonusUsdAmount   int64                  `protobuf:"varint,26,opt,name=provider_bonus_usd_amount,json=providerBonusUsdAmount,proto3" json:"provider_bonus_usd_amount,omitempty"`
+	ProviderBonusAmountUsd   int64                  `protobuf:"varint,26,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
 	CreatedAt                int64                  `protobuf:"varint,27,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt                int64                  `protobuf:"varint,28,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields            protoimpl.UnknownFields
@@ -2863,9 +2863,9 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetCashAm
 	return 0
 }
 
-func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetCashUsdAmount() int64 {
+func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetCashAmountUsd() int64 {
 	if x != nil {
-		return x.CashUsdAmount
+		return x.CashAmountUsd
 	}
 	return 0
 }
@@ -2905,9 +2905,9 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOperat
 	return 0
 }
 
-func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOperatorBonusUsdAmount() int64 {
+func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOperatorBonusAmountUsd() int64 {
 	if x != nil {
-		return x.OperatorBonusUsdAmount
+		return x.OperatorBonusAmountUsd
 	}
 	return 0
 }
@@ -2947,9 +2947,9 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetProvid
 	return 0
 }
 
-func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetProviderBonusUsdAmount() int64 {
+func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetProviderBonusAmountUsd() int64 {
 	if x != nil {
-		return x.ProviderBonusUsdAmount
+		return x.ProviderBonusAmountUsd
 	}
 	return 0
 }
@@ -3240,19 +3240,19 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bcash_usd\x18\f \x01(\x03R\acashUsd\x12\x1f\n" +
 	"\vcash_amount\x18\r \x01(\x03R\n" +
 	"cashAmount\x12&\n" +
-	"\x0fcash_usd_amount\x18\x0e \x01(\x03R\rcashUsdAmount\x126\n" +
+	"\x0fcash_amount_usd\x18\x0e \x01(\x03R\rcashAmountUsd\x126\n" +
 	"\x17original_operator_bonus\x18\x0f \x01(\x03R\x15originalOperatorBonus\x12=\n" +
 	"\x1boriginal_operator_bonus_usd\x18\x10 \x01(\x03R\x18originalOperatorBonusUsd\x12%\n" +
 	"\x0eoperator_bonus\x18\x11 \x01(\x03R\roperatorBonus\x12,\n" +
 	"\x12operator_bonus_usd\x18\x12 \x01(\x03R\x10operatorBonusUsd\x122\n" +
 	"\x15operator_bonus_amount\x18\x13 \x01(\x03R\x13operatorBonusAmount\x129\n" +
-	"\x19operator_bonus_usd_amount\x18\x14 \x01(\x03R\x16operatorBonusUsdAmount\x126\n" +
+	"\x19operator_bonus_amount_usd\x18\x14 \x01(\x03R\x16operatorBonusAmountUsd\x126\n" +
 	"\x17original_provider_bonus\x18\x15 \x01(\x03R\x15originalProviderBonus\x12=\n" +
 	"\x1boriginal_provider_bonus_usd\x18\x16 \x01(\x03R\x18originalProviderBonusUsd\x12%\n" +
 	"\x0eprovider_bonus\x18\x17 \x01(\x03R\rproviderBonus\x12,\n" +
 	"\x12provider_bonus_usd\x18\x18 \x01(\x03R\x10providerBonusUsd\x122\n" +
 	"\x15provider_bonus_amount\x18\x19 \x01(\x03R\x13providerBonusAmount\x129\n" +
-	"\x19provider_bonus_usd_amount\x18\x1a \x01(\x03R\x16providerBonusUsdAmount\x12\x1d\n" +
+	"\x19provider_bonus_amount_usd\x18\x1a \x01(\x03R\x16providerBonusAmountUsd\x12\x1d\n" +
 	"\n" +
 	"created_at\x18\x1b \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
