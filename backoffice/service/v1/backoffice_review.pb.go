@@ -1074,7 +1074,7 @@ func (x *GetTicketResponse_UserWalletData) GetTodayWithdrawCount() int32 {
 
 type GetTicketResponse_Comment struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	AuthorUserName int64                  `protobuf:"varint,1,opt,name=author_user_name,json=authorUserName,proto3" json:"author_user_name,omitempty"`
+	AuthorUsername string                 `protobuf:"bytes,1,opt,name=author_username,json=authorUsername,proto3" json:"author_username,omitempty"`
 	Content        string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
 	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -1111,11 +1111,11 @@ func (*GetTicketResponse_Comment) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{3, 2}
 }
 
-func (x *GetTicketResponse_Comment) GetAuthorUserName() int64 {
+func (x *GetTicketResponse_Comment) GetAuthorUsername() string {
 	if x != nil {
-		return x.AuthorUserName
+		return x.AuthorUsername
 	}
-	return 0
+	return ""
 }
 
 func (x *GetTicketResponse_Comment) GetContent() string {
@@ -1206,7 +1206,7 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x11reviewer_username\x18\x12 \x01(\tR\x10reviewerUsername\x12'\n" +
 	"\x0freview_duration\x18\x13 \x01(\x05R\x0ereviewDuration\"/\n" +
 	"\x10GetTicketRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x89\v\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x88\v\n" +
 	"\x11GetTicketResponse\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -1242,9 +1242,9 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x12valid_turnover_usd\x18\x04 \x01(\tR\x10validTurnoverUsd\x12#\n" +
 	"\rdeposit_count\x18\x05 \x01(\x05R\fdepositCount\x12%\n" +
 	"\x0ewithdraw_count\x18\x06 \x01(\x05R\rwithdrawCount\x120\n" +
-	"\x14today_withdraw_count\x18\a \x01(\x05R\x12todayWithdrawCount\x1a\x88\x01\n" +
-	"\aComment\x12(\n" +
-	"\x10author_user_name\x18\x01 \x01(\x03R\x0eauthorUserName\x12\x18\n" +
+	"\x14today_withdraw_count\x18\a \x01(\x05R\x12todayWithdrawCount\x1a\x87\x01\n" +
+	"\aComment\x12'\n" +
+	"\x0fauthor_username\x18\x01 \x01(\tR\x0eauthorUsername\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x9b\x01\n" +

@@ -2504,7 +2504,7 @@ components:
         api.backoffice.service.v1.GetTicketResponse_Comment:
             type: object
             properties:
-                authorUserName:
+                authorUsername:
                     type: string
                 content:
                     type: string
