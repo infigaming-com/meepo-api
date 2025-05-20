@@ -4998,7 +4998,11 @@ func (m *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) validate(
 
 	// no validation rules for OriginalCash
 
+	// no validation rules for OriginalCashUsd
+
 	// no validation rules for Cash
+
+	// no validation rules for CashUsd
 
 	// no validation rules for CashAmount
 
@@ -5006,7 +5010,11 @@ func (m *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) validate(
 
 	// no validation rules for OriginalOperatorBonus
 
+	// no validation rules for OriginalOperatorBonusUsd
+
 	// no validation rules for OperatorBonus
+
+	// no validation rules for OperatorBonusUsd
 
 	// no validation rules for OperatorBonusAmount
 
@@ -5014,7 +5022,11 @@ func (m *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) validate(
 
 	// no validation rules for OriginalProviderBonus
 
+	// no validation rules for OriginalProviderBonusUsd
+
 	// no validation rules for ProviderBonus
+
+	// no validation rules for ProviderBonusUsd
 
 	// no validation rules for ProviderBonusAmount
 

@@ -73,14 +73,18 @@ message ListTicketsResponse {
 		int32 vip_level = 5;
 		repeated string user_tags = 6;
 		string before_balance = 7;
-		string after_balance = 8;
-		string currency = 9;
-		string payment_channel = 10;
-		string protocol = 11;
-		string fee = 12;
-		string status = 13;	// pending, approved, rejected, manual_payout, paying, paid, failed
-		string reviewer_username = 14;
-		int32 review_duration = 15;
+		string before_balance_in_usd = 8;
+		string amount = 9;
+		string amount_in_usd = 10;
+		string after_balance = 11;
+		string after_balance_in_usd = 12;
+		string currency = 13;
+		string payment_channel = 14;
+		string protocol = 15;
+		string fee = 16;
+		string status = 17;	// pending, approved, rejected, manual_payout, paying, paid, failed
+		string reviewer_username = 18;
+		int32 review_duration = 19;
 	}
 	repeated Ticket tickets = 1;
 	int32 page = 2;

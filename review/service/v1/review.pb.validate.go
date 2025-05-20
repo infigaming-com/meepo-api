@@ -1442,7 +1442,15 @@ func (m *ListTicketsResponse_Ticket) validate(all bool) error {
 
 	// no validation rules for BeforeBalance
 
+	// no validation rules for BeforeBalanceInUsd
+
+	// no validation rules for Amount
+
+	// no validation rules for AmountInUsd
+
 	// no validation rules for AfterBalance
+
+	// no validation rules for AfterBalanceInUsd
 
 	// no validation rules for Currency
 

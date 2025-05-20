@@ -3716,7 +3716,7 @@ components:
                 createdAt:
                     type: string
                     format: date-time
-                operator:
+                operatorName:
                     type: string
                 ticketId:
                     type: string
@@ -3731,7 +3731,15 @@ components:
                         type: string
                 beforeBalance:
                     type: string
+                beforeBalanceUsd:
+                    type: string
+                amount:
+                    type: string
+                amountUsd:
+                    type: string
                 afterBalance:
+                    type: string
+                afterBalanceUsd:
                     type: string
                 currency:
                     type: string
