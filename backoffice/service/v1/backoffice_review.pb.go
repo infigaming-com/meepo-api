@@ -1260,11 +1260,11 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x0ereview_comment\x18\x03 \x01(\tR\rreviewComment\"3\n" +
 	"\x12AddCommentResponse\x12\x1d\n" +
 	"\n" +
-	"comment_id\x18\x01 \x01(\x03R\tcommentId2\xe8\x03\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId2\xea\x03\n" +
 	"\x10BackofficeReview\x12\x9b\x01\n" +
-	"\vListTickets\x12-.api.backoffice.service.v1.ListTicketsRequest\x1a..api.backoffice.service.v1.ListTicketsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/review/tickets/list\x12\x93\x01\n" +
-	"\tGetTicket\x12+.api.backoffice.service.v1.GetTicketRequest\x1a,.api.backoffice.service.v1.GetTicketResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/review/ticket/get\x12\x9f\x01\n" +
-	"\fReviewTicket\x12..api.backoffice.service.v1.ReviewTicketRequest\x1a/.api.backoffice.service.v1.ReviewTicketResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/review/ticket/reviewB[\n" +
+	"\vListTickets\x12-.api.backoffice.service.v1.ListTicketsRequest\x1a..api.backoffice.service.v1.ListTicketsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/review/tickets/list\x12\x94\x01\n" +
+	"\tGetTicket\x12+.api.backoffice.service.v1.GetTicketRequest\x1a,.api.backoffice.service.v1.GetTicketResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/review/tickets/get\x12\xa0\x01\n" +
+	"\fReviewTicket\x12..api.backoffice.service.v1.ReviewTicketRequest\x1a/.api.backoffice.service.v1.ReviewTicketResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/review/tickets/reviewB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

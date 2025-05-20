@@ -32,8 +32,8 @@ type BackofficeReviewHTTPServer interface {
 func RegisterBackofficeReviewHTTPServer(s *http.Server, srv BackofficeReviewHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/backoffice/review/tickets/list", _BackofficeReview_ListTickets0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/review/ticket/get", _BackofficeReview_GetTicket0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/review/ticket/review", _BackofficeReview_ReviewTicket0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/review/tickets/get", _BackofficeReview_GetTicket0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/review/tickets/review", _BackofficeReview_ReviewTicket0_HTTP_Handler(srv))
 }
 
 func _BackofficeReview_ListTickets0_HTTP_Handler(srv BackofficeReviewHTTPServer) func(ctx http.Context) error {
@@ -118,7 +118,7 @@ func NewBackofficeReviewHTTPClient(client *http.Client) BackofficeReviewHTTPClie
 
 func (c *BackofficeReviewHTTPClientImpl) GetTicket(ctx context.Context, in *GetTicketRequest, opts ...http.CallOption) (*GetTicketResponse, error) {
 	var out GetTicketResponse
-	pattern := "/v1/backoffice/review/ticket/get"
+	pattern := "/v1/backoffice/review/tickets/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReviewGetTicket))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -144,7 +144,7 @@ func (c *BackofficeReviewHTTPClientImpl) ListTickets(ctx context.Context, in *Li
 
 func (c *BackofficeReviewHTTPClientImpl) ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...http.CallOption) (*ReviewTicketResponse, error) {
 	var out ReviewTicketResponse
-	pattern := "/v1/backoffice/review/ticket/review"
+	pattern := "/v1/backoffice/review/tickets/review"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReviewReviewTicket))
 	opts = append(opts, http.PathTemplate(pattern))
