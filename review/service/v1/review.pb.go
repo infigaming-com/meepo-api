@@ -594,10 +594,13 @@ func (x *ListTicketsResponse) GetAverageReviewTime() int32 {
 }
 
 type GetTicketRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	TicketId int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	// Optional flag for including comments in the response or not.
+	// If not provided, the comments will not be included in the response.
+	IncludeComments *bool `protobuf:"varint,2,opt,name=include_comments,json=includeComments,proto3,oneof" json:"include_comments,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetTicketRequest) Reset() {
@@ -635,6 +638,13 @@ func (x *GetTicketRequest) GetTicketId() int64 {
 		return x.TicketId
 	}
 	return 0
+}
+
+func (x *GetTicketRequest) GetIncludeComments() bool {
+	if x != nil && x.IncludeComments != nil {
+		return *x.IncludeComments
+	}
+	return false
 }
 
 type GetTicketResponse struct {
@@ -1238,9 +1248,11 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x03fee\x18\x10 \x01(\tR\x03fee\x12\x16\n" +
 	"\x06status\x18\x11 \x01(\tR\x06status\x12+\n" +
 	"\x11reviewer_username\x18\x12 \x01(\tR\x10reviewerUsername\x12'\n" +
-	"\x0freview_duration\x18\x13 \x01(\x05R\x0ereviewDuration\"/\n" +
+	"\x0freview_duration\x18\x13 \x01(\x05R\x0ereviewDuration\"t\n" +
 	"\x10GetTicketRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x91\t\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
+	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01B\x13\n" +
+	"\x11_include_comments\"\x91\t\n" +
 	"\x11GetTicketResponse\x12G\n" +
 	"\x06ticket\x18\x01 \x01(\v2/.api.review.service.v1.GetTicketResponse.TicketR\x06ticket\x12L\n" +
 	"\bcomments\x18\x02 \x03(\v20.api.review.service.v1.GetTicketResponse.CommentR\bcomments\x1a\xfa\x06\n" +
@@ -1347,6 +1359,7 @@ func file_review_service_v1_review_proto_init() {
 		return
 	}
 	file_review_service_v1_review_proto_msgTypes[6].OneofWrappers = []any{}
+	file_review_service_v1_review_proto_msgTypes[8].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -1080,6 +1080,10 @@ func (m *GetTicketRequest) validate(all bool) error {
 
 	// no validation rules for TicketId
 
+	if m.IncludeComments != nil {
+		// no validation rules for IncludeComments
+	}
+
 	if len(errors) > 0 {
 		return GetTicketRequestMultiError(errors)
 	}
