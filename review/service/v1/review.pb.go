@@ -638,8 +638,9 @@ func (x *GetTicketRequest) GetTicketId() int64 {
 }
 
 type GetTicketResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Ticket        *GetTicketResponse_Ticket `protobuf:"bytes,1,opt,name=ticket,proto3" json:"ticket,omitempty"`
+	state         protoimpl.MessageState       `protogen:"open.v1"`
+	Ticket        *GetTicketResponse_Ticket    `protobuf:"bytes,1,opt,name=ticket,proto3" json:"ticket,omitempty"`
+	Comments      []*GetTicketResponse_Comment `protobuf:"bytes,2,rep,name=comments,proto3" json:"comments,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -677,6 +678,13 @@ func (*GetTicketResponse) Descriptor() ([]byte, []int) {
 func (x *GetTicketResponse) GetTicket() *GetTicketResponse_Ticket {
 	if x != nil {
 		return x.Ticket
+	}
+	return nil
+}
+
+func (x *GetTicketResponse) GetComments() []*GetTicketResponse_Comment {
+	if x != nil {
+		return x.Comments
 	}
 	return nil
 }
@@ -1081,6 +1089,66 @@ func (x *GetTicketResponse_Ticket) GetReviewedAt() int64 {
 	return 0
 }
 
+type GetTicketResponse_Comment struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AuthorUserId  int64                  `protobuf:"varint,1,opt,name=author_user_id,json=authorUserId,proto3" json:"author_user_id,omitempty"`
+	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt     int64                  `protobuf:"varint,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTicketResponse_Comment) Reset() {
+	*x = GetTicketResponse_Comment{}
+	mi := &file_review_service_v1_review_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTicketResponse_Comment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTicketResponse_Comment) ProtoMessage() {}
+
+func (x *GetTicketResponse_Comment) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTicketResponse_Comment.ProtoReflect.Descriptor instead.
+func (*GetTicketResponse_Comment) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9, 1}
+}
+
+func (x *GetTicketResponse_Comment) GetAuthorUserId() int64 {
+	if x != nil {
+		return x.AuthorUserId
+	}
+	return 0
+}
+
+func (x *GetTicketResponse_Comment) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_Comment) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
 var File_review_service_v1_review_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_review_proto_rawDesc = "" +
@@ -1172,9 +1240,10 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x11reviewer_username\x18\x12 \x01(\tR\x10reviewerUsername\x12'\n" +
 	"\x0freview_duration\x18\x13 \x01(\x05R\x0ereviewDuration\"/\n" +
 	"\x10GetTicketRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\xd9\a\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x91\t\n" +
 	"\x11GetTicketResponse\x12G\n" +
-	"\x06ticket\x18\x01 \x01(\v2/.api.review.service.v1.GetTicketResponse.TicketR\x06ticket\x1a\xfa\x06\n" +
+	"\x06ticket\x18\x01 \x01(\v2/.api.review.service.v1.GetTicketResponse.TicketR\x06ticket\x12L\n" +
+	"\bcomments\x18\x02 \x03(\v20.api.review.service.v1.GetTicketResponse.CommentR\bcomments\x1a\xfa\x06\n" +
 	"\x06Ticket\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x18\n" +
@@ -1202,7 +1271,12 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\x15 \x01(\x03R\tupdatedAt\x12\x1f\n" +
 	"\vreviewed_at\x18\x16 \x01(\x03R\n" +
-	"reviewedAt2\xb2\x04\n" +
+	"reviewedAt\x1ah\n" +
+	"\aComment\x12$\n" +
+	"\x0eauthor_user_id\x18\x01 \x01(\x03R\fauthorUserId\x12\x18\n" +
+	"\acontent\x18\x02 \x01(\tR\acontent\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x03 \x01(\x03R\tcreatedAt2\xb2\x04\n" +
 	"\x06Review\x12\x8d\x01\n" +
 	"\x0eCreateWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/review/withdraw\x12i\n" +
 	"\fReviewTicket\x12*.api.review.service.v1.ReviewTicketRequest\x1a+.api.review.service.v1.ReviewTicketResponse\"\x00\x12c\n" +
@@ -1224,7 +1298,7 @@ func file_review_service_v1_review_proto_rawDescGZIP() []byte {
 	return file_review_service_v1_review_proto_rawDescData
 }
 
-var file_review_service_v1_review_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_review_service_v1_review_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_review_service_v1_review_proto_goTypes = []any{
 	(*CreateWithdrawRequest)(nil),      // 0: api.review.service.v1.CreateWithdrawRequest
 	(*CreateWithdrawResponse)(nil),     // 1: api.review.service.v1.CreateWithdrawResponse
@@ -1238,31 +1312,33 @@ var file_review_service_v1_review_proto_goTypes = []any{
 	(*GetTicketResponse)(nil),          // 9: api.review.service.v1.GetTicketResponse
 	(*ListTicketsResponse_Ticket)(nil), // 10: api.review.service.v1.ListTicketsResponse.Ticket
 	(*GetTicketResponse_Ticket)(nil),   // 11: api.review.service.v1.GetTicketResponse.Ticket
-	(*structpb.Struct)(nil),            // 12: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),      // 13: google.protobuf.Timestamp
+	(*GetTicketResponse_Comment)(nil),  // 12: api.review.service.v1.GetTicketResponse.Comment
+	(*structpb.Struct)(nil),            // 13: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),      // 14: google.protobuf.Timestamp
 }
 var file_review_service_v1_review_proto_depIdxs = []int32{
-	12, // 0: api.review.service.v1.CreateWithdrawRequest.request:type_name -> google.protobuf.Struct
-	13, // 1: api.review.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	13, // 2: api.review.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	13, // 0: api.review.service.v1.CreateWithdrawRequest.request:type_name -> google.protobuf.Struct
+	14, // 1: api.review.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	14, // 2: api.review.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
 	10, // 3: api.review.service.v1.ListTicketsResponse.tickets:type_name -> api.review.service.v1.ListTicketsResponse.Ticket
 	11, // 4: api.review.service.v1.GetTicketResponse.ticket:type_name -> api.review.service.v1.GetTicketResponse.Ticket
-	13, // 5: api.review.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 6: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
-	2,  // 7: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
-	4,  // 8: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
-	6,  // 9: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
-	8,  // 10: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
-	1,  // 11: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	3,  // 12: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
-	5,  // 13: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
-	7,  // 14: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	9,  // 15: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
-	11, // [11:16] is the sub-list for method output_type
-	6,  // [6:11] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	12, // 5: api.review.service.v1.GetTicketResponse.comments:type_name -> api.review.service.v1.GetTicketResponse.Comment
+	14, // 6: api.review.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 7: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
+	2,  // 8: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
+	4,  // 9: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
+	6,  // 10: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
+	8,  // 11: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
+	1,  // 12: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	3,  // 13: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
+	5,  // 14: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
+	7,  // 15: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	9,  // 16: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
+	12, // [12:17] is the sub-list for method output_type
+	7,  // [7:12] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_review_service_v1_review_proto_init() }
@@ -1277,7 +1353,7 @@ func file_review_service_v1_review_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_review_service_v1_review_proto_rawDesc), len(file_review_service_v1_review_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

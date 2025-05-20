@@ -133,5 +133,11 @@ message GetTicketResponse {
 		int64 updated_at = 21;
 		int64 reviewed_at = 22;
 	}
+	message Comment {
+		int64 author_user_id = 1;
+		string content = 2;
+		int64 created_at = 3;
+	}
 	Ticket ticket = 1;
+	repeated Comment comments = 2;
 }
