@@ -1023,6 +1023,94 @@ func (x *GetParentOperatorIdsResponse) GetParentOperatorIds() []int64 {
 	return nil
 }
 
+type ListOperatorsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Enabled       *bool                  `protobuf:"varint,1,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOperatorsRequest) Reset() {
+	*x = ListOperatorsRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorsRequest) ProtoMessage() {}
+
+func (x *ListOperatorsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorsRequest.ProtoReflect.Descriptor instead.
+func (*ListOperatorsRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *ListOperatorsRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+type ListOperatorsResponse struct {
+	state         protoimpl.MessageState            `protogen:"open.v1"`
+	Operators     []*ListOperatorsResponse_Operator `protobuf:"bytes,1,rep,name=operators,proto3" json:"operators,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOperatorsResponse) Reset() {
+	*x = ListOperatorsResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorsResponse) ProtoMessage() {}
+
+func (x *ListOperatorsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorsResponse.ProtoReflect.Descriptor instead.
+func (*ListOperatorsResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ListOperatorsResponse) GetOperators() []*ListOperatorsResponse_Operator {
+	if x != nil {
+		return x.Operators
+	}
+	return nil
+}
+
 type GetOperatorResponse_Operator struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
@@ -1034,7 +1122,7 @@ type GetOperatorResponse_Operator struct {
 
 func (x *GetOperatorResponse_Operator) Reset() {
 	*x = GetOperatorResponse_Operator{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[22]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1046,7 +1134,7 @@ func (x *GetOperatorResponse_Operator) String() string {
 func (*GetOperatorResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[22]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1094,7 +1182,7 @@ type GetOperatorsByIdsResponse_Operator struct {
 
 func (x *GetOperatorsByIdsResponse_Operator) Reset() {
 	*x = GetOperatorsByIdsResponse_Operator{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[23]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1106,7 +1194,7 @@ func (x *GetOperatorsByIdsResponse_Operator) String() string {
 func (*GetOperatorsByIdsResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorsByIdsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[23]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1154,7 +1242,7 @@ type GetOperatorCurrenciesResponse_Currency struct {
 
 func (x *GetOperatorCurrenciesResponse_Currency) Reset() {
 	*x = GetOperatorCurrenciesResponse_Currency{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[24]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1166,7 +1254,7 @@ func (x *GetOperatorCurrenciesResponse_Currency) String() string {
 func (*GetOperatorCurrenciesResponse_Currency) ProtoMessage() {}
 
 func (x *GetOperatorCurrenciesResponse_Currency) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[24]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1199,6 +1287,66 @@ func (x *GetOperatorCurrenciesResponse_Currency) GetEnabled() bool {
 func (x *GetOperatorCurrenciesResponse_Currency) GetHidden() bool {
 	if x != nil {
 		return x.Hidden
+	}
+	return false
+}
+
+type ListOperatorsResponse_Operator struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName  string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOperatorsResponse_Operator) Reset() {
+	*x = ListOperatorsResponse_Operator{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorsResponse_Operator) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorsResponse_Operator) ProtoMessage() {}
+
+func (x *ListOperatorsResponse_Operator) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorsResponse_Operator.ProtoReflect.Descriptor instead.
+func (*ListOperatorsResponse_Operator) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{23, 0}
+}
+
+func (x *ListOperatorsResponse_Operator) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *ListOperatorsResponse_Operator) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *ListOperatorsResponse_Operator) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
 	}
 	return false
 }
@@ -1280,7 +1428,18 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"N\n" +
 	"\x1cGetParentOperatorIdsResponse\x12.\n" +
-	"\x13parent_operator_ids\x18\x01 \x03(\x03R\x11parentOperatorIds2\xec\f\n" +
+	"\x13parent_operator_ids\x18\x01 \x03(\x03R\x11parentOperatorIds\"A\n" +
+	"\x14ListOperatorsRequest\x12\x1d\n" +
+	"\aenabled\x18\x01 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
+	"\n" +
+	"\b_enabled\"\xda\x01\n" +
+	"\x15ListOperatorsResponse\x12U\n" +
+	"\toperators\x18\x01 \x03(\v27.api.operator.service.v1.ListOperatorsResponse.OperatorR\toperators\x1aj\n" +
+	"\bOperator\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled2\xde\r\n" +
 	"\bOperator\x12\x85\x01\n" +
 	"\vAddOperator\x12+.api.operator.service.v1.AddOperatorRequest\x1a,.api.operator.service.v1.AddOperatorResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/operator/add\x12\x91\x01\n" +
 	"\x0eUpdateOperator\x12..api.operator.service.v1.UpdateOperatorRequest\x1a/.api.operator.service.v1.UpdateOperatorResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/operator/update\x12j\n" +
@@ -1292,7 +1451,8 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x13AddOriginOperatorId\x123.api.operator.service.v1.AddOriginOperatorIdRequest\x1a4.api.operator.service.v1.AddOriginOperatorIdResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/operator/origins/add\x12\x88\x01\n" +
 	"\x15GetOperatorIdByOrigin\x125.api.operator.service.v1.GetOperatorIdByOriginRequest\x1a6.api.operator.service.v1.GetOperatorIdByOriginResponse\"\x00\x12\xb1\x01\n" +
 	"\x16DeleteOriginOperatorId\x126.api.operator.service.v1.DeleteOriginOperatorIdRequest\x1a7.api.operator.service.v1.DeleteOriginOperatorIdResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/operator/origins/delete\x12\x85\x01\n" +
-	"\x14GetParentOperatorIds\x124.api.operator.service.v1.GetParentOperatorIdsRequest\x1a5.api.operator.service.v1.GetParentOperatorIdsResponse\"\x00BW\n" +
+	"\x14GetParentOperatorIds\x124.api.operator.service.v1.GetParentOperatorIdsRequest\x1a5.api.operator.service.v1.GetParentOperatorIdsResponse\"\x00\x12p\n" +
+	"\rListOperators\x12-.api.operator.service.v1.ListOperatorsRequest\x1a..api.operator.service.v1.ListOperatorsResponse\"\x00BW\n" +
 	"\x17api.operator.service.v1P\x01Z:github.com/infigaming-com/meepo-api/operator/service/v1;v1b\x06proto3"
 
 var (
@@ -1307,7 +1467,7 @@ func file_operator_service_v1_operator_proto_rawDescGZIP() []byte {
 	return file_operator_service_v1_operator_proto_rawDescData
 }
 
-var file_operator_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_operator_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_operator_service_v1_operator_proto_goTypes = []any{
 	(*AddOperatorRequest)(nil),                     // 0: api.operator.service.v1.AddOperatorRequest
 	(*AddOperatorResponse)(nil),                    // 1: api.operator.service.v1.AddOperatorResponse
@@ -1331,41 +1491,47 @@ var file_operator_service_v1_operator_proto_goTypes = []any{
 	(*DeleteOriginOperatorIdResponse)(nil),         // 19: api.operator.service.v1.DeleteOriginOperatorIdResponse
 	(*GetParentOperatorIdsRequest)(nil),            // 20: api.operator.service.v1.GetParentOperatorIdsRequest
 	(*GetParentOperatorIdsResponse)(nil),           // 21: api.operator.service.v1.GetParentOperatorIdsResponse
-	(*GetOperatorResponse_Operator)(nil),           // 22: api.operator.service.v1.GetOperatorResponse.Operator
-	(*GetOperatorsByIdsResponse_Operator)(nil),     // 23: api.operator.service.v1.GetOperatorsByIdsResponse.Operator
-	(*GetOperatorCurrenciesResponse_Currency)(nil), // 24: api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
+	(*ListOperatorsRequest)(nil),                   // 22: api.operator.service.v1.ListOperatorsRequest
+	(*ListOperatorsResponse)(nil),                  // 23: api.operator.service.v1.ListOperatorsResponse
+	(*GetOperatorResponse_Operator)(nil),           // 24: api.operator.service.v1.GetOperatorResponse.Operator
+	(*GetOperatorsByIdsResponse_Operator)(nil),     // 25: api.operator.service.v1.GetOperatorsByIdsResponse.Operator
+	(*GetOperatorCurrenciesResponse_Currency)(nil), // 26: api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
+	(*ListOperatorsResponse_Operator)(nil),         // 27: api.operator.service.v1.ListOperatorsResponse.Operator
 }
 var file_operator_service_v1_operator_proto_depIdxs = []int32{
-	22, // 0: api.operator.service.v1.GetOperatorResponse.operator:type_name -> api.operator.service.v1.GetOperatorResponse.Operator
-	23, // 1: api.operator.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.operator.service.v1.GetOperatorsByIdsResponse.Operator
-	24, // 2: api.operator.service.v1.GetOperatorCurrenciesResponse.currencies:type_name -> api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
-	0,  // 3: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
-	2,  // 4: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
-	4,  // 5: api.operator.service.v1.Operator.GetOperator:input_type -> api.operator.service.v1.GetOperatorRequest
-	6,  // 6: api.operator.service.v1.Operator.GetOperatorsByIds:input_type -> api.operator.service.v1.GetOperatorsByIdsRequest
-	8,  // 7: api.operator.service.v1.Operator.AddOrUpdateCurrency:input_type -> api.operator.service.v1.AddOrUpdateCurrencyRequest
-	10, // 8: api.operator.service.v1.Operator.UpdateOperatorCurrency:input_type -> api.operator.service.v1.UpdateOperatorCurrencyRequest
-	12, // 9: api.operator.service.v1.Operator.GetOperatorCurrencies:input_type -> api.operator.service.v1.GetOperatorCurrenciesRequest
-	14, // 10: api.operator.service.v1.Operator.AddOriginOperatorId:input_type -> api.operator.service.v1.AddOriginOperatorIdRequest
-	16, // 11: api.operator.service.v1.Operator.GetOperatorIdByOrigin:input_type -> api.operator.service.v1.GetOperatorIdByOriginRequest
-	18, // 12: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
-	20, // 13: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
-	1,  // 14: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
-	3,  // 15: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
-	5,  // 16: api.operator.service.v1.Operator.GetOperator:output_type -> api.operator.service.v1.GetOperatorResponse
-	7,  // 17: api.operator.service.v1.Operator.GetOperatorsByIds:output_type -> api.operator.service.v1.GetOperatorsByIdsResponse
-	9,  // 18: api.operator.service.v1.Operator.AddOrUpdateCurrency:output_type -> api.operator.service.v1.AddOrUpdateCurrencyResponse
-	11, // 19: api.operator.service.v1.Operator.UpdateOperatorCurrency:output_type -> api.operator.service.v1.UpdateOperatorCurrencyResponse
-	13, // 20: api.operator.service.v1.Operator.GetOperatorCurrencies:output_type -> api.operator.service.v1.GetOperatorCurrenciesResponse
-	15, // 21: api.operator.service.v1.Operator.AddOriginOperatorId:output_type -> api.operator.service.v1.AddOriginOperatorIdResponse
-	17, // 22: api.operator.service.v1.Operator.GetOperatorIdByOrigin:output_type -> api.operator.service.v1.GetOperatorIdByOriginResponse
-	19, // 23: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
-	21, // 24: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
-	14, // [14:25] is the sub-list for method output_type
-	3,  // [3:14] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	24, // 0: api.operator.service.v1.GetOperatorResponse.operator:type_name -> api.operator.service.v1.GetOperatorResponse.Operator
+	25, // 1: api.operator.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.operator.service.v1.GetOperatorsByIdsResponse.Operator
+	26, // 2: api.operator.service.v1.GetOperatorCurrenciesResponse.currencies:type_name -> api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
+	27, // 3: api.operator.service.v1.ListOperatorsResponse.operators:type_name -> api.operator.service.v1.ListOperatorsResponse.Operator
+	0,  // 4: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
+	2,  // 5: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
+	4,  // 6: api.operator.service.v1.Operator.GetOperator:input_type -> api.operator.service.v1.GetOperatorRequest
+	6,  // 7: api.operator.service.v1.Operator.GetOperatorsByIds:input_type -> api.operator.service.v1.GetOperatorsByIdsRequest
+	8,  // 8: api.operator.service.v1.Operator.AddOrUpdateCurrency:input_type -> api.operator.service.v1.AddOrUpdateCurrencyRequest
+	10, // 9: api.operator.service.v1.Operator.UpdateOperatorCurrency:input_type -> api.operator.service.v1.UpdateOperatorCurrencyRequest
+	12, // 10: api.operator.service.v1.Operator.GetOperatorCurrencies:input_type -> api.operator.service.v1.GetOperatorCurrenciesRequest
+	14, // 11: api.operator.service.v1.Operator.AddOriginOperatorId:input_type -> api.operator.service.v1.AddOriginOperatorIdRequest
+	16, // 12: api.operator.service.v1.Operator.GetOperatorIdByOrigin:input_type -> api.operator.service.v1.GetOperatorIdByOriginRequest
+	18, // 13: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
+	20, // 14: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
+	22, // 15: api.operator.service.v1.Operator.ListOperators:input_type -> api.operator.service.v1.ListOperatorsRequest
+	1,  // 16: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
+	3,  // 17: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
+	5,  // 18: api.operator.service.v1.Operator.GetOperator:output_type -> api.operator.service.v1.GetOperatorResponse
+	7,  // 19: api.operator.service.v1.Operator.GetOperatorsByIds:output_type -> api.operator.service.v1.GetOperatorsByIdsResponse
+	9,  // 20: api.operator.service.v1.Operator.AddOrUpdateCurrency:output_type -> api.operator.service.v1.AddOrUpdateCurrencyResponse
+	11, // 21: api.operator.service.v1.Operator.UpdateOperatorCurrency:output_type -> api.operator.service.v1.UpdateOperatorCurrencyResponse
+	13, // 22: api.operator.service.v1.Operator.GetOperatorCurrencies:output_type -> api.operator.service.v1.GetOperatorCurrenciesResponse
+	15, // 23: api.operator.service.v1.Operator.AddOriginOperatorId:output_type -> api.operator.service.v1.AddOriginOperatorIdResponse
+	17, // 24: api.operator.service.v1.Operator.GetOperatorIdByOrigin:output_type -> api.operator.service.v1.GetOperatorIdByOriginResponse
+	19, // 25: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
+	21, // 26: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
+	23, // 27: api.operator.service.v1.Operator.ListOperators:output_type -> api.operator.service.v1.ListOperatorsResponse
+	16, // [16:28] is the sub-list for method output_type
+	4,  // [4:16] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_operator_service_v1_operator_proto_init() }
@@ -1373,13 +1539,14 @@ func file_operator_service_v1_operator_proto_init() {
 	if File_operator_service_v1_operator_proto != nil {
 		return
 	}
+	file_operator_service_v1_operator_proto_msgTypes[22].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_operator_service_v1_operator_proto_rawDesc), len(file_operator_service_v1_operator_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   25,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
