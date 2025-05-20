@@ -10,6 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -2267,11 +2268,465 @@ func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{39}
 }
 
+type ListUsersRequest struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	UserId                *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	Tags                  []string               `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"` // not available for now
+	RegistrationStartTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=registration_start_time,json=registrationStartTime,proto3,oneof" json:"registration_start_time,omitempty"`
+	RegistrationEndTime   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=registration_end_time,json=registrationEndTime,proto3,oneof" json:"registration_end_time,omitempty"`
+	VipLevel              *int32                 `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3,oneof" json:"vip_level,omitempty"`
+	RetailerOperatorId    *int64                 `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3,oneof" json:"retailer_operator_id,omitempty"`
+	GroupOperatorId       *int64                 `protobuf:"varint,7,opt,name=group_operator_id,json=groupOperatorId,proto3,oneof" json:"group_operator_id,omitempty"`
+	OperatorId            *int64                 `protobuf:"varint,8,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	Country               *string                `protobuf:"bytes,9,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	// optional int32 risk_level_min = 10;
+	// optional int32 risk_level_max = 11;
+	KycLevel *int32 `protobuf:"varint,12,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
+	// optional bool has_made_deposit = 13;
+	DepositMin    *string `protobuf:"bytes,14,opt,name=deposit_min,json=depositMin,proto3,oneof" json:"deposit_min,omitempty"`
+	DepositMax    *string `protobuf:"bytes,15,opt,name=deposit_max,json=depositMax,proto3,oneof" json:"deposit_max,omitempty"`
+	WithdrawalMin *string `protobuf:"bytes,16,opt,name=withdrawal_min,json=withdrawalMin,proto3,oneof" json:"withdrawal_min,omitempty"`
+	WithdrawalMax *string `protobuf:"bytes,17,opt,name=withdrawal_max,json=withdrawalMax,proto3,oneof" json:"withdrawal_max,omitempty"`
+	BanWithdraw   *bool   `protobuf:"varint,18,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
+	BanGame       *bool   `protobuf:"varint,19,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
+	BanLogin      *bool   `protobuf:"varint,20,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
+	// optional bool online = 21;
+	Page          *int32 `protobuf:"varint,22,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,23,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUsersRequest) Reset() {
+	*x = ListUsersRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUsersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUsersRequest) ProtoMessage() {}
+
+func (x *ListUsersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUsersRequest.ProtoReflect.Descriptor instead.
+func (*ListUsersRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *ListUsersRequest) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetTags() []string {
+	if x != nil {
+		return x.Tags
+	}
+	return nil
+}
+
+func (x *ListUsersRequest) GetRegistrationStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RegistrationStartTime
+	}
+	return nil
+}
+
+func (x *ListUsersRequest) GetRegistrationEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RegistrationEndTime
+	}
+	return nil
+}
+
+func (x *ListUsersRequest) GetVipLevel() int32 {
+	if x != nil && x.VipLevel != nil {
+		return *x.VipLevel
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetRetailerOperatorId() int64 {
+	if x != nil && x.RetailerOperatorId != nil {
+		return *x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetGroupOperatorId() int64 {
+	if x != nil && x.GroupOperatorId != nil {
+		return *x.GroupOperatorId
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetOperatorId() int64 {
+	if x != nil && x.OperatorId != nil {
+		return *x.OperatorId
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetCountry() string {
+	if x != nil && x.Country != nil {
+		return *x.Country
+	}
+	return ""
+}
+
+func (x *ListUsersRequest) GetKycLevel() int32 {
+	if x != nil && x.KycLevel != nil {
+		return *x.KycLevel
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetDepositMin() string {
+	if x != nil && x.DepositMin != nil {
+		return *x.DepositMin
+	}
+	return ""
+}
+
+func (x *ListUsersRequest) GetDepositMax() string {
+	if x != nil && x.DepositMax != nil {
+		return *x.DepositMax
+	}
+	return ""
+}
+
+func (x *ListUsersRequest) GetWithdrawalMin() string {
+	if x != nil && x.WithdrawalMin != nil {
+		return *x.WithdrawalMin
+	}
+	return ""
+}
+
+func (x *ListUsersRequest) GetWithdrawalMax() string {
+	if x != nil && x.WithdrawalMax != nil {
+		return *x.WithdrawalMax
+	}
+	return ""
+}
+
+func (x *ListUsersRequest) GetBanWithdraw() bool {
+	if x != nil && x.BanWithdraw != nil {
+		return *x.BanWithdraw
+	}
+	return false
+}
+
+func (x *ListUsersRequest) GetBanGame() bool {
+	if x != nil && x.BanGame != nil {
+		return *x.BanGame
+	}
+	return false
+}
+
+func (x *ListUsersRequest) GetBanLogin() bool {
+	if x != nil && x.BanLogin != nil {
+		return *x.BanLogin
+	}
+	return false
+}
+
+func (x *ListUsersRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type ListUsersResponse struct {
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Users         []*ListUsersResponse_User `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
+	Page          int32                     `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                     `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                     `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUsersResponse) Reset() {
+	*x = ListUsersResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUsersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUsersResponse) ProtoMessage() {}
+
+func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUsersResponse.ProtoReflect.Descriptor instead.
+func (*ListUsersResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *ListUsersResponse) GetUsers() []*ListUsersResponse_User {
+	if x != nil {
+		return x.Users
+	}
+	return nil
+}
+
+func (x *ListUsersResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListUsersResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListUsersResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type ListUsersResponse_User struct {
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	Retailer     string                 `protobuf:"bytes,1,opt,name=retailer,proto3" json:"retailer,omitempty"`
+	Group        string                 `protobuf:"bytes,2,opt,name=group,proto3" json:"group,omitempty"`
+	OperatorName string                 `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	UserId       int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Username     string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
+	Email        string                 `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile       string                 `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	VipLevel     int32                  `protobuf:"varint,8,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	KycLevel     int32                  `protobuf:"varint,9,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
+	Deposit      string                 `protobuf:"bytes,10,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	Withdraw     string                 `protobuf:"bytes,11,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
+	Tags         []string               `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
+	BanWithdraw  bool                   `protobuf:"varint,13,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
+	BanGame      bool                   `protobuf:"varint,14,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
+	BanLogin     bool                   `protobuf:"varint,15,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
+	// bool online = 16;
+	LastLoginAt  *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
+	RegisteredAt *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	// int32 risk_level = 19;
+	// string referral_code = 20;
+	// string affiliate_code = 21;
+	Country string `protobuf:"bytes,22,opt,name=country,proto3" json:"country,omitempty"`
+	// string device = 23;
+	// string source = 24;
+	RegistrationIp string `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ListUsersResponse_User) Reset() {
+	*x = ListUsersResponse_User{}
+	mi := &file_user_service_v1_user_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUsersResponse_User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUsersResponse_User) ProtoMessage() {}
+
+func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUsersResponse_User.ProtoReflect.Descriptor instead.
+func (*ListUsersResponse_User) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{41, 0}
+}
+
+func (x *ListUsersResponse_User) GetRetailer() string {
+	if x != nil {
+		return x.Retailer
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetGroup() string {
+	if x != nil {
+		return x.Group
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ListUsersResponse_User) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetMobile() string {
+	if x != nil {
+		return x.Mobile
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetVipLevel() int32 {
+	if x != nil {
+		return x.VipLevel
+	}
+	return 0
+}
+
+func (x *ListUsersResponse_User) GetKycLevel() int32 {
+	if x != nil {
+		return x.KycLevel
+	}
+	return 0
+}
+
+func (x *ListUsersResponse_User) GetDeposit() string {
+	if x != nil {
+		return x.Deposit
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetWithdraw() string {
+	if x != nil {
+		return x.Withdraw
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetTags() []string {
+	if x != nil {
+		return x.Tags
+	}
+	return nil
+}
+
+func (x *ListUsersResponse_User) GetBanWithdraw() bool {
+	if x != nil {
+		return x.BanWithdraw
+	}
+	return false
+}
+
+func (x *ListUsersResponse_User) GetBanGame() bool {
+	if x != nil {
+		return x.BanGame
+	}
+	return false
+}
+
+func (x *ListUsersResponse_User) GetBanLogin() bool {
+	if x != nil {
+		return x.BanLogin
+	}
+	return false
+}
+
+func (x *ListUsersResponse_User) GetLastLoginAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastLoginAt
+	}
+	return nil
+}
+
+func (x *ListUsersResponse_User) GetRegisteredAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RegisteredAt
+	}
+	return nil
+}
+
+func (x *ListUsersResponse_User) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetRegistrationIp() string {
+	if x != nil {
+		return x.RegistrationIp
+	}
+	return ""
+}
+
 var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xd4\x02\n" +
+	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd4\x02\n" +
 	"\bUserInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -2396,7 +2851,81 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"_ban_loginB\v\n" +
 	"\t_ban_gameB\x0f\n" +
 	"\r_ban_withdraw\"\x14\n" +
-	"\x12UpdateUserResponse*j\n" +
+	"\x12UpdateUserResponse\"\xde\b\n" +
+	"\x10ListUsersRequest\x12\x1c\n" +
+	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
+	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
+	"\x17registration_start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x15registrationStartTime\x88\x01\x01\x12S\n" +
+	"\x15registration_end_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x13registrationEndTime\x88\x01\x01\x12 \n" +
+	"\tvip_level\x18\x05 \x01(\x05H\x03R\bvipLevel\x88\x01\x01\x125\n" +
+	"\x14retailer_operator_id\x18\x06 \x01(\x03H\x04R\x12retailerOperatorId\x88\x01\x01\x12/\n" +
+	"\x11group_operator_id\x18\a \x01(\x03H\x05R\x0fgroupOperatorId\x88\x01\x01\x12$\n" +
+	"\voperator_id\x18\b \x01(\x03H\x06R\n" +
+	"operatorId\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\t \x01(\tH\aR\acountry\x88\x01\x01\x12 \n" +
+	"\tkyc_level\x18\f \x01(\x05H\bR\bkycLevel\x88\x01\x01\x12$\n" +
+	"\vdeposit_min\x18\x0e \x01(\tH\tR\n" +
+	"depositMin\x88\x01\x01\x12$\n" +
+	"\vdeposit_max\x18\x0f \x01(\tH\n" +
+	"R\n" +
+	"depositMax\x88\x01\x01\x12*\n" +
+	"\x0ewithdrawal_min\x18\x10 \x01(\tH\vR\rwithdrawalMin\x88\x01\x01\x12*\n" +
+	"\x0ewithdrawal_max\x18\x11 \x01(\tH\fR\rwithdrawalMax\x88\x01\x01\x12&\n" +
+	"\fban_withdraw\x18\x12 \x01(\bH\rR\vbanWithdraw\x88\x01\x01\x12\x1e\n" +
+	"\bban_game\x18\x13 \x01(\bH\x0eR\abanGame\x88\x01\x01\x12 \n" +
+	"\tban_login\x18\x14 \x01(\bH\x0fR\bbanLogin\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x16 \x01(\x05H\x10R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x17 \x01(\x05H\x11R\bpageSize\x88\x01\x01B\n" +
+	"\n" +
+	"\b_user_idB\x1a\n" +
+	"\x18_registration_start_timeB\x18\n" +
+	"\x16_registration_end_timeB\f\n" +
+	"\n" +
+	"_vip_levelB\x17\n" +
+	"\x15_retailer_operator_idB\x14\n" +
+	"\x12_group_operator_idB\x0e\n" +
+	"\f_operator_idB\n" +
+	"\n" +
+	"\b_countryB\f\n" +
+	"\n" +
+	"_kyc_levelB\x0e\n" +
+	"\f_deposit_minB\x0e\n" +
+	"\f_deposit_maxB\x11\n" +
+	"\x0f_withdrawal_minB\x11\n" +
+	"\x0f_withdrawal_maxB\x0f\n" +
+	"\r_ban_withdrawB\v\n" +
+	"\t_ban_gameB\f\n" +
+	"\n" +
+	"_ban_loginB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\x83\x06\n" +
+	"\x11ListUsersResponse\x12A\n" +
+	"\x05users\x18\x01 \x03(\v2+.api.user.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xe3\x04\n" +
+	"\x04User\x12\x1a\n" +
+	"\bretailer\x18\x01 \x01(\tR\bretailer\x12\x14\n" +
+	"\x05group\x18\x02 \x01(\tR\x05group\x12#\n" +
+	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1a\n" +
+	"\busername\x18\x05 \x01(\tR\busername\x12\x14\n" +
+	"\x05email\x18\x06 \x01(\tR\x05email\x12\x16\n" +
+	"\x06mobile\x18\a \x01(\tR\x06mobile\x12\x1b\n" +
+	"\tvip_level\x18\b \x01(\x05R\bvipLevel\x12\x1b\n" +
+	"\tkyc_level\x18\t \x01(\x05R\bkycLevel\x12\x18\n" +
+	"\adeposit\x18\n" +
+	" \x01(\tR\adeposit\x12\x1a\n" +
+	"\bwithdraw\x18\v \x01(\tR\bwithdraw\x12\x12\n" +
+	"\x04tags\x18\f \x03(\tR\x04tags\x12!\n" +
+	"\fban_withdraw\x18\r \x01(\bR\vbanWithdraw\x12\x19\n" +
+	"\bban_game\x18\x0e \x01(\bR\abanGame\x12\x1b\n" +
+	"\tban_login\x18\x0f \x01(\bR\bbanLogin\x12>\n" +
+	"\rlast_login_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
+	"\rregistered_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
+	"\acountry\x18\x16 \x01(\tR\acountry\x12'\n" +
+	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp*j\n" +
 	"\bAuthType\x12\x19\n" +
 	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x13\n" +
@@ -2411,7 +2940,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1aOAUTH_PROVIDER_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15OAUTH_PROVIDER_GOOGLE\x10\x01\x12\x1b\n" +
 	"\x17OAUTH_PROVIDER_FACEBOOK\x10\x02\x12\x1a\n" +
-	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\xcc\x15\n" +
+	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\xaa\x16\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12\x80\x01\n" +
@@ -2435,7 +2964,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0fCheckPermission\x12+.api.user.service.v1.CheckPermissionRequest\x1a,.api.user.service.v1.CheckPermissionResponse\"\x00\x12\x83\x01\n" +
 	"\vAddOperator\x12'.api.user.service.v1.AddOperatorRequest\x1a(.api.user.service.v1.AddOperatorResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/operators/add\x12_\n" +
 	"\n" +
-	"UpdateUser\x12&.api.user.service.v1.UpdateUserRequest\x1a'.api.user.service.v1.UpdateUserResponse\"\x00BO\n" +
+	"UpdateUser\x12&.api.user.service.v1.UpdateUserRequest\x1a'.api.user.service.v1.UpdateUserResponse\"\x00\x12\\\n" +
+	"\tListUsers\x12%.api.user.service.v1.ListUsersRequest\x1a&.api.user.service.v1.ListUsersResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -2451,7 +2981,7 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
+var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 43)
 var file_user_service_v1_user_proto_goTypes = []any{
 	(AuthType)(0),                           // 0: api.user.service.v1.AuthType
 	(PasswordProvider)(0),                   // 1: api.user.service.v1.PasswordProvider
@@ -2496,6 +3026,10 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*AddOperatorResponse)(nil),             // 40: api.user.service.v1.AddOperatorResponse
 	(*UpdateUserRequest)(nil),               // 41: api.user.service.v1.UpdateUserRequest
 	(*UpdateUserResponse)(nil),              // 42: api.user.service.v1.UpdateUserResponse
+	(*ListUsersRequest)(nil),                // 43: api.user.service.v1.ListUsersRequest
+	(*ListUsersResponse)(nil),               // 44: api.user.service.v1.ListUsersResponse
+	(*ListUsersResponse_User)(nil),          // 45: api.user.service.v1.ListUsersResponse.User
+	(*timestamppb.Timestamp)(nil),           // 46: google.protobuf.Timestamp
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
 	1,  // 0: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
@@ -2504,53 +3038,60 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	3,  // 3: api.user.service.v1.AuthResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	3,  // 4: api.user.service.v1.GetUserResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	3,  // 5: api.user.service.v1.GetUsersByIdsResponse.users:type_name -> api.user.service.v1.UserInfo
-	4,  // 6: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
-	5,  // 7: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
-	6,  // 8: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
-	7,  // 9: api.user.service.v1.User.RegisterOrLoginWithTelegram:input_type -> api.user.service.v1.TelegramAuthRequest
-	8,  // 10: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
-	11, // 11: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
-	13, // 12: api.user.service.v1.User.GetUsersByIds:input_type -> api.user.service.v1.GetUsersByIdsRequest
-	15, // 13: api.user.service.v1.User.GetUserIdsByOperatorIds:input_type -> api.user.service.v1.GetUserIdsByOperatorIdsRequest
-	17, // 14: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
-	19, // 15: api.user.service.v1.User.IsTokenRevoked:input_type -> api.user.service.v1.IsTokenRevokedRequest
-	21, // 16: api.user.service.v1.User.GetOperatorTagConfig:input_type -> api.user.service.v1.GetOperatorTagConfigRequest
-	23, // 17: api.user.service.v1.User.SetOperatorTagConfig:input_type -> api.user.service.v1.SetOperatorTagConfigRequest
-	25, // 18: api.user.service.v1.User.AddOperatorTag:input_type -> api.user.service.v1.AddOperatorTagRequest
-	27, // 19: api.user.service.v1.User.GetOperatorTags:input_type -> api.user.service.v1.GetOperatorTagsRequest
-	29, // 20: api.user.service.v1.User.DeleteOperatorTag:input_type -> api.user.service.v1.DeleteOperatorTagRequest
-	31, // 21: api.user.service.v1.User.AddUserTag:input_type -> api.user.service.v1.AddUserTagRequest
-	33, // 22: api.user.service.v1.User.DeleteUserTag:input_type -> api.user.service.v1.DeleteUserTagRequest
-	35, // 23: api.user.service.v1.User.GetUserTags:input_type -> api.user.service.v1.GetUserTagsRequest
-	37, // 24: api.user.service.v1.User.CheckPermission:input_type -> api.user.service.v1.CheckPermissionRequest
-	39, // 25: api.user.service.v1.User.AddOperator:input_type -> api.user.service.v1.AddOperatorRequest
-	41, // 26: api.user.service.v1.User.UpdateUser:input_type -> api.user.service.v1.UpdateUserRequest
-	9,  // 27: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
-	9,  // 28: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
-	9,  // 29: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
-	9,  // 30: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
-	10, // 31: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
-	12, // 32: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	14, // 33: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
-	16, // 34: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
-	18, // 35: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
-	20, // 36: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
-	22, // 37: api.user.service.v1.User.GetOperatorTagConfig:output_type -> api.user.service.v1.GetOperatorTagConfigResponse
-	24, // 38: api.user.service.v1.User.SetOperatorTagConfig:output_type -> api.user.service.v1.SetOperatorTagConfigResponse
-	26, // 39: api.user.service.v1.User.AddOperatorTag:output_type -> api.user.service.v1.AddOperatorTagResponse
-	28, // 40: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
-	30, // 41: api.user.service.v1.User.DeleteOperatorTag:output_type -> api.user.service.v1.DeleteOperatorTagResponse
-	32, // 42: api.user.service.v1.User.AddUserTag:output_type -> api.user.service.v1.AddUserTagResponse
-	34, // 43: api.user.service.v1.User.DeleteUserTag:output_type -> api.user.service.v1.DeleteUserTagResponse
-	36, // 44: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
-	38, // 45: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
-	40, // 46: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
-	42, // 47: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
-	27, // [27:48] is the sub-list for method output_type
-	6,  // [6:27] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	46, // 6: api.user.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	46, // 7: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	45, // 8: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
+	46, // 9: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	46, // 10: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	4,  // 11: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
+	5,  // 12: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
+	6,  // 13: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
+	7,  // 14: api.user.service.v1.User.RegisterOrLoginWithTelegram:input_type -> api.user.service.v1.TelegramAuthRequest
+	8,  // 15: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
+	11, // 16: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
+	13, // 17: api.user.service.v1.User.GetUsersByIds:input_type -> api.user.service.v1.GetUsersByIdsRequest
+	15, // 18: api.user.service.v1.User.GetUserIdsByOperatorIds:input_type -> api.user.service.v1.GetUserIdsByOperatorIdsRequest
+	17, // 19: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
+	19, // 20: api.user.service.v1.User.IsTokenRevoked:input_type -> api.user.service.v1.IsTokenRevokedRequest
+	21, // 21: api.user.service.v1.User.GetOperatorTagConfig:input_type -> api.user.service.v1.GetOperatorTagConfigRequest
+	23, // 22: api.user.service.v1.User.SetOperatorTagConfig:input_type -> api.user.service.v1.SetOperatorTagConfigRequest
+	25, // 23: api.user.service.v1.User.AddOperatorTag:input_type -> api.user.service.v1.AddOperatorTagRequest
+	27, // 24: api.user.service.v1.User.GetOperatorTags:input_type -> api.user.service.v1.GetOperatorTagsRequest
+	29, // 25: api.user.service.v1.User.DeleteOperatorTag:input_type -> api.user.service.v1.DeleteOperatorTagRequest
+	31, // 26: api.user.service.v1.User.AddUserTag:input_type -> api.user.service.v1.AddUserTagRequest
+	33, // 27: api.user.service.v1.User.DeleteUserTag:input_type -> api.user.service.v1.DeleteUserTagRequest
+	35, // 28: api.user.service.v1.User.GetUserTags:input_type -> api.user.service.v1.GetUserTagsRequest
+	37, // 29: api.user.service.v1.User.CheckPermission:input_type -> api.user.service.v1.CheckPermissionRequest
+	39, // 30: api.user.service.v1.User.AddOperator:input_type -> api.user.service.v1.AddOperatorRequest
+	41, // 31: api.user.service.v1.User.UpdateUser:input_type -> api.user.service.v1.UpdateUserRequest
+	43, // 32: api.user.service.v1.User.ListUsers:input_type -> api.user.service.v1.ListUsersRequest
+	9,  // 33: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
+	9,  // 34: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
+	9,  // 35: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
+	9,  // 36: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
+	10, // 37: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
+	12, // 38: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	14, // 39: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
+	16, // 40: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
+	18, // 41: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	20, // 42: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
+	22, // 43: api.user.service.v1.User.GetOperatorTagConfig:output_type -> api.user.service.v1.GetOperatorTagConfigResponse
+	24, // 44: api.user.service.v1.User.SetOperatorTagConfig:output_type -> api.user.service.v1.SetOperatorTagConfigResponse
+	26, // 45: api.user.service.v1.User.AddOperatorTag:output_type -> api.user.service.v1.AddOperatorTagResponse
+	28, // 46: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
+	30, // 47: api.user.service.v1.User.DeleteOperatorTag:output_type -> api.user.service.v1.DeleteOperatorTagResponse
+	32, // 48: api.user.service.v1.User.AddUserTag:output_type -> api.user.service.v1.AddUserTagResponse
+	34, // 49: api.user.service.v1.User.DeleteUserTag:output_type -> api.user.service.v1.DeleteUserTagResponse
+	36, // 50: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
+	38, // 51: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
+	40, // 52: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
+	42, // 53: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
+	44, // 54: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
+	33, // [33:55] is the sub-list for method output_type
+	11, // [11:33] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_user_proto_init() }
@@ -2559,13 +3100,14 @@ func file_user_service_v1_user_proto_init() {
 		return
 	}
 	file_user_service_v1_user_proto_msgTypes[38].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[40].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   40,
+			NumMessages:   43,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
