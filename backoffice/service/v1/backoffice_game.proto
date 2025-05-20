@@ -100,7 +100,15 @@ service BackofficeGame {
 			body: "*"
 		};
 	}
+
+	rpc ListOperators(ListOperatorsRequest) returns (ListOperatorsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/operators/list"
+			body: "*"
+		};
+	}
 }
+
 
 message ListProvidersRequest {
 	optional bool enabled = 1;
@@ -346,3 +354,13 @@ message UpdateProviderRequest {
 }
 
 message UpdateProviderResponse {}
+
+message ListOperatorsRequest {}
+
+message ListOperatorsResponse {
+	message Operator {
+		string operator_id = 1;
+		string operator_name = 2;
+	}
+	repeated Operator operators = 1;
+}

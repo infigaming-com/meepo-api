@@ -2774,7 +2774,7 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 
 	// no validation rules for Group
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	// no validation rules for UserId
 

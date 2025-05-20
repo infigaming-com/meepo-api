@@ -1460,22 +1460,22 @@ func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListUsersResponse_User struct {
-	state       protoimpl.MessageState `protogen:"open.v1"`
-	Retailer    string                 `protobuf:"bytes,1,opt,name=retailer,proto3" json:"retailer,omitempty"`
-	Group       string                 `protobuf:"bytes,2,opt,name=group,proto3" json:"group,omitempty"`
-	Operator    string                 `protobuf:"bytes,3,opt,name=operator,proto3" json:"operator,omitempty"` // Operator name
-	UserId      int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Username    string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
-	Email       string                 `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile      string                 `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	VipLevel    int32                  `protobuf:"varint,8,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	KycLevel    int32                  `protobuf:"varint,9,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
-	Deposit     string                 `protobuf:"bytes,10,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	Withdraw    string                 `protobuf:"bytes,11,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
-	Tags        []string               `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
-	BanWithdraw bool                   `protobuf:"varint,13,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
-	BanGame     bool                   `protobuf:"varint,14,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
-	BanLogin    bool                   `protobuf:"varint,15,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	Retailer     string                 `protobuf:"bytes,1,opt,name=retailer,proto3" json:"retailer,omitempty"`
+	Group        string                 `protobuf:"bytes,2,opt,name=group,proto3" json:"group,omitempty"`
+	OperatorName string                 `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	UserId       int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Username     string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
+	Email        string                 `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile       string                 `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	VipLevel     int32                  `protobuf:"varint,8,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	KycLevel     int32                  `protobuf:"varint,9,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
+	Deposit      string                 `protobuf:"bytes,10,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	Withdraw     string                 `protobuf:"bytes,11,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
+	Tags         []string               `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
+	BanWithdraw  bool                   `protobuf:"varint,13,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
+	BanGame      bool                   `protobuf:"varint,14,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
+	BanLogin     bool                   `protobuf:"varint,15,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
 	// bool online = 16;
 	LastLoginAt  *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
 	RegisteredAt *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
@@ -1534,9 +1534,9 @@ func (x *ListUsersResponse_User) GetGroup() string {
 	return ""
 }
 
-func (x *ListUsersResponse_User) GetOperator() string {
+func (x *ListUsersResponse_User) GetOperatorName() string {
 	if x != nil {
-		return x.Operator
+		return x.OperatorName
 	}
 	return ""
 }
@@ -2109,16 +2109,16 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"_ban_loginB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x80\x06\n" +
+	"_page_size\"\x89\x06\n" +
 	"\x11ListUsersResponse\x12G\n" +
 	"\x05users\x18\x01 \x03(\v21.api.backoffice.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xda\x04\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xe3\x04\n" +
 	"\x04User\x12\x1a\n" +
 	"\bretailer\x18\x01 \x01(\tR\bretailer\x12\x14\n" +
-	"\x05group\x18\x02 \x01(\tR\x05group\x12\x1a\n" +
-	"\boperator\x18\x03 \x01(\tR\boperator\x12\x17\n" +
+	"\x05group\x18\x02 \x01(\tR\x05group\x12#\n" +
+	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\busername\x18\x05 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x06 \x01(\tR\x05email\x12\x16\n" +
