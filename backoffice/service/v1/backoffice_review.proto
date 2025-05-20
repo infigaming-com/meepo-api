@@ -110,7 +110,7 @@ message GetTicketResponse {
 		int32 today_withdraw_count = 7;
 	}
 	message Comment {
-		int64 author_user_name = 1;
+		string author_username = 1;
 		string content = 2;
 		google.protobuf.Timestamp created_at = 3;
 	}

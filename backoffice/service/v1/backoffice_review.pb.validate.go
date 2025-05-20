@@ -1641,7 +1641,7 @@ func (m *GetTicketResponse_Comment) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for AuthorUserName
+	// no validation rules for AuthorUsername
 
 	// no validation rules for Content
 
