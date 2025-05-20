@@ -4914,13 +4914,13 @@ components:
         api.game.service.v1.Transactions:
             type: object
             properties:
-                txnId:
+                txn_id:
                     type: string
-                operatorTxnId:
+                operator_txn_id:
                     type: string
-                processedAt:
+                processed_at:
                     type: string
-                bonusAmount:
+                bonus_amount:
                     type: number
                     format: double
         api.game.service.v1.UrlInfo:

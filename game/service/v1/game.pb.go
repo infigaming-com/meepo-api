@@ -2287,10 +2287,10 @@ func (x *Action) GetProviderTimestamp() int64 {
 
 type Transactions struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
-	OperatorTxnId string                 `protobuf:"bytes,2,opt,name=operator_txn_id,json=operatorTxnId,proto3" json:"operator_txn_id,omitempty"`
-	ProcessedAt   string                 `protobuf:"bytes,3,opt,name=processed_at,json=processedAt,proto3" json:"processed_at,omitempty"`
-	BonusAmount   float64                `protobuf:"fixed64,4,opt,name=bonus_amount,json=bonusAmount,proto3" json:"bonus_amount,omitempty"`
+	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,proto3" json:"txn_id,omitempty"`
+	OperatorTxnId string                 `protobuf:"bytes,2,opt,name=operator_txn_id,proto3" json:"operator_txn_id,omitempty"`
+	ProcessedAt   string                 `protobuf:"bytes,3,opt,name=processed_at,proto3" json:"processed_at,omitempty"`
+	BonusAmount   float64                `protobuf:"fixed64,4,opt,name=bonus_amount,proto3" json:"bonus_amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4190,12 +4190,12 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\bbet_time\x18\v \x01(\x03R\abetTime\x12\x1f\n" +
 	"\vsettle_time\x18\f \x01(\x03R\n" +
 	"settleTime\x12-\n" +
-	"\x12provider_timestamp\x18\r \x01(\x03R\x11providerTimestamp\"\x93\x01\n" +
-	"\fTransactions\x12\x15\n" +
-	"\x06txn_id\x18\x01 \x01(\tR\x05txnId\x12&\n" +
-	"\x0foperator_txn_id\x18\x02 \x01(\tR\roperatorTxnId\x12!\n" +
-	"\fprocessed_at\x18\x03 \x01(\tR\vprocessedAt\x12!\n" +
-	"\fbonus_amount\x18\x04 \x01(\x01R\vbonusAmount\"\xf2\x01\n" +
+	"\x12provider_timestamp\x18\r \x01(\x03R\x11providerTimestamp\"\x98\x01\n" +
+	"\fTransactions\x12\x16\n" +
+	"\x06txn_id\x18\x01 \x01(\tR\x06txn_id\x12(\n" +
+	"\x0foperator_txn_id\x18\x02 \x01(\tR\x0foperator_txn_id\x12\"\n" +
+	"\fprocessed_at\x18\x03 \x01(\tR\fprocessed_at\x12\"\n" +
+	"\fbonus_amount\x18\x04 \x01(\x01R\fbonus_amount\"\xf2\x01\n" +
 	"\x0fRollbackRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
