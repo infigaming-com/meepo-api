@@ -38,6 +38,7 @@ const (
 	User_GetUserTags_FullMethodName                 = "/api.user.service.v1.User/GetUserTags"
 	User_CheckPermission_FullMethodName             = "/api.user.service.v1.User/CheckPermission"
 	User_AddOperator_FullMethodName                 = "/api.user.service.v1.User/AddOperator"
+	User_SendEmailVerificationCode_FullMethodName   = "/api.user.service.v1.User/SendEmailVerificationCode"
 )
 
 // UserClient is the client API for User service.
@@ -90,6 +91,7 @@ type UserClient interface {
 	GetUserTags(ctx context.Context, in *GetUserTagsRequest, opts ...grpc.CallOption) (*GetUserTagsResponse, error)
 	CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error)
 	AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...grpc.CallOption) (*AddOperatorResponse, error)
+	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
 }
 
 type userClient struct {
@@ -290,6 +292,16 @@ func (c *userClient) AddOperator(ctx context.Context, in *AddOperatorRequest, op
 	return out, nil
 }
 
+func (c *userClient) SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendEmailVerificationCodeResponse)
+	err := c.cc.Invoke(ctx, User_SendEmailVerificationCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -340,6 +352,7 @@ type UserServer interface {
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
 	CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error)
 	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
+	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -406,6 +419,9 @@ func (UnimplementedUserServer) CheckPermission(context.Context, *CheckPermission
 }
 func (UnimplementedUserServer) AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddOperator not implemented")
+}
+func (UnimplementedUserServer) SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendEmailVerificationCode not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -770,6 +786,24 @@ func _User_AddOperator_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_SendEmailVerificationCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendEmailVerificationCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SendEmailVerificationCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SendEmailVerificationCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SendEmailVerificationCode(ctx, req.(*SendEmailVerificationCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -852,6 +886,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddOperator",
 			Handler:    _User_AddOperator_Handler,
+		},
+		{
+			MethodName: "SendEmailVerificationCode",
+			Handler:    _User_SendEmailVerificationCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
