@@ -5623,6 +5623,7 @@ components:
                     format: enum
                 status:
                     enum:
+                        - TRANSACTION_STATUS_UNSPECIFIED
                         - TRANSACTION_STATUS_PROCESSING
                         - TRANSACTION_STATUS_SUCCESSFUL
                         - TRANSACTION_STATUS_FAILED
@@ -5949,6 +5950,7 @@ components:
                     format: enum
                 status:
                     enum:
+                        - TRANSACTION_STATUS_UNSPECIFIED
                         - TRANSACTION_STATUS_PROCESSING
                         - TRANSACTION_STATUS_SUCCESSFUL
                         - TRANSACTION_STATUS_FAILED
