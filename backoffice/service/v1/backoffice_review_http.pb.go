@@ -19,10 +19,12 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeReviewGetTicket = "/api.backoffice.service.v1.BackofficeReview/GetTicket"
 const OperationBackofficeReviewListTickets = "/api.backoffice.service.v1.BackofficeReview/ListTickets"
 const OperationBackofficeReviewReviewTicket = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
 
 type BackofficeReviewHTTPServer interface {
+	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
 	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
 }
@@ -30,6 +32,7 @@ type BackofficeReviewHTTPServer interface {
 func RegisterBackofficeReviewHTTPServer(s *http.Server, srv BackofficeReviewHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/backoffice/review/tickets/list", _BackofficeReview_ListTickets0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/review/ticket/get", _BackofficeReview_GetTicket0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/review/ticket/review", _BackofficeReview_ReviewTicket0_HTTP_Handler(srv))
 }
 
@@ -51,6 +54,28 @@ func _BackofficeReview_ListTickets0_HTTP_Handler(srv BackofficeReviewHTTPServer)
 			return err
 		}
 		reply := out.(*ListTicketsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeReview_GetTicket0_HTTP_Handler(srv BackofficeReviewHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetTicketRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeReviewGetTicket)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetTicket(ctx, req.(*GetTicketRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetTicketResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -78,6 +103,7 @@ func _BackofficeReview_ReviewTicket0_HTTP_Handler(srv BackofficeReviewHTTPServer
 }
 
 type BackofficeReviewHTTPClient interface {
+	GetTicket(ctx context.Context, req *GetTicketRequest, opts ...http.CallOption) (rsp *GetTicketResponse, err error)
 	ListTickets(ctx context.Context, req *ListTicketsRequest, opts ...http.CallOption) (rsp *ListTicketsResponse, err error)
 	ReviewTicket(ctx context.Context, req *ReviewTicketRequest, opts ...http.CallOption) (rsp *ReviewTicketResponse, err error)
 }
@@ -88,6 +114,19 @@ type BackofficeReviewHTTPClientImpl struct {
 
 func NewBackofficeReviewHTTPClient(client *http.Client) BackofficeReviewHTTPClient {
 	return &BackofficeReviewHTTPClientImpl{client}
+}
+
+func (c *BackofficeReviewHTTPClientImpl) GetTicket(ctx context.Context, in *GetTicketRequest, opts ...http.CallOption) (*GetTicketResponse, error) {
+	var out GetTicketResponse
+	pattern := "/v1/backoffice/review/ticket/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeReviewGetTicket))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *BackofficeReviewHTTPClientImpl) ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...http.CallOption) (*ListTicketsResponse, error) {

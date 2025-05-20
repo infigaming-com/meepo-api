@@ -755,6 +755,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDailySummariesResponse'
+    /v1/backoffice/review/ticket/get:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_GetTicket
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketResponse'
     /v1/backoffice/review/ticket/review:
         post:
             tags:
@@ -2448,6 +2466,96 @@ components:
                     type: string
                 ngr:
                     type: string
+        api.backoffice.service.v1.GetTicketRequest:
+            type: object
+            properties:
+                ticketId:
+                    type: string
+        api.backoffice.service.v1.GetTicketResponse:
+            type: object
+            properties:
+                operatorName:
+                    type: string
+                userId:
+                    type: string
+                vipLevel:
+                    type: integer
+                    format: int32
+                ticketId:
+                    type: string
+                status:
+                    type: string
+                userTags:
+                    type: array
+                    items:
+                        type: string
+                withdrawPaymentInfo:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketResponse_WithdrawPaymentInfo'
+                linkedAccounts:
+                    type: array
+                    items:
+                        type: string
+                userWalletData:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketResponse_UserWalletData'
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketResponse_Comment'
+        api.backoffice.service.v1.GetTicketResponse_Comment:
+            type: object
+            properties:
+                authorUserName:
+                    type: string
+                content:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+        api.backoffice.service.v1.GetTicketResponse_UserWalletData:
+            type: object
+            properties:
+                depositUsd:
+                    type: string
+                withdrawUsd:
+                    type: string
+                depositMinusWithdrawUsd:
+                    type: string
+                validTurnoverUsd:
+                    type: string
+                depositCount:
+                    type: integer
+                    format: int32
+                withdrawCount:
+                    type: integer
+                    format: int32
+                todayWithdrawCount:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetTicketResponse_WithdrawPaymentInfo:
+            type: object
+            properties:
+                createdAt:
+                    type: object
+                currency:
+                    type: string
+                amount:
+                    type: string
+                amountUsd:
+                    type: string
+                beforeBalance:
+                    type: string
+                afterBalance:
+                    type: string
+                paymentChannel:
+                    type: string
+                protocol:
+                    type: string
+                fee:
+                    type: string
+                extra:
+                    type: object
+                schema:
+                    type: object
         api.backoffice.service.v1.GetTimeRangedDashboardRequest:
             type: object
             properties:
