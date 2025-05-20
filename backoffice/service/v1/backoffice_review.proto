@@ -88,7 +88,7 @@ message GetTicketRequest {
 
 message GetTicketResponse {
 	message WithdrawPaymentInfo {
-		google.protobuf.Struct created_at = 1;
+		google.protobuf.Timestamp created_at = 1;
 		string currency = 2;
 		string amount = 3;
 		string amount_usd = 4;

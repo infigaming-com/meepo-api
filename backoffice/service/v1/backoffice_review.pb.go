@@ -858,7 +858,7 @@ func (x *ListTicketsResponse_Ticket) GetReviewDuration() int32 {
 
 type GetTicketResponse_WithdrawPaymentInfo struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	CreatedAt      *structpb.Struct       `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	Currency       string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Amount         string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
 	AmountUsd      string                 `protobuf:"bytes,4,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
@@ -903,7 +903,7 @@ func (*GetTicketResponse_WithdrawPaymentInfo) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{3, 0}
 }
 
-func (x *GetTicketResponse_WithdrawPaymentInfo) GetCreatedAt() *structpb.Struct {
+func (x *GetTicketResponse_WithdrawPaymentInfo) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
@@ -1206,7 +1206,7 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x11reviewer_username\x18\x12 \x01(\tR\x10reviewerUsername\x12'\n" +
 	"\x0freview_duration\x18\x13 \x01(\x05R\x0ereviewDuration\"/\n" +
 	"\x10GetTicketRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x88\v\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x8b\v\n" +
 	"\x11GetTicketResponse\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -1218,10 +1218,10 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x0flinked_accounts\x18\b \x03(\tR\x0elinkedAccounts\x12e\n" +
 	"\x10user_wallet_data\x18\t \x01(\v2;.api.backoffice.service.v1.GetTicketResponse.UserWalletDataR\x0euserWalletData\x12P\n" +
 	"\bcomments\x18\n" +
-	" \x03(\v24.api.backoffice.service.v1.GetTicketResponse.CommentR\bcomments\x1a\xa3\x03\n" +
-	"\x13WithdrawPaymentInfo\x126\n" +
+	" \x03(\v24.api.backoffice.service.v1.GetTicketResponse.CommentR\bcomments\x1a\xa6\x03\n" +
+	"\x13WithdrawPaymentInfo\x129\n" +
 	"\n" +
-	"created_at\x18\x01 \x01(\v2\x17.google.protobuf.StructR\tcreatedAt\x12\x1a\n" +
+	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x1d\n" +
 	"\n" +
@@ -1304,7 +1304,7 @@ var file_backoffice_service_v1_backoffice_review_proto_depIdxs = []int32{
 	10, // 4: api.backoffice.service.v1.GetTicketResponse.user_wallet_data:type_name -> api.backoffice.service.v1.GetTicketResponse.UserWalletData
 	11, // 5: api.backoffice.service.v1.GetTicketResponse.comments:type_name -> api.backoffice.service.v1.GetTicketResponse.Comment
 	12, // 6: api.backoffice.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
-	13, // 7: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.created_at:type_name -> google.protobuf.Struct
+	12, // 7: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.created_at:type_name -> google.protobuf.Timestamp
 	13, // 8: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.extra:type_name -> google.protobuf.Struct
 	13, // 9: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.schema:type_name -> google.protobuf.Struct
 	12, // 10: api.backoffice.service.v1.GetTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
