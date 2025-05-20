@@ -21,9 +21,9 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationPaymentCreatePaymentChannel = "/payment.service.v1.Payment/CreatePaymentChannel"
 const OperationPaymentDepositCallback = "/payment.service.v1.Payment/DepositCallback"
-const OperationPaymentGetPaymentChannelList = "/payment.service.v1.Payment/GetPaymentChannelList"
 const OperationPaymentGetPaymentChannelPage = "/payment.service.v1.Payment/GetPaymentChannelPage"
 const OperationPaymentGetPaymentMethodList = "/payment.service.v1.Payment/GetPaymentMethodList"
+const OperationPaymentGetTransactionDetailById = "/payment.service.v1.Payment/GetTransactionDetailById"
 const OperationPaymentGetTransactionPage = "/payment.service.v1.Payment/GetTransactionPage"
 const OperationPaymentInitiateDeposit = "/payment.service.v1.Payment/InitiateDeposit"
 const OperationPaymentInitiateWithdraw = "/payment.service.v1.Payment/InitiateWithdraw"
@@ -31,24 +31,42 @@ const OperationPaymentWithdrawCallback = "/payment.service.v1.Payment/WithdrawCa
 
 type PaymentHTTPServer interface {
 	// CreatePaymentChannel Create payment channel
+	// Creates a new payment channel with specified configuration
+	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
 	CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error)
 	// DepositCallback Deposit callback
-	// This endpoint handles callbacks from payment gateways.
+	// Handles callbacks from payment gateways for deposit status updates
+	// This endpoint is called by payment providers to notify of completed or failed deposits
+	// Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
 	DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error)
-	// GetPaymentChannelList Get list of payment channels
-	GetPaymentChannelList(context.Context, *GetPaymentChannelListRequest) (*GetPaymentChannelListResponse, error)
 	// GetPaymentChannelPage Get payment channel page with pagination and filters
+	// Retrieves a paginated list of payment channels with optional filtering
+	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
 	GetPaymentChannelPage(context.Context, *GetPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error)
 	// GetPaymentMethodList Get list of payment methods
+	// Retrieves all available payment methods supported by the system
+	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
 	GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*GetPaymentMethodListResponse, error)
+	// GetTransactionDetailById Get transaction detail
+	// Retrieves detailed information about a specific transaction
+	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+	GetTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error)
 	// GetTransactionPage Get transaction page with pagination and filters
+	// Retrieves a paginated list of transactions with optional filtering
+	// Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
 	GetTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error)
 	// InitiateDeposit Initiate a deposit transaction
+	// Starts a new deposit process and returns payment information
+	// Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
 	InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error)
 	// InitiateWithdraw Initiate a withdrawal transaction
+	// Starts a new withdrawal process
+	// Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
 	InitiateWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error)
 	// WithdrawCallback Withdraw callback
-	// This endpoint handles callbacks from payment gateways for withdrawal results.
+	// Handles callbacks from payment gateways for withdrawal status updates
+	// This endpoint is called by payment providers to notify of completed or failed withdrawals
+	// Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
 	WithdrawCallback(context.Context, *WithdrawCallbackRequest) (*WithdrawCallbackResponse, error)
 }
 
@@ -56,13 +74,13 @@ func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/payment/method/list", _Payment_GetPaymentMethodList0_HTTP_Handler(srv))
 	r.POST("/v1/payment/channel/create", _Payment_CreatePaymentChannel0_HTTP_Handler(srv))
-	r.POST("/v1/payment/channel/list", _Payment_GetPaymentChannelList0_HTTP_Handler(srv))
 	r.POST("/v1/payment/deposit/initiate", _Payment_InitiateDeposit0_HTTP_Handler(srv))
 	r.POST("/v1/payment/withdraw/initiate", _Payment_InitiateWithdraw0_HTTP_Handler(srv))
 	r.POST("/v1/payment/deposit/callback", _Payment_DepositCallback0_HTTP_Handler(srv))
 	r.POST("/v1/payment/withdraw/callback", _Payment_WithdrawCallback0_HTTP_Handler(srv))
 	r.POST("/v1/payment/transaction/page", _Payment_GetTransactionPage0_HTTP_Handler(srv))
 	r.POST("/v1/payment/channel/page", _Payment_GetPaymentChannelPage0_HTTP_Handler(srv))
+	r.POST("/v1/payment/transaction/detail", _Payment_GetTransactionDetailById0_HTTP_Handler(srv))
 }
 
 func _Payment_GetPaymentMethodList0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
@@ -105,28 +123,6 @@ func _Payment_CreatePaymentChannel0_HTTP_Handler(srv PaymentHTTPServer) func(ctx
 			return err
 		}
 		reply := out.(*CreatePaymentChannelResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Payment_GetPaymentChannelList0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetPaymentChannelListRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationPaymentGetPaymentChannelList)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetPaymentChannelList(ctx, req.(*GetPaymentChannelListRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetPaymentChannelListResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -263,12 +259,34 @@ func _Payment_GetPaymentChannelPage0_HTTP_Handler(srv PaymentHTTPServer) func(ct
 	}
 }
 
+func _Payment_GetTransactionDetailById0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetTransactionDetailByIdRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentGetTransactionDetailById)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetTransactionDetailById(ctx, req.(*GetTransactionDetailByIdRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetTransactionDetailByIdResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type PaymentHTTPClient interface {
 	CreatePaymentChannel(ctx context.Context, req *CreatePaymentChannelRequest, opts ...http.CallOption) (rsp *CreatePaymentChannelResponse, err error)
 	DepositCallback(ctx context.Context, req *DepositCallbackRequest, opts ...http.CallOption) (rsp *DepositCallbackResponse, err error)
-	GetPaymentChannelList(ctx context.Context, req *GetPaymentChannelListRequest, opts ...http.CallOption) (rsp *GetPaymentChannelListResponse, err error)
 	GetPaymentChannelPage(ctx context.Context, req *GetPaymentChannelPageRequest, opts ...http.CallOption) (rsp *GetPaymentChannelPageResponse, err error)
 	GetPaymentMethodList(ctx context.Context, req *GetPaymentMethodListRequest, opts ...http.CallOption) (rsp *GetPaymentMethodListResponse, err error)
+	GetTransactionDetailById(ctx context.Context, req *GetTransactionDetailByIdRequest, opts ...http.CallOption) (rsp *GetTransactionDetailByIdResponse, err error)
 	GetTransactionPage(ctx context.Context, req *GetTransactionPageRequest, opts ...http.CallOption) (rsp *GetTransactionPageResponse, err error)
 	InitiateDeposit(ctx context.Context, req *InitiateDepositRequest, opts ...http.CallOption) (rsp *InitiateDepositResponse, err error)
 	InitiateWithdraw(ctx context.Context, req *InitiateWithdrawRequest, opts ...http.CallOption) (rsp *InitiateWithdrawResponse, err error)
@@ -309,19 +327,6 @@ func (c *PaymentHTTPClientImpl) DepositCallback(ctx context.Context, in *Deposit
 	return &out, nil
 }
 
-func (c *PaymentHTTPClientImpl) GetPaymentChannelList(ctx context.Context, in *GetPaymentChannelListRequest, opts ...http.CallOption) (*GetPaymentChannelListResponse, error) {
-	var out GetPaymentChannelListResponse
-	pattern := "/v1/payment/channel/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationPaymentGetPaymentChannelList))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 func (c *PaymentHTTPClientImpl) GetPaymentChannelPage(ctx context.Context, in *GetPaymentChannelPageRequest, opts ...http.CallOption) (*GetPaymentChannelPageResponse, error) {
 	var out GetPaymentChannelPageResponse
 	pattern := "/v1/payment/channel/page"
@@ -340,6 +345,19 @@ func (c *PaymentHTTPClientImpl) GetPaymentMethodList(ctx context.Context, in *Ge
 	pattern := "/v1/payment/method/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentGetPaymentMethodList))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *PaymentHTTPClientImpl) GetTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...http.CallOption) (*GetTransactionDetailByIdResponse, error) {
+	var out GetTransactionDetailByIdResponse
+	pattern := "/v1/payment/transaction/detail"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPaymentGetTransactionDetailById))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

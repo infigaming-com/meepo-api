@@ -7,10 +7,10 @@
 package v1
 
 import (
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -21,237 +21,133 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type EventRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
+	EventData      []byte                 `protobuf:"bytes,2,opt,name=event_data,json=eventData,proto3" json:"event_data,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *EventRequest) Reset() {
+	*x = EventRequest{}
+	mi := &file_backoffice_service_v1_backoffice_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EventRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventRequest) ProtoMessage() {}
+
+func (x *EventRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventRequest.ProtoReflect.Descriptor instead.
+func (*EventRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *EventRequest) GetSubscriptionId() string {
+	if x != nil {
+		return x.SubscriptionId
+	}
+	return ""
+}
+
+func (x *EventRequest) GetEventData() []byte {
+	if x != nil {
+		return x.EventData
+	}
+	return nil
+}
+
+type EventResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EventResponse) Reset() {
+	*x = EventResponse{}
+	mi := &file_backoffice_service_v1_backoffice_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EventResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventResponse) ProtoMessage() {}
+
+func (x *EventResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventResponse.ProtoReflect.Descriptor instead.
+func (*EventResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_proto_rawDescGZIP(), []int{1}
+}
+
 var File_backoffice_service_v1_backoffice_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_proto_rawDesc = "" +
 	"\n" +
-	"&backoffice/service/v1/backoffice.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a0backoffice/service/v1/backoffice_dashboard.proto\x1a.backoffice/service/v1/backoffice_account.proto\x1a+backoffice/service/v1/backoffice_game.proto\x1a+backoffice/service/v1/backoffice_user.proto\x1a.backoffice/service/v1/backoffice_payment.proto\x1a-backoffice/service/v1/backoffice_wallet.proto\x1a-backoffice/service/v1/backoffice_review.proto\x1a-backoffice/service/v1/backoffice_report.proto2\xda:\n" +
+	"&backoffice/service/v1/backoffice.proto\x12\x19api.backoffice.service.v1\"V\n" +
+	"\fEventRequest\x12'\n" +
+	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
-	"Backoffice\x12\x91\x01\n" +
-	"\n" +
-	"AddAccount\x12,.api.backoffice.service.v1.AddAccountRequest\x1a-.api.backoffice.service.v1.AddAccountResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/backoffice/accounts/add\x12\xc6\x01\n" +
-	"\x15SendEmailVerification\x127.api.backoffice.service.v1.SendEmailVerificationRequest\x1a8.api.backoffice.service.v1.SendEmailVerificationResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/accounts/email/verification/send\x12\x9d\x01\n" +
-	"\vVerifyEmail\x12-.api.backoffice.service.v1.VerifyEmailRequest\x1a..api.backoffice.service.v1.VerifyEmailResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/accounts/email/verify\x12\xca\x01\n" +
-	"\x16SendMobileVerification\x128.api.backoffice.service.v1.SendMobileVerificationRequest\x1a9.api.backoffice.service.v1.SendMobileVerificationResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/accounts/mobile/verification/send\x12\xa1\x01\n" +
-	"\fVerifyMobile\x12..api.backoffice.service.v1.VerifyMobileRequest\x1a/.api.backoffice.service.v1.VerifyMobileResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/accounts/mobile/verify\x12\xa5\x01\n" +
-	"\rResetPassword\x12/.api.backoffice.service.v1.ResetPasswordRequest\x1a0.api.backoffice.service.v1.ResetPasswordResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/accounts/password/reset\x12\x9d\x01\n" +
-	"\vGenerate2fa\x12-.api.backoffice.service.v1.Generate2faRequest\x1a..api.backoffice.service.v1.Generate2faResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/accounts/2fa/generate\x12\x8d\x01\n" +
-	"\aBind2fa\x12).api.backoffice.service.v1.Bind2faRequest\x1a*.api.backoffice.service.v1.Bind2faResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/accounts/2fa/bind\x12\x95\x01\n" +
-	"\tUnbind2fa\x12+.api.backoffice.service.v1.Unbind2faRequest\x1a,.api.backoffice.service.v1.Unbind2faResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/accounts/2fa/unbind\x12\x9d\x01\n" +
-	"\rUpdateAccount\x12/.api.backoffice.service.v1.UpdateAccountRequest\x1a0.api.backoffice.service.v1.UpdateAccountResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/accounts/update\x12\xb0\x01\n" +
-	"\x14GetOverviewDashboard\x126.api.backoffice.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/dashboard/get\x12\xc2\x01\n" +
-	"\x16GetTimeRangedDashboard\x128.api.backoffice.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/dashboard/time-ranged/get\x12\xca\x01\n" +
-	"\x18GetTopOperatorsDashboard\x12:.api.backoffice.service.v1.GetTopOperatorsDashboardRequest\x1a;.api.backoffice.service.v1.GetTopOperatorsDashboardResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/dashboard/top-operators/get\x12\x8d\x01\n" +
-	"\bListBets\x12*.api.backoffice.service.v1.ListBetsRequest\x1a+.api.backoffice.service.v1.ListBetsResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/backoffice/game/bets/list\x12\xb6\x01\n" +
-	"\x13GetUserBetsOverview\x125.api.backoffice.service.v1.GetUserBetsOverviewRequest\x1a6.api.backoffice.service.v1.GetUserBetsOverviewResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/game/bets/overview/get\x12\xcc\x01\n" +
-	"\x19GetGameTransactionsForBet\x12;.api.backoffice.service.v1.GetGameTransactionsForBetRequest\x1a<.api.backoffice.service.v1.GetGameTransactionsForBetResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/game/bets/transactions/get\x12\x99\x01\n" +
-	"\fListUserBets\x12..api.backoffice.service.v1.ListUserBetsRequest\x1a/.api.backoffice.service.v1.ListUserBetsResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/backoffice/game/bets/list\x12\x8b\x01\n" +
-	"\tListGames\x12+.api.backoffice.service.v1.ListGamesRequest\x1a,.api.backoffice.service.v1.ListGamesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/backoffice/game/list\x12\x8b\x01\n" +
-	"\tListUsers\x12+.api.backoffice.service.v1.ListUsersRequest\x1a,.api.backoffice.service.v1.ListUsersResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/backoffice/user/list\x12\xa5\x01\n" +
-	"\x0fGetUserOverview\x121.api.backoffice.service.v1.GetUserOverviewRequest\x1a2.api.backoffice.service.v1.GetUserOverviewResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/overview/get\x12\xa1\x01\n" +
-	"\x0eGetUserProfile\x120.api.backoffice.service.v1.GetUserProfileRequest\x1a1.api.backoffice.service.v1.GetUserProfileResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/user/profile/get\x12\xb3\x01\n" +
-	"\x12AddOperatorUserTag\x124.api.backoffice.service.v1.AddOperatorUserTagRequest\x1a5.api.backoffice.service.v1.AddOperatorUserTagResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/operator/user-tags/add\x12\xbf\x01\n" +
-	"\x15DeleteOperatorUserTag\x127.api.backoffice.service.v1.DeleteOperatorUserTagRequest\x1a8.api.backoffice.service.v1.DeleteOperatorUserTagResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/operator/user-tags/delete\x12\xb6\x01\n" +
-	"\x13GetOperatorUserTags\x125.api.backoffice.service.v1.GetOperatorUserTagsRequest\x1a6.api.backoffice.service.v1.GetOperatorUserTagsResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/operator/user-tags/get\x12\x92\x01\n" +
-	"\n" +
-	"AddUserTag\x12,.api.backoffice.service.v1.AddUserTagRequest\x1a-.api.backoffice.service.v1.AddUserTagResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/user/tags/add\x12\x9e\x01\n" +
-	"\rDeleteUserTag\x12/.api.backoffice.service.v1.DeleteUserTagRequest\x1a0.api.backoffice.service.v1.DeleteUserTagResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/user/tags/delete\x12\xa2\x01\n" +
-	"\x0eAddUserComment\x120.api.backoffice.service.v1.AddUserCommentRequest\x1a1.api.backoffice.service.v1.AddUserCommentResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/comments/add\x12\xc5\x01\n" +
-	"\x17ListPaymentTransactions\x129.api.backoffice.service.v1.ListPaymentTransactionsRequest\x1a:.api.backoffice.service.v1.ListPaymentTransactionsResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/payment/transactions/list\x12\x8f\x01\n" +
-	"\n" +
-	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a-.api.backoffice.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xd6\x01\n" +
-	"\x1bGetWalletCreditTransactions\x12=.api.backoffice.service.v1.GetWalletCreditTransactionsRequest\x1a>.api.backoffice.service.v1.GetWalletCreditTransactionsResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/credit-transactions/get\x12\x98\x01\n" +
-	"\fUpdateWallet\x12..api.backoffice.service.v1.UpdateWalletRequest\x1a/.api.backoffice.service.v1.UpdateWalletResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/wallet/update\x12\xd5\x01\n" +
-	"\x19ListWithdrawReviewTickets\x12;.api.backoffice.service.v1.ListWithdrawReviewTicketsRequest\x1a<.api.backoffice.service.v1.ListWithdrawReviewTicketsResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/v1/backoffice/review/withdraw-review-tickets/list\x12\x9f\x01\n" +
-	"\fReviewTicket\x12..api.backoffice.service.v1.ReviewTicketRequest\x1a/.api.backoffice.service.v1.ReviewTicketResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/review/ticket/review\x12\x97\x01\n" +
-	"\n" +
-	"GetSummary\x12,.api.backoffice.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/report/summary/get\x12\xb8\x01\n" +
-	"\x12ListDailySummaries\x124.api.backoffice.service.v1.ListDailySummariesRequest\x1a5.api.backoffice.service.v1.ListDailySummariesResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/report/daily-summaries/list\x12\xb9\x01\n" +
-	"\x12GetGameDataSummary\x124.api.backoffice.service.v1.GetGameDataSummaryRequest\x1a5.api.backoffice.service.v1.GetGameDataSummaryResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/report/game-data-summary/get\x12\xda\x01\n" +
-	"\x1aListGameDataDailySummaries\x12<.api.backoffice.service.v1.ListGameDataDailySummariesRequest\x1a=.api.backoffice.service.v1.ListGameDataDailySummariesResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/report/game-data-daily-summaries/list\x12\xd2\x01\n" +
-	"\x18GetPlayerGameDataSummary\x12:.api.backoffice.service.v1.GetPlayerGameDataSummaryRequest\x1a;.api.backoffice.service.v1.GetPlayerGameDataSummaryResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/v1/backoffice/report/player-game-data-summary/get\x12\xd5\x01\n" +
-	"\x19ListDepositDailySummaries\x12;.api.backoffice.service.v1.ListDepositDailySummariesRequest\x1a<.api.backoffice.service.v1.ListDepositDailySummariesResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/v1/backoffice/report/deposit-daily-summaries/list\x12\xcd\x01\n" +
-	"\x17ListDepositDailyDetails\x129.api.backoffice.service.v1.ListDepositDailyDetailsRequest\x1a:.api.backoffice.service.v1.ListDepositDailyDetailsResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/report/deposit-daily-details/list\x12\xd9\x01\n" +
-	"\x1aListWithdrawDailySummaries\x12<.api.backoffice.service.v1.ListWithdrawDailySummariesRequest\x1a=.api.backoffice.service.v1.ListWithdrawDailySummariesResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/report/withdraw-daily-summaries/list\x12\xd1\x01\n" +
-	"\x18ListWithdrawDailyDetails\x12:.api.backoffice.service.v1.ListWithdrawDailyDetailsRequest\x1a;.api.backoffice.service.v1.ListWithdrawDailyDetailsResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/report/withdraw-daily-details/listB[\n" +
+	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
+	"\rEventResponse2o\n" +
+	"\x0fBackofficeEvent\x12\\\n" +
+	"\x05Event\x12'.api.backoffice.service.v1.EventRequest\x1a(.api.backoffice.service.v1.EventResponse\"\x00B[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
+var (
+	file_backoffice_service_v1_backoffice_proto_rawDescOnce sync.Once
+	file_backoffice_service_v1_backoffice_proto_rawDescData []byte
+)
+
+func file_backoffice_service_v1_backoffice_proto_rawDescGZIP() []byte {
+	file_backoffice_service_v1_backoffice_proto_rawDescOnce.Do(func() {
+		file_backoffice_service_v1_backoffice_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_proto_rawDesc), len(file_backoffice_service_v1_backoffice_proto_rawDesc)))
+	})
+	return file_backoffice_service_v1_backoffice_proto_rawDescData
+}
+
+var file_backoffice_service_v1_backoffice_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_backoffice_service_v1_backoffice_proto_goTypes = []any{
-	(*AddAccountRequest)(nil),                   // 0: api.backoffice.service.v1.AddAccountRequest
-	(*SendEmailVerificationRequest)(nil),        // 1: api.backoffice.service.v1.SendEmailVerificationRequest
-	(*VerifyEmailRequest)(nil),                  // 2: api.backoffice.service.v1.VerifyEmailRequest
-	(*SendMobileVerificationRequest)(nil),       // 3: api.backoffice.service.v1.SendMobileVerificationRequest
-	(*VerifyMobileRequest)(nil),                 // 4: api.backoffice.service.v1.VerifyMobileRequest
-	(*ResetPasswordRequest)(nil),                // 5: api.backoffice.service.v1.ResetPasswordRequest
-	(*Generate2FaRequest)(nil),                  // 6: api.backoffice.service.v1.Generate2faRequest
-	(*Bind2FaRequest)(nil),                      // 7: api.backoffice.service.v1.Bind2faRequest
-	(*Unbind2FaRequest)(nil),                    // 8: api.backoffice.service.v1.Unbind2faRequest
-	(*UpdateAccountRequest)(nil),                // 9: api.backoffice.service.v1.UpdateAccountRequest
-	(*GetOverviewDashboardRequest)(nil),         // 10: api.backoffice.service.v1.GetOverviewDashboardRequest
-	(*GetTimeRangedDashboardRequest)(nil),       // 11: api.backoffice.service.v1.GetTimeRangedDashboardRequest
-	(*GetTopOperatorsDashboardRequest)(nil),     // 12: api.backoffice.service.v1.GetTopOperatorsDashboardRequest
-	(*ListBetsRequest)(nil),                     // 13: api.backoffice.service.v1.ListBetsRequest
-	(*GetUserBetsOverviewRequest)(nil),          // 14: api.backoffice.service.v1.GetUserBetsOverviewRequest
-	(*GetGameTransactionsForBetRequest)(nil),    // 15: api.backoffice.service.v1.GetGameTransactionsForBetRequest
-	(*ListUserBetsRequest)(nil),                 // 16: api.backoffice.service.v1.ListUserBetsRequest
-	(*ListGamesRequest)(nil),                    // 17: api.backoffice.service.v1.ListGamesRequest
-	(*ListUsersRequest)(nil),                    // 18: api.backoffice.service.v1.ListUsersRequest
-	(*GetUserOverviewRequest)(nil),              // 19: api.backoffice.service.v1.GetUserOverviewRequest
-	(*GetUserProfileRequest)(nil),               // 20: api.backoffice.service.v1.GetUserProfileRequest
-	(*AddOperatorUserTagRequest)(nil),           // 21: api.backoffice.service.v1.AddOperatorUserTagRequest
-	(*DeleteOperatorUserTagRequest)(nil),        // 22: api.backoffice.service.v1.DeleteOperatorUserTagRequest
-	(*GetOperatorUserTagsRequest)(nil),          // 23: api.backoffice.service.v1.GetOperatorUserTagsRequest
-	(*AddUserTagRequest)(nil),                   // 24: api.backoffice.service.v1.AddUserTagRequest
-	(*DeleteUserTagRequest)(nil),                // 25: api.backoffice.service.v1.DeleteUserTagRequest
-	(*AddUserCommentRequest)(nil),               // 26: api.backoffice.service.v1.AddUserCommentRequest
-	(*ListPaymentTransactionsRequest)(nil),      // 27: api.backoffice.service.v1.ListPaymentTransactionsRequest
-	(*GetWalletsRequest)(nil),                   // 28: api.backoffice.service.v1.GetWalletsRequest
-	(*GetWalletCreditTransactionsRequest)(nil),  // 29: api.backoffice.service.v1.GetWalletCreditTransactionsRequest
-	(*UpdateWalletRequest)(nil),                 // 30: api.backoffice.service.v1.UpdateWalletRequest
-	(*ListWithdrawReviewTicketsRequest)(nil),    // 31: api.backoffice.service.v1.ListWithdrawReviewTicketsRequest
-	(*ReviewTicketRequest)(nil),                 // 32: api.backoffice.service.v1.ReviewTicketRequest
-	(*GetSummaryRequest)(nil),                   // 33: api.backoffice.service.v1.GetSummaryRequest
-	(*ListDailySummariesRequest)(nil),           // 34: api.backoffice.service.v1.ListDailySummariesRequest
-	(*GetGameDataSummaryRequest)(nil),           // 35: api.backoffice.service.v1.GetGameDataSummaryRequest
-	(*ListGameDataDailySummariesRequest)(nil),   // 36: api.backoffice.service.v1.ListGameDataDailySummariesRequest
-	(*GetPlayerGameDataSummaryRequest)(nil),     // 37: api.backoffice.service.v1.GetPlayerGameDataSummaryRequest
-	(*ListDepositDailySummariesRequest)(nil),    // 38: api.backoffice.service.v1.ListDepositDailySummariesRequest
-	(*ListDepositDailyDetailsRequest)(nil),      // 39: api.backoffice.service.v1.ListDepositDailyDetailsRequest
-	(*ListWithdrawDailySummariesRequest)(nil),   // 40: api.backoffice.service.v1.ListWithdrawDailySummariesRequest
-	(*ListWithdrawDailyDetailsRequest)(nil),     // 41: api.backoffice.service.v1.ListWithdrawDailyDetailsRequest
-	(*AddAccountResponse)(nil),                  // 42: api.backoffice.service.v1.AddAccountResponse
-	(*SendEmailVerificationResponse)(nil),       // 43: api.backoffice.service.v1.SendEmailVerificationResponse
-	(*VerifyEmailResponse)(nil),                 // 44: api.backoffice.service.v1.VerifyEmailResponse
-	(*SendMobileVerificationResponse)(nil),      // 45: api.backoffice.service.v1.SendMobileVerificationResponse
-	(*VerifyMobileResponse)(nil),                // 46: api.backoffice.service.v1.VerifyMobileResponse
-	(*ResetPasswordResponse)(nil),               // 47: api.backoffice.service.v1.ResetPasswordResponse
-	(*Generate2FaResponse)(nil),                 // 48: api.backoffice.service.v1.Generate2faResponse
-	(*Bind2FaResponse)(nil),                     // 49: api.backoffice.service.v1.Bind2faResponse
-	(*Unbind2FaResponse)(nil),                   // 50: api.backoffice.service.v1.Unbind2faResponse
-	(*UpdateAccountResponse)(nil),               // 51: api.backoffice.service.v1.UpdateAccountResponse
-	(*GetOverviewDashboardResponse)(nil),        // 52: api.backoffice.service.v1.GetOverviewDashboardResponse
-	(*GetTimeRangedDashboardResponse)(nil),      // 53: api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	(*GetTopOperatorsDashboardResponse)(nil),    // 54: api.backoffice.service.v1.GetTopOperatorsDashboardResponse
-	(*ListBetsResponse)(nil),                    // 55: api.backoffice.service.v1.ListBetsResponse
-	(*GetUserBetsOverviewResponse)(nil),         // 56: api.backoffice.service.v1.GetUserBetsOverviewResponse
-	(*GetGameTransactionsForBetResponse)(nil),   // 57: api.backoffice.service.v1.GetGameTransactionsForBetResponse
-	(*ListUserBetsResponse)(nil),                // 58: api.backoffice.service.v1.ListUserBetsResponse
-	(*ListGamesResponse)(nil),                   // 59: api.backoffice.service.v1.ListGamesResponse
-	(*ListUsersResponse)(nil),                   // 60: api.backoffice.service.v1.ListUsersResponse
-	(*GetUserOverviewResponse)(nil),             // 61: api.backoffice.service.v1.GetUserOverviewResponse
-	(*GetUserProfileResponse)(nil),              // 62: api.backoffice.service.v1.GetUserProfileResponse
-	(*AddOperatorUserTagResponse)(nil),          // 63: api.backoffice.service.v1.AddOperatorUserTagResponse
-	(*DeleteOperatorUserTagResponse)(nil),       // 64: api.backoffice.service.v1.DeleteOperatorUserTagResponse
-	(*GetOperatorUserTagsResponse)(nil),         // 65: api.backoffice.service.v1.GetOperatorUserTagsResponse
-	(*AddUserTagResponse)(nil),                  // 66: api.backoffice.service.v1.AddUserTagResponse
-	(*DeleteUserTagResponse)(nil),               // 67: api.backoffice.service.v1.DeleteUserTagResponse
-	(*AddUserCommentResponse)(nil),              // 68: api.backoffice.service.v1.AddUserCommentResponse
-	(*ListPaymentTransactionsResponse)(nil),     // 69: api.backoffice.service.v1.ListPaymentTransactionsResponse
-	(*GetWalletsResponse)(nil),                  // 70: api.backoffice.service.v1.GetWalletsResponse
-	(*GetWalletCreditTransactionsResponse)(nil), // 71: api.backoffice.service.v1.GetWalletCreditTransactionsResponse
-	(*UpdateWalletResponse)(nil),                // 72: api.backoffice.service.v1.UpdateWalletResponse
-	(*ListWithdrawReviewTicketsResponse)(nil),   // 73: api.backoffice.service.v1.ListWithdrawReviewTicketsResponse
-	(*ReviewTicketResponse)(nil),                // 74: api.backoffice.service.v1.ReviewTicketResponse
-	(*GetSummaryResponse)(nil),                  // 75: api.backoffice.service.v1.GetSummaryResponse
-	(*ListDailySummariesResponse)(nil),          // 76: api.backoffice.service.v1.ListDailySummariesResponse
-	(*GetGameDataSummaryResponse)(nil),          // 77: api.backoffice.service.v1.GetGameDataSummaryResponse
-	(*ListGameDataDailySummariesResponse)(nil),  // 78: api.backoffice.service.v1.ListGameDataDailySummariesResponse
-	(*GetPlayerGameDataSummaryResponse)(nil),    // 79: api.backoffice.service.v1.GetPlayerGameDataSummaryResponse
-	(*ListDepositDailySummariesResponse)(nil),   // 80: api.backoffice.service.v1.ListDepositDailySummariesResponse
-	(*ListDepositDailyDetailsResponse)(nil),     // 81: api.backoffice.service.v1.ListDepositDailyDetailsResponse
-	(*ListWithdrawDailySummariesResponse)(nil),  // 82: api.backoffice.service.v1.ListWithdrawDailySummariesResponse
-	(*ListWithdrawDailyDetailsResponse)(nil),    // 83: api.backoffice.service.v1.ListWithdrawDailyDetailsResponse
+	(*EventRequest)(nil),  // 0: api.backoffice.service.v1.EventRequest
+	(*EventResponse)(nil), // 1: api.backoffice.service.v1.EventResponse
 }
 var file_backoffice_service_v1_backoffice_proto_depIdxs = []int32{
-	0,  // 0: api.backoffice.service.v1.Backoffice.AddAccount:input_type -> api.backoffice.service.v1.AddAccountRequest
-	1,  // 1: api.backoffice.service.v1.Backoffice.SendEmailVerification:input_type -> api.backoffice.service.v1.SendEmailVerificationRequest
-	2,  // 2: api.backoffice.service.v1.Backoffice.VerifyEmail:input_type -> api.backoffice.service.v1.VerifyEmailRequest
-	3,  // 3: api.backoffice.service.v1.Backoffice.SendMobileVerification:input_type -> api.backoffice.service.v1.SendMobileVerificationRequest
-	4,  // 4: api.backoffice.service.v1.Backoffice.VerifyMobile:input_type -> api.backoffice.service.v1.VerifyMobileRequest
-	5,  // 5: api.backoffice.service.v1.Backoffice.ResetPassword:input_type -> api.backoffice.service.v1.ResetPasswordRequest
-	6,  // 6: api.backoffice.service.v1.Backoffice.Generate2fa:input_type -> api.backoffice.service.v1.Generate2faRequest
-	7,  // 7: api.backoffice.service.v1.Backoffice.Bind2fa:input_type -> api.backoffice.service.v1.Bind2faRequest
-	8,  // 8: api.backoffice.service.v1.Backoffice.Unbind2fa:input_type -> api.backoffice.service.v1.Unbind2faRequest
-	9,  // 9: api.backoffice.service.v1.Backoffice.UpdateAccount:input_type -> api.backoffice.service.v1.UpdateAccountRequest
-	10, // 10: api.backoffice.service.v1.Backoffice.GetOverviewDashboard:input_type -> api.backoffice.service.v1.GetOverviewDashboardRequest
-	11, // 11: api.backoffice.service.v1.Backoffice.GetTimeRangedDashboard:input_type -> api.backoffice.service.v1.GetTimeRangedDashboardRequest
-	12, // 12: api.backoffice.service.v1.Backoffice.GetTopOperatorsDashboard:input_type -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest
-	13, // 13: api.backoffice.service.v1.Backoffice.ListBets:input_type -> api.backoffice.service.v1.ListBetsRequest
-	14, // 14: api.backoffice.service.v1.Backoffice.GetUserBetsOverview:input_type -> api.backoffice.service.v1.GetUserBetsOverviewRequest
-	15, // 15: api.backoffice.service.v1.Backoffice.GetGameTransactionsForBet:input_type -> api.backoffice.service.v1.GetGameTransactionsForBetRequest
-	16, // 16: api.backoffice.service.v1.Backoffice.ListUserBets:input_type -> api.backoffice.service.v1.ListUserBetsRequest
-	17, // 17: api.backoffice.service.v1.Backoffice.ListGames:input_type -> api.backoffice.service.v1.ListGamesRequest
-	18, // 18: api.backoffice.service.v1.Backoffice.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
-	19, // 19: api.backoffice.service.v1.Backoffice.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
-	20, // 20: api.backoffice.service.v1.Backoffice.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
-	21, // 21: api.backoffice.service.v1.Backoffice.AddOperatorUserTag:input_type -> api.backoffice.service.v1.AddOperatorUserTagRequest
-	22, // 22: api.backoffice.service.v1.Backoffice.DeleteOperatorUserTag:input_type -> api.backoffice.service.v1.DeleteOperatorUserTagRequest
-	23, // 23: api.backoffice.service.v1.Backoffice.GetOperatorUserTags:input_type -> api.backoffice.service.v1.GetOperatorUserTagsRequest
-	24, // 24: api.backoffice.service.v1.Backoffice.AddUserTag:input_type -> api.backoffice.service.v1.AddUserTagRequest
-	25, // 25: api.backoffice.service.v1.Backoffice.DeleteUserTag:input_type -> api.backoffice.service.v1.DeleteUserTagRequest
-	26, // 26: api.backoffice.service.v1.Backoffice.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
-	27, // 27: api.backoffice.service.v1.Backoffice.ListPaymentTransactions:input_type -> api.backoffice.service.v1.ListPaymentTransactionsRequest
-	28, // 28: api.backoffice.service.v1.Backoffice.GetWallets:input_type -> api.backoffice.service.v1.GetWalletsRequest
-	29, // 29: api.backoffice.service.v1.Backoffice.GetWalletCreditTransactions:input_type -> api.backoffice.service.v1.GetWalletCreditTransactionsRequest
-	30, // 30: api.backoffice.service.v1.Backoffice.UpdateWallet:input_type -> api.backoffice.service.v1.UpdateWalletRequest
-	31, // 31: api.backoffice.service.v1.Backoffice.ListWithdrawReviewTickets:input_type -> api.backoffice.service.v1.ListWithdrawReviewTicketsRequest
-	32, // 32: api.backoffice.service.v1.Backoffice.ReviewTicket:input_type -> api.backoffice.service.v1.ReviewTicketRequest
-	33, // 33: api.backoffice.service.v1.Backoffice.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
-	34, // 34: api.backoffice.service.v1.Backoffice.ListDailySummaries:input_type -> api.backoffice.service.v1.ListDailySummariesRequest
-	35, // 35: api.backoffice.service.v1.Backoffice.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameDataSummaryRequest
-	36, // 36: api.backoffice.service.v1.Backoffice.ListGameDataDailySummaries:input_type -> api.backoffice.service.v1.ListGameDataDailySummariesRequest
-	37, // 37: api.backoffice.service.v1.Backoffice.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameDataSummaryRequest
-	38, // 38: api.backoffice.service.v1.Backoffice.ListDepositDailySummaries:input_type -> api.backoffice.service.v1.ListDepositDailySummariesRequest
-	39, // 39: api.backoffice.service.v1.Backoffice.ListDepositDailyDetails:input_type -> api.backoffice.service.v1.ListDepositDailyDetailsRequest
-	40, // 40: api.backoffice.service.v1.Backoffice.ListWithdrawDailySummaries:input_type -> api.backoffice.service.v1.ListWithdrawDailySummariesRequest
-	41, // 41: api.backoffice.service.v1.Backoffice.ListWithdrawDailyDetails:input_type -> api.backoffice.service.v1.ListWithdrawDailyDetailsRequest
-	42, // 42: api.backoffice.service.v1.Backoffice.AddAccount:output_type -> api.backoffice.service.v1.AddAccountResponse
-	43, // 43: api.backoffice.service.v1.Backoffice.SendEmailVerification:output_type -> api.backoffice.service.v1.SendEmailVerificationResponse
-	44, // 44: api.backoffice.service.v1.Backoffice.VerifyEmail:output_type -> api.backoffice.service.v1.VerifyEmailResponse
-	45, // 45: api.backoffice.service.v1.Backoffice.SendMobileVerification:output_type -> api.backoffice.service.v1.SendMobileVerificationResponse
-	46, // 46: api.backoffice.service.v1.Backoffice.VerifyMobile:output_type -> api.backoffice.service.v1.VerifyMobileResponse
-	47, // 47: api.backoffice.service.v1.Backoffice.ResetPassword:output_type -> api.backoffice.service.v1.ResetPasswordResponse
-	48, // 48: api.backoffice.service.v1.Backoffice.Generate2fa:output_type -> api.backoffice.service.v1.Generate2faResponse
-	49, // 49: api.backoffice.service.v1.Backoffice.Bind2fa:output_type -> api.backoffice.service.v1.Bind2faResponse
-	50, // 50: api.backoffice.service.v1.Backoffice.Unbind2fa:output_type -> api.backoffice.service.v1.Unbind2faResponse
-	51, // 51: api.backoffice.service.v1.Backoffice.UpdateAccount:output_type -> api.backoffice.service.v1.UpdateAccountResponse
-	52, // 52: api.backoffice.service.v1.Backoffice.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
-	53, // 53: api.backoffice.service.v1.Backoffice.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	54, // 54: api.backoffice.service.v1.Backoffice.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
-	55, // 55: api.backoffice.service.v1.Backoffice.ListBets:output_type -> api.backoffice.service.v1.ListBetsResponse
-	56, // 56: api.backoffice.service.v1.Backoffice.GetUserBetsOverview:output_type -> api.backoffice.service.v1.GetUserBetsOverviewResponse
-	57, // 57: api.backoffice.service.v1.Backoffice.GetGameTransactionsForBet:output_type -> api.backoffice.service.v1.GetGameTransactionsForBetResponse
-	58, // 58: api.backoffice.service.v1.Backoffice.ListUserBets:output_type -> api.backoffice.service.v1.ListUserBetsResponse
-	59, // 59: api.backoffice.service.v1.Backoffice.ListGames:output_type -> api.backoffice.service.v1.ListGamesResponse
-	60, // 60: api.backoffice.service.v1.Backoffice.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
-	61, // 61: api.backoffice.service.v1.Backoffice.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
-	62, // 62: api.backoffice.service.v1.Backoffice.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
-	63, // 63: api.backoffice.service.v1.Backoffice.AddOperatorUserTag:output_type -> api.backoffice.service.v1.AddOperatorUserTagResponse
-	64, // 64: api.backoffice.service.v1.Backoffice.DeleteOperatorUserTag:output_type -> api.backoffice.service.v1.DeleteOperatorUserTagResponse
-	65, // 65: api.backoffice.service.v1.Backoffice.GetOperatorUserTags:output_type -> api.backoffice.service.v1.GetOperatorUserTagsResponse
-	66, // 66: api.backoffice.service.v1.Backoffice.AddUserTag:output_type -> api.backoffice.service.v1.AddUserTagResponse
-	67, // 67: api.backoffice.service.v1.Backoffice.DeleteUserTag:output_type -> api.backoffice.service.v1.DeleteUserTagResponse
-	68, // 68: api.backoffice.service.v1.Backoffice.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
-	69, // 69: api.backoffice.service.v1.Backoffice.ListPaymentTransactions:output_type -> api.backoffice.service.v1.ListPaymentTransactionsResponse
-	70, // 70: api.backoffice.service.v1.Backoffice.GetWallets:output_type -> api.backoffice.service.v1.GetWalletsResponse
-	71, // 71: api.backoffice.service.v1.Backoffice.GetWalletCreditTransactions:output_type -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse
-	72, // 72: api.backoffice.service.v1.Backoffice.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
-	73, // 73: api.backoffice.service.v1.Backoffice.ListWithdrawReviewTickets:output_type -> api.backoffice.service.v1.ListWithdrawReviewTicketsResponse
-	74, // 74: api.backoffice.service.v1.Backoffice.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
-	75, // 75: api.backoffice.service.v1.Backoffice.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	76, // 76: api.backoffice.service.v1.Backoffice.ListDailySummaries:output_type -> api.backoffice.service.v1.ListDailySummariesResponse
-	77, // 77: api.backoffice.service.v1.Backoffice.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameDataSummaryResponse
-	78, // 78: api.backoffice.service.v1.Backoffice.ListGameDataDailySummaries:output_type -> api.backoffice.service.v1.ListGameDataDailySummariesResponse
-	79, // 79: api.backoffice.service.v1.Backoffice.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameDataSummaryResponse
-	80, // 80: api.backoffice.service.v1.Backoffice.ListDepositDailySummaries:output_type -> api.backoffice.service.v1.ListDepositDailySummariesResponse
-	81, // 81: api.backoffice.service.v1.Backoffice.ListDepositDailyDetails:output_type -> api.backoffice.service.v1.ListDepositDailyDetailsResponse
-	82, // 82: api.backoffice.service.v1.Backoffice.ListWithdrawDailySummaries:output_type -> api.backoffice.service.v1.ListWithdrawDailySummariesResponse
-	83, // 83: api.backoffice.service.v1.Backoffice.ListWithdrawDailyDetails:output_type -> api.backoffice.service.v1.ListWithdrawDailyDetailsResponse
-	42, // [42:84] is the sub-list for method output_type
-	0,  // [0:42] is the sub-list for method input_type
-	0,  // [0:0] is the sub-list for extension type_name
-	0,  // [0:0] is the sub-list for extension extendee
-	0,  // [0:0] is the sub-list for field type_name
+	0, // 0: api.backoffice.service.v1.BackofficeEvent.Event:input_type -> api.backoffice.service.v1.EventRequest
+	1, // 1: api.backoffice.service.v1.BackofficeEvent.Event:output_type -> api.backoffice.service.v1.EventResponse
+	1, // [1:2] is the sub-list for method output_type
+	0, // [0:1] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for extension type_name
+	0, // [0:0] is the sub-list for extension extendee
+	0, // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_proto_init() }
@@ -259,26 +155,19 @@ func file_backoffice_service_v1_backoffice_proto_init() {
 	if File_backoffice_service_v1_backoffice_proto != nil {
 		return
 	}
-	file_backoffice_service_v1_backoffice_dashboard_proto_init()
-	file_backoffice_service_v1_backoffice_account_proto_init()
-	file_backoffice_service_v1_backoffice_game_proto_init()
-	file_backoffice_service_v1_backoffice_user_proto_init()
-	file_backoffice_service_v1_backoffice_payment_proto_init()
-	file_backoffice_service_v1_backoffice_wallet_proto_init()
-	file_backoffice_service_v1_backoffice_review_proto_init()
-	file_backoffice_service_v1_backoffice_report_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_proto_rawDesc), len(file_backoffice_service_v1_backoffice_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   0,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_backoffice_service_v1_backoffice_proto_goTypes,
 		DependencyIndexes: file_backoffice_service_v1_backoffice_proto_depIdxs,
+		MessageInfos:      file_backoffice_service_v1_backoffice_proto_msgTypes,
 	}.Build()
 	File_backoffice_service_v1_backoffice_proto = out.File
 	file_backoffice_service_v1_backoffice_proto_goTypes = nil

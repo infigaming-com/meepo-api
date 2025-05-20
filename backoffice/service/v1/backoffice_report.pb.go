@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -3558,7 +3559,7 @@ var File_backoffice_service_v1_backoffice_report_proto protoreflect.FileDescript
 
 const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\n" +
-	"-backoffice/service/v1/backoffice_report.proto\x12\x19api.backoffice.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x82\x05\n" +
+	"-backoffice/service/v1/backoffice_report.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x82\x05\n" +
 	"\x11GetSummaryRequest\x12U\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\x0e26.api.backoffice.service.v1.GetSummaryRequest.TimeRangeR\ttimeRange\x122\n" +
@@ -3980,7 +3981,18 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"3average_ftw_amount_for_non_same_day_registred_users\x18\x0f \x01(\x03R+averageFtwAmountForNonSameDayRegistredUsers\x12-\n" +
 	"\x12success_percentage\x18\x10 \x01(\x05R\x11successPercentage\x12A\n" +
 	"\x1ddeposit_minus_withdraw_amount\x18\x11 \x01(\x03R\x1adepositMinusWithdrawAmount\x12@\n" +
-	"\x1camount_proportion_percentage\x18\x12 \x01(\x05R\x1aamountProportionPercentageB[\n" +
+	"\x1camount_proportion_percentage\x18\x12 \x01(\x05R\x1aamountProportionPercentage2\xad\x0e\n" +
+	"\x10BackofficeReport\x12\x97\x01\n" +
+	"\n" +
+	"GetSummary\x12,.api.backoffice.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/report/summary/get\x12\xb8\x01\n" +
+	"\x12ListDailySummaries\x124.api.backoffice.service.v1.ListDailySummariesRequest\x1a5.api.backoffice.service.v1.ListDailySummariesResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/report/daily-summaries/list\x12\xb9\x01\n" +
+	"\x12GetGameDataSummary\x124.api.backoffice.service.v1.GetGameDataSummaryRequest\x1a5.api.backoffice.service.v1.GetGameDataSummaryResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/report/game-data-summary/get\x12\xda\x01\n" +
+	"\x1aListGameDataDailySummaries\x12<.api.backoffice.service.v1.ListGameDataDailySummariesRequest\x1a=.api.backoffice.service.v1.ListGameDataDailySummariesResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/report/game-data-daily-summaries/list\x12\xd2\x01\n" +
+	"\x18GetPlayerGameDataSummary\x12:.api.backoffice.service.v1.GetPlayerGameDataSummaryRequest\x1a;.api.backoffice.service.v1.GetPlayerGameDataSummaryResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/v1/backoffice/report/player-game-data-summary/get\x12\xd5\x01\n" +
+	"\x19ListDepositDailySummaries\x12;.api.backoffice.service.v1.ListDepositDailySummariesRequest\x1a<.api.backoffice.service.v1.ListDepositDailySummariesResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/v1/backoffice/report/deposit-daily-summaries/list\x12\xcd\x01\n" +
+	"\x17ListDepositDailyDetails\x129.api.backoffice.service.v1.ListDepositDailyDetailsRequest\x1a:.api.backoffice.service.v1.ListDepositDailyDetailsResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/report/deposit-daily-details/list\x12\xd9\x01\n" +
+	"\x1aListWithdrawDailySummaries\x12<.api.backoffice.service.v1.ListWithdrawDailySummariesRequest\x1a=.api.backoffice.service.v1.ListWithdrawDailySummariesResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/report/withdraw-daily-summaries/list\x12\xd1\x01\n" +
+	"\x18ListWithdrawDailyDetails\x12:.api.backoffice.service.v1.ListWithdrawDailyDetailsRequest\x1a;.api.backoffice.service.v1.ListWithdrawDailyDetailsResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/report/withdraw-daily-details/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -4082,8 +4094,26 @@ var file_backoffice_service_v1_backoffice_report_proto_depIdxs = []int32{
 	37, // 41: api.backoffice.service.v1.ListDepositDailyDetailsResponse.DailyDetail.date:type_name -> google.protobuf.Timestamp
 	37, // 42: api.backoffice.service.v1.ListWithdrawDailySummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
 	37, // 43: api.backoffice.service.v1.ListWithdrawDailyDetailsResponse.DailyDetail.date:type_name -> google.protobuf.Timestamp
-	44, // [44:44] is the sub-list for method output_type
-	44, // [44:44] is the sub-list for method input_type
+	10, // 44: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
+	12, // 45: api.backoffice.service.v1.BackofficeReport.ListDailySummaries:input_type -> api.backoffice.service.v1.ListDailySummariesRequest
+	14, // 46: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameDataSummaryRequest
+	16, // 47: api.backoffice.service.v1.BackofficeReport.ListGameDataDailySummaries:input_type -> api.backoffice.service.v1.ListGameDataDailySummariesRequest
+	18, // 48: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameDataSummaryRequest
+	22, // 49: api.backoffice.service.v1.BackofficeReport.ListDepositDailySummaries:input_type -> api.backoffice.service.v1.ListDepositDailySummariesRequest
+	24, // 50: api.backoffice.service.v1.BackofficeReport.ListDepositDailyDetails:input_type -> api.backoffice.service.v1.ListDepositDailyDetailsRequest
+	26, // 51: api.backoffice.service.v1.BackofficeReport.ListWithdrawDailySummaries:input_type -> api.backoffice.service.v1.ListWithdrawDailySummariesRequest
+	28, // 52: api.backoffice.service.v1.BackofficeReport.ListWithdrawDailyDetails:input_type -> api.backoffice.service.v1.ListWithdrawDailyDetailsRequest
+	11, // 53: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	13, // 54: api.backoffice.service.v1.BackofficeReport.ListDailySummaries:output_type -> api.backoffice.service.v1.ListDailySummariesResponse
+	15, // 55: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameDataSummaryResponse
+	17, // 56: api.backoffice.service.v1.BackofficeReport.ListGameDataDailySummaries:output_type -> api.backoffice.service.v1.ListGameDataDailySummariesResponse
+	19, // 57: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameDataSummaryResponse
+	23, // 58: api.backoffice.service.v1.BackofficeReport.ListDepositDailySummaries:output_type -> api.backoffice.service.v1.ListDepositDailySummariesResponse
+	25, // 59: api.backoffice.service.v1.BackofficeReport.ListDepositDailyDetails:output_type -> api.backoffice.service.v1.ListDepositDailyDetailsResponse
+	27, // 60: api.backoffice.service.v1.BackofficeReport.ListWithdrawDailySummaries:output_type -> api.backoffice.service.v1.ListWithdrawDailySummariesResponse
+	29, // 61: api.backoffice.service.v1.BackofficeReport.ListWithdrawDailyDetails:output_type -> api.backoffice.service.v1.ListWithdrawDailyDetailsResponse
+	53, // [53:62] is the sub-list for method output_type
+	44, // [44:53] is the sub-list for method input_type
 	44, // [44:44] is the sub-list for extension type_name
 	44, // [44:44] is the sub-list for extension extendee
 	0,  // [0:44] is the sub-list for field type_name
@@ -4112,7 +4142,7 @@ func file_backoffice_service_v1_backoffice_report_proto_init() {
 			NumEnums:      10,
 			NumMessages:   27,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_backoffice_service_v1_backoffice_report_proto_goTypes,
 		DependencyIndexes: file_backoffice_service_v1_backoffice_report_proto_depIdxs,

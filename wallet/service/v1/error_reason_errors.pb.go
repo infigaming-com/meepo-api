@@ -394,3 +394,75 @@ func IsGetCurrenciesFailed(err error) bool {
 func ErrorGetCurrenciesFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_CURRENCIES_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetBalanceTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_BALANCE_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetBalanceTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_BALANCE_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateBalanceTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_BALANCE_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateBalanceTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_BALANCE_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateCreditTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_CREDIT_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateCreditTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_CREDIT_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCreditsByIdsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_CREDITS_BY_IDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCreditsByIdsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_CREDITS_BY_IDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCreditByIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_CREDIT_BY_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCreditByIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_CREDIT_BY_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetExchangeRateFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_EXCHANGE_RATE_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetExchangeRateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_EXCHANGE_RATE_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -23,16 +23,17 @@ const (
 )
 
 type Currency struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled       bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Hidden        bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
-	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Symbol        string                 `protobuf:"bytes,5,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	Icon          string                 `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
-	DecimalPlaces int32                  `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Currency              string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Enabled               bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Hidden                bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
+	Type                  string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	Symbol                string                 `protobuf:"bytes,5,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	Icon                  string                 `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
+	DecimalPlaces         int32                  `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
+	CurrencyDecimalPlaces int32                  `protobuf:"varint,8,opt,name=currency_decimal_places,json=currencyDecimalPlaces,proto3" json:"currency_decimal_places,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *Currency) Reset() {
@@ -114,17 +115,25 @@ func (x *Currency) GetDecimalPlaces() int32 {
 	return 0
 }
 
+func (x *Currency) GetCurrencyDecimalPlaces() int32 {
+	if x != nil {
+		return x.CurrencyDecimalPlaces
+	}
+	return 0
+}
+
 type AddCurrencyRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled       bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Hidden        bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
-	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Symbol        string                 `protobuf:"bytes,5,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	Icon          string                 `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
-	DecimalPlaces int32                  `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Currency              string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Enabled               bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Hidden                bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
+	Type                  string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	Symbol                string                 `protobuf:"bytes,5,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	Icon                  string                 `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
+	DecimalPlaces         int32                  `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
+	CurrencyDecimalPlaces int32                  `protobuf:"varint,8,opt,name=currency_decimal_places,json=currencyDecimalPlaces,proto3" json:"currency_decimal_places,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *AddCurrencyRequest) Reset() {
@@ -206,6 +215,13 @@ func (x *AddCurrencyRequest) GetDecimalPlaces() int32 {
 	return 0
 }
 
+func (x *AddCurrencyRequest) GetCurrencyDecimalPlaces() int32 {
+	if x != nil {
+		return x.CurrencyDecimalPlaces
+	}
+	return 0
+}
+
 type AddCurrencyResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -243,16 +259,17 @@ func (*AddCurrencyResponse) Descriptor() ([]byte, []int) {
 }
 
 type UpdateCurrencyRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled       *bool                  `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Hidden        *bool                  `protobuf:"varint,3,opt,name=hidden,proto3,oneof" json:"hidden,omitempty"`
-	Type          *string                `protobuf:"bytes,4,opt,name=type,proto3,oneof" json:"type,omitempty"`
-	Symbol        *string                `protobuf:"bytes,5,opt,name=symbol,proto3,oneof" json:"symbol,omitempty"`
-	Icon          *string                `protobuf:"bytes,6,opt,name=icon,proto3,oneof" json:"icon,omitempty"`
-	DecimalPlaces *int32                 `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3,oneof" json:"decimal_places,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Currency              string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Enabled               *bool                  `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Hidden                *bool                  `protobuf:"varint,3,opt,name=hidden,proto3,oneof" json:"hidden,omitempty"`
+	Type                  *string                `protobuf:"bytes,4,opt,name=type,proto3,oneof" json:"type,omitempty"`
+	Symbol                *string                `protobuf:"bytes,5,opt,name=symbol,proto3,oneof" json:"symbol,omitempty"`
+	Icon                  *string                `protobuf:"bytes,6,opt,name=icon,proto3,oneof" json:"icon,omitempty"`
+	DecimalPlaces         *int32                 `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3,oneof" json:"decimal_places,omitempty"`
+	CurrencyDecimalPlaces *int32                 `protobuf:"varint,8,opt,name=currency_decimal_places,json=currencyDecimalPlaces,proto3,oneof" json:"currency_decimal_places,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *UpdateCurrencyRequest) Reset() {
@@ -330,6 +347,13 @@ func (x *UpdateCurrencyRequest) GetIcon() string {
 func (x *UpdateCurrencyRequest) GetDecimalPlaces() int32 {
 	if x != nil && x.DecimalPlaces != nil {
 		return *x.DecimalPlaces
+	}
+	return 0
+}
+
+func (x *UpdateCurrencyRequest) GetCurrencyDecimalPlaces() int32 {
+	if x != nil && x.CurrencyDecimalPlaces != nil {
+		return *x.CurrencyDecimalPlaces
 	}
 	return 0
 }
@@ -472,7 +496,7 @@ var File_system_service_v1_system_proto protoreflect.FileDescriptor
 
 const file_system_service_v1_system_proto_rawDesc = "" +
 	"\n" +
-	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xbf\x01\n" +
+	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xf7\x01\n" +
 	"\bCurrency\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
@@ -480,7 +504,8 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12\x16\n" +
 	"\x06symbol\x18\x05 \x01(\tR\x06symbol\x12\x12\n" +
 	"\x04icon\x18\x06 \x01(\tR\x04icon\x12%\n" +
-	"\x0edecimal_places\x18\a \x01(\x05R\rdecimalPlaces\"\xc9\x01\n" +
+	"\x0edecimal_places\x18\a \x01(\x05R\rdecimalPlaces\x126\n" +
+	"\x17currency_decimal_places\x18\b \x01(\x05R\x15currencyDecimalPlaces\"\x81\x02\n" +
 	"\x12AddCurrencyRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
@@ -488,8 +513,9 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12\x16\n" +
 	"\x06symbol\x18\x05 \x01(\tR\x06symbol\x12\x12\n" +
 	"\x04icon\x18\x06 \x01(\tR\x04icon\x12%\n" +
-	"\x0edecimal_places\x18\a \x01(\x05R\rdecimalPlaces\"\x15\n" +
-	"\x13AddCurrencyResponse\"\xb1\x02\n" +
+	"\x0edecimal_places\x18\a \x01(\x05R\rdecimalPlaces\x126\n" +
+	"\x17currency_decimal_places\x18\b \x01(\x05R\x15currencyDecimalPlaces\"\x15\n" +
+	"\x13AddCurrencyResponse\"\x8a\x03\n" +
 	"\x15UpdateCurrencyRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01\x12\x1b\n" +
@@ -497,14 +523,16 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\tH\x02R\x04type\x88\x01\x01\x12\x1b\n" +
 	"\x06symbol\x18\x05 \x01(\tH\x03R\x06symbol\x88\x01\x01\x12\x17\n" +
 	"\x04icon\x18\x06 \x01(\tH\x04R\x04icon\x88\x01\x01\x12*\n" +
-	"\x0edecimal_places\x18\a \x01(\x05H\x05R\rdecimalPlaces\x88\x01\x01B\n" +
+	"\x0edecimal_places\x18\a \x01(\x05H\x05R\rdecimalPlaces\x88\x01\x01\x12;\n" +
+	"\x17currency_decimal_places\x18\b \x01(\x05H\x06R\x15currencyDecimalPlaces\x88\x01\x01B\n" +
 	"\n" +
 	"\b_enabledB\t\n" +
 	"\a_hiddenB\a\n" +
 	"\x05_typeB\t\n" +
 	"\a_symbolB\a\n" +
 	"\x05_iconB\x11\n" +
-	"\x0f_decimal_places\"Q\n" +
+	"\x0f_decimal_placesB\x1a\n" +
+	"\x18_currency_decimal_places\"Q\n" +
 	"\x16UpdateCurrencyResponse\x127\n" +
 	"\bcurrency\x18\x01 \x01(\v2\x1b.system.service.v1.CurrencyR\bcurrency\"6\n" +
 	"\x14GetCurrenciesRequest\x12\x1e\n" +

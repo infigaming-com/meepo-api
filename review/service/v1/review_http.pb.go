@@ -19,27 +19,15 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationReviewAddReviewComment = "/api.review.service.v1.Review/AddReviewComment"
-const OperationReviewApproveReview = "/api.review.service.v1.Review/ApproveReview"
 const OperationReviewCreateWithdraw = "/api.review.service.v1.Review/CreateWithdraw"
-const OperationReviewGetReview = "/api.review.service.v1.Review/GetReview"
-const OperationReviewListReviews = "/api.review.service.v1.Review/ListReviews"
 
 type ReviewHTTPServer interface {
-	AddReviewComment(context.Context, *AddReviewCommentRequest) (*AddReviewCommentResponse, error)
-	ApproveReview(context.Context, *ApproveReviewRequest) (*ApproveReviewResponse, error)
 	CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
-	GetReview(context.Context, *GetReviewRequest) (*GetReviewResponse, error)
-	ListReviews(context.Context, *ListReviewsRequest) (*ListReviewsResponse, error)
 }
 
 func RegisterReviewHTTPServer(s *http.Server, srv ReviewHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/review/withdraw", _Review_CreateWithdraw0_HTTP_Handler(srv))
-	r.POST("/v1/review/approve", _Review_ApproveReview0_HTTP_Handler(srv))
-	r.POST("/v1/review/comment", _Review_AddReviewComment0_HTTP_Handler(srv))
-	r.POST("/v1/review/list", _Review_ListReviews0_HTTP_Handler(srv))
-	r.POST("/v1/review/get", _Review_GetReview0_HTTP_Handler(srv))
 }
 
 func _Review_CreateWithdraw0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
@@ -64,100 +52,8 @@ func _Review_CreateWithdraw0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Co
 	}
 }
 
-func _Review_ApproveReview0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ApproveReviewRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationReviewApproveReview)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ApproveReview(ctx, req.(*ApproveReviewRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApproveReviewResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Review_AddReviewComment0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in AddReviewCommentRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationReviewAddReviewComment)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddReviewComment(ctx, req.(*AddReviewCommentRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*AddReviewCommentResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Review_ListReviews0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListReviewsRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationReviewListReviews)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListReviews(ctx, req.(*ListReviewsRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListReviewsResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Review_GetReview0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetReviewRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationReviewGetReview)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetReview(ctx, req.(*GetReviewRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetReviewResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type ReviewHTTPClient interface {
-	AddReviewComment(ctx context.Context, req *AddReviewCommentRequest, opts ...http.CallOption) (rsp *AddReviewCommentResponse, err error)
-	ApproveReview(ctx context.Context, req *ApproveReviewRequest, opts ...http.CallOption) (rsp *ApproveReviewResponse, err error)
 	CreateWithdraw(ctx context.Context, req *CreateWithdrawRequest, opts ...http.CallOption) (rsp *CreateWithdrawResponse, err error)
-	GetReview(ctx context.Context, req *GetReviewRequest, opts ...http.CallOption) (rsp *GetReviewResponse, err error)
-	ListReviews(ctx context.Context, req *ListReviewsRequest, opts ...http.CallOption) (rsp *ListReviewsResponse, err error)
 }
 
 type ReviewHTTPClientImpl struct {
@@ -168,63 +64,11 @@ func NewReviewHTTPClient(client *http.Client) ReviewHTTPClient {
 	return &ReviewHTTPClientImpl{client}
 }
 
-func (c *ReviewHTTPClientImpl) AddReviewComment(ctx context.Context, in *AddReviewCommentRequest, opts ...http.CallOption) (*AddReviewCommentResponse, error) {
-	var out AddReviewCommentResponse
-	pattern := "/v1/review/comment"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationReviewAddReviewComment))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *ReviewHTTPClientImpl) ApproveReview(ctx context.Context, in *ApproveReviewRequest, opts ...http.CallOption) (*ApproveReviewResponse, error) {
-	var out ApproveReviewResponse
-	pattern := "/v1/review/approve"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationReviewApproveReview))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 func (c *ReviewHTTPClientImpl) CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...http.CallOption) (*CreateWithdrawResponse, error) {
 	var out CreateWithdrawResponse
 	pattern := "/v1/review/withdraw"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationReviewCreateWithdraw))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *ReviewHTTPClientImpl) GetReview(ctx context.Context, in *GetReviewRequest, opts ...http.CallOption) (*GetReviewResponse, error) {
-	var out GetReviewResponse
-	pattern := "/v1/review/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationReviewGetReview))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *ReviewHTTPClientImpl) ListReviews(ctx context.Context, in *ListReviewsRequest, opts ...http.CallOption) (*ListReviewsResponse, error) {
-	var out ListReviewsResponse
-	pattern := "/v1/review/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationReviewListReviews))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

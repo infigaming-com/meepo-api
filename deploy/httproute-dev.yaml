@@ -58,3 +58,27 @@ spec:
     - name: wallet-svc
       port: 8000
       weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/backoffice"
+    backendRefs:
+    - name: backoffice-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/ws"
+    backendRefs:
+    - name: websocket-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/review"
+    backendRefs:
+    - name: review-svc
+      port: 8000
+      weight: 1

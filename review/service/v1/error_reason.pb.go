@@ -25,16 +25,82 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED ErrorReason = 0
+	ErrorReason_UNSPECIFIED                               ErrorReason = 0
+	ErrorReason_CONVERT_STRUCT_TO_JSON_FAILED             ErrorReason = 70000
+	ErrorReason_CONVERT_JSON_TO_STRUCT_FAILED             ErrorReason = 70001
+	ErrorReason_GET_USER_INFO_FROM_CONTEXT_FAILED         ErrorReason = 70002
+	ErrorReason_GENERATE_TICKET_ID_FAILED                 ErrorReason = 70003
+	ErrorReason_ADD_TICKET_FAILED                         ErrorReason = 70004
+	ErrorReason_INVALID_REVIEW_ACTION                     ErrorReason = 70005
+	ErrorReason_INITIATE_WITHDRAW_FAILED                  ErrorReason = 70006
+	ErrorReason_GET_TICKET_FAILED                         ErrorReason = 70007
+	ErrorReason_UPDATE_TICKET_FAILED                      ErrorReason = 70008
+	ErrorReason_ADD_COMMENT_FAILED                        ErrorReason = 70009
+	ErrorReason_LIST_TICKETS_FAILED                       ErrorReason = 70010
+	ErrorReason_GET_COMMENTS_FAILED                       ErrorReason = 70011
+	ErrorReason_LOCK_TICKET_FAILED                        ErrorReason = 70012
+	ErrorReason_UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED ErrorReason = 70013
+	ErrorReason_MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED  ErrorReason = 70014
+	ErrorReason_TICKET_ALREADY_REVIEWED                   ErrorReason = 70015
+	ErrorReason_FREEZE_BALANCE_FAILED                     ErrorReason = 70016
+	ErrorReason_ROLLBACK_FREEZE_FAILED                    ErrorReason = 70017
+	ErrorReason_GET_CURRENCIES_FAILED                     ErrorReason = 70018
+	ErrorReason_INVALID_TICKET_STATUS                     ErrorReason = 70019
+	ErrorReason_SETTLE_FREEZE_FAILED                      ErrorReason = 70020
+	ErrorReason_GENERATE_COMMENT_ID_FAILED                ErrorReason = 70021
 )
 
 // Enum value maps for ErrorReason.
 var (
 	ErrorReason_name = map[int32]string{
-		0: "UNSPECIFIED",
+		0:     "UNSPECIFIED",
+		70000: "CONVERT_STRUCT_TO_JSON_FAILED",
+		70001: "CONVERT_JSON_TO_STRUCT_FAILED",
+		70002: "GET_USER_INFO_FROM_CONTEXT_FAILED",
+		70003: "GENERATE_TICKET_ID_FAILED",
+		70004: "ADD_TICKET_FAILED",
+		70005: "INVALID_REVIEW_ACTION",
+		70006: "INITIATE_WITHDRAW_FAILED",
+		70007: "GET_TICKET_FAILED",
+		70008: "UPDATE_TICKET_FAILED",
+		70009: "ADD_COMMENT_FAILED",
+		70010: "LIST_TICKETS_FAILED",
+		70011: "GET_COMMENTS_FAILED",
+		70012: "LOCK_TICKET_FAILED",
+		70013: "UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED",
+		70014: "MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED",
+		70015: "TICKET_ALREADY_REVIEWED",
+		70016: "FREEZE_BALANCE_FAILED",
+		70017: "ROLLBACK_FREEZE_FAILED",
+		70018: "GET_CURRENCIES_FAILED",
+		70019: "INVALID_TICKET_STATUS",
+		70020: "SETTLE_FREEZE_FAILED",
+		70021: "GENERATE_COMMENT_ID_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED": 0,
+		"UNSPECIFIED":                               0,
+		"CONVERT_STRUCT_TO_JSON_FAILED":             70000,
+		"CONVERT_JSON_TO_STRUCT_FAILED":             70001,
+		"GET_USER_INFO_FROM_CONTEXT_FAILED":         70002,
+		"GENERATE_TICKET_ID_FAILED":                 70003,
+		"ADD_TICKET_FAILED":                         70004,
+		"INVALID_REVIEW_ACTION":                     70005,
+		"INITIATE_WITHDRAW_FAILED":                  70006,
+		"GET_TICKET_FAILED":                         70007,
+		"UPDATE_TICKET_FAILED":                      70008,
+		"ADD_COMMENT_FAILED":                        70009,
+		"LIST_TICKETS_FAILED":                       70010,
+		"GET_COMMENTS_FAILED":                       70011,
+		"LOCK_TICKET_FAILED":                        70012,
+		"UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED": 70013,
+		"MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED":  70014,
+		"TICKET_ALREADY_REVIEWED":                   70015,
+		"FREEZE_BALANCE_FAILED":                     70016,
+		"ROLLBACK_FREEZE_FAILED":                    70017,
+		"GET_CURRENCIES_FAILED":                     70018,
+		"INVALID_TICKET_STATUS":                     70019,
+		"SETTLE_FREEZE_FAILED":                      70020,
+		"GENERATE_COMMENT_ID_FAILED":                70021,
 	}
 )
 
@@ -69,9 +135,31 @@ var File_review_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*$\n" +
+	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\xe0\x05\n" +
 	"\vErrorReason\x12\x0f\n" +
-	"\vUNSPECIFIED\x10\x00\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\vUNSPECIFIED\x10\x00\x12#\n" +
+	"\x1dCONVERT_STRUCT_TO_JSON_FAILED\x10\xf0\xa2\x04\x12#\n" +
+	"\x1dCONVERT_JSON_TO_STRUCT_FAILED\x10\xf1\xa2\x04\x12'\n" +
+	"!GET_USER_INFO_FROM_CONTEXT_FAILED\x10\xf2\xa2\x04\x12\x1f\n" +
+	"\x19GENERATE_TICKET_ID_FAILED\x10\xf3\xa2\x04\x12\x17\n" +
+	"\x11ADD_TICKET_FAILED\x10\xf4\xa2\x04\x12\x1b\n" +
+	"\x15INVALID_REVIEW_ACTION\x10\xf5\xa2\x04\x12\x1e\n" +
+	"\x18INITIATE_WITHDRAW_FAILED\x10\xf6\xa2\x04\x12\x17\n" +
+	"\x11GET_TICKET_FAILED\x10\xf7\xa2\x04\x12\x1a\n" +
+	"\x14UPDATE_TICKET_FAILED\x10\xf8\xa2\x04\x12\x18\n" +
+	"\x12ADD_COMMENT_FAILED\x10\xf9\xa2\x04\x12\x19\n" +
+	"\x13LIST_TICKETS_FAILED\x10\xfa\xa2\x04\x12\x19\n" +
+	"\x13GET_COMMENTS_FAILED\x10\xfb\xa2\x04\x12\x18\n" +
+	"\x12LOCK_TICKET_FAILED\x10\xfc\xa2\x04\x12/\n" +
+	")UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED\x10\xfd\xa2\x04\x12.\n" +
+	"(MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED\x10\xfe\xa2\x04\x12\x1d\n" +
+	"\x17TICKET_ALREADY_REVIEWED\x10\xff\xa2\x04\x12\x1b\n" +
+	"\x15FREEZE_BALANCE_FAILED\x10\x80\xa3\x04\x12\x1c\n" +
+	"\x16ROLLBACK_FREEZE_FAILED\x10\x81\xa3\x04\x12\x1b\n" +
+	"\x15GET_CURRENCIES_FAILED\x10\x82\xa3\x04\x12\x1b\n" +
+	"\x15INVALID_TICKET_STATUS\x10\x83\xa3\x04\x12\x1a\n" +
+	"\x14SETTLE_FREEZE_FAILED\x10\x84\xa3\x04\x12 \n" +
+	"\x1aGENERATE_COMMENT_ID_FAILED\x10\x85\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"
 
 var (

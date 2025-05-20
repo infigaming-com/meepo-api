@@ -39,6 +39,7 @@ message Currency {
 	string symbol = 5;
 	string icon = 6;
 	int32 decimal_places = 7;
+	int32 currency_decimal_places = 8;
 }
 
 message AddCurrencyRequest {
@@ -49,6 +50,7 @@ message AddCurrencyRequest {
 	string symbol = 5;
 	string icon = 6;
 	int32 decimal_places = 7;
+	int32 currency_decimal_places = 8;
 }
 
 message AddCurrencyResponse {}
@@ -61,6 +63,7 @@ message UpdateCurrencyRequest {
 	optional string symbol = 5;
 	optional string icon = 6;
 	optional int32 decimal_places = 7;
+	optional int32 currency_decimal_places = 8;
 }
 
 message UpdateCurrencyResponse {

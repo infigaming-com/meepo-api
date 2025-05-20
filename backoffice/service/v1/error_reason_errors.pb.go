@@ -22,3 +22,15 @@ func IsUnspecified(err error) bool {
 func ErrorUnspecified(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UNSPECIFIED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsCallWalletServiceFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CALL_WALLET_SERVICE_FAILED.String() && e.Code == 500
+}
+
+func ErrorCallWalletServiceFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CALL_WALLET_SERVICE_FAILED.String(), fmt.Sprintf(format, args...))
+}

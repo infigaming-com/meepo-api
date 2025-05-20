@@ -34,8 +34,6 @@ const (
 // BackofficeAccountClient is the client API for BackofficeAccount service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// Backoffice service provides authentication and user management functionality.
 type BackofficeAccountClient interface {
 	AddAccount(ctx context.Context, in *AddAccountRequest, opts ...grpc.CallOption) (*AddAccountResponse, error)
 	SendEmailVerification(ctx context.Context, in *SendEmailVerificationRequest, opts ...grpc.CallOption) (*SendEmailVerificationResponse, error)
@@ -160,8 +158,6 @@ func (c *backofficeAccountClient) UpdateAccount(ctx context.Context, in *UpdateA
 // BackofficeAccountServer is the server API for BackofficeAccount service.
 // All implementations must embed UnimplementedBackofficeAccountServer
 // for forward compatibility.
-//
-// Backoffice service provides authentication and user management functionality.
 type BackofficeAccountServer interface {
 	AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error)
 	SendEmailVerification(context.Context, *SendEmailVerificationRequest) (*SendEmailVerificationResponse, error)

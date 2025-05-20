@@ -18,86 +18,132 @@ service Review {
 			body: "*"
 		};
 	}
-	rpc ApproveReview(ApproveReviewRequest) returns (ApproveReviewResponse) {
-		option (google.api.http) = {
-			post: "/v1/review/approve"
-			body: "*"
-		};
-	}
-	rpc AddReviewComment(AddReviewCommentRequest) returns (AddReviewCommentResponse) {
-		option (google.api.http) = {
-			post: "/v1/review/comment"
-			body: "*"
-		};
-	}
-	rpc ListReviews(ListReviewsRequest) returns (ListReviewsResponse) {
-		option (google.api.http) = {
-			post: "/v1/review/list"
-			body: "*"
-		};
-	}
-	rpc GetReview(GetReviewRequest) returns (GetReviewResponse) {
-		option (google.api.http) = {
-			post: "/v1/review/get"
-			body: "*"
-		};
-	}
+	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {}
+	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
+	rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {}
+	rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {}
 }
 
 message CreateWithdrawRequest {
-	google.protobuf.Struct withdraw_request_data = 1;
+	google.protobuf.Struct request = 1;  // JSON data for REST API
 }
 
 message CreateWithdrawResponse {
-	google.protobuf.Struct withdraw_response_data = 1;
+	int64 ticket_id = 1;
 }
 
-enum ReviewAction {
-	REVIEW_ACTION_UNSPECIFIED = 0;
-	REVIEW_ACTION_APPROVE = 1;
-	REVIEW_ACTION_REJECT = 2;
-	REVIEW_ACTION_MANUAL_PAYOUT = 3;
+message ReviewTicketRequest {
+	int64 ticket_id = 1;
+	int64 reviewer_user_id = 2;
+	// action: approve, reject, manual_payout
+	string action = 3;
+	string review_comment = 4;
 }
 
-message ApproveReviewRequest {
-	int64 review_id = 1;
-	ReviewAction action = 2;
-	string approve_comment = 3;
-}
+message ReviewTicketResponse {}
 
-message ApproveReviewResponse {}
-
-message AddReviewCommentRequest {
-	int64 review_id = 1;
+message AddCommentRequest {
+	int64 ticket_id = 1;
 	int64 author_user_id = 2;
 	string content = 3;
 }
 
-message AddReviewCommentResponse {}
+message AddCommentResponse {
+	int64 comment_id = 1;
+}
 
-message ListReviewsRequest {
-	optional int64 review_id = 1;
+message ListTicketsRequest {
 	optional int64 user_id = 2;
 	optional int64 operator_id = 3;
-	optional string currency = 4;
-	optional string status = 5;
-	optional google.protobuf.Timestamp start_time = 6;
-	optional google.protobuf.Timestamp end_time = 7;
-	optional int32 page = 8;
-	optional int32 page_size = 9;
+	optional int64 ticket_id = 4;
+	optional string currency = 5;
+	optional string status = 6;
+	optional google.protobuf.Timestamp start_time = 7;
+	optional google.protobuf.Timestamp end_time = 8;
+	optional int32 page = 9;
+	optional int32 page_size = 10;
 }
 
-message ListReviewsResponse {}
-
-message GetReviewRequest {
-	int64 review_id = 1;
+message ListTicketsResponse {
+	message Ticket {
+		google.protobuf.Timestamp created_at = 1;
+		string operator = 2;
+		int64 ticket_id = 3;
+		int64 user_id = 4;
+		int32 vip_level = 5;
+		repeated string user_tags = 6;
+		string before_balance = 7;
+		string before_balance_usd = 8;
+		string amount = 9;
+		string amount_usd = 10;
+		string after_balance = 11;
+		string after_balance_usd = 12;
+		string currency = 13;
+		string payment_channel = 14;
+		string protocol = 15;
+		string fee = 16;
+		string status = 17;	// pending, approved, rejected, manual_payout, paying, paid, failed
+		string reviewer_username = 18;
+		int32 review_duration = 19;
+	}
+	repeated Ticket tickets = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total_count = 4;
+	string total_amount = 5;
+	int32 total_pending_count = 6;
+	string total_pending_amount = 7;
+	int32 total_paying_count = 8;
+	string total_paying_amount = 9;
+	int32 total_paid_count = 10;
+	string total_paid_amount = 11;
+	int32 total_failed_count = 12;
+	string total_failed_amount = 13;
+	int32 total_rejected_count = 14;
+	string total_rejected_amount = 15;
+	int32 average_review_time = 16;
 }
 
-message GetReviewResponse {
+message GetTicketRequest {
+	int64 ticket_id = 1;
+}
+
+message GetTicketResponse {
+	message WithdrawPaymentInfo {
+		google.protobuf.Struct created_at = 1;
+		string currency = 2;
+		string amount = 3;
+		string amount_usd = 4;
+		string before_balance = 5;
+		string after_balance = 6;
+		string payment_channel = 7;
+		string protocol = 8;
+		string fee = 9;
+		google.protobuf.Struct extra = 10;
+		google.protobuf.Struct schema = 11;
+	}
+	message UserWalletData {
+		string deposit_usd = 1;
+		string withdraw_usd = 2;
+		string deposit_minus_withdraw_usd = 3;
+		string valid_turnover_usd = 4;
+		int32 deposit_count = 5;
+		int32 withdraw_count = 6;
+		int32 today_withdraw_count = 7;
+	}
 	message Comment {
 		int64 author_user_name = 1;
 		string content = 2;
 		google.protobuf.Timestamp created_at = 3;
 	}
-	repeated Comment comments = 1;
+	string operator_name = 1;
+	int64 user_id = 2;
+	int32 vip_level = 3;
+	int64 ticket_id = 4;
+	string status = 5;	// pending, approved, rejected, manual_payout, paying, paid, failed
+	repeated string user_tags = 6;
+	WithdrawPaymentInfo withdraw_payment_info = 7;
+	repeated string linked_accounts = 8;
+	UserWalletData user_wallet_data = 9;
+	repeated Comment comments = 10;
 }

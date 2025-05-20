@@ -2,20 +2,179 @@ syntax = "proto3";
 
 package api.backoffice.service.v1;
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
+service BackofficeGame {
+	// ListProviders returns all providers with optional filter for enabled status.
+	// If not provided, all providers will be returned.
+	// ListProviders is used for the providers drop down list and provider search.
+	rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/providers/list"
+			body: "*"
+		};
+	}
+	// ListProvidersWithDetail returns all providers with detailed information,
+	// including game count and enabled status.
+	// ListProvidersWithDetail is used for the providers page.
+	rpc ListProvidersWithDetail(ListProvidersWithDetailRequest) returns (ListProvidersWithDetailResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/providers-with-detail/list"
+			body: "*"
+		};
+	}
+	rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/categories/list"
+			body: "*"
+		};
+	}
+	rpc ListFeeGroups(ListFeeGroupsRequest) returns (ListFeeGroupsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/fee-groups/list"
+			body: "*"
+		};
+	}
+	rpc ListTags(ListTagsRequest) returns (ListTagsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/tags/list"
+			body: "*"
+		};
+	}
+	rpc ListThemes(ListThemesRequest) returns (ListThemesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/themes/list"
+			body: "*"
+		};
+	}
+	rpc ListCurrencies(ListCurrenciesRequest) returns (ListCurrenciesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/currencies/list"
+			body: "*"
+		};
+	}
+	rpc ListBets(ListBetsRequest) returns (ListBetsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/bets/list"
+            body: "*"
+        };
+    }
+    rpc GetUserBetsOverview(GetUserBetsOverviewRequest) returns (GetUserBetsOverviewResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/bets/overview/get"
+            body: "*"
+        };
+    }
+    rpc GetGameTransactionsForBet(GetGameTransactionsForBetRequest) returns (GetGameTransactionsForBetResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/bets/transactions/get"
+            body: "*"
+        };
+    }
+    rpc ListUserBets(ListUserBetsRequest) returns (ListUserBetsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/bets/list"
+            body: "*"
+        };
+    }
+    rpc ListGames(ListGamesRequest) returns (ListGamesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/game/list"
+            body: "*"
+        };
+    }
+	rpc UpdateGame(UpdateGameRequest) returns (UpdateGameResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/update"
+			body: "*"
+		};
+	}
+	rpc UpdateProvider(UpdateProviderRequest) returns (UpdateProviderResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/provider/update"
+			body: "*"
+		};
+	}
+}
+
+
+message ListProvidersRequest {
+	optional bool enabled = 1;
+}
+
+message ListProvidersResponse {
+	message Provider {
+		string provider_id = 1;
+		string provider_name = 2;
+	}
+	repeated Provider providers = 1;
+}
+
+message ListProvidersWithDetailRequest {
+	optional string provider_id = 1;
+	optional bool enabled = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+}
+
+message ListProvidersWithDetailResponse {
+	message Provider {
+		string provider_id = 1;
+		string provider_name = 2;
+		int32 game_count = 3;
+		bool enabled = 4;
+	}
+	repeated Provider providers = 1;
+	int32 total = 2;
+	int32 total_enabled = 3;
+	int32 total_disabled = 4;
+	int32 page = 5;
+	int32 page_size = 6;
+}
+
+message ListCategoriesRequest {}
+
+message ListCategoriesResponse {
+	repeated string categories = 1;
+}
+
+message ListFeeGroupsRequest {}
+
+message ListFeeGroupsResponse {
+	repeated string fee_groups = 1;
+}
+
+message ListTagsRequest {}
+
+message ListTagsResponse {
+	repeated string tags = 1;
+}
+
+message ListThemesRequest {}
+
+message ListThemesResponse {
+	repeated string themes = 1;
+}
+
+message ListCurrenciesRequest {}
+
+message ListCurrenciesResponse {
+	repeated string currencies = 1;
+}
+
 message ListBetsRequest {
 	repeated int64 operator_ids = 1;
 	repeated string provider_ids = 2;
-	repeated string game_names = 3;
-	repeated string game_ids = 4;
+	optional string game_name = 3;
+	optional string game_id = 4;
 	optional int64 user_id = 5;
-	optional int64 operator_transaction_id = 6;
-	optional string provider_transaction_id = 7;
+	optional int64 operator_bet_id = 6;
+	optional string provider_bet_id = 7;
 	optional google.protobuf.Timestamp start_time = 8;
 	optional google.protobuf.Timestamp end_time = 9;
 	optional int64 min_bet_amount = 10;
@@ -27,37 +186,40 @@ message ListBetsRequest {
 }
 
 message Bet {
-	message Amount {
-		int64 amount_in_currency = 1;
-		int64 amount_in_settlement_currency = 2;
-	}
-	string operator = 1;
+	string operator_name = 1;
 	google.protobuf.Timestamp created_at = 2;
 	google.protobuf.Timestamp updated_at = 3;
-	string category = 4;
-	string game_id = 5;
-	string provider = 6;
-	int64 operator_transaction_id = 7;
-	string provider_transaction_id = 8;
-	int64 user_id = 9;
-	Amount bet_amount = 10;
-	Amount win_amount = 11;
-	double odds = 12;
-	int64 valid_bet_amount = 13;
+	string game_category = 4;
+	string game_name = 5;
+	string game_id = 6;
+	string provider_name = 7;
+	int64 id = 8	 [json_name="operatorBetId"];
+	string provider_bet_id = 9;
+	int64 user_id = 10;
+	string bet_amount = 17;
+	string settlement_bet_amount = 19;
+	string win_amount = 20;
+	string settlement_win_amount = 21;
+	string odds = 13;
+	string valid_bet_amount = 14;
 }
 
 message ListBetsResponse {
 	repeated Bet bets = 1;
-	int64 page = 2;
-	int64 page_size = 3;
-	int64 total = 4;
+	string turnover = 2;
+	string win_amount = 3;
+	int32 bet_count = 4;
+	int32 rtp_percentage = 5; // value from 0 to 100
+	int64 page = 6;
+	int64 page_size = 7;
+	int64 total = 8;
 }
 
 message GetUserBetsOverviewRequest {
 	int64 user_id = 1;
 	repeated string providers = 2;
 	repeated string game_names = 3;
-	repeated string game_ids = 4;
+	optional string game_id = 4;
 	repeated string currencies = 5;
 	optional int64 bet_amount_min = 6;
 	optional int64 bet_amount_max = 7;
@@ -83,8 +245,8 @@ message GetUserBetsOverviewResponse {
 message ListUserBetsRequest {
 	int64 user_id = 1;
 	repeated string provider_ids = 2;
-	repeated string game_names = 3;
-	repeated string game_ids = 4;
+	optional string game_name = 3;
+	optional string game_id = 4;
 	repeated string currencies = 5;
 	optional int64 min_bet_amount = 6;
 	optional int64 max_bet_amount = 7;
@@ -131,17 +293,17 @@ message GetGameTransactionsForBetResponse {
 }
 
 message ListGamesRequest {
-	repeated string providers = 1;
+	repeated string provider_ids = 1;
 	repeated string categories = 2;
 	repeated string fee_groups = 3;
-	repeated string game_names = 4;
-	repeated string game_ids = 5;
-	repeated string game_tags = 6;
-	repeated string themes = 7;
-	optional bool support_bonus_buy = 8;
-	optional bool has_freespins = 9;
-	repeated string support_currencies = 10;
-	repeated string restricted_countries = 11;
+	optional string game_id = 4;
+	repeated string game_tags = 5;
+	repeated string themes = 6;
+	optional bool support_bonus_buy = 7;
+	optional bool has_freespins = 8;
+	repeated string support_currencies = 9;
+	repeated string restricted_countries = 10;
+	optional bool enabled = 11;
 	optional int64 page = 12;
 	optional int64 page_size = 13;
 }
@@ -171,3 +333,18 @@ message ListGamesResponse {
 	int64 total_enabled = 5;
 	int64 total_disabled = 6;
 }
+
+message UpdateGameRequest {
+	string game_id = 1;
+	optional bool enabled = 2;
+}
+
+message UpdateGameResponse {}
+
+message UpdateProviderRequest {
+	string provider_id = 1;
+	optional bool enabled = 2;
+}
+
+message UpdateProviderResponse {}
+

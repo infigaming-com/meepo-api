@@ -71,6 +71,8 @@ func (m *Currency) validate(all bool) error {
 
 	// no validation rules for DecimalPlaces
 
+	// no validation rules for CurrencyDecimalPlaces
+
 	if len(errors) > 0 {
 		return CurrencyMultiError(errors)
 	}
@@ -183,6 +185,8 @@ func (m *AddCurrencyRequest) validate(all bool) error {
 	// no validation rules for Icon
 
 	// no validation rules for DecimalPlaces
+
+	// no validation rules for CurrencyDecimalPlaces
 
 	if len(errors) > 0 {
 		return AddCurrencyRequestMultiError(errors)
@@ -412,6 +416,10 @@ func (m *UpdateCurrencyRequest) validate(all bool) error {
 
 	if m.DecimalPlaces != nil {
 		// no validation rules for DecimalPlaces
+	}
+
+	if m.CurrencyDecimalPlaces != nil {
+		// no validation rules for CurrencyDecimalPlaces
 	}
 
 	if len(errors) > 0 {

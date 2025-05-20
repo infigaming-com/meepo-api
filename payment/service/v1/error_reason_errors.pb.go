@@ -47,16 +47,16 @@ func ErrorCreatePaymentChannelFailed(format string, args ...interface{}) *errors
 	return errors.New(500, ErrorReason_CREATE_PAYMENT_CHANNEL_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsGetPaymentChannelListFailed(err error) bool {
+func IsGetPaymentChannelPageFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_GET_PAYMENT_CHANNEL_LIST_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_GET_PAYMENT_CHANNEL_PAGE_FAILED.String() && e.Code == 500
 }
 
-func ErrorGetPaymentChannelListFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_GET_PAYMENT_CHANNEL_LIST_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorGetPaymentChannelPageFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_PAYMENT_CHANNEL_PAGE_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsInitiateDepositFailed(err error) bool {
@@ -105,4 +105,28 @@ func IsWithdrawCallbackFailed(err error) bool {
 
 func ErrorWithdrawCallbackFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_WITHDRAW_CALLBACK_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetTransactionPageFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_TRANSACTION_PAGE_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetTransactionPageFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_TRANSACTION_PAGE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetTransactionDetailFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_TRANSACTION_DETAIL_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetTransactionDetailFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_TRANSACTION_DETAIL_FAILED.String(), fmt.Sprintf(format, args...))
 }

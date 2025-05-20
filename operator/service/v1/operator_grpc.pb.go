@@ -21,6 +21,8 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Operator_AddOperator_FullMethodName            = "/api.operator.service.v1.Operator/AddOperator"
 	Operator_UpdateOperator_FullMethodName         = "/api.operator.service.v1.Operator/UpdateOperator"
+	Operator_GetOperator_FullMethodName            = "/api.operator.service.v1.Operator/GetOperator"
+	Operator_GetOperatorsByIds_FullMethodName      = "/api.operator.service.v1.Operator/GetOperatorsByIds"
 	Operator_AddOrUpdateCurrency_FullMethodName    = "/api.operator.service.v1.Operator/AddOrUpdateCurrency"
 	Operator_UpdateOperatorCurrency_FullMethodName = "/api.operator.service.v1.Operator/UpdateOperatorCurrency"
 	Operator_GetOperatorCurrencies_FullMethodName  = "/api.operator.service.v1.Operator/GetOperatorCurrencies"
@@ -28,6 +30,7 @@ const (
 	Operator_GetOperatorIdByOrigin_FullMethodName  = "/api.operator.service.v1.Operator/GetOperatorIdByOrigin"
 	Operator_DeleteOriginOperatorId_FullMethodName = "/api.operator.service.v1.Operator/DeleteOriginOperatorId"
 	Operator_GetParentOperatorIds_FullMethodName   = "/api.operator.service.v1.Operator/GetParentOperatorIds"
+	Operator_ListOperators_FullMethodName          = "/api.operator.service.v1.Operator/ListOperators"
 )
 
 // OperatorClient is the client API for Operator service.
@@ -38,6 +41,8 @@ const (
 type OperatorClient interface {
 	AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...grpc.CallOption) (*AddOperatorResponse, error)
 	UpdateOperator(ctx context.Context, in *UpdateOperatorRequest, opts ...grpc.CallOption) (*UpdateOperatorResponse, error)
+	GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error)
+	GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error)
 	AddOrUpdateCurrency(ctx context.Context, in *AddOrUpdateCurrencyRequest, opts ...grpc.CallOption) (*AddOrUpdateCurrencyResponse, error)
 	UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error)
 	GetOperatorCurrencies(ctx context.Context, in *GetOperatorCurrenciesRequest, opts ...grpc.CallOption) (*GetOperatorCurrenciesResponse, error)
@@ -47,6 +52,8 @@ type OperatorClient interface {
 	// GetParentOperatorIds returns parent operator IDs for the given operator ID.
 	// The response contains only the list of parent operator IDs, doesn't include the requested operator_id.
 	GetParentOperatorIds(ctx context.Context, in *GetParentOperatorIdsRequest, opts ...grpc.CallOption) (*GetParentOperatorIdsResponse, error)
+	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
+	ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...grpc.CallOption) (*ListOperatorsResponse, error)
 }
 
 type operatorClient struct {
@@ -71,6 +78,26 @@ func (c *operatorClient) UpdateOperator(ctx context.Context, in *UpdateOperatorR
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateOperatorResponse)
 	err := c.cc.Invoke(ctx, Operator_UpdateOperator_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operatorClient) GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorResponse)
+	err := c.cc.Invoke(ctx, Operator_GetOperator_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operatorClient) GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorsByIdsResponse)
+	err := c.cc.Invoke(ctx, Operator_GetOperatorsByIds_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -147,6 +174,16 @@ func (c *operatorClient) GetParentOperatorIds(ctx context.Context, in *GetParent
 	return out, nil
 }
 
+func (c *operatorClient) ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...grpc.CallOption) (*ListOperatorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorsResponse)
+	err := c.cc.Invoke(ctx, Operator_ListOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OperatorServer is the server API for Operator service.
 // All implementations must embed UnimplementedOperatorServer
 // for forward compatibility.
@@ -155,6 +192,8 @@ func (c *operatorClient) GetParentOperatorIds(ctx context.Context, in *GetParent
 type OperatorServer interface {
 	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
 	UpdateOperator(context.Context, *UpdateOperatorRequest) (*UpdateOperatorResponse, error)
+	GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error)
+	GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error)
 	AddOrUpdateCurrency(context.Context, *AddOrUpdateCurrencyRequest) (*AddOrUpdateCurrencyResponse, error)
 	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
 	GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error)
@@ -164,6 +203,8 @@ type OperatorServer interface {
 	// GetParentOperatorIds returns parent operator IDs for the given operator ID.
 	// The response contains only the list of parent operator IDs, doesn't include the requested operator_id.
 	GetParentOperatorIds(context.Context, *GetParentOperatorIdsRequest) (*GetParentOperatorIdsResponse, error)
+	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
+	ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error)
 	mustEmbedUnimplementedOperatorServer()
 }
 
@@ -179,6 +220,12 @@ func (UnimplementedOperatorServer) AddOperator(context.Context, *AddOperatorRequ
 }
 func (UnimplementedOperatorServer) UpdateOperator(context.Context, *UpdateOperatorRequest) (*UpdateOperatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperator not implemented")
+}
+func (UnimplementedOperatorServer) GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperator not implemented")
+}
+func (UnimplementedOperatorServer) GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorsByIds not implemented")
 }
 func (UnimplementedOperatorServer) AddOrUpdateCurrency(context.Context, *AddOrUpdateCurrencyRequest) (*AddOrUpdateCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddOrUpdateCurrency not implemented")
@@ -200,6 +247,9 @@ func (UnimplementedOperatorServer) DeleteOriginOperatorId(context.Context, *Dele
 }
 func (UnimplementedOperatorServer) GetParentOperatorIds(context.Context, *GetParentOperatorIdsRequest) (*GetParentOperatorIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetParentOperatorIds not implemented")
+}
+func (UnimplementedOperatorServer) ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperators not implemented")
 }
 func (UnimplementedOperatorServer) mustEmbedUnimplementedOperatorServer() {}
 func (UnimplementedOperatorServer) testEmbeddedByValue()                  {}
@@ -254,6 +304,42 @@ func _Operator_UpdateOperator_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OperatorServer).UpdateOperator(ctx, req.(*UpdateOperatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Operator_GetOperator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).GetOperator(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_GetOperator_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).GetOperator(ctx, req.(*GetOperatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Operator_GetOperatorsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorsByIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).GetOperatorsByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_GetOperatorsByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).GetOperatorsByIds(ctx, req.(*GetOperatorsByIdsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -384,6 +470,24 @@ func _Operator_GetParentOperatorIds_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_ListOperators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).ListOperators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_ListOperators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).ListOperators(ctx, req.(*ListOperatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Operator_ServiceDesc is the grpc.ServiceDesc for Operator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -398,6 +502,14 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperator",
 			Handler:    _Operator_UpdateOperator_Handler,
+		},
+		{
+			MethodName: "GetOperator",
+			Handler:    _Operator_GetOperator_Handler,
+		},
+		{
+			MethodName: "GetOperatorsByIds",
+			Handler:    _Operator_GetOperatorsByIds_Handler,
 		},
 		{
 			MethodName: "AddOrUpdateCurrency",
@@ -426,6 +538,10 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetParentOperatorIds",
 			Handler:    _Operator_GetParentOperatorIds_Handler,
+		},
+		{
+			MethodName: "ListOperators",
+			Handler:    _Operator_ListOperators_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
