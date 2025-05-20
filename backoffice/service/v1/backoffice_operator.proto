@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+service BackofficeOperator {
+	rpc ListOperators(ListOperatorsRequest) returns (ListOperatorsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/list"
+			body: "*"
+		};
+	}
+}
+
+message ListOperatorsRequest {
+	optional bool enabled = 1;
+}
+
+message ListOperatorsResponse {
+	message Operator {
+		int64 operator_id = 1;
+		string operator_name = 2;
+	}
+	repeated Operator operators = 1;
+}
