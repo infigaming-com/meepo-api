@@ -66,6 +66,7 @@ const (
 	ErrorReason_NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND ErrorReason = 10039
 	ErrorReason_SYSTEM_OPERATOR                      ErrorReason = 10040
 	ErrorReason_LIST_USERS_FAILED                    ErrorReason = 10041
+	ErrorReason_ROLE_NOT_FOUND                       ErrorReason = 10042
 )
 
 // Enum value maps for ErrorReason.
@@ -112,6 +113,7 @@ var (
 		10039: "NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND",
 		10040: "SYSTEM_OPERATOR",
 		10041: "LIST_USERS_FAILED",
+		10042: "ROLE_NOT_FOUND",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                          0,
@@ -155,6 +157,7 @@ var (
 		"NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND": 10039,
 		"SYSTEM_OPERATOR":                      10040,
 		"LIST_USERS_FAILED":                    10041,
+		"ROLE_NOT_FOUND":                       10042,
 	}
 )
 
@@ -189,7 +192,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xba\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xd5\n" +
 	"\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12)\n" +
@@ -232,7 +235,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x19OPERATOR_PARENT_NOT_FOUND\x10\xb6N\x1a\x04\xa8E\x94\x03\x12/\n" +
 	"$NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND\x10\xb7N\x1a\x04\xa8E\x94\x03\x12\x14\n" +
 	"\x0fSYSTEM_OPERATOR\x10\xb8N\x12\x16\n" +
-	"\x11LIST_USERS_FAILED\x10\xb9N\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x11LIST_USERS_FAILED\x10\xb9N\x12\x19\n" +
+	"\x0eROLE_NOT_FOUND\x10\xbaN\x1a\x04\xa8E\x94\x03\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (

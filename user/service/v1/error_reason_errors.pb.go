@@ -504,3 +504,15 @@ func IsListUsersFailed(err error) bool {
 func ErrorListUsersFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_USERS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsRoleNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ROLE_NOT_FOUND.String() && e.Code == 404
+}
+
+func ErrorRoleNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_ROLE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}

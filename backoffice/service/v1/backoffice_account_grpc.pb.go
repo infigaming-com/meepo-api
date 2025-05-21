@@ -29,6 +29,7 @@ const (
 	BackofficeAccount_Bind2Fa_FullMethodName                = "/api.backoffice.service.v1.BackofficeAccount/Bind2fa"
 	BackofficeAccount_Unbind2Fa_FullMethodName              = "/api.backoffice.service.v1.BackofficeAccount/Unbind2fa"
 	BackofficeAccount_UpdateAccount_FullMethodName          = "/api.backoffice.service.v1.BackofficeAccount/UpdateAccount"
+	BackofficeAccount_Login_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAccount/Login"
 )
 
 // BackofficeAccountClient is the client API for BackofficeAccount service.
@@ -45,6 +46,7 @@ type BackofficeAccountClient interface {
 	Bind2Fa(ctx context.Context, in *Bind2FaRequest, opts ...grpc.CallOption) (*Bind2FaResponse, error)
 	Unbind2Fa(ctx context.Context, in *Unbind2FaRequest, opts ...grpc.CallOption) (*Unbind2FaResponse, error)
 	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error)
+	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 }
 
 type backofficeAccountClient struct {
@@ -155,6 +157,16 @@ func (c *backofficeAccountClient) UpdateAccount(ctx context.Context, in *UpdateA
 	return out, nil
 }
 
+func (c *backofficeAccountClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LoginResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_Login_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeAccountServer is the server API for BackofficeAccount service.
 // All implementations must embed UnimplementedBackofficeAccountServer
 // for forward compatibility.
@@ -169,6 +181,7 @@ type BackofficeAccountServer interface {
 	Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error)
 	Unbind2Fa(context.Context, *Unbind2FaRequest) (*Unbind2FaResponse, error)
 	UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error)
+	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	mustEmbedUnimplementedBackofficeAccountServer()
 }
 
@@ -208,6 +221,9 @@ func (UnimplementedBackofficeAccountServer) Unbind2Fa(context.Context, *Unbind2F
 }
 func (UnimplementedBackofficeAccountServer) UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
+}
+func (UnimplementedBackofficeAccountServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
 func (UnimplementedBackofficeAccountServer) mustEmbedUnimplementedBackofficeAccountServer() {}
 func (UnimplementedBackofficeAccountServer) testEmbeddedByValue()                           {}
@@ -410,6 +426,24 @@ func _BackofficeAccount_UpdateAccount_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAccount_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_Login_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).Login(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeAccount_ServiceDesc is the grpc.ServiceDesc for BackofficeAccount service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -456,6 +490,10 @@ var BackofficeAccount_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAccount",
 			Handler:    _BackofficeAccount_UpdateAccount_Handler,
+		},
+		{
+			MethodName: "Login",
+			Handler:    _BackofficeAccount_Login_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

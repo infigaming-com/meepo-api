@@ -69,6 +69,12 @@ service BackofficeAccount {
             body: "*"
         };
     }
+    rpc Login(LoginRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/login"
+            body: "*"
+        };
+    }
 }
 
 // Account related messages
@@ -133,3 +139,12 @@ message UpdateAccountRequest {
 }
 
 message UpdateAccountResponse {}
+
+message LoginRequest {
+	string username = 1;
+	string password = 2;
+}
+
+message LoginResponse {
+	string token = 1;
+}
