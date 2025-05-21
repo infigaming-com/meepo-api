@@ -2265,10 +2265,10 @@ func (x *GetUserTransactionSummaryRequest) GetEndTime() *timestamppb.Timestamp {
 type GetUserTransactionSummaryResponse struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	Currency             string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	TotalDeposit         int64                  `protobuf:"varint,2,opt,name=total_deposit,json=totalDeposit,proto3" json:"total_deposit,omitempty"`
-	TotalWithdraw        int64                  `protobuf:"varint,3,opt,name=total_withdraw,json=totalWithdraw,proto3" json:"total_withdraw,omitempty"`
-	DepositMinusWithdraw int64                  `protobuf:"varint,4,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
-	TotalValidBet        int64                  `protobuf:"varint,5,opt,name=total_valid_bet,json=totalValidBet,proto3" json:"total_valid_bet,omitempty"`
+	TotalDeposit         string                 `protobuf:"bytes,2,opt,name=total_deposit,json=totalDeposit,proto3" json:"total_deposit,omitempty"`
+	TotalWithdraw        string                 `protobuf:"bytes,3,opt,name=total_withdraw,json=totalWithdraw,proto3" json:"total_withdraw,omitempty"`
+	DepositMinusWithdraw string                 `protobuf:"bytes,4,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
+	TotalValidBet        string                 `protobuf:"bytes,5,opt,name=total_valid_bet,json=totalValidBet,proto3" json:"total_valid_bet,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -2310,32 +2310,32 @@ func (x *GetUserTransactionSummaryResponse) GetCurrency() string {
 	return ""
 }
 
-func (x *GetUserTransactionSummaryResponse) GetTotalDeposit() int64 {
+func (x *GetUserTransactionSummaryResponse) GetTotalDeposit() string {
 	if x != nil {
 		return x.TotalDeposit
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserTransactionSummaryResponse) GetTotalWithdraw() int64 {
+func (x *GetUserTransactionSummaryResponse) GetTotalWithdraw() string {
 	if x != nil {
 		return x.TotalWithdraw
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserTransactionSummaryResponse) GetDepositMinusWithdraw() int64 {
+func (x *GetUserTransactionSummaryResponse) GetDepositMinusWithdraw() string {
 	if x != nil {
 		return x.DepositMinusWithdraw
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserTransactionSummaryResponse) GetTotalValidBet() int64 {
+func (x *GetUserTransactionSummaryResponse) GetTotalValidBet() string {
 	if x != nil {
 		return x.TotalValidBet
 	}
-	return 0
+	return ""
 }
 
 type GetUserBalancesResponse_Balance struct {
@@ -3439,10 +3439,10 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\t_end_time\"\xe9\x01\n" +
 	"!GetUserTransactionSummaryResponse\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12#\n" +
-	"\rtotal_deposit\x18\x02 \x01(\x03R\ftotalDeposit\x12%\n" +
-	"\x0etotal_withdraw\x18\x03 \x01(\x03R\rtotalWithdraw\x124\n" +
-	"\x16deposit_minus_withdraw\x18\x04 \x01(\x03R\x14depositMinusWithdraw\x12&\n" +
-	"\x0ftotal_valid_bet\x18\x05 \x01(\x03R\rtotalValidBet2\x8f\x12\n" +
+	"\rtotal_deposit\x18\x02 \x01(\tR\ftotalDeposit\x12%\n" +
+	"\x0etotal_withdraw\x18\x03 \x01(\tR\rtotalWithdraw\x124\n" +
+	"\x16deposit_minus_withdraw\x18\x04 \x01(\tR\x14depositMinusWithdraw\x12&\n" +
+	"\x0ftotal_valid_bet\x18\x05 \x01(\tR\rtotalValidBet2\x8f\x12\n" +
 	"\x06Wallet\x12Z\n" +
 	"\aAddUser\x12%.api.wallet.service.v1.AddUserRequest\x1a&.api.wallet.service.v1.AddUserResponse\"\x00\x12c\n" +
 	"\n" +

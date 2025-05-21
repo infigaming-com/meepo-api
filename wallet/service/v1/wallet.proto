@@ -447,8 +447,8 @@ message GetUserTransactionSummaryRequest {
 
 message GetUserTransactionSummaryResponse {
 	string currency = 1;
-	int64 total_deposit = 2;
-	int64 total_withdraw = 3;
-	int64 deposit_minus_withdraw = 4;
-	int64 total_valid_bet = 5;
+	string total_deposit = 2;
+	string total_withdraw = 3;
+	string deposit_minus_withdraw = 4;
+	string total_valid_bet = 5;
 }
