@@ -653,19 +653,19 @@ func (x *GetSummaryRequest) GetRegistrationCountries() []string {
 
 type GetSummaryResponse struct {
 	state                      protoimpl.MessageState `protogen:"open.v1"`
-	Visits                     int64                  `protobuf:"varint,1,opt,name=visits,proto3" json:"visits,omitempty"`
-	RegisteredUsers            int64                  `protobuf:"varint,2,opt,name=registered_users,json=registeredUsers,proto3" json:"registered_users,omitempty"`
-	Ftd                        int64                  `protobuf:"varint,3,opt,name=ftd,proto3" json:"ftd,omitempty"`
-	FtdConversionRate          int64                  `protobuf:"varint,4,opt,name=ftd_conversion_rate,json=ftdConversionRate,proto3" json:"ftd_conversion_rate,omitempty"`
-	DepositAmount              int64                  `protobuf:"varint,5,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
-	WithdrawAmount             int64                  `protobuf:"varint,6,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
-	DepositMinusWithdrawAmount int64                  `protobuf:"varint,7,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
-	AverageFtdAmount           int64                  `protobuf:"varint,8,opt,name=average_ftd_amount,json=averageFtdAmount,proto3" json:"average_ftd_amount,omitempty"`
+	Visits                     int32                  `protobuf:"varint,1,opt,name=visits,proto3" json:"visits,omitempty"`
+	RegisteredUsers            int32                  `protobuf:"varint,2,opt,name=registered_users,json=registeredUsers,proto3" json:"registered_users,omitempty"`
+	Ftd                        int32                  `protobuf:"varint,3,opt,name=ftd,proto3" json:"ftd,omitempty"`
+	FtdConversionRate          int32                  `protobuf:"varint,4,opt,name=ftd_conversion_rate,json=ftdConversionRate,proto3" json:"ftd_conversion_rate,omitempty"`
+	DepositAmount              string                 `protobuf:"bytes,5,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
+	WithdrawAmount             string                 `protobuf:"bytes,6,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
+	DepositMinusWithdrawAmount string                 `protobuf:"bytes,7,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
+	AverageFtdAmount           string                 `protobuf:"bytes,8,opt,name=average_ftd_amount,json=averageFtdAmount,proto3" json:"average_ftd_amount,omitempty"`
 	ArpuToArppuPercentage      int32                  `protobuf:"varint,9,opt,name=arpu_to_arppu_percentage,json=arpuToArppuPercentage,proto3" json:"arpu_to_arppu_percentage,omitempty"`
-	Turnover                   int64                  `protobuf:"varint,10,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	Bonus                      int64                  `protobuf:"varint,11,opt,name=bonus,proto3" json:"bonus,omitempty"`
-	Ggr                        int64                  `protobuf:"varint,12,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	Ngr                        int64                  `protobuf:"varint,13,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	Turnover                   string                 `protobuf:"bytes,10,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	Bonus                      string                 `protobuf:"bytes,11,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	Ggr                        string                 `protobuf:"bytes,12,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	Ngr                        string                 `protobuf:"bytes,13,opt,name=ngr,proto3" json:"ngr,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -700,60 +700,60 @@ func (*GetSummaryResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetSummaryResponse) GetVisits() int64 {
+func (x *GetSummaryResponse) GetVisits() int32 {
 	if x != nil {
 		return x.Visits
 	}
 	return 0
 }
 
-func (x *GetSummaryResponse) GetRegisteredUsers() int64 {
+func (x *GetSummaryResponse) GetRegisteredUsers() int32 {
 	if x != nil {
 		return x.RegisteredUsers
 	}
 	return 0
 }
 
-func (x *GetSummaryResponse) GetFtd() int64 {
+func (x *GetSummaryResponse) GetFtd() int32 {
 	if x != nil {
 		return x.Ftd
 	}
 	return 0
 }
 
-func (x *GetSummaryResponse) GetFtdConversionRate() int64 {
+func (x *GetSummaryResponse) GetFtdConversionRate() int32 {
 	if x != nil {
 		return x.FtdConversionRate
 	}
 	return 0
 }
 
-func (x *GetSummaryResponse) GetDepositAmount() int64 {
+func (x *GetSummaryResponse) GetDepositAmount() string {
 	if x != nil {
 		return x.DepositAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetSummaryResponse) GetWithdrawAmount() int64 {
+func (x *GetSummaryResponse) GetWithdrawAmount() string {
 	if x != nil {
 		return x.WithdrawAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetSummaryResponse) GetDepositMinusWithdrawAmount() int64 {
+func (x *GetSummaryResponse) GetDepositMinusWithdrawAmount() string {
 	if x != nil {
 		return x.DepositMinusWithdrawAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetSummaryResponse) GetAverageFtdAmount() int64 {
+func (x *GetSummaryResponse) GetAverageFtdAmount() string {
 	if x != nil {
 		return x.AverageFtdAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *GetSummaryResponse) GetArpuToArppuPercentage() int32 {
@@ -763,32 +763,32 @@ func (x *GetSummaryResponse) GetArpuToArppuPercentage() int32 {
 	return 0
 }
 
-func (x *GetSummaryResponse) GetTurnover() int64 {
+func (x *GetSummaryResponse) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetSummaryResponse) GetBonus() int64 {
+func (x *GetSummaryResponse) GetBonus() string {
 	if x != nil {
 		return x.Bonus
 	}
-	return 0
+	return ""
 }
 
-func (x *GetSummaryResponse) GetGgr() int64 {
+func (x *GetSummaryResponse) GetGgr() string {
 	if x != nil {
 		return x.Ggr
 	}
-	return 0
+	return ""
 }
 
-func (x *GetSummaryResponse) GetNgr() int64 {
+func (x *GetSummaryResponse) GetNgr() string {
 	if x != nil {
 		return x.Ngr
 	}
-	return 0
+	return ""
 }
 
 type ListDailySummariesRequest struct {
@@ -802,8 +802,8 @@ type ListDailySummariesRequest struct {
 	AffiliateCodes        []string                            `protobuf:"bytes,7,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
 	ReferralCodes         []string                            `protobuf:"bytes,8,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
 	RegistrationCountries []string                            `protobuf:"bytes,9,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
-	Page                  *int64                              `protobuf:"varint,10,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize              *int64                              `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page                  *int32                              `protobuf:"varint,10,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize              *int32                              `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -901,14 +901,14 @@ func (x *ListDailySummariesRequest) GetRegistrationCountries() []string {
 	return nil
 }
 
-func (x *ListDailySummariesRequest) GetPage() int64 {
+func (x *ListDailySummariesRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListDailySummariesRequest) GetPageSize() int64 {
+func (x *ListDailySummariesRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
@@ -918,9 +918,9 @@ func (x *ListDailySummariesRequest) GetPageSize() int64 {
 type ListDailySummariesResponse struct {
 	state          protoimpl.MessageState                     `protogen:"open.v1"`
 	DailySummaries []*ListDailySummariesResponse_DailySummary `protobuf:"bytes,1,rep,name=daily_summaries,json=dailySummaries,proto3" json:"daily_summaries,omitempty"`
-	Page           int64                                      `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize       int64                                      `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total          int64                                      `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	Page           int32                                      `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize       int32                                      `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total          int32                                      `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -962,21 +962,21 @@ func (x *ListDailySummariesResponse) GetDailySummaries() []*ListDailySummariesRe
 	return nil
 }
 
-func (x *ListDailySummariesResponse) GetPage() int64 {
+func (x *ListDailySummariesResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse) GetPageSize() int64 {
+func (x *ListDailySummariesResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse) GetTotal() int64 {
+func (x *ListDailySummariesResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
 	}
@@ -2402,46 +2402,46 @@ func (x *ListWithdrawDailyDetailsResponse) GetTotal() int64 {
 type ListDailySummariesResponse_DailySummary struct {
 	state                      protoimpl.MessageState `protogen:"open.v1"`
 	Date                       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Operator                   string                 `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
+	OperatorName               string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	Country                    string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	Visits                     int64                  `protobuf:"varint,4,opt,name=visits,proto3" json:"visits,omitempty"`
-	UniqueVisits               int64                  `protobuf:"varint,5,opt,name=unique_visits,json=uniqueVisits,proto3" json:"unique_visits,omitempty"`
-	ActiveUsers                int64                  `protobuf:"varint,6,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
-	RegisteredUsers            int64                  `protobuf:"varint,7,opt,name=registered_users,json=registeredUsers,proto3" json:"registered_users,omitempty"`
-	DepositedUsers             int64                  `protobuf:"varint,8,opt,name=deposited_users,json=depositedUsers,proto3" json:"deposited_users,omitempty"`
-	FtdUsers                   int64                  `protobuf:"varint,9,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
-	RepeatedDepositedUsers     int64                  `protobuf:"varint,10,opt,name=repeated_deposited_users,json=repeatedDepositedUsers,proto3" json:"repeated_deposited_users,omitempty"`
-	DepositConversionRate      int64                  `protobuf:"varint,11,opt,name=deposit_conversion_rate,json=depositConversionRate,proto3" json:"deposit_conversion_rate,omitempty"`
-	DepositCount               int64                  `protobuf:"varint,12,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
-	DepositAmount              int64                  `protobuf:"varint,13,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
-	Arpu                       int64                  `protobuf:"varint,14,opt,name=arpu,proto3" json:"arpu,omitempty"`
-	Arppu                      int64                  `protobuf:"varint,15,opt,name=arppu,proto3" json:"arppu,omitempty"`
-	AverageFtdAmount           int64                  `protobuf:"varint,16,opt,name=average_ftd_amount,json=averageFtdAmount,proto3" json:"average_ftd_amount,omitempty"`
-	WithdrawAmount             int64                  `protobuf:"varint,17,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
-	WithdrawedUsers            int64                  `protobuf:"varint,18,opt,name=withdrawed_users,json=withdrawedUsers,proto3" json:"withdrawed_users,omitempty"`
-	FtwUsers                   int64                  `protobuf:"varint,19,opt,name=ftw_users,json=ftwUsers,proto3" json:"ftw_users,omitempty"`
-	AverageWithdrawAmount      int64                  `protobuf:"varint,20,opt,name=average_withdraw_amount,json=averageWithdrawAmount,proto3" json:"average_withdraw_amount,omitempty"`
-	FtwAmount                  int64                  `protobuf:"varint,21,opt,name=ftw_amount,json=ftwAmount,proto3" json:"ftw_amount,omitempty"`
-	AverageFtwAmount           int64                  `protobuf:"varint,22,opt,name=average_ftw_amount,json=averageFtwAmount,proto3" json:"average_ftw_amount,omitempty"`
+	Visits                     int32                  `protobuf:"varint,4,opt,name=visits,proto3" json:"visits,omitempty"`
+	UniqueVisits               int32                  `protobuf:"varint,5,opt,name=unique_visits,json=uniqueVisits,proto3" json:"unique_visits,omitempty"`
+	ActiveUsers                int32                  `protobuf:"varint,6,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
+	RegisteredUsers            int32                  `protobuf:"varint,7,opt,name=registered_users,json=registeredUsers,proto3" json:"registered_users,omitempty"`
+	DepositedUsers             int32                  `protobuf:"varint,8,opt,name=deposited_users,json=depositedUsers,proto3" json:"deposited_users,omitempty"`
+	FtdUsers                   int32                  `protobuf:"varint,9,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
+	RepeatedDepositedUsers     int32                  `protobuf:"varint,10,opt,name=repeated_deposited_users,json=repeatedDepositedUsers,proto3" json:"repeated_deposited_users,omitempty"`
+	DepositConversionRate      int32                  `protobuf:"varint,11,opt,name=deposit_conversion_rate,json=depositConversionRate,proto3" json:"deposit_conversion_rate,omitempty"`
+	DepositCount               string                 `protobuf:"bytes,12,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	DepositAmount              string                 `protobuf:"bytes,13,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
+	Arpu                       string                 `protobuf:"bytes,14,opt,name=arpu,proto3" json:"arpu,omitempty"`
+	Arppu                      string                 `protobuf:"bytes,15,opt,name=arppu,proto3" json:"arppu,omitempty"`
+	AverageFtdAmount           int32                  `protobuf:"varint,16,opt,name=average_ftd_amount,json=averageFtdAmount,proto3" json:"average_ftd_amount,omitempty"`
+	WithdrawalAmount           string                 `protobuf:"bytes,17,opt,name=withdrawal_amount,json=withdrawalAmount,proto3" json:"withdrawal_amount,omitempty"`
+	WithdrawalUsers            int32                  `protobuf:"varint,18,opt,name=withdrawal_users,json=withdrawalUsers,proto3" json:"withdrawal_users,omitempty"`
+	FtwUsers                   int32                  `protobuf:"varint,19,opt,name=ftw_users,json=ftwUsers,proto3" json:"ftw_users,omitempty"`
+	AverageWithdrawalAmount    string                 `protobuf:"bytes,20,opt,name=average_withdrawal_amount,json=averageWithdrawalAmount,proto3" json:"average_withdrawal_amount,omitempty"`
+	FtwAmount                  string                 `protobuf:"bytes,21,opt,name=ftw_amount,json=ftwAmount,proto3" json:"ftw_amount,omitempty"`
+	AverageFtwAmount           string                 `protobuf:"bytes,22,opt,name=average_ftw_amount,json=averageFtwAmount,proto3" json:"average_ftw_amount,omitempty"`
 	WuToAuPercentage           int32                  `protobuf:"varint,23,opt,name=wu_to_au_percentage,json=wuToAuPercentage,proto3" json:"wu_to_au_percentage,omitempty"`
 	WuToDuPercentage           int32                  `protobuf:"varint,24,opt,name=wu_to_du_percentage,json=wuToDuPercentage,proto3" json:"wu_to_du_percentage,omitempty"`
-	DepositMinusWithdrawAmount int64                  `protobuf:"varint,25,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
+	DepositMinusWithdrawAmount string                 `protobuf:"bytes,25,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
 	WToDPercentage             int32                  `protobuf:"varint,26,opt,name=w_to_d_percentage,json=wToDPercentage,proto3" json:"w_to_d_percentage,omitempty"`
-	Turnover                   int64                  `protobuf:"varint,27,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	DepositBonus               int64                  `protobuf:"varint,28,opt,name=deposit_bonus,json=depositBonus,proto3" json:"deposit_bonus,omitempty"`
-	RebateBonus                int64                  `protobuf:"varint,29,opt,name=rebate_bonus,json=rebateBonus,proto3" json:"rebate_bonus,omitempty"`
-	LossRebate                 int64                  `protobuf:"varint,30,opt,name=loss_rebate,json=lossRebate,proto3" json:"loss_rebate,omitempty"`
-	VipBonus                   int64                  `protobuf:"varint,31,opt,name=vip_bonus,json=vipBonus,proto3" json:"vip_bonus,omitempty"`
-	OtherBonus                 int64                  `protobuf:"varint,32,opt,name=other_bonus,json=otherBonus,proto3" json:"other_bonus,omitempty"`
-	ReferralCommission         int64                  `protobuf:"varint,33,opt,name=referral_commission,json=referralCommission,proto3" json:"referral_commission,omitempty"`
-	DepositFeeSubsidyAmount    int64                  `protobuf:"varint,34,opt,name=deposit_fee_subsidy_amount,json=depositFeeSubsidyAmount,proto3" json:"deposit_fee_subsidy_amount,omitempty"`
-	PlayerWithdrawFee          int64                  `protobuf:"varint,35,opt,name=player_withdraw_fee,json=playerWithdrawFee,proto3" json:"player_withdraw_fee,omitempty"`
-	OperatorWithdrawFee        int64                  `protobuf:"varint,36,opt,name=operator_withdraw_fee,json=operatorWithdrawFee,proto3" json:"operator_withdraw_fee,omitempty"`
-	CashBalance                int64                  `protobuf:"varint,37,opt,name=cash_balance,json=cashBalance,proto3" json:"cash_balance,omitempty"`
-	BonusBalance               int64                  `protobuf:"varint,38,opt,name=bonus_balance,json=bonusBalance,proto3" json:"bonus_balance,omitempty"`
-	LockedBalance              int64                  `protobuf:"varint,39,opt,name=locked_balance,json=lockedBalance,proto3" json:"locked_balance,omitempty"`
-	Ggr                        int64                  `protobuf:"varint,40,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	Ngr                        int64                  `protobuf:"varint,41,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	Turnover                   string                 `protobuf:"bytes,27,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	DepositBonus               string                 `protobuf:"bytes,28,opt,name=deposit_bonus,json=depositBonus,proto3" json:"deposit_bonus,omitempty"`
+	RebateBonus                string                 `protobuf:"bytes,29,opt,name=rebate_bonus,json=rebateBonus,proto3" json:"rebate_bonus,omitempty"`
+	LossRebate                 string                 `protobuf:"bytes,30,opt,name=loss_rebate,json=lossRebate,proto3" json:"loss_rebate,omitempty"`
+	VipBonus                   string                 `protobuf:"bytes,31,opt,name=vip_bonus,json=vipBonus,proto3" json:"vip_bonus,omitempty"`
+	OtherBonus                 string                 `protobuf:"bytes,32,opt,name=other_bonus,json=otherBonus,proto3" json:"other_bonus,omitempty"`
+	ReferralCommission         string                 `protobuf:"bytes,33,opt,name=referral_commission,json=referralCommission,proto3" json:"referral_commission,omitempty"`
+	DepositFeeSubsidyAmount    string                 `protobuf:"bytes,34,opt,name=deposit_fee_subsidy_amount,json=depositFeeSubsidyAmount,proto3" json:"deposit_fee_subsidy_amount,omitempty"`
+	PlayerWithdrawalFee        string                 `protobuf:"bytes,35,opt,name=player_withdrawal_fee,json=playerWithdrawalFee,proto3" json:"player_withdrawal_fee,omitempty"`
+	OperatorWithdrawalFee      string                 `protobuf:"bytes,36,opt,name=operator_withdrawal_fee,json=operatorWithdrawalFee,proto3" json:"operator_withdrawal_fee,omitempty"`
+	CashBalance                string                 `protobuf:"bytes,37,opt,name=cash_balance,json=cashBalance,proto3" json:"cash_balance,omitempty"`
+	BonusBalance               string                 `protobuf:"bytes,38,opt,name=bonus_balance,json=bonusBalance,proto3" json:"bonus_balance,omitempty"`
+	LockedBalance              string                 `protobuf:"bytes,39,opt,name=locked_balance,json=lockedBalance,proto3" json:"locked_balance,omitempty"`
+	Ggr                        string                 `protobuf:"bytes,40,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	Ngr                        string                 `protobuf:"bytes,41,opt,name=ngr,proto3" json:"ngr,omitempty"`
 	GgrToNgrPercentage         int32                  `protobuf:"varint,42,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`
 	HouseEdgePercentage        int32                  `protobuf:"varint,43,opt,name=house_edge_percentage,json=houseEdgePercentage,proto3" json:"house_edge_percentage,omitempty"`
 	unknownFields              protoimpl.UnknownFields
@@ -2485,9 +2485,9 @@ func (x *ListDailySummariesResponse_DailySummary) GetDate() *timestamppb.Timesta
 	return nil
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetOperator() string {
+func (x *ListDailySummariesResponse_DailySummary) GetOperatorName() string {
 	if x != nil {
-		return x.Operator
+		return x.OperatorName
 	}
 	return ""
 }
@@ -2499,137 +2499,137 @@ func (x *ListDailySummariesResponse_DailySummary) GetCountry() string {
 	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetVisits() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetVisits() int32 {
 	if x != nil {
 		return x.Visits
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetUniqueVisits() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetUniqueVisits() int32 {
 	if x != nil {
 		return x.UniqueVisits
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetActiveUsers() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetActiveUsers() int32 {
 	if x != nil {
 		return x.ActiveUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetRegisteredUsers() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetRegisteredUsers() int32 {
 	if x != nil {
 		return x.RegisteredUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositedUsers() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetDepositedUsers() int32 {
 	if x != nil {
 		return x.DepositedUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetFtdUsers() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetFtdUsers() int32 {
 	if x != nil {
 		return x.FtdUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetRepeatedDepositedUsers() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetRepeatedDepositedUsers() int32 {
 	if x != nil {
 		return x.RepeatedDepositedUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositConversionRate() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetDepositConversionRate() int32 {
 	if x != nil {
 		return x.DepositConversionRate
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositCount() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetDepositCount() string {
 	if x != nil {
 		return x.DepositCount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositAmount() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetDepositAmount() string {
 	if x != nil {
 		return x.DepositAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetArpu() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetArpu() string {
 	if x != nil {
 		return x.Arpu
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetArppu() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetArppu() string {
 	if x != nil {
 		return x.Arppu
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetAverageFtdAmount() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetAverageFtdAmount() int32 {
 	if x != nil {
 		return x.AverageFtdAmount
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetWithdrawAmount() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetWithdrawalAmount() string {
 	if x != nil {
-		return x.WithdrawAmount
+		return x.WithdrawalAmount
+	}
+	return ""
+}
+
+func (x *ListDailySummariesResponse_DailySummary) GetWithdrawalUsers() int32 {
+	if x != nil {
+		return x.WithdrawalUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetWithdrawedUsers() int64 {
-	if x != nil {
-		return x.WithdrawedUsers
-	}
-	return 0
-}
-
-func (x *ListDailySummariesResponse_DailySummary) GetFtwUsers() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetFtwUsers() int32 {
 	if x != nil {
 		return x.FtwUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetAverageWithdrawAmount() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetAverageWithdrawalAmount() string {
 	if x != nil {
-		return x.AverageWithdrawAmount
+		return x.AverageWithdrawalAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetFtwAmount() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetFtwAmount() string {
 	if x != nil {
 		return x.FtwAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetAverageFtwAmount() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetAverageFtwAmount() string {
 	if x != nil {
 		return x.AverageFtwAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *ListDailySummariesResponse_DailySummary) GetWuToAuPercentage() int32 {
@@ -2646,11 +2646,11 @@ func (x *ListDailySummariesResponse_DailySummary) GetWuToDuPercentage() int32 {
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositMinusWithdrawAmount() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetDepositMinusWithdrawAmount() string {
 	if x != nil {
 		return x.DepositMinusWithdrawAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *ListDailySummariesResponse_DailySummary) GetWToDPercentage() int32 {
@@ -2660,109 +2660,109 @@ func (x *ListDailySummariesResponse_DailySummary) GetWToDPercentage() int32 {
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetTurnover() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositBonus() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetDepositBonus() string {
 	if x != nil {
 		return x.DepositBonus
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetRebateBonus() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetRebateBonus() string {
 	if x != nil {
 		return x.RebateBonus
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetLossRebate() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetLossRebate() string {
 	if x != nil {
 		return x.LossRebate
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetVipBonus() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetVipBonus() string {
 	if x != nil {
 		return x.VipBonus
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetOtherBonus() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetOtherBonus() string {
 	if x != nil {
 		return x.OtherBonus
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetReferralCommission() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetReferralCommission() string {
 	if x != nil {
 		return x.ReferralCommission
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositFeeSubsidyAmount() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetDepositFeeSubsidyAmount() string {
 	if x != nil {
 		return x.DepositFeeSubsidyAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetPlayerWithdrawFee() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetPlayerWithdrawalFee() string {
 	if x != nil {
-		return x.PlayerWithdrawFee
+		return x.PlayerWithdrawalFee
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetOperatorWithdrawFee() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetOperatorWithdrawalFee() string {
 	if x != nil {
-		return x.OperatorWithdrawFee
+		return x.OperatorWithdrawalFee
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetCashBalance() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetCashBalance() string {
 	if x != nil {
 		return x.CashBalance
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetBonusBalance() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetBonusBalance() string {
 	if x != nil {
 		return x.BonusBalance
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetLockedBalance() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetLockedBalance() string {
 	if x != nil {
 		return x.LockedBalance
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetGgr() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetGgr() string {
 	if x != nil {
 		return x.Ggr
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetNgr() int64 {
+func (x *ListDailySummariesResponse_DailySummary) GetNgr() string {
 	if x != nil {
 		return x.Ngr
 	}
-	return 0
+	return ""
 }
 
 func (x *ListDailySummariesResponse_DailySummary) GetGgrToNgrPercentage() int32 {
@@ -3580,20 +3580,20 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\v_start_timeB\v\n" +
 	"\t_end_time\"\xe9\x03\n" +
 	"\x12GetSummaryResponse\x12\x16\n" +
-	"\x06visits\x18\x01 \x01(\x03R\x06visits\x12)\n" +
-	"\x10registered_users\x18\x02 \x01(\x03R\x0fregisteredUsers\x12\x10\n" +
-	"\x03ftd\x18\x03 \x01(\x03R\x03ftd\x12.\n" +
-	"\x13ftd_conversion_rate\x18\x04 \x01(\x03R\x11ftdConversionRate\x12%\n" +
-	"\x0edeposit_amount\x18\x05 \x01(\x03R\rdepositAmount\x12'\n" +
-	"\x0fwithdraw_amount\x18\x06 \x01(\x03R\x0ewithdrawAmount\x12A\n" +
-	"\x1ddeposit_minus_withdraw_amount\x18\a \x01(\x03R\x1adepositMinusWithdrawAmount\x12,\n" +
-	"\x12average_ftd_amount\x18\b \x01(\x03R\x10averageFtdAmount\x127\n" +
+	"\x06visits\x18\x01 \x01(\x05R\x06visits\x12)\n" +
+	"\x10registered_users\x18\x02 \x01(\x05R\x0fregisteredUsers\x12\x10\n" +
+	"\x03ftd\x18\x03 \x01(\x05R\x03ftd\x12.\n" +
+	"\x13ftd_conversion_rate\x18\x04 \x01(\x05R\x11ftdConversionRate\x12%\n" +
+	"\x0edeposit_amount\x18\x05 \x01(\tR\rdepositAmount\x12'\n" +
+	"\x0fwithdraw_amount\x18\x06 \x01(\tR\x0ewithdrawAmount\x12A\n" +
+	"\x1ddeposit_minus_withdraw_amount\x18\a \x01(\tR\x1adepositMinusWithdrawAmount\x12,\n" +
+	"\x12average_ftd_amount\x18\b \x01(\tR\x10averageFtdAmount\x127\n" +
 	"\x18arpu_to_arppu_percentage\x18\t \x01(\x05R\x15arpuToArppuPercentage\x12\x1a\n" +
 	"\bturnover\x18\n" +
-	" \x01(\x03R\bturnover\x12\x14\n" +
-	"\x05bonus\x18\v \x01(\x03R\x05bonus\x12\x10\n" +
-	"\x03ggr\x18\f \x01(\x03R\x03ggr\x12\x10\n" +
-	"\x03ngr\x18\r \x01(\x03R\x03ngr\"\xe4\x05\n" +
+	" \x01(\tR\bturnover\x12\x14\n" +
+	"\x05bonus\x18\v \x01(\tR\x05bonus\x12\x10\n" +
+	"\x03ggr\x18\f \x01(\tR\x03ggr\x12\x10\n" +
+	"\x03ngr\x18\r \x01(\tR\x03ngr\"\xe4\x05\n" +
 	"\x19ListDailySummariesRequest\x12]\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\x0e2>.api.backoffice.service.v1.ListDailySummariesRequest.TimeRangeR\ttimeRange\x122\n" +
@@ -3607,8 +3607,8 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x0ereferral_codes\x18\b \x03(\tR\rreferralCodes\x125\n" +
 	"\x16registration_countries\x18\t \x03(\tR\x15registrationCountries\x12\x17\n" +
 	"\x04page\x18\n" +
-	" \x01(\x03H\x02R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\v \x01(\x03H\x03R\bpageSize\x88\x01\x01\"r\n" +
+	" \x01(\x05H\x02R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\v \x01(\x05H\x03R\bpageSize\x88\x01\x01\"r\n" +
 	"\tTimeRange\x12\x1a\n" +
 	"\x16TIME_RANGE_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10TIME_RANGE_TODAY\x10\x01\x12\x18\n" +
@@ -3618,58 +3618,58 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xff\x0e\n" +
+	"_page_size\"\x98\x0f\n" +
 	"\x1aListDailySummariesResponse\x12k\n" +
 	"\x0fdaily_summaries\x18\x01 \x03(\v2B.api.backoffice.service.v1.ListDailySummariesResponse.DailySummaryR\x0edailySummaries\x12\x12\n" +
-	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x03 \x01(\x03R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\x1a\xac\r\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xc5\r\n" +
 	"\fDailySummary\x12.\n" +
-	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12\x1a\n" +
-	"\boperator\x18\x02 \x01(\tR\boperator\x12\x18\n" +
+	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x16\n" +
-	"\x06visits\x18\x04 \x01(\x03R\x06visits\x12#\n" +
-	"\runique_visits\x18\x05 \x01(\x03R\funiqueVisits\x12!\n" +
-	"\factive_users\x18\x06 \x01(\x03R\vactiveUsers\x12)\n" +
-	"\x10registered_users\x18\a \x01(\x03R\x0fregisteredUsers\x12'\n" +
-	"\x0fdeposited_users\x18\b \x01(\x03R\x0edepositedUsers\x12\x1b\n" +
-	"\tftd_users\x18\t \x01(\x03R\bftdUsers\x128\n" +
+	"\x06visits\x18\x04 \x01(\x05R\x06visits\x12#\n" +
+	"\runique_visits\x18\x05 \x01(\x05R\funiqueVisits\x12!\n" +
+	"\factive_users\x18\x06 \x01(\x05R\vactiveUsers\x12)\n" +
+	"\x10registered_users\x18\a \x01(\x05R\x0fregisteredUsers\x12'\n" +
+	"\x0fdeposited_users\x18\b \x01(\x05R\x0edepositedUsers\x12\x1b\n" +
+	"\tftd_users\x18\t \x01(\x05R\bftdUsers\x128\n" +
 	"\x18repeated_deposited_users\x18\n" +
-	" \x01(\x03R\x16repeatedDepositedUsers\x126\n" +
-	"\x17deposit_conversion_rate\x18\v \x01(\x03R\x15depositConversionRate\x12#\n" +
-	"\rdeposit_count\x18\f \x01(\x03R\fdepositCount\x12%\n" +
-	"\x0edeposit_amount\x18\r \x01(\x03R\rdepositAmount\x12\x12\n" +
-	"\x04arpu\x18\x0e \x01(\x03R\x04arpu\x12\x14\n" +
-	"\x05arppu\x18\x0f \x01(\x03R\x05arppu\x12,\n" +
-	"\x12average_ftd_amount\x18\x10 \x01(\x03R\x10averageFtdAmount\x12'\n" +
-	"\x0fwithdraw_amount\x18\x11 \x01(\x03R\x0ewithdrawAmount\x12)\n" +
-	"\x10withdrawed_users\x18\x12 \x01(\x03R\x0fwithdrawedUsers\x12\x1b\n" +
-	"\tftw_users\x18\x13 \x01(\x03R\bftwUsers\x126\n" +
-	"\x17average_withdraw_amount\x18\x14 \x01(\x03R\x15averageWithdrawAmount\x12\x1d\n" +
+	" \x01(\x05R\x16repeatedDepositedUsers\x126\n" +
+	"\x17deposit_conversion_rate\x18\v \x01(\x05R\x15depositConversionRate\x12#\n" +
+	"\rdeposit_count\x18\f \x01(\tR\fdepositCount\x12%\n" +
+	"\x0edeposit_amount\x18\r \x01(\tR\rdepositAmount\x12\x12\n" +
+	"\x04arpu\x18\x0e \x01(\tR\x04arpu\x12\x14\n" +
+	"\x05arppu\x18\x0f \x01(\tR\x05arppu\x12,\n" +
+	"\x12average_ftd_amount\x18\x10 \x01(\x05R\x10averageFtdAmount\x12+\n" +
+	"\x11withdrawal_amount\x18\x11 \x01(\tR\x10withdrawalAmount\x12)\n" +
+	"\x10withdrawal_users\x18\x12 \x01(\x05R\x0fwithdrawalUsers\x12\x1b\n" +
+	"\tftw_users\x18\x13 \x01(\x05R\bftwUsers\x12:\n" +
+	"\x19average_withdrawal_amount\x18\x14 \x01(\tR\x17averageWithdrawalAmount\x12\x1d\n" +
 	"\n" +
-	"ftw_amount\x18\x15 \x01(\x03R\tftwAmount\x12,\n" +
-	"\x12average_ftw_amount\x18\x16 \x01(\x03R\x10averageFtwAmount\x12-\n" +
+	"ftw_amount\x18\x15 \x01(\tR\tftwAmount\x12,\n" +
+	"\x12average_ftw_amount\x18\x16 \x01(\tR\x10averageFtwAmount\x12-\n" +
 	"\x13wu_to_au_percentage\x18\x17 \x01(\x05R\x10wuToAuPercentage\x12-\n" +
 	"\x13wu_to_du_percentage\x18\x18 \x01(\x05R\x10wuToDuPercentage\x12A\n" +
-	"\x1ddeposit_minus_withdraw_amount\x18\x19 \x01(\x03R\x1adepositMinusWithdrawAmount\x12)\n" +
+	"\x1ddeposit_minus_withdraw_amount\x18\x19 \x01(\tR\x1adepositMinusWithdrawAmount\x12)\n" +
 	"\x11w_to_d_percentage\x18\x1a \x01(\x05R\x0ewToDPercentage\x12\x1a\n" +
-	"\bturnover\x18\x1b \x01(\x03R\bturnover\x12#\n" +
-	"\rdeposit_bonus\x18\x1c \x01(\x03R\fdepositBonus\x12!\n" +
-	"\frebate_bonus\x18\x1d \x01(\x03R\vrebateBonus\x12\x1f\n" +
-	"\vloss_rebate\x18\x1e \x01(\x03R\n" +
+	"\bturnover\x18\x1b \x01(\tR\bturnover\x12#\n" +
+	"\rdeposit_bonus\x18\x1c \x01(\tR\fdepositBonus\x12!\n" +
+	"\frebate_bonus\x18\x1d \x01(\tR\vrebateBonus\x12\x1f\n" +
+	"\vloss_rebate\x18\x1e \x01(\tR\n" +
 	"lossRebate\x12\x1b\n" +
-	"\tvip_bonus\x18\x1f \x01(\x03R\bvipBonus\x12\x1f\n" +
-	"\vother_bonus\x18  \x01(\x03R\n" +
+	"\tvip_bonus\x18\x1f \x01(\tR\bvipBonus\x12\x1f\n" +
+	"\vother_bonus\x18  \x01(\tR\n" +
 	"otherBonus\x12/\n" +
-	"\x13referral_commission\x18! \x01(\x03R\x12referralCommission\x12;\n" +
-	"\x1adeposit_fee_subsidy_amount\x18\" \x01(\x03R\x17depositFeeSubsidyAmount\x12.\n" +
-	"\x13player_withdraw_fee\x18# \x01(\x03R\x11playerWithdrawFee\x122\n" +
-	"\x15operator_withdraw_fee\x18$ \x01(\x03R\x13operatorWithdrawFee\x12!\n" +
-	"\fcash_balance\x18% \x01(\x03R\vcashBalance\x12#\n" +
-	"\rbonus_balance\x18& \x01(\x03R\fbonusBalance\x12%\n" +
-	"\x0elocked_balance\x18' \x01(\x03R\rlockedBalance\x12\x10\n" +
-	"\x03ggr\x18( \x01(\x03R\x03ggr\x12\x10\n" +
-	"\x03ngr\x18) \x01(\x03R\x03ngr\x121\n" +
+	"\x13referral_commission\x18! \x01(\tR\x12referralCommission\x12;\n" +
+	"\x1adeposit_fee_subsidy_amount\x18\" \x01(\tR\x17depositFeeSubsidyAmount\x122\n" +
+	"\x15player_withdrawal_fee\x18# \x01(\tR\x13playerWithdrawalFee\x126\n" +
+	"\x17operator_withdrawal_fee\x18$ \x01(\tR\x15operatorWithdrawalFee\x12!\n" +
+	"\fcash_balance\x18% \x01(\tR\vcashBalance\x12#\n" +
+	"\rbonus_balance\x18& \x01(\tR\fbonusBalance\x12%\n" +
+	"\x0elocked_balance\x18' \x01(\tR\rlockedBalance\x12\x10\n" +
+	"\x03ggr\x18( \x01(\tR\x03ggr\x12\x10\n" +
+	"\x03ngr\x18) \x01(\tR\x03ngr\x121\n" +
 	"\x15ggr_to_ngr_percentage\x18* \x01(\x05R\x12ggrToNgrPercentage\x122\n" +
 	"\x15house_edge_percentage\x18+ \x01(\x05R\x13houseEdgePercentage\"\x87\x05\n" +
 	"\x19GetGameDataSummaryRequest\x12]\n" +

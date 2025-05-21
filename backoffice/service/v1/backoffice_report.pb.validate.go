@@ -3194,7 +3194,7 @@ func (m *ListDailySummariesResponse_DailySummary) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	// no validation rules for Country
 
@@ -3224,13 +3224,13 @@ func (m *ListDailySummariesResponse_DailySummary) validate(all bool) error {
 
 	// no validation rules for AverageFtdAmount
 
-	// no validation rules for WithdrawAmount
+	// no validation rules for WithdrawalAmount
 
-	// no validation rules for WithdrawedUsers
+	// no validation rules for WithdrawalUsers
 
 	// no validation rules for FtwUsers
 
-	// no validation rules for AverageWithdrawAmount
+	// no validation rules for AverageWithdrawalAmount
 
 	// no validation rules for FtwAmount
 
@@ -3260,9 +3260,9 @@ func (m *ListDailySummariesResponse_DailySummary) validate(all bool) error {
 
 	// no validation rules for DepositFeeSubsidyAmount
 
-	// no validation rules for PlayerWithdrawFee
+	// no validation rules for PlayerWithdrawalFee
 
-	// no validation rules for OperatorWithdrawFee
+	// no validation rules for OperatorWithdrawalFee
 
 	// no validation rules for CashBalance
 

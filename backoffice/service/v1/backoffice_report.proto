@@ -85,19 +85,19 @@ message GetSummaryRequest {
 }
 
 message GetSummaryResponse {
-	int64 visits = 1;
-	int64 registered_users = 2;
-	int64 ftd = 3;
-	int64 ftd_conversion_rate = 4;
-	int64 deposit_amount = 5;
-	int64 withdraw_amount = 6;
-	int64 deposit_minus_withdraw_amount = 7;
-	int64 average_ftd_amount = 8;
+	int32 visits = 1;
+	int32 registered_users = 2;
+	int32 ftd = 3;
+	int32 ftd_conversion_rate = 4;
+	string deposit_amount = 5;
+	string withdraw_amount = 6;
+	string deposit_minus_withdraw_amount = 7;
+	string average_ftd_amount = 8;
 	int32 arpu_to_arppu_percentage = 9;
-	int64 turnover = 10;
-	int64 bonus = 11;
-	int64 ggr = 12;
-	int64 ngr = 13;
+	string turnover = 10;
+	string bonus = 11;
+	string ggr = 12;
+	string ngr = 13;
 }
 
 message ListDailySummariesRequest {
@@ -116,60 +116,60 @@ message ListDailySummariesRequest {
 	repeated string affiliate_codes = 7;
 	repeated string referral_codes = 8;
 	repeated string registration_countries = 9;
-	optional int64 page = 10;
-	optional int64 page_size = 11;
+	optional int32 page = 10;
+	optional int32 page_size = 11;
 }
 
 message ListDailySummariesResponse {
 	message DailySummary {
 		google.protobuf.Timestamp date = 1;
-		string operator = 2;
+		string operator_name = 2;
 		string country = 3;
-		int64 visits = 4;
-		int64 unique_visits = 5;
-		int64 active_users = 6;
-		int64 registered_users = 7;
-		int64 deposited_users = 8;
-		int64 ftd_users = 9;
-		int64 repeated_deposited_users = 10;
-		int64 deposit_conversion_rate = 11;
-		int64 deposit_count = 12;
-		int64 deposit_amount = 13;
-		int64 arpu = 14;
-		int64 arppu = 15;
-		int64 average_ftd_amount = 16;
-		int64 withdraw_amount = 17;
-		int64 withdrawed_users = 18;
-		int64 ftw_users = 19;
-		int64 average_withdraw_amount = 20;
-		int64 ftw_amount = 21;
-		int64 average_ftw_amount = 22;
+		int32 visits = 4;
+		int32 unique_visits = 5;
+		int32 active_users = 6;
+		int32 registered_users = 7;
+		int32 deposited_users = 8;
+		int32 ftd_users = 9;
+		int32 repeated_deposited_users = 10;
+		int32 deposit_conversion_rate = 11;
+		string deposit_count = 12;
+		string deposit_amount = 13;
+		string arpu = 14;
+		string arppu = 15;
+		int32 average_ftd_amount = 16;
+		string withdrawal_amount = 17;
+		int32 withdrawal_users = 18;
+		int32 ftw_users = 19;
+		string average_withdrawal_amount = 20;
+		string ftw_amount = 21;
+		string average_ftw_amount = 22;
 		int32 wu_to_au_percentage = 23;
 		int32 wu_to_du_percentage = 24;
-		int64 deposit_minus_withdraw_amount = 25;
+		string deposit_minus_withdraw_amount = 25;
 		int32 w_to_d_percentage = 26;
-		int64 turnover = 27;
-		int64 deposit_bonus = 28;
-		int64 rebate_bonus = 29;
-		int64 loss_rebate = 30;
-		int64 vip_bonus = 31;
-		int64 other_bonus = 32;
-		int64 referral_commission = 33;
-		int64 deposit_fee_subsidy_amount = 34;
-		int64 player_withdraw_fee = 35;
-		int64 operator_withdraw_fee = 36;
-		int64 cash_balance = 37;
-		int64 bonus_balance = 38;
-		int64 locked_balance = 39;
-		int64 ggr = 40;
-		int64 ngr = 41;
+		string turnover = 27;
+		string deposit_bonus = 28;
+		string rebate_bonus = 29;
+		string loss_rebate = 30;
+		string vip_bonus = 31;
+		string other_bonus = 32;
+		string referral_commission = 33;
+		string deposit_fee_subsidy_amount = 34;
+		string player_withdrawal_fee = 35;
+		string operator_withdrawal_fee = 36;
+		string cash_balance = 37;
+		string bonus_balance = 38;
+		string locked_balance = 39;
+		string ggr = 40;
+		string ngr = 41;
 		int32 ggr_to_ngr_percentage = 42;
 		int32 house_edge_percentage = 43;
 	}
 	repeated DailySummary daily_summaries = 1;
-	int64 page = 2;
-	int64 page_size = 3;
-	int64 total = 4;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
 }
 
 message GetGameDataSummaryRequest {
