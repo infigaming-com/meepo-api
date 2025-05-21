@@ -561,13 +561,10 @@ func (*ReviewTicketResponse) Descriptor() ([]byte, []int) {
 }
 
 type AddCommentRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// review ticket id
-	TicketId int64 `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	// user id of the reviewer
-	ReviewerUserId int64 `protobuf:"varint,2,opt,name=reviewer_user_id,json=reviewerUserId,proto3" json:"reviewer_user_id,omitempty"`
-	// review comment
-	ReviewComment string `protobuf:"bytes,3,opt,name=review_comment,json=reviewComment,proto3" json:"review_comment,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	AuthorUserId  int64                  `protobuf:"varint,2,opt,name=author_user_id,json=authorUserId,proto3" json:"author_user_id,omitempty"`
+	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -609,24 +606,23 @@ func (x *AddCommentRequest) GetTicketId() int64 {
 	return 0
 }
 
-func (x *AddCommentRequest) GetReviewerUserId() int64 {
+func (x *AddCommentRequest) GetAuthorUserId() int64 {
 	if x != nil {
-		return x.ReviewerUserId
+		return x.AuthorUserId
 	}
 	return 0
 }
 
-func (x *AddCommentRequest) GetReviewComment() string {
+func (x *AddCommentRequest) GetContent() string {
 	if x != nil {
-		return x.ReviewComment
+		return x.Content
 	}
 	return ""
 }
 
 type AddCommentResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// id of the comment added
-	CommentId     int64 `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CommentId     int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1341,22 +1337,24 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x10reviewer_user_id\x18\x02 \x01(\x03R\x0ereviewerUserId\x12\x16\n" +
 	"\x06action\x18\x03 \x01(\tR\x06action\x12%\n" +
 	"\x0ereview_comment\x18\x04 \x01(\tR\rreviewComment\"\x16\n" +
-	"\x14ReviewTicketResponse\"\x81\x01\n" +
+	"\x14ReviewTicketResponse\"p\n" +
 	"\x11AddCommentRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12(\n" +
-	"\x10reviewer_user_id\x18\x02 \x01(\x03R\x0ereviewerUserId\x12%\n" +
-	"\x0ereview_comment\x18\x03 \x01(\tR\rreviewComment\"3\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12$\n" +
+	"\x0eauthor_user_id\x18\x02 \x01(\x03R\fauthorUserId\x12\x18\n" +
+	"\acontent\x18\x03 \x01(\tR\acontent\"3\n" +
 	"\x12AddCommentResponse\x12\x1d\n" +
 	"\n" +
 	"comment_id\x18\x01 \x01(\x03R\tcommentId\"^\n" +
 	"\x13CancelTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12*\n" +
 	"\x11canceller_user_id\x18\x02 \x01(\x03R\x0fcancellerUserId\"\x16\n" +
-	"\x14CancelTicketResponse2\x8d\x05\n" +
+	"\x14CancelTicketResponse2\xb0\x06\n" +
 	"\x10BackofficeReview\x12\x9b\x01\n" +
 	"\vListTickets\x12-.api.backoffice.service.v1.ListTicketsRequest\x1a..api.backoffice.service.v1.ListTicketsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/review/tickets/list\x12\x94\x01\n" +
 	"\tGetTicket\x12+.api.backoffice.service.v1.GetTicketRequest\x1a,.api.backoffice.service.v1.GetTicketResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/review/tickets/get\x12\xa0\x01\n" +
 	"\fReviewTicket\x12..api.backoffice.service.v1.ReviewTicketRequest\x1a/.api.backoffice.service.v1.ReviewTicketResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/review/tickets/review\x12\xa0\x01\n" +
+	"\n" +
+	"AddComment\x12,.api.backoffice.service.v1.AddCommentRequest\x1a-.api.backoffice.service.v1.AddCommentResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/review/tickets/comments/add\x12\xa0\x01\n" +
 	"\fCancelTicket\x12..api.backoffice.service.v1.CancelTicketRequest\x1a/.api.backoffice.service.v1.CancelTicketResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/review/tickets/cancelB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
@@ -1406,13 +1404,15 @@ var file_backoffice_service_v1_backoffice_review_proto_depIdxs = []int32{
 	0,  // 11: api.backoffice.service.v1.BackofficeReview.ListTickets:input_type -> api.backoffice.service.v1.ListTicketsRequest
 	2,  // 12: api.backoffice.service.v1.BackofficeReview.GetTicket:input_type -> api.backoffice.service.v1.GetTicketRequest
 	4,  // 13: api.backoffice.service.v1.BackofficeReview.ReviewTicket:input_type -> api.backoffice.service.v1.ReviewTicketRequest
-	8,  // 14: api.backoffice.service.v1.BackofficeReview.CancelTicket:input_type -> api.backoffice.service.v1.CancelTicketRequest
-	1,  // 15: api.backoffice.service.v1.BackofficeReview.ListTickets:output_type -> api.backoffice.service.v1.ListTicketsResponse
-	3,  // 16: api.backoffice.service.v1.BackofficeReview.GetTicket:output_type -> api.backoffice.service.v1.GetTicketResponse
-	5,  // 17: api.backoffice.service.v1.BackofficeReview.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
-	9,  // 18: api.backoffice.service.v1.BackofficeReview.CancelTicket:output_type -> api.backoffice.service.v1.CancelTicketResponse
-	15, // [15:19] is the sub-list for method output_type
-	11, // [11:15] is the sub-list for method input_type
+	6,  // 14: api.backoffice.service.v1.BackofficeReview.AddComment:input_type -> api.backoffice.service.v1.AddCommentRequest
+	8,  // 15: api.backoffice.service.v1.BackofficeReview.CancelTicket:input_type -> api.backoffice.service.v1.CancelTicketRequest
+	1,  // 16: api.backoffice.service.v1.BackofficeReview.ListTickets:output_type -> api.backoffice.service.v1.ListTicketsResponse
+	3,  // 17: api.backoffice.service.v1.BackofficeReview.GetTicket:output_type -> api.backoffice.service.v1.GetTicketResponse
+	5,  // 18: api.backoffice.service.v1.BackofficeReview.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
+	7,  // 19: api.backoffice.service.v1.BackofficeReview.AddComment:output_type -> api.backoffice.service.v1.AddCommentResponse
+	9,  // 20: api.backoffice.service.v1.BackofficeReview.CancelTicket:output_type -> api.backoffice.service.v1.CancelTicketResponse
+	16, // [16:21] is the sub-list for method output_type
+	11, // [11:16] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name
 	11, // [11:11] is the sub-list for extension extendee
 	0,  // [0:11] is the sub-list for field type_name
