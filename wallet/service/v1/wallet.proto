@@ -451,4 +451,7 @@ message GetUserTransactionSummaryResponse {
 	string total_withdraw = 3;
 	string deposit_minus_withdraw = 4;
 	string total_valid_bet = 5;
+	int32 total_deposit_count = 6;
+	int32 total_withdraw_count = 7;
+	int32 today_withdraw_count = 8;
 }
