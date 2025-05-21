@@ -165,6 +165,9 @@ service User {
 
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {
 	}
+
+	rpc GetCommentsByUserId(GetCommentsByUserIdRequest) returns (GetCommentsByUserIdResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -536,4 +539,19 @@ message AddCommentRequest {
 
 message AddCommentResponse {
 	int64 comment_id = 1;
+}
+
+message GetCommentsByUserIdRequest {
+	int64 user_id = 1;
+}
+
+message GetCommentsByUserIdResponse {
+	message Comment {
+		int64 comment_id = 1;
+		int64 user_id = 2;
+		int64 author_user_id = 4;
+		string content = 6;
+		int64 created_at = 7;
+	}
+	repeated Comment comments = 1;
 }

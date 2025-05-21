@@ -28,7 +28,6 @@ const (
 	BackofficeUser_AddUserTag_FullMethodName            = "/api.backoffice.service.v1.BackofficeUser/AddUserTag"
 	BackofficeUser_DeleteUserTag_FullMethodName         = "/api.backoffice.service.v1.BackofficeUser/DeleteUserTag"
 	BackofficeUser_AddUserComment_FullMethodName        = "/api.backoffice.service.v1.BackofficeUser/AddUserComment"
-	BackofficeUser_ListUserComments_FullMethodName      = "/api.backoffice.service.v1.BackofficeUser/ListUserComments"
 	BackofficeUser_UpdateUser_FullMethodName            = "/api.backoffice.service.v1.BackofficeUser/UpdateUser"
 )
 
@@ -45,7 +44,6 @@ type BackofficeUserClient interface {
 	AddUserTag(ctx context.Context, in *AddUserTagRequest, opts ...grpc.CallOption) (*AddUserTagResponse, error)
 	DeleteUserTag(ctx context.Context, in *DeleteUserTagRequest, opts ...grpc.CallOption) (*DeleteUserTagResponse, error)
 	AddUserComment(ctx context.Context, in *AddUserCommentRequest, opts ...grpc.CallOption) (*AddUserCommentResponse, error)
-	ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...grpc.CallOption) (*ListUserCommentsResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 }
 
@@ -147,16 +145,6 @@ func (c *backofficeUserClient) AddUserComment(ctx context.Context, in *AddUserCo
 	return out, nil
 }
 
-func (c *backofficeUserClient) ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...grpc.CallOption) (*ListUserCommentsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListUserCommentsResponse)
-	err := c.cc.Invoke(ctx, BackofficeUser_ListUserComments_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *backofficeUserClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserResponse)
@@ -180,7 +168,6 @@ type BackofficeUserServer interface {
 	AddUserTag(context.Context, *AddUserTagRequest) (*AddUserTagResponse, error)
 	DeleteUserTag(context.Context, *DeleteUserTagRequest) (*DeleteUserTagResponse, error)
 	AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error)
-	ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	mustEmbedUnimplementedBackofficeUserServer()
 }
@@ -218,9 +205,6 @@ func (UnimplementedBackofficeUserServer) DeleteUserTag(context.Context, *DeleteU
 }
 func (UnimplementedBackofficeUserServer) AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddUserComment not implemented")
-}
-func (UnimplementedBackofficeUserServer) ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListUserComments not implemented")
 }
 func (UnimplementedBackofficeUserServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
@@ -408,24 +392,6 @@ func _BackofficeUser_AddUserComment_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeUser_ListUserComments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListUserCommentsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeUserServer).ListUserComments(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeUser_ListUserComments_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeUserServer).ListUserComments(ctx, req.(*ListUserCommentsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _BackofficeUser_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateUserRequest)
 	if err := dec(in); err != nil {
@@ -486,10 +452,6 @@ var BackofficeUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddUserComment",
 			Handler:    _BackofficeUser_AddUserComment_Handler,
-		},
-		{
-			MethodName: "ListUserComments",
-			Handler:    _BackofficeUser_ListUserComments_Handler,
 		},
 		{
 			MethodName: "UpdateUser",
