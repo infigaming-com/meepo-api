@@ -2264,7 +2264,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"_ban_loginB\v\n" +
 	"\t_ban_gameB\x0f\n" +
 	"\r_ban_withdraw\"\x14\n" +
-	"\x12UpdateUserResponse2\xb5\x0e\n" +
+	"\x12UpdateUserResponse2\x89\r\n" +
 	"\x0eBackofficeUser\x12\x8b\x01\n" +
 	"\tListUsers\x12+.api.backoffice.service.v1.ListUsersRequest\x1a,.api.backoffice.service.v1.ListUsersResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/backoffice/user/list\x12\xa5\x01\n" +
 	"\x0fGetUserOverview\x121.api.backoffice.service.v1.GetUserOverviewRequest\x1a2.api.backoffice.service.v1.GetUserOverviewResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/overview/get\x12\xa1\x01\n" +
@@ -2275,8 +2275,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
 	"AddUserTag\x12,.api.backoffice.service.v1.AddUserTagRequest\x1a-.api.backoffice.service.v1.AddUserTagResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/user/tags/add\x12\x9e\x01\n" +
 	"\rDeleteUserTag\x12/.api.backoffice.service.v1.DeleteUserTagRequest\x1a0.api.backoffice.service.v1.DeleteUserTagResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/user/tags/delete\x12\xa2\x01\n" +
-	"\x0eAddUserComment\x120.api.backoffice.service.v1.AddUserCommentRequest\x1a1.api.backoffice.service.v1.AddUserCommentResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/comments/add\x12\xa9\x01\n" +
-	"\x10ListUserComments\x122.api.backoffice.service.v1.ListUserCommentsRequest\x1a3.api.backoffice.service.v1.ListUserCommentsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/user/comments/list\x12\x90\x01\n" +
+	"\x0eAddUserComment\x120.api.backoffice.service.v1.AddUserCommentRequest\x1a1.api.backoffice.service.v1.AddUserCommentResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/comments/add\x12\x90\x01\n" +
 	"\n" +
 	"UpdateUser\x12,.api.backoffice.service.v1.UpdateUserRequest\x1a-.api.backoffice.service.v1.UpdateUserResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/backoffice/user/updateB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
@@ -2350,21 +2349,19 @@ var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
 	12, // 21: api.backoffice.service.v1.BackofficeUser.AddUserTag:input_type -> api.backoffice.service.v1.AddUserTagRequest
 	14, // 22: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:input_type -> api.backoffice.service.v1.DeleteUserTagRequest
 	16, // 23: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
-	18, // 24: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
-	20, // 25: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
-	1,  // 26: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
-	3,  // 27: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
-	5,  // 28: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
-	7,  // 29: api.backoffice.service.v1.BackofficeUser.AddOperatorUserTag:output_type -> api.backoffice.service.v1.AddOperatorUserTagResponse
-	9,  // 30: api.backoffice.service.v1.BackofficeUser.DeleteOperatorUserTag:output_type -> api.backoffice.service.v1.DeleteOperatorUserTagResponse
-	11, // 31: api.backoffice.service.v1.BackofficeUser.GetOperatorUserTags:output_type -> api.backoffice.service.v1.GetOperatorUserTagsResponse
-	13, // 32: api.backoffice.service.v1.BackofficeUser.AddUserTag:output_type -> api.backoffice.service.v1.AddUserTagResponse
-	15, // 33: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:output_type -> api.backoffice.service.v1.DeleteUserTagResponse
-	17, // 34: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
-	19, // 35: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
-	21, // 36: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
-	26, // [26:37] is the sub-list for method output_type
-	15, // [15:26] is the sub-list for method input_type
+	20, // 24: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
+	1,  // 25: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
+	3,  // 26: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
+	5,  // 27: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
+	7,  // 28: api.backoffice.service.v1.BackofficeUser.AddOperatorUserTag:output_type -> api.backoffice.service.v1.AddOperatorUserTagResponse
+	9,  // 29: api.backoffice.service.v1.BackofficeUser.DeleteOperatorUserTag:output_type -> api.backoffice.service.v1.DeleteOperatorUserTagResponse
+	11, // 30: api.backoffice.service.v1.BackofficeUser.GetOperatorUserTags:output_type -> api.backoffice.service.v1.GetOperatorUserTagsResponse
+	13, // 31: api.backoffice.service.v1.BackofficeUser.AddUserTag:output_type -> api.backoffice.service.v1.AddUserTagResponse
+	15, // 32: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:output_type -> api.backoffice.service.v1.DeleteUserTagResponse
+	17, // 33: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
+	21, // 34: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
+	25, // [25:35] is the sub-list for method output_type
+	15, // [15:25] is the sub-list for method input_type
 	15, // [15:15] is the sub-list for extension type_name
 	15, // [15:15] is the sub-list for extension extendee
 	0,  // [0:15] is the sub-list for field type_name

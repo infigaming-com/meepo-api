@@ -27,7 +27,6 @@ const OperationBackofficeUserDeleteUserTag = "/api.backoffice.service.v1.Backoff
 const OperationBackofficeUserGetOperatorUserTags = "/api.backoffice.service.v1.BackofficeUser/GetOperatorUserTags"
 const OperationBackofficeUserGetUserOverview = "/api.backoffice.service.v1.BackofficeUser/GetUserOverview"
 const OperationBackofficeUserGetUserProfile = "/api.backoffice.service.v1.BackofficeUser/GetUserProfile"
-const OperationBackofficeUserListUserComments = "/api.backoffice.service.v1.BackofficeUser/ListUserComments"
 const OperationBackofficeUserListUsers = "/api.backoffice.service.v1.BackofficeUser/ListUsers"
 const OperationBackofficeUserUpdateUser = "/api.backoffice.service.v1.BackofficeUser/UpdateUser"
 
@@ -40,7 +39,6 @@ type BackofficeUserHTTPServer interface {
 	GetOperatorUserTags(context.Context, *GetOperatorUserTagsRequest) (*GetOperatorUserTagsResponse, error)
 	GetUserOverview(context.Context, *GetUserOverviewRequest) (*GetUserOverviewResponse, error)
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
-	ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 }
@@ -56,7 +54,6 @@ func RegisterBackofficeUserHTTPServer(s *http.Server, srv BackofficeUserHTTPServ
 	r.POST("/v1/backoffice/user/tags/add", _BackofficeUser_AddUserTag1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/tags/delete", _BackofficeUser_DeleteUserTag1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/comments/add", _BackofficeUser_AddUserComment0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/user/comments/list", _BackofficeUser_ListUserComments0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/update", _BackofficeUser_UpdateUser0_HTTP_Handler(srv))
 }
 
@@ -258,28 +255,6 @@ func _BackofficeUser_AddUserComment0_HTTP_Handler(srv BackofficeUserHTTPServer) 
 	}
 }
 
-func _BackofficeUser_ListUserComments0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListUserCommentsRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeUserListUserComments)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListUserComments(ctx, req.(*ListUserCommentsRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListUserCommentsResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 func _BackofficeUser_UpdateUser0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateUserRequest
@@ -311,7 +286,6 @@ type BackofficeUserHTTPClient interface {
 	GetOperatorUserTags(ctx context.Context, req *GetOperatorUserTagsRequest, opts ...http.CallOption) (rsp *GetOperatorUserTagsResponse, err error)
 	GetUserOverview(ctx context.Context, req *GetUserOverviewRequest, opts ...http.CallOption) (rsp *GetUserOverviewResponse, err error)
 	GetUserProfile(ctx context.Context, req *GetUserProfileRequest, opts ...http.CallOption) (rsp *GetUserProfileResponse, err error)
-	ListUserComments(ctx context.Context, req *ListUserCommentsRequest, opts ...http.CallOption) (rsp *ListUserCommentsResponse, err error)
 	ListUsers(ctx context.Context, req *ListUsersRequest, opts ...http.CallOption) (rsp *ListUsersResponse, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
 }
@@ -420,19 +394,6 @@ func (c *BackofficeUserHTTPClientImpl) GetUserProfile(ctx context.Context, in *G
 	pattern := "/v1/backoffice/user/profile/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeUserGetUserProfile))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeUserHTTPClientImpl) ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...http.CallOption) (*ListUserCommentsResponse, error) {
-	var out ListUserCommentsResponse
-	pattern := "/v1/backoffice/user/comments/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeUserListUserComments))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -64,12 +64,6 @@ service BackofficeUser {
             body: "*"
         };
     }
-	rpc ListUserComments(ListUserCommentsRequest) returns (ListUserCommentsResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/comments/list"
-            body: "*"
-        };
-    }
 	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/update"

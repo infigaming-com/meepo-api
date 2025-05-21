@@ -42,6 +42,7 @@ const (
 	User_UpdateUser_FullMethodName                  = "/api.user.service.v1.User/UpdateUser"
 	User_ListUsers_FullMethodName                   = "/api.user.service.v1.User/ListUsers"
 	User_AddComment_FullMethodName                  = "/api.user.service.v1.User/AddComment"
+	User_GetCommentsByUserId_FullMethodName         = "/api.user.service.v1.User/GetCommentsByUserId"
 )
 
 // UserClient is the client API for User service.
@@ -98,6 +99,7 @@ type UserClient interface {
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
+	GetCommentsByUserId(ctx context.Context, in *GetCommentsByUserIdRequest, opts ...grpc.CallOption) (*GetCommentsByUserIdResponse, error)
 }
 
 type userClient struct {
@@ -338,6 +340,16 @@ func (c *userClient) AddComment(ctx context.Context, in *AddCommentRequest, opts
 	return out, nil
 }
 
+func (c *userClient) GetCommentsByUserId(ctx context.Context, in *GetCommentsByUserIdRequest, opts ...grpc.CallOption) (*GetCommentsByUserIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCommentsByUserIdResponse)
+	err := c.cc.Invoke(ctx, User_GetCommentsByUserId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -392,6 +404,7 @@ type UserServer interface {
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
+	GetCommentsByUserId(context.Context, *GetCommentsByUserIdRequest) (*GetCommentsByUserIdResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -470,6 +483,9 @@ func (UnimplementedUserServer) ListUsers(context.Context, *ListUsersRequest) (*L
 }
 func (UnimplementedUserServer) AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddComment not implemented")
+}
+func (UnimplementedUserServer) GetCommentsByUserId(context.Context, *GetCommentsByUserIdRequest) (*GetCommentsByUserIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCommentsByUserId not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -906,6 +922,24 @@ func _User_AddComment_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetCommentsByUserId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCommentsByUserIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetCommentsByUserId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetCommentsByUserId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetCommentsByUserId(ctx, req.(*GetCommentsByUserIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1004,6 +1038,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddComment",
 			Handler:    _User_AddComment_Handler,
+		},
+		{
+			MethodName: "GetCommentsByUserId",
+			Handler:    _User_GetCommentsByUserId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
