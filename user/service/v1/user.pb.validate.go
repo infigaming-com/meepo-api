@@ -4691,6 +4691,218 @@ var _ interface {
 	ErrorName() string
 } = ListUsersResponseValidationError{}
 
+// Validate checks the field values on AddCommentRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *AddCommentRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddCommentRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddCommentRequestMultiError, or nil if none found.
+func (m *AddCommentRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddCommentRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for AuthorUserId
+
+	// no validation rules for Content
+
+	if len(errors) > 0 {
+		return AddCommentRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddCommentRequestMultiError is an error wrapping multiple validation errors
+// returned by AddCommentRequest.ValidateAll() if the designated constraints
+// aren't met.
+type AddCommentRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddCommentRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddCommentRequestMultiError) AllErrors() []error { return m }
+
+// AddCommentRequestValidationError is the validation error returned by
+// AddCommentRequest.Validate if the designated constraints aren't met.
+type AddCommentRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddCommentRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddCommentRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddCommentRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddCommentRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddCommentRequestValidationError) ErrorName() string {
+	return "AddCommentRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddCommentRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddCommentRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddCommentRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddCommentRequestValidationError{}
+
+// Validate checks the field values on AddCommentResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddCommentResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddCommentResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddCommentResponseMultiError, or nil if none found.
+func (m *AddCommentResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddCommentResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CommentId
+
+	if len(errors) > 0 {
+		return AddCommentResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddCommentResponseMultiError is an error wrapping multiple validation errors
+// returned by AddCommentResponse.ValidateAll() if the designated constraints
+// aren't met.
+type AddCommentResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddCommentResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddCommentResponseMultiError) AllErrors() []error { return m }
+
+// AddCommentResponseValidationError is the validation error returned by
+// AddCommentResponse.Validate if the designated constraints aren't met.
+type AddCommentResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddCommentResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddCommentResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddCommentResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddCommentResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddCommentResponseValidationError) ErrorName() string {
+	return "AddCommentResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddCommentResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddCommentResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddCommentResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddCommentResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
