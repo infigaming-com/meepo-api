@@ -99,10 +99,9 @@ service Game {
 	};
 
 	rpc UpdateGame(UpdateGameRequest) returns (UpdateGameResponse) {
-		option (google.api.http) = {
-			post: "/v1/game/update"
-			body: "*"
-		};
+	};
+
+	rpc UpdateProvider(UpdateProviderRequest) returns (UpdateProviderResponse) {
 	};
 }
 
@@ -363,10 +362,10 @@ message Action {
 }
 
 message Transactions {
-	string txn_id = 1;
-	string operator_txn_id = 2;
-	string processed_at = 3;
-	double bonus_amount = 4;
+	string txn_id = 1 [json_name="txn_id"];
+	string operator_txn_id = 2 [json_name="operator_txn_id"];
+	double processed_at = 3 [json_name="processed_at"];
+	double bonus_amount = 4 [json_name="bonus_amount"];
 }
 
 message RollbackRequest {
@@ -514,3 +513,12 @@ message UpdateGameRequest {
 
 message UpdateGameResponse {
 }
+
+message UpdateProviderRequest {
+	string provider_id = 1;
+	optional bool enabled = 2;
+}
+
+message UpdateProviderResponse {
+}
+

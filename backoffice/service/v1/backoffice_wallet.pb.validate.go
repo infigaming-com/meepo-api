@@ -2028,6 +2028,8 @@ func (m *ListWalletBalanceTransactionsResponse_BalanceTransaction) validate(all 
 		}
 	}
 
+	// no validation rules for TransactionId
+
 	// no validation rules for TransactionType
 
 	// no validation rules for VipLevel

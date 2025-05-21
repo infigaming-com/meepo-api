@@ -26,30 +26,30 @@ const (
 type ListUsersRequest struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
 	UserId                *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	Tags                  []string               `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"`
+	Tags                  []string               `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"` // not available for now
 	RegistrationStartTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=registration_start_time,json=registrationStartTime,proto3,oneof" json:"registration_start_time,omitempty"`
 	RegistrationEndTime   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=registration_end_time,json=registrationEndTime,proto3,oneof" json:"registration_end_time,omitempty"`
 	VipLevel              *int32                 `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3,oneof" json:"vip_level,omitempty"`
 	RetailerOperatorId    *int64                 `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3,oneof" json:"retailer_operator_id,omitempty"`
 	GroupOperatorId       *int64                 `protobuf:"varint,7,opt,name=group_operator_id,json=groupOperatorId,proto3,oneof" json:"group_operator_id,omitempty"`
 	OperatorId            *int64                 `protobuf:"varint,8,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
-	Countries             []string               `protobuf:"bytes,9,rep,name=countries,proto3" json:"countries,omitempty"`
-	RiskLevelMin          *int32                 `protobuf:"varint,10,opt,name=risk_level_min,json=riskLevelMin,proto3,oneof" json:"risk_level_min,omitempty"`
-	RiskLevelMax          *int32                 `protobuf:"varint,11,opt,name=risk_level_max,json=riskLevelMax,proto3,oneof" json:"risk_level_max,omitempty"`
-	KycLevels             []int32                `protobuf:"varint,12,rep,packed,name=kyc_levels,json=kycLevels,proto3" json:"kyc_levels,omitempty"`
-	HasMadeDeposit        *bool                  `protobuf:"varint,13,opt,name=has_made_deposit,json=hasMadeDeposit,proto3,oneof" json:"has_made_deposit,omitempty"`
-	DepositMin            *string                `protobuf:"bytes,14,opt,name=deposit_min,json=depositMin,proto3,oneof" json:"deposit_min,omitempty"`
-	DepositMax            *string                `protobuf:"bytes,15,opt,name=deposit_max,json=depositMax,proto3,oneof" json:"deposit_max,omitempty"`
-	WithdrawalMin         *string                `protobuf:"bytes,16,opt,name=withdrawal_min,json=withdrawalMin,proto3,oneof" json:"withdrawal_min,omitempty"`
-	WithdrawalMax         *string                `protobuf:"bytes,17,opt,name=withdrawal_max,json=withdrawalMax,proto3,oneof" json:"withdrawal_max,omitempty"`
-	BanWithdraw           *bool                  `protobuf:"varint,18,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
-	BanGame               *bool                  `protobuf:"varint,19,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
-	BanLogin              *bool                  `protobuf:"varint,20,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
-	Online                *bool                  `protobuf:"varint,21,opt,name=online,proto3,oneof" json:"online,omitempty"`
-	Page                  *int32                 `protobuf:"varint,22,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize              *int32                 `protobuf:"varint,23,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	Country               *string                `protobuf:"bytes,9,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	// optional int32 risk_level_min = 10;
+	// optional int32 risk_level_max = 11;
+	KycLevel *int32 `protobuf:"varint,12,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
+	// optional bool has_made_deposit = 13;
+	DepositMin    *string `protobuf:"bytes,14,opt,name=deposit_min,json=depositMin,proto3,oneof" json:"deposit_min,omitempty"`
+	DepositMax    *string `protobuf:"bytes,15,opt,name=deposit_max,json=depositMax,proto3,oneof" json:"deposit_max,omitempty"`
+	WithdrawalMin *string `protobuf:"bytes,16,opt,name=withdrawal_min,json=withdrawalMin,proto3,oneof" json:"withdrawal_min,omitempty"`
+	WithdrawalMax *string `protobuf:"bytes,17,opt,name=withdrawal_max,json=withdrawalMax,proto3,oneof" json:"withdrawal_max,omitempty"`
+	BanWithdraw   *bool   `protobuf:"varint,18,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
+	BanGame       *bool   `protobuf:"varint,19,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
+	BanLogin      *bool   `protobuf:"varint,20,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
+	// optional bool online = 21;
+	Page          *int32 `protobuf:"varint,22,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,23,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListUsersRequest) Reset() {
@@ -138,39 +138,18 @@ func (x *ListUsersRequest) GetOperatorId() int64 {
 	return 0
 }
 
-func (x *ListUsersRequest) GetCountries() []string {
-	if x != nil {
-		return x.Countries
+func (x *ListUsersRequest) GetCountry() string {
+	if x != nil && x.Country != nil {
+		return *x.Country
 	}
-	return nil
+	return ""
 }
 
-func (x *ListUsersRequest) GetRiskLevelMin() int32 {
-	if x != nil && x.RiskLevelMin != nil {
-		return *x.RiskLevelMin
+func (x *ListUsersRequest) GetKycLevel() int32 {
+	if x != nil && x.KycLevel != nil {
+		return *x.KycLevel
 	}
 	return 0
-}
-
-func (x *ListUsersRequest) GetRiskLevelMax() int32 {
-	if x != nil && x.RiskLevelMax != nil {
-		return *x.RiskLevelMax
-	}
-	return 0
-}
-
-func (x *ListUsersRequest) GetKycLevels() []int32 {
-	if x != nil {
-		return x.KycLevels
-	}
-	return nil
-}
-
-func (x *ListUsersRequest) GetHasMadeDeposit() bool {
-	if x != nil && x.HasMadeDeposit != nil {
-		return *x.HasMadeDeposit
-	}
-	return false
 }
 
 func (x *ListUsersRequest) GetDepositMin() string {
@@ -218,13 +197,6 @@ func (x *ListUsersRequest) GetBanGame() bool {
 func (x *ListUsersRequest) GetBanLogin() bool {
 	if x != nil && x.BanLogin != nil {
 		return *x.BanLogin
-	}
-	return false
-}
-
-func (x *ListUsersRequest) GetOnline() bool {
-	if x != nil && x.Online != nil {
-		return *x.Online
 	}
 	return false
 }
@@ -1575,40 +1547,144 @@ func (*SendEmailVerificationCodeResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{23}
 }
 
+type UpdateUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	BanLogin      *bool                  `protobuf:"varint,2,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
+	BanGame       *bool                  `protobuf:"varint,3,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
+	BanWithdraw   *bool                  `protobuf:"varint,4,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserRequest) Reset() {
+	*x = UpdateUserRequest{}
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserRequest) ProtoMessage() {}
+
+func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *UpdateUserRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UpdateUserRequest) GetBanLogin() bool {
+	if x != nil && x.BanLogin != nil {
+		return *x.BanLogin
+	}
+	return false
+}
+
+func (x *UpdateUserRequest) GetBanGame() bool {
+	if x != nil && x.BanGame != nil {
+		return *x.BanGame
+	}
+	return false
+}
+
+func (x *UpdateUserRequest) GetBanWithdraw() bool {
+	if x != nil && x.BanWithdraw != nil {
+		return *x.BanWithdraw
+	}
+	return false
+}
+
+type UpdateUserResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserResponse) Reset() {
+	*x = UpdateUserResponse{}
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserResponse) ProtoMessage() {}
+
+func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserResponse.ProtoReflect.Descriptor instead.
+func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{25}
+}
+
 type ListUsersResponse_User struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Retailer       string                 `protobuf:"bytes,1,opt,name=retailer,proto3" json:"retailer,omitempty"`
-	Group          string                 `protobuf:"bytes,2,opt,name=group,proto3" json:"group,omitempty"`
-	Operator       string                 `protobuf:"bytes,3,opt,name=operator,proto3" json:"operator,omitempty"`
-	UserId         int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Username       string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
-	Email          string                 `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile         string                 `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	VipLevel       int32                  `protobuf:"varint,8,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	KycLevel       int32                  `protobuf:"varint,9,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
-	Deposit        string                 `protobuf:"bytes,10,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	Withdraw       string                 `protobuf:"bytes,11,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
-	Tags           []string               `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
-	BanWithdraw    bool                   `protobuf:"varint,13,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
-	BanGame        bool                   `protobuf:"varint,14,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
-	BanLogin       bool                   `protobuf:"varint,15,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
-	Online         bool                   `protobuf:"varint,16,opt,name=online,proto3" json:"online,omitempty"`
-	LastLoginAt    *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
-	RegisteredAt   *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
-	RiskLevel      int32                  `protobuf:"varint,19,opt,name=risk_level,json=riskLevel,proto3" json:"risk_level,omitempty"`
-	ReferralCode   string                 `protobuf:"bytes,20,opt,name=referral_code,json=referralCode,proto3" json:"referral_code,omitempty"`
-	AffiliateCode  string                 `protobuf:"bytes,21,opt,name=affiliate_code,json=affiliateCode,proto3" json:"affiliate_code,omitempty"`
-	Country        string                 `protobuf:"bytes,22,opt,name=country,proto3" json:"country,omitempty"`
-	Device         string                 `protobuf:"bytes,23,opt,name=device,proto3" json:"device,omitempty"`
-	Source         string                 `protobuf:"bytes,24,opt,name=source,proto3" json:"source,omitempty"`
-	RegistrationIp string                 `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	Retailer     string                 `protobuf:"bytes,1,opt,name=retailer,proto3" json:"retailer,omitempty"`
+	Group        string                 `protobuf:"bytes,2,opt,name=group,proto3" json:"group,omitempty"`
+	OperatorName string                 `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	UserId       int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Username     string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
+	Email        string                 `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile       string                 `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	VipLevel     int32                  `protobuf:"varint,8,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	KycLevel     int32                  `protobuf:"varint,9,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
+	Deposit      string                 `protobuf:"bytes,10,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	Withdraw     string                 `protobuf:"bytes,11,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
+	Tags         []string               `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
+	BanWithdraw  bool                   `protobuf:"varint,13,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
+	BanGame      bool                   `protobuf:"varint,14,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
+	BanLogin     bool                   `protobuf:"varint,15,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
+	// bool online = 16;
+	LastLoginAt  *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
+	RegisteredAt *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	// int32 risk_level = 19;
+	// string referral_code = 20;
+	// string affiliate_code = 21;
+	Country string `protobuf:"bytes,22,opt,name=country,proto3" json:"country,omitempty"`
+	// string device = 23;
+	// string source = 24;
+	RegistrationIp string `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ListUsersResponse_User) Reset() {
 	*x = ListUsersResponse_User{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1620,7 +1696,7 @@ func (x *ListUsersResponse_User) String() string {
 func (*ListUsersResponse_User) ProtoMessage() {}
 
 func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1650,9 +1726,9 @@ func (x *ListUsersResponse_User) GetGroup() string {
 	return ""
 }
 
-func (x *ListUsersResponse_User) GetOperator() string {
+func (x *ListUsersResponse_User) GetOperatorName() string {
 	if x != nil {
-		return x.Operator
+		return x.OperatorName
 	}
 	return ""
 }
@@ -1741,13 +1817,6 @@ func (x *ListUsersResponse_User) GetBanLogin() bool {
 	return false
 }
 
-func (x *ListUsersResponse_User) GetOnline() bool {
-	if x != nil {
-		return x.Online
-	}
-	return false
-}
-
 func (x *ListUsersResponse_User) GetLastLoginAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.LastLoginAt
@@ -1762,44 +1831,9 @@ func (x *ListUsersResponse_User) GetRegisteredAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *ListUsersResponse_User) GetRiskLevel() int32 {
-	if x != nil {
-		return x.RiskLevel
-	}
-	return 0
-}
-
-func (x *ListUsersResponse_User) GetReferralCode() string {
-	if x != nil {
-		return x.ReferralCode
-	}
-	return ""
-}
-
-func (x *ListUsersResponse_User) GetAffiliateCode() string {
-	if x != nil {
-		return x.AffiliateCode
-	}
-	return ""
-}
-
 func (x *ListUsersResponse_User) GetCountry() string {
 	if x != nil {
 		return x.Country
-	}
-	return ""
-}
-
-func (x *ListUsersResponse_User) GetDevice() string {
-	if x != nil {
-		return x.Device
-	}
-	return ""
-}
-
-func (x *ListUsersResponse_User) GetSource() string {
-	if x != nil {
-		return x.Source
 	}
 	return ""
 }
@@ -1823,7 +1857,7 @@ type GetUserOverviewResponse_GameData struct {
 
 func (x *GetUserOverviewResponse_GameData) Reset() {
 	*x = GetUserOverviewResponse_GameData{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1835,7 +1869,7 @@ func (x *GetUserOverviewResponse_GameData) String() string {
 func (*GetUserOverviewResponse_GameData) ProtoMessage() {}
 
 func (x *GetUserOverviewResponse_GameData) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1897,7 +1931,7 @@ type GetUserProfileResponse_RegistrationRecord struct {
 
 func (x *GetUserProfileResponse_RegistrationRecord) Reset() {
 	*x = GetUserProfileResponse_RegistrationRecord{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1909,7 +1943,7 @@ func (x *GetUserProfileResponse_RegistrationRecord) String() string {
 func (*GetUserProfileResponse_RegistrationRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_RegistrationRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2011,7 +2045,7 @@ type GetUserProfileResponse_LoginRecord struct {
 
 func (x *GetUserProfileResponse_LoginRecord) Reset() {
 	*x = GetUserProfileResponse_LoginRecord{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2023,7 +2057,7 @@ func (x *GetUserProfileResponse_LoginRecord) String() string {
 func (*GetUserProfileResponse_LoginRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_LoginRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2106,7 +2140,7 @@ type GetUserProfileResponse_Comment struct {
 
 func (x *GetUserProfileResponse_Comment) Reset() {
 	*x = GetUserProfileResponse_Comment{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2118,7 +2152,7 @@ func (x *GetUserProfileResponse_Comment) String() string {
 func (*GetUserProfileResponse_Comment) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2166,7 +2200,7 @@ type ListUserCommentsResponse_Comment struct {
 
 func (x *ListUserCommentsResponse_Comment) Reset() {
 	*x = ListUserCommentsResponse_Comment{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2178,7 +2212,7 @@ func (x *ListUserCommentsResponse_Comment) String() string {
 func (*ListUserCommentsResponse_Comment) ProtoMessage() {}
 
 func (x *ListUserCommentsResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2219,8 +2253,7 @@ var File_backoffice_service_v1_backoffice_user_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa8\n" +
-	"\n" +
+	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xde\b\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -2230,27 +2263,21 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x14retailer_operator_id\x18\x06 \x01(\x03H\x04R\x12retailerOperatorId\x88\x01\x01\x12/\n" +
 	"\x11group_operator_id\x18\a \x01(\x03H\x05R\x0fgroupOperatorId\x88\x01\x01\x12$\n" +
 	"\voperator_id\x18\b \x01(\x03H\x06R\n" +
-	"operatorId\x88\x01\x01\x12\x1c\n" +
-	"\tcountries\x18\t \x03(\tR\tcountries\x12)\n" +
-	"\x0erisk_level_min\x18\n" +
-	" \x01(\x05H\aR\friskLevelMin\x88\x01\x01\x12)\n" +
-	"\x0erisk_level_max\x18\v \x01(\x05H\bR\friskLevelMax\x88\x01\x01\x12\x1d\n" +
-	"\n" +
-	"kyc_levels\x18\f \x03(\x05R\tkycLevels\x12-\n" +
-	"\x10has_made_deposit\x18\r \x01(\bH\tR\x0ehasMadeDeposit\x88\x01\x01\x12$\n" +
-	"\vdeposit_min\x18\x0e \x01(\tH\n" +
-	"R\n" +
+	"operatorId\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\t \x01(\tH\aR\acountry\x88\x01\x01\x12 \n" +
+	"\tkyc_level\x18\f \x01(\x05H\bR\bkycLevel\x88\x01\x01\x12$\n" +
+	"\vdeposit_min\x18\x0e \x01(\tH\tR\n" +
 	"depositMin\x88\x01\x01\x12$\n" +
-	"\vdeposit_max\x18\x0f \x01(\tH\vR\n" +
+	"\vdeposit_max\x18\x0f \x01(\tH\n" +
+	"R\n" +
 	"depositMax\x88\x01\x01\x12*\n" +
-	"\x0ewithdrawal_min\x18\x10 \x01(\tH\fR\rwithdrawalMin\x88\x01\x01\x12*\n" +
-	"\x0ewithdrawal_max\x18\x11 \x01(\tH\rR\rwithdrawalMax\x88\x01\x01\x12&\n" +
-	"\fban_withdraw\x18\x12 \x01(\bH\x0eR\vbanWithdraw\x88\x01\x01\x12\x1e\n" +
-	"\bban_game\x18\x13 \x01(\bH\x0fR\abanGame\x88\x01\x01\x12 \n" +
-	"\tban_login\x18\x14 \x01(\bH\x10R\bbanLogin\x88\x01\x01\x12\x1b\n" +
-	"\x06online\x18\x15 \x01(\bH\x11R\x06online\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x16 \x01(\x05H\x12R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x17 \x01(\x05H\x13R\bpageSize\x88\x01\x01B\n" +
+	"\x0ewithdrawal_min\x18\x10 \x01(\tH\vR\rwithdrawalMin\x88\x01\x01\x12*\n" +
+	"\x0ewithdrawal_max\x18\x11 \x01(\tH\fR\rwithdrawalMax\x88\x01\x01\x12&\n" +
+	"\fban_withdraw\x18\x12 \x01(\bH\rR\vbanWithdraw\x88\x01\x01\x12\x1e\n" +
+	"\bban_game\x18\x13 \x01(\bH\x0eR\abanGame\x88\x01\x01\x12 \n" +
+	"\tban_login\x18\x14 \x01(\bH\x0fR\bbanLogin\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x16 \x01(\x05H\x10R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x17 \x01(\x05H\x11R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -2259,10 +2286,11 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"_vip_levelB\x17\n" +
 	"\x15_retailer_operator_idB\x14\n" +
 	"\x12_group_operator_idB\x0e\n" +
-	"\f_operator_idB\x11\n" +
-	"\x0f_risk_level_minB\x11\n" +
-	"\x0f_risk_level_maxB\x13\n" +
-	"\x11_has_made_depositB\x0e\n" +
+	"\f_operator_idB\n" +
+	"\n" +
+	"\b_countryB\f\n" +
+	"\n" +
+	"_kyc_levelB\x0e\n" +
 	"\f_deposit_minB\x0e\n" +
 	"\f_deposit_maxB\x11\n" +
 	"\x0f_withdrawal_minB\x11\n" +
@@ -2270,20 +2298,19 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\r_ban_withdrawB\v\n" +
 	"\t_ban_gameB\f\n" +
 	"\n" +
-	"_ban_loginB\t\n" +
-	"\a_onlineB\a\n" +
+	"_ban_loginB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xb3\a\n" +
+	"_page_size\"\x89\x06\n" +
 	"\x11ListUsersResponse\x12G\n" +
 	"\x05users\x18\x01 \x03(\v21.api.backoffice.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x8d\x06\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xe3\x04\n" +
 	"\x04User\x12\x1a\n" +
 	"\bretailer\x18\x01 \x01(\tR\bretailer\x12\x14\n" +
-	"\x05group\x18\x02 \x01(\tR\x05group\x12\x1a\n" +
-	"\boperator\x18\x03 \x01(\tR\boperator\x12\x17\n" +
+	"\x05group\x18\x02 \x01(\tR\x05group\x12#\n" +
+	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\busername\x18\x05 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x06 \x01(\tR\x05email\x12\x16\n" +
@@ -2296,17 +2323,10 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x04tags\x18\f \x03(\tR\x04tags\x12!\n" +
 	"\fban_withdraw\x18\r \x01(\bR\vbanWithdraw\x12\x19\n" +
 	"\bban_game\x18\x0e \x01(\bR\abanGame\x12\x1b\n" +
-	"\tban_login\x18\x0f \x01(\bR\bbanLogin\x12\x16\n" +
-	"\x06online\x18\x10 \x01(\bR\x06online\x12>\n" +
+	"\tban_login\x18\x0f \x01(\bR\bbanLogin\x12>\n" +
 	"\rlast_login_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
-	"\rregistered_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x1d\n" +
-	"\n" +
-	"risk_level\x18\x13 \x01(\x05R\triskLevel\x12#\n" +
-	"\rreferral_code\x18\x14 \x01(\tR\freferralCode\x12%\n" +
-	"\x0eaffiliate_code\x18\x15 \x01(\tR\raffiliateCode\x12\x18\n" +
-	"\acountry\x18\x16 \x01(\tR\acountry\x12\x16\n" +
-	"\x06device\x18\x17 \x01(\tR\x06device\x12\x16\n" +
-	"\x06source\x18\x18 \x01(\tR\x06source\x12'\n" +
+	"\rregistered_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
+	"\acountry\x18\x16 \x01(\tR\acountry\x12'\n" +
 	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\"\x18\n" +
 	"\x16GetUserOverviewRequest\"\xd8\n" +
 	"\n" +
@@ -2427,7 +2447,17 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x12CreateUserResponse\"8\n" +
 	" SendEmailVerificationCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"#\n" +
-	"!SendEmailVerificationCodeResponse2\x8b\x10\n" +
+	"!SendEmailVerificationCodeResponse\"\xc2\x01\n" +
+	"\x11UpdateUserRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12 \n" +
+	"\tban_login\x18\x02 \x01(\bH\x00R\bbanLogin\x88\x01\x01\x12\x1e\n" +
+	"\bban_game\x18\x03 \x01(\bH\x01R\abanGame\x88\x01\x01\x12&\n" +
+	"\fban_withdraw\x18\x04 \x01(\bH\x02R\vbanWithdraw\x88\x01\x01B\f\n" +
+	"\n" +
+	"_ban_loginB\v\n" +
+	"\t_ban_gameB\x0f\n" +
+	"\r_ban_withdraw\"\x14\n" +
+	"\x12UpdateUserResponse2\x9e\x11\n" +
 	"\x0eBackofficeUser\x12\x8b\x01\n" +
 	"\tListUsers\x12+.api.backoffice.service.v1.ListUsersRequest\x1a,.api.backoffice.service.v1.ListUsersResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/backoffice/user/list\x12\xa5\x01\n" +
 	"\x0fGetUserOverview\x121.api.backoffice.service.v1.GetUserOverviewRequest\x1a2.api.backoffice.service.v1.GetUserOverviewResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/overview/get\x12\xa1\x01\n" +
@@ -2442,7 +2472,9 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x10ListUserComments\x122.api.backoffice.service.v1.ListUserCommentsRequest\x1a3.api.backoffice.service.v1.ListUserCommentsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/user/comments/list\x12\x90\x01\n" +
 	"\n" +
 	"CreateUser\x12,.api.backoffice.service.v1.CreateUserRequest\x1a-.api.backoffice.service.v1.CreateUserResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/backoffice/user/create\x12\xd3\x01\n" +
-	"\x19SendEmailVerificationCode\x12;.api.backoffice.service.v1.SendEmailVerificationCodeRequest\x1a<.api.backoffice.service.v1.SendEmailVerificationCodeResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/user/send-email-verification-codeB[\n" +
+	"\x19SendEmailVerificationCode\x12;.api.backoffice.service.v1.SendEmailVerificationCodeRequest\x1a<.api.backoffice.service.v1.SendEmailVerificationCodeResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/user/send-email-verification-code\x12\x90\x01\n" +
+	"\n" +
+	"UpdateUser\x12,.api.backoffice.service.v1.UpdateUserRequest\x1a-.api.backoffice.service.v1.UpdateUserResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/backoffice/user/updateB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -2457,7 +2489,7 @@ func file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_user_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
+var file_backoffice_service_v1_backoffice_user_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*ListUsersRequest)(nil),                          // 0: api.backoffice.service.v1.ListUsersRequest
 	(*ListUsersResponse)(nil),                         // 1: api.backoffice.service.v1.ListUsersResponse
@@ -2483,30 +2515,32 @@ var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*CreateUserResponse)(nil),                        // 21: api.backoffice.service.v1.CreateUserResponse
 	(*SendEmailVerificationCodeRequest)(nil),          // 22: api.backoffice.service.v1.SendEmailVerificationCodeRequest
 	(*SendEmailVerificationCodeResponse)(nil),         // 23: api.backoffice.service.v1.SendEmailVerificationCodeResponse
-	(*ListUsersResponse_User)(nil),                    // 24: api.backoffice.service.v1.ListUsersResponse.User
-	(*GetUserOverviewResponse_GameData)(nil),          // 25: api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	(*GetUserProfileResponse_RegistrationRecord)(nil), // 26: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	(*GetUserProfileResponse_LoginRecord)(nil),        // 27: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	(*GetUserProfileResponse_Comment)(nil),            // 28: api.backoffice.service.v1.GetUserProfileResponse.Comment
-	(*ListUserCommentsResponse_Comment)(nil),          // 29: api.backoffice.service.v1.ListUserCommentsResponse.Comment
-	(*timestamppb.Timestamp)(nil),                     // 30: google.protobuf.Timestamp
+	(*UpdateUserRequest)(nil),                         // 24: api.backoffice.service.v1.UpdateUserRequest
+	(*UpdateUserResponse)(nil),                        // 25: api.backoffice.service.v1.UpdateUserResponse
+	(*ListUsersResponse_User)(nil),                    // 26: api.backoffice.service.v1.ListUsersResponse.User
+	(*GetUserOverviewResponse_GameData)(nil),          // 27: api.backoffice.service.v1.GetUserOverviewResponse.GameData
+	(*GetUserProfileResponse_RegistrationRecord)(nil), // 28: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
+	(*GetUserProfileResponse_LoginRecord)(nil),        // 29: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
+	(*GetUserProfileResponse_Comment)(nil),            // 30: api.backoffice.service.v1.GetUserProfileResponse.Comment
+	(*ListUserCommentsResponse_Comment)(nil),          // 31: api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	(*timestamppb.Timestamp)(nil),                     // 32: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
-	30, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	30, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	24, // 2: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
-	25, // 3: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	30, // 4: api.backoffice.service.v1.GetUserOverviewResponse.last_deposit_at:type_name -> google.protobuf.Timestamp
-	26, // 5: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	27, // 6: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	28, // 7: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
-	29, // 8: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
-	30, // 9: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	30, // 10: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	30, // 11: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	30, // 12: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	30, // 13: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	30, // 14: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	32, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	32, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	26, // 2: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
+	27, // 3: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
+	32, // 4: api.backoffice.service.v1.GetUserOverviewResponse.last_deposit_at:type_name -> google.protobuf.Timestamp
+	28, // 5: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
+	29, // 6: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
+	30, // 7: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
+	31, // 8: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	32, // 9: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	32, // 10: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	32, // 11: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
+	32, // 12: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
+	32, // 13: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	32, // 14: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 15: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
 	2,  // 16: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
 	4,  // 17: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
@@ -2519,20 +2553,22 @@ var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
 	18, // 24: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
 	20, // 25: api.backoffice.service.v1.BackofficeUser.CreateUser:input_type -> api.backoffice.service.v1.CreateUserRequest
 	22, // 26: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
-	1,  // 27: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
-	3,  // 28: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
-	5,  // 29: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
-	7,  // 30: api.backoffice.service.v1.BackofficeUser.AddOperatorUserTag:output_type -> api.backoffice.service.v1.AddOperatorUserTagResponse
-	9,  // 31: api.backoffice.service.v1.BackofficeUser.DeleteOperatorUserTag:output_type -> api.backoffice.service.v1.DeleteOperatorUserTagResponse
-	11, // 32: api.backoffice.service.v1.BackofficeUser.GetOperatorUserTags:output_type -> api.backoffice.service.v1.GetOperatorUserTagsResponse
-	13, // 33: api.backoffice.service.v1.BackofficeUser.AddUserTag:output_type -> api.backoffice.service.v1.AddUserTagResponse
-	15, // 34: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:output_type -> api.backoffice.service.v1.DeleteUserTagResponse
-	17, // 35: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
-	19, // 36: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
-	21, // 37: api.backoffice.service.v1.BackofficeUser.CreateUser:output_type -> api.backoffice.service.v1.CreateUserResponse
-	23, // 38: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
-	27, // [27:39] is the sub-list for method output_type
-	15, // [15:27] is the sub-list for method input_type
+	24, // 27: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
+	1,  // 28: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
+	3,  // 29: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
+	5,  // 30: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
+	7,  // 31: api.backoffice.service.v1.BackofficeUser.AddOperatorUserTag:output_type -> api.backoffice.service.v1.AddOperatorUserTagResponse
+	9,  // 32: api.backoffice.service.v1.BackofficeUser.DeleteOperatorUserTag:output_type -> api.backoffice.service.v1.DeleteOperatorUserTagResponse
+	11, // 33: api.backoffice.service.v1.BackofficeUser.GetOperatorUserTags:output_type -> api.backoffice.service.v1.GetOperatorUserTagsResponse
+	13, // 34: api.backoffice.service.v1.BackofficeUser.AddUserTag:output_type -> api.backoffice.service.v1.AddUserTagResponse
+	15, // 35: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:output_type -> api.backoffice.service.v1.DeleteUserTagResponse
+	17, // 36: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
+	19, // 37: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
+	21, // 38: api.backoffice.service.v1.BackofficeUser.CreateUser:output_type -> api.backoffice.service.v1.CreateUserResponse
+	23, // 39: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
+	25, // 40: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
+	28, // [28:41] is the sub-list for method output_type
+	15, // [15:28] is the sub-list for method input_type
 	15, // [15:15] is the sub-list for extension type_name
 	15, // [15:15] is the sub-list for extension extendee
 	0,  // [0:15] is the sub-list for field type_name
@@ -2544,13 +2580,14 @@ func file_backoffice_service_v1_backoffice_user_proto_init() {
 		return
 	}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[0].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_user_proto_msgTypes[24].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_user_proto_rawDesc), len(file_backoffice_service_v1_backoffice_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   30,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

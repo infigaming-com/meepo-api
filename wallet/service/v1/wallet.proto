@@ -62,6 +62,8 @@ service Wallet {
 	// It's called by ListWalletBalanceTransactions in backoffice service for the information in user transactions page.
 	rpc ListWalletBalanceTransactions (ListWalletBalanceTransactionsRequest) returns (ListWalletBalanceTransactionsResponse) {}
 
+	rpc GetWalletBalanceTransactionsByIds (GetWalletBalanceTransactionsByIdsRequest) returns (GetWalletBalanceTransactionsByIdsResponse) {}
+
 	rpc GetWalletCreditTransactions (GetWalletCreditTransactionsRequest) returns (GetWalletCreditTransactionsResponse) {}
 
 	rpc GetExchangeRates (GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {}
@@ -323,15 +325,18 @@ message ListWalletBalanceTransactionsRequest {
 	//   - "game_bet_rollback"            - Game bet transaction rollback
 	//   - "game_win_rollback"            - Game win transaction rollback
 	//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
-	optional string transaction_type = 2;
-	optional string currency = 3;
-	optional google.protobuf.Timestamp start_time = 4;
-	optional google.protobuf.Timestamp end_time = 5;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional google.protobuf.Timestamp start_time = 5;
+	optional google.protobuf.Timestamp end_time = 6;
+	optional int32 page = 7;
+	optional int32 page_size = 8;
 }
 
 message ListWalletBalanceTransactionsResponse {
 	message BalanceTransaction {
 		google.protobuf.Timestamp created_at = 1;
+		int64 transaction_id = 2;
 		// Transaction types for different operations
 		// Expected values:
 		// Credit operations:
@@ -350,17 +355,55 @@ message ListWalletBalanceTransactionsResponse {
 		//   - "game_bet_rollback"            - Game bet transaction rollback
 		//   - "game_win_rollback"            - Game win transaction rollback
 		//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
-		string transaction_type = 2;
-		int32 vip_level = 3;
-		string change = 4;
-		string before_balance = 5;
-		string after_balance = 6;
-		string currency = 7;
+		string transaction_type = 3;
+		int32 vip_level = 4;
+		string change_balance = 5;
+		string before_balance = 6;
+		string after_balance = 7;
+		string currency = 8;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message GetWalletBalanceTransactionsByIdsRequest {
+	repeated int64 transaction_ids = 1;
+}
+
+message GetWalletBalanceTransactionsByIdsResponse {
+	message BalanceTransaction {
+		int64 id = 1;
+		int64 user_id = 2;
+		string settlement_currency = 3;
+		string currency = 4;
+		string exchange_rate = 5;
+		string transaction_type = 6;
+		int64 external_transaction_id = 7;
+		int64 related_transaction_id = 8;
+		int64 original_cash = 9;
+		int64 original_cash_usd = 10;
+		int64 cash = 11;
+		int64 cash_usd = 12;
+		int64 cash_amount = 13;
+		int64 cash_amount_usd = 14;
+		int64 original_operator_bonus = 15;
+		int64 original_operator_bonus_usd = 16;
+		int64 operator_bonus = 17;
+		int64 operator_bonus_usd = 18;
+		int64 operator_bonus_amount = 19;
+		int64 operator_bonus_amount_usd = 20;
+		int64 original_provider_bonus = 21;
+		int64 original_provider_bonus_usd = 22;
+		int64 provider_bonus = 23;
+		int64 provider_bonus_usd = 24;
+		int64 provider_bonus_amount = 25;
+		int64 provider_bonus_amount_usd = 26;
+		int64 created_at = 27;
+		int64 updated_at = 28;
+	}
+	repeated BalanceTransaction balance_transactions = 1;
 }
 
 message GetWalletCreditTransactionsRequest {

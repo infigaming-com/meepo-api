@@ -26,6 +26,8 @@ service Operator {
 
 	rpc GetOperator(GetOperatorRequest) returns (GetOperatorResponse) {}
 
+	rpc GetOperatorsByIds(GetOperatorsByIdsRequest) returns (GetOperatorsByIdsResponse) {}
+
 	rpc AddOrUpdateCurrency(AddOrUpdateCurrencyRequest) returns (AddOrUpdateCurrencyResponse) {
 	}
 
@@ -63,6 +65,10 @@ service Operator {
 	// The response contains only the list of parent operator IDs, doesn't include the requested operator_id.
 	rpc GetParentOperatorIds(GetParentOperatorIdsRequest) returns (GetParentOperatorIdsResponse) {
 	}
+
+	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
+	rpc ListOperators(ListOperatorsRequest) returns (ListOperatorsResponse) {
+	}
 }
 
 message AddOperatorRequest {
@@ -97,6 +103,19 @@ message GetOperatorResponse {
 		bool enabled = 3;
 	}
 	Operator operator = 1;
+}
+
+message GetOperatorsByIdsRequest {
+	repeated int64 operator_ids = 1;
+}
+
+message GetOperatorsByIdsResponse {
+	message Operator {
+		int64 operator_id = 1;
+		string name = 2;
+		bool enabled = 3;
+	}
+	repeated Operator operators = 1;
 }
 
 message AddOrUpdateCurrencyRequest {
@@ -160,4 +179,17 @@ message GetParentOperatorIdsRequest {
 message GetParentOperatorIdsResponse {
 	// List of parent operator IDs.
 	repeated int64 parent_operator_ids = 1;
+}
+
+message ListOperatorsRequest {
+	optional bool enabled = 1;
+}
+
+message ListOperatorsResponse {
+	message Operator {
+		int64 operator_id = 1;
+		string operator_name = 2;
+		bool enabled = 3;
+	}
+	repeated Operator operators = 1;
 }

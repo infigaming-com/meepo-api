@@ -274,3 +274,15 @@ func IsSettleFreezeFailed(err error) bool {
 func ErrorSettleFreezeFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_SETTLE_FREEZE_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGenerateCommentIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_COMMENT_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGenerateCommentIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_COMMENT_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}

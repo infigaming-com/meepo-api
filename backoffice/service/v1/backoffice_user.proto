@@ -80,6 +80,13 @@ service BackofficeUser {
 		rpc SendEmailVerificationCode(SendEmailVerificationCodeRequest) returns (SendEmailVerificationCodeResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/send-email-verification-code"
+						body: "*"
+				};
+		}
+
+		rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/update"
             body: "*"
         };
     }
@@ -87,18 +94,18 @@ service BackofficeUser {
 
 message ListUsersRequest {
 	optional int64 user_id = 1;
-	repeated string tags = 2;
+	repeated string tags = 2; // not available for now
 	optional google.protobuf.Timestamp registration_start_time = 3;
 	optional google.protobuf.Timestamp registration_end_time = 4;
 	optional int32 vip_level = 5;
 	optional int64 retailer_operator_id = 6;
 	optional int64 group_operator_id = 7;
 	optional int64 operator_id = 8;
-	repeated string countries = 9;
-	optional int32 risk_level_min = 10;
-	optional int32 risk_level_max = 11;
-	repeated int32 kyc_levels = 12;
-	optional bool has_made_deposit = 13;
+	optional string country = 9;
+	// optional int32 risk_level_min = 10;
+	// optional int32 risk_level_max = 11;
+	optional int32 kyc_level = 12;
+	// optional bool has_made_deposit = 13;
 	optional string deposit_min = 14;
 	optional string deposit_max = 15;
 	optional string withdrawal_min = 16;
@@ -106,7 +113,7 @@ message ListUsersRequest {
 	optional bool ban_withdraw = 18;
 	optional bool ban_game = 19;
 	optional bool ban_login = 20;
-	optional bool online = 21;
+	// optional bool online = 21;
 	optional int32 page = 22;
 	optional int32 page_size = 23;
 }
@@ -115,7 +122,7 @@ message ListUsersResponse {
 	message User {
 		string retailer = 1;
 		string group = 2;
-		string operator = 3;
+		string operator_name = 3;
 		int64 user_id = 4;
 		string username = 5;
 		string email = 6;
@@ -128,15 +135,15 @@ message ListUsersResponse {
 		bool ban_withdraw = 13;
 		bool ban_game = 14;
 		bool ban_login = 15;
-		bool online = 16;
+		// bool online = 16;
 		google.protobuf.Timestamp last_login_at = 17;
 		google.protobuf.Timestamp registered_at = 18;
-		int32 risk_level = 19;
-		string referral_code = 20;
-		string affiliate_code = 21;
+		// int32 risk_level = 19;
+		// string referral_code = 20;
+		// string affiliate_code = 21;
 		string country = 22;
-		string device = 23;
-		string source = 24;
+		// string device = 23;
+		// string source = 24;
 		string registration_ip = 25;
 	}
 	repeated User users = 1;
@@ -303,3 +310,11 @@ message SendEmailVerificationCodeRequest {
 
 message SendEmailVerificationCodeResponse {}
 
+message UpdateUserRequest {
+	int64 user_id = 1;
+	optional bool ban_login = 2;
+	optional bool ban_game = 3;
+	optional bool ban_withdraw = 4;
+}
+
+message UpdateUserResponse {}

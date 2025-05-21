@@ -19,23 +19,24 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Wallet_AddUser_FullMethodName                       = "/api.wallet.service.v1.Wallet/AddUser"
-	Wallet_UpdateUser_FullMethodName                    = "/api.wallet.service.v1.Wallet/UpdateUser"
-	Wallet_AddOrUpdateOperatorsCurrency_FullMethodName  = "/api.wallet.service.v1.Wallet/AddOrUpdateOperatorsCurrency"
-	Wallet_UpdateUserCurrency_FullMethodName            = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
-	Wallet_GetUserBalances_FullMethodName               = "/api.wallet.service.v1.Wallet/GetUserBalances"
-	Wallet_GetUserBalance_FullMethodName                = "/api.wallet.service.v1.Wallet/GetUserBalance"
-	Wallet_Credit_FullMethodName                        = "/api.wallet.service.v1.Wallet/Credit"
-	Wallet_Debit_FullMethodName                         = "/api.wallet.service.v1.Wallet/Debit"
-	Wallet_GameDebit_FullMethodName                     = "/api.wallet.service.v1.Wallet/GameDebit"
-	Wallet_GameCredit_FullMethodName                    = "/api.wallet.service.v1.Wallet/GameCredit"
-	Wallet_Freeze_FullMethodName                        = "/api.wallet.service.v1.Wallet/Freeze"
-	Wallet_Settle_FullMethodName                        = "/api.wallet.service.v1.Wallet/Settle"
-	Wallet_Rollback_FullMethodName                      = "/api.wallet.service.v1.Wallet/Rollback"
-	Wallet_GetWallets_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetWallets"
-	Wallet_ListWalletBalanceTransactions_FullMethodName = "/api.wallet.service.v1.Wallet/ListWalletBalanceTransactions"
-	Wallet_GetWalletCreditTransactions_FullMethodName   = "/api.wallet.service.v1.Wallet/GetWalletCreditTransactions"
-	Wallet_GetExchangeRates_FullMethodName              = "/api.wallet.service.v1.Wallet/GetExchangeRates"
+	Wallet_AddUser_FullMethodName                           = "/api.wallet.service.v1.Wallet/AddUser"
+	Wallet_UpdateUser_FullMethodName                        = "/api.wallet.service.v1.Wallet/UpdateUser"
+	Wallet_AddOrUpdateOperatorsCurrency_FullMethodName      = "/api.wallet.service.v1.Wallet/AddOrUpdateOperatorsCurrency"
+	Wallet_UpdateUserCurrency_FullMethodName                = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
+	Wallet_GetUserBalances_FullMethodName                   = "/api.wallet.service.v1.Wallet/GetUserBalances"
+	Wallet_GetUserBalance_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetUserBalance"
+	Wallet_Credit_FullMethodName                            = "/api.wallet.service.v1.Wallet/Credit"
+	Wallet_Debit_FullMethodName                             = "/api.wallet.service.v1.Wallet/Debit"
+	Wallet_GameDebit_FullMethodName                         = "/api.wallet.service.v1.Wallet/GameDebit"
+	Wallet_GameCredit_FullMethodName                        = "/api.wallet.service.v1.Wallet/GameCredit"
+	Wallet_Freeze_FullMethodName                            = "/api.wallet.service.v1.Wallet/Freeze"
+	Wallet_Settle_FullMethodName                            = "/api.wallet.service.v1.Wallet/Settle"
+	Wallet_Rollback_FullMethodName                          = "/api.wallet.service.v1.Wallet/Rollback"
+	Wallet_GetWallets_FullMethodName                        = "/api.wallet.service.v1.Wallet/GetWallets"
+	Wallet_ListWalletBalanceTransactions_FullMethodName     = "/api.wallet.service.v1.Wallet/ListWalletBalanceTransactions"
+	Wallet_GetWalletBalanceTransactionsByIds_FullMethodName = "/api.wallet.service.v1.Wallet/GetWalletBalanceTransactionsByIds"
+	Wallet_GetWalletCreditTransactions_FullMethodName       = "/api.wallet.service.v1.Wallet/GetWalletCreditTransactions"
+	Wallet_GetExchangeRates_FullMethodName                  = "/api.wallet.service.v1.Wallet/GetExchangeRates"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -64,6 +65,7 @@ type WalletClient interface {
 	// ListWalletBalanceTransactions provides balance transactions for a specific user.
 	// It's called by ListWalletBalanceTransactions in backoffice service for the information in user transactions page.
 	ListWalletBalanceTransactions(ctx context.Context, in *ListWalletBalanceTransactionsRequest, opts ...grpc.CallOption) (*ListWalletBalanceTransactionsResponse, error)
+	GetWalletBalanceTransactionsByIds(ctx context.Context, in *GetWalletBalanceTransactionsByIdsRequest, opts ...grpc.CallOption) (*GetWalletBalanceTransactionsByIdsResponse, error)
 	GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...grpc.CallOption) (*GetWalletCreditTransactionsResponse, error)
 	GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error)
 }
@@ -226,6 +228,16 @@ func (c *walletClient) ListWalletBalanceTransactions(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *walletClient) GetWalletBalanceTransactionsByIds(ctx context.Context, in *GetWalletBalanceTransactionsByIdsRequest, opts ...grpc.CallOption) (*GetWalletBalanceTransactionsByIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWalletBalanceTransactionsByIdsResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetWalletBalanceTransactionsByIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...grpc.CallOption) (*GetWalletCreditTransactionsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetWalletCreditTransactionsResponse)
@@ -272,6 +284,7 @@ type WalletServer interface {
 	// ListWalletBalanceTransactions provides balance transactions for a specific user.
 	// It's called by ListWalletBalanceTransactions in backoffice service for the information in user transactions page.
 	ListWalletBalanceTransactions(context.Context, *ListWalletBalanceTransactionsRequest) (*ListWalletBalanceTransactionsResponse, error)
+	GetWalletBalanceTransactionsByIds(context.Context, *GetWalletBalanceTransactionsByIdsRequest) (*GetWalletBalanceTransactionsByIdsResponse, error)
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
 	mustEmbedUnimplementedWalletServer()
@@ -328,6 +341,9 @@ func (UnimplementedWalletServer) GetWallets(context.Context, *GetWalletsRequest)
 }
 func (UnimplementedWalletServer) ListWalletBalanceTransactions(context.Context, *ListWalletBalanceTransactionsRequest) (*ListWalletBalanceTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWalletBalanceTransactions not implemented")
+}
+func (UnimplementedWalletServer) GetWalletBalanceTransactionsByIds(context.Context, *GetWalletBalanceTransactionsByIdsRequest) (*GetWalletBalanceTransactionsByIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWalletBalanceTransactionsByIds not implemented")
 }
 func (UnimplementedWalletServer) GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWalletCreditTransactions not implemented")
@@ -626,6 +642,24 @@ func _Wallet_ListWalletBalanceTransactions_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_GetWalletBalanceTransactionsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWalletBalanceTransactionsByIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetWalletBalanceTransactionsByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetWalletBalanceTransactionsByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetWalletBalanceTransactionsByIds(ctx, req.(*GetWalletBalanceTransactionsByIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_GetWalletCreditTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetWalletCreditTransactionsRequest)
 	if err := dec(in); err != nil {
@@ -728,6 +762,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListWalletBalanceTransactions",
 			Handler:    _Wallet_ListWalletBalanceTransactions_Handler,
+		},
+		{
+			MethodName: "GetWalletBalanceTransactionsByIds",
+			Handler:    _Wallet_GetWalletBalanceTransactionsByIds_Handler,
 		},
 		{
 			MethodName: "GetWalletCreditTransactions",

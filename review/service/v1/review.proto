@@ -20,6 +20,9 @@ service Review {
 	}
 	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {}
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
+	// CancelTicket is used to manually cancel a ticket.
+	// Ticket is cancellable only in paying status.
+	rpc CancelTicket(CancelTicketRequest) returns (CancelTicketResponse) {}
 	rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {}
 	rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {}
 }
@@ -52,6 +55,14 @@ message AddCommentResponse {
 	int64 comment_id = 1;
 }
 
+message CancelTicketRequest {
+	int64 ticket_id = 1;
+	// The user who is cancelling the ticket.
+	int64 canceller_user_id = 2;
+}
+
+message CancelTicketResponse {}
+
 message ListTicketsRequest {
 	optional int64 user_id = 2;
 	optional int64 operator_id = 3;
@@ -73,14 +84,18 @@ message ListTicketsResponse {
 		int32 vip_level = 5;
 		repeated string user_tags = 6;
 		string before_balance = 7;
-		string after_balance = 8;
-		string currency = 9;
-		string payment_channel = 10;
-		string protocol = 11;
-		string fee = 12;
-		string status = 13;	// pending, approved, rejected, manual_payout, paying, paid, failed
-		string reviewer_username = 14;
-		int32 review_duration = 15;
+		string before_balance_usd = 8;
+		string amount = 9;
+		string amount_usd = 10;
+		string after_balance = 11;
+		string after_balance_usd = 12;
+		string currency = 13;
+		string payment_channel = 14;
+		string protocol = 15;
+		string fee = 16;
+		string status = 17;	// pending, approved, rejected, manual_payout, paying, paid, failed
+		string reviewer_username = 18;
+		int32 review_duration = 19;
 	}
 	repeated Ticket tickets = 1;
 	int32 page = 2;
@@ -102,47 +117,41 @@ message ListTicketsResponse {
 
 message GetTicketRequest {
 	int64 ticket_id = 1;
+	// Optional flag for including comments in the response or not.
+	// If not provided, the comments will not be included in the response.
+	optional bool include_comments = 2;
 }
 
 message GetTicketResponse {
-	message UserInfo {
-		string operator = 1;
-		int64 user_id = 2;
-		int32 vip_level = 3;
-		int64 ticket_id = 4;
-		string status = 5;	// pending, approved, rejected, manual_payout, paying, paid, failed
-	}
-	message WithdrawInfo {
-		google.protobuf.Struct created_at = 1;
-		string currency = 2;
-		string amount = 3;
-		string amount_usd = 4;
-		string before_balance = 5;
-		string after_balance = 6;
-		string payment_channel = 7;
-		string protocol = 8;
-		string fee = 9;
-		string recipient = 10;
-		string id_type = 11;
-		string account_number = 12;
-		repeated string linked_accounts = 13;
-	}
-	message UserStatus {
-		string deposit_usd = 1;
-		string deposit_withdraw = 2;
-		string deposit_minus_withdraw_usd = 3;
-		string valid_turnover = 4;
-		int32 deposit_count = 5;
-		int32 withdraw_count = 6;
-		int32 today_withdraw_count = 7;
+	message Ticket {
+		int64 id = 1;
+		string type = 2;
+		string request = 3;
+		string response = 4;
+		int64 user_id = 5;
+		int64 operator_id = 6;
+		string currency = 7;
+		string ticket_status = 8;
+		int64 reviewer_user_id = 9;
+		string reviewer_comment = 10;
+		string payment_status = 11;
+		int64 payment_transaction_id = 12;
+		string payment_transaction_error = 13;
+		string wallet_status = 14;
+		int64 wallet_freeze_transaction_id = 15;
+		int64 wallet_settle_transaction_id = 16;
+		string wallet_settle_error = 17;
+		int64 wallet_rollback_transaction_id = 18;
+		string wallet_rollback_error = 19;
+		int64 created_at = 20;
+		int64 updated_at = 21;
+		int64 reviewed_at = 22;
 	}
 	message Comment {
-		int64 author_user_name = 1;
+		int64 author_user_id = 1;
 		string content = 2;
-		google.protobuf.Timestamp created_at = 3;
+		int64 created_at = 3;
 	}
-	UserInfo user_info = 1;
-	WithdrawInfo withdraw_info = 2;
-	UserStatus user_status = 3;
-	repeated Comment comments = 4;
+	Ticket ticket = 1;
+	repeated Comment comments = 2;
 }

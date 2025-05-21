@@ -31,6 +31,7 @@ const (
 	BackofficeUser_ListUserComments_FullMethodName          = "/api.backoffice.service.v1.BackofficeUser/ListUserComments"
 	BackofficeUser_CreateUser_FullMethodName                = "/api.backoffice.service.v1.BackofficeUser/CreateUser"
 	BackofficeUser_SendEmailVerificationCode_FullMethodName = "/api.backoffice.service.v1.BackofficeUser/SendEmailVerificationCode"
+	BackofficeUser_UpdateUser_FullMethodName                = "/api.backoffice.service.v1.BackofficeUser/UpdateUser"
 )
 
 // BackofficeUserClient is the client API for BackofficeUser service.
@@ -49,6 +50,7 @@ type BackofficeUserClient interface {
 	ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...grpc.CallOption) (*ListUserCommentsResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
+	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 }
 
 type backofficeUserClient struct {
@@ -179,6 +181,16 @@ func (c *backofficeUserClient) SendEmailVerificationCode(ctx context.Context, in
 	return out, nil
 }
 
+func (c *backofficeUserClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_UpdateUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeUserServer is the server API for BackofficeUser service.
 // All implementations must embed UnimplementedBackofficeUserServer
 // for forward compatibility.
@@ -195,6 +207,7 @@ type BackofficeUserServer interface {
 	ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
+	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	mustEmbedUnimplementedBackofficeUserServer()
 }
 
@@ -240,6 +253,9 @@ func (UnimplementedBackofficeUserServer) CreateUser(context.Context, *CreateUser
 }
 func (UnimplementedBackofficeUserServer) SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendEmailVerificationCode not implemented")
+}
+func (UnimplementedBackofficeUserServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
 }
 func (UnimplementedBackofficeUserServer) mustEmbedUnimplementedBackofficeUserServer() {}
 func (UnimplementedBackofficeUserServer) testEmbeddedByValue()                        {}
@@ -478,6 +494,24 @@ func _BackofficeUser_SendEmailVerificationCode_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeUser_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).UpdateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_UpdateUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeUser_ServiceDesc is the grpc.ServiceDesc for BackofficeUser service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -532,6 +566,10 @@ var BackofficeUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendEmailVerificationCode",
 			Handler:    _BackofficeUser_SendEmailVerificationCode_Handler,
+		},
+		{
+			MethodName: "UpdateUser",
+			Handler:    _BackofficeUser_UpdateUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
