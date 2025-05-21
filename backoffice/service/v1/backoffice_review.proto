@@ -28,6 +28,12 @@ service BackofficeReview {
             body: "*"
         };
     }
+	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/review/tickets/comments/add"
+            body: "*"
+        };
+    }
 	rpc CancelTicket(CancelTicketRequest) returns (CancelTicketResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/review/tickets/cancel"
@@ -142,16 +148,12 @@ message ReviewTicketRequest {
 message ReviewTicketResponse {}
 
 message AddCommentRequest {
-	// review ticket id
 	int64 ticket_id = 1;
-	// user id of the reviewer
-	int64 reviewer_user_id = 2;
-	// review comment
-	string review_comment = 3;
+	int64 author_user_id = 2;
+	string content = 3;
 }
 
 message AddCommentResponse {
-	// id of the comment added
 	int64 comment_id = 1;
 }
 

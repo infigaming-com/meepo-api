@@ -22,6 +22,7 @@ const (
 	BackofficeReview_ListTickets_FullMethodName  = "/api.backoffice.service.v1.BackofficeReview/ListTickets"
 	BackofficeReview_GetTicket_FullMethodName    = "/api.backoffice.service.v1.BackofficeReview/GetTicket"
 	BackofficeReview_ReviewTicket_FullMethodName = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
+	BackofficeReview_AddComment_FullMethodName   = "/api.backoffice.service.v1.BackofficeReview/AddComment"
 	BackofficeReview_CancelTicket_FullMethodName = "/api.backoffice.service.v1.BackofficeReview/CancelTicket"
 )
 
@@ -32,6 +33,7 @@ type BackofficeReviewClient interface {
 	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
 	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error)
 	ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error)
+	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
 	CancelTicket(ctx context.Context, in *CancelTicketRequest, opts ...grpc.CallOption) (*CancelTicketResponse, error)
 }
 
@@ -73,6 +75,16 @@ func (c *backofficeReviewClient) ReviewTicket(ctx context.Context, in *ReviewTic
 	return out, nil
 }
 
+func (c *backofficeReviewClient) AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddCommentResponse)
+	err := c.cc.Invoke(ctx, BackofficeReview_AddComment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeReviewClient) CancelTicket(ctx context.Context, in *CancelTicketRequest, opts ...grpc.CallOption) (*CancelTicketResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CancelTicketResponse)
@@ -90,6 +102,7 @@ type BackofficeReviewServer interface {
 	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
 	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
+	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
 	CancelTicket(context.Context, *CancelTicketRequest) (*CancelTicketResponse, error)
 	mustEmbedUnimplementedBackofficeReviewServer()
 }
@@ -109,6 +122,9 @@ func (UnimplementedBackofficeReviewServer) GetTicket(context.Context, *GetTicket
 }
 func (UnimplementedBackofficeReviewServer) ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReviewTicket not implemented")
+}
+func (UnimplementedBackofficeReviewServer) AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddComment not implemented")
 }
 func (UnimplementedBackofficeReviewServer) CancelTicket(context.Context, *CancelTicketRequest) (*CancelTicketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelTicket not implemented")
@@ -188,6 +204,24 @@ func _BackofficeReview_ReviewTicket_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeReview_AddComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCommentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReviewServer).AddComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReview_AddComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReviewServer).AddComment(ctx, req.(*AddCommentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeReview_CancelTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CancelTicketRequest)
 	if err := dec(in); err != nil {
@@ -224,6 +258,10 @@ var BackofficeReview_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReviewTicket",
 			Handler:    _BackofficeReview_ReviewTicket_Handler,
+		},
+		{
+			MethodName: "AddComment",
+			Handler:    _BackofficeReview_AddComment_Handler,
 		},
 		{
 			MethodName: "CancelTicket",
