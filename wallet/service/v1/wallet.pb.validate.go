@@ -4379,6 +4379,12 @@ func (m *GetUserTransactionSummaryResponse) validate(all bool) error {
 
 	// no validation rules for TotalValidBet
 
+	// no validation rules for TotalDepositCount
+
+	// no validation rules for TotalWithdrawCount
+
+	// no validation rules for TodayWithdrawCount
+
 	if len(errors) > 0 {
 		return GetUserTransactionSummaryResponseMultiError(errors)
 	}

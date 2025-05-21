@@ -2269,6 +2269,9 @@ type GetUserTransactionSummaryResponse struct {
 	TotalWithdraw        string                 `protobuf:"bytes,3,opt,name=total_withdraw,json=totalWithdraw,proto3" json:"total_withdraw,omitempty"`
 	DepositMinusWithdraw string                 `protobuf:"bytes,4,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
 	TotalValidBet        string                 `protobuf:"bytes,5,opt,name=total_valid_bet,json=totalValidBet,proto3" json:"total_valid_bet,omitempty"`
+	TotalDepositCount    int32                  `protobuf:"varint,6,opt,name=total_deposit_count,json=totalDepositCount,proto3" json:"total_deposit_count,omitempty"`
+	TotalWithdrawCount   int32                  `protobuf:"varint,7,opt,name=total_withdraw_count,json=totalWithdrawCount,proto3" json:"total_withdraw_count,omitempty"`
+	TodayWithdrawCount   int32                  `protobuf:"varint,8,opt,name=today_withdraw_count,json=todayWithdrawCount,proto3" json:"today_withdraw_count,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -2336,6 +2339,27 @@ func (x *GetUserTransactionSummaryResponse) GetTotalValidBet() string {
 		return x.TotalValidBet
 	}
 	return ""
+}
+
+func (x *GetUserTransactionSummaryResponse) GetTotalDepositCount() int32 {
+	if x != nil {
+		return x.TotalDepositCount
+	}
+	return 0
+}
+
+func (x *GetUserTransactionSummaryResponse) GetTotalWithdrawCount() int32 {
+	if x != nil {
+		return x.TotalWithdrawCount
+	}
+	return 0
+}
+
+func (x *GetUserTransactionSummaryResponse) GetTodayWithdrawCount() int32 {
+	if x != nil {
+		return x.TodayWithdrawCount
+	}
+	return 0
 }
 
 type GetUserBalancesResponse_Balance struct {
@@ -3436,13 +3460,16 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bend_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\aendTime\x88\x01\x01B\v\n" +
 	"\t_currencyB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\xe9\x01\n" +
+	"\t_end_time\"\xfd\x02\n" +
 	"!GetUserTransactionSummaryResponse\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12#\n" +
 	"\rtotal_deposit\x18\x02 \x01(\tR\ftotalDeposit\x12%\n" +
 	"\x0etotal_withdraw\x18\x03 \x01(\tR\rtotalWithdraw\x124\n" +
 	"\x16deposit_minus_withdraw\x18\x04 \x01(\tR\x14depositMinusWithdraw\x12&\n" +
-	"\x0ftotal_valid_bet\x18\x05 \x01(\tR\rtotalValidBet2\x8f\x12\n" +
+	"\x0ftotal_valid_bet\x18\x05 \x01(\tR\rtotalValidBet\x12.\n" +
+	"\x13total_deposit_count\x18\x06 \x01(\x05R\x11totalDepositCount\x120\n" +
+	"\x14total_withdraw_count\x18\a \x01(\x05R\x12totalWithdrawCount\x120\n" +
+	"\x14today_withdraw_count\x18\b \x01(\x05R\x12todayWithdrawCount2\x8f\x12\n" +
 	"\x06Wallet\x12Z\n" +
 	"\aAddUser\x12%.api.wallet.service.v1.AddUserRequest\x1a&.api.wallet.service.v1.AddUserResponse\"\x00\x12c\n" +
 	"\n" +
