@@ -1127,6 +1127,214 @@ var _ interface {
 	ErrorName() string
 } = AddCommentResponseValidationError{}
 
+// Validate checks the field values on CancelTicketRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CancelTicketRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CancelTicketRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CancelTicketRequestMultiError, or nil if none found.
+func (m *CancelTicketRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CancelTicketRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TicketId
+
+	// no validation rules for CancellerUserId
+
+	if len(errors) > 0 {
+		return CancelTicketRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CancelTicketRequestMultiError is an error wrapping multiple validation
+// errors returned by CancelTicketRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CancelTicketRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CancelTicketRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CancelTicketRequestMultiError) AllErrors() []error { return m }
+
+// CancelTicketRequestValidationError is the validation error returned by
+// CancelTicketRequest.Validate if the designated constraints aren't met.
+type CancelTicketRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CancelTicketRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CancelTicketRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CancelTicketRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CancelTicketRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CancelTicketRequestValidationError) ErrorName() string {
+	return "CancelTicketRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CancelTicketRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCancelTicketRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CancelTicketRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CancelTicketRequestValidationError{}
+
+// Validate checks the field values on CancelTicketResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CancelTicketResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CancelTicketResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CancelTicketResponseMultiError, or nil if none found.
+func (m *CancelTicketResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CancelTicketResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return CancelTicketResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CancelTicketResponseMultiError is an error wrapping multiple validation
+// errors returned by CancelTicketResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CancelTicketResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CancelTicketResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CancelTicketResponseMultiError) AllErrors() []error { return m }
+
+// CancelTicketResponseValidationError is the validation error returned by
+// CancelTicketResponse.Validate if the designated constraints aren't met.
+type CancelTicketResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CancelTicketResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CancelTicketResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CancelTicketResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CancelTicketResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CancelTicketResponseValidationError) ErrorName() string {
+	return "CancelTicketResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CancelTicketResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCancelTicketResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CancelTicketResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CancelTicketResponseValidationError{}
+
 // Validate checks the field values on ListTicketsResponse_Ticket with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

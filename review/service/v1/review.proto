@@ -20,6 +20,9 @@ service Review {
 	}
 	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {}
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
+	// CancelTicket is used to manually cancel a ticket.
+	// Ticket is cancellable only in paying status.
+	rpc CancelTicket(CancelTicketRequest) returns (CancelTicketResponse) {}
 	rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {}
 	rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {}
 }
@@ -51,6 +54,14 @@ message AddCommentRequest {
 message AddCommentResponse {
 	int64 comment_id = 1;
 }
+
+message CancelTicketRequest {
+	int64 ticket_id = 1;
+	// The user who is cancelling the ticket.
+	int64 canceller_user_id = 2;
+}
+
+message CancelTicketResponse {}
 
 message ListTicketsRequest {
 	optional int64 user_id = 2;

@@ -53,8 +53,8 @@ func RegisterBackofficeUserHTTPServer(s *http.Server, srv BackofficeUserHTTPServ
 	r.POST("/v1/backoffice/operator/user-tags/add", _BackofficeUser_AddOperatorUserTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/user-tags/delete", _BackofficeUser_DeleteOperatorUserTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/user-tags/get", _BackofficeUser_GetOperatorUserTags0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/user/tags/add", _BackofficeUser_AddUserTag0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/user/tags/delete", _BackofficeUser_DeleteUserTag0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/tags/add", _BackofficeUser_AddUserTag1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/tags/delete", _BackofficeUser_DeleteUserTag1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/comments/add", _BackofficeUser_AddUserComment0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/comments/list", _BackofficeUser_ListUserComments0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/update", _BackofficeUser_UpdateUser0_HTTP_Handler(srv))
@@ -192,7 +192,7 @@ func _BackofficeUser_GetOperatorUserTags0_HTTP_Handler(srv BackofficeUserHTTPSer
 	}
 }
 
-func _BackofficeUser_AddUserTag0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+func _BackofficeUser_AddUserTag1_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddUserTagRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -214,7 +214,7 @@ func _BackofficeUser_AddUserTag0_HTTP_Handler(srv BackofficeUserHTTPServer) func
 	}
 }
 
-func _BackofficeUser_DeleteUserTag0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+func _BackofficeUser_DeleteUserTag1_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteUserTagRequest
 		if err := ctx.Bind(&in); err != nil {

@@ -28,6 +28,12 @@ service BackofficeReview {
             body: "*"
         };
     }
+	rpc CancelTicket(CancelTicketRequest) returns (CancelTicketResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/review/tickets/cancel"
+            body: "*"
+        };
+    }
 }
 
 message ListTicketsRequest {
@@ -148,3 +154,10 @@ message AddCommentResponse {
 	// id of the comment added
 	int64 comment_id = 1;
 }
+
+message CancelTicketRequest {
+	int64 ticket_id = 1;
+	int64 canceller_user_id = 2;
+}
+
+message CancelTicketResponse {}

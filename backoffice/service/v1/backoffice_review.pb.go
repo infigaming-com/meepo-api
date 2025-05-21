@@ -668,6 +668,94 @@ func (x *AddCommentResponse) GetCommentId() int64 {
 	return 0
 }
 
+type CancelTicketRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	TicketId        int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	CancellerUserId int64                  `protobuf:"varint,2,opt,name=canceller_user_id,json=cancellerUserId,proto3" json:"canceller_user_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *CancelTicketRequest) Reset() {
+	*x = CancelTicketRequest{}
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelTicketRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelTicketRequest) ProtoMessage() {}
+
+func (x *CancelTicketRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelTicketRequest.ProtoReflect.Descriptor instead.
+func (*CancelTicketRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *CancelTicketRequest) GetTicketId() int64 {
+	if x != nil {
+		return x.TicketId
+	}
+	return 0
+}
+
+func (x *CancelTicketRequest) GetCancellerUserId() int64 {
+	if x != nil {
+		return x.CancellerUserId
+	}
+	return 0
+}
+
+type CancelTicketResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelTicketResponse) Reset() {
+	*x = CancelTicketResponse{}
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelTicketResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelTicketResponse) ProtoMessage() {}
+
+func (x *CancelTicketResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelTicketResponse.ProtoReflect.Descriptor instead.
+func (*CancelTicketResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{9}
+}
+
 type ListTicketsResponse_Ticket struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -695,7 +783,7 @@ type ListTicketsResponse_Ticket struct {
 
 func (x *ListTicketsResponse_Ticket) Reset() {
 	*x = ListTicketsResponse_Ticket{}
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -707,7 +795,7 @@ func (x *ListTicketsResponse_Ticket) String() string {
 func (*ListTicketsResponse_Ticket) ProtoMessage() {}
 
 func (x *ListTicketsResponse_Ticket) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -875,7 +963,7 @@ type GetTicketResponse_WithdrawPaymentInfo struct {
 
 func (x *GetTicketResponse_WithdrawPaymentInfo) Reset() {
 	*x = GetTicketResponse_WithdrawPaymentInfo{}
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -887,7 +975,7 @@ func (x *GetTicketResponse_WithdrawPaymentInfo) String() string {
 func (*GetTicketResponse_WithdrawPaymentInfo) ProtoMessage() {}
 
 func (x *GetTicketResponse_WithdrawPaymentInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -995,7 +1083,7 @@ type GetTicketResponse_UserWalletData struct {
 
 func (x *GetTicketResponse_UserWalletData) Reset() {
 	*x = GetTicketResponse_UserWalletData{}
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1007,7 +1095,7 @@ func (x *GetTicketResponse_UserWalletData) String() string {
 func (*GetTicketResponse_UserWalletData) ProtoMessage() {}
 
 func (x *GetTicketResponse_UserWalletData) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1083,7 +1171,7 @@ type GetTicketResponse_Comment struct {
 
 func (x *GetTicketResponse_Comment) Reset() {
 	*x = GetTicketResponse_Comment{}
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1095,7 +1183,7 @@ func (x *GetTicketResponse_Comment) String() string {
 func (*GetTicketResponse_Comment) ProtoMessage() {}
 
 func (x *GetTicketResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_review_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1260,11 +1348,16 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x0ereview_comment\x18\x03 \x01(\tR\rreviewComment\"3\n" +
 	"\x12AddCommentResponse\x12\x1d\n" +
 	"\n" +
-	"comment_id\x18\x01 \x01(\x03R\tcommentId2\xea\x03\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId\"^\n" +
+	"\x13CancelTicketRequest\x12\x1b\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12*\n" +
+	"\x11canceller_user_id\x18\x02 \x01(\x03R\x0fcancellerUserId\"\x16\n" +
+	"\x14CancelTicketResponse2\x8d\x05\n" +
 	"\x10BackofficeReview\x12\x9b\x01\n" +
 	"\vListTickets\x12-.api.backoffice.service.v1.ListTicketsRequest\x1a..api.backoffice.service.v1.ListTicketsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/review/tickets/list\x12\x94\x01\n" +
 	"\tGetTicket\x12+.api.backoffice.service.v1.GetTicketRequest\x1a,.api.backoffice.service.v1.GetTicketResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/review/tickets/get\x12\xa0\x01\n" +
-	"\fReviewTicket\x12..api.backoffice.service.v1.ReviewTicketRequest\x1a/.api.backoffice.service.v1.ReviewTicketResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/review/tickets/reviewB[\n" +
+	"\fReviewTicket\x12..api.backoffice.service.v1.ReviewTicketRequest\x1a/.api.backoffice.service.v1.ReviewTicketResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/review/tickets/review\x12\xa0\x01\n" +
+	"\fCancelTicket\x12..api.backoffice.service.v1.CancelTicketRequest\x1a/.api.backoffice.service.v1.CancelTicketResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/review/tickets/cancelB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -1279,7 +1372,7 @@ func file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_review_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_review_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_backoffice_service_v1_backoffice_review_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_backoffice_service_v1_backoffice_review_proto_goTypes = []any{
 	(*ListTicketsRequest)(nil),                    // 0: api.backoffice.service.v1.ListTicketsRequest
 	(*ListTicketsResponse)(nil),                   // 1: api.backoffice.service.v1.ListTicketsResponse
@@ -1289,33 +1382,37 @@ var file_backoffice_service_v1_backoffice_review_proto_goTypes = []any{
 	(*ReviewTicketResponse)(nil),                  // 5: api.backoffice.service.v1.ReviewTicketResponse
 	(*AddCommentRequest)(nil),                     // 6: api.backoffice.service.v1.AddCommentRequest
 	(*AddCommentResponse)(nil),                    // 7: api.backoffice.service.v1.AddCommentResponse
-	(*ListTicketsResponse_Ticket)(nil),            // 8: api.backoffice.service.v1.ListTicketsResponse.Ticket
-	(*GetTicketResponse_WithdrawPaymentInfo)(nil), // 9: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo
-	(*GetTicketResponse_UserWalletData)(nil),      // 10: api.backoffice.service.v1.GetTicketResponse.UserWalletData
-	(*GetTicketResponse_Comment)(nil),             // 11: api.backoffice.service.v1.GetTicketResponse.Comment
-	(*timestamppb.Timestamp)(nil),                 // 12: google.protobuf.Timestamp
-	(*structpb.Struct)(nil),                       // 13: google.protobuf.Struct
+	(*CancelTicketRequest)(nil),                   // 8: api.backoffice.service.v1.CancelTicketRequest
+	(*CancelTicketResponse)(nil),                  // 9: api.backoffice.service.v1.CancelTicketResponse
+	(*ListTicketsResponse_Ticket)(nil),            // 10: api.backoffice.service.v1.ListTicketsResponse.Ticket
+	(*GetTicketResponse_WithdrawPaymentInfo)(nil), // 11: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo
+	(*GetTicketResponse_UserWalletData)(nil),      // 12: api.backoffice.service.v1.GetTicketResponse.UserWalletData
+	(*GetTicketResponse_Comment)(nil),             // 13: api.backoffice.service.v1.GetTicketResponse.Comment
+	(*timestamppb.Timestamp)(nil),                 // 14: google.protobuf.Timestamp
+	(*structpb.Struct)(nil),                       // 15: google.protobuf.Struct
 }
 var file_backoffice_service_v1_backoffice_review_proto_depIdxs = []int32{
-	12, // 0: api.backoffice.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	12, // 1: api.backoffice.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
-	8,  // 2: api.backoffice.service.v1.ListTicketsResponse.tickets:type_name -> api.backoffice.service.v1.ListTicketsResponse.Ticket
-	9,  // 3: api.backoffice.service.v1.GetTicketResponse.withdraw_payment_info:type_name -> api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo
-	10, // 4: api.backoffice.service.v1.GetTicketResponse.user_wallet_data:type_name -> api.backoffice.service.v1.GetTicketResponse.UserWalletData
-	11, // 5: api.backoffice.service.v1.GetTicketResponse.comments:type_name -> api.backoffice.service.v1.GetTicketResponse.Comment
-	12, // 6: api.backoffice.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
-	12, // 7: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.created_at:type_name -> google.protobuf.Timestamp
-	13, // 8: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.extra:type_name -> google.protobuf.Struct
-	13, // 9: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.schema:type_name -> google.protobuf.Struct
-	12, // 10: api.backoffice.service.v1.GetTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	14, // 0: api.backoffice.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	14, // 1: api.backoffice.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	10, // 2: api.backoffice.service.v1.ListTicketsResponse.tickets:type_name -> api.backoffice.service.v1.ListTicketsResponse.Ticket
+	11, // 3: api.backoffice.service.v1.GetTicketResponse.withdraw_payment_info:type_name -> api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo
+	12, // 4: api.backoffice.service.v1.GetTicketResponse.user_wallet_data:type_name -> api.backoffice.service.v1.GetTicketResponse.UserWalletData
+	13, // 5: api.backoffice.service.v1.GetTicketResponse.comments:type_name -> api.backoffice.service.v1.GetTicketResponse.Comment
+	14, // 6: api.backoffice.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	14, // 7: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.created_at:type_name -> google.protobuf.Timestamp
+	15, // 8: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.extra:type_name -> google.protobuf.Struct
+	15, // 9: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.schema:type_name -> google.protobuf.Struct
+	14, // 10: api.backoffice.service.v1.GetTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 11: api.backoffice.service.v1.BackofficeReview.ListTickets:input_type -> api.backoffice.service.v1.ListTicketsRequest
 	2,  // 12: api.backoffice.service.v1.BackofficeReview.GetTicket:input_type -> api.backoffice.service.v1.GetTicketRequest
 	4,  // 13: api.backoffice.service.v1.BackofficeReview.ReviewTicket:input_type -> api.backoffice.service.v1.ReviewTicketRequest
-	1,  // 14: api.backoffice.service.v1.BackofficeReview.ListTickets:output_type -> api.backoffice.service.v1.ListTicketsResponse
-	3,  // 15: api.backoffice.service.v1.BackofficeReview.GetTicket:output_type -> api.backoffice.service.v1.GetTicketResponse
-	5,  // 16: api.backoffice.service.v1.BackofficeReview.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
-	14, // [14:17] is the sub-list for method output_type
-	11, // [11:14] is the sub-list for method input_type
+	8,  // 14: api.backoffice.service.v1.BackofficeReview.CancelTicket:input_type -> api.backoffice.service.v1.CancelTicketRequest
+	1,  // 15: api.backoffice.service.v1.BackofficeReview.ListTickets:output_type -> api.backoffice.service.v1.ListTicketsResponse
+	3,  // 16: api.backoffice.service.v1.BackofficeReview.GetTicket:output_type -> api.backoffice.service.v1.GetTicketResponse
+	5,  // 17: api.backoffice.service.v1.BackofficeReview.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
+	9,  // 18: api.backoffice.service.v1.BackofficeReview.CancelTicket:output_type -> api.backoffice.service.v1.CancelTicketResponse
+	15, // [15:19] is the sub-list for method output_type
+	11, // [11:15] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name
 	11, // [11:11] is the sub-list for extension extendee
 	0,  // [0:11] is the sub-list for field type_name
@@ -1333,7 +1430,7 @@ func file_backoffice_service_v1_backoffice_review_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_review_proto_rawDesc), len(file_backoffice_service_v1_backoffice_review_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

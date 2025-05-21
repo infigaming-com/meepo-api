@@ -19,11 +19,13 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeReviewCancelTicket = "/api.backoffice.service.v1.BackofficeReview/CancelTicket"
 const OperationBackofficeReviewGetTicket = "/api.backoffice.service.v1.BackofficeReview/GetTicket"
 const OperationBackofficeReviewListTickets = "/api.backoffice.service.v1.BackofficeReview/ListTickets"
 const OperationBackofficeReviewReviewTicket = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
 
 type BackofficeReviewHTTPServer interface {
+	CancelTicket(context.Context, *CancelTicketRequest) (*CancelTicketResponse, error)
 	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
 	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
@@ -34,6 +36,7 @@ func RegisterBackofficeReviewHTTPServer(s *http.Server, srv BackofficeReviewHTTP
 	r.POST("/v1/backoffice/review/tickets/list", _BackofficeReview_ListTickets0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/review/tickets/get", _BackofficeReview_GetTicket0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/review/tickets/review", _BackofficeReview_ReviewTicket0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/review/tickets/cancel", _BackofficeReview_CancelTicket0_HTTP_Handler(srv))
 }
 
 func _BackofficeReview_ListTickets0_HTTP_Handler(srv BackofficeReviewHTTPServer) func(ctx http.Context) error {
@@ -102,7 +105,30 @@ func _BackofficeReview_ReviewTicket0_HTTP_Handler(srv BackofficeReviewHTTPServer
 	}
 }
 
+func _BackofficeReview_CancelTicket0_HTTP_Handler(srv BackofficeReviewHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CancelTicketRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeReviewCancelTicket)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CancelTicket(ctx, req.(*CancelTicketRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CancelTicketResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeReviewHTTPClient interface {
+	CancelTicket(ctx context.Context, req *CancelTicketRequest, opts ...http.CallOption) (rsp *CancelTicketResponse, err error)
 	GetTicket(ctx context.Context, req *GetTicketRequest, opts ...http.CallOption) (rsp *GetTicketResponse, err error)
 	ListTickets(ctx context.Context, req *ListTicketsRequest, opts ...http.CallOption) (rsp *ListTicketsResponse, err error)
 	ReviewTicket(ctx context.Context, req *ReviewTicketRequest, opts ...http.CallOption) (rsp *ReviewTicketResponse, err error)
@@ -114,6 +140,19 @@ type BackofficeReviewHTTPClientImpl struct {
 
 func NewBackofficeReviewHTTPClient(client *http.Client) BackofficeReviewHTTPClient {
 	return &BackofficeReviewHTTPClientImpl{client}
+}
+
+func (c *BackofficeReviewHTTPClientImpl) CancelTicket(ctx context.Context, in *CancelTicketRequest, opts ...http.CallOption) (*CancelTicketResponse, error) {
+	var out CancelTicketResponse
+	pattern := "/v1/backoffice/review/tickets/cancel"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeReviewCancelTicket))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *BackofficeReviewHTTPClientImpl) GetTicket(ctx context.Context, in *GetTicketRequest, opts ...http.CallOption) (*GetTicketResponse, error) {

@@ -22,6 +22,7 @@ const (
 	BackofficeReview_ListTickets_FullMethodName  = "/api.backoffice.service.v1.BackofficeReview/ListTickets"
 	BackofficeReview_GetTicket_FullMethodName    = "/api.backoffice.service.v1.BackofficeReview/GetTicket"
 	BackofficeReview_ReviewTicket_FullMethodName = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
+	BackofficeReview_CancelTicket_FullMethodName = "/api.backoffice.service.v1.BackofficeReview/CancelTicket"
 )
 
 // BackofficeReviewClient is the client API for BackofficeReview service.
@@ -31,6 +32,7 @@ type BackofficeReviewClient interface {
 	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
 	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error)
 	ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error)
+	CancelTicket(ctx context.Context, in *CancelTicketRequest, opts ...grpc.CallOption) (*CancelTicketResponse, error)
 }
 
 type backofficeReviewClient struct {
@@ -71,6 +73,16 @@ func (c *backofficeReviewClient) ReviewTicket(ctx context.Context, in *ReviewTic
 	return out, nil
 }
 
+func (c *backofficeReviewClient) CancelTicket(ctx context.Context, in *CancelTicketRequest, opts ...grpc.CallOption) (*CancelTicketResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelTicketResponse)
+	err := c.cc.Invoke(ctx, BackofficeReview_CancelTicket_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeReviewServer is the server API for BackofficeReview service.
 // All implementations must embed UnimplementedBackofficeReviewServer
 // for forward compatibility.
@@ -78,6 +90,7 @@ type BackofficeReviewServer interface {
 	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
 	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
+	CancelTicket(context.Context, *CancelTicketRequest) (*CancelTicketResponse, error)
 	mustEmbedUnimplementedBackofficeReviewServer()
 }
 
@@ -96,6 +109,9 @@ func (UnimplementedBackofficeReviewServer) GetTicket(context.Context, *GetTicket
 }
 func (UnimplementedBackofficeReviewServer) ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReviewTicket not implemented")
+}
+func (UnimplementedBackofficeReviewServer) CancelTicket(context.Context, *CancelTicketRequest) (*CancelTicketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelTicket not implemented")
 }
 func (UnimplementedBackofficeReviewServer) mustEmbedUnimplementedBackofficeReviewServer() {}
 func (UnimplementedBackofficeReviewServer) testEmbeddedByValue()                          {}
@@ -172,6 +188,24 @@ func _BackofficeReview_ReviewTicket_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeReview_CancelTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelTicketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReviewServer).CancelTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReview_CancelTicket_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReviewServer).CancelTicket(ctx, req.(*CancelTicketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeReview_ServiceDesc is the grpc.ServiceDesc for BackofficeReview service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +224,10 @@ var BackofficeReview_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReviewTicket",
 			Handler:    _BackofficeReview_ReviewTicket_Handler,
+		},
+		{
+			MethodName: "CancelTicket",
+			Handler:    _BackofficeReview_CancelTicket_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
