@@ -2104,6 +2104,8 @@ func (m *AddUserCommentRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	// no validation rules for AuthorUserId
+
 	// no validation rules for Content
 
 	if len(errors) > 0 {

@@ -162,6 +162,9 @@ service User {
 
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
     }
+
+	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -523,4 +526,14 @@ message ListUsersResponse {
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;
+}
+
+message AddCommentRequest {
+	int64 user_id = 1;
+	int64 author_user_id = 2;
+	string content = 3;
+}
+
+message AddCommentResponse {
+	int64 comment_id = 1;
 }
