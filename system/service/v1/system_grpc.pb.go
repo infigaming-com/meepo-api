@@ -22,6 +22,7 @@ const (
 	System_AddCurrency_FullMethodName    = "/system.service.v1.System/AddCurrency"
 	System_UpdateCurrency_FullMethodName = "/system.service.v1.System/UpdateCurrency"
 	System_GetCurrencies_FullMethodName  = "/system.service.v1.System/GetCurrencies"
+	System_ListCurrencies_FullMethodName = "/system.service.v1.System/ListCurrencies"
 )
 
 // SystemClient is the client API for System service.
@@ -31,6 +32,7 @@ type SystemClient interface {
 	AddCurrency(ctx context.Context, in *AddCurrencyRequest, opts ...grpc.CallOption) (*AddCurrencyResponse, error)
 	UpdateCurrency(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*UpdateCurrencyResponse, error)
 	GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error)
+	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
 }
 
 type systemClient struct {
@@ -71,6 +73,16 @@ func (c *systemClient) GetCurrencies(ctx context.Context, in *GetCurrenciesReque
 	return out, nil
 }
 
+func (c *systemClient) ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCurrenciesResponse)
+	err := c.cc.Invoke(ctx, System_ListCurrencies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SystemServer is the server API for System service.
 // All implementations must embed UnimplementedSystemServer
 // for forward compatibility.
@@ -78,6 +90,7 @@ type SystemServer interface {
 	AddCurrency(context.Context, *AddCurrencyRequest) (*AddCurrencyResponse, error)
 	UpdateCurrency(context.Context, *UpdateCurrencyRequest) (*UpdateCurrencyResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
+	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	mustEmbedUnimplementedSystemServer()
 }
 
@@ -96,6 +109,9 @@ func (UnimplementedSystemServer) UpdateCurrency(context.Context, *UpdateCurrency
 }
 func (UnimplementedSystemServer) GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCurrencies not implemented")
+}
+func (UnimplementedSystemServer) ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCurrencies not implemented")
 }
 func (UnimplementedSystemServer) mustEmbedUnimplementedSystemServer() {}
 func (UnimplementedSystemServer) testEmbeddedByValue()                {}
@@ -172,6 +188,24 @@ func _System_GetCurrencies_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _System_ListCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCurrenciesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).ListCurrencies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: System_ListCurrencies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).ListCurrencies(ctx, req.(*ListCurrenciesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // System_ServiceDesc is the grpc.ServiceDesc for System service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +224,10 @@ var System_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCurrencies",
 			Handler:    _System_GetCurrencies_Handler,
+		},
+		{
+			MethodName: "ListCurrencies",
+			Handler:    _System_ListCurrencies_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
