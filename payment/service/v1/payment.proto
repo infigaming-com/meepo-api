@@ -312,20 +312,22 @@ message TransactionInfo {
   int64 amount = 7;
   // Currency code for the transaction
   string currency = 8;
+  // Transaction fee in smallest currency unit
+  int64 fee = 9;
   // Payment method used for the transaction
-  string payment_method = 9 [json_name="paymentMethod"];
+  string payment_method = 10 [json_name="paymentMethod"];
   // Payment channel used for the transaction
-  string payment_channel = 10 [json_name="paymentChannel"];
+  string payment_channel = 11 [json_name="paymentChannel"];
   // Protocol used for the transaction
-  string protocol = 11;
+  string protocol = 12;
   // Type of transaction (deposit or withdrawal)
-  TransactionType type = 12;
+  TransactionType type = 13;
   // Current status of the transaction
-  TransactionStatus status = 13;
+  TransactionStatus status = 14;
   // Timestamp when the transaction was created
-  google.protobuf.Timestamp created_at = 14 [json_name="createdAt"];
+  google.protobuf.Timestamp created_at = 15 [json_name="createdAt"];
   // Timestamp when the transaction was last updated
-  google.protobuf.Timestamp updated_at = 15 [json_name="updatedAt"];
+  google.protobuf.Timestamp updated_at = 16 [json_name="updatedAt"];
 }
 
 message TransactionDetail {
