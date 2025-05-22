@@ -3491,17 +3491,17 @@ func (x *GetUserProfileResponse_IpInfo) GetCountry() string {
 }
 
 type GetUserProfileResponse_RegistrationRecord struct {
-	state         protoimpl.MessageState           `protogen:"open.v1"`
-	RegisteredAt  *timestamppb.Timestamp           `protobuf:"bytes,1,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
-	IpInfos       []*GetUserProfileResponse_IpInfo `protobuf:"bytes,2,rep,name=ip_infos,json=ipInfos,proto3" json:"ip_infos,omitempty"`
-	Device        string                           `protobuf:"bytes,3,opt,name=device,proto3" json:"device,omitempty"`
-	Method        string                           `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
-	Browser       string                           `protobuf:"bytes,5,opt,name=browser,proto3" json:"browser,omitempty"`
-	App           string                           `protobuf:"bytes,6,opt,name=app,proto3" json:"app,omitempty"` // Not available for now
-	Mobile        string                           `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Email         string                           `protobuf:"bytes,8,opt,name=email,proto3" json:"email,omitempty"`
-	Username      string                           `protobuf:"bytes,9,opt,name=username,proto3" json:"username,omitempty"`
-	Source        string                           `protobuf:"bytes,10,opt,name=source,proto3" json:"source,omitempty"`
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	RegisteredAt  *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	IpInfo        *GetUserProfileResponse_IpInfo `protobuf:"bytes,2,opt,name=ip_info,json=ipInfo,proto3" json:"ip_info,omitempty"`
+	Device        string                         `protobuf:"bytes,3,opt,name=device,proto3" json:"device,omitempty"`
+	Method        string                         `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
+	Browser       string                         `protobuf:"bytes,5,opt,name=browser,proto3" json:"browser,omitempty"`
+	App           string                         `protobuf:"bytes,6,opt,name=app,proto3" json:"app,omitempty"` // Not available for now
+	Mobile        string                         `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Email         string                         `protobuf:"bytes,8,opt,name=email,proto3" json:"email,omitempty"`
+	Username      string                         `protobuf:"bytes,9,opt,name=username,proto3" json:"username,omitempty"`
+	Source        string                         `protobuf:"bytes,10,opt,name=source,proto3" json:"source,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3543,9 +3543,9 @@ func (x *GetUserProfileResponse_RegistrationRecord) GetRegisteredAt() *timestamp
 	return nil
 }
 
-func (x *GetUserProfileResponse_RegistrationRecord) GetIpInfos() []*GetUserProfileResponse_IpInfo {
+func (x *GetUserProfileResponse_RegistrationRecord) GetIpInfo() *GetUserProfileResponse_IpInfo {
 	if x != nil {
-		return x.IpInfos
+		return x.IpInfo
 	}
 	return nil
 }
@@ -4027,7 +4027,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\a \x01(\x03R\tcreatedAt\"0\n" +
 	"\x15GetUserProfileRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xbf\v\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xbd\v\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -4043,10 +4043,10 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x06IpInfo\x12\x0e\n" +
 	"\x02ip\x18\x01 \x01(\tR\x02ip\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x05R\x05count\x12\x18\n" +
-	"\acountry\x18\x03 \x01(\tR\acountry\x1a\xe2\x02\n" +
+	"\acountry\x18\x03 \x01(\tR\acountry\x1a\xe0\x02\n" +
 	"\x12RegistrationRecord\x12?\n" +
-	"\rregistered_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12M\n" +
-	"\bip_infos\x18\x02 \x03(\v22.api.user.service.v1.GetUserProfileResponse.IpInfoR\aipInfos\x12\x16\n" +
+	"\rregistered_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12K\n" +
+	"\aip_info\x18\x02 \x01(\v22.api.user.service.v1.GetUserProfileResponse.IpInfoR\x06ipInfo\x12\x16\n" +
 	"\x06device\x18\x03 \x01(\tR\x06device\x12\x16\n" +
 	"\x06method\x18\x04 \x01(\tR\x06method\x12\x18\n" +
 	"\abrowser\x18\x05 \x01(\tR\abrowser\x12\x10\n" +
@@ -4220,7 +4220,7 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	63, // 13: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
 	63, // 14: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
 	63, // 15: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	59, // 16: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_infos:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	59, // 16: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
 	63, // 17: api.user.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
 	59, // 18: api.user.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
 	63, // 19: api.user.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp

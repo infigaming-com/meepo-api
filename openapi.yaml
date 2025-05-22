@@ -3118,10 +3118,8 @@ components:
                 registeredAt:
                     type: string
                     format: date-time
-                ipInfos:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_IpInfo'
+                ipInfo:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_IpInfo'
                 device:
                     type: string
                 method:

@@ -207,7 +207,7 @@ message GetUserProfileResponse {
 	}
 	message RegistrationRecord {
 		google.protobuf.Timestamp registered_at = 1;
-		repeated IpInfo ip_infos = 2;
+		IpInfo ip_info = 2;
 		string device = 3;
 		string method = 4;
 		string browser = 5;

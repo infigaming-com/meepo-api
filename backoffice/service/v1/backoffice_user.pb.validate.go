@@ -3643,38 +3643,33 @@ func (m *GetUserProfileResponse_RegistrationRecord) validate(all bool) error {
 		}
 	}
 
-	for idx, item := range m.GetIpInfos() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetUserProfileResponse_RegistrationRecordValidationError{
-						field:  fmt.Sprintf("IpInfos[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GetUserProfileResponse_RegistrationRecordValidationError{
-						field:  fmt.Sprintf("IpInfos[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GetUserProfileResponse_RegistrationRecordValidationError{
-					field:  fmt.Sprintf("IpInfos[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetIpInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserProfileResponse_RegistrationRecordValidationError{
+					field:  "IpInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserProfileResponse_RegistrationRecordValidationError{
+					field:  "IpInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetIpInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserProfileResponse_RegistrationRecordValidationError{
+				field:  "IpInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	// no validation rules for Device
