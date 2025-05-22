@@ -75,6 +75,18 @@ service BackofficeAccount {
             body: "*"
         };
     }
+    rpc Register(RegisterRequest) returns (RegisterResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/register"
+            body: "*"
+        };
+    }
+    rpc SendRegisterVerificationCode(SendRegisterVerificationCodeRequest) returns (SendRegisterVerificationCodeResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/register/verification/send"
+            body: "*"
+        };
+    }
 }
 
 // Account related messages
@@ -148,3 +160,21 @@ message LoginRequest {
 message LoginResponse {
 	string token = 1;
 }
+
+message RegisterRequest {
+	string username = 1;
+	string email = 2;
+	string verification_code = 3;
+	string password = 4;
+	string mobile = 5;
+}
+
+message RegisterResponse {
+	string token = 1;
+}
+
+message SendRegisterVerificationCodeRequest {
+	string email = 1;
+}
+
+message SendRegisterVerificationCodeResponse {}

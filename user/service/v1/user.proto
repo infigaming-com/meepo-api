@@ -168,6 +168,10 @@ service User {
 
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
     }
+	rpc CreateGroupUser(CreateGroupUserRequest) returns (CreateGroupUserResponse) {
+	}
+	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -536,3 +540,19 @@ message ListUsersResponse {
 	int32 page_size = 3;
 	int32 total = 4;
 }
+
+message CreateGroupUserRequest {
+	string username = 1;
+	string password = 2;
+	string email = 3;
+	string mobile = 4;
+}
+
+message CreateGroupUserResponse {}
+
+message VerifyEmailRequest {
+	string email = 1;
+	string verification_code = 2;
+}
+
+message VerifyEmailResponse {}

@@ -83,7 +83,7 @@ type UserHTTPServer interface {
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/user/auth/register", _User_Register0_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/register", _User_Register1_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/login", _User_Login1_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/oauth", _User_RegisterOrLoginWithOAuth0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/telegram", _User_RegisterOrLoginWithTelegram0_HTTP_Handler(srv))
@@ -102,7 +102,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/email/verification-code/send", _User_SendEmailVerificationCode1_HTTP_Handler(srv))
 }
 
-func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Register1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in RegisterRequest
 		if err := ctx.Bind(&in); err != nil {
