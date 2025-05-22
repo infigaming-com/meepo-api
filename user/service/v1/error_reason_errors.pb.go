@@ -505,6 +505,66 @@ func ErrorListUsersFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_USERS_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
+func IsRoleNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ROLE_NOT_FOUND.String() && e.Code == 404
+}
+
+func ErrorRoleNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_ROLE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailedToSendEmail(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAILED_TO_SEND_EMAIL.String() && e.Code == 500
+}
+
+func ErrorFailedToSendEmail(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAILED_TO_SEND_EMAIL.String(), fmt.Sprintf(format, args...))
+}
+
+func IsVerificationCodeSendTooFrequently(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_VERIFICATION_CODE_SEND_TOO_FREQUENTLY.String() && e.Code == 500
+}
+
+func ErrorVerificationCodeSendTooFrequently(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_VERIFICATION_CODE_SEND_TOO_FREQUENTLY.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEmailVerificationFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_VERIFICATION_FAILED.String() && e.Code == 500
+}
+
+func ErrorEmailVerificationFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMAIL_VERIFICATION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEmailAlreadyRegistered(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_ALREADY_REGISTERED.String() && e.Code == 500
+}
+
+func ErrorEmailAlreadyRegistered(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMAIL_ALREADY_REGISTERED.String(), fmt.Sprintf(format, args...))
+}
+
 func IsGenerateCommentIdFailed(err error) bool {
 	if err == nil {
 		return false

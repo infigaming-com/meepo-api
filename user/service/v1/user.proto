@@ -157,12 +157,21 @@ service User {
 		};
 	}
 
+	rpc SendEmailVerificationCode(SendEmailVerificationCodeRequest) returns (SendEmailVerificationCodeResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/email/verification-code/send"
+			body: "*"
+		};
+	}
 	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
 	}
 
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
-    }
-
+	}
+	rpc CreateGroupUser(CreateGroupUserRequest) returns (CreateGroupUserResponse) {
+	}
+	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {
+	}
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {
 	}
 
@@ -461,6 +470,12 @@ message AddOperatorRequest {
 message AddOperatorResponse {
 }
 
+message SendEmailVerificationCodeRequest {
+	string email = 1;
+}
+
+message SendEmailVerificationCodeResponse {
+}
 message UpdateUserRequest {
 	int64 user_id = 1;
 	optional bool ban_login = 2;
@@ -531,6 +546,21 @@ message ListUsersResponse {
 	int32 total = 4;
 }
 
+message CreateGroupUserRequest {
+	string username = 1;
+	string password = 2;
+	string email = 3;
+	string mobile = 4;
+}
+
+message CreateGroupUserResponse {}
+
+message VerifyEmailRequest {
+	string email = 1;
+	string verification_code = 2;
+}
+
+message VerifyEmailResponse {}
 message AddCommentRequest {
 	int64 user_id = 1;
 	int64 author_user_id = 2;

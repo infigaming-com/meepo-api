@@ -2164,6 +2164,86 @@ func (*AddOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{37}
 }
 
+type SendEmailVerificationCodeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendEmailVerificationCodeRequest) Reset() {
+	*x = SendEmailVerificationCodeRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendEmailVerificationCodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendEmailVerificationCodeRequest) ProtoMessage() {}
+
+func (x *SendEmailVerificationCodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendEmailVerificationCodeRequest.ProtoReflect.Descriptor instead.
+func (*SendEmailVerificationCodeRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *SendEmailVerificationCodeRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+type SendEmailVerificationCodeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendEmailVerificationCodeResponse) Reset() {
+	*x = SendEmailVerificationCodeResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendEmailVerificationCodeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendEmailVerificationCodeResponse) ProtoMessage() {}
+
+func (x *SendEmailVerificationCodeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendEmailVerificationCodeResponse.ProtoReflect.Descriptor instead.
+func (*SendEmailVerificationCodeResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{39}
+}
+
 type UpdateUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -2176,7 +2256,7 @@ type UpdateUserRequest struct {
 
 func (x *UpdateUserRequest) Reset() {
 	*x = UpdateUserRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[38]
+	mi := &file_user_service_v1_user_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2188,7 +2268,7 @@ func (x *UpdateUserRequest) String() string {
 func (*UpdateUserRequest) ProtoMessage() {}
 
 func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[38]
+	mi := &file_user_service_v1_user_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2201,7 +2281,7 @@ func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{38}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *UpdateUserRequest) GetUserId() int64 {
@@ -2240,7 +2320,7 @@ type UpdateUserResponse struct {
 
 func (x *UpdateUserResponse) Reset() {
 	*x = UpdateUserResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[39]
+	mi := &file_user_service_v1_user_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2252,7 +2332,7 @@ func (x *UpdateUserResponse) String() string {
 func (*UpdateUserResponse) ProtoMessage() {}
 
 func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[39]
+	mi := &file_user_service_v1_user_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2265,7 +2345,7 @@ func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserResponse.ProtoReflect.Descriptor instead.
 func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{39}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{41}
 }
 
 type ListUsersRequest struct {
@@ -2299,7 +2379,7 @@ type ListUsersRequest struct {
 
 func (x *ListUsersRequest) Reset() {
 	*x = ListUsersRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[40]
+	mi := &file_user_service_v1_user_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2311,7 +2391,7 @@ func (x *ListUsersRequest) String() string {
 func (*ListUsersRequest) ProtoMessage() {}
 
 func (x *ListUsersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[40]
+	mi := &file_user_service_v1_user_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2324,7 +2404,7 @@ func (x *ListUsersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUsersRequest.ProtoReflect.Descriptor instead.
 func (*ListUsersRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{40}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *ListUsersRequest) GetUserId() int64 {
@@ -2472,7 +2552,7 @@ type ListUsersResponse struct {
 
 func (x *ListUsersResponse) Reset() {
 	*x = ListUsersResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[41]
+	mi := &file_user_service_v1_user_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2484,7 +2564,7 @@ func (x *ListUsersResponse) String() string {
 func (*ListUsersResponse) ProtoMessage() {}
 
 func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[41]
+	mi := &file_user_service_v1_user_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2497,7 +2577,7 @@ func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUsersResponse.ProtoReflect.Descriptor instead.
 func (*ListUsersResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{41}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *ListUsersResponse) GetUsers() []*ListUsersResponse_User {
@@ -2528,6 +2608,198 @@ func (x *ListUsersResponse) GetTotal() int32 {
 	return 0
 }
 
+type CreateGroupUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile        string                 `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateGroupUserRequest) Reset() {
+	*x = CreateGroupUserRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateGroupUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateGroupUserRequest) ProtoMessage() {}
+
+func (x *CreateGroupUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateGroupUserRequest.ProtoReflect.Descriptor instead.
+func (*CreateGroupUserRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *CreateGroupUserRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *CreateGroupUserRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *CreateGroupUserRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *CreateGroupUserRequest) GetMobile() string {
+	if x != nil {
+		return x.Mobile
+	}
+	return ""
+}
+
+type CreateGroupUserResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateGroupUserResponse) Reset() {
+	*x = CreateGroupUserResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateGroupUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateGroupUserResponse) ProtoMessage() {}
+
+func (x *CreateGroupUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateGroupUserResponse.ProtoReflect.Descriptor instead.
+func (*CreateGroupUserResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{45}
+}
+
+type VerifyEmailRequest struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Email            string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	VerificationCode string                 `protobuf:"bytes,2,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *VerifyEmailRequest) Reset() {
+	*x = VerifyEmailRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VerifyEmailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VerifyEmailRequest) ProtoMessage() {}
+
+func (x *VerifyEmailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VerifyEmailRequest.ProtoReflect.Descriptor instead.
+func (*VerifyEmailRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *VerifyEmailRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *VerifyEmailRequest) GetVerificationCode() string {
+	if x != nil {
+		return x.VerificationCode
+	}
+	return ""
+}
+
+type VerifyEmailResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VerifyEmailResponse) Reset() {
+	*x = VerifyEmailResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VerifyEmailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VerifyEmailResponse) ProtoMessage() {}
+
+func (x *VerifyEmailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VerifyEmailResponse.ProtoReflect.Descriptor instead.
+func (*VerifyEmailResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{47}
+}
+
 type AddCommentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -2539,7 +2811,7 @@ type AddCommentRequest struct {
 
 func (x *AddCommentRequest) Reset() {
 	*x = AddCommentRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[42]
+	mi := &file_user_service_v1_user_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2551,7 +2823,7 @@ func (x *AddCommentRequest) String() string {
 func (*AddCommentRequest) ProtoMessage() {}
 
 func (x *AddCommentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[42]
+	mi := &file_user_service_v1_user_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2564,7 +2836,7 @@ func (x *AddCommentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddCommentRequest.ProtoReflect.Descriptor instead.
 func (*AddCommentRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{42}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *AddCommentRequest) GetUserId() int64 {
@@ -2597,7 +2869,7 @@ type AddCommentResponse struct {
 
 func (x *AddCommentResponse) Reset() {
 	*x = AddCommentResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[43]
+	mi := &file_user_service_v1_user_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2609,7 +2881,7 @@ func (x *AddCommentResponse) String() string {
 func (*AddCommentResponse) ProtoMessage() {}
 
 func (x *AddCommentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[43]
+	mi := &file_user_service_v1_user_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2622,7 +2894,7 @@ func (x *AddCommentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddCommentResponse.ProtoReflect.Descriptor instead.
 func (*AddCommentResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{43}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *AddCommentResponse) GetCommentId() int64 {
@@ -2641,7 +2913,7 @@ type GetCommentsByUserIdRequest struct {
 
 func (x *GetCommentsByUserIdRequest) Reset() {
 	*x = GetCommentsByUserIdRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[44]
+	mi := &file_user_service_v1_user_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2653,7 +2925,7 @@ func (x *GetCommentsByUserIdRequest) String() string {
 func (*GetCommentsByUserIdRequest) ProtoMessage() {}
 
 func (x *GetCommentsByUserIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[44]
+	mi := &file_user_service_v1_user_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2666,7 +2938,7 @@ func (x *GetCommentsByUserIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCommentsByUserIdRequest.ProtoReflect.Descriptor instead.
 func (*GetCommentsByUserIdRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{44}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *GetCommentsByUserIdRequest) GetUserId() int64 {
@@ -2685,7 +2957,7 @@ type GetCommentsByUserIdResponse struct {
 
 func (x *GetCommentsByUserIdResponse) Reset() {
 	*x = GetCommentsByUserIdResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[45]
+	mi := &file_user_service_v1_user_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2697,7 +2969,7 @@ func (x *GetCommentsByUserIdResponse) String() string {
 func (*GetCommentsByUserIdResponse) ProtoMessage() {}
 
 func (x *GetCommentsByUserIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[45]
+	mi := &file_user_service_v1_user_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2710,7 +2982,7 @@ func (x *GetCommentsByUserIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCommentsByUserIdResponse.ProtoReflect.Descriptor instead.
 func (*GetCommentsByUserIdResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{45}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *GetCommentsByUserIdResponse) GetComments() []*GetCommentsByUserIdResponse_Comment {
@@ -2753,7 +3025,7 @@ type ListUsersResponse_User struct {
 
 func (x *ListUsersResponse_User) Reset() {
 	*x = ListUsersResponse_User{}
-	mi := &file_user_service_v1_user_proto_msgTypes[46]
+	mi := &file_user_service_v1_user_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2765,7 +3037,7 @@ func (x *ListUsersResponse_User) String() string {
 func (*ListUsersResponse_User) ProtoMessage() {}
 
 func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[46]
+	mi := &file_user_service_v1_user_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2778,7 +3050,7 @@ func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUsersResponse_User.ProtoReflect.Descriptor instead.
 func (*ListUsersResponse_User) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{41, 0}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{43, 0}
 }
 
 func (x *ListUsersResponse_User) GetRetailer() string {
@@ -2927,7 +3199,7 @@ type GetCommentsByUserIdResponse_Comment struct {
 
 func (x *GetCommentsByUserIdResponse_Comment) Reset() {
 	*x = GetCommentsByUserIdResponse_Comment{}
-	mi := &file_user_service_v1_user_proto_msgTypes[47]
+	mi := &file_user_service_v1_user_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2939,7 +3211,7 @@ func (x *GetCommentsByUserIdResponse_Comment) String() string {
 func (*GetCommentsByUserIdResponse_Comment) ProtoMessage() {}
 
 func (x *GetCommentsByUserIdResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[47]
+	mi := &file_user_service_v1_user_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2952,7 +3224,7 @@ func (x *GetCommentsByUserIdResponse_Comment) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use GetCommentsByUserIdResponse_Comment.ProtoReflect.Descriptor instead.
 func (*GetCommentsByUserIdResponse_Comment) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{45, 0}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{51, 0}
 }
 
 func (x *GetCommentsByUserIdResponse_Comment) GetCommentId() int64 {
@@ -3109,7 +3381,10 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x12AddOperatorRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\tR\n" +
 	"operatorId\"\x15\n" +
-	"\x13AddOperatorResponse\"\xc2\x01\n" +
+	"\x13AddOperatorResponse\"8\n" +
+	" SendEmailVerificationCodeRequest\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\"#\n" +
+	"!SendEmailVerificationCodeResponse\"\xc2\x01\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12 \n" +
 	"\tban_login\x18\x02 \x01(\bH\x00R\bbanLogin\x88\x01\x01\x12\x1e\n" +
@@ -3193,7 +3468,17 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\rlast_login_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
 	"\rregistered_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
 	"\acountry\x18\x16 \x01(\tR\acountry\x12'\n" +
-	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\"l\n" +
+	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\"~\n" +
+	"\x16CreateGroupUserRequest\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x14\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email\x12\x16\n" +
+	"\x06mobile\x18\x04 \x01(\tR\x06mobile\"\x19\n" +
+	"\x17CreateGroupUserResponse\"W\n" +
+	"\x12VerifyEmailRequest\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\x12+\n" +
+	"\x11verification_code\x18\x02 \x01(\tR\x10verificationCode\"\x15\n" +
+	"\x13VerifyEmailResponse\"l\n" +
 	"\x11AddCommentRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12$\n" +
 	"\x0eauthor_user_id\x18\x02 \x01(\x03R\fauthorUserId\x12\x18\n" +
@@ -3227,7 +3512,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1aOAUTH_PROVIDER_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15OAUTH_PROVIDER_GOOGLE\x10\x01\x12\x1b\n" +
 	"\x17OAUTH_PROVIDER_FACEBOOK\x10\x02\x12\x1a\n" +
-	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\x87\x18\n" +
+	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\x9a\x1b\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12\x80\x01\n" +
@@ -3249,10 +3534,13 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\rDeleteUserTag\x12).api.user.service.v1.DeleteUserTagRequest\x1a*.api.user.service.v1.DeleteUserTagResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1/user/tags/delete\x12~\n" +
 	"\vGetUserTags\x12'.api.user.service.v1.GetUserTagsRequest\x1a(.api.user.service.v1.GetUserTagsResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/user/tags/get\x12n\n" +
 	"\x0fCheckPermission\x12+.api.user.service.v1.CheckPermissionRequest\x1a,.api.user.service.v1.CheckPermissionResponse\"\x00\x12\x83\x01\n" +
-	"\vAddOperator\x12'.api.user.service.v1.AddOperatorRequest\x1a(.api.user.service.v1.AddOperatorResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/operators/add\x12_\n" +
+	"\vAddOperator\x12'.api.user.service.v1.AddOperatorRequest\x1a(.api.user.service.v1.AddOperatorResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/operators/add\x12\xbc\x01\n" +
+	"\x19SendEmailVerificationCode\x125.api.user.service.v1.SendEmailVerificationCodeRequest\x1a6.api.user.service.v1.SendEmailVerificationCodeResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/user/email/verification-code/send\x12_\n" +
 	"\n" +
 	"UpdateUser\x12&.api.user.service.v1.UpdateUserRequest\x1a'.api.user.service.v1.UpdateUserResponse\"\x00\x12\\\n" +
-	"\tListUsers\x12%.api.user.service.v1.ListUsersRequest\x1a&.api.user.service.v1.ListUsersResponse\"\x00\x12_\n" +
+	"\tListUsers\x12%.api.user.service.v1.ListUsersRequest\x1a&.api.user.service.v1.ListUsersResponse\"\x00\x12n\n" +
+	"\x0fCreateGroupUser\x12+.api.user.service.v1.CreateGroupUserRequest\x1a,.api.user.service.v1.CreateGroupUserResponse\"\x00\x12b\n" +
+	"\vVerifyEmail\x12'.api.user.service.v1.VerifyEmailRequest\x1a(.api.user.service.v1.VerifyEmailResponse\"\x00\x12_\n" +
 	"\n" +
 	"AddComment\x12&.api.user.service.v1.AddCommentRequest\x1a'.api.user.service.v1.AddCommentResponse\"\x00\x12z\n" +
 	"\x13GetCommentsByUserId\x12/.api.user.service.v1.GetCommentsByUserIdRequest\x1a0.api.user.service.v1.GetCommentsByUserIdResponse\"\x00BO\n" +
@@ -3271,7 +3559,7 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 48)
+var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 54)
 var file_user_service_v1_user_proto_goTypes = []any{
 	(AuthType)(0),                               // 0: api.user.service.v1.AuthType
 	(PasswordProvider)(0),                       // 1: api.user.service.v1.PasswordProvider
@@ -3314,17 +3602,23 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*CheckPermissionResponse)(nil),             // 38: api.user.service.v1.CheckPermissionResponse
 	(*AddOperatorRequest)(nil),                  // 39: api.user.service.v1.AddOperatorRequest
 	(*AddOperatorResponse)(nil),                 // 40: api.user.service.v1.AddOperatorResponse
-	(*UpdateUserRequest)(nil),                   // 41: api.user.service.v1.UpdateUserRequest
-	(*UpdateUserResponse)(nil),                  // 42: api.user.service.v1.UpdateUserResponse
-	(*ListUsersRequest)(nil),                    // 43: api.user.service.v1.ListUsersRequest
-	(*ListUsersResponse)(nil),                   // 44: api.user.service.v1.ListUsersResponse
-	(*AddCommentRequest)(nil),                   // 45: api.user.service.v1.AddCommentRequest
-	(*AddCommentResponse)(nil),                  // 46: api.user.service.v1.AddCommentResponse
-	(*GetCommentsByUserIdRequest)(nil),          // 47: api.user.service.v1.GetCommentsByUserIdRequest
-	(*GetCommentsByUserIdResponse)(nil),         // 48: api.user.service.v1.GetCommentsByUserIdResponse
-	(*ListUsersResponse_User)(nil),              // 49: api.user.service.v1.ListUsersResponse.User
-	(*GetCommentsByUserIdResponse_Comment)(nil), // 50: api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	(*timestamppb.Timestamp)(nil),               // 51: google.protobuf.Timestamp
+	(*SendEmailVerificationCodeRequest)(nil),    // 41: api.user.service.v1.SendEmailVerificationCodeRequest
+	(*SendEmailVerificationCodeResponse)(nil),   // 42: api.user.service.v1.SendEmailVerificationCodeResponse
+	(*UpdateUserRequest)(nil),                   // 43: api.user.service.v1.UpdateUserRequest
+	(*UpdateUserResponse)(nil),                  // 44: api.user.service.v1.UpdateUserResponse
+	(*ListUsersRequest)(nil),                    // 45: api.user.service.v1.ListUsersRequest
+	(*ListUsersResponse)(nil),                   // 46: api.user.service.v1.ListUsersResponse
+	(*CreateGroupUserRequest)(nil),              // 47: api.user.service.v1.CreateGroupUserRequest
+	(*CreateGroupUserResponse)(nil),             // 48: api.user.service.v1.CreateGroupUserResponse
+	(*VerifyEmailRequest)(nil),                  // 49: api.user.service.v1.VerifyEmailRequest
+	(*VerifyEmailResponse)(nil),                 // 50: api.user.service.v1.VerifyEmailResponse
+	(*AddCommentRequest)(nil),                   // 51: api.user.service.v1.AddCommentRequest
+	(*AddCommentResponse)(nil),                  // 52: api.user.service.v1.AddCommentResponse
+	(*GetCommentsByUserIdRequest)(nil),          // 53: api.user.service.v1.GetCommentsByUserIdRequest
+	(*GetCommentsByUserIdResponse)(nil),         // 54: api.user.service.v1.GetCommentsByUserIdResponse
+	(*ListUsersResponse_User)(nil),              // 55: api.user.service.v1.ListUsersResponse.User
+	(*GetCommentsByUserIdResponse_Comment)(nil), // 56: api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	(*timestamppb.Timestamp)(nil),               // 57: google.protobuf.Timestamp
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
 	1,  // 0: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
@@ -3333,12 +3627,12 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	3,  // 3: api.user.service.v1.AuthResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	3,  // 4: api.user.service.v1.GetUserResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	3,  // 5: api.user.service.v1.GetUsersByIdsResponse.users:type_name -> api.user.service.v1.UserInfo
-	51, // 6: api.user.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	51, // 7: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	49, // 8: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
-	50, // 9: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	51, // 10: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	51, // 11: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	57, // 6: api.user.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	57, // 7: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	55, // 8: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
+	56, // 9: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	57, // 10: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	57, // 11: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
 	4,  // 12: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
 	5,  // 13: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
 	6,  // 14: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
@@ -3359,36 +3653,42 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	35, // 29: api.user.service.v1.User.GetUserTags:input_type -> api.user.service.v1.GetUserTagsRequest
 	37, // 30: api.user.service.v1.User.CheckPermission:input_type -> api.user.service.v1.CheckPermissionRequest
 	39, // 31: api.user.service.v1.User.AddOperator:input_type -> api.user.service.v1.AddOperatorRequest
-	41, // 32: api.user.service.v1.User.UpdateUser:input_type -> api.user.service.v1.UpdateUserRequest
-	43, // 33: api.user.service.v1.User.ListUsers:input_type -> api.user.service.v1.ListUsersRequest
-	45, // 34: api.user.service.v1.User.AddComment:input_type -> api.user.service.v1.AddCommentRequest
-	47, // 35: api.user.service.v1.User.GetCommentsByUserId:input_type -> api.user.service.v1.GetCommentsByUserIdRequest
-	9,  // 36: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
-	9,  // 37: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
-	9,  // 38: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
-	9,  // 39: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
-	10, // 40: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
-	12, // 41: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	14, // 42: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
-	16, // 43: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
-	18, // 44: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
-	20, // 45: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
-	22, // 46: api.user.service.v1.User.GetOperatorTagConfig:output_type -> api.user.service.v1.GetOperatorTagConfigResponse
-	24, // 47: api.user.service.v1.User.SetOperatorTagConfig:output_type -> api.user.service.v1.SetOperatorTagConfigResponse
-	26, // 48: api.user.service.v1.User.AddOperatorTag:output_type -> api.user.service.v1.AddOperatorTagResponse
-	28, // 49: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
-	30, // 50: api.user.service.v1.User.DeleteOperatorTag:output_type -> api.user.service.v1.DeleteOperatorTagResponse
-	32, // 51: api.user.service.v1.User.AddUserTag:output_type -> api.user.service.v1.AddUserTagResponse
-	34, // 52: api.user.service.v1.User.DeleteUserTag:output_type -> api.user.service.v1.DeleteUserTagResponse
-	36, // 53: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
-	38, // 54: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
-	40, // 55: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
-	42, // 56: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
-	44, // 57: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
-	46, // 58: api.user.service.v1.User.AddComment:output_type -> api.user.service.v1.AddCommentResponse
-	48, // 59: api.user.service.v1.User.GetCommentsByUserId:output_type -> api.user.service.v1.GetCommentsByUserIdResponse
-	36, // [36:60] is the sub-list for method output_type
-	12, // [12:36] is the sub-list for method input_type
+	41, // 32: api.user.service.v1.User.SendEmailVerificationCode:input_type -> api.user.service.v1.SendEmailVerificationCodeRequest
+	43, // 33: api.user.service.v1.User.UpdateUser:input_type -> api.user.service.v1.UpdateUserRequest
+	45, // 34: api.user.service.v1.User.ListUsers:input_type -> api.user.service.v1.ListUsersRequest
+	47, // 35: api.user.service.v1.User.CreateGroupUser:input_type -> api.user.service.v1.CreateGroupUserRequest
+	49, // 36: api.user.service.v1.User.VerifyEmail:input_type -> api.user.service.v1.VerifyEmailRequest
+	51, // 37: api.user.service.v1.User.AddComment:input_type -> api.user.service.v1.AddCommentRequest
+	53, // 38: api.user.service.v1.User.GetCommentsByUserId:input_type -> api.user.service.v1.GetCommentsByUserIdRequest
+	9,  // 39: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
+	9,  // 40: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
+	9,  // 41: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
+	9,  // 42: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
+	10, // 43: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
+	12, // 44: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	14, // 45: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
+	16, // 46: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
+	18, // 47: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	20, // 48: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
+	22, // 49: api.user.service.v1.User.GetOperatorTagConfig:output_type -> api.user.service.v1.GetOperatorTagConfigResponse
+	24, // 50: api.user.service.v1.User.SetOperatorTagConfig:output_type -> api.user.service.v1.SetOperatorTagConfigResponse
+	26, // 51: api.user.service.v1.User.AddOperatorTag:output_type -> api.user.service.v1.AddOperatorTagResponse
+	28, // 52: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
+	30, // 53: api.user.service.v1.User.DeleteOperatorTag:output_type -> api.user.service.v1.DeleteOperatorTagResponse
+	32, // 54: api.user.service.v1.User.AddUserTag:output_type -> api.user.service.v1.AddUserTagResponse
+	34, // 55: api.user.service.v1.User.DeleteUserTag:output_type -> api.user.service.v1.DeleteUserTagResponse
+	36, // 56: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
+	38, // 57: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
+	40, // 58: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
+	42, // 59: api.user.service.v1.User.SendEmailVerificationCode:output_type -> api.user.service.v1.SendEmailVerificationCodeResponse
+	44, // 60: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
+	46, // 61: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
+	48, // 62: api.user.service.v1.User.CreateGroupUser:output_type -> api.user.service.v1.CreateGroupUserResponse
+	50, // 63: api.user.service.v1.User.VerifyEmail:output_type -> api.user.service.v1.VerifyEmailResponse
+	52, // 64: api.user.service.v1.User.AddComment:output_type -> api.user.service.v1.AddCommentResponse
+	54, // 65: api.user.service.v1.User.GetCommentsByUserId:output_type -> api.user.service.v1.GetCommentsByUserIdResponse
+	39, // [39:66] is the sub-list for method output_type
+	12, // [12:39] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
 	12, // [12:12] is the sub-list for extension extendee
 	0,  // [0:12] is the sub-list for field type_name
@@ -3399,15 +3699,15 @@ func file_user_service_v1_user_proto_init() {
 	if File_user_service_v1_user_proto != nil {
 		return
 	}
-	file_user_service_v1_user_proto_msgTypes[38].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[40].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[42].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   48,
+			NumMessages:   54,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

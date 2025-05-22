@@ -22,9 +22,12 @@ const _ = http.SupportPackageIsVersion1
 const OperationBackofficeAccountAddAccount = "/api.backoffice.service.v1.BackofficeAccount/AddAccount"
 const OperationBackofficeAccountBind2fa = "/api.backoffice.service.v1.BackofficeAccount/Bind2fa"
 const OperationBackofficeAccountGenerate2fa = "/api.backoffice.service.v1.BackofficeAccount/Generate2fa"
+const OperationBackofficeAccountLogin = "/api.backoffice.service.v1.BackofficeAccount/Login"
+const OperationBackofficeAccountRegister = "/api.backoffice.service.v1.BackofficeAccount/Register"
 const OperationBackofficeAccountResetPassword = "/api.backoffice.service.v1.BackofficeAccount/ResetPassword"
 const OperationBackofficeAccountSendEmailVerification = "/api.backoffice.service.v1.BackofficeAccount/SendEmailVerification"
 const OperationBackofficeAccountSendMobileVerification = "/api.backoffice.service.v1.BackofficeAccount/SendMobileVerification"
+const OperationBackofficeAccountSendRegisterVerificationCode = "/api.backoffice.service.v1.BackofficeAccount/SendRegisterVerificationCode"
 const OperationBackofficeAccountUnbind2fa = "/api.backoffice.service.v1.BackofficeAccount/Unbind2fa"
 const OperationBackofficeAccountUpdateAccount = "/api.backoffice.service.v1.BackofficeAccount/UpdateAccount"
 const OperationBackofficeAccountVerifyEmail = "/api.backoffice.service.v1.BackofficeAccount/VerifyEmail"
@@ -34,9 +37,12 @@ type BackofficeAccountHTTPServer interface {
 	AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error)
 	Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error)
 	Generate2Fa(context.Context, *Generate2FaRequest) (*Generate2FaResponse, error)
+	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error)
 	SendEmailVerification(context.Context, *SendEmailVerificationRequest) (*SendEmailVerificationResponse, error)
 	SendMobileVerification(context.Context, *SendMobileVerificationRequest) (*SendMobileVerificationResponse, error)
+	SendRegisterVerificationCode(context.Context, *SendRegisterVerificationCodeRequest) (*SendRegisterVerificationCodeResponse, error)
 	Unbind2Fa(context.Context, *Unbind2FaRequest) (*Unbind2FaResponse, error)
 	UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
@@ -55,6 +61,9 @@ func RegisterBackofficeAccountHTTPServer(s *http.Server, srv BackofficeAccountHT
 	r.POST("/v1/backoffice/accounts/2fa/bind", _BackofficeAccount_Bind2Fa0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/2fa/unbind", _BackofficeAccount_Unbind2Fa0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/update", _BackofficeAccount_UpdateAccount0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/login", _BackofficeAccount_Login0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/register", _BackofficeAccount_Register0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/register/verification/send", _BackofficeAccount_SendRegisterVerificationCode0_HTTP_Handler(srv))
 }
 
 func _BackofficeAccount_AddAccount0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
@@ -277,13 +286,82 @@ func _BackofficeAccount_UpdateAccount0_HTTP_Handler(srv BackofficeAccountHTTPSer
 	}
 }
 
+func _BackofficeAccount_Login0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in LoginRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountLogin)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Login(ctx, req.(*LoginRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*LoginResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAccount_Register0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RegisterRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountRegister)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Register(ctx, req.(*RegisterRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*RegisterResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAccount_SendRegisterVerificationCode0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SendRegisterVerificationCodeRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountSendRegisterVerificationCode)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SendRegisterVerificationCode(ctx, req.(*SendRegisterVerificationCodeRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SendRegisterVerificationCodeResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeAccountHTTPClient interface {
 	AddAccount(ctx context.Context, req *AddAccountRequest, opts ...http.CallOption) (rsp *AddAccountResponse, err error)
 	Bind2Fa(ctx context.Context, req *Bind2FaRequest, opts ...http.CallOption) (rsp *Bind2FaResponse, err error)
 	Generate2Fa(ctx context.Context, req *Generate2FaRequest, opts ...http.CallOption) (rsp *Generate2FaResponse, err error)
+	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginResponse, err error)
+	Register(ctx context.Context, req *RegisterRequest, opts ...http.CallOption) (rsp *RegisterResponse, err error)
 	ResetPassword(ctx context.Context, req *ResetPasswordRequest, opts ...http.CallOption) (rsp *ResetPasswordResponse, err error)
 	SendEmailVerification(ctx context.Context, req *SendEmailVerificationRequest, opts ...http.CallOption) (rsp *SendEmailVerificationResponse, err error)
 	SendMobileVerification(ctx context.Context, req *SendMobileVerificationRequest, opts ...http.CallOption) (rsp *SendMobileVerificationResponse, err error)
+	SendRegisterVerificationCode(ctx context.Context, req *SendRegisterVerificationCodeRequest, opts ...http.CallOption) (rsp *SendRegisterVerificationCodeResponse, err error)
 	Unbind2Fa(ctx context.Context, req *Unbind2FaRequest, opts ...http.CallOption) (rsp *Unbind2FaResponse, err error)
 	UpdateAccount(ctx context.Context, req *UpdateAccountRequest, opts ...http.CallOption) (rsp *UpdateAccountResponse, err error)
 	VerifyEmail(ctx context.Context, req *VerifyEmailRequest, opts ...http.CallOption) (rsp *VerifyEmailResponse, err error)
@@ -337,6 +415,32 @@ func (c *BackofficeAccountHTTPClientImpl) Generate2Fa(ctx context.Context, in *G
 	return &out, nil
 }
 
+func (c *BackofficeAccountHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts ...http.CallOption) (*LoginResponse, error) {
+	var out LoginResponse
+	pattern := "/v1/backoffice/accounts/login"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountLogin))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAccountHTTPClientImpl) Register(ctx context.Context, in *RegisterRequest, opts ...http.CallOption) (*RegisterResponse, error) {
+	var out RegisterResponse
+	pattern := "/v1/backoffice/accounts/register"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountRegister))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeAccountHTTPClientImpl) ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...http.CallOption) (*ResetPasswordResponse, error) {
 	var out ResetPasswordResponse
 	pattern := "/v1/backoffice/accounts/password/reset"
@@ -368,6 +472,19 @@ func (c *BackofficeAccountHTTPClientImpl) SendMobileVerification(ctx context.Con
 	pattern := "/v1/backoffice/accounts/mobile/verification/send"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAccountSendMobileVerification))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAccountHTTPClientImpl) SendRegisterVerificationCode(ctx context.Context, in *SendRegisterVerificationCodeRequest, opts ...http.CallOption) (*SendRegisterVerificationCodeResponse, error) {
+	var out SendRegisterVerificationCodeResponse
+	pattern := "/v1/backoffice/accounts/register/verification/send"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountSendRegisterVerificationCode))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

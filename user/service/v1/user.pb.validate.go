@@ -4101,6 +4101,218 @@ var _ interface {
 	ErrorName() string
 } = AddOperatorResponseValidationError{}
 
+// Validate checks the field values on SendEmailVerificationCodeRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *SendEmailVerificationCodeRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendEmailVerificationCodeRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SendEmailVerificationCodeRequestMultiError, or nil if none found.
+func (m *SendEmailVerificationCodeRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendEmailVerificationCodeRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Email
+
+	if len(errors) > 0 {
+		return SendEmailVerificationCodeRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendEmailVerificationCodeRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// SendEmailVerificationCodeRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SendEmailVerificationCodeRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendEmailVerificationCodeRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendEmailVerificationCodeRequestMultiError) AllErrors() []error { return m }
+
+// SendEmailVerificationCodeRequestValidationError is the validation error
+// returned by SendEmailVerificationCodeRequest.Validate if the designated
+// constraints aren't met.
+type SendEmailVerificationCodeRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendEmailVerificationCodeRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendEmailVerificationCodeRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendEmailVerificationCodeRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendEmailVerificationCodeRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendEmailVerificationCodeRequestValidationError) ErrorName() string {
+	return "SendEmailVerificationCodeRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendEmailVerificationCodeRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendEmailVerificationCodeRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendEmailVerificationCodeRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendEmailVerificationCodeRequestValidationError{}
+
+// Validate checks the field values on SendEmailVerificationCodeResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *SendEmailVerificationCodeResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendEmailVerificationCodeResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// SendEmailVerificationCodeResponseMultiError, or nil if none found.
+func (m *SendEmailVerificationCodeResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendEmailVerificationCodeResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SendEmailVerificationCodeResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendEmailVerificationCodeResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// SendEmailVerificationCodeResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SendEmailVerificationCodeResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendEmailVerificationCodeResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendEmailVerificationCodeResponseMultiError) AllErrors() []error { return m }
+
+// SendEmailVerificationCodeResponseValidationError is the validation error
+// returned by SendEmailVerificationCodeResponse.Validate if the designated
+// constraints aren't met.
+type SendEmailVerificationCodeResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendEmailVerificationCodeResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendEmailVerificationCodeResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendEmailVerificationCodeResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendEmailVerificationCodeResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendEmailVerificationCodeResponseValidationError) ErrorName() string {
+	return "SendEmailVerificationCodeResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendEmailVerificationCodeResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendEmailVerificationCodeResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendEmailVerificationCodeResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendEmailVerificationCodeResponseValidationError{}
+
 // Validate checks the field values on UpdateUserRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -4690,6 +4902,426 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListUsersResponseValidationError{}
+
+// Validate checks the field values on CreateGroupUserRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateGroupUserRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateGroupUserRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateGroupUserRequestMultiError, or nil if none found.
+func (m *CreateGroupUserRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateGroupUserRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Username
+
+	// no validation rules for Password
+
+	// no validation rules for Email
+
+	// no validation rules for Mobile
+
+	if len(errors) > 0 {
+		return CreateGroupUserRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateGroupUserRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateGroupUserRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateGroupUserRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateGroupUserRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateGroupUserRequestMultiError) AllErrors() []error { return m }
+
+// CreateGroupUserRequestValidationError is the validation error returned by
+// CreateGroupUserRequest.Validate if the designated constraints aren't met.
+type CreateGroupUserRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateGroupUserRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateGroupUserRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateGroupUserRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateGroupUserRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateGroupUserRequestValidationError) ErrorName() string {
+	return "CreateGroupUserRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateGroupUserRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateGroupUserRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateGroupUserRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateGroupUserRequestValidationError{}
+
+// Validate checks the field values on CreateGroupUserResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateGroupUserResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateGroupUserResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateGroupUserResponseMultiError, or nil if none found.
+func (m *CreateGroupUserResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateGroupUserResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return CreateGroupUserResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateGroupUserResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateGroupUserResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreateGroupUserResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateGroupUserResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateGroupUserResponseMultiError) AllErrors() []error { return m }
+
+// CreateGroupUserResponseValidationError is the validation error returned by
+// CreateGroupUserResponse.Validate if the designated constraints aren't met.
+type CreateGroupUserResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateGroupUserResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateGroupUserResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateGroupUserResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateGroupUserResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateGroupUserResponseValidationError) ErrorName() string {
+	return "CreateGroupUserResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateGroupUserResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateGroupUserResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateGroupUserResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateGroupUserResponseValidationError{}
+
+// Validate checks the field values on VerifyEmailRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *VerifyEmailRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on VerifyEmailRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// VerifyEmailRequestMultiError, or nil if none found.
+func (m *VerifyEmailRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *VerifyEmailRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Email
+
+	// no validation rules for VerificationCode
+
+	if len(errors) > 0 {
+		return VerifyEmailRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// VerifyEmailRequestMultiError is an error wrapping multiple validation errors
+// returned by VerifyEmailRequest.ValidateAll() if the designated constraints
+// aren't met.
+type VerifyEmailRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m VerifyEmailRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m VerifyEmailRequestMultiError) AllErrors() []error { return m }
+
+// VerifyEmailRequestValidationError is the validation error returned by
+// VerifyEmailRequest.Validate if the designated constraints aren't met.
+type VerifyEmailRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VerifyEmailRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VerifyEmailRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VerifyEmailRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VerifyEmailRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VerifyEmailRequestValidationError) ErrorName() string {
+	return "VerifyEmailRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e VerifyEmailRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerifyEmailRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VerifyEmailRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VerifyEmailRequestValidationError{}
+
+// Validate checks the field values on VerifyEmailResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *VerifyEmailResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on VerifyEmailResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// VerifyEmailResponseMultiError, or nil if none found.
+func (m *VerifyEmailResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *VerifyEmailResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return VerifyEmailResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// VerifyEmailResponseMultiError is an error wrapping multiple validation
+// errors returned by VerifyEmailResponse.ValidateAll() if the designated
+// constraints aren't met.
+type VerifyEmailResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m VerifyEmailResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m VerifyEmailResponseMultiError) AllErrors() []error { return m }
+
+// VerifyEmailResponseValidationError is the validation error returned by
+// VerifyEmailResponse.Validate if the designated constraints aren't met.
+type VerifyEmailResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VerifyEmailResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VerifyEmailResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VerifyEmailResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VerifyEmailResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VerifyEmailResponseValidationError) ErrorName() string {
+	return "VerifyEmailResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e VerifyEmailResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerifyEmailResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VerifyEmailResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VerifyEmailResponseValidationError{}
 
 // Validate checks the field values on AddCommentRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the

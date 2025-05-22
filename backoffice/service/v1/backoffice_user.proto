@@ -64,7 +64,27 @@ service BackofficeUser {
             body: "*"
         };
     }
-	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+		rpc ListUserComments(ListUserCommentsRequest) returns (ListUserCommentsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/comments/list"
+            body: "*"
+        };
+    }
+		rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/create"
+            body: "*"
+        };
+    }
+
+		rpc SendEmailVerificationCode(SendEmailVerificationCodeRequest) returns (SendEmailVerificationCodeResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/user/send-email-verification-code"
+						body: "*"
+				};
+		}
+
+		rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/update"
             body: "*"
@@ -274,6 +294,22 @@ message ListUserCommentsResponse {
 	}
 	repeated Comment comments = 1;
 }
+
+message CreateUserRequest {
+	string username = 1;
+	string email = 2;
+	string password = 3;
+	string mobile = 4;
+	string verification_code = 5;
+}
+
+message CreateUserResponse {}
+
+message SendEmailVerificationCodeRequest {
+	string email = 1;
+}
+
+message SendEmailVerificationCodeResponse {}
 
 message UpdateUserRequest {
 	int64 user_id = 1;

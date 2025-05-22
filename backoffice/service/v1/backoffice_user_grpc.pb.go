@@ -19,16 +19,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeUser_ListUsers_FullMethodName             = "/api.backoffice.service.v1.BackofficeUser/ListUsers"
-	BackofficeUser_GetUserOverview_FullMethodName       = "/api.backoffice.service.v1.BackofficeUser/GetUserOverview"
-	BackofficeUser_GetUserProfile_FullMethodName        = "/api.backoffice.service.v1.BackofficeUser/GetUserProfile"
-	BackofficeUser_AddOperatorUserTag_FullMethodName    = "/api.backoffice.service.v1.BackofficeUser/AddOperatorUserTag"
-	BackofficeUser_DeleteOperatorUserTag_FullMethodName = "/api.backoffice.service.v1.BackofficeUser/DeleteOperatorUserTag"
-	BackofficeUser_GetOperatorUserTags_FullMethodName   = "/api.backoffice.service.v1.BackofficeUser/GetOperatorUserTags"
-	BackofficeUser_AddUserTag_FullMethodName            = "/api.backoffice.service.v1.BackofficeUser/AddUserTag"
-	BackofficeUser_DeleteUserTag_FullMethodName         = "/api.backoffice.service.v1.BackofficeUser/DeleteUserTag"
-	BackofficeUser_AddUserComment_FullMethodName        = "/api.backoffice.service.v1.BackofficeUser/AddUserComment"
-	BackofficeUser_UpdateUser_FullMethodName            = "/api.backoffice.service.v1.BackofficeUser/UpdateUser"
+	BackofficeUser_ListUsers_FullMethodName                 = "/api.backoffice.service.v1.BackofficeUser/ListUsers"
+	BackofficeUser_GetUserOverview_FullMethodName           = "/api.backoffice.service.v1.BackofficeUser/GetUserOverview"
+	BackofficeUser_GetUserProfile_FullMethodName            = "/api.backoffice.service.v1.BackofficeUser/GetUserProfile"
+	BackofficeUser_AddOperatorUserTag_FullMethodName        = "/api.backoffice.service.v1.BackofficeUser/AddOperatorUserTag"
+	BackofficeUser_DeleteOperatorUserTag_FullMethodName     = "/api.backoffice.service.v1.BackofficeUser/DeleteOperatorUserTag"
+	BackofficeUser_GetOperatorUserTags_FullMethodName       = "/api.backoffice.service.v1.BackofficeUser/GetOperatorUserTags"
+	BackofficeUser_AddUserTag_FullMethodName                = "/api.backoffice.service.v1.BackofficeUser/AddUserTag"
+	BackofficeUser_DeleteUserTag_FullMethodName             = "/api.backoffice.service.v1.BackofficeUser/DeleteUserTag"
+	BackofficeUser_AddUserComment_FullMethodName            = "/api.backoffice.service.v1.BackofficeUser/AddUserComment"
+	BackofficeUser_ListUserComments_FullMethodName          = "/api.backoffice.service.v1.BackofficeUser/ListUserComments"
+	BackofficeUser_CreateUser_FullMethodName                = "/api.backoffice.service.v1.BackofficeUser/CreateUser"
+	BackofficeUser_SendEmailVerificationCode_FullMethodName = "/api.backoffice.service.v1.BackofficeUser/SendEmailVerificationCode"
+	BackofficeUser_UpdateUser_FullMethodName                = "/api.backoffice.service.v1.BackofficeUser/UpdateUser"
 )
 
 // BackofficeUserClient is the client API for BackofficeUser service.
@@ -44,6 +47,9 @@ type BackofficeUserClient interface {
 	AddUserTag(ctx context.Context, in *AddUserTagRequest, opts ...grpc.CallOption) (*AddUserTagResponse, error)
 	DeleteUserTag(ctx context.Context, in *DeleteUserTagRequest, opts ...grpc.CallOption) (*DeleteUserTagResponse, error)
 	AddUserComment(ctx context.Context, in *AddUserCommentRequest, opts ...grpc.CallOption) (*AddUserCommentResponse, error)
+	ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...grpc.CallOption) (*ListUserCommentsResponse, error)
+	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
+	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 }
 
@@ -145,6 +151,36 @@ func (c *backofficeUserClient) AddUserComment(ctx context.Context, in *AddUserCo
 	return out, nil
 }
 
+func (c *backofficeUserClient) ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...grpc.CallOption) (*ListUserCommentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUserCommentsResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_ListUserComments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeUserClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateUserResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_CreateUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeUserClient) SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendEmailVerificationCodeResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_SendEmailVerificationCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeUserClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserResponse)
@@ -168,6 +204,9 @@ type BackofficeUserServer interface {
 	AddUserTag(context.Context, *AddUserTagRequest) (*AddUserTagResponse, error)
 	DeleteUserTag(context.Context, *DeleteUserTagRequest) (*DeleteUserTagResponse, error)
 	AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error)
+	ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error)
+	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
+	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	mustEmbedUnimplementedBackofficeUserServer()
 }
@@ -205,6 +244,15 @@ func (UnimplementedBackofficeUserServer) DeleteUserTag(context.Context, *DeleteU
 }
 func (UnimplementedBackofficeUserServer) AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddUserComment not implemented")
+}
+func (UnimplementedBackofficeUserServer) ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUserComments not implemented")
+}
+func (UnimplementedBackofficeUserServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
+}
+func (UnimplementedBackofficeUserServer) SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendEmailVerificationCode not implemented")
 }
 func (UnimplementedBackofficeUserServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
@@ -392,6 +440,60 @@ func _BackofficeUser_AddUserComment_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeUser_ListUserComments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserCommentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).ListUserComments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_ListUserComments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).ListUserComments(ctx, req.(*ListUserCommentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeUser_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).CreateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_CreateUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).CreateUser(ctx, req.(*CreateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeUser_SendEmailVerificationCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendEmailVerificationCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).SendEmailVerificationCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_SendEmailVerificationCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).SendEmailVerificationCode(ctx, req.(*SendEmailVerificationCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeUser_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateUserRequest)
 	if err := dec(in); err != nil {
@@ -452,6 +554,18 @@ var BackofficeUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddUserComment",
 			Handler:    _BackofficeUser_AddUserComment_Handler,
+		},
+		{
+			MethodName: "ListUserComments",
+			Handler:    _BackofficeUser_ListUserComments_Handler,
+		},
+		{
+			MethodName: "CreateUser",
+			Handler:    _BackofficeUser_CreateUser_Handler,
+		},
+		{
+			MethodName: "SendEmailVerificationCode",
+			Handler:    _BackofficeUser_SendEmailVerificationCode_Handler,
 		},
 		{
 			MethodName: "UpdateUser",

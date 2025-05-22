@@ -114,6 +114,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.VerifyEmailResponse'
+    /v1/backoffice/accounts/login:
+        post:
+            tags:
+                - BackofficeAccount
+            operationId: BackofficeAccount_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.LoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.LoginResponse'
     /v1/backoffice/accounts/mobile/verification/send:
         post:
             tags:
@@ -168,6 +186,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ResetPasswordResponse'
+    /v1/backoffice/accounts/register:
+        post:
+            tags:
+                - BackofficeAccount
+            operationId: BackofficeAccount_Register
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.RegisterRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.RegisterResponse'
+    /v1/backoffice/accounts/register/verification/send:
+        post:
+            tags:
+                - BackofficeAccount
+            operationId: BackofficeAccount_SendRegisterVerificationCode
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SendRegisterVerificationCodeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SendRegisterVerificationCodeResponse'
     /v1/backoffice/accounts/update:
         post:
             tags:
@@ -863,6 +917,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.AddUserCommentResponse'
+    /v1/backoffice/user/comments/list:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_ListUserComments
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListUserCommentsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListUserCommentsResponse'
+    /v1/backoffice/user/create:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_CreateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CreateUserResponse'
     /v1/backoffice/user/list:
         post:
             tags:
@@ -917,6 +1007,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse'
+    /v1/backoffice/user/send-email-verification-code:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_SendEmailVerificationCode
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SendEmailVerificationCodeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SendEmailVerificationCodeResponse'
     /v1/backoffice/user/tags/add:
         post:
             tags:
@@ -1748,6 +1856,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/email/verification-code/send:
+        post:
+            tags:
+                - User
+            operationId: User_SendEmailVerificationCode
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.SendEmailVerificationCodeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.SendEmailVerificationCodeResponse'
     /v1/user/get:
         post:
             tags:
@@ -2124,6 +2250,22 @@ components:
                 cancellerUserId:
                     type: string
         api.backoffice.service.v1.CancelTicketResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.CreateUserRequest:
+            type: object
+            properties:
+                username:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+                mobile:
+                    type: string
+                verificationCode:
+                    type: string
+        api.backoffice.service.v1.CreateUserResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.DeleteOperatorUserTagRequest:
@@ -3995,6 +4137,28 @@ components:
                     type: string
                 total:
                     type: string
+        api.backoffice.service.v1.ListUserCommentsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+        api.backoffice.service.v1.ListUserCommentsResponse:
+            type: object
+            properties:
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListUserCommentsResponse_Comment'
+        api.backoffice.service.v1.ListUserCommentsResponse_Comment:
+            type: object
+            properties:
+                author:
+                    type: string
+                content:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
         api.backoffice.service.v1.ListUsersRequest:
             type: object
             properties:
@@ -4355,12 +4519,42 @@ components:
                     format: int32
                 withdrawAmount:
                     type: string
+        api.backoffice.service.v1.LoginRequest:
+            type: object
+            properties:
+                username:
+                    type: string
+                password:
+                    type: string
+        api.backoffice.service.v1.LoginResponse:
+            type: object
+            properties:
+                token:
+                    type: string
         api.backoffice.service.v1.PaymentData_Data:
             type: object
             properties:
                 deposit:
                     type: string
                 withdrawal:
+                    type: string
+        api.backoffice.service.v1.RegisterRequest:
+            type: object
+            properties:
+                username:
+                    type: string
+                email:
+                    type: string
+                verificationCode:
+                    type: string
+                password:
+                    type: string
+                mobile:
+                    type: string
+        api.backoffice.service.v1.RegisterResponse:
+            type: object
+            properties:
+                token:
                     type: string
         api.backoffice.service.v1.ResetPasswordRequest:
             type: object
@@ -4384,6 +4578,14 @@ components:
         api.backoffice.service.v1.ReviewTicketResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.SendEmailVerificationCodeRequest:
+            type: object
+            properties:
+                email:
+                    type: string
+        api.backoffice.service.v1.SendEmailVerificationCodeResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.SendEmailVerificationRequest:
             type: object
             properties: {}
@@ -4394,6 +4596,14 @@ components:
             type: object
             properties: {}
         api.backoffice.service.v1.SendMobileVerificationResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.SendRegisterVerificationCodeRequest:
+            type: object
+            properties:
+                email:
+                    type: string
+        api.backoffice.service.v1.SendRegisterVerificationCodeResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.Unbind2faRequest:
@@ -5386,6 +5596,14 @@ components:
                     type: string
                     description: The password for the new account.
             description: RegisterRequest contains the information needed to register a new user.
+        api.user.service.v1.SendEmailVerificationCodeRequest:
+            type: object
+            properties:
+                email:
+                    type: string
+        api.user.service.v1.SendEmailVerificationCodeResponse:
+            type: object
+            properties: {}
         api.user.service.v1.SetOperatorTagConfigRequest:
             type: object
             properties:
