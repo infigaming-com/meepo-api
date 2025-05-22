@@ -46,3 +46,15 @@ func IsGameActionNotFound(err error) bool {
 func ErrorGameActionNotFound(format string, args ...interface{}) *errors.Error {
 	return errors.New(401, ErrorReason_GAME_ACTION_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetRatesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_RATES_FAILED.String() && e.Code == 401
+}
+
+func ErrorGetRatesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_GET_RATES_FAILED.String(), fmt.Sprintf(format, args...))
+}
