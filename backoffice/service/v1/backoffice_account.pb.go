@@ -857,7 +857,7 @@ func (*UpdateAccountResponse) Descriptor() ([]byte, []int) {
 
 type LoginRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
 	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -893,9 +893,9 @@ func (*LoginRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *LoginRequest) GetUsername() string {
+func (x *LoginRequest) GetEmail() string {
 	if x != nil {
-		return x.Username
+		return x.Email
 	}
 	return ""
 }
@@ -1192,9 +1192,9 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\n" +
 	"\b_enabledB\a\n" +
 	"\x05_role\"\x17\n" +
-	"\x15UpdateAccountResponse\"F\n" +
-	"\fLoginRequest\x12\x1a\n" +
-	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
+	"\x15UpdateAccountResponse\"@\n" +
+	"\fLoginRequest\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\"%\n" +
 	"\rLoginResponse\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"\xa4\x01\n" +

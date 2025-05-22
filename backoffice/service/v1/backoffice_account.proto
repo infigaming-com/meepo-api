@@ -153,7 +153,7 @@ message UpdateAccountRequest {
 message UpdateAccountResponse {}
 
 message LoginRequest {
-	string username = 1;
+	string email = 1;
 	string password = 2;
 }
 

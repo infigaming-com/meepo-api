@@ -4522,7 +4522,7 @@ components:
         api.backoffice.service.v1.LoginRequest:
             type: object
             properties:
-                username:
+                email:
                     type: string
                 password:
                     type: string
