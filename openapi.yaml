@@ -3352,6 +3352,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_Comment'
+                totalLoginCount:
+                    type: integer
+                    format: int32
+                loginPage:
+                    type: integer
+                    format: int32
+                loginPageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetUserProfileResponse_Comment:
             type: object
             properties:
