@@ -590,6 +590,8 @@ func (x *GetUserOverviewResponse) GetFirstWithdrawOnToday() bool {
 type GetUserProfileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	LoginPage     int32                  `protobuf:"varint,2,opt,name=login_page,json=loginPage,proto3" json:"login_page,omitempty"`
+	LoginPageSize int32                  `protobuf:"varint,3,opt,name=login_page_size,json=loginPageSize,proto3" json:"login_page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -627,6 +629,20 @@ func (*GetUserProfileRequest) Descriptor() ([]byte, []int) {
 func (x *GetUserProfileRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetUserProfileRequest) GetLoginPage() int32 {
+	if x != nil {
+		return x.LoginPage
+	}
+	return 0
+}
+
+func (x *GetUserProfileRequest) GetLoginPageSize() int32 {
+	if x != nil {
+		return x.LoginPageSize
 	}
 	return 0
 }
@@ -2457,9 +2473,12 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\tgame_type\x18\x01 \x01(\tR\bgameType\x12\x10\n" +
 	"\x03ggr\x18\x02 \x01(\tR\x03ggr\x12\x1a\n" +
 	"\bturnover\x18\x03 \x01(\tR\bturnover\x12\x10\n" +
-	"\x03rtp\x18\x04 \x01(\tR\x03rtp\"0\n" +
+	"\x03rtp\x18\x04 \x01(\tR\x03rtp\"w\n" +
 	"\x15GetUserProfileRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xdb\v\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1d\n" +
+	"\n" +
+	"login_page\x18\x02 \x01(\x05R\tloginPage\x12&\n" +
+	"\x0flogin_page_size\x18\x03 \x01(\x05R\rloginPageSize\"\xdb\v\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +

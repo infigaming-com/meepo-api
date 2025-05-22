@@ -3314,6 +3314,12 @@ components:
             properties:
                 userId:
                     type: string
+                loginPage:
+                    type: integer
+                    format: int32
+                loginPageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetUserProfileResponse:
             type: object
             properties:
