@@ -2428,33 +2428,38 @@ components:
                 gameCategory:
                     type: string
                 jackpotContribution:
-                    type: number
-                    format: double
+                    type: string
                 jackpotContributionUsd:
-                    type: number
-                    format: double
+                    type: string
                 jackpotWin:
                     type: string
                 jackpotWinUsd:
                     type: string
                 betTime:
                     type: string
+                    format: date-time
                 settleTime:
                     type: string
+                    format: date-time
                 providerTimestamp:
                     type: string
+                    format: date-time
                 bonusAmount:
                     type: string
                 bonusAmountUsd:
                     type: string
                 operatorTimestamp:
                     type: string
+                    format: date-time
                 processedAt:
                     type: string
+                    format: date-time
                 createdAt:
                     type: string
+                    format: date-time
                 updatedAt:
                     type: string
+                    format: date-time
         api.backoffice.service.v1.GetBetByIdResponse_Bet:
             type: object
             properties:
@@ -2520,8 +2525,10 @@ components:
                     type: string
                 createdAt:
                     type: string
+                    format: date-time
                 updatedAt:
                     type: string
+                    format: date-time
                 actions:
                     type: array
                     items:
