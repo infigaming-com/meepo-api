@@ -83,8 +83,8 @@ type UserHTTPServer interface {
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/user/auth/register", _User_Register1_HTTP_Handler(srv))
-	r.POST("/v1/user/auth/login", _User_Login1_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/register", _User_Register0_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/login", _User_Login0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/oauth", _User_RegisterOrLoginWithOAuth0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/telegram", _User_RegisterOrLoginWithTelegram0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/refresh", _User_RefreshToken0_HTTP_Handler(srv))
@@ -95,14 +95,14 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/operators/tags/add", _User_AddOperatorTag0_HTTP_Handler(srv))
 	r.POST("/v1/user/operators/tags/get", _User_GetOperatorTags0_HTTP_Handler(srv))
 	r.POST("/v1/user/operators/tags/delete", _User_DeleteOperatorTag0_HTTP_Handler(srv))
-	r.POST("/v1/user/tags/add", _User_AddUserTag1_HTTP_Handler(srv))
-	r.POST("/v1/user/tags/delete", _User_DeleteUserTag1_HTTP_Handler(srv))
+	r.POST("/v1/user/tags/add", _User_AddUserTag0_HTTP_Handler(srv))
+	r.POST("/v1/user/tags/delete", _User_DeleteUserTag0_HTTP_Handler(srv))
 	r.POST("/v1/user/tags/get", _User_GetUserTags0_HTTP_Handler(srv))
-	r.POST("/v1/user/operators/add", _User_AddOperator1_HTTP_Handler(srv))
-	r.POST("/v1/user/email/verification-code/send", _User_SendEmailVerificationCode1_HTTP_Handler(srv))
+	r.POST("/v1/user/operators/add", _User_AddOperator0_HTTP_Handler(srv))
+	r.POST("/v1/user/email/verification-code/send", _User_SendEmailVerificationCode0_HTTP_Handler(srv))
 }
 
-func _User_Register1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in RegisterRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -124,7 +124,7 @@ func _User_Register1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) err
 	}
 }
 
-func _User_Login1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Login0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LoginRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -366,7 +366,7 @@ func _User_DeleteOperatorTag0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Con
 	}
 }
 
-func _User_AddUserTag1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_AddUserTag0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddUserTagRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -388,7 +388,7 @@ func _User_AddUserTag1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) e
 	}
 }
 
-func _User_DeleteUserTag1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_DeleteUserTag0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteUserTagRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -432,7 +432,7 @@ func _User_GetUserTags0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) 
 	}
 }
 
-func _User_AddOperator1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_AddOperator0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddOperatorRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -454,7 +454,7 @@ func _User_AddOperator1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) 
 	}
 }
 
-func _User_SendEmailVerificationCode1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_SendEmailVerificationCode0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SendEmailVerificationCodeRequest
 		if err := ctx.Bind(&in); err != nil {

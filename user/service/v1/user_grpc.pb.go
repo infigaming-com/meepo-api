@@ -46,6 +46,7 @@ const (
 	User_VerifyEmail_FullMethodName                 = "/api.user.service.v1.User/VerifyEmail"
 	User_AddComment_FullMethodName                  = "/api.user.service.v1.User/AddComment"
 	User_GetCommentsByUserId_FullMethodName         = "/api.user.service.v1.User/GetCommentsByUserId"
+	User_GetUserProfile_FullMethodName              = "/api.user.service.v1.User/GetUserProfile"
 )
 
 // UserClient is the client API for User service.
@@ -106,6 +107,7 @@ type UserClient interface {
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
 	GetCommentsByUserId(ctx context.Context, in *GetCommentsByUserIdRequest, opts ...grpc.CallOption) (*GetCommentsByUserIdResponse, error)
+	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
 }
 
 type userClient struct {
@@ -386,6 +388,16 @@ func (c *userClient) GetCommentsByUserId(ctx context.Context, in *GetCommentsByU
 	return out, nil
 }
 
+func (c *userClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserProfileResponse)
+	err := c.cc.Invoke(ctx, User_GetUserProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -444,6 +456,7 @@ type UserServer interface {
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
 	GetCommentsByUserId(context.Context, *GetCommentsByUserIdRequest) (*GetCommentsByUserIdResponse, error)
+	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -534,6 +547,9 @@ func (UnimplementedUserServer) AddComment(context.Context, *AddCommentRequest) (
 }
 func (UnimplementedUserServer) GetCommentsByUserId(context.Context, *GetCommentsByUserIdRequest) (*GetCommentsByUserIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCommentsByUserId not implemented")
+}
+func (UnimplementedUserServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserProfile not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1042,6 +1058,24 @@ func _User_GetCommentsByUserId_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUserProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserProfile(ctx, req.(*GetUserProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1156,6 +1190,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCommentsByUserId",
 			Handler:    _User_GetCommentsByUserId_Handler,
+		},
+		{
+			MethodName: "GetUserProfile",
+			Handler:    _User_GetUserProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

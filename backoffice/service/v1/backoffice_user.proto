@@ -200,13 +200,18 @@ message GetUserProfileRequest {
 }
 
 message GetUserProfileResponse {
+	message IpInfo {
+		string ip = 1;
+		int32 count = 2;
+		string country = 3;
+	}
 	message RegistrationRecord {
 		google.protobuf.Timestamp registered_at = 1;
-		string registration_ip = 2;
+		IpInfo ip_info = 2;
 		string device = 3;
 		string method = 4;
 		string browser = 5;
-		string app = 6;
+		string app = 6; // Not available for now
 		string mobile = 7;
 		string email = 8;
 		string username = 9;
@@ -214,23 +219,26 @@ message GetUserProfileResponse {
 	}
 	message LoginRecord {
 		google.protobuf.Timestamp login_at = 1;
-		string login_ip = 2;
+		IpInfo ip_info = 2;
 		string device = 3;
 		string method = 4;
 		string browser = 5;
-		string app = 6;
+		string app = 6; // Not available for now
 		string email = 7;
 		string mobile = 8;
+		string username = 9;
 	}
 	message Comment {
-		string author_username = 1;
-		string content = 2;
-		google.protobuf.Timestamp created_at = 3;
+		int64 comment_id = 1;
+		string username = 2;
+		string author_username = 3;
+		string content = 4;
+		google.protobuf.Timestamp created_at = 5;
 	}
 	string nickname = 1;
 	int64 user_id = 2;
-	int32 vip_level = 3;
-	bool online = 4;
+	int32 vip_level = 3; // Not available for now, only return 1
+	bool online = 4; // Not available for now, only return true
 	bool ban_withdraw = 11;
 	bool ban_game = 12;
 	bool ban_login = 13;

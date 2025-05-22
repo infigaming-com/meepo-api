@@ -3481,6 +3481,115 @@ var _ interface {
 	ErrorName() string
 } = GetUserOverviewResponse_GameDataValidationError{}
 
+// Validate checks the field values on GetUserProfileResponse_IpInfo with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserProfileResponse_IpInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserProfileResponse_IpInfo with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetUserProfileResponse_IpInfoMultiError, or nil if none found.
+func (m *GetUserProfileResponse_IpInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserProfileResponse_IpInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Ip
+
+	// no validation rules for Count
+
+	// no validation rules for Country
+
+	if len(errors) > 0 {
+		return GetUserProfileResponse_IpInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserProfileResponse_IpInfoMultiError is an error wrapping multiple
+// validation errors returned by GetUserProfileResponse_IpInfo.ValidateAll()
+// if the designated constraints aren't met.
+type GetUserProfileResponse_IpInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserProfileResponse_IpInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserProfileResponse_IpInfoMultiError) AllErrors() []error { return m }
+
+// GetUserProfileResponse_IpInfoValidationError is the validation error
+// returned by GetUserProfileResponse_IpInfo.Validate if the designated
+// constraints aren't met.
+type GetUserProfileResponse_IpInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserProfileResponse_IpInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserProfileResponse_IpInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserProfileResponse_IpInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserProfileResponse_IpInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserProfileResponse_IpInfoValidationError) ErrorName() string {
+	return "GetUserProfileResponse_IpInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserProfileResponse_IpInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserProfileResponse_IpInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserProfileResponse_IpInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserProfileResponse_IpInfoValidationError{}
+
 // Validate checks the field values on
 // GetUserProfileResponse_RegistrationRecord with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
@@ -3534,7 +3643,34 @@ func (m *GetUserProfileResponse_RegistrationRecord) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for RegistrationIp
+	if all {
+		switch v := interface{}(m.GetIpInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserProfileResponse_RegistrationRecordValidationError{
+					field:  "IpInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserProfileResponse_RegistrationRecordValidationError{
+					field:  "IpInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetIpInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserProfileResponse_RegistrationRecordValidationError{
+				field:  "IpInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for Device
 
@@ -3686,7 +3822,34 @@ func (m *GetUserProfileResponse_LoginRecord) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for LoginIp
+	if all {
+		switch v := interface{}(m.GetIpInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserProfileResponse_LoginRecordValidationError{
+					field:  "IpInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserProfileResponse_LoginRecordValidationError{
+					field:  "IpInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetIpInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserProfileResponse_LoginRecordValidationError{
+				field:  "IpInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for Device
 
@@ -3699,6 +3862,8 @@ func (m *GetUserProfileResponse_LoginRecord) validate(all bool) error {
 	// no validation rules for Email
 
 	// no validation rules for Mobile
+
+	// no validation rules for Username
 
 	if len(errors) > 0 {
 		return GetUserProfileResponse_LoginRecordMultiError(errors)
@@ -3803,6 +3968,10 @@ func (m *GetUserProfileResponse_Comment) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for CommentId
+
+	// no validation rules for Username
 
 	// no validation rules for AuthorUsername
 

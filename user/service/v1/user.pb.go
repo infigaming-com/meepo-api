@@ -2992,6 +2992,174 @@ func (x *GetCommentsByUserIdResponse) GetComments() []*GetCommentsByUserIdRespon
 	return nil
 }
 
+type GetUserProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserProfileRequest) Reset() {
+	*x = GetUserProfileRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserProfileRequest) ProtoMessage() {}
+
+func (x *GetUserProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserProfileRequest.ProtoReflect.Descriptor instead.
+func (*GetUserProfileRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *GetUserProfileRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type GetUserProfileResponse struct {
+	state              protoimpl.MessageState                     `protogen:"open.v1"`
+	Nickname           string                                     `protobuf:"bytes,1,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	UserId             int64                                      `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	VipLevel           int32                                      `protobuf:"varint,3,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"` // Not available for now, only return 1
+	Online             bool                                       `protobuf:"varint,4,opt,name=online,proto3" json:"online,omitempty"`                     // Not available for now, only return true
+	BanWithdraw        bool                                       `protobuf:"varint,11,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
+	BanGame            bool                                       `protobuf:"varint,12,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
+	BanLogin           bool                                       `protobuf:"varint,13,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
+	RegistrationRecord *GetUserProfileResponse_RegistrationRecord `protobuf:"bytes,5,opt,name=registration_record,json=registrationRecord,proto3" json:"registration_record,omitempty"`
+	LoginRecords       []*GetUserProfileResponse_LoginRecord      `protobuf:"bytes,6,rep,name=login_records,json=loginRecords,proto3" json:"login_records,omitempty"`
+	Tags               []string                                   `protobuf:"bytes,7,rep,name=tags,proto3" json:"tags,omitempty"`
+	Comments           []*GetUserProfileResponse_Comment          `protobuf:"bytes,8,rep,name=comments,proto3" json:"comments,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *GetUserProfileResponse) Reset() {
+	*x = GetUserProfileResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserProfileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserProfileResponse) ProtoMessage() {}
+
+func (x *GetUserProfileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserProfileResponse.ProtoReflect.Descriptor instead.
+func (*GetUserProfileResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *GetUserProfileResponse) GetNickname() string {
+	if x != nil {
+		return x.Nickname
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetUserProfileResponse) GetVipLevel() int32 {
+	if x != nil {
+		return x.VipLevel
+	}
+	return 0
+}
+
+func (x *GetUserProfileResponse) GetOnline() bool {
+	if x != nil {
+		return x.Online
+	}
+	return false
+}
+
+func (x *GetUserProfileResponse) GetBanWithdraw() bool {
+	if x != nil {
+		return x.BanWithdraw
+	}
+	return false
+}
+
+func (x *GetUserProfileResponse) GetBanGame() bool {
+	if x != nil {
+		return x.BanGame
+	}
+	return false
+}
+
+func (x *GetUserProfileResponse) GetBanLogin() bool {
+	if x != nil {
+		return x.BanLogin
+	}
+	return false
+}
+
+func (x *GetUserProfileResponse) GetRegistrationRecord() *GetUserProfileResponse_RegistrationRecord {
+	if x != nil {
+		return x.RegistrationRecord
+	}
+	return nil
+}
+
+func (x *GetUserProfileResponse) GetLoginRecords() []*GetUserProfileResponse_LoginRecord {
+	if x != nil {
+		return x.LoginRecords
+	}
+	return nil
+}
+
+func (x *GetUserProfileResponse) GetTags() []string {
+	if x != nil {
+		return x.Tags
+	}
+	return nil
+}
+
+func (x *GetUserProfileResponse) GetComments() []*GetUserProfileResponse_Comment {
+	if x != nil {
+		return x.Comments
+	}
+	return nil
+}
+
 type ListUsersResponse_User struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
 	Retailer     string                 `protobuf:"bytes,1,opt,name=retailer,proto3" json:"retailer,omitempty"`
@@ -3025,7 +3193,7 @@ type ListUsersResponse_User struct {
 
 func (x *ListUsersResponse_User) Reset() {
 	*x = ListUsersResponse_User{}
-	mi := &file_user_service_v1_user_proto_msgTypes[52]
+	mi := &file_user_service_v1_user_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3037,7 +3205,7 @@ func (x *ListUsersResponse_User) String() string {
 func (*ListUsersResponse_User) ProtoMessage() {}
 
 func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[52]
+	mi := &file_user_service_v1_user_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3199,7 +3367,7 @@ type GetCommentsByUserIdResponse_Comment struct {
 
 func (x *GetCommentsByUserIdResponse_Comment) Reset() {
 	*x = GetCommentsByUserIdResponse_Comment{}
-	mi := &file_user_service_v1_user_proto_msgTypes[53]
+	mi := &file_user_service_v1_user_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3211,7 +3379,7 @@ func (x *GetCommentsByUserIdResponse_Comment) String() string {
 func (*GetCommentsByUserIdResponse_Comment) ProtoMessage() {}
 
 func (x *GetCommentsByUserIdResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[53]
+	mi := &file_user_service_v1_user_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3260,6 +3428,366 @@ func (x *GetCommentsByUserIdResponse_Comment) GetCreatedAt() int64 {
 		return x.CreatedAt
 	}
 	return 0
+}
+
+type GetUserProfileResponse_IpInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ip            string                 `protobuf:"bytes,1,opt,name=ip,proto3" json:"ip,omitempty"`
+	Count         int32                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserProfileResponse_IpInfo) Reset() {
+	*x = GetUserProfileResponse_IpInfo{}
+	mi := &file_user_service_v1_user_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserProfileResponse_IpInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserProfileResponse_IpInfo) ProtoMessage() {}
+
+func (x *GetUserProfileResponse_IpInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserProfileResponse_IpInfo.ProtoReflect.Descriptor instead.
+func (*GetUserProfileResponse_IpInfo) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{53, 0}
+}
+
+func (x *GetUserProfileResponse_IpInfo) GetIp() string {
+	if x != nil {
+		return x.Ip
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_IpInfo) GetCount() int32 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *GetUserProfileResponse_IpInfo) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+type GetUserProfileResponse_RegistrationRecord struct {
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	RegisteredAt  *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	IpInfo        *GetUserProfileResponse_IpInfo `protobuf:"bytes,2,opt,name=ip_info,json=ipInfo,proto3" json:"ip_info,omitempty"`
+	Device        string                         `protobuf:"bytes,3,opt,name=device,proto3" json:"device,omitempty"`
+	Method        string                         `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
+	Browser       string                         `protobuf:"bytes,5,opt,name=browser,proto3" json:"browser,omitempty"`
+	App           string                         `protobuf:"bytes,6,opt,name=app,proto3" json:"app,omitempty"` // Not available for now
+	Mobile        string                         `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Email         string                         `protobuf:"bytes,8,opt,name=email,proto3" json:"email,omitempty"`
+	Username      string                         `protobuf:"bytes,9,opt,name=username,proto3" json:"username,omitempty"`
+	Source        string                         `protobuf:"bytes,10,opt,name=source,proto3" json:"source,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) Reset() {
+	*x = GetUserProfileResponse_RegistrationRecord{}
+	mi := &file_user_service_v1_user_proto_msgTypes[57]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserProfileResponse_RegistrationRecord) ProtoMessage() {}
+
+func (x *GetUserProfileResponse_RegistrationRecord) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[57]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserProfileResponse_RegistrationRecord.ProtoReflect.Descriptor instead.
+func (*GetUserProfileResponse_RegistrationRecord) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{53, 1}
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) GetRegisteredAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RegisteredAt
+	}
+	return nil
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) GetIpInfo() *GetUserProfileResponse_IpInfo {
+	if x != nil {
+		return x.IpInfo
+	}
+	return nil
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) GetDevice() string {
+	if x != nil {
+		return x.Device
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) GetMethod() string {
+	if x != nil {
+		return x.Method
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) GetBrowser() string {
+	if x != nil {
+		return x.Browser
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) GetApp() string {
+	if x != nil {
+		return x.App
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) GetMobile() string {
+	if x != nil {
+		return x.Mobile
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_RegistrationRecord) GetSource() string {
+	if x != nil {
+		return x.Source
+	}
+	return ""
+}
+
+type GetUserProfileResponse_LoginRecord struct {
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	LoginAt       *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=login_at,json=loginAt,proto3" json:"login_at,omitempty"`
+	IpInfo        *GetUserProfileResponse_IpInfo `protobuf:"bytes,2,opt,name=ip_info,json=ipInfo,proto3" json:"ip_info,omitempty"`
+	Device        string                         `protobuf:"bytes,3,opt,name=device,proto3" json:"device,omitempty"`
+	Method        string                         `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
+	Browser       string                         `protobuf:"bytes,5,opt,name=browser,proto3" json:"browser,omitempty"`
+	App           string                         `protobuf:"bytes,6,opt,name=app,proto3" json:"app,omitempty"` // Not available for now
+	Email         string                         `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile        string                         `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Username      string                         `protobuf:"bytes,9,opt,name=username,proto3" json:"username,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserProfileResponse_LoginRecord) Reset() {
+	*x = GetUserProfileResponse_LoginRecord{}
+	mi := &file_user_service_v1_user_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserProfileResponse_LoginRecord) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserProfileResponse_LoginRecord) ProtoMessage() {}
+
+func (x *GetUserProfileResponse_LoginRecord) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserProfileResponse_LoginRecord.ProtoReflect.Descriptor instead.
+func (*GetUserProfileResponse_LoginRecord) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{53, 2}
+}
+
+func (x *GetUserProfileResponse_LoginRecord) GetLoginAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LoginAt
+	}
+	return nil
+}
+
+func (x *GetUserProfileResponse_LoginRecord) GetIpInfo() *GetUserProfileResponse_IpInfo {
+	if x != nil {
+		return x.IpInfo
+	}
+	return nil
+}
+
+func (x *GetUserProfileResponse_LoginRecord) GetDevice() string {
+	if x != nil {
+		return x.Device
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_LoginRecord) GetMethod() string {
+	if x != nil {
+		return x.Method
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_LoginRecord) GetBrowser() string {
+	if x != nil {
+		return x.Browser
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_LoginRecord) GetApp() string {
+	if x != nil {
+		return x.App
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_LoginRecord) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_LoginRecord) GetMobile() string {
+	if x != nil {
+		return x.Mobile
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_LoginRecord) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+type GetUserProfileResponse_Comment struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	CommentId      int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	Username       string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
+	AuthorUsername string                 `protobuf:"bytes,3,opt,name=author_username,json=authorUsername,proto3" json:"author_username,omitempty"`
+	Content        string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetUserProfileResponse_Comment) Reset() {
+	*x = GetUserProfileResponse_Comment{}
+	mi := &file_user_service_v1_user_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserProfileResponse_Comment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserProfileResponse_Comment) ProtoMessage() {}
+
+func (x *GetUserProfileResponse_Comment) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserProfileResponse_Comment.ProtoReflect.Descriptor instead.
+func (*GetUserProfileResponse_Comment) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{53, 3}
+}
+
+func (x *GetUserProfileResponse_Comment) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+func (x *GetUserProfileResponse_Comment) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_Comment) GetAuthorUsername() string {
+	if x != nil {
+		return x.AuthorUsername
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_Comment) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_Comment) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
 }
 
 var File_user_service_v1_user_proto protoreflect.FileDescriptor
@@ -3497,7 +4025,55 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0eauthor_user_id\x18\x04 \x01(\x03R\fauthorUserId\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\tR\acontent\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\a \x01(\x03R\tcreatedAt*j\n" +
+	"created_at\x18\a \x01(\x03R\tcreatedAt\"0\n" +
+	"\x15GetUserProfileRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xbd\v\n" +
+	"\x16GetUserProfileResponse\x12\x1a\n" +
+	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
+	"\tvip_level\x18\x03 \x01(\x05R\bvipLevel\x12\x16\n" +
+	"\x06online\x18\x04 \x01(\bR\x06online\x12!\n" +
+	"\fban_withdraw\x18\v \x01(\bR\vbanWithdraw\x12\x19\n" +
+	"\bban_game\x18\f \x01(\bR\abanGame\x12\x1b\n" +
+	"\tban_login\x18\r \x01(\bR\bbanLogin\x12o\n" +
+	"\x13registration_record\x18\x05 \x01(\v2>.api.user.service.v1.GetUserProfileResponse.RegistrationRecordR\x12registrationRecord\x12\\\n" +
+	"\rlogin_records\x18\x06 \x03(\v27.api.user.service.v1.GetUserProfileResponse.LoginRecordR\floginRecords\x12\x12\n" +
+	"\x04tags\x18\a \x03(\tR\x04tags\x12O\n" +
+	"\bcomments\x18\b \x03(\v23.api.user.service.v1.GetUserProfileResponse.CommentR\bcomments\x1aH\n" +
+	"\x06IpInfo\x12\x0e\n" +
+	"\x02ip\x18\x01 \x01(\tR\x02ip\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x05R\x05count\x12\x18\n" +
+	"\acountry\x18\x03 \x01(\tR\acountry\x1a\xe0\x02\n" +
+	"\x12RegistrationRecord\x12?\n" +
+	"\rregistered_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12K\n" +
+	"\aip_info\x18\x02 \x01(\v22.api.user.service.v1.GetUserProfileResponse.IpInfoR\x06ipInfo\x12\x16\n" +
+	"\x06device\x18\x03 \x01(\tR\x06device\x12\x16\n" +
+	"\x06method\x18\x04 \x01(\tR\x06method\x12\x18\n" +
+	"\abrowser\x18\x05 \x01(\tR\abrowser\x12\x10\n" +
+	"\x03app\x18\x06 \x01(\tR\x03app\x12\x16\n" +
+	"\x06mobile\x18\a \x01(\tR\x06mobile\x12\x14\n" +
+	"\x05email\x18\b \x01(\tR\x05email\x12\x1a\n" +
+	"\busername\x18\t \x01(\tR\busername\x12\x16\n" +
+	"\x06source\x18\n" +
+	" \x01(\tR\x06source\x1a\xb7\x02\n" +
+	"\vLoginRecord\x125\n" +
+	"\blogin_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\aloginAt\x12K\n" +
+	"\aip_info\x18\x02 \x01(\v22.api.user.service.v1.GetUserProfileResponse.IpInfoR\x06ipInfo\x12\x16\n" +
+	"\x06device\x18\x03 \x01(\tR\x06device\x12\x16\n" +
+	"\x06method\x18\x04 \x01(\tR\x06method\x12\x18\n" +
+	"\abrowser\x18\x05 \x01(\tR\abrowser\x12\x10\n" +
+	"\x03app\x18\x06 \x01(\tR\x03app\x12\x14\n" +
+	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
+	"\x06mobile\x18\b \x01(\tR\x06mobile\x12\x1a\n" +
+	"\busername\x18\t \x01(\tR\busername\x1a\xc2\x01\n" +
+	"\aComment\x12\x1d\n" +
+	"\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId\x12\x1a\n" +
+	"\busername\x18\x02 \x01(\tR\busername\x12'\n" +
+	"\x0fauthor_username\x18\x03 \x01(\tR\x0eauthorUsername\x12\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt*j\n" +
 	"\bAuthType\x12\x19\n" +
 	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x13\n" +
@@ -3512,7 +4088,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1aOAUTH_PROVIDER_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15OAUTH_PROVIDER_GOOGLE\x10\x01\x12\x1b\n" +
 	"\x17OAUTH_PROVIDER_FACEBOOK\x10\x02\x12\x1a\n" +
-	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\x9a\x1b\n" +
+	"\x16OAUTH_PROVIDER_TWITTER\x10\x032\x87\x1c\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12\x80\x01\n" +
@@ -3543,7 +4119,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\vVerifyEmail\x12'.api.user.service.v1.VerifyEmailRequest\x1a(.api.user.service.v1.VerifyEmailResponse\"\x00\x12_\n" +
 	"\n" +
 	"AddComment\x12&.api.user.service.v1.AddCommentRequest\x1a'.api.user.service.v1.AddCommentResponse\"\x00\x12z\n" +
-	"\x13GetCommentsByUserId\x12/.api.user.service.v1.GetCommentsByUserIdRequest\x1a0.api.user.service.v1.GetCommentsByUserIdResponse\"\x00BO\n" +
+	"\x13GetCommentsByUserId\x12/.api.user.service.v1.GetCommentsByUserIdRequest\x1a0.api.user.service.v1.GetCommentsByUserIdResponse\"\x00\x12k\n" +
+	"\x0eGetUserProfile\x12*.api.user.service.v1.GetUserProfileRequest\x1a+.api.user.service.v1.GetUserProfileResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -3559,66 +4136,72 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 54)
+var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 60)
 var file_user_service_v1_user_proto_goTypes = []any{
-	(AuthType)(0),                               // 0: api.user.service.v1.AuthType
-	(PasswordProvider)(0),                       // 1: api.user.service.v1.PasswordProvider
-	(OAuthProvider)(0),                          // 2: api.user.service.v1.OAuthProvider
-	(*UserInfo)(nil),                            // 3: api.user.service.v1.UserInfo
-	(*RegisterRequest)(nil),                     // 4: api.user.service.v1.RegisterRequest
-	(*LoginRequest)(nil),                        // 5: api.user.service.v1.LoginRequest
-	(*OAuthRequest)(nil),                        // 6: api.user.service.v1.OAuthRequest
-	(*TelegramAuthRequest)(nil),                 // 7: api.user.service.v1.TelegramAuthRequest
-	(*RefreshTokenRequest)(nil),                 // 8: api.user.service.v1.RefreshTokenRequest
-	(*AuthResponse)(nil),                        // 9: api.user.service.v1.AuthResponse
-	(*RefreshTokenResponse)(nil),                // 10: api.user.service.v1.RefreshTokenResponse
-	(*GetUserRequest)(nil),                      // 11: api.user.service.v1.GetUserRequest
-	(*GetUserResponse)(nil),                     // 12: api.user.service.v1.GetUserResponse
-	(*GetUsersByIdsRequest)(nil),                // 13: api.user.service.v1.GetUsersByIdsRequest
-	(*GetUsersByIdsResponse)(nil),               // 14: api.user.service.v1.GetUsersByIdsResponse
-	(*GetUserIdsByOperatorIdsRequest)(nil),      // 15: api.user.service.v1.GetUserIdsByOperatorIdsRequest
-	(*GetUserIdsByOperatorIdsResponse)(nil),     // 16: api.user.service.v1.GetUserIdsByOperatorIdsResponse
-	(*LogoutRequest)(nil),                       // 17: api.user.service.v1.LogoutRequest
-	(*LogoutResponse)(nil),                      // 18: api.user.service.v1.LogoutResponse
-	(*IsTokenRevokedRequest)(nil),               // 19: api.user.service.v1.IsTokenRevokedRequest
-	(*IsTokenRevokedResponse)(nil),              // 20: api.user.service.v1.IsTokenRevokedResponse
-	(*GetOperatorTagConfigRequest)(nil),         // 21: api.user.service.v1.GetOperatorTagConfigRequest
-	(*GetOperatorTagConfigResponse)(nil),        // 22: api.user.service.v1.GetOperatorTagConfigResponse
-	(*SetOperatorTagConfigRequest)(nil),         // 23: api.user.service.v1.SetOperatorTagConfigRequest
-	(*SetOperatorTagConfigResponse)(nil),        // 24: api.user.service.v1.SetOperatorTagConfigResponse
-	(*AddOperatorTagRequest)(nil),               // 25: api.user.service.v1.AddOperatorTagRequest
-	(*AddOperatorTagResponse)(nil),              // 26: api.user.service.v1.AddOperatorTagResponse
-	(*GetOperatorTagsRequest)(nil),              // 27: api.user.service.v1.GetOperatorTagsRequest
-	(*GetOperatorTagsResponse)(nil),             // 28: api.user.service.v1.GetOperatorTagsResponse
-	(*DeleteOperatorTagRequest)(nil),            // 29: api.user.service.v1.DeleteOperatorTagRequest
-	(*DeleteOperatorTagResponse)(nil),           // 30: api.user.service.v1.DeleteOperatorTagResponse
-	(*AddUserTagRequest)(nil),                   // 31: api.user.service.v1.AddUserTagRequest
-	(*AddUserTagResponse)(nil),                  // 32: api.user.service.v1.AddUserTagResponse
-	(*DeleteUserTagRequest)(nil),                // 33: api.user.service.v1.DeleteUserTagRequest
-	(*DeleteUserTagResponse)(nil),               // 34: api.user.service.v1.DeleteUserTagResponse
-	(*GetUserTagsRequest)(nil),                  // 35: api.user.service.v1.GetUserTagsRequest
-	(*GetUserTagsResponse)(nil),                 // 36: api.user.service.v1.GetUserTagsResponse
-	(*CheckPermissionRequest)(nil),              // 37: api.user.service.v1.CheckPermissionRequest
-	(*CheckPermissionResponse)(nil),             // 38: api.user.service.v1.CheckPermissionResponse
-	(*AddOperatorRequest)(nil),                  // 39: api.user.service.v1.AddOperatorRequest
-	(*AddOperatorResponse)(nil),                 // 40: api.user.service.v1.AddOperatorResponse
-	(*SendEmailVerificationCodeRequest)(nil),    // 41: api.user.service.v1.SendEmailVerificationCodeRequest
-	(*SendEmailVerificationCodeResponse)(nil),   // 42: api.user.service.v1.SendEmailVerificationCodeResponse
-	(*UpdateUserRequest)(nil),                   // 43: api.user.service.v1.UpdateUserRequest
-	(*UpdateUserResponse)(nil),                  // 44: api.user.service.v1.UpdateUserResponse
-	(*ListUsersRequest)(nil),                    // 45: api.user.service.v1.ListUsersRequest
-	(*ListUsersResponse)(nil),                   // 46: api.user.service.v1.ListUsersResponse
-	(*CreateGroupUserRequest)(nil),              // 47: api.user.service.v1.CreateGroupUserRequest
-	(*CreateGroupUserResponse)(nil),             // 48: api.user.service.v1.CreateGroupUserResponse
-	(*VerifyEmailRequest)(nil),                  // 49: api.user.service.v1.VerifyEmailRequest
-	(*VerifyEmailResponse)(nil),                 // 50: api.user.service.v1.VerifyEmailResponse
-	(*AddCommentRequest)(nil),                   // 51: api.user.service.v1.AddCommentRequest
-	(*AddCommentResponse)(nil),                  // 52: api.user.service.v1.AddCommentResponse
-	(*GetCommentsByUserIdRequest)(nil),          // 53: api.user.service.v1.GetCommentsByUserIdRequest
-	(*GetCommentsByUserIdResponse)(nil),         // 54: api.user.service.v1.GetCommentsByUserIdResponse
-	(*ListUsersResponse_User)(nil),              // 55: api.user.service.v1.ListUsersResponse.User
-	(*GetCommentsByUserIdResponse_Comment)(nil), // 56: api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	(*timestamppb.Timestamp)(nil),               // 57: google.protobuf.Timestamp
+	(AuthType)(0),                                     // 0: api.user.service.v1.AuthType
+	(PasswordProvider)(0),                             // 1: api.user.service.v1.PasswordProvider
+	(OAuthProvider)(0),                                // 2: api.user.service.v1.OAuthProvider
+	(*UserInfo)(nil),                                  // 3: api.user.service.v1.UserInfo
+	(*RegisterRequest)(nil),                           // 4: api.user.service.v1.RegisterRequest
+	(*LoginRequest)(nil),                              // 5: api.user.service.v1.LoginRequest
+	(*OAuthRequest)(nil),                              // 6: api.user.service.v1.OAuthRequest
+	(*TelegramAuthRequest)(nil),                       // 7: api.user.service.v1.TelegramAuthRequest
+	(*RefreshTokenRequest)(nil),                       // 8: api.user.service.v1.RefreshTokenRequest
+	(*AuthResponse)(nil),                              // 9: api.user.service.v1.AuthResponse
+	(*RefreshTokenResponse)(nil),                      // 10: api.user.service.v1.RefreshTokenResponse
+	(*GetUserRequest)(nil),                            // 11: api.user.service.v1.GetUserRequest
+	(*GetUserResponse)(nil),                           // 12: api.user.service.v1.GetUserResponse
+	(*GetUsersByIdsRequest)(nil),                      // 13: api.user.service.v1.GetUsersByIdsRequest
+	(*GetUsersByIdsResponse)(nil),                     // 14: api.user.service.v1.GetUsersByIdsResponse
+	(*GetUserIdsByOperatorIdsRequest)(nil),            // 15: api.user.service.v1.GetUserIdsByOperatorIdsRequest
+	(*GetUserIdsByOperatorIdsResponse)(nil),           // 16: api.user.service.v1.GetUserIdsByOperatorIdsResponse
+	(*LogoutRequest)(nil),                             // 17: api.user.service.v1.LogoutRequest
+	(*LogoutResponse)(nil),                            // 18: api.user.service.v1.LogoutResponse
+	(*IsTokenRevokedRequest)(nil),                     // 19: api.user.service.v1.IsTokenRevokedRequest
+	(*IsTokenRevokedResponse)(nil),                    // 20: api.user.service.v1.IsTokenRevokedResponse
+	(*GetOperatorTagConfigRequest)(nil),               // 21: api.user.service.v1.GetOperatorTagConfigRequest
+	(*GetOperatorTagConfigResponse)(nil),              // 22: api.user.service.v1.GetOperatorTagConfigResponse
+	(*SetOperatorTagConfigRequest)(nil),               // 23: api.user.service.v1.SetOperatorTagConfigRequest
+	(*SetOperatorTagConfigResponse)(nil),              // 24: api.user.service.v1.SetOperatorTagConfigResponse
+	(*AddOperatorTagRequest)(nil),                     // 25: api.user.service.v1.AddOperatorTagRequest
+	(*AddOperatorTagResponse)(nil),                    // 26: api.user.service.v1.AddOperatorTagResponse
+	(*GetOperatorTagsRequest)(nil),                    // 27: api.user.service.v1.GetOperatorTagsRequest
+	(*GetOperatorTagsResponse)(nil),                   // 28: api.user.service.v1.GetOperatorTagsResponse
+	(*DeleteOperatorTagRequest)(nil),                  // 29: api.user.service.v1.DeleteOperatorTagRequest
+	(*DeleteOperatorTagResponse)(nil),                 // 30: api.user.service.v1.DeleteOperatorTagResponse
+	(*AddUserTagRequest)(nil),                         // 31: api.user.service.v1.AddUserTagRequest
+	(*AddUserTagResponse)(nil),                        // 32: api.user.service.v1.AddUserTagResponse
+	(*DeleteUserTagRequest)(nil),                      // 33: api.user.service.v1.DeleteUserTagRequest
+	(*DeleteUserTagResponse)(nil),                     // 34: api.user.service.v1.DeleteUserTagResponse
+	(*GetUserTagsRequest)(nil),                        // 35: api.user.service.v1.GetUserTagsRequest
+	(*GetUserTagsResponse)(nil),                       // 36: api.user.service.v1.GetUserTagsResponse
+	(*CheckPermissionRequest)(nil),                    // 37: api.user.service.v1.CheckPermissionRequest
+	(*CheckPermissionResponse)(nil),                   // 38: api.user.service.v1.CheckPermissionResponse
+	(*AddOperatorRequest)(nil),                        // 39: api.user.service.v1.AddOperatorRequest
+	(*AddOperatorResponse)(nil),                       // 40: api.user.service.v1.AddOperatorResponse
+	(*SendEmailVerificationCodeRequest)(nil),          // 41: api.user.service.v1.SendEmailVerificationCodeRequest
+	(*SendEmailVerificationCodeResponse)(nil),         // 42: api.user.service.v1.SendEmailVerificationCodeResponse
+	(*UpdateUserRequest)(nil),                         // 43: api.user.service.v1.UpdateUserRequest
+	(*UpdateUserResponse)(nil),                        // 44: api.user.service.v1.UpdateUserResponse
+	(*ListUsersRequest)(nil),                          // 45: api.user.service.v1.ListUsersRequest
+	(*ListUsersResponse)(nil),                         // 46: api.user.service.v1.ListUsersResponse
+	(*CreateGroupUserRequest)(nil),                    // 47: api.user.service.v1.CreateGroupUserRequest
+	(*CreateGroupUserResponse)(nil),                   // 48: api.user.service.v1.CreateGroupUserResponse
+	(*VerifyEmailRequest)(nil),                        // 49: api.user.service.v1.VerifyEmailRequest
+	(*VerifyEmailResponse)(nil),                       // 50: api.user.service.v1.VerifyEmailResponse
+	(*AddCommentRequest)(nil),                         // 51: api.user.service.v1.AddCommentRequest
+	(*AddCommentResponse)(nil),                        // 52: api.user.service.v1.AddCommentResponse
+	(*GetCommentsByUserIdRequest)(nil),                // 53: api.user.service.v1.GetCommentsByUserIdRequest
+	(*GetCommentsByUserIdResponse)(nil),               // 54: api.user.service.v1.GetCommentsByUserIdResponse
+	(*GetUserProfileRequest)(nil),                     // 55: api.user.service.v1.GetUserProfileRequest
+	(*GetUserProfileResponse)(nil),                    // 56: api.user.service.v1.GetUserProfileResponse
+	(*ListUsersResponse_User)(nil),                    // 57: api.user.service.v1.ListUsersResponse.User
+	(*GetCommentsByUserIdResponse_Comment)(nil),       // 58: api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	(*GetUserProfileResponse_IpInfo)(nil),             // 59: api.user.service.v1.GetUserProfileResponse.IpInfo
+	(*GetUserProfileResponse_RegistrationRecord)(nil), // 60: api.user.service.v1.GetUserProfileResponse.RegistrationRecord
+	(*GetUserProfileResponse_LoginRecord)(nil),        // 61: api.user.service.v1.GetUserProfileResponse.LoginRecord
+	(*GetUserProfileResponse_Comment)(nil),            // 62: api.user.service.v1.GetUserProfileResponse.Comment
+	(*timestamppb.Timestamp)(nil),                     // 63: google.protobuf.Timestamp
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
 	1,  // 0: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
@@ -3627,71 +4210,81 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	3,  // 3: api.user.service.v1.AuthResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	3,  // 4: api.user.service.v1.GetUserResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	3,  // 5: api.user.service.v1.GetUsersByIdsResponse.users:type_name -> api.user.service.v1.UserInfo
-	57, // 6: api.user.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	57, // 7: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	55, // 8: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
-	56, // 9: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	57, // 10: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	57, // 11: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	4,  // 12: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
-	5,  // 13: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
-	6,  // 14: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
-	7,  // 15: api.user.service.v1.User.RegisterOrLoginWithTelegram:input_type -> api.user.service.v1.TelegramAuthRequest
-	8,  // 16: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
-	11, // 17: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
-	13, // 18: api.user.service.v1.User.GetUsersByIds:input_type -> api.user.service.v1.GetUsersByIdsRequest
-	15, // 19: api.user.service.v1.User.GetUserIdsByOperatorIds:input_type -> api.user.service.v1.GetUserIdsByOperatorIdsRequest
-	17, // 20: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
-	19, // 21: api.user.service.v1.User.IsTokenRevoked:input_type -> api.user.service.v1.IsTokenRevokedRequest
-	21, // 22: api.user.service.v1.User.GetOperatorTagConfig:input_type -> api.user.service.v1.GetOperatorTagConfigRequest
-	23, // 23: api.user.service.v1.User.SetOperatorTagConfig:input_type -> api.user.service.v1.SetOperatorTagConfigRequest
-	25, // 24: api.user.service.v1.User.AddOperatorTag:input_type -> api.user.service.v1.AddOperatorTagRequest
-	27, // 25: api.user.service.v1.User.GetOperatorTags:input_type -> api.user.service.v1.GetOperatorTagsRequest
-	29, // 26: api.user.service.v1.User.DeleteOperatorTag:input_type -> api.user.service.v1.DeleteOperatorTagRequest
-	31, // 27: api.user.service.v1.User.AddUserTag:input_type -> api.user.service.v1.AddUserTagRequest
-	33, // 28: api.user.service.v1.User.DeleteUserTag:input_type -> api.user.service.v1.DeleteUserTagRequest
-	35, // 29: api.user.service.v1.User.GetUserTags:input_type -> api.user.service.v1.GetUserTagsRequest
-	37, // 30: api.user.service.v1.User.CheckPermission:input_type -> api.user.service.v1.CheckPermissionRequest
-	39, // 31: api.user.service.v1.User.AddOperator:input_type -> api.user.service.v1.AddOperatorRequest
-	41, // 32: api.user.service.v1.User.SendEmailVerificationCode:input_type -> api.user.service.v1.SendEmailVerificationCodeRequest
-	43, // 33: api.user.service.v1.User.UpdateUser:input_type -> api.user.service.v1.UpdateUserRequest
-	45, // 34: api.user.service.v1.User.ListUsers:input_type -> api.user.service.v1.ListUsersRequest
-	47, // 35: api.user.service.v1.User.CreateGroupUser:input_type -> api.user.service.v1.CreateGroupUserRequest
-	49, // 36: api.user.service.v1.User.VerifyEmail:input_type -> api.user.service.v1.VerifyEmailRequest
-	51, // 37: api.user.service.v1.User.AddComment:input_type -> api.user.service.v1.AddCommentRequest
-	53, // 38: api.user.service.v1.User.GetCommentsByUserId:input_type -> api.user.service.v1.GetCommentsByUserIdRequest
-	9,  // 39: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
-	9,  // 40: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
-	9,  // 41: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
-	9,  // 42: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
-	10, // 43: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
-	12, // 44: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	14, // 45: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
-	16, // 46: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
-	18, // 47: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
-	20, // 48: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
-	22, // 49: api.user.service.v1.User.GetOperatorTagConfig:output_type -> api.user.service.v1.GetOperatorTagConfigResponse
-	24, // 50: api.user.service.v1.User.SetOperatorTagConfig:output_type -> api.user.service.v1.SetOperatorTagConfigResponse
-	26, // 51: api.user.service.v1.User.AddOperatorTag:output_type -> api.user.service.v1.AddOperatorTagResponse
-	28, // 52: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
-	30, // 53: api.user.service.v1.User.DeleteOperatorTag:output_type -> api.user.service.v1.DeleteOperatorTagResponse
-	32, // 54: api.user.service.v1.User.AddUserTag:output_type -> api.user.service.v1.AddUserTagResponse
-	34, // 55: api.user.service.v1.User.DeleteUserTag:output_type -> api.user.service.v1.DeleteUserTagResponse
-	36, // 56: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
-	38, // 57: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
-	40, // 58: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
-	42, // 59: api.user.service.v1.User.SendEmailVerificationCode:output_type -> api.user.service.v1.SendEmailVerificationCodeResponse
-	44, // 60: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
-	46, // 61: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
-	48, // 62: api.user.service.v1.User.CreateGroupUser:output_type -> api.user.service.v1.CreateGroupUserResponse
-	50, // 63: api.user.service.v1.User.VerifyEmail:output_type -> api.user.service.v1.VerifyEmailResponse
-	52, // 64: api.user.service.v1.User.AddComment:output_type -> api.user.service.v1.AddCommentResponse
-	54, // 65: api.user.service.v1.User.GetCommentsByUserId:output_type -> api.user.service.v1.GetCommentsByUserIdResponse
-	39, // [39:66] is the sub-list for method output_type
-	12, // [12:39] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	63, // 6: api.user.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	63, // 7: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	57, // 8: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
+	58, // 9: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	60, // 10: api.user.service.v1.GetUserProfileResponse.registration_record:type_name -> api.user.service.v1.GetUserProfileResponse.RegistrationRecord
+	61, // 11: api.user.service.v1.GetUserProfileResponse.login_records:type_name -> api.user.service.v1.GetUserProfileResponse.LoginRecord
+	62, // 12: api.user.service.v1.GetUserProfileResponse.comments:type_name -> api.user.service.v1.GetUserProfileResponse.Comment
+	63, // 13: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	63, // 14: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	63, // 15: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
+	59, // 16: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	63, // 17: api.user.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
+	59, // 18: api.user.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	63, // 19: api.user.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	4,  // 20: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
+	5,  // 21: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
+	6,  // 22: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
+	7,  // 23: api.user.service.v1.User.RegisterOrLoginWithTelegram:input_type -> api.user.service.v1.TelegramAuthRequest
+	8,  // 24: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
+	11, // 25: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
+	13, // 26: api.user.service.v1.User.GetUsersByIds:input_type -> api.user.service.v1.GetUsersByIdsRequest
+	15, // 27: api.user.service.v1.User.GetUserIdsByOperatorIds:input_type -> api.user.service.v1.GetUserIdsByOperatorIdsRequest
+	17, // 28: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
+	19, // 29: api.user.service.v1.User.IsTokenRevoked:input_type -> api.user.service.v1.IsTokenRevokedRequest
+	21, // 30: api.user.service.v1.User.GetOperatorTagConfig:input_type -> api.user.service.v1.GetOperatorTagConfigRequest
+	23, // 31: api.user.service.v1.User.SetOperatorTagConfig:input_type -> api.user.service.v1.SetOperatorTagConfigRequest
+	25, // 32: api.user.service.v1.User.AddOperatorTag:input_type -> api.user.service.v1.AddOperatorTagRequest
+	27, // 33: api.user.service.v1.User.GetOperatorTags:input_type -> api.user.service.v1.GetOperatorTagsRequest
+	29, // 34: api.user.service.v1.User.DeleteOperatorTag:input_type -> api.user.service.v1.DeleteOperatorTagRequest
+	31, // 35: api.user.service.v1.User.AddUserTag:input_type -> api.user.service.v1.AddUserTagRequest
+	33, // 36: api.user.service.v1.User.DeleteUserTag:input_type -> api.user.service.v1.DeleteUserTagRequest
+	35, // 37: api.user.service.v1.User.GetUserTags:input_type -> api.user.service.v1.GetUserTagsRequest
+	37, // 38: api.user.service.v1.User.CheckPermission:input_type -> api.user.service.v1.CheckPermissionRequest
+	39, // 39: api.user.service.v1.User.AddOperator:input_type -> api.user.service.v1.AddOperatorRequest
+	41, // 40: api.user.service.v1.User.SendEmailVerificationCode:input_type -> api.user.service.v1.SendEmailVerificationCodeRequest
+	43, // 41: api.user.service.v1.User.UpdateUser:input_type -> api.user.service.v1.UpdateUserRequest
+	45, // 42: api.user.service.v1.User.ListUsers:input_type -> api.user.service.v1.ListUsersRequest
+	47, // 43: api.user.service.v1.User.CreateGroupUser:input_type -> api.user.service.v1.CreateGroupUserRequest
+	49, // 44: api.user.service.v1.User.VerifyEmail:input_type -> api.user.service.v1.VerifyEmailRequest
+	51, // 45: api.user.service.v1.User.AddComment:input_type -> api.user.service.v1.AddCommentRequest
+	53, // 46: api.user.service.v1.User.GetCommentsByUserId:input_type -> api.user.service.v1.GetCommentsByUserIdRequest
+	55, // 47: api.user.service.v1.User.GetUserProfile:input_type -> api.user.service.v1.GetUserProfileRequest
+	9,  // 48: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
+	9,  // 49: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
+	9,  // 50: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
+	9,  // 51: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
+	10, // 52: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
+	12, // 53: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	14, // 54: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
+	16, // 55: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
+	18, // 56: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	20, // 57: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
+	22, // 58: api.user.service.v1.User.GetOperatorTagConfig:output_type -> api.user.service.v1.GetOperatorTagConfigResponse
+	24, // 59: api.user.service.v1.User.SetOperatorTagConfig:output_type -> api.user.service.v1.SetOperatorTagConfigResponse
+	26, // 60: api.user.service.v1.User.AddOperatorTag:output_type -> api.user.service.v1.AddOperatorTagResponse
+	28, // 61: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
+	30, // 62: api.user.service.v1.User.DeleteOperatorTag:output_type -> api.user.service.v1.DeleteOperatorTagResponse
+	32, // 63: api.user.service.v1.User.AddUserTag:output_type -> api.user.service.v1.AddUserTagResponse
+	34, // 64: api.user.service.v1.User.DeleteUserTag:output_type -> api.user.service.v1.DeleteUserTagResponse
+	36, // 65: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
+	38, // 66: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
+	40, // 67: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
+	42, // 68: api.user.service.v1.User.SendEmailVerificationCode:output_type -> api.user.service.v1.SendEmailVerificationCodeResponse
+	44, // 69: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
+	46, // 70: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
+	48, // 71: api.user.service.v1.User.CreateGroupUser:output_type -> api.user.service.v1.CreateGroupUserResponse
+	50, // 72: api.user.service.v1.User.VerifyEmail:output_type -> api.user.service.v1.VerifyEmailResponse
+	52, // 73: api.user.service.v1.User.AddComment:output_type -> api.user.service.v1.AddCommentResponse
+	54, // 74: api.user.service.v1.User.GetCommentsByUserId:output_type -> api.user.service.v1.GetCommentsByUserIdResponse
+	56, // 75: api.user.service.v1.User.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
+	48, // [48:76] is the sub-list for method output_type
+	20, // [20:48] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_user_proto_init() }
@@ -3707,7 +4300,7 @@ func file_user_service_v1_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   54,
+			NumMessages:   60,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
