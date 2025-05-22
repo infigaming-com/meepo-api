@@ -62,24 +62,46 @@ func (c *SystemCurrency) SetDefaultCurrency(currency string) error {
 	return errors.New("Currency not found")
 }
 
-func (c *SystemCurrency) ToExternalStringAbs(amount int64) string {
+func (c *SystemCurrency) Int64ToExternalStringAbs(amount int64) string {
 	return decimal.NewFromInt(amount).Div(decimal.NewFromInt(10).Pow(decimal.NewFromInt32(c.curCurrency.DecimalPlaces))).Abs().String()
 }
 
-func (c *SystemCurrency) ToExternalString(amount int64) string {
+func (c *SystemCurrency) Int64ToExternalString(amount int64) string {
 	return decimal.NewFromInt(amount).Div(decimal.NewFromInt(10).Pow(decimal.NewFromInt32(c.curCurrency.DecimalPlaces))).String()
 }
 
-func (c *SystemCurrency) ToExternalStringAbsByCurrency(amount int64, currency string) (string, error) {
+func (c *SystemCurrency) Float64ToExternalStringAbs(amount float64) string {
+	return decimal.NewFromFloat(amount).Div(decimal.NewFromInt(10).Pow(decimal.NewFromInt32(c.curCurrency.DecimalPlaces))).Abs().String()
+}
+
+func (c *SystemCurrency) Float64ToExternalString(amount float64) string {
+	return decimal.NewFromFloat(amount).Div(decimal.NewFromInt(10).Pow(decimal.NewFromInt32(c.curCurrency.DecimalPlaces))).String()
+}
+
+func (c *SystemCurrency) Int64ToExternalStringAbsByCurrency(amount int64, currency string) (string, error) {
 	if cur, ok := c.currencies[currency]; ok {
 		return decimal.NewFromInt(amount).Div(decimal.NewFromInt(10).Pow(decimal.NewFromInt32(cur.DecimalPlaces))).Abs().String(), nil
 	}
 	return "", errors.New("Currency not found")
 }
 
-func (c *SystemCurrency) ToExternalStringByCurrency(amount int64, currency string) (string, error) {
+func (c *SystemCurrency) Int64ToExternalStringByCurrency(amount int64, currency string) (string, error) {
 	if cur, ok := c.currencies[currency]; ok {
 		return decimal.NewFromInt(amount).Div(decimal.NewFromInt(10).Pow(decimal.NewFromInt32(cur.DecimalPlaces))).String(), nil
+	}
+	return "", errors.New("Currency not found")
+}
+
+func (c *SystemCurrency) Float64ToExternalStringAbsByCurrency(amount float64, currency string) (string, error) {
+	if cur, ok := c.currencies[currency]; ok {
+		return decimal.NewFromFloat(amount).Div(decimal.NewFromInt(10).Pow(decimal.NewFromInt32(cur.DecimalPlaces))).Abs().String(), nil
+	}
+	return "", errors.New("Currency not found")
+}
+
+func (c *SystemCurrency) Float64ToExternalStringByCurrency(amount float64, currency string) (string, error) {
+	if cur, ok := c.currencies[currency]; ok {
+		return decimal.NewFromFloat(amount).Div(decimal.NewFromInt(10).Pow(decimal.NewFromInt32(cur.DecimalPlaces))).String(), nil
 	}
 	return "", errors.New("Currency not found")
 }
