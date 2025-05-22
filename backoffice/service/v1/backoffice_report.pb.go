@@ -3447,11 +3447,11 @@ type ListDepositVtgDetailsResponse_DailyDetail struct {
 	DepositAmount                               string                 `protobuf:"bytes,4,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
 	DepositUsers                                int32                  `protobuf:"varint,5,opt,name=deposit_users,json=depositUsers,proto3" json:"deposit_users,omitempty"`
 	FtdAmount                                   string                 `protobuf:"bytes,6,opt,name=ftd_amount,json=ftdAmount,proto3" json:"ftd_amount,omitempty"`
-	FtdUsers                                    string                 `protobuf:"bytes,7,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
+	FtdUsers                                    int32                  `protobuf:"varint,7,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
 	SameDayFtdAmount                            string                 `protobuf:"bytes,8,opt,name=same_day_ftd_amount,json=sameDayFtdAmount,proto3" json:"same_day_ftd_amount,omitempty"`
 	SameDayFtdUsers                             int32                  `protobuf:"varint,9,opt,name=same_day_ftd_users,json=sameDayFtdUsers,proto3" json:"same_day_ftd_users,omitempty"`
 	RepeatedDepositAmount                       string                 `protobuf:"bytes,10,opt,name=repeated_deposit_amount,json=repeatedDepositAmount,proto3" json:"repeated_deposit_amount,omitempty"`
-	RepeatedDepositUsers                        string                 `protobuf:"bytes,11,opt,name=repeated_deposit_users,json=repeatedDepositUsers,proto3" json:"repeated_deposit_users,omitempty"`
+	RepeatedDepositUsers                        int32                  `protobuf:"varint,11,opt,name=repeated_deposit_users,json=repeatedDepositUsers,proto3" json:"repeated_deposit_users,omitempty"`
 	SameDayFtd                                  string                 `protobuf:"bytes,12,opt,name=same_day_ftd,json=sameDayFtd,proto3" json:"same_day_ftd,omitempty"`
 	NonSameDayFtd                               string                 `protobuf:"bytes,13,opt,name=non_same_day_ftd,json=nonSameDayFtd,proto3" json:"non_same_day_ftd,omitempty"`
 	AverageFtdAmountForSameDayRegistredUsers    int32                  `protobuf:"varint,14,opt,name=average_ftd_amount_for_same_day_registred_users,json=averageFtdAmountForSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_same_day_registred_users,omitempty"`
@@ -3534,11 +3534,11 @@ func (x *ListDepositVtgDetailsResponse_DailyDetail) GetFtdAmount() string {
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetFtdUsers() string {
+func (x *ListDepositVtgDetailsResponse_DailyDetail) GetFtdUsers() int32 {
 	if x != nil {
 		return x.FtdUsers
 	}
-	return ""
+	return 0
 }
 
 func (x *ListDepositVtgDetailsResponse_DailyDetail) GetSameDayFtdAmount() string {
@@ -3562,11 +3562,11 @@ func (x *ListDepositVtgDetailsResponse_DailyDetail) GetRepeatedDepositAmount() s
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetRepeatedDepositUsers() string {
+func (x *ListDepositVtgDetailsResponse_DailyDetail) GetRepeatedDepositUsers() int32 {
 	if x != nil {
 		return x.RepeatedDepositUsers
 	}
-	return ""
+	return 0
 }
 
 func (x *ListDepositVtgDetailsResponse_DailyDetail) GetSameDayFtd() string {
@@ -4200,12 +4200,12 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\rdeposit_users\x18\x05 \x01(\x05R\fdepositUsers\x12\x1d\n" +
 	"\n" +
 	"ftd_amount\x18\x06 \x01(\tR\tftdAmount\x12\x1b\n" +
-	"\tftd_users\x18\a \x01(\tR\bftdUsers\x12-\n" +
+	"\tftd_users\x18\a \x01(\x05R\bftdUsers\x12-\n" +
 	"\x13same_day_ftd_amount\x18\b \x01(\tR\x10sameDayFtdAmount\x12+\n" +
 	"\x12same_day_ftd_users\x18\t \x01(\x05R\x0fsameDayFtdUsers\x126\n" +
 	"\x17repeated_deposit_amount\x18\n" +
 	" \x01(\tR\x15repeatedDepositAmount\x124\n" +
-	"\x16repeated_deposit_users\x18\v \x01(\tR\x14repeatedDepositUsers\x12 \n" +
+	"\x16repeated_deposit_users\x18\v \x01(\x05R\x14repeatedDepositUsers\x12 \n" +
 	"\fsame_day_ftd\x18\f \x01(\tR\n" +
 	"sameDayFtd\x12'\n" +
 	"\x10non_same_day_ftd\x18\r \x01(\tR\rnonSameDayFtd\x12a\n" +
