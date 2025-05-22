@@ -564,3 +564,39 @@ func IsEmailAlreadyRegistered(err error) bool {
 func ErrorEmailAlreadyRegistered(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_EMAIL_ALREADY_REGISTERED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGenerateCommentIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_COMMENT_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGenerateCommentIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_COMMENT_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddCommentFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_COMMENT_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddCommentFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_COMMENT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCommentsByUserIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_COMMENTS_BY_USER_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCommentsByUserIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_COMMENTS_BY_USER_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}

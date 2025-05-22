@@ -67,6 +67,10 @@ service Wallet {
 	rpc GetWalletCreditTransactions (GetWalletCreditTransactionsRequest) returns (GetWalletCreditTransactionsResponse) {}
 
 	rpc GetExchangeRates (GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {}
+
+	// GetUserTransactionSummary returns the summary of user's transactions 
+	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
+	rpc GetUserTransactionSummary (GetUserTransactionSummaryRequest) returns (GetUserTransactionSummaryResponse) {}
 }
 
 message AddUserRequest {
@@ -432,4 +436,22 @@ message GetExchangeRatesRequest {
 message GetExchangeRatesResponse {
 	// map key is source currency, value is target currency rate
 	map<string, string> exchange_rates = 1;
+}
+
+message GetUserTransactionSummaryRequest {
+	int64 user_id = 1;
+	optional string currency = 2;
+	optional google.protobuf.Timestamp start_time = 3;
+	optional google.protobuf.Timestamp end_time = 4;
+}
+
+message GetUserTransactionSummaryResponse {
+	string currency = 1;
+	string total_deposit = 2;
+	string total_withdraw = 3;
+	string deposit_minus_withdraw = 4;
+	string total_valid_bet = 5;
+	int32 total_deposit_count = 6;
+	int32 total_withdraw_count = 7;
+	int32 today_withdraw_count = 8;
 }

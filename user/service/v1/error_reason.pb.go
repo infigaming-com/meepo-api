@@ -71,6 +71,9 @@ const (
 	ErrorReason_VERIFICATION_CODE_SEND_TOO_FREQUENTLY ErrorReason = 10044
 	ErrorReason_EMAIL_VERIFICATION_FAILED             ErrorReason = 10045
 	ErrorReason_EMAIL_ALREADY_REGISTERED              ErrorReason = 10046
+	ErrorReason_GENERATE_COMMENT_ID_FAILED            ErrorReason = 10047
+	ErrorReason_ADD_COMMENT_FAILED                    ErrorReason = 10048
+	ErrorReason_GET_COMMENTS_BY_USER_ID_FAILED        ErrorReason = 10049
 )
 
 // Enum value maps for ErrorReason.
@@ -122,6 +125,9 @@ var (
 		10044: "VERIFICATION_CODE_SEND_TOO_FREQUENTLY",
 		10045: "EMAIL_VERIFICATION_FAILED",
 		10046: "EMAIL_ALREADY_REGISTERED",
+		10047: "GENERATE_COMMENT_ID_FAILED",
+		10048: "ADD_COMMENT_FAILED",
+		10049: "GET_COMMENTS_BY_USER_ID_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                           0,
@@ -170,6 +176,9 @@ var (
 		"VERIFICATION_CODE_SEND_TOO_FREQUENTLY": 10044,
 		"EMAIL_VERIFICATION_FAILED":             10045,
 		"EMAIL_ALREADY_REGISTERED":              10046,
+		"GENERATE_COMMENT_ID_FAILED":            10047,
+		"ADD_COMMENT_FAILED":                    10048,
+		"GET_COMMENTS_BY_USER_ID_FAILED":        10049,
 	}
 )
 
@@ -204,7 +213,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xdb\v\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xba\f\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12)\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x1a\x04\xa8E\x91\x03\x12,\n" +
@@ -251,7 +260,10 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x14FAILED_TO_SEND_EMAIL\x10\xbbN\x12*\n" +
 	"%VERIFICATION_CODE_SEND_TOO_FREQUENTLY\x10\xbcN\x12\x1e\n" +
 	"\x19EMAIL_VERIFICATION_FAILED\x10\xbdN\x12\x1d\n" +
-	"\x18EMAIL_ALREADY_REGISTERED\x10\xbeN\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x18EMAIL_ALREADY_REGISTERED\x10\xbeN\x12\x1f\n" +
+	"\x1aGENERATE_COMMENT_ID_FAILED\x10\xbfN\x12\x17\n" +
+	"\x12ADD_COMMENT_FAILED\x10\xc0N\x12#\n" +
+	"\x1eGET_COMMENTS_BY_USER_ID_FAILED\x10\xc1N\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
