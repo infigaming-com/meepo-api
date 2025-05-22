@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "google/api/annotations.proto";
-
 package system.service.v1;
 
 option go_package = "github.com/infigaming-com/meepo-api/system/service/v1;v1";
@@ -10,24 +8,15 @@ option java_package = "system.service.v1";
 
 service System {
 	rpc AddCurrency(AddCurrencyRequest) returns (AddCurrencyResponse) {
-		option (google.api.http) = {
-			post: "/v1/system/currencies/add"
-			body: "*"
-		};
 	};
 
 	rpc UpdateCurrency(UpdateCurrencyRequest) returns (UpdateCurrencyResponse) {
-		option (google.api.http) = {
-			post: "/v1/system/currencies/update"
-			body: "*"
-		};
 	};
 
 	rpc GetCurrencies(GetCurrenciesRequest) returns (GetCurrenciesResponse) {
-		option (google.api.http) = {
-			post: "/v1/system/currencies/get"
-			body: "*"
-		};
+	};
+	
+	rpc ListCurrencies(ListCurrenciesRequest) returns (ListCurrenciesResponse) {
 	};
 }
 
@@ -77,5 +66,15 @@ message GetCurrenciesRequest {
 }
 
 message GetCurrenciesResponse {
+	repeated Currency currencies = 1;
+}
+
+message ListCurrenciesRequest {
+	repeated string currencies = 1;
+	optional bool enabled = 2;
+	optional bool hidden = 3;
+}
+
+message ListCurrenciesResponse {
 	repeated Currency currencies = 1;
 }

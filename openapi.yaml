@@ -953,6 +953,60 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
+    /v1/backoffice/system/currencies/add:
+        post:
+            tags:
+                - BackofficeSystem
+            operationId: BackofficeSystem_AddSystemCurrency
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddSystemCurrencyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AddSystemCurrencyResponse'
+    /v1/backoffice/system/currencies/list:
+        post:
+            tags:
+                - BackofficeSystem
+            operationId: BackofficeSystem_ListSystemCurrencies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSystemCurrenciesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSystemCurrenciesResponse'
+    /v1/backoffice/system/currencies/update:
+        post:
+            tags:
+                - BackofficeSystem
+            operationId: BackofficeSystem_UpdateSystemCurrency
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateSystemCurrencyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateSystemCurrencyResponse'
     /v1/backoffice/user/comments/add:
         post:
             tags:
@@ -1730,60 +1784,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawResponse'
-    /v1/system/currencies/add:
-        post:
-            tags:
-                - System
-            operationId: System_AddCurrency
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/system.service.v1.AddCurrencyRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/system.service.v1.AddCurrencyResponse'
-    /v1/system/currencies/get:
-        post:
-            tags:
-                - System
-            operationId: System_GetCurrencies
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/system.service.v1.GetCurrenciesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/system.service.v1.GetCurrenciesResponse'
-    /v1/system/currencies/update:
-        post:
-            tags:
-                - System
-            operationId: System_UpdateCurrency
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/system.service.v1.UpdateCurrencyRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/system.service.v1.UpdateCurrencyResponse'
     /v1/user/auth/login:
         post:
             tags:
@@ -2225,6 +2225,30 @@ components:
                 tag:
                     type: string
         api.backoffice.service.v1.AddOperatorUserTagResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.AddSystemCurrencyRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+                hidden:
+                    type: boolean
+                type:
+                    type: string
+                symbol:
+                    type: string
+                icon:
+                    type: string
+                decimalPlaces:
+                    type: integer
+                    format: int32
+                currencyDecimalPlaces:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.AddSystemCurrencyResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.AddUserCommentRequest:
@@ -4370,6 +4394,24 @@ components:
                     format: int32
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.ListSystemCurrenciesRequest:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                enabled:
+                    type: boolean
+                hidden:
+                    type: boolean
+        api.backoffice.service.v1.ListSystemCurrenciesResponse:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.SystemCurrency'
         api.backoffice.service.v1.ListTagsRequest:
             type: object
             properties: {}
@@ -5084,6 +5126,27 @@ components:
         api.backoffice.service.v1.SendRegisterVerificationCodeResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.SystemCurrency:
+            type: object
+            properties:
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+                hidden:
+                    type: boolean
+                type:
+                    type: string
+                symbol:
+                    type: string
+                icon:
+                    type: string
+                decimalPlaces:
+                    type: integer
+                    format: int32
+                currencyDecimalPlaces:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.Unbind2faRequest:
             type: object
             properties:
@@ -5124,6 +5187,32 @@ components:
         api.backoffice.service.v1.UpdateProviderResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateSystemCurrencyRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+                hidden:
+                    type: boolean
+                type:
+                    type: string
+                symbol:
+                    type: string
+                icon:
+                    type: string
+                decimalPlaces:
+                    type: integer
+                    format: int32
+                currencyDecimalPlaces:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.UpdateSystemCurrencyResponse:
+            type: object
+            properties:
+                currency:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.SystemCurrency'
         api.backoffice.service.v1.UpdateUserRequest:
             type: object
             properties:
@@ -6853,94 +6942,6 @@ components:
             description: |-
                 Response for withdraw callback
                  Confirms receipt of callback notification
-        system.service.v1.AddCurrencyRequest:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-                type:
-                    type: string
-                symbol:
-                    type: string
-                icon:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
-                currencyDecimalPlaces:
-                    type: integer
-                    format: int32
-        system.service.v1.AddCurrencyResponse:
-            type: object
-            properties: {}
-        system.service.v1.Currency:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-                type:
-                    type: string
-                symbol:
-                    type: string
-                icon:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
-                currencyDecimalPlaces:
-                    type: integer
-                    format: int32
-        system.service.v1.GetCurrenciesRequest:
-            type: object
-            properties:
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                    description: |-
-                        Filter to return specific currencies only.
-                         If empty or not provided, all currencies will be returned
-        system.service.v1.GetCurrenciesResponse:
-            type: object
-            properties:
-                currencies:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/system.service.v1.Currency'
-        system.service.v1.UpdateCurrencyRequest:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-                type:
-                    type: string
-                symbol:
-                    type: string
-                icon:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
-                currencyDecimalPlaces:
-                    type: integer
-                    format: int32
-        system.service.v1.UpdateCurrencyResponse:
-            type: object
-            properties:
-                currency:
-                    $ref: '#/components/schemas/system.service.v1.Currency'
 tags:
     - name: BackofficeAccount
     - name: BackofficeDashboard
@@ -6952,6 +6953,7 @@ tags:
          Provides methods for backoffice payment management
     - name: BackofficeReport
     - name: BackofficeReview
+    - name: BackofficeSystem
     - name: BackofficeUser
     - name: BackofficeWallet
     - name: Game
@@ -6963,7 +6965,6 @@ tags:
          Provides methods for managing payment methods, channels, and transactions
     - name: Review
       description: Review service provides review functionality.
-    - name: System
     - name: User
       description: User service provides authentication and user management functionality.
     - name: Wallet
