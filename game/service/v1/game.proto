@@ -603,6 +603,7 @@ message GetBetByIdResponse {
 		int64 rollback_win_amount_usd = 30;
 		int64 created_at = 31;
 		int64 updated_at = 32;
+		repeated Action actions = 33;
 	}
 	Bet bet = 1;
 }
