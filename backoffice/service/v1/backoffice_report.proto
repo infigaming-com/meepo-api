@@ -435,11 +435,11 @@ message ListDepositVtgDetailsResponse {
 		string deposit_amount = 4;
 		int32 deposit_users = 5;
 		string ftd_amount = 6;
-		string ftd_users = 7;
+		int32 ftd_users = 7;
 		string same_day_ftd_amount = 8;
 		int32 same_day_ftd_users = 9;
 		string repeated_deposit_amount = 10;
-		string repeated_deposit_users = 11;
+		int32 repeated_deposit_users = 11;
 		string same_day_ftd = 12;
 		string non_same_day_ftd = 13;
 		int32 average_ftd_amount_for_same_day_registred_users = 14;

@@ -4052,7 +4052,8 @@ components:
                 ftdAmount:
                     type: string
                 ftdUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 sameDayFtdAmount:
                     type: string
                 sameDayFtdUsers:
@@ -4061,7 +4062,8 @@ components:
                 repeatedDepositAmount:
                     type: string
                 repeatedDepositUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 sameDayFtd:
                     type: string
                 nonSameDayFtd:
