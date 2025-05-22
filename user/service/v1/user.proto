@@ -590,8 +590,8 @@ message GetCommentsByUserIdResponse {
 
 message GetUserProfileRequest {
 	int64 user_id = 1;
-	int32 login_page = 2;
-	int32 login_page_size = 3;
+	optional int32 login_page = 2;
+	optional int32 login_page_size = 3;
 }
 
 message GetUserProfileResponse {

@@ -2995,8 +2995,8 @@ func (x *GetCommentsByUserIdResponse) GetComments() []*GetCommentsByUserIdRespon
 type GetUserProfileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	LoginPage     int32                  `protobuf:"varint,2,opt,name=login_page,json=loginPage,proto3" json:"login_page,omitempty"`
-	LoginPageSize int32                  `protobuf:"varint,3,opt,name=login_page_size,json=loginPageSize,proto3" json:"login_page_size,omitempty"`
+	LoginPage     *int32                 `protobuf:"varint,2,opt,name=login_page,json=loginPage,proto3,oneof" json:"login_page,omitempty"`
+	LoginPageSize *int32                 `protobuf:"varint,3,opt,name=login_page_size,json=loginPageSize,proto3,oneof" json:"login_page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3039,15 +3039,15 @@ func (x *GetUserProfileRequest) GetUserId() int64 {
 }
 
 func (x *GetUserProfileRequest) GetLoginPage() int32 {
-	if x != nil {
-		return x.LoginPage
+	if x != nil && x.LoginPage != nil {
+		return *x.LoginPage
 	}
 	return 0
 }
 
 func (x *GetUserProfileRequest) GetLoginPageSize() int32 {
-	if x != nil {
-		return x.LoginPageSize
+	if x != nil && x.LoginPageSize != nil {
+		return *x.LoginPageSize
 	}
 	return 0
 }
@@ -4041,12 +4041,14 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0eauthor_user_id\x18\x04 \x01(\x03R\fauthorUserId\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\tR\acontent\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\a \x01(\x03R\tcreatedAt\"w\n" +
+	"created_at\x18\a \x01(\x03R\tcreatedAt\"\xa4\x01\n" +
 	"\x15GetUserProfileRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1d\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\"\n" +
 	"\n" +
-	"login_page\x18\x02 \x01(\x05R\tloginPage\x12&\n" +
-	"\x0flogin_page_size\x18\x03 \x01(\x05R\rloginPageSize\"\xbd\v\n" +
+	"login_page\x18\x02 \x01(\x05H\x00R\tloginPage\x88\x01\x01\x12+\n" +
+	"\x0flogin_page_size\x18\x03 \x01(\x05H\x01R\rloginPageSize\x88\x01\x01B\r\n" +
+	"\v_login_pageB\x12\n" +
+	"\x10_login_page_size\"\xbd\v\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -4313,6 +4315,7 @@ func file_user_service_v1_user_proto_init() {
 	}
 	file_user_service_v1_user_proto_msgTypes[40].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[42].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[52].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
