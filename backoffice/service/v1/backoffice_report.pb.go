@@ -28,8 +28,8 @@ type TimePeriod int32
 const (
 	TimePeriod_TIME_RANGE_UNSPECIFIED TimePeriod = 0
 	TimePeriod_TIME_RANGE_TODAY       TimePeriod = 1
-	TimePeriod_TIME_RANGE_THIS_WEEK   TimePeriod = 2
-	TimePeriod_TIME_RANGE_THIS_MONTH  TimePeriod = 3
+	TimePeriod_TIME_RANGE_WEEK        TimePeriod = 2
+	TimePeriod_TIME_RANGE_MONTH       TimePeriod = 3
 )
 
 // Enum value maps for TimePeriod.
@@ -37,14 +37,14 @@ var (
 	TimePeriod_name = map[int32]string{
 		0: "TIME_RANGE_UNSPECIFIED",
 		1: "TIME_RANGE_TODAY",
-		2: "TIME_RANGE_THIS_WEEK",
-		3: "TIME_RANGE_THIS_MONTH",
+		2: "TIME_RANGE_WEEK",
+		3: "TIME_RANGE_MONTH",
 	}
 	TimePeriod_value = map[string]int32{
 		"TIME_RANGE_UNSPECIFIED": 0,
 		"TIME_RANGE_TODAY":       1,
-		"TIME_RANGE_THIS_WEEK":   2,
-		"TIME_RANGE_THIS_MONTH":  3,
+		"TIME_RANGE_WEEK":        2,
+		"TIME_RANGE_MONTH":       3,
 	}
 )
 
@@ -4258,13 +4258,13 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"3average_ftw_amount_for_non_same_day_registred_users\x18\x0f \x01(\x05R+averageFtwAmountForNonSameDayRegistredUsers\x12-\n" +
 	"\x12success_percentage\x18\x10 \x01(\x05R\x11successPercentage\x12A\n" +
 	"\x1ddeposit_minus_withdraw_amount\x18\x11 \x01(\x03R\x1adepositMinusWithdrawAmount\x12@\n" +
-	"\x1camount_proportion_percentage\x18\x12 \x01(\x05R\x1aamountProportionPercentage*s\n" +
+	"\x1camount_proportion_percentage\x18\x12 \x01(\x05R\x1aamountProportionPercentage*i\n" +
 	"\n" +
 	"TimePeriod\x12\x1a\n" +
 	"\x16TIME_RANGE_UNSPECIFIED\x10\x00\x12\x14\n" +
-	"\x10TIME_RANGE_TODAY\x10\x01\x12\x18\n" +
-	"\x14TIME_RANGE_THIS_WEEK\x10\x02\x12\x19\n" +
-	"\x15TIME_RANGE_THIS_MONTH\x10\x032\xe5\x10\n" +
+	"\x10TIME_RANGE_TODAY\x10\x01\x12\x13\n" +
+	"\x0fTIME_RANGE_WEEK\x10\x02\x12\x14\n" +
+	"\x10TIME_RANGE_MONTH\x10\x032\xe5\x10\n" +
 	"\x10BackofficeReport\x12\x97\x01\n" +
 	"\n" +
 	"GetSummary\x12,.api.backoffice.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/report/summary/get\x12\xb8\x01\n" +

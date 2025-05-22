@@ -2349,8 +2349,8 @@ components:
                     enum:
                         - TIME_RANGE_UNSPECIFIED
                         - TIME_RANGE_TODAY
-                        - TIME_RANGE_THIS_WEEK
-                        - TIME_RANGE_THIS_MONTH
+                        - TIME_RANGE_WEEK
+                        - TIME_RANGE_MONTH
                     type: string
                     format: enum
                 retailerOperatorIds:
@@ -2402,8 +2402,8 @@ components:
                     enum:
                         - TIME_RANGE_UNSPECIFIED
                         - TIME_RANGE_TODAY
-                        - TIME_RANGE_THIS_WEEK
-                        - TIME_RANGE_THIS_MONTH
+                        - TIME_RANGE_WEEK
+                        - TIME_RANGE_MONTH
                     type: string
                     format: enum
                 operatorIds:
@@ -2612,8 +2612,8 @@ components:
                     enum:
                         - TIME_RANGE_UNSPECIFIED
                         - TIME_RANGE_TODAY
-                        - TIME_RANGE_THIS_WEEK
-                        - TIME_RANGE_THIS_MONTH
+                        - TIME_RANGE_WEEK
+                        - TIME_RANGE_MONTH
                     type: string
                     format: enum
                 retailerOperatorIds:
@@ -2677,8 +2677,8 @@ components:
                     enum:
                         - TIME_RANGE_UNSPECIFIED
                         - TIME_RANGE_TODAY
-                        - TIME_RANGE_THIS_WEEK
-                        - TIME_RANGE_THIS_MONTH
+                        - TIME_RANGE_WEEK
+                        - TIME_RANGE_MONTH
                     type: string
                     format: enum
                 retailerOperatorIds:
@@ -3373,8 +3373,8 @@ components:
                     enum:
                         - TIME_RANGE_UNSPECIFIED
                         - TIME_RANGE_TODAY
-                        - TIME_RANGE_THIS_WEEK
-                        - TIME_RANGE_THIS_MONTH
+                        - TIME_RANGE_WEEK
+                        - TIME_RANGE_MONTH
                     type: string
                     format: enum
                 retailerOperatorIds:
@@ -3512,8 +3512,8 @@ components:
                     enum:
                         - TIME_RANGE_UNSPECIFIED
                         - TIME_RANGE_TODAY
-                        - TIME_RANGE_THIS_WEEK
-                        - TIME_RANGE_THIS_MONTH
+                        - TIME_RANGE_WEEK
+                        - TIME_RANGE_MONTH
                     type: string
                     format: enum
                 retailerOperatorIds:
@@ -3665,8 +3665,8 @@ components:
                     enum:
                         - TIME_RANGE_UNSPECIFIED
                         - TIME_RANGE_TODAY
-                        - TIME_RANGE_THIS_WEEK
-                        - TIME_RANGE_THIS_MONTH
+                        - TIME_RANGE_WEEK
+                        - TIME_RANGE_MONTH
                     type: string
                     format: enum
                 retailerOperatorIds:
@@ -3764,8 +3764,8 @@ components:
                     enum:
                         - TIME_RANGE_UNSPECIFIED
                         - TIME_RANGE_TODAY
-                        - TIME_RANGE_THIS_WEEK
-                        - TIME_RANGE_THIS_MONTH
+                        - TIME_RANGE_WEEK
+                        - TIME_RANGE_MONTH
                     type: string
                     format: enum
                 retailerOperatorIds:
@@ -3873,8 +3873,8 @@ components:
                     enum:
                         - TIME_RANGE_UNSPECIFIED
                         - TIME_RANGE_TODAY
-                        - TIME_RANGE_THIS_WEEK
-                        - TIME_RANGE_THIS_MONTH
+                        - TIME_RANGE_WEEK
+                        - TIME_RANGE_MONTH
                     type: string
                     format: enum
                 operatorIds:
@@ -4578,8 +4578,8 @@ components:
                     enum:
                         - TIME_RANGE_UNSPECIFIED
                         - TIME_RANGE_TODAY
-                        - TIME_RANGE_THIS_WEEK
-                        - TIME_RANGE_THIS_MONTH
+                        - TIME_RANGE_WEEK
+                        - TIME_RANGE_MONTH
                     type: string
                     format: enum
                 retailerOperatorIds:
@@ -4681,8 +4681,8 @@ components:
                     enum:
                         - TIME_RANGE_UNSPECIFIED
                         - TIME_RANGE_TODAY
-                        - TIME_RANGE_THIS_WEEK
-                        - TIME_RANGE_THIS_MONTH
+                        - TIME_RANGE_WEEK
+                        - TIME_RANGE_MONTH
                     type: string
                     format: enum
                 retailerOperatorIds:
