@@ -3069,6 +3069,10 @@ components:
         api.backoffice.service.v1.GetUserProfileResponse_Comment:
             type: object
             properties:
+                commentId:
+                    type: string
+                username:
+                    type: string
                 authorUsername:
                     type: string
                 content:
@@ -3076,14 +3080,24 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+        api.backoffice.service.v1.GetUserProfileResponse_IpInfo:
+            type: object
+            properties:
+                ip:
+                    type: string
+                count:
+                    type: integer
+                    format: int32
+                country:
+                    type: string
         api.backoffice.service.v1.GetUserProfileResponse_LoginRecord:
             type: object
             properties:
                 loginAt:
                     type: string
                     format: date-time
-                loginIp:
-                    type: string
+                ipInfo:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_IpInfo'
                 device:
                     type: string
                 method:
@@ -3096,14 +3110,18 @@ components:
                     type: string
                 mobile:
                     type: string
+                username:
+                    type: string
         api.backoffice.service.v1.GetUserProfileResponse_RegistrationRecord:
             type: object
             properties:
                 registeredAt:
                     type: string
                     format: date-time
-                registrationIp:
-                    type: string
+                ipInfos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_IpInfo'
                 device:
                     type: string
                 method:

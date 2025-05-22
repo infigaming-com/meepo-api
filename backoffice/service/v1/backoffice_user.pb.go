@@ -635,8 +635,8 @@ type GetUserProfileResponse struct {
 	state              protoimpl.MessageState                     `protogen:"open.v1"`
 	Nickname           string                                     `protobuf:"bytes,1,opt,name=nickname,proto3" json:"nickname,omitempty"`
 	UserId             int64                                      `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	VipLevel           int32                                      `protobuf:"varint,3,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	Online             bool                                       `protobuf:"varint,4,opt,name=online,proto3" json:"online,omitempty"`
+	VipLevel           int32                                      `protobuf:"varint,3,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"` // Not available for now, only return 1
+	Online             bool                                       `protobuf:"varint,4,opt,name=online,proto3" json:"online,omitempty"`                     // Not available for now, only return true
 	BanWithdraw        bool                                       `protobuf:"varint,11,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
 	BanGame            bool                                       `protobuf:"varint,12,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
 	BanLogin           bool                                       `protobuf:"varint,13,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
@@ -1921,25 +1921,85 @@ func (x *GetUserOverviewResponse_GameData) GetRtp() string {
 	return ""
 }
 
+type GetUserProfileResponse_IpInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ip            string                 `protobuf:"bytes,1,opt,name=ip,proto3" json:"ip,omitempty"`
+	Count         int32                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserProfileResponse_IpInfo) Reset() {
+	*x = GetUserProfileResponse_IpInfo{}
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserProfileResponse_IpInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserProfileResponse_IpInfo) ProtoMessage() {}
+
+func (x *GetUserProfileResponse_IpInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserProfileResponse_IpInfo.ProtoReflect.Descriptor instead.
+func (*GetUserProfileResponse_IpInfo) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5, 0}
+}
+
+func (x *GetUserProfileResponse_IpInfo) GetIp() string {
+	if x != nil {
+		return x.Ip
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse_IpInfo) GetCount() int32 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *GetUserProfileResponse_IpInfo) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
 type GetUserProfileResponse_RegistrationRecord struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	RegisteredAt   *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
-	RegistrationIp string                 `protobuf:"bytes,2,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
-	Device         string                 `protobuf:"bytes,3,opt,name=device,proto3" json:"device,omitempty"`
-	Method         string                 `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
-	Browser        string                 `protobuf:"bytes,5,opt,name=browser,proto3" json:"browser,omitempty"`
-	App            string                 `protobuf:"bytes,6,opt,name=app,proto3" json:"app,omitempty"`
-	Mobile         string                 `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Email          string                 `protobuf:"bytes,8,opt,name=email,proto3" json:"email,omitempty"`
-	Username       string                 `protobuf:"bytes,9,opt,name=username,proto3" json:"username,omitempty"`
-	Source         string                 `protobuf:"bytes,10,opt,name=source,proto3" json:"source,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	RegisteredAt  *timestamppb.Timestamp           `protobuf:"bytes,1,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	IpInfos       []*GetUserProfileResponse_IpInfo `protobuf:"bytes,2,rep,name=ip_infos,json=ipInfos,proto3" json:"ip_infos,omitempty"`
+	Device        string                           `protobuf:"bytes,3,opt,name=device,proto3" json:"device,omitempty"`
+	Method        string                           `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
+	Browser       string                           `protobuf:"bytes,5,opt,name=browser,proto3" json:"browser,omitempty"`
+	App           string                           `protobuf:"bytes,6,opt,name=app,proto3" json:"app,omitempty"` // Not available for now
+	Mobile        string                           `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Email         string                           `protobuf:"bytes,8,opt,name=email,proto3" json:"email,omitempty"`
+	Username      string                           `protobuf:"bytes,9,opt,name=username,proto3" json:"username,omitempty"`
+	Source        string                           `protobuf:"bytes,10,opt,name=source,proto3" json:"source,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetUserProfileResponse_RegistrationRecord) Reset() {
 	*x = GetUserProfileResponse_RegistrationRecord{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1951,7 +2011,7 @@ func (x *GetUserProfileResponse_RegistrationRecord) String() string {
 func (*GetUserProfileResponse_RegistrationRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_RegistrationRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1964,7 +2024,7 @@ func (x *GetUserProfileResponse_RegistrationRecord) ProtoReflect() protoreflect.
 
 // Deprecated: Use GetUserProfileResponse_RegistrationRecord.ProtoReflect.Descriptor instead.
 func (*GetUserProfileResponse_RegistrationRecord) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5, 0}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5, 1}
 }
 
 func (x *GetUserProfileResponse_RegistrationRecord) GetRegisteredAt() *timestamppb.Timestamp {
@@ -1974,11 +2034,11 @@ func (x *GetUserProfileResponse_RegistrationRecord) GetRegisteredAt() *timestamp
 	return nil
 }
 
-func (x *GetUserProfileResponse_RegistrationRecord) GetRegistrationIp() string {
+func (x *GetUserProfileResponse_RegistrationRecord) GetIpInfos() []*GetUserProfileResponse_IpInfo {
 	if x != nil {
-		return x.RegistrationIp
+		return x.IpInfos
 	}
-	return ""
+	return nil
 }
 
 func (x *GetUserProfileResponse_RegistrationRecord) GetDevice() string {
@@ -2038,22 +2098,23 @@ func (x *GetUserProfileResponse_RegistrationRecord) GetSource() string {
 }
 
 type GetUserProfileResponse_LoginRecord struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	LoginAt       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=login_at,json=loginAt,proto3" json:"login_at,omitempty"`
-	LoginIp       string                 `protobuf:"bytes,2,opt,name=login_ip,json=loginIp,proto3" json:"login_ip,omitempty"`
-	Device        string                 `protobuf:"bytes,3,opt,name=device,proto3" json:"device,omitempty"`
-	Method        string                 `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
-	Browser       string                 `protobuf:"bytes,5,opt,name=browser,proto3" json:"browser,omitempty"`
-	App           string                 `protobuf:"bytes,6,opt,name=app,proto3" json:"app,omitempty"`
-	Email         string                 `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile        string                 `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	LoginAt       *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=login_at,json=loginAt,proto3" json:"login_at,omitempty"`
+	IpInfo        *GetUserProfileResponse_IpInfo `protobuf:"bytes,2,opt,name=ip_info,json=ipInfo,proto3" json:"ip_info,omitempty"`
+	Device        string                         `protobuf:"bytes,3,opt,name=device,proto3" json:"device,omitempty"`
+	Method        string                         `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
+	Browser       string                         `protobuf:"bytes,5,opt,name=browser,proto3" json:"browser,omitempty"`
+	App           string                         `protobuf:"bytes,6,opt,name=app,proto3" json:"app,omitempty"` // Not available for now
+	Email         string                         `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile        string                         `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Username      string                         `protobuf:"bytes,9,opt,name=username,proto3" json:"username,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetUserProfileResponse_LoginRecord) Reset() {
 	*x = GetUserProfileResponse_LoginRecord{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2065,7 +2126,7 @@ func (x *GetUserProfileResponse_LoginRecord) String() string {
 func (*GetUserProfileResponse_LoginRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_LoginRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2078,7 +2139,7 @@ func (x *GetUserProfileResponse_LoginRecord) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use GetUserProfileResponse_LoginRecord.ProtoReflect.Descriptor instead.
 func (*GetUserProfileResponse_LoginRecord) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5, 1}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5, 2}
 }
 
 func (x *GetUserProfileResponse_LoginRecord) GetLoginAt() *timestamppb.Timestamp {
@@ -2088,11 +2149,11 @@ func (x *GetUserProfileResponse_LoginRecord) GetLoginAt() *timestamppb.Timestamp
 	return nil
 }
 
-func (x *GetUserProfileResponse_LoginRecord) GetLoginIp() string {
+func (x *GetUserProfileResponse_LoginRecord) GetIpInfo() *GetUserProfileResponse_IpInfo {
 	if x != nil {
-		return x.LoginIp
+		return x.IpInfo
 	}
-	return ""
+	return nil
 }
 
 func (x *GetUserProfileResponse_LoginRecord) GetDevice() string {
@@ -2137,18 +2198,27 @@ func (x *GetUserProfileResponse_LoginRecord) GetMobile() string {
 	return ""
 }
 
+func (x *GetUserProfileResponse_LoginRecord) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
 type GetUserProfileResponse_Comment struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	AuthorUsername string                 `protobuf:"bytes,1,opt,name=author_username,json=authorUsername,proto3" json:"author_username,omitempty"`
-	Content        string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CommentId      int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
+	Username       string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
+	AuthorUsername string                 `protobuf:"bytes,3,opt,name=author_username,json=authorUsername,proto3" json:"author_username,omitempty"`
+	Content        string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
 
 func (x *GetUserProfileResponse_Comment) Reset() {
 	*x = GetUserProfileResponse_Comment{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2160,7 +2230,7 @@ func (x *GetUserProfileResponse_Comment) String() string {
 func (*GetUserProfileResponse_Comment) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2173,7 +2243,21 @@ func (x *GetUserProfileResponse_Comment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserProfileResponse_Comment.ProtoReflect.Descriptor instead.
 func (*GetUserProfileResponse_Comment) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5, 2}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5, 3}
+}
+
+func (x *GetUserProfileResponse_Comment) GetCommentId() int64 {
+	if x != nil {
+		return x.CommentId
+	}
+	return 0
+}
+
+func (x *GetUserProfileResponse_Comment) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
 }
 
 func (x *GetUserProfileResponse_Comment) GetAuthorUsername() string {
@@ -2208,7 +2292,7 @@ type ListUserCommentsResponse_Comment struct {
 
 func (x *ListUserCommentsResponse_Comment) Reset() {
 	*x = ListUserCommentsResponse_Comment{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2220,7 +2304,7 @@ func (x *ListUserCommentsResponse_Comment) String() string {
 func (*ListUserCommentsResponse_Comment) ProtoMessage() {}
 
 func (x *ListUserCommentsResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2375,7 +2459,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\bturnover\x18\x03 \x01(\tR\bturnover\x12\x10\n" +
 	"\x03rtp\x18\x04 \x01(\tR\x03rtp\"0\n" +
 	"\x15GetUserProfileRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xd8\t\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xdd\v\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -2387,10 +2471,14 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x13registration_record\x18\x05 \x01(\v2D.api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecordR\x12registrationRecord\x12b\n" +
 	"\rlogin_records\x18\x06 \x03(\v2=.api.backoffice.service.v1.GetUserProfileResponse.LoginRecordR\floginRecords\x12\x12\n" +
 	"\x04tags\x18\a \x03(\tR\x04tags\x12U\n" +
-	"\bcomments\x18\b \x03(\v29.api.backoffice.service.v1.GetUserProfileResponse.CommentR\bcomments\x1a\xbc\x02\n" +
+	"\bcomments\x18\b \x03(\v29.api.backoffice.service.v1.GetUserProfileResponse.CommentR\bcomments\x1aH\n" +
+	"\x06IpInfo\x12\x0e\n" +
+	"\x02ip\x18\x01 \x01(\tR\x02ip\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x05R\x05count\x12\x18\n" +
+	"\acountry\x18\x03 \x01(\tR\acountry\x1a\xe8\x02\n" +
 	"\x12RegistrationRecord\x12?\n" +
-	"\rregistered_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12'\n" +
-	"\x0fregistration_ip\x18\x02 \x01(\tR\x0eregistrationIp\x12\x16\n" +
+	"\rregistered_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12S\n" +
+	"\bip_infos\x18\x02 \x03(\v28.api.backoffice.service.v1.GetUserProfileResponse.IpInfoR\aipInfos\x12\x16\n" +
 	"\x06device\x18\x03 \x01(\tR\x06device\x12\x16\n" +
 	"\x06method\x18\x04 \x01(\tR\x06method\x12\x18\n" +
 	"\abrowser\x18\x05 \x01(\tR\abrowser\x12\x10\n" +
@@ -2399,21 +2487,25 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x05email\x18\b \x01(\tR\x05email\x12\x1a\n" +
 	"\busername\x18\t \x01(\tR\busername\x12\x16\n" +
 	"\x06source\x18\n" +
-	" \x01(\tR\x06source\x1a\xe9\x01\n" +
+	" \x01(\tR\x06source\x1a\xbd\x02\n" +
 	"\vLoginRecord\x125\n" +
-	"\blogin_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\aloginAt\x12\x19\n" +
-	"\blogin_ip\x18\x02 \x01(\tR\aloginIp\x12\x16\n" +
+	"\blogin_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\aloginAt\x12Q\n" +
+	"\aip_info\x18\x02 \x01(\v28.api.backoffice.service.v1.GetUserProfileResponse.IpInfoR\x06ipInfo\x12\x16\n" +
 	"\x06device\x18\x03 \x01(\tR\x06device\x12\x16\n" +
 	"\x06method\x18\x04 \x01(\tR\x06method\x12\x18\n" +
 	"\abrowser\x18\x05 \x01(\tR\abrowser\x12\x10\n" +
 	"\x03app\x18\x06 \x01(\tR\x03app\x12\x14\n" +
 	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
-	"\x06mobile\x18\b \x01(\tR\x06mobile\x1a\x87\x01\n" +
-	"\aComment\x12'\n" +
-	"\x0fauthor_username\x18\x01 \x01(\tR\x0eauthorUsername\x12\x18\n" +
-	"\acontent\x18\x02 \x01(\tR\acontent\x129\n" +
+	"\x06mobile\x18\b \x01(\tR\x06mobile\x12\x1a\n" +
+	"\busername\x18\t \x01(\tR\busername\x1a\xc2\x01\n" +
+	"\aComment\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"-\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId\x12\x1a\n" +
+	"\busername\x18\x02 \x01(\tR\busername\x12'\n" +
+	"\x0fauthor_username\x18\x03 \x01(\tR\x0eauthorUsername\x12\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"-\n" +
 	"\x19AddOperatorUserTagRequest\x12\x10\n" +
 	"\x03tag\x18\x01 \x01(\tR\x03tag\"\x1c\n" +
 	"\x1aAddOperatorUserTagResponse\"0\n" +
@@ -2498,7 +2590,7 @@ func file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_user_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_backoffice_service_v1_backoffice_user_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*ListUsersRequest)(nil),                          // 0: api.backoffice.service.v1.ListUsersRequest
 	(*ListUsersResponse)(nil),                         // 1: api.backoffice.service.v1.ListUsersResponse
@@ -2528,59 +2620,62 @@ var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*UpdateUserResponse)(nil),                        // 25: api.backoffice.service.v1.UpdateUserResponse
 	(*ListUsersResponse_User)(nil),                    // 26: api.backoffice.service.v1.ListUsersResponse.User
 	(*GetUserOverviewResponse_GameData)(nil),          // 27: api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	(*GetUserProfileResponse_RegistrationRecord)(nil), // 28: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	(*GetUserProfileResponse_LoginRecord)(nil),        // 29: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	(*GetUserProfileResponse_Comment)(nil),            // 30: api.backoffice.service.v1.GetUserProfileResponse.Comment
-	(*ListUserCommentsResponse_Comment)(nil),          // 31: api.backoffice.service.v1.ListUserCommentsResponse.Comment
-	(*timestamppb.Timestamp)(nil),                     // 32: google.protobuf.Timestamp
+	(*GetUserProfileResponse_IpInfo)(nil),             // 28: api.backoffice.service.v1.GetUserProfileResponse.IpInfo
+	(*GetUserProfileResponse_RegistrationRecord)(nil), // 29: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
+	(*GetUserProfileResponse_LoginRecord)(nil),        // 30: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
+	(*GetUserProfileResponse_Comment)(nil),            // 31: api.backoffice.service.v1.GetUserProfileResponse.Comment
+	(*ListUserCommentsResponse_Comment)(nil),          // 32: api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	(*timestamppb.Timestamp)(nil),                     // 33: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
-	32, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	32, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	33, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	33, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
 	26, // 2: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
 	27, // 3: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	32, // 4: api.backoffice.service.v1.GetUserOverviewResponse.last_deposit_at:type_name -> google.protobuf.Timestamp
-	28, // 5: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	29, // 6: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	30, // 7: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
-	31, // 8: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
-	32, // 9: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	32, // 10: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	32, // 11: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	32, // 12: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	32, // 13: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	32, // 14: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 15: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
-	2,  // 16: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
-	4,  // 17: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
-	6,  // 18: api.backoffice.service.v1.BackofficeUser.AddOperatorUserTag:input_type -> api.backoffice.service.v1.AddOperatorUserTagRequest
-	8,  // 19: api.backoffice.service.v1.BackofficeUser.DeleteOperatorUserTag:input_type -> api.backoffice.service.v1.DeleteOperatorUserTagRequest
-	10, // 20: api.backoffice.service.v1.BackofficeUser.GetOperatorUserTags:input_type -> api.backoffice.service.v1.GetOperatorUserTagsRequest
-	12, // 21: api.backoffice.service.v1.BackofficeUser.AddUserTag:input_type -> api.backoffice.service.v1.AddUserTagRequest
-	14, // 22: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:input_type -> api.backoffice.service.v1.DeleteUserTagRequest
-	16, // 23: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
-	18, // 24: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
-	20, // 25: api.backoffice.service.v1.BackofficeUser.CreateUser:input_type -> api.backoffice.service.v1.CreateUserRequest
-	22, // 26: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
-	24, // 27: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
-	1,  // 28: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
-	3,  // 29: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
-	5,  // 30: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
-	7,  // 31: api.backoffice.service.v1.BackofficeUser.AddOperatorUserTag:output_type -> api.backoffice.service.v1.AddOperatorUserTagResponse
-	9,  // 32: api.backoffice.service.v1.BackofficeUser.DeleteOperatorUserTag:output_type -> api.backoffice.service.v1.DeleteOperatorUserTagResponse
-	11, // 33: api.backoffice.service.v1.BackofficeUser.GetOperatorUserTags:output_type -> api.backoffice.service.v1.GetOperatorUserTagsResponse
-	13, // 34: api.backoffice.service.v1.BackofficeUser.AddUserTag:output_type -> api.backoffice.service.v1.AddUserTagResponse
-	15, // 35: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:output_type -> api.backoffice.service.v1.DeleteUserTagResponse
-	17, // 36: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
-	19, // 37: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
-	21, // 38: api.backoffice.service.v1.BackofficeUser.CreateUser:output_type -> api.backoffice.service.v1.CreateUserResponse
-	23, // 39: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
-	25, // 40: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
-	28, // [28:41] is the sub-list for method output_type
-	15, // [15:28] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	33, // 4: api.backoffice.service.v1.GetUserOverviewResponse.last_deposit_at:type_name -> google.protobuf.Timestamp
+	29, // 5: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
+	30, // 6: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
+	31, // 7: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
+	32, // 8: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	33, // 9: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	33, // 10: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	33, // 11: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
+	28, // 12: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.ip_infos:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
+	33, // 13: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
+	28, // 14: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
+	33, // 15: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	33, // 16: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 17: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
+	2,  // 18: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
+	4,  // 19: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
+	6,  // 20: api.backoffice.service.v1.BackofficeUser.AddOperatorUserTag:input_type -> api.backoffice.service.v1.AddOperatorUserTagRequest
+	8,  // 21: api.backoffice.service.v1.BackofficeUser.DeleteOperatorUserTag:input_type -> api.backoffice.service.v1.DeleteOperatorUserTagRequest
+	10, // 22: api.backoffice.service.v1.BackofficeUser.GetOperatorUserTags:input_type -> api.backoffice.service.v1.GetOperatorUserTagsRequest
+	12, // 23: api.backoffice.service.v1.BackofficeUser.AddUserTag:input_type -> api.backoffice.service.v1.AddUserTagRequest
+	14, // 24: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:input_type -> api.backoffice.service.v1.DeleteUserTagRequest
+	16, // 25: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
+	18, // 26: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
+	20, // 27: api.backoffice.service.v1.BackofficeUser.CreateUser:input_type -> api.backoffice.service.v1.CreateUserRequest
+	22, // 28: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
+	24, // 29: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
+	1,  // 30: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
+	3,  // 31: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
+	5,  // 32: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
+	7,  // 33: api.backoffice.service.v1.BackofficeUser.AddOperatorUserTag:output_type -> api.backoffice.service.v1.AddOperatorUserTagResponse
+	9,  // 34: api.backoffice.service.v1.BackofficeUser.DeleteOperatorUserTag:output_type -> api.backoffice.service.v1.DeleteOperatorUserTagResponse
+	11, // 35: api.backoffice.service.v1.BackofficeUser.GetOperatorUserTags:output_type -> api.backoffice.service.v1.GetOperatorUserTagsResponse
+	13, // 36: api.backoffice.service.v1.BackofficeUser.AddUserTag:output_type -> api.backoffice.service.v1.AddUserTagResponse
+	15, // 37: api.backoffice.service.v1.BackofficeUser.DeleteUserTag:output_type -> api.backoffice.service.v1.DeleteUserTagResponse
+	17, // 38: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
+	19, // 39: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
+	21, // 40: api.backoffice.service.v1.BackofficeUser.CreateUser:output_type -> api.backoffice.service.v1.CreateUserResponse
+	23, // 41: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
+	25, // 42: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
+	30, // [30:43] is the sub-list for method output_type
+	17, // [17:30] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_user_proto_init() }
@@ -2596,7 +2691,7 @@ func file_backoffice_service_v1_backoffice_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_user_proto_rawDesc), len(file_backoffice_service_v1_backoffice_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   32,
+			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
