@@ -28,6 +28,7 @@ const (
 	ErrorReason_UNSPECIFIED           ErrorReason = 0
 	ErrorReason_GAME_BET_NOT_FOUND    ErrorReason = 40001
 	ErrorReason_GAME_ACTION_NOT_FOUND ErrorReason = 40002
+	ErrorReason_GET_RATES_FAILED      ErrorReason = 40003
 )
 
 // Enum value maps for ErrorReason.
@@ -36,11 +37,13 @@ var (
 		0:     "UNSPECIFIED",
 		40001: "GAME_BET_NOT_FOUND",
 		40002: "GAME_ACTION_NOT_FOUND",
+		40003: "GET_RATES_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":           0,
 		"GAME_BET_NOT_FOUND":    40001,
 		"GAME_ACTION_NOT_FOUND": 40002,
+		"GET_RATES_FAILED":      40003,
 	}
 )
 
@@ -75,11 +78,12 @@ var File_game_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_game_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*g\n" +
+	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\x85\x01\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x1e\n" +
 	"\x12GAME_BET_NOT_FOUND\x10\xc1\xb8\x02\x1a\x04\xa8E\x94\x03\x12!\n" +
-	"\x15GAME_ACTION_NOT_FOUND\x10¸\x02\x1a\x04\xa8E\x91\x03\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x15GAME_ACTION_NOT_FOUND\x10¸\x02\x1a\x04\xa8E\x91\x03\x12\x1c\n" +
+	"\x10GET_RATES_FAILED\x10ø\x02\x1a\x04\xa8E\x91\x03\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.game.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (
