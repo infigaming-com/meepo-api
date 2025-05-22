@@ -5931,6 +5931,9 @@ components:
                 currency:
                     type: string
                     description: Currency code for the transaction
+                fee:
+                    type: string
+                    description: Transaction fee in smallest currency unit
                 paymentMethod:
                     type: string
                     description: Payment method used for the transaction
