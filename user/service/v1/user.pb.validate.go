@@ -5800,6 +5800,14 @@ func (m *GetUserProfileRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	if m.LoginPage != nil {
+		// no validation rules for LoginPage
+	}
+
+	if m.LoginPageSize != nil {
+		// no validation rules for LoginPageSize
+	}
+
 	if len(errors) > 0 {
 		return GetUserProfileRequestMultiError(errors)
 	}
