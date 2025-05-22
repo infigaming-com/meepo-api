@@ -4095,16 +4095,18 @@ type GetBetByIdResponse_Action struct {
 	GameName                      string                 `protobuf:"bytes,25,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
 	GameCategory                  string                 `protobuf:"bytes,26,opt,name=game_category,json=gameCategory,proto3" json:"game_category,omitempty"`
 	JackpotContribution           float64                `protobuf:"fixed64,27,opt,name=jackpot_contribution,json=jackpotContribution,proto3" json:"jackpot_contribution,omitempty"`
-	JackpotWin                    int64                  `protobuf:"varint,28,opt,name=jackpot_win,json=jackpotWin,proto3" json:"jackpot_win,omitempty"`
-	BetTime                       int64                  `protobuf:"varint,29,opt,name=bet_time,json=betTime,proto3" json:"bet_time,omitempty"`
-	SettleTime                    int64                  `protobuf:"varint,30,opt,name=settle_time,json=settleTime,proto3" json:"settle_time,omitempty"`
-	ProviderTimestamp             int64                  `protobuf:"varint,31,opt,name=provider_timestamp,json=providerTimestamp,proto3" json:"provider_timestamp,omitempty"`
-	BonusAmount                   int64                  `protobuf:"varint,32,opt,name=bonus_amount,json=bonusAmount,proto3" json:"bonus_amount,omitempty"`
-	BonusAmountUsd                int64                  `protobuf:"varint,33,opt,name=bonus_amount_usd,json=bonusAmountUsd,proto3" json:"bonus_amount_usd,omitempty"`
-	OperatorTimestamp             int64                  `protobuf:"varint,34,opt,name=operator_timestamp,json=operatorTimestamp,proto3" json:"operator_timestamp,omitempty"`
-	ProcessedAt                   int64                  `protobuf:"varint,35,opt,name=processed_at,json=processedAt,proto3" json:"processed_at,omitempty"`
-	CreatedAt                     int64                  `protobuf:"varint,36,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt                     int64                  `protobuf:"varint,37,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	JackpotContributionUsd        float64                `protobuf:"fixed64,28,opt,name=jackpot_contribution_usd,json=jackpotContributionUsd,proto3" json:"jackpot_contribution_usd,omitempty"`
+	JackpotWin                    int64                  `protobuf:"varint,29,opt,name=jackpot_win,json=jackpotWin,proto3" json:"jackpot_win,omitempty"`
+	JackpotWinUsd                 int64                  `protobuf:"varint,30,opt,name=jackpot_win_usd,json=jackpotWinUsd,proto3" json:"jackpot_win_usd,omitempty"`
+	BetTime                       int64                  `protobuf:"varint,31,opt,name=bet_time,json=betTime,proto3" json:"bet_time,omitempty"`
+	SettleTime                    int64                  `protobuf:"varint,32,opt,name=settle_time,json=settleTime,proto3" json:"settle_time,omitempty"`
+	ProviderTimestamp             int64                  `protobuf:"varint,33,opt,name=provider_timestamp,json=providerTimestamp,proto3" json:"provider_timestamp,omitempty"`
+	BonusAmount                   int64                  `protobuf:"varint,34,opt,name=bonus_amount,json=bonusAmount,proto3" json:"bonus_amount,omitempty"`
+	BonusAmountUsd                int64                  `protobuf:"varint,35,opt,name=bonus_amount_usd,json=bonusAmountUsd,proto3" json:"bonus_amount_usd,omitempty"`
+	OperatorTimestamp             int64                  `protobuf:"varint,36,opt,name=operator_timestamp,json=operatorTimestamp,proto3" json:"operator_timestamp,omitempty"`
+	ProcessedAt                   int64                  `protobuf:"varint,37,opt,name=processed_at,json=processedAt,proto3" json:"processed_at,omitempty"`
+	CreatedAt                     int64                  `protobuf:"varint,38,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                     int64                  `protobuf:"varint,39,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields                 protoimpl.UnknownFields
 	sizeCache                     protoimpl.SizeCache
 }
@@ -4328,9 +4330,23 @@ func (x *GetBetByIdResponse_Action) GetJackpotContribution() float64 {
 	return 0
 }
 
+func (x *GetBetByIdResponse_Action) GetJackpotContributionUsd() float64 {
+	if x != nil {
+		return x.JackpotContributionUsd
+	}
+	return 0
+}
+
 func (x *GetBetByIdResponse_Action) GetJackpotWin() int64 {
 	if x != nil {
 		return x.JackpotWin
+	}
+	return 0
+}
+
+func (x *GetBetByIdResponse_Action) GetJackpotWinUsd() int64 {
+	if x != nil {
+		return x.JackpotWinUsd
 	}
 	return 0
 }
@@ -5104,10 +5120,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x11GetBetByIdRequest\x12\x15\n" +
 	"\x06bet_id\x18\x01 \x01(\x03R\x05betId\x12,\n" +
 	"\x0finclude_actions\x18\x02 \x01(\bH\x00R\x0eincludeActions\x88\x01\x01B\x12\n" +
-	"\x10_include_actions\"\x86\x15\n" +
+	"\x10_include_actions\"\xe8\x15\n" +
 	"\x12GetBetByIdResponse\x12=\n" +
-	"\x03bet\x18\x01 \x01(\v2+.api.game.service.v1.GetBetByIdResponse.BetR\x03bet\x1a\xaa\n" +
-	"\n" +
+	"\x03bet\x18\x01 \x01(\v2+.api.game.service.v1.GetBetByIdResponse.BetR\x03bet\x1a\x8c\v\n" +
 	"\x06Action\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bround_id\x18\x02 \x01(\x03R\aroundId\x12\x16\n" +
@@ -5139,21 +5154,23 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\agame_id\x18\x18 \x01(\tR\x06gameId\x12\x1b\n" +
 	"\tgame_name\x18\x19 \x01(\tR\bgameName\x12#\n" +
 	"\rgame_category\x18\x1a \x01(\tR\fgameCategory\x121\n" +
-	"\x14jackpot_contribution\x18\x1b \x01(\x01R\x13jackpotContribution\x12\x1f\n" +
-	"\vjackpot_win\x18\x1c \x01(\x03R\n" +
-	"jackpotWin\x12\x19\n" +
-	"\bbet_time\x18\x1d \x01(\x03R\abetTime\x12\x1f\n" +
-	"\vsettle_time\x18\x1e \x01(\x03R\n" +
+	"\x14jackpot_contribution\x18\x1b \x01(\x01R\x13jackpotContribution\x128\n" +
+	"\x18jackpot_contribution_usd\x18\x1c \x01(\x01R\x16jackpotContributionUsd\x12\x1f\n" +
+	"\vjackpot_win\x18\x1d \x01(\x03R\n" +
+	"jackpotWin\x12&\n" +
+	"\x0fjackpot_win_usd\x18\x1e \x01(\x03R\rjackpotWinUsd\x12\x19\n" +
+	"\bbet_time\x18\x1f \x01(\x03R\abetTime\x12\x1f\n" +
+	"\vsettle_time\x18  \x01(\x03R\n" +
 	"settleTime\x12-\n" +
-	"\x12provider_timestamp\x18\x1f \x01(\x03R\x11providerTimestamp\x12!\n" +
-	"\fbonus_amount\x18  \x01(\x03R\vbonusAmount\x12(\n" +
-	"\x10bonus_amount_usd\x18! \x01(\x03R\x0ebonusAmountUsd\x12-\n" +
-	"\x12operator_timestamp\x18\" \x01(\x03R\x11operatorTimestamp\x12!\n" +
-	"\fprocessed_at\x18# \x01(\x03R\vprocessedAt\x12\x1d\n" +
+	"\x12provider_timestamp\x18! \x01(\x03R\x11providerTimestamp\x12!\n" +
+	"\fbonus_amount\x18\" \x01(\x03R\vbonusAmount\x12(\n" +
+	"\x10bonus_amount_usd\x18# \x01(\x03R\x0ebonusAmountUsd\x12-\n" +
+	"\x12operator_timestamp\x18$ \x01(\x03R\x11operatorTimestamp\x12!\n" +
+	"\fprocessed_at\x18% \x01(\x03R\vprocessedAt\x12\x1d\n" +
 	"\n" +
-	"created_at\x18$ \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18& \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18% \x01(\x03R\tupdatedAt\x1a\x83\n" +
+	"updated_at\x18' \x01(\x03R\tupdatedAt\x1a\x83\n" +
 	"\n" +
 	"\x03Bet\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12&\n" +

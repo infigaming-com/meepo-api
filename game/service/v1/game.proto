@@ -559,16 +559,18 @@ message GetBetByIdResponse {
 		string game_name = 25;
 		string game_category = 26;
 		double jackpot_contribution = 27;
-		int64 jackpot_win = 28;
-		int64 bet_time = 29;
-		int64 settle_time = 30;
-		int64 provider_timestamp = 31;
-		int64 bonus_amount = 32;
-		int64 bonus_amount_usd = 33;
-		int64 operator_timestamp = 34;
-		int64 processed_at = 35;
-		int64 created_at = 36;
-		int64 updated_at = 37;
+		double jackpot_contribution_usd = 28;
+		int64 jackpot_win = 29;
+		int64 jackpot_win_usd = 30;
+		int64 bet_time = 31;
+		int64 settle_time = 32;
+		int64 provider_timestamp = 33;
+		int64 bonus_amount = 34;
+		int64 bonus_amount_usd = 35;
+		int64 operator_timestamp = 36;
+		int64 processed_at = 37;
+		int64 created_at = 38;
+		int64 updated_at = 39;
 	}
 	message Bet {
 		int64 id = 1;
