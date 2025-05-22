@@ -6021,6 +6021,12 @@ func (m *GetUserProfileResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for TotalLoginCount
+
+	// no validation rules for LoginPage
+
+	// no validation rules for LoginPageSize
+
 	if len(errors) > 0 {
 		return GetUserProfileResponseMultiError(errors)
 	}

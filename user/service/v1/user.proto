@@ -634,11 +634,14 @@ message GetUserProfileResponse {
 	int64 user_id = 2;
 	int32 vip_level = 3; // Not available for now, only return 1
 	bool online = 4; // Not available for now, only return true
-	bool ban_withdraw = 11;
-	bool ban_game = 12;
-	bool ban_login = 13;
-	RegistrationRecord registration_record = 5;
-	repeated LoginRecord login_records = 6;
-	repeated string tags = 7;
-	repeated Comment comments = 8;
+	bool ban_withdraw = 5;
+	bool ban_game = 6;
+	bool ban_login = 7;
+	RegistrationRecord registration_record = 8;
+	repeated LoginRecord login_records = 9;
+	repeated string tags = 10;
+	repeated Comment comments = 11;
+	int32 total_login_count = 12;
+	int32 login_page = 13;
+	int32 login_page_size = 14;
 }
