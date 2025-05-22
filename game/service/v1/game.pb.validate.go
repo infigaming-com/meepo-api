@@ -6957,7 +6957,11 @@ func (m *GetBetByIdResponse_Action) validate(all bool) error {
 
 	// no validation rules for JackpotContribution
 
+	// no validation rules for JackpotContributionUsd
+
 	// no validation rules for JackpotWin
+
+	// no validation rules for JackpotWinUsd
 
 	// no validation rules for BetTime
 
