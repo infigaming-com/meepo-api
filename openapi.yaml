@@ -665,16 +665,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListDailySummariesResponse'
-    /v1/backoffice/report/deposit-daily-details/list:
+    /v1/backoffice/report/deposit-details/list:
         post:
             tags:
                 - BackofficeReport
-            operationId: BackofficeReport_ListDepositDailyDetails
+            operationId: BackofficeReport_ListDepositDetails
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDailyDetailsRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsRequest'
                 required: true
             responses:
                 "200":
@@ -682,17 +682,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDailyDetailsResponse'
-    /v1/backoffice/report/deposit-daily-summaries/list:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsResponse'
+    /v1/backoffice/report/deposit-summaries/get:
         post:
             tags:
                 - BackofficeReport
-            operationId: BackofficeReport_ListDepositDailySummaries
+            operationId: BackofficeReport_GetDepositSummaries
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDailySummariesRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesRequest'
                 required: true
             responses:
                 "200":
@@ -700,7 +700,25 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDailySummariesResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesResponse'
+    /v1/backoffice/report/deposit-vtg-details/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListDepositVtgDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse'
     /v1/backoffice/report/game-data-daily-summaries/list:
         post:
             tags:
@@ -773,16 +791,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetSummaryResponse'
-    /v1/backoffice/report/withdraw-daily-details/list:
+    /v1/backoffice/report/withdraw-details/list:
         post:
             tags:
                 - BackofficeReport
-            operationId: BackofficeReport_ListWithdrawDailyDetails
+            operationId: BackofficeReport_ListWithdrawDetails
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDailyDetailsRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsRequest'
                 required: true
             responses:
                 "200":
@@ -790,17 +808,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDailyDetailsResponse'
-    /v1/backoffice/report/withdraw-daily-summaries/list:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsResponse'
+    /v1/backoffice/report/withdraw-summaries/get:
         post:
             tags:
                 - BackofficeReport
-            operationId: BackofficeReport_ListWithdrawDailySummaries
+            operationId: BackofficeReport_GetWithdrawSummaries
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDailySummariesRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesRequest'
                 required: true
             responses:
                 "200":
@@ -808,7 +826,25 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDailySummariesResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesResponse'
+    /v1/backoffice/report/withdraw-vtg-details/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListWithdrawVtgDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse'
     /v1/backoffice/review/tickets/cancel:
         post:
             tags:
@@ -2306,6 +2342,59 @@ components:
         api.backoffice.service.v1.Generate2faResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.GetDepositSummariesRequest:
+            type: object
+            properties:
+                timeRange:
+                    enum:
+                        - TIME_RANGE_UNSPECIFIED
+                        - TIME_RANGE_TODAY
+                        - TIME_RANGE_THIS_WEEK
+                        - TIME_RANGE_THIS_MONTH
+                    type: string
+                    format: enum
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                groupOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+        api.backoffice.service.v1.GetDepositSummariesResponse:
+            type: object
+            properties:
+                dailySummaries:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesResponse_DailySummary'
+        api.backoffice.service.v1.GetDepositSummariesResponse_DailySummary:
+            type: object
+            properties:
+                date:
+                    type: string
+                    format: date-time
+                currency:
+                    type: string
+                depositSuccessPercentage:
+                    type: integer
+                    format: int32
+                depositAmount:
+                    type: string
         api.backoffice.service.v1.GetGameDataSummaryRequest:
             type: object
             properties:
@@ -3277,6 +3366,59 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse_Credit'
+        api.backoffice.service.v1.GetWithdrawSummariesRequest:
+            type: object
+            properties:
+                timeRange:
+                    enum:
+                        - TIME_RANGE_UNSPECIFIED
+                        - TIME_RANGE_TODAY
+                        - TIME_RANGE_THIS_WEEK
+                        - TIME_RANGE_THIS_MONTH
+                    type: string
+                    format: enum
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                groupOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+        api.backoffice.service.v1.GetWithdrawSummariesResponse:
+            type: object
+            properties:
+                dailySummaries:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesResponse_DailySummary'
+        api.backoffice.service.v1.GetWithdrawSummariesResponse_DailySummary:
+            type: object
+            properties:
+                date:
+                    type: string
+                    format: date-time
+                currency:
+                    type: string
+                withdrawSuccessPercentage:
+                    type: integer
+                    format: int32
+                withdrawAmount:
+                    type: string
         api.backoffice.service.v1.ListBetsRequest:
             type: object
             properties:
@@ -3516,7 +3658,7 @@ components:
                 houseEdgePercentage:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListDepositDailyDetailsRequest:
+        api.backoffice.service.v1.ListDepositDetailsRequest:
             type: object
             properties:
                 timeRange:
@@ -3550,23 +3692,28 @@ components:
                     type: string
                     format: date-time
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
-        api.backoffice.service.v1.ListDepositDailyDetailsResponse:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListDepositDetailsResponse:
             type: object
             properties:
                 dailyDetails:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDailyDetailsResponse_DailyDetail'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsResponse_DailyDetail'
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
                 total:
-                    type: string
-        api.backoffice.service.v1.ListDepositDailyDetailsResponse_DailyDetail:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListDepositDetailsResponse_DailyDetail:
             type: object
             properties:
                 date:
@@ -3579,7 +3726,8 @@ components:
                 depositAmount:
                     type: string
                 depositUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 ftdAmount:
                     type: string
                 ftdUsers:
@@ -3587,7 +3735,8 @@ components:
                 sameDayFtdAmount:
                     type: string
                 sameDayFtdUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 repeatedDepositAmount:
                     type: string
                 repeatedDepositUsers:
@@ -3597,16 +3746,18 @@ components:
                 nonSameDayFtd:
                     type: string
                 averageFtdAmountForSameDayRegistredUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 averageFtdAmountForNonSameDayRegistredUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 successPercentage:
                     type: integer
                     format: int32
                 amountProportionPercentage:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListDepositDailySummariesRequest:
+        api.backoffice.service.v1.ListDepositVtgDetailsRequest:
             type: object
             properties:
                 timeRange:
@@ -3639,26 +3790,72 @@ components:
                 endTime:
                     type: string
                     format: date-time
-        api.backoffice.service.v1.ListDepositDailySummariesResponse:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListDepositVtgDetailsResponse:
             type: object
             properties:
-                dailySummaries:
+                dailyDetails:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDailySummariesResponse_DailySummary'
-        api.backoffice.service.v1.ListDepositDailySummariesResponse_DailySummary:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse_DailyDetail'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListDepositVtgDetailsResponse_DailyDetail:
             type: object
             properties:
                 date:
                     type: string
                     format: date-time
+                operator:
+                    type: string
                 currency:
                     type: string
-                depositSuccessPercentage:
-                    type: integer
-                    format: int32
                 depositAmount:
                     type: string
+                depositUsers:
+                    type: integer
+                    format: int32
+                ftdAmount:
+                    type: string
+                ftdUsers:
+                    type: string
+                sameDayFtdAmount:
+                    type: string
+                sameDayFtdUsers:
+                    type: integer
+                    format: int32
+                repeatedDepositAmount:
+                    type: string
+                repeatedDepositUsers:
+                    type: string
+                sameDayFtd:
+                    type: string
+                nonSameDayFtd:
+                    type: string
+                averageFtdAmountForSameDayRegistredUsers:
+                    type: integer
+                    format: int32
+                averageFtdAmountForNonSameDayRegistredUsers:
+                    type: integer
+                    format: int32
+                successPercentage:
+                    type: integer
+                    format: int32
+                amountProportionPercentage:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListFeeGroupsRequest:
             type: object
             properties: {}
@@ -4374,7 +4571,7 @@ components:
                     type: string
                 currency:
                     type: string
-        api.backoffice.service.v1.ListWithdrawDailyDetailsRequest:
+        api.backoffice.service.v1.ListWithdrawDetailsRequest:
             type: object
             properties:
                 timeRange:
@@ -4408,23 +4605,28 @@ components:
                     type: string
                     format: date-time
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
-        api.backoffice.service.v1.ListWithdrawDailyDetailsResponse:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListWithdrawDetailsResponse:
             type: object
             properties:
                 dailyDetails:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDailyDetailsResponse_DailyDetail'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsResponse_DailyDetail'
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
                 total:
-                    type: string
-        api.backoffice.service.v1.ListWithdrawDailyDetailsResponse_DailyDetail:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListWithdrawDetailsResponse_DailyDetail:
             type: object
             properties:
                 date:
@@ -4437,27 +4639,33 @@ components:
                 withdrawAmount:
                     type: string
                 withdrawUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 ftwAmount:
                     type: string
                 ftwUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 sameDayFtwAmount:
                     type: string
                 sameDayFtwUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 repeatedWithdrawAmount:
                     type: string
                 repeatedWithdrawUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 sameDayFtw:
                     type: string
                 nonSameDayFtw:
                     type: string
                 averageFtwAmountForSameDayRegistredUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 averageFtwAmountForNonSameDayRegistredUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 successPercentage:
                     type: integer
                     format: int32
@@ -4466,7 +4674,7 @@ components:
                 amountProportionPercentage:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListWithdrawDailySummariesRequest:
+        api.backoffice.service.v1.ListWithdrawVtgDetailsRequest:
             type: object
             properties:
                 timeRange:
@@ -4499,26 +4707,41 @@ components:
                 endTime:
                     type: string
                     format: date-time
-        api.backoffice.service.v1.ListWithdrawDailySummariesResponse:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListWithdrawVtgDetailsResponse:
             type: object
             properties:
-                dailySummaries:
+                dailyDetails:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDailySummariesResponse_DailySummary'
-        api.backoffice.service.v1.ListWithdrawDailySummariesResponse_DailySummary:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse_DailyDetail'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListWithdrawVtgDetailsResponse_DailyDetail:
             type: object
             properties:
                 date:
                     type: string
                     format: date-time
+                operator:
+                    type: string
                 currency:
                     type: string
-                withdrawSuccessPercentage:
-                    type: integer
-                    format: int32
                 withdrawAmount:
                     type: string
+<<<<<<< Updated upstream
         api.backoffice.service.v1.LoginRequest:
             type: object
             properties:
@@ -4531,6 +4754,44 @@ components:
             properties:
                 token:
                     type: string
+=======
+                withdrawUsers:
+                    type: integer
+                    format: int32
+                ftwAmount:
+                    type: string
+                ftwUsers:
+                    type: integer
+                    format: int32
+                sameDayFtwAmount:
+                    type: string
+                sameDayFtwUsers:
+                    type: integer
+                    format: int32
+                repeatedWithdrawAmount:
+                    type: string
+                repeatedWithdrawUsers:
+                    type: integer
+                    format: int32
+                sameDayFtw:
+                    type: string
+                nonSameDayFtw:
+                    type: string
+                averageFtwAmountForSameDayRegistredUsers:
+                    type: integer
+                    format: int32
+                averageFtwAmountForNonSameDayRegistredUsers:
+                    type: integer
+                    format: int32
+                successPercentage:
+                    type: integer
+                    format: int32
+                depositMinusWithdrawAmount:
+                    type: string
+                amountProportionPercentage:
+                    type: integer
+                    format: int32
+>>>>>>> Stashed changes
         api.backoffice.service.v1.PaymentData_Data:
             type: object
             properties:
