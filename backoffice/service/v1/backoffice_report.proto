@@ -442,8 +442,8 @@ message ListDepositVtgDetailsResponse {
 		int32 repeated_deposit_users = 11;
 		string same_day_ftd = 12;
 		string non_same_day_ftd = 13;
-		int32 average_ftd_amount_for_same_day_registred_users = 14;
-		int32 average_ftd_amount_for_non_same_day_registred_users = 15;
+		string average_ftd_amount_for_same_day_registred_users = 14;
+		string average_ftd_amount_for_non_same_day_registred_users = 15;
 		int32 success_percentage = 16;
 		int32 amount_proportion_percentage = 17;
 	}
@@ -480,10 +480,10 @@ message ListWithdrawVtgDetailsResponse {
 		int32 repeated_withdraw_users = 11;
 		int64 same_day_ftw = 12;
 		int64 non_same_day_ftw = 13;
-		int32 average_ftw_amount_for_same_day_registred_users = 14;
-		int32 average_ftw_amount_for_non_same_day_registred_users = 15;
+		string average_ftw_amount_for_same_day_registred_users = 14;
+		string average_ftw_amount_for_non_same_day_registred_users = 15;
 		int32 success_percentage = 16;
-		int64 deposit_minus_withdraw_amount = 17;
+		string deposit_minus_withdraw_amount = 17;
 		int32 amount_proportion_percentage = 18;
 	}
 	repeated DailyDetail daily_details = 1;

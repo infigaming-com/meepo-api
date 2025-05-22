@@ -3454,8 +3454,8 @@ type ListDepositVtgDetailsResponse_DailyDetail struct {
 	RepeatedDepositUsers                        int32                  `protobuf:"varint,11,opt,name=repeated_deposit_users,json=repeatedDepositUsers,proto3" json:"repeated_deposit_users,omitempty"`
 	SameDayFtd                                  string                 `protobuf:"bytes,12,opt,name=same_day_ftd,json=sameDayFtd,proto3" json:"same_day_ftd,omitempty"`
 	NonSameDayFtd                               string                 `protobuf:"bytes,13,opt,name=non_same_day_ftd,json=nonSameDayFtd,proto3" json:"non_same_day_ftd,omitempty"`
-	AverageFtdAmountForSameDayRegistredUsers    int32                  `protobuf:"varint,14,opt,name=average_ftd_amount_for_same_day_registred_users,json=averageFtdAmountForSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_same_day_registred_users,omitempty"`
-	AverageFtdAmountForNonSameDayRegistredUsers int32                  `protobuf:"varint,15,opt,name=average_ftd_amount_for_non_same_day_registred_users,json=averageFtdAmountForNonSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_non_same_day_registred_users,omitempty"`
+	AverageFtdAmountForSameDayRegistredUsers    string                 `protobuf:"bytes,14,opt,name=average_ftd_amount_for_same_day_registred_users,json=averageFtdAmountForSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_same_day_registred_users,omitempty"`
+	AverageFtdAmountForNonSameDayRegistredUsers string                 `protobuf:"bytes,15,opt,name=average_ftd_amount_for_non_same_day_registred_users,json=averageFtdAmountForNonSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_non_same_day_registred_users,omitempty"`
 	SuccessPercentage                           int32                  `protobuf:"varint,16,opt,name=success_percentage,json=successPercentage,proto3" json:"success_percentage,omitempty"`
 	AmountProportionPercentage                  int32                  `protobuf:"varint,17,opt,name=amount_proportion_percentage,json=amountProportionPercentage,proto3" json:"amount_proportion_percentage,omitempty"`
 	unknownFields                               protoimpl.UnknownFields
@@ -3583,18 +3583,18 @@ func (x *ListDepositVtgDetailsResponse_DailyDetail) GetNonSameDayFtd() string {
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetAverageFtdAmountForSameDayRegistredUsers() int32 {
+func (x *ListDepositVtgDetailsResponse_DailyDetail) GetAverageFtdAmountForSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtdAmountForSameDayRegistredUsers
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetAverageFtdAmountForNonSameDayRegistredUsers() int32 {
+func (x *ListDepositVtgDetailsResponse_DailyDetail) GetAverageFtdAmountForNonSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtdAmountForNonSameDayRegistredUsers
 	}
-	return 0
+	return ""
 }
 
 func (x *ListDepositVtgDetailsResponse_DailyDetail) GetSuccessPercentage() int32 {
@@ -3626,10 +3626,10 @@ type ListWithdrawVtgDetailsResponse_DailyDetail struct {
 	RepeatedWithdrawUsers                       int32                  `protobuf:"varint,11,opt,name=repeated_withdraw_users,json=repeatedWithdrawUsers,proto3" json:"repeated_withdraw_users,omitempty"`
 	SameDayFtw                                  int64                  `protobuf:"varint,12,opt,name=same_day_ftw,json=sameDayFtw,proto3" json:"same_day_ftw,omitempty"`
 	NonSameDayFtw                               int64                  `protobuf:"varint,13,opt,name=non_same_day_ftw,json=nonSameDayFtw,proto3" json:"non_same_day_ftw,omitempty"`
-	AverageFtwAmountForSameDayRegistredUsers    int32                  `protobuf:"varint,14,opt,name=average_ftw_amount_for_same_day_registred_users,json=averageFtwAmountForSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_same_day_registred_users,omitempty"`
-	AverageFtwAmountForNonSameDayRegistredUsers int32                  `protobuf:"varint,15,opt,name=average_ftw_amount_for_non_same_day_registred_users,json=averageFtwAmountForNonSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_non_same_day_registred_users,omitempty"`
+	AverageFtwAmountForSameDayRegistredUsers    string                 `protobuf:"bytes,14,opt,name=average_ftw_amount_for_same_day_registred_users,json=averageFtwAmountForSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_same_day_registred_users,omitempty"`
+	AverageFtwAmountForNonSameDayRegistredUsers string                 `protobuf:"bytes,15,opt,name=average_ftw_amount_for_non_same_day_registred_users,json=averageFtwAmountForNonSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_non_same_day_registred_users,omitempty"`
 	SuccessPercentage                           int32                  `protobuf:"varint,16,opt,name=success_percentage,json=successPercentage,proto3" json:"success_percentage,omitempty"`
-	DepositMinusWithdrawAmount                  int64                  `protobuf:"varint,17,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
+	DepositMinusWithdrawAmount                  string                 `protobuf:"bytes,17,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
 	AmountProportionPercentage                  int32                  `protobuf:"varint,18,opt,name=amount_proportion_percentage,json=amountProportionPercentage,proto3" json:"amount_proportion_percentage,omitempty"`
 	unknownFields                               protoimpl.UnknownFields
 	sizeCache                                   protoimpl.SizeCache
@@ -3756,18 +3756,18 @@ func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetNonSameDayFtw() int64 {
 	return 0
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetAverageFtwAmountForSameDayRegistredUsers() int32 {
+func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetAverageFtwAmountForSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtwAmountForSameDayRegistredUsers
 	}
-	return 0
+	return ""
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetAverageFtwAmountForNonSameDayRegistredUsers() int32 {
+func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetAverageFtwAmountForNonSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtwAmountForNonSameDayRegistredUsers
 	}
-	return 0
+	return ""
 }
 
 func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetSuccessPercentage() int32 {
@@ -3777,11 +3777,11 @@ func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetSuccessPercentage() int3
 	return 0
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetDepositMinusWithdrawAmount() int64 {
+func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetDepositMinusWithdrawAmount() string {
 	if x != nil {
 		return x.DepositMinusWithdrawAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetAmountProportionPercentage() int32 {
@@ -4209,8 +4209,8 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\fsame_day_ftd\x18\f \x01(\tR\n" +
 	"sameDayFtd\x12'\n" +
 	"\x10non_same_day_ftd\x18\r \x01(\tR\rnonSameDayFtd\x12a\n" +
-	"/average_ftd_amount_for_same_day_registred_users\x18\x0e \x01(\x05R(averageFtdAmountForSameDayRegistredUsers\x12h\n" +
-	"3average_ftd_amount_for_non_same_day_registred_users\x18\x0f \x01(\x05R+averageFtdAmountForNonSameDayRegistredUsers\x12-\n" +
+	"/average_ftd_amount_for_same_day_registred_users\x18\x0e \x01(\tR(averageFtdAmountForSameDayRegistredUsers\x12h\n" +
+	"3average_ftd_amount_for_non_same_day_registred_users\x18\x0f \x01(\tR+averageFtdAmountForNonSameDayRegistredUsers\x12-\n" +
 	"\x12success_percentage\x18\x10 \x01(\x05R\x11successPercentage\x12@\n" +
 	"\x1camount_proportion_percentage\x18\x11 \x01(\x05R\x1aamountProportionPercentage\"\xf4\x03\n" +
 	"\x1dListWithdrawVtgDetailsRequest\x12D\n" +
@@ -4254,10 +4254,10 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\fsame_day_ftw\x18\f \x01(\x03R\n" +
 	"sameDayFtw\x12'\n" +
 	"\x10non_same_day_ftw\x18\r \x01(\x03R\rnonSameDayFtw\x12a\n" +
-	"/average_ftw_amount_for_same_day_registred_users\x18\x0e \x01(\x05R(averageFtwAmountForSameDayRegistredUsers\x12h\n" +
-	"3average_ftw_amount_for_non_same_day_registred_users\x18\x0f \x01(\x05R+averageFtwAmountForNonSameDayRegistredUsers\x12-\n" +
+	"/average_ftw_amount_for_same_day_registred_users\x18\x0e \x01(\tR(averageFtwAmountForSameDayRegistredUsers\x12h\n" +
+	"3average_ftw_amount_for_non_same_day_registred_users\x18\x0f \x01(\tR+averageFtwAmountForNonSameDayRegistredUsers\x12-\n" +
 	"\x12success_percentage\x18\x10 \x01(\x05R\x11successPercentage\x12A\n" +
-	"\x1ddeposit_minus_withdraw_amount\x18\x11 \x01(\x03R\x1adepositMinusWithdrawAmount\x12@\n" +
+	"\x1ddeposit_minus_withdraw_amount\x18\x11 \x01(\tR\x1adepositMinusWithdrawAmount\x12@\n" +
 	"\x1camount_proportion_percentage\x18\x12 \x01(\x05R\x1aamountProportionPercentage*i\n" +
 	"\n" +
 	"TimePeriod\x12\x1a\n" +
