@@ -5489,6 +5489,9 @@ components:
                 tags:
                     type: string
                     description: 'tags: hot game, live casino, slots, etc..'
+                name:
+                    type: string
+                    description: 'name: game name'
         api.game.service.v1.GameInfo:
             type: object
             properties:
@@ -5704,6 +5707,11 @@ components:
                     type: boolean
                     description: |-
                         Optional filter for provider's enabled status.
+                         If not provided, all providers will be returned.
+                tag:
+                    type: string
+                    description: |-
+                        Optional filter for game's tag.
                          If not provided, all providers will be returned.
                 includeGameCount:
                     type: boolean

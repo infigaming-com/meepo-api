@@ -705,6 +705,8 @@ func (m *GameFilter) validate(all bool) error {
 
 	// no validation rules for Tags
 
+	// no validation rules for Name
+
 	if len(errors) > 0 {
 		return GameFilterMultiError(errors)
 	}
@@ -911,6 +913,10 @@ func (m *ListProvidersRequest) validate(all bool) error {
 
 	if m.Enabled != nil {
 		// no validation rules for Enabled
+	}
+
+	if m.Tag != nil {
+		// no validation rules for Tag
 	}
 
 	if m.IncludeGameCount != nil {
