@@ -679,7 +679,7 @@ type ListBetsRequest struct {
 	//	*ListBetsRequest_SettlementCurrencyWithRanges
 	//	*ListBetsRequest_SettlementCurrencies
 	SettlementCurrencyOption isListBetsRequest_SettlementCurrencyOption `protobuf_oneof:"settlement_currency_option"`
-	Categories               *string                                    `protobuf:"bytes,12,opt,name=categories,proto3,oneof" json:"categories,omitempty"`
+	Categories               []string                                   `protobuf:"bytes,12,rep,name=categories,proto3" json:"categories,omitempty"`
 	Status                   *string                                    `protobuf:"bytes,13,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	Page                     *int64                                     `protobuf:"varint,14,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize                 *int64                                     `protobuf:"varint,15,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -805,11 +805,11 @@ func (x *ListBetsRequest) GetSettlementCurrencies() *ListBetsRequest_Currencies 
 	return nil
 }
 
-func (x *ListBetsRequest) GetCategories() string {
-	if x != nil && x.Categories != nil {
-		return *x.Categories
+func (x *ListBetsRequest) GetCategories() []string {
+	if x != nil {
+		return x.Categories
 	}
-	return ""
+	return nil
 }
 
 func (x *ListBetsRequest) GetStatus() string {
@@ -3313,8 +3313,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x16ListCurrenciesResponse\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\tR\n" +
-	"currencies\"\x8f\n" +
-	"\n" +
+	"currencies\"\xfb\t\n" +
 	"\x0fListBetsRequest\x12!\n" +
 	"\foperator_ids\x18\x01 \x03(\x03R\voperatorIds\x12!\n" +
 	"\fprovider_ids\x18\x02 \x03(\tR\vproviderIds\x12 \n" +
@@ -3328,14 +3327,14 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\aR\aendTime\x88\x01\x01\x12\x85\x01\n" +
 	"\x1fsettlement_currency_with_ranges\x18\n" +
 	" \x01(\v2<.api.backoffice.service.v1.ListBetsRequest.CurrencyWithRangeH\x00R\x1csettlementCurrencyWithRanges\x12l\n" +
-	"\x15settlement_currencies\x18\v \x01(\v25.api.backoffice.service.v1.ListBetsRequest.CurrenciesH\x00R\x14settlementCurrencies\x12#\n" +
+	"\x15settlement_currencies\x18\v \x01(\v25.api.backoffice.service.v1.ListBetsRequest.CurrenciesH\x00R\x14settlementCurrencies\x12\x1e\n" +
 	"\n" +
-	"categories\x18\f \x01(\tH\bR\n" +
-	"categories\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\r \x01(\tH\tR\x06status\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x0e \x01(\x03H\n" +
-	"R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x0f \x01(\x03H\vR\bpageSize\x88\x01\x01\x1a\xa7\x02\n" +
+	"categories\x18\f \x03(\tR\n" +
+	"categories\x12\x1b\n" +
+	"\x06status\x18\r \x01(\tH\bR\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x0e \x01(\x03H\tR\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x0f \x01(\x03H\n" +
+	"R\bpageSize\x88\x01\x01\x1a\xa7\x02\n" +
 	"\x11CurrencyWithRange\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12)\n" +
 	"\x0emin_bet_amount\x18\x02 \x01(\tH\x00R\fminBetAmount\x88\x01\x01\x12)\n" +
@@ -3361,8 +3360,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x10_operator_bet_idB\x12\n" +
 	"\x10_provider_bet_idB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_timeB\r\n" +
-	"\v_categoriesB\t\n" +
+	"\t_end_timeB\t\n" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +

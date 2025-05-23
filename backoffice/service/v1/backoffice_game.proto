@@ -191,7 +191,7 @@ message ListBetsRequest {
 		CurrencyWithRange settlement_currency_with_ranges = 10;
 		Currencies settlement_currencies = 11;
 	}
-	optional string categories = 12;
+	repeated string categories = 12;
 	optional string status = 13;
 	optional int64 page = 14;
 	optional int64 page_size = 15;
