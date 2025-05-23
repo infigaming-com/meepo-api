@@ -2210,8 +2210,6 @@ components:
             properties:
                 ticketId:
                     type: string
-                authorUserId:
-                    type: string
                 content:
                     type: string
         api.backoffice.service.v1.AddCommentResponse:
@@ -2324,8 +2322,6 @@ components:
             type: object
             properties:
                 ticketId:
-                    type: string
-                cancellerUserId:
                     type: string
         api.backoffice.service.v1.CancelTicketResponse:
             type: object
@@ -3692,21 +3688,33 @@ components:
                 endTime:
                     type: string
                     format: date-time
-                minBetAmount:
+                settlementCurrencyWithRanges:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsRequest_CurrencyWithRange'
+                settlementCurrencies:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsRequest_Currencies'
+                page:
                     type: string
-                maxBetAmount:
+                pageSize:
                     type: string
+        api.backoffice.service.v1.ListBetsRequest_Currencies:
+            type: object
+            properties:
                 currencies:
                     type: array
                     items:
                         type: string
-                settlementCurrencies:
-                    type: array
-                    items:
-                        type: string
-                page:
+        api.backoffice.service.v1.ListBetsRequest_CurrencyWithRange:
+            type: object
+            properties:
+                currency:
                     type: string
-                pageSize:
+                minBetAmount:
+                    type: string
+                maxBetAmount:
+                    type: string
+                minWinAmount:
+                    type: string
+                maxWinAmount:
                     type: string
         api.backoffice.service.v1.ListBetsResponse:
             type: object
@@ -5089,8 +5097,6 @@ components:
             properties:
                 ticketId:
                     type: string
-                reviewerUserId:
-                    type: string
                 action:
                     type: string
                 reviewComment:
@@ -5611,18 +5617,10 @@ components:
                 endTime:
                     type: string
                     format: date-time
-                minBetAmount:
-                    type: string
-                maxBetAmount:
-                    type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
+                settlementCurrencyWithRanges:
+                    $ref: '#/components/schemas/api.game.service.v1.ListBetsRequest_CurrencyWithRange'
                 settlementCurrencies:
-                    type: array
-                    items:
-                        type: string
+                    $ref: '#/components/schemas/api.game.service.v1.ListBetsRequest_Currencies'
                 categories:
                     type: array
                     items:
@@ -5632,6 +5630,26 @@ components:
                 page:
                     type: string
                 pageSize:
+                    type: string
+        api.game.service.v1.ListBetsRequest_Currencies:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
+        api.game.service.v1.ListBetsRequest_CurrencyWithRange:
+            type: object
+            properties:
+                currency:
+                    type: string
+                minBetAmount:
+                    type: string
+                maxBetAmount:
+                    type: string
+                minWinAmount:
+                    type: string
+                maxWinAmount:
                     type: string
         api.game.service.v1.ListBetsResponse:
             type: object
