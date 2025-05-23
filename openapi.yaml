@@ -5633,12 +5633,6 @@ components:
                     $ref: '#/components/schemas/api.game.service.v1.ListBetsRequest_CurrencyWithRange'
                 settlementCurrencies:
                     $ref: '#/components/schemas/api.game.service.v1.ListBetsRequest_Currencies'
-                categories:
-                    type: array
-                    items:
-                        type: string
-                status:
-                    type: string
                 page:
                     type: string
                 pageSize:
