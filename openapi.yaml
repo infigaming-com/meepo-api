@@ -258,24 +258,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAccountResponse'
-    /v1/backoffice/audit/actions/list:
-        post:
-            tags:
-                - BackofficeAudit
-            operationId: BackofficeAudit_ListAuditActions
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAuditActionsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListAuditActionsResponse'
     /v1/backoffice/audit/logs/list:
         post:
             tags:
@@ -294,24 +276,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListAuditLogsResponse'
-    /v1/backoffice/audit/users/list:
-        post:
-            tags:
-                - BackofficeAudit
-            operationId: BackofficeAudit_ListAuditUsers
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAuditUsersRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListAuditUsersResponse'
     /v1/backoffice/dashboard/get:
         post:
             tags:
@@ -2385,13 +2349,6 @@ components:
                     type: string
                 action:
                     type: string
-        api.backoffice.service.v1.AuditUser:
-            type: object
-            properties:
-                userId:
-                    type: string
-                userName:
-                    type: string
         api.backoffice.service.v1.Bet:
             type: object
             properties:
@@ -3803,16 +3760,6 @@ components:
                     format: int32
                 withdrawAmount:
                     type: string
-        api.backoffice.service.v1.ListAuditActionsRequest:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.ListAuditActionsResponse:
-            type: object
-            properties:
-                auditActions:
-                    type: array
-                    items:
-                        type: string
         api.backoffice.service.v1.ListAuditLogsRequest:
             type: object
             properties:
@@ -3843,16 +3790,6 @@ components:
                     type: string
                 pageSize:
                     type: string
-        api.backoffice.service.v1.ListAuditUsersRequest:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.ListAuditUsersResponse:
-            type: object
-            properties:
-                auditUsers:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.AuditUser'
         api.backoffice.service.v1.ListBetsRequest:
             type: object
             properties:

@@ -19,21 +19,15 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackofficeAuditListAuditActions = "/api.backoffice.service.v1.BackofficeAudit/ListAuditActions"
 const OperationBackofficeAuditListAuditLogs = "/api.backoffice.service.v1.BackofficeAudit/ListAuditLogs"
-const OperationBackofficeAuditListAuditUsers = "/api.backoffice.service.v1.BackofficeAudit/ListAuditUsers"
 
 type BackofficeAuditHTTPServer interface {
-	ListAuditActions(context.Context, *ListAuditActionsRequest) (*ListAuditActionsResponse, error)
 	ListAuditLogs(context.Context, *ListAuditLogsRequest) (*ListAuditLogsResponse, error)
-	ListAuditUsers(context.Context, *ListAuditUsersRequest) (*ListAuditUsersResponse, error)
 }
 
 func RegisterBackofficeAuditHTTPServer(s *http.Server, srv BackofficeAuditHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/backoffice/audit/logs/list", _BackofficeAudit_ListAuditLogs0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/audit/users/list", _BackofficeAudit_ListAuditUsers0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/audit/actions/list", _BackofficeAudit_ListAuditActions0_HTTP_Handler(srv))
 }
 
 func _BackofficeAudit_ListAuditLogs0_HTTP_Handler(srv BackofficeAuditHTTPServer) func(ctx http.Context) error {
@@ -58,54 +52,8 @@ func _BackofficeAudit_ListAuditLogs0_HTTP_Handler(srv BackofficeAuditHTTPServer)
 	}
 }
 
-func _BackofficeAudit_ListAuditUsers0_HTTP_Handler(srv BackofficeAuditHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListAuditUsersRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeAuditListAuditUsers)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListAuditUsers(ctx, req.(*ListAuditUsersRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListAuditUsersResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeAudit_ListAuditActions0_HTTP_Handler(srv BackofficeAuditHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListAuditActionsRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeAuditListAuditActions)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListAuditActions(ctx, req.(*ListAuditActionsRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListAuditActionsResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type BackofficeAuditHTTPClient interface {
-	ListAuditActions(ctx context.Context, req *ListAuditActionsRequest, opts ...http.CallOption) (rsp *ListAuditActionsResponse, err error)
 	ListAuditLogs(ctx context.Context, req *ListAuditLogsRequest, opts ...http.CallOption) (rsp *ListAuditLogsResponse, err error)
-	ListAuditUsers(ctx context.Context, req *ListAuditUsersRequest, opts ...http.CallOption) (rsp *ListAuditUsersResponse, err error)
 }
 
 type BackofficeAuditHTTPClientImpl struct {
@@ -116,37 +64,11 @@ func NewBackofficeAuditHTTPClient(client *http.Client) BackofficeAuditHTTPClient
 	return &BackofficeAuditHTTPClientImpl{client}
 }
 
-func (c *BackofficeAuditHTTPClientImpl) ListAuditActions(ctx context.Context, in *ListAuditActionsRequest, opts ...http.CallOption) (*ListAuditActionsResponse, error) {
-	var out ListAuditActionsResponse
-	pattern := "/v1/backoffice/audit/actions/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeAuditListAuditActions))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 func (c *BackofficeAuditHTTPClientImpl) ListAuditLogs(ctx context.Context, in *ListAuditLogsRequest, opts ...http.CallOption) (*ListAuditLogsResponse, error) {
 	var out ListAuditLogsResponse
 	pattern := "/v1/backoffice/audit/logs/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAuditListAuditLogs))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeAuditHTTPClientImpl) ListAuditUsers(ctx context.Context, in *ListAuditUsersRequest, opts ...http.CallOption) (*ListAuditUsersResponse, error) {
-	var out ListAuditUsersResponse
-	pattern := "/v1/backoffice/audit/users/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeAuditListAuditUsers))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

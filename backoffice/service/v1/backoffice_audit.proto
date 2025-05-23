@@ -16,18 +16,6 @@ service BackofficeAudit {
 			body: "*"
 		};
 	}
-    rpc ListAuditUsers(ListAuditUsersRequest) returns (ListAuditUsersResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/audit/users/list"
-            body: "*"
-        };
-    }
-    rpc ListAuditActions(ListAuditActionsRequest) returns (ListAuditActionsResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/audit/actions/list"
-            body: "*"
-        };
-    }
 }
 
 message ListAuditLogsRequest {
@@ -55,23 +43,4 @@ message ListAuditLogsResponse {
 	int64 total = 2;
 	int64 page = 3;
 	int64 page_size = 4;
-}
-
-message ListAuditUsersRequest {
-}
-
-message AuditUser {
-	int64 user_id = 1;
-	string user_name = 2;
-}
-
-message ListAuditUsersResponse {
-	repeated AuditUser audit_users = 1;
-}
-
-message ListAuditActionsRequest {
-}
-
-message ListAuditActionsResponse {
-	repeated string audit_actions = 1;
 }
