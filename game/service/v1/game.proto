@@ -18,7 +18,12 @@ service Game {
 	rpc DeleteOperator(DeleteOperatorRequest) returns (DeleteOperatorResponse) {
 	};
 
-	rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse) {}
+	rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/providers/list"
+			body: "*"
+		};
+	}
 
 	rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse) {
 		option (google.api.http) = {
@@ -45,13 +50,6 @@ service Game {
 	rpc GetGame(GetGameRequest) returns (GetGameResponse) {
 		option (google.api.http) = {
 			post: "/v1/game/get"
-			body: "*"
-		};
-	};
-
-	rpc ProviderList(ProviderListRequest) returns (ProviderListResponse) {
-		option (google.api.http) = {
-			post: "/v1/game/provider/list"
 			body: "*"
 		};
 	};
@@ -293,21 +291,6 @@ message UrlInfo {
 	string deposit_url = 2;
 	// URL to redirect user to lobby.
 	string lobby_url = 3;
-}
-
-message ProviderListRequest {
-	// tags: hot game, live casino, slots, etc..
-	string tags = 1;
-}
-
-message ProviderListResponse {
-	repeated Provider providers = 1;
-}
-
-message Provider {
-	string id = 1;
-	string name = 2;
-	int32 game_count = 3;
 }
 
 message BalanceRequest {
