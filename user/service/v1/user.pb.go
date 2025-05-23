@@ -2247,9 +2247,11 @@ func (*SendEmailVerificationCodeResponse) Descriptor() ([]byte, []int) {
 type UpdateUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	BanLogin      *bool                  `protobuf:"varint,2,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
-	BanGame       *bool                  `protobuf:"varint,3,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
-	BanWithdraw   *bool                  `protobuf:"varint,4,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
+	Nickname      *string                `protobuf:"bytes,2,opt,name=nickname,proto3,oneof" json:"nickname,omitempty"`
+	Avatar        *string                `protobuf:"bytes,3,opt,name=avatar,proto3,oneof" json:"avatar,omitempty"`
+	BanLogin      *bool                  `protobuf:"varint,4,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
+	BanGame       *bool                  `protobuf:"varint,5,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
+	BanWithdraw   *bool                  `protobuf:"varint,6,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2289,6 +2291,20 @@ func (x *UpdateUserRequest) GetUserId() int64 {
 		return x.UserId
 	}
 	return 0
+}
+
+func (x *UpdateUserRequest) GetNickname() string {
+	if x != nil && x.Nickname != nil {
+		return *x.Nickname
+	}
+	return ""
+}
+
+func (x *UpdateUserRequest) GetAvatar() string {
+	if x != nil && x.Avatar != nil {
+		return *x.Avatar
+	}
+	return ""
 }
 
 func (x *UpdateUserRequest) GetBanLogin() bool {
@@ -3952,12 +3968,16 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x13AddOperatorResponse\"8\n" +
 	" SendEmailVerificationCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"#\n" +
-	"!SendEmailVerificationCodeResponse\"\xc2\x01\n" +
+	"!SendEmailVerificationCodeResponse\"\x98\x02\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12 \n" +
-	"\tban_login\x18\x02 \x01(\bH\x00R\bbanLogin\x88\x01\x01\x12\x1e\n" +
-	"\bban_game\x18\x03 \x01(\bH\x01R\abanGame\x88\x01\x01\x12&\n" +
-	"\fban_withdraw\x18\x04 \x01(\bH\x02R\vbanWithdraw\x88\x01\x01B\f\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
+	"\bnickname\x18\x02 \x01(\tH\x00R\bnickname\x88\x01\x01\x12\x1b\n" +
+	"\x06avatar\x18\x03 \x01(\tH\x01R\x06avatar\x88\x01\x01\x12 \n" +
+	"\tban_login\x18\x04 \x01(\bH\x02R\bbanLogin\x88\x01\x01\x12\x1e\n" +
+	"\bban_game\x18\x05 \x01(\bH\x03R\abanGame\x88\x01\x01\x12&\n" +
+	"\fban_withdraw\x18\x06 \x01(\bH\x04R\vbanWithdraw\x88\x01\x01B\v\n" +
+	"\t_nicknameB\t\n" +
+	"\a_avatarB\f\n" +
 	"\n" +
 	"_ban_loginB\v\n" +
 	"\t_ban_gameB\x0f\n" +
