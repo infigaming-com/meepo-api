@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package api.game.service.v1;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/game/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.game.service.v1";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  UNSPECIFIED = 0;
+  GAME_BET_NOT_FOUND = 40001 [(errors.code) = 404];
+  GAME_ACTION_NOT_FOUND = 40002 [(errors.code) = 401];
+  GET_RATES_FAILED = 40003 [(errors.code) = 401];
+}

@@ -1871,23 +1871,22 @@ var _ interface {
 	ErrorName() string
 } = GetPlayerGameDataDailySummariesResponseValidationError{}
 
-// Validate checks the field values on ListDepositDailySummariesRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *ListDepositDailySummariesRequest) Validate() error {
+// Validate checks the field values on GetDepositSummariesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetDepositSummariesRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListDepositDailySummariesRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// ListDepositDailySummariesRequestMultiError, or nil if none found.
-func (m *ListDepositDailySummariesRequest) ValidateAll() error {
+// ValidateAll checks the field values on GetDepositSummariesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetDepositSummariesRequestMultiError, or nil if none found.
+func (m *GetDepositSummariesRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListDepositDailySummariesRequest) validate(all bool) error {
+func (m *GetDepositSummariesRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1902,7 +1901,7 @@ func (m *ListDepositDailySummariesRequest) validate(all bool) error {
 			switch v := interface{}(m.GetStartTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListDepositDailySummariesRequestValidationError{
+					errors = append(errors, GetDepositSummariesRequestValidationError{
 						field:  "StartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1910,7 +1909,7 @@ func (m *ListDepositDailySummariesRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListDepositDailySummariesRequestValidationError{
+					errors = append(errors, GetDepositSummariesRequestValidationError{
 						field:  "StartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1919,7 +1918,7 @@ func (m *ListDepositDailySummariesRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListDepositDailySummariesRequestValidationError{
+				return GetDepositSummariesRequestValidationError{
 					field:  "StartTime",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1935,7 +1934,7 @@ func (m *ListDepositDailySummariesRequest) validate(all bool) error {
 			switch v := interface{}(m.GetEndTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListDepositDailySummariesRequestValidationError{
+					errors = append(errors, GetDepositSummariesRequestValidationError{
 						field:  "EndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1943,7 +1942,7 @@ func (m *ListDepositDailySummariesRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListDepositDailySummariesRequestValidationError{
+					errors = append(errors, GetDepositSummariesRequestValidationError{
 						field:  "EndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1952,7 +1951,7 @@ func (m *ListDepositDailySummariesRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListDepositDailySummariesRequestValidationError{
+				return GetDepositSummariesRequestValidationError{
 					field:  "EndTime",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1963,20 +1962,19 @@ func (m *ListDepositDailySummariesRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListDepositDailySummariesRequestMultiError(errors)
+		return GetDepositSummariesRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListDepositDailySummariesRequestMultiError is an error wrapping multiple
-// validation errors returned by
-// ListDepositDailySummariesRequest.ValidateAll() if the designated
-// constraints aren't met.
-type ListDepositDailySummariesRequestMultiError []error
+// GetDepositSummariesRequestMultiError is an error wrapping multiple
+// validation errors returned by GetDepositSummariesRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetDepositSummariesRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListDepositDailySummariesRequestMultiError) Error() string {
+func (m GetDepositSummariesRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1985,12 +1983,11 @@ func (m ListDepositDailySummariesRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListDepositDailySummariesRequestMultiError) AllErrors() []error { return m }
+func (m GetDepositSummariesRequestMultiError) AllErrors() []error { return m }
 
-// ListDepositDailySummariesRequestValidationError is the validation error
-// returned by ListDepositDailySummariesRequest.Validate if the designated
-// constraints aren't met.
-type ListDepositDailySummariesRequestValidationError struct {
+// GetDepositSummariesRequestValidationError is the validation error returned
+// by GetDepositSummariesRequest.Validate if the designated constraints aren't met.
+type GetDepositSummariesRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1998,24 +1995,24 @@ type ListDepositDailySummariesRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListDepositDailySummariesRequestValidationError) Field() string { return e.field }
+func (e GetDepositSummariesRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListDepositDailySummariesRequestValidationError) Reason() string { return e.reason }
+func (e GetDepositSummariesRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListDepositDailySummariesRequestValidationError) Cause() error { return e.cause }
+func (e GetDepositSummariesRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListDepositDailySummariesRequestValidationError) Key() bool { return e.key }
+func (e GetDepositSummariesRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListDepositDailySummariesRequestValidationError) ErrorName() string {
-	return "ListDepositDailySummariesRequestValidationError"
+func (e GetDepositSummariesRequestValidationError) ErrorName() string {
+	return "GetDepositSummariesRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListDepositDailySummariesRequestValidationError) Error() string {
+func (e GetDepositSummariesRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2027,14 +2024,14 @@ func (e ListDepositDailySummariesRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListDepositDailySummariesRequest.%s: %s%s",
+		"invalid %sGetDepositSummariesRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListDepositDailySummariesRequestValidationError{}
+var _ error = GetDepositSummariesRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -2042,25 +2039,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListDepositDailySummariesRequestValidationError{}
+} = GetDepositSummariesRequestValidationError{}
 
-// Validate checks the field values on ListDepositDailySummariesResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *ListDepositDailySummariesResponse) Validate() error {
+// Validate checks the field values on GetDepositSummariesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetDepositSummariesResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListDepositDailySummariesResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// ListDepositDailySummariesResponseMultiError, or nil if none found.
-func (m *ListDepositDailySummariesResponse) ValidateAll() error {
+// ValidateAll checks the field values on GetDepositSummariesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetDepositSummariesResponseMultiError, or nil if none found.
+func (m *GetDepositSummariesResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListDepositDailySummariesResponse) validate(all bool) error {
+func (m *GetDepositSummariesResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2074,7 +2070,7 @@ func (m *ListDepositDailySummariesResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListDepositDailySummariesResponseValidationError{
+					errors = append(errors, GetDepositSummariesResponseValidationError{
 						field:  fmt.Sprintf("DailySummaries[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2082,7 +2078,7 @@ func (m *ListDepositDailySummariesResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListDepositDailySummariesResponseValidationError{
+					errors = append(errors, GetDepositSummariesResponseValidationError{
 						field:  fmt.Sprintf("DailySummaries[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2091,7 +2087,7 @@ func (m *ListDepositDailySummariesResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListDepositDailySummariesResponseValidationError{
+				return GetDepositSummariesResponseValidationError{
 					field:  fmt.Sprintf("DailySummaries[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2102,20 +2098,19 @@ func (m *ListDepositDailySummariesResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListDepositDailySummariesResponseMultiError(errors)
+		return GetDepositSummariesResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListDepositDailySummariesResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// ListDepositDailySummariesResponse.ValidateAll() if the designated
-// constraints aren't met.
-type ListDepositDailySummariesResponseMultiError []error
+// GetDepositSummariesResponseMultiError is an error wrapping multiple
+// validation errors returned by GetDepositSummariesResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetDepositSummariesResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListDepositDailySummariesResponseMultiError) Error() string {
+func (m GetDepositSummariesResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2124,12 +2119,12 @@ func (m ListDepositDailySummariesResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListDepositDailySummariesResponseMultiError) AllErrors() []error { return m }
+func (m GetDepositSummariesResponseMultiError) AllErrors() []error { return m }
 
-// ListDepositDailySummariesResponseValidationError is the validation error
-// returned by ListDepositDailySummariesResponse.Validate if the designated
-// constraints aren't met.
-type ListDepositDailySummariesResponseValidationError struct {
+// GetDepositSummariesResponseValidationError is the validation error returned
+// by GetDepositSummariesResponse.Validate if the designated constraints
+// aren't met.
+type GetDepositSummariesResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2137,24 +2132,24 @@ type ListDepositDailySummariesResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListDepositDailySummariesResponseValidationError) Field() string { return e.field }
+func (e GetDepositSummariesResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListDepositDailySummariesResponseValidationError) Reason() string { return e.reason }
+func (e GetDepositSummariesResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListDepositDailySummariesResponseValidationError) Cause() error { return e.cause }
+func (e GetDepositSummariesResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListDepositDailySummariesResponseValidationError) Key() bool { return e.key }
+func (e GetDepositSummariesResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListDepositDailySummariesResponseValidationError) ErrorName() string {
-	return "ListDepositDailySummariesResponseValidationError"
+func (e GetDepositSummariesResponseValidationError) ErrorName() string {
+	return "GetDepositSummariesResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListDepositDailySummariesResponseValidationError) Error() string {
+func (e GetDepositSummariesResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2166,14 +2161,14 @@ func (e ListDepositDailySummariesResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListDepositDailySummariesResponse.%s: %s%s",
+		"invalid %sGetDepositSummariesResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListDepositDailySummariesResponseValidationError{}
+var _ error = GetDepositSummariesResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -2181,24 +2176,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListDepositDailySummariesResponseValidationError{}
+} = GetDepositSummariesResponseValidationError{}
 
-// Validate checks the field values on ListDepositDailyDetailsRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on ListDepositDetailsRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListDepositDailyDetailsRequest) Validate() error {
+func (m *ListDepositDetailsRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListDepositDailyDetailsRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// ListDepositDailyDetailsRequestMultiError, or nil if none found.
-func (m *ListDepositDailyDetailsRequest) ValidateAll() error {
+// ValidateAll checks the field values on ListDepositDetailsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListDepositDetailsRequestMultiError, or nil if none found.
+func (m *ListDepositDetailsRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListDepositDailyDetailsRequest) validate(all bool) error {
+func (m *ListDepositDetailsRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2213,7 +2208,7 @@ func (m *ListDepositDailyDetailsRequest) validate(all bool) error {
 			switch v := interface{}(m.GetStartTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListDepositDailyDetailsRequestValidationError{
+					errors = append(errors, ListDepositDetailsRequestValidationError{
 						field:  "StartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2221,7 +2216,7 @@ func (m *ListDepositDailyDetailsRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListDepositDailyDetailsRequestValidationError{
+					errors = append(errors, ListDepositDetailsRequestValidationError{
 						field:  "StartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2230,7 +2225,7 @@ func (m *ListDepositDailyDetailsRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListDepositDailyDetailsRequestValidationError{
+				return ListDepositDetailsRequestValidationError{
 					field:  "StartTime",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2246,7 +2241,7 @@ func (m *ListDepositDailyDetailsRequest) validate(all bool) error {
 			switch v := interface{}(m.GetEndTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListDepositDailyDetailsRequestValidationError{
+					errors = append(errors, ListDepositDetailsRequestValidationError{
 						field:  "EndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2254,7 +2249,7 @@ func (m *ListDepositDailyDetailsRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListDepositDailyDetailsRequestValidationError{
+					errors = append(errors, ListDepositDetailsRequestValidationError{
 						field:  "EndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2263,7 +2258,7 @@ func (m *ListDepositDailyDetailsRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListDepositDailyDetailsRequestValidationError{
+				return ListDepositDetailsRequestValidationError{
 					field:  "EndTime",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2282,19 +2277,19 @@ func (m *ListDepositDailyDetailsRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListDepositDailyDetailsRequestMultiError(errors)
+		return ListDepositDetailsRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListDepositDailyDetailsRequestMultiError is an error wrapping multiple
-// validation errors returned by ListDepositDailyDetailsRequest.ValidateAll()
-// if the designated constraints aren't met.
-type ListDepositDailyDetailsRequestMultiError []error
+// ListDepositDetailsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListDepositDetailsRequest.ValidateAll() if the
+// designated constraints aren't met.
+type ListDepositDetailsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListDepositDailyDetailsRequestMultiError) Error() string {
+func (m ListDepositDetailsRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2303,12 +2298,11 @@ func (m ListDepositDailyDetailsRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListDepositDailyDetailsRequestMultiError) AllErrors() []error { return m }
+func (m ListDepositDetailsRequestMultiError) AllErrors() []error { return m }
 
-// ListDepositDailyDetailsRequestValidationError is the validation error
-// returned by ListDepositDailyDetailsRequest.Validate if the designated
-// constraints aren't met.
-type ListDepositDailyDetailsRequestValidationError struct {
+// ListDepositDetailsRequestValidationError is the validation error returned by
+// ListDepositDetailsRequest.Validate if the designated constraints aren't met.
+type ListDepositDetailsRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2316,24 +2310,24 @@ type ListDepositDailyDetailsRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListDepositDailyDetailsRequestValidationError) Field() string { return e.field }
+func (e ListDepositDetailsRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListDepositDailyDetailsRequestValidationError) Reason() string { return e.reason }
+func (e ListDepositDetailsRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListDepositDailyDetailsRequestValidationError) Cause() error { return e.cause }
+func (e ListDepositDetailsRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListDepositDailyDetailsRequestValidationError) Key() bool { return e.key }
+func (e ListDepositDetailsRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListDepositDailyDetailsRequestValidationError) ErrorName() string {
-	return "ListDepositDailyDetailsRequestValidationError"
+func (e ListDepositDetailsRequestValidationError) ErrorName() string {
+	return "ListDepositDetailsRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListDepositDailyDetailsRequestValidationError) Error() string {
+func (e ListDepositDetailsRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2345,14 +2339,14 @@ func (e ListDepositDailyDetailsRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListDepositDailyDetailsRequest.%s: %s%s",
+		"invalid %sListDepositDetailsRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListDepositDailyDetailsRequestValidationError{}
+var _ error = ListDepositDetailsRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -2360,24 +2354,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListDepositDailyDetailsRequestValidationError{}
+} = ListDepositDetailsRequestValidationError{}
 
-// Validate checks the field values on ListDepositDailyDetailsResponse with the
+// Validate checks the field values on ListDepositDetailsResponse with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListDepositDailyDetailsResponse) Validate() error {
+func (m *ListDepositDetailsResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListDepositDailyDetailsResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// ListDepositDailyDetailsResponseMultiError, or nil if none found.
-func (m *ListDepositDailyDetailsResponse) ValidateAll() error {
+// ValidateAll checks the field values on ListDepositDetailsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListDepositDetailsResponseMultiError, or nil if none found.
+func (m *ListDepositDetailsResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListDepositDailyDetailsResponse) validate(all bool) error {
+func (m *ListDepositDetailsResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2391,7 +2385,7 @@ func (m *ListDepositDailyDetailsResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListDepositDailyDetailsResponseValidationError{
+					errors = append(errors, ListDepositDetailsResponseValidationError{
 						field:  fmt.Sprintf("DailyDetails[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2399,7 +2393,7 @@ func (m *ListDepositDailyDetailsResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListDepositDailyDetailsResponseValidationError{
+					errors = append(errors, ListDepositDetailsResponseValidationError{
 						field:  fmt.Sprintf("DailyDetails[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2408,7 +2402,7 @@ func (m *ListDepositDailyDetailsResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListDepositDailyDetailsResponseValidationError{
+				return ListDepositDetailsResponseValidationError{
 					field:  fmt.Sprintf("DailyDetails[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2425,19 +2419,19 @@ func (m *ListDepositDailyDetailsResponse) validate(all bool) error {
 	// no validation rules for Total
 
 	if len(errors) > 0 {
-		return ListDepositDailyDetailsResponseMultiError(errors)
+		return ListDepositDetailsResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListDepositDailyDetailsResponseMultiError is an error wrapping multiple
-// validation errors returned by ListDepositDailyDetailsResponse.ValidateAll()
-// if the designated constraints aren't met.
-type ListDepositDailyDetailsResponseMultiError []error
+// ListDepositDetailsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListDepositDetailsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListDepositDetailsResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListDepositDailyDetailsResponseMultiError) Error() string {
+func (m ListDepositDetailsResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2446,12 +2440,11 @@ func (m ListDepositDailyDetailsResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListDepositDailyDetailsResponseMultiError) AllErrors() []error { return m }
+func (m ListDepositDetailsResponseMultiError) AllErrors() []error { return m }
 
-// ListDepositDailyDetailsResponseValidationError is the validation error
-// returned by ListDepositDailyDetailsResponse.Validate if the designated
-// constraints aren't met.
-type ListDepositDailyDetailsResponseValidationError struct {
+// ListDepositDetailsResponseValidationError is the validation error returned
+// by ListDepositDetailsResponse.Validate if the designated constraints aren't met.
+type ListDepositDetailsResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2459,24 +2452,24 @@ type ListDepositDailyDetailsResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListDepositDailyDetailsResponseValidationError) Field() string { return e.field }
+func (e ListDepositDetailsResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListDepositDailyDetailsResponseValidationError) Reason() string { return e.reason }
+func (e ListDepositDetailsResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListDepositDailyDetailsResponseValidationError) Cause() error { return e.cause }
+func (e ListDepositDetailsResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListDepositDailyDetailsResponseValidationError) Key() bool { return e.key }
+func (e ListDepositDetailsResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListDepositDailyDetailsResponseValidationError) ErrorName() string {
-	return "ListDepositDailyDetailsResponseValidationError"
+func (e ListDepositDetailsResponseValidationError) ErrorName() string {
+	return "ListDepositDetailsResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListDepositDailyDetailsResponseValidationError) Error() string {
+func (e ListDepositDetailsResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2488,14 +2481,14 @@ func (e ListDepositDailyDetailsResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListDepositDailyDetailsResponse.%s: %s%s",
+		"invalid %sListDepositDetailsResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListDepositDailyDetailsResponseValidationError{}
+var _ error = ListDepositDetailsResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -2503,25 +2496,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListDepositDailyDetailsResponseValidationError{}
+} = ListDepositDetailsResponseValidationError{}
 
-// Validate checks the field values on ListWithdrawDailySummariesRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *ListWithdrawDailySummariesRequest) Validate() error {
+// Validate checks the field values on GetWithdrawSummariesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetWithdrawSummariesRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListWithdrawDailySummariesRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// ListWithdrawDailySummariesRequestMultiError, or nil if none found.
-func (m *ListWithdrawDailySummariesRequest) ValidateAll() error {
+// ValidateAll checks the field values on GetWithdrawSummariesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetWithdrawSummariesRequestMultiError, or nil if none found.
+func (m *GetWithdrawSummariesRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListWithdrawDailySummariesRequest) validate(all bool) error {
+func (m *GetWithdrawSummariesRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2536,7 +2528,7 @@ func (m *ListWithdrawDailySummariesRequest) validate(all bool) error {
 			switch v := interface{}(m.GetStartTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListWithdrawDailySummariesRequestValidationError{
+					errors = append(errors, GetWithdrawSummariesRequestValidationError{
 						field:  "StartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2544,7 +2536,7 @@ func (m *ListWithdrawDailySummariesRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListWithdrawDailySummariesRequestValidationError{
+					errors = append(errors, GetWithdrawSummariesRequestValidationError{
 						field:  "StartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2553,7 +2545,7 @@ func (m *ListWithdrawDailySummariesRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListWithdrawDailySummariesRequestValidationError{
+				return GetWithdrawSummariesRequestValidationError{
 					field:  "StartTime",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2569,7 +2561,7 @@ func (m *ListWithdrawDailySummariesRequest) validate(all bool) error {
 			switch v := interface{}(m.GetEndTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListWithdrawDailySummariesRequestValidationError{
+					errors = append(errors, GetWithdrawSummariesRequestValidationError{
 						field:  "EndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2577,7 +2569,7 @@ func (m *ListWithdrawDailySummariesRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListWithdrawDailySummariesRequestValidationError{
+					errors = append(errors, GetWithdrawSummariesRequestValidationError{
 						field:  "EndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2586,7 +2578,7 @@ func (m *ListWithdrawDailySummariesRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListWithdrawDailySummariesRequestValidationError{
+				return GetWithdrawSummariesRequestValidationError{
 					field:  "EndTime",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2597,20 +2589,19 @@ func (m *ListWithdrawDailySummariesRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListWithdrawDailySummariesRequestMultiError(errors)
+		return GetWithdrawSummariesRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListWithdrawDailySummariesRequestMultiError is an error wrapping multiple
-// validation errors returned by
-// ListWithdrawDailySummariesRequest.ValidateAll() if the designated
-// constraints aren't met.
-type ListWithdrawDailySummariesRequestMultiError []error
+// GetWithdrawSummariesRequestMultiError is an error wrapping multiple
+// validation errors returned by GetWithdrawSummariesRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetWithdrawSummariesRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListWithdrawDailySummariesRequestMultiError) Error() string {
+func (m GetWithdrawSummariesRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2619,12 +2610,12 @@ func (m ListWithdrawDailySummariesRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListWithdrawDailySummariesRequestMultiError) AllErrors() []error { return m }
+func (m GetWithdrawSummariesRequestMultiError) AllErrors() []error { return m }
 
-// ListWithdrawDailySummariesRequestValidationError is the validation error
-// returned by ListWithdrawDailySummariesRequest.Validate if the designated
-// constraints aren't met.
-type ListWithdrawDailySummariesRequestValidationError struct {
+// GetWithdrawSummariesRequestValidationError is the validation error returned
+// by GetWithdrawSummariesRequest.Validate if the designated constraints
+// aren't met.
+type GetWithdrawSummariesRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2632,24 +2623,24 @@ type ListWithdrawDailySummariesRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListWithdrawDailySummariesRequestValidationError) Field() string { return e.field }
+func (e GetWithdrawSummariesRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListWithdrawDailySummariesRequestValidationError) Reason() string { return e.reason }
+func (e GetWithdrawSummariesRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListWithdrawDailySummariesRequestValidationError) Cause() error { return e.cause }
+func (e GetWithdrawSummariesRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListWithdrawDailySummariesRequestValidationError) Key() bool { return e.key }
+func (e GetWithdrawSummariesRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListWithdrawDailySummariesRequestValidationError) ErrorName() string {
-	return "ListWithdrawDailySummariesRequestValidationError"
+func (e GetWithdrawSummariesRequestValidationError) ErrorName() string {
+	return "GetWithdrawSummariesRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListWithdrawDailySummariesRequestValidationError) Error() string {
+func (e GetWithdrawSummariesRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2661,14 +2652,14 @@ func (e ListWithdrawDailySummariesRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListWithdrawDailySummariesRequest.%s: %s%s",
+		"invalid %sGetWithdrawSummariesRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListWithdrawDailySummariesRequestValidationError{}
+var _ error = GetWithdrawSummariesRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -2676,25 +2667,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListWithdrawDailySummariesRequestValidationError{}
+} = GetWithdrawSummariesRequestValidationError{}
 
-// Validate checks the field values on ListWithdrawDailySummariesResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *ListWithdrawDailySummariesResponse) Validate() error {
+// Validate checks the field values on GetWithdrawSummariesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetWithdrawSummariesResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListWithdrawDailySummariesResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// ListWithdrawDailySummariesResponseMultiError, or nil if none found.
-func (m *ListWithdrawDailySummariesResponse) ValidateAll() error {
+// ValidateAll checks the field values on GetWithdrawSummariesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetWithdrawSummariesResponseMultiError, or nil if none found.
+func (m *GetWithdrawSummariesResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListWithdrawDailySummariesResponse) validate(all bool) error {
+func (m *GetWithdrawSummariesResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2708,7 +2698,7 @@ func (m *ListWithdrawDailySummariesResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListWithdrawDailySummariesResponseValidationError{
+					errors = append(errors, GetWithdrawSummariesResponseValidationError{
 						field:  fmt.Sprintf("DailySummaries[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2716,7 +2706,7 @@ func (m *ListWithdrawDailySummariesResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListWithdrawDailySummariesResponseValidationError{
+					errors = append(errors, GetWithdrawSummariesResponseValidationError{
 						field:  fmt.Sprintf("DailySummaries[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2725,7 +2715,7 @@ func (m *ListWithdrawDailySummariesResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListWithdrawDailySummariesResponseValidationError{
+				return GetWithdrawSummariesResponseValidationError{
 					field:  fmt.Sprintf("DailySummaries[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2736,20 +2726,19 @@ func (m *ListWithdrawDailySummariesResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListWithdrawDailySummariesResponseMultiError(errors)
+		return GetWithdrawSummariesResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListWithdrawDailySummariesResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// ListWithdrawDailySummariesResponse.ValidateAll() if the designated
-// constraints aren't met.
-type ListWithdrawDailySummariesResponseMultiError []error
+// GetWithdrawSummariesResponseMultiError is an error wrapping multiple
+// validation errors returned by GetWithdrawSummariesResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetWithdrawSummariesResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListWithdrawDailySummariesResponseMultiError) Error() string {
+func (m GetWithdrawSummariesResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2758,12 +2747,12 @@ func (m ListWithdrawDailySummariesResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListWithdrawDailySummariesResponseMultiError) AllErrors() []error { return m }
+func (m GetWithdrawSummariesResponseMultiError) AllErrors() []error { return m }
 
-// ListWithdrawDailySummariesResponseValidationError is the validation error
-// returned by ListWithdrawDailySummariesResponse.Validate if the designated
-// constraints aren't met.
-type ListWithdrawDailySummariesResponseValidationError struct {
+// GetWithdrawSummariesResponseValidationError is the validation error returned
+// by GetWithdrawSummariesResponse.Validate if the designated constraints
+// aren't met.
+type GetWithdrawSummariesResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2771,24 +2760,24 @@ type ListWithdrawDailySummariesResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListWithdrawDailySummariesResponseValidationError) Field() string { return e.field }
+func (e GetWithdrawSummariesResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListWithdrawDailySummariesResponseValidationError) Reason() string { return e.reason }
+func (e GetWithdrawSummariesResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListWithdrawDailySummariesResponseValidationError) Cause() error { return e.cause }
+func (e GetWithdrawSummariesResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListWithdrawDailySummariesResponseValidationError) Key() bool { return e.key }
+func (e GetWithdrawSummariesResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListWithdrawDailySummariesResponseValidationError) ErrorName() string {
-	return "ListWithdrawDailySummariesResponseValidationError"
+func (e GetWithdrawSummariesResponseValidationError) ErrorName() string {
+	return "GetWithdrawSummariesResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListWithdrawDailySummariesResponseValidationError) Error() string {
+func (e GetWithdrawSummariesResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2800,14 +2789,14 @@ func (e ListWithdrawDailySummariesResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListWithdrawDailySummariesResponse.%s: %s%s",
+		"invalid %sGetWithdrawSummariesResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListWithdrawDailySummariesResponseValidationError{}
+var _ error = GetWithdrawSummariesResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -2815,24 +2804,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListWithdrawDailySummariesResponseValidationError{}
+} = GetWithdrawSummariesResponseValidationError{}
 
-// Validate checks the field values on ListWithdrawDailyDetailsRequest with the
+// Validate checks the field values on ListWithdrawDetailsRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListWithdrawDailyDetailsRequest) Validate() error {
+func (m *ListWithdrawDetailsRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListWithdrawDailyDetailsRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// ListWithdrawDailyDetailsRequestMultiError, or nil if none found.
-func (m *ListWithdrawDailyDetailsRequest) ValidateAll() error {
+// ValidateAll checks the field values on ListWithdrawDetailsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListWithdrawDetailsRequestMultiError, or nil if none found.
+func (m *ListWithdrawDetailsRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListWithdrawDailyDetailsRequest) validate(all bool) error {
+func (m *ListWithdrawDetailsRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2847,7 +2836,7 @@ func (m *ListWithdrawDailyDetailsRequest) validate(all bool) error {
 			switch v := interface{}(m.GetStartTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListWithdrawDailyDetailsRequestValidationError{
+					errors = append(errors, ListWithdrawDetailsRequestValidationError{
 						field:  "StartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2855,7 +2844,7 @@ func (m *ListWithdrawDailyDetailsRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListWithdrawDailyDetailsRequestValidationError{
+					errors = append(errors, ListWithdrawDetailsRequestValidationError{
 						field:  "StartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2864,7 +2853,7 @@ func (m *ListWithdrawDailyDetailsRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListWithdrawDailyDetailsRequestValidationError{
+				return ListWithdrawDetailsRequestValidationError{
 					field:  "StartTime",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2880,7 +2869,7 @@ func (m *ListWithdrawDailyDetailsRequest) validate(all bool) error {
 			switch v := interface{}(m.GetEndTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListWithdrawDailyDetailsRequestValidationError{
+					errors = append(errors, ListWithdrawDetailsRequestValidationError{
 						field:  "EndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2888,7 +2877,7 @@ func (m *ListWithdrawDailyDetailsRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListWithdrawDailyDetailsRequestValidationError{
+					errors = append(errors, ListWithdrawDetailsRequestValidationError{
 						field:  "EndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2897,7 +2886,7 @@ func (m *ListWithdrawDailyDetailsRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListWithdrawDailyDetailsRequestValidationError{
+				return ListWithdrawDetailsRequestValidationError{
 					field:  "EndTime",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2916,19 +2905,19 @@ func (m *ListWithdrawDailyDetailsRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListWithdrawDailyDetailsRequestMultiError(errors)
+		return ListWithdrawDetailsRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListWithdrawDailyDetailsRequestMultiError is an error wrapping multiple
-// validation errors returned by ListWithdrawDailyDetailsRequest.ValidateAll()
-// if the designated constraints aren't met.
-type ListWithdrawDailyDetailsRequestMultiError []error
+// ListWithdrawDetailsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListWithdrawDetailsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListWithdrawDetailsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListWithdrawDailyDetailsRequestMultiError) Error() string {
+func (m ListWithdrawDetailsRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2937,12 +2926,11 @@ func (m ListWithdrawDailyDetailsRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListWithdrawDailyDetailsRequestMultiError) AllErrors() []error { return m }
+func (m ListWithdrawDetailsRequestMultiError) AllErrors() []error { return m }
 
-// ListWithdrawDailyDetailsRequestValidationError is the validation error
-// returned by ListWithdrawDailyDetailsRequest.Validate if the designated
-// constraints aren't met.
-type ListWithdrawDailyDetailsRequestValidationError struct {
+// ListWithdrawDetailsRequestValidationError is the validation error returned
+// by ListWithdrawDetailsRequest.Validate if the designated constraints aren't met.
+type ListWithdrawDetailsRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2950,24 +2938,24 @@ type ListWithdrawDailyDetailsRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListWithdrawDailyDetailsRequestValidationError) Field() string { return e.field }
+func (e ListWithdrawDetailsRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListWithdrawDailyDetailsRequestValidationError) Reason() string { return e.reason }
+func (e ListWithdrawDetailsRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListWithdrawDailyDetailsRequestValidationError) Cause() error { return e.cause }
+func (e ListWithdrawDetailsRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListWithdrawDailyDetailsRequestValidationError) Key() bool { return e.key }
+func (e ListWithdrawDetailsRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListWithdrawDailyDetailsRequestValidationError) ErrorName() string {
-	return "ListWithdrawDailyDetailsRequestValidationError"
+func (e ListWithdrawDetailsRequestValidationError) ErrorName() string {
+	return "ListWithdrawDetailsRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListWithdrawDailyDetailsRequestValidationError) Error() string {
+func (e ListWithdrawDetailsRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2979,14 +2967,14 @@ func (e ListWithdrawDailyDetailsRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListWithdrawDailyDetailsRequest.%s: %s%s",
+		"invalid %sListWithdrawDetailsRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListWithdrawDailyDetailsRequestValidationError{}
+var _ error = ListWithdrawDetailsRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -2994,25 +2982,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListWithdrawDailyDetailsRequestValidationError{}
+} = ListWithdrawDetailsRequestValidationError{}
 
-// Validate checks the field values on ListWithdrawDailyDetailsResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *ListWithdrawDailyDetailsResponse) Validate() error {
+// Validate checks the field values on ListWithdrawDetailsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListWithdrawDetailsResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListWithdrawDailyDetailsResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// ListWithdrawDailyDetailsResponseMultiError, or nil if none found.
-func (m *ListWithdrawDailyDetailsResponse) ValidateAll() error {
+// ValidateAll checks the field values on ListWithdrawDetailsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListWithdrawDetailsResponseMultiError, or nil if none found.
+func (m *ListWithdrawDetailsResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListWithdrawDailyDetailsResponse) validate(all bool) error {
+func (m *ListWithdrawDetailsResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3026,7 +3013,7 @@ func (m *ListWithdrawDailyDetailsResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListWithdrawDailyDetailsResponseValidationError{
+					errors = append(errors, ListWithdrawDetailsResponseValidationError{
 						field:  fmt.Sprintf("DailyDetails[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -3034,7 +3021,7 @@ func (m *ListWithdrawDailyDetailsResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListWithdrawDailyDetailsResponseValidationError{
+					errors = append(errors, ListWithdrawDetailsResponseValidationError{
 						field:  fmt.Sprintf("DailyDetails[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -3043,7 +3030,7 @@ func (m *ListWithdrawDailyDetailsResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListWithdrawDailyDetailsResponseValidationError{
+				return ListWithdrawDetailsResponseValidationError{
 					field:  fmt.Sprintf("DailyDetails[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3060,20 +3047,19 @@ func (m *ListWithdrawDailyDetailsResponse) validate(all bool) error {
 	// no validation rules for Total
 
 	if len(errors) > 0 {
-		return ListWithdrawDailyDetailsResponseMultiError(errors)
+		return ListWithdrawDetailsResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListWithdrawDailyDetailsResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// ListWithdrawDailyDetailsResponse.ValidateAll() if the designated
-// constraints aren't met.
-type ListWithdrawDailyDetailsResponseMultiError []error
+// ListWithdrawDetailsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListWithdrawDetailsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListWithdrawDetailsResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListWithdrawDailyDetailsResponseMultiError) Error() string {
+func (m ListWithdrawDetailsResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3082,12 +3068,12 @@ func (m ListWithdrawDailyDetailsResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListWithdrawDailyDetailsResponseMultiError) AllErrors() []error { return m }
+func (m ListWithdrawDetailsResponseMultiError) AllErrors() []error { return m }
 
-// ListWithdrawDailyDetailsResponseValidationError is the validation error
-// returned by ListWithdrawDailyDetailsResponse.Validate if the designated
-// constraints aren't met.
-type ListWithdrawDailyDetailsResponseValidationError struct {
+// ListWithdrawDetailsResponseValidationError is the validation error returned
+// by ListWithdrawDetailsResponse.Validate if the designated constraints
+// aren't met.
+type ListWithdrawDetailsResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3095,24 +3081,24 @@ type ListWithdrawDailyDetailsResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListWithdrawDailyDetailsResponseValidationError) Field() string { return e.field }
+func (e ListWithdrawDetailsResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListWithdrawDailyDetailsResponseValidationError) Reason() string { return e.reason }
+func (e ListWithdrawDetailsResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListWithdrawDailyDetailsResponseValidationError) Cause() error { return e.cause }
+func (e ListWithdrawDetailsResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListWithdrawDailyDetailsResponseValidationError) Key() bool { return e.key }
+func (e ListWithdrawDetailsResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListWithdrawDailyDetailsResponseValidationError) ErrorName() string {
-	return "ListWithdrawDailyDetailsResponseValidationError"
+func (e ListWithdrawDetailsResponseValidationError) ErrorName() string {
+	return "ListWithdrawDetailsResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListWithdrawDailyDetailsResponseValidationError) Error() string {
+func (e ListWithdrawDetailsResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3124,14 +3110,14 @@ func (e ListWithdrawDailyDetailsResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListWithdrawDailyDetailsResponse.%s: %s%s",
+		"invalid %sListWithdrawDetailsResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListWithdrawDailyDetailsResponseValidationError{}
+var _ error = ListWithdrawDetailsResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -3139,7 +3125,651 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListWithdrawDailyDetailsResponseValidationError{}
+} = ListWithdrawDetailsResponseValidationError{}
+
+// Validate checks the field values on ListDepositVtgDetailsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListDepositVtgDetailsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListDepositVtgDetailsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListDepositVtgDetailsRequestMultiError, or nil if none found.
+func (m *ListDepositVtgDetailsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListDepositVtgDetailsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TimeRange
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListDepositVtgDetailsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListDepositVtgDetailsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListDepositVtgDetailsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListDepositVtgDetailsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListDepositVtgDetailsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListDepositVtgDetailsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListDepositVtgDetailsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListDepositVtgDetailsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListDepositVtgDetailsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListDepositVtgDetailsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListDepositVtgDetailsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListDepositVtgDetailsRequestMultiError) AllErrors() []error { return m }
+
+// ListDepositVtgDetailsRequestValidationError is the validation error returned
+// by ListDepositVtgDetailsRequest.Validate if the designated constraints
+// aren't met.
+type ListDepositVtgDetailsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListDepositVtgDetailsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListDepositVtgDetailsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListDepositVtgDetailsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListDepositVtgDetailsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListDepositVtgDetailsRequestValidationError) ErrorName() string {
+	return "ListDepositVtgDetailsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListDepositVtgDetailsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListDepositVtgDetailsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListDepositVtgDetailsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListDepositVtgDetailsRequestValidationError{}
+
+// Validate checks the field values on ListDepositVtgDetailsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListDepositVtgDetailsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListDepositVtgDetailsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListDepositVtgDetailsResponseMultiError, or nil if none found.
+func (m *ListDepositVtgDetailsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListDepositVtgDetailsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetDailyDetails() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListDepositVtgDetailsResponseValidationError{
+						field:  fmt.Sprintf("DailyDetails[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListDepositVtgDetailsResponseValidationError{
+						field:  fmt.Sprintf("DailyDetails[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListDepositVtgDetailsResponseValidationError{
+					field:  fmt.Sprintf("DailyDetails[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for Total
+
+	if len(errors) > 0 {
+		return ListDepositVtgDetailsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListDepositVtgDetailsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListDepositVtgDetailsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ListDepositVtgDetailsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListDepositVtgDetailsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListDepositVtgDetailsResponseMultiError) AllErrors() []error { return m }
+
+// ListDepositVtgDetailsResponseValidationError is the validation error
+// returned by ListDepositVtgDetailsResponse.Validate if the designated
+// constraints aren't met.
+type ListDepositVtgDetailsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListDepositVtgDetailsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListDepositVtgDetailsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListDepositVtgDetailsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListDepositVtgDetailsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListDepositVtgDetailsResponseValidationError) ErrorName() string {
+	return "ListDepositVtgDetailsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListDepositVtgDetailsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListDepositVtgDetailsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListDepositVtgDetailsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListDepositVtgDetailsResponseValidationError{}
+
+// Validate checks the field values on ListWithdrawVtgDetailsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListWithdrawVtgDetailsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListWithdrawVtgDetailsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListWithdrawVtgDetailsRequestMultiError, or nil if none found.
+func (m *ListWithdrawVtgDetailsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListWithdrawVtgDetailsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TimeRange
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListWithdrawVtgDetailsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListWithdrawVtgDetailsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListWithdrawVtgDetailsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListWithdrawVtgDetailsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListWithdrawVtgDetailsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListWithdrawVtgDetailsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListWithdrawVtgDetailsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListWithdrawVtgDetailsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListWithdrawVtgDetailsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListWithdrawVtgDetailsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListWithdrawVtgDetailsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListWithdrawVtgDetailsRequestMultiError) AllErrors() []error { return m }
+
+// ListWithdrawVtgDetailsRequestValidationError is the validation error
+// returned by ListWithdrawVtgDetailsRequest.Validate if the designated
+// constraints aren't met.
+type ListWithdrawVtgDetailsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListWithdrawVtgDetailsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListWithdrawVtgDetailsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListWithdrawVtgDetailsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListWithdrawVtgDetailsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListWithdrawVtgDetailsRequestValidationError) ErrorName() string {
+	return "ListWithdrawVtgDetailsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListWithdrawVtgDetailsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListWithdrawVtgDetailsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListWithdrawVtgDetailsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListWithdrawVtgDetailsRequestValidationError{}
+
+// Validate checks the field values on ListWithdrawVtgDetailsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListWithdrawVtgDetailsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListWithdrawVtgDetailsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListWithdrawVtgDetailsResponseMultiError, or nil if none found.
+func (m *ListWithdrawVtgDetailsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListWithdrawVtgDetailsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetDailyDetails() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListWithdrawVtgDetailsResponseValidationError{
+						field:  fmt.Sprintf("DailyDetails[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListWithdrawVtgDetailsResponseValidationError{
+						field:  fmt.Sprintf("DailyDetails[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListWithdrawVtgDetailsResponseValidationError{
+					field:  fmt.Sprintf("DailyDetails[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for Total
+
+	if len(errors) > 0 {
+		return ListWithdrawVtgDetailsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListWithdrawVtgDetailsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListWithdrawVtgDetailsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ListWithdrawVtgDetailsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListWithdrawVtgDetailsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListWithdrawVtgDetailsResponseMultiError) AllErrors() []error { return m }
+
+// ListWithdrawVtgDetailsResponseValidationError is the validation error
+// returned by ListWithdrawVtgDetailsResponse.Validate if the designated
+// constraints aren't met.
+type ListWithdrawVtgDetailsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListWithdrawVtgDetailsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListWithdrawVtgDetailsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListWithdrawVtgDetailsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListWithdrawVtgDetailsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListWithdrawVtgDetailsResponseValidationError) ErrorName() string {
+	return "ListWithdrawVtgDetailsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListWithdrawVtgDetailsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListWithdrawVtgDetailsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListWithdrawVtgDetailsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListWithdrawVtgDetailsResponseValidationError{}
 
 // Validate checks the field values on ListDailySummariesResponse_DailySummary
 // with the rules defined in the proto definition for this message. If any
@@ -3693,24 +4323,24 @@ var _ interface {
 	ErrorName() string
 } = GetPlayerGameDataDailySummariesResponse_DailySummaryValidationError{}
 
-// Validate checks the field values on
-// ListDepositDailySummariesResponse_DailySummary with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *ListDepositDailySummariesResponse_DailySummary) Validate() error {
+// Validate checks the field values on GetDepositSummariesResponse_DailySummary
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetDepositSummariesResponse_DailySummary) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// ListDepositDailySummariesResponse_DailySummary with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in
-// ListDepositDailySummariesResponse_DailySummaryMultiError, or nil if none found.
-func (m *ListDepositDailySummariesResponse_DailySummary) ValidateAll() error {
+// GetDepositSummariesResponse_DailySummary with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetDepositSummariesResponse_DailySummaryMultiError, or nil if none found.
+func (m *GetDepositSummariesResponse_DailySummary) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListDepositDailySummariesResponse_DailySummary) validate(all bool) error {
+func (m *GetDepositSummariesResponse_DailySummary) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3721,7 +4351,7 @@ func (m *ListDepositDailySummariesResponse_DailySummary) validate(all bool) erro
 		switch v := interface{}(m.GetDate()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListDepositDailySummariesResponse_DailySummaryValidationError{
+				errors = append(errors, GetDepositSummariesResponse_DailySummaryValidationError{
 					field:  "Date",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3729,7 +4359,7 @@ func (m *ListDepositDailySummariesResponse_DailySummary) validate(all bool) erro
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListDepositDailySummariesResponse_DailySummaryValidationError{
+				errors = append(errors, GetDepositSummariesResponse_DailySummaryValidationError{
 					field:  "Date",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3738,7 +4368,7 @@ func (m *ListDepositDailySummariesResponse_DailySummary) validate(all bool) erro
 		}
 	} else if v, ok := interface{}(m.GetDate()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListDepositDailySummariesResponse_DailySummaryValidationError{
+			return GetDepositSummariesResponse_DailySummaryValidationError{
 				field:  "Date",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -3753,20 +4383,20 @@ func (m *ListDepositDailySummariesResponse_DailySummary) validate(all bool) erro
 	// no validation rules for DepositAmount
 
 	if len(errors) > 0 {
-		return ListDepositDailySummariesResponse_DailySummaryMultiError(errors)
+		return GetDepositSummariesResponse_DailySummaryMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListDepositDailySummariesResponse_DailySummaryMultiError is an error
-// wrapping multiple validation errors returned by
-// ListDepositDailySummariesResponse_DailySummary.ValidateAll() if the
-// designated constraints aren't met.
-type ListDepositDailySummariesResponse_DailySummaryMultiError []error
+// GetDepositSummariesResponse_DailySummaryMultiError is an error wrapping
+// multiple validation errors returned by
+// GetDepositSummariesResponse_DailySummary.ValidateAll() if the designated
+// constraints aren't met.
+type GetDepositSummariesResponse_DailySummaryMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListDepositDailySummariesResponse_DailySummaryMultiError) Error() string {
+func (m GetDepositSummariesResponse_DailySummaryMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3775,13 +4405,12 @@ func (m ListDepositDailySummariesResponse_DailySummaryMultiError) Error() string
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListDepositDailySummariesResponse_DailySummaryMultiError) AllErrors() []error { return m }
+func (m GetDepositSummariesResponse_DailySummaryMultiError) AllErrors() []error { return m }
 
-// ListDepositDailySummariesResponse_DailySummaryValidationError is the
-// validation error returned by
-// ListDepositDailySummariesResponse_DailySummary.Validate if the designated
-// constraints aren't met.
-type ListDepositDailySummariesResponse_DailySummaryValidationError struct {
+// GetDepositSummariesResponse_DailySummaryValidationError is the validation
+// error returned by GetDepositSummariesResponse_DailySummary.Validate if the
+// designated constraints aren't met.
+type GetDepositSummariesResponse_DailySummaryValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3789,26 +4418,24 @@ type ListDepositDailySummariesResponse_DailySummaryValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListDepositDailySummariesResponse_DailySummaryValidationError) Field() string { return e.field }
+func (e GetDepositSummariesResponse_DailySummaryValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListDepositDailySummariesResponse_DailySummaryValidationError) Reason() string {
-	return e.reason
-}
+func (e GetDepositSummariesResponse_DailySummaryValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListDepositDailySummariesResponse_DailySummaryValidationError) Cause() error { return e.cause }
+func (e GetDepositSummariesResponse_DailySummaryValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListDepositDailySummariesResponse_DailySummaryValidationError) Key() bool { return e.key }
+func (e GetDepositSummariesResponse_DailySummaryValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListDepositDailySummariesResponse_DailySummaryValidationError) ErrorName() string {
-	return "ListDepositDailySummariesResponse_DailySummaryValidationError"
+func (e GetDepositSummariesResponse_DailySummaryValidationError) ErrorName() string {
+	return "GetDepositSummariesResponse_DailySummaryValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListDepositDailySummariesResponse_DailySummaryValidationError) Error() string {
+func (e GetDepositSummariesResponse_DailySummaryValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3820,14 +4447,14 @@ func (e ListDepositDailySummariesResponse_DailySummaryValidationError) Error() s
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListDepositDailySummariesResponse_DailySummary.%s: %s%s",
+		"invalid %sGetDepositSummariesResponse_DailySummary.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListDepositDailySummariesResponse_DailySummaryValidationError{}
+var _ error = GetDepositSummariesResponse_DailySummaryValidationError{}
 
 var _ interface {
 	Field() string
@@ -3835,26 +4462,26 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListDepositDailySummariesResponse_DailySummaryValidationError{}
+} = GetDepositSummariesResponse_DailySummaryValidationError{}
 
-// Validate checks the field values on
-// ListDepositDailyDetailsResponse_DailyDetail with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *ListDepositDailyDetailsResponse_DailyDetail) Validate() error {
+// Validate checks the field values on ListDepositDetailsResponse_DailyDetail
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListDepositDetailsResponse_DailyDetail) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// ListDepositDailyDetailsResponse_DailyDetail with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// ListDepositDailyDetailsResponse_DailyDetailMultiError, or nil if none found.
-func (m *ListDepositDailyDetailsResponse_DailyDetail) ValidateAll() error {
+// ListDepositDetailsResponse_DailyDetail with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ListDepositDetailsResponse_DailyDetailMultiError, or nil if none found.
+func (m *ListDepositDetailsResponse_DailyDetail) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListDepositDailyDetailsResponse_DailyDetail) validate(all bool) error {
+func (m *ListDepositDetailsResponse_DailyDetail) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3865,7 +4492,7 @@ func (m *ListDepositDailyDetailsResponse_DailyDetail) validate(all bool) error {
 		switch v := interface{}(m.GetDate()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListDepositDailyDetailsResponse_DailyDetailValidationError{
+				errors = append(errors, ListDepositDetailsResponse_DailyDetailValidationError{
 					field:  "Date",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3873,7 +4500,7 @@ func (m *ListDepositDailyDetailsResponse_DailyDetail) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListDepositDailyDetailsResponse_DailyDetailValidationError{
+				errors = append(errors, ListDepositDetailsResponse_DailyDetailValidationError{
 					field:  "Date",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3882,7 +4509,7 @@ func (m *ListDepositDailyDetailsResponse_DailyDetail) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetDate()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListDepositDailyDetailsResponse_DailyDetailValidationError{
+			return ListDepositDetailsResponse_DailyDetailValidationError{
 				field:  "Date",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -3923,20 +4550,20 @@ func (m *ListDepositDailyDetailsResponse_DailyDetail) validate(all bool) error {
 	// no validation rules for AmountProportionPercentage
 
 	if len(errors) > 0 {
-		return ListDepositDailyDetailsResponse_DailyDetailMultiError(errors)
+		return ListDepositDetailsResponse_DailyDetailMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListDepositDailyDetailsResponse_DailyDetailMultiError is an error wrapping
+// ListDepositDetailsResponse_DailyDetailMultiError is an error wrapping
 // multiple validation errors returned by
-// ListDepositDailyDetailsResponse_DailyDetail.ValidateAll() if the designated
+// ListDepositDetailsResponse_DailyDetail.ValidateAll() if the designated
 // constraints aren't met.
-type ListDepositDailyDetailsResponse_DailyDetailMultiError []error
+type ListDepositDetailsResponse_DailyDetailMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListDepositDailyDetailsResponse_DailyDetailMultiError) Error() string {
+func (m ListDepositDetailsResponse_DailyDetailMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3945,12 +4572,12 @@ func (m ListDepositDailyDetailsResponse_DailyDetailMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListDepositDailyDetailsResponse_DailyDetailMultiError) AllErrors() []error { return m }
+func (m ListDepositDetailsResponse_DailyDetailMultiError) AllErrors() []error { return m }
 
-// ListDepositDailyDetailsResponse_DailyDetailValidationError is the validation
-// error returned by ListDepositDailyDetailsResponse_DailyDetail.Validate if
-// the designated constraints aren't met.
-type ListDepositDailyDetailsResponse_DailyDetailValidationError struct {
+// ListDepositDetailsResponse_DailyDetailValidationError is the validation
+// error returned by ListDepositDetailsResponse_DailyDetail.Validate if the
+// designated constraints aren't met.
+type ListDepositDetailsResponse_DailyDetailValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3958,24 +4585,24 @@ type ListDepositDailyDetailsResponse_DailyDetailValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListDepositDailyDetailsResponse_DailyDetailValidationError) Field() string { return e.field }
+func (e ListDepositDetailsResponse_DailyDetailValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListDepositDailyDetailsResponse_DailyDetailValidationError) Reason() string { return e.reason }
+func (e ListDepositDetailsResponse_DailyDetailValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListDepositDailyDetailsResponse_DailyDetailValidationError) Cause() error { return e.cause }
+func (e ListDepositDetailsResponse_DailyDetailValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListDepositDailyDetailsResponse_DailyDetailValidationError) Key() bool { return e.key }
+func (e ListDepositDetailsResponse_DailyDetailValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListDepositDailyDetailsResponse_DailyDetailValidationError) ErrorName() string {
-	return "ListDepositDailyDetailsResponse_DailyDetailValidationError"
+func (e ListDepositDetailsResponse_DailyDetailValidationError) ErrorName() string {
+	return "ListDepositDetailsResponse_DailyDetailValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListDepositDailyDetailsResponse_DailyDetailValidationError) Error() string {
+func (e ListDepositDetailsResponse_DailyDetailValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3987,14 +4614,14 @@ func (e ListDepositDailyDetailsResponse_DailyDetailValidationError) Error() stri
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListDepositDailyDetailsResponse_DailyDetail.%s: %s%s",
+		"invalid %sListDepositDetailsResponse_DailyDetail.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListDepositDailyDetailsResponse_DailyDetailValidationError{}
+var _ error = ListDepositDetailsResponse_DailyDetailValidationError{}
 
 var _ interface {
 	Field() string
@@ -4002,26 +4629,26 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListDepositDailyDetailsResponse_DailyDetailValidationError{}
+} = ListDepositDetailsResponse_DailyDetailValidationError{}
 
 // Validate checks the field values on
-// ListWithdrawDailySummariesResponse_DailySummary with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
+// GetWithdrawSummariesResponse_DailySummary with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *ListWithdrawDailySummariesResponse_DailySummary) Validate() error {
+func (m *GetWithdrawSummariesResponse_DailySummary) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// ListWithdrawDailySummariesResponse_DailySummary with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in
-// ListWithdrawDailySummariesResponse_DailySummaryMultiError, or nil if none found.
-func (m *ListWithdrawDailySummariesResponse_DailySummary) ValidateAll() error {
+// GetWithdrawSummariesResponse_DailySummary with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetWithdrawSummariesResponse_DailySummaryMultiError, or nil if none found.
+func (m *GetWithdrawSummariesResponse_DailySummary) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListWithdrawDailySummariesResponse_DailySummary) validate(all bool) error {
+func (m *GetWithdrawSummariesResponse_DailySummary) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4032,7 +4659,7 @@ func (m *ListWithdrawDailySummariesResponse_DailySummary) validate(all bool) err
 		switch v := interface{}(m.GetDate()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListWithdrawDailySummariesResponse_DailySummaryValidationError{
+				errors = append(errors, GetWithdrawSummariesResponse_DailySummaryValidationError{
 					field:  "Date",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4040,7 +4667,7 @@ func (m *ListWithdrawDailySummariesResponse_DailySummary) validate(all bool) err
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListWithdrawDailySummariesResponse_DailySummaryValidationError{
+				errors = append(errors, GetWithdrawSummariesResponse_DailySummaryValidationError{
 					field:  "Date",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4049,7 +4676,7 @@ func (m *ListWithdrawDailySummariesResponse_DailySummary) validate(all bool) err
 		}
 	} else if v, ok := interface{}(m.GetDate()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListWithdrawDailySummariesResponse_DailySummaryValidationError{
+			return GetWithdrawSummariesResponse_DailySummaryValidationError{
 				field:  "Date",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4064,20 +4691,20 @@ func (m *ListWithdrawDailySummariesResponse_DailySummary) validate(all bool) err
 	// no validation rules for WithdrawAmount
 
 	if len(errors) > 0 {
-		return ListWithdrawDailySummariesResponse_DailySummaryMultiError(errors)
+		return GetWithdrawSummariesResponse_DailySummaryMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListWithdrawDailySummariesResponse_DailySummaryMultiError is an error
-// wrapping multiple validation errors returned by
-// ListWithdrawDailySummariesResponse_DailySummary.ValidateAll() if the
-// designated constraints aren't met.
-type ListWithdrawDailySummariesResponse_DailySummaryMultiError []error
+// GetWithdrawSummariesResponse_DailySummaryMultiError is an error wrapping
+// multiple validation errors returned by
+// GetWithdrawSummariesResponse_DailySummary.ValidateAll() if the designated
+// constraints aren't met.
+type GetWithdrawSummariesResponse_DailySummaryMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListWithdrawDailySummariesResponse_DailySummaryMultiError) Error() string {
+func (m GetWithdrawSummariesResponse_DailySummaryMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4086,13 +4713,12 @@ func (m ListWithdrawDailySummariesResponse_DailySummaryMultiError) Error() strin
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListWithdrawDailySummariesResponse_DailySummaryMultiError) AllErrors() []error { return m }
+func (m GetWithdrawSummariesResponse_DailySummaryMultiError) AllErrors() []error { return m }
 
-// ListWithdrawDailySummariesResponse_DailySummaryValidationError is the
-// validation error returned by
-// ListWithdrawDailySummariesResponse_DailySummary.Validate if the designated
-// constraints aren't met.
-type ListWithdrawDailySummariesResponse_DailySummaryValidationError struct {
+// GetWithdrawSummariesResponse_DailySummaryValidationError is the validation
+// error returned by GetWithdrawSummariesResponse_DailySummary.Validate if the
+// designated constraints aren't met.
+type GetWithdrawSummariesResponse_DailySummaryValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4100,28 +4726,24 @@ type ListWithdrawDailySummariesResponse_DailySummaryValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListWithdrawDailySummariesResponse_DailySummaryValidationError) Field() string {
-	return e.field
-}
+func (e GetWithdrawSummariesResponse_DailySummaryValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListWithdrawDailySummariesResponse_DailySummaryValidationError) Reason() string {
-	return e.reason
-}
+func (e GetWithdrawSummariesResponse_DailySummaryValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListWithdrawDailySummariesResponse_DailySummaryValidationError) Cause() error { return e.cause }
+func (e GetWithdrawSummariesResponse_DailySummaryValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListWithdrawDailySummariesResponse_DailySummaryValidationError) Key() bool { return e.key }
+func (e GetWithdrawSummariesResponse_DailySummaryValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListWithdrawDailySummariesResponse_DailySummaryValidationError) ErrorName() string {
-	return "ListWithdrawDailySummariesResponse_DailySummaryValidationError"
+func (e GetWithdrawSummariesResponse_DailySummaryValidationError) ErrorName() string {
+	return "GetWithdrawSummariesResponse_DailySummaryValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListWithdrawDailySummariesResponse_DailySummaryValidationError) Error() string {
+func (e GetWithdrawSummariesResponse_DailySummaryValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4133,14 +4755,14 @@ func (e ListWithdrawDailySummariesResponse_DailySummaryValidationError) Error() 
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListWithdrawDailySummariesResponse_DailySummary.%s: %s%s",
+		"invalid %sGetWithdrawSummariesResponse_DailySummary.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListWithdrawDailySummariesResponse_DailySummaryValidationError{}
+var _ error = GetWithdrawSummariesResponse_DailySummaryValidationError{}
 
 var _ interface {
 	Field() string
@@ -4148,26 +4770,26 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListWithdrawDailySummariesResponse_DailySummaryValidationError{}
+} = GetWithdrawSummariesResponse_DailySummaryValidationError{}
 
-// Validate checks the field values on
-// ListWithdrawDailyDetailsResponse_DailyDetail with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *ListWithdrawDailyDetailsResponse_DailyDetail) Validate() error {
+// Validate checks the field values on ListWithdrawDetailsResponse_DailyDetail
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListWithdrawDetailsResponse_DailyDetail) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// ListWithdrawDailyDetailsResponse_DailyDetail with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// ListWithdrawDailyDetailsResponse_DailyDetailMultiError, or nil if none found.
-func (m *ListWithdrawDailyDetailsResponse_DailyDetail) ValidateAll() error {
+// ListWithdrawDetailsResponse_DailyDetail with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ListWithdrawDetailsResponse_DailyDetailMultiError, or nil if none found.
+func (m *ListWithdrawDetailsResponse_DailyDetail) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListWithdrawDailyDetailsResponse_DailyDetail) validate(all bool) error {
+func (m *ListWithdrawDetailsResponse_DailyDetail) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4178,7 +4800,7 @@ func (m *ListWithdrawDailyDetailsResponse_DailyDetail) validate(all bool) error 
 		switch v := interface{}(m.GetDate()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListWithdrawDailyDetailsResponse_DailyDetailValidationError{
+				errors = append(errors, ListWithdrawDetailsResponse_DailyDetailValidationError{
 					field:  "Date",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4186,7 +4808,7 @@ func (m *ListWithdrawDailyDetailsResponse_DailyDetail) validate(all bool) error 
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListWithdrawDailyDetailsResponse_DailyDetailValidationError{
+				errors = append(errors, ListWithdrawDetailsResponse_DailyDetailValidationError{
 					field:  "Date",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4195,7 +4817,7 @@ func (m *ListWithdrawDailyDetailsResponse_DailyDetail) validate(all bool) error 
 		}
 	} else if v, ok := interface{}(m.GetDate()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListWithdrawDailyDetailsResponse_DailyDetailValidationError{
+			return ListWithdrawDetailsResponse_DailyDetailValidationError{
 				field:  "Date",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4238,20 +4860,20 @@ func (m *ListWithdrawDailyDetailsResponse_DailyDetail) validate(all bool) error 
 	// no validation rules for AmountProportionPercentage
 
 	if len(errors) > 0 {
-		return ListWithdrawDailyDetailsResponse_DailyDetailMultiError(errors)
+		return ListWithdrawDetailsResponse_DailyDetailMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListWithdrawDailyDetailsResponse_DailyDetailMultiError is an error wrapping
+// ListWithdrawDetailsResponse_DailyDetailMultiError is an error wrapping
 // multiple validation errors returned by
-// ListWithdrawDailyDetailsResponse_DailyDetail.ValidateAll() if the
-// designated constraints aren't met.
-type ListWithdrawDailyDetailsResponse_DailyDetailMultiError []error
+// ListWithdrawDetailsResponse_DailyDetail.ValidateAll() if the designated
+// constraints aren't met.
+type ListWithdrawDetailsResponse_DailyDetailMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListWithdrawDailyDetailsResponse_DailyDetailMultiError) Error() string {
+func (m ListWithdrawDetailsResponse_DailyDetailMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4260,13 +4882,12 @@ func (m ListWithdrawDailyDetailsResponse_DailyDetailMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListWithdrawDailyDetailsResponse_DailyDetailMultiError) AllErrors() []error { return m }
+func (m ListWithdrawDetailsResponse_DailyDetailMultiError) AllErrors() []error { return m }
 
-// ListWithdrawDailyDetailsResponse_DailyDetailValidationError is the
-// validation error returned by
-// ListWithdrawDailyDetailsResponse_DailyDetail.Validate if the designated
-// constraints aren't met.
-type ListWithdrawDailyDetailsResponse_DailyDetailValidationError struct {
+// ListWithdrawDetailsResponse_DailyDetailValidationError is the validation
+// error returned by ListWithdrawDetailsResponse_DailyDetail.Validate if the
+// designated constraints aren't met.
+type ListWithdrawDetailsResponse_DailyDetailValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4274,24 +4895,24 @@ type ListWithdrawDailyDetailsResponse_DailyDetailValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListWithdrawDailyDetailsResponse_DailyDetailValidationError) Field() string { return e.field }
+func (e ListWithdrawDetailsResponse_DailyDetailValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListWithdrawDailyDetailsResponse_DailyDetailValidationError) Reason() string { return e.reason }
+func (e ListWithdrawDetailsResponse_DailyDetailValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListWithdrawDailyDetailsResponse_DailyDetailValidationError) Cause() error { return e.cause }
+func (e ListWithdrawDetailsResponse_DailyDetailValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListWithdrawDailyDetailsResponse_DailyDetailValidationError) Key() bool { return e.key }
+func (e ListWithdrawDetailsResponse_DailyDetailValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListWithdrawDailyDetailsResponse_DailyDetailValidationError) ErrorName() string {
-	return "ListWithdrawDailyDetailsResponse_DailyDetailValidationError"
+func (e ListWithdrawDetailsResponse_DailyDetailValidationError) ErrorName() string {
+	return "ListWithdrawDetailsResponse_DailyDetailValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListWithdrawDailyDetailsResponse_DailyDetailValidationError) Error() string {
+func (e ListWithdrawDetailsResponse_DailyDetailValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4303,14 +4924,14 @@ func (e ListWithdrawDailyDetailsResponse_DailyDetailValidationError) Error() str
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListWithdrawDailyDetailsResponse_DailyDetail.%s: %s%s",
+		"invalid %sListWithdrawDetailsResponse_DailyDetail.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListWithdrawDailyDetailsResponse_DailyDetailValidationError{}
+var _ error = ListWithdrawDetailsResponse_DailyDetailValidationError{}
 
 var _ interface {
 	Field() string
@@ -4318,4 +4939,340 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListWithdrawDailyDetailsResponse_DailyDetailValidationError{}
+} = ListWithdrawDetailsResponse_DailyDetailValidationError{}
+
+// Validate checks the field values on
+// ListDepositVtgDetailsResponse_DailyDetail with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListDepositVtgDetailsResponse_DailyDetail) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListDepositVtgDetailsResponse_DailyDetail with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// ListDepositVtgDetailsResponse_DailyDetailMultiError, or nil if none found.
+func (m *ListDepositVtgDetailsResponse_DailyDetail) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListDepositVtgDetailsResponse_DailyDetail) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetDate()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListDepositVtgDetailsResponse_DailyDetailValidationError{
+					field:  "Date",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListDepositVtgDetailsResponse_DailyDetailValidationError{
+					field:  "Date",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListDepositVtgDetailsResponse_DailyDetailValidationError{
+				field:  "Date",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Operator
+
+	// no validation rules for Currency
+
+	// no validation rules for DepositAmount
+
+	// no validation rules for DepositUsers
+
+	// no validation rules for FtdAmount
+
+	// no validation rules for FtdUsers
+
+	// no validation rules for SameDayFtdAmount
+
+	// no validation rules for SameDayFtdUsers
+
+	// no validation rules for RepeatedDepositAmount
+
+	// no validation rules for RepeatedDepositUsers
+
+	// no validation rules for SameDayFtd
+
+	// no validation rules for NonSameDayFtd
+
+	// no validation rules for AverageFtdAmountForSameDayRegistredUsers
+
+	// no validation rules for AverageFtdAmountForNonSameDayRegistredUsers
+
+	// no validation rules for SuccessPercentage
+
+	// no validation rules for AmountProportionPercentage
+
+	if len(errors) > 0 {
+		return ListDepositVtgDetailsResponse_DailyDetailMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListDepositVtgDetailsResponse_DailyDetailMultiError is an error wrapping
+// multiple validation errors returned by
+// ListDepositVtgDetailsResponse_DailyDetail.ValidateAll() if the designated
+// constraints aren't met.
+type ListDepositVtgDetailsResponse_DailyDetailMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListDepositVtgDetailsResponse_DailyDetailMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListDepositVtgDetailsResponse_DailyDetailMultiError) AllErrors() []error { return m }
+
+// ListDepositVtgDetailsResponse_DailyDetailValidationError is the validation
+// error returned by ListDepositVtgDetailsResponse_DailyDetail.Validate if the
+// designated constraints aren't met.
+type ListDepositVtgDetailsResponse_DailyDetailValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListDepositVtgDetailsResponse_DailyDetailValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListDepositVtgDetailsResponse_DailyDetailValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListDepositVtgDetailsResponse_DailyDetailValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListDepositVtgDetailsResponse_DailyDetailValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListDepositVtgDetailsResponse_DailyDetailValidationError) ErrorName() string {
+	return "ListDepositVtgDetailsResponse_DailyDetailValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListDepositVtgDetailsResponse_DailyDetailValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListDepositVtgDetailsResponse_DailyDetail.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListDepositVtgDetailsResponse_DailyDetailValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListDepositVtgDetailsResponse_DailyDetailValidationError{}
+
+// Validate checks the field values on
+// ListWithdrawVtgDetailsResponse_DailyDetail with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListWithdrawVtgDetailsResponse_DailyDetail) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListWithdrawVtgDetailsResponse_DailyDetail with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// ListWithdrawVtgDetailsResponse_DailyDetailMultiError, or nil if none found.
+func (m *ListWithdrawVtgDetailsResponse_DailyDetail) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListWithdrawVtgDetailsResponse_DailyDetail) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetDate()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListWithdrawVtgDetailsResponse_DailyDetailValidationError{
+					field:  "Date",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListWithdrawVtgDetailsResponse_DailyDetailValidationError{
+					field:  "Date",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListWithdrawVtgDetailsResponse_DailyDetailValidationError{
+				field:  "Date",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Operator
+
+	// no validation rules for Currency
+
+	// no validation rules for WithdrawAmount
+
+	// no validation rules for WithdrawUsers
+
+	// no validation rules for FtwAmount
+
+	// no validation rules for FtwUsers
+
+	// no validation rules for SameDayFtwAmount
+
+	// no validation rules for SameDayFtwUsers
+
+	// no validation rules for RepeatedWithdrawAmount
+
+	// no validation rules for RepeatedWithdrawUsers
+
+	// no validation rules for SameDayFtw
+
+	// no validation rules for NonSameDayFtw
+
+	// no validation rules for AverageFtwAmountForSameDayRegistredUsers
+
+	// no validation rules for AverageFtwAmountForNonSameDayRegistredUsers
+
+	// no validation rules for SuccessPercentage
+
+	// no validation rules for DepositMinusWithdrawAmount
+
+	// no validation rules for AmountProportionPercentage
+
+	if len(errors) > 0 {
+		return ListWithdrawVtgDetailsResponse_DailyDetailMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListWithdrawVtgDetailsResponse_DailyDetailMultiError is an error wrapping
+// multiple validation errors returned by
+// ListWithdrawVtgDetailsResponse_DailyDetail.ValidateAll() if the designated
+// constraints aren't met.
+type ListWithdrawVtgDetailsResponse_DailyDetailMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListWithdrawVtgDetailsResponse_DailyDetailMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListWithdrawVtgDetailsResponse_DailyDetailMultiError) AllErrors() []error { return m }
+
+// ListWithdrawVtgDetailsResponse_DailyDetailValidationError is the validation
+// error returned by ListWithdrawVtgDetailsResponse_DailyDetail.Validate if
+// the designated constraints aren't met.
+type ListWithdrawVtgDetailsResponse_DailyDetailValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListWithdrawVtgDetailsResponse_DailyDetailValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListWithdrawVtgDetailsResponse_DailyDetailValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListWithdrawVtgDetailsResponse_DailyDetailValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListWithdrawVtgDetailsResponse_DailyDetailValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListWithdrawVtgDetailsResponse_DailyDetailValidationError) ErrorName() string {
+	return "ListWithdrawVtgDetailsResponse_DailyDetailValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListWithdrawVtgDetailsResponse_DailyDetailValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListWithdrawVtgDetailsResponse_DailyDetail.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListWithdrawVtgDetailsResponse_DailyDetailValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListWithdrawVtgDetailsResponse_DailyDetailValidationError{}

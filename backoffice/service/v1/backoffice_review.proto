@@ -4,7 +4,7 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
-
+import "google/protobuf/struct.proto";
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
@@ -16,9 +16,27 @@ service BackofficeReview {
             body: "*"
         };
     }
+	rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/review/tickets/get"
+            body: "*"
+        };
+    }
     rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {
         option (google.api.http) = {
-            post: "/v1/backoffice/review/ticket/review"
+            post: "/v1/backoffice/review/tickets/review"
+            body: "*"
+        };
+    }
+	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/review/tickets/comments/add"
+            body: "*"
+        };
+    }
+	rpc CancelTicket(CancelTicketRequest) returns (CancelTicketResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/review/tickets/cancel"
             body: "*"
         };
     }
@@ -76,6 +94,50 @@ message ListTicketsResponse {
 	int32 average_review_time = 16;
 }
 
+message GetTicketRequest {
+	int64 ticket_id = 1;
+}
+
+message GetTicketResponse {
+	message WithdrawPaymentInfo {
+		google.protobuf.Timestamp created_at = 1;
+		string currency = 2;
+		string amount = 3;
+		string amount_usd = 4;
+		string before_balance = 5;
+		string after_balance = 6;
+		string payment_channel = 7;
+		string protocol = 8;
+		string fee = 9;
+		google.protobuf.Struct extra = 10;
+		google.protobuf.Struct schema = 11;
+	}
+	message UserWalletData {
+		string deposit_usd = 1;
+		string withdraw_usd = 2;
+		string deposit_minus_withdraw_usd = 3;
+		string valid_turnover_usd = 4;
+		int32 deposit_count = 5;
+		int32 withdraw_count = 6;
+		int32 today_withdraw_count = 7;
+	}
+	message Comment {
+		string author_username = 1;
+		string content = 2;
+		google.protobuf.Timestamp created_at = 3;
+	}
+	string operator_name = 1;
+	int64 user_id = 2;
+	int32 vip_level = 3;
+	int64 ticket_id = 4;
+	string status = 5;	// pending, approved, rejected, manual_payout, paying, paid, failed
+	repeated string user_tags = 6;
+	WithdrawPaymentInfo withdraw_payment_info = 7;
+	repeated string linked_accounts = 8;
+	UserWalletData user_wallet_data = 9;
+	repeated Comment comments = 10;
+}
+
 message ReviewTicketRequest {
 	int64 ticket_id = 1;
 	int64 reviewer_user_id = 2;
@@ -86,15 +148,18 @@ message ReviewTicketRequest {
 message ReviewTicketResponse {}
 
 message AddCommentRequest {
-	// review ticket id
 	int64 ticket_id = 1;
-	// user id of the reviewer
-	int64 reviewer_user_id = 2;
-	// review comment
-	string review_comment = 3;
+	int64 author_user_id = 2;
+	string content = 3;
 }
 
 message AddCommentResponse {
-	// id of the comment added
 	int64 comment_id = 1;
 }
+
+message CancelTicketRequest {
+	int64 ticket_id = 1;
+	int64 canceller_user_id = 2;
+}
+
+message CancelTicketResponse {}

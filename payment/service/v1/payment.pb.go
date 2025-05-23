@@ -1560,20 +1560,22 @@ type TransactionInfo struct {
 	Amount int64 `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Currency code for the transaction
 	Currency string `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Transaction fee in smallest currency unit
+	Fee int64 `protobuf:"varint,9,opt,name=fee,proto3" json:"fee,omitempty"`
 	// Payment method used for the transaction
-	PaymentMethod string `protobuf:"bytes,9,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	PaymentMethod string `protobuf:"bytes,10,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Payment channel used for the transaction
-	PaymentChannel string `protobuf:"bytes,10,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	PaymentChannel string `protobuf:"bytes,11,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
 	// Protocol used for the transaction
-	Protocol string `protobuf:"bytes,11,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Protocol string `protobuf:"bytes,12,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Type of transaction (deposit or withdrawal)
-	Type TransactionType `protobuf:"varint,12,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
+	Type TransactionType `protobuf:"varint,13,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
 	// Current status of the transaction
-	Status TransactionStatus `protobuf:"varint,13,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
+	Status TransactionStatus `protobuf:"varint,14,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
 	// Timestamp when the transaction was created
-	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Timestamp when the transaction was last updated
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1662,6 +1664,13 @@ func (x *TransactionInfo) GetCurrency() string {
 		return x.Currency
 	}
 	return ""
+}
+
+func (x *TransactionInfo) GetFee() int64 {
+	if x != nil {
+		return x.Fee
+	}
+	return 0
 }
 
 func (x *TransactionInfo) GetPaymentMethod() string {
@@ -2497,7 +2506,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05nonce\x18\f \x01(\tR\x05nonce\"N\n" +
 	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\x80\x05\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\x92\x05\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x126\n" +
 	"\x17operator_transaction_id\x18\x02 \x01(\tR\x15operatorTransactionId\x124\n" +
@@ -2507,17 +2516,18 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12\x10\n" +
 	"\x03vip\x18\x06 \x01(\x05R\x03vip\x12\x16\n" +
 	"\x06amount\x18\a \x01(\x03R\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\b \x01(\tR\bcurrency\x12%\n" +
-	"\x0epayment_method\x18\t \x01(\tR\rpaymentMethod\x12'\n" +
-	"\x0fpayment_channel\x18\n" +
-	" \x01(\tR\x0epaymentChannel\x12\x1a\n" +
-	"\bprotocol\x18\v \x01(\tR\bprotocol\x127\n" +
-	"\x04type\x18\f \x01(\x0e2#.payment.service.v1.TransactionTypeR\x04type\x12=\n" +
-	"\x06status\x18\r \x01(\x0e2%.payment.service.v1.TransactionStatusR\x06status\x129\n" +
+	"\bcurrency\x18\b \x01(\tR\bcurrency\x12\x10\n" +
+	"\x03fee\x18\t \x01(\x03R\x03fee\x12%\n" +
+	"\x0epayment_method\x18\n" +
+	" \x01(\tR\rpaymentMethod\x12'\n" +
+	"\x0fpayment_channel\x18\v \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bprotocol\x18\f \x01(\tR\bprotocol\x127\n" +
+	"\x04type\x18\r \x01(\x0e2#.payment.service.v1.TransactionTypeR\x04type\x12=\n" +
+	"\x06status\x18\x0e \x01(\x0e2%.payment.service.v1.TransactionStatusR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x9c\x01\n" +
+	"updated_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x9c\x01\n" +
 	"\x11TransactionDetail\x12E\n" +
 	"\vtransaction\x18\x01 \x01(\v2#.payment.service.v1.TransactionInfoR\vtransaction\x12@\n" +
 	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xdc\x05\n" +

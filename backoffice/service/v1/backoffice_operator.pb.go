@@ -10,7 +10,6 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -167,7 +166,7 @@ var File_backoffice_service_v1_backoffice_operator_proto protoreflect.FileDescri
 
 const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\n" +
-	"/backoffice/service/v1/backoffice_operator.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"A\n" +
+	"/backoffice/service/v1/backoffice_operator.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\"A\n" +
 	"\x14ListOperatorsRequest\x12\x1d\n" +
 	"\aenabled\x18\x01 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
 	"\n" +

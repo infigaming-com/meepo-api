@@ -39,8 +39,14 @@ const (
 	User_GetUserTags_FullMethodName                 = "/api.user.service.v1.User/GetUserTags"
 	User_CheckPermission_FullMethodName             = "/api.user.service.v1.User/CheckPermission"
 	User_AddOperator_FullMethodName                 = "/api.user.service.v1.User/AddOperator"
+	User_SendEmailVerificationCode_FullMethodName   = "/api.user.service.v1.User/SendEmailVerificationCode"
 	User_UpdateUser_FullMethodName                  = "/api.user.service.v1.User/UpdateUser"
 	User_ListUsers_FullMethodName                   = "/api.user.service.v1.User/ListUsers"
+	User_CreateGroupUser_FullMethodName             = "/api.user.service.v1.User/CreateGroupUser"
+	User_VerifyEmail_FullMethodName                 = "/api.user.service.v1.User/VerifyEmail"
+	User_AddComment_FullMethodName                  = "/api.user.service.v1.User/AddComment"
+	User_GetCommentsByUserId_FullMethodName         = "/api.user.service.v1.User/GetCommentsByUserId"
+	User_GetUserProfile_FullMethodName              = "/api.user.service.v1.User/GetUserProfile"
 )
 
 // UserClient is the client API for User service.
@@ -94,8 +100,14 @@ type UserClient interface {
 	GetUserTags(ctx context.Context, in *GetUserTagsRequest, opts ...grpc.CallOption) (*GetUserTagsResponse, error)
 	CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error)
 	AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...grpc.CallOption) (*AddOperatorResponse, error)
+	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
+	CreateGroupUser(ctx context.Context, in *CreateGroupUserRequest, opts ...grpc.CallOption) (*CreateGroupUserResponse, error)
+	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
+	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
+	GetCommentsByUserId(ctx context.Context, in *GetCommentsByUserIdRequest, opts ...grpc.CallOption) (*GetCommentsByUserIdResponse, error)
+	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
 }
 
 type userClient struct {
@@ -306,6 +318,16 @@ func (c *userClient) AddOperator(ctx context.Context, in *AddOperatorRequest, op
 	return out, nil
 }
 
+func (c *userClient) SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendEmailVerificationCodeResponse)
+	err := c.cc.Invoke(ctx, User_SendEmailVerificationCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserResponse)
@@ -320,6 +342,56 @@ func (c *userClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts .
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUsersResponse)
 	err := c.cc.Invoke(ctx, User_ListUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) CreateGroupUser(ctx context.Context, in *CreateGroupUserRequest, opts ...grpc.CallOption) (*CreateGroupUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateGroupUserResponse)
+	err := c.cc.Invoke(ctx, User_CreateGroupUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VerifyEmailResponse)
+	err := c.cc.Invoke(ctx, User_VerifyEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddCommentResponse)
+	err := c.cc.Invoke(ctx, User_AddComment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetCommentsByUserId(ctx context.Context, in *GetCommentsByUserIdRequest, opts ...grpc.CallOption) (*GetCommentsByUserIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCommentsByUserIdResponse)
+	err := c.cc.Invoke(ctx, User_GetCommentsByUserId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserProfileResponse)
+	err := c.cc.Invoke(ctx, User_GetUserProfile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -377,8 +449,14 @@ type UserServer interface {
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
 	CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error)
 	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
+	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
+	CreateGroupUser(context.Context, *CreateGroupUserRequest) (*CreateGroupUserResponse, error)
+	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
+	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
+	GetCommentsByUserId(context.Context, *GetCommentsByUserIdRequest) (*GetCommentsByUserIdResponse, error)
+	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -449,11 +527,29 @@ func (UnimplementedUserServer) CheckPermission(context.Context, *CheckPermission
 func (UnimplementedUserServer) AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddOperator not implemented")
 }
+func (UnimplementedUserServer) SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendEmailVerificationCode not implemented")
+}
 func (UnimplementedUserServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
 }
 func (UnimplementedUserServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
+}
+func (UnimplementedUserServer) CreateGroupUser(context.Context, *CreateGroupUserRequest) (*CreateGroupUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGroupUser not implemented")
+}
+func (UnimplementedUserServer) VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyEmail not implemented")
+}
+func (UnimplementedUserServer) AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddComment not implemented")
+}
+func (UnimplementedUserServer) GetCommentsByUserId(context.Context, *GetCommentsByUserIdRequest) (*GetCommentsByUserIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCommentsByUserId not implemented")
+}
+func (UnimplementedUserServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserProfile not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -836,6 +932,24 @@ func _User_AddOperator_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_SendEmailVerificationCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendEmailVerificationCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SendEmailVerificationCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SendEmailVerificationCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SendEmailVerificationCode(ctx, req.(*SendEmailVerificationCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateUserRequest)
 	if err := dec(in); err != nil {
@@ -868,6 +982,96 @@ func _User_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).ListUsers(ctx, req.(*ListUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_CreateGroupUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateGroupUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CreateGroupUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CreateGroupUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CreateGroupUser(ctx, req.(*CreateGroupUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_VerifyEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).VerifyEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_VerifyEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).VerifyEmail(ctx, req.(*VerifyEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_AddComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCommentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).AddComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_AddComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).AddComment(ctx, req.(*AddCommentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetCommentsByUserId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCommentsByUserIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetCommentsByUserId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetCommentsByUserId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetCommentsByUserId(ctx, req.(*GetCommentsByUserIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUserProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserProfile(ctx, req.(*GetUserProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -960,12 +1164,36 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_AddOperator_Handler,
 		},
 		{
+			MethodName: "SendEmailVerificationCode",
+			Handler:    _User_SendEmailVerificationCode_Handler,
+		},
+		{
 			MethodName: "UpdateUser",
 			Handler:    _User_UpdateUser_Handler,
 		},
 		{
 			MethodName: "ListUsers",
 			Handler:    _User_ListUsers_Handler,
+		},
+		{
+			MethodName: "CreateGroupUser",
+			Handler:    _User_CreateGroupUser_Handler,
+		},
+		{
+			MethodName: "VerifyEmail",
+			Handler:    _User_VerifyEmail_Handler,
+		},
+		{
+			MethodName: "AddComment",
+			Handler:    _User_AddComment_Handler,
+		},
+		{
+			MethodName: "GetCommentsByUserId",
+			Handler:    _User_GetCommentsByUserId_Handler,
+		},
+		{
+			MethodName: "GetUserProfile",
+			Handler:    _User_GetUserProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

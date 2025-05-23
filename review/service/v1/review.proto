@@ -20,6 +20,9 @@ service Review {
 	}
 	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {}
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
+	// CancelTicket is used to manually cancel a ticket.
+	// Ticket is cancellable only in paying status.
+	rpc CancelTicket(CancelTicketRequest) returns (CancelTicketResponse) {}
 	rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {}
 	rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {}
 }
@@ -51,6 +54,14 @@ message AddCommentRequest {
 message AddCommentResponse {
 	int64 comment_id = 1;
 }
+
+message CancelTicketRequest {
+	int64 ticket_id = 1;
+	// The user who is cancelling the ticket.
+	int64 canceller_user_id = 2;
+}
+
+message CancelTicketResponse {}
 
 message ListTicketsRequest {
 	optional int64 user_id = 2;
@@ -106,44 +117,41 @@ message ListTicketsResponse {
 
 message GetTicketRequest {
 	int64 ticket_id = 1;
+	// Optional flag for including comments in the response or not.
+	// If not provided, the comments will not be included in the response.
+	optional bool include_comments = 2;
 }
 
 message GetTicketResponse {
-	message WithdrawPaymentInfo {
-		google.protobuf.Struct created_at = 1;
-		string currency = 2;
-		string amount = 3;
-		string amount_usd = 4;
-		string before_balance = 5;
-		string after_balance = 6;
-		string payment_channel = 7;
-		string protocol = 8;
-		string fee = 9;
-		google.protobuf.Struct extra = 10;
-		google.protobuf.Struct schema = 11;
-	}
-	message UserWalletData {
-		string deposit_usd = 1;
-		string withdraw_usd = 2;
-		string deposit_minus_withdraw_usd = 3;
-		string valid_turnover_usd = 4;
-		int32 deposit_count = 5;
-		int32 withdraw_count = 6;
-		int32 today_withdraw_count = 7;
+	message Ticket {
+		int64 id = 1;
+		string type = 2;
+		string request = 3;
+		string response = 4;
+		int64 user_id = 5;
+		int64 operator_id = 6;
+		string currency = 7;
+		string ticket_status = 8;
+		int64 reviewer_user_id = 9;
+		string reviewer_comment = 10;
+		string payment_status = 11;
+		int64 payment_transaction_id = 12;
+		string payment_transaction_error = 13;
+		string wallet_status = 14;
+		int64 wallet_freeze_transaction_id = 15;
+		int64 wallet_settle_transaction_id = 16;
+		string wallet_settle_error = 17;
+		int64 wallet_rollback_transaction_id = 18;
+		string wallet_rollback_error = 19;
+		int64 created_at = 20;
+		int64 updated_at = 21;
+		int64 reviewed_at = 22;
 	}
 	message Comment {
-		int64 author_user_name = 1;
+		int64 author_user_id = 1;
 		string content = 2;
-		google.protobuf.Timestamp created_at = 3;
+		int64 created_at = 3;
 	}
-	string operator_name = 1;
-	int64 user_id = 2;
-	int32 vip_level = 3;
-	int64 ticket_id = 4;
-	string status = 5;	// pending, approved, rejected, manual_payout, paying, paid, failed
-	repeated string user_tags = 6;
-	WithdrawPaymentInfo withdraw_payment_info = 7;
-	repeated string linked_accounts = 8;
-	UserWalletData user_wallet_data = 9;
-	repeated Comment comments = 10;
+	Ticket ticket = 1;
+	repeated Comment comments = 2;
 }

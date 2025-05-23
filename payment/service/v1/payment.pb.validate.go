@@ -1940,6 +1940,8 @@ func (m *TransactionInfo) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for Fee
+
 	// no validation rules for PaymentMethod
 
 	// no validation rules for PaymentChannel

@@ -34,6 +34,7 @@ const OperationUserRefreshToken = "/api.user.service.v1.User/RefreshToken"
 const OperationUserRegister = "/api.user.service.v1.User/Register"
 const OperationUserRegisterOrLoginWithOAuth = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
 const OperationUserRegisterOrLoginWithTelegram = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
+const OperationUserSendEmailVerificationCode = "/api.user.service.v1.User/SendEmailVerificationCode"
 const OperationUserSetOperatorTagConfig = "/api.user.service.v1.User/SetOperatorTagConfig"
 
 type UserHTTPServer interface {
@@ -73,6 +74,7 @@ type UserHTTPServer interface {
 	// RegisterOrLoginWithTelegram Register or login using Telegram authentication.
 	// Uses Telegram's login widget for authentication.
 	RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error)
+	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	// SetOperatorTagConfig SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
 	// It will reverse the follow_parent flag if the record exists.
 	// If the record doesn't exist, it will create a new one with follow_parent set to false.
@@ -93,10 +95,11 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/operators/tags/add", _User_AddOperatorTag0_HTTP_Handler(srv))
 	r.POST("/v1/user/operators/tags/get", _User_GetOperatorTags0_HTTP_Handler(srv))
 	r.POST("/v1/user/operators/tags/delete", _User_DeleteOperatorTag0_HTTP_Handler(srv))
-	r.POST("/v1/user/tags/add", _User_AddUserTag1_HTTP_Handler(srv))
-	r.POST("/v1/user/tags/delete", _User_DeleteUserTag1_HTTP_Handler(srv))
+	r.POST("/v1/user/tags/add", _User_AddUserTag0_HTTP_Handler(srv))
+	r.POST("/v1/user/tags/delete", _User_DeleteUserTag0_HTTP_Handler(srv))
 	r.POST("/v1/user/tags/get", _User_GetUserTags0_HTTP_Handler(srv))
-	r.POST("/v1/user/operators/add", _User_AddOperator1_HTTP_Handler(srv))
+	r.POST("/v1/user/operators/add", _User_AddOperator0_HTTP_Handler(srv))
+	r.POST("/v1/user/email/verification-code/send", _User_SendEmailVerificationCode0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -363,7 +366,7 @@ func _User_DeleteOperatorTag0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Con
 	}
 }
 
-func _User_AddUserTag1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_AddUserTag0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddUserTagRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -385,7 +388,7 @@ func _User_AddUserTag1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) e
 	}
 }
 
-func _User_DeleteUserTag1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_DeleteUserTag0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteUserTagRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -429,7 +432,7 @@ func _User_GetUserTags0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) 
 	}
 }
 
-func _User_AddOperator1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_AddOperator0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddOperatorRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -451,6 +454,28 @@ func _User_AddOperator1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) 
 	}
 }
 
+func _User_SendEmailVerificationCode0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SendEmailVerificationCodeRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserSendEmailVerificationCode)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SendEmailVerificationCode(ctx, req.(*SendEmailVerificationCodeRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SendEmailVerificationCodeResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	AddOperator(ctx context.Context, req *AddOperatorRequest, opts ...http.CallOption) (rsp *AddOperatorResponse, err error)
 	AddOperatorTag(ctx context.Context, req *AddOperatorTagRequest, opts ...http.CallOption) (rsp *AddOperatorTagResponse, err error)
@@ -467,6 +492,7 @@ type UserHTTPClient interface {
 	Register(ctx context.Context, req *RegisterRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	RegisterOrLoginWithOAuth(ctx context.Context, req *OAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	RegisterOrLoginWithTelegram(ctx context.Context, req *TelegramAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
+	SendEmailVerificationCode(ctx context.Context, req *SendEmailVerificationCodeRequest, opts ...http.CallOption) (rsp *SendEmailVerificationCodeResponse, err error)
 	SetOperatorTagConfig(ctx context.Context, req *SetOperatorTagConfigRequest, opts ...http.CallOption) (rsp *SetOperatorTagConfigResponse, err error)
 }
 
@@ -665,6 +691,19 @@ func (c *UserHTTPClientImpl) RegisterOrLoginWithTelegram(ctx context.Context, in
 	pattern := "/v1/user/auth/telegram"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserRegisterOrLoginWithTelegram))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...http.CallOption) (*SendEmailVerificationCodeResponse, error) {
+	var out SendEmailVerificationCodeResponse
+	pattern := "/v1/user/email/verification-code/send"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserSendEmailVerificationCode))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
