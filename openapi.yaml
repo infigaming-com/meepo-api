@@ -3716,7 +3716,9 @@ components:
                 settlementCurrencies:
                     $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsRequest_Currencies'
                 categories:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                 status:
                     type: string
                 page:

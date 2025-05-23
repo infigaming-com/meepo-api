@@ -419,17 +419,6 @@ message ListBetsRequest {
 	optional int64 page_size = 15;
 }
 
-message ListBetsResponse {
-	repeated Bet bets = 1;
-	string turnover = 2;
-	string win_amount = 3;
-	int32 bet_count = 4;
-	int32 rtp_percentage = 5; // value from 0 to 100
-	int64 total = 6;
-	int64 page = 7;
-	int64 page_size = 8;
-}
-
 message Bet {
 	int64 id = 1;
 	string provider_bet_id = 2;
@@ -458,6 +447,17 @@ message Bet {
 	string rollback_win_amount = 25;
 	google.protobuf.Timestamp created_at = 26;
 	google.protobuf.Timestamp updated_at = 27;
+}
+
+message ListBetsResponse {
+	repeated Bet bets = 1;
+	string turnover = 2;
+	string win_amount = 3;
+	int32 bet_count = 4;
+	int32 rtp_percentage = 5; // value from 0 to 100
+	int64 total = 6;
+	int64 page = 7;
+	int64 page_size = 8;
 }
 
 message BackofficeListGamesRequest {
