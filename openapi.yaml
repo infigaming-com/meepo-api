@@ -114,6 +114,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.VerifyEmailResponse'
+    /v1/backoffice/accounts/info:
+        post:
+            tags:
+                - BackofficeAccount
+            operationId: BackofficeAccount_AccountInfo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AccountInfoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AccountInfoResponse'
     /v1/backoffice/accounts/login:
         post:
             tags:
@@ -2180,6 +2198,26 @@ paths:
                                 $ref: '#/components/schemas/api.wallet.service.v1.UpdateUserCurrencyResponse'
 components:
     schemas:
+        api.backoffice.service.v1.AccountInfoRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.AccountInfoResponse:
+            type: object
+            properties:
+                username:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                emailVerified:
+                    type: boolean
+                mobileVerified:
+                    type: boolean
+                enabled:
+                    type: boolean
+                role:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.Role'
         api.backoffice.service.v1.ActiveUsersData_Data:
             type: object
             properties:
@@ -5046,6 +5084,13 @@ components:
                     type: string
                 withdrawal:
                     type: string
+        api.backoffice.service.v1.Permission:
+            type: object
+            properties:
+                page:
+                    type: string
+                action:
+                    type: string
         api.backoffice.service.v1.RegisterRequest:
             type: object
             properties:
@@ -5084,6 +5129,17 @@ components:
         api.backoffice.service.v1.ReviewTicketResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.Role:
+            type: object
+            properties:
+                name:
+                    type: string
+                roleId:
+                    type: string
+                permissions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.Permission'
         api.backoffice.service.v1.SendEmailVerificationCodeRequest:
             type: object
             properties:
