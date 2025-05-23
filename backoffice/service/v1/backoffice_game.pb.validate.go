@@ -1581,6 +1581,93 @@ func (m *ListBetsRequest) validate(all bool) error {
 
 	var errors []error
 
+	switch v := m.SettlementCurrencyOption.(type) {
+	case *ListBetsRequest_SettlementCurrencyWithRanges:
+		if v == nil {
+			err := ListBetsRequestValidationError{
+				field:  "SettlementCurrencyOption",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetSettlementCurrencyWithRanges()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListBetsRequestValidationError{
+						field:  "SettlementCurrencyWithRanges",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListBetsRequestValidationError{
+						field:  "SettlementCurrencyWithRanges",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetSettlementCurrencyWithRanges()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListBetsRequestValidationError{
+					field:  "SettlementCurrencyWithRanges",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *ListBetsRequest_SettlementCurrencies:
+		if v == nil {
+			err := ListBetsRequestValidationError{
+				field:  "SettlementCurrencyOption",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetSettlementCurrencies()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListBetsRequestValidationError{
+						field:  "SettlementCurrencies",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListBetsRequestValidationError{
+						field:  "SettlementCurrencies",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetSettlementCurrencies()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListBetsRequestValidationError{
+					field:  "SettlementCurrencies",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		_ = v // ensures v is used
+	}
+
 	if m.GameName != nil {
 		// no validation rules for GameName
 	}
@@ -1665,14 +1752,6 @@ func (m *ListBetsRequest) validate(all bool) error {
 			}
 		}
 
-	}
-
-	if m.MinBetAmount != nil {
-		// no validation rules for MinBetAmount
-	}
-
-	if m.MaxBetAmount != nil {
-		// no validation rules for MaxBetAmount
 	}
 
 	if m.Page != nil {
@@ -4149,6 +4228,231 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListProvidersWithDetailResponse_ProviderValidationError{}
+
+// Validate checks the field values on ListBetsRequest_CurrencyWithRange with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListBetsRequest_CurrencyWithRange) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListBetsRequest_CurrencyWithRange
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListBetsRequest_CurrencyWithRangeMultiError, or nil if none found.
+func (m *ListBetsRequest_CurrencyWithRange) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBetsRequest_CurrencyWithRange) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	if m.MinBetAmount != nil {
+		// no validation rules for MinBetAmount
+	}
+
+	if m.MaxBetAmount != nil {
+		// no validation rules for MaxBetAmount
+	}
+
+	if m.MinWinAmount != nil {
+		// no validation rules for MinWinAmount
+	}
+
+	if m.MaxWinAmount != nil {
+		// no validation rules for MaxWinAmount
+	}
+
+	if len(errors) > 0 {
+		return ListBetsRequest_CurrencyWithRangeMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBetsRequest_CurrencyWithRangeMultiError is an error wrapping multiple
+// validation errors returned by
+// ListBetsRequest_CurrencyWithRange.ValidateAll() if the designated
+// constraints aren't met.
+type ListBetsRequest_CurrencyWithRangeMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBetsRequest_CurrencyWithRangeMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBetsRequest_CurrencyWithRangeMultiError) AllErrors() []error { return m }
+
+// ListBetsRequest_CurrencyWithRangeValidationError is the validation error
+// returned by ListBetsRequest_CurrencyWithRange.Validate if the designated
+// constraints aren't met.
+type ListBetsRequest_CurrencyWithRangeValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBetsRequest_CurrencyWithRangeValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListBetsRequest_CurrencyWithRangeValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListBetsRequest_CurrencyWithRangeValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListBetsRequest_CurrencyWithRangeValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListBetsRequest_CurrencyWithRangeValidationError) ErrorName() string {
+	return "ListBetsRequest_CurrencyWithRangeValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBetsRequest_CurrencyWithRangeValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBetsRequest_CurrencyWithRange.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBetsRequest_CurrencyWithRangeValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBetsRequest_CurrencyWithRangeValidationError{}
+
+// Validate checks the field values on ListBetsRequest_Currencies with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListBetsRequest_Currencies) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListBetsRequest_Currencies with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListBetsRequest_CurrenciesMultiError, or nil if none found.
+func (m *ListBetsRequest_Currencies) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBetsRequest_Currencies) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListBetsRequest_CurrenciesMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBetsRequest_CurrenciesMultiError is an error wrapping multiple
+// validation errors returned by ListBetsRequest_Currencies.ValidateAll() if
+// the designated constraints aren't met.
+type ListBetsRequest_CurrenciesMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBetsRequest_CurrenciesMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBetsRequest_CurrenciesMultiError) AllErrors() []error { return m }
+
+// ListBetsRequest_CurrenciesValidationError is the validation error returned
+// by ListBetsRequest_Currencies.Validate if the designated constraints aren't met.
+type ListBetsRequest_CurrenciesValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBetsRequest_CurrenciesValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListBetsRequest_CurrenciesValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListBetsRequest_CurrenciesValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListBetsRequest_CurrenciesValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListBetsRequest_CurrenciesValidationError) ErrorName() string {
+	return "ListBetsRequest_CurrenciesValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBetsRequest_CurrenciesValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBetsRequest_Currencies.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBetsRequest_CurrenciesValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBetsRequest_CurrenciesValidationError{}
 
 // Validate checks the field values on GetBetByIdResponse_Action with the rules
 // defined in the proto definition for this message. If any rules are
