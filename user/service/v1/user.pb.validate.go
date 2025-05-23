@@ -4337,6 +4337,14 @@ func (m *UpdateUserRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	if m.Nickname != nil {
+		// no validation rules for Nickname
+	}
+
+	if m.Avatar != nil {
+		// no validation rules for Avatar
+	}
+
 	if m.BanLogin != nil {
 		// no validation rules for BanLogin
 	}
