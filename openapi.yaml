@@ -2276,29 +2276,42 @@ components:
         api.backoffice.service.v1.Bet:
             type: object
             properties:
-                operatorName:
-                    type: string
-                createdAt:
-                    type: string
-                    format: date-time
-                updatedAt:
-                    type: string
-                    format: date-time
-                gameCategory:
-                    type: string
-                gameName:
-                    type: string
-                gameId:
-                    type: string
-                providerName:
-                    type: string
                 operatorBetId:
                     type: string
                 providerBetId:
                     type: string
+                roundId:
+                    type: string
+                providerRoundId:
+                    type: string
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                currency:
+                    type: string
+                settlementCurrency:
+                    type: string
+                status:
+                    type: string
                 userId:
                     type: string
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                gameCategory:
+                    type: string
+                winCount:
+                    type: integer
+                    format: int32
                 betAmount:
+                    type: string
+                validBetAmount:
                     type: string
                 settlementBetAmount:
                     type: string
@@ -2306,10 +2319,20 @@ components:
                     type: string
                 settlementWinAmount:
                     type: string
+                turnover:
+                    type: string
                 odds:
                     type: string
-                validBetAmount:
+                rollbackBetAmount:
                     type: string
+                rollbackWinAmount:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
         api.backoffice.service.v1.Bind2faRequest:
             type: object
             properties:
@@ -3692,6 +3715,10 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsRequest_CurrencyWithRange'
                 settlementCurrencies:
                     $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsRequest_Currencies'
+                categories:
+                    type: string
+                status:
+                    type: string
                 page:
                     type: string
                 pageSize:
