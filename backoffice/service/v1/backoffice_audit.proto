@@ -19,7 +19,7 @@ service BackofficeAudit {
 }
 
 message ListAuditLogsRequest {
-	optional string user_id = 1;
+	optional int64 user_id = 1;
 	optional string action = 2;
 	optional google.protobuf.Timestamp start_time = 3;
 	optional google.protobuf.Timestamp end_time = 4;

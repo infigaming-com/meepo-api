@@ -25,7 +25,7 @@ const (
 
 type ListAuditLogsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        *string                `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	UserId        *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	Action        *string                `protobuf:"bytes,2,opt,name=action,proto3,oneof" json:"action,omitempty"`
 	StartTime     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
@@ -65,11 +65,11 @@ func (*ListAuditLogsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_audit_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ListAuditLogsRequest) GetUserId() string {
+func (x *ListAuditLogsRequest) GetUserId() int64 {
 	if x != nil && x.UserId != nil {
 		return *x.UserId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListAuditLogsRequest) GetAction() string {
@@ -281,7 +281,7 @@ const file_backoffice_service_v1_backoffice_audit_proto_rawDesc = "" +
 	"\n" +
 	",backoffice/service/v1/backoffice_audit.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd2\x02\n" +
 	"\x14ListAuditLogsRequest\x12\x1c\n" +
-	"\auser_id\x18\x01 \x01(\tH\x00R\x06userId\x88\x01\x01\x12\x1b\n" +
+	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1b\n" +
 	"\x06action\x18\x02 \x01(\tH\x01R\x06action\x88\x01\x01\x12>\n" +
 	"\n" +
 	"start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\tstartTime\x88\x01\x01\x12:\n" +
