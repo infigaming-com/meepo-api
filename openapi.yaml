@@ -1422,16 +1422,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.PlayResponse'
-    /v1/game/provider/list:
+    /v1/game/providers/list:
         post:
             tags:
                 - Game
-            operationId: Game_ProviderList
+            operationId: Game_ListProviders
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.game.service.v1.ProviderListRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.ListProvidersRequest'
                 required: true
             responses:
                 "200":
@@ -1439,7 +1439,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.game.service.v1.ProviderListResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.ListProvidersResponse'
     /v1/game/rollback:
         post:
             tags:
@@ -5726,6 +5726,70 @@ components:
                     type: string
                 pageSize:
                     type: string
+        api.game.service.v1.ListProvidersRequest:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                    description: |-
+                        Optional filter for provider's id.
+                         If not provided, all providers will be returned.
+                enabled:
+                    type: boolean
+                    description: |-
+                        Optional filter for provider's enabled status.
+                         If not provided, all providers will be returned.
+                includeGameCount:
+                    type: boolean
+                    description: |-
+                        Include game count in response, false by default.
+                         Only enable it for ListProviders page which game_count is needed.
+                paginationEnabled:
+                    type: boolean
+                    description: |-
+                        Enable pagination, false by default.
+                         Only enable it for ListProviders page.
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListProvidersResponse:
+            type: object
+            properties:
+                providers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListProvidersResponse_Provider'
+                total:
+                    type: integer
+                    format: int32
+                totalEnabled:
+                    type: integer
+                    format: int32
+                totalDisabled:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListProvidersResponse_Provider:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                gameCount:
+                    type: integer
+                    description: Only available when include_game_count is true
+                    format: int32
+                enabled:
+                    type: boolean
         api.game.service.v1.PlayRequest:
             type: object
             properties:
@@ -5764,29 +5828,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.game.service.v1.Transactions'
-        api.game.service.v1.Provider:
-            type: object
-            properties:
-                id:
-                    type: string
-                name:
-                    type: string
-                gameCount:
-                    type: integer
-                    format: int32
-        api.game.service.v1.ProviderListRequest:
-            type: object
-            properties:
-                tags:
-                    type: string
-                    description: 'tags: hot game, live casino, slots, etc..'
-        api.game.service.v1.ProviderListResponse:
-            type: object
-            properties:
-                providers:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.game.service.v1.Provider'
         api.game.service.v1.RollbackAction:
             type: object
             properties:

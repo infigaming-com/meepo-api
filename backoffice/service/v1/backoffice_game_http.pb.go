@@ -61,7 +61,7 @@ type BackofficeGameHTTPServer interface {
 
 func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/game/providers/list", _BackofficeGame_ListProviders0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/providers/list", _BackofficeGame_ListProviders1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/providers-with-detail/list", _BackofficeGame_ListProvidersWithDetail0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/categories/list", _BackofficeGame_ListCategories1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/fee-groups/list", _BackofficeGame_ListFeeGroups0_HTTP_Handler(srv))
@@ -78,7 +78,7 @@ func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServ
 	r.POST("/v1/backoffice/game/provider/update", _BackofficeGame_UpdateProvider0_HTTP_Handler(srv))
 }
 
-func _BackofficeGame_ListProviders0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+func _BackofficeGame_ListProviders1_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListProvidersRequest
 		if err := ctx.Bind(&in); err != nil {
