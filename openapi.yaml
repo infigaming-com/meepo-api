@@ -334,12 +334,12 @@ paths:
         post:
             tags:
                 - BackofficeGame
-            operationId: BackofficeGame_ListUserBets
+            operationId: BackofficeGame_ListBets
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListUserBetsRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsRequest'
                 required: true
             responses:
                 "200":
@@ -347,7 +347,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListUserBetsResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsResponse'
     /v1/backoffice/game/bets/overview/get:
         post:
             tags:
@@ -4561,55 +4561,6 @@ components:
                 reviewDuration:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListUserBetsRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                providerIds:
-                    type: array
-                    items:
-                        type: string
-                gameName:
-                    type: string
-                gameId:
-                    type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                minBetAmount:
-                    type: string
-                maxBetAmount:
-                    type: string
-                minWinAmount:
-                    type: string
-                maxWinAmount:
-                    type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-                page:
-                    type: string
-                pageSize:
-                    type: string
-            description: ?? Can merge with ListBetsRequest
-        api.backoffice.service.v1.ListUserBetsResponse:
-            type: object
-            properties:
-                bets:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.Bet'
-                page:
-                    type: string
-                pageSize:
-                    type: string
-                total:
-                    type: string
         api.backoffice.service.v1.ListUserCommentsRequest:
             type: object
             properties:
