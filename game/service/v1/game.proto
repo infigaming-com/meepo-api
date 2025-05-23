@@ -145,6 +145,8 @@ message GameFilter {
 	string provider_id = 1;
 	// tags: hot game, live casino, slots, etc..
 	string tags = 2;
+	// name: game name
+	string name = 3;
 }
 
 message GameSort {
@@ -164,14 +166,17 @@ message ListProvidersRequest {
 	// Optional filter for provider's enabled status.
 	// If not provided, all providers will be returned.
 	optional bool enabled = 2;
+	// Optional filter for game's tag.
+	// If not provided, all providers will be returned.
+	optional string tag = 3;
 	// Include game count in response, false by default.
 	// Only enable it for ListProviders page which game_count is needed.
-	optional bool include_game_count = 3;
+	optional bool include_game_count = 4;
 	// Enable pagination, false by default.
 	// Only enable it for ListProviders page.
-	optional bool pagination_enabled = 4;
-	optional int32 page = 5;
-	optional int32 page_size = 6;
+	optional bool pagination_enabled = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
 }
 
 message ListProvidersResponse {
