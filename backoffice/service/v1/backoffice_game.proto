@@ -82,12 +82,6 @@ service BackofficeGame {
             body: "*"
         };
     }
-    rpc ListUserBets(ListUserBetsRequest) returns (ListUserBetsResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/game/bets/list"
-            body: "*"
-        };
-    }
     rpc ListGames(ListGamesRequest) returns (ListGamesResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/game/list"
@@ -340,30 +334,6 @@ message GetUserBetsOverviewResponse {
 	int64 win_amount = 5;
 	int64 ggr = 6;
 	int64 ngr = 7;
-}
-
-// ?? Can merge with ListBetsRequest
-message ListUserBetsRequest {
-	int64 user_id = 1;
-	repeated string provider_ids = 2;
-	optional string game_name = 3;
-	optional string game_id = 4;
-	repeated string currencies = 5;
-	optional int64 min_bet_amount = 6;
-	optional int64 max_bet_amount = 7;
-	optional int64 min_win_amount = 8;
-	optional int64 max_win_amount = 9;
-	optional google.protobuf.Timestamp start_time = 10;
-	optional google.protobuf.Timestamp end_time = 11;
-	optional int64 page = 12;
-	optional int64 page_size = 13;
-}
-
-message ListUserBetsResponse {
-	repeated Bet bets = 1;
-	int64 page = 2;
-	int64 page_size = 3;
-	int64 total = 4;
 }
 
 message GetGameTransactionsForBetRequest {
