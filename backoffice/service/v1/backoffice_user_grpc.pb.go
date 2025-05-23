@@ -32,6 +32,12 @@ const (
 	BackofficeUser_CreateUser_FullMethodName                = "/api.backoffice.service.v1.BackofficeUser/CreateUser"
 	BackofficeUser_SendEmailVerificationCode_FullMethodName = "/api.backoffice.service.v1.BackofficeUser/SendEmailVerificationCode"
 	BackofficeUser_UpdateUser_FullMethodName                = "/api.backoffice.service.v1.BackofficeUser/UpdateUser"
+	BackofficeUser_SetOperatorTagsConfig_FullMethodName     = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTagsConfig"
+	BackofficeUser_SetOperatorTags_FullMethodName           = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTags"
+	BackofficeUser_GetOperatorTagsConfig_FullMethodName     = "/api.backoffice.service.v1.BackofficeUser/GetOperatorTagsConfig"
+	BackofficeUser_GetOperatorTags_FullMethodName           = "/api.backoffice.service.v1.BackofficeUser/GetOperatorTags"
+	BackofficeUser_GetUserTags_FullMethodName               = "/api.backoffice.service.v1.BackofficeUser/GetUserTags"
+	BackofficeUser_SetUserTags_FullMethodName               = "/api.backoffice.service.v1.BackofficeUser/SetUserTags"
 )
 
 // BackofficeUserClient is the client API for BackofficeUser service.
@@ -51,6 +57,19 @@ type BackofficeUserClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
+	// SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
+	// It will reverse the follow_parent flag if the record exists.
+	// If the record doesn't exist, it will create a new one with follow_parent set to false.
+	SetOperatorTagsConfig(ctx context.Context, in *SetOperatorTagsConfigRequest, opts ...grpc.CallOption) (*SetOperatorTagsConfigResponse, error)
+	// SetOperatorTags sets or updates the tags for an operator.
+	SetOperatorTags(ctx context.Context, in *SetOperatorTagsRequest, opts ...grpc.CallOption) (*SetOperatorTagsResponse, error)
+	// GetOperatorTagConfig returns follow-parent flag for the given operator ID.
+	GetOperatorTagsConfig(ctx context.Context, in *GetOperatorTagsConfigRequest, opts ...grpc.CallOption) (*GetOperatorTagsConfigResponse, error)
+	// GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
+	GetOperatorTags(ctx context.Context, in *GetOperatorTagsRequest, opts ...grpc.CallOption) (*GetOperatorTagsResponse, error)
+	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	GetUserTags(ctx context.Context, in *GetUserTagsRequest, opts ...grpc.CallOption) (*GetUserTagsResponse, error)
+	SetUserTags(ctx context.Context, in *SetUserTagsRequest, opts ...grpc.CallOption) (*SetUserTagsResponse, error)
 }
 
 type backofficeUserClient struct {
@@ -191,6 +210,66 @@ func (c *backofficeUserClient) UpdateUser(ctx context.Context, in *UpdateUserReq
 	return out, nil
 }
 
+func (c *backofficeUserClient) SetOperatorTagsConfig(ctx context.Context, in *SetOperatorTagsConfigRequest, opts ...grpc.CallOption) (*SetOperatorTagsConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOperatorTagsConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_SetOperatorTagsConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeUserClient) SetOperatorTags(ctx context.Context, in *SetOperatorTagsRequest, opts ...grpc.CallOption) (*SetOperatorTagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOperatorTagsResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_SetOperatorTags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeUserClient) GetOperatorTagsConfig(ctx context.Context, in *GetOperatorTagsConfigRequest, opts ...grpc.CallOption) (*GetOperatorTagsConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorTagsConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_GetOperatorTagsConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeUserClient) GetOperatorTags(ctx context.Context, in *GetOperatorTagsRequest, opts ...grpc.CallOption) (*GetOperatorTagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorTagsResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_GetOperatorTags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeUserClient) GetUserTags(ctx context.Context, in *GetUserTagsRequest, opts ...grpc.CallOption) (*GetUserTagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserTagsResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_GetUserTags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeUserClient) SetUserTags(ctx context.Context, in *SetUserTagsRequest, opts ...grpc.CallOption) (*SetUserTagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUserTagsResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_SetUserTags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeUserServer is the server API for BackofficeUser service.
 // All implementations must embed UnimplementedBackofficeUserServer
 // for forward compatibility.
@@ -208,6 +287,19 @@ type BackofficeUserServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	// SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
+	// It will reverse the follow_parent flag if the record exists.
+	// If the record doesn't exist, it will create a new one with follow_parent set to false.
+	SetOperatorTagsConfig(context.Context, *SetOperatorTagsConfigRequest) (*SetOperatorTagsConfigResponse, error)
+	// SetOperatorTags sets or updates the tags for an operator.
+	SetOperatorTags(context.Context, *SetOperatorTagsRequest) (*SetOperatorTagsResponse, error)
+	// GetOperatorTagConfig returns follow-parent flag for the given operator ID.
+	GetOperatorTagsConfig(context.Context, *GetOperatorTagsConfigRequest) (*GetOperatorTagsConfigResponse, error)
+	// GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
+	GetOperatorTags(context.Context, *GetOperatorTagsRequest) (*GetOperatorTagsResponse, error)
+	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
+	SetUserTags(context.Context, *SetUserTagsRequest) (*SetUserTagsResponse, error)
 	mustEmbedUnimplementedBackofficeUserServer()
 }
 
@@ -256,6 +348,24 @@ func (UnimplementedBackofficeUserServer) SendEmailVerificationCode(context.Conte
 }
 func (UnimplementedBackofficeUserServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedBackofficeUserServer) SetOperatorTagsConfig(context.Context, *SetOperatorTagsConfigRequest) (*SetOperatorTagsConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetOperatorTagsConfig not implemented")
+}
+func (UnimplementedBackofficeUserServer) SetOperatorTags(context.Context, *SetOperatorTagsRequest) (*SetOperatorTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetOperatorTags not implemented")
+}
+func (UnimplementedBackofficeUserServer) GetOperatorTagsConfig(context.Context, *GetOperatorTagsConfigRequest) (*GetOperatorTagsConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorTagsConfig not implemented")
+}
+func (UnimplementedBackofficeUserServer) GetOperatorTags(context.Context, *GetOperatorTagsRequest) (*GetOperatorTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorTags not implemented")
+}
+func (UnimplementedBackofficeUserServer) GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserTags not implemented")
+}
+func (UnimplementedBackofficeUserServer) SetUserTags(context.Context, *SetUserTagsRequest) (*SetUserTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetUserTags not implemented")
 }
 func (UnimplementedBackofficeUserServer) mustEmbedUnimplementedBackofficeUserServer() {}
 func (UnimplementedBackofficeUserServer) testEmbeddedByValue()                        {}
@@ -512,6 +622,114 @@ func _BackofficeUser_UpdateUser_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeUser_SetOperatorTagsConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorTagsConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).SetOperatorTagsConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_SetOperatorTagsConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).SetOperatorTagsConfig(ctx, req.(*SetOperatorTagsConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeUser_SetOperatorTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).SetOperatorTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_SetOperatorTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).SetOperatorTags(ctx, req.(*SetOperatorTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeUser_GetOperatorTagsConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorTagsConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).GetOperatorTagsConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_GetOperatorTagsConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).GetOperatorTagsConfig(ctx, req.(*GetOperatorTagsConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeUser_GetOperatorTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).GetOperatorTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_GetOperatorTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).GetOperatorTags(ctx, req.(*GetOperatorTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeUser_GetUserTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).GetUserTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_GetUserTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).GetUserTags(ctx, req.(*GetUserTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeUser_SetUserTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).SetUserTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_SetUserTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).SetUserTags(ctx, req.(*SetUserTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeUser_ServiceDesc is the grpc.ServiceDesc for BackofficeUser service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -570,6 +788,30 @@ var BackofficeUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUser",
 			Handler:    _BackofficeUser_UpdateUser_Handler,
+		},
+		{
+			MethodName: "SetOperatorTagsConfig",
+			Handler:    _BackofficeUser_SetOperatorTagsConfig_Handler,
+		},
+		{
+			MethodName: "SetOperatorTags",
+			Handler:    _BackofficeUser_SetOperatorTags_Handler,
+		},
+		{
+			MethodName: "GetOperatorTagsConfig",
+			Handler:    _BackofficeUser_GetOperatorTagsConfig_Handler,
+		},
+		{
+			MethodName: "GetOperatorTags",
+			Handler:    _BackofficeUser_GetOperatorTags_Handler,
+		},
+		{
+			MethodName: "GetUserTags",
+			Handler:    _BackofficeUser_GetUserTags_Handler,
+		},
+		{
+			MethodName: "SetUserTags",
+			Handler:    _BackofficeUser_SetUserTags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

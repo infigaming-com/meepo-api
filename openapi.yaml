@@ -1115,6 +1115,85 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListUsersResponse'
+    /v1/backoffice/user/operator-tags/config/get:
+        post:
+            tags:
+                - BackofficeUser
+            description: GetOperatorTagConfig returns follow-parent flag for the given operator ID.
+            operationId: BackofficeUser_GetOperatorTagsConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTagsConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTagsConfigResponse'
+    /v1/backoffice/user/operator-tags/config/set:
+        post:
+            tags:
+                - BackofficeUser
+            description: |-
+                SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
+                 It will reverse the follow_parent flag if the record exists.
+                 If the record doesn't exist, it will create a new one with follow_parent set to false.
+            operationId: BackofficeUser_SetOperatorTagsConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorTagsConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorTagsConfigResponse'
+    /v1/backoffice/user/operator-tags/get:
+        post:
+            tags:
+                - BackofficeUser
+            description: GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
+            operationId: BackofficeUser_GetOperatorTags
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTagsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTagsResponse'
+    /v1/backoffice/user/operator-tags/set:
+        post:
+            tags:
+                - BackofficeUser
+            description: SetOperatorTags sets or updates the tags for an operator.
+            operationId: BackofficeUser_SetOperatorTags
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorTagsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorTagsResponse'
     /v1/backoffice/user/overview/get:
         post:
             tags:
@@ -1205,6 +1284,43 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.DeleteUserTagResponse'
+    /v1/backoffice/user/tags/get:
+        post:
+            tags:
+                - BackofficeUser
+            description: GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+            operationId: BackofficeUser_GetUserTags
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetUserTagsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetUserTagsResponse'
+    /v1/backoffice/user/tags/set:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_SetUserTags
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetUserTagsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SetUserTagsResponse'
     /v1/backoffice/user/update:
         post:
             tags:
@@ -2673,6 +2789,36 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GameTransaction_Amount'
                 validBetAmount:
                     type: string
+        api.backoffice.service.v1.GetOperatorTagsConfigRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                    description: The ID of the operator to get tag configuration for.
+            description: GetOperatorTagsConfigRequest contains the operator ID to retrieve tag configuration.
+        api.backoffice.service.v1.GetOperatorTagsConfigResponse:
+            type: object
+            properties:
+                followParent:
+                    type: boolean
+                    description: Whether the operator should follow parent operator's tags.
+            description: GetOperatorTagsConfigResponse contains the tag configuration settings, now only follow_parent flag.
+        api.backoffice.service.v1.GetOperatorTagsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                    description: The ID of the operator to get tags for.
+            description: GetOperatorTagsRequest contains the operator ID to retrieve tags for.
+        api.backoffice.service.v1.GetOperatorTagsResponse:
+            type: object
+            properties:
+                tags:
+                    type: array
+                    items:
+                        type: string
+                    description: List of tags associated with the operator.
+            description: GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
         api.backoffice.service.v1.GetOperatorUserTagsRequest:
             type: object
             properties: {}
@@ -3414,6 +3560,22 @@ components:
                     type: string
                 source:
                     type: string
+        api.backoffice.service.v1.GetUserTagsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                    description: The ID of the user to get tags for.
+            description: GetUserTagsRequest contains the user ID to retrieve tags for.
+        api.backoffice.service.v1.GetUserTagsResponse:
+            type: object
+            properties:
+                tags:
+                    type: array
+                    items:
+                        type: string
+                    description: List of active tags associated with the user.
+            description: GetUserTagsResponse contains the list of active tags associated with the user.
         api.backoffice.service.v1.GetWalletCreditTransactionsRequest:
             type: object
             properties:
@@ -5098,6 +5260,48 @@ components:
                 email:
                     type: string
         api.backoffice.service.v1.SendRegisterVerificationCodeResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.SetOperatorTagsConfigRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                    description: The ID of the operator to set tag configuration for.
+                followParent:
+                    type: boolean
+                    description: Whether to follow parent operator's tags.
+            description: SetOperatorTagsConfigRequest contains the operator ID.
+        api.backoffice.service.v1.SetOperatorTagsConfigResponse:
+            type: object
+            properties: {}
+            description: SetOperatorTagsConfigResponse is an empty message indicating successful tag configuration.
+        api.backoffice.service.v1.SetOperatorTagsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                    description: The ID of the operator to add the tag to.
+                tags:
+                    type: array
+                    items:
+                        type: string
+                    description: The tag to add to the operator.
+            description: SetOperatorTagsRequest contains the operator ID and tag to add.
+        api.backoffice.service.v1.SetOperatorTagsResponse:
+            type: object
+            properties: {}
+            description: SetOperatorTagsResponse is an empty message indicating successful tag addition.
+        api.backoffice.service.v1.SetUserTagsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                tags:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.SetUserTagsResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.SystemCurrency:

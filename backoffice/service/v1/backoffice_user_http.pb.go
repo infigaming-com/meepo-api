@@ -25,12 +25,18 @@ const OperationBackofficeUserAddUserTag = "/api.backoffice.service.v1.Backoffice
 const OperationBackofficeUserCreateUser = "/api.backoffice.service.v1.BackofficeUser/CreateUser"
 const OperationBackofficeUserDeleteOperatorUserTag = "/api.backoffice.service.v1.BackofficeUser/DeleteOperatorUserTag"
 const OperationBackofficeUserDeleteUserTag = "/api.backoffice.service.v1.BackofficeUser/DeleteUserTag"
+const OperationBackofficeUserGetOperatorTags = "/api.backoffice.service.v1.BackofficeUser/GetOperatorTags"
+const OperationBackofficeUserGetOperatorTagsConfig = "/api.backoffice.service.v1.BackofficeUser/GetOperatorTagsConfig"
 const OperationBackofficeUserGetOperatorUserTags = "/api.backoffice.service.v1.BackofficeUser/GetOperatorUserTags"
 const OperationBackofficeUserGetUserOverview = "/api.backoffice.service.v1.BackofficeUser/GetUserOverview"
 const OperationBackofficeUserGetUserProfile = "/api.backoffice.service.v1.BackofficeUser/GetUserProfile"
+const OperationBackofficeUserGetUserTags = "/api.backoffice.service.v1.BackofficeUser/GetUserTags"
 const OperationBackofficeUserListUserComments = "/api.backoffice.service.v1.BackofficeUser/ListUserComments"
 const OperationBackofficeUserListUsers = "/api.backoffice.service.v1.BackofficeUser/ListUsers"
 const OperationBackofficeUserSendEmailVerificationCode = "/api.backoffice.service.v1.BackofficeUser/SendEmailVerificationCode"
+const OperationBackofficeUserSetOperatorTags = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTags"
+const OperationBackofficeUserSetOperatorTagsConfig = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTagsConfig"
+const OperationBackofficeUserSetUserTags = "/api.backoffice.service.v1.BackofficeUser/SetUserTags"
 const OperationBackofficeUserUpdateUser = "/api.backoffice.service.v1.BackofficeUser/UpdateUser"
 
 type BackofficeUserHTTPServer interface {
@@ -40,12 +46,25 @@ type BackofficeUserHTTPServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	DeleteOperatorUserTag(context.Context, *DeleteOperatorUserTagRequest) (*DeleteOperatorUserTagResponse, error)
 	DeleteUserTag(context.Context, *DeleteUserTagRequest) (*DeleteUserTagResponse, error)
+	// GetOperatorTags GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
+	GetOperatorTags(context.Context, *GetOperatorTagsRequest) (*GetOperatorTagsResponse, error)
+	// GetOperatorTagsConfig GetOperatorTagConfig returns follow-parent flag for the given operator ID.
+	GetOperatorTagsConfig(context.Context, *GetOperatorTagsConfigRequest) (*GetOperatorTagsConfigResponse, error)
 	GetOperatorUserTags(context.Context, *GetOperatorUserTagsRequest) (*GetOperatorUserTagsResponse, error)
 	GetUserOverview(context.Context, *GetUserOverviewRequest) (*GetUserOverviewResponse, error)
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
+	// GetUserTags GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
 	ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
+	// SetOperatorTags SetOperatorTags sets or updates the tags for an operator.
+	SetOperatorTags(context.Context, *SetOperatorTagsRequest) (*SetOperatorTagsResponse, error)
+	// SetOperatorTagsConfig SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
+	// It will reverse the follow_parent flag if the record exists.
+	// If the record doesn't exist, it will create a new one with follow_parent set to false.
+	SetOperatorTagsConfig(context.Context, *SetOperatorTagsConfigRequest) (*SetOperatorTagsConfigResponse, error)
+	SetUserTags(context.Context, *SetUserTagsRequest) (*SetUserTagsResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 }
 
@@ -64,6 +83,12 @@ func RegisterBackofficeUserHTTPServer(s *http.Server, srv BackofficeUserHTTPServ
 	r.POST("/v1/backoffice/user/create", _BackofficeUser_CreateUser0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/send-email-verification-code", _BackofficeUser_SendEmailVerificationCode1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/update", _BackofficeUser_UpdateUser0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/operator-tags/config/set", _BackofficeUser_SetOperatorTagsConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/operator-tags/set", _BackofficeUser_SetOperatorTags0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/operator-tags/config/get", _BackofficeUser_GetOperatorTagsConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/operator-tags/get", _BackofficeUser_GetOperatorTags0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/tags/get", _BackofficeUser_GetUserTags1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/tags/set", _BackofficeUser_SetUserTags0_HTTP_Handler(srv))
 }
 
 func _BackofficeUser_ListUsers0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
@@ -352,6 +377,138 @@ func _BackofficeUser_UpdateUser0_HTTP_Handler(srv BackofficeUserHTTPServer) func
 	}
 }
 
+func _BackofficeUser_SetOperatorTagsConfig0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetOperatorTagsConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserSetOperatorTagsConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetOperatorTagsConfig(ctx, req.(*SetOperatorTagsConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SetOperatorTagsConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeUser_SetOperatorTags0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetOperatorTagsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserSetOperatorTags)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetOperatorTags(ctx, req.(*SetOperatorTagsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SetOperatorTagsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeUser_GetOperatorTagsConfig0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorTagsConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserGetOperatorTagsConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorTagsConfig(ctx, req.(*GetOperatorTagsConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetOperatorTagsConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeUser_GetOperatorTags0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorTagsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserGetOperatorTags)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorTags(ctx, req.(*GetOperatorTagsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetOperatorTagsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeUser_GetUserTags1_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetUserTagsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserGetUserTags)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetUserTags(ctx, req.(*GetUserTagsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetUserTagsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeUser_SetUserTags0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetUserTagsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserSetUserTags)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetUserTags(ctx, req.(*SetUserTagsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SetUserTagsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeUserHTTPClient interface {
 	AddOperatorUserTag(ctx context.Context, req *AddOperatorUserTagRequest, opts ...http.CallOption) (rsp *AddOperatorUserTagResponse, err error)
 	AddUserComment(ctx context.Context, req *AddUserCommentRequest, opts ...http.CallOption) (rsp *AddUserCommentResponse, err error)
@@ -359,12 +516,18 @@ type BackofficeUserHTTPClient interface {
 	CreateUser(ctx context.Context, req *CreateUserRequest, opts ...http.CallOption) (rsp *CreateUserResponse, err error)
 	DeleteOperatorUserTag(ctx context.Context, req *DeleteOperatorUserTagRequest, opts ...http.CallOption) (rsp *DeleteOperatorUserTagResponse, err error)
 	DeleteUserTag(ctx context.Context, req *DeleteUserTagRequest, opts ...http.CallOption) (rsp *DeleteUserTagResponse, err error)
+	GetOperatorTags(ctx context.Context, req *GetOperatorTagsRequest, opts ...http.CallOption) (rsp *GetOperatorTagsResponse, err error)
+	GetOperatorTagsConfig(ctx context.Context, req *GetOperatorTagsConfigRequest, opts ...http.CallOption) (rsp *GetOperatorTagsConfigResponse, err error)
 	GetOperatorUserTags(ctx context.Context, req *GetOperatorUserTagsRequest, opts ...http.CallOption) (rsp *GetOperatorUserTagsResponse, err error)
 	GetUserOverview(ctx context.Context, req *GetUserOverviewRequest, opts ...http.CallOption) (rsp *GetUserOverviewResponse, err error)
 	GetUserProfile(ctx context.Context, req *GetUserProfileRequest, opts ...http.CallOption) (rsp *GetUserProfileResponse, err error)
+	GetUserTags(ctx context.Context, req *GetUserTagsRequest, opts ...http.CallOption) (rsp *GetUserTagsResponse, err error)
 	ListUserComments(ctx context.Context, req *ListUserCommentsRequest, opts ...http.CallOption) (rsp *ListUserCommentsResponse, err error)
 	ListUsers(ctx context.Context, req *ListUsersRequest, opts ...http.CallOption) (rsp *ListUsersResponse, err error)
 	SendEmailVerificationCode(ctx context.Context, req *SendEmailVerificationCodeRequest, opts ...http.CallOption) (rsp *SendEmailVerificationCodeResponse, err error)
+	SetOperatorTags(ctx context.Context, req *SetOperatorTagsRequest, opts ...http.CallOption) (rsp *SetOperatorTagsResponse, err error)
+	SetOperatorTagsConfig(ctx context.Context, req *SetOperatorTagsConfigRequest, opts ...http.CallOption) (rsp *SetOperatorTagsConfigResponse, err error)
+	SetUserTags(ctx context.Context, req *SetUserTagsRequest, opts ...http.CallOption) (rsp *SetUserTagsResponse, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
 }
 
@@ -454,6 +617,32 @@ func (c *BackofficeUserHTTPClientImpl) DeleteUserTag(ctx context.Context, in *De
 	return &out, nil
 }
 
+func (c *BackofficeUserHTTPClientImpl) GetOperatorTags(ctx context.Context, in *GetOperatorTagsRequest, opts ...http.CallOption) (*GetOperatorTagsResponse, error) {
+	var out GetOperatorTagsResponse
+	pattern := "/v1/backoffice/user/operator-tags/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserGetOperatorTags))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeUserHTTPClientImpl) GetOperatorTagsConfig(ctx context.Context, in *GetOperatorTagsConfigRequest, opts ...http.CallOption) (*GetOperatorTagsConfigResponse, error) {
+	var out GetOperatorTagsConfigResponse
+	pattern := "/v1/backoffice/user/operator-tags/config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserGetOperatorTagsConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeUserHTTPClientImpl) GetOperatorUserTags(ctx context.Context, in *GetOperatorUserTagsRequest, opts ...http.CallOption) (*GetOperatorUserTagsResponse, error) {
 	var out GetOperatorUserTagsResponse
 	pattern := "/v1/backoffice/operator/user-tags/get"
@@ -493,6 +682,19 @@ func (c *BackofficeUserHTTPClientImpl) GetUserProfile(ctx context.Context, in *G
 	return &out, nil
 }
 
+func (c *BackofficeUserHTTPClientImpl) GetUserTags(ctx context.Context, in *GetUserTagsRequest, opts ...http.CallOption) (*GetUserTagsResponse, error) {
+	var out GetUserTagsResponse
+	pattern := "/v1/backoffice/user/tags/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserGetUserTags))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeUserHTTPClientImpl) ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...http.CallOption) (*ListUserCommentsResponse, error) {
 	var out ListUserCommentsResponse
 	pattern := "/v1/backoffice/user/comments/list"
@@ -524,6 +726,45 @@ func (c *BackofficeUserHTTPClientImpl) SendEmailVerificationCode(ctx context.Con
 	pattern := "/v1/backoffice/user/send-email-verification-code"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeUserSendEmailVerificationCode))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeUserHTTPClientImpl) SetOperatorTags(ctx context.Context, in *SetOperatorTagsRequest, opts ...http.CallOption) (*SetOperatorTagsResponse, error) {
+	var out SetOperatorTagsResponse
+	pattern := "/v1/backoffice/user/operator-tags/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserSetOperatorTags))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeUserHTTPClientImpl) SetOperatorTagsConfig(ctx context.Context, in *SetOperatorTagsConfigRequest, opts ...http.CallOption) (*SetOperatorTagsConfigResponse, error) {
+	var out SetOperatorTagsConfigResponse
+	pattern := "/v1/backoffice/user/operator-tags/config/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserSetOperatorTagsConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeUserHTTPClientImpl) SetUserTags(ctx context.Context, in *SetUserTagsRequest, opts ...http.CallOption) (*SetUserTagsResponse, error) {
+	var out SetUserTagsResponse
+	pattern := "/v1/backoffice/user/tags/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserSetUserTags))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
