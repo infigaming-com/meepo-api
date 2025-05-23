@@ -1754,6 +1754,14 @@ func (m *ListBetsRequest) validate(all bool) error {
 
 	}
 
+	if m.Categories != nil {
+		// no validation rules for Categories
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
 	if m.Page != nil {
 		// no validation rules for Page
 	}
