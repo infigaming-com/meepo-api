@@ -34,3 +34,15 @@ func IsCallWalletServiceFailed(err error) bool {
 func ErrorCallWalletServiceFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_CALL_WALLET_SERVICE_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUserInfoNotFoundInContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT.String() && e.Code == 500
+}
+
+func ErrorUserInfoNotFoundInContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+}

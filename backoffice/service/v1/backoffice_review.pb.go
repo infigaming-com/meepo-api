@@ -457,13 +457,12 @@ func (x *GetTicketResponse) GetComments() []*GetTicketResponse_Comment {
 }
 
 type ReviewTicketRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	TicketId       int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	ReviewerUserId int64                  `protobuf:"varint,2,opt,name=reviewer_user_id,json=reviewerUserId,proto3" json:"reviewer_user_id,omitempty"`
-	Action         string                 `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"` // approve, reject, manual_payout
-	ReviewComment  string                 `protobuf:"bytes,4,opt,name=review_comment,json=reviewComment,proto3" json:"review_comment,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"` // approve, reject, manual_payout
+	ReviewComment string                 `protobuf:"bytes,3,opt,name=review_comment,json=reviewComment,proto3" json:"review_comment,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ReviewTicketRequest) Reset() {
@@ -499,13 +498,6 @@ func (*ReviewTicketRequest) Descriptor() ([]byte, []int) {
 func (x *ReviewTicketRequest) GetTicketId() int64 {
 	if x != nil {
 		return x.TicketId
-	}
-	return 0
-}
-
-func (x *ReviewTicketRequest) GetReviewerUserId() int64 {
-	if x != nil {
-		return x.ReviewerUserId
 	}
 	return 0
 }
@@ -563,8 +555,7 @@ func (*ReviewTicketResponse) Descriptor() ([]byte, []int) {
 type AddCommentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	AuthorUserId  int64                  `protobuf:"varint,2,opt,name=author_user_id,json=authorUserId,proto3" json:"author_user_id,omitempty"`
-	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
+	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -602,13 +593,6 @@ func (*AddCommentRequest) Descriptor() ([]byte, []int) {
 func (x *AddCommentRequest) GetTicketId() int64 {
 	if x != nil {
 		return x.TicketId
-	}
-	return 0
-}
-
-func (x *AddCommentRequest) GetAuthorUserId() int64 {
-	if x != nil {
-		return x.AuthorUserId
 	}
 	return 0
 }
@@ -665,11 +649,10 @@ func (x *AddCommentResponse) GetCommentId() int64 {
 }
 
 type CancelTicketRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	TicketId        int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	CancellerUserId int64                  `protobuf:"varint,2,opt,name=canceller_user_id,json=cancellerUserId,proto3" json:"canceller_user_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CancelTicketRequest) Reset() {
@@ -705,13 +688,6 @@ func (*CancelTicketRequest) Descriptor() ([]byte, []int) {
 func (x *CancelTicketRequest) GetTicketId() int64 {
 	if x != nil {
 		return x.TicketId
-	}
-	return 0
-}
-
-func (x *CancelTicketRequest) GetCancellerUserId() int64 {
-	if x != nil {
-		return x.CancellerUserId
 	}
 	return 0
 }
@@ -1331,23 +1307,20 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x0fauthor_username\x18\x01 \x01(\tR\x0eauthorUsername\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x129\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x9b\x01\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"q\n" +
 	"\x13ReviewTicketRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12(\n" +
-	"\x10reviewer_user_id\x18\x02 \x01(\x03R\x0ereviewerUserId\x12\x16\n" +
-	"\x06action\x18\x03 \x01(\tR\x06action\x12%\n" +
-	"\x0ereview_comment\x18\x04 \x01(\tR\rreviewComment\"\x16\n" +
-	"\x14ReviewTicketResponse\"p\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12\x16\n" +
+	"\x06action\x18\x02 \x01(\tR\x06action\x12%\n" +
+	"\x0ereview_comment\x18\x03 \x01(\tR\rreviewComment\"\x16\n" +
+	"\x14ReviewTicketResponse\"J\n" +
 	"\x11AddCommentRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12$\n" +
-	"\x0eauthor_user_id\x18\x02 \x01(\x03R\fauthorUserId\x12\x18\n" +
-	"\acontent\x18\x03 \x01(\tR\acontent\"3\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12\x18\n" +
+	"\acontent\x18\x02 \x01(\tR\acontent\"3\n" +
 	"\x12AddCommentResponse\x12\x1d\n" +
 	"\n" +
-	"comment_id\x18\x01 \x01(\x03R\tcommentId\"^\n" +
+	"comment_id\x18\x01 \x01(\x03R\tcommentId\"2\n" +
 	"\x13CancelTicketRequest\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12*\n" +
-	"\x11canceller_user_id\x18\x02 \x01(\x03R\x0fcancellerUserId\"\x16\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x16\n" +
 	"\x14CancelTicketResponse2\xb0\x06\n" +
 	"\x10BackofficeReview\x12\x9b\x01\n" +
 	"\vListTickets\x12-.api.backoffice.service.v1.ListTicketsRequest\x1a..api.backoffice.service.v1.ListTicketsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/review/tickets/list\x12\x94\x01\n" +
