@@ -118,6 +118,7 @@ type AuditLog struct {
 	ClientIp      string                 `protobuf:"bytes,7,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
 	ApiPath       string                 `protobuf:"bytes,8,opt,name=api_path,json=apiPath,proto3" json:"api_path,omitempty"`
 	Action        string                 `protobuf:"bytes,9,opt,name=action,proto3" json:"action,omitempty"`
+	ErrorMessage  string                 `protobuf:"bytes,10,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -215,6 +216,13 @@ func (x *AuditLog) GetAction() string {
 	return ""
 }
 
+func (x *AuditLog) GetErrorMessage() string {
+	if x != nil {
+		return x.ErrorMessage
+	}
+	return ""
+}
+
 type ListAuditLogsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AuditLogs     []*AuditLog            `protobuf:"bytes,1,rep,name=audit_logs,json=auditLogs,proto3" json:"audit_logs,omitempty"`
@@ -303,7 +311,7 @@ const file_backoffice_service_v1_backoffice_audit_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xae\x02\n" +
+	"_page_size\"\xd3\x02\n" +
 	"\bAuditLog\x12\x19\n" +
 	"\baudit_id\x18\x01 \x01(\x03R\aauditId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -314,7 +322,9 @@ const file_backoffice_service_v1_backoffice_audit_proto_rawDesc = "" +
 	"\rresponse_info\x18\x06 \x01(\tR\fresponseInfo\x12\x1b\n" +
 	"\tclient_ip\x18\a \x01(\tR\bclientIp\x12\x19\n" +
 	"\bapi_path\x18\b \x01(\tR\aapiPath\x12\x16\n" +
-	"\x06action\x18\t \x01(\tR\x06action\"\xa2\x01\n" +
+	"\x06action\x18\t \x01(\tR\x06action\x12#\n" +
+	"\rerror_message\x18\n" +
+	" \x01(\tR\ferrorMessage\"\xa2\x01\n" +
 	"\x15ListAuditLogsResponse\x12B\n" +
 	"\n" +
 	"audit_logs\x18\x01 \x03(\v2#.api.backoffice.service.v1.AuditLogR\tauditLogs\x12\x14\n" +

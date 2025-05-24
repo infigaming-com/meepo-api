@@ -37,6 +37,7 @@ message AuditLog {
 	string client_ip = 7;
 	string api_path = 8;
 	string action = 9;
+	string error_message = 10;
 }
 
 message ListAuditLogsResponse {

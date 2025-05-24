@@ -286,6 +286,8 @@ func (m *AuditLog) validate(all bool) error {
 
 	// no validation rules for Action
 
+	// no validation rules for ErrorMessage
+
 	if len(errors) > 0 {
 		return AuditLogMultiError(errors)
 	}
