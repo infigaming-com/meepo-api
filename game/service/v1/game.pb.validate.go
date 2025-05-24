@@ -5991,6 +5991,316 @@ var _ interface {
 	ErrorName() string
 } = GetBetByIdResponseValidationError{}
 
+// Validate checks the field values on GetBackofficeUserOverviewFromGameRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetBackofficeUserOverviewFromGameRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetBackofficeUserOverviewFromGameRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetBackofficeUserOverviewFromGameRequestMultiError, or nil if none found.
+func (m *GetBackofficeUserOverviewFromGameRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBackofficeUserOverviewFromGameRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetBackofficeUserOverviewFromGameRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetBackofficeUserOverviewFromGameRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetBackofficeUserOverviewFromGameRequestValidationError{
+				field:  "StartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetBackofficeUserOverviewFromGameRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetBackofficeUserOverviewFromGameRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetBackofficeUserOverviewFromGameRequestValidationError{
+				field:  "EndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetBackofficeUserOverviewFromGameRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBackofficeUserOverviewFromGameRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// GetBackofficeUserOverviewFromGameRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetBackofficeUserOverviewFromGameRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBackofficeUserOverviewFromGameRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBackofficeUserOverviewFromGameRequestMultiError) AllErrors() []error { return m }
+
+// GetBackofficeUserOverviewFromGameRequestValidationError is the validation
+// error returned by GetBackofficeUserOverviewFromGameRequest.Validate if the
+// designated constraints aren't met.
+type GetBackofficeUserOverviewFromGameRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBackofficeUserOverviewFromGameRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBackofficeUserOverviewFromGameRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBackofficeUserOverviewFromGameRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBackofficeUserOverviewFromGameRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBackofficeUserOverviewFromGameRequestValidationError) ErrorName() string {
+	return "GetBackofficeUserOverviewFromGameRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBackofficeUserOverviewFromGameRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBackofficeUserOverviewFromGameRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBackofficeUserOverviewFromGameRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBackofficeUserOverviewFromGameRequestValidationError{}
+
+// Validate checks the field values on
+// GetBackofficeUserOverviewFromGameResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetBackofficeUserOverviewFromGameResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetBackofficeUserOverviewFromGameResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetBackofficeUserOverviewFromGameResponseMultiError, or nil if none found.
+func (m *GetBackofficeUserOverviewFromGameResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBackofficeUserOverviewFromGameResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AverageBetAmount
+
+	// no validation rules for RtpPercentage
+
+	for idx, item := range m.GetGameData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetBackofficeUserOverviewFromGameResponseValidationError{
+						field:  fmt.Sprintf("GameData[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetBackofficeUserOverviewFromGameResponseValidationError{
+						field:  fmt.Sprintf("GameData[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetBackofficeUserOverviewFromGameResponseValidationError{
+					field:  fmt.Sprintf("GameData[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetBackofficeUserOverviewFromGameResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBackofficeUserOverviewFromGameResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// GetBackofficeUserOverviewFromGameResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetBackofficeUserOverviewFromGameResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBackofficeUserOverviewFromGameResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBackofficeUserOverviewFromGameResponseMultiError) AllErrors() []error { return m }
+
+// GetBackofficeUserOverviewFromGameResponseValidationError is the validation
+// error returned by GetBackofficeUserOverviewFromGameResponse.Validate if the
+// designated constraints aren't met.
+type GetBackofficeUserOverviewFromGameResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBackofficeUserOverviewFromGameResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBackofficeUserOverviewFromGameResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBackofficeUserOverviewFromGameResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBackofficeUserOverviewFromGameResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBackofficeUserOverviewFromGameResponseValidationError) ErrorName() string {
+	return "GetBackofficeUserOverviewFromGameResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBackofficeUserOverviewFromGameResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBackofficeUserOverviewFromGameResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBackofficeUserOverviewFromGameResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBackofficeUserOverviewFromGameResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -7225,3 +7535,125 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetBetByIdResponse_BetValidationError{}
+
+// Validate checks the field values on
+// GetBackofficeUserOverviewFromGameResponse_GameData with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetBackofficeUserOverviewFromGameResponse_GameData) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetBackofficeUserOverviewFromGameResponse_GameData with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// GetBackofficeUserOverviewFromGameResponse_GameDataMultiError, or nil if
+// none found.
+func (m *GetBackofficeUserOverviewFromGameResponse_GameData) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBackofficeUserOverviewFromGameResponse_GameData) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GameType
+
+	// no validation rules for Ggr
+
+	// no validation rules for Turnover
+
+	// no validation rules for Rtp
+
+	if len(errors) > 0 {
+		return GetBackofficeUserOverviewFromGameResponse_GameDataMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBackofficeUserOverviewFromGameResponse_GameDataMultiError is an error
+// wrapping multiple validation errors returned by
+// GetBackofficeUserOverviewFromGameResponse_GameData.ValidateAll() if the
+// designated constraints aren't met.
+type GetBackofficeUserOverviewFromGameResponse_GameDataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBackofficeUserOverviewFromGameResponse_GameDataMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBackofficeUserOverviewFromGameResponse_GameDataMultiError) AllErrors() []error { return m }
+
+// GetBackofficeUserOverviewFromGameResponse_GameDataValidationError is the
+// validation error returned by
+// GetBackofficeUserOverviewFromGameResponse_GameData.Validate if the
+// designated constraints aren't met.
+type GetBackofficeUserOverviewFromGameResponse_GameDataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBackofficeUserOverviewFromGameResponse_GameDataValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetBackofficeUserOverviewFromGameResponse_GameDataValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetBackofficeUserOverviewFromGameResponse_GameDataValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e GetBackofficeUserOverviewFromGameResponse_GameDataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBackofficeUserOverviewFromGameResponse_GameDataValidationError) ErrorName() string {
+	return "GetBackofficeUserOverviewFromGameResponse_GameDataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBackofficeUserOverviewFromGameResponse_GameDataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBackofficeUserOverviewFromGameResponse_GameData.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBackofficeUserOverviewFromGameResponse_GameDataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBackofficeUserOverviewFromGameResponse_GameDataValidationError{}

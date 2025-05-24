@@ -284,7 +284,16 @@ func (x *ListUsersResponse) GetTotal() int32 {
 }
 
 type GetUserOverviewRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	UserId int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// filter options:
+	// - "today": Today's data
+	// - "this_week": This week's data
+	// - "this_month": This month's data
+	// - "recent_24h": Recent 24 hours data
+	// - "recent_30d": Recent 30 days data
+	// If not specified, returns all time data
+	Filter        *string `protobuf:"bytes,2,opt,name=filter,proto3,oneof" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -319,37 +328,51 @@ func (*GetUserOverviewRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{2}
 }
 
+func (x *GetUserOverviewRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetUserOverviewRequest) GetFilter() string {
+	if x != nil && x.Filter != nil {
+		return *x.Filter
+	}
+	return ""
+}
+
 type GetUserOverviewResponse struct {
 	state                    protoimpl.MessageState              `protogen:"open.v1"`
-	Balance                  string                              `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
-	DepositMinusWithdraw     string                              `protobuf:"bytes,2,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
+	DepositMinusWithdraw     string                              `protobuf:"bytes,1,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
+	Turnover                 string                              `protobuf:"bytes,2,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	CashTurnover             string                              `protobuf:"bytes,3,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
 	BonusTurnover            string                              `protobuf:"bytes,4,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
 	Deposit                  string                              `protobuf:"bytes,5,opt,name=deposit,proto3" json:"deposit,omitempty"`
 	LastDeposit              string                              `protobuf:"bytes,6,opt,name=last_deposit,json=lastDeposit,proto3" json:"last_deposit,omitempty"`
-	DepositCount             string                              `protobuf:"bytes,7,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
-	Withdraw                 string                              `protobuf:"bytes,8,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
-	LastWithdraw             string                              `protobuf:"bytes,9,opt,name=last_withdraw,json=lastWithdraw,proto3" json:"last_withdraw,omitempty"`
-	WithdrawCount            int32                               `protobuf:"varint,10,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"`
+	DepositCount             int32                               `protobuf:"varint,7,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	Withdraw                 string                              `protobuf:"bytes,8,opt,name=withdraw,proto3" json:"withdraw,omitempty"`                                  // withdrawal
+	LastWithdraw             string                              `protobuf:"bytes,9,opt,name=last_withdraw,json=lastWithdraw,proto3" json:"last_withdraw,omitempty"`      // last withdrawal
+	WithdrawCount            int32                               `protobuf:"varint,10,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"` // withdrawal count
 	Bonus                    string                              `protobuf:"bytes,11,opt,name=bonus,proto3" json:"bonus,omitempty"`
-	ValidTurnover            string                              `protobuf:"bytes,12,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`
+	ValidTurnover            string                              `protobuf:"bytes,12,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"` // Not available for now, only return 0
 	AverageBetAmount         string                              `protobuf:"bytes,13,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
 	Ggr                      string                              `protobuf:"bytes,14,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	GgrPercentage            int32                               `protobuf:"varint,15,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
-	ManuallyAddedBalance     string                              `protobuf:"bytes,16,opt,name=manually_added_balance,json=manuallyAddedBalance,proto3" json:"manually_added_balance,omitempty"`
-	BonusClaimed             string                              `protobuf:"bytes,17,opt,name=bonus_claimed,json=bonusClaimed,proto3" json:"bonus_claimed,omitempty"`
+	ManuallyAddedBalance     string                              `protobuf:"bytes,16,opt,name=manually_added_balance,json=manuallyAddedBalance,proto3" json:"manually_added_balance,omitempty"` // Not available for now, only return 0
+	BonusClaimed             string                              `protobuf:"bytes,17,opt,name=bonus_claimed,json=bonusClaimed,proto3" json:"bonus_claimed,omitempty"`                           // Not available for now, only return 0
 	Ngr                      string                              `protobuf:"bytes,18,opt,name=ngr,proto3" json:"ngr,omitempty"`
 	GgrToNgrPercentage       int32                               `protobuf:"varint,19,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`
-	TurnoverMultiplier       int32                               `protobuf:"varint,20,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`
+	TurnoverMultiplier       int32                               `protobuf:"varint,20,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"` // Not available for now, only return 0
 	DepositToWithdrawRatio   int32                               `protobuf:"varint,21,opt,name=deposit_to_withdraw_ratio,json=depositToWithdrawRatio,proto3" json:"deposit_to_withdraw_ratio,omitempty"`
 	RtpPercentage            int32                               `protobuf:"varint,22,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
 	GameData                 []*GetUserOverviewResponse_GameData `protobuf:"bytes,23,rep,name=game_data,json=gameData,proto3" json:"game_data,omitempty"`
-	VpnUsed                  bool                                `protobuf:"varint,24,opt,name=vpn_used,json=vpnUsed,proto3" json:"vpn_used,omitempty"`
-	Has_1XDepositsBeforeWd   bool                                `protobuf:"varint,25,opt,name=has_1x_deposits_before_wd,json=has1xDepositsBeforeWd,proto3" json:"has_1x_deposits_before_wd,omitempty"`
-	MoreThan_2Deposits       bool                                `protobuf:"varint,26,opt,name=more_than_2_deposits,json=moreThan2Deposits,proto3" json:"more_than_2_deposits,omitempty"`
+	VpnUsed                  bool                                `protobuf:"varint,24,opt,name=vpn_used,json=vpnUsed,proto3" json:"vpn_used,omitempty"`                                                 // Not available for now, only return false
+	Has_1XDepositsBeforeWd   bool                                `protobuf:"varint,25,opt,name=has_1x_deposits_before_wd,json=has1xDepositsBeforeWd,proto3" json:"has_1x_deposits_before_wd,omitempty"` // Not available for now, only return false
+	MoreThan_2Deposits       bool                                `protobuf:"varint,26,opt,name=more_than_2_deposits,json=moreThan2Deposits,proto3" json:"more_than_2_deposits,omitempty"`               // Not available for now, only return false
 	AccountOlderThan_3Months bool                                `protobuf:"varint,27,opt,name=account_older_than_3_months,json=accountOlderThan3Months,proto3" json:"account_older_than_3_months,omitempty"`
-	LastDepositAt            *timestamppb.Timestamp              `protobuf:"bytes,28,opt,name=last_deposit_at,json=lastDepositAt,proto3" json:"last_deposit_at,omitempty"` // ?? Is this time since last deposit
-	FirstWithdrawOnToday     bool                                `protobuf:"varint,29,opt,name=first_withdraw_on_today,json=firstWithdrawOnToday,proto3" json:"first_withdraw_on_today,omitempty"`
+	LastDepositAt            *timestamppb.Timestamp              `protobuf:"bytes,28,opt,name=last_deposit_at,json=lastDepositAt,proto3" json:"last_deposit_at,omitempty"`                         // Is this time since last deposit
+	FirstWithdrawOnToday     bool                                `protobuf:"varint,29,opt,name=first_withdraw_on_today,json=firstWithdrawOnToday,proto3" json:"first_withdraw_on_today,omitempty"` // Not available for now, only return false
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -384,16 +407,16 @@ func (*GetUserOverviewResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetUserOverviewResponse) GetBalance() string {
+func (x *GetUserOverviewResponse) GetDepositMinusWithdraw() string {
 	if x != nil {
-		return x.Balance
+		return x.DepositMinusWithdraw
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetDepositMinusWithdraw() string {
+func (x *GetUserOverviewResponse) GetTurnover() string {
 	if x != nil {
-		return x.DepositMinusWithdraw
+		return x.Turnover
 	}
 	return ""
 }
@@ -426,11 +449,11 @@ func (x *GetUserOverviewResponse) GetLastDeposit() string {
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetDepositCount() string {
+func (x *GetUserOverviewResponse) GetDepositCount() int32 {
 	if x != nil {
 		return x.DepositCount
 	}
-	return ""
+	return 0
 }
 
 func (x *GetUserOverviewResponse) GetWithdraw() string {
@@ -2027,7 +2050,7 @@ func (x *ListUsersResponse_User) GetRegistrationIp() string {
 
 type GetUserOverviewResponse_GameData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	GameType      string                 `protobuf:"bytes,1,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"`
+	GameType      string                 `protobuf:"bytes,1,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"` // game category
 	Ggr           string                 `protobuf:"bytes,2,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	Turnover      string                 `protobuf:"bytes,3,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	Rtp           string                 `protobuf:"bytes,4,opt,name=rtp,proto3" json:"rtp,omitempty"`
@@ -2591,17 +2614,20 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\rlast_login_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
 	"\rregistered_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
 	"\acountry\x18\x16 \x01(\tR\acountry\x12'\n" +
-	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\"\x18\n" +
-	"\x16GetUserOverviewRequest\"\xd8\n" +
+	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\"Y\n" +
+	"\x16GetUserOverviewRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
+	"\x06filter\x18\x02 \x01(\tH\x00R\x06filter\x88\x01\x01B\t\n" +
+	"\a_filter\"\xda\n" +
 	"\n" +
-	"\x17GetUserOverviewResponse\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\tR\abalance\x124\n" +
-	"\x16deposit_minus_withdraw\x18\x02 \x01(\tR\x14depositMinusWithdraw\x12#\n" +
+	"\x17GetUserOverviewResponse\x124\n" +
+	"\x16deposit_minus_withdraw\x18\x01 \x01(\tR\x14depositMinusWithdraw\x12\x1a\n" +
+	"\bturnover\x18\x02 \x01(\tR\bturnover\x12#\n" +
 	"\rcash_turnover\x18\x03 \x01(\tR\fcashTurnover\x12%\n" +
 	"\x0ebonus_turnover\x18\x04 \x01(\tR\rbonusTurnover\x12\x18\n" +
 	"\adeposit\x18\x05 \x01(\tR\adeposit\x12!\n" +
 	"\flast_deposit\x18\x06 \x01(\tR\vlastDeposit\x12#\n" +
-	"\rdeposit_count\x18\a \x01(\tR\fdepositCount\x12\x1a\n" +
+	"\rdeposit_count\x18\a \x01(\x05R\fdepositCount\x12\x1a\n" +
 	"\bwithdraw\x18\b \x01(\tR\bwithdraw\x12#\n" +
 	"\rlast_withdraw\x18\t \x01(\tR\flastWithdraw\x12%\n" +
 	"\x0ewithdraw_count\x18\n" +
@@ -2881,6 +2907,7 @@ func file_backoffice_service_v1_backoffice_user_proto_init() {
 		return
 	}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[0].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_user_proto_msgTypes[2].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[4].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}

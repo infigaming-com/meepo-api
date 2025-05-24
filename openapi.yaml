@@ -3226,13 +3226,25 @@ components:
                     type: string
         api.backoffice.service.v1.GetUserOverviewRequest:
             type: object
-            properties: {}
+            properties:
+                userId:
+                    type: string
+                filter:
+                    type: string
+                    description: |-
+                        filter options:
+                         - "today": Today's data
+                         - "this_week": This week's data
+                         - "this_month": This month's data
+                         - "recent_24h": Recent 24 hours data
+                         - "recent_30d": Recent 30 days data
+                         If not specified, returns all time data
         api.backoffice.service.v1.GetUserOverviewResponse:
             type: object
             properties:
-                balance:
-                    type: string
                 depositMinusWithdraw:
+                    type: string
+                turnover:
                     type: string
                 cashTurnover:
                     type: string
@@ -3243,7 +3255,8 @@ components:
                 lastDeposit:
                     type: string
                 depositCount:
-                    type: string
+                    type: integer
+                    format: int32
                 withdraw:
                     type: string
                 lastWithdraw:

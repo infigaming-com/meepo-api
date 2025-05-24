@@ -429,6 +429,12 @@ func (m *GetUserOverviewRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for UserId
+
+	if m.Filter != nil {
+		// no validation rules for Filter
+	}
+
 	if len(errors) > 0 {
 		return GetUserOverviewRequestMultiError(errors)
 	}
@@ -531,9 +537,9 @@ func (m *GetUserOverviewResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Balance
-
 	// no validation rules for DepositMinusWithdraw
+
+	// no validation rules for Turnover
 
 	// no validation rules for CashTurnover
 

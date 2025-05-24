@@ -171,46 +171,53 @@ message ListUsersResponse {
 }
 
 message GetUserOverviewRequest {
-	// ?? filter
-	// Today, This Week, This Month, Latest 30/90/120 days
+	int64 user_id = 1;
+	// filter options:
+	// - "today": Today's data
+	// - "this_week": This week's data
+	// - "this_month": This month's data
+	// - "recent_24h": Recent 24 hours data
+	// - "recent_30d": Recent 30 days data
+	// If not specified, returns all time data
+	optional string filter = 2;
 }
 
 message GetUserOverviewResponse {
 	message GameData {
-		string game_type = 1;
+		string game_type = 1; // game category
 		string ggr = 2;
 		string turnover = 3;
 		string rtp = 4;
 	}
-	string balance = 1;
-	string deposit_minus_withdraw = 2;
+	string deposit_minus_withdraw = 1;
+	string turnover = 2;
 	string cash_turnover = 3;
 	string bonus_turnover = 4;
 	string deposit = 5;
 	string last_deposit = 6;
-	string deposit_count = 7;
-	string withdraw = 8;
-	string last_withdraw = 9;
-	int32 withdraw_count = 10;
+	int32 deposit_count = 7;
+	string withdraw = 8; // withdrawal
+	string last_withdraw = 9; // last withdrawal
+	int32 withdraw_count = 10; // withdrawal count
 	string bonus = 11;
-	string valid_turnover = 12;
+	string valid_turnover = 12; // Not available for now, only return 0
 	string average_bet_amount = 13;
 	string ggr = 14;
 	int32 ggr_percentage = 15;
-	string manually_added_balance = 16;
-	string bonus_claimed = 17;
+	string manually_added_balance = 16; // Not available for now, only return 0
+	string bonus_claimed = 17; // Not available for now, only return 0
 	string ngr = 18;
 	int32 ggr_to_ngr_percentage = 19;
-	int32 turnover_multiplier = 20;
+	int32 turnover_multiplier = 20; // Not available for now, only return 0
 	int32 deposit_to_withdraw_ratio = 21;
 	int32 rtp_percentage = 22;
 	repeated GameData game_data = 23;
-	bool vpn_used = 24;
-	bool has_1x_deposits_before_wd = 25;
-	bool more_than_2_deposits = 26;
+	bool vpn_used = 24; // Not available for now, only return false
+	bool has_1x_deposits_before_wd = 25; // Not available for now, only return false
+	bool more_than_2_deposits = 26; // Not available for now, only return false
 	bool account_older_than_3_months = 27;
-	google.protobuf.Timestamp last_deposit_at = 28;	// ?? Is this time since last deposit
-	bool first_withdraw_on_today = 29;
+	google.protobuf.Timestamp last_deposit_at = 28;	// Is this time since last deposit
+	bool first_withdraw_on_today = 29; // Not available for now, only return false
 }
 
 message GetUserProfileRequest {
