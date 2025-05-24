@@ -284,7 +284,16 @@ func (x *ListUsersResponse) GetTotal() int32 {
 }
 
 type GetUserOverviewRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	UserId int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// filter options:
+	// - "today": Today's data
+	// - "this_week": This week's data
+	// - "this_month": This month's data
+	// - "recent_24h": Recent 24 hours data
+	// - "recent_30d": Recent 30 days data
+	// If not specified, returns all time data
+	Filter        *string `protobuf:"bytes,2,opt,name=filter,proto3,oneof" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -319,39 +328,47 @@ func (*GetUserOverviewRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{2}
 }
 
+func (x *GetUserOverviewRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetUserOverviewRequest) GetFilter() string {
+	if x != nil && x.Filter != nil {
+		return *x.Filter
+	}
+	return ""
+}
+
 type GetUserOverviewResponse struct {
-	state                    protoimpl.MessageState              `protogen:"open.v1"`
-	Balance                  string                              `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
-	DepositMinusWithdraw     string                              `protobuf:"bytes,2,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
-	CashTurnover             string                              `protobuf:"bytes,3,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
-	BonusTurnover            string                              `protobuf:"bytes,4,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
-	Deposit                  string                              `protobuf:"bytes,5,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	LastDeposit              string                              `protobuf:"bytes,6,opt,name=last_deposit,json=lastDeposit,proto3" json:"last_deposit,omitempty"`
-	DepositCount             string                              `protobuf:"bytes,7,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
-	Withdraw                 string                              `protobuf:"bytes,8,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
-	LastWithdraw             string                              `protobuf:"bytes,9,opt,name=last_withdraw,json=lastWithdraw,proto3" json:"last_withdraw,omitempty"`
-	WithdrawCount            int32                               `protobuf:"varint,10,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"`
-	Bonus                    string                              `protobuf:"bytes,11,opt,name=bonus,proto3" json:"bonus,omitempty"`
-	ValidTurnover            string                              `protobuf:"bytes,12,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`
-	AverageBetAmount         string                              `protobuf:"bytes,13,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
-	Ggr                      string                              `protobuf:"bytes,14,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	GgrPercentage            int32                               `protobuf:"varint,15,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
-	ManuallyAddedBalance     string                              `protobuf:"bytes,16,opt,name=manually_added_balance,json=manuallyAddedBalance,proto3" json:"manually_added_balance,omitempty"`
-	BonusClaimed             string                              `protobuf:"bytes,17,opt,name=bonus_claimed,json=bonusClaimed,proto3" json:"bonus_claimed,omitempty"`
-	Ngr                      string                              `protobuf:"bytes,18,opt,name=ngr,proto3" json:"ngr,omitempty"`
-	GgrToNgrPercentage       int32                               `protobuf:"varint,19,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`
-	TurnoverMultiplier       int32                               `protobuf:"varint,20,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`
-	DepositToWithdrawRatio   int32                               `protobuf:"varint,21,opt,name=deposit_to_withdraw_ratio,json=depositToWithdrawRatio,proto3" json:"deposit_to_withdraw_ratio,omitempty"`
-	RtpPercentage            int32                               `protobuf:"varint,22,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
-	GameData                 []*GetUserOverviewResponse_GameData `protobuf:"bytes,23,rep,name=game_data,json=gameData,proto3" json:"game_data,omitempty"`
-	VpnUsed                  bool                                `protobuf:"varint,24,opt,name=vpn_used,json=vpnUsed,proto3" json:"vpn_used,omitempty"`
-	Has_1XDepositsBeforeWd   bool                                `protobuf:"varint,25,opt,name=has_1x_deposits_before_wd,json=has1xDepositsBeforeWd,proto3" json:"has_1x_deposits_before_wd,omitempty"`
-	MoreThan_2Deposits       bool                                `protobuf:"varint,26,opt,name=more_than_2_deposits,json=moreThan2Deposits,proto3" json:"more_than_2_deposits,omitempty"`
-	AccountOlderThan_3Months bool                                `protobuf:"varint,27,opt,name=account_older_than_3_months,json=accountOlderThan3Months,proto3" json:"account_older_than_3_months,omitempty"`
-	LastDepositAt            *timestamppb.Timestamp              `protobuf:"bytes,28,opt,name=last_deposit_at,json=lastDepositAt,proto3" json:"last_deposit_at,omitempty"` // ?? Is this time since last deposit
-	FirstWithdrawOnToday     bool                                `protobuf:"varint,29,opt,name=first_withdraw_on_today,json=firstWithdrawOnToday,proto3" json:"first_withdraw_on_today,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                  protoimpl.MessageState              `protogen:"open.v1"`
+	DepositMinusWithdraw   string                              `protobuf:"bytes,1,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
+	Turnover               string                              `protobuf:"bytes,2,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	CashTurnover           string                              `protobuf:"bytes,3,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
+	BonusTurnover          string                              `protobuf:"bytes,4,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
+	Deposit                string                              `protobuf:"bytes,5,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	LastDeposit            string                              `protobuf:"bytes,6,opt,name=last_deposit,json=lastDeposit,proto3" json:"last_deposit,omitempty"`
+	DepositCount           int32                               `protobuf:"varint,7,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	Withdraw               string                              `protobuf:"bytes,8,opt,name=withdraw,proto3" json:"withdraw,omitempty"`                                  // withdrawal
+	LastWithdraw           string                              `protobuf:"bytes,9,opt,name=last_withdraw,json=lastWithdraw,proto3" json:"last_withdraw,omitempty"`      // last withdrawal
+	WithdrawCount          int32                               `protobuf:"varint,10,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"` // withdrawal count
+	Bonus                  string                              `protobuf:"bytes,11,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	ValidTurnover          string                              `protobuf:"bytes,12,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"` // Not available for now, only return 0
+	AverageBetAmount       string                              `protobuf:"bytes,13,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
+	Ggr                    string                              `protobuf:"bytes,14,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	GgrPercentage          int32                               `protobuf:"varint,15,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
+	ManuallyAddedBalance   string                              `protobuf:"bytes,16,opt,name=manually_added_balance,json=manuallyAddedBalance,proto3" json:"manually_added_balance,omitempty"` // Not available for now, only return 0
+	BonusClaimed           string                              `protobuf:"bytes,17,opt,name=bonus_claimed,json=bonusClaimed,proto3" json:"bonus_claimed,omitempty"`                           // Not available for now, only return 0
+	Ngr                    string                              `protobuf:"bytes,18,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	GgrToNgrPercentage     int32                               `protobuf:"varint,19,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`
+	TurnoverMultiplier     int32                               `protobuf:"varint,20,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"` // Not available for now, only return 0
+	DepositToWithdrawRatio int32                               `protobuf:"varint,21,opt,name=deposit_to_withdraw_ratio,json=depositToWithdrawRatio,proto3" json:"deposit_to_withdraw_ratio,omitempty"`
+	RtpPercentage          int32                               `protobuf:"varint,22,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
+	GameData               []*GetUserOverviewResponse_GameData `protobuf:"bytes,23,rep,name=game_data,json=gameData,proto3" json:"game_data,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetUserOverviewResponse) Reset() {
@@ -384,16 +401,16 @@ func (*GetUserOverviewResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetUserOverviewResponse) GetBalance() string {
+func (x *GetUserOverviewResponse) GetDepositMinusWithdraw() string {
 	if x != nil {
-		return x.Balance
+		return x.DepositMinusWithdraw
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetDepositMinusWithdraw() string {
+func (x *GetUserOverviewResponse) GetTurnover() string {
 	if x != nil {
-		return x.DepositMinusWithdraw
+		return x.Turnover
 	}
 	return ""
 }
@@ -426,11 +443,11 @@ func (x *GetUserOverviewResponse) GetLastDeposit() string {
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetDepositCount() string {
+func (x *GetUserOverviewResponse) GetDepositCount() int32 {
 	if x != nil {
 		return x.DepositCount
 	}
-	return ""
+	return 0
 }
 
 func (x *GetUserOverviewResponse) GetWithdraw() string {
@@ -543,48 +560,6 @@ func (x *GetUserOverviewResponse) GetGameData() []*GetUserOverviewResponse_GameD
 		return x.GameData
 	}
 	return nil
-}
-
-func (x *GetUserOverviewResponse) GetVpnUsed() bool {
-	if x != nil {
-		return x.VpnUsed
-	}
-	return false
-}
-
-func (x *GetUserOverviewResponse) GetHas_1XDepositsBeforeWd() bool {
-	if x != nil {
-		return x.Has_1XDepositsBeforeWd
-	}
-	return false
-}
-
-func (x *GetUserOverviewResponse) GetMoreThan_2Deposits() bool {
-	if x != nil {
-		return x.MoreThan_2Deposits
-	}
-	return false
-}
-
-func (x *GetUserOverviewResponse) GetAccountOlderThan_3Months() bool {
-	if x != nil {
-		return x.AccountOlderThan_3Months
-	}
-	return false
-}
-
-func (x *GetUserOverviewResponse) GetLastDepositAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.LastDepositAt
-	}
-	return nil
-}
-
-func (x *GetUserOverviewResponse) GetFirstWithdrawOnToday() bool {
-	if x != nil {
-		return x.FirstWithdrawOnToday
-	}
-	return false
 }
 
 type GetUserProfileRequest struct {
@@ -2027,7 +2002,7 @@ func (x *ListUsersResponse_User) GetRegistrationIp() string {
 
 type GetUserOverviewResponse_GameData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	GameType      string                 `protobuf:"bytes,1,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"`
+	GameType      string                 `protobuf:"bytes,1,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"` // game category
 	Ggr           string                 `protobuf:"bytes,2,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	Turnover      string                 `protobuf:"bytes,3,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	Rtp           string                 `protobuf:"bytes,4,opt,name=rtp,proto3" json:"rtp,omitempty"`
@@ -2591,17 +2566,19 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\rlast_login_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
 	"\rregistered_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
 	"\acountry\x18\x16 \x01(\tR\acountry\x12'\n" +
-	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\"\x18\n" +
-	"\x16GetUserOverviewRequest\"\xd8\n" +
-	"\n" +
-	"\x17GetUserOverviewResponse\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\tR\abalance\x124\n" +
-	"\x16deposit_minus_withdraw\x18\x02 \x01(\tR\x14depositMinusWithdraw\x12#\n" +
+	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\"Y\n" +
+	"\x16GetUserOverviewRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
+	"\x06filter\x18\x02 \x01(\tH\x00R\x06filter\x88\x01\x01B\t\n" +
+	"\a_filter\"\x9b\b\n" +
+	"\x17GetUserOverviewResponse\x124\n" +
+	"\x16deposit_minus_withdraw\x18\x01 \x01(\tR\x14depositMinusWithdraw\x12\x1a\n" +
+	"\bturnover\x18\x02 \x01(\tR\bturnover\x12#\n" +
 	"\rcash_turnover\x18\x03 \x01(\tR\fcashTurnover\x12%\n" +
 	"\x0ebonus_turnover\x18\x04 \x01(\tR\rbonusTurnover\x12\x18\n" +
 	"\adeposit\x18\x05 \x01(\tR\adeposit\x12!\n" +
 	"\flast_deposit\x18\x06 \x01(\tR\vlastDeposit\x12#\n" +
-	"\rdeposit_count\x18\a \x01(\tR\fdepositCount\x12\x1a\n" +
+	"\rdeposit_count\x18\a \x01(\x05R\fdepositCount\x12\x1a\n" +
 	"\bwithdraw\x18\b \x01(\tR\bwithdraw\x12#\n" +
 	"\rlast_withdraw\x18\t \x01(\tR\flastWithdraw\x12%\n" +
 	"\x0ewithdraw_count\x18\n" +
@@ -2618,13 +2595,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x13turnover_multiplier\x18\x14 \x01(\x05R\x12turnoverMultiplier\x129\n" +
 	"\x19deposit_to_withdraw_ratio\x18\x15 \x01(\x05R\x16depositToWithdrawRatio\x12%\n" +
 	"\x0ertp_percentage\x18\x16 \x01(\x05R\rrtpPercentage\x12X\n" +
-	"\tgame_data\x18\x17 \x03(\v2;.api.backoffice.service.v1.GetUserOverviewResponse.GameDataR\bgameData\x12\x19\n" +
-	"\bvpn_used\x18\x18 \x01(\bR\avpnUsed\x128\n" +
-	"\x19has_1x_deposits_before_wd\x18\x19 \x01(\bR\x15has1xDepositsBeforeWd\x12/\n" +
-	"\x14more_than_2_deposits\x18\x1a \x01(\bR\x11moreThan2Deposits\x12<\n" +
-	"\x1baccount_older_than_3_months\x18\x1b \x01(\bR\x17accountOlderThan3Months\x12B\n" +
-	"\x0flast_deposit_at\x18\x1c \x01(\v2\x1a.google.protobuf.TimestampR\rlastDepositAt\x125\n" +
-	"\x17first_withdraw_on_today\x18\x1d \x01(\bR\x14firstWithdrawOnToday\x1ag\n" +
+	"\tgame_data\x18\x17 \x03(\v2;.api.backoffice.service.v1.GetUserOverviewResponse.GameDataR\bgameData\x1ag\n" +
 	"\bGameData\x12\x1b\n" +
 	"\tgame_type\x18\x01 \x01(\tR\bgameType\x12\x10\n" +
 	"\x03ggr\x18\x02 \x01(\tR\x03ggr\x12\x1a\n" +
@@ -2827,52 +2798,51 @@ var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
 	35, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
 	28, // 2: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
 	29, // 3: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	35, // 4: api.backoffice.service.v1.GetUserOverviewResponse.last_deposit_at:type_name -> google.protobuf.Timestamp
-	31, // 5: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	32, // 6: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	33, // 7: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
-	34, // 8: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
-	35, // 9: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	35, // 10: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	35, // 11: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	30, // 12: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
-	35, // 13: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	30, // 14: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
-	35, // 15: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	35, // 16: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 17: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
-	2,  // 18: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
-	4,  // 19: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
-	6,  // 20: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
-	8,  // 21: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
-	10, // 22: api.backoffice.service.v1.BackofficeUser.CreateUser:input_type -> api.backoffice.service.v1.CreateUserRequest
-	12, // 23: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
-	14, // 24: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
-	16, // 25: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:input_type -> api.backoffice.service.v1.SetOperatorTagsConfigRequest
-	18, // 26: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:input_type -> api.backoffice.service.v1.SetOperatorTagsRequest
-	20, // 27: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:input_type -> api.backoffice.service.v1.GetOperatorTagsConfigRequest
-	22, // 28: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:input_type -> api.backoffice.service.v1.GetOperatorTagsRequest
-	24, // 29: api.backoffice.service.v1.BackofficeUser.GetUserTags:input_type -> api.backoffice.service.v1.GetUserTagsRequest
-	26, // 30: api.backoffice.service.v1.BackofficeUser.SetUserTags:input_type -> api.backoffice.service.v1.SetUserTagsRequest
-	1,  // 31: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
-	3,  // 32: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
-	5,  // 33: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
-	7,  // 34: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
-	9,  // 35: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
-	11, // 36: api.backoffice.service.v1.BackofficeUser.CreateUser:output_type -> api.backoffice.service.v1.CreateUserResponse
-	13, // 37: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
-	15, // 38: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
-	17, // 39: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:output_type -> api.backoffice.service.v1.SetOperatorTagsConfigResponse
-	19, // 40: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:output_type -> api.backoffice.service.v1.SetOperatorTagsResponse
-	21, // 41: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:output_type -> api.backoffice.service.v1.GetOperatorTagsConfigResponse
-	23, // 42: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:output_type -> api.backoffice.service.v1.GetOperatorTagsResponse
-	25, // 43: api.backoffice.service.v1.BackofficeUser.GetUserTags:output_type -> api.backoffice.service.v1.GetUserTagsResponse
-	27, // 44: api.backoffice.service.v1.BackofficeUser.SetUserTags:output_type -> api.backoffice.service.v1.SetUserTagsResponse
-	31, // [31:45] is the sub-list for method output_type
-	17, // [17:31] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	31, // 4: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
+	32, // 5: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
+	33, // 6: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
+	34, // 7: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	35, // 8: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	35, // 9: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	35, // 10: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
+	30, // 11: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
+	35, // 12: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
+	30, // 13: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
+	35, // 14: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	35, // 15: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 16: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
+	2,  // 17: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
+	4,  // 18: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
+	6,  // 19: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
+	8,  // 20: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
+	10, // 21: api.backoffice.service.v1.BackofficeUser.CreateUser:input_type -> api.backoffice.service.v1.CreateUserRequest
+	12, // 22: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
+	14, // 23: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
+	16, // 24: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:input_type -> api.backoffice.service.v1.SetOperatorTagsConfigRequest
+	18, // 25: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:input_type -> api.backoffice.service.v1.SetOperatorTagsRequest
+	20, // 26: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:input_type -> api.backoffice.service.v1.GetOperatorTagsConfigRequest
+	22, // 27: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:input_type -> api.backoffice.service.v1.GetOperatorTagsRequest
+	24, // 28: api.backoffice.service.v1.BackofficeUser.GetUserTags:input_type -> api.backoffice.service.v1.GetUserTagsRequest
+	26, // 29: api.backoffice.service.v1.BackofficeUser.SetUserTags:input_type -> api.backoffice.service.v1.SetUserTagsRequest
+	1,  // 30: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
+	3,  // 31: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
+	5,  // 32: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
+	7,  // 33: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
+	9,  // 34: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
+	11, // 35: api.backoffice.service.v1.BackofficeUser.CreateUser:output_type -> api.backoffice.service.v1.CreateUserResponse
+	13, // 36: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
+	15, // 37: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
+	17, // 38: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:output_type -> api.backoffice.service.v1.SetOperatorTagsConfigResponse
+	19, // 39: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:output_type -> api.backoffice.service.v1.SetOperatorTagsResponse
+	21, // 40: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:output_type -> api.backoffice.service.v1.GetOperatorTagsConfigResponse
+	23, // 41: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:output_type -> api.backoffice.service.v1.GetOperatorTagsResponse
+	25, // 42: api.backoffice.service.v1.BackofficeUser.GetUserTags:output_type -> api.backoffice.service.v1.GetUserTagsResponse
+	27, // 43: api.backoffice.service.v1.BackofficeUser.SetUserTags:output_type -> api.backoffice.service.v1.SetUserTagsResponse
+	30, // [30:44] is the sub-list for method output_type
+	16, // [16:30] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_user_proto_init() }
@@ -2881,6 +2851,7 @@ func file_backoffice_service_v1_backoffice_user_proto_init() {
 		return
 	}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[0].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_user_proto_msgTypes[2].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[4].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}

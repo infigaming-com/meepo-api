@@ -104,6 +104,9 @@ service Game {
 
 	rpc GetBetById(GetBetByIdRequest) returns (GetBetByIdResponse) {
 	}
+
+	rpc GetBackofficeUserOverviewFromGame(GetBackofficeUserOverviewFromGameRequest) returns (GetBackofficeUserOverviewFromGameResponse) {
+	}
 }
 
 message CreateOperatorRequest {
@@ -606,4 +609,22 @@ message GetBetByIdResponse {
 		repeated Action actions = 33;
 	}
 	Bet bet = 1;
+}
+
+message GetBackofficeUserOverviewFromGameRequest {
+	string user_id = 1;
+	optional google.protobuf.Timestamp start_time = 2;
+	optional google.protobuf.Timestamp end_time = 3;
+}
+
+message GetBackofficeUserOverviewFromGameResponse {
+	message GameData {
+		string game_type = 1; // game category
+		string ggr = 2;
+		string turnover = 3;
+		string rtp = 4;
+	}
+	string average_bet_amount = 1;
+	int32 rtp_percentage = 2;
+	repeated GameData game_data = 3;
 }
