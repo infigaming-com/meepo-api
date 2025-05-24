@@ -35,7 +35,8 @@ type UserHTTPServer interface {
 	// GetUser Get user information by userId.
 	// Returns basic user information for the specified user.
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
-	// GetUserTags GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	// GetUserTags GetUserTags retrieves all active tags associated for the current user
+	// and also exists in the related operator's tag list.
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
 	// Login Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.

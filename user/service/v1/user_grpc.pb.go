@@ -34,7 +34,8 @@ const (
 	User_GetOperatorTagsConfig_FullMethodName       = "/api.user.service.v1.User/GetOperatorTagsConfig"
 	User_GetOperatorTags_FullMethodName             = "/api.user.service.v1.User/GetOperatorTags"
 	User_GetUserTags_FullMethodName                 = "/api.user.service.v1.User/GetUserTags"
-	User_SetUserTags_FullMethodName                 = "/api.user.service.v1.User/SetUserTags"
+	User_GetUserTagsById_FullMethodName             = "/api.user.service.v1.User/GetUserTagsById"
+	User_SetUserTagsById_FullMethodName             = "/api.user.service.v1.User/SetUserTagsById"
 	User_CheckPermission_FullMethodName             = "/api.user.service.v1.User/CheckPermission"
 	User_AddOperator_FullMethodName                 = "/api.user.service.v1.User/AddOperator"
 	User_SendEmailVerificationCode_FullMethodName   = "/api.user.service.v1.User/SendEmailVerificationCode"
@@ -88,9 +89,16 @@ type UserClient interface {
 	GetOperatorTagsConfig(ctx context.Context, in *GetOperatorTagsConfigRequest, opts ...grpc.CallOption) (*GetOperatorTagsConfigResponse, error)
 	// GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
 	GetOperatorTags(ctx context.Context, in *GetOperatorTagsRequest, opts ...grpc.CallOption) (*GetOperatorTagsResponse, error)
-	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	// GetUserTags retrieves all active tags associated for the current user
+	// and also exists in the related operator's tag list.
 	GetUserTags(ctx context.Context, in *GetUserTagsRequest, opts ...grpc.CallOption) (*GetUserTagsResponse, error)
-	SetUserTags(ctx context.Context, in *SetUserTagsRequest, opts ...grpc.CallOption) (*SetUserTagsResponse, error)
+	// GetUserTagsById is an internal API to retrieve the tags of given user.
+	// It's used by GetUserTags() in user-service for the current user and
+	// also by GetUserTags() in backoffice-service for the given user.
+	GetUserTagsById(ctx context.Context, in *GetUserTagsByIdRequest, opts ...grpc.CallOption) (*GetUserTagsByIdResponse, error)
+	// SetUserTagsById is an internal API to set the tags of given user.
+	// It's used by SetUserTags() in backoffice-service for the given user.
+	SetUserTagsById(ctx context.Context, in *SetUserTagsByIdRequest, opts ...grpc.CallOption) (*SetUserTagsByIdResponse, error)
 	CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error)
 	AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...grpc.CallOption) (*AddOperatorResponse, error)
 	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
@@ -261,10 +269,20 @@ func (c *userClient) GetUserTags(ctx context.Context, in *GetUserTagsRequest, op
 	return out, nil
 }
 
-func (c *userClient) SetUserTags(ctx context.Context, in *SetUserTagsRequest, opts ...grpc.CallOption) (*SetUserTagsResponse, error) {
+func (c *userClient) GetUserTagsById(ctx context.Context, in *GetUserTagsByIdRequest, opts ...grpc.CallOption) (*GetUserTagsByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetUserTagsResponse)
-	err := c.cc.Invoke(ctx, User_SetUserTags_FullMethodName, in, out, cOpts...)
+	out := new(GetUserTagsByIdResponse)
+	err := c.cc.Invoke(ctx, User_GetUserTagsById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SetUserTagsById(ctx context.Context, in *SetUserTagsByIdRequest, opts ...grpc.CallOption) (*SetUserTagsByIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUserTagsByIdResponse)
+	err := c.cc.Invoke(ctx, User_SetUserTagsById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -412,9 +430,16 @@ type UserServer interface {
 	GetOperatorTagsConfig(context.Context, *GetOperatorTagsConfigRequest) (*GetOperatorTagsConfigResponse, error)
 	// GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
 	GetOperatorTags(context.Context, *GetOperatorTagsRequest) (*GetOperatorTagsResponse, error)
-	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	// GetUserTags retrieves all active tags associated for the current user
+	// and also exists in the related operator's tag list.
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
-	SetUserTags(context.Context, *SetUserTagsRequest) (*SetUserTagsResponse, error)
+	// GetUserTagsById is an internal API to retrieve the tags of given user.
+	// It's used by GetUserTags() in user-service for the current user and
+	// also by GetUserTags() in backoffice-service for the given user.
+	GetUserTagsById(context.Context, *GetUserTagsByIdRequest) (*GetUserTagsByIdResponse, error)
+	// SetUserTagsById is an internal API to set the tags of given user.
+	// It's used by SetUserTags() in backoffice-service for the given user.
+	SetUserTagsById(context.Context, *SetUserTagsByIdRequest) (*SetUserTagsByIdResponse, error)
 	CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error)
 	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
@@ -480,8 +505,11 @@ func (UnimplementedUserServer) GetOperatorTags(context.Context, *GetOperatorTags
 func (UnimplementedUserServer) GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserTags not implemented")
 }
-func (UnimplementedUserServer) SetUserTags(context.Context, *SetUserTagsRequest) (*SetUserTagsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetUserTags not implemented")
+func (UnimplementedUserServer) GetUserTagsById(context.Context, *GetUserTagsByIdRequest) (*GetUserTagsByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserTagsById not implemented")
+}
+func (UnimplementedUserServer) SetUserTagsById(context.Context, *SetUserTagsByIdRequest) (*SetUserTagsByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetUserTagsById not implemented")
 }
 func (UnimplementedUserServer) CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckPermission not implemented")
@@ -804,20 +832,38 @@ func _User_GetUserTags_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_SetUserTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetUserTagsRequest)
+func _User_GetUserTagsById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserTagsByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).SetUserTags(ctx, in)
+		return srv.(UserServer).GetUserTagsById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_SetUserTags_FullMethodName,
+		FullMethod: User_GetUserTagsById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).SetUserTags(ctx, req.(*SetUserTagsRequest))
+		return srv.(UserServer).GetUserTagsById(ctx, req.(*GetUserTagsByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SetUserTagsById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserTagsByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetUserTagsById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SetUserTagsById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetUserTagsById(ctx, req.(*SetUserTagsByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1070,8 +1116,12 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_GetUserTags_Handler,
 		},
 		{
-			MethodName: "SetUserTags",
-			Handler:    _User_SetUserTags_Handler,
+			MethodName: "GetUserTagsById",
+			Handler:    _User_GetUserTagsById_Handler,
+		},
+		{
+			MethodName: "SetUserTagsById",
+			Handler:    _User_SetUserTagsById_Handler,
 		},
 		{
 			MethodName: "CheckPermission",

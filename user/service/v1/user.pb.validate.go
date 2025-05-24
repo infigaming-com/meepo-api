@@ -2871,8 +2871,6 @@ func (m *GetUserTagsRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for UserId
-
 	if len(errors) > 0 {
 		return GetUserTagsRequestMultiError(errors)
 	}
@@ -3055,22 +3053,22 @@ var _ interface {
 	ErrorName() string
 } = GetUserTagsResponseValidationError{}
 
-// Validate checks the field values on SetUserTagsRequest with the rules
+// Validate checks the field values on GetUserTagsByIdRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SetUserTagsRequest) Validate() error {
+func (m *GetUserTagsByIdRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SetUserTagsRequest with the rules
+// ValidateAll checks the field values on GetUserTagsByIdRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// SetUserTagsRequestMultiError, or nil if none found.
-func (m *SetUserTagsRequest) ValidateAll() error {
+// GetUserTagsByIdRequestMultiError, or nil if none found.
+func (m *GetUserTagsByIdRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SetUserTagsRequest) validate(all bool) error {
+func (m *GetUserTagsByIdRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3080,19 +3078,19 @@ func (m *SetUserTagsRequest) validate(all bool) error {
 	// no validation rules for UserId
 
 	if len(errors) > 0 {
-		return SetUserTagsRequestMultiError(errors)
+		return GetUserTagsByIdRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// SetUserTagsRequestMultiError is an error wrapping multiple validation errors
-// returned by SetUserTagsRequest.ValidateAll() if the designated constraints
-// aren't met.
-type SetUserTagsRequestMultiError []error
+// GetUserTagsByIdRequestMultiError is an error wrapping multiple validation
+// errors returned by GetUserTagsByIdRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserTagsByIdRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SetUserTagsRequestMultiError) Error() string {
+func (m GetUserTagsByIdRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3101,11 +3099,11 @@ func (m SetUserTagsRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SetUserTagsRequestMultiError) AllErrors() []error { return m }
+func (m GetUserTagsByIdRequestMultiError) AllErrors() []error { return m }
 
-// SetUserTagsRequestValidationError is the validation error returned by
-// SetUserTagsRequest.Validate if the designated constraints aren't met.
-type SetUserTagsRequestValidationError struct {
+// GetUserTagsByIdRequestValidationError is the validation error returned by
+// GetUserTagsByIdRequest.Validate if the designated constraints aren't met.
+type GetUserTagsByIdRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3113,24 +3111,24 @@ type SetUserTagsRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e SetUserTagsRequestValidationError) Field() string { return e.field }
+func (e GetUserTagsByIdRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SetUserTagsRequestValidationError) Reason() string { return e.reason }
+func (e GetUserTagsByIdRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SetUserTagsRequestValidationError) Cause() error { return e.cause }
+func (e GetUserTagsByIdRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SetUserTagsRequestValidationError) Key() bool { return e.key }
+func (e GetUserTagsByIdRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SetUserTagsRequestValidationError) ErrorName() string {
-	return "SetUserTagsRequestValidationError"
+func (e GetUserTagsByIdRequestValidationError) ErrorName() string {
+	return "GetUserTagsByIdRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SetUserTagsRequestValidationError) Error() string {
+func (e GetUserTagsByIdRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3142,14 +3140,14 @@ func (e SetUserTagsRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSetUserTagsRequest.%s: %s%s",
+		"invalid %sGetUserTagsByIdRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SetUserTagsRequestValidationError{}
+var _ error = GetUserTagsByIdRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -3157,24 +3155,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SetUserTagsRequestValidationError{}
+} = GetUserTagsByIdRequestValidationError{}
 
-// Validate checks the field values on SetUserTagsResponse with the rules
+// Validate checks the field values on GetUserTagsByIdResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SetUserTagsResponse) Validate() error {
+func (m *GetUserTagsByIdResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SetUserTagsResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on GetUserTagsByIdResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// SetUserTagsResponseMultiError, or nil if none found.
-func (m *SetUserTagsResponse) ValidateAll() error {
+// GetUserTagsByIdResponseMultiError, or nil if none found.
+func (m *GetUserTagsByIdResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SetUserTagsResponse) validate(all bool) error {
+func (m *GetUserTagsByIdResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3182,19 +3180,19 @@ func (m *SetUserTagsResponse) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return SetUserTagsResponseMultiError(errors)
+		return GetUserTagsByIdResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// SetUserTagsResponseMultiError is an error wrapping multiple validation
-// errors returned by SetUserTagsResponse.ValidateAll() if the designated
+// GetUserTagsByIdResponseMultiError is an error wrapping multiple validation
+// errors returned by GetUserTagsByIdResponse.ValidateAll() if the designated
 // constraints aren't met.
-type SetUserTagsResponseMultiError []error
+type GetUserTagsByIdResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SetUserTagsResponseMultiError) Error() string {
+func (m GetUserTagsByIdResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3203,11 +3201,11 @@ func (m SetUserTagsResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SetUserTagsResponseMultiError) AllErrors() []error { return m }
+func (m GetUserTagsByIdResponseMultiError) AllErrors() []error { return m }
 
-// SetUserTagsResponseValidationError is the validation error returned by
-// SetUserTagsResponse.Validate if the designated constraints aren't met.
-type SetUserTagsResponseValidationError struct {
+// GetUserTagsByIdResponseValidationError is the validation error returned by
+// GetUserTagsByIdResponse.Validate if the designated constraints aren't met.
+type GetUserTagsByIdResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3215,24 +3213,24 @@ type SetUserTagsResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e SetUserTagsResponseValidationError) Field() string { return e.field }
+func (e GetUserTagsByIdResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SetUserTagsResponseValidationError) Reason() string { return e.reason }
+func (e GetUserTagsByIdResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SetUserTagsResponseValidationError) Cause() error { return e.cause }
+func (e GetUserTagsByIdResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SetUserTagsResponseValidationError) Key() bool { return e.key }
+func (e GetUserTagsByIdResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SetUserTagsResponseValidationError) ErrorName() string {
-	return "SetUserTagsResponseValidationError"
+func (e GetUserTagsByIdResponseValidationError) ErrorName() string {
+	return "GetUserTagsByIdResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SetUserTagsResponseValidationError) Error() string {
+func (e GetUserTagsByIdResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3244,14 +3242,14 @@ func (e SetUserTagsResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSetUserTagsResponse.%s: %s%s",
+		"invalid %sGetUserTagsByIdResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SetUserTagsResponseValidationError{}
+var _ error = GetUserTagsByIdResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -3259,24 +3257,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SetUserTagsResponseValidationError{}
+} = GetUserTagsByIdResponseValidationError{}
 
-// Validate checks the field values on AddUserTagRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *AddUserTagRequest) Validate() error {
+// Validate checks the field values on SetUserTagsByIdRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetUserTagsByIdRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AddUserTagRequest with the rules
+// ValidateAll checks the field values on SetUserTagsByIdRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AddUserTagRequestMultiError, or nil if none found.
-func (m *AddUserTagRequest) ValidateAll() error {
+// SetUserTagsByIdRequestMultiError, or nil if none found.
+func (m *SetUserTagsByIdRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AddUserTagRequest) validate(all bool) error {
+func (m *SetUserTagsByIdRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3285,230 +3283,20 @@ func (m *AddUserTagRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
-	// no validation rules for Tag
-
 	if len(errors) > 0 {
-		return AddUserTagRequestMultiError(errors)
+		return SetUserTagsByIdRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// AddUserTagRequestMultiError is an error wrapping multiple validation errors
-// returned by AddUserTagRequest.ValidateAll() if the designated constraints
-// aren't met.
-type AddUserTagRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m AddUserTagRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m AddUserTagRequestMultiError) AllErrors() []error { return m }
-
-// AddUserTagRequestValidationError is the validation error returned by
-// AddUserTagRequest.Validate if the designated constraints aren't met.
-type AddUserTagRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e AddUserTagRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e AddUserTagRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e AddUserTagRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e AddUserTagRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e AddUserTagRequestValidationError) ErrorName() string {
-	return "AddUserTagRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e AddUserTagRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sAddUserTagRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = AddUserTagRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = AddUserTagRequestValidationError{}
-
-// Validate checks the field values on AddUserTagResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AddUserTagResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on AddUserTagResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// AddUserTagResponseMultiError, or nil if none found.
-func (m *AddUserTagResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *AddUserTagResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return AddUserTagResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// AddUserTagResponseMultiError is an error wrapping multiple validation errors
-// returned by AddUserTagResponse.ValidateAll() if the designated constraints
-// aren't met.
-type AddUserTagResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m AddUserTagResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m AddUserTagResponseMultiError) AllErrors() []error { return m }
-
-// AddUserTagResponseValidationError is the validation error returned by
-// AddUserTagResponse.Validate if the designated constraints aren't met.
-type AddUserTagResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e AddUserTagResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e AddUserTagResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e AddUserTagResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e AddUserTagResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e AddUserTagResponseValidationError) ErrorName() string {
-	return "AddUserTagResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e AddUserTagResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sAddUserTagResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = AddUserTagResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = AddUserTagResponseValidationError{}
-
-// Validate checks the field values on DeleteUserTagRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *DeleteUserTagRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on DeleteUserTagRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// DeleteUserTagRequestMultiError, or nil if none found.
-func (m *DeleteUserTagRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *DeleteUserTagRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for UserId
-
-	// no validation rules for Tag
-
-	if len(errors) > 0 {
-		return DeleteUserTagRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// DeleteUserTagRequestMultiError is an error wrapping multiple validation
-// errors returned by DeleteUserTagRequest.ValidateAll() if the designated
+// SetUserTagsByIdRequestMultiError is an error wrapping multiple validation
+// errors returned by SetUserTagsByIdRequest.ValidateAll() if the designated
 // constraints aren't met.
-type DeleteUserTagRequestMultiError []error
+type SetUserTagsByIdRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m DeleteUserTagRequestMultiError) Error() string {
+func (m SetUserTagsByIdRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3517,11 +3305,11 @@ func (m DeleteUserTagRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m DeleteUserTagRequestMultiError) AllErrors() []error { return m }
+func (m SetUserTagsByIdRequestMultiError) AllErrors() []error { return m }
 
-// DeleteUserTagRequestValidationError is the validation error returned by
-// DeleteUserTagRequest.Validate if the designated constraints aren't met.
-type DeleteUserTagRequestValidationError struct {
+// SetUserTagsByIdRequestValidationError is the validation error returned by
+// SetUserTagsByIdRequest.Validate if the designated constraints aren't met.
+type SetUserTagsByIdRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3529,24 +3317,24 @@ type DeleteUserTagRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e DeleteUserTagRequestValidationError) Field() string { return e.field }
+func (e SetUserTagsByIdRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DeleteUserTagRequestValidationError) Reason() string { return e.reason }
+func (e SetUserTagsByIdRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DeleteUserTagRequestValidationError) Cause() error { return e.cause }
+func (e SetUserTagsByIdRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DeleteUserTagRequestValidationError) Key() bool { return e.key }
+func (e SetUserTagsByIdRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DeleteUserTagRequestValidationError) ErrorName() string {
-	return "DeleteUserTagRequestValidationError"
+func (e SetUserTagsByIdRequestValidationError) ErrorName() string {
+	return "SetUserTagsByIdRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e DeleteUserTagRequestValidationError) Error() string {
+func (e SetUserTagsByIdRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3558,14 +3346,14 @@ func (e DeleteUserTagRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDeleteUserTagRequest.%s: %s%s",
+		"invalid %sSetUserTagsByIdRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DeleteUserTagRequestValidationError{}
+var _ error = SetUserTagsByIdRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -3573,24 +3361,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DeleteUserTagRequestValidationError{}
+} = SetUserTagsByIdRequestValidationError{}
 
-// Validate checks the field values on DeleteUserTagResponse with the rules
+// Validate checks the field values on SetUserTagsByIdResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *DeleteUserTagResponse) Validate() error {
+func (m *SetUserTagsByIdResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on DeleteUserTagResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on SetUserTagsByIdResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// DeleteUserTagResponseMultiError, or nil if none found.
-func (m *DeleteUserTagResponse) ValidateAll() error {
+// SetUserTagsByIdResponseMultiError, or nil if none found.
+func (m *SetUserTagsByIdResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *DeleteUserTagResponse) validate(all bool) error {
+func (m *SetUserTagsByIdResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3598,19 +3386,19 @@ func (m *DeleteUserTagResponse) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return DeleteUserTagResponseMultiError(errors)
+		return SetUserTagsByIdResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// DeleteUserTagResponseMultiError is an error wrapping multiple validation
-// errors returned by DeleteUserTagResponse.ValidateAll() if the designated
+// SetUserTagsByIdResponseMultiError is an error wrapping multiple validation
+// errors returned by SetUserTagsByIdResponse.ValidateAll() if the designated
 // constraints aren't met.
-type DeleteUserTagResponseMultiError []error
+type SetUserTagsByIdResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m DeleteUserTagResponseMultiError) Error() string {
+func (m SetUserTagsByIdResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3619,11 +3407,11 @@ func (m DeleteUserTagResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m DeleteUserTagResponseMultiError) AllErrors() []error { return m }
+func (m SetUserTagsByIdResponseMultiError) AllErrors() []error { return m }
 
-// DeleteUserTagResponseValidationError is the validation error returned by
-// DeleteUserTagResponse.Validate if the designated constraints aren't met.
-type DeleteUserTagResponseValidationError struct {
+// SetUserTagsByIdResponseValidationError is the validation error returned by
+// SetUserTagsByIdResponse.Validate if the designated constraints aren't met.
+type SetUserTagsByIdResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3631,24 +3419,24 @@ type DeleteUserTagResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e DeleteUserTagResponseValidationError) Field() string { return e.field }
+func (e SetUserTagsByIdResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DeleteUserTagResponseValidationError) Reason() string { return e.reason }
+func (e SetUserTagsByIdResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DeleteUserTagResponseValidationError) Cause() error { return e.cause }
+func (e SetUserTagsByIdResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DeleteUserTagResponseValidationError) Key() bool { return e.key }
+func (e SetUserTagsByIdResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DeleteUserTagResponseValidationError) ErrorName() string {
-	return "DeleteUserTagResponseValidationError"
+func (e SetUserTagsByIdResponseValidationError) ErrorName() string {
+	return "SetUserTagsByIdResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e DeleteUserTagResponseValidationError) Error() string {
+func (e SetUserTagsByIdResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3660,14 +3448,14 @@ func (e DeleteUserTagResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDeleteUserTagResponse.%s: %s%s",
+		"invalid %sSetUserTagsByIdResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DeleteUserTagResponseValidationError{}
+var _ error = SetUserTagsByIdResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -3675,7 +3463,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DeleteUserTagResponseValidationError{}
+} = SetUserTagsByIdResponseValidationError{}
 
 // Validate checks the field values on CheckPermissionRequest with the rules
 // defined in the proto definition for this message. If any rules are
