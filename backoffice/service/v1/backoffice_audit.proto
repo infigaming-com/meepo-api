@@ -33,9 +33,10 @@ message AuditLog {
 	string user_name = 3;
 	google.protobuf.Timestamp created_at = 4;
 	string request_info = 5; // JSON string
-	string client_ip = 6;
-	string api_path = 7;
-	string action = 8;
+	string response_info = 6; // JSON string
+	string client_ip = 7;
+	string api_path = 8;
+	string action = 9;
 }
 
 message ListAuditLogsResponse {

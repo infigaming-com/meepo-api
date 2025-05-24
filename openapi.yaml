@@ -2325,6 +2325,8 @@ components:
                     format: date-time
                 requestInfo:
                     type: string
+                responseInfo:
+                    type: string
                 clientIp:
                     type: string
                 apiPath:
