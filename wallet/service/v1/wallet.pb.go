@@ -2437,7 +2437,7 @@ type GetBackofficeUserOverviewFromWalletResponse struct {
 	Bonus                  string                 `protobuf:"bytes,11,opt,name=bonus,proto3" json:"bonus,omitempty"`
 	ValidTurnover          string                 `protobuf:"bytes,12,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"` // Not available for now, only return 0
 	Ggr                    string                 `protobuf:"bytes,13,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	GgrPercentage          string                 `protobuf:"bytes,14,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
+	GgrPercentage          int32                  `protobuf:"varint,14,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
 	ManuallyAddedBalance   string                 `protobuf:"bytes,15,opt,name=manually_added_balance,json=manuallyAddedBalance,proto3" json:"manually_added_balance,omitempty"` // Not available for now, only return 0
 	BonusClaimed           string                 `protobuf:"bytes,16,opt,name=bonus_claimed,json=bonusClaimed,proto3" json:"bonus_claimed,omitempty"`                           // Not available for now, only return 0
 	Ngr                    string                 `protobuf:"bytes,17,opt,name=ngr,proto3" json:"ngr,omitempty"`
@@ -2569,11 +2569,11 @@ func (x *GetBackofficeUserOverviewFromWalletResponse) GetGgr() string {
 	return ""
 }
 
-func (x *GetBackofficeUserOverviewFromWalletResponse) GetGgrPercentage() string {
+func (x *GetBackofficeUserOverviewFromWalletResponse) GetGgrPercentage() int32 {
 	if x != nil {
 		return x.GgrPercentage
 	}
-	return ""
+	return 0
 }
 
 func (x *GetBackofficeUserOverviewFromWalletResponse) GetManuallyAddedBalance() string {
@@ -3748,7 +3748,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x05bonus\x18\v \x01(\tR\x05bonus\x12%\n" +
 	"\x0evalid_turnover\x18\f \x01(\tR\rvalidTurnover\x12\x10\n" +
 	"\x03ggr\x18\r \x01(\tR\x03ggr\x12%\n" +
-	"\x0eggr_percentage\x18\x0e \x01(\tR\rggrPercentage\x124\n" +
+	"\x0eggr_percentage\x18\x0e \x01(\x05R\rggrPercentage\x124\n" +
 	"\x16manually_added_balance\x18\x0f \x01(\tR\x14manuallyAddedBalance\x12#\n" +
 	"\rbonus_claimed\x18\x10 \x01(\tR\fbonusClaimed\x12\x10\n" +
 	"\x03ngr\x18\x11 \x01(\tR\x03ngr\x121\n" +
