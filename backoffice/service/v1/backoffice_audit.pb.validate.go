@@ -278,7 +278,7 @@ func (m *AuditLog) validate(all bool) error {
 
 	// no validation rules for RequestInfo
 
-	// no validation rules for ResponseInfo
+	// no validation rules for RequestBody
 
 	// no validation rules for ClientIp
 
