@@ -626,60 +626,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsResponse'
-    /v1/backoffice/operator/user-tags/add:
-        post:
-            tags:
-                - BackofficeUser
-            operationId: BackofficeUser_AddOperatorUserTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorUserTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorUserTagResponse'
-    /v1/backoffice/operator/user-tags/delete:
-        post:
-            tags:
-                - BackofficeUser
-            operationId: BackofficeUser_DeleteOperatorUserTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorUserTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorUserTagResponse'
-    /v1/backoffice/operator/user-tags/get:
-        post:
-            tags:
-                - BackofficeUser
-            operationId: BackofficeUser_GetOperatorUserTags
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorUserTagsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorUserTagsResponse'
     /v1/backoffice/payment/transaction/page:
         post:
             tags:
@@ -1248,42 +1194,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.SendEmailVerificationCodeResponse'
-    /v1/backoffice/user/tags/add:
-        post:
-            tags:
-                - BackofficeUser
-            operationId: BackofficeUser_AddUserTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddUserTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.AddUserTagResponse'
-    /v1/backoffice/user/tags/delete:
-        post:
-            tags:
-                - BackofficeUser
-            operationId: BackofficeUser_DeleteUserTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteUserTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteUserTagResponse'
     /v1/backoffice/user/tags/get:
         post:
             tags:
@@ -2255,14 +2165,6 @@ components:
             properties:
                 commentId:
                     type: string
-        api.backoffice.service.v1.AddOperatorUserTagRequest:
-            type: object
-            properties:
-                tag:
-                    type: string
-        api.backoffice.service.v1.AddOperatorUserTagResponse:
-            type: object
-            properties: {}
         api.backoffice.service.v1.AddSystemCurrencyRequest:
             type: object
             properties:
@@ -2301,16 +2203,6 @@ components:
             properties:
                 commentId:
                     type: string
-        api.backoffice.service.v1.AddUserTagRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                tag:
-                    type: string
-        api.backoffice.service.v1.AddUserTagResponse:
-            type: object
-            properties: {}
         api.backoffice.service.v1.AuditLog:
             type: object
             properties:
@@ -2421,24 +2313,6 @@ components:
                 verificationCode:
                     type: string
         api.backoffice.service.v1.CreateUserResponse:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.DeleteOperatorUserTagRequest:
-            type: object
-            properties:
-                tag:
-                    type: string
-        api.backoffice.service.v1.DeleteOperatorUserTagResponse:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.DeleteUserTagRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                tag:
-                    type: string
-        api.backoffice.service.v1.DeleteUserTagResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.GameData_Data:
@@ -2821,16 +2695,6 @@ components:
                         type: string
                     description: List of tags associated with the operator.
             description: GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
-        api.backoffice.service.v1.GetOperatorUserTagsRequest:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.GetOperatorUserTagsResponse:
-            type: object
-            properties:
-                tags:
-                    type: array
-                    items:
-                        type: string
         api.backoffice.service.v1.GetOverviewDashboardRequest:
             type: object
             properties: {}

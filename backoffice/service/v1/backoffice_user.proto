@@ -28,61 +28,30 @@ service BackofficeUser {
             body: "*"
         };
     }
-    rpc AddOperatorUserTag(AddOperatorUserTagRequest) returns (AddOperatorUserTagResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/operator/user-tags/add"
-            body: "*"
-        };
-    }
-    rpc DeleteOperatorUserTag(DeleteOperatorUserTagRequest) returns (DeleteOperatorUserTagResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/operator/user-tags/delete"
-            body: "*"
-        };
-    }
-    rpc GetOperatorUserTags(GetOperatorUserTagsRequest) returns (GetOperatorUserTagsResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/operator/user-tags/get"
-            body: "*"
-        };
-    }
-    rpc AddUserTag(AddUserTagRequest) returns (AddUserTagResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/tags/add"
-            body: "*"
-        };
-    }
-    rpc DeleteUserTag(DeleteUserTagRequest) returns (DeleteUserTagResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/tags/delete"
-            body: "*"
-        };
-    }
     rpc AddUserComment(AddUserCommentRequest) returns (AddUserCommentResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/comments/add"
             body: "*"
         };
     }
-		rpc ListUserComments(ListUserCommentsRequest) returns (ListUserCommentsResponse) {
+	rpc ListUserComments(ListUserCommentsRequest) returns (ListUserCommentsResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/comments/list"
             body: "*"
         };
     }
-		rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/create"
             body: "*"
         };
     }
-
 	rpc SendEmailVerificationCode(SendEmailVerificationCodeRequest) returns (SendEmailVerificationCodeResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/send-email-verification-code"
-						body: "*"
-				};
-		}
+			body: "*"
+		};
+	}
 
 	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
         option (google.api.http) = {
@@ -301,38 +270,6 @@ message GetUserProfileResponse {
 	int32 login_page = 13;
 	int32 login_page_size = 14;
 }
-
-message AddOperatorUserTagRequest {
-	string tag = 1;
-}
-
-message AddOperatorUserTagResponse {}
-
-message DeleteOperatorUserTagRequest {
-	string tag = 1;
-}
-
-message DeleteOperatorUserTagResponse {}
-
-message GetOperatorUserTagsRequest {}
-
-message GetOperatorUserTagsResponse {
-	repeated string tags = 1;
-}
-
-message AddUserTagRequest {
-	int64 user_id = 1;
-	string tag = 2;
-}
-
-message AddUserTagResponse {}
-
-message DeleteUserTagRequest {
-	int64 user_id = 1;
-	string tag = 2;
-}
-
-message DeleteUserTagResponse {}
 
 message AddUserCommentRequest {
 	int64 user_id = 1;
