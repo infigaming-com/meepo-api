@@ -212,12 +212,6 @@ message GetUserOverviewResponse {
 	int32 deposit_to_withdraw_ratio = 21;
 	int32 rtp_percentage = 22;
 	repeated GameData game_data = 23;
-	bool vpn_used = 24; // Not available for now, only return false
-	bool has_1x_deposits_before_wd = 25; // Not available for now, only return false
-	bool more_than_2_deposits = 26; // Not available for now, only return false
-	bool account_older_than_3_months = 27;
-	google.protobuf.Timestamp last_deposit_at = 28;	// Is this time since last deposit
-	bool first_withdraw_on_today = 29; // Not available for now, only return false
 }
 
 message GetUserProfileRequest {

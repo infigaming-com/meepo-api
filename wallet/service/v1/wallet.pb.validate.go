@@ -4493,62 +4493,70 @@ func (m *GetBackofficeUserOverviewFromWalletRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
-	if all {
-		switch v := interface{}(m.GetStartTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetBackofficeUserOverviewFromWalletRequestValidationError{
-					field:  "StartTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetBackofficeUserOverviewFromWalletRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetBackofficeUserOverviewFromWalletRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
 			}
-		case interface{ Validate() error }:
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetBackofficeUserOverviewFromWalletRequestValidationError{
+				return GetBackofficeUserOverviewFromWalletRequestValidationError{
 					field:  "StartTime",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetBackofficeUserOverviewFromWalletRequestValidationError{
-				field:  "StartTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	if all {
-		switch v := interface{}(m.GetEndTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetBackofficeUserOverviewFromWalletRequestValidationError{
-					field:  "EndTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetBackofficeUserOverviewFromWalletRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetBackofficeUserOverviewFromWalletRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
 			}
-		case interface{ Validate() error }:
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetBackofficeUserOverviewFromWalletRequestValidationError{
+				return GetBackofficeUserOverviewFromWalletRequestValidationError{
 					field:  "EndTime",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetBackofficeUserOverviewFromWalletRequestValidationError{
-				field:  "EndTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
 	if len(errors) > 0 {
@@ -4696,41 +4704,6 @@ func (m *GetBackofficeUserOverviewFromWalletResponse) validate(all bool) error {
 	// no validation rules for TurnoverMultiplier
 
 	// no validation rules for DepositToWithdrawRatio
-
-	// no validation rules for Has_1XDepositsBeforeWd
-
-	// no validation rules for MoreThan_2Deposits
-
-	if all {
-		switch v := interface{}(m.GetLastDepositAt()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetBackofficeUserOverviewFromWalletResponseValidationError{
-					field:  "LastDepositAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetBackofficeUserOverviewFromWalletResponseValidationError{
-					field:  "LastDepositAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetLastDepositAt()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetBackofficeUserOverviewFromWalletResponseValidationError{
-				field:  "LastDepositAt",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for FirstWithdrawOnToday
 
 	if len(errors) > 0 {
 		return GetBackofficeUserOverviewFromWalletResponseMultiError(errors)

@@ -615,45 +615,6 @@ func (m *GetUserOverviewResponse) validate(all bool) error {
 
 	}
 
-	// no validation rules for VpnUsed
-
-	// no validation rules for Has_1XDepositsBeforeWd
-
-	// no validation rules for MoreThan_2Deposits
-
-	// no validation rules for AccountOlderThan_3Months
-
-	if all {
-		switch v := interface{}(m.GetLastDepositAt()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetUserOverviewResponseValidationError{
-					field:  "LastDepositAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetUserOverviewResponseValidationError{
-					field:  "LastDepositAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetLastDepositAt()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetUserOverviewResponseValidationError{
-				field:  "LastDepositAt",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for FirstWithdrawOnToday
-
 	if len(errors) > 0 {
 		return GetUserOverviewResponseMultiError(errors)
 	}

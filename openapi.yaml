@@ -3297,19 +3297,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetUserOverviewResponse_GameData'
-                vpnUsed:
-                    type: boolean
-                has1xDepositsBeforeWd:
-                    type: boolean
-                moreThan2Deposits:
-                    type: boolean
-                accountOlderThan3Months:
-                    type: boolean
-                lastDepositAt:
-                    type: string
-                    format: date-time
-                firstWithdrawOnToday:
-                    type: boolean
         api.backoffice.service.v1.GetUserOverviewResponse_GameData:
             type: object
             properties:

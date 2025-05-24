@@ -2365,8 +2365,8 @@ func (x *GetUserTransactionSummaryResponse) GetTodayWithdrawCount() int32 {
 type GetBackofficeUserOverviewFromWalletRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime       *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2444,10 +2444,6 @@ type GetBackofficeUserOverviewFromWalletResponse struct {
 	GgrToNgrPercentage     int32                  `protobuf:"varint,18,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`
 	TurnoverMultiplier     int32                  `protobuf:"varint,19,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"` // Not available for now, only return 0
 	DepositToWithdrawRatio int32                  `protobuf:"varint,20,opt,name=deposit_to_withdraw_ratio,json=depositToWithdrawRatio,proto3" json:"deposit_to_withdraw_ratio,omitempty"`
-	Has_1XDepositsBeforeWd bool                   `protobuf:"varint,21,opt,name=has_1x_deposits_before_wd,json=has1xDepositsBeforeWd,proto3" json:"has_1x_deposits_before_wd,omitempty"` // Not available for now, only return false
-	MoreThan_2Deposits     bool                   `protobuf:"varint,22,opt,name=more_than_2_deposits,json=moreThan2Deposits,proto3" json:"more_than_2_deposits,omitempty"`               // Not available for now, only return false
-	LastDepositAt          *timestamppb.Timestamp `protobuf:"bytes,23,opt,name=last_deposit_at,json=lastDepositAt,proto3" json:"last_deposit_at,omitempty"`
-	FirstWithdrawOnToday   bool                   `protobuf:"varint,24,opt,name=first_withdraw_on_today,json=firstWithdrawOnToday,proto3" json:"first_withdraw_on_today,omitempty"` // Not available for now, only return false
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -2620,34 +2616,6 @@ func (x *GetBackofficeUserOverviewFromWalletResponse) GetDepositToWithdrawRatio(
 		return x.DepositToWithdrawRatio
 	}
 	return 0
-}
-
-func (x *GetBackofficeUserOverviewFromWalletResponse) GetHas_1XDepositsBeforeWd() bool {
-	if x != nil {
-		return x.Has_1XDepositsBeforeWd
-	}
-	return false
-}
-
-func (x *GetBackofficeUserOverviewFromWalletResponse) GetMoreThan_2Deposits() bool {
-	if x != nil {
-		return x.MoreThan_2Deposits
-	}
-	return false
-}
-
-func (x *GetBackofficeUserOverviewFromWalletResponse) GetLastDepositAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.LastDepositAt
-	}
-	return nil
-}
-
-func (x *GetBackofficeUserOverviewFromWalletResponse) GetFirstWithdrawOnToday() bool {
-	if x != nil {
-		return x.FirstWithdrawOnToday
-	}
-	return false
 }
 
 type GetUserBalancesResponse_Balance struct {
@@ -3757,12 +3725,14 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0ftotal_valid_bet\x18\x05 \x01(\tR\rtotalValidBet\x12.\n" +
 	"\x13total_deposit_count\x18\x06 \x01(\x05R\x11totalDepositCount\x120\n" +
 	"\x14total_withdraw_count\x18\a \x01(\x05R\x12totalWithdrawCount\x120\n" +
-	"\x14today_withdraw_count\x18\b \x01(\x05R\x12todayWithdrawCount\"\xb7\x01\n" +
+	"\x14today_withdraw_count\x18\b \x01(\x05R\x12todayWithdrawCount\"\xdd\x01\n" +
 	"*GetBackofficeUserOverviewFromWalletRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x129\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12>\n" +
 	"\n" +
-	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\"\xfd\a\n" +
+	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01B\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_time\"\x97\x06\n" +
 	"+GetBackofficeUserOverviewFromWalletResponse\x124\n" +
 	"\x16deposit_minus_withdraw\x18\x01 \x01(\tR\x14depositMinusWithdraw\x12\x1a\n" +
 	"\bturnover\x18\x02 \x01(\tR\bturnover\x12#\n" +
@@ -3784,11 +3754,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x03ngr\x18\x11 \x01(\tR\x03ngr\x121\n" +
 	"\x15ggr_to_ngr_percentage\x18\x12 \x01(\x05R\x12ggrToNgrPercentage\x12/\n" +
 	"\x13turnover_multiplier\x18\x13 \x01(\x05R\x12turnoverMultiplier\x129\n" +
-	"\x19deposit_to_withdraw_ratio\x18\x14 \x01(\x05R\x16depositToWithdrawRatio\x128\n" +
-	"\x19has_1x_deposits_before_wd\x18\x15 \x01(\bR\x15has1xDepositsBeforeWd\x12/\n" +
-	"\x14more_than_2_deposits\x18\x16 \x01(\bR\x11moreThan2Deposits\x12B\n" +
-	"\x0flast_deposit_at\x18\x17 \x01(\v2\x1a.google.protobuf.TimestampR\rlastDepositAt\x125\n" +
-	"\x17first_withdraw_on_today\x18\x18 \x01(\bR\x14firstWithdrawOnToday2\xc0\x13\n" +
+	"\x19deposit_to_withdraw_ratio\x18\x14 \x01(\x05R\x16depositToWithdrawRatio2\xc0\x13\n" +
 	"\x06Wallet\x12Z\n" +
 	"\aAddUser\x12%.api.wallet.service.v1.AddUserRequest\x1a&.api.wallet.service.v1.AddUserResponse\"\x00\x12c\n" +
 	"\n" +
@@ -3894,56 +3860,55 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	49, // 10: api.wallet.service.v1.GetUserTransactionSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
 	49, // 11: api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest.start_time:type_name -> google.protobuf.Timestamp
 	49, // 12: api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest.end_time:type_name -> google.protobuf.Timestamp
-	49, // 13: api.wallet.service.v1.GetBackofficeUserOverviewFromWalletResponse.last_deposit_at:type_name -> google.protobuf.Timestamp
-	49, // 14: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
-	43, // 15: api.wallet.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.wallet.service.v1.GetWalletsResponse.Credit
-	49, // 16: api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
-	49, // 17: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 18: api.wallet.service.v1.Wallet.AddUser:input_type -> api.wallet.service.v1.AddUserRequest
-	2,  // 19: api.wallet.service.v1.Wallet.UpdateUser:input_type -> api.wallet.service.v1.UpdateUserRequest
-	4,  // 20: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:input_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest
-	6,  // 21: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
-	8,  // 22: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
-	10, // 23: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
-	12, // 24: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
-	14, // 25: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
-	16, // 26: api.wallet.service.v1.Wallet.GameDebit:input_type -> api.wallet.service.v1.GameDebitRequest
-	18, // 27: api.wallet.service.v1.Wallet.GameCredit:input_type -> api.wallet.service.v1.GameCreditRequest
-	20, // 28: api.wallet.service.v1.Wallet.Freeze:input_type -> api.wallet.service.v1.FreezeRequest
-	22, // 29: api.wallet.service.v1.Wallet.Settle:input_type -> api.wallet.service.v1.SettleRequest
-	24, // 30: api.wallet.service.v1.Wallet.Rollback:input_type -> api.wallet.service.v1.RollbackRequest
-	26, // 31: api.wallet.service.v1.Wallet.GetWallets:input_type -> api.wallet.service.v1.GetWalletsRequest
-	28, // 32: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:input_type -> api.wallet.service.v1.ListWalletBalanceTransactionsRequest
-	30, // 33: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:input_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsRequest
-	32, // 34: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:input_type -> api.wallet.service.v1.GetWalletCreditTransactionsRequest
-	34, // 35: api.wallet.service.v1.Wallet.GetExchangeRates:input_type -> api.wallet.service.v1.GetExchangeRatesRequest
-	36, // 36: api.wallet.service.v1.Wallet.GetUserTransactionSummary:input_type -> api.wallet.service.v1.GetUserTransactionSummaryRequest
-	38, // 37: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:input_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest
-	1,  // 38: api.wallet.service.v1.Wallet.AddUser:output_type -> api.wallet.service.v1.AddUserResponse
-	3,  // 39: api.wallet.service.v1.Wallet.UpdateUser:output_type -> api.wallet.service.v1.UpdateUserResponse
-	5,  // 40: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:output_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse
-	7,  // 41: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
-	9,  // 42: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
-	11, // 43: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
-	13, // 44: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
-	15, // 45: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
-	17, // 46: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
-	19, // 47: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
-	21, // 48: api.wallet.service.v1.Wallet.Freeze:output_type -> api.wallet.service.v1.FreezeResponse
-	23, // 49: api.wallet.service.v1.Wallet.Settle:output_type -> api.wallet.service.v1.SettleResponse
-	25, // 50: api.wallet.service.v1.Wallet.Rollback:output_type -> api.wallet.service.v1.RollbackResponse
-	27, // 51: api.wallet.service.v1.Wallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
-	29, // 52: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:output_type -> api.wallet.service.v1.ListWalletBalanceTransactionsResponse
-	31, // 53: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:output_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse
-	33, // 54: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:output_type -> api.wallet.service.v1.GetWalletCreditTransactionsResponse
-	35, // 55: api.wallet.service.v1.Wallet.GetExchangeRates:output_type -> api.wallet.service.v1.GetExchangeRatesResponse
-	37, // 56: api.wallet.service.v1.Wallet.GetUserTransactionSummary:output_type -> api.wallet.service.v1.GetUserTransactionSummaryResponse
-	39, // 57: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:output_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletResponse
-	38, // [38:58] is the sub-list for method output_type
-	18, // [18:38] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	49, // 13: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
+	43, // 14: api.wallet.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.wallet.service.v1.GetWalletsResponse.Credit
+	49, // 15: api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
+	49, // 16: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 17: api.wallet.service.v1.Wallet.AddUser:input_type -> api.wallet.service.v1.AddUserRequest
+	2,  // 18: api.wallet.service.v1.Wallet.UpdateUser:input_type -> api.wallet.service.v1.UpdateUserRequest
+	4,  // 19: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:input_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest
+	6,  // 20: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
+	8,  // 21: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
+	10, // 22: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
+	12, // 23: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
+	14, // 24: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
+	16, // 25: api.wallet.service.v1.Wallet.GameDebit:input_type -> api.wallet.service.v1.GameDebitRequest
+	18, // 26: api.wallet.service.v1.Wallet.GameCredit:input_type -> api.wallet.service.v1.GameCreditRequest
+	20, // 27: api.wallet.service.v1.Wallet.Freeze:input_type -> api.wallet.service.v1.FreezeRequest
+	22, // 28: api.wallet.service.v1.Wallet.Settle:input_type -> api.wallet.service.v1.SettleRequest
+	24, // 29: api.wallet.service.v1.Wallet.Rollback:input_type -> api.wallet.service.v1.RollbackRequest
+	26, // 30: api.wallet.service.v1.Wallet.GetWallets:input_type -> api.wallet.service.v1.GetWalletsRequest
+	28, // 31: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:input_type -> api.wallet.service.v1.ListWalletBalanceTransactionsRequest
+	30, // 32: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:input_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsRequest
+	32, // 33: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:input_type -> api.wallet.service.v1.GetWalletCreditTransactionsRequest
+	34, // 34: api.wallet.service.v1.Wallet.GetExchangeRates:input_type -> api.wallet.service.v1.GetExchangeRatesRequest
+	36, // 35: api.wallet.service.v1.Wallet.GetUserTransactionSummary:input_type -> api.wallet.service.v1.GetUserTransactionSummaryRequest
+	38, // 36: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:input_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest
+	1,  // 37: api.wallet.service.v1.Wallet.AddUser:output_type -> api.wallet.service.v1.AddUserResponse
+	3,  // 38: api.wallet.service.v1.Wallet.UpdateUser:output_type -> api.wallet.service.v1.UpdateUserResponse
+	5,  // 39: api.wallet.service.v1.Wallet.AddOrUpdateOperatorsCurrency:output_type -> api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse
+	7,  // 40: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
+	9,  // 41: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
+	11, // 42: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
+	13, // 43: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
+	15, // 44: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
+	17, // 45: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
+	19, // 46: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
+	21, // 47: api.wallet.service.v1.Wallet.Freeze:output_type -> api.wallet.service.v1.FreezeResponse
+	23, // 48: api.wallet.service.v1.Wallet.Settle:output_type -> api.wallet.service.v1.SettleResponse
+	25, // 49: api.wallet.service.v1.Wallet.Rollback:output_type -> api.wallet.service.v1.RollbackResponse
+	27, // 50: api.wallet.service.v1.Wallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
+	29, // 51: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:output_type -> api.wallet.service.v1.ListWalletBalanceTransactionsResponse
+	31, // 52: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:output_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse
+	33, // 53: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:output_type -> api.wallet.service.v1.GetWalletCreditTransactionsResponse
+	35, // 54: api.wallet.service.v1.Wallet.GetExchangeRates:output_type -> api.wallet.service.v1.GetExchangeRatesResponse
+	37, // 55: api.wallet.service.v1.Wallet.GetUserTransactionSummary:output_type -> api.wallet.service.v1.GetUserTransactionSummaryResponse
+	39, // 56: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:output_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletResponse
+	37, // [37:57] is the sub-list for method output_type
+	17, // [17:37] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_wallet_proto_init() }
@@ -3954,6 +3919,7 @@ func file_wallet_service_v1_wallet_proto_init() {
 	file_wallet_service_v1_wallet_proto_msgTypes[28].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[32].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[36].OneofWrappers = []any{}
+	file_wallet_service_v1_wallet_proto_msgTypes[38].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

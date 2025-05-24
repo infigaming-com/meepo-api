@@ -3548,8 +3548,8 @@ func (x *GetBetByIdResponse) GetBet() *GetBetByIdResponse_Bet {
 type GetBackofficeUserOverviewFromGameRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime       *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5408,12 +5408,14 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"created_at\x18\x1f \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18  \x01(\x03R\tupdatedAt\x12H\n" +
-	"\aactions\x18! \x03(\v2..api.game.service.v1.GetBetByIdResponse.ActionR\aactions\"\xb5\x01\n" +
+	"\aactions\x18! \x03(\v2..api.game.service.v1.GetBetByIdResponse.ActionR\aactions\"\xdb\x01\n" +
 	"(GetBackofficeUserOverviewFromGameRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x129\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12>\n" +
 	"\n" +
-	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\"\xcf\x02\n" +
+	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01B\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_time\"\xcf\x02\n" +
 	")GetBackofficeUserOverviewFromGameResponse\x12,\n" +
 	"\x12average_bet_amount\x18\x01 \x01(\tR\x10averageBetAmount\x12%\n" +
 	"\x0ertp_percentage\x18\x02 \x01(\x05R\rrtpPercentage\x12d\n" +
@@ -5620,6 +5622,7 @@ func file_game_service_v1_game_proto_init() {
 	file_game_service_v1_game_proto_msgTypes[43].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[45].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[47].OneofWrappers = []any{}
+	file_game_service_v1_game_proto_msgTypes[49].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[51].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[55].OneofWrappers = []any{}
 	type x struct{}

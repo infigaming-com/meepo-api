@@ -613,8 +613,8 @@ message GetBetByIdResponse {
 
 message GetBackofficeUserOverviewFromGameRequest {
 	string user_id = 1;
-	google.protobuf.Timestamp start_time = 2;
-	google.protobuf.Timestamp end_time = 3;
+	optional google.protobuf.Timestamp start_time = 2;
+	optional google.protobuf.Timestamp end_time = 3;
 }
 
 message GetBackofficeUserOverviewFromGameResponse {
