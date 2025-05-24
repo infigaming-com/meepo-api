@@ -2123,7 +2123,9 @@ paths:
         post:
             tags:
                 - User
-            description: GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+            description: |-
+                GetUserTags retrieves all active tags associated for the current user
+                 and also exists in the related operator's tag list.
             operationId: User_GetUserTags
             requestBody:
                 content:
@@ -6220,11 +6222,8 @@ components:
             description: GetUserResponse contains the requested user's information.
         api.user.service.v1.GetUserTagsRequest:
             type: object
-            properties:
-                userId:
-                    type: string
-                    description: The ID of the user to get tags for.
-            description: GetUserTagsRequest contains the user ID to retrieve tags for.
+            properties: {}
+            description: GetUserTagsRequest retrieve tags for the current user.
         api.user.service.v1.GetUserTagsResponse:
             type: object
             properties:

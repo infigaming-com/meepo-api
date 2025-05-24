@@ -98,7 +98,8 @@ service User {
 	rpc GetOperatorTags(GetOperatorTagsRequest) returns (GetOperatorTagsResponse) {
 	}
 
-	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	// GetUserTags retrieves all active tags associated for the current user
+	// and also exists in the related operator's tag list.
 	rpc GetUserTags (GetUserTagsRequest) returns (GetUserTagsResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/tags/get"
@@ -106,7 +107,15 @@ service User {
 		};
 	}
 
-	rpc SetUserTags(SetUserTagsRequest) returns (SetUserTagsResponse) {
+	// GetUserTagsById is an internal API to retrieve the tags of given user.
+	// It's used by GetUserTags() in user-service for the current user and
+	// also by GetUserTags() in backoffice-service for the given user.
+	rpc GetUserTagsById (GetUserTagsByIdRequest) returns (GetUserTagsByIdResponse) {
+	}
+
+	// SetUserTagsById is an internal API to set the tags of given user.
+	// It's used by SetUserTags() in backoffice-service for the given user.
+	rpc SetUserTagsById(SetUserTagsByIdRequest) returns (SetUserTagsByIdResponse) {
 	}
 
 	rpc CheckPermission (CheckPermissionRequest) returns (CheckPermissionResponse) {
@@ -366,11 +375,8 @@ message GetOperatorTagsResponse {
 	repeated string tags = 1;
 }
 
-// GetUserTagsRequest contains the user ID to retrieve tags for.
-message GetUserTagsRequest {
-	// The ID of the user to get tags for.
-	int64 user_id = 1;
-}
+// GetUserTagsRequest retrieve tags for the current user.
+message GetUserTagsRequest {}
 
 // GetUserTagsResponse contains the list of active tags associated with the user.
 message GetUserTagsResponse {
@@ -378,34 +384,25 @@ message GetUserTagsResponse {
 	repeated string tags = 1;
 }
 
-message SetUserTagsRequest {
+
+// GetUserTagsByIdRequest contains the user ID to retrieve tags for.
+message GetUserTagsByIdRequest {
+	// The ID of the user to get tags for.
+	int64 user_id = 1;
+}
+
+// GetUserTagsByIdResponse contains the list of active tags associated with the user.
+message GetUserTagsByIdResponse {
+	// List of active tags associated with the user.
+	repeated string tags = 1;
+}
+
+message SetUserTagsByIdRequest {
 	int64 user_id = 1;
 	repeated string tags = 2;
 }
 
-message SetUserTagsResponse {}
-
-// AddUserTagRequest contains the user ID and tag to add.
-message AddUserTagRequest {
-	// The ID of the user to add the tag to.
-	int64 user_id = 1;
-	// The tag to add to the user.
-	string tag = 2;
-}
-
-// AddUserTagResponse is an empty message indicating successful tag addition.
-message AddUserTagResponse {}
-
-// DeleteUserTagRequest contains the user ID and tag to soft delete.
-message DeleteUserTagRequest {
-	// The ID of the user to delete the tag from.
-	int64 user_id = 1;
-	// The tag to delete from the user.
-	string tag = 2;
-}
-
-// DeleteUserTagResponse is an empty message indicating successful tag deletion.
-message DeleteUserTagResponse {}
+message SetUserTagsByIdResponse {}
 
 message CheckPermissionRequest {
 	string path = 1;
