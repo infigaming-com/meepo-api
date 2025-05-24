@@ -479,7 +479,7 @@ message GetBackofficeUserOverviewFromWalletResponse {
 	string bonus = 11;
 	string valid_turnover = 12; // Not available for now, only return 0
 	string ggr = 13;
-	string ggr_percentage = 14;
+	int32 ggr_percentage = 14;
 	string manually_added_balance = 15; // Not available for now, only return 0
 	string bonus_claimed = 16; // Not available for now, only return 0
 	string ngr = 17;
