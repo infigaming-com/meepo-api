@@ -2217,7 +2217,7 @@ components:
                     format: date-time
                 requestInfo:
                     type: string
-                responseInfo:
+                requestBody:
                     type: string
                 clientIp:
                     type: string

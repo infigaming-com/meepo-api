@@ -113,8 +113,8 @@ type AuditLog struct {
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	UserName      string                 `protobuf:"bytes,3,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	RequestInfo   string                 `protobuf:"bytes,5,opt,name=request_info,json=requestInfo,proto3" json:"request_info,omitempty"`    // JSON string
-	ResponseInfo  string                 `protobuf:"bytes,6,opt,name=response_info,json=responseInfo,proto3" json:"response_info,omitempty"` // JSON string
+	RequestInfo   string                 `protobuf:"bytes,5,opt,name=request_info,json=requestInfo,proto3" json:"request_info,omitempty"` // JSON string
+	RequestBody   string                 `protobuf:"bytes,6,opt,name=request_body,json=requestBody,proto3" json:"request_body,omitempty"` // JSON string
 	ClientIp      string                 `protobuf:"bytes,7,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
 	ApiPath       string                 `protobuf:"bytes,8,opt,name=api_path,json=apiPath,proto3" json:"api_path,omitempty"`
 	Action        string                 `protobuf:"bytes,9,opt,name=action,proto3" json:"action,omitempty"`
@@ -188,9 +188,9 @@ func (x *AuditLog) GetRequestInfo() string {
 	return ""
 }
 
-func (x *AuditLog) GetResponseInfo() string {
+func (x *AuditLog) GetRequestBody() string {
 	if x != nil {
-		return x.ResponseInfo
+		return x.RequestBody
 	}
 	return ""
 }
@@ -311,15 +311,15 @@ const file_backoffice_service_v1_backoffice_audit_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xd3\x02\n" +
+	"_page_size\"\xd1\x02\n" +
 	"\bAuditLog\x12\x19\n" +
 	"\baudit_id\x18\x01 \x01(\x03R\aauditId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tuser_name\x18\x03 \x01(\tR\buserName\x129\n" +
 	"\n" +
 	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12!\n" +
-	"\frequest_info\x18\x05 \x01(\tR\vrequestInfo\x12#\n" +
-	"\rresponse_info\x18\x06 \x01(\tR\fresponseInfo\x12\x1b\n" +
+	"\frequest_info\x18\x05 \x01(\tR\vrequestInfo\x12!\n" +
+	"\frequest_body\x18\x06 \x01(\tR\vrequestBody\x12\x1b\n" +
 	"\tclient_ip\x18\a \x01(\tR\bclientIp\x12\x19\n" +
 	"\bapi_path\x18\b \x01(\tR\aapiPath\x12\x16\n" +
 	"\x06action\x18\t \x01(\tR\x06action\x12#\n" +
