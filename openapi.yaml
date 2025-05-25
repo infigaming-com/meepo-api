@@ -4046,13 +4046,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -4069,12 +4063,6 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
                 page:
                     type: integer
                     format: int32
@@ -4087,7 +4075,7 @@ components:
                 dailyDetails:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse_DailyDetail'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse_Detail'
                 page:
                     type: integer
                     format: int32
@@ -4097,12 +4085,15 @@ components:
                 total:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListDepositVtgDetailsResponse_DailyDetail:
+        api.backoffice.service.v1.ListDepositVtgDetailsResponse_Detail:
             type: object
             properties:
                 date:
                     type: string
-                    format: date-time
+                week:
+                    type: string
+                month:
+                    type: string
                 operator:
                     type: string
                 currency:
@@ -4135,12 +4126,6 @@ components:
                     type: string
                 averageFtdAmountForNonSameDayRegistredUsers:
                     type: string
-                successPercentage:
-                    type: integer
-                    format: int32
-                amountProportionPercentage:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListFeeGroupsRequest:
             type: object
             properties: {}
@@ -4932,13 +4917,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -4955,12 +4934,6 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
                 page:
                     type: integer
                     format: int32
@@ -4973,7 +4946,7 @@ components:
                 dailyDetails:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse_DailyDetail'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse_Detail'
                 page:
                     type: integer
                     format: int32
@@ -4983,12 +4956,11 @@ components:
                 total:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListWithdrawVtgDetailsResponse_DailyDetail:
+        api.backoffice.service.v1.ListWithdrawVtgDetailsResponse_Detail:
             type: object
             properties:
                 date:
                     type: string
-                    format: date-time
                 operator:
                     type: string
                 currency:
@@ -5021,14 +4993,8 @@ components:
                     type: string
                 averageFtwAmountForNonSameDayRegistredUsers:
                     type: string
-                successPercentage:
-                    type: integer
-                    format: int32
                 depositMinusWithdrawAmount:
                     type: string
-                amountProportionPercentage:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.LoginRequest:
             type: object
             properties:
@@ -5195,6 +5161,15 @@ components:
                 currencyDecimalPlaces:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.TimeRange:
+            type: object
+            properties:
+                type:
+                    type: string
+                startTime:
+                    type: string
+                endTime:
+                    type: string
         api.backoffice.service.v1.Unbind2faRequest:
             type: object
             properties:
