@@ -4707,7 +4707,7 @@ func (m *GetBackofficeUserOverviewFromWalletResponse) validate(all bool) error {
 
 	// no validation rules for DepositToWithdrawRatio
 
-	// no validation rules for RtpPercentage
+	// no validation rules for Rtp
 
 	if len(errors) > 0 {
 		return GetBackofficeUserOverviewFromWalletResponseMultiError(errors)

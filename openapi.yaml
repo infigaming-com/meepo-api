@@ -3273,8 +3273,7 @@ components:
                 ggr:
                     type: string
                 ggrPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 manuallyAddedBalance:
                     type: string
                 bonusClaimed:
@@ -3282,17 +3281,13 @@ components:
                 ngr:
                     type: string
                 ggrToNgrPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 turnoverMultiplier:
-                    type: integer
-                    format: int32
+                    type: string
                 depositToWithdrawRatio:
-                    type: integer
-                    format: int32
-                rtpPercentage:
-                    type: integer
-                    format: int32
+                    type: string
+                rtp:
+                    type: string
                 gameData:
                     type: array
                     items:
