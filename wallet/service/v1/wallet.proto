@@ -476,14 +476,16 @@ message GetBackofficeUserOverviewFromWalletResponse {
 	string withdraw = 8;
 	string last_withdraw = 9;
 	int32 withdraw_count = 10;
-	string bonus = 11;
+	string bonus = 11; // Not available for now, only return 0
 	string valid_turnover = 12; // Not available for now, only return 0
-	string ggr = 13;
-	int32 ggr_percentage = 14;
-	string manually_added_balance = 15; // Not available for now, only return 0
-	string bonus_claimed = 16; // Not available for now, only return 0
-	string ngr = 17;
-	int32 ggr_to_ngr_percentage = 18;
-	int32 turnover_multiplier = 19; // Not available for now, only return 0
-	int32 deposit_to_withdraw_ratio = 20;
+	string average_bet_amount = 13;
+	string ggr = 14;
+	int32 ggr_percentage = 15;
+	string manually_added_balance = 16; // Not available for now, only return 0
+	string bonus_claimed = 17; // Not available for now, only return 0
+	string ngr = 18;
+	int32 ggr_to_ngr_percentage = 19;
+	int32 turnover_multiplier = 20; // Not available for now, only return 0
+	int32 deposit_to_withdraw_ratio = 21;
+	int32 rtp_percentage = 22;
 }

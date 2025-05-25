@@ -354,8 +354,8 @@ type GetUserOverviewResponse struct {
 	Withdraw               string                              `protobuf:"bytes,8,opt,name=withdraw,proto3" json:"withdraw,omitempty"`                                  // withdrawal
 	LastWithdraw           string                              `protobuf:"bytes,9,opt,name=last_withdraw,json=lastWithdraw,proto3" json:"last_withdraw,omitempty"`      // last withdrawal
 	WithdrawCount          int32                               `protobuf:"varint,10,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"` // withdrawal count
-	Bonus                  string                              `protobuf:"bytes,11,opt,name=bonus,proto3" json:"bonus,omitempty"`
-	ValidTurnover          string                              `protobuf:"bytes,12,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"` // Not available for now, only return 0
+	Bonus                  string                              `protobuf:"bytes,11,opt,name=bonus,proto3" json:"bonus,omitempty"`                                       // Not available for now, only return 0
+	ValidTurnover          string                              `protobuf:"bytes,12,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`  // Not available for now, only return 0
 	AverageBetAmount       string                              `protobuf:"bytes,13,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
 	Ggr                    string                              `protobuf:"bytes,14,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	GgrPercentage          int32                               `protobuf:"varint,15,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
