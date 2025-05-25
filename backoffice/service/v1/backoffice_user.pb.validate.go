@@ -579,7 +579,7 @@ func (m *GetUserOverviewResponse) validate(all bool) error {
 
 	// no validation rules for DepositToWithdrawRatio
 
-	// no validation rules for RtpPercentage
+	// no validation rules for Rtp
 
 	for idx, item := range m.GetGameData() {
 		_, _ = idx, item

@@ -480,12 +480,12 @@ message GetBackofficeUserOverviewFromWalletResponse {
 	string valid_turnover = 12; // Not available for now, only return 0
 	string average_bet_amount = 13;
 	string ggr = 14;
-	int32 ggr_percentage = 15;
+	string ggr_percentage = 15; // Round to 2 decimal places
 	string manually_added_balance = 16; // Not available for now, only return 0
 	string bonus_claimed = 17; // Not available for now, only return 0
 	string ngr = 18;
-	int32 ggr_to_ngr_percentage = 19;
-	int32 turnover_multiplier = 20; // Not available for now, only return 0
-	int32 deposit_to_withdraw_ratio = 21;
-	int32 rtp_percentage = 22;
+	string ggr_to_ngr_percentage = 19; // Round to 2 decimal places
+	string turnover_multiplier = 20; // Round to 2 decimal places
+	string deposit_to_withdraw_ratio = 21; // Round to 2 decimal places
+	string rtp = 22; // Round to 2 decimal places
 }

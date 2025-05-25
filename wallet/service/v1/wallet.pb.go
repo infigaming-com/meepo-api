@@ -2438,14 +2438,14 @@ type GetBackofficeUserOverviewFromWalletResponse struct {
 	ValidTurnover          string                 `protobuf:"bytes,12,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"` // Not available for now, only return 0
 	AverageBetAmount       string                 `protobuf:"bytes,13,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
 	Ggr                    string                 `protobuf:"bytes,14,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	GgrPercentage          int32                  `protobuf:"varint,15,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
+	GgrPercentage          string                 `protobuf:"bytes,15,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`                        // Round to 2 decimal places
 	ManuallyAddedBalance   string                 `protobuf:"bytes,16,opt,name=manually_added_balance,json=manuallyAddedBalance,proto3" json:"manually_added_balance,omitempty"` // Not available for now, only return 0
 	BonusClaimed           string                 `protobuf:"bytes,17,opt,name=bonus_claimed,json=bonusClaimed,proto3" json:"bonus_claimed,omitempty"`                           // Not available for now, only return 0
 	Ngr                    string                 `protobuf:"bytes,18,opt,name=ngr,proto3" json:"ngr,omitempty"`
-	GgrToNgrPercentage     int32                  `protobuf:"varint,19,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`
-	TurnoverMultiplier     int32                  `protobuf:"varint,20,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"` // Not available for now, only return 0
-	DepositToWithdrawRatio int32                  `protobuf:"varint,21,opt,name=deposit_to_withdraw_ratio,json=depositToWithdrawRatio,proto3" json:"deposit_to_withdraw_ratio,omitempty"`
-	RtpPercentage          int32                  `protobuf:"varint,22,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
+	GgrToNgrPercentage     string                 `protobuf:"bytes,19,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`             // Round to 2 decimal places
+	TurnoverMultiplier     string                 `protobuf:"bytes,20,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`                 // Round to 2 decimal places
+	DepositToWithdrawRatio string                 `protobuf:"bytes,21,opt,name=deposit_to_withdraw_ratio,json=depositToWithdrawRatio,proto3" json:"deposit_to_withdraw_ratio,omitempty"` // Round to 2 decimal places
+	Rtp                    string                 `protobuf:"bytes,22,opt,name=rtp,proto3" json:"rtp,omitempty"`                                                                         // Round to 2 decimal places
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -2578,11 +2578,11 @@ func (x *GetBackofficeUserOverviewFromWalletResponse) GetGgr() string {
 	return ""
 }
 
-func (x *GetBackofficeUserOverviewFromWalletResponse) GetGgrPercentage() int32 {
+func (x *GetBackofficeUserOverviewFromWalletResponse) GetGgrPercentage() string {
 	if x != nil {
 		return x.GgrPercentage
 	}
-	return 0
+	return ""
 }
 
 func (x *GetBackofficeUserOverviewFromWalletResponse) GetManuallyAddedBalance() string {
@@ -2606,32 +2606,32 @@ func (x *GetBackofficeUserOverviewFromWalletResponse) GetNgr() string {
 	return ""
 }
 
-func (x *GetBackofficeUserOverviewFromWalletResponse) GetGgrToNgrPercentage() int32 {
+func (x *GetBackofficeUserOverviewFromWalletResponse) GetGgrToNgrPercentage() string {
 	if x != nil {
 		return x.GgrToNgrPercentage
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBackofficeUserOverviewFromWalletResponse) GetTurnoverMultiplier() int32 {
+func (x *GetBackofficeUserOverviewFromWalletResponse) GetTurnoverMultiplier() string {
 	if x != nil {
 		return x.TurnoverMultiplier
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBackofficeUserOverviewFromWalletResponse) GetDepositToWithdrawRatio() int32 {
+func (x *GetBackofficeUserOverviewFromWalletResponse) GetDepositToWithdrawRatio() string {
 	if x != nil {
 		return x.DepositToWithdrawRatio
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBackofficeUserOverviewFromWalletResponse) GetRtpPercentage() int32 {
+func (x *GetBackofficeUserOverviewFromWalletResponse) GetRtp() string {
 	if x != nil {
-		return x.RtpPercentage
+		return x.Rtp
 	}
-	return 0
+	return ""
 }
 
 type GetUserBalancesResponse_Balance struct {
@@ -3748,7 +3748,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
 	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01B\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\xec\x06\n" +
+	"\t_end_time\"\xd7\x06\n" +
 	"+GetBackofficeUserOverviewFromWalletResponse\x124\n" +
 	"\x16deposit_minus_withdraw\x18\x01 \x01(\tR\x14depositMinusWithdraw\x12\x1a\n" +
 	"\bturnover\x18\x02 \x01(\tR\bturnover\x12#\n" +
@@ -3765,14 +3765,14 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0evalid_turnover\x18\f \x01(\tR\rvalidTurnover\x12,\n" +
 	"\x12average_bet_amount\x18\r \x01(\tR\x10averageBetAmount\x12\x10\n" +
 	"\x03ggr\x18\x0e \x01(\tR\x03ggr\x12%\n" +
-	"\x0eggr_percentage\x18\x0f \x01(\x05R\rggrPercentage\x124\n" +
+	"\x0eggr_percentage\x18\x0f \x01(\tR\rggrPercentage\x124\n" +
 	"\x16manually_added_balance\x18\x10 \x01(\tR\x14manuallyAddedBalance\x12#\n" +
 	"\rbonus_claimed\x18\x11 \x01(\tR\fbonusClaimed\x12\x10\n" +
 	"\x03ngr\x18\x12 \x01(\tR\x03ngr\x121\n" +
-	"\x15ggr_to_ngr_percentage\x18\x13 \x01(\x05R\x12ggrToNgrPercentage\x12/\n" +
-	"\x13turnover_multiplier\x18\x14 \x01(\x05R\x12turnoverMultiplier\x129\n" +
-	"\x19deposit_to_withdraw_ratio\x18\x15 \x01(\x05R\x16depositToWithdrawRatio\x12%\n" +
-	"\x0ertp_percentage\x18\x16 \x01(\x05R\rrtpPercentage2\xc0\x13\n" +
+	"\x15ggr_to_ngr_percentage\x18\x13 \x01(\tR\x12ggrToNgrPercentage\x12/\n" +
+	"\x13turnover_multiplier\x18\x14 \x01(\tR\x12turnoverMultiplier\x129\n" +
+	"\x19deposit_to_withdraw_ratio\x18\x15 \x01(\tR\x16depositToWithdrawRatio\x12\x10\n" +
+	"\x03rtp\x18\x16 \x01(\tR\x03rtp2\xc0\x13\n" +
 	"\x06Wallet\x12Z\n" +
 	"\aAddUser\x12%.api.wallet.service.v1.AddUserRequest\x1a&.api.wallet.service.v1.AddUserResponse\"\x00\x12c\n" +
 	"\n" +
