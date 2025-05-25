@@ -75,6 +75,292 @@ func (TimePeriod) EnumDescriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{0}
 }
 
+type TimeRange struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to TimeRange:
+	//
+	//	*TimeRange_Day_
+	//	*TimeRange_Week_
+	//	*TimeRange_Month_
+	TimeRange     isTimeRange_TimeRange `protobuf_oneof:"time_range"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeRange) Reset() {
+	*x = TimeRange{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeRange) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeRange) ProtoMessage() {}
+
+func (x *TimeRange) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeRange.ProtoReflect.Descriptor instead.
+func (*TimeRange) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *TimeRange) GetTimeRange() isTimeRange_TimeRange {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+func (x *TimeRange) GetDay() *TimeRange_Day {
+	if x != nil {
+		if x, ok := x.TimeRange.(*TimeRange_Day_); ok {
+			return x.Day
+		}
+	}
+	return nil
+}
+
+func (x *TimeRange) GetWeek() *TimeRange_Week {
+	if x != nil {
+		if x, ok := x.TimeRange.(*TimeRange_Week_); ok {
+			return x.Week
+		}
+	}
+	return nil
+}
+
+func (x *TimeRange) GetMonth() *TimeRange_Month {
+	if x != nil {
+		if x, ok := x.TimeRange.(*TimeRange_Month_); ok {
+			return x.Month
+		}
+	}
+	return nil
+}
+
+type isTimeRange_TimeRange interface {
+	isTimeRange_TimeRange()
+}
+
+type TimeRange_Day_ struct {
+	Day *TimeRange_Day `protobuf:"bytes,1,opt,name=day,proto3,oneof"`
+}
+
+type TimeRange_Week_ struct {
+	Week *TimeRange_Week `protobuf:"bytes,2,opt,name=week,proto3,oneof"`
+}
+
+type TimeRange_Month_ struct {
+	Month *TimeRange_Month `protobuf:"bytes,3,opt,name=month,proto3,oneof"`
+}
+
+func (*TimeRange_Day_) isTimeRange_TimeRange() {}
+
+func (*TimeRange_Week_) isTimeRange_TimeRange() {}
+
+func (*TimeRange_Month_) isTimeRange_TimeRange() {}
+
+type TimeRangeDay struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StartDate     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
+	EndDate       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeRangeDay) Reset() {
+	*x = TimeRangeDay{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeRangeDay) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeRangeDay) ProtoMessage() {}
+
+func (x *TimeRangeDay) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeRangeDay.ProtoReflect.Descriptor instead.
+func (*TimeRangeDay) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *TimeRangeDay) GetStartDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartDate
+	}
+	return nil
+}
+
+func (x *TimeRangeDay) GetEndDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndDate
+	}
+	return nil
+}
+
+type TimeRangeWeek struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StartYear     int32                  `protobuf:"varint,1,opt,name=start_year,json=startYear,proto3" json:"start_year,omitempty"`
+	StartWeek     int32                  `protobuf:"varint,2,opt,name=start_week,json=startWeek,proto3" json:"start_week,omitempty"`
+	EndYear       int32                  `protobuf:"varint,3,opt,name=end_year,json=endYear,proto3" json:"end_year,omitempty"`
+	EndWeek       int32                  `protobuf:"varint,4,opt,name=end_week,json=endWeek,proto3" json:"end_week,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeRangeWeek) Reset() {
+	*x = TimeRangeWeek{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeRangeWeek) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeRangeWeek) ProtoMessage() {}
+
+func (x *TimeRangeWeek) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeRangeWeek.ProtoReflect.Descriptor instead.
+func (*TimeRangeWeek) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *TimeRangeWeek) GetStartYear() int32 {
+	if x != nil {
+		return x.StartYear
+	}
+	return 0
+}
+
+func (x *TimeRangeWeek) GetStartWeek() int32 {
+	if x != nil {
+		return x.StartWeek
+	}
+	return 0
+}
+
+func (x *TimeRangeWeek) GetEndYear() int32 {
+	if x != nil {
+		return x.EndYear
+	}
+	return 0
+}
+
+func (x *TimeRangeWeek) GetEndWeek() int32 {
+	if x != nil {
+		return x.EndWeek
+	}
+	return 0
+}
+
+type TimeRangeMonth struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StartYear     int32                  `protobuf:"varint,1,opt,name=start_year,json=startYear,proto3" json:"start_year,omitempty"`
+	StartMonth    int32                  `protobuf:"varint,2,opt,name=start_month,json=startMonth,proto3" json:"start_month,omitempty"`
+	EndYear       int32                  `protobuf:"varint,3,opt,name=end_year,json=endYear,proto3" json:"end_year,omitempty"`
+	EndMonth      int32                  `protobuf:"varint,4,opt,name=end_month,json=endMonth,proto3" json:"end_month,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeRangeMonth) Reset() {
+	*x = TimeRangeMonth{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeRangeMonth) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeRangeMonth) ProtoMessage() {}
+
+func (x *TimeRangeMonth) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeRangeMonth.ProtoReflect.Descriptor instead.
+func (*TimeRangeMonth) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TimeRangeMonth) GetStartYear() int32 {
+	if x != nil {
+		return x.StartYear
+	}
+	return 0
+}
+
+func (x *TimeRangeMonth) GetStartMonth() int32 {
+	if x != nil {
+		return x.StartMonth
+	}
+	return 0
+}
+
+func (x *TimeRangeMonth) GetEndYear() int32 {
+	if x != nil {
+		return x.EndYear
+	}
+	return 0
+}
+
+func (x *TimeRangeMonth) GetEndMonth() int32 {
+	if x != nil {
+		return x.EndMonth
+	}
+	return 0
+}
+
 type GetSummaryRequest struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
 	TimeRange             TimePeriod             `protobuf:"varint,1,opt,name=time_range,json=timeRange,proto3,enum=api.backoffice.service.v1.TimePeriod" json:"time_range,omitempty"`
@@ -92,7 +378,7 @@ type GetSummaryRequest struct {
 
 func (x *GetSummaryRequest) Reset() {
 	*x = GetSummaryRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[0]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -104,7 +390,7 @@ func (x *GetSummaryRequest) String() string {
 func (*GetSummaryRequest) ProtoMessage() {}
 
 func (x *GetSummaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[0]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -117,7 +403,7 @@ func (x *GetSummaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSummaryRequest.ProtoReflect.Descriptor instead.
 func (*GetSummaryRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetSummaryRequest) GetTimeRange() TimePeriod {
@@ -204,7 +490,7 @@ type GetSummaryResponse struct {
 
 func (x *GetSummaryResponse) Reset() {
 	*x = GetSummaryResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[1]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -216,7 +502,7 @@ func (x *GetSummaryResponse) String() string {
 func (*GetSummaryResponse) ProtoMessage() {}
 
 func (x *GetSummaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[1]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -229,7 +515,7 @@ func (x *GetSummaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSummaryResponse.ProtoReflect.Descriptor instead.
 func (*GetSummaryResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{1}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetSummaryResponse) GetVisits() int64 {
@@ -342,7 +628,7 @@ type ListDailySummariesRequest struct {
 
 func (x *ListDailySummariesRequest) Reset() {
 	*x = ListDailySummariesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[2]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -354,7 +640,7 @@ func (x *ListDailySummariesRequest) String() string {
 func (*ListDailySummariesRequest) ProtoMessage() {}
 
 func (x *ListDailySummariesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[2]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -367,7 +653,7 @@ func (x *ListDailySummariesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDailySummariesRequest.ProtoReflect.Descriptor instead.
 func (*ListDailySummariesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{2}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ListDailySummariesRequest) GetTimeRange() TimePeriod {
@@ -459,7 +745,7 @@ type ListDailySummariesResponse struct {
 
 func (x *ListDailySummariesResponse) Reset() {
 	*x = ListDailySummariesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[3]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -471,7 +757,7 @@ func (x *ListDailySummariesResponse) String() string {
 func (*ListDailySummariesResponse) ProtoMessage() {}
 
 func (x *ListDailySummariesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[3]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -484,7 +770,7 @@ func (x *ListDailySummariesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDailySummariesResponse.ProtoReflect.Descriptor instead.
 func (*ListDailySummariesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{3}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ListDailySummariesResponse) GetDailySummaries() []*ListDailySummariesResponse_DailySummary {
@@ -533,7 +819,7 @@ type GetGameDataSummaryRequest struct {
 
 func (x *GetGameDataSummaryRequest) Reset() {
 	*x = GetGameDataSummaryRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[4]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -545,7 +831,7 @@ func (x *GetGameDataSummaryRequest) String() string {
 func (*GetGameDataSummaryRequest) ProtoMessage() {}
 
 func (x *GetGameDataSummaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[4]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -558,7 +844,7 @@ func (x *GetGameDataSummaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGameDataSummaryRequest.ProtoReflect.Descriptor instead.
 func (*GetGameDataSummaryRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{4}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetGameDataSummaryRequest) GetTimeRange() TimePeriod {
@@ -645,7 +931,7 @@ type GetGameDataSummaryResponse struct {
 
 func (x *GetGameDataSummaryResponse) Reset() {
 	*x = GetGameDataSummaryResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[5]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -657,7 +943,7 @@ func (x *GetGameDataSummaryResponse) String() string {
 func (*GetGameDataSummaryResponse) ProtoMessage() {}
 
 func (x *GetGameDataSummaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[5]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -670,7 +956,7 @@ func (x *GetGameDataSummaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGameDataSummaryResponse.ProtoReflect.Descriptor instead.
 func (*GetGameDataSummaryResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{5}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetGameDataSummaryResponse) GetTurnover() int64 {
@@ -733,7 +1019,7 @@ type ListGameDataDailySummariesRequest struct {
 
 func (x *ListGameDataDailySummariesRequest) Reset() {
 	*x = ListGameDataDailySummariesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[6]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -745,7 +1031,7 @@ func (x *ListGameDataDailySummariesRequest) String() string {
 func (*ListGameDataDailySummariesRequest) ProtoMessage() {}
 
 func (x *ListGameDataDailySummariesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[6]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -758,7 +1044,7 @@ func (x *ListGameDataDailySummariesRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ListGameDataDailySummariesRequest.ProtoReflect.Descriptor instead.
 func (*ListGameDataDailySummariesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{6}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListGameDataDailySummariesRequest) GetTimeRange() TimePeriod {
@@ -843,7 +1129,7 @@ type ListGameDataDailySummariesResponse struct {
 
 func (x *ListGameDataDailySummariesResponse) Reset() {
 	*x = ListGameDataDailySummariesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[7]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -855,7 +1141,7 @@ func (x *ListGameDataDailySummariesResponse) String() string {
 func (*ListGameDataDailySummariesResponse) ProtoMessage() {}
 
 func (x *ListGameDataDailySummariesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[7]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -868,7 +1154,7 @@ func (x *ListGameDataDailySummariesResponse) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ListGameDataDailySummariesResponse.ProtoReflect.Descriptor instead.
 func (*ListGameDataDailySummariesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{7}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListGameDataDailySummariesResponse) GetDailySummaries() []*ListGameDataDailySummariesResponse_DailySummary {
@@ -918,7 +1204,7 @@ type GetPlayerGameDataSummaryRequest struct {
 
 func (x *GetPlayerGameDataSummaryRequest) Reset() {
 	*x = GetPlayerGameDataSummaryRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -930,7 +1216,7 @@ func (x *GetPlayerGameDataSummaryRequest) String() string {
 func (*GetPlayerGameDataSummaryRequest) ProtoMessage() {}
 
 func (x *GetPlayerGameDataSummaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -943,7 +1229,7 @@ func (x *GetPlayerGameDataSummaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPlayerGameDataSummaryRequest.ProtoReflect.Descriptor instead.
 func (*GetPlayerGameDataSummaryRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{8}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetPlayerGameDataSummaryRequest) GetTimeRange() TimePeriod {
@@ -1037,7 +1323,7 @@ type GetPlayerGameDataSummaryResponse struct {
 
 func (x *GetPlayerGameDataSummaryResponse) Reset() {
 	*x = GetPlayerGameDataSummaryResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1049,7 +1335,7 @@ func (x *GetPlayerGameDataSummaryResponse) String() string {
 func (*GetPlayerGameDataSummaryResponse) ProtoMessage() {}
 
 func (x *GetPlayerGameDataSummaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1062,7 +1348,7 @@ func (x *GetPlayerGameDataSummaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPlayerGameDataSummaryResponse.ProtoReflect.Descriptor instead.
 func (*GetPlayerGameDataSummaryResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{9}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetPlayerGameDataSummaryResponse) GetTurnover() int64 {
@@ -1127,7 +1413,7 @@ type GetPlayerGameDataDailySummariesRequest struct {
 
 func (x *GetPlayerGameDataDailySummariesRequest) Reset() {
 	*x = GetPlayerGameDataDailySummariesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1139,7 +1425,7 @@ func (x *GetPlayerGameDataDailySummariesRequest) String() string {
 func (*GetPlayerGameDataDailySummariesRequest) ProtoMessage() {}
 
 func (x *GetPlayerGameDataDailySummariesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1152,7 +1438,7 @@ func (x *GetPlayerGameDataDailySummariesRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use GetPlayerGameDataDailySummariesRequest.ProtoReflect.Descriptor instead.
 func (*GetPlayerGameDataDailySummariesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{10}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetPlayerGameDataDailySummariesRequest) GetTimeRange() TimePeriod {
@@ -1251,7 +1537,7 @@ type GetPlayerGameDataDailySummariesResponse struct {
 
 func (x *GetPlayerGameDataDailySummariesResponse) Reset() {
 	*x = GetPlayerGameDataDailySummariesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1263,7 +1549,7 @@ func (x *GetPlayerGameDataDailySummariesResponse) String() string {
 func (*GetPlayerGameDataDailySummariesResponse) ProtoMessage() {}
 
 func (x *GetPlayerGameDataDailySummariesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1276,7 +1562,7 @@ func (x *GetPlayerGameDataDailySummariesResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use GetPlayerGameDataDailySummariesResponse.ProtoReflect.Descriptor instead.
 func (*GetPlayerGameDataDailySummariesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{11}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetPlayerGameDataDailySummariesResponse) GetDailySummaries() []*GetPlayerGameDataDailySummariesResponse_DailySummary {
@@ -1322,7 +1608,7 @@ type GetDepositSummariesRequest struct {
 
 func (x *GetDepositSummariesRequest) Reset() {
 	*x = GetDepositSummariesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1334,7 +1620,7 @@ func (x *GetDepositSummariesRequest) String() string {
 func (*GetDepositSummariesRequest) ProtoMessage() {}
 
 func (x *GetDepositSummariesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1347,7 +1633,7 @@ func (x *GetDepositSummariesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDepositSummariesRequest.ProtoReflect.Descriptor instead.
 func (*GetDepositSummariesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{12}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetDepositSummariesRequest) GetTimeRange() TimePeriod {
@@ -1408,7 +1694,7 @@ type GetDepositSummariesResponse struct {
 
 func (x *GetDepositSummariesResponse) Reset() {
 	*x = GetDepositSummariesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1420,7 +1706,7 @@ func (x *GetDepositSummariesResponse) String() string {
 func (*GetDepositSummariesResponse) ProtoMessage() {}
 
 func (x *GetDepositSummariesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1433,7 +1719,7 @@ func (x *GetDepositSummariesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDepositSummariesResponse.ProtoReflect.Descriptor instead.
 func (*GetDepositSummariesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{13}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetDepositSummariesResponse) GetDailySummaries() []*GetDepositSummariesResponse_DailySummary {
@@ -1460,7 +1746,7 @@ type ListDepositDetailsRequest struct {
 
 func (x *ListDepositDetailsRequest) Reset() {
 	*x = ListDepositDetailsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1472,7 +1758,7 @@ func (x *ListDepositDetailsRequest) String() string {
 func (*ListDepositDetailsRequest) ProtoMessage() {}
 
 func (x *ListDepositDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1485,7 +1771,7 @@ func (x *ListDepositDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDepositDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListDepositDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{14}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ListDepositDetailsRequest) GetTimeRange() TimePeriod {
@@ -1563,7 +1849,7 @@ type ListDepositDetailsResponse struct {
 
 func (x *ListDepositDetailsResponse) Reset() {
 	*x = ListDepositDetailsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1575,7 +1861,7 @@ func (x *ListDepositDetailsResponse) String() string {
 func (*ListDepositDetailsResponse) ProtoMessage() {}
 
 func (x *ListDepositDetailsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1588,7 +1874,7 @@ func (x *ListDepositDetailsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDepositDetailsResponse.ProtoReflect.Descriptor instead.
 func (*ListDepositDetailsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{15}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ListDepositDetailsResponse) GetDailyDetails() []*ListDepositDetailsResponse_DailyDetail {
@@ -1634,7 +1920,7 @@ type GetWithdrawSummariesRequest struct {
 
 func (x *GetWithdrawSummariesRequest) Reset() {
 	*x = GetWithdrawSummariesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[16]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1646,7 +1932,7 @@ func (x *GetWithdrawSummariesRequest) String() string {
 func (*GetWithdrawSummariesRequest) ProtoMessage() {}
 
 func (x *GetWithdrawSummariesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[16]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1659,7 +1945,7 @@ func (x *GetWithdrawSummariesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWithdrawSummariesRequest.ProtoReflect.Descriptor instead.
 func (*GetWithdrawSummariesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{16}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetWithdrawSummariesRequest) GetTimeRange() TimePeriod {
@@ -1720,7 +2006,7 @@ type GetWithdrawSummariesResponse struct {
 
 func (x *GetWithdrawSummariesResponse) Reset() {
 	*x = GetWithdrawSummariesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[17]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1732,7 +2018,7 @@ func (x *GetWithdrawSummariesResponse) String() string {
 func (*GetWithdrawSummariesResponse) ProtoMessage() {}
 
 func (x *GetWithdrawSummariesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[17]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1745,7 +2031,7 @@ func (x *GetWithdrawSummariesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWithdrawSummariesResponse.ProtoReflect.Descriptor instead.
 func (*GetWithdrawSummariesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{17}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetWithdrawSummariesResponse) GetDailySummaries() []*GetWithdrawSummariesResponse_DailySummary {
@@ -1772,7 +2058,7 @@ type ListWithdrawDetailsRequest struct {
 
 func (x *ListWithdrawDetailsRequest) Reset() {
 	*x = ListWithdrawDetailsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1784,7 +2070,7 @@ func (x *ListWithdrawDetailsRequest) String() string {
 func (*ListWithdrawDetailsRequest) ProtoMessage() {}
 
 func (x *ListWithdrawDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1797,7 +2083,7 @@ func (x *ListWithdrawDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListWithdrawDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListWithdrawDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{18}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListWithdrawDetailsRequest) GetTimeRange() TimePeriod {
@@ -1875,7 +2161,7 @@ type ListWithdrawDetailsResponse struct {
 
 func (x *ListWithdrawDetailsResponse) Reset() {
 	*x = ListWithdrawDetailsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1887,7 +2173,7 @@ func (x *ListWithdrawDetailsResponse) String() string {
 func (*ListWithdrawDetailsResponse) ProtoMessage() {}
 
 func (x *ListWithdrawDetailsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1900,7 +2186,7 @@ func (x *ListWithdrawDetailsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListWithdrawDetailsResponse.ProtoReflect.Descriptor instead.
 func (*ListWithdrawDetailsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{19}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListWithdrawDetailsResponse) GetDailyDetails() []*ListWithdrawDetailsResponse_DailyDetail {
@@ -1932,23 +2218,26 @@ func (x *ListWithdrawDetailsResponse) GetTotal() int32 {
 }
 
 type ListDepositVtgDetailsRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	TimeRange           TimePeriod             `protobuf:"varint,1,opt,name=time_range,json=timeRange,proto3,enum=api.backoffice.service.v1.TimePeriod" json:"time_range,omitempty"`
-	RetailerOperatorIds []int64                `protobuf:"varint,2,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
-	GroupOperatorIds    []int64                `protobuf:"varint,3,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
-	OperatorIds         []int64                `protobuf:"varint,4,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	Currencies          []string               `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	StartTime           *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime             *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page                *int32                 `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize            *int32                 `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to TimeRange:
+	//
+	//	*ListDepositVtgDetailsRequest_Day
+	//	*ListDepositVtgDetailsRequest_Week
+	//	*ListDepositVtgDetailsRequest_Month
+	TimeRange           isListDepositVtgDetailsRequest_TimeRange `protobuf_oneof:"time_range"`
+	RetailerOperatorIds []int64                                  `protobuf:"varint,4,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
+	GroupOperatorIds    []int64                                  `protobuf:"varint,5,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
+	OperatorIds         []int64                                  `protobuf:"varint,6,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
+	Currencies          []string                                 `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Page                *int32                                   `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize            *int32                                   `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ListDepositVtgDetailsRequest) Reset() {
 	*x = ListDepositVtgDetailsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1960,7 +2249,7 @@ func (x *ListDepositVtgDetailsRequest) String() string {
 func (*ListDepositVtgDetailsRequest) ProtoMessage() {}
 
 func (x *ListDepositVtgDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1973,14 +2262,41 @@ func (x *ListDepositVtgDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDepositVtgDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListDepositVtgDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{20}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *ListDepositVtgDetailsRequest) GetTimeRange() TimePeriod {
+func (x *ListDepositVtgDetailsRequest) GetTimeRange() isListDepositVtgDetailsRequest_TimeRange {
 	if x != nil {
 		return x.TimeRange
 	}
-	return TimePeriod_TIME_RANGE_UNSPECIFIED
+	return nil
+}
+
+func (x *ListDepositVtgDetailsRequest) GetDay() *TimeRangeDay {
+	if x != nil {
+		if x, ok := x.TimeRange.(*ListDepositVtgDetailsRequest_Day); ok {
+			return x.Day
+		}
+	}
+	return nil
+}
+
+func (x *ListDepositVtgDetailsRequest) GetWeek() *TimeRangeWeek {
+	if x != nil {
+		if x, ok := x.TimeRange.(*ListDepositVtgDetailsRequest_Week); ok {
+			return x.Week
+		}
+	}
+	return nil
+}
+
+func (x *ListDepositVtgDetailsRequest) GetMonth() *TimeRangeMonth {
+	if x != nil {
+		if x, ok := x.TimeRange.(*ListDepositVtgDetailsRequest_Month); ok {
+			return x.Month
+		}
+	}
+	return nil
 }
 
 func (x *ListDepositVtgDetailsRequest) GetRetailerOperatorIds() []int64 {
@@ -2011,20 +2327,6 @@ func (x *ListDepositVtgDetailsRequest) GetCurrencies() []string {
 	return nil
 }
 
-func (x *ListDepositVtgDetailsRequest) GetStartTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.StartTime
-	}
-	return nil
-}
-
-func (x *ListDepositVtgDetailsRequest) GetEndTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.EndTime
-	}
-	return nil
-}
-
 func (x *ListDepositVtgDetailsRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
@@ -2039,19 +2341,41 @@ func (x *ListDepositVtgDetailsRequest) GetPageSize() int32 {
 	return 0
 }
 
+type isListDepositVtgDetailsRequest_TimeRange interface {
+	isListDepositVtgDetailsRequest_TimeRange()
+}
+
+type ListDepositVtgDetailsRequest_Day struct {
+	Day *TimeRangeDay `protobuf:"bytes,1,opt,name=day,proto3,oneof"`
+}
+
+type ListDepositVtgDetailsRequest_Week struct {
+	Week *TimeRangeWeek `protobuf:"bytes,2,opt,name=week,proto3,oneof"`
+}
+
+type ListDepositVtgDetailsRequest_Month struct {
+	Month *TimeRangeMonth `protobuf:"bytes,3,opt,name=month,proto3,oneof"`
+}
+
+func (*ListDepositVtgDetailsRequest_Day) isListDepositVtgDetailsRequest_TimeRange() {}
+
+func (*ListDepositVtgDetailsRequest_Week) isListDepositVtgDetailsRequest_TimeRange() {}
+
+func (*ListDepositVtgDetailsRequest_Month) isListDepositVtgDetailsRequest_TimeRange() {}
+
 type ListDepositVtgDetailsResponse struct {
-	state         protoimpl.MessageState                       `protogen:"open.v1"`
-	DailyDetails  []*ListDepositVtgDetailsResponse_DailyDetail `protobuf:"bytes,1,rep,name=daily_details,json=dailyDetails,proto3" json:"daily_details,omitempty"`
-	Page          int32                                        `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                                        `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total         int32                                        `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	state         protoimpl.MessageState                  `protogen:"open.v1"`
+	DailyDetails  []*ListDepositVtgDetailsResponse_Detail `protobuf:"bytes,1,rep,name=daily_details,json=dailyDetails,proto3" json:"daily_details,omitempty"`
+	Page          int32                                   `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                                   `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                                   `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListDepositVtgDetailsResponse) Reset() {
 	*x = ListDepositVtgDetailsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2063,7 +2387,7 @@ func (x *ListDepositVtgDetailsResponse) String() string {
 func (*ListDepositVtgDetailsResponse) ProtoMessage() {}
 
 func (x *ListDepositVtgDetailsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2076,10 +2400,10 @@ func (x *ListDepositVtgDetailsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDepositVtgDetailsResponse.ProtoReflect.Descriptor instead.
 func (*ListDepositVtgDetailsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{21}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{25}
 }
 
-func (x *ListDepositVtgDetailsResponse) GetDailyDetails() []*ListDepositVtgDetailsResponse_DailyDetail {
+func (x *ListDepositVtgDetailsResponse) GetDailyDetails() []*ListDepositVtgDetailsResponse_Detail {
 	if x != nil {
 		return x.DailyDetails
 	}
@@ -2108,23 +2432,26 @@ func (x *ListDepositVtgDetailsResponse) GetTotal() int32 {
 }
 
 type ListWithdrawVtgDetailsRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	TimeRange           TimePeriod             `protobuf:"varint,1,opt,name=time_range,json=timeRange,proto3,enum=api.backoffice.service.v1.TimePeriod" json:"time_range,omitempty"`
-	RetailerOperatorIds []int64                `protobuf:"varint,2,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
-	GroupOperatorIds    []int64                `protobuf:"varint,3,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
-	OperatorIds         []int64                `protobuf:"varint,4,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	Currencies          []string               `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	StartTime           *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime             *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page                *int32                 `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize            *int32                 `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to TimeRange:
+	//
+	//	*ListWithdrawVtgDetailsRequest_Day
+	//	*ListWithdrawVtgDetailsRequest_Week
+	//	*ListWithdrawVtgDetailsRequest_Month
+	TimeRange           isListWithdrawVtgDetailsRequest_TimeRange `protobuf_oneof:"time_range"`
+	RetailerOperatorIds []int64                                   `protobuf:"varint,4,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
+	GroupOperatorIds    []int64                                   `protobuf:"varint,5,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
+	OperatorIds         []int64                                   `protobuf:"varint,6,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
+	Currencies          []string                                  `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Page                *int32                                    `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize            *int32                                    `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ListWithdrawVtgDetailsRequest) Reset() {
 	*x = ListWithdrawVtgDetailsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2136,7 +2463,7 @@ func (x *ListWithdrawVtgDetailsRequest) String() string {
 func (*ListWithdrawVtgDetailsRequest) ProtoMessage() {}
 
 func (x *ListWithdrawVtgDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2149,14 +2476,41 @@ func (x *ListWithdrawVtgDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListWithdrawVtgDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListWithdrawVtgDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{22}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{26}
 }
 
-func (x *ListWithdrawVtgDetailsRequest) GetTimeRange() TimePeriod {
+func (x *ListWithdrawVtgDetailsRequest) GetTimeRange() isListWithdrawVtgDetailsRequest_TimeRange {
 	if x != nil {
 		return x.TimeRange
 	}
-	return TimePeriod_TIME_RANGE_UNSPECIFIED
+	return nil
+}
+
+func (x *ListWithdrawVtgDetailsRequest) GetDay() *TimeRangeDay {
+	if x != nil {
+		if x, ok := x.TimeRange.(*ListWithdrawVtgDetailsRequest_Day); ok {
+			return x.Day
+		}
+	}
+	return nil
+}
+
+func (x *ListWithdrawVtgDetailsRequest) GetWeek() *TimeRangeWeek {
+	if x != nil {
+		if x, ok := x.TimeRange.(*ListWithdrawVtgDetailsRequest_Week); ok {
+			return x.Week
+		}
+	}
+	return nil
+}
+
+func (x *ListWithdrawVtgDetailsRequest) GetMonth() *TimeRangeMonth {
+	if x != nil {
+		if x, ok := x.TimeRange.(*ListWithdrawVtgDetailsRequest_Month); ok {
+			return x.Month
+		}
+	}
+	return nil
 }
 
 func (x *ListWithdrawVtgDetailsRequest) GetRetailerOperatorIds() []int64 {
@@ -2187,20 +2541,6 @@ func (x *ListWithdrawVtgDetailsRequest) GetCurrencies() []string {
 	return nil
 }
 
-func (x *ListWithdrawVtgDetailsRequest) GetStartTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.StartTime
-	}
-	return nil
-}
-
-func (x *ListWithdrawVtgDetailsRequest) GetEndTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.EndTime
-	}
-	return nil
-}
-
 func (x *ListWithdrawVtgDetailsRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
@@ -2215,19 +2555,41 @@ func (x *ListWithdrawVtgDetailsRequest) GetPageSize() int32 {
 	return 0
 }
 
+type isListWithdrawVtgDetailsRequest_TimeRange interface {
+	isListWithdrawVtgDetailsRequest_TimeRange()
+}
+
+type ListWithdrawVtgDetailsRequest_Day struct {
+	Day *TimeRangeDay `protobuf:"bytes,1,opt,name=day,proto3,oneof"`
+}
+
+type ListWithdrawVtgDetailsRequest_Week struct {
+	Week *TimeRangeWeek `protobuf:"bytes,2,opt,name=week,proto3,oneof"`
+}
+
+type ListWithdrawVtgDetailsRequest_Month struct {
+	Month *TimeRangeMonth `protobuf:"bytes,3,opt,name=month,proto3,oneof"`
+}
+
+func (*ListWithdrawVtgDetailsRequest_Day) isListWithdrawVtgDetailsRequest_TimeRange() {}
+
+func (*ListWithdrawVtgDetailsRequest_Week) isListWithdrawVtgDetailsRequest_TimeRange() {}
+
+func (*ListWithdrawVtgDetailsRequest_Month) isListWithdrawVtgDetailsRequest_TimeRange() {}
+
 type ListWithdrawVtgDetailsResponse struct {
-	state         protoimpl.MessageState                        `protogen:"open.v1"`
-	DailyDetails  []*ListWithdrawVtgDetailsResponse_DailyDetail `protobuf:"bytes,1,rep,name=daily_details,json=dailyDetails,proto3" json:"daily_details,omitempty"`
-	Page          int32                                         `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total         int32                                         `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	state         protoimpl.MessageState                   `protogen:"open.v1"`
+	DailyDetails  []*ListWithdrawVtgDetailsResponse_Detail `protobuf:"bytes,1,rep,name=daily_details,json=dailyDetails,proto3" json:"daily_details,omitempty"`
+	Page          int32                                    `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                                    `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                                    `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListWithdrawVtgDetailsResponse) Reset() {
 	*x = ListWithdrawVtgDetailsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[23]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2239,7 +2601,7 @@ func (x *ListWithdrawVtgDetailsResponse) String() string {
 func (*ListWithdrawVtgDetailsResponse) ProtoMessage() {}
 
 func (x *ListWithdrawVtgDetailsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[23]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2252,10 +2614,10 @@ func (x *ListWithdrawVtgDetailsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListWithdrawVtgDetailsResponse.ProtoReflect.Descriptor instead.
 func (*ListWithdrawVtgDetailsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{23}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *ListWithdrawVtgDetailsResponse) GetDailyDetails() []*ListWithdrawVtgDetailsResponse_DailyDetail {
+func (x *ListWithdrawVtgDetailsResponse) GetDailyDetails() []*ListWithdrawVtgDetailsResponse_Detail {
 	if x != nil {
 		return x.DailyDetails
 	}
@@ -2279,6 +2641,194 @@ func (x *ListWithdrawVtgDetailsResponse) GetPageSize() int32 {
 func (x *ListWithdrawVtgDetailsResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
+	}
+	return 0
+}
+
+type TimeRange_Day struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StartDate     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
+	EndDate       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeRange_Day) Reset() {
+	*x = TimeRange_Day{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeRange_Day) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeRange_Day) ProtoMessage() {}
+
+func (x *TimeRange_Day) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeRange_Day.ProtoReflect.Descriptor instead.
+func (*TimeRange_Day) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *TimeRange_Day) GetStartDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartDate
+	}
+	return nil
+}
+
+func (x *TimeRange_Day) GetEndDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndDate
+	}
+	return nil
+}
+
+type TimeRange_Week struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StartYear     int32                  `protobuf:"varint,1,opt,name=start_year,json=startYear,proto3" json:"start_year,omitempty"`
+	StartWeek     int32                  `protobuf:"varint,2,opt,name=start_week,json=startWeek,proto3" json:"start_week,omitempty"`
+	EndYear       int32                  `protobuf:"varint,3,opt,name=end_year,json=endYear,proto3" json:"end_year,omitempty"`
+	EndWeek       int32                  `protobuf:"varint,4,opt,name=end_week,json=endWeek,proto3" json:"end_week,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeRange_Week) Reset() {
+	*x = TimeRange_Week{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeRange_Week) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeRange_Week) ProtoMessage() {}
+
+func (x *TimeRange_Week) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeRange_Week.ProtoReflect.Descriptor instead.
+func (*TimeRange_Week) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{0, 1}
+}
+
+func (x *TimeRange_Week) GetStartYear() int32 {
+	if x != nil {
+		return x.StartYear
+	}
+	return 0
+}
+
+func (x *TimeRange_Week) GetStartWeek() int32 {
+	if x != nil {
+		return x.StartWeek
+	}
+	return 0
+}
+
+func (x *TimeRange_Week) GetEndYear() int32 {
+	if x != nil {
+		return x.EndYear
+	}
+	return 0
+}
+
+func (x *TimeRange_Week) GetEndWeek() int32 {
+	if x != nil {
+		return x.EndWeek
+	}
+	return 0
+}
+
+type TimeRange_Month struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StartYear     int32                  `protobuf:"varint,1,opt,name=start_year,json=startYear,proto3" json:"start_year,omitempty"`
+	StartMonth    int32                  `protobuf:"varint,2,opt,name=start_month,json=startMonth,proto3" json:"start_month,omitempty"`
+	EndYear       int32                  `protobuf:"varint,3,opt,name=end_year,json=endYear,proto3" json:"end_year,omitempty"`
+	EndMonth      int32                  `protobuf:"varint,4,opt,name=end_month,json=endMonth,proto3" json:"end_month,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeRange_Month) Reset() {
+	*x = TimeRange_Month{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeRange_Month) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeRange_Month) ProtoMessage() {}
+
+func (x *TimeRange_Month) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeRange_Month.ProtoReflect.Descriptor instead.
+func (*TimeRange_Month) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{0, 2}
+}
+
+func (x *TimeRange_Month) GetStartYear() int32 {
+	if x != nil {
+		return x.StartYear
+	}
+	return 0
+}
+
+func (x *TimeRange_Month) GetStartMonth() int32 {
+	if x != nil {
+		return x.StartMonth
+	}
+	return 0
+}
+
+func (x *TimeRange_Month) GetEndYear() int32 {
+	if x != nil {
+		return x.EndYear
+	}
+	return 0
+}
+
+func (x *TimeRange_Month) GetEndMonth() int32 {
+	if x != nil {
+		return x.EndMonth
 	}
 	return 0
 }
@@ -2334,7 +2884,7 @@ type ListDailySummariesResponse_DailySummary struct {
 
 func (x *ListDailySummariesResponse_DailySummary) Reset() {
 	*x = ListDailySummariesResponse_DailySummary{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2346,7 +2896,7 @@ func (x *ListDailySummariesResponse_DailySummary) String() string {
 func (*ListDailySummariesResponse_DailySummary) ProtoMessage() {}
 
 func (x *ListDailySummariesResponse_DailySummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2359,7 +2909,7 @@ func (x *ListDailySummariesResponse_DailySummary) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use ListDailySummariesResponse_DailySummary.ProtoReflect.Descriptor instead.
 func (*ListDailySummariesResponse_DailySummary) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{3, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{7, 0}
 }
 
 func (x *ListDailySummariesResponse_DailySummary) GetDate() *timestamppb.Timestamp {
@@ -2686,7 +3236,7 @@ type ListGameDataDailySummariesResponse_DailySummary struct {
 
 func (x *ListGameDataDailySummariesResponse_DailySummary) Reset() {
 	*x = ListGameDataDailySummariesResponse_DailySummary{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2698,7 +3248,7 @@ func (x *ListGameDataDailySummariesResponse_DailySummary) String() string {
 func (*ListGameDataDailySummariesResponse_DailySummary) ProtoMessage() {}
 
 func (x *ListGameDataDailySummariesResponse_DailySummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2711,7 +3261,7 @@ func (x *ListGameDataDailySummariesResponse_DailySummary) ProtoReflect() protore
 
 // Deprecated: Use ListGameDataDailySummariesResponse_DailySummary.ProtoReflect.Descriptor instead.
 func (*ListGameDataDailySummariesResponse_DailySummary) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{7, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{11, 0}
 }
 
 func (x *ListGameDataDailySummariesResponse_DailySummary) GetDate() *timestamppb.Timestamp {
@@ -2839,7 +3389,7 @@ type GetPlayerGameDataDailySummariesResponse_DailySummary struct {
 
 func (x *GetPlayerGameDataDailySummariesResponse_DailySummary) Reset() {
 	*x = GetPlayerGameDataDailySummariesResponse_DailySummary{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2851,7 +3401,7 @@ func (x *GetPlayerGameDataDailySummariesResponse_DailySummary) String() string {
 func (*GetPlayerGameDataDailySummariesResponse_DailySummary) ProtoMessage() {}
 
 func (x *GetPlayerGameDataDailySummariesResponse_DailySummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2864,7 +3414,7 @@ func (x *GetPlayerGameDataDailySummariesResponse_DailySummary) ProtoReflect() pr
 
 // Deprecated: Use GetPlayerGameDataDailySummariesResponse_DailySummary.ProtoReflect.Descriptor instead.
 func (*GetPlayerGameDataDailySummariesResponse_DailySummary) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{11, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{15, 0}
 }
 
 func (x *GetPlayerGameDataDailySummariesResponse_DailySummary) GetDate() *timestamppb.Timestamp {
@@ -2963,7 +3513,7 @@ type GetDepositSummariesResponse_DailySummary struct {
 
 func (x *GetDepositSummariesResponse_DailySummary) Reset() {
 	*x = GetDepositSummariesResponse_DailySummary{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2975,7 +3525,7 @@ func (x *GetDepositSummariesResponse_DailySummary) String() string {
 func (*GetDepositSummariesResponse_DailySummary) ProtoMessage() {}
 
 func (x *GetDepositSummariesResponse_DailySummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2988,7 +3538,7 @@ func (x *GetDepositSummariesResponse_DailySummary) ProtoReflect() protoreflect.M
 
 // Deprecated: Use GetDepositSummariesResponse_DailySummary.ProtoReflect.Descriptor instead.
 func (*GetDepositSummariesResponse_DailySummary) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{13, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{17, 0}
 }
 
 func (x *GetDepositSummariesResponse_DailySummary) GetDate() *timestamppb.Timestamp {
@@ -3044,7 +3594,7 @@ type ListDepositDetailsResponse_DailyDetail struct {
 
 func (x *ListDepositDetailsResponse_DailyDetail) Reset() {
 	*x = ListDepositDetailsResponse_DailyDetail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3056,7 +3606,7 @@ func (x *ListDepositDetailsResponse_DailyDetail) String() string {
 func (*ListDepositDetailsResponse_DailyDetail) ProtoMessage() {}
 
 func (x *ListDepositDetailsResponse_DailyDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3069,7 +3619,7 @@ func (x *ListDepositDetailsResponse_DailyDetail) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ListDepositDetailsResponse_DailyDetail.ProtoReflect.Descriptor instead.
 func (*ListDepositDetailsResponse_DailyDetail) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{15, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{19, 0}
 }
 
 func (x *ListDepositDetailsResponse_DailyDetail) GetDate() *timestamppb.Timestamp {
@@ -3203,7 +3753,7 @@ type GetWithdrawSummariesResponse_DailySummary struct {
 
 func (x *GetWithdrawSummariesResponse_DailySummary) Reset() {
 	*x = GetWithdrawSummariesResponse_DailySummary{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3215,7 +3765,7 @@ func (x *GetWithdrawSummariesResponse_DailySummary) String() string {
 func (*GetWithdrawSummariesResponse_DailySummary) ProtoMessage() {}
 
 func (x *GetWithdrawSummariesResponse_DailySummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3228,7 +3778,7 @@ func (x *GetWithdrawSummariesResponse_DailySummary) ProtoReflect() protoreflect.
 
 // Deprecated: Use GetWithdrawSummariesResponse_DailySummary.ProtoReflect.Descriptor instead.
 func (*GetWithdrawSummariesResponse_DailySummary) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{17, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{21, 0}
 }
 
 func (x *GetWithdrawSummariesResponse_DailySummary) GetDate() *timestamppb.Timestamp {
@@ -3285,7 +3835,7 @@ type ListWithdrawDetailsResponse_DailyDetail struct {
 
 func (x *ListWithdrawDetailsResponse_DailyDetail) Reset() {
 	*x = ListWithdrawDetailsResponse_DailyDetail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3297,7 +3847,7 @@ func (x *ListWithdrawDetailsResponse_DailyDetail) String() string {
 func (*ListWithdrawDetailsResponse_DailyDetail) ProtoMessage() {}
 
 func (x *ListWithdrawDetailsResponse_DailyDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3310,7 +3860,7 @@ func (x *ListWithdrawDetailsResponse_DailyDetail) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use ListWithdrawDetailsResponse_DailyDetail.ProtoReflect.Descriptor instead.
 func (*ListWithdrawDetailsResponse_DailyDetail) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{19, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{23, 0}
 }
 
 func (x *ListWithdrawDetailsResponse_DailyDetail) GetDate() *timestamppb.Timestamp {
@@ -3439,44 +3989,44 @@ func (x *ListWithdrawDetailsResponse_DailyDetail) GetAmountProportionPercentage(
 	return 0
 }
 
-type ListDepositVtgDetailsResponse_DailyDetail struct {
+type ListDepositVtgDetailsResponse_Detail struct {
 	state                                       protoimpl.MessageState `protogen:"open.v1"`
-	Date                                        *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Operator                                    string                 `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
-	Currency                                    string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	DepositAmount                               string                 `protobuf:"bytes,4,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
-	DepositUsers                                int32                  `protobuf:"varint,5,opt,name=deposit_users,json=depositUsers,proto3" json:"deposit_users,omitempty"`
-	FtdAmount                                   string                 `protobuf:"bytes,6,opt,name=ftd_amount,json=ftdAmount,proto3" json:"ftd_amount,omitempty"`
-	FtdUsers                                    int32                  `protobuf:"varint,7,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
-	SameDayFtdAmount                            string                 `protobuf:"bytes,8,opt,name=same_day_ftd_amount,json=sameDayFtdAmount,proto3" json:"same_day_ftd_amount,omitempty"`
-	SameDayFtdUsers                             int32                  `protobuf:"varint,9,opt,name=same_day_ftd_users,json=sameDayFtdUsers,proto3" json:"same_day_ftd_users,omitempty"`
-	RepeatedDepositAmount                       string                 `protobuf:"bytes,10,opt,name=repeated_deposit_amount,json=repeatedDepositAmount,proto3" json:"repeated_deposit_amount,omitempty"`
-	RepeatedDepositUsers                        int32                  `protobuf:"varint,11,opt,name=repeated_deposit_users,json=repeatedDepositUsers,proto3" json:"repeated_deposit_users,omitempty"`
-	SameDayFtd                                  string                 `protobuf:"bytes,12,opt,name=same_day_ftd,json=sameDayFtd,proto3" json:"same_day_ftd,omitempty"`
-	NonSameDayFtd                               string                 `protobuf:"bytes,13,opt,name=non_same_day_ftd,json=nonSameDayFtd,proto3" json:"non_same_day_ftd,omitempty"`
-	AverageFtdAmountForSameDayRegistredUsers    string                 `protobuf:"bytes,14,opt,name=average_ftd_amount_for_same_day_registred_users,json=averageFtdAmountForSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_same_day_registred_users,omitempty"`
-	AverageFtdAmountForNonSameDayRegistredUsers string                 `protobuf:"bytes,15,opt,name=average_ftd_amount_for_non_same_day_registred_users,json=averageFtdAmountForNonSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_non_same_day_registred_users,omitempty"`
-	SuccessPercentage                           int32                  `protobuf:"varint,16,opt,name=success_percentage,json=successPercentage,proto3" json:"success_percentage,omitempty"`
-	AmountProportionPercentage                  int32                  `protobuf:"varint,17,opt,name=amount_proportion_percentage,json=amountProportionPercentage,proto3" json:"amount_proportion_percentage,omitempty"`
+	Date                                        string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Week                                        string                 `protobuf:"bytes,2,opt,name=week,proto3" json:"week,omitempty"`
+	Month                                       string                 `protobuf:"bytes,3,opt,name=month,proto3" json:"month,omitempty"`
+	Operator                                    string                 `protobuf:"bytes,4,opt,name=operator,proto3" json:"operator,omitempty"`
+	Currency                                    string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	DepositAmount                               string                 `protobuf:"bytes,6,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
+	DepositUsers                                int32                  `protobuf:"varint,7,opt,name=deposit_users,json=depositUsers,proto3" json:"deposit_users,omitempty"`
+	FtdAmount                                   string                 `protobuf:"bytes,8,opt,name=ftd_amount,json=ftdAmount,proto3" json:"ftd_amount,omitempty"`
+	FtdUsers                                    int32                  `protobuf:"varint,9,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
+	SameDayFtdAmount                            string                 `protobuf:"bytes,10,opt,name=same_day_ftd_amount,json=sameDayFtdAmount,proto3" json:"same_day_ftd_amount,omitempty"`
+	SameDayFtdUsers                             int32                  `protobuf:"varint,11,opt,name=same_day_ftd_users,json=sameDayFtdUsers,proto3" json:"same_day_ftd_users,omitempty"`
+	RepeatedDepositAmount                       string                 `protobuf:"bytes,12,opt,name=repeated_deposit_amount,json=repeatedDepositAmount,proto3" json:"repeated_deposit_amount,omitempty"`
+	RepeatedDepositUsers                        int32                  `protobuf:"varint,13,opt,name=repeated_deposit_users,json=repeatedDepositUsers,proto3" json:"repeated_deposit_users,omitempty"`
+	SameDayFtd                                  string                 `protobuf:"bytes,14,opt,name=same_day_ftd,json=sameDayFtd,proto3" json:"same_day_ftd,omitempty"`
+	NonSameDayFtd                               string                 `protobuf:"bytes,15,opt,name=non_same_day_ftd,json=nonSameDayFtd,proto3" json:"non_same_day_ftd,omitempty"`
+	AverageFtdAmountForSameDayRegistredUsers    string                 `protobuf:"bytes,16,opt,name=average_ftd_amount_for_same_day_registred_users,json=averageFtdAmountForSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_same_day_registred_users,omitempty"`
+	AverageFtdAmountForNonSameDayRegistredUsers string                 `protobuf:"bytes,17,opt,name=average_ftd_amount_for_non_same_day_registred_users,json=averageFtdAmountForNonSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_non_same_day_registred_users,omitempty"`
 	unknownFields                               protoimpl.UnknownFields
 	sizeCache                                   protoimpl.SizeCache
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) Reset() {
-	*x = ListDepositVtgDetailsResponse_DailyDetail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
+func (x *ListDepositVtgDetailsResponse_Detail) Reset() {
+	*x = ListDepositVtgDetailsResponse_Detail{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) String() string {
+func (x *ListDepositVtgDetailsResponse_Detail) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListDepositVtgDetailsResponse_DailyDetail) ProtoMessage() {}
+func (*ListDepositVtgDetailsResponse_Detail) ProtoMessage() {}
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
+func (x *ListDepositVtgDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3487,133 +4037,133 @@ func (x *ListDepositVtgDetailsResponse_DailyDetail) ProtoReflect() protoreflect.
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListDepositVtgDetailsResponse_DailyDetail.ProtoReflect.Descriptor instead.
-func (*ListDepositVtgDetailsResponse_DailyDetail) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{21, 0}
+// Deprecated: Use ListDepositVtgDetailsResponse_Detail.ProtoReflect.Descriptor instead.
+func (*ListDepositVtgDetailsResponse_Detail) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{25, 0}
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetDate() *timestamppb.Timestamp {
+func (x *ListDepositVtgDetailsResponse_Detail) GetDate() string {
 	if x != nil {
 		return x.Date
 	}
-	return nil
+	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetOperator() string {
+func (x *ListDepositVtgDetailsResponse_Detail) GetWeek() string {
+	if x != nil {
+		return x.Week
+	}
+	return ""
+}
+
+func (x *ListDepositVtgDetailsResponse_Detail) GetMonth() string {
+	if x != nil {
+		return x.Month
+	}
+	return ""
+}
+
+func (x *ListDepositVtgDetailsResponse_Detail) GetOperator() string {
 	if x != nil {
 		return x.Operator
 	}
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetCurrency() string {
+func (x *ListDepositVtgDetailsResponse_Detail) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetDepositAmount() string {
+func (x *ListDepositVtgDetailsResponse_Detail) GetDepositAmount() string {
 	if x != nil {
 		return x.DepositAmount
 	}
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetDepositUsers() int32 {
+func (x *ListDepositVtgDetailsResponse_Detail) GetDepositUsers() int32 {
 	if x != nil {
 		return x.DepositUsers
 	}
 	return 0
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetFtdAmount() string {
+func (x *ListDepositVtgDetailsResponse_Detail) GetFtdAmount() string {
 	if x != nil {
 		return x.FtdAmount
 	}
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetFtdUsers() int32 {
+func (x *ListDepositVtgDetailsResponse_Detail) GetFtdUsers() int32 {
 	if x != nil {
 		return x.FtdUsers
 	}
 	return 0
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetSameDayFtdAmount() string {
+func (x *ListDepositVtgDetailsResponse_Detail) GetSameDayFtdAmount() string {
 	if x != nil {
 		return x.SameDayFtdAmount
 	}
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetSameDayFtdUsers() int32 {
+func (x *ListDepositVtgDetailsResponse_Detail) GetSameDayFtdUsers() int32 {
 	if x != nil {
 		return x.SameDayFtdUsers
 	}
 	return 0
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetRepeatedDepositAmount() string {
+func (x *ListDepositVtgDetailsResponse_Detail) GetRepeatedDepositAmount() string {
 	if x != nil {
 		return x.RepeatedDepositAmount
 	}
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetRepeatedDepositUsers() int32 {
+func (x *ListDepositVtgDetailsResponse_Detail) GetRepeatedDepositUsers() int32 {
 	if x != nil {
 		return x.RepeatedDepositUsers
 	}
 	return 0
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetSameDayFtd() string {
+func (x *ListDepositVtgDetailsResponse_Detail) GetSameDayFtd() string {
 	if x != nil {
 		return x.SameDayFtd
 	}
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetNonSameDayFtd() string {
+func (x *ListDepositVtgDetailsResponse_Detail) GetNonSameDayFtd() string {
 	if x != nil {
 		return x.NonSameDayFtd
 	}
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetAverageFtdAmountForSameDayRegistredUsers() string {
+func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountForSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtdAmountForSameDayRegistredUsers
 	}
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetAverageFtdAmountForNonSameDayRegistredUsers() string {
+func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountForNonSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtdAmountForNonSameDayRegistredUsers
 	}
 	return ""
 }
 
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetSuccessPercentage() int32 {
-	if x != nil {
-		return x.SuccessPercentage
-	}
-	return 0
-}
-
-func (x *ListDepositVtgDetailsResponse_DailyDetail) GetAmountProportionPercentage() int32 {
-	if x != nil {
-		return x.AmountProportionPercentage
-	}
-	return 0
-}
-
-type ListWithdrawVtgDetailsResponse_DailyDetail struct {
+type ListWithdrawVtgDetailsResponse_Detail struct {
 	state                                       protoimpl.MessageState `protogen:"open.v1"`
-	Date                                        *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Date                                        string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
 	Operator                                    string                 `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
 	Currency                                    string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	WithdrawAmount                              string                 `protobuf:"bytes,4,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
@@ -3628,28 +4178,26 @@ type ListWithdrawVtgDetailsResponse_DailyDetail struct {
 	NonSameDayFtw                               int64                  `protobuf:"varint,13,opt,name=non_same_day_ftw,json=nonSameDayFtw,proto3" json:"non_same_day_ftw,omitempty"`
 	AverageFtwAmountForSameDayRegistredUsers    string                 `protobuf:"bytes,14,opt,name=average_ftw_amount_for_same_day_registred_users,json=averageFtwAmountForSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_same_day_registred_users,omitempty"`
 	AverageFtwAmountForNonSameDayRegistredUsers string                 `protobuf:"bytes,15,opt,name=average_ftw_amount_for_non_same_day_registred_users,json=averageFtwAmountForNonSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_non_same_day_registred_users,omitempty"`
-	SuccessPercentage                           int32                  `protobuf:"varint,16,opt,name=success_percentage,json=successPercentage,proto3" json:"success_percentage,omitempty"`
-	DepositMinusWithdrawAmount                  string                 `protobuf:"bytes,17,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
-	AmountProportionPercentage                  int32                  `protobuf:"varint,18,opt,name=amount_proportion_percentage,json=amountProportionPercentage,proto3" json:"amount_proportion_percentage,omitempty"`
+	DepositMinusWithdrawAmount                  string                 `protobuf:"bytes,16,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
 	unknownFields                               protoimpl.UnknownFields
 	sizeCache                                   protoimpl.SizeCache
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) Reset() {
-	*x = ListWithdrawVtgDetailsResponse_DailyDetail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
+func (x *ListWithdrawVtgDetailsResponse_Detail) Reset() {
+	*x = ListWithdrawVtgDetailsResponse_Detail{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) String() string {
+func (x *ListWithdrawVtgDetailsResponse_Detail) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListWithdrawVtgDetailsResponse_DailyDetail) ProtoMessage() {}
+func (*ListWithdrawVtgDetailsResponse_Detail) ProtoMessage() {}
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
+func (x *ListWithdrawVtgDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3660,142 +4208,170 @@ func (x *ListWithdrawVtgDetailsResponse_DailyDetail) ProtoReflect() protoreflect
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListWithdrawVtgDetailsResponse_DailyDetail.ProtoReflect.Descriptor instead.
-func (*ListWithdrawVtgDetailsResponse_DailyDetail) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{23, 0}
+// Deprecated: Use ListWithdrawVtgDetailsResponse_Detail.ProtoReflect.Descriptor instead.
+func (*ListWithdrawVtgDetailsResponse_Detail) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{27, 0}
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetDate() *timestamppb.Timestamp {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetDate() string {
 	if x != nil {
 		return x.Date
 	}
-	return nil
+	return ""
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetOperator() string {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetOperator() string {
 	if x != nil {
 		return x.Operator
 	}
 	return ""
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetCurrency() string {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetWithdrawAmount() string {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetWithdrawAmount() string {
 	if x != nil {
 		return x.WithdrawAmount
 	}
 	return ""
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetWithdrawUsers() int32 {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetWithdrawUsers() int32 {
 	if x != nil {
 		return x.WithdrawUsers
 	}
 	return 0
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetFtwAmount() string {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetFtwAmount() string {
 	if x != nil {
 		return x.FtwAmount
 	}
 	return ""
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetFtwUsers() int32 {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetFtwUsers() int32 {
 	if x != nil {
 		return x.FtwUsers
 	}
 	return 0
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetSameDayFtwAmount() string {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetSameDayFtwAmount() string {
 	if x != nil {
 		return x.SameDayFtwAmount
 	}
 	return ""
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetSameDayFtwUsers() int32 {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetSameDayFtwUsers() int32 {
 	if x != nil {
 		return x.SameDayFtwUsers
 	}
 	return 0
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetRepeatedWithdrawAmount() string {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetRepeatedWithdrawAmount() string {
 	if x != nil {
 		return x.RepeatedWithdrawAmount
 	}
 	return ""
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetRepeatedWithdrawUsers() int32 {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetRepeatedWithdrawUsers() int32 {
 	if x != nil {
 		return x.RepeatedWithdrawUsers
 	}
 	return 0
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetSameDayFtw() int64 {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetSameDayFtw() int64 {
 	if x != nil {
 		return x.SameDayFtw
 	}
 	return 0
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetNonSameDayFtw() int64 {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetNonSameDayFtw() int64 {
 	if x != nil {
 		return x.NonSameDayFtw
 	}
 	return 0
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetAverageFtwAmountForSameDayRegistredUsers() string {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetAverageFtwAmountForSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtwAmountForSameDayRegistredUsers
 	}
 	return ""
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetAverageFtwAmountForNonSameDayRegistredUsers() string {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetAverageFtwAmountForNonSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtwAmountForNonSameDayRegistredUsers
 	}
 	return ""
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetSuccessPercentage() int32 {
-	if x != nil {
-		return x.SuccessPercentage
-	}
-	return 0
-}
-
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetDepositMinusWithdrawAmount() string {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetDepositMinusWithdrawAmount() string {
 	if x != nil {
 		return x.DepositMinusWithdrawAmount
 	}
 	return ""
 }
 
-func (x *ListWithdrawVtgDetailsResponse_DailyDetail) GetAmountProportionPercentage() int32 {
-	if x != nil {
-		return x.AmountProportionPercentage
-	}
-	return 0
-}
-
 var File_backoffice_service_v1_backoffice_report_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\n" +
-	"-backoffice/service/v1/backoffice_report.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfd\x03\n" +
+	"-backoffice/service/v1/backoffice_report.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd2\x04\n" +
+	"\tTimeRange\x12<\n" +
+	"\x03day\x18\x01 \x01(\v2(.api.backoffice.service.v1.TimeRange.DayH\x00R\x03day\x12?\n" +
+	"\x04week\x18\x02 \x01(\v2).api.backoffice.service.v1.TimeRange.WeekH\x00R\x04week\x12B\n" +
+	"\x05month\x18\x03 \x01(\v2*.api.backoffice.service.v1.TimeRange.MonthH\x00R\x05month\x1aw\n" +
+	"\x03Day\x129\n" +
+	"\n" +
+	"start_date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tstartDate\x125\n" +
+	"\bend_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\aendDate\x1az\n" +
+	"\x04Week\x12\x1d\n" +
+	"\n" +
+	"start_year\x18\x01 \x01(\x05R\tstartYear\x12\x1d\n" +
+	"\n" +
+	"start_week\x18\x02 \x01(\x05R\tstartWeek\x12\x19\n" +
+	"\bend_year\x18\x03 \x01(\x05R\aendYear\x12\x19\n" +
+	"\bend_week\x18\x04 \x01(\x05R\aendWeek\x1a\x7f\n" +
+	"\x05Month\x12\x1d\n" +
+	"\n" +
+	"start_year\x18\x01 \x01(\x05R\tstartYear\x12\x1f\n" +
+	"\vstart_month\x18\x02 \x01(\x05R\n" +
+	"startMonth\x12\x19\n" +
+	"\bend_year\x18\x03 \x01(\x05R\aendYear\x12\x1b\n" +
+	"\tend_month\x18\x04 \x01(\x05R\bendMonthB\f\n" +
+	"\n" +
+	"time_range\"\x80\x01\n" +
+	"\fTimeRangeDay\x129\n" +
+	"\n" +
+	"start_date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tstartDate\x125\n" +
+	"\bend_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\aendDate\"\x83\x01\n" +
+	"\rTimeRangeWeek\x12\x1d\n" +
+	"\n" +
+	"start_year\x18\x01 \x01(\x05R\tstartYear\x12\x1d\n" +
+	"\n" +
+	"start_week\x18\x02 \x01(\x05R\tstartWeek\x12\x19\n" +
+	"\bend_year\x18\x03 \x01(\x05R\aendYear\x12\x19\n" +
+	"\bend_week\x18\x04 \x01(\x05R\aendWeek\"\x88\x01\n" +
+	"\x0eTimeRangeMonth\x12\x1d\n" +
+	"\n" +
+	"start_year\x18\x01 \x01(\x05R\tstartYear\x12\x1f\n" +
+	"\vstart_month\x18\x02 \x01(\x05R\n" +
+	"startMonth\x12\x19\n" +
+	"\bend_year\x18\x03 \x01(\x05R\aendYear\x12\x1b\n" +
+	"\tend_month\x18\x04 \x01(\x05R\bendMonth\"\xfd\x03\n" +
 	"\x11GetSummaryRequest\x12D\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\x0e2%.api.backoffice.service.v1.TimePeriodR\ttimeRange\x122\n" +
@@ -4167,78 +4743,74 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"3average_ftw_amount_for_non_same_day_registred_users\x18\x0f \x01(\x05R+averageFtwAmountForNonSameDayRegistredUsers\x12-\n" +
 	"\x12success_percentage\x18\x10 \x01(\x05R\x11successPercentage\x12A\n" +
 	"\x1ddeposit_minus_withdraw_amount\x18\x11 \x01(\x03R\x1adepositMinusWithdrawAmount\x12@\n" +
-	"\x1camount_proportion_percentage\x18\x12 \x01(\x05R\x1aamountProportionPercentage\"\xf3\x03\n" +
-	"\x1cListDepositVtgDetailsRequest\x12D\n" +
+	"\x1camount_proportion_percentage\x18\x12 \x01(\x05R\x1aamountProportionPercentage\"\xe3\x03\n" +
+	"\x1cListDepositVtgDetailsRequest\x12;\n" +
+	"\x03day\x18\x01 \x01(\v2'.api.backoffice.service.v1.TimeRangeDayH\x00R\x03day\x12>\n" +
+	"\x04week\x18\x02 \x01(\v2(.api.backoffice.service.v1.TimeRangeWeekH\x00R\x04week\x12A\n" +
+	"\x05month\x18\x03 \x01(\v2).api.backoffice.service.v1.TimeRangeMonthH\x00R\x05month\x122\n" +
+	"\x15retailer_operator_ids\x18\x04 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
+	"\x12group_operator_ids\x18\x05 \x03(\x03R\x10groupOperatorIds\x12!\n" +
+	"\foperator_ids\x18\x06 \x03(\x03R\voperatorIds\x12\x1e\n" +
 	"\n" +
-	"time_range\x18\x01 \x01(\x0e2%.api.backoffice.service.v1.TimePeriodR\ttimeRange\x122\n" +
-	"\x15retailer_operator_ids\x18\x02 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
-	"\x12group_operator_ids\x18\x03 \x03(\x03R\x10groupOperatorIds\x12!\n" +
-	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12\x1e\n" +
+	"currencies\x18\a \x03(\tR\n" +
+	"currencies\x12\x17\n" +
+	"\x04page\x18\b \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\t \x01(\x05H\x02R\bpageSize\x88\x01\x01B\f\n" +
 	"\n" +
-	"currencies\x18\x05 \x03(\tR\n" +
-	"currencies\x12>\n" +
-	"\n" +
-	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\b \x01(\x05H\x02R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\t \x01(\x05H\x03R\bpageSize\x88\x01\x01B\r\n" +
-	"\v_start_timeB\v\n" +
-	"\t_end_timeB\a\n" +
+	"time_rangeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xa4\b\n" +
-	"\x1dListDepositVtgDetailsResponse\x12i\n" +
-	"\rdaily_details\x18\x01 \x03(\v2D.api.backoffice.service.v1.ListDepositVtgDetailsResponse.DailyDetailR\fdailyDetails\x12\x12\n" +
+	"_page_size\"\xb7\a\n" +
+	"\x1dListDepositVtgDetailsResponse\x12d\n" +
+	"\rdaily_details\x18\x01 \x03(\v2?.api.backoffice.service.v1.ListDepositVtgDetailsResponse.DetailR\fdailyDetails\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xd0\x06\n" +
-	"\vDailyDetail\x12.\n" +
-	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12\x1a\n" +
-	"\boperator\x18\x02 \x01(\tR\boperator\x12\x1a\n" +
-	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12%\n" +
-	"\x0edeposit_amount\x18\x04 \x01(\tR\rdepositAmount\x12#\n" +
-	"\rdeposit_users\x18\x05 \x01(\x05R\fdepositUsers\x12\x1d\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xe8\x05\n" +
+	"\x06Detail\x12\x12\n" +
+	"\x04date\x18\x01 \x01(\tR\x04date\x12\x12\n" +
+	"\x04week\x18\x02 \x01(\tR\x04week\x12\x14\n" +
+	"\x05month\x18\x03 \x01(\tR\x05month\x12\x1a\n" +
+	"\boperator\x18\x04 \x01(\tR\boperator\x12\x1a\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12%\n" +
+	"\x0edeposit_amount\x18\x06 \x01(\tR\rdepositAmount\x12#\n" +
+	"\rdeposit_users\x18\a \x01(\x05R\fdepositUsers\x12\x1d\n" +
 	"\n" +
-	"ftd_amount\x18\x06 \x01(\tR\tftdAmount\x12\x1b\n" +
-	"\tftd_users\x18\a \x01(\x05R\bftdUsers\x12-\n" +
-	"\x13same_day_ftd_amount\x18\b \x01(\tR\x10sameDayFtdAmount\x12+\n" +
-	"\x12same_day_ftd_users\x18\t \x01(\x05R\x0fsameDayFtdUsers\x126\n" +
-	"\x17repeated_deposit_amount\x18\n" +
-	" \x01(\tR\x15repeatedDepositAmount\x124\n" +
-	"\x16repeated_deposit_users\x18\v \x01(\x05R\x14repeatedDepositUsers\x12 \n" +
-	"\fsame_day_ftd\x18\f \x01(\tR\n" +
+	"ftd_amount\x18\b \x01(\tR\tftdAmount\x12\x1b\n" +
+	"\tftd_users\x18\t \x01(\x05R\bftdUsers\x12-\n" +
+	"\x13same_day_ftd_amount\x18\n" +
+	" \x01(\tR\x10sameDayFtdAmount\x12+\n" +
+	"\x12same_day_ftd_users\x18\v \x01(\x05R\x0fsameDayFtdUsers\x126\n" +
+	"\x17repeated_deposit_amount\x18\f \x01(\tR\x15repeatedDepositAmount\x124\n" +
+	"\x16repeated_deposit_users\x18\r \x01(\x05R\x14repeatedDepositUsers\x12 \n" +
+	"\fsame_day_ftd\x18\x0e \x01(\tR\n" +
 	"sameDayFtd\x12'\n" +
-	"\x10non_same_day_ftd\x18\r \x01(\tR\rnonSameDayFtd\x12a\n" +
-	"/average_ftd_amount_for_same_day_registred_users\x18\x0e \x01(\tR(averageFtdAmountForSameDayRegistredUsers\x12h\n" +
-	"3average_ftd_amount_for_non_same_day_registred_users\x18\x0f \x01(\tR+averageFtdAmountForNonSameDayRegistredUsers\x12-\n" +
-	"\x12success_percentage\x18\x10 \x01(\x05R\x11successPercentage\x12@\n" +
-	"\x1camount_proportion_percentage\x18\x11 \x01(\x05R\x1aamountProportionPercentage\"\xf4\x03\n" +
-	"\x1dListWithdrawVtgDetailsRequest\x12D\n" +
+	"\x10non_same_day_ftd\x18\x0f \x01(\tR\rnonSameDayFtd\x12a\n" +
+	"/average_ftd_amount_for_same_day_registred_users\x18\x10 \x01(\tR(averageFtdAmountForSameDayRegistredUsers\x12h\n" +
+	"3average_ftd_amount_for_non_same_day_registred_users\x18\x11 \x01(\tR+averageFtdAmountForNonSameDayRegistredUsers\"\xe4\x03\n" +
+	"\x1dListWithdrawVtgDetailsRequest\x12;\n" +
+	"\x03day\x18\x01 \x01(\v2'.api.backoffice.service.v1.TimeRangeDayH\x00R\x03day\x12>\n" +
+	"\x04week\x18\x02 \x01(\v2(.api.backoffice.service.v1.TimeRangeWeekH\x00R\x04week\x12A\n" +
+	"\x05month\x18\x03 \x01(\v2).api.backoffice.service.v1.TimeRangeMonthH\x00R\x05month\x122\n" +
+	"\x15retailer_operator_ids\x18\x04 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
+	"\x12group_operator_ids\x18\x05 \x03(\x03R\x10groupOperatorIds\x12!\n" +
+	"\foperator_ids\x18\x06 \x03(\x03R\voperatorIds\x12\x1e\n" +
 	"\n" +
-	"time_range\x18\x01 \x01(\x0e2%.api.backoffice.service.v1.TimePeriodR\ttimeRange\x122\n" +
-	"\x15retailer_operator_ids\x18\x02 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
-	"\x12group_operator_ids\x18\x03 \x03(\x03R\x10groupOperatorIds\x12!\n" +
-	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12\x1e\n" +
+	"currencies\x18\a \x03(\tR\n" +
+	"currencies\x12\x17\n" +
+	"\x04page\x18\b \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\t \x01(\x05H\x02R\bpageSize\x88\x01\x01B\f\n" +
 	"\n" +
-	"currencies\x18\x05 \x03(\tR\n" +
-	"currencies\x12>\n" +
-	"\n" +
-	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\b \x01(\x05H\x02R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\t \x01(\x05H\x03R\bpageSize\x88\x01\x01B\r\n" +
-	"\v_start_timeB\v\n" +
-	"\t_end_timeB\a\n" +
+	"time_rangeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf1\b\n" +
-	"\x1eListWithdrawVtgDetailsResponse\x12j\n" +
-	"\rdaily_details\x18\x01 \x03(\v2E.api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.DailyDetailR\fdailyDetails\x12\x12\n" +
+	"_page_size\"\xda\a\n" +
+	"\x1eListWithdrawVtgDetailsResponse\x12e\n" +
+	"\rdaily_details\x18\x01 \x03(\v2@.api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.DetailR\fdailyDetails\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x9b\a\n" +
-	"\vDailyDetail\x12.\n" +
-	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12\x1a\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x89\x06\n" +
+	"\x06Detail\x12\x12\n" +
+	"\x04date\x18\x01 \x01(\tR\x04date\x12\x1a\n" +
 	"\boperator\x18\x02 \x01(\tR\boperator\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12'\n" +
 	"\x0fwithdraw_amount\x18\x04 \x01(\tR\x0ewithdrawAmount\x12%\n" +
@@ -4255,10 +4827,8 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"sameDayFtw\x12'\n" +
 	"\x10non_same_day_ftw\x18\r \x01(\x03R\rnonSameDayFtw\x12a\n" +
 	"/average_ftw_amount_for_same_day_registred_users\x18\x0e \x01(\tR(averageFtwAmountForSameDayRegistredUsers\x12h\n" +
-	"3average_ftw_amount_for_non_same_day_registred_users\x18\x0f \x01(\tR+averageFtwAmountForNonSameDayRegistredUsers\x12-\n" +
-	"\x12success_percentage\x18\x10 \x01(\x05R\x11successPercentage\x12A\n" +
-	"\x1ddeposit_minus_withdraw_amount\x18\x11 \x01(\tR\x1adepositMinusWithdrawAmount\x12@\n" +
-	"\x1camount_proportion_percentage\x18\x12 \x01(\x05R\x1aamountProportionPercentage*i\n" +
+	"3average_ftw_amount_for_non_same_day_registred_users\x18\x0f \x01(\tR+averageFtwAmountForNonSameDayRegistredUsers\x12A\n" +
+	"\x1ddeposit_minus_withdraw_amount\x18\x10 \x01(\tR\x1adepositMinusWithdrawAmount*i\n" +
 	"\n" +
 	"TimePeriod\x12\x1a\n" +
 	"\x16TIME_RANGE_UNSPECIFIED\x10\x00\x12\x14\n" +
@@ -4293,126 +4863,138 @@ func file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP() []byte {
 }
 
 var file_backoffice_service_v1_backoffice_report_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_backoffice_service_v1_backoffice_report_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
+var file_backoffice_service_v1_backoffice_report_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_backoffice_service_v1_backoffice_report_proto_goTypes = []any{
 	(TimePeriod)(0),                                              // 0: api.backoffice.service.v1.TimePeriod
-	(*GetSummaryRequest)(nil),                                    // 1: api.backoffice.service.v1.GetSummaryRequest
-	(*GetSummaryResponse)(nil),                                   // 2: api.backoffice.service.v1.GetSummaryResponse
-	(*ListDailySummariesRequest)(nil),                            // 3: api.backoffice.service.v1.ListDailySummariesRequest
-	(*ListDailySummariesResponse)(nil),                           // 4: api.backoffice.service.v1.ListDailySummariesResponse
-	(*GetGameDataSummaryRequest)(nil),                            // 5: api.backoffice.service.v1.GetGameDataSummaryRequest
-	(*GetGameDataSummaryResponse)(nil),                           // 6: api.backoffice.service.v1.GetGameDataSummaryResponse
-	(*ListGameDataDailySummariesRequest)(nil),                    // 7: api.backoffice.service.v1.ListGameDataDailySummariesRequest
-	(*ListGameDataDailySummariesResponse)(nil),                   // 8: api.backoffice.service.v1.ListGameDataDailySummariesResponse
-	(*GetPlayerGameDataSummaryRequest)(nil),                      // 9: api.backoffice.service.v1.GetPlayerGameDataSummaryRequest
-	(*GetPlayerGameDataSummaryResponse)(nil),                     // 10: api.backoffice.service.v1.GetPlayerGameDataSummaryResponse
-	(*GetPlayerGameDataDailySummariesRequest)(nil),               // 11: api.backoffice.service.v1.GetPlayerGameDataDailySummariesRequest
-	(*GetPlayerGameDataDailySummariesResponse)(nil),              // 12: api.backoffice.service.v1.GetPlayerGameDataDailySummariesResponse
-	(*GetDepositSummariesRequest)(nil),                           // 13: api.backoffice.service.v1.GetDepositSummariesRequest
-	(*GetDepositSummariesResponse)(nil),                          // 14: api.backoffice.service.v1.GetDepositSummariesResponse
-	(*ListDepositDetailsRequest)(nil),                            // 15: api.backoffice.service.v1.ListDepositDetailsRequest
-	(*ListDepositDetailsResponse)(nil),                           // 16: api.backoffice.service.v1.ListDepositDetailsResponse
-	(*GetWithdrawSummariesRequest)(nil),                          // 17: api.backoffice.service.v1.GetWithdrawSummariesRequest
-	(*GetWithdrawSummariesResponse)(nil),                         // 18: api.backoffice.service.v1.GetWithdrawSummariesResponse
-	(*ListWithdrawDetailsRequest)(nil),                           // 19: api.backoffice.service.v1.ListWithdrawDetailsRequest
-	(*ListWithdrawDetailsResponse)(nil),                          // 20: api.backoffice.service.v1.ListWithdrawDetailsResponse
-	(*ListDepositVtgDetailsRequest)(nil),                         // 21: api.backoffice.service.v1.ListDepositVtgDetailsRequest
-	(*ListDepositVtgDetailsResponse)(nil),                        // 22: api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	(*ListWithdrawVtgDetailsRequest)(nil),                        // 23: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
-	(*ListWithdrawVtgDetailsResponse)(nil),                       // 24: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	(*ListDailySummariesResponse_DailySummary)(nil),              // 25: api.backoffice.service.v1.ListDailySummariesResponse.DailySummary
-	(*ListGameDataDailySummariesResponse_DailySummary)(nil),      // 26: api.backoffice.service.v1.ListGameDataDailySummariesResponse.DailySummary
-	(*GetPlayerGameDataDailySummariesResponse_DailySummary)(nil), // 27: api.backoffice.service.v1.GetPlayerGameDataDailySummariesResponse.DailySummary
-	(*GetDepositSummariesResponse_DailySummary)(nil),             // 28: api.backoffice.service.v1.GetDepositSummariesResponse.DailySummary
-	(*ListDepositDetailsResponse_DailyDetail)(nil),               // 29: api.backoffice.service.v1.ListDepositDetailsResponse.DailyDetail
-	(*GetWithdrawSummariesResponse_DailySummary)(nil),            // 30: api.backoffice.service.v1.GetWithdrawSummariesResponse.DailySummary
-	(*ListWithdrawDetailsResponse_DailyDetail)(nil),              // 31: api.backoffice.service.v1.ListWithdrawDetailsResponse.DailyDetail
-	(*ListDepositVtgDetailsResponse_DailyDetail)(nil),            // 32: api.backoffice.service.v1.ListDepositVtgDetailsResponse.DailyDetail
-	(*ListWithdrawVtgDetailsResponse_DailyDetail)(nil),           // 33: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.DailyDetail
-	(*timestamppb.Timestamp)(nil),                                // 34: google.protobuf.Timestamp
+	(*TimeRange)(nil),                                            // 1: api.backoffice.service.v1.TimeRange
+	(*TimeRangeDay)(nil),                                         // 2: api.backoffice.service.v1.TimeRangeDay
+	(*TimeRangeWeek)(nil),                                        // 3: api.backoffice.service.v1.TimeRangeWeek
+	(*TimeRangeMonth)(nil),                                       // 4: api.backoffice.service.v1.TimeRangeMonth
+	(*GetSummaryRequest)(nil),                                    // 5: api.backoffice.service.v1.GetSummaryRequest
+	(*GetSummaryResponse)(nil),                                   // 6: api.backoffice.service.v1.GetSummaryResponse
+	(*ListDailySummariesRequest)(nil),                            // 7: api.backoffice.service.v1.ListDailySummariesRequest
+	(*ListDailySummariesResponse)(nil),                           // 8: api.backoffice.service.v1.ListDailySummariesResponse
+	(*GetGameDataSummaryRequest)(nil),                            // 9: api.backoffice.service.v1.GetGameDataSummaryRequest
+	(*GetGameDataSummaryResponse)(nil),                           // 10: api.backoffice.service.v1.GetGameDataSummaryResponse
+	(*ListGameDataDailySummariesRequest)(nil),                    // 11: api.backoffice.service.v1.ListGameDataDailySummariesRequest
+	(*ListGameDataDailySummariesResponse)(nil),                   // 12: api.backoffice.service.v1.ListGameDataDailySummariesResponse
+	(*GetPlayerGameDataSummaryRequest)(nil),                      // 13: api.backoffice.service.v1.GetPlayerGameDataSummaryRequest
+	(*GetPlayerGameDataSummaryResponse)(nil),                     // 14: api.backoffice.service.v1.GetPlayerGameDataSummaryResponse
+	(*GetPlayerGameDataDailySummariesRequest)(nil),               // 15: api.backoffice.service.v1.GetPlayerGameDataDailySummariesRequest
+	(*GetPlayerGameDataDailySummariesResponse)(nil),              // 16: api.backoffice.service.v1.GetPlayerGameDataDailySummariesResponse
+	(*GetDepositSummariesRequest)(nil),                           // 17: api.backoffice.service.v1.GetDepositSummariesRequest
+	(*GetDepositSummariesResponse)(nil),                          // 18: api.backoffice.service.v1.GetDepositSummariesResponse
+	(*ListDepositDetailsRequest)(nil),                            // 19: api.backoffice.service.v1.ListDepositDetailsRequest
+	(*ListDepositDetailsResponse)(nil),                           // 20: api.backoffice.service.v1.ListDepositDetailsResponse
+	(*GetWithdrawSummariesRequest)(nil),                          // 21: api.backoffice.service.v1.GetWithdrawSummariesRequest
+	(*GetWithdrawSummariesResponse)(nil),                         // 22: api.backoffice.service.v1.GetWithdrawSummariesResponse
+	(*ListWithdrawDetailsRequest)(nil),                           // 23: api.backoffice.service.v1.ListWithdrawDetailsRequest
+	(*ListWithdrawDetailsResponse)(nil),                          // 24: api.backoffice.service.v1.ListWithdrawDetailsResponse
+	(*ListDepositVtgDetailsRequest)(nil),                         // 25: api.backoffice.service.v1.ListDepositVtgDetailsRequest
+	(*ListDepositVtgDetailsResponse)(nil),                        // 26: api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	(*ListWithdrawVtgDetailsRequest)(nil),                        // 27: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
+	(*ListWithdrawVtgDetailsResponse)(nil),                       // 28: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	(*TimeRange_Day)(nil),                                        // 29: api.backoffice.service.v1.TimeRange.Day
+	(*TimeRange_Week)(nil),                                       // 30: api.backoffice.service.v1.TimeRange.Week
+	(*TimeRange_Month)(nil),                                      // 31: api.backoffice.service.v1.TimeRange.Month
+	(*ListDailySummariesResponse_DailySummary)(nil),              // 32: api.backoffice.service.v1.ListDailySummariesResponse.DailySummary
+	(*ListGameDataDailySummariesResponse_DailySummary)(nil),      // 33: api.backoffice.service.v1.ListGameDataDailySummariesResponse.DailySummary
+	(*GetPlayerGameDataDailySummariesResponse_DailySummary)(nil), // 34: api.backoffice.service.v1.GetPlayerGameDataDailySummariesResponse.DailySummary
+	(*GetDepositSummariesResponse_DailySummary)(nil),             // 35: api.backoffice.service.v1.GetDepositSummariesResponse.DailySummary
+	(*ListDepositDetailsResponse_DailyDetail)(nil),               // 36: api.backoffice.service.v1.ListDepositDetailsResponse.DailyDetail
+	(*GetWithdrawSummariesResponse_DailySummary)(nil),            // 37: api.backoffice.service.v1.GetWithdrawSummariesResponse.DailySummary
+	(*ListWithdrawDetailsResponse_DailyDetail)(nil),              // 38: api.backoffice.service.v1.ListWithdrawDetailsResponse.DailyDetail
+	(*ListDepositVtgDetailsResponse_Detail)(nil),                 // 39: api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
+	(*ListWithdrawVtgDetailsResponse_Detail)(nil),                // 40: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
+	(*timestamppb.Timestamp)(nil),                                // 41: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_report_proto_depIdxs = []int32{
-	0,  // 0: api.backoffice.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
-	34, // 1: api.backoffice.service.v1.GetSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 2: api.backoffice.service.v1.GetSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
-	0,  // 3: api.backoffice.service.v1.ListDailySummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
-	34, // 4: api.backoffice.service.v1.ListDailySummariesRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 5: api.backoffice.service.v1.ListDailySummariesRequest.end_time:type_name -> google.protobuf.Timestamp
-	25, // 6: api.backoffice.service.v1.ListDailySummariesResponse.daily_summaries:type_name -> api.backoffice.service.v1.ListDailySummariesResponse.DailySummary
-	0,  // 7: api.backoffice.service.v1.GetGameDataSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
-	34, // 8: api.backoffice.service.v1.GetGameDataSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 9: api.backoffice.service.v1.GetGameDataSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
-	0,  // 10: api.backoffice.service.v1.ListGameDataDailySummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
-	34, // 11: api.backoffice.service.v1.ListGameDataDailySummariesRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 12: api.backoffice.service.v1.ListGameDataDailySummariesRequest.end_time:type_name -> google.protobuf.Timestamp
-	26, // 13: api.backoffice.service.v1.ListGameDataDailySummariesResponse.daily_summaries:type_name -> api.backoffice.service.v1.ListGameDataDailySummariesResponse.DailySummary
-	0,  // 14: api.backoffice.service.v1.GetPlayerGameDataSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
-	34, // 15: api.backoffice.service.v1.GetPlayerGameDataSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 16: api.backoffice.service.v1.GetPlayerGameDataSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
-	0,  // 17: api.backoffice.service.v1.GetPlayerGameDataDailySummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
-	34, // 18: api.backoffice.service.v1.GetPlayerGameDataDailySummariesRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 19: api.backoffice.service.v1.GetPlayerGameDataDailySummariesRequest.end_time:type_name -> google.protobuf.Timestamp
-	27, // 20: api.backoffice.service.v1.GetPlayerGameDataDailySummariesResponse.daily_summaries:type_name -> api.backoffice.service.v1.GetPlayerGameDataDailySummariesResponse.DailySummary
-	0,  // 21: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
-	34, // 22: api.backoffice.service.v1.GetDepositSummariesRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 23: api.backoffice.service.v1.GetDepositSummariesRequest.end_time:type_name -> google.protobuf.Timestamp
-	28, // 24: api.backoffice.service.v1.GetDepositSummariesResponse.daily_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DailySummary
-	0,  // 25: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
-	34, // 26: api.backoffice.service.v1.ListDepositDetailsRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 27: api.backoffice.service.v1.ListDepositDetailsRequest.end_time:type_name -> google.protobuf.Timestamp
-	29, // 28: api.backoffice.service.v1.ListDepositDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.DailyDetail
-	0,  // 29: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
-	34, // 30: api.backoffice.service.v1.GetWithdrawSummariesRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 31: api.backoffice.service.v1.GetWithdrawSummariesRequest.end_time:type_name -> google.protobuf.Timestamp
-	30, // 32: api.backoffice.service.v1.GetWithdrawSummariesResponse.daily_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.DailySummary
-	0,  // 33: api.backoffice.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
-	34, // 34: api.backoffice.service.v1.ListWithdrawDetailsRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 35: api.backoffice.service.v1.ListWithdrawDetailsRequest.end_time:type_name -> google.protobuf.Timestamp
-	31, // 36: api.backoffice.service.v1.ListWithdrawDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.DailyDetail
-	0,  // 37: api.backoffice.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
-	34, // 38: api.backoffice.service.v1.ListDepositVtgDetailsRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 39: api.backoffice.service.v1.ListDepositVtgDetailsRequest.end_time:type_name -> google.protobuf.Timestamp
-	32, // 40: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.DailyDetail
-	0,  // 41: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
-	34, // 42: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 43: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.end_time:type_name -> google.protobuf.Timestamp
-	33, // 44: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.DailyDetail
-	34, // 45: api.backoffice.service.v1.ListDailySummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
-	34, // 46: api.backoffice.service.v1.ListGameDataDailySummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
-	34, // 47: api.backoffice.service.v1.GetPlayerGameDataDailySummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
-	34, // 48: api.backoffice.service.v1.GetDepositSummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
-	34, // 49: api.backoffice.service.v1.ListDepositDetailsResponse.DailyDetail.date:type_name -> google.protobuf.Timestamp
-	34, // 50: api.backoffice.service.v1.GetWithdrawSummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
-	34, // 51: api.backoffice.service.v1.ListWithdrawDetailsResponse.DailyDetail.date:type_name -> google.protobuf.Timestamp
-	34, // 52: api.backoffice.service.v1.ListDepositVtgDetailsResponse.DailyDetail.date:type_name -> google.protobuf.Timestamp
-	34, // 53: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.DailyDetail.date:type_name -> google.protobuf.Timestamp
-	1,  // 54: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
-	3,  // 55: api.backoffice.service.v1.BackofficeReport.ListDailySummaries:input_type -> api.backoffice.service.v1.ListDailySummariesRequest
-	5,  // 56: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameDataSummaryRequest
-	7,  // 57: api.backoffice.service.v1.BackofficeReport.ListGameDataDailySummaries:input_type -> api.backoffice.service.v1.ListGameDataDailySummariesRequest
-	9,  // 58: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameDataSummaryRequest
-	13, // 59: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
-	15, // 60: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
-	17, // 61: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
-	19, // 62: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
-	21, // 63: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
-	23, // 64: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
-	2,  // 65: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	4,  // 66: api.backoffice.service.v1.BackofficeReport.ListDailySummaries:output_type -> api.backoffice.service.v1.ListDailySummariesResponse
-	6,  // 67: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameDataSummaryResponse
-	8,  // 68: api.backoffice.service.v1.BackofficeReport.ListGameDataDailySummaries:output_type -> api.backoffice.service.v1.ListGameDataDailySummariesResponse
-	10, // 69: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameDataSummaryResponse
-	14, // 70: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
-	16, // 71: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
-	18, // 72: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
-	20, // 73: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
-	22, // 74: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	24, // 75: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	65, // [65:76] is the sub-list for method output_type
-	54, // [54:65] is the sub-list for method input_type
-	54, // [54:54] is the sub-list for extension type_name
-	54, // [54:54] is the sub-list for extension extendee
-	0,  // [0:54] is the sub-list for field type_name
+	29, // 0: api.backoffice.service.v1.TimeRange.day:type_name -> api.backoffice.service.v1.TimeRange.Day
+	30, // 1: api.backoffice.service.v1.TimeRange.week:type_name -> api.backoffice.service.v1.TimeRange.Week
+	31, // 2: api.backoffice.service.v1.TimeRange.month:type_name -> api.backoffice.service.v1.TimeRange.Month
+	41, // 3: api.backoffice.service.v1.TimeRangeDay.start_date:type_name -> google.protobuf.Timestamp
+	41, // 4: api.backoffice.service.v1.TimeRangeDay.end_date:type_name -> google.protobuf.Timestamp
+	0,  // 5: api.backoffice.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
+	41, // 6: api.backoffice.service.v1.GetSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
+	41, // 7: api.backoffice.service.v1.GetSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
+	0,  // 8: api.backoffice.service.v1.ListDailySummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
+	41, // 9: api.backoffice.service.v1.ListDailySummariesRequest.start_time:type_name -> google.protobuf.Timestamp
+	41, // 10: api.backoffice.service.v1.ListDailySummariesRequest.end_time:type_name -> google.protobuf.Timestamp
+	32, // 11: api.backoffice.service.v1.ListDailySummariesResponse.daily_summaries:type_name -> api.backoffice.service.v1.ListDailySummariesResponse.DailySummary
+	0,  // 12: api.backoffice.service.v1.GetGameDataSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
+	41, // 13: api.backoffice.service.v1.GetGameDataSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
+	41, // 14: api.backoffice.service.v1.GetGameDataSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
+	0,  // 15: api.backoffice.service.v1.ListGameDataDailySummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
+	41, // 16: api.backoffice.service.v1.ListGameDataDailySummariesRequest.start_time:type_name -> google.protobuf.Timestamp
+	41, // 17: api.backoffice.service.v1.ListGameDataDailySummariesRequest.end_time:type_name -> google.protobuf.Timestamp
+	33, // 18: api.backoffice.service.v1.ListGameDataDailySummariesResponse.daily_summaries:type_name -> api.backoffice.service.v1.ListGameDataDailySummariesResponse.DailySummary
+	0,  // 19: api.backoffice.service.v1.GetPlayerGameDataSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
+	41, // 20: api.backoffice.service.v1.GetPlayerGameDataSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
+	41, // 21: api.backoffice.service.v1.GetPlayerGameDataSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
+	0,  // 22: api.backoffice.service.v1.GetPlayerGameDataDailySummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
+	41, // 23: api.backoffice.service.v1.GetPlayerGameDataDailySummariesRequest.start_time:type_name -> google.protobuf.Timestamp
+	41, // 24: api.backoffice.service.v1.GetPlayerGameDataDailySummariesRequest.end_time:type_name -> google.protobuf.Timestamp
+	34, // 25: api.backoffice.service.v1.GetPlayerGameDataDailySummariesResponse.daily_summaries:type_name -> api.backoffice.service.v1.GetPlayerGameDataDailySummariesResponse.DailySummary
+	0,  // 26: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
+	41, // 27: api.backoffice.service.v1.GetDepositSummariesRequest.start_time:type_name -> google.protobuf.Timestamp
+	41, // 28: api.backoffice.service.v1.GetDepositSummariesRequest.end_time:type_name -> google.protobuf.Timestamp
+	35, // 29: api.backoffice.service.v1.GetDepositSummariesResponse.daily_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DailySummary
+	0,  // 30: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
+	41, // 31: api.backoffice.service.v1.ListDepositDetailsRequest.start_time:type_name -> google.protobuf.Timestamp
+	41, // 32: api.backoffice.service.v1.ListDepositDetailsRequest.end_time:type_name -> google.protobuf.Timestamp
+	36, // 33: api.backoffice.service.v1.ListDepositDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.DailyDetail
+	0,  // 34: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
+	41, // 35: api.backoffice.service.v1.GetWithdrawSummariesRequest.start_time:type_name -> google.protobuf.Timestamp
+	41, // 36: api.backoffice.service.v1.GetWithdrawSummariesRequest.end_time:type_name -> google.protobuf.Timestamp
+	37, // 37: api.backoffice.service.v1.GetWithdrawSummariesResponse.daily_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.DailySummary
+	0,  // 38: api.backoffice.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimePeriod
+	41, // 39: api.backoffice.service.v1.ListWithdrawDetailsRequest.start_time:type_name -> google.protobuf.Timestamp
+	41, // 40: api.backoffice.service.v1.ListWithdrawDetailsRequest.end_time:type_name -> google.protobuf.Timestamp
+	38, // 41: api.backoffice.service.v1.ListWithdrawDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.DailyDetail
+	2,  // 42: api.backoffice.service.v1.ListDepositVtgDetailsRequest.day:type_name -> api.backoffice.service.v1.TimeRangeDay
+	3,  // 43: api.backoffice.service.v1.ListDepositVtgDetailsRequest.week:type_name -> api.backoffice.service.v1.TimeRangeWeek
+	4,  // 44: api.backoffice.service.v1.ListDepositVtgDetailsRequest.month:type_name -> api.backoffice.service.v1.TimeRangeMonth
+	39, // 45: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
+	2,  // 46: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.day:type_name -> api.backoffice.service.v1.TimeRangeDay
+	3,  // 47: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.week:type_name -> api.backoffice.service.v1.TimeRangeWeek
+	4,  // 48: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.month:type_name -> api.backoffice.service.v1.TimeRangeMonth
+	40, // 49: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
+	41, // 50: api.backoffice.service.v1.TimeRange.Day.start_date:type_name -> google.protobuf.Timestamp
+	41, // 51: api.backoffice.service.v1.TimeRange.Day.end_date:type_name -> google.protobuf.Timestamp
+	41, // 52: api.backoffice.service.v1.ListDailySummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
+	41, // 53: api.backoffice.service.v1.ListGameDataDailySummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
+	41, // 54: api.backoffice.service.v1.GetPlayerGameDataDailySummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
+	41, // 55: api.backoffice.service.v1.GetDepositSummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
+	41, // 56: api.backoffice.service.v1.ListDepositDetailsResponse.DailyDetail.date:type_name -> google.protobuf.Timestamp
+	41, // 57: api.backoffice.service.v1.GetWithdrawSummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
+	41, // 58: api.backoffice.service.v1.ListWithdrawDetailsResponse.DailyDetail.date:type_name -> google.protobuf.Timestamp
+	5,  // 59: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
+	7,  // 60: api.backoffice.service.v1.BackofficeReport.ListDailySummaries:input_type -> api.backoffice.service.v1.ListDailySummariesRequest
+	9,  // 61: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameDataSummaryRequest
+	11, // 62: api.backoffice.service.v1.BackofficeReport.ListGameDataDailySummaries:input_type -> api.backoffice.service.v1.ListGameDataDailySummariesRequest
+	13, // 63: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameDataSummaryRequest
+	17, // 64: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
+	19, // 65: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
+	21, // 66: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
+	23, // 67: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
+	25, // 68: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
+	27, // 69: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
+	6,  // 70: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	8,  // 71: api.backoffice.service.v1.BackofficeReport.ListDailySummaries:output_type -> api.backoffice.service.v1.ListDailySummariesResponse
+	10, // 72: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameDataSummaryResponse
+	12, // 73: api.backoffice.service.v1.BackofficeReport.ListGameDataDailySummaries:output_type -> api.backoffice.service.v1.ListGameDataDailySummariesResponse
+	14, // 74: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameDataSummaryResponse
+	18, // 75: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
+	20, // 76: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
+	22, // 77: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
+	24, // 78: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
+	26, // 79: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	28, // 80: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	70, // [70:81] is the sub-list for method output_type
+	59, // [59:70] is the sub-list for method input_type
+	59, // [59:59] is the sub-list for extension type_name
+	59, // [59:59] is the sub-list for extension extendee
+	0,  // [0:59] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_report_proto_init() }
@@ -4420,8 +5002,11 @@ func file_backoffice_service_v1_backoffice_report_proto_init() {
 	if File_backoffice_service_v1_backoffice_report_proto != nil {
 		return
 	}
-	file_backoffice_service_v1_backoffice_report_proto_msgTypes[0].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_report_proto_msgTypes[2].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_report_proto_msgTypes[0].OneofWrappers = []any{
+		(*TimeRange_Day_)(nil),
+		(*TimeRange_Week_)(nil),
+		(*TimeRange_Month_)(nil),
+	}
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[4].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[6].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[8].OneofWrappers = []any{}
@@ -4432,13 +5017,23 @@ func file_backoffice_service_v1_backoffice_report_proto_init() {
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[18].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[20].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[22].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_report_proto_msgTypes[24].OneofWrappers = []any{
+		(*ListDepositVtgDetailsRequest_Day)(nil),
+		(*ListDepositVtgDetailsRequest_Week)(nil),
+		(*ListDepositVtgDetailsRequest_Month)(nil),
+	}
+	file_backoffice_service_v1_backoffice_report_proto_msgTypes[26].OneofWrappers = []any{
+		(*ListWithdrawVtgDetailsRequest_Day)(nil),
+		(*ListWithdrawVtgDetailsRequest_Week)(nil),
+		(*ListWithdrawVtgDetailsRequest_Month)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_report_proto_rawDesc), len(file_backoffice_service_v1_backoffice_report_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   33,
+			NumMessages:   40,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
