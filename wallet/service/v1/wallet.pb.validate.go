@@ -4689,6 +4689,8 @@ func (m *GetBackofficeUserOverviewFromWalletResponse) validate(all bool) error {
 
 	// no validation rules for ValidTurnover
 
+	// no validation rules for AverageBetAmount
+
 	// no validation rules for Ggr
 
 	// no validation rules for GgrPercentage
@@ -4704,6 +4706,8 @@ func (m *GetBackofficeUserOverviewFromWalletResponse) validate(all bool) error {
 	// no validation rules for TurnoverMultiplier
 
 	// no validation rules for DepositToWithdrawRatio
+
+	// no validation rules for RtpPercentage
 
 	if len(errors) > 0 {
 		return GetBackofficeUserOverviewFromWalletResponseMultiError(errors)

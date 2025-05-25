@@ -199,7 +199,7 @@ message GetUserOverviewResponse {
 	string withdraw = 8; // withdrawal
 	string last_withdraw = 9; // last withdrawal
 	int32 withdraw_count = 10; // withdrawal count
-	string bonus = 11;
+	string bonus = 11; // Not available for now, only return 0
 	string valid_turnover = 12; // Not available for now, only return 0
 	string average_bet_amount = 13;
 	string ggr = 14;

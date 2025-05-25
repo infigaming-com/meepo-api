@@ -3606,12 +3606,10 @@ func (x *GetBackofficeUserOverviewFromGameRequest) GetEndTime() *timestamppb.Tim
 }
 
 type GetBackofficeUserOverviewFromGameResponse struct {
-	state            protoimpl.MessageState                                `protogen:"open.v1"`
-	AverageBetAmount string                                                `protobuf:"bytes,1,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
-	RtpPercentage    int32                                                 `protobuf:"varint,2,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
-	GameData         []*GetBackofficeUserOverviewFromGameResponse_GameData `protobuf:"bytes,3,rep,name=game_data,json=gameData,proto3" json:"game_data,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state         protoimpl.MessageState                                `protogen:"open.v1"`
+	GameData      []*GetBackofficeUserOverviewFromGameResponse_GameData `protobuf:"bytes,1,rep,name=game_data,json=gameData,proto3" json:"game_data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetBackofficeUserOverviewFromGameResponse) Reset() {
@@ -3642,20 +3640,6 @@ func (x *GetBackofficeUserOverviewFromGameResponse) ProtoReflect() protoreflect.
 // Deprecated: Use GetBackofficeUserOverviewFromGameResponse.ProtoReflect.Descriptor instead.
 func (*GetBackofficeUserOverviewFromGameResponse) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{50}
-}
-
-func (x *GetBackofficeUserOverviewFromGameResponse) GetAverageBetAmount() string {
-	if x != nil {
-		return x.AverageBetAmount
-	}
-	return ""
-}
-
-func (x *GetBackofficeUserOverviewFromGameResponse) GetRtpPercentage() int32 {
-	if x != nil {
-		return x.RtpPercentage
-	}
-	return 0
 }
 
 func (x *GetBackofficeUserOverviewFromGameResponse) GetGameData() []*GetBackofficeUserOverviewFromGameResponse_GameData {
@@ -5415,11 +5399,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
 	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01B\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\xcf\x02\n" +
-	")GetBackofficeUserOverviewFromGameResponse\x12,\n" +
-	"\x12average_bet_amount\x18\x01 \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x02 \x01(\x05R\rrtpPercentage\x12d\n" +
-	"\tgame_data\x18\x03 \x03(\v2G.api.game.service.v1.GetBackofficeUserOverviewFromGameResponse.GameDataR\bgameData\x1ag\n" +
+	"\t_end_time\"\xfa\x01\n" +
+	")GetBackofficeUserOverviewFromGameResponse\x12d\n" +
+	"\tgame_data\x18\x01 \x03(\v2G.api.game.service.v1.GetBackofficeUserOverviewFromGameResponse.GameDataR\bgameData\x1ag\n" +
 	"\bGameData\x12\x1b\n" +
 	"\tgame_type\x18\x01 \x01(\tR\bgameType\x12\x10\n" +
 	"\x03ggr\x18\x02 \x01(\tR\x03ggr\x12\x1a\n" +

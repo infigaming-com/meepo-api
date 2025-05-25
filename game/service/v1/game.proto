@@ -624,7 +624,5 @@ message GetBackofficeUserOverviewFromGameResponse {
 		string turnover = 3;
 		string rtp = 4;
 	}
-	string average_bet_amount = 1;
-	int32 rtp_percentage = 2;
-	repeated GameData game_data = 3;
+	repeated GameData game_data = 1;
 }

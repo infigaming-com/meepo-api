@@ -6189,10 +6189,6 @@ func (m *GetBackofficeUserOverviewFromGameResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for AverageBetAmount
-
-	// no validation rules for RtpPercentage
-
 	for idx, item := range m.GetGameData() {
 		_, _ = idx, item
 
