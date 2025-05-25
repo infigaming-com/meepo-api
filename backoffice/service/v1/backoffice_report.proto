@@ -85,46 +85,12 @@ enum TimePeriod {
 	TIME_RANGE_MONTH = 3;
 }
 
-message TimeRange {
-	message Day {
-		google.protobuf.Timestamp start_date = 1;
-		google.protobuf.Timestamp end_date = 2;
-	}
-	message Week {
-		int32 start_year = 1;
-		int32 start_week = 2;
-		int32 end_year = 3;
-		int32 end_week = 4;
-	}
-	message Month {
-		int32 start_year = 1;
-		int32 start_month = 2;
-		int32 end_year = 3;
-		int32 end_month = 4;
-	}
-	oneof time_range {
-		Day day = 1;
-		Week week = 2;
-		Month month = 3;
-	}
+message TimeRange{
+  string type = 1;
+  optional string start_time = 2;
+  optional string end_time = 3;
 }
 
-message TimeRangeDay {
-	google.protobuf.Timestamp start_date = 1;
-	google.protobuf.Timestamp end_date = 2;
-}
-message TimeRangeWeek {
-	int32 start_year = 1;
-	int32 start_week = 2;
-	int32 end_year = 3;
-	int32 end_week = 4;
-}
-message TimeRangeMonth {
-	int32 start_year = 1;
-	int32 start_month = 2;
-	int32 end_year = 3;
-	int32 end_month = 4;
-}
 
 message GetSummaryRequest {
 	TimePeriod time_range = 1;
@@ -457,17 +423,13 @@ message ListWithdrawDetailsResponse {
 }
 
 message ListDepositVtgDetailsRequest {
-	oneof time_range {
-		TimeRangeDay day = 1;
-		TimeRangeWeek week = 2;
-		TimeRangeMonth month = 3;
-	}
-	repeated int64 retailer_operator_ids = 4;
-	repeated int64 group_operator_ids = 5;
-	repeated int64 operator_ids = 6;
-	repeated string currencies = 7;
-	optional int32 page = 8;
-	optional int32 page_size = 9;
+	TimeRange time_range = 1;
+	repeated int64 retailer_operator_ids = 2;
+	repeated int64 group_operator_ids = 3;
+	repeated int64 operator_ids = 4;
+	repeated string currencies = 5;
+	int32 page = 6;
+	int32 page_size = 7;
 }
 
 message ListDepositVtgDetailsResponse {
@@ -499,17 +461,13 @@ message ListDepositVtgDetailsResponse {
 }
 
 message ListWithdrawVtgDetailsRequest {
-	oneof time_range {
-		TimeRangeDay day = 1;
-		TimeRangeWeek week = 2;
-		TimeRangeMonth month = 3;
-	}
-	repeated int64 retailer_operator_ids = 4;
-	repeated int64 group_operator_ids = 5;
-	repeated int64 operator_ids = 6;
-	repeated string currencies = 7;
-	optional int32 page = 8;
-	optional int32 page_size = 9;
+	TimeRange time_range = 1;
+	repeated int64 retailer_operator_ids = 2;
+	repeated int64 group_operator_ids = 3;
+	repeated int64 operator_ids = 4;
+	repeated string currencies = 5;
+	int32 page = 6;
+	int32 page_size = 7;
 }
 
 message ListWithdrawVtgDetailsResponse {

@@ -4045,12 +4045,8 @@ components:
         api.backoffice.service.v1.ListDepositVtgDetailsRequest:
             type: object
             properties:
-                day:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRangeDay'
-                week:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRangeWeek'
-                month:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRangeMonth'
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -4920,12 +4916,8 @@ components:
         api.backoffice.service.v1.ListWithdrawVtgDetailsRequest:
             type: object
             properties:
-                day:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRangeDay'
-                week:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRangeWeek'
-                month:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRangeMonth'
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -5169,45 +5161,15 @@ components:
                 currencyDecimalPlaces:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.TimeRangeDay:
+        api.backoffice.service.v1.TimeRange:
             type: object
             properties:
-                startDate:
+                type:
                     type: string
-                    format: date-time
-                endDate:
+                startTime:
                     type: string
-                    format: date-time
-        api.backoffice.service.v1.TimeRangeMonth:
-            type: object
-            properties:
-                startYear:
-                    type: integer
-                    format: int32
-                startMonth:
-                    type: integer
-                    format: int32
-                endYear:
-                    type: integer
-                    format: int32
-                endMonth:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.TimeRangeWeek:
-            type: object
-            properties:
-                startYear:
-                    type: integer
-                    format: int32
-                startWeek:
-                    type: integer
-                    format: int32
-                endYear:
-                    type: integer
-                    format: int32
-                endWeek:
-                    type: integer
-                    format: int32
+                endTime:
+                    type: string
         api.backoffice.service.v1.Unbind2faRequest:
             type: object
             properties:
