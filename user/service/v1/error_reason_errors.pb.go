@@ -600,3 +600,15 @@ func IsGetCommentsByUserIdFailed(err error) bool {
 func ErrorGetCommentsByUserIdFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_COMMENTS_BY_USER_ID_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUserTagsNotMatchOperatorTags(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_TAGS_NOT_MATCH_OPERATOR_TAGS.String() && e.Code == 500
+}
+
+func ErrorUserTagsNotMatchOperatorTags(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_TAGS_NOT_MATCH_OPERATOR_TAGS.String(), fmt.Sprintf(format, args...))
+}

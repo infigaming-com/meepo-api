@@ -19,6 +19,7 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeAccountAccountInfo = "/api.backoffice.service.v1.BackofficeAccount/AccountInfo"
 const OperationBackofficeAccountAddAccount = "/api.backoffice.service.v1.BackofficeAccount/AddAccount"
 const OperationBackofficeAccountBind2fa = "/api.backoffice.service.v1.BackofficeAccount/Bind2fa"
 const OperationBackofficeAccountGenerate2fa = "/api.backoffice.service.v1.BackofficeAccount/Generate2fa"
@@ -34,6 +35,7 @@ const OperationBackofficeAccountVerifyEmail = "/api.backoffice.service.v1.Backof
 const OperationBackofficeAccountVerifyMobile = "/api.backoffice.service.v1.BackofficeAccount/VerifyMobile"
 
 type BackofficeAccountHTTPServer interface {
+	AccountInfo(context.Context, *AccountInfoRequest) (*AccountInfoResponse, error)
 	AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error)
 	Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error)
 	Generate2Fa(context.Context, *Generate2FaRequest) (*Generate2FaResponse, error)
@@ -64,6 +66,7 @@ func RegisterBackofficeAccountHTTPServer(s *http.Server, srv BackofficeAccountHT
 	r.POST("/v1/backoffice/accounts/login", _BackofficeAccount_Login1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/register", _BackofficeAccount_Register1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/register/verification/send", _BackofficeAccount_SendRegisterVerificationCode0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/info", _BackofficeAccount_AccountInfo0_HTTP_Handler(srv))
 }
 
 func _BackofficeAccount_AddAccount0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
@@ -352,7 +355,30 @@ func _BackofficeAccount_SendRegisterVerificationCode0_HTTP_Handler(srv Backoffic
 	}
 }
 
+func _BackofficeAccount_AccountInfo0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AccountInfoRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountAccountInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AccountInfo(ctx, req.(*AccountInfoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AccountInfoResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeAccountHTTPClient interface {
+	AccountInfo(ctx context.Context, req *AccountInfoRequest, opts ...http.CallOption) (rsp *AccountInfoResponse, err error)
 	AddAccount(ctx context.Context, req *AddAccountRequest, opts ...http.CallOption) (rsp *AddAccountResponse, err error)
 	Bind2Fa(ctx context.Context, req *Bind2FaRequest, opts ...http.CallOption) (rsp *Bind2FaResponse, err error)
 	Generate2Fa(ctx context.Context, req *Generate2FaRequest, opts ...http.CallOption) (rsp *Generate2FaResponse, err error)
@@ -374,6 +400,19 @@ type BackofficeAccountHTTPClientImpl struct {
 
 func NewBackofficeAccountHTTPClient(client *http.Client) BackofficeAccountHTTPClient {
 	return &BackofficeAccountHTTPClientImpl{client}
+}
+
+func (c *BackofficeAccountHTTPClientImpl) AccountInfo(ctx context.Context, in *AccountInfoRequest, opts ...http.CallOption) (*AccountInfoResponse, error) {
+	var out AccountInfoResponse
+	pattern := "/v1/backoffice/accounts/info"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountAccountInfo))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *BackofficeAccountHTTPClientImpl) AddAccount(ctx context.Context, in *AddAccountRequest, opts ...http.CallOption) (*AddAccountResponse, error) {
