@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+service BackofficeAudit {
+	rpc ListAuditLogs(ListAuditLogsRequest) returns (ListAuditLogsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/audit/logs/list"
+			body: "*"
+		};
+	}
+}
+
+message ListAuditLogsRequest {
+	optional int64 user_id = 1;
+	optional string action = 2;
+	optional google.protobuf.Timestamp start_time = 3;
+	optional google.protobuf.Timestamp end_time = 4;
+	optional int64 page = 5; // default 1
+	optional int64 page_size = 6; // default 20
+}
+
+message AuditLog {
+	int64 audit_id = 1;
+	int64 user_id = 2;
+	string user_name = 3;
+	google.protobuf.Timestamp created_at = 4;
+	string request_info = 5; // JSON string
+	string request_body = 6; // JSON string
+	string client_ip = 7;
+	string api_path = 8;
+	string action = 9;
+	string error_message = 10;
+}
+
+message ListAuditLogsResponse {
+	repeated AuditLog audit_logs = 1;
+	int64 total = 2;
+	int64 page = 3;
+	int64 page_size = 4;
+}

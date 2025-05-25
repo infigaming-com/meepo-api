@@ -20,12 +20,6 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationUserAddOperator = "/api.user.service.v1.User/AddOperator"
-const OperationUserAddOperatorTag = "/api.user.service.v1.User/AddOperatorTag"
-const OperationUserAddUserTag = "/api.user.service.v1.User/AddUserTag"
-const OperationUserDeleteOperatorTag = "/api.user.service.v1.User/DeleteOperatorTag"
-const OperationUserDeleteUserTag = "/api.user.service.v1.User/DeleteUserTag"
-const OperationUserGetOperatorTagConfig = "/api.user.service.v1.User/GetOperatorTagConfig"
-const OperationUserGetOperatorTags = "/api.user.service.v1.User/GetOperatorTags"
 const OperationUserGetUser = "/api.user.service.v1.User/GetUser"
 const OperationUserGetUserTags = "/api.user.service.v1.User/GetUserTags"
 const OperationUserLogin = "/api.user.service.v1.User/Login"
@@ -35,26 +29,14 @@ const OperationUserRegister = "/api.user.service.v1.User/Register"
 const OperationUserRegisterOrLoginWithOAuth = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
 const OperationUserRegisterOrLoginWithTelegram = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
 const OperationUserSendEmailVerificationCode = "/api.user.service.v1.User/SendEmailVerificationCode"
-const OperationUserSetOperatorTagConfig = "/api.user.service.v1.User/SetOperatorTagConfig"
 
 type UserHTTPServer interface {
 	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
-	// AddOperatorTag AddOperatorTag adds a new tag to an operator if follow_parent is false.
-	AddOperatorTag(context.Context, *AddOperatorTagRequest) (*AddOperatorTagResponse, error)
-	// AddUserTag AddUserTag adds a new tag to a user.
-	AddUserTag(context.Context, *AddUserTagRequest) (*AddUserTagResponse, error)
-	// DeleteOperatorTag DeleteOperatorTag soft deletes a specific tag from an operator.
-	DeleteOperatorTag(context.Context, *DeleteOperatorTagRequest) (*DeleteOperatorTagResponse, error)
-	// DeleteUserTag DeleteUserTag soft deletes a tag from a user.
-	DeleteUserTag(context.Context, *DeleteUserTagRequest) (*DeleteUserTagResponse, error)
-	// GetOperatorTagConfig GetOperatorTagConfig returns follow-parent flag for the given operator ID.
-	GetOperatorTagConfig(context.Context, *GetOperatorTagConfigRequest) (*GetOperatorTagConfigResponse, error)
-	// GetOperatorTags GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
-	GetOperatorTags(context.Context, *GetOperatorTagsRequest) (*GetOperatorTagsResponse, error)
 	// GetUser Get user information by userId.
 	// Returns basic user information for the specified user.
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
-	// GetUserTags GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	// GetUserTags GetUserTags retrieves all active tags associated for the current user
+	// and also exists in the related operator's tag list.
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
 	// Login Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.
@@ -75,34 +57,23 @@ type UserHTTPServer interface {
 	// Uses Telegram's login widget for authentication.
 	RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
-	// SetOperatorTagConfig SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
-	// It will reverse the follow_parent flag if the record exists.
-	// If the record doesn't exist, it will create a new one with follow_parent set to false.
-	SetOperatorTagConfig(context.Context, *SetOperatorTagConfigRequest) (*SetOperatorTagConfigResponse, error)
 }
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/user/auth/register", _User_Register1_HTTP_Handler(srv))
-	r.POST("/v1/user/auth/login", _User_Login1_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/register", _User_Register0_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/login", _User_Login0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/oauth", _User_RegisterOrLoginWithOAuth0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/telegram", _User_RegisterOrLoginWithTelegram0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/refresh", _User_RefreshToken0_HTTP_Handler(srv))
 	r.POST("/v1/user/get", _User_GetUser0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/logout", _User_Logout0_HTTP_Handler(srv))
-	r.POST("/v1/user/operators/tag-config/get", _User_GetOperatorTagConfig0_HTTP_Handler(srv))
-	r.POST("/v1/user/operators/tag-config/set", _User_SetOperatorTagConfig0_HTTP_Handler(srv))
-	r.POST("/v1/user/operators/tags/add", _User_AddOperatorTag0_HTTP_Handler(srv))
-	r.POST("/v1/user/operators/tags/get", _User_GetOperatorTags0_HTTP_Handler(srv))
-	r.POST("/v1/user/operators/tags/delete", _User_DeleteOperatorTag0_HTTP_Handler(srv))
-	r.POST("/v1/user/tags/add", _User_AddUserTag1_HTTP_Handler(srv))
-	r.POST("/v1/user/tags/delete", _User_DeleteUserTag1_HTTP_Handler(srv))
 	r.POST("/v1/user/tags/get", _User_GetUserTags0_HTTP_Handler(srv))
-	r.POST("/v1/user/operators/add", _User_AddOperator1_HTTP_Handler(srv))
-	r.POST("/v1/user/email/verification-code/send", _User_SendEmailVerificationCode1_HTTP_Handler(srv))
+	r.POST("/v1/user/operators/add", _User_AddOperator0_HTTP_Handler(srv))
+	r.POST("/v1/user/email/verification-code/send", _User_SendEmailVerificationCode0_HTTP_Handler(srv))
 }
 
-func _User_Register1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in RegisterRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -124,7 +95,7 @@ func _User_Register1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) err
 	}
 }
 
-func _User_Login1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Login0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LoginRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -256,160 +227,6 @@ func _User_Logout0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error
 	}
 }
 
-func _User_GetOperatorTagConfig0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetOperatorTagConfigRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationUserGetOperatorTagConfig)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetOperatorTagConfig(ctx, req.(*GetOperatorTagConfigRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetOperatorTagConfigResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _User_SetOperatorTagConfig0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in SetOperatorTagConfigRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationUserSetOperatorTagConfig)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.SetOperatorTagConfig(ctx, req.(*SetOperatorTagConfigRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*SetOperatorTagConfigResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _User_AddOperatorTag0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in AddOperatorTagRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationUserAddOperatorTag)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddOperatorTag(ctx, req.(*AddOperatorTagRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*AddOperatorTagResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _User_GetOperatorTags0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetOperatorTagsRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationUserGetOperatorTags)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetOperatorTags(ctx, req.(*GetOperatorTagsRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetOperatorTagsResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _User_DeleteOperatorTag0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in DeleteOperatorTagRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationUserDeleteOperatorTag)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteOperatorTag(ctx, req.(*DeleteOperatorTagRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*DeleteOperatorTagResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _User_AddUserTag1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in AddUserTagRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationUserAddUserTag)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddUserTag(ctx, req.(*AddUserTagRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*AddUserTagResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _User_DeleteUserTag1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in DeleteUserTagRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationUserDeleteUserTag)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteUserTag(ctx, req.(*DeleteUserTagRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*DeleteUserTagResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 func _User_GetUserTags0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetUserTagsRequest
@@ -432,7 +249,7 @@ func _User_GetUserTags0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) 
 	}
 }
 
-func _User_AddOperator1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_AddOperator0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddOperatorRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -454,7 +271,7 @@ func _User_AddOperator1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) 
 	}
 }
 
-func _User_SendEmailVerificationCode1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_SendEmailVerificationCode0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SendEmailVerificationCodeRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -478,12 +295,6 @@ func _User_SendEmailVerificationCode1_HTTP_Handler(srv UserHTTPServer) func(ctx 
 
 type UserHTTPClient interface {
 	AddOperator(ctx context.Context, req *AddOperatorRequest, opts ...http.CallOption) (rsp *AddOperatorResponse, err error)
-	AddOperatorTag(ctx context.Context, req *AddOperatorTagRequest, opts ...http.CallOption) (rsp *AddOperatorTagResponse, err error)
-	AddUserTag(ctx context.Context, req *AddUserTagRequest, opts ...http.CallOption) (rsp *AddUserTagResponse, err error)
-	DeleteOperatorTag(ctx context.Context, req *DeleteOperatorTagRequest, opts ...http.CallOption) (rsp *DeleteOperatorTagResponse, err error)
-	DeleteUserTag(ctx context.Context, req *DeleteUserTagRequest, opts ...http.CallOption) (rsp *DeleteUserTagResponse, err error)
-	GetOperatorTagConfig(ctx context.Context, req *GetOperatorTagConfigRequest, opts ...http.CallOption) (rsp *GetOperatorTagConfigResponse, err error)
-	GetOperatorTags(ctx context.Context, req *GetOperatorTagsRequest, opts ...http.CallOption) (rsp *GetOperatorTagsResponse, err error)
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserResponse, err error)
 	GetUserTags(ctx context.Context, req *GetUserTagsRequest, opts ...http.CallOption) (rsp *GetUserTagsResponse, err error)
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
@@ -493,7 +304,6 @@ type UserHTTPClient interface {
 	RegisterOrLoginWithOAuth(ctx context.Context, req *OAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	RegisterOrLoginWithTelegram(ctx context.Context, req *TelegramAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	SendEmailVerificationCode(ctx context.Context, req *SendEmailVerificationCodeRequest, opts ...http.CallOption) (rsp *SendEmailVerificationCodeResponse, err error)
-	SetOperatorTagConfig(ctx context.Context, req *SetOperatorTagConfigRequest, opts ...http.CallOption) (rsp *SetOperatorTagConfigResponse, err error)
 }
 
 type UserHTTPClientImpl struct {
@@ -509,84 +319,6 @@ func (c *UserHTTPClientImpl) AddOperator(ctx context.Context, in *AddOperatorReq
 	pattern := "/v1/user/operators/add"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserAddOperator))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *UserHTTPClientImpl) AddOperatorTag(ctx context.Context, in *AddOperatorTagRequest, opts ...http.CallOption) (*AddOperatorTagResponse, error) {
-	var out AddOperatorTagResponse
-	pattern := "/v1/user/operators/tags/add"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationUserAddOperatorTag))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *UserHTTPClientImpl) AddUserTag(ctx context.Context, in *AddUserTagRequest, opts ...http.CallOption) (*AddUserTagResponse, error) {
-	var out AddUserTagResponse
-	pattern := "/v1/user/tags/add"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationUserAddUserTag))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *UserHTTPClientImpl) DeleteOperatorTag(ctx context.Context, in *DeleteOperatorTagRequest, opts ...http.CallOption) (*DeleteOperatorTagResponse, error) {
-	var out DeleteOperatorTagResponse
-	pattern := "/v1/user/operators/tags/delete"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationUserDeleteOperatorTag))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *UserHTTPClientImpl) DeleteUserTag(ctx context.Context, in *DeleteUserTagRequest, opts ...http.CallOption) (*DeleteUserTagResponse, error) {
-	var out DeleteUserTagResponse
-	pattern := "/v1/user/tags/delete"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationUserDeleteUserTag))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *UserHTTPClientImpl) GetOperatorTagConfig(ctx context.Context, in *GetOperatorTagConfigRequest, opts ...http.CallOption) (*GetOperatorTagConfigResponse, error) {
-	var out GetOperatorTagConfigResponse
-	pattern := "/v1/user/operators/tag-config/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationUserGetOperatorTagConfig))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *UserHTTPClientImpl) GetOperatorTags(ctx context.Context, in *GetOperatorTagsRequest, opts ...http.CallOption) (*GetOperatorTagsResponse, error) {
-	var out GetOperatorTagsResponse
-	pattern := "/v1/user/operators/tags/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationUserGetOperatorTags))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -704,19 +436,6 @@ func (c *UserHTTPClientImpl) SendEmailVerificationCode(ctx context.Context, in *
 	pattern := "/v1/user/email/verification-code/send"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserSendEmailVerificationCode))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *UserHTTPClientImpl) SetOperatorTagConfig(ctx context.Context, in *SetOperatorTagConfigRequest, opts ...http.CallOption) (*SetOperatorTagConfigResponse, error) {
-	var out SetOperatorTagConfigResponse
-	pattern := "/v1/user/operators/tag-config/set"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationUserSetOperatorTagConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

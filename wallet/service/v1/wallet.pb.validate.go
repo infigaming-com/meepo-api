@@ -4467,6 +4467,330 @@ var _ interface {
 	ErrorName() string
 } = GetUserTransactionSummaryResponseValidationError{}
 
+// Validate checks the field values on
+// GetBackofficeUserOverviewFromWalletRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetBackofficeUserOverviewFromWalletRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetBackofficeUserOverviewFromWalletRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetBackofficeUserOverviewFromWalletRequestMultiError, or nil if none found.
+func (m *GetBackofficeUserOverviewFromWalletRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBackofficeUserOverviewFromWalletRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetBackofficeUserOverviewFromWalletRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetBackofficeUserOverviewFromWalletRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetBackofficeUserOverviewFromWalletRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetBackofficeUserOverviewFromWalletRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetBackofficeUserOverviewFromWalletRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetBackofficeUserOverviewFromWalletRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetBackofficeUserOverviewFromWalletRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBackofficeUserOverviewFromWalletRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// GetBackofficeUserOverviewFromWalletRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetBackofficeUserOverviewFromWalletRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBackofficeUserOverviewFromWalletRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBackofficeUserOverviewFromWalletRequestMultiError) AllErrors() []error { return m }
+
+// GetBackofficeUserOverviewFromWalletRequestValidationError is the validation
+// error returned by GetBackofficeUserOverviewFromWalletRequest.Validate if
+// the designated constraints aren't met.
+type GetBackofficeUserOverviewFromWalletRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBackofficeUserOverviewFromWalletRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBackofficeUserOverviewFromWalletRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBackofficeUserOverviewFromWalletRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBackofficeUserOverviewFromWalletRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBackofficeUserOverviewFromWalletRequestValidationError) ErrorName() string {
+	return "GetBackofficeUserOverviewFromWalletRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBackofficeUserOverviewFromWalletRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBackofficeUserOverviewFromWalletRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBackofficeUserOverviewFromWalletRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBackofficeUserOverviewFromWalletRequestValidationError{}
+
+// Validate checks the field values on
+// GetBackofficeUserOverviewFromWalletResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetBackofficeUserOverviewFromWalletResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetBackofficeUserOverviewFromWalletResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetBackofficeUserOverviewFromWalletResponseMultiError, or nil if none found.
+func (m *GetBackofficeUserOverviewFromWalletResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBackofficeUserOverviewFromWalletResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for DepositMinusWithdraw
+
+	// no validation rules for Turnover
+
+	// no validation rules for CashTurnover
+
+	// no validation rules for BonusTurnover
+
+	// no validation rules for Deposit
+
+	// no validation rules for LastDeposit
+
+	// no validation rules for DepositCount
+
+	// no validation rules for Withdraw
+
+	// no validation rules for LastWithdraw
+
+	// no validation rules for WithdrawCount
+
+	// no validation rules for Bonus
+
+	// no validation rules for ValidTurnover
+
+	// no validation rules for AverageBetAmount
+
+	// no validation rules for Ggr
+
+	// no validation rules for GgrPercentage
+
+	// no validation rules for ManuallyAddedBalance
+
+	// no validation rules for BonusClaimed
+
+	// no validation rules for Ngr
+
+	// no validation rules for GgrToNgrPercentage
+
+	// no validation rules for TurnoverMultiplier
+
+	// no validation rules for DepositToWithdrawRatio
+
+	// no validation rules for Rtp
+
+	if len(errors) > 0 {
+		return GetBackofficeUserOverviewFromWalletResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBackofficeUserOverviewFromWalletResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// GetBackofficeUserOverviewFromWalletResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetBackofficeUserOverviewFromWalletResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBackofficeUserOverviewFromWalletResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBackofficeUserOverviewFromWalletResponseMultiError) AllErrors() []error { return m }
+
+// GetBackofficeUserOverviewFromWalletResponseValidationError is the validation
+// error returned by GetBackofficeUserOverviewFromWalletResponse.Validate if
+// the designated constraints aren't met.
+type GetBackofficeUserOverviewFromWalletResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBackofficeUserOverviewFromWalletResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBackofficeUserOverviewFromWalletResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBackofficeUserOverviewFromWalletResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBackofficeUserOverviewFromWalletResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBackofficeUserOverviewFromWalletResponseValidationError) ErrorName() string {
+	return "GetBackofficeUserOverviewFromWalletResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBackofficeUserOverviewFromWalletResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBackofficeUserOverviewFromWalletResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBackofficeUserOverviewFromWalletResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBackofficeUserOverviewFromWalletResponseValidationError{}
+
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

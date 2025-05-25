@@ -74,6 +74,7 @@ const (
 	ErrorReason_GENERATE_COMMENT_ID_FAILED            ErrorReason = 10047
 	ErrorReason_ADD_COMMENT_FAILED                    ErrorReason = 10048
 	ErrorReason_GET_COMMENTS_BY_USER_ID_FAILED        ErrorReason = 10049
+	ErrorReason_USER_TAGS_NOT_MATCH_OPERATOR_TAGS     ErrorReason = 10050
 )
 
 // Enum value maps for ErrorReason.
@@ -128,6 +129,7 @@ var (
 		10047: "GENERATE_COMMENT_ID_FAILED",
 		10048: "ADD_COMMENT_FAILED",
 		10049: "GET_COMMENTS_BY_USER_ID_FAILED",
+		10050: "USER_TAGS_NOT_MATCH_OPERATOR_TAGS",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                           0,
@@ -179,6 +181,7 @@ var (
 		"GENERATE_COMMENT_ID_FAILED":            10047,
 		"ADD_COMMENT_FAILED":                    10048,
 		"GET_COMMENTS_BY_USER_ID_FAILED":        10049,
+		"USER_TAGS_NOT_MATCH_OPERATOR_TAGS":     10050,
 	}
 )
 
@@ -213,7 +216,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xba\f\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xe2\f\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12)\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x1a\x04\xa8E\x91\x03\x12,\n" +
@@ -263,7 +266,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x18EMAIL_ALREADY_REGISTERED\x10\xbeN\x12\x1f\n" +
 	"\x1aGENERATE_COMMENT_ID_FAILED\x10\xbfN\x12\x17\n" +
 	"\x12ADD_COMMENT_FAILED\x10\xc0N\x12#\n" +
-	"\x1eGET_COMMENTS_BY_USER_ID_FAILED\x10\xc1N\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x1eGET_COMMENTS_BY_USER_ID_FAILED\x10\xc1N\x12&\n" +
+	"!USER_TAGS_NOT_MATCH_OPERATOR_TAGS\x10\xc2N\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
