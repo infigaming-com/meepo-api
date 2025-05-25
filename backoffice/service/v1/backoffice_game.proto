@@ -82,12 +82,6 @@ service BackofficeGame {
             body: "*"
         };
     }
-    rpc ListUserBets(ListUserBetsRequest) returns (ListUserBetsResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/game/bets/list"
-            body: "*"
-        };
-    }
     rpc ListGames(ListGamesRequest) returns (ListGamesResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/game/list"
@@ -174,6 +168,16 @@ message ListCurrenciesResponse {
 }
 
 message ListBetsRequest {
+	message CurrencyWithRange {
+		string currency = 1;
+		optional string min_bet_amount = 2;
+		optional string max_bet_amount = 3;
+		optional string min_win_amount = 4;
+		optional string max_win_amount = 5;
+	}
+	message Currencies {
+		repeated string currencies = 1;
+	}
 	repeated int64 operator_ids = 1;
 	repeated string provider_ids = 2;
 	optional string game_name = 3;
@@ -183,31 +187,44 @@ message ListBetsRequest {
 	optional string provider_bet_id = 7;
 	optional google.protobuf.Timestamp start_time = 8;
 	optional google.protobuf.Timestamp end_time = 9;
-	optional int64 min_bet_amount = 10;
-	optional int64 max_bet_amount = 11;
-	repeated string currencies = 12;
-	repeated string settlement_currencies = 13;
+	oneof settlement_currency_option {
+		CurrencyWithRange settlement_currency_with_ranges = 10;
+		Currencies settlement_currencies = 11;
+	}
+	repeated string categories = 12;
+	optional string status = 13;
 	optional int64 page = 14;
 	optional int64 page_size = 15;
 }
 
 message Bet {
-	string operator_name = 1;
-	google.protobuf.Timestamp created_at = 2;
-	google.protobuf.Timestamp updated_at = 3;
-	string game_category = 4;
-	string game_name = 5;
-	string game_id = 6;
-	string provider_name = 7;
-	int64 id = 8	 [json_name="operatorBetId"];
-	string provider_bet_id = 9;
-	int64 user_id = 10;
+	int64 id = 1	 [json_name="operatorBetId"];
+	string provider_bet_id = 2;
+	int64 round_id = 3;
+	string provider_round_id = 4;
+	string provider_id = 5;
+	string provider_name = 6;
+	int64 operator_id = 7;
+	string operator_name = 8;
+	string currency = 9;
+	string settlement_currency = 10;
+	string status = 11; //pending, end
+	int64 user_id = 12;
+	string game_id = 13;
+	string game_name = 14;
+	string game_category = 15;
+	int32 win_count = 16;
 	string bet_amount = 17;
+	string valid_bet_amount = 18;
 	string settlement_bet_amount = 19;
 	string win_amount = 20;
 	string settlement_win_amount = 21;
-	string odds = 13;
-	string valid_bet_amount = 14;
+	string turnover = 22;
+	string odds = 23;
+	string rollback_bet_amount = 24;
+	string rollback_win_amount = 25;
+	google.protobuf.Timestamp created_at = 26;
+	google.protobuf.Timestamp updated_at = 27;
 }
 
 message ListBetsResponse {
@@ -330,30 +347,6 @@ message GetUserBetsOverviewResponse {
 	int64 win_amount = 5;
 	int64 ggr = 6;
 	int64 ngr = 7;
-}
-
-// ?? Can merge with ListBetsRequest
-message ListUserBetsRequest {
-	int64 user_id = 1;
-	repeated string provider_ids = 2;
-	optional string game_name = 3;
-	optional string game_id = 4;
-	repeated string currencies = 5;
-	optional int64 min_bet_amount = 6;
-	optional int64 max_bet_amount = 7;
-	optional int64 min_win_amount = 8;
-	optional int64 max_win_amount = 9;
-	optional google.protobuf.Timestamp start_time = 10;
-	optional google.protobuf.Timestamp end_time = 11;
-	optional int64 page = 12;
-	optional int64 page_size = 13;
-}
-
-message ListUserBetsResponse {
-	repeated Bet bets = 1;
-	int64 page = 2;
-	int64 page_size = 3;
-	int64 total = 4;
 }
 
 message GetGameTransactionsForBetRequest {

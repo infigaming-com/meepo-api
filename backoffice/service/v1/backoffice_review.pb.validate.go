@@ -727,8 +727,6 @@ func (m *ReviewTicketRequest) validate(all bool) error {
 
 	// no validation rules for TicketId
 
-	// no validation rules for ReviewerUserId
-
 	// no validation rules for Action
 
 	// no validation rules for ReviewComment
@@ -939,8 +937,6 @@ func (m *AddCommentRequest) validate(all bool) error {
 
 	// no validation rules for TicketId
 
-	// no validation rules for AuthorUserId
-
 	// no validation rules for Content
 
 	if len(errors) > 0 {
@@ -1150,8 +1146,6 @@ func (m *CancelTicketRequest) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for TicketId
-
-	// no validation rules for CancellerUserId
 
 	if len(errors) > 0 {
 		return CancelTicketRequestMultiError(errors)

@@ -18,7 +18,12 @@ service Game {
 	rpc DeleteOperator(DeleteOperatorRequest) returns (DeleteOperatorResponse) {
 	};
 
-	rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse) {}
+	rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/providers/list"
+			body: "*"
+		};
+	}
 
 	rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse) {
 		option (google.api.http) = {
@@ -45,13 +50,6 @@ service Game {
 	rpc GetGame(GetGameRequest) returns (GetGameResponse) {
 		option (google.api.http) = {
 			post: "/v1/game/get"
-			body: "*"
-		};
-	};
-
-	rpc ProviderList(ProviderListRequest) returns (ProviderListResponse) {
-		option (google.api.http) = {
-			post: "/v1/game/provider/list"
 			body: "*"
 		};
 	};
@@ -106,6 +104,9 @@ service Game {
 
 	rpc GetBetById(GetBetByIdRequest) returns (GetBetByIdResponse) {
 	}
+
+	rpc GetBackofficeUserOverviewFromGame(GetBackofficeUserOverviewFromGameRequest) returns (GetBackofficeUserOverviewFromGameResponse) {
+	}
 }
 
 message CreateOperatorRequest {
@@ -147,6 +148,8 @@ message GameFilter {
 	string provider_id = 1;
 	// tags: hot game, live casino, slots, etc..
 	string tags = 2;
+	// name: game name
+	string name = 3;
 }
 
 message GameSort {
@@ -166,14 +169,17 @@ message ListProvidersRequest {
 	// Optional filter for provider's enabled status.
 	// If not provided, all providers will be returned.
 	optional bool enabled = 2;
+	// Optional filter for game's tag.
+	// If not provided, all providers will be returned.
+	optional string tag = 3;
 	// Include game count in response, false by default.
 	// Only enable it for ListProviders page which game_count is needed.
-	optional bool include_game_count = 3;
+	optional bool include_game_count = 4;
 	// Enable pagination, false by default.
 	// Only enable it for ListProviders page.
-	optional bool pagination_enabled = 4;
-	optional int32 page = 5;
-	optional int32 page_size = 6;
+	optional bool pagination_enabled = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
 }
 
 message ListProvidersResponse {
@@ -295,21 +301,6 @@ message UrlInfo {
 	string lobby_url = 3;
 }
 
-message ProviderListRequest {
-	// tags: hot game, live casino, slots, etc..
-	string tags = 1;
-}
-
-message ProviderListResponse {
-	repeated Provider providers = 1;
-}
-
-message Provider {
-	string id = 1;
-	string name = 2;
-	int32 game_count = 3;
-}
-
 message BalanceRequest {
 	int64 user_id = 1;
 	string currency = 2;
@@ -407,6 +398,16 @@ message RollbackTransactions {
 }
 
 message ListBetsRequest {
+	message CurrencyWithRange {
+		string currency = 1;
+		optional string min_bet_amount = 2;
+		optional string max_bet_amount = 3;
+		optional string min_win_amount = 4;
+		optional string max_win_amount = 5;
+	}
+	message Currencies {
+		repeated string currencies = 1;
+	}
 	repeated int64 operator_ids = 1;
 	repeated string provider_ids = 2;
 	optional string game_name = 3;
@@ -416,25 +417,14 @@ message ListBetsRequest {
 	optional string provider_bet_id = 7;
 	optional google.protobuf.Timestamp start_time = 8;
 	optional google.protobuf.Timestamp end_time = 9;
-	optional int64 min_bet_amount = 10;
-	optional int64 max_bet_amount = 11;
-	repeated string currencies = 12; // For bet history, don't use this field. Use this in backoffice for amount currency.
-	repeated string settlement_currencies = 13; // For bet history, it's the currency of the bet. Use this in backoffice for bet settlement currency.
-	repeated string categories = 14;
-	optional string status = 15;
-	optional int64 page = 16;
-	optional int64 page_size = 17;
-}
-
-message ListBetsResponse {
-	repeated Bet bets = 1;
-	string turnover = 2;
-	string win_amount = 3;
-	int32 bet_count = 4;
-	int32 rtp_percentage = 5; // value from 0 to 100
-	int64 total = 6;
-	int64 page = 7;
-	int64 page_size = 8;
+	oneof settlement_currency_option {
+		CurrencyWithRange settlement_currency_with_ranges = 10;
+		Currencies settlement_currencies = 11;
+	}
+	repeated string categories = 12;
+	optional string status = 13;
+	optional int64 page = 14;
+	optional int64 page_size = 15;
 }
 
 message Bet {
@@ -465,6 +455,17 @@ message Bet {
 	string rollback_win_amount = 25;
 	google.protobuf.Timestamp created_at = 26;
 	google.protobuf.Timestamp updated_at = 27;
+}
+
+message ListBetsResponse {
+	repeated Bet bets = 1;
+	string turnover = 2;
+	string win_amount = 3;
+	int32 bet_count = 4;
+	int32 rtp_percentage = 5; // value from 0 to 100
+	int64 total = 6;
+	int64 page = 7;
+	int64 page_size = 8;
 }
 
 message BackofficeListGamesRequest {
@@ -608,4 +609,22 @@ message GetBetByIdResponse {
 		repeated Action actions = 33;
 	}
 	Bet bet = 1;
+}
+
+message GetBackofficeUserOverviewFromGameRequest {
+	string user_id = 1;
+	optional google.protobuf.Timestamp start_time = 2;
+	optional google.protobuf.Timestamp end_time = 3;
+}
+
+message GetBackofficeUserOverviewFromGameResponse {
+	message GameData {
+		string game_type = 1; // game category
+		string ggr = 2;
+		string turnover = 3;
+		string rtp = 4;
+	}
+	string average_bet_amount = 1;
+	int32 rtp_percentage = 2;
+	repeated GameData game_data = 3;
 }

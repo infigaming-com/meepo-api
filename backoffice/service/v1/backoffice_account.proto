@@ -87,6 +87,12 @@ service BackofficeAccount {
             body: "*"
         };
     }
+    rpc AccountInfo(AccountInfoRequest) returns (AccountInfoResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/info"
+            body: "*"
+        };
+    }
 }
 
 // Account related messages
@@ -178,3 +184,26 @@ message SendRegisterVerificationCodeRequest {
 }
 
 message SendRegisterVerificationCodeResponse {}
+
+message AccountInfoRequest {}
+
+message AccountInfoResponse {
+	string username = 1;
+	string email = 2;
+	string mobile = 3;
+	bool email_verified = 4;
+	bool mobile_verified = 5;
+	bool enabled = 6;
+	Role role = 7;
+}
+
+message Role {
+    string name = 1;
+    int64 role_id = 2;
+    repeated Permission permissions = 3;
+}
+
+message Permission {
+    string page = 1;
+    string action = 2;
+}

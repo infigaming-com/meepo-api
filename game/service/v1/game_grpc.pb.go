@@ -19,27 +19,27 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Game_CreateOperator_FullMethodName      = "/api.game.service.v1.Game/CreateOperator"
-	Game_UpdateOperator_FullMethodName      = "/api.game.service.v1.Game/UpdateOperator"
-	Game_DeleteOperator_FullMethodName      = "/api.game.service.v1.Game/DeleteOperator"
-	Game_ListProviders_FullMethodName       = "/api.game.service.v1.Game/ListProviders"
-	Game_ListCategories_FullMethodName      = "/api.game.service.v1.Game/ListCategories"
-	Game_ListFeeGroups_FullMethodName       = "/api.game.service.v1.Game/ListFeeGroups"
-	Game_ListTags_FullMethodName            = "/api.game.service.v1.Game/ListTags"
-	Game_ListThemes_FullMethodName          = "/api.game.service.v1.Game/ListThemes"
-	Game_ListCurrencies_FullMethodName      = "/api.game.service.v1.Game/ListCurrencies"
-	Game_ListGames_FullMethodName           = "/api.game.service.v1.Game/ListGames"
-	Game_GetGame_FullMethodName             = "/api.game.service.v1.Game/GetGame"
-	Game_ProviderList_FullMethodName        = "/api.game.service.v1.Game/ProviderList"
-	Game_CreateSession_FullMethodName       = "/api.game.service.v1.Game/CreateSession"
-	Game_Balance_FullMethodName             = "/api.game.service.v1.Game/Balance"
-	Game_Play_FullMethodName                = "/api.game.service.v1.Game/Play"
-	Game_Rollback_FullMethodName            = "/api.game.service.v1.Game/Rollback"
-	Game_ListBets_FullMethodName            = "/api.game.service.v1.Game/ListBets"
-	Game_BackofficeListGames_FullMethodName = "/api.game.service.v1.Game/BackofficeListGames"
-	Game_UpdateGame_FullMethodName          = "/api.game.service.v1.Game/UpdateGame"
-	Game_UpdateProvider_FullMethodName      = "/api.game.service.v1.Game/UpdateProvider"
-	Game_GetBetById_FullMethodName          = "/api.game.service.v1.Game/GetBetById"
+	Game_CreateOperator_FullMethodName                    = "/api.game.service.v1.Game/CreateOperator"
+	Game_UpdateOperator_FullMethodName                    = "/api.game.service.v1.Game/UpdateOperator"
+	Game_DeleteOperator_FullMethodName                    = "/api.game.service.v1.Game/DeleteOperator"
+	Game_ListProviders_FullMethodName                     = "/api.game.service.v1.Game/ListProviders"
+	Game_ListCategories_FullMethodName                    = "/api.game.service.v1.Game/ListCategories"
+	Game_ListFeeGroups_FullMethodName                     = "/api.game.service.v1.Game/ListFeeGroups"
+	Game_ListTags_FullMethodName                          = "/api.game.service.v1.Game/ListTags"
+	Game_ListThemes_FullMethodName                        = "/api.game.service.v1.Game/ListThemes"
+	Game_ListCurrencies_FullMethodName                    = "/api.game.service.v1.Game/ListCurrencies"
+	Game_ListGames_FullMethodName                         = "/api.game.service.v1.Game/ListGames"
+	Game_GetGame_FullMethodName                           = "/api.game.service.v1.Game/GetGame"
+	Game_CreateSession_FullMethodName                     = "/api.game.service.v1.Game/CreateSession"
+	Game_Balance_FullMethodName                           = "/api.game.service.v1.Game/Balance"
+	Game_Play_FullMethodName                              = "/api.game.service.v1.Game/Play"
+	Game_Rollback_FullMethodName                          = "/api.game.service.v1.Game/Rollback"
+	Game_ListBets_FullMethodName                          = "/api.game.service.v1.Game/ListBets"
+	Game_BackofficeListGames_FullMethodName               = "/api.game.service.v1.Game/BackofficeListGames"
+	Game_UpdateGame_FullMethodName                        = "/api.game.service.v1.Game/UpdateGame"
+	Game_UpdateProvider_FullMethodName                    = "/api.game.service.v1.Game/UpdateProvider"
+	Game_GetBetById_FullMethodName                        = "/api.game.service.v1.Game/GetBetById"
+	Game_GetBackofficeUserOverviewFromGame_FullMethodName = "/api.game.service.v1.Game/GetBackofficeUserOverviewFromGame"
 )
 
 // GameClient is the client API for Game service.
@@ -57,7 +57,6 @@ type GameClient interface {
 	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
 	ListGames(ctx context.Context, in *ListGamesRequest, opts ...grpc.CallOption) (*ListGamesResponse, error)
 	GetGame(ctx context.Context, in *GetGameRequest, opts ...grpc.CallOption) (*GetGameResponse, error)
-	ProviderList(ctx context.Context, in *ProviderListRequest, opts ...grpc.CallOption) (*ProviderListResponse, error)
 	CreateSession(ctx context.Context, in *CreateSessionRequest, opts ...grpc.CallOption) (*CreateSessionResponse, error)
 	Balance(ctx context.Context, in *BalanceRequest, opts ...grpc.CallOption) (*BalanceResponse, error)
 	Play(ctx context.Context, in *PlayRequest, opts ...grpc.CallOption) (*PlayResponse, error)
@@ -67,6 +66,7 @@ type GameClient interface {
 	UpdateGame(ctx context.Context, in *UpdateGameRequest, opts ...grpc.CallOption) (*UpdateGameResponse, error)
 	UpdateProvider(ctx context.Context, in *UpdateProviderRequest, opts ...grpc.CallOption) (*UpdateProviderResponse, error)
 	GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...grpc.CallOption) (*GetBetByIdResponse, error)
+	GetBackofficeUserOverviewFromGame(ctx context.Context, in *GetBackofficeUserOverviewFromGameRequest, opts ...grpc.CallOption) (*GetBackofficeUserOverviewFromGameResponse, error)
 }
 
 type gameClient struct {
@@ -187,16 +187,6 @@ func (c *gameClient) GetGame(ctx context.Context, in *GetGameRequest, opts ...gr
 	return out, nil
 }
 
-func (c *gameClient) ProviderList(ctx context.Context, in *ProviderListRequest, opts ...grpc.CallOption) (*ProviderListResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ProviderListResponse)
-	err := c.cc.Invoke(ctx, Game_ProviderList_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *gameClient) CreateSession(ctx context.Context, in *CreateSessionRequest, opts ...grpc.CallOption) (*CreateSessionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateSessionResponse)
@@ -287,6 +277,16 @@ func (c *gameClient) GetBetById(ctx context.Context, in *GetBetByIdRequest, opts
 	return out, nil
 }
 
+func (c *gameClient) GetBackofficeUserOverviewFromGame(ctx context.Context, in *GetBackofficeUserOverviewFromGameRequest, opts ...grpc.CallOption) (*GetBackofficeUserOverviewFromGameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBackofficeUserOverviewFromGameResponse)
+	err := c.cc.Invoke(ctx, Game_GetBackofficeUserOverviewFromGame_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -302,7 +302,6 @@ type GameServer interface {
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
 	GetGame(context.Context, *GetGameRequest) (*GetGameResponse, error)
-	ProviderList(context.Context, *ProviderListRequest) (*ProviderListResponse, error)
 	CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error)
 	Balance(context.Context, *BalanceRequest) (*BalanceResponse, error)
 	Play(context.Context, *PlayRequest) (*PlayResponse, error)
@@ -312,6 +311,7 @@ type GameServer interface {
 	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error)
 	UpdateProvider(context.Context, *UpdateProviderRequest) (*UpdateProviderResponse, error)
 	GetBetById(context.Context, *GetBetByIdRequest) (*GetBetByIdResponse, error)
+	GetBackofficeUserOverviewFromGame(context.Context, *GetBackofficeUserOverviewFromGameRequest) (*GetBackofficeUserOverviewFromGameResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -355,9 +355,6 @@ func (UnimplementedGameServer) ListGames(context.Context, *ListGamesRequest) (*L
 func (UnimplementedGameServer) GetGame(context.Context, *GetGameRequest) (*GetGameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGame not implemented")
 }
-func (UnimplementedGameServer) ProviderList(context.Context, *ProviderListRequest) (*ProviderListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProviderList not implemented")
-}
 func (UnimplementedGameServer) CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSession not implemented")
 }
@@ -384,6 +381,9 @@ func (UnimplementedGameServer) UpdateProvider(context.Context, *UpdateProviderRe
 }
 func (UnimplementedGameServer) GetBetById(context.Context, *GetBetByIdRequest) (*GetBetByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBetById not implemented")
+}
+func (UnimplementedGameServer) GetBackofficeUserOverviewFromGame(context.Context, *GetBackofficeUserOverviewFromGameRequest) (*GetBackofficeUserOverviewFromGameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBackofficeUserOverviewFromGame not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -604,24 +604,6 @@ func _Game_GetGame_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Game_ProviderList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProviderListRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GameServer).ProviderList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Game_ProviderList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GameServer).ProviderList(ctx, req.(*ProviderListRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Game_CreateSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateSessionRequest)
 	if err := dec(in); err != nil {
@@ -784,6 +766,24 @@ func _Game_GetBetById_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_GetBackofficeUserOverviewFromGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBackofficeUserOverviewFromGameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetBackofficeUserOverviewFromGame(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetBackofficeUserOverviewFromGame_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetBackofficeUserOverviewFromGame(ctx, req.(*GetBackofficeUserOverviewFromGameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -836,10 +836,6 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Game_GetGame_Handler,
 		},
 		{
-			MethodName: "ProviderList",
-			Handler:    _Game_ProviderList_Handler,
-		},
-		{
 			MethodName: "CreateSession",
 			Handler:    _Game_CreateSession_Handler,
 		},
@@ -874,6 +870,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBetById",
 			Handler:    _Game_GetBetById_Handler,
+		},
+		{
+			MethodName: "GetBackofficeUserOverviewFromGame",
+			Handler:    _Game_GetBackofficeUserOverviewFromGame_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

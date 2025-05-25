@@ -31,7 +31,6 @@ const OperationBackofficeGameListProviders = "/api.backoffice.service.v1.Backoff
 const OperationBackofficeGameListProvidersWithDetail = "/api.backoffice.service.v1.BackofficeGame/ListProvidersWithDetail"
 const OperationBackofficeGameListTags = "/api.backoffice.service.v1.BackofficeGame/ListTags"
 const OperationBackofficeGameListThemes = "/api.backoffice.service.v1.BackofficeGame/ListThemes"
-const OperationBackofficeGameListUserBets = "/api.backoffice.service.v1.BackofficeGame/ListUserBets"
 const OperationBackofficeGameUpdateGame = "/api.backoffice.service.v1.BackofficeGame/UpdateGame"
 const OperationBackofficeGameUpdateProvider = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
 
@@ -54,14 +53,13 @@ type BackofficeGameHTTPServer interface {
 	ListProvidersWithDetail(context.Context, *ListProvidersWithDetailRequest) (*ListProvidersWithDetailResponse, error)
 	ListTags(context.Context, *ListTagsRequest) (*ListTagsResponse, error)
 	ListThemes(context.Context, *ListThemesRequest) (*ListThemesResponse, error)
-	ListUserBets(context.Context, *ListUserBetsRequest) (*ListUserBetsResponse, error)
 	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error)
 	UpdateProvider(context.Context, *UpdateProviderRequest) (*UpdateProviderResponse, error)
 }
 
 func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/game/providers/list", _BackofficeGame_ListProviders0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/providers/list", _BackofficeGame_ListProviders1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/providers-with-detail/list", _BackofficeGame_ListProvidersWithDetail0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/categories/list", _BackofficeGame_ListCategories1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/fee-groups/list", _BackofficeGame_ListFeeGroups0_HTTP_Handler(srv))
@@ -72,13 +70,12 @@ func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServ
 	r.POST("/v1/backoffice/game/bets/get", _BackofficeGame_GetBetById0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/bets/overview/get", _BackofficeGame_GetUserBetsOverview0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/bets/transactions/get", _BackofficeGame_GetGameTransactionsForBet0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/game/bets/list", _BackofficeGame_ListUserBets0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/list", _BackofficeGame_ListGames1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/update", _BackofficeGame_UpdateGame0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/provider/update", _BackofficeGame_UpdateProvider0_HTTP_Handler(srv))
 }
 
-func _BackofficeGame_ListProviders0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+func _BackofficeGame_ListProviders1_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListProvidersRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -320,28 +317,6 @@ func _BackofficeGame_GetGameTransactionsForBet0_HTTP_Handler(srv BackofficeGameH
 	}
 }
 
-func _BackofficeGame_ListUserBets0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListUserBetsRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeGameListUserBets)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListUserBets(ctx, req.(*ListUserBetsRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListUserBetsResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 func _BackofficeGame_ListGames1_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListGamesRequest
@@ -421,7 +396,6 @@ type BackofficeGameHTTPClient interface {
 	ListProvidersWithDetail(ctx context.Context, req *ListProvidersWithDetailRequest, opts ...http.CallOption) (rsp *ListProvidersWithDetailResponse, err error)
 	ListTags(ctx context.Context, req *ListTagsRequest, opts ...http.CallOption) (rsp *ListTagsResponse, err error)
 	ListThemes(ctx context.Context, req *ListThemesRequest, opts ...http.CallOption) (rsp *ListThemesResponse, err error)
-	ListUserBets(ctx context.Context, req *ListUserBetsRequest, opts ...http.CallOption) (rsp *ListUserBetsResponse, err error)
 	UpdateGame(ctx context.Context, req *UpdateGameRequest, opts ...http.CallOption) (rsp *UpdateGameResponse, err error)
 	UpdateProvider(ctx context.Context, req *UpdateProviderRequest, opts ...http.CallOption) (rsp *UpdateProviderResponse, err error)
 }
@@ -582,19 +556,6 @@ func (c *BackofficeGameHTTPClientImpl) ListThemes(ctx context.Context, in *ListT
 	pattern := "/v1/backoffice/game/themes/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListThemes))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeGameHTTPClientImpl) ListUserBets(ctx context.Context, in *ListUserBetsRequest, opts ...http.CallOption) (*ListUserBetsResponse, error) {
-	var out ListUserBetsResponse
-	pattern := "/v1/backoffice/game/bets/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGameListUserBets))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
