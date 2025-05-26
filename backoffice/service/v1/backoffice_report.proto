@@ -78,22 +78,14 @@ service BackofficeReport {
   }
 }
 
-enum TimePeriod {
-	TIME_RANGE_UNSPECIFIED = 0;
-	TIME_RANGE_TODAY = 1;
-	TIME_RANGE_WEEK = 2;
-	TIME_RANGE_MONTH = 3;
-}
-
 message TimeRange{
   string type = 1;
   optional string start_time = 2;
   optional string end_time = 3;
 }
 
-
 message GetSummaryRequest {
-	TimePeriod time_range = 1;
+	TimeRange time_range = 1;
 	repeated int64 retailer_operator_ids = 2;
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
@@ -121,7 +113,7 @@ message GetSummaryResponse {
 }
 
 message ListDailySummariesRequest {
-	TimePeriod time_range = 1;
+	TimeRange time_range = 1;
 	repeated int64 retailer_operator_ids = 2;
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
@@ -187,7 +179,7 @@ message ListDailySummariesResponse {
 }
 
 message GetGameDataSummaryRequest {
-	TimePeriod time_range = 1;
+	TimeRange time_range = 1;
 	repeated int64 operator_ids = 2;
 	repeated int64 retailer_operator_ids = 3;
 	repeated int64 group_operator_ids = 4;
@@ -209,7 +201,7 @@ message GetGameDataSummaryResponse {
 }
 
 message ListGameDataDailySummariesRequest {
-	TimePeriod time_range = 1;
+	TimeRange time_range = 1;
 	repeated int64 operator_ids = 2;
 	repeated int64 retailer_operator_ids = 3;
 	repeated int64 group_operator_ids = 4;
@@ -246,7 +238,7 @@ message ListGameDataDailySummariesResponse {
 }
 
 message GetPlayerGameDataSummaryRequest {
-	TimePeriod time_range = 1;
+	TimeRange time_range = 1;
 	repeated int64 retailer_operator_ids = 2;
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
@@ -269,7 +261,7 @@ message GetPlayerGameDataSummaryResponse {
 }
 
 message GetPlayerGameDataDailySummariesRequest {
-	TimePeriod time_range = 1;
+	TimeRange time_range = 1;
 	repeated int64 retailer_operator_ids = 2;
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
@@ -306,7 +298,7 @@ message GetPlayerGameDataDailySummariesResponse {
 
 
 message GetDepositSummariesRequest {
-	TimePeriod time_range = 1;
+	TimeRange time_range = 1;
 	repeated int64 retailer_operator_ids = 2;
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
@@ -326,7 +318,7 @@ message GetDepositSummariesResponse {
 }
 
 message ListDepositDetailsRequest {
-	TimePeriod time_range = 1;
+	TimeRange time_range = 1;
 	repeated int64 retailer_operator_ids = 2;
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
@@ -364,7 +356,7 @@ message ListDepositDetailsResponse {
 }
 
 message GetWithdrawSummariesRequest {
-	TimePeriod time_range = 1;
+	TimeRange time_range = 1;
 	repeated int64 retailer_operator_ids = 2;
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
@@ -384,7 +376,7 @@ message GetWithdrawSummariesResponse {
 }
 
 message ListWithdrawDetailsRequest {
-	TimePeriod time_range = 1;
+	TimeRange time_range = 1;
 	repeated int64 retailer_operator_ids = 2;
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
@@ -417,6 +409,68 @@ message ListWithdrawDetailsResponse {
 		int32 amount_proportion_percentage = 18;
 	}
 	repeated DailyDetail daily_details = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
+}
+
+message ListRegisterRetentionRequest {
+	TimeRange time_range = 1;
+	repeated int64 retailer_operator_ids = 2;
+	repeated int64 group_operator_ids = 3;
+	repeated int64 operator_ids = 4;
+	int32 page = 5;
+	int32 page_size = 6;
+}
+
+message ListRegisterRetentionResponse {
+	message List {
+		string date = 1;
+		string operator = 2;
+		int32 reg_users = 3;
+		int32 paid_users = 4;
+		int32 active_users = 5;
+		int32 deposit_convertion_rate = 6;
+		int32 arppu = 7;
+		int32 d1_active_users = 8;
+		int32 d2_active_users = 9;
+		int32 d3_active_users = 10;
+		int32 d4_active_users = 11;
+		int32 d5_active_users = 12;
+		int32 d6_active_users = 13;
+		int32 d7_active_users = 14;
+		int32 d15_active_users = 15;
+		int32 d30_active_users = 16;
+		int32 d45_active_users = 17;
+		int32 d60_active_users = 18;
+		int32 d120_active_users = 19;
+		int32 d1_paid_users = 20;
+		int32 d2_paid_users = 21;
+		int32 d3_paid_users = 22;
+		int32 d4_paid_users = 23;
+		int32 d5_paid_users = 24;
+		int32 d6_paid_users = 25;
+		int32 d7_paid_users = 26;
+		int32 d15_paid_users = 27;
+		int32 d30_paid_users = 28;
+		int32 d45_paid_users = 29;
+		int32 d60_paid_users = 30;
+		int32 d120_paid_users = 31;
+		string d1_paid_amt = 32;
+		string d2_paid_amt = 33;
+		string d3_paid_amt = 34;
+		string d4_paid_amt = 35;
+		string d5_paid_amt = 36;
+		string d6_paid_amt = 37;
+		string d7_paid_amt = 38;
+		string d15_paid_amt = 39;
+		string d30_paid_amt = 40;
+		string d45_paid_amt = 41;
+		string d60_paid_amt = 42;
+		string d120_paid_amt = 43;
+
+	}
+	repeated List details = 1;
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;

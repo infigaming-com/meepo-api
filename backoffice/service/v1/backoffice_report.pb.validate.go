@@ -166,7 +166,34 @@ func (m *GetSummaryRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TimeRange
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetSummaryRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetSummaryRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetSummaryRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.StartTime != nil {
 
@@ -464,7 +491,34 @@ func (m *ListDailySummariesRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TimeRange
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListDailySummariesRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListDailySummariesRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListDailySummariesRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.StartTime != nil {
 
@@ -784,7 +838,34 @@ func (m *GetGameDataSummaryRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TimeRange
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetGameDataSummaryRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetGameDataSummaryRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetGameDataSummaryRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.StartTime != nil {
 
@@ -1069,7 +1150,34 @@ func (m *ListGameDataDailySummariesRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TimeRange
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListGameDataDailySummariesRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListGameDataDailySummariesRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListGameDataDailySummariesRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.StartTime != nil {
 
@@ -1386,7 +1494,34 @@ func (m *GetPlayerGameDataSummaryRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TimeRange
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetPlayerGameDataSummaryRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetPlayerGameDataSummaryRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetPlayerGameDataSummaryRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.StartTime != nil {
 
@@ -1676,7 +1811,34 @@ func (m *GetPlayerGameDataDailySummariesRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TimeRange
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetPlayerGameDataDailySummariesRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetPlayerGameDataDailySummariesRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetPlayerGameDataDailySummariesRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.StartTime != nil {
 
@@ -2002,7 +2164,34 @@ func (m *GetDepositSummariesRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TimeRange
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetDepositSummariesRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetDepositSummariesRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetDepositSummariesRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.StartTime != nil {
 
@@ -2309,7 +2498,34 @@ func (m *ListDepositDetailsRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TimeRange
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListDepositDetailsRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListDepositDetailsRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListDepositDetailsRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.StartTime != nil {
 
@@ -2629,7 +2845,34 @@ func (m *GetWithdrawSummariesRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TimeRange
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetWithdrawSummariesRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetWithdrawSummariesRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetWithdrawSummariesRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.StartTime != nil {
 
@@ -2937,7 +3180,34 @@ func (m *ListWithdrawDetailsRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TimeRange
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListWithdrawDetailsRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListWithdrawDetailsRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListWithdrawDetailsRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.StartTime != nil {
 
@@ -3235,6 +3505,285 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListWithdrawDetailsResponseValidationError{}
+
+// Validate checks the field values on ListRegisterRetentionRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListRegisterRetentionRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListRegisterRetentionRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListRegisterRetentionRequestMultiError, or nil if none found.
+func (m *ListRegisterRetentionRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListRegisterRetentionRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListRegisterRetentionRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListRegisterRetentionRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListRegisterRetentionRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListRegisterRetentionRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListRegisterRetentionRequestMultiError is an error wrapping multiple
+// validation errors returned by ListRegisterRetentionRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListRegisterRetentionRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListRegisterRetentionRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListRegisterRetentionRequestMultiError) AllErrors() []error { return m }
+
+// ListRegisterRetentionRequestValidationError is the validation error returned
+// by ListRegisterRetentionRequest.Validate if the designated constraints
+// aren't met.
+type ListRegisterRetentionRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListRegisterRetentionRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListRegisterRetentionRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListRegisterRetentionRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListRegisterRetentionRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListRegisterRetentionRequestValidationError) ErrorName() string {
+	return "ListRegisterRetentionRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListRegisterRetentionRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListRegisterRetentionRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListRegisterRetentionRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListRegisterRetentionRequestValidationError{}
+
+// Validate checks the field values on ListRegisterRetentionResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListRegisterRetentionResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListRegisterRetentionResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListRegisterRetentionResponseMultiError, or nil if none found.
+func (m *ListRegisterRetentionResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListRegisterRetentionResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetDetails() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListRegisterRetentionResponseValidationError{
+						field:  fmt.Sprintf("Details[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListRegisterRetentionResponseValidationError{
+						field:  fmt.Sprintf("Details[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListRegisterRetentionResponseValidationError{
+					field:  fmt.Sprintf("Details[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for Total
+
+	if len(errors) > 0 {
+		return ListRegisterRetentionResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListRegisterRetentionResponseMultiError is an error wrapping multiple
+// validation errors returned by ListRegisterRetentionResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ListRegisterRetentionResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListRegisterRetentionResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListRegisterRetentionResponseMultiError) AllErrors() []error { return m }
+
+// ListRegisterRetentionResponseValidationError is the validation error
+// returned by ListRegisterRetentionResponse.Validate if the designated
+// constraints aren't met.
+type ListRegisterRetentionResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListRegisterRetentionResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListRegisterRetentionResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListRegisterRetentionResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListRegisterRetentionResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListRegisterRetentionResponseValidationError) ErrorName() string {
+	return "ListRegisterRetentionResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListRegisterRetentionResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListRegisterRetentionResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListRegisterRetentionResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListRegisterRetentionResponseValidationError{}
 
 // Validate checks the field values on ListDepositVtgDetailsRequest with the
 // rules defined in the proto definition for this message. If any rules are
@@ -4963,6 +5512,197 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListWithdrawDetailsResponse_DailyDetailValidationError{}
+
+// Validate checks the field values on ListRegisterRetentionResponse_List with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListRegisterRetentionResponse_List) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListRegisterRetentionResponse_List
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListRegisterRetentionResponse_ListMultiError, or nil if none found.
+func (m *ListRegisterRetentionResponse_List) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListRegisterRetentionResponse_List) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Date
+
+	// no validation rules for Operator
+
+	// no validation rules for RegUsers
+
+	// no validation rules for PaidUsers
+
+	// no validation rules for ActiveUsers
+
+	// no validation rules for DepositConvertionRate
+
+	// no validation rules for Arppu
+
+	// no validation rules for D1ActiveUsers
+
+	// no validation rules for D2ActiveUsers
+
+	// no validation rules for D3ActiveUsers
+
+	// no validation rules for D4ActiveUsers
+
+	// no validation rules for D5ActiveUsers
+
+	// no validation rules for D6ActiveUsers
+
+	// no validation rules for D7ActiveUsers
+
+	// no validation rules for D15ActiveUsers
+
+	// no validation rules for D30ActiveUsers
+
+	// no validation rules for D45ActiveUsers
+
+	// no validation rules for D60ActiveUsers
+
+	// no validation rules for D120ActiveUsers
+
+	// no validation rules for D1PaidUsers
+
+	// no validation rules for D2PaidUsers
+
+	// no validation rules for D3PaidUsers
+
+	// no validation rules for D4PaidUsers
+
+	// no validation rules for D5PaidUsers
+
+	// no validation rules for D6PaidUsers
+
+	// no validation rules for D7PaidUsers
+
+	// no validation rules for D15PaidUsers
+
+	// no validation rules for D30PaidUsers
+
+	// no validation rules for D45PaidUsers
+
+	// no validation rules for D60PaidUsers
+
+	// no validation rules for D120PaidUsers
+
+	// no validation rules for D1PaidAmt
+
+	// no validation rules for D2PaidAmt
+
+	// no validation rules for D3PaidAmt
+
+	// no validation rules for D4PaidAmt
+
+	// no validation rules for D5PaidAmt
+
+	// no validation rules for D6PaidAmt
+
+	// no validation rules for D7PaidAmt
+
+	// no validation rules for D15PaidAmt
+
+	// no validation rules for D30PaidAmt
+
+	// no validation rules for D45PaidAmt
+
+	// no validation rules for D60PaidAmt
+
+	// no validation rules for D120PaidAmt
+
+	if len(errors) > 0 {
+		return ListRegisterRetentionResponse_ListMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListRegisterRetentionResponse_ListMultiError is an error wrapping multiple
+// validation errors returned by
+// ListRegisterRetentionResponse_List.ValidateAll() if the designated
+// constraints aren't met.
+type ListRegisterRetentionResponse_ListMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListRegisterRetentionResponse_ListMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListRegisterRetentionResponse_ListMultiError) AllErrors() []error { return m }
+
+// ListRegisterRetentionResponse_ListValidationError is the validation error
+// returned by ListRegisterRetentionResponse_List.Validate if the designated
+// constraints aren't met.
+type ListRegisterRetentionResponse_ListValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListRegisterRetentionResponse_ListValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListRegisterRetentionResponse_ListValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListRegisterRetentionResponse_ListValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListRegisterRetentionResponse_ListValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListRegisterRetentionResponse_ListValidationError) ErrorName() string {
+	return "ListRegisterRetentionResponse_ListValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListRegisterRetentionResponse_ListValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListRegisterRetentionResponse_List.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListRegisterRetentionResponse_ListValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListRegisterRetentionResponse_ListValidationError{}
 
 // Validate checks the field values on ListDepositVtgDetailsResponse_Detail
 // with the rules defined in the proto definition for this message. If any

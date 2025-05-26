@@ -2516,13 +2516,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -2569,13 +2563,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorIds:
                     type: array
                     items:
@@ -2799,13 +2787,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -2864,13 +2846,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -3602,13 +3578,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -3789,13 +3759,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -3942,13 +3906,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -4135,13 +4093,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorIds:
                     type: array
                     items:
@@ -4809,13 +4761,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
