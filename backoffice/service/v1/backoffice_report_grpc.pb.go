@@ -28,6 +28,7 @@ const (
 	BackofficeReport_ListDepositDetails_FullMethodName         = "/api.backoffice.service.v1.BackofficeReport/ListDepositDetails"
 	BackofficeReport_GetWithdrawSummaries_FullMethodName       = "/api.backoffice.service.v1.BackofficeReport/GetWithdrawSummaries"
 	BackofficeReport_ListWithdrawDetails_FullMethodName        = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawDetails"
+	BackofficeReport_ListRegisterRetention_FullMethodName      = "/api.backoffice.service.v1.BackofficeReport/ListRegisterRetention"
 	BackofficeReport_ListDepositVtgDetails_FullMethodName      = "/api.backoffice.service.v1.BackofficeReport/ListDepositVtgDetails"
 	BackofficeReport_ListWithdrawVtgDetails_FullMethodName     = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawVtgDetails"
 )
@@ -45,6 +46,7 @@ type BackofficeReportClient interface {
 	ListDepositDetails(ctx context.Context, in *ListDepositDetailsRequest, opts ...grpc.CallOption) (*ListDepositDetailsResponse, error)
 	GetWithdrawSummaries(ctx context.Context, in *GetWithdrawSummariesRequest, opts ...grpc.CallOption) (*GetWithdrawSummariesResponse, error)
 	ListWithdrawDetails(ctx context.Context, in *ListWithdrawDetailsRequest, opts ...grpc.CallOption) (*ListWithdrawDetailsResponse, error)
+	ListRegisterRetention(ctx context.Context, in *ListRegisterRetentionRequest, opts ...grpc.CallOption) (*ListRegisterRetentionResponse, error)
 	ListDepositVtgDetails(ctx context.Context, in *ListDepositVtgDetailsRequest, opts ...grpc.CallOption) (*ListDepositVtgDetailsResponse, error)
 	ListWithdrawVtgDetails(ctx context.Context, in *ListWithdrawVtgDetailsRequest, opts ...grpc.CallOption) (*ListWithdrawVtgDetailsResponse, error)
 }
@@ -147,6 +149,16 @@ func (c *backofficeReportClient) ListWithdrawDetails(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *backofficeReportClient) ListRegisterRetention(ctx context.Context, in *ListRegisterRetentionRequest, opts ...grpc.CallOption) (*ListRegisterRetentionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListRegisterRetentionResponse)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListRegisterRetention_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeReportClient) ListDepositVtgDetails(ctx context.Context, in *ListDepositVtgDetailsRequest, opts ...grpc.CallOption) (*ListDepositVtgDetailsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListDepositVtgDetailsResponse)
@@ -180,6 +192,7 @@ type BackofficeReportServer interface {
 	ListDepositDetails(context.Context, *ListDepositDetailsRequest) (*ListDepositDetailsResponse, error)
 	GetWithdrawSummaries(context.Context, *GetWithdrawSummariesRequest) (*GetWithdrawSummariesResponse, error)
 	ListWithdrawDetails(context.Context, *ListWithdrawDetailsRequest) (*ListWithdrawDetailsResponse, error)
+	ListRegisterRetention(context.Context, *ListRegisterRetentionRequest) (*ListRegisterRetentionResponse, error)
 	ListDepositVtgDetails(context.Context, *ListDepositVtgDetailsRequest) (*ListDepositVtgDetailsResponse, error)
 	ListWithdrawVtgDetails(context.Context, *ListWithdrawVtgDetailsRequest) (*ListWithdrawVtgDetailsResponse, error)
 	mustEmbedUnimplementedBackofficeReportServer()
@@ -218,6 +231,9 @@ func (UnimplementedBackofficeReportServer) GetWithdrawSummaries(context.Context,
 }
 func (UnimplementedBackofficeReportServer) ListWithdrawDetails(context.Context, *ListWithdrawDetailsRequest) (*ListWithdrawDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWithdrawDetails not implemented")
+}
+func (UnimplementedBackofficeReportServer) ListRegisterRetention(context.Context, *ListRegisterRetentionRequest) (*ListRegisterRetentionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRegisterRetention not implemented")
 }
 func (UnimplementedBackofficeReportServer) ListDepositVtgDetails(context.Context, *ListDepositVtgDetailsRequest) (*ListDepositVtgDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDepositVtgDetails not implemented")
@@ -408,6 +424,24 @@ func _BackofficeReport_ListWithdrawDetails_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeReport_ListRegisterRetention_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRegisterRetentionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReportServer).ListRegisterRetention(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReport_ListRegisterRetention_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReportServer).ListRegisterRetention(ctx, req.(*ListRegisterRetentionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeReport_ListDepositVtgDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListDepositVtgDetailsRequest)
 	if err := dec(in); err != nil {
@@ -486,6 +520,10 @@ var BackofficeReport_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListWithdrawDetails",
 			Handler:    _BackofficeReport_ListWithdrawDetails_Handler,
+		},
+		{
+			MethodName: "ListRegisterRetention",
+			Handler:    _BackofficeReport_ListRegisterRetention_Handler,
 		},
 		{
 			MethodName: "ListDepositVtgDetails",

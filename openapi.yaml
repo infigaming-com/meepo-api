@@ -773,6 +773,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataSummaryResponse'
+    /v1/backoffice/report/register-retention/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListRegisterRetention
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionResponse'
     /v1/backoffice/report/summary/get:
         post:
             tags:
@@ -4365,6 +4383,163 @@ components:
                     format: int32
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.ListRegisterRetentionRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                groupOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListRegisterRetentionResponse:
+            type: object
+            properties:
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListRegisterRetentionResponse_List:
+            type: object
+            properties:
+                date:
+                    type: string
+                operator:
+                    type: string
+                regUsers:
+                    type: integer
+                    format: int32
+                paidUsers:
+                    type: integer
+                    format: int32
+                activeUsers:
+                    type: integer
+                    format: int32
+                depositConvertionRate:
+                    type: integer
+                    format: int32
+                arppu:
+                    type: integer
+                    format: int32
+                d1ActiveUsers:
+                    type: integer
+                    format: int32
+                d2ActiveUsers:
+                    type: integer
+                    format: int32
+                d3ActiveUsers:
+                    type: integer
+                    format: int32
+                d4ActiveUsers:
+                    type: integer
+                    format: int32
+                d5ActiveUsers:
+                    type: integer
+                    format: int32
+                d6ActiveUsers:
+                    type: integer
+                    format: int32
+                d7ActiveUsers:
+                    type: integer
+                    format: int32
+                d15ActiveUsers:
+                    type: integer
+                    format: int32
+                d30ActiveUsers:
+                    type: integer
+                    format: int32
+                d45ActiveUsers:
+                    type: integer
+                    format: int32
+                d60ActiveUsers:
+                    type: integer
+                    format: int32
+                d120ActiveUsers:
+                    type: integer
+                    format: int32
+                d1PaidUsers:
+                    type: integer
+                    format: int32
+                d2PaidUsers:
+                    type: integer
+                    format: int32
+                d3PaidUsers:
+                    type: integer
+                    format: int32
+                d4PaidUsers:
+                    type: integer
+                    format: int32
+                d5PaidUsers:
+                    type: integer
+                    format: int32
+                d6PaidUsers:
+                    type: integer
+                    format: int32
+                d7PaidUsers:
+                    type: integer
+                    format: int32
+                d15PaidUsers:
+                    type: integer
+                    format: int32
+                d30PaidUsers:
+                    type: integer
+                    format: int32
+                d45PaidUsers:
+                    type: integer
+                    format: int32
+                d60PaidUsers:
+                    type: integer
+                    format: int32
+                d120PaidUsers:
+                    type: integer
+                    format: int32
+                d1PaidAmt:
+                    type: string
+                d2PaidAmt:
+                    type: string
+                d3PaidAmt:
+                    type: string
+                d4PaidAmt:
+                    type: string
+                d5PaidAmt:
+                    type: string
+                d6PaidAmt:
+                    type: string
+                d7PaidAmt:
+                    type: string
+                d15PaidAmt:
+                    type: string
+                d30PaidAmt:
+                    type: string
+                d45PaidAmt:
+                    type: string
+                d60PaidAmt:
+                    type: string
+                d120PaidAmt:
+                    type: string
         api.backoffice.service.v1.ListSystemCurrenciesRequest:
             type: object
             properties:

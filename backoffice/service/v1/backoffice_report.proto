@@ -64,6 +64,13 @@ service BackofficeReport {
           body: "*"
       };
   }
+
+  rpc ListRegisterRetention(ListRegisterRetentionRequest) returns (ListRegisterRetentionResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/report/register-retention/list"
+          body: "*"
+      };
+  }
   rpc ListDepositVtgDetails(ListDepositVtgDetailsRequest) returns (ListDepositVtgDetailsResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/report/deposit-vtg-details/list"
