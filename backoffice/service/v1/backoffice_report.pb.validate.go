@@ -5403,17 +5403,25 @@ func (m *ListWithdrawDetailsResponse_DailyDetail) validate(all bool) error {
 
 	// no validation rules for WithdrawAmount
 
+	// no validation rules for WithdrawAmountUsd
+
 	// no validation rules for WithdrawUsers
 
 	// no validation rules for FtwAmount
+
+	// no validation rules for FtwAmountUsd
 
 	// no validation rules for FtwUsers
 
 	// no validation rules for SameDayFtwAmount
 
+	// no validation rules for SameDayFtwAmountUsd
+
 	// no validation rules for SameDayFtwUsers
 
 	// no validation rules for RepeatedWithdrawAmount
+
+	// no validation rules for RepeatedWithdrawAmountUsd
 
 	// no validation rules for RepeatedWithdrawUsers
 
@@ -5423,13 +5431,19 @@ func (m *ListWithdrawDetailsResponse_DailyDetail) validate(all bool) error {
 
 	// no validation rules for AverageFtwAmountForSameDayRegistredUsers
 
+	// no validation rules for AverageFtwAmountUsdForSameDayRegistredUsers
+
 	// no validation rules for AverageFtwAmountForNonSameDayRegistredUsers
 
-	// no validation rules for SuccessPercentage
+	// no validation rules for AverageFtwAmountUsdForNonSameDayRegistredUsers
+
+	// no validation rules for SuccessRate
 
 	// no validation rules for DepositMinusWithdrawAmount
 
-	// no validation rules for AmountProportionPercentage
+	// no validation rules for DepositMinusWithdrawAmountUsd
+
+	// no validation rules for AmountProportion
 
 	if len(errors) > 0 {
 		return ListWithdrawDetailsResponse_DailyDetailMultiError(errors)
