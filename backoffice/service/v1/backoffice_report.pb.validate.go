@@ -3315,7 +3315,7 @@ func (m *ListWithdrawDetailsResponse) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetDailyDetails() {
+	for idx, item := range m.GetDetails() {
 		_, _ = idx, item
 
 		if all {
@@ -3323,7 +3323,7 @@ func (m *ListWithdrawDetailsResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, ListWithdrawDetailsResponseValidationError{
-						field:  fmt.Sprintf("DailyDetails[%v]", idx),
+						field:  fmt.Sprintf("Details[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -3331,7 +3331,7 @@ func (m *ListWithdrawDetailsResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, ListWithdrawDetailsResponseValidationError{
-						field:  fmt.Sprintf("DailyDetails[%v]", idx),
+						field:  fmt.Sprintf("Details[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -3340,7 +3340,7 @@ func (m *ListWithdrawDetailsResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return ListWithdrawDetailsResponseValidationError{
-					field:  fmt.Sprintf("DailyDetails[%v]", idx),
+					field:  fmt.Sprintf("Details[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -5274,58 +5274,30 @@ var _ interface {
 	ErrorName() string
 } = GetWithdrawSummariesResponse_DailySummaryValidationError{}
 
-// Validate checks the field values on ListWithdrawDetailsResponse_DailyDetail
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *ListWithdrawDetailsResponse_DailyDetail) Validate() error {
+// Validate checks the field values on ListWithdrawDetailsResponse_Detail with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListWithdrawDetailsResponse_Detail) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on
-// ListWithdrawDetailsResponse_DailyDetail with the rules defined in the proto
-// definition for this message. If any rules are violated, the result is a
-// list of violation errors wrapped in
-// ListWithdrawDetailsResponse_DailyDetailMultiError, or nil if none found.
-func (m *ListWithdrawDetailsResponse_DailyDetail) ValidateAll() error {
+// ValidateAll checks the field values on ListWithdrawDetailsResponse_Detail
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListWithdrawDetailsResponse_DetailMultiError, or nil if none found.
+func (m *ListWithdrawDetailsResponse_Detail) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListWithdrawDetailsResponse_DailyDetail) validate(all bool) error {
+func (m *ListWithdrawDetailsResponse_Detail) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetDate()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListWithdrawDetailsResponse_DailyDetailValidationError{
-					field:  "Date",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListWithdrawDetailsResponse_DailyDetailValidationError{
-					field:  "Date",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetDate()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListWithdrawDetailsResponse_DailyDetailValidationError{
-				field:  "Date",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Date
 
 	// no validation rules for Operator
 
@@ -5376,20 +5348,20 @@ func (m *ListWithdrawDetailsResponse_DailyDetail) validate(all bool) error {
 	// no validation rules for AmountProportion
 
 	if len(errors) > 0 {
-		return ListWithdrawDetailsResponse_DailyDetailMultiError(errors)
+		return ListWithdrawDetailsResponse_DetailMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListWithdrawDetailsResponse_DailyDetailMultiError is an error wrapping
-// multiple validation errors returned by
-// ListWithdrawDetailsResponse_DailyDetail.ValidateAll() if the designated
+// ListWithdrawDetailsResponse_DetailMultiError is an error wrapping multiple
+// validation errors returned by
+// ListWithdrawDetailsResponse_Detail.ValidateAll() if the designated
 // constraints aren't met.
-type ListWithdrawDetailsResponse_DailyDetailMultiError []error
+type ListWithdrawDetailsResponse_DetailMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListWithdrawDetailsResponse_DailyDetailMultiError) Error() string {
+func (m ListWithdrawDetailsResponse_DetailMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5398,12 +5370,12 @@ func (m ListWithdrawDetailsResponse_DailyDetailMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListWithdrawDetailsResponse_DailyDetailMultiError) AllErrors() []error { return m }
+func (m ListWithdrawDetailsResponse_DetailMultiError) AllErrors() []error { return m }
 
-// ListWithdrawDetailsResponse_DailyDetailValidationError is the validation
-// error returned by ListWithdrawDetailsResponse_DailyDetail.Validate if the
-// designated constraints aren't met.
-type ListWithdrawDetailsResponse_DailyDetailValidationError struct {
+// ListWithdrawDetailsResponse_DetailValidationError is the validation error
+// returned by ListWithdrawDetailsResponse_Detail.Validate if the designated
+// constraints aren't met.
+type ListWithdrawDetailsResponse_DetailValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5411,24 +5383,24 @@ type ListWithdrawDetailsResponse_DailyDetailValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListWithdrawDetailsResponse_DailyDetailValidationError) Field() string { return e.field }
+func (e ListWithdrawDetailsResponse_DetailValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListWithdrawDetailsResponse_DailyDetailValidationError) Reason() string { return e.reason }
+func (e ListWithdrawDetailsResponse_DetailValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListWithdrawDetailsResponse_DailyDetailValidationError) Cause() error { return e.cause }
+func (e ListWithdrawDetailsResponse_DetailValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListWithdrawDetailsResponse_DailyDetailValidationError) Key() bool { return e.key }
+func (e ListWithdrawDetailsResponse_DetailValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListWithdrawDetailsResponse_DailyDetailValidationError) ErrorName() string {
-	return "ListWithdrawDetailsResponse_DailyDetailValidationError"
+func (e ListWithdrawDetailsResponse_DetailValidationError) ErrorName() string {
+	return "ListWithdrawDetailsResponse_DetailValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListWithdrawDetailsResponse_DailyDetailValidationError) Error() string {
+func (e ListWithdrawDetailsResponse_DetailValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5440,14 +5412,14 @@ func (e ListWithdrawDetailsResponse_DailyDetailValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListWithdrawDetailsResponse_DailyDetail.%s: %s%s",
+		"invalid %sListWithdrawDetailsResponse_Detail.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListWithdrawDetailsResponse_DailyDetailValidationError{}
+var _ error = ListWithdrawDetailsResponse_DetailValidationError{}
 
 var _ interface {
 	Field() string
@@ -5455,7 +5427,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListWithdrawDetailsResponse_DailyDetailValidationError{}
+} = ListWithdrawDetailsResponse_DetailValidationError{}
 
 // Validate checks the field values on ListRegisterRetentionResponse_List with
 // the rules defined in the proto definition for this message. If any rules

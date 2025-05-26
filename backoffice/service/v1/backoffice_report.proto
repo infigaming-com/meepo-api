@@ -393,8 +393,8 @@ message ListWithdrawDetailsRequest {
 }
 
 message ListWithdrawDetailsResponse {
-	message DailyDetail {
-		google.protobuf.Timestamp date = 1;
+	message Detail {
+		string date = 1;
 		string operator = 2; // Only return operator_id
 		string currency = 3; 
 		string withdraw_amount = 4;
@@ -420,7 +420,7 @@ message ListWithdrawDetailsResponse {
 		string deposit_minus_withdraw_amount_usd = 24;
 		string amount_proportion = 25; // decimal number between 0-100 representing percentage
 	}
-	repeated DailyDetail daily_details = 1;
+	repeated Detail details = 1;
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;
