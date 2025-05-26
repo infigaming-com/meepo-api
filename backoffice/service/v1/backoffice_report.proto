@@ -394,7 +394,7 @@ message ListWithdrawDetailsRequest {
 
 message ListWithdrawDetailsResponse {
 	message Detail {
-		google.protobuf.Timestamp date = 1;
+		string date = 1;
 		string operator = 2; // Only return operator_id
 		string currency = 3; 
 		string withdraw_amount = 4;

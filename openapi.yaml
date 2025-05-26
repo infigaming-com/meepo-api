@@ -4980,7 +4980,6 @@ components:
             properties:
                 date:
                     type: string
-                    format: date-time
                 operator:
                     type: string
                 currency:
