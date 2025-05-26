@@ -388,10 +388,8 @@ message ListWithdrawDetailsRequest {
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
 	repeated string currencies = 5;
-	optional google.protobuf.Timestamp start_time = 6;
-	optional google.protobuf.Timestamp end_time = 7;
-	optional int32 page = 8;
-	optional int32 page_size = 9;
+	int32 page = 6;
+	int32 page_size = 7;
 }
 
 message ListWithdrawDetailsResponse {
