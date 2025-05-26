@@ -397,23 +397,30 @@ message ListWithdrawDetailsRequest {
 message ListWithdrawDetailsResponse {
 	message DailyDetail {
 		google.protobuf.Timestamp date = 1;
-		string operator = 2;
-		string currency = 3;
+		string operator = 2; // Only return operator_id
+		string currency = 3; 
 		string withdraw_amount = 4;
-		int32 withdraw_users = 5;
-		string ftw_amount = 6;
-		int32 ftw_users = 7;
-		string same_day_ftw_amount = 8;
-		int32 same_day_ftw_users = 9;
-		string repeated_withdraw_amount = 10;
-		int32 repeated_withdraw_users = 11;
-		int64 same_day_ftw = 12;
-		int64 non_same_day_ftw = 13;
-		int32 average_ftw_amount_for_same_day_registred_users = 14;
-		int32 average_ftw_amount_for_non_same_day_registred_users = 15;
-		int32 success_percentage = 16;
-		int64 deposit_minus_withdraw_amount = 17;
-		int32 amount_proportion_percentage = 18;
+		string withdraw_amount_usd = 5;
+		int32 withdraw_users = 6;
+		string ftw_amount = 7; 
+		string ftw_amount_usd = 8;
+		int32 ftw_users = 9;
+		string same_day_ftw_amount = 10;
+		string same_day_ftw_amount_usd = 11;
+		int32 same_day_ftw_users = 12;
+		string repeated_withdraw_amount = 13;
+		string repeated_withdraw_amount_usd = 14;
+		int32 repeated_withdraw_users = 15;
+		int32 same_day_ftw = 16;
+		int32 non_same_day_ftw = 17;
+		string average_ftw_amount_for_same_day_registred_users = 18;
+		string average_ftw_amount_usd_for_same_day_registred_users = 19;
+		string average_ftw_amount_for_non_same_day_registred_users = 20;
+		string average_ftw_amount_usd_for_non_same_day_registred_users = 21;
+		string success_rate = 22; // decimal number between 0-100 representing percentage
+		string deposit_minus_withdraw_amount = 23;
+		string deposit_minus_withdraw_amount_usd = 24;
+		string amount_proportion = 25; // decimal number between 0-100 representing percentage
 	}
 	repeated DailyDetail daily_details = 1;
 	int32 page = 2;

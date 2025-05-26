@@ -3388,27 +3388,34 @@ func (x *GetWithdrawSummariesResponse_DailySummary) GetWithdrawAmount() string {
 }
 
 type ListWithdrawDetailsResponse_DailyDetail struct {
-	state                                       protoimpl.MessageState `protogen:"open.v1"`
-	Date                                        *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Operator                                    string                 `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
-	Currency                                    string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	WithdrawAmount                              string                 `protobuf:"bytes,4,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
-	WithdrawUsers                               int32                  `protobuf:"varint,5,opt,name=withdraw_users,json=withdrawUsers,proto3" json:"withdraw_users,omitempty"`
-	FtwAmount                                   string                 `protobuf:"bytes,6,opt,name=ftw_amount,json=ftwAmount,proto3" json:"ftw_amount,omitempty"`
-	FtwUsers                                    int32                  `protobuf:"varint,7,opt,name=ftw_users,json=ftwUsers,proto3" json:"ftw_users,omitempty"`
-	SameDayFtwAmount                            string                 `protobuf:"bytes,8,opt,name=same_day_ftw_amount,json=sameDayFtwAmount,proto3" json:"same_day_ftw_amount,omitempty"`
-	SameDayFtwUsers                             int32                  `protobuf:"varint,9,opt,name=same_day_ftw_users,json=sameDayFtwUsers,proto3" json:"same_day_ftw_users,omitempty"`
-	RepeatedWithdrawAmount                      string                 `protobuf:"bytes,10,opt,name=repeated_withdraw_amount,json=repeatedWithdrawAmount,proto3" json:"repeated_withdraw_amount,omitempty"`
-	RepeatedWithdrawUsers                       int32                  `protobuf:"varint,11,opt,name=repeated_withdraw_users,json=repeatedWithdrawUsers,proto3" json:"repeated_withdraw_users,omitempty"`
-	SameDayFtw                                  int64                  `protobuf:"varint,12,opt,name=same_day_ftw,json=sameDayFtw,proto3" json:"same_day_ftw,omitempty"`
-	NonSameDayFtw                               int64                  `protobuf:"varint,13,opt,name=non_same_day_ftw,json=nonSameDayFtw,proto3" json:"non_same_day_ftw,omitempty"`
-	AverageFtwAmountForSameDayRegistredUsers    int32                  `protobuf:"varint,14,opt,name=average_ftw_amount_for_same_day_registred_users,json=averageFtwAmountForSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_same_day_registred_users,omitempty"`
-	AverageFtwAmountForNonSameDayRegistredUsers int32                  `protobuf:"varint,15,opt,name=average_ftw_amount_for_non_same_day_registred_users,json=averageFtwAmountForNonSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_non_same_day_registred_users,omitempty"`
-	SuccessPercentage                           int32                  `protobuf:"varint,16,opt,name=success_percentage,json=successPercentage,proto3" json:"success_percentage,omitempty"`
-	DepositMinusWithdrawAmount                  int64                  `protobuf:"varint,17,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
-	AmountProportionPercentage                  int32                  `protobuf:"varint,18,opt,name=amount_proportion_percentage,json=amountProportionPercentage,proto3" json:"amount_proportion_percentage,omitempty"`
-	unknownFields                               protoimpl.UnknownFields
-	sizeCache                                   protoimpl.SizeCache
+	state                                          protoimpl.MessageState `protogen:"open.v1"`
+	Date                                           *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Operator                                       string                 `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"` // Only return operator_id
+	Currency                                       string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	WithdrawAmount                                 string                 `protobuf:"bytes,4,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
+	WithdrawAmountUsd                              string                 `protobuf:"bytes,5,opt,name=withdraw_amount_usd,json=withdrawAmountUsd,proto3" json:"withdraw_amount_usd,omitempty"`
+	WithdrawUsers                                  int32                  `protobuf:"varint,6,opt,name=withdraw_users,json=withdrawUsers,proto3" json:"withdraw_users,omitempty"`
+	FtwAmount                                      string                 `protobuf:"bytes,7,opt,name=ftw_amount,json=ftwAmount,proto3" json:"ftw_amount,omitempty"`
+	FtwAmountUsd                                   string                 `protobuf:"bytes,8,opt,name=ftw_amount_usd,json=ftwAmountUsd,proto3" json:"ftw_amount_usd,omitempty"`
+	FtwUsers                                       int32                  `protobuf:"varint,9,opt,name=ftw_users,json=ftwUsers,proto3" json:"ftw_users,omitempty"`
+	SameDayFtwAmount                               string                 `protobuf:"bytes,10,opt,name=same_day_ftw_amount,json=sameDayFtwAmount,proto3" json:"same_day_ftw_amount,omitempty"`
+	SameDayFtwAmountUsd                            string                 `protobuf:"bytes,11,opt,name=same_day_ftw_amount_usd,json=sameDayFtwAmountUsd,proto3" json:"same_day_ftw_amount_usd,omitempty"`
+	SameDayFtwUsers                                int32                  `protobuf:"varint,12,opt,name=same_day_ftw_users,json=sameDayFtwUsers,proto3" json:"same_day_ftw_users,omitempty"`
+	RepeatedWithdrawAmount                         string                 `protobuf:"bytes,13,opt,name=repeated_withdraw_amount,json=repeatedWithdrawAmount,proto3" json:"repeated_withdraw_amount,omitempty"`
+	RepeatedWithdrawAmountUsd                      string                 `protobuf:"bytes,14,opt,name=repeated_withdraw_amount_usd,json=repeatedWithdrawAmountUsd,proto3" json:"repeated_withdraw_amount_usd,omitempty"`
+	RepeatedWithdrawUsers                          int32                  `protobuf:"varint,15,opt,name=repeated_withdraw_users,json=repeatedWithdrawUsers,proto3" json:"repeated_withdraw_users,omitempty"`
+	SameDayFtw                                     int32                  `protobuf:"varint,16,opt,name=same_day_ftw,json=sameDayFtw,proto3" json:"same_day_ftw,omitempty"`
+	NonSameDayFtw                                  int32                  `protobuf:"varint,17,opt,name=non_same_day_ftw,json=nonSameDayFtw,proto3" json:"non_same_day_ftw,omitempty"`
+	AverageFtwAmountForSameDayRegistredUsers       string                 `protobuf:"bytes,18,opt,name=average_ftw_amount_for_same_day_registred_users,json=averageFtwAmountForSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_same_day_registred_users,omitempty"`
+	AverageFtwAmountUsdForSameDayRegistredUsers    string                 `protobuf:"bytes,19,opt,name=average_ftw_amount_usd_for_same_day_registred_users,json=averageFtwAmountUsdForSameDayRegistredUsers,proto3" json:"average_ftw_amount_usd_for_same_day_registred_users,omitempty"`
+	AverageFtwAmountForNonSameDayRegistredUsers    string                 `protobuf:"bytes,20,opt,name=average_ftw_amount_for_non_same_day_registred_users,json=averageFtwAmountForNonSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_non_same_day_registred_users,omitempty"`
+	AverageFtwAmountUsdForNonSameDayRegistredUsers string                 `protobuf:"bytes,21,opt,name=average_ftw_amount_usd_for_non_same_day_registred_users,json=averageFtwAmountUsdForNonSameDayRegistredUsers,proto3" json:"average_ftw_amount_usd_for_non_same_day_registred_users,omitempty"`
+	SuccessRate                                    string                 `protobuf:"bytes,22,opt,name=success_rate,json=successRate,proto3" json:"success_rate,omitempty"` // decimal number between 0-100 representing percentage
+	DepositMinusWithdrawAmount                     string                 `protobuf:"bytes,23,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
+	DepositMinusWithdrawAmountUsd                  string                 `protobuf:"bytes,24,opt,name=deposit_minus_withdraw_amount_usd,json=depositMinusWithdrawAmountUsd,proto3" json:"deposit_minus_withdraw_amount_usd,omitempty"`
+	AmountProportion                               string                 `protobuf:"bytes,25,opt,name=amount_proportion,json=amountProportion,proto3" json:"amount_proportion,omitempty"` // decimal number between 0-100 representing percentage
+	unknownFields                                  protoimpl.UnknownFields
+	sizeCache                                      protoimpl.SizeCache
 }
 
 func (x *ListWithdrawDetailsResponse_DailyDetail) Reset() {
@@ -3469,6 +3476,13 @@ func (x *ListWithdrawDetailsResponse_DailyDetail) GetWithdrawAmount() string {
 	return ""
 }
 
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetWithdrawAmountUsd() string {
+	if x != nil {
+		return x.WithdrawAmountUsd
+	}
+	return ""
+}
+
 func (x *ListWithdrawDetailsResponse_DailyDetail) GetWithdrawUsers() int32 {
 	if x != nil {
 		return x.WithdrawUsers
@@ -3479,6 +3493,13 @@ func (x *ListWithdrawDetailsResponse_DailyDetail) GetWithdrawUsers() int32 {
 func (x *ListWithdrawDetailsResponse_DailyDetail) GetFtwAmount() string {
 	if x != nil {
 		return x.FtwAmount
+	}
+	return ""
+}
+
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetFtwAmountUsd() string {
+	if x != nil {
+		return x.FtwAmountUsd
 	}
 	return ""
 }
@@ -3497,6 +3518,13 @@ func (x *ListWithdrawDetailsResponse_DailyDetail) GetSameDayFtwAmount() string {
 	return ""
 }
 
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetSameDayFtwAmountUsd() string {
+	if x != nil {
+		return x.SameDayFtwAmountUsd
+	}
+	return ""
+}
+
 func (x *ListWithdrawDetailsResponse_DailyDetail) GetSameDayFtwUsers() int32 {
 	if x != nil {
 		return x.SameDayFtwUsers
@@ -3511,6 +3539,13 @@ func (x *ListWithdrawDetailsResponse_DailyDetail) GetRepeatedWithdrawAmount() st
 	return ""
 }
 
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetRepeatedWithdrawAmountUsd() string {
+	if x != nil {
+		return x.RepeatedWithdrawAmountUsd
+	}
+	return ""
+}
+
 func (x *ListWithdrawDetailsResponse_DailyDetail) GetRepeatedWithdrawUsers() int32 {
 	if x != nil {
 		return x.RepeatedWithdrawUsers
@@ -3518,53 +3553,74 @@ func (x *ListWithdrawDetailsResponse_DailyDetail) GetRepeatedWithdrawUsers() int
 	return 0
 }
 
-func (x *ListWithdrawDetailsResponse_DailyDetail) GetSameDayFtw() int64 {
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetSameDayFtw() int32 {
 	if x != nil {
 		return x.SameDayFtw
 	}
 	return 0
 }
 
-func (x *ListWithdrawDetailsResponse_DailyDetail) GetNonSameDayFtw() int64 {
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetNonSameDayFtw() int32 {
 	if x != nil {
 		return x.NonSameDayFtw
 	}
 	return 0
 }
 
-func (x *ListWithdrawDetailsResponse_DailyDetail) GetAverageFtwAmountForSameDayRegistredUsers() int32 {
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetAverageFtwAmountForSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtwAmountForSameDayRegistredUsers
 	}
-	return 0
+	return ""
 }
 
-func (x *ListWithdrawDetailsResponse_DailyDetail) GetAverageFtwAmountForNonSameDayRegistredUsers() int32 {
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetAverageFtwAmountUsdForSameDayRegistredUsers() string {
+	if x != nil {
+		return x.AverageFtwAmountUsdForSameDayRegistredUsers
+	}
+	return ""
+}
+
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetAverageFtwAmountForNonSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtwAmountForNonSameDayRegistredUsers
 	}
-	return 0
+	return ""
 }
 
-func (x *ListWithdrawDetailsResponse_DailyDetail) GetSuccessPercentage() int32 {
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetAverageFtwAmountUsdForNonSameDayRegistredUsers() string {
 	if x != nil {
-		return x.SuccessPercentage
+		return x.AverageFtwAmountUsdForNonSameDayRegistredUsers
 	}
-	return 0
+	return ""
 }
 
-func (x *ListWithdrawDetailsResponse_DailyDetail) GetDepositMinusWithdrawAmount() int64 {
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetSuccessRate() string {
+	if x != nil {
+		return x.SuccessRate
+	}
+	return ""
+}
+
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetDepositMinusWithdrawAmount() string {
 	if x != nil {
 		return x.DepositMinusWithdrawAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListWithdrawDetailsResponse_DailyDetail) GetAmountProportionPercentage() int32 {
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetDepositMinusWithdrawAmountUsd() string {
 	if x != nil {
-		return x.AmountProportionPercentage
+		return x.DepositMinusWithdrawAmountUsd
 	}
-	return 0
+	return ""
+}
+
+func (x *ListWithdrawDetailsResponse_DailyDetail) GetAmountProportion() string {
+	if x != nil {
+		return x.AmountProportion
+	}
+	return ""
 }
 
 type ListRegisterRetentionResponse_List struct {
@@ -4639,34 +4695,42 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xeb\b\n" +
+	"_page_size\"\xbc\f\n" +
 	"\x1bListWithdrawDetailsResponse\x12g\n" +
 	"\rdaily_details\x18\x01 \x03(\v2B.api.backoffice.service.v1.ListWithdrawDetailsResponse.DailyDetailR\fdailyDetails\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x9b\a\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xec\n" +
+	"\n" +
 	"\vDailyDetail\x12.\n" +
 	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12\x1a\n" +
 	"\boperator\x18\x02 \x01(\tR\boperator\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12'\n" +
-	"\x0fwithdraw_amount\x18\x04 \x01(\tR\x0ewithdrawAmount\x12%\n" +
-	"\x0ewithdraw_users\x18\x05 \x01(\x05R\rwithdrawUsers\x12\x1d\n" +
+	"\x0fwithdraw_amount\x18\x04 \x01(\tR\x0ewithdrawAmount\x12.\n" +
+	"\x13withdraw_amount_usd\x18\x05 \x01(\tR\x11withdrawAmountUsd\x12%\n" +
+	"\x0ewithdraw_users\x18\x06 \x01(\x05R\rwithdrawUsers\x12\x1d\n" +
 	"\n" +
-	"ftw_amount\x18\x06 \x01(\tR\tftwAmount\x12\x1b\n" +
-	"\tftw_users\x18\a \x01(\x05R\bftwUsers\x12-\n" +
-	"\x13same_day_ftw_amount\x18\b \x01(\tR\x10sameDayFtwAmount\x12+\n" +
-	"\x12same_day_ftw_users\x18\t \x01(\x05R\x0fsameDayFtwUsers\x128\n" +
-	"\x18repeated_withdraw_amount\x18\n" +
-	" \x01(\tR\x16repeatedWithdrawAmount\x126\n" +
-	"\x17repeated_withdraw_users\x18\v \x01(\x05R\x15repeatedWithdrawUsers\x12 \n" +
-	"\fsame_day_ftw\x18\f \x01(\x03R\n" +
+	"ftw_amount\x18\a \x01(\tR\tftwAmount\x12$\n" +
+	"\x0eftw_amount_usd\x18\b \x01(\tR\fftwAmountUsd\x12\x1b\n" +
+	"\tftw_users\x18\t \x01(\x05R\bftwUsers\x12-\n" +
+	"\x13same_day_ftw_amount\x18\n" +
+	" \x01(\tR\x10sameDayFtwAmount\x124\n" +
+	"\x17same_day_ftw_amount_usd\x18\v \x01(\tR\x13sameDayFtwAmountUsd\x12+\n" +
+	"\x12same_day_ftw_users\x18\f \x01(\x05R\x0fsameDayFtwUsers\x128\n" +
+	"\x18repeated_withdraw_amount\x18\r \x01(\tR\x16repeatedWithdrawAmount\x12?\n" +
+	"\x1crepeated_withdraw_amount_usd\x18\x0e \x01(\tR\x19repeatedWithdrawAmountUsd\x126\n" +
+	"\x17repeated_withdraw_users\x18\x0f \x01(\x05R\x15repeatedWithdrawUsers\x12 \n" +
+	"\fsame_day_ftw\x18\x10 \x01(\x05R\n" +
 	"sameDayFtw\x12'\n" +
-	"\x10non_same_day_ftw\x18\r \x01(\x03R\rnonSameDayFtw\x12a\n" +
-	"/average_ftw_amount_for_same_day_registred_users\x18\x0e \x01(\x05R(averageFtwAmountForSameDayRegistredUsers\x12h\n" +
-	"3average_ftw_amount_for_non_same_day_registred_users\x18\x0f \x01(\x05R+averageFtwAmountForNonSameDayRegistredUsers\x12-\n" +
-	"\x12success_percentage\x18\x10 \x01(\x05R\x11successPercentage\x12A\n" +
-	"\x1ddeposit_minus_withdraw_amount\x18\x11 \x01(\x03R\x1adepositMinusWithdrawAmount\x12@\n" +
-	"\x1camount_proportion_percentage\x18\x12 \x01(\x05R\x1aamountProportionPercentage\"\x99\x02\n" +
+	"\x10non_same_day_ftw\x18\x11 \x01(\x05R\rnonSameDayFtw\x12a\n" +
+	"/average_ftw_amount_for_same_day_registred_users\x18\x12 \x01(\tR(averageFtwAmountForSameDayRegistredUsers\x12h\n" +
+	"3average_ftw_amount_usd_for_same_day_registred_users\x18\x13 \x01(\tR+averageFtwAmountUsdForSameDayRegistredUsers\x12h\n" +
+	"3average_ftw_amount_for_non_same_day_registred_users\x18\x14 \x01(\tR+averageFtwAmountForNonSameDayRegistredUsers\x12o\n" +
+	"7average_ftw_amount_usd_for_non_same_day_registred_users\x18\x15 \x01(\tR.averageFtwAmountUsdForNonSameDayRegistredUsers\x12!\n" +
+	"\fsuccess_rate\x18\x16 \x01(\tR\vsuccessRate\x12A\n" +
+	"\x1ddeposit_minus_withdraw_amount\x18\x17 \x01(\tR\x1adepositMinusWithdrawAmount\x12H\n" +
+	"!deposit_minus_withdraw_amount_usd\x18\x18 \x01(\tR\x1ddepositMinusWithdrawAmountUsd\x12+\n" +
+	"\x11amount_proportion\x18\x19 \x01(\tR\x10amountProportion\"\x99\x02\n" +
 	"\x1cListRegisterRetentionRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
