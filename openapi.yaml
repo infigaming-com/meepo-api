@@ -4962,10 +4962,10 @@ components:
         api.backoffice.service.v1.ListWithdrawDetailsResponse:
             type: object
             properties:
-                dailyDetails:
+                details:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsResponse_DailyDetail'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsResponse_Detail'
                 page:
                     type: integer
                     format: int32
@@ -4975,7 +4975,7 @@ components:
                 total:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListWithdrawDetailsResponse_DailyDetail:
+        api.backoffice.service.v1.ListWithdrawDetailsResponse_Detail:
             type: object
             properties:
                 date:
