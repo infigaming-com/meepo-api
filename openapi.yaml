@@ -4902,9 +4902,10 @@ components:
                     type: boolean
                 banLogin:
                     type: boolean
+                online:
+                    type: boolean
                 page:
                     type: integer
-                    description: optional bool online = 21;
                     format: int32
                 pageSize:
                     type: integer
@@ -4962,9 +4963,10 @@ components:
                     type: boolean
                 banLogin:
                     type: boolean
+                online:
+                    type: boolean
                 lastLoginAt:
                     type: string
-                    description: bool online = 16;
                     format: date-time
                 registeredAt:
                     type: string
