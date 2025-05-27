@@ -100,12 +100,6 @@ service BackofficeAccount {
             body: "*"
         };
     }
-    rpc UpdateAccountRole(UpdateAccountRoleRequest) returns (UpdateAccountRoleResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/accounts/role/update"
-            body: "*"
-        };
-    }
     rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/accounts/role/create"
@@ -178,6 +172,7 @@ message Unbind2faResponse {}
 message UpdateAccountRequest {
 	int64 user_id = 1;
 	optional bool enabled = 2;
+	optional int64 role_id = 3;
 }
 
 message UpdateAccountResponse {}
@@ -258,14 +253,6 @@ message ListAccountsResponse {
     int32 page = 3;
     int32 page_size = 4;
 }
-
-message UpdateAccountRoleRequest {
-    int64 user_id = 1;
-    optional int64 role_id = 2;
-    optional bool enabled = 3;
-}
-
-message UpdateAccountRoleResponse {}
 
 message CreateRoleRequest {
     string name = 1;

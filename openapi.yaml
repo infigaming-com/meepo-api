@@ -294,24 +294,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListRolesResponse'
-    /v1/backoffice/accounts/role/update:
-        post:
-            tags:
-                - BackofficeAccount
-            operationId: BackofficeAccount_UpdateAccountRole
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAccountRoleRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAccountRoleResponse'
     /v1/backoffice/accounts/update:
         post:
             tags:
@@ -5477,19 +5459,9 @@ components:
                     type: string
                 enabled:
                     type: boolean
-        api.backoffice.service.v1.UpdateAccountResponse:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.UpdateAccountRoleRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
                 roleId:
                     type: string
-                enabled:
-                    type: boolean
-        api.backoffice.service.v1.UpdateAccountRoleResponse:
+        api.backoffice.service.v1.UpdateAccountResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.UpdateGameRequest:
