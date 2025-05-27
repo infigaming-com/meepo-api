@@ -22,21 +22,15 @@ service BackofficeReport {
           body: "*"
       };
   }
-  rpc GetGameDataSummary(GetGameDataSummaryRequest) returns (GetGameDataSummaryResponse) {
+  rpc GetGameData(GetGameDataRequest) returns (GetGameDataResponse) {
       option (google.api.http) = {
-          post: "/v1/backoffice/report/game-data-summary/get"
+          post: "/v1/backoffice/report/game-data/get"
           body: "*"
       };
   }
-  rpc ListGameDataDailySummaries(ListGameDataDailySummariesRequest) returns (ListGameDataDailySummariesResponse) {
+  rpc GetPlayerGameData(GetPlayerGameDataRequest) returns (GetPlayerGameDataResponse) {
       option (google.api.http) = {
-          post: "/v1/backoffice/report/game-data-daily-summaries/list"
-          body: "*"
-      };
-  }
-  rpc GetPlayerGameDataSummary(GetPlayerGameDataSummaryRequest) returns (GetPlayerGameDataSummaryResponse) {
-      option (google.api.http) = {
-          post: "/v1/backoffice/report/player-game-data-summary/get"
+          post: "/v1/backoffice/report/player-game-data/get"
           body: "*"
       };
   }
@@ -185,7 +179,7 @@ message ListDailySummariesResponse {
 	int64 total = 4;
 }
 
-message GetGameDataSummaryRequest {
+message GetGameDataRequest {
 	TimeRange time_range = 1;
 	repeated int64 operator_ids = 2;
 	repeated int64 retailer_operator_ids = 3;
@@ -194,57 +188,41 @@ message GetGameDataSummaryRequest {
 	repeated string game_types = 6;
 	repeated string game_names = 7;
 	repeated string game_ids = 8;
-	optional google.protobuf.Timestamp start_time = 9;
-	optional google.protobuf.Timestamp end_time = 10;
+	int32 page = 9;
+	int32 page_size = 10;
 }
 
-message GetGameDataSummaryResponse {
-	int64 turnover = 1;
-	int64 win_amount =  2;
-	int64 ggr = 3;
+message GetGameDataResponse {
+	string turnover = 1;
+	string win_amount =  2;
+	string ggr = 3;
 	int64 bet_count = 4;
-	int64 average_bet_amount = 5;
-	int32 rtp_percentage = 6;
-}
-
-message ListGameDataDailySummariesRequest {
-	TimeRange time_range = 1;
-	repeated int64 operator_ids = 2;
-	repeated int64 retailer_operator_ids = 3;
-	repeated int64 group_operator_ids = 4;
-	repeated string provider_ids = 5;
-	repeated string game_types = 6;
-	repeated string game_names = 7;
-	repeated string game_ids = 8;
-	optional google.protobuf.Timestamp start_time = 9;
-	optional google.protobuf.Timestamp end_time = 10;
-}
-
-message ListGameDataDailySummariesResponse {
-	message DailySummary {
-		google.protobuf.Timestamp date = 1;
-		string operator_name = 2;
+	string average_bet_amount = 5;
+	string rtp_percentage = 6;
+	message List {
+		string date = 1;
+		string operator = 2;
 		string provider = 3;
 		string game_type = 4;
 		string game_name = 5;
 		string game_id = 6;
 		int64 player_count = 7;
-		int64 turnover = 8;
-		int32 turnover_percentage = 9;
-		int64 win_amount = 10;
-		int64 ggr = 11;
-		int32 ggr_percentage = 12;
+		string turnover = 8;
+		string turnover_percentage = 9;
+		string win_amount = 10;
+		string ggr = 11;
+		string ggr_percentage = 12;
 		int64 bet_count = 13;
-		int64 average_bet_amount = 14;
-		int32 rtp_percentage = 15;
+		string average_bet_amount = 14;
+		string rtp_percentage = 15;
 	}
-	repeated DailySummary daily_summaries = 1;
-	int64 page = 2;
-	int64 page_size = 3;
-	int64 total = 4;
+	repeated List list = 7;
+	int32 page = 8;
+	int32 page_size = 9;
+	int32 total = 10;
 }
 
-message GetPlayerGameDataSummaryRequest {
+message GetPlayerGameDataRequest {
 	TimeRange time_range = 1;
 	repeated int64 retailer_operator_ids = 2;
 	repeated int64 group_operator_ids = 3;
@@ -254,55 +232,36 @@ message GetPlayerGameDataSummaryRequest {
 	repeated string game_tags = 7;
 	repeated string game_names = 8;
 	repeated string game_ids = 9;
-	optional google.protobuf.Timestamp start_time = 10;
-	optional google.protobuf.Timestamp end_time = 11;
+	int32 page = 10;
+	int32 page_size = 11;
 }
 
-message GetPlayerGameDataSummaryResponse {
-	int64 turnover = 1;
-	int64 win_amount = 2;
-	int64 ggr = 3;
+message GetPlayerGameDataResponse {
+	string turnover = 1;
+	string win_amount = 2;
+	string ggr = 3;
 	int64 bet_count = 4;
-	int64 average_bet_amount = 5;
-	int32 rtp_percentage = 6;
-}
-
-message GetPlayerGameDataDailySummariesRequest {
-	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
-	repeated string provider_ids = 5;
-	repeated string game_types = 6;
-	repeated string game_names = 7;
-	repeated string game_ids = 8;
-	optional google.protobuf.Timestamp start_time = 9;
-	optional google.protobuf.Timestamp end_time = 10;
-	optional int64 page = 11;
-	optional int64 page_size = 12;
-}
-
-message GetPlayerGameDataDailySummariesResponse {
-	message DailySummary {
-		google.protobuf.Timestamp date = 1;
-		string operator_name = 2;
+	string average_bet_amount = 5;
+	string rtp_percentage = 6;
+	message List {
+		string date = 1;
+		string operator = 2;
 		string provider = 3;
 		string game_type = 4;
 		string game_id = 5;
-		int64 user_id = 6;
-		int64 turnover = 7;
-		int64 win_amount = 8;
-		int64 ggr = 9;
-		int32 rtp_percentage = 10;
+		string user_id = 6;
+		string turnover = 7;
+		string win_amount = 8;
+		string ggr = 9;
+		string rtp_percentage = 10;
 		int64 bet_count = 11;
-		int64 average_bet_amount = 12;
+		string average_bet_amount = 12;
 	}
-	repeated DailySummary daily_summaries = 1;
-	int64 page = 2;
-	int64 page_size = 3;
-	int64 total = 4;
+	repeated List list = 7;
+	int32 page = 8;
+	int32 page_size = 9;
+	int32 total = 10;
 }
-
 
 message GetDepositSummariesRequest {
 	TimeRange time_range = 1;
