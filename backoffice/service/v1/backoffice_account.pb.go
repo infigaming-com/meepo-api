@@ -1333,9 +1333,12 @@ func (x *Role) GetPermissions() []*Permission {
 }
 
 type Permission struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Group         string                 `protobuf:"bytes,1,opt,name=group,proto3" json:"group,omitempty"`
-	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	GroupId int64                  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	// group name: dashboard, game, user, finance, report, system, etc.
+	GroupName string `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`
+	// action name: read, write, delete, etc.
+	Actions       []string `protobuf:"bytes,3,rep,name=actions,proto3" json:"actions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1370,18 +1373,25 @@ func (*Permission) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *Permission) GetGroup() string {
+func (x *Permission) GetGroupId() int64 {
 	if x != nil {
-		return x.Group
+		return x.GroupId
+	}
+	return 0
+}
+
+func (x *Permission) GetGroupName() string {
+	if x != nil {
+		return x.GroupName
 	}
 	return ""
 }
 
-func (x *Permission) GetAction() string {
+func (x *Permission) GetActions() []string {
 	if x != nil {
-		return x.Action
+		return x.Actions
 	}
-	return ""
+	return nil
 }
 
 type ListAccountsRequest struct {
@@ -1531,7 +1541,8 @@ func (x *ListAccountsResponse) GetPageSize() int32 {
 type UpdateAccountRoleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	RoleId        int64                  `protobuf:"varint,2,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	RoleId        *int64                 `protobuf:"varint,2,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
+	Enabled       *bool                  `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1574,10 +1585,17 @@ func (x *UpdateAccountRoleRequest) GetUserId() int64 {
 }
 
 func (x *UpdateAccountRoleRequest) GetRoleId() int64 {
-	if x != nil {
-		return x.RoleId
+	if x != nil && x.RoleId != nil {
+		return *x.RoleId
 	}
 	return 0
+}
+
+func (x *UpdateAccountRoleRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
 }
 
 type UpdateAccountRoleResponse struct {
@@ -1984,11 +2002,13 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\x04Role\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\arole_id\x18\x02 \x01(\x03R\x06roleId\x12G\n" +
-	"\vpermissions\x18\x03 \x03(\v2%.api.backoffice.service.v1.PermissionR\vpermissions\":\n" +
+	"\vpermissions\x18\x03 \x03(\v2%.api.backoffice.service.v1.PermissionR\vpermissions\"`\n" +
 	"\n" +
-	"Permission\x12\x14\n" +
-	"\x05group\x18\x01 \x01(\tR\x05group\x12\x16\n" +
-	"\x06action\x18\x02 \x01(\tR\x06action\"\xf1\x01\n" +
+	"Permission\x12\x19\n" +
+	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\x12\x1d\n" +
+	"\n" +
+	"group_name\x18\x02 \x01(\tR\tgroupName\x12\x18\n" +
+	"\aactions\x18\x03 \x03(\tR\aactions\"\xf1\x01\n" +
 	"\x13ListAccountsRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1c\n" +
 	"\arole_id\x18\x02 \x01(\x03H\x01R\x06roleId\x88\x01\x01\x12$\n" +
@@ -2017,10 +2037,15 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\aenabled\x18\x05 \x01(\bR\aenabled\x123\n" +
 	"\x04role\x18\x06 \x01(\v2\x1f.api.backoffice.service.v1.RoleR\x04role\x129\n" +
 	"\n" +
-	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"L\n" +
+	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x88\x01\n" +
 	"\x18UpdateAccountRoleRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x17\n" +
-	"\arole_id\x18\x02 \x01(\x03R\x06roleId\"\x1b\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1c\n" +
+	"\arole_id\x18\x02 \x01(\x03H\x00R\x06roleId\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x03 \x01(\bH\x01R\aenabled\x88\x01\x01B\n" +
+	"\n" +
+	"\b_role_idB\n" +
+	"\n" +
+	"\b_enabled\"\x1b\n" +
 	"\x19UpdateAccountRoleResponse\"p\n" +
 	"\x11CreateRoleRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12G\n" +
@@ -2173,6 +2198,7 @@ func file_backoffice_service_v1_backoffice_account_proto_init() {
 	}
 	file_backoffice_service_v1_backoffice_account_proto_msgTypes[18].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_account_proto_msgTypes[30].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_account_proto_msgTypes[32].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_account_proto_msgTypes[36].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

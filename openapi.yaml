@@ -5303,10 +5303,16 @@ components:
         api.backoffice.service.v1.Permission:
             type: object
             properties:
-                group:
+                groupId:
                     type: string
-                action:
+                groupName:
                     type: string
+                    description: 'group name: dashboard, game, user, finance, report, system, etc.'
+                actions:
+                    type: array
+                    items:
+                        type: string
+                    description: 'action name: read, write, delete, etc.'
         api.backoffice.service.v1.RegisterRequest:
             type: object
             properties:
@@ -5481,6 +5487,8 @@ components:
                     type: string
                 roleId:
                     type: string
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.UpdateAccountRoleResponse:
             type: object
             properties: {}

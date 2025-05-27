@@ -2139,6 +2139,7 @@ type UpdateUserRequest struct {
 	BanGame       *bool                  `protobuf:"varint,5,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
 	BanWithdraw   *bool                  `protobuf:"varint,6,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
 	Enabled       *bool                  `protobuf:"varint,7,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	RoleId        *int64                 `protobuf:"varint,8,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2220,6 +2221,13 @@ func (x *UpdateUserRequest) GetEnabled() bool {
 		return *x.Enabled
 	}
 	return false
+}
+
+func (x *UpdateUserRequest) GetRoleId() int64 {
+	if x != nil && x.RoleId != nil {
+		return *x.RoleId
+	}
+	return 0
 }
 
 type UpdateUserResponse struct {
@@ -4011,7 +4019,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x13AddOperatorResponse\"8\n" +
 	" SendEmailVerificationCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"#\n" +
-	"!SendEmailVerificationCodeResponse\"\xc3\x02\n" +
+	"!SendEmailVerificationCodeResponse\"\xed\x02\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\bnickname\x18\x02 \x01(\tH\x00R\bnickname\x88\x01\x01\x12\x1b\n" +
@@ -4019,7 +4027,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\tban_login\x18\x04 \x01(\bH\x02R\bbanLogin\x88\x01\x01\x12\x1e\n" +
 	"\bban_game\x18\x05 \x01(\bH\x03R\abanGame\x88\x01\x01\x12&\n" +
 	"\fban_withdraw\x18\x06 \x01(\bH\x04R\vbanWithdraw\x88\x01\x01\x12\x1d\n" +
-	"\aenabled\x18\a \x01(\bH\x05R\aenabled\x88\x01\x01B\v\n" +
+	"\aenabled\x18\a \x01(\bH\x05R\aenabled\x88\x01\x01\x12\x1c\n" +
+	"\arole_id\x18\b \x01(\x03H\x06R\x06roleId\x88\x01\x01B\v\n" +
 	"\t_nicknameB\t\n" +
 	"\a_avatarB\f\n" +
 	"\n" +
@@ -4027,7 +4036,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\t_ban_gameB\x0f\n" +
 	"\r_ban_withdrawB\n" +
 	"\n" +
-	"\b_enabled\"\x14\n" +
+	"\b_enabledB\n" +
+	"\n" +
+	"\b_role_id\"\x14\n" +
 	"\x12UpdateUserResponse\"\x8e\t\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
