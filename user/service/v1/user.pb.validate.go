@@ -4143,6 +4143,10 @@ func (m *UpdateUserRequest) validate(all bool) error {
 		// no validation rules for Enabled
 	}
 
+	if m.RoleId != nil {
+		// no validation rules for RoleId
+	}
+
 	if len(errors) > 0 {
 		return UpdateUserRequestMultiError(errors)
 	}

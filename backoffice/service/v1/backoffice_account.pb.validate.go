@@ -3133,9 +3133,9 @@ func (m *Permission) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Group
+	// no validation rules for GroupId
 
-	// no validation rules for Action
+	// no validation rules for GroupName
 
 	if len(errors) > 0 {
 		return PermissionMultiError(errors)
@@ -3502,7 +3502,13 @@ func (m *UpdateAccountRoleRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
-	// no validation rules for RoleId
+	if m.RoleId != nil {
+		// no validation rules for RoleId
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
 
 	if len(errors) > 0 {
 		return UpdateAccountRoleRequestMultiError(errors)

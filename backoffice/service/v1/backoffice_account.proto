@@ -228,8 +228,11 @@ message Role {
 }
 
 message Permission {
-    string group = 1;
-    string action = 2;
+    int64 group_id = 1;
+    // group name: dashboard, game, user, finance, report, system, etc.
+    string group_name = 2;
+    // action name: read, write, delete, etc.
+    repeated string actions = 3;
 }
 
 message ListAccountsRequest {
@@ -258,7 +261,8 @@ message ListAccountsResponse {
 
 message UpdateAccountRoleRequest {
     int64 user_id = 1;
-    int64 role_id = 2;
+    optional int64 role_id = 2;
+    optional bool enabled = 3;
 }
 
 message UpdateAccountRoleResponse {}

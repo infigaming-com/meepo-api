@@ -437,6 +437,7 @@ message UpdateUserRequest {
 	optional bool ban_game = 5;
 	optional bool ban_withdraw = 6;
 	optional bool enabled = 7;
+	optional int64 role_id = 8;
 }
 
 message UpdateUserResponse {
