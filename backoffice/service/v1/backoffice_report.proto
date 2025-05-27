@@ -193,11 +193,11 @@ message GetGameDataRequest {
 }
 
 message GetGameDataResponse {
-	int64 turnover = 1;
-	int64 win_amount =  2;
-	int64 ggr = 3;
+	string turnover = 1;
+	string win_amount =  2;
+	string ggr = 3;
 	int64 bet_count = 4;
-	int64 average_bet_amount = 5;
+	string average_bet_amount = 5;
 	string rtp_percentage = 6;
 	message List {
 		string date = 1;
@@ -237,11 +237,11 @@ message GetPlayerGameDataRequest {
 }
 
 message GetPlayerGameDataResponse {
-	int64 turnover = 1;
-	int64 win_amount = 2;
-	int64 ggr = 3;
+	string turnover = 1;
+	string win_amount = 2;
+	string ggr = 3;
 	int64 bet_count = 4;
-	int64 average_bet_amount = 5;
+	string average_bet_amount = 5;
 	string rtp_percentage = 6;
 	message List {
 		string date = 1;
