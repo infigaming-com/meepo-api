@@ -198,7 +198,7 @@ message GetGameDataResponse {
 	int64 ggr = 3;
 	int64 bet_count = 4;
 	int64 average_bet_amount = 5;
-	int32 rtp_percentage = 6;
+	string rtp_percentage = 6;
 	message List {
 		string date = 1;
 		string operator = 2;
@@ -211,7 +211,7 @@ message GetGameDataResponse {
 		string turnover_percentage = 9;
 		int64 win_amount = 10;
 		int64 ggr = 11;
-		int32 ggr_percentage = 12;
+		string ggr_percentage = 12;
 		int64 bet_count = 13;
 		int64 average_bet_amount = 14;
 		string rtp_percentage = 15;
@@ -242,7 +242,7 @@ message GetPlayerGameDataResponse {
 	int64 ggr = 3;
 	int64 bet_count = 4;
 	int64 average_bet_amount = 5;
-	int32 rtp_percentage = 6;
+	string rtp_percentage = 6;
 	message List {
 		string date = 1;
 		string operator = 2;

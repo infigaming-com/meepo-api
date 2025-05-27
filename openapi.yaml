@@ -2678,8 +2678,7 @@ components:
                 averageBetAmount:
                     type: string
                 rtpPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 list:
                     type: array
                     items:
@@ -2719,8 +2718,7 @@ components:
                 ggr:
                     type: string
                 ggrPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 betCount:
                     type: string
                 averageBetAmount:
@@ -2953,8 +2951,7 @@ components:
                 averageBetAmount:
                     type: string
                 rtpPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 list:
                     type: array
                     items:

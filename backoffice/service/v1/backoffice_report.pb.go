@@ -646,7 +646,7 @@ type GetGameDataResponse struct {
 	Ggr              int64                       `protobuf:"varint,3,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	BetCount         int64                       `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
 	AverageBetAmount int64                       `protobuf:"varint,5,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
-	RtpPercentage    int32                       `protobuf:"varint,6,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
+	RtpPercentage    string                      `protobuf:"bytes,6,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
 	List             []*GetGameDataResponse_List `protobuf:"bytes,7,rep,name=list,proto3" json:"list,omitempty"`
 	Page             int32                       `protobuf:"varint,8,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize         int32                       `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
@@ -720,11 +720,11 @@ func (x *GetGameDataResponse) GetAverageBetAmount() int64 {
 	return 0
 }
 
-func (x *GetGameDataResponse) GetRtpPercentage() int32 {
+func (x *GetGameDataResponse) GetRtpPercentage() string {
 	if x != nil {
 		return x.RtpPercentage
 	}
-	return 0
+	return ""
 }
 
 func (x *GetGameDataResponse) GetList() []*GetGameDataResponse_List {
@@ -886,7 +886,7 @@ type GetPlayerGameDataResponse struct {
 	Ggr              int64                             `protobuf:"varint,3,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	BetCount         int64                             `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
 	AverageBetAmount int64                             `protobuf:"varint,5,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
-	RtpPercentage    int32                             `protobuf:"varint,6,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
+	RtpPercentage    string                            `protobuf:"bytes,6,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
 	List             []*GetPlayerGameDataResponse_List `protobuf:"bytes,7,rep,name=list,proto3" json:"list,omitempty"`
 	Page             int32                             `protobuf:"varint,8,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize         int32                             `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
@@ -960,11 +960,11 @@ func (x *GetPlayerGameDataResponse) GetAverageBetAmount() int64 {
 	return 0
 }
 
-func (x *GetPlayerGameDataResponse) GetRtpPercentage() int32 {
+func (x *GetPlayerGameDataResponse) GetRtpPercentage() string {
 	if x != nil {
 		return x.RtpPercentage
 	}
-	return 0
+	return ""
 }
 
 func (x *GetPlayerGameDataResponse) GetList() []*GetPlayerGameDataResponse_List {
@@ -2468,7 +2468,7 @@ type GetGameDataResponse_List struct {
 	TurnoverPercentage string                 `protobuf:"bytes,9,opt,name=turnover_percentage,json=turnoverPercentage,proto3" json:"turnover_percentage,omitempty"`
 	WinAmount          int64                  `protobuf:"varint,10,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
 	Ggr                int64                  `protobuf:"varint,11,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	GgrPercentage      int32                  `protobuf:"varint,12,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
+	GgrPercentage      string                 `protobuf:"bytes,12,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
 	BetCount           int64                  `protobuf:"varint,13,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
 	AverageBetAmount   int64                  `protobuf:"varint,14,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
 	RtpPercentage      string                 `protobuf:"bytes,15,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
@@ -2583,11 +2583,11 @@ func (x *GetGameDataResponse_List) GetGgr() int64 {
 	return 0
 }
 
-func (x *GetGameDataResponse_List) GetGgrPercentage() int32 {
+func (x *GetGameDataResponse_List) GetGgrPercentage() string {
 	if x != nil {
 		return x.GgrPercentage
 	}
-	return 0
+	return ""
 }
 
 func (x *GetGameDataResponse_List) GetBetCount() int64 {
@@ -4139,7 +4139,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18\x03 \x01(\x03R\x03ggr\x12\x1b\n" +
 	"\tbet_count\x18\x04 \x01(\x03R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x05 \x01(\x03R\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x06 \x01(\x05R\rrtpPercentage\x12G\n" +
+	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\x12G\n" +
 	"\x04list\x18\a \x03(\v23.api.backoffice.service.v1.GetGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\t \x01(\x05R\bpageSize\x12\x14\n" +
@@ -4159,7 +4159,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"win_amount\x18\n" +
 	" \x01(\x03R\twinAmount\x12\x10\n" +
 	"\x03ggr\x18\v \x01(\x03R\x03ggr\x12%\n" +
-	"\x0eggr_percentage\x18\f \x01(\x05R\rggrPercentage\x12\x1b\n" +
+	"\x0eggr_percentage\x18\f \x01(\tR\rggrPercentage\x12\x1b\n" +
 	"\tbet_count\x18\r \x01(\x03R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x0e \x01(\x03R\x10averageBetAmount\x12%\n" +
 	"\x0ertp_percentage\x18\x0f \x01(\tR\rrtpPercentage\"\xae\x03\n" +
@@ -4186,7 +4186,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18\x03 \x01(\x03R\x03ggr\x12\x1b\n" +
 	"\tbet_count\x18\x04 \x01(\x03R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x05 \x01(\x03R\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x06 \x01(\x05R\rrtpPercentage\x12M\n" +
+	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\x12M\n" +
 	"\x04list\x18\a \x03(\v29.api.backoffice.service.v1.GetPlayerGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\t \x01(\x05R\bpageSize\x12\x14\n" +
