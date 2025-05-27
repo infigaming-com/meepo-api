@@ -773,16 +773,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse'
-    /v1/backoffice/report/game-data-daily-summaries/list:
+    /v1/backoffice/report/game-data/get:
         post:
             tags:
                 - BackofficeReport
-            operationId: BackofficeReport_ListGameDataDailySummaries
+            operationId: BackofficeReport_GetGameData
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataDailySummariesRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataRequest'
                 required: true
             responses:
                 "200":
@@ -790,17 +790,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataDailySummariesResponse'
-    /v1/backoffice/report/game-data-summary/get:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataResponse'
+    /v1/backoffice/report/player-game-data/get:
         post:
             tags:
                 - BackofficeReport
-            operationId: BackofficeReport_GetGameDataSummary
+            operationId: BackofficeReport_GetPlayerGameData
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataSummaryRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataRequest'
                 required: true
             responses:
                 "200":
@@ -808,25 +808,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataSummaryResponse'
-    /v1/backoffice/report/player-game-data-summary/get:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_GetPlayerGameDataSummary
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataSummaryRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataSummaryResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataResponse'
     /v1/backoffice/report/register-retention/list:
         post:
             tags:
@@ -2643,7 +2625,7 @@ components:
                     format: int32
                 depositAmount:
                     type: string
-        api.backoffice.service.v1.GetGameDataSummaryRequest:
+        api.backoffice.service.v1.GetGameDataRequest:
             type: object
             properties:
                 timeRange:
@@ -2676,13 +2658,13 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-        api.backoffice.service.v1.GetGameDataSummaryResponse:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetGameDataResponse:
             type: object
             properties:
                 turnover:
@@ -2691,6 +2673,54 @@ components:
                     type: string
                 ggr:
                     type: string
+                betCount:
+                    type: string
+                averageBetAmount:
+                    type: string
+                rtpPercentage:
+                    type: integer
+                    format: int32
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetGameDataResponse_List:
+            type: object
+            properties:
+                date:
+                    type: string
+                operator:
+                    type: string
+                provider:
+                    type: string
+                gameType:
+                    type: string
+                gameName:
+                    type: string
+                gameId:
+                    type: string
+                playerCount:
+                    type: string
+                turnover:
+                    type: string
+                turnoverPercentage:
+                    type: string
+                winAmount:
+                    type: string
+                ggr:
+                    type: string
+                ggrPercentage:
+                    type: integer
+                    format: int32
                 betCount:
                     type: string
                 averageBetAmount:
@@ -2867,7 +2897,7 @@ components:
                     type: string
                 yesterday:
                     type: string
-        api.backoffice.service.v1.GetPlayerGameDataSummaryRequest:
+        api.backoffice.service.v1.GetPlayerGameDataRequest:
             type: object
             properties:
                 timeRange:
@@ -2904,13 +2934,13 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-        api.backoffice.service.v1.GetPlayerGameDataSummaryResponse:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetPlayerGameDataResponse:
             type: object
             properties:
                 turnover:
@@ -2926,6 +2956,47 @@ components:
                 rtpPercentage:
                     type: integer
                     format: int32
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetPlayerGameDataResponse_List:
+            type: object
+            properties:
+                date:
+                    type: string
+                operator:
+                    type: string
+                provider:
+                    type: string
+                gameType:
+                    type: string
+                gameId:
+                    type: string
+                userId:
+                    type: string
+                turnover:
+                    type: string
+                winAmount:
+                    type: string
+                ggr:
+                    type: string
+                rtpPercentage:
+                    type: integer
+                    format: int32
+                betCount:
+                    type: string
+                averageBetAmount:
+                    type: string
         api.backoffice.service.v1.GetSummaryRequest:
             type: object
             properties:
@@ -4222,95 +4293,6 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.ListGameDataDailySummariesRequest:
-            type: object
-            properties:
-                timeRange:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                providerIds:
-                    type: array
-                    items:
-                        type: string
-                gameTypes:
-                    type: array
-                    items:
-                        type: string
-                gameNames:
-                    type: array
-                    items:
-                        type: string
-                gameIds:
-                    type: array
-                    items:
-                        type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-        api.backoffice.service.v1.ListGameDataDailySummariesResponse:
-            type: object
-            properties:
-                dailySummaries:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataDailySummariesResponse_DailySummary'
-                page:
-                    type: string
-                pageSize:
-                    type: string
-                total:
-                    type: string
-        api.backoffice.service.v1.ListGameDataDailySummariesResponse_DailySummary:
-            type: object
-            properties:
-                date:
-                    type: string
-                    format: date-time
-                operator:
-                    type: string
-                provider:
-                    type: string
-                gameType:
-                    type: string
-                gameName:
-                    type: string
-                gameId:
-                    type: string
-                playerCount:
-                    type: string
-                turnover:
-                    type: string
-                turnoverPercentage:
-                    type: integer
-                    format: int32
-                winAmount:
-                    type: string
-                ggr:
-                    type: string
-                ggrPercentage:
-                    type: integer
-                    format: int32
-                betCount:
-                    type: string
-                averageBetAmount:
-                    type: string
-                rtpPercentage:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListGamesRequest:
             type: object
             properties:

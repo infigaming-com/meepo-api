@@ -58,3 +58,15 @@ func IsReportTimeRangeError(err error) bool {
 func ErrorReportTimeRangeError(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_REPORT_TIME_RANGE_ERROR.String(), fmt.Sprintf(format, args...))
 }
+
+func IsReportGetDataError(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REPORT_GET_DATA_ERROR.String() && e.Code == 500
+}
+
+func ErrorReportGetDataError(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_REPORT_GET_DATA_ERROR.String(), fmt.Sprintf(format, args...))
+}
