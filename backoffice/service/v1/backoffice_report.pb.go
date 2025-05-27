@@ -2464,13 +2464,13 @@ type GetGameDataResponse_List struct {
 	GameName           string                 `protobuf:"bytes,5,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
 	GameId             string                 `protobuf:"bytes,6,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	PlayerCount        int64                  `protobuf:"varint,7,opt,name=player_count,json=playerCount,proto3" json:"player_count,omitempty"`
-	Turnover           int64                  `protobuf:"varint,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	Turnover           string                 `protobuf:"bytes,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	TurnoverPercentage string                 `protobuf:"bytes,9,opt,name=turnover_percentage,json=turnoverPercentage,proto3" json:"turnover_percentage,omitempty"`
-	WinAmount          int64                  `protobuf:"varint,10,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
-	Ggr                int64                  `protobuf:"varint,11,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	WinAmount          string                 `protobuf:"bytes,10,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	Ggr                string                 `protobuf:"bytes,11,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	GgrPercentage      string                 `protobuf:"bytes,12,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
 	BetCount           int64                  `protobuf:"varint,13,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	AverageBetAmount   int64                  `protobuf:"varint,14,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
+	AverageBetAmount   string                 `protobuf:"bytes,14,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
 	RtpPercentage      string                 `protobuf:"bytes,15,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -2555,11 +2555,11 @@ func (x *GetGameDataResponse_List) GetPlayerCount() int64 {
 	return 0
 }
 
-func (x *GetGameDataResponse_List) GetTurnover() int64 {
+func (x *GetGameDataResponse_List) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
 func (x *GetGameDataResponse_List) GetTurnoverPercentage() string {
@@ -2569,18 +2569,18 @@ func (x *GetGameDataResponse_List) GetTurnoverPercentage() string {
 	return ""
 }
 
-func (x *GetGameDataResponse_List) GetWinAmount() int64 {
+func (x *GetGameDataResponse_List) GetWinAmount() string {
 	if x != nil {
 		return x.WinAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetGameDataResponse_List) GetGgr() int64 {
+func (x *GetGameDataResponse_List) GetGgr() string {
 	if x != nil {
 		return x.Ggr
 	}
-	return 0
+	return ""
 }
 
 func (x *GetGameDataResponse_List) GetGgrPercentage() string {
@@ -2597,11 +2597,11 @@ func (x *GetGameDataResponse_List) GetBetCount() int64 {
 	return 0
 }
 
-func (x *GetGameDataResponse_List) GetAverageBetAmount() int64 {
+func (x *GetGameDataResponse_List) GetAverageBetAmount() string {
 	if x != nil {
 		return x.AverageBetAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *GetGameDataResponse_List) GetRtpPercentage() string {
@@ -2619,12 +2619,12 @@ type GetPlayerGameDataResponse_List struct {
 	GameType         string                 `protobuf:"bytes,4,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"`
 	GameId           string                 `protobuf:"bytes,5,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	UserId           string                 `protobuf:"bytes,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Turnover         int64                  `protobuf:"varint,7,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	WinAmount        int64                  `protobuf:"varint,8,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
-	Ggr              int64                  `protobuf:"varint,9,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	Turnover         string                 `protobuf:"bytes,7,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	WinAmount        string                 `protobuf:"bytes,8,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	Ggr              string                 `protobuf:"bytes,9,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	RtpPercentage    string                 `protobuf:"bytes,10,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
 	BetCount         int64                  `protobuf:"varint,11,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	AverageBetAmount int64                  `protobuf:"varint,12,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
+	AverageBetAmount string                 `protobuf:"bytes,12,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -2701,25 +2701,25 @@ func (x *GetPlayerGameDataResponse_List) GetUserId() string {
 	return ""
 }
 
-func (x *GetPlayerGameDataResponse_List) GetTurnover() int64 {
+func (x *GetPlayerGameDataResponse_List) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetPlayerGameDataResponse_List) GetWinAmount() int64 {
+func (x *GetPlayerGameDataResponse_List) GetWinAmount() string {
 	if x != nil {
 		return x.WinAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetPlayerGameDataResponse_List) GetGgr() int64 {
+func (x *GetPlayerGameDataResponse_List) GetGgr() string {
 	if x != nil {
 		return x.Ggr
 	}
-	return 0
+	return ""
 }
 
 func (x *GetPlayerGameDataResponse_List) GetRtpPercentage() string {
@@ -2736,11 +2736,11 @@ func (x *GetPlayerGameDataResponse_List) GetBetCount() int64 {
 	return 0
 }
 
-func (x *GetPlayerGameDataResponse_List) GetAverageBetAmount() int64 {
+func (x *GetPlayerGameDataResponse_List) GetAverageBetAmount() string {
 	if x != nil {
 		return x.AverageBetAmount
 	}
-	return 0
+	return ""
 }
 
 type GetDepositSummariesResponse_DailySummary struct {
@@ -4153,15 +4153,15 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tgame_name\x18\x05 \x01(\tR\bgameName\x12\x17\n" +
 	"\agame_id\x18\x06 \x01(\tR\x06gameId\x12!\n" +
 	"\fplayer_count\x18\a \x01(\x03R\vplayerCount\x12\x1a\n" +
-	"\bturnover\x18\b \x01(\x03R\bturnover\x12/\n" +
+	"\bturnover\x18\b \x01(\tR\bturnover\x12/\n" +
 	"\x13turnover_percentage\x18\t \x01(\tR\x12turnoverPercentage\x12\x1d\n" +
 	"\n" +
 	"win_amount\x18\n" +
-	" \x01(\x03R\twinAmount\x12\x10\n" +
-	"\x03ggr\x18\v \x01(\x03R\x03ggr\x12%\n" +
+	" \x01(\tR\twinAmount\x12\x10\n" +
+	"\x03ggr\x18\v \x01(\tR\x03ggr\x12%\n" +
 	"\x0eggr_percentage\x18\f \x01(\tR\rggrPercentage\x12\x1b\n" +
 	"\tbet_count\x18\r \x01(\x03R\bbetCount\x12,\n" +
-	"\x12average_bet_amount\x18\x0e \x01(\x03R\x10averageBetAmount\x12%\n" +
+	"\x12average_bet_amount\x18\x0e \x01(\tR\x10averageBetAmount\x12%\n" +
 	"\x0ertp_percentage\x18\x0f \x01(\tR\rrtpPercentage\"\xae\x03\n" +
 	"\x18GetPlayerGameDataRequest\x12C\n" +
 	"\n" +
@@ -4199,14 +4199,14 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tgame_type\x18\x04 \x01(\tR\bgameType\x12\x17\n" +
 	"\agame_id\x18\x05 \x01(\tR\x06gameId\x12\x17\n" +
 	"\auser_id\x18\x06 \x01(\tR\x06userId\x12\x1a\n" +
-	"\bturnover\x18\a \x01(\x03R\bturnover\x12\x1d\n" +
+	"\bturnover\x18\a \x01(\tR\bturnover\x12\x1d\n" +
 	"\n" +
-	"win_amount\x18\b \x01(\x03R\twinAmount\x12\x10\n" +
-	"\x03ggr\x18\t \x01(\x03R\x03ggr\x12%\n" +
+	"win_amount\x18\b \x01(\tR\twinAmount\x12\x10\n" +
+	"\x03ggr\x18\t \x01(\tR\x03ggr\x12%\n" +
 	"\x0ertp_percentage\x18\n" +
 	" \x01(\tR\rrtpPercentage\x12\x1b\n" +
 	"\tbet_count\x18\v \x01(\x03R\bbetCount\x12,\n" +
-	"\x12average_bet_amount\x18\f \x01(\x03R\x10averageBetAmount\"\x9e\x03\n" +
+	"\x12average_bet_amount\x18\f \x01(\tR\x10averageBetAmount\"\x9e\x03\n" +
 	"\x1aGetDepositSummariesRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +

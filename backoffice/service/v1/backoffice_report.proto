@@ -207,13 +207,13 @@ message GetGameDataResponse {
 		string game_name = 5;
 		string game_id = 6;
 		int64 player_count = 7;
-		int64 turnover = 8;
+		string turnover = 8;
 		string turnover_percentage = 9;
-		int64 win_amount = 10;
-		int64 ggr = 11;
+		string win_amount = 10;
+		string ggr = 11;
 		string ggr_percentage = 12;
 		int64 bet_count = 13;
-		int64 average_bet_amount = 14;
+		string average_bet_amount = 14;
 		string rtp_percentage = 15;
 	}
 	repeated List list = 7;
@@ -250,12 +250,12 @@ message GetPlayerGameDataResponse {
 		string game_type = 4;
 		string game_id = 5;
 		string user_id = 6;
-		int64 turnover = 7;
-		int64 win_amount = 8;
-		int64 ggr = 9;
+		string turnover = 7;
+		string win_amount = 8;
+		string ggr = 9;
 		string rtp_percentage = 10;
 		int64 bet_count = 11;
-		int64 average_bet_amount = 12;
+		string average_bet_amount = 12;
 	}
 	repeated List list = 7;
 	int32 page = 8;
