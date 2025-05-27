@@ -130,7 +130,7 @@ message ListDailySummariesRequest {
 message ListDailySummariesResponse {
 	message DailySummary {
 		google.protobuf.Timestamp date = 1;
-		string operator = 2;
+		string operator_name = 2;
 		string country = 3;
 		int64 visits = 4;
 		int64 unique_visits = 5;
@@ -269,18 +269,18 @@ message GetDepositSummariesRequest {
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
 	repeated string currencies = 5;
-	optional google.protobuf.Timestamp start_time = 6;
-	optional google.protobuf.Timestamp end_time = 7;
 }
 
 message GetDepositSummariesResponse {
-	message DailySummary {
-		google.protobuf.Timestamp date = 1;
-		string currency = 2;
-		int32 deposit_success_percentage = 3;
-		int64 deposit_amount = 4;
+	message Summary {
+		message SummaryData {
+			string date = 1;
+			string data = 2;
+		}
+		repeated SummaryData summary_data = 1;
 	}
-	repeated DailySummary daily_summaries = 1;
+	map<string, Summary> deposit_success_rate_summary_map = 1; // key is currency, value is summary
+	map<string, Summary> deposit_amount_summary_map = 2; // key is currency, value is summary
 }
 
 message ListDepositDetailsRequest {
@@ -289,33 +289,37 @@ message ListDepositDetailsRequest {
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
 	repeated string currencies = 5;
-	optional google.protobuf.Timestamp start_time = 6;
-	optional google.protobuf.Timestamp end_time = 7;
-	optional int32 page = 8;
-	optional int32 page_size = 9;
+	int32 page = 6;
+	int32 page_size = 7;
 }
 
 message ListDepositDetailsResponse {
-	message DailyDetail {
-		google.protobuf.Timestamp date = 1;
-		string operator = 2;
+	message Detail {
+		string date = 1;
+		string operator_name = 2;
 		string currency = 3;
 		string deposit_amount = 4;
-		int32 deposit_users = 5;
-		string ftd_amount = 6;
-		string ftd_users = 7;
-		string same_day_ftd_amount = 8;
-		int32 same_day_ftd_users = 9;
-		string repeated_deposit_amount = 10;
-		string repeated_deposit_users = 11;
-		string same_day_ftd = 12;
-		string non_same_day_ftd = 13;
-		int32 average_ftd_amount_for_same_day_registred_users = 14;
-		int32 average_ftd_amount_for_non_same_day_registred_users = 15;
-		int32 success_percentage = 16;
-		int32 amount_proportion_percentage = 17;
+		string deposit_amount_usd = 5;
+		int32 deposit_users = 6;
+		string ftd_amount = 7;
+		string ftd_amount_usd = 8;
+		int32 ftd_users = 9;
+		string same_day_ftd_amount = 10;
+		string same_day_ftd_amount_usd = 11;
+		int32 same_day_ftd_users = 12;
+		string repeated_deposit_amount = 13;
+		string repeated_deposit_amount_usd = 14;
+		int32 repeated_deposit_users = 15;
+		int32 same_day_ftd = 16;
+		int32 non_same_day_ftd = 17;
+		string average_ftd_amount_for_same_day_registred_users = 18;
+		string average_ftd_amount_usd_for_same_day_registred_users = 19;
+		string average_ftd_amount_for_non_same_day_registred_users = 20;
+		string average_ftd_amount_usd_for_non_same_day_registred_users = 21;
+		string success_rate = 22; // decimal number between 0-100, two decimal places
+		string amount_proportion = 23; // decimal number between 0-100, two decimal places
 	}
-	repeated DailyDetail daily_details = 1;
+	repeated Detail details = 1;
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;
@@ -327,18 +331,18 @@ message GetWithdrawSummariesRequest {
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
 	repeated string currencies = 5;
-	optional google.protobuf.Timestamp start_time = 6;
-	optional google.protobuf.Timestamp end_time = 7;
 }
 
 message GetWithdrawSummariesResponse {
-	message DailySummary {
-		google.protobuf.Timestamp date = 1;
-		string currency = 2;
-		int32 withdraw_success_percentage = 3;
-		string withdraw_amount = 4;
+	message Summary {
+		message SummaryData {
+			string date = 1;
+			string data = 2;
+		}
+		repeated SummaryData summary_data = 1;
 	}
-	repeated DailySummary daily_summaries = 1;
+	map<string, Summary> withdraw_success_rate_summary_map = 1; // key is currency, value is summary
+	map<string, Summary> withdraw_amount_summary_map = 2; // key is currency, value is summary
 }
 
 message ListWithdrawDetailsRequest {
@@ -354,7 +358,7 @@ message ListWithdrawDetailsRequest {
 message ListWithdrawDetailsResponse {
 	message Detail {
 		string date = 1;
-		string operator = 2; // Only return operator_id
+		string operator_name = 2;
 		string currency = 3; 
 		string withdraw_amount = 4;
 		string withdraw_amount_usd = 5;
@@ -374,10 +378,10 @@ message ListWithdrawDetailsResponse {
 		string average_ftw_amount_usd_for_same_day_registred_users = 19;
 		string average_ftw_amount_for_non_same_day_registred_users = 20;
 		string average_ftw_amount_usd_for_non_same_day_registred_users = 21;
-		string success_rate = 22; // decimal number between 0-100 representing percentage
+		string success_rate = 22; // decimal number between 0-100, two decimal places
 		string deposit_minus_withdraw_amount = 23;
 		string deposit_minus_withdraw_amount_usd = 24;
-		string amount_proportion = 25; // decimal number between 0-100 representing percentage
+		string amount_proportion = 25; // decimal number between 0-100, two decimal places
 	}
 	repeated Detail details = 1;
 	int32 page = 2;
@@ -397,7 +401,7 @@ message ListRegisterRetentionRequest {
 message ListRegisterRetentionResponse {
 	message List {
 		string date = 1;
-		string operator = 2;
+		string operator_name = 2;
 		int32 reg_users = 3;
 		int32 paid_users = 4;
 		int32 active_users = 5;
@@ -462,7 +466,7 @@ message ListDepositVtgDetailsResponse {
 		string date = 1;
 		string week = 2;
 		string month = 3;
-		string operator = 4;
+		string operator_name = 4;
 		string currency = 5;
 		string deposit_amount = 6;
 		int32 deposit_users = 7;
@@ -498,7 +502,7 @@ message ListWithdrawVtgDetailsRequest {
 message ListWithdrawVtgDetailsResponse {
 	message Detail {
 		string date = 1;
-		string operator = 2;
+		string operator_name = 2;
 		string currency = 3;
 		string withdraw_amount = 4;
 		int32 withdraw_users = 5;

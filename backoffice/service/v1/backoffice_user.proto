@@ -131,7 +131,7 @@ message ListUsersRequest {
 	optional bool ban_withdraw = 18;
 	optional bool ban_game = 19;
 	optional bool ban_login = 20;
-	// optional bool online = 21;
+	optional bool online = 21;
 	optional int32 page = 22;
 	optional int32 page_size = 23;
 }
@@ -153,7 +153,7 @@ message ListUsersResponse {
 		bool ban_withdraw = 13;
 		bool ban_game = 14;
 		bool ban_login = 15;
-		// bool online = 16;
+		bool online = 16;
 		google.protobuf.Timestamp last_login_at = 17;
 		google.protobuf.Timestamp registered_at = 18;
 		// int32 risk_level = 19;

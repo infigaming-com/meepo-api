@@ -149,6 +149,8 @@ service User {
 	rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse) {}
 
 	rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {}
+
+	rpc ListRoles(ListRolesRequest) returns (ListRolesResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -465,9 +467,9 @@ message ListUsersRequest {
 	optional bool ban_game = 19;
 	optional bool ban_login = 20;
 	optional string user_type = 21;
-	// optional bool online = 21;
-	optional int32 page = 22;
-	optional int32 page_size = 23;
+	optional bool online = 22;
+	optional int32 page = 23;
+	optional int32 page_size = 24;
 }
 
 message ListUsersResponse {
@@ -487,7 +489,7 @@ message ListUsersResponse {
 		bool ban_withdraw = 13;
 		bool ban_game = 14;
 		bool ban_login = 15;
-		// bool online = 16;
+		bool online = 16;
 		google.protobuf.Timestamp last_login_at = 17;
 		google.protobuf.Timestamp registered_at = 18;
 		// int32 risk_level = 19;
@@ -590,7 +592,7 @@ message GetUserProfileResponse {
 	string nickname = 1;
 	int64 user_id = 2;
 	int32 vip_level = 3; // Not available for now, only return 1
-	bool online = 4; // Not available for now, only return true
+	bool online = 4;
 	bool ban_withdraw = 5;
 	bool ban_game = 6;
 	bool ban_login = 7;
@@ -615,3 +617,21 @@ message Permission {
 }
 
 message CreateRoleResponse {}
+
+message ListRolesRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+}
+
+message Role {
+	int64 role_id = 1;
+	string name = 2;
+	repeated Permission permissions = 3;
+}
+
+message ListRolesResponse {
+	repeated Role roles = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
+}

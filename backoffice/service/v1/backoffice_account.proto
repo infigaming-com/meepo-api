@@ -262,8 +262,8 @@ message CreateRoleRequest {
 message CreateRoleResponse {}
 
 message ListRolesRequest {
-    optional int64 page = 1;
-    optional int64 page_size = 2;
+    optional int32 page = 1;
+    optional int32 page_size = 2;
 }
 
 message ListRolesResponse {
