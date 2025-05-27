@@ -4558,6 +4558,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.SystemCurrency'
+                total:
+                    type: integer
+                    format: int32
+                totalEnabled:
+                    type: integer
+                    format: int32
+                totalHidden:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListTagsRequest:
             type: object
             properties: {}
