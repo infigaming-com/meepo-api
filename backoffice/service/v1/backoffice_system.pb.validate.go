@@ -538,6 +538,12 @@ func (m *ListSystemCurrenciesResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for Total
+
+	// no validation rules for TotalEnabled
+
+	// no validation rules for TotalHidden
+
 	if len(errors) > 0 {
 		return ListSystemCurrenciesResponseMultiError(errors)
 	}

@@ -554,6 +554,9 @@ func (x *ListCurrenciesRequest) GetHidden() bool {
 type ListCurrenciesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Currencies    []*Currency            `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	TotalEnabled  int32                  `protobuf:"varint,3,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
+	TotalHidden   int32                  `protobuf:"varint,4,opt,name=total_hidden,json=totalHidden,proto3" json:"total_hidden,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -593,6 +596,27 @@ func (x *ListCurrenciesResponse) GetCurrencies() []*Currency {
 		return x.Currencies
 	}
 	return nil
+}
+
+func (x *ListCurrenciesResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *ListCurrenciesResponse) GetTotalEnabled() int32 {
+	if x != nil {
+		return x.TotalEnabled
+	}
+	return 0
+}
+
+func (x *ListCurrenciesResponse) GetTotalHidden() int32 {
+	if x != nil {
+		return x.TotalHidden
+	}
+	return 0
 }
 
 var File_system_service_v1_system_proto protoreflect.FileDescriptor
@@ -654,11 +678,14 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x06hidden\x18\x03 \x01(\bH\x01R\x06hidden\x88\x01\x01B\n" +
 	"\n" +
 	"\b_enabledB\t\n" +
-	"\a_hidden\"U\n" +
+	"\a_hidden\"\xb3\x01\n" +
 	"\x16ListCurrenciesResponse\x12;\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\v2\x1b.system.service.v1.CurrencyR\n" +
-	"currencies2\xa0\x03\n" +
+	"currencies\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
+	"\rtotal_enabled\x18\x03 \x01(\x05R\ftotalEnabled\x12!\n" +
+	"\ftotal_hidden\x18\x04 \x01(\x05R\vtotalHidden2\xa0\x03\n" +
 	"\x06System\x12^\n" +
 	"\vAddCurrency\x12%.system.service.v1.AddCurrencyRequest\x1a&.system.service.v1.AddCurrencyResponse\"\x00\x12g\n" +
 	"\x0eUpdateCurrency\x12(.system.service.v1.UpdateCurrencyRequest\x1a).system.service.v1.UpdateCurrencyResponse\"\x00\x12d\n" +
