@@ -147,6 +147,8 @@ service User {
 	rpc GetCommentsByUserId(GetCommentsByUserIdRequest) returns (GetCommentsByUserIdResponse) {}
 
 	rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse) {}
+
+	rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -434,6 +436,7 @@ message UpdateUserRequest {
 	optional bool ban_login = 4;
 	optional bool ban_game = 5;
 	optional bool ban_withdraw = 6;
+	optional bool enabled = 7;
 }
 
 message UpdateUserResponse {
@@ -460,6 +463,7 @@ message ListUsersRequest {
 	optional bool ban_withdraw = 18;
 	optional bool ban_game = 19;
 	optional bool ban_login = 20;
+	optional string user_type = 21;
 	// optional bool online = 21;
 	optional int32 page = 22;
 	optional int32 page_size = 23;
@@ -492,6 +496,7 @@ message ListUsersResponse {
 		// string device = 23;
 		// string source = 24;
 		string registration_ip = 25;
+		bool enabled = 26;
 	}
 	repeated User users = 1;
 	int32 page = 2;
@@ -596,3 +601,15 @@ message GetUserProfileResponse {
 	int32 login_page = 13;
 	int32 login_page_size = 14;
 }
+
+message CreateRoleRequest {
+	string name = 1;
+	repeated Permission permissions = 2;
+}
+
+message Permission {
+	string page = 1;
+	string action = 2;
+}
+
+message CreateRoleResponse {}
