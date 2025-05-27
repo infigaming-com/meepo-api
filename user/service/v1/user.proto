@@ -609,8 +609,9 @@ message CreateRoleRequest {
 }
 
 message Permission {
-	string page = 1;
-	string action = 2;
+	int64 group_id = 1;
+	string group_name = 2;
+	repeated string actions = 3;
 }
 
 message CreateRoleResponse {}

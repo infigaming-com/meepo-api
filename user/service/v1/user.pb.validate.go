@@ -6069,9 +6069,9 @@ func (m *Permission) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Page
+	// no validation rules for GroupId
 
-	// no validation rules for Action
+	// no validation rules for GroupName
 
 	if len(errors) > 0 {
 		return PermissionMultiError(errors)

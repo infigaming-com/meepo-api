@@ -3180,8 +3180,9 @@ func (x *CreateRoleRequest) GetPermissions() []*Permission {
 
 type Permission struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          string                 `protobuf:"bytes,1,opt,name=page,proto3" json:"page,omitempty"`
-	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
+	GroupId       int64                  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	GroupName     string                 `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`
+	Actions       []string               `protobuf:"bytes,3,rep,name=actions,proto3" json:"actions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3216,18 +3217,25 @@ func (*Permission) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{53}
 }
 
-func (x *Permission) GetPage() string {
+func (x *Permission) GetGroupId() int64 {
 	if x != nil {
-		return x.Page
+		return x.GroupId
+	}
+	return 0
+}
+
+func (x *Permission) GetGroupName() string {
+	if x != nil {
+		return x.GroupName
 	}
 	return ""
 }
 
-func (x *Permission) GetAction() string {
+func (x *Permission) GetActions() []string {
 	if x != nil {
-		return x.Action
+		return x.Actions
 	}
-	return ""
+	return nil
 }
 
 type CreateRoleResponse struct {
@@ -4207,11 +4215,13 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"j\n" +
 	"\x11CreateRoleRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12A\n" +
-	"\vpermissions\x18\x02 \x03(\v2\x1f.api.user.service.v1.PermissionR\vpermissions\"8\n" +
+	"\vpermissions\x18\x02 \x03(\v2\x1f.api.user.service.v1.PermissionR\vpermissions\"`\n" +
 	"\n" +
-	"Permission\x12\x12\n" +
-	"\x04page\x18\x01 \x01(\tR\x04page\x12\x16\n" +
-	"\x06action\x18\x02 \x01(\tR\x06action\"\x14\n" +
+	"Permission\x12\x19\n" +
+	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\x12\x1d\n" +
+	"\n" +
+	"group_name\x18\x02 \x01(\tR\tgroupName\x12\x18\n" +
+	"\aactions\x18\x03 \x03(\tR\aactions\"\x14\n" +
 	"\x12CreateRoleResponse*j\n" +
 	"\bAuthType\x12\x19\n" +
 	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
