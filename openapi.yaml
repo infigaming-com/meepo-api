@@ -4659,9 +4659,11 @@ components:
             type: object
             properties:
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListRolesResponse:
             type: object
             properties:

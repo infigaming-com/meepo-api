@@ -149,6 +149,8 @@ service User {
 	rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse) {}
 
 	rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {}
+
+	rpc ListRoles(ListRolesRequest) returns (ListRolesResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -615,3 +617,21 @@ message Permission {
 }
 
 message CreateRoleResponse {}
+
+message ListRolesRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+}
+
+message Role {
+	int64 role_id = 1;
+	string name = 2;
+	repeated Permission permissions = 3;
+}
+
+message ListRolesResponse {
+	repeated Role roles = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
+}

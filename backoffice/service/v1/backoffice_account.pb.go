@@ -1636,8 +1636,8 @@ func (*CreateRoleResponse) Descriptor() ([]byte, []int) {
 
 type ListRolesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          *int64                 `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int64                 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page          *int32                 `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1672,14 +1672,14 @@ func (*ListRolesRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{34}
 }
 
-func (x *ListRolesRequest) GetPage() int64 {
+func (x *ListRolesRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListRolesRequest) GetPageSize() int64 {
+func (x *ListRolesRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
@@ -1958,8 +1958,8 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\vpermissions\x18\x02 \x03(\v2%.api.backoffice.service.v1.PermissionR\vpermissions\"\x14\n" +
 	"\x12CreateRoleResponse\"d\n" +
 	"\x10ListRolesRequest\x12\x17\n" +
-	"\x04page\x18\x01 \x01(\x03H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x02 \x01(\x03H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\x91\x01\n" +
