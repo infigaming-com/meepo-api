@@ -2289,9 +2289,9 @@ type ListUsersRequest struct {
 	BanGame       *bool   `protobuf:"varint,19,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
 	BanLogin      *bool   `protobuf:"varint,20,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
 	UserType      *string `protobuf:"bytes,21,opt,name=user_type,json=userType,proto3,oneof" json:"user_type,omitempty"`
-	// optional bool online = 21;
-	Page          *int32 `protobuf:"varint,22,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32 `protobuf:"varint,23,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Online        *bool   `protobuf:"varint,22,opt,name=online,proto3,oneof" json:"online,omitempty"`
+	Page          *int32  `protobuf:"varint,23,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32  `protobuf:"varint,24,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2450,6 +2450,13 @@ func (x *ListUsersRequest) GetUserType() string {
 		return *x.UserType
 	}
 	return ""
+}
+
+func (x *ListUsersRequest) GetOnline() bool {
+	if x != nil && x.Online != nil {
+		return *x.Online
+	}
+	return false
 }
 
 func (x *ListUsersRequest) GetPage() int32 {
@@ -2983,7 +2990,7 @@ type GetUserProfileResponse struct {
 	Nickname           string                                     `protobuf:"bytes,1,opt,name=nickname,proto3" json:"nickname,omitempty"`
 	UserId             int64                                      `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	VipLevel           int32                                      `protobuf:"varint,3,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"` // Not available for now, only return 1
-	Online             bool                                       `protobuf:"varint,4,opt,name=online,proto3" json:"online,omitempty"`                     // Not available for now, only return true
+	Online             bool                                       `protobuf:"varint,4,opt,name=online,proto3" json:"online,omitempty"`
 	BanWithdraw        bool                                       `protobuf:"varint,5,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
 	BanGame            bool                                       `protobuf:"varint,6,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
 	BanLogin           bool                                       `protobuf:"varint,7,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
@@ -3471,7 +3478,7 @@ type ListUsersResponse_User struct {
 	BanWithdraw  bool                   `protobuf:"varint,13,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
 	BanGame      bool                   `protobuf:"varint,14,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
 	BanLogin     bool                   `protobuf:"varint,15,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
-	// bool online = 16;
+	Online       bool                   `protobuf:"varint,16,opt,name=online,proto3" json:"online,omitempty"`
 	LastLoginAt  *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
 	RegisteredAt *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
 	// int32 risk_level = 19;
@@ -3617,6 +3624,13 @@ func (x *ListUsersResponse_User) GetBanGame() bool {
 func (x *ListUsersResponse_User) GetBanLogin() bool {
 	if x != nil {
 		return x.BanLogin
+	}
+	return false
+}
+
+func (x *ListUsersResponse_User) GetOnline() bool {
+	if x != nil {
+		return x.Online
 	}
 	return false
 }
@@ -4227,7 +4241,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\b_enabledB\n" +
 	"\n" +
 	"\b_role_id\"\x14\n" +
-	"\x12UpdateUserResponse\"\x8e\t\n" +
+	"\x12UpdateUserResponse\"\xb6\t\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -4250,9 +4264,10 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\fban_withdraw\x18\x12 \x01(\bH\rR\vbanWithdraw\x88\x01\x01\x12\x1e\n" +
 	"\bban_game\x18\x13 \x01(\bH\x0eR\abanGame\x88\x01\x01\x12 \n" +
 	"\tban_login\x18\x14 \x01(\bH\x0fR\bbanLogin\x88\x01\x01\x12 \n" +
-	"\tuser_type\x18\x15 \x01(\tH\x10R\buserType\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x16 \x01(\x05H\x11R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x17 \x01(\x05H\x12R\bpageSize\x88\x01\x01B\n" +
+	"\tuser_type\x18\x15 \x01(\tH\x10R\buserType\x88\x01\x01\x12\x1b\n" +
+	"\x06online\x18\x16 \x01(\bH\x11R\x06online\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x17 \x01(\x05H\x12R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x18 \x01(\x05H\x13R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -4275,15 +4290,16 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
 	"_ban_loginB\f\n" +
 	"\n" +
-	"_user_typeB\a\n" +
+	"_user_typeB\t\n" +
+	"\a_onlineB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x9d\x06\n" +
+	"_page_size\"\xb5\x06\n" +
 	"\x11ListUsersResponse\x12A\n" +
 	"\x05users\x18\x01 \x03(\v2+.api.user.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xfd\x04\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x95\x05\n" +
 	"\x04User\x12\x1a\n" +
 	"\bretailer\x18\x01 \x01(\tR\bretailer\x12\x14\n" +
 	"\x05group\x18\x02 \x01(\tR\x05group\x12#\n" +
@@ -4300,7 +4316,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x04tags\x18\f \x03(\tR\x04tags\x12!\n" +
 	"\fban_withdraw\x18\r \x01(\bR\vbanWithdraw\x12\x19\n" +
 	"\bban_game\x18\x0e \x01(\bR\abanGame\x12\x1b\n" +
-	"\tban_login\x18\x0f \x01(\bR\bbanLogin\x12>\n" +
+	"\tban_login\x18\x0f \x01(\bR\bbanLogin\x12\x16\n" +
+	"\x06online\x18\x10 \x01(\bR\x06online\x12>\n" +
 	"\rlast_login_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
 	"\rregistered_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
 	"\acountry\x18\x16 \x01(\tR\acountry\x12'\n" +
