@@ -2613,18 +2613,11 @@ components:
         api.backoffice.service.v1.GetDepositSummariesResponse_Summary:
             type: object
             properties:
-                date:
-                    type: string
-                    format: date-time
-                currency:
-                    type: string
-                depositSuccessPercentage:
-                    type: integer
-                    format: int32
-                depositAmount:
-                    type: string
+                summaryData:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.Summary_SummaryData'
         api.backoffice.service.v1.GetGameDataRequest:
-
             type: object
             properties:
                 timeRange:
