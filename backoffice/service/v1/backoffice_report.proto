@@ -208,7 +208,7 @@ message GetGameDataResponse {
 		string game_id = 6;
 		int64 player_count = 7;
 		int64 turnover = 8;
-		int64 turnover_percentage = 9;
+		int32 turnover_percentage = 9;
 		int64 win_amount = 10;
 		int64 ggr = 11;
 		int32 ggr_percentage = 12;

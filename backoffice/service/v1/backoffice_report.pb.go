@@ -2465,7 +2465,7 @@ type GetGameDataResponse_List struct {
 	GameId             string                 `protobuf:"bytes,6,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	PlayerCount        int64                  `protobuf:"varint,7,opt,name=player_count,json=playerCount,proto3" json:"player_count,omitempty"`
 	Turnover           int64                  `protobuf:"varint,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	TurnoverPercentage int64                  `protobuf:"varint,9,opt,name=turnover_percentage,json=turnoverPercentage,proto3" json:"turnover_percentage,omitempty"`
+	TurnoverPercentage int32                  `protobuf:"varint,9,opt,name=turnover_percentage,json=turnoverPercentage,proto3" json:"turnover_percentage,omitempty"`
 	WinAmount          int64                  `protobuf:"varint,10,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
 	Ggr                int64                  `protobuf:"varint,11,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	GgrPercentage      int32                  `protobuf:"varint,12,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
@@ -2562,7 +2562,7 @@ func (x *GetGameDataResponse_List) GetTurnover() int64 {
 	return 0
 }
 
-func (x *GetGameDataResponse_List) GetTurnoverPercentage() int64 {
+func (x *GetGameDataResponse_List) GetTurnoverPercentage() int32 {
 	if x != nil {
 		return x.TurnoverPercentage
 	}
@@ -4154,7 +4154,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\agame_id\x18\x06 \x01(\tR\x06gameId\x12!\n" +
 	"\fplayer_count\x18\a \x01(\x03R\vplayerCount\x12\x1a\n" +
 	"\bturnover\x18\b \x01(\x03R\bturnover\x12/\n" +
-	"\x13turnover_percentage\x18\t \x01(\x03R\x12turnoverPercentage\x12\x1d\n" +
+	"\x13turnover_percentage\x18\t \x01(\x05R\x12turnoverPercentage\x12\x1d\n" +
 	"\n" +
 	"win_amount\x18\n" +
 	" \x01(\x03R\twinAmount\x12\x10\n" +

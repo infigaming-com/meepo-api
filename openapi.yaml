@@ -2713,7 +2713,8 @@ components:
                 turnover:
                     type: string
                 turnoverPercentage:
-                    type: string
+                    type: integer
+                    format: int32
                 winAmount:
                     type: string
                 ggr:
