@@ -34,7 +34,6 @@ const (
 	BackofficeAccount_SendRegisterVerificationCode_FullMethodName = "/api.backoffice.service.v1.BackofficeAccount/SendRegisterVerificationCode"
 	BackofficeAccount_AccountInfo_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAccount/AccountInfo"
 	BackofficeAccount_ListAccounts_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAccount/ListAccounts"
-	BackofficeAccount_UpdateAccountRole_FullMethodName            = "/api.backoffice.service.v1.BackofficeAccount/UpdateAccountRole"
 	BackofficeAccount_CreateRole_FullMethodName                   = "/api.backoffice.service.v1.BackofficeAccount/CreateRole"
 	BackofficeAccount_ListRoles_FullMethodName                    = "/api.backoffice.service.v1.BackofficeAccount/ListRoles"
 )
@@ -58,7 +57,6 @@ type BackofficeAccountClient interface {
 	SendRegisterVerificationCode(ctx context.Context, in *SendRegisterVerificationCodeRequest, opts ...grpc.CallOption) (*SendRegisterVerificationCodeResponse, error)
 	AccountInfo(ctx context.Context, in *AccountInfoRequest, opts ...grpc.CallOption) (*AccountInfoResponse, error)
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error)
-	UpdateAccountRole(ctx context.Context, in *UpdateAccountRoleRequest, opts ...grpc.CallOption) (*UpdateAccountRoleResponse, error)
 	CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*CreateRoleResponse, error)
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
 }
@@ -221,16 +219,6 @@ func (c *backofficeAccountClient) ListAccounts(ctx context.Context, in *ListAcco
 	return out, nil
 }
 
-func (c *backofficeAccountClient) UpdateAccountRole(ctx context.Context, in *UpdateAccountRoleRequest, opts ...grpc.CallOption) (*UpdateAccountRoleResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateAccountRoleResponse)
-	err := c.cc.Invoke(ctx, BackofficeAccount_UpdateAccountRole_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *backofficeAccountClient) CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*CreateRoleResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateRoleResponse)
@@ -270,7 +258,6 @@ type BackofficeAccountServer interface {
 	SendRegisterVerificationCode(context.Context, *SendRegisterVerificationCodeRequest) (*SendRegisterVerificationCodeResponse, error)
 	AccountInfo(context.Context, *AccountInfoRequest) (*AccountInfoResponse, error)
 	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)
-	UpdateAccountRole(context.Context, *UpdateAccountRoleRequest) (*UpdateAccountRoleResponse, error)
 	CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleResponse, error)
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
 	mustEmbedUnimplementedBackofficeAccountServer()
@@ -327,9 +314,6 @@ func (UnimplementedBackofficeAccountServer) AccountInfo(context.Context, *Accoun
 }
 func (UnimplementedBackofficeAccountServer) ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccounts not implemented")
-}
-func (UnimplementedBackofficeAccountServer) UpdateAccountRole(context.Context, *UpdateAccountRoleRequest) (*UpdateAccountRoleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountRole not implemented")
 }
 func (UnimplementedBackofficeAccountServer) CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateRole not implemented")
@@ -628,24 +612,6 @@ func _BackofficeAccount_ListAccounts_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeAccount_UpdateAccountRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateAccountRoleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeAccountServer).UpdateAccountRole(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeAccount_UpdateAccountRole_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeAccountServer).UpdateAccountRole(ctx, req.(*UpdateAccountRoleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _BackofficeAccount_CreateRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateRoleRequest)
 	if err := dec(in); err != nil {
@@ -748,10 +714,6 @@ var BackofficeAccount_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAccounts",
 			Handler:    _BackofficeAccount_ListAccounts_Handler,
-		},
-		{
-			MethodName: "UpdateAccountRole",
-			Handler:    _BackofficeAccount_UpdateAccountRole_Handler,
 		},
 		{
 			MethodName: "CreateRole",
