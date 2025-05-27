@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -93,6 +94,30 @@ service BackofficeAccount {
             body: "*"
         };
     }
+    rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/list"
+            body: "*"
+        };
+    }
+    rpc UpdateAccountRole(UpdateAccountRoleRequest) returns (UpdateAccountRoleResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/role/update"
+            body: "*"
+        };
+    }
+    rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/role/create"
+            body: "*"
+        };
+    }
+    rpc ListRoles(ListRolesRequest) returns (ListRolesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/role/list"
+            body: "*"
+        };
+    }
 }
 
 // Account related messages
@@ -153,7 +178,6 @@ message Unbind2faResponse {}
 message UpdateAccountRequest {
 	int64 user_id = 1;
 	optional bool enabled = 2;
-	optional string role = 3;
 }
 
 message UpdateAccountResponse {}
@@ -204,6 +228,56 @@ message Role {
 }
 
 message Permission {
-    string page = 1;
+    string group = 1;
     string action = 2;
+}
+
+message ListAccountsRequest {
+    optional int64 user_id = 1;
+    optional int64 role_id = 2;
+    optional int64 operator_id = 3;
+    optional int32 page = 4;
+    optional int32 page_size = 5;
+}
+
+message ListAccountsResponse {
+    message Account {
+        int64 user_id = 1;
+        string username = 2;
+        string email = 3;
+        string mobile = 4;
+        bool enabled = 5;
+        Role role = 6;
+        google.protobuf.Timestamp created_at = 7;
+    }
+    repeated Account accounts = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+message UpdateAccountRoleRequest {
+    int64 user_id = 1;
+    int64 role_id = 2;
+}
+
+message UpdateAccountRoleResponse {}
+
+message CreateRoleRequest {
+    string name = 1;
+    repeated Permission permissions = 2;
+}
+
+message CreateRoleResponse {}
+
+message ListRolesRequest {
+    optional int64 page = 1;
+    optional int64 page_size = 2;
+}
+
+message ListRolesResponse {
+    repeated Role roles = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
 }
