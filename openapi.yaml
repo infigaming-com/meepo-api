@@ -3948,7 +3948,7 @@ components:
                 date:
                     type: string
                     format: date-time
-                operator:
+                operatorName:
                     type: string
                 country:
                     type: string
@@ -4085,7 +4085,7 @@ components:
             properties:
                 date:
                     type: string
-                operator:
+                operatorName:
                     type: string
                 currency:
                     type: string
@@ -4187,7 +4187,7 @@ components:
                     type: string
                 month:
                     type: string
-                operator:
+                operatorName:
                     type: string
                 currency:
                     type: string
@@ -4287,7 +4287,7 @@ components:
                 date:
                     type: string
                     format: date-time
-                operator:
+                operatorName:
                     type: string
                 provider:
                     type: string
@@ -4549,7 +4549,7 @@ components:
             properties:
                 date:
                     type: string
-                operator:
+                operatorName:
                     type: string
                 regUsers:
                     type: integer
@@ -5134,7 +5134,7 @@ components:
             properties:
                 date:
                     type: string
-                operator:
+                operatorName:
                     type: string
                 currency:
                     type: string
@@ -5236,7 +5236,7 @@ components:
             properties:
                 date:
                     type: string
-                operator:
+                operatorName:
                     type: string
                 currency:
                     type: string

@@ -4240,7 +4240,7 @@ func (m *ListDailySummariesResponse_DailySummary) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	// no validation rules for Country
 
@@ -4459,7 +4459,7 @@ func (m *ListGameDataDailySummariesResponse_DailySummary) validate(all bool) err
 		}
 	}
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	// no validation rules for Provider
 
@@ -4628,7 +4628,7 @@ func (m *GetPlayerGameDataDailySummariesResponse_DailySummary) validate(all bool
 		}
 	}
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	// no validation rules for Provider
 
@@ -5018,7 +5018,7 @@ func (m *ListDepositDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for Date
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	// no validation rules for Currency
 
@@ -5425,7 +5425,7 @@ func (m *ListWithdrawDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for Date
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	// no validation rules for Currency
 
@@ -5580,7 +5580,7 @@ func (m *ListRegisterRetentionResponse_List) validate(all bool) error {
 
 	// no validation rules for Date
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	// no validation rules for RegUsers
 
@@ -5775,7 +5775,7 @@ func (m *ListDepositVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for Month
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	// no validation rules for Currency
 
@@ -5910,7 +5910,7 @@ func (m *ListWithdrawVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for Date
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	// no validation rules for Currency
 
