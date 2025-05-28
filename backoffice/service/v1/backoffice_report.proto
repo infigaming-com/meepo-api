@@ -34,7 +34,7 @@ service BackofficeReport {
           body: "*"
       };
   }
-  rpc GetPlayerGameData(GetPlayerGameSummaryRequest) returns (GetPlayerGameSummaryResponse) {
+  rpc GetPlayerGameDataSummary(GetPlayerGameSummaryRequest) returns (GetPlayerGameSummaryResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/report/player-game-data/get"
           body: "*"
@@ -108,18 +108,18 @@ message GetSummaryRequest {
 }
 
 message GetSummaryResponse {
-	int64 visits = 1;
-	int64 registered_users = 2;
-	int64 ftd = 3;
-	int64 ftd_conversion_rate = 4;
+	int32 visits = 1;
+	int32 registered_users = 2;
+	string ftd = 3;
+	string ftd_conversion_rate = 4;
 	string deposit_amount = 5;
 	string withdraw_amount = 6;
 	string deposit_minus_withdraw_amount = 7;
 	string average_ftd_amount = 8;
-	int32 arpu_to_arppu_percentage = 9;
+	string arpu_to_arppu_percentage = 9;
 	string turnover = 10;
 	string bonus = 11;
-	int64 ggr = 12;
+	string ggr = 12;
 	string ngr = 13;
 }
 
@@ -136,7 +136,7 @@ message ListSummariesRequest {
 }
 
 message ListSummariesResponse {
-	message DailySummary {
+	message List {
 		string date = 1;
 		string operator_name = 2;
 		string country = 3;
@@ -147,7 +147,7 @@ message ListSummariesResponse {
 		int32 deposited_users = 8;
 		int32 ftd_users = 9;
 		int32 repeated_deposited_users = 10;
-		int32 deposit_conversion_rate = 11;
+		string deposit_conversion_rate = 11;
 		int32 deposit_count = 12;
 		string deposit_amount = 13;
 		string arpu = 14;
@@ -178,13 +178,13 @@ message ListSummariesResponse {
 		string locked_balance = 39;
 		string ggr = 40;
 		string ngr = 41;
-		int32 ggr_to_ngr_percentage = 42;
-		int32 house_edge_percentage = 43;
+		string ggr_to_ngr_percentage = 42;
+		string house_edge_percentage = 43;
 	}
-	repeated DailySummary daily_summaries = 1;
-	int64 page = 2;
-	int64 page_size = 3;
-	int64 total = 4;
+	repeated List list = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
 }
 
 message GetGameSummaryRequest {

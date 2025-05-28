@@ -795,7 +795,7 @@ paths:
         post:
             tags:
                 - BackofficeReport
-            operationId: BackofficeReport_GetPlayerGameData
+            operationId: BackofficeReport_GetPlayerGameDataSummary
             requestBody:
                 content:
                     application/json:
@@ -3129,9 +3129,11 @@ components:
             type: object
             properties:
                 visits:
-                    type: string
+                    type: integer
+                    format: int32
                 registeredUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 ftd:
                     type: string
                 ftdConversionRate:
@@ -3145,8 +3147,7 @@ components:
                 averageFtdAmount:
                     type: string
                 arpuToArppuPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 turnover:
                     type: string
                 bonus:
@@ -4655,17 +4656,20 @@ components:
         api.backoffice.service.v1.ListSummariesResponse:
             type: object
             properties:
-                dailySummaries:
+                list:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse_DailySummary'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse_List'
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
                 total:
-                    type: string
-        api.backoffice.service.v1.ListSummariesResponse_DailySummary:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListSummariesResponse_List:
             type: object
             properties:
                 date:
@@ -4694,8 +4698,7 @@ components:
                     type: integer
                     format: int32
                 depositConversionRate:
-                    type: integer
-                    format: int32
+                    type: string
                 depositCount:
                     type: integer
                     format: int32
@@ -4763,11 +4766,9 @@ components:
                 ngr:
                     type: string
                 ggrToNgrPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 houseEdgePercentage:
-                    type: integer
-                    format: int32
+                    type: string
         api.backoffice.service.v1.ListSystemCurrenciesRequest:
             type: object
             properties:
