@@ -1547,96 +1547,38 @@ func (m *GetDepositSummariesResponse) validate(all bool) error {
 
 	var errors []error
 
-	{
-		sorted_keys := make([]string, len(m.GetDepositSuccessRateSummaryMap()))
-		i := 0
-		for key := range m.GetDepositSuccessRateSummaryMap() {
-			sorted_keys[i] = key
-			i++
-		}
-		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
-		for _, key := range sorted_keys {
-			val := m.GetDepositSuccessRateSummaryMap()[key]
-			_ = val
+	for idx, item := range m.GetDepositSummaries() {
+		_, _ = idx, item
 
-			// no validation rules for DepositSuccessRateSummaryMap[key]
-
-			if all {
-				switch v := interface{}(val).(type) {
-				case interface{ ValidateAll() error }:
-					if err := v.ValidateAll(); err != nil {
-						errors = append(errors, GetDepositSummariesResponseValidationError{
-							field:  fmt.Sprintf("DepositSuccessRateSummaryMap[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				case interface{ Validate() error }:
-					if err := v.Validate(); err != nil {
-						errors = append(errors, GetDepositSummariesResponseValidationError{
-							field:  fmt.Sprintf("DepositSuccessRateSummaryMap[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				}
-			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
-				if err := v.Validate(); err != nil {
-					return GetDepositSummariesResponseValidationError{
-						field:  fmt.Sprintf("DepositSuccessRateSummaryMap[%v]", key),
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetDepositSummariesResponseValidationError{
+						field:  fmt.Sprintf("DepositSummaries[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
-					}
+					})
 				}
-			}
-
-		}
-	}
-
-	{
-		sorted_keys := make([]string, len(m.GetDepositAmountSummaryMap()))
-		i := 0
-		for key := range m.GetDepositAmountSummaryMap() {
-			sorted_keys[i] = key
-			i++
-		}
-		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
-		for _, key := range sorted_keys {
-			val := m.GetDepositAmountSummaryMap()[key]
-			_ = val
-
-			// no validation rules for DepositAmountSummaryMap[key]
-
-			if all {
-				switch v := interface{}(val).(type) {
-				case interface{ ValidateAll() error }:
-					if err := v.ValidateAll(); err != nil {
-						errors = append(errors, GetDepositSummariesResponseValidationError{
-							field:  fmt.Sprintf("DepositAmountSummaryMap[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				case interface{ Validate() error }:
-					if err := v.Validate(); err != nil {
-						errors = append(errors, GetDepositSummariesResponseValidationError{
-							field:  fmt.Sprintf("DepositAmountSummaryMap[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				}
-			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					return GetDepositSummariesResponseValidationError{
-						field:  fmt.Sprintf("DepositAmountSummaryMap[%v]", key),
+					errors = append(errors, GetDepositSummariesResponseValidationError{
+						field:  fmt.Sprintf("DepositSummaries[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
-					}
+					})
 				}
 			}
-
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetDepositSummariesResponseValidationError{
+					field:  fmt.Sprintf("DepositSummaries[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
 		}
+
 	}
 
 	if len(errors) > 0 {
@@ -2151,96 +2093,38 @@ func (m *GetWithdrawSummariesResponse) validate(all bool) error {
 
 	var errors []error
 
-	{
-		sorted_keys := make([]string, len(m.GetWithdrawSuccessRateSummaryMap()))
-		i := 0
-		for key := range m.GetWithdrawSuccessRateSummaryMap() {
-			sorted_keys[i] = key
-			i++
-		}
-		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
-		for _, key := range sorted_keys {
-			val := m.GetWithdrawSuccessRateSummaryMap()[key]
-			_ = val
+	for idx, item := range m.GetWithdrawSummaries() {
+		_, _ = idx, item
 
-			// no validation rules for WithdrawSuccessRateSummaryMap[key]
-
-			if all {
-				switch v := interface{}(val).(type) {
-				case interface{ ValidateAll() error }:
-					if err := v.ValidateAll(); err != nil {
-						errors = append(errors, GetWithdrawSummariesResponseValidationError{
-							field:  fmt.Sprintf("WithdrawSuccessRateSummaryMap[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				case interface{ Validate() error }:
-					if err := v.Validate(); err != nil {
-						errors = append(errors, GetWithdrawSummariesResponseValidationError{
-							field:  fmt.Sprintf("WithdrawSuccessRateSummaryMap[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				}
-			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
-				if err := v.Validate(); err != nil {
-					return GetWithdrawSummariesResponseValidationError{
-						field:  fmt.Sprintf("WithdrawSuccessRateSummaryMap[%v]", key),
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetWithdrawSummariesResponseValidationError{
+						field:  fmt.Sprintf("WithdrawSummaries[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
-					}
+					})
 				}
-			}
-
-		}
-	}
-
-	{
-		sorted_keys := make([]string, len(m.GetWithdrawAmountSummaryMap()))
-		i := 0
-		for key := range m.GetWithdrawAmountSummaryMap() {
-			sorted_keys[i] = key
-			i++
-		}
-		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
-		for _, key := range sorted_keys {
-			val := m.GetWithdrawAmountSummaryMap()[key]
-			_ = val
-
-			// no validation rules for WithdrawAmountSummaryMap[key]
-
-			if all {
-				switch v := interface{}(val).(type) {
-				case interface{ ValidateAll() error }:
-					if err := v.ValidateAll(); err != nil {
-						errors = append(errors, GetWithdrawSummariesResponseValidationError{
-							field:  fmt.Sprintf("WithdrawAmountSummaryMap[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				case interface{ Validate() error }:
-					if err := v.Validate(); err != nil {
-						errors = append(errors, GetWithdrawSummariesResponseValidationError{
-							field:  fmt.Sprintf("WithdrawAmountSummaryMap[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				}
-			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					return GetWithdrawSummariesResponseValidationError{
-						field:  fmt.Sprintf("WithdrawAmountSummaryMap[%v]", key),
+					errors = append(errors, GetWithdrawSummariesResponseValidationError{
+						field:  fmt.Sprintf("WithdrawSummaries[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
-					}
+					})
 				}
 			}
-
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWithdrawSummariesResponseValidationError{
+					field:  fmt.Sprintf("WithdrawSummaries[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
 		}
+
 	}
 
 	if len(errors) > 0 {
@@ -3917,163 +3801,24 @@ var _ interface {
 	ErrorName() string
 } = GetPlayerGameDataResponse_ListValidationError{}
 
-// Validate checks the field values on GetDepositSummariesResponse_Summary with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *GetDepositSummariesResponse_Summary) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GetDepositSummariesResponse_Summary
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// GetDepositSummariesResponse_SummaryMultiError, or nil if none found.
-func (m *GetDepositSummariesResponse_Summary) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetDepositSummariesResponse_Summary) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	for idx, item := range m.GetSummaryData() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetDepositSummariesResponse_SummaryValidationError{
-						field:  fmt.Sprintf("SummaryData[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GetDepositSummariesResponse_SummaryValidationError{
-						field:  fmt.Sprintf("SummaryData[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GetDepositSummariesResponse_SummaryValidationError{
-					field:  fmt.Sprintf("SummaryData[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if len(errors) > 0 {
-		return GetDepositSummariesResponse_SummaryMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetDepositSummariesResponse_SummaryMultiError is an error wrapping multiple
-// validation errors returned by
-// GetDepositSummariesResponse_Summary.ValidateAll() if the designated
-// constraints aren't met.
-type GetDepositSummariesResponse_SummaryMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetDepositSummariesResponse_SummaryMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetDepositSummariesResponse_SummaryMultiError) AllErrors() []error { return m }
-
-// GetDepositSummariesResponse_SummaryValidationError is the validation error
-// returned by GetDepositSummariesResponse_Summary.Validate if the designated
-// constraints aren't met.
-type GetDepositSummariesResponse_SummaryValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetDepositSummariesResponse_SummaryValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetDepositSummariesResponse_SummaryValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetDepositSummariesResponse_SummaryValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetDepositSummariesResponse_SummaryValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetDepositSummariesResponse_SummaryValidationError) ErrorName() string {
-	return "GetDepositSummariesResponse_SummaryValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetDepositSummariesResponse_SummaryValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetDepositSummariesResponse_Summary.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetDepositSummariesResponse_SummaryValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetDepositSummariesResponse_SummaryValidationError{}
-
 // Validate checks the field values on
-// GetDepositSummariesResponse_Summary_SummaryData with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
+// GetDepositSummariesResponse_DepositSummary with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *GetDepositSummariesResponse_Summary_SummaryData) Validate() error {
+func (m *GetDepositSummariesResponse_DepositSummary) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// GetDepositSummariesResponse_Summary_SummaryData with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in
-// GetDepositSummariesResponse_Summary_SummaryDataMultiError, or nil if none found.
-func (m *GetDepositSummariesResponse_Summary_SummaryData) ValidateAll() error {
+// GetDepositSummariesResponse_DepositSummary with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetDepositSummariesResponse_DepositSummaryMultiError, or nil if none found.
+func (m *GetDepositSummariesResponse_DepositSummary) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetDepositSummariesResponse_Summary_SummaryData) validate(all bool) error {
+func (m *GetDepositSummariesResponse_DepositSummary) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4082,23 +3827,27 @@ func (m *GetDepositSummariesResponse_Summary_SummaryData) validate(all bool) err
 
 	// no validation rules for Date
 
-	// no validation rules for Data
+	// no validation rules for Currency
+
+	// no validation rules for DepositSuccessRate
+
+	// no validation rules for DepositAmount
 
 	if len(errors) > 0 {
-		return GetDepositSummariesResponse_Summary_SummaryDataMultiError(errors)
+		return GetDepositSummariesResponse_DepositSummaryMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetDepositSummariesResponse_Summary_SummaryDataMultiError is an error
-// wrapping multiple validation errors returned by
-// GetDepositSummariesResponse_Summary_SummaryData.ValidateAll() if the
-// designated constraints aren't met.
-type GetDepositSummariesResponse_Summary_SummaryDataMultiError []error
+// GetDepositSummariesResponse_DepositSummaryMultiError is an error wrapping
+// multiple validation errors returned by
+// GetDepositSummariesResponse_DepositSummary.ValidateAll() if the designated
+// constraints aren't met.
+type GetDepositSummariesResponse_DepositSummaryMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetDepositSummariesResponse_Summary_SummaryDataMultiError) Error() string {
+func (m GetDepositSummariesResponse_DepositSummaryMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4107,13 +3856,12 @@ func (m GetDepositSummariesResponse_Summary_SummaryDataMultiError) Error() strin
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetDepositSummariesResponse_Summary_SummaryDataMultiError) AllErrors() []error { return m }
+func (m GetDepositSummariesResponse_DepositSummaryMultiError) AllErrors() []error { return m }
 
-// GetDepositSummariesResponse_Summary_SummaryDataValidationError is the
-// validation error returned by
-// GetDepositSummariesResponse_Summary_SummaryData.Validate if the designated
-// constraints aren't met.
-type GetDepositSummariesResponse_Summary_SummaryDataValidationError struct {
+// GetDepositSummariesResponse_DepositSummaryValidationError is the validation
+// error returned by GetDepositSummariesResponse_DepositSummary.Validate if
+// the designated constraints aren't met.
+type GetDepositSummariesResponse_DepositSummaryValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4121,28 +3869,24 @@ type GetDepositSummariesResponse_Summary_SummaryDataValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetDepositSummariesResponse_Summary_SummaryDataValidationError) Field() string {
-	return e.field
-}
+func (e GetDepositSummariesResponse_DepositSummaryValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetDepositSummariesResponse_Summary_SummaryDataValidationError) Reason() string {
-	return e.reason
-}
+func (e GetDepositSummariesResponse_DepositSummaryValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetDepositSummariesResponse_Summary_SummaryDataValidationError) Cause() error { return e.cause }
+func (e GetDepositSummariesResponse_DepositSummaryValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetDepositSummariesResponse_Summary_SummaryDataValidationError) Key() bool { return e.key }
+func (e GetDepositSummariesResponse_DepositSummaryValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetDepositSummariesResponse_Summary_SummaryDataValidationError) ErrorName() string {
-	return "GetDepositSummariesResponse_Summary_SummaryDataValidationError"
+func (e GetDepositSummariesResponse_DepositSummaryValidationError) ErrorName() string {
+	return "GetDepositSummariesResponse_DepositSummaryValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetDepositSummariesResponse_Summary_SummaryDataValidationError) Error() string {
+func (e GetDepositSummariesResponse_DepositSummaryValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4154,14 +3898,14 @@ func (e GetDepositSummariesResponse_Summary_SummaryDataValidationError) Error() 
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetDepositSummariesResponse_Summary_SummaryData.%s: %s%s",
+		"invalid %sGetDepositSummariesResponse_DepositSummary.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetDepositSummariesResponse_Summary_SummaryDataValidationError{}
+var _ error = GetDepositSummariesResponse_DepositSummaryValidationError{}
 
 var _ interface {
 	Field() string
@@ -4169,7 +3913,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetDepositSummariesResponse_Summary_SummaryDataValidationError{}
+} = GetDepositSummariesResponse_DepositSummaryValidationError{}
 
 // Validate checks the field values on ListDepositDetailsResponse_Detail with
 // the rules defined in the proto definition for this message. If any rules
@@ -4322,163 +4066,24 @@ var _ interface {
 	ErrorName() string
 } = ListDepositDetailsResponse_DetailValidationError{}
 
-// Validate checks the field values on GetWithdrawSummariesResponse_Summary
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *GetWithdrawSummariesResponse_Summary) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GetWithdrawSummariesResponse_Summary
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// GetWithdrawSummariesResponse_SummaryMultiError, or nil if none found.
-func (m *GetWithdrawSummariesResponse_Summary) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetWithdrawSummariesResponse_Summary) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	for idx, item := range m.GetSummaryData() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetWithdrawSummariesResponse_SummaryValidationError{
-						field:  fmt.Sprintf("SummaryData[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GetWithdrawSummariesResponse_SummaryValidationError{
-						field:  fmt.Sprintf("SummaryData[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GetWithdrawSummariesResponse_SummaryValidationError{
-					field:  fmt.Sprintf("SummaryData[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if len(errors) > 0 {
-		return GetWithdrawSummariesResponse_SummaryMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetWithdrawSummariesResponse_SummaryMultiError is an error wrapping multiple
-// validation errors returned by
-// GetWithdrawSummariesResponse_Summary.ValidateAll() if the designated
-// constraints aren't met.
-type GetWithdrawSummariesResponse_SummaryMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetWithdrawSummariesResponse_SummaryMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetWithdrawSummariesResponse_SummaryMultiError) AllErrors() []error { return m }
-
-// GetWithdrawSummariesResponse_SummaryValidationError is the validation error
-// returned by GetWithdrawSummariesResponse_Summary.Validate if the designated
-// constraints aren't met.
-type GetWithdrawSummariesResponse_SummaryValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetWithdrawSummariesResponse_SummaryValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetWithdrawSummariesResponse_SummaryValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetWithdrawSummariesResponse_SummaryValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetWithdrawSummariesResponse_SummaryValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetWithdrawSummariesResponse_SummaryValidationError) ErrorName() string {
-	return "GetWithdrawSummariesResponse_SummaryValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetWithdrawSummariesResponse_SummaryValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetWithdrawSummariesResponse_Summary.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetWithdrawSummariesResponse_SummaryValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetWithdrawSummariesResponse_SummaryValidationError{}
-
 // Validate checks the field values on
-// GetWithdrawSummariesResponse_Summary_SummaryData with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
+// GetWithdrawSummariesResponse_WithdrawSummary with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *GetWithdrawSummariesResponse_Summary_SummaryData) Validate() error {
+func (m *GetWithdrawSummariesResponse_WithdrawSummary) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// GetWithdrawSummariesResponse_Summary_SummaryData with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in
-// GetWithdrawSummariesResponse_Summary_SummaryDataMultiError, or nil if none found.
-func (m *GetWithdrawSummariesResponse_Summary_SummaryData) ValidateAll() error {
+// GetWithdrawSummariesResponse_WithdrawSummary with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetWithdrawSummariesResponse_WithdrawSummaryMultiError, or nil if none found.
+func (m *GetWithdrawSummariesResponse_WithdrawSummary) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetWithdrawSummariesResponse_Summary_SummaryData) validate(all bool) error {
+func (m *GetWithdrawSummariesResponse_WithdrawSummary) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4487,23 +4092,27 @@ func (m *GetWithdrawSummariesResponse_Summary_SummaryData) validate(all bool) er
 
 	// no validation rules for Date
 
-	// no validation rules for Data
+	// no validation rules for Currency
+
+	// no validation rules for WithdrawSuccessRate
+
+	// no validation rules for WithdrawAmount
 
 	if len(errors) > 0 {
-		return GetWithdrawSummariesResponse_Summary_SummaryDataMultiError(errors)
+		return GetWithdrawSummariesResponse_WithdrawSummaryMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetWithdrawSummariesResponse_Summary_SummaryDataMultiError is an error
-// wrapping multiple validation errors returned by
-// GetWithdrawSummariesResponse_Summary_SummaryData.ValidateAll() if the
+// GetWithdrawSummariesResponse_WithdrawSummaryMultiError is an error wrapping
+// multiple validation errors returned by
+// GetWithdrawSummariesResponse_WithdrawSummary.ValidateAll() if the
 // designated constraints aren't met.
-type GetWithdrawSummariesResponse_Summary_SummaryDataMultiError []error
+type GetWithdrawSummariesResponse_WithdrawSummaryMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetWithdrawSummariesResponse_Summary_SummaryDataMultiError) Error() string {
+func (m GetWithdrawSummariesResponse_WithdrawSummaryMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4512,13 +4121,13 @@ func (m GetWithdrawSummariesResponse_Summary_SummaryDataMultiError) Error() stri
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetWithdrawSummariesResponse_Summary_SummaryDataMultiError) AllErrors() []error { return m }
+func (m GetWithdrawSummariesResponse_WithdrawSummaryMultiError) AllErrors() []error { return m }
 
-// GetWithdrawSummariesResponse_Summary_SummaryDataValidationError is the
+// GetWithdrawSummariesResponse_WithdrawSummaryValidationError is the
 // validation error returned by
-// GetWithdrawSummariesResponse_Summary_SummaryData.Validate if the designated
+// GetWithdrawSummariesResponse_WithdrawSummary.Validate if the designated
 // constraints aren't met.
-type GetWithdrawSummariesResponse_Summary_SummaryDataValidationError struct {
+type GetWithdrawSummariesResponse_WithdrawSummaryValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4526,30 +4135,24 @@ type GetWithdrawSummariesResponse_Summary_SummaryDataValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetWithdrawSummariesResponse_Summary_SummaryDataValidationError) Field() string {
-	return e.field
-}
+func (e GetWithdrawSummariesResponse_WithdrawSummaryValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetWithdrawSummariesResponse_Summary_SummaryDataValidationError) Reason() string {
-	return e.reason
-}
+func (e GetWithdrawSummariesResponse_WithdrawSummaryValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetWithdrawSummariesResponse_Summary_SummaryDataValidationError) Cause() error {
-	return e.cause
-}
+func (e GetWithdrawSummariesResponse_WithdrawSummaryValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetWithdrawSummariesResponse_Summary_SummaryDataValidationError) Key() bool { return e.key }
+func (e GetWithdrawSummariesResponse_WithdrawSummaryValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetWithdrawSummariesResponse_Summary_SummaryDataValidationError) ErrorName() string {
-	return "GetWithdrawSummariesResponse_Summary_SummaryDataValidationError"
+func (e GetWithdrawSummariesResponse_WithdrawSummaryValidationError) ErrorName() string {
+	return "GetWithdrawSummariesResponse_WithdrawSummaryValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetWithdrawSummariesResponse_Summary_SummaryDataValidationError) Error() string {
+func (e GetWithdrawSummariesResponse_WithdrawSummaryValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4561,14 +4164,14 @@ func (e GetWithdrawSummariesResponse_Summary_SummaryDataValidationError) Error()
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetWithdrawSummariesResponse_Summary_SummaryData.%s: %s%s",
+		"invalid %sGetWithdrawSummariesResponse_WithdrawSummary.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetWithdrawSummariesResponse_Summary_SummaryDataValidationError{}
+var _ error = GetWithdrawSummariesResponse_WithdrawSummaryValidationError{}
 
 var _ interface {
 	Field() string
@@ -4576,7 +4179,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetWithdrawSummariesResponse_Summary_SummaryDataValidationError{}
+} = GetWithdrawSummariesResponse_WithdrawSummaryValidationError{}
 
 // Validate checks the field values on ListWithdrawDetailsResponse_Detail with
 // the rules defined in the proto definition for this message. If any rules

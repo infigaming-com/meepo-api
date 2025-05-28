@@ -272,15 +272,13 @@ message GetDepositSummariesRequest {
 }
 
 message GetDepositSummariesResponse {
-	message Summary {
-		message SummaryData {
-			string date = 1;
-			string data = 2;
-		}
-		repeated SummaryData summary_data = 1;
+	message DepositSummary {
+		string date = 1;
+		string currency = 2;
+		string deposit_success_percentage = 3;  // decimal number between 0-100, two decimal places
+		string deposit_amount = 4;
 	}
-	map<string, Summary> deposit_success_rate_summary_map = 1; // key is currency, value is summary
-	map<string, Summary> deposit_amount_summary_map = 2; // key is currency, value is summary
+	repeated DepositSummary deposit_summaries = 1;
 }
 
 message ListDepositDetailsRequest {
@@ -334,15 +332,13 @@ message GetWithdrawSummariesRequest {
 }
 
 message GetWithdrawSummariesResponse {
-	message Summary {
-		message SummaryData {
-			string date = 1;
-			string data = 2;
-		}
-		repeated SummaryData summary_data = 1;
+	message WithdrawSummary {
+		string date = 1;
+		string currency = 2;
+		string withdraw_success_percentage = 3;  // decimal number between 0-100, two decimal places
+		string withdraw_amount = 4;
 	}
-	map<string, Summary> withdraw_success_rate_summary_map = 1; // key is currency, value is summary
-	map<string, Summary> withdraw_amount_summary_map = 2; // key is currency, value is summary
+	repeated WithdrawSummary withdraw_summaries = 1;
 }
 
 message ListWithdrawDetailsRequest {
