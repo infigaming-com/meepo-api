@@ -2649,7 +2649,7 @@ components:
                     type: string
                 currency:
                     type: string
-                depositSuccessPercentage:
+                depositSuccessRate:
                     type: string
                 depositAmount:
                     type: string
@@ -3856,7 +3856,7 @@ components:
                     type: string
                 currency:
                     type: string
-                withdrawSuccessPercentage:
+                withdrawSuccessRate:
                     type: string
                 withdrawAmount:
                     type: string

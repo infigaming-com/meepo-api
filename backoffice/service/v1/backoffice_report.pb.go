@@ -2944,13 +2944,13 @@ func (x *GetPlayerGameDataResponse_List) GetAverageBetAmount() string {
 }
 
 type GetDepositSummariesResponse_DepositSummary struct {
-	state                    protoimpl.MessageState `protogen:"open.v1"`
-	Date                     string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Currency                 string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	DepositSuccessPercentage string                 `protobuf:"bytes,3,opt,name=deposit_success_percentage,json=depositSuccessPercentage,proto3" json:"deposit_success_percentage,omitempty"` // decimal number between 0-100, two decimal places
-	DepositAmount            string                 `protobuf:"bytes,4,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Date               string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Currency           string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	DepositSuccessRate string                 `protobuf:"bytes,3,opt,name=deposit_success_rate,json=depositSuccessRate,proto3" json:"deposit_success_rate,omitempty"` // decimal number between 0-100, two decimal places
+	DepositAmount      string                 `protobuf:"bytes,4,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *GetDepositSummariesResponse_DepositSummary) Reset() {
@@ -2997,9 +2997,9 @@ func (x *GetDepositSummariesResponse_DepositSummary) GetCurrency() string {
 	return ""
 }
 
-func (x *GetDepositSummariesResponse_DepositSummary) GetDepositSuccessPercentage() string {
+func (x *GetDepositSummariesResponse_DepositSummary) GetDepositSuccessRate() string {
 	if x != nil {
-		return x.DepositSuccessPercentage
+		return x.DepositSuccessRate
 	}
 	return ""
 }
@@ -3232,13 +3232,13 @@ func (x *ListDepositDetailsResponse_Detail) GetAmountProportion() string {
 }
 
 type GetWithdrawSummariesResponse_WithdrawSummary struct {
-	state                     protoimpl.MessageState `protogen:"open.v1"`
-	Date                      string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Currency                  string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	WithdrawSuccessPercentage string                 `protobuf:"bytes,3,opt,name=withdraw_success_percentage,json=withdrawSuccessPercentage,proto3" json:"withdraw_success_percentage,omitempty"` // decimal number between 0-100, two decimal places
-	WithdrawAmount            string                 `protobuf:"bytes,4,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Date                string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Currency            string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	WithdrawSuccessRate string                 `protobuf:"bytes,3,opt,name=withdraw_success_rate,json=withdrawSuccessRate,proto3" json:"withdraw_success_rate,omitempty"` // decimal number between 0-100, two decimal places
+	WithdrawAmount      string                 `protobuf:"bytes,4,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *GetWithdrawSummariesResponse_WithdrawSummary) Reset() {
@@ -3285,9 +3285,9 @@ func (x *GetWithdrawSummariesResponse_WithdrawSummary) GetCurrency() string {
 	return ""
 }
 
-func (x *GetWithdrawSummariesResponse_WithdrawSummary) GetWithdrawSuccessPercentage() string {
+func (x *GetWithdrawSummariesResponse_WithdrawSummary) GetWithdrawSuccessRate() string {
 	if x != nil {
-		return x.WithdrawSuccessPercentage
+		return x.WithdrawSuccessRate
 	}
 	return ""
 }
@@ -4583,13 +4583,13 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
-	"currencies\"\xb9\x02\n" +
+	"currencies\"\xad\x02\n" +
 	"\x1bGetDepositSummariesResponse\x12r\n" +
-	"\x11deposit_summaries\x18\x01 \x03(\v2E.api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummaryR\x10depositSummaries\x1a\xa5\x01\n" +
+	"\x11deposit_summaries\x18\x01 \x03(\v2E.api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummaryR\x10depositSummaries\x1a\x99\x01\n" +
 	"\x0eDepositSummary\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12<\n" +
-	"\x1adeposit_success_percentage\x18\x03 \x01(\tR\x18depositSuccessPercentage\x12%\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x120\n" +
+	"\x14deposit_success_rate\x18\x03 \x01(\tR\x12depositSuccessRate\x12%\n" +
 	"\x0edeposit_amount\x18\x04 \x01(\tR\rdepositAmount\"\xb6\x02\n" +
 	"\x19ListDepositDetailsRequest\x12C\n" +
 	"\n" +
@@ -4643,13 +4643,13 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
-	"currencies\"\xc3\x02\n" +
+	"currencies\"\xb7\x02\n" +
 	"\x1cGetWithdrawSummariesResponse\x12v\n" +
-	"\x12withdraw_summaries\x18\x01 \x03(\v2G.api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummaryR\x11withdrawSummaries\x1a\xaa\x01\n" +
+	"\x12withdraw_summaries\x18\x01 \x03(\v2G.api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummaryR\x11withdrawSummaries\x1a\x9e\x01\n" +
 	"\x0fWithdrawSummary\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12>\n" +
-	"\x1bwithdraw_success_percentage\x18\x03 \x01(\tR\x19withdrawSuccessPercentage\x12'\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x122\n" +
+	"\x15withdraw_success_rate\x18\x03 \x01(\tR\x13withdrawSuccessRate\x12'\n" +
 	"\x0fwithdraw_amount\x18\x04 \x01(\tR\x0ewithdrawAmount\"\xb7\x02\n" +
 	"\x1aListWithdrawDetailsRequest\x12C\n" +
 	"\n" +
