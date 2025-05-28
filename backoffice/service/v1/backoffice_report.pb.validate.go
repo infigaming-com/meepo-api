@@ -564,7 +564,7 @@ func (m *ListSummariesResponse) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetDailySummaries() {
+	for idx, item := range m.GetList() {
 		_, _ = idx, item
 
 		if all {
@@ -572,7 +572,7 @@ func (m *ListSummariesResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, ListSummariesResponseValidationError{
-						field:  fmt.Sprintf("DailySummaries[%v]", idx),
+						field:  fmt.Sprintf("List[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -580,7 +580,7 @@ func (m *ListSummariesResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, ListSummariesResponseValidationError{
-						field:  fmt.Sprintf("DailySummaries[%v]", idx),
+						field:  fmt.Sprintf("List[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -589,7 +589,7 @@ func (m *ListSummariesResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return ListSummariesResponseValidationError{
-					field:  fmt.Sprintf("DailySummaries[%v]", idx),
+					field:  fmt.Sprintf("List[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -3659,23 +3659,22 @@ var _ interface {
 	ErrorName() string
 } = ListWithdrawVtgDetailsResponseValidationError{}
 
-// Validate checks the field values on ListSummariesResponse_DailySummary with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *ListSummariesResponse_DailySummary) Validate() error {
+// Validate checks the field values on ListSummariesResponse_List with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListSummariesResponse_List) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListSummariesResponse_DailySummary
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// ListSummariesResponse_DailySummaryMultiError, or nil if none found.
-func (m *ListSummariesResponse_DailySummary) ValidateAll() error {
+// ValidateAll checks the field values on ListSummariesResponse_List with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListSummariesResponse_ListMultiError, or nil if none found.
+func (m *ListSummariesResponse_List) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListSummariesResponse_DailySummary) validate(all bool) error {
+func (m *ListSummariesResponse_List) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3769,20 +3768,19 @@ func (m *ListSummariesResponse_DailySummary) validate(all bool) error {
 	// no validation rules for HouseEdgePercentage
 
 	if len(errors) > 0 {
-		return ListSummariesResponse_DailySummaryMultiError(errors)
+		return ListSummariesResponse_ListMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListSummariesResponse_DailySummaryMultiError is an error wrapping multiple
-// validation errors returned by
-// ListSummariesResponse_DailySummary.ValidateAll() if the designated
-// constraints aren't met.
-type ListSummariesResponse_DailySummaryMultiError []error
+// ListSummariesResponse_ListMultiError is an error wrapping multiple
+// validation errors returned by ListSummariesResponse_List.ValidateAll() if
+// the designated constraints aren't met.
+type ListSummariesResponse_ListMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListSummariesResponse_DailySummaryMultiError) Error() string {
+func (m ListSummariesResponse_ListMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3791,12 +3789,11 @@ func (m ListSummariesResponse_DailySummaryMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListSummariesResponse_DailySummaryMultiError) AllErrors() []error { return m }
+func (m ListSummariesResponse_ListMultiError) AllErrors() []error { return m }
 
-// ListSummariesResponse_DailySummaryValidationError is the validation error
-// returned by ListSummariesResponse_DailySummary.Validate if the designated
-// constraints aren't met.
-type ListSummariesResponse_DailySummaryValidationError struct {
+// ListSummariesResponse_ListValidationError is the validation error returned
+// by ListSummariesResponse_List.Validate if the designated constraints aren't met.
+type ListSummariesResponse_ListValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3804,24 +3801,24 @@ type ListSummariesResponse_DailySummaryValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListSummariesResponse_DailySummaryValidationError) Field() string { return e.field }
+func (e ListSummariesResponse_ListValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListSummariesResponse_DailySummaryValidationError) Reason() string { return e.reason }
+func (e ListSummariesResponse_ListValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListSummariesResponse_DailySummaryValidationError) Cause() error { return e.cause }
+func (e ListSummariesResponse_ListValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListSummariesResponse_DailySummaryValidationError) Key() bool { return e.key }
+func (e ListSummariesResponse_ListValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListSummariesResponse_DailySummaryValidationError) ErrorName() string {
-	return "ListSummariesResponse_DailySummaryValidationError"
+func (e ListSummariesResponse_ListValidationError) ErrorName() string {
+	return "ListSummariesResponse_ListValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListSummariesResponse_DailySummaryValidationError) Error() string {
+func (e ListSummariesResponse_ListValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3833,14 +3830,14 @@ func (e ListSummariesResponse_DailySummaryValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListSummariesResponse_DailySummary.%s: %s%s",
+		"invalid %sListSummariesResponse_List.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListSummariesResponse_DailySummaryValidationError{}
+var _ error = ListSummariesResponse_ListValidationError{}
 
 var _ interface {
 	Field() string
@@ -3848,7 +3845,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListSummariesResponse_DailySummaryValidationError{}
+} = ListSummariesResponse_ListValidationError{}
 
 // Validate checks the field values on GetGameDataResponse_List with the rules
 // defined in the proto definition for this message. If any rules are
@@ -3888,11 +3885,17 @@ func (m *GetGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for Turnover
 
+	// no validation rules for TurnoverUsd
+
 	// no validation rules for TurnoverPercentage
 
 	// no validation rules for WinAmount
 
+	// no validation rules for WinAmountUsd
+
 	// no validation rules for Ggr
+
+	// no validation rules for GgrUsd
 
 	// no validation rules for GgrPercentage
 
@@ -4018,9 +4021,15 @@ func (m *GetPlayerGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for Turnover
 
+	// no validation rules for TurnoverUsd
+
 	// no validation rules for WinAmount
 
+	// no validation rules for WinAmountUsd
+
 	// no validation rules for Ggr
+
+	// no validation rules for GgrUsd
 
 	// no validation rules for RtpPercentage
 
