@@ -77,13 +77,13 @@ message GetOverviewDashboardResponse {
 	}
 	RegisteredUsers registered_users = 1;
 	FirstDepositUsers first_deposit_users = 2;
-	GGR ggr = 3;
-	NGR ngr = 4;
-	DepositAmount deposit_amount = 5;
-	WithdrawalAmount withdrawal_amount = 6;
-	DepositMinusWithdrawalAmount deposit_minus_withdrawal_amount = 7;
+	GGR ggr = 3; // USD
+	NGR ngr = 4; // USD
+	DepositAmount deposit_amount = 5; // USD
+	WithdrawalAmount withdrawal_amount = 6; // USD
+	DepositMinusWithdrawalAmount deposit_minus_withdrawal_amount = 7; // USD
 	ActiveUsers active_users = 8;
-	ActiveDevices active_devices = 9;
+	ActiveDevices active_devices = 9; // Not available For now
 }
 
 message GetTimeRangedDashboardRequest {
@@ -101,25 +101,25 @@ message GetTimeRangedDashboardRequest {
 message GetTimeRangedDashboardResponse {
 	message GameData {
 		message Data {
-			string ggr = 1;
-			string ngr = 2;
+			string ggr = 1; // USD
+			string ngr = 2; // USD
 		}
-		google.protobuf.Timestamp time = 1;
+		string time = 1;
 		Data data = 2;
 	}
 	message PaymentData {
 		message Data {
-			string deposit = 1;
-			string withdrawal = 2;
+			string deposit = 1; // USD
+			string withdrawal = 2; // USD
 		}
-		google.protobuf.Timestamp time = 1;
+		string time = 1;
 		Data data = 2;
 	}
 	message ActiveUsersData {
 		message Data {
 			int32 active_users = 1;
 		}
-		google.protobuf.Timestamp time = 1;
+		string time = 1;
 		Data data = 2;
 	}
 	repeated GameData game_data = 1;
@@ -143,8 +143,8 @@ message GetTopUsersDashboardResponse {
 		string avatar = 2;
 		string country = 3;
 		int32 vip_level = 4;
-		string amount = 5;
-		string operator = 6;
+		string amount = 5; // USD
+		string operator_name = 6;
 	}
 	repeated User top_deposit_users = 1;
 	repeated User top_withdrawal_users = 2;
@@ -162,16 +162,17 @@ message GetTopOperatorsDashboardRequest {
 
 message GetTopOperatorsDashboardResponse {
 	message OperatorData {
-		string operator = 1;
-		string amount = 2;
+		string operator_id = 1;
+		string operator_name = 2;
+		string amount = 3; // USD
 	}
 	repeated OperatorData top_ggr_operators = 1;
-	repeated OperatorData top_ngr_operators = 2;
+	repeated OperatorData top_ngr_operators = 2; // Not available For now
 	repeated OperatorData top_deposit_minus_withdraw_operators = 3;
-	repeated OperatorData top_ggr_group_operators = 4;
-	repeated OperatorData top_ngr_group_operators = 5;
-	repeated OperatorData top_deposit_minus_withdraw_group_operators = 6;
-	repeated OperatorData top_ggr_retailer_operators = 7;
-	repeated OperatorData top_ngr_retailer_operators = 8;
-	repeated OperatorData top_deposit_minus_withdraw_retailer_operators = 9;
+	repeated OperatorData top_ggr_group_operators = 4; // Not available For now
+	repeated OperatorData top_ngr_group_operators = 5; // Not available For now
+	repeated OperatorData top_deposit_minus_withdraw_group_operators = 6; // Not available For now
+	repeated OperatorData top_ggr_retailer_operators = 7; // Not available For now
+	repeated OperatorData top_ngr_retailer_operators = 8; // Not available For now
+	repeated OperatorData top_deposit_minus_withdraw_retailer_operators = 9; // Not available For now
 }
