@@ -312,7 +312,7 @@ message GetDepositSummariesResponse {
 	message DepositSummary {
 		string date = 1;
 		string currency = 2;
-		string deposit_success_percentage = 3;  // decimal number between 0-100, two decimal places
+		string deposit_success_rate = 3;  // decimal number between 0-100, two decimal places
 		string deposit_amount = 4;
 	}
 	repeated DepositSummary deposit_summaries = 1;
@@ -372,7 +372,7 @@ message GetWithdrawSummariesResponse {
 	message WithdrawSummary {
 		string date = 1;
 		string currency = 2;
-		string withdraw_success_percentage = 3;  // decimal number between 0-100, two decimal places
+		string withdraw_success_rate = 3;  // decimal number between 0-100, two decimal places
 		string withdraw_amount = 4;
 	}
 	repeated WithdrawSummary withdraw_summaries = 1;

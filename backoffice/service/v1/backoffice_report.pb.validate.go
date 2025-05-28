@@ -4137,7 +4137,7 @@ func (m *GetDepositSummariesResponse_DepositSummary) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for DepositSuccessPercentage
+	// no validation rules for DepositSuccessRate
 
 	// no validation rules for DepositAmount
 
@@ -4402,7 +4402,7 @@ func (m *GetWithdrawSummariesResponse_WithdrawSummary) validate(all bool) error 
 
 	// no validation rules for Currency
 
-	// no validation rules for WithdrawSuccessPercentage
+	// no validation rules for WithdrawSuccessRate
 
 	// no validation rules for WithdrawAmount
 
