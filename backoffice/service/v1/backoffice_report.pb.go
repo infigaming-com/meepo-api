@@ -10,7 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -89,11 +89,9 @@ type GetSummaryRequest struct {
 	RetailerOperatorIds   []int64                `protobuf:"varint,2,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
 	GroupOperatorIds      []int64                `protobuf:"varint,3,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
 	OperatorIds           []int64                `protobuf:"varint,4,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	StartTime             *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime               *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	AffiliateCodes        []string               `protobuf:"bytes,7,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
-	ReferralCodes         []string               `protobuf:"bytes,8,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
-	RegistrationCountries []string               `protobuf:"bytes,9,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
+	AffiliateCodes        []string               `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
+	ReferralCodes         []string               `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
+	RegistrationCountries []string               `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -156,20 +154,6 @@ func (x *GetSummaryRequest) GetOperatorIds() []int64 {
 	return nil
 }
 
-func (x *GetSummaryRequest) GetStartTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.StartTime
-	}
-	return nil
-}
-
-func (x *GetSummaryRequest) GetEndTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.EndTime
-	}
-	return nil
-}
-
 func (x *GetSummaryRequest) GetAffiliateCodes() []string {
 	if x != nil {
 		return x.AffiliateCodes
@@ -197,15 +181,15 @@ type GetSummaryResponse struct {
 	RegisteredUsers            int64                  `protobuf:"varint,2,opt,name=registered_users,json=registeredUsers,proto3" json:"registered_users,omitempty"`
 	Ftd                        int64                  `protobuf:"varint,3,opt,name=ftd,proto3" json:"ftd,omitempty"`
 	FtdConversionRate          int64                  `protobuf:"varint,4,opt,name=ftd_conversion_rate,json=ftdConversionRate,proto3" json:"ftd_conversion_rate,omitempty"`
-	DepositAmount              int64                  `protobuf:"varint,5,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
-	WithdrawAmount             int64                  `protobuf:"varint,6,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
-	DepositMinusWithdrawAmount int64                  `protobuf:"varint,7,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
-	AverageFtdAmount           int64                  `protobuf:"varint,8,opt,name=average_ftd_amount,json=averageFtdAmount,proto3" json:"average_ftd_amount,omitempty"`
+	DepositAmount              string                 `protobuf:"bytes,5,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
+	WithdrawAmount             string                 `protobuf:"bytes,6,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
+	DepositMinusWithdrawAmount string                 `protobuf:"bytes,7,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
+	AverageFtdAmount           string                 `protobuf:"bytes,8,opt,name=average_ftd_amount,json=averageFtdAmount,proto3" json:"average_ftd_amount,omitempty"`
 	ArpuToArppuPercentage      int32                  `protobuf:"varint,9,opt,name=arpu_to_arppu_percentage,json=arpuToArppuPercentage,proto3" json:"arpu_to_arppu_percentage,omitempty"`
-	Turnover                   int64                  `protobuf:"varint,10,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	Bonus                      int64                  `protobuf:"varint,11,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	Turnover                   string                 `protobuf:"bytes,10,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	Bonus                      string                 `protobuf:"bytes,11,opt,name=bonus,proto3" json:"bonus,omitempty"`
 	Ggr                        int64                  `protobuf:"varint,12,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	Ngr                        int64                  `protobuf:"varint,13,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	Ngr                        string                 `protobuf:"bytes,13,opt,name=ngr,proto3" json:"ngr,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -268,32 +252,32 @@ func (x *GetSummaryResponse) GetFtdConversionRate() int64 {
 	return 0
 }
 
-func (x *GetSummaryResponse) GetDepositAmount() int64 {
+func (x *GetSummaryResponse) GetDepositAmount() string {
 	if x != nil {
 		return x.DepositAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetSummaryResponse) GetWithdrawAmount() int64 {
+func (x *GetSummaryResponse) GetWithdrawAmount() string {
 	if x != nil {
 		return x.WithdrawAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetSummaryResponse) GetDepositMinusWithdrawAmount() int64 {
+func (x *GetSummaryResponse) GetDepositMinusWithdrawAmount() string {
 	if x != nil {
 		return x.DepositMinusWithdrawAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetSummaryResponse) GetAverageFtdAmount() int64 {
+func (x *GetSummaryResponse) GetAverageFtdAmount() string {
 	if x != nil {
 		return x.AverageFtdAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *GetSummaryResponse) GetArpuToArppuPercentage() int32 {
@@ -303,18 +287,18 @@ func (x *GetSummaryResponse) GetArpuToArppuPercentage() int32 {
 	return 0
 }
 
-func (x *GetSummaryResponse) GetTurnover() int64 {
+func (x *GetSummaryResponse) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetSummaryResponse) GetBonus() int64 {
+func (x *GetSummaryResponse) GetBonus() string {
 	if x != nil {
 		return x.Bonus
 	}
-	return 0
+	return ""
 }
 
 func (x *GetSummaryResponse) GetGgr() int64 {
@@ -324,44 +308,42 @@ func (x *GetSummaryResponse) GetGgr() int64 {
 	return 0
 }
 
-func (x *GetSummaryResponse) GetNgr() int64 {
+func (x *GetSummaryResponse) GetNgr() string {
 	if x != nil {
 		return x.Ngr
 	}
-	return 0
+	return ""
 }
 
-type ListDailySummariesRequest struct {
+type ListSummariesRequest struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
 	TimeRange             *TimeRange             `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	RetailerOperatorIds   []int64                `protobuf:"varint,2,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
 	GroupOperatorIds      []int64                `protobuf:"varint,3,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
 	OperatorIds           []int64                `protobuf:"varint,4,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	StartTime             *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime               *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	AffiliateCodes        []string               `protobuf:"bytes,7,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
-	ReferralCodes         []string               `protobuf:"bytes,8,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
-	RegistrationCountries []string               `protobuf:"bytes,9,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
-	Page                  *int64                 `protobuf:"varint,10,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize              *int64                 `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	AffiliateCodes        []string               `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
+	ReferralCodes         []string               `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
+	RegistrationCountries []string               `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
+	Page                  *int32                 `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize              *int32                 `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
-func (x *ListDailySummariesRequest) Reset() {
-	*x = ListDailySummariesRequest{}
+func (x *ListSummariesRequest) Reset() {
+	*x = ListSummariesRequest{}
 	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListDailySummariesRequest) String() string {
+func (x *ListSummariesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListDailySummariesRequest) ProtoMessage() {}
+func (*ListSummariesRequest) ProtoMessage() {}
 
-func (x *ListDailySummariesRequest) ProtoReflect() protoreflect.Message {
+func (x *ListSummariesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -373,112 +355,98 @@ func (x *ListDailySummariesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListDailySummariesRequest.ProtoReflect.Descriptor instead.
-func (*ListDailySummariesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListSummariesRequest.ProtoReflect.Descriptor instead.
+func (*ListSummariesRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ListDailySummariesRequest) GetTimeRange() *TimeRange {
+func (x *ListSummariesRequest) GetTimeRange() *TimeRange {
 	if x != nil {
 		return x.TimeRange
 	}
 	return nil
 }
 
-func (x *ListDailySummariesRequest) GetRetailerOperatorIds() []int64 {
+func (x *ListSummariesRequest) GetRetailerOperatorIds() []int64 {
 	if x != nil {
 		return x.RetailerOperatorIds
 	}
 	return nil
 }
 
-func (x *ListDailySummariesRequest) GetGroupOperatorIds() []int64 {
+func (x *ListSummariesRequest) GetGroupOperatorIds() []int64 {
 	if x != nil {
 		return x.GroupOperatorIds
 	}
 	return nil
 }
 
-func (x *ListDailySummariesRequest) GetOperatorIds() []int64 {
+func (x *ListSummariesRequest) GetOperatorIds() []int64 {
 	if x != nil {
 		return x.OperatorIds
 	}
 	return nil
 }
 
-func (x *ListDailySummariesRequest) GetStartTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.StartTime
-	}
-	return nil
-}
-
-func (x *ListDailySummariesRequest) GetEndTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.EndTime
-	}
-	return nil
-}
-
-func (x *ListDailySummariesRequest) GetAffiliateCodes() []string {
+func (x *ListSummariesRequest) GetAffiliateCodes() []string {
 	if x != nil {
 		return x.AffiliateCodes
 	}
 	return nil
 }
 
-func (x *ListDailySummariesRequest) GetReferralCodes() []string {
+func (x *ListSummariesRequest) GetReferralCodes() []string {
 	if x != nil {
 		return x.ReferralCodes
 	}
 	return nil
 }
 
-func (x *ListDailySummariesRequest) GetRegistrationCountries() []string {
+func (x *ListSummariesRequest) GetRegistrationCountries() []string {
 	if x != nil {
 		return x.RegistrationCountries
 	}
 	return nil
 }
 
-func (x *ListDailySummariesRequest) GetPage() int64 {
+func (x *ListSummariesRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListDailySummariesRequest) GetPageSize() int64 {
+func (x *ListSummariesRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
 	return 0
 }
 
-type ListDailySummariesResponse struct {
-	state          protoimpl.MessageState                     `protogen:"open.v1"`
-	DailySummaries []*ListDailySummariesResponse_DailySummary `protobuf:"bytes,1,rep,name=daily_summaries,json=dailySummaries,proto3" json:"daily_summaries,omitempty"`
-	Page           int64                                      `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize       int64                                      `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total          int64                                      `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+type ListSummariesResponse struct {
+	state          protoimpl.MessageState                `protogen:"open.v1"`
+	DailySummaries []*ListSummariesResponse_DailySummary `protobuf:"bytes,1,rep,name=daily_summaries,json=dailySummaries,proto3" json:"daily_summaries,omitempty"`
+	Page           int64                                 `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize       int64                                 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total          int64                                 `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
 
-func (x *ListDailySummariesResponse) Reset() {
-	*x = ListDailySummariesResponse{}
+func (x *ListSummariesResponse) Reset() {
+	*x = ListSummariesResponse{}
 	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListDailySummariesResponse) String() string {
+func (x *ListSummariesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListDailySummariesResponse) ProtoMessage() {}
+func (*ListSummariesResponse) ProtoMessage() {}
 
-func (x *ListDailySummariesResponse) ProtoReflect() protoreflect.Message {
+func (x *ListSummariesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -490,37 +458,221 @@ func (x *ListDailySummariesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListDailySummariesResponse.ProtoReflect.Descriptor instead.
-func (*ListDailySummariesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListSummariesResponse.ProtoReflect.Descriptor instead.
+func (*ListSummariesResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *ListDailySummariesResponse) GetDailySummaries() []*ListDailySummariesResponse_DailySummary {
+func (x *ListSummariesResponse) GetDailySummaries() []*ListSummariesResponse_DailySummary {
 	if x != nil {
 		return x.DailySummaries
 	}
 	return nil
 }
 
-func (x *ListDailySummariesResponse) GetPage() int64 {
+func (x *ListSummariesResponse) GetPage() int64 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse) GetPageSize() int64 {
+func (x *ListSummariesResponse) GetPageSize() int64 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse) GetTotal() int64 {
+func (x *ListSummariesResponse) GetTotal() int64 {
 	if x != nil {
 		return x.Total
 	}
 	return 0
+}
+
+type GetGameSummaryRequest struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	TimeRange           *TimeRange             `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	OperatorIds         []int64                `protobuf:"varint,2,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
+	RetailerOperatorIds []int64                `protobuf:"varint,3,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
+	GroupOperatorIds    []int64                `protobuf:"varint,4,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
+	ProviderIds         []string               `protobuf:"bytes,5,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
+	GameTypes           []string               `protobuf:"bytes,6,rep,name=game_types,json=gameTypes,proto3" json:"game_types,omitempty"`
+	GameNames           []string               `protobuf:"bytes,7,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
+	GameIds             []string               `protobuf:"bytes,8,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *GetGameSummaryRequest) Reset() {
+	*x = GetGameSummaryRequest{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetGameSummaryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGameSummaryRequest) ProtoMessage() {}
+
+func (x *GetGameSummaryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGameSummaryRequest.ProtoReflect.Descriptor instead.
+func (*GetGameSummaryRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetGameSummaryRequest) GetTimeRange() *TimeRange {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+func (x *GetGameSummaryRequest) GetOperatorIds() []int64 {
+	if x != nil {
+		return x.OperatorIds
+	}
+	return nil
+}
+
+func (x *GetGameSummaryRequest) GetRetailerOperatorIds() []int64 {
+	if x != nil {
+		return x.RetailerOperatorIds
+	}
+	return nil
+}
+
+func (x *GetGameSummaryRequest) GetGroupOperatorIds() []int64 {
+	if x != nil {
+		return x.GroupOperatorIds
+	}
+	return nil
+}
+
+func (x *GetGameSummaryRequest) GetProviderIds() []string {
+	if x != nil {
+		return x.ProviderIds
+	}
+	return nil
+}
+
+func (x *GetGameSummaryRequest) GetGameTypes() []string {
+	if x != nil {
+		return x.GameTypes
+	}
+	return nil
+}
+
+func (x *GetGameSummaryRequest) GetGameNames() []string {
+	if x != nil {
+		return x.GameNames
+	}
+	return nil
+}
+
+func (x *GetGameSummaryRequest) GetGameIds() []string {
+	if x != nil {
+		return x.GameIds
+	}
+	return nil
+}
+
+type GetGameSummaryResponse struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Turnover         string                 `protobuf:"bytes,1,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	WinAmount        string                 `protobuf:"bytes,2,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	Ggr              string                 `protobuf:"bytes,3,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	BetCount         int64                  `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	AverageBetAmount string                 `protobuf:"bytes,5,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
+	RtpPercentage    string                 `protobuf:"bytes,6,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *GetGameSummaryResponse) Reset() {
+	*x = GetGameSummaryResponse{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetGameSummaryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGameSummaryResponse) ProtoMessage() {}
+
+func (x *GetGameSummaryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGameSummaryResponse.ProtoReflect.Descriptor instead.
+func (*GetGameSummaryResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetGameSummaryResponse) GetTurnover() string {
+	if x != nil {
+		return x.Turnover
+	}
+	return ""
+}
+
+func (x *GetGameSummaryResponse) GetWinAmount() string {
+	if x != nil {
+		return x.WinAmount
+	}
+	return ""
+}
+
+func (x *GetGameSummaryResponse) GetGgr() string {
+	if x != nil {
+		return x.Ggr
+	}
+	return ""
+}
+
+func (x *GetGameSummaryResponse) GetBetCount() int64 {
+	if x != nil {
+		return x.BetCount
+	}
+	return 0
+}
+
+func (x *GetGameSummaryResponse) GetAverageBetAmount() string {
+	if x != nil {
+		return x.AverageBetAmount
+	}
+	return ""
+}
+
+func (x *GetGameSummaryResponse) GetRtpPercentage() string {
+	if x != nil {
+		return x.RtpPercentage
+	}
+	return ""
 }
 
 type GetGameDataRequest struct {
@@ -541,7 +693,7 @@ type GetGameDataRequest struct {
 
 func (x *GetGameDataRequest) Reset() {
 	*x = GetGameDataRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[5]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -553,7 +705,7 @@ func (x *GetGameDataRequest) String() string {
 func (*GetGameDataRequest) ProtoMessage() {}
 
 func (x *GetGameDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[5]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -566,7 +718,7 @@ func (x *GetGameDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGameDataRequest.ProtoReflect.Descriptor instead.
 func (*GetGameDataRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{5}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetGameDataRequest) GetTimeRange() *TimeRange {
@@ -640,24 +792,18 @@ func (x *GetGameDataRequest) GetPageSize() int32 {
 }
 
 type GetGameDataResponse struct {
-	state            protoimpl.MessageState      `protogen:"open.v1"`
-	Turnover         string                      `protobuf:"bytes,1,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	WinAmount        string                      `protobuf:"bytes,2,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
-	Ggr              string                      `protobuf:"bytes,3,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	BetCount         int64                       `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	AverageBetAmount string                      `protobuf:"bytes,5,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
-	RtpPercentage    string                      `protobuf:"bytes,6,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
-	List             []*GetGameDataResponse_List `protobuf:"bytes,7,rep,name=list,proto3" json:"list,omitempty"`
-	Page             int32                       `protobuf:"varint,8,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize         int32                       `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total            int32                       `protobuf:"varint,10,opt,name=total,proto3" json:"total,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	List          []*GetGameDataResponse_List `protobuf:"bytes,7,rep,name=list,proto3" json:"list,omitempty"`
+	Page          int32                       `protobuf:"varint,8,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                       `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                       `protobuf:"varint,10,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetGameDataResponse) Reset() {
 	*x = GetGameDataResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[6]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -669,7 +815,7 @@ func (x *GetGameDataResponse) String() string {
 func (*GetGameDataResponse) ProtoMessage() {}
 
 func (x *GetGameDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[6]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -682,49 +828,7 @@ func (x *GetGameDataResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGameDataResponse.ProtoReflect.Descriptor instead.
 func (*GetGameDataResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *GetGameDataResponse) GetTurnover() string {
-	if x != nil {
-		return x.Turnover
-	}
-	return ""
-}
-
-func (x *GetGameDataResponse) GetWinAmount() string {
-	if x != nil {
-		return x.WinAmount
-	}
-	return ""
-}
-
-func (x *GetGameDataResponse) GetGgr() string {
-	if x != nil {
-		return x.Ggr
-	}
-	return ""
-}
-
-func (x *GetGameDataResponse) GetBetCount() int64 {
-	if x != nil {
-		return x.BetCount
-	}
-	return 0
-}
-
-func (x *GetGameDataResponse) GetAverageBetAmount() string {
-	if x != nil {
-		return x.AverageBetAmount
-	}
-	return ""
-}
-
-func (x *GetGameDataResponse) GetRtpPercentage() string {
-	if x != nil {
-		return x.RtpPercentage
-	}
-	return ""
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetGameDataResponse) GetList() []*GetGameDataResponse_List {
@@ -755,6 +859,198 @@ func (x *GetGameDataResponse) GetTotal() int32 {
 	return 0
 }
 
+type GetPlayerGameSummaryRequest struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	TimeRange           *TimeRange             `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	RetailerOperatorIds []int64                `protobuf:"varint,2,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
+	GroupOperatorIds    []int64                `protobuf:"varint,3,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
+	OperatorIds         []int64                `protobuf:"varint,4,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
+	ProviderIds         []string               `protobuf:"bytes,5,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
+	GameTypes           []string               `protobuf:"bytes,6,rep,name=game_types,json=gameTypes,proto3" json:"game_types,omitempty"`
+	GameTags            []string               `protobuf:"bytes,7,rep,name=game_tags,json=gameTags,proto3" json:"game_tags,omitempty"`
+	GameNames           []string               `protobuf:"bytes,8,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
+	GameIds             []string               `protobuf:"bytes,9,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *GetPlayerGameSummaryRequest) Reset() {
+	*x = GetPlayerGameSummaryRequest{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPlayerGameSummaryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPlayerGameSummaryRequest) ProtoMessage() {}
+
+func (x *GetPlayerGameSummaryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPlayerGameSummaryRequest.ProtoReflect.Descriptor instead.
+func (*GetPlayerGameSummaryRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetPlayerGameSummaryRequest) GetTimeRange() *TimeRange {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+func (x *GetPlayerGameSummaryRequest) GetRetailerOperatorIds() []int64 {
+	if x != nil {
+		return x.RetailerOperatorIds
+	}
+	return nil
+}
+
+func (x *GetPlayerGameSummaryRequest) GetGroupOperatorIds() []int64 {
+	if x != nil {
+		return x.GroupOperatorIds
+	}
+	return nil
+}
+
+func (x *GetPlayerGameSummaryRequest) GetOperatorIds() []int64 {
+	if x != nil {
+		return x.OperatorIds
+	}
+	return nil
+}
+
+func (x *GetPlayerGameSummaryRequest) GetProviderIds() []string {
+	if x != nil {
+		return x.ProviderIds
+	}
+	return nil
+}
+
+func (x *GetPlayerGameSummaryRequest) GetGameTypes() []string {
+	if x != nil {
+		return x.GameTypes
+	}
+	return nil
+}
+
+func (x *GetPlayerGameSummaryRequest) GetGameTags() []string {
+	if x != nil {
+		return x.GameTags
+	}
+	return nil
+}
+
+func (x *GetPlayerGameSummaryRequest) GetGameNames() []string {
+	if x != nil {
+		return x.GameNames
+	}
+	return nil
+}
+
+func (x *GetPlayerGameSummaryRequest) GetGameIds() []string {
+	if x != nil {
+		return x.GameIds
+	}
+	return nil
+}
+
+type GetPlayerGameSummaryResponse struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Turnover         string                 `protobuf:"bytes,1,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	WinAmount        string                 `protobuf:"bytes,2,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	Ggr              string                 `protobuf:"bytes,3,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	BetCount         int64                  `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	AverageBetAmount string                 `protobuf:"bytes,5,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
+	RtpPercentage    string                 `protobuf:"bytes,6,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *GetPlayerGameSummaryResponse) Reset() {
+	*x = GetPlayerGameSummaryResponse{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPlayerGameSummaryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPlayerGameSummaryResponse) ProtoMessage() {}
+
+func (x *GetPlayerGameSummaryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPlayerGameSummaryResponse.ProtoReflect.Descriptor instead.
+func (*GetPlayerGameSummaryResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *GetPlayerGameSummaryResponse) GetTurnover() string {
+	if x != nil {
+		return x.Turnover
+	}
+	return ""
+}
+
+func (x *GetPlayerGameSummaryResponse) GetWinAmount() string {
+	if x != nil {
+		return x.WinAmount
+	}
+	return ""
+}
+
+func (x *GetPlayerGameSummaryResponse) GetGgr() string {
+	if x != nil {
+		return x.Ggr
+	}
+	return ""
+}
+
+func (x *GetPlayerGameSummaryResponse) GetBetCount() int64 {
+	if x != nil {
+		return x.BetCount
+	}
+	return 0
+}
+
+func (x *GetPlayerGameSummaryResponse) GetAverageBetAmount() string {
+	if x != nil {
+		return x.AverageBetAmount
+	}
+	return ""
+}
+
+func (x *GetPlayerGameSummaryResponse) GetRtpPercentage() string {
+	if x != nil {
+		return x.RtpPercentage
+	}
+	return ""
+}
+
 type GetPlayerGameDataRequest struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	TimeRange           *TimeRange             `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
@@ -774,7 +1070,7 @@ type GetPlayerGameDataRequest struct {
 
 func (x *GetPlayerGameDataRequest) Reset() {
 	*x = GetPlayerGameDataRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[7]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -786,7 +1082,7 @@ func (x *GetPlayerGameDataRequest) String() string {
 func (*GetPlayerGameDataRequest) ProtoMessage() {}
 
 func (x *GetPlayerGameDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[7]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -799,7 +1095,7 @@ func (x *GetPlayerGameDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPlayerGameDataRequest.ProtoReflect.Descriptor instead.
 func (*GetPlayerGameDataRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{7}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetPlayerGameDataRequest) GetTimeRange() *TimeRange {
@@ -880,24 +1176,18 @@ func (x *GetPlayerGameDataRequest) GetPageSize() int32 {
 }
 
 type GetPlayerGameDataResponse struct {
-	state            protoimpl.MessageState            `protogen:"open.v1"`
-	Turnover         string                            `protobuf:"bytes,1,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	WinAmount        string                            `protobuf:"bytes,2,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
-	Ggr              string                            `protobuf:"bytes,3,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	BetCount         int64                             `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	AverageBetAmount string                            `protobuf:"bytes,5,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
-	RtpPercentage    string                            `protobuf:"bytes,6,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
-	List             []*GetPlayerGameDataResponse_List `protobuf:"bytes,7,rep,name=list,proto3" json:"list,omitempty"`
-	Page             int32                             `protobuf:"varint,8,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize         int32                             `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total            int32                             `protobuf:"varint,10,opt,name=total,proto3" json:"total,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state         protoimpl.MessageState            `protogen:"open.v1"`
+	List          []*GetPlayerGameDataResponse_List `protobuf:"bytes,7,rep,name=list,proto3" json:"list,omitempty"`
+	Page          int32                             `protobuf:"varint,8,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                             `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                             `protobuf:"varint,10,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetPlayerGameDataResponse) Reset() {
 	*x = GetPlayerGameDataResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -909,7 +1199,7 @@ func (x *GetPlayerGameDataResponse) String() string {
 func (*GetPlayerGameDataResponse) ProtoMessage() {}
 
 func (x *GetPlayerGameDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -922,49 +1212,7 @@ func (x *GetPlayerGameDataResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPlayerGameDataResponse.ProtoReflect.Descriptor instead.
 func (*GetPlayerGameDataResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *GetPlayerGameDataResponse) GetTurnover() string {
-	if x != nil {
-		return x.Turnover
-	}
-	return ""
-}
-
-func (x *GetPlayerGameDataResponse) GetWinAmount() string {
-	if x != nil {
-		return x.WinAmount
-	}
-	return ""
-}
-
-func (x *GetPlayerGameDataResponse) GetGgr() string {
-	if x != nil {
-		return x.Ggr
-	}
-	return ""
-}
-
-func (x *GetPlayerGameDataResponse) GetBetCount() int64 {
-	if x != nil {
-		return x.BetCount
-	}
-	return 0
-}
-
-func (x *GetPlayerGameDataResponse) GetAverageBetAmount() string {
-	if x != nil {
-		return x.AverageBetAmount
-	}
-	return ""
-}
-
-func (x *GetPlayerGameDataResponse) GetRtpPercentage() string {
-	if x != nil {
-		return x.RtpPercentage
-	}
-	return ""
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetPlayerGameDataResponse) GetList() []*GetPlayerGameDataResponse_List {
@@ -1008,7 +1256,7 @@ type GetDepositSummariesRequest struct {
 
 func (x *GetDepositSummariesRequest) Reset() {
 	*x = GetDepositSummariesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1020,7 +1268,7 @@ func (x *GetDepositSummariesRequest) String() string {
 func (*GetDepositSummariesRequest) ProtoMessage() {}
 
 func (x *GetDepositSummariesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1033,7 +1281,7 @@ func (x *GetDepositSummariesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDepositSummariesRequest.ProtoReflect.Descriptor instead.
 func (*GetDepositSummariesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{9}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetDepositSummariesRequest) GetTimeRange() *TimeRange {
@@ -1080,7 +1328,7 @@ type GetDepositSummariesResponse struct {
 
 func (x *GetDepositSummariesResponse) Reset() {
 	*x = GetDepositSummariesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1092,7 +1340,7 @@ func (x *GetDepositSummariesResponse) String() string {
 func (*GetDepositSummariesResponse) ProtoMessage() {}
 
 func (x *GetDepositSummariesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1105,7 +1353,7 @@ func (x *GetDepositSummariesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDepositSummariesResponse.ProtoReflect.Descriptor instead.
 func (*GetDepositSummariesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{10}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetDepositSummariesResponse) GetDepositSummaries() []*GetDepositSummariesResponse_DepositSummary {
@@ -1130,7 +1378,7 @@ type ListDepositDetailsRequest struct {
 
 func (x *ListDepositDetailsRequest) Reset() {
 	*x = ListDepositDetailsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1142,7 +1390,7 @@ func (x *ListDepositDetailsRequest) String() string {
 func (*ListDepositDetailsRequest) ProtoMessage() {}
 
 func (x *ListDepositDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1155,7 +1403,7 @@ func (x *ListDepositDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDepositDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListDepositDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{11}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ListDepositDetailsRequest) GetTimeRange() *TimeRange {
@@ -1219,7 +1467,7 @@ type ListDepositDetailsResponse struct {
 
 func (x *ListDepositDetailsResponse) Reset() {
 	*x = ListDepositDetailsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1231,7 +1479,7 @@ func (x *ListDepositDetailsResponse) String() string {
 func (*ListDepositDetailsResponse) ProtoMessage() {}
 
 func (x *ListDepositDetailsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1244,7 +1492,7 @@ func (x *ListDepositDetailsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDepositDetailsResponse.ProtoReflect.Descriptor instead.
 func (*ListDepositDetailsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{12}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ListDepositDetailsResponse) GetDetails() []*ListDepositDetailsResponse_Detail {
@@ -1288,7 +1536,7 @@ type GetWithdrawSummariesRequest struct {
 
 func (x *GetWithdrawSummariesRequest) Reset() {
 	*x = GetWithdrawSummariesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1300,7 +1548,7 @@ func (x *GetWithdrawSummariesRequest) String() string {
 func (*GetWithdrawSummariesRequest) ProtoMessage() {}
 
 func (x *GetWithdrawSummariesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1313,7 +1561,7 @@ func (x *GetWithdrawSummariesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWithdrawSummariesRequest.ProtoReflect.Descriptor instead.
 func (*GetWithdrawSummariesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{13}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetWithdrawSummariesRequest) GetTimeRange() *TimeRange {
@@ -1360,7 +1608,7 @@ type GetWithdrawSummariesResponse struct {
 
 func (x *GetWithdrawSummariesResponse) Reset() {
 	*x = GetWithdrawSummariesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1372,7 +1620,7 @@ func (x *GetWithdrawSummariesResponse) String() string {
 func (*GetWithdrawSummariesResponse) ProtoMessage() {}
 
 func (x *GetWithdrawSummariesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1385,7 +1633,7 @@ func (x *GetWithdrawSummariesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWithdrawSummariesResponse.ProtoReflect.Descriptor instead.
 func (*GetWithdrawSummariesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{14}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetWithdrawSummariesResponse) GetWithdrawSummaries() []*GetWithdrawSummariesResponse_WithdrawSummary {
@@ -1410,7 +1658,7 @@ type ListWithdrawDetailsRequest struct {
 
 func (x *ListWithdrawDetailsRequest) Reset() {
 	*x = ListWithdrawDetailsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1422,7 +1670,7 @@ func (x *ListWithdrawDetailsRequest) String() string {
 func (*ListWithdrawDetailsRequest) ProtoMessage() {}
 
 func (x *ListWithdrawDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1435,7 +1683,7 @@ func (x *ListWithdrawDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListWithdrawDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListWithdrawDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{15}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ListWithdrawDetailsRequest) GetTimeRange() *TimeRange {
@@ -1499,7 +1747,7 @@ type ListWithdrawDetailsResponse struct {
 
 func (x *ListWithdrawDetailsResponse) Reset() {
 	*x = ListWithdrawDetailsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[16]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1511,7 +1759,7 @@ func (x *ListWithdrawDetailsResponse) String() string {
 func (*ListWithdrawDetailsResponse) ProtoMessage() {}
 
 func (x *ListWithdrawDetailsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[16]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1524,7 +1772,7 @@ func (x *ListWithdrawDetailsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListWithdrawDetailsResponse.ProtoReflect.Descriptor instead.
 func (*ListWithdrawDetailsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{16}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ListWithdrawDetailsResponse) GetDetails() []*ListWithdrawDetailsResponse_Detail {
@@ -1569,7 +1817,7 @@ type ListRegisterRetentionRequest struct {
 
 func (x *ListRegisterRetentionRequest) Reset() {
 	*x = ListRegisterRetentionRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[17]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1581,7 +1829,7 @@ func (x *ListRegisterRetentionRequest) String() string {
 func (*ListRegisterRetentionRequest) ProtoMessage() {}
 
 func (x *ListRegisterRetentionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[17]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1594,7 +1842,7 @@ func (x *ListRegisterRetentionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRegisterRetentionRequest.ProtoReflect.Descriptor instead.
 func (*ListRegisterRetentionRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{17}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ListRegisterRetentionRequest) GetTimeRange() *TimeRange {
@@ -1651,7 +1899,7 @@ type ListRegisterRetentionResponse struct {
 
 func (x *ListRegisterRetentionResponse) Reset() {
 	*x = ListRegisterRetentionResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1663,7 +1911,7 @@ func (x *ListRegisterRetentionResponse) String() string {
 func (*ListRegisterRetentionResponse) ProtoMessage() {}
 
 func (x *ListRegisterRetentionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1676,7 +1924,7 @@ func (x *ListRegisterRetentionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRegisterRetentionResponse.ProtoReflect.Descriptor instead.
 func (*ListRegisterRetentionResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{18}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListRegisterRetentionResponse) GetDetails() []*ListRegisterRetentionResponse_List {
@@ -1722,7 +1970,7 @@ type ListDepositVtgDetailsRequest struct {
 
 func (x *ListDepositVtgDetailsRequest) Reset() {
 	*x = ListDepositVtgDetailsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1734,7 +1982,7 @@ func (x *ListDepositVtgDetailsRequest) String() string {
 func (*ListDepositVtgDetailsRequest) ProtoMessage() {}
 
 func (x *ListDepositVtgDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1747,7 +1995,7 @@ func (x *ListDepositVtgDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDepositVtgDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListDepositVtgDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{19}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListDepositVtgDetailsRequest) GetTimeRange() *TimeRange {
@@ -1811,7 +2059,7 @@ type ListDepositVtgDetailsResponse struct {
 
 func (x *ListDepositVtgDetailsResponse) Reset() {
 	*x = ListDepositVtgDetailsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1823,7 +2071,7 @@ func (x *ListDepositVtgDetailsResponse) String() string {
 func (*ListDepositVtgDetailsResponse) ProtoMessage() {}
 
 func (x *ListDepositVtgDetailsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1836,7 +2084,7 @@ func (x *ListDepositVtgDetailsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDepositVtgDetailsResponse.ProtoReflect.Descriptor instead.
 func (*ListDepositVtgDetailsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{20}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListDepositVtgDetailsResponse) GetDailyDetails() []*ListDepositVtgDetailsResponse_Detail {
@@ -1882,7 +2130,7 @@ type ListWithdrawVtgDetailsRequest struct {
 
 func (x *ListWithdrawVtgDetailsRequest) Reset() {
 	*x = ListWithdrawVtgDetailsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1894,7 +2142,7 @@ func (x *ListWithdrawVtgDetailsRequest) String() string {
 func (*ListWithdrawVtgDetailsRequest) ProtoMessage() {}
 
 func (x *ListWithdrawVtgDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1907,7 +2155,7 @@ func (x *ListWithdrawVtgDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListWithdrawVtgDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListWithdrawVtgDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{21}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListWithdrawVtgDetailsRequest) GetTimeRange() *TimeRange {
@@ -1971,7 +2219,7 @@ type ListWithdrawVtgDetailsResponse struct {
 
 func (x *ListWithdrawVtgDetailsResponse) Reset() {
 	*x = ListWithdrawVtgDetailsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1983,7 +2231,7 @@ func (x *ListWithdrawVtgDetailsResponse) String() string {
 func (*ListWithdrawVtgDetailsResponse) ProtoMessage() {}
 
 func (x *ListWithdrawVtgDetailsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1996,7 +2244,7 @@ func (x *ListWithdrawVtgDetailsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListWithdrawVtgDetailsResponse.ProtoReflect.Descriptor instead.
 func (*ListWithdrawVtgDetailsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{22}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ListWithdrawVtgDetailsResponse) GetDailyDetails() []*ListWithdrawVtgDetailsResponse_Detail {
@@ -2027,70 +2275,70 @@ func (x *ListWithdrawVtgDetailsResponse) GetTotal() int32 {
 	return 0
 }
 
-type ListDailySummariesResponse_DailySummary struct {
+type ListSummariesResponse_DailySummary struct {
 	state                      protoimpl.MessageState `protogen:"open.v1"`
-	Date                       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Date                       string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
 	OperatorName               string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	Country                    string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	Visits                     int64                  `protobuf:"varint,4,opt,name=visits,proto3" json:"visits,omitempty"`
 	UniqueVisits               int64                  `protobuf:"varint,5,opt,name=unique_visits,json=uniqueVisits,proto3" json:"unique_visits,omitempty"`
-	ActiveUsers                int64                  `protobuf:"varint,6,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
-	RegisteredUsers            int64                  `protobuf:"varint,7,opt,name=registered_users,json=registeredUsers,proto3" json:"registered_users,omitempty"`
-	DepositedUsers             int64                  `protobuf:"varint,8,opt,name=deposited_users,json=depositedUsers,proto3" json:"deposited_users,omitempty"`
-	FtdUsers                   int64                  `protobuf:"varint,9,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
-	RepeatedDepositedUsers     int64                  `protobuf:"varint,10,opt,name=repeated_deposited_users,json=repeatedDepositedUsers,proto3" json:"repeated_deposited_users,omitempty"`
-	DepositConversionRate      int64                  `protobuf:"varint,11,opt,name=deposit_conversion_rate,json=depositConversionRate,proto3" json:"deposit_conversion_rate,omitempty"`
-	DepositCount               int64                  `protobuf:"varint,12,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
-	DepositAmount              int64                  `protobuf:"varint,13,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
-	Arpu                       int64                  `protobuf:"varint,14,opt,name=arpu,proto3" json:"arpu,omitempty"`
-	Arppu                      int64                  `protobuf:"varint,15,opt,name=arppu,proto3" json:"arppu,omitempty"`
-	AverageFtdAmount           int64                  `protobuf:"varint,16,opt,name=average_ftd_amount,json=averageFtdAmount,proto3" json:"average_ftd_amount,omitempty"`
-	WithdrawAmount             int64                  `protobuf:"varint,17,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
-	WithdrawedUsers            int64                  `protobuf:"varint,18,opt,name=withdrawed_users,json=withdrawedUsers,proto3" json:"withdrawed_users,omitempty"`
-	FtwUsers                   int64                  `protobuf:"varint,19,opt,name=ftw_users,json=ftwUsers,proto3" json:"ftw_users,omitempty"`
-	AverageWithdrawAmount      int64                  `protobuf:"varint,20,opt,name=average_withdraw_amount,json=averageWithdrawAmount,proto3" json:"average_withdraw_amount,omitempty"`
-	FtwAmount                  int64                  `protobuf:"varint,21,opt,name=ftw_amount,json=ftwAmount,proto3" json:"ftw_amount,omitempty"`
-	AverageFtwAmount           int64                  `protobuf:"varint,22,opt,name=average_ftw_amount,json=averageFtwAmount,proto3" json:"average_ftw_amount,omitempty"`
+	ActiveUsers                int32                  `protobuf:"varint,6,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
+	RegisteredUsers            int32                  `protobuf:"varint,7,opt,name=registered_users,json=registeredUsers,proto3" json:"registered_users,omitempty"`
+	DepositedUsers             int32                  `protobuf:"varint,8,opt,name=deposited_users,json=depositedUsers,proto3" json:"deposited_users,omitempty"`
+	FtdUsers                   int32                  `protobuf:"varint,9,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
+	RepeatedDepositedUsers     int32                  `protobuf:"varint,10,opt,name=repeated_deposited_users,json=repeatedDepositedUsers,proto3" json:"repeated_deposited_users,omitempty"`
+	DepositConversionRate      int32                  `protobuf:"varint,11,opt,name=deposit_conversion_rate,json=depositConversionRate,proto3" json:"deposit_conversion_rate,omitempty"`
+	DepositCount               int32                  `protobuf:"varint,12,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	DepositAmount              string                 `protobuf:"bytes,13,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
+	Arpu                       string                 `protobuf:"bytes,14,opt,name=arpu,proto3" json:"arpu,omitempty"`
+	Arppu                      string                 `protobuf:"bytes,15,opt,name=arppu,proto3" json:"arppu,omitempty"`
+	AverageFtdAmount           string                 `protobuf:"bytes,16,opt,name=average_ftd_amount,json=averageFtdAmount,proto3" json:"average_ftd_amount,omitempty"`
+	WithdrawAmount             string                 `protobuf:"bytes,17,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
+	WithdrawedUsers            int32                  `protobuf:"varint,18,opt,name=withdrawed_users,json=withdrawedUsers,proto3" json:"withdrawed_users,omitempty"`
+	FtwUsers                   int32                  `protobuf:"varint,19,opt,name=ftw_users,json=ftwUsers,proto3" json:"ftw_users,omitempty"`
+	AverageWithdrawAmount      string                 `protobuf:"bytes,20,opt,name=average_withdraw_amount,json=averageWithdrawAmount,proto3" json:"average_withdraw_amount,omitempty"`
+	FtwAmount                  string                 `protobuf:"bytes,21,opt,name=ftw_amount,json=ftwAmount,proto3" json:"ftw_amount,omitempty"`
+	AverageFtwAmount           string                 `protobuf:"bytes,22,opt,name=average_ftw_amount,json=averageFtwAmount,proto3" json:"average_ftw_amount,omitempty"`
 	WuToAuPercentage           int32                  `protobuf:"varint,23,opt,name=wu_to_au_percentage,json=wuToAuPercentage,proto3" json:"wu_to_au_percentage,omitempty"`
 	WuToDuPercentage           int32                  `protobuf:"varint,24,opt,name=wu_to_du_percentage,json=wuToDuPercentage,proto3" json:"wu_to_du_percentage,omitempty"`
-	DepositMinusWithdrawAmount int64                  `protobuf:"varint,25,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
+	DepositMinusWithdrawAmount string                 `protobuf:"bytes,25,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
 	WToDPercentage             int32                  `protobuf:"varint,26,opt,name=w_to_d_percentage,json=wToDPercentage,proto3" json:"w_to_d_percentage,omitempty"`
-	Turnover                   int64                  `protobuf:"varint,27,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	DepositBonus               int64                  `protobuf:"varint,28,opt,name=deposit_bonus,json=depositBonus,proto3" json:"deposit_bonus,omitempty"`
-	RebateBonus                int64                  `protobuf:"varint,29,opt,name=rebate_bonus,json=rebateBonus,proto3" json:"rebate_bonus,omitempty"`
-	LossRebate                 int64                  `protobuf:"varint,30,opt,name=loss_rebate,json=lossRebate,proto3" json:"loss_rebate,omitempty"`
-	VipBonus                   int64                  `protobuf:"varint,31,opt,name=vip_bonus,json=vipBonus,proto3" json:"vip_bonus,omitempty"`
-	OtherBonus                 int64                  `protobuf:"varint,32,opt,name=other_bonus,json=otherBonus,proto3" json:"other_bonus,omitempty"`
-	ReferralCommission         int64                  `protobuf:"varint,33,opt,name=referral_commission,json=referralCommission,proto3" json:"referral_commission,omitempty"`
-	DepositFeeSubsidyAmount    int64                  `protobuf:"varint,34,opt,name=deposit_fee_subsidy_amount,json=depositFeeSubsidyAmount,proto3" json:"deposit_fee_subsidy_amount,omitempty"`
-	PlayerWithdrawFee          int64                  `protobuf:"varint,35,opt,name=player_withdraw_fee,json=playerWithdrawFee,proto3" json:"player_withdraw_fee,omitempty"`
-	OperatorWithdrawFee        int64                  `protobuf:"varint,36,opt,name=operator_withdraw_fee,json=operatorWithdrawFee,proto3" json:"operator_withdraw_fee,omitempty"`
-	CashBalance                int64                  `protobuf:"varint,37,opt,name=cash_balance,json=cashBalance,proto3" json:"cash_balance,omitempty"`
-	BonusBalance               int64                  `protobuf:"varint,38,opt,name=bonus_balance,json=bonusBalance,proto3" json:"bonus_balance,omitempty"`
-	LockedBalance              int64                  `protobuf:"varint,39,opt,name=locked_balance,json=lockedBalance,proto3" json:"locked_balance,omitempty"`
-	Ggr                        int64                  `protobuf:"varint,40,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	Ngr                        int64                  `protobuf:"varint,41,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	Turnover                   string                 `protobuf:"bytes,27,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	DepositBonus               string                 `protobuf:"bytes,28,opt,name=deposit_bonus,json=depositBonus,proto3" json:"deposit_bonus,omitempty"`
+	RebateBonus                string                 `protobuf:"bytes,29,opt,name=rebate_bonus,json=rebateBonus,proto3" json:"rebate_bonus,omitempty"`
+	LossRebate                 string                 `protobuf:"bytes,30,opt,name=loss_rebate,json=lossRebate,proto3" json:"loss_rebate,omitempty"`
+	VipBonus                   string                 `protobuf:"bytes,31,opt,name=vip_bonus,json=vipBonus,proto3" json:"vip_bonus,omitempty"`
+	OtherBonus                 string                 `protobuf:"bytes,32,opt,name=other_bonus,json=otherBonus,proto3" json:"other_bonus,omitempty"`
+	ReferralCommission         string                 `protobuf:"bytes,33,opt,name=referral_commission,json=referralCommission,proto3" json:"referral_commission,omitempty"`
+	DepositFeeSubsidyAmount    string                 `protobuf:"bytes,34,opt,name=deposit_fee_subsidy_amount,json=depositFeeSubsidyAmount,proto3" json:"deposit_fee_subsidy_amount,omitempty"`
+	PlayerWithdrawFee          string                 `protobuf:"bytes,35,opt,name=player_withdraw_fee,json=playerWithdrawFee,proto3" json:"player_withdraw_fee,omitempty"`
+	OperatorWithdrawFee        string                 `protobuf:"bytes,36,opt,name=operator_withdraw_fee,json=operatorWithdrawFee,proto3" json:"operator_withdraw_fee,omitempty"`
+	CashBalance                string                 `protobuf:"bytes,37,opt,name=cash_balance,json=cashBalance,proto3" json:"cash_balance,omitempty"`
+	BonusBalance               string                 `protobuf:"bytes,38,opt,name=bonus_balance,json=bonusBalance,proto3" json:"bonus_balance,omitempty"`
+	LockedBalance              string                 `protobuf:"bytes,39,opt,name=locked_balance,json=lockedBalance,proto3" json:"locked_balance,omitempty"`
+	Ggr                        string                 `protobuf:"bytes,40,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	Ngr                        string                 `protobuf:"bytes,41,opt,name=ngr,proto3" json:"ngr,omitempty"`
 	GgrToNgrPercentage         int32                  `protobuf:"varint,42,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`
 	HouseEdgePercentage        int32                  `protobuf:"varint,43,opt,name=house_edge_percentage,json=houseEdgePercentage,proto3" json:"house_edge_percentage,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
 
-func (x *ListDailySummariesResponse_DailySummary) Reset() {
-	*x = ListDailySummariesResponse_DailySummary{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[23]
+func (x *ListSummariesResponse_DailySummary) Reset() {
+	*x = ListSummariesResponse_DailySummary{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListDailySummariesResponse_DailySummary) String() string {
+func (x *ListSummariesResponse_DailySummary) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListDailySummariesResponse_DailySummary) ProtoMessage() {}
+func (*ListSummariesResponse_DailySummary) ProtoMessage() {}
 
-func (x *ListDailySummariesResponse_DailySummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[23]
+func (x *ListSummariesResponse_DailySummary) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2101,306 +2349,306 @@ func (x *ListDailySummariesResponse_DailySummary) ProtoReflect() protoreflect.Me
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListDailySummariesResponse_DailySummary.ProtoReflect.Descriptor instead.
-func (*ListDailySummariesResponse_DailySummary) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListSummariesResponse_DailySummary.ProtoReflect.Descriptor instead.
+func (*ListSummariesResponse_DailySummary) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{4, 0}
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDate() *timestamppb.Timestamp {
+func (x *ListSummariesResponse_DailySummary) GetDate() string {
 	if x != nil {
 		return x.Date
 	}
-	return nil
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetOperatorName() string {
+func (x *ListSummariesResponse_DailySummary) GetOperatorName() string {
 	if x != nil {
 		return x.OperatorName
 	}
 	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetCountry() string {
+func (x *ListSummariesResponse_DailySummary) GetCountry() string {
 	if x != nil {
 		return x.Country
 	}
 	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetVisits() int64 {
+func (x *ListSummariesResponse_DailySummary) GetVisits() int64 {
 	if x != nil {
 		return x.Visits
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetUniqueVisits() int64 {
+func (x *ListSummariesResponse_DailySummary) GetUniqueVisits() int64 {
 	if x != nil {
 		return x.UniqueVisits
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetActiveUsers() int64 {
+func (x *ListSummariesResponse_DailySummary) GetActiveUsers() int32 {
 	if x != nil {
 		return x.ActiveUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetRegisteredUsers() int64 {
+func (x *ListSummariesResponse_DailySummary) GetRegisteredUsers() int32 {
 	if x != nil {
 		return x.RegisteredUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositedUsers() int64 {
+func (x *ListSummariesResponse_DailySummary) GetDepositedUsers() int32 {
 	if x != nil {
 		return x.DepositedUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetFtdUsers() int64 {
+func (x *ListSummariesResponse_DailySummary) GetFtdUsers() int32 {
 	if x != nil {
 		return x.FtdUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetRepeatedDepositedUsers() int64 {
+func (x *ListSummariesResponse_DailySummary) GetRepeatedDepositedUsers() int32 {
 	if x != nil {
 		return x.RepeatedDepositedUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositConversionRate() int64 {
+func (x *ListSummariesResponse_DailySummary) GetDepositConversionRate() int32 {
 	if x != nil {
 		return x.DepositConversionRate
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositCount() int64 {
+func (x *ListSummariesResponse_DailySummary) GetDepositCount() int32 {
 	if x != nil {
 		return x.DepositCount
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositAmount() int64 {
+func (x *ListSummariesResponse_DailySummary) GetDepositAmount() string {
 	if x != nil {
 		return x.DepositAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetArpu() int64 {
+func (x *ListSummariesResponse_DailySummary) GetArpu() string {
 	if x != nil {
 		return x.Arpu
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetArppu() int64 {
+func (x *ListSummariesResponse_DailySummary) GetArppu() string {
 	if x != nil {
 		return x.Arppu
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetAverageFtdAmount() int64 {
+func (x *ListSummariesResponse_DailySummary) GetAverageFtdAmount() string {
 	if x != nil {
 		return x.AverageFtdAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetWithdrawAmount() int64 {
+func (x *ListSummariesResponse_DailySummary) GetWithdrawAmount() string {
 	if x != nil {
 		return x.WithdrawAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetWithdrawedUsers() int64 {
+func (x *ListSummariesResponse_DailySummary) GetWithdrawedUsers() int32 {
 	if x != nil {
 		return x.WithdrawedUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetFtwUsers() int64 {
+func (x *ListSummariesResponse_DailySummary) GetFtwUsers() int32 {
 	if x != nil {
 		return x.FtwUsers
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetAverageWithdrawAmount() int64 {
+func (x *ListSummariesResponse_DailySummary) GetAverageWithdrawAmount() string {
 	if x != nil {
 		return x.AverageWithdrawAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetFtwAmount() int64 {
+func (x *ListSummariesResponse_DailySummary) GetFtwAmount() string {
 	if x != nil {
 		return x.FtwAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetAverageFtwAmount() int64 {
+func (x *ListSummariesResponse_DailySummary) GetAverageFtwAmount() string {
 	if x != nil {
 		return x.AverageFtwAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetWuToAuPercentage() int32 {
+func (x *ListSummariesResponse_DailySummary) GetWuToAuPercentage() int32 {
 	if x != nil {
 		return x.WuToAuPercentage
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetWuToDuPercentage() int32 {
+func (x *ListSummariesResponse_DailySummary) GetWuToDuPercentage() int32 {
 	if x != nil {
 		return x.WuToDuPercentage
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositMinusWithdrawAmount() int64 {
+func (x *ListSummariesResponse_DailySummary) GetDepositMinusWithdrawAmount() string {
 	if x != nil {
 		return x.DepositMinusWithdrawAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetWToDPercentage() int32 {
+func (x *ListSummariesResponse_DailySummary) GetWToDPercentage() int32 {
 	if x != nil {
 		return x.WToDPercentage
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetTurnover() int64 {
+func (x *ListSummariesResponse_DailySummary) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositBonus() int64 {
+func (x *ListSummariesResponse_DailySummary) GetDepositBonus() string {
 	if x != nil {
 		return x.DepositBonus
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetRebateBonus() int64 {
+func (x *ListSummariesResponse_DailySummary) GetRebateBonus() string {
 	if x != nil {
 		return x.RebateBonus
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetLossRebate() int64 {
+func (x *ListSummariesResponse_DailySummary) GetLossRebate() string {
 	if x != nil {
 		return x.LossRebate
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetVipBonus() int64 {
+func (x *ListSummariesResponse_DailySummary) GetVipBonus() string {
 	if x != nil {
 		return x.VipBonus
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetOtherBonus() int64 {
+func (x *ListSummariesResponse_DailySummary) GetOtherBonus() string {
 	if x != nil {
 		return x.OtherBonus
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetReferralCommission() int64 {
+func (x *ListSummariesResponse_DailySummary) GetReferralCommission() string {
 	if x != nil {
 		return x.ReferralCommission
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetDepositFeeSubsidyAmount() int64 {
+func (x *ListSummariesResponse_DailySummary) GetDepositFeeSubsidyAmount() string {
 	if x != nil {
 		return x.DepositFeeSubsidyAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetPlayerWithdrawFee() int64 {
+func (x *ListSummariesResponse_DailySummary) GetPlayerWithdrawFee() string {
 	if x != nil {
 		return x.PlayerWithdrawFee
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetOperatorWithdrawFee() int64 {
+func (x *ListSummariesResponse_DailySummary) GetOperatorWithdrawFee() string {
 	if x != nil {
 		return x.OperatorWithdrawFee
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetCashBalance() int64 {
+func (x *ListSummariesResponse_DailySummary) GetCashBalance() string {
 	if x != nil {
 		return x.CashBalance
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetBonusBalance() int64 {
+func (x *ListSummariesResponse_DailySummary) GetBonusBalance() string {
 	if x != nil {
 		return x.BonusBalance
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetLockedBalance() int64 {
+func (x *ListSummariesResponse_DailySummary) GetLockedBalance() string {
 	if x != nil {
 		return x.LockedBalance
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetGgr() int64 {
+func (x *ListSummariesResponse_DailySummary) GetGgr() string {
 	if x != nil {
 		return x.Ggr
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetNgr() int64 {
+func (x *ListSummariesResponse_DailySummary) GetNgr() string {
 	if x != nil {
 		return x.Ngr
 	}
-	return 0
+	return ""
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetGgrToNgrPercentage() int32 {
+func (x *ListSummariesResponse_DailySummary) GetGgrToNgrPercentage() int32 {
 	if x != nil {
 		return x.GgrToNgrPercentage
 	}
 	return 0
 }
 
-func (x *ListDailySummariesResponse_DailySummary) GetHouseEdgePercentage() int32 {
+func (x *ListSummariesResponse_DailySummary) GetHouseEdgePercentage() int32 {
 	if x != nil {
 		return x.HouseEdgePercentage
 	}
@@ -2430,7 +2678,7 @@ type GetGameDataResponse_List struct {
 
 func (x *GetGameDataResponse_List) Reset() {
 	*x = GetGameDataResponse_List{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2442,7 +2690,7 @@ func (x *GetGameDataResponse_List) String() string {
 func (*GetGameDataResponse_List) ProtoMessage() {}
 
 func (x *GetGameDataResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2455,7 +2703,7 @@ func (x *GetGameDataResponse_List) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGameDataResponse_List.ProtoReflect.Descriptor instead.
 func (*GetGameDataResponse_List) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{6, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{8, 0}
 }
 
 func (x *GetGameDataResponse_List) GetDate() string {
@@ -2583,7 +2831,7 @@ type GetPlayerGameDataResponse_List struct {
 
 func (x *GetPlayerGameDataResponse_List) Reset() {
 	*x = GetPlayerGameDataResponse_List{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2595,7 +2843,7 @@ func (x *GetPlayerGameDataResponse_List) String() string {
 func (*GetPlayerGameDataResponse_List) ProtoMessage() {}
 
 func (x *GetPlayerGameDataResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2608,7 +2856,7 @@ func (x *GetPlayerGameDataResponse_List) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPlayerGameDataResponse_List.ProtoReflect.Descriptor instead.
 func (*GetPlayerGameDataResponse_List) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{8, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{12, 0}
 }
 
 func (x *GetPlayerGameDataResponse_List) GetDate() string {
@@ -2696,18 +2944,18 @@ func (x *GetPlayerGameDataResponse_List) GetAverageBetAmount() string {
 }
 
 type GetDepositSummariesResponse_DepositSummary struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Date               string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Currency           string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	DepositSuccessRate string                 `protobuf:"bytes,3,opt,name=deposit_success_rate,json=depositSuccessRate,proto3" json:"deposit_success_rate,omitempty"` // decimal number between 0-100, two decimal places
-	DepositAmount      string                 `protobuf:"bytes,4,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	Date                     string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Currency                 string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	DepositSuccessPercentage string                 `protobuf:"bytes,3,opt,name=deposit_success_percentage,json=depositSuccessPercentage,proto3" json:"deposit_success_percentage,omitempty"` // decimal number between 0-100, two decimal places
+	DepositAmount            string                 `protobuf:"bytes,4,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *GetDepositSummariesResponse_DepositSummary) Reset() {
 	*x = GetDepositSummariesResponse_DepositSummary{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2719,7 +2967,7 @@ func (x *GetDepositSummariesResponse_DepositSummary) String() string {
 func (*GetDepositSummariesResponse_DepositSummary) ProtoMessage() {}
 
 func (x *GetDepositSummariesResponse_DepositSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2732,7 +2980,7 @@ func (x *GetDepositSummariesResponse_DepositSummary) ProtoReflect() protoreflect
 
 // Deprecated: Use GetDepositSummariesResponse_DepositSummary.ProtoReflect.Descriptor instead.
 func (*GetDepositSummariesResponse_DepositSummary) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{10, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{14, 0}
 }
 
 func (x *GetDepositSummariesResponse_DepositSummary) GetDate() string {
@@ -2749,9 +2997,9 @@ func (x *GetDepositSummariesResponse_DepositSummary) GetCurrency() string {
 	return ""
 }
 
-func (x *GetDepositSummariesResponse_DepositSummary) GetDepositSuccessRate() string {
+func (x *GetDepositSummariesResponse_DepositSummary) GetDepositSuccessPercentage() string {
 	if x != nil {
-		return x.DepositSuccessRate
+		return x.DepositSuccessPercentage
 	}
 	return ""
 }
@@ -2794,7 +3042,7 @@ type ListDepositDetailsResponse_Detail struct {
 
 func (x *ListDepositDetailsResponse_Detail) Reset() {
 	*x = ListDepositDetailsResponse_Detail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2806,7 +3054,7 @@ func (x *ListDepositDetailsResponse_Detail) String() string {
 func (*ListDepositDetailsResponse_Detail) ProtoMessage() {}
 
 func (x *ListDepositDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2819,7 +3067,7 @@ func (x *ListDepositDetailsResponse_Detail) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ListDepositDetailsResponse_Detail.ProtoReflect.Descriptor instead.
 func (*ListDepositDetailsResponse_Detail) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{12, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{16, 0}
 }
 
 func (x *ListDepositDetailsResponse_Detail) GetDate() string {
@@ -2984,18 +3232,18 @@ func (x *ListDepositDetailsResponse_Detail) GetAmountProportion() string {
 }
 
 type GetWithdrawSummariesResponse_WithdrawSummary struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Date                string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Currency            string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	WithdrawSuccessRate string                 `protobuf:"bytes,3,opt,name=withdraw_success_rate,json=withdrawSuccessRate,proto3" json:"withdraw_success_rate,omitempty"` // decimal number between 0-100, two decimal places
-	WithdrawAmount      string                 `protobuf:"bytes,4,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"open.v1"`
+	Date                      string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Currency                  string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	WithdrawSuccessPercentage string                 `protobuf:"bytes,3,opt,name=withdraw_success_percentage,json=withdrawSuccessPercentage,proto3" json:"withdraw_success_percentage,omitempty"` // decimal number between 0-100, two decimal places
+	WithdrawAmount            string                 `protobuf:"bytes,4,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *GetWithdrawSummariesResponse_WithdrawSummary) Reset() {
 	*x = GetWithdrawSummariesResponse_WithdrawSummary{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3007,7 +3255,7 @@ func (x *GetWithdrawSummariesResponse_WithdrawSummary) String() string {
 func (*GetWithdrawSummariesResponse_WithdrawSummary) ProtoMessage() {}
 
 func (x *GetWithdrawSummariesResponse_WithdrawSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3020,7 +3268,7 @@ func (x *GetWithdrawSummariesResponse_WithdrawSummary) ProtoReflect() protorefle
 
 // Deprecated: Use GetWithdrawSummariesResponse_WithdrawSummary.ProtoReflect.Descriptor instead.
 func (*GetWithdrawSummariesResponse_WithdrawSummary) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{14, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{18, 0}
 }
 
 func (x *GetWithdrawSummariesResponse_WithdrawSummary) GetDate() string {
@@ -3037,9 +3285,9 @@ func (x *GetWithdrawSummariesResponse_WithdrawSummary) GetCurrency() string {
 	return ""
 }
 
-func (x *GetWithdrawSummariesResponse_WithdrawSummary) GetWithdrawSuccessRate() string {
+func (x *GetWithdrawSummariesResponse_WithdrawSummary) GetWithdrawSuccessPercentage() string {
 	if x != nil {
-		return x.WithdrawSuccessRate
+		return x.WithdrawSuccessPercentage
 	}
 	return ""
 }
@@ -3084,7 +3332,7 @@ type ListWithdrawDetailsResponse_Detail struct {
 
 func (x *ListWithdrawDetailsResponse_Detail) Reset() {
 	*x = ListWithdrawDetailsResponse_Detail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3096,7 +3344,7 @@ func (x *ListWithdrawDetailsResponse_Detail) String() string {
 func (*ListWithdrawDetailsResponse_Detail) ProtoMessage() {}
 
 func (x *ListWithdrawDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3109,7 +3357,7 @@ func (x *ListWithdrawDetailsResponse_Detail) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ListWithdrawDetailsResponse_Detail.ProtoReflect.Descriptor instead.
 func (*ListWithdrawDetailsResponse_Detail) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{16, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{20, 0}
 }
 
 func (x *ListWithdrawDetailsResponse_Detail) GetDate() string {
@@ -3338,7 +3586,7 @@ type ListRegisterRetentionResponse_List struct {
 
 func (x *ListRegisterRetentionResponse_List) Reset() {
 	*x = ListRegisterRetentionResponse_List{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3350,7 +3598,7 @@ func (x *ListRegisterRetentionResponse_List) String() string {
 func (*ListRegisterRetentionResponse_List) ProtoMessage() {}
 
 func (x *ListRegisterRetentionResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3363,7 +3611,7 @@ func (x *ListRegisterRetentionResponse_List) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ListRegisterRetentionResponse_List.ProtoReflect.Descriptor instead.
 func (*ListRegisterRetentionResponse_List) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{18, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{22, 0}
 }
 
 func (x *ListRegisterRetentionResponse_List) GetDate() string {
@@ -3668,31 +3916,37 @@ func (x *ListRegisterRetentionResponse_List) GetD120PaidAmt() string {
 }
 
 type ListDepositVtgDetailsResponse_Detail struct {
-	state                                       protoimpl.MessageState `protogen:"open.v1"`
-	Date                                        string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Week                                        string                 `protobuf:"bytes,2,opt,name=week,proto3" json:"week,omitempty"`
-	Month                                       string                 `protobuf:"bytes,3,opt,name=month,proto3" json:"month,omitempty"`
-	OperatorName                                string                 `protobuf:"bytes,4,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	Currency                                    string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
-	DepositAmount                               string                 `protobuf:"bytes,6,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
-	DepositUsers                                int32                  `protobuf:"varint,7,opt,name=deposit_users,json=depositUsers,proto3" json:"deposit_users,omitempty"`
-	FtdAmount                                   string                 `protobuf:"bytes,8,opt,name=ftd_amount,json=ftdAmount,proto3" json:"ftd_amount,omitempty"`
-	FtdUsers                                    int32                  `protobuf:"varint,9,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
-	SameDayFtdAmount                            string                 `protobuf:"bytes,10,opt,name=same_day_ftd_amount,json=sameDayFtdAmount,proto3" json:"same_day_ftd_amount,omitempty"`
-	SameDayFtdUsers                             int32                  `protobuf:"varint,11,opt,name=same_day_ftd_users,json=sameDayFtdUsers,proto3" json:"same_day_ftd_users,omitempty"`
-	RepeatedDepositAmount                       string                 `protobuf:"bytes,12,opt,name=repeated_deposit_amount,json=repeatedDepositAmount,proto3" json:"repeated_deposit_amount,omitempty"`
-	RepeatedDepositUsers                        int32                  `protobuf:"varint,13,opt,name=repeated_deposit_users,json=repeatedDepositUsers,proto3" json:"repeated_deposit_users,omitempty"`
-	SameDayFtd                                  string                 `protobuf:"bytes,14,opt,name=same_day_ftd,json=sameDayFtd,proto3" json:"same_day_ftd,omitempty"`
-	NonSameDayFtd                               string                 `protobuf:"bytes,15,opt,name=non_same_day_ftd,json=nonSameDayFtd,proto3" json:"non_same_day_ftd,omitempty"`
-	AverageFtdAmountForSameDayRegistredUsers    string                 `protobuf:"bytes,16,opt,name=average_ftd_amount_for_same_day_registred_users,json=averageFtdAmountForSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_same_day_registred_users,omitempty"`
-	AverageFtdAmountForNonSameDayRegistredUsers string                 `protobuf:"bytes,17,opt,name=average_ftd_amount_for_non_same_day_registred_users,json=averageFtdAmountForNonSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_non_same_day_registred_users,omitempty"`
-	unknownFields                               protoimpl.UnknownFields
-	sizeCache                                   protoimpl.SizeCache
+	state                                          protoimpl.MessageState `protogen:"open.v1"`
+	Date                                           string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Week                                           string                 `protobuf:"bytes,2,opt,name=week,proto3" json:"week,omitempty"`
+	Month                                          string                 `protobuf:"bytes,3,opt,name=month,proto3" json:"month,omitempty"`
+	OperatorName                                   string                 `protobuf:"bytes,4,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	Currency                                       string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	DepositAmount                                  string                 `protobuf:"bytes,6,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
+	DepositAmountUsd                               string                 `protobuf:"bytes,7,opt,name=deposit_amount_usd,json=depositAmountUsd,proto3" json:"deposit_amount_usd,omitempty"`
+	DepositUsers                                   int32                  `protobuf:"varint,8,opt,name=deposit_users,json=depositUsers,proto3" json:"deposit_users,omitempty"`
+	FtdAmount                                      string                 `protobuf:"bytes,9,opt,name=ftd_amount,json=ftdAmount,proto3" json:"ftd_amount,omitempty"`
+	FtdAmountUsd                                   string                 `protobuf:"bytes,10,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
+	FtdUsers                                       int32                  `protobuf:"varint,11,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
+	SameDayFtdAmount                               string                 `protobuf:"bytes,12,opt,name=same_day_ftd_amount,json=sameDayFtdAmount,proto3" json:"same_day_ftd_amount,omitempty"`
+	SameDayFtdAmountUsd                            string                 `protobuf:"bytes,13,opt,name=same_day_ftd_amount_usd,json=sameDayFtdAmountUsd,proto3" json:"same_day_ftd_amount_usd,omitempty"`
+	SameDayFtdUsers                                int32                  `protobuf:"varint,14,opt,name=same_day_ftd_users,json=sameDayFtdUsers,proto3" json:"same_day_ftd_users,omitempty"`
+	RepeatedDepositAmount                          string                 `protobuf:"bytes,15,opt,name=repeated_deposit_amount,json=repeatedDepositAmount,proto3" json:"repeated_deposit_amount,omitempty"`
+	RepeatedDepositAmountUsd                       string                 `protobuf:"bytes,16,opt,name=repeated_deposit_amount_usd,json=repeatedDepositAmountUsd,proto3" json:"repeated_deposit_amount_usd,omitempty"`
+	RepeatedDepositUsers                           int32                  `protobuf:"varint,17,opt,name=repeated_deposit_users,json=repeatedDepositUsers,proto3" json:"repeated_deposit_users,omitempty"`
+	SameDayFtd                                     string                 `protobuf:"bytes,18,opt,name=same_day_ftd,json=sameDayFtd,proto3" json:"same_day_ftd,omitempty"`
+	NonSameDayFtd                                  string                 `protobuf:"bytes,19,opt,name=non_same_day_ftd,json=nonSameDayFtd,proto3" json:"non_same_day_ftd,omitempty"`
+	AverageFtdAmountForSameDayRegistredUsers       string                 `protobuf:"bytes,20,opt,name=average_ftd_amount_for_same_day_registred_users,json=averageFtdAmountForSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_same_day_registred_users,omitempty"`
+	AverageFtdAmountUsdForSameDayRegistredUsers    string                 `protobuf:"bytes,21,opt,name=average_ftd_amount_usd_for_same_day_registred_users,json=averageFtdAmountUsdForSameDayRegistredUsers,proto3" json:"average_ftd_amount_usd_for_same_day_registred_users,omitempty"`
+	AverageFtdAmountForNonSameDayRegistredUsers    string                 `protobuf:"bytes,22,opt,name=average_ftd_amount_for_non_same_day_registred_users,json=averageFtdAmountForNonSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_non_same_day_registred_users,omitempty"`
+	AverageFtdAmountUsdForNonSameDayRegistredUsers string                 `protobuf:"bytes,23,opt,name=average_ftd_amount_usd_for_non_same_day_registred_users,json=averageFtdAmountUsdForNonSameDayRegistredUsers,proto3" json:"average_ftd_amount_usd_for_non_same_day_registred_users,omitempty"`
+	unknownFields                                  protoimpl.UnknownFields
+	sizeCache                                      protoimpl.SizeCache
 }
 
 func (x *ListDepositVtgDetailsResponse_Detail) Reset() {
 	*x = ListDepositVtgDetailsResponse_Detail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3704,7 +3958,7 @@ func (x *ListDepositVtgDetailsResponse_Detail) String() string {
 func (*ListDepositVtgDetailsResponse_Detail) ProtoMessage() {}
 
 func (x *ListDepositVtgDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3717,7 +3971,7 @@ func (x *ListDepositVtgDetailsResponse_Detail) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use ListDepositVtgDetailsResponse_Detail.ProtoReflect.Descriptor instead.
 func (*ListDepositVtgDetailsResponse_Detail) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{20, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{24, 0}
 }
 
 func (x *ListDepositVtgDetailsResponse_Detail) GetDate() string {
@@ -3762,6 +4016,13 @@ func (x *ListDepositVtgDetailsResponse_Detail) GetDepositAmount() string {
 	return ""
 }
 
+func (x *ListDepositVtgDetailsResponse_Detail) GetDepositAmountUsd() string {
+	if x != nil {
+		return x.DepositAmountUsd
+	}
+	return ""
+}
+
 func (x *ListDepositVtgDetailsResponse_Detail) GetDepositUsers() int32 {
 	if x != nil {
 		return x.DepositUsers
@@ -3772,6 +4033,13 @@ func (x *ListDepositVtgDetailsResponse_Detail) GetDepositUsers() int32 {
 func (x *ListDepositVtgDetailsResponse_Detail) GetFtdAmount() string {
 	if x != nil {
 		return x.FtdAmount
+	}
+	return ""
+}
+
+func (x *ListDepositVtgDetailsResponse_Detail) GetFtdAmountUsd() string {
+	if x != nil {
+		return x.FtdAmountUsd
 	}
 	return ""
 }
@@ -3790,6 +4058,13 @@ func (x *ListDepositVtgDetailsResponse_Detail) GetSameDayFtdAmount() string {
 	return ""
 }
 
+func (x *ListDepositVtgDetailsResponse_Detail) GetSameDayFtdAmountUsd() string {
+	if x != nil {
+		return x.SameDayFtdAmountUsd
+	}
+	return ""
+}
+
 func (x *ListDepositVtgDetailsResponse_Detail) GetSameDayFtdUsers() int32 {
 	if x != nil {
 		return x.SameDayFtdUsers
@@ -3800,6 +4075,13 @@ func (x *ListDepositVtgDetailsResponse_Detail) GetSameDayFtdUsers() int32 {
 func (x *ListDepositVtgDetailsResponse_Detail) GetRepeatedDepositAmount() string {
 	if x != nil {
 		return x.RepeatedDepositAmount
+	}
+	return ""
+}
+
+func (x *ListDepositVtgDetailsResponse_Detail) GetRepeatedDepositAmountUsd() string {
+	if x != nil {
+		return x.RepeatedDepositAmountUsd
 	}
 	return ""
 }
@@ -3832,6 +4114,13 @@ func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountForSameDayRegi
 	return ""
 }
 
+func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountUsdForSameDayRegistredUsers() string {
+	if x != nil {
+		return x.AverageFtdAmountUsdForSameDayRegistredUsers
+	}
+	return ""
+}
+
 func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountForNonSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtdAmountForNonSameDayRegistredUsers
@@ -3839,31 +4128,45 @@ func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountForNonSameDayR
 	return ""
 }
 
+func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountUsdForNonSameDayRegistredUsers() string {
+	if x != nil {
+		return x.AverageFtdAmountUsdForNonSameDayRegistredUsers
+	}
+	return ""
+}
+
 type ListWithdrawVtgDetailsResponse_Detail struct {
-	state                                       protoimpl.MessageState `protogen:"open.v1"`
-	Date                                        string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	OperatorName                                string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	Currency                                    string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	WithdrawAmount                              string                 `protobuf:"bytes,4,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
-	WithdrawUsers                               int32                  `protobuf:"varint,5,opt,name=withdraw_users,json=withdrawUsers,proto3" json:"withdraw_users,omitempty"`
-	FtwAmount                                   string                 `protobuf:"bytes,6,opt,name=ftw_amount,json=ftwAmount,proto3" json:"ftw_amount,omitempty"`
-	FtwUsers                                    int32                  `protobuf:"varint,7,opt,name=ftw_users,json=ftwUsers,proto3" json:"ftw_users,omitempty"`
-	SameDayFtwAmount                            string                 `protobuf:"bytes,8,opt,name=same_day_ftw_amount,json=sameDayFtwAmount,proto3" json:"same_day_ftw_amount,omitempty"`
-	SameDayFtwUsers                             int32                  `protobuf:"varint,9,opt,name=same_day_ftw_users,json=sameDayFtwUsers,proto3" json:"same_day_ftw_users,omitempty"`
-	RepeatedWithdrawAmount                      string                 `protobuf:"bytes,10,opt,name=repeated_withdraw_amount,json=repeatedWithdrawAmount,proto3" json:"repeated_withdraw_amount,omitempty"`
-	RepeatedWithdrawUsers                       int32                  `protobuf:"varint,11,opt,name=repeated_withdraw_users,json=repeatedWithdrawUsers,proto3" json:"repeated_withdraw_users,omitempty"`
-	SameDayFtw                                  int64                  `protobuf:"varint,12,opt,name=same_day_ftw,json=sameDayFtw,proto3" json:"same_day_ftw,omitempty"`
-	NonSameDayFtw                               int64                  `protobuf:"varint,13,opt,name=non_same_day_ftw,json=nonSameDayFtw,proto3" json:"non_same_day_ftw,omitempty"`
-	AverageFtwAmountForSameDayRegistredUsers    string                 `protobuf:"bytes,14,opt,name=average_ftw_amount_for_same_day_registred_users,json=averageFtwAmountForSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_same_day_registred_users,omitempty"`
-	AverageFtwAmountForNonSameDayRegistredUsers string                 `protobuf:"bytes,15,opt,name=average_ftw_amount_for_non_same_day_registred_users,json=averageFtwAmountForNonSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_non_same_day_registred_users,omitempty"`
-	DepositMinusWithdrawAmount                  string                 `protobuf:"bytes,16,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
-	unknownFields                               protoimpl.UnknownFields
-	sizeCache                                   protoimpl.SizeCache
+	state                                          protoimpl.MessageState `protogen:"open.v1"`
+	Date                                           string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	OperatorName                                   string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	Currency                                       string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	WithdrawAmount                                 string                 `protobuf:"bytes,4,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
+	WithdrawAmountUsd                              string                 `protobuf:"bytes,5,opt,name=withdraw_amount_usd,json=withdrawAmountUsd,proto3" json:"withdraw_amount_usd,omitempty"`
+	WithdrawUsers                                  int32                  `protobuf:"varint,6,opt,name=withdraw_users,json=withdrawUsers,proto3" json:"withdraw_users,omitempty"`
+	FtwAmount                                      string                 `protobuf:"bytes,7,opt,name=ftw_amount,json=ftwAmount,proto3" json:"ftw_amount,omitempty"`
+	FtwAmountUsd                                   string                 `protobuf:"bytes,8,opt,name=ftw_amount_usd,json=ftwAmountUsd,proto3" json:"ftw_amount_usd,omitempty"`
+	FtwUsers                                       int32                  `protobuf:"varint,9,opt,name=ftw_users,json=ftwUsers,proto3" json:"ftw_users,omitempty"`
+	SameDayFtwAmount                               string                 `protobuf:"bytes,10,opt,name=same_day_ftw_amount,json=sameDayFtwAmount,proto3" json:"same_day_ftw_amount,omitempty"`
+	SameDayFtwAmountUsd                            string                 `protobuf:"bytes,11,opt,name=same_day_ftw_amount_usd,json=sameDayFtwAmountUsd,proto3" json:"same_day_ftw_amount_usd,omitempty"`
+	SameDayFtwUsers                                int32                  `protobuf:"varint,12,opt,name=same_day_ftw_users,json=sameDayFtwUsers,proto3" json:"same_day_ftw_users,omitempty"`
+	RepeatedWithdrawAmount                         string                 `protobuf:"bytes,13,opt,name=repeated_withdraw_amount,json=repeatedWithdrawAmount,proto3" json:"repeated_withdraw_amount,omitempty"`
+	RepeatedWithdrawAmountUsd                      string                 `protobuf:"bytes,14,opt,name=repeated_withdraw_amount_usd,json=repeatedWithdrawAmountUsd,proto3" json:"repeated_withdraw_amount_usd,omitempty"`
+	RepeatedWithdrawUsers                          int32                  `protobuf:"varint,15,opt,name=repeated_withdraw_users,json=repeatedWithdrawUsers,proto3" json:"repeated_withdraw_users,omitempty"`
+	SameDayFtw                                     int64                  `protobuf:"varint,16,opt,name=same_day_ftw,json=sameDayFtw,proto3" json:"same_day_ftw,omitempty"`
+	NonSameDayFtw                                  int64                  `protobuf:"varint,17,opt,name=non_same_day_ftw,json=nonSameDayFtw,proto3" json:"non_same_day_ftw,omitempty"`
+	AverageFtwAmountForSameDayRegistredUsers       string                 `protobuf:"bytes,18,opt,name=average_ftw_amount_for_same_day_registred_users,json=averageFtwAmountForSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_same_day_registred_users,omitempty"`
+	AverageFtwAmountUsdForSameDayRegistredUsers    string                 `protobuf:"bytes,19,opt,name=average_ftw_amount_usd_for_same_day_registred_users,json=averageFtwAmountUsdForSameDayRegistredUsers,proto3" json:"average_ftw_amount_usd_for_same_day_registred_users,omitempty"`
+	AverageFtwAmountForNonSameDayRegistredUsers    string                 `protobuf:"bytes,20,opt,name=average_ftw_amount_for_non_same_day_registred_users,json=averageFtwAmountForNonSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_non_same_day_registred_users,omitempty"`
+	AverageFtwAmountUsdForNonSameDayRegistredUsers string                 `protobuf:"bytes,21,opt,name=average_ftw_amount_usd_for_non_same_day_registred_users,json=averageFtwAmountUsdForNonSameDayRegistredUsers,proto3" json:"average_ftw_amount_usd_for_non_same_day_registred_users,omitempty"`
+	DepositMinusWithdrawAmount                     string                 `protobuf:"bytes,22,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
+	DepositMinusWithdrawAmountUsd                  string                 `protobuf:"bytes,23,opt,name=deposit_minus_withdraw_amount_usd,json=depositMinusWithdrawAmountUsd,proto3" json:"deposit_minus_withdraw_amount_usd,omitempty"`
+	unknownFields                                  protoimpl.UnknownFields
+	sizeCache                                      protoimpl.SizeCache
 }
 
 func (x *ListWithdrawVtgDetailsResponse_Detail) Reset() {
 	*x = ListWithdrawVtgDetailsResponse_Detail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3875,7 +4178,7 @@ func (x *ListWithdrawVtgDetailsResponse_Detail) String() string {
 func (*ListWithdrawVtgDetailsResponse_Detail) ProtoMessage() {}
 
 func (x *ListWithdrawVtgDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3888,7 +4191,7 @@ func (x *ListWithdrawVtgDetailsResponse_Detail) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use ListWithdrawVtgDetailsResponse_Detail.ProtoReflect.Descriptor instead.
 func (*ListWithdrawVtgDetailsResponse_Detail) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{22, 0}
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{26, 0}
 }
 
 func (x *ListWithdrawVtgDetailsResponse_Detail) GetDate() string {
@@ -3919,6 +4222,13 @@ func (x *ListWithdrawVtgDetailsResponse_Detail) GetWithdrawAmount() string {
 	return ""
 }
 
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetWithdrawAmountUsd() string {
+	if x != nil {
+		return x.WithdrawAmountUsd
+	}
+	return ""
+}
+
 func (x *ListWithdrawVtgDetailsResponse_Detail) GetWithdrawUsers() int32 {
 	if x != nil {
 		return x.WithdrawUsers
@@ -3929,6 +4239,13 @@ func (x *ListWithdrawVtgDetailsResponse_Detail) GetWithdrawUsers() int32 {
 func (x *ListWithdrawVtgDetailsResponse_Detail) GetFtwAmount() string {
 	if x != nil {
 		return x.FtwAmount
+	}
+	return ""
+}
+
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetFtwAmountUsd() string {
+	if x != nil {
+		return x.FtwAmountUsd
 	}
 	return ""
 }
@@ -3947,6 +4264,13 @@ func (x *ListWithdrawVtgDetailsResponse_Detail) GetSameDayFtwAmount() string {
 	return ""
 }
 
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetSameDayFtwAmountUsd() string {
+	if x != nil {
+		return x.SameDayFtwAmountUsd
+	}
+	return ""
+}
+
 func (x *ListWithdrawVtgDetailsResponse_Detail) GetSameDayFtwUsers() int32 {
 	if x != nil {
 		return x.SameDayFtwUsers
@@ -3957,6 +4281,13 @@ func (x *ListWithdrawVtgDetailsResponse_Detail) GetSameDayFtwUsers() int32 {
 func (x *ListWithdrawVtgDetailsResponse_Detail) GetRepeatedWithdrawAmount() string {
 	if x != nil {
 		return x.RepeatedWithdrawAmount
+	}
+	return ""
+}
+
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetRepeatedWithdrawAmountUsd() string {
+	if x != nil {
+		return x.RepeatedWithdrawAmountUsd
 	}
 	return ""
 }
@@ -3989,6 +4320,13 @@ func (x *ListWithdrawVtgDetailsResponse_Detail) GetAverageFtwAmountForSameDayReg
 	return ""
 }
 
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetAverageFtwAmountUsdForSameDayRegistredUsers() string {
+	if x != nil {
+		return x.AverageFtwAmountUsdForSameDayRegistredUsers
+	}
+	return ""
+}
+
 func (x *ListWithdrawVtgDetailsResponse_Detail) GetAverageFtwAmountForNonSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtwAmountForNonSameDayRegistredUsers
@@ -3996,9 +4334,23 @@ func (x *ListWithdrawVtgDetailsResponse_Detail) GetAverageFtwAmountForNonSameDay
 	return ""
 }
 
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetAverageFtwAmountUsdForNonSameDayRegistredUsers() string {
+	if x != nil {
+		return x.AverageFtwAmountUsdForNonSameDayRegistredUsers
+	}
+	return ""
+}
+
 func (x *ListWithdrawVtgDetailsResponse_Detail) GetDepositMinusWithdrawAmount() string {
 	if x != nil {
 		return x.DepositMinusWithdrawAmount
+	}
+	return ""
+}
+
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetDepositMinusWithdrawAmountUsd() string {
+	if x != nil {
+		return x.DepositMinusWithdrawAmountUsd
 	}
 	return ""
 }
@@ -4014,109 +4366,118 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"start_time\x18\x02 \x01(\tH\x00R\tstartTime\x88\x01\x01\x12\x1e\n" +
 	"\bend_time\x18\x03 \x01(\tH\x01R\aendTime\x88\x01\x01B\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\xfc\x03\n" +
+	"\t_end_time\"\xe4\x02\n" +
 	"\x11GetSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
 	"\x15retailer_operator_ids\x18\x02 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
 	"\x12group_operator_ids\x18\x03 \x03(\x03R\x10groupOperatorIds\x12!\n" +
-	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12>\n" +
-	"\n" +
-	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01\x12'\n" +
-	"\x0faffiliate_codes\x18\a \x03(\tR\x0eaffiliateCodes\x12%\n" +
-	"\x0ereferral_codes\x18\b \x03(\tR\rreferralCodes\x125\n" +
-	"\x16registration_countries\x18\t \x03(\tR\x15registrationCountriesB\r\n" +
-	"\v_start_timeB\v\n" +
-	"\t_end_time\"\xe9\x03\n" +
+	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12'\n" +
+	"\x0faffiliate_codes\x18\x05 \x03(\tR\x0eaffiliateCodes\x12%\n" +
+	"\x0ereferral_codes\x18\x06 \x03(\tR\rreferralCodes\x125\n" +
+	"\x16registration_countries\x18\a \x03(\tR\x15registrationCountries\"\xe9\x03\n" +
 	"\x12GetSummaryResponse\x12\x16\n" +
 	"\x06visits\x18\x01 \x01(\x03R\x06visits\x12)\n" +
 	"\x10registered_users\x18\x02 \x01(\x03R\x0fregisteredUsers\x12\x10\n" +
 	"\x03ftd\x18\x03 \x01(\x03R\x03ftd\x12.\n" +
 	"\x13ftd_conversion_rate\x18\x04 \x01(\x03R\x11ftdConversionRate\x12%\n" +
-	"\x0edeposit_amount\x18\x05 \x01(\x03R\rdepositAmount\x12'\n" +
-	"\x0fwithdraw_amount\x18\x06 \x01(\x03R\x0ewithdrawAmount\x12A\n" +
-	"\x1ddeposit_minus_withdraw_amount\x18\a \x01(\x03R\x1adepositMinusWithdrawAmount\x12,\n" +
-	"\x12average_ftd_amount\x18\b \x01(\x03R\x10averageFtdAmount\x127\n" +
+	"\x0edeposit_amount\x18\x05 \x01(\tR\rdepositAmount\x12'\n" +
+	"\x0fwithdraw_amount\x18\x06 \x01(\tR\x0ewithdrawAmount\x12A\n" +
+	"\x1ddeposit_minus_withdraw_amount\x18\a \x01(\tR\x1adepositMinusWithdrawAmount\x12,\n" +
+	"\x12average_ftd_amount\x18\b \x01(\tR\x10averageFtdAmount\x127\n" +
 	"\x18arpu_to_arppu_percentage\x18\t \x01(\x05R\x15arpuToArppuPercentage\x12\x1a\n" +
 	"\bturnover\x18\n" +
-	" \x01(\x03R\bturnover\x12\x14\n" +
-	"\x05bonus\x18\v \x01(\x03R\x05bonus\x12\x10\n" +
+	" \x01(\tR\bturnover\x12\x14\n" +
+	"\x05bonus\x18\v \x01(\tR\x05bonus\x12\x10\n" +
 	"\x03ggr\x18\f \x01(\x03R\x03ggr\x12\x10\n" +
-	"\x03ngr\x18\r \x01(\x03R\x03ngr\"\xd6\x04\n" +
-	"\x19ListDailySummariesRequest\x12C\n" +
+	"\x03ngr\x18\r \x01(\tR\x03ngr\"\xb9\x03\n" +
+	"\x14ListSummariesRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
 	"\x15retailer_operator_ids\x18\x02 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
 	"\x12group_operator_ids\x18\x03 \x03(\x03R\x10groupOperatorIds\x12!\n" +
-	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12>\n" +
-	"\n" +
-	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01\x12'\n" +
-	"\x0faffiliate_codes\x18\a \x03(\tR\x0eaffiliateCodes\x12%\n" +
-	"\x0ereferral_codes\x18\b \x03(\tR\rreferralCodes\x125\n" +
-	"\x16registration_countries\x18\t \x03(\tR\x15registrationCountries\x12\x17\n" +
-	"\x04page\x18\n" +
-	" \x01(\x03H\x02R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\v \x01(\x03H\x03R\bpageSize\x88\x01\x01B\r\n" +
-	"\v_start_timeB\v\n" +
-	"\t_end_timeB\a\n" +
+	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12'\n" +
+	"\x0faffiliate_codes\x18\x05 \x03(\tR\x0eaffiliateCodes\x12%\n" +
+	"\x0ereferral_codes\x18\x06 \x03(\tR\rreferralCodes\x125\n" +
+	"\x16registration_countries\x18\a \x03(\tR\x15registrationCountries\x12\x17\n" +
+	"\x04page\x18\b \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\t \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x88\x0f\n" +
-	"\x1aListDailySummariesResponse\x12k\n" +
-	"\x0fdaily_summaries\x18\x01 \x03(\v2B.api.backoffice.service.v1.ListDailySummariesResponse.DailySummaryR\x0edailySummaries\x12\x12\n" +
+	"_page_size\"\xe2\x0e\n" +
+	"\x15ListSummariesResponse\x12f\n" +
+	"\x0fdaily_summaries\x18\x01 \x03(\v2=.api.backoffice.service.v1.ListSummariesResponse.DailySummaryR\x0edailySummaries\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x03R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\x1a\xb5\r\n" +
-	"\fDailySummary\x12.\n" +
-	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12#\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\x1a\x99\r\n" +
+	"\fDailySummary\x12\x12\n" +
+	"\x04date\x18\x01 \x01(\tR\x04date\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x16\n" +
 	"\x06visits\x18\x04 \x01(\x03R\x06visits\x12#\n" +
 	"\runique_visits\x18\x05 \x01(\x03R\funiqueVisits\x12!\n" +
-	"\factive_users\x18\x06 \x01(\x03R\vactiveUsers\x12)\n" +
-	"\x10registered_users\x18\a \x01(\x03R\x0fregisteredUsers\x12'\n" +
-	"\x0fdeposited_users\x18\b \x01(\x03R\x0edepositedUsers\x12\x1b\n" +
-	"\tftd_users\x18\t \x01(\x03R\bftdUsers\x128\n" +
+	"\factive_users\x18\x06 \x01(\x05R\vactiveUsers\x12)\n" +
+	"\x10registered_users\x18\a \x01(\x05R\x0fregisteredUsers\x12'\n" +
+	"\x0fdeposited_users\x18\b \x01(\x05R\x0edepositedUsers\x12\x1b\n" +
+	"\tftd_users\x18\t \x01(\x05R\bftdUsers\x128\n" +
 	"\x18repeated_deposited_users\x18\n" +
-	" \x01(\x03R\x16repeatedDepositedUsers\x126\n" +
-	"\x17deposit_conversion_rate\x18\v \x01(\x03R\x15depositConversionRate\x12#\n" +
-	"\rdeposit_count\x18\f \x01(\x03R\fdepositCount\x12%\n" +
-	"\x0edeposit_amount\x18\r \x01(\x03R\rdepositAmount\x12\x12\n" +
-	"\x04arpu\x18\x0e \x01(\x03R\x04arpu\x12\x14\n" +
-	"\x05arppu\x18\x0f \x01(\x03R\x05arppu\x12,\n" +
-	"\x12average_ftd_amount\x18\x10 \x01(\x03R\x10averageFtdAmount\x12'\n" +
-	"\x0fwithdraw_amount\x18\x11 \x01(\x03R\x0ewithdrawAmount\x12)\n" +
-	"\x10withdrawed_users\x18\x12 \x01(\x03R\x0fwithdrawedUsers\x12\x1b\n" +
-	"\tftw_users\x18\x13 \x01(\x03R\bftwUsers\x126\n" +
-	"\x17average_withdraw_amount\x18\x14 \x01(\x03R\x15averageWithdrawAmount\x12\x1d\n" +
+	" \x01(\x05R\x16repeatedDepositedUsers\x126\n" +
+	"\x17deposit_conversion_rate\x18\v \x01(\x05R\x15depositConversionRate\x12#\n" +
+	"\rdeposit_count\x18\f \x01(\x05R\fdepositCount\x12%\n" +
+	"\x0edeposit_amount\x18\r \x01(\tR\rdepositAmount\x12\x12\n" +
+	"\x04arpu\x18\x0e \x01(\tR\x04arpu\x12\x14\n" +
+	"\x05arppu\x18\x0f \x01(\tR\x05arppu\x12,\n" +
+	"\x12average_ftd_amount\x18\x10 \x01(\tR\x10averageFtdAmount\x12'\n" +
+	"\x0fwithdraw_amount\x18\x11 \x01(\tR\x0ewithdrawAmount\x12)\n" +
+	"\x10withdrawed_users\x18\x12 \x01(\x05R\x0fwithdrawedUsers\x12\x1b\n" +
+	"\tftw_users\x18\x13 \x01(\x05R\bftwUsers\x126\n" +
+	"\x17average_withdraw_amount\x18\x14 \x01(\tR\x15averageWithdrawAmount\x12\x1d\n" +
 	"\n" +
-	"ftw_amount\x18\x15 \x01(\x03R\tftwAmount\x12,\n" +
-	"\x12average_ftw_amount\x18\x16 \x01(\x03R\x10averageFtwAmount\x12-\n" +
+	"ftw_amount\x18\x15 \x01(\tR\tftwAmount\x12,\n" +
+	"\x12average_ftw_amount\x18\x16 \x01(\tR\x10averageFtwAmount\x12-\n" +
 	"\x13wu_to_au_percentage\x18\x17 \x01(\x05R\x10wuToAuPercentage\x12-\n" +
 	"\x13wu_to_du_percentage\x18\x18 \x01(\x05R\x10wuToDuPercentage\x12A\n" +
-	"\x1ddeposit_minus_withdraw_amount\x18\x19 \x01(\x03R\x1adepositMinusWithdrawAmount\x12)\n" +
+	"\x1ddeposit_minus_withdraw_amount\x18\x19 \x01(\tR\x1adepositMinusWithdrawAmount\x12)\n" +
 	"\x11w_to_d_percentage\x18\x1a \x01(\x05R\x0ewToDPercentage\x12\x1a\n" +
-	"\bturnover\x18\x1b \x01(\x03R\bturnover\x12#\n" +
-	"\rdeposit_bonus\x18\x1c \x01(\x03R\fdepositBonus\x12!\n" +
-	"\frebate_bonus\x18\x1d \x01(\x03R\vrebateBonus\x12\x1f\n" +
-	"\vloss_rebate\x18\x1e \x01(\x03R\n" +
+	"\bturnover\x18\x1b \x01(\tR\bturnover\x12#\n" +
+	"\rdeposit_bonus\x18\x1c \x01(\tR\fdepositBonus\x12!\n" +
+	"\frebate_bonus\x18\x1d \x01(\tR\vrebateBonus\x12\x1f\n" +
+	"\vloss_rebate\x18\x1e \x01(\tR\n" +
 	"lossRebate\x12\x1b\n" +
-	"\tvip_bonus\x18\x1f \x01(\x03R\bvipBonus\x12\x1f\n" +
-	"\vother_bonus\x18  \x01(\x03R\n" +
+	"\tvip_bonus\x18\x1f \x01(\tR\bvipBonus\x12\x1f\n" +
+	"\vother_bonus\x18  \x01(\tR\n" +
 	"otherBonus\x12/\n" +
-	"\x13referral_commission\x18! \x01(\x03R\x12referralCommission\x12;\n" +
-	"\x1adeposit_fee_subsidy_amount\x18\" \x01(\x03R\x17depositFeeSubsidyAmount\x12.\n" +
-	"\x13player_withdraw_fee\x18# \x01(\x03R\x11playerWithdrawFee\x122\n" +
-	"\x15operator_withdraw_fee\x18$ \x01(\x03R\x13operatorWithdrawFee\x12!\n" +
-	"\fcash_balance\x18% \x01(\x03R\vcashBalance\x12#\n" +
-	"\rbonus_balance\x18& \x01(\x03R\fbonusBalance\x12%\n" +
-	"\x0elocked_balance\x18' \x01(\x03R\rlockedBalance\x12\x10\n" +
-	"\x03ggr\x18( \x01(\x03R\x03ggr\x12\x10\n" +
-	"\x03ngr\x18) \x01(\x03R\x03ngr\x121\n" +
+	"\x13referral_commission\x18! \x01(\tR\x12referralCommission\x12;\n" +
+	"\x1adeposit_fee_subsidy_amount\x18\" \x01(\tR\x17depositFeeSubsidyAmount\x12.\n" +
+	"\x13player_withdraw_fee\x18# \x01(\tR\x11playerWithdrawFee\x122\n" +
+	"\x15operator_withdraw_fee\x18$ \x01(\tR\x13operatorWithdrawFee\x12!\n" +
+	"\fcash_balance\x18% \x01(\tR\vcashBalance\x12#\n" +
+	"\rbonus_balance\x18& \x01(\tR\fbonusBalance\x12%\n" +
+	"\x0elocked_balance\x18' \x01(\tR\rlockedBalance\x12\x10\n" +
+	"\x03ggr\x18( \x01(\tR\x03ggr\x12\x10\n" +
+	"\x03ngr\x18) \x01(\tR\x03ngr\x121\n" +
 	"\x15ggr_to_ngr_percentage\x18* \x01(\x05R\x12ggrToNgrPercentage\x122\n" +
-	"\x15house_edge_percentage\x18+ \x01(\x05R\x13houseEdgePercentage\"\x8b\x03\n" +
+	"\x15house_edge_percentage\x18+ \x01(\x05R\x13houseEdgePercentage\"\xdd\x02\n" +
+	"\x15GetGameSummaryRequest\x12C\n" +
+	"\n" +
+	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12!\n" +
+	"\foperator_ids\x18\x02 \x03(\x03R\voperatorIds\x122\n" +
+	"\x15retailer_operator_ids\x18\x03 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
+	"\x12group_operator_ids\x18\x04 \x03(\x03R\x10groupOperatorIds\x12!\n" +
+	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12\x1d\n" +
+	"\n" +
+	"game_types\x18\x06 \x03(\tR\tgameTypes\x12\x1d\n" +
+	"\n" +
+	"game_names\x18\a \x03(\tR\tgameNames\x12\x19\n" +
+	"\bgame_ids\x18\b \x03(\tR\agameIds\"\xd7\x01\n" +
+	"\x16GetGameSummaryResponse\x12\x1a\n" +
+	"\bturnover\x18\x01 \x01(\tR\bturnover\x12\x1d\n" +
+	"\n" +
+	"win_amount\x18\x02 \x01(\tR\twinAmount\x12\x10\n" +
+	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
+	"\tbet_count\x18\x04 \x01(\x03R\bbetCount\x12,\n" +
+	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
+	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\x8b\x03\n" +
 	"\x12GetGameDataRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12!\n" +
@@ -4131,15 +4492,8 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\bgame_ids\x18\b \x03(\tR\agameIds\x12\x12\n" +
 	"\x04page\x18\t \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\n" +
-	" \x01(\x05R\bpageSize\"\xc6\x06\n" +
-	"\x13GetGameDataResponse\x12\x1a\n" +
-	"\bturnover\x18\x01 \x01(\tR\bturnover\x12\x1d\n" +
-	"\n" +
-	"win_amount\x18\x02 \x01(\tR\twinAmount\x12\x10\n" +
-	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
-	"\tbet_count\x18\x04 \x01(\x03R\bbetCount\x12,\n" +
-	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\x12G\n" +
+	" \x01(\x05R\bpageSize\"\x87\x05\n" +
+	"\x13GetGameDataResponse\x12G\n" +
 	"\x04list\x18\a \x03(\v23.api.backoffice.service.v1.GetGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\t \x01(\x05R\bpageSize\x12\x14\n" +
@@ -4162,7 +4516,28 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x0eggr_percentage\x18\f \x01(\tR\rggrPercentage\x12\x1b\n" +
 	"\tbet_count\x18\r \x01(\x03R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x0e \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x0f \x01(\tR\rrtpPercentage\"\xae\x03\n" +
+	"\x0ertp_percentage\x18\x0f \x01(\tR\rrtpPercentage\"\x80\x03\n" +
+	"\x1bGetPlayerGameSummaryRequest\x12C\n" +
+	"\n" +
+	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
+	"\x15retailer_operator_ids\x18\x02 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
+	"\x12group_operator_ids\x18\x03 \x03(\x03R\x10groupOperatorIds\x12!\n" +
+	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12!\n" +
+	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12\x1d\n" +
+	"\n" +
+	"game_types\x18\x06 \x03(\tR\tgameTypes\x12\x1b\n" +
+	"\tgame_tags\x18\a \x03(\tR\bgameTags\x12\x1d\n" +
+	"\n" +
+	"game_names\x18\b \x03(\tR\tgameNames\x12\x19\n" +
+	"\bgame_ids\x18\t \x03(\tR\agameIds\"\xdd\x01\n" +
+	"\x1cGetPlayerGameSummaryResponse\x12\x1a\n" +
+	"\bturnover\x18\x01 \x01(\tR\bturnover\x12\x1d\n" +
+	"\n" +
+	"win_amount\x18\x02 \x01(\tR\twinAmount\x12\x10\n" +
+	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
+	"\tbet_count\x18\x04 \x01(\x03R\bbetCount\x12,\n" +
+	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
+	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\xae\x03\n" +
 	"\x18GetPlayerGameDataRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
@@ -4178,15 +4553,8 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\bgame_ids\x18\t \x03(\tR\agameIds\x12\x12\n" +
 	"\x04page\x18\n" +
 	" \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\v \x01(\x05R\bpageSize\"\xd3\x05\n" +
-	"\x19GetPlayerGameDataResponse\x12\x1a\n" +
-	"\bturnover\x18\x01 \x01(\tR\bturnover\x12\x1d\n" +
-	"\n" +
-	"win_amount\x18\x02 \x01(\tR\twinAmount\x12\x10\n" +
-	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
-	"\tbet_count\x18\x04 \x01(\x03R\bbetCount\x12,\n" +
-	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\x12M\n" +
+	"\tpage_size\x18\v \x01(\x05R\bpageSize\"\x94\x04\n" +
+	"\x19GetPlayerGameDataResponse\x12M\n" +
 	"\x04list\x18\a \x03(\v29.api.backoffice.service.v1.GetPlayerGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\t \x01(\x05R\bpageSize\x12\x14\n" +
@@ -4215,13 +4583,13 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
-	"currencies\"\xad\x02\n" +
+	"currencies\"\xb9\x02\n" +
 	"\x1bGetDepositSummariesResponse\x12r\n" +
-	"\x11deposit_summaries\x18\x01 \x03(\v2E.api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummaryR\x10depositSummaries\x1a\x99\x01\n" +
+	"\x11deposit_summaries\x18\x01 \x03(\v2E.api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummaryR\x10depositSummaries\x1a\xa5\x01\n" +
 	"\x0eDepositSummary\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x120\n" +
-	"\x14deposit_success_rate\x18\x03 \x01(\tR\x12depositSuccessRate\x12%\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12<\n" +
+	"\x1adeposit_success_percentage\x18\x03 \x01(\tR\x18depositSuccessPercentage\x12%\n" +
 	"\x0edeposit_amount\x18\x04 \x01(\tR\rdepositAmount\"\xb6\x02\n" +
 	"\x19ListDepositDetailsRequest\x12C\n" +
 	"\n" +
@@ -4275,13 +4643,13 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
-	"currencies\"\xb7\x02\n" +
+	"currencies\"\xc3\x02\n" +
 	"\x1cGetWithdrawSummariesResponse\x12v\n" +
-	"\x12withdraw_summaries\x18\x01 \x03(\v2G.api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummaryR\x11withdrawSummaries\x1a\x9e\x01\n" +
+	"\x12withdraw_summaries\x18\x01 \x03(\v2G.api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummaryR\x11withdrawSummaries\x1a\xaa\x01\n" +
 	"\x0fWithdrawSummary\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x122\n" +
-	"\x15withdraw_success_rate\x18\x03 \x01(\tR\x13withdrawSuccessRate\x12'\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12>\n" +
+	"\x1bwithdraw_success_percentage\x18\x03 \x01(\tR\x19withdrawSuccessPercentage\x12'\n" +
 	"\x0fwithdraw_amount\x18\x04 \x01(\tR\x0ewithdrawAmount\"\xb7\x02\n" +
 	"\x1aListWithdrawDetailsRequest\x12C\n" +
 	"\n" +
@@ -4402,33 +4770,40 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"currencies\x18\x05 \x03(\tR\n" +
 	"currencies\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\"\xc0\a\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\"\xe4\n" +
+	"\n" +
 	"\x1dListDepositVtgDetailsResponse\x12d\n" +
 	"\rdaily_details\x18\x01 \x03(\v2?.api.backoffice.service.v1.ListDepositVtgDetailsResponse.DetailR\fdailyDetails\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xf1\x05\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x95\t\n" +
 	"\x06Detail\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x12\n" +
 	"\x04week\x18\x02 \x01(\tR\x04week\x12\x14\n" +
 	"\x05month\x18\x03 \x01(\tR\x05month\x12#\n" +
 	"\roperator_name\x18\x04 \x01(\tR\foperatorName\x12\x1a\n" +
 	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12%\n" +
-	"\x0edeposit_amount\x18\x06 \x01(\tR\rdepositAmount\x12#\n" +
-	"\rdeposit_users\x18\a \x01(\x05R\fdepositUsers\x12\x1d\n" +
+	"\x0edeposit_amount\x18\x06 \x01(\tR\rdepositAmount\x12,\n" +
+	"\x12deposit_amount_usd\x18\a \x01(\tR\x10depositAmountUsd\x12#\n" +
+	"\rdeposit_users\x18\b \x01(\x05R\fdepositUsers\x12\x1d\n" +
 	"\n" +
-	"ftd_amount\x18\b \x01(\tR\tftdAmount\x12\x1b\n" +
-	"\tftd_users\x18\t \x01(\x05R\bftdUsers\x12-\n" +
-	"\x13same_day_ftd_amount\x18\n" +
-	" \x01(\tR\x10sameDayFtdAmount\x12+\n" +
-	"\x12same_day_ftd_users\x18\v \x01(\x05R\x0fsameDayFtdUsers\x126\n" +
-	"\x17repeated_deposit_amount\x18\f \x01(\tR\x15repeatedDepositAmount\x124\n" +
-	"\x16repeated_deposit_users\x18\r \x01(\x05R\x14repeatedDepositUsers\x12 \n" +
-	"\fsame_day_ftd\x18\x0e \x01(\tR\n" +
+	"ftd_amount\x18\t \x01(\tR\tftdAmount\x12$\n" +
+	"\x0eftd_amount_usd\x18\n" +
+	" \x01(\tR\fftdAmountUsd\x12\x1b\n" +
+	"\tftd_users\x18\v \x01(\x05R\bftdUsers\x12-\n" +
+	"\x13same_day_ftd_amount\x18\f \x01(\tR\x10sameDayFtdAmount\x124\n" +
+	"\x17same_day_ftd_amount_usd\x18\r \x01(\tR\x13sameDayFtdAmountUsd\x12+\n" +
+	"\x12same_day_ftd_users\x18\x0e \x01(\x05R\x0fsameDayFtdUsers\x126\n" +
+	"\x17repeated_deposit_amount\x18\x0f \x01(\tR\x15repeatedDepositAmount\x12=\n" +
+	"\x1brepeated_deposit_amount_usd\x18\x10 \x01(\tR\x18repeatedDepositAmountUsd\x124\n" +
+	"\x16repeated_deposit_users\x18\x11 \x01(\x05R\x14repeatedDepositUsers\x12 \n" +
+	"\fsame_day_ftd\x18\x12 \x01(\tR\n" +
 	"sameDayFtd\x12'\n" +
-	"\x10non_same_day_ftd\x18\x0f \x01(\tR\rnonSameDayFtd\x12a\n" +
-	"/average_ftd_amount_for_same_day_registred_users\x18\x10 \x01(\tR(averageFtdAmountForSameDayRegistredUsers\x12h\n" +
-	"3average_ftd_amount_for_non_same_day_registred_users\x18\x11 \x01(\tR+averageFtdAmountForNonSameDayRegistredUsers\"\xba\x02\n" +
+	"\x10non_same_day_ftd\x18\x13 \x01(\tR\rnonSameDayFtd\x12a\n" +
+	"/average_ftd_amount_for_same_day_registred_users\x18\x14 \x01(\tR(averageFtdAmountForSameDayRegistredUsers\x12h\n" +
+	"3average_ftd_amount_usd_for_same_day_registred_users\x18\x15 \x01(\tR+averageFtdAmountUsdForSameDayRegistredUsers\x12h\n" +
+	"3average_ftd_amount_for_non_same_day_registred_users\x18\x16 \x01(\tR+averageFtdAmountForNonSameDayRegistredUsers\x12o\n" +
+	"7average_ftd_amount_usd_for_non_same_day_registred_users\x18\x17 \x01(\tR.averageFtdAmountUsdForNonSameDayRegistredUsers\"\xba\x02\n" +
 	"\x1dListWithdrawVtgDetailsRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
@@ -4439,38 +4814,48 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"currencies\x18\x05 \x03(\tR\n" +
 	"currencies\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\"\xe3\a\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\"\xd5\v\n" +
 	"\x1eListWithdrawVtgDetailsResponse\x12e\n" +
 	"\rdaily_details\x18\x01 \x03(\v2@.api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.DetailR\fdailyDetails\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x92\x06\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x84\n" +
+	"\n" +
 	"\x06Detail\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12'\n" +
-	"\x0fwithdraw_amount\x18\x04 \x01(\tR\x0ewithdrawAmount\x12%\n" +
-	"\x0ewithdraw_users\x18\x05 \x01(\x05R\rwithdrawUsers\x12\x1d\n" +
+	"\x0fwithdraw_amount\x18\x04 \x01(\tR\x0ewithdrawAmount\x12.\n" +
+	"\x13withdraw_amount_usd\x18\x05 \x01(\tR\x11withdrawAmountUsd\x12%\n" +
+	"\x0ewithdraw_users\x18\x06 \x01(\x05R\rwithdrawUsers\x12\x1d\n" +
 	"\n" +
-	"ftw_amount\x18\x06 \x01(\tR\tftwAmount\x12\x1b\n" +
-	"\tftw_users\x18\a \x01(\x05R\bftwUsers\x12-\n" +
-	"\x13same_day_ftw_amount\x18\b \x01(\tR\x10sameDayFtwAmount\x12+\n" +
-	"\x12same_day_ftw_users\x18\t \x01(\x05R\x0fsameDayFtwUsers\x128\n" +
-	"\x18repeated_withdraw_amount\x18\n" +
-	" \x01(\tR\x16repeatedWithdrawAmount\x126\n" +
-	"\x17repeated_withdraw_users\x18\v \x01(\x05R\x15repeatedWithdrawUsers\x12 \n" +
-	"\fsame_day_ftw\x18\f \x01(\x03R\n" +
+	"ftw_amount\x18\a \x01(\tR\tftwAmount\x12$\n" +
+	"\x0eftw_amount_usd\x18\b \x01(\tR\fftwAmountUsd\x12\x1b\n" +
+	"\tftw_users\x18\t \x01(\x05R\bftwUsers\x12-\n" +
+	"\x13same_day_ftw_amount\x18\n" +
+	" \x01(\tR\x10sameDayFtwAmount\x124\n" +
+	"\x17same_day_ftw_amount_usd\x18\v \x01(\tR\x13sameDayFtwAmountUsd\x12+\n" +
+	"\x12same_day_ftw_users\x18\f \x01(\x05R\x0fsameDayFtwUsers\x128\n" +
+	"\x18repeated_withdraw_amount\x18\r \x01(\tR\x16repeatedWithdrawAmount\x12?\n" +
+	"\x1crepeated_withdraw_amount_usd\x18\x0e \x01(\tR\x19repeatedWithdrawAmountUsd\x126\n" +
+	"\x17repeated_withdraw_users\x18\x0f \x01(\x05R\x15repeatedWithdrawUsers\x12 \n" +
+	"\fsame_day_ftw\x18\x10 \x01(\x03R\n" +
 	"sameDayFtw\x12'\n" +
-	"\x10non_same_day_ftw\x18\r \x01(\x03R\rnonSameDayFtw\x12a\n" +
-	"/average_ftw_amount_for_same_day_registred_users\x18\x0e \x01(\tR(averageFtwAmountForSameDayRegistredUsers\x12h\n" +
-	"3average_ftw_amount_for_non_same_day_registred_users\x18\x0f \x01(\tR+averageFtwAmountForNonSameDayRegistredUsers\x12A\n" +
-	"\x1ddeposit_minus_withdraw_amount\x18\x10 \x01(\tR\x1adepositMinusWithdrawAmount2\x95\x10\n" +
+	"\x10non_same_day_ftw\x18\x11 \x01(\x03R\rnonSameDayFtw\x12a\n" +
+	"/average_ftw_amount_for_same_day_registred_users\x18\x12 \x01(\tR(averageFtwAmountForSameDayRegistredUsers\x12h\n" +
+	"3average_ftw_amount_usd_for_same_day_registred_users\x18\x13 \x01(\tR+averageFtwAmountUsdForSameDayRegistredUsers\x12h\n" +
+	"3average_ftw_amount_for_non_same_day_registred_users\x18\x14 \x01(\tR+averageFtwAmountForNonSameDayRegistredUsers\x12o\n" +
+	"7average_ftw_amount_usd_for_non_same_day_registred_users\x18\x15 \x01(\tR.averageFtwAmountUsdForNonSameDayRegistredUsers\x12A\n" +
+	"\x1ddeposit_minus_withdraw_amount\x18\x16 \x01(\tR\x1adepositMinusWithdrawAmount\x12H\n" +
+	"!deposit_minus_withdraw_amount_usd\x18\x17 \x01(\tR\x1ddepositMinusWithdrawAmountUsd2\xec\x12\n" +
 	"\x10BackofficeReport\x12\x97\x01\n" +
 	"\n" +
-	"GetSummary\x12,.api.backoffice.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/report/summary/get\x12\xb8\x01\n" +
-	"\x12ListDailySummaries\x124.api.backoffice.service.v1.ListDailySummariesRequest\x1a5.api.backoffice.service.v1.ListDailySummariesResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/report/daily-summaries/list\x12\x9c\x01\n" +
-	"\vGetGameData\x12-.api.backoffice.service.v1.GetGameDataRequest\x1a..api.backoffice.service.v1.GetGameDataResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/report/game-data/get\x12\xb5\x01\n" +
-	"\x11GetPlayerGameData\x123.api.backoffice.service.v1.GetPlayerGameDataRequest\x1a4.api.backoffice.service.v1.GetPlayerGameDataResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/report/player-game-data/get\x12\xbc\x01\n" +
+	"GetSummary\x12,.api.backoffice.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/report/summary/get\x12\xa1\x01\n" +
+	"\rListSummaries\x12/.api.backoffice.service.v1.ListSummariesRequest\x1a0.api.backoffice.service.v1.ListSummariesResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/report/summary/list\x12\xa9\x01\n" +
+	"\x12GetGameDataSummary\x120.api.backoffice.service.v1.GetGameSummaryRequest\x1a1.api.backoffice.service.v1.GetGameSummaryResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/report/game-data/get\x12\x9e\x01\n" +
+	"\fListGameData\x12-.api.backoffice.service.v1.GetGameDataRequest\x1a..api.backoffice.service.v1.GetGameDataResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/report/game-data/list\x12\xbb\x01\n" +
+	"\x11GetPlayerGameData\x126.api.backoffice.service.v1.GetPlayerGameSummaryRequest\x1a7.api.backoffice.service.v1.GetPlayerGameSummaryResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/report/player-game-data/get\x12\xb7\x01\n" +
+	"\x12ListPlayerGameData\x123.api.backoffice.service.v1.GetPlayerGameDataRequest\x1a4.api.backoffice.service.v1.GetPlayerGameDataResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/report/player-game-data/list\x12\xbc\x01\n" +
 	"\x13GetDepositSummaries\x125.api.backoffice.service.v1.GetDepositSummariesRequest\x1a6.api.backoffice.service.v1.GetDepositSummariesResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/report/deposit-summaries/get\x12\xb8\x01\n" +
 	"\x12ListDepositDetails\x124.api.backoffice.service.v1.ListDepositDetailsRequest\x1a5.api.backoffice.service.v1.ListDepositDetailsResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/report/deposit-details/list\x12\xc0\x01\n" +
 	"\x14GetWithdrawSummaries\x126.api.backoffice.service.v1.GetWithdrawSummariesRequest\x1a7.api.backoffice.service.v1.GetWithdrawSummariesResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/report/withdraw-summaries/get\x12\xbc\x01\n" +
@@ -4492,97 +4877,101 @@ func file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_report_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_report_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
+var file_backoffice_service_v1_backoffice_report_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
 var file_backoffice_service_v1_backoffice_report_proto_goTypes = []any{
 	(*TimeRange)(nil),                                    // 0: api.backoffice.service.v1.TimeRange
 	(*GetSummaryRequest)(nil),                            // 1: api.backoffice.service.v1.GetSummaryRequest
 	(*GetSummaryResponse)(nil),                           // 2: api.backoffice.service.v1.GetSummaryResponse
-	(*ListDailySummariesRequest)(nil),                    // 3: api.backoffice.service.v1.ListDailySummariesRequest
-	(*ListDailySummariesResponse)(nil),                   // 4: api.backoffice.service.v1.ListDailySummariesResponse
-	(*GetGameDataRequest)(nil),                           // 5: api.backoffice.service.v1.GetGameDataRequest
-	(*GetGameDataResponse)(nil),                          // 6: api.backoffice.service.v1.GetGameDataResponse
-	(*GetPlayerGameDataRequest)(nil),                     // 7: api.backoffice.service.v1.GetPlayerGameDataRequest
-	(*GetPlayerGameDataResponse)(nil),                    // 8: api.backoffice.service.v1.GetPlayerGameDataResponse
-	(*GetDepositSummariesRequest)(nil),                   // 9: api.backoffice.service.v1.GetDepositSummariesRequest
-	(*GetDepositSummariesResponse)(nil),                  // 10: api.backoffice.service.v1.GetDepositSummariesResponse
-	(*ListDepositDetailsRequest)(nil),                    // 11: api.backoffice.service.v1.ListDepositDetailsRequest
-	(*ListDepositDetailsResponse)(nil),                   // 12: api.backoffice.service.v1.ListDepositDetailsResponse
-	(*GetWithdrawSummariesRequest)(nil),                  // 13: api.backoffice.service.v1.GetWithdrawSummariesRequest
-	(*GetWithdrawSummariesResponse)(nil),                 // 14: api.backoffice.service.v1.GetWithdrawSummariesResponse
-	(*ListWithdrawDetailsRequest)(nil),                   // 15: api.backoffice.service.v1.ListWithdrawDetailsRequest
-	(*ListWithdrawDetailsResponse)(nil),                  // 16: api.backoffice.service.v1.ListWithdrawDetailsResponse
-	(*ListRegisterRetentionRequest)(nil),                 // 17: api.backoffice.service.v1.ListRegisterRetentionRequest
-	(*ListRegisterRetentionResponse)(nil),                // 18: api.backoffice.service.v1.ListRegisterRetentionResponse
-	(*ListDepositVtgDetailsRequest)(nil),                 // 19: api.backoffice.service.v1.ListDepositVtgDetailsRequest
-	(*ListDepositVtgDetailsResponse)(nil),                // 20: api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	(*ListWithdrawVtgDetailsRequest)(nil),                // 21: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
-	(*ListWithdrawVtgDetailsResponse)(nil),               // 22: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	(*ListDailySummariesResponse_DailySummary)(nil),      // 23: api.backoffice.service.v1.ListDailySummariesResponse.DailySummary
-	(*GetGameDataResponse_List)(nil),                     // 24: api.backoffice.service.v1.GetGameDataResponse.List
-	(*GetPlayerGameDataResponse_List)(nil),               // 25: api.backoffice.service.v1.GetPlayerGameDataResponse.List
-	(*GetDepositSummariesResponse_DepositSummary)(nil),   // 26: api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
-	(*ListDepositDetailsResponse_Detail)(nil),            // 27: api.backoffice.service.v1.ListDepositDetailsResponse.Detail
-	(*GetWithdrawSummariesResponse_WithdrawSummary)(nil), // 28: api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
-	(*ListWithdrawDetailsResponse_Detail)(nil),           // 29: api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
-	(*ListRegisterRetentionResponse_List)(nil),           // 30: api.backoffice.service.v1.ListRegisterRetentionResponse.List
-	(*ListDepositVtgDetailsResponse_Detail)(nil),         // 31: api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
-	(*ListWithdrawVtgDetailsResponse_Detail)(nil),        // 32: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
-	(*timestamppb.Timestamp)(nil),                        // 33: google.protobuf.Timestamp
+	(*ListSummariesRequest)(nil),                         // 3: api.backoffice.service.v1.ListSummariesRequest
+	(*ListSummariesResponse)(nil),                        // 4: api.backoffice.service.v1.ListSummariesResponse
+	(*GetGameSummaryRequest)(nil),                        // 5: api.backoffice.service.v1.GetGameSummaryRequest
+	(*GetGameSummaryResponse)(nil),                       // 6: api.backoffice.service.v1.GetGameSummaryResponse
+	(*GetGameDataRequest)(nil),                           // 7: api.backoffice.service.v1.GetGameDataRequest
+	(*GetGameDataResponse)(nil),                          // 8: api.backoffice.service.v1.GetGameDataResponse
+	(*GetPlayerGameSummaryRequest)(nil),                  // 9: api.backoffice.service.v1.GetPlayerGameSummaryRequest
+	(*GetPlayerGameSummaryResponse)(nil),                 // 10: api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	(*GetPlayerGameDataRequest)(nil),                     // 11: api.backoffice.service.v1.GetPlayerGameDataRequest
+	(*GetPlayerGameDataResponse)(nil),                    // 12: api.backoffice.service.v1.GetPlayerGameDataResponse
+	(*GetDepositSummariesRequest)(nil),                   // 13: api.backoffice.service.v1.GetDepositSummariesRequest
+	(*GetDepositSummariesResponse)(nil),                  // 14: api.backoffice.service.v1.GetDepositSummariesResponse
+	(*ListDepositDetailsRequest)(nil),                    // 15: api.backoffice.service.v1.ListDepositDetailsRequest
+	(*ListDepositDetailsResponse)(nil),                   // 16: api.backoffice.service.v1.ListDepositDetailsResponse
+	(*GetWithdrawSummariesRequest)(nil),                  // 17: api.backoffice.service.v1.GetWithdrawSummariesRequest
+	(*GetWithdrawSummariesResponse)(nil),                 // 18: api.backoffice.service.v1.GetWithdrawSummariesResponse
+	(*ListWithdrawDetailsRequest)(nil),                   // 19: api.backoffice.service.v1.ListWithdrawDetailsRequest
+	(*ListWithdrawDetailsResponse)(nil),                  // 20: api.backoffice.service.v1.ListWithdrawDetailsResponse
+	(*ListRegisterRetentionRequest)(nil),                 // 21: api.backoffice.service.v1.ListRegisterRetentionRequest
+	(*ListRegisterRetentionResponse)(nil),                // 22: api.backoffice.service.v1.ListRegisterRetentionResponse
+	(*ListDepositVtgDetailsRequest)(nil),                 // 23: api.backoffice.service.v1.ListDepositVtgDetailsRequest
+	(*ListDepositVtgDetailsResponse)(nil),                // 24: api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	(*ListWithdrawVtgDetailsRequest)(nil),                // 25: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
+	(*ListWithdrawVtgDetailsResponse)(nil),               // 26: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	(*ListSummariesResponse_DailySummary)(nil),           // 27: api.backoffice.service.v1.ListSummariesResponse.DailySummary
+	(*GetGameDataResponse_List)(nil),                     // 28: api.backoffice.service.v1.GetGameDataResponse.List
+	(*GetPlayerGameDataResponse_List)(nil),               // 29: api.backoffice.service.v1.GetPlayerGameDataResponse.List
+	(*GetDepositSummariesResponse_DepositSummary)(nil),   // 30: api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
+	(*ListDepositDetailsResponse_Detail)(nil),            // 31: api.backoffice.service.v1.ListDepositDetailsResponse.Detail
+	(*GetWithdrawSummariesResponse_WithdrawSummary)(nil), // 32: api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
+	(*ListWithdrawDetailsResponse_Detail)(nil),           // 33: api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
+	(*ListRegisterRetentionResponse_List)(nil),           // 34: api.backoffice.service.v1.ListRegisterRetentionResponse.List
+	(*ListDepositVtgDetailsResponse_Detail)(nil),         // 35: api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
+	(*ListWithdrawVtgDetailsResponse_Detail)(nil),        // 36: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
 }
 var file_backoffice_service_v1_backoffice_report_proto_depIdxs = []int32{
 	0,  // 0: api.backoffice.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	33, // 1: api.backoffice.service.v1.GetSummaryRequest.start_time:type_name -> google.protobuf.Timestamp
-	33, // 2: api.backoffice.service.v1.GetSummaryRequest.end_time:type_name -> google.protobuf.Timestamp
-	0,  // 3: api.backoffice.service.v1.ListDailySummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	33, // 4: api.backoffice.service.v1.ListDailySummariesRequest.start_time:type_name -> google.protobuf.Timestamp
-	33, // 5: api.backoffice.service.v1.ListDailySummariesRequest.end_time:type_name -> google.protobuf.Timestamp
-	23, // 6: api.backoffice.service.v1.ListDailySummariesResponse.daily_summaries:type_name -> api.backoffice.service.v1.ListDailySummariesResponse.DailySummary
-	0,  // 7: api.backoffice.service.v1.GetGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	24, // 8: api.backoffice.service.v1.GetGameDataResponse.list:type_name -> api.backoffice.service.v1.GetGameDataResponse.List
-	0,  // 9: api.backoffice.service.v1.GetPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	25, // 10: api.backoffice.service.v1.GetPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.GetPlayerGameDataResponse.List
-	0,  // 11: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	26, // 12: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
-	0,  // 13: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	27, // 14: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
-	0,  // 15: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	28, // 16: api.backoffice.service.v1.GetWithdrawSummariesResponse.withdraw_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
-	0,  // 17: api.backoffice.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	29, // 18: api.backoffice.service.v1.ListWithdrawDetailsResponse.details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
-	0,  // 19: api.backoffice.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	30, // 20: api.backoffice.service.v1.ListRegisterRetentionResponse.details:type_name -> api.backoffice.service.v1.ListRegisterRetentionResponse.List
-	0,  // 21: api.backoffice.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	31, // 22: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
-	0,  // 23: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	32, // 24: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
-	33, // 25: api.backoffice.service.v1.ListDailySummariesResponse.DailySummary.date:type_name -> google.protobuf.Timestamp
-	1,  // 26: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
-	3,  // 27: api.backoffice.service.v1.BackofficeReport.ListDailySummaries:input_type -> api.backoffice.service.v1.ListDailySummariesRequest
-	5,  // 28: api.backoffice.service.v1.BackofficeReport.GetGameData:input_type -> api.backoffice.service.v1.GetGameDataRequest
-	7,  // 29: api.backoffice.service.v1.BackofficeReport.GetPlayerGameData:input_type -> api.backoffice.service.v1.GetPlayerGameDataRequest
-	9,  // 30: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
-	11, // 31: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
-	13, // 32: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
-	15, // 33: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
-	17, // 34: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
-	19, // 35: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
-	21, // 36: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
-	2,  // 37: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	4,  // 38: api.backoffice.service.v1.BackofficeReport.ListDailySummaries:output_type -> api.backoffice.service.v1.ListDailySummariesResponse
-	6,  // 39: api.backoffice.service.v1.BackofficeReport.GetGameData:output_type -> api.backoffice.service.v1.GetGameDataResponse
-	8,  // 40: api.backoffice.service.v1.BackofficeReport.GetPlayerGameData:output_type -> api.backoffice.service.v1.GetPlayerGameDataResponse
-	10, // 41: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
-	12, // 42: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
-	14, // 43: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
-	16, // 44: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
-	18, // 45: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
-	20, // 46: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	22, // 47: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	37, // [37:48] is the sub-list for method output_type
-	26, // [26:37] is the sub-list for method input_type
-	26, // [26:26] is the sub-list for extension type_name
-	26, // [26:26] is the sub-list for extension extendee
-	0,  // [0:26] is the sub-list for field type_name
+	0,  // 1: api.backoffice.service.v1.ListSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	27, // 2: api.backoffice.service.v1.ListSummariesResponse.daily_summaries:type_name -> api.backoffice.service.v1.ListSummariesResponse.DailySummary
+	0,  // 3: api.backoffice.service.v1.GetGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	0,  // 4: api.backoffice.service.v1.GetGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	28, // 5: api.backoffice.service.v1.GetGameDataResponse.list:type_name -> api.backoffice.service.v1.GetGameDataResponse.List
+	0,  // 6: api.backoffice.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	0,  // 7: api.backoffice.service.v1.GetPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	29, // 8: api.backoffice.service.v1.GetPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.GetPlayerGameDataResponse.List
+	0,  // 9: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	30, // 10: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
+	0,  // 11: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	31, // 12: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
+	0,  // 13: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	32, // 14: api.backoffice.service.v1.GetWithdrawSummariesResponse.withdraw_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
+	0,  // 15: api.backoffice.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	33, // 16: api.backoffice.service.v1.ListWithdrawDetailsResponse.details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
+	0,  // 17: api.backoffice.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	34, // 18: api.backoffice.service.v1.ListRegisterRetentionResponse.details:type_name -> api.backoffice.service.v1.ListRegisterRetentionResponse.List
+	0,  // 19: api.backoffice.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	35, // 20: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
+	0,  // 21: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	36, // 22: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
+	1,  // 23: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
+	3,  // 24: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
+	5,  // 25: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
+	7,  // 26: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.GetGameDataRequest
+	9,  // 27: api.backoffice.service.v1.BackofficeReport.GetPlayerGameData:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
+	11, // 28: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.GetPlayerGameDataRequest
+	13, // 29: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
+	15, // 30: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
+	17, // 31: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
+	19, // 32: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
+	21, // 33: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
+	23, // 34: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
+	25, // 35: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
+	2,  // 36: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	4,  // 37: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
+	6,  // 38: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
+	8,  // 39: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.GetGameDataResponse
+	10, // 40: api.backoffice.service.v1.BackofficeReport.GetPlayerGameData:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	12, // 41: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.GetPlayerGameDataResponse
+	14, // 42: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
+	16, // 43: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
+	18, // 44: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
+	20, // 45: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
+	22, // 46: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
+	24, // 47: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	26, // 48: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	36, // [36:49] is the sub-list for method output_type
+	23, // [23:36] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_report_proto_init() }
@@ -4591,7 +4980,6 @@ func file_backoffice_service_v1_backoffice_report_proto_init() {
 		return
 	}
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[0].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_report_proto_msgTypes[1].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[3].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -4599,7 +4987,7 @@ func file_backoffice_service_v1_backoffice_report_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_report_proto_rawDesc), len(file_backoffice_service_v1_backoffice_report_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   33,
+			NumMessages:   37,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
