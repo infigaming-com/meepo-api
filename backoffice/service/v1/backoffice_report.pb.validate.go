@@ -195,72 +195,6 @@ func (m *GetSummaryRequest) validate(all bool) error {
 		}
 	}
 
-	if m.StartTime != nil {
-
-		if all {
-			switch v := interface{}(m.GetStartTime()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetSummaryRequestValidationError{
-						field:  "StartTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GetSummaryRequestValidationError{
-						field:  "StartTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GetSummaryRequestValidationError{
-					field:  "StartTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if m.EndTime != nil {
-
-		if all {
-			switch v := interface{}(m.GetEndTime()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetSummaryRequestValidationError{
-						field:  "EndTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GetSummaryRequestValidationError{
-						field:  "EndTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GetSummaryRequestValidationError{
-					field:  "EndTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
 	if len(errors) > 0 {
 		return GetSummaryRequestMultiError(errors)
 	}
@@ -469,22 +403,22 @@ var _ interface {
 	ErrorName() string
 } = GetSummaryResponseValidationError{}
 
-// Validate checks the field values on ListDailySummariesRequest with the rules
+// Validate checks the field values on ListSummariesRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListDailySummariesRequest) Validate() error {
+func (m *ListSummariesRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListDailySummariesRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on ListSummariesRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListDailySummariesRequestMultiError, or nil if none found.
-func (m *ListDailySummariesRequest) ValidateAll() error {
+// ListSummariesRequestMultiError, or nil if none found.
+func (m *ListSummariesRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListDailySummariesRequest) validate(all bool) error {
+func (m *ListSummariesRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -495,7 +429,7 @@ func (m *ListDailySummariesRequest) validate(all bool) error {
 		switch v := interface{}(m.GetTimeRange()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListDailySummariesRequestValidationError{
+				errors = append(errors, ListSummariesRequestValidationError{
 					field:  "TimeRange",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -503,7 +437,7 @@ func (m *ListDailySummariesRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListDailySummariesRequestValidationError{
+				errors = append(errors, ListSummariesRequestValidationError{
 					field:  "TimeRange",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -512,78 +446,12 @@ func (m *ListDailySummariesRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListDailySummariesRequestValidationError{
+			return ListSummariesRequestValidationError{
 				field:  "TimeRange",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
 		}
-	}
-
-	if m.StartTime != nil {
-
-		if all {
-			switch v := interface{}(m.GetStartTime()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListDailySummariesRequestValidationError{
-						field:  "StartTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListDailySummariesRequestValidationError{
-						field:  "StartTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListDailySummariesRequestValidationError{
-					field:  "StartTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if m.EndTime != nil {
-
-		if all {
-			switch v := interface{}(m.GetEndTime()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListDailySummariesRequestValidationError{
-						field:  "EndTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListDailySummariesRequestValidationError{
-						field:  "EndTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListDailySummariesRequestValidationError{
-					field:  "EndTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
 	}
 
 	if m.Page != nil {
@@ -595,19 +463,19 @@ func (m *ListDailySummariesRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListDailySummariesRequestMultiError(errors)
+		return ListSummariesRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListDailySummariesRequestMultiError is an error wrapping multiple validation
-// errors returned by ListDailySummariesRequest.ValidateAll() if the
-// designated constraints aren't met.
-type ListDailySummariesRequestMultiError []error
+// ListSummariesRequestMultiError is an error wrapping multiple validation
+// errors returned by ListSummariesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListSummariesRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListDailySummariesRequestMultiError) Error() string {
+func (m ListSummariesRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -616,11 +484,11 @@ func (m ListDailySummariesRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListDailySummariesRequestMultiError) AllErrors() []error { return m }
+func (m ListSummariesRequestMultiError) AllErrors() []error { return m }
 
-// ListDailySummariesRequestValidationError is the validation error returned by
-// ListDailySummariesRequest.Validate if the designated constraints aren't met.
-type ListDailySummariesRequestValidationError struct {
+// ListSummariesRequestValidationError is the validation error returned by
+// ListSummariesRequest.Validate if the designated constraints aren't met.
+type ListSummariesRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -628,24 +496,24 @@ type ListDailySummariesRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListDailySummariesRequestValidationError) Field() string { return e.field }
+func (e ListSummariesRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListDailySummariesRequestValidationError) Reason() string { return e.reason }
+func (e ListSummariesRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListDailySummariesRequestValidationError) Cause() error { return e.cause }
+func (e ListSummariesRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListDailySummariesRequestValidationError) Key() bool { return e.key }
+func (e ListSummariesRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListDailySummariesRequestValidationError) ErrorName() string {
-	return "ListDailySummariesRequestValidationError"
+func (e ListSummariesRequestValidationError) ErrorName() string {
+	return "ListSummariesRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListDailySummariesRequestValidationError) Error() string {
+func (e ListSummariesRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -657,14 +525,14 @@ func (e ListDailySummariesRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListDailySummariesRequest.%s: %s%s",
+		"invalid %sListSummariesRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListDailySummariesRequestValidationError{}
+var _ error = ListSummariesRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -672,24 +540,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListDailySummariesRequestValidationError{}
+} = ListSummariesRequestValidationError{}
 
-// Validate checks the field values on ListDailySummariesResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on ListSummariesResponse with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListDailySummariesResponse) Validate() error {
+func (m *ListSummariesResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListDailySummariesResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on ListSummariesResponse with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListDailySummariesResponseMultiError, or nil if none found.
-func (m *ListDailySummariesResponse) ValidateAll() error {
+// ListSummariesResponseMultiError, or nil if none found.
+func (m *ListSummariesResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListDailySummariesResponse) validate(all bool) error {
+func (m *ListSummariesResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -703,7 +571,7 @@ func (m *ListDailySummariesResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListDailySummariesResponseValidationError{
+					errors = append(errors, ListSummariesResponseValidationError{
 						field:  fmt.Sprintf("DailySummaries[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -711,7 +579,7 @@ func (m *ListDailySummariesResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListDailySummariesResponseValidationError{
+					errors = append(errors, ListSummariesResponseValidationError{
 						field:  fmt.Sprintf("DailySummaries[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -720,7 +588,7 @@ func (m *ListDailySummariesResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListDailySummariesResponseValidationError{
+				return ListSummariesResponseValidationError{
 					field:  fmt.Sprintf("DailySummaries[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -737,19 +605,19 @@ func (m *ListDailySummariesResponse) validate(all bool) error {
 	// no validation rules for Total
 
 	if len(errors) > 0 {
-		return ListDailySummariesResponseMultiError(errors)
+		return ListSummariesResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListDailySummariesResponseMultiError is an error wrapping multiple
-// validation errors returned by ListDailySummariesResponse.ValidateAll() if
-// the designated constraints aren't met.
-type ListDailySummariesResponseMultiError []error
+// ListSummariesResponseMultiError is an error wrapping multiple validation
+// errors returned by ListSummariesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListSummariesResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListDailySummariesResponseMultiError) Error() string {
+func (m ListSummariesResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -758,11 +626,11 @@ func (m ListDailySummariesResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListDailySummariesResponseMultiError) AllErrors() []error { return m }
+func (m ListSummariesResponseMultiError) AllErrors() []error { return m }
 
-// ListDailySummariesResponseValidationError is the validation error returned
-// by ListDailySummariesResponse.Validate if the designated constraints aren't met.
-type ListDailySummariesResponseValidationError struct {
+// ListSummariesResponseValidationError is the validation error returned by
+// ListSummariesResponse.Validate if the designated constraints aren't met.
+type ListSummariesResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -770,24 +638,24 @@ type ListDailySummariesResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListDailySummariesResponseValidationError) Field() string { return e.field }
+func (e ListSummariesResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListDailySummariesResponseValidationError) Reason() string { return e.reason }
+func (e ListSummariesResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListDailySummariesResponseValidationError) Cause() error { return e.cause }
+func (e ListSummariesResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListDailySummariesResponseValidationError) Key() bool { return e.key }
+func (e ListSummariesResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListDailySummariesResponseValidationError) ErrorName() string {
-	return "ListDailySummariesResponseValidationError"
+func (e ListSummariesResponseValidationError) ErrorName() string {
+	return "ListSummariesResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListDailySummariesResponseValidationError) Error() string {
+func (e ListSummariesResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -799,14 +667,14 @@ func (e ListDailySummariesResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListDailySummariesResponse.%s: %s%s",
+		"invalid %sListSummariesResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListDailySummariesResponseValidationError{}
+var _ error = ListSummariesResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -814,7 +682,252 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListDailySummariesResponseValidationError{}
+} = ListSummariesResponseValidationError{}
+
+// Validate checks the field values on GetGameSummaryRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetGameSummaryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetGameSummaryRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetGameSummaryRequestMultiError, or nil if none found.
+func (m *GetGameSummaryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetGameSummaryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetGameSummaryRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetGameSummaryRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetGameSummaryRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetGameSummaryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetGameSummaryRequestMultiError is an error wrapping multiple validation
+// errors returned by GetGameSummaryRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetGameSummaryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetGameSummaryRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetGameSummaryRequestMultiError) AllErrors() []error { return m }
+
+// GetGameSummaryRequestValidationError is the validation error returned by
+// GetGameSummaryRequest.Validate if the designated constraints aren't met.
+type GetGameSummaryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetGameSummaryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetGameSummaryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetGameSummaryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetGameSummaryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetGameSummaryRequestValidationError) ErrorName() string {
+	return "GetGameSummaryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetGameSummaryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetGameSummaryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetGameSummaryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetGameSummaryRequestValidationError{}
+
+// Validate checks the field values on GetGameSummaryResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetGameSummaryResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetGameSummaryResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetGameSummaryResponseMultiError, or nil if none found.
+func (m *GetGameSummaryResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetGameSummaryResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Turnover
+
+	// no validation rules for WinAmount
+
+	// no validation rules for Ggr
+
+	// no validation rules for BetCount
+
+	// no validation rules for AverageBetAmount
+
+	// no validation rules for RtpPercentage
+
+	if len(errors) > 0 {
+		return GetGameSummaryResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetGameSummaryResponseMultiError is an error wrapping multiple validation
+// errors returned by GetGameSummaryResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetGameSummaryResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetGameSummaryResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetGameSummaryResponseMultiError) AllErrors() []error { return m }
+
+// GetGameSummaryResponseValidationError is the validation error returned by
+// GetGameSummaryResponse.Validate if the designated constraints aren't met.
+type GetGameSummaryResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetGameSummaryResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetGameSummaryResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetGameSummaryResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetGameSummaryResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetGameSummaryResponseValidationError) ErrorName() string {
+	return "GetGameSummaryResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetGameSummaryResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetGameSummaryResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetGameSummaryResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetGameSummaryResponseValidationError{}
 
 // Validate checks the field values on GetGameDataRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -973,18 +1086,6 @@ func (m *GetGameDataResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Turnover
-
-	// no validation rules for WinAmount
-
-	// no validation rules for Ggr
-
-	// no validation rules for BetCount
-
-	// no validation rules for AverageBetAmount
-
-	// no validation rules for RtpPercentage
-
 	for idx, item := range m.GetList() {
 		_, _ = idx, item
 
@@ -1104,6 +1205,253 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetGameDataResponseValidationError{}
+
+// Validate checks the field values on GetPlayerGameSummaryRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPlayerGameSummaryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetPlayerGameSummaryRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetPlayerGameSummaryRequestMultiError, or nil if none found.
+func (m *GetPlayerGameSummaryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPlayerGameSummaryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetPlayerGameSummaryRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetPlayerGameSummaryRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetPlayerGameSummaryRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetPlayerGameSummaryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPlayerGameSummaryRequestMultiError is an error wrapping multiple
+// validation errors returned by GetPlayerGameSummaryRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetPlayerGameSummaryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPlayerGameSummaryRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPlayerGameSummaryRequestMultiError) AllErrors() []error { return m }
+
+// GetPlayerGameSummaryRequestValidationError is the validation error returned
+// by GetPlayerGameSummaryRequest.Validate if the designated constraints
+// aren't met.
+type GetPlayerGameSummaryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPlayerGameSummaryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPlayerGameSummaryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPlayerGameSummaryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPlayerGameSummaryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPlayerGameSummaryRequestValidationError) ErrorName() string {
+	return "GetPlayerGameSummaryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPlayerGameSummaryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPlayerGameSummaryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPlayerGameSummaryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPlayerGameSummaryRequestValidationError{}
+
+// Validate checks the field values on GetPlayerGameSummaryResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPlayerGameSummaryResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetPlayerGameSummaryResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetPlayerGameSummaryResponseMultiError, or nil if none found.
+func (m *GetPlayerGameSummaryResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPlayerGameSummaryResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Turnover
+
+	// no validation rules for WinAmount
+
+	// no validation rules for Ggr
+
+	// no validation rules for BetCount
+
+	// no validation rules for AverageBetAmount
+
+	// no validation rules for RtpPercentage
+
+	if len(errors) > 0 {
+		return GetPlayerGameSummaryResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPlayerGameSummaryResponseMultiError is an error wrapping multiple
+// validation errors returned by GetPlayerGameSummaryResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetPlayerGameSummaryResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPlayerGameSummaryResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPlayerGameSummaryResponseMultiError) AllErrors() []error { return m }
+
+// GetPlayerGameSummaryResponseValidationError is the validation error returned
+// by GetPlayerGameSummaryResponse.Validate if the designated constraints
+// aren't met.
+type GetPlayerGameSummaryResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPlayerGameSummaryResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPlayerGameSummaryResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPlayerGameSummaryResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPlayerGameSummaryResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPlayerGameSummaryResponseValidationError) ErrorName() string {
+	return "GetPlayerGameSummaryResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPlayerGameSummaryResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPlayerGameSummaryResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPlayerGameSummaryResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPlayerGameSummaryResponseValidationError{}
 
 // Validate checks the field values on GetPlayerGameDataRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -1261,18 +1609,6 @@ func (m *GetPlayerGameDataResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for Turnover
-
-	// no validation rules for WinAmount
-
-	// no validation rules for Ggr
-
-	// no validation rules for BetCount
-
-	// no validation rules for AverageBetAmount
-
-	// no validation rules for RtpPercentage
 
 	for idx, item := range m.GetList() {
 		_, _ = idx, item
@@ -3323,58 +3659,30 @@ var _ interface {
 	ErrorName() string
 } = ListWithdrawVtgDetailsResponseValidationError{}
 
-// Validate checks the field values on ListDailySummariesResponse_DailySummary
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *ListDailySummariesResponse_DailySummary) Validate() error {
+// Validate checks the field values on ListSummariesResponse_DailySummary with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListSummariesResponse_DailySummary) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on
-// ListDailySummariesResponse_DailySummary with the rules defined in the proto
-// definition for this message. If any rules are violated, the result is a
-// list of violation errors wrapped in
-// ListDailySummariesResponse_DailySummaryMultiError, or nil if none found.
-func (m *ListDailySummariesResponse_DailySummary) ValidateAll() error {
+// ValidateAll checks the field values on ListSummariesResponse_DailySummary
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListSummariesResponse_DailySummaryMultiError, or nil if none found.
+func (m *ListSummariesResponse_DailySummary) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListDailySummariesResponse_DailySummary) validate(all bool) error {
+func (m *ListSummariesResponse_DailySummary) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetDate()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListDailySummariesResponse_DailySummaryValidationError{
-					field:  "Date",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListDailySummariesResponse_DailySummaryValidationError{
-					field:  "Date",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetDate()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListDailySummariesResponse_DailySummaryValidationError{
-				field:  "Date",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Date
 
 	// no validation rules for OperatorName
 
@@ -3461,20 +3769,20 @@ func (m *ListDailySummariesResponse_DailySummary) validate(all bool) error {
 	// no validation rules for HouseEdgePercentage
 
 	if len(errors) > 0 {
-		return ListDailySummariesResponse_DailySummaryMultiError(errors)
+		return ListSummariesResponse_DailySummaryMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListDailySummariesResponse_DailySummaryMultiError is an error wrapping
-// multiple validation errors returned by
-// ListDailySummariesResponse_DailySummary.ValidateAll() if the designated
+// ListSummariesResponse_DailySummaryMultiError is an error wrapping multiple
+// validation errors returned by
+// ListSummariesResponse_DailySummary.ValidateAll() if the designated
 // constraints aren't met.
-type ListDailySummariesResponse_DailySummaryMultiError []error
+type ListSummariesResponse_DailySummaryMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListDailySummariesResponse_DailySummaryMultiError) Error() string {
+func (m ListSummariesResponse_DailySummaryMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3483,12 +3791,12 @@ func (m ListDailySummariesResponse_DailySummaryMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListDailySummariesResponse_DailySummaryMultiError) AllErrors() []error { return m }
+func (m ListSummariesResponse_DailySummaryMultiError) AllErrors() []error { return m }
 
-// ListDailySummariesResponse_DailySummaryValidationError is the validation
-// error returned by ListDailySummariesResponse_DailySummary.Validate if the
-// designated constraints aren't met.
-type ListDailySummariesResponse_DailySummaryValidationError struct {
+// ListSummariesResponse_DailySummaryValidationError is the validation error
+// returned by ListSummariesResponse_DailySummary.Validate if the designated
+// constraints aren't met.
+type ListSummariesResponse_DailySummaryValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3496,24 +3804,24 @@ type ListDailySummariesResponse_DailySummaryValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListDailySummariesResponse_DailySummaryValidationError) Field() string { return e.field }
+func (e ListSummariesResponse_DailySummaryValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListDailySummariesResponse_DailySummaryValidationError) Reason() string { return e.reason }
+func (e ListSummariesResponse_DailySummaryValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListDailySummariesResponse_DailySummaryValidationError) Cause() error { return e.cause }
+func (e ListSummariesResponse_DailySummaryValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListDailySummariesResponse_DailySummaryValidationError) Key() bool { return e.key }
+func (e ListSummariesResponse_DailySummaryValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListDailySummariesResponse_DailySummaryValidationError) ErrorName() string {
-	return "ListDailySummariesResponse_DailySummaryValidationError"
+func (e ListSummariesResponse_DailySummaryValidationError) ErrorName() string {
+	return "ListSummariesResponse_DailySummaryValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListDailySummariesResponse_DailySummaryValidationError) Error() string {
+func (e ListSummariesResponse_DailySummaryValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3525,14 +3833,14 @@ func (e ListDailySummariesResponse_DailySummaryValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListDailySummariesResponse_DailySummary.%s: %s%s",
+		"invalid %sListSummariesResponse_DailySummary.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListDailySummariesResponse_DailySummaryValidationError{}
+var _ error = ListSummariesResponse_DailySummaryValidationError{}
 
 var _ interface {
 	Field() string
@@ -3540,7 +3848,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListDailySummariesResponse_DailySummaryValidationError{}
+} = ListSummariesResponse_DailySummaryValidationError{}
 
 // Validate checks the field values on GetGameDataResponse_List with the rules
 // defined in the proto definition for this message. If any rules are
@@ -3829,7 +4137,7 @@ func (m *GetDepositSummariesResponse_DepositSummary) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for DepositSuccessRate
+	// no validation rules for DepositSuccessPercentage
 
 	// no validation rules for DepositAmount
 
@@ -4094,7 +4402,7 @@ func (m *GetWithdrawSummariesResponse_WithdrawSummary) validate(all bool) error 
 
 	// no validation rules for Currency
 
-	// no validation rules for WithdrawSuccessRate
+	// no validation rules for WithdrawSuccessPercentage
 
 	// no validation rules for WithdrawAmount
 
@@ -4562,17 +4870,25 @@ func (m *ListDepositVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for DepositAmount
 
+	// no validation rules for DepositAmountUsd
+
 	// no validation rules for DepositUsers
 
 	// no validation rules for FtdAmount
+
+	// no validation rules for FtdAmountUsd
 
 	// no validation rules for FtdUsers
 
 	// no validation rules for SameDayFtdAmount
 
+	// no validation rules for SameDayFtdAmountUsd
+
 	// no validation rules for SameDayFtdUsers
 
 	// no validation rules for RepeatedDepositAmount
+
+	// no validation rules for RepeatedDepositAmountUsd
 
 	// no validation rules for RepeatedDepositUsers
 
@@ -4582,7 +4898,11 @@ func (m *ListDepositVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for AverageFtdAmountForSameDayRegistredUsers
 
+	// no validation rules for AverageFtdAmountUsdForSameDayRegistredUsers
+
 	// no validation rules for AverageFtdAmountForNonSameDayRegistredUsers
+
+	// no validation rules for AverageFtdAmountUsdForNonSameDayRegistredUsers
 
 	if len(errors) > 0 {
 		return ListDepositVtgDetailsResponse_DetailMultiError(errors)
@@ -4697,17 +5017,25 @@ func (m *ListWithdrawVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for WithdrawAmount
 
+	// no validation rules for WithdrawAmountUsd
+
 	// no validation rules for WithdrawUsers
 
 	// no validation rules for FtwAmount
+
+	// no validation rules for FtwAmountUsd
 
 	// no validation rules for FtwUsers
 
 	// no validation rules for SameDayFtwAmount
 
+	// no validation rules for SameDayFtwAmountUsd
+
 	// no validation rules for SameDayFtwUsers
 
 	// no validation rules for RepeatedWithdrawAmount
+
+	// no validation rules for RepeatedWithdrawAmountUsd
 
 	// no validation rules for RepeatedWithdrawUsers
 
@@ -4717,9 +5045,15 @@ func (m *ListWithdrawVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for AverageFtwAmountForSameDayRegistredUsers
 
+	// no validation rules for AverageFtwAmountUsdForSameDayRegistredUsers
+
 	// no validation rules for AverageFtwAmountForNonSameDayRegistredUsers
 
+	// no validation rules for AverageFtwAmountUsdForNonSameDayRegistredUsers
+
 	// no validation rules for DepositMinusWithdrawAmount
+
+	// no validation rules for DepositMinusWithdrawAmountUsd
 
 	if len(errors) > 0 {
 		return ListWithdrawVtgDetailsResponse_DetailMultiError(errors)
