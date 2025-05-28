@@ -3885,11 +3885,17 @@ func (m *GetGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for Turnover
 
+	// no validation rules for TurnoverUsd
+
 	// no validation rules for TurnoverPercentage
 
 	// no validation rules for WinAmount
 
+	// no validation rules for WinAmountUsd
+
 	// no validation rules for Ggr
+
+	// no validation rules for GgrUsd
 
 	// no validation rules for GgrPercentage
 
@@ -4015,9 +4021,15 @@ func (m *GetPlayerGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for Turnover
 
+	// no validation rules for TurnoverUsd
+
 	// no validation rules for WinAmount
 
+	// no validation rules for WinAmountUsd
+
 	// no validation rules for Ggr
+
+	// no validation rules for GgrUsd
 
 	// no validation rules for RtpPercentage
 

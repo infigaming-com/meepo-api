@@ -2665,13 +2665,16 @@ type GetGameDataResponse_List struct {
 	GameId             string                 `protobuf:"bytes,6,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	PlayerCount        int64                  `protobuf:"varint,7,opt,name=player_count,json=playerCount,proto3" json:"player_count,omitempty"`
 	Turnover           string                 `protobuf:"bytes,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	TurnoverPercentage string                 `protobuf:"bytes,9,opt,name=turnover_percentage,json=turnoverPercentage,proto3" json:"turnover_percentage,omitempty"`
-	WinAmount          string                 `protobuf:"bytes,10,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
-	Ggr                string                 `protobuf:"bytes,11,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	GgrPercentage      string                 `protobuf:"bytes,12,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
-	BetCount           int64                  `protobuf:"varint,13,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	AverageBetAmount   string                 `protobuf:"bytes,14,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
-	RtpPercentage      string                 `protobuf:"bytes,15,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
+	TurnoverUsd        string                 `protobuf:"bytes,9,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	TurnoverPercentage string                 `protobuf:"bytes,10,opt,name=turnover_percentage,json=turnoverPercentage,proto3" json:"turnover_percentage,omitempty"`
+	WinAmount          string                 `protobuf:"bytes,11,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	WinAmountUsd       string                 `protobuf:"bytes,12,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
+	Ggr                string                 `protobuf:"bytes,13,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	GgrUsd             string                 `protobuf:"bytes,14,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	GgrPercentage      string                 `protobuf:"bytes,15,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
+	BetCount           int64                  `protobuf:"varint,16,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	AverageBetAmount   string                 `protobuf:"bytes,17,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
+	RtpPercentage      string                 `protobuf:"bytes,18,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -2762,6 +2765,13 @@ func (x *GetGameDataResponse_List) GetTurnover() string {
 	return ""
 }
 
+func (x *GetGameDataResponse_List) GetTurnoverUsd() string {
+	if x != nil {
+		return x.TurnoverUsd
+	}
+	return ""
+}
+
 func (x *GetGameDataResponse_List) GetTurnoverPercentage() string {
 	if x != nil {
 		return x.TurnoverPercentage
@@ -2776,9 +2786,23 @@ func (x *GetGameDataResponse_List) GetWinAmount() string {
 	return ""
 }
 
+func (x *GetGameDataResponse_List) GetWinAmountUsd() string {
+	if x != nil {
+		return x.WinAmountUsd
+	}
+	return ""
+}
+
 func (x *GetGameDataResponse_List) GetGgr() string {
 	if x != nil {
 		return x.Ggr
+	}
+	return ""
+}
+
+func (x *GetGameDataResponse_List) GetGgrUsd() string {
+	if x != nil {
+		return x.GgrUsd
 	}
 	return ""
 }
@@ -2820,11 +2844,14 @@ type GetPlayerGameDataResponse_List struct {
 	GameId           string                 `protobuf:"bytes,5,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	UserId           string                 `protobuf:"bytes,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Turnover         string                 `protobuf:"bytes,7,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	WinAmount        string                 `protobuf:"bytes,8,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
-	Ggr              string                 `protobuf:"bytes,9,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	RtpPercentage    string                 `protobuf:"bytes,10,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
-	BetCount         int64                  `protobuf:"varint,11,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	AverageBetAmount string                 `protobuf:"bytes,12,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
+	TurnoverUsd      string                 `protobuf:"bytes,8,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	WinAmount        string                 `protobuf:"bytes,9,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	WinAmountUsd     string                 `protobuf:"bytes,10,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
+	Ggr              string                 `protobuf:"bytes,11,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	GgrUsd           string                 `protobuf:"bytes,12,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	RtpPercentage    string                 `protobuf:"bytes,13,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
+	BetCount         int64                  `protobuf:"varint,14,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	AverageBetAmount string                 `protobuf:"bytes,15,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -2908,6 +2935,13 @@ func (x *GetPlayerGameDataResponse_List) GetTurnover() string {
 	return ""
 }
 
+func (x *GetPlayerGameDataResponse_List) GetTurnoverUsd() string {
+	if x != nil {
+		return x.TurnoverUsd
+	}
+	return ""
+}
+
 func (x *GetPlayerGameDataResponse_List) GetWinAmount() string {
 	if x != nil {
 		return x.WinAmount
@@ -2915,9 +2949,23 @@ func (x *GetPlayerGameDataResponse_List) GetWinAmount() string {
 	return ""
 }
 
+func (x *GetPlayerGameDataResponse_List) GetWinAmountUsd() string {
+	if x != nil {
+		return x.WinAmountUsd
+	}
+	return ""
+}
+
 func (x *GetPlayerGameDataResponse_List) GetGgr() string {
 	if x != nil {
 		return x.Ggr
+	}
+	return ""
+}
+
+func (x *GetPlayerGameDataResponse_List) GetGgrUsd() string {
+	if x != nil {
+		return x.GgrUsd
 	}
 	return ""
 }
@@ -4492,13 +4540,13 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\bgame_ids\x18\b \x03(\tR\agameIds\x12\x12\n" +
 	"\x04page\x18\t \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\n" +
-	" \x01(\x05R\bpageSize\"\x87\x05\n" +
+	" \x01(\x05R\bpageSize\"\xe9\x05\n" +
 	"\x13GetGameDataResponse\x12G\n" +
 	"\x04list\x18\a \x03(\v23.api.backoffice.service.v1.GetGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\t \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\n" +
-	" \x01(\x05R\x05total\x1a\xdf\x03\n" +
+	" \x01(\x05R\x05total\x1a\xc1\x04\n" +
 	"\x04List\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x1a\n" +
 	"\boperator\x18\x02 \x01(\tR\boperator\x12\x1a\n" +
@@ -4507,16 +4555,19 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tgame_name\x18\x05 \x01(\tR\bgameName\x12\x17\n" +
 	"\agame_id\x18\x06 \x01(\tR\x06gameId\x12!\n" +
 	"\fplayer_count\x18\a \x01(\x03R\vplayerCount\x12\x1a\n" +
-	"\bturnover\x18\b \x01(\tR\bturnover\x12/\n" +
-	"\x13turnover_percentage\x18\t \x01(\tR\x12turnoverPercentage\x12\x1d\n" +
+	"\bturnover\x18\b \x01(\tR\bturnover\x12!\n" +
+	"\fturnover_usd\x18\t \x01(\tR\vturnoverUsd\x12/\n" +
+	"\x13turnover_percentage\x18\n" +
+	" \x01(\tR\x12turnoverPercentage\x12\x1d\n" +
 	"\n" +
-	"win_amount\x18\n" +
-	" \x01(\tR\twinAmount\x12\x10\n" +
-	"\x03ggr\x18\v \x01(\tR\x03ggr\x12%\n" +
-	"\x0eggr_percentage\x18\f \x01(\tR\rggrPercentage\x12\x1b\n" +
-	"\tbet_count\x18\r \x01(\x03R\bbetCount\x12,\n" +
-	"\x12average_bet_amount\x18\x0e \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x0f \x01(\tR\rrtpPercentage\"\x80\x03\n" +
+	"win_amount\x18\v \x01(\tR\twinAmount\x12$\n" +
+	"\x0ewin_amount_usd\x18\f \x01(\tR\fwinAmountUsd\x12\x10\n" +
+	"\x03ggr\x18\r \x01(\tR\x03ggr\x12\x17\n" +
+	"\aggr_usd\x18\x0e \x01(\tR\x06ggrUsd\x12%\n" +
+	"\x0eggr_percentage\x18\x0f \x01(\tR\rggrPercentage\x12\x1b\n" +
+	"\tbet_count\x18\x10 \x01(\x03R\bbetCount\x12,\n" +
+	"\x12average_bet_amount\x18\x11 \x01(\tR\x10averageBetAmount\x12%\n" +
+	"\x0ertp_percentage\x18\x12 \x01(\tR\rrtpPercentage\"\x80\x03\n" +
 	"\x1bGetPlayerGameSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
@@ -4553,13 +4604,13 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\bgame_ids\x18\t \x03(\tR\agameIds\x12\x12\n" +
 	"\x04page\x18\n" +
 	" \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\v \x01(\x05R\bpageSize\"\x94\x04\n" +
+	"\tpage_size\x18\v \x01(\x05R\bpageSize\"\xf6\x04\n" +
 	"\x19GetPlayerGameDataResponse\x12M\n" +
 	"\x04list\x18\a \x03(\v29.api.backoffice.service.v1.GetPlayerGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\t \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\n" +
-	" \x01(\x05R\x05total\x1a\xe0\x02\n" +
+	" \x01(\x05R\x05total\x1a\xc2\x03\n" +
 	"\x04List\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x1a\n" +
 	"\boperator\x18\x02 \x01(\tR\boperator\x12\x1a\n" +
@@ -4567,14 +4618,17 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tgame_type\x18\x04 \x01(\tR\bgameType\x12\x17\n" +
 	"\agame_id\x18\x05 \x01(\tR\x06gameId\x12\x17\n" +
 	"\auser_id\x18\x06 \x01(\tR\x06userId\x12\x1a\n" +
-	"\bturnover\x18\a \x01(\tR\bturnover\x12\x1d\n" +
+	"\bturnover\x18\a \x01(\tR\bturnover\x12!\n" +
+	"\fturnover_usd\x18\b \x01(\tR\vturnoverUsd\x12\x1d\n" +
 	"\n" +
-	"win_amount\x18\b \x01(\tR\twinAmount\x12\x10\n" +
-	"\x03ggr\x18\t \x01(\tR\x03ggr\x12%\n" +
-	"\x0ertp_percentage\x18\n" +
-	" \x01(\tR\rrtpPercentage\x12\x1b\n" +
-	"\tbet_count\x18\v \x01(\x03R\bbetCount\x12,\n" +
-	"\x12average_bet_amount\x18\f \x01(\tR\x10averageBetAmount\"\x86\x02\n" +
+	"win_amount\x18\t \x01(\tR\twinAmount\x12$\n" +
+	"\x0ewin_amount_usd\x18\n" +
+	" \x01(\tR\fwinAmountUsd\x12\x10\n" +
+	"\x03ggr\x18\v \x01(\tR\x03ggr\x12\x17\n" +
+	"\aggr_usd\x18\f \x01(\tR\x06ggrUsd\x12%\n" +
+	"\x0ertp_percentage\x18\r \x01(\tR\rrtpPercentage\x12\x1b\n" +
+	"\tbet_count\x18\x0e \x01(\x03R\bbetCount\x12,\n" +
+	"\x12average_bet_amount\x18\x0f \x01(\tR\x10averageBetAmount\"\x86\x02\n" +
 	"\x1aGetDepositSummariesRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +

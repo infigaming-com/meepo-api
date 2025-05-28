@@ -2727,11 +2727,17 @@ components:
                     type: string
                 turnover:
                     type: string
+                turnoverUsd:
+                    type: string
                 turnoverPercentage:
                     type: string
                 winAmount:
                     type: string
+                winAmountUsd:
+                    type: string
                 ggr:
+                    type: string
+                ggrUsd:
                     type: string
                 ggrPercentage:
                     type: string
@@ -3034,9 +3040,15 @@ components:
                     type: string
                 turnover:
                     type: string
+                turnoverUsd:
+                    type: string
                 winAmount:
                     type: string
+                winAmountUsd:
+                    type: string
                 ggr:
+                    type: string
+                ggrUsd:
                     type: string
                 rtpPercentage:
                     type: string
