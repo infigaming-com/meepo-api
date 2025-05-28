@@ -3280,7 +3280,6 @@ components:
             properties:
                 time:
                     type: string
-                    format: date-time
                 data:
                     $ref: '#/components/schemas/api.backoffice.service.v1.ActiveUsersData_Data'
         api.backoffice.service.v1.GetTimeRangedDashboardResponse_GameData:
@@ -3288,7 +3287,6 @@ components:
             properties:
                 time:
                     type: string
-                    format: date-time
                 data:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GameData_Data'
         api.backoffice.service.v1.GetTimeRangedDashboardResponse_PaymentData:
@@ -3296,7 +3294,6 @@ components:
             properties:
                 time:
                     type: string
-                    format: date-time
                 data:
                     $ref: '#/components/schemas/api.backoffice.service.v1.PaymentData_Data'
         api.backoffice.service.v1.GetTopOperatorsDashboardRequest:
@@ -3352,7 +3349,9 @@ components:
         api.backoffice.service.v1.GetTopOperatorsDashboardResponse_OperatorData:
             type: object
             properties:
-                operator:
+                operatorId:
+                    type: string
+                operatorName:
                     type: string
                 amount:
                     type: string
@@ -3392,7 +3391,7 @@ components:
                     format: int32
                 amount:
                     type: string
-                operator:
+                operatorName:
                     type: string
         api.backoffice.service.v1.GetUserBetsOverviewRequest:
             type: object
