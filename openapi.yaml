@@ -6622,6 +6622,9 @@ components:
                 banWithdraw:
                     type: boolean
                     description: BanWithdraw
+                roleId:
+                    type: string
+                    description: role id
             description: UserInfo contains basic user information.
         api.wallet.service.v1.GetUserBalanceRequest:
             type: object

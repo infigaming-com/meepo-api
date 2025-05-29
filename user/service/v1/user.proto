@@ -155,6 +155,8 @@ service User {
 	rpc CreateOperator(CreateOperatorRequest) returns (CreateOperatorResponse) {}
 
 	rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse) {}
+
+	rpc GetRole(GetRoleRequest) returns (GetRoleResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -183,6 +185,8 @@ message UserInfo {
 	bool ban_game = 11;
 	// BanWithdraw
 	bool ban_withdraw = 12;
+	// role id
+	int64 role_id = 13;
 }
 
 // AuthType defines the type of authentication method.
@@ -669,3 +673,11 @@ message UpdateRoleRequest {
 }
 
 message UpdateRoleResponse {}
+
+message GetRoleRequest {
+	int64 role_id = 1;
+}
+
+message GetRoleResponse {
+	Role role = 1;
+}
