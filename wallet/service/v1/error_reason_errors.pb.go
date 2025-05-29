@@ -466,3 +466,15 @@ func IsGetExchangeRateFailed(err error) bool {
 func ErrorGetExchangeRateFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_EXCHANGE_RATE_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetBalanceTransactionSummaryFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_BALANCE_TRANSACTION_SUMMARY_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetBalanceTransactionSummaryFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_BALANCE_TRANSACTION_SUMMARY_FAILED.String(), fmt.Sprintf(format, args...))
+}
