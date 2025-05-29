@@ -5767,11 +5767,15 @@ components:
         api.game.service.v1.GameFilter:
             type: object
             properties:
-                providerId:
-                    type: string
+                providerIds:
+                    type: array
+                    items:
+                        type: string
                     description: 'provider id: provider list api'
                 tags:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: 'tags: hot game, live casino, slots, etc..'
                 name:
                     type: string
