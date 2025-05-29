@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package api.operator.service.v1;
 
-import "google/api/annotations.proto";
-
 option go_package = "github.com/infigaming-com/meepo-api/operator/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.operator.service.v1";
@@ -11,54 +9,33 @@ option java_package = "api.operator.service.v1";
 // User service provides authentication and user management functionality.
 service Operator {
 	rpc AddOperator(AddOperatorRequest) returns (AddOperatorResponse) {
-		option (google.api.http) = {
-			post: "/v1/operator/add"
-			body: "*"
-		};
 	}
 
 	rpc UpdateOperator(UpdateOperatorRequest) returns (UpdateOperatorResponse) {
-		option (google.api.http) = {
-			post: "/v1/operator/update"
-			body: "*"
-		};
 	}
 
-	rpc GetOperator(GetOperatorRequest) returns (GetOperatorResponse) {}
+	rpc GetOperator(GetOperatorRequest) returns (GetOperatorResponse) {
+	}
 
-	rpc GetOperatorsByIds(GetOperatorsByIdsRequest) returns (GetOperatorsByIdsResponse) {}
+	rpc GetOperatorsByIds(GetOperatorsByIdsRequest) returns (GetOperatorsByIdsResponse) {
+	}
 
 	rpc AddOrUpdateCurrency(AddOrUpdateCurrencyRequest) returns (AddOrUpdateCurrencyResponse) {
 	}
 
 	rpc UpdateOperatorCurrency(UpdateOperatorCurrencyRequest) returns (UpdateOperatorCurrencyResponse) {
-		option (google.api.http) = {
-			post: "/v1/operator/currencies/update"
-			body: "*"
-		};
 	}
 
 	rpc GetOperatorCurrencies(GetOperatorCurrenciesRequest) returns (GetOperatorCurrenciesResponse) {
-		option (google.api.http) = {
-			post: "/v1/operator/currencies/get"
-			body: "*"
-		};
 	}
 
 	rpc AddOriginOperatorId(AddOriginOperatorIdRequest) returns (AddOriginOperatorIdResponse) {
-		option (google.api.http) = {
-			post: "/v1/operator/origins/add"
-			body: "*"
-		};
 	}
 
-	rpc GetOperatorIdByOrigin(GetOperatorIdByOriginRequest) returns (GetOperatorIdByOriginResponse) {}
+	rpc GetOperatorIdByOrigin(GetOperatorIdByOriginRequest) returns (GetOperatorIdByOriginResponse) {
+	}
 	
 	rpc DeleteOriginOperatorId(DeleteOriginOperatorIdRequest) returns (DeleteOriginOperatorIdResponse) {
-		option (google.api.http) = {
-			post: "/v1/operator/origins/delete"
-			body: "*"
-		};
 	}
 
 	// GetParentOperatorIds returns parent operator IDs for the given operator ID.

@@ -1610,114 +1610,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
-    /v1/operator/add:
-        post:
-            tags:
-                - Operator
-            operationId: Operator_AddOperator
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.operator.service.v1.AddOperatorRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.operator.service.v1.AddOperatorResponse'
-    /v1/operator/currencies/get:
-        post:
-            tags:
-                - Operator
-            operationId: Operator_GetOperatorCurrencies
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.operator.service.v1.GetOperatorCurrenciesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.operator.service.v1.GetOperatorCurrenciesResponse'
-    /v1/operator/currencies/update:
-        post:
-            tags:
-                - Operator
-            operationId: Operator_UpdateOperatorCurrency
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorCurrencyRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorCurrencyResponse'
-    /v1/operator/origins/add:
-        post:
-            tags:
-                - Operator
-            operationId: Operator_AddOriginOperatorId
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.operator.service.v1.AddOriginOperatorIdRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.operator.service.v1.AddOriginOperatorIdResponse'
-    /v1/operator/origins/delete:
-        post:
-            tags:
-                - Operator
-            operationId: Operator_DeleteOriginOperatorId
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.operator.service.v1.DeleteOriginOperatorIdRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.operator.service.v1.DeleteOriginOperatorIdResponse'
-    /v1/operator/update:
-        post:
-            tags:
-                - Operator
-            operationId: Operator_UpdateOperator
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorResponse'
     /v1/payment/channel/create:
         post:
             tags:
@@ -2140,25 +2032,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserTagsResponse'
-    /v1/wallet/balances/get:
-        post:
-            tags:
-                - Wallet
-            description: GetUserBalance returns the balance of specific currency of the user
-            operationId: Wallet_GetUserBalance
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceResponse'
     /v1/wallet/balances/list:
         post:
             tags:
@@ -2178,24 +2051,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse'
-    /v1/wallet/currencies/update:
-        post:
-            tags:
-                - Wallet
-            operationId: Wallet_UpdateUserCurrency
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.wallet.service.v1.UpdateUserCurrencyRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.UpdateUserCurrencyResponse'
 components:
     schemas:
         api.backoffice.service.v1.AccountInfoRequest:
@@ -6320,91 +6175,6 @@ components:
                 lobbyUrl:
                     type: string
                     description: URL to redirect user to lobby.
-        api.operator.service.v1.AddOperatorRequest:
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: operator name
-                userId:
-                    type: string
-                    description: user id who creates the operator
-        api.operator.service.v1.AddOperatorResponse:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                    description: operator id allocated by operator service
-        api.operator.service.v1.AddOriginOperatorIdRequest:
-            type: object
-            properties:
-                origin:
-                    type: string
-                operatorId:
-                    type: string
-        api.operator.service.v1.AddOriginOperatorIdResponse:
-            type: object
-            properties: {}
-        api.operator.service.v1.DeleteOriginOperatorIdRequest:
-            type: object
-            properties:
-                origin:
-                    type: string
-        api.operator.service.v1.DeleteOriginOperatorIdResponse:
-            type: object
-            properties: {}
-        api.operator.service.v1.GetOperatorCurrenciesRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                    description: |-
-                        Filter to return specific currencies only.
-                         If empty or not provided, all currencies will be returned
-        api.operator.service.v1.GetOperatorCurrenciesResponse:
-            type: object
-            properties:
-                currencies:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.operator.service.v1.GetOperatorCurrenciesResponse_Currency'
-        api.operator.service.v1.GetOperatorCurrenciesResponse_Currency:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-        api.operator.service.v1.UpdateOperatorCurrencyRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-        api.operator.service.v1.UpdateOperatorCurrencyResponse:
-            type: object
-            properties: {}
-        api.operator.service.v1.UpdateOperatorRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                    description: operator id allocated by operator service
-                enabled:
-                    type: boolean
-                    description: enabled
-        api.operator.service.v1.UpdateOperatorResponse:
-            type: object
-            properties: {}
         api.review.service.v1.CreateWithdrawRequest:
             type: object
             properties:
@@ -6626,28 +6396,6 @@ components:
                     type: string
                     description: role id
             description: UserInfo contains basic user information.
-        api.wallet.service.v1.GetUserBalanceRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                currency:
-                    type: string
-                settlementCurrency:
-                    type: string
-                    description: optional target currency
-        api.wallet.service.v1.GetUserBalanceResponse:
-            type: object
-            properties:
-                exchangeRate:
-                    type: string
-                    description: optional exchange rate between currency and target currency
-                cash:
-                    type: string
-                operatorBonus:
-                    type: string
-                providerBonus:
-                    type: string
         api.wallet.service.v1.GetUserBalancesRequest:
             type: object
             properties:
@@ -6671,18 +6419,6 @@ components:
                     type: string
                 providerBonus:
                     type: string
-        api.wallet.service.v1.UpdateUserCurrencyRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-        api.wallet.service.v1.UpdateUserCurrencyResponse:
-            type: object
-            properties: {}
         payment.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
@@ -7331,8 +7067,6 @@ tags:
     - name: BackofficeUser
     - name: BackofficeWallet
     - name: Game
-    - name: Operator
-      description: User service provides authentication and user management functionality.
     - name: Payment
       description: |-
         Payment Service
