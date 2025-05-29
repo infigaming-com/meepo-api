@@ -4481,6 +4481,10 @@ func (m *ListUsersRequest) validate(all bool) error {
 		// no validation rules for RoleId
 	}
 
+	if m.Online != nil {
+		// no validation rules for Online
+	}
+
 	if m.Page != nil {
 		// no validation rules for Page
 	}
@@ -7151,6 +7155,8 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 	// no validation rules for BanGame
 
 	// no validation rules for BanLogin
+
+	// no validation rules for Online
 
 	if all {
 		switch v := interface{}(m.GetLastLoginAt()).(type) {

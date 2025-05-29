@@ -701,24 +701,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
-    /v1/backoffice/report/daily-summaries/list:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_ListDailySummaries
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDailySummariesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDailySummariesResponse'
     /v1/backoffice/report/deposit-details/list:
         post:
             tags:
@@ -773,25 +755,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse'
-    /v1/backoffice/report/game-data-daily-summaries/list:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_ListGameDataDailySummaries
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataDailySummariesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataDailySummariesResponse'
-    /v1/backoffice/report/game-data-summary/get:
+    /v1/backoffice/report/game-data/get:
         post:
             tags:
                 - BackofficeReport
@@ -800,7 +764,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataSummaryRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameSummaryRequest'
                 required: true
             responses:
                 "200":
@@ -808,8 +772,26 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataSummaryResponse'
-    /v1/backoffice/report/player-game-data-summary/get:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameSummaryResponse'
+    /v1/backoffice/report/game-data/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListGameData
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataResponse'
+    /v1/backoffice/report/player-game-data/get:
         post:
             tags:
                 - BackofficeReport
@@ -818,7 +800,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataSummaryRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameSummaryRequest'
                 required: true
             responses:
                 "200":
@@ -826,7 +808,25 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataSummaryResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameSummaryResponse'
+    /v1/backoffice/report/player-game-data/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListPlayerGameData
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataResponse'
     /v1/backoffice/report/register-retention/list:
         post:
             tags:
@@ -863,6 +863,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetSummaryResponse'
+    /v1/backoffice/report/summary/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListSummaries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse'
     /v1/backoffice/report/withdraw-details/list:
         post:
             tags:
@@ -2613,33 +2631,25 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
         api.backoffice.service.v1.GetDepositSummariesResponse:
             type: object
             properties:
-                dailySummaries:
+                depositSummaries:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesResponse_DailySummary'
-        api.backoffice.service.v1.GetDepositSummariesResponse_DailySummary:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesResponse_DepositSummary'
+        api.backoffice.service.v1.GetDepositSummariesResponse_DepositSummary:
             type: object
             properties:
                 date:
                     type: string
-                    format: date-time
                 currency:
                     type: string
-                depositSuccessPercentage:
-                    type: integer
-                    format: int32
+                depositSuccessRate:
+                    type: string
                 depositAmount:
                     type: string
-        api.backoffice.service.v1.GetGameDataSummaryRequest:
+        api.backoffice.service.v1.GetGameDataRequest:
             type: object
             properties:
                 timeRange:
@@ -2672,13 +2682,101 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetGameDataResponse:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetGameDataResponse_List:
+            type: object
+            properties:
+                date:
                     type: string
-                    format: date-time
-                endTime:
+                operator:
                     type: string
-                    format: date-time
-        api.backoffice.service.v1.GetGameDataSummaryResponse:
+                provider:
+                    type: string
+                gameType:
+                    type: string
+                gameName:
+                    type: string
+                gameId:
+                    type: string
+                playerCount:
+                    type: string
+                turnover:
+                    type: string
+                turnoverUsd:
+                    type: string
+                turnoverPercentage:
+                    type: string
+                winAmount:
+                    type: string
+                winAmountUsd:
+                    type: string
+                ggr:
+                    type: string
+                ggrUsd:
+                    type: string
+                ggrPercentage:
+                    type: string
+                betCount:
+                    type: string
+                averageBetAmount:
+                    type: string
+                rtpPercentage:
+                    type: string
+        api.backoffice.service.v1.GetGameSummaryRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                groupOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameTypes:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.GetGameSummaryResponse:
             type: object
             properties:
                 turnover:
@@ -2692,8 +2790,7 @@ components:
                 averageBetAmount:
                     type: string
                 rtpPercentage:
-                    type: integer
-                    format: int32
+                    type: string
         api.backoffice.service.v1.GetGameTransactionsForBetRequest:
             type: object
             properties:
@@ -2863,7 +2960,7 @@ components:
                     type: string
                 yesterday:
                     type: string
-        api.backoffice.service.v1.GetPlayerGameDataSummaryRequest:
+        api.backoffice.service.v1.GetPlayerGameDataRequest:
             type: object
             properties:
                 timeRange:
@@ -2900,13 +2997,99 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetPlayerGameDataResponse:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetPlayerGameDataResponse_List:
+            type: object
+            properties:
+                date:
                     type: string
-                    format: date-time
-                endTime:
+                operator:
                     type: string
-                    format: date-time
-        api.backoffice.service.v1.GetPlayerGameDataSummaryResponse:
+                provider:
+                    type: string
+                gameType:
+                    type: string
+                gameId:
+                    type: string
+                userId:
+                    type: string
+                turnover:
+                    type: string
+                turnoverUsd:
+                    type: string
+                winAmount:
+                    type: string
+                winAmountUsd:
+                    type: string
+                ggr:
+                    type: string
+                ggrUsd:
+                    type: string
+                rtpPercentage:
+                    type: string
+                betCount:
+                    type: string
+                averageBetAmount:
+                    type: string
+        api.backoffice.service.v1.GetPlayerGameSummaryRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                groupOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameTypes:
+                    type: array
+                    items:
+                        type: string
+                gameTags:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.GetPlayerGameSummaryResponse:
             type: object
             properties:
                 turnover:
@@ -2920,8 +3103,7 @@ components:
                 averageBetAmount:
                     type: string
                 rtpPercentage:
-                    type: integer
-                    format: int32
+                    type: string
         api.backoffice.service.v1.GetSummaryRequest:
             type: object
             properties:
@@ -2939,12 +3121,6 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
                 affiliateCodes:
                     type: array
                     items:
@@ -2961,9 +3137,11 @@ components:
             type: object
             properties:
                 visits:
-                    type: string
+                    type: integer
+                    format: int32
                 registeredUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 ftd:
                     type: string
                 ftdConversionRate:
@@ -2977,8 +3155,7 @@ components:
                 averageFtdAmount:
                     type: string
                 arpuToArppuPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 turnover:
                     type: string
                 bonus:
@@ -3112,7 +3289,6 @@ components:
             properties:
                 time:
                     type: string
-                    format: date-time
                 data:
                     $ref: '#/components/schemas/api.backoffice.service.v1.ActiveUsersData_Data'
         api.backoffice.service.v1.GetTimeRangedDashboardResponse_GameData:
@@ -3120,7 +3296,6 @@ components:
             properties:
                 time:
                     type: string
-                    format: date-time
                 data:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GameData_Data'
         api.backoffice.service.v1.GetTimeRangedDashboardResponse_PaymentData:
@@ -3128,7 +3303,6 @@ components:
             properties:
                 time:
                     type: string
-                    format: date-time
                 data:
                     $ref: '#/components/schemas/api.backoffice.service.v1.PaymentData_Data'
         api.backoffice.service.v1.GetTopOperatorsDashboardRequest:
@@ -3184,7 +3358,9 @@ components:
         api.backoffice.service.v1.GetTopOperatorsDashboardResponse_OperatorData:
             type: object
             properties:
-                operator:
+                operatorId:
+                    type: string
+                operatorName:
                     type: string
                 amount:
                     type: string
@@ -3224,7 +3400,7 @@ components:
                     format: int32
                 amount:
                     type: string
-                operator:
+                operatorName:
                     type: string
         api.backoffice.service.v1.GetUserBetsOverviewRequest:
             type: object
@@ -3675,30 +3851,22 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
         api.backoffice.service.v1.GetWithdrawSummariesResponse:
             type: object
             properties:
-                dailySummaries:
+                withdrawSummaries:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesResponse_DailySummary'
-        api.backoffice.service.v1.GetWithdrawSummariesResponse_DailySummary:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesResponse_WithdrawSummary'
+        api.backoffice.service.v1.GetWithdrawSummariesResponse_WithdrawSummary:
             type: object
             properties:
                 date:
                     type: string
-                    format: date-time
                 currency:
                     type: string
-                withdrawSuccessPercentage:
-                    type: integer
-                    format: int32
+                withdrawSuccessRate:
+                    type: string
                 withdrawAmount:
                     type: string
         api.backoffice.service.v1.ListAccountsRequest:
@@ -3884,153 +4052,6 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.ListDailySummariesRequest:
-            type: object
-            properties:
-                timeRange:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-                affiliateCodes:
-                    type: array
-                    items:
-                        type: string
-                referralCodes:
-                    type: array
-                    items:
-                        type: string
-                registrationCountries:
-                    type: array
-                    items:
-                        type: string
-                page:
-                    type: string
-                pageSize:
-                    type: string
-        api.backoffice.service.v1.ListDailySummariesResponse:
-            type: object
-            properties:
-                dailySummaries:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDailySummariesResponse_DailySummary'
-                page:
-                    type: string
-                pageSize:
-                    type: string
-                total:
-                    type: string
-        api.backoffice.service.v1.ListDailySummariesResponse_DailySummary:
-            type: object
-            properties:
-                date:
-                    type: string
-                    format: date-time
-                operator:
-                    type: string
-                country:
-                    type: string
-                visits:
-                    type: string
-                uniqueVisits:
-                    type: string
-                activeUsers:
-                    type: string
-                registeredUsers:
-                    type: string
-                depositedUsers:
-                    type: string
-                ftdUsers:
-                    type: string
-                repeatedDepositedUsers:
-                    type: string
-                depositConversionRate:
-                    type: string
-                depositCount:
-                    type: string
-                depositAmount:
-                    type: string
-                arpu:
-                    type: string
-                arppu:
-                    type: string
-                averageFtdAmount:
-                    type: string
-                withdrawAmount:
-                    type: string
-                withdrawedUsers:
-                    type: string
-                ftwUsers:
-                    type: string
-                averageWithdrawAmount:
-                    type: string
-                ftwAmount:
-                    type: string
-                averageFtwAmount:
-                    type: string
-                wuToAuPercentage:
-                    type: integer
-                    format: int32
-                wuToDuPercentage:
-                    type: integer
-                    format: int32
-                depositMinusWithdrawAmount:
-                    type: string
-                wToDPercentage:
-                    type: integer
-                    format: int32
-                turnover:
-                    type: string
-                depositBonus:
-                    type: string
-                rebateBonus:
-                    type: string
-                lossRebate:
-                    type: string
-                vipBonus:
-                    type: string
-                otherBonus:
-                    type: string
-                referralCommission:
-                    type: string
-                depositFeeSubsidyAmount:
-                    type: string
-                playerWithdrawFee:
-                    type: string
-                operatorWithdrawFee:
-                    type: string
-                cashBalance:
-                    type: string
-                bonusBalance:
-                    type: string
-                lockedBalance:
-                    type: string
-                ggr:
-                    type: string
-                ngr:
-                    type: string
-                ggrToNgrPercentage:
-                    type: integer
-                    format: int32
-                houseEdgePercentage:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListDepositDetailsRequest:
             type: object
             properties:
@@ -4052,12 +4073,6 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
                 page:
                     type: integer
                     format: int32
@@ -4067,10 +4082,10 @@ components:
         api.backoffice.service.v1.ListDepositDetailsResponse:
             type: object
             properties:
-                dailyDetails:
+                details:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsResponse_DailyDetail'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsResponse_Detail'
                 page:
                     type: integer
                     format: int32
@@ -4080,50 +4095,61 @@ components:
                 total:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListDepositDetailsResponse_DailyDetail:
+        api.backoffice.service.v1.ListDepositDetailsResponse_Detail:
             type: object
             properties:
                 date:
                     type: string
-                    format: date-time
-                operator:
+                operatorName:
                     type: string
                 currency:
                     type: string
                 depositAmount:
+                    type: string
+                depositAmountUsd:
                     type: string
                 depositUsers:
                     type: integer
                     format: int32
                 ftdAmount:
                     type: string
-                ftdUsers:
+                ftdAmountUsd:
                     type: string
+                ftdUsers:
+                    type: integer
+                    format: int32
                 sameDayFtdAmount:
+                    type: string
+                sameDayFtdAmountUsd:
                     type: string
                 sameDayFtdUsers:
                     type: integer
                     format: int32
                 repeatedDepositAmount:
                     type: string
+                repeatedDepositAmountUsd:
+                    type: string
                 repeatedDepositUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 sameDayFtd:
-                    type: string
+                    type: integer
+                    format: int32
                 nonSameDayFtd:
-                    type: string
+                    type: integer
+                    format: int32
                 averageFtdAmountForSameDayRegistredUsers:
-                    type: integer
-                    format: int32
+                    type: string
+                averageFtdAmountUsdForSameDayRegistredUsers:
+                    type: string
                 averageFtdAmountForNonSameDayRegistredUsers:
-                    type: integer
-                    format: int32
-                successPercentage:
-                    type: integer
-                    format: int32
-                amountProportionPercentage:
-                    type: integer
-                    format: int32
+                    type: string
+                averageFtdAmountUsdForNonSameDayRegistredUsers:
+                    type: string
+                successRate:
+                    type: string
+                amountProportion:
+                    type: string
         api.backoffice.service.v1.ListDepositVtgDetailsRequest:
             type: object
             properties:
@@ -4176,26 +4202,34 @@ components:
                     type: string
                 month:
                     type: string
-                operator:
+                operatorName:
                     type: string
                 currency:
                     type: string
                 depositAmount:
+                    type: string
+                depositAmountUsd:
                     type: string
                 depositUsers:
                     type: integer
                     format: int32
                 ftdAmount:
                     type: string
+                ftdAmountUsd:
+                    type: string
                 ftdUsers:
                     type: integer
                     format: int32
                 sameDayFtdAmount:
                     type: string
+                sameDayFtdAmountUsd:
+                    type: string
                 sameDayFtdUsers:
                     type: integer
                     format: int32
                 repeatedDepositAmount:
+                    type: string
+                repeatedDepositAmountUsd:
                     type: string
                 repeatedDepositUsers:
                     type: integer
@@ -4206,7 +4240,11 @@ components:
                     type: string
                 averageFtdAmountForSameDayRegistredUsers:
                     type: string
+                averageFtdAmountUsdForSameDayRegistredUsers:
+                    type: string
                 averageFtdAmountForNonSameDayRegistredUsers:
+                    type: string
+                averageFtdAmountUsdForNonSameDayRegistredUsers:
                     type: string
         api.backoffice.service.v1.ListFeeGroupsRequest:
             type: object
@@ -4218,95 +4256,6 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.ListGameDataDailySummariesRequest:
-            type: object
-            properties:
-                timeRange:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                providerIds:
-                    type: array
-                    items:
-                        type: string
-                gameTypes:
-                    type: array
-                    items:
-                        type: string
-                gameNames:
-                    type: array
-                    items:
-                        type: string
-                gameIds:
-                    type: array
-                    items:
-                        type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-        api.backoffice.service.v1.ListGameDataDailySummariesResponse:
-            type: object
-            properties:
-                dailySummaries:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataDailySummariesResponse_DailySummary'
-                page:
-                    type: string
-                pageSize:
-                    type: string
-                total:
-                    type: string
-        api.backoffice.service.v1.ListGameDataDailySummariesResponse_DailySummary:
-            type: object
-            properties:
-                date:
-                    type: string
-                    format: date-time
-                operator:
-                    type: string
-                provider:
-                    type: string
-                gameType:
-                    type: string
-                gameName:
-                    type: string
-                gameId:
-                    type: string
-                playerCount:
-                    type: string
-                turnover:
-                    type: string
-                turnoverPercentage:
-                    type: integer
-                    format: int32
-                winAmount:
-                    type: string
-                ggr:
-                    type: string
-                ggrPercentage:
-                    type: integer
-                    format: int32
-                betCount:
-                    type: string
-                averageBetAmount:
-                    type: string
-                rtpPercentage:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListGamesRequest:
             type: object
             properties:
@@ -4538,7 +4487,7 @@ components:
             properties:
                 date:
                     type: string
-                operator:
+                operatorName:
                     type: string
                 regUsers:
                     type: integer
@@ -4676,6 +4625,157 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListSummariesRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                groupOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                affiliateCodes:
+                    type: array
+                    items:
+                        type: string
+                referralCodes:
+                    type: array
+                    items:
+                        type: string
+                registrationCountries:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListSummariesResponse:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListSummariesResponse_List:
+            type: object
+            properties:
+                date:
+                    type: string
+                operatorName:
+                    type: string
+                country:
+                    type: string
+                visits:
+                    type: string
+                uniqueVisits:
+                    type: string
+                activeUsers:
+                    type: integer
+                    format: int32
+                registeredUsers:
+                    type: integer
+                    format: int32
+                depositedUsers:
+                    type: integer
+                    format: int32
+                ftdUsers:
+                    type: integer
+                    format: int32
+                repeatedDepositedUsers:
+                    type: integer
+                    format: int32
+                depositConversionRate:
+                    type: string
+                depositCount:
+                    type: integer
+                    format: int32
+                depositAmount:
+                    type: string
+                arpu:
+                    type: string
+                arppu:
+                    type: string
+                averageFtdAmount:
+                    type: string
+                withdrawAmount:
+                    type: string
+                withdrawedUsers:
+                    type: integer
+                    format: int32
+                ftwUsers:
+                    type: integer
+                    format: int32
+                averageWithdrawAmount:
+                    type: string
+                ftwAmount:
+                    type: string
+                averageFtwAmount:
+                    type: string
+                wuToAuPercentage:
+                    type: integer
+                    format: int32
+                wuToDuPercentage:
+                    type: integer
+                    format: int32
+                depositMinusWithdrawAmount:
+                    type: string
+                wToDPercentage:
+                    type: integer
+                    format: int32
+                turnover:
+                    type: string
+                depositBonus:
+                    type: string
+                rebateBonus:
+                    type: string
+                lossRebate:
+                    type: string
+                vipBonus:
+                    type: string
+                otherBonus:
+                    type: string
+                referralCommission:
+                    type: string
+                depositFeeSubsidyAmount:
+                    type: string
+                playerWithdrawFee:
+                    type: string
+                operatorWithdrawFee:
+                    type: string
+                cashBalance:
+                    type: string
+                bonusBalance:
+                    type: string
+                lockedBalance:
+                    type: string
+                ggr:
+                    type: string
+                ngr:
+                    type: string
+                ggrToNgrPercentage:
+                    type: string
+                houseEdgePercentage:
+                    type: string
         api.backoffice.service.v1.ListSystemCurrenciesRequest:
             type: object
             properties:
@@ -4909,9 +5009,10 @@ components:
                     type: boolean
                 banLogin:
                     type: boolean
+                online:
+                    type: boolean
                 page:
                     type: integer
-                    description: optional bool online = 21;
                     format: int32
                 pageSize:
                     type: integer
@@ -4969,9 +5070,10 @@ components:
                     type: boolean
                 banLogin:
                     type: boolean
+                online:
+                    type: boolean
                 lastLoginAt:
                     type: string
-                    description: bool online = 16;
                     format: date-time
                 registeredAt:
                     type: string
@@ -5125,7 +5227,7 @@ components:
             properties:
                 date:
                     type: string
-                operator:
+                operatorName:
                     type: string
                 currency:
                     type: string
@@ -5227,26 +5329,34 @@ components:
             properties:
                 date:
                     type: string
-                operator:
+                operatorName:
                     type: string
                 currency:
                     type: string
                 withdrawAmount:
+                    type: string
+                withdrawAmountUsd:
                     type: string
                 withdrawUsers:
                     type: integer
                     format: int32
                 ftwAmount:
                     type: string
+                ftwAmountUsd:
+                    type: string
                 ftwUsers:
                     type: integer
                     format: int32
                 sameDayFtwAmount:
                     type: string
+                sameDayFtwAmountUsd:
+                    type: string
                 sameDayFtwUsers:
                     type: integer
                     format: int32
                 repeatedWithdrawAmount:
+                    type: string
+                repeatedWithdrawAmountUsd:
                     type: string
                 repeatedWithdrawUsers:
                     type: integer
@@ -5257,9 +5367,15 @@ components:
                     type: string
                 averageFtwAmountForSameDayRegistredUsers:
                     type: string
+                averageFtwAmountUsdForSameDayRegistredUsers:
+                    type: string
                 averageFtwAmountForNonSameDayRegistredUsers:
                     type: string
+                averageFtwAmountUsdForNonSameDayRegistredUsers:
+                    type: string
                 depositMinusWithdrawAmount:
+                    type: string
+                depositMinusWithdrawAmountUsd:
                     type: string
         api.backoffice.service.v1.LoginRequest:
             type: object
