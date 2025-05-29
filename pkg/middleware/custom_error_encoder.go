@@ -28,7 +28,7 @@ func CustomErrorEncoder(errorReasonMap map[string]int32) khttp.EncodeErrorFunc {
 		}
 
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
+		w.WriteHeader(http.StatusInternalServerError)
 
 		json.NewEncoder(w).Encode(resp)
 	}
