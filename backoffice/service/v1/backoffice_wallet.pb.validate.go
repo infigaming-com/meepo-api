@@ -2034,7 +2034,7 @@ func (m *ListWalletBalanceTransactionsResponse_BalanceTransaction) validate(all 
 
 	// no validation rules for VipLevel
 
-	// no validation rules for Change
+	// no validation rules for ChangeBalance
 
 	// no validation rules for BeforeBalance
 

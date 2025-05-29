@@ -5024,7 +5024,7 @@ components:
                 vipLevel:
                     type: integer
                     format: int32
-                change:
+                changeBalance:
                     type: string
                 beforeBalance:
                     type: string
