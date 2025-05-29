@@ -65,8 +65,6 @@ func (m *AddAccountRequest) validate(all bool) error {
 
 	// no validation rules for Password
 
-	// no validation rules for Role
-
 	if len(errors) > 0 {
 		return AddAccountRequestMultiError(errors)
 	}
@@ -168,8 +166,6 @@ func (m *AddAccountResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for UserId
 
 	if len(errors) > 0 {
 		return AddAccountResponseMultiError(errors)

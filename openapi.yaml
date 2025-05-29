@@ -2217,14 +2217,10 @@ components:
                     type: string
                 password:
                     type: string
-                role:
-                    type: string
             description: Account related messages
         api.backoffice.service.v1.AddAccountResponse:
             type: object
-            properties:
-                userId:
-                    type: string
+            properties: {}
         api.backoffice.service.v1.AddCommentRequest:
             type: object
             properties:
@@ -5297,6 +5293,10 @@ components:
                     items:
                         type: string
                     description: 'action name: read, write, delete, etc.'
+                apiPaths:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.RegisterRequest:
             type: object
             properties:

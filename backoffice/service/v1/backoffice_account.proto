@@ -120,12 +120,9 @@ message AddAccountRequest {
 	string email = 2;
 	string mobile = 3;
 	string password = 4;
-	string role = 5;
 }
 
-message AddAccountResponse {
-	int64 user_id = 1;
-}
+message AddAccountResponse {}
 
 message SendEmailVerificationRequest {}
 
@@ -228,6 +225,7 @@ message Permission {
     string group_name = 2;
     // action name: read, write, delete, etc.
     repeated string actions = 3;
+    repeated string api_paths = 4;
 }
 
 message ListAccountsRequest {

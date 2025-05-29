@@ -41,13 +41,15 @@ const (
 	User_SendEmailVerificationCode_FullMethodName   = "/api.user.service.v1.User/SendEmailVerificationCode"
 	User_UpdateUser_FullMethodName                  = "/api.user.service.v1.User/UpdateUser"
 	User_ListUsers_FullMethodName                   = "/api.user.service.v1.User/ListUsers"
-	User_CreateGroupUser_FullMethodName             = "/api.user.service.v1.User/CreateGroupUser"
+	User_CreateUser_FullMethodName                  = "/api.user.service.v1.User/CreateUser"
 	User_VerifyEmail_FullMethodName                 = "/api.user.service.v1.User/VerifyEmail"
 	User_AddComment_FullMethodName                  = "/api.user.service.v1.User/AddComment"
 	User_GetCommentsByUserId_FullMethodName         = "/api.user.service.v1.User/GetCommentsByUserId"
 	User_GetUserProfile_FullMethodName              = "/api.user.service.v1.User/GetUserProfile"
 	User_CreateRole_FullMethodName                  = "/api.user.service.v1.User/CreateRole"
 	User_ListRoles_FullMethodName                   = "/api.user.service.v1.User/ListRoles"
+	User_CreateOperator_FullMethodName              = "/api.user.service.v1.User/CreateOperator"
+	User_UpdateRole_FullMethodName                  = "/api.user.service.v1.User/UpdateRole"
 )
 
 // UserClient is the client API for User service.
@@ -106,13 +108,15 @@ type UserClient interface {
 	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
-	CreateGroupUser(ctx context.Context, in *CreateGroupUserRequest, opts ...grpc.CallOption) (*CreateGroupUserResponse, error)
+	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
 	GetCommentsByUserId(ctx context.Context, in *GetCommentsByUserIdRequest, opts ...grpc.CallOption) (*GetCommentsByUserIdResponse, error)
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
 	CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*CreateRoleResponse, error)
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
+	CreateOperator(ctx context.Context, in *CreateOperatorRequest, opts ...grpc.CallOption) (*CreateOperatorResponse, error)
+	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*UpdateRoleResponse, error)
 }
 
 type userClient struct {
@@ -343,10 +347,10 @@ func (c *userClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts .
 	return out, nil
 }
 
-func (c *userClient) CreateGroupUser(ctx context.Context, in *CreateGroupUserRequest, opts ...grpc.CallOption) (*CreateGroupUserResponse, error) {
+func (c *userClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateGroupUserResponse)
-	err := c.cc.Invoke(ctx, User_CreateGroupUser_FullMethodName, in, out, cOpts...)
+	out := new(CreateUserResponse)
+	err := c.cc.Invoke(ctx, User_CreateUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -413,6 +417,26 @@ func (c *userClient) ListRoles(ctx context.Context, in *ListRolesRequest, opts .
 	return out, nil
 }
 
+func (c *userClient) CreateOperator(ctx context.Context, in *CreateOperatorRequest, opts ...grpc.CallOption) (*CreateOperatorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateOperatorResponse)
+	err := c.cc.Invoke(ctx, User_CreateOperator_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*UpdateRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateRoleResponse)
+	err := c.cc.Invoke(ctx, User_UpdateRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -469,13 +493,15 @@ type UserServer interface {
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
-	CreateGroupUser(context.Context, *CreateGroupUserRequest) (*CreateGroupUserResponse, error)
+	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
 	GetCommentsByUserId(context.Context, *GetCommentsByUserIdRequest) (*GetCommentsByUserIdResponse, error)
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
 	CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleResponse, error)
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
+	CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error)
+	UpdateRole(context.Context, *UpdateRoleRequest) (*UpdateRoleResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -552,8 +578,8 @@ func (UnimplementedUserServer) UpdateUser(context.Context, *UpdateUserRequest) (
 func (UnimplementedUserServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
 }
-func (UnimplementedUserServer) CreateGroupUser(context.Context, *CreateGroupUserRequest) (*CreateGroupUserResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateGroupUser not implemented")
+func (UnimplementedUserServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 }
 func (UnimplementedUserServer) VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyEmail not implemented")
@@ -572,6 +598,12 @@ func (UnimplementedUserServer) CreateRole(context.Context, *CreateRoleRequest) (
 }
 func (UnimplementedUserServer) ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRoles not implemented")
+}
+func (UnimplementedUserServer) CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateOperator not implemented")
+}
+func (UnimplementedUserServer) UpdateRole(context.Context, *UpdateRoleRequest) (*UpdateRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRole not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -990,20 +1022,20 @@ func _User_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_CreateGroupUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateGroupUserRequest)
+func _User_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).CreateGroupUser(ctx, in)
+		return srv.(UserServer).CreateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_CreateGroupUser_FullMethodName,
+		FullMethod: User_CreateUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).CreateGroupUser(ctx, req.(*CreateGroupUserRequest))
+		return srv.(UserServer).CreateUser(ctx, req.(*CreateUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1116,6 +1148,42 @@ func _User_ListRoles_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_CreateOperator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOperatorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CreateOperator(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CreateOperator_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CreateOperator(ctx, req.(*CreateOperatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateRole(ctx, req.(*UpdateRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1212,8 +1280,8 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_ListUsers_Handler,
 		},
 		{
-			MethodName: "CreateGroupUser",
-			Handler:    _User_CreateGroupUser_Handler,
+			MethodName: "CreateUser",
+			Handler:    _User_CreateUser_Handler,
 		},
 		{
 			MethodName: "VerifyEmail",
@@ -1238,6 +1306,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListRoles",
 			Handler:    _User_ListRoles_Handler,
+		},
+		{
+			MethodName: "CreateOperator",
+			Handler:    _User_CreateOperator_Handler,
+		},
+		{
+			MethodName: "UpdateRole",
+			Handler:    _User_UpdateRole_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

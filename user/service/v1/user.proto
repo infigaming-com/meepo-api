@@ -138,7 +138,7 @@ service User {
 
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
 
-	rpc CreateGroupUser(CreateGroupUserRequest) returns (CreateGroupUserResponse) {}
+	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
 
 	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {}
 	
@@ -151,6 +151,10 @@ service User {
 	rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {}
 
 	rpc ListRoles(ListRolesRequest) returns (ListRolesResponse) {}
+
+	rpc CreateOperator(CreateOperatorRequest) returns (CreateOperatorResponse) {}
+
+	rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -467,9 +471,10 @@ message ListUsersRequest {
 	optional bool ban_game = 19;
 	optional bool ban_login = 20;
 	optional string user_type = 21;
+	optional int64 role_id = 22;
 	// optional bool online = 21;
-	optional int32 page = 22;
-	optional int32 page_size = 23;
+	optional int32 page = 23;
+	optional int32 page_size = 24;
 }
 
 message ListUsersResponse {
@@ -500,6 +505,8 @@ message ListUsersResponse {
 		// string source = 24;
 		string registration_ip = 25;
 		bool enabled = 26;
+		google.protobuf.Timestamp created_at = 27;
+		Role role = 28;
 	}
 	repeated User users = 1;
 	int32 page = 2;
@@ -507,14 +514,15 @@ message ListUsersResponse {
 	int32 total = 4;
 }
 
-message CreateGroupUserRequest {
+message CreateUserRequest {
 	string username = 1;
 	string password = 2;
 	string email = 3;
 	string mobile = 4;
+	int64 operator_id = 5;
 }
 
-message CreateGroupUserResponse {}
+message CreateUserResponse {}
 
 message VerifyEmailRequest {
 	string email = 1;
@@ -608,12 +616,14 @@ message GetUserProfileResponse {
 message CreateRoleRequest {
 	string name = 1;
 	repeated Permission permissions = 2;
+	int64 user_id = 3;
 }
 
 message Permission {
 	int64 group_id = 1;
 	string group_name = 2;
 	repeated string actions = 3;
+	repeated string api_paths = 4;
 }
 
 message CreateRoleResponse {}
@@ -635,3 +645,27 @@ message ListRolesResponse {
 	int32 page_size = 3;
 	int32 total = 4;
 }
+enum OperatorType {
+	OPERATOR_TYPE_UNSPECIFIED = 0;
+	OPERATOR_TYPE_RETAILER = 1;
+	OPERATOR_TYPE_GROUP = 2;
+	OPERATOR_TYPE_OPERATOR = 3;
+}
+
+message CreateOperatorRequest {
+	string operator_name = 1;
+	OperatorType operator_type = 2;
+	optional int64 parent_operator_id = 3;
+}
+
+message CreateOperatorResponse {
+	int64 operator_id = 1;
+}
+
+message UpdateRoleRequest {
+	int64 role_id = 1;
+	string name = 2;
+	repeated Permission permissions = 3;
+}
+
+message UpdateRoleResponse {}
