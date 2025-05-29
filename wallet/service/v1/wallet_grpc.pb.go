@@ -39,6 +39,7 @@ const (
 	Wallet_GetExchangeRates_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetExchangeRates"
 	Wallet_GetUserTransactionSummary_FullMethodName           = "/api.wallet.service.v1.Wallet/GetUserTransactionSummary"
 	Wallet_GetBackofficeUserOverviewFromWallet_FullMethodName = "/api.wallet.service.v1.Wallet/GetBackofficeUserOverviewFromWallet"
+	Wallet_GetOverviewDashboardFromWallet_FullMethodName      = "/api.wallet.service.v1.Wallet/GetOverviewDashboardFromWallet"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -75,6 +76,7 @@ type WalletClient interface {
 	GetUserTransactionSummary(ctx context.Context, in *GetUserTransactionSummaryRequest, opts ...grpc.CallOption) (*GetUserTransactionSummaryResponse, error)
 	// GetUserOverview returns data for the overview of user's wallet
 	GetBackofficeUserOverviewFromWallet(ctx context.Context, in *GetBackofficeUserOverviewFromWalletRequest, opts ...grpc.CallOption) (*GetBackofficeUserOverviewFromWalletResponse, error)
+	GetOverviewDashboardFromWallet(ctx context.Context, in *GetOverviewDashboardFromWalletRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromWalletResponse, error)
 }
 
 type walletClient struct {
@@ -285,6 +287,16 @@ func (c *walletClient) GetBackofficeUserOverviewFromWallet(ctx context.Context, 
 	return out, nil
 }
 
+func (c *walletClient) GetOverviewDashboardFromWallet(ctx context.Context, in *GetOverviewDashboardFromWalletRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromWalletResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOverviewDashboardFromWalletResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetOverviewDashboardFromWallet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -319,6 +331,7 @@ type WalletServer interface {
 	GetUserTransactionSummary(context.Context, *GetUserTransactionSummaryRequest) (*GetUserTransactionSummaryResponse, error)
 	// GetUserOverview returns data for the overview of user's wallet
 	GetBackofficeUserOverviewFromWallet(context.Context, *GetBackofficeUserOverviewFromWalletRequest) (*GetBackofficeUserOverviewFromWalletResponse, error)
+	GetOverviewDashboardFromWallet(context.Context, *GetOverviewDashboardFromWalletRequest) (*GetOverviewDashboardFromWalletResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -388,6 +401,9 @@ func (UnimplementedWalletServer) GetUserTransactionSummary(context.Context, *Get
 }
 func (UnimplementedWalletServer) GetBackofficeUserOverviewFromWallet(context.Context, *GetBackofficeUserOverviewFromWalletRequest) (*GetBackofficeUserOverviewFromWalletResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBackofficeUserOverviewFromWallet not implemented")
+}
+func (UnimplementedWalletServer) GetOverviewDashboardFromWallet(context.Context, *GetOverviewDashboardFromWalletRequest) (*GetOverviewDashboardFromWalletResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOverviewDashboardFromWallet not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -770,6 +786,24 @@ func _Wallet_GetBackofficeUserOverviewFromWallet_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_GetOverviewDashboardFromWallet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOverviewDashboardFromWalletRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetOverviewDashboardFromWallet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetOverviewDashboardFromWallet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetOverviewDashboardFromWallet(ctx, req.(*GetOverviewDashboardFromWalletRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -856,6 +890,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBackofficeUserOverviewFromWallet",
 			Handler:    _Wallet_GetBackofficeUserOverviewFromWallet_Handler,
+		},
+		{
+			MethodName: "GetOverviewDashboardFromWallet",
+			Handler:    _Wallet_GetOverviewDashboardFromWallet_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

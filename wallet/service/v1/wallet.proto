@@ -74,6 +74,8 @@ service Wallet {
 
 	// GetUserOverview returns data for the overview of user's wallet
 	rpc GetBackofficeUserOverviewFromWallet (GetBackofficeUserOverviewFromWalletRequest) returns (GetBackofficeUserOverviewFromWalletResponse) {}
+
+	rpc GetOverviewDashboardFromWallet (GetOverviewDashboardFromWalletRequest) returns (GetOverviewDashboardFromWalletResponse) {}
 }
 
 message AddUserRequest {
@@ -488,4 +490,30 @@ message GetBackofficeUserOverviewFromWalletResponse {
 	string turnover_multiplier = 20; // Round to 2 decimal places
 	string deposit_to_withdraw_ratio = 21; // Round to 2 decimal places
 	string rtp = 22; // Round to 2 decimal places
+}
+
+message GetOverviewDashboardFromWalletRequest {
+}
+
+message GetOverviewDashboardFromWalletResponse {
+	message GGR {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message NGR {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message Deposit {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message Withdraw {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message DepositMinusWithdraw {
+		string today = 1;
+		string yesterday = 2;
+	}
 }
