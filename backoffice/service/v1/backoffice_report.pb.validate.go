@@ -4017,6 +4017,8 @@ func (m *GetPlayerGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for GameId
 
+	// no validation rules for GameName
+
 	// no validation rules for UserId
 
 	// no validation rules for Turnover
@@ -4868,10 +4870,6 @@ func (m *ListDepositVtgDetailsResponse_Detail) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for Date
-
-	// no validation rules for Week
-
-	// no validation rules for Month
 
 	// no validation rules for OperatorName
 
