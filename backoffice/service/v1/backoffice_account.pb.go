@@ -30,7 +30,6 @@ type AddAccountRequest struct {
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Mobile        string                 `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile,omitempty"`
 	Password      string                 `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	Role          string                 `protobuf:"bytes,5,opt,name=role,proto3" json:"role,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -93,16 +92,8 @@ func (x *AddAccountRequest) GetPassword() string {
 	return ""
 }
 
-func (x *AddAccountRequest) GetRole() string {
-	if x != nil {
-		return x.Role
-	}
-	return ""
-}
-
 type AddAccountResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -135,13 +126,6 @@ func (x *AddAccountResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AddAccountResponse.ProtoReflect.Descriptor instead.
 func (*AddAccountResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *AddAccountResponse) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
 }
 
 type SendEmailVerificationRequest struct {
@@ -1347,6 +1331,7 @@ type Permission struct {
 	GroupName string `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`
 	// action name: read, write, delete, etc.
 	Actions       []string `protobuf:"bytes,3,rep,name=actions,proto3" json:"actions,omitempty"`
+	ApiPaths      []string `protobuf:"bytes,4,rep,name=api_paths,json=apiPaths,proto3" json:"api_paths,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1398,6 +1383,13 @@ func (x *Permission) GetGroupName() string {
 func (x *Permission) GetActions() []string {
 	if x != nil {
 		return x.Actions
+	}
+	return nil
+}
+
+func (x *Permission) GetApiPaths() []string {
+	if x != nil {
+		return x.ApiPaths
 	}
 	return nil
 }
@@ -1850,15 +1842,13 @@ var File_backoffice_service_v1_backoffice_account_proto protoreflect.FileDescrip
 
 const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_account.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8d\x01\n" +
+	".backoffice/service/v1/backoffice_account.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"y\n" +
 	"\x11AddAccountRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
 	"\x06mobile\x18\x03 \x01(\tR\x06mobile\x12\x1a\n" +
-	"\bpassword\x18\x04 \x01(\tR\bpassword\x12\x12\n" +
-	"\x04role\x18\x05 \x01(\tR\x04role\"-\n" +
-	"\x12AddAccountResponse\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x1e\n" +
+	"\bpassword\x18\x04 \x01(\tR\bpassword\"\x14\n" +
+	"\x12AddAccountResponse\"\x1e\n" +
 	"\x1cSendEmailVerificationRequest\"\x1f\n" +
 	"\x1dSendEmailVerificationResponse\"*\n" +
 	"\x12VerifyEmailRequest\x12\x14\n" +
@@ -1917,13 +1907,14 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\x04Role\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\arole_id\x18\x02 \x01(\x03R\x06roleId\x12G\n" +
-	"\vpermissions\x18\x03 \x03(\v2%.api.backoffice.service.v1.PermissionR\vpermissions\"`\n" +
+	"\vpermissions\x18\x03 \x03(\v2%.api.backoffice.service.v1.PermissionR\vpermissions\"}\n" +
 	"\n" +
 	"Permission\x12\x19\n" +
 	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\x12\x1d\n" +
 	"\n" +
 	"group_name\x18\x02 \x01(\tR\tgroupName\x12\x18\n" +
-	"\aactions\x18\x03 \x03(\tR\aactions\"\xf1\x01\n" +
+	"\aactions\x18\x03 \x03(\tR\aactions\x12\x1b\n" +
+	"\tapi_paths\x18\x04 \x03(\tR\bapiPaths\"\xf1\x01\n" +
 	"\x13ListAccountsRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1c\n" +
 	"\arole_id\x18\x02 \x01(\x03H\x01R\x06roleId\x88\x01\x01\x12$\n" +
