@@ -157,6 +157,8 @@ service User {
 	rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse) {}
 
 	rpc GetRole(GetRoleRequest) returns (GetRoleResponse) {}
+
+	rpc GetOverviewDashboardFromUser(GetOverviewDashboardFromUserRequest) returns (GetOverviewDashboardFromUserResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -680,4 +682,25 @@ message GetRoleRequest {
 
 message GetRoleResponse {
 	Role role = 1;
+}
+
+message GetOverviewDashboardFromUserRequest {
+}
+
+message GetOverviewDashboardFromUserResponse {
+	message RegisteredUsers {
+		int32 today = 1;
+		int32 yesterday = 2;
+	}
+	message FirstDepositUsers {
+		int32 today = 1;
+		int32 yesterday = 2;
+	}
+	message ActiveUsers {
+		int32 today = 1;
+		int32 yesterday = 2;
+	}
+	RegisteredUsers registered_users = 1;
+	FirstDepositUsers first_deposit_users = 2;
+	ActiveUsers active_users = 3;
 }
