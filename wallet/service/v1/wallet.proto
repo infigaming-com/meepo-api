@@ -10,17 +10,16 @@ option java_multiple_files = true;
 option java_package = "api.wallet.service.v1";
 
 service Wallet {
-	rpc AddUser (AddUserRequest) returns (AddUserResponse) {}
+	rpc AddUser (AddUserRequest) returns (AddUserResponse) {
+	}
 
-	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {}
+	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {
+	}
 	
-	rpc AddOrUpdateOperatorsCurrency (AddOrUpdateOperatorsCurrencyRequest) returns (AddOrUpdateOperatorsCurrencyResponse) {}
+	rpc AddOrUpdateOperatorsCurrency (AddOrUpdateOperatorsCurrencyRequest) returns (AddOrUpdateOperatorsCurrencyResponse) {
+	}
 	
 	rpc UpdateUserCurrency (UpdateUserCurrencyRequest) returns (UpdateUserCurrencyResponse) {
-		option (google.api.http) = {
-			post: "/v1/wallet/currencies/update"
-			body: "*"
-		};
 	}
 	
 	// GetUserBalances returns the balances of all currencies of the user
@@ -33,10 +32,6 @@ service Wallet {
 
 	// GetUserBalance returns the balance of specific currency of the user
 	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {
-		option (google.api.http) = {
-			post: "/v1/wallet/balances/get"
-			body: "*"
-		};
 	}
 
 	rpc Credit (CreditRequest) returns (CreditResponse) {}

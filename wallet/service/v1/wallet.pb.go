@@ -4166,15 +4166,15 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\tyesterday\x18\x02 \x01(\tR\tyesterday\x1aJ\n" +
 	"\x14DepositMinusWithdraw\x12\x14\n" +
 	"\x05today\x18\x01 \x01(\tR\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\tR\tyesterday2\xe2\x14\n" +
+	"\tyesterday\x18\x02 \x01(\tR\tyesterday2\x97\x14\n" +
 	"\x06Wallet\x12Z\n" +
 	"\aAddUser\x12%.api.wallet.service.v1.AddUserRequest\x1a&.api.wallet.service.v1.AddUserResponse\"\x00\x12c\n" +
 	"\n" +
 	"UpdateUser\x12(.api.wallet.service.v1.UpdateUserRequest\x1a).api.wallet.service.v1.UpdateUserResponse\"\x00\x12\x99\x01\n" +
-	"\x1cAddOrUpdateOperatorsCurrency\x12:.api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest\x1a;.api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse\"\x00\x12\xa2\x01\n" +
-	"\x12UpdateUserCurrency\x120.api.wallet.service.v1.UpdateUserCurrencyRequest\x1a1.api.wallet.service.v1.UpdateUserCurrencyResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/wallet/currencies/update\x12\x95\x01\n" +
-	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12\x91\x01\n" +
-	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/wallet/balances/get\x12W\n" +
+	"\x1cAddOrUpdateOperatorsCurrency\x12:.api.wallet.service.v1.AddOrUpdateOperatorsCurrencyRequest\x1a;.api.wallet.service.v1.AddOrUpdateOperatorsCurrencyResponse\"\x00\x12{\n" +
+	"\x12UpdateUserCurrency\x120.api.wallet.service.v1.UpdateUserCurrencyRequest\x1a1.api.wallet.service.v1.UpdateUserCurrencyResponse\"\x00\x12\x95\x01\n" +
+	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
+	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12W\n" +
 	"\x06Credit\x12$.api.wallet.service.v1.CreditRequest\x1a%.api.wallet.service.v1.CreditResponse\"\x00\x12T\n" +
 	"\x05Debit\x12#.api.wallet.service.v1.DebitRequest\x1a$.api.wallet.service.v1.DebitResponse\"\x00\x12`\n" +
 	"\tGameDebit\x12'.api.wallet.service.v1.GameDebitRequest\x1a(.api.wallet.service.v1.GameDebitResponse\"\x00\x12c\n" +

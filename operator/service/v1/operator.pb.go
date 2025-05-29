@@ -7,7 +7,6 @@
 package v1
 
 import (
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1355,7 +1354,7 @@ var File_operator_service_v1_operator_proto protoreflect.FileDescriptor
 
 const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\n" +
-	"\"operator/service/v1/operator.proto\x12\x17api.operator.service.v1\x1a\x1cgoogle/api/annotations.proto\"A\n" +
+	"\"operator/service/v1/operator.proto\x12\x17api.operator.service.v1\"A\n" +
 	"\x12AddOperatorRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\"6\n" +
@@ -1439,18 +1438,18 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
-	"\aenabled\x18\x03 \x01(\bR\aenabled2\xde\r\n" +
-	"\bOperator\x12\x85\x01\n" +
-	"\vAddOperator\x12+.api.operator.service.v1.AddOperatorRequest\x1a,.api.operator.service.v1.AddOperatorResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/operator/add\x12\x91\x01\n" +
-	"\x0eUpdateOperator\x12..api.operator.service.v1.UpdateOperatorRequest\x1a/.api.operator.service.v1.UpdateOperatorResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/operator/update\x12j\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled2\x8b\f\n" +
+	"\bOperator\x12j\n" +
+	"\vAddOperator\x12+.api.operator.service.v1.AddOperatorRequest\x1a,.api.operator.service.v1.AddOperatorResponse\"\x00\x12s\n" +
+	"\x0eUpdateOperator\x12..api.operator.service.v1.UpdateOperatorRequest\x1a/.api.operator.service.v1.UpdateOperatorResponse\"\x00\x12j\n" +
 	"\vGetOperator\x12+.api.operator.service.v1.GetOperatorRequest\x1a,.api.operator.service.v1.GetOperatorResponse\"\x00\x12|\n" +
 	"\x11GetOperatorsByIds\x121.api.operator.service.v1.GetOperatorsByIdsRequest\x1a2.api.operator.service.v1.GetOperatorsByIdsResponse\"\x00\x12\x82\x01\n" +
-	"\x13AddOrUpdateCurrency\x123.api.operator.service.v1.AddOrUpdateCurrencyRequest\x1a4.api.operator.service.v1.AddOrUpdateCurrencyResponse\"\x00\x12\xb4\x01\n" +
-	"\x16UpdateOperatorCurrency\x126.api.operator.service.v1.UpdateOperatorCurrencyRequest\x1a7.api.operator.service.v1.UpdateOperatorCurrencyResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/operator/currencies/update\x12\xae\x01\n" +
-	"\x15GetOperatorCurrencies\x125.api.operator.service.v1.GetOperatorCurrenciesRequest\x1a6.api.operator.service.v1.GetOperatorCurrenciesResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/operator/currencies/get\x12\xa5\x01\n" +
-	"\x13AddOriginOperatorId\x123.api.operator.service.v1.AddOriginOperatorIdRequest\x1a4.api.operator.service.v1.AddOriginOperatorIdResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/operator/origins/add\x12\x88\x01\n" +
-	"\x15GetOperatorIdByOrigin\x125.api.operator.service.v1.GetOperatorIdByOriginRequest\x1a6.api.operator.service.v1.GetOperatorIdByOriginResponse\"\x00\x12\xb1\x01\n" +
-	"\x16DeleteOriginOperatorId\x126.api.operator.service.v1.DeleteOriginOperatorIdRequest\x1a7.api.operator.service.v1.DeleteOriginOperatorIdResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/operator/origins/delete\x12\x85\x01\n" +
+	"\x13AddOrUpdateCurrency\x123.api.operator.service.v1.AddOrUpdateCurrencyRequest\x1a4.api.operator.service.v1.AddOrUpdateCurrencyResponse\"\x00\x12\x8b\x01\n" +
+	"\x16UpdateOperatorCurrency\x126.api.operator.service.v1.UpdateOperatorCurrencyRequest\x1a7.api.operator.service.v1.UpdateOperatorCurrencyResponse\"\x00\x12\x88\x01\n" +
+	"\x15GetOperatorCurrencies\x125.api.operator.service.v1.GetOperatorCurrenciesRequest\x1a6.api.operator.service.v1.GetOperatorCurrenciesResponse\"\x00\x12\x82\x01\n" +
+	"\x13AddOriginOperatorId\x123.api.operator.service.v1.AddOriginOperatorIdRequest\x1a4.api.operator.service.v1.AddOriginOperatorIdResponse\"\x00\x12\x88\x01\n" +
+	"\x15GetOperatorIdByOrigin\x125.api.operator.service.v1.GetOperatorIdByOriginRequest\x1a6.api.operator.service.v1.GetOperatorIdByOriginResponse\"\x00\x12\x8b\x01\n" +
+	"\x16DeleteOriginOperatorId\x126.api.operator.service.v1.DeleteOriginOperatorIdRequest\x1a7.api.operator.service.v1.DeleteOriginOperatorIdResponse\"\x00\x12\x85\x01\n" +
 	"\x14GetParentOperatorIds\x124.api.operator.service.v1.GetParentOperatorIdsRequest\x1a5.api.operator.service.v1.GetParentOperatorIdsResponse\"\x00\x12p\n" +
 	"\rListOperators\x12-.api.operator.service.v1.ListOperatorsRequest\x1a..api.operator.service.v1.ListOperatorsResponse\"\x00BW\n" +
 	"\x17api.operator.service.v1P\x01Z:github.com/infigaming-com/meepo-api/operator/service/v1;v1b\x06proto3"
