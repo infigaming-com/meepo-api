@@ -516,4 +516,9 @@ message GetOverviewDashboardFromWalletResponse {
 		string today = 1;
 		string yesterday = 2;
 	}
+	GGR ggr = 1;
+	NGR ngr = 2;
+	Deposit deposit = 3;
+	Withdraw withdraw = 4;
+	DepositMinusWithdraw deposit_minus_withdraw = 5;
 }
