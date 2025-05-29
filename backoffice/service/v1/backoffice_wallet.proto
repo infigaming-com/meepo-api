@@ -156,7 +156,7 @@ message ListWalletBalanceTransactionsResponse {
 		//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
 		string transaction_type = 3;
 		int32 vip_level = 4;
-		string change = 5;
+		string change_balance = 5;
 		string before_balance = 6;
 		string after_balance = 7;
 		string currency = 8;

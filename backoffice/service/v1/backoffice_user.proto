@@ -28,68 +28,86 @@ service BackofficeUser {
             body: "*"
         };
     }
-    rpc AddOperatorUserTag(AddOperatorUserTagRequest) returns (AddOperatorUserTagResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/operator/user-tags/add"
-            body: "*"
-        };
-    }
-    rpc DeleteOperatorUserTag(DeleteOperatorUserTagRequest) returns (DeleteOperatorUserTagResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/operator/user-tags/delete"
-            body: "*"
-        };
-    }
-    rpc GetOperatorUserTags(GetOperatorUserTagsRequest) returns (GetOperatorUserTagsResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/operator/user-tags/get"
-            body: "*"
-        };
-    }
-    rpc AddUserTag(AddUserTagRequest) returns (AddUserTagResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/tags/add"
-            body: "*"
-        };
-    }
-    rpc DeleteUserTag(DeleteUserTagRequest) returns (DeleteUserTagResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/tags/delete"
-            body: "*"
-        };
-    }
     rpc AddUserComment(AddUserCommentRequest) returns (AddUserCommentResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/comments/add"
             body: "*"
         };
     }
-		rpc ListUserComments(ListUserCommentsRequest) returns (ListUserCommentsResponse) {
+	rpc ListUserComments(ListUserCommentsRequest) returns (ListUserCommentsResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/comments/list"
             body: "*"
         };
     }
-		rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/create"
             body: "*"
         };
     }
-
-		rpc SendEmailVerificationCode(SendEmailVerificationCodeRequest) returns (SendEmailVerificationCodeResponse) {
+	rpc SendEmailVerificationCode(SendEmailVerificationCodeRequest) returns (SendEmailVerificationCodeResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/send-email-verification-code"
-						body: "*"
-				};
-		}
+			body: "*"
+		};
+	}
 
-		rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/update"
             body: "*"
         };
     }
+
+	// SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
+	// It will reverse the follow_parent flag if the record exists.
+	// If the record doesn't exist, it will create a new one with follow_parent set to false.
+	rpc SetOperatorTagsConfig(SetOperatorTagsConfigRequest) returns (SetOperatorTagsConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/operator-tags/config/set"
+			body: "*"
+		};
+	}
+
+	// SetOperatorTags sets or updates the tags for an operator.
+	rpc SetOperatorTags(SetOperatorTagsRequest) returns (SetOperatorTagsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/operator-tags/set"
+			body: "*"
+		};
+	}
+
+	// GetOperatorTagConfig returns follow-parent flag for the given operator ID.
+	rpc GetOperatorTagsConfig(GetOperatorTagsConfigRequest) returns (GetOperatorTagsConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/operator-tags/config/get"
+			body: "*"
+		};
+	}
+
+	// GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
+	rpc GetOperatorTags(GetOperatorTagsRequest) returns (GetOperatorTagsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/operator-tags/get"
+			body: "*"
+		};
+	}
+
+	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	rpc GetUserTags (GetUserTagsRequest) returns (GetUserTagsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/tags/get"
+			body: "*"
+		};
+	}
+
+	rpc SetUserTags(SetUserTagsRequest) returns (SetUserTagsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/tags/set"
+			body: "*"
+		};
+	}
 }
 
 message ListUsersRequest {
@@ -113,7 +131,7 @@ message ListUsersRequest {
 	optional bool ban_withdraw = 18;
 	optional bool ban_game = 19;
 	optional bool ban_login = 20;
-	// optional bool online = 21;
+	optional bool online = 21;
 	optional int32 page = 22;
 	optional int32 page_size = 23;
 }
@@ -135,7 +153,7 @@ message ListUsersResponse {
 		bool ban_withdraw = 13;
 		bool ban_game = 14;
 		bool ban_login = 15;
-		// bool online = 16;
+		bool online = 16;
 		google.protobuf.Timestamp last_login_at = 17;
 		google.protobuf.Timestamp registered_at = 18;
 		// int32 risk_level = 19;
@@ -153,46 +171,47 @@ message ListUsersResponse {
 }
 
 message GetUserOverviewRequest {
-	// ?? filter
-	// Today, This Week, This Month, Latest 30/90/120 days
+	int64 user_id = 1;
+	// filter options:
+	// - "today": Today's data
+	// - "this_week": This week's data
+	// - "this_month": This month's data
+	// - "recent_24h": Recent 24 hours data
+	// - "recent_30d": Recent 30 days data
+	// If not specified, returns all time data
+	optional string filter = 2;
 }
 
 message GetUserOverviewResponse {
 	message GameData {
-		string game_type = 1;
+		string game_type = 1; // game category
 		string ggr = 2;
 		string turnover = 3;
 		string rtp = 4;
 	}
-	string balance = 1;
-	string deposit_minus_withdraw = 2;
+	string deposit_minus_withdraw = 1;
+	string turnover = 2;
 	string cash_turnover = 3;
 	string bonus_turnover = 4;
 	string deposit = 5;
 	string last_deposit = 6;
-	string deposit_count = 7;
-	string withdraw = 8;
-	string last_withdraw = 9;
-	int32 withdraw_count = 10;
-	string bonus = 11;
-	string valid_turnover = 12;
+	int32 deposit_count = 7;
+	string withdraw = 8; // withdrawal
+	string last_withdraw = 9; // last withdrawal
+	int32 withdraw_count = 10; // withdrawal count
+	string bonus = 11; // Not available for now, only return 0
+	string valid_turnover = 12; // Not available for now, only return 0
 	string average_bet_amount = 13;
 	string ggr = 14;
-	int32 ggr_percentage = 15;
-	string manually_added_balance = 16;
-	string bonus_claimed = 17;
+	string ggr_percentage = 15; // Round to 2 decimal places
+	string manually_added_balance = 16; // Not available for now, only return 0
+	string bonus_claimed = 17; // Not available for now, only return 0
 	string ngr = 18;
-	int32 ggr_to_ngr_percentage = 19;
-	int32 turnover_multiplier = 20;
-	int32 deposit_to_withdraw_ratio = 21;
-	int32 rtp_percentage = 22;
+	string ggr_to_ngr_percentage = 19; // Round to 2 decimal places
+	string turnover_multiplier = 20; // Round to 2 decimal places
+	string deposit_to_withdraw_ratio = 21; // Round to 2 decimal places
+	string rtp = 22; // Round to 2 decimal places
 	repeated GameData game_data = 23;
-	bool vpn_used = 24;
-	bool has_1x_deposits_before_wd = 25;
-	bool more_than_2_deposits = 26;
-	bool account_older_than_3_months = 27;
-	google.protobuf.Timestamp last_deposit_at = 28;	// ?? Is this time since last deposit
-	bool first_withdraw_on_today = 29;
 }
 
 message GetUserProfileRequest {
@@ -253,42 +272,9 @@ message GetUserProfileResponse {
 	int32 login_page_size = 14;
 }
 
-message AddOperatorUserTagRequest {
-	string tag = 1;
-}
-
-message AddOperatorUserTagResponse {}
-
-message DeleteOperatorUserTagRequest {
-	string tag = 1;
-}
-
-message DeleteOperatorUserTagResponse {}
-
-message GetOperatorUserTagsRequest {}
-
-message GetOperatorUserTagsResponse {
-	repeated string tags = 1;
-}
-
-message AddUserTagRequest {
-	int64 user_id = 1;
-	string tag = 2;
-}
-
-message AddUserTagResponse {}
-
-message DeleteUserTagRequest {
-	int64 user_id = 1;
-	string tag = 2;
-}
-
-message DeleteUserTagResponse {}
-
 message AddUserCommentRequest {
 	int64 user_id = 1;
-	int64 author_user_id = 2;
-	string content = 3;
+	string content = 2;
 }
 
 message AddUserCommentResponse {
@@ -332,3 +318,68 @@ message UpdateUserRequest {
 }
 
 message UpdateUserResponse {}
+
+// SetOperatorTagsConfigRequest contains the operator ID.
+message SetOperatorTagsConfigRequest {
+	// The ID of the operator to set tag configuration for.
+	int64 operator_id = 1;
+	// Whether to follow parent operator's tags.
+	bool follow_parent = 2;
+}
+
+// SetOperatorTagsConfigResponse is an empty message indicating successful tag configuration.
+message SetOperatorTagsConfigResponse {}
+
+// SetOperatorTagsRequest contains the operator ID and tag to add.
+message SetOperatorTagsRequest {
+	// The ID of the operator to add the tag to.
+	int64 operator_id = 1;
+	// The tag to add to the operator.
+	repeated string tags = 2;
+}
+
+// SetOperatorTagsResponse is an empty message indicating successful tag addition.
+message SetOperatorTagsResponse {}
+
+// GetOperatorTagsConfigRequest contains the operator ID to retrieve tag configuration.
+message GetOperatorTagsConfigRequest {
+	// The ID of the operator to get tag configuration for.
+	int64 operator_id = 1;
+}
+
+// GetOperatorTagsConfigResponse contains the tag configuration settings, now only follow_parent flag.
+message GetOperatorTagsConfigResponse {
+	// Whether the operator should follow parent operator's tags.
+	bool follow_parent = 1;
+}
+
+// GetOperatorTagsRequest contains the operator ID to retrieve tags for.
+message GetOperatorTagsRequest {
+	// The ID of the operator to get tags for.
+	int64 operator_id = 1;
+}	
+
+// GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
+message GetOperatorTagsResponse {
+	// List of tags associated with the operator.
+	repeated string tags = 1;
+}
+
+// GetUserTagsRequest contains the user ID to retrieve tags for.
+message GetUserTagsRequest {
+	// The ID of the user to get tags for.
+	int64 user_id = 1;
+}
+
+// GetUserTagsResponse contains the list of active tags associated with the user.
+message GetUserTagsResponse {
+	// List of active tags associated with the user.
+	repeated string tags = 1;
+}
+
+message SetUserTagsRequest {
+	int64 user_id = 1;
+	repeated string tags = 2;
+}
+
+message SetUserTagsResponse {}

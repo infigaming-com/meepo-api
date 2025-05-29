@@ -10,17 +10,16 @@ option java_multiple_files = true;
 option java_package = "api.wallet.service.v1";
 
 service Wallet {
-	rpc AddUser (AddUserRequest) returns (AddUserResponse) {}
+	rpc AddUser (AddUserRequest) returns (AddUserResponse) {
+	}
 
-	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {}
+	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {
+	}
 	
-	rpc AddOrUpdateOperatorsCurrency (AddOrUpdateOperatorsCurrencyRequest) returns (AddOrUpdateOperatorsCurrencyResponse) {}
+	rpc AddOrUpdateOperatorsCurrency (AddOrUpdateOperatorsCurrencyRequest) returns (AddOrUpdateOperatorsCurrencyResponse) {
+	}
 	
 	rpc UpdateUserCurrency (UpdateUserCurrencyRequest) returns (UpdateUserCurrencyResponse) {
-		option (google.api.http) = {
-			post: "/v1/wallet/currencies/update"
-			body: "*"
-		};
 	}
 	
 	// GetUserBalances returns the balances of all currencies of the user
@@ -33,10 +32,6 @@ service Wallet {
 
 	// GetUserBalance returns the balance of specific currency of the user
 	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {
-		option (google.api.http) = {
-			post: "/v1/wallet/balances/get"
-			body: "*"
-		};
 	}
 
 	rpc Credit (CreditRequest) returns (CreditResponse) {}
@@ -71,6 +66,11 @@ service Wallet {
 	// GetUserTransactionSummary returns the summary of user's transactions 
 	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
 	rpc GetUserTransactionSummary (GetUserTransactionSummaryRequest) returns (GetUserTransactionSummaryResponse) {}
+
+	// GetUserOverview returns data for the overview of user's wallet
+	rpc GetBackofficeUserOverviewFromWallet (GetBackofficeUserOverviewFromWalletRequest) returns (GetBackofficeUserOverviewFromWalletResponse) {}
+
+	rpc GetOverviewDashboardFromWallet (GetOverviewDashboardFromWalletRequest) returns (GetOverviewDashboardFromWalletResponse) {}
 }
 
 message AddUserRequest {
@@ -454,4 +454,66 @@ message GetUserTransactionSummaryResponse {
 	int32 total_deposit_count = 6;
 	int32 total_withdraw_count = 7;
 	int32 today_withdraw_count = 8;
+}
+
+message GetBackofficeUserOverviewFromWalletRequest {
+	int64 user_id = 1;
+	optional google.protobuf.Timestamp start_time = 2;
+	optional google.protobuf.Timestamp end_time = 3;
+}
+
+message GetBackofficeUserOverviewFromWalletResponse {
+	string deposit_minus_withdraw = 1;
+	string turnover = 2;
+	string cash_turnover = 3;
+	string bonus_turnover = 4;
+	string deposit = 5;
+	string last_deposit = 6;
+	int32 deposit_count = 7;
+	string withdraw = 8;
+	string last_withdraw = 9;
+	int32 withdraw_count = 10;
+	string bonus = 11; // Not available for now, only return 0
+	string valid_turnover = 12; // Not available for now, only return 0
+	string average_bet_amount = 13;
+	string ggr = 14;
+	string ggr_percentage = 15; // Round to 2 decimal places
+	string manually_added_balance = 16; // Not available for now, only return 0
+	string bonus_claimed = 17; // Not available for now, only return 0
+	string ngr = 18;
+	string ggr_to_ngr_percentage = 19; // Round to 2 decimal places
+	string turnover_multiplier = 20; // Round to 2 decimal places
+	string deposit_to_withdraw_ratio = 21; // Round to 2 decimal places
+	string rtp = 22; // Round to 2 decimal places
+}
+
+message GetOverviewDashboardFromWalletRequest {
+}
+
+message GetOverviewDashboardFromWalletResponse {
+	message GGR {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message NGR {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message Deposit {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message Withdraw {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message DepositMinusWithdraw {
+		string today = 1;
+		string yesterday = 2;
+	}
+	GGR ggr = 1;
+	NGR ngr = 2;
+	Deposit deposit = 3;
+	Withdraw withdraw = 4;
+	DepositMinusWithdraw deposit_minus_withdraw = 5;
 }

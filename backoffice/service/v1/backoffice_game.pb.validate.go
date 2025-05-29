@@ -1754,6 +1754,10 @@ func (m *ListBetsRequest) validate(all bool) error {
 
 	}
 
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
 	if m.Page != nil {
 		// no validation rules for Page
 	}
@@ -1861,7 +1865,55 @@ func (m *Bet) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Id
+
+	// no validation rules for ProviderBetId
+
+	// no validation rules for RoundId
+
+	// no validation rules for ProviderRoundId
+
+	// no validation rules for ProviderId
+
+	// no validation rules for ProviderName
+
+	// no validation rules for OperatorId
+
 	// no validation rules for OperatorName
+
+	// no validation rules for Currency
+
+	// no validation rules for SettlementCurrency
+
+	// no validation rules for Status
+
+	// no validation rules for UserId
+
+	// no validation rules for GameId
+
+	// no validation rules for GameName
+
+	// no validation rules for GameCategory
+
+	// no validation rules for WinCount
+
+	// no validation rules for BetAmount
+
+	// no validation rules for ValidBetAmount
+
+	// no validation rules for SettlementBetAmount
+
+	// no validation rules for WinAmount
+
+	// no validation rules for SettlementWinAmount
+
+	// no validation rules for Turnover
+
+	// no validation rules for Odds
+
+	// no validation rules for RollbackBetAmount
+
+	// no validation rules for RollbackWinAmount
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -1920,32 +1972,6 @@ func (m *Bet) validate(all bool) error {
 			}
 		}
 	}
-
-	// no validation rules for GameCategory
-
-	// no validation rules for GameName
-
-	// no validation rules for GameId
-
-	// no validation rules for ProviderName
-
-	// no validation rules for Id
-
-	// no validation rules for ProviderBetId
-
-	// no validation rules for UserId
-
-	// no validation rules for BetAmount
-
-	// no validation rules for SettlementBetAmount
-
-	// no validation rules for WinAmount
-
-	// no validation rules for SettlementWinAmount
-
-	// no validation rules for Odds
-
-	// no validation rules for ValidBetAmount
 
 	if len(errors) > 0 {
 		return BetMultiError(errors)

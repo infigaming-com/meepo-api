@@ -77,4 +77,7 @@ message ListCurrenciesRequest {
 
 message ListCurrenciesResponse {
 	repeated Currency currencies = 1;
+	int32 total = 2;
+	int32 total_enabled = 3;
+	int32 total_hidden = 4;
 }

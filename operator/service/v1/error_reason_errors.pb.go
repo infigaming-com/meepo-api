@@ -28,11 +28,11 @@ func IsOperatorNotFound(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_OPERATOR_NOT_FOUND.String() && e.Code == 404
+	return e.Reason == ErrorReason_OPERATOR_NOT_FOUND.String() && e.Code == 500
 }
 
 func ErrorOperatorNotFound(format string, args ...interface{}) *errors.Error {
-	return errors.New(404, ErrorReason_OPERATOR_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_OPERATOR_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
 
 func IsOperatorAlreadyExists(err error) bool {
@@ -40,11 +40,11 @@ func IsOperatorAlreadyExists(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_OPERATOR_ALREADY_EXISTS.String() && e.Code == 409
+	return e.Reason == ErrorReason_OPERATOR_ALREADY_EXISTS.String() && e.Code == 500
 }
 
 func ErrorOperatorAlreadyExists(format string, args ...interface{}) *errors.Error {
-	return errors.New(409, ErrorReason_OPERATOR_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_OPERATOR_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
 }
 
 func IsLockOperatorFailed(err error) bool {

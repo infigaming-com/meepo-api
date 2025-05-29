@@ -104,6 +104,9 @@ service Game {
 
 	rpc GetBetById(GetBetByIdRequest) returns (GetBetByIdResponse) {
 	}
+
+	rpc GetBackofficeUserOverviewFromGame(GetBackofficeUserOverviewFromGameRequest) returns (GetBackofficeUserOverviewFromGameResponse) {
+	}
 }
 
 message CreateOperatorRequest {
@@ -424,17 +427,6 @@ message ListBetsRequest {
 	optional int64 page_size = 15;
 }
 
-message ListBetsResponse {
-	repeated Bet bets = 1;
-	string turnover = 2;
-	string win_amount = 3;
-	int32 bet_count = 4;
-	int32 rtp_percentage = 5; // value from 0 to 100
-	int64 total = 6;
-	int64 page = 7;
-	int64 page_size = 8;
-}
-
 message Bet {
 	int64 id = 1;
 	string provider_bet_id = 2;
@@ -463,6 +455,17 @@ message Bet {
 	string rollback_win_amount = 25;
 	google.protobuf.Timestamp created_at = 26;
 	google.protobuf.Timestamp updated_at = 27;
+}
+
+message ListBetsResponse {
+	repeated Bet bets = 1;
+	string turnover = 2;
+	string win_amount = 3;
+	int32 bet_count = 4;
+	int32 rtp_percentage = 5; // value from 0 to 100
+	int64 total = 6;
+	int64 page = 7;
+	int64 page_size = 8;
 }
 
 message BackofficeListGamesRequest {
@@ -606,4 +609,20 @@ message GetBetByIdResponse {
 		repeated Action actions = 33;
 	}
 	Bet bet = 1;
+}
+
+message GetBackofficeUserOverviewFromGameRequest {
+	string user_id = 1;
+	optional google.protobuf.Timestamp start_time = 2;
+	optional google.protobuf.Timestamp end_time = 3;
+}
+
+message GetBackofficeUserOverviewFromGameResponse {
+	message GameData {
+		string game_type = 1; // game category
+		string ggr = 2;
+		string turnover = 3;
+		string rtp = 4;
+	}
+	repeated GameData game_data = 1;
 }

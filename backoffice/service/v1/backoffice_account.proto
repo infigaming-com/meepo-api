@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -87,6 +88,30 @@ service BackofficeAccount {
             body: "*"
         };
     }
+    rpc AccountInfo(AccountInfoRequest) returns (AccountInfoResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/info"
+            body: "*"
+        };
+    }
+    rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/list"
+            body: "*"
+        };
+    }
+    rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/role/create"
+            body: "*"
+        };
+    }
+    rpc ListRoles(ListRolesRequest) returns (ListRolesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/role/list"
+            body: "*"
+        };
+    }
 }
 
 // Account related messages
@@ -95,12 +120,9 @@ message AddAccountRequest {
 	string email = 2;
 	string mobile = 3;
 	string password = 4;
-	string role = 5;
 }
 
-message AddAccountResponse {
-	int64 user_id = 1;
-}
+message AddAccountResponse {}
 
 message SendEmailVerificationRequest {}
 
@@ -147,7 +169,7 @@ message Unbind2faResponse {}
 message UpdateAccountRequest {
 	int64 user_id = 1;
 	optional bool enabled = 2;
-	optional string role = 3;
+	optional int64 role_id = 3;
 }
 
 message UpdateAccountResponse {}
@@ -178,3 +200,73 @@ message SendRegisterVerificationCodeRequest {
 }
 
 message SendRegisterVerificationCodeResponse {}
+
+message AccountInfoRequest {}
+
+message AccountInfoResponse {
+	string username = 1;
+	string email = 2;
+	string mobile = 3;
+	bool email_verified = 4;
+	bool mobile_verified = 5;
+	bool enabled = 6;
+	Role role = 7;
+}
+
+message Role {
+    string name = 1;
+    int64 role_id = 2;
+    repeated Permission permissions = 3;
+}
+
+message Permission {
+    int64 group_id = 1;
+    // group name: dashboard, game, user, finance, report, system, etc.
+    string group_name = 2;
+    // action name: read, write, delete, etc.
+    repeated string actions = 3;
+    repeated string api_paths = 4;
+}
+
+message ListAccountsRequest {
+    optional int64 user_id = 1;
+    optional int64 role_id = 2;
+    optional int64 operator_id = 3;
+    optional int32 page = 4;
+    optional int32 page_size = 5;
+}
+
+message ListAccountsResponse {
+    message Account {
+        int64 user_id = 1;
+        string username = 2;
+        string email = 3;
+        string mobile = 4;
+        bool enabled = 5;
+        Role role = 6;
+        google.protobuf.Timestamp created_at = 7;
+    }
+    repeated Account accounts = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+message CreateRoleRequest {
+    string name = 1;
+    repeated Permission permissions = 2;
+}
+
+message CreateRoleResponse {}
+
+message ListRolesRequest {
+    optional int32 page = 1;
+    optional int32 page_size = 2;
+}
+
+message ListRolesResponse {
+    repeated Role roles = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}

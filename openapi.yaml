@@ -114,6 +114,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.VerifyEmailResponse'
+    /v1/backoffice/accounts/info:
+        post:
+            tags:
+                - BackofficeAccount
+            operationId: BackofficeAccount_AccountInfo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AccountInfoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AccountInfoResponse'
+    /v1/backoffice/accounts/list:
+        post:
+            tags:
+                - BackofficeAccount
+            operationId: BackofficeAccount_ListAccounts
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAccountsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListAccountsResponse'
     /v1/backoffice/accounts/login:
         post:
             tags:
@@ -222,6 +258,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.SendRegisterVerificationCodeResponse'
+    /v1/backoffice/accounts/role/create:
+        post:
+            tags:
+                - BackofficeAccount
+            operationId: BackofficeAccount_CreateRole
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateRoleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CreateRoleResponse'
+    /v1/backoffice/accounts/role/list:
+        post:
+            tags:
+                - BackofficeAccount
+            operationId: BackofficeAccount_ListRoles
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRolesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListRolesResponse'
     /v1/backoffice/accounts/update:
         post:
             tags:
@@ -240,6 +312,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAccountResponse'
+    /v1/backoffice/audit/logs/list:
+        post:
+            tags:
+                - BackofficeAudit
+            operationId: BackofficeAudit_ListAuditLogs
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAuditLogsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListAuditLogsResponse'
     /v1/backoffice/dashboard/get:
         post:
             tags:
@@ -590,60 +680,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsResponse'
-    /v1/backoffice/operator/user-tags/add:
-        post:
-            tags:
-                - BackofficeUser
-            operationId: BackofficeUser_AddOperatorUserTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorUserTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorUserTagResponse'
-    /v1/backoffice/operator/user-tags/delete:
-        post:
-            tags:
-                - BackofficeUser
-            operationId: BackofficeUser_DeleteOperatorUserTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorUserTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorUserTagResponse'
-    /v1/backoffice/operator/user-tags/get:
-        post:
-            tags:
-                - BackofficeUser
-            operationId: BackofficeUser_GetOperatorUserTags
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorUserTagsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorUserTagsResponse'
     /v1/backoffice/payment/transaction/page:
         post:
             tags:
@@ -665,24 +701,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
-    /v1/backoffice/report/daily-summaries/list:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_ListDailySummaries
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDailySummariesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDailySummariesResponse'
     /v1/backoffice/report/deposit-details/list:
         post:
             tags:
@@ -737,25 +755,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse'
-    /v1/backoffice/report/game-data-daily-summaries/list:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_ListGameDataDailySummaries
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataDailySummariesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataDailySummariesResponse'
-    /v1/backoffice/report/game-data-summary/get:
+    /v1/backoffice/report/game-data/get:
         post:
             tags:
                 - BackofficeReport
@@ -764,7 +764,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataSummaryRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameSummaryRequest'
                 required: true
             responses:
                 "200":
@@ -772,8 +772,26 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataSummaryResponse'
-    /v1/backoffice/report/player-game-data-summary/get:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameSummaryResponse'
+    /v1/backoffice/report/game-data/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListGameData
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataResponse'
+    /v1/backoffice/report/player-game-data/get:
         post:
             tags:
                 - BackofficeReport
@@ -782,7 +800,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataSummaryRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameSummaryRequest'
                 required: true
             responses:
                 "200":
@@ -790,7 +808,43 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataSummaryResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameSummaryResponse'
+    /v1/backoffice/report/player-game-data/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListPlayerGameData
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataResponse'
+    /v1/backoffice/report/register-retention/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListRegisterRetention
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionResponse'
     /v1/backoffice/report/summary/get:
         post:
             tags:
@@ -809,6 +863,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetSummaryResponse'
+    /v1/backoffice/report/summary/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListSummaries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse'
     /v1/backoffice/report/withdraw-details/list:
         post:
             tags:
@@ -1079,6 +1151,85 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListUsersResponse'
+    /v1/backoffice/user/operator-tags/config/get:
+        post:
+            tags:
+                - BackofficeUser
+            description: GetOperatorTagConfig returns follow-parent flag for the given operator ID.
+            operationId: BackofficeUser_GetOperatorTagsConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTagsConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTagsConfigResponse'
+    /v1/backoffice/user/operator-tags/config/set:
+        post:
+            tags:
+                - BackofficeUser
+            description: |-
+                SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
+                 It will reverse the follow_parent flag if the record exists.
+                 If the record doesn't exist, it will create a new one with follow_parent set to false.
+            operationId: BackofficeUser_SetOperatorTagsConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorTagsConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorTagsConfigResponse'
+    /v1/backoffice/user/operator-tags/get:
+        post:
+            tags:
+                - BackofficeUser
+            description: GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
+            operationId: BackofficeUser_GetOperatorTags
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTagsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTagsResponse'
+    /v1/backoffice/user/operator-tags/set:
+        post:
+            tags:
+                - BackofficeUser
+            description: SetOperatorTags sets or updates the tags for an operator.
+            operationId: BackofficeUser_SetOperatorTags
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorTagsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorTagsResponse'
     /v1/backoffice/user/overview/get:
         post:
             tags:
@@ -1133,16 +1284,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.SendEmailVerificationCodeResponse'
-    /v1/backoffice/user/tags/add:
+    /v1/backoffice/user/tags/get:
         post:
             tags:
                 - BackofficeUser
-            operationId: BackofficeUser_AddUserTag
+            description: GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+            operationId: BackofficeUser_GetUserTags
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddUserTagRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetUserTagsRequest'
                 required: true
             responses:
                 "200":
@@ -1150,17 +1302,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.AddUserTagResponse'
-    /v1/backoffice/user/tags/delete:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetUserTagsResponse'
+    /v1/backoffice/user/tags/set:
         post:
             tags:
                 - BackofficeUser
-            operationId: BackofficeUser_DeleteUserTag
+            operationId: BackofficeUser_SetUserTags
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteUserTagRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetUserTagsRequest'
                 required: true
             responses:
                 "200":
@@ -1168,7 +1320,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteUserTagResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SetUserTagsResponse'
     /v1/backoffice/user/update:
         post:
             tags:
@@ -1458,114 +1610,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
-    /v1/operator/add:
-        post:
-            tags:
-                - Operator
-            operationId: Operator_AddOperator
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.operator.service.v1.AddOperatorRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.operator.service.v1.AddOperatorResponse'
-    /v1/operator/currencies/get:
-        post:
-            tags:
-                - Operator
-            operationId: Operator_GetOperatorCurrencies
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.operator.service.v1.GetOperatorCurrenciesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.operator.service.v1.GetOperatorCurrenciesResponse'
-    /v1/operator/currencies/update:
-        post:
-            tags:
-                - Operator
-            operationId: Operator_UpdateOperatorCurrency
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorCurrencyRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorCurrencyResponse'
-    /v1/operator/origins/add:
-        post:
-            tags:
-                - Operator
-            operationId: Operator_AddOriginOperatorId
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.operator.service.v1.AddOriginOperatorIdRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.operator.service.v1.AddOriginOperatorIdResponse'
-    /v1/operator/origins/delete:
-        post:
-            tags:
-                - Operator
-            operationId: Operator_DeleteOriginOperatorId
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.operator.service.v1.DeleteOriginOperatorIdRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.operator.service.v1.DeleteOriginOperatorIdResponse'
-    /v1/operator/update:
-        post:
-            tags:
-                - Operator
-            operationId: Operator_UpdateOperator
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.operator.service.v1.UpdateOperatorResponse'
     /v1/payment/channel/create:
         post:
             tags:
@@ -1967,147 +2011,13 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.AddOperatorResponse'
-    /v1/user/operators/tag-config/get:
-        post:
-            tags:
-                - User
-            description: GetOperatorTagConfig returns follow-parent flag for the given operator ID.
-            operationId: User_GetOperatorTagConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagConfigResponse'
-    /v1/user/operators/tag-config/set:
-        post:
-            tags:
-                - User
-            description: |-
-                SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
-                 It will reverse the follow_parent flag if the record exists.
-                 If the record doesn't exist, it will create a new one with follow_parent set to false.
-            operationId: User_SetOperatorTagConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.SetOperatorTagConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.SetOperatorTagConfigResponse'
-    /v1/user/operators/tags/add:
-        post:
-            tags:
-                - User
-            description: AddOperatorTag adds a new tag to an operator if follow_parent is false.
-            operationId: User_AddOperatorTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.AddOperatorTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.AddOperatorTagResponse'
-    /v1/user/operators/tags/delete:
-        post:
-            tags:
-                - User
-            description: DeleteOperatorTag soft deletes a specific tag from an operator.
-            operationId: User_DeleteOperatorTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorTagResponse'
-    /v1/user/operators/tags/get:
-        post:
-            tags:
-                - User
-            description: GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
-            operationId: User_GetOperatorTags
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorTagsResponse'
-    /v1/user/tags/add:
-        post:
-            tags:
-                - User
-            description: AddUserTag adds a new tag to a user.
-            operationId: User_AddUserTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.AddUserTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.AddUserTagResponse'
-    /v1/user/tags/delete:
-        post:
-            tags:
-                - User
-            description: DeleteUserTag soft deletes a tag from a user.
-            operationId: User_DeleteUserTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.DeleteUserTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.DeleteUserTagResponse'
     /v1/user/tags/get:
         post:
             tags:
                 - User
-            description: GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+            description: |-
+                GetUserTags retrieves all active tags associated for the current user
+                 and also exists in the related operator's tag list.
             operationId: User_GetUserTags
             requestBody:
                 content:
@@ -2122,25 +2032,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserTagsResponse'
-    /v1/wallet/balances/get:
-        post:
-            tags:
-                - Wallet
-            description: GetUserBalance returns the balance of specific currency of the user
-            operationId: Wallet_GetUserBalance
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceResponse'
     /v1/wallet/balances/list:
         post:
             tags:
@@ -2160,26 +2051,28 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse'
-    /v1/wallet/currencies/update:
-        post:
-            tags:
-                - Wallet
-            operationId: Wallet_UpdateUserCurrency
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.wallet.service.v1.UpdateUserCurrencyRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.UpdateUserCurrencyResponse'
 components:
     schemas:
+        api.backoffice.service.v1.AccountInfoRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.AccountInfoResponse:
+            type: object
+            properties:
+                username:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                emailVerified:
+                    type: boolean
+                mobileVerified:
+                    type: boolean
+                enabled:
+                    type: boolean
+                role:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.Role'
         api.backoffice.service.v1.ActiveUsersData_Data:
             type: object
             properties:
@@ -2197,14 +2090,10 @@ components:
                     type: string
                 password:
                     type: string
-                role:
-                    type: string
             description: Account related messages
         api.backoffice.service.v1.AddAccountResponse:
             type: object
-            properties:
-                userId:
-                    type: string
+            properties: {}
         api.backoffice.service.v1.AddCommentRequest:
             type: object
             properties:
@@ -2217,14 +2106,6 @@ components:
             properties:
                 commentId:
                     type: string
-        api.backoffice.service.v1.AddOperatorUserTagRequest:
-            type: object
-            properties:
-                tag:
-                    type: string
-        api.backoffice.service.v1.AddOperatorUserTagResponse:
-            type: object
-            properties: {}
         api.backoffice.service.v1.AddSystemCurrencyRequest:
             type: object
             properties:
@@ -2254,8 +2135,6 @@ components:
             properties:
                 userId:
                     type: string
-                authorUserId:
-                    type: string
                 content:
                     type: string
         api.backoffice.service.v1.AddUserCommentResponse:
@@ -2263,42 +2142,69 @@ components:
             properties:
                 commentId:
                     type: string
-        api.backoffice.service.v1.AddUserTagRequest:
+        api.backoffice.service.v1.AuditLog:
             type: object
             properties:
+                auditId:
+                    type: string
                 userId:
                     type: string
-                tag:
-                    type: string
-        api.backoffice.service.v1.AddUserTagResponse:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.Bet:
-            type: object
-            properties:
-                operatorName:
+                userName:
                     type: string
                 createdAt:
                     type: string
                     format: date-time
-                updatedAt:
+                requestInfo:
                     type: string
-                    format: date-time
-                gameCategory:
+                requestBody:
                     type: string
-                gameName:
+                clientIp:
                     type: string
-                gameId:
+                apiPath:
                     type: string
-                providerName:
+                action:
                     type: string
+                errorMessage:
+                    type: string
+        api.backoffice.service.v1.Bet:
+            type: object
+            properties:
                 operatorBetId:
                     type: string
                 providerBetId:
                     type: string
+                roundId:
+                    type: string
+                providerRoundId:
+                    type: string
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                currency:
+                    type: string
+                settlementCurrency:
+                    type: string
+                status:
+                    type: string
                 userId:
                     type: string
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                gameCategory:
+                    type: string
+                winCount:
+                    type: integer
+                    format: int32
                 betAmount:
+                    type: string
+                validBetAmount:
                     type: string
                 settlementBetAmount:
                     type: string
@@ -2306,10 +2212,20 @@ components:
                     type: string
                 settlementWinAmount:
                     type: string
+                turnover:
+                    type: string
                 odds:
                     type: string
-                validBetAmount:
+                rollbackBetAmount:
                     type: string
+                rollbackWinAmount:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
         api.backoffice.service.v1.Bind2faRequest:
             type: object
             properties:
@@ -2326,6 +2242,18 @@ components:
         api.backoffice.service.v1.CancelTicketResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.CreateRoleRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                permissions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.Permission'
+        api.backoffice.service.v1.CreateRoleResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.CreateUserRequest:
             type: object
             properties:
@@ -2340,24 +2268,6 @@ components:
                 verificationCode:
                     type: string
         api.backoffice.service.v1.CreateUserResponse:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.DeleteOperatorUserTagRequest:
-            type: object
-            properties:
-                tag:
-                    type: string
-        api.backoffice.service.v1.DeleteOperatorUserTagResponse:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.DeleteUserTagRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                tag:
-                    type: string
-        api.backoffice.service.v1.DeleteUserTagResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.GameData_Data:
@@ -2557,13 +2467,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -2580,43 +2484,29 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
         api.backoffice.service.v1.GetDepositSummariesResponse:
             type: object
             properties:
-                dailySummaries:
+                depositSummaries:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesResponse_DailySummary'
-        api.backoffice.service.v1.GetDepositSummariesResponse_DailySummary:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesResponse_DepositSummary'
+        api.backoffice.service.v1.GetDepositSummariesResponse_DepositSummary:
             type: object
             properties:
                 date:
                     type: string
-                    format: date-time
                 currency:
                     type: string
-                depositSuccessPercentage:
-                    type: integer
-                    format: int32
+                depositSuccessRate:
+                    type: string
                 depositAmount:
                     type: string
-        api.backoffice.service.v1.GetGameDataSummaryRequest:
+        api.backoffice.service.v1.GetGameDataRequest:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorIds:
                     type: array
                     items:
@@ -2645,13 +2535,101 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetGameDataResponse:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetGameDataResponse_List:
+            type: object
+            properties:
+                date:
                     type: string
-                    format: date-time
-                endTime:
+                operator:
                     type: string
-                    format: date-time
-        api.backoffice.service.v1.GetGameDataSummaryResponse:
+                provider:
+                    type: string
+                gameType:
+                    type: string
+                gameName:
+                    type: string
+                gameId:
+                    type: string
+                playerCount:
+                    type: string
+                turnover:
+                    type: string
+                turnoverUsd:
+                    type: string
+                turnoverPercentage:
+                    type: string
+                winAmount:
+                    type: string
+                winAmountUsd:
+                    type: string
+                ggr:
+                    type: string
+                ggrUsd:
+                    type: string
+                ggrPercentage:
+                    type: string
+                betCount:
+                    type: string
+                averageBetAmount:
+                    type: string
+                rtpPercentage:
+                    type: string
+        api.backoffice.service.v1.GetGameSummaryRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                groupOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameTypes:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.GetGameSummaryResponse:
             type: object
             properties:
                 turnover:
@@ -2665,8 +2643,7 @@ components:
                 averageBetAmount:
                     type: string
                 rtpPercentage:
-                    type: integer
-                    format: int32
+                    type: string
         api.backoffice.service.v1.GetGameTransactionsForBetRequest:
             type: object
             properties:
@@ -2710,16 +2687,36 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GameTransaction_Amount'
                 validBetAmount:
                     type: string
-        api.backoffice.service.v1.GetOperatorUserTagsRequest:
+        api.backoffice.service.v1.GetOperatorTagsConfigRequest:
             type: object
-            properties: {}
-        api.backoffice.service.v1.GetOperatorUserTagsResponse:
+            properties:
+                operatorId:
+                    type: string
+                    description: The ID of the operator to get tag configuration for.
+            description: GetOperatorTagsConfigRequest contains the operator ID to retrieve tag configuration.
+        api.backoffice.service.v1.GetOperatorTagsConfigResponse:
+            type: object
+            properties:
+                followParent:
+                    type: boolean
+                    description: Whether the operator should follow parent operator's tags.
+            description: GetOperatorTagsConfigResponse contains the tag configuration settings, now only follow_parent flag.
+        api.backoffice.service.v1.GetOperatorTagsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                    description: The ID of the operator to get tags for.
+            description: GetOperatorTagsRequest contains the operator ID to retrieve tags for.
+        api.backoffice.service.v1.GetOperatorTagsResponse:
             type: object
             properties:
                 tags:
                     type: array
                     items:
                         type: string
+                    description: List of tags associated with the operator.
+            description: GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
         api.backoffice.service.v1.GetOverviewDashboardRequest:
             type: object
             properties: {}
@@ -2816,17 +2813,11 @@ components:
                     type: string
                 yesterday:
                     type: string
-        api.backoffice.service.v1.GetPlayerGameDataSummaryRequest:
+        api.backoffice.service.v1.GetPlayerGameDataRequest:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -2859,13 +2850,99 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetPlayerGameDataResponse:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.GetPlayerGameDataResponse_List:
+            type: object
+            properties:
+                date:
                     type: string
-                    format: date-time
-                endTime:
+                operator:
                     type: string
-                    format: date-time
-        api.backoffice.service.v1.GetPlayerGameDataSummaryResponse:
+                provider:
+                    type: string
+                gameType:
+                    type: string
+                gameId:
+                    type: string
+                userId:
+                    type: string
+                turnover:
+                    type: string
+                turnoverUsd:
+                    type: string
+                winAmount:
+                    type: string
+                winAmountUsd:
+                    type: string
+                ggr:
+                    type: string
+                ggrUsd:
+                    type: string
+                rtpPercentage:
+                    type: string
+                betCount:
+                    type: string
+                averageBetAmount:
+                    type: string
+        api.backoffice.service.v1.GetPlayerGameSummaryRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                groupOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameTypes:
+                    type: array
+                    items:
+                        type: string
+                gameTags:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.GetPlayerGameSummaryResponse:
             type: object
             properties:
                 turnover:
@@ -2879,19 +2956,12 @@ components:
                 averageBetAmount:
                     type: string
                 rtpPercentage:
-                    type: integer
-                    format: int32
+                    type: string
         api.backoffice.service.v1.GetSummaryRequest:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -2904,12 +2974,6 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
                 affiliateCodes:
                     type: array
                     items:
@@ -2926,9 +2990,11 @@ components:
             type: object
             properties:
                 visits:
-                    type: string
+                    type: integer
+                    format: int32
                 registeredUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 ftd:
                     type: string
                 ftdConversionRate:
@@ -2942,8 +3008,7 @@ components:
                 averageFtdAmount:
                     type: string
                 arpuToArppuPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 turnover:
                     type: string
                 bonus:
@@ -3077,7 +3142,6 @@ components:
             properties:
                 time:
                     type: string
-                    format: date-time
                 data:
                     $ref: '#/components/schemas/api.backoffice.service.v1.ActiveUsersData_Data'
         api.backoffice.service.v1.GetTimeRangedDashboardResponse_GameData:
@@ -3085,7 +3149,6 @@ components:
             properties:
                 time:
                     type: string
-                    format: date-time
                 data:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GameData_Data'
         api.backoffice.service.v1.GetTimeRangedDashboardResponse_PaymentData:
@@ -3093,7 +3156,6 @@ components:
             properties:
                 time:
                     type: string
-                    format: date-time
                 data:
                     $ref: '#/components/schemas/api.backoffice.service.v1.PaymentData_Data'
         api.backoffice.service.v1.GetTopOperatorsDashboardRequest:
@@ -3149,7 +3211,9 @@ components:
         api.backoffice.service.v1.GetTopOperatorsDashboardResponse_OperatorData:
             type: object
             properties:
-                operator:
+                operatorId:
+                    type: string
+                operatorName:
                     type: string
                 amount:
                     type: string
@@ -3189,7 +3253,7 @@ components:
                     format: int32
                 amount:
                     type: string
-                operator:
+                operatorName:
                     type: string
         api.backoffice.service.v1.GetUserBetsOverviewRequest:
             type: object
@@ -3247,13 +3311,25 @@ components:
                     type: string
         api.backoffice.service.v1.GetUserOverviewRequest:
             type: object
-            properties: {}
+            properties:
+                userId:
+                    type: string
+                filter:
+                    type: string
+                    description: |-
+                        filter options:
+                         - "today": Today's data
+                         - "this_week": This week's data
+                         - "this_month": This month's data
+                         - "recent_24h": Recent 24 hours data
+                         - "recent_30d": Recent 30 days data
+                         If not specified, returns all time data
         api.backoffice.service.v1.GetUserOverviewResponse:
             type: object
             properties:
-                balance:
-                    type: string
                 depositMinusWithdraw:
+                    type: string
+                turnover:
                     type: string
                 cashTurnover:
                     type: string
@@ -3264,7 +3340,8 @@ components:
                 lastDeposit:
                     type: string
                 depositCount:
-                    type: string
+                    type: integer
+                    format: int32
                 withdraw:
                     type: string
                 lastWithdraw:
@@ -3281,8 +3358,7 @@ components:
                 ggr:
                     type: string
                 ggrPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 manuallyAddedBalance:
                     type: string
                 bonusClaimed:
@@ -3290,34 +3366,17 @@ components:
                 ngr:
                     type: string
                 ggrToNgrPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 turnoverMultiplier:
-                    type: integer
-                    format: int32
+                    type: string
                 depositToWithdrawRatio:
-                    type: integer
-                    format: int32
-                rtpPercentage:
-                    type: integer
-                    format: int32
+                    type: string
+                rtp:
+                    type: string
                 gameData:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetUserOverviewResponse_GameData'
-                vpnUsed:
-                    type: boolean
-                has1xDepositsBeforeWd:
-                    type: boolean
-                moreThan2Deposits:
-                    type: boolean
-                accountOlderThan3Months:
-                    type: boolean
-                lastDepositAt:
-                    type: string
-                    format: date-time
-                firstWithdrawOnToday:
-                    type: boolean
         api.backoffice.service.v1.GetUserOverviewResponse_GameData:
             type: object
             properties:
@@ -3451,6 +3510,22 @@ components:
                     type: string
                 source:
                     type: string
+        api.backoffice.service.v1.GetUserTagsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                    description: The ID of the user to get tags for.
+            description: GetUserTagsRequest contains the user ID to retrieve tags for.
+        api.backoffice.service.v1.GetUserTagsResponse:
+            type: object
+            properties:
+                tags:
+                    type: array
+                    items:
+                        type: string
+                    description: List of active tags associated with the user.
+            description: GetUserTagsResponse contains the list of active tags associated with the user.
         api.backoffice.service.v1.GetWalletCreditTransactionsRequest:
             type: object
             properties:
@@ -3612,13 +3687,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -3635,31 +3704,102 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.GetWithdrawSummariesResponse:
+            type: object
+            properties:
+                withdrawSummaries:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesResponse_WithdrawSummary'
+        api.backoffice.service.v1.GetWithdrawSummariesResponse_WithdrawSummary:
+            type: object
+            properties:
+                date:
+                    type: string
+                currency:
+                    type: string
+                withdrawSuccessRate:
+                    type: string
+                withdrawAmount:
+                    type: string
+        api.backoffice.service.v1.ListAccountsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                roleId:
+                    type: string
+                operatorId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListAccountsResponse:
+            type: object
+            properties:
+                accounts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListAccountsResponse_Account'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListAccountsResponse_Account:
+            type: object
+            properties:
+                userId:
+                    type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                enabled:
+                    type: boolean
+                role:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.Role'
+                createdAt:
+                    type: string
+                    format: date-time
+        api.backoffice.service.v1.ListAuditLogsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                action:
+                    type: string
                 startTime:
                     type: string
                     format: date-time
                 endTime:
                     type: string
                     format: date-time
-        api.backoffice.service.v1.GetWithdrawSummariesResponse:
+                page:
+                    type: string
+                pageSize:
+                    type: string
+        api.backoffice.service.v1.ListAuditLogsResponse:
             type: object
             properties:
-                dailySummaries:
+                auditLogs:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesResponse_DailySummary'
-        api.backoffice.service.v1.GetWithdrawSummariesResponse_DailySummary:
-            type: object
-            properties:
-                date:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.AuditLog'
+                total:
                     type: string
-                    format: date-time
-                currency:
+                page:
                     type: string
-                withdrawSuccessPercentage:
-                    type: integer
-                    format: int32
-                withdrawAmount:
+                pageSize:
                     type: string
         api.backoffice.service.v1.ListBetsRequest:
             type: object
@@ -3692,6 +3832,12 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsRequest_CurrencyWithRange'
                 settlementCurrencies:
                     $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsRequest_Currencies'
+                categories:
+                    type: array
+                    items:
+                        type: string
+                status:
+                    type: string
                 page:
                     type: string
                 pageSize:
@@ -3759,170 +3905,11 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.ListDailySummariesRequest:
-            type: object
-            properties:
-                timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-                affiliateCodes:
-                    type: array
-                    items:
-                        type: string
-                referralCodes:
-                    type: array
-                    items:
-                        type: string
-                registrationCountries:
-                    type: array
-                    items:
-                        type: string
-                page:
-                    type: string
-                pageSize:
-                    type: string
-        api.backoffice.service.v1.ListDailySummariesResponse:
-            type: object
-            properties:
-                dailySummaries:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDailySummariesResponse_DailySummary'
-                page:
-                    type: string
-                pageSize:
-                    type: string
-                total:
-                    type: string
-        api.backoffice.service.v1.ListDailySummariesResponse_DailySummary:
-            type: object
-            properties:
-                date:
-                    type: string
-                    format: date-time
-                operator:
-                    type: string
-                country:
-                    type: string
-                visits:
-                    type: string
-                uniqueVisits:
-                    type: string
-                activeUsers:
-                    type: string
-                registeredUsers:
-                    type: string
-                depositedUsers:
-                    type: string
-                ftdUsers:
-                    type: string
-                repeatedDepositedUsers:
-                    type: string
-                depositConversionRate:
-                    type: string
-                depositCount:
-                    type: string
-                depositAmount:
-                    type: string
-                arpu:
-                    type: string
-                arppu:
-                    type: string
-                averageFtdAmount:
-                    type: string
-                withdrawAmount:
-                    type: string
-                withdrawedUsers:
-                    type: string
-                ftwUsers:
-                    type: string
-                averageWithdrawAmount:
-                    type: string
-                ftwAmount:
-                    type: string
-                averageFtwAmount:
-                    type: string
-                wuToAuPercentage:
-                    type: integer
-                    format: int32
-                wuToDuPercentage:
-                    type: integer
-                    format: int32
-                depositMinusWithdrawAmount:
-                    type: string
-                wToDPercentage:
-                    type: integer
-                    format: int32
-                turnover:
-                    type: string
-                depositBonus:
-                    type: string
-                rebateBonus:
-                    type: string
-                lossRebate:
-                    type: string
-                vipBonus:
-                    type: string
-                otherBonus:
-                    type: string
-                referralCommission:
-                    type: string
-                depositFeeSubsidyAmount:
-                    type: string
-                playerWithdrawFee:
-                    type: string
-                operatorWithdrawFee:
-                    type: string
-                cashBalance:
-                    type: string
-                bonusBalance:
-                    type: string
-                lockedBalance:
-                    type: string
-                ggr:
-                    type: string
-                ngr:
-                    type: string
-                ggrToNgrPercentage:
-                    type: integer
-                    format: int32
-                houseEdgePercentage:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListDepositDetailsRequest:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -3939,12 +3926,6 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
                 page:
                     type: integer
                     format: int32
@@ -3954,10 +3935,10 @@ components:
         api.backoffice.service.v1.ListDepositDetailsResponse:
             type: object
             properties:
-                dailyDetails:
+                details:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsResponse_DailyDetail'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsResponse_Detail'
                 page:
                     type: integer
                     format: int32
@@ -3967,61 +3948,66 @@ components:
                 total:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListDepositDetailsResponse_DailyDetail:
+        api.backoffice.service.v1.ListDepositDetailsResponse_Detail:
             type: object
             properties:
                 date:
                     type: string
-                    format: date-time
-                operator:
+                operatorName:
                     type: string
                 currency:
                     type: string
                 depositAmount:
+                    type: string
+                depositAmountUsd:
                     type: string
                 depositUsers:
                     type: integer
                     format: int32
                 ftdAmount:
                     type: string
-                ftdUsers:
+                ftdAmountUsd:
                     type: string
+                ftdUsers:
+                    type: integer
+                    format: int32
                 sameDayFtdAmount:
+                    type: string
+                sameDayFtdAmountUsd:
                     type: string
                 sameDayFtdUsers:
                     type: integer
                     format: int32
                 repeatedDepositAmount:
                     type: string
+                repeatedDepositAmountUsd:
+                    type: string
                 repeatedDepositUsers:
-                    type: string
+                    type: integer
+                    format: int32
                 sameDayFtd:
-                    type: string
+                    type: integer
+                    format: int32
                 nonSameDayFtd:
-                    type: string
+                    type: integer
+                    format: int32
                 averageFtdAmountForSameDayRegistredUsers:
-                    type: integer
-                    format: int32
+                    type: string
+                averageFtdAmountUsdForSameDayRegistredUsers:
+                    type: string
                 averageFtdAmountForNonSameDayRegistredUsers:
-                    type: integer
-                    format: int32
-                successPercentage:
-                    type: integer
-                    format: int32
-                amountProportionPercentage:
-                    type: integer
-                    format: int32
+                    type: string
+                averageFtdAmountUsdForNonSameDayRegistredUsers:
+                    type: string
+                successRate:
+                    type: string
+                amountProportion:
+                    type: string
         api.backoffice.service.v1.ListDepositVtgDetailsRequest:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -4038,12 +4024,6 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
                 page:
                     type: integer
                     format: int32
@@ -4056,7 +4036,7 @@ components:
                 dailyDetails:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse_DailyDetail'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse_Detail'
                 page:
                     type: integer
                     format: int32
@@ -4066,32 +4046,43 @@ components:
                 total:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListDepositVtgDetailsResponse_DailyDetail:
+        api.backoffice.service.v1.ListDepositVtgDetailsResponse_Detail:
             type: object
             properties:
                 date:
                     type: string
-                    format: date-time
-                operator:
+                week:
+                    type: string
+                month:
+                    type: string
+                operatorName:
                     type: string
                 currency:
                     type: string
                 depositAmount:
+                    type: string
+                depositAmountUsd:
                     type: string
                 depositUsers:
                     type: integer
                     format: int32
                 ftdAmount:
                     type: string
+                ftdAmountUsd:
+                    type: string
                 ftdUsers:
                     type: integer
                     format: int32
                 sameDayFtdAmount:
                     type: string
+                sameDayFtdAmountUsd:
+                    type: string
                 sameDayFtdUsers:
                     type: integer
                     format: int32
                 repeatedDepositAmount:
+                    type: string
+                repeatedDepositAmountUsd:
                     type: string
                 repeatedDepositUsers:
                     type: integer
@@ -4102,14 +4093,12 @@ components:
                     type: string
                 averageFtdAmountForSameDayRegistredUsers:
                     type: string
+                averageFtdAmountUsdForSameDayRegistredUsers:
+                    type: string
                 averageFtdAmountForNonSameDayRegistredUsers:
                     type: string
-                successPercentage:
-                    type: integer
-                    format: int32
-                amountProportionPercentage:
-                    type: integer
-                    format: int32
+                averageFtdAmountUsdForNonSameDayRegistredUsers:
+                    type: string
         api.backoffice.service.v1.ListFeeGroupsRequest:
             type: object
             properties: {}
@@ -4120,101 +4109,6 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.ListGameDataDailySummariesRequest:
-            type: object
-            properties:
-                timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                providerIds:
-                    type: array
-                    items:
-                        type: string
-                gameTypes:
-                    type: array
-                    items:
-                        type: string
-                gameNames:
-                    type: array
-                    items:
-                        type: string
-                gameIds:
-                    type: array
-                    items:
-                        type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-        api.backoffice.service.v1.ListGameDataDailySummariesResponse:
-            type: object
-            properties:
-                dailySummaries:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataDailySummariesResponse_DailySummary'
-                page:
-                    type: string
-                pageSize:
-                    type: string
-                total:
-                    type: string
-        api.backoffice.service.v1.ListGameDataDailySummariesResponse_DailySummary:
-            type: object
-            properties:
-                date:
-                    type: string
-                    format: date-time
-                operator:
-                    type: string
-                provider:
-                    type: string
-                gameType:
-                    type: string
-                gameName:
-                    type: string
-                gameId:
-                    type: string
-                playerCount:
-                    type: string
-                turnover:
-                    type: string
-                turnoverPercentage:
-                    type: integer
-                    format: int32
-                winAmount:
-                    type: string
-                ggr:
-                    type: string
-                ggrPercentage:
-                    type: integer
-                    format: int32
-                betCount:
-                    type: string
-                averageBetAmount:
-                    type: string
-                rtpPercentage:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListGamesRequest:
             type: object
             properties:
@@ -4402,6 +4296,339 @@ components:
                     format: int32
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.ListRegisterRetentionRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                groupOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListRegisterRetentionResponse:
+            type: object
+            properties:
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListRegisterRetentionResponse_List:
+            type: object
+            properties:
+                date:
+                    type: string
+                operatorName:
+                    type: string
+                regUsers:
+                    type: integer
+                    format: int32
+                paidUsers:
+                    type: integer
+                    format: int32
+                activeUsers:
+                    type: integer
+                    format: int32
+                depositConvertionRate:
+                    type: integer
+                    format: int32
+                arppu:
+                    type: integer
+                    format: int32
+                d1ActiveUsers:
+                    type: integer
+                    format: int32
+                d2ActiveUsers:
+                    type: integer
+                    format: int32
+                d3ActiveUsers:
+                    type: integer
+                    format: int32
+                d4ActiveUsers:
+                    type: integer
+                    format: int32
+                d5ActiveUsers:
+                    type: integer
+                    format: int32
+                d6ActiveUsers:
+                    type: integer
+                    format: int32
+                d7ActiveUsers:
+                    type: integer
+                    format: int32
+                d15ActiveUsers:
+                    type: integer
+                    format: int32
+                d30ActiveUsers:
+                    type: integer
+                    format: int32
+                d45ActiveUsers:
+                    type: integer
+                    format: int32
+                d60ActiveUsers:
+                    type: integer
+                    format: int32
+                d120ActiveUsers:
+                    type: integer
+                    format: int32
+                d1PaidUsers:
+                    type: integer
+                    format: int32
+                d2PaidUsers:
+                    type: integer
+                    format: int32
+                d3PaidUsers:
+                    type: integer
+                    format: int32
+                d4PaidUsers:
+                    type: integer
+                    format: int32
+                d5PaidUsers:
+                    type: integer
+                    format: int32
+                d6PaidUsers:
+                    type: integer
+                    format: int32
+                d7PaidUsers:
+                    type: integer
+                    format: int32
+                d15PaidUsers:
+                    type: integer
+                    format: int32
+                d30PaidUsers:
+                    type: integer
+                    format: int32
+                d45PaidUsers:
+                    type: integer
+                    format: int32
+                d60PaidUsers:
+                    type: integer
+                    format: int32
+                d120PaidUsers:
+                    type: integer
+                    format: int32
+                d1PaidAmt:
+                    type: string
+                d2PaidAmt:
+                    type: string
+                d3PaidAmt:
+                    type: string
+                d4PaidAmt:
+                    type: string
+                d5PaidAmt:
+                    type: string
+                d6PaidAmt:
+                    type: string
+                d7PaidAmt:
+                    type: string
+                d15PaidAmt:
+                    type: string
+                d30PaidAmt:
+                    type: string
+                d45PaidAmt:
+                    type: string
+                d60PaidAmt:
+                    type: string
+                d120PaidAmt:
+                    type: string
+        api.backoffice.service.v1.ListRolesRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListRolesResponse:
+            type: object
+            properties:
+                roles:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.Role'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListSummariesRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                groupOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                affiliateCodes:
+                    type: array
+                    items:
+                        type: string
+                referralCodes:
+                    type: array
+                    items:
+                        type: string
+                registrationCountries:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListSummariesResponse:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListSummariesResponse_List:
+            type: object
+            properties:
+                date:
+                    type: string
+                operatorName:
+                    type: string
+                country:
+                    type: string
+                visits:
+                    type: string
+                uniqueVisits:
+                    type: string
+                activeUsers:
+                    type: integer
+                    format: int32
+                registeredUsers:
+                    type: integer
+                    format: int32
+                depositedUsers:
+                    type: integer
+                    format: int32
+                ftdUsers:
+                    type: integer
+                    format: int32
+                repeatedDepositedUsers:
+                    type: integer
+                    format: int32
+                depositConversionRate:
+                    type: string
+                depositCount:
+                    type: integer
+                    format: int32
+                depositAmount:
+                    type: string
+                arpu:
+                    type: string
+                arppu:
+                    type: string
+                averageFtdAmount:
+                    type: string
+                withdrawAmount:
+                    type: string
+                withdrawedUsers:
+                    type: integer
+                    format: int32
+                ftwUsers:
+                    type: integer
+                    format: int32
+                averageWithdrawAmount:
+                    type: string
+                ftwAmount:
+                    type: string
+                averageFtwAmount:
+                    type: string
+                wuToAuPercentage:
+                    type: integer
+                    format: int32
+                wuToDuPercentage:
+                    type: integer
+                    format: int32
+                depositMinusWithdrawAmount:
+                    type: string
+                wToDPercentage:
+                    type: integer
+                    format: int32
+                turnover:
+                    type: string
+                depositBonus:
+                    type: string
+                rebateBonus:
+                    type: string
+                lossRebate:
+                    type: string
+                vipBonus:
+                    type: string
+                otherBonus:
+                    type: string
+                referralCommission:
+                    type: string
+                depositFeeSubsidyAmount:
+                    type: string
+                playerWithdrawFee:
+                    type: string
+                operatorWithdrawFee:
+                    type: string
+                cashBalance:
+                    type: string
+                bonusBalance:
+                    type: string
+                lockedBalance:
+                    type: string
+                ggr:
+                    type: string
+                ngr:
+                    type: string
+                ggrToNgrPercentage:
+                    type: string
+                houseEdgePercentage:
+                    type: string
         api.backoffice.service.v1.ListSystemCurrenciesRequest:
             type: object
             properties:
@@ -4420,6 +4647,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.SystemCurrency'
+                total:
+                    type: integer
+                    format: int32
+                totalEnabled:
+                    type: integer
+                    format: int32
+                totalHidden:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListTagsRequest:
             type: object
             properties: {}
@@ -4626,9 +4862,10 @@ components:
                     type: boolean
                 banLogin:
                     type: boolean
+                online:
+                    type: boolean
                 page:
                     type: integer
-                    description: optional bool online = 21;
                     format: int32
                 pageSize:
                     type: integer
@@ -4686,9 +4923,10 @@ components:
                     type: boolean
                 banLogin:
                     type: boolean
+                online:
+                    type: boolean
                 lastLoginAt:
                     type: string
-                    description: bool online = 16;
                     format: date-time
                 registeredAt:
                     type: string
@@ -4786,7 +5024,7 @@ components:
                 vipLevel:
                     type: integer
                     format: int32
-                change:
+                changeBalance:
                     type: string
                 beforeBalance:
                     type: string
@@ -4798,13 +5036,7 @@ components:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -4821,12 +5053,6 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
                 page:
                     type: integer
                     format: int32
@@ -4836,10 +5062,10 @@ components:
         api.backoffice.service.v1.ListWithdrawDetailsResponse:
             type: object
             properties:
-                dailyDetails:
+                details:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsResponse_DailyDetail'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsResponse_Detail'
                 page:
                     type: integer
                     format: int32
@@ -4849,65 +5075,70 @@ components:
                 total:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListWithdrawDetailsResponse_DailyDetail:
+        api.backoffice.service.v1.ListWithdrawDetailsResponse_Detail:
             type: object
             properties:
                 date:
                     type: string
-                    format: date-time
-                operator:
+                operatorName:
                     type: string
                 currency:
                     type: string
                 withdrawAmount:
+                    type: string
+                withdrawAmountUsd:
                     type: string
                 withdrawUsers:
                     type: integer
                     format: int32
                 ftwAmount:
                     type: string
+                ftwAmountUsd:
+                    type: string
                 ftwUsers:
                     type: integer
                     format: int32
                 sameDayFtwAmount:
+                    type: string
+                sameDayFtwAmountUsd:
                     type: string
                 sameDayFtwUsers:
                     type: integer
                     format: int32
                 repeatedWithdrawAmount:
                     type: string
+                repeatedWithdrawAmountUsd:
+                    type: string
                 repeatedWithdrawUsers:
                     type: integer
                     format: int32
                 sameDayFtw:
-                    type: string
+                    type: integer
+                    format: int32
                 nonSameDayFtw:
-                    type: string
+                    type: integer
+                    format: int32
                 averageFtwAmountForSameDayRegistredUsers:
-                    type: integer
-                    format: int32
+                    type: string
+                averageFtwAmountUsdForSameDayRegistredUsers:
+                    type: string
                 averageFtwAmountForNonSameDayRegistredUsers:
-                    type: integer
-                    format: int32
-                successPercentage:
-                    type: integer
-                    format: int32
+                    type: string
+                averageFtwAmountUsdForNonSameDayRegistredUsers:
+                    type: string
+                successRate:
+                    type: string
                 depositMinusWithdrawAmount:
                     type: string
-                amountProportionPercentage:
-                    type: integer
-                    format: int32
+                depositMinusWithdrawAmountUsd:
+                    type: string
+                amountProportion:
+                    type: string
         api.backoffice.service.v1.ListWithdrawVtgDetailsRequest:
             type: object
             properties:
                 timeRange:
-                    enum:
-                        - TIME_RANGE_UNSPECIFIED
-                        - TIME_RANGE_TODAY
-                        - TIME_RANGE_WEEK
-                        - TIME_RANGE_MONTH
-                    type: string
-                    format: enum
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 retailerOperatorIds:
                     type: array
                     items:
@@ -4924,12 +5155,6 @@ components:
                     type: array
                     items:
                         type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
                 page:
                     type: integer
                     format: int32
@@ -4942,7 +5167,7 @@ components:
                 dailyDetails:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse_DailyDetail'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse_Detail'
                 page:
                     type: integer
                     format: int32
@@ -4952,32 +5177,39 @@ components:
                 total:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListWithdrawVtgDetailsResponse_DailyDetail:
+        api.backoffice.service.v1.ListWithdrawVtgDetailsResponse_Detail:
             type: object
             properties:
                 date:
                     type: string
-                    format: date-time
-                operator:
+                operatorName:
                     type: string
                 currency:
                     type: string
                 withdrawAmount:
+                    type: string
+                withdrawAmountUsd:
                     type: string
                 withdrawUsers:
                     type: integer
                     format: int32
                 ftwAmount:
                     type: string
+                ftwAmountUsd:
+                    type: string
                 ftwUsers:
                     type: integer
                     format: int32
                 sameDayFtwAmount:
                     type: string
+                sameDayFtwAmountUsd:
+                    type: string
                 sameDayFtwUsers:
                     type: integer
                     format: int32
                 repeatedWithdrawAmount:
+                    type: string
+                repeatedWithdrawAmountUsd:
                     type: string
                 repeatedWithdrawUsers:
                     type: integer
@@ -4988,16 +5220,16 @@ components:
                     type: string
                 averageFtwAmountForSameDayRegistredUsers:
                     type: string
+                averageFtwAmountUsdForSameDayRegistredUsers:
+                    type: string
                 averageFtwAmountForNonSameDayRegistredUsers:
                     type: string
-                successPercentage:
-                    type: integer
-                    format: int32
+                averageFtwAmountUsdForNonSameDayRegistredUsers:
+                    type: string
                 depositMinusWithdrawAmount:
                     type: string
-                amountProportionPercentage:
-                    type: integer
-                    format: int32
+                depositMinusWithdrawAmountUsd:
+                    type: string
         api.backoffice.service.v1.LoginRequest:
             type: object
             properties:
@@ -5017,6 +5249,23 @@ components:
                     type: string
                 withdrawal:
                     type: string
+        api.backoffice.service.v1.Permission:
+            type: object
+            properties:
+                groupId:
+                    type: string
+                groupName:
+                    type: string
+                    description: 'group name: dashboard, game, user, finance, report, system, etc.'
+                actions:
+                    type: array
+                    items:
+                        type: string
+                    description: 'action name: read, write, delete, etc.'
+                apiPaths:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.RegisterRequest:
             type: object
             properties:
@@ -5055,6 +5304,17 @@ components:
         api.backoffice.service.v1.ReviewTicketResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.Role:
+            type: object
+            properties:
+                name:
+                    type: string
+                roleId:
+                    type: string
+                permissions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.Permission'
         api.backoffice.service.v1.SendEmailVerificationCodeRequest:
             type: object
             properties:
@@ -5083,6 +5343,48 @@ components:
         api.backoffice.service.v1.SendRegisterVerificationCodeResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.SetOperatorTagsConfigRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                    description: The ID of the operator to set tag configuration for.
+                followParent:
+                    type: boolean
+                    description: Whether to follow parent operator's tags.
+            description: SetOperatorTagsConfigRequest contains the operator ID.
+        api.backoffice.service.v1.SetOperatorTagsConfigResponse:
+            type: object
+            properties: {}
+            description: SetOperatorTagsConfigResponse is an empty message indicating successful tag configuration.
+        api.backoffice.service.v1.SetOperatorTagsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                    description: The ID of the operator to add the tag to.
+                tags:
+                    type: array
+                    items:
+                        type: string
+                    description: The tag to add to the operator.
+            description: SetOperatorTagsRequest contains the operator ID and tag to add.
+        api.backoffice.service.v1.SetOperatorTagsResponse:
+            type: object
+            properties: {}
+            description: SetOperatorTagsResponse is an empty message indicating successful tag addition.
+        api.backoffice.service.v1.SetUserTagsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                tags:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.SetUserTagsResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.SystemCurrency:
             type: object
             properties:
@@ -5104,6 +5406,15 @@ components:
                 currencyDecimalPlaces:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.TimeRange:
+            type: object
+            properties:
+                type:
+                    type: string
+                startTime:
+                    type: string
+                endTime:
+                    type: string
         api.backoffice.service.v1.Unbind2faRequest:
             type: object
             properties:
@@ -5119,7 +5430,7 @@ components:
                     type: string
                 enabled:
                     type: boolean
-                role:
+                roleId:
                     type: string
         api.backoffice.service.v1.UpdateAccountResponse:
             type: object
@@ -5862,91 +6173,6 @@ components:
                 lobbyUrl:
                     type: string
                     description: URL to redirect user to lobby.
-        api.operator.service.v1.AddOperatorRequest:
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: operator name
-                userId:
-                    type: string
-                    description: user id who creates the operator
-        api.operator.service.v1.AddOperatorResponse:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                    description: operator id allocated by operator service
-        api.operator.service.v1.AddOriginOperatorIdRequest:
-            type: object
-            properties:
-                origin:
-                    type: string
-                operatorId:
-                    type: string
-        api.operator.service.v1.AddOriginOperatorIdResponse:
-            type: object
-            properties: {}
-        api.operator.service.v1.DeleteOriginOperatorIdRequest:
-            type: object
-            properties:
-                origin:
-                    type: string
-        api.operator.service.v1.DeleteOriginOperatorIdResponse:
-            type: object
-            properties: {}
-        api.operator.service.v1.GetOperatorCurrenciesRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                    description: |-
-                        Filter to return specific currencies only.
-                         If empty or not provided, all currencies will be returned
-        api.operator.service.v1.GetOperatorCurrenciesResponse:
-            type: object
-            properties:
-                currencies:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.operator.service.v1.GetOperatorCurrenciesResponse_Currency'
-        api.operator.service.v1.GetOperatorCurrenciesResponse_Currency:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-        api.operator.service.v1.UpdateOperatorCurrencyRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-        api.operator.service.v1.UpdateOperatorCurrencyResponse:
-            type: object
-            properties: {}
-        api.operator.service.v1.UpdateOperatorRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                    description: operator id allocated by operator service
-                enabled:
-                    type: boolean
-                    description: enabled
-        api.operator.service.v1.UpdateOperatorResponse:
-            type: object
-            properties: {}
         api.review.service.v1.CreateWithdrawRequest:
             type: object
             properties:
@@ -5965,34 +6191,6 @@ components:
         api.user.service.v1.AddOperatorResponse:
             type: object
             properties: {}
-        api.user.service.v1.AddOperatorTagRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                    description: The ID of the operator to add the tag to.
-                tag:
-                    type: string
-                    description: The tag to add to the operator.
-            description: AddOperatorTagRequest contains the operator ID and tag to add.
-        api.user.service.v1.AddOperatorTagResponse:
-            type: object
-            properties: {}
-            description: AddOperatorTagResponse is an empty message indicating successful tag addition.
-        api.user.service.v1.AddUserTagRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                    description: The ID of the user to add the tag to.
-                tag:
-                    type: string
-                    description: The tag to add to the user.
-            description: AddUserTagRequest contains the user ID and tag to add.
-        api.user.service.v1.AddUserTagResponse:
-            type: object
-            properties: {}
-            description: AddUserTagResponse is an empty message indicating successful tag addition.
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -6010,64 +6208,6 @@ components:
                         - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
                     description: Basic information about the authenticated user.
             description: AuthResponse contains the authentication tokens and user information.
-        api.user.service.v1.DeleteOperatorTagRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                    description: The ID of the operator to delete the tag from.
-                tag:
-                    type: string
-                    description: The tag to delete from the operator.
-            description: DeleteOperatorTagRequest contains the operator ID and tag to soft delete.
-        api.user.service.v1.DeleteOperatorTagResponse:
-            type: object
-            properties: {}
-            description: DeleteOperatorTagResponse is an empty message indicating successful tag deletion.
-        api.user.service.v1.DeleteUserTagRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                    description: The ID of the user to delete the tag from.
-                tag:
-                    type: string
-                    description: The tag to delete from the user.
-            description: DeleteUserTagRequest contains the user ID and tag to soft delete.
-        api.user.service.v1.DeleteUserTagResponse:
-            type: object
-            properties: {}
-            description: DeleteUserTagResponse is an empty message indicating successful tag deletion.
-        api.user.service.v1.GetOperatorTagConfigRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                    description: The ID of the operator to get tag configuration for.
-            description: GetOperatorTagConfigRequest contains the operator ID to retrieve tag configuration.
-        api.user.service.v1.GetOperatorTagConfigResponse:
-            type: object
-            properties:
-                followParent:
-                    type: boolean
-                    description: Whether the operator should follow parent operator's tags.
-            description: GetOperatorTagConfigResponse contains the tag configuration settings, now only follow_parent flag.
-        api.user.service.v1.GetOperatorTagsRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                    description: The ID of the operator to get tags for.
-            description: GetOperatorTagsRequest contains the operator ID to retrieve tags for.
-        api.user.service.v1.GetOperatorTagsResponse:
-            type: object
-            properties:
-                tags:
-                    type: array
-                    items:
-                        type: string
-                    description: List of tags associated with the operator.
-            description: GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
@@ -6085,11 +6225,8 @@ components:
             description: GetUserResponse contains the requested user's information.
         api.user.service.v1.GetUserTagsRequest:
             type: object
-            properties:
-                userId:
-                    type: string
-                    description: The ID of the user to get tags for.
-            description: GetUserTagsRequest contains the user ID to retrieve tags for.
+            properties: {}
+            description: GetUserTagsRequest retrieve tags for the current user.
         api.user.service.v1.GetUserTagsResponse:
             type: object
             properties:
@@ -6189,23 +6326,6 @@ components:
         api.user.service.v1.SendEmailVerificationCodeResponse:
             type: object
             properties: {}
-        api.user.service.v1.SetOperatorTagConfigRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                    description: The ID of the operator to set tag configuration for.
-                followParent:
-                    type: boolean
-                    description: Whether to follow parent operator's tags.
-            description: SetOperatorTagConfigRequest contains the operator ID.
-        api.user.service.v1.SetOperatorTagConfigResponse:
-            type: object
-            properties:
-                followParent:
-                    type: boolean
-                    description: The updated follow_parent setting.
-            description: SetOperatorTagConfigResponse contains the updated tag configuration, now only follow_parent flag.
         api.user.service.v1.TelegramAuthRequest:
             type: object
             properties:
@@ -6270,29 +6390,10 @@ components:
                 banWithdraw:
                     type: boolean
                     description: BanWithdraw
+                roleId:
+                    type: string
+                    description: role id
             description: UserInfo contains basic user information.
-        api.wallet.service.v1.GetUserBalanceRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                currency:
-                    type: string
-                settlementCurrency:
-                    type: string
-                    description: optional target currency
-        api.wallet.service.v1.GetUserBalanceResponse:
-            type: object
-            properties:
-                exchangeRate:
-                    type: string
-                    description: optional exchange rate between currency and target currency
-                cash:
-                    type: string
-                operatorBonus:
-                    type: string
-                providerBonus:
-                    type: string
         api.wallet.service.v1.GetUserBalancesRequest:
             type: object
             properties:
@@ -6316,18 +6417,6 @@ components:
                     type: string
                 providerBonus:
                     type: string
-        api.wallet.service.v1.UpdateUserCurrencyRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-        api.wallet.service.v1.UpdateUserCurrencyResponse:
-            type: object
-            properties: {}
         payment.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
@@ -6962,6 +7051,7 @@ components:
                  Confirms receipt of callback notification
 tags:
     - name: BackofficeAccount
+    - name: BackofficeAudit
     - name: BackofficeDashboard
     - name: BackofficeGame
     - name: BackofficeOperator
@@ -6975,8 +7065,6 @@ tags:
     - name: BackofficeUser
     - name: BackofficeWallet
     - name: Game
-    - name: Operator
-      description: User service provides authentication and user management functionality.
     - name: Payment
       description: |-
         Payment Service

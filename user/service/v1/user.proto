@@ -81,70 +81,41 @@ service User {
 	rpc IsTokenRevoked (IsTokenRevokedRequest) returns (IsTokenRevokedResponse) {
 	}
 
-	// GetOperatorTagConfig returns follow-parent flag for the given operator ID.
-	rpc GetOperatorTagConfig(GetOperatorTagConfigRequest) returns (GetOperatorTagConfigResponse) {
-		option (google.api.http) = {
-			post: "/v1/user/operators/tag-config/get"
-			body: "*"
-		};
-	}
-
 	// SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
 	// It will reverse the follow_parent flag if the record exists.
 	// If the record doesn't exist, it will create a new one with follow_parent set to false.
-	rpc SetOperatorTagConfig(SetOperatorTagConfigRequest) returns (SetOperatorTagConfigResponse) {
-		option (google.api.http) = {
-			post: "/v1/user/operators/tag-config/set"
-			body: "*"
-		};
+	rpc SetOperatorTagsConfig(SetOperatorTagsConfigRequest) returns (SetOperatorTagsConfigResponse) {
 	}
 
-	// AddOperatorTag adds a new tag to an operator if follow_parent is false.
-	rpc AddOperatorTag(AddOperatorTagRequest) returns (AddOperatorTagResponse) {
-		option (google.api.http) = {
-			post: "/v1/user/operators/tags/add"
-			body: "*"
-		};
+	// SetOperatorTags sets or updates the tags for an operator.
+	rpc SetOperatorTags(SetOperatorTagsRequest) returns (SetOperatorTagsResponse) {
 	}
+
+	// GetOperatorTagConfig returns follow-parent flag for the given operator ID.
+	rpc GetOperatorTagsConfig(GetOperatorTagsConfigRequest) returns (GetOperatorTagsConfigResponse) {}
 
 	// GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
 	rpc GetOperatorTags(GetOperatorTagsRequest) returns (GetOperatorTagsResponse) {
-		option (google.api.http) = {
-			post: "/v1/user/operators/tags/get"
-			body: "*"
-		};
 	}
 
-	// DeleteOperatorTag soft deletes a specific tag from an operator.
-	rpc DeleteOperatorTag(DeleteOperatorTagRequest) returns (DeleteOperatorTagResponse) {
-		option (google.api.http) = {
-			post: "/v1/user/operators/tags/delete"
-			body: "*"
-		};
-	}
-
-	// AddUserTag adds a new tag to a user.
-	rpc AddUserTag (AddUserTagRequest) returns (AddUserTagResponse) {
-		option (google.api.http) = {
-			post: "/v1/user/tags/add"
-			body: "*"
-		};
-	}
-
-	// DeleteUserTag soft deletes a tag from a user.
-	rpc DeleteUserTag (DeleteUserTagRequest) returns (DeleteUserTagResponse) {
-		option (google.api.http) = {
-			post: "/v1/user/tags/delete"
-			body: "*"
-		};
-	}
-
-	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
+	// GetUserTags retrieves all active tags associated for the current user
+	// and also exists in the related operator's tag list.
 	rpc GetUserTags (GetUserTagsRequest) returns (GetUserTagsResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/tags/get"
 			body: "*"
 		};
+	}
+
+	// GetUserTagsById is an internal API to retrieve the tags of given user.
+	// It's used by GetUserTags() in user-service for the current user and
+	// also by GetUserTags() in backoffice-service for the given user.
+	rpc GetUserTagsById (GetUserTagsByIdRequest) returns (GetUserTagsByIdResponse) {
+	}
+
+	// SetUserTagsById is an internal API to set the tags of given user.
+	// It's used by SetUserTags() in backoffice-service for the given user.
+	rpc SetUserTagsById(SetUserTagsByIdRequest) returns (SetUserTagsByIdResponse) {
 	}
 
 	rpc CheckPermission (CheckPermissionRequest) returns (CheckPermissionResponse) {
@@ -163,22 +134,31 @@ service User {
 			body: "*"
 		};
 	}
-	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
-	}
+	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
 
-	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
-	}
-	rpc CreateGroupUser(CreateGroupUserRequest) returns (CreateGroupUserResponse) {
-	}
-	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {
-	}
-	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {
-	}
+	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
 
-	rpc GetCommentsByUserId(GetCommentsByUserIdRequest) returns (GetCommentsByUserIdResponse) {
-	}
-	rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse) {
-	}
+	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
+
+	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {}
+	
+	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
+
+	rpc GetCommentsByUserId(GetCommentsByUserIdRequest) returns (GetCommentsByUserIdResponse) {}
+
+	rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse) {}
+
+	rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {}
+
+	rpc ListRoles(ListRolesRequest) returns (ListRolesResponse) {}
+
+	rpc CreateOperator(CreateOperatorRequest) returns (CreateOperatorResponse) {}
+
+	rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse) {}
+
+	rpc GetRole(GetRoleRequest) returns (GetRoleResponse) {}
+
+	rpc GetOverviewDashboardFromUser(GetOverviewDashboardFromUserRequest) returns (GetOverviewDashboardFromUserResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -207,6 +187,8 @@ message UserInfo {
 	bool ban_game = 11;
 	// BanWithdraw
 	bool ban_withdraw = 12;
+	// role id
+	int64 role_id = 13;
 }
 
 // AuthType defines the type of authentication method.
@@ -361,42 +343,39 @@ message IsTokenRevokedResponse {
 	bool revoked = 1;
 }
 
-// GetOperatorTagConfigRequest contains the operator ID to retrieve tag configuration.
-message GetOperatorTagConfigRequest {
-	// The ID of the operator to get tag configuration for.
-	int64 operator_id = 1;
-}
-
-// GetOperatorTagConfigResponse contains the tag configuration settings, now only follow_parent flag.
-message GetOperatorTagConfigResponse {
-	// Whether the operator should follow parent operator's tags.
-	bool follow_parent = 1;
-}
-
-// SetOperatorTagConfigRequest contains the operator ID.
-message SetOperatorTagConfigRequest {
+// SetOperatorTagsConfigRequest contains the operator ID.
+message SetOperatorTagsConfigRequest {
 	// The ID of the operator to set tag configuration for.
 	int64 operator_id = 1;
 	// Whether to follow parent operator's tags.
 	bool follow_parent = 2;
 }
 
-// SetOperatorTagConfigResponse contains the updated tag configuration, now only follow_parent flag.
-message SetOperatorTagConfigResponse {
-	// The updated follow_parent setting.
-	bool follow_parent = 1;
-}
+// SetOperatorTagsConfigResponse is an empty message indicating successful tag configuration.
+message SetOperatorTagsConfigResponse {}
 
-// AddOperatorTagRequest contains the operator ID and tag to add.
-message AddOperatorTagRequest {
+// SetOperatorTagsRequest contains the operator ID and tag to add.
+message SetOperatorTagsRequest {
 	// The ID of the operator to add the tag to.
 	int64 operator_id = 1;
 	// The tag to add to the operator.
-	string tag = 2;
+	repeated string tags = 2;
 }
 
-// AddOperatorTagResponse is an empty message indicating successful tag addition.
-message AddOperatorTagResponse {}
+// SetOperatorTagsResponse is an empty message indicating successful tag addition.
+message SetOperatorTagsResponse {}
+
+// GetOperatorTagsConfigRequest contains the operator ID to retrieve tag configuration.
+message GetOperatorTagsConfigRequest {
+	// The ID of the operator to get tag configuration for.
+	int64 operator_id = 1;
+}
+
+// GetOperatorTagsConfigResponse contains the tag configuration settings, now only follow_parent flag.
+message GetOperatorTagsConfigResponse {
+	// Whether the operator should follow parent operator's tags.
+	bool follow_parent = 1;
+}
 
 // GetOperatorTagsRequest contains the operator ID to retrieve tags for.
 message GetOperatorTagsRequest {
@@ -410,50 +389,34 @@ message GetOperatorTagsResponse {
 	repeated string tags = 1;
 }
 
-// DeleteOperatorTagRequest contains the operator ID and tag to soft delete.
-message DeleteOperatorTagRequest {
-	// The ID of the operator to delete the tag from.
-	int64 operator_id = 1;
-	// The tag to delete from the operator.
-	string tag = 2;
-}
-
-// DeleteOperatorTagResponse is an empty message indicating successful tag deletion.
-message DeleteOperatorTagResponse {}
-
-// AddUserTagRequest contains the user ID and tag to add.
-message AddUserTagRequest {
-	// The ID of the user to add the tag to.
-	int64 user_id = 1;
-	// The tag to add to the user.
-	string tag = 2;
-}
-
-// AddUserTagResponse is an empty message indicating successful tag addition.
-message AddUserTagResponse {}
-
-// DeleteUserTagRequest contains the user ID and tag to soft delete.
-message DeleteUserTagRequest {
-	// The ID of the user to delete the tag from.
-	int64 user_id = 1;
-	// The tag to delete from the user.
-	string tag = 2;
-}
-
-// DeleteUserTagResponse is an empty message indicating successful tag deletion.
-message DeleteUserTagResponse {}
-
-// GetUserTagsRequest contains the user ID to retrieve tags for.
-message GetUserTagsRequest {
-	// The ID of the user to get tags for.
-	int64 user_id = 1;
-}
+// GetUserTagsRequest retrieve tags for the current user.
+message GetUserTagsRequest {}
 
 // GetUserTagsResponse contains the list of active tags associated with the user.
 message GetUserTagsResponse {
 	// List of active tags associated with the user.
 	repeated string tags = 1;
 }
+
+
+// GetUserTagsByIdRequest contains the user ID to retrieve tags for.
+message GetUserTagsByIdRequest {
+	// The ID of the user to get tags for.
+	int64 user_id = 1;
+}
+
+// GetUserTagsByIdResponse contains the list of active tags associated with the user.
+message GetUserTagsByIdResponse {
+	// List of active tags associated with the user.
+	repeated string tags = 1;
+}
+
+message SetUserTagsByIdRequest {
+	int64 user_id = 1;
+	repeated string tags = 2;
+}
+
+message SetUserTagsByIdResponse {}
 
 message CheckPermissionRequest {
 	string path = 1;
@@ -485,6 +448,8 @@ message UpdateUserRequest {
 	optional bool ban_login = 4;
 	optional bool ban_game = 5;
 	optional bool ban_withdraw = 6;
+	optional bool enabled = 7;
+	optional int64 role_id = 8;
 }
 
 message UpdateUserResponse {
@@ -511,9 +476,11 @@ message ListUsersRequest {
 	optional bool ban_withdraw = 18;
 	optional bool ban_game = 19;
 	optional bool ban_login = 20;
-	// optional bool online = 21;
-	optional int32 page = 22;
-	optional int32 page_size = 23;
+	optional string user_type = 21;
+	optional int64 role_id = 22;
+	optional bool online = 23;
+	optional int32 page = 24;
+	optional int32 page_size = 25;
 }
 
 message ListUsersResponse {
@@ -533,7 +500,7 @@ message ListUsersResponse {
 		bool ban_withdraw = 13;
 		bool ban_game = 14;
 		bool ban_login = 15;
-		// bool online = 16;
+		bool online = 16;
 		google.protobuf.Timestamp last_login_at = 17;
 		google.protobuf.Timestamp registered_at = 18;
 		// int32 risk_level = 19;
@@ -543,6 +510,9 @@ message ListUsersResponse {
 		// string device = 23;
 		// string source = 24;
 		string registration_ip = 25;
+		bool enabled = 26;
+		google.protobuf.Timestamp created_at = 27;
+		Role role = 28;
 	}
 	repeated User users = 1;
 	int32 page = 2;
@@ -550,14 +520,15 @@ message ListUsersResponse {
 	int32 total = 4;
 }
 
-message CreateGroupUserRequest {
+message CreateUserRequest {
 	string username = 1;
 	string password = 2;
 	string email = 3;
 	string mobile = 4;
+	int64 operator_id = 5;
 }
 
-message CreateGroupUserResponse {}
+message CreateUserResponse {}
 
 message VerifyEmailRequest {
 	string email = 1;
@@ -635,7 +606,7 @@ message GetUserProfileResponse {
 	string nickname = 1;
 	int64 user_id = 2;
 	int32 vip_level = 3; // Not available for now, only return 1
-	bool online = 4; // Not available for now, only return true
+	bool online = 4;
 	bool ban_withdraw = 5;
 	bool ban_game = 6;
 	bool ban_login = 7;
@@ -646,4 +617,90 @@ message GetUserProfileResponse {
 	int32 total_login_count = 12;
 	int32 login_page = 13;
 	int32 login_page_size = 14;
+}
+
+message CreateRoleRequest {
+	string name = 1;
+	repeated Permission permissions = 2;
+	int64 user_id = 3;
+}
+
+message Permission {
+	int64 group_id = 1;
+	string group_name = 2;
+	repeated string actions = 3;
+	repeated string api_paths = 4;
+}
+
+message CreateRoleResponse {}
+
+message ListRolesRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+}
+
+message Role {
+	int64 role_id = 1;
+	string name = 2;
+	repeated Permission permissions = 3;
+}
+
+message ListRolesResponse {
+	repeated Role roles = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
+}
+enum OperatorType {
+	OPERATOR_TYPE_UNSPECIFIED = 0;
+	OPERATOR_TYPE_RETAILER = 1;
+	OPERATOR_TYPE_GROUP = 2;
+	OPERATOR_TYPE_OPERATOR = 3;
+}
+
+message CreateOperatorRequest {
+	string operator_name = 1;
+	OperatorType operator_type = 2;
+	optional int64 parent_operator_id = 3;
+}
+
+message CreateOperatorResponse {
+	int64 operator_id = 1;
+}
+
+message UpdateRoleRequest {
+	int64 role_id = 1;
+	string name = 2;
+	repeated Permission permissions = 3;
+}
+
+message UpdateRoleResponse {}
+
+message GetRoleRequest {
+	int64 role_id = 1;
+}
+
+message GetRoleResponse {
+	Role role = 1;
+}
+
+message GetOverviewDashboardFromUserRequest {
+}
+
+message GetOverviewDashboardFromUserResponse {
+	message RegisteredUsers {
+		int32 today = 1;
+		int32 yesterday = 2;
+	}
+	message FirstDepositUsers {
+		int32 today = 1;
+		int32 yesterday = 2;
+	}
+	message ActiveUsers {
+		int32 today = 1;
+		int32 yesterday = 2;
+	}
+	RegisteredUsers registered_users = 1;
+	FirstDepositUsers first_deposit_users = 2;
+	ActiveUsers active_users = 3;
 }
