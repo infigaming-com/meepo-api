@@ -28,11 +28,11 @@ func IsUserInfoNotFoundInContext(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT.String() && e.Code == 401
+	return e.Reason == ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT.String() && e.Code == 500
 }
 
 func ErrorUserInfoNotFoundInContext(format string, args ...interface{}) *errors.Error {
-	return errors.New(401, ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
 }
 
 func IsRequestInfoNotFoundInContext(err error) bool {
@@ -40,11 +40,11 @@ func IsRequestInfoNotFoundInContext(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_REQUEST_INFO_NOT_FOUND_IN_CONTEXT.String() && e.Code == 401
+	return e.Reason == ErrorReason_REQUEST_INFO_NOT_FOUND_IN_CONTEXT.String() && e.Code == 500
 }
 
 func ErrorRequestInfoNotFoundInContext(format string, args ...interface{}) *errors.Error {
-	return errors.New(401, ErrorReason_REQUEST_INFO_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_REQUEST_INFO_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
 }
 
 func IsUserNotFound(err error) bool {
@@ -52,11 +52,11 @@ func IsUserNotFound(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_USER_NOT_FOUND.String() && e.Code == 404
+	return e.Reason == ErrorReason_USER_NOT_FOUND.String() && e.Code == 500
 }
 
 func ErrorUserNotFound(format string, args ...interface{}) *errors.Error {
-	return errors.New(404, ErrorReason_USER_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_USER_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
 
 func IsUserAuthNotFound(err error) bool {
@@ -64,11 +64,11 @@ func IsUserAuthNotFound(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_USER_AUTH_NOT_FOUND.String() && e.Code == 404
+	return e.Reason == ErrorReason_USER_AUTH_NOT_FOUND.String() && e.Code == 500
 }
 
 func ErrorUserAuthNotFound(format string, args ...interface{}) *errors.Error {
-	return errors.New(404, ErrorReason_USER_AUTH_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_USER_AUTH_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
 
 func IsUserAlreadyExists(err error) bool {
@@ -76,11 +76,11 @@ func IsUserAlreadyExists(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_USER_ALREADY_EXISTS.String() && e.Code == 409
+	return e.Reason == ErrorReason_USER_ALREADY_EXISTS.String() && e.Code == 500
 }
 
 func ErrorUserAlreadyExists(format string, args ...interface{}) *errors.Error {
-	return errors.New(409, ErrorReason_USER_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_USER_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
 }
 
 func IsRevokeTokenFailed(err error) bool {
@@ -232,11 +232,11 @@ func IsUserDisabled(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_USER_DISABLED.String() && e.Code == 401
+	return e.Reason == ErrorReason_USER_DISABLED.String() && e.Code == 500
 }
 
 func ErrorUserDisabled(format string, args ...interface{}) *errors.Error {
-	return errors.New(401, ErrorReason_USER_DISABLED.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_USER_DISABLED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsUserLoginBanned(err error) bool {
@@ -244,11 +244,11 @@ func IsUserLoginBanned(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_USER_LOGIN_BANNED.String() && e.Code == 401
+	return e.Reason == ErrorReason_USER_LOGIN_BANNED.String() && e.Code == 500
 }
 
 func ErrorUserLoginBanned(format string, args ...interface{}) *errors.Error {
-	return errors.New(401, ErrorReason_USER_LOGIN_BANNED.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_USER_LOGIN_BANNED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsInvalidUserPassword(err error) bool {
@@ -256,11 +256,11 @@ func IsInvalidUserPassword(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_INVALID_USER_PASSWORD.String() && e.Code == 401
+	return e.Reason == ErrorReason_INVALID_USER_PASSWORD.String() && e.Code == 500
 }
 
 func ErrorInvalidUserPassword(format string, args ...interface{}) *errors.Error {
-	return errors.New(401, ErrorReason_INVALID_USER_PASSWORD.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_INVALID_USER_PASSWORD.String(), fmt.Sprintf(format, args...))
 }
 
 func IsGetTokenWithRefreshTokenFailed(err error) bool {
@@ -304,11 +304,11 @@ func IsUsernameOrPasswordInvalid(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_USERNAME_OR_PASSWORD_INVALID.String() && e.Code == 401
+	return e.Reason == ErrorReason_USERNAME_OR_PASSWORD_INVALID.String() && e.Code == 500
 }
 
 func ErrorUsernameOrPasswordInvalid(format string, args ...interface{}) *errors.Error {
-	return errors.New(401, ErrorReason_USERNAME_OR_PASSWORD_INVALID.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_USERNAME_OR_PASSWORD_INVALID.String(), fmt.Sprintf(format, args...))
 }
 
 func IsAddUserToWalletFailed(err error) bool {
@@ -352,11 +352,11 @@ func IsUserTagAlreadyExists(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_USER_TAG_ALREADY_EXISTS.String() && e.Code == 409
+	return e.Reason == ErrorReason_USER_TAG_ALREADY_EXISTS.String() && e.Code == 500
 }
 
 func ErrorUserTagAlreadyExists(format string, args ...interface{}) *errors.Error {
-	return errors.New(409, ErrorReason_USER_TAG_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_USER_TAG_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
 }
 
 func IsUserTagNotExist(err error) bool {
@@ -438,11 +438,11 @@ func IsOperatorTagsAlreadyExists(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_OPERATOR_TAGS_ALREADY_EXISTS.String() && e.Code == 409
+	return e.Reason == ErrorReason_OPERATOR_TAGS_ALREADY_EXISTS.String() && e.Code == 500
 }
 
 func ErrorOperatorTagsAlreadyExists(format string, args ...interface{}) *errors.Error {
-	return errors.New(409, ErrorReason_OPERATOR_TAGS_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_OPERATOR_TAGS_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
 }
 
 func IsOperatorTagNotFound(err error) bool {
@@ -450,11 +450,11 @@ func IsOperatorTagNotFound(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_OPERATOR_TAG_NOT_FOUND.String() && e.Code == 404
+	return e.Reason == ErrorReason_OPERATOR_TAG_NOT_FOUND.String() && e.Code == 500
 }
 
 func ErrorOperatorTagNotFound(format string, args ...interface{}) *errors.Error {
-	return errors.New(404, ErrorReason_OPERATOR_TAG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_OPERATOR_TAG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
 
 func IsOperatorParentNotFound(err error) bool {
@@ -462,11 +462,11 @@ func IsOperatorParentNotFound(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_OPERATOR_PARENT_NOT_FOUND.String() && e.Code == 404
+	return e.Reason == ErrorReason_OPERATOR_PARENT_NOT_FOUND.String() && e.Code == 500
 }
 
 func ErrorOperatorParentNotFound(format string, args ...interface{}) *errors.Error {
-	return errors.New(404, ErrorReason_OPERATOR_PARENT_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_OPERATOR_PARENT_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
 
 func IsNonFollowParentOperatorNotFound(err error) bool {
@@ -474,11 +474,11 @@ func IsNonFollowParentOperatorNotFound(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND.String() && e.Code == 404
+	return e.Reason == ErrorReason_NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND.String() && e.Code == 500
 }
 
 func ErrorNonFollowParentOperatorNotFound(format string, args ...interface{}) *errors.Error {
-	return errors.New(404, ErrorReason_NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
 
 func IsSystemOperator(err error) bool {
@@ -510,11 +510,11 @@ func IsRoleNotFound(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_ROLE_NOT_FOUND.String() && e.Code == 404
+	return e.Reason == ErrorReason_ROLE_NOT_FOUND.String() && e.Code == 500
 }
 
 func ErrorRoleNotFound(format string, args ...interface{}) *errors.Error {
-	return errors.New(404, ErrorReason_ROLE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_ROLE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
 
 func IsFailedToSendEmail(err error) bool {

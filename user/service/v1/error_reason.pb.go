@@ -219,14 +219,14 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xfe\f\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa4\f\n" +
 	"\vErrorReason\x12\x0f\n" +
-	"\vUNSPECIFIED\x10\x00\x12)\n" +
-	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x1a\x04\xa8E\x91\x03\x12,\n" +
-	"!REQUEST_INFO_NOT_FOUND_IN_CONTEXT\x10\x91N\x1a\x04\xa8E\x91\x03\x12\x19\n" +
-	"\x0eUSER_NOT_FOUND\x10\x92N\x1a\x04\xa8E\x94\x03\x12\x1e\n" +
-	"\x13USER_AUTH_NOT_FOUND\x10\x93N\x1a\x04\xa8E\x94\x03\x12\x1e\n" +
-	"\x13USER_ALREADY_EXISTS\x10\x94N\x1a\x04\xa8E\x99\x03\x12\x18\n" +
+	"\vUNSPECIFIED\x10\x00\x12#\n" +
+	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
+	"!REQUEST_INFO_NOT_FOUND_IN_CONTEXT\x10\x91N\x12\x13\n" +
+	"\x0eUSER_NOT_FOUND\x10\x92N\x12\x18\n" +
+	"\x13USER_AUTH_NOT_FOUND\x10\x93N\x12\x18\n" +
+	"\x13USER_ALREADY_EXISTS\x10\x94N\x12\x18\n" +
 	"\x13REVOKE_TOKEN_FAILED\x10\x95N\x12%\n" +
 	" GENERATE_REFRESH_TOKEN_ID_FAILED\x10\x96N\x12\x1d\n" +
 	"\x18GENERATE_TOKEN_ID_FAILED\x10\x97N\x12\x16\n" +
@@ -238,31 +238,31 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x19HASH_USER_PASSWORD_FAILED\x10\x9dN\x12\x1c\n" +
 	"\x17GENERATE_USER_ID_FAILED\x10\x9eN\x12\x14\n" +
 	"\x0fADD_USER_FAILED\x10\x9fN\x12\x19\n" +
-	"\x14ADD_USER_AUTH_FAILED\x10\xa0N\x12\x18\n" +
-	"\rUSER_DISABLED\x10\xa1N\x1a\x04\xa8E\x91\x03\x12\x1c\n" +
-	"\x11USER_LOGIN_BANNED\x10\xa2N\x1a\x04\xa8E\x91\x03\x12 \n" +
-	"\x15INVALID_USER_PASSWORD\x10\xa3N\x1a\x04\xa8E\x91\x03\x12(\n" +
+	"\x14ADD_USER_AUTH_FAILED\x10\xa0N\x12\x12\n" +
+	"\rUSER_DISABLED\x10\xa1N\x12\x16\n" +
+	"\x11USER_LOGIN_BANNED\x10\xa2N\x12\x1a\n" +
+	"\x15INVALID_USER_PASSWORD\x10\xa3N\x12(\n" +
 	"#GET_TOKEN_WITH_REFRESH_TOKEN_FAILED\x10\xa4N\x12(\n" +
 	"#GET_UNEXPIRED_TOKEN_FOR_USER_FAILED\x10\xa5N\x12!\n" +
-	"\x1cOAUTH_PROVIDER_NOT_SUPPORTED\x10\xa6N\x12'\n" +
-	"\x1cUSERNAME_OR_PASSWORD_INVALID\x10\xa7N\x1a\x04\xa8E\x91\x03\x12\x1e\n" +
+	"\x1cOAUTH_PROVIDER_NOT_SUPPORTED\x10\xa6N\x12!\n" +
+	"\x1cUSERNAME_OR_PASSWORD_INVALID\x10\xa7N\x12\x1e\n" +
 	"\x19ADD_USER_TO_WALLET_FAILED\x10\xa8N\x12%\n" +
 	" GET_USERS_BY_OPERATOR_IDS_FAILED\x10\xa9N\x12%\n" +
-	" GET_OPERATOR_ID_BY_ORIGIN_FAILED\x10\xaaN\x12\"\n" +
-	"\x17USER_TAG_ALREADY_EXISTS\x10\xabN\x1a\x04\xa8E\x99\x03\x12\x17\n" +
+	" GET_OPERATOR_ID_BY_ORIGIN_FAILED\x10\xaaN\x12\x1c\n" +
+	"\x17USER_TAG_ALREADY_EXISTS\x10\xabN\x12\x17\n" +
 	"\x12USER_TAG_NOT_EXIST\x10\xaeN\x12\x1f\n" +
 	"\x1aVERIFY_GOOGLE_TOKEN_FAILED\x10\xafN\x12 \n" +
 	"\x1bMARSHAL_REQUEST_INFO_FAILED\x10\xb0N\x12\x1a\n" +
 	"\x15ADD_USER_EVENT_FAILED\x10\xb1N\x12\"\n" +
 	"\x1dGENERATE_USER_EVENT_ID_FAILED\x10\xb2N\x12\x1a\n" +
-	"\x15FOLLOW_PARENT_ENABLED\x10\xb3N\x12'\n" +
-	"\x1cOPERATOR_TAGS_ALREADY_EXISTS\x10\xb4N\x1a\x04\xa8E\x99\x03\x12!\n" +
-	"\x16OPERATOR_TAG_NOT_FOUND\x10\xb5N\x1a\x04\xa8E\x94\x03\x12$\n" +
-	"\x19OPERATOR_PARENT_NOT_FOUND\x10\xb6N\x1a\x04\xa8E\x94\x03\x12/\n" +
-	"$NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND\x10\xb7N\x1a\x04\xa8E\x94\x03\x12\x14\n" +
+	"\x15FOLLOW_PARENT_ENABLED\x10\xb3N\x12!\n" +
+	"\x1cOPERATOR_TAGS_ALREADY_EXISTS\x10\xb4N\x12\x1b\n" +
+	"\x16OPERATOR_TAG_NOT_FOUND\x10\xb5N\x12\x1e\n" +
+	"\x19OPERATOR_PARENT_NOT_FOUND\x10\xb6N\x12)\n" +
+	"$NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND\x10\xb7N\x12\x14\n" +
 	"\x0fSYSTEM_OPERATOR\x10\xb8N\x12\x16\n" +
-	"\x11LIST_USERS_FAILED\x10\xb9N\x12\x19\n" +
-	"\x0eROLE_NOT_FOUND\x10\xbaN\x1a\x04\xa8E\x94\x03\x12\x19\n" +
+	"\x11LIST_USERS_FAILED\x10\xb9N\x12\x13\n" +
+	"\x0eROLE_NOT_FOUND\x10\xbaN\x12\x19\n" +
 	"\x14FAILED_TO_SEND_EMAIL\x10\xbbN\x12*\n" +
 	"%VERIFICATION_CODE_SEND_TOO_FREQUENTLY\x10\xbcN\x12\x1e\n" +
 	"\x19EMAIL_VERIFICATION_FAILED\x10\xbdN\x12\x1d\n" +

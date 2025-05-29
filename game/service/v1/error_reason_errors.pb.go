@@ -28,11 +28,11 @@ func IsGameBetNotFound(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_GAME_BET_NOT_FOUND.String() && e.Code == 404
+	return e.Reason == ErrorReason_GAME_BET_NOT_FOUND.String() && e.Code == 500
 }
 
 func ErrorGameBetNotFound(format string, args ...interface{}) *errors.Error {
-	return errors.New(404, ErrorReason_GAME_BET_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_GAME_BET_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
 
 func IsGameActionNotFound(err error) bool {
@@ -40,11 +40,11 @@ func IsGameActionNotFound(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_GAME_ACTION_NOT_FOUND.String() && e.Code == 401
+	return e.Reason == ErrorReason_GAME_ACTION_NOT_FOUND.String() && e.Code == 500
 }
 
 func ErrorGameActionNotFound(format string, args ...interface{}) *errors.Error {
-	return errors.New(401, ErrorReason_GAME_ACTION_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_GAME_ACTION_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
 
 func IsGetRatesFailed(err error) bool {
@@ -52,9 +52,9 @@ func IsGetRatesFailed(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_GET_RATES_FAILED.String() && e.Code == 401
+	return e.Reason == ErrorReason_GET_RATES_FAILED.String() && e.Code == 500
 }
 
 func ErrorGetRatesFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(401, ErrorReason_GET_RATES_FAILED.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_GET_RATES_FAILED.String(), fmt.Sprintf(format, args...))
 }
