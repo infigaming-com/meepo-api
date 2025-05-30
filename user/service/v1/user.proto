@@ -158,6 +158,8 @@ service User {
 
 	rpc GetRole(GetRoleRequest) returns (GetRoleResponse) {}
 
+	rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse) {}
+
 	rpc GetOverviewDashboardFromUser(GetOverviewDashboardFromUserRequest) returns (GetOverviewDashboardFromUserResponse) {}
 }
 
@@ -708,3 +710,9 @@ message GetOverviewDashboardFromUserResponse {
 	FirstDepositUsers first_deposit_users = 2;
 	ActiveUsers active_users = 3;
 }
+
+message DeleteRoleRequest {
+	int64 role_id = 1;
+}
+
+message DeleteRoleResponse {}

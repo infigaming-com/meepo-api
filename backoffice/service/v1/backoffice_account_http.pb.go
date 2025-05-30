@@ -23,6 +23,7 @@ const OperationBackofficeAccountAccountInfo = "/api.backoffice.service.v1.Backof
 const OperationBackofficeAccountAddAccount = "/api.backoffice.service.v1.BackofficeAccount/AddAccount"
 const OperationBackofficeAccountBind2fa = "/api.backoffice.service.v1.BackofficeAccount/Bind2fa"
 const OperationBackofficeAccountCreateRole = "/api.backoffice.service.v1.BackofficeAccount/CreateRole"
+const OperationBackofficeAccountDeleteRole = "/api.backoffice.service.v1.BackofficeAccount/DeleteRole"
 const OperationBackofficeAccountGenerate2fa = "/api.backoffice.service.v1.BackofficeAccount/Generate2fa"
 const OperationBackofficeAccountListAccounts = "/api.backoffice.service.v1.BackofficeAccount/ListAccounts"
 const OperationBackofficeAccountListRoles = "/api.backoffice.service.v1.BackofficeAccount/ListRoles"
@@ -34,6 +35,7 @@ const OperationBackofficeAccountSendMobileVerification = "/api.backoffice.servic
 const OperationBackofficeAccountSendRegisterVerificationCode = "/api.backoffice.service.v1.BackofficeAccount/SendRegisterVerificationCode"
 const OperationBackofficeAccountUnbind2fa = "/api.backoffice.service.v1.BackofficeAccount/Unbind2fa"
 const OperationBackofficeAccountUpdateAccount = "/api.backoffice.service.v1.BackofficeAccount/UpdateAccount"
+const OperationBackofficeAccountUpdateRole = "/api.backoffice.service.v1.BackofficeAccount/UpdateRole"
 const OperationBackofficeAccountVerifyEmail = "/api.backoffice.service.v1.BackofficeAccount/VerifyEmail"
 const OperationBackofficeAccountVerifyMobile = "/api.backoffice.service.v1.BackofficeAccount/VerifyMobile"
 
@@ -42,6 +44,7 @@ type BackofficeAccountHTTPServer interface {
 	AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error)
 	Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error)
 	CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleResponse, error)
+	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
 	Generate2Fa(context.Context, *Generate2FaRequest) (*Generate2FaResponse, error)
 	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
@@ -53,6 +56,7 @@ type BackofficeAccountHTTPServer interface {
 	SendRegisterVerificationCode(context.Context, *SendRegisterVerificationCodeRequest) (*SendRegisterVerificationCodeResponse, error)
 	Unbind2Fa(context.Context, *Unbind2FaRequest) (*Unbind2FaResponse, error)
 	UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error)
+	UpdateRole(context.Context, *UpdateRoleRequest) (*UpdateRoleResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 	VerifyMobile(context.Context, *VerifyMobileRequest) (*VerifyMobileResponse, error)
 }
@@ -76,6 +80,8 @@ func RegisterBackofficeAccountHTTPServer(s *http.Server, srv BackofficeAccountHT
 	r.POST("/v1/backoffice/accounts/list", _BackofficeAccount_ListAccounts0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/role/create", _BackofficeAccount_CreateRole0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/role/list", _BackofficeAccount_ListRoles0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/role/update", _BackofficeAccount_UpdateRole0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/role/delete", _BackofficeAccount_DeleteRole0_HTTP_Handler(srv))
 }
 
 func _BackofficeAccount_AddAccount0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
@@ -452,11 +458,56 @@ func _BackofficeAccount_ListRoles0_HTTP_Handler(srv BackofficeAccountHTTPServer)
 	}
 }
 
+func _BackofficeAccount_UpdateRole0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateRoleRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountUpdateRole)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateRole(ctx, req.(*UpdateRoleRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateRoleResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAccount_DeleteRole0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteRoleRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountDeleteRole)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteRole(ctx, req.(*DeleteRoleRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteRoleResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeAccountHTTPClient interface {
 	AccountInfo(ctx context.Context, req *AccountInfoRequest, opts ...http.CallOption) (rsp *AccountInfoResponse, err error)
 	AddAccount(ctx context.Context, req *AddAccountRequest, opts ...http.CallOption) (rsp *AddAccountResponse, err error)
 	Bind2Fa(ctx context.Context, req *Bind2FaRequest, opts ...http.CallOption) (rsp *Bind2FaResponse, err error)
 	CreateRole(ctx context.Context, req *CreateRoleRequest, opts ...http.CallOption) (rsp *CreateRoleResponse, err error)
+	DeleteRole(ctx context.Context, req *DeleteRoleRequest, opts ...http.CallOption) (rsp *DeleteRoleResponse, err error)
 	Generate2Fa(ctx context.Context, req *Generate2FaRequest, opts ...http.CallOption) (rsp *Generate2FaResponse, err error)
 	ListAccounts(ctx context.Context, req *ListAccountsRequest, opts ...http.CallOption) (rsp *ListAccountsResponse, err error)
 	ListRoles(ctx context.Context, req *ListRolesRequest, opts ...http.CallOption) (rsp *ListRolesResponse, err error)
@@ -468,6 +519,7 @@ type BackofficeAccountHTTPClient interface {
 	SendRegisterVerificationCode(ctx context.Context, req *SendRegisterVerificationCodeRequest, opts ...http.CallOption) (rsp *SendRegisterVerificationCodeResponse, err error)
 	Unbind2Fa(ctx context.Context, req *Unbind2FaRequest, opts ...http.CallOption) (rsp *Unbind2FaResponse, err error)
 	UpdateAccount(ctx context.Context, req *UpdateAccountRequest, opts ...http.CallOption) (rsp *UpdateAccountResponse, err error)
+	UpdateRole(ctx context.Context, req *UpdateRoleRequest, opts ...http.CallOption) (rsp *UpdateRoleResponse, err error)
 	VerifyEmail(ctx context.Context, req *VerifyEmailRequest, opts ...http.CallOption) (rsp *VerifyEmailResponse, err error)
 	VerifyMobile(ctx context.Context, req *VerifyMobileRequest, opts ...http.CallOption) (rsp *VerifyMobileResponse, err error)
 }
@@ -524,6 +576,19 @@ func (c *BackofficeAccountHTTPClientImpl) CreateRole(ctx context.Context, in *Cr
 	pattern := "/v1/backoffice/accounts/role/create"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAccountCreateRole))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAccountHTTPClientImpl) DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...http.CallOption) (*DeleteRoleResponse, error) {
+	var out DeleteRoleResponse
+	pattern := "/v1/backoffice/accounts/role/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountDeleteRole))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -667,6 +732,19 @@ func (c *BackofficeAccountHTTPClientImpl) UpdateAccount(ctx context.Context, in 
 	pattern := "/v1/backoffice/accounts/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAccountUpdateAccount))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAccountHTTPClientImpl) UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...http.CallOption) (*UpdateRoleResponse, error) {
+	var out UpdateRoleResponse
+	pattern := "/v1/backoffice/accounts/role/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountUpdateRole))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
