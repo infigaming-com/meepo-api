@@ -2885,6 +2885,8 @@ components:
                     type: string
                 gameId:
                     type: string
+                gameName:
+                    type: string
                 userId:
                     type: string
                 turnover:
@@ -4050,10 +4052,6 @@ components:
             type: object
             properties:
                 date:
-                    type: string
-                week:
-                    type: string
-                month:
                     type: string
                 operatorName:
                     type: string
