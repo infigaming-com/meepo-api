@@ -51,6 +51,7 @@ const (
 	User_CreateOperator_FullMethodName               = "/api.user.service.v1.User/CreateOperator"
 	User_UpdateRole_FullMethodName                   = "/api.user.service.v1.User/UpdateRole"
 	User_GetRole_FullMethodName                      = "/api.user.service.v1.User/GetRole"
+	User_DeleteRole_FullMethodName                   = "/api.user.service.v1.User/DeleteRole"
 	User_GetOverviewDashboardFromUser_FullMethodName = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
 )
 
@@ -120,6 +121,7 @@ type UserClient interface {
 	CreateOperator(ctx context.Context, in *CreateOperatorRequest, opts ...grpc.CallOption) (*CreateOperatorResponse, error)
 	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*UpdateRoleResponse, error)
 	GetRole(ctx context.Context, in *GetRoleRequest, opts ...grpc.CallOption) (*GetRoleResponse, error)
+	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error)
 	GetOverviewDashboardFromUser(ctx context.Context, in *GetOverviewDashboardFromUserRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromUserResponse, error)
 }
 
@@ -451,6 +453,16 @@ func (c *userClient) GetRole(ctx context.Context, in *GetRoleRequest, opts ...gr
 	return out, nil
 }
 
+func (c *userClient) DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteRoleResponse)
+	err := c.cc.Invoke(ctx, User_DeleteRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) GetOverviewDashboardFromUser(ctx context.Context, in *GetOverviewDashboardFromUserRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOverviewDashboardFromUserResponse)
@@ -527,6 +539,7 @@ type UserServer interface {
 	CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error)
 	UpdateRole(context.Context, *UpdateRoleRequest) (*UpdateRoleResponse, error)
 	GetRole(context.Context, *GetRoleRequest) (*GetRoleResponse, error)
+	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
 	GetOverviewDashboardFromUser(context.Context, *GetOverviewDashboardFromUserRequest) (*GetOverviewDashboardFromUserResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
@@ -633,6 +646,9 @@ func (UnimplementedUserServer) UpdateRole(context.Context, *UpdateRoleRequest) (
 }
 func (UnimplementedUserServer) GetRole(context.Context, *GetRoleRequest) (*GetRoleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRole not implemented")
+}
+func (UnimplementedUserServer) DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRole not implemented")
 }
 func (UnimplementedUserServer) GetOverviewDashboardFromUser(context.Context, *GetOverviewDashboardFromUserRequest) (*GetOverviewDashboardFromUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOverviewDashboardFromUser not implemented")
@@ -1234,6 +1250,24 @@ func _User_GetRole_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_DeleteRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DeleteRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DeleteRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DeleteRole(ctx, req.(*DeleteRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_GetOverviewDashboardFromUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOverviewDashboardFromUserRequest)
 	if err := dec(in); err != nil {
@@ -1386,6 +1420,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRole",
 			Handler:    _User_GetRole_Handler,
+		},
+		{
+			MethodName: "DeleteRole",
+			Handler:    _User_DeleteRole_Handler,
 		},
 		{
 			MethodName: "GetOverviewDashboardFromUser",

@@ -112,6 +112,18 @@ service BackofficeAccount {
             body: "*"
         };
     }
+    rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/role/update"
+            body: "*"
+        };
+    }
+    rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/role/delete"
+            body: "*"
+        };
+    }
 }
 
 // Account related messages
@@ -274,3 +286,17 @@ message ListRolesResponse {
     int32 page = 3;
     int32 page_size = 4;
 }
+
+message UpdateRoleRequest {
+    int64 role_id = 1;
+    string name = 2;
+    repeated Permission permissions = 3;
+}
+
+message UpdateRoleResponse {}
+
+message DeleteRoleRequest {
+    int64 role_id = 1;
+}
+
+message DeleteRoleResponse {}

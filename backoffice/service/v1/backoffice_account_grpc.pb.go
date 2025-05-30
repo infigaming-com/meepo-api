@@ -36,6 +36,8 @@ const (
 	BackofficeAccount_ListAccounts_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAccount/ListAccounts"
 	BackofficeAccount_CreateRole_FullMethodName                   = "/api.backoffice.service.v1.BackofficeAccount/CreateRole"
 	BackofficeAccount_ListRoles_FullMethodName                    = "/api.backoffice.service.v1.BackofficeAccount/ListRoles"
+	BackofficeAccount_UpdateRole_FullMethodName                   = "/api.backoffice.service.v1.BackofficeAccount/UpdateRole"
+	BackofficeAccount_DeleteRole_FullMethodName                   = "/api.backoffice.service.v1.BackofficeAccount/DeleteRole"
 )
 
 // BackofficeAccountClient is the client API for BackofficeAccount service.
@@ -59,6 +61,8 @@ type BackofficeAccountClient interface {
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error)
 	CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*CreateRoleResponse, error)
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
+	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*UpdateRoleResponse, error)
+	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error)
 }
 
 type backofficeAccountClient struct {
@@ -239,6 +243,26 @@ func (c *backofficeAccountClient) ListRoles(ctx context.Context, in *ListRolesRe
 	return out, nil
 }
 
+func (c *backofficeAccountClient) UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*UpdateRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateRoleResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_UpdateRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAccountClient) DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteRoleResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_DeleteRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeAccountServer is the server API for BackofficeAccount service.
 // All implementations must embed UnimplementedBackofficeAccountServer
 // for forward compatibility.
@@ -260,6 +284,8 @@ type BackofficeAccountServer interface {
 	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)
 	CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleResponse, error)
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
+	UpdateRole(context.Context, *UpdateRoleRequest) (*UpdateRoleResponse, error)
+	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
 	mustEmbedUnimplementedBackofficeAccountServer()
 }
 
@@ -320,6 +346,12 @@ func (UnimplementedBackofficeAccountServer) CreateRole(context.Context, *CreateR
 }
 func (UnimplementedBackofficeAccountServer) ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRoles not implemented")
+}
+func (UnimplementedBackofficeAccountServer) UpdateRole(context.Context, *UpdateRoleRequest) (*UpdateRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRole not implemented")
+}
+func (UnimplementedBackofficeAccountServer) DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRole not implemented")
 }
 func (UnimplementedBackofficeAccountServer) mustEmbedUnimplementedBackofficeAccountServer() {}
 func (UnimplementedBackofficeAccountServer) testEmbeddedByValue()                           {}
@@ -648,6 +680,42 @@ func _BackofficeAccount_ListRoles_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAccount_UpdateRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).UpdateRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_UpdateRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).UpdateRole(ctx, req.(*UpdateRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAccount_DeleteRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).DeleteRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_DeleteRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).DeleteRole(ctx, req.(*DeleteRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeAccount_ServiceDesc is the grpc.ServiceDesc for BackofficeAccount service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -722,6 +790,14 @@ var BackofficeAccount_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListRoles",
 			Handler:    _BackofficeAccount_ListRoles_Handler,
+		},
+		{
+			MethodName: "UpdateRole",
+			Handler:    _BackofficeAccount_UpdateRole_Handler,
+		},
+		{
+			MethodName: "DeleteRole",
+			Handler:    _BackofficeAccount_DeleteRole_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
