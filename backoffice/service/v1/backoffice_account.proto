@@ -112,6 +112,18 @@ service BackofficeAccount {
             body: "*"
         };
     }
+    rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/role/update"
+            body: "*"
+        };
+    }
+    rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/role/delete"
+            body: "*"
+        };
+    }
 }
 
 // Account related messages
@@ -224,16 +236,21 @@ message Permission {
     // group name: dashboard, game, user, finance, report, system, etc.
     string group_name = 2;
     // action name: read, write, delete, etc.
-    repeated string actions = 3;
-    repeated string api_paths = 4;
+    repeated ApiPath api_paths = 4;
+}
+
+message ApiPath {
+    string path = 1;
+    string action = 2;
 }
 
 message ListAccountsRequest {
     optional int64 user_id = 1;
     optional int64 role_id = 2;
     optional int64 operator_id = 3;
-    optional int32 page = 4;
-    optional int32 page_size = 5;
+    optional bool enabled = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
 }
 
 message ListAccountsResponse {
@@ -248,8 +265,10 @@ message ListAccountsResponse {
     }
     repeated Account accounts = 1;
     int32 total = 2;
-    int32 page = 3;
-    int32 page_size = 4;
+    int32 total_enabled = 3;
+    int32 total_disabled = 4;
+    int32 page = 5;
+    int32 page_size = 6;
 }
 
 message CreateRoleRequest {
@@ -270,3 +289,17 @@ message ListRolesResponse {
     int32 page = 3;
     int32 page_size = 4;
 }
+
+message UpdateRoleRequest {
+    int64 role_id = 1;
+    string name = 2;
+    repeated Permission permissions = 3;
+}
+
+message UpdateRoleResponse {}
+
+message DeleteRoleRequest {
+    int64 role_id = 1;
+}
+
+message DeleteRoleResponse {}

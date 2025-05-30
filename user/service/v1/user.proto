@@ -158,6 +158,8 @@ service User {
 
 	rpc GetRole(GetRoleRequest) returns (GetRoleResponse) {}
 
+	rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse) {}
+
 	rpc GetOverviewDashboardFromUser(GetOverviewDashboardFromUserRequest) returns (GetOverviewDashboardFromUserResponse) {}
 }
 
@@ -479,8 +481,9 @@ message ListUsersRequest {
 	optional string user_type = 21;
 	optional int64 role_id = 22;
 	optional bool online = 23;
-	optional int32 page = 24;
-	optional int32 page_size = 25;
+	optional bool enabled = 24;
+	optional int32 page = 25;
+	optional int32 page_size = 26;
 }
 
 message ListUsersResponse {
@@ -518,6 +521,8 @@ message ListUsersResponse {
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;
+	int32 total_enabled = 5;
+	int32 total_disabled = 6;
 }
 
 message CreateUserRequest {
@@ -628,8 +633,12 @@ message CreateRoleRequest {
 message Permission {
 	int64 group_id = 1;
 	string group_name = 2;
-	repeated string actions = 3;
-	repeated string api_paths = 4;
+	repeated ApiPath api_paths = 4;
+}
+
+message ApiPath {
+	string path = 1;
+	string action = 2;
 }
 
 message CreateRoleResponse {}
@@ -704,3 +713,9 @@ message GetOverviewDashboardFromUserResponse {
 	FirstDepositUsers first_deposit_users = 2;
 	ActiveUsers active_users = 3;
 }
+
+message DeleteRoleRequest {
+	int64 role_id = 1;
+}
+
+message DeleteRoleResponse {}
