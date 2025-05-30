@@ -146,8 +146,8 @@ message DeleteOperatorResponse {
 message GameFilter {
 	// provider id: provider list api
 	repeated string provider_ids = 1;
-	// tags: hot game, live casino, slots, etc..
-	repeated string tags = 2;
+	// tag: hot game, live casino, slots, etc..
+	string tag = 2;
 	// name: game name
 	string name = 3;
 }

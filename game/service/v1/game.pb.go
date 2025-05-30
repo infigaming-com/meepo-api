@@ -423,8 +423,8 @@ type GameFilter struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// provider id: provider list api
 	ProviderIds []string `protobuf:"bytes,1,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
-	// tags: hot game, live casino, slots, etc..
-	Tags []string `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"`
+	// tag: hot game, live casino, slots, etc..
+	Tag string `protobuf:"bytes,2,opt,name=tag,proto3" json:"tag,omitempty"`
 	// name: game name
 	Name          string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -468,11 +468,11 @@ func (x *GameFilter) GetProviderIds() []string {
 	return nil
 }
 
-func (x *GameFilter) GetTags() []string {
+func (x *GameFilter) GetTag() string {
 	if x != nil {
-		return x.Tags
+		return x.Tag
 	}
-	return nil
+	return ""
 }
 
 func (x *GameFilter) GetName() string {
@@ -4923,11 +4923,11 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x15DeleteOperatorRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"\x18\n" +
-	"\x16DeleteOperatorResponse\"W\n" +
+	"\x16DeleteOperatorResponse\"U\n" +
 	"\n" +
 	"GameFilter\x12!\n" +
-	"\fprovider_ids\x18\x01 \x03(\tR\vproviderIds\x12\x12\n" +
-	"\x04tags\x18\x02 \x03(\tR\x04tags\x12\x12\n" +
+	"\fprovider_ids\x18\x01 \x03(\tR\vproviderIds\x12\x10\n" +
+	"\x03tag\x18\x02 \x01(\tR\x03tag\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\"\x80\x01\n" +
 	"\bGameSort\x129\n" +
 	"\x05field\x18\x01 \x01(\x0e2#.api.game.service.v1.GameSort.FieldR\x05field\"9\n" +
