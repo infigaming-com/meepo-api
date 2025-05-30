@@ -2142,6 +2142,13 @@ components:
             properties:
                 commentId:
                     type: string
+        api.backoffice.service.v1.ApiPath:
+            type: object
+            properties:
+                path:
+                    type: string
+                action:
+                    type: string
         api.backoffice.service.v1.AuditLog:
             type: object
             properties:
@@ -5255,15 +5262,11 @@ components:
                 groupName:
                     type: string
                     description: 'group name: dashboard, game, user, finance, report, system, etc.'
-                actions:
-                    type: array
-                    items:
-                        type: string
-                    description: 'action name: read, write, delete, etc.'
                 apiPaths:
                     type: array
                     items:
-                        type: string
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ApiPath'
+                    description: 'action name: read, write, delete, etc.'
         api.backoffice.service.v1.RegisterRequest:
             type: object
             properties:

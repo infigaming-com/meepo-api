@@ -1330,8 +1330,7 @@ type Permission struct {
 	// group name: dashboard, game, user, finance, report, system, etc.
 	GroupName string `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`
 	// action name: read, write, delete, etc.
-	Actions       []string `protobuf:"bytes,3,rep,name=actions,proto3" json:"actions,omitempty"`
-	ApiPaths      []string `protobuf:"bytes,4,rep,name=api_paths,json=apiPaths,proto3" json:"api_paths,omitempty"`
+	ApiPaths      []*ApiPath `protobuf:"bytes,4,rep,name=api_paths,json=apiPaths,proto3" json:"api_paths,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1380,18 +1379,63 @@ func (x *Permission) GetGroupName() string {
 	return ""
 }
 
-func (x *Permission) GetActions() []string {
-	if x != nil {
-		return x.Actions
-	}
-	return nil
-}
-
-func (x *Permission) GetApiPaths() []string {
+func (x *Permission) GetApiPaths() []*ApiPath {
 	if x != nil {
 		return x.ApiPaths
 	}
 	return nil
+}
+
+type ApiPath struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Path          string                 `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
+	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ApiPath) Reset() {
+	*x = ApiPath{}
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ApiPath) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ApiPath) ProtoMessage() {}
+
+func (x *ApiPath) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ApiPath.ProtoReflect.Descriptor instead.
+func (*ApiPath) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ApiPath) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+func (x *ApiPath) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
 }
 
 type ListAccountsRequest struct {
@@ -1407,7 +1451,7 @@ type ListAccountsRequest struct {
 
 func (x *ListAccountsRequest) Reset() {
 	*x = ListAccountsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1419,7 +1463,7 @@ func (x *ListAccountsRequest) String() string {
 func (*ListAccountsRequest) ProtoMessage() {}
 
 func (x *ListAccountsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1432,7 +1476,7 @@ func (x *ListAccountsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAccountsRequest.ProtoReflect.Descriptor instead.
 func (*ListAccountsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{30}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *ListAccountsRequest) GetUserId() int64 {
@@ -1482,7 +1526,7 @@ type ListAccountsResponse struct {
 
 func (x *ListAccountsResponse) Reset() {
 	*x = ListAccountsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1494,7 +1538,7 @@ func (x *ListAccountsResponse) String() string {
 func (*ListAccountsResponse) ProtoMessage() {}
 
 func (x *ListAccountsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1507,7 +1551,7 @@ func (x *ListAccountsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAccountsResponse.ProtoReflect.Descriptor instead.
 func (*ListAccountsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{31}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *ListAccountsResponse) GetAccounts() []*ListAccountsResponse_Account {
@@ -1548,7 +1592,7 @@ type CreateRoleRequest struct {
 
 func (x *CreateRoleRequest) Reset() {
 	*x = CreateRoleRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1560,7 +1604,7 @@ func (x *CreateRoleRequest) String() string {
 func (*CreateRoleRequest) ProtoMessage() {}
 
 func (x *CreateRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1573,7 +1617,7 @@ func (x *CreateRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRoleRequest.ProtoReflect.Descriptor instead.
 func (*CreateRoleRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{32}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *CreateRoleRequest) GetName() string {
@@ -1598,7 +1642,7 @@ type CreateRoleResponse struct {
 
 func (x *CreateRoleResponse) Reset() {
 	*x = CreateRoleResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1610,7 +1654,7 @@ func (x *CreateRoleResponse) String() string {
 func (*CreateRoleResponse) ProtoMessage() {}
 
 func (x *CreateRoleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1623,7 +1667,7 @@ func (x *CreateRoleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRoleResponse.ProtoReflect.Descriptor instead.
 func (*CreateRoleResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{33}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{34}
 }
 
 type ListRolesRequest struct {
@@ -1636,7 +1680,7 @@ type ListRolesRequest struct {
 
 func (x *ListRolesRequest) Reset() {
 	*x = ListRolesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1648,7 +1692,7 @@ func (x *ListRolesRequest) String() string {
 func (*ListRolesRequest) ProtoMessage() {}
 
 func (x *ListRolesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1661,7 +1705,7 @@ func (x *ListRolesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRolesRequest.ProtoReflect.Descriptor instead.
 func (*ListRolesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{34}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ListRolesRequest) GetPage() int32 {
@@ -1690,7 +1734,7 @@ type ListRolesResponse struct {
 
 func (x *ListRolesResponse) Reset() {
 	*x = ListRolesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[35]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1702,7 +1746,7 @@ func (x *ListRolesResponse) String() string {
 func (*ListRolesResponse) ProtoMessage() {}
 
 func (x *ListRolesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[35]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1715,7 +1759,7 @@ func (x *ListRolesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRolesResponse.ProtoReflect.Descriptor instead.
 func (*ListRolesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{35}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ListRolesResponse) GetRoles() []*Role {
@@ -1761,7 +1805,7 @@ type ListAccountsResponse_Account struct {
 
 func (x *ListAccountsResponse_Account) Reset() {
 	*x = ListAccountsResponse_Account{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[36]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1773,7 +1817,7 @@ func (x *ListAccountsResponse_Account) String() string {
 func (*ListAccountsResponse_Account) ProtoMessage() {}
 
 func (x *ListAccountsResponse_Account) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[36]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1786,7 +1830,7 @@ func (x *ListAccountsResponse_Account) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAccountsResponse_Account.ProtoReflect.Descriptor instead.
 func (*ListAccountsResponse_Account) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{31, 0}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{32, 0}
 }
 
 func (x *ListAccountsResponse_Account) GetUserId() int64 {
@@ -1907,14 +1951,16 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\x04Role\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\arole_id\x18\x02 \x01(\x03R\x06roleId\x12G\n" +
-	"\vpermissions\x18\x03 \x03(\v2%.api.backoffice.service.v1.PermissionR\vpermissions\"}\n" +
+	"\vpermissions\x18\x03 \x03(\v2%.api.backoffice.service.v1.PermissionR\vpermissions\"\x87\x01\n" +
 	"\n" +
 	"Permission\x12\x19\n" +
 	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\x12\x1d\n" +
 	"\n" +
-	"group_name\x18\x02 \x01(\tR\tgroupName\x12\x18\n" +
-	"\aactions\x18\x03 \x03(\tR\aactions\x12\x1b\n" +
-	"\tapi_paths\x18\x04 \x03(\tR\bapiPaths\"\xf1\x01\n" +
+	"group_name\x18\x02 \x01(\tR\tgroupName\x12?\n" +
+	"\tapi_paths\x18\x04 \x03(\v2\".api.backoffice.service.v1.ApiPathR\bapiPaths\"5\n" +
+	"\aApiPath\x12\x12\n" +
+	"\x04path\x18\x01 \x01(\tR\x04path\x12\x16\n" +
+	"\x06action\x18\x02 \x01(\tR\x06action\"\xf1\x01\n" +
 	"\x13ListAccountsRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1c\n" +
 	"\arole_id\x18\x02 \x01(\x03H\x01R\x06roleId\x88\x01\x01\x12$\n" +
@@ -1993,7 +2039,7 @@ func file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_account_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_account_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
+var file_backoffice_service_v1_backoffice_account_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
 var file_backoffice_service_v1_backoffice_account_proto_goTypes = []any{
 	(*AddAccountRequest)(nil),                    // 0: api.backoffice.service.v1.AddAccountRequest
 	(*AddAccountResponse)(nil),                   // 1: api.backoffice.service.v1.AddAccountResponse
@@ -2025,62 +2071,64 @@ var file_backoffice_service_v1_backoffice_account_proto_goTypes = []any{
 	(*AccountInfoResponse)(nil),                  // 27: api.backoffice.service.v1.AccountInfoResponse
 	(*Role)(nil),                                 // 28: api.backoffice.service.v1.Role
 	(*Permission)(nil),                           // 29: api.backoffice.service.v1.Permission
-	(*ListAccountsRequest)(nil),                  // 30: api.backoffice.service.v1.ListAccountsRequest
-	(*ListAccountsResponse)(nil),                 // 31: api.backoffice.service.v1.ListAccountsResponse
-	(*CreateRoleRequest)(nil),                    // 32: api.backoffice.service.v1.CreateRoleRequest
-	(*CreateRoleResponse)(nil),                   // 33: api.backoffice.service.v1.CreateRoleResponse
-	(*ListRolesRequest)(nil),                     // 34: api.backoffice.service.v1.ListRolesRequest
-	(*ListRolesResponse)(nil),                    // 35: api.backoffice.service.v1.ListRolesResponse
-	(*ListAccountsResponse_Account)(nil),         // 36: api.backoffice.service.v1.ListAccountsResponse.Account
-	(*timestamppb.Timestamp)(nil),                // 37: google.protobuf.Timestamp
+	(*ApiPath)(nil),                              // 30: api.backoffice.service.v1.ApiPath
+	(*ListAccountsRequest)(nil),                  // 31: api.backoffice.service.v1.ListAccountsRequest
+	(*ListAccountsResponse)(nil),                 // 32: api.backoffice.service.v1.ListAccountsResponse
+	(*CreateRoleRequest)(nil),                    // 33: api.backoffice.service.v1.CreateRoleRequest
+	(*CreateRoleResponse)(nil),                   // 34: api.backoffice.service.v1.CreateRoleResponse
+	(*ListRolesRequest)(nil),                     // 35: api.backoffice.service.v1.ListRolesRequest
+	(*ListRolesResponse)(nil),                    // 36: api.backoffice.service.v1.ListRolesResponse
+	(*ListAccountsResponse_Account)(nil),         // 37: api.backoffice.service.v1.ListAccountsResponse.Account
+	(*timestamppb.Timestamp)(nil),                // 38: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_account_proto_depIdxs = []int32{
 	28, // 0: api.backoffice.service.v1.AccountInfoResponse.role:type_name -> api.backoffice.service.v1.Role
 	29, // 1: api.backoffice.service.v1.Role.permissions:type_name -> api.backoffice.service.v1.Permission
-	36, // 2: api.backoffice.service.v1.ListAccountsResponse.accounts:type_name -> api.backoffice.service.v1.ListAccountsResponse.Account
-	29, // 3: api.backoffice.service.v1.CreateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
-	28, // 4: api.backoffice.service.v1.ListRolesResponse.roles:type_name -> api.backoffice.service.v1.Role
-	28, // 5: api.backoffice.service.v1.ListAccountsResponse.Account.role:type_name -> api.backoffice.service.v1.Role
-	37, // 6: api.backoffice.service.v1.ListAccountsResponse.Account.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 7: api.backoffice.service.v1.BackofficeAccount.AddAccount:input_type -> api.backoffice.service.v1.AddAccountRequest
-	2,  // 8: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:input_type -> api.backoffice.service.v1.SendEmailVerificationRequest
-	4,  // 9: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:input_type -> api.backoffice.service.v1.VerifyEmailRequest
-	6,  // 10: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:input_type -> api.backoffice.service.v1.SendMobileVerificationRequest
-	8,  // 11: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:input_type -> api.backoffice.service.v1.VerifyMobileRequest
-	10, // 12: api.backoffice.service.v1.BackofficeAccount.ResetPassword:input_type -> api.backoffice.service.v1.ResetPasswordRequest
-	12, // 13: api.backoffice.service.v1.BackofficeAccount.Generate2fa:input_type -> api.backoffice.service.v1.Generate2faRequest
-	14, // 14: api.backoffice.service.v1.BackofficeAccount.Bind2fa:input_type -> api.backoffice.service.v1.Bind2faRequest
-	16, // 15: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:input_type -> api.backoffice.service.v1.Unbind2faRequest
-	18, // 16: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:input_type -> api.backoffice.service.v1.UpdateAccountRequest
-	20, // 17: api.backoffice.service.v1.BackofficeAccount.Login:input_type -> api.backoffice.service.v1.LoginRequest
-	22, // 18: api.backoffice.service.v1.BackofficeAccount.Register:input_type -> api.backoffice.service.v1.RegisterRequest
-	24, // 19: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:input_type -> api.backoffice.service.v1.SendRegisterVerificationCodeRequest
-	26, // 20: api.backoffice.service.v1.BackofficeAccount.AccountInfo:input_type -> api.backoffice.service.v1.AccountInfoRequest
-	30, // 21: api.backoffice.service.v1.BackofficeAccount.ListAccounts:input_type -> api.backoffice.service.v1.ListAccountsRequest
-	32, // 22: api.backoffice.service.v1.BackofficeAccount.CreateRole:input_type -> api.backoffice.service.v1.CreateRoleRequest
-	34, // 23: api.backoffice.service.v1.BackofficeAccount.ListRoles:input_type -> api.backoffice.service.v1.ListRolesRequest
-	1,  // 24: api.backoffice.service.v1.BackofficeAccount.AddAccount:output_type -> api.backoffice.service.v1.AddAccountResponse
-	3,  // 25: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:output_type -> api.backoffice.service.v1.SendEmailVerificationResponse
-	5,  // 26: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:output_type -> api.backoffice.service.v1.VerifyEmailResponse
-	7,  // 27: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:output_type -> api.backoffice.service.v1.SendMobileVerificationResponse
-	9,  // 28: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:output_type -> api.backoffice.service.v1.VerifyMobileResponse
-	11, // 29: api.backoffice.service.v1.BackofficeAccount.ResetPassword:output_type -> api.backoffice.service.v1.ResetPasswordResponse
-	13, // 30: api.backoffice.service.v1.BackofficeAccount.Generate2fa:output_type -> api.backoffice.service.v1.Generate2faResponse
-	15, // 31: api.backoffice.service.v1.BackofficeAccount.Bind2fa:output_type -> api.backoffice.service.v1.Bind2faResponse
-	17, // 32: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:output_type -> api.backoffice.service.v1.Unbind2faResponse
-	19, // 33: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:output_type -> api.backoffice.service.v1.UpdateAccountResponse
-	21, // 34: api.backoffice.service.v1.BackofficeAccount.Login:output_type -> api.backoffice.service.v1.LoginResponse
-	23, // 35: api.backoffice.service.v1.BackofficeAccount.Register:output_type -> api.backoffice.service.v1.RegisterResponse
-	25, // 36: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:output_type -> api.backoffice.service.v1.SendRegisterVerificationCodeResponse
-	27, // 37: api.backoffice.service.v1.BackofficeAccount.AccountInfo:output_type -> api.backoffice.service.v1.AccountInfoResponse
-	31, // 38: api.backoffice.service.v1.BackofficeAccount.ListAccounts:output_type -> api.backoffice.service.v1.ListAccountsResponse
-	33, // 39: api.backoffice.service.v1.BackofficeAccount.CreateRole:output_type -> api.backoffice.service.v1.CreateRoleResponse
-	35, // 40: api.backoffice.service.v1.BackofficeAccount.ListRoles:output_type -> api.backoffice.service.v1.ListRolesResponse
-	24, // [24:41] is the sub-list for method output_type
-	7,  // [7:24] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	30, // 2: api.backoffice.service.v1.Permission.api_paths:type_name -> api.backoffice.service.v1.ApiPath
+	37, // 3: api.backoffice.service.v1.ListAccountsResponse.accounts:type_name -> api.backoffice.service.v1.ListAccountsResponse.Account
+	29, // 4: api.backoffice.service.v1.CreateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
+	28, // 5: api.backoffice.service.v1.ListRolesResponse.roles:type_name -> api.backoffice.service.v1.Role
+	28, // 6: api.backoffice.service.v1.ListAccountsResponse.Account.role:type_name -> api.backoffice.service.v1.Role
+	38, // 7: api.backoffice.service.v1.ListAccountsResponse.Account.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 8: api.backoffice.service.v1.BackofficeAccount.AddAccount:input_type -> api.backoffice.service.v1.AddAccountRequest
+	2,  // 9: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:input_type -> api.backoffice.service.v1.SendEmailVerificationRequest
+	4,  // 10: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:input_type -> api.backoffice.service.v1.VerifyEmailRequest
+	6,  // 11: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:input_type -> api.backoffice.service.v1.SendMobileVerificationRequest
+	8,  // 12: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:input_type -> api.backoffice.service.v1.VerifyMobileRequest
+	10, // 13: api.backoffice.service.v1.BackofficeAccount.ResetPassword:input_type -> api.backoffice.service.v1.ResetPasswordRequest
+	12, // 14: api.backoffice.service.v1.BackofficeAccount.Generate2fa:input_type -> api.backoffice.service.v1.Generate2faRequest
+	14, // 15: api.backoffice.service.v1.BackofficeAccount.Bind2fa:input_type -> api.backoffice.service.v1.Bind2faRequest
+	16, // 16: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:input_type -> api.backoffice.service.v1.Unbind2faRequest
+	18, // 17: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:input_type -> api.backoffice.service.v1.UpdateAccountRequest
+	20, // 18: api.backoffice.service.v1.BackofficeAccount.Login:input_type -> api.backoffice.service.v1.LoginRequest
+	22, // 19: api.backoffice.service.v1.BackofficeAccount.Register:input_type -> api.backoffice.service.v1.RegisterRequest
+	24, // 20: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:input_type -> api.backoffice.service.v1.SendRegisterVerificationCodeRequest
+	26, // 21: api.backoffice.service.v1.BackofficeAccount.AccountInfo:input_type -> api.backoffice.service.v1.AccountInfoRequest
+	31, // 22: api.backoffice.service.v1.BackofficeAccount.ListAccounts:input_type -> api.backoffice.service.v1.ListAccountsRequest
+	33, // 23: api.backoffice.service.v1.BackofficeAccount.CreateRole:input_type -> api.backoffice.service.v1.CreateRoleRequest
+	35, // 24: api.backoffice.service.v1.BackofficeAccount.ListRoles:input_type -> api.backoffice.service.v1.ListRolesRequest
+	1,  // 25: api.backoffice.service.v1.BackofficeAccount.AddAccount:output_type -> api.backoffice.service.v1.AddAccountResponse
+	3,  // 26: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:output_type -> api.backoffice.service.v1.SendEmailVerificationResponse
+	5,  // 27: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:output_type -> api.backoffice.service.v1.VerifyEmailResponse
+	7,  // 28: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:output_type -> api.backoffice.service.v1.SendMobileVerificationResponse
+	9,  // 29: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:output_type -> api.backoffice.service.v1.VerifyMobileResponse
+	11, // 30: api.backoffice.service.v1.BackofficeAccount.ResetPassword:output_type -> api.backoffice.service.v1.ResetPasswordResponse
+	13, // 31: api.backoffice.service.v1.BackofficeAccount.Generate2fa:output_type -> api.backoffice.service.v1.Generate2faResponse
+	15, // 32: api.backoffice.service.v1.BackofficeAccount.Bind2fa:output_type -> api.backoffice.service.v1.Bind2faResponse
+	17, // 33: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:output_type -> api.backoffice.service.v1.Unbind2faResponse
+	19, // 34: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:output_type -> api.backoffice.service.v1.UpdateAccountResponse
+	21, // 35: api.backoffice.service.v1.BackofficeAccount.Login:output_type -> api.backoffice.service.v1.LoginResponse
+	23, // 36: api.backoffice.service.v1.BackofficeAccount.Register:output_type -> api.backoffice.service.v1.RegisterResponse
+	25, // 37: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:output_type -> api.backoffice.service.v1.SendRegisterVerificationCodeResponse
+	27, // 38: api.backoffice.service.v1.BackofficeAccount.AccountInfo:output_type -> api.backoffice.service.v1.AccountInfoResponse
+	32, // 39: api.backoffice.service.v1.BackofficeAccount.ListAccounts:output_type -> api.backoffice.service.v1.ListAccountsResponse
+	34, // 40: api.backoffice.service.v1.BackofficeAccount.CreateRole:output_type -> api.backoffice.service.v1.CreateRoleResponse
+	36, // 41: api.backoffice.service.v1.BackofficeAccount.ListRoles:output_type -> api.backoffice.service.v1.ListRolesResponse
+	25, // [25:42] is the sub-list for method output_type
+	8,  // [8:25] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_account_proto_init() }
@@ -2089,15 +2137,15 @@ func file_backoffice_service_v1_backoffice_account_proto_init() {
 		return
 	}
 	file_backoffice_service_v1_backoffice_account_proto_msgTypes[18].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_account_proto_msgTypes[30].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_account_proto_msgTypes[34].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_account_proto_msgTypes[31].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_account_proto_msgTypes[35].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_account_proto_rawDesc), len(file_backoffice_service_v1_backoffice_account_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   37,
+			NumMessages:   38,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

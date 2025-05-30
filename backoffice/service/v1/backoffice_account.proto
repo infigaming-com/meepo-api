@@ -224,8 +224,12 @@ message Permission {
     // group name: dashboard, game, user, finance, report, system, etc.
     string group_name = 2;
     // action name: read, write, delete, etc.
-    repeated string actions = 3;
-    repeated string api_paths = 4;
+    repeated ApiPath api_paths = 4;
+}
+
+message ApiPath {
+    string path = 1;
+    string action = 2;
 }
 
 message ListAccountsRequest {
