@@ -302,7 +302,7 @@ message UrlInfo {
 }
 
 message BalanceRequest {
-	int64 user_id = 1;
+	string user_id = 1;
 	string currency = 2;
 	string game_id = 3;
 	string round_id = 4;
