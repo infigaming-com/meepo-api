@@ -3384,6 +3384,10 @@ func (m *ListAccountsRequest) validate(all bool) error {
 		// no validation rules for OperatorId
 	}
 
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
 	if m.Page != nil {
 		// no validation rules for Page
 	}
@@ -3529,6 +3533,10 @@ func (m *ListAccountsResponse) validate(all bool) error {
 	}
 
 	// no validation rules for Total
+
+	// no validation rules for TotalEnabled
+
+	// no validation rules for TotalDisabled
 
 	// no validation rules for Page
 

@@ -2352,8 +2352,9 @@ type ListUsersRequest struct {
 	UserType      *string `protobuf:"bytes,21,opt,name=user_type,json=userType,proto3,oneof" json:"user_type,omitempty"`
 	RoleId        *int64  `protobuf:"varint,22,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
 	Online        *bool   `protobuf:"varint,23,opt,name=online,proto3,oneof" json:"online,omitempty"`
-	Page          *int32  `protobuf:"varint,24,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32  `protobuf:"varint,25,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Enabled       *bool   `protobuf:"varint,24,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Page          *int32  `protobuf:"varint,25,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32  `protobuf:"varint,26,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2528,6 +2529,13 @@ func (x *ListUsersRequest) GetOnline() bool {
 	return false
 }
 
+func (x *ListUsersRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
 func (x *ListUsersRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
@@ -2548,6 +2556,8 @@ type ListUsersResponse struct {
 	Page          int32                     `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                     `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	Total         int32                     `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	TotalEnabled  int32                     `protobuf:"varint,5,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
+	TotalDisabled int32                     `protobuf:"varint,6,opt,name=total_disabled,json=totalDisabled,proto3" json:"total_disabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2606,6 +2616,20 @@ func (x *ListUsersResponse) GetPageSize() int32 {
 func (x *ListUsersResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
+	}
+	return 0
+}
+
+func (x *ListUsersResponse) GetTotalEnabled() int32 {
+	if x != nil {
+		return x.TotalEnabled
+	}
+	return 0
+}
+
+func (x *ListUsersResponse) GetTotalDisabled() int32 {
+	if x != nil {
+		return x.TotalDisabled
 	}
 	return 0
 }
@@ -5015,7 +5039,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\b_enabledB\n" +
 	"\n" +
 	"\b_role_id\"\x14\n" +
-	"\x12UpdateUserResponse\"\xe0\t\n" +
+	"\x12UpdateUserResponse\"\x8b\n" +
+	"\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -5040,9 +5065,10 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\tban_login\x18\x14 \x01(\bH\x0fR\bbanLogin\x88\x01\x01\x12 \n" +
 	"\tuser_type\x18\x15 \x01(\tH\x10R\buserType\x88\x01\x01\x12\x1c\n" +
 	"\arole_id\x18\x16 \x01(\x03H\x11R\x06roleId\x88\x01\x01\x12\x1b\n" +
-	"\x06online\x18\x17 \x01(\bH\x12R\x06online\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x18 \x01(\x05H\x13R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x19 \x01(\x05H\x14R\bpageSize\x88\x01\x01B\n" +
+	"\x06online\x18\x17 \x01(\bH\x12R\x06online\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x18 \x01(\bH\x13R\aenabled\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x19 \x01(\x05H\x14R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x1a \x01(\x05H\x15R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -5068,15 +5094,19 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"_user_typeB\n" +
 	"\n" +
 	"\b_role_idB\t\n" +
-	"\a_onlineB\a\n" +
+	"\a_onlineB\n" +
+	"\n" +
+	"\b_enabledB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x9f\a\n" +
+	"_page_size\"\xeb\a\n" +
 	"\x11ListUsersResponse\x12A\n" +
 	"\x05users\x18\x01 \x03(\v2+.api.user.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xff\x05\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x12#\n" +
+	"\rtotal_enabled\x18\x05 \x01(\x05R\ftotalEnabled\x12%\n" +
+	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\xff\x05\n" +
 	"\x04User\x12\x1a\n" +
 	"\bretailer\x18\x01 \x01(\tR\bretailer\x12\x14\n" +
 	"\x05group\x18\x02 \x01(\tR\x05group\x12#\n" +

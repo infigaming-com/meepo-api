@@ -248,8 +248,9 @@ message ListAccountsRequest {
     optional int64 user_id = 1;
     optional int64 role_id = 2;
     optional int64 operator_id = 3;
-    optional int32 page = 4;
-    optional int32 page_size = 5;
+    optional bool enabled = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
 }
 
 message ListAccountsResponse {
@@ -264,8 +265,10 @@ message ListAccountsResponse {
     }
     repeated Account accounts = 1;
     int32 total = 2;
-    int32 page = 3;
-    int32 page_size = 4;
+    int32 total_enabled = 3;
+    int32 total_disabled = 4;
+    int32 page = 5;
+    int32 page_size = 6;
 }
 
 message CreateRoleRequest {

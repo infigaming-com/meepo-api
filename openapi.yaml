@@ -3784,6 +3784,8 @@ components:
                     type: string
                 operatorId:
                     type: string
+                enabled:
+                    type: boolean
                 page:
                     type: integer
                     format: int32
@@ -3798,6 +3800,12 @@ components:
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.ListAccountsResponse_Account'
                 total:
+                    type: integer
+                    format: int32
+                totalEnabled:
+                    type: integer
+                    format: int32
+                totalDisabled:
                     type: integer
                     format: int32
                 page:

@@ -1443,8 +1443,9 @@ type ListAccountsRequest struct {
 	UserId        *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	RoleId        *int64                 `protobuf:"varint,2,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
 	OperatorId    *int64                 `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
-	Page          *int32                 `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Enabled       *bool                  `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Page          *int32                 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1500,6 +1501,13 @@ func (x *ListAccountsRequest) GetOperatorId() int64 {
 	return 0
 }
 
+func (x *ListAccountsRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
 func (x *ListAccountsRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
@@ -1518,8 +1526,10 @@ type ListAccountsResponse struct {
 	state         protoimpl.MessageState          `protogen:"open.v1"`
 	Accounts      []*ListAccountsResponse_Account `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`
 	Total         int32                           `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	Page          int32                           `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                           `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	TotalEnabled  int32                           `protobuf:"varint,3,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
+	TotalDisabled int32                           `protobuf:"varint,4,opt,name=total_disabled,json=totalDisabled,proto3" json:"total_disabled,omitempty"`
+	Page          int32                           `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                           `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1564,6 +1574,20 @@ func (x *ListAccountsResponse) GetAccounts() []*ListAccountsResponse_Account {
 func (x *ListAccountsResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
+	}
+	return 0
+}
+
+func (x *ListAccountsResponse) GetTotalEnabled() int32 {
+	if x != nil {
+		return x.TotalEnabled
+	}
+	return 0
+}
+
+func (x *ListAccountsResponse) GetTotalDisabled() int32 {
+	if x != nil {
+		return x.TotalDisabled
 	}
 	return 0
 }
@@ -2136,27 +2160,32 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\tapi_paths\x18\x04 \x03(\v2\".api.backoffice.service.v1.ApiPathR\bapiPaths\"5\n" +
 	"\aApiPath\x12\x12\n" +
 	"\x04path\x18\x01 \x01(\tR\x04path\x12\x16\n" +
-	"\x06action\x18\x02 \x01(\tR\x06action\"\xf1\x01\n" +
+	"\x06action\x18\x02 \x01(\tR\x06action\"\x9c\x02\n" +
 	"\x13ListAccountsRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1c\n" +
 	"\arole_id\x18\x02 \x01(\x03H\x01R\x06roleId\x88\x01\x01\x12$\n" +
 	"\voperator_id\x18\x03 \x01(\x03H\x02R\n" +
-	"operatorId\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x04 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x05 \x01(\x05H\x04R\bpageSize\x88\x01\x01B\n" +
+	"operatorId\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x04 \x01(\bH\x03R\aenabled\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\n" +
 	"\n" +
 	"\b_role_idB\x0e\n" +
-	"\f_operator_idB\a\n" +
+	"\f_operator_idB\n" +
+	"\n" +
+	"\b_enabledB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xab\x03\n" +
+	"_page_size\"\xf7\x03\n" +
 	"\x14ListAccountsResponse\x12S\n" +
 	"\baccounts\x18\x01 \x03(\v27.api.backoffice.service.v1.ListAccountsResponse.AccountR\baccounts\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
-	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xf6\x01\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
+	"\rtotal_enabled\x18\x03 \x01(\x05R\ftotalEnabled\x12%\n" +
+	"\x0etotal_disabled\x18\x04 \x01(\x05R\rtotalDisabled\x12\x12\n" +
+	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\x1a\xf6\x01\n" +
 	"\aAccount\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x14\n" +
