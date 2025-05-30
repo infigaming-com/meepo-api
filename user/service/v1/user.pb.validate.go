@@ -4487,6 +4487,10 @@ func (m *ListUsersRequest) validate(all bool) error {
 		// no validation rules for Online
 	}
 
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
 	if m.Page != nil {
 		// no validation rules for Page
 	}
@@ -4634,6 +4638,10 @@ func (m *ListUsersResponse) validate(all bool) error {
 	// no validation rules for PageSize
 
 	// no validation rules for Total
+
+	// no validation rules for TotalEnabled
+
+	// no validation rules for TotalDisabled
 
 	if len(errors) > 0 {
 		return ListUsersResponseMultiError(errors)
