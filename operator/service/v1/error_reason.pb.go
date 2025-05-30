@@ -87,11 +87,11 @@ var File_operator_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_operator_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"&operator/service/v1/error_reason.proto\x12\x17api.operator.service.v1\x1a\x13errors/errors.proto*\x82\x02\n" +
+	"&operator/service/v1/error_reason.proto\x12\x17api.operator.service.v1\x1a\x13errors/errors.proto*\xf6\x01\n" +
 	"\vErrorReason\x12\x0f\n" +
-	"\vUNSPECIFIED\x10\x00\x12\x1e\n" +
-	"\x12OPERATOR_NOT_FOUND\x10\xa0\x9c\x01\x1a\x04\xa8E\x94\x03\x12#\n" +
-	"\x17OPERATOR_ALREADY_EXISTS\x10\xa1\x9c\x01\x1a\x04\xa8E\x99\x03\x12\x1a\n" +
+	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
+	"\x12OPERATOR_NOT_FOUND\x10\xa0\x9c\x01\x12\x1d\n" +
+	"\x17OPERATOR_ALREADY_EXISTS\x10\xa1\x9c\x01\x12\x1a\n" +
 	"\x14LOCK_OPERATOR_FAILED\x10\xa2\x9c\x01\x12\x19\n" +
 	"\x13ADD_OPERATOR_FAILED\x10\xa3\x9c\x01\x128\n" +
 	"2ADD_ORIGIN_OPERATOR_ID_FAILED_WITH_EXISTING_ORIGIN\x10\xa4\x9c\x01\x12&\n" +

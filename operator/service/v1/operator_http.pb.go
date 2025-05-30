@@ -37,7 +37,7 @@ type OperatorHTTPServer interface {
 
 func RegisterOperatorHTTPServer(s *http.Server, srv OperatorHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/operator/add", _Operator_AddOperator0_HTTP_Handler(srv))
+	r.POST("/v1/operator/add", _Operator_AddOperator1_HTTP_Handler(srv))
 	r.POST("/v1/operator/update", _Operator_UpdateOperator0_HTTP_Handler(srv))
 	r.POST("/v1/operator/currencies/update", _Operator_UpdateOperatorCurrency0_HTTP_Handler(srv))
 	r.POST("/v1/operator/currencies/get", _Operator_GetOperatorCurrencies0_HTTP_Handler(srv))
@@ -45,7 +45,7 @@ func RegisterOperatorHTTPServer(s *http.Server, srv OperatorHTTPServer) {
 	r.POST("/v1/operator/origins/delete", _Operator_DeleteOriginOperatorId0_HTTP_Handler(srv))
 }
 
-func _Operator_AddOperator0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
+func _Operator_AddOperator1_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddOperatorRequest
 		if err := ctx.Bind(&in); err != nil {

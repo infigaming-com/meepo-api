@@ -274,8 +274,7 @@ message GetUserProfileResponse {
 
 message AddUserCommentRequest {
 	int64 user_id = 1;
-	int64 author_user_id = 2;
-	string content = 3;
+	string content = 2;
 }
 
 message AddUserCommentResponse {

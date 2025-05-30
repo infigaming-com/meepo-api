@@ -12,7 +12,7 @@ enum ErrorReason {
   option (errors.default_code) = 500;
 
   UNSPECIFIED = 0;
-  GAME_BET_NOT_FOUND = 40001 [(errors.code) = 404];
-  GAME_ACTION_NOT_FOUND = 40002 [(errors.code) = 401];
-  GET_RATES_FAILED = 40003 [(errors.code) = 401];
+  GAME_BET_NOT_FOUND = 40001;
+  GAME_ACTION_NOT_FOUND = 40002;
+  GET_RATES_FAILED = 40003;
 }

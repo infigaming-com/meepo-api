@@ -3,7 +3,6 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
-import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -289,16 +288,17 @@ message GetPlayerGameDataResponse {
 		string provider = 3;
 		string game_type = 4;
 		string game_id = 5;
-		string user_id = 6;
-		string turnover = 7;
-		string turnover_usd = 8;
-		string win_amount = 9;
-		string win_amount_usd = 10;
-		string ggr = 11;
-		string ggr_usd = 12;
-		string rtp_percentage = 13;
-		int64 bet_count = 14;
-		string average_bet_amount = 15;
+		string game_name = 6;
+		string user_id = 7;
+		string turnover = 8;
+		string turnover_usd = 9;
+		string win_amount = 10;
+		string win_amount_usd = 11;
+		string ggr = 12;
+		string ggr_usd = 13;
+		string rtp_percentage = 14;
+		int64 bet_count = 15;
+		string average_bet_amount = 16;
 	}
 	repeated List list = 7;
 	int32 page = 8;
@@ -503,28 +503,26 @@ message ListDepositVtgDetailsRequest {
 message ListDepositVtgDetailsResponse {
 	message Detail {
 		string date = 1;
-		string week = 2;
-		string month = 3;
-		string operator_name = 4;
-		string currency = 5;
-		string deposit_amount = 6;
-		string deposit_amount_usd = 7;
-		int32 deposit_users = 8;
-		string ftd_amount = 9;
-		string ftd_amount_usd = 10;
-		int32 ftd_users = 11;
-		string same_day_ftd_amount = 12;
-		string same_day_ftd_amount_usd = 13;
-		int32 same_day_ftd_users = 14;
-		string repeated_deposit_amount = 15;
-		string repeated_deposit_amount_usd = 16;
-		int32 repeated_deposit_users = 17;
-		string same_day_ftd = 18;
-		string non_same_day_ftd = 19;
-		string average_ftd_amount_for_same_day_registred_users = 20;
-		string average_ftd_amount_usd_for_same_day_registred_users = 21;
-		string average_ftd_amount_for_non_same_day_registred_users = 22;
-		string average_ftd_amount_usd_for_non_same_day_registred_users = 23;
+		string operator_name = 2;
+		string currency = 3;
+		string deposit_amount = 4;
+		string deposit_amount_usd = 5;
+		int32 deposit_users = 6;
+		string ftd_amount = 7;
+		string ftd_amount_usd = 8;
+		int32 ftd_users = 9;
+		string same_day_ftd_amount = 10;
+		string same_day_ftd_amount_usd = 11;
+		int32 same_day_ftd_users = 12;
+		string repeated_deposit_amount = 13;
+		string repeated_deposit_amount_usd = 14;
+		int32 repeated_deposit_users = 15;
+		string same_day_ftd = 16;
+		string non_same_day_ftd = 17;
+		string average_ftd_amount_for_same_day_registred_users = 18;
+		string average_ftd_amount_usd_for_same_day_registred_users = 19;
+		string average_ftd_amount_for_non_same_day_registred_users = 20;
+		string average_ftd_amount_usd_for_non_same_day_registred_users = 21;
 	}
 	repeated Detail daily_details = 1;
 	int32 page = 2;

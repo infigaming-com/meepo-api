@@ -10,17 +10,16 @@ option java_multiple_files = true;
 option java_package = "api.wallet.service.v1";
 
 service Wallet {
-	rpc AddUser (AddUserRequest) returns (AddUserResponse) {}
+	rpc AddUser (AddUserRequest) returns (AddUserResponse) {
+	}
 
-	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {}
+	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {
+	}
 	
-	rpc AddOrUpdateOperatorsCurrency (AddOrUpdateOperatorsCurrencyRequest) returns (AddOrUpdateOperatorsCurrencyResponse) {}
+	rpc AddOrUpdateOperatorsCurrency (AddOrUpdateOperatorsCurrencyRequest) returns (AddOrUpdateOperatorsCurrencyResponse) {
+	}
 	
 	rpc UpdateUserCurrency (UpdateUserCurrencyRequest) returns (UpdateUserCurrencyResponse) {
-		option (google.api.http) = {
-			post: "/v1/wallet/currencies/update"
-			body: "*"
-		};
 	}
 	
 	// GetUserBalances returns the balances of all currencies of the user
@@ -33,10 +32,6 @@ service Wallet {
 
 	// GetUserBalance returns the balance of specific currency of the user
 	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {
-		option (google.api.http) = {
-			post: "/v1/wallet/balances/get"
-			body: "*"
-		};
 	}
 
 	rpc Credit (CreditRequest) returns (CreditResponse) {}
@@ -74,6 +69,8 @@ service Wallet {
 
 	// GetUserOverview returns data for the overview of user's wallet
 	rpc GetBackofficeUserOverviewFromWallet (GetBackofficeUserOverviewFromWalletRequest) returns (GetBackofficeUserOverviewFromWalletResponse) {}
+
+	rpc GetOverviewDashboardFromWallet (GetOverviewDashboardFromWalletRequest) returns (GetOverviewDashboardFromWalletResponse) {}
 }
 
 message AddUserRequest {
@@ -488,4 +485,35 @@ message GetBackofficeUserOverviewFromWalletResponse {
 	string turnover_multiplier = 20; // Round to 2 decimal places
 	string deposit_to_withdraw_ratio = 21; // Round to 2 decimal places
 	string rtp = 22; // Round to 2 decimal places
+}
+
+message GetOverviewDashboardFromWalletRequest {
+}
+
+message GetOverviewDashboardFromWalletResponse {
+	message GGR {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message NGR {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message Deposit {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message Withdraw {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message DepositMinusWithdraw {
+		string today = 1;
+		string yesterday = 2;
+	}
+	GGR ggr = 1;
+	NGR ngr = 2;
+	Deposit deposit = 3;
+	Withdraw withdraw = 4;
+	DepositMinusWithdraw deposit_minus_withdraw = 5;
 }

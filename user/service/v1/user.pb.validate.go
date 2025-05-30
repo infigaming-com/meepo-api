@@ -7339,6 +7339,303 @@ var _ interface {
 	ErrorName() string
 } = GetRoleResponseValidationError{}
 
+// Validate checks the field values on GetOverviewDashboardFromUserRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetOverviewDashboardFromUserRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOverviewDashboardFromUserRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOverviewDashboardFromUserRequestMultiError, or nil if none found.
+func (m *GetOverviewDashboardFromUserRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOverviewDashboardFromUserRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetOverviewDashboardFromUserRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOverviewDashboardFromUserRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetOverviewDashboardFromUserRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetOverviewDashboardFromUserRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOverviewDashboardFromUserRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOverviewDashboardFromUserRequestMultiError) AllErrors() []error { return m }
+
+// GetOverviewDashboardFromUserRequestValidationError is the validation error
+// returned by GetOverviewDashboardFromUserRequest.Validate if the designated
+// constraints aren't met.
+type GetOverviewDashboardFromUserRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOverviewDashboardFromUserRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOverviewDashboardFromUserRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOverviewDashboardFromUserRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOverviewDashboardFromUserRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOverviewDashboardFromUserRequestValidationError) ErrorName() string {
+	return "GetOverviewDashboardFromUserRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOverviewDashboardFromUserRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOverviewDashboardFromUserRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOverviewDashboardFromUserRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOverviewDashboardFromUserRequestValidationError{}
+
+// Validate checks the field values on GetOverviewDashboardFromUserResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOverviewDashboardFromUserResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOverviewDashboardFromUserResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOverviewDashboardFromUserResponseMultiError, or nil if none found.
+func (m *GetOverviewDashboardFromUserResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOverviewDashboardFromUserResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetRegisteredUsers()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOverviewDashboardFromUserResponseValidationError{
+					field:  "RegisteredUsers",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOverviewDashboardFromUserResponseValidationError{
+					field:  "RegisteredUsers",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRegisteredUsers()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOverviewDashboardFromUserResponseValidationError{
+				field:  "RegisteredUsers",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetFirstDepositUsers()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOverviewDashboardFromUserResponseValidationError{
+					field:  "FirstDepositUsers",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOverviewDashboardFromUserResponseValidationError{
+					field:  "FirstDepositUsers",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFirstDepositUsers()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOverviewDashboardFromUserResponseValidationError{
+				field:  "FirstDepositUsers",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetActiveUsers()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOverviewDashboardFromUserResponseValidationError{
+					field:  "ActiveUsers",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOverviewDashboardFromUserResponseValidationError{
+					field:  "ActiveUsers",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetActiveUsers()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOverviewDashboardFromUserResponseValidationError{
+				field:  "ActiveUsers",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOverviewDashboardFromUserResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOverviewDashboardFromUserResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetOverviewDashboardFromUserResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetOverviewDashboardFromUserResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOverviewDashboardFromUserResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOverviewDashboardFromUserResponseMultiError) AllErrors() []error { return m }
+
+// GetOverviewDashboardFromUserResponseValidationError is the validation error
+// returned by GetOverviewDashboardFromUserResponse.Validate if the designated
+// constraints aren't met.
+type GetOverviewDashboardFromUserResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOverviewDashboardFromUserResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOverviewDashboardFromUserResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOverviewDashboardFromUserResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOverviewDashboardFromUserResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOverviewDashboardFromUserResponseValidationError) ErrorName() string {
+	return "GetOverviewDashboardFromUserResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOverviewDashboardFromUserResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOverviewDashboardFromUserResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOverviewDashboardFromUserResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOverviewDashboardFromUserResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -8313,3 +8610,360 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetUserProfileResponse_CommentValidationError{}
+
+// Validate checks the field values on
+// GetOverviewDashboardFromUserResponse_RegisteredUsers with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetOverviewDashboardFromUserResponse_RegisteredUsers) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetOverviewDashboardFromUserResponse_RegisteredUsers with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// GetOverviewDashboardFromUserResponse_RegisteredUsersMultiError, or nil if
+// none found.
+func (m *GetOverviewDashboardFromUserResponse_RegisteredUsers) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOverviewDashboardFromUserResponse_RegisteredUsers) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Today
+
+	// no validation rules for Yesterday
+
+	if len(errors) > 0 {
+		return GetOverviewDashboardFromUserResponse_RegisteredUsersMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOverviewDashboardFromUserResponse_RegisteredUsersMultiError is an error
+// wrapping multiple validation errors returned by
+// GetOverviewDashboardFromUserResponse_RegisteredUsers.ValidateAll() if the
+// designated constraints aren't met.
+type GetOverviewDashboardFromUserResponse_RegisteredUsersMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOverviewDashboardFromUserResponse_RegisteredUsersMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOverviewDashboardFromUserResponse_RegisteredUsersMultiError) AllErrors() []error { return m }
+
+// GetOverviewDashboardFromUserResponse_RegisteredUsersValidationError is the
+// validation error returned by
+// GetOverviewDashboardFromUserResponse_RegisteredUsers.Validate if the
+// designated constraints aren't met.
+type GetOverviewDashboardFromUserResponse_RegisteredUsersValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOverviewDashboardFromUserResponse_RegisteredUsersValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetOverviewDashboardFromUserResponse_RegisteredUsersValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetOverviewDashboardFromUserResponse_RegisteredUsersValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e GetOverviewDashboardFromUserResponse_RegisteredUsersValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOverviewDashboardFromUserResponse_RegisteredUsersValidationError) ErrorName() string {
+	return "GetOverviewDashboardFromUserResponse_RegisteredUsersValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOverviewDashboardFromUserResponse_RegisteredUsersValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOverviewDashboardFromUserResponse_RegisteredUsers.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOverviewDashboardFromUserResponse_RegisteredUsersValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOverviewDashboardFromUserResponse_RegisteredUsersValidationError{}
+
+// Validate checks the field values on
+// GetOverviewDashboardFromUserResponse_FirstDepositUsers with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetOverviewDashboardFromUserResponse_FirstDepositUsers) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetOverviewDashboardFromUserResponse_FirstDepositUsers with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetOverviewDashboardFromUserResponse_FirstDepositUsersMultiError, or nil if
+// none found.
+func (m *GetOverviewDashboardFromUserResponse_FirstDepositUsers) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOverviewDashboardFromUserResponse_FirstDepositUsers) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Today
+
+	// no validation rules for Yesterday
+
+	if len(errors) > 0 {
+		return GetOverviewDashboardFromUserResponse_FirstDepositUsersMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOverviewDashboardFromUserResponse_FirstDepositUsersMultiError is an error
+// wrapping multiple validation errors returned by
+// GetOverviewDashboardFromUserResponse_FirstDepositUsers.ValidateAll() if the
+// designated constraints aren't met.
+type GetOverviewDashboardFromUserResponse_FirstDepositUsersMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOverviewDashboardFromUserResponse_FirstDepositUsersMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOverviewDashboardFromUserResponse_FirstDepositUsersMultiError) AllErrors() []error {
+	return m
+}
+
+// GetOverviewDashboardFromUserResponse_FirstDepositUsersValidationError is the
+// validation error returned by
+// GetOverviewDashboardFromUserResponse_FirstDepositUsers.Validate if the
+// designated constraints aren't met.
+type GetOverviewDashboardFromUserResponse_FirstDepositUsersValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOverviewDashboardFromUserResponse_FirstDepositUsersValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetOverviewDashboardFromUserResponse_FirstDepositUsersValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetOverviewDashboardFromUserResponse_FirstDepositUsersValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e GetOverviewDashboardFromUserResponse_FirstDepositUsersValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e GetOverviewDashboardFromUserResponse_FirstDepositUsersValidationError) ErrorName() string {
+	return "GetOverviewDashboardFromUserResponse_FirstDepositUsersValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOverviewDashboardFromUserResponse_FirstDepositUsersValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOverviewDashboardFromUserResponse_FirstDepositUsers.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOverviewDashboardFromUserResponse_FirstDepositUsersValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOverviewDashboardFromUserResponse_FirstDepositUsersValidationError{}
+
+// Validate checks the field values on
+// GetOverviewDashboardFromUserResponse_ActiveUsers with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetOverviewDashboardFromUserResponse_ActiveUsers) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetOverviewDashboardFromUserResponse_ActiveUsers with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// GetOverviewDashboardFromUserResponse_ActiveUsersMultiError, or nil if none found.
+func (m *GetOverviewDashboardFromUserResponse_ActiveUsers) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOverviewDashboardFromUserResponse_ActiveUsers) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Today
+
+	// no validation rules for Yesterday
+
+	if len(errors) > 0 {
+		return GetOverviewDashboardFromUserResponse_ActiveUsersMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOverviewDashboardFromUserResponse_ActiveUsersMultiError is an error
+// wrapping multiple validation errors returned by
+// GetOverviewDashboardFromUserResponse_ActiveUsers.ValidateAll() if the
+// designated constraints aren't met.
+type GetOverviewDashboardFromUserResponse_ActiveUsersMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOverviewDashboardFromUserResponse_ActiveUsersMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOverviewDashboardFromUserResponse_ActiveUsersMultiError) AllErrors() []error { return m }
+
+// GetOverviewDashboardFromUserResponse_ActiveUsersValidationError is the
+// validation error returned by
+// GetOverviewDashboardFromUserResponse_ActiveUsers.Validate if the designated
+// constraints aren't met.
+type GetOverviewDashboardFromUserResponse_ActiveUsersValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOverviewDashboardFromUserResponse_ActiveUsersValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetOverviewDashboardFromUserResponse_ActiveUsersValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetOverviewDashboardFromUserResponse_ActiveUsersValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e GetOverviewDashboardFromUserResponse_ActiveUsersValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOverviewDashboardFromUserResponse_ActiveUsersValidationError) ErrorName() string {
+	return "GetOverviewDashboardFromUserResponse_ActiveUsersValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOverviewDashboardFromUserResponse_ActiveUsersValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOverviewDashboardFromUserResponse_ActiveUsers.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOverviewDashboardFromUserResponse_ActiveUsersValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOverviewDashboardFromUserResponse_ActiveUsersValidationError{}

@@ -701,9 +701,7 @@ func (m *GameFilter) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for ProviderId
-
-	// no validation rules for Tags
+	// no validation rules for Tag
 
 	// no validation rules for Name
 
