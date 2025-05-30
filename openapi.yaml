@@ -5770,11 +5770,9 @@ components:
                     items:
                         type: string
                     description: 'provider id: provider list api'
-                tags:
-                    type: array
-                    items:
-                        type: string
-                    description: 'tags: hot game, live casino, slots, etc..'
+                tag:
+                    type: string
+                    description: 'tag: hot game, live casino, slots, etc..'
                 name:
                     type: string
                     description: 'name: game name'
