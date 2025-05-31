@@ -1873,7 +1873,7 @@ func (x *BalanceResponse) GetData() *BalanceResponse_Data {
 
 type PlayRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	GameId        string                 `protobuf:"bytes,3,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	RoundId       string                 `protobuf:"bytes,4,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
@@ -1915,11 +1915,11 @@ func (*PlayRequest) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *PlayRequest) GetUserId() int64 {
+func (x *PlayRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return ""
 }
 
 func (x *PlayRequest) GetCurrency() string {
@@ -5071,7 +5071,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x05bonus\x18\x02 \x01(\x01R\x05bonus\x12\x19\n" +
 	"\bround_id\x18\x03 \x01(\tR\aroundId\"\x85\x02\n" +
 	"\vPlayRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
 	"\agame_id\x18\x03 \x01(\tR\x06gameId\x12\x19\n" +
 	"\bround_id\x18\x04 \x01(\tR\aroundId\x12\x1a\n" +
