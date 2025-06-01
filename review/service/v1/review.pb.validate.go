@@ -1868,6 +1868,10 @@ func (m *GetTicketResponse_Comment) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Id
+
+	// no validation rules for TicketId
+
 	// no validation rules for AuthorUserId
 
 	// no validation rules for Content

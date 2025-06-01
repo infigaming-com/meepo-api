@@ -58,3 +58,15 @@ func IsGetRatesFailed(err error) bool {
 func ErrorGetRatesFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_RATES_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGameTransactionNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GAME_TRANSACTION_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorGameTransactionNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GAME_TRANSACTION_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}

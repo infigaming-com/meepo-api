@@ -109,6 +109,9 @@ service Game {
 	}
 
 	rpc ListProviderRates(ListProviderRatesRequest) returns (ListProviderRatesResponse) {}
+
+	rpc GetGameTransactionById(GetGameTransactionByIdRequest) returns (GetGameTransactionByIdResponse) {
+	}
 }
 
 message CreateOperatorRequest {
@@ -627,6 +630,52 @@ message GetBackofficeUserOverviewFromGameResponse {
 		string rtp = 4;
 	}
 	repeated GameData game_data = 1;
+}
+
+message GetGameTransactionByIdRequest {
+	int64 transaction_id = 1;
+}
+
+message GetGameTransactionByIdResponse {
+	int64 id = 1; // transaction id
+	int64 round_id = 2;
+	string action = 3;
+	int64 bet_id = 4;
+	string provider_bet_id = 5;
+	string provider_transaction_id = 6;
+	string provider_external_transaction_id = 7;
+	string provider_id = 8;
+	string provider_name = 9;
+	int64 operator_id = 10;
+	string operator_name = 11;
+	bool update_balance = 12;
+	bool take_all = 13;
+	bool is_refund = 14;
+	string amount = 15;
+	string amount_usd = 16;
+	string settlement_amount = 17;
+	string settlement_amount_usd = 18;
+	string turnover = 19;
+	string turnover_usd = 20;
+	int64 user_id = 21;
+	string currency = 22;
+	string settlement_currency = 23;
+	string game_id = 24;
+	string game_name = 25;
+	string game_category = 26;
+	string jackpot_contribution = 27;
+	string jackpot_contribution_usd = 28;
+	string jackpot_win = 29;
+	string jackpot_win_usd = 30;
+	google.protobuf.Timestamp bet_time = 31;
+	google.protobuf.Timestamp settle_time = 32;
+	google.protobuf.Timestamp provider_timestamp = 33;
+	string bonus_amount = 34;
+	string bonus_amount_usd = 35;
+	google.protobuf.Timestamp operator_timestamp = 36;
+	google.protobuf.Timestamp processed_at = 37;
+	google.protobuf.Timestamp created_at = 38;
+	google.protobuf.Timestamp updated_at = 39;
 }
 
 message ListProviderRatesRequest {
