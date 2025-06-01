@@ -582,6 +582,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListGamesResponse'
+    /v1/backoffice/game/provider/rates/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListProviderRates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListProviderRatesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListProviderRatesResponse'
     /v1/backoffice/game/provider/update:
         post:
             tags:
@@ -4287,6 +4305,51 @@ components:
                     type: string
                 operatorName:
                     type: string
+        api.backoffice.service.v1.ListProviderRatesRequest:
+            type: object
+            properties:
+                feeGroup:
+                    type: string
+                currency:
+                    type: string
+                providerId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListProviderRatesResponse:
+            type: object
+            properties:
+                providerRates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListProviderRatesResponse_ProviderRate'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListProviderRatesResponse_ProviderRate:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                feeGroup:
+                    type: string
+                currency:
+                    type: string
+                rate:
+                    type: number
+                    format: double
         api.backoffice.service.v1.ListProvidersRequest:
             type: object
             properties:
