@@ -107,6 +107,8 @@ service Game {
 
 	rpc GetBackofficeUserOverviewFromGame(GetBackofficeUserOverviewFromGameRequest) returns (GetBackofficeUserOverviewFromGameResponse) {
 	}
+
+	rpc ListProviderRates(ListProviderRatesRequest) returns (ListProviderRatesResponse) {}
 }
 
 message CreateOperatorRequest {
@@ -625,4 +627,26 @@ message GetBackofficeUserOverviewFromGameResponse {
 		string rtp = 4;
 	}
 	repeated GameData game_data = 1;
+}
+
+message ListProviderRatesRequest {
+	optional string fee_group = 1;
+	optional string currency = 2;
+	optional string provider_id = 3;
+	int32 page = 4;
+	int32 page_size = 5;
+}
+
+message ListProviderRatesResponse {
+	message ProviderRate {
+		string provider_id = 1;
+		string provider_name = 2;
+		string fee_group = 3;
+		string currency = 4;
+		double rate = 5;
+	}
+	repeated ProviderRate provider_rates = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
 }

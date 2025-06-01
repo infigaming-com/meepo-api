@@ -88,15 +88,21 @@ service BackofficeGame {
             body: "*"
         };
     }
-	rpc UpdateGame(UpdateGameRequest) returns (UpdateGameResponse) {
+		rpc UpdateGame(UpdateGameRequest) returns (UpdateGameResponse) {
+			option (google.api.http) = {
+				post: "/v1/backoffice/game/update"
+				body: "*"
+			};
+		}
+		rpc UpdateProvider(UpdateProviderRequest) returns (UpdateProviderResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/game/update"
+			post: "/v1/backoffice/game/provider/update"
 			body: "*"
 		};
 	}
-	rpc UpdateProvider(UpdateProviderRequest) returns (UpdateProviderResponse) {
+	rpc ListProviderRates(ListProviderRatesRequest) returns (ListProviderRatesResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/game/provider/update"
+			post: "/v1/backoffice/game/provider/rates/list"
 			body: "*"
 		};
 	}
@@ -432,3 +438,24 @@ message UpdateProviderRequest {
 
 message UpdateProviderResponse {}
 
+message ListProviderRatesRequest {
+	optional string fee_group = 1;
+	optional string currency = 2;
+	optional string provider_id = 3;
+	int32 page = 4;
+	int32 page_size = 5;
+}
+
+message ListProviderRatesResponse {
+	message ProviderRate {
+		string provider_id = 1;
+		string provider_name = 2;
+		string fee_group = 3;
+		string currency = 4;
+		double rate = 5;
+	}
+	repeated ProviderRate provider_rates = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
+} 
