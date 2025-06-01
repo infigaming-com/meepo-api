@@ -698,6 +698,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListThemesResponse'
+    /v1/backoffice/game/transaction/get:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_GetGameTransactionById
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionByIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionByIdResponse'
     /v1/backoffice/game/update:
         post:
             tags:
@@ -1043,6 +1061,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketResponse'
+    /v1/backoffice/review/tickets/get_by_id:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_GetTicketById
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketByIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketByIdResponse'
     /v1/backoffice/review/tickets/list:
         post:
             tags:
@@ -2713,6 +2749,99 @@ components:
                     type: string
                 rtpPercentage:
                     type: string
+        api.backoffice.service.v1.GetGameTransactionByIdRequest:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+        api.backoffice.service.v1.GetGameTransactionByIdResponse:
+            type: object
+            properties:
+                id:
+                    type: string
+                roundId:
+                    type: string
+                action:
+                    type: string
+                betId:
+                    type: string
+                providerBetId:
+                    type: string
+                providerTransactionId:
+                    type: string
+                providerExternalTransactionId:
+                    type: string
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                updateBalance:
+                    type: boolean
+                takeAll:
+                    type: boolean
+                isRefund:
+                    type: boolean
+                amount:
+                    type: string
+                amountUsd:
+                    type: string
+                settlementAmount:
+                    type: string
+                settlementAmountUsd:
+                    type: string
+                turnover:
+                    type: string
+                turnoverUsd:
+                    type: string
+                userId:
+                    type: string
+                currency:
+                    type: string
+                settlementCurrency:
+                    type: string
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                gameCategory:
+                    type: string
+                jackpotContribution:
+                    type: string
+                jackpotContributionUsd:
+                    type: string
+                jackpotWin:
+                    type: string
+                jackpotWinUsd:
+                    type: string
+                betTime:
+                    type: string
+                    format: date-time
+                settleTime:
+                    type: string
+                    format: date-time
+                providerTimestamp:
+                    type: string
+                    format: date-time
+                bonusAmount:
+                    type: string
+                bonusAmountUsd:
+                    type: string
+                operatorTimestamp:
+                    type: string
+                    format: date-time
+                processedAt:
+                    type: string
+                    format: date-time
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
         api.backoffice.service.v1.GetGameTransactionsForBetRequest:
             type: object
             properties:
@@ -3087,6 +3216,80 @@ components:
                 ggr:
                     type: string
                 ngr:
+                    type: string
+        api.backoffice.service.v1.GetTicketByIdRequest:
+            type: object
+            properties:
+                ticketId:
+                    type: string
+        api.backoffice.service.v1.GetTicketByIdResponse:
+            type: object
+            properties:
+                ticket:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketByIdResponse_Ticket'
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketByIdResponse_Comment'
+        api.backoffice.service.v1.GetTicketByIdResponse_Comment:
+            type: object
+            properties:
+                id:
+                    type: string
+                ticketId:
+                    type: string
+                authorUserId:
+                    type: string
+                content:
+                    type: string
+                createdAt:
+                    type: string
+        api.backoffice.service.v1.GetTicketByIdResponse_Ticket:
+            type: object
+            properties:
+                id:
+                    type: string
+                type:
+                    type: string
+                request:
+                    type: string
+                response:
+                    type: string
+                userId:
+                    type: string
+                operatorId:
+                    type: string
+                currency:
+                    type: string
+                ticketStatus:
+                    type: string
+                reviewerUserId:
+                    type: string
+                reviewerComment:
+                    type: string
+                paymentStatus:
+                    type: string
+                paymentTransactionId:
+                    type: string
+                paymentTransactionError:
+                    type: string
+                walletStatus:
+                    type: string
+                walletFreezeTransactionId:
+                    type: string
+                walletSettleTransactionId:
+                    type: string
+                walletSettleError:
+                    type: string
+                walletRollbackTransactionId:
+                    type: string
+                walletRollbackError:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                reviewedAt:
                     type: string
         api.backoffice.service.v1.GetTicketRequest:
             type: object
