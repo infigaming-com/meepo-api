@@ -25,7 +25,7 @@ service Wallet {
 	// GetUserBalances returns the balances of all currencies of the user
 	rpc GetUserBalances (GetUserBalancesRequest) returns (GetUserBalancesResponse) {
 		option (google.api.http) = {
-			post: "/v1/wallet/balances/list"
+			post: "/decimal/v1/wallet/balances/list"
 			body: "*"
 		};
 	}
