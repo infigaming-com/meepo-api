@@ -11,35 +11,41 @@ option java_package = "api.backoffice.service.v1";
 
 service BackofficeReview {
 	rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/review/tickets/list"
-            body: "*"
-        };
-    }
+		option (google.api.http) = {
+			post: "/v1/backoffice/review/tickets/list"
+			body: "*"
+		};
+	}
 	rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/review/tickets/get"
-            body: "*"
-        };
-    }
-    rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/review/tickets/review"
-            body: "*"
-        };
-    }
+		option (google.api.http) = {
+			post: "/v1/backoffice/review/tickets/get"
+			body: "*"
+		};
+	}
+	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/review/tickets/review"
+			body: "*"
+		};
+	}
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/review/tickets/comments/add"
-            body: "*"
-        };
-    }
+		option (google.api.http) = {
+			post: "/v1/backoffice/review/tickets/comments/add"
+			body: "*"
+		};
+	}
 	rpc CancelTicket(CancelTicketRequest) returns (CancelTicketResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/review/tickets/cancel"
-            body: "*"
-        };
-    }
+		option (google.api.http) = {
+			post: "/v1/backoffice/review/tickets/cancel"
+			body: "*"
+		};
+	}
+	rpc GetTicketById(GetTicketByIdRequest) returns (GetTicketByIdResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/review/tickets/get_by_id"
+			body: "*"
+		};
+	}
 }
 
 message ListTicketsRequest {
@@ -160,3 +166,45 @@ message CancelTicketRequest {
 }
 
 message CancelTicketResponse {}
+
+message GetTicketByIdRequest {
+	int64 ticket_id = 1;
+}
+
+message GetTicketByIdResponse {
+	message Ticket {
+		int64 id = 1;
+		string type = 2;
+		string request = 3;
+		string response = 4;
+		int64 user_id = 5;
+		int64 canceller_user_id = 6;
+		int64 operator_id = 7;
+		string currency = 8;
+		string ticket_status = 9;
+		int64 reviewer_user_id = 10;
+		string reviewer_comment = 11;
+		string payment_status = 12;
+		int64 payment_transaction_id = 13;
+		string payment_transaction_error = 14;
+		string wallet_status = 15;
+		int64 wallet_freeze_transaction_id = 16;
+		int64 wallet_settle_transaction_id = 17;
+		string wallet_settle_error = 18;
+		int64 wallet_rollback_transaction_id = 19;
+		string wallet_rollback_error = 20;
+		int64 created_at = 21;
+		int64 updated_at = 22;
+		int64 reviewed_at = 23;
+		int64 cancelled_at = 24;
+	}
+	message Comment {
+		int64 id = 1;
+		int64 ticket_id = 2;
+		int64 author_user_id = 3;
+		string content = 4;
+		int64 created_at = 5;
+	}
+	Ticket ticket = 1;
+	repeated Comment comments = 2;
+}

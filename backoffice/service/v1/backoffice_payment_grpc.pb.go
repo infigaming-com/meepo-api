@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	BackofficePayment_GetPaymentTransactionPage_FullMethodName = "/api.backoffice.service.v1.BackofficePayment/GetPaymentTransactionPage"
+	BackofficePayment_GetPaymentTransactionById_FullMethodName = "/api.backoffice.service.v1.BackofficePayment/GetPaymentTransactionById"
 )
 
 // BackofficePaymentClient is the client API for BackofficePayment service.
@@ -33,6 +34,10 @@ type BackofficePaymentClient interface {
 	// Get payment transaction page
 	// Retrieves a paginated list of payment transactions with optional filtering
 	GetPaymentTransactionPage(ctx context.Context, in *v1.GetTransactionPageRequest, opts ...grpc.CallOption) (*v1.GetTransactionPageResponse, error)
+	// Get transaction detail
+	// Retrieves detailed information about a specific transaction
+	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+	GetPaymentTransactionById(ctx context.Context, in *GetPaymentTransactionByIdRequest, opts ...grpc.CallOption) (*GetPaymentTransactionByIdResponse, error)
 }
 
 type backofficePaymentClient struct {
@@ -53,6 +58,16 @@ func (c *backofficePaymentClient) GetPaymentTransactionPage(ctx context.Context,
 	return out, nil
 }
 
+func (c *backofficePaymentClient) GetPaymentTransactionById(ctx context.Context, in *GetPaymentTransactionByIdRequest, opts ...grpc.CallOption) (*GetPaymentTransactionByIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPaymentTransactionByIdResponse)
+	err := c.cc.Invoke(ctx, BackofficePayment_GetPaymentTransactionById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficePaymentServer is the server API for BackofficePayment service.
 // All implementations must embed UnimplementedBackofficePaymentServer
 // for forward compatibility.
@@ -63,6 +78,10 @@ type BackofficePaymentServer interface {
 	// Get payment transaction page
 	// Retrieves a paginated list of payment transactions with optional filtering
 	GetPaymentTransactionPage(context.Context, *v1.GetTransactionPageRequest) (*v1.GetTransactionPageResponse, error)
+	// Get transaction detail
+	// Retrieves detailed information about a specific transaction
+	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+	GetPaymentTransactionById(context.Context, *GetPaymentTransactionByIdRequest) (*GetPaymentTransactionByIdResponse, error)
 	mustEmbedUnimplementedBackofficePaymentServer()
 }
 
@@ -75,6 +94,9 @@ type UnimplementedBackofficePaymentServer struct{}
 
 func (UnimplementedBackofficePaymentServer) GetPaymentTransactionPage(context.Context, *v1.GetTransactionPageRequest) (*v1.GetTransactionPageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentTransactionPage not implemented")
+}
+func (UnimplementedBackofficePaymentServer) GetPaymentTransactionById(context.Context, *GetPaymentTransactionByIdRequest) (*GetPaymentTransactionByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentTransactionById not implemented")
 }
 func (UnimplementedBackofficePaymentServer) mustEmbedUnimplementedBackofficePaymentServer() {}
 func (UnimplementedBackofficePaymentServer) testEmbeddedByValue()                           {}
@@ -115,6 +137,24 @@ func _BackofficePayment_GetPaymentTransactionPage_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficePayment_GetPaymentTransactionById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPaymentTransactionByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficePaymentServer).GetPaymentTransactionById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficePayment_GetPaymentTransactionById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficePaymentServer).GetPaymentTransactionById(ctx, req.(*GetPaymentTransactionByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficePayment_ServiceDesc is the grpc.ServiceDesc for BackofficePayment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -125,6 +165,10 @@ var BackofficePayment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPaymentTransactionPage",
 			Handler:    _BackofficePayment_GetPaymentTransactionPage_Handler,
+		},
+		{
+			MethodName: "GetPaymentTransactionById",
+			Handler:    _BackofficePayment_GetPaymentTransactionById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
