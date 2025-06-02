@@ -490,15 +490,3 @@ func IsInvalidCurrencyAmount(err error) bool {
 func ErrorInvalidCurrencyAmount(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_CURRENCY_AMOUNT.String(), fmt.Sprintf(format, args...))
 }
-
-func IsInvalidExchangeRate(err error) bool {
-	if err == nil {
-		return false
-	}
-	e := errors.FromError(err)
-	return e.Reason == ErrorReason_INVALID_EXCHANGE_RATE.String() && e.Code == 500
-}
-
-func ErrorInvalidExchangeRate(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_INVALID_EXCHANGE_RATE.String(), fmt.Sprintf(format, args...))
-}
