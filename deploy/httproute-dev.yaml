@@ -10,6 +10,7 @@ spec:
   hostnames:
     - "dev.meepoapi.xyz"
   rules:
+<<<<<<< HEAD
     - matches:
         - path:
             type: PathPrefix
@@ -122,3 +123,91 @@ spec:
         - name: review-decimal-svc
           port: 8000
           weight: 1
+=======
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/user"
+    backendRefs:
+    - name: user-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/operator"
+    backendRefs:
+    - name: operator-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/system"
+    backendRefs:
+    - name: system-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/game"
+    backendRefs:
+    - name: game-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/payment"
+    backendRefs:
+    - name: payment-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/wallet"
+    backendRefs:
+    - name: wallet-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/decimal/v1/wallet"
+    backendRefs:
+    - name: wallet-decimal-svc
+      port: 8000
+      weight: 1
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: "/v1/wallet"
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/backoffice"
+    backendRefs:
+    - name: backoffice-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/ws"
+    backendRefs:
+    - name: websocket-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/review"
+    backendRefs:
+    - name: review-svc
+      port: 8000
+      weight: 1
+>>>>>>> fbe8ce1 (wallet-decimal)
