@@ -6,6 +6,25 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /decimal/v1/wallet/balances/list:
+        post:
+            tags:
+                - Wallet
+            description: GetUserBalances returns the balances of all currencies of the user
+            operationId: Wallet_GetUserBalances
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse'
     /v1/backoffice/accounts/2fa/bind:
         post:
             tags:
@@ -2144,25 +2163,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserTagsResponse'
-    /v1/wallet/balances/list:
-        post:
-            tags:
-                - Wallet
-            description: GetUserBalances returns the balances of all currencies of the user
-            operationId: Wallet_GetUserBalances
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse'
 components:
     schemas:
         api.backoffice.service.v1.AccountInfoRequest:
