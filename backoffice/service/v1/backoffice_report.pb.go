@@ -595,7 +595,7 @@ type GetGameSummaryResponse struct {
 	Turnover         string                 `protobuf:"bytes,1,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	WinAmount        string                 `protobuf:"bytes,2,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
 	Ggr              string                 `protobuf:"bytes,3,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	BetCount         int64                  `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetCount         int32                  `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
 	AverageBetAmount string                 `protobuf:"bytes,5,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
 	RtpPercentage    string                 `protobuf:"bytes,6,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -653,7 +653,7 @@ func (x *GetGameSummaryResponse) GetGgr() string {
 	return ""
 }
 
-func (x *GetGameSummaryResponse) GetBetCount() int64 {
+func (x *GetGameSummaryResponse) GetBetCount() int32 {
 	if x != nil {
 		return x.BetCount
 	}
@@ -971,7 +971,7 @@ type GetPlayerGameSummaryResponse struct {
 	Turnover         string                 `protobuf:"bytes,1,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	WinAmount        string                 `protobuf:"bytes,2,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
 	Ggr              string                 `protobuf:"bytes,3,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	BetCount         int64                  `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetCount         int32                  `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
 	AverageBetAmount string                 `protobuf:"bytes,5,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
 	RtpPercentage    string                 `protobuf:"bytes,6,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -1029,7 +1029,7 @@ func (x *GetPlayerGameSummaryResponse) GetGgr() string {
 	return ""
 }
 
-func (x *GetPlayerGameSummaryResponse) GetBetCount() int64 {
+func (x *GetPlayerGameSummaryResponse) GetBetCount() int32 {
 	if x != nil {
 		return x.BetCount
 	}
@@ -2279,8 +2279,8 @@ type ListSummariesResponse_List struct {
 	Date                       string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
 	OperatorName               string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	Country                    string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	Visits                     int64                  `protobuf:"varint,4,opt,name=visits,proto3" json:"visits,omitempty"`
-	UniqueVisits               int64                  `protobuf:"varint,5,opt,name=unique_visits,json=uniqueVisits,proto3" json:"unique_visits,omitempty"`
+	Visits                     int32                  `protobuf:"varint,4,opt,name=visits,proto3" json:"visits,omitempty"`
+	UniqueVisits               int32                  `protobuf:"varint,5,opt,name=unique_visits,json=uniqueVisits,proto3" json:"unique_visits,omitempty"`
 	ActiveUsers                int32                  `protobuf:"varint,6,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
 	RegisteredUsers            int32                  `protobuf:"varint,7,opt,name=registered_users,json=registeredUsers,proto3" json:"registered_users,omitempty"`
 	DepositedUsers             int32                  `protobuf:"varint,8,opt,name=deposited_users,json=depositedUsers,proto3" json:"deposited_users,omitempty"`
@@ -2374,14 +2374,14 @@ func (x *ListSummariesResponse_List) GetCountry() string {
 	return ""
 }
 
-func (x *ListSummariesResponse_List) GetVisits() int64 {
+func (x *ListSummariesResponse_List) GetVisits() int32 {
 	if x != nil {
 		return x.Visits
 	}
 	return 0
 }
 
-func (x *ListSummariesResponse_List) GetUniqueVisits() int64 {
+func (x *ListSummariesResponse_List) GetUniqueVisits() int32 {
 	if x != nil {
 		return x.UniqueVisits
 	}
@@ -2662,7 +2662,7 @@ type GetGameDataResponse_List struct {
 	GameType           string                 `protobuf:"bytes,4,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"`
 	GameName           string                 `protobuf:"bytes,5,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
 	GameId             string                 `protobuf:"bytes,6,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	PlayerCount        int64                  `protobuf:"varint,7,opt,name=player_count,json=playerCount,proto3" json:"player_count,omitempty"`
+	PlayerCount        int32                  `protobuf:"varint,7,opt,name=player_count,json=playerCount,proto3" json:"player_count,omitempty"`
 	Turnover           string                 `protobuf:"bytes,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	TurnoverUsd        string                 `protobuf:"bytes,9,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
 	TurnoverPercentage string                 `protobuf:"bytes,10,opt,name=turnover_percentage,json=turnoverPercentage,proto3" json:"turnover_percentage,omitempty"`
@@ -2671,7 +2671,7 @@ type GetGameDataResponse_List struct {
 	Ggr                string                 `protobuf:"bytes,13,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	GgrUsd             string                 `protobuf:"bytes,14,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
 	GgrPercentage      string                 `protobuf:"bytes,15,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
-	BetCount           int64                  `protobuf:"varint,16,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetCount           int32                  `protobuf:"varint,16,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
 	AverageBetAmount   string                 `protobuf:"bytes,17,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
 	RtpPercentage      string                 `protobuf:"bytes,18,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -2750,7 +2750,7 @@ func (x *GetGameDataResponse_List) GetGameId() string {
 	return ""
 }
 
-func (x *GetGameDataResponse_List) GetPlayerCount() int64 {
+func (x *GetGameDataResponse_List) GetPlayerCount() int32 {
 	if x != nil {
 		return x.PlayerCount
 	}
@@ -2813,7 +2813,7 @@ func (x *GetGameDataResponse_List) GetGgrPercentage() string {
 	return ""
 }
 
-func (x *GetGameDataResponse_List) GetBetCount() int64 {
+func (x *GetGameDataResponse_List) GetBetCount() int32 {
 	if x != nil {
 		return x.BetCount
 	}
@@ -2850,7 +2850,7 @@ type GetPlayerGameDataResponse_List struct {
 	Ggr              string                 `protobuf:"bytes,12,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	GgrUsd           string                 `protobuf:"bytes,13,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
 	RtpPercentage    string                 `protobuf:"bytes,14,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
-	BetCount         int64                  `protobuf:"varint,15,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetCount         int32                  `protobuf:"varint,15,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
 	AverageBetAmount string                 `protobuf:"bytes,16,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -2984,7 +2984,7 @@ func (x *GetPlayerGameDataResponse_List) GetRtpPercentage() string {
 	return ""
 }
 
-func (x *GetPlayerGameDataResponse_List) GetBetCount() int64 {
+func (x *GetPlayerGameDataResponse_List) GetBetCount() int32 {
 	if x != nil {
 		return x.BetCount
 	}
@@ -4191,8 +4191,8 @@ type ListWithdrawVtgDetailsResponse_Detail struct {
 	RepeatedWithdrawAmount                         string                 `protobuf:"bytes,13,opt,name=repeated_withdraw_amount,json=repeatedWithdrawAmount,proto3" json:"repeated_withdraw_amount,omitempty"`
 	RepeatedWithdrawAmountUsd                      string                 `protobuf:"bytes,14,opt,name=repeated_withdraw_amount_usd,json=repeatedWithdrawAmountUsd,proto3" json:"repeated_withdraw_amount_usd,omitempty"`
 	RepeatedWithdrawUsers                          int32                  `protobuf:"varint,15,opt,name=repeated_withdraw_users,json=repeatedWithdrawUsers,proto3" json:"repeated_withdraw_users,omitempty"`
-	SameDayFtw                                     int64                  `protobuf:"varint,16,opt,name=same_day_ftw,json=sameDayFtw,proto3" json:"same_day_ftw,omitempty"`
-	NonSameDayFtw                                  int64                  `protobuf:"varint,17,opt,name=non_same_day_ftw,json=nonSameDayFtw,proto3" json:"non_same_day_ftw,omitempty"`
+	SameDayFtw                                     int32                  `protobuf:"varint,16,opt,name=same_day_ftw,json=sameDayFtw,proto3" json:"same_day_ftw,omitempty"`
+	NonSameDayFtw                                  int32                  `protobuf:"varint,17,opt,name=non_same_day_ftw,json=nonSameDayFtw,proto3" json:"non_same_day_ftw,omitempty"`
 	AverageFtwAmountForSameDayRegistredUsers       string                 `protobuf:"bytes,18,opt,name=average_ftw_amount_for_same_day_registred_users,json=averageFtwAmountForSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_same_day_registred_users,omitempty"`
 	AverageFtwAmountUsdForSameDayRegistredUsers    string                 `protobuf:"bytes,19,opt,name=average_ftw_amount_usd_for_same_day_registred_users,json=averageFtwAmountUsdForSameDayRegistredUsers,proto3" json:"average_ftw_amount_usd_for_same_day_registred_users,omitempty"`
 	AverageFtwAmountForNonSameDayRegistredUsers    string                 `protobuf:"bytes,20,opt,name=average_ftw_amount_for_non_same_day_registred_users,json=averageFtwAmountForNonSameDayRegistredUsers,proto3" json:"average_ftw_amount_for_non_same_day_registred_users,omitempty"`
@@ -4338,14 +4338,14 @@ func (x *ListWithdrawVtgDetailsResponse_Detail) GetRepeatedWithdrawUsers() int32
 	return 0
 }
 
-func (x *ListWithdrawVtgDetailsResponse_Detail) GetSameDayFtw() int64 {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetSameDayFtw() int32 {
 	if x != nil {
 		return x.SameDayFtw
 	}
 	return 0
 }
 
-func (x *ListWithdrawVtgDetailsResponse_Detail) GetNonSameDayFtw() int64 {
+func (x *ListWithdrawVtgDetailsResponse_Detail) GetNonSameDayFtw() int32 {
 	if x != nil {
 		return x.NonSameDayFtw
 	}
@@ -4453,8 +4453,8 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x16\n" +
-	"\x06visits\x18\x04 \x01(\x03R\x06visits\x12#\n" +
-	"\runique_visits\x18\x05 \x01(\x03R\funiqueVisits\x12!\n" +
+	"\x06visits\x18\x04 \x01(\x05R\x06visits\x12#\n" +
+	"\runique_visits\x18\x05 \x01(\x05R\funiqueVisits\x12!\n" +
 	"\factive_users\x18\x06 \x01(\x05R\vactiveUsers\x12)\n" +
 	"\x10registered_users\x18\a \x01(\x05R\x0fregisteredUsers\x12'\n" +
 	"\x0fdeposited_users\x18\b \x01(\x05R\x0edepositedUsers\x12\x1b\n" +
@@ -4514,7 +4514,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\n" +
 	"win_amount\x18\x02 \x01(\tR\twinAmount\x12\x10\n" +
 	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
-	"\tbet_count\x18\x04 \x01(\x03R\bbetCount\x12,\n" +
+	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
 	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\x8b\x03\n" +
 	"\x12GetGameDataRequest\x12C\n" +
@@ -4545,7 +4545,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tgame_type\x18\x04 \x01(\tR\bgameType\x12\x1b\n" +
 	"\tgame_name\x18\x05 \x01(\tR\bgameName\x12\x17\n" +
 	"\agame_id\x18\x06 \x01(\tR\x06gameId\x12!\n" +
-	"\fplayer_count\x18\a \x01(\x03R\vplayerCount\x12\x1a\n" +
+	"\fplayer_count\x18\a \x01(\x05R\vplayerCount\x12\x1a\n" +
 	"\bturnover\x18\b \x01(\tR\bturnover\x12!\n" +
 	"\fturnover_usd\x18\t \x01(\tR\vturnoverUsd\x12/\n" +
 	"\x13turnover_percentage\x18\n" +
@@ -4556,7 +4556,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18\r \x01(\tR\x03ggr\x12\x17\n" +
 	"\aggr_usd\x18\x0e \x01(\tR\x06ggrUsd\x12%\n" +
 	"\x0eggr_percentage\x18\x0f \x01(\tR\rggrPercentage\x12\x1b\n" +
-	"\tbet_count\x18\x10 \x01(\x03R\bbetCount\x12,\n" +
+	"\tbet_count\x18\x10 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x11 \x01(\tR\x10averageBetAmount\x12%\n" +
 	"\x0ertp_percentage\x18\x12 \x01(\tR\rrtpPercentage\"\x80\x03\n" +
 	"\x1bGetPlayerGameSummaryRequest\x12C\n" +
@@ -4577,7 +4577,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\n" +
 	"win_amount\x18\x02 \x01(\tR\twinAmount\x12\x10\n" +
 	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
-	"\tbet_count\x18\x04 \x01(\x03R\bbetCount\x12,\n" +
+	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
 	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\xae\x03\n" +
 	"\x18GetPlayerGameDataRequest\x12C\n" +
@@ -4619,7 +4619,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18\f \x01(\tR\x03ggr\x12\x17\n" +
 	"\aggr_usd\x18\r \x01(\tR\x06ggrUsd\x12%\n" +
 	"\x0ertp_percentage\x18\x0e \x01(\tR\rrtpPercentage\x12\x1b\n" +
-	"\tbet_count\x18\x0f \x01(\x03R\bbetCount\x12,\n" +
+	"\tbet_count\x18\x0f \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x10 \x01(\tR\x10averageBetAmount\"\x86\x02\n" +
 	"\x1aGetDepositSummariesRequest\x12C\n" +
 	"\n" +
@@ -4883,9 +4883,9 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x18repeated_withdraw_amount\x18\r \x01(\tR\x16repeatedWithdrawAmount\x12?\n" +
 	"\x1crepeated_withdraw_amount_usd\x18\x0e \x01(\tR\x19repeatedWithdrawAmountUsd\x126\n" +
 	"\x17repeated_withdraw_users\x18\x0f \x01(\x05R\x15repeatedWithdrawUsers\x12 \n" +
-	"\fsame_day_ftw\x18\x10 \x01(\x03R\n" +
+	"\fsame_day_ftw\x18\x10 \x01(\x05R\n" +
 	"sameDayFtw\x12'\n" +
-	"\x10non_same_day_ftw\x18\x11 \x01(\x03R\rnonSameDayFtw\x12a\n" +
+	"\x10non_same_day_ftw\x18\x11 \x01(\x05R\rnonSameDayFtw\x12a\n" +
 	"/average_ftw_amount_for_same_day_registred_users\x18\x12 \x01(\tR(averageFtwAmountForSameDayRegistredUsers\x12h\n" +
 	"3average_ftw_amount_usd_for_same_day_registred_users\x18\x13 \x01(\tR+averageFtwAmountUsdForSameDayRegistredUsers\x12h\n" +
 	"3average_ftw_amount_for_non_same_day_registred_users\x18\x14 \x01(\tR+averageFtwAmountForNonSameDayRegistredUsers\x12o\n" +
