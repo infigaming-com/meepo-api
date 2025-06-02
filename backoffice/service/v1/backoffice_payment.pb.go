@@ -983,10 +983,10 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\x1eTRANSACTION_STATUS_UNSPECIFIED\x10\x00\x12!\n" +
 	"\x1dTRANSACTION_STATUS_PROCESSING\x10\x01\x12!\n" +
 	"\x1dTRANSACTION_STATUS_SUCCESSFUL\x10\x02\x12\x1d\n" +
-	"\x19TRANSACTION_STATUS_FAILED\x10\x032\x93\x03\n" +
-	"\x11BackofficePayment\x12\xae\x01\n" +
-	"\x19GetPaymentTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/payment/transaction/page\x12\xcc\x01\n" +
-	"\x19GetPaymentTransactionById\x12;.api.backoffice.service.v1.GetPaymentTransactionByIdRequest\x1a<.api.backoffice.service.v1.GetPaymentTransactionByIdResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/payment/transaction/detailB[\n" +
+	"\x19TRANSACTION_STATUS_FAILED\x10\x032\xa3\x03\n" +
+	"\x11BackofficePayment\x12\xb6\x01\n" +
+	"\x19GetPaymentTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//decimal/v1/backoffice/payment/transaction/page\x12\xd4\x01\n" +
+	"\x19GetPaymentTransactionById\x12;.api.backoffice.service.v1.GetPaymentTransactionByIdRequest\x1a<.api.backoffice.service.v1.GetPaymentTransactionByIdResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/decimal/v1/backoffice/payment/transaction/detailB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

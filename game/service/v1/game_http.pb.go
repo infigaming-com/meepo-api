@@ -45,16 +45,16 @@ type GameHTTPServer interface {
 
 func RegisterGameHTTPServer(s *http.Server, srv GameHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/game/providers/list", _Game_ListProviders0_HTTP_Handler(srv))
-	r.POST("/v1/game/categories/list", _Game_ListCategories0_HTTP_Handler(srv))
-	r.POST("/v1/game/list", _Game_ListGames0_HTTP_Handler(srv))
-	r.POST("/v1/game/get", _Game_GetGame0_HTTP_Handler(srv))
-	r.POST("/v1/game/create-session", _Game_CreateSession0_HTTP_Handler(srv))
-	r.POST("/v1/game/balance", _Game_Balance0_HTTP_Handler(srv))
-	r.POST("/v1/game/play", _Game_Play0_HTTP_Handler(srv))
-	r.POST("/v1/game/rollback", _Game_Rollback0_HTTP_Handler(srv))
-	r.POST("/v1/game/bets/list", _Game_ListBets0_HTTP_Handler(srv))
-	r.POST("/v1/game/backoffice/games/list", _Game_BackofficeListGames0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/game/providers/list", _Game_ListProviders0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/game/categories/list", _Game_ListCategories0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/game/list", _Game_ListGames0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/game/get", _Game_GetGame0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/game/create-session", _Game_CreateSession0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/game/balance", _Game_Balance0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/game/play", _Game_Play0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/game/rollback", _Game_Rollback0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/game/bets/list", _Game_ListBets0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/game/backoffice/games/list", _Game_BackofficeListGames0_HTTP_Handler(srv))
 }
 
 func _Game_ListProviders0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
@@ -300,7 +300,7 @@ func NewGameHTTPClient(client *http.Client) GameHTTPClient {
 
 func (c *GameHTTPClientImpl) BackofficeListGames(ctx context.Context, in *BackofficeListGamesRequest, opts ...http.CallOption) (*BackofficeListGamesResponse, error) {
 	var out BackofficeListGamesResponse
-	pattern := "/v1/game/backoffice/games/list"
+	pattern := "/decimal/v1/game/backoffice/games/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameBackofficeListGames))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -313,7 +313,7 @@ func (c *GameHTTPClientImpl) BackofficeListGames(ctx context.Context, in *Backof
 
 func (c *GameHTTPClientImpl) Balance(ctx context.Context, in *BalanceRequest, opts ...http.CallOption) (*BalanceResponse, error) {
 	var out BalanceResponse
-	pattern := "/v1/game/balance"
+	pattern := "/decimal/v1/game/balance"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameBalance))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -326,7 +326,7 @@ func (c *GameHTTPClientImpl) Balance(ctx context.Context, in *BalanceRequest, op
 
 func (c *GameHTTPClientImpl) CreateSession(ctx context.Context, in *CreateSessionRequest, opts ...http.CallOption) (*CreateSessionResponse, error) {
 	var out CreateSessionResponse
-	pattern := "/v1/game/create-session"
+	pattern := "/decimal/v1/game/create-session"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameCreateSession))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -339,7 +339,7 @@ func (c *GameHTTPClientImpl) CreateSession(ctx context.Context, in *CreateSessio
 
 func (c *GameHTTPClientImpl) GetGame(ctx context.Context, in *GetGameRequest, opts ...http.CallOption) (*GetGameResponse, error) {
 	var out GetGameResponse
-	pattern := "/v1/game/get"
+	pattern := "/decimal/v1/game/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameGetGame))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -352,7 +352,7 @@ func (c *GameHTTPClientImpl) GetGame(ctx context.Context, in *GetGameRequest, op
 
 func (c *GameHTTPClientImpl) ListBets(ctx context.Context, in *ListBetsRequest, opts ...http.CallOption) (*ListBetsResponse, error) {
 	var out ListBetsResponse
-	pattern := "/v1/game/bets/list"
+	pattern := "/decimal/v1/game/bets/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameListBets))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -365,7 +365,7 @@ func (c *GameHTTPClientImpl) ListBets(ctx context.Context, in *ListBetsRequest, 
 
 func (c *GameHTTPClientImpl) ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...http.CallOption) (*ListCategoriesResponse, error) {
 	var out ListCategoriesResponse
-	pattern := "/v1/game/categories/list"
+	pattern := "/decimal/v1/game/categories/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameListCategories))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -378,7 +378,7 @@ func (c *GameHTTPClientImpl) ListCategories(ctx context.Context, in *ListCategor
 
 func (c *GameHTTPClientImpl) ListGames(ctx context.Context, in *ListGamesRequest, opts ...http.CallOption) (*ListGamesResponse, error) {
 	var out ListGamesResponse
-	pattern := "/v1/game/list"
+	pattern := "/decimal/v1/game/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameListGames))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -391,7 +391,7 @@ func (c *GameHTTPClientImpl) ListGames(ctx context.Context, in *ListGamesRequest
 
 func (c *GameHTTPClientImpl) ListProviders(ctx context.Context, in *ListProvidersRequest, opts ...http.CallOption) (*ListProvidersResponse, error) {
 	var out ListProvidersResponse
-	pattern := "/v1/game/providers/list"
+	pattern := "/decimal/v1/game/providers/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameListProviders))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -404,7 +404,7 @@ func (c *GameHTTPClientImpl) ListProviders(ctx context.Context, in *ListProvider
 
 func (c *GameHTTPClientImpl) Play(ctx context.Context, in *PlayRequest, opts ...http.CallOption) (*PlayResponse, error) {
 	var out PlayResponse
-	pattern := "/v1/game/play"
+	pattern := "/decimal/v1/game/play"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGamePlay))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -417,7 +417,7 @@ func (c *GameHTTPClientImpl) Play(ctx context.Context, in *PlayRequest, opts ...
 
 func (c *GameHTTPClientImpl) Rollback(ctx context.Context, in *RollbackRequest, opts ...http.CallOption) (*RollbackResponse, error) {
 	var out RollbackResponse
-	pattern := "/v1/game/rollback"
+	pattern := "/decimal/v1/game/rollback"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameRollback))
 	opts = append(opts, http.PathTemplate(pattern))
