@@ -478,3 +478,15 @@ func IsGetBalanceTransactionSummaryFailed(err error) bool {
 func ErrorGetBalanceTransactionSummaryFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_BALANCE_TRANSACTION_SUMMARY_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidCurrencyAmount(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_CURRENCY_AMOUNT.String() && e.Code == 500
+}
+
+func ErrorInvalidCurrencyAmount(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_CURRENCY_AMOUNT.String(), fmt.Sprintf(format, args...))
+}
