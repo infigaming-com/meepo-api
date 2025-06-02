@@ -817,3 +817,329 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetPaymentTransactionByIdResponseValidationError{}
+
+// Validate checks the field values on GetTransactionPageRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetTransactionPageRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetTransactionPageRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetTransactionPageRequestMultiError, or nil if none found.
+func (m *GetTransactionPageRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTransactionPageRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.Type != nil {
+		// no validation rules for Type
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetTransactionPageRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetTransactionPageRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetTransactionPageRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetTransactionPageRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetTransactionPageRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetTransactionPageRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetTransactionPageRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTransactionPageRequestMultiError is an error wrapping multiple validation
+// errors returned by GetTransactionPageRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetTransactionPageRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTransactionPageRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTransactionPageRequestMultiError) AllErrors() []error { return m }
+
+// GetTransactionPageRequestValidationError is the validation error returned by
+// GetTransactionPageRequest.Validate if the designated constraints aren't met.
+type GetTransactionPageRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTransactionPageRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTransactionPageRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTransactionPageRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTransactionPageRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTransactionPageRequestValidationError) ErrorName() string {
+	return "GetTransactionPageRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTransactionPageRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTransactionPageRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTransactionPageRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTransactionPageRequestValidationError{}
+
+// Validate checks the field values on GetTransactionPageResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetTransactionPageResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetTransactionPageResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetTransactionPageResponseMultiError, or nil if none found.
+func (m *GetTransactionPageResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTransactionPageResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetTransactions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetTransactionPageResponseValidationError{
+						field:  fmt.Sprintf("Transactions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetTransactionPageResponseValidationError{
+						field:  fmt.Sprintf("Transactions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetTransactionPageResponseValidationError{
+					field:  fmt.Sprintf("Transactions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return GetTransactionPageResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTransactionPageResponseMultiError is an error wrapping multiple
+// validation errors returned by GetTransactionPageResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetTransactionPageResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTransactionPageResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTransactionPageResponseMultiError) AllErrors() []error { return m }
+
+// GetTransactionPageResponseValidationError is the validation error returned
+// by GetTransactionPageResponse.Validate if the designated constraints aren't met.
+type GetTransactionPageResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTransactionPageResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTransactionPageResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTransactionPageResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTransactionPageResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTransactionPageResponseValidationError) ErrorName() string {
+	return "GetTransactionPageResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTransactionPageResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTransactionPageResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTransactionPageResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTransactionPageResponseValidationError{}
