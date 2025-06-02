@@ -1115,9 +1115,9 @@ func (x *ListCurrenciesResponse) GetCurrencies() []string {
 type ListGamesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// page number for pagination (starts from 1)
-	Page int64 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	Page int32 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	// page size for pagination
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// filter
 	Filter *GameFilter `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
 	// sort
@@ -1156,14 +1156,14 @@ func (*ListGamesRequest) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *ListGamesRequest) GetPage() int64 {
+func (x *ListGamesRequest) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListGamesRequest) GetPageSize() int64 {
+func (x *ListGamesRequest) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
@@ -1187,9 +1187,9 @@ func (x *ListGamesRequest) GetSort() *GameSort {
 type ListGamesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	GameIds       []string               `protobuf:"bytes,1,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
-	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	Page          int64                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int64                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1231,21 +1231,21 @@ func (x *ListGamesResponse) GetGameIds() []string {
 	return nil
 }
 
-func (x *ListGamesResponse) GetTotal() int64 {
+func (x *ListGamesResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
 	}
 	return 0
 }
 
-func (x *ListGamesResponse) GetPage() int64 {
+func (x *ListGamesResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListGamesResponse) GetPageSize() int64 {
+func (x *ListGamesResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
@@ -2529,8 +2529,8 @@ type ListBetsRequest struct {
 	SettlementCurrencyOption isListBetsRequest_SettlementCurrencyOption `protobuf_oneof:"settlement_currency_option"`
 	Categories               []string                                   `protobuf:"bytes,12,rep,name=categories,proto3" json:"categories,omitempty"`
 	Status                   *string                                    `protobuf:"bytes,13,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	Page                     *int64                                     `protobuf:"varint,14,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize                 *int64                                     `protobuf:"varint,15,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page                     *int32                                     `protobuf:"varint,14,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize                 *int32                                     `protobuf:"varint,15,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -2667,14 +2667,14 @@ func (x *ListBetsRequest) GetStatus() string {
 	return ""
 }
 
-func (x *ListBetsRequest) GetPage() int64 {
+func (x *ListBetsRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListBetsRequest) GetPageSize() int64 {
+func (x *ListBetsRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
@@ -2956,9 +2956,9 @@ type ListBetsResponse struct {
 	WinAmount     string                 `protobuf:"bytes,3,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
 	BetCount      int32                  `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
 	RtpPercentage int32                  `protobuf:"varint,5,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"` // value from 0 to 100
-	Total         int64                  `protobuf:"varint,6,opt,name=total,proto3" json:"total,omitempty"`
-	Page          int64                  `protobuf:"varint,7,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int64                  `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                  `protobuf:"varint,6,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                  `protobuf:"varint,7,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3028,21 +3028,21 @@ func (x *ListBetsResponse) GetRtpPercentage() int32 {
 	return 0
 }
 
-func (x *ListBetsResponse) GetTotal() int64 {
+func (x *ListBetsResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
 	}
 	return 0
 }
 
-func (x *ListBetsResponse) GetPage() int64 {
+func (x *ListBetsResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListBetsResponse) GetPageSize() int64 {
+func (x *ListBetsResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
@@ -3062,8 +3062,8 @@ type BackofficeListGamesRequest struct {
 	SupportCurrencies   []string               `protobuf:"bytes,9,rep,name=support_currencies,json=supportCurrencies,proto3" json:"support_currencies,omitempty"`
 	RestrictedCountries []string               `protobuf:"bytes,10,rep,name=restricted_countries,json=restrictedCountries,proto3" json:"restricted_countries,omitempty"`
 	Enabled             *bool                  `protobuf:"varint,11,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Page                *int64                 `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize            *int64                 `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page                *int32                 `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize            *int32                 `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -3175,14 +3175,14 @@ func (x *BackofficeListGamesRequest) GetEnabled() bool {
 	return false
 }
 
-func (x *BackofficeListGamesRequest) GetPage() int64 {
+func (x *BackofficeListGamesRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *BackofficeListGamesRequest) GetPageSize() int64 {
+func (x *BackofficeListGamesRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
@@ -3192,11 +3192,11 @@ func (x *BackofficeListGamesRequest) GetPageSize() int64 {
 type BackofficeListGamesResponse struct {
 	state         protoimpl.MessageState              `protogen:"open.v1"`
 	Games         []*BackofficeListGamesResponse_Game `protobuf:"bytes,1,rep,name=games,proto3" json:"games,omitempty"`
-	Page          int64                               `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int64                               `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total         int64                               `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
-	TotalEnabled  int64                               `protobuf:"varint,5,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
-	TotalDisabled int64                               `protobuf:"varint,6,opt,name=total_disabled,json=totalDisabled,proto3" json:"total_disabled,omitempty"`
+	Page          int32                               `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                               `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                               `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	TotalEnabled  int32                               `protobuf:"varint,5,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
+	TotalDisabled int32                               `protobuf:"varint,6,opt,name=total_disabled,json=totalDisabled,proto3" json:"total_disabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3238,35 +3238,35 @@ func (x *BackofficeListGamesResponse) GetGames() []*BackofficeListGamesResponse_
 	return nil
 }
 
-func (x *BackofficeListGamesResponse) GetPage() int64 {
+func (x *BackofficeListGamesResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *BackofficeListGamesResponse) GetPageSize() int64 {
+func (x *BackofficeListGamesResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *BackofficeListGamesResponse) GetTotal() int64 {
+func (x *BackofficeListGamesResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
 	}
 	return 0
 }
 
-func (x *BackofficeListGamesResponse) GetTotalEnabled() int64 {
+func (x *BackofficeListGamesResponse) GetTotalEnabled() int32 {
 	if x != nil {
 		return x.TotalEnabled
 	}
 	return 0
 }
 
-func (x *BackofficeListGamesResponse) GetTotalDisabled() int64 {
+func (x *BackofficeListGamesResponse) GetTotalDisabled() int32 {
 	if x != nil {
 		return x.TotalDisabled
 	}
@@ -4726,31 +4726,31 @@ type GetBetByIdResponse_Action struct {
 	UpdateBalance                 bool                   `protobuf:"varint,12,opt,name=update_balance,json=updateBalance,proto3" json:"update_balance,omitempty"`
 	TakeAll                       bool                   `protobuf:"varint,13,opt,name=take_all,json=takeAll,proto3" json:"take_all,omitempty"`
 	IsRefund                      bool                   `protobuf:"varint,14,opt,name=is_refund,json=isRefund,proto3" json:"is_refund,omitempty"`
-	Amount                        int64                  `protobuf:"varint,15,opt,name=amount,proto3" json:"amount,omitempty"`
-	AmountUsd                     int64                  `protobuf:"varint,16,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
-	SettlementAmount              int64                  `protobuf:"varint,17,opt,name=settlement_amount,json=settlementAmount,proto3" json:"settlement_amount,omitempty"`
-	SettlementAmountUsd           int64                  `protobuf:"varint,18,opt,name=settlement_amount_usd,json=settlementAmountUsd,proto3" json:"settlement_amount_usd,omitempty"`
-	Turnover                      int64                  `protobuf:"varint,19,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	TurnoverUsd                   int64                  `protobuf:"varint,20,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	Amount                        string                 `protobuf:"bytes,15,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd                     string                 `protobuf:"bytes,16,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	SettlementAmount              string                 `protobuf:"bytes,17,opt,name=settlement_amount,json=settlementAmount,proto3" json:"settlement_amount,omitempty"`
+	SettlementAmountUsd           string                 `protobuf:"bytes,18,opt,name=settlement_amount_usd,json=settlementAmountUsd,proto3" json:"settlement_amount_usd,omitempty"`
+	Turnover                      string                 `protobuf:"bytes,19,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	TurnoverUsd                   string                 `protobuf:"bytes,20,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
 	UserId                        int64                  `protobuf:"varint,21,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Currency                      string                 `protobuf:"bytes,22,opt,name=currency,proto3" json:"currency,omitempty"`
 	SettlementCurrency            string                 `protobuf:"bytes,23,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
 	GameId                        string                 `protobuf:"bytes,24,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	GameName                      string                 `protobuf:"bytes,25,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
 	GameCategory                  string                 `protobuf:"bytes,26,opt,name=game_category,json=gameCategory,proto3" json:"game_category,omitempty"`
-	JackpotContribution           float64                `protobuf:"fixed64,27,opt,name=jackpot_contribution,json=jackpotContribution,proto3" json:"jackpot_contribution,omitempty"`
-	JackpotContributionUsd        float64                `protobuf:"fixed64,28,opt,name=jackpot_contribution_usd,json=jackpotContributionUsd,proto3" json:"jackpot_contribution_usd,omitempty"`
-	JackpotWin                    int64                  `protobuf:"varint,29,opt,name=jackpot_win,json=jackpotWin,proto3" json:"jackpot_win,omitempty"`
-	JackpotWinUsd                 int64                  `protobuf:"varint,30,opt,name=jackpot_win_usd,json=jackpotWinUsd,proto3" json:"jackpot_win_usd,omitempty"`
-	BetTime                       int64                  `protobuf:"varint,31,opt,name=bet_time,json=betTime,proto3" json:"bet_time,omitempty"`
-	SettleTime                    int64                  `protobuf:"varint,32,opt,name=settle_time,json=settleTime,proto3" json:"settle_time,omitempty"`
-	ProviderTimestamp             int64                  `protobuf:"varint,33,opt,name=provider_timestamp,json=providerTimestamp,proto3" json:"provider_timestamp,omitempty"`
-	BonusAmount                   int64                  `protobuf:"varint,34,opt,name=bonus_amount,json=bonusAmount,proto3" json:"bonus_amount,omitempty"`
-	BonusAmountUsd                int64                  `protobuf:"varint,35,opt,name=bonus_amount_usd,json=bonusAmountUsd,proto3" json:"bonus_amount_usd,omitempty"`
-	OperatorTimestamp             int64                  `protobuf:"varint,36,opt,name=operator_timestamp,json=operatorTimestamp,proto3" json:"operator_timestamp,omitempty"`
-	ProcessedAt                   int64                  `protobuf:"varint,37,opt,name=processed_at,json=processedAt,proto3" json:"processed_at,omitempty"`
-	CreatedAt                     int64                  `protobuf:"varint,38,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt                     int64                  `protobuf:"varint,39,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	JackpotContribution           string                 `protobuf:"bytes,27,opt,name=jackpot_contribution,json=jackpotContribution,proto3" json:"jackpot_contribution,omitempty"`
+	JackpotContributionUsd        string                 `protobuf:"bytes,28,opt,name=jackpot_contribution_usd,json=jackpotContributionUsd,proto3" json:"jackpot_contribution_usd,omitempty"`
+	JackpotWin                    string                 `protobuf:"bytes,29,opt,name=jackpot_win,json=jackpotWin,proto3" json:"jackpot_win,omitempty"`
+	JackpotWinUsd                 string                 `protobuf:"bytes,30,opt,name=jackpot_win_usd,json=jackpotWinUsd,proto3" json:"jackpot_win_usd,omitempty"`
+	BetTime                       *timestamppb.Timestamp `protobuf:"bytes,31,opt,name=bet_time,json=betTime,proto3" json:"bet_time,omitempty"`
+	SettleTime                    *timestamppb.Timestamp `protobuf:"bytes,32,opt,name=settle_time,json=settleTime,proto3" json:"settle_time,omitempty"`
+	ProviderTimestamp             *timestamppb.Timestamp `protobuf:"bytes,33,opt,name=provider_timestamp,json=providerTimestamp,proto3" json:"provider_timestamp,omitempty"`
+	BonusAmount                   string                 `protobuf:"bytes,34,opt,name=bonus_amount,json=bonusAmount,proto3" json:"bonus_amount,omitempty"`
+	BonusAmountUsd                string                 `protobuf:"bytes,35,opt,name=bonus_amount_usd,json=bonusAmountUsd,proto3" json:"bonus_amount_usd,omitempty"`
+	OperatorTimestamp             *timestamppb.Timestamp `protobuf:"bytes,36,opt,name=operator_timestamp,json=operatorTimestamp,proto3" json:"operator_timestamp,omitempty"`
+	ProcessedAt                   *timestamppb.Timestamp `protobuf:"bytes,37,opt,name=processed_at,json=processedAt,proto3" json:"processed_at,omitempty"`
+	CreatedAt                     *timestamppb.Timestamp `protobuf:"bytes,38,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                     *timestamppb.Timestamp `protobuf:"bytes,39,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields                 protoimpl.UnknownFields
 	sizeCache                     protoimpl.SizeCache
 }
@@ -4883,46 +4883,46 @@ func (x *GetBetByIdResponse_Action) GetIsRefund() bool {
 	return false
 }
 
-func (x *GetBetByIdResponse_Action) GetAmount() int64 {
+func (x *GetBetByIdResponse_Action) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Action) GetAmountUsd() int64 {
+func (x *GetBetByIdResponse_Action) GetAmountUsd() string {
 	if x != nil {
 		return x.AmountUsd
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Action) GetSettlementAmount() int64 {
+func (x *GetBetByIdResponse_Action) GetSettlementAmount() string {
 	if x != nil {
 		return x.SettlementAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Action) GetSettlementAmountUsd() int64 {
+func (x *GetBetByIdResponse_Action) GetSettlementAmountUsd() string {
 	if x != nil {
 		return x.SettlementAmountUsd
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Action) GetTurnover() int64 {
+func (x *GetBetByIdResponse_Action) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Action) GetTurnoverUsd() int64 {
+func (x *GetBetByIdResponse_Action) GetTurnoverUsd() string {
 	if x != nil {
 		return x.TurnoverUsd
 	}
-	return 0
+	return ""
 }
 
 func (x *GetBetByIdResponse_Action) GetUserId() int64 {
@@ -4967,95 +4967,95 @@ func (x *GetBetByIdResponse_Action) GetGameCategory() string {
 	return ""
 }
 
-func (x *GetBetByIdResponse_Action) GetJackpotContribution() float64 {
+func (x *GetBetByIdResponse_Action) GetJackpotContribution() string {
 	if x != nil {
 		return x.JackpotContribution
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Action) GetJackpotContributionUsd() float64 {
+func (x *GetBetByIdResponse_Action) GetJackpotContributionUsd() string {
 	if x != nil {
 		return x.JackpotContributionUsd
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Action) GetJackpotWin() int64 {
+func (x *GetBetByIdResponse_Action) GetJackpotWin() string {
 	if x != nil {
 		return x.JackpotWin
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Action) GetJackpotWinUsd() int64 {
+func (x *GetBetByIdResponse_Action) GetJackpotWinUsd() string {
 	if x != nil {
 		return x.JackpotWinUsd
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Action) GetBetTime() int64 {
+func (x *GetBetByIdResponse_Action) GetBetTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.BetTime
 	}
-	return 0
+	return nil
 }
 
-func (x *GetBetByIdResponse_Action) GetSettleTime() int64 {
+func (x *GetBetByIdResponse_Action) GetSettleTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.SettleTime
 	}
-	return 0
+	return nil
 }
 
-func (x *GetBetByIdResponse_Action) GetProviderTimestamp() int64 {
+func (x *GetBetByIdResponse_Action) GetProviderTimestamp() *timestamppb.Timestamp {
 	if x != nil {
 		return x.ProviderTimestamp
 	}
-	return 0
+	return nil
 }
 
-func (x *GetBetByIdResponse_Action) GetBonusAmount() int64 {
+func (x *GetBetByIdResponse_Action) GetBonusAmount() string {
 	if x != nil {
 		return x.BonusAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Action) GetBonusAmountUsd() int64 {
+func (x *GetBetByIdResponse_Action) GetBonusAmountUsd() string {
 	if x != nil {
 		return x.BonusAmountUsd
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Action) GetOperatorTimestamp() int64 {
+func (x *GetBetByIdResponse_Action) GetOperatorTimestamp() *timestamppb.Timestamp {
 	if x != nil {
 		return x.OperatorTimestamp
 	}
-	return 0
+	return nil
 }
 
-func (x *GetBetByIdResponse_Action) GetProcessedAt() int64 {
+func (x *GetBetByIdResponse_Action) GetProcessedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.ProcessedAt
 	}
-	return 0
+	return nil
 }
 
-func (x *GetBetByIdResponse_Action) GetCreatedAt() int64 {
+func (x *GetBetByIdResponse_Action) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return 0
+	return nil
 }
 
-func (x *GetBetByIdResponse_Action) GetUpdatedAt() int64 {
+func (x *GetBetByIdResponse_Action) GetUpdatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return 0
+	return nil
 }
 
 type GetBetByIdResponse_Bet struct {
@@ -5075,23 +5075,23 @@ type GetBetByIdResponse_Bet struct {
 	GameId                 string                       `protobuf:"bytes,13,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	GameName               string                       `protobuf:"bytes,14,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
 	GameCategory           string                       `protobuf:"bytes,15,opt,name=game_category,json=gameCategory,proto3" json:"game_category,omitempty"`
-	WinCount               int64                        `protobuf:"varint,16,opt,name=win_count,json=winCount,proto3" json:"win_count,omitempty"`
-	BetAmount              int64                        `protobuf:"varint,17,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
-	BetAmountUsd           int64                        `protobuf:"varint,18,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
-	SettlementBetAmount    int64                        `protobuf:"varint,19,opt,name=settlement_bet_amount,json=settlementBetAmount,proto3" json:"settlement_bet_amount,omitempty"`
-	SettlementBetAmountUsd int64                        `protobuf:"varint,20,opt,name=settlement_bet_amount_usd,json=settlementBetAmountUsd,proto3" json:"settlement_bet_amount_usd,omitempty"`
-	WinAmount              int64                        `protobuf:"varint,21,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
-	WinAmountUsd           int64                        `protobuf:"varint,22,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
-	SettlementWinAmount    int64                        `protobuf:"varint,23,opt,name=settlement_win_amount,json=settlementWinAmount,proto3" json:"settlement_win_amount,omitempty"`
-	SettlementWinAmountUsd int64                        `protobuf:"varint,24,opt,name=settlement_win_amount_usd,json=settlementWinAmountUsd,proto3" json:"settlement_win_amount_usd,omitempty"`
-	Turnover               int64                        `protobuf:"varint,25,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	TurnoverUsd            int64                        `protobuf:"varint,26,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
-	RollbackBetAmount      int64                        `protobuf:"varint,27,opt,name=rollback_bet_amount,json=rollbackBetAmount,proto3" json:"rollback_bet_amount,omitempty"`
-	RollbackBetAmountUsd   int64                        `protobuf:"varint,28,opt,name=rollback_bet_amount_usd,json=rollbackBetAmountUsd,proto3" json:"rollback_bet_amount_usd,omitempty"`
-	RollbackWinAmount      int64                        `protobuf:"varint,29,opt,name=rollback_win_amount,json=rollbackWinAmount,proto3" json:"rollback_win_amount,omitempty"`
-	RollbackWinAmountUsd   int64                        `protobuf:"varint,30,opt,name=rollback_win_amount_usd,json=rollbackWinAmountUsd,proto3" json:"rollback_win_amount_usd,omitempty"`
-	CreatedAt              int64                        `protobuf:"varint,31,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt              int64                        `protobuf:"varint,32,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	WinCount               int32                        `protobuf:"varint,16,opt,name=win_count,json=winCount,proto3" json:"win_count,omitempty"`
+	BetAmount              string                       `protobuf:"bytes,17,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
+	BetAmountUsd           string                       `protobuf:"bytes,18,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	SettlementBetAmount    string                       `protobuf:"bytes,19,opt,name=settlement_bet_amount,json=settlementBetAmount,proto3" json:"settlement_bet_amount,omitempty"`
+	SettlementBetAmountUsd string                       `protobuf:"bytes,20,opt,name=settlement_bet_amount_usd,json=settlementBetAmountUsd,proto3" json:"settlement_bet_amount_usd,omitempty"`
+	WinAmount              string                       `protobuf:"bytes,21,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	WinAmountUsd           string                       `protobuf:"bytes,22,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
+	SettlementWinAmount    string                       `protobuf:"bytes,23,opt,name=settlement_win_amount,json=settlementWinAmount,proto3" json:"settlement_win_amount,omitempty"`
+	SettlementWinAmountUsd string                       `protobuf:"bytes,24,opt,name=settlement_win_amount_usd,json=settlementWinAmountUsd,proto3" json:"settlement_win_amount_usd,omitempty"`
+	Turnover               string                       `protobuf:"bytes,25,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	TurnoverUsd            string                       `protobuf:"bytes,26,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	RollbackBetAmount      string                       `protobuf:"bytes,27,opt,name=rollback_bet_amount,json=rollbackBetAmount,proto3" json:"rollback_bet_amount,omitempty"`
+	RollbackBetAmountUsd   string                       `protobuf:"bytes,28,opt,name=rollback_bet_amount_usd,json=rollbackBetAmountUsd,proto3" json:"rollback_bet_amount_usd,omitempty"`
+	RollbackWinAmount      string                       `protobuf:"bytes,29,opt,name=rollback_win_amount,json=rollbackWinAmount,proto3" json:"rollback_win_amount,omitempty"`
+	RollbackWinAmountUsd   string                       `protobuf:"bytes,30,opt,name=rollback_win_amount_usd,json=rollbackWinAmountUsd,proto3" json:"rollback_win_amount_usd,omitempty"`
+	CreatedAt              *timestamppb.Timestamp       `protobuf:"bytes,31,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt              *timestamppb.Timestamp       `protobuf:"bytes,32,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Actions                []*GetBetByIdResponse_Action `protobuf:"bytes,33,rep,name=actions,proto3" json:"actions,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -5232,123 +5232,123 @@ func (x *GetBetByIdResponse_Bet) GetGameCategory() string {
 	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetWinCount() int64 {
+func (x *GetBetByIdResponse_Bet) GetWinCount() int32 {
 	if x != nil {
 		return x.WinCount
 	}
 	return 0
 }
 
-func (x *GetBetByIdResponse_Bet) GetBetAmount() int64 {
+func (x *GetBetByIdResponse_Bet) GetBetAmount() string {
 	if x != nil {
 		return x.BetAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetBetAmountUsd() int64 {
+func (x *GetBetByIdResponse_Bet) GetBetAmountUsd() string {
 	if x != nil {
 		return x.BetAmountUsd
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetSettlementBetAmount() int64 {
+func (x *GetBetByIdResponse_Bet) GetSettlementBetAmount() string {
 	if x != nil {
 		return x.SettlementBetAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetSettlementBetAmountUsd() int64 {
+func (x *GetBetByIdResponse_Bet) GetSettlementBetAmountUsd() string {
 	if x != nil {
 		return x.SettlementBetAmountUsd
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetWinAmount() int64 {
+func (x *GetBetByIdResponse_Bet) GetWinAmount() string {
 	if x != nil {
 		return x.WinAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetWinAmountUsd() int64 {
+func (x *GetBetByIdResponse_Bet) GetWinAmountUsd() string {
 	if x != nil {
 		return x.WinAmountUsd
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetSettlementWinAmount() int64 {
+func (x *GetBetByIdResponse_Bet) GetSettlementWinAmount() string {
 	if x != nil {
 		return x.SettlementWinAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetSettlementWinAmountUsd() int64 {
+func (x *GetBetByIdResponse_Bet) GetSettlementWinAmountUsd() string {
 	if x != nil {
 		return x.SettlementWinAmountUsd
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetTurnover() int64 {
+func (x *GetBetByIdResponse_Bet) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetTurnoverUsd() int64 {
+func (x *GetBetByIdResponse_Bet) GetTurnoverUsd() string {
 	if x != nil {
 		return x.TurnoverUsd
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetRollbackBetAmount() int64 {
+func (x *GetBetByIdResponse_Bet) GetRollbackBetAmount() string {
 	if x != nil {
 		return x.RollbackBetAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetRollbackBetAmountUsd() int64 {
+func (x *GetBetByIdResponse_Bet) GetRollbackBetAmountUsd() string {
 	if x != nil {
 		return x.RollbackBetAmountUsd
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetRollbackWinAmount() int64 {
+func (x *GetBetByIdResponse_Bet) GetRollbackWinAmount() string {
 	if x != nil {
 		return x.RollbackWinAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetRollbackWinAmountUsd() int64 {
+func (x *GetBetByIdResponse_Bet) GetRollbackWinAmountUsd() string {
 	if x != nil {
 		return x.RollbackWinAmountUsd
 	}
-	return 0
+	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetCreatedAt() int64 {
+func (x *GetBetByIdResponse_Bet) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return 0
+	return nil
 }
 
-func (x *GetBetByIdResponse_Bet) GetUpdatedAt() int64 {
+func (x *GetBetByIdResponse_Bet) GetUpdatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return 0
+	return nil
 }
 
 func (x *GetBetByIdResponse_Bet) GetActions() []*GetBetByIdResponse_Action {
@@ -5432,7 +5432,7 @@ type ListProviderRatesResponse_ProviderRate struct {
 	ProviderName  string                 `protobuf:"bytes,2,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
 	FeeGroup      string                 `protobuf:"bytes,3,opt,name=fee_group,json=feeGroup,proto3" json:"fee_group,omitempty"`
 	Currency      string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	Rate          float64                `protobuf:"fixed64,5,opt,name=rate,proto3" json:"rate,omitempty"`
+	Rate          string                 `protobuf:"bytes,5,opt,name=rate,proto3" json:"rate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5495,11 +5495,11 @@ func (x *ListProviderRatesResponse_ProviderRate) GetCurrency() string {
 	return ""
 }
 
-func (x *ListProviderRatesResponse_ProviderRate) GetRate() float64 {
+func (x *ListProviderRatesResponse_ProviderRate) GetRate() string {
 	if x != nil {
 		return x.Rate
 	}
-	return 0
+	return ""
 }
 
 var File_game_service_v1_game_proto protoreflect.FileDescriptor
@@ -5609,15 +5609,15 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"currencies\x18\x01 \x03(\tR\n" +
 	"currencies\"\xaf\x01\n" +
 	"\x10ListGamesRequest\x12\x12\n" +
-	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x127\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x127\n" +
 	"\x06filter\x18\x03 \x01(\v2\x1f.api.game.service.v1.GameFilterR\x06filter\x121\n" +
 	"\x04sort\x18\x04 \x01(\v2\x1d.api.game.service.v1.GameSortR\x04sort\"u\n" +
 	"\x11ListGamesResponse\x12\x19\n" +
 	"\bgame_ids\x18\x01 \x03(\tR\agameIds\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
-	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x03R\bpageSize\")\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\")\n" +
 	"\x0eGetGameRequest\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\"D\n" +
 	"\x0fGetGameResponse\x121\n" +
@@ -5766,8 +5766,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"categories\x18\f \x03(\tR\n" +
 	"categories\x12\x1b\n" +
 	"\x06status\x18\r \x01(\tH\bR\x06status\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x0e \x01(\x03H\tR\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x0f \x01(\x03H\n" +
+	"\x04page\x18\x0e \x01(\x05H\tR\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x0f \x01(\x05H\n" +
 	"R\bpageSize\x88\x01\x01\x1a\xa7\x02\n" +
 	"\x11CurrencyWithRange\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12)\n" +
@@ -5841,9 +5841,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"win_amount\x18\x03 \x01(\tR\twinAmount\x12\x1b\n" +
 	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12%\n" +
 	"\x0ertp_percentage\x18\x05 \x01(\x05R\rrtpPercentage\x12\x14\n" +
-	"\x05total\x18\x06 \x01(\x03R\x05total\x12\x12\n" +
-	"\x04page\x18\a \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\b \x01(\x03R\bpageSize\"\xbf\x04\n" +
+	"\x05total\x18\x06 \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\a \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\b \x01(\x05R\bpageSize\"\xbf\x04\n" +
 	"\x1aBackofficeListGamesRequest\x12!\n" +
 	"\fprovider_ids\x18\x01 \x03(\tR\vproviderIds\x12\x1e\n" +
 	"\n" +
@@ -5860,8 +5860,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x14restricted_countries\x18\n" +
 	" \x03(\tR\x13restrictedCountries\x12\x1d\n" +
 	"\aenabled\x18\v \x01(\bH\x03R\aenabled\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\f \x01(\x03H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\r \x01(\x03H\x05R\bpageSize\x88\x01\x01B\n" +
+	"\x04page\x18\f \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\r \x01(\x05H\x05R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_game_idB\x14\n" +
 	"\x12_support_bonus_buyB\x10\n" +
@@ -5873,11 +5873,11 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"_page_size\"\xc2\x05\n" +
 	"\x1bBackofficeListGamesResponse\x12K\n" +
 	"\x05games\x18\x01 \x03(\v25.api.game.service.v1.BackofficeListGamesResponse.GameR\x05games\x12\x12\n" +
-	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x03 \x01(\x03R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\x12#\n" +
-	"\rtotal_enabled\x18\x05 \x01(\x03R\ftotalEnabled\x12%\n" +
-	"\x0etotal_disabled\x18\x06 \x01(\x03R\rtotalDisabled\x1a\xc2\x03\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x12#\n" +
+	"\rtotal_enabled\x18\x05 \x01(\x05R\ftotalEnabled\x12%\n" +
+	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\xc2\x03\n" +
 	"\x04Game\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12\x0e\n" +
@@ -5911,9 +5911,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x11GetBetByIdRequest\x12\x15\n" +
 	"\x06bet_id\x18\x01 \x01(\x03R\x05betId\x12,\n" +
 	"\x0finclude_actions\x18\x02 \x01(\bH\x00R\x0eincludeActions\x88\x01\x01B\x12\n" +
-	"\x10_include_actions\"\xe8\x15\n" +
+	"\x10_include_actions\"\xe4\x17\n" +
 	"\x12GetBetByIdResponse\x12=\n" +
-	"\x03bet\x18\x01 \x01(\v2+.api.game.service.v1.GetBetByIdResponse.BetR\x03bet\x1a\x8c\v\n" +
+	"\x03bet\x18\x01 \x01(\v2+.api.game.service.v1.GetBetByIdResponse.BetR\x03bet\x1a\xd0\f\n" +
 	"\x06Action\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bround_id\x18\x02 \x01(\x03R\aroundId\x12\x16\n" +
@@ -5932,36 +5932,36 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x0eupdate_balance\x18\f \x01(\bR\rupdateBalance\x12\x19\n" +
 	"\btake_all\x18\r \x01(\bR\atakeAll\x12\x1b\n" +
 	"\tis_refund\x18\x0e \x01(\bR\bisRefund\x12\x16\n" +
-	"\x06amount\x18\x0f \x01(\x03R\x06amount\x12\x1d\n" +
+	"\x06amount\x18\x0f \x01(\tR\x06amount\x12\x1d\n" +
 	"\n" +
-	"amount_usd\x18\x10 \x01(\x03R\tamountUsd\x12+\n" +
-	"\x11settlement_amount\x18\x11 \x01(\x03R\x10settlementAmount\x122\n" +
-	"\x15settlement_amount_usd\x18\x12 \x01(\x03R\x13settlementAmountUsd\x12\x1a\n" +
-	"\bturnover\x18\x13 \x01(\x03R\bturnover\x12!\n" +
-	"\fturnover_usd\x18\x14 \x01(\x03R\vturnoverUsd\x12\x17\n" +
+	"amount_usd\x18\x10 \x01(\tR\tamountUsd\x12+\n" +
+	"\x11settlement_amount\x18\x11 \x01(\tR\x10settlementAmount\x122\n" +
+	"\x15settlement_amount_usd\x18\x12 \x01(\tR\x13settlementAmountUsd\x12\x1a\n" +
+	"\bturnover\x18\x13 \x01(\tR\bturnover\x12!\n" +
+	"\fturnover_usd\x18\x14 \x01(\tR\vturnoverUsd\x12\x17\n" +
 	"\auser_id\x18\x15 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x16 \x01(\tR\bcurrency\x12/\n" +
 	"\x13settlement_currency\x18\x17 \x01(\tR\x12settlementCurrency\x12\x17\n" +
 	"\agame_id\x18\x18 \x01(\tR\x06gameId\x12\x1b\n" +
 	"\tgame_name\x18\x19 \x01(\tR\bgameName\x12#\n" +
 	"\rgame_category\x18\x1a \x01(\tR\fgameCategory\x121\n" +
-	"\x14jackpot_contribution\x18\x1b \x01(\x01R\x13jackpotContribution\x128\n" +
-	"\x18jackpot_contribution_usd\x18\x1c \x01(\x01R\x16jackpotContributionUsd\x12\x1f\n" +
-	"\vjackpot_win\x18\x1d \x01(\x03R\n" +
+	"\x14jackpot_contribution\x18\x1b \x01(\tR\x13jackpotContribution\x128\n" +
+	"\x18jackpot_contribution_usd\x18\x1c \x01(\tR\x16jackpotContributionUsd\x12\x1f\n" +
+	"\vjackpot_win\x18\x1d \x01(\tR\n" +
 	"jackpotWin\x12&\n" +
-	"\x0fjackpot_win_usd\x18\x1e \x01(\x03R\rjackpotWinUsd\x12\x19\n" +
-	"\bbet_time\x18\x1f \x01(\x03R\abetTime\x12\x1f\n" +
-	"\vsettle_time\x18  \x01(\x03R\n" +
-	"settleTime\x12-\n" +
-	"\x12provider_timestamp\x18! \x01(\x03R\x11providerTimestamp\x12!\n" +
-	"\fbonus_amount\x18\" \x01(\x03R\vbonusAmount\x12(\n" +
-	"\x10bonus_amount_usd\x18# \x01(\x03R\x0ebonusAmountUsd\x12-\n" +
-	"\x12operator_timestamp\x18$ \x01(\x03R\x11operatorTimestamp\x12!\n" +
-	"\fprocessed_at\x18% \x01(\x03R\vprocessedAt\x12\x1d\n" +
+	"\x0fjackpot_win_usd\x18\x1e \x01(\tR\rjackpotWinUsd\x125\n" +
+	"\bbet_time\x18\x1f \x01(\v2\x1a.google.protobuf.TimestampR\abetTime\x12;\n" +
+	"\vsettle_time\x18  \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"settleTime\x12I\n" +
+	"\x12provider_timestamp\x18! \x01(\v2\x1a.google.protobuf.TimestampR\x11providerTimestamp\x12!\n" +
+	"\fbonus_amount\x18\" \x01(\tR\vbonusAmount\x12(\n" +
+	"\x10bonus_amount_usd\x18# \x01(\tR\x0ebonusAmountUsd\x12I\n" +
+	"\x12operator_timestamp\x18$ \x01(\v2\x1a.google.protobuf.TimestampR\x11operatorTimestamp\x12=\n" +
+	"\fprocessed_at\x18% \x01(\v2\x1a.google.protobuf.TimestampR\vprocessedAt\x129\n" +
 	"\n" +
-	"created_at\x18& \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18& \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18' \x01(\x03R\tupdatedAt\x1a\x83\n" +
+	"updated_at\x18' \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1a\xbb\n" +
 	"\n" +
 	"\x03Bet\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12&\n" +
@@ -5982,27 +5982,27 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\agame_id\x18\r \x01(\tR\x06gameId\x12\x1b\n" +
 	"\tgame_name\x18\x0e \x01(\tR\bgameName\x12#\n" +
 	"\rgame_category\x18\x0f \x01(\tR\fgameCategory\x12\x1b\n" +
-	"\twin_count\x18\x10 \x01(\x03R\bwinCount\x12\x1d\n" +
+	"\twin_count\x18\x10 \x01(\x05R\bwinCount\x12\x1d\n" +
 	"\n" +
-	"bet_amount\x18\x11 \x01(\x03R\tbetAmount\x12$\n" +
-	"\x0ebet_amount_usd\x18\x12 \x01(\x03R\fbetAmountUsd\x122\n" +
-	"\x15settlement_bet_amount\x18\x13 \x01(\x03R\x13settlementBetAmount\x129\n" +
-	"\x19settlement_bet_amount_usd\x18\x14 \x01(\x03R\x16settlementBetAmountUsd\x12\x1d\n" +
+	"bet_amount\x18\x11 \x01(\tR\tbetAmount\x12$\n" +
+	"\x0ebet_amount_usd\x18\x12 \x01(\tR\fbetAmountUsd\x122\n" +
+	"\x15settlement_bet_amount\x18\x13 \x01(\tR\x13settlementBetAmount\x129\n" +
+	"\x19settlement_bet_amount_usd\x18\x14 \x01(\tR\x16settlementBetAmountUsd\x12\x1d\n" +
 	"\n" +
-	"win_amount\x18\x15 \x01(\x03R\twinAmount\x12$\n" +
-	"\x0ewin_amount_usd\x18\x16 \x01(\x03R\fwinAmountUsd\x122\n" +
-	"\x15settlement_win_amount\x18\x17 \x01(\x03R\x13settlementWinAmount\x129\n" +
-	"\x19settlement_win_amount_usd\x18\x18 \x01(\x03R\x16settlementWinAmountUsd\x12\x1a\n" +
-	"\bturnover\x18\x19 \x01(\x03R\bturnover\x12!\n" +
-	"\fturnover_usd\x18\x1a \x01(\x03R\vturnoverUsd\x12.\n" +
-	"\x13rollback_bet_amount\x18\x1b \x01(\x03R\x11rollbackBetAmount\x125\n" +
-	"\x17rollback_bet_amount_usd\x18\x1c \x01(\x03R\x14rollbackBetAmountUsd\x12.\n" +
-	"\x13rollback_win_amount\x18\x1d \x01(\x03R\x11rollbackWinAmount\x125\n" +
-	"\x17rollback_win_amount_usd\x18\x1e \x01(\x03R\x14rollbackWinAmountUsd\x12\x1d\n" +
+	"win_amount\x18\x15 \x01(\tR\twinAmount\x12$\n" +
+	"\x0ewin_amount_usd\x18\x16 \x01(\tR\fwinAmountUsd\x122\n" +
+	"\x15settlement_win_amount\x18\x17 \x01(\tR\x13settlementWinAmount\x129\n" +
+	"\x19settlement_win_amount_usd\x18\x18 \x01(\tR\x16settlementWinAmountUsd\x12\x1a\n" +
+	"\bturnover\x18\x19 \x01(\tR\bturnover\x12!\n" +
+	"\fturnover_usd\x18\x1a \x01(\tR\vturnoverUsd\x12.\n" +
+	"\x13rollback_bet_amount\x18\x1b \x01(\tR\x11rollbackBetAmount\x125\n" +
+	"\x17rollback_bet_amount_usd\x18\x1c \x01(\tR\x14rollbackBetAmountUsd\x12.\n" +
+	"\x13rollback_win_amount\x18\x1d \x01(\tR\x11rollbackWinAmount\x125\n" +
+	"\x17rollback_win_amount_usd\x18\x1e \x01(\tR\x14rollbackWinAmountUsd\x129\n" +
 	"\n" +
-	"created_at\x18\x1f \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\x1f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18  \x01(\x03R\tupdatedAt\x12H\n" +
+	"updated_at\x18  \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12H\n" +
 	"\aactions\x18! \x03(\v2..api.game.service.v1.GetBetByIdResponse.ActionR\aactions\"\xdb\x01\n" +
 	"(GetBackofficeUserOverviewFromGameRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12>\n" +
@@ -6090,7 +6090,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\x12\x1b\n" +
 	"\tfee_group\x18\x03 \x01(\tR\bfeeGroup\x12\x1a\n" +
 	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12\x12\n" +
-	"\x04rate\x18\x05 \x01(\x01R\x04rate2\x81\x16\n" +
+	"\x04rate\x18\x05 \x01(\tR\x04rate2\x81\x16\n" +
 	"\x04Game\x12k\n" +
 	"\x0eCreateOperator\x12*.api.game.service.v1.CreateOperatorRequest\x1a+.api.game.service.v1.CreateOperatorResponse\"\x00\x12k\n" +
 	"\x0eUpdateOperator\x12*.api.game.service.v1.UpdateOperatorRequest\x1a+.api.game.service.v1.UpdateOperatorResponse\"\x00\x12k\n" +
@@ -6238,58 +6238,67 @@ var file_game_service_v1_game_proto_depIdxs = []int32{
 	66, // 30: api.game.service.v1.ListProviderRatesResponse.provider_rates:type_name -> api.game.service.v1.ListProviderRatesResponse.ProviderRate
 	34, // 31: api.game.service.v1.PlayResponse.Data.transactions:type_name -> api.game.service.v1.Transactions
 	38, // 32: api.game.service.v1.RollbackResponse.Data.transactions:type_name -> api.game.service.v1.RollbackTransactions
-	63, // 33: api.game.service.v1.GetBetByIdResponse.Bet.actions:type_name -> api.game.service.v1.GetBetByIdResponse.Action
-	1,  // 34: api.game.service.v1.Game.CreateOperator:input_type -> api.game.service.v1.CreateOperatorRequest
-	3,  // 35: api.game.service.v1.Game.UpdateOperator:input_type -> api.game.service.v1.UpdateOperatorRequest
-	5,  // 36: api.game.service.v1.Game.DeleteOperator:input_type -> api.game.service.v1.DeleteOperatorRequest
-	9,  // 37: api.game.service.v1.Game.ListProviders:input_type -> api.game.service.v1.ListProvidersRequest
-	11, // 38: api.game.service.v1.Game.ListCategories:input_type -> api.game.service.v1.ListCategoriesRequest
-	13, // 39: api.game.service.v1.Game.ListFeeGroups:input_type -> api.game.service.v1.ListFeeGroupsRequest
-	15, // 40: api.game.service.v1.Game.ListTags:input_type -> api.game.service.v1.ListTagsRequest
-	17, // 41: api.game.service.v1.Game.ListThemes:input_type -> api.game.service.v1.ListThemesRequest
-	19, // 42: api.game.service.v1.Game.ListCurrencies:input_type -> api.game.service.v1.ListCurrenciesRequest
-	21, // 43: api.game.service.v1.Game.ListGames:input_type -> api.game.service.v1.ListGamesRequest
-	23, // 44: api.game.service.v1.Game.GetGame:input_type -> api.game.service.v1.GetGameRequest
-	26, // 45: api.game.service.v1.Game.CreateSession:input_type -> api.game.service.v1.CreateSessionRequest
-	29, // 46: api.game.service.v1.Game.Balance:input_type -> api.game.service.v1.BalanceRequest
-	31, // 47: api.game.service.v1.Game.Play:input_type -> api.game.service.v1.PlayRequest
-	35, // 48: api.game.service.v1.Game.Rollback:input_type -> api.game.service.v1.RollbackRequest
-	39, // 49: api.game.service.v1.Game.ListBets:input_type -> api.game.service.v1.ListBetsRequest
-	42, // 50: api.game.service.v1.Game.BackofficeListGames:input_type -> api.game.service.v1.BackofficeListGamesRequest
-	44, // 51: api.game.service.v1.Game.UpdateGame:input_type -> api.game.service.v1.UpdateGameRequest
-	46, // 52: api.game.service.v1.Game.UpdateProvider:input_type -> api.game.service.v1.UpdateProviderRequest
-	48, // 53: api.game.service.v1.Game.GetBetById:input_type -> api.game.service.v1.GetBetByIdRequest
-	50, // 54: api.game.service.v1.Game.GetBackofficeUserOverviewFromGame:input_type -> api.game.service.v1.GetBackofficeUserOverviewFromGameRequest
-	54, // 55: api.game.service.v1.Game.ListProviderRates:input_type -> api.game.service.v1.ListProviderRatesRequest
-	52, // 56: api.game.service.v1.Game.GetGameTransactionById:input_type -> api.game.service.v1.GetGameTransactionByIdRequest
-	2,  // 57: api.game.service.v1.Game.CreateOperator:output_type -> api.game.service.v1.CreateOperatorResponse
-	4,  // 58: api.game.service.v1.Game.UpdateOperator:output_type -> api.game.service.v1.UpdateOperatorResponse
-	6,  // 59: api.game.service.v1.Game.DeleteOperator:output_type -> api.game.service.v1.DeleteOperatorResponse
-	10, // 60: api.game.service.v1.Game.ListProviders:output_type -> api.game.service.v1.ListProvidersResponse
-	12, // 61: api.game.service.v1.Game.ListCategories:output_type -> api.game.service.v1.ListCategoriesResponse
-	14, // 62: api.game.service.v1.Game.ListFeeGroups:output_type -> api.game.service.v1.ListFeeGroupsResponse
-	16, // 63: api.game.service.v1.Game.ListTags:output_type -> api.game.service.v1.ListTagsResponse
-	18, // 64: api.game.service.v1.Game.ListThemes:output_type -> api.game.service.v1.ListThemesResponse
-	20, // 65: api.game.service.v1.Game.ListCurrencies:output_type -> api.game.service.v1.ListCurrenciesResponse
-	22, // 66: api.game.service.v1.Game.ListGames:output_type -> api.game.service.v1.ListGamesResponse
-	24, // 67: api.game.service.v1.Game.GetGame:output_type -> api.game.service.v1.GetGameResponse
-	27, // 68: api.game.service.v1.Game.CreateSession:output_type -> api.game.service.v1.CreateSessionResponse
-	30, // 69: api.game.service.v1.Game.Balance:output_type -> api.game.service.v1.BalanceResponse
-	32, // 70: api.game.service.v1.Game.Play:output_type -> api.game.service.v1.PlayResponse
-	37, // 71: api.game.service.v1.Game.Rollback:output_type -> api.game.service.v1.RollbackResponse
-	41, // 72: api.game.service.v1.Game.ListBets:output_type -> api.game.service.v1.ListBetsResponse
-	43, // 73: api.game.service.v1.Game.BackofficeListGames:output_type -> api.game.service.v1.BackofficeListGamesResponse
-	45, // 74: api.game.service.v1.Game.UpdateGame:output_type -> api.game.service.v1.UpdateGameResponse
-	47, // 75: api.game.service.v1.Game.UpdateProvider:output_type -> api.game.service.v1.UpdateProviderResponse
-	49, // 76: api.game.service.v1.Game.GetBetById:output_type -> api.game.service.v1.GetBetByIdResponse
-	51, // 77: api.game.service.v1.Game.GetBackofficeUserOverviewFromGame:output_type -> api.game.service.v1.GetBackofficeUserOverviewFromGameResponse
-	55, // 78: api.game.service.v1.Game.ListProviderRates:output_type -> api.game.service.v1.ListProviderRatesResponse
-	53, // 79: api.game.service.v1.Game.GetGameTransactionById:output_type -> api.game.service.v1.GetGameTransactionByIdResponse
-	57, // [57:80] is the sub-list for method output_type
-	34, // [34:57] is the sub-list for method input_type
-	34, // [34:34] is the sub-list for extension type_name
-	34, // [34:34] is the sub-list for extension extendee
-	0,  // [0:34] is the sub-list for field type_name
+	67, // 33: api.game.service.v1.GetBetByIdResponse.Action.bet_time:type_name -> google.protobuf.Timestamp
+	67, // 34: api.game.service.v1.GetBetByIdResponse.Action.settle_time:type_name -> google.protobuf.Timestamp
+	67, // 35: api.game.service.v1.GetBetByIdResponse.Action.provider_timestamp:type_name -> google.protobuf.Timestamp
+	67, // 36: api.game.service.v1.GetBetByIdResponse.Action.operator_timestamp:type_name -> google.protobuf.Timestamp
+	67, // 37: api.game.service.v1.GetBetByIdResponse.Action.processed_at:type_name -> google.protobuf.Timestamp
+	67, // 38: api.game.service.v1.GetBetByIdResponse.Action.created_at:type_name -> google.protobuf.Timestamp
+	67, // 39: api.game.service.v1.GetBetByIdResponse.Action.updated_at:type_name -> google.protobuf.Timestamp
+	67, // 40: api.game.service.v1.GetBetByIdResponse.Bet.created_at:type_name -> google.protobuf.Timestamp
+	67, // 41: api.game.service.v1.GetBetByIdResponse.Bet.updated_at:type_name -> google.protobuf.Timestamp
+	63, // 42: api.game.service.v1.GetBetByIdResponse.Bet.actions:type_name -> api.game.service.v1.GetBetByIdResponse.Action
+	1,  // 43: api.game.service.v1.Game.CreateOperator:input_type -> api.game.service.v1.CreateOperatorRequest
+	3,  // 44: api.game.service.v1.Game.UpdateOperator:input_type -> api.game.service.v1.UpdateOperatorRequest
+	5,  // 45: api.game.service.v1.Game.DeleteOperator:input_type -> api.game.service.v1.DeleteOperatorRequest
+	9,  // 46: api.game.service.v1.Game.ListProviders:input_type -> api.game.service.v1.ListProvidersRequest
+	11, // 47: api.game.service.v1.Game.ListCategories:input_type -> api.game.service.v1.ListCategoriesRequest
+	13, // 48: api.game.service.v1.Game.ListFeeGroups:input_type -> api.game.service.v1.ListFeeGroupsRequest
+	15, // 49: api.game.service.v1.Game.ListTags:input_type -> api.game.service.v1.ListTagsRequest
+	17, // 50: api.game.service.v1.Game.ListThemes:input_type -> api.game.service.v1.ListThemesRequest
+	19, // 51: api.game.service.v1.Game.ListCurrencies:input_type -> api.game.service.v1.ListCurrenciesRequest
+	21, // 52: api.game.service.v1.Game.ListGames:input_type -> api.game.service.v1.ListGamesRequest
+	23, // 53: api.game.service.v1.Game.GetGame:input_type -> api.game.service.v1.GetGameRequest
+	26, // 54: api.game.service.v1.Game.CreateSession:input_type -> api.game.service.v1.CreateSessionRequest
+	29, // 55: api.game.service.v1.Game.Balance:input_type -> api.game.service.v1.BalanceRequest
+	31, // 56: api.game.service.v1.Game.Play:input_type -> api.game.service.v1.PlayRequest
+	35, // 57: api.game.service.v1.Game.Rollback:input_type -> api.game.service.v1.RollbackRequest
+	39, // 58: api.game.service.v1.Game.ListBets:input_type -> api.game.service.v1.ListBetsRequest
+	42, // 59: api.game.service.v1.Game.BackofficeListGames:input_type -> api.game.service.v1.BackofficeListGamesRequest
+	44, // 60: api.game.service.v1.Game.UpdateGame:input_type -> api.game.service.v1.UpdateGameRequest
+	46, // 61: api.game.service.v1.Game.UpdateProvider:input_type -> api.game.service.v1.UpdateProviderRequest
+	48, // 62: api.game.service.v1.Game.GetBetById:input_type -> api.game.service.v1.GetBetByIdRequest
+	50, // 63: api.game.service.v1.Game.GetBackofficeUserOverviewFromGame:input_type -> api.game.service.v1.GetBackofficeUserOverviewFromGameRequest
+	54, // 64: api.game.service.v1.Game.ListProviderRates:input_type -> api.game.service.v1.ListProviderRatesRequest
+	52, // 65: api.game.service.v1.Game.GetGameTransactionById:input_type -> api.game.service.v1.GetGameTransactionByIdRequest
+	2,  // 66: api.game.service.v1.Game.CreateOperator:output_type -> api.game.service.v1.CreateOperatorResponse
+	4,  // 67: api.game.service.v1.Game.UpdateOperator:output_type -> api.game.service.v1.UpdateOperatorResponse
+	6,  // 68: api.game.service.v1.Game.DeleteOperator:output_type -> api.game.service.v1.DeleteOperatorResponse
+	10, // 69: api.game.service.v1.Game.ListProviders:output_type -> api.game.service.v1.ListProvidersResponse
+	12, // 70: api.game.service.v1.Game.ListCategories:output_type -> api.game.service.v1.ListCategoriesResponse
+	14, // 71: api.game.service.v1.Game.ListFeeGroups:output_type -> api.game.service.v1.ListFeeGroupsResponse
+	16, // 72: api.game.service.v1.Game.ListTags:output_type -> api.game.service.v1.ListTagsResponse
+	18, // 73: api.game.service.v1.Game.ListThemes:output_type -> api.game.service.v1.ListThemesResponse
+	20, // 74: api.game.service.v1.Game.ListCurrencies:output_type -> api.game.service.v1.ListCurrenciesResponse
+	22, // 75: api.game.service.v1.Game.ListGames:output_type -> api.game.service.v1.ListGamesResponse
+	24, // 76: api.game.service.v1.Game.GetGame:output_type -> api.game.service.v1.GetGameResponse
+	27, // 77: api.game.service.v1.Game.CreateSession:output_type -> api.game.service.v1.CreateSessionResponse
+	30, // 78: api.game.service.v1.Game.Balance:output_type -> api.game.service.v1.BalanceResponse
+	32, // 79: api.game.service.v1.Game.Play:output_type -> api.game.service.v1.PlayResponse
+	37, // 80: api.game.service.v1.Game.Rollback:output_type -> api.game.service.v1.RollbackResponse
+	41, // 81: api.game.service.v1.Game.ListBets:output_type -> api.game.service.v1.ListBetsResponse
+	43, // 82: api.game.service.v1.Game.BackofficeListGames:output_type -> api.game.service.v1.BackofficeListGamesResponse
+	45, // 83: api.game.service.v1.Game.UpdateGame:output_type -> api.game.service.v1.UpdateGameResponse
+	47, // 84: api.game.service.v1.Game.UpdateProvider:output_type -> api.game.service.v1.UpdateProviderResponse
+	49, // 85: api.game.service.v1.Game.GetBetById:output_type -> api.game.service.v1.GetBetByIdResponse
+	51, // 86: api.game.service.v1.Game.GetBackofficeUserOverviewFromGame:output_type -> api.game.service.v1.GetBackofficeUserOverviewFromGameResponse
+	55, // 87: api.game.service.v1.Game.ListProviderRates:output_type -> api.game.service.v1.ListProviderRatesResponse
+	53, // 88: api.game.service.v1.Game.GetGameTransactionById:output_type -> api.game.service.v1.GetGameTransactionByIdResponse
+	66, // [66:89] is the sub-list for method output_type
+	43, // [43:66] is the sub-list for method input_type
+	43, // [43:43] is the sub-list for extension type_name
+	43, // [43:43] is the sub-list for extension extendee
+	0,  // [0:43] is the sub-list for field type_name
 }
 
 func init() { file_game_service_v1_game_proto_init() }
