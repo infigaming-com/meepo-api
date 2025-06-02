@@ -6117,9 +6117,11 @@ components:
                 enabled:
                     type: boolean
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.game.service.v1.BackofficeListGamesResponse:
             type: object
             properties:
@@ -6128,15 +6130,20 @@ components:
                     items:
                         $ref: '#/components/schemas/api.game.service.v1.BackofficeListGamesResponse_Game'
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
                 total:
-                    type: string
+                    type: integer
+                    format: int32
                 totalEnabled:
-                    type: string
+                    type: integer
+                    format: int32
                 totalDisabled:
-                    type: string
+                    type: integer
+                    format: int32
         api.game.service.v1.BackofficeListGamesResponse_Game:
             type: object
             properties:
@@ -6419,9 +6426,11 @@ components:
                 status:
                     type: string
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.game.service.v1.ListBetsRequest_Currencies:
             type: object
             properties:
@@ -6460,11 +6469,14 @@ components:
                     type: integer
                     format: int32
                 total:
-                    type: string
+                    type: integer
+                    format: int32
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.game.service.v1.ListCategoriesRequest:
             type: object
             properties: {}
@@ -6479,11 +6491,13 @@ components:
             type: object
             properties:
                 page:
-                    type: string
+                    type: integer
                     description: page number for pagination (starts from 1)
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
                     description: page size for pagination
+                    format: int32
                 filter:
                     allOf:
                         - $ref: '#/components/schemas/api.game.service.v1.GameFilter'
@@ -6500,11 +6514,14 @@ components:
                     items:
                         type: string
                 total:
-                    type: string
+                    type: integer
+                    format: int32
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.game.service.v1.ListProvidersRequest:
             type: object
             properties:
