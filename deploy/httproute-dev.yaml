@@ -61,6 +61,20 @@ spec:
   - matches:
     - path:
         type: PathPrefix
+        value: "/decimal/v1/wallet"
+    backendRefs:
+    - name: wallet-decimal-svc
+      port: 8000
+      weight: 1
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: "/v1/wallet"
+  - matches:
+    - path:
+        type: PathPrefix
         value: "/v1/backoffice"
     backendRefs:
     - name: backoffice-svc

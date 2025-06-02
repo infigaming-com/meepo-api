@@ -315,7 +315,7 @@ message GetBetByIdResponse {
 		string game_id = 13;
 		string game_name = 14;
 		string game_category = 15;
-		int64 win_count = 16;
+		int32 win_count = 16;
 		string bet_amount = 17;
 		string bet_amount_usd = 18;
 		string settlement_bet_amount = 19;
@@ -459,7 +459,7 @@ message ListProviderRatesResponse {
 		string provider_name = 2;
 		string fee_group = 3;
 		string currency = 4;
-		double rate = 5;
+		string rate = 5;
 	}
 	repeated ProviderRate provider_rates = 1;
 	int32 page = 2;
