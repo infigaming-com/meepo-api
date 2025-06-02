@@ -20,14 +20,14 @@ service Game {
 
 	rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse) {
 		option (google.api.http) = {
-			post: "/v1/game/providers/list"
+			post: "/decimal/v1/game/providers/list"
 			body: "*"
 		};
 	}
 
 	rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse) {
 		option (google.api.http) = {
-			post: "/v1/game/categories/list"
+			post: "/decimal/v1/game/categories/list"
 			body: "*"
 		};
 	};
@@ -42,56 +42,56 @@ service Game {
 
 	rpc ListGames(ListGamesRequest) returns (ListGamesResponse) {
 		option (google.api.http) = {
-			post: "/v1/game/list"
+			post: "/decimal/v1/game/list"
 			body: "*"
 		};
 	};
 
 	rpc GetGame(GetGameRequest) returns (GetGameResponse) {
 		option (google.api.http) = {
-			post: "/v1/game/get"
+			post: "/decimal/v1/game/get"
 			body: "*"
 		};
 	};
 
 	rpc CreateSession(CreateSessionRequest) returns (CreateSessionResponse) {
 		option (google.api.http) = {
-			post: "/v1/game/create-session"
+			post: "/decimal/v1/game/create-session"
 			body: "*"
 		};
 	};
 
 	rpc Balance(BalanceRequest) returns (BalanceResponse) {
 		option (google.api.http) = {
-			post: "/v1/game/balance"
+			post: "/decimal/v1/game/balance"
 			body: "*"
 		};
 	};
 
 	rpc Play(PlayRequest) returns (PlayResponse) {
 		option (google.api.http) = {
-			post: "/v1/game/play"
+			post: "/decimal/v1/game/play"
 			body: "*"
 		};
 	};
 
 	rpc Rollback(RollbackRequest) returns (RollbackResponse) {
 		option (google.api.http) = {
-			post: "/v1/game/rollback"
+			post: "/decimal/v1/game/rollback"
 			body: "*"
 		};
 	};
 
 	rpc ListBets(ListBetsRequest) returns (ListBetsResponse) {
 		option (google.api.http) = {
-			post: "/v1/game/bets/list"
+			post: "/decimal/v1/game/bets/list"
 			body: "*"
 		};
 	};
 
 	rpc BackofficeListGames(BackofficeListGamesRequest) returns (BackofficeListGamesResponse) {
 		option (google.api.http) = {
-			post: "/v1/game/backoffice/games/list"
+			post: "/decimal/v1/game/backoffice/games/list"
 			body: "*"
 		};
 	};

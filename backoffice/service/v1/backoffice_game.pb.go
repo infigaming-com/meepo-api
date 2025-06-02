@@ -4318,27 +4318,27 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18& \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18' \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\x8a\x15\n" +
-	"\x0eBackofficeGame\x12\xa1\x01\n" +
-	"\rListProviders\x12/.api.backoffice.service.v1.ListProvidersRequest\x1a0.api.backoffice.service.v1.ListProvidersResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/game/providers/list\x12\xcb\x01\n" +
-	"\x17ListProvidersWithDetail\x129.api.backoffice.service.v1.ListProvidersWithDetailRequest\x1a:.api.backoffice.service.v1.ListProvidersWithDetailResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/game/providers-with-detail/list\x12\xa5\x01\n" +
-	"\x0eListCategories\x120.api.backoffice.service.v1.ListCategoriesRequest\x1a1.api.backoffice.service.v1.ListCategoriesResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/game/categories/list\x12\xa2\x01\n" +
-	"\rListFeeGroups\x12/.api.backoffice.service.v1.ListFeeGroupsRequest\x1a0.api.backoffice.service.v1.ListFeeGroupsResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/game/fee-groups/list\x12\x8d\x01\n" +
-	"\bListTags\x12*.api.backoffice.service.v1.ListTagsRequest\x1a+.api.backoffice.service.v1.ListTagsResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/backoffice/game/tags/list\x12\x95\x01\n" +
+	"updated_at\x18' \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\x8a\x16\n" +
+	"\x0eBackofficeGame\x12\xa9\x01\n" +
+	"\rListProviders\x12/.api.backoffice.service.v1.ListProvidersRequest\x1a0.api.backoffice.service.v1.ListProvidersResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/decimal/v1/backoffice/game/providers/list\x12\xd3\x01\n" +
+	"\x17ListProvidersWithDetail\x129.api.backoffice.service.v1.ListProvidersWithDetailRequest\x1a:.api.backoffice.service.v1.ListProvidersWithDetailResponse\"A\x82\xd3\xe4\x93\x02;:\x01*\"6/decimal/v1/backoffice/game/providers-with-detail/list\x12\xad\x01\n" +
+	"\x0eListCategories\x120.api.backoffice.service.v1.ListCategoriesRequest\x1a1.api.backoffice.service.v1.ListCategoriesResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/decimal/v1/backoffice/game/categories/list\x12\xaa\x01\n" +
+	"\rListFeeGroups\x12/.api.backoffice.service.v1.ListFeeGroupsRequest\x1a0.api.backoffice.service.v1.ListFeeGroupsResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/decimal/v1/backoffice/game/fee-groups/list\x12\x95\x01\n" +
+	"\bListTags\x12*.api.backoffice.service.v1.ListTagsRequest\x1a+.api.backoffice.service.v1.ListTagsResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/decimal/v1/backoffice/game/tags/list\x12\x9d\x01\n" +
 	"\n" +
-	"ListThemes\x12,.api.backoffice.service.v1.ListThemesRequest\x1a-.api.backoffice.service.v1.ListThemesResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/game/themes/list\x12\xa5\x01\n" +
-	"\x0eListCurrencies\x120.api.backoffice.service.v1.ListCurrenciesRequest\x1a1.api.backoffice.service.v1.ListCurrenciesResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/game/currencies/list\x12\x8d\x01\n" +
-	"\bListBets\x12*.api.backoffice.service.v1.ListBetsRequest\x1a+.api.backoffice.service.v1.ListBetsResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/backoffice/game/bets/list\x12\x92\x01\n" +
+	"ListThemes\x12,.api.backoffice.service.v1.ListThemesRequest\x1a-.api.backoffice.service.v1.ListThemesResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/decimal/v1/backoffice/game/themes/list\x12\xad\x01\n" +
+	"\x0eListCurrencies\x120.api.backoffice.service.v1.ListCurrenciesRequest\x1a1.api.backoffice.service.v1.ListCurrenciesResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/decimal/v1/backoffice/game/currencies/list\x12\x95\x01\n" +
+	"\bListBets\x12*.api.backoffice.service.v1.ListBetsRequest\x1a+.api.backoffice.service.v1.ListBetsResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/decimal/v1/backoffice/game/bets/list\x12\x9a\x01\n" +
 	"\n" +
-	"GetBetById\x12,.api.backoffice.service.v1.GetBetByIdRequest\x1a-.api.backoffice.service.v1.GetBetByIdResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/game/bets/get\x12\xb6\x01\n" +
-	"\x13GetUserBetsOverview\x125.api.backoffice.service.v1.GetUserBetsOverviewRequest\x1a6.api.backoffice.service.v1.GetUserBetsOverviewResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/game/bets/overview/get\x12\xcc\x01\n" +
-	"\x19GetGameTransactionsForBet\x12;.api.backoffice.service.v1.GetGameTransactionsForBetRequest\x1a<.api.backoffice.service.v1.GetGameTransactionsForBetResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/game/bets/transactions/get\x12\x8b\x01\n" +
-	"\tListGames\x12+.api.backoffice.service.v1.ListGamesRequest\x1a,.api.backoffice.service.v1.ListGamesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/backoffice/game/list\x12\x90\x01\n" +
+	"GetBetById\x12,.api.backoffice.service.v1.GetBetByIdRequest\x1a-.api.backoffice.service.v1.GetBetByIdResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/decimal/v1/backoffice/game/bets/get\x12\xbe\x01\n" +
+	"\x13GetUserBetsOverview\x125.api.backoffice.service.v1.GetUserBetsOverviewRequest\x1a6.api.backoffice.service.v1.GetUserBetsOverviewResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/decimal/v1/backoffice/game/bets/overview/get\x12\xd4\x01\n" +
+	"\x19GetGameTransactionsForBet\x12;.api.backoffice.service.v1.GetGameTransactionsForBetRequest\x1a<.api.backoffice.service.v1.GetGameTransactionsForBetResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/decimal/v1/backoffice/game/bets/transactions/get\x12\x93\x01\n" +
+	"\tListGames\x12+.api.backoffice.service.v1.ListGamesRequest\x1a,.api.backoffice.service.v1.ListGamesResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /decimal/v1/backoffice/game/list\x12\x98\x01\n" +
 	"\n" +
-	"UpdateGame\x12,.api.backoffice.service.v1.UpdateGameRequest\x1a-.api.backoffice.service.v1.UpdateGameResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/backoffice/game/update\x12\xa5\x01\n" +
-	"\x0eUpdateProvider\x120.api.backoffice.service.v1.UpdateProviderRequest\x1a1.api.backoffice.service.v1.UpdateProviderResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/game/provider/update\x12\xb2\x01\n" +
-	"\x11ListProviderRates\x123.api.backoffice.service.v1.ListProviderRatesRequest\x1a4.api.backoffice.service.v1.ListProviderRatesResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/game/provider/rates/list\x12\xbd\x01\n" +
-	"\x16GetGameTransactionById\x128.api.backoffice.service.v1.GetGameTransactionByIdRequest\x1a9.api.backoffice.service.v1.GetGameTransactionByIdResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/game/transaction/getB[\n" +
+	"UpdateGame\x12,.api.backoffice.service.v1.UpdateGameRequest\x1a-.api.backoffice.service.v1.UpdateGameResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/decimal/v1/backoffice/game/update\x12\xad\x01\n" +
+	"\x0eUpdateProvider\x120.api.backoffice.service.v1.UpdateProviderRequest\x1a1.api.backoffice.service.v1.UpdateProviderResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/decimal/v1/backoffice/game/provider/update\x12\xba\x01\n" +
+	"\x11ListProviderRates\x123.api.backoffice.service.v1.ListProviderRatesRequest\x1a4.api.backoffice.service.v1.ListProviderRatesResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//decimal/v1/backoffice/game/provider/rates/list\x12\xc5\x01\n" +
+	"\x16GetGameTransactionById\x128.api.backoffice.service.v1.GetGameTransactionByIdRequest\x1a9.api.backoffice.service.v1.GetGameTransactionByIdResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/decimal/v1/backoffice/game/transaction/getB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

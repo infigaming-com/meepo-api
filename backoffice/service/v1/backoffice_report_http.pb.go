@@ -51,19 +51,19 @@ type BackofficeReportHTTPServer interface {
 
 func RegisterBackofficeReportHTTPServer(s *http.Server, srv BackofficeReportHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/report/summary/get", _BackofficeReport_GetSummary0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/summary/list", _BackofficeReport_ListSummaries0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/game-data/get", _BackofficeReport_GetGameDataSummary0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/game-data/list", _BackofficeReport_ListGameData0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/player-game-data/get", _BackofficeReport_GetPlayerGameDataSummary0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/player-game-data/list", _BackofficeReport_ListPlayerGameData0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/deposit-summaries/get", _BackofficeReport_GetDepositSummaries0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/deposit-details/list", _BackofficeReport_ListDepositDetails0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/withdraw-summaries/get", _BackofficeReport_GetWithdrawSummaries0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/withdraw-details/list", _BackofficeReport_ListWithdrawDetails0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/register-retention/list", _BackofficeReport_ListRegisterRetention0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/deposit-vtg-details/list", _BackofficeReport_ListDepositVtgDetails0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/withdraw-vtg-details/list", _BackofficeReport_ListWithdrawVtgDetails0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/summary/get", _BackofficeReport_GetSummary0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/summary/list", _BackofficeReport_ListSummaries0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/game-data/get", _BackofficeReport_GetGameDataSummary0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/game-data/list", _BackofficeReport_ListGameData0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/player-game-data/get", _BackofficeReport_GetPlayerGameDataSummary0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/player-game-data/list", _BackofficeReport_ListPlayerGameData0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/deposit-summaries/get", _BackofficeReport_GetDepositSummaries0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/deposit-details/list", _BackofficeReport_ListDepositDetails0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/withdraw-summaries/get", _BackofficeReport_GetWithdrawSummaries0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/withdraw-details/list", _BackofficeReport_ListWithdrawDetails0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/register-retention/list", _BackofficeReport_ListRegisterRetention0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/deposit-vtg-details/list", _BackofficeReport_ListDepositVtgDetails0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/report/withdraw-vtg-details/list", _BackofficeReport_ListWithdrawVtgDetails0_HTTP_Handler(srv))
 }
 
 func _BackofficeReport_GetSummary0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
@@ -378,7 +378,7 @@ func NewBackofficeReportHTTPClient(client *http.Client) BackofficeReportHTTPClie
 
 func (c *BackofficeReportHTTPClientImpl) GetDepositSummaries(ctx context.Context, in *GetDepositSummariesRequest, opts ...http.CallOption) (*GetDepositSummariesResponse, error) {
 	var out GetDepositSummariesResponse
-	pattern := "/v1/backoffice/report/deposit-summaries/get"
+	pattern := "/decimal/v1/backoffice/report/deposit-summaries/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportGetDepositSummaries))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -391,7 +391,7 @@ func (c *BackofficeReportHTTPClientImpl) GetDepositSummaries(ctx context.Context
 
 func (c *BackofficeReportHTTPClientImpl) GetGameDataSummary(ctx context.Context, in *GetGameSummaryRequest, opts ...http.CallOption) (*GetGameSummaryResponse, error) {
 	var out GetGameSummaryResponse
-	pattern := "/v1/backoffice/report/game-data/get"
+	pattern := "/decimal/v1/backoffice/report/game-data/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportGetGameDataSummary))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -404,7 +404,7 @@ func (c *BackofficeReportHTTPClientImpl) GetGameDataSummary(ctx context.Context,
 
 func (c *BackofficeReportHTTPClientImpl) GetPlayerGameDataSummary(ctx context.Context, in *GetPlayerGameSummaryRequest, opts ...http.CallOption) (*GetPlayerGameSummaryResponse, error) {
 	var out GetPlayerGameSummaryResponse
-	pattern := "/v1/backoffice/report/player-game-data/get"
+	pattern := "/decimal/v1/backoffice/report/player-game-data/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportGetPlayerGameDataSummary))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -417,7 +417,7 @@ func (c *BackofficeReportHTTPClientImpl) GetPlayerGameDataSummary(ctx context.Co
 
 func (c *BackofficeReportHTTPClientImpl) GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...http.CallOption) (*GetSummaryResponse, error) {
 	var out GetSummaryResponse
-	pattern := "/v1/backoffice/report/summary/get"
+	pattern := "/decimal/v1/backoffice/report/summary/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportGetSummary))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -430,7 +430,7 @@ func (c *BackofficeReportHTTPClientImpl) GetSummary(ctx context.Context, in *Get
 
 func (c *BackofficeReportHTTPClientImpl) GetWithdrawSummaries(ctx context.Context, in *GetWithdrawSummariesRequest, opts ...http.CallOption) (*GetWithdrawSummariesResponse, error) {
 	var out GetWithdrawSummariesResponse
-	pattern := "/v1/backoffice/report/withdraw-summaries/get"
+	pattern := "/decimal/v1/backoffice/report/withdraw-summaries/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportGetWithdrawSummaries))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -443,7 +443,7 @@ func (c *BackofficeReportHTTPClientImpl) GetWithdrawSummaries(ctx context.Contex
 
 func (c *BackofficeReportHTTPClientImpl) ListDepositDetails(ctx context.Context, in *ListDepositDetailsRequest, opts ...http.CallOption) (*ListDepositDetailsResponse, error) {
 	var out ListDepositDetailsResponse
-	pattern := "/v1/backoffice/report/deposit-details/list"
+	pattern := "/decimal/v1/backoffice/report/deposit-details/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListDepositDetails))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -456,7 +456,7 @@ func (c *BackofficeReportHTTPClientImpl) ListDepositDetails(ctx context.Context,
 
 func (c *BackofficeReportHTTPClientImpl) ListDepositVtgDetails(ctx context.Context, in *ListDepositVtgDetailsRequest, opts ...http.CallOption) (*ListDepositVtgDetailsResponse, error) {
 	var out ListDepositVtgDetailsResponse
-	pattern := "/v1/backoffice/report/deposit-vtg-details/list"
+	pattern := "/decimal/v1/backoffice/report/deposit-vtg-details/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListDepositVtgDetails))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -469,7 +469,7 @@ func (c *BackofficeReportHTTPClientImpl) ListDepositVtgDetails(ctx context.Conte
 
 func (c *BackofficeReportHTTPClientImpl) ListGameData(ctx context.Context, in *GetGameDataRequest, opts ...http.CallOption) (*GetGameDataResponse, error) {
 	var out GetGameDataResponse
-	pattern := "/v1/backoffice/report/game-data/list"
+	pattern := "/decimal/v1/backoffice/report/game-data/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListGameData))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -482,7 +482,7 @@ func (c *BackofficeReportHTTPClientImpl) ListGameData(ctx context.Context, in *G
 
 func (c *BackofficeReportHTTPClientImpl) ListPlayerGameData(ctx context.Context, in *GetPlayerGameDataRequest, opts ...http.CallOption) (*GetPlayerGameDataResponse, error) {
 	var out GetPlayerGameDataResponse
-	pattern := "/v1/backoffice/report/player-game-data/list"
+	pattern := "/decimal/v1/backoffice/report/player-game-data/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListPlayerGameData))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -495,7 +495,7 @@ func (c *BackofficeReportHTTPClientImpl) ListPlayerGameData(ctx context.Context,
 
 func (c *BackofficeReportHTTPClientImpl) ListRegisterRetention(ctx context.Context, in *ListRegisterRetentionRequest, opts ...http.CallOption) (*ListRegisterRetentionResponse, error) {
 	var out ListRegisterRetentionResponse
-	pattern := "/v1/backoffice/report/register-retention/list"
+	pattern := "/decimal/v1/backoffice/report/register-retention/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListRegisterRetention))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -508,7 +508,7 @@ func (c *BackofficeReportHTTPClientImpl) ListRegisterRetention(ctx context.Conte
 
 func (c *BackofficeReportHTTPClientImpl) ListSummaries(ctx context.Context, in *ListSummariesRequest, opts ...http.CallOption) (*ListSummariesResponse, error) {
 	var out ListSummariesResponse
-	pattern := "/v1/backoffice/report/summary/list"
+	pattern := "/decimal/v1/backoffice/report/summary/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListSummaries))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -521,7 +521,7 @@ func (c *BackofficeReportHTTPClientImpl) ListSummaries(ctx context.Context, in *
 
 func (c *BackofficeReportHTTPClientImpl) ListWithdrawDetails(ctx context.Context, in *ListWithdrawDetailsRequest, opts ...http.CallOption) (*ListWithdrawDetailsResponse, error) {
 	var out ListWithdrawDetailsResponse
-	pattern := "/v1/backoffice/report/withdraw-details/list"
+	pattern := "/decimal/v1/backoffice/report/withdraw-details/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListWithdrawDetails))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -534,7 +534,7 @@ func (c *BackofficeReportHTTPClientImpl) ListWithdrawDetails(ctx context.Context
 
 func (c *BackofficeReportHTTPClientImpl) ListWithdrawVtgDetails(ctx context.Context, in *ListWithdrawVtgDetailsRequest, opts ...http.CallOption) (*ListWithdrawVtgDetailsResponse, error) {
 	var out ListWithdrawVtgDetailsResponse
-	pattern := "/v1/backoffice/report/withdraw-vtg-details/list"
+	pattern := "/decimal/v1/backoffice/report/withdraw-vtg-details/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListWithdrawVtgDetails))
 	opts = append(opts, http.PathTemplate(pattern))

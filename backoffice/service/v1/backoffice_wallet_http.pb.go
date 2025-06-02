@@ -36,11 +36,11 @@ type BackofficeWalletHTTPServer interface {
 
 func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/wallet/get", _BackofficeWallet_GetWallets0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/credits/get", _BackofficeWallet_GetWalletCredits0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/balance-transactions/list", _BackofficeWallet_ListWalletBalanceTransactions0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/credit-transactions/get", _BackofficeWallet_GetWalletCreditTransactions0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/update", _BackofficeWallet_UpdateWallet0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/wallet/get", _BackofficeWallet_GetWallets0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/wallet/credits/get", _BackofficeWallet_GetWalletCredits0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/wallet/balance-transactions/list", _BackofficeWallet_ListWalletBalanceTransactions0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/wallet/credit-transactions/get", _BackofficeWallet_GetWalletCreditTransactions0_HTTP_Handler(srv))
+	r.POST("/decimal/v1/backoffice/wallet/update", _BackofficeWallet_UpdateWallet0_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -171,7 +171,7 @@ func NewBackofficeWalletHTTPClient(client *http.Client) BackofficeWalletHTTPClie
 
 func (c *BackofficeWalletHTTPClientImpl) GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...http.CallOption) (*GetWalletCreditTransactionsResponse, error) {
 	var out GetWalletCreditTransactionsResponse
-	pattern := "/v1/backoffice/wallet/credit-transactions/get"
+	pattern := "/decimal/v1/backoffice/wallet/credit-transactions/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletGetWalletCreditTransactions))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -184,7 +184,7 @@ func (c *BackofficeWalletHTTPClientImpl) GetWalletCreditTransactions(ctx context
 
 func (c *BackofficeWalletHTTPClientImpl) GetWalletCredits(ctx context.Context, in *GetWalletCreditsRequest, opts ...http.CallOption) (*GetWalletCreditsResponse, error) {
 	var out GetWalletCreditsResponse
-	pattern := "/v1/backoffice/wallet/credits/get"
+	pattern := "/decimal/v1/backoffice/wallet/credits/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletGetWalletCredits))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -197,7 +197,7 @@ func (c *BackofficeWalletHTTPClientImpl) GetWalletCredits(ctx context.Context, i
 
 func (c *BackofficeWalletHTTPClientImpl) GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...http.CallOption) (*GetWalletsResponse, error) {
 	var out GetWalletsResponse
-	pattern := "/v1/backoffice/wallet/get"
+	pattern := "/decimal/v1/backoffice/wallet/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletGetWallets))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -210,7 +210,7 @@ func (c *BackofficeWalletHTTPClientImpl) GetWallets(ctx context.Context, in *Get
 
 func (c *BackofficeWalletHTTPClientImpl) ListWalletBalanceTransactions(ctx context.Context, in *ListWalletBalanceTransactionsRequest, opts ...http.CallOption) (*ListWalletBalanceTransactionsResponse, error) {
 	var out ListWalletBalanceTransactionsResponse
-	pattern := "/v1/backoffice/wallet/balance-transactions/list"
+	pattern := "/decimal/v1/backoffice/wallet/balance-transactions/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletListWalletBalanceTransactions))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -223,7 +223,7 @@ func (c *BackofficeWalletHTTPClientImpl) ListWalletBalanceTransactions(ctx conte
 
 func (c *BackofficeWalletHTTPClientImpl) UpdateWallet(ctx context.Context, in *UpdateWalletRequest, opts ...http.CallOption) (*UpdateWalletResponse, error) {
 	var out UpdateWalletResponse
-	pattern := "/v1/backoffice/wallet/update"
+	pattern := "/decimal/v1/backoffice/wallet/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletUpdateWallet))
 	opts = append(opts, http.PathTemplate(pattern))

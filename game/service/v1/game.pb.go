@@ -6090,26 +6090,26 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\x12\x1b\n" +
 	"\tfee_group\x18\x03 \x01(\tR\bfeeGroup\x12\x1a\n" +
 	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12\x12\n" +
-	"\x04rate\x18\x05 \x01(\x01R\x04rate2\xb1\x15\n" +
+	"\x04rate\x18\x05 \x01(\x01R\x04rate2\x81\x16\n" +
 	"\x04Game\x12k\n" +
 	"\x0eCreateOperator\x12*.api.game.service.v1.CreateOperatorRequest\x1a+.api.game.service.v1.CreateOperatorResponse\"\x00\x12k\n" +
 	"\x0eUpdateOperator\x12*.api.game.service.v1.UpdateOperatorRequest\x1a+.api.game.service.v1.UpdateOperatorResponse\"\x00\x12k\n" +
-	"\x0eDeleteOperator\x12*.api.game.service.v1.DeleteOperatorRequest\x1a+.api.game.service.v1.DeleteOperatorResponse\"\x00\x12\x8a\x01\n" +
-	"\rListProviders\x12).api.game.service.v1.ListProvidersRequest\x1a*.api.game.service.v1.ListProvidersResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/game/providers/list\x12\x8e\x01\n" +
-	"\x0eListCategories\x12*.api.game.service.v1.ListCategoriesRequest\x1a+.api.game.service.v1.ListCategoriesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/game/categories/list\x12h\n" +
+	"\x0eDeleteOperator\x12*.api.game.service.v1.DeleteOperatorRequest\x1a+.api.game.service.v1.DeleteOperatorResponse\"\x00\x12\x92\x01\n" +
+	"\rListProviders\x12).api.game.service.v1.ListProvidersRequest\x1a*.api.game.service.v1.ListProvidersResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/decimal/v1/game/providers/list\x12\x96\x01\n" +
+	"\x0eListCategories\x12*.api.game.service.v1.ListCategoriesRequest\x1a+.api.game.service.v1.ListCategoriesResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /decimal/v1/game/categories/list\x12h\n" +
 	"\rListFeeGroups\x12).api.game.service.v1.ListFeeGroupsRequest\x1a*.api.game.service.v1.ListFeeGroupsResponse\"\x00\x12Y\n" +
 	"\bListTags\x12$.api.game.service.v1.ListTagsRequest\x1a%.api.game.service.v1.ListTagsResponse\"\x00\x12_\n" +
 	"\n" +
 	"ListThemes\x12&.api.game.service.v1.ListThemesRequest\x1a'.api.game.service.v1.ListThemesResponse\"\x00\x12k\n" +
-	"\x0eListCurrencies\x12*.api.game.service.v1.ListCurrenciesRequest\x1a+.api.game.service.v1.ListCurrenciesResponse\"\x00\x12t\n" +
-	"\tListGames\x12%.api.game.service.v1.ListGamesRequest\x1a&.api.game.service.v1.ListGamesResponse\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/game/list\x12m\n" +
-	"\aGetGame\x12#.api.game.service.v1.GetGameRequest\x1a$.api.game.service.v1.GetGameResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v1/game/get\x12\x8a\x01\n" +
-	"\rCreateSession\x12).api.game.service.v1.CreateSessionRequest\x1a*.api.game.service.v1.CreateSessionResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/game/create-session\x12q\n" +
-	"\aBalance\x12#.api.game.service.v1.BalanceRequest\x1a$.api.game.service.v1.BalanceResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/game/balance\x12e\n" +
-	"\x04Play\x12 .api.game.service.v1.PlayRequest\x1a!.api.game.service.v1.PlayResponse\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/game/play\x12u\n" +
-	"\bRollback\x12$.api.game.service.v1.RollbackRequest\x1a%.api.game.service.v1.RollbackResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/game/rollback\x12v\n" +
-	"\bListBets\x12$.api.game.service.v1.ListBetsRequest\x1a%.api.game.service.v1.ListBetsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1/game/bets/list\x12\xa3\x01\n" +
-	"\x13BackofficeListGames\x12/.api.game.service.v1.BackofficeListGamesRequest\x1a0.api.game.service.v1.BackofficeListGamesResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/game/backoffice/games/list\x12_\n" +
+	"\x0eListCurrencies\x12*.api.game.service.v1.ListCurrenciesRequest\x1a+.api.game.service.v1.ListCurrenciesResponse\"\x00\x12|\n" +
+	"\tListGames\x12%.api.game.service.v1.ListGamesRequest\x1a&.api.game.service.v1.ListGamesResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/decimal/v1/game/list\x12u\n" +
+	"\aGetGame\x12#.api.game.service.v1.GetGameRequest\x1a$.api.game.service.v1.GetGameResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/decimal/v1/game/get\x12\x92\x01\n" +
+	"\rCreateSession\x12).api.game.service.v1.CreateSessionRequest\x1a*.api.game.service.v1.CreateSessionResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/decimal/v1/game/create-session\x12y\n" +
+	"\aBalance\x12#.api.game.service.v1.BalanceRequest\x1a$.api.game.service.v1.BalanceResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/decimal/v1/game/balance\x12m\n" +
+	"\x04Play\x12 .api.game.service.v1.PlayRequest\x1a!.api.game.service.v1.PlayResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/decimal/v1/game/play\x12}\n" +
+	"\bRollback\x12$.api.game.service.v1.RollbackRequest\x1a%.api.game.service.v1.RollbackResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/decimal/v1/game/rollback\x12~\n" +
+	"\bListBets\x12$.api.game.service.v1.ListBetsRequest\x1a%.api.game.service.v1.ListBetsResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/decimal/v1/game/bets/list\x12\xab\x01\n" +
+	"\x13BackofficeListGames\x12/.api.game.service.v1.BackofficeListGamesRequest\x1a0.api.game.service.v1.BackofficeListGamesResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/decimal/v1/game/backoffice/games/list\x12_\n" +
 	"\n" +
 	"UpdateGame\x12&.api.game.service.v1.UpdateGameRequest\x1a'.api.game.service.v1.UpdateGameResponse\"\x00\x12k\n" +
 	"\x0eUpdateProvider\x12*.api.game.service.v1.UpdateProviderRequest\x1a+.api.game.service.v1.UpdateProviderResponse\"\x00\x12_\n" +

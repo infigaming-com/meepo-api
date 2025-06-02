@@ -18,7 +18,7 @@ service BackofficePayment {
 	// Retrieves a paginated list of payment transactions with optional filtering
 	rpc GetPaymentTransactionPage(payment.service.v1.GetTransactionPageRequest) returns (payment.service.v1.GetTransactionPageResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/payment/transaction/page"
+			post: "/decimal/v1/backoffice/payment/transaction/page"
 			body: "*"
 		};
 	}
@@ -28,7 +28,7 @@ service BackofficePayment {
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
 	rpc GetPaymentTransactionById(GetPaymentTransactionByIdRequest) returns (GetPaymentTransactionByIdResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/payment/transaction/detail"
+			post: "/decimal/v1/backoffice/payment/transaction/detail"
 			body: "*"
 		};
 	}
