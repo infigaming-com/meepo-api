@@ -2257,6 +2257,8 @@ func (m *GetTicketByIdResponse_Ticket) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	// no validation rules for CancellerUserId
+
 	// no validation rules for OperatorId
 
 	// no validation rules for Currency
@@ -2290,6 +2292,8 @@ func (m *GetTicketByIdResponse_Ticket) validate(all bool) error {
 	// no validation rules for UpdatedAt
 
 	// no validation rules for ReviewedAt
+
+	// no validation rules for CancelledAt
 
 	if len(errors) > 0 {
 		return GetTicketByIdResponse_TicketMultiError(errors)
