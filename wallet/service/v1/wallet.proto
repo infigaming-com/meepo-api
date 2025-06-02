@@ -128,9 +128,9 @@ message GetUserBalanceRequest {
 message GetUserBalanceResponse {
 	// optional exchange rate between currency and target currency
 	string exchange_rate = 1;
-	int64 cash = 2;
-	int64 operator_bonus = 3;
-	int64 provider_bonus = 4;
+	string cash = 2;
+	string operator_bonus = 3;
+	string provider_bonus = 4;
 }
 
 // Transaction types for different operations
@@ -154,8 +154,8 @@ message GetUserBalanceResponse {
 
 message CreditRequest {
 	message Ratio {
-		int64 cash = 1;
-		int64 operator_bonus = 2;
+		string cash = 1;
+		string operator_bonus = 2;
 	}
 
 	int64 user_id = 1;
@@ -164,7 +164,7 @@ message CreditRequest {
 	//   - "payment_deposit"    - Payment deposit transaction
 	string transaction_type = 3;
 	int64 transaction_id = 4;
-	int64 cash = 5;
+	string cash = 5;
 }
 
 message CreditResponse {
@@ -178,7 +178,7 @@ message DebitRequest {
 	//   - "payment_withdraw"   - Payment withdraw transaction
 	string transaction_type = 3;
 	int64 transaction_id = 4;
-	int64 cash = 5;
+	string cash = 5;
 }
 
 message DebitResponse {
@@ -194,16 +194,16 @@ message GameDebitRequest {
 	//   - "game_bet"          - Game bet transaction
 	string transaction_type = 5;
 	int64 transaction_id = 6;
-	int64 amount = 7;
-	int64 turnover = 8;
+	string amount = 7;
+	string turnover = 8;
 }
 
 message GameDebitResponse {
 	int64 transaction_id = 1;
 	string exchange_rate = 2;
-	int64 cash = 3;
-	int64 operator_bonus = 4;
-	int64 provider_bonus = 5;
+	string cash = 3;
+	string operator_bonus = 4;
+	string provider_bonus = 5;
 }
 
 message GameCreditRequest {
@@ -214,15 +214,15 @@ message GameCreditRequest {
 	string transaction_type = 5;
 	int64 transaction_id = 6;
 	int64 original_transaction_id = 7;
-	int64 amount = 8;
+	string amount = 8;
 }
 
 message GameCreditResponse {
 	int64 transaction_id = 1;
 	string exchange_rate = 2;
-	int64 cash = 3;
-	int64 operator_bonus = 4;
-	int64 provider_bonus = 5;
+	string cash = 3;
+	string operator_bonus = 4;
+	string provider_bonus = 5;
 }
 
 message FreezeRequest {
@@ -232,7 +232,7 @@ message FreezeRequest {
 	//   - "payment_withdraw_freeze"   - Payment withdraw freeze transaction
 	string transaction_type = 3;
 	int64 transaction_id = 4;
-	int64 cash = 5;
+	string cash = 5;
 }
 
 message FreezeResponse {
@@ -267,9 +267,9 @@ message RollbackRequest {
 
 message RollbackResponse {
 	int64 transaction_id = 1;
-	int64 cash = 2;
-	int64 operator_bonus = 3;
-	int64 provider_bonus = 4;
+	string cash = 2;
+	string operator_bonus = 3;
+	string provider_bonus = 4;
 }
 
 message GetWalletsRequest {
@@ -279,9 +279,9 @@ message GetWalletsRequest {
 
 message GetWalletsResponse {
 	message TotalAssets {
-		string balance = 1;
-		string deposit = 2;
-		string withdraw = 3;
+		string cash = 1;
+		string operator_bonus = 2;
+		string provider_bonus = 3;
 		string deposit_minus_withdraw = 4;
 		string valid_turnover = 5;
 	}
@@ -386,26 +386,26 @@ message GetWalletBalanceTransactionsByIdsResponse {
 		string transaction_type = 6;
 		int64 external_transaction_id = 7;
 		int64 related_transaction_id = 8;
-		int64 original_cash = 9;
-		int64 original_cash_usd = 10;
-		int64 cash = 11;
-		int64 cash_usd = 12;
-		int64 cash_amount = 13;
-		int64 cash_amount_usd = 14;
-		int64 original_operator_bonus = 15;
-		int64 original_operator_bonus_usd = 16;
-		int64 operator_bonus = 17;
-		int64 operator_bonus_usd = 18;
-		int64 operator_bonus_amount = 19;
-		int64 operator_bonus_amount_usd = 20;
-		int64 original_provider_bonus = 21;
-		int64 original_provider_bonus_usd = 22;
-		int64 provider_bonus = 23;
-		int64 provider_bonus_usd = 24;
-		int64 provider_bonus_amount = 25;
-		int64 provider_bonus_amount_usd = 26;
-		int64 created_at = 27;
-		int64 updated_at = 28;
+		string original_cash = 9;
+		string original_cash_usd = 10;
+		string cash = 11;
+		string cash_usd = 12;
+		string cash_amount = 13;
+		string cash_amount_usd = 14;
+		string original_operator_bonus = 15;
+		string original_operator_bonus_usd = 16;
+		string operator_bonus = 17;
+		string operator_bonus_usd = 18;
+		string operator_bonus_amount = 19;
+		string operator_bonus_amount_usd = 20;
+		string original_provider_bonus = 21;
+		string original_provider_bonus_usd = 22;
+		string provider_bonus = 23;
+		string provider_bonus_usd = 24;
+		string provider_bonus_amount = 25;
+		string provider_bonus_amount_usd = 26;
+		google.protobuf.Timestamp created_at = 27;
+		google.protobuf.Timestamp updated_at = 28;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 }
