@@ -29,8 +29,8 @@ type ListAuditLogsRequest struct {
 	Action        *string                `protobuf:"bytes,2,opt,name=action,proto3,oneof" json:"action,omitempty"`
 	StartTime     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page          *int64                 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`                         // default 1
-	PageSize      *int64                 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"` // default 20
+	Page          *int32                 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`                         // default 1
+	PageSize      *int32                 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"` // default 20
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -93,14 +93,14 @@ func (x *ListAuditLogsRequest) GetEndTime() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *ListAuditLogsRequest) GetPage() int64 {
+func (x *ListAuditLogsRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListAuditLogsRequest) GetPageSize() int64 {
+func (x *ListAuditLogsRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
@@ -226,9 +226,9 @@ func (x *AuditLog) GetErrorMessage() string {
 type ListAuditLogsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AuditLogs     []*AuditLog            `protobuf:"bytes,1,rep,name=audit_logs,json=auditLogs,proto3" json:"audit_logs,omitempty"`
-	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	Page          int64                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int64                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -270,21 +270,21 @@ func (x *ListAuditLogsResponse) GetAuditLogs() []*AuditLog {
 	return nil
 }
 
-func (x *ListAuditLogsResponse) GetTotal() int64 {
+func (x *ListAuditLogsResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
 	}
 	return 0
 }
 
-func (x *ListAuditLogsResponse) GetPage() int64 {
+func (x *ListAuditLogsResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListAuditLogsResponse) GetPageSize() int64 {
+func (x *ListAuditLogsResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
@@ -302,8 +302,8 @@ const file_backoffice_service_v1_backoffice_audit_proto_rawDesc = "" +
 	"\n" +
 	"start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\tstartTime\x88\x01\x01\x12:\n" +
 	"\bend_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x05 \x01(\x03H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x03H\x05R\bpageSize\x88\x01\x01B\n" +
+	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\t\n" +
 	"\a_actionB\r\n" +
@@ -328,9 +328,9 @@ const file_backoffice_service_v1_backoffice_audit_proto_rawDesc = "" +
 	"\x15ListAuditLogsResponse\x12B\n" +
 	"\n" +
 	"audit_logs\x18\x01 \x03(\v2#.api.backoffice.service.v1.AuditLogR\tauditLogs\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x03R\x05total\x12\x12\n" +
-	"\x04page\x18\x03 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x03R\bpageSize2\xb1\x01\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize2\xb1\x01\n" +
 	"\x0fBackofficeAudit\x12\x9d\x01\n" +
 	"\rListAuditLogs\x12/.api.backoffice.service.v1.ListAuditLogsRequest\x1a0.api.backoffice.service.v1.ListAuditLogsResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/audit/logs/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"

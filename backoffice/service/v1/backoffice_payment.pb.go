@@ -398,13 +398,13 @@ type PaymentChannelInfo struct {
 	// URL to the logo image for this payment channel
 	Logo string `protobuf:"bytes,12,opt,name=logo,proto3" json:"logo,omitempty"`
 	// Minimum amount allowed for deposit transactions
-	MinDepositAmount int64 `protobuf:"varint,13,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
+	MinDepositAmount string `protobuf:"bytes,13,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
 	// Maximum amount allowed for deposit transactions
-	MaxDepositAmount int64 `protobuf:"varint,14,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
+	MaxDepositAmount string `protobuf:"bytes,14,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
 	// Minimum amount allowed for withdrawal transactions
-	MinWithdrawAmount int64 `protobuf:"varint,15,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
+	MinWithdrawAmount string `protobuf:"bytes,15,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
 	// Maximum amount allowed for withdrawal transactions
-	MaxWithdrawAmount int64 `protobuf:"varint,16,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
+	MaxWithdrawAmount string `protobuf:"bytes,16,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
 	// Estimated arrival time in minutes
 	Eat int32 `protobuf:"varint,17,opt,name=eat,proto3" json:"eat,omitempty"`
 	// JSON schema defining deposit form fields required by this channel
@@ -529,32 +529,32 @@ func (x *PaymentChannelInfo) GetLogo() string {
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetMinDepositAmount() int64 {
+func (x *PaymentChannelInfo) GetMinDepositAmount() string {
 	if x != nil {
 		return x.MinDepositAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *PaymentChannelInfo) GetMaxDepositAmount() int64 {
+func (x *PaymentChannelInfo) GetMaxDepositAmount() string {
 	if x != nil {
 		return x.MaxDepositAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *PaymentChannelInfo) GetMinWithdrawAmount() int64 {
+func (x *PaymentChannelInfo) GetMinWithdrawAmount() string {
 	if x != nil {
 		return x.MinWithdrawAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *PaymentChannelInfo) GetMaxWithdrawAmount() int64 {
+func (x *PaymentChannelInfo) GetMaxWithdrawAmount() string {
 	if x != nil {
 		return x.MaxWithdrawAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *PaymentChannelInfo) GetEat() int32 {
@@ -937,10 +937,10 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	" \x01(\tR\acountry\x12\x16\n" +
 	"\x06method\x18\v \x01(\tR\x06method\x12\x12\n" +
 	"\x04logo\x18\f \x01(\tR\x04logo\x12,\n" +
-	"\x12min_deposit_amount\x18\r \x01(\x03R\x10minDepositAmount\x12,\n" +
-	"\x12max_deposit_amount\x18\x0e \x01(\x03R\x10maxDepositAmount\x12.\n" +
-	"\x13min_withdraw_amount\x18\x0f \x01(\x03R\x11minWithdrawAmount\x12.\n" +
-	"\x13max_withdraw_amount\x18\x10 \x01(\x03R\x11maxWithdrawAmount\x12\x10\n" +
+	"\x12min_deposit_amount\x18\r \x01(\tR\x10minDepositAmount\x12,\n" +
+	"\x12max_deposit_amount\x18\x0e \x01(\tR\x10maxDepositAmount\x12.\n" +
+	"\x13min_withdraw_amount\x18\x0f \x01(\tR\x11minWithdrawAmount\x12.\n" +
+	"\x13max_withdraw_amount\x18\x10 \x01(\tR\x11maxWithdrawAmount\x12\x10\n" +
 	"\x03eat\x18\x11 \x01(\x05R\x03eat\x12>\n" +
 	"\x0edeposit_schema\x18\x12 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
 	"\x0fwithdraw_schema\x18\x13 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\"\xaa\x01\n" +
