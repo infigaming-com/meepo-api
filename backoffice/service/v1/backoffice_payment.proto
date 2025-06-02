@@ -132,13 +132,13 @@ message PaymentChannelInfo {
 	// URL to the logo image for this payment channel
 	string logo = 12;
 	// Minimum amount allowed for deposit transactions
-	int64 min_deposit_amount = 13 [json_name="minDepositAmount"];
+	string min_deposit_amount = 13 [json_name="minDepositAmount"];
 	// Maximum amount allowed for deposit transactions
-	int64 max_deposit_amount = 14 [json_name="maxDepositAmount"];
+	string max_deposit_amount = 14 [json_name="maxDepositAmount"];
 	// Minimum amount allowed for withdrawal transactions
-	int64 min_withdraw_amount = 15 [json_name="minWithdrawAmount"];
+	string min_withdraw_amount = 15 [json_name="minWithdrawAmount"];
 	// Maximum amount allowed for withdrawal transactions
-	int64 max_withdraw_amount = 16 [json_name="maxWithdrawAmount"];
+	string max_withdraw_amount = 16 [json_name="maxWithdrawAmount"];
 	// Estimated arrival time in minutes
 	int32 eat = 17;
 	// JSON schema defining deposit form fields required by this channel

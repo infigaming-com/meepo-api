@@ -23,8 +23,8 @@ message ListAuditLogsRequest {
 	optional string action = 2;
 	optional google.protobuf.Timestamp start_time = 3;
 	optional google.protobuf.Timestamp end_time = 4;
-	optional int64 page = 5; // default 1
-	optional int64 page_size = 6; // default 20
+	optional int32 page = 5; // default 1
+	optional int32 page_size = 6; // default 20
 }
 
 message AuditLog {
@@ -42,7 +42,7 @@ message AuditLog {
 
 message ListAuditLogsResponse {
 	repeated AuditLog audit_logs = 1;
-	int64 total = 2;
-	int64 page = 3;
-	int64 page_size = 4;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }

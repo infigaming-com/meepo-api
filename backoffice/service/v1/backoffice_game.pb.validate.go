@@ -3184,8 +3184,6 @@ func (m *ListGamesResponse) validate(all bool) error {
 
 	}
 
-	// no validation rules for Page
-
 	// no validation rules for PageSize
 
 	// no validation rules for Total
@@ -5524,7 +5522,7 @@ func (m *GetGameTransactionsForBetResponse_GameTransaction) validate(all bool) e
 
 	// no validation rules for Action
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -5584,11 +5582,11 @@ func (m *GetGameTransactionsForBetResponse_GameTransaction) validate(all bool) e
 		}
 	}
 
-	// no validation rules for Category
+	// no validation rules for GameCategory
 
 	// no validation rules for GameId
 
-	// no validation rules for Provider
+	// no validation rules for ProviderName
 
 	// no validation rules for OperatorTransactionId
 

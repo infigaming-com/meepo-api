@@ -2693,7 +2693,8 @@ components:
                 gameId:
                     type: string
                 playerCount:
-                    type: string
+                    type: integer
+                    format: int32
                 turnover:
                     type: string
                 turnoverUsd:
@@ -2711,7 +2712,8 @@ components:
                 ggrPercentage:
                     type: string
                 betCount:
-                    type: string
+                    type: integer
+                    format: int32
                 averageBetAmount:
                     type: string
                 rtpPercentage:
@@ -2759,7 +2761,8 @@ components:
                 ggr:
                     type: string
                 betCount:
-                    type: string
+                    type: integer
+                    format: int32
                 averageBetAmount:
                     type: string
                 rtpPercentage:
@@ -2876,7 +2879,7 @@ components:
             properties:
                 action:
                     type: string
-                operator:
+                operatorName:
                     type: string
                 createdAt:
                     type: string
@@ -2884,11 +2887,11 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
-                category:
+                gameCategory:
                     type: string
                 gameId:
                     type: string
-                provider:
+                providerName:
                     type: string
                 operatorTransactionId:
                     type: string
@@ -3140,7 +3143,8 @@ components:
                 rtpPercentage:
                     type: string
                 betCount:
-                    type: string
+                    type: integer
+                    format: int32
                 averageBetAmount:
                     type: string
         api.backoffice.service.v1.GetPlayerGameSummaryRequest:
@@ -3190,7 +3194,8 @@ components:
                 ggr:
                     type: string
                 betCount:
-                    type: string
+                    type: integer
+                    format: int32
                 averageBetAmount:
                     type: string
                 rtpPercentage:
@@ -3605,16 +3610,19 @@ components:
                     type: string
                     format: date-time
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetUserBetsOverviewResponse:
             type: object
             properties:
                 rounds:
                     type: string
                 betCount:
-                    type: string
+                    type: integer
+                    format: int32
                 turnover:
                     type: string
                 betAmount:
@@ -4109,9 +4117,11 @@ components:
                     type: string
                     format: date-time
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListAuditLogsResponse:
             type: object
             properties:
@@ -4120,11 +4130,14 @@ components:
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.AuditLog'
                 total:
-                    type: string
+                    type: integer
+                    format: int32
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListBetsRequest:
             type: object
             properties:
@@ -4163,9 +4176,11 @@ components:
                 status:
                     type: string
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListBetsRequest_Currencies:
             type: object
             properties:
@@ -4204,11 +4219,14 @@ components:
                     type: integer
                     format: int32
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
                 total:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListCategoriesRequest:
             type: object
             properties: {}
@@ -4471,9 +4489,11 @@ components:
                 enabled:
                     type: boolean
                 page:
-                    type: string
+                    type: integer
+                    format: int32
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListGamesResponse:
             type: object
             properties:
@@ -4481,16 +4501,18 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.ListGamesResponse_Game'
-                page:
-                    type: string
                 pageSize:
-                    type: string
+                    type: integer
+                    format: int32
                 total:
-                    type: string
+                    type: integer
+                    format: int32
                 totalEnabled:
-                    type: string
+                    type: integer
+                    format: int32
                 totalDisabled:
-                    type: string
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListGamesResponse_Game:
             type: object
             properties:
@@ -4906,9 +4928,11 @@ components:
                 country:
                     type: string
                 visits:
-                    type: string
+                    type: integer
+                    format: int32
                 uniqueVisits:
-                    type: string
+                    type: integer
+                    format: int32
                 activeUsers:
                     type: integer
                     format: int32
@@ -5588,9 +5612,11 @@ components:
                     type: integer
                     format: int32
                 sameDayFtw:
-                    type: string
+                    type: integer
+                    format: int32
                 nonSameDayFtw:
-                    type: string
+                    type: integer
+                    format: int32
                 averageFtwAmountForSameDayRegistredUsers:
                     type: string
                 averageFtwAmountUsdForSameDayRegistredUsers:
