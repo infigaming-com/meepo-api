@@ -235,9 +235,9 @@ message ListCurrenciesResponse {
 
 message ListGamesRequest {
 	// page number for pagination (starts from 1)
-	int32 page = 1;
+	int64 page = 1;
 	// page size for pagination
-	int32 page_size = 2;
+	int64 page_size = 2;
 	// filter
 	GameFilter filter = 3;
 	// sort
@@ -246,9 +246,9 @@ message ListGamesRequest {
 
 message ListGamesResponse {
 	repeated string game_ids = 1;
-	int32 total = 2;
-	int32 page = 3;
-	int32 page_size = 4;
+	int64 total = 2;
+	int64 page = 3;
+	int64 page_size = 4;
 }
 
 message GetGameRequest {
@@ -428,8 +428,8 @@ message ListBetsRequest {
 	}
 	repeated string categories = 12;
 	optional string status = 13;
-	optional int32 page = 14;
-	optional int32 page_size = 15;
+	optional int64 page = 14;
+	optional int64 page_size = 15;
 }
 
 message Bet {
@@ -468,9 +468,9 @@ message ListBetsResponse {
 	string win_amount = 3;
 	int32 bet_count = 4;
 	int32 rtp_percentage = 5; // value from 0 to 100
-	int32 total = 6;
-	int32 page = 7;
-	int32 page_size = 8;
+	int64 total = 6;
+	int64 page = 7;
+	int64 page_size = 8;
 }
 
 message BackofficeListGamesRequest {
@@ -485,8 +485,8 @@ message BackofficeListGamesRequest {
 	repeated string support_currencies = 9;
 	repeated string restricted_countries = 10;
 	optional bool enabled = 11;
-	optional int32 page = 12;
-	optional int32 page_size = 13;	
+	optional int64 page = 12;
+	optional int64 page_size = 13;
 }
 
 message BackofficeListGamesResponse {
@@ -508,11 +508,11 @@ message BackofficeListGamesResponse {
 		bool enabled = 15;
 	}
 	repeated Game games = 1;
-	int32 page = 2;
-	int32 page_size = 3;
-	int32 total = 4;
-	int32 total_enabled = 5;
-	int32 total_disabled = 6;
+	int64 page = 2;
+	int64 page_size = 3;
+	int64 total = 4;
+	int64 total_enabled = 5;
+	int64 total_disabled = 6;
 }
 
 message UpdateGameRequest {
@@ -552,31 +552,31 @@ message GetBetByIdResponse {
 		bool update_balance = 12;
 		bool take_all = 13;
 		bool is_refund = 14;
-		string amount = 15;
-		string amount_usd = 16;
-		string settlement_amount = 17;
-		string settlement_amount_usd = 18;
-		string turnover = 19;
-		string turnover_usd = 20;
+		int64 amount = 15;
+		int64 amount_usd = 16;
+		int64 settlement_amount = 17;
+		int64 settlement_amount_usd = 18;
+		int64 turnover = 19;
+		int64 turnover_usd = 20;
 		int64 user_id = 21;
 		string currency = 22;
 		string settlement_currency = 23;
 		string game_id = 24;
 		string game_name = 25;
 		string game_category = 26;
-		string jackpot_contribution = 27;
-		string jackpot_contribution_usd = 28;
-		string jackpot_win = 29;
-		string jackpot_win_usd = 30;
-		google.protobuf.Timestamp bet_time = 31;
-		google.protobuf.Timestamp settle_time = 32;
-		google.protobuf.Timestamp provider_timestamp = 33;
-		string bonus_amount = 34;
-		string bonus_amount_usd = 35;
-		google.protobuf.Timestamp operator_timestamp = 36;
-		google.protobuf.Timestamp processed_at = 37;
-		google.protobuf.Timestamp created_at = 38;
-		google.protobuf.Timestamp updated_at = 39;
+		double jackpot_contribution = 27;
+		double jackpot_contribution_usd = 28;
+		int64 jackpot_win = 29;
+		int64 jackpot_win_usd = 30;
+		int64 bet_time = 31;
+		int64 settle_time = 32;
+		int64 provider_timestamp = 33;
+		int64 bonus_amount = 34;
+		int64 bonus_amount_usd = 35;
+		int64 operator_timestamp = 36;
+		int64 processed_at = 37;
+		int64 created_at = 38;
+		int64 updated_at = 39;
 	}
 	message Bet {
 		int64 id = 1;
@@ -594,23 +594,23 @@ message GetBetByIdResponse {
 		string game_id = 13;
 		string game_name = 14;
 		string game_category = 15;
-		int32 win_count = 16;
-		string bet_amount = 17;
-		string bet_amount_usd = 18;
-		string settlement_bet_amount = 19;
-		string settlement_bet_amount_usd = 20;
-		string win_amount = 21;
-		string win_amount_usd = 22;
-		string settlement_win_amount = 23;
-		string settlement_win_amount_usd = 24;
-		string turnover = 25;
-		string turnover_usd = 26;
-		string rollback_bet_amount = 27;
-		string rollback_bet_amount_usd = 28;
-		string rollback_win_amount = 29;
-		string rollback_win_amount_usd = 30;
-		google.protobuf.Timestamp created_at = 31;
-		google.protobuf.Timestamp updated_at = 32;
+		int64 win_count = 16;
+		int64 bet_amount = 17;
+		int64 bet_amount_usd = 18;
+		int64 settlement_bet_amount = 19;
+		int64 settlement_bet_amount_usd = 20;
+		int64 win_amount = 21;
+		int64 win_amount_usd = 22;
+		int64 settlement_win_amount = 23;
+		int64 settlement_win_amount_usd = 24;
+		int64 turnover = 25;
+		int64 turnover_usd = 26;
+		int64 rollback_bet_amount = 27;
+		int64 rollback_bet_amount_usd = 28;
+		int64 rollback_win_amount = 29;
+		int64 rollback_win_amount_usd = 30;
+		int64 created_at = 31;
+		int64 updated_at = 32;
 		repeated Action actions = 33;
 	}
 	Bet bet = 1;
@@ -692,7 +692,7 @@ message ListProviderRatesResponse {
 		string provider_name = 2;
 		string fee_group = 3;
 		string currency = 4;
-		string rate = 5;
+		double rate = 5;
 	}
 	repeated ProviderRate provider_rates = 1;
 	int32 page = 2;
