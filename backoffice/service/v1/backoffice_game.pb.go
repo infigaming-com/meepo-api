@@ -3166,7 +3166,7 @@ type GetBetByIdResponse_Bet struct {
 	GameId                 string                       `protobuf:"bytes,13,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	GameName               string                       `protobuf:"bytes,14,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
 	GameCategory           string                       `protobuf:"bytes,15,opt,name=game_category,json=gameCategory,proto3" json:"game_category,omitempty"`
-	WinCount               int64                        `protobuf:"varint,16,opt,name=win_count,json=winCount,proto3" json:"win_count,omitempty"`
+	WinCount               int32                        `protobuf:"varint,16,opt,name=win_count,json=winCount,proto3" json:"win_count,omitempty"`
 	BetAmount              string                       `protobuf:"bytes,17,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
 	BetAmountUsd           string                       `protobuf:"bytes,18,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
 	SettlementBetAmount    string                       `protobuf:"bytes,19,opt,name=settlement_bet_amount,json=settlementBetAmount,proto3" json:"settlement_bet_amount,omitempty"`
@@ -3323,7 +3323,7 @@ func (x *GetBetByIdResponse_Bet) GetGameCategory() string {
 	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetWinCount() int64 {
+func (x *GetBetByIdResponse_Bet) GetWinCount() int32 {
 	if x != nil {
 		return x.WinCount
 	}
@@ -3795,7 +3795,7 @@ type ListProviderRatesResponse_ProviderRate struct {
 	ProviderName  string                 `protobuf:"bytes,2,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
 	FeeGroup      string                 `protobuf:"bytes,3,opt,name=fee_group,json=feeGroup,proto3" json:"fee_group,omitempty"`
 	Currency      string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	Rate          float64                `protobuf:"fixed64,5,opt,name=rate,proto3" json:"rate,omitempty"`
+	Rate          string                 `protobuf:"bytes,5,opt,name=rate,proto3" json:"rate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3858,11 +3858,11 @@ func (x *ListProviderRatesResponse_ProviderRate) GetCurrency() string {
 	return ""
 }
 
-func (x *ListProviderRatesResponse_ProviderRate) GetRate() float64 {
+func (x *ListProviderRatesResponse_ProviderRate) GetRate() string {
 	if x != nil {
 		return x.Rate
 	}
-	return 0
+	return ""
 }
 
 var File_backoffice_service_v1_backoffice_game_proto protoreflect.FileDescriptor
@@ -4099,7 +4099,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\agame_id\x18\r \x01(\tR\x06gameId\x12\x1b\n" +
 	"\tgame_name\x18\x0e \x01(\tR\bgameName\x12#\n" +
 	"\rgame_category\x18\x0f \x01(\tR\fgameCategory\x12\x1b\n" +
-	"\twin_count\x18\x10 \x01(\x03R\bwinCount\x12\x1d\n" +
+	"\twin_count\x18\x10 \x01(\x05R\bwinCount\x12\x1d\n" +
 	"\n" +
 	"bet_amount\x18\x11 \x01(\tR\tbetAmount\x12$\n" +
 	"\x0ebet_amount_usd\x18\x12 \x01(\tR\fbetAmountUsd\x122\n" +
@@ -4270,7 +4270,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\x12\x1b\n" +
 	"\tfee_group\x18\x03 \x01(\tR\bfeeGroup\x12\x1a\n" +
 	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12\x12\n" +
-	"\x04rate\x18\x05 \x01(\x01R\x04rate\"F\n" +
+	"\x04rate\x18\x05 \x01(\tR\x04rate\"F\n" +
 	"\x1dGetGameTransactionByIdRequest\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xe8\f\n" +
 	"\x1eGetGameTransactionByIdResponse\x12\x0e\n" +

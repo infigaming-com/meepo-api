@@ -2842,7 +2842,7 @@ type GetPlayerGameDataResponse_List struct {
 	GameType         string                 `protobuf:"bytes,4,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"`
 	GameId           string                 `protobuf:"bytes,5,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	GameName         string                 `protobuf:"bytes,6,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
-	UserId           string                 `protobuf:"bytes,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId           int64                  `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Turnover         string                 `protobuf:"bytes,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	TurnoverUsd      string                 `protobuf:"bytes,9,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
 	WinAmount        string                 `protobuf:"bytes,10,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
@@ -2928,11 +2928,11 @@ func (x *GetPlayerGameDataResponse_List) GetGameName() string {
 	return ""
 }
 
-func (x *GetPlayerGameDataResponse_List) GetUserId() string {
+func (x *GetPlayerGameDataResponse_List) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 func (x *GetPlayerGameDataResponse_List) GetTurnover() string {
@@ -4609,7 +4609,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tgame_type\x18\x04 \x01(\tR\bgameType\x12\x17\n" +
 	"\agame_id\x18\x05 \x01(\tR\x06gameId\x12\x1b\n" +
 	"\tgame_name\x18\x06 \x01(\tR\bgameName\x12\x17\n" +
-	"\auser_id\x18\a \x01(\tR\x06userId\x12\x1a\n" +
+	"\auser_id\x18\a \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bturnover\x18\b \x01(\tR\bturnover\x12!\n" +
 	"\fturnover_usd\x18\t \x01(\tR\vturnoverUsd\x12\x1d\n" +
 	"\n" +

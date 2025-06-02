@@ -289,7 +289,7 @@ message GetPlayerGameDataResponse {
 		string game_type = 4;
 		string game_id = 5;
 		string game_name = 6;
-		string user_id = 7;
+		int64 user_id = 7;
 		string turnover = 8;
 		string turnover_usd = 9;
 		string win_amount = 10;

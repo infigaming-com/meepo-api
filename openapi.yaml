@@ -2544,7 +2544,8 @@ components:
                 gameCategory:
                     type: string
                 winCount:
-                    type: string
+                    type: integer
+                    format: int32
                 betAmount:
                     type: string
                 betAmountUsd:
@@ -4617,8 +4618,7 @@ components:
                 currency:
                     type: string
                 rate:
-                    type: number
-                    format: double
+                    type: string
         api.backoffice.service.v1.ListProvidersRequest:
             type: object
             properties:
