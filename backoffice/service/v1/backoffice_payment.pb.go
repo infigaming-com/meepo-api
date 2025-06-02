@@ -735,6 +735,166 @@ func (x *GetPaymentTransactionByIdResponse) GetDetail() *TransactionDetail {
 	return nil
 }
 
+type GetTransactionPageRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Currency      *string                `protobuf:"bytes,3,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Type          *TransactionType       `protobuf:"varint,4,opt,name=type,proto3,enum=api.backoffice.service.v1.TransactionType,oneof" json:"type,omitempty"`
+	Status        *TransactionStatus     `protobuf:"varint,5,opt,name=status,proto3,enum=api.backoffice.service.v1.TransactionStatus,oneof" json:"status,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTransactionPageRequest) Reset() {
+	*x = GetTransactionPageRequest{}
+	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTransactionPageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTransactionPageRequest) ProtoMessage() {}
+
+func (x *GetTransactionPageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTransactionPageRequest.ProtoReflect.Descriptor instead.
+func (*GetTransactionPageRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetTransactionPageRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetTransactionPageRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *GetTransactionPageRequest) GetCurrency() string {
+	if x != nil && x.Currency != nil {
+		return *x.Currency
+	}
+	return ""
+}
+
+func (x *GetTransactionPageRequest) GetType() TransactionType {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return TransactionType_TRANSACTION_TYPE_UNSPECIFIED
+}
+
+func (x *GetTransactionPageRequest) GetStatus() TransactionStatus {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return TransactionStatus_TRANSACTION_STATUS_UNSPECIFIED
+}
+
+func (x *GetTransactionPageRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *GetTransactionPageRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+type GetTransactionPageResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Transactions  []*TransactionInfo     `protobuf:"bytes,1,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	TotalCount    int32                  `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTransactionPageResponse) Reset() {
+	*x = GetTransactionPageResponse{}
+	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTransactionPageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTransactionPageResponse) ProtoMessage() {}
+
+func (x *GetTransactionPageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTransactionPageResponse.ProtoReflect.Descriptor instead.
+func (*GetTransactionPageResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetTransactionPageResponse) GetTransactions() []*TransactionInfo {
+	if x != nil {
+		return x.Transactions
+	}
+	return nil
+}
+
+func (x *GetTransactionPageResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *GetTransactionPageResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetTransactionPageResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
 var File_backoffice_service_v1_backoffice_payment_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
@@ -791,7 +951,27 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12@\n" +
 	"\x06source\x18\x02 \x01(\x0e2(.api.backoffice.service.v1.RequestSourceR\x06source\"i\n" +
 	"!GetPaymentTransactionByIdResponse\x12D\n" +
-	"\x06detail\x18\x01 \x01(\v2,.api.backoffice.service.v1.TransactionDetailR\x06detail*F\n" +
+	"\x06detail\x18\x01 \x01(\v2,.api.backoffice.service.v1.TransactionDetailR\x06detail\"\xb6\x03\n" +
+	"\x19GetTransactionPageRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1f\n" +
+	"\bcurrency\x18\x03 \x01(\tH\x00R\bcurrency\x88\x01\x01\x12C\n" +
+	"\x04type\x18\x04 \x01(\x0e2*.api.backoffice.service.v1.TransactionTypeH\x01R\x04type\x88\x01\x01\x12I\n" +
+	"\x06status\x18\x05 \x01(\x0e2,.api.backoffice.service.v1.TransactionStatusH\x02R\x06status\x88\x01\x01\x12>\n" +
+	"\n" +
+	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\aendTime\x88\x01\x01B\v\n" +
+	"\t_currencyB\a\n" +
+	"\x05_typeB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_time\"\xbe\x01\n" +
+	"\x1aGetTransactionPageResponse\x12N\n" +
+	"\ftransactions\x18\x01 \x03(\v2*.api.backoffice.service.v1.TransactionInfoR\ftransactions\x12\x1f\n" +
+	"\vtotal_count\x18\x02 \x01(\x05R\n" +
+	"totalCount\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize*F\n" +
 	"\rRequestSource\x12\x1b\n" +
 	"\x17REQUEST_SOURCE_FRONTEND\x10\x00\x12\x18\n" +
 	"\x14REQUEST_SOURCE_ADMIN\x10\x01*p\n" +
@@ -822,7 +1002,7 @@ func file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP() []byte {
 }
 
 var file_backoffice_service_v1_backoffice_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_backoffice_service_v1_backoffice_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_backoffice_service_v1_backoffice_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_backoffice_service_v1_backoffice_payment_proto_goTypes = []any{
 	(RequestSource)(0),                        // 0: api.backoffice.service.v1.RequestSource
 	(TransactionType)(0),                      // 1: api.backoffice.service.v1.TransactionType
@@ -832,31 +1012,38 @@ var file_backoffice_service_v1_backoffice_payment_proto_goTypes = []any{
 	(*TransactionDetail)(nil),                 // 5: api.backoffice.service.v1.TransactionDetail
 	(*GetPaymentTransactionByIdRequest)(nil),  // 6: api.backoffice.service.v1.GetPaymentTransactionByIdRequest
 	(*GetPaymentTransactionByIdResponse)(nil), // 7: api.backoffice.service.v1.GetPaymentTransactionByIdResponse
-	(*timestamppb.Timestamp)(nil),             // 8: google.protobuf.Timestamp
-	(*structpb.Struct)(nil),                   // 9: google.protobuf.Struct
-	(*v1.GetTransactionPageRequest)(nil),      // 10: payment.service.v1.GetTransactionPageRequest
-	(*v1.GetTransactionPageResponse)(nil),     // 11: payment.service.v1.GetTransactionPageResponse
+	(*GetTransactionPageRequest)(nil),         // 8: api.backoffice.service.v1.GetTransactionPageRequest
+	(*GetTransactionPageResponse)(nil),        // 9: api.backoffice.service.v1.GetTransactionPageResponse
+	(*timestamppb.Timestamp)(nil),             // 10: google.protobuf.Timestamp
+	(*structpb.Struct)(nil),                   // 11: google.protobuf.Struct
+	(*v1.GetTransactionPageRequest)(nil),      // 12: payment.service.v1.GetTransactionPageRequest
+	(*v1.GetTransactionPageResponse)(nil),     // 13: payment.service.v1.GetTransactionPageResponse
 }
 var file_backoffice_service_v1_backoffice_payment_proto_depIdxs = []int32{
 	1,  // 0: api.backoffice.service.v1.TransactionInfo.type:type_name -> api.backoffice.service.v1.TransactionType
 	2,  // 1: api.backoffice.service.v1.TransactionInfo.status:type_name -> api.backoffice.service.v1.TransactionStatus
-	8,  // 2: api.backoffice.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
-	8,  // 3: api.backoffice.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
-	9,  // 4: api.backoffice.service.v1.PaymentChannelInfo.deposit_schema:type_name -> google.protobuf.Struct
-	9,  // 5: api.backoffice.service.v1.PaymentChannelInfo.withdraw_schema:type_name -> google.protobuf.Struct
+	10, // 2: api.backoffice.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	10, // 3: api.backoffice.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
+	11, // 4: api.backoffice.service.v1.PaymentChannelInfo.deposit_schema:type_name -> google.protobuf.Struct
+	11, // 5: api.backoffice.service.v1.PaymentChannelInfo.withdraw_schema:type_name -> google.protobuf.Struct
 	3,  // 6: api.backoffice.service.v1.TransactionDetail.transaction:type_name -> api.backoffice.service.v1.TransactionInfo
 	4,  // 7: api.backoffice.service.v1.TransactionDetail.channel:type_name -> api.backoffice.service.v1.PaymentChannelInfo
 	0,  // 8: api.backoffice.service.v1.GetPaymentTransactionByIdRequest.source:type_name -> api.backoffice.service.v1.RequestSource
 	5,  // 9: api.backoffice.service.v1.GetPaymentTransactionByIdResponse.detail:type_name -> api.backoffice.service.v1.TransactionDetail
-	10, // 10: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
-	6,  // 11: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:input_type -> api.backoffice.service.v1.GetPaymentTransactionByIdRequest
-	11, // 12: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
-	7,  // 13: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:output_type -> api.backoffice.service.v1.GetPaymentTransactionByIdResponse
-	12, // [12:14] is the sub-list for method output_type
-	10, // [10:12] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	1,  // 10: api.backoffice.service.v1.GetTransactionPageRequest.type:type_name -> api.backoffice.service.v1.TransactionType
+	2,  // 11: api.backoffice.service.v1.GetTransactionPageRequest.status:type_name -> api.backoffice.service.v1.TransactionStatus
+	10, // 12: api.backoffice.service.v1.GetTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
+	10, // 13: api.backoffice.service.v1.GetTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
+	3,  // 14: api.backoffice.service.v1.GetTransactionPageResponse.transactions:type_name -> api.backoffice.service.v1.TransactionInfo
+	12, // 15: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
+	6,  // 16: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:input_type -> api.backoffice.service.v1.GetPaymentTransactionByIdRequest
+	13, // 17: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
+	7,  // 18: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:output_type -> api.backoffice.service.v1.GetPaymentTransactionByIdResponse
+	17, // [17:19] is the sub-list for method output_type
+	15, // [15:17] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_payment_proto_init() }
@@ -864,13 +1051,14 @@ func file_backoffice_service_v1_backoffice_payment_proto_init() {
 	if File_backoffice_service_v1_backoffice_payment_proto != nil {
 		return
 	}
+	file_backoffice_service_v1_backoffice_payment_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_payment_proto_rawDesc), len(file_backoffice_service_v1_backoffice_payment_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
