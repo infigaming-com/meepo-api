@@ -232,16 +232,14 @@ message Role {
 }
 
 message Permission {
-    int64 group_id = 1;
-    // group name: dashboard, game, user, finance, report, system, etc.
-    string group_name = 2;
+    // module name: dashboard, game list, user list, etc.
+    string module = 1;
     // action name: read, write, delete, etc.
-    repeated ApiPath api_paths = 4;
+    repeated Action actions = 2;
 }
 
-message ApiPath {
-    string path = 1;
-    string action = 2;
+message Action {
+    string name = 1;
 }
 
 message ListAccountsRequest {

@@ -1325,12 +1325,11 @@ func (x *Role) GetPermissions() []*Permission {
 }
 
 type Permission struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	GroupId int64                  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	// group name: dashboard, game, user, finance, report, system, etc.
-	GroupName string `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// module name: dashboard, game list, user list, etc.
+	Module string `protobuf:"bytes,1,opt,name=module,proto3" json:"module,omitempty"`
 	// action name: read, write, delete, etc.
-	ApiPaths      []*ApiPath `protobuf:"bytes,4,rep,name=api_paths,json=apiPaths,proto3" json:"api_paths,omitempty"`
+	Actions       []*Action `protobuf:"bytes,2,rep,name=actions,proto3" json:"actions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1365,49 +1364,41 @@ func (*Permission) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *Permission) GetGroupId() int64 {
+func (x *Permission) GetModule() string {
 	if x != nil {
-		return x.GroupId
-	}
-	return 0
-}
-
-func (x *Permission) GetGroupName() string {
-	if x != nil {
-		return x.GroupName
+		return x.Module
 	}
 	return ""
 }
 
-func (x *Permission) GetApiPaths() []*ApiPath {
+func (x *Permission) GetActions() []*Action {
 	if x != nil {
-		return x.ApiPaths
+		return x.Actions
 	}
 	return nil
 }
 
-type ApiPath struct {
+type Action struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Path          string                 `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ApiPath) Reset() {
-	*x = ApiPath{}
+func (x *Action) Reset() {
+	*x = Action{}
 	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ApiPath) String() string {
+func (x *Action) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ApiPath) ProtoMessage() {}
+func (*Action) ProtoMessage() {}
 
-func (x *ApiPath) ProtoReflect() protoreflect.Message {
+func (x *Action) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1419,21 +1410,14 @@ func (x *ApiPath) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ApiPath.ProtoReflect.Descriptor instead.
-func (*ApiPath) Descriptor() ([]byte, []int) {
+// Deprecated: Use Action.ProtoReflect.Descriptor instead.
+func (*Action) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *ApiPath) GetPath() string {
+func (x *Action) GetName() string {
 	if x != nil {
-		return x.Path
-	}
-	return ""
-}
-
-func (x *ApiPath) GetAction() string {
-	if x != nil {
-		return x.Action
+		return x.Name
 	}
 	return ""
 }
@@ -2151,16 +2135,13 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\x04Role\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\arole_id\x18\x02 \x01(\x03R\x06roleId\x12G\n" +
-	"\vpermissions\x18\x03 \x03(\v2%.api.backoffice.service.v1.PermissionR\vpermissions\"\x87\x01\n" +
+	"\vpermissions\x18\x03 \x03(\v2%.api.backoffice.service.v1.PermissionR\vpermissions\"a\n" +
 	"\n" +
-	"Permission\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\x12\x1d\n" +
-	"\n" +
-	"group_name\x18\x02 \x01(\tR\tgroupName\x12?\n" +
-	"\tapi_paths\x18\x04 \x03(\v2\".api.backoffice.service.v1.ApiPathR\bapiPaths\"5\n" +
-	"\aApiPath\x12\x12\n" +
-	"\x04path\x18\x01 \x01(\tR\x04path\x12\x16\n" +
-	"\x06action\x18\x02 \x01(\tR\x06action\"\x9c\x02\n" +
+	"Permission\x12\x16\n" +
+	"\x06module\x18\x01 \x01(\tR\x06module\x12;\n" +
+	"\aactions\x18\x02 \x03(\v2!.api.backoffice.service.v1.ActionR\aactions\"\x1c\n" +
+	"\x06Action\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x9c\x02\n" +
 	"\x13ListAccountsRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1c\n" +
 	"\arole_id\x18\x02 \x01(\x03H\x01R\x06roleId\x88\x01\x01\x12$\n" +
@@ -2288,7 +2269,7 @@ var file_backoffice_service_v1_backoffice_account_proto_goTypes = []any{
 	(*AccountInfoResponse)(nil),                  // 27: api.backoffice.service.v1.AccountInfoResponse
 	(*Role)(nil),                                 // 28: api.backoffice.service.v1.Role
 	(*Permission)(nil),                           // 29: api.backoffice.service.v1.Permission
-	(*ApiPath)(nil),                              // 30: api.backoffice.service.v1.ApiPath
+	(*Action)(nil),                               // 30: api.backoffice.service.v1.Action
 	(*ListAccountsRequest)(nil),                  // 31: api.backoffice.service.v1.ListAccountsRequest
 	(*ListAccountsResponse)(nil),                 // 32: api.backoffice.service.v1.ListAccountsResponse
 	(*CreateRoleRequest)(nil),                    // 33: api.backoffice.service.v1.CreateRoleRequest
@@ -2305,7 +2286,7 @@ var file_backoffice_service_v1_backoffice_account_proto_goTypes = []any{
 var file_backoffice_service_v1_backoffice_account_proto_depIdxs = []int32{
 	28, // 0: api.backoffice.service.v1.AccountInfoResponse.role:type_name -> api.backoffice.service.v1.Role
 	29, // 1: api.backoffice.service.v1.Role.permissions:type_name -> api.backoffice.service.v1.Permission
-	30, // 2: api.backoffice.service.v1.Permission.api_paths:type_name -> api.backoffice.service.v1.ApiPath
+	30, // 2: api.backoffice.service.v1.Permission.actions:type_name -> api.backoffice.service.v1.Action
 	41, // 3: api.backoffice.service.v1.ListAccountsResponse.accounts:type_name -> api.backoffice.service.v1.ListAccountsResponse.Account
 	29, // 4: api.backoffice.service.v1.CreateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
 	28, // 5: api.backoffice.service.v1.ListRolesResponse.roles:type_name -> api.backoffice.service.v1.Role

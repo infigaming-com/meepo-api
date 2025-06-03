@@ -2185,6 +2185,11 @@ components:
                     type: boolean
                 role:
                     $ref: '#/components/schemas/api.backoffice.service.v1.Role'
+        api.backoffice.service.v1.Action:
+            type: object
+            properties:
+                name:
+                    type: string
         api.backoffice.service.v1.ActiveUsersData_Data:
             type: object
             properties:
@@ -2253,13 +2258,6 @@ components:
             type: object
             properties:
                 commentId:
-                    type: string
-        api.backoffice.service.v1.ApiPath:
-            type: object
-            properties:
-                path:
-                    type: string
-                action:
                     type: string
         api.backoffice.service.v1.AuditLog:
             type: object
@@ -5691,15 +5689,13 @@ components:
         api.backoffice.service.v1.Permission:
             type: object
             properties:
-                groupId:
+                module:
                     type: string
-                groupName:
-                    type: string
-                    description: 'group name: dashboard, game, user, finance, report, system, etc.'
-                apiPaths:
+                    description: 'module name: dashboard, game list, user list, etc.'
+                actions:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ApiPath'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.Action'
                     description: 'action name: read, write, delete, etc.'
         api.backoffice.service.v1.RegisterRequest:
             type: object

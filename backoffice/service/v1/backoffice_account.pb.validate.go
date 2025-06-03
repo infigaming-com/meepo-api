@@ -3133,11 +3133,9 @@ func (m *Permission) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for GroupId
+	// no validation rules for Module
 
-	// no validation rules for GroupName
-
-	for idx, item := range m.GetApiPaths() {
+	for idx, item := range m.GetActions() {
 		_, _ = idx, item
 
 		if all {
@@ -3145,7 +3143,7 @@ func (m *Permission) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, PermissionValidationError{
-						field:  fmt.Sprintf("ApiPaths[%v]", idx),
+						field:  fmt.Sprintf("Actions[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -3153,7 +3151,7 @@ func (m *Permission) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, PermissionValidationError{
-						field:  fmt.Sprintf("ApiPaths[%v]", idx),
+						field:  fmt.Sprintf("Actions[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -3162,7 +3160,7 @@ func (m *Permission) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return PermissionValidationError{
-					field:  fmt.Sprintf("ApiPaths[%v]", idx),
+					field:  fmt.Sprintf("Actions[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -3248,44 +3246,42 @@ var _ interface {
 	ErrorName() string
 } = PermissionValidationError{}
 
-// Validate checks the field values on ApiPath with the rules defined in the
+// Validate checks the field values on Action with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *ApiPath) Validate() error {
+func (m *Action) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ApiPath with the rules defined in the
+// ValidateAll checks the field values on Action with the rules defined in the
 // proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in ApiPathMultiError, or nil if none found.
-func (m *ApiPath) ValidateAll() error {
+// a list of violation errors wrapped in ActionMultiError, or nil if none found.
+func (m *Action) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ApiPath) validate(all bool) error {
+func (m *Action) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Path
-
-	// no validation rules for Action
+	// no validation rules for Name
 
 	if len(errors) > 0 {
-		return ApiPathMultiError(errors)
+		return ActionMultiError(errors)
 	}
 
 	return nil
 }
 
-// ApiPathMultiError is an error wrapping multiple validation errors returned
-// by ApiPath.ValidateAll() if the designated constraints aren't met.
-type ApiPathMultiError []error
+// ActionMultiError is an error wrapping multiple validation errors returned by
+// Action.ValidateAll() if the designated constraints aren't met.
+type ActionMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ApiPathMultiError) Error() string {
+func (m ActionMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3294,11 +3290,11 @@ func (m ApiPathMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ApiPathMultiError) AllErrors() []error { return m }
+func (m ActionMultiError) AllErrors() []error { return m }
 
-// ApiPathValidationError is the validation error returned by ApiPath.Validate
-// if the designated constraints aren't met.
-type ApiPathValidationError struct {
+// ActionValidationError is the validation error returned by Action.Validate if
+// the designated constraints aren't met.
+type ActionValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3306,22 +3302,22 @@ type ApiPathValidationError struct {
 }
 
 // Field function returns field value.
-func (e ApiPathValidationError) Field() string { return e.field }
+func (e ActionValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ApiPathValidationError) Reason() string { return e.reason }
+func (e ActionValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ApiPathValidationError) Cause() error { return e.cause }
+func (e ActionValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ApiPathValidationError) Key() bool { return e.key }
+func (e ActionValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ApiPathValidationError) ErrorName() string { return "ApiPathValidationError" }
+func (e ActionValidationError) ErrorName() string { return "ActionValidationError" }
 
 // Error satisfies the builtin error interface
-func (e ApiPathValidationError) Error() string {
+func (e ActionValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3333,14 +3329,14 @@ func (e ApiPathValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sApiPath.%s: %s%s",
+		"invalid %sAction.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ApiPathValidationError{}
+var _ error = ActionValidationError{}
 
 var _ interface {
 	Field() string
@@ -3348,7 +3344,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ApiPathValidationError{}
+} = ActionValidationError{}
 
 // Validate checks the field values on ListAccountsRequest with the rules
 // defined in the proto definition for this message. If any rules are

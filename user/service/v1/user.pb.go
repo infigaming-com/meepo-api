@@ -3296,9 +3296,8 @@ func (x *CreateRoleRequest) GetUserId() int64 {
 
 type Permission struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	GroupId       int64                  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	GroupName     string                 `protobuf:"bytes,2,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`
-	ApiPaths      []*ApiPath             `protobuf:"bytes,4,rep,name=api_paths,json=apiPaths,proto3" json:"api_paths,omitempty"`
+	Module        string                 `protobuf:"bytes,1,opt,name=module,proto3" json:"module,omitempty"`
+	Actions       []*Action              `protobuf:"bytes,2,rep,name=actions,proto3" json:"actions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3333,49 +3332,41 @@ func (*Permission) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{53}
 }
 
-func (x *Permission) GetGroupId() int64 {
+func (x *Permission) GetModule() string {
 	if x != nil {
-		return x.GroupId
-	}
-	return 0
-}
-
-func (x *Permission) GetGroupName() string {
-	if x != nil {
-		return x.GroupName
+		return x.Module
 	}
 	return ""
 }
 
-func (x *Permission) GetApiPaths() []*ApiPath {
+func (x *Permission) GetActions() []*Action {
 	if x != nil {
-		return x.ApiPaths
+		return x.Actions
 	}
 	return nil
 }
 
-type ApiPath struct {
+type Action struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Path          string                 `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ApiPath) Reset() {
-	*x = ApiPath{}
+func (x *Action) Reset() {
+	*x = Action{}
 	mi := &file_user_service_v1_user_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ApiPath) String() string {
+func (x *Action) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ApiPath) ProtoMessage() {}
+func (*Action) ProtoMessage() {}
 
-func (x *ApiPath) ProtoReflect() protoreflect.Message {
+func (x *Action) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3387,21 +3378,14 @@ func (x *ApiPath) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ApiPath.ProtoReflect.Descriptor instead.
-func (*ApiPath) Descriptor() ([]byte, []int) {
+// Deprecated: Use Action.ProtoReflect.Descriptor instead.
+func (*Action) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{54}
 }
 
-func (x *ApiPath) GetPath() string {
+func (x *Action) GetName() string {
 	if x != nil {
-		return x.Path
-	}
-	return ""
-}
-
-func (x *ApiPath) GetAction() string {
-	if x != nil {
-		return x.Action
+		return x.Name
 	}
 	return ""
 }
@@ -5225,16 +5209,13 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x11CreateRoleRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12A\n" +
 	"\vpermissions\x18\x02 \x03(\v2\x1f.api.user.service.v1.PermissionR\vpermissions\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\"\x81\x01\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\"[\n" +
 	"\n" +
-	"Permission\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\x12\x1d\n" +
-	"\n" +
-	"group_name\x18\x02 \x01(\tR\tgroupName\x129\n" +
-	"\tapi_paths\x18\x04 \x03(\v2\x1c.api.user.service.v1.ApiPathR\bapiPaths\"5\n" +
-	"\aApiPath\x12\x12\n" +
-	"\x04path\x18\x01 \x01(\tR\x04path\x12\x16\n" +
-	"\x06action\x18\x02 \x01(\tR\x06action\"\x14\n" +
+	"Permission\x12\x16\n" +
+	"\x06module\x18\x01 \x01(\tR\x06module\x125\n" +
+	"\aactions\x18\x02 \x03(\v2\x1b.api.user.service.v1.ActionR\aactions\"\x1c\n" +
+	"\x06Action\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x14\n" +
 	"\x12CreateRoleResponse\"d\n" +
 	"\x10ListRolesRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
@@ -5421,7 +5402,7 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*GetUserProfileResponse)(nil),                                 // 55: api.user.service.v1.GetUserProfileResponse
 	(*CreateRoleRequest)(nil),                                      // 56: api.user.service.v1.CreateRoleRequest
 	(*Permission)(nil),                                             // 57: api.user.service.v1.Permission
-	(*ApiPath)(nil),                                                // 58: api.user.service.v1.ApiPath
+	(*Action)(nil),                                                 // 58: api.user.service.v1.Action
 	(*CreateRoleResponse)(nil),                                     // 59: api.user.service.v1.CreateRoleResponse
 	(*ListRolesRequest)(nil),                                       // 60: api.user.service.v1.ListRolesRequest
 	(*Role)(nil),                                                   // 61: api.user.service.v1.Role
@@ -5462,7 +5443,7 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	77, // 11: api.user.service.v1.GetUserProfileResponse.login_records:type_name -> api.user.service.v1.GetUserProfileResponse.LoginRecord
 	78, // 12: api.user.service.v1.GetUserProfileResponse.comments:type_name -> api.user.service.v1.GetUserProfileResponse.Comment
 	57, // 13: api.user.service.v1.CreateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
-	58, // 14: api.user.service.v1.Permission.api_paths:type_name -> api.user.service.v1.ApiPath
+	58, // 14: api.user.service.v1.Permission.actions:type_name -> api.user.service.v1.Action
 	57, // 15: api.user.service.v1.Role.permissions:type_name -> api.user.service.v1.Permission
 	61, // 16: api.user.service.v1.ListRolesResponse.roles:type_name -> api.user.service.v1.Role
 	3,  // 17: api.user.service.v1.CreateOperatorRequest.operator_type:type_name -> api.user.service.v1.OperatorType
