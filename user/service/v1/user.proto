@@ -631,14 +631,12 @@ message CreateRoleRequest {
 }
 
 message Permission {
-	int64 group_id = 1;
-	string group_name = 2;
-	repeated ApiPath api_paths = 4;
+	string module = 1;
+	repeated Action actions = 2;
 }
 
-message ApiPath {
-	string path = 1;
-	string action = 2;
+message Action {
+	string name = 1;
 }
 
 message CreateRoleResponse {}
