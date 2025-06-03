@@ -130,6 +130,8 @@ message ListWalletBalanceTransactionsRequest {
 	optional string currency = 3;
 	optional google.protobuf.Timestamp start_time = 4;
 	optional google.protobuf.Timestamp end_time = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
 }
 
 message ListWalletBalanceTransactionsResponse {

@@ -5351,6 +5351,12 @@ components:
                 endTime:
                     type: string
                     format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListWalletBalanceTransactionsResponse:
             type: object
             properties:

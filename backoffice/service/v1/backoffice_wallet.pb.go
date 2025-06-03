@@ -312,6 +312,8 @@ type ListWalletBalanceTransactionsRequest struct {
 	Currency        *string                `protobuf:"bytes,3,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
 	StartTime       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime         *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page            *int32                 `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize        *int32                 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -379,6 +381,20 @@ func (x *ListWalletBalanceTransactionsRequest) GetEndTime() *timestamppb.Timesta
 		return x.EndTime
 	}
 	return nil
+}
+
+func (x *ListWalletBalanceTransactionsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListWalletBalanceTransactionsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
 }
 
 type ListWalletBalanceTransactionsResponse struct {
@@ -1262,18 +1278,23 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\tvip_level\x18\x04 \x01(\x05R\bvipLevel\x12%\n" +
 	"\x0ebefore_blanace\x18\x05 \x01(\tR\rbeforeBlanace\x12#\n" +
 	"\rafter_balance\x18\x06 \x01(\tR\fafterBalance\x12\x1a\n" +
-	"\bcurrency\x18\a \x01(\tR\bcurrency\"\xca\x02\n" +
+	"\bcurrency\x18\a \x01(\tR\bcurrency\"\x9c\x03\n" +
 	"$ListWalletBalanceTransactionsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12.\n" +
 	"\x10transaction_type\x18\x02 \x01(\tH\x00R\x0ftransactionType\x88\x01\x01\x12\x1f\n" +
 	"\bcurrency\x18\x03 \x01(\tH\x01R\bcurrency\x88\x01\x01\x12>\n" +
 	"\n" +
 	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\aendTime\x88\x01\x01B\x13\n" +
+	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x06 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\a \x01(\x05H\x05R\bpageSize\x88\x01\x01B\x13\n" +
 	"\x11_transaction_typeB\v\n" +
 	"\t_currencyB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\xc7\x04\n" +
+	"\t_end_timeB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xc7\x04\n" +
 	"%ListWalletBalanceTransactionsResponse\x12\x86\x01\n" +
 	"\x14balance_transactions\x18\x01 \x03(\v2S.api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransactionR\x13balanceTransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
