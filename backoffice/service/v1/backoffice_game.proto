@@ -173,7 +173,9 @@ message ListThemesResponse {
 	repeated string themes = 1;
 }
 
-message ListCurrenciesRequest {}
+message ListCurrenciesRequest {
+	optional string provider_id = 1;
+}
 
 message ListCurrenciesResponse {
 	repeated string currencies = 1;
