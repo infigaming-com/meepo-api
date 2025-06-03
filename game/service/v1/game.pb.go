@@ -1034,6 +1034,7 @@ func (x *ListThemesResponse) GetThemes() []string {
 
 type ListCurrenciesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProviderId    *string                `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1066,6 +1067,13 @@ func (x *ListCurrenciesRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListCurrenciesRequest.ProtoReflect.Descriptor instead.
 func (*ListCurrenciesRequest) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ListCurrenciesRequest) GetProviderId() string {
+	if x != nil && x.ProviderId != nil {
+		return *x.ProviderId
+	}
+	return ""
 }
 
 type ListCurrenciesResponse struct {
@@ -5602,8 +5610,11 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x04tags\x18\x01 \x03(\tR\x04tags\"\x13\n" +
 	"\x11ListThemesRequest\",\n" +
 	"\x12ListThemesResponse\x12\x16\n" +
-	"\x06themes\x18\x01 \x03(\tR\x06themes\"\x17\n" +
-	"\x15ListCurrenciesRequest\"8\n" +
+	"\x06themes\x18\x01 \x03(\tR\x06themes\"M\n" +
+	"\x15ListCurrenciesRequest\x12$\n" +
+	"\vprovider_id\x18\x01 \x01(\tH\x00R\n" +
+	"providerId\x88\x01\x01B\x0e\n" +
+	"\f_provider_id\"8\n" +
 	"\x16ListCurrenciesResponse\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\tR\n" +
@@ -6299,6 +6310,7 @@ func file_game_service_v1_game_proto_init() {
 	}
 	file_game_service_v1_game_proto_msgTypes[8].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[9].OneofWrappers = []any{}
+	file_game_service_v1_game_proto_msgTypes[18].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[38].OneofWrappers = []any{
 		(*ListBetsRequest_SettlementCurrencyWithRanges)(nil),
 		(*ListBetsRequest_SettlementCurrencies)(nil),
