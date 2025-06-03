@@ -2003,6 +2003,10 @@ func (m *ListCurrenciesRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.ProviderId != nil {
+		// no validation rules for ProviderId
+	}
+
 	if len(errors) > 0 {
 		return ListCurrenciesRequestMultiError(errors)
 	}

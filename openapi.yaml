@@ -4229,7 +4229,9 @@ components:
                         type: string
         api.backoffice.service.v1.ListCurrenciesRequest:
             type: object
-            properties: {}
+            properties:
+                providerId:
+                    type: string
         api.backoffice.service.v1.ListCurrenciesResponse:
             type: object
             properties:
