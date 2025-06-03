@@ -632,11 +632,7 @@ message CreateRoleRequest {
 
 message Permission {
 	string module = 1;
-	repeated Action actions = 2;
-}
-
-message Action {
-	string name = 1;
+	repeated string actions = 2;
 }
 
 message CreateRoleResponse {}

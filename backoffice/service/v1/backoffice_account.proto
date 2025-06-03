@@ -235,11 +235,7 @@ message Permission {
     // module name: dashboard, game list, user list, etc.
     string module = 1;
     // action name: read, write, delete, etc.
-    repeated Action actions = 2;
-}
-
-message Action {
-    string name = 1;
+    repeated string actions = 2;
 }
 
 message ListAccountsRequest {
