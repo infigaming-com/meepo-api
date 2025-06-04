@@ -12,32 +12,32 @@ option java_package = "api.backoffice.service.v1";
 service BackofficeWallet {
 	rpc GetWallets(GetWalletsRequest) returns (GetWalletsResponse) {
         option (google.api.http) = {
-            post: "/decimal/v1/backoffice/wallet/get"
+            post: "/v1/backoffice/wallet/get"
             body: "*"
         };
     }
 	rpc GetWalletCredits(GetWalletCreditsRequest) returns (GetWalletCreditsResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/wallet/credits/get"
+			post: "/v1/backoffice/wallet/credits/get"
 			body: "*"
 		};
 	}
 	// ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
 	rpc ListWalletBalanceTransactions(ListWalletBalanceTransactionsRequest) returns (ListWalletBalanceTransactionsResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/wallet/balance-transactions/list"
+			post: "/v1/backoffice/wallet/balance-transactions/list"
 			body: "*"
 		};
 	}
     rpc GetWalletCreditTransactions(GetWalletCreditTransactionsRequest) returns (GetWalletCreditTransactionsResponse) {
         option (google.api.http) = {
-            post: "/decimal/v1/backoffice/wallet/credit-transactions/get"
+            post: "/v1/backoffice/wallet/credit-transactions/get"
             body: "*"
         };
     }
     rpc UpdateWallet(UpdateWalletRequest) returns (UpdateWalletResponse) {
         option (google.api.http) = {
-            post: "/decimal/v1/backoffice/wallet/update"
+            post: "/v1/backoffice/wallet/update"
             body: "*"
         };
     }

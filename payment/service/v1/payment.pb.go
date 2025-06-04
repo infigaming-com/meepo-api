@@ -2607,17 +2607,17 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x14REQUEST_SOURCE_ADMIN\x10\x01*B\n" +
 	"\vChannelType\x12\x18\n" +
 	"\x14CHANNEL_TYPE_DEPOSIT\x10\x00\x12\x19\n" +
-	"\x15CHANNEL_TYPE_WITHDRAW\x10\x012\xea\v\n" +
-	"\aPayment\x12\xa5\x01\n" +
-	"\x14GetPaymentMethodList\x12/.payment.service.v1.GetPaymentMethodListRequest\x1a0.payment.service.v1.GetPaymentMethodListResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/decimal/v1/payment/method/list\x12\xa8\x01\n" +
-	"\x14CreatePaymentChannel\x12/.payment.service.v1.CreatePaymentChannelRequest\x1a0.payment.service.v1.CreatePaymentChannelResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/decimal/v1/payment/channel/create\x12\x9b\x01\n" +
-	"\x0fInitiateDeposit\x12*.payment.service.v1.InitiateDepositRequest\x1a+.payment.service.v1.InitiateDepositResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/decimal/v1/payment/deposit/initiate\x12\x9f\x01\n" +
-	"\x10InitiateWithdraw\x12+.payment.service.v1.InitiateWithdrawRequest\x1a,.payment.service.v1.InitiateWithdrawResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/decimal/v1/payment/withdraw/initiate\x12\x9b\x01\n" +
-	"\x0fDepositCallback\x12*.payment.service.v1.DepositCallbackRequest\x1a+.payment.service.v1.DepositCallbackResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/decimal/v1/payment/deposit/callback\x12\x9f\x01\n" +
-	"\x10WithdrawCallback\x12+.payment.service.v1.WithdrawCallbackRequest\x1a,.payment.service.v1.WithdrawCallbackResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/decimal/v1/payment/withdraw/callback\x12\xa4\x01\n" +
-	"\x12GetTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/decimal/v1/payment/transaction/page\x12\xa9\x01\n" +
-	"\x15GetPaymentChannelPage\x120.payment.service.v1.GetPaymentChannelPageRequest\x1a1.payment.service.v1.GetPaymentChannelPageResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /decimal/v1/payment/channel/page\x12\xb8\x01\n" +
-	"\x18GetTransactionDetailById\x123.payment.service.v1.GetTransactionDetailByIdRequest\x1a4.payment.service.v1.GetTransactionDetailByIdResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/decimal/v1/payment/transaction/detailBU\n" +
+	"\x15CHANNEL_TYPE_WITHDRAW\x10\x012\xa2\v\n" +
+	"\aPayment\x12\x9d\x01\n" +
+	"\x14GetPaymentMethodList\x12/.payment.service.v1.GetPaymentMethodListRequest\x1a0.payment.service.v1.GetPaymentMethodListResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/payment/method/list\x12\xa0\x01\n" +
+	"\x14CreatePaymentChannel\x12/.payment.service.v1.CreatePaymentChannelRequest\x1a0.payment.service.v1.CreatePaymentChannelResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/payment/channel/create\x12\x93\x01\n" +
+	"\x0fInitiateDeposit\x12*.payment.service.v1.InitiateDepositRequest\x1a+.payment.service.v1.InitiateDepositResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/deposit/initiate\x12\x97\x01\n" +
+	"\x10InitiateWithdraw\x12+.payment.service.v1.InitiateWithdrawRequest\x1a,.payment.service.v1.InitiateWithdrawResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/payment/withdraw/initiate\x12\x93\x01\n" +
+	"\x0fDepositCallback\x12*.payment.service.v1.DepositCallbackRequest\x1a+.payment.service.v1.DepositCallbackResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/deposit/callback\x12\x97\x01\n" +
+	"\x10WithdrawCallback\x12+.payment.service.v1.WithdrawCallbackRequest\x1a,.payment.service.v1.WithdrawCallbackResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/payment/withdraw/callback\x12\x9c\x01\n" +
+	"\x12GetTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/transaction/page\x12\xa1\x01\n" +
+	"\x15GetPaymentChannelPage\x120.payment.service.v1.GetPaymentChannelPageRequest\x1a1.payment.service.v1.GetPaymentChannelPageResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/payment/channel/page\x12\xb0\x01\n" +
+	"\x18GetTransactionDetailById\x123.payment.service.v1.GetTransactionDetailByIdRequest\x1a4.payment.service.v1.GetTransactionDetailByIdResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/payment/transaction/detailBU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
 
 var (

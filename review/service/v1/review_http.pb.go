@@ -27,7 +27,7 @@ type ReviewHTTPServer interface {
 
 func RegisterReviewHTTPServer(s *http.Server, srv ReviewHTTPServer) {
 	r := s.Route("/")
-	r.POST("/decimal/v1/review/withdraw", _Review_CreateWithdraw0_HTTP_Handler(srv))
+	r.POST("/v1/review/withdraw", _Review_CreateWithdraw0_HTTP_Handler(srv))
 }
 
 func _Review_CreateWithdraw0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
@@ -66,7 +66,7 @@ func NewReviewHTTPClient(client *http.Client) ReviewHTTPClient {
 
 func (c *ReviewHTTPClientImpl) CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...http.CallOption) (*CreateWithdrawResponse, error) {
 	var out CreateWithdrawResponse
-	pattern := "/decimal/v1/review/withdraw"
+	pattern := "/v1/review/withdraw"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationReviewCreateWithdraw))
 	opts = append(opts, http.PathTemplate(pattern))

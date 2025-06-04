@@ -6,1267 +6,6 @@ info:
     title: ""
     version: 0.0.1
 paths:
-    /decimal/v1/backoffice/dashboard/get:
-        post:
-            tags:
-                - BackofficeDashboard
-            operationId: BackofficeDashboard_GetOverviewDashboard
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardResponse'
-    /decimal/v1/backoffice/dashboard/time-ranged/get:
-        post:
-            tags:
-                - BackofficeDashboard
-            operationId: BackofficeDashboard_GetTimeRangedDashboard
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTimeRangedDashboardRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTimeRangedDashboardResponse'
-    /decimal/v1/backoffice/dashboard/top-operators/get:
-        post:
-            tags:
-                - BackofficeDashboard
-            operationId: BackofficeDashboard_GetTopOperatorsDashboard
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardResponse'
-    /decimal/v1/backoffice/dashboard/top-users/get:
-        post:
-            tags:
-                - BackofficeDashboard
-            operationId: BackofficeDashboard_GetTopUsersDashboard
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardResponse'
-    /decimal/v1/backoffice/game/bets/get:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_GetBetById
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetBetByIdRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetBetByIdResponse'
-    /decimal/v1/backoffice/game/bets/list:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_ListBets
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsResponse'
-    /decimal/v1/backoffice/game/bets/overview/get:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_GetUserBetsOverview
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetUserBetsOverviewRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetUserBetsOverviewResponse'
-    /decimal/v1/backoffice/game/bets/transactions/get:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_GetGameTransactionsForBet
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionsForBetRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionsForBetResponse'
-    /decimal/v1/backoffice/game/categories/list:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_ListCategories
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCategoriesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListCategoriesResponse'
-    /decimal/v1/backoffice/game/currencies/list:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_ListCurrencies
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCurrenciesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListCurrenciesResponse'
-    /decimal/v1/backoffice/game/fee-groups/list:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_ListFeeGroups
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListFeeGroupsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListFeeGroupsResponse'
-    /decimal/v1/backoffice/game/list:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_ListGames
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGamesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListGamesResponse'
-    /decimal/v1/backoffice/game/provider/rates/list:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_ListProviderRates
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListProviderRatesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListProviderRatesResponse'
-    /decimal/v1/backoffice/game/provider/update:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_UpdateProvider
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateProviderRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateProviderResponse'
-    /decimal/v1/backoffice/game/providers-with-detail/list:
-        post:
-            tags:
-                - BackofficeGame
-            description: |-
-                ListProvidersWithDetail returns all providers with detailed information,
-                 including game count and enabled status.
-                 ListProvidersWithDetail is used for the providers page.
-            operationId: BackofficeGame_ListProvidersWithDetail
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersWithDetailRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersWithDetailResponse'
-    /decimal/v1/backoffice/game/providers/list:
-        post:
-            tags:
-                - BackofficeGame
-            description: |-
-                ListProviders returns all providers with optional filter for enabled status.
-                 If not provided, all providers will be returned.
-                 ListProviders is used for the providers drop down list and provider search.
-            operationId: BackofficeGame_ListProviders
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersResponse'
-    /decimal/v1/backoffice/game/tags/list:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_ListTags
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListTagsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTagsResponse'
-    /decimal/v1/backoffice/game/themes/list:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_ListThemes
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListThemesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListThemesResponse'
-    /decimal/v1/backoffice/game/transaction/get:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_GetGameTransactionById
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionByIdRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionByIdResponse'
-    /decimal/v1/backoffice/game/update:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_UpdateGame
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
-    /decimal/v1/backoffice/payment/transaction/detail:
-        post:
-            tags:
-                - BackofficePayment
-            description: |-
-                Get transaction detail
-                 Retrieves detailed information about a specific transaction
-                 Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
-            operationId: BackofficePayment_GetPaymentTransactionById
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionByIdRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionByIdResponse'
-    /decimal/v1/backoffice/payment/transaction/page:
-        post:
-            tags:
-                - BackofficePayment
-            description: |-
-                Get payment transaction page
-                 Retrieves a paginated list of payment transactions with optional filtering
-            operationId: BackofficePayment_GetPaymentTransactionPage
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
-    /decimal/v1/backoffice/report/deposit-details/list:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_ListDepositDetails
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsResponse'
-    /decimal/v1/backoffice/report/deposit-summaries/get:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_GetDepositSummaries
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesResponse'
-    /decimal/v1/backoffice/report/deposit-vtg-details/list:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_ListDepositVtgDetails
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse'
-    /decimal/v1/backoffice/report/game-data/get:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_GetGameDataSummary
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameSummaryRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameSummaryResponse'
-    /decimal/v1/backoffice/report/game-data/list:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_ListGameData
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataResponse'
-    /decimal/v1/backoffice/report/player-game-data/get:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_GetPlayerGameDataSummary
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameSummaryRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameSummaryResponse'
-    /decimal/v1/backoffice/report/player-game-data/list:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_ListPlayerGameData
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataResponse'
-    /decimal/v1/backoffice/report/register-retention/list:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_ListRegisterRetention
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionResponse'
-    /decimal/v1/backoffice/report/summary/get:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_GetSummary
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSummaryRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetSummaryResponse'
-    /decimal/v1/backoffice/report/summary/list:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_ListSummaries
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse'
-    /decimal/v1/backoffice/report/withdraw-details/list:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_ListWithdrawDetails
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsResponse'
-    /decimal/v1/backoffice/report/withdraw-summaries/get:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_GetWithdrawSummaries
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesResponse'
-    /decimal/v1/backoffice/report/withdraw-vtg-details/list:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_ListWithdrawVtgDetails
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse'
-    /decimal/v1/backoffice/review/tickets/cancel:
-        post:
-            tags:
-                - BackofficeReview
-            operationId: BackofficeReview_CancelTicket
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.CancelTicketRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.CancelTicketResponse'
-    /decimal/v1/backoffice/review/tickets/comments/add:
-        post:
-            tags:
-                - BackofficeReview
-            operationId: BackofficeReview_AddComment
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddCommentRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.AddCommentResponse'
-    /decimal/v1/backoffice/review/tickets/get:
-        post:
-            tags:
-                - BackofficeReview
-            operationId: BackofficeReview_GetTicket
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketResponse'
-    /decimal/v1/backoffice/review/tickets/get_by_id:
-        post:
-            tags:
-                - BackofficeReview
-            operationId: BackofficeReview_GetTicketById
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketByIdRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketByIdResponse'
-    /decimal/v1/backoffice/review/tickets/list:
-        post:
-            tags:
-                - BackofficeReview
-            operationId: BackofficeReview_ListTickets
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse'
-    /decimal/v1/backoffice/review/tickets/review:
-        post:
-            tags:
-                - BackofficeReview
-            operationId: BackofficeReview_ReviewTicket
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
-    /decimal/v1/backoffice/wallet/balance-transactions/list:
-        post:
-            tags:
-                - BackofficeWallet
-            description: ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
-            operationId: BackofficeWallet_ListWalletBalanceTransactions
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsResponse'
-    /decimal/v1/backoffice/wallet/credit-transactions/get:
-        post:
-            tags:
-                - BackofficeWallet
-            operationId: BackofficeWallet_GetWalletCreditTransactions
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditTransactionsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditTransactionsResponse'
-    /decimal/v1/backoffice/wallet/credits/get:
-        post:
-            tags:
-                - BackofficeWallet
-            operationId: BackofficeWallet_GetWalletCredits
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditsResponse'
-    /decimal/v1/backoffice/wallet/get:
-        post:
-            tags:
-                - BackofficeWallet
-            operationId: BackofficeWallet_GetWallets
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse'
-    /decimal/v1/backoffice/wallet/update:
-        post:
-            tags:
-                - BackofficeWallet
-            operationId: BackofficeWallet_UpdateWallet
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletResponse'
-    /decimal/v1/game/backoffice/games/list:
-        post:
-            tags:
-                - Game
-            operationId: Game_BackofficeListGames
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.BackofficeListGamesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.BackofficeListGamesResponse'
-    /decimal/v1/game/balance:
-        post:
-            tags:
-                - Game
-            operationId: Game_Balance
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.BalanceRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.BalanceResponse'
-    /decimal/v1/game/bets/list:
-        post:
-            tags:
-                - Game
-            operationId: Game_ListBets
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.ListBetsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.ListBetsResponse'
-    /decimal/v1/game/categories/list:
-        post:
-            tags:
-                - Game
-            operationId: Game_ListCategories
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.ListCategoriesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.ListCategoriesResponse'
-    /decimal/v1/game/create-session:
-        post:
-            tags:
-                - Game
-            operationId: Game_CreateSession
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.CreateSessionRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.CreateSessionResponse'
-    /decimal/v1/game/get:
-        post:
-            tags:
-                - Game
-            operationId: Game_GetGame
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.GetGameRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.GetGameResponse'
-    /decimal/v1/game/list:
-        post:
-            tags:
-                - Game
-            operationId: Game_ListGames
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.ListGamesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.ListGamesResponse'
-    /decimal/v1/game/play:
-        post:
-            tags:
-                - Game
-            operationId: Game_Play
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.PlayRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.PlayResponse'
-    /decimal/v1/game/providers/list:
-        post:
-            tags:
-                - Game
-            operationId: Game_ListProviders
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.ListProvidersRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.ListProvidersResponse'
-    /decimal/v1/game/rollback:
-        post:
-            tags:
-                - Game
-            operationId: Game_Rollback
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.RollbackRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
-    /decimal/v1/payment/channel/create:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Create payment channel
-                 Creates a new payment channel with specified configuration
-                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-            operationId: Payment_CreatePaymentChannel
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
-    /decimal/v1/payment/channel/page:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Get payment channel page with pagination and filters
-                 Retrieves a paginated list of payment channels with optional filtering
-                 Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
-            operationId: Payment_GetPaymentChannelPage
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageResponse'
-    /decimal/v1/payment/deposit/callback:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Deposit callback
-                 Handles callbacks from payment gateways for deposit status updates
-                 This endpoint is called by payment providers to notify of completed or failed deposits
-                 Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
-            operationId: Payment_DepositCallback
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.DepositCallbackRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.DepositCallbackResponse'
-    /decimal/v1/payment/deposit/initiate:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Initiate a deposit transaction
-                 Starts a new deposit process and returns payment information
-                 Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
-            operationId: Payment_InitiateDeposit
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.InitiateDepositRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.InitiateDepositResponse'
-    /decimal/v1/payment/method/list:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Get list of payment methods
-                 Retrieves all available payment methods supported by the system
-                 Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-            operationId: Payment_GetPaymentMethodList
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
-    /decimal/v1/payment/transaction/detail:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Get transaction detail
-                 Retrieves detailed information about a specific transaction
-                 Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
-            operationId: Payment_GetTransactionDetailById
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetTransactionDetailByIdRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetTransactionDetailByIdResponse'
-    /decimal/v1/payment/transaction/page:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Get transaction page with pagination and filters
-                 Retrieves a paginated list of transactions with optional filtering
-                 Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
-            operationId: Payment_GetTransactionPage
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
-    /decimal/v1/payment/withdraw/callback:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Withdraw callback
-                 Handles callbacks from payment gateways for withdrawal status updates
-                 This endpoint is called by payment providers to notify of completed or failed withdrawals
-                 Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
-            operationId: Payment_WithdrawCallback
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
-    /decimal/v1/payment/withdraw/initiate:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Initiate a withdrawal transaction
-                 Starts a new withdrawal process
-                 Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
-            operationId: Payment_InitiateWithdraw
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawResponse'
-    /decimal/v1/review/withdraw:
-        post:
-            tags:
-                - Review
-            operationId: Review_CreateWithdraw
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawResponse'
-    /decimal/v1/wallet/balances/list:
-        post:
-            tags:
-                - Wallet
-            description: GetUserBalances returns the balances of all currencies of the user
-            operationId: Wallet_GetUserBalances
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse'
     /v1/backoffice/accounts/2fa/bind:
         post:
             tags:
@@ -1627,6 +366,374 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListAuditLogsResponse'
+    /v1/backoffice/dashboard/get:
+        post:
+            tags:
+                - BackofficeDashboard
+            operationId: BackofficeDashboard_GetOverviewDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardResponse'
+    /v1/backoffice/dashboard/time-ranged/get:
+        post:
+            tags:
+                - BackofficeDashboard
+            operationId: BackofficeDashboard_GetTimeRangedDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTimeRangedDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTimeRangedDashboardResponse'
+    /v1/backoffice/dashboard/top-operators/get:
+        post:
+            tags:
+                - BackofficeDashboard
+            operationId: BackofficeDashboard_GetTopOperatorsDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardResponse'
+    /v1/backoffice/dashboard/top-users/get:
+        post:
+            tags:
+                - BackofficeDashboard
+            operationId: BackofficeDashboard_GetTopUsersDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardResponse'
+    /v1/backoffice/game/bets/get:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_GetBetById
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetBetByIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetBetByIdResponse'
+    /v1/backoffice/game/bets/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListBets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsResponse'
+    /v1/backoffice/game/bets/overview/get:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_GetUserBetsOverview
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetUserBetsOverviewRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetUserBetsOverviewResponse'
+    /v1/backoffice/game/bets/transactions/get:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_GetGameTransactionsForBet
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionsForBetRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionsForBetResponse'
+    /v1/backoffice/game/categories/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListCategories
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCategoriesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListCategoriesResponse'
+    /v1/backoffice/game/currencies/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListCurrencies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCurrenciesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListCurrenciesResponse'
+    /v1/backoffice/game/fee-groups/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListFeeGroups
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListFeeGroupsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListFeeGroupsResponse'
+    /v1/backoffice/game/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListGames
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGamesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListGamesResponse'
+    /v1/backoffice/game/provider/rates/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListProviderRates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListProviderRatesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListProviderRatesResponse'
+    /v1/backoffice/game/provider/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateProvider
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateProviderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateProviderResponse'
+    /v1/backoffice/game/providers-with-detail/list:
+        post:
+            tags:
+                - BackofficeGame
+            description: |-
+                ListProvidersWithDetail returns all providers with detailed information,
+                 including game count and enabled status.
+                 ListProvidersWithDetail is used for the providers page.
+            operationId: BackofficeGame_ListProvidersWithDetail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersWithDetailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersWithDetailResponse'
+    /v1/backoffice/game/providers/list:
+        post:
+            tags:
+                - BackofficeGame
+            description: |-
+                ListProviders returns all providers with optional filter for enabled status.
+                 If not provided, all providers will be returned.
+                 ListProviders is used for the providers drop down list and provider search.
+            operationId: BackofficeGame_ListProviders
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersResponse'
+    /v1/backoffice/game/tags/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListTags
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListTagsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTagsResponse'
+    /v1/backoffice/game/themes/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListThemes
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListThemesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListThemesResponse'
+    /v1/backoffice/game/transaction/get:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_GetGameTransactionById
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionByIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionByIdResponse'
+    /v1/backoffice/game/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateGame
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
     /v1/backoffice/operator/list:
         post:
             tags:
@@ -1645,6 +752,391 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsResponse'
+    /v1/backoffice/payment/transaction/detail:
+        post:
+            tags:
+                - BackofficePayment
+            description: |-
+                Get transaction detail
+                 Retrieves detailed information about a specific transaction
+                 Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+            operationId: BackofficePayment_GetPaymentTransactionById
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionByIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentTransactionByIdResponse'
+    /v1/backoffice/payment/transaction/page:
+        post:
+            tags:
+                - BackofficePayment
+            description: |-
+                Get payment transaction page
+                 Retrieves a paginated list of payment transactions with optional filtering
+            operationId: BackofficePayment_GetPaymentTransactionPage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
+    /v1/backoffice/report/deposit-details/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListDepositDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsResponse'
+    /v1/backoffice/report/deposit-summaries/get:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_GetDepositSummaries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesResponse'
+    /v1/backoffice/report/deposit-vtg-details/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListDepositVtgDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse'
+    /v1/backoffice/report/game-data/get:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_GetGameDataSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameSummaryResponse'
+    /v1/backoffice/report/game-data/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListGameData
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataResponse'
+    /v1/backoffice/report/player-game-data/get:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_GetPlayerGameDataSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameSummaryResponse'
+    /v1/backoffice/report/player-game-data/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListPlayerGameData
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataResponse'
+    /v1/backoffice/report/register-retention/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListRegisterRetention
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionResponse'
+    /v1/backoffice/report/summary/get:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_GetSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetSummaryResponse'
+    /v1/backoffice/report/summary/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListSummaries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse'
+    /v1/backoffice/report/withdraw-details/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListWithdrawDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsResponse'
+    /v1/backoffice/report/withdraw-summaries/get:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_GetWithdrawSummaries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesResponse'
+    /v1/backoffice/report/withdraw-vtg-details/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListWithdrawVtgDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse'
+    /v1/backoffice/review/tickets/cancel:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_CancelTicket
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CancelTicketRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CancelTicketResponse'
+    /v1/backoffice/review/tickets/comments/add:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_AddComment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddCommentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AddCommentResponse'
+    /v1/backoffice/review/tickets/get:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_GetTicket
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketResponse'
+    /v1/backoffice/review/tickets/get_by_id:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_GetTicketById
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketByIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketByIdResponse'
+    /v1/backoffice/review/tickets/list:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_ListTickets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse'
+    /v1/backoffice/review/tickets/review:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_ReviewTicket
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
     /v1/backoffice/system/currencies/add:
         post:
             tags:
@@ -1959,6 +1451,495 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateUserResponse'
+    /v1/backoffice/wallet/balance-transactions/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
+            operationId: BackofficeWallet_ListWalletBalanceTransactions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsResponse'
+    /v1/backoffice/wallet/credit-transactions/get:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_GetWalletCreditTransactions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditTransactionsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditTransactionsResponse'
+    /v1/backoffice/wallet/credits/get:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_GetWalletCredits
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditsResponse'
+    /v1/backoffice/wallet/get:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_GetWallets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse'
+    /v1/backoffice/wallet/update:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_UpdateWallet
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletResponse'
+    /v1/game/backoffice/games/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_BackofficeListGames
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.BackofficeListGamesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.BackofficeListGamesResponse'
+    /v1/game/balance:
+        post:
+            tags:
+                - Game
+            operationId: Game_Balance
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.BalanceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.BalanceResponse'
+    /v1/game/bets/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_ListBets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.ListBetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListBetsResponse'
+    /v1/game/categories/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_ListCategories
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.ListCategoriesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListCategoriesResponse'
+    /v1/game/create-session:
+        post:
+            tags:
+                - Game
+            operationId: Game_CreateSession
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.CreateSessionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.CreateSessionResponse'
+    /v1/game/get:
+        post:
+            tags:
+                - Game
+            operationId: Game_GetGame
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.GetGameRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.GetGameResponse'
+    /v1/game/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_ListGames
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.ListGamesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListGamesResponse'
+    /v1/game/play:
+        post:
+            tags:
+                - Game
+            operationId: Game_Play
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.PlayRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.PlayResponse'
+    /v1/game/providers/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_ListProviders
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.ListProvidersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListProvidersResponse'
+    /v1/game/rollback:
+        post:
+            tags:
+                - Game
+            operationId: Game_Rollback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.RollbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
+    /v1/payment/channel/create:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Create payment channel
+                 Creates a new payment channel with specified configuration
+                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
+            operationId: Payment_CreatePaymentChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
+    /v1/payment/channel/page:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Get payment channel page with pagination and filters
+                 Retrieves a paginated list of payment channels with optional filtering
+                 Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
+            operationId: Payment_GetPaymentChannelPage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageResponse'
+    /v1/payment/deposit/callback:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Deposit callback
+                 Handles callbacks from payment gateways for deposit status updates
+                 This endpoint is called by payment providers to notify of completed or failed deposits
+                 Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
+            operationId: Payment_DepositCallback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.DepositCallbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.DepositCallbackResponse'
+    /v1/payment/deposit/initiate:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Initiate a deposit transaction
+                 Starts a new deposit process and returns payment information
+                 Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
+            operationId: Payment_InitiateDeposit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.InitiateDepositRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.InitiateDepositResponse'
+    /v1/payment/method/list:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Get list of payment methods
+                 Retrieves all available payment methods supported by the system
+                 Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
+            operationId: Payment_GetPaymentMethodList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /v1/payment/transaction/detail:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Get transaction detail
+                 Retrieves detailed information about a specific transaction
+                 Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+            operationId: Payment_GetTransactionDetailById
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetTransactionDetailByIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetTransactionDetailByIdResponse'
+    /v1/payment/transaction/page:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Get transaction page with pagination and filters
+                 Retrieves a paginated list of transactions with optional filtering
+                 Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
+            operationId: Payment_GetTransactionPage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
+    /v1/payment/withdraw/callback:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Withdraw callback
+                 Handles callbacks from payment gateways for withdrawal status updates
+                 This endpoint is called by payment providers to notify of completed or failed withdrawals
+                 Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
+            operationId: Payment_WithdrawCallback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
+    /v1/payment/withdraw/initiate:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Initiate a withdrawal transaction
+                 Starts a new withdrawal process
+                 Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
+            operationId: Payment_InitiateWithdraw
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawResponse'
+    /v1/review/withdraw:
+        post:
+            tags:
+                - Review
+            operationId: Review_CreateWithdraw
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawResponse'
     /v1/user/auth/login:
         post:
             tags:
@@ -2163,6 +2144,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserTagsResponse'
+    /v1/wallet/balances/list:
+        post:
+            tags:
+                - Wallet
+            description: GetUserBalances returns the balances of all currencies of the user
+            operationId: Wallet_GetUserBalances
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse'
 components:
     schemas:
         api.backoffice.service.v1.AccountInfoRequest:

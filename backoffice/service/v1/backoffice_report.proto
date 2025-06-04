@@ -11,80 +11,80 @@ option java_package = "api.backoffice.service.v1";
 service BackofficeReport {
 	rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/summary/get"
+          post: "/v1/backoffice/report/summary/get"
           body: "*"
       };
   }
   rpc ListSummaries(ListSummariesRequest) returns (ListSummariesResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/summary/list"
+          post: "/v1/backoffice/report/summary/list"
           body: "*"
       };
   }
   rpc GetGameDataSummary(GetGameSummaryRequest) returns (GetGameSummaryResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/game-data/get"
+          post: "/v1/backoffice/report/game-data/get"
           body: "*"
       };
   }
   rpc ListGameData(GetGameDataRequest) returns (GetGameDataResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/game-data/list"
+          post: "/v1/backoffice/report/game-data/list"
           body: "*"
       };
   }
   rpc GetPlayerGameDataSummary(GetPlayerGameSummaryRequest) returns (GetPlayerGameSummaryResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/player-game-data/get"
+          post: "/v1/backoffice/report/player-game-data/get"
           body: "*"
       };
   }
   rpc ListPlayerGameData(GetPlayerGameDataRequest) returns (GetPlayerGameDataResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/player-game-data/list"
+          post: "/v1/backoffice/report/player-game-data/list"
           body: "*"
       };
   }
   rpc GetDepositSummaries(GetDepositSummariesRequest) returns (GetDepositSummariesResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/deposit-summaries/get"
+          post: "/v1/backoffice/report/deposit-summaries/get"
           body: "*"
       };
   }
   rpc ListDepositDetails(ListDepositDetailsRequest) returns (ListDepositDetailsResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/deposit-details/list"
+          post: "/v1/backoffice/report/deposit-details/list"
           body: "*"
       };
   }
   rpc GetWithdrawSummaries(GetWithdrawSummariesRequest) returns (GetWithdrawSummariesResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/withdraw-summaries/get"
+          post: "/v1/backoffice/report/withdraw-summaries/get"
           body: "*"
       };
   }
   rpc ListWithdrawDetails(ListWithdrawDetailsRequest) returns (ListWithdrawDetailsResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/withdraw-details/list"
+          post: "/v1/backoffice/report/withdraw-details/list"
           body: "*"
       };
   }
 
   rpc ListRegisterRetention(ListRegisterRetentionRequest) returns (ListRegisterRetentionResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/register-retention/list"
+          post: "/v1/backoffice/report/register-retention/list"
           body: "*"
       };
   }
   rpc ListDepositVtgDetails(ListDepositVtgDetailsRequest) returns (ListDepositVtgDetailsResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/deposit-vtg-details/list"
+          post: "/v1/backoffice/report/deposit-vtg-details/list"
           body: "*"
       };
   }
   rpc ListWithdrawVtgDetails(ListWithdrawVtgDetailsRequest) returns (ListWithdrawVtgDetailsResponse) {
       option (google.api.http) = {
-          post: "/decimal/v1/backoffice/report/withdraw-vtg-details/list"
+          post: "/v1/backoffice/report/withdraw-vtg-details/list"
           body: "*"
       };
   }

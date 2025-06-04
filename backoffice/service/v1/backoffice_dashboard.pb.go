@@ -1713,12 +1713,12 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\tR\n" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\tR\x06amount2\xb7\x06\n" +
-	"\x13BackofficeDashboard\x12\xb8\x01\n" +
-	"\x14GetOverviewDashboard\x126.api.backoffice.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/decimal/v1/backoffice/dashboard/get\x12\xca\x01\n" +
-	"\x16GetTimeRangedDashboard\x128.api.backoffice.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/decimal/v1/backoffice/dashboard/time-ranged/get\x12\xc2\x01\n" +
-	"\x14GetTopUsersDashboard\x126.api.backoffice.service.v1.GetTopUsersDashboardRequest\x1a7.api.backoffice.service.v1.GetTopUsersDashboardResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./decimal/v1/backoffice/dashboard/top-users/get\x12\xd2\x01\n" +
-	"\x18GetTopOperatorsDashboard\x12:.api.backoffice.service.v1.GetTopOperatorsDashboardRequest\x1a;.api.backoffice.service.v1.GetTopOperatorsDashboardResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/decimal/v1/backoffice/dashboard/top-operators/getB[\n" +
+	"\x06amount\x18\x03 \x01(\tR\x06amount2\x97\x06\n" +
+	"\x13BackofficeDashboard\x12\xb0\x01\n" +
+	"\x14GetOverviewDashboard\x126.api.backoffice.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/dashboard/get\x12\xc2\x01\n" +
+	"\x16GetTimeRangedDashboard\x128.api.backoffice.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/dashboard/time-ranged/get\x12\xba\x01\n" +
+	"\x14GetTopUsersDashboard\x126.api.backoffice.service.v1.GetTopUsersDashboardRequest\x1a7.api.backoffice.service.v1.GetTopUsersDashboardResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/dashboard/top-users/get\x12\xca\x01\n" +
+	"\x18GetTopOperatorsDashboard\x12:.api.backoffice.service.v1.GetTopOperatorsDashboardRequest\x1a;.api.backoffice.service.v1.GetTopOperatorsDashboardResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/dashboard/top-operators/getB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

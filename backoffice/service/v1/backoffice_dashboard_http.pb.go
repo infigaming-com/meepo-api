@@ -33,10 +33,10 @@ type BackofficeDashboardHTTPServer interface {
 
 func RegisterBackofficeDashboardHTTPServer(s *http.Server, srv BackofficeDashboardHTTPServer) {
 	r := s.Route("/")
-	r.POST("/decimal/v1/backoffice/dashboard/get", _BackofficeDashboard_GetOverviewDashboard0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/dashboard/time-ranged/get", _BackofficeDashboard_GetTimeRangedDashboard0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/dashboard/top-users/get", _BackofficeDashboard_GetTopUsersDashboard0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/dashboard/top-operators/get", _BackofficeDashboard_GetTopOperatorsDashboard0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dashboard/get", _BackofficeDashboard_GetOverviewDashboard0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dashboard/time-ranged/get", _BackofficeDashboard_GetTimeRangedDashboard0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dashboard/top-users/get", _BackofficeDashboard_GetTopUsersDashboard0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dashboard/top-operators/get", _BackofficeDashboard_GetTopOperatorsDashboard0_HTTP_Handler(srv))
 }
 
 func _BackofficeDashboard_GetOverviewDashboard0_HTTP_Handler(srv BackofficeDashboardHTTPServer) func(ctx http.Context) error {
@@ -144,7 +144,7 @@ func NewBackofficeDashboardHTTPClient(client *http.Client) BackofficeDashboardHT
 
 func (c *BackofficeDashboardHTTPClientImpl) GetOverviewDashboard(ctx context.Context, in *GetOverviewDashboardRequest, opts ...http.CallOption) (*GetOverviewDashboardResponse, error) {
 	var out GetOverviewDashboardResponse
-	pattern := "/decimal/v1/backoffice/dashboard/get"
+	pattern := "/v1/backoffice/dashboard/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeDashboardGetOverviewDashboard))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -157,7 +157,7 @@ func (c *BackofficeDashboardHTTPClientImpl) GetOverviewDashboard(ctx context.Con
 
 func (c *BackofficeDashboardHTTPClientImpl) GetTimeRangedDashboard(ctx context.Context, in *GetTimeRangedDashboardRequest, opts ...http.CallOption) (*GetTimeRangedDashboardResponse, error) {
 	var out GetTimeRangedDashboardResponse
-	pattern := "/decimal/v1/backoffice/dashboard/time-ranged/get"
+	pattern := "/v1/backoffice/dashboard/time-ranged/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeDashboardGetTimeRangedDashboard))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -170,7 +170,7 @@ func (c *BackofficeDashboardHTTPClientImpl) GetTimeRangedDashboard(ctx context.C
 
 func (c *BackofficeDashboardHTTPClientImpl) GetTopOperatorsDashboard(ctx context.Context, in *GetTopOperatorsDashboardRequest, opts ...http.CallOption) (*GetTopOperatorsDashboardResponse, error) {
 	var out GetTopOperatorsDashboardResponse
-	pattern := "/decimal/v1/backoffice/dashboard/top-operators/get"
+	pattern := "/v1/backoffice/dashboard/top-operators/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeDashboardGetTopOperatorsDashboard))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -183,7 +183,7 @@ func (c *BackofficeDashboardHTTPClientImpl) GetTopOperatorsDashboard(ctx context
 
 func (c *BackofficeDashboardHTTPClientImpl) GetTopUsersDashboard(ctx context.Context, in *GetTopUsersDashboardRequest, opts ...http.CallOption) (*GetTopUsersDashboardResponse, error) {
 	var out GetTopUsersDashboardResponse
-	pattern := "/decimal/v1/backoffice/dashboard/top-users/get"
+	pattern := "/v1/backoffice/dashboard/top-users/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeDashboardGetTopUsersDashboard))
 	opts = append(opts, http.PathTemplate(pattern))

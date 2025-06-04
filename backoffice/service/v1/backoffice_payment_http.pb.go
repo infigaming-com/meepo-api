@@ -35,8 +35,8 @@ type BackofficePaymentHTTPServer interface {
 
 func RegisterBackofficePaymentHTTPServer(s *http.Server, srv BackofficePaymentHTTPServer) {
 	r := s.Route("/")
-	r.POST("/decimal/v1/backoffice/payment/transaction/page", _BackofficePayment_GetPaymentTransactionPage0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/payment/transaction/detail", _BackofficePayment_GetPaymentTransactionById0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/transaction/page", _BackofficePayment_GetPaymentTransactionPage0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/transaction/detail", _BackofficePayment_GetPaymentTransactionById0_HTTP_Handler(srv))
 }
 
 func _BackofficePayment_GetPaymentTransactionPage0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
@@ -98,7 +98,7 @@ func NewBackofficePaymentHTTPClient(client *http.Client) BackofficePaymentHTTPCl
 
 func (c *BackofficePaymentHTTPClientImpl) GetPaymentTransactionById(ctx context.Context, in *GetPaymentTransactionByIdRequest, opts ...http.CallOption) (*GetPaymentTransactionByIdResponse, error) {
 	var out GetPaymentTransactionByIdResponse
-	pattern := "/decimal/v1/backoffice/payment/transaction/detail"
+	pattern := "/v1/backoffice/payment/transaction/detail"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficePaymentGetPaymentTransactionById))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -111,7 +111,7 @@ func (c *BackofficePaymentHTTPClientImpl) GetPaymentTransactionById(ctx context.
 
 func (c *BackofficePaymentHTTPClientImpl) GetPaymentTransactionPage(ctx context.Context, in *v1.GetTransactionPageRequest, opts ...http.CallOption) (*v1.GetTransactionPageResponse, error) {
 	var out v1.GetTransactionPageResponse
-	pattern := "/decimal/v1/backoffice/payment/transaction/page"
+	pattern := "/v1/backoffice/payment/transaction/page"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficePaymentGetPaymentTransactionPage))
 	opts = append(opts, http.PathTemplate(pattern))

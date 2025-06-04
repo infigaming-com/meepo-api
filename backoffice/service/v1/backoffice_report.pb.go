@@ -4891,22 +4891,22 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"3average_ftw_amount_for_non_same_day_registred_users\x18\x14 \x01(\tR+averageFtwAmountForNonSameDayRegistredUsers\x12o\n" +
 	"7average_ftw_amount_usd_for_non_same_day_registred_users\x18\x15 \x01(\tR.averageFtwAmountUsdForNonSameDayRegistredUsers\x12A\n" +
 	"\x1ddeposit_minus_withdraw_amount\x18\x16 \x01(\tR\x1adepositMinusWithdrawAmount\x12H\n" +
-	"!deposit_minus_withdraw_amount_usd\x18\x17 \x01(\tR\x1ddepositMinusWithdrawAmountUsd2\xdb\x13\n" +
-	"\x10BackofficeReport\x12\x9f\x01\n" +
+	"!deposit_minus_withdraw_amount_usd\x18\x17 \x01(\tR\x1ddepositMinusWithdrawAmountUsd2\xf3\x12\n" +
+	"\x10BackofficeReport\x12\x97\x01\n" +
 	"\n" +
-	"GetSummary\x12,.api.backoffice.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/decimal/v1/backoffice/report/summary/get\x12\xa9\x01\n" +
-	"\rListSummaries\x12/.api.backoffice.service.v1.ListSummariesRequest\x1a0.api.backoffice.service.v1.ListSummariesResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/decimal/v1/backoffice/report/summary/list\x12\xb1\x01\n" +
-	"\x12GetGameDataSummary\x120.api.backoffice.service.v1.GetGameSummaryRequest\x1a1.api.backoffice.service.v1.GetGameSummaryResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/decimal/v1/backoffice/report/game-data/get\x12\xa6\x01\n" +
-	"\fListGameData\x12-.api.backoffice.service.v1.GetGameDataRequest\x1a..api.backoffice.service.v1.GetGameDataResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/decimal/v1/backoffice/report/game-data/list\x12\xca\x01\n" +
-	"\x18GetPlayerGameDataSummary\x126.api.backoffice.service.v1.GetPlayerGameSummaryRequest\x1a7.api.backoffice.service.v1.GetPlayerGameSummaryResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/decimal/v1/backoffice/report/player-game-data/get\x12\xbf\x01\n" +
-	"\x12ListPlayerGameData\x123.api.backoffice.service.v1.GetPlayerGameDataRequest\x1a4.api.backoffice.service.v1.GetPlayerGameDataResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/decimal/v1/backoffice/report/player-game-data/list\x12\xc4\x01\n" +
-	"\x13GetDepositSummaries\x125.api.backoffice.service.v1.GetDepositSummariesRequest\x1a6.api.backoffice.service.v1.GetDepositSummariesResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/decimal/v1/backoffice/report/deposit-summaries/get\x12\xc0\x01\n" +
-	"\x12ListDepositDetails\x124.api.backoffice.service.v1.ListDepositDetailsRequest\x1a5.api.backoffice.service.v1.ListDepositDetailsResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/decimal/v1/backoffice/report/deposit-details/list\x12\xc8\x01\n" +
-	"\x14GetWithdrawSummaries\x126.api.backoffice.service.v1.GetWithdrawSummariesRequest\x1a7.api.backoffice.service.v1.GetWithdrawSummariesResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/decimal/v1/backoffice/report/withdraw-summaries/get\x12\xc4\x01\n" +
-	"\x13ListWithdrawDetails\x125.api.backoffice.service.v1.ListWithdrawDetailsRequest\x1a6.api.backoffice.service.v1.ListWithdrawDetailsResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/decimal/v1/backoffice/report/withdraw-details/list\x12\xcc\x01\n" +
-	"\x15ListRegisterRetention\x127.api.backoffice.service.v1.ListRegisterRetentionRequest\x1a8.api.backoffice.service.v1.ListRegisterRetentionResponse\"@\x82\xd3\xe4\x93\x02::\x01*\"5/decimal/v1/backoffice/report/register-retention/list\x12\xcd\x01\n" +
-	"\x15ListDepositVtgDetails\x127.api.backoffice.service.v1.ListDepositVtgDetailsRequest\x1a8.api.backoffice.service.v1.ListDepositVtgDetailsResponse\"A\x82\xd3\xe4\x93\x02;:\x01*\"6/decimal/v1/backoffice/report/deposit-vtg-details/list\x12\xd1\x01\n" +
-	"\x16ListWithdrawVtgDetails\x128.api.backoffice.service.v1.ListWithdrawVtgDetailsRequest\x1a9.api.backoffice.service.v1.ListWithdrawVtgDetailsResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/decimal/v1/backoffice/report/withdraw-vtg-details/listB[\n" +
+	"GetSummary\x12,.api.backoffice.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/report/summary/get\x12\xa1\x01\n" +
+	"\rListSummaries\x12/.api.backoffice.service.v1.ListSummariesRequest\x1a0.api.backoffice.service.v1.ListSummariesResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/report/summary/list\x12\xa9\x01\n" +
+	"\x12GetGameDataSummary\x120.api.backoffice.service.v1.GetGameSummaryRequest\x1a1.api.backoffice.service.v1.GetGameSummaryResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/report/game-data/get\x12\x9e\x01\n" +
+	"\fListGameData\x12-.api.backoffice.service.v1.GetGameDataRequest\x1a..api.backoffice.service.v1.GetGameDataResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/report/game-data/list\x12\xc2\x01\n" +
+	"\x18GetPlayerGameDataSummary\x126.api.backoffice.service.v1.GetPlayerGameSummaryRequest\x1a7.api.backoffice.service.v1.GetPlayerGameSummaryResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/report/player-game-data/get\x12\xb7\x01\n" +
+	"\x12ListPlayerGameData\x123.api.backoffice.service.v1.GetPlayerGameDataRequest\x1a4.api.backoffice.service.v1.GetPlayerGameDataResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/report/player-game-data/list\x12\xbc\x01\n" +
+	"\x13GetDepositSummaries\x125.api.backoffice.service.v1.GetDepositSummariesRequest\x1a6.api.backoffice.service.v1.GetDepositSummariesResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/report/deposit-summaries/get\x12\xb8\x01\n" +
+	"\x12ListDepositDetails\x124.api.backoffice.service.v1.ListDepositDetailsRequest\x1a5.api.backoffice.service.v1.ListDepositDetailsResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/report/deposit-details/list\x12\xc0\x01\n" +
+	"\x14GetWithdrawSummaries\x126.api.backoffice.service.v1.GetWithdrawSummariesRequest\x1a7.api.backoffice.service.v1.GetWithdrawSummariesResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/report/withdraw-summaries/get\x12\xbc\x01\n" +
+	"\x13ListWithdrawDetails\x125.api.backoffice.service.v1.ListWithdrawDetailsRequest\x1a6.api.backoffice.service.v1.ListWithdrawDetailsResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/report/withdraw-details/list\x12\xc4\x01\n" +
+	"\x15ListRegisterRetention\x127.api.backoffice.service.v1.ListRegisterRetentionRequest\x1a8.api.backoffice.service.v1.ListRegisterRetentionResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/report/register-retention/list\x12\xc5\x01\n" +
+	"\x15ListDepositVtgDetails\x127.api.backoffice.service.v1.ListDepositVtgDetailsRequest\x1a8.api.backoffice.service.v1.ListDepositVtgDetailsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/report/deposit-vtg-details/list\x12\xc9\x01\n" +
+	"\x16ListWithdrawVtgDetails\x128.api.backoffice.service.v1.ListWithdrawVtgDetailsRequest\x1a9.api.backoffice.service.v1.ListWithdrawVtgDetailsResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/report/withdraw-vtg-details/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

@@ -15,7 +15,7 @@ service BackofficeGame {
 	// ListProviders is used for the providers drop down list and provider search.
 	rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/game/providers/list"
+			post: "/v1/backoffice/game/providers/list"
 			body: "*"
 		};
 	}
@@ -24,91 +24,91 @@ service BackofficeGame {
 	// ListProvidersWithDetail is used for the providers page.
 	rpc ListProvidersWithDetail(ListProvidersWithDetailRequest) returns (ListProvidersWithDetailResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/game/providers-with-detail/list"
+			post: "/v1/backoffice/game/providers-with-detail/list"
 			body: "*"
 		};
 	}
 	rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/game/categories/list"
+			post: "/v1/backoffice/game/categories/list"
 			body: "*"
 		};
 	}
 	rpc ListFeeGroups(ListFeeGroupsRequest) returns (ListFeeGroupsResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/game/fee-groups/list"
+			post: "/v1/backoffice/game/fee-groups/list"
 			body: "*"
 		};
 	}
 	rpc ListTags(ListTagsRequest) returns (ListTagsResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/game/tags/list"
+			post: "/v1/backoffice/game/tags/list"
 			body: "*"
 		};
 	}
 	rpc ListThemes(ListThemesRequest) returns (ListThemesResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/game/themes/list"
+			post: "/v1/backoffice/game/themes/list"
 			body: "*"
 		};
 	}
 	rpc ListCurrencies(ListCurrenciesRequest) returns (ListCurrenciesResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/game/currencies/list"
+			post: "/v1/backoffice/game/currencies/list"
 			body: "*"
 		};
 	}
 	rpc ListBets(ListBetsRequest) returns (ListBetsResponse) {
         option (google.api.http) = {
-            post: "/decimal/v1/backoffice/game/bets/list"
+            post: "/v1/backoffice/game/bets/list"
             body: "*"
         };
     }
 	rpc GetBetById(GetBetByIdRequest) returns (GetBetByIdResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/game/bets/get"
+			post: "/v1/backoffice/game/bets/get"
 			body: "*"
 		};
 	}
     rpc GetUserBetsOverview(GetUserBetsOverviewRequest) returns (GetUserBetsOverviewResponse) {
         option (google.api.http) = {
-            post: "/decimal/v1/backoffice/game/bets/overview/get"
+            post: "/v1/backoffice/game/bets/overview/get"
             body: "*"
         };
     }
     rpc GetGameTransactionsForBet(GetGameTransactionsForBetRequest) returns (GetGameTransactionsForBetResponse) {
         option (google.api.http) = {
-            post: "/decimal/v1/backoffice/game/bets/transactions/get"
+            post: "/v1/backoffice/game/bets/transactions/get"
             body: "*"
         };
     }
     rpc ListGames(ListGamesRequest) returns (ListGamesResponse) {
         option (google.api.http) = {
-            post: "/decimal/v1/backoffice/game/list"
+            post: "/v1/backoffice/game/list"
             body: "*"
         };
     }
 		rpc UpdateGame(UpdateGameRequest) returns (UpdateGameResponse) {
 			option (google.api.http) = {
-				post: "/decimal/v1/backoffice/game/update"
+				post: "/v1/backoffice/game/update"
 				body: "*"
 			};
 		}
 		rpc UpdateProvider(UpdateProviderRequest) returns (UpdateProviderResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/game/provider/update"
+			post: "/v1/backoffice/game/provider/update"
 			body: "*"
 		};
 	}
 	rpc ListProviderRates(ListProviderRatesRequest) returns (ListProviderRatesResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/game/provider/rates/list"
+			post: "/v1/backoffice/game/provider/rates/list"
 			body: "*"
 		};
 	}
 	rpc GetGameTransactionById(GetGameTransactionByIdRequest) returns (GetGameTransactionByIdResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/backoffice/game/transaction/get"
+			post: "/v1/backoffice/game/transaction/get"
 			body: "*"
 		};
 	}

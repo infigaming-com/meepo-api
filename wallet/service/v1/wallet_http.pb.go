@@ -28,7 +28,7 @@ type WalletHTTPServer interface {
 
 func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r := s.Route("/")
-	r.POST("/decimal/v1/wallet/balances/list", _Wallet_GetUserBalances0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/balances/list", _Wallet_GetUserBalances0_HTTP_Handler(srv))
 }
 
 func _Wallet_GetUserBalances0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
@@ -67,7 +67,7 @@ func NewWalletHTTPClient(client *http.Client) WalletHTTPClient {
 
 func (c *WalletHTTPClientImpl) GetUserBalances(ctx context.Context, in *GetUserBalancesRequest, opts ...http.CallOption) (*GetUserBalancesResponse, error) {
 	var out GetUserBalancesResponse
-	pattern := "/decimal/v1/wallet/balances/list"
+	pattern := "/v1/wallet/balances/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationWalletGetUserBalances))
 	opts = append(opts, http.PathTemplate(pattern))

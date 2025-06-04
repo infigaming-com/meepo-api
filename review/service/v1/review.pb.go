@@ -1399,9 +1399,9 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x0eauthor_user_id\x18\x03 \x01(\x03R\fauthorUserId\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\xa5\x05\n" +
-	"\x06Review\x12\x95\x01\n" +
-	"\x0eCreateWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/decimal/v1/review/withdraw\x12i\n" +
+	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\x9d\x05\n" +
+	"\x06Review\x12\x8d\x01\n" +
+	"\x0eCreateWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/review/withdraw\x12i\n" +
 	"\fReviewTicket\x12*.api.review.service.v1.ReviewTicketRequest\x1a+.api.review.service.v1.ReviewTicketResponse\"\x00\x12c\n" +
 	"\n" +
 	"AddComment\x12(.api.review.service.v1.AddCommentRequest\x1a).api.review.service.v1.AddCommentResponse\"\x00\x12i\n" +

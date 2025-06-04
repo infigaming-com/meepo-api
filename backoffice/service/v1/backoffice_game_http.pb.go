@@ -63,22 +63,22 @@ type BackofficeGameHTTPServer interface {
 
 func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServer) {
 	r := s.Route("/")
-	r.POST("/decimal/v1/backoffice/game/providers/list", _BackofficeGame_ListProviders1_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/providers-with-detail/list", _BackofficeGame_ListProvidersWithDetail0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/categories/list", _BackofficeGame_ListCategories1_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/fee-groups/list", _BackofficeGame_ListFeeGroups0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/tags/list", _BackofficeGame_ListTags0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/themes/list", _BackofficeGame_ListThemes0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/currencies/list", _BackofficeGame_ListCurrencies0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/bets/list", _BackofficeGame_ListBets1_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/bets/get", _BackofficeGame_GetBetById0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/bets/overview/get", _BackofficeGame_GetUserBetsOverview0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/bets/transactions/get", _BackofficeGame_GetGameTransactionsForBet0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/list", _BackofficeGame_ListGames1_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/update", _BackofficeGame_UpdateGame0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/provider/update", _BackofficeGame_UpdateProvider0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/provider/rates/list", _BackofficeGame_ListProviderRates0_HTTP_Handler(srv))
-	r.POST("/decimal/v1/backoffice/game/transaction/get", _BackofficeGame_GetGameTransactionById0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/providers/list", _BackofficeGame_ListProviders1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/providers-with-detail/list", _BackofficeGame_ListProvidersWithDetail0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/categories/list", _BackofficeGame_ListCategories1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/fee-groups/list", _BackofficeGame_ListFeeGroups0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/tags/list", _BackofficeGame_ListTags0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/themes/list", _BackofficeGame_ListThemes0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/currencies/list", _BackofficeGame_ListCurrencies0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/bets/list", _BackofficeGame_ListBets1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/bets/get", _BackofficeGame_GetBetById0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/bets/overview/get", _BackofficeGame_GetUserBetsOverview0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/bets/transactions/get", _BackofficeGame_GetGameTransactionsForBet0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/list", _BackofficeGame_ListGames1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/update", _BackofficeGame_UpdateGame0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/provider/update", _BackofficeGame_UpdateProvider0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/provider/rates/list", _BackofficeGame_ListProviderRates0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/transaction/get", _BackofficeGame_GetGameTransactionById0_HTTP_Handler(srv))
 }
 
 func _BackofficeGame_ListProviders1_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
@@ -462,7 +462,7 @@ func NewBackofficeGameHTTPClient(client *http.Client) BackofficeGameHTTPClient {
 
 func (c *BackofficeGameHTTPClientImpl) GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...http.CallOption) (*GetBetByIdResponse, error) {
 	var out GetBetByIdResponse
-	pattern := "/decimal/v1/backoffice/game/bets/get"
+	pattern := "/v1/backoffice/game/bets/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameGetBetById))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -475,7 +475,7 @@ func (c *BackofficeGameHTTPClientImpl) GetBetById(ctx context.Context, in *GetBe
 
 func (c *BackofficeGameHTTPClientImpl) GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...http.CallOption) (*GetGameTransactionByIdResponse, error) {
 	var out GetGameTransactionByIdResponse
-	pattern := "/decimal/v1/backoffice/game/transaction/get"
+	pattern := "/v1/backoffice/game/transaction/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameGetGameTransactionById))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -488,7 +488,7 @@ func (c *BackofficeGameHTTPClientImpl) GetGameTransactionById(ctx context.Contex
 
 func (c *BackofficeGameHTTPClientImpl) GetGameTransactionsForBet(ctx context.Context, in *GetGameTransactionsForBetRequest, opts ...http.CallOption) (*GetGameTransactionsForBetResponse, error) {
 	var out GetGameTransactionsForBetResponse
-	pattern := "/decimal/v1/backoffice/game/bets/transactions/get"
+	pattern := "/v1/backoffice/game/bets/transactions/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameGetGameTransactionsForBet))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -501,7 +501,7 @@ func (c *BackofficeGameHTTPClientImpl) GetGameTransactionsForBet(ctx context.Con
 
 func (c *BackofficeGameHTTPClientImpl) GetUserBetsOverview(ctx context.Context, in *GetUserBetsOverviewRequest, opts ...http.CallOption) (*GetUserBetsOverviewResponse, error) {
 	var out GetUserBetsOverviewResponse
-	pattern := "/decimal/v1/backoffice/game/bets/overview/get"
+	pattern := "/v1/backoffice/game/bets/overview/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameGetUserBetsOverview))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -514,7 +514,7 @@ func (c *BackofficeGameHTTPClientImpl) GetUserBetsOverview(ctx context.Context, 
 
 func (c *BackofficeGameHTTPClientImpl) ListBets(ctx context.Context, in *ListBetsRequest, opts ...http.CallOption) (*ListBetsResponse, error) {
 	var out ListBetsResponse
-	pattern := "/decimal/v1/backoffice/game/bets/list"
+	pattern := "/v1/backoffice/game/bets/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListBets))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -527,7 +527,7 @@ func (c *BackofficeGameHTTPClientImpl) ListBets(ctx context.Context, in *ListBet
 
 func (c *BackofficeGameHTTPClientImpl) ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...http.CallOption) (*ListCategoriesResponse, error) {
 	var out ListCategoriesResponse
-	pattern := "/decimal/v1/backoffice/game/categories/list"
+	pattern := "/v1/backoffice/game/categories/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListCategories))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -540,7 +540,7 @@ func (c *BackofficeGameHTTPClientImpl) ListCategories(ctx context.Context, in *L
 
 func (c *BackofficeGameHTTPClientImpl) ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...http.CallOption) (*ListCurrenciesResponse, error) {
 	var out ListCurrenciesResponse
-	pattern := "/decimal/v1/backoffice/game/currencies/list"
+	pattern := "/v1/backoffice/game/currencies/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListCurrencies))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -553,7 +553,7 @@ func (c *BackofficeGameHTTPClientImpl) ListCurrencies(ctx context.Context, in *L
 
 func (c *BackofficeGameHTTPClientImpl) ListFeeGroups(ctx context.Context, in *ListFeeGroupsRequest, opts ...http.CallOption) (*ListFeeGroupsResponse, error) {
 	var out ListFeeGroupsResponse
-	pattern := "/decimal/v1/backoffice/game/fee-groups/list"
+	pattern := "/v1/backoffice/game/fee-groups/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListFeeGroups))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -566,7 +566,7 @@ func (c *BackofficeGameHTTPClientImpl) ListFeeGroups(ctx context.Context, in *Li
 
 func (c *BackofficeGameHTTPClientImpl) ListGames(ctx context.Context, in *ListGamesRequest, opts ...http.CallOption) (*ListGamesResponse, error) {
 	var out ListGamesResponse
-	pattern := "/decimal/v1/backoffice/game/list"
+	pattern := "/v1/backoffice/game/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListGames))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -579,7 +579,7 @@ func (c *BackofficeGameHTTPClientImpl) ListGames(ctx context.Context, in *ListGa
 
 func (c *BackofficeGameHTTPClientImpl) ListProviderRates(ctx context.Context, in *ListProviderRatesRequest, opts ...http.CallOption) (*ListProviderRatesResponse, error) {
 	var out ListProviderRatesResponse
-	pattern := "/decimal/v1/backoffice/game/provider/rates/list"
+	pattern := "/v1/backoffice/game/provider/rates/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListProviderRates))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -592,7 +592,7 @@ func (c *BackofficeGameHTTPClientImpl) ListProviderRates(ctx context.Context, in
 
 func (c *BackofficeGameHTTPClientImpl) ListProviders(ctx context.Context, in *ListProvidersRequest, opts ...http.CallOption) (*ListProvidersResponse, error) {
 	var out ListProvidersResponse
-	pattern := "/decimal/v1/backoffice/game/providers/list"
+	pattern := "/v1/backoffice/game/providers/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListProviders))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -605,7 +605,7 @@ func (c *BackofficeGameHTTPClientImpl) ListProviders(ctx context.Context, in *Li
 
 func (c *BackofficeGameHTTPClientImpl) ListProvidersWithDetail(ctx context.Context, in *ListProvidersWithDetailRequest, opts ...http.CallOption) (*ListProvidersWithDetailResponse, error) {
 	var out ListProvidersWithDetailResponse
-	pattern := "/decimal/v1/backoffice/game/providers-with-detail/list"
+	pattern := "/v1/backoffice/game/providers-with-detail/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListProvidersWithDetail))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -618,7 +618,7 @@ func (c *BackofficeGameHTTPClientImpl) ListProvidersWithDetail(ctx context.Conte
 
 func (c *BackofficeGameHTTPClientImpl) ListTags(ctx context.Context, in *ListTagsRequest, opts ...http.CallOption) (*ListTagsResponse, error) {
 	var out ListTagsResponse
-	pattern := "/decimal/v1/backoffice/game/tags/list"
+	pattern := "/v1/backoffice/game/tags/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListTags))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -631,7 +631,7 @@ func (c *BackofficeGameHTTPClientImpl) ListTags(ctx context.Context, in *ListTag
 
 func (c *BackofficeGameHTTPClientImpl) ListThemes(ctx context.Context, in *ListThemesRequest, opts ...http.CallOption) (*ListThemesResponse, error) {
 	var out ListThemesResponse
-	pattern := "/decimal/v1/backoffice/game/themes/list"
+	pattern := "/v1/backoffice/game/themes/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListThemes))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -644,7 +644,7 @@ func (c *BackofficeGameHTTPClientImpl) ListThemes(ctx context.Context, in *ListT
 
 func (c *BackofficeGameHTTPClientImpl) UpdateGame(ctx context.Context, in *UpdateGameRequest, opts ...http.CallOption) (*UpdateGameResponse, error) {
 	var out UpdateGameResponse
-	pattern := "/decimal/v1/backoffice/game/update"
+	pattern := "/v1/backoffice/game/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameUpdateGame))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -657,7 +657,7 @@ func (c *BackofficeGameHTTPClientImpl) UpdateGame(ctx context.Context, in *Updat
 
 func (c *BackofficeGameHTTPClientImpl) UpdateProvider(ctx context.Context, in *UpdateProviderRequest, opts ...http.CallOption) (*UpdateProviderResponse, error) {
 	var out UpdateProviderResponse
-	pattern := "/decimal/v1/backoffice/game/provider/update"
+	pattern := "/v1/backoffice/game/provider/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameUpdateProvider))
 	opts = append(opts, http.PathTemplate(pattern))

@@ -14,7 +14,7 @@ option java_package = "api.review.service.v1";
 service Review {
 	rpc CreateWithdraw(CreateWithdrawRequest) returns (CreateWithdrawResponse) {
 		option (google.api.http) = {
-			post: "/decimal/v1/review/withdraw"
+			post: "/v1/review/withdraw"
 			body: "*"
 		};
 	}
