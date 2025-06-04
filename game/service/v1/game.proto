@@ -339,7 +339,7 @@ message PlayRequest {
 
 message PlayResponse {
 	message Data {
-		double balance = 1;
+		string balance = 1;
 		string round_id = 2;
 		repeated Transactions transactions = 3;
 	}
@@ -365,7 +365,7 @@ message Action {
 message Transactions {
 	string txn_id = 1 [json_name="txn_id"];
 	string operator_txn_id = 2 [json_name="operator_txn_id"];
-	google.protobuf.Timestamp processed_at = 3 [json_name="processed_at"];
+	double processed_at = 3 [json_name="processed_at"];
 	string bonus_amount = 4 [json_name="bonus_amount"];
 }
 

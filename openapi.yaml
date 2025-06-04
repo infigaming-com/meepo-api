@@ -6644,8 +6644,7 @@ components:
             type: object
             properties:
                 balance:
-                    type: number
-                    format: double
+                    type: string
                 roundId:
                     type: string
                 transactions:
@@ -6721,8 +6720,8 @@ components:
                 operator_txn_id:
                     type: string
                 processed_at:
-                    type: string
-                    format: date-time
+                    type: number
+                    format: double
                 bonus_amount:
                     type: string
         api.game.service.v1.UrlInfo:
