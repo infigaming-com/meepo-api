@@ -1327,14 +1327,14 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\aenabled\x18\x03 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
 	"\n" +
 	"\b_enabled\"\x16\n" +
-	"\x14UpdateWalletResponse2\xcd\a\n" +
-	"\x10BackofficeWallet\x12\x97\x01\n" +
+	"\x14UpdateWalletResponse2\xa5\a\n" +
+	"\x10BackofficeWallet\x12\x8f\x01\n" +
 	"\n" +
-	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a-.api.backoffice.service.v1.GetWalletsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/decimal/v1/backoffice/wallet/get\x12\xb1\x01\n" +
-	"\x10GetWalletCredits\x122.api.backoffice.service.v1.GetWalletCreditsRequest\x1a3.api.backoffice.service.v1.GetWalletCreditsResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/decimal/v1/backoffice/wallet/credits/get\x12\xe6\x01\n" +
-	"\x1dListWalletBalanceTransactions\x12?.api.backoffice.service.v1.ListWalletBalanceTransactionsRequest\x1a@.api.backoffice.service.v1.ListWalletBalanceTransactionsResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/decimal/v1/backoffice/wallet/balance-transactions/list\x12\xde\x01\n" +
-	"\x1bGetWalletCreditTransactions\x12=.api.backoffice.service.v1.GetWalletCreditTransactionsRequest\x1a>.api.backoffice.service.v1.GetWalletCreditTransactionsResponse\"@\x82\xd3\xe4\x93\x02::\x01*\"5/decimal/v1/backoffice/wallet/credit-transactions/get\x12\xa0\x01\n" +
-	"\fUpdateWallet\x12..api.backoffice.service.v1.UpdateWalletRequest\x1a/.api.backoffice.service.v1.UpdateWalletResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/decimal/v1/backoffice/wallet/updateB[\n" +
+	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a-.api.backoffice.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
+	"\x10GetWalletCredits\x122.api.backoffice.service.v1.GetWalletCreditsRequest\x1a3.api.backoffice.service.v1.GetWalletCreditsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/wallet/credits/get\x12\xde\x01\n" +
+	"\x1dListWalletBalanceTransactions\x12?.api.backoffice.service.v1.ListWalletBalanceTransactionsRequest\x1a@.api.backoffice.service.v1.ListWalletBalanceTransactionsResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/wallet/balance-transactions/list\x12\xd6\x01\n" +
+	"\x1bGetWalletCreditTransactions\x12=.api.backoffice.service.v1.GetWalletCreditTransactionsRequest\x1a>.api.backoffice.service.v1.GetWalletCreditTransactionsResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/credit-transactions/get\x12\x98\x01\n" +
+	"\fUpdateWallet\x12..api.backoffice.service.v1.UpdateWalletRequest\x1a/.api.backoffice.service.v1.UpdateWalletResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/wallet/updateB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

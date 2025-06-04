@@ -464,7 +464,7 @@ service Payment {
   // Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
   rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
     option (google.api.http) = {
-      post: "/decimal/v1/payment/method/list"
+      post: "/v1/payment/method/list"
       body: "*"
     };
   }
@@ -474,7 +474,7 @@ service Payment {
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
   rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (CreatePaymentChannelResponse) {
     option (google.api.http) = {
-      post: "/decimal/v1/payment/channel/create"
+      post: "/v1/payment/channel/create"
       body: "*"
     };
   }
@@ -484,7 +484,7 @@ service Payment {
   // Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
   rpc InitiateDeposit(InitiateDepositRequest) returns (InitiateDepositResponse) {
     option (google.api.http) = {
-      post: "/decimal/v1/payment/deposit/initiate"
+      post: "/v1/payment/deposit/initiate"
       body: "*"
     };
   }
@@ -494,7 +494,7 @@ service Payment {
   // Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
   rpc InitiateWithdraw(InitiateWithdrawRequest) returns (InitiateWithdrawResponse) {
     option (google.api.http) = {
-      post: "/decimal/v1/payment/withdraw/initiate"
+      post: "/v1/payment/withdraw/initiate"
       body: "*"
     };
   }
@@ -505,7 +505,7 @@ service Payment {
   // Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
   rpc DepositCallback(DepositCallbackRequest) returns (DepositCallbackResponse) {
     option (google.api.http) = {
-      post: "/decimal/v1/payment/deposit/callback"
+      post: "/v1/payment/deposit/callback"
       body: "*"
     };
   }
@@ -516,7 +516,7 @@ service Payment {
   // Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
   rpc WithdrawCallback(WithdrawCallbackRequest) returns (WithdrawCallbackResponse) {
     option (google.api.http) = {
-      post: "/decimal/v1/payment/withdraw/callback"
+      post: "/v1/payment/withdraw/callback"
       body: "*"
     };
   }
@@ -526,7 +526,7 @@ service Payment {
   // Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
   rpc GetTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) {
     option (google.api.http) = {
-      post: "/decimal/v1/payment/transaction/page"
+      post: "/v1/payment/transaction/page"
       body: "*"
     };
   }
@@ -536,7 +536,7 @@ service Payment {
   // Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
   rpc GetPaymentChannelPage(GetPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) {
     option (google.api.http) = {
-      post: "/decimal/v1/payment/channel/page"
+      post: "/v1/payment/channel/page"
       body: "*"
     };
   }
@@ -546,7 +546,7 @@ service Payment {
   // Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
   rpc GetTransactionDetailById(GetTransactionDetailByIdRequest) returns (GetTransactionDetailByIdResponse) {
     option (google.api.http) = {
-      post: "/decimal/v1/payment/transaction/detail"
+      post: "/v1/payment/transaction/detail"
       body: "*"
     };
   }

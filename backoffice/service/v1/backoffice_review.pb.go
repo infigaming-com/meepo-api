@@ -1764,15 +1764,15 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x0eauthor_user_id\x18\x03 \x01(\x03R\fauthorUserId\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\x89\b\n" +
-	"\x10BackofficeReview\x12\xa3\x01\n" +
-	"\vListTickets\x12-.api.backoffice.service.v1.ListTicketsRequest\x1a..api.backoffice.service.v1.ListTicketsResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/decimal/v1/backoffice/review/tickets/list\x12\x9c\x01\n" +
-	"\tGetTicket\x12+.api.backoffice.service.v1.GetTicketRequest\x1a,.api.backoffice.service.v1.GetTicketResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/decimal/v1/backoffice/review/tickets/get\x12\xa8\x01\n" +
-	"\fReviewTicket\x12..api.backoffice.service.v1.ReviewTicketRequest\x1a/.api.backoffice.service.v1.ReviewTicketResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/decimal/v1/backoffice/review/tickets/review\x12\xa8\x01\n" +
+	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\xd9\a\n" +
+	"\x10BackofficeReview\x12\x9b\x01\n" +
+	"\vListTickets\x12-.api.backoffice.service.v1.ListTicketsRequest\x1a..api.backoffice.service.v1.ListTicketsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/review/tickets/list\x12\x94\x01\n" +
+	"\tGetTicket\x12+.api.backoffice.service.v1.GetTicketRequest\x1a,.api.backoffice.service.v1.GetTicketResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/review/tickets/get\x12\xa0\x01\n" +
+	"\fReviewTicket\x12..api.backoffice.service.v1.ReviewTicketRequest\x1a/.api.backoffice.service.v1.ReviewTicketResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/review/tickets/review\x12\xa0\x01\n" +
 	"\n" +
-	"AddComment\x12,.api.backoffice.service.v1.AddCommentRequest\x1a-.api.backoffice.service.v1.AddCommentResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/decimal/v1/backoffice/review/tickets/comments/add\x12\xa8\x01\n" +
-	"\fCancelTicket\x12..api.backoffice.service.v1.CancelTicketRequest\x1a/.api.backoffice.service.v1.CancelTicketResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/decimal/v1/backoffice/review/tickets/cancel\x12\xae\x01\n" +
-	"\rGetTicketById\x12/.api.backoffice.service.v1.GetTicketByIdRequest\x1a0.api.backoffice.service.v1.GetTicketByIdResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//decimal/v1/backoffice/review/tickets/get_by_idB[\n" +
+	"AddComment\x12,.api.backoffice.service.v1.AddCommentRequest\x1a-.api.backoffice.service.v1.AddCommentResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/review/tickets/comments/add\x12\xa0\x01\n" +
+	"\fCancelTicket\x12..api.backoffice.service.v1.CancelTicketRequest\x1a/.api.backoffice.service.v1.CancelTicketResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/review/tickets/cancel\x12\xa6\x01\n" +
+	"\rGetTicketById\x12/.api.backoffice.service.v1.GetTicketByIdRequest\x1a0.api.backoffice.service.v1.GetTicketByIdResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/review/tickets/get_by_idB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
