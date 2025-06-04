@@ -2916,11 +2916,8 @@ components:
             description: GetOperatorTagsConfigResponse contains the tag configuration settings, now only follow_parent flag.
         api.backoffice.service.v1.GetOperatorTagsRequest:
             type: object
-            properties:
-                operatorId:
-                    type: string
-                    description: The ID of the operator to get tags for.
-            description: GetOperatorTagsRequest contains the operator ID to retrieve tags for.
+            properties: {}
+            description: GetOperatorTagsRequest does not contain any parameters. It will return all tags of user's operator.
         api.backoffice.service.v1.GetOperatorTagsResponse:
             type: object
             properties:

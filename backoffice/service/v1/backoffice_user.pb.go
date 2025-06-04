@@ -1533,11 +1533,9 @@ func (x *GetOperatorTagsConfigResponse) GetFollowParent() bool {
 	return false
 }
 
-// GetOperatorTagsRequest contains the operator ID to retrieve tags for.
+// GetOperatorTagsRequest does not contain any parameters. It will return all tags of user's operator.
 type GetOperatorTagsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The ID of the operator to get tags for.
-	OperatorId    int64 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1570,13 +1568,6 @@ func (x *GetOperatorTagsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetOperatorTagsRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *GetOperatorTagsRequest) GetOperatorId() int64 {
-	if x != nil {
-		return x.OperatorId
-	}
-	return 0
 }
 
 // GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
@@ -2717,10 +2708,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"D\n" +
 	"\x1dGetOperatorTagsConfigResponse\x12#\n" +
-	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\"9\n" +
-	"\x16GetOperatorTagsRequest\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\x03R\n" +
-	"operatorId\"-\n" +
+	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\"\x18\n" +
+	"\x16GetOperatorTagsRequest\"-\n" +
 	"\x17GetOperatorTagsResponse\x12\x12\n" +
 	"\x04tags\x18\x01 \x03(\tR\x04tags\"-\n" +
 	"\x12GetUserTagsRequest\x12\x17\n" +

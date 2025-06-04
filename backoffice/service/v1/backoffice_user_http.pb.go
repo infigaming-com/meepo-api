@@ -66,13 +66,13 @@ func RegisterBackofficeUserHTTPServer(s *http.Server, srv BackofficeUserHTTPServ
 	r.POST("/v1/backoffice/user/comments/add", _BackofficeUser_AddUserComment0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/comments/list", _BackofficeUser_ListUserComments0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/create", _BackofficeUser_CreateUser0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/user/send-email-verification-code", _BackofficeUser_SendEmailVerificationCode0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/send-email-verification-code", _BackofficeUser_SendEmailVerificationCode1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/update", _BackofficeUser_UpdateUser0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/operator-tags/config/set", _BackofficeUser_SetOperatorTagsConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/operator-tags/set", _BackofficeUser_SetOperatorTags0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/operator-tags/config/get", _BackofficeUser_GetOperatorTagsConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/operator-tags/get", _BackofficeUser_GetOperatorTags0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/user/tags/get", _BackofficeUser_GetUserTags0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/tags/get", _BackofficeUser_GetUserTags1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/tags/set", _BackofficeUser_SetUserTags0_HTTP_Handler(srv))
 }
 
@@ -208,7 +208,7 @@ func _BackofficeUser_CreateUser0_HTTP_Handler(srv BackofficeUserHTTPServer) func
 	}
 }
 
-func _BackofficeUser_SendEmailVerificationCode0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+func _BackofficeUser_SendEmailVerificationCode1_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SendEmailVerificationCodeRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -340,7 +340,7 @@ func _BackofficeUser_GetOperatorTags0_HTTP_Handler(srv BackofficeUserHTTPServer)
 	}
 }
 
-func _BackofficeUser_GetUserTags0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+func _BackofficeUser_GetUserTags1_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetUserTagsRequest
 		if err := ctx.Bind(&in); err != nil {
