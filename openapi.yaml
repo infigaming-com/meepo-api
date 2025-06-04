@@ -6097,8 +6097,7 @@ components:
                 amount:
                     type: string
                 jackpotContribution:
-                    type: number
-                    format: float
+                    type: string
                 jackpotWin:
                     type: string
                 betTime:
@@ -6240,11 +6239,9 @@ components:
             type: object
             properties:
                 balance:
-                    type: number
-                    format: double
+                    type: string
                 bonus:
-                    type: number
-                    format: double
+                    type: string
                 roundId:
                     type: string
         api.game.service.v1.Bet:
@@ -6704,8 +6701,7 @@ components:
             type: object
             properties:
                 balance:
-                    type: number
-                    format: double
+                    type: string
                 roundId:
                     type: string
                 transactions:
@@ -6729,11 +6725,10 @@ components:
                 operator_txn_id:
                     type: string
                 processed_at:
-                    type: number
-                    format: double
+                    type: string
+                    format: date-time
                 bonus_amount:
-                    type: number
-                    format: double
+                    type: string
         api.game.service.v1.UrlInfo:
             type: object
             properties:

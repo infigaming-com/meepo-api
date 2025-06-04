@@ -317,8 +317,8 @@ message BalanceRequest {
 
 message BalanceResponse {
 	message Data {
-		double balance = 1;
-		double bonus = 2;
+		string balance = 1;
+		string bonus = 2;
 		string round_id = 3;
 	}
 	Data data = 1;
@@ -352,9 +352,9 @@ message Action {
 	bool update_balance = 5;
 	bool take_all = 6;
 	bool is_refund = 7;
-	int64 amount = 8;
-	float jackpot_contribution = 9;
-	int64 jackpot_win = 10;
+	string amount = 8;
+	string jackpot_contribution = 9;
+	string jackpot_win = 10;
 	int64 bet_time = 11;
 	int64 settle_time = 12;
 	int64 provider_timestamp = 13;
@@ -363,8 +363,8 @@ message Action {
 message Transactions {
 	string txn_id = 1 [json_name="txn_id"];
 	string operator_txn_id = 2 [json_name="operator_txn_id"];
-	double processed_at = 3 [json_name="processed_at"];
-	double bonus_amount = 4 [json_name="bonus_amount"];
+	google.protobuf.Timestamp processed_at = 3 [json_name="processed_at"];
+	string bonus_amount = 4 [json_name="bonus_amount"];
 }
 
 message RollbackRequest {
@@ -389,7 +389,7 @@ message RollbackAction {
 
 message RollbackResponse {
 	message Data {
-		double balance = 1;
+		string balance = 1;
 		string round_id = 2;
 		repeated RollbackTransactions transactions = 3;
 	}
