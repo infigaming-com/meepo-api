@@ -2667,6 +2667,8 @@ func (m *GetOperatorTagsRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for OperatorId
+
 	if len(errors) > 0 {
 		return GetOperatorTagsRequestMultiError(errors)
 	}
