@@ -2024,9 +2024,9 @@ type Action struct {
 	UpdateBalance       bool                   `protobuf:"varint,5,opt,name=update_balance,json=updateBalance,proto3" json:"update_balance,omitempty"`
 	TakeAll             bool                   `protobuf:"varint,6,opt,name=take_all,json=takeAll,proto3" json:"take_all,omitempty"`
 	IsRefund            bool                   `protobuf:"varint,7,opt,name=is_refund,json=isRefund,proto3" json:"is_refund,omitempty"`
-	Amount              int64                  `protobuf:"varint,8,opt,name=amount,proto3" json:"amount,omitempty"`
-	JackpotContribution float32                `protobuf:"fixed32,9,opt,name=jackpot_contribution,json=jackpotContribution,proto3" json:"jackpot_contribution,omitempty"`
-	JackpotWin          int64                  `protobuf:"varint,10,opt,name=jackpot_win,json=jackpotWin,proto3" json:"jackpot_win,omitempty"`
+	Amount              string                 `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"`
+	JackpotContribution string                 `protobuf:"bytes,9,opt,name=jackpot_contribution,json=jackpotContribution,proto3" json:"jackpot_contribution,omitempty"`
+	JackpotWin          string                 `protobuf:"bytes,10,opt,name=jackpot_win,json=jackpotWin,proto3" json:"jackpot_win,omitempty"`
 	BetTime             int64                  `protobuf:"varint,11,opt,name=bet_time,json=betTime,proto3" json:"bet_time,omitempty"`
 	SettleTime          int64                  `protobuf:"varint,12,opt,name=settle_time,json=settleTime,proto3" json:"settle_time,omitempty"`
 	ProviderTimestamp   int64                  `protobuf:"varint,13,opt,name=provider_timestamp,json=providerTimestamp,proto3" json:"provider_timestamp,omitempty"`
@@ -2113,25 +2113,25 @@ func (x *Action) GetIsRefund() bool {
 	return false
 }
 
-func (x *Action) GetAmount() int64 {
+func (x *Action) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
-	return 0
+	return ""
 }
 
-func (x *Action) GetJackpotContribution() float32 {
+func (x *Action) GetJackpotContribution() string {
 	if x != nil {
 		return x.JackpotContribution
 	}
-	return 0
+	return ""
 }
 
-func (x *Action) GetJackpotWin() int64 {
+func (x *Action) GetJackpotWin() string {
 	if x != nil {
 		return x.JackpotWin
 	}
-	return 0
+	return ""
 }
 
 func (x *Action) GetBetTime() int64 {
@@ -2160,7 +2160,7 @@ type Transactions struct {
 	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,proto3" json:"txn_id,omitempty"`
 	OperatorTxnId string                 `protobuf:"bytes,2,opt,name=operator_txn_id,proto3" json:"operator_txn_id,omitempty"`
 	ProcessedAt   float64                `protobuf:"fixed64,3,opt,name=processed_at,proto3" json:"processed_at,omitempty"`
-	BonusAmount   float64                `protobuf:"fixed64,4,opt,name=bonus_amount,proto3" json:"bonus_amount,omitempty"`
+	BonusAmount   string                 `protobuf:"bytes,4,opt,name=bonus_amount,proto3" json:"bonus_amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2216,11 +2216,11 @@ func (x *Transactions) GetProcessedAt() float64 {
 	return 0
 }
 
-func (x *Transactions) GetBonusAmount() float64 {
+func (x *Transactions) GetBonusAmount() string {
 	if x != nil {
 		return x.BonusAmount
 	}
-	return 0
+	return ""
 }
 
 type RollbackRequest struct {
@@ -4256,8 +4256,8 @@ func (x *ListProvidersResponse_Provider) GetEnabled() bool {
 
 type BalanceResponse_Data struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Balance       float64                `protobuf:"fixed64,1,opt,name=balance,proto3" json:"balance,omitempty"`
-	Bonus         float64                `protobuf:"fixed64,2,opt,name=bonus,proto3" json:"bonus,omitempty"`
+	Balance       string                 `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	Bonus         string                 `protobuf:"bytes,2,opt,name=bonus,proto3" json:"bonus,omitempty"`
 	RoundId       string                 `protobuf:"bytes,3,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4293,18 +4293,18 @@ func (*BalanceResponse_Data) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{29, 0}
 }
 
-func (x *BalanceResponse_Data) GetBalance() float64 {
+func (x *BalanceResponse_Data) GetBalance() string {
 	if x != nil {
 		return x.Balance
 	}
-	return 0
+	return ""
 }
 
-func (x *BalanceResponse_Data) GetBonus() float64 {
+func (x *BalanceResponse_Data) GetBonus() string {
 	if x != nil {
 		return x.Bonus
 	}
-	return 0
+	return ""
 }
 
 func (x *BalanceResponse_Data) GetRoundId() string {
@@ -4316,7 +4316,7 @@ func (x *BalanceResponse_Data) GetRoundId() string {
 
 type PlayResponse_Data struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Balance       float64                `protobuf:"fixed64,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	Balance       string                 `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
 	RoundId       string                 `protobuf:"bytes,2,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
 	Transactions  []*Transactions        `protobuf:"bytes,3,rep,name=transactions,proto3" json:"transactions,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -4353,11 +4353,11 @@ func (*PlayResponse_Data) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{31, 0}
 }
 
-func (x *PlayResponse_Data) GetBalance() float64 {
+func (x *PlayResponse_Data) GetBalance() string {
 	if x != nil {
 		return x.Balance
 	}
-	return 0
+	return ""
 }
 
 func (x *PlayResponse_Data) GetRoundId() string {
@@ -4376,7 +4376,7 @@ func (x *PlayResponse_Data) GetTransactions() []*Transactions {
 
 type RollbackResponse_Data struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Balance       float64                 `protobuf:"fixed64,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	Balance       string                  `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
 	RoundId       string                  `protobuf:"bytes,2,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
 	Transactions  []*RollbackTransactions `protobuf:"bytes,3,rep,name=transactions,proto3" json:"transactions,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -4413,11 +4413,11 @@ func (*RollbackResponse_Data) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{36, 0}
 }
 
-func (x *RollbackResponse_Data) GetBalance() float64 {
+func (x *RollbackResponse_Data) GetBalance() string {
 	if x != nil {
 		return x.Balance
 	}
-	return 0
+	return ""
 }
 
 func (x *RollbackResponse_Data) GetRoundId() string {
@@ -5679,8 +5679,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x0fBalanceResponse\x12=\n" +
 	"\x04data\x18\x01 \x01(\v2).api.game.service.v1.BalanceResponse.DataR\x04data\x1aQ\n" +
 	"\x04Data\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\x01R\abalance\x12\x14\n" +
-	"\x05bonus\x18\x02 \x01(\x01R\x05bonus\x12\x19\n" +
+	"\abalance\x18\x01 \x01(\tR\abalance\x12\x14\n" +
+	"\x05bonus\x18\x02 \x01(\tR\x05bonus\x12\x19\n" +
 	"\bround_id\x18\x03 \x01(\tR\aroundId\"\x85\x02\n" +
 	"\vPlayRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
@@ -5695,7 +5695,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\fPlayResponse\x12:\n" +
 	"\x04data\x18\x01 \x01(\v2&.api.game.service.v1.PlayResponse.DataR\x04data\x1a\x82\x01\n" +
 	"\x04Data\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\x01R\abalance\x12\x19\n" +
+	"\abalance\x18\x01 \x01(\tR\abalance\x12\x19\n" +
 	"\bround_id\x18\x02 \x01(\tR\aroundId\x12E\n" +
 	"\ftransactions\x18\x03 \x03(\v2!.api.game.service.v1.TransactionsR\ftransactions\"\xa2\x03\n" +
 	"\x06Action\x12\x16\n" +
@@ -5707,10 +5707,10 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x0eupdate_balance\x18\x05 \x01(\bR\rupdateBalance\x12\x19\n" +
 	"\btake_all\x18\x06 \x01(\bR\atakeAll\x12\x1b\n" +
 	"\tis_refund\x18\a \x01(\bR\bisRefund\x12\x16\n" +
-	"\x06amount\x18\b \x01(\x03R\x06amount\x121\n" +
-	"\x14jackpot_contribution\x18\t \x01(\x02R\x13jackpotContribution\x12\x1f\n" +
+	"\x06amount\x18\b \x01(\tR\x06amount\x121\n" +
+	"\x14jackpot_contribution\x18\t \x01(\tR\x13jackpotContribution\x12\x1f\n" +
 	"\vjackpot_win\x18\n" +
-	" \x01(\x03R\n" +
+	" \x01(\tR\n" +
 	"jackpotWin\x12\x19\n" +
 	"\bbet_time\x18\v \x01(\x03R\abetTime\x12\x1f\n" +
 	"\vsettle_time\x18\f \x01(\x03R\n" +
@@ -5720,7 +5720,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x06txn_id\x18\x01 \x01(\tR\x06txn_id\x12(\n" +
 	"\x0foperator_txn_id\x18\x02 \x01(\tR\x0foperator_txn_id\x12\"\n" +
 	"\fprocessed_at\x18\x03 \x01(\x01R\fprocessed_at\x12\"\n" +
-	"\fbonus_amount\x18\x04 \x01(\x01R\fbonus_amount\"\xf2\x01\n" +
+	"\fbonus_amount\x18\x04 \x01(\tR\fbonus_amount\"\xf2\x01\n" +
 	"\x0fRollbackRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
@@ -5741,7 +5741,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x10RollbackResponse\x12>\n" +
 	"\x04data\x18\x01 \x01(\v2*.api.game.service.v1.RollbackResponse.DataR\x04data\x1a\x8a\x01\n" +
 	"\x04Data\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\x01R\abalance\x12\x19\n" +
+	"\abalance\x18\x01 \x01(\tR\abalance\x12\x19\n" +
 	"\bround_id\x18\x02 \x01(\tR\aroundId\x12M\n" +
 	"\ftransactions\x18\x03 \x03(\v2).api.game.service.v1.RollbackTransactionsR\ftransactions\"x\n" +
 	"\x14RollbackTransactions\x12\x15\n" +
