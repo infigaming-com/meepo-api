@@ -379,10 +379,8 @@ message GetOperatorTagsConfigResponse {
 	bool follow_parent = 1;
 }
 
-// GetOperatorTagsRequest contains the operator ID to retrieve tags for.
+// GetOperatorTagsRequest does not contain any parameters. It will return all tags of user's operator.
 message GetOperatorTagsRequest {
-	// The ID of the operator to get tags for.
-	int64 operator_id = 1;
 }	
 
 // GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
