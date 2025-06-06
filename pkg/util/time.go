@@ -1,8 +1,6 @@
 package util
 
 import (
-	"errors"
-
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -18,18 +16,18 @@ func TimestamppbToUnixMill(t *timestamppb.Timestamp) *int64 {
 // A valid time range means:
 // 1. If either timestamp is nil, the range is considered valid
 // 2. If both timestamps are present, start time must be before or equal to end time
-func IsValidTimestampTimeRange(start, end *timestamppb.Timestamp) (bool, error) {
+func IsValidTimestampTimeRange(start, end *timestamppb.Timestamp) bool {
 	// If either timestamp is nil, consider it valid
 	if start == nil || end == nil {
-		return true, nil
+		return true
 	}
 
 	// Check if start time is before or equal to end time
 	if start.AsTime().After(end.AsTime()) {
-		return false, errors.New("start time must be before or equal to end time")
+		return false
 	}
 
-	return true, nil
+	return true
 }
 
 // IsValidInt64TimeRange validates if the given time range is valid.
@@ -38,10 +36,10 @@ func IsValidTimestampTimeRange(start, end *timestamppb.Timestamp) (bool, error) 
 // 2. If both timestamps are present:
 //   - They must be of the same type (both Unix or both UnixMilli)
 //   - Start time must be before or equal to end time
-func IsValidInt64TimeRange(start, end *int64) (bool, error) {
+func IsValidInt64TimeRange(start, end *int64) bool {
 	// If either timestamp is nil, consider it valid
 	if start == nil || end == nil {
-		return true, nil
+		return true
 	}
 
 	// Check if both timestamps are of the same type
@@ -51,12 +49,12 @@ func IsValidInt64TimeRange(start, end *int64) (bool, error) {
 	startIsUnix := *start < unixMilliThreshold
 	endIsUnix := *end < unixMilliThreshold
 	if startIsUnix != endIsUnix {
-		return false, errors.New("timestamps must be of the same type (both Unix or both UnixMilli)")
+		return false
 	}
 
 	if *start > *end {
-		return false, errors.New("start time must be before or equal to end time")
+		return false
 	}
 
-	return true, nil
+	return true
 }
