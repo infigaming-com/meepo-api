@@ -14,11 +14,11 @@ func TimestamppbToUnixMill(t *timestamppb.Timestamp) *int64 {
 	return &unixMilli
 }
 
-// CheckTimestampTimeRange validates if the given time range is valid.
+// IsValidTimestampTimeRange validates if the given time range is valid.
 // A valid time range means:
 // 1. If either timestamp is nil, the range is considered valid
 // 2. If both timestamps are present, start time must be before or equal to end time
-func CheckTimestampTimeRange(start, end *timestamppb.Timestamp) (bool, error) {
+func IsValidTimestampTimeRange(start, end *timestamppb.Timestamp) (bool, error) {
 	// If either timestamp is nil, consider it valid
 	if start == nil || end == nil {
 		return true, nil
@@ -32,13 +32,14 @@ func CheckTimestampTimeRange(start, end *timestamppb.Timestamp) (bool, error) {
 	return true, nil
 }
 
-// CheckInt64TimeRange validates if the given time range is valid.
+// IsValidInt64TimeRange validates if the given time range is valid.
 // A valid time range means:
 // 1. If either timestamp is nil, the range is considered valid
 // 2. If both timestamps are present:
 //   - They must be of the same type (both Unix or both UnixMilli)
 //   - Start time must be before or equal to end time
-func CheckInt64TimeRange(start, end *int64) (bool, error) {
+func IsValidInt64TimeRange(start, end *int64) (bool, error) {
+	// If either timestamp is nil, consider it valid
 	if start == nil || end == nil {
 		return true, nil
 	}
