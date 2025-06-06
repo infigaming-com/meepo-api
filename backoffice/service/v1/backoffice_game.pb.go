@@ -689,8 +689,8 @@ type ListBetsRequest struct {
 	SettlementCurrencyOption isListBetsRequest_SettlementCurrencyOption `protobuf_oneof:"settlement_currency_option"`
 	Categories               []string                                   `protobuf:"bytes,12,rep,name=categories,proto3" json:"categories,omitempty"`
 	Status                   *string                                    `protobuf:"bytes,13,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	Page                     *int64                                     `protobuf:"varint,14,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize                 *int64                                     `protobuf:"varint,15,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page                     *int32                                     `protobuf:"varint,14,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize                 *int32                                     `protobuf:"varint,15,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -827,14 +827,14 @@ func (x *ListBetsRequest) GetStatus() string {
 	return ""
 }
 
-func (x *ListBetsRequest) GetPage() int64 {
+func (x *ListBetsRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListBetsRequest) GetPageSize() int64 {
+func (x *ListBetsRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
@@ -1116,9 +1116,9 @@ type ListBetsResponse struct {
 	WinAmount     string                 `protobuf:"bytes,3,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
 	BetCount      int32                  `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
 	RtpPercentage int32                  `protobuf:"varint,5,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"` // value from 0 to 100
-	Page          int64                  `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int64                  `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total         int64                  `protobuf:"varint,8,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                  `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                  `protobuf:"varint,8,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1188,21 +1188,21 @@ func (x *ListBetsResponse) GetRtpPercentage() int32 {
 	return 0
 }
 
-func (x *ListBetsResponse) GetPage() int64 {
+func (x *ListBetsResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListBetsResponse) GetPageSize() int64 {
+func (x *ListBetsResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *ListBetsResponse) GetTotal() int64 {
+func (x *ListBetsResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
 	}
@@ -1312,14 +1312,14 @@ type GetUserBetsOverviewRequest struct {
 	GameNames     []string               `protobuf:"bytes,3,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameId        *string                `protobuf:"bytes,4,opt,name=game_id,json=gameId,proto3,oneof" json:"game_id,omitempty"`
 	Currencies    []string               `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	BetAmountMin  *int64                 `protobuf:"varint,6,opt,name=bet_amount_min,json=betAmountMin,proto3,oneof" json:"bet_amount_min,omitempty"`
-	BetAmountMax  *int64                 `protobuf:"varint,7,opt,name=bet_amount_max,json=betAmountMax,proto3,oneof" json:"bet_amount_max,omitempty"`
-	WinAmountMin  *int64                 `protobuf:"varint,8,opt,name=win_amount_min,json=winAmountMin,proto3,oneof" json:"win_amount_min,omitempty"`
-	WinAmountMax  *int64                 `protobuf:"varint,9,opt,name=win_amount_max,json=winAmountMax,proto3,oneof" json:"win_amount_max,omitempty"`
+	BetAmountMin  *string                `protobuf:"bytes,6,opt,name=bet_amount_min,json=betAmountMin,proto3,oneof" json:"bet_amount_min,omitempty"`
+	BetAmountMax  *string                `protobuf:"bytes,7,opt,name=bet_amount_max,json=betAmountMax,proto3,oneof" json:"bet_amount_max,omitempty"`
+	WinAmountMin  *string                `protobuf:"bytes,8,opt,name=win_amount_min,json=winAmountMin,proto3,oneof" json:"win_amount_min,omitempty"`
+	WinAmountMax  *string                `protobuf:"bytes,9,opt,name=win_amount_max,json=winAmountMax,proto3,oneof" json:"win_amount_max,omitempty"`
 	StartTime     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page          *int64                 `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int64                 `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page          *int32                 `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                 `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1389,32 +1389,32 @@ func (x *GetUserBetsOverviewRequest) GetCurrencies() []string {
 	return nil
 }
 
-func (x *GetUserBetsOverviewRequest) GetBetAmountMin() int64 {
+func (x *GetUserBetsOverviewRequest) GetBetAmountMin() string {
 	if x != nil && x.BetAmountMin != nil {
 		return *x.BetAmountMin
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserBetsOverviewRequest) GetBetAmountMax() int64 {
+func (x *GetUserBetsOverviewRequest) GetBetAmountMax() string {
 	if x != nil && x.BetAmountMax != nil {
 		return *x.BetAmountMax
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserBetsOverviewRequest) GetWinAmountMin() int64 {
+func (x *GetUserBetsOverviewRequest) GetWinAmountMin() string {
 	if x != nil && x.WinAmountMin != nil {
 		return *x.WinAmountMin
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserBetsOverviewRequest) GetWinAmountMax() int64 {
+func (x *GetUserBetsOverviewRequest) GetWinAmountMax() string {
 	if x != nil && x.WinAmountMax != nil {
 		return *x.WinAmountMax
 	}
-	return 0
+	return ""
 }
 
 func (x *GetUserBetsOverviewRequest) GetStartTime() *timestamppb.Timestamp {
@@ -1431,14 +1431,14 @@ func (x *GetUserBetsOverviewRequest) GetEndTime() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *GetUserBetsOverviewRequest) GetPage() int64 {
+func (x *GetUserBetsOverviewRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *GetUserBetsOverviewRequest) GetPageSize() int64 {
+func (x *GetUserBetsOverviewRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
@@ -1448,12 +1448,12 @@ func (x *GetUserBetsOverviewRequest) GetPageSize() int64 {
 type GetUserBetsOverviewResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Rounds        int64                  `protobuf:"varint,1,opt,name=rounds,proto3" json:"rounds,omitempty"`
-	BetCount      int64                  `protobuf:"varint,2,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	Turnover      int64                  `protobuf:"varint,3,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	BetAmount     int64                  `protobuf:"varint,4,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
-	WinAmount     int64                  `protobuf:"varint,5,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
-	Ggr           int64                  `protobuf:"varint,6,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	Ngr           int64                  `protobuf:"varint,7,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	BetCount      int32                  `protobuf:"varint,2,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	Turnover      string                 `protobuf:"bytes,3,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	BetAmount     string                 `protobuf:"bytes,4,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
+	WinAmount     string                 `protobuf:"bytes,5,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	Ggr           string                 `protobuf:"bytes,6,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	Ngr           string                 `protobuf:"bytes,7,opt,name=ngr,proto3" json:"ngr,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1495,46 +1495,46 @@ func (x *GetUserBetsOverviewResponse) GetRounds() int64 {
 	return 0
 }
 
-func (x *GetUserBetsOverviewResponse) GetBetCount() int64 {
+func (x *GetUserBetsOverviewResponse) GetBetCount() int32 {
 	if x != nil {
 		return x.BetCount
 	}
 	return 0
 }
 
-func (x *GetUserBetsOverviewResponse) GetTurnover() int64 {
+func (x *GetUserBetsOverviewResponse) GetTurnover() string {
 	if x != nil {
 		return x.Turnover
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserBetsOverviewResponse) GetBetAmount() int64 {
+func (x *GetUserBetsOverviewResponse) GetBetAmount() string {
 	if x != nil {
 		return x.BetAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserBetsOverviewResponse) GetWinAmount() int64 {
+func (x *GetUserBetsOverviewResponse) GetWinAmount() string {
 	if x != nil {
 		return x.WinAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserBetsOverviewResponse) GetGgr() int64 {
+func (x *GetUserBetsOverviewResponse) GetGgr() string {
 	if x != nil {
 		return x.Ggr
 	}
-	return 0
+	return ""
 }
 
-func (x *GetUserBetsOverviewResponse) GetNgr() int64 {
+func (x *GetUserBetsOverviewResponse) GetNgr() string {
 	if x != nil {
 		return x.Ngr
 	}
-	return 0
+	return ""
 }
 
 type GetGameTransactionsForBetRequest struct {
@@ -1646,8 +1646,8 @@ type ListGamesRequest struct {
 	SupportCurrencies   []string               `protobuf:"bytes,9,rep,name=support_currencies,json=supportCurrencies,proto3" json:"support_currencies,omitempty"`
 	RestrictedCountries []string               `protobuf:"bytes,10,rep,name=restricted_countries,json=restrictedCountries,proto3" json:"restricted_countries,omitempty"`
 	Enabled             *bool                  `protobuf:"varint,11,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Page                *int64                 `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize            *int64                 `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page                *int32                 `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize            *int32                 `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1759,14 +1759,14 @@ func (x *ListGamesRequest) GetEnabled() bool {
 	return false
 }
 
-func (x *ListGamesRequest) GetPage() int64 {
+func (x *ListGamesRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListGamesRequest) GetPageSize() int64 {
+func (x *ListGamesRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
@@ -1776,11 +1776,10 @@ func (x *ListGamesRequest) GetPageSize() int64 {
 type ListGamesResponse struct {
 	state         protoimpl.MessageState    `protogen:"open.v1"`
 	Games         []*ListGamesResponse_Game `protobuf:"bytes,1,rep,name=games,proto3" json:"games,omitempty"`
-	Page          int64                     `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int64                     `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total         int64                     `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
-	TotalEnabled  int64                     `protobuf:"varint,5,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
-	TotalDisabled int64                     `protobuf:"varint,6,opt,name=total_disabled,json=totalDisabled,proto3" json:"total_disabled,omitempty"`
+	PageSize      int32                     `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                     `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	TotalEnabled  int32                     `protobuf:"varint,5,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
+	TotalDisabled int32                     `protobuf:"varint,6,opt,name=total_disabled,json=totalDisabled,proto3" json:"total_disabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1822,35 +1821,28 @@ func (x *ListGamesResponse) GetGames() []*ListGamesResponse_Game {
 	return nil
 }
 
-func (x *ListGamesResponse) GetPage() int64 {
-	if x != nil {
-		return x.Page
-	}
-	return 0
-}
-
-func (x *ListGamesResponse) GetPageSize() int64 {
+func (x *ListGamesResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *ListGamesResponse) GetTotal() int64 {
+func (x *ListGamesResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
 	}
 	return 0
 }
 
-func (x *ListGamesResponse) GetTotalEnabled() int64 {
+func (x *ListGamesResponse) GetTotalEnabled() int32 {
 	if x != nil {
 		return x.TotalEnabled
 	}
 	return 0
 }
 
-func (x *ListGamesResponse) GetTotalDisabled() int64 {
+func (x *ListGamesResponse) GetTotalDisabled() int32 {
 	if x != nil {
 		return x.TotalDisabled
 	}
@@ -3174,7 +3166,7 @@ type GetBetByIdResponse_Bet struct {
 	GameId                 string                       `protobuf:"bytes,13,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	GameName               string                       `protobuf:"bytes,14,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
 	GameCategory           string                       `protobuf:"bytes,15,opt,name=game_category,json=gameCategory,proto3" json:"game_category,omitempty"`
-	WinCount               int64                        `protobuf:"varint,16,opt,name=win_count,json=winCount,proto3" json:"win_count,omitempty"`
+	WinCount               int32                        `protobuf:"varint,16,opt,name=win_count,json=winCount,proto3" json:"win_count,omitempty"`
 	BetAmount              string                       `protobuf:"bytes,17,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
 	BetAmountUsd           string                       `protobuf:"bytes,18,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
 	SettlementBetAmount    string                       `protobuf:"bytes,19,opt,name=settlement_bet_amount,json=settlementBetAmount,proto3" json:"settlement_bet_amount,omitempty"`
@@ -3331,7 +3323,7 @@ func (x *GetBetByIdResponse_Bet) GetGameCategory() string {
 	return ""
 }
 
-func (x *GetBetByIdResponse_Bet) GetWinCount() int64 {
+func (x *GetBetByIdResponse_Bet) GetWinCount() int32 {
 	if x != nil {
 		return x.WinCount
 	}
@@ -3460,17 +3452,17 @@ func (x *GetBetByIdResponse_Bet) GetActions() []*GetBetByIdResponse_Action {
 type GetGameTransactionsForBetResponse_GameTransaction struct {
 	state                 protoimpl.MessageState                                    `protogen:"open.v1"`
 	Action                string                                                    `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
-	Operator              string                                                    `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
+	OperatorName          string                                                    `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	CreatedAt             *timestamppb.Timestamp                                    `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt             *timestamppb.Timestamp                                    `protobuf:"bytes,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Category              string                                                    `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
+	GameCategory          string                                                    `protobuf:"bytes,5,opt,name=game_category,json=gameCategory,proto3" json:"game_category,omitempty"`
 	GameId                string                                                    `protobuf:"bytes,6,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	Provider              string                                                    `protobuf:"bytes,7,opt,name=provider,proto3" json:"provider,omitempty"`
+	ProviderName          string                                                    `protobuf:"bytes,7,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
 	OperatorTransactionId int64                                                     `protobuf:"varint,8,opt,name=operator_transaction_id,json=operatorTransactionId,proto3" json:"operator_transaction_id,omitempty"`
 	ProviderTransactionId string                                                    `protobuf:"bytes,9,opt,name=provider_transaction_id,json=providerTransactionId,proto3" json:"provider_transaction_id,omitempty"`
 	UserId                int64                                                     `protobuf:"varint,10,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Amount                *GetGameTransactionsForBetResponse_GameTransaction_Amount `protobuf:"bytes,11,opt,name=amount,proto3" json:"amount,omitempty"`
-	ValidBetAmount        int64                                                     `protobuf:"varint,12,opt,name=valid_bet_amount,json=validBetAmount,proto3" json:"valid_bet_amount,omitempty"`
+	ValidBetAmount        string                                                    `protobuf:"bytes,12,opt,name=valid_bet_amount,json=validBetAmount,proto3" json:"valid_bet_amount,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -3512,9 +3504,9 @@ func (x *GetGameTransactionsForBetResponse_GameTransaction) GetAction() string {
 	return ""
 }
 
-func (x *GetGameTransactionsForBetResponse_GameTransaction) GetOperator() string {
+func (x *GetGameTransactionsForBetResponse_GameTransaction) GetOperatorName() string {
 	if x != nil {
-		return x.Operator
+		return x.OperatorName
 	}
 	return ""
 }
@@ -3533,9 +3525,9 @@ func (x *GetGameTransactionsForBetResponse_GameTransaction) GetUpdatedAt() *time
 	return nil
 }
 
-func (x *GetGameTransactionsForBetResponse_GameTransaction) GetCategory() string {
+func (x *GetGameTransactionsForBetResponse_GameTransaction) GetGameCategory() string {
 	if x != nil {
-		return x.Category
+		return x.GameCategory
 	}
 	return ""
 }
@@ -3547,9 +3539,9 @@ func (x *GetGameTransactionsForBetResponse_GameTransaction) GetGameId() string {
 	return ""
 }
 
-func (x *GetGameTransactionsForBetResponse_GameTransaction) GetProvider() string {
+func (x *GetGameTransactionsForBetResponse_GameTransaction) GetProviderName() string {
 	if x != nil {
-		return x.Provider
+		return x.ProviderName
 	}
 	return ""
 }
@@ -3582,17 +3574,17 @@ func (x *GetGameTransactionsForBetResponse_GameTransaction) GetAmount() *GetGame
 	return nil
 }
 
-func (x *GetGameTransactionsForBetResponse_GameTransaction) GetValidBetAmount() int64 {
+func (x *GetGameTransactionsForBetResponse_GameTransaction) GetValidBetAmount() string {
 	if x != nil {
 		return x.ValidBetAmount
 	}
-	return 0
+	return ""
 }
 
 type GetGameTransactionsForBetResponse_GameTransaction_Amount struct {
 	state                      protoimpl.MessageState `protogen:"open.v1"`
-	AmountInCurrency           int64                  `protobuf:"varint,1,opt,name=amount_in_currency,json=amountInCurrency,proto3" json:"amount_in_currency,omitempty"`
-	AmountInSettlementCurrency int64                  `protobuf:"varint,2,opt,name=amount_in_settlement_currency,json=amountInSettlementCurrency,proto3" json:"amount_in_settlement_currency,omitempty"`
+	AmountInCurrency           string                 `protobuf:"bytes,1,opt,name=amount_in_currency,json=amountInCurrency,proto3" json:"amount_in_currency,omitempty"`
+	AmountInSettlementCurrency string                 `protobuf:"bytes,2,opt,name=amount_in_settlement_currency,json=amountInSettlementCurrency,proto3" json:"amount_in_settlement_currency,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -3627,18 +3619,18 @@ func (*GetGameTransactionsForBetResponse_GameTransaction_Amount) Descriptor() ([
 	return file_backoffice_service_v1_backoffice_game_proto_rawDescGZIP(), []int{22, 0, 0}
 }
 
-func (x *GetGameTransactionsForBetResponse_GameTransaction_Amount) GetAmountInCurrency() int64 {
+func (x *GetGameTransactionsForBetResponse_GameTransaction_Amount) GetAmountInCurrency() string {
 	if x != nil {
 		return x.AmountInCurrency
 	}
-	return 0
+	return ""
 }
 
-func (x *GetGameTransactionsForBetResponse_GameTransaction_Amount) GetAmountInSettlementCurrency() int64 {
+func (x *GetGameTransactionsForBetResponse_GameTransaction_Amount) GetAmountInSettlementCurrency() string {
 	if x != nil {
 		return x.AmountInSettlementCurrency
 	}
-	return 0
+	return ""
 }
 
 type ListGamesResponse_Game struct {
@@ -3803,7 +3795,7 @@ type ListProviderRatesResponse_ProviderRate struct {
 	ProviderName  string                 `protobuf:"bytes,2,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
 	FeeGroup      string                 `protobuf:"bytes,3,opt,name=fee_group,json=feeGroup,proto3" json:"fee_group,omitempty"`
 	Currency      string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	Rate          float64                `protobuf:"fixed64,5,opt,name=rate,proto3" json:"rate,omitempty"`
+	Rate          string                 `protobuf:"bytes,5,opt,name=rate,proto3" json:"rate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3866,11 +3858,11 @@ func (x *ListProviderRatesResponse_ProviderRate) GetCurrency() string {
 	return ""
 }
 
-func (x *ListProviderRatesResponse_ProviderRate) GetRate() float64 {
+func (x *ListProviderRatesResponse_ProviderRate) GetRate() string {
 	if x != nil {
 		return x.Rate
 	}
-	return 0
+	return ""
 }
 
 var File_backoffice_service_v1_backoffice_game_proto protoreflect.FileDescriptor
@@ -3955,8 +3947,8 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"categories\x18\f \x03(\tR\n" +
 	"categories\x12\x1b\n" +
 	"\x06status\x18\r \x01(\tH\bR\x06status\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x0e \x01(\x03H\tR\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x0f \x01(\x03H\n" +
+	"\x04page\x18\x0e \x01(\x05H\tR\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x0f \x01(\x05H\n" +
 	"R\bpageSize\x88\x01\x01\x1a\xa7\x02\n" +
 	"\x11CurrencyWithRange\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12)\n" +
@@ -4030,9 +4022,9 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"win_amount\x18\x03 \x01(\tR\twinAmount\x12\x1b\n" +
 	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12%\n" +
 	"\x0ertp_percentage\x18\x05 \x01(\x05R\rrtpPercentage\x12\x12\n" +
-	"\x04page\x18\x06 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x03R\bpageSize\x12\x14\n" +
-	"\x05total\x18\b \x01(\x03R\x05total\"l\n" +
+	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\b \x01(\x05R\x05total\"l\n" +
 	"\x11GetBetByIdRequest\x12\x15\n" +
 	"\x06bet_id\x18\x01 \x01(\x03R\x05betId\x12,\n" +
 	"\x0finclude_actions\x18\x02 \x01(\bH\x00R\x0eincludeActions\x88\x01\x01B\x12\n" +
@@ -4107,7 +4099,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\agame_id\x18\r \x01(\tR\x06gameId\x12\x1b\n" +
 	"\tgame_name\x18\x0e \x01(\tR\bgameName\x12#\n" +
 	"\rgame_category\x18\x0f \x01(\tR\fgameCategory\x12\x1b\n" +
-	"\twin_count\x18\x10 \x01(\x03R\bwinCount\x12\x1d\n" +
+	"\twin_count\x18\x10 \x01(\x05R\bwinCount\x12\x1d\n" +
 	"\n" +
 	"bet_amount\x18\x11 \x01(\tR\tbetAmount\x12$\n" +
 	"\x0ebet_amount_usd\x18\x12 \x01(\tR\fbetAmountUsd\x122\n" +
@@ -4138,16 +4130,16 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
 	"currencies\x12)\n" +
-	"\x0ebet_amount_min\x18\x06 \x01(\x03H\x01R\fbetAmountMin\x88\x01\x01\x12)\n" +
-	"\x0ebet_amount_max\x18\a \x01(\x03H\x02R\fbetAmountMax\x88\x01\x01\x12)\n" +
-	"\x0ewin_amount_min\x18\b \x01(\x03H\x03R\fwinAmountMin\x88\x01\x01\x12)\n" +
-	"\x0ewin_amount_max\x18\t \x01(\x03H\x04R\fwinAmountMax\x88\x01\x01\x12>\n" +
+	"\x0ebet_amount_min\x18\x06 \x01(\tH\x01R\fbetAmountMin\x88\x01\x01\x12)\n" +
+	"\x0ebet_amount_max\x18\a \x01(\tH\x02R\fbetAmountMax\x88\x01\x01\x12)\n" +
+	"\x0ewin_amount_min\x18\b \x01(\tH\x03R\fwinAmountMin\x88\x01\x01\x12)\n" +
+	"\x0ewin_amount_max\x18\t \x01(\tH\x04R\fwinAmountMax\x88\x01\x01\x12>\n" +
 	"\n" +
 	"start_time\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampH\x05R\tstartTime\x88\x01\x01\x12:\n" +
 	"\bend_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampH\x06R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\f \x01(\x03H\aR\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\r \x01(\x03H\bR\bpageSize\x88\x01\x01B\n" +
+	"\x04page\x18\f \x01(\x05H\aR\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\r \x01(\x05H\bR\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_game_idB\x11\n" +
 	"\x0f_bet_amount_minB\x11\n" +
@@ -4161,38 +4153,38 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"_page_size\"\xd0\x01\n" +
 	"\x1bGetUserBetsOverviewResponse\x12\x16\n" +
 	"\x06rounds\x18\x01 \x01(\x03R\x06rounds\x12\x1b\n" +
-	"\tbet_count\x18\x02 \x01(\x03R\bbetCount\x12\x1a\n" +
-	"\bturnover\x18\x03 \x01(\x03R\bturnover\x12\x1d\n" +
+	"\tbet_count\x18\x02 \x01(\x05R\bbetCount\x12\x1a\n" +
+	"\bturnover\x18\x03 \x01(\tR\bturnover\x12\x1d\n" +
 	"\n" +
-	"bet_amount\x18\x04 \x01(\x03R\tbetAmount\x12\x1d\n" +
+	"bet_amount\x18\x04 \x01(\tR\tbetAmount\x12\x1d\n" +
 	"\n" +
-	"win_amount\x18\x05 \x01(\x03R\twinAmount\x12\x10\n" +
-	"\x03ggr\x18\x06 \x01(\x03R\x03ggr\x12\x10\n" +
-	"\x03ngr\x18\a \x01(\x03R\x03ngr\"T\n" +
+	"win_amount\x18\x05 \x01(\tR\twinAmount\x12\x10\n" +
+	"\x03ggr\x18\x06 \x01(\tR\x03ggr\x12\x10\n" +
+	"\x03ngr\x18\a \x01(\tR\x03ngr\"T\n" +
 	" GetGameTransactionsForBetRequest\x12\x19\n" +
 	"\bround_id\x18\x01 \x01(\tR\aroundId\x12\x15\n" +
-	"\x06bet_id\x18\x02 \x01(\tR\x05betId\"\xc8\x06\n" +
+	"\x06bet_id\x18\x02 \x01(\tR\x05betId\"\xe3\x06\n" +
 	"!GetGameTransactionsForBetResponse\x12y\n" +
-	"\x11game_transactions\x18\x01 \x03(\v2L.api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransactionR\x10gameTransactions\x1a\xa7\x05\n" +
+	"\x11game_transactions\x18\x01 \x03(\v2L.api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransactionR\x10gameTransactions\x1a\xc2\x05\n" +
 	"\x0fGameTransaction\x12\x16\n" +
-	"\x06action\x18\x01 \x01(\tR\x06action\x12\x1a\n" +
-	"\boperator\x18\x02 \x01(\tR\boperator\x129\n" +
+	"\x06action\x18\x01 \x01(\tR\x06action\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x1a\n" +
-	"\bcategory\x18\x05 \x01(\tR\bcategory\x12\x17\n" +
-	"\agame_id\x18\x06 \x01(\tR\x06gameId\x12\x1a\n" +
-	"\bprovider\x18\a \x01(\tR\bprovider\x126\n" +
+	"updated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12#\n" +
+	"\rgame_category\x18\x05 \x01(\tR\fgameCategory\x12\x17\n" +
+	"\agame_id\x18\x06 \x01(\tR\x06gameId\x12#\n" +
+	"\rprovider_name\x18\a \x01(\tR\fproviderName\x126\n" +
 	"\x17operator_transaction_id\x18\b \x01(\x03R\x15operatorTransactionId\x126\n" +
 	"\x17provider_transaction_id\x18\t \x01(\tR\x15providerTransactionId\x12\x17\n" +
 	"\auser_id\x18\n" +
 	" \x01(\x03R\x06userId\x12k\n" +
 	"\x06amount\x18\v \x01(\v2S.api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.AmountR\x06amount\x12(\n" +
-	"\x10valid_bet_amount\x18\f \x01(\x03R\x0evalidBetAmount\x1ay\n" +
+	"\x10valid_bet_amount\x18\f \x01(\tR\x0evalidBetAmount\x1ay\n" +
 	"\x06Amount\x12,\n" +
-	"\x12amount_in_currency\x18\x01 \x01(\x03R\x10amountInCurrency\x12A\n" +
-	"\x1damount_in_settlement_currency\x18\x02 \x01(\x03R\x1aamountInSettlementCurrency\"\xb5\x04\n" +
+	"\x12amount_in_currency\x18\x01 \x01(\tR\x10amountInCurrency\x12A\n" +
+	"\x1damount_in_settlement_currency\x18\x02 \x01(\tR\x1aamountInSettlementCurrency\"\xb5\x04\n" +
 	"\x10ListGamesRequest\x12!\n" +
 	"\fprovider_ids\x18\x01 \x03(\tR\vproviderIds\x12\x1e\n" +
 	"\n" +
@@ -4209,8 +4201,8 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x14restricted_countries\x18\n" +
 	" \x03(\tR\x13restrictedCountries\x12\x1d\n" +
 	"\aenabled\x18\v \x01(\bH\x03R\aenabled\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\f \x01(\x03H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\r \x01(\x03H\x05R\bpageSize\x88\x01\x01B\n" +
+	"\x04page\x18\f \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\r \x01(\x05H\x05R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_game_idB\x14\n" +
 	"\x12_support_bonus_buyB\x10\n" +
@@ -4219,14 +4211,13 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\b_enabledB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xb4\x05\n" +
+	"_page_size\"\xa0\x05\n" +
 	"\x11ListGamesResponse\x12G\n" +
-	"\x05games\x18\x01 \x03(\v21.api.backoffice.service.v1.ListGamesResponse.GameR\x05games\x12\x12\n" +
-	"\x04page\x18\x02 \x01(\x03R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x03 \x01(\x03R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\x12#\n" +
-	"\rtotal_enabled\x18\x05 \x01(\x03R\ftotalEnabled\x12%\n" +
-	"\x0etotal_disabled\x18\x06 \x01(\x03R\rtotalDisabled\x1a\xc2\x03\n" +
+	"\x05games\x18\x01 \x03(\v21.api.backoffice.service.v1.ListGamesResponse.GameR\x05games\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x12#\n" +
+	"\rtotal_enabled\x18\x05 \x01(\x05R\ftotalEnabled\x12%\n" +
+	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\xc2\x03\n" +
 	"\x04Game\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n" +
 	"\bprovider\x18\x02 \x01(\tR\bprovider\x12\x0e\n" +
@@ -4279,7 +4270,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\x12\x1b\n" +
 	"\tfee_group\x18\x03 \x01(\tR\bfeeGroup\x12\x1a\n" +
 	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12\x12\n" +
-	"\x04rate\x18\x05 \x01(\x01R\x04rate\"F\n" +
+	"\x04rate\x18\x05 \x01(\tR\x04rate\"F\n" +
 	"\x1dGetGameTransactionByIdRequest\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xe8\f\n" +
 	"\x1eGetGameTransactionByIdResponse\x12\x0e\n" +

@@ -139,8 +139,8 @@ message ListSummariesResponse {
 		string date = 1;
 		string operator_name = 2;
 		string country = 3;
-		int64 visits = 4;
-		int64 unique_visits = 5;
+		int32 visits = 4;
+		int32 unique_visits = 5;
 		int32 active_users = 6;
 		int32 registered_users = 7;
 		int32 deposited_users = 8;
@@ -201,7 +201,7 @@ message GetGameSummaryResponse {
 	string turnover = 1;
 	string win_amount =  2;
 	string ggr = 3;
-	int64 bet_count = 4;
+	int32 bet_count = 4;
 	string average_bet_amount = 5;
 	string rtp_percentage = 6;
 }
@@ -227,7 +227,7 @@ message GetGameDataResponse {
 		string game_type = 4;
 		string game_name = 5;
 		string game_id = 6;
-		int64 player_count = 7;
+		int32 player_count = 7;
 		string turnover = 8;
 		string turnover_usd = 9;
 		string turnover_percentage = 10;
@@ -236,7 +236,7 @@ message GetGameDataResponse {
 		string ggr = 13;
 		string ggr_usd = 14;
 		string ggr_percentage = 15;
-		int64 bet_count = 16;
+		int32 bet_count = 16;
 		string average_bet_amount = 17;
 		string rtp_percentage = 18;
 	}
@@ -262,7 +262,7 @@ message GetPlayerGameSummaryResponse {
 	string turnover = 1;
 	string win_amount = 2;
 	string ggr = 3;
-	int64 bet_count = 4;
+	int32 bet_count = 4;
 	string average_bet_amount = 5;
 	string rtp_percentage = 6;
 }
@@ -289,7 +289,7 @@ message GetPlayerGameDataResponse {
 		string game_type = 4;
 		string game_id = 5;
 		string game_name = 6;
-		string user_id = 7;
+		int64 user_id = 7;
 		string turnover = 8;
 		string turnover_usd = 9;
 		string win_amount = 10;
@@ -297,7 +297,7 @@ message GetPlayerGameDataResponse {
 		string ggr = 12;
 		string ggr_usd = 13;
 		string rtp_percentage = 14;
-		int64 bet_count = 15;
+		int32 bet_count = 15;
 		string average_bet_amount = 16;
 	}
 	repeated List list = 7;
@@ -557,8 +557,8 @@ message ListWithdrawVtgDetailsResponse {
 		string repeated_withdraw_amount = 13;
 		string repeated_withdraw_amount_usd = 14;
 		int32 repeated_withdraw_users = 15;
-		int64 same_day_ftw = 16;
-		int64 non_same_day_ftw = 17;
+		int32 same_day_ftw = 16;
+		int32 non_same_day_ftw = 17;
 		string average_ftw_amount_for_same_day_registred_users = 18;
 		string average_ftw_amount_usd_for_same_day_registred_users = 19;
 		string average_ftw_amount_for_non_same_day_registred_users = 20;

@@ -604,13 +604,13 @@ type PaymentChannelInfo struct {
 	// URL to the logo image for this payment channel
 	Logo string `protobuf:"bytes,12,opt,name=logo,proto3" json:"logo,omitempty"`
 	// Minimum amount allowed for deposit transactions
-	MinDepositAmount int64 `protobuf:"varint,13,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
+	MinDepositAmount string `protobuf:"bytes,13,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
 	// Maximum amount allowed for deposit transactions
-	MaxDepositAmount int64 `protobuf:"varint,14,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
+	MaxDepositAmount string `protobuf:"bytes,14,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
 	// Minimum amount allowed for withdrawal transactions
-	MinWithdrawAmount int64 `protobuf:"varint,15,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
+	MinWithdrawAmount string `protobuf:"bytes,15,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
 	// Maximum amount allowed for withdrawal transactions
-	MaxWithdrawAmount int64 `protobuf:"varint,16,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
+	MaxWithdrawAmount string `protobuf:"bytes,16,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
 	// Estimated arrival time in minutes
 	Eat int32 `protobuf:"varint,17,opt,name=eat,proto3" json:"eat,omitempty"`
 	// JSON schema defining deposit form fields required by this channel
@@ -735,32 +735,32 @@ func (x *PaymentChannelInfo) GetLogo() string {
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetMinDepositAmount() int64 {
+func (x *PaymentChannelInfo) GetMinDepositAmount() string {
 	if x != nil {
 		return x.MinDepositAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *PaymentChannelInfo) GetMaxDepositAmount() int64 {
+func (x *PaymentChannelInfo) GetMaxDepositAmount() string {
 	if x != nil {
 		return x.MaxDepositAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *PaymentChannelInfo) GetMinWithdrawAmount() int64 {
+func (x *PaymentChannelInfo) GetMinWithdrawAmount() string {
 	if x != nil {
 		return x.MinWithdrawAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *PaymentChannelInfo) GetMaxWithdrawAmount() int64 {
+func (x *PaymentChannelInfo) GetMaxWithdrawAmount() string {
 	if x != nil {
 		return x.MaxWithdrawAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *PaymentChannelInfo) GetEat() int32 {
@@ -789,7 +789,7 @@ func (x *PaymentChannelInfo) GetWithdrawSchema() *structpb.Struct {
 type InitiateDepositRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Amount to deposit in smallest currency unit (e.g., cents)
-	Amount int64 `protobuf:"varint,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount string `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Currency code for the transaction
 	Currency string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	// ID of the channel to use for this deposit
@@ -831,11 +831,11 @@ func (*InitiateDepositRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *InitiateDepositRequest) GetAmount() int64 {
+func (x *InitiateDepositRequest) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
-	return 0
+	return ""
 }
 
 func (x *InitiateDepositRequest) GetCurrency() string {
@@ -866,7 +866,7 @@ type InitiateDepositResponse struct {
 	// Unique identifier for the transaction
 	TransactionId int64 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	// Amount to be deposited in smallest currency unit
-	Amount int64 `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount string `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Currency code for the transaction
 	Currency string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Current status of the transaction
@@ -920,11 +920,11 @@ func (x *InitiateDepositResponse) GetTransactionId() int64 {
 	return 0
 }
 
-func (x *InitiateDepositResponse) GetAmount() int64 {
+func (x *InitiateDepositResponse) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
-	return 0
+	return ""
 }
 
 func (x *InitiateDepositResponse) GetCurrency() string {
@@ -974,7 +974,7 @@ func (x *InitiateDepositResponse) GetExtra() *structpb.Struct {
 type InitiateWithdrawRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Amount to withdraw in smallest currency unit (e.g., cents)
-	Amount int64 `protobuf:"varint,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount string `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Currency code for the transaction
 	Currency string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	// ID of the user who initiated the withdrawal
@@ -1020,11 +1020,11 @@ func (*InitiateWithdrawRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *InitiateWithdrawRequest) GetAmount() int64 {
+func (x *InitiateWithdrawRequest) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
-	return 0
+	return ""
 }
 
 func (x *InitiateWithdrawRequest) GetCurrency() string {
@@ -1071,7 +1071,7 @@ type InitiateWithdrawResponse struct {
 	// Order number from the operator's system
 	OperatorOrderNo string `protobuf:"bytes,2,opt,name=operator_order_no,json=operatorOrderNo,proto3" json:"operator_order_no,omitempty"`
 	// Amount to be withdrawn in smallest currency unit
-	Amount int64 `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount string `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Current status of the transaction
 	Status string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	// Timestamp when the transaction was created
@@ -1124,11 +1124,11 @@ func (x *InitiateWithdrawResponse) GetOperatorOrderNo() string {
 	return ""
 }
 
-func (x *InitiateWithdrawResponse) GetAmount() int64 {
+func (x *InitiateWithdrawResponse) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
-	return 0
+	return ""
 }
 
 func (x *InitiateWithdrawResponse) GetStatus() string {
@@ -1162,9 +1162,9 @@ type DepositCallbackRequest struct {
 	// Time when order was created. Format: yyyy-MM-dd HH:mm:ss
 	CreateTime string `protobuf:"bytes,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	// Original amount of the order
-	Amount int64 `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount string `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Actual amount paid
-	Money int64 `protobuf:"varint,8,opt,name=money,proto3" json:"money,omitempty"`
+	Money string `protobuf:"bytes,8,opt,name=money,proto3" json:"money,omitempty"`
 	// HMAC-SHA256 signature to verify request authenticity
 	Sign string `protobuf:"bytes,9,opt,name=sign,proto3" json:"sign,omitempty"`
 	// Request timestamp to prevent replay attacks
@@ -1247,18 +1247,18 @@ func (x *DepositCallbackRequest) GetCreateTime() string {
 	return ""
 }
 
-func (x *DepositCallbackRequest) GetAmount() int64 {
+func (x *DepositCallbackRequest) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
-	return 0
+	return ""
 }
 
-func (x *DepositCallbackRequest) GetMoney() int64 {
+func (x *DepositCallbackRequest) GetMoney() string {
 	if x != nil {
 		return x.Money
 	}
-	return 0
+	return ""
 }
 
 func (x *DepositCallbackRequest) GetSign() string {
@@ -1355,11 +1355,11 @@ type WithdrawCallbackRequest struct {
 	// Time when order was created. Format: yyyy-MM-dd HH:mm:ss
 	CreateTime string `protobuf:"bytes,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	// Original amount of the withdrawal order
-	Amount int64 `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount string `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Service fee applied to the withdrawal
-	Fee int64 `protobuf:"varint,8,opt,name=fee,proto3" json:"fee,omitempty"`
+	Fee string `protobuf:"bytes,8,opt,name=fee,proto3" json:"fee,omitempty"`
 	// Actual amount withdrawn after fees
-	RealMoney int64 `protobuf:"varint,9,opt,name=real_money,json=realMoney,proto3" json:"real_money,omitempty"`
+	RealMoney string `protobuf:"bytes,9,opt,name=real_money,json=realMoney,proto3" json:"real_money,omitempty"`
 	// HMAC-SHA256 signature to verify request authenticity
 	Sign string `protobuf:"bytes,10,opt,name=sign,proto3" json:"sign,omitempty"`
 	// Request timestamp to prevent replay attacks
@@ -1442,25 +1442,25 @@ func (x *WithdrawCallbackRequest) GetCreateTime() string {
 	return ""
 }
 
-func (x *WithdrawCallbackRequest) GetAmount() int64 {
+func (x *WithdrawCallbackRequest) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
-	return 0
+	return ""
 }
 
-func (x *WithdrawCallbackRequest) GetFee() int64 {
+func (x *WithdrawCallbackRequest) GetFee() string {
 	if x != nil {
 		return x.Fee
 	}
-	return 0
+	return ""
 }
 
-func (x *WithdrawCallbackRequest) GetRealMoney() int64 {
+func (x *WithdrawCallbackRequest) GetRealMoney() string {
 	if x != nil {
 		return x.RealMoney
 	}
-	return 0
+	return ""
 }
 
 func (x *WithdrawCallbackRequest) GetSign() string {
@@ -1557,11 +1557,11 @@ type TransactionInfo struct {
 	// VIP level of the user
 	Vip int32 `protobuf:"varint,6,opt,name=vip,proto3" json:"vip,omitempty"`
 	// Transaction amount in smallest currency unit
-	Amount int64 `protobuf:"varint,7,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount string `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Currency code for the transaction
 	Currency string `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Transaction fee in smallest currency unit
-	Fee int64 `protobuf:"varint,9,opt,name=fee,proto3" json:"fee,omitempty"`
+	Fee string `protobuf:"bytes,9,opt,name=fee,proto3" json:"fee,omitempty"`
 	// Payment method used for the transaction
 	PaymentMethod string `protobuf:"bytes,10,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Payment channel used for the transaction
@@ -1652,11 +1652,11 @@ func (x *TransactionInfo) GetVip() int32 {
 	return 0
 }
 
-func (x *TransactionInfo) GetAmount() int64 {
+func (x *TransactionInfo) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
-	return 0
+	return ""
 }
 
 func (x *TransactionInfo) GetCurrency() string {
@@ -1666,11 +1666,11 @@ func (x *TransactionInfo) GetCurrency() string {
 	return ""
 }
 
-func (x *TransactionInfo) GetFee() int64 {
+func (x *TransactionInfo) GetFee() string {
 	if x != nil {
 		return x.Fee
 	}
-	return 0
+	return ""
 }
 
 func (x *TransactionInfo) GetPaymentMethod() string {
@@ -1813,9 +1813,9 @@ type GetTransactionPageRequest struct {
 	// Optional user ID filter
 	UserId int64 `protobuf:"varint,16,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	// Optional minimum amount filter
-	MinAmount int64 `protobuf:"varint,17,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	MinAmount string `protobuf:"bytes,17,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Optional maximum amount filter
-	MaxAmount     int64 `protobuf:"varint,18,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	MaxAmount     string `protobuf:"bytes,18,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1962,18 +1962,18 @@ func (x *GetTransactionPageRequest) GetUserId() int64 {
 	return 0
 }
 
-func (x *GetTransactionPageRequest) GetMinAmount() int64 {
+func (x *GetTransactionPageRequest) GetMinAmount() string {
 	if x != nil {
 		return x.MinAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetTransactionPageRequest) GetMaxAmount() int64 {
+func (x *GetTransactionPageRequest) GetMaxAmount() string {
 	if x != nil {
 		return x.MaxAmount
 	}
-	return 0
+	return ""
 }
 
 // Response for transaction page
@@ -2432,22 +2432,22 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	" \x01(\tR\acountry\x12\x16\n" +
 	"\x06method\x18\v \x01(\tR\x06method\x12\x12\n" +
 	"\x04logo\x18\f \x01(\tR\x04logo\x12,\n" +
-	"\x12min_deposit_amount\x18\r \x01(\x03R\x10minDepositAmount\x12,\n" +
-	"\x12max_deposit_amount\x18\x0e \x01(\x03R\x10maxDepositAmount\x12.\n" +
-	"\x13min_withdraw_amount\x18\x0f \x01(\x03R\x11minWithdrawAmount\x12.\n" +
-	"\x13max_withdraw_amount\x18\x10 \x01(\x03R\x11maxWithdrawAmount\x12\x10\n" +
+	"\x12min_deposit_amount\x18\r \x01(\tR\x10minDepositAmount\x12,\n" +
+	"\x12max_deposit_amount\x18\x0e \x01(\tR\x10maxDepositAmount\x12.\n" +
+	"\x13min_withdraw_amount\x18\x0f \x01(\tR\x11minWithdrawAmount\x12.\n" +
+	"\x13max_withdraw_amount\x18\x10 \x01(\tR\x11maxWithdrawAmount\x12\x10\n" +
 	"\x03eat\x18\x11 \x01(\x05R\x03eat\x12>\n" +
 	"\x0edeposit_schema\x18\x12 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
 	"\x0fwithdraw_schema\x18\x13 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
-	"\x06amount\x18\x01 \x01(\x03R\x06amount\x12\x1a\n" +
+	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x03 \x01(\tR\tchannelId\x12-\n" +
 	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xa8\x02\n" +
 	"\x17InitiateDepositResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x16\n" +
-	"\x06amount\x18\x02 \x01(\x03R\x06amount\x12\x1a\n" +
+	"\x06amount\x18\x02 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x17\n" +
 	"\apay_url\x18\x05 \x01(\tR\x06payUrl\x12\x17\n" +
@@ -2456,7 +2456,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
 	"\x05extra\x18\b \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xd5\x01\n" +
 	"\x17InitiateWithdrawRequest\x12\x16\n" +
-	"\x06amount\x18\x01 \x01(\x03R\x06amount\x12\x1a\n" +
+	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x04 \x01(\x03R\n" +
@@ -2467,7 +2467,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x18InitiateWithdrawResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11operator_order_no\x18\x02 \x01(\tR\x0foperatorOrderNo\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\x03R\x06amount\x12\x16\n" +
+	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x129\n" +
 	"\n" +
 	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xea\x02\n" +
@@ -2479,8 +2479,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bpay_time\x18\x05 \x01(\tR\apayTime\x12\x1f\n" +
 	"\vcreate_time\x18\x06 \x01(\tR\n" +
 	"createTime\x12\x16\n" +
-	"\x06amount\x18\a \x01(\x03R\x06amount\x12\x14\n" +
-	"\x05money\x18\b \x01(\x03R\x05money\x12\x12\n" +
+	"\x06amount\x18\a \x01(\tR\x06amount\x12\x14\n" +
+	"\x05money\x18\b \x01(\tR\x05money\x12\x12\n" +
 	"\x04sign\x18\t \x01(\tR\x04sign\x12\x1c\n" +
 	"\ttimestamp\x18\n" +
 	" \x01(\tR\ttimestamp\x12\x14\n" +
@@ -2496,10 +2496,10 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bpay_time\x18\x05 \x01(\tR\apayTime\x12\x1f\n" +
 	"\vcreate_time\x18\x06 \x01(\tR\n" +
 	"createTime\x12\x16\n" +
-	"\x06amount\x18\a \x01(\x03R\x06amount\x12\x10\n" +
-	"\x03fee\x18\b \x01(\x03R\x03fee\x12\x1d\n" +
+	"\x06amount\x18\a \x01(\tR\x06amount\x12\x10\n" +
+	"\x03fee\x18\b \x01(\tR\x03fee\x12\x1d\n" +
 	"\n" +
-	"real_money\x18\t \x01(\x03R\trealMoney\x12\x12\n" +
+	"real_money\x18\t \x01(\tR\trealMoney\x12\x12\n" +
 	"\x04sign\x18\n" +
 	" \x01(\tR\x04sign\x12\x1c\n" +
 	"\ttimestamp\x18\v \x01(\tR\ttimestamp\x12\x14\n" +
@@ -2515,9 +2515,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"operatorId\x12\x17\n" +
 	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12\x10\n" +
 	"\x03vip\x18\x06 \x01(\x05R\x03vip\x12\x16\n" +
-	"\x06amount\x18\a \x01(\x03R\x06amount\x12\x1a\n" +
+	"\x06amount\x18\a \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\b \x01(\tR\bcurrency\x12\x10\n" +
-	"\x03fee\x18\t \x01(\x03R\x03fee\x12%\n" +
+	"\x03fee\x18\t \x01(\tR\x03fee\x12%\n" +
 	"\x0epayment_method\x18\n" +
 	" \x01(\tR\rpaymentMethod\x12'\n" +
 	"\x0fpayment_channel\x18\v \x01(\tR\x0epaymentChannel\x12\x1a\n" +
@@ -2552,9 +2552,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x06source\x18\x0f \x01(\x0e2!.payment.service.v1.RequestSourceR\x06source\x12\x17\n" +
 	"\auser_id\x18\x10 \x01(\x03R\x06userId\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\x11 \x01(\x03R\tminAmount\x12\x1d\n" +
+	"min_amount\x18\x11 \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\x12 \x01(\x03R\tmaxAmount\"\xd1\x02\n" +
+	"max_amount\x18\x12 \x01(\tR\tmaxAmount\"\xd1\x02\n" +
 	"\x1aGetTransactionPageResponse\x12G\n" +
 	"\ftransactions\x18\x01 \x03(\v2#.payment.service.v1.TransactionInfoR\ftransactions\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
