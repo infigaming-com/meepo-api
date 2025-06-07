@@ -3392,6 +3392,8 @@ func (m *GetTopUsersDashboardResponse_User) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Rank
+
 	// no validation rules for UserId
 
 	// no validation rules for Avatar
@@ -3509,6 +3511,8 @@ func (m *GetTopOperatorsDashboardResponse_OperatorData) validate(all bool) error
 	}
 
 	var errors []error
+
+	// no validation rules for Rank
 
 	// no validation rules for OperatorId
 

@@ -139,12 +139,13 @@ message GetTopUsersDashboardRequest {
 
 message GetTopUsersDashboardResponse {
 	message User {
-		string user_id = 1;
-		string avatar = 2;
-		string country = 3;
-		int32 vip_level = 4;
-		string amount = 5; // USD
-		string operator_name = 6;
+		int32 rank = 1;
+		string user_id = 2;
+		string avatar = 3;
+		string country = 4;
+		int32 vip_level = 5;
+		string amount = 6; // USD
+		string operator_name = 7;
 	}
 	repeated User top_deposit_users = 1;
 	repeated User top_withdrawal_users = 2;
@@ -162,12 +163,13 @@ message GetTopOperatorsDashboardRequest {
 
 message GetTopOperatorsDashboardResponse {
 	message OperatorData {
-		string operator_id = 1;
-		string operator_name = 2;
-		string amount = 3; // USD
+		int32 rank = 1;
+		string operator_id = 2;
+		string operator_name = 3;
+		string amount = 4; // USD
 	}
 	repeated OperatorData top_ggr_operators = 1;
-	repeated OperatorData top_ngr_operators = 2; // Not available For now
+	repeated OperatorData top_ngr_operators = 2; // Now only returns the same rank as ggr
 	repeated OperatorData top_deposit_minus_withdraw_operators = 3;
 	repeated OperatorData top_ggr_group_operators = 4; // Not available For now
 	repeated OperatorData top_ngr_group_operators = 5; // Not available For now
