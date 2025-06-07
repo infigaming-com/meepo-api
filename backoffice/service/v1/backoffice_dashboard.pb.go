@@ -578,7 +578,7 @@ func (x *GetTopOperatorsDashboardRequest) GetTimeRangeType() GetTopOperatorsDash
 type GetTopOperatorsDashboardResponse struct {
 	state                                    protoimpl.MessageState                           `protogen:"open.v1"`
 	TopGgrOperators                          []*GetTopOperatorsDashboardResponse_OperatorData `protobuf:"bytes,1,rep,name=top_ggr_operators,json=topGgrOperators,proto3" json:"top_ggr_operators,omitempty"`
-	TopNgrOperators                          []*GetTopOperatorsDashboardResponse_OperatorData `protobuf:"bytes,2,rep,name=top_ngr_operators,json=topNgrOperators,proto3" json:"top_ngr_operators,omitempty"` // Not available For now
+	TopNgrOperators                          []*GetTopOperatorsDashboardResponse_OperatorData `protobuf:"bytes,2,rep,name=top_ngr_operators,json=topNgrOperators,proto3" json:"top_ngr_operators,omitempty"` // Now only returns the same rank as ggr
 	TopDepositMinusWithdrawOperators         []*GetTopOperatorsDashboardResponse_OperatorData `protobuf:"bytes,3,rep,name=top_deposit_minus_withdraw_operators,json=topDepositMinusWithdrawOperators,proto3" json:"top_deposit_minus_withdraw_operators,omitempty"`
 	TopGgrGroupOperators                     []*GetTopOperatorsDashboardResponse_OperatorData `protobuf:"bytes,4,rep,name=top_ggr_group_operators,json=topGgrGroupOperators,proto3" json:"top_ggr_group_operators,omitempty"`                                                                 // Not available For now
 	TopNgrGroupOperators                     []*GetTopOperatorsDashboardResponse_OperatorData `protobuf:"bytes,5,rep,name=top_ngr_group_operators,json=topNgrGroupOperators,proto3" json:"top_ngr_group_operators,omitempty"`                                                                 // Not available For now
@@ -1457,12 +1457,13 @@ func (x *GetTimeRangedDashboardResponse_ActiveUsersData_Data) GetActiveUsers() i
 
 type GetTopUsersDashboardResponse_User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Avatar        string                 `protobuf:"bytes,2,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	VipLevel      int32                  `protobuf:"varint,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	Amount        string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"` // USD
-	OperatorName  string                 `protobuf:"bytes,6,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	Rank          int32                  `protobuf:"varint,1,opt,name=rank,proto3" json:"rank,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Avatar        string                 `protobuf:"bytes,3,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Country       string                 `protobuf:"bytes,4,opt,name=country,proto3" json:"country,omitempty"`
+	VipLevel      int32                  `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	Amount        string                 `protobuf:"bytes,6,opt,name=amount,proto3" json:"amount,omitempty"` // USD
+	OperatorName  string                 `protobuf:"bytes,7,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1495,6 +1496,13 @@ func (x *GetTopUsersDashboardResponse_User) ProtoReflect() protoreflect.Message 
 // Deprecated: Use GetTopUsersDashboardResponse_User.ProtoReflect.Descriptor instead.
 func (*GetTopUsersDashboardResponse_User) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{5, 0}
+}
+
+func (x *GetTopUsersDashboardResponse_User) GetRank() int32 {
+	if x != nil {
+		return x.Rank
+	}
+	return 0
 }
 
 func (x *GetTopUsersDashboardResponse_User) GetUserId() string {
@@ -1541,9 +1549,10 @@ func (x *GetTopUsersDashboardResponse_User) GetOperatorName() string {
 
 type GetTopOperatorsDashboardResponse_OperatorData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId    string                 `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	OperatorName  string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	Amount        string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"` // USD
+	Rank          int32                  `protobuf:"varint,1,opt,name=rank,proto3" json:"rank,omitempty"`
+	OperatorId    string                 `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName  string                 `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	Amount        string                 `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"` // USD
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1576,6 +1585,13 @@ func (x *GetTopOperatorsDashboardResponse_OperatorData) ProtoReflect() protorefl
 // Deprecated: Use GetTopOperatorsDashboardResponse_OperatorData.ProtoReflect.Descriptor instead.
 func (*GetTopOperatorsDashboardResponse_OperatorData) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{7, 0}
+}
+
+func (x *GetTopOperatorsDashboardResponse_OperatorData) GetRank() int32 {
+	if x != nil {
+		return x.Rank
+	}
+	return 0
 }
 
 func (x *GetTopOperatorsDashboardResponse_OperatorData) GetOperatorId() string {
@@ -1680,25 +1696,25 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"\x1bTIME_RANGE_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15TIME_RANGE_TYPE_TODAY\x10\x01\x12\x1d\n" +
 	"\x19TIME_RANGE_TYPE_THIS_WEEK\x10\x02\x12\x1e\n" +
-	"\x1aTIME_RANGE_TYPE_THIS_MONTH\x10\x03\"\xa6\x03\n" +
+	"\x1aTIME_RANGE_TYPE_THIS_MONTH\x10\x03\"\xba\x03\n" +
 	"\x1cGetTopUsersDashboardResponse\x12h\n" +
 	"\x11top_deposit_users\x18\x01 \x03(\v2<.api.backoffice.service.v1.GetTopUsersDashboardResponse.UserR\x0ftopDepositUsers\x12n\n" +
-	"\x14top_withdrawal_users\x18\x02 \x03(\v2<.api.backoffice.service.v1.GetTopUsersDashboardResponse.UserR\x12topWithdrawalUsers\x1a\xab\x01\n" +
-	"\x04User\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x16\n" +
-	"\x06avatar\x18\x02 \x01(\tR\x06avatar\x12\x18\n" +
-	"\acountry\x18\x03 \x01(\tR\acountry\x12\x1b\n" +
-	"\tvip_level\x18\x04 \x01(\x05R\bvipLevel\x12\x16\n" +
-	"\x06amount\x18\x05 \x01(\tR\x06amount\x12#\n" +
-	"\roperator_name\x18\x06 \x01(\tR\foperatorName\"\xa0\x02\n" +
+	"\x14top_withdrawal_users\x18\x02 \x03(\v2<.api.backoffice.service.v1.GetTopUsersDashboardResponse.UserR\x12topWithdrawalUsers\x1a\xbf\x01\n" +
+	"\x04User\x12\x12\n" +
+	"\x04rank\x18\x01 \x01(\x05R\x04rank\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x16\n" +
+	"\x06avatar\x18\x03 \x01(\tR\x06avatar\x12\x18\n" +
+	"\acountry\x18\x04 \x01(\tR\acountry\x12\x1b\n" +
+	"\tvip_level\x18\x05 \x01(\x05R\bvipLevel\x12\x16\n" +
+	"\x06amount\x18\x06 \x01(\tR\x06amount\x12#\n" +
+	"\roperator_name\x18\a \x01(\tR\foperatorName\"\xa0\x02\n" +
 	"\x1fGetTopOperatorsDashboardRequest\x12p\n" +
 	"\x0ftime_range_type\x18\x01 \x01(\x0e2H.api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeTypeR\rtimeRangeType\"\x8a\x01\n" +
 	"\rTimeRangeType\x12\x1f\n" +
 	"\x1bTIME_RANGE_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15TIME_RANGE_TYPE_TODAY\x10\x01\x12\x1d\n" +
 	"\x19TIME_RANGE_TYPE_THIS_WEEK\x10\x02\x12\x1e\n" +
-	"\x1aTIME_RANGE_TYPE_THIS_MONTH\x10\x03\"\xfb\n" +
-	"\n" +
+	"\x1aTIME_RANGE_TYPE_THIS_MONTH\x10\x03\"\x90\v\n" +
 	" GetTopOperatorsDashboardResponse\x12t\n" +
 	"\x11top_ggr_operators\x18\x01 \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR\x0ftopGgrOperators\x12t\n" +
 	"\x11top_ngr_operators\x18\x02 \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR\x0ftopNgrOperators\x12\x98\x01\n" +
@@ -1708,12 +1724,13 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"*top_deposit_minus_withdraw_group_operators\x18\x06 \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR%topDepositMinusWithdrawGroupOperators\x12\x85\x01\n" +
 	"\x1atop_ggr_retailer_operators\x18\a \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR\x17topGgrRetailerOperators\x12\x85\x01\n" +
 	"\x1atop_ngr_retailer_operators\x18\b \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR\x17topNgrRetailerOperators\x12\xa9\x01\n" +
-	"-top_deposit_minus_withdraw_retailer_operators\x18\t \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR(topDepositMinusWithdrawRetailerOperators\x1al\n" +
-	"\fOperatorData\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"-top_deposit_minus_withdraw_retailer_operators\x18\t \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR(topDepositMinusWithdrawRetailerOperators\x1a\x80\x01\n" +
+	"\fOperatorData\x12\x12\n" +
+	"\x04rank\x18\x01 \x01(\x05R\x04rank\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\tR\n" +
 	"operatorId\x12#\n" +
-	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\tR\x06amount2\x97\x06\n" +
+	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\tR\x06amount2\x97\x06\n" +
 	"\x13BackofficeDashboard\x12\xb0\x01\n" +
 	"\x14GetOverviewDashboard\x126.api.backoffice.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/dashboard/get\x12\xc2\x01\n" +
 	"\x16GetTimeRangedDashboard\x128.api.backoffice.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/dashboard/time-ranged/get\x12\xba\x01\n" +

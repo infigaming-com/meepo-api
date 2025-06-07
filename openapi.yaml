@@ -3533,6 +3533,9 @@ components:
         api.backoffice.service.v1.GetTopOperatorsDashboardResponse_OperatorData:
             type: object
             properties:
+                rank:
+                    type: integer
+                    format: int32
                 operatorId:
                     type: string
                 operatorName:
@@ -3564,6 +3567,9 @@ components:
         api.backoffice.service.v1.GetTopUsersDashboardResponse_User:
             type: object
             properties:
+                rank:
+                    type: integer
+                    format: int32
                 userId:
                     type: string
                 avatar:
