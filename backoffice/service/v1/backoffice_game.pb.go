@@ -265,6 +265,7 @@ func (x *ListProvidersWithDetailResponse) GetPageSize() int32 {
 
 type ListCategoriesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProviderId    *string                `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -297,6 +298,13 @@ func (x *ListCategoriesRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListCategoriesRequest.ProtoReflect.Descriptor instead.
 func (*ListCategoriesRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_game_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ListCategoriesRequest) GetProviderId() string {
+	if x != nil && x.ProviderId != nil {
+		return *x.ProviderId
+	}
+	return ""
 }
 
 type ListCategoriesResponse struct {
@@ -345,6 +353,8 @@ func (x *ListCategoriesResponse) GetCategories() []string {
 
 type ListFeeGroupsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProviderId    *string                `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"`
+	Category      *string                `protobuf:"bytes,2,opt,name=category,proto3,oneof" json:"category,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -377,6 +387,20 @@ func (x *ListFeeGroupsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListFeeGroupsRequest.ProtoReflect.Descriptor instead.
 func (*ListFeeGroupsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_game_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListFeeGroupsRequest) GetProviderId() string {
+	if x != nil && x.ProviderId != nil {
+		return *x.ProviderId
+	}
+	return ""
+}
+
+func (x *ListFeeGroupsRequest) GetCategory() string {
+	if x != nil && x.Category != nil {
+		return *x.Category
+	}
+	return ""
 }
 
 type ListFeeGroupsResponse struct {
@@ -3905,13 +3929,21 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\x12\x1d\n" +
 	"\n" +
 	"game_count\x18\x03 \x01(\x05R\tgameCount\x12\x18\n" +
-	"\aenabled\x18\x04 \x01(\bR\aenabled\"\x17\n" +
-	"\x15ListCategoriesRequest\"8\n" +
+	"\aenabled\x18\x04 \x01(\bR\aenabled\"M\n" +
+	"\x15ListCategoriesRequest\x12$\n" +
+	"\vprovider_id\x18\x01 \x01(\tH\x00R\n" +
+	"providerId\x88\x01\x01B\x0e\n" +
+	"\f_provider_id\"8\n" +
 	"\x16ListCategoriesResponse\x12\x1e\n" +
 	"\n" +
 	"categories\x18\x01 \x03(\tR\n" +
-	"categories\"\x16\n" +
-	"\x14ListFeeGroupsRequest\"6\n" +
+	"categories\"z\n" +
+	"\x14ListFeeGroupsRequest\x12$\n" +
+	"\vprovider_id\x18\x01 \x01(\tH\x00R\n" +
+	"providerId\x88\x01\x01\x12\x1f\n" +
+	"\bcategory\x18\x02 \x01(\tH\x01R\bcategory\x88\x01\x01B\x0e\n" +
+	"\f_provider_idB\v\n" +
+	"\t_category\"6\n" +
 	"\x15ListFeeGroupsResponse\x12\x1d\n" +
 	"\n" +
 	"fee_groups\x18\x01 \x03(\tR\tfeeGroups\"\x11\n" +
@@ -4484,6 +4516,8 @@ func file_backoffice_service_v1_backoffice_game_proto_init() {
 	}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[0].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[2].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_game_proto_msgTypes[4].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_game_proto_msgTypes[6].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[12].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[14].OneofWrappers = []any{
 		(*ListBetsRequest_SettlementCurrencyWithRanges)(nil),

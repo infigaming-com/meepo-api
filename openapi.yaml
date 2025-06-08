@@ -4236,7 +4236,9 @@ components:
                     format: int32
         api.backoffice.service.v1.ListCategoriesRequest:
             type: object
-            properties: {}
+            properties:
+                providerId:
+                    type: string
         api.backoffice.service.v1.ListCategoriesResponse:
             type: object
             properties:
@@ -4448,7 +4450,11 @@ components:
                     type: string
         api.backoffice.service.v1.ListFeeGroupsRequest:
             type: object
-            properties: {}
+            properties:
+                providerId:
+                    type: string
+                category:
+                    type: string
         api.backoffice.service.v1.ListFeeGroupsResponse:
             type: object
             properties:
