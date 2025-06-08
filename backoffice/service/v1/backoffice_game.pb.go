@@ -354,7 +354,7 @@ func (x *ListCategoriesResponse) GetCategories() []string {
 type ListFeeGroupsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ProviderId    *string                `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"`
-	Categories    []string               `protobuf:"bytes,2,rep,name=categories,proto3" json:"categories,omitempty"`
+	Category      *string                `protobuf:"bytes,2,opt,name=category,proto3,oneof" json:"category,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -396,11 +396,11 @@ func (x *ListFeeGroupsRequest) GetProviderId() string {
 	return ""
 }
 
-func (x *ListFeeGroupsRequest) GetCategories() []string {
-	if x != nil {
-		return x.Categories
+func (x *ListFeeGroupsRequest) GetCategory() string {
+	if x != nil && x.Category != nil {
+		return *x.Category
 	}
-	return nil
+	return ""
 }
 
 type ListFeeGroupsResponse struct {
@@ -3937,14 +3937,13 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x16ListCategoriesResponse\x12\x1e\n" +
 	"\n" +
 	"categories\x18\x01 \x03(\tR\n" +
-	"categories\"l\n" +
+	"categories\"z\n" +
 	"\x14ListFeeGroupsRequest\x12$\n" +
 	"\vprovider_id\x18\x01 \x01(\tH\x00R\n" +
-	"providerId\x88\x01\x01\x12\x1e\n" +
-	"\n" +
-	"categories\x18\x02 \x03(\tR\n" +
-	"categoriesB\x0e\n" +
-	"\f_provider_id\"6\n" +
+	"providerId\x88\x01\x01\x12\x1f\n" +
+	"\bcategory\x18\x02 \x01(\tH\x01R\bcategory\x88\x01\x01B\x0e\n" +
+	"\f_provider_idB\v\n" +
+	"\t_category\"6\n" +
 	"\x15ListFeeGroupsResponse\x12\x1d\n" +
 	"\n" +
 	"fee_groups\x18\x01 \x03(\tR\tfeeGroups\"\x11\n" +

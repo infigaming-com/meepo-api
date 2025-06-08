@@ -159,7 +159,7 @@ message ListCategoriesResponse {
 
 message ListFeeGroupsRequest {
 	optional string provider_id = 1;
-	repeated string categories = 2;
+	optional string category = 2;
 }
 
 message ListFeeGroupsResponse {

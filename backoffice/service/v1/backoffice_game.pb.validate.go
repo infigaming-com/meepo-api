@@ -777,6 +777,10 @@ func (m *ListFeeGroupsRequest) validate(all bool) error {
 		// no validation rules for ProviderId
 	}
 
+	if m.Category != nil {
+		// no validation rules for Category
+	}
+
 	if len(errors) > 0 {
 		return ListFeeGroupsRequestMultiError(errors)
 	}
