@@ -1191,6 +1191,10 @@ func (m *ListCategoriesRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.ProviderId != nil {
+		// no validation rules for ProviderId
+	}
+
 	if len(errors) > 0 {
 		return ListCategoriesRequestMultiError(errors)
 	}
@@ -1394,6 +1398,14 @@ func (m *ListFeeGroupsRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if m.ProviderId != nil {
+		// no validation rules for ProviderId
+	}
+
+	if m.Category != nil {
+		// no validation rules for Category
+	}
 
 	if len(errors) > 0 {
 		return ListFeeGroupsRequestMultiError(errors)

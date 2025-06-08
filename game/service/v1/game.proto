@@ -203,13 +203,18 @@ message ListProvidersResponse {
 	optional int32 page_size = 6;
 }
 
-message ListCategoriesRequest{}
+message ListCategoriesRequest{
+	optional string provider_id = 1;
+}
 
 message ListCategoriesResponse {
 	repeated string categories = 1;
 }
 
-message ListFeeGroupsRequest {}
+message ListFeeGroupsRequest {
+	optional string provider_id = 1;
+	optional string category = 2;
+}
 
 message ListFeeGroupsResponse {
 	repeated string fee_groups = 1;

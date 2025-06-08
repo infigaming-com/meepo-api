@@ -6514,7 +6514,9 @@ components:
                     format: int32
         api.game.service.v1.ListCategoriesRequest:
             type: object
-            properties: {}
+            properties:
+                providerId:
+                    type: string
         api.game.service.v1.ListCategoriesResponse:
             type: object
             properties:
