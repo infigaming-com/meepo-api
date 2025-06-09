@@ -348,6 +348,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAccountResponse'
+    /v1/backoffice/audit/actions/list:
+        post:
+            tags:
+                - BackofficeAudit
+            operationId: BackofficeAudit_ListAuditActions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAuditActionsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListAuditActionsResponse'
     /v1/backoffice/audit/logs/list:
         post:
             tags:
@@ -2263,6 +2281,8 @@ components:
                     type: string
                 userName:
                     type: string
+                userEmail:
+                    type: string
                 createdAt:
                     type: string
                     format: date-time
@@ -4112,12 +4132,24 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+        api.backoffice.service.v1.ListAuditActionsRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.ListAuditActionsResponse:
+            type: object
+            properties:
+                actions:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.ListAuditLogsRequest:
             type: object
             properties:
-                userId:
+                userName:
                     type: string
                 action:
+                    type: string
+                userEmail:
                     type: string
                 startTime:
                     type: string

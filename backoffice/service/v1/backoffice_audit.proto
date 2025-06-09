@@ -16,29 +16,37 @@ service BackofficeAudit {
 			body: "*"
 		};
 	}
+	rpc ListAuditActions(ListAuditActionsRequest) returns (ListAuditActionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/audit/actions/list"
+			body: "*"
+		};
+	}
 }
 
 message ListAuditLogsRequest {
-	optional int64 user_id = 1;
+	optional string user_name = 1;
 	optional string action = 2;
-	optional google.protobuf.Timestamp start_time = 3;
-	optional google.protobuf.Timestamp end_time = 4;
-	optional int32 page = 5; // default 1
-	optional int32 page_size = 6; // default 20
+	optional string user_email = 3;
+	optional google.protobuf.Timestamp start_time = 4;
+	optional google.protobuf.Timestamp end_time = 5;
+	optional int32 page = 6; // default 1
+	optional int32 page_size = 7; // default 20
 }
 
 message AuditLog {
 	int64 audit_id = 1;
 	int64 user_id = 2;
 	string user_name = 3;
-	google.protobuf.Timestamp created_at = 4;
-	string request_info = 5; // JSON string
-	string request_body = 6; // JSON string
-	string response_body = 7; // JSON string
-	string client_ip = 8;
-	string api_path = 9;
-	string action = 10;
-	string error_message = 11;
+	string user_email = 4;
+	google.protobuf.Timestamp created_at = 5;
+	string request_info = 6; // JSON string
+	string request_body = 7; // JSON string
+	string response_body = 8; // JSON string
+	string client_ip = 9;
+	string api_path = 10;
+	string action = 11;
+	string error_message = 12;
 }
 
 message ListAuditLogsResponse {
@@ -46,4 +54,11 @@ message ListAuditLogsResponse {
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message ListAuditActionsRequest {
+}
+
+message ListAuditActionsResponse {
+	repeated string actions = 1;
 }

@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeAudit_ListAuditLogs_FullMethodName = "/api.backoffice.service.v1.BackofficeAudit/ListAuditLogs"
+	BackofficeAudit_ListAuditLogs_FullMethodName    = "/api.backoffice.service.v1.BackofficeAudit/ListAuditLogs"
+	BackofficeAudit_ListAuditActions_FullMethodName = "/api.backoffice.service.v1.BackofficeAudit/ListAuditActions"
 )
 
 // BackofficeAuditClient is the client API for BackofficeAudit service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeAuditClient interface {
 	ListAuditLogs(ctx context.Context, in *ListAuditLogsRequest, opts ...grpc.CallOption) (*ListAuditLogsResponse, error)
+	ListAuditActions(ctx context.Context, in *ListAuditActionsRequest, opts ...grpc.CallOption) (*ListAuditActionsResponse, error)
 }
 
 type backofficeAuditClient struct {
@@ -47,11 +49,22 @@ func (c *backofficeAuditClient) ListAuditLogs(ctx context.Context, in *ListAudit
 	return out, nil
 }
 
+func (c *backofficeAuditClient) ListAuditActions(ctx context.Context, in *ListAuditActionsRequest, opts ...grpc.CallOption) (*ListAuditActionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAuditActionsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAudit_ListAuditActions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeAuditServer is the server API for BackofficeAudit service.
 // All implementations must embed UnimplementedBackofficeAuditServer
 // for forward compatibility.
 type BackofficeAuditServer interface {
 	ListAuditLogs(context.Context, *ListAuditLogsRequest) (*ListAuditLogsResponse, error)
+	ListAuditActions(context.Context, *ListAuditActionsRequest) (*ListAuditActionsResponse, error)
 	mustEmbedUnimplementedBackofficeAuditServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedBackofficeAuditServer struct{}
 
 func (UnimplementedBackofficeAuditServer) ListAuditLogs(context.Context, *ListAuditLogsRequest) (*ListAuditLogsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAuditLogs not implemented")
+}
+func (UnimplementedBackofficeAuditServer) ListAuditActions(context.Context, *ListAuditActionsRequest) (*ListAuditActionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAuditActions not implemented")
 }
 func (UnimplementedBackofficeAuditServer) mustEmbedUnimplementedBackofficeAuditServer() {}
 func (UnimplementedBackofficeAuditServer) testEmbeddedByValue()                         {}
@@ -104,6 +120,24 @@ func _BackofficeAudit_ListAuditLogs_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAudit_ListAuditActions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAuditActionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAuditServer).ListAuditActions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAudit_ListAuditActions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAuditServer).ListAuditActions(ctx, req.(*ListAuditActionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeAudit_ServiceDesc is the grpc.ServiceDesc for BackofficeAudit service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var BackofficeAudit_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAuditLogs",
 			Handler:    _BackofficeAudit_ListAuditLogs_Handler,
+		},
+		{
+			MethodName: "ListAuditActions",
+			Handler:    _BackofficeAudit_ListAuditActions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
