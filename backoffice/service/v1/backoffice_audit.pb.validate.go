@@ -280,6 +280,8 @@ func (m *AuditLog) validate(all bool) error {
 
 	// no validation rules for RequestBody
 
+	// no validation rules for ResponseBody
+
 	// no validation rules for ClientIp
 
 	// no validation rules for ApiPath
