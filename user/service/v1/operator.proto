@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package api.user.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.user.service.v1";
+
+// User service provides authentication and user management functionality.
+service Operator {
+	rpc AddWhiteLabelOperator (AddWhiteLabelOperatorRequest) returns (AddWhiteLabelOperatorResponse) {}	
+}
+
+message AddWhiteLabelOperatorRequest {
+	string name = 1;
+}
+
+message AddWhiteLabelOperatorResponse {}
