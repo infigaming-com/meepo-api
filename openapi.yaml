@@ -2270,6 +2270,8 @@ components:
                     type: string
                 requestBody:
                     type: string
+                responseBody:
+                    type: string
                 clientIp:
                     type: string
                 apiPath:
