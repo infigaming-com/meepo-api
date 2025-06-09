@@ -3905,6 +3905,8 @@ func (m *GetGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for RtpPercentage
 
+	// no validation rules for SettlementCurrency
+
 	if len(errors) > 0 {
 		return GetGameDataResponse_ListMultiError(errors)
 	}
@@ -4038,6 +4040,8 @@ func (m *GetPlayerGameDataResponse_List) validate(all bool) error {
 	// no validation rules for BetCount
 
 	// no validation rules for AverageBetAmount
+
+	// no validation rules for SettlementCurrency
 
 	if len(errors) > 0 {
 		return GetPlayerGameDataResponse_ListMultiError(errors)

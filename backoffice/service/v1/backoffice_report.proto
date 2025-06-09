@@ -239,6 +239,7 @@ message GetGameDataResponse {
 		int32 bet_count = 16;
 		string average_bet_amount = 17;
 		string rtp_percentage = 18;
+		string settlement_currency = 19;
 	}
 	repeated List list = 7;
 	int32 page = 8;
@@ -299,6 +300,7 @@ message GetPlayerGameDataResponse {
 		string rtp_percentage = 14;
 		int32 bet_count = 15;
 		string average_bet_amount = 16;
+		string settlement_currency = 17;
 	}
 	repeated List list = 7;
 	int32 page = 8;
