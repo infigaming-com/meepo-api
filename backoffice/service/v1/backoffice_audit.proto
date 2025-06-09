@@ -16,10 +16,16 @@ service BackofficeAudit {
 			body: "*"
 		};
 	}
+	rpc ListAuditActions(ListAuditActionsRequest) returns (ListAuditActionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/audit/actions/list"
+			body: "*"
+		};
+	}
 }
 
 message ListAuditLogsRequest {
-	optional int64 user_id = 1;
+	optional string user_name = 1;
 	optional string action = 2;
 	optional google.protobuf.Timestamp start_time = 3;
 	optional google.protobuf.Timestamp end_time = 4;
@@ -46,4 +52,11 @@ message ListAuditLogsResponse {
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message ListAuditActionsRequest {
+}
+
+message ListAuditActionsResponse {
+	repeated string actions = 1;
 }

@@ -25,7 +25,7 @@ const (
 
 type ListAuditLogsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	UserName      *string                `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3,oneof" json:"user_name,omitempty"`
 	Action        *string                `protobuf:"bytes,2,opt,name=action,proto3,oneof" json:"action,omitempty"`
 	StartTime     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
@@ -65,11 +65,11 @@ func (*ListAuditLogsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_audit_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ListAuditLogsRequest) GetUserId() int64 {
-	if x != nil && x.UserId != nil {
-		return *x.UserId
+func (x *ListAuditLogsRequest) GetUserName() string {
+	if x != nil && x.UserName != nil {
+		return *x.UserName
 	}
-	return 0
+	return ""
 }
 
 func (x *ListAuditLogsRequest) GetAction() string {
@@ -299,21 +299,101 @@ func (x *ListAuditLogsResponse) GetPageSize() int32 {
 	return 0
 }
 
+type ListAuditActionsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAuditActionsRequest) Reset() {
+	*x = ListAuditActionsRequest{}
+	mi := &file_backoffice_service_v1_backoffice_audit_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAuditActionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAuditActionsRequest) ProtoMessage() {}
+
+func (x *ListAuditActionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_audit_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAuditActionsRequest.ProtoReflect.Descriptor instead.
+func (*ListAuditActionsRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_audit_proto_rawDescGZIP(), []int{3}
+}
+
+type ListAuditActionsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Actions       []string               `protobuf:"bytes,1,rep,name=actions,proto3" json:"actions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAuditActionsResponse) Reset() {
+	*x = ListAuditActionsResponse{}
+	mi := &file_backoffice_service_v1_backoffice_audit_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAuditActionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAuditActionsResponse) ProtoMessage() {}
+
+func (x *ListAuditActionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_audit_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAuditActionsResponse.ProtoReflect.Descriptor instead.
+func (*ListAuditActionsResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_audit_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ListAuditActionsResponse) GetActions() []string {
+	if x != nil {
+		return x.Actions
+	}
+	return nil
+}
+
 var File_backoffice_service_v1_backoffice_audit_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_audit_proto_rawDesc = "" +
 	"\n" +
-	",backoffice/service/v1/backoffice_audit.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd2\x02\n" +
-	"\x14ListAuditLogsRequest\x12\x1c\n" +
-	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1b\n" +
+	",backoffice/service/v1/backoffice_audit.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd8\x02\n" +
+	"\x14ListAuditLogsRequest\x12 \n" +
+	"\tuser_name\x18\x01 \x01(\tH\x00R\buserName\x88\x01\x01\x12\x1b\n" +
 	"\x06action\x18\x02 \x01(\tH\x01R\x06action\x88\x01\x01\x12>\n" +
 	"\n" +
 	"start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\tstartTime\x88\x01\x01\x12:\n" +
 	"\bend_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\aendTime\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\f\n" +
 	"\n" +
-	"\b_user_idB\t\n" +
+	"_user_nameB\t\n" +
 	"\a_actionB\r\n" +
 	"\v_start_timeB\v\n" +
 	"\t_end_timeB\a\n" +
@@ -339,9 +419,13 @@ const file_backoffice_service_v1_backoffice_audit_proto_rawDesc = "" +
 	"audit_logs\x18\x01 \x03(\v2#.api.backoffice.service.v1.AuditLogR\tauditLogs\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize2\xb1\x01\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x19\n" +
+	"\x17ListAuditActionsRequest\"4\n" +
+	"\x18ListAuditActionsResponse\x12\x18\n" +
+	"\aactions\x18\x01 \x03(\tR\aactions2\xdd\x02\n" +
 	"\x0fBackofficeAudit\x12\x9d\x01\n" +
-	"\rListAuditLogs\x12/.api.backoffice.service.v1.ListAuditLogsRequest\x1a0.api.backoffice.service.v1.ListAuditLogsResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/audit/logs/listB[\n" +
+	"\rListAuditLogs\x12/.api.backoffice.service.v1.ListAuditLogsRequest\x1a0.api.backoffice.service.v1.ListAuditLogsResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/audit/logs/list\x12\xa9\x01\n" +
+	"\x10ListAuditActions\x122.api.backoffice.service.v1.ListAuditActionsRequest\x1a3.api.backoffice.service.v1.ListAuditActionsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/audit/actions/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -356,22 +440,26 @@ func file_backoffice_service_v1_backoffice_audit_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_audit_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_audit_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_backoffice_service_v1_backoffice_audit_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_backoffice_service_v1_backoffice_audit_proto_goTypes = []any{
-	(*ListAuditLogsRequest)(nil),  // 0: api.backoffice.service.v1.ListAuditLogsRequest
-	(*AuditLog)(nil),              // 1: api.backoffice.service.v1.AuditLog
-	(*ListAuditLogsResponse)(nil), // 2: api.backoffice.service.v1.ListAuditLogsResponse
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(*ListAuditLogsRequest)(nil),     // 0: api.backoffice.service.v1.ListAuditLogsRequest
+	(*AuditLog)(nil),                 // 1: api.backoffice.service.v1.AuditLog
+	(*ListAuditLogsResponse)(nil),    // 2: api.backoffice.service.v1.ListAuditLogsResponse
+	(*ListAuditActionsRequest)(nil),  // 3: api.backoffice.service.v1.ListAuditActionsRequest
+	(*ListAuditActionsResponse)(nil), // 4: api.backoffice.service.v1.ListAuditActionsResponse
+	(*timestamppb.Timestamp)(nil),    // 5: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_audit_proto_depIdxs = []int32{
-	3, // 0: api.backoffice.service.v1.ListAuditLogsRequest.start_time:type_name -> google.protobuf.Timestamp
-	3, // 1: api.backoffice.service.v1.ListAuditLogsRequest.end_time:type_name -> google.protobuf.Timestamp
-	3, // 2: api.backoffice.service.v1.AuditLog.created_at:type_name -> google.protobuf.Timestamp
+	5, // 0: api.backoffice.service.v1.ListAuditLogsRequest.start_time:type_name -> google.protobuf.Timestamp
+	5, // 1: api.backoffice.service.v1.ListAuditLogsRequest.end_time:type_name -> google.protobuf.Timestamp
+	5, // 2: api.backoffice.service.v1.AuditLog.created_at:type_name -> google.protobuf.Timestamp
 	1, // 3: api.backoffice.service.v1.ListAuditLogsResponse.audit_logs:type_name -> api.backoffice.service.v1.AuditLog
 	0, // 4: api.backoffice.service.v1.BackofficeAudit.ListAuditLogs:input_type -> api.backoffice.service.v1.ListAuditLogsRequest
-	2, // 5: api.backoffice.service.v1.BackofficeAudit.ListAuditLogs:output_type -> api.backoffice.service.v1.ListAuditLogsResponse
-	5, // [5:6] is the sub-list for method output_type
-	4, // [4:5] is the sub-list for method input_type
+	3, // 5: api.backoffice.service.v1.BackofficeAudit.ListAuditActions:input_type -> api.backoffice.service.v1.ListAuditActionsRequest
+	2, // 6: api.backoffice.service.v1.BackofficeAudit.ListAuditLogs:output_type -> api.backoffice.service.v1.ListAuditLogsResponse
+	4, // 7: api.backoffice.service.v1.BackofficeAudit.ListAuditActions:output_type -> api.backoffice.service.v1.ListAuditActionsResponse
+	6, // [6:8] is the sub-list for method output_type
+	4, // [4:6] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
 	4, // [4:4] is the sub-list for extension extendee
 	0, // [0:4] is the sub-list for field type_name
@@ -389,7 +477,7 @@ func file_backoffice_service_v1_backoffice_audit_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_audit_proto_rawDesc), len(file_backoffice_service_v1_backoffice_audit_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
