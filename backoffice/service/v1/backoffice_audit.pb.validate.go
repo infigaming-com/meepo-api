@@ -65,6 +65,10 @@ func (m *ListAuditLogsRequest) validate(all bool) error {
 		// no validation rules for Action
 	}
 
+	if m.UserEmail != nil {
+		// no validation rules for UserEmail
+	}
+
 	if m.StartTime != nil {
 
 		if all {
@@ -246,6 +250,8 @@ func (m *AuditLog) validate(all bool) error {
 	// no validation rules for UserId
 
 	// no validation rules for UserName
+
+	// no validation rules for UserEmail
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {

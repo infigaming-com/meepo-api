@@ -27,10 +27,11 @@ type ListAuditLogsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserName      *string                `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3,oneof" json:"user_name,omitempty"`
 	Action        *string                `protobuf:"bytes,2,opt,name=action,proto3,oneof" json:"action,omitempty"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page          *int32                 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`                         // default 1
-	PageSize      *int32                 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"` // default 20
+	UserEmail     *string                `protobuf:"bytes,3,opt,name=user_email,json=userEmail,proto3,oneof" json:"user_email,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page          *int32                 `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`                         // default 1
+	PageSize      *int32                 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"` // default 20
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -79,6 +80,13 @@ func (x *ListAuditLogsRequest) GetAction() string {
 	return ""
 }
 
+func (x *ListAuditLogsRequest) GetUserEmail() string {
+	if x != nil && x.UserEmail != nil {
+		return *x.UserEmail
+	}
+	return ""
+}
+
 func (x *ListAuditLogsRequest) GetStartTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.StartTime
@@ -112,14 +120,15 @@ type AuditLog struct {
 	AuditId       int64                  `protobuf:"varint,1,opt,name=audit_id,json=auditId,proto3" json:"audit_id,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	UserName      string                 `protobuf:"bytes,3,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	RequestInfo   string                 `protobuf:"bytes,5,opt,name=request_info,json=requestInfo,proto3" json:"request_info,omitempty"`    // JSON string
-	RequestBody   string                 `protobuf:"bytes,6,opt,name=request_body,json=requestBody,proto3" json:"request_body,omitempty"`    // JSON string
-	ResponseBody  string                 `protobuf:"bytes,7,opt,name=response_body,json=responseBody,proto3" json:"response_body,omitempty"` // JSON string
-	ClientIp      string                 `protobuf:"bytes,8,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
-	ApiPath       string                 `protobuf:"bytes,9,opt,name=api_path,json=apiPath,proto3" json:"api_path,omitempty"`
-	Action        string                 `protobuf:"bytes,10,opt,name=action,proto3" json:"action,omitempty"`
-	ErrorMessage  string                 `protobuf:"bytes,11,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	UserEmail     string                 `protobuf:"bytes,4,opt,name=user_email,json=userEmail,proto3" json:"user_email,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	RequestInfo   string                 `protobuf:"bytes,6,opt,name=request_info,json=requestInfo,proto3" json:"request_info,omitempty"`    // JSON string
+	RequestBody   string                 `protobuf:"bytes,7,opt,name=request_body,json=requestBody,proto3" json:"request_body,omitempty"`    // JSON string
+	ResponseBody  string                 `protobuf:"bytes,8,opt,name=response_body,json=responseBody,proto3" json:"response_body,omitempty"` // JSON string
+	ClientIp      string                 `protobuf:"bytes,9,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	ApiPath       string                 `protobuf:"bytes,10,opt,name=api_path,json=apiPath,proto3" json:"api_path,omitempty"`
+	Action        string                 `protobuf:"bytes,11,opt,name=action,proto3" json:"action,omitempty"`
+	ErrorMessage  string                 `protobuf:"bytes,12,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -171,6 +180,13 @@ func (x *AuditLog) GetUserId() int64 {
 func (x *AuditLog) GetUserName() string {
 	if x != nil {
 		return x.UserName
+	}
+	return ""
+}
+
+func (x *AuditLog) GetUserEmail() string {
+	if x != nil {
+		return x.UserEmail
 	}
 	return ""
 }
@@ -383,37 +399,42 @@ var File_backoffice_service_v1_backoffice_audit_proto protoreflect.FileDescripto
 
 const file_backoffice_service_v1_backoffice_audit_proto_rawDesc = "" +
 	"\n" +
-	",backoffice/service/v1/backoffice_audit.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd8\x02\n" +
+	",backoffice/service/v1/backoffice_audit.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8b\x03\n" +
 	"\x14ListAuditLogsRequest\x12 \n" +
 	"\tuser_name\x18\x01 \x01(\tH\x00R\buserName\x88\x01\x01\x12\x1b\n" +
-	"\x06action\x18\x02 \x01(\tH\x01R\x06action\x88\x01\x01\x12>\n" +
+	"\x06action\x18\x02 \x01(\tH\x01R\x06action\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\f\n" +
+	"user_email\x18\x03 \x01(\tH\x02R\tuserEmail\x88\x01\x01\x12>\n" +
+	"\n" +
+	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x06 \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\a \x01(\x05H\x06R\bpageSize\x88\x01\x01B\f\n" +
 	"\n" +
 	"_user_nameB\t\n" +
 	"\a_actionB\r\n" +
+	"\v_user_emailB\r\n" +
 	"\v_start_timeB\v\n" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf6\x02\n" +
+	"_page_size\"\x95\x03\n" +
 	"\bAuditLog\x12\x19\n" +
 	"\baudit_id\x18\x01 \x01(\x03R\aauditId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
-	"\tuser_name\x18\x03 \x01(\tR\buserName\x129\n" +
+	"\tuser_name\x18\x03 \x01(\tR\buserName\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12!\n" +
-	"\frequest_info\x18\x05 \x01(\tR\vrequestInfo\x12!\n" +
-	"\frequest_body\x18\x06 \x01(\tR\vrequestBody\x12#\n" +
-	"\rresponse_body\x18\a \x01(\tR\fresponseBody\x12\x1b\n" +
-	"\tclient_ip\x18\b \x01(\tR\bclientIp\x12\x19\n" +
-	"\bapi_path\x18\t \x01(\tR\aapiPath\x12\x16\n" +
-	"\x06action\x18\n" +
-	" \x01(\tR\x06action\x12#\n" +
-	"\rerror_message\x18\v \x01(\tR\ferrorMessage\"\xa2\x01\n" +
+	"user_email\x18\x04 \x01(\tR\tuserEmail\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12!\n" +
+	"\frequest_info\x18\x06 \x01(\tR\vrequestInfo\x12!\n" +
+	"\frequest_body\x18\a \x01(\tR\vrequestBody\x12#\n" +
+	"\rresponse_body\x18\b \x01(\tR\fresponseBody\x12\x1b\n" +
+	"\tclient_ip\x18\t \x01(\tR\bclientIp\x12\x19\n" +
+	"\bapi_path\x18\n" +
+	" \x01(\tR\aapiPath\x12\x16\n" +
+	"\x06action\x18\v \x01(\tR\x06action\x12#\n" +
+	"\rerror_message\x18\f \x01(\tR\ferrorMessage\"\xa2\x01\n" +
 	"\x15ListAuditLogsResponse\x12B\n" +
 	"\n" +
 	"audit_logs\x18\x01 \x03(\v2#.api.backoffice.service.v1.AuditLogR\tauditLogs\x12\x14\n" +
