@@ -84,3 +84,34 @@ func GetBearerToken(token string) string {
 	}
 	return TokenPrefix + token
 }
+
+func FromJwtClaims[T any](claims jwt.Claims, key string) T {
+	var zero T
+	claimsMap, ok := claims.(jwt.MapClaims)
+	if !ok {
+		return zero
+	}
+
+	return FromJwtClaimsMap[T](claimsMap, key)
+}
+
+func FromJwtClaimsMap[T any](claims jwt.MapClaims, key string) T {
+	var zero T
+
+	v, ok := claims[key]
+	if !ok {
+		return zero
+	}
+
+	switch any(zero).(type) {
+	case string:
+		if value, ok := v.(string); ok {
+			return any(value).(T)
+		}
+	case bool:
+		if value, ok := v.(bool); ok {
+			return any(value).(T)
+		}
+	}
+	return zero
+}
