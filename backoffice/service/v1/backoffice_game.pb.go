@@ -696,25 +696,26 @@ func (x *ListCurrenciesResponse) GetCurrencies() []string {
 }
 
 type ListBetsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorIds   []int64                `protobuf:"varint,1,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	ProviderIds   []string               `protobuf:"bytes,2,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
-	GameName      *string                `protobuf:"bytes,3,opt,name=game_name,json=gameName,proto3,oneof" json:"game_name,omitempty"`
-	GameId        *string                `protobuf:"bytes,4,opt,name=game_id,json=gameId,proto3,oneof" json:"game_id,omitempty"`
-	UserId        *int64                 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	OperatorBetId *int64                 `protobuf:"varint,6,opt,name=operator_bet_id,json=operatorBetId,proto3,oneof" json:"operator_bet_id,omitempty"`
-	ProviderBetId *string                `protobuf:"bytes,7,opt,name=provider_bet_id,json=providerBetId,proto3,oneof" json:"provider_bet_id,omitempty"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime       *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	state              protoimpl.MessageState             `protogen:"open.v1"`
+	OperatorIds        []int64                            `protobuf:"varint,1,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
+	ProviderIds        []string                           `protobuf:"bytes,2,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
+	GameName           *string                            `protobuf:"bytes,3,opt,name=game_name,json=gameName,proto3,oneof" json:"game_name,omitempty"`
+	GameId             *string                            `protobuf:"bytes,4,opt,name=game_id,json=gameId,proto3,oneof" json:"game_id,omitempty"`
+	UserId             *int64                             `protobuf:"varint,5,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	OperatorBetId      *int64                             `protobuf:"varint,6,opt,name=operator_bet_id,json=operatorBetId,proto3,oneof" json:"operator_bet_id,omitempty"`
+	ProviderBetId      *string                            `protobuf:"bytes,7,opt,name=provider_bet_id,json=providerBetId,proto3,oneof" json:"provider_bet_id,omitempty"`
+	StartTime          *timestamppb.Timestamp             `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime            *timestamppb.Timestamp             `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	CurrencyWithRanges *ListBetsRequest_CurrencyWithRange `protobuf:"bytes,10,opt,name=currency_with_ranges,json=currencyWithRanges,proto3,oneof" json:"currency_with_ranges,omitempty"`
 	// Types that are valid to be assigned to SettlementCurrencyOption:
 	//
 	//	*ListBetsRequest_SettlementCurrencyWithRanges
 	//	*ListBetsRequest_SettlementCurrencies
 	SettlementCurrencyOption isListBetsRequest_SettlementCurrencyOption `protobuf_oneof:"settlement_currency_option"`
-	Categories               []string                                   `protobuf:"bytes,12,rep,name=categories,proto3" json:"categories,omitempty"`
-	Status                   *string                                    `protobuf:"bytes,13,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	Page                     *int32                                     `protobuf:"varint,14,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize                 *int32                                     `protobuf:"varint,15,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Categories               []string                                   `protobuf:"bytes,13,rep,name=categories,proto3" json:"categories,omitempty"`
+	Status                   *string                                    `protobuf:"bytes,14,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Page                     *int32                                     `protobuf:"varint,15,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize                 *int32                                     `protobuf:"varint,16,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -812,6 +813,13 @@ func (x *ListBetsRequest) GetEndTime() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *ListBetsRequest) GetCurrencyWithRanges() *ListBetsRequest_CurrencyWithRange {
+	if x != nil {
+		return x.CurrencyWithRanges
+	}
+	return nil
+}
+
 func (x *ListBetsRequest) GetSettlementCurrencyOption() isListBetsRequest_SettlementCurrencyOption {
 	if x != nil {
 		return x.SettlementCurrencyOption
@@ -870,11 +878,11 @@ type isListBetsRequest_SettlementCurrencyOption interface {
 }
 
 type ListBetsRequest_SettlementCurrencyWithRanges struct {
-	SettlementCurrencyWithRanges *ListBetsRequest_CurrencyWithRange `protobuf:"bytes,10,opt,name=settlement_currency_with_ranges,json=settlementCurrencyWithRanges,proto3,oneof"`
+	SettlementCurrencyWithRanges *ListBetsRequest_CurrencyWithRange `protobuf:"bytes,11,opt,name=settlement_currency_with_ranges,json=settlementCurrencyWithRanges,proto3,oneof"`
 }
 
 type ListBetsRequest_SettlementCurrencies struct {
-	SettlementCurrencies *ListBetsRequest_Currencies `protobuf:"bytes,11,opt,name=settlement_currencies,json=settlementCurrencies,proto3,oneof"`
+	SettlementCurrencies *ListBetsRequest_Currencies `protobuf:"bytes,12,opt,name=settlement_currencies,json=settlementCurrencies,proto3,oneof"`
 }
 
 func (*ListBetsRequest_SettlementCurrencyWithRanges) isListBetsRequest_SettlementCurrencyOption() {}
@@ -3960,7 +3968,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x16ListCurrenciesResponse\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\tR\n" +
-	"currencies\"\xfb\t\n" +
+	"currencies\"\x89\v\n" +
 	"\x0fListBetsRequest\x12!\n" +
 	"\foperator_ids\x18\x01 \x03(\x03R\voperatorIds\x12!\n" +
 	"\fprovider_ids\x18\x02 \x03(\tR\vproviderIds\x12 \n" +
@@ -3971,17 +3979,18 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x0fprovider_bet_id\x18\a \x01(\tH\x05R\rproviderBetId\x88\x01\x01\x12>\n" +
 	"\n" +
 	"start_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x06R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\aR\aendTime\x88\x01\x01\x12\x85\x01\n" +
-	"\x1fsettlement_currency_with_ranges\x18\n" +
-	" \x01(\v2<.api.backoffice.service.v1.ListBetsRequest.CurrencyWithRangeH\x00R\x1csettlementCurrencyWithRanges\x12l\n" +
-	"\x15settlement_currencies\x18\v \x01(\v25.api.backoffice.service.v1.ListBetsRequest.CurrenciesH\x00R\x14settlementCurrencies\x12\x1e\n" +
+	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\aR\aendTime\x88\x01\x01\x12s\n" +
+	"\x14currency_with_ranges\x18\n" +
+	" \x01(\v2<.api.backoffice.service.v1.ListBetsRequest.CurrencyWithRangeH\bR\x12currencyWithRanges\x88\x01\x01\x12\x85\x01\n" +
+	"\x1fsettlement_currency_with_ranges\x18\v \x01(\v2<.api.backoffice.service.v1.ListBetsRequest.CurrencyWithRangeH\x00R\x1csettlementCurrencyWithRanges\x12l\n" +
+	"\x15settlement_currencies\x18\f \x01(\v25.api.backoffice.service.v1.ListBetsRequest.CurrenciesH\x00R\x14settlementCurrencies\x12\x1e\n" +
 	"\n" +
-	"categories\x18\f \x03(\tR\n" +
+	"categories\x18\r \x03(\tR\n" +
 	"categories\x12\x1b\n" +
-	"\x06status\x18\r \x01(\tH\bR\x06status\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x0e \x01(\x05H\tR\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x0f \x01(\x05H\n" +
-	"R\bpageSize\x88\x01\x01\x1a\xa7\x02\n" +
+	"\x06status\x18\x0e \x01(\tH\tR\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x0f \x01(\x05H\n" +
+	"R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x10 \x01(\x05H\vR\bpageSize\x88\x01\x01\x1a\xa7\x02\n" +
 	"\x11CurrencyWithRange\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12)\n" +
 	"\x0emin_bet_amount\x18\x02 \x01(\tH\x00R\fminBetAmount\x88\x01\x01\x12)\n" +
@@ -4007,7 +4016,8 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x10_operator_bet_idB\x12\n" +
 	"\x10_provider_bet_idB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_timeB\t\n" +
+	"\t_end_timeB\x17\n" +
+	"\x15_currency_with_rangesB\t\n" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
@@ -4439,74 +4449,75 @@ var file_backoffice_service_v1_backoffice_game_proto_depIdxs = []int32{
 	34, // 1: api.backoffice.service.v1.ListProvidersWithDetailResponse.providers:type_name -> api.backoffice.service.v1.ListProvidersWithDetailResponse.Provider
 	43, // 2: api.backoffice.service.v1.ListBetsRequest.start_time:type_name -> google.protobuf.Timestamp
 	43, // 3: api.backoffice.service.v1.ListBetsRequest.end_time:type_name -> google.protobuf.Timestamp
-	35, // 4: api.backoffice.service.v1.ListBetsRequest.settlement_currency_with_ranges:type_name -> api.backoffice.service.v1.ListBetsRequest.CurrencyWithRange
-	36, // 5: api.backoffice.service.v1.ListBetsRequest.settlement_currencies:type_name -> api.backoffice.service.v1.ListBetsRequest.Currencies
-	43, // 6: api.backoffice.service.v1.Bet.created_at:type_name -> google.protobuf.Timestamp
-	43, // 7: api.backoffice.service.v1.Bet.updated_at:type_name -> google.protobuf.Timestamp
-	15, // 8: api.backoffice.service.v1.ListBetsResponse.bets:type_name -> api.backoffice.service.v1.Bet
-	38, // 9: api.backoffice.service.v1.GetBetByIdResponse.bet:type_name -> api.backoffice.service.v1.GetBetByIdResponse.Bet
-	43, // 10: api.backoffice.service.v1.GetUserBetsOverviewRequest.start_time:type_name -> google.protobuf.Timestamp
-	43, // 11: api.backoffice.service.v1.GetUserBetsOverviewRequest.end_time:type_name -> google.protobuf.Timestamp
-	39, // 12: api.backoffice.service.v1.GetGameTransactionsForBetResponse.game_transactions:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction
-	41, // 13: api.backoffice.service.v1.ListGamesResponse.games:type_name -> api.backoffice.service.v1.ListGamesResponse.Game
-	42, // 14: api.backoffice.service.v1.ListProviderRatesResponse.provider_rates:type_name -> api.backoffice.service.v1.ListProviderRatesResponse.ProviderRate
-	43, // 15: api.backoffice.service.v1.GetGameTransactionByIdResponse.bet_time:type_name -> google.protobuf.Timestamp
-	43, // 16: api.backoffice.service.v1.GetGameTransactionByIdResponse.settle_time:type_name -> google.protobuf.Timestamp
-	43, // 17: api.backoffice.service.v1.GetGameTransactionByIdResponse.provider_timestamp:type_name -> google.protobuf.Timestamp
-	43, // 18: api.backoffice.service.v1.GetGameTransactionByIdResponse.operator_timestamp:type_name -> google.protobuf.Timestamp
-	43, // 19: api.backoffice.service.v1.GetGameTransactionByIdResponse.processed_at:type_name -> google.protobuf.Timestamp
-	43, // 20: api.backoffice.service.v1.GetGameTransactionByIdResponse.created_at:type_name -> google.protobuf.Timestamp
-	43, // 21: api.backoffice.service.v1.GetGameTransactionByIdResponse.updated_at:type_name -> google.protobuf.Timestamp
-	43, // 22: api.backoffice.service.v1.GetBetByIdResponse.Action.bet_time:type_name -> google.protobuf.Timestamp
-	43, // 23: api.backoffice.service.v1.GetBetByIdResponse.Action.settle_time:type_name -> google.protobuf.Timestamp
-	43, // 24: api.backoffice.service.v1.GetBetByIdResponse.Action.provider_timestamp:type_name -> google.protobuf.Timestamp
-	43, // 25: api.backoffice.service.v1.GetBetByIdResponse.Action.operator_timestamp:type_name -> google.protobuf.Timestamp
-	43, // 26: api.backoffice.service.v1.GetBetByIdResponse.Action.processed_at:type_name -> google.protobuf.Timestamp
-	43, // 27: api.backoffice.service.v1.GetBetByIdResponse.Action.created_at:type_name -> google.protobuf.Timestamp
-	43, // 28: api.backoffice.service.v1.GetBetByIdResponse.Action.updated_at:type_name -> google.protobuf.Timestamp
-	43, // 29: api.backoffice.service.v1.GetBetByIdResponse.Bet.created_at:type_name -> google.protobuf.Timestamp
-	43, // 30: api.backoffice.service.v1.GetBetByIdResponse.Bet.updated_at:type_name -> google.protobuf.Timestamp
-	37, // 31: api.backoffice.service.v1.GetBetByIdResponse.Bet.actions:type_name -> api.backoffice.service.v1.GetBetByIdResponse.Action
-	43, // 32: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.created_at:type_name -> google.protobuf.Timestamp
-	43, // 33: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.updated_at:type_name -> google.protobuf.Timestamp
-	40, // 34: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.amount:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.Amount
-	0,  // 35: api.backoffice.service.v1.BackofficeGame.ListProviders:input_type -> api.backoffice.service.v1.ListProvidersRequest
-	2,  // 36: api.backoffice.service.v1.BackofficeGame.ListProvidersWithDetail:input_type -> api.backoffice.service.v1.ListProvidersWithDetailRequest
-	4,  // 37: api.backoffice.service.v1.BackofficeGame.ListCategories:input_type -> api.backoffice.service.v1.ListCategoriesRequest
-	6,  // 38: api.backoffice.service.v1.BackofficeGame.ListFeeGroups:input_type -> api.backoffice.service.v1.ListFeeGroupsRequest
-	8,  // 39: api.backoffice.service.v1.BackofficeGame.ListTags:input_type -> api.backoffice.service.v1.ListTagsRequest
-	10, // 40: api.backoffice.service.v1.BackofficeGame.ListThemes:input_type -> api.backoffice.service.v1.ListThemesRequest
-	12, // 41: api.backoffice.service.v1.BackofficeGame.ListCurrencies:input_type -> api.backoffice.service.v1.ListCurrenciesRequest
-	14, // 42: api.backoffice.service.v1.BackofficeGame.ListBets:input_type -> api.backoffice.service.v1.ListBetsRequest
-	17, // 43: api.backoffice.service.v1.BackofficeGame.GetBetById:input_type -> api.backoffice.service.v1.GetBetByIdRequest
-	19, // 44: api.backoffice.service.v1.BackofficeGame.GetUserBetsOverview:input_type -> api.backoffice.service.v1.GetUserBetsOverviewRequest
-	21, // 45: api.backoffice.service.v1.BackofficeGame.GetGameTransactionsForBet:input_type -> api.backoffice.service.v1.GetGameTransactionsForBetRequest
-	23, // 46: api.backoffice.service.v1.BackofficeGame.ListGames:input_type -> api.backoffice.service.v1.ListGamesRequest
-	25, // 47: api.backoffice.service.v1.BackofficeGame.UpdateGame:input_type -> api.backoffice.service.v1.UpdateGameRequest
-	27, // 48: api.backoffice.service.v1.BackofficeGame.UpdateProvider:input_type -> api.backoffice.service.v1.UpdateProviderRequest
-	29, // 49: api.backoffice.service.v1.BackofficeGame.ListProviderRates:input_type -> api.backoffice.service.v1.ListProviderRatesRequest
-	31, // 50: api.backoffice.service.v1.BackofficeGame.GetGameTransactionById:input_type -> api.backoffice.service.v1.GetGameTransactionByIdRequest
-	1,  // 51: api.backoffice.service.v1.BackofficeGame.ListProviders:output_type -> api.backoffice.service.v1.ListProvidersResponse
-	3,  // 52: api.backoffice.service.v1.BackofficeGame.ListProvidersWithDetail:output_type -> api.backoffice.service.v1.ListProvidersWithDetailResponse
-	5,  // 53: api.backoffice.service.v1.BackofficeGame.ListCategories:output_type -> api.backoffice.service.v1.ListCategoriesResponse
-	7,  // 54: api.backoffice.service.v1.BackofficeGame.ListFeeGroups:output_type -> api.backoffice.service.v1.ListFeeGroupsResponse
-	9,  // 55: api.backoffice.service.v1.BackofficeGame.ListTags:output_type -> api.backoffice.service.v1.ListTagsResponse
-	11, // 56: api.backoffice.service.v1.BackofficeGame.ListThemes:output_type -> api.backoffice.service.v1.ListThemesResponse
-	13, // 57: api.backoffice.service.v1.BackofficeGame.ListCurrencies:output_type -> api.backoffice.service.v1.ListCurrenciesResponse
-	16, // 58: api.backoffice.service.v1.BackofficeGame.ListBets:output_type -> api.backoffice.service.v1.ListBetsResponse
-	18, // 59: api.backoffice.service.v1.BackofficeGame.GetBetById:output_type -> api.backoffice.service.v1.GetBetByIdResponse
-	20, // 60: api.backoffice.service.v1.BackofficeGame.GetUserBetsOverview:output_type -> api.backoffice.service.v1.GetUserBetsOverviewResponse
-	22, // 61: api.backoffice.service.v1.BackofficeGame.GetGameTransactionsForBet:output_type -> api.backoffice.service.v1.GetGameTransactionsForBetResponse
-	24, // 62: api.backoffice.service.v1.BackofficeGame.ListGames:output_type -> api.backoffice.service.v1.ListGamesResponse
-	26, // 63: api.backoffice.service.v1.BackofficeGame.UpdateGame:output_type -> api.backoffice.service.v1.UpdateGameResponse
-	28, // 64: api.backoffice.service.v1.BackofficeGame.UpdateProvider:output_type -> api.backoffice.service.v1.UpdateProviderResponse
-	30, // 65: api.backoffice.service.v1.BackofficeGame.ListProviderRates:output_type -> api.backoffice.service.v1.ListProviderRatesResponse
-	32, // 66: api.backoffice.service.v1.BackofficeGame.GetGameTransactionById:output_type -> api.backoffice.service.v1.GetGameTransactionByIdResponse
-	51, // [51:67] is the sub-list for method output_type
-	35, // [35:51] is the sub-list for method input_type
-	35, // [35:35] is the sub-list for extension type_name
-	35, // [35:35] is the sub-list for extension extendee
-	0,  // [0:35] is the sub-list for field type_name
+	35, // 4: api.backoffice.service.v1.ListBetsRequest.currency_with_ranges:type_name -> api.backoffice.service.v1.ListBetsRequest.CurrencyWithRange
+	35, // 5: api.backoffice.service.v1.ListBetsRequest.settlement_currency_with_ranges:type_name -> api.backoffice.service.v1.ListBetsRequest.CurrencyWithRange
+	36, // 6: api.backoffice.service.v1.ListBetsRequest.settlement_currencies:type_name -> api.backoffice.service.v1.ListBetsRequest.Currencies
+	43, // 7: api.backoffice.service.v1.Bet.created_at:type_name -> google.protobuf.Timestamp
+	43, // 8: api.backoffice.service.v1.Bet.updated_at:type_name -> google.protobuf.Timestamp
+	15, // 9: api.backoffice.service.v1.ListBetsResponse.bets:type_name -> api.backoffice.service.v1.Bet
+	38, // 10: api.backoffice.service.v1.GetBetByIdResponse.bet:type_name -> api.backoffice.service.v1.GetBetByIdResponse.Bet
+	43, // 11: api.backoffice.service.v1.GetUserBetsOverviewRequest.start_time:type_name -> google.protobuf.Timestamp
+	43, // 12: api.backoffice.service.v1.GetUserBetsOverviewRequest.end_time:type_name -> google.protobuf.Timestamp
+	39, // 13: api.backoffice.service.v1.GetGameTransactionsForBetResponse.game_transactions:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction
+	41, // 14: api.backoffice.service.v1.ListGamesResponse.games:type_name -> api.backoffice.service.v1.ListGamesResponse.Game
+	42, // 15: api.backoffice.service.v1.ListProviderRatesResponse.provider_rates:type_name -> api.backoffice.service.v1.ListProviderRatesResponse.ProviderRate
+	43, // 16: api.backoffice.service.v1.GetGameTransactionByIdResponse.bet_time:type_name -> google.protobuf.Timestamp
+	43, // 17: api.backoffice.service.v1.GetGameTransactionByIdResponse.settle_time:type_name -> google.protobuf.Timestamp
+	43, // 18: api.backoffice.service.v1.GetGameTransactionByIdResponse.provider_timestamp:type_name -> google.protobuf.Timestamp
+	43, // 19: api.backoffice.service.v1.GetGameTransactionByIdResponse.operator_timestamp:type_name -> google.protobuf.Timestamp
+	43, // 20: api.backoffice.service.v1.GetGameTransactionByIdResponse.processed_at:type_name -> google.protobuf.Timestamp
+	43, // 21: api.backoffice.service.v1.GetGameTransactionByIdResponse.created_at:type_name -> google.protobuf.Timestamp
+	43, // 22: api.backoffice.service.v1.GetGameTransactionByIdResponse.updated_at:type_name -> google.protobuf.Timestamp
+	43, // 23: api.backoffice.service.v1.GetBetByIdResponse.Action.bet_time:type_name -> google.protobuf.Timestamp
+	43, // 24: api.backoffice.service.v1.GetBetByIdResponse.Action.settle_time:type_name -> google.protobuf.Timestamp
+	43, // 25: api.backoffice.service.v1.GetBetByIdResponse.Action.provider_timestamp:type_name -> google.protobuf.Timestamp
+	43, // 26: api.backoffice.service.v1.GetBetByIdResponse.Action.operator_timestamp:type_name -> google.protobuf.Timestamp
+	43, // 27: api.backoffice.service.v1.GetBetByIdResponse.Action.processed_at:type_name -> google.protobuf.Timestamp
+	43, // 28: api.backoffice.service.v1.GetBetByIdResponse.Action.created_at:type_name -> google.protobuf.Timestamp
+	43, // 29: api.backoffice.service.v1.GetBetByIdResponse.Action.updated_at:type_name -> google.protobuf.Timestamp
+	43, // 30: api.backoffice.service.v1.GetBetByIdResponse.Bet.created_at:type_name -> google.protobuf.Timestamp
+	43, // 31: api.backoffice.service.v1.GetBetByIdResponse.Bet.updated_at:type_name -> google.protobuf.Timestamp
+	37, // 32: api.backoffice.service.v1.GetBetByIdResponse.Bet.actions:type_name -> api.backoffice.service.v1.GetBetByIdResponse.Action
+	43, // 33: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.created_at:type_name -> google.protobuf.Timestamp
+	43, // 34: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.updated_at:type_name -> google.protobuf.Timestamp
+	40, // 35: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.amount:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.Amount
+	0,  // 36: api.backoffice.service.v1.BackofficeGame.ListProviders:input_type -> api.backoffice.service.v1.ListProvidersRequest
+	2,  // 37: api.backoffice.service.v1.BackofficeGame.ListProvidersWithDetail:input_type -> api.backoffice.service.v1.ListProvidersWithDetailRequest
+	4,  // 38: api.backoffice.service.v1.BackofficeGame.ListCategories:input_type -> api.backoffice.service.v1.ListCategoriesRequest
+	6,  // 39: api.backoffice.service.v1.BackofficeGame.ListFeeGroups:input_type -> api.backoffice.service.v1.ListFeeGroupsRequest
+	8,  // 40: api.backoffice.service.v1.BackofficeGame.ListTags:input_type -> api.backoffice.service.v1.ListTagsRequest
+	10, // 41: api.backoffice.service.v1.BackofficeGame.ListThemes:input_type -> api.backoffice.service.v1.ListThemesRequest
+	12, // 42: api.backoffice.service.v1.BackofficeGame.ListCurrencies:input_type -> api.backoffice.service.v1.ListCurrenciesRequest
+	14, // 43: api.backoffice.service.v1.BackofficeGame.ListBets:input_type -> api.backoffice.service.v1.ListBetsRequest
+	17, // 44: api.backoffice.service.v1.BackofficeGame.GetBetById:input_type -> api.backoffice.service.v1.GetBetByIdRequest
+	19, // 45: api.backoffice.service.v1.BackofficeGame.GetUserBetsOverview:input_type -> api.backoffice.service.v1.GetUserBetsOverviewRequest
+	21, // 46: api.backoffice.service.v1.BackofficeGame.GetGameTransactionsForBet:input_type -> api.backoffice.service.v1.GetGameTransactionsForBetRequest
+	23, // 47: api.backoffice.service.v1.BackofficeGame.ListGames:input_type -> api.backoffice.service.v1.ListGamesRequest
+	25, // 48: api.backoffice.service.v1.BackofficeGame.UpdateGame:input_type -> api.backoffice.service.v1.UpdateGameRequest
+	27, // 49: api.backoffice.service.v1.BackofficeGame.UpdateProvider:input_type -> api.backoffice.service.v1.UpdateProviderRequest
+	29, // 50: api.backoffice.service.v1.BackofficeGame.ListProviderRates:input_type -> api.backoffice.service.v1.ListProviderRatesRequest
+	31, // 51: api.backoffice.service.v1.BackofficeGame.GetGameTransactionById:input_type -> api.backoffice.service.v1.GetGameTransactionByIdRequest
+	1,  // 52: api.backoffice.service.v1.BackofficeGame.ListProviders:output_type -> api.backoffice.service.v1.ListProvidersResponse
+	3,  // 53: api.backoffice.service.v1.BackofficeGame.ListProvidersWithDetail:output_type -> api.backoffice.service.v1.ListProvidersWithDetailResponse
+	5,  // 54: api.backoffice.service.v1.BackofficeGame.ListCategories:output_type -> api.backoffice.service.v1.ListCategoriesResponse
+	7,  // 55: api.backoffice.service.v1.BackofficeGame.ListFeeGroups:output_type -> api.backoffice.service.v1.ListFeeGroupsResponse
+	9,  // 56: api.backoffice.service.v1.BackofficeGame.ListTags:output_type -> api.backoffice.service.v1.ListTagsResponse
+	11, // 57: api.backoffice.service.v1.BackofficeGame.ListThemes:output_type -> api.backoffice.service.v1.ListThemesResponse
+	13, // 58: api.backoffice.service.v1.BackofficeGame.ListCurrencies:output_type -> api.backoffice.service.v1.ListCurrenciesResponse
+	16, // 59: api.backoffice.service.v1.BackofficeGame.ListBets:output_type -> api.backoffice.service.v1.ListBetsResponse
+	18, // 60: api.backoffice.service.v1.BackofficeGame.GetBetById:output_type -> api.backoffice.service.v1.GetBetByIdResponse
+	20, // 61: api.backoffice.service.v1.BackofficeGame.GetUserBetsOverview:output_type -> api.backoffice.service.v1.GetUserBetsOverviewResponse
+	22, // 62: api.backoffice.service.v1.BackofficeGame.GetGameTransactionsForBet:output_type -> api.backoffice.service.v1.GetGameTransactionsForBetResponse
+	24, // 63: api.backoffice.service.v1.BackofficeGame.ListGames:output_type -> api.backoffice.service.v1.ListGamesResponse
+	26, // 64: api.backoffice.service.v1.BackofficeGame.UpdateGame:output_type -> api.backoffice.service.v1.UpdateGameResponse
+	28, // 65: api.backoffice.service.v1.BackofficeGame.UpdateProvider:output_type -> api.backoffice.service.v1.UpdateProviderResponse
+	30, // 66: api.backoffice.service.v1.BackofficeGame.ListProviderRates:output_type -> api.backoffice.service.v1.ListProviderRatesResponse
+	32, // 67: api.backoffice.service.v1.BackofficeGame.GetGameTransactionById:output_type -> api.backoffice.service.v1.GetGameTransactionByIdResponse
+	52, // [52:68] is the sub-list for method output_type
+	36, // [36:52] is the sub-list for method input_type
+	36, // [36:36] is the sub-list for extension type_name
+	36, // [36:36] is the sub-list for extension extendee
+	0,  // [0:36] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_game_proto_init() }

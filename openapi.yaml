@@ -4210,6 +4210,8 @@ components:
                 endTime:
                     type: string
                     format: date-time
+                currencyWithRanges:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsRequest_CurrencyWithRange'
                 settlementCurrencyWithRanges:
                     $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsRequest_CurrencyWithRange'
                 settlementCurrencies:
@@ -6488,6 +6490,8 @@ components:
                 endTime:
                     type: string
                     format: date-time
+                currencyWithRanges:
+                    $ref: '#/components/schemas/api.game.service.v1.ListBetsRequest_CurrencyWithRange'
                 settlementCurrencyWithRanges:
                     $ref: '#/components/schemas/api.game.service.v1.ListBetsRequest_CurrencyWithRange'
                 settlementCurrencies:
