@@ -531,6 +531,7 @@ message CreateUserRequest {
 	string email = 3;
 	string mobile = 4;
 	int64 operator_id = 5;
+	int64 role_id = 6;
 }
 
 message CreateUserResponse {}

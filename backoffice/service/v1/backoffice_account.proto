@@ -132,6 +132,7 @@ message AddAccountRequest {
 	string email = 2;
 	string mobile = 3;
 	string password = 4;
+	int64 role_id = 5;
 }
 
 message AddAccountResponse {}
