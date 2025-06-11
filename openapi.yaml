@@ -2220,6 +2220,8 @@ components:
                     type: string
                 password:
                     type: string
+                roleId:
+                    type: string
             description: Account related messages
         api.backoffice.service.v1.AddAccountResponse:
             type: object
