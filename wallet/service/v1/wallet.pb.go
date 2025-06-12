@@ -2868,9 +2868,9 @@ func (x *CreditRequest_Ratio) GetOperatorBonus() string {
 
 type GetWalletsResponse_TotalAssets struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	Cash                 string                 `protobuf:"bytes,1,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus        string                 `protobuf:"bytes,2,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus        string                 `protobuf:"bytes,3,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	Balance              string                 `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	Deposit              string                 `protobuf:"bytes,2,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	Withdraw             string                 `protobuf:"bytes,3,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
 	DepositMinusWithdraw string                 `protobuf:"bytes,4,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
 	ValidTurnover        string                 `protobuf:"bytes,5,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`
 	unknownFields        protoimpl.UnknownFields
@@ -2907,23 +2907,23 @@ func (*GetWalletsResponse_TotalAssets) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{27, 0}
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetCash() string {
+func (x *GetWalletsResponse_TotalAssets) GetBalance() string {
 	if x != nil {
-		return x.Cash
+		return x.Balance
 	}
 	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetOperatorBonus() string {
+func (x *GetWalletsResponse_TotalAssets) GetDeposit() string {
 	if x != nil {
-		return x.OperatorBonus
+		return x.Deposit
 	}
 	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetProviderBonus() string {
+func (x *GetWalletsResponse_TotalAssets) GetWithdraw() string {
 	if x != nil {
-		return x.ProviderBonus
+		return x.Withdraw
 	}
 	return ""
 }
@@ -3971,14 +3971,14 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x02 \x03(\tR\n" +
-	"currencies\"\xeb\a\n" +
+	"currencies\"\xd9\a\n" +
 	"\x12GetWalletsResponse\x12X\n" +
 	"\ftotal_assets\x18\x01 \x01(\v25.api.wallet.service.v1.GetWalletsResponse.TotalAssetsR\vtotalAssets\x12J\n" +
-	"\awallets\x18\x02 \x03(\v20.api.wallet.service.v1.GetWalletsResponse.WalletR\awallets\x1a\xcc\x01\n" +
-	"\vTotalAssets\x12\x12\n" +
-	"\x04cash\x18\x01 \x01(\tR\x04cash\x12%\n" +
-	"\x0eoperator_bonus\x18\x02 \x01(\tR\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x03 \x01(\tR\rproviderBonus\x124\n" +
+	"\awallets\x18\x02 \x03(\v20.api.wallet.service.v1.GetWalletsResponse.WalletR\awallets\x1a\xba\x01\n" +
+	"\vTotalAssets\x12\x18\n" +
+	"\abalance\x18\x01 \x01(\tR\abalance\x12\x18\n" +
+	"\adeposit\x18\x02 \x01(\tR\adeposit\x12\x1a\n" +
+	"\bwithdraw\x18\x03 \x01(\tR\bwithdraw\x124\n" +
 	"\x16deposit_minus_withdraw\x18\x04 \x01(\tR\x14depositMinusWithdraw\x12%\n" +
 	"\x0evalid_turnover\x18\x05 \x01(\tR\rvalidTurnover\x1a\xab\x02\n" +
 	"\x06Credit\x129\n" +
