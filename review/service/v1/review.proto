@@ -78,7 +78,7 @@ message ListTicketsRequest {
 message ListTicketsResponse {
 	message Ticket {
 		google.protobuf.Timestamp created_at = 1;
-		string operator = 2;
+		string operator_name = 2;
 		int64 ticket_id = 3;
 		int64 user_id = 4;
 		int32 vip_level = 5;
