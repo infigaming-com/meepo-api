@@ -4795,8 +4795,7 @@ components:
                     type: integer
                     format: int32
                 depositConvertionRate:
-                    type: integer
-                    format: int32
+                    type: string
                 arppu:
                     type: integer
                     format: int32

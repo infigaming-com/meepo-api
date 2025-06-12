@@ -446,7 +446,7 @@ message ListRegisterRetentionResponse {
 		int32 reg_users = 3;
 		int32 paid_users = 4;
 		int32 active_users = 5;
-		int32 deposit_convertion_rate = 6;
+		string deposit_convertion_rate = 6;
 		int32 arppu = 7;
 		int32 d1_active_users = 8;
 		int32 d2_active_users = 9;

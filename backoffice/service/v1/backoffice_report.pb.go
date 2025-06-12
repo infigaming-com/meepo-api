@@ -3613,7 +3613,7 @@ type ListRegisterRetentionResponse_List struct {
 	RegUsers              int32                  `protobuf:"varint,3,opt,name=reg_users,json=regUsers,proto3" json:"reg_users,omitempty"`
 	PaidUsers             int32                  `protobuf:"varint,4,opt,name=paid_users,json=paidUsers,proto3" json:"paid_users,omitempty"`
 	ActiveUsers           int32                  `protobuf:"varint,5,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
-	DepositConvertionRate int32                  `protobuf:"varint,6,opt,name=deposit_convertion_rate,json=depositConvertionRate,proto3" json:"deposit_convertion_rate,omitempty"`
+	DepositConvertionRate string                 `protobuf:"bytes,6,opt,name=deposit_convertion_rate,json=depositConvertionRate,proto3" json:"deposit_convertion_rate,omitempty"`
 	Arppu                 int32                  `protobuf:"varint,7,opt,name=arppu,proto3" json:"arppu,omitempty"`
 	D1ActiveUsers         int32                  `protobuf:"varint,8,opt,name=d1_active_users,json=d1ActiveUsers,proto3" json:"d1_active_users,omitempty"`
 	D2ActiveUsers         int32                  `protobuf:"varint,9,opt,name=d2_active_users,json=d2ActiveUsers,proto3" json:"d2_active_users,omitempty"`
@@ -3720,11 +3720,11 @@ func (x *ListRegisterRetentionResponse_List) GetActiveUsers() int32 {
 	return 0
 }
 
-func (x *ListRegisterRetentionResponse_List) GetDepositConvertionRate() int32 {
+func (x *ListRegisterRetentionResponse_List) GetDepositConvertionRate() string {
 	if x != nil {
 		return x.DepositConvertionRate
 	}
-	return 0
+	return ""
 }
 
 func (x *ListRegisterRetentionResponse_List) GetArppu() int32 {
@@ -4781,7 +4781,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\n" +
 	"paid_users\x18\x04 \x01(\x05R\tpaidUsers\x12!\n" +
 	"\factive_users\x18\x05 \x01(\x05R\vactiveUsers\x126\n" +
-	"\x17deposit_convertion_rate\x18\x06 \x01(\x05R\x15depositConvertionRate\x12\x14\n" +
+	"\x17deposit_convertion_rate\x18\x06 \x01(\tR\x15depositConvertionRate\x12\x14\n" +
 	"\x05arppu\x18\a \x01(\x05R\x05arppu\x12&\n" +
 	"\x0fd1_active_users\x18\b \x01(\x05R\rd1ActiveUsers\x12&\n" +
 	"\x0fd2_active_users\x18\t \x01(\x05R\rd2ActiveUsers\x12&\n" +
