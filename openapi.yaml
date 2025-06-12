@@ -3686,6 +3686,8 @@ components:
         api.backoffice.service.v1.GetUserOverviewResponse:
             type: object
             properties:
+                balance:
+                    type: string
                 depositMinusWithdraw:
                     type: string
                 turnover:
