@@ -351,29 +351,30 @@ func (x *GetUserOverviewRequest) GetFilter() string {
 
 type GetUserOverviewResponse struct {
 	state                  protoimpl.MessageState              `protogen:"open.v1"`
-	DepositMinusWithdraw   string                              `protobuf:"bytes,1,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
-	Turnover               string                              `protobuf:"bytes,2,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	CashTurnover           string                              `protobuf:"bytes,3,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
-	BonusTurnover          string                              `protobuf:"bytes,4,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
-	Deposit                string                              `protobuf:"bytes,5,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	LastDeposit            string                              `protobuf:"bytes,6,opt,name=last_deposit,json=lastDeposit,proto3" json:"last_deposit,omitempty"`
-	DepositCount           int32                               `protobuf:"varint,7,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
-	Withdraw               string                              `protobuf:"bytes,8,opt,name=withdraw,proto3" json:"withdraw,omitempty"`                                  // withdrawal
-	LastWithdraw           string                              `protobuf:"bytes,9,opt,name=last_withdraw,json=lastWithdraw,proto3" json:"last_withdraw,omitempty"`      // last withdrawal
-	WithdrawCount          int32                               `protobuf:"varint,10,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"` // withdrawal count
-	Bonus                  string                              `protobuf:"bytes,11,opt,name=bonus,proto3" json:"bonus,omitempty"`                                       // Not available for now, only return 0
-	ValidTurnover          string                              `protobuf:"bytes,12,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`  // Not available for now, only return 0
-	AverageBetAmount       string                              `protobuf:"bytes,13,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
-	Ggr                    string                              `protobuf:"bytes,14,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	GgrPercentage          string                              `protobuf:"bytes,15,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`                        // Round to 2 decimal places
-	ManuallyAddedBalance   string                              `protobuf:"bytes,16,opt,name=manually_added_balance,json=manuallyAddedBalance,proto3" json:"manually_added_balance,omitempty"` // Not available for now, only return 0
-	BonusClaimed           string                              `protobuf:"bytes,17,opt,name=bonus_claimed,json=bonusClaimed,proto3" json:"bonus_claimed,omitempty"`                           // Not available for now, only return 0
-	Ngr                    string                              `protobuf:"bytes,18,opt,name=ngr,proto3" json:"ngr,omitempty"`
-	GgrToNgrPercentage     string                              `protobuf:"bytes,19,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`             // Round to 2 decimal places
-	TurnoverMultiplier     string                              `protobuf:"bytes,20,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`                 // Round to 2 decimal places
-	DepositToWithdrawRatio string                              `protobuf:"bytes,21,opt,name=deposit_to_withdraw_ratio,json=depositToWithdrawRatio,proto3" json:"deposit_to_withdraw_ratio,omitempty"` // Round to 2 decimal places
-	Rtp                    string                              `protobuf:"bytes,22,opt,name=rtp,proto3" json:"rtp,omitempty"`                                                                         // Round to 2 decimal places
-	GameData               []*GetUserOverviewResponse_GameData `protobuf:"bytes,23,rep,name=game_data,json=gameData,proto3" json:"game_data,omitempty"`
+	Balance                string                              `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	DepositMinusWithdraw   string                              `protobuf:"bytes,2,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
+	Turnover               string                              `protobuf:"bytes,3,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	CashTurnover           string                              `protobuf:"bytes,4,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
+	BonusTurnover          string                              `protobuf:"bytes,5,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
+	Deposit                string                              `protobuf:"bytes,6,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	LastDeposit            string                              `protobuf:"bytes,7,opt,name=last_deposit,json=lastDeposit,proto3" json:"last_deposit,omitempty"`
+	DepositCount           int32                               `protobuf:"varint,8,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	Withdraw               string                              `protobuf:"bytes,9,opt,name=withdraw,proto3" json:"withdraw,omitempty"`                                  // withdrawal
+	LastWithdraw           string                              `protobuf:"bytes,10,opt,name=last_withdraw,json=lastWithdraw,proto3" json:"last_withdraw,omitempty"`     // last withdrawal
+	WithdrawCount          int32                               `protobuf:"varint,11,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"` // withdrawal count
+	Bonus                  string                              `protobuf:"bytes,12,opt,name=bonus,proto3" json:"bonus,omitempty"`                                       // Not available for now, only return 0
+	ValidTurnover          string                              `protobuf:"bytes,13,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`  // Not available for now, only return 0
+	AverageBetAmount       string                              `protobuf:"bytes,14,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
+	Ggr                    string                              `protobuf:"bytes,15,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	GgrPercentage          string                              `protobuf:"bytes,16,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`                        // Round to 2 decimal places
+	ManuallyAddedBalance   string                              `protobuf:"bytes,17,opt,name=manually_added_balance,json=manuallyAddedBalance,proto3" json:"manually_added_balance,omitempty"` // Not available for now, only return 0
+	BonusClaimed           string                              `protobuf:"bytes,18,opt,name=bonus_claimed,json=bonusClaimed,proto3" json:"bonus_claimed,omitempty"`                           // Not available for now, only return 0
+	Ngr                    string                              `protobuf:"bytes,19,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	GgrToNgrPercentage     string                              `protobuf:"bytes,20,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`             // Round to 2 decimal places
+	TurnoverMultiplier     string                              `protobuf:"bytes,21,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`                 // Round to 2 decimal places
+	DepositToWithdrawRatio string                              `protobuf:"bytes,22,opt,name=deposit_to_withdraw_ratio,json=depositToWithdrawRatio,proto3" json:"deposit_to_withdraw_ratio,omitempty"` // Round to 2 decimal places
+	Rtp                    string                              `protobuf:"bytes,23,opt,name=rtp,proto3" json:"rtp,omitempty"`                                                                         // Round to 2 decimal places
+	GameData               []*GetUserOverviewResponse_GameData `protobuf:"bytes,24,rep,name=game_data,json=gameData,proto3" json:"game_data,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -406,6 +407,13 @@ func (x *GetUserOverviewResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetUserOverviewResponse.ProtoReflect.Descriptor instead.
 func (*GetUserOverviewResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetUserOverviewResponse) GetBalance() string {
+	if x != nil {
+		return x.Balance
+	}
+	return ""
 }
 
 func (x *GetUserOverviewResponse) GetDepositMinusWithdraw() string {
@@ -2570,32 +2578,33 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x16GetUserOverviewRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\x06filter\x18\x02 \x01(\tH\x00R\x06filter\x88\x01\x01B\t\n" +
-	"\a_filter\"\x86\b\n" +
-	"\x17GetUserOverviewResponse\x124\n" +
-	"\x16deposit_minus_withdraw\x18\x01 \x01(\tR\x14depositMinusWithdraw\x12\x1a\n" +
-	"\bturnover\x18\x02 \x01(\tR\bturnover\x12#\n" +
-	"\rcash_turnover\x18\x03 \x01(\tR\fcashTurnover\x12%\n" +
-	"\x0ebonus_turnover\x18\x04 \x01(\tR\rbonusTurnover\x12\x18\n" +
-	"\adeposit\x18\x05 \x01(\tR\adeposit\x12!\n" +
-	"\flast_deposit\x18\x06 \x01(\tR\vlastDeposit\x12#\n" +
-	"\rdeposit_count\x18\a \x01(\x05R\fdepositCount\x12\x1a\n" +
-	"\bwithdraw\x18\b \x01(\tR\bwithdraw\x12#\n" +
-	"\rlast_withdraw\x18\t \x01(\tR\flastWithdraw\x12%\n" +
-	"\x0ewithdraw_count\x18\n" +
-	" \x01(\x05R\rwithdrawCount\x12\x14\n" +
-	"\x05bonus\x18\v \x01(\tR\x05bonus\x12%\n" +
-	"\x0evalid_turnover\x18\f \x01(\tR\rvalidTurnover\x12,\n" +
-	"\x12average_bet_amount\x18\r \x01(\tR\x10averageBetAmount\x12\x10\n" +
-	"\x03ggr\x18\x0e \x01(\tR\x03ggr\x12%\n" +
-	"\x0eggr_percentage\x18\x0f \x01(\tR\rggrPercentage\x124\n" +
-	"\x16manually_added_balance\x18\x10 \x01(\tR\x14manuallyAddedBalance\x12#\n" +
-	"\rbonus_claimed\x18\x11 \x01(\tR\fbonusClaimed\x12\x10\n" +
-	"\x03ngr\x18\x12 \x01(\tR\x03ngr\x121\n" +
-	"\x15ggr_to_ngr_percentage\x18\x13 \x01(\tR\x12ggrToNgrPercentage\x12/\n" +
-	"\x13turnover_multiplier\x18\x14 \x01(\tR\x12turnoverMultiplier\x129\n" +
-	"\x19deposit_to_withdraw_ratio\x18\x15 \x01(\tR\x16depositToWithdrawRatio\x12\x10\n" +
-	"\x03rtp\x18\x16 \x01(\tR\x03rtp\x12X\n" +
-	"\tgame_data\x18\x17 \x03(\v2;.api.backoffice.service.v1.GetUserOverviewResponse.GameDataR\bgameData\x1ag\n" +
+	"\a_filter\"\xa0\b\n" +
+	"\x17GetUserOverviewResponse\x12\x18\n" +
+	"\abalance\x18\x01 \x01(\tR\abalance\x124\n" +
+	"\x16deposit_minus_withdraw\x18\x02 \x01(\tR\x14depositMinusWithdraw\x12\x1a\n" +
+	"\bturnover\x18\x03 \x01(\tR\bturnover\x12#\n" +
+	"\rcash_turnover\x18\x04 \x01(\tR\fcashTurnover\x12%\n" +
+	"\x0ebonus_turnover\x18\x05 \x01(\tR\rbonusTurnover\x12\x18\n" +
+	"\adeposit\x18\x06 \x01(\tR\adeposit\x12!\n" +
+	"\flast_deposit\x18\a \x01(\tR\vlastDeposit\x12#\n" +
+	"\rdeposit_count\x18\b \x01(\x05R\fdepositCount\x12\x1a\n" +
+	"\bwithdraw\x18\t \x01(\tR\bwithdraw\x12#\n" +
+	"\rlast_withdraw\x18\n" +
+	" \x01(\tR\flastWithdraw\x12%\n" +
+	"\x0ewithdraw_count\x18\v \x01(\x05R\rwithdrawCount\x12\x14\n" +
+	"\x05bonus\x18\f \x01(\tR\x05bonus\x12%\n" +
+	"\x0evalid_turnover\x18\r \x01(\tR\rvalidTurnover\x12,\n" +
+	"\x12average_bet_amount\x18\x0e \x01(\tR\x10averageBetAmount\x12\x10\n" +
+	"\x03ggr\x18\x0f \x01(\tR\x03ggr\x12%\n" +
+	"\x0eggr_percentage\x18\x10 \x01(\tR\rggrPercentage\x124\n" +
+	"\x16manually_added_balance\x18\x11 \x01(\tR\x14manuallyAddedBalance\x12#\n" +
+	"\rbonus_claimed\x18\x12 \x01(\tR\fbonusClaimed\x12\x10\n" +
+	"\x03ngr\x18\x13 \x01(\tR\x03ngr\x121\n" +
+	"\x15ggr_to_ngr_percentage\x18\x14 \x01(\tR\x12ggrToNgrPercentage\x12/\n" +
+	"\x13turnover_multiplier\x18\x15 \x01(\tR\x12turnoverMultiplier\x129\n" +
+	"\x19deposit_to_withdraw_ratio\x18\x16 \x01(\tR\x16depositToWithdrawRatio\x12\x10\n" +
+	"\x03rtp\x18\x17 \x01(\tR\x03rtp\x12X\n" +
+	"\tgame_data\x18\x18 \x03(\v2;.api.backoffice.service.v1.GetUserOverviewResponse.GameDataR\bgameData\x1ag\n" +
 	"\bGameData\x12\x1b\n" +
 	"\tgame_type\x18\x01 \x01(\tR\bgameType\x12\x10\n" +
 	"\x03ggr\x18\x02 \x01(\tR\x03ggr\x12\x1a\n" +
