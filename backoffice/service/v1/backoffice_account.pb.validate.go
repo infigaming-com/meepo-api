@@ -65,6 +65,8 @@ func (m *AddAccountRequest) validate(all bool) error {
 
 	// no validation rules for Password
 
+	// no validation rules for RoleId
+
 	if len(errors) > 0 {
 		return AddAccountRequestMultiError(errors)
 	}

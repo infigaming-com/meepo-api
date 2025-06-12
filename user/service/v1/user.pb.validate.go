@@ -4755,6 +4755,8 @@ func (m *CreateUserRequest) validate(all bool) error {
 
 	// no validation rules for OperatorId
 
+	// no validation rules for RoleId
+
 	if len(errors) > 0 {
 		return CreateUserRequestMultiError(errors)
 	}

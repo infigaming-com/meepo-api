@@ -30,6 +30,7 @@ type AddAccountRequest struct {
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Mobile        string                 `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile,omitempty"`
 	Password      string                 `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
+	RoleId        int64                  `protobuf:"varint,5,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -90,6 +91,13 @@ func (x *AddAccountRequest) GetPassword() string {
 		return x.Password
 	}
 	return ""
+}
+
+func (x *AddAccountRequest) GetRoleId() int64 {
+	if x != nil {
+		return x.RoleId
+	}
+	return 0
 }
 
 type AddAccountResponse struct {
@@ -2026,12 +2034,13 @@ var File_backoffice_service_v1_backoffice_account_proto protoreflect.FileDescrip
 
 const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_account.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"y\n" +
+	".backoffice/service/v1/backoffice_account.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x92\x01\n" +
 	"\x11AddAccountRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
 	"\x06mobile\x18\x03 \x01(\tR\x06mobile\x12\x1a\n" +
-	"\bpassword\x18\x04 \x01(\tR\bpassword\"\x14\n" +
+	"\bpassword\x18\x04 \x01(\tR\bpassword\x12\x17\n" +
+	"\arole_id\x18\x05 \x01(\x03R\x06roleId\"\x14\n" +
 	"\x12AddAccountResponse\"\x1e\n" +
 	"\x1cSendEmailVerificationRequest\"\x1f\n" +
 	"\x1dSendEmailVerificationResponse\"*\n" +

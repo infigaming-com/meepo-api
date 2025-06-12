@@ -2641,6 +2641,7 @@ type CreateUserRequest struct {
 	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	Mobile        string                 `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile,omitempty"`
 	OperatorId    int64                  `protobuf:"varint,5,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	RoleId        int64                  `protobuf:"varint,6,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2706,6 +2707,13 @@ func (x *CreateUserRequest) GetMobile() string {
 func (x *CreateUserRequest) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *CreateUserRequest) GetRoleId() int64 {
+	if x != nil {
+		return x.RoleId
 	}
 	return 0
 }
@@ -5072,14 +5080,15 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aenabled\x18\x1a \x01(\bR\aenabled\x129\n" +
 	"\n" +
 	"created_at\x18\x1b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
-	"\x04role\x18\x1c \x01(\v2\x19.api.user.service.v1.RoleR\x04role\"\x9a\x01\n" +
+	"\x04role\x18\x1c \x01(\v2\x19.api.user.service.v1.RoleR\x04role\"\xb3\x01\n" +
 	"\x11CreateUserRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12\x16\n" +
 	"\x06mobile\x18\x04 \x01(\tR\x06mobile\x12\x1f\n" +
 	"\voperator_id\x18\x05 \x01(\x03R\n" +
-	"operatorId\"\x14\n" +
+	"operatorId\x12\x17\n" +
+	"\arole_id\x18\x06 \x01(\x03R\x06roleId\"\x14\n" +
 	"\x12CreateUserResponse\"W\n" +
 	"\x12VerifyEmailRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12+\n" +
