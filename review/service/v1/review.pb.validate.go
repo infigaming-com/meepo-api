@@ -1586,7 +1586,7 @@ func (m *ListTicketsResponse_Ticket) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	// no validation rules for TicketId
 
