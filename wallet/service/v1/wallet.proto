@@ -279,9 +279,9 @@ message GetWalletsRequest {
 
 message GetWalletsResponse {
 	message TotalAssets {
-		string cash = 1;
-		string operator_bonus = 2;
-		string provider_bonus = 3;
+		string balance = 1;
+		string deposit = 2;
+		string withdraw = 3;
 		string deposit_minus_withdraw = 4;
 		string valid_turnover = 5;
 	}

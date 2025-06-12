@@ -5386,11 +5386,11 @@ func (m *GetWalletsResponse_TotalAssets) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Cash
+	// no validation rules for Balance
 
-	// no validation rules for OperatorBonus
+	// no validation rules for Deposit
 
-	// no validation rules for ProviderBonus
+	// no validation rules for Withdraw
 
 	// no validation rules for DepositMinusWithdraw
 
