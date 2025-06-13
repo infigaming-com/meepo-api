@@ -50,6 +50,7 @@ const (
 	ErrorReason_GENERATE_COMMENT_ID_FAILED                ErrorReason = 70021
 	ErrorReason_GET_USERS_FAILED                          ErrorReason = 70022
 	ErrorReason_USER_NOT_FOUND                            ErrorReason = 70023
+	ErrorReason_WITHDRAW_BANNED_ON_USER                   ErrorReason = 70024
 )
 
 // Enum value maps for ErrorReason.
@@ -80,6 +81,7 @@ var (
 		70021: "GENERATE_COMMENT_ID_FAILED",
 		70022: "GET_USERS_FAILED",
 		70023: "USER_NOT_FOUND",
+		70024: "WITHDRAW_BANNED_ON_USER",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                               0,
@@ -107,6 +109,7 @@ var (
 		"GENERATE_COMMENT_ID_FAILED":                70021,
 		"GET_USERS_FAILED":                          70022,
 		"USER_NOT_FOUND":                            70023,
+		"WITHDRAW_BANNED_ON_USER":                   70024,
 	}
 )
 
@@ -141,7 +144,7 @@ var File_review_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\x8e\x06\n" +
+	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\xad\x06\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCONVERT_STRUCT_TO_JSON_FAILED\x10\xf0\xa2\x04\x12#\n" +
@@ -167,7 +170,8 @@ const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\x14SETTLE_FREEZE_FAILED\x10\x84\xa3\x04\x12 \n" +
 	"\x1aGENERATE_COMMENT_ID_FAILED\x10\x85\xa3\x04\x12\x16\n" +
 	"\x10GET_USERS_FAILED\x10\x86\xa3\x04\x12\x14\n" +
-	"\x0eUSER_NOT_FOUND\x10\x87\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x0eUSER_NOT_FOUND\x10\x87\xa3\x04\x12\x1d\n" +
+	"\x17WITHDRAW_BANNED_ON_USER\x10\x88\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"
 
 var (
