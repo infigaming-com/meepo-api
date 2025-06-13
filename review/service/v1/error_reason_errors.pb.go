@@ -286,3 +286,27 @@ func IsGenerateCommentIdFailed(err error) bool {
 func ErrorGenerateCommentIdFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GENERATE_COMMENT_ID_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetUsersFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USERS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUsersFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USERS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorUserNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
