@@ -310,3 +310,15 @@ func IsUserNotFound(err error) bool {
 func ErrorUserNotFound(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_USER_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
+
+func IsWithdrawBannedOnUser(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_WITHDRAW_BANNED_ON_USER.String() && e.Code == 500
+}
+
+func ErrorWithdrawBannedOnUser(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WITHDRAW_BANNED_ON_USER.String(), fmt.Sprintf(format, args...))
+}
