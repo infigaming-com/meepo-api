@@ -4543,6 +4543,10 @@ components:
                     type: array
                     items:
                         type: string
+                rtpMin:
+                    type: string
+                rtpMax:
+                    type: string
                 enabled:
                     type: boolean
                 page:
@@ -4594,14 +4598,11 @@ components:
                 feeGroup:
                     type: string
                 rate:
-                    type: integer
-                    format: int32
+                    type: string
                 rtp:
-                    type: integer
-                    format: int32
+                    type: string
                 validBetRate:
-                    type: integer
-                    format: int32
+                    type: string
                 supportCurrencies:
                     type: array
                     items:
@@ -6194,6 +6195,10 @@ components:
                     type: array
                     items:
                         type: string
+                rtpMin:
+                    type: string
+                rtpMax:
+                    type: string
                 enabled:
                     type: boolean
                 page:
@@ -6248,14 +6253,11 @@ components:
                 feeGroup:
                     type: string
                 rate:
-                    type: integer
-                    format: int32
+                    type: string
                 rtp:
-                    type: integer
-                    format: int32
+                    type: string
                 validBetRate:
-                    type: integer
-                    format: int32
+                    type: string
                 supportCurrencies:
                     type: array
                     items:

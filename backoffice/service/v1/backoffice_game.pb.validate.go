@@ -3083,6 +3083,14 @@ func (m *ListGamesRequest) validate(all bool) error {
 		// no validation rules for HasFreespins
 	}
 
+	if m.RtpMin != nil {
+		// no validation rules for RtpMin
+	}
+
+	if m.RtpMax != nil {
+		// no validation rules for RtpMax
+	}
+
 	if m.Enabled != nil {
 		// no validation rules for Enabled
 	}
