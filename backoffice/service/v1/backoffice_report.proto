@@ -192,7 +192,7 @@ message GetGameSummaryRequest {
 	repeated int64 retailer_operator_ids = 3;
 	repeated int64 group_operator_ids = 4;
 	repeated string provider_ids = 5;
-	repeated string game_types = 6;
+	repeated string game_categories = 6;
 	repeated string game_names = 7;
 	repeated string game_ids = 8;
 }
@@ -212,7 +212,7 @@ message GetGameDataRequest {
 	repeated int64 retailer_operator_ids = 3;
 	repeated int64 group_operator_ids = 4;
 	repeated string provider_ids = 5;
-	repeated string game_types = 6;
+	repeated string game_categories = 6;
 	repeated string game_names = 7;
 	repeated string game_ids = 8;
 	int32 page = 9;
@@ -253,7 +253,7 @@ message GetPlayerGameSummaryRequest {
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
 	repeated string provider_ids = 5;
-	repeated string game_types = 6;
+	repeated string game_categories = 6;
 	repeated string game_tags = 7;
 	repeated string game_names = 8;
 	repeated string game_ids = 9;
@@ -274,7 +274,7 @@ message GetPlayerGameDataRequest {
 	repeated int64 group_operator_ids = 3;
 	repeated int64 operator_ids = 4;
 	repeated string provider_ids = 5;
-	repeated string game_types = 6;
+	repeated string game_categories = 6;
 	repeated string game_tags = 7;
 	repeated string game_names = 8;
 	repeated string game_ids = 9;
