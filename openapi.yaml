@@ -3116,6 +3116,10 @@ components:
                     type: array
                     items:
                         type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
                 page:
                     type: integer
                     format: int32
