@@ -5313,8 +5313,12 @@ components:
                     type: boolean
                 banLogin:
                     type: boolean
-                online:
+                enabled:
                     type: boolean
+                email:
+                    type: string
+                mobile:
+                    type: string
                 page:
                     type: integer
                     format: int32

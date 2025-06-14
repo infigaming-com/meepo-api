@@ -4491,6 +4491,14 @@ func (m *ListUsersRequest) validate(all bool) error {
 		// no validation rules for Enabled
 	}
 
+	if m.Email != nil {
+		// no validation rules for Email
+	}
+
+	if m.Mobile != nil {
+		// no validation rules for Mobile
+	}
+
 	if m.Page != nil {
 		// no validation rules for Page
 	}

@@ -179,8 +179,16 @@ func (m *ListUsersRequest) validate(all bool) error {
 		// no validation rules for BanLogin
 	}
 
-	if m.Online != nil {
-		// no validation rules for Online
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if m.Email != nil {
+		// no validation rules for Email
+	}
+
+	if m.Mobile != nil {
+		// no validation rules for Mobile
 	}
 
 	if m.Page != nil {
