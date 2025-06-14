@@ -194,7 +194,7 @@ type TransactionInfo struct {
 	// Unique identifier for the transaction
 	TransactionId int64 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	// Transaction ID from the operator's system
-	OperatorTransactionId string `protobuf:"bytes,2,opt,name=operator_transaction_id,json=operatorTransactionId,proto3" json:"operator_transaction_id,omitempty"`
+	PaTransactionId string `protobuf:"bytes,2,opt,name=pa_transaction_id,json=paTransactionId,proto3" json:"pa_transaction_id,omitempty"`
 	// Transaction ID from the payment gateway
 	GatewayTransactionId string `protobuf:"bytes,3,opt,name=gateway_transaction_id,json=gatewayTransactionId,proto3" json:"gateway_transaction_id,omitempty"`
 	// Operator ID associated with the transaction
@@ -264,9 +264,9 @@ func (x *TransactionInfo) GetTransactionId() int64 {
 	return 0
 }
 
-func (x *TransactionInfo) GetOperatorTransactionId() string {
+func (x *TransactionInfo) GetPaTransactionId() string {
 	if x != nil {
-		return x.OperatorTransactionId
+		return x.PaTransactionId
 	}
 	return ""
 }
@@ -899,10 +899,10 @@ var File_backoffice_service_v1_backoffice_payment_proto protoreflect.FileDescrip
 
 const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a payment/service/v1/payment.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xa0\x05\n" +
+	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a payment/service/v1/payment.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"\x94\x05\n" +
 	"\x0fTransactionInfo\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x126\n" +
-	"\x17operator_transaction_id\x18\x02 \x01(\tR\x15operatorTransactionId\x124\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
+	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x124\n" +
 	"\x16gateway_transaction_id\x18\x03 \x01(\tR\x14gatewayTransactionId\x12\x1f\n" +
 	"\voperator_id\x18\x04 \x01(\tR\n" +
 	"operatorId\x12\x17\n" +

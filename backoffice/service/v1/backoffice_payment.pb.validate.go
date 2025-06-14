@@ -59,7 +59,7 @@ func (m *TransactionInfo) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
-	// no validation rules for OperatorTransactionId
+	// no validation rules for PaTransactionId
 
 	// no validation rules for GatewayTransactionId
 
