@@ -2353,8 +2353,10 @@ type ListUsersRequest struct {
 	RoleId        *int64  `protobuf:"varint,22,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
 	Online        *bool   `protobuf:"varint,23,opt,name=online,proto3,oneof" json:"online,omitempty"`
 	Enabled       *bool   `protobuf:"varint,24,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Page          *int32  `protobuf:"varint,25,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32  `protobuf:"varint,26,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Email         *string `protobuf:"bytes,25,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	Mobile        *string `protobuf:"bytes,26,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
+	Page          *int32  `protobuf:"varint,27,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32  `protobuf:"varint,28,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2534,6 +2536,20 @@ func (x *ListUsersRequest) GetEnabled() bool {
 		return *x.Enabled
 	}
 	return false
+}
+
+func (x *ListUsersRequest) GetEmail() string {
+	if x != nil && x.Email != nil {
+		return *x.Email
+	}
+	return ""
+}
+
+func (x *ListUsersRequest) GetMobile() string {
+	if x != nil && x.Mobile != nil {
+		return *x.Mobile
+	}
+	return ""
 }
 
 func (x *ListUsersRequest) GetPage() int32 {
@@ -4987,7 +5003,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\b_enabledB\n" +
 	"\n" +
 	"\b_role_id\"\x14\n" +
-	"\x12UpdateUserResponse\"\x8b\n" +
+	"\x12UpdateUserResponse\"\xd8\n" +
 	"\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
@@ -5014,9 +5030,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\tuser_type\x18\x15 \x01(\tH\x10R\buserType\x88\x01\x01\x12\x1c\n" +
 	"\arole_id\x18\x16 \x01(\x03H\x11R\x06roleId\x88\x01\x01\x12\x1b\n" +
 	"\x06online\x18\x17 \x01(\bH\x12R\x06online\x88\x01\x01\x12\x1d\n" +
-	"\aenabled\x18\x18 \x01(\bH\x13R\aenabled\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x19 \x01(\x05H\x14R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x1a \x01(\x05H\x15R\bpageSize\x88\x01\x01B\n" +
+	"\aenabled\x18\x18 \x01(\bH\x13R\aenabled\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x19 \x01(\tH\x14R\x05email\x88\x01\x01\x12\x1b\n" +
+	"\x06mobile\x18\x1a \x01(\tH\x15R\x06mobile\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x1b \x01(\x05H\x16R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x1c \x01(\x05H\x17R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -5044,7 +5062,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\b_role_idB\t\n" +
 	"\a_onlineB\n" +
 	"\n" +
-	"\b_enabledB\a\n" +
+	"\b_enabledB\b\n" +
+	"\x06_emailB\t\n" +
+	"\a_mobileB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xeb\a\n" +

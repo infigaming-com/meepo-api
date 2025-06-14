@@ -482,8 +482,10 @@ message ListUsersRequest {
 	optional int64 role_id = 22;
 	optional bool online = 23;
 	optional bool enabled = 24;
-	optional int32 page = 25;
-	optional int32 page_size = 26;
+	optional string email = 25;
+	optional string mobile = 26;
+	optional int32 page = 27;
+	optional int32 page_size = 28;
 }
 
 message ListUsersResponse {
