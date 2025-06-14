@@ -497,7 +497,7 @@ type GetGameSummaryRequest struct {
 	RetailerOperatorIds []int64                `protobuf:"varint,3,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
 	GroupOperatorIds    []int64                `protobuf:"varint,4,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
 	ProviderIds         []string               `protobuf:"bytes,5,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
-	GameTypes           []string               `protobuf:"bytes,6,rep,name=game_types,json=gameTypes,proto3" json:"game_types,omitempty"`
+	GameCategories      []string               `protobuf:"bytes,6,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
 	GameNames           []string               `protobuf:"bytes,7,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds             []string               `protobuf:"bytes,8,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -569,9 +569,9 @@ func (x *GetGameSummaryRequest) GetProviderIds() []string {
 	return nil
 }
 
-func (x *GetGameSummaryRequest) GetGameTypes() []string {
+func (x *GetGameSummaryRequest) GetGameCategories() []string {
 	if x != nil {
-		return x.GameTypes
+		return x.GameCategories
 	}
 	return nil
 }
@@ -681,7 +681,7 @@ type GetGameDataRequest struct {
 	RetailerOperatorIds []int64                `protobuf:"varint,3,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
 	GroupOperatorIds    []int64                `protobuf:"varint,4,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
 	ProviderIds         []string               `protobuf:"bytes,5,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
-	GameTypes           []string               `protobuf:"bytes,6,rep,name=game_types,json=gameTypes,proto3" json:"game_types,omitempty"`
+	GameCategories      []string               `protobuf:"bytes,6,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
 	GameNames           []string               `protobuf:"bytes,7,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds             []string               `protobuf:"bytes,8,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
 	Page                int32                  `protobuf:"varint,9,opt,name=page,proto3" json:"page,omitempty"`
@@ -755,9 +755,9 @@ func (x *GetGameDataRequest) GetProviderIds() []string {
 	return nil
 }
 
-func (x *GetGameDataRequest) GetGameTypes() []string {
+func (x *GetGameDataRequest) GetGameCategories() []string {
 	if x != nil {
-		return x.GameTypes
+		return x.GameCategories
 	}
 	return nil
 }
@@ -865,7 +865,7 @@ type GetPlayerGameSummaryRequest struct {
 	GroupOperatorIds    []int64                `protobuf:"varint,3,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
 	OperatorIds         []int64                `protobuf:"varint,4,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
 	ProviderIds         []string               `protobuf:"bytes,5,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
-	GameTypes           []string               `protobuf:"bytes,6,rep,name=game_types,json=gameTypes,proto3" json:"game_types,omitempty"`
+	GameCategories      []string               `protobuf:"bytes,6,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
 	GameTags            []string               `protobuf:"bytes,7,rep,name=game_tags,json=gameTags,proto3" json:"game_tags,omitempty"`
 	GameNames           []string               `protobuf:"bytes,8,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds             []string               `protobuf:"bytes,9,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
@@ -938,9 +938,9 @@ func (x *GetPlayerGameSummaryRequest) GetProviderIds() []string {
 	return nil
 }
 
-func (x *GetPlayerGameSummaryRequest) GetGameTypes() []string {
+func (x *GetPlayerGameSummaryRequest) GetGameCategories() []string {
 	if x != nil {
-		return x.GameTypes
+		return x.GameCategories
 	}
 	return nil
 }
@@ -1057,7 +1057,7 @@ type GetPlayerGameDataRequest struct {
 	GroupOperatorIds    []int64                `protobuf:"varint,3,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
 	OperatorIds         []int64                `protobuf:"varint,4,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
 	ProviderIds         []string               `protobuf:"bytes,5,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
-	GameTypes           []string               `protobuf:"bytes,6,rep,name=game_types,json=gameTypes,proto3" json:"game_types,omitempty"`
+	GameCategories      []string               `protobuf:"bytes,6,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
 	GameTags            []string               `protobuf:"bytes,7,rep,name=game_tags,json=gameTags,proto3" json:"game_tags,omitempty"`
 	GameNames           []string               `protobuf:"bytes,8,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds             []string               `protobuf:"bytes,9,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
@@ -1133,9 +1133,9 @@ func (x *GetPlayerGameDataRequest) GetProviderIds() []string {
 	return nil
 }
 
-func (x *GetPlayerGameDataRequest) GetGameTypes() []string {
+func (x *GetPlayerGameDataRequest) GetGameCategories() []string {
 	if x != nil {
-		return x.GameTypes
+		return x.GameCategories
 	}
 	return nil
 }
@@ -4520,16 +4520,15 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18( \x01(\tR\x03ggr\x12\x10\n" +
 	"\x03ngr\x18) \x01(\tR\x03ngr\x121\n" +
 	"\x15ggr_to_ngr_percentage\x18* \x01(\tR\x12ggrToNgrPercentage\x122\n" +
-	"\x15house_edge_percentage\x18+ \x01(\tR\x13houseEdgePercentage\"\xdd\x02\n" +
+	"\x15house_edge_percentage\x18+ \x01(\tR\x13houseEdgePercentage\"\xe7\x02\n" +
 	"\x15GetGameSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12!\n" +
 	"\foperator_ids\x18\x02 \x03(\x03R\voperatorIds\x122\n" +
 	"\x15retailer_operator_ids\x18\x03 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
 	"\x12group_operator_ids\x18\x04 \x03(\x03R\x10groupOperatorIds\x12!\n" +
-	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12\x1d\n" +
-	"\n" +
-	"game_types\x18\x06 \x03(\tR\tgameTypes\x12\x1d\n" +
+	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12'\n" +
+	"\x0fgame_categories\x18\x06 \x03(\tR\x0egameCategories\x12\x1d\n" +
 	"\n" +
 	"game_names\x18\a \x03(\tR\tgameNames\x12\x19\n" +
 	"\bgame_ids\x18\b \x03(\tR\agameIds\"\xd7\x01\n" +
@@ -4540,16 +4539,15 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
 	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\x8b\x03\n" +
+	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\x95\x03\n" +
 	"\x12GetGameDataRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12!\n" +
 	"\foperator_ids\x18\x02 \x03(\x03R\voperatorIds\x122\n" +
 	"\x15retailer_operator_ids\x18\x03 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
 	"\x12group_operator_ids\x18\x04 \x03(\x03R\x10groupOperatorIds\x12!\n" +
-	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12\x1d\n" +
-	"\n" +
-	"game_types\x18\x06 \x03(\tR\tgameTypes\x12\x1d\n" +
+	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12'\n" +
+	"\x0fgame_categories\x18\x06 \x03(\tR\x0egameCategories\x12\x1d\n" +
 	"\n" +
 	"game_names\x18\a \x03(\tR\tgameNames\x12\x19\n" +
 	"\bgame_ids\x18\b \x03(\tR\agameIds\x12\x12\n" +
@@ -4583,16 +4581,15 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tbet_count\x18\x10 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x11 \x01(\tR\x10averageBetAmount\x12%\n" +
 	"\x0ertp_percentage\x18\x12 \x01(\tR\rrtpPercentage\x12/\n" +
-	"\x13settlement_currency\x18\x13 \x01(\tR\x12settlementCurrency\"\x80\x03\n" +
+	"\x13settlement_currency\x18\x13 \x01(\tR\x12settlementCurrency\"\x8a\x03\n" +
 	"\x1bGetPlayerGameSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
 	"\x15retailer_operator_ids\x18\x02 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
 	"\x12group_operator_ids\x18\x03 \x03(\x03R\x10groupOperatorIds\x12!\n" +
 	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12!\n" +
-	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12\x1d\n" +
-	"\n" +
-	"game_types\x18\x06 \x03(\tR\tgameTypes\x12\x1b\n" +
+	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12'\n" +
+	"\x0fgame_categories\x18\x06 \x03(\tR\x0egameCategories\x12\x1b\n" +
 	"\tgame_tags\x18\a \x03(\tR\bgameTags\x12\x1d\n" +
 	"\n" +
 	"game_names\x18\b \x03(\tR\tgameNames\x12\x19\n" +
@@ -4604,16 +4601,15 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
 	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\xce\x03\n" +
+	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\xd8\x03\n" +
 	"\x18GetPlayerGameDataRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
 	"\x15retailer_operator_ids\x18\x02 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
 	"\x12group_operator_ids\x18\x03 \x03(\x03R\x10groupOperatorIds\x12!\n" +
 	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12!\n" +
-	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12\x1d\n" +
-	"\n" +
-	"game_types\x18\x06 \x03(\tR\tgameTypes\x12\x1b\n" +
+	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12'\n" +
+	"\x0fgame_categories\x18\x06 \x03(\tR\x0egameCategories\x12\x1b\n" +
 	"\tgame_tags\x18\a \x03(\tR\bgameTags\x12\x1d\n" +
 	"\n" +
 	"game_names\x18\b \x03(\tR\tgameNames\x12\x19\n" +

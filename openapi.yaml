@@ -2668,7 +2668,7 @@ components:
                     type: array
                     items:
                         type: string
-                gameTypes:
+                gameCategories:
                     type: array
                     items:
                         type: string
@@ -2766,7 +2766,7 @@ components:
                     type: array
                     items:
                         type: string
-                gameTypes:
+                gameCategories:
                     type: array
                     items:
                         type: string
@@ -3100,7 +3100,7 @@ components:
                     type: array
                     items:
                         type: string
-                gameTypes:
+                gameCategories:
                     type: array
                     items:
                         type: string
@@ -3201,7 +3201,7 @@ components:
                     type: array
                     items:
                         type: string
-                gameTypes:
+                gameCategories:
                     type: array
                     items:
                         type: string
