@@ -3172,14 +3172,15 @@ type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
 	//   - "game_bet_rollback"            - Game bet transaction rollback
 	//   - "game_win_rollback"            - Game win transaction rollback
 	//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
-	TransactionType string `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	VipLevel        int32  `protobuf:"varint,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	ChangeBalance   string `protobuf:"bytes,5,opt,name=change_balance,json=changeBalance,proto3" json:"change_balance,omitempty"`
-	BeforeBalance   string `protobuf:"bytes,6,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	AfterBalance    string `protobuf:"bytes,7,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	Currency        string `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	TransactionType      string `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	VipLevel             int32  `protobuf:"varint,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	ChangeBalance        string `protobuf:"bytes,5,opt,name=change_balance,json=changeBalance,proto3" json:"change_balance,omitempty"`
+	BeforeBalance        string `protobuf:"bytes,6,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	AfterBalance         string `protobuf:"bytes,7,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	Currency             string `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
+	RelatedTransactionId int64  `protobuf:"varint,9,opt,name=related_transaction_id,json=relatedTransactionId,proto3" json:"related_transaction_id,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) Reset() {
@@ -3266,6 +3267,13 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetCurrency()
 		return x.Currency
 	}
 	return ""
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetRelatedTransactionId() int64 {
+	if x != nil {
+		return x.RelatedTransactionId
+	}
+	return 0
 }
 
 type GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction struct {
@@ -4023,12 +4031,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xc3\x04\n" +
+	"_page_size\"\xf9\x04\n" +
 	"%ListWalletBalanceTransactionsResponse\x12\x82\x01\n" +
 	"\x14balance_transactions\x18\x01 \x03(\v2O.api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransactionR\x13balanceTransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xcd\x02\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x83\x03\n" +
 	"\x12BalanceTransaction\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
@@ -4038,7 +4046,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0echange_balance\x18\x05 \x01(\tR\rchangeBalance\x12%\n" +
 	"\x0ebefore_balance\x18\x06 \x01(\tR\rbeforeBalance\x12#\n" +
 	"\rafter_balance\x18\a \x01(\tR\fafterBalance\x12\x1a\n" +
-	"\bcurrency\x18\b \x01(\tR\bcurrency\"S\n" +
+	"\bcurrency\x18\b \x01(\tR\bcurrency\x124\n" +
+	"\x16related_transaction_id\x18\t \x01(\x03R\x14relatedTransactionId\"S\n" +
 	"(GetWalletBalanceTransactionsByIdsRequest\x12'\n" +
 	"\x0ftransaction_ids\x18\x01 \x03(\x03R\x0etransactionIds\"\xb4\v\n" +
 	")GetWalletBalanceTransactionsByIdsResponse\x12\x86\x01\n" +

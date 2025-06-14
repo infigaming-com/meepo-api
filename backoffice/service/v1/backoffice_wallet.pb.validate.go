@@ -2050,6 +2050,8 @@ func (m *ListWalletBalanceTransactionsResponse_BalanceTransaction) validate(all 
 
 	// no validation rules for Currency
 
+	// no validation rules for RelatedTransactionId
+
 	if len(errors) > 0 {
 		return ListWalletBalanceTransactionsResponse_BalanceTransactionMultiError(errors)
 	}
