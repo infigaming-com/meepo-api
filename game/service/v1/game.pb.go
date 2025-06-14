@@ -3101,9 +3101,11 @@ type BackofficeListGamesRequest struct {
 	HasFreespins        *bool                  `protobuf:"varint,8,opt,name=has_freespins,json=hasFreespins,proto3,oneof" json:"has_freespins,omitempty"`
 	SupportCurrencies   []string               `protobuf:"bytes,9,rep,name=support_currencies,json=supportCurrencies,proto3" json:"support_currencies,omitempty"`
 	RestrictedCountries []string               `protobuf:"bytes,10,rep,name=restricted_countries,json=restrictedCountries,proto3" json:"restricted_countries,omitempty"`
-	Enabled             *bool                  `protobuf:"varint,11,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Page                *int32                 `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize            *int32                 `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	RtpMin              *string                `protobuf:"bytes,11,opt,name=rtp_min,json=rtpMin,proto3,oneof" json:"rtp_min,omitempty"`
+	RtpMax              *string                `protobuf:"bytes,12,opt,name=rtp_max,json=rtpMax,proto3,oneof" json:"rtp_max,omitempty"`
+	Enabled             *bool                  `protobuf:"varint,13,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Page                *int32                 `protobuf:"varint,14,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize            *int32                 `protobuf:"varint,15,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -3206,6 +3208,20 @@ func (x *BackofficeListGamesRequest) GetRestrictedCountries() []string {
 		return x.RestrictedCountries
 	}
 	return nil
+}
+
+func (x *BackofficeListGamesRequest) GetRtpMin() string {
+	if x != nil && x.RtpMin != nil {
+		return *x.RtpMin
+	}
+	return ""
+}
+
+func (x *BackofficeListGamesRequest) GetRtpMax() string {
+	if x != nil && x.RtpMax != nil {
+		return *x.RtpMax
+	}
+	return ""
 }
 
 func (x *BackofficeListGamesRequest) GetEnabled() bool {
@@ -4605,9 +4621,9 @@ type BackofficeListGamesResponse_Game struct {
 	HasFreespins        bool                   `protobuf:"varint,7,opt,name=has_freespins,json=hasFreespins,proto3" json:"has_freespins,omitempty"`
 	Tags                []string               `protobuf:"bytes,8,rep,name=tags,proto3" json:"tags,omitempty"`
 	FeeGroup            string                 `protobuf:"bytes,9,opt,name=fee_group,json=feeGroup,proto3" json:"fee_group,omitempty"`
-	Rate                int32                  `protobuf:"varint,10,opt,name=rate,proto3" json:"rate,omitempty"`
-	Rtp                 int32                  `protobuf:"varint,11,opt,name=rtp,proto3" json:"rtp,omitempty"`
-	ValidBetRate        int32                  `protobuf:"varint,12,opt,name=valid_bet_rate,json=validBetRate,proto3" json:"valid_bet_rate,omitempty"`
+	Rate                string                 `protobuf:"bytes,10,opt,name=rate,proto3" json:"rate,omitempty"`
+	Rtp                 string                 `protobuf:"bytes,11,opt,name=rtp,proto3" json:"rtp,omitempty"`
+	ValidBetRate        string                 `protobuf:"bytes,12,opt,name=valid_bet_rate,json=validBetRate,proto3" json:"valid_bet_rate,omitempty"`
 	SupportCurrencies   []string               `protobuf:"bytes,13,rep,name=support_currencies,json=supportCurrencies,proto3" json:"support_currencies,omitempty"`
 	RestrictedCountries []string               `protobuf:"bytes,14,rep,name=restricted_countries,json=restrictedCountries,proto3" json:"restricted_countries,omitempty"`
 	Enabled             bool                   `protobuf:"varint,15,opt,name=enabled,proto3" json:"enabled,omitempty"`
@@ -4708,25 +4724,25 @@ func (x *BackofficeListGamesResponse_Game) GetFeeGroup() string {
 	return ""
 }
 
-func (x *BackofficeListGamesResponse_Game) GetRate() int32 {
+func (x *BackofficeListGamesResponse_Game) GetRate() string {
 	if x != nil {
 		return x.Rate
 	}
-	return 0
+	return ""
 }
 
-func (x *BackofficeListGamesResponse_Game) GetRtp() int32 {
+func (x *BackofficeListGamesResponse_Game) GetRtp() string {
 	if x != nil {
 		return x.Rtp
 	}
-	return 0
+	return ""
 }
 
-func (x *BackofficeListGamesResponse_Game) GetValidBetRate() int32 {
+func (x *BackofficeListGamesResponse_Game) GetValidBetRate() string {
 	if x != nil {
 		return x.ValidBetRate
 	}
-	return 0
+	return ""
 }
 
 func (x *BackofficeListGamesResponse_Game) GetSupportCurrencies() []string {
@@ -5897,7 +5913,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x0ertp_percentage\x18\x05 \x01(\x05R\rrtpPercentage\x12\x14\n" +
 	"\x05total\x18\x06 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\a \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\b \x01(\x05R\bpageSize\"\xbf\x04\n" +
+	"\tpage_size\x18\b \x01(\x05R\bpageSize\"\x93\x05\n" +
 	"\x1aBackofficeListGamesRequest\x12!\n" +
 	"\fprovider_ids\x18\x01 \x03(\tR\vproviderIds\x12\x1e\n" +
 	"\n" +
@@ -5912,14 +5928,20 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\rhas_freespins\x18\b \x01(\bH\x02R\fhasFreespins\x88\x01\x01\x12-\n" +
 	"\x12support_currencies\x18\t \x03(\tR\x11supportCurrencies\x121\n" +
 	"\x14restricted_countries\x18\n" +
-	" \x03(\tR\x13restrictedCountries\x12\x1d\n" +
-	"\aenabled\x18\v \x01(\bH\x03R\aenabled\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\f \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\r \x01(\x05H\x05R\bpageSize\x88\x01\x01B\n" +
+	" \x03(\tR\x13restrictedCountries\x12\x1c\n" +
+	"\artp_min\x18\v \x01(\tH\x03R\x06rtpMin\x88\x01\x01\x12\x1c\n" +
+	"\artp_max\x18\f \x01(\tH\x04R\x06rtpMax\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\r \x01(\bH\x05R\aenabled\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x0e \x01(\x05H\x06R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x0f \x01(\x05H\aR\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_game_idB\x14\n" +
 	"\x12_support_bonus_buyB\x10\n" +
 	"\x0e_has_freespinsB\n" +
+	"\n" +
+	"\b_rtp_minB\n" +
+	"\n" +
+	"\b_rtp_maxB\n" +
 	"\n" +
 	"\b_enabledB\a\n" +
 	"\x05_pageB\f\n" +
@@ -5943,9 +5965,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x04tags\x18\b \x03(\tR\x04tags\x12\x1b\n" +
 	"\tfee_group\x18\t \x01(\tR\bfeeGroup\x12\x12\n" +
 	"\x04rate\x18\n" +
-	" \x01(\x05R\x04rate\x12\x10\n" +
-	"\x03rtp\x18\v \x01(\x05R\x03rtp\x12$\n" +
-	"\x0evalid_bet_rate\x18\f \x01(\x05R\fvalidBetRate\x12-\n" +
+	" \x01(\tR\x04rate\x12\x10\n" +
+	"\x03rtp\x18\v \x01(\tR\x03rtp\x12$\n" +
+	"\x0evalid_bet_rate\x18\f \x01(\tR\fvalidBetRate\x12-\n" +
 	"\x12support_currencies\x18\r \x03(\tR\x11supportCurrencies\x121\n" +
 	"\x14restricted_countries\x18\x0e \x03(\tR\x13restrictedCountries\x12\x18\n" +
 	"\aenabled\x18\x0f \x01(\bR\aenabled\"W\n" +

@@ -492,9 +492,11 @@ message BackofficeListGamesRequest {
 	optional bool has_freespins = 8;
 	repeated string support_currencies = 9;
 	repeated string restricted_countries = 10;
-	optional bool enabled = 11;
-	optional int32 page = 12;
-	optional int32 page_size = 13;	
+	optional string rtp_min = 11;
+	optional string rtp_max = 12;
+	optional bool enabled = 13;
+	optional int32 page = 14;
+	optional int32 page_size = 15;	
 }
 
 message BackofficeListGamesResponse {
@@ -508,9 +510,9 @@ message BackofficeListGamesResponse {
 		bool has_freespins = 7;
 		repeated string tags = 8;
 		string fee_group = 9;
-		int32 rate = 10;
-		int32 rtp = 11;
-		int32 valid_bet_rate = 12;
+		string rate = 10;
+		string rtp = 11;
+		string valid_bet_rate = 12;
 		repeated string support_currencies = 13;
 		repeated string restricted_countries = 14;
 		bool enabled = 15;
