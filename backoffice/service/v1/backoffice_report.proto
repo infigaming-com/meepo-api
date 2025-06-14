@@ -278,8 +278,9 @@ message GetPlayerGameDataRequest {
 	repeated string game_tags = 7;
 	repeated string game_names = 8;
 	repeated string game_ids = 9;
-	int32 page = 10;
-	int32 page_size = 11;
+	repeated string currencies = 10;
+	int32 page = 11;
+	int32 page_size = 12;
 }
 
 message GetPlayerGameDataResponse {

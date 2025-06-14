@@ -1061,8 +1061,9 @@ type GetPlayerGameDataRequest struct {
 	GameTags            []string               `protobuf:"bytes,7,rep,name=game_tags,json=gameTags,proto3" json:"game_tags,omitempty"`
 	GameNames           []string               `protobuf:"bytes,8,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds             []string               `protobuf:"bytes,9,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
-	Page                int32                  `protobuf:"varint,10,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize            int32                  `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Currencies          []string               `protobuf:"bytes,10,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Page                int32                  `protobuf:"varint,11,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize            int32                  `protobuf:"varint,12,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1156,6 +1157,13 @@ func (x *GetPlayerGameDataRequest) GetGameNames() []string {
 func (x *GetPlayerGameDataRequest) GetGameIds() []string {
 	if x != nil {
 		return x.GameIds
+	}
+	return nil
+}
+
+func (x *GetPlayerGameDataRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
 	}
 	return nil
 }
@@ -4596,7 +4604,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
 	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\xae\x03\n" +
+	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\xce\x03\n" +
 	"\x18GetPlayerGameDataRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
@@ -4609,10 +4617,13 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tgame_tags\x18\a \x03(\tR\bgameTags\x12\x1d\n" +
 	"\n" +
 	"game_names\x18\b \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\t \x03(\tR\agameIds\x12\x12\n" +
-	"\x04page\x18\n" +
-	" \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\v \x01(\x05R\bpageSize\"\xc4\x05\n" +
+	"\bgame_ids\x18\t \x03(\tR\agameIds\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\n" +
+	" \x03(\tR\n" +
+	"currencies\x12\x12\n" +
+	"\x04page\x18\v \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\f \x01(\x05R\bpageSize\"\xc4\x05\n" +
 	"\x19GetPlayerGameDataResponse\x12M\n" +
 	"\x04list\x18\a \x03(\v29.api.backoffice.service.v1.GetPlayerGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
