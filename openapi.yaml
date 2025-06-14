@@ -5948,7 +5948,7 @@ components:
                 transactionId:
                     type: string
                     description: Unique identifier for the transaction
-                operatorTransactionId:
+                paTransactionId:
                     type: string
                     description: Transaction ID from the operator's system
                 gatewayTransactionId:
