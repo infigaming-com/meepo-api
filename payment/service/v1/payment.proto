@@ -299,7 +299,7 @@ message TransactionInfo {
   // Unique identifier for the transaction
   int64 transaction_id = 1 [json_name="transactionId"];
   // Transaction ID from the operator's system
-  string operator_transaction_id = 2 [json_name="operatorTransactionId"];
+  string pa_transaction_id = 2 [json_name="paTransactionId"];
   // Transaction ID from the payment gateway
   string gateway_transaction_id = 3 [json_name="gatewayTransactionId"];
   // Operator ID associated with the transaction
