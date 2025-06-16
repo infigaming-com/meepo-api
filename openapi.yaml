@@ -4024,7 +4024,11 @@ components:
                     type: string
                 cash:
                     type: string
+                originalCash:
+                    type: string
                 bonus:
+                    type: string
+                originalBonus:
                     type: string
                 turnoverThreshold:
                     type: string
@@ -4033,6 +4037,8 @@ components:
                 cashTurnover:
                     type: string
                 bonusTurnover:
+                    type: string
+                turnoverMultiplier:
                     type: string
         api.backoffice.service.v1.GetWalletsResponse_TotalAssets:
             type: object
@@ -4054,7 +4060,11 @@ components:
                     type: string
                 cash:
                     type: string
+                originalCash:
+                    type: string
                 bonus:
+                    type: string
+                originalBonus:
                     type: string
                 turnoverThreshold:
                     type: string
@@ -4063,6 +4073,8 @@ components:
                 cashTurnover:
                     type: string
                 bonusTurnover:
+                    type: string
+                turnoverMultiplier:
                     type: string
                 credits:
                     type: array
