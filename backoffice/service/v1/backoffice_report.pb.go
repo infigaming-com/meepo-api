@@ -500,6 +500,7 @@ type GetGameSummaryRequest struct {
 	GameCategories      []string               `protobuf:"bytes,6,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
 	GameNames           []string               `protobuf:"bytes,7,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds             []string               `protobuf:"bytes,8,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	Currencies          []string               `protobuf:"bytes,9,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -586,6 +587,13 @@ func (x *GetGameSummaryRequest) GetGameNames() []string {
 func (x *GetGameSummaryRequest) GetGameIds() []string {
 	if x != nil {
 		return x.GameIds
+	}
+	return nil
+}
+
+func (x *GetGameSummaryRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
 	}
 	return nil
 }
@@ -684,8 +692,9 @@ type GetGameDataRequest struct {
 	GameCategories      []string               `protobuf:"bytes,6,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
 	GameNames           []string               `protobuf:"bytes,7,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds             []string               `protobuf:"bytes,8,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
-	Page                int32                  `protobuf:"varint,9,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize            int32                  `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Currencies          []string               `protobuf:"bytes,9,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Page                int32                  `protobuf:"varint,10,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize            int32                  `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -772,6 +781,13 @@ func (x *GetGameDataRequest) GetGameNames() []string {
 func (x *GetGameDataRequest) GetGameIds() []string {
 	if x != nil {
 		return x.GameIds
+	}
+	return nil
+}
+
+func (x *GetGameDataRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
 	}
 	return nil
 }
@@ -869,6 +885,8 @@ type GetPlayerGameSummaryRequest struct {
 	GameTags            []string               `protobuf:"bytes,7,rep,name=game_tags,json=gameTags,proto3" json:"game_tags,omitempty"`
 	GameNames           []string               `protobuf:"bytes,8,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds             []string               `protobuf:"bytes,9,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	Currencies          []string               `protobuf:"bytes,10,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	UserIds             []int64                `protobuf:"varint,11,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -962,6 +980,20 @@ func (x *GetPlayerGameSummaryRequest) GetGameNames() []string {
 func (x *GetPlayerGameSummaryRequest) GetGameIds() []string {
 	if x != nil {
 		return x.GameIds
+	}
+	return nil
+}
+
+func (x *GetPlayerGameSummaryRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
+func (x *GetPlayerGameSummaryRequest) GetUserIds() []int64 {
+	if x != nil {
+		return x.UserIds
 	}
 	return nil
 }
@@ -1062,8 +1094,9 @@ type GetPlayerGameDataRequest struct {
 	GameNames           []string               `protobuf:"bytes,8,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds             []string               `protobuf:"bytes,9,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
 	Currencies          []string               `protobuf:"bytes,10,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Page                int32                  `protobuf:"varint,11,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize            int32                  `protobuf:"varint,12,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	UserIds             []int64                `protobuf:"varint,11,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
+	Page                int32                  `protobuf:"varint,12,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize            int32                  `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1164,6 +1197,13 @@ func (x *GetPlayerGameDataRequest) GetGameIds() []string {
 func (x *GetPlayerGameDataRequest) GetCurrencies() []string {
 	if x != nil {
 		return x.Currencies
+	}
+	return nil
+}
+
+func (x *GetPlayerGameDataRequest) GetUserIds() []int64 {
+	if x != nil {
+		return x.UserIds
 	}
 	return nil
 }
@@ -4520,7 +4560,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18( \x01(\tR\x03ggr\x12\x10\n" +
 	"\x03ngr\x18) \x01(\tR\x03ngr\x121\n" +
 	"\x15ggr_to_ngr_percentage\x18* \x01(\tR\x12ggrToNgrPercentage\x122\n" +
-	"\x15house_edge_percentage\x18+ \x01(\tR\x13houseEdgePercentage\"\xe7\x02\n" +
+	"\x15house_edge_percentage\x18+ \x01(\tR\x13houseEdgePercentage\"\x87\x03\n" +
 	"\x15GetGameSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12!\n" +
@@ -4531,7 +4571,10 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x0fgame_categories\x18\x06 \x03(\tR\x0egameCategories\x12\x1d\n" +
 	"\n" +
 	"game_names\x18\a \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\b \x03(\tR\agameIds\"\xd7\x01\n" +
+	"\bgame_ids\x18\b \x03(\tR\agameIds\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\t \x03(\tR\n" +
+	"currencies\"\xd7\x01\n" +
 	"\x16GetGameSummaryResponse\x12\x1a\n" +
 	"\bturnover\x18\x01 \x01(\tR\bturnover\x12\x1d\n" +
 	"\n" +
@@ -4539,7 +4582,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
 	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\x95\x03\n" +
+	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\xb5\x03\n" +
 	"\x12GetGameDataRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12!\n" +
@@ -4550,10 +4593,13 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x0fgame_categories\x18\x06 \x03(\tR\x0egameCategories\x12\x1d\n" +
 	"\n" +
 	"game_names\x18\a \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\b \x03(\tR\agameIds\x12\x12\n" +
-	"\x04page\x18\t \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\n" +
-	" \x01(\x05R\bpageSize\"\x9a\x06\n" +
+	"\bgame_ids\x18\b \x03(\tR\agameIds\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\t \x03(\tR\n" +
+	"currencies\x12\x12\n" +
+	"\x04page\x18\n" +
+	" \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\v \x01(\x05R\bpageSize\"\x9a\x06\n" +
 	"\x13GetGameDataResponse\x12G\n" +
 	"\x04list\x18\a \x03(\v23.api.backoffice.service.v1.GetGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
@@ -4581,7 +4627,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tbet_count\x18\x10 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x11 \x01(\tR\x10averageBetAmount\x12%\n" +
 	"\x0ertp_percentage\x18\x12 \x01(\tR\rrtpPercentage\x12/\n" +
-	"\x13settlement_currency\x18\x13 \x01(\tR\x12settlementCurrency\"\x8a\x03\n" +
+	"\x13settlement_currency\x18\x13 \x01(\tR\x12settlementCurrency\"\xc5\x03\n" +
 	"\x1bGetPlayerGameSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
@@ -4593,7 +4639,12 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tgame_tags\x18\a \x03(\tR\bgameTags\x12\x1d\n" +
 	"\n" +
 	"game_names\x18\b \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\t \x03(\tR\agameIds\"\xdd\x01\n" +
+	"\bgame_ids\x18\t \x03(\tR\agameIds\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\n" +
+	" \x03(\tR\n" +
+	"currencies\x12\x19\n" +
+	"\buser_ids\x18\v \x03(\x03R\auserIds\"\xdd\x01\n" +
 	"\x1cGetPlayerGameSummaryResponse\x12\x1a\n" +
 	"\bturnover\x18\x01 \x01(\tR\bturnover\x12\x1d\n" +
 	"\n" +
@@ -4601,7 +4652,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
 	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\xd8\x03\n" +
+	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\xf3\x03\n" +
 	"\x18GetPlayerGameDataRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
@@ -4617,9 +4668,10 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\n" +
 	"currencies\x18\n" +
 	" \x03(\tR\n" +
-	"currencies\x12\x12\n" +
-	"\x04page\x18\v \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\f \x01(\x05R\bpageSize\"\xc4\x05\n" +
+	"currencies\x12\x19\n" +
+	"\buser_ids\x18\v \x03(\x03R\auserIds\x12\x12\n" +
+	"\x04page\x18\f \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\r \x01(\x05R\bpageSize\"\xc4\x05\n" +
 	"\x19GetPlayerGameDataResponse\x12M\n" +
 	"\x04list\x18\a \x03(\v29.api.backoffice.service.v1.GetPlayerGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +

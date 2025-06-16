@@ -2680,6 +2680,10 @@ components:
                     type: array
                     items:
                         type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
                 page:
                     type: integer
                     format: int32
@@ -2775,6 +2779,10 @@ components:
                     items:
                         type: string
                 gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
                     type: array
                     items:
                         type: string
@@ -3120,6 +3128,10 @@ components:
                     type: array
                     items:
                         type: string
+                userIds:
+                    type: array
+                    items:
+                        type: string
                 page:
                     type: integer
                     format: int32
@@ -3214,6 +3226,14 @@ components:
                     items:
                         type: string
                 gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                userIds:
                     type: array
                     items:
                         type: string
