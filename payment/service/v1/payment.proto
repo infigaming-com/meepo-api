@@ -85,13 +85,13 @@ message PaymentChannelInfo {
   // URL to the logo image for this payment channel
   string logo = 12;
   // Minimum amount allowed for deposit transactions
-  int64 min_deposit_amount = 13 [json_name="minDepositAmount"];
+  string min_deposit_amount = 13 [json_name="minDepositAmount"];
   // Maximum amount allowed for deposit transactions
-  int64 max_deposit_amount = 14 [json_name="maxDepositAmount"];
+  string max_deposit_amount = 14 [json_name="maxDepositAmount"];
   // Minimum amount allowed for withdrawal transactions
-  int64 min_withdraw_amount = 15 [json_name="minWithdrawAmount"];
+  string min_withdraw_amount = 15 [json_name="minWithdrawAmount"];
   // Maximum amount allowed for withdrawal transactions
-  int64 max_withdraw_amount = 16 [json_name="maxWithdrawAmount"];
+  string max_withdraw_amount = 16 [json_name="maxWithdrawAmount"];
   // Estimated arrival time in minutes
   int32 eat = 17;
   // JSON schema defining deposit form fields required by this channel
@@ -104,7 +104,7 @@ message PaymentChannelInfo {
 // Used to start a deposit transaction
 message InitiateDepositRequest {
   // Amount to deposit in smallest currency unit (e.g., cents)
-  int64 amount = 1;
+  string amount = 1;
   // Currency code for the transaction
   string currency = 2;
   // ID of the channel to use for this deposit
@@ -120,7 +120,7 @@ message InitiateDepositResponse {
   // Unique identifier for the transaction
   int64 transaction_id = 1 [json_name="transactionId"];
   // Amount to be deposited in smallest currency unit
-  int64 amount = 2;
+  string amount = 2;
   // Currency code for the transaction
   string currency = 3;
   // Current status of the transaction
@@ -139,7 +139,7 @@ message InitiateDepositResponse {
 // Used to start a withdrawal transaction
 message InitiateWithdrawRequest {
   // Amount to withdraw in smallest currency unit (e.g., cents)
-  int64 amount = 1;
+  string amount = 1;
   // Currency code for the transaction
   string currency = 2;
   // ID of the user who initiated the withdrawal
@@ -161,7 +161,7 @@ message InitiateWithdrawResponse {
   // Order number from the operator's system
   string operator_order_no = 2 [json_name="operatorOrderNo"];
   // Amount to be withdrawn in smallest currency unit
-  int64 amount = 3;
+  string amount = 3;
   // Current status of the transaction
   string status = 4;
   // Timestamp when the transaction was created
@@ -184,9 +184,9 @@ message DepositCallbackRequest {
   // Time when order was created. Format: yyyy-MM-dd HH:mm:ss
   string create_time = 6 [json_name="createTime"];
   // Original amount of the order
-  int64 amount = 7;
+  string amount = 7;
   // Actual amount paid
-  int64 money = 8;
+  string money = 8;
   // HMAC-SHA256 signature to verify request authenticity
   string sign = 9 [json_name="sign"];
   // Request timestamp to prevent replay attacks
@@ -220,11 +220,11 @@ message WithdrawCallbackRequest {
   // Time when order was created. Format: yyyy-MM-dd HH:mm:ss
   string create_time = 6 [json_name="createTime"];
   // Original amount of the withdrawal order
-  int64 amount = 7;
+  string amount = 7;
   // Service fee applied to the withdrawal
-  int64 fee = 8;
+  string fee = 8;
   // Actual amount withdrawn after fees
-  int64 real_money = 9 [json_name="realMoney"];
+  string real_money = 9 [json_name="realMoney"];
   // HMAC-SHA256 signature to verify request authenticity
   string sign = 10 [json_name="sign"];
   // Request timestamp to prevent replay attacks
@@ -299,7 +299,7 @@ message TransactionInfo {
   // Unique identifier for the transaction
   int64 transaction_id = 1 [json_name="transactionId"];
   // Transaction ID from the operator's system
-  string operator_transaction_id = 2 [json_name="operatorTransactionId"];
+  string pa_transaction_id = 2 [json_name="paTransactionId"];
   // Transaction ID from the payment gateway
   string gateway_transaction_id = 3 [json_name="gatewayTransactionId"];
   // Operator ID associated with the transaction
@@ -309,23 +309,25 @@ message TransactionInfo {
   // VIP level of the user
   int32 vip = 6;
   // Transaction amount in smallest currency unit
-  int64 amount = 7;
+  string amount = 7;
   // Currency code for the transaction
   string currency = 8;
+  // Transaction fee in smallest currency unit
+  string fee = 9;
   // Payment method used for the transaction
-  string payment_method = 9 [json_name="paymentMethod"];
+  string payment_method = 10 [json_name="paymentMethod"];
   // Payment channel used for the transaction
-  string payment_channel = 10 [json_name="paymentChannel"];
+  string payment_channel = 11 [json_name="paymentChannel"];
   // Protocol used for the transaction
-  string protocol = 11;
+  string protocol = 12;
   // Type of transaction (deposit or withdrawal)
-  TransactionType type = 12;
+  TransactionType type = 13;
   // Current status of the transaction
-  TransactionStatus status = 13;
+  TransactionStatus status = 14;
   // Timestamp when the transaction was created
-  google.protobuf.Timestamp created_at = 14 [json_name="createdAt"];
+  google.protobuf.Timestamp created_at = 15 [json_name="createdAt"];
   // Timestamp when the transaction was last updated
-  google.protobuf.Timestamp updated_at = 15 [json_name="updatedAt"];
+  google.protobuf.Timestamp updated_at = 16 [json_name="updatedAt"];
 }
 
 message TransactionDetail {
@@ -372,9 +374,9 @@ message GetTransactionPageRequest {
   // Optional user ID filter
   int64 user_id = 16 [json_name="userId"];
   // Optional minimum amount filter
-  int64 min_amount = 17 [json_name="minAmount"];
+  string min_amount = 17 [json_name="minAmount"];
   // Optional maximum amount filter
-  int64 max_amount = 18 [json_name="maxAmount"];
+  string max_amount = 18 [json_name="maxAmount"];
 }
 
 // Response for transaction page

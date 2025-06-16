@@ -731,6 +731,14 @@ func (m *ListWalletBalanceTransactionsRequest) validate(all bool) error {
 
 	}
 
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
 	if len(errors) > 0 {
 		return ListWalletBalanceTransactionsRequestMultiError(errors)
 	}
@@ -2034,13 +2042,15 @@ func (m *ListWalletBalanceTransactionsResponse_BalanceTransaction) validate(all 
 
 	// no validation rules for VipLevel
 
-	// no validation rules for Change
+	// no validation rules for ChangeBalance
 
 	// no validation rules for BeforeBalance
 
 	// no validation rules for AfterBalance
 
 	// no validation rules for Currency
+
+	// no validation rules for RelatedTransactionId
 
 	if len(errors) > 0 {
 		return ListWalletBalanceTransactionsResponse_BalanceTransactionMultiError(errors)

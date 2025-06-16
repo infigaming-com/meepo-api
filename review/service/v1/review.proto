@@ -78,7 +78,7 @@ message ListTicketsRequest {
 message ListTicketsResponse {
 	message Ticket {
 		google.protobuf.Timestamp created_at = 1;
-		string operator = 2;
+		string operator_name = 2;
 		int64 ticket_id = 3;
 		int64 user_id = 4;
 		int32 vip_level = 5;
@@ -148,9 +148,11 @@ message GetTicketResponse {
 		int64 reviewed_at = 22;
 	}
 	message Comment {
-		int64 author_user_id = 1;
-		string content = 2;
-		int64 created_at = 3;
+		int64 id = 1;
+		int64 ticket_id = 2;
+		int64 author_user_id = 3;
+		string content = 4;
+		int64 created_at = 5;
 	}
 	Ticket ticket = 1;
 	repeated Comment comments = 2;

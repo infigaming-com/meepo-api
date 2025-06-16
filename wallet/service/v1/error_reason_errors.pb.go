@@ -28,11 +28,11 @@ func IsUserNotFound(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_USER_NOT_FOUND.String() && e.Code == 404
+	return e.Reason == ErrorReason_USER_NOT_FOUND.String() && e.Code == 500
 }
 
 func ErrorUserNotFound(format string, args ...interface{}) *errors.Error {
-	return errors.New(404, ErrorReason_USER_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_USER_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
 
 func IsUserDisabled(err error) bool {
@@ -40,11 +40,11 @@ func IsUserDisabled(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_USER_DISABLED.String() && e.Code == 401
+	return e.Reason == ErrorReason_USER_DISABLED.String() && e.Code == 500
 }
 
 func ErrorUserDisabled(format string, args ...interface{}) *errors.Error {
-	return errors.New(401, ErrorReason_USER_DISABLED.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_USER_DISABLED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsGetOperatorCurrenciesFailed(err error) bool {
@@ -196,11 +196,11 @@ func IsBalanceDisabled(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_BALANCE_DISABLED.String() && e.Code == 401
+	return e.Reason == ErrorReason_BALANCE_DISABLED.String() && e.Code == 500
 }
 
 func ErrorBalanceDisabled(format string, args ...interface{}) *errors.Error {
-	return errors.New(401, ErrorReason_BALANCE_DISABLED.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_BALANCE_DISABLED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsGenerateCreditIdFailed(err error) bool {
@@ -244,11 +244,11 @@ func IsInvalidTransactionType(err error) bool {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_INVALID_TRANSACTION_TYPE.String() && e.Code == 400
+	return e.Reason == ErrorReason_INVALID_TRANSACTION_TYPE.String() && e.Code == 500
 }
 
 func ErrorInvalidTransactionType(format string, args ...interface{}) *errors.Error {
-	return errors.New(400, ErrorReason_INVALID_TRANSACTION_TYPE.String(), fmt.Sprintf(format, args...))
+	return errors.New(500, ErrorReason_INVALID_TRANSACTION_TYPE.String(), fmt.Sprintf(format, args...))
 }
 
 func IsGenerateBalanceTransactionIdFailed(err error) bool {
@@ -465,4 +465,28 @@ func IsGetExchangeRateFailed(err error) bool {
 
 func ErrorGetExchangeRateFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_EXCHANGE_RATE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetBalanceTransactionSummaryFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_BALANCE_TRANSACTION_SUMMARY_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetBalanceTransactionSummaryFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_BALANCE_TRANSACTION_SUMMARY_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidCurrencyAmount(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_CURRENCY_AMOUNT.String() && e.Code == 500
+}
+
+func ErrorInvalidCurrencyAmount(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_CURRENCY_AMOUNT.String(), fmt.Sprintf(format, args...))
 }

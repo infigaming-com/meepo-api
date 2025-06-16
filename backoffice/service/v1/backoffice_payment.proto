@@ -4,6 +4,8 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "payment/service/v1/payment.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -15,9 +17,172 @@ service BackofficePayment {
 	// Get payment transaction page
 	// Retrieves a paginated list of payment transactions with optional filtering
 	rpc GetPaymentTransactionPage(payment.service.v1.GetTransactionPageRequest) returns (payment.service.v1.GetTransactionPageResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/payment/transaction/page"
-            body: "*"
-        };
-    }
+		option (google.api.http) = {
+			post: "/v1/backoffice/payment/transaction/page"
+			body: "*"
+		};
+	}
+
+	// Get transaction detail
+	// Retrieves detailed information about a specific transaction
+	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+	rpc GetPaymentTransactionById(GetPaymentTransactionByIdRequest) returns (GetPaymentTransactionByIdResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/payment/transaction/detail"
+			body: "*"
+		};
+	}
+}
+
+// Request source enum
+// Defines the source of the request
+enum RequestSource {
+	// Request from frontend user
+	REQUEST_SOURCE_FRONTEND = 0;
+	// Request from admin backend
+	REQUEST_SOURCE_ADMIN = 1;
+}
+
+// Transaction type enum
+// Defines possible types of financial transactions
+enum TransactionType {
+	// Default unspecified value
+	TRANSACTION_TYPE_UNSPECIFIED = 0;
+	// Money incoming to platform
+	TRANSACTION_TYPE_DEPOSIT = 1;
+	// Money outgoing from platform
+	TRANSACTION_TYPE_WITHDRAW = 2;
+}
+
+// Transaction status enum
+// Defines possible states of a transaction
+enum TransactionStatus {
+	// Default unspecified value
+	TRANSACTION_STATUS_UNSPECIFIED = 0;
+	// Transaction is in progress
+	TRANSACTION_STATUS_PROCESSING = 1;
+	// Transaction completed successfully
+	TRANSACTION_STATUS_SUCCESSFUL = 2;
+	// Transaction failed to complete
+	TRANSACTION_STATUS_FAILED = 3;
+}
+
+// Transaction information
+// Detailed information about a specific transaction
+message TransactionInfo {
+	// Unique identifier for the transaction
+	int64 transaction_id = 1 [json_name="transactionId"];
+	// Transaction ID from the operator's system
+	string pa_transaction_id = 2 [json_name="paTransactionId"];
+	// Transaction ID from the payment gateway
+	string gateway_transaction_id = 3 [json_name="gatewayTransactionId"];
+	// Operator ID associated with the transaction
+	string operator_id = 4 [json_name="operatorId"];
+	// ID of the user who initiated the transaction
+	int64 user_id = 5 [json_name="userId"];
+	// VIP level of the user
+	int32 vip = 6;
+	// Real amount of the transaction
+	string amount = 7;
+	// Currency code for the transaction
+	string currency = 8;
+	// Transaction fee in smallest currency unit
+	string fee = 9;
+	// Payment method used for the transaction
+	string payment_method = 10 [json_name="paymentMethod"];
+	// Payment channel used for the transaction
+	string payment_channel = 11 [json_name="paymentChannel"];
+	// Protocol used for the transaction
+	string protocol = 12;
+	// Type of transaction (deposit or withdrawal)
+	TransactionType type = 13;
+	// Current status of the transaction
+	TransactionStatus status = 14;
+	// Timestamp when the transaction was created
+	google.protobuf.Timestamp created_at = 15 [json_name="createdAt"];
+	// Timestamp when the transaction was last updated
+	google.protobuf.Timestamp updated_at = 16 [json_name="updatedAt"];
+}
+
+// Payment channel information
+// Detailed information about a specific payment channel
+message PaymentChannelInfo {
+	// Unique identifier for the channel
+	string channel_id = 1 [json_name="channelId"];
+	// Type of the channel (e.g., online, offline)
+	string type = 2;
+	// Category of the channel (e.g., bank, e-wallet)
+	string category = 3;
+	// ID of the operator who owns this channel
+	string operator_id = 4 [json_name="operatorId"];
+	// Payment method used in this channel
+	string payment_method = 5 [json_name="paymentMethod"];
+	// Tag for categorization or filtering
+	string tag = 6;
+	// Display name of the channel
+	string name = 7;
+	// ID of the payment method used
+	string payment_method_id = 8 [json_name="paymentMethodId"];
+	// Currency supported by this channel
+	string currency = 9;
+	// Country where this channel is available
+	string country = 10;
+	// Specific method used (might be more detailed than payment_method)
+	string method = 11;
+	// URL to the logo image for this payment channel
+	string logo = 12;
+	// Minimum amount allowed for deposit transactions
+	string min_deposit_amount = 13 [json_name="minDepositAmount"];
+	// Maximum amount allowed for deposit transactions
+	string max_deposit_amount = 14 [json_name="maxDepositAmount"];
+	// Minimum amount allowed for withdrawal transactions
+	string min_withdraw_amount = 15 [json_name="minWithdrawAmount"];
+	// Maximum amount allowed for withdrawal transactions
+	string max_withdraw_amount = 16 [json_name="maxWithdrawAmount"];
+	// Estimated arrival time in minutes
+	int32 eat = 17;
+	// JSON schema defining deposit form fields required by this channel
+	google.protobuf.Struct deposit_schema = 18 [json_name="depositSchema"];
+	// JSON schema defining withdrawal form fields required by this channel
+	google.protobuf.Struct withdraw_schema = 19 [json_name="withdrawSchema"];
+}
+
+message TransactionDetail {
+	// Transaction information
+	TransactionInfo transaction = 1;
+	// Channel information
+	PaymentChannelInfo channel = 2;
+}
+
+// Request to get transaction detail by ID
+// Used to retrieve detailed information about a specific transaction
+message GetPaymentTransactionByIdRequest {
+	// Unique identifier for the transaction
+	int64 transaction_id = 1 [json_name="transactionId"];
+	// Source of the request (frontend or admin)
+	RequestSource source = 2 [json_name="source"];
+}
+
+// Response for transaction detail
+// Contains detailed information about the requested transaction
+message GetPaymentTransactionByIdResponse {
+	// Detailed transaction information including channel data
+	TransactionDetail detail = 1;
+}
+
+message GetTransactionPageRequest {
+	int32 page = 1;
+	int32 page_size = 2;
+	optional string currency = 3;
+	optional TransactionType type = 4;
+	optional TransactionStatus status = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+}
+
+message GetTransactionPageResponse {
+	repeated TransactionInfo transactions = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }

@@ -791,7 +791,7 @@ func (x *GetTicketResponse) GetComments() []*GetTicketResponse_Comment {
 type ListTicketsResponse_Ticket struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Operator         string                 `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
+	OperatorName     string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	TicketId         int64                  `protobuf:"varint,3,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
 	UserId           int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	VipLevel         int32                  `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
@@ -850,9 +850,9 @@ func (x *ListTicketsResponse_Ticket) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *ListTicketsResponse_Ticket) GetOperator() string {
+func (x *ListTicketsResponse_Ticket) GetOperatorName() string {
 	if x != nil {
-		return x.Operator
+		return x.OperatorName
 	}
 	return ""
 }
@@ -1190,9 +1190,11 @@ func (x *GetTicketResponse_Ticket) GetReviewedAt() int64 {
 
 type GetTicketResponse_Comment struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AuthorUserId  int64                  `protobuf:"varint,1,opt,name=author_user_id,json=authorUserId,proto3" json:"author_user_id,omitempty"`
-	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TicketId      int64                  `protobuf:"varint,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	AuthorUserId  int64                  `protobuf:"varint,3,opt,name=author_user_id,json=authorUserId,proto3" json:"author_user_id,omitempty"`
+	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt     int64                  `protobuf:"varint,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1225,6 +1227,20 @@ func (x *GetTicketResponse_Comment) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetTicketResponse_Comment.ProtoReflect.Descriptor instead.
 func (*GetTicketResponse_Comment) Descriptor() ([]byte, []int) {
 	return file_review_service_v1_review_proto_rawDescGZIP(), []int{11, 1}
+}
+
+func (x *GetTicketResponse_Comment) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *GetTicketResponse_Comment) GetTicketId() int64 {
+	if x != nil {
+		return x.TicketId
+	}
+	return 0
 }
 
 func (x *GetTicketResponse_Comment) GetAuthorUserId() int64 {
@@ -1298,7 +1314,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf1\n" +
+	"_page_size\"\xfa\n" +
 	"\n" +
 	"\x13ListTicketsResponse\x12K\n" +
 	"\atickets\x18\x01 \x03(\v21.api.review.service.v1.ListTicketsResponse.TicketR\atickets\x12\x12\n" +
@@ -1318,11 +1334,11 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x13total_failed_amount\x18\r \x01(\tR\x11totalFailedAmount\x120\n" +
 	"\x14total_rejected_count\x18\x0e \x01(\x05R\x12totalRejectedCount\x122\n" +
 	"\x15total_rejected_amount\x18\x0f \x01(\tR\x13totalRejectedAmount\x12.\n" +
-	"\x13average_review_time\x18\x10 \x01(\x05R\x11averageReviewTime\x1a\x8d\x05\n" +
+	"\x13average_review_time\x18\x10 \x01(\x05R\x11averageReviewTime\x1a\x96\x05\n" +
 	"\x06Ticket\x129\n" +
 	"\n" +
-	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1a\n" +
-	"\boperator\x18\x02 \x01(\tR\boperator\x12\x1b\n" +
+	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x1b\n" +
 	"\tticket_id\x18\x03 \x01(\x03R\bticketId\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tvip_level\x18\x05 \x01(\x05R\bvipLevel\x12\x1b\n" +
@@ -1345,7 +1361,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x10GetTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
 	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01B\x13\n" +
-	"\x11_include_comments\"\x91\t\n" +
+	"\x11_include_comments\"\xbf\t\n" +
 	"\x11GetTicketResponse\x12G\n" +
 	"\x06ticket\x18\x01 \x01(\v2/.api.review.service.v1.GetTicketResponse.TicketR\x06ticket\x12L\n" +
 	"\bcomments\x18\x02 \x03(\v20.api.review.service.v1.GetTicketResponse.CommentR\bcomments\x1a\xfa\x06\n" +
@@ -1376,12 +1392,14 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\x15 \x01(\x03R\tupdatedAt\x12\x1f\n" +
 	"\vreviewed_at\x18\x16 \x01(\x03R\n" +
-	"reviewedAt\x1ah\n" +
-	"\aComment\x12$\n" +
-	"\x0eauthor_user_id\x18\x01 \x01(\x03R\fauthorUserId\x12\x18\n" +
-	"\acontent\x18\x02 \x01(\tR\acontent\x12\x1d\n" +
+	"reviewedAt\x1a\x95\x01\n" +
+	"\aComment\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
+	"\tticket_id\x18\x02 \x01(\x03R\bticketId\x12$\n" +
+	"\x0eauthor_user_id\x18\x03 \x01(\x03R\fauthorUserId\x12\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\x03R\tcreatedAt2\x9d\x05\n" +
+	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\x9d\x05\n" +
 	"\x06Review\x12\x8d\x01\n" +
 	"\x0eCreateWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/review/withdraw\x12i\n" +
 	"\fReviewTicket\x12*.api.review.service.v1.ReviewTicketRequest\x1a+.api.review.service.v1.ReviewTicketResponse\"\x00\x12c\n" +

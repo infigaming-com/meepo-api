@@ -10,17 +10,16 @@ option java_multiple_files = true;
 option java_package = "api.wallet.service.v1";
 
 service Wallet {
-	rpc AddUser (AddUserRequest) returns (AddUserResponse) {}
+	rpc AddUser (AddUserRequest) returns (AddUserResponse) {
+	}
 
-	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {}
+	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {
+	}
 	
-	rpc AddOrUpdateOperatorsCurrency (AddOrUpdateOperatorsCurrencyRequest) returns (AddOrUpdateOperatorsCurrencyResponse) {}
+	rpc AddOrUpdateOperatorsCurrency (AddOrUpdateOperatorsCurrencyRequest) returns (AddOrUpdateOperatorsCurrencyResponse) {
+	}
 	
 	rpc UpdateUserCurrency (UpdateUserCurrencyRequest) returns (UpdateUserCurrencyResponse) {
-		option (google.api.http) = {
-			post: "/v1/wallet/currencies/update"
-			body: "*"
-		};
 	}
 	
 	// GetUserBalances returns the balances of all currencies of the user
@@ -33,10 +32,6 @@ service Wallet {
 
 	// GetUserBalance returns the balance of specific currency of the user
 	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {
-		option (google.api.http) = {
-			post: "/v1/wallet/balances/get"
-			body: "*"
-		};
 	}
 
 	rpc Credit (CreditRequest) returns (CreditResponse) {}
@@ -71,6 +66,11 @@ service Wallet {
 	// GetUserTransactionSummary returns the summary of user's transactions 
 	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
 	rpc GetUserTransactionSummary (GetUserTransactionSummaryRequest) returns (GetUserTransactionSummaryResponse) {}
+
+	// GetUserOverview returns data for the overview of user's wallet
+	rpc GetBackofficeUserOverviewFromWallet (GetBackofficeUserOverviewFromWalletRequest) returns (GetBackofficeUserOverviewFromWalletResponse) {}
+
+	rpc GetOverviewDashboardFromWallet (GetOverviewDashboardFromWalletRequest) returns (GetOverviewDashboardFromWalletResponse) {}
 }
 
 message AddUserRequest {
@@ -128,9 +128,9 @@ message GetUserBalanceRequest {
 message GetUserBalanceResponse {
 	// optional exchange rate between currency and target currency
 	string exchange_rate = 1;
-	int64 cash = 2;
-	int64 operator_bonus = 3;
-	int64 provider_bonus = 4;
+	string cash = 2;
+	string operator_bonus = 3;
+	string provider_bonus = 4;
 }
 
 // Transaction types for different operations
@@ -154,8 +154,8 @@ message GetUserBalanceResponse {
 
 message CreditRequest {
 	message Ratio {
-		int64 cash = 1;
-		int64 operator_bonus = 2;
+		string cash = 1;
+		string operator_bonus = 2;
 	}
 
 	int64 user_id = 1;
@@ -164,7 +164,7 @@ message CreditRequest {
 	//   - "payment_deposit"    - Payment deposit transaction
 	string transaction_type = 3;
 	int64 transaction_id = 4;
-	int64 cash = 5;
+	string cash = 5;
 }
 
 message CreditResponse {
@@ -178,7 +178,7 @@ message DebitRequest {
 	//   - "payment_withdraw"   - Payment withdraw transaction
 	string transaction_type = 3;
 	int64 transaction_id = 4;
-	int64 cash = 5;
+	string cash = 5;
 }
 
 message DebitResponse {
@@ -194,16 +194,16 @@ message GameDebitRequest {
 	//   - "game_bet"          - Game bet transaction
 	string transaction_type = 5;
 	int64 transaction_id = 6;
-	int64 amount = 7;
-	int64 turnover = 8;
+	string amount = 7;
+	string turnover = 8;
 }
 
 message GameDebitResponse {
 	int64 transaction_id = 1;
 	string exchange_rate = 2;
-	int64 cash = 3;
-	int64 operator_bonus = 4;
-	int64 provider_bonus = 5;
+	string cash = 3;
+	string operator_bonus = 4;
+	string provider_bonus = 5;
 }
 
 message GameCreditRequest {
@@ -214,15 +214,15 @@ message GameCreditRequest {
 	string transaction_type = 5;
 	int64 transaction_id = 6;
 	int64 original_transaction_id = 7;
-	int64 amount = 8;
+	string amount = 8;
 }
 
 message GameCreditResponse {
 	int64 transaction_id = 1;
 	string exchange_rate = 2;
-	int64 cash = 3;
-	int64 operator_bonus = 4;
-	int64 provider_bonus = 5;
+	string cash = 3;
+	string operator_bonus = 4;
+	string provider_bonus = 5;
 }
 
 message FreezeRequest {
@@ -232,7 +232,7 @@ message FreezeRequest {
 	//   - "payment_withdraw_freeze"   - Payment withdraw freeze transaction
 	string transaction_type = 3;
 	int64 transaction_id = 4;
-	int64 cash = 5;
+	string cash = 5;
 }
 
 message FreezeResponse {
@@ -267,9 +267,9 @@ message RollbackRequest {
 
 message RollbackResponse {
 	int64 transaction_id = 1;
-	int64 cash = 2;
-	int64 operator_bonus = 3;
-	int64 provider_bonus = 4;
+	string cash = 2;
+	string operator_bonus = 3;
+	string provider_bonus = 4;
 }
 
 message GetWalletsRequest {
@@ -329,12 +329,12 @@ message ListWalletBalanceTransactionsRequest {
 	//   - "game_bet_rollback"            - Game bet transaction rollback
 	//   - "game_win_rollback"            - Game win transaction rollback
 	//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
-	optional string transaction_type = 3;
-	optional string currency = 4;
-	optional google.protobuf.Timestamp start_time = 5;
-	optional google.protobuf.Timestamp end_time = 6;
-	optional int32 page = 7;
-	optional int32 page_size = 8;
+	optional string transaction_type = 2;
+	optional string currency = 3;
+	optional google.protobuf.Timestamp start_time = 4;
+	optional google.protobuf.Timestamp end_time = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
 }
 
 message ListWalletBalanceTransactionsResponse {
@@ -365,6 +365,7 @@ message ListWalletBalanceTransactionsResponse {
 		string before_balance = 6;
 		string after_balance = 7;
 		string currency = 8;
+		int64 related_transaction_id = 9;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 	int32 total = 2;
@@ -386,26 +387,26 @@ message GetWalletBalanceTransactionsByIdsResponse {
 		string transaction_type = 6;
 		int64 external_transaction_id = 7;
 		int64 related_transaction_id = 8;
-		int64 original_cash = 9;
-		int64 original_cash_usd = 10;
-		int64 cash = 11;
-		int64 cash_usd = 12;
-		int64 cash_amount = 13;
-		int64 cash_amount_usd = 14;
-		int64 original_operator_bonus = 15;
-		int64 original_operator_bonus_usd = 16;
-		int64 operator_bonus = 17;
-		int64 operator_bonus_usd = 18;
-		int64 operator_bonus_amount = 19;
-		int64 operator_bonus_amount_usd = 20;
-		int64 original_provider_bonus = 21;
-		int64 original_provider_bonus_usd = 22;
-		int64 provider_bonus = 23;
-		int64 provider_bonus_usd = 24;
-		int64 provider_bonus_amount = 25;
-		int64 provider_bonus_amount_usd = 26;
-		int64 created_at = 27;
-		int64 updated_at = 28;
+		string original_cash = 9;
+		string original_cash_usd = 10;
+		string cash = 11;
+		string cash_usd = 12;
+		string cash_amount = 13;
+		string cash_amount_usd = 14;
+		string original_operator_bonus = 15;
+		string original_operator_bonus_usd = 16;
+		string operator_bonus = 17;
+		string operator_bonus_usd = 18;
+		string operator_bonus_amount = 19;
+		string operator_bonus_amount_usd = 20;
+		string original_provider_bonus = 21;
+		string original_provider_bonus_usd = 22;
+		string provider_bonus = 23;
+		string provider_bonus_usd = 24;
+		string provider_bonus_amount = 25;
+		string provider_bonus_amount_usd = 26;
+		google.protobuf.Timestamp created_at = 27;
+		google.protobuf.Timestamp updated_at = 28;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 }
@@ -454,4 +455,67 @@ message GetUserTransactionSummaryResponse {
 	int32 total_deposit_count = 6;
 	int32 total_withdraw_count = 7;
 	int32 today_withdraw_count = 8;
+}
+
+message GetBackofficeUserOverviewFromWalletRequest {
+	int64 user_id = 1;
+	optional google.protobuf.Timestamp start_time = 2;
+	optional google.protobuf.Timestamp end_time = 3;
+}
+
+message GetBackofficeUserOverviewFromWalletResponse {
+	string balance = 1;
+	string deposit_minus_withdraw = 2;
+	string turnover = 3;
+	string cash_turnover = 4;
+	string bonus_turnover = 5;
+	string deposit = 6;
+	string last_deposit = 7;
+	int32 deposit_count = 8;
+	string withdraw = 9;
+	string last_withdraw = 10;
+	int32 withdraw_count = 11;
+	string bonus = 12; // Not available for now, only return 0
+	string valid_turnover = 13; // Not available for now, only return 0
+	string average_bet_amount = 14;
+	string ggr = 15;
+	string ggr_percentage = 16; // Round to 2 decimal places
+	string manually_added_balance = 17; // Not available for now, only return 0
+	string bonus_claimed = 18; // Not available for now, only return 0
+	string ngr = 19;
+	string ggr_to_ngr_percentage = 20; // Round to 2 decimal places
+	string turnover_multiplier = 21; // Round to 2 decimal places
+	string deposit_to_withdraw_ratio = 22; // Round to 2 decimal places
+	string rtp = 23; // Round to 2 decimal places
+}
+
+message GetOverviewDashboardFromWalletRequest {
+}
+
+message GetOverviewDashboardFromWalletResponse {
+	message GGR {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message NGR {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message Deposit {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message Withdraw {
+		string today = 1;
+		string yesterday = 2;
+	}
+	message DepositMinusWithdraw {
+		string today = 1;
+		string yesterday = 2;
+	}
+	GGR ggr = 1;
+	NGR ngr = 2;
+	Deposit deposit = 3;
+	Withdraw withdraw = 4;
+	DepositMinusWithdraw deposit_minus_withdraw = 5;
 }

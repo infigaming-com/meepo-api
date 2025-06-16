@@ -2637,34 +2637,7 @@ func (m *GetTimeRangedDashboardResponse_GameData) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetTimeRangedDashboardResponse_GameDataValidationError{
-					field:  "Time",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetTimeRangedDashboardResponse_GameDataValidationError{
-					field:  "Time",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetTimeRangedDashboardResponse_GameDataValidationError{
-				field:  "Time",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Time
 
 	if all {
 		switch v := interface{}(m.GetData()).(type) {
@@ -2801,34 +2774,7 @@ func (m *GetTimeRangedDashboardResponse_PaymentData) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetTimeRangedDashboardResponse_PaymentDataValidationError{
-					field:  "Time",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetTimeRangedDashboardResponse_PaymentDataValidationError{
-					field:  "Time",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetTimeRangedDashboardResponse_PaymentDataValidationError{
-				field:  "Time",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Time
 
 	if all {
 		switch v := interface{}(m.GetData()).(type) {
@@ -2965,34 +2911,7 @@ func (m *GetTimeRangedDashboardResponse_ActiveUsersData) validate(all bool) erro
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetTimeRangedDashboardResponse_ActiveUsersDataValidationError{
-					field:  "Time",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetTimeRangedDashboardResponse_ActiveUsersDataValidationError{
-					field:  "Time",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetTimeRangedDashboardResponse_ActiveUsersDataValidationError{
-				field:  "Time",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Time
 
 	if all {
 		switch v := interface{}(m.GetData()).(type) {
@@ -3473,6 +3392,8 @@ func (m *GetTopUsersDashboardResponse_User) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Rank
+
 	// no validation rules for UserId
 
 	// no validation rules for Avatar
@@ -3483,7 +3404,7 @@ func (m *GetTopUsersDashboardResponse_User) validate(all bool) error {
 
 	// no validation rules for Amount
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
 
 	if len(errors) > 0 {
 		return GetTopUsersDashboardResponse_UserMultiError(errors)
@@ -3591,7 +3512,11 @@ func (m *GetTopOperatorsDashboardResponse_OperatorData) validate(all bool) error
 
 	var errors []error
 
-	// no validation rules for Operator
+	// no validation rules for Rank
+
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorName
 
 	// no validation rules for Amount
 
