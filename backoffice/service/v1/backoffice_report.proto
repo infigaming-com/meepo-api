@@ -195,6 +195,7 @@ message GetGameSummaryRequest {
 	repeated string game_categories = 6;
 	repeated string game_names = 7;
 	repeated string game_ids = 8;
+	repeated string currencies = 9;
 }
 
 message GetGameSummaryResponse {
@@ -215,8 +216,9 @@ message GetGameDataRequest {
 	repeated string game_categories = 6;
 	repeated string game_names = 7;
 	repeated string game_ids = 8;
-	int32 page = 9;
-	int32 page_size = 10;
+	repeated string currencies = 9;
+	int32 page = 10;
+	int32 page_size = 11;
 }
 
 message GetGameDataResponse {
@@ -257,6 +259,8 @@ message GetPlayerGameSummaryRequest {
 	repeated string game_tags = 7;
 	repeated string game_names = 8;
 	repeated string game_ids = 9;
+	repeated string currencies = 10;
+	repeated int64 user_ids = 11;
 }
 
 message GetPlayerGameSummaryResponse {
@@ -279,8 +283,9 @@ message GetPlayerGameDataRequest {
 	repeated string game_names = 8;
 	repeated string game_ids = 9;
 	repeated string currencies = 10;
-	int32 page = 11;
-	int32 page_size = 12;
+	repeated int64 user_ids = 11;
+	int32 page = 12;
+	int32 page_size = 13;
 }
 
 message GetPlayerGameDataResponse {
