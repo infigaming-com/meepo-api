@@ -5534,7 +5534,11 @@ func (m *GetWalletsResponse_Credit) validate(all bool) error {
 
 	// no validation rules for Cash
 
+	// no validation rules for OriginalCash
+
 	// no validation rules for Bonus
+
+	// no validation rules for OriginalBonus
 
 	// no validation rules for TurnoverThreshold
 
@@ -5543,6 +5547,8 @@ func (m *GetWalletsResponse_Credit) validate(all bool) error {
 	// no validation rules for CashTurnover
 
 	// no validation rules for BonusTurnover
+
+	// no validation rules for TurnoverMultiplier
 
 	if len(errors) > 0 {
 		return GetWalletsResponse_CreditMultiError(errors)
@@ -5650,7 +5656,11 @@ func (m *GetWalletsResponse_Wallet) validate(all bool) error {
 
 	// no validation rules for Cash
 
+	// no validation rules for OriginalCash
+
 	// no validation rules for Bonus
+
+	// no validation rules for OriginalBonus
 
 	// no validation rules for TurnoverThreshold
 
@@ -5659,6 +5669,8 @@ func (m *GetWalletsResponse_Wallet) validate(all bool) error {
 	// no validation rules for CashTurnover
 
 	// no validation rules for BonusTurnover
+
+	// no validation rules for TurnoverMultiplier
 
 	for idx, item := range m.GetCredits() {
 		_, _ = idx, item
