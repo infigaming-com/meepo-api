@@ -12,7 +12,7 @@ import (
 	user "github.com/infigaming-com/meepo-api/user/service/v1"
 )
 
-func AuthzMiddleware(paths []string, secret string, uc user.UserClient) middleware.Middleware {
+func AuthzMiddleware(paths []string, uc user.UserClient) middleware.Middleware {
 	return func(handler middleware.Handler) middleware.Handler {
 		return func(ctx context.Context, req interface{}) (reply interface{}, err error) {
 			tr, ok := transport.FromServerContext(ctx)
@@ -25,7 +25,7 @@ func AuthzMiddleware(paths []string, secret string, uc user.UserClient) middlewa
 			}
 
 			path := httpTr.Request().URL.Path
-			if !slices.Contains(paths, path) {
+			if slices.Contains(paths, path) {
 				return handler(ctx, req)
 			}
 
