@@ -5068,16 +5068,13 @@ components:
                 averageFtwAmount:
                     type: string
                 wuToAuPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 wuToDuPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 depositMinusWithdrawAmount:
                     type: string
                 wToDPercentage:
-                    type: integer
-                    format: int32
+                    type: string
                 turnover:
                     type: string
                 depositBonus:
