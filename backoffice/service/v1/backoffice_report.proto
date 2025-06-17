@@ -158,10 +158,10 @@ message ListSummariesResponse {
 		string average_withdraw_amount = 20;
 		string ftw_amount = 21;
 		string average_ftw_amount = 22;
-		int32 wu_to_au_percentage = 23;
-		int32 wu_to_du_percentage = 24;
+		string wu_to_au_percentage = 23;
+		string wu_to_du_percentage = 24;
 		string deposit_minus_withdraw_amount = 25;
-		int32 w_to_d_percentage = 26;
+		string w_to_d_percentage = 26;
 		string turnover = 27;
 		string deposit_bonus = 28;
 		string rebate_bonus = 29;

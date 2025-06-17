@@ -2346,10 +2346,10 @@ type ListSummariesResponse_List struct {
 	AverageWithdrawAmount      string                 `protobuf:"bytes,20,opt,name=average_withdraw_amount,json=averageWithdrawAmount,proto3" json:"average_withdraw_amount,omitempty"`
 	FtwAmount                  string                 `protobuf:"bytes,21,opt,name=ftw_amount,json=ftwAmount,proto3" json:"ftw_amount,omitempty"`
 	AverageFtwAmount           string                 `protobuf:"bytes,22,opt,name=average_ftw_amount,json=averageFtwAmount,proto3" json:"average_ftw_amount,omitempty"`
-	WuToAuPercentage           int32                  `protobuf:"varint,23,opt,name=wu_to_au_percentage,json=wuToAuPercentage,proto3" json:"wu_to_au_percentage,omitempty"`
-	WuToDuPercentage           int32                  `protobuf:"varint,24,opt,name=wu_to_du_percentage,json=wuToDuPercentage,proto3" json:"wu_to_du_percentage,omitempty"`
+	WuToAuPercentage           string                 `protobuf:"bytes,23,opt,name=wu_to_au_percentage,json=wuToAuPercentage,proto3" json:"wu_to_au_percentage,omitempty"`
+	WuToDuPercentage           string                 `protobuf:"bytes,24,opt,name=wu_to_du_percentage,json=wuToDuPercentage,proto3" json:"wu_to_du_percentage,omitempty"`
 	DepositMinusWithdrawAmount string                 `protobuf:"bytes,25,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
-	WToDPercentage             int32                  `protobuf:"varint,26,opt,name=w_to_d_percentage,json=wToDPercentage,proto3" json:"w_to_d_percentage,omitempty"`
+	WToDPercentage             string                 `protobuf:"bytes,26,opt,name=w_to_d_percentage,json=wToDPercentage,proto3" json:"w_to_d_percentage,omitempty"`
 	Turnover                   string                 `protobuf:"bytes,27,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	DepositBonus               string                 `protobuf:"bytes,28,opt,name=deposit_bonus,json=depositBonus,proto3" json:"deposit_bonus,omitempty"`
 	RebateBonus                string                 `protobuf:"bytes,29,opt,name=rebate_bonus,json=rebateBonus,proto3" json:"rebate_bonus,omitempty"`
@@ -2555,18 +2555,18 @@ func (x *ListSummariesResponse_List) GetAverageFtwAmount() string {
 	return ""
 }
 
-func (x *ListSummariesResponse_List) GetWuToAuPercentage() int32 {
+func (x *ListSummariesResponse_List) GetWuToAuPercentage() string {
 	if x != nil {
 		return x.WuToAuPercentage
 	}
-	return 0
+	return ""
 }
 
-func (x *ListSummariesResponse_List) GetWuToDuPercentage() int32 {
+func (x *ListSummariesResponse_List) GetWuToDuPercentage() string {
 	if x != nil {
 		return x.WuToDuPercentage
 	}
-	return 0
+	return ""
 }
 
 func (x *ListSummariesResponse_List) GetDepositMinusWithdrawAmount() string {
@@ -2576,11 +2576,11 @@ func (x *ListSummariesResponse_List) GetDepositMinusWithdrawAmount() string {
 	return ""
 }
 
-func (x *ListSummariesResponse_List) GetWToDPercentage() int32 {
+func (x *ListSummariesResponse_List) GetWToDPercentage() string {
 	if x != nil {
 		return x.WToDPercentage
 	}
-	return 0
+	return ""
 }
 
 func (x *ListSummariesResponse_List) GetTurnover() string {
@@ -4538,10 +4538,10 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\n" +
 	"ftw_amount\x18\x15 \x01(\tR\tftwAmount\x12,\n" +
 	"\x12average_ftw_amount\x18\x16 \x01(\tR\x10averageFtwAmount\x12-\n" +
-	"\x13wu_to_au_percentage\x18\x17 \x01(\x05R\x10wuToAuPercentage\x12-\n" +
-	"\x13wu_to_du_percentage\x18\x18 \x01(\x05R\x10wuToDuPercentage\x12A\n" +
+	"\x13wu_to_au_percentage\x18\x17 \x01(\tR\x10wuToAuPercentage\x12-\n" +
+	"\x13wu_to_du_percentage\x18\x18 \x01(\tR\x10wuToDuPercentage\x12A\n" +
 	"\x1ddeposit_minus_withdraw_amount\x18\x19 \x01(\tR\x1adepositMinusWithdrawAmount\x12)\n" +
-	"\x11w_to_d_percentage\x18\x1a \x01(\x05R\x0ewToDPercentage\x12\x1a\n" +
+	"\x11w_to_d_percentage\x18\x1a \x01(\tR\x0ewToDPercentage\x12\x1a\n" +
 	"\bturnover\x18\x1b \x01(\tR\bturnover\x12#\n" +
 	"\rdeposit_bonus\x18\x1c \x01(\tR\fdepositBonus\x12!\n" +
 	"\frebate_bonus\x18\x1d \x01(\tR\vrebateBonus\x12\x1f\n" +
