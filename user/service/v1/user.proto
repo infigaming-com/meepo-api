@@ -161,6 +161,8 @@ service User {
 	rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse) {}
 
 	rpc GetOverviewDashboardFromUser(GetOverviewDashboardFromUserRequest) returns (GetOverviewDashboardFromUserResponse) {}
+
+	rpc GetOperatorIdByOrigin(GetOperatorIdByOriginRequest) returns (GetOperatorIdByOriginResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -716,3 +718,11 @@ message DeleteRoleRequest {
 }
 
 message DeleteRoleResponse {}
+
+message GetOperatorIdByOriginRequest {
+	string origin = 1;
+}
+
+message GetOperatorIdByOriginResponse {
+	int64 operator_id = 1;
+}

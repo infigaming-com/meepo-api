@@ -636,3 +636,15 @@ func IsAddUserDailyActivityFailed(err error) bool {
 func ErrorAddUserDailyActivityFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_ADD_USER_DAILY_ACTIVITY_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorIdNotFoundByOrigin(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_ID_NOT_FOUND_BY_ORIGIN.String() && e.Code == 500
+}
+
+func ErrorOperatorIdNotFoundByOrigin(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_ID_NOT_FOUND_BY_ORIGIN.String(), fmt.Sprintf(format, args...))
+}
