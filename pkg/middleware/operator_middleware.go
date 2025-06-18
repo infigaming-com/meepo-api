@@ -17,7 +17,7 @@ func OperatorIdMiddleware(path []string, userClient user.UserClient) middleware.
 	return func(handler middleware.Handler) middleware.Handler {
 		return func(ctx context.Context, req any) (reply any, err error) {
 			if r, ok := khttp.RequestFromServerContext(ctx); ok {
-				if !slices.Contains(path, r.URL.Path) {
+				if len(path) > 0 && !slices.Contains(path, r.URL.Path) {
 					return handler(ctx, req)
 				}
 				origin := r.Header.Get("Origin")
