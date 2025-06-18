@@ -7,22 +7,13 @@ import (
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/middleware"
 	khttp "github.com/go-kratos/kratos/v2/transport/http"
-	operator "github.com/infigaming-com/meepo-api/operator/service/v1"
 	mctx "github.com/infigaming-com/meepo-api/pkg/context"
-)
-
-type operatorKey struct{}
-
-var (
-	OperatorKey           = operatorKey{}
-	OriginToOperatorIdMap = map[string]int64{
-		"https://dev.mini.bet": 1234567890,
-	}
+	user "github.com/infigaming-com/meepo-api/user/service/v1"
 )
 
 // OperatorIdMiddleware is a middleware that extract Origin and
 // get the operatorId with Origin from redis
-func OperatorIdMiddleware(path []string, operator operator.OperatorClient) middleware.Middleware {
+func OperatorIdMiddleware(path []string, userClient user.UserClient) middleware.Middleware {
 	return func(handler middleware.Handler) middleware.Handler {
 		return func(ctx context.Context, req any) (reply any, err error) {
 			if r, ok := khttp.RequestFromServerContext(ctx); ok {
@@ -34,12 +25,17 @@ func OperatorIdMiddleware(path []string, operator operator.OperatorClient) middl
 					return nil, errors.New(400, "BAD_REQUEST", "missing origin header")
 				}
 				// temporary use map to store origin and operatorId
-				operatorId, ok := OriginToOperatorIdMap[origin]
-				if !ok {
-					//return nil, errors.New(400, "BAD_REQUEST", "invalid origin")
-					operatorId = 1234567890 // temporary use 1234567890 as default operatorId
+				resp, err := userClient.GetOperatorIdByOrigin(ctx, &user.GetOperatorIdByOriginRequest{
+					Origin: origin,
+				})
+				if err != nil {
+					if user.IsOperatorIdNotFoundByOrigin(err) {
+						return nil, errors.New(400, "BAD_REQUEST", "operatorId not found by origin")
+					} else {
+						return nil, errors.New(400, "BAD_REQUEST", "cannot get operatorId by origin")
+					}
 				}
-				ctx = mctx.WithOperatorId(ctx, operatorId)
+				ctx = mctx.WithOperatorId(ctx, resp.OperatorId)
 			}
 			return handler(ctx, req)
 		}
