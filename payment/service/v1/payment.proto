@@ -457,12 +457,12 @@ message GetTransactionDetailByIdResponse {
 }
 
 message GetChannelsByIdsRequest {
-	repeated int64 channel_ids = 1;
+	repeated string channel_ids = 1;
 }
 
 message GetChannelsByIdsResponse {
 	message Channel {
-		int64 channel_id = 1;
+		string channel_id = 1;
 		string name = 2;
 	}
 	repeated Channel channels = 1;

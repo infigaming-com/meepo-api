@@ -2394,7 +2394,7 @@ func (x *GetTransactionDetailByIdResponse) GetDetail() *TransactionDetail {
 
 type GetChannelsByIdsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChannelIds    []int64                `protobuf:"varint,1,rep,packed,name=channel_ids,json=channelIds,proto3" json:"channel_ids,omitempty"`
+	ChannelIds    []string               `protobuf:"bytes,1,rep,name=channel_ids,json=channelIds,proto3" json:"channel_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2429,7 +2429,7 @@ func (*GetChannelsByIdsRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *GetChannelsByIdsRequest) GetChannelIds() []int64 {
+func (x *GetChannelsByIdsRequest) GetChannelIds() []string {
 	if x != nil {
 		return x.ChannelIds
 	}
@@ -2482,7 +2482,7 @@ func (x *GetChannelsByIdsResponse) GetChannels() []*GetChannelsByIdsResponse_Cha
 
 type GetChannelsByIdsResponse_Channel struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChannelId     int64                  `protobuf:"varint,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	ChannelId     string                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2518,11 +2518,11 @@ func (*GetChannelsByIdsResponse_Channel) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{23, 0}
 }
 
-func (x *GetChannelsByIdsResponse_Channel) GetChannelId() int64 {
+func (x *GetChannelsByIdsResponse_Channel) GetChannelId() string {
 	if x != nil {
 		return x.ChannelId
 	}
-	return 0
+	return ""
 }
 
 func (x *GetChannelsByIdsResponse_Channel) GetName() string {
@@ -2731,13 +2731,13 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	" GetTransactionDetailByIdResponse\x12=\n" +
 	"\x06detail\x18\x01 \x01(\v2%.payment.service.v1.TransactionDetailR\x06detail\":\n" +
 	"\x17GetChannelsByIdsRequest\x12\x1f\n" +
-	"\vchannel_ids\x18\x01 \x03(\x03R\n" +
+	"\vchannel_ids\x18\x01 \x03(\tR\n" +
 	"channelIds\"\xaa\x01\n" +
 	"\x18GetChannelsByIdsResponse\x12P\n" +
 	"\bchannels\x18\x01 \x03(\v24.payment.service.v1.GetChannelsByIdsResponse.ChannelR\bchannels\x1a<\n" +
 	"\aChannel\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\x03R\tchannelId\x12\x12\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name*p\n" +
 	"\x0fTransactionType\x12 \n" +
 	"\x1cTRANSACTION_TYPE_UNSPECIFIED\x10\x00\x12\x1c\n" +
