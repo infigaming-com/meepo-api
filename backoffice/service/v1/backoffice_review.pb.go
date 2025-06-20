@@ -825,29 +825,28 @@ func (x *GetTicketByIdResponse) GetComments() []*GetTicketByIdResponse_Comment {
 }
 
 type ListTicketsResponse_Ticket struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	CreatedAt          *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	OperatorName       string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	TicketId           int64                  `protobuf:"varint,3,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	UserId             int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	VipLevel           int32                  `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	UserTags           []string               `protobuf:"bytes,6,rep,name=user_tags,json=userTags,proto3" json:"user_tags,omitempty"`
-	BeforeBalance      string                 `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	BeforeBalanceUsd   string                 `protobuf:"bytes,8,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
-	Amount             string                 `protobuf:"bytes,9,opt,name=amount,proto3" json:"amount,omitempty"`
-	AmountUsd          string                 `protobuf:"bytes,10,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
-	AfterBalance       string                 `protobuf:"bytes,11,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	AfterBalanceUsd    string                 `protobuf:"bytes,12,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
-	Currency           string                 `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
-	PaymentChannelId   string                 `protobuf:"bytes,14,opt,name=payment_channel_id,json=paymentChannelId,proto3" json:"payment_channel_id,omitempty"`
-	PaymentChannelName string                 `protobuf:"bytes,15,opt,name=payment_channel_name,json=paymentChannelName,proto3" json:"payment_channel_name,omitempty"`
-	Protocol           string                 `protobuf:"bytes,16,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	Fee                string                 `protobuf:"bytes,17,opt,name=fee,proto3" json:"fee,omitempty"`
-	Status             string                 `protobuf:"bytes,18,opt,name=status,proto3" json:"status,omitempty"` // pending, approved, rejected, manual_payout, paying, paid, failed
-	ReviewerUsername   string                 `protobuf:"bytes,19,opt,name=reviewer_username,json=reviewerUsername,proto3" json:"reviewer_username,omitempty"`
-	ReviewDuration     int32                  `protobuf:"varint,20,opt,name=review_duration,json=reviewDuration,proto3" json:"review_duration,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	OperatorName     string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	TicketId         int64                  `protobuf:"varint,3,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	UserId           int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	VipLevel         int32                  `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	UserTags         []string               `protobuf:"bytes,6,rep,name=user_tags,json=userTags,proto3" json:"user_tags,omitempty"`
+	BeforeBalance    string                 `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	BeforeBalanceUsd string                 `protobuf:"bytes,8,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
+	Amount           string                 `protobuf:"bytes,9,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd        string                 `protobuf:"bytes,10,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AfterBalance     string                 `protobuf:"bytes,11,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	AfterBalanceUsd  string                 `protobuf:"bytes,12,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
+	Currency         string                 `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
+	PaymentChannel   string                 `protobuf:"bytes,14,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	Protocol         string                 `protobuf:"bytes,15,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Fee              string                 `protobuf:"bytes,16,opt,name=fee,proto3" json:"fee,omitempty"`
+	Status           string                 `protobuf:"bytes,17,opt,name=status,proto3" json:"status,omitempty"` // pending, approved, rejected, manual_payout, paying, paid, failed
+	ReviewerUsername string                 `protobuf:"bytes,18,opt,name=reviewer_username,json=reviewerUsername,proto3" json:"reviewer_username,omitempty"`
+	ReviewDuration   int32                  `protobuf:"varint,19,opt,name=review_duration,json=reviewDuration,proto3" json:"review_duration,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ListTicketsResponse_Ticket) Reset() {
@@ -971,16 +970,9 @@ func (x *ListTicketsResponse_Ticket) GetCurrency() string {
 	return ""
 }
 
-func (x *ListTicketsResponse_Ticket) GetPaymentChannelId() string {
+func (x *ListTicketsResponse_Ticket) GetPaymentChannel() string {
 	if x != nil {
-		return x.PaymentChannelId
-	}
-	return ""
-}
-
-func (x *ListTicketsResponse_Ticket) GetPaymentChannelName() string {
-	if x != nil {
-		return x.PaymentChannelName
+		return x.PaymentChannel
 	}
 	return ""
 }
@@ -1629,7 +1621,8 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xb5\v\n" +
+	"_page_size\"\xfe\n" +
+	"\n" +
 	"\x13ListTicketsResponse\x12O\n" +
 	"\atickets\x18\x01 \x03(\v25.api.backoffice.service.v1.ListTicketsResponse.TicketR\atickets\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -1648,7 +1641,7 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x13total_failed_amount\x18\r \x01(\tR\x11totalFailedAmount\x120\n" +
 	"\x14total_rejected_count\x18\x0e \x01(\x05R\x12totalRejectedCount\x122\n" +
 	"\x15total_rejected_amount\x18\x0f \x01(\tR\x13totalRejectedAmount\x12.\n" +
-	"\x13average_review_time\x18\x10 \x01(\x05R\x11averageReviewTime\x1a\xcd\x05\n" +
+	"\x13average_review_time\x18\x10 \x01(\x05R\x11averageReviewTime\x1a\x96\x05\n" +
 	"\x06Ticket\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12#\n" +
@@ -1665,14 +1658,13 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	" \x01(\tR\tamountUsd\x12#\n" +
 	"\rafter_balance\x18\v \x01(\tR\fafterBalance\x12*\n" +
 	"\x11after_balance_usd\x18\f \x01(\tR\x0fafterBalanceUsd\x12\x1a\n" +
-	"\bcurrency\x18\r \x01(\tR\bcurrency\x12,\n" +
-	"\x12payment_channel_id\x18\x0e \x01(\tR\x10paymentChannelId\x120\n" +
-	"\x14payment_channel_name\x18\x0f \x01(\tR\x12paymentChannelName\x12\x1a\n" +
-	"\bprotocol\x18\x10 \x01(\tR\bprotocol\x12\x10\n" +
-	"\x03fee\x18\x11 \x01(\tR\x03fee\x12\x16\n" +
-	"\x06status\x18\x12 \x01(\tR\x06status\x12+\n" +
-	"\x11reviewer_username\x18\x13 \x01(\tR\x10reviewerUsername\x12'\n" +
-	"\x0freview_duration\x18\x14 \x01(\x05R\x0ereviewDuration\"/\n" +
+	"\bcurrency\x18\r \x01(\tR\bcurrency\x12'\n" +
+	"\x0fpayment_channel\x18\x0e \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bprotocol\x18\x0f \x01(\tR\bprotocol\x12\x10\n" +
+	"\x03fee\x18\x10 \x01(\tR\x03fee\x12\x16\n" +
+	"\x06status\x18\x11 \x01(\tR\x06status\x12+\n" +
+	"\x11reviewer_username\x18\x12 \x01(\tR\x10reviewerUsername\x12'\n" +
+	"\x0freview_duration\x18\x13 \x01(\x05R\x0ereviewDuration\"/\n" +
 	"\x10GetTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x8b\v\n" +
 	"\x11GetTicketResponse\x12#\n" +

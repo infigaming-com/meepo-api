@@ -1671,9 +1671,7 @@ func (m *ListTicketsResponse_Ticket) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for PaymentChannelId
-
-	// no validation rules for PaymentChannelName
+	// no validation rules for PaymentChannel
 
 	// no validation rules for Protocol
 

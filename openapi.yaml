@@ -5220,9 +5220,7 @@ components:
                     type: string
                 currency:
                     type: string
-                paymentChannelId:
-                    type: string
-                paymentChannelName:
+                paymentChannel:
                     type: string
                 protocol:
                     type: string
