@@ -134,18 +134,20 @@ message GetTicketResponse {
 		string ticket_status = 8;
 		int64 reviewer_user_id = 9;
 		string reviewer_comment = 10;
-		string payment_status = 11;
-		int64 payment_transaction_id = 12;
-		string payment_transaction_error = 13;
-		string wallet_status = 14;
-		int64 wallet_freeze_transaction_id = 15;
-		int64 wallet_settle_transaction_id = 16;
-		string wallet_settle_error = 17;
-		int64 wallet_rollback_transaction_id = 18;
-		string wallet_rollback_error = 19;
-		int64 created_at = 20;
-		int64 updated_at = 21;
-		int64 reviewed_at = 22;
+		string payment_channel_id = 11;
+		string payment_channel_name = 12;
+		string payment_status = 13;
+		int64 payment_transaction_id = 14;
+		string payment_transaction_error = 15;
+		string wallet_status = 16;
+		int64 wallet_freeze_transaction_id = 17;
+		int64 wallet_settle_transaction_id = 18;
+		string wallet_settle_error = 19;
+		int64 wallet_rollback_transaction_id = 20;
+		string wallet_rollback_error = 21;
+		int64 created_at = 22;
+		int64 updated_at = 23;
+		int64 reviewed_at = 24;
 	}
 	message Comment {
 		int64 id = 1;
