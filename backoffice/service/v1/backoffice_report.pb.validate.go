@@ -323,6 +323,10 @@ func (m *GetSummaryResponse) validate(all bool) error {
 
 	// no validation rules for Ngr
 
+	// no validation rules for Arpu
+
+	// no validation rules for Arppu
+
 	if len(errors) > 0 {
 		return GetSummaryResponseMultiError(errors)
 	}
