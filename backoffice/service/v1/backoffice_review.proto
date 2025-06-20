@@ -75,12 +75,13 @@ message ListTicketsResponse {
 		string after_balance = 11;
 		string after_balance_usd = 12;
 		string currency = 13;
-		string payment_channel = 14;
-		string protocol = 15;
-		string fee = 16;
-		string status = 17;	// pending, approved, rejected, manual_payout, paying, paid, failed
-		string reviewer_username = 18;
-		int32 review_duration = 19;
+		string payment_channel_id = 14;
+		string payment_channel_name = 15;
+		string protocol = 16;
+		string fee = 17;
+		string status = 18;	// pending, approved, rejected, manual_payout, paying, paid, failed
+		string reviewer_username = 19;
+		int32 review_duration = 20;
 	}
 	repeated Ticket tickets = 1;
 	int32 page = 2;
