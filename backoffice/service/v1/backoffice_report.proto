@@ -120,6 +120,8 @@ message GetSummaryResponse {
 	string bonus = 11;
 	string ggr = 12;
 	string ngr = 13;
+	string arpu = 14;
+	string arppu = 15;
 }
 
 message ListSummariesRequest {
@@ -130,10 +132,8 @@ message ListSummariesRequest {
 	repeated string affiliate_codes = 5;
 	repeated string referral_codes = 6;
 	repeated string registration_countries = 7;
-	repeated string arpu = 8;
-	repeated string arppu = 9;
-	optional int32 page = 10;
-	optional int32 page_size = 11;
+	optional int32 page = 8;
+	optional int32 page_size = 9;
 }
 
 message ListSummariesResponse {
