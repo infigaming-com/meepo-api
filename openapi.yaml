@@ -1762,6 +1762,28 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
+    /v1/payment/channel/page:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Get payment channel page with pagination and filters
+                 Retrieves a paginated list of payment channels with optional filtering
+                 Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
+            operationId: Payment_GetPaymentChannelPage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageResponse'
     /v1/payment/deposit/callback:
         post:
             tags:
@@ -7098,6 +7120,76 @@ components:
             description: |-
                 Response for deposit callback
                  Confirms receipt of callback notification
+        payment.service.v1.GetPaymentChannelPageRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                operatorId:
+                    type: string
+                    description: Optional operator ID filter
+                type:
+                    enum:
+                        - CHANNEL_TYPE_DEPOSIT
+                        - CHANNEL_TYPE_WITHDRAW
+                    type: string
+                    description: Optional channel type filter
+                    format: enum
+                category:
+                    type: string
+                    description: Optional category filter
+                paymentMethod:
+                    type: string
+                    description: Optional payment method filter
+                currency:
+                    type: string
+                    description: Optional currency filter
+                country:
+                    type: string
+                    description: Optional country filter
+                sort:
+                    enum:
+                        - DESC
+                        - ASC
+                    type: string
+                    description: Optional sort direction
+                    format: enum
+            description: |-
+                Request to get payment channel page
+                 Used to retrieve a paginated list of payment channels with optional filters
+        payment.service.v1.GetPaymentChannelPageResponse:
+            type: object
+            properties:
+                paymentChannels:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
+                    description: List of payment channels matching the filter criteria
+                totalCount:
+                    type: integer
+                    description: Total number of channels matching the filter criteria
+                    format: int32
+                page:
+                    type: integer
+                    description: Current page number
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                totalPages:
+                    type: integer
+                    description: Total number of pages available
+                    format: int32
+            description: |-
+                Response for payment channel page
+                 Contains paginated list of payment channels and pagination metadata
         payment.service.v1.GetPaymentMethodListRequest:
             type: object
             properties: {}
@@ -7338,6 +7430,70 @@ components:
             description: |-
                 Response for withdrawal initiation
                  Contains details about the initiated withdrawal transaction
+        payment.service.v1.PaymentChannelInfo:
+            type: object
+            properties:
+                channelId:
+                    type: string
+                    description: Unique identifier for the channel
+                type:
+                    type: string
+                    description: Type of the channel (e.g., online, offline)
+                category:
+                    type: string
+                    description: Category of the channel (e.g., bank, e-wallet)
+                operatorId:
+                    type: string
+                    description: ID of the operator who owns this channel
+                paymentMethod:
+                    type: string
+                    description: Payment method used in this channel
+                tag:
+                    type: string
+                    description: Tag for categorization or filtering
+                name:
+                    type: string
+                    description: Display name of the channel
+                paymentMethodId:
+                    type: string
+                    description: ID of the payment method used
+                currency:
+                    type: string
+                    description: Currency supported by this channel
+                country:
+                    type: string
+                    description: Country where this channel is available
+                method:
+                    type: string
+                    description: Specific method used (might be more detailed than payment_method)
+                logo:
+                    type: string
+                    description: URL to the logo image for this payment channel
+                minDepositAmount:
+                    type: string
+                    description: Minimum amount allowed for deposit transactions
+                maxDepositAmount:
+                    type: string
+                    description: Maximum amount allowed for deposit transactions
+                minWithdrawAmount:
+                    type: string
+                    description: Minimum amount allowed for withdrawal transactions
+                maxWithdrawAmount:
+                    type: string
+                    description: Maximum amount allowed for withdrawal transactions
+                eat:
+                    type: integer
+                    description: Estimated arrival time in minutes
+                    format: int32
+                depositSchema:
+                    type: object
+                    description: JSON schema defining deposit form fields required by this channel
+                withdrawSchema:
+                    type: object
+                    description: JSON schema defining withdrawal form fields required by this channel
+            description: |-
+                Payment channel information
+                 Detailed information about a specific payment channel
         payment.service.v1.PaymentMethodInfo:
             type: object
             properties:

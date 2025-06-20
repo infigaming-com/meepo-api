@@ -543,6 +543,10 @@ service Payment {
   // Retrieves a paginated list of payment channels with optional filtering
   // Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
   rpc GetPaymentChannelPage(GetPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/channel/page"
+      body: "*"
+    };
   }
 
   // Get transaction detail
