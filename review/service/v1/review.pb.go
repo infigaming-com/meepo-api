@@ -988,18 +988,20 @@ type GetTicketResponse_Ticket struct {
 	TicketStatus                string                 `protobuf:"bytes,8,opt,name=ticket_status,json=ticketStatus,proto3" json:"ticket_status,omitempty"`
 	ReviewerUserId              int64                  `protobuf:"varint,9,opt,name=reviewer_user_id,json=reviewerUserId,proto3" json:"reviewer_user_id,omitempty"`
 	ReviewerComment             string                 `protobuf:"bytes,10,opt,name=reviewer_comment,json=reviewerComment,proto3" json:"reviewer_comment,omitempty"`
-	PaymentStatus               string                 `protobuf:"bytes,11,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
-	PaymentTransactionId        int64                  `protobuf:"varint,12,opt,name=payment_transaction_id,json=paymentTransactionId,proto3" json:"payment_transaction_id,omitempty"`
-	PaymentTransactionError     string                 `protobuf:"bytes,13,opt,name=payment_transaction_error,json=paymentTransactionError,proto3" json:"payment_transaction_error,omitempty"`
-	WalletStatus                string                 `protobuf:"bytes,14,opt,name=wallet_status,json=walletStatus,proto3" json:"wallet_status,omitempty"`
-	WalletFreezeTransactionId   int64                  `protobuf:"varint,15,opt,name=wallet_freeze_transaction_id,json=walletFreezeTransactionId,proto3" json:"wallet_freeze_transaction_id,omitempty"`
-	WalletSettleTransactionId   int64                  `protobuf:"varint,16,opt,name=wallet_settle_transaction_id,json=walletSettleTransactionId,proto3" json:"wallet_settle_transaction_id,omitempty"`
-	WalletSettleError           string                 `protobuf:"bytes,17,opt,name=wallet_settle_error,json=walletSettleError,proto3" json:"wallet_settle_error,omitempty"`
-	WalletRollbackTransactionId int64                  `protobuf:"varint,18,opt,name=wallet_rollback_transaction_id,json=walletRollbackTransactionId,proto3" json:"wallet_rollback_transaction_id,omitempty"`
-	WalletRollbackError         string                 `protobuf:"bytes,19,opt,name=wallet_rollback_error,json=walletRollbackError,proto3" json:"wallet_rollback_error,omitempty"`
-	CreatedAt                   int64                  `protobuf:"varint,20,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt                   int64                  `protobuf:"varint,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	ReviewedAt                  int64                  `protobuf:"varint,22,opt,name=reviewed_at,json=reviewedAt,proto3" json:"reviewed_at,omitempty"`
+	PaymentChannelId            string                 `protobuf:"bytes,11,opt,name=payment_channel_id,json=paymentChannelId,proto3" json:"payment_channel_id,omitempty"`
+	PaymentChannelName          string                 `protobuf:"bytes,12,opt,name=payment_channel_name,json=paymentChannelName,proto3" json:"payment_channel_name,omitempty"`
+	PaymentStatus               string                 `protobuf:"bytes,13,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
+	PaymentTransactionId        int64                  `protobuf:"varint,14,opt,name=payment_transaction_id,json=paymentTransactionId,proto3" json:"payment_transaction_id,omitempty"`
+	PaymentTransactionError     string                 `protobuf:"bytes,15,opt,name=payment_transaction_error,json=paymentTransactionError,proto3" json:"payment_transaction_error,omitempty"`
+	WalletStatus                string                 `protobuf:"bytes,16,opt,name=wallet_status,json=walletStatus,proto3" json:"wallet_status,omitempty"`
+	WalletFreezeTransactionId   int64                  `protobuf:"varint,17,opt,name=wallet_freeze_transaction_id,json=walletFreezeTransactionId,proto3" json:"wallet_freeze_transaction_id,omitempty"`
+	WalletSettleTransactionId   int64                  `protobuf:"varint,18,opt,name=wallet_settle_transaction_id,json=walletSettleTransactionId,proto3" json:"wallet_settle_transaction_id,omitempty"`
+	WalletSettleError           string                 `protobuf:"bytes,19,opt,name=wallet_settle_error,json=walletSettleError,proto3" json:"wallet_settle_error,omitempty"`
+	WalletRollbackTransactionId int64                  `protobuf:"varint,20,opt,name=wallet_rollback_transaction_id,json=walletRollbackTransactionId,proto3" json:"wallet_rollback_transaction_id,omitempty"`
+	WalletRollbackError         string                 `protobuf:"bytes,21,opt,name=wallet_rollback_error,json=walletRollbackError,proto3" json:"wallet_rollback_error,omitempty"`
+	CreatedAt                   int64                  `protobuf:"varint,22,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                   int64                  `protobuf:"varint,23,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	ReviewedAt                  int64                  `protobuf:"varint,24,opt,name=reviewed_at,json=reviewedAt,proto3" json:"reviewed_at,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -1100,6 +1102,20 @@ func (x *GetTicketResponse_Ticket) GetReviewerUserId() int64 {
 func (x *GetTicketResponse_Ticket) GetReviewerComment() string {
 	if x != nil {
 		return x.ReviewerComment
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_Ticket) GetPaymentChannelId() string {
+	if x != nil {
+		return x.PaymentChannelId
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_Ticket) GetPaymentChannelName() string {
+	if x != nil {
+		return x.PaymentChannelName
 	}
 	return ""
 }
@@ -1361,10 +1377,11 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x10GetTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
 	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01B\x13\n" +
-	"\x11_include_comments\"\xbf\t\n" +
+	"\x11_include_comments\"\x9f\n" +
+	"\n" +
 	"\x11GetTicketResponse\x12G\n" +
 	"\x06ticket\x18\x01 \x01(\v2/.api.review.service.v1.GetTicketResponse.TicketR\x06ticket\x12L\n" +
-	"\bcomments\x18\x02 \x03(\v20.api.review.service.v1.GetTicketResponse.CommentR\bcomments\x1a\xfa\x06\n" +
+	"\bcomments\x18\x02 \x03(\v20.api.review.service.v1.GetTicketResponse.CommentR\bcomments\x1a\xda\a\n" +
 	"\x06Ticket\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x18\n" +
@@ -1377,21 +1394,23 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\rticket_status\x18\b \x01(\tR\fticketStatus\x12(\n" +
 	"\x10reviewer_user_id\x18\t \x01(\x03R\x0ereviewerUserId\x12)\n" +
 	"\x10reviewer_comment\x18\n" +
-	" \x01(\tR\x0freviewerComment\x12%\n" +
-	"\x0epayment_status\x18\v \x01(\tR\rpaymentStatus\x124\n" +
-	"\x16payment_transaction_id\x18\f \x01(\x03R\x14paymentTransactionId\x12:\n" +
-	"\x19payment_transaction_error\x18\r \x01(\tR\x17paymentTransactionError\x12#\n" +
-	"\rwallet_status\x18\x0e \x01(\tR\fwalletStatus\x12?\n" +
-	"\x1cwallet_freeze_transaction_id\x18\x0f \x01(\x03R\x19walletFreezeTransactionId\x12?\n" +
-	"\x1cwallet_settle_transaction_id\x18\x10 \x01(\x03R\x19walletSettleTransactionId\x12.\n" +
-	"\x13wallet_settle_error\x18\x11 \x01(\tR\x11walletSettleError\x12C\n" +
-	"\x1ewallet_rollback_transaction_id\x18\x12 \x01(\x03R\x1bwalletRollbackTransactionId\x122\n" +
-	"\x15wallet_rollback_error\x18\x13 \x01(\tR\x13walletRollbackError\x12\x1d\n" +
+	" \x01(\tR\x0freviewerComment\x12,\n" +
+	"\x12payment_channel_id\x18\v \x01(\tR\x10paymentChannelId\x120\n" +
+	"\x14payment_channel_name\x18\f \x01(\tR\x12paymentChannelName\x12%\n" +
+	"\x0epayment_status\x18\r \x01(\tR\rpaymentStatus\x124\n" +
+	"\x16payment_transaction_id\x18\x0e \x01(\x03R\x14paymentTransactionId\x12:\n" +
+	"\x19payment_transaction_error\x18\x0f \x01(\tR\x17paymentTransactionError\x12#\n" +
+	"\rwallet_status\x18\x10 \x01(\tR\fwalletStatus\x12?\n" +
+	"\x1cwallet_freeze_transaction_id\x18\x11 \x01(\x03R\x19walletFreezeTransactionId\x12?\n" +
+	"\x1cwallet_settle_transaction_id\x18\x12 \x01(\x03R\x19walletSettleTransactionId\x12.\n" +
+	"\x13wallet_settle_error\x18\x13 \x01(\tR\x11walletSettleError\x12C\n" +
+	"\x1ewallet_rollback_transaction_id\x18\x14 \x01(\x03R\x1bwalletRollbackTransactionId\x122\n" +
+	"\x15wallet_rollback_error\x18\x15 \x01(\tR\x13walletRollbackError\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x14 \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\x16 \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x15 \x01(\x03R\tupdatedAt\x12\x1f\n" +
-	"\vreviewed_at\x18\x16 \x01(\x03R\n" +
+	"updated_at\x18\x17 \x01(\x03R\tupdatedAt\x12\x1f\n" +
+	"\vreviewed_at\x18\x18 \x01(\x03R\n" +
 	"reviewedAt\x1a\x95\x01\n" +
 	"\aComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +

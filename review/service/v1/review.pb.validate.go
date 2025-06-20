@@ -1742,6 +1742,10 @@ func (m *GetTicketResponse_Ticket) validate(all bool) error {
 
 	// no validation rules for ReviewerComment
 
+	// no validation rules for PaymentChannelId
+
+	// no validation rules for PaymentChannelName
+
 	// no validation rules for PaymentStatus
 
 	// no validation rules for PaymentTransactionId
