@@ -323,8 +323,10 @@ type ListSummariesRequest struct {
 	AffiliateCodes        []string               `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
 	ReferralCodes         []string               `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
 	RegistrationCountries []string               `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
-	Page                  *int32                 `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize              *int32                 `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Arpu                  []string               `protobuf:"bytes,8,rep,name=arpu,proto3" json:"arpu,omitempty"`
+	Arppu                 []string               `protobuf:"bytes,9,rep,name=arppu,proto3" json:"arppu,omitempty"`
+	Page                  *int32                 `protobuf:"varint,10,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize              *int32                 `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -404,6 +406,20 @@ func (x *ListSummariesRequest) GetReferralCodes() []string {
 func (x *ListSummariesRequest) GetRegistrationCountries() []string {
 	if x != nil {
 		return x.RegistrationCountries
+	}
+	return nil
+}
+
+func (x *ListSummariesRequest) GetArpu() []string {
+	if x != nil {
+		return x.Arpu
+	}
+	return nil
+}
+
+func (x *ListSummariesRequest) GetArppu() []string {
+	if x != nil {
+		return x.Arppu
 	}
 	return nil
 }
@@ -4493,7 +4509,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	" \x01(\tR\bturnover\x12\x14\n" +
 	"\x05bonus\x18\v \x01(\tR\x05bonus\x12\x10\n" +
 	"\x03ggr\x18\f \x01(\tR\x03ggr\x12\x10\n" +
-	"\x03ngr\x18\r \x01(\tR\x03ngr\"\xb9\x03\n" +
+	"\x03ngr\x18\r \x01(\tR\x03ngr\"\xe3\x03\n" +
 	"\x14ListSummariesRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
@@ -4502,9 +4518,12 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12'\n" +
 	"\x0faffiliate_codes\x18\x05 \x03(\tR\x0eaffiliateCodes\x12%\n" +
 	"\x0ereferral_codes\x18\x06 \x03(\tR\rreferralCodes\x125\n" +
-	"\x16registration_countries\x18\a \x03(\tR\x15registrationCountries\x12\x17\n" +
-	"\x04page\x18\b \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\t \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x16registration_countries\x18\a \x03(\tR\x15registrationCountries\x12\x12\n" +
+	"\x04arpu\x18\b \x03(\tR\x04arpu\x12\x14\n" +
+	"\x05arppu\x18\t \x03(\tR\x05arppu\x12\x17\n" +
+	"\x04page\x18\n" +
+	" \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\v \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xbd\x0e\n" +

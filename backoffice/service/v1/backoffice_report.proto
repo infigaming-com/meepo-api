@@ -130,8 +130,10 @@ message ListSummariesRequest {
 	repeated string affiliate_codes = 5;
 	repeated string referral_codes = 6;
 	repeated string registration_countries = 7;
-	optional int32 page = 8;
-	optional int32 page_size = 9;
+	repeated string arpu = 8;
+	repeated string arppu = 9;
+	optional int32 page = 10;
+	optional int32 page_size = 11;
 }
 
 message ListSummariesResponse {
