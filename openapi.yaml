@@ -5198,7 +5198,9 @@ components:
                     type: string
                 currency:
                     type: string
-                paymentChannel:
+                paymentChannelId:
+                    type: string
+                paymentChannelName:
                     type: string
                 protocol:
                     type: string
