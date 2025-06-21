@@ -672,3 +672,15 @@ func IsListOperatorsFailed(err error) bool {
 func ErrorListOperatorsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_OPERATORS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetOperatorsByIdsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATORS_BY_IDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorsByIdsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATORS_BY_IDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
