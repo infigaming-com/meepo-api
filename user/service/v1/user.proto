@@ -164,6 +164,12 @@ service User {
 
 	rpc GetOperatorIdByOrigin(GetOperatorIdByOriginRequest) returns (GetOperatorIdByOriginResponse) {}
 
+	rpc GetOperator(GetOperatorRequest) returns (GetOperatorResponse) {
+	}
+
+	rpc GetOperatorsByIds(GetOperatorsByIdsRequest) returns (GetOperatorsByIdsResponse) {
+	}
+
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
 	rpc ListOperators(ListOperatorsRequest) returns (ListOperatorsResponse) {
 	}
@@ -729,6 +735,32 @@ message GetOperatorIdByOriginRequest {
 
 message GetOperatorIdByOriginResponse {
 	int64 operator_id = 1;
+}
+
+message GetOperatorRequest {
+	int64 operator_id = 1;
+}
+
+message GetOperatorResponse {
+	message Operator {
+		int64 operator_id = 1;
+		string name = 2;
+		bool enabled = 3;
+	}
+	Operator operator = 1;
+}
+
+message GetOperatorsByIdsRequest {
+	repeated int64 operator_ids = 1;
+}
+
+message GetOperatorsByIdsResponse {
+	message Operator {
+		int64 operator_id = 1;
+		string name = 2;
+		bool enabled = 3;
+	}
+	repeated Operator operators = 1;
 }
 
 message ListOperatorsRequest {
