@@ -189,6 +189,8 @@ type GetSummaryResponse struct {
 	Bonus                      string                 `protobuf:"bytes,11,opt,name=bonus,proto3" json:"bonus,omitempty"`
 	Ggr                        string                 `protobuf:"bytes,12,opt,name=ggr,proto3" json:"ggr,omitempty"`
 	Ngr                        string                 `protobuf:"bytes,13,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	Arpu                       string                 `protobuf:"bytes,14,opt,name=arpu,proto3" json:"arpu,omitempty"`
+	Arppu                      string                 `protobuf:"bytes,15,opt,name=arppu,proto3" json:"arppu,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -310,6 +312,20 @@ func (x *GetSummaryResponse) GetGgr() string {
 func (x *GetSummaryResponse) GetNgr() string {
 	if x != nil {
 		return x.Ngr
+	}
+	return ""
+}
+
+func (x *GetSummaryResponse) GetArpu() string {
+	if x != nil {
+		return x.Arpu
+	}
+	return ""
+}
+
+func (x *GetSummaryResponse) GetArppu() string {
+	if x != nil {
+		return x.Arppu
 	}
 	return ""
 }
@@ -4478,7 +4494,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12'\n" +
 	"\x0faffiliate_codes\x18\x05 \x03(\tR\x0eaffiliateCodes\x12%\n" +
 	"\x0ereferral_codes\x18\x06 \x03(\tR\rreferralCodes\x125\n" +
-	"\x16registration_countries\x18\a \x03(\tR\x15registrationCountries\"\xe9\x03\n" +
+	"\x16registration_countries\x18\a \x03(\tR\x15registrationCountries\"\x93\x04\n" +
 	"\x12GetSummaryResponse\x12\x16\n" +
 	"\x06visits\x18\x01 \x01(\x05R\x06visits\x12)\n" +
 	"\x10registered_users\x18\x02 \x01(\x05R\x0fregisteredUsers\x12\x10\n" +
@@ -4493,7 +4509,9 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	" \x01(\tR\bturnover\x12\x14\n" +
 	"\x05bonus\x18\v \x01(\tR\x05bonus\x12\x10\n" +
 	"\x03ggr\x18\f \x01(\tR\x03ggr\x12\x10\n" +
-	"\x03ngr\x18\r \x01(\tR\x03ngr\"\xb9\x03\n" +
+	"\x03ngr\x18\r \x01(\tR\x03ngr\x12\x12\n" +
+	"\x04arpu\x18\x0e \x01(\tR\x04arpu\x12\x14\n" +
+	"\x05arppu\x18\x0f \x01(\tR\x05arppu\"\xb9\x03\n" +
 	"\x14ListSummariesRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +

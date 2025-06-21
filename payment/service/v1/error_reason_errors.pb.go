@@ -130,3 +130,15 @@ func IsGetTransactionDetailFailed(err error) bool {
 func ErrorGetTransactionDetailFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_TRANSACTION_DETAIL_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetChannelListFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_CHANNEL_LIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetChannelListFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_CHANNEL_LIST_FAILED.String(), fmt.Sprintf(format, args...))
+}

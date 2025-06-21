@@ -1851,50 +1851,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
-    /v1/payment/transaction/detail:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Get transaction detail
-                 Retrieves detailed information about a specific transaction
-                 Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
-            operationId: Payment_GetTransactionDetailById
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetTransactionDetailByIdRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetTransactionDetailByIdResponse'
-    /v1/payment/transaction/page:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Get transaction page with pagination and filters
-                 Retrieves a paginated list of transactions with optional filtering
-                 Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
-            operationId: Payment_GetTransactionPage
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
     /v1/payment/withdraw/callback:
         post:
             tags:
@@ -3312,6 +3268,10 @@ components:
                 ggr:
                     type: string
                 ngr:
+                    type: string
+                arpu:
+                    type: string
+                arppu:
                     type: string
         api.backoffice.service.v1.GetTicketByIdRequest:
             type: object
@@ -7245,32 +7205,6 @@ components:
             description: |-
                 Response for payment method list
                  Contains a list of all available payment methods
-        payment.service.v1.GetTransactionDetailByIdRequest:
-            type: object
-            properties:
-                transactionId:
-                    type: string
-                    description: Unique identifier for the transaction
-                source:
-                    enum:
-                        - REQUEST_SOURCE_FRONTEND
-                        - REQUEST_SOURCE_ADMIN
-                    type: string
-                    description: Source of the request (frontend or admin)
-                    format: enum
-            description: |-
-                Request to get transaction detail by ID
-                 Used to retrieve detailed information about a specific transaction
-        payment.service.v1.GetTransactionDetailByIdResponse:
-            type: object
-            properties:
-                detail:
-                    allOf:
-                        - $ref: '#/components/schemas/payment.service.v1.TransactionDetail'
-                    description: Detailed transaction information including channel data
-            description: |-
-                Response for transaction detail
-                 Contains detailed information about the requested transaction
         payment.service.v1.GetTransactionPageRequest:
             type: object
             properties:
@@ -7579,17 +7513,6 @@ components:
             description: |-
                 Details of a single payment method
                  Contains information about a specific payment method including its ID, currency, and required fields schema
-        payment.service.v1.TransactionDetail:
-            type: object
-            properties:
-                transaction:
-                    allOf:
-                        - $ref: '#/components/schemas/payment.service.v1.TransactionInfo'
-                    description: Transaction information
-                channel:
-                    allOf:
-                        - $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
-                    description: Channel information
         payment.service.v1.TransactionInfo:
             type: object
             properties:

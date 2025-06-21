@@ -456,6 +456,18 @@ message GetTransactionDetailByIdResponse {
   TransactionDetail detail = 1;
 }
 
+message GetChannelsByIdsRequest {
+	repeated string channel_ids = 1;
+}
+
+message GetChannelsByIdsResponse {
+	message Channel {
+		string channel_id = 1;
+		string name = 2;
+	}
+	repeated Channel channels = 1;
+}
+
 // Payment Service
 // Provides methods for managing payment methods, channels, and transactions
 service Payment {
@@ -525,10 +537,6 @@ service Payment {
   // Retrieves a paginated list of transactions with optional filtering
   // Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
   rpc GetTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/transaction/page"
-      body: "*"
-    };
   }
 
   // Get payment channel page with pagination and filters
@@ -545,9 +553,9 @@ service Payment {
   // Retrieves detailed information about a specific transaction
   // Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
   rpc GetTransactionDetailById(GetTransactionDetailByIdRequest) returns (GetTransactionDetailByIdResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/transaction/detail"
-      body: "*"
-    };
   }
+
+  
+	rpc GetChannelsByIds(GetChannelsByIdsRequest) returns (GetChannelsByIdsResponse) {
+	}
 }

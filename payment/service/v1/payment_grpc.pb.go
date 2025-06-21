@@ -28,6 +28,7 @@ const (
 	Payment_GetTransactionPage_FullMethodName       = "/payment.service.v1.Payment/GetTransactionPage"
 	Payment_GetPaymentChannelPage_FullMethodName    = "/payment.service.v1.Payment/GetPaymentChannelPage"
 	Payment_GetTransactionDetailById_FullMethodName = "/payment.service.v1.Payment/GetTransactionDetailById"
+	Payment_GetChannelsByIds_FullMethodName         = "/payment.service.v1.Payment/GetChannelsByIds"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -75,6 +76,7 @@ type PaymentClient interface {
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
 	GetTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error)
+	GetChannelsByIds(ctx context.Context, in *GetChannelsByIdsRequest, opts ...grpc.CallOption) (*GetChannelsByIdsResponse, error)
 }
 
 type paymentClient struct {
@@ -175,6 +177,16 @@ func (c *paymentClient) GetTransactionDetailById(ctx context.Context, in *GetTra
 	return out, nil
 }
 
+func (c *paymentClient) GetChannelsByIds(ctx context.Context, in *GetChannelsByIdsRequest, opts ...grpc.CallOption) (*GetChannelsByIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetChannelsByIdsResponse)
+	err := c.cc.Invoke(ctx, Payment_GetChannelsByIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentServer is the server API for Payment service.
 // All implementations must embed UnimplementedPaymentServer
 // for forward compatibility.
@@ -220,6 +232,7 @@ type PaymentServer interface {
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
 	GetTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error)
+	GetChannelsByIds(context.Context, *GetChannelsByIdsRequest) (*GetChannelsByIdsResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -256,6 +269,9 @@ func (UnimplementedPaymentServer) GetPaymentChannelPage(context.Context, *GetPay
 }
 func (UnimplementedPaymentServer) GetTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionDetailById not implemented")
+}
+func (UnimplementedPaymentServer) GetChannelsByIds(context.Context, *GetChannelsByIdsRequest) (*GetChannelsByIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChannelsByIds not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -440,6 +456,24 @@ func _Payment_GetTransactionDetailById_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_GetChannelsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetChannelsByIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetChannelsByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetChannelsByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetChannelsByIds(ctx, req.(*GetChannelsByIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Payment_ServiceDesc is the grpc.ServiceDesc for Payment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -482,6 +516,10 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTransactionDetailById",
 			Handler:    _Payment_GetTransactionDetailById_Handler,
+		},
+		{
+			MethodName: "GetChannelsByIds",
+			Handler:    _Payment_GetChannelsByIds_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
