@@ -204,6 +204,12 @@ message GameDebitResponse {
 	string cash = 3;
 	string operator_bonus = 4;
 	string provider_bonus = 5;
+	string cash_amount = 6;
+	string operator_bonus_amount = 7;
+	string provider_bonus_amount = 8;
+	string cash_amount_usd = 9;
+	string operator_bonus_amount_usd = 10;
+	string provider_bonus_amount_usd = 11;
 }
 
 message GameCreditRequest {
@@ -223,6 +229,12 @@ message GameCreditResponse {
 	string cash = 3;
 	string operator_bonus = 4;
 	string provider_bonus = 5;
+	string cash_amount = 6;
+	string operator_bonus_amount = 7;
+	string provider_bonus_amount = 8;
+	string cash_amount_usd = 9;
+	string operator_bonus_amount_usd = 10;
+	string provider_bonus_amount_usd = 11;
 }
 
 message FreezeRequest {
@@ -240,13 +252,11 @@ message FreezeResponse {
 }
 
 message SettleRequest {
-	int64 user_id = 1;
-	string currency = 2;
 	// Valid settle transaction types:
 	//   - "payment_withdraw_settle"   - Payment withdraw settle transaction
-	string transaction_type = 3;
-	int64 transaction_id = 4;
-	int64 original_transaction_id = 5;
+	string transaction_type = 1;
+	int64 transaction_id = 2;
+	int64 original_transaction_id = 3;
 }
 
 message SettleResponse {
@@ -254,15 +264,13 @@ message SettleResponse {
 }
 
 message RollbackRequest {
-	int64 user_id = 1;
-	string currency = 2;
 	// Valid rollback transaction types:
 	//   - "game_bet_rollback"            - Game bet transaction rollback
 	//   - "game_win_rollback"            - Game win transaction rollback
 	//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
-	string transaction_type = 3;
-	int64 transaction_id = 4;
-	int64 original_transaction_id = 5;
+	string transaction_type = 1;
+	int64 transaction_id = 2;
+	int64 original_transaction_id = 3;
 }
 
 message RollbackResponse {
@@ -270,6 +278,12 @@ message RollbackResponse {
 	string cash = 2;
 	string operator_bonus = 3;
 	string provider_bonus = 4;
+	string cash_amount = 5;
+	string operator_bonus_amount = 6;
+	string provider_bonus_amount = 7;
+	string cash_amount_usd = 8;
+	string operator_bonus_amount_usd = 9;
+	string provider_bonus_amount_usd = 10;
 }
 
 message GetWalletsRequest {

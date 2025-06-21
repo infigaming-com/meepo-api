@@ -1902,6 +1902,18 @@ func (m *GameDebitResponse) validate(all bool) error {
 
 	// no validation rules for ProviderBonus
 
+	// no validation rules for CashAmount
+
+	// no validation rules for OperatorBonusAmount
+
+	// no validation rules for ProviderBonusAmount
+
+	// no validation rules for CashAmountUsd
+
+	// no validation rules for OperatorBonusAmountUsd
+
+	// no validation rules for ProviderBonusAmountUsd
+
 	if len(errors) > 0 {
 		return GameDebitResponseMultiError(errors)
 	}
@@ -2131,6 +2143,18 @@ func (m *GameCreditResponse) validate(all bool) error {
 	// no validation rules for OperatorBonus
 
 	// no validation rules for ProviderBonus
+
+	// no validation rules for CashAmount
+
+	// no validation rules for OperatorBonusAmount
+
+	// no validation rules for ProviderBonusAmount
+
+	// no validation rules for CashAmountUsd
+
+	// no validation rules for OperatorBonusAmountUsd
+
+	// no validation rules for ProviderBonusAmountUsd
 
 	if len(errors) > 0 {
 		return GameCreditResponseMultiError(errors)
@@ -2446,10 +2470,6 @@ func (m *SettleRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for UserId
-
-	// no validation rules for Currency
-
 	// no validation rules for TransactionType
 
 	// no validation rules for TransactionId
@@ -2658,10 +2678,6 @@ func (m *RollbackRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for UserId
-
-	// no validation rules for Currency
-
 	// no validation rules for TransactionType
 
 	// no validation rules for TransactionId
@@ -2775,6 +2791,18 @@ func (m *RollbackResponse) validate(all bool) error {
 	// no validation rules for OperatorBonus
 
 	// no validation rules for ProviderBonus
+
+	// no validation rules for CashAmount
+
+	// no validation rules for OperatorBonusAmount
+
+	// no validation rules for ProviderBonusAmount
+
+	// no validation rules for CashAmountUsd
+
+	// no validation rules for OperatorBonusAmountUsd
+
+	// no validation rules for ProviderBonusAmountUsd
 
 	if len(errors) > 0 {
 		return RollbackResponseMultiError(errors)
