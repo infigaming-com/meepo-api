@@ -54,6 +54,8 @@ const (
 	User_DeleteRole_FullMethodName                   = "/api.user.service.v1.User/DeleteRole"
 	User_GetOverviewDashboardFromUser_FullMethodName = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
 	User_GetOperatorIdByOrigin_FullMethodName        = "/api.user.service.v1.User/GetOperatorIdByOrigin"
+	User_GetOperator_FullMethodName                  = "/api.user.service.v1.User/GetOperator"
+	User_GetOperatorsByIds_FullMethodName            = "/api.user.service.v1.User/GetOperatorsByIds"
 	User_ListOperators_FullMethodName                = "/api.user.service.v1.User/ListOperators"
 )
 
@@ -126,6 +128,8 @@ type UserClient interface {
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error)
 	GetOverviewDashboardFromUser(ctx context.Context, in *GetOverviewDashboardFromUserRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromUserResponse, error)
 	GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdByOriginResponse, error)
+	GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error)
+	GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
 	ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...grpc.CallOption) (*ListOperatorsResponse, error)
 }
@@ -488,6 +492,26 @@ func (c *userClient) GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorI
 	return out, nil
 }
 
+func (c *userClient) GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorResponse)
+	err := c.cc.Invoke(ctx, User_GetOperator_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorsByIdsResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorsByIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...grpc.CallOption) (*ListOperatorsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListOperatorsResponse)
@@ -567,6 +591,8 @@ type UserServer interface {
 	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
 	GetOverviewDashboardFromUser(context.Context, *GetOverviewDashboardFromUserRequest) (*GetOverviewDashboardFromUserResponse, error)
 	GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error)
+	GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error)
+	GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
 	ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error)
 	mustEmbedUnimplementedUserServer()
@@ -683,6 +709,12 @@ func (UnimplementedUserServer) GetOverviewDashboardFromUser(context.Context, *Ge
 }
 func (UnimplementedUserServer) GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorIdByOrigin not implemented")
+}
+func (UnimplementedUserServer) GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperator not implemented")
+}
+func (UnimplementedUserServer) GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorsByIds not implemented")
 }
 func (UnimplementedUserServer) ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperators not implemented")
@@ -1338,6 +1370,42 @@ func _User_GetOperatorIdByOrigin_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperator(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperator_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperator(ctx, req.(*GetOperatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetOperatorsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorsByIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorsByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorsByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorsByIds(ctx, req.(*GetOperatorsByIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_ListOperators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListOperatorsRequest)
 	if err := dec(in); err != nil {
@@ -1502,6 +1570,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorIdByOrigin",
 			Handler:    _User_GetOperatorIdByOrigin_Handler,
+		},
+		{
+			MethodName: "GetOperator",
+			Handler:    _User_GetOperator_Handler,
+		},
+		{
+			MethodName: "GetOperatorsByIds",
+			Handler:    _User_GetOperatorsByIds_Handler,
 		},
 		{
 			MethodName: "ListOperators",
