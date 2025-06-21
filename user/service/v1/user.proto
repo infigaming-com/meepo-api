@@ -163,6 +163,10 @@ service User {
 	rpc GetOverviewDashboardFromUser(GetOverviewDashboardFromUserRequest) returns (GetOverviewDashboardFromUserResponse) {}
 
 	rpc GetOperatorIdByOrigin(GetOperatorIdByOriginRequest) returns (GetOperatorIdByOriginResponse) {}
+
+	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
+	rpc ListOperators(ListOperatorsRequest) returns (ListOperatorsResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -725,4 +729,17 @@ message GetOperatorIdByOriginRequest {
 
 message GetOperatorIdByOriginResponse {
 	int64 operator_id = 1;
+}
+
+message ListOperatorsRequest {
+	optional bool enabled = 1;
+}
+
+message ListOperatorsResponse {
+	message Operator {
+		int64 operator_id = 1;
+		string operator_name = 2;
+		bool enabled = 3;
+	}
+	repeated Operator operators = 1;
 }

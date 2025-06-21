@@ -54,6 +54,7 @@ const (
 	User_DeleteRole_FullMethodName                   = "/api.user.service.v1.User/DeleteRole"
 	User_GetOverviewDashboardFromUser_FullMethodName = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
 	User_GetOperatorIdByOrigin_FullMethodName        = "/api.user.service.v1.User/GetOperatorIdByOrigin"
+	User_ListOperators_FullMethodName                = "/api.user.service.v1.User/ListOperators"
 )
 
 // UserClient is the client API for User service.
@@ -125,6 +126,8 @@ type UserClient interface {
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error)
 	GetOverviewDashboardFromUser(ctx context.Context, in *GetOverviewDashboardFromUserRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromUserResponse, error)
 	GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdByOriginResponse, error)
+	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
+	ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...grpc.CallOption) (*ListOperatorsResponse, error)
 }
 
 type userClient struct {
@@ -485,6 +488,16 @@ func (c *userClient) GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorI
 	return out, nil
 }
 
+func (c *userClient) ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...grpc.CallOption) (*ListOperatorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorsResponse)
+	err := c.cc.Invoke(ctx, User_ListOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -554,6 +567,8 @@ type UserServer interface {
 	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
 	GetOverviewDashboardFromUser(context.Context, *GetOverviewDashboardFromUserRequest) (*GetOverviewDashboardFromUserResponse, error)
 	GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error)
+	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
+	ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -668,6 +683,9 @@ func (UnimplementedUserServer) GetOverviewDashboardFromUser(context.Context, *Ge
 }
 func (UnimplementedUserServer) GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorIdByOrigin not implemented")
+}
+func (UnimplementedUserServer) ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperators not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1320,6 +1338,24 @@ func _User_GetOperatorIdByOrigin_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_ListOperators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListOperators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListOperators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListOperators(ctx, req.(*ListOperatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1466,6 +1502,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorIdByOrigin",
 			Handler:    _User_GetOperatorIdByOrigin_Handler,
+		},
+		{
+			MethodName: "ListOperators",
+			Handler:    _User_ListOperators_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
