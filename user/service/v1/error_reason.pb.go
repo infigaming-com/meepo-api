@@ -80,6 +80,7 @@ const (
 	ErrorReason_OPERATOR_ID_NOT_FOUND_BY_ORIGIN       ErrorReason = 10053
 	ErrorReason_OPERATOR_ID_NOT_FOUND_IN_CONTEXT      ErrorReason = 10054
 	ErrorReason_LIST_OPERATORS_FAILED                 ErrorReason = 10055
+	ErrorReason_GET_OPERATORS_BY_IDS_FAILED           ErrorReason = 10056
 )
 
 // Enum value maps for ErrorReason.
@@ -140,6 +141,7 @@ var (
 		10053: "OPERATOR_ID_NOT_FOUND_BY_ORIGIN",
 		10054: "OPERATOR_ID_NOT_FOUND_IN_CONTEXT",
 		10055: "LIST_OPERATORS_FAILED",
+		10056: "GET_OPERATORS_BY_IDS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                           0,
@@ -197,6 +199,7 @@ var (
 		"OPERATOR_ID_NOT_FOUND_BY_ORIGIN":       10053,
 		"OPERATOR_ID_NOT_FOUND_IN_CONTEXT":      10054,
 		"LIST_OPERATORS_FAILED":                 10055,
+		"GET_OPERATORS_BY_IDS_FAILED":           10056,
 	}
 )
 
@@ -231,7 +234,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xb2\r\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xd4\r\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -287,7 +290,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1eADD_USER_DAILY_ACTIVITY_FAILED\x10\xc4N\x12$\n" +
 	"\x1fOPERATOR_ID_NOT_FOUND_BY_ORIGIN\x10\xc5N\x12%\n" +
 	" OPERATOR_ID_NOT_FOUND_IN_CONTEXT\x10\xc6N\x12\x1a\n" +
-	"\x15LIST_OPERATORS_FAILED\x10\xc7N\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x15LIST_OPERATORS_FAILED\x10\xc7N\x12 \n" +
+	"\x1bGET_OPERATORS_BY_IDS_FAILED\x10\xc8N\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
