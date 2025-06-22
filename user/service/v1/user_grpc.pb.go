@@ -57,6 +57,8 @@ const (
 	User_GetOperator_FullMethodName                  = "/api.user.service.v1.User/GetOperator"
 	User_GetOperatorsByIds_FullMethodName            = "/api.user.service.v1.User/GetOperatorsByIds"
 	User_ListOperators_FullMethodName                = "/api.user.service.v1.User/ListOperators"
+	User_GetParentOperatorIds_FullMethodName         = "/api.user.service.v1.User/GetParentOperatorIds"
+	User_GetChildOperatorIds_FullMethodName          = "/api.user.service.v1.User/GetChildOperatorIds"
 )
 
 // UserClient is the client API for User service.
@@ -132,6 +134,11 @@ type UserClient interface {
 	GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
 	ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...grpc.CallOption) (*ListOperatorsResponse, error)
+	// GetParentOperatorIds returns parent operator IDs for the given operator ID.
+	// The response contains only the list of parent operator IDs, doesn't include the requested operator_id.
+	GetParentOperatorIds(ctx context.Context, in *GetParentOperatorIdsRequest, opts ...grpc.CallOption) (*GetParentOperatorIdsResponse, error)
+	// GetChildOperatorIds returns direct child operator IDs for the given operator ID.
+	GetChildOperatorIds(ctx context.Context, in *GetChildOperatorIdsRequest, opts ...grpc.CallOption) (*GetChildOperatorIdsResponse, error)
 }
 
 type userClient struct {
@@ -522,6 +529,26 @@ func (c *userClient) ListOperators(ctx context.Context, in *ListOperatorsRequest
 	return out, nil
 }
 
+func (c *userClient) GetParentOperatorIds(ctx context.Context, in *GetParentOperatorIdsRequest, opts ...grpc.CallOption) (*GetParentOperatorIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetParentOperatorIdsResponse)
+	err := c.cc.Invoke(ctx, User_GetParentOperatorIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetChildOperatorIds(ctx context.Context, in *GetChildOperatorIdsRequest, opts ...grpc.CallOption) (*GetChildOperatorIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetChildOperatorIdsResponse)
+	err := c.cc.Invoke(ctx, User_GetChildOperatorIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -595,6 +622,11 @@ type UserServer interface {
 	GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
 	ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error)
+	// GetParentOperatorIds returns parent operator IDs for the given operator ID.
+	// The response contains only the list of parent operator IDs, doesn't include the requested operator_id.
+	GetParentOperatorIds(context.Context, *GetParentOperatorIdsRequest) (*GetParentOperatorIdsResponse, error)
+	// GetChildOperatorIds returns direct child operator IDs for the given operator ID.
+	GetChildOperatorIds(context.Context, *GetChildOperatorIdsRequest) (*GetChildOperatorIdsResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -718,6 +750,12 @@ func (UnimplementedUserServer) GetOperatorsByIds(context.Context, *GetOperatorsB
 }
 func (UnimplementedUserServer) ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperators not implemented")
+}
+func (UnimplementedUserServer) GetParentOperatorIds(context.Context, *GetParentOperatorIdsRequest) (*GetParentOperatorIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetParentOperatorIds not implemented")
+}
+func (UnimplementedUserServer) GetChildOperatorIds(context.Context, *GetChildOperatorIdsRequest) (*GetChildOperatorIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChildOperatorIds not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1424,6 +1462,42 @@ func _User_ListOperators_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetParentOperatorIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetParentOperatorIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetParentOperatorIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetParentOperatorIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetParentOperatorIds(ctx, req.(*GetParentOperatorIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetChildOperatorIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetChildOperatorIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetChildOperatorIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetChildOperatorIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetChildOperatorIds(ctx, req.(*GetChildOperatorIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1582,6 +1656,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperators",
 			Handler:    _User_ListOperators_Handler,
+		},
+		{
+			MethodName: "GetParentOperatorIds",
+			Handler:    _User_GetParentOperatorIds_Handler,
+		},
+		{
+			MethodName: "GetChildOperatorIds",
+			Handler:    _User_GetChildOperatorIds_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
