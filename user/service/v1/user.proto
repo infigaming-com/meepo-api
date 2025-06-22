@@ -173,6 +173,15 @@ service User {
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
 	rpc ListOperators(ListOperatorsRequest) returns (ListOperatorsResponse) {
 	}
+
+	// GetParentOperatorIds returns parent operator IDs for the given operator ID.
+	// The response contains only the list of parent operator IDs, doesn't include the requested operator_id.
+	rpc GetParentOperatorIds(GetParentOperatorIdsRequest) returns (GetParentOperatorIdsResponse) {
+	}
+
+	// GetChildOperatorIds returns direct child operator IDs for the given operator ID.
+	rpc GetChildOperatorIds(GetChildOperatorIdsRequest) returns (GetChildOperatorIdsResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -774,4 +783,24 @@ message ListOperatorsResponse {
 		bool enabled = 3;
 	}
 	repeated Operator operators = 1;
+}
+
+message GetParentOperatorIdsRequest {
+	// The operator ID to get parent operators for
+	int64 operator_id = 1;
+}
+
+message GetParentOperatorIdsResponse {
+	// List of parent operator IDs.
+	repeated int64 parent_operator_ids = 1;
+}
+
+message GetChildOperatorIdsRequest {
+	// The operator ID to get child operators for
+	int64 operator_id = 1;
+}
+
+message GetChildOperatorIdsResponse {
+	// List of child operator IDs.
+	repeated int64 child_operator_ids = 1;
 }
