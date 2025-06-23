@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Payment_GetPaymentMethodList_FullMethodName     = "/payment.service.v1.Payment/GetPaymentMethodList"
 	Payment_CreatePaymentChannel_FullMethodName     = "/payment.service.v1.Payment/CreatePaymentChannel"
+	Payment_GetAddress_FullMethodName               = "/payment.service.v1.Payment/GetAddress"
 	Payment_InitiateDeposit_FullMethodName          = "/payment.service.v1.Payment/InitiateDeposit"
 	Payment_InitiateWithdraw_FullMethodName         = "/payment.service.v1.Payment/InitiateWithdraw"
 	Payment_DepositCallback_FullMethodName          = "/payment.service.v1.Payment/DepositCallback"
@@ -46,6 +47,7 @@ type PaymentClient interface {
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
 	CreatePaymentChannel(ctx context.Context, in *CreatePaymentChannelRequest, opts ...grpc.CallOption) (*CreatePaymentChannelResponse, error)
+	GetAddress(ctx context.Context, in *GetAddressRequest, opts ...grpc.CallOption) (*GetAddressResponse, error)
 	// Initiate a deposit transaction
 	// Starts a new deposit process and returns payment information
 	// Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
@@ -101,6 +103,16 @@ func (c *paymentClient) CreatePaymentChannel(ctx context.Context, in *CreatePaym
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreatePaymentChannelResponse)
 	err := c.cc.Invoke(ctx, Payment_CreatePaymentChannel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetAddress(ctx context.Context, in *GetAddressRequest, opts ...grpc.CallOption) (*GetAddressResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAddressResponse)
+	err := c.cc.Invoke(ctx, Payment_GetAddress_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -202,6 +214,7 @@ type PaymentServer interface {
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
 	CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error)
+	GetAddress(context.Context, *GetAddressRequest) (*GetAddressResponse, error)
 	// Initiate a deposit transaction
 	// Starts a new deposit process and returns payment information
 	// Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
@@ -248,6 +261,9 @@ func (UnimplementedPaymentServer) GetPaymentMethodList(context.Context, *GetPaym
 }
 func (UnimplementedPaymentServer) CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentChannel not implemented")
+}
+func (UnimplementedPaymentServer) GetAddress(context.Context, *GetAddressRequest) (*GetAddressResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAddress not implemented")
 }
 func (UnimplementedPaymentServer) InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InitiateDeposit not implemented")
@@ -326,6 +342,24 @@ func _Payment_CreatePaymentChannel_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentServer).CreatePaymentChannel(ctx, req.(*CreatePaymentChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetAddress(ctx, req.(*GetAddressRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -488,6 +522,10 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreatePaymentChannel",
 			Handler:    _Payment_CreatePaymentChannel_Handler,
+		},
+		{
+			MethodName: "GetAddress",
+			Handler:    _Payment_GetAddress_Handler,
 		},
 		{
 			MethodName: "InitiateDeposit",

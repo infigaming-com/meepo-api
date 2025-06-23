@@ -135,6 +135,28 @@ message InitiateDepositResponse {
   google.protobuf.Struct extra = 8;
 }
 
+// Request to get address
+// Used to get DC address
+message GetAddressRequest {
+  // ID of the channel to use for this deposit
+  string channel_id = 1 [json_name="channelId"];
+  // Additional information needed for the deposit
+  // May include clientOrderId, productId, userInfo, etc.
+  google.protobuf.Struct extra = 2;
+}
+
+// Response for deposit initiation
+// Contains details about the initiated deposit transaction
+message GetAddressResponse {
+  message Data {
+    // Digital Currency like btc, eth...
+    string coin = 1;
+    // Digital Currency address
+    string address = 2;
+  }
+  repeated Data data = 1;
+}
+
 // Request to initiate a withdrawal
 // Used to start a withdrawal transaction
 message InitiateWithdrawRequest {
@@ -491,6 +513,13 @@ service Payment {
     };
   }
 
+  rpc GetAddress(GetAddressRequest) returns (GetAddressResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/address/get"
+      body: "*"
+    };
+  }
+
   // Initiate a deposit transaction
   // Starts a new deposit process and returns payment information
   // Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
@@ -537,6 +566,10 @@ service Payment {
   // Retrieves a paginated list of transactions with optional filtering
   // Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
   rpc GetTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/transaction/page"
+      body: "*"
+    };
   }
 
   // Get payment channel page with pagination and filters

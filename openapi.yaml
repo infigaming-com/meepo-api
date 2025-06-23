@@ -1740,6 +1740,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
+    /v1/payment/address/get:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_GetAddress
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetAddressRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetAddressResponse'
     /v1/payment/channel/create:
         post:
             tags:
@@ -1851,6 +1869,28 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /v1/payment/transaction/page:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Get transaction page with pagination and filters
+                 Retrieves a paginated list of transactions with optional filtering
+                 Error code: GET_TRANSACTION_PAGE_FAILED(50008) - Failed to get transaction page
+            operationId: Payment_GetTransactionPage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
     /v1/payment/withdraw/callback:
         post:
             tags:
@@ -7118,6 +7158,39 @@ components:
             description: |-
                 Response for deposit callback
                  Confirms receipt of callback notification
+        payment.service.v1.GetAddressRequest:
+            type: object
+            properties:
+                channelId:
+                    type: string
+                    description: ID of the channel to use for this deposit
+                extra:
+                    type: object
+                    description: |-
+                        Additional information needed for the deposit
+                         May include clientOrderId, productId, userInfo, etc.
+            description: |-
+                Request to get address
+                 Used to get DC address
+        payment.service.v1.GetAddressResponse:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.GetAddressResponse_Data'
+            description: |-
+                Response for deposit initiation
+                 Contains details about the initiated deposit transaction
+        payment.service.v1.GetAddressResponse_Data:
+            type: object
+            properties:
+                coin:
+                    type: string
+                    description: Digital Currency like btc, eth...
+                address:
+                    type: string
+                    description: Digital Currency address
         payment.service.v1.GetPaymentChannelPageRequest:
             type: object
             properties:
