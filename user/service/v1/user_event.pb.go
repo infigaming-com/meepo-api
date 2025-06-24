@@ -109,6 +109,160 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{1}
 }
 
+// AddUserEvent is emitted when a player user is created.
+type AddUserEvent struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	UserId             int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorId         int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId  int64                  `protobuf:"varint,3,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64                  `protobuf:"varint,4,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	Username           string                 `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
+	Email              string                 `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile             string                 `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *AddUserEvent) Reset() {
+	*x = AddUserEvent{}
+	mi := &file_user_service_v1_user_event_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddUserEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddUserEvent) ProtoMessage() {}
+
+func (x *AddUserEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_event_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddUserEvent.ProtoReflect.Descriptor instead.
+func (*AddUserEvent) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *AddUserEvent) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *AddUserEvent) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *AddUserEvent) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *AddUserEvent) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *AddUserEvent) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *AddUserEvent) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *AddUserEvent) GetMobile() string {
+	if x != nil {
+		return x.Mobile
+	}
+	return ""
+}
+
+// AddOperatorEvent is emitted when a operator is created.
+type AddOperatorEvent struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorType  string                 `protobuf:"bytes,2,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	OperatorName  string                 `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddOperatorEvent) Reset() {
+	*x = AddOperatorEvent{}
+	mi := &file_user_service_v1_user_event_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOperatorEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOperatorEvent) ProtoMessage() {}
+
+func (x *AddOperatorEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_event_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOperatorEvent.ProtoReflect.Descriptor instead.
+func (*AddOperatorEvent) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AddOperatorEvent) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *AddOperatorEvent) GetOperatorType() string {
+	if x != nil {
+		return x.OperatorType
+	}
+	return ""
+}
+
+func (x *AddOperatorEvent) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
 var File_user_service_v1_user_event_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_event_proto_rawDesc = "" +
@@ -118,7 +272,21 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse2]\n" +
+	"\rEventResponse\"\xf4\x01\n" +
+	"\fAddUserEvent\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\x03 \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x04 \x01(\x03R\x12retailerOperatorId\x12\x1a\n" +
+	"\busername\x18\x06 \x01(\tR\busername\x12\x14\n" +
+	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
+	"\x06mobile\x18\b \x01(\tR\x06mobile\"}\n" +
+	"\x10AddOperatorEvent\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12#\n" +
+	"\roperator_type\x18\x02 \x01(\tR\foperatorType\x12#\n" +
+	"\roperator_name\x18\x03 \x01(\tR\foperatorName2]\n" +
 	"\tUserEvent\x12P\n" +
 	"\x05Event\x12!.api.user.service.v1.EventRequest\x1a\".api.user.service.v1.EventResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
@@ -135,10 +303,12 @@ func file_user_service_v1_user_event_proto_rawDescGZIP() []byte {
 	return file_user_service_v1_user_event_proto_rawDescData
 }
 
-var file_user_service_v1_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_user_service_v1_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_user_service_v1_user_event_proto_goTypes = []any{
-	(*EventRequest)(nil),  // 0: api.user.service.v1.EventRequest
-	(*EventResponse)(nil), // 1: api.user.service.v1.EventResponse
+	(*EventRequest)(nil),     // 0: api.user.service.v1.EventRequest
+	(*EventResponse)(nil),    // 1: api.user.service.v1.EventResponse
+	(*AddUserEvent)(nil),     // 2: api.user.service.v1.AddUserEvent
+	(*AddOperatorEvent)(nil), // 3: api.user.service.v1.AddOperatorEvent
 }
 var file_user_service_v1_user_event_proto_depIdxs = []int32{
 	0, // 0: api.user.service.v1.UserEvent.Event:input_type -> api.user.service.v1.EventRequest
@@ -161,7 +331,7 @@ func file_user_service_v1_user_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_event_proto_rawDesc), len(file_user_service_v1_user_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
