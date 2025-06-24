@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.push.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/push/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.push.service.v1";
+
+service Push {
+	rpc SendEmail(SendEmailRequest) returns (SendEmailResponse) {}
+}
+
+message EmailAttachment {
+    string name = 1;
+    string contentType = 2;
+    string data = 3; // Base64 encoded attachment data
+}
+
+message SendEmailRequest {
+    string from = 1;
+    repeated string to = 2;
+    string subject = 3;
+    string text = 4;
+    string html = 5;
+    repeated EmailAttachment attachments = 6;
+}
+
+message SendEmailResponse {
+    string messageId = 1;
+}
