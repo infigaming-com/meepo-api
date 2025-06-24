@@ -45,6 +45,7 @@ type ListUsersRequest struct {
 	BanWithdraw   *bool   `protobuf:"varint,18,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
 	BanGame       *bool   `protobuf:"varint,19,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
 	BanLogin      *bool   `protobuf:"varint,20,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
+	Online        *bool   `protobuf:"varint,23,opt,name=online,proto3,oneof" json:"online,omitempty"`
 	Enabled       *bool   `protobuf:"varint,24,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	Email         *string `protobuf:"bytes,25,opt,name=email,proto3,oneof" json:"email,omitempty"`
 	Mobile        *string `protobuf:"bytes,26,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
@@ -199,6 +200,13 @@ func (x *ListUsersRequest) GetBanGame() bool {
 func (x *ListUsersRequest) GetBanLogin() bool {
 	if x != nil && x.BanLogin != nil {
 		return *x.BanLogin
+	}
+	return false
+}
+
+func (x *ListUsersRequest) GetOnline() bool {
+	if x != nil && x.Online != nil {
+		return *x.Online
 	}
 	return false
 }
@@ -2513,7 +2521,7 @@ var File_backoffice_service_v1_backoffice_user_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd6\t\n" +
+	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfe\t\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -2535,12 +2543,13 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x0ewithdrawal_max\x18\x11 \x01(\tH\fR\rwithdrawalMax\x88\x01\x01\x12&\n" +
 	"\fban_withdraw\x18\x12 \x01(\bH\rR\vbanWithdraw\x88\x01\x01\x12\x1e\n" +
 	"\bban_game\x18\x13 \x01(\bH\x0eR\abanGame\x88\x01\x01\x12 \n" +
-	"\tban_login\x18\x14 \x01(\bH\x0fR\bbanLogin\x88\x01\x01\x12\x1d\n" +
-	"\aenabled\x18\x18 \x01(\bH\x10R\aenabled\x88\x01\x01\x12\x19\n" +
-	"\x05email\x18\x19 \x01(\tH\x11R\x05email\x88\x01\x01\x12\x1b\n" +
-	"\x06mobile\x18\x1a \x01(\tH\x12R\x06mobile\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x1b \x01(\x05H\x13R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x1c \x01(\x05H\x14R\bpageSize\x88\x01\x01B\n" +
+	"\tban_login\x18\x14 \x01(\bH\x0fR\bbanLogin\x88\x01\x01\x12\x1b\n" +
+	"\x06online\x18\x17 \x01(\bH\x10R\x06online\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x18 \x01(\bH\x11R\aenabled\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x19 \x01(\tH\x12R\x05email\x88\x01\x01\x12\x1b\n" +
+	"\x06mobile\x18\x1a \x01(\tH\x13R\x06mobile\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x1b \x01(\x05H\x14R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x1c \x01(\x05H\x15R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -2561,7 +2570,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\r_ban_withdrawB\v\n" +
 	"\t_ban_gameB\f\n" +
 	"\n" +
-	"_ban_loginB\n" +
+	"_ban_loginB\t\n" +
+	"\a_onlineB\n" +
 	"\n" +
 	"\b_enabledB\b\n" +
 	"\x06_emailB\t\n" +

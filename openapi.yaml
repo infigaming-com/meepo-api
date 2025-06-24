@@ -5342,6 +5342,8 @@ components:
                     type: boolean
                 banLogin:
                     type: boolean
+                online:
+                    type: boolean
                 enabled:
                     type: boolean
                 email:
