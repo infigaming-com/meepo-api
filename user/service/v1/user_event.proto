@@ -17,3 +17,20 @@ message EventRequest {
 }
 
 message EventResponse {}
+
+message AddUserEvent {
+	int64 user_id = 1;
+	int64 operator_id = 2;
+	int64 company_operator_id = 3;
+	int64 retailer_operator_id = 4;
+	int64 role_id = 5;
+	string username = 6;
+	string email = 7;
+	string mobile = 8;
+}
+
+message AddOperatorEvent {
+	int64 operator_id = 1;
+	string operator_type = 2;
+	string operator_name = 3;
+}

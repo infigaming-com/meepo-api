@@ -237,3 +237,224 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = EventResponseValidationError{}
+
+// Validate checks the field values on AddUserEvent with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AddUserEvent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddUserEvent with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AddUserEventMultiError, or
+// nil if none found.
+func (m *AddUserEvent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddUserEvent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for RoleId
+
+	// no validation rules for Username
+
+	// no validation rules for Email
+
+	// no validation rules for Mobile
+
+	if len(errors) > 0 {
+		return AddUserEventMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddUserEventMultiError is an error wrapping multiple validation errors
+// returned by AddUserEvent.ValidateAll() if the designated constraints aren't met.
+type AddUserEventMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddUserEventMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddUserEventMultiError) AllErrors() []error { return m }
+
+// AddUserEventValidationError is the validation error returned by
+// AddUserEvent.Validate if the designated constraints aren't met.
+type AddUserEventValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddUserEventValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddUserEventValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddUserEventValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddUserEventValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddUserEventValidationError) ErrorName() string { return "AddUserEventValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AddUserEventValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddUserEvent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddUserEventValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddUserEventValidationError{}
+
+// Validate checks the field values on AddOperatorEvent with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *AddOperatorEvent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddOperatorEvent with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddOperatorEventMultiError, or nil if none found.
+func (m *AddOperatorEvent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddOperatorEvent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorType
+
+	// no validation rules for OperatorName
+
+	if len(errors) > 0 {
+		return AddOperatorEventMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddOperatorEventMultiError is an error wrapping multiple validation errors
+// returned by AddOperatorEvent.ValidateAll() if the designated constraints
+// aren't met.
+type AddOperatorEventMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddOperatorEventMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddOperatorEventMultiError) AllErrors() []error { return m }
+
+// AddOperatorEventValidationError is the validation error returned by
+// AddOperatorEvent.Validate if the designated constraints aren't met.
+type AddOperatorEventValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddOperatorEventValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddOperatorEventValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddOperatorEventValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddOperatorEventValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddOperatorEventValidationError) ErrorName() string { return "AddOperatorEventValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AddOperatorEventValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddOperatorEvent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddOperatorEventValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddOperatorEventValidationError{}
