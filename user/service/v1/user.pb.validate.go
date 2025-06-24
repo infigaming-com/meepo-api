@@ -3910,6 +3910,16 @@ func (m *SendEmailVerificationCodeRequest) validate(all bool) error {
 
 	// no validation rules for Email
 
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
 	if len(errors) > 0 {
 		return SendEmailVerificationCodeRequestMultiError(errors)
 	}

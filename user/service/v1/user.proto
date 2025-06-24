@@ -460,6 +460,10 @@ message AddOperatorResponse {
 
 message SendEmailVerificationCodeRequest {
 	string email = 1;
+	int64 operator_id = 2;
+	int64 company_operator_id = 3;
+	int64 retailer_operator_id = 4;
+	optional int64 user_id = 5;
 }
 
 message SendEmailVerificationCodeResponse {
