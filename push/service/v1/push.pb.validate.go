@@ -205,6 +205,14 @@ func (m *SendEmailRequest) validate(all bool) error {
 
 	}
 
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for UserId
+
 	if len(errors) > 0 {
 		return SendEmailRequestMultiError(errors)
 	}

@@ -82,15 +82,19 @@ func (x *EmailAttachment) GetData() string {
 }
 
 type SendEmailRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	From          string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
-	To            []string               `protobuf:"bytes,2,rep,name=to,proto3" json:"to,omitempty"`
-	Subject       string                 `protobuf:"bytes,3,opt,name=subject,proto3" json:"subject,omitempty"`
-	Text          string                 `protobuf:"bytes,4,opt,name=text,proto3" json:"text,omitempty"`
-	Html          string                 `protobuf:"bytes,5,opt,name=html,proto3" json:"html,omitempty"`
-	Attachments   []*EmailAttachment     `protobuf:"bytes,6,rep,name=attachments,proto3" json:"attachments,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	From               string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
+	To                 []string               `protobuf:"bytes,2,rep,name=to,proto3" json:"to,omitempty"`
+	Subject            string                 `protobuf:"bytes,3,opt,name=subject,proto3" json:"subject,omitempty"`
+	Text               string                 `protobuf:"bytes,4,opt,name=text,proto3" json:"text,omitempty"`
+	Html               string                 `protobuf:"bytes,5,opt,name=html,proto3" json:"html,omitempty"`
+	Attachments        []*EmailAttachment     `protobuf:"bytes,6,rep,name=attachments,proto3" json:"attachments,omitempty"`
+	OperatorId         int64                  `protobuf:"varint,7,opt,name=operatorId,proto3" json:"operatorId,omitempty"`
+	CompanyOperatorId  int64                  `protobuf:"varint,8,opt,name=companyOperatorId,proto3" json:"companyOperatorId,omitempty"`
+	RetailerOperatorId int64                  `protobuf:"varint,9,opt,name=retailerOperatorId,proto3" json:"retailerOperatorId,omitempty"`
+	UserId             int64                  `protobuf:"varint,10,opt,name=userId,proto3" json:"userId,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *SendEmailRequest) Reset() {
@@ -165,6 +169,34 @@ func (x *SendEmailRequest) GetAttachments() []*EmailAttachment {
 	return nil
 }
 
+func (x *SendEmailRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *SendEmailRequest) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *SendEmailRequest) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *SendEmailRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
 type SendEmailResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MessageId     int64                  `protobuf:"varint,1,opt,name=messageId,proto3" json:"messageId,omitempty"`
@@ -217,14 +249,21 @@ const file_push_service_v1_push_proto_rawDesc = "" +
 	"\x0fEmailAttachment\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vcontentType\x18\x02 \x01(\tR\vcontentType\x12\x12\n" +
-	"\x04data\x18\x03 \x01(\tR\x04data\"\xc0\x01\n" +
+	"\x04data\x18\x03 \x01(\tR\x04data\"\xd6\x02\n" +
 	"\x10SendEmailRequest\x12\x12\n" +
 	"\x04from\x18\x01 \x01(\tR\x04from\x12\x0e\n" +
 	"\x02to\x18\x02 \x03(\tR\x02to\x12\x18\n" +
 	"\asubject\x18\x03 \x01(\tR\asubject\x12\x12\n" +
 	"\x04text\x18\x04 \x01(\tR\x04text\x12\x12\n" +
 	"\x04html\x18\x05 \x01(\tR\x04html\x12F\n" +
-	"\vattachments\x18\x06 \x03(\v2$.api.push.service.v1.EmailAttachmentR\vattachments\"1\n" +
+	"\vattachments\x18\x06 \x03(\v2$.api.push.service.v1.EmailAttachmentR\vattachments\x12\x1e\n" +
+	"\n" +
+	"operatorId\x18\a \x01(\x03R\n" +
+	"operatorId\x12,\n" +
+	"\x11companyOperatorId\x18\b \x01(\x03R\x11companyOperatorId\x12.\n" +
+	"\x12retailerOperatorId\x18\t \x01(\x03R\x12retailerOperatorId\x12\x16\n" +
+	"\x06userId\x18\n" +
+	" \x01(\x03R\x06userId\"1\n" +
 	"\x11SendEmailResponse\x12\x1c\n" +
 	"\tmessageId\x18\x01 \x01(\x03R\tmessageId2d\n" +
 	"\x04Push\x12\\\n" +
