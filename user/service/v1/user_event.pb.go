@@ -109,13 +109,13 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{1}
 }
 
+// AddUserEvent is emitted when a player user is created.
 type AddUserEvent struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	UserId             int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OperatorId         int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	CompanyOperatorId  int64                  `protobuf:"varint,3,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
 	RetailerOperatorId int64                  `protobuf:"varint,4,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
-	RoleId             int64                  `protobuf:"varint,5,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	Username           string                 `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
 	Email              string                 `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
 	Mobile             string                 `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
@@ -181,13 +181,6 @@ func (x *AddUserEvent) GetRetailerOperatorId() int64 {
 	return 0
 }
 
-func (x *AddUserEvent) GetRoleId() int64 {
-	if x != nil {
-		return x.RoleId
-	}
-	return 0
-}
-
 func (x *AddUserEvent) GetUsername() string {
 	if x != nil {
 		return x.Username
@@ -209,6 +202,7 @@ func (x *AddUserEvent) GetMobile() string {
 	return ""
 }
 
+// AddOperatorEvent is emitted when a operator is created.
 type AddOperatorEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
@@ -278,14 +272,13 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse\"\x8d\x02\n" +
+	"\rEventResponse\"\xf4\x01\n" +
 	"\fAddUserEvent\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
 	"operatorId\x12.\n" +
 	"\x13company_operator_id\x18\x03 \x01(\x03R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18\x04 \x01(\x03R\x12retailerOperatorId\x12\x17\n" +
-	"\arole_id\x18\x05 \x01(\x03R\x06roleId\x12\x1a\n" +
+	"\x14retailer_operator_id\x18\x04 \x01(\x03R\x12retailerOperatorId\x12\x1a\n" +
 	"\busername\x18\x06 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
 	"\x06mobile\x18\b \x01(\tR\x06mobile\"}\n" +
