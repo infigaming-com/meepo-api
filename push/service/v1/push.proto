@@ -26,5 +26,5 @@ message SendEmailRequest {
 }
 
 message SendEmailResponse {
-    string messageId = 1;
+    int64 messageId = 1;
 }

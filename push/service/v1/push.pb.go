@@ -167,7 +167,7 @@ func (x *SendEmailRequest) GetAttachments() []*EmailAttachment {
 
 type SendEmailResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	MessageId     string                 `protobuf:"bytes,1,opt,name=messageId,proto3" json:"messageId,omitempty"`
+	MessageId     int64                  `protobuf:"varint,1,opt,name=messageId,proto3" json:"messageId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -202,11 +202,11 @@ func (*SendEmailResponse) Descriptor() ([]byte, []int) {
 	return file_push_service_v1_push_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *SendEmailResponse) GetMessageId() string {
+func (x *SendEmailResponse) GetMessageId() int64 {
 	if x != nil {
 		return x.MessageId
 	}
-	return ""
+	return 0
 }
 
 var File_push_service_v1_push_proto protoreflect.FileDescriptor
@@ -226,7 +226,7 @@ const file_push_service_v1_push_proto_rawDesc = "" +
 	"\x04html\x18\x05 \x01(\tR\x04html\x12F\n" +
 	"\vattachments\x18\x06 \x03(\v2$.api.push.service.v1.EmailAttachmentR\vattachments\"1\n" +
 	"\x11SendEmailResponse\x12\x1c\n" +
-	"\tmessageId\x18\x01 \x01(\tR\tmessageId2d\n" +
+	"\tmessageId\x18\x01 \x01(\x03R\tmessageId2d\n" +
 	"\x04Push\x12\\\n" +
 	"\tSendEmail\x12%.api.push.service.v1.SendEmailRequest\x1a&.api.push.service.v1.SendEmailResponse\"\x00BO\n" +
 	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
