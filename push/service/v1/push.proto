@@ -23,6 +23,10 @@ message SendEmailRequest {
     string text = 4;
     string html = 5;
     repeated EmailAttachment attachments = 6;
+    int64 operatorId = 7;
+    int64 companyOperatorId = 8;
+    int64 retailerOperatorId = 9;
+    int64 userId = 10;
 }
 
 message SendEmailResponse {
