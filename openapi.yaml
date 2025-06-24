@@ -6988,6 +6988,14 @@ components:
             properties:
                 email:
                     type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                userId:
+                    type: string
         api.user.service.v1.SendEmailVerificationCodeResponse:
             type: object
             properties: {}
