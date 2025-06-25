@@ -8,27 +8,61 @@ option java_package = "api.push.service.v1";
 
 service Push {
 	rpc SendEmail(SendEmailRequest) returns (SendEmailResponse) {}
+
+	// Get notification statistics for specified operators within a time range
+	// Returns notification counts grouped by operator ID
+	rpc GetNotificationStats(GetNotificationStatsRequest) returns (GetNotificationStatsResponse) {}
 }
 
 message EmailAttachment {
-    string name = 1;
-    string contentType = 2;
-    string data = 3; // Base64 encoded attachment data
+	string name = 1;
+	string contentType = 2;
+	string data = 3; // Base64 encoded attachment data
 }
 
 message SendEmailRequest {
-    string from = 1;
-    repeated string to = 2;
-    string subject = 3;
-    string text = 4;
-    string html = 5;
-    repeated EmailAttachment attachments = 6;
-    int64 operatorId = 7;
-    int64 companyOperatorId = 8;
-    int64 retailerOperatorId = 9;
-    int64 userId = 10;
+	string from = 1;
+	repeated string to = 2;
+	string subject = 3;
+	string text = 4;
+	string html = 5;
+	repeated EmailAttachment attachments = 6;
+	int64 operatorId = 7;
+	int64 companyOperatorId = 8;
+	int64 retailerOperatorId = 9;
+	int64 userId = 10;
 }
 
 message SendEmailResponse {
-    int64 messageId = 1;
+	int64 messageId = 1;
+}
+
+// Time range filter for notifications
+// startTime: inclusive (>=), endTime: exclusive (<)
+message TimeRange {
+	int64 startTime = 1;
+	int64 endTime = 2;
+}
+
+
+// Filter by time range and optionally by operator IDs
+// At most one of operatorIds, companyOperatorIds, or retailerOperatorIds should be provided
+// If all three parameters are empty, returns statistics for all operators
+message GetNotificationStatsRequest {
+	TimeRange timeRange = 1;
+	repeated int64 operatorIds = 2;
+	repeated int64 companyOperatorIds = 3;
+	repeated int64 retailerOperatorIds = 4;
+}
+
+// Response containing notification statistics grouped by operator
+message GetNotificationStatsResponse {
+	// Statistics for a single operator
+	message OperatorNotificationStats {
+		int64 operatorId = 1;
+		int64 companyOperatorId = 2;
+		int64 retailerOperatorId = 3;
+		int32 count = 4; // Number of notifications for this operator
+	}
+	repeated OperatorNotificationStats operatorStats = 1;
 }
