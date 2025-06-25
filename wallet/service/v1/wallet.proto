@@ -557,7 +557,7 @@ message Currency {
 	string type = 4;
 	string symbol = 5;
 	string icon = 6;
-	string decimal_places = 7;
+	int32 decimal_places = 7;
 }
 
 message AddCurrencyRequest {
