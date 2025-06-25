@@ -490,3 +490,123 @@ func IsInvalidCurrencyAmount(err error) bool {
 func ErrorInvalidCurrencyAmount(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_CURRENCY_AMOUNT.String(), fmt.Sprintf(format, args...))
 }
+
+func IsLockOperatorCurrencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LOCK_OPERATOR_CURRENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorLockOperatorCurrencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LOCK_OPERATOR_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorCurrencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_CURRENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorCurrencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorCurrencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_CURRENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorCurrencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorIdsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_IDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorIdsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_IDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserIdsByOperatorIdsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_IDS_BY_OPERATOR_IDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserIdsByOperatorIdsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_IDS_BY_OPERATOR_IDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddOperatorCurrencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_OPERATOR_CURRENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddOperatorCurrencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_OPERATOR_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorCurrenciesByOperatorIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_CURRENCIES_BY_OPERATOR_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorCurrenciesByOperatorIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_CURRENCIES_BY_OPERATOR_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserOperatorIdsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_OPERATOR_IDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserOperatorIdsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_OPERATOR_IDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSystemOperatorCurrencyNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SYSTEM_OPERATOR_CURRENCY_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorSystemOperatorCurrencyNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SYSTEM_OPERATOR_CURRENCY_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetParentOperatorIdsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_PARENT_OPERATOR_IDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetParentOperatorIdsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_PARENT_OPERATOR_IDS_FAILED.String(), fmt.Sprintf(format, args...))
+}

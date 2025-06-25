@@ -71,6 +71,16 @@ service Wallet {
 	rpc GetBackofficeUserOverviewFromWallet (GetBackofficeUserOverviewFromWalletRequest) returns (GetBackofficeUserOverviewFromWalletResponse) {}
 
 	rpc GetOverviewDashboardFromWallet (GetOverviewDashboardFromWalletRequest) returns (GetOverviewDashboardFromWalletResponse) {}
+
+	rpc AddCurrency (AddCurrencyRequest) returns (AddCurrencyResponse) {}
+
+	rpc UpdateCurrency (UpdateCurrencyRequest) returns (UpdateCurrencyResponse) {}
+
+	rpc GetCurrencies (GetCurrenciesRequest) returns (GetCurrenciesResponse) {}
+
+	rpc ListCurrencies (ListCurrenciesRequest) returns (ListCurrenciesResponse) {}
+
+	rpc UpdateOperatorCurrency (UpdateOperatorCurrencyRequest) returns (UpdateOperatorCurrencyResponse) {}
 }
 
 message AddUserRequest {
@@ -539,3 +549,65 @@ message GetOverviewDashboardFromWalletResponse {
 	Withdraw withdraw = 4;
 	DepositMinusWithdraw deposit_minus_withdraw = 5;
 }
+
+message Currency {
+	string currency = 1;
+	bool enabled = 2;
+	bool hidden = 3;
+	string type = 4;
+	string symbol = 5;
+	string icon = 6;
+	string decimal_places = 7;
+}
+
+message AddCurrencyRequest {
+	Currency currency = 1;
+}
+
+message AddCurrencyResponse {}
+
+message UpdateCurrencyRequest {
+	string currency = 1;
+	optional bool enabled = 2;
+	optional bool hidden = 3;
+	optional string type = 4;
+	optional string symbol = 5;
+	optional string icon = 6;
+	optional string decimal_places = 7;
+}
+
+message UpdateCurrencyResponse {}
+
+message GetCurrenciesRequest {
+	repeated string currencies = 1;
+}
+
+message GetCurrenciesResponse {
+	repeated Currency currencies = 1;
+}
+
+message ListCurrenciesRequest {
+	repeated string currencies = 1;
+	optional bool enabled = 2;
+	optional bool hidden = 3;
+}
+
+message ListCurrenciesResponse {
+	repeated Currency currencies = 1;
+	int32 total = 2;
+	int32 total_enabled = 3;
+	int32 total_hidden = 4;
+}
+
+message UpdateOperatorCurrencyRequest {
+	int64 operator_id = 1;
+	string currency = 2;
+	optional bool enabled = 3;
+	optional bool hidden = 4;
+	optional string type = 5;
+	optional string symbol = 6;
+	optional string icon = 7;
+	optional string decimal_places = 8;
+}
+
+message UpdateOperatorCurrencyResponse {}
