@@ -599,6 +599,18 @@ func ErrorSystemOperatorCurrencyNotFound(format string, args ...interface{}) *er
 	return errors.New(500, ErrorReason_SYSTEM_OPERATOR_CURRENCY_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
 
+func IsSystemOperatorCurrencyAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorSystemOperatorCurrencyAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
 func IsGetParentOperatorIdsFailed(err error) bool {
 	if err == nil {
 		return false
