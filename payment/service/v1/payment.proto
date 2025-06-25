@@ -536,10 +536,6 @@ service Payment {
   // Starts a new withdrawal process
   // Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
   rpc InitiateWithdraw(InitiateWithdrawRequest) returns (InitiateWithdrawResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/withdraw/initiate"
-      body: "*"
-    };
   }
 
   // Deposit callback

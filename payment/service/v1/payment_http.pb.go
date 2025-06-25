@@ -26,7 +26,6 @@ const OperationPaymentGetPaymentChannelPage = "/payment.service.v1.Payment/GetPa
 const OperationPaymentGetPaymentMethodList = "/payment.service.v1.Payment/GetPaymentMethodList"
 const OperationPaymentGetTransactionPage = "/payment.service.v1.Payment/GetTransactionPage"
 const OperationPaymentInitiateDeposit = "/payment.service.v1.Payment/InitiateDeposit"
-const OperationPaymentInitiateWithdraw = "/payment.service.v1.Payment/InitiateWithdraw"
 const OperationPaymentWithdrawCallback = "/payment.service.v1.Payment/WithdrawCallback"
 
 type PaymentHTTPServer interface {
@@ -56,10 +55,6 @@ type PaymentHTTPServer interface {
 	// Starts a new deposit process and returns payment information
 	// Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
 	InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error)
-	// InitiateWithdraw Initiate a withdrawal transaction
-	// Starts a new withdrawal process
-	// Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
-	InitiateWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error)
 	// WithdrawCallback Withdraw callback
 	// Handles callbacks from payment gateways for withdrawal status updates
 	// This endpoint is called by payment providers to notify of completed or failed withdrawals
@@ -73,7 +68,6 @@ func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r.POST("/v1/payment/channel/create", _Payment_CreatePaymentChannel0_HTTP_Handler(srv))
 	r.POST("/v1/payment/address/get", _Payment_GetAddress0_HTTP_Handler(srv))
 	r.POST("/v1/payment/deposit/initiate", _Payment_InitiateDeposit0_HTTP_Handler(srv))
-	r.POST("/v1/payment/withdraw/initiate", _Payment_InitiateWithdraw0_HTTP_Handler(srv))
 	r.POST("/v1/payment/deposit/callback", _Payment_DepositCallback0_HTTP_Handler(srv))
 	r.POST("/v1/payment/withdraw/callback", _Payment_WithdrawCallback0_HTTP_Handler(srv))
 	r.POST("/v1/payment/transaction/page", _Payment_GetTransactionPage0_HTTP_Handler(srv))
@@ -164,28 +158,6 @@ func _Payment_InitiateDeposit0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http
 			return err
 		}
 		reply := out.(*InitiateDepositResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Payment_InitiateWithdraw0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in InitiateWithdrawRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationPaymentInitiateWithdraw)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.InitiateWithdraw(ctx, req.(*InitiateWithdrawRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*InitiateWithdrawResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -286,7 +258,6 @@ type PaymentHTTPClient interface {
 	GetPaymentMethodList(ctx context.Context, req *GetPaymentMethodListRequest, opts ...http.CallOption) (rsp *GetPaymentMethodListResponse, err error)
 	GetTransactionPage(ctx context.Context, req *GetTransactionPageRequest, opts ...http.CallOption) (rsp *GetTransactionPageResponse, err error)
 	InitiateDeposit(ctx context.Context, req *InitiateDepositRequest, opts ...http.CallOption) (rsp *InitiateDepositResponse, err error)
-	InitiateWithdraw(ctx context.Context, req *InitiateWithdrawRequest, opts ...http.CallOption) (rsp *InitiateWithdrawResponse, err error)
 	WithdrawCallback(ctx context.Context, req *WithdrawCallbackRequest, opts ...http.CallOption) (rsp *WithdrawCallbackResponse, err error)
 }
 
@@ -381,19 +352,6 @@ func (c *PaymentHTTPClientImpl) InitiateDeposit(ctx context.Context, in *Initiat
 	pattern := "/v1/payment/deposit/initiate"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentInitiateDeposit))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *PaymentHTTPClientImpl) InitiateWithdraw(ctx context.Context, in *InitiateWithdrawRequest, opts ...http.CallOption) (*InitiateWithdrawResponse, error) {
-	var out InitiateWithdrawResponse
-	pattern := "/v1/payment/withdraw/initiate"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationPaymentInitiateWithdraw))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
