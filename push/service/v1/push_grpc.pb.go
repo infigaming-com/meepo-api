@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Push_SendEmail_FullMethodName = "/api.push.service.v1.Push/SendEmail"
+	Push_SendEmail_FullMethodName            = "/api.push.service.v1.Push/SendEmail"
+	Push_GetNotificationStats_FullMethodName = "/api.push.service.v1.Push/GetNotificationStats"
 )
 
 // PushClient is the client API for Push service.
@@ -27,6 +28,9 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PushClient interface {
 	SendEmail(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*SendEmailResponse, error)
+	// Get notification statistics for specified operators within a time range
+	// Returns notification counts grouped by operator ID
+	GetNotificationStats(ctx context.Context, in *GetNotificationStatsRequest, opts ...grpc.CallOption) (*GetNotificationStatsResponse, error)
 }
 
 type pushClient struct {
@@ -47,11 +51,24 @@ func (c *pushClient) SendEmail(ctx context.Context, in *SendEmailRequest, opts .
 	return out, nil
 }
 
+func (c *pushClient) GetNotificationStats(ctx context.Context, in *GetNotificationStatsRequest, opts ...grpc.CallOption) (*GetNotificationStatsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNotificationStatsResponse)
+	err := c.cc.Invoke(ctx, Push_GetNotificationStats_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PushServer is the server API for Push service.
 // All implementations must embed UnimplementedPushServer
 // for forward compatibility.
 type PushServer interface {
 	SendEmail(context.Context, *SendEmailRequest) (*SendEmailResponse, error)
+	// Get notification statistics for specified operators within a time range
+	// Returns notification counts grouped by operator ID
+	GetNotificationStats(context.Context, *GetNotificationStatsRequest) (*GetNotificationStatsResponse, error)
 	mustEmbedUnimplementedPushServer()
 }
 
@@ -64,6 +81,9 @@ type UnimplementedPushServer struct{}
 
 func (UnimplementedPushServer) SendEmail(context.Context, *SendEmailRequest) (*SendEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendEmail not implemented")
+}
+func (UnimplementedPushServer) GetNotificationStats(context.Context, *GetNotificationStatsRequest) (*GetNotificationStatsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNotificationStats not implemented")
 }
 func (UnimplementedPushServer) mustEmbedUnimplementedPushServer() {}
 func (UnimplementedPushServer) testEmbeddedByValue()              {}
@@ -104,6 +124,24 @@ func _Push_SendEmail_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Push_GetNotificationStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNotificationStatsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServer).GetNotificationStats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Push_GetNotificationStats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServer).GetNotificationStats(ctx, req.(*GetNotificationStatsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Push_ServiceDesc is the grpc.ServiceDesc for Push service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +152,10 @@ var Push_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendEmail",
 			Handler:    _Push_SendEmail_Handler,
+		},
+		{
+			MethodName: "GetNotificationStats",
+			Handler:    _Push_GetNotificationStats_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
