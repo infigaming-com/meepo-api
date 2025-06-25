@@ -1914,28 +1914,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
-    /v1/payment/withdraw/initiate:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Initiate a withdrawal transaction
-                 Starts a new withdrawal process
-                 Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
-            operationId: Payment_InitiateWithdraw
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawResponse'
     /v1/review/withdraw:
         post:
             tags:
@@ -7468,54 +7446,6 @@ components:
             description: |-
                 Response for deposit initiation
                  Contains details about the initiated deposit transaction
-        payment.service.v1.InitiateWithdrawRequest:
-            type: object
-            properties:
-                amount:
-                    type: string
-                    description: Amount to withdraw in smallest currency unit (e.g., cents)
-                currency:
-                    type: string
-                    description: Currency code for the transaction
-                userId:
-                    type: string
-                    description: ID of the user who initiated the withdrawal
-                operatorId:
-                    type: string
-                    description: ID of the operator who owns this channel
-                channelId:
-                    type: string
-                    description: ID of the channel to use for withdrawal
-                extra:
-                    type: object
-                    description: |-
-                        Additional information needed for the withdrawal
-                         May include account details, clientId, note, etc.
-            description: |-
-                Request to initiate a withdrawal
-                 Used to start a withdrawal transaction
-        payment.service.v1.InitiateWithdrawResponse:
-            type: object
-            properties:
-                transactionId:
-                    type: string
-                    description: Unique identifier for the transaction
-                operatorOrderNo:
-                    type: string
-                    description: Order number from the operator's system
-                amount:
-                    type: string
-                    description: Amount to be withdrawn in smallest currency unit
-                status:
-                    type: string
-                    description: Current status of the transaction
-                createdAt:
-                    type: string
-                    description: Timestamp when the transaction was created
-                    format: date-time
-            description: |-
-                Response for withdrawal initiation
-                 Contains details about the initiated withdrawal transaction
         payment.service.v1.PaymentChannelInfo:
             type: object
             properties:
