@@ -42,12 +42,14 @@ message GetPaymentMethodListResponse {
 message CreatePaymentChannelRequest {
   // ID of the merchant creating this channel
   string merchant_id = 1 [json_name="merchantId"];
+  // ID of the Operator connect with this channel
+  string operator_id = 2;
   // ID of the payment method to be used
-  string payment_method_id = 2 [json_name="paymentMethodId"];
+  string payment_method_id = 3 [json_name="paymentMethodId"];
   // Type of channel (e.g., deposit, withdrawal)
-  string type = 3;
+  string type = 4;
   // Configuration fields for the payment channel in JSON format
-  google.protobuf.Struct key = 4;
+  google.protobuf.Struct key = 5;
 }
 
 // Response for channel creation
@@ -139,7 +141,7 @@ message InitiateDepositResponse {
 // Used to get DC address
 message GetAddressRequest {
   // ID of the channel to use for this deposit
-  string channel_id = 1 [json_name="channelId"];
+  repeated string channel_id = 1 [json_name="channelId"];
   // Additional information needed for the deposit
   // May include clientOrderId, productId, userInfo, etc.
   google.protobuf.Struct extra = 2;

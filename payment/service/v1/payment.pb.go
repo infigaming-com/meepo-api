@@ -460,12 +460,14 @@ type CreatePaymentChannelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the merchant creating this channel
 	MerchantId string `protobuf:"bytes,1,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	// ID of the Operator connect with this channel
+	OperatorId string `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// ID of the payment method to be used
-	PaymentMethodId string `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	PaymentMethodId string `protobuf:"bytes,3,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	// Type of channel (e.g., deposit, withdrawal)
-	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Type string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
 	// Configuration fields for the payment channel in JSON format
-	Key           *structpb.Struct `protobuf:"bytes,4,opt,name=key,proto3" json:"key,omitempty"`
+	Key           *structpb.Struct `protobuf:"bytes,5,opt,name=key,proto3" json:"key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -503,6 +505,13 @@ func (*CreatePaymentChannelRequest) Descriptor() ([]byte, []int) {
 func (x *CreatePaymentChannelRequest) GetMerchantId() string {
 	if x != nil {
 		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *CreatePaymentChannelRequest) GetOperatorId() string {
+	if x != nil {
+		return x.OperatorId
 	}
 	return ""
 }
@@ -974,7 +983,7 @@ func (x *InitiateDepositResponse) GetExtra() *structpb.Struct {
 type GetAddressRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the channel to use for this deposit
-	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	ChannelId []string `protobuf:"bytes,1,rep,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Additional information needed for the deposit
 	// May include clientOrderId, productId, userInfo, etc.
 	Extra         *structpb.Struct `protobuf:"bytes,2,opt,name=extra,proto3" json:"extra,omitempty"`
@@ -1012,11 +1021,11 @@ func (*GetAddressRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetAddressRequest) GetChannelId() string {
+func (x *GetAddressRequest) GetChannelId() []string {
 	if x != nil {
 		return x.ChannelId
 	}
-	return ""
+	return nil
 }
 
 func (x *GetAddressRequest) GetExtra() *structpb.Struct {
@@ -2703,13 +2712,15 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	"key_schema\x18\x05 \x01(\v2\x17.google.protobuf.StructR\tkeySchema\"n\n" +
 	"\x1cGetPaymentMethodListResponse\x12N\n" +
-	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xa9\x01\n" +
+	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xca\x01\n" +
 	"\x1bCreatePaymentChannelRequest\x12\x1f\n" +
 	"\vmerchant_id\x18\x01 \x01(\tR\n" +
-	"merchantId\x12*\n" +
-	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12)\n" +
-	"\x03key\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
+	"merchantId\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\tR\n" +
+	"operatorId\x12*\n" +
+	"\x11payment_method_id\x18\x03 \x01(\tR\x0fpaymentMethodId\x12\x12\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\x12)\n" +
+	"\x03key\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xaf\x05\n" +
@@ -2754,7 +2765,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05extra\x18\b \x01(\v2\x17.google.protobuf.StructR\x05extra\"a\n" +
 	"\x11GetAddressRequest\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\x12-\n" +
+	"channel_id\x18\x01 \x03(\tR\tchannelId\x12-\n" +
 	"\x05extra\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x8b\x01\n" +
 	"\x12GetAddressResponse\x12?\n" +
 	"\x04data\x18\x01 \x03(\v2+.payment.service.v1.GetAddressResponse.DataR\x04data\x1a4\n" +

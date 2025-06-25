@@ -7096,6 +7096,9 @@ components:
                 merchantId:
                     type: string
                     description: ID of the merchant creating this channel
+                operatorId:
+                    type: string
+                    description: ID of the Operator connect with this channel
                 paymentMethodId:
                     type: string
                     description: ID of the payment method to be used
@@ -7172,7 +7175,9 @@ components:
             type: object
             properties:
                 channelId:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: ID of the channel to use for this deposit
                 extra:
                     type: object

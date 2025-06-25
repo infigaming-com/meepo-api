@@ -438,6 +438,8 @@ func (m *CreatePaymentChannelRequest) validate(all bool) error {
 
 	// no validation rules for MerchantId
 
+	// no validation rules for OperatorId
+
 	// no validation rules for PaymentMethodId
 
 	// no validation rules for Type
@@ -1181,8 +1183,6 @@ func (m *GetAddressRequest) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for ChannelId
 
 	if all {
 		switch v := interface{}(m.GetExtra()).(type) {
