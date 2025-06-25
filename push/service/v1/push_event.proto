@@ -16,3 +16,16 @@ message EventRequest {
 }
 
 message EventResponse {}
+
+message NotificationEvent {
+	int64 id = 1;
+    string external_notification_id = 2;
+    int64 operator_id = 3;
+    int64 company_operator_id = 4;
+    int64 retailer_operator_id = 5;
+    string type = 6;
+    repeated string recipients = 7;
+    int64 user_id = 8;
+    string content = 9;
+    int64 created_at = 10;
+}
