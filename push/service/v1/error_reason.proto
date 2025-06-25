@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package api.push.service.v1;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/push/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.push.service.v1";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  UNSPECIFIED = 0;
+  INVALID_TIME_RANGE = 90001;
+  GET_NOTIFICATIONS_FAILED = 90002;
+}
