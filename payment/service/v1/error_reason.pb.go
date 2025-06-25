@@ -36,6 +36,7 @@ const (
 	ErrorReason_GET_TRANSACTION_PAGE_FAILED     ErrorReason = 50008
 	ErrorReason_GET_TRANSACTION_DETAIL_FAILED   ErrorReason = 50009
 	ErrorReason_GET_CHANNEL_LIST_FAILED         ErrorReason = 50010
+	ErrorReason_GET_ADDRESS_FAILED              ErrorReason = 50011
 )
 
 // Enum value maps for ErrorReason.
@@ -52,6 +53,7 @@ var (
 		50008: "GET_TRANSACTION_PAGE_FAILED",
 		50009: "GET_TRANSACTION_DETAIL_FAILED",
 		50010: "GET_CHANNEL_LIST_FAILED",
+		50011: "GET_ADDRESS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                     0,
@@ -65,6 +67,7 @@ var (
 		"GET_TRANSACTION_PAGE_FAILED":     50008,
 		"GET_TRANSACTION_DETAIL_FAILED":   50009,
 		"GET_CHANNEL_LIST_FAILED":         50010,
+		"GET_ADDRESS_FAILED":              50011,
 	}
 )
 
@@ -99,7 +102,7 @@ var File_payment_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_payment_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"%payment/service/v1/error_reason.proto\x12\x16api.payment.service.v1\x1a\x13errors/errors.proto*\xfb\x02\n" +
+	"%payment/service/v1/error_reason.proto\x12\x16api.payment.service.v1\x1a\x13errors/errors.proto*\x95\x03\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12$\n" +
 	"\x1eGET_PAYMENT_METHOD_LIST_FAILED\x10ц\x03\x12#\n" +
@@ -111,7 +114,8 @@ const file_payment_service_v1_error_reason_proto_rawDesc = "" +
 	"\x18WITHDRAW_CALLBACK_FAILED\x10׆\x03\x12!\n" +
 	"\x1bGET_TRANSACTION_PAGE_FAILED\x10؆\x03\x12#\n" +
 	"\x1dGET_TRANSACTION_DETAIL_FAILED\x10ن\x03\x12\x1d\n" +
-	"\x17GET_CHANNEL_LIST_FAILED\x10چ\x03\x1a\x04\xa0E\xf4\x03BU\n" +
+	"\x17GET_CHANNEL_LIST_FAILED\x10چ\x03\x12\x18\n" +
+	"\x12GET_ADDRESS_FAILED\x10ۆ\x03\x1a\x04\xa0E\xf4\x03BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
 
 var (
