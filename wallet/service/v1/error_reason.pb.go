@@ -74,7 +74,8 @@ const (
 	ErrorReason_GET_OPERATOR_CURRENCIES_BY_OPERATOR_ID_FAILED ErrorReason = 30046
 	ErrorReason_GET_USER_OPERATOR_IDS_FAILED                  ErrorReason = 30047
 	ErrorReason_SYSTEM_OPERATOR_CURRENCY_NOT_FOUND            ErrorReason = 30048
-	ErrorReason_GET_PARENT_OPERATOR_IDS_FAILED                ErrorReason = 30049
+	ErrorReason_SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS       ErrorReason = 30049
+	ErrorReason_GET_PARENT_OPERATOR_IDS_FAILED                ErrorReason = 30050
 )
 
 // Enum value maps for ErrorReason.
@@ -129,7 +130,8 @@ var (
 		30046: "GET_OPERATOR_CURRENCIES_BY_OPERATOR_ID_FAILED",
 		30047: "GET_USER_OPERATOR_IDS_FAILED",
 		30048: "SYSTEM_OPERATOR_CURRENCY_NOT_FOUND",
-		30049: "GET_PARENT_OPERATOR_IDS_FAILED",
+		30049: "SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS",
+		30050: "GET_PARENT_OPERATOR_IDS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                   0,
@@ -181,7 +183,8 @@ var (
 		"GET_OPERATOR_CURRENCIES_BY_OPERATOR_ID_FAILED": 30046,
 		"GET_USER_OPERATOR_IDS_FAILED":                  30047,
 		"SYSTEM_OPERATOR_CURRENCY_NOT_FOUND":            30048,
-		"GET_PARENT_OPERATOR_IDS_FAILED":                30049,
+		"SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS":       30049,
+		"GET_PARENT_OPERATOR_IDS_FAILED":                30050,
 	}
 )
 
@@ -216,7 +219,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x86\x0e\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xb5\x0e\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -266,8 +269,9 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1cADD_OPERATOR_CURRENCY_FAILED\x10\xdd\xea\x01\x123\n" +
 	"-GET_OPERATOR_CURRENCIES_BY_OPERATOR_ID_FAILED\x10\xde\xea\x01\x12\"\n" +
 	"\x1cGET_USER_OPERATOR_IDS_FAILED\x10\xdf\xea\x01\x12(\n" +
-	"\"SYSTEM_OPERATOR_CURRENCY_NOT_FOUND\x10\xe0\xea\x01\x12$\n" +
-	"\x1eGET_PARENT_OPERATOR_IDS_FAILED\x10\xe1\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\"SYSTEM_OPERATOR_CURRENCY_NOT_FOUND\x10\xe0\xea\x01\x12-\n" +
+	"'SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS\x10\xe1\xea\x01\x12$\n" +
+	"\x1eGET_PARENT_OPERATOR_IDS_FAILED\x10\xe2\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
