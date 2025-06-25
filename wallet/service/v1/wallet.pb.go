@@ -3046,7 +3046,7 @@ type UpdateCurrencyRequest struct {
 	Type          *string                `protobuf:"bytes,4,opt,name=type,proto3,oneof" json:"type,omitempty"`
 	Symbol        *string                `protobuf:"bytes,5,opt,name=symbol,proto3,oneof" json:"symbol,omitempty"`
 	Icon          *string                `protobuf:"bytes,6,opt,name=icon,proto3,oneof" json:"icon,omitempty"`
-	DecimalPlaces *string                `protobuf:"bytes,7,opt,name=decimal_places,json=decimalPlaces,proto3,oneof" json:"decimal_places,omitempty"`
+	DecimalPlaces *int32                 `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3,oneof" json:"decimal_places,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3123,11 +3123,11 @@ func (x *UpdateCurrencyRequest) GetIcon() string {
 	return ""
 }
 
-func (x *UpdateCurrencyRequest) GetDecimalPlaces() string {
+func (x *UpdateCurrencyRequest) GetDecimalPlaces() int32 {
 	if x != nil && x.DecimalPlaces != nil {
 		return *x.DecimalPlaces
 	}
-	return ""
+	return 0
 }
 
 type UpdateCurrencyResponse struct {
@@ -3391,7 +3391,7 @@ type UpdateOperatorCurrencyRequest struct {
 	Type          *string                `protobuf:"bytes,5,opt,name=type,proto3,oneof" json:"type,omitempty"`
 	Symbol        *string                `protobuf:"bytes,6,opt,name=symbol,proto3,oneof" json:"symbol,omitempty"`
 	Icon          *string                `protobuf:"bytes,7,opt,name=icon,proto3,oneof" json:"icon,omitempty"`
-	DecimalPlaces *string                `protobuf:"bytes,8,opt,name=decimal_places,json=decimalPlaces,proto3,oneof" json:"decimal_places,omitempty"`
+	DecimalPlaces *int32                 `protobuf:"varint,8,opt,name=decimal_places,json=decimalPlaces,proto3,oneof" json:"decimal_places,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3475,11 +3475,11 @@ func (x *UpdateOperatorCurrencyRequest) GetIcon() string {
 	return ""
 }
 
-func (x *UpdateOperatorCurrencyRequest) GetDecimalPlaces() string {
+func (x *UpdateOperatorCurrencyRequest) GetDecimalPlaces() int32 {
 	if x != nil && x.DecimalPlaces != nil {
 		return *x.DecimalPlaces
 	}
-	return ""
+	return 0
 }
 
 type UpdateOperatorCurrencyResponse struct {
@@ -5042,7 +5042,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\tH\x02R\x04type\x88\x01\x01\x12\x1b\n" +
 	"\x06symbol\x18\x05 \x01(\tH\x03R\x06symbol\x88\x01\x01\x12\x17\n" +
 	"\x04icon\x18\x06 \x01(\tH\x04R\x04icon\x88\x01\x01\x12*\n" +
-	"\x0edecimal_places\x18\a \x01(\tH\x05R\rdecimalPlaces\x88\x01\x01B\n" +
+	"\x0edecimal_places\x18\a \x01(\x05H\x05R\rdecimalPlaces\x88\x01\x01B\n" +
 	"\n" +
 	"\b_enabledB\t\n" +
 	"\a_hiddenB\a\n" +
@@ -5084,7 +5084,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x04type\x18\x05 \x01(\tH\x02R\x04type\x88\x01\x01\x12\x1b\n" +
 	"\x06symbol\x18\x06 \x01(\tH\x03R\x06symbol\x88\x01\x01\x12\x17\n" +
 	"\x04icon\x18\a \x01(\tH\x04R\x04icon\x88\x01\x01\x12*\n" +
-	"\x0edecimal_places\x18\b \x01(\tH\x05R\rdecimalPlaces\x88\x01\x01B\n" +
+	"\x0edecimal_places\x18\b \x01(\x05H\x05R\rdecimalPlaces\x88\x01\x01B\n" +
 	"\n" +
 	"\b_enabledB\t\n" +
 	"\a_hiddenB\a\n" +
