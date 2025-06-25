@@ -35,844 +35,6 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on AddUserRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *AddUserRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on AddUserRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in AddUserRequestMultiError,
-// or nil if none found.
-func (m *AddUserRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *AddUserRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for UserId
-
-	// no validation rules for OperatorId
-
-	if len(errors) > 0 {
-		return AddUserRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// AddUserRequestMultiError is an error wrapping multiple validation errors
-// returned by AddUserRequest.ValidateAll() if the designated constraints
-// aren't met.
-type AddUserRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m AddUserRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m AddUserRequestMultiError) AllErrors() []error { return m }
-
-// AddUserRequestValidationError is the validation error returned by
-// AddUserRequest.Validate if the designated constraints aren't met.
-type AddUserRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e AddUserRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e AddUserRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e AddUserRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e AddUserRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e AddUserRequestValidationError) ErrorName() string { return "AddUserRequestValidationError" }
-
-// Error satisfies the builtin error interface
-func (e AddUserRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sAddUserRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = AddUserRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = AddUserRequestValidationError{}
-
-// Validate checks the field values on AddUserResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *AddUserResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on AddUserResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// AddUserResponseMultiError, or nil if none found.
-func (m *AddUserResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *AddUserResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return AddUserResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// AddUserResponseMultiError is an error wrapping multiple validation errors
-// returned by AddUserResponse.ValidateAll() if the designated constraints
-// aren't met.
-type AddUserResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m AddUserResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m AddUserResponseMultiError) AllErrors() []error { return m }
-
-// AddUserResponseValidationError is the validation error returned by
-// AddUserResponse.Validate if the designated constraints aren't met.
-type AddUserResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e AddUserResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e AddUserResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e AddUserResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e AddUserResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e AddUserResponseValidationError) ErrorName() string { return "AddUserResponseValidationError" }
-
-// Error satisfies the builtin error interface
-func (e AddUserResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sAddUserResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = AddUserResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = AddUserResponseValidationError{}
-
-// Validate checks the field values on UpdateUserRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *UpdateUserRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on UpdateUserRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// UpdateUserRequestMultiError, or nil if none found.
-func (m *UpdateUserRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *UpdateUserRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for UserId
-
-	// no validation rules for Enabled
-
-	if len(errors) > 0 {
-		return UpdateUserRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// UpdateUserRequestMultiError is an error wrapping multiple validation errors
-// returned by UpdateUserRequest.ValidateAll() if the designated constraints
-// aren't met.
-type UpdateUserRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m UpdateUserRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m UpdateUserRequestMultiError) AllErrors() []error { return m }
-
-// UpdateUserRequestValidationError is the validation error returned by
-// UpdateUserRequest.Validate if the designated constraints aren't met.
-type UpdateUserRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e UpdateUserRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e UpdateUserRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e UpdateUserRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e UpdateUserRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e UpdateUserRequestValidationError) ErrorName() string {
-	return "UpdateUserRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e UpdateUserRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sUpdateUserRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = UpdateUserRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = UpdateUserRequestValidationError{}
-
-// Validate checks the field values on UpdateUserResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *UpdateUserResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on UpdateUserResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// UpdateUserResponseMultiError, or nil if none found.
-func (m *UpdateUserResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *UpdateUserResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return UpdateUserResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// UpdateUserResponseMultiError is an error wrapping multiple validation errors
-// returned by UpdateUserResponse.ValidateAll() if the designated constraints
-// aren't met.
-type UpdateUserResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m UpdateUserResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m UpdateUserResponseMultiError) AllErrors() []error { return m }
-
-// UpdateUserResponseValidationError is the validation error returned by
-// UpdateUserResponse.Validate if the designated constraints aren't met.
-type UpdateUserResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e UpdateUserResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e UpdateUserResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e UpdateUserResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e UpdateUserResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e UpdateUserResponseValidationError) ErrorName() string {
-	return "UpdateUserResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e UpdateUserResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sUpdateUserResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = UpdateUserResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = UpdateUserResponseValidationError{}
-
-// Validate checks the field values on AddOrUpdateOperatorsCurrencyRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *AddOrUpdateOperatorsCurrencyRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on AddOrUpdateOperatorsCurrencyRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// AddOrUpdateOperatorsCurrencyRequestMultiError, or nil if none found.
-func (m *AddOrUpdateOperatorsCurrencyRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *AddOrUpdateOperatorsCurrencyRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Currency
-
-	// no validation rules for Enabled
-
-	// no validation rules for Hidden
-
-	if len(errors) > 0 {
-		return AddOrUpdateOperatorsCurrencyRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// AddOrUpdateOperatorsCurrencyRequestMultiError is an error wrapping multiple
-// validation errors returned by
-// AddOrUpdateOperatorsCurrencyRequest.ValidateAll() if the designated
-// constraints aren't met.
-type AddOrUpdateOperatorsCurrencyRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m AddOrUpdateOperatorsCurrencyRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m AddOrUpdateOperatorsCurrencyRequestMultiError) AllErrors() []error { return m }
-
-// AddOrUpdateOperatorsCurrencyRequestValidationError is the validation error
-// returned by AddOrUpdateOperatorsCurrencyRequest.Validate if the designated
-// constraints aren't met.
-type AddOrUpdateOperatorsCurrencyRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e AddOrUpdateOperatorsCurrencyRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e AddOrUpdateOperatorsCurrencyRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e AddOrUpdateOperatorsCurrencyRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e AddOrUpdateOperatorsCurrencyRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e AddOrUpdateOperatorsCurrencyRequestValidationError) ErrorName() string {
-	return "AddOrUpdateOperatorsCurrencyRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e AddOrUpdateOperatorsCurrencyRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sAddOrUpdateOperatorsCurrencyRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = AddOrUpdateOperatorsCurrencyRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = AddOrUpdateOperatorsCurrencyRequestValidationError{}
-
-// Validate checks the field values on AddOrUpdateOperatorsCurrencyResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *AddOrUpdateOperatorsCurrencyResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on AddOrUpdateOperatorsCurrencyResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// AddOrUpdateOperatorsCurrencyResponseMultiError, or nil if none found.
-func (m *AddOrUpdateOperatorsCurrencyResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *AddOrUpdateOperatorsCurrencyResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return AddOrUpdateOperatorsCurrencyResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// AddOrUpdateOperatorsCurrencyResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// AddOrUpdateOperatorsCurrencyResponse.ValidateAll() if the designated
-// constraints aren't met.
-type AddOrUpdateOperatorsCurrencyResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m AddOrUpdateOperatorsCurrencyResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m AddOrUpdateOperatorsCurrencyResponseMultiError) AllErrors() []error { return m }
-
-// AddOrUpdateOperatorsCurrencyResponseValidationError is the validation error
-// returned by AddOrUpdateOperatorsCurrencyResponse.Validate if the designated
-// constraints aren't met.
-type AddOrUpdateOperatorsCurrencyResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e AddOrUpdateOperatorsCurrencyResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e AddOrUpdateOperatorsCurrencyResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e AddOrUpdateOperatorsCurrencyResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e AddOrUpdateOperatorsCurrencyResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e AddOrUpdateOperatorsCurrencyResponseValidationError) ErrorName() string {
-	return "AddOrUpdateOperatorsCurrencyResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e AddOrUpdateOperatorsCurrencyResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sAddOrUpdateOperatorsCurrencyResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = AddOrUpdateOperatorsCurrencyResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = AddOrUpdateOperatorsCurrencyResponseValidationError{}
-
-// Validate checks the field values on UpdateUserCurrencyRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *UpdateUserCurrencyRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on UpdateUserCurrencyRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// UpdateUserCurrencyRequestMultiError, or nil if none found.
-func (m *UpdateUserCurrencyRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *UpdateUserCurrencyRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for UserId
-
-	// no validation rules for Currency
-
-	// no validation rules for Enabled
-
-	if len(errors) > 0 {
-		return UpdateUserCurrencyRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// UpdateUserCurrencyRequestMultiError is an error wrapping multiple validation
-// errors returned by UpdateUserCurrencyRequest.ValidateAll() if the
-// designated constraints aren't met.
-type UpdateUserCurrencyRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m UpdateUserCurrencyRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m UpdateUserCurrencyRequestMultiError) AllErrors() []error { return m }
-
-// UpdateUserCurrencyRequestValidationError is the validation error returned by
-// UpdateUserCurrencyRequest.Validate if the designated constraints aren't met.
-type UpdateUserCurrencyRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e UpdateUserCurrencyRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e UpdateUserCurrencyRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e UpdateUserCurrencyRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e UpdateUserCurrencyRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e UpdateUserCurrencyRequestValidationError) ErrorName() string {
-	return "UpdateUserCurrencyRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e UpdateUserCurrencyRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sUpdateUserCurrencyRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = UpdateUserCurrencyRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = UpdateUserCurrencyRequestValidationError{}
-
-// Validate checks the field values on UpdateUserCurrencyResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *UpdateUserCurrencyResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on UpdateUserCurrencyResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// UpdateUserCurrencyResponseMultiError, or nil if none found.
-func (m *UpdateUserCurrencyResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *UpdateUserCurrencyResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return UpdateUserCurrencyResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// UpdateUserCurrencyResponseMultiError is an error wrapping multiple
-// validation errors returned by UpdateUserCurrencyResponse.ValidateAll() if
-// the designated constraints aren't met.
-type UpdateUserCurrencyResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m UpdateUserCurrencyResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m UpdateUserCurrencyResponseMultiError) AllErrors() []error { return m }
-
-// UpdateUserCurrencyResponseValidationError is the validation error returned
-// by UpdateUserCurrencyResponse.Validate if the designated constraints aren't met.
-type UpdateUserCurrencyResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e UpdateUserCurrencyResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e UpdateUserCurrencyResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e UpdateUserCurrencyResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e UpdateUserCurrencyResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e UpdateUserCurrencyResponseValidationError) ErrorName() string {
-	return "UpdateUserCurrencyResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e UpdateUserCurrencyResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sUpdateUserCurrencyResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = UpdateUserCurrencyResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = UpdateUserCurrencyResponseValidationError{}
-
 // Validate checks the field values on GetUserBalancesRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -6476,6 +5638,216 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateOperatorCurrencyResponseValidationError{}
+
+// Validate checks the field values on UpdateUserCurrencyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateUserCurrencyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateUserCurrencyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateUserCurrencyRequestMultiError, or nil if none found.
+func (m *UpdateUserCurrencyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateUserCurrencyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Currency
+
+	// no validation rules for Enabled
+
+	if len(errors) > 0 {
+		return UpdateUserCurrencyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateUserCurrencyRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateUserCurrencyRequest.ValidateAll() if the
+// designated constraints aren't met.
+type UpdateUserCurrencyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateUserCurrencyRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateUserCurrencyRequestMultiError) AllErrors() []error { return m }
+
+// UpdateUserCurrencyRequestValidationError is the validation error returned by
+// UpdateUserCurrencyRequest.Validate if the designated constraints aren't met.
+type UpdateUserCurrencyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateUserCurrencyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateUserCurrencyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateUserCurrencyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateUserCurrencyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateUserCurrencyRequestValidationError) ErrorName() string {
+	return "UpdateUserCurrencyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateUserCurrencyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateUserCurrencyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateUserCurrencyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateUserCurrencyRequestValidationError{}
+
+// Validate checks the field values on UpdateUserCurrencyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateUserCurrencyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateUserCurrencyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateUserCurrencyResponseMultiError, or nil if none found.
+func (m *UpdateUserCurrencyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateUserCurrencyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateUserCurrencyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateUserCurrencyResponseMultiError is an error wrapping multiple
+// validation errors returned by UpdateUserCurrencyResponse.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateUserCurrencyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateUserCurrencyResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateUserCurrencyResponseMultiError) AllErrors() []error { return m }
+
+// UpdateUserCurrencyResponseValidationError is the validation error returned
+// by UpdateUserCurrencyResponse.Validate if the designated constraints aren't met.
+type UpdateUserCurrencyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateUserCurrencyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateUserCurrencyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateUserCurrencyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateUserCurrencyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateUserCurrencyResponseValidationError) ErrorName() string {
+	return "UpdateUserCurrencyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateUserCurrencyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateUserCurrencyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateUserCurrencyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateUserCurrencyResponseValidationError{}
 
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
