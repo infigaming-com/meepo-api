@@ -2874,7 +2874,7 @@ type Currency struct {
 	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
 	Symbol        string                 `protobuf:"bytes,5,opt,name=symbol,proto3" json:"symbol,omitempty"`
 	Icon          string                 `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
-	DecimalPlaces string                 `protobuf:"bytes,7,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
+	DecimalPlaces int32                  `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2951,11 +2951,11 @@ func (x *Currency) GetIcon() string {
 	return ""
 }
 
-func (x *Currency) GetDecimalPlaces() string {
+func (x *Currency) GetDecimalPlaces() int32 {
 	if x != nil {
 		return x.DecimalPlaces
 	}
-	return ""
+	return 0
 }
 
 type AddCurrencyRequest struct {
@@ -5031,7 +5031,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12\x16\n" +
 	"\x06symbol\x18\x05 \x01(\tR\x06symbol\x12\x12\n" +
 	"\x04icon\x18\x06 \x01(\tR\x04icon\x12%\n" +
-	"\x0edecimal_places\x18\a \x01(\tR\rdecimalPlaces\"Q\n" +
+	"\x0edecimal_places\x18\a \x01(\x05R\rdecimalPlaces\"Q\n" +
 	"\x12AddCurrencyRequest\x12;\n" +
 	"\bcurrency\x18\x01 \x01(\v2\x1f.api.wallet.service.v1.CurrencyR\bcurrency\"\x15\n" +
 	"\x13AddCurrencyResponse\"\xb1\x02\n" +
