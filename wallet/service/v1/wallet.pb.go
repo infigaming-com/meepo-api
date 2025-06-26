@@ -4797,7 +4797,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"\x1c\n" +
-	"\x1aUpdateUserCurrencyResponse2\xfc\x15\n" +
+	"\x1aUpdateUserCurrencyResponse2\xa1\x16\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12W\n" +
@@ -4819,8 +4819,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"#GetBackofficeUserOverviewFromWallet\x12A.api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest\x1aB.api.wallet.service.v1.GetBackofficeUserOverviewFromWalletResponse\"\x00\x12\x9f\x01\n" +
 	"\x1eGetOverviewDashboardFromWallet\x12<.api.wallet.service.v1.GetOverviewDashboardFromWalletRequest\x1a=.api.wallet.service.v1.GetOverviewDashboardFromWalletResponse\"\x00\x12f\n" +
 	"\vAddCurrency\x12).api.wallet.service.v1.AddCurrencyRequest\x1a*.api.wallet.service.v1.AddCurrencyResponse\"\x00\x12o\n" +
-	"\x0eUpdateCurrency\x12,.api.wallet.service.v1.UpdateCurrencyRequest\x1a-.api.wallet.service.v1.UpdateCurrencyResponse\"\x00\x12l\n" +
-	"\rGetCurrencies\x12+.api.wallet.service.v1.GetCurrenciesRequest\x1a,.api.wallet.service.v1.GetCurrenciesResponse\"\x00\x12o\n" +
+	"\x0eUpdateCurrency\x12,.api.wallet.service.v1.UpdateCurrencyRequest\x1a-.api.wallet.service.v1.UpdateCurrencyResponse\"\x00\x12\x90\x01\n" +
+	"\rGetCurrencies\x12+.api.wallet.service.v1.GetCurrenciesRequest\x1a,.api.wallet.service.v1.GetCurrenciesResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/wallet/currencies/get\x12o\n" +
 	"\x0eListCurrencies\x12,.api.wallet.service.v1.ListCurrenciesRequest\x1a-.api.wallet.service.v1.ListCurrenciesResponse\"\x00\x12\x87\x01\n" +
 	"\x16UpdateOperatorCurrency\x124.api.wallet.service.v1.UpdateOperatorCurrencyRequest\x1a5.api.wallet.service.v1.UpdateOperatorCurrencyResponse\"\x00\x12{\n" +
 	"\x12UpdateUserCurrency\x120.api.wallet.service.v1.UpdateUserCurrencyRequest\x1a1.api.wallet.service.v1.UpdateUserCurrencyResponse\"\x00BS\n" +
