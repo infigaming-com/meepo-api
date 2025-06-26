@@ -371,6 +371,263 @@ var _ interface {
 	ErrorName() string
 } = LoginRequestValidationError{}
 
+// Validate checks the field values on HttpRequestInfo with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *HttpRequestInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on HttpRequestInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// HttpRequestInfoMultiError, or nil if none found.
+func (m *HttpRequestInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *HttpRequestInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Method
+
+	// no validation rules for Path
+
+	// no validation rules for Host
+
+	// no validation rules for RemoteAddr
+
+	// no validation rules for Country
+
+	// no validation rules for Origin
+
+	// no validation rules for Referer
+
+	// no validation rules for UserAgent
+
+	// no validation rules for ClientIp
+
+	if len(errors) > 0 {
+		return HttpRequestInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// HttpRequestInfoMultiError is an error wrapping multiple validation errors
+// returned by HttpRequestInfo.ValidateAll() if the designated constraints
+// aren't met.
+type HttpRequestInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m HttpRequestInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m HttpRequestInfoMultiError) AllErrors() []error { return m }
+
+// HttpRequestInfoValidationError is the validation error returned by
+// HttpRequestInfo.Validate if the designated constraints aren't met.
+type HttpRequestInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e HttpRequestInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e HttpRequestInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e HttpRequestInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e HttpRequestInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e HttpRequestInfoValidationError) ErrorName() string { return "HttpRequestInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e HttpRequestInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sHttpRequestInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = HttpRequestInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = HttpRequestInfoValidationError{}
+
+// Validate checks the field values on LoginWithInfoRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *LoginWithInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LoginWithInfoRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// LoginWithInfoRequestMultiError, or nil if none found.
+func (m *LoginWithInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LoginWithInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for PasswordProvider
+
+	// no validation rules for AuthId
+
+	// no validation rules for Password
+
+	// no validation rules for OperatorId
+
+	if all {
+		switch v := interface{}(m.GetHttpRequestInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LoginWithInfoRequestValidationError{
+					field:  "HttpRequestInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LoginWithInfoRequestValidationError{
+					field:  "HttpRequestInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetHttpRequestInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LoginWithInfoRequestValidationError{
+				field:  "HttpRequestInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return LoginWithInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// LoginWithInfoRequestMultiError is an error wrapping multiple validation
+// errors returned by LoginWithInfoRequest.ValidateAll() if the designated
+// constraints aren't met.
+type LoginWithInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LoginWithInfoRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LoginWithInfoRequestMultiError) AllErrors() []error { return m }
+
+// LoginWithInfoRequestValidationError is the validation error returned by
+// LoginWithInfoRequest.Validate if the designated constraints aren't met.
+type LoginWithInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LoginWithInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LoginWithInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LoginWithInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LoginWithInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LoginWithInfoRequestValidationError) ErrorName() string {
+	return "LoginWithInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LoginWithInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLoginWithInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LoginWithInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LoginWithInfoRequestValidationError{}
+
 // Validate checks the field values on OAuthRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
