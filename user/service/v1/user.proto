@@ -27,6 +27,11 @@ service User {
 			body: "*"
 		};
 	}
+
+	// Login an existing user with password-based authentication and request info (now only add operator_id).
+	// Users can login using their registered credentials.
+	rpc LoginWithInfo (LoginWithInfoRequest) returns (AuthResponse) {
+	}
 	
 	// Register or login using OAuth provider.
 	// Supports multiple OAuth providers like Google, Facebook, and Twitter.
@@ -268,6 +273,28 @@ message LoginRequest {
 	string auth_id = 2;
 	// The password for the account.
 	string password = 3;
+}
+
+// LoginWithInfoRequest contains the credentials for user login and request info.
+message LoginWithInfoRequest {
+	// The type of identity provider to use for login.
+	PasswordProvider password_provider = 1;
+	// The identity (username, email, or mobile) to login with.
+	string auth_id = 2;
+	// The password for the account.
+	string password = 3;
+	// The operator ID to login with.
+	int64 operator_id = 4;
+	// Below are the Http request info.
+	string method = 5;
+	string path = 6;
+	string host = 7;
+	string remote_addr = 8;
+	string country = 9;
+	string origin = 10;
+	string referer = 11;
+	string user_agent = 12;
+	string client_ip = 13;
 }
 
 // OAuthRequest contains the information needed for OAuth authentication.

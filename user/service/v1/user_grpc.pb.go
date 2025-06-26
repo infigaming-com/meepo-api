@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	User_Register_FullMethodName                     = "/api.user.service.v1.User/Register"
 	User_Login_FullMethodName                        = "/api.user.service.v1.User/Login"
+	User_LoginWithInfo_FullMethodName                = "/api.user.service.v1.User/LoginWithInfo"
 	User_RegisterOrLoginWithOAuth_FullMethodName     = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
 	User_RegisterOrLoginWithTelegram_FullMethodName  = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
 	User_RefreshToken_FullMethodName                 = "/api.user.service.v1.User/RefreshToken"
@@ -73,6 +74,9 @@ type UserClient interface {
 	// Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	// Login an existing user with password-based authentication and request info (now only add operator_id).
+	// Users can login using their registered credentials.
+	LoginWithInfo(ctx context.Context, in *LoginWithInfoRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	// Register or login using OAuth provider.
 	// Supports multiple OAuth providers like Google, Facebook, and Twitter.
 	RegisterOrLoginWithOAuth(ctx context.Context, in *OAuthRequest, opts ...grpc.CallOption) (*AuthResponse, error)
@@ -163,6 +167,16 @@ func (c *userClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.C
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthResponse)
 	err := c.cc.Invoke(ctx, User_Login_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) LoginWithInfo(ctx context.Context, in *LoginWithInfoRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuthResponse)
+	err := c.cc.Invoke(ctx, User_LoginWithInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -561,6 +575,9 @@ type UserServer interface {
 	// Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.
 	Login(context.Context, *LoginRequest) (*AuthResponse, error)
+	// Login an existing user with password-based authentication and request info (now only add operator_id).
+	// Users can login using their registered credentials.
+	LoginWithInfo(context.Context, *LoginWithInfoRequest) (*AuthResponse, error)
 	// Register or login using OAuth provider.
 	// Supports multiple OAuth providers like Google, Facebook, and Twitter.
 	RegisterOrLoginWithOAuth(context.Context, *OAuthRequest) (*AuthResponse, error)
@@ -642,6 +659,9 @@ func (UnimplementedUserServer) Register(context.Context, *RegisterRequest) (*Aut
 }
 func (UnimplementedUserServer) Login(context.Context, *LoginRequest) (*AuthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (UnimplementedUserServer) LoginWithInfo(context.Context, *LoginWithInfoRequest) (*AuthResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LoginWithInfo not implemented")
 }
 func (UnimplementedUserServer) RegisterOrLoginWithOAuth(context.Context, *OAuthRequest) (*AuthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterOrLoginWithOAuth not implemented")
@@ -810,6 +830,24 @@ func _User_Login_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).Login(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_LoginWithInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginWithInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).LoginWithInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_LoginWithInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).LoginWithInfo(ctx, req.(*LoginWithInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1512,6 +1550,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Login",
 			Handler:    _User_Login_Handler,
+		},
+		{
+			MethodName: "LoginWithInfo",
+			Handler:    _User_LoginWithInfo_Handler,
 		},
 		{
 			MethodName: "RegisterOrLoginWithOAuth",
