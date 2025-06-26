@@ -127,10 +127,6 @@ service User {
 	}
 
 	rpc AddOperator (AddOperatorRequest) returns (AddOperatorResponse) {
-		option (google.api.http) = {
-			post: "/v1/user/operators/add"
-			body: "*"
-		};
 	}
 
 	rpc SendEmailVerificationCode(SendEmailVerificationCodeRequest) returns (SendEmailVerificationCodeResponse) {
@@ -139,6 +135,7 @@ service User {
 			body: "*"
 		};
 	}
+	
 	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
 
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
