@@ -7165,9 +7165,7 @@ components:
             type: object
             properties:
                 channelId:
-                    type: array
-                    items:
-                        type: string
+                    type: string
                     description: ID of the channel to use for this deposit
                 extra:
                     type: object
@@ -7181,9 +7179,7 @@ components:
             type: object
             properties:
                 data:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/payment.service.v1.GetAddressResponse_Data'
+                    $ref: '#/components/schemas/payment.service.v1.GetAddressResponse_Data'
             description: |-
                 Response for deposit initiation
                  Contains details about the initiated deposit transaction
@@ -7226,6 +7222,9 @@ components:
                 currency:
                     type: string
                     description: Optional currency filter
+                protocol:
+                    type: string
+                    description: Optional crypto currency chain
                 country:
                     type: string
                     description: Optional country filter

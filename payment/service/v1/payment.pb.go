@@ -983,7 +983,7 @@ func (x *InitiateDepositResponse) GetExtra() *structpb.Struct {
 type GetAddressRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the channel to use for this deposit
-	ChannelId []string `protobuf:"bytes,1,rep,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Additional information needed for the deposit
 	// May include clientOrderId, productId, userInfo, etc.
 	Extra         *structpb.Struct `protobuf:"bytes,2,opt,name=extra,proto3" json:"extra,omitempty"`
@@ -1021,11 +1021,11 @@ func (*GetAddressRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetAddressRequest) GetChannelId() []string {
+func (x *GetAddressRequest) GetChannelId() string {
 	if x != nil {
 		return x.ChannelId
 	}
-	return nil
+	return ""
 }
 
 func (x *GetAddressRequest) GetExtra() *structpb.Struct {
@@ -1038,8 +1038,8 @@ func (x *GetAddressRequest) GetExtra() *structpb.Struct {
 // Response for deposit initiation
 // Contains details about the initiated deposit transaction
 type GetAddressResponse struct {
-	state         protoimpl.MessageState     `protogen:"open.v1"`
-	Data          []*GetAddressResponse_Data `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	state         protoimpl.MessageState   `protogen:"open.v1"`
+	Data          *GetAddressResponse_Data `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1074,7 +1074,7 @@ func (*GetAddressResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *GetAddressResponse) GetData() []*GetAddressResponse_Data {
+func (x *GetAddressResponse) GetData() *GetAddressResponse_Data {
 	if x != nil {
 		return x.Data
 	}
@@ -2217,10 +2217,12 @@ type GetPaymentChannelPageRequest struct {
 	PaymentMethod string `protobuf:"bytes,6,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Optional currency filter
 	Currency string `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Optional crypto currency chain
+	Protocol string `protobuf:"bytes,8,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Optional country filter
-	Country string `protobuf:"bytes,8,opt,name=country,proto3" json:"country,omitempty"`
+	Country string `protobuf:"bytes,9,opt,name=country,proto3" json:"country,omitempty"`
 	// Optional sort direction
-	Sort          Sort `protobuf:"varint,9,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
+	Sort          Sort `protobuf:"varint,10,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2300,6 +2302,13 @@ func (x *GetPaymentChannelPageRequest) GetPaymentMethod() string {
 func (x *GetPaymentChannelPageRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetPaymentChannelPageRequest) GetProtocol() string {
+	if x != nil {
+		return x.Protocol
 	}
 	return ""
 }
@@ -2765,10 +2774,10 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05extra\x18\b \x01(\v2\x17.google.protobuf.StructR\x05extra\"a\n" +
 	"\x11GetAddressRequest\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x03(\tR\tchannelId\x12-\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\x12-\n" +
 	"\x05extra\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x8b\x01\n" +
 	"\x12GetAddressResponse\x12?\n" +
-	"\x04data\x18\x01 \x03(\v2+.payment.service.v1.GetAddressResponse.DataR\x04data\x1a4\n" +
+	"\x04data\x18\x01 \x01(\v2+.payment.service.v1.GetAddressResponse.DataR\x04data\x1a4\n" +
 	"\x04Data\x12\x12\n" +
 	"\x04coin\x18\x01 \x01(\tR\x04coin\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress\"\xd5\x01\n" +
@@ -2882,7 +2891,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"totalPages\x12)\n" +
 	"\x10total_successful\x18\x06 \x01(\x05R\x0ftotalSuccessful\x12)\n" +
 	"\x10total_processing\x18\a \x01(\x05R\x0ftotalProcessing\x12!\n" +
-	"\ftotal_failed\x18\b \x01(\x05R\vtotalFailed\"\xcc\x02\n" +
+	"\ftotal_failed\x18\b \x01(\x05R\vtotalFailed\"\xe8\x02\n" +
 	"\x1cGetPaymentChannelPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1f\n" +
@@ -2891,9 +2900,11 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\x0e2\x1f.payment.service.v1.ChannelTypeR\x04type\x12\x1a\n" +
 	"\bcategory\x18\x05 \x01(\tR\bcategory\x12%\n" +
 	"\x0epayment_method\x18\x06 \x01(\tR\rpaymentMethod\x12\x1a\n" +
-	"\bcurrency\x18\a \x01(\tR\bcurrency\x12\x18\n" +
-	"\acountry\x18\b \x01(\tR\acountry\x12,\n" +
-	"\x04sort\x18\t \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\"\xe5\x01\n" +
+	"\bcurrency\x18\a \x01(\tR\bcurrency\x12\x1a\n" +
+	"\bprotocol\x18\b \x01(\tR\bprotocol\x12\x18\n" +
+	"\acountry\x18\t \x01(\tR\acountry\x12,\n" +
+	"\x04sort\x18\n" +
+	" \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\"\xe5\x01\n" +
 	"\x1dGetPaymentChannelPageResponse\x12Q\n" +
 	"\x10payment_channels\x18\x01 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x0fpaymentChannels\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +

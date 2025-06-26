@@ -141,7 +141,7 @@ message InitiateDepositResponse {
 // Used to get DC address
 message GetAddressRequest {
   // ID of the channel to use for this deposit
-  repeated string channel_id = 1 [json_name="channelId"];
+  string channel_id = 1 [json_name="channelId"];
   // Additional information needed for the deposit
   // May include clientOrderId, productId, userInfo, etc.
   google.protobuf.Struct extra = 2;
@@ -156,7 +156,7 @@ message GetAddressResponse {
     // Digital Currency address
     string address = 2;
   }
-  repeated Data data = 1;
+  Data data = 1;
 }
 
 // Request to initiate a withdrawal
@@ -443,10 +443,12 @@ message GetPaymentChannelPageRequest {
   string payment_method = 6 [json_name="paymentMethod"];
   // Optional currency filter
   string currency = 7;
+  // Optional crypto currency chain
+  string protocol = 8;
   // Optional country filter
-  string country = 8;
+  string country = 9;
   // Optional sort direction
-  Sort sort = 9 [json_name="sort"];
+  Sort sort = 10 [json_name="sort"];
 }
 
 // Response for payment channel page

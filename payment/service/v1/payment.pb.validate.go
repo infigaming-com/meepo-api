@@ -1184,6 +1184,8 @@ func (m *GetAddressRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for ChannelId
+
 	if all {
 		switch v := interface{}(m.GetExtra()).(type) {
 		case interface{ ValidateAll() error }:
@@ -1315,38 +1317,33 @@ func (m *GetAddressResponse) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetData() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetAddressResponseValidationError{
-						field:  fmt.Sprintf("Data[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GetAddressResponseValidationError{
-						field:  fmt.Sprintf("Data[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GetAddressResponseValidationError{
-					field:  fmt.Sprintf("Data[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetData()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetAddressResponseValidationError{
+					field:  "Data",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetAddressResponseValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetAddressResponseValidationError{
+				field:  "Data",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	if len(errors) > 0 {
@@ -2894,6 +2891,8 @@ func (m *GetPaymentChannelPageRequest) validate(all bool) error {
 	// no validation rules for PaymentMethod
 
 	// no validation rules for Currency
+
+	// no validation rules for Protocol
 
 	// no validation rules for Country
 
