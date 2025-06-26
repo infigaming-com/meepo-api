@@ -64,7 +64,12 @@ service Wallet {
 
 	rpc UpdateCurrency (UpdateCurrencyRequest) returns (UpdateCurrencyResponse) {}
 
-	rpc GetCurrencies (GetCurrenciesRequest) returns (GetCurrenciesResponse) {}
+	rpc GetCurrencies (GetCurrenciesRequest) returns (GetCurrenciesResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/currencies/get"
+			body: "*"
+		};
+	}
 
 	rpc ListCurrencies (ListCurrenciesRequest) returns (ListCurrenciesResponse) {}
 
