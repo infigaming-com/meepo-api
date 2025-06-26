@@ -275,7 +275,20 @@ message LoginRequest {
 	string password = 3;
 }
 
-// LoginWithInfoRequest contains the credentials for user login and request info.
+// HttpRequestInfo contains the http request info get from RequestInfoMiddleware.
+message HttpRequestInfo {
+	string method = 1;
+	string path = 2;
+	string host = 3;
+	string remote_addr = 4;
+	string country = 5;
+	string origin = 6;
+	string referer = 7;
+	string user_agent = 8;
+	string client_ip = 9;
+}
+
+// LoginWithInfoRequest contains the credentials for user login and http request info.
 message LoginWithInfoRequest {
 	// The type of identity provider to use for login.
 	PasswordProvider password_provider = 1;
@@ -285,16 +298,8 @@ message LoginWithInfoRequest {
 	string password = 3;
 	// The operator ID to login with.
 	int64 operator_id = 4;
-	// Below are the Http request info.
-	string method = 5;
-	string path = 6;
-	string host = 7;
-	string remote_addr = 8;
-	string country = 9;
-	string origin = 10;
-	string referer = 11;
-	string user_agent = 12;
-	string client_ip = 13;
+	// Http request info.
+	HttpRequestInfo http_request_info = 5;
 }
 
 // OAuthRequest contains the information needed for OAuth authentication.
