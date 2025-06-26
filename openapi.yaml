@@ -7188,7 +7188,10 @@ components:
             properties:
                 coin:
                     type: string
-                    description: Digital Currency like btc, eth...
+                    description: Crypto like btc, eth...
+                protocol:
+                    type: string
+                    description: Crypto chain
                 address:
                     type: string
                     description: Digital Currency address
@@ -7535,6 +7538,9 @@ components:
                 currency:
                     type: string
                     description: Currency supported by this channel
+                protocol:
+                    type: string
+                    description: Crypto chian supported by this channel
                 country:
                     type: string
                     description: Country where this channel is available

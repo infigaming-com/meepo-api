@@ -606,26 +606,28 @@ type PaymentChannelInfo struct {
 	PaymentMethodId string `protobuf:"bytes,8,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	// Currency supported by this channel
 	Currency string `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Crypto chian supported by this channel
+	Protocol string `protobuf:"bytes,10,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Country where this channel is available
-	Country string `protobuf:"bytes,10,opt,name=country,proto3" json:"country,omitempty"`
+	Country string `protobuf:"bytes,11,opt,name=country,proto3" json:"country,omitempty"`
 	// Specific method used (might be more detailed than payment_method)
-	Method string `protobuf:"bytes,11,opt,name=method,proto3" json:"method,omitempty"`
+	Method string `protobuf:"bytes,12,opt,name=method,proto3" json:"method,omitempty"`
 	// URL to the logo image for this payment channel
-	Logo string `protobuf:"bytes,12,opt,name=logo,proto3" json:"logo,omitempty"`
+	Logo string `protobuf:"bytes,13,opt,name=logo,proto3" json:"logo,omitempty"`
 	// Minimum amount allowed for deposit transactions
-	MinDepositAmount string `protobuf:"bytes,13,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
+	MinDepositAmount string `protobuf:"bytes,14,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
 	// Maximum amount allowed for deposit transactions
-	MaxDepositAmount string `protobuf:"bytes,14,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
+	MaxDepositAmount string `protobuf:"bytes,15,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
 	// Minimum amount allowed for withdrawal transactions
-	MinWithdrawAmount string `protobuf:"bytes,15,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
+	MinWithdrawAmount string `protobuf:"bytes,16,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
 	// Maximum amount allowed for withdrawal transactions
-	MaxWithdrawAmount string `protobuf:"bytes,16,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
+	MaxWithdrawAmount string `protobuf:"bytes,17,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
 	// Estimated arrival time in minutes
-	Eat int32 `protobuf:"varint,17,opt,name=eat,proto3" json:"eat,omitempty"`
+	Eat int32 `protobuf:"varint,18,opt,name=eat,proto3" json:"eat,omitempty"`
 	// JSON schema defining deposit form fields required by this channel
-	DepositSchema *structpb.Struct `protobuf:"bytes,18,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
+	DepositSchema *structpb.Struct `protobuf:"bytes,19,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
 	// JSON schema defining withdrawal form fields required by this channel
-	WithdrawSchema *structpb.Struct `protobuf:"bytes,19,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
+	WithdrawSchema *structpb.Struct `protobuf:"bytes,20,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -719,6 +721,13 @@ func (x *PaymentChannelInfo) GetPaymentMethodId() string {
 func (x *PaymentChannelInfo) GetCurrency() string {
 	if x != nil {
 		return x.Currency
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetProtocol() string {
+	if x != nil {
+		return x.Protocol
 	}
 	return ""
 }
@@ -2603,10 +2612,12 @@ func (x *GetChannelsByIdsResponse) GetChannels() []*GetChannelsByIdsResponse_Cha
 
 type GetAddressResponse_Data struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Digital Currency like btc, eth...
+	// Crypto like btc, eth...
 	Coin string `protobuf:"bytes,1,opt,name=coin,proto3" json:"coin,omitempty"`
+	// Crypto chain
+	Protocol string `protobuf:"bytes,2,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Digital Currency address
-	Address       string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+	Address       string `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2644,6 +2655,13 @@ func (*GetAddressResponse_Data) Descriptor() ([]byte, []int) {
 func (x *GetAddressResponse_Data) GetCoin() string {
 	if x != nil {
 		return x.Coin
+	}
+	return ""
+}
+
+func (x *GetAddressResponse_Data) GetProtocol() string {
+	if x != nil {
+		return x.Protocol
 	}
 	return ""
 }
@@ -2732,7 +2750,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03key\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xaf\x05\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xcb\x05\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x12\n" +
@@ -2744,18 +2762,19 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03tag\x18\x06 \x01(\tR\x03tag\x12\x12\n" +
 	"\x04name\x18\a \x01(\tR\x04name\x12*\n" +
 	"\x11payment_method_id\x18\b \x01(\tR\x0fpaymentMethodId\x12\x1a\n" +
-	"\bcurrency\x18\t \x01(\tR\bcurrency\x12\x18\n" +
-	"\acountry\x18\n" +
-	" \x01(\tR\acountry\x12\x16\n" +
-	"\x06method\x18\v \x01(\tR\x06method\x12\x12\n" +
-	"\x04logo\x18\f \x01(\tR\x04logo\x12,\n" +
-	"\x12min_deposit_amount\x18\r \x01(\tR\x10minDepositAmount\x12,\n" +
-	"\x12max_deposit_amount\x18\x0e \x01(\tR\x10maxDepositAmount\x12.\n" +
-	"\x13min_withdraw_amount\x18\x0f \x01(\tR\x11minWithdrawAmount\x12.\n" +
-	"\x13max_withdraw_amount\x18\x10 \x01(\tR\x11maxWithdrawAmount\x12\x10\n" +
-	"\x03eat\x18\x11 \x01(\x05R\x03eat\x12>\n" +
-	"\x0edeposit_schema\x18\x12 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
-	"\x0fwithdraw_schema\x18\x13 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\"\x9a\x01\n" +
+	"\bcurrency\x18\t \x01(\tR\bcurrency\x12\x1a\n" +
+	"\bprotocol\x18\n" +
+	" \x01(\tR\bprotocol\x12\x18\n" +
+	"\acountry\x18\v \x01(\tR\acountry\x12\x16\n" +
+	"\x06method\x18\f \x01(\tR\x06method\x12\x12\n" +
+	"\x04logo\x18\r \x01(\tR\x04logo\x12,\n" +
+	"\x12min_deposit_amount\x18\x0e \x01(\tR\x10minDepositAmount\x12,\n" +
+	"\x12max_deposit_amount\x18\x0f \x01(\tR\x10maxDepositAmount\x12.\n" +
+	"\x13min_withdraw_amount\x18\x10 \x01(\tR\x11minWithdrawAmount\x12.\n" +
+	"\x13max_withdraw_amount\x18\x11 \x01(\tR\x11maxWithdrawAmount\x12\x10\n" +
+	"\x03eat\x18\x12 \x01(\x05R\x03eat\x12>\n" +
+	"\x0edeposit_schema\x18\x13 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
+	"\x0fwithdraw_schema\x18\x14 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
@@ -2775,12 +2794,13 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x11GetAddressRequest\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12-\n" +
-	"\x05extra\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x8b\x01\n" +
+	"\x05extra\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xa7\x01\n" +
 	"\x12GetAddressResponse\x12?\n" +
-	"\x04data\x18\x01 \x01(\v2+.payment.service.v1.GetAddressResponse.DataR\x04data\x1a4\n" +
+	"\x04data\x18\x01 \x01(\v2+.payment.service.v1.GetAddressResponse.DataR\x04data\x1aP\n" +
 	"\x04Data\x12\x12\n" +
-	"\x04coin\x18\x01 \x01(\tR\x04coin\x12\x18\n" +
-	"\aaddress\x18\x02 \x01(\tR\aaddress\"\xd5\x01\n" +
+	"\x04coin\x18\x01 \x01(\tR\x04coin\x12\x1a\n" +
+	"\bprotocol\x18\x02 \x01(\tR\bprotocol\x12\x18\n" +
+	"\aaddress\x18\x03 \x01(\tR\aaddress\"\xd5\x01\n" +
 	"\x17InitiateWithdrawRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
