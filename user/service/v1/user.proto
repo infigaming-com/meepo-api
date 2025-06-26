@@ -28,7 +28,7 @@ service User {
 		};
 	}
 
-	// Login an existing user with password-based authentication and request info (now only add operator_id).
+	// Login an existing user with password-based authentication and request info (now adds operator_id and http request info).
 	// Users can login using their registered credentials.
 	rpc LoginWithInfo (LoginWithInfoRequest) returns (AuthResponse) {
 	}

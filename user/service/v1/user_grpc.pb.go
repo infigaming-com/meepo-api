@@ -74,7 +74,7 @@ type UserClient interface {
 	// Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*AuthResponse, error)
-	// Login an existing user with password-based authentication and request info (now only add operator_id).
+	// Login an existing user with password-based authentication and request info (now adds operator_id and http request info).
 	// Users can login using their registered credentials.
 	LoginWithInfo(ctx context.Context, in *LoginWithInfoRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	// Register or login using OAuth provider.
@@ -575,7 +575,7 @@ type UserServer interface {
 	// Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.
 	Login(context.Context, *LoginRequest) (*AuthResponse, error)
-	// Login an existing user with password-based authentication and request info (now only add operator_id).
+	// Login an existing user with password-based authentication and request info (now adds operator_id and http request info).
 	// Users can login using their registered credentials.
 	LoginWithInfo(context.Context, *LoginWithInfoRequest) (*AuthResponse, error)
 	// Register or login using OAuth provider.
