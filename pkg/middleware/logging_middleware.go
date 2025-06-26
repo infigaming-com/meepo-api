@@ -17,7 +17,7 @@ func LoggingMiddleware(enabled bool, lg log.Logger) middleware.Middleware {
 				reply, err = handler(ctx, req)
 
 				if enabled {
-					log.NewHelper(lg).Infow(
+					log.NewHelper(lg).Debugw(
 						"method", r.Method,
 						"path", r.URL.Path,
 						"host", r.Host,
