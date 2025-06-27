@@ -106,3 +106,15 @@ func IsGameNotFound(err error) bool {
 func ErrorGameNotFound(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GAME_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGameInsufficientBalance(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GAME_INSUFFICIENT_BALANCE.String() && e.Code == 500
+}
+
+func ErrorGameInsufficientBalance(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GAME_INSUFFICIENT_BALANCE.String(), fmt.Sprintf(format, args...))
+}

@@ -33,6 +33,7 @@ const (
 	ErrorReason_GAME_BANNED_ON_USER        ErrorReason = 40005
 	ErrorReason_GAME_DISABLED              ErrorReason = 40006
 	ErrorReason_GAME_NOT_FOUND             ErrorReason = 40007
+	ErrorReason_GAME_INSUFFICIENT_BALANCE  ErrorReason = 40008
 )
 
 // Enum value maps for ErrorReason.
@@ -46,6 +47,7 @@ var (
 		40005: "GAME_BANNED_ON_USER",
 		40006: "GAME_DISABLED",
 		40007: "GAME_NOT_FOUND",
+		40008: "GAME_INSUFFICIENT_BALANCE",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                0,
@@ -56,6 +58,7 @@ var (
 		"GAME_BANNED_ON_USER":        40005,
 		"GAME_DISABLED":              40006,
 		"GAME_NOT_FOUND":             40007,
+		"GAME_INSUFFICIENT_BALANCE":  40008,
 	}
 )
 
@@ -90,7 +93,7 @@ var File_game_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_game_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\xdb\x01\n" +
+	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\xfc\x01\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x12GAME_BET_NOT_FOUND\x10\xc1\xb8\x02\x12\x1b\n" +
@@ -99,7 +102,8 @@ const file_game_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1aGAME_TRANSACTION_NOT_FOUND\x10ĸ\x02\x12\x19\n" +
 	"\x13GAME_BANNED_ON_USER\x10Ÿ\x02\x12\x13\n" +
 	"\rGAME_DISABLED\x10Ƹ\x02\x12\x14\n" +
-	"\x0eGAME_NOT_FOUND\x10Ǹ\x02\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x0eGAME_NOT_FOUND\x10Ǹ\x02\x12\x1f\n" +
+	"\x19GAME_INSUFFICIENT_BALANCE\x10ȸ\x02\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.game.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (
