@@ -701,6 +701,8 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for Protocol
 
+	// no validation rules for Network
+
 	// no validation rules for Country
 
 	// no validation rules for Method
@@ -2216,6 +2218,8 @@ func (m *TransactionInfo) validate(all bool) error {
 
 	// no validation rules for Protocol
 
+	// no validation rules for Network
+
 	// no validation rules for Type
 
 	// no validation rules for Status
@@ -2553,6 +2557,8 @@ func (m *GetTransactionPageRequest) validate(all bool) error {
 	// no validation rules for PaymentChannel
 
 	// no validation rules for Protocol
+
+	// no validation rules for Network
 
 	// no validation rules for Type
 
@@ -2895,6 +2901,8 @@ func (m *GetPaymentChannelPageRequest) validate(all bool) error {
 	// no validation rules for Currency
 
 	// no validation rules for Protocol
+
+	// no validation rules for Network
 
 	// no validation rules for Country
 
@@ -3627,9 +3635,11 @@ func (m *GetAddressResponse_Data) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Coin
+	// no validation rules for Currency
 
 	// no validation rules for Protocol
+
+	// no validation rules for Network
 
 	// no validation rules for Address
 
