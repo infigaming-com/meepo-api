@@ -100,10 +100,12 @@ message PaymentChannelInfo {
   string max_withdraw_amount = 18 [json_name="maxWithdrawAmount"];
   // Estimated arrival time in minutes
   int32 eat = 19;
+  // Fee
+  int32 fee = 20;
   // JSON schema defining deposit form fields required by this channel
-  google.protobuf.Struct deposit_schema = 20 [json_name="depositSchema"];
+  google.protobuf.Struct deposit_schema = 21 [json_name="depositSchema"];
   // JSON schema defining withdrawal form fields required by this channel
-  google.protobuf.Struct withdraw_schema = 21 [json_name="withdrawSchema"];
+  google.protobuf.Struct withdraw_schema = 22 [json_name="withdrawSchema"];
 }
 
 // Request to initiate a deposit

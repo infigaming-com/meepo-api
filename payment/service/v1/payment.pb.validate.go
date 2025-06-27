@@ -719,6 +719,8 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for Eat
 
+	// no validation rules for Fee
+
 	if all {
 		switch v := interface{}(m.GetDepositSchema()).(type) {
 		case interface{ ValidateAll() error }:

@@ -626,10 +626,12 @@ type PaymentChannelInfo struct {
 	MaxWithdrawAmount string `protobuf:"bytes,18,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
 	// Estimated arrival time in minutes
 	Eat int32 `protobuf:"varint,19,opt,name=eat,proto3" json:"eat,omitempty"`
+	// Fee
+	Fee int32 `protobuf:"varint,20,opt,name=fee,proto3" json:"fee,omitempty"`
 	// JSON schema defining deposit form fields required by this channel
-	DepositSchema *structpb.Struct `protobuf:"bytes,20,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
+	DepositSchema *structpb.Struct `protobuf:"bytes,21,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
 	// JSON schema defining withdrawal form fields required by this channel
-	WithdrawSchema *structpb.Struct `protobuf:"bytes,21,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
+	WithdrawSchema *structpb.Struct `protobuf:"bytes,22,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -793,6 +795,13 @@ func (x *PaymentChannelInfo) GetMaxWithdrawAmount() string {
 func (x *PaymentChannelInfo) GetEat() int32 {
 	if x != nil {
 		return x.Eat
+	}
+	return 0
+}
+
+func (x *PaymentChannelInfo) GetFee() int32 {
+	if x != nil {
+		return x.Fee
 	}
 	return 0
 }
@@ -2795,7 +2804,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03key\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xe5\x05\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xf7\x05\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x12\n" +
@@ -2818,9 +2827,10 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x12max_deposit_amount\x18\x10 \x01(\tR\x10maxDepositAmount\x12.\n" +
 	"\x13min_withdraw_amount\x18\x11 \x01(\tR\x11minWithdrawAmount\x12.\n" +
 	"\x13max_withdraw_amount\x18\x12 \x01(\tR\x11maxWithdrawAmount\x12\x10\n" +
-	"\x03eat\x18\x13 \x01(\x05R\x03eat\x12>\n" +
-	"\x0edeposit_schema\x18\x14 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
-	"\x0fwithdraw_schema\x18\x15 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\"\x9a\x01\n" +
+	"\x03eat\x18\x13 \x01(\x05R\x03eat\x12\x10\n" +
+	"\x03fee\x18\x14 \x01(\x05R\x03fee\x12>\n" +
+	"\x0edeposit_schema\x18\x15 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
+	"\x0fwithdraw_schema\x18\x16 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
