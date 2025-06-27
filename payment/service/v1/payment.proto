@@ -80,28 +80,32 @@ message PaymentChannelInfo {
   string payment_method_id = 8 [json_name="paymentMethodId"];
   // Currency supported by this channel
   string currency = 9;
-  // Crypto chian supported by this channel
+  // Crypto protocol supported by this channel
   string protocol = 10;
+  // Crypto chian supported by this channel
+  string network = 11;
   // Country where this channel is available
-  string country = 11;
+  string country = 12;
   // Specific method used (might be more detailed than payment_method)
-  string method = 12;
+  string method = 13;
   // URL to the logo image for this payment channel
-  string logo = 13;
+  string logo = 14;
   // Minimum amount allowed for deposit transactions
-  string min_deposit_amount = 14 [json_name="minDepositAmount"];
+  string min_deposit_amount = 15 [json_name="minDepositAmount"];
   // Maximum amount allowed for deposit transactions
-  string max_deposit_amount = 15 [json_name="maxDepositAmount"];
+  string max_deposit_amount = 16 [json_name="maxDepositAmount"];
   // Minimum amount allowed for withdrawal transactions
-  string min_withdraw_amount = 16 [json_name="minWithdrawAmount"];
+  string min_withdraw_amount = 17 [json_name="minWithdrawAmount"];
   // Maximum amount allowed for withdrawal transactions
-  string max_withdraw_amount = 17 [json_name="maxWithdrawAmount"];
+  string max_withdraw_amount = 18 [json_name="maxWithdrawAmount"];
   // Estimated arrival time in minutes
-  int32 eat = 18;
+  int32 eat = 19;
+  // Fee
+  int32 fee = 20;
   // JSON schema defining deposit form fields required by this channel
-  google.protobuf.Struct deposit_schema = 19 [json_name="depositSchema"];
+  google.protobuf.Struct deposit_schema = 21 [json_name="depositSchema"];
   // JSON schema defining withdrawal form fields required by this channel
-  google.protobuf.Struct withdraw_schema = 20 [json_name="withdrawSchema"];
+  google.protobuf.Struct withdraw_schema = 22 [json_name="withdrawSchema"];
 }
 
 // Request to initiate a deposit
@@ -154,11 +158,13 @@ message GetAddressRequest {
 message GetAddressResponse {
   message Data {
     // Crypto like btc, eth...
-    string coin = 1;
-    // Crypto chain
+    string currency = 1;
+    // Crypto protocol
     string protocol = 2;
+    // Crypto chain
+    string network = 3;
     // Digital Currency address
-    string address = 3;
+    string address = 4;
   }
   Data data = 1;
 }
@@ -346,16 +352,18 @@ message TransactionInfo {
   string payment_method = 10 [json_name="paymentMethod"];
   // Payment channel used for the transaction
   string payment_channel = 11 [json_name="paymentChannel"];
-  // Protocol used for the transaction
+  // Crypto Protocol used for the transaction
   string protocol = 12;
+  // Crypto Network used for the transaction
+  string network = 13;
   // Type of transaction (deposit or withdrawal)
-  TransactionType type = 13;
+  TransactionType type = 14;
   // Current status of the transaction
-  TransactionStatus status = 14;
+  TransactionStatus status = 15;
   // Timestamp when the transaction was created
-  google.protobuf.Timestamp created_at = 15 [json_name="createdAt"];
+  google.protobuf.Timestamp created_at = 16 [json_name="createdAt"];
   // Timestamp when the transaction was last updated
-  google.protobuf.Timestamp updated_at = 16 [json_name="updatedAt"];
+  google.protobuf.Timestamp updated_at = 17 [json_name="updatedAt"];
 }
 
 message TransactionDetail {
@@ -383,28 +391,30 @@ message GetTransactionPageRequest {
   string payment_method = 6 [json_name="paymentMethod"];
   // Optional payment channel filter
   string payment_channel = 7 [json_name="paymentChannel"];
-  // Optional protocol filter
+  // Optional crypto protocol filter
   string protocol = 8;
+  // Optional crypto network filter
+  string network = 9;
   // Optional transaction type filter
-  TransactionType type = 9;
+  TransactionType type = 10;
   // Optional status filter
-  TransactionStatus status = 10;
+  TransactionStatus status = 11;
   // Optional agent filter
-  string agent = 11;
+  string agent = 12;
   // Optional start time for date range filter
-  google.protobuf.Timestamp start_time = 12 [json_name="startTime"];
+  google.protobuf.Timestamp start_time = 13 [json_name="startTime"];
   // Optional end time for date range filter
-  google.protobuf.Timestamp end_time = 13 [json_name="endTime"];
+  google.protobuf.Timestamp end_time = 14 [json_name="endTime"];
   // Optional sort direction
-  Sort sort = 14 [json_name="sort"];
+  Sort sort = 15 [json_name="sort"];
   // Source of the request (frontend or admin)
-  RequestSource source = 15 [json_name="source"];
+  RequestSource source = 16 [json_name="source"];
   // Optional user ID filter
-  int64 user_id = 16 [json_name="userId"];
+  int64 user_id = 17 [json_name="userId"];
   // Optional minimum amount filter
-  string min_amount = 17 [json_name="minAmount"];
+  string min_amount = 18 [json_name="minAmount"];
   // Optional maximum amount filter
-  string max_amount = 18 [json_name="maxAmount"];
+  string max_amount = 19 [json_name="maxAmount"];
 }
 
 // Response for transaction page
@@ -447,12 +457,14 @@ message GetPaymentChannelPageRequest {
   string payment_method = 6 [json_name="paymentMethod"];
   // Optional currency filter
   string currency = 7;
-  // Optional crypto currency chain
+  // Optional crypto protocol
   string protocol = 8;
+  // Optional crypto network filter
+  string network = 9;
   // Optional country filter
-  string country = 9;
+  string country = 10;
   // Optional sort direction
-  Sort sort = 10 [json_name="sort"];
+  Sort sort = 11 [json_name="sort"];
 }
 
 // Response for payment channel page

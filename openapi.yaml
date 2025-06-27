@@ -7347,10 +7347,13 @@ components:
         payment.service.v1.GetAddressResponse_Data:
             type: object
             properties:
-                coin:
+                currency:
                     type: string
                     description: Crypto like btc, eth...
                 protocol:
+                    type: string
+                    description: Crypto protocol
+                network:
                     type: string
                     description: Crypto chain
                 address:
@@ -7388,7 +7391,10 @@ components:
                     description: Optional currency filter
                 protocol:
                     type: string
-                    description: Optional crypto currency chain
+                    description: Optional crypto protocol
+                network:
+                    type: string
+                    description: Optional crypto network filter
                 country:
                     type: string
                     description: Optional country filter
@@ -7474,7 +7480,10 @@ components:
                     description: Optional payment channel filter
                 protocol:
                     type: string
-                    description: Optional protocol filter
+                    description: Optional crypto protocol filter
+                network:
+                    type: string
+                    description: Optional crypto network filter
                 type:
                     enum:
                         - TRANSACTION_TYPE_UNSPECIFIED
@@ -7653,6 +7662,9 @@ components:
                     description: Currency supported by this channel
                 protocol:
                     type: string
+                    description: Crypto protocol supported by this channel
+                network:
+                    type: string
                     description: Crypto chian supported by this channel
                 country:
                     type: string
@@ -7678,6 +7690,10 @@ components:
                 eat:
                     type: integer
                     description: Estimated arrival time in minutes
+                    format: int32
+                fee:
+                    type: integer
+                    description: Fee
                     format: int32
                 depositSchema:
                     type: object
@@ -7748,7 +7764,10 @@ components:
                     description: Payment channel used for the transaction
                 protocol:
                     type: string
-                    description: Protocol used for the transaction
+                    description: Crypto Protocol used for the transaction
+                network:
+                    type: string
+                    description: Crypto Network used for the transaction
                 type:
                     enum:
                         - TRANSACTION_TYPE_UNSPECIFIED
