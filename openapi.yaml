@@ -7578,10 +7578,11 @@ components:
                     type: integer
                     description: Estimated arrival time in minutes
                     format: int32
-                fee:
-                    type: integer
+                fixFee:
+                    type: string
                     description: Fee
-                    format: int32
+                rateFee:
+                    type: string
                 depositSchema:
                     type: object
                     description: JSON schema defining deposit form fields required by this channel

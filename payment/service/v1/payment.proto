@@ -101,11 +101,12 @@ message PaymentChannelInfo {
   // Estimated arrival time in minutes
   int32 eat = 19;
   // Fee
-  int32 fee = 20;
+  string fix_fee = 20;
+  string rate_fee = 21;
   // JSON schema defining deposit form fields required by this channel
-  google.protobuf.Struct deposit_schema = 21 [json_name="depositSchema"];
+  google.protobuf.Struct deposit_schema = 22 [json_name="depositSchema"];
   // JSON schema defining withdrawal form fields required by this channel
-  google.protobuf.Struct withdraw_schema = 22 [json_name="withdrawSchema"];
+  google.protobuf.Struct withdraw_schema = 23 [json_name="withdrawSchema"];
 }
 
 // Request to initiate a deposit

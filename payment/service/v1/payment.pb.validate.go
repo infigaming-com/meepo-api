@@ -719,7 +719,9 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for Eat
 
-	// no validation rules for Fee
+	// no validation rules for FixFee
+
+	// no validation rules for RateFee
 
 	if all {
 		switch v := interface{}(m.GetDepositSchema()).(type) {
