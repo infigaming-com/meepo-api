@@ -80,26 +80,28 @@ message PaymentChannelInfo {
   string payment_method_id = 8 [json_name="paymentMethodId"];
   // Currency supported by this channel
   string currency = 9;
+  // Crypto chian supported by this channel
+  string protocol = 10;
   // Country where this channel is available
-  string country = 10;
+  string country = 11;
   // Specific method used (might be more detailed than payment_method)
-  string method = 11;
+  string method = 12;
   // URL to the logo image for this payment channel
-  string logo = 12;
+  string logo = 13;
   // Minimum amount allowed for deposit transactions
-  string min_deposit_amount = 13 [json_name="minDepositAmount"];
+  string min_deposit_amount = 14 [json_name="minDepositAmount"];
   // Maximum amount allowed for deposit transactions
-  string max_deposit_amount = 14 [json_name="maxDepositAmount"];
+  string max_deposit_amount = 15 [json_name="maxDepositAmount"];
   // Minimum amount allowed for withdrawal transactions
-  string min_withdraw_amount = 15 [json_name="minWithdrawAmount"];
+  string min_withdraw_amount = 16 [json_name="minWithdrawAmount"];
   // Maximum amount allowed for withdrawal transactions
-  string max_withdraw_amount = 16 [json_name="maxWithdrawAmount"];
+  string max_withdraw_amount = 17 [json_name="maxWithdrawAmount"];
   // Estimated arrival time in minutes
-  int32 eat = 17;
+  int32 eat = 18;
   // JSON schema defining deposit form fields required by this channel
-  google.protobuf.Struct deposit_schema = 18 [json_name="depositSchema"];
+  google.protobuf.Struct deposit_schema = 19 [json_name="depositSchema"];
   // JSON schema defining withdrawal form fields required by this channel
-  google.protobuf.Struct withdraw_schema = 19 [json_name="withdrawSchema"];
+  google.protobuf.Struct withdraw_schema = 20 [json_name="withdrawSchema"];
 }
 
 // Request to initiate a deposit
@@ -151,10 +153,12 @@ message GetAddressRequest {
 // Contains details about the initiated deposit transaction
 message GetAddressResponse {
   message Data {
-    // Digital Currency like btc, eth...
+    // Crypto like btc, eth...
     string coin = 1;
+    // Crypto chain
+    string protocol = 2;
     // Digital Currency address
-    string address = 2;
+    string address = 3;
   }
   Data data = 1;
 }
