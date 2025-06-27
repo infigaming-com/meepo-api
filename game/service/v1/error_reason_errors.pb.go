@@ -82,3 +82,27 @@ func IsGameBannedOnUser(err error) bool {
 func ErrorGameBannedOnUser(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GAME_BANNED_ON_USER.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGameDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GAME_DISABLED.String() && e.Code == 500
+}
+
+func ErrorGameDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GAME_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGameNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GAME_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorGameNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GAME_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
