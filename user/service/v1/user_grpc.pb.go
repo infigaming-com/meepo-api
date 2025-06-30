@@ -60,6 +60,8 @@ const (
 	User_ListOperators_FullMethodName                = "/api.user.service.v1.User/ListOperators"
 	User_GetParentOperatorIds_FullMethodName         = "/api.user.service.v1.User/GetParentOperatorIds"
 	User_GetChildOperatorIds_FullMethodName          = "/api.user.service.v1.User/GetChildOperatorIds"
+	User_CheckEmailExists_FullMethodName             = "/api.user.service.v1.User/CheckEmailExists"
+	User_CreateBusiness_FullMethodName               = "/api.user.service.v1.User/CreateBusiness"
 )
 
 // UserClient is the client API for User service.
@@ -143,6 +145,10 @@ type UserClient interface {
 	GetParentOperatorIds(ctx context.Context, in *GetParentOperatorIdsRequest, opts ...grpc.CallOption) (*GetParentOperatorIdsResponse, error)
 	// GetChildOperatorIds returns direct child operator IDs for the given operator ID.
 	GetChildOperatorIds(ctx context.Context, in *GetChildOperatorIdsRequest, opts ...grpc.CallOption) (*GetChildOperatorIdsResponse, error)
+	// CheckEmailExists checks if the email with the hierarchy operator_id list exists in the user table.
+	CheckEmailExists(ctx context.Context, in *CheckEmailExistsRequest, opts ...grpc.CallOption) (*CheckEmailExistsResponse, error)
+	// CreateBusiness creates a new business record.
+	CreateBusiness(ctx context.Context, in *CreateBusinessRequest, opts ...grpc.CallOption) (*CreateBusinessResponse, error)
 }
 
 type userClient struct {
@@ -563,6 +569,26 @@ func (c *userClient) GetChildOperatorIds(ctx context.Context, in *GetChildOperat
 	return out, nil
 }
 
+func (c *userClient) CheckEmailExists(ctx context.Context, in *CheckEmailExistsRequest, opts ...grpc.CallOption) (*CheckEmailExistsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckEmailExistsResponse)
+	err := c.cc.Invoke(ctx, User_CheckEmailExists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) CreateBusiness(ctx context.Context, in *CreateBusinessRequest, opts ...grpc.CallOption) (*CreateBusinessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateBusinessResponse)
+	err := c.cc.Invoke(ctx, User_CreateBusiness_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -644,6 +670,10 @@ type UserServer interface {
 	GetParentOperatorIds(context.Context, *GetParentOperatorIdsRequest) (*GetParentOperatorIdsResponse, error)
 	// GetChildOperatorIds returns direct child operator IDs for the given operator ID.
 	GetChildOperatorIds(context.Context, *GetChildOperatorIdsRequest) (*GetChildOperatorIdsResponse, error)
+	// CheckEmailExists checks if the email with the hierarchy operator_id list exists in the user table.
+	CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error)
+	// CreateBusiness creates a new business record.
+	CreateBusiness(context.Context, *CreateBusinessRequest) (*CreateBusinessResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -776,6 +806,12 @@ func (UnimplementedUserServer) GetParentOperatorIds(context.Context, *GetParentO
 }
 func (UnimplementedUserServer) GetChildOperatorIds(context.Context, *GetChildOperatorIdsRequest) (*GetChildOperatorIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChildOperatorIds not implemented")
+}
+func (UnimplementedUserServer) CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckEmailExists not implemented")
+}
+func (UnimplementedUserServer) CreateBusiness(context.Context, *CreateBusinessRequest) (*CreateBusinessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBusiness not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1536,6 +1572,42 @@ func _User_GetChildOperatorIds_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_CheckEmailExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckEmailExistsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CheckEmailExists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CheckEmailExists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CheckEmailExists(ctx, req.(*CheckEmailExistsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_CreateBusiness_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBusinessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CreateBusiness(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CreateBusiness_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CreateBusiness(ctx, req.(*CreateBusinessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1706,6 +1778,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetChildOperatorIds",
 			Handler:    _User_GetChildOperatorIds_Handler,
+		},
+		{
+			MethodName: "CheckEmailExists",
+			Handler:    _User_CheckEmailExists_Handler,
+		},
+		{
+			MethodName: "CreateBusiness",
+			Handler:    _User_CreateBusiness_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

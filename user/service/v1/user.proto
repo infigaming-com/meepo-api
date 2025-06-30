@@ -184,6 +184,14 @@ service User {
 	// GetChildOperatorIds returns direct child operator IDs for the given operator ID.
 	rpc GetChildOperatorIds(GetChildOperatorIdsRequest) returns (GetChildOperatorIdsResponse) {
 	}
+
+	// CheckEmailExists checks if the email with the hierarchy operator_id list exists in the user table.
+	rpc CheckEmailExists(CheckEmailExistsRequest) returns (CheckEmailExistsResponse) {
+	}
+
+	// CreateBusiness creates a new business record.
+	rpc CreateBusiness(CreateBusinessRequest) returns (CreateBusinessResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -489,10 +497,8 @@ message AddOperatorResponse {
 
 message SendEmailVerificationCodeRequest {
 	string email = 1;
-	int64 operator_id = 2;
-	int64 company_operator_id = 3;
-	int64 retailer_operator_id = 4;
-	optional int64 user_id = 5;
+	OperatorContext operator_context = 2;
+	optional int64 user_id = 3;
 }
 
 message SendEmailVerificationCodeResponse {
@@ -586,15 +592,18 @@ message CreateUserRequest {
 	string password = 2;
 	string email = 3;
 	string mobile = 4;
-	int64 operator_id = 5;
+	OperatorContext operator_context = 5;
 	int64 role_id = 6;
 }
 
-message CreateUserResponse {}
+message CreateUserResponse {
+	int64 user_id = 1;
+}
 
 message VerifyEmailRequest {
 	string email = 1;
 	string verification_code = 2;
+	OperatorContext operator_context = 3;
 }
 
 message VerifyEmailResponse {}
@@ -720,8 +729,9 @@ enum OperatorType {
 
 message CreateOperatorRequest {
 	string operator_name = 1;
-	OperatorType operator_type = 2;
-	optional int64 parent_operator_id = 3;
+	string operator_type = 2;
+	repeated int64 parent_operator_ids = 3;
+	string subdomain = 4;
 }
 
 message CreateOperatorResponse {
@@ -836,4 +846,36 @@ message GetChildOperatorIdsRequest {
 message GetChildOperatorIdsResponse {
 	// List of child operator IDs.
 	repeated int64 child_operator_ids = 1;
+}
+
+message OperatorContext {
+	int64 operator_id = 1;
+	int64 company_operator_id = 2;
+	int64 retailer_operator_id = 3;
+	int64 system_operator_id = 4;
+}
+
+message CheckEmailExistsRequest {
+	string email = 1;
+	int64 operator_id = 2;
+	string operator_type = 3; // "operator", "company", "retailer", "system"
+}
+
+message CheckEmailExistsResponse {
+	bool exists = 1;
+}
+
+message CreateBusinessRequest {
+	string name = 1;
+	// business type: "retailer", "retailer", "operator"
+	string type = 2;
+	string contact_name = 3;
+	string contact_methods = 4;
+	string affiliate = 5;
+	int64 owner_user_id = 6;
+	OperatorContext operator_context = 7;
+}
+
+message CreateBusinessResponse {
+	int64 business_id = 1;
 }

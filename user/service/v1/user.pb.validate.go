@@ -4167,11 +4167,34 @@ func (m *SendEmailVerificationCodeRequest) validate(all bool) error {
 
 	// no validation rules for Email
 
-	// no validation rules for OperatorId
-
-	// no validation rules for CompanyOperatorId
-
-	// no validation rules for RetailerOperatorId
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendEmailVerificationCodeRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendEmailVerificationCodeRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendEmailVerificationCodeRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.UserId != nil {
 		// no validation rules for UserId
@@ -5028,7 +5051,34 @@ func (m *CreateUserRequest) validate(all bool) error {
 
 	// no validation rules for Mobile
 
-	// no validation rules for OperatorId
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateUserRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateUserRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateUserRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for RoleId
 
@@ -5133,6 +5183,8 @@ func (m *CreateUserResponse) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for UserId
 
 	if len(errors) > 0 {
 		return CreateUserResponseMultiError(errors)
@@ -5239,6 +5291,35 @@ func (m *VerifyEmailRequest) validate(all bool) error {
 	// no validation rules for Email
 
 	// no validation rules for VerificationCode
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, VerifyEmailRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, VerifyEmailRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return VerifyEmailRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return VerifyEmailRequestMultiError(errors)
@@ -6961,9 +7042,7 @@ func (m *CreateOperatorRequest) validate(all bool) error {
 
 	// no validation rules for OperatorType
 
-	if m.ParentOperatorId != nil {
-		// no validation rules for ParentOperatorId
-	}
+	// no validation rules for Subdomain
 
 	if len(errors) > 0 {
 		return CreateOperatorRequestMultiError(errors)
@@ -9464,6 +9543,573 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetChildOperatorIdsResponseValidationError{}
+
+// Validate checks the field values on OperatorContext with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *OperatorContext) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OperatorContext with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OperatorContextMultiError, or nil if none found.
+func (m *OperatorContext) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OperatorContext) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for SystemOperatorId
+
+	if len(errors) > 0 {
+		return OperatorContextMultiError(errors)
+	}
+
+	return nil
+}
+
+// OperatorContextMultiError is an error wrapping multiple validation errors
+// returned by OperatorContext.ValidateAll() if the designated constraints
+// aren't met.
+type OperatorContextMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OperatorContextMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OperatorContextMultiError) AllErrors() []error { return m }
+
+// OperatorContextValidationError is the validation error returned by
+// OperatorContext.Validate if the designated constraints aren't met.
+type OperatorContextValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OperatorContextValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OperatorContextValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OperatorContextValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OperatorContextValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OperatorContextValidationError) ErrorName() string { return "OperatorContextValidationError" }
+
+// Error satisfies the builtin error interface
+func (e OperatorContextValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOperatorContext.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OperatorContextValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OperatorContextValidationError{}
+
+// Validate checks the field values on CheckEmailExistsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CheckEmailExistsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CheckEmailExistsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CheckEmailExistsRequestMultiError, or nil if none found.
+func (m *CheckEmailExistsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CheckEmailExistsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Email
+
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorType
+
+	if len(errors) > 0 {
+		return CheckEmailExistsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CheckEmailExistsRequestMultiError is an error wrapping multiple validation
+// errors returned by CheckEmailExistsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CheckEmailExistsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CheckEmailExistsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CheckEmailExistsRequestMultiError) AllErrors() []error { return m }
+
+// CheckEmailExistsRequestValidationError is the validation error returned by
+// CheckEmailExistsRequest.Validate if the designated constraints aren't met.
+type CheckEmailExistsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CheckEmailExistsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CheckEmailExistsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CheckEmailExistsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CheckEmailExistsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CheckEmailExistsRequestValidationError) ErrorName() string {
+	return "CheckEmailExistsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CheckEmailExistsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCheckEmailExistsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CheckEmailExistsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CheckEmailExistsRequestValidationError{}
+
+// Validate checks the field values on CheckEmailExistsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CheckEmailExistsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CheckEmailExistsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CheckEmailExistsResponseMultiError, or nil if none found.
+func (m *CheckEmailExistsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CheckEmailExistsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Exists
+
+	if len(errors) > 0 {
+		return CheckEmailExistsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CheckEmailExistsResponseMultiError is an error wrapping multiple validation
+// errors returned by CheckEmailExistsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CheckEmailExistsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CheckEmailExistsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CheckEmailExistsResponseMultiError) AllErrors() []error { return m }
+
+// CheckEmailExistsResponseValidationError is the validation error returned by
+// CheckEmailExistsResponse.Validate if the designated constraints aren't met.
+type CheckEmailExistsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CheckEmailExistsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CheckEmailExistsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CheckEmailExistsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CheckEmailExistsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CheckEmailExistsResponseValidationError) ErrorName() string {
+	return "CheckEmailExistsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CheckEmailExistsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCheckEmailExistsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CheckEmailExistsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CheckEmailExistsResponseValidationError{}
+
+// Validate checks the field values on CreateBusinessRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateBusinessRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateBusinessRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateBusinessRequestMultiError, or nil if none found.
+func (m *CreateBusinessRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateBusinessRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for Type
+
+	// no validation rules for ContactName
+
+	// no validation rules for ContactMethods
+
+	// no validation rules for Affiliate
+
+	// no validation rules for OwnerUserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateBusinessRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateBusinessRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateBusinessRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreateBusinessRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateBusinessRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateBusinessRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateBusinessRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateBusinessRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateBusinessRequestMultiError) AllErrors() []error { return m }
+
+// CreateBusinessRequestValidationError is the validation error returned by
+// CreateBusinessRequest.Validate if the designated constraints aren't met.
+type CreateBusinessRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateBusinessRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateBusinessRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateBusinessRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateBusinessRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateBusinessRequestValidationError) ErrorName() string {
+	return "CreateBusinessRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateBusinessRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateBusinessRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateBusinessRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateBusinessRequestValidationError{}
+
+// Validate checks the field values on CreateBusinessResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateBusinessResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateBusinessResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateBusinessResponseMultiError, or nil if none found.
+func (m *CreateBusinessResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateBusinessResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for BusinessId
+
+	if len(errors) > 0 {
+		return CreateBusinessResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateBusinessResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateBusinessResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreateBusinessResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateBusinessResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateBusinessResponseMultiError) AllErrors() []error { return m }
+
+// CreateBusinessResponseValidationError is the validation error returned by
+// CreateBusinessResponse.Validate if the designated constraints aren't met.
+type CreateBusinessResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateBusinessResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateBusinessResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateBusinessResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateBusinessResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateBusinessResponseValidationError) ErrorName() string {
+	return "CreateBusinessResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateBusinessResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateBusinessResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateBusinessResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateBusinessResponseValidationError{}
 
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are

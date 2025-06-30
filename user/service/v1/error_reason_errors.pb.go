@@ -684,3 +684,75 @@ func IsGetOperatorsByIdsFailed(err error) bool {
 func ErrorGetOperatorsByIdsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_OPERATORS_BY_IDS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorHierarchyTooDeep(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_HIERARCHY_TOO_DEEP.String() && e.Code == 500
+}
+
+func ErrorOperatorHierarchyTooDeep(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_HIERARCHY_TOO_DEEP.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetParentOperatorIdsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_PARENT_OPERATOR_IDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetParentOperatorIdsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_PARENT_OPERATOR_IDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateOriginToOperatorMappingFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_ORIGIN_TO_OPERATOR_MAPPING_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateOriginToOperatorMappingFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_ORIGIN_TO_OPERATOR_MAPPING_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOriginAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ORIGIN_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorOriginAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ORIGIN_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGenerateBusinessIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_BUSINESS_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGenerateBusinessIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_BUSINESS_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateBusinessFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_BUSINESS_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateBusinessFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_BUSINESS_FAILED.String(), fmt.Sprintf(format, args...))
+}

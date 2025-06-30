@@ -384,6 +384,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListAuditLogsResponse'
+    /v1/backoffice/company/register:
+        post:
+            tags:
+                - BackofficeCompany
+            description: Create a company's owner account and related data
+            operationId: BackofficeCompany_CreateCompany
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateCompanyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CreateCompanyResponse'
     /v1/backoffice/dashboard/get:
         post:
             tags:
@@ -2430,6 +2449,34 @@ components:
         api.backoffice.service.v1.CancelTicketResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.CreateCompanyRequest:
+            type: object
+            properties:
+                companyName:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                subdomain:
+                    type: string
+                password:
+                    type: string
+                contact:
+                    type: string
+                contactMethods:
+                    type: string
+                affiliate:
+                    type: string
+                verificationCode:
+                    type: string
+        api.backoffice.service.v1.CreateCompanyResponse:
+            type: object
+            properties:
+                token:
+                    type: string
+                subdomain:
+                    type: string
         api.backoffice.service.v1.CreateRoleRequest:
             type: object
             properties:
@@ -7063,6 +7110,17 @@ components:
                     type: string
                     description: The OAuth token received from the provider.
             description: OAuthRequest contains the information needed for OAuth authentication.
+        api.user.service.v1.OperatorContext:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
         api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
@@ -7107,12 +7165,8 @@ components:
             properties:
                 email:
                     type: string
-                operatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorContext'
                 userId:
                     type: string
         api.user.service.v1.SendEmailVerificationCodeResponse:
@@ -7857,6 +7911,7 @@ components:
 tags:
     - name: BackofficeAccount
     - name: BackofficeAudit
+    - name: BackofficeCompany
     - name: BackofficeDashboard
     - name: BackofficeGame
     - name: BackofficeOperator
