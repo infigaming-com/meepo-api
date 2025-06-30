@@ -9864,6 +9864,216 @@ var _ interface {
 	ErrorName() string
 } = CheckEmailExistsResponseValidationError{}
 
+// Validate checks the field values on CheckSubdomainExistsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CheckSubdomainExistsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CheckSubdomainExistsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CheckSubdomainExistsRequestMultiError, or nil if none found.
+func (m *CheckSubdomainExistsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CheckSubdomainExistsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Subdomain
+
+	if len(errors) > 0 {
+		return CheckSubdomainExistsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CheckSubdomainExistsRequestMultiError is an error wrapping multiple
+// validation errors returned by CheckSubdomainExistsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type CheckSubdomainExistsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CheckSubdomainExistsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CheckSubdomainExistsRequestMultiError) AllErrors() []error { return m }
+
+// CheckSubdomainExistsRequestValidationError is the validation error returned
+// by CheckSubdomainExistsRequest.Validate if the designated constraints
+// aren't met.
+type CheckSubdomainExistsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CheckSubdomainExistsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CheckSubdomainExistsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CheckSubdomainExistsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CheckSubdomainExistsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CheckSubdomainExistsRequestValidationError) ErrorName() string {
+	return "CheckSubdomainExistsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CheckSubdomainExistsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCheckSubdomainExistsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CheckSubdomainExistsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CheckSubdomainExistsRequestValidationError{}
+
+// Validate checks the field values on CheckSubdomainExistsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CheckSubdomainExistsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CheckSubdomainExistsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CheckSubdomainExistsResponseMultiError, or nil if none found.
+func (m *CheckSubdomainExistsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CheckSubdomainExistsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Exists
+
+	if len(errors) > 0 {
+		return CheckSubdomainExistsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CheckSubdomainExistsResponseMultiError is an error wrapping multiple
+// validation errors returned by CheckSubdomainExistsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type CheckSubdomainExistsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CheckSubdomainExistsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CheckSubdomainExistsResponseMultiError) AllErrors() []error { return m }
+
+// CheckSubdomainExistsResponseValidationError is the validation error returned
+// by CheckSubdomainExistsResponse.Validate if the designated constraints
+// aren't met.
+type CheckSubdomainExistsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CheckSubdomainExistsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CheckSubdomainExistsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CheckSubdomainExistsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CheckSubdomainExistsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CheckSubdomainExistsResponseValidationError) ErrorName() string {
+	return "CheckSubdomainExistsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CheckSubdomainExistsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCheckSubdomainExistsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CheckSubdomainExistsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CheckSubdomainExistsResponseValidationError{}
+
 // Validate checks the field values on CreateBusinessRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

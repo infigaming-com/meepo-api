@@ -33,5 +33,5 @@ message CreateCompanyRequest {
 
 message CreateCompanyResponse {
 	string token = 1;
-	string subdomain = 2;
+	string site_url = 2;
 }

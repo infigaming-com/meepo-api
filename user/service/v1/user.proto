@@ -189,6 +189,10 @@ service User {
 	rpc CheckEmailExists(CheckEmailExistsRequest) returns (CheckEmailExistsResponse) {
 	}
 
+	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
+	rpc CheckSubdomainExists(CheckSubdomainExistsRequest) returns (CheckSubdomainExistsResponse) {
+	}
+
 	// CreateBusiness creates a new business record.
 	rpc CreateBusiness(CreateBusinessRequest) returns (CreateBusinessResponse) {
 	}
@@ -862,6 +866,14 @@ message CheckEmailExistsRequest {
 }
 
 message CheckEmailExistsResponse {
+	bool exists = 1;
+}
+
+message CheckSubdomainExistsRequest {
+	string subdomain = 1;
+}
+
+message CheckSubdomainExistsResponse {
 	bool exists = 1;
 }
 

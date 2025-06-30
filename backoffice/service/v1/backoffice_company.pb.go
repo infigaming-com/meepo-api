@@ -134,7 +134,7 @@ func (x *CreateCompanyRequest) GetVerificationCode() string {
 type CreateCompanyResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
-	Subdomain     string                 `protobuf:"bytes,2,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	SiteUrl       string                 `protobuf:"bytes,2,opt,name=site_url,json=siteUrl,proto3" json:"site_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -176,9 +176,9 @@ func (x *CreateCompanyResponse) GetToken() string {
 	return ""
 }
 
-func (x *CreateCompanyResponse) GetSubdomain() string {
+func (x *CreateCompanyResponse) GetSiteUrl() string {
 	if x != nil {
-		return x.Subdomain
+		return x.SiteUrl
 	}
 	return ""
 }
@@ -197,10 +197,10 @@ const file_backoffice_service_v1_backoffice_company_proto_rawDesc = "" +
 	"\acontact\x18\x06 \x01(\tR\acontact\x12'\n" +
 	"\x0fcontact_methods\x18\a \x01(\tR\x0econtactMethods\x12\x1c\n" +
 	"\taffiliate\x18\b \x01(\tR\taffiliate\x12+\n" +
-	"\x11verification_code\x18\t \x01(\tR\x10verificationCode\"K\n" +
+	"\x11verification_code\x18\t \x01(\tR\x10verificationCode\"H\n" +
 	"\x15CreateCompanyResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\x12\x1c\n" +
-	"\tsubdomain\x18\x02 \x01(\tR\tsubdomain2\xb4\x01\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x12\x19\n" +
+	"\bsite_url\x18\x02 \x01(\tR\asiteUrl2\xb4\x01\n" +
 	"\x11BackofficeCompany\x12\x9e\x01\n" +
 	"\rCreateCompany\x12/.api.backoffice.service.v1.CreateCompanyRequest\x1a0.api.backoffice.service.v1.CreateCompanyResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/company/registerB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"

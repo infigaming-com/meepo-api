@@ -61,6 +61,7 @@ const (
 	User_GetParentOperatorIds_FullMethodName         = "/api.user.service.v1.User/GetParentOperatorIds"
 	User_GetChildOperatorIds_FullMethodName          = "/api.user.service.v1.User/GetChildOperatorIds"
 	User_CheckEmailExists_FullMethodName             = "/api.user.service.v1.User/CheckEmailExists"
+	User_CheckSubdomainExists_FullMethodName         = "/api.user.service.v1.User/CheckSubdomainExists"
 	User_CreateBusiness_FullMethodName               = "/api.user.service.v1.User/CreateBusiness"
 )
 
@@ -147,6 +148,8 @@ type UserClient interface {
 	GetChildOperatorIds(ctx context.Context, in *GetChildOperatorIdsRequest, opts ...grpc.CallOption) (*GetChildOperatorIdsResponse, error)
 	// CheckEmailExists checks if the email with the hierarchy operator_id list exists in the user table.
 	CheckEmailExists(ctx context.Context, in *CheckEmailExistsRequest, opts ...grpc.CallOption) (*CheckEmailExistsResponse, error)
+	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
+	CheckSubdomainExists(ctx context.Context, in *CheckSubdomainExistsRequest, opts ...grpc.CallOption) (*CheckSubdomainExistsResponse, error)
 	// CreateBusiness creates a new business record.
 	CreateBusiness(ctx context.Context, in *CreateBusinessRequest, opts ...grpc.CallOption) (*CreateBusinessResponse, error)
 }
@@ -579,6 +582,16 @@ func (c *userClient) CheckEmailExists(ctx context.Context, in *CheckEmailExistsR
 	return out, nil
 }
 
+func (c *userClient) CheckSubdomainExists(ctx context.Context, in *CheckSubdomainExistsRequest, opts ...grpc.CallOption) (*CheckSubdomainExistsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckSubdomainExistsResponse)
+	err := c.cc.Invoke(ctx, User_CheckSubdomainExists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) CreateBusiness(ctx context.Context, in *CreateBusinessRequest, opts ...grpc.CallOption) (*CreateBusinessResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateBusinessResponse)
@@ -672,6 +685,8 @@ type UserServer interface {
 	GetChildOperatorIds(context.Context, *GetChildOperatorIdsRequest) (*GetChildOperatorIdsResponse, error)
 	// CheckEmailExists checks if the email with the hierarchy operator_id list exists in the user table.
 	CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error)
+	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
+	CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error)
 	// CreateBusiness creates a new business record.
 	CreateBusiness(context.Context, *CreateBusinessRequest) (*CreateBusinessResponse, error)
 	mustEmbedUnimplementedUserServer()
@@ -809,6 +824,9 @@ func (UnimplementedUserServer) GetChildOperatorIds(context.Context, *GetChildOpe
 }
 func (UnimplementedUserServer) CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckEmailExists not implemented")
+}
+func (UnimplementedUserServer) CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckSubdomainExists not implemented")
 }
 func (UnimplementedUserServer) CreateBusiness(context.Context, *CreateBusinessRequest) (*CreateBusinessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateBusiness not implemented")
@@ -1590,6 +1608,24 @@ func _User_CheckEmailExists_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_CheckSubdomainExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckSubdomainExistsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CheckSubdomainExists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CheckSubdomainExists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CheckSubdomainExists(ctx, req.(*CheckSubdomainExistsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_CreateBusiness_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateBusinessRequest)
 	if err := dec(in); err != nil {
@@ -1782,6 +1818,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckEmailExists",
 			Handler:    _User_CheckEmailExists_Handler,
+		},
+		{
+			MethodName: "CheckSubdomainExists",
+			Handler:    _User_CheckSubdomainExists_Handler,
 		},
 		{
 			MethodName: "CreateBusiness",

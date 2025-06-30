@@ -38,6 +38,8 @@ const (
 	BackofficeAccount_ListRoles_FullMethodName                    = "/api.backoffice.service.v1.BackofficeAccount/ListRoles"
 	BackofficeAccount_UpdateRole_FullMethodName                   = "/api.backoffice.service.v1.BackofficeAccount/UpdateRole"
 	BackofficeAccount_DeleteRole_FullMethodName                   = "/api.backoffice.service.v1.BackofficeAccount/DeleteRole"
+	BackofficeAccount_CheckEmailExists_FullMethodName             = "/api.backoffice.service.v1.BackofficeAccount/CheckEmailExists"
+	BackofficeAccount_CheckSubdomainExists_FullMethodName         = "/api.backoffice.service.v1.BackofficeAccount/CheckSubdomainExists"
 )
 
 // BackofficeAccountClient is the client API for BackofficeAccount service.
@@ -63,6 +65,10 @@ type BackofficeAccountClient interface {
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
 	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*UpdateRoleResponse, error)
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error)
+	// CheckEmailExists checks if the email exists in the user table.
+	CheckEmailExists(ctx context.Context, in *CheckEmailExistsRequest, opts ...grpc.CallOption) (*CheckEmailExistsResponse, error)
+	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
+	CheckSubdomainExists(ctx context.Context, in *CheckSubdomainExistsRequest, opts ...grpc.CallOption) (*CheckSubdomainExistsResponse, error)
 }
 
 type backofficeAccountClient struct {
@@ -263,6 +269,26 @@ func (c *backofficeAccountClient) DeleteRole(ctx context.Context, in *DeleteRole
 	return out, nil
 }
 
+func (c *backofficeAccountClient) CheckEmailExists(ctx context.Context, in *CheckEmailExistsRequest, opts ...grpc.CallOption) (*CheckEmailExistsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckEmailExistsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_CheckEmailExists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAccountClient) CheckSubdomainExists(ctx context.Context, in *CheckSubdomainExistsRequest, opts ...grpc.CallOption) (*CheckSubdomainExistsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckSubdomainExistsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_CheckSubdomainExists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeAccountServer is the server API for BackofficeAccount service.
 // All implementations must embed UnimplementedBackofficeAccountServer
 // for forward compatibility.
@@ -286,6 +312,10 @@ type BackofficeAccountServer interface {
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
 	UpdateRole(context.Context, *UpdateRoleRequest) (*UpdateRoleResponse, error)
 	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
+	// CheckEmailExists checks if the email exists in the user table.
+	CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error)
+	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
+	CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error)
 	mustEmbedUnimplementedBackofficeAccountServer()
 }
 
@@ -352,6 +382,12 @@ func (UnimplementedBackofficeAccountServer) UpdateRole(context.Context, *UpdateR
 }
 func (UnimplementedBackofficeAccountServer) DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteRole not implemented")
+}
+func (UnimplementedBackofficeAccountServer) CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckEmailExists not implemented")
+}
+func (UnimplementedBackofficeAccountServer) CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckSubdomainExists not implemented")
 }
 func (UnimplementedBackofficeAccountServer) mustEmbedUnimplementedBackofficeAccountServer() {}
 func (UnimplementedBackofficeAccountServer) testEmbeddedByValue()                           {}
@@ -716,6 +752,42 @@ func _BackofficeAccount_DeleteRole_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAccount_CheckEmailExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckEmailExistsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).CheckEmailExists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_CheckEmailExists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).CheckEmailExists(ctx, req.(*CheckEmailExistsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAccount_CheckSubdomainExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckSubdomainExistsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).CheckSubdomainExists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_CheckSubdomainExists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).CheckSubdomainExists(ctx, req.(*CheckSubdomainExistsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeAccount_ServiceDesc is the grpc.ServiceDesc for BackofficeAccount service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -798,6 +870,14 @@ var BackofficeAccount_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteRole",
 			Handler:    _BackofficeAccount_DeleteRole_Handler,
+		},
+		{
+			MethodName: "CheckEmailExists",
+			Handler:    _BackofficeAccount_CheckEmailExists_Handler,
+		},
+		{
+			MethodName: "CheckSubdomainExists",
+			Handler:    _BackofficeAccount_CheckSubdomainExists_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
