@@ -1794,6 +1794,186 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
+    /v1/operator/adjustment-configs/delete:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_DeleteAdjustmentConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.DeleteAdjustmentConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.DeleteAdjustmentConfigResponse'
+    /v1/operator/adjustment-configs/list:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_ListAdjustmentConfigs
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.ListAdjustmentConfigsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.ListAdjustmentConfigsResponse'
+    /v1/operator/adjustment-configs/update:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_UpdateAdjustmentConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.UpdateAdjustmentConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.UpdateAdjustmentConfigResponse'
+    /v1/operator/adjustment/add:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_AddAdjustment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.AddAdjustmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.AddAdjustmentResponse'
+    /v1/operator/adjustments/list:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_ListAdjustments
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.ListAdjustmentsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.ListAdjustmentsResponse'
+    /v1/operator/invoice/detail:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_GetInvoiceDetail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.GetInvoiceDetailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.GetInvoiceDetailResponse'
+    /v1/operator/invovies/list:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_ListInvovies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.ListInvoviesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.ListInvoviesResponse'
+    /v1/operator/monthly-revenue-shares/list:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_ListMonthlyRevenueShare
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.ListMonthlyRevenueShareRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.ListMonthlyRevenueShareResponse'
+    /v1/operator/revenue-shares/list:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_ListOperatorRevenueShare
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.ListOperatorRevenueShareRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.ListOperatorRevenueShareResponse'
+    /v1/operator/third-party-fees/list:
+        post:
+            tags:
+                - Operator
+            operationId: Operator_ListThirdPartyFees
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.operator.service.v1.ListThirdPartyFeesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.operator.service.v1.ListThirdPartyFeesResponse'
     /v1/payment/address/get:
         post:
             tags:
@@ -6965,6 +7145,535 @@ components:
                 lobbyUrl:
                     type: string
                     description: URL to redirect user to lobby.
+        api.operator.service.v1.AddAdjustmentRequest:
+            type: object
+            properties:
+                item:
+                    type: string
+                    description: Basic information
+                retailerId:
+                    type: string
+                companyId:
+                    type: string
+                operatorId:
+                    type: string
+                currency:
+                    type: string
+                    description: Financial information
+                amount:
+                    type: string
+                description:
+                    type: string
+        api.operator.service.v1.AddAdjustmentResponse:
+            type: object
+            properties:
+                adjustmentId:
+                    type: string
+                    description: Created adjustment ID
+        api.operator.service.v1.DeleteAdjustmentConfigRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.operator.service.v1.DeleteAdjustmentConfigResponse:
+            type: object
+            properties: {}
+        api.operator.service.v1.GetInvoiceDetailRequest:
+            type: object
+            properties:
+                invoiceId:
+                    type: string
+        api.operator.service.v1.GetInvoiceDetailResponse:
+            type: object
+            properties:
+                invoice:
+                    $ref: '#/components/schemas/api.operator.service.v1.GetInvoiceDetailResponse_InvoiceDetail'
+        api.operator.service.v1.GetInvoiceDetailResponse_InvoiceDetail:
+            type: object
+            properties:
+                invoiceId:
+                    type: string
+                    description: Basic invoice information
+                paymentStatus:
+                    enum:
+                        - PAYMENT_STATUS_PAID
+                        - PAYMENT_STATUS_NOT_PAID
+                    type: string
+                    format: enum
+                invoiceDate:
+                    type: string
+                    description: Dates
+                dueDate:
+                    type: string
+                month:
+                    type: string
+                gameProviderRevenueShare:
+                    type: string
+                    description: Invoice details
+                thirdPartyCost:
+                    type: string
+                featureSubscription:
+                    type: string
+                revenueShareDisburse:
+                    type: string
+                revenueShareCollet:
+                    type: string
+                adjustments:
+                    type: string
+                totalAmount:
+                    type: string
+                    description: Financial summary
+                amountPaid:
+                    type: string
+                dueAmount:
+                    type: string
+                retailerId:
+                    type: string
+                    description: Retailer information
+                retailerName:
+                    type: string
+                companyId:
+                    type: string
+                    description: Company information
+                companyName:
+                    type: string
+                operatorId:
+                    type: string
+                    description: Operator information
+                operatorName:
+                    type: string
+        api.operator.service.v1.ListAdjustmentConfigsRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Pagination
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.operator.service.v1.ListAdjustmentConfigsResponse:
+            type: object
+            properties:
+                configs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.operator.service.v1.ListAdjustmentConfigsResponse_AdjustmentConfig'
+                totalCount:
+                    type: integer
+                    description: Pagination information
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.operator.service.v1.ListAdjustmentConfigsResponse_AdjustmentConfig:
+            type: object
+            properties:
+                id:
+                    type: string
+                item:
+                    type: string
+                description:
+                    type: string
+        api.operator.service.v1.ListAdjustmentsRequest:
+            type: object
+            properties:
+                invoiceId:
+                    type: string
+                    description: Filter by invoice ID
+                retailerId:
+                    type: string
+                    description: Filter by retailer
+                companyId:
+                    type: string
+                    description: Filter by company
+                operatorId:
+                    type: string
+                    description: Filter by operator
+                page:
+                    type: integer
+                    description: Pagination
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.operator.service.v1.ListAdjustmentsResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.operator.service.v1.ListAdjustmentsResponse_AdjustmentItem'
+                subtotal:
+                    type: string
+                    description: Summary
+                totalCount:
+                    type: integer
+                    description: Pagination information
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.operator.service.v1.ListAdjustmentsResponse_AdjustmentItem:
+            type: object
+            properties:
+                item:
+                    type: string
+                    description: Basic information
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                currency:
+                    type: string
+                amount:
+                    type: string
+                    description: Amount information
+                description:
+                    type: string
+        api.operator.service.v1.ListInvoviesRequest:
+            type: object
+            properties:
+                retailerId:
+                    type: string
+                    description: Filter by retailer
+                companyId:
+                    type: string
+                    description: Filter by company
+                month:
+                    type: string
+                    description: 'Filter by month (format: YYYY-MM)'
+                invoiceId:
+                    type: string
+                    description: Search by invoice id
+                paymentStatus:
+                    enum:
+                        - PAYMENT_STATUS_PAID
+                        - PAYMENT_STATUS_NOT_PAID
+                    type: string
+                    format: enum
+                page:
+                    type: integer
+                    description: Pagination
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.operator.service.v1.ListInvoviesResponse:
+            type: object
+            properties:
+                invoices:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.operator.service.v1.ListInvoviesResponse_Invoice'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                totalPaidCount:
+                    type: integer
+                    format: int32
+                totalNotPaidCount:
+                    type: integer
+                    format: int32
+        api.operator.service.v1.ListInvoviesResponse_Invoice:
+            type: object
+            properties:
+                invoiceId:
+                    type: string
+                    description: Invoice ID
+                operatorId:
+                    type: string
+                    description: Operator information
+                operatorName:
+                    type: string
+                retailerId:
+                    type: string
+                    description: Retailer information
+                retailerName:
+                    type: string
+                companyId:
+                    type: string
+                    description: Company information
+                companyName:
+                    type: string
+                month:
+                    type: string
+                    description: Invoice details
+                retailer:
+                    type: string
+                company:
+                    type: string
+                dueAmount:
+                    type: string
+                    description: Financial information
+                paymentStatus:
+                    enum:
+                        - PAYMENT_STATUS_PAID
+                        - PAYMENT_STATUS_NOT_PAID
+                    type: string
+                    format: enum
+                invoiceDate:
+                    type: string
+                    description: Dates
+                dueDate:
+                    type: string
+        api.operator.service.v1.ListMonthlyRevenueShareRequest:
+            type: object
+            properties:
+                invoiceId:
+                    type: string
+                    description: Filter by invoice ID
+                retailerId:
+                    type: string
+                    description: Filter by retailer
+                companyId:
+                    type: string
+                    description: Filter by company
+                operatorId:
+                    type: string
+                    description: Filter by operator
+                page:
+                    type: integer
+                    description: Pagination
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.operator.service.v1.ListMonthlyRevenueShareResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.operator.service.v1.ListMonthlyRevenueShareResponse_RevenueShareItem'
+                summary:
+                    $ref: '#/components/schemas/api.operator.service.v1.ListMonthlyRevenueShareResponse_Summary'
+                totalCount:
+                    type: integer
+                    description: Pagination information
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.operator.service.v1.ListMonthlyRevenueShareResponse_RevenueShareItem:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                    description: Basic information
+                operatorName:
+                    type: string
+                operatorMode:
+                    type: string
+                deposits:
+                    type: string
+                    description: Financial data
+                withdrawals:
+                    type: string
+                balance:
+                    type: string
+                ngr:
+                    type: string
+                ggr:
+                    type: string
+                gameProviderRs:
+                    type: string
+                    description: Revenue breakdown
+                thirdPartyFees:
+                    type: string
+                adjustments:
+                    type: string
+                netProfit:
+                    type: string
+                rsRate:
+                    type: string
+                    description: Revenue share details
+                revenueShareDisburse:
+                    type: string
+                revenueShareCollect:
+                    type: string
+        api.operator.service.v1.ListMonthlyRevenueShareResponse_Summary:
+            type: object
+            properties:
+                subtotal:
+                    type: string
+                revenueShareDisburseTotal:
+                    type: string
+                revenueShareCollectTotal:
+                    type: string
+            description: Summary totals
+        api.operator.service.v1.ListOperatorRevenueShareRequest:
+            type: object
+            properties:
+                invoiceId:
+                    type: string
+                    description: Filter by invoice ID
+                retailerId:
+                    type: string
+                    description: Filter by retailer
+                companyId:
+                    type: string
+                    description: Filter by company
+                operatorId:
+                    type: string
+                    description: Filter by operator
+                page:
+                    type: integer
+                    description: Pagination
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.operator.service.v1.ListOperatorRevenueShareResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.operator.service.v1.ListOperatorRevenueShareResponse_RevenueShareItem'
+                subtotal:
+                    type: string
+                    description: Summary
+                totalCount:
+                    type: integer
+                    description: Pagination information
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                totalPages:
+                    type: integer
+                    format: int32
+        api.operator.service.v1.ListOperatorRevenueShareResponse_RevenueShareItem:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                    description: Basic information
+                operatorName:
+                    type: string
+                gameProviderId:
+                    type: string
+                gameProviderName:
+                    type: string
+                feeGroup:
+                    type: string
+                currency:
+                    type: string
+                totalBet:
+                    type: string
+                    description: Gaming statistics
+                totalPayout:
+                    type: string
+                betsCount:
+                    type: integer
+                    format: int32
+                ngr:
+                    type: string
+                ggr:
+                    type: string
+                rate:
+                    type: string
+                    description: Revenue share calculation
+                amount:
+                    type: string
+                fxRate:
+                    type: string
+                amountUsd:
+                    type: string
+        api.operator.service.v1.ListThirdPartyFeesRequest:
+            type: object
+            properties:
+                invoiceId:
+                    type: string
+                    description: Filter by invoice ID
+                retailerId:
+                    type: string
+                    description: Filter by retailer
+                companyId:
+                    type: string
+                    description: Filter by company
+                operatorId:
+                    type: string
+                    description: Filter by operator
+                page:
+                    type: integer
+                    description: Pagination
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.operator.service.v1.ListThirdPartyFeesResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.operator.service.v1.ListThirdPartyFeesResponse_ThirdPartyFeeItem'
+                subtotal:
+                    type: string
+                    description: Summary
+                totalCount:
+                    type: integer
+                    description: Pagination information
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.operator.service.v1.ListThirdPartyFeesResponse_ThirdPartyFeeItem:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                    description: Basic information
+                operatorName:
+                    type: string
+                service:
+                    type: string
+                quantity:
+                    type: string
+                    description: Fee details
+                amount:
+                    type: string
+                description:
+                    type: string
+        api.operator.service.v1.UpdateAdjustmentConfigRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                item:
+                    type: string
+                description:
+                    type: string
+                enabled:
+                    type: boolean
+        api.operator.service.v1.UpdateAdjustmentConfigResponse:
+            type: object
+            properties:
+                id:
+                    type: string
         api.review.service.v1.CreateWithdrawRequest:
             type: object
             properties:
@@ -7870,6 +8579,8 @@ tags:
     - name: BackofficeUser
     - name: BackofficeWallet
     - name: Game
+    - name: Operator
+      description: User service provides authentication and user management functionality.
     - name: Payment
       description: |-
         Payment Service

@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package api.operator.service.v1;
 
+import "google/api/annotations.proto";
+
 option go_package = "github.com/infigaming-com/meepo-api/operator/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.operator.service.v1";
@@ -45,6 +47,76 @@ service Operator {
 
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
 	rpc ListOperators(ListOperatorsRequest) returns (ListOperatorsResponse) {
+	}
+
+	rpc ListInvovies(ListInvoviesRequest) returns (ListInvoviesResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/invovies/list"
+			body: "*"
+		};
+	}
+
+	rpc GetInvoiceDetail(GetInvoiceDetailRequest) returns (GetInvoiceDetailResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/invoice/detail"
+			body: "*"
+		};
+	}
+
+	rpc ListOperatorRevenueShare(ListOperatorRevenueShareRequest) returns (ListOperatorRevenueShareResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/revenue-shares/list"
+			body: "*"
+		};
+	}
+
+	rpc ListThirdPartyFees(ListThirdPartyFeesRequest) returns (ListThirdPartyFeesResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/third-party-fees/list"
+			body: "*"
+		};
+	}
+
+	rpc ListAdjustments(ListAdjustmentsRequest) returns (ListAdjustmentsResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/adjustments/list"
+			body: "*"
+		};
+	}
+
+	rpc ListMonthlyRevenueShare(ListMonthlyRevenueShareRequest) returns (ListMonthlyRevenueShareResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/monthly-revenue-shares/list"
+			body: "*"
+		};
+	}
+
+	rpc AddAdjustment(AddAdjustmentRequest) returns (AddAdjustmentResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/adjustment/add"
+			body: "*"
+		};
+	}
+
+	rpc ListAdjustmentConfigs(ListAdjustmentConfigsRequest) returns (ListAdjustmentConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/adjustment-configs/list"
+			body: "*"
+		};
+	}
+
+	rpc UpdateAdjustmentConfig(UpdateAdjustmentConfigRequest) returns (UpdateAdjustmentConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/adjustment-configs/update"
+			body: "*"
+		};
+	}
+
+	rpc DeleteAdjustmentConfig(DeleteAdjustmentConfigRequest) returns (DeleteAdjustmentConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/operator/adjustment-configs/delete"
+			body: "*"
+		};
 	}
 }
 
@@ -170,3 +242,380 @@ message ListOperatorsResponse {
 	}
 	repeated Operator operators = 1;
 }
+
+message ListInvoviesRequest {
+	// Filter by retailer
+	optional string retailer_id = 1;
+	
+	// Filter by company
+	optional string company_id = 2;
+	
+	// Filter by month (format: YYYY-MM)
+	optional string month = 3;
+	
+	// Search by invoice id
+	optional int64 invoice_id = 4;
+	
+	// Filter by payment status
+	enum PaymentStatus {
+		PAYMENT_STATUS_PAID = 0;
+		PAYMENT_STATUS_NOT_PAID = 1;
+	}
+	optional PaymentStatus payment_status = 5;
+	
+	// Pagination
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+}
+
+message ListInvoviesResponse {
+	message Invoice {
+		// Invoice ID
+		int64 invoice_id = 1;
+		
+		// Operator information
+		int64 operator_id = 2;
+		string operator_name = 3;
+
+		// Retailer information
+		string retailer_id = 4;
+		string retailer_name = 5;
+
+		// Company information
+		string company_id = 6;
+		string company_name = 7;
+		
+		// Invoice details
+		string month = 8;
+		string retailer = 9;
+		string company = 10;
+		
+		// Financial information
+		string due_amount = 11;
+		
+		// Payment status
+		enum PaymentStatus {
+			PAYMENT_STATUS_PAID = 0;
+			PAYMENT_STATUS_NOT_PAID = 1;
+		}
+		PaymentStatus payment_status = 12;
+		
+		// Dates
+		string invoice_date = 13; // Format: YYYY-MM-DD
+		string due_date = 14; // Format: YYYY-MM-DD
+	}
+	
+	repeated Invoice invoices = 1;
+	
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+	int32 total_paid_count = 5;
+	int32 total_not_paid_count = 6;
+}
+
+message GetInvoiceDetailRequest {
+	int64 invoice_id = 1;
+}
+
+message GetInvoiceDetailResponse {
+	message InvoiceDetail {
+		// Basic invoice information
+		int64 invoice_id = 1;
+		
+		// Payment status
+		enum PaymentStatus {
+			PAYMENT_STATUS_PAID = 0;
+			PAYMENT_STATUS_NOT_PAID = 1;
+		}
+		PaymentStatus payment_status = 2;
+		
+		// Dates
+		string invoice_date = 3; // Format: YYYY-MM-DD
+		string due_date = 4; // Format: YYYY-MM-DD
+		string month = 5; // Format: YYYY-MM
+		
+		// Invoice details
+		string game_provider_revenue_share = 6;
+		string third_party_cost = 7;
+		string feature_subscription = 8;
+		string revenue_share_disburse = 9;
+		string revenue_share_collet = 10;
+		string adjustments = 11;
+		
+		// Financial summary
+		string total_amount = 12; // Total invoice amount
+		string amount_paid = 13; // Amount already paid
+		string due_amount = 14; // Remaining amount due
+
+		// Retailer information
+		string retailer_id = 15;
+		string retailer_name = 16;
+
+		// Company information
+		string company_id = 17;
+		string company_name = 18;
+		
+		// Operator information
+		int64 operator_id = 19;
+		string operator_name = 20;
+	}
+	
+	InvoiceDetail invoice = 1;
+}
+
+message ListOperatorRevenueShareRequest {
+	// Filter by invoice ID
+	optional int64 invoice_id = 1;
+	
+	// Filter by retailer
+	optional string retailer_id = 2;
+	
+	// Filter by company
+	optional string company_id = 3;
+	
+	// Filter by operator
+	optional string operator_id = 4;
+	
+	// Pagination
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+}
+
+message ListOperatorRevenueShareResponse {
+	message RevenueShareItem {
+		// Basic information
+		string operator_id = 1;
+		string operator_name = 2;
+		string game_provider_id = 3;
+		string game_provider_name = 4;
+		string fee_group = 5;
+		string currency = 6;
+	
+		// Gaming statistics
+		string total_bet = 7; // Total bet amount
+		string total_payout = 8; // Total payout amount
+		int32 bets_count = 9; // Number of bets
+		string ngr = 10; // Net Gaming Revenue
+		string ggr = 11; // Gross Gaming Revenue
+		
+		// Revenue share calculation
+		string rate = 12; // Revenue share rate (e.g., "7.50%")
+		string amount = 13; // Revenue share amount in original currency
+		string fx_rate = 14; // Foreign exchange rate
+		string amount_usd = 15; // Revenue share amount in USD
+	}
+	
+	repeated RevenueShareItem items = 1;
+	
+	// Summary
+	string subtotal = 2; // Total amount
+	
+	// Pagination information
+	int32 total_count = 3;
+	int32 page = 4;
+	int32 page_size = 5;
+	int32 total_pages = 6;
+}
+
+message ListThirdPartyFeesRequest {
+	// Filter by invoice ID
+	optional int64 invoice_id = 1;
+	
+	// Filter by retailer
+	optional string retailer_id = 2;
+	
+	// Filter by company
+	optional string company_id = 3;
+	
+	// Filter by operator
+	optional string operator_id = 4;
+	
+	// Pagination
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+}
+
+message ListThirdPartyFeesResponse {
+	message ThirdPartyFeeItem {
+		// Basic information
+		string operator_id = 1;
+		string operator_name = 2;
+		string service = 3;
+		
+		// Fee details
+		string quantity = 4; // Quantity as string to preserve formatting
+		string amount = 5; // Amount as string to preserve precision
+		string description = 6; // Description of the fee
+	}
+	
+	repeated ThirdPartyFeeItem items = 1;
+	
+	// Summary
+	string subtotal = 2; // Total amount
+	
+	// Pagination information
+	int32 total_count = 3;
+	int32 page = 4;
+	int32 page_size = 5;
+}
+
+message ListMonthlyRevenueShareRequest {
+	// Filter by invoice ID
+	optional int64 invoice_id = 1;
+	
+	// Filter by retailer
+	optional string retailer_id = 2;
+	
+	// Filter by company
+	optional string company_id = 3;
+	
+	// Filter by operator
+	optional string operator_id = 4;
+	
+	// Pagination
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+}
+
+message ListMonthlyRevenueShareResponse {
+	message RevenueShareItem{
+		// Basic information
+		string operator_id = 1;
+		string operator_name = 2;
+		string operator_mode = 3; // Individual, Co-Operation, Co-Operation (Self-Managed Payment)
+		
+		// Financial data
+		string deposits = 4; // Deposit amounts
+		string withdrawals = 5; // Withdrawal amounts
+		string balance = 6; // Current balance
+		string ngr = 7; // Net Gaming Revenue
+		string ggr = 8; // Gross Gaming Revenue
+		
+		// Revenue breakdown
+		string game_provider_rs = 9; // Game Provider Revenue Share
+		string third_party_fees = 10; // Other 3rd-Party Fees
+		string adjustments = 11; // Adjustments
+		string net_profit = 13; // Net Profit
+		
+		// Revenue share details
+		string rs_rate = 14; // Revenue Share Rate (e.g., "80%")
+		string revenue_share_disburse = 15; // Revenue Share (Disburse)
+		string revenue_share_collect = 16; // Revenue Share (Collect)
+	}
+	
+	repeated RevenueShareItem items = 1;
+	
+	// Summary totals
+	message Summary {
+		string subtotal = 1;
+		string revenue_share_disburse_total = 2;
+		string revenue_share_collect_total = 3;
+	}
+	Summary summary = 2;
+	
+	// Pagination information
+	int32 total_count = 3;
+	int32 page = 4;
+	int32 page_size = 5;
+}
+
+message AddAdjustmentRequest {
+	// Basic information
+	string item = 1; // Adjustment item type
+	string retailer_id = 2; // Retailer ID
+	string company_id = 3; // Company ID
+	string operator_id = 4; // Operator ID
+	
+	// Financial information
+	string currency = 5; // Currency code (e.g., "USDT", "USD")
+	string amount = 6; // Adjustment amount as string to preserve precision
+	string description = 7; // Description of the adjustment
+}
+
+message AddAdjustmentResponse {
+	// Created adjustment ID
+	int64 adjustment_id = 1;
+}
+
+message ListAdjustmentConfigsRequest {
+	// Pagination
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+}
+
+message ListAdjustmentConfigsResponse {
+	message AdjustmentConfig {
+		string id = 1;
+		string item = 2; // Adjustment item name
+		string description = 3; // Description of the adjustment item
+	}
+	
+	repeated AdjustmentConfig configs = 1;
+	
+	// Pagination information
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message UpdateAdjustmentConfigRequest {
+	int64 id = 1; // Configuration ID to update
+	string item = 2; // Updated item name
+	string description = 3; // Updated description
+	optional bool enabled = 4; // Updated enabled status
+}
+
+message UpdateAdjustmentConfigResponse {
+	int64 id = 1; // Updated configuration ID
+}
+
+message DeleteAdjustmentConfigRequest {
+	int64 id = 1; // Configuration ID to delete
+}
+
+message DeleteAdjustmentConfigResponse {
+}
+
+message ListAdjustmentsRequest {
+	// Filter by invoice ID
+	optional int64 invoice_id = 1;
+	
+	// Filter by retailer
+	optional string retailer_id = 2;
+	
+	// Filter by company
+	optional string company_id = 3;
+	
+	// Filter by operator
+	optional string operator_id = 4;
+	
+	// Pagination
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+}
+
+message ListAdjustmentsResponse {
+	message AdjustmentItem {
+		// Basic information
+		string item = 1; // Item type (e.g., "JP Provisions", "Correction", "Custom Fee")
+		string operator_id = 2;
+		string operator_name = 3;
+		string currency = 4;
+		
+		// Amount information
+		string amount = 5; // Amount as string to preserve precision
+		string description = 6; // Description of the adjustment
+	}
+	
+	repeated AdjustmentItem items = 1;
+	
+	// Summary
+	string subtotal = 2; // Total adjustment amount
+	
+	// Pagination information
+	int32 total_count = 3;
+	int32 page = 4;
+	int32 page_size = 5;
+}
+

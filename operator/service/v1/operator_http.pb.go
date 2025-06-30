@@ -19,171 +19,275 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationOperatorAddOperator = "/api.operator.service.v1.Operator/AddOperator"
-const OperationOperatorAddOriginOperatorId = "/api.operator.service.v1.Operator/AddOriginOperatorId"
-const OperationOperatorDeleteOriginOperatorId = "/api.operator.service.v1.Operator/DeleteOriginOperatorId"
-const OperationOperatorGetOperatorCurrencies = "/api.operator.service.v1.Operator/GetOperatorCurrencies"
-const OperationOperatorUpdateOperator = "/api.operator.service.v1.Operator/UpdateOperator"
-const OperationOperatorUpdateOperatorCurrency = "/api.operator.service.v1.Operator/UpdateOperatorCurrency"
+const OperationOperatorAddAdjustment = "/api.operator.service.v1.Operator/AddAdjustment"
+const OperationOperatorDeleteAdjustmentConfig = "/api.operator.service.v1.Operator/DeleteAdjustmentConfig"
+const OperationOperatorGetInvoiceDetail = "/api.operator.service.v1.Operator/GetInvoiceDetail"
+const OperationOperatorListAdjustmentConfigs = "/api.operator.service.v1.Operator/ListAdjustmentConfigs"
+const OperationOperatorListAdjustments = "/api.operator.service.v1.Operator/ListAdjustments"
+const OperationOperatorListInvovies = "/api.operator.service.v1.Operator/ListInvovies"
+const OperationOperatorListMonthlyRevenueShare = "/api.operator.service.v1.Operator/ListMonthlyRevenueShare"
+const OperationOperatorListOperatorRevenueShare = "/api.operator.service.v1.Operator/ListOperatorRevenueShare"
+const OperationOperatorListThirdPartyFees = "/api.operator.service.v1.Operator/ListThirdPartyFees"
+const OperationOperatorUpdateAdjustmentConfig = "/api.operator.service.v1.Operator/UpdateAdjustmentConfig"
 
 type OperatorHTTPServer interface {
-	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
-	AddOriginOperatorId(context.Context, *AddOriginOperatorIdRequest) (*AddOriginOperatorIdResponse, error)
-	DeleteOriginOperatorId(context.Context, *DeleteOriginOperatorIdRequest) (*DeleteOriginOperatorIdResponse, error)
-	GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error)
-	UpdateOperator(context.Context, *UpdateOperatorRequest) (*UpdateOperatorResponse, error)
-	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
+	AddAdjustment(context.Context, *AddAdjustmentRequest) (*AddAdjustmentResponse, error)
+	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
+	GetInvoiceDetail(context.Context, *GetInvoiceDetailRequest) (*GetInvoiceDetailResponse, error)
+	ListAdjustmentConfigs(context.Context, *ListAdjustmentConfigsRequest) (*ListAdjustmentConfigsResponse, error)
+	ListAdjustments(context.Context, *ListAdjustmentsRequest) (*ListAdjustmentsResponse, error)
+	ListInvovies(context.Context, *ListInvoviesRequest) (*ListInvoviesResponse, error)
+	ListMonthlyRevenueShare(context.Context, *ListMonthlyRevenueShareRequest) (*ListMonthlyRevenueShareResponse, error)
+	ListOperatorRevenueShare(context.Context, *ListOperatorRevenueShareRequest) (*ListOperatorRevenueShareResponse, error)
+	ListThirdPartyFees(context.Context, *ListThirdPartyFeesRequest) (*ListThirdPartyFeesResponse, error)
+	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*UpdateAdjustmentConfigResponse, error)
 }
 
 func RegisterOperatorHTTPServer(s *http.Server, srv OperatorHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/operator/add", _Operator_AddOperator1_HTTP_Handler(srv))
-	r.POST("/v1/operator/update", _Operator_UpdateOperator0_HTTP_Handler(srv))
-	r.POST("/v1/operator/currencies/update", _Operator_UpdateOperatorCurrency0_HTTP_Handler(srv))
-	r.POST("/v1/operator/currencies/get", _Operator_GetOperatorCurrencies0_HTTP_Handler(srv))
-	r.POST("/v1/operator/origins/add", _Operator_AddOriginOperatorId0_HTTP_Handler(srv))
-	r.POST("/v1/operator/origins/delete", _Operator_DeleteOriginOperatorId0_HTTP_Handler(srv))
+	r.POST("/v1/operator/invovies/list", _Operator_ListInvovies0_HTTP_Handler(srv))
+	r.POST("/v1/operator/invoice/detail", _Operator_GetInvoiceDetail0_HTTP_Handler(srv))
+	r.POST("/v1/operator/revenue-shares/list", _Operator_ListOperatorRevenueShare0_HTTP_Handler(srv))
+	r.POST("/v1/operator/third-party-fees/list", _Operator_ListThirdPartyFees0_HTTP_Handler(srv))
+	r.POST("/v1/operator/adjustments/list", _Operator_ListAdjustments0_HTTP_Handler(srv))
+	r.POST("/v1/operator/monthly-revenue-shares/list", _Operator_ListMonthlyRevenueShare0_HTTP_Handler(srv))
+	r.POST("/v1/operator/adjustment/add", _Operator_AddAdjustment0_HTTP_Handler(srv))
+	r.POST("/v1/operator/adjustment-configs/list", _Operator_ListAdjustmentConfigs0_HTTP_Handler(srv))
+	r.POST("/v1/operator/adjustment-configs/update", _Operator_UpdateAdjustmentConfig0_HTTP_Handler(srv))
+	r.POST("/v1/operator/adjustment-configs/delete", _Operator_DeleteAdjustmentConfig0_HTTP_Handler(srv))
 }
 
-func _Operator_AddOperator1_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
+func _Operator_ListInvovies0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in AddOperatorRequest
+		var in ListInvoviesRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationOperatorAddOperator)
+		http.SetOperation(ctx, OperationOperatorListInvovies)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddOperator(ctx, req.(*AddOperatorRequest))
+			return srv.ListInvovies(ctx, req.(*ListInvoviesRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*AddOperatorResponse)
+		reply := out.(*ListInvoviesResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Operator_UpdateOperator0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
+func _Operator_GetInvoiceDetail0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in UpdateOperatorRequest
+		var in GetInvoiceDetailRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationOperatorUpdateOperator)
+		http.SetOperation(ctx, OperationOperatorGetInvoiceDetail)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateOperator(ctx, req.(*UpdateOperatorRequest))
+			return srv.GetInvoiceDetail(ctx, req.(*GetInvoiceDetailRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*UpdateOperatorResponse)
+		reply := out.(*GetInvoiceDetailResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Operator_UpdateOperatorCurrency0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
+func _Operator_ListOperatorRevenueShare0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in UpdateOperatorCurrencyRequest
+		var in ListOperatorRevenueShareRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationOperatorUpdateOperatorCurrency)
+		http.SetOperation(ctx, OperationOperatorListOperatorRevenueShare)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateOperatorCurrency(ctx, req.(*UpdateOperatorCurrencyRequest))
+			return srv.ListOperatorRevenueShare(ctx, req.(*ListOperatorRevenueShareRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*UpdateOperatorCurrencyResponse)
+		reply := out.(*ListOperatorRevenueShareResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Operator_GetOperatorCurrencies0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
+func _Operator_ListThirdPartyFees0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetOperatorCurrenciesRequest
+		var in ListThirdPartyFeesRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationOperatorGetOperatorCurrencies)
+		http.SetOperation(ctx, OperationOperatorListThirdPartyFees)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetOperatorCurrencies(ctx, req.(*GetOperatorCurrenciesRequest))
+			return srv.ListThirdPartyFees(ctx, req.(*ListThirdPartyFeesRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetOperatorCurrenciesResponse)
+		reply := out.(*ListThirdPartyFeesResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Operator_AddOriginOperatorId0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
+func _Operator_ListAdjustments0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in AddOriginOperatorIdRequest
+		var in ListAdjustmentsRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationOperatorAddOriginOperatorId)
+		http.SetOperation(ctx, OperationOperatorListAdjustments)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddOriginOperatorId(ctx, req.(*AddOriginOperatorIdRequest))
+			return srv.ListAdjustments(ctx, req.(*ListAdjustmentsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*AddOriginOperatorIdResponse)
+		reply := out.(*ListAdjustmentsResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Operator_DeleteOriginOperatorId0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
+func _Operator_ListMonthlyRevenueShare0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in DeleteOriginOperatorIdRequest
+		var in ListMonthlyRevenueShareRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationOperatorDeleteOriginOperatorId)
+		http.SetOperation(ctx, OperationOperatorListMonthlyRevenueShare)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteOriginOperatorId(ctx, req.(*DeleteOriginOperatorIdRequest))
+			return srv.ListMonthlyRevenueShare(ctx, req.(*ListMonthlyRevenueShareRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*DeleteOriginOperatorIdResponse)
+		reply := out.(*ListMonthlyRevenueShareResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Operator_AddAdjustment0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AddAdjustmentRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationOperatorAddAdjustment)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AddAdjustment(ctx, req.(*AddAdjustmentRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AddAdjustmentResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Operator_ListAdjustmentConfigs0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListAdjustmentConfigsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationOperatorListAdjustmentConfigs)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListAdjustmentConfigs(ctx, req.(*ListAdjustmentConfigsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListAdjustmentConfigsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Operator_UpdateAdjustmentConfig0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateAdjustmentConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationOperatorUpdateAdjustmentConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateAdjustmentConfig(ctx, req.(*UpdateAdjustmentConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateAdjustmentConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Operator_DeleteAdjustmentConfig0_HTTP_Handler(srv OperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteAdjustmentConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationOperatorDeleteAdjustmentConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteAdjustmentConfig(ctx, req.(*DeleteAdjustmentConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteAdjustmentConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 type OperatorHTTPClient interface {
-	AddOperator(ctx context.Context, req *AddOperatorRequest, opts ...http.CallOption) (rsp *AddOperatorResponse, err error)
-	AddOriginOperatorId(ctx context.Context, req *AddOriginOperatorIdRequest, opts ...http.CallOption) (rsp *AddOriginOperatorIdResponse, err error)
-	DeleteOriginOperatorId(ctx context.Context, req *DeleteOriginOperatorIdRequest, opts ...http.CallOption) (rsp *DeleteOriginOperatorIdResponse, err error)
-	GetOperatorCurrencies(ctx context.Context, req *GetOperatorCurrenciesRequest, opts ...http.CallOption) (rsp *GetOperatorCurrenciesResponse, err error)
-	UpdateOperator(ctx context.Context, req *UpdateOperatorRequest, opts ...http.CallOption) (rsp *UpdateOperatorResponse, err error)
-	UpdateOperatorCurrency(ctx context.Context, req *UpdateOperatorCurrencyRequest, opts ...http.CallOption) (rsp *UpdateOperatorCurrencyResponse, err error)
+	AddAdjustment(ctx context.Context, req *AddAdjustmentRequest, opts ...http.CallOption) (rsp *AddAdjustmentResponse, err error)
+	DeleteAdjustmentConfig(ctx context.Context, req *DeleteAdjustmentConfigRequest, opts ...http.CallOption) (rsp *DeleteAdjustmentConfigResponse, err error)
+	GetInvoiceDetail(ctx context.Context, req *GetInvoiceDetailRequest, opts ...http.CallOption) (rsp *GetInvoiceDetailResponse, err error)
+	ListAdjustmentConfigs(ctx context.Context, req *ListAdjustmentConfigsRequest, opts ...http.CallOption) (rsp *ListAdjustmentConfigsResponse, err error)
+	ListAdjustments(ctx context.Context, req *ListAdjustmentsRequest, opts ...http.CallOption) (rsp *ListAdjustmentsResponse, err error)
+	ListInvovies(ctx context.Context, req *ListInvoviesRequest, opts ...http.CallOption) (rsp *ListInvoviesResponse, err error)
+	ListMonthlyRevenueShare(ctx context.Context, req *ListMonthlyRevenueShareRequest, opts ...http.CallOption) (rsp *ListMonthlyRevenueShareResponse, err error)
+	ListOperatorRevenueShare(ctx context.Context, req *ListOperatorRevenueShareRequest, opts ...http.CallOption) (rsp *ListOperatorRevenueShareResponse, err error)
+	ListThirdPartyFees(ctx context.Context, req *ListThirdPartyFeesRequest, opts ...http.CallOption) (rsp *ListThirdPartyFeesResponse, err error)
+	UpdateAdjustmentConfig(ctx context.Context, req *UpdateAdjustmentConfigRequest, opts ...http.CallOption) (rsp *UpdateAdjustmentConfigResponse, err error)
 }
 
 type OperatorHTTPClientImpl struct {
@@ -194,11 +298,11 @@ func NewOperatorHTTPClient(client *http.Client) OperatorHTTPClient {
 	return &OperatorHTTPClientImpl{client}
 }
 
-func (c *OperatorHTTPClientImpl) AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...http.CallOption) (*AddOperatorResponse, error) {
-	var out AddOperatorResponse
-	pattern := "/v1/operator/add"
+func (c *OperatorHTTPClientImpl) AddAdjustment(ctx context.Context, in *AddAdjustmentRequest, opts ...http.CallOption) (*AddAdjustmentResponse, error) {
+	var out AddAdjustmentResponse
+	pattern := "/v1/operator/adjustment/add"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationOperatorAddOperator))
+	opts = append(opts, http.Operation(OperationOperatorAddAdjustment))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -207,11 +311,11 @@ func (c *OperatorHTTPClientImpl) AddOperator(ctx context.Context, in *AddOperato
 	return &out, nil
 }
 
-func (c *OperatorHTTPClientImpl) AddOriginOperatorId(ctx context.Context, in *AddOriginOperatorIdRequest, opts ...http.CallOption) (*AddOriginOperatorIdResponse, error) {
-	var out AddOriginOperatorIdResponse
-	pattern := "/v1/operator/origins/add"
+func (c *OperatorHTTPClientImpl) DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...http.CallOption) (*DeleteAdjustmentConfigResponse, error) {
+	var out DeleteAdjustmentConfigResponse
+	pattern := "/v1/operator/adjustment-configs/delete"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationOperatorAddOriginOperatorId))
+	opts = append(opts, http.Operation(OperationOperatorDeleteAdjustmentConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -220,11 +324,11 @@ func (c *OperatorHTTPClientImpl) AddOriginOperatorId(ctx context.Context, in *Ad
 	return &out, nil
 }
 
-func (c *OperatorHTTPClientImpl) DeleteOriginOperatorId(ctx context.Context, in *DeleteOriginOperatorIdRequest, opts ...http.CallOption) (*DeleteOriginOperatorIdResponse, error) {
-	var out DeleteOriginOperatorIdResponse
-	pattern := "/v1/operator/origins/delete"
+func (c *OperatorHTTPClientImpl) GetInvoiceDetail(ctx context.Context, in *GetInvoiceDetailRequest, opts ...http.CallOption) (*GetInvoiceDetailResponse, error) {
+	var out GetInvoiceDetailResponse
+	pattern := "/v1/operator/invoice/detail"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationOperatorDeleteOriginOperatorId))
+	opts = append(opts, http.Operation(OperationOperatorGetInvoiceDetail))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -233,11 +337,11 @@ func (c *OperatorHTTPClientImpl) DeleteOriginOperatorId(ctx context.Context, in 
 	return &out, nil
 }
 
-func (c *OperatorHTTPClientImpl) GetOperatorCurrencies(ctx context.Context, in *GetOperatorCurrenciesRequest, opts ...http.CallOption) (*GetOperatorCurrenciesResponse, error) {
-	var out GetOperatorCurrenciesResponse
-	pattern := "/v1/operator/currencies/get"
+func (c *OperatorHTTPClientImpl) ListAdjustmentConfigs(ctx context.Context, in *ListAdjustmentConfigsRequest, opts ...http.CallOption) (*ListAdjustmentConfigsResponse, error) {
+	var out ListAdjustmentConfigsResponse
+	pattern := "/v1/operator/adjustment-configs/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationOperatorGetOperatorCurrencies))
+	opts = append(opts, http.Operation(OperationOperatorListAdjustmentConfigs))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -246,11 +350,11 @@ func (c *OperatorHTTPClientImpl) GetOperatorCurrencies(ctx context.Context, in *
 	return &out, nil
 }
 
-func (c *OperatorHTTPClientImpl) UpdateOperator(ctx context.Context, in *UpdateOperatorRequest, opts ...http.CallOption) (*UpdateOperatorResponse, error) {
-	var out UpdateOperatorResponse
-	pattern := "/v1/operator/update"
+func (c *OperatorHTTPClientImpl) ListAdjustments(ctx context.Context, in *ListAdjustmentsRequest, opts ...http.CallOption) (*ListAdjustmentsResponse, error) {
+	var out ListAdjustmentsResponse
+	pattern := "/v1/operator/adjustments/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationOperatorUpdateOperator))
+	opts = append(opts, http.Operation(OperationOperatorListAdjustments))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -259,11 +363,63 @@ func (c *OperatorHTTPClientImpl) UpdateOperator(ctx context.Context, in *UpdateO
 	return &out, nil
 }
 
-func (c *OperatorHTTPClientImpl) UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...http.CallOption) (*UpdateOperatorCurrencyResponse, error) {
-	var out UpdateOperatorCurrencyResponse
-	pattern := "/v1/operator/currencies/update"
+func (c *OperatorHTTPClientImpl) ListInvovies(ctx context.Context, in *ListInvoviesRequest, opts ...http.CallOption) (*ListInvoviesResponse, error) {
+	var out ListInvoviesResponse
+	pattern := "/v1/operator/invovies/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationOperatorUpdateOperatorCurrency))
+	opts = append(opts, http.Operation(OperationOperatorListInvovies))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *OperatorHTTPClientImpl) ListMonthlyRevenueShare(ctx context.Context, in *ListMonthlyRevenueShareRequest, opts ...http.CallOption) (*ListMonthlyRevenueShareResponse, error) {
+	var out ListMonthlyRevenueShareResponse
+	pattern := "/v1/operator/monthly-revenue-shares/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationOperatorListMonthlyRevenueShare))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *OperatorHTTPClientImpl) ListOperatorRevenueShare(ctx context.Context, in *ListOperatorRevenueShareRequest, opts ...http.CallOption) (*ListOperatorRevenueShareResponse, error) {
+	var out ListOperatorRevenueShareResponse
+	pattern := "/v1/operator/revenue-shares/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationOperatorListOperatorRevenueShare))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *OperatorHTTPClientImpl) ListThirdPartyFees(ctx context.Context, in *ListThirdPartyFeesRequest, opts ...http.CallOption) (*ListThirdPartyFeesResponse, error) {
+	var out ListThirdPartyFeesResponse
+	pattern := "/v1/operator/third-party-fees/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationOperatorListThirdPartyFees))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *OperatorHTTPClientImpl) UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...http.CallOption) (*UpdateAdjustmentConfigResponse, error) {
+	var out UpdateAdjustmentConfigResponse
+	pattern := "/v1/operator/adjustment-configs/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationOperatorUpdateAdjustmentConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
