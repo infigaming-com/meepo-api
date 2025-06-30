@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -20,6 +21,147 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+// Filter by payment status
+type ListInvoviesRequest_PaymentStatus int32
+
+const (
+	ListInvoviesRequest_PAYMENT_STATUS_PAID     ListInvoviesRequest_PaymentStatus = 0
+	ListInvoviesRequest_PAYMENT_STATUS_NOT_PAID ListInvoviesRequest_PaymentStatus = 1
+)
+
+// Enum value maps for ListInvoviesRequest_PaymentStatus.
+var (
+	ListInvoviesRequest_PaymentStatus_name = map[int32]string{
+		0: "PAYMENT_STATUS_PAID",
+		1: "PAYMENT_STATUS_NOT_PAID",
+	}
+	ListInvoviesRequest_PaymentStatus_value = map[string]int32{
+		"PAYMENT_STATUS_PAID":     0,
+		"PAYMENT_STATUS_NOT_PAID": 1,
+	}
+)
+
+func (x ListInvoviesRequest_PaymentStatus) Enum() *ListInvoviesRequest_PaymentStatus {
+	p := new(ListInvoviesRequest_PaymentStatus)
+	*p = x
+	return p
+}
+
+func (x ListInvoviesRequest_PaymentStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ListInvoviesRequest_PaymentStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_operator_service_v1_operator_proto_enumTypes[0].Descriptor()
+}
+
+func (ListInvoviesRequest_PaymentStatus) Type() protoreflect.EnumType {
+	return &file_operator_service_v1_operator_proto_enumTypes[0]
+}
+
+func (x ListInvoviesRequest_PaymentStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ListInvoviesRequest_PaymentStatus.Descriptor instead.
+func (ListInvoviesRequest_PaymentStatus) EnumDescriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{24, 0}
+}
+
+// Payment status
+type ListInvoviesResponse_Invoice_PaymentStatus int32
+
+const (
+	ListInvoviesResponse_Invoice_PAYMENT_STATUS_PAID     ListInvoviesResponse_Invoice_PaymentStatus = 0
+	ListInvoviesResponse_Invoice_PAYMENT_STATUS_NOT_PAID ListInvoviesResponse_Invoice_PaymentStatus = 1
+)
+
+// Enum value maps for ListInvoviesResponse_Invoice_PaymentStatus.
+var (
+	ListInvoviesResponse_Invoice_PaymentStatus_name = map[int32]string{
+		0: "PAYMENT_STATUS_PAID",
+		1: "PAYMENT_STATUS_NOT_PAID",
+	}
+	ListInvoviesResponse_Invoice_PaymentStatus_value = map[string]int32{
+		"PAYMENT_STATUS_PAID":     0,
+		"PAYMENT_STATUS_NOT_PAID": 1,
+	}
+)
+
+func (x ListInvoviesResponse_Invoice_PaymentStatus) Enum() *ListInvoviesResponse_Invoice_PaymentStatus {
+	p := new(ListInvoviesResponse_Invoice_PaymentStatus)
+	*p = x
+	return p
+}
+
+func (x ListInvoviesResponse_Invoice_PaymentStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ListInvoviesResponse_Invoice_PaymentStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_operator_service_v1_operator_proto_enumTypes[1].Descriptor()
+}
+
+func (ListInvoviesResponse_Invoice_PaymentStatus) Type() protoreflect.EnumType {
+	return &file_operator_service_v1_operator_proto_enumTypes[1]
+}
+
+func (x ListInvoviesResponse_Invoice_PaymentStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ListInvoviesResponse_Invoice_PaymentStatus.Descriptor instead.
+func (ListInvoviesResponse_Invoice_PaymentStatus) EnumDescriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{25, 0, 0}
+}
+
+// Payment status
+type GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus int32
+
+const (
+	GetInvoiceDetailResponse_InvoiceDetail_PAYMENT_STATUS_PAID     GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus = 0
+	GetInvoiceDetailResponse_InvoiceDetail_PAYMENT_STATUS_NOT_PAID GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus = 1
+)
+
+// Enum value maps for GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus.
+var (
+	GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus_name = map[int32]string{
+		0: "PAYMENT_STATUS_PAID",
+		1: "PAYMENT_STATUS_NOT_PAID",
+	}
+	GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus_value = map[string]int32{
+		"PAYMENT_STATUS_PAID":     0,
+		"PAYMENT_STATUS_NOT_PAID": 1,
+	}
+)
+
+func (x GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus) Enum() *GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus {
+	p := new(GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus)
+	*p = x
+	return p
+}
+
+func (x GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_operator_service_v1_operator_proto_enumTypes[2].Descriptor()
+}
+
+func (GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus) Type() protoreflect.EnumType {
+	return &file_operator_service_v1_operator_proto_enumTypes[2]
+}
+
+func (x GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus.Descriptor instead.
+func (GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus) EnumDescriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{27, 0, 0}
+}
 
 type AddOperatorRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1110,6 +1252,1403 @@ func (x *ListOperatorsResponse) GetOperators() []*ListOperatorsResponse_Operator
 	return nil
 }
 
+type ListInvoviesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Filter by retailer
+	RetailerId *string `protobuf:"bytes,1,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	// Filter by company
+	CompanyId *string `protobuf:"bytes,2,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	// Filter by month (format: YYYY-MM)
+	Month *string `protobuf:"bytes,3,opt,name=month,proto3,oneof" json:"month,omitempty"`
+	// Search by invoice id
+	InvoiceId     *int64                             `protobuf:"varint,4,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
+	PaymentStatus *ListInvoviesRequest_PaymentStatus `protobuf:"varint,5,opt,name=payment_status,json=paymentStatus,proto3,enum=api.operator.service.v1.ListInvoviesRequest_PaymentStatus,oneof" json:"payment_status,omitempty"`
+	// Pagination
+	Page          *int32 `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListInvoviesRequest) Reset() {
+	*x = ListInvoviesRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListInvoviesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListInvoviesRequest) ProtoMessage() {}
+
+func (x *ListInvoviesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListInvoviesRequest.ProtoReflect.Descriptor instead.
+func (*ListInvoviesRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *ListInvoviesRequest) GetRetailerId() string {
+	if x != nil && x.RetailerId != nil {
+		return *x.RetailerId
+	}
+	return ""
+}
+
+func (x *ListInvoviesRequest) GetCompanyId() string {
+	if x != nil && x.CompanyId != nil {
+		return *x.CompanyId
+	}
+	return ""
+}
+
+func (x *ListInvoviesRequest) GetMonth() string {
+	if x != nil && x.Month != nil {
+		return *x.Month
+	}
+	return ""
+}
+
+func (x *ListInvoviesRequest) GetInvoiceId() int64 {
+	if x != nil && x.InvoiceId != nil {
+		return *x.InvoiceId
+	}
+	return 0
+}
+
+func (x *ListInvoviesRequest) GetPaymentStatus() ListInvoviesRequest_PaymentStatus {
+	if x != nil && x.PaymentStatus != nil {
+		return *x.PaymentStatus
+	}
+	return ListInvoviesRequest_PAYMENT_STATUS_PAID
+}
+
+func (x *ListInvoviesRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListInvoviesRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type ListInvoviesResponse struct {
+	state             protoimpl.MessageState          `protogen:"open.v1"`
+	Invoices          []*ListInvoviesResponse_Invoice `protobuf:"bytes,1,rep,name=invoices,proto3" json:"invoices,omitempty"`
+	TotalCount        int32                           `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	Page              int32                           `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize          int32                           `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	TotalPaidCount    int32                           `protobuf:"varint,5,opt,name=total_paid_count,json=totalPaidCount,proto3" json:"total_paid_count,omitempty"`
+	TotalNotPaidCount int32                           `protobuf:"varint,6,opt,name=total_not_paid_count,json=totalNotPaidCount,proto3" json:"total_not_paid_count,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *ListInvoviesResponse) Reset() {
+	*x = ListInvoviesResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListInvoviesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListInvoviesResponse) ProtoMessage() {}
+
+func (x *ListInvoviesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListInvoviesResponse.ProtoReflect.Descriptor instead.
+func (*ListInvoviesResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *ListInvoviesResponse) GetInvoices() []*ListInvoviesResponse_Invoice {
+	if x != nil {
+		return x.Invoices
+	}
+	return nil
+}
+
+func (x *ListInvoviesResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *ListInvoviesResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListInvoviesResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListInvoviesResponse) GetTotalPaidCount() int32 {
+	if x != nil {
+		return x.TotalPaidCount
+	}
+	return 0
+}
+
+func (x *ListInvoviesResponse) GetTotalNotPaidCount() int32 {
+	if x != nil {
+		return x.TotalNotPaidCount
+	}
+	return 0
+}
+
+type GetInvoiceDetailRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	InvoiceId     int64                  `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3" json:"invoice_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetInvoiceDetailRequest) Reset() {
+	*x = GetInvoiceDetailRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetInvoiceDetailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetInvoiceDetailRequest) ProtoMessage() {}
+
+func (x *GetInvoiceDetailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetInvoiceDetailRequest.ProtoReflect.Descriptor instead.
+func (*GetInvoiceDetailRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *GetInvoiceDetailRequest) GetInvoiceId() int64 {
+	if x != nil {
+		return x.InvoiceId
+	}
+	return 0
+}
+
+type GetInvoiceDetailResponse struct {
+	state         protoimpl.MessageState                  `protogen:"open.v1"`
+	Invoice       *GetInvoiceDetailResponse_InvoiceDetail `protobuf:"bytes,1,opt,name=invoice,proto3" json:"invoice,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetInvoiceDetailResponse) Reset() {
+	*x = GetInvoiceDetailResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetInvoiceDetailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetInvoiceDetailResponse) ProtoMessage() {}
+
+func (x *GetInvoiceDetailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetInvoiceDetailResponse.ProtoReflect.Descriptor instead.
+func (*GetInvoiceDetailResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *GetInvoiceDetailResponse) GetInvoice() *GetInvoiceDetailResponse_InvoiceDetail {
+	if x != nil {
+		return x.Invoice
+	}
+	return nil
+}
+
+type ListOperatorRevenueShareRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Filter by invoice ID
+	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
+	// Filter by retailer
+	RetailerId *string `protobuf:"bytes,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	// Filter by company
+	CompanyId *string `protobuf:"bytes,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	// Filter by operator
+	OperatorId *string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	// Pagination
+	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOperatorRevenueShareRequest) Reset() {
+	*x = ListOperatorRevenueShareRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorRevenueShareRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorRevenueShareRequest) ProtoMessage() {}
+
+func (x *ListOperatorRevenueShareRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorRevenueShareRequest.ProtoReflect.Descriptor instead.
+func (*ListOperatorRevenueShareRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *ListOperatorRevenueShareRequest) GetInvoiceId() int64 {
+	if x != nil && x.InvoiceId != nil {
+		return *x.InvoiceId
+	}
+	return 0
+}
+
+func (x *ListOperatorRevenueShareRequest) GetRetailerId() string {
+	if x != nil && x.RetailerId != nil {
+		return *x.RetailerId
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareRequest) GetCompanyId() string {
+	if x != nil && x.CompanyId != nil {
+		return *x.CompanyId
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareRequest) GetOperatorId() string {
+	if x != nil && x.OperatorId != nil {
+		return *x.OperatorId
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorRevenueShareRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type ListOperatorRevenueShareResponse struct {
+	state protoimpl.MessageState                               `protogen:"open.v1"`
+	Items []*ListOperatorRevenueShareResponse_RevenueShareItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	// Summary
+	Subtotal string `protobuf:"bytes,2,opt,name=subtotal,proto3" json:"subtotal,omitempty"` // Total amount
+	// Pagination information
+	TotalCount    int32 `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	Page          int32 `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	TotalPages    int32 `protobuf:"varint,6,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOperatorRevenueShareResponse) Reset() {
+	*x = ListOperatorRevenueShareResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorRevenueShareResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorRevenueShareResponse) ProtoMessage() {}
+
+func (x *ListOperatorRevenueShareResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorRevenueShareResponse.ProtoReflect.Descriptor instead.
+func (*ListOperatorRevenueShareResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *ListOperatorRevenueShareResponse) GetItems() []*ListOperatorRevenueShareResponse_RevenueShareItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *ListOperatorRevenueShareResponse) GetSubtotal() string {
+	if x != nil {
+		return x.Subtotal
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *ListOperatorRevenueShareResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorRevenueShareResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListOperatorRevenueShareResponse) GetTotalPages() int32 {
+	if x != nil {
+		return x.TotalPages
+	}
+	return 0
+}
+
+type ListThirdPartyFeesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Filter by invoice ID
+	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
+	// Filter by retailer
+	RetailerId *string `protobuf:"bytes,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	// Filter by company
+	CompanyId *string `protobuf:"bytes,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	// Filter by operator
+	OperatorId *string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	// Pagination
+	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListThirdPartyFeesRequest) Reset() {
+	*x = ListThirdPartyFeesRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListThirdPartyFeesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListThirdPartyFeesRequest) ProtoMessage() {}
+
+func (x *ListThirdPartyFeesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListThirdPartyFeesRequest.ProtoReflect.Descriptor instead.
+func (*ListThirdPartyFeesRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ListThirdPartyFeesRequest) GetInvoiceId() int64 {
+	if x != nil && x.InvoiceId != nil {
+		return *x.InvoiceId
+	}
+	return 0
+}
+
+func (x *ListThirdPartyFeesRequest) GetRetailerId() string {
+	if x != nil && x.RetailerId != nil {
+		return *x.RetailerId
+	}
+	return ""
+}
+
+func (x *ListThirdPartyFeesRequest) GetCompanyId() string {
+	if x != nil && x.CompanyId != nil {
+		return *x.CompanyId
+	}
+	return ""
+}
+
+func (x *ListThirdPartyFeesRequest) GetOperatorId() string {
+	if x != nil && x.OperatorId != nil {
+		return *x.OperatorId
+	}
+	return ""
+}
+
+func (x *ListThirdPartyFeesRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListThirdPartyFeesRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type ListThirdPartyFeesResponse struct {
+	state protoimpl.MessageState                          `protogen:"open.v1"`
+	Items []*ListThirdPartyFeesResponse_ThirdPartyFeeItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	// Summary
+	Subtotal string `protobuf:"bytes,2,opt,name=subtotal,proto3" json:"subtotal,omitempty"` // Total amount
+	// Pagination information
+	TotalCount    int32 `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	Page          int32 `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListThirdPartyFeesResponse) Reset() {
+	*x = ListThirdPartyFeesResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListThirdPartyFeesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListThirdPartyFeesResponse) ProtoMessage() {}
+
+func (x *ListThirdPartyFeesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListThirdPartyFeesResponse.ProtoReflect.Descriptor instead.
+func (*ListThirdPartyFeesResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *ListThirdPartyFeesResponse) GetItems() []*ListThirdPartyFeesResponse_ThirdPartyFeeItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *ListThirdPartyFeesResponse) GetSubtotal() string {
+	if x != nil {
+		return x.Subtotal
+	}
+	return ""
+}
+
+func (x *ListThirdPartyFeesResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *ListThirdPartyFeesResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListThirdPartyFeesResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type ListMonthlyRevenueShareRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Filter by invoice ID
+	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
+	// Filter by retailer
+	RetailerId *string `protobuf:"bytes,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	// Filter by company
+	CompanyId *string `protobuf:"bytes,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	// Filter by operator
+	OperatorId *string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	// Pagination
+	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListMonthlyRevenueShareRequest) Reset() {
+	*x = ListMonthlyRevenueShareRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListMonthlyRevenueShareRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMonthlyRevenueShareRequest) ProtoMessage() {}
+
+func (x *ListMonthlyRevenueShareRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMonthlyRevenueShareRequest.ProtoReflect.Descriptor instead.
+func (*ListMonthlyRevenueShareRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *ListMonthlyRevenueShareRequest) GetInvoiceId() int64 {
+	if x != nil && x.InvoiceId != nil {
+		return *x.InvoiceId
+	}
+	return 0
+}
+
+func (x *ListMonthlyRevenueShareRequest) GetRetailerId() string {
+	if x != nil && x.RetailerId != nil {
+		return *x.RetailerId
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareRequest) GetCompanyId() string {
+	if x != nil && x.CompanyId != nil {
+		return *x.CompanyId
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareRequest) GetOperatorId() string {
+	if x != nil && x.OperatorId != nil {
+		return *x.OperatorId
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListMonthlyRevenueShareRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type ListMonthlyRevenueShareResponse struct {
+	state   protoimpl.MessageState                              `protogen:"open.v1"`
+	Items   []*ListMonthlyRevenueShareResponse_RevenueShareItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Summary *ListMonthlyRevenueShareResponse_Summary            `protobuf:"bytes,2,opt,name=summary,proto3" json:"summary,omitempty"`
+	// Pagination information
+	TotalCount    int32 `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	Page          int32 `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListMonthlyRevenueShareResponse) Reset() {
+	*x = ListMonthlyRevenueShareResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListMonthlyRevenueShareResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMonthlyRevenueShareResponse) ProtoMessage() {}
+
+func (x *ListMonthlyRevenueShareResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMonthlyRevenueShareResponse.ProtoReflect.Descriptor instead.
+func (*ListMonthlyRevenueShareResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *ListMonthlyRevenueShareResponse) GetItems() []*ListMonthlyRevenueShareResponse_RevenueShareItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *ListMonthlyRevenueShareResponse) GetSummary() *ListMonthlyRevenueShareResponse_Summary {
+	if x != nil {
+		return x.Summary
+	}
+	return nil
+}
+
+func (x *ListMonthlyRevenueShareResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *ListMonthlyRevenueShareResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListMonthlyRevenueShareResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type AddAdjustmentRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Basic information
+	Item       string `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`                               // Adjustment item type
+	RetailerId string `protobuf:"bytes,2,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"` // Retailer ID
+	CompanyId  string `protobuf:"bytes,3,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`    // Company ID
+	OperatorId string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"` // Operator ID
+	// Financial information
+	Currency      string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`       // Currency code (e.g., "USDT", "USD")
+	Amount        string `protobuf:"bytes,6,opt,name=amount,proto3" json:"amount,omitempty"`           // Adjustment amount as string to preserve precision
+	Description   string `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"` // Description of the adjustment
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddAdjustmentRequest) Reset() {
+	*x = AddAdjustmentRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddAdjustmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddAdjustmentRequest) ProtoMessage() {}
+
+func (x *AddAdjustmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddAdjustmentRequest.ProtoReflect.Descriptor instead.
+func (*AddAdjustmentRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *AddAdjustmentRequest) GetItem() string {
+	if x != nil {
+		return x.Item
+	}
+	return ""
+}
+
+func (x *AddAdjustmentRequest) GetRetailerId() string {
+	if x != nil {
+		return x.RetailerId
+	}
+	return ""
+}
+
+func (x *AddAdjustmentRequest) GetCompanyId() string {
+	if x != nil {
+		return x.CompanyId
+	}
+	return ""
+}
+
+func (x *AddAdjustmentRequest) GetOperatorId() string {
+	if x != nil {
+		return x.OperatorId
+	}
+	return ""
+}
+
+func (x *AddAdjustmentRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *AddAdjustmentRequest) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *AddAdjustmentRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+type AddAdjustmentResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Created adjustment ID
+	AdjustmentId  int64 `protobuf:"varint,1,opt,name=adjustment_id,json=adjustmentId,proto3" json:"adjustment_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddAdjustmentResponse) Reset() {
+	*x = AddAdjustmentResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddAdjustmentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddAdjustmentResponse) ProtoMessage() {}
+
+func (x *AddAdjustmentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddAdjustmentResponse.ProtoReflect.Descriptor instead.
+func (*AddAdjustmentResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *AddAdjustmentResponse) GetAdjustmentId() int64 {
+	if x != nil {
+		return x.AdjustmentId
+	}
+	return 0
+}
+
+type ListAdjustmentConfigsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Pagination
+	Page          *int32 `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAdjustmentConfigsRequest) Reset() {
+	*x = ListAdjustmentConfigsRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAdjustmentConfigsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAdjustmentConfigsRequest) ProtoMessage() {}
+
+func (x *ListAdjustmentConfigsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAdjustmentConfigsRequest.ProtoReflect.Descriptor instead.
+func (*ListAdjustmentConfigsRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *ListAdjustmentConfigsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListAdjustmentConfigsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type ListAdjustmentConfigsResponse struct {
+	state   protoimpl.MessageState                            `protogen:"open.v1"`
+	Configs []*ListAdjustmentConfigsResponse_AdjustmentConfig `protobuf:"bytes,1,rep,name=configs,proto3" json:"configs,omitempty"`
+	// Pagination information
+	TotalCount    int32 `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	Page          int32 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAdjustmentConfigsResponse) Reset() {
+	*x = ListAdjustmentConfigsResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAdjustmentConfigsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAdjustmentConfigsResponse) ProtoMessage() {}
+
+func (x *ListAdjustmentConfigsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAdjustmentConfigsResponse.ProtoReflect.Descriptor instead.
+func (*ListAdjustmentConfigsResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *ListAdjustmentConfigsResponse) GetConfigs() []*ListAdjustmentConfigsResponse_AdjustmentConfig {
+	if x != nil {
+		return x.Configs
+	}
+	return nil
+}
+
+func (x *ListAdjustmentConfigsResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *ListAdjustmentConfigsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListAdjustmentConfigsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type UpdateAdjustmentConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                  // Configuration ID to update
+	Item          string                 `protobuf:"bytes,2,opt,name=item,proto3" json:"item,omitempty"`               // Updated item name
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"` // Updated description
+	Enabled       *bool                  `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`  // Updated enabled status
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAdjustmentConfigRequest) Reset() {
+	*x = UpdateAdjustmentConfigRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAdjustmentConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAdjustmentConfigRequest) ProtoMessage() {}
+
+func (x *UpdateAdjustmentConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAdjustmentConfigRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAdjustmentConfigRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *UpdateAdjustmentConfigRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateAdjustmentConfigRequest) GetItem() string {
+	if x != nil {
+		return x.Item
+	}
+	return ""
+}
+
+func (x *UpdateAdjustmentConfigRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *UpdateAdjustmentConfigRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+type UpdateAdjustmentConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // Updated configuration ID
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAdjustmentConfigResponse) Reset() {
+	*x = UpdateAdjustmentConfigResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAdjustmentConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAdjustmentConfigResponse) ProtoMessage() {}
+
+func (x *UpdateAdjustmentConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAdjustmentConfigResponse.ProtoReflect.Descriptor instead.
+func (*UpdateAdjustmentConfigResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *UpdateAdjustmentConfigResponse) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteAdjustmentConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // Configuration ID to delete
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteAdjustmentConfigRequest) Reset() {
+	*x = DeleteAdjustmentConfigRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteAdjustmentConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAdjustmentConfigRequest) ProtoMessage() {}
+
+func (x *DeleteAdjustmentConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAdjustmentConfigRequest.ProtoReflect.Descriptor instead.
+func (*DeleteAdjustmentConfigRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *DeleteAdjustmentConfigRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteAdjustmentConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteAdjustmentConfigResponse) Reset() {
+	*x = DeleteAdjustmentConfigResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteAdjustmentConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAdjustmentConfigResponse) ProtoMessage() {}
+
+func (x *DeleteAdjustmentConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAdjustmentConfigResponse.ProtoReflect.Descriptor instead.
+func (*DeleteAdjustmentConfigResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{41}
+}
+
+type ListAdjustmentsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Filter by invoice ID
+	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
+	// Filter by retailer
+	RetailerId *string `protobuf:"bytes,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	// Filter by company
+	CompanyId *string `protobuf:"bytes,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	// Filter by operator
+	OperatorId *string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	// Pagination
+	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAdjustmentsRequest) Reset() {
+	*x = ListAdjustmentsRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAdjustmentsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAdjustmentsRequest) ProtoMessage() {}
+
+func (x *ListAdjustmentsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAdjustmentsRequest.ProtoReflect.Descriptor instead.
+func (*ListAdjustmentsRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *ListAdjustmentsRequest) GetInvoiceId() int64 {
+	if x != nil && x.InvoiceId != nil {
+		return *x.InvoiceId
+	}
+	return 0
+}
+
+func (x *ListAdjustmentsRequest) GetRetailerId() string {
+	if x != nil && x.RetailerId != nil {
+		return *x.RetailerId
+	}
+	return ""
+}
+
+func (x *ListAdjustmentsRequest) GetCompanyId() string {
+	if x != nil && x.CompanyId != nil {
+		return *x.CompanyId
+	}
+	return ""
+}
+
+func (x *ListAdjustmentsRequest) GetOperatorId() string {
+	if x != nil && x.OperatorId != nil {
+		return *x.OperatorId
+	}
+	return ""
+}
+
+func (x *ListAdjustmentsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListAdjustmentsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type ListAdjustmentsResponse struct {
+	state protoimpl.MessageState                    `protogen:"open.v1"`
+	Items []*ListAdjustmentsResponse_AdjustmentItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	// Summary
+	Subtotal string `protobuf:"bytes,2,opt,name=subtotal,proto3" json:"subtotal,omitempty"` // Total adjustment amount
+	// Pagination information
+	TotalCount    int32 `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	Page          int32 `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAdjustmentsResponse) Reset() {
+	*x = ListAdjustmentsResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAdjustmentsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAdjustmentsResponse) ProtoMessage() {}
+
+func (x *ListAdjustmentsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAdjustmentsResponse.ProtoReflect.Descriptor instead.
+func (*ListAdjustmentsResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *ListAdjustmentsResponse) GetItems() []*ListAdjustmentsResponse_AdjustmentItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *ListAdjustmentsResponse) GetSubtotal() string {
+	if x != nil {
+		return x.Subtotal
+	}
+	return ""
+}
+
+func (x *ListAdjustmentsResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *ListAdjustmentsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListAdjustmentsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
 type GetOperatorResponse_Operator struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
@@ -1121,7 +2660,7 @@ type GetOperatorResponse_Operator struct {
 
 func (x *GetOperatorResponse_Operator) Reset() {
 	*x = GetOperatorResponse_Operator{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[24]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1133,7 +2672,7 @@ func (x *GetOperatorResponse_Operator) String() string {
 func (*GetOperatorResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[24]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1181,7 +2720,7 @@ type GetOperatorsByIdsResponse_Operator struct {
 
 func (x *GetOperatorsByIdsResponse_Operator) Reset() {
 	*x = GetOperatorsByIdsResponse_Operator{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[25]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1193,7 +2732,7 @@ func (x *GetOperatorsByIdsResponse_Operator) String() string {
 func (*GetOperatorsByIdsResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorsByIdsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[25]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1241,7 +2780,7 @@ type GetOperatorCurrenciesResponse_Currency struct {
 
 func (x *GetOperatorCurrenciesResponse_Currency) Reset() {
 	*x = GetOperatorCurrenciesResponse_Currency{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[26]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1253,7 +2792,7 @@ func (x *GetOperatorCurrenciesResponse_Currency) String() string {
 func (*GetOperatorCurrenciesResponse_Currency) ProtoMessage() {}
 
 func (x *GetOperatorCurrenciesResponse_Currency) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[26]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1301,7 +2840,7 @@ type ListOperatorsResponse_Operator struct {
 
 func (x *ListOperatorsResponse_Operator) Reset() {
 	*x = ListOperatorsResponse_Operator{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[27]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1313,7 +2852,7 @@ func (x *ListOperatorsResponse_Operator) String() string {
 func (*ListOperatorsResponse_Operator) ProtoMessage() {}
 
 func (x *ListOperatorsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[27]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1350,11 +2889,981 @@ func (x *ListOperatorsResponse_Operator) GetEnabled() bool {
 	return false
 }
 
+type ListInvoviesResponse_Invoice struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Invoice ID
+	InvoiceId int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3" json:"invoice_id,omitempty"`
+	// Operator information
+	OperatorId   int64  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName string `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	// Retailer information
+	RetailerId   string `protobuf:"bytes,4,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
+	RetailerName string `protobuf:"bytes,5,opt,name=retailer_name,json=retailerName,proto3" json:"retailer_name,omitempty"`
+	// Company information
+	CompanyId   string `protobuf:"bytes,6,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
+	CompanyName string `protobuf:"bytes,7,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
+	// Invoice details
+	Month    string `protobuf:"bytes,8,opt,name=month,proto3" json:"month,omitempty"`
+	Retailer string `protobuf:"bytes,9,opt,name=retailer,proto3" json:"retailer,omitempty"`
+	Company  string `protobuf:"bytes,10,opt,name=company,proto3" json:"company,omitempty"`
+	// Financial information
+	DueAmount     string                                     `protobuf:"bytes,11,opt,name=due_amount,json=dueAmount,proto3" json:"due_amount,omitempty"`
+	PaymentStatus ListInvoviesResponse_Invoice_PaymentStatus `protobuf:"varint,12,opt,name=payment_status,json=paymentStatus,proto3,enum=api.operator.service.v1.ListInvoviesResponse_Invoice_PaymentStatus" json:"payment_status,omitempty"`
+	// Dates
+	InvoiceDate   string `protobuf:"bytes,13,opt,name=invoice_date,json=invoiceDate,proto3" json:"invoice_date,omitempty"` // Format: YYYY-MM-DD
+	DueDate       string `protobuf:"bytes,14,opt,name=due_date,json=dueDate,proto3" json:"due_date,omitempty"`             // Format: YYYY-MM-DD
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListInvoviesResponse_Invoice) Reset() {
+	*x = ListInvoviesResponse_Invoice{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListInvoviesResponse_Invoice) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListInvoviesResponse_Invoice) ProtoMessage() {}
+
+func (x *ListInvoviesResponse_Invoice) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListInvoviesResponse_Invoice.ProtoReflect.Descriptor instead.
+func (*ListInvoviesResponse_Invoice) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{25, 0}
+}
+
+func (x *ListInvoviesResponse_Invoice) GetInvoiceId() int64 {
+	if x != nil {
+		return x.InvoiceId
+	}
+	return 0
+}
+
+func (x *ListInvoviesResponse_Invoice) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *ListInvoviesResponse_Invoice) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *ListInvoviesResponse_Invoice) GetRetailerId() string {
+	if x != nil {
+		return x.RetailerId
+	}
+	return ""
+}
+
+func (x *ListInvoviesResponse_Invoice) GetRetailerName() string {
+	if x != nil {
+		return x.RetailerName
+	}
+	return ""
+}
+
+func (x *ListInvoviesResponse_Invoice) GetCompanyId() string {
+	if x != nil {
+		return x.CompanyId
+	}
+	return ""
+}
+
+func (x *ListInvoviesResponse_Invoice) GetCompanyName() string {
+	if x != nil {
+		return x.CompanyName
+	}
+	return ""
+}
+
+func (x *ListInvoviesResponse_Invoice) GetMonth() string {
+	if x != nil {
+		return x.Month
+	}
+	return ""
+}
+
+func (x *ListInvoviesResponse_Invoice) GetRetailer() string {
+	if x != nil {
+		return x.Retailer
+	}
+	return ""
+}
+
+func (x *ListInvoviesResponse_Invoice) GetCompany() string {
+	if x != nil {
+		return x.Company
+	}
+	return ""
+}
+
+func (x *ListInvoviesResponse_Invoice) GetDueAmount() string {
+	if x != nil {
+		return x.DueAmount
+	}
+	return ""
+}
+
+func (x *ListInvoviesResponse_Invoice) GetPaymentStatus() ListInvoviesResponse_Invoice_PaymentStatus {
+	if x != nil {
+		return x.PaymentStatus
+	}
+	return ListInvoviesResponse_Invoice_PAYMENT_STATUS_PAID
+}
+
+func (x *ListInvoviesResponse_Invoice) GetInvoiceDate() string {
+	if x != nil {
+		return x.InvoiceDate
+	}
+	return ""
+}
+
+func (x *ListInvoviesResponse_Invoice) GetDueDate() string {
+	if x != nil {
+		return x.DueDate
+	}
+	return ""
+}
+
+type GetInvoiceDetailResponse_InvoiceDetail struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Basic invoice information
+	InvoiceId     int64                                                `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3" json:"invoice_id,omitempty"`
+	PaymentStatus GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus `protobuf:"varint,2,opt,name=payment_status,json=paymentStatus,proto3,enum=api.operator.service.v1.GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus" json:"payment_status,omitempty"`
+	// Dates
+	InvoiceDate string `protobuf:"bytes,3,opt,name=invoice_date,json=invoiceDate,proto3" json:"invoice_date,omitempty"` // Format: YYYY-MM-DD
+	DueDate     string `protobuf:"bytes,4,opt,name=due_date,json=dueDate,proto3" json:"due_date,omitempty"`             // Format: YYYY-MM-DD
+	Month       string `protobuf:"bytes,5,opt,name=month,proto3" json:"month,omitempty"`                                // Format: YYYY-MM
+	// Invoice details
+	GameProviderRevenueShare string `protobuf:"bytes,6,opt,name=game_provider_revenue_share,json=gameProviderRevenueShare,proto3" json:"game_provider_revenue_share,omitempty"`
+	ThirdPartyCost           string `protobuf:"bytes,7,opt,name=third_party_cost,json=thirdPartyCost,proto3" json:"third_party_cost,omitempty"`
+	FeatureSubscription      string `protobuf:"bytes,8,opt,name=feature_subscription,json=featureSubscription,proto3" json:"feature_subscription,omitempty"`
+	RevenueShareDisburse     string `protobuf:"bytes,9,opt,name=revenue_share_disburse,json=revenueShareDisburse,proto3" json:"revenue_share_disburse,omitempty"`
+	RevenueShareCollet       string `protobuf:"bytes,10,opt,name=revenue_share_collet,json=revenueShareCollet,proto3" json:"revenue_share_collet,omitempty"`
+	Adjustments              string `protobuf:"bytes,11,opt,name=adjustments,proto3" json:"adjustments,omitempty"`
+	// Financial summary
+	TotalAmount string `protobuf:"bytes,12,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"` // Total invoice amount
+	AmountPaid  string `protobuf:"bytes,13,opt,name=amount_paid,json=amountPaid,proto3" json:"amount_paid,omitempty"`    // Amount already paid
+	DueAmount   string `protobuf:"bytes,14,opt,name=due_amount,json=dueAmount,proto3" json:"due_amount,omitempty"`       // Remaining amount due
+	// Retailer information
+	RetailerId   string `protobuf:"bytes,15,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
+	RetailerName string `protobuf:"bytes,16,opt,name=retailer_name,json=retailerName,proto3" json:"retailer_name,omitempty"`
+	// Company information
+	CompanyId   string `protobuf:"bytes,17,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
+	CompanyName string `protobuf:"bytes,18,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
+	// Operator information
+	OperatorId    int64  `protobuf:"varint,19,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName  string `protobuf:"bytes,20,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) Reset() {
+	*x = GetInvoiceDetailResponse_InvoiceDetail{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetInvoiceDetailResponse_InvoiceDetail) ProtoMessage() {}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetInvoiceDetailResponse_InvoiceDetail.ProtoReflect.Descriptor instead.
+func (*GetInvoiceDetailResponse_InvoiceDetail) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{27, 0}
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetInvoiceId() int64 {
+	if x != nil {
+		return x.InvoiceId
+	}
+	return 0
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetPaymentStatus() GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus {
+	if x != nil {
+		return x.PaymentStatus
+	}
+	return GetInvoiceDetailResponse_InvoiceDetail_PAYMENT_STATUS_PAID
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetInvoiceDate() string {
+	if x != nil {
+		return x.InvoiceDate
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetDueDate() string {
+	if x != nil {
+		return x.DueDate
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetMonth() string {
+	if x != nil {
+		return x.Month
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetGameProviderRevenueShare() string {
+	if x != nil {
+		return x.GameProviderRevenueShare
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetThirdPartyCost() string {
+	if x != nil {
+		return x.ThirdPartyCost
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetFeatureSubscription() string {
+	if x != nil {
+		return x.FeatureSubscription
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRevenueShareDisburse() string {
+	if x != nil {
+		return x.RevenueShareDisburse
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRevenueShareCollet() string {
+	if x != nil {
+		return x.RevenueShareCollet
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetAdjustments() string {
+	if x != nil {
+		return x.Adjustments
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetTotalAmount() string {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetAmountPaid() string {
+	if x != nil {
+		return x.AmountPaid
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetDueAmount() string {
+	if x != nil {
+		return x.DueAmount
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRetailerId() string {
+	if x != nil {
+		return x.RetailerId
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRetailerName() string {
+	if x != nil {
+		return x.RetailerName
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetCompanyId() string {
+	if x != nil {
+		return x.CompanyId
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetCompanyName() string {
+	if x != nil {
+		return x.CompanyName
+	}
+	return ""
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+type ListOperatorRevenueShareResponse_RevenueShareItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Basic information
+	OperatorId       string `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName     string `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	GameProviderId   string `protobuf:"bytes,3,opt,name=game_provider_id,json=gameProviderId,proto3" json:"game_provider_id,omitempty"`
+	GameProviderName string `protobuf:"bytes,4,opt,name=game_provider_name,json=gameProviderName,proto3" json:"game_provider_name,omitempty"`
+	FeeGroup         string `protobuf:"bytes,5,opt,name=fee_group,json=feeGroup,proto3" json:"fee_group,omitempty"`
+	Currency         string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Gaming statistics
+	TotalBet    string `protobuf:"bytes,7,opt,name=total_bet,json=totalBet,proto3" json:"total_bet,omitempty"`          // Total bet amount
+	TotalPayout string `protobuf:"bytes,8,opt,name=total_payout,json=totalPayout,proto3" json:"total_payout,omitempty"` // Total payout amount
+	BetsCount   int32  `protobuf:"varint,9,opt,name=bets_count,json=betsCount,proto3" json:"bets_count,omitempty"`      // Number of bets
+	Ngr         string `protobuf:"bytes,10,opt,name=ngr,proto3" json:"ngr,omitempty"`                                   // Net Gaming Revenue
+	Ggr         string `protobuf:"bytes,11,opt,name=ggr,proto3" json:"ggr,omitempty"`                                   // Gross Gaming Revenue
+	// Revenue share calculation
+	Rate          string `protobuf:"bytes,12,opt,name=rate,proto3" json:"rate,omitempty"`                            // Revenue share rate (e.g., "7.50%")
+	Amount        string `protobuf:"bytes,13,opt,name=amount,proto3" json:"amount,omitempty"`                        // Revenue share amount in original currency
+	FxRate        string `protobuf:"bytes,14,opt,name=fx_rate,json=fxRate,proto3" json:"fx_rate,omitempty"`          // Foreign exchange rate
+	AmountUsd     string `protobuf:"bytes,15,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"` // Revenue share amount in USD
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) Reset() {
+	*x = ListOperatorRevenueShareResponse_RevenueShareItem{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorRevenueShareResponse_RevenueShareItem) ProtoMessage() {}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorRevenueShareResponse_RevenueShareItem.ProtoReflect.Descriptor instead.
+func (*ListOperatorRevenueShareResponse_RevenueShareItem) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{29, 0}
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetOperatorId() string {
+	if x != nil {
+		return x.OperatorId
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetGameProviderId() string {
+	if x != nil {
+		return x.GameProviderId
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetGameProviderName() string {
+	if x != nil {
+		return x.GameProviderName
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetFeeGroup() string {
+	if x != nil {
+		return x.FeeGroup
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetTotalBet() string {
+	if x != nil {
+		return x.TotalBet
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetTotalPayout() string {
+	if x != nil {
+		return x.TotalPayout
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetBetsCount() int32 {
+	if x != nil {
+		return x.BetsCount
+	}
+	return 0
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetNgr() string {
+	if x != nil {
+		return x.Ngr
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetGgr() string {
+	if x != nil {
+		return x.Ggr
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetRate() string {
+	if x != nil {
+		return x.Rate
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetFxRate() string {
+	if x != nil {
+		return x.FxRate
+	}
+	return ""
+}
+
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+type ListThirdPartyFeesResponse_ThirdPartyFeeItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Basic information
+	OperatorId   string `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName string `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	Service      string `protobuf:"bytes,3,opt,name=service,proto3" json:"service,omitempty"`
+	// Fee details
+	Quantity      string `protobuf:"bytes,4,opt,name=quantity,proto3" json:"quantity,omitempty"`       // Quantity as string to preserve formatting
+	Amount        string `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`           // Amount as string to preserve precision
+	Description   string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"` // Description of the fee
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) Reset() {
+	*x = ListThirdPartyFeesResponse_ThirdPartyFeeItem{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListThirdPartyFeesResponse_ThirdPartyFeeItem) ProtoMessage() {}
+
+func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListThirdPartyFeesResponse_ThirdPartyFeeItem.ProtoReflect.Descriptor instead.
+func (*ListThirdPartyFeesResponse_ThirdPartyFeeItem) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{31, 0}
+}
+
+func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetOperatorId() string {
+	if x != nil {
+		return x.OperatorId
+	}
+	return ""
+}
+
+func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetService() string {
+	if x != nil {
+		return x.Service
+	}
+	return ""
+}
+
+func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetQuantity() string {
+	if x != nil {
+		return x.Quantity
+	}
+	return ""
+}
+
+func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+type ListMonthlyRevenueShareResponse_RevenueShareItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Basic information
+	OperatorId   string `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName string `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	OperatorMode string `protobuf:"bytes,3,opt,name=operator_mode,json=operatorMode,proto3" json:"operator_mode,omitempty"` // Individual, Co-Operation, Co-Operation (Self-Managed Payment)
+	// Financial data
+	Deposits    string `protobuf:"bytes,4,opt,name=deposits,proto3" json:"deposits,omitempty"`       // Deposit amounts
+	Withdrawals string `protobuf:"bytes,5,opt,name=withdrawals,proto3" json:"withdrawals,omitempty"` // Withdrawal amounts
+	Balance     string `protobuf:"bytes,6,opt,name=balance,proto3" json:"balance,omitempty"`         // Current balance
+	Ngr         string `protobuf:"bytes,7,opt,name=ngr,proto3" json:"ngr,omitempty"`                 // Net Gaming Revenue
+	Ggr         string `protobuf:"bytes,8,opt,name=ggr,proto3" json:"ggr,omitempty"`                 // Gross Gaming Revenue
+	// Revenue breakdown
+	GameProviderRs string `protobuf:"bytes,9,opt,name=game_provider_rs,json=gameProviderRs,proto3" json:"game_provider_rs,omitempty"`  // Game Provider Revenue Share
+	ThirdPartyFees string `protobuf:"bytes,10,opt,name=third_party_fees,json=thirdPartyFees,proto3" json:"third_party_fees,omitempty"` // Other 3rd-Party Fees
+	Adjustments    string `protobuf:"bytes,11,opt,name=adjustments,proto3" json:"adjustments,omitempty"`                               // Adjustments
+	NetProfit      string `protobuf:"bytes,13,opt,name=net_profit,json=netProfit,proto3" json:"net_profit,omitempty"`                  // Net Profit
+	// Revenue share details
+	RsRate               string `protobuf:"bytes,14,opt,name=rs_rate,json=rsRate,proto3" json:"rs_rate,omitempty"`                                             // Revenue Share Rate (e.g., "80%")
+	RevenueShareDisburse string `protobuf:"bytes,15,opt,name=revenue_share_disburse,json=revenueShareDisburse,proto3" json:"revenue_share_disburse,omitempty"` // Revenue Share (Disburse)
+	RevenueShareCollect  string `protobuf:"bytes,16,opt,name=revenue_share_collect,json=revenueShareCollect,proto3" json:"revenue_share_collect,omitempty"`    // Revenue Share (Collect)
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) Reset() {
+	*x = ListMonthlyRevenueShareResponse_RevenueShareItem{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMonthlyRevenueShareResponse_RevenueShareItem) ProtoMessage() {}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMonthlyRevenueShareResponse_RevenueShareItem.ProtoReflect.Descriptor instead.
+func (*ListMonthlyRevenueShareResponse_RevenueShareItem) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{33, 0}
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetOperatorId() string {
+	if x != nil {
+		return x.OperatorId
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetOperatorMode() string {
+	if x != nil {
+		return x.OperatorMode
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetDeposits() string {
+	if x != nil {
+		return x.Deposits
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetWithdrawals() string {
+	if x != nil {
+		return x.Withdrawals
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetBalance() string {
+	if x != nil {
+		return x.Balance
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetNgr() string {
+	if x != nil {
+		return x.Ngr
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetGgr() string {
+	if x != nil {
+		return x.Ggr
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetGameProviderRs() string {
+	if x != nil {
+		return x.GameProviderRs
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetThirdPartyFees() string {
+	if x != nil {
+		return x.ThirdPartyFees
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetAdjustments() string {
+	if x != nil {
+		return x.Adjustments
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetNetProfit() string {
+	if x != nil {
+		return x.NetProfit
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetRsRate() string {
+	if x != nil {
+		return x.RsRate
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetRevenueShareDisburse() string {
+	if x != nil {
+		return x.RevenueShareDisburse
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetRevenueShareCollect() string {
+	if x != nil {
+		return x.RevenueShareCollect
+	}
+	return ""
+}
+
+// Summary totals
+type ListMonthlyRevenueShareResponse_Summary struct {
+	state                     protoimpl.MessageState `protogen:"open.v1"`
+	Subtotal                  string                 `protobuf:"bytes,1,opt,name=subtotal,proto3" json:"subtotal,omitempty"`
+	RevenueShareDisburseTotal string                 `protobuf:"bytes,2,opt,name=revenue_share_disburse_total,json=revenueShareDisburseTotal,proto3" json:"revenue_share_disburse_total,omitempty"`
+	RevenueShareCollectTotal  string                 `protobuf:"bytes,3,opt,name=revenue_share_collect_total,json=revenueShareCollectTotal,proto3" json:"revenue_share_collect_total,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
+}
+
+func (x *ListMonthlyRevenueShareResponse_Summary) Reset() {
+	*x = ListMonthlyRevenueShareResponse_Summary{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListMonthlyRevenueShareResponse_Summary) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMonthlyRevenueShareResponse_Summary) ProtoMessage() {}
+
+func (x *ListMonthlyRevenueShareResponse_Summary) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMonthlyRevenueShareResponse_Summary.ProtoReflect.Descriptor instead.
+func (*ListMonthlyRevenueShareResponse_Summary) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{33, 1}
+}
+
+func (x *ListMonthlyRevenueShareResponse_Summary) GetSubtotal() string {
+	if x != nil {
+		return x.Subtotal
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_Summary) GetRevenueShareDisburseTotal() string {
+	if x != nil {
+		return x.RevenueShareDisburseTotal
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_Summary) GetRevenueShareCollectTotal() string {
+	if x != nil {
+		return x.RevenueShareCollectTotal
+	}
+	return ""
+}
+
+type ListAdjustmentConfigsResponse_AdjustmentConfig struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Item          string                 `protobuf:"bytes,2,opt,name=item,proto3" json:"item,omitempty"`               // Adjustment item name
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"` // Description of the adjustment item
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) Reset() {
+	*x = ListAdjustmentConfigsResponse_AdjustmentConfig{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAdjustmentConfigsResponse_AdjustmentConfig) ProtoMessage() {}
+
+func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAdjustmentConfigsResponse_AdjustmentConfig.ProtoReflect.Descriptor instead.
+func (*ListAdjustmentConfigsResponse_AdjustmentConfig) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{37, 0}
+}
+
+func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) GetItem() string {
+	if x != nil {
+		return x.Item
+	}
+	return ""
+}
+
+func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+type ListAdjustmentsResponse_AdjustmentItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Basic information
+	Item         string `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"` // Item type (e.g., "JP Provisions", "Correction", "Custom Fee")
+	OperatorId   string `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName string `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	Currency     string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Amount information
+	Amount        string `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`           // Amount as string to preserve precision
+	Description   string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"` // Description of the adjustment
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAdjustmentsResponse_AdjustmentItem) Reset() {
+	*x = ListAdjustmentsResponse_AdjustmentItem{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAdjustmentsResponse_AdjustmentItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAdjustmentsResponse_AdjustmentItem) ProtoMessage() {}
+
+func (x *ListAdjustmentsResponse_AdjustmentItem) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAdjustmentsResponse_AdjustmentItem.ProtoReflect.Descriptor instead.
+func (*ListAdjustmentsResponse_AdjustmentItem) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{43, 0}
+}
+
+func (x *ListAdjustmentsResponse_AdjustmentItem) GetItem() string {
+	if x != nil {
+		return x.Item
+	}
+	return ""
+}
+
+func (x *ListAdjustmentsResponse_AdjustmentItem) GetOperatorId() string {
+	if x != nil {
+		return x.OperatorId
+	}
+	return ""
+}
+
+func (x *ListAdjustmentsResponse_AdjustmentItem) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *ListAdjustmentsResponse_AdjustmentItem) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *ListAdjustmentsResponse_AdjustmentItem) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *ListAdjustmentsResponse_AdjustmentItem) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 var File_operator_service_v1_operator_proto protoreflect.FileDescriptor
 
 const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\n" +
-	"\"operator/service/v1/operator.proto\x12\x17api.operator.service.v1\"A\n" +
+	"\"operator/service/v1/operator.proto\x12\x17api.operator.service.v1\x1a\x1cgoogle/api/annotations.proto\"A\n" +
 	"\x12AddOperatorRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\"6\n" +
@@ -1438,7 +3947,299 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
-	"\aenabled\x18\x03 \x01(\bR\aenabled2\x8b\f\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled\"\xea\x03\n" +
+	"\x13ListInvoviesRequest\x12$\n" +
+	"\vretailer_id\x18\x01 \x01(\tH\x00R\n" +
+	"retailerId\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"company_id\x18\x02 \x01(\tH\x01R\tcompanyId\x88\x01\x01\x12\x19\n" +
+	"\x05month\x18\x03 \x01(\tH\x02R\x05month\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"invoice_id\x18\x04 \x01(\x03H\x03R\tinvoiceId\x88\x01\x01\x12f\n" +
+	"\x0epayment_status\x18\x05 \x01(\x0e2:.api.operator.service.v1.ListInvoviesRequest.PaymentStatusH\x04R\rpaymentStatus\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x06 \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\a \x01(\x05H\x06R\bpageSize\x88\x01\x01\"E\n" +
+	"\rPaymentStatus\x12\x17\n" +
+	"\x13PAYMENT_STATUS_PAID\x10\x00\x12\x1b\n" +
+	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01B\x0e\n" +
+	"\f_retailer_idB\r\n" +
+	"\v_company_idB\b\n" +
+	"\x06_monthB\r\n" +
+	"\v_invoice_idB\x11\n" +
+	"\x0f_payment_statusB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xeb\x06\n" +
+	"\x14ListInvoviesResponse\x12Q\n" +
+	"\binvoices\x18\x01 \x03(\v25.api.operator.service.v1.ListInvoviesResponse.InvoiceR\binvoices\x12\x1f\n" +
+	"\vtotal_count\x18\x02 \x01(\x05R\n" +
+	"totalCount\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12(\n" +
+	"\x10total_paid_count\x18\x05 \x01(\x05R\x0etotalPaidCount\x12/\n" +
+	"\x14total_not_paid_count\x18\x06 \x01(\x05R\x11totalNotPaidCount\x1a\xd2\x04\n" +
+	"\aInvoice\x12\x1d\n" +
+	"\n" +
+	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
+	"operatorId\x12#\n" +
+	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x12\x1f\n" +
+	"\vretailer_id\x18\x04 \x01(\tR\n" +
+	"retailerId\x12#\n" +
+	"\rretailer_name\x18\x05 \x01(\tR\fretailerName\x12\x1d\n" +
+	"\n" +
+	"company_id\x18\x06 \x01(\tR\tcompanyId\x12!\n" +
+	"\fcompany_name\x18\a \x01(\tR\vcompanyName\x12\x14\n" +
+	"\x05month\x18\b \x01(\tR\x05month\x12\x1a\n" +
+	"\bretailer\x18\t \x01(\tR\bretailer\x12\x18\n" +
+	"\acompany\x18\n" +
+	" \x01(\tR\acompany\x12\x1d\n" +
+	"\n" +
+	"due_amount\x18\v \x01(\tR\tdueAmount\x12j\n" +
+	"\x0epayment_status\x18\f \x01(\x0e2C.api.operator.service.v1.ListInvoviesResponse.Invoice.PaymentStatusR\rpaymentStatus\x12!\n" +
+	"\finvoice_date\x18\r \x01(\tR\vinvoiceDate\x12\x19\n" +
+	"\bdue_date\x18\x0e \x01(\tR\adueDate\"E\n" +
+	"\rPaymentStatus\x12\x17\n" +
+	"\x13PAYMENT_STATUS_PAID\x10\x00\x12\x1b\n" +
+	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01\"8\n" +
+	"\x17GetInvoiceDetailRequest\x12\x1d\n" +
+	"\n" +
+	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\"\x8e\b\n" +
+	"\x18GetInvoiceDetailResponse\x12Y\n" +
+	"\ainvoice\x18\x01 \x01(\v2?.api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetailR\ainvoice\x1a\x96\a\n" +
+	"\rInvoiceDetail\x12\x1d\n" +
+	"\n" +
+	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\x12t\n" +
+	"\x0epayment_status\x18\x02 \x01(\x0e2M.api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatusR\rpaymentStatus\x12!\n" +
+	"\finvoice_date\x18\x03 \x01(\tR\vinvoiceDate\x12\x19\n" +
+	"\bdue_date\x18\x04 \x01(\tR\adueDate\x12\x14\n" +
+	"\x05month\x18\x05 \x01(\tR\x05month\x12=\n" +
+	"\x1bgame_provider_revenue_share\x18\x06 \x01(\tR\x18gameProviderRevenueShare\x12(\n" +
+	"\x10third_party_cost\x18\a \x01(\tR\x0ethirdPartyCost\x121\n" +
+	"\x14feature_subscription\x18\b \x01(\tR\x13featureSubscription\x124\n" +
+	"\x16revenue_share_disburse\x18\t \x01(\tR\x14revenueShareDisburse\x120\n" +
+	"\x14revenue_share_collet\x18\n" +
+	" \x01(\tR\x12revenueShareCollet\x12 \n" +
+	"\vadjustments\x18\v \x01(\tR\vadjustments\x12!\n" +
+	"\ftotal_amount\x18\f \x01(\tR\vtotalAmount\x12\x1f\n" +
+	"\vamount_paid\x18\r \x01(\tR\n" +
+	"amountPaid\x12\x1d\n" +
+	"\n" +
+	"due_amount\x18\x0e \x01(\tR\tdueAmount\x12\x1f\n" +
+	"\vretailer_id\x18\x0f \x01(\tR\n" +
+	"retailerId\x12#\n" +
+	"\rretailer_name\x18\x10 \x01(\tR\fretailerName\x12\x1d\n" +
+	"\n" +
+	"company_id\x18\x11 \x01(\tR\tcompanyId\x12!\n" +
+	"\fcompany_name\x18\x12 \x01(\tR\vcompanyName\x12\x1f\n" +
+	"\voperator_id\x18\x13 \x01(\x03R\n" +
+	"operatorId\x12#\n" +
+	"\roperator_name\x18\x14 \x01(\tR\foperatorName\"E\n" +
+	"\rPaymentStatus\x12\x17\n" +
+	"\x13PAYMENT_STATUS_PAID\x10\x00\x12\x1b\n" +
+	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01\"\xc5\x02\n" +
+	"\x1fListOperatorRevenueShareRequest\x12\"\n" +
+	"\n" +
+	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
+	"\vretailer_id\x18\x02 \x01(\tH\x01R\n" +
+	"retailerId\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"company_id\x18\x03 \x01(\tH\x02R\tcompanyId\x88\x01\x01\x12$\n" +
+	"\voperator_id\x18\x04 \x01(\tH\x03R\n" +
+	"operatorId\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
+	"\v_invoice_idB\x0e\n" +
+	"\f_retailer_idB\r\n" +
+	"\v_company_idB\x0e\n" +
+	"\f_operator_idB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xe6\x05\n" +
+	" ListOperatorRevenueShareResponse\x12`\n" +
+	"\x05items\x18\x01 \x03(\v2J.api.operator.service.v1.ListOperatorRevenueShareResponse.RevenueShareItemR\x05items\x12\x1a\n" +
+	"\bsubtotal\x18\x02 \x01(\tR\bsubtotal\x12\x1f\n" +
+	"\vtotal_count\x18\x03 \x01(\x05R\n" +
+	"totalCount\x12\x12\n" +
+	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x12\x1f\n" +
+	"\vtotal_pages\x18\x06 \x01(\x05R\n" +
+	"totalPages\x1a\xd0\x03\n" +
+	"\x10RevenueShareItem\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"operatorId\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12(\n" +
+	"\x10game_provider_id\x18\x03 \x01(\tR\x0egameProviderId\x12,\n" +
+	"\x12game_provider_name\x18\x04 \x01(\tR\x10gameProviderName\x12\x1b\n" +
+	"\tfee_group\x18\x05 \x01(\tR\bfeeGroup\x12\x1a\n" +
+	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12\x1b\n" +
+	"\ttotal_bet\x18\a \x01(\tR\btotalBet\x12!\n" +
+	"\ftotal_payout\x18\b \x01(\tR\vtotalPayout\x12\x1d\n" +
+	"\n" +
+	"bets_count\x18\t \x01(\x05R\tbetsCount\x12\x10\n" +
+	"\x03ngr\x18\n" +
+	" \x01(\tR\x03ngr\x12\x10\n" +
+	"\x03ggr\x18\v \x01(\tR\x03ggr\x12\x12\n" +
+	"\x04rate\x18\f \x01(\tR\x04rate\x12\x16\n" +
+	"\x06amount\x18\r \x01(\tR\x06amount\x12\x17\n" +
+	"\afx_rate\x18\x0e \x01(\tR\x06fxRate\x12\x1d\n" +
+	"\n" +
+	"amount_usd\x18\x0f \x01(\tR\tamountUsd\"\xbf\x02\n" +
+	"\x19ListThirdPartyFeesRequest\x12\"\n" +
+	"\n" +
+	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
+	"\vretailer_id\x18\x02 \x01(\tH\x01R\n" +
+	"retailerId\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"company_id\x18\x03 \x01(\tH\x02R\tcompanyId\x88\x01\x01\x12$\n" +
+	"\voperator_id\x18\x04 \x01(\tH\x03R\n" +
+	"operatorId\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
+	"\v_invoice_idB\x0e\n" +
+	"\f_retailer_idB\r\n" +
+	"\v_company_idB\x0e\n" +
+	"\f_operator_idB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xb3\x03\n" +
+	"\x1aListThirdPartyFeesResponse\x12[\n" +
+	"\x05items\x18\x01 \x03(\v2E.api.operator.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItemR\x05items\x12\x1a\n" +
+	"\bsubtotal\x18\x02 \x01(\tR\bsubtotal\x12\x1f\n" +
+	"\vtotal_count\x18\x03 \x01(\x05R\n" +
+	"totalCount\x12\x12\n" +
+	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xc9\x01\n" +
+	"\x11ThirdPartyFeeItem\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"operatorId\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
+	"\aservice\x18\x03 \x01(\tR\aservice\x12\x1a\n" +
+	"\bquantity\x18\x04 \x01(\tR\bquantity\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\tR\x06amount\x12 \n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\"\xc4\x02\n" +
+	"\x1eListMonthlyRevenueShareRequest\x12\"\n" +
+	"\n" +
+	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
+	"\vretailer_id\x18\x02 \x01(\tH\x01R\n" +
+	"retailerId\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"company_id\x18\x03 \x01(\tH\x02R\tcompanyId\x88\x01\x01\x12$\n" +
+	"\voperator_id\x18\x04 \x01(\tH\x03R\n" +
+	"operatorId\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
+	"\v_invoice_idB\x0e\n" +
+	"\f_retailer_idB\r\n" +
+	"\v_company_idB\x0e\n" +
+	"\f_operator_idB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xec\a\n" +
+	"\x1fListMonthlyRevenueShareResponse\x12_\n" +
+	"\x05items\x18\x01 \x03(\v2I.api.operator.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItemR\x05items\x12Z\n" +
+	"\asummary\x18\x02 \x01(\v2@.api.operator.service.v1.ListMonthlyRevenueShareResponse.SummaryR\asummary\x12\x1f\n" +
+	"\vtotal_count\x18\x03 \x01(\x05R\n" +
+	"totalCount\x12\x12\n" +
+	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\x91\x04\n" +
+	"\x10RevenueShareItem\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"operatorId\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12#\n" +
+	"\roperator_mode\x18\x03 \x01(\tR\foperatorMode\x12\x1a\n" +
+	"\bdeposits\x18\x04 \x01(\tR\bdeposits\x12 \n" +
+	"\vwithdrawals\x18\x05 \x01(\tR\vwithdrawals\x12\x18\n" +
+	"\abalance\x18\x06 \x01(\tR\abalance\x12\x10\n" +
+	"\x03ngr\x18\a \x01(\tR\x03ngr\x12\x10\n" +
+	"\x03ggr\x18\b \x01(\tR\x03ggr\x12(\n" +
+	"\x10game_provider_rs\x18\t \x01(\tR\x0egameProviderRs\x12(\n" +
+	"\x10third_party_fees\x18\n" +
+	" \x01(\tR\x0ethirdPartyFees\x12 \n" +
+	"\vadjustments\x18\v \x01(\tR\vadjustments\x12\x1d\n" +
+	"\n" +
+	"net_profit\x18\r \x01(\tR\tnetProfit\x12\x17\n" +
+	"\ars_rate\x18\x0e \x01(\tR\x06rsRate\x124\n" +
+	"\x16revenue_share_disburse\x18\x0f \x01(\tR\x14revenueShareDisburse\x122\n" +
+	"\x15revenue_share_collect\x18\x10 \x01(\tR\x13revenueShareCollect\x1a\xa5\x01\n" +
+	"\aSummary\x12\x1a\n" +
+	"\bsubtotal\x18\x01 \x01(\tR\bsubtotal\x12?\n" +
+	"\x1crevenue_share_disburse_total\x18\x02 \x01(\tR\x19revenueShareDisburseTotal\x12=\n" +
+	"\x1brevenue_share_collect_total\x18\x03 \x01(\tR\x18revenueShareCollectTotal\"\xe1\x01\n" +
+	"\x14AddAdjustmentRequest\x12\x12\n" +
+	"\x04item\x18\x01 \x01(\tR\x04item\x12\x1f\n" +
+	"\vretailer_id\x18\x02 \x01(\tR\n" +
+	"retailerId\x12\x1d\n" +
+	"\n" +
+	"company_id\x18\x03 \x01(\tR\tcompanyId\x12\x1f\n" +
+	"\voperator_id\x18\x04 \x01(\tR\n" +
+	"operatorId\x12\x1a\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x16\n" +
+	"\x06amount\x18\x06 \x01(\tR\x06amount\x12 \n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\"<\n" +
+	"\x15AddAdjustmentResponse\x12#\n" +
+	"\radjustment_id\x18\x01 \x01(\x03R\fadjustmentId\"p\n" +
+	"\x1cListAdjustmentConfigsRequest\x12\x17\n" +
+	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xae\x02\n" +
+	"\x1dListAdjustmentConfigsResponse\x12a\n" +
+	"\aconfigs\x18\x01 \x03(\v2G.api.operator.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfigR\aconfigs\x12\x1f\n" +
+	"\vtotal_count\x18\x02 \x01(\x05R\n" +
+	"totalCount\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1aX\n" +
+	"\x10AdjustmentConfig\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04item\x18\x02 \x01(\tR\x04item\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\"\x90\x01\n" +
+	"\x1dUpdateAdjustmentConfigRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04item\x18\x02 \x01(\tR\x04item\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1d\n" +
+	"\aenabled\x18\x04 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
+	"\n" +
+	"\b_enabled\"0\n" +
+	"\x1eUpdateAdjustmentConfigResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"/\n" +
+	"\x1dDeleteAdjustmentConfigRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\" \n" +
+	"\x1eDeleteAdjustmentConfigResponse\"\xbc\x02\n" +
+	"\x16ListAdjustmentsRequest\x12\"\n" +
+	"\n" +
+	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
+	"\vretailer_id\x18\x02 \x01(\tH\x01R\n" +
+	"retailerId\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"company_id\x18\x03 \x01(\tH\x02R\tcompanyId\x88\x01\x01\x12$\n" +
+	"\voperator_id\x18\x04 \x01(\tH\x03R\n" +
+	"operatorId\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
+	"\v_invoice_idB\x0e\n" +
+	"\f_retailer_idB\r\n" +
+	"\v_company_idB\x0e\n" +
+	"\f_operator_idB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xa1\x03\n" +
+	"\x17ListAdjustmentsResponse\x12U\n" +
+	"\x05items\x18\x01 \x03(\v2?.api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItemR\x05items\x12\x1a\n" +
+	"\bsubtotal\x18\x02 \x01(\tR\bsubtotal\x12\x1f\n" +
+	"\vtotal_count\x18\x03 \x01(\x05R\n" +
+	"totalCount\x12\x12\n" +
+	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xc0\x01\n" +
+	"\x0eAdjustmentItem\x12\x12\n" +
+	"\x04item\x18\x01 \x01(\tR\x04item\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\tR\n" +
+	"operatorId\x12#\n" +
+	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x12\x1a\n" +
+	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\tR\x06amount\x12 \n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription2\xe6\x19\n" +
 	"\bOperator\x12j\n" +
 	"\vAddOperator\x12+.api.operator.service.v1.AddOperatorRequest\x1a,.api.operator.service.v1.AddOperatorResponse\"\x00\x12s\n" +
 	"\x0eUpdateOperator\x12..api.operator.service.v1.UpdateOperatorRequest\x1a/.api.operator.service.v1.UpdateOperatorResponse\"\x00\x12j\n" +
@@ -1451,7 +4252,17 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x15GetOperatorIdByOrigin\x125.api.operator.service.v1.GetOperatorIdByOriginRequest\x1a6.api.operator.service.v1.GetOperatorIdByOriginResponse\"\x00\x12\x8b\x01\n" +
 	"\x16DeleteOriginOperatorId\x126.api.operator.service.v1.DeleteOriginOperatorIdRequest\x1a7.api.operator.service.v1.DeleteOriginOperatorIdResponse\"\x00\x12\x85\x01\n" +
 	"\x14GetParentOperatorIds\x124.api.operator.service.v1.GetParentOperatorIdsRequest\x1a5.api.operator.service.v1.GetParentOperatorIdsResponse\"\x00\x12p\n" +
-	"\rListOperators\x12-.api.operator.service.v1.ListOperatorsRequest\x1a..api.operator.service.v1.ListOperatorsResponse\"\x00BW\n" +
+	"\rListOperators\x12-.api.operator.service.v1.ListOperatorsRequest\x1a..api.operator.service.v1.ListOperatorsResponse\"\x00\x12\x92\x01\n" +
+	"\fListInvovies\x12,.api.operator.service.v1.ListInvoviesRequest\x1a-.api.operator.service.v1.ListInvoviesResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/operator/invovies/list\x12\x9f\x01\n" +
+	"\x10GetInvoiceDetail\x120.api.operator.service.v1.GetInvoiceDetailRequest\x1a1.api.operator.service.v1.GetInvoiceDetailResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/operator/invoice/detail\x12\xbc\x01\n" +
+	"\x18ListOperatorRevenueShare\x128.api.operator.service.v1.ListOperatorRevenueShareRequest\x1a9.api.operator.service.v1.ListOperatorRevenueShareResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/operator/revenue-shares/list\x12\xac\x01\n" +
+	"\x12ListThirdPartyFees\x122.api.operator.service.v1.ListThirdPartyFeesRequest\x1a3.api.operator.service.v1.ListThirdPartyFeesResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/operator/third-party-fees/list\x12\x9e\x01\n" +
+	"\x0fListAdjustments\x12/.api.operator.service.v1.ListAdjustmentsRequest\x1a0.api.operator.service.v1.ListAdjustmentsResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/operator/adjustments/list\x12\xc1\x01\n" +
+	"\x17ListMonthlyRevenueShare\x127.api.operator.service.v1.ListMonthlyRevenueShareRequest\x1a8.api.operator.service.v1.ListMonthlyRevenueShareResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/operator/monthly-revenue-shares/list\x12\x96\x01\n" +
+	"\rAddAdjustment\x12-.api.operator.service.v1.AddAdjustmentRequest\x1a..api.operator.service.v1.AddAdjustmentResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/operator/adjustment/add\x12\xb7\x01\n" +
+	"\x15ListAdjustmentConfigs\x125.api.operator.service.v1.ListAdjustmentConfigsRequest\x1a6.api.operator.service.v1.ListAdjustmentConfigsResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/operator/adjustment-configs/list\x12\xbc\x01\n" +
+	"\x16UpdateAdjustmentConfig\x126.api.operator.service.v1.UpdateAdjustmentConfigRequest\x1a7.api.operator.service.v1.UpdateAdjustmentConfigResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/operator/adjustment-configs/update\x12\xbc\x01\n" +
+	"\x16DeleteAdjustmentConfig\x126.api.operator.service.v1.DeleteAdjustmentConfigRequest\x1a7.api.operator.service.v1.DeleteAdjustmentConfigResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/operator/adjustment-configs/deleteBW\n" +
 	"\x17api.operator.service.v1P\x01Z:github.com/infigaming-com/meepo-api/operator/service/v1;v1b\x06proto3"
 
 var (
@@ -1466,71 +4277,134 @@ func file_operator_service_v1_operator_proto_rawDescGZIP() []byte {
 	return file_operator_service_v1_operator_proto_rawDescData
 }
 
-var file_operator_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_operator_service_v1_operator_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_operator_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
 var file_operator_service_v1_operator_proto_goTypes = []any{
-	(*AddOperatorRequest)(nil),                     // 0: api.operator.service.v1.AddOperatorRequest
-	(*AddOperatorResponse)(nil),                    // 1: api.operator.service.v1.AddOperatorResponse
-	(*UpdateOperatorRequest)(nil),                  // 2: api.operator.service.v1.UpdateOperatorRequest
-	(*UpdateOperatorResponse)(nil),                 // 3: api.operator.service.v1.UpdateOperatorResponse
-	(*GetOperatorRequest)(nil),                     // 4: api.operator.service.v1.GetOperatorRequest
-	(*GetOperatorResponse)(nil),                    // 5: api.operator.service.v1.GetOperatorResponse
-	(*GetOperatorsByIdsRequest)(nil),               // 6: api.operator.service.v1.GetOperatorsByIdsRequest
-	(*GetOperatorsByIdsResponse)(nil),              // 7: api.operator.service.v1.GetOperatorsByIdsResponse
-	(*AddOrUpdateCurrencyRequest)(nil),             // 8: api.operator.service.v1.AddOrUpdateCurrencyRequest
-	(*AddOrUpdateCurrencyResponse)(nil),            // 9: api.operator.service.v1.AddOrUpdateCurrencyResponse
-	(*UpdateOperatorCurrencyRequest)(nil),          // 10: api.operator.service.v1.UpdateOperatorCurrencyRequest
-	(*UpdateOperatorCurrencyResponse)(nil),         // 11: api.operator.service.v1.UpdateOperatorCurrencyResponse
-	(*GetOperatorCurrenciesRequest)(nil),           // 12: api.operator.service.v1.GetOperatorCurrenciesRequest
-	(*GetOperatorCurrenciesResponse)(nil),          // 13: api.operator.service.v1.GetOperatorCurrenciesResponse
-	(*AddOriginOperatorIdRequest)(nil),             // 14: api.operator.service.v1.AddOriginOperatorIdRequest
-	(*AddOriginOperatorIdResponse)(nil),            // 15: api.operator.service.v1.AddOriginOperatorIdResponse
-	(*GetOperatorIdByOriginRequest)(nil),           // 16: api.operator.service.v1.GetOperatorIdByOriginRequest
-	(*GetOperatorIdByOriginResponse)(nil),          // 17: api.operator.service.v1.GetOperatorIdByOriginResponse
-	(*DeleteOriginOperatorIdRequest)(nil),          // 18: api.operator.service.v1.DeleteOriginOperatorIdRequest
-	(*DeleteOriginOperatorIdResponse)(nil),         // 19: api.operator.service.v1.DeleteOriginOperatorIdResponse
-	(*GetParentOperatorIdsRequest)(nil),            // 20: api.operator.service.v1.GetParentOperatorIdsRequest
-	(*GetParentOperatorIdsResponse)(nil),           // 21: api.operator.service.v1.GetParentOperatorIdsResponse
-	(*ListOperatorsRequest)(nil),                   // 22: api.operator.service.v1.ListOperatorsRequest
-	(*ListOperatorsResponse)(nil),                  // 23: api.operator.service.v1.ListOperatorsResponse
-	(*GetOperatorResponse_Operator)(nil),           // 24: api.operator.service.v1.GetOperatorResponse.Operator
-	(*GetOperatorsByIdsResponse_Operator)(nil),     // 25: api.operator.service.v1.GetOperatorsByIdsResponse.Operator
-	(*GetOperatorCurrenciesResponse_Currency)(nil), // 26: api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
-	(*ListOperatorsResponse_Operator)(nil),         // 27: api.operator.service.v1.ListOperatorsResponse.Operator
+	(ListInvoviesRequest_PaymentStatus)(0),                    // 0: api.operator.service.v1.ListInvoviesRequest.PaymentStatus
+	(ListInvoviesResponse_Invoice_PaymentStatus)(0),           // 1: api.operator.service.v1.ListInvoviesResponse.Invoice.PaymentStatus
+	(GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus)(0), // 2: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatus
+	(*AddOperatorRequest)(nil),                                // 3: api.operator.service.v1.AddOperatorRequest
+	(*AddOperatorResponse)(nil),                               // 4: api.operator.service.v1.AddOperatorResponse
+	(*UpdateOperatorRequest)(nil),                             // 5: api.operator.service.v1.UpdateOperatorRequest
+	(*UpdateOperatorResponse)(nil),                            // 6: api.operator.service.v1.UpdateOperatorResponse
+	(*GetOperatorRequest)(nil),                                // 7: api.operator.service.v1.GetOperatorRequest
+	(*GetOperatorResponse)(nil),                               // 8: api.operator.service.v1.GetOperatorResponse
+	(*GetOperatorsByIdsRequest)(nil),                          // 9: api.operator.service.v1.GetOperatorsByIdsRequest
+	(*GetOperatorsByIdsResponse)(nil),                         // 10: api.operator.service.v1.GetOperatorsByIdsResponse
+	(*AddOrUpdateCurrencyRequest)(nil),                        // 11: api.operator.service.v1.AddOrUpdateCurrencyRequest
+	(*AddOrUpdateCurrencyResponse)(nil),                       // 12: api.operator.service.v1.AddOrUpdateCurrencyResponse
+	(*UpdateOperatorCurrencyRequest)(nil),                     // 13: api.operator.service.v1.UpdateOperatorCurrencyRequest
+	(*UpdateOperatorCurrencyResponse)(nil),                    // 14: api.operator.service.v1.UpdateOperatorCurrencyResponse
+	(*GetOperatorCurrenciesRequest)(nil),                      // 15: api.operator.service.v1.GetOperatorCurrenciesRequest
+	(*GetOperatorCurrenciesResponse)(nil),                     // 16: api.operator.service.v1.GetOperatorCurrenciesResponse
+	(*AddOriginOperatorIdRequest)(nil),                        // 17: api.operator.service.v1.AddOriginOperatorIdRequest
+	(*AddOriginOperatorIdResponse)(nil),                       // 18: api.operator.service.v1.AddOriginOperatorIdResponse
+	(*GetOperatorIdByOriginRequest)(nil),                      // 19: api.operator.service.v1.GetOperatorIdByOriginRequest
+	(*GetOperatorIdByOriginResponse)(nil),                     // 20: api.operator.service.v1.GetOperatorIdByOriginResponse
+	(*DeleteOriginOperatorIdRequest)(nil),                     // 21: api.operator.service.v1.DeleteOriginOperatorIdRequest
+	(*DeleteOriginOperatorIdResponse)(nil),                    // 22: api.operator.service.v1.DeleteOriginOperatorIdResponse
+	(*GetParentOperatorIdsRequest)(nil),                       // 23: api.operator.service.v1.GetParentOperatorIdsRequest
+	(*GetParentOperatorIdsResponse)(nil),                      // 24: api.operator.service.v1.GetParentOperatorIdsResponse
+	(*ListOperatorsRequest)(nil),                              // 25: api.operator.service.v1.ListOperatorsRequest
+	(*ListOperatorsResponse)(nil),                             // 26: api.operator.service.v1.ListOperatorsResponse
+	(*ListInvoviesRequest)(nil),                               // 27: api.operator.service.v1.ListInvoviesRequest
+	(*ListInvoviesResponse)(nil),                              // 28: api.operator.service.v1.ListInvoviesResponse
+	(*GetInvoiceDetailRequest)(nil),                           // 29: api.operator.service.v1.GetInvoiceDetailRequest
+	(*GetInvoiceDetailResponse)(nil),                          // 30: api.operator.service.v1.GetInvoiceDetailResponse
+	(*ListOperatorRevenueShareRequest)(nil),                   // 31: api.operator.service.v1.ListOperatorRevenueShareRequest
+	(*ListOperatorRevenueShareResponse)(nil),                  // 32: api.operator.service.v1.ListOperatorRevenueShareResponse
+	(*ListThirdPartyFeesRequest)(nil),                         // 33: api.operator.service.v1.ListThirdPartyFeesRequest
+	(*ListThirdPartyFeesResponse)(nil),                        // 34: api.operator.service.v1.ListThirdPartyFeesResponse
+	(*ListMonthlyRevenueShareRequest)(nil),                    // 35: api.operator.service.v1.ListMonthlyRevenueShareRequest
+	(*ListMonthlyRevenueShareResponse)(nil),                   // 36: api.operator.service.v1.ListMonthlyRevenueShareResponse
+	(*AddAdjustmentRequest)(nil),                              // 37: api.operator.service.v1.AddAdjustmentRequest
+	(*AddAdjustmentResponse)(nil),                             // 38: api.operator.service.v1.AddAdjustmentResponse
+	(*ListAdjustmentConfigsRequest)(nil),                      // 39: api.operator.service.v1.ListAdjustmentConfigsRequest
+	(*ListAdjustmentConfigsResponse)(nil),                     // 40: api.operator.service.v1.ListAdjustmentConfigsResponse
+	(*UpdateAdjustmentConfigRequest)(nil),                     // 41: api.operator.service.v1.UpdateAdjustmentConfigRequest
+	(*UpdateAdjustmentConfigResponse)(nil),                    // 42: api.operator.service.v1.UpdateAdjustmentConfigResponse
+	(*DeleteAdjustmentConfigRequest)(nil),                     // 43: api.operator.service.v1.DeleteAdjustmentConfigRequest
+	(*DeleteAdjustmentConfigResponse)(nil),                    // 44: api.operator.service.v1.DeleteAdjustmentConfigResponse
+	(*ListAdjustmentsRequest)(nil),                            // 45: api.operator.service.v1.ListAdjustmentsRequest
+	(*ListAdjustmentsResponse)(nil),                           // 46: api.operator.service.v1.ListAdjustmentsResponse
+	(*GetOperatorResponse_Operator)(nil),                      // 47: api.operator.service.v1.GetOperatorResponse.Operator
+	(*GetOperatorsByIdsResponse_Operator)(nil),                // 48: api.operator.service.v1.GetOperatorsByIdsResponse.Operator
+	(*GetOperatorCurrenciesResponse_Currency)(nil),            // 49: api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
+	(*ListOperatorsResponse_Operator)(nil),                    // 50: api.operator.service.v1.ListOperatorsResponse.Operator
+	(*ListInvoviesResponse_Invoice)(nil),                      // 51: api.operator.service.v1.ListInvoviesResponse.Invoice
+	(*GetInvoiceDetailResponse_InvoiceDetail)(nil),            // 52: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail
+	(*ListOperatorRevenueShareResponse_RevenueShareItem)(nil), // 53: api.operator.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
+	(*ListThirdPartyFeesResponse_ThirdPartyFeeItem)(nil),      // 54: api.operator.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
+	(*ListMonthlyRevenueShareResponse_RevenueShareItem)(nil),  // 55: api.operator.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItem
+	(*ListMonthlyRevenueShareResponse_Summary)(nil),           // 56: api.operator.service.v1.ListMonthlyRevenueShareResponse.Summary
+	(*ListAdjustmentConfigsResponse_AdjustmentConfig)(nil),    // 57: api.operator.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
+	(*ListAdjustmentsResponse_AdjustmentItem)(nil),            // 58: api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItem
 }
 var file_operator_service_v1_operator_proto_depIdxs = []int32{
-	24, // 0: api.operator.service.v1.GetOperatorResponse.operator:type_name -> api.operator.service.v1.GetOperatorResponse.Operator
-	25, // 1: api.operator.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.operator.service.v1.GetOperatorsByIdsResponse.Operator
-	26, // 2: api.operator.service.v1.GetOperatorCurrenciesResponse.currencies:type_name -> api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
-	27, // 3: api.operator.service.v1.ListOperatorsResponse.operators:type_name -> api.operator.service.v1.ListOperatorsResponse.Operator
-	0,  // 4: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
-	2,  // 5: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
-	4,  // 6: api.operator.service.v1.Operator.GetOperator:input_type -> api.operator.service.v1.GetOperatorRequest
-	6,  // 7: api.operator.service.v1.Operator.GetOperatorsByIds:input_type -> api.operator.service.v1.GetOperatorsByIdsRequest
-	8,  // 8: api.operator.service.v1.Operator.AddOrUpdateCurrency:input_type -> api.operator.service.v1.AddOrUpdateCurrencyRequest
-	10, // 9: api.operator.service.v1.Operator.UpdateOperatorCurrency:input_type -> api.operator.service.v1.UpdateOperatorCurrencyRequest
-	12, // 10: api.operator.service.v1.Operator.GetOperatorCurrencies:input_type -> api.operator.service.v1.GetOperatorCurrenciesRequest
-	14, // 11: api.operator.service.v1.Operator.AddOriginOperatorId:input_type -> api.operator.service.v1.AddOriginOperatorIdRequest
-	16, // 12: api.operator.service.v1.Operator.GetOperatorIdByOrigin:input_type -> api.operator.service.v1.GetOperatorIdByOriginRequest
-	18, // 13: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
-	20, // 14: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
-	22, // 15: api.operator.service.v1.Operator.ListOperators:input_type -> api.operator.service.v1.ListOperatorsRequest
-	1,  // 16: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
-	3,  // 17: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
-	5,  // 18: api.operator.service.v1.Operator.GetOperator:output_type -> api.operator.service.v1.GetOperatorResponse
-	7,  // 19: api.operator.service.v1.Operator.GetOperatorsByIds:output_type -> api.operator.service.v1.GetOperatorsByIdsResponse
-	9,  // 20: api.operator.service.v1.Operator.AddOrUpdateCurrency:output_type -> api.operator.service.v1.AddOrUpdateCurrencyResponse
-	11, // 21: api.operator.service.v1.Operator.UpdateOperatorCurrency:output_type -> api.operator.service.v1.UpdateOperatorCurrencyResponse
-	13, // 22: api.operator.service.v1.Operator.GetOperatorCurrencies:output_type -> api.operator.service.v1.GetOperatorCurrenciesResponse
-	15, // 23: api.operator.service.v1.Operator.AddOriginOperatorId:output_type -> api.operator.service.v1.AddOriginOperatorIdResponse
-	17, // 24: api.operator.service.v1.Operator.GetOperatorIdByOrigin:output_type -> api.operator.service.v1.GetOperatorIdByOriginResponse
-	19, // 25: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
-	21, // 26: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
-	23, // 27: api.operator.service.v1.Operator.ListOperators:output_type -> api.operator.service.v1.ListOperatorsResponse
-	16, // [16:28] is the sub-list for method output_type
-	4,  // [4:16] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	47, // 0: api.operator.service.v1.GetOperatorResponse.operator:type_name -> api.operator.service.v1.GetOperatorResponse.Operator
+	48, // 1: api.operator.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.operator.service.v1.GetOperatorsByIdsResponse.Operator
+	49, // 2: api.operator.service.v1.GetOperatorCurrenciesResponse.currencies:type_name -> api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
+	50, // 3: api.operator.service.v1.ListOperatorsResponse.operators:type_name -> api.operator.service.v1.ListOperatorsResponse.Operator
+	0,  // 4: api.operator.service.v1.ListInvoviesRequest.payment_status:type_name -> api.operator.service.v1.ListInvoviesRequest.PaymentStatus
+	51, // 5: api.operator.service.v1.ListInvoviesResponse.invoices:type_name -> api.operator.service.v1.ListInvoviesResponse.Invoice
+	52, // 6: api.operator.service.v1.GetInvoiceDetailResponse.invoice:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail
+	53, // 7: api.operator.service.v1.ListOperatorRevenueShareResponse.items:type_name -> api.operator.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
+	54, // 8: api.operator.service.v1.ListThirdPartyFeesResponse.items:type_name -> api.operator.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
+	55, // 9: api.operator.service.v1.ListMonthlyRevenueShareResponse.items:type_name -> api.operator.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItem
+	56, // 10: api.operator.service.v1.ListMonthlyRevenueShareResponse.summary:type_name -> api.operator.service.v1.ListMonthlyRevenueShareResponse.Summary
+	57, // 11: api.operator.service.v1.ListAdjustmentConfigsResponse.configs:type_name -> api.operator.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
+	58, // 12: api.operator.service.v1.ListAdjustmentsResponse.items:type_name -> api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItem
+	1,  // 13: api.operator.service.v1.ListInvoviesResponse.Invoice.payment_status:type_name -> api.operator.service.v1.ListInvoviesResponse.Invoice.PaymentStatus
+	2,  // 14: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.payment_status:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatus
+	3,  // 15: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
+	5,  // 16: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
+	7,  // 17: api.operator.service.v1.Operator.GetOperator:input_type -> api.operator.service.v1.GetOperatorRequest
+	9,  // 18: api.operator.service.v1.Operator.GetOperatorsByIds:input_type -> api.operator.service.v1.GetOperatorsByIdsRequest
+	11, // 19: api.operator.service.v1.Operator.AddOrUpdateCurrency:input_type -> api.operator.service.v1.AddOrUpdateCurrencyRequest
+	13, // 20: api.operator.service.v1.Operator.UpdateOperatorCurrency:input_type -> api.operator.service.v1.UpdateOperatorCurrencyRequest
+	15, // 21: api.operator.service.v1.Operator.GetOperatorCurrencies:input_type -> api.operator.service.v1.GetOperatorCurrenciesRequest
+	17, // 22: api.operator.service.v1.Operator.AddOriginOperatorId:input_type -> api.operator.service.v1.AddOriginOperatorIdRequest
+	19, // 23: api.operator.service.v1.Operator.GetOperatorIdByOrigin:input_type -> api.operator.service.v1.GetOperatorIdByOriginRequest
+	21, // 24: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
+	23, // 25: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
+	25, // 26: api.operator.service.v1.Operator.ListOperators:input_type -> api.operator.service.v1.ListOperatorsRequest
+	27, // 27: api.operator.service.v1.Operator.ListInvovies:input_type -> api.operator.service.v1.ListInvoviesRequest
+	29, // 28: api.operator.service.v1.Operator.GetInvoiceDetail:input_type -> api.operator.service.v1.GetInvoiceDetailRequest
+	31, // 29: api.operator.service.v1.Operator.ListOperatorRevenueShare:input_type -> api.operator.service.v1.ListOperatorRevenueShareRequest
+	33, // 30: api.operator.service.v1.Operator.ListThirdPartyFees:input_type -> api.operator.service.v1.ListThirdPartyFeesRequest
+	45, // 31: api.operator.service.v1.Operator.ListAdjustments:input_type -> api.operator.service.v1.ListAdjustmentsRequest
+	35, // 32: api.operator.service.v1.Operator.ListMonthlyRevenueShare:input_type -> api.operator.service.v1.ListMonthlyRevenueShareRequest
+	37, // 33: api.operator.service.v1.Operator.AddAdjustment:input_type -> api.operator.service.v1.AddAdjustmentRequest
+	39, // 34: api.operator.service.v1.Operator.ListAdjustmentConfigs:input_type -> api.operator.service.v1.ListAdjustmentConfigsRequest
+	41, // 35: api.operator.service.v1.Operator.UpdateAdjustmentConfig:input_type -> api.operator.service.v1.UpdateAdjustmentConfigRequest
+	43, // 36: api.operator.service.v1.Operator.DeleteAdjustmentConfig:input_type -> api.operator.service.v1.DeleteAdjustmentConfigRequest
+	4,  // 37: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
+	6,  // 38: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
+	8,  // 39: api.operator.service.v1.Operator.GetOperator:output_type -> api.operator.service.v1.GetOperatorResponse
+	10, // 40: api.operator.service.v1.Operator.GetOperatorsByIds:output_type -> api.operator.service.v1.GetOperatorsByIdsResponse
+	12, // 41: api.operator.service.v1.Operator.AddOrUpdateCurrency:output_type -> api.operator.service.v1.AddOrUpdateCurrencyResponse
+	14, // 42: api.operator.service.v1.Operator.UpdateOperatorCurrency:output_type -> api.operator.service.v1.UpdateOperatorCurrencyResponse
+	16, // 43: api.operator.service.v1.Operator.GetOperatorCurrencies:output_type -> api.operator.service.v1.GetOperatorCurrenciesResponse
+	18, // 44: api.operator.service.v1.Operator.AddOriginOperatorId:output_type -> api.operator.service.v1.AddOriginOperatorIdResponse
+	20, // 45: api.operator.service.v1.Operator.GetOperatorIdByOrigin:output_type -> api.operator.service.v1.GetOperatorIdByOriginResponse
+	22, // 46: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
+	24, // 47: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
+	26, // 48: api.operator.service.v1.Operator.ListOperators:output_type -> api.operator.service.v1.ListOperatorsResponse
+	28, // 49: api.operator.service.v1.Operator.ListInvovies:output_type -> api.operator.service.v1.ListInvoviesResponse
+	30, // 50: api.operator.service.v1.Operator.GetInvoiceDetail:output_type -> api.operator.service.v1.GetInvoiceDetailResponse
+	32, // 51: api.operator.service.v1.Operator.ListOperatorRevenueShare:output_type -> api.operator.service.v1.ListOperatorRevenueShareResponse
+	34, // 52: api.operator.service.v1.Operator.ListThirdPartyFees:output_type -> api.operator.service.v1.ListThirdPartyFeesResponse
+	46, // 53: api.operator.service.v1.Operator.ListAdjustments:output_type -> api.operator.service.v1.ListAdjustmentsResponse
+	36, // 54: api.operator.service.v1.Operator.ListMonthlyRevenueShare:output_type -> api.operator.service.v1.ListMonthlyRevenueShareResponse
+	38, // 55: api.operator.service.v1.Operator.AddAdjustment:output_type -> api.operator.service.v1.AddAdjustmentResponse
+	40, // 56: api.operator.service.v1.Operator.ListAdjustmentConfigs:output_type -> api.operator.service.v1.ListAdjustmentConfigsResponse
+	42, // 57: api.operator.service.v1.Operator.UpdateAdjustmentConfig:output_type -> api.operator.service.v1.UpdateAdjustmentConfigResponse
+	44, // 58: api.operator.service.v1.Operator.DeleteAdjustmentConfig:output_type -> api.operator.service.v1.DeleteAdjustmentConfigResponse
+	37, // [37:59] is the sub-list for method output_type
+	15, // [15:37] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_operator_service_v1_operator_proto_init() }
@@ -1539,18 +4413,26 @@ func file_operator_service_v1_operator_proto_init() {
 		return
 	}
 	file_operator_service_v1_operator_proto_msgTypes[22].OneofWrappers = []any{}
+	file_operator_service_v1_operator_proto_msgTypes[24].OneofWrappers = []any{}
+	file_operator_service_v1_operator_proto_msgTypes[28].OneofWrappers = []any{}
+	file_operator_service_v1_operator_proto_msgTypes[30].OneofWrappers = []any{}
+	file_operator_service_v1_operator_proto_msgTypes[32].OneofWrappers = []any{}
+	file_operator_service_v1_operator_proto_msgTypes[36].OneofWrappers = []any{}
+	file_operator_service_v1_operator_proto_msgTypes[38].OneofWrappers = []any{}
+	file_operator_service_v1_operator_proto_msgTypes[42].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_operator_service_v1_operator_proto_rawDesc), len(file_operator_service_v1_operator_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   28,
+			NumEnums:      3,
+			NumMessages:   56,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_operator_service_v1_operator_proto_goTypes,
 		DependencyIndexes: file_operator_service_v1_operator_proto_depIdxs,
+		EnumInfos:         file_operator_service_v1_operator_proto_enumTypes,
 		MessageInfos:      file_operator_service_v1_operator_proto_msgTypes,
 	}.Build()
 	File_operator_service_v1_operator_proto = out.File
