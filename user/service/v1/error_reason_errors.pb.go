@@ -768,3 +768,27 @@ func IsOperatorIdsNotFoundByOrigin(err error) bool {
 func ErrorOperatorIdsNotFoundByOrigin(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_OPERATOR_IDS_NOT_FOUND_BY_ORIGIN.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorIdsNotFoundInContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_IDS_NOT_FOUND_IN_CONTEXT.String() && e.Code == 500
+}
+
+func ErrorOperatorIdsNotFoundInContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_IDS_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsActualOperatorIdNotGetInContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ACTUAL_OPERATOR_ID_NOT_GET_IN_CONTEXT.String() && e.Code == 500
+}
+
+func ErrorActualOperatorIdNotGetInContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ACTUAL_OPERATOR_ID_NOT_GET_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+}

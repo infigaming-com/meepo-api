@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/infigaming-com/meepo-api/pkg/jwt"
+	"github.com/infigaming-com/meepo-api/pkg/util"
 )
 
 type contextKey string
@@ -78,13 +79,13 @@ func GetRequestInfo(ctx context.Context) (RequestInfo, bool) {
 func GetActualOperatorIdAndType(ctx context.Context) (int64, string, bool) {
 	if operatorIds, ok := GetOperatorIds(ctx); ok {
 		if operatorIds.OperatorId != 0 {
-			return operatorIds.OperatorId, "operator", true
+			return operatorIds.OperatorId, util.OperatorTypeCompany, true
 		} else if operatorIds.CompanyOperatorId != 0 {
-			return operatorIds.CompanyOperatorId, "company", true
+			return operatorIds.CompanyOperatorId, util.OperatorTypeCompany, true
 		} else if operatorIds.RetailerOperatorId != 0 {
-			return operatorIds.RetailerOperatorId, "retailer", true
+			return operatorIds.RetailerOperatorId, util.OperatorTypeRetailer, true
 		} else {
-			return operatorIds.SystemOperatorId, "system", true
+			return operatorIds.SystemOperatorId, util.OperatorTypeSystem, true
 		}
 	}
 	return 0, "", false
