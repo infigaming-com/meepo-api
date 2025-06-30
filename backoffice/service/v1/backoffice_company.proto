@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+service BackofficeCompany {
+	// Create a company's owner account and related data
+	rpc CreateCompany(CreateCompanyRequest) returns (CreateCompanyResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/company/register"
+			body: "*"
+		};
+	}
+}
+
+message CreateCompanyRequest {
+	string company_name = 1;
+	string email = 2;
+	string mobile = 3;
+	string subdomain = 4;
+	string password = 5;
+	string contact = 6;
+	string contact_methods = 7;
+	string affiliate = 8;
+	string verification_code = 9;
+}
+
+message CreateCompanyResponse {
+	string token = 1;
+	string site_url = 2;
+}

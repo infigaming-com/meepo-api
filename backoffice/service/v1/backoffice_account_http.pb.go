@@ -22,6 +22,8 @@ const _ = http.SupportPackageIsVersion1
 const OperationBackofficeAccountAccountInfo = "/api.backoffice.service.v1.BackofficeAccount/AccountInfo"
 const OperationBackofficeAccountAddAccount = "/api.backoffice.service.v1.BackofficeAccount/AddAccount"
 const OperationBackofficeAccountBind2fa = "/api.backoffice.service.v1.BackofficeAccount/Bind2fa"
+const OperationBackofficeAccountCheckEmailExists = "/api.backoffice.service.v1.BackofficeAccount/CheckEmailExists"
+const OperationBackofficeAccountCheckSubdomainExists = "/api.backoffice.service.v1.BackofficeAccount/CheckSubdomainExists"
 const OperationBackofficeAccountCreateRole = "/api.backoffice.service.v1.BackofficeAccount/CreateRole"
 const OperationBackofficeAccountDeleteRole = "/api.backoffice.service.v1.BackofficeAccount/DeleteRole"
 const OperationBackofficeAccountGenerate2fa = "/api.backoffice.service.v1.BackofficeAccount/Generate2fa"
@@ -43,6 +45,10 @@ type BackofficeAccountHTTPServer interface {
 	AccountInfo(context.Context, *AccountInfoRequest) (*AccountInfoResponse, error)
 	AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error)
 	Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error)
+	// CheckEmailExists CheckEmailExists checks if the email exists in the user table.
+	CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error)
+	// CheckSubdomainExists CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
+	CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error)
 	CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleResponse, error)
 	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
 	Generate2Fa(context.Context, *Generate2FaRequest) (*Generate2FaResponse, error)
@@ -73,8 +79,8 @@ func RegisterBackofficeAccountHTTPServer(s *http.Server, srv BackofficeAccountHT
 	r.POST("/v1/backoffice/accounts/2fa/bind", _BackofficeAccount_Bind2Fa0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/2fa/unbind", _BackofficeAccount_Unbind2Fa0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/update", _BackofficeAccount_UpdateAccount0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/login", _BackofficeAccount_Login0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/register", _BackofficeAccount_Register0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/login", _BackofficeAccount_Login1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/register", _BackofficeAccount_Register1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/register/verification/send", _BackofficeAccount_SendRegisterVerificationCode0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/info", _BackofficeAccount_AccountInfo0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/list", _BackofficeAccount_ListAccounts0_HTTP_Handler(srv))
@@ -82,6 +88,8 @@ func RegisterBackofficeAccountHTTPServer(s *http.Server, srv BackofficeAccountHT
 	r.POST("/v1/backoffice/accounts/role/list", _BackofficeAccount_ListRoles0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/role/update", _BackofficeAccount_UpdateRole0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/role/delete", _BackofficeAccount_DeleteRole0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/email/check_exists", _BackofficeAccount_CheckEmailExists0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/subdomain/check_exists", _BackofficeAccount_CheckSubdomainExists0_HTTP_Handler(srv))
 }
 
 func _BackofficeAccount_AddAccount0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
@@ -304,7 +312,7 @@ func _BackofficeAccount_UpdateAccount0_HTTP_Handler(srv BackofficeAccountHTTPSer
 	}
 }
 
-func _BackofficeAccount_Login0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _BackofficeAccount_Login1_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LoginRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -326,7 +334,7 @@ func _BackofficeAccount_Login0_HTTP_Handler(srv BackofficeAccountHTTPServer) fun
 	}
 }
 
-func _BackofficeAccount_Register0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _BackofficeAccount_Register1_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in RegisterRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -502,10 +510,56 @@ func _BackofficeAccount_DeleteRole0_HTTP_Handler(srv BackofficeAccountHTTPServer
 	}
 }
 
+func _BackofficeAccount_CheckEmailExists0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CheckEmailExistsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountCheckEmailExists)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CheckEmailExists(ctx, req.(*CheckEmailExistsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CheckEmailExistsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAccount_CheckSubdomainExists0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CheckSubdomainExistsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountCheckSubdomainExists)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CheckSubdomainExists(ctx, req.(*CheckSubdomainExistsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CheckSubdomainExistsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeAccountHTTPClient interface {
 	AccountInfo(ctx context.Context, req *AccountInfoRequest, opts ...http.CallOption) (rsp *AccountInfoResponse, err error)
 	AddAccount(ctx context.Context, req *AddAccountRequest, opts ...http.CallOption) (rsp *AddAccountResponse, err error)
 	Bind2Fa(ctx context.Context, req *Bind2FaRequest, opts ...http.CallOption) (rsp *Bind2FaResponse, err error)
+	CheckEmailExists(ctx context.Context, req *CheckEmailExistsRequest, opts ...http.CallOption) (rsp *CheckEmailExistsResponse, err error)
+	CheckSubdomainExists(ctx context.Context, req *CheckSubdomainExistsRequest, opts ...http.CallOption) (rsp *CheckSubdomainExistsResponse, err error)
 	CreateRole(ctx context.Context, req *CreateRoleRequest, opts ...http.CallOption) (rsp *CreateRoleResponse, err error)
 	DeleteRole(ctx context.Context, req *DeleteRoleRequest, opts ...http.CallOption) (rsp *DeleteRoleResponse, err error)
 	Generate2Fa(ctx context.Context, req *Generate2FaRequest, opts ...http.CallOption) (rsp *Generate2FaResponse, err error)
@@ -563,6 +617,32 @@ func (c *BackofficeAccountHTTPClientImpl) Bind2Fa(ctx context.Context, in *Bind2
 	pattern := "/v1/backoffice/accounts/2fa/bind"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAccountBind2fa))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAccountHTTPClientImpl) CheckEmailExists(ctx context.Context, in *CheckEmailExistsRequest, opts ...http.CallOption) (*CheckEmailExistsResponse, error) {
+	var out CheckEmailExistsResponse
+	pattern := "/v1/backoffice/accounts/email/check_exists"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountCheckEmailExists))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAccountHTTPClientImpl) CheckSubdomainExists(ctx context.Context, in *CheckSubdomainExistsRequest, opts ...http.CallOption) (*CheckSubdomainExistsResponse, error) {
+	var out CheckSubdomainExistsResponse
+	pattern := "/v1/backoffice/accounts/subdomain/check_exists"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountCheckSubdomainExists))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

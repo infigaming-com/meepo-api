@@ -124,6 +124,22 @@ service BackofficeAccount {
             body: "*"
         };
     }
+
+    // CheckEmailExists checks if the email exists in the user table.
+	rpc CheckEmailExists(CheckEmailExistsRequest) returns (CheckEmailExistsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/email/check_exists"
+            body: "*"
+        };
+    }
+
+	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
+	rpc CheckSubdomainExists(CheckSubdomainExistsRequest) returns (CheckSubdomainExistsResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/subdomain/check_exists"
+            body: "*"
+        };
+    }
 }
 
 // Account related messages
@@ -298,3 +314,19 @@ message DeleteRoleRequest {
 }
 
 message DeleteRoleResponse {}
+
+message CheckEmailExistsRequest {
+	string email = 1;
+}
+
+message CheckEmailExistsResponse {
+	bool exists = 1;
+}
+
+message CheckSubdomainExistsRequest {
+	string subdomain = 1;
+}
+
+message CheckSubdomainExistsResponse {
+	bool exists = 1;
+}

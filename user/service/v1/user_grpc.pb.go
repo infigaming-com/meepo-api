@@ -55,11 +55,15 @@ const (
 	User_DeleteRole_FullMethodName                   = "/api.user.service.v1.User/DeleteRole"
 	User_GetOverviewDashboardFromUser_FullMethodName = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
 	User_GetOperatorIdByOrigin_FullMethodName        = "/api.user.service.v1.User/GetOperatorIdByOrigin"
+	User_GetOperatorIdsByOrigin_FullMethodName       = "/api.user.service.v1.User/GetOperatorIdsByOrigin"
 	User_GetOperator_FullMethodName                  = "/api.user.service.v1.User/GetOperator"
 	User_GetOperatorsByIds_FullMethodName            = "/api.user.service.v1.User/GetOperatorsByIds"
 	User_ListOperators_FullMethodName                = "/api.user.service.v1.User/ListOperators"
 	User_GetParentOperatorIds_FullMethodName         = "/api.user.service.v1.User/GetParentOperatorIds"
 	User_GetChildOperatorIds_FullMethodName          = "/api.user.service.v1.User/GetChildOperatorIds"
+	User_CheckEmailExists_FullMethodName             = "/api.user.service.v1.User/CheckEmailExists"
+	User_CheckSubdomainExists_FullMethodName         = "/api.user.service.v1.User/CheckSubdomainExists"
+	User_CreateBusiness_FullMethodName               = "/api.user.service.v1.User/CreateBusiness"
 )
 
 // UserClient is the client API for User service.
@@ -134,6 +138,7 @@ type UserClient interface {
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error)
 	GetOverviewDashboardFromUser(ctx context.Context, in *GetOverviewDashboardFromUserRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromUserResponse, error)
 	GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdByOriginResponse, error)
+	GetOperatorIdsByOrigin(ctx context.Context, in *GetOperatorIdsByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdsByOriginResponse, error)
 	GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error)
 	GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
@@ -143,6 +148,12 @@ type UserClient interface {
 	GetParentOperatorIds(ctx context.Context, in *GetParentOperatorIdsRequest, opts ...grpc.CallOption) (*GetParentOperatorIdsResponse, error)
 	// GetChildOperatorIds returns direct child operator IDs for the given operator ID.
 	GetChildOperatorIds(ctx context.Context, in *GetChildOperatorIdsRequest, opts ...grpc.CallOption) (*GetChildOperatorIdsResponse, error)
+	// CheckEmailExists checks if the email with the hierarchy operator_id list exists in the user table.
+	CheckEmailExists(ctx context.Context, in *CheckEmailExistsRequest, opts ...grpc.CallOption) (*CheckEmailExistsResponse, error)
+	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
+	CheckSubdomainExists(ctx context.Context, in *CheckSubdomainExistsRequest, opts ...grpc.CallOption) (*CheckSubdomainExistsResponse, error)
+	// CreateBusiness creates a new business record.
+	CreateBusiness(ctx context.Context, in *CreateBusinessRequest, opts ...grpc.CallOption) (*CreateBusinessResponse, error)
 }
 
 type userClient struct {
@@ -513,6 +524,16 @@ func (c *userClient) GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorI
 	return out, nil
 }
 
+func (c *userClient) GetOperatorIdsByOrigin(ctx context.Context, in *GetOperatorIdsByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdsByOriginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorIdsByOriginResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorIdsByOrigin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOperatorResponse)
@@ -557,6 +578,36 @@ func (c *userClient) GetChildOperatorIds(ctx context.Context, in *GetChildOperat
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetChildOperatorIdsResponse)
 	err := c.cc.Invoke(ctx, User_GetChildOperatorIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) CheckEmailExists(ctx context.Context, in *CheckEmailExistsRequest, opts ...grpc.CallOption) (*CheckEmailExistsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckEmailExistsResponse)
+	err := c.cc.Invoke(ctx, User_CheckEmailExists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) CheckSubdomainExists(ctx context.Context, in *CheckSubdomainExistsRequest, opts ...grpc.CallOption) (*CheckSubdomainExistsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckSubdomainExistsResponse)
+	err := c.cc.Invoke(ctx, User_CheckSubdomainExists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) CreateBusiness(ctx context.Context, in *CreateBusinessRequest, opts ...grpc.CallOption) (*CreateBusinessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateBusinessResponse)
+	err := c.cc.Invoke(ctx, User_CreateBusiness_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -635,6 +686,7 @@ type UserServer interface {
 	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
 	GetOverviewDashboardFromUser(context.Context, *GetOverviewDashboardFromUserRequest) (*GetOverviewDashboardFromUserResponse, error)
 	GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error)
+	GetOperatorIdsByOrigin(context.Context, *GetOperatorIdsByOriginRequest) (*GetOperatorIdsByOriginResponse, error)
 	GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error)
 	GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
@@ -644,6 +696,12 @@ type UserServer interface {
 	GetParentOperatorIds(context.Context, *GetParentOperatorIdsRequest) (*GetParentOperatorIdsResponse, error)
 	// GetChildOperatorIds returns direct child operator IDs for the given operator ID.
 	GetChildOperatorIds(context.Context, *GetChildOperatorIdsRequest) (*GetChildOperatorIdsResponse, error)
+	// CheckEmailExists checks if the email with the hierarchy operator_id list exists in the user table.
+	CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error)
+	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
+	CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error)
+	// CreateBusiness creates a new business record.
+	CreateBusiness(context.Context, *CreateBusinessRequest) (*CreateBusinessResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -762,6 +820,9 @@ func (UnimplementedUserServer) GetOverviewDashboardFromUser(context.Context, *Ge
 func (UnimplementedUserServer) GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorIdByOrigin not implemented")
 }
+func (UnimplementedUserServer) GetOperatorIdsByOrigin(context.Context, *GetOperatorIdsByOriginRequest) (*GetOperatorIdsByOriginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorIdsByOrigin not implemented")
+}
 func (UnimplementedUserServer) GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperator not implemented")
 }
@@ -776,6 +837,15 @@ func (UnimplementedUserServer) GetParentOperatorIds(context.Context, *GetParentO
 }
 func (UnimplementedUserServer) GetChildOperatorIds(context.Context, *GetChildOperatorIdsRequest) (*GetChildOperatorIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChildOperatorIds not implemented")
+}
+func (UnimplementedUserServer) CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckEmailExists not implemented")
+}
+func (UnimplementedUserServer) CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckSubdomainExists not implemented")
+}
+func (UnimplementedUserServer) CreateBusiness(context.Context, *CreateBusinessRequest) (*CreateBusinessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBusiness not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1446,6 +1516,24 @@ func _User_GetOperatorIdByOrigin_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperatorIdsByOrigin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorIdsByOriginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorIdsByOrigin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorIdsByOrigin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorIdsByOrigin(ctx, req.(*GetOperatorIdsByOriginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_GetOperator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOperatorRequest)
 	if err := dec(in); err != nil {
@@ -1532,6 +1620,60 @@ func _User_GetChildOperatorIds_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).GetChildOperatorIds(ctx, req.(*GetChildOperatorIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_CheckEmailExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckEmailExistsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CheckEmailExists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CheckEmailExists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CheckEmailExists(ctx, req.(*CheckEmailExistsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_CheckSubdomainExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckSubdomainExistsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CheckSubdomainExists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CheckSubdomainExists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CheckSubdomainExists(ctx, req.(*CheckSubdomainExistsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_CreateBusiness_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBusinessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CreateBusiness(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CreateBusiness_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CreateBusiness(ctx, req.(*CreateBusinessRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1688,6 +1830,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_GetOperatorIdByOrigin_Handler,
 		},
 		{
+			MethodName: "GetOperatorIdsByOrigin",
+			Handler:    _User_GetOperatorIdsByOrigin_Handler,
+		},
+		{
 			MethodName: "GetOperator",
 			Handler:    _User_GetOperator_Handler,
 		},
@@ -1706,6 +1852,18 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetChildOperatorIds",
 			Handler:    _User_GetChildOperatorIds_Handler,
+		},
+		{
+			MethodName: "CheckEmailExists",
+			Handler:    _User_CheckEmailExists_Handler,
+		},
+		{
+			MethodName: "CheckSubdomainExists",
+			Handler:    _User_CheckSubdomainExists_Handler,
+		},
+		{
+			MethodName: "CreateBusiness",
+			Handler:    _User_CreateBusiness_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
