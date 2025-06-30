@@ -7298,6 +7298,9 @@ components:
                 money:
                     type: string
                     description: Actual amount paid
+                address:
+                    type: string
+                    description: Actual address
                 sign:
                     type: string
                     description: HMAC-SHA256 signature to verify request authenticity

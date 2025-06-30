@@ -1752,6 +1752,8 @@ func (m *DepositCallbackRequest) validate(all bool) error {
 
 	// no validation rules for Money
 
+	// no validation rules for Address
+
 	// no validation rules for Sign
 
 	// no validation rules for Timestamp
