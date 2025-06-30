@@ -25,17 +25,22 @@ func OperatorIdMiddleware(path []string, userClient user.UserClient) middleware.
 					return nil, errors.New(400, "BAD_REQUEST", "missing origin header")
 				}
 				// temporary use map to store origin and operatorId
-				resp, err := userClient.GetOperatorIdByOrigin(ctx, &user.GetOperatorIdByOriginRequest{
+				resp, err := userClient.GetOperatorIdsByOrigin(ctx, &user.GetOperatorIdsByOriginRequest{
 					Origin: origin,
 				})
 				if err != nil {
-					if user.IsOperatorIdNotFoundByOrigin(err) {
-						return nil, errors.New(400, "BAD_REQUEST", "operatorId not found by origin")
+					if user.IsOperatorIdsNotFoundByOrigin(err) {
+						return nil, errors.New(400, "BAD_REQUEST", "operatorIds not found by origin")
 					} else {
-						return nil, errors.New(400, "BAD_REQUEST", "cannot get operatorId by origin")
+						return nil, errors.New(400, "BAD_REQUEST", "cannot get operatorIds by origin")
 					}
 				}
-				ctx = mctx.WithOperatorId(ctx, resp.OperatorId)
+				ctx = mctx.WithOperators(ctx, mctx.Operators{
+					OperatorId:         resp.OperatorContext.OperatorId,
+					CompanyOperatorId:  resp.OperatorContext.CompanyOperatorId,
+					RetailerOperatorId: resp.OperatorContext.RetailerOperatorId,
+					SystemOperatorId:   resp.OperatorContext.SystemOperatorId,
+				})
 			}
 			return handler(ctx, req)
 		}

@@ -87,6 +87,7 @@ const (
 	ErrorReason_ORIGIN_ALREADY_EXISTS                    ErrorReason = 10060
 	ErrorReason_GENERATE_BUSINESS_ID_FAILED              ErrorReason = 10061
 	ErrorReason_CREATE_BUSINESS_FAILED                   ErrorReason = 10062
+	ErrorReason_OPERATOR_IDS_NOT_FOUND_BY_ORIGIN         ErrorReason = 10063
 )
 
 // Enum value maps for ErrorReason.
@@ -154,6 +155,7 @@ var (
 		10060: "ORIGIN_ALREADY_EXISTS",
 		10061: "GENERATE_BUSINESS_ID_FAILED",
 		10062: "CREATE_BUSINESS_FAILED",
+		10063: "OPERATOR_IDS_NOT_FOUND_BY_ORIGIN",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                              0,
@@ -218,6 +220,7 @@ var (
 		"ORIGIN_ALREADY_EXISTS":                    10060,
 		"GENERATE_BUSINESS_ID_FAILED":              10061,
 		"CREATE_BUSINESS_FAILED":                   10062,
+		"OPERATOR_IDS_NOT_FOUND_BY_ORIGIN":         10063,
 	}
 )
 
@@ -252,7 +255,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa5\x0f\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xcc\x0f\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -315,7 +318,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"(CREATE_ORIGIN_TO_OPERATOR_MAPPING_FAILED\x10\xcbN\x12\x1a\n" +
 	"\x15ORIGIN_ALREADY_EXISTS\x10\xccN\x12 \n" +
 	"\x1bGENERATE_BUSINESS_ID_FAILED\x10\xcdN\x12\x1b\n" +
-	"\x16CREATE_BUSINESS_FAILED\x10\xceN\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x16CREATE_BUSINESS_FAILED\x10\xceN\x12%\n" +
+	" OPERATOR_IDS_NOT_FOUND_BY_ORIGIN\x10\xcfN\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (

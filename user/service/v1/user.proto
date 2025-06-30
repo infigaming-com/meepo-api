@@ -166,6 +166,8 @@ service User {
 
 	rpc GetOperatorIdByOrigin(GetOperatorIdByOriginRequest) returns (GetOperatorIdByOriginResponse) {}
 
+	rpc GetOperatorIdsByOrigin(GetOperatorIdsByOriginRequest) returns (GetOperatorIdsByOriginResponse) {}
+
 	rpc GetOperator(GetOperatorRequest) returns (GetOperatorResponse) {
 	}
 
@@ -791,6 +793,14 @@ message GetOperatorIdByOriginRequest {
 
 message GetOperatorIdByOriginResponse {
 	int64 operator_id = 1;
+}
+
+message GetOperatorIdsByOriginRequest {
+	string origin = 1;
+}
+
+message GetOperatorIdsByOriginResponse {
+	OperatorContext operator_context = 1;
 }
 
 message GetOperatorRequest {

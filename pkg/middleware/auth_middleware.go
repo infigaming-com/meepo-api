@@ -46,11 +46,22 @@ func AuthMiddleware(authPaths []string, secret string, uc user.UserClient) middl
 				return nil, errors.New(401, "UNAUTHORIZED", "invalid token")
 			}
 
-			contextOperatorId, ok := mctx.OperatorId(ctx)
+			operators, ok := mctx.GetOperators(ctx)
 			// If the operatorId in the context does not exists, do not check the operatorId in the token
 			// If the operatorId in the context exists, check if it is the same as the operatorId in the token
-			if ok && claims.UserInfo.OperatorId != contextOperatorId {
-				return nil, errors.New(401, "UNAUTHORIZED", "invalid operatorId")
+			if ok {
+				if claims.UserInfo.OperatorId != operators.OperatorId {
+					return nil, errors.New(401, "UNAUTHORIZED", "invalid operatorId")
+				}
+				if claims.UserInfo.CompanyOperatorId != operators.CompanyOperatorId {
+					return nil, errors.New(401, "UNAUTHORIZED", "invalid company operatorId")
+				}
+				if claims.UserInfo.RetailerOperatorId != operators.RetailerOperatorId {
+					return nil, errors.New(401, "UNAUTHORIZED", "invalid retailer operatorId")
+				}
+				if claims.UserInfo.SystemOperatorId != operators.SystemOperatorId {
+					return nil, errors.New(401, "UNAUTHORIZED", "invalid system operatorId")
+				}
 			}
 
 			revoked, err := uc.IsTokenRevoked(ctx, &user.IsTokenRevokedRequest{

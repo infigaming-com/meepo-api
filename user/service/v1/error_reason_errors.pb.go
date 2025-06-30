@@ -756,3 +756,15 @@ func IsCreateBusinessFailed(err error) bool {
 func ErrorCreateBusinessFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_CREATE_BUSINESS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorIdsNotFoundByOrigin(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_IDS_NOT_FOUND_BY_ORIGIN.String() && e.Code == 500
+}
+
+func ErrorOperatorIdsNotFoundByOrigin(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_IDS_NOT_FOUND_BY_ORIGIN.String(), fmt.Sprintf(format, args...))
+}
