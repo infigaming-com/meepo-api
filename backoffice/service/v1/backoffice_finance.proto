@@ -1,206 +1,84 @@
 syntax = "proto3";
 
-package api.operator.service.v1;
+package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/infigaming-com/meepo-api/operator/service/v1;v1";
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
-option java_package = "api.operator.service.v1";
+option java_package = "api.backoffice.service.v1";
 
-// User service provides authentication and user management functionality.
-service Operator {
-	rpc AddOperator(AddOperatorRequest) returns (AddOperatorResponse) {
-	}
-
-	rpc UpdateOperator(UpdateOperatorRequest) returns (UpdateOperatorResponse) {
-	}
-
-	rpc GetOperator(GetOperatorRequest) returns (GetOperatorResponse) {
-	}
-
-	rpc GetOperatorsByIds(GetOperatorsByIdsRequest) returns (GetOperatorsByIdsResponse) {
-	}
-
-	rpc AddOrUpdateCurrency(AddOrUpdateCurrencyRequest) returns (AddOrUpdateCurrencyResponse) {
-	}
-
-	rpc UpdateOperatorCurrency(UpdateOperatorCurrencyRequest) returns (UpdateOperatorCurrencyResponse) {
-	}
-
-	rpc GetOperatorCurrencies(GetOperatorCurrenciesRequest) returns (GetOperatorCurrenciesResponse) {
-	}
-
-	rpc AddOriginOperatorId(AddOriginOperatorIdRequest) returns (AddOriginOperatorIdResponse) {
-	}
-
-	rpc GetOperatorIdByOrigin(GetOperatorIdByOriginRequest) returns (GetOperatorIdByOriginResponse) {
-	}
-	
-	rpc DeleteOriginOperatorId(DeleteOriginOperatorIdRequest) returns (DeleteOriginOperatorIdResponse) {
-	}
-
-	// GetParentOperatorIds returns parent operator IDs for the given operator ID.
-	// The response contains only the list of parent operator IDs, doesn't include the requested operator_id.
-	rpc GetParentOperatorIds(GetParentOperatorIdsRequest) returns (GetParentOperatorIdsResponse) {
-	}
-
-	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
-	rpc ListOperators(ListOperatorsRequest) returns (ListOperatorsResponse) {
-	}
-
+service BackofficeFinance {
 	rpc ListInvovies(ListInvoviesRequest) returns (ListInvoviesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/invovies/list"
+			body: "*"
+		};
 	}
 
 	rpc GetInvoiceDetail(GetInvoiceDetailRequest) returns (GetInvoiceDetailResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/invoice/detail"
+			body: "*"
+		};
 	}
 
 	rpc ListOperatorRevenueShare(ListOperatorRevenueShareRequest) returns (ListOperatorRevenueShareResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/revenue-shares/list"
+			body: "*"
+		};
 	}
 
 	rpc ListThirdPartyFees(ListThirdPartyFeesRequest) returns (ListThirdPartyFeesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/third-party-fees/list"
+			body: "*"
+		};
 	}
 
 	rpc ListAdjustments(ListAdjustmentsRequest) returns (ListAdjustmentsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/adjustments/list"
+			body: "*"
+		};
 	}
 
 	rpc ListMonthlyRevenueShare(ListMonthlyRevenueShareRequest) returns (ListMonthlyRevenueShareResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/monthly-revenue-shares/list"
+			body: "*"
+		};
 	}
 
 	rpc AddAdjustment(AddAdjustmentRequest) returns (AddAdjustmentResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/adjustment/add"
+			body: "*"
+		};
 	}
 
 	rpc ListAdjustmentConfigs(ListAdjustmentConfigsRequest) returns (ListAdjustmentConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/adjustment-configs/list"
+			body: "*"
+		};
 	}
 
 	rpc UpdateAdjustmentConfig(UpdateAdjustmentConfigRequest) returns (UpdateAdjustmentConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/adjustment-configs/update"
+			body: "*"
+		};
 	}
 
 	rpc DeleteAdjustmentConfig(DeleteAdjustmentConfigRequest) returns (DeleteAdjustmentConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/adjustment-configs/delete"
+			body: "*"
+		};
 	}
-}
-
-message AddOperatorRequest {
-	// operator name
-	string name = 1;
-	// user id who creates the operator
-	int64 user_id = 2;
-}
-
-message AddOperatorResponse {
-	// operator id allocated by operator service
-	int64 operator_id = 1;
-}
-
-message UpdateOperatorRequest {
-	// operator id allocated by operator service
-	int64 operator_id = 1;
-	// enabled
-	bool enabled = 2;
-}
-
-message UpdateOperatorResponse {}
-
-message GetOperatorRequest {
-	int64 operator_id = 1;
-}
-
-message GetOperatorResponse {
-	message Operator {
-		int64 operator_id = 1;
-		string name = 2;
-		bool enabled = 3;
-	}
-	Operator operator = 1;
-}
-
-message GetOperatorsByIdsRequest {
-	repeated int64 operator_ids = 1;
-}
-
-message GetOperatorsByIdsResponse {
-	message Operator {
-		int64 operator_id = 1;
-		string name = 2;
-		bool enabled = 3;
-	}
-	repeated Operator operators = 1;
-}
-
-message AddOrUpdateCurrencyRequest {
-	string currency = 1;
-	bool enabled = 2;
-	bool hidden = 3;
-}
-
-message AddOrUpdateCurrencyResponse {}
-
-message UpdateOperatorCurrencyRequest {
-	int64 operator_id = 1;
-	string currency = 2;
-	bool enabled = 3;
-}
-
-message UpdateOperatorCurrencyResponse {}
-
-message GetOperatorCurrenciesRequest {
-	int64 operator_id = 1;
-	// Filter to return specific currencies only.
-	// If empty or not provided, all currencies will be returned
-	repeated string currencies = 2;
-}
-
-message GetOperatorCurrenciesResponse {
-	message Currency {
-		string currency = 1;
-		bool enabled = 2;
-		bool hidden = 3;
-	}
-	repeated Currency currencies = 1;
-}
-
-message AddOriginOperatorIdRequest {
-	string origin = 1;
-	int64 operator_id = 2;
-}
-
-message AddOriginOperatorIdResponse {}
-
-message GetOperatorIdByOriginRequest {
-	string origin = 1;
-}
-
-message GetOperatorIdByOriginResponse {
-	int64 operator_id = 1;
-}
-
-message DeleteOriginOperatorIdRequest {
-	string origin = 1;
-}
-
-message DeleteOriginOperatorIdResponse {}
-
-message GetParentOperatorIdsRequest {
-	// The operator ID to get parent operators for
-	int64 operator_id = 1;
-}
-
-message GetParentOperatorIdsResponse {
-	// List of parent operator IDs.
-	repeated int64 parent_operator_ids = 1;
-}
-
-message ListOperatorsRequest {
-	optional bool enabled = 1;
-}
-
-message ListOperatorsResponse {
-	message Operator {
-		int64 operator_id = 1;
-		string operator_name = 2;
-		bool enabled = 3;
-	}
-	repeated Operator operators = 1;
 }
 
 message ListInvoviesRequest {
@@ -578,4 +456,3 @@ message ListAdjustmentsResponse {
 	int32 page = 4;
 	int32 page_size = 5;
 }
-
