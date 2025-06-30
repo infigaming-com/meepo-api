@@ -131,7 +131,7 @@ service BackofficeAccount {
             post: "/v1/backoffice/accounts/email/check_exists"
             body: "*"
         };
-	}
+    }
 
 	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
 	rpc CheckSubdomainExists(CheckSubdomainExistsRequest) returns (CheckSubdomainExistsResponse) {
@@ -139,7 +139,7 @@ service BackofficeAccount {
             post: "/v1/backoffice/accounts/subdomain/check_exists"
             body: "*"
         };
-	}
+    }
 }
 
 // Account related messages
