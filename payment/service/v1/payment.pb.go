@@ -1312,12 +1312,14 @@ type DepositCallbackRequest struct {
 	Amount string `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Actual amount paid
 	Money string `protobuf:"bytes,8,opt,name=money,proto3" json:"money,omitempty"`
+	// Actual address
+	Address string `protobuf:"bytes,9,opt,name=address,proto3" json:"address,omitempty"`
 	// HMAC-SHA256 signature to verify request authenticity
-	Sign string `protobuf:"bytes,9,opt,name=sign,proto3" json:"sign,omitempty"`
+	Sign string `protobuf:"bytes,10,opt,name=sign,proto3" json:"sign,omitempty"`
 	// Request timestamp to prevent replay attacks
-	Timestamp string `protobuf:"bytes,10,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Timestamp string `protobuf:"bytes,11,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	// Random string to ensure each request is unique
-	Nonce         string `protobuf:"bytes,11,opt,name=nonce,proto3" json:"nonce,omitempty"`
+	Nonce         string `protobuf:"bytes,12,opt,name=nonce,proto3" json:"nonce,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1404,6 +1406,13 @@ func (x *DepositCallbackRequest) GetAmount() string {
 func (x *DepositCallbackRequest) GetMoney() string {
 	if x != nil {
 		return x.Money
+	}
+	return ""
+}
+
+func (x *DepositCallbackRequest) GetAddress() string {
+	if x != nil {
+		return x.Address
 	}
 	return ""
 }
@@ -2882,7 +2891,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xea\x02\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x84\x03\n" +
 	"\x16DepositCallbackRequest\x12(\n" +
 	"\x11pa_transaction_no\x18\x01 \x01(\x03R\rtransactionNo\x12(\n" +
 	"\x10gateway_order_no\x18\x02 \x01(\tR\x0egatewayOrderNo\x12'\n" +
@@ -2892,11 +2901,12 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\vcreate_time\x18\x06 \x01(\tR\n" +
 	"createTime\x12\x16\n" +
 	"\x06amount\x18\a \x01(\tR\x06amount\x12\x14\n" +
-	"\x05money\x18\b \x01(\tR\x05money\x12\x12\n" +
-	"\x04sign\x18\t \x01(\tR\x04sign\x12\x1c\n" +
-	"\ttimestamp\x18\n" +
-	" \x01(\tR\ttimestamp\x12\x14\n" +
-	"\x05nonce\x18\v \x01(\tR\x05nonce\"M\n" +
+	"\x05money\x18\b \x01(\tR\x05money\x12\x18\n" +
+	"\aaddress\x18\t \x01(\tR\aaddress\x12\x12\n" +
+	"\x04sign\x18\n" +
+	" \x01(\tR\x04sign\x12\x1c\n" +
+	"\ttimestamp\x18\v \x01(\tR\ttimestamp\x12\x14\n" +
+	"\x05nonce\x18\f \x01(\tR\x05nonce\"M\n" +
 	"\x17DepositCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"\x86\x03\n" +
