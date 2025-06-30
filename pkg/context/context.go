@@ -78,19 +78,24 @@ func GetRequestInfo(ctx context.Context) (RequestInfo, bool) {
 
 func GetActualOperatorIdAndType(ctx context.Context) (int64, string, bool) {
 	if operatorIds, ok := GetOperatorIds(ctx); ok {
-		if operatorIds.OperatorId != 0 {
-			// Operator level
-			return operatorIds.OperatorId, util.OperatorTypeOperator, true
-		} else if operatorIds.CompanyOperatorId != 0 {
-			// Company level
-			return operatorIds.CompanyOperatorId, util.OperatorTypeCompany, true
-		} else if operatorIds.RetailerOperatorId != 0 {
-			// Retailer level
-			return operatorIds.RetailerOperatorId, util.OperatorTypeRetailer, true
-		} else {
-			// System level
-			return operatorIds.SystemOperatorId, util.OperatorTypeSystem, true
-		}
+		actualOperatorId, actualOperatorType := operatorIds.GetActualOperatorIdAndType()
+		return actualOperatorId, actualOperatorType, true
 	}
 	return 0, "", false
+}
+
+func (o *OperatorIds) GetActualOperatorIdAndType() (int64, string) {
+	if o.OperatorId != 0 {
+		// Operator level
+		return o.OperatorId, util.OperatorTypeOperator
+	} else if o.CompanyOperatorId != 0 {
+		// Company level
+		return o.CompanyOperatorId, util.OperatorTypeCompany
+	} else if o.RetailerOperatorId != 0 {
+		// Retailer level
+		return o.RetailerOperatorId, util.OperatorTypeRetailer
+	} else {
+		// System level
+		return o.SystemOperatorId, util.OperatorTypeSystem
+	}
 }
