@@ -41,6 +41,26 @@ service BackofficeWallet {
             body: "*"
         };
     }
+
+	rpc AddWalletCurrency(AddWalletCurrencyRequest) returns (AddWalletCurrencyResponse) {
+		option (google.api.http) = {
+            post: "/v1/backoffice/wallet/currencies/add"
+            body: "*"
+        };
+	};
+
+	rpc ListWalletCurrencies(ListWalletCurrenciesRequest) returns (ListWalletCurrenciesResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/wallet/currencies/list"
+            body: "*"
+        };
+    }
+	rpc UpdateWalletCurrency(UpdateWalletCurrencyRequest) returns (UpdateWalletCurrencyResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/wallet/currencies/update"
+            body: "*"
+        };
+    }
 }
 
 message GetWalletsRequest {
@@ -198,3 +218,54 @@ message UpdateWalletRequest {
 }
 
 message UpdateWalletResponse {}
+
+message WalletCurrency {
+	string currency = 1;
+	bool enabled = 2;
+	bool hidden = 3;
+	string type = 4;
+	string symbol = 5;
+	string icon = 6;
+	int32 decimal_places = 7;
+}
+
+message AddWalletCurrencyRequest {
+	string currency = 1;
+	bool enabled = 2;
+	bool hidden = 3;
+	string type = 4;
+	string symbol = 5;
+	string icon = 6;
+	int32 decimal_places = 7;
+	int32 currency_decimal_places = 8;
+}
+
+message AddWalletCurrencyResponse {}
+
+message ListWalletCurrenciesRequest {
+	repeated string currencies = 1;
+	optional bool enabled = 2;
+	optional bool hidden = 3;
+}
+
+message ListWalletCurrenciesResponse {
+	repeated WalletCurrency currencies = 1;
+	int32 total = 2;
+	int32 total_enabled = 3;
+	int32 total_hidden = 4;
+}
+
+message UpdateWalletCurrencyRequest {
+	string currency = 1;
+	optional bool enabled = 2;
+	optional bool hidden = 3;
+	optional string type = 4;
+	optional string symbol = 5;
+	optional string icon = 6;
+	optional int32 decimal_places = 7;
+	optional int32 currency_decimal_places = 8;
+}
+
+message UpdateWalletCurrencyResponse {
+	WalletCurrency currency = 1;
+}

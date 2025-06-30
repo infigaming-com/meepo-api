@@ -142,3 +142,15 @@ func IsGetChannelListFailed(err error) bool {
 func ErrorGetChannelListFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_CHANNEL_LIST_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetAddressFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_ADDRESS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetAddressFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_ADDRESS_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -241,6 +241,245 @@ func (x *SendEmailResponse) GetMessageId() int64 {
 	return 0
 }
 
+// Time range filter for notifications
+// startTime: inclusive (>=), endTime: exclusive (<)
+type TimeRange struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StartTime     int64                  `protobuf:"varint,1,opt,name=startTime,proto3" json:"startTime,omitempty"`
+	EndTime       int64                  `protobuf:"varint,2,opt,name=endTime,proto3" json:"endTime,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeRange) Reset() {
+	*x = TimeRange{}
+	mi := &file_push_service_v1_push_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeRange) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeRange) ProtoMessage() {}
+
+func (x *TimeRange) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeRange.ProtoReflect.Descriptor instead.
+func (*TimeRange) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TimeRange) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *TimeRange) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+// Filter by time range and optionally by operator IDs
+// At most one of operatorIds, companyOperatorIds, or retailerOperatorIds should be provided
+// If all three parameters are empty, returns statistics for all operators
+type GetNotificationStatsRequest struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	TimeRange           *TimeRange             `protobuf:"bytes,1,opt,name=timeRange,proto3" json:"timeRange,omitempty"`
+	OperatorIds         []int64                `protobuf:"varint,2,rep,packed,name=operatorIds,proto3" json:"operatorIds,omitempty"`
+	CompanyOperatorIds  []int64                `protobuf:"varint,3,rep,packed,name=companyOperatorIds,proto3" json:"companyOperatorIds,omitempty"`
+	RetailerOperatorIds []int64                `protobuf:"varint,4,rep,packed,name=retailerOperatorIds,proto3" json:"retailerOperatorIds,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *GetNotificationStatsRequest) Reset() {
+	*x = GetNotificationStatsRequest{}
+	mi := &file_push_service_v1_push_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNotificationStatsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNotificationStatsRequest) ProtoMessage() {}
+
+func (x *GetNotificationStatsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNotificationStatsRequest.ProtoReflect.Descriptor instead.
+func (*GetNotificationStatsRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetNotificationStatsRequest) GetTimeRange() *TimeRange {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+func (x *GetNotificationStatsRequest) GetOperatorIds() []int64 {
+	if x != nil {
+		return x.OperatorIds
+	}
+	return nil
+}
+
+func (x *GetNotificationStatsRequest) GetCompanyOperatorIds() []int64 {
+	if x != nil {
+		return x.CompanyOperatorIds
+	}
+	return nil
+}
+
+func (x *GetNotificationStatsRequest) GetRetailerOperatorIds() []int64 {
+	if x != nil {
+		return x.RetailerOperatorIds
+	}
+	return nil
+}
+
+// Response containing notification statistics grouped by operator
+type GetNotificationStatsResponse struct {
+	state         protoimpl.MessageState                                    `protogen:"open.v1"`
+	OperatorStats []*GetNotificationStatsResponse_OperatorNotificationStats `protobuf:"bytes,1,rep,name=operatorStats,proto3" json:"operatorStats,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNotificationStatsResponse) Reset() {
+	*x = GetNotificationStatsResponse{}
+	mi := &file_push_service_v1_push_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNotificationStatsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNotificationStatsResponse) ProtoMessage() {}
+
+func (x *GetNotificationStatsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNotificationStatsResponse.ProtoReflect.Descriptor instead.
+func (*GetNotificationStatsResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetNotificationStatsResponse) GetOperatorStats() []*GetNotificationStatsResponse_OperatorNotificationStats {
+	if x != nil {
+		return x.OperatorStats
+	}
+	return nil
+}
+
+// Statistics for a single operator
+type GetNotificationStatsResponse_OperatorNotificationStats struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId         int64                  `protobuf:"varint,1,opt,name=operatorId,proto3" json:"operatorId,omitempty"`
+	CompanyOperatorId  int64                  `protobuf:"varint,2,opt,name=companyOperatorId,proto3" json:"companyOperatorId,omitempty"`
+	RetailerOperatorId int64                  `protobuf:"varint,3,opt,name=retailerOperatorId,proto3" json:"retailerOperatorId,omitempty"`
+	Count              int32                  `protobuf:"varint,4,opt,name=count,proto3" json:"count,omitempty"` // Number of notifications for this operator
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *GetNotificationStatsResponse_OperatorNotificationStats) Reset() {
+	*x = GetNotificationStatsResponse_OperatorNotificationStats{}
+	mi := &file_push_service_v1_push_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNotificationStatsResponse_OperatorNotificationStats) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNotificationStatsResponse_OperatorNotificationStats) ProtoMessage() {}
+
+func (x *GetNotificationStatsResponse_OperatorNotificationStats) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNotificationStatsResponse_OperatorNotificationStats.ProtoReflect.Descriptor instead.
+func (*GetNotificationStatsResponse_OperatorNotificationStats) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{5, 0}
+}
+
+func (x *GetNotificationStatsResponse_OperatorNotificationStats) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *GetNotificationStatsResponse_OperatorNotificationStats) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *GetNotificationStatsResponse_OperatorNotificationStats) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *GetNotificationStatsResponse_OperatorNotificationStats) GetCount() int32 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
 var File_push_service_v1_push_proto protoreflect.FileDescriptor
 
 const file_push_service_v1_push_proto_rawDesc = "" +
@@ -265,9 +504,27 @@ const file_push_service_v1_push_proto_rawDesc = "" +
 	"\x06userId\x18\n" +
 	" \x01(\x03R\x06userId\"1\n" +
 	"\x11SendEmailResponse\x12\x1c\n" +
-	"\tmessageId\x18\x01 \x01(\x03R\tmessageId2d\n" +
+	"\tmessageId\x18\x01 \x01(\x03R\tmessageId\"C\n" +
+	"\tTimeRange\x12\x1c\n" +
+	"\tstartTime\x18\x01 \x01(\x03R\tstartTime\x12\x18\n" +
+	"\aendTime\x18\x02 \x01(\x03R\aendTime\"\xdf\x01\n" +
+	"\x1bGetNotificationStatsRequest\x12<\n" +
+	"\ttimeRange\x18\x01 \x01(\v2\x1e.api.push.service.v1.TimeRangeR\ttimeRange\x12 \n" +
+	"\voperatorIds\x18\x02 \x03(\x03R\voperatorIds\x12.\n" +
+	"\x12companyOperatorIds\x18\x03 \x03(\x03R\x12companyOperatorIds\x120\n" +
+	"\x13retailerOperatorIds\x18\x04 \x03(\x03R\x13retailerOperatorIds\"\xc3\x02\n" +
+	"\x1cGetNotificationStatsResponse\x12q\n" +
+	"\roperatorStats\x18\x01 \x03(\v2K.api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStatsR\roperatorStats\x1a\xaf\x01\n" +
+	"\x19OperatorNotificationStats\x12\x1e\n" +
+	"\n" +
+	"operatorId\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12,\n" +
+	"\x11companyOperatorId\x18\x02 \x01(\x03R\x11companyOperatorId\x12.\n" +
+	"\x12retailerOperatorId\x18\x03 \x01(\x03R\x12retailerOperatorId\x12\x14\n" +
+	"\x05count\x18\x04 \x01(\x05R\x05count2\xe3\x01\n" +
 	"\x04Push\x12\\\n" +
-	"\tSendEmail\x12%.api.push.service.v1.SendEmailRequest\x1a&.api.push.service.v1.SendEmailResponse\"\x00BO\n" +
+	"\tSendEmail\x12%.api.push.service.v1.SendEmailRequest\x1a&.api.push.service.v1.SendEmailResponse\"\x00\x12}\n" +
+	"\x14GetNotificationStats\x120.api.push.service.v1.GetNotificationStatsRequest\x1a1.api.push.service.v1.GetNotificationStatsResponse\"\x00BO\n" +
 	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
 
 var (
@@ -282,21 +539,29 @@ func file_push_service_v1_push_proto_rawDescGZIP() []byte {
 	return file_push_service_v1_push_proto_rawDescData
 }
 
-var file_push_service_v1_push_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_push_service_v1_push_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_push_service_v1_push_proto_goTypes = []any{
-	(*EmailAttachment)(nil),   // 0: api.push.service.v1.EmailAttachment
-	(*SendEmailRequest)(nil),  // 1: api.push.service.v1.SendEmailRequest
-	(*SendEmailResponse)(nil), // 2: api.push.service.v1.SendEmailResponse
+	(*EmailAttachment)(nil),                                        // 0: api.push.service.v1.EmailAttachment
+	(*SendEmailRequest)(nil),                                       // 1: api.push.service.v1.SendEmailRequest
+	(*SendEmailResponse)(nil),                                      // 2: api.push.service.v1.SendEmailResponse
+	(*TimeRange)(nil),                                              // 3: api.push.service.v1.TimeRange
+	(*GetNotificationStatsRequest)(nil),                            // 4: api.push.service.v1.GetNotificationStatsRequest
+	(*GetNotificationStatsResponse)(nil),                           // 5: api.push.service.v1.GetNotificationStatsResponse
+	(*GetNotificationStatsResponse_OperatorNotificationStats)(nil), // 6: api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
 }
 var file_push_service_v1_push_proto_depIdxs = []int32{
 	0, // 0: api.push.service.v1.SendEmailRequest.attachments:type_name -> api.push.service.v1.EmailAttachment
-	1, // 1: api.push.service.v1.Push.SendEmail:input_type -> api.push.service.v1.SendEmailRequest
-	2, // 2: api.push.service.v1.Push.SendEmail:output_type -> api.push.service.v1.SendEmailResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	3, // 1: api.push.service.v1.GetNotificationStatsRequest.timeRange:type_name -> api.push.service.v1.TimeRange
+	6, // 2: api.push.service.v1.GetNotificationStatsResponse.operatorStats:type_name -> api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
+	1, // 3: api.push.service.v1.Push.SendEmail:input_type -> api.push.service.v1.SendEmailRequest
+	4, // 4: api.push.service.v1.Push.GetNotificationStats:input_type -> api.push.service.v1.GetNotificationStatsRequest
+	2, // 5: api.push.service.v1.Push.SendEmail:output_type -> api.push.service.v1.SendEmailResponse
+	5, // 6: api.push.service.v1.Push.GetNotificationStats:output_type -> api.push.service.v1.GetNotificationStatsResponse
+	5, // [5:7] is the sub-list for method output_type
+	3, // [3:5] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_push_service_v1_push_proto_init() }
@@ -310,7 +575,7 @@ func file_push_service_v1_push_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_push_service_v1_push_proto_rawDesc), len(file_push_service_v1_push_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -27,6 +27,11 @@ service User {
 			body: "*"
 		};
 	}
+
+	// Login an existing user with password-based authentication and request info (now adds operator_id and http request info).
+	// Users can login using their registered credentials.
+	rpc LoginWithInfo (LoginWithInfoRequest) returns (AuthResponse) {
+	}
 	
 	// Register or login using OAuth provider.
 	// Supports multiple OAuth providers like Google, Facebook, and Twitter.
@@ -122,10 +127,6 @@ service User {
 	}
 
 	rpc AddOperator (AddOperatorRequest) returns (AddOperatorResponse) {
-		option (google.api.http) = {
-			post: "/v1/user/operators/add"
-			body: "*"
-		};
 	}
 
 	rpc SendEmailVerificationCode(SendEmailVerificationCodeRequest) returns (SendEmailVerificationCodeResponse) {
@@ -134,6 +135,7 @@ service User {
 			body: "*"
 		};
 	}
+	
 	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
 
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
@@ -268,6 +270,33 @@ message LoginRequest {
 	string auth_id = 2;
 	// The password for the account.
 	string password = 3;
+}
+
+// HttpRequestInfo contains the http request info get from RequestInfoMiddleware.
+message HttpRequestInfo {
+	string method = 1;
+	string path = 2;
+	string host = 3;
+	string remote_addr = 4;
+	string country = 5;
+	string origin = 6;
+	string referer = 7;
+	string user_agent = 8;
+	string client_ip = 9;
+}
+
+// LoginWithInfoRequest contains the credentials for user login and http request info.
+message LoginWithInfoRequest {
+	// The type of identity provider to use for login.
+	PasswordProvider password_provider = 1;
+	// The identity (username, email, or mobile) to login with.
+	string auth_id = 2;
+	// The password for the account.
+	string password = 3;
+	// The operator ID to login with.
+	int64 operator_id = 4;
+	// Http request info.
+	HttpRequestInfo http_request_info = 5;
 }
 
 // OAuthRequest contains the information needed for OAuth authentication.

@@ -19,9 +19,11 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationWalletGetCurrencies = "/api.wallet.service.v1.Wallet/GetCurrencies"
 const OperationWalletGetUserBalances = "/api.wallet.service.v1.Wallet/GetUserBalances"
 
 type WalletHTTPServer interface {
+	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
 	// GetUserBalances GetUserBalances returns the balances of all currencies of the user
 	GetUserBalances(context.Context, *GetUserBalancesRequest) (*GetUserBalancesResponse, error)
 }
@@ -29,6 +31,7 @@ type WalletHTTPServer interface {
 func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/wallet/balances/list", _Wallet_GetUserBalances0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/currencies/get", _Wallet_GetCurrencies0_HTTP_Handler(srv))
 }
 
 func _Wallet_GetUserBalances0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
@@ -53,7 +56,30 @@ func _Wallet_GetUserBalances0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.C
 	}
 }
 
+func _Wallet_GetCurrencies0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetCurrenciesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWalletGetCurrencies)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetCurrencies(ctx, req.(*GetCurrenciesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetCurrenciesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type WalletHTTPClient interface {
+	GetCurrencies(ctx context.Context, req *GetCurrenciesRequest, opts ...http.CallOption) (rsp *GetCurrenciesResponse, err error)
 	GetUserBalances(ctx context.Context, req *GetUserBalancesRequest, opts ...http.CallOption) (rsp *GetUserBalancesResponse, err error)
 }
 
@@ -63,6 +89,19 @@ type WalletHTTPClientImpl struct {
 
 func NewWalletHTTPClient(client *http.Client) WalletHTTPClient {
 	return &WalletHTTPClientImpl{client}
+}
+
+func (c *WalletHTTPClientImpl) GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...http.CallOption) (*GetCurrenciesResponse, error) {
+	var out GetCurrenciesResponse
+	pattern := "/v1/wallet/currencies/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletGetCurrencies))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *WalletHTTPClientImpl) GetUserBalances(ctx context.Context, in *GetUserBalancesRequest, opts ...http.CallOption) (*GetUserBalancesResponse, error) {

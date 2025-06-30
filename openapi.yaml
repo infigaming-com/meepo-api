@@ -1524,6 +1524,60 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditsResponse'
+    /v1/backoffice/wallet/currencies/add:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_AddWalletCurrency
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddWalletCurrencyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AddWalletCurrencyResponse'
+    /v1/backoffice/wallet/currencies/list:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_ListWalletCurrencies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletCurrenciesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletCurrenciesResponse'
+    /v1/backoffice/wallet/currencies/update:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_UpdateWalletCurrency
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletCurrencyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletCurrencyResponse'
     /v1/backoffice/wallet/get:
         post:
             tags:
@@ -2094,28 +2148,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
-    /v1/payment/withdraw/initiate:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Initiate a withdrawal transaction
-                 Starts a new withdrawal process
-                 Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
-            operationId: Payment_InitiateWithdraw
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.InitiateWithdrawResponse'
     /v1/review/withdraw:
         post:
             tags:
@@ -2299,24 +2331,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
-    /v1/user/operators/add:
-        post:
-            tags:
-                - User
-            operationId: User_AddOperator
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.user.service.v1.AddOperatorRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.AddOperatorResponse'
     /v1/user/tags/get:
         post:
             tags:
@@ -2357,6 +2371,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse'
+    /v1/wallet/currencies/get:
+        post:
+            tags:
+                - Wallet
+            operationId: Wallet_GetCurrencies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetCurrenciesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetCurrenciesResponse'
 components:
     schemas:
         api.backoffice.service.v1.AccountInfoRequest:
@@ -2450,6 +2482,30 @@ components:
             properties:
                 commentId:
                     type: string
+        api.backoffice.service.v1.AddWalletCurrencyRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+                hidden:
+                    type: boolean
+                type:
+                    type: string
+                symbol:
+                    type: string
+                icon:
+                    type: string
+                decimalPlaces:
+                    type: integer
+                    format: int32
+                currencyDecimalPlaces:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.AddWalletCurrencyResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.AuditLog:
             type: object
             properties:
@@ -5706,6 +5762,33 @@ components:
                     type: string
                 relatedTransactionId:
                     type: string
+        api.backoffice.service.v1.ListWalletCurrenciesRequest:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                enabled:
+                    type: boolean
+                hidden:
+                    type: boolean
+        api.backoffice.service.v1.ListWalletCurrenciesResponse:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.WalletCurrency'
+                total:
+                    type: integer
+                    format: int32
+                totalEnabled:
+                    type: integer
+                    format: int32
+                totalHidden:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListWithdrawDetailsRequest:
             type: object
             properties:
@@ -6322,6 +6405,32 @@ components:
         api.backoffice.service.v1.UpdateUserResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateWalletCurrencyRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+                hidden:
+                    type: boolean
+                type:
+                    type: string
+                symbol:
+                    type: string
+                icon:
+                    type: string
+                decimalPlaces:
+                    type: integer
+                    format: int32
+                currencyDecimalPlaces:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.UpdateWalletCurrencyResponse:
+            type: object
+            properties:
+                currency:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.WalletCurrency'
         api.backoffice.service.v1.UpdateWalletRequest:
             type: object
             properties:
@@ -6350,6 +6459,24 @@ components:
         api.backoffice.service.v1.VerifyMobileResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.WalletCurrency:
+            type: object
+            properties:
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+                hidden:
+                    type: boolean
+                type:
+                    type: string
+                symbol:
+                    type: string
+                icon:
+                    type: string
+                decimalPlaces:
+                    type: integer
+                    format: int32
         api.game.service.v1.Action:
             type: object
             properties:
@@ -7557,14 +7684,6 @@ components:
             properties:
                 ticketId:
                     type: string
-        api.user.service.v1.AddOperatorRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-        api.user.service.v1.AddOperatorResponse:
-            type: object
-            properties: {}
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -7776,6 +7895,38 @@ components:
                     type: string
                     description: role id
             description: UserInfo contains basic user information.
+        api.wallet.service.v1.Currency:
+            type: object
+            properties:
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+                hidden:
+                    type: boolean
+                type:
+                    type: string
+                symbol:
+                    type: string
+                icon:
+                    type: string
+                decimalPlaces:
+                    type: integer
+                    format: int32
+        api.wallet.service.v1.GetCurrenciesRequest:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
+        api.wallet.service.v1.GetCurrenciesResponse:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.Currency'
         api.wallet.service.v1.GetUserBalancesRequest:
             type: object
             properties:
@@ -7856,6 +8007,9 @@ components:
                 money:
                     type: string
                     description: Actual amount paid
+                address:
+                    type: string
+                    description: Actual address
                 sign:
                     type: string
                     description: HMAC-SHA256 signature to verify request authenticity
@@ -7884,9 +8038,7 @@ components:
             type: object
             properties:
                 channelId:
-                    type: array
-                    items:
-                        type: string
+                    type: string
                     description: ID of the channel to use for this deposit
                 extra:
                     type: object
@@ -7900,18 +8052,22 @@ components:
             type: object
             properties:
                 data:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/payment.service.v1.GetAddressResponse_Data'
+                    $ref: '#/components/schemas/payment.service.v1.GetAddressResponse_Data'
             description: |-
                 Response for deposit initiation
                  Contains details about the initiated deposit transaction
         payment.service.v1.GetAddressResponse_Data:
             type: object
             properties:
-                coin:
+                currency:
                     type: string
-                    description: Digital Currency like btc, eth...
+                    description: Crypto like btc, eth...
+                protocol:
+                    type: string
+                    description: Crypto protocol
+                network:
+                    type: string
+                    description: Crypto chain
                 address:
                     type: string
                     description: Digital Currency address
@@ -7945,6 +8101,12 @@ components:
                 currency:
                     type: string
                     description: Optional currency filter
+                protocol:
+                    type: string
+                    description: Optional crypto protocol
+                network:
+                    type: string
+                    description: Optional crypto network filter
                 country:
                     type: string
                     description: Optional country filter
@@ -8030,7 +8192,10 @@ components:
                     description: Optional payment channel filter
                 protocol:
                     type: string
-                    description: Optional protocol filter
+                    description: Optional crypto protocol filter
+                network:
+                    type: string
+                    description: Optional crypto network filter
                 type:
                     enum:
                         - TRANSACTION_TYPE_UNSPECIFIED
@@ -8177,54 +8342,6 @@ components:
             description: |-
                 Response for deposit initiation
                  Contains details about the initiated deposit transaction
-        payment.service.v1.InitiateWithdrawRequest:
-            type: object
-            properties:
-                amount:
-                    type: string
-                    description: Amount to withdraw in smallest currency unit (e.g., cents)
-                currency:
-                    type: string
-                    description: Currency code for the transaction
-                userId:
-                    type: string
-                    description: ID of the user who initiated the withdrawal
-                operatorId:
-                    type: string
-                    description: ID of the operator who owns this channel
-                channelId:
-                    type: string
-                    description: ID of the channel to use for withdrawal
-                extra:
-                    type: object
-                    description: |-
-                        Additional information needed for the withdrawal
-                         May include account details, clientId, note, etc.
-            description: |-
-                Request to initiate a withdrawal
-                 Used to start a withdrawal transaction
-        payment.service.v1.InitiateWithdrawResponse:
-            type: object
-            properties:
-                transactionId:
-                    type: string
-                    description: Unique identifier for the transaction
-                operatorOrderNo:
-                    type: string
-                    description: Order number from the operator's system
-                amount:
-                    type: string
-                    description: Amount to be withdrawn in smallest currency unit
-                status:
-                    type: string
-                    description: Current status of the transaction
-                createdAt:
-                    type: string
-                    description: Timestamp when the transaction was created
-                    format: date-time
-            description: |-
-                Response for withdrawal initiation
-                 Contains details about the initiated withdrawal transaction
         payment.service.v1.PaymentChannelInfo:
             type: object
             properties:
@@ -8255,6 +8372,12 @@ components:
                 currency:
                     type: string
                     description: Currency supported by this channel
+                protocol:
+                    type: string
+                    description: Crypto protocol supported by this channel
+                network:
+                    type: string
+                    description: Crypto chian supported by this channel
                 country:
                     type: string
                     description: Country where this channel is available
@@ -8280,6 +8403,11 @@ components:
                     type: integer
                     description: Estimated arrival time in minutes
                     format: int32
+                fixFee:
+                    type: string
+                    description: Fee
+                rateFee:
+                    type: string
                 depositSchema:
                     type: object
                     description: JSON schema defining deposit form fields required by this channel
@@ -8349,7 +8477,10 @@ components:
                     description: Payment channel used for the transaction
                 protocol:
                     type: string
-                    description: Protocol used for the transaction
+                    description: Crypto Protocol used for the transaction
+                network:
+                    type: string
+                    description: Crypto Network used for the transaction
                 type:
                     enum:
                         - TRANSACTION_TYPE_UNSPECIFIED
