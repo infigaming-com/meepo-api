@@ -46,20 +46,20 @@ func AuthMiddleware(authPaths []string, secret string, uc user.UserClient) middl
 				return nil, errors.New(401, "UNAUTHORIZED", "invalid token")
 			}
 
-			operators, ok := mctx.GetOperators(ctx)
+			operatorIds, ok := mctx.GetOperatorIds(ctx)
 			// If the operatorId in the context does not exists, do not check the operatorId in the token
 			// If the operatorId in the context exists, check if it is the same as the operatorId in the token
 			if ok {
-				if claims.UserInfo.OperatorId != operators.OperatorId {
+				if claims.UserInfo.OperatorId != operatorIds.OperatorId {
 					return nil, errors.New(401, "UNAUTHORIZED", "invalid operatorId")
 				}
-				if claims.UserInfo.CompanyOperatorId != operators.CompanyOperatorId {
+				if claims.UserInfo.CompanyOperatorId != operatorIds.CompanyOperatorId {
 					return nil, errors.New(401, "UNAUTHORIZED", "invalid company operatorId")
 				}
-				if claims.UserInfo.RetailerOperatorId != operators.RetailerOperatorId {
+				if claims.UserInfo.RetailerOperatorId != operatorIds.RetailerOperatorId {
 					return nil, errors.New(401, "UNAUTHORIZED", "invalid retailer operatorId")
 				}
-				if claims.UserInfo.SystemOperatorId != operators.SystemOperatorId {
+				if claims.UserInfo.SystemOperatorId != operatorIds.SystemOperatorId {
 					return nil, errors.New(401, "UNAUTHORIZED", "invalid system operatorId")
 				}
 			}

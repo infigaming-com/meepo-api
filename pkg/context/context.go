@@ -20,7 +20,7 @@ type RequestInfo struct {
 	ClientIP   string
 }
 
-type Operators struct {
+type OperatorIds struct {
 	OperatorId         int64
 	CompanyOperatorId  int64
 	RetailerOperatorId int64
@@ -59,12 +59,12 @@ func OperatorId(ctx context.Context) (int64, bool) {
 	return Value[int64](ctx, "operatorId")
 }
 
-func WithOperators(ctx context.Context, operators Operators) context.Context {
-	return WithValue(ctx, "operators", operators)
+func WithOperatorIds(ctx context.Context, operatorIds OperatorIds) context.Context {
+	return WithValue(ctx, "operatorIds", operatorIds)
 }
 
-func GetOperators(ctx context.Context) (Operators, bool) {
-	return Value[Operators](ctx, "operators")
+func GetOperatorIds(ctx context.Context) (OperatorIds, bool) {
+	return Value[OperatorIds](ctx, "operatorIds")
 }
 
 func WithRequestInfo(ctx context.Context, requestInfo RequestInfo) context.Context {
@@ -76,15 +76,15 @@ func GetRequestInfo(ctx context.Context) (RequestInfo, bool) {
 }
 
 func GetActualOperatorIdAndType(ctx context.Context) (int64, string, bool) {
-	if operators, ok := GetOperators(ctx); ok {
-		if operators.OperatorId != 0 {
-			return operators.OperatorId, "operator", true
-		} else if operators.CompanyOperatorId != 0 {
-			return operators.CompanyOperatorId, "company", true
-		} else if operators.RetailerOperatorId != 0 {
-			return operators.RetailerOperatorId, "retailer", true
+	if operatorIds, ok := GetOperatorIds(ctx); ok {
+		if operatorIds.OperatorId != 0 {
+			return operatorIds.OperatorId, "operator", true
+		} else if operatorIds.CompanyOperatorId != 0 {
+			return operatorIds.CompanyOperatorId, "company", true
+		} else if operatorIds.RetailerOperatorId != 0 {
+			return operatorIds.RetailerOperatorId, "retailer", true
 		} else {
-			return operators.SystemOperatorId, "system", true
+			return operatorIds.SystemOperatorId, "system", true
 		}
 	}
 	return 0, "", false

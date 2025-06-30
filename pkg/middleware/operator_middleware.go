@@ -35,7 +35,7 @@ func OperatorIdMiddleware(path []string, userClient user.UserClient) middleware.
 						return nil, errors.New(400, "BAD_REQUEST", "cannot get operatorIds by origin")
 					}
 				}
-				ctx = mctx.WithOperators(ctx, mctx.Operators{
+				ctx = mctx.WithOperatorIds(ctx, mctx.OperatorIds{
 					OperatorId:         resp.OperatorContext.OperatorId,
 					CompanyOperatorId:  resp.OperatorContext.CompanyOperatorId,
 					RetailerOperatorId: resp.OperatorContext.RetailerOperatorId,
