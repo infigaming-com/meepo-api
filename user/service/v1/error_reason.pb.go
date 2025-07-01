@@ -90,6 +90,11 @@ const (
 	ErrorReason_OPERATOR_IDS_NOT_FOUND_BY_ORIGIN         ErrorReason = 10063
 	ErrorReason_OPERATOR_IDS_NOT_FOUND_IN_CONTEXT        ErrorReason = 10064
 	ErrorReason_ACTUAL_OPERATOR_ID_NOT_GET_IN_CONTEXT    ErrorReason = 10065
+	ErrorReason_INVALID_OPERATOR_KEY                     ErrorReason = 10066
+	ErrorReason_GET_OPERATOR_BY_KEY_FAILED               ErrorReason = 10067
+	ErrorReason_OPERATOR_KEY_ALREADY_EXISTS              ErrorReason = 10068
+	ErrorReason_EMPTY_PASSWORD                           ErrorReason = 10069
+	ErrorReason_EMAIL_ALREADY_EXISTS                     ErrorReason = 10070
 )
 
 // Enum value maps for ErrorReason.
@@ -160,6 +165,11 @@ var (
 		10063: "OPERATOR_IDS_NOT_FOUND_BY_ORIGIN",
 		10064: "OPERATOR_IDS_NOT_FOUND_IN_CONTEXT",
 		10065: "ACTUAL_OPERATOR_ID_NOT_GET_IN_CONTEXT",
+		10066: "INVALID_OPERATOR_KEY",
+		10067: "GET_OPERATOR_BY_KEY_FAILED",
+		10068: "OPERATOR_KEY_ALREADY_EXISTS",
+		10069: "EMPTY_PASSWORD",
+		10070: "EMAIL_ALREADY_EXISTS",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                              0,
@@ -227,6 +237,11 @@ var (
 		"OPERATOR_IDS_NOT_FOUND_BY_ORIGIN":         10063,
 		"OPERATOR_IDS_NOT_FOUND_IN_CONTEXT":        10064,
 		"ACTUAL_OPERATOR_ID_NOT_GET_IN_CONTEXT":    10065,
+		"INVALID_OPERATOR_KEY":                     10066,
+		"GET_OPERATOR_BY_KEY_FAILED":               10067,
+		"OPERATOR_KEY_ALREADY_EXISTS":              10068,
+		"EMPTY_PASSWORD":                           10069,
+		"EMAIL_ALREADY_EXISTS":                     10070,
 	}
 )
 
@@ -261,7 +276,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa0\x10\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xae\x11\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -327,7 +342,12 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x16CREATE_BUSINESS_FAILED\x10\xceN\x12%\n" +
 	" OPERATOR_IDS_NOT_FOUND_BY_ORIGIN\x10\xcfN\x12&\n" +
 	"!OPERATOR_IDS_NOT_FOUND_IN_CONTEXT\x10\xd0N\x12*\n" +
-	"%ACTUAL_OPERATOR_ID_NOT_GET_IN_CONTEXT\x10\xd1N\x1a\x04\xa0E\xf4\x03BO\n" +
+	"%ACTUAL_OPERATOR_ID_NOT_GET_IN_CONTEXT\x10\xd1N\x12\x19\n" +
+	"\x14INVALID_OPERATOR_KEY\x10\xd2N\x12\x1f\n" +
+	"\x1aGET_OPERATOR_BY_KEY_FAILED\x10\xd3N\x12 \n" +
+	"\x1bOPERATOR_KEY_ALREADY_EXISTS\x10\xd4N\x12\x13\n" +
+	"\x0eEMPTY_PASSWORD\x10\xd5N\x12\x19\n" +
+	"\x14EMAIL_ALREADY_EXISTS\x10\xd6N\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (

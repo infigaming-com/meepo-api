@@ -792,3 +792,63 @@ func IsActualOperatorIdNotGetInContext(err error) bool {
 func ErrorActualOperatorIdNotGetInContext(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_ACTUAL_OPERATOR_ID_NOT_GET_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidOperatorKey(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_KEY.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorKey(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_KEY.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorByKeyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_BY_KEY_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorByKeyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_BY_KEY_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorKeyAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_KEY_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorOperatorKeyAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_KEY_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEmptyPassword(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMPTY_PASSWORD.String() && e.Code == 500
+}
+
+func ErrorEmptyPassword(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMPTY_PASSWORD.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEmailAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorEmailAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMAIL_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}

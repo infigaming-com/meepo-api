@@ -19,15 +19,18 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeOperatorCreateOperator = "/api.backoffice.service.v1.BackofficeOperator/CreateOperator"
 const OperationBackofficeOperatorListOperators = "/api.backoffice.service.v1.BackofficeOperator/ListOperators"
 
 type BackofficeOperatorHTTPServer interface {
+	CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error)
 	ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error)
 }
 
 func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperatorHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/backoffice/operator/list", _BackofficeOperator_ListOperators0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/create", _BackofficeOperator_CreateOperator0_HTTP_Handler(srv))
 }
 
 func _BackofficeOperator_ListOperators0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
@@ -52,7 +55,30 @@ func _BackofficeOperator_ListOperators0_HTTP_Handler(srv BackofficeOperatorHTTPS
 	}
 }
 
+func _BackofficeOperator_CreateOperator0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateOperatorRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorCreateOperator)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateOperator(ctx, req.(*CreateOperatorRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateOperatorResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeOperatorHTTPClient interface {
+	CreateOperator(ctx context.Context, req *CreateOperatorRequest, opts ...http.CallOption) (rsp *CreateOperatorResponse, err error)
 	ListOperators(ctx context.Context, req *ListOperatorsRequest, opts ...http.CallOption) (rsp *ListOperatorsResponse, err error)
 }
 
@@ -62,6 +88,19 @@ type BackofficeOperatorHTTPClientImpl struct {
 
 func NewBackofficeOperatorHTTPClient(client *http.Client) BackofficeOperatorHTTPClient {
 	return &BackofficeOperatorHTTPClientImpl{client}
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) CreateOperator(ctx context.Context, in *CreateOperatorRequest, opts ...http.CallOption) (*CreateOperatorResponse, error) {
+	var out CreateOperatorResponse
+	pattern := "/v1/backoffice/operator/create"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorCreateOperator))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *BackofficeOperatorHTTPClientImpl) ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...http.CallOption) (*ListOperatorsResponse, error) {

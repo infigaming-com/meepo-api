@@ -110,6 +110,182 @@ func (x *ListOperatorsResponse) GetOperators() []*ListOperatorsResponse_Operator
 	return nil
 }
 
+type CreateOperatorRequest struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Mode                string                 `protobuf:"bytes,1,opt,name=mode,proto3" json:"mode,omitempty"`
+	OperatorName        string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	OperatorKey         string                 `protobuf:"bytes,3,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
+	ReportingCurrency   string                 `protobuf:"bytes,4,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	BackofficeTimezone  string                 `protobuf:"bytes,5,opt,name=backoffice_timezone,json=backofficeTimezone,proto3" json:"backoffice_timezone,omitempty"`
+	OperatorAdminEmail  string                 `protobuf:"bytes,6,opt,name=operator_admin_email,json=operatorAdminEmail,proto3" json:"operator_admin_email,omitempty"`
+	VerificationCode    string                 `protobuf:"bytes,7,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"`
+	SupportedLanguages  []string               `protobuf:"bytes,8,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
+	SupportedCurrencies []string               `protobuf:"bytes,9,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"` // Contains Fiat and Crypto currencies
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *CreateOperatorRequest) Reset() {
+	*x = CreateOperatorRequest{}
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOperatorRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOperatorRequest) ProtoMessage() {}
+
+func (x *CreateOperatorRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOperatorRequest.ProtoReflect.Descriptor instead.
+func (*CreateOperatorRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CreateOperatorRequest) GetMode() string {
+	if x != nil {
+		return x.Mode
+	}
+	return ""
+}
+
+func (x *CreateOperatorRequest) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *CreateOperatorRequest) GetOperatorKey() string {
+	if x != nil {
+		return x.OperatorKey
+	}
+	return ""
+}
+
+func (x *CreateOperatorRequest) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
+func (x *CreateOperatorRequest) GetBackofficeTimezone() string {
+	if x != nil {
+		return x.BackofficeTimezone
+	}
+	return ""
+}
+
+func (x *CreateOperatorRequest) GetOperatorAdminEmail() string {
+	if x != nil {
+		return x.OperatorAdminEmail
+	}
+	return ""
+}
+
+func (x *CreateOperatorRequest) GetVerificationCode() string {
+	if x != nil {
+		return x.VerificationCode
+	}
+	return ""
+}
+
+func (x *CreateOperatorRequest) GetSupportedLanguages() []string {
+	if x != nil {
+		return x.SupportedLanguages
+	}
+	return nil
+}
+
+func (x *CreateOperatorRequest) GetSupportedCurrencies() []string {
+	if x != nil {
+		return x.SupportedCurrencies
+	}
+	return nil
+}
+
+type CreateOperatorResponse struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Subdomain           string                 `protobuf:"bytes,1,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	BackofficeSubdomain string                 `protobuf:"bytes,2,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
+	OperatorAdminEmail  string                 `protobuf:"bytes,3,opt,name=operator_admin_email,json=operatorAdminEmail,proto3" json:"operator_admin_email,omitempty"`
+	Password            string                 `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *CreateOperatorResponse) Reset() {
+	*x = CreateOperatorResponse{}
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOperatorResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOperatorResponse) ProtoMessage() {}
+
+func (x *CreateOperatorResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOperatorResponse.ProtoReflect.Descriptor instead.
+func (*CreateOperatorResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreateOperatorResponse) GetSubdomain() string {
+	if x != nil {
+		return x.Subdomain
+	}
+	return ""
+}
+
+func (x *CreateOperatorResponse) GetBackofficeSubdomain() string {
+	if x != nil {
+		return x.BackofficeSubdomain
+	}
+	return ""
+}
+
+func (x *CreateOperatorResponse) GetOperatorAdminEmail() string {
+	if x != nil {
+		return x.OperatorAdminEmail
+	}
+	return ""
+}
+
+func (x *CreateOperatorResponse) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
 type ListOperatorsResponse_Operator struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
@@ -120,7 +296,7 @@ type ListOperatorsResponse_Operator struct {
 
 func (x *ListOperatorsResponse_Operator) Reset() {
 	*x = ListOperatorsResponse_Operator{}
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[2]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -132,7 +308,7 @@ func (x *ListOperatorsResponse_Operator) String() string {
 func (*ListOperatorsResponse_Operator) ProtoMessage() {}
 
 func (x *ListOperatorsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[2]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -176,9 +352,25 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\bOperator\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
-	"\roperator_name\x18\x02 \x01(\tR\foperatorName2\xb2\x01\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\"\x96\x03\n" +
+	"\x15CreateOperatorRequest\x12\x12\n" +
+	"\x04mode\x18\x01 \x01(\tR\x04mode\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12!\n" +
+	"\foperator_key\x18\x03 \x01(\tR\voperatorKey\x12-\n" +
+	"\x12reporting_currency\x18\x04 \x01(\tR\x11reportingCurrency\x12/\n" +
+	"\x13backoffice_timezone\x18\x05 \x01(\tR\x12backofficeTimezone\x120\n" +
+	"\x14operator_admin_email\x18\x06 \x01(\tR\x12operatorAdminEmail\x12+\n" +
+	"\x11verification_code\x18\a \x01(\tR\x10verificationCode\x12/\n" +
+	"\x13supported_languages\x18\b \x03(\tR\x12supportedLanguages\x121\n" +
+	"\x14supported_currencies\x18\t \x03(\tR\x13supportedCurrencies\"\xb7\x01\n" +
+	"\x16CreateOperatorResponse\x12\x1c\n" +
+	"\tsubdomain\x18\x01 \x01(\tR\tsubdomain\x121\n" +
+	"\x14backoffice_subdomain\x18\x02 \x01(\tR\x13backofficeSubdomain\x120\n" +
+	"\x14operator_admin_email\x18\x03 \x01(\tR\x12operatorAdminEmail\x12\x1a\n" +
+	"\bpassword\x18\x04 \x01(\tR\bpassword2\xd5\x02\n" +
 	"\x12BackofficeOperator\x12\x9b\x01\n" +
-	"\rListOperators\x12/.api.backoffice.service.v1.ListOperatorsRequest\x1a0.api.backoffice.service.v1.ListOperatorsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/operator/listB[\n" +
+	"\rListOperators\x12/.api.backoffice.service.v1.ListOperatorsRequest\x1a0.api.backoffice.service.v1.ListOperatorsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/operator/list\x12\xa0\x01\n" +
+	"\x0eCreateOperator\x120.api.backoffice.service.v1.CreateOperatorRequest\x1a1.api.backoffice.service.v1.CreateOperatorResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/operator/createB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -193,18 +385,22 @@ func file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_operator_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_backoffice_service_v1_backoffice_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_backoffice_service_v1_backoffice_operator_proto_goTypes = []any{
 	(*ListOperatorsRequest)(nil),           // 0: api.backoffice.service.v1.ListOperatorsRequest
 	(*ListOperatorsResponse)(nil),          // 1: api.backoffice.service.v1.ListOperatorsResponse
-	(*ListOperatorsResponse_Operator)(nil), // 2: api.backoffice.service.v1.ListOperatorsResponse.Operator
+	(*CreateOperatorRequest)(nil),          // 2: api.backoffice.service.v1.CreateOperatorRequest
+	(*CreateOperatorResponse)(nil),         // 3: api.backoffice.service.v1.CreateOperatorResponse
+	(*ListOperatorsResponse_Operator)(nil), // 4: api.backoffice.service.v1.ListOperatorsResponse.Operator
 }
 var file_backoffice_service_v1_backoffice_operator_proto_depIdxs = []int32{
-	2, // 0: api.backoffice.service.v1.ListOperatorsResponse.operators:type_name -> api.backoffice.service.v1.ListOperatorsResponse.Operator
+	4, // 0: api.backoffice.service.v1.ListOperatorsResponse.operators:type_name -> api.backoffice.service.v1.ListOperatorsResponse.Operator
 	0, // 1: api.backoffice.service.v1.BackofficeOperator.ListOperators:input_type -> api.backoffice.service.v1.ListOperatorsRequest
-	1, // 2: api.backoffice.service.v1.BackofficeOperator.ListOperators:output_type -> api.backoffice.service.v1.ListOperatorsResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
+	2, // 2: api.backoffice.service.v1.BackofficeOperator.CreateOperator:input_type -> api.backoffice.service.v1.CreateOperatorRequest
+	1, // 3: api.backoffice.service.v1.BackofficeOperator.ListOperators:output_type -> api.backoffice.service.v1.ListOperatorsResponse
+	3, // 4: api.backoffice.service.v1.BackofficeOperator.CreateOperator:output_type -> api.backoffice.service.v1.CreateOperatorResponse
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -222,7 +418,7 @@ func file_backoffice_service_v1_backoffice_operator_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_operator_proto_rawDesc), len(file_backoffice_service_v1_backoffice_operator_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

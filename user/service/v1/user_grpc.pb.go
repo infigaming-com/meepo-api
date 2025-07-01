@@ -63,6 +63,7 @@ const (
 	User_GetChildOperatorIds_FullMethodName          = "/api.user.service.v1.User/GetChildOperatorIds"
 	User_CheckEmailExists_FullMethodName             = "/api.user.service.v1.User/CheckEmailExists"
 	User_CheckSubdomainExists_FullMethodName         = "/api.user.service.v1.User/CheckSubdomainExists"
+	User_CheckOperatorKeyExists_FullMethodName       = "/api.user.service.v1.User/CheckOperatorKeyExists"
 	User_CreateBusiness_FullMethodName               = "/api.user.service.v1.User/CreateBusiness"
 )
 
@@ -152,6 +153,8 @@ type UserClient interface {
 	CheckEmailExists(ctx context.Context, in *CheckEmailExistsRequest, opts ...grpc.CallOption) (*CheckEmailExistsResponse, error)
 	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
 	CheckSubdomainExists(ctx context.Context, in *CheckSubdomainExistsRequest, opts ...grpc.CallOption) (*CheckSubdomainExistsResponse, error)
+	// CheckOperatorKeyExists checks if the operator key exists in the operator table.
+	CheckOperatorKeyExists(ctx context.Context, in *CheckOperatorKeyExistsRequest, opts ...grpc.CallOption) (*CheckOperatorKeyExistsResponse, error)
 	// CreateBusiness creates a new business record.
 	CreateBusiness(ctx context.Context, in *CreateBusinessRequest, opts ...grpc.CallOption) (*CreateBusinessResponse, error)
 }
@@ -604,6 +607,16 @@ func (c *userClient) CheckSubdomainExists(ctx context.Context, in *CheckSubdomai
 	return out, nil
 }
 
+func (c *userClient) CheckOperatorKeyExists(ctx context.Context, in *CheckOperatorKeyExistsRequest, opts ...grpc.CallOption) (*CheckOperatorKeyExistsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckOperatorKeyExistsResponse)
+	err := c.cc.Invoke(ctx, User_CheckOperatorKeyExists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) CreateBusiness(ctx context.Context, in *CreateBusinessRequest, opts ...grpc.CallOption) (*CreateBusinessResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateBusinessResponse)
@@ -700,6 +713,8 @@ type UserServer interface {
 	CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error)
 	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
 	CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error)
+	// CheckOperatorKeyExists checks if the operator key exists in the operator table.
+	CheckOperatorKeyExists(context.Context, *CheckOperatorKeyExistsRequest) (*CheckOperatorKeyExistsResponse, error)
 	// CreateBusiness creates a new business record.
 	CreateBusiness(context.Context, *CreateBusinessRequest) (*CreateBusinessResponse, error)
 	mustEmbedUnimplementedUserServer()
@@ -843,6 +858,9 @@ func (UnimplementedUserServer) CheckEmailExists(context.Context, *CheckEmailExis
 }
 func (UnimplementedUserServer) CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckSubdomainExists not implemented")
+}
+func (UnimplementedUserServer) CheckOperatorKeyExists(context.Context, *CheckOperatorKeyExistsRequest) (*CheckOperatorKeyExistsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckOperatorKeyExists not implemented")
 }
 func (UnimplementedUserServer) CreateBusiness(context.Context, *CreateBusinessRequest) (*CreateBusinessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateBusiness not implemented")
@@ -1660,6 +1678,24 @@ func _User_CheckSubdomainExists_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_CheckOperatorKeyExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckOperatorKeyExistsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CheckOperatorKeyExists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CheckOperatorKeyExists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CheckOperatorKeyExists(ctx, req.(*CheckOperatorKeyExistsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_CreateBusiness_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateBusinessRequest)
 	if err := dec(in); err != nil {
@@ -1860,6 +1896,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckSubdomainExists",
 			Handler:    _User_CheckSubdomainExists_Handler,
+		},
+		{
+			MethodName: "CheckOperatorKeyExists",
+			Handler:    _User_CheckOperatorKeyExists_Handler,
 		},
 		{
 			MethodName: "CreateBusiness",

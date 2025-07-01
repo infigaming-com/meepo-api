@@ -23,7 +23,7 @@ message CreateCompanyRequest {
 	string company_name = 1;
 	string email = 2;
 	string mobile = 3;
-	string subdomain = 4;
+	string operator_key = 4;
 	string password = 5;
 	string contact = 6;
 	string contact_methods = 7;
@@ -33,5 +33,5 @@ message CreateCompanyRequest {
 
 message CreateCompanyResponse {
 	string token = 1;
-	string site_url = 2;
+	string backoffice_subdomain = 2;
 }

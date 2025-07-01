@@ -23,6 +23,7 @@ const OperationBackofficeAccountAccountInfo = "/api.backoffice.service.v1.Backof
 const OperationBackofficeAccountAddAccount = "/api.backoffice.service.v1.BackofficeAccount/AddAccount"
 const OperationBackofficeAccountBind2fa = "/api.backoffice.service.v1.BackofficeAccount/Bind2fa"
 const OperationBackofficeAccountCheckEmailExists = "/api.backoffice.service.v1.BackofficeAccount/CheckEmailExists"
+const OperationBackofficeAccountCheckOperatorKeyExists = "/api.backoffice.service.v1.BackofficeAccount/CheckOperatorKeyExists"
 const OperationBackofficeAccountCheckSubdomainExists = "/api.backoffice.service.v1.BackofficeAccount/CheckSubdomainExists"
 const OperationBackofficeAccountCreateRole = "/api.backoffice.service.v1.BackofficeAccount/CreateRole"
 const OperationBackofficeAccountDeleteRole = "/api.backoffice.service.v1.BackofficeAccount/DeleteRole"
@@ -47,6 +48,8 @@ type BackofficeAccountHTTPServer interface {
 	Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error)
 	// CheckEmailExists CheckEmailExists checks if the email exists in the user table.
 	CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error)
+	// CheckOperatorKeyExists CheckOperatorKeyExists checks if the operator key exists in the operator table.
+	CheckOperatorKeyExists(context.Context, *CheckOperatorKeyExistsRequest) (*CheckOperatorKeyExistsResponse, error)
 	// CheckSubdomainExists CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
 	CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error)
 	CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleResponse, error)
@@ -90,6 +93,7 @@ func RegisterBackofficeAccountHTTPServer(s *http.Server, srv BackofficeAccountHT
 	r.POST("/v1/backoffice/accounts/role/delete", _BackofficeAccount_DeleteRole0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/email/check_exists", _BackofficeAccount_CheckEmailExists0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/subdomain/check_exists", _BackofficeAccount_CheckSubdomainExists0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/key/check_exists", _BackofficeAccount_CheckOperatorKeyExists0_HTTP_Handler(srv))
 }
 
 func _BackofficeAccount_AddAccount0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
@@ -554,11 +558,34 @@ func _BackofficeAccount_CheckSubdomainExists0_HTTP_Handler(srv BackofficeAccount
 	}
 }
 
+func _BackofficeAccount_CheckOperatorKeyExists0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CheckOperatorKeyExistsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountCheckOperatorKeyExists)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CheckOperatorKeyExists(ctx, req.(*CheckOperatorKeyExistsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CheckOperatorKeyExistsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeAccountHTTPClient interface {
 	AccountInfo(ctx context.Context, req *AccountInfoRequest, opts ...http.CallOption) (rsp *AccountInfoResponse, err error)
 	AddAccount(ctx context.Context, req *AddAccountRequest, opts ...http.CallOption) (rsp *AddAccountResponse, err error)
 	Bind2Fa(ctx context.Context, req *Bind2FaRequest, opts ...http.CallOption) (rsp *Bind2FaResponse, err error)
 	CheckEmailExists(ctx context.Context, req *CheckEmailExistsRequest, opts ...http.CallOption) (rsp *CheckEmailExistsResponse, err error)
+	CheckOperatorKeyExists(ctx context.Context, req *CheckOperatorKeyExistsRequest, opts ...http.CallOption) (rsp *CheckOperatorKeyExistsResponse, err error)
 	CheckSubdomainExists(ctx context.Context, req *CheckSubdomainExistsRequest, opts ...http.CallOption) (rsp *CheckSubdomainExistsResponse, err error)
 	CreateRole(ctx context.Context, req *CreateRoleRequest, opts ...http.CallOption) (rsp *CreateRoleResponse, err error)
 	DeleteRole(ctx context.Context, req *DeleteRoleRequest, opts ...http.CallOption) (rsp *DeleteRoleResponse, err error)
@@ -630,6 +657,19 @@ func (c *BackofficeAccountHTTPClientImpl) CheckEmailExists(ctx context.Context, 
 	pattern := "/v1/backoffice/accounts/email/check_exists"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAccountCheckEmailExists))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAccountHTTPClientImpl) CheckOperatorKeyExists(ctx context.Context, in *CheckOperatorKeyExistsRequest, opts ...http.CallOption) (*CheckOperatorKeyExistsResponse, error) {
+	var out CheckOperatorKeyExistsResponse
+	pattern := "/v1/backoffice/operator/key/check_exists"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountCheckOperatorKeyExists))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

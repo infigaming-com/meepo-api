@@ -989,6 +989,43 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
+    /v1/backoffice/operator/create:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_CreateOperator
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateOperatorRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CreateOperatorResponse'
+    /v1/backoffice/operator/key/check_exists:
+        post:
+            tags:
+                - BackofficeAccount
+            description: CheckOperatorKeyExists checks if the operator key exists in the operator table.
+            operationId: BackofficeAccount_CheckOperatorKeyExists
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CheckOperatorKeyExistsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CheckOperatorKeyExistsResponse'
     /v1/backoffice/operator/list:
         post:
             tags:
@@ -2702,6 +2739,16 @@ components:
             properties:
                 exists:
                     type: boolean
+        api.backoffice.service.v1.CheckOperatorKeyExistsRequest:
+            type: object
+            properties:
+                operatorKey:
+                    type: string
+        api.backoffice.service.v1.CheckOperatorKeyExistsResponse:
+            type: object
+            properties:
+                exists:
+                    type: boolean
         api.backoffice.service.v1.CheckSubdomainExistsRequest:
             type: object
             properties:
@@ -2721,7 +2768,7 @@ components:
                     type: string
                 mobile:
                     type: string
-                subdomain:
+                operatorKey:
                     type: string
                 password:
                     type: string
@@ -2738,7 +2785,43 @@ components:
             properties:
                 token:
                     type: string
-                siteUrl:
+                backofficeSubdomain:
+                    type: string
+        api.backoffice.service.v1.CreateOperatorRequest:
+            type: object
+            properties:
+                mode:
+                    type: string
+                operatorName:
+                    type: string
+                operatorKey:
+                    type: string
+                reportingCurrency:
+                    type: string
+                backofficeTimezone:
+                    type: string
+                operatorAdminEmail:
+                    type: string
+                verificationCode:
+                    type: string
+                supportedLanguages:
+                    type: array
+                    items:
+                        type: string
+                supportedCurrencies:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.CreateOperatorResponse:
+            type: object
+            properties:
+                subdomain:
+                    type: string
+                backofficeSubdomain:
+                    type: string
+                operatorAdminEmail:
+                    type: string
+                password:
                     type: string
         api.backoffice.service.v1.CreateRoleRequest:
             type: object

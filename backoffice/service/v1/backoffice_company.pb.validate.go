@@ -63,7 +63,7 @@ func (m *CreateCompanyRequest) validate(all bool) error {
 
 	// no validation rules for Mobile
 
-	// no validation rules for Subdomain
+	// no validation rules for OperatorKey
 
 	// no validation rules for Password
 
@@ -179,7 +179,7 @@ func (m *CreateCompanyResponse) validate(all bool) error {
 
 	// no validation rules for Token
 
-	// no validation rules for SiteUrl
+	// no validation rules for BackofficeSubdomain
 
 	if len(errors) > 0 {
 		return CreateCompanyResponseMultiError(errors)

@@ -28,7 +28,7 @@ type CreateCompanyRequest struct {
 	CompanyName      string                 `protobuf:"bytes,1,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
 	Email            string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Mobile           string                 `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Subdomain        string                 `protobuf:"bytes,4,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	OperatorKey      string                 `protobuf:"bytes,4,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
 	Password         string                 `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
 	Contact          string                 `protobuf:"bytes,6,opt,name=contact,proto3" json:"contact,omitempty"`
 	ContactMethods   string                 `protobuf:"bytes,7,opt,name=contact_methods,json=contactMethods,proto3" json:"contact_methods,omitempty"`
@@ -89,9 +89,9 @@ func (x *CreateCompanyRequest) GetMobile() string {
 	return ""
 }
 
-func (x *CreateCompanyRequest) GetSubdomain() string {
+func (x *CreateCompanyRequest) GetOperatorKey() string {
 	if x != nil {
-		return x.Subdomain
+		return x.OperatorKey
 	}
 	return ""
 }
@@ -132,11 +132,11 @@ func (x *CreateCompanyRequest) GetVerificationCode() string {
 }
 
 type CreateCompanyResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
-	SiteUrl       string                 `protobuf:"bytes,2,opt,name=site_url,json=siteUrl,proto3" json:"site_url,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Token               string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	BackofficeSubdomain string                 `protobuf:"bytes,2,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *CreateCompanyResponse) Reset() {
@@ -176,9 +176,9 @@ func (x *CreateCompanyResponse) GetToken() string {
 	return ""
 }
 
-func (x *CreateCompanyResponse) GetSiteUrl() string {
+func (x *CreateCompanyResponse) GetBackofficeSubdomain() string {
 	if x != nil {
-		return x.SiteUrl
+		return x.BackofficeSubdomain
 	}
 	return ""
 }
@@ -187,20 +187,20 @@ var File_backoffice_service_v1_backoffice_company_proto protoreflect.FileDescrip
 
 const file_backoffice_service_v1_backoffice_company_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_company.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xaf\x02\n" +
+	".backoffice/service/v1/backoffice_company.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb4\x02\n" +
 	"\x14CreateCompanyRequest\x12!\n" +
 	"\fcompany_name\x18\x01 \x01(\tR\vcompanyName\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
-	"\x06mobile\x18\x03 \x01(\tR\x06mobile\x12\x1c\n" +
-	"\tsubdomain\x18\x04 \x01(\tR\tsubdomain\x12\x1a\n" +
+	"\x06mobile\x18\x03 \x01(\tR\x06mobile\x12!\n" +
+	"\foperator_key\x18\x04 \x01(\tR\voperatorKey\x12\x1a\n" +
 	"\bpassword\x18\x05 \x01(\tR\bpassword\x12\x18\n" +
 	"\acontact\x18\x06 \x01(\tR\acontact\x12'\n" +
 	"\x0fcontact_methods\x18\a \x01(\tR\x0econtactMethods\x12\x1c\n" +
 	"\taffiliate\x18\b \x01(\tR\taffiliate\x12+\n" +
-	"\x11verification_code\x18\t \x01(\tR\x10verificationCode\"H\n" +
+	"\x11verification_code\x18\t \x01(\tR\x10verificationCode\"`\n" +
 	"\x15CreateCompanyResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\x12\x19\n" +
-	"\bsite_url\x18\x02 \x01(\tR\asiteUrl2\xb4\x01\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x121\n" +
+	"\x14backoffice_subdomain\x18\x02 \x01(\tR\x13backofficeSubdomain2\xb4\x01\n" +
 	"\x11BackofficeCompany\x12\x9e\x01\n" +
 	"\rCreateCompany\x12/.api.backoffice.service.v1.CreateCompanyRequest\x1a0.api.backoffice.service.v1.CreateCompanyResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/company/registerB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"

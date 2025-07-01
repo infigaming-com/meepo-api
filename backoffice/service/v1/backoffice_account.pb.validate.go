@@ -4842,6 +4842,216 @@ var _ interface {
 	ErrorName() string
 } = CheckSubdomainExistsResponseValidationError{}
 
+// Validate checks the field values on CheckOperatorKeyExistsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CheckOperatorKeyExistsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CheckOperatorKeyExistsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CheckOperatorKeyExistsRequestMultiError, or nil if none found.
+func (m *CheckOperatorKeyExistsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CheckOperatorKeyExistsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorKey
+
+	if len(errors) > 0 {
+		return CheckOperatorKeyExistsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CheckOperatorKeyExistsRequestMultiError is an error wrapping multiple
+// validation errors returned by CheckOperatorKeyExistsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type CheckOperatorKeyExistsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CheckOperatorKeyExistsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CheckOperatorKeyExistsRequestMultiError) AllErrors() []error { return m }
+
+// CheckOperatorKeyExistsRequestValidationError is the validation error
+// returned by CheckOperatorKeyExistsRequest.Validate if the designated
+// constraints aren't met.
+type CheckOperatorKeyExistsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CheckOperatorKeyExistsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CheckOperatorKeyExistsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CheckOperatorKeyExistsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CheckOperatorKeyExistsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CheckOperatorKeyExistsRequestValidationError) ErrorName() string {
+	return "CheckOperatorKeyExistsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CheckOperatorKeyExistsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCheckOperatorKeyExistsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CheckOperatorKeyExistsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CheckOperatorKeyExistsRequestValidationError{}
+
+// Validate checks the field values on CheckOperatorKeyExistsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CheckOperatorKeyExistsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CheckOperatorKeyExistsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CheckOperatorKeyExistsResponseMultiError, or nil if none found.
+func (m *CheckOperatorKeyExistsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CheckOperatorKeyExistsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Exists
+
+	if len(errors) > 0 {
+		return CheckOperatorKeyExistsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CheckOperatorKeyExistsResponseMultiError is an error wrapping multiple
+// validation errors returned by CheckOperatorKeyExistsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type CheckOperatorKeyExistsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CheckOperatorKeyExistsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CheckOperatorKeyExistsResponseMultiError) AllErrors() []error { return m }
+
+// CheckOperatorKeyExistsResponseValidationError is the validation error
+// returned by CheckOperatorKeyExistsResponse.Validate if the designated
+// constraints aren't met.
+type CheckOperatorKeyExistsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CheckOperatorKeyExistsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CheckOperatorKeyExistsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CheckOperatorKeyExistsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CheckOperatorKeyExistsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CheckOperatorKeyExistsResponseValidationError) ErrorName() string {
+	return "CheckOperatorKeyExistsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CheckOperatorKeyExistsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCheckOperatorKeyExistsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CheckOperatorKeyExistsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CheckOperatorKeyExistsResponseValidationError{}
+
 // Validate checks the field values on ListAccountsResponse_Account with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
