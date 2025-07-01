@@ -621,16 +621,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetInvoiceDetailResponse'
-    /v1/backoffice/finance/invovies/list:
+    /v1/backoffice/finance/invoices/list:
         post:
             tags:
                 - BackofficeFinance
-            operationId: BackofficeFinance_ListInvovies
+            operationId: BackofficeFinance_ListInvoices
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListInvoviesRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListInvoicesRequest'
                 required: true
             responses:
                 "200":
@@ -638,7 +638,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListInvoviesResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListInvoicesResponse'
     /v1/backoffice/finance/monthly-revenue-shares/list:
         post:
             tags:
@@ -5182,7 +5182,7 @@ components:
                         type: string
                 enabled:
                     type: boolean
-        api.backoffice.service.v1.ListInvoviesRequest:
+        api.backoffice.service.v1.ListInvoicesRequest:
             type: object
             properties:
                 retailerId:
@@ -5210,13 +5210,13 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListInvoviesResponse:
+        api.backoffice.service.v1.ListInvoicesResponse:
             type: object
             properties:
                 invoices:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListInvoviesResponse_Invoice'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListInvoicesResponse_Invoice'
                 totalCount:
                     type: integer
                     format: int32
@@ -5232,7 +5232,7 @@ components:
                 totalNotPaidCount:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListInvoviesResponse_Invoice:
+        api.backoffice.service.v1.ListInvoicesResponse_Invoice:
             type: object
             properties:
                 invoiceId:

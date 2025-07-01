@@ -10,9 +10,9 @@ option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficeFinance {
-	rpc ListInvovies(ListInvoviesRequest) returns (ListInvoviesResponse) {
+	rpc ListInvoices(ListInvoicesRequest) returns (ListInvoicesResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/finance/invovies/list"
+			post: "/v1/backoffice/finance/invoices/list"
 			body: "*"
 		};
 	}
@@ -81,7 +81,7 @@ service BackofficeFinance {
 	}
 }
 
-message ListInvoviesRequest {
+message ListInvoicesRequest {
 	// Filter by retailer
 	optional string retailer_id = 1;
 	
@@ -106,7 +106,7 @@ message ListInvoviesRequest {
 	optional int32 page_size = 7;
 }
 
-message ListInvoviesResponse {
+message ListInvoicesResponse {
 	message Invoice {
 		// Invoice ID
 		int64 invoice_id = 1;

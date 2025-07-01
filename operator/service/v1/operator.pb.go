@@ -23,96 +23,96 @@ const (
 )
 
 // Filter by payment status
-type ListInvoviesRequest_PaymentStatus int32
+type ListInvoicesRequest_PaymentStatus int32
 
 const (
-	ListInvoviesRequest_PAYMENT_STATUS_PAID     ListInvoviesRequest_PaymentStatus = 0
-	ListInvoviesRequest_PAYMENT_STATUS_NOT_PAID ListInvoviesRequest_PaymentStatus = 1
+	ListInvoicesRequest_PAYMENT_STATUS_PAID     ListInvoicesRequest_PaymentStatus = 0
+	ListInvoicesRequest_PAYMENT_STATUS_NOT_PAID ListInvoicesRequest_PaymentStatus = 1
 )
 
-// Enum value maps for ListInvoviesRequest_PaymentStatus.
+// Enum value maps for ListInvoicesRequest_PaymentStatus.
 var (
-	ListInvoviesRequest_PaymentStatus_name = map[int32]string{
+	ListInvoicesRequest_PaymentStatus_name = map[int32]string{
 		0: "PAYMENT_STATUS_PAID",
 		1: "PAYMENT_STATUS_NOT_PAID",
 	}
-	ListInvoviesRequest_PaymentStatus_value = map[string]int32{
+	ListInvoicesRequest_PaymentStatus_value = map[string]int32{
 		"PAYMENT_STATUS_PAID":     0,
 		"PAYMENT_STATUS_NOT_PAID": 1,
 	}
 )
 
-func (x ListInvoviesRequest_PaymentStatus) Enum() *ListInvoviesRequest_PaymentStatus {
-	p := new(ListInvoviesRequest_PaymentStatus)
+func (x ListInvoicesRequest_PaymentStatus) Enum() *ListInvoicesRequest_PaymentStatus {
+	p := new(ListInvoicesRequest_PaymentStatus)
 	*p = x
 	return p
 }
 
-func (x ListInvoviesRequest_PaymentStatus) String() string {
+func (x ListInvoicesRequest_PaymentStatus) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (ListInvoviesRequest_PaymentStatus) Descriptor() protoreflect.EnumDescriptor {
+func (ListInvoicesRequest_PaymentStatus) Descriptor() protoreflect.EnumDescriptor {
 	return file_operator_service_v1_operator_proto_enumTypes[0].Descriptor()
 }
 
-func (ListInvoviesRequest_PaymentStatus) Type() protoreflect.EnumType {
+func (ListInvoicesRequest_PaymentStatus) Type() protoreflect.EnumType {
 	return &file_operator_service_v1_operator_proto_enumTypes[0]
 }
 
-func (x ListInvoviesRequest_PaymentStatus) Number() protoreflect.EnumNumber {
+func (x ListInvoicesRequest_PaymentStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ListInvoviesRequest_PaymentStatus.Descriptor instead.
-func (ListInvoviesRequest_PaymentStatus) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use ListInvoicesRequest_PaymentStatus.Descriptor instead.
+func (ListInvoicesRequest_PaymentStatus) EnumDescriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{24, 0}
 }
 
 // Payment status
-type ListInvoviesResponse_Invoice_PaymentStatus int32
+type ListInvoicesResponse_Invoice_PaymentStatus int32
 
 const (
-	ListInvoviesResponse_Invoice_PAYMENT_STATUS_PAID     ListInvoviesResponse_Invoice_PaymentStatus = 0
-	ListInvoviesResponse_Invoice_PAYMENT_STATUS_NOT_PAID ListInvoviesResponse_Invoice_PaymentStatus = 1
+	ListInvoicesResponse_Invoice_PAYMENT_STATUS_PAID     ListInvoicesResponse_Invoice_PaymentStatus = 0
+	ListInvoicesResponse_Invoice_PAYMENT_STATUS_NOT_PAID ListInvoicesResponse_Invoice_PaymentStatus = 1
 )
 
-// Enum value maps for ListInvoviesResponse_Invoice_PaymentStatus.
+// Enum value maps for ListInvoicesResponse_Invoice_PaymentStatus.
 var (
-	ListInvoviesResponse_Invoice_PaymentStatus_name = map[int32]string{
+	ListInvoicesResponse_Invoice_PaymentStatus_name = map[int32]string{
 		0: "PAYMENT_STATUS_PAID",
 		1: "PAYMENT_STATUS_NOT_PAID",
 	}
-	ListInvoviesResponse_Invoice_PaymentStatus_value = map[string]int32{
+	ListInvoicesResponse_Invoice_PaymentStatus_value = map[string]int32{
 		"PAYMENT_STATUS_PAID":     0,
 		"PAYMENT_STATUS_NOT_PAID": 1,
 	}
 )
 
-func (x ListInvoviesResponse_Invoice_PaymentStatus) Enum() *ListInvoviesResponse_Invoice_PaymentStatus {
-	p := new(ListInvoviesResponse_Invoice_PaymentStatus)
+func (x ListInvoicesResponse_Invoice_PaymentStatus) Enum() *ListInvoicesResponse_Invoice_PaymentStatus {
+	p := new(ListInvoicesResponse_Invoice_PaymentStatus)
 	*p = x
 	return p
 }
 
-func (x ListInvoviesResponse_Invoice_PaymentStatus) String() string {
+func (x ListInvoicesResponse_Invoice_PaymentStatus) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (ListInvoviesResponse_Invoice_PaymentStatus) Descriptor() protoreflect.EnumDescriptor {
+func (ListInvoicesResponse_Invoice_PaymentStatus) Descriptor() protoreflect.EnumDescriptor {
 	return file_operator_service_v1_operator_proto_enumTypes[1].Descriptor()
 }
 
-func (ListInvoviesResponse_Invoice_PaymentStatus) Type() protoreflect.EnumType {
+func (ListInvoicesResponse_Invoice_PaymentStatus) Type() protoreflect.EnumType {
 	return &file_operator_service_v1_operator_proto_enumTypes[1]
 }
 
-func (x ListInvoviesResponse_Invoice_PaymentStatus) Number() protoreflect.EnumNumber {
+func (x ListInvoicesResponse_Invoice_PaymentStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ListInvoviesResponse_Invoice_PaymentStatus.Descriptor instead.
-func (ListInvoviesResponse_Invoice_PaymentStatus) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use ListInvoicesResponse_Invoice_PaymentStatus.Descriptor instead.
+func (ListInvoicesResponse_Invoice_PaymentStatus) EnumDescriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{25, 0, 0}
 }
 
@@ -1252,7 +1252,7 @@ func (x *ListOperatorsResponse) GetOperators() []*ListOperatorsResponse_Operator
 	return nil
 }
 
-type ListInvoviesRequest struct {
+type ListInvoicesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Filter by retailer
 	RetailerId *string `protobuf:"bytes,1,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
@@ -1262,7 +1262,7 @@ type ListInvoviesRequest struct {
 	Month *string `protobuf:"bytes,3,opt,name=month,proto3,oneof" json:"month,omitempty"`
 	// Search by invoice id
 	InvoiceId     *int64                             `protobuf:"varint,4,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
-	PaymentStatus *ListInvoviesRequest_PaymentStatus `protobuf:"varint,5,opt,name=payment_status,json=paymentStatus,proto3,enum=api.operator.service.v1.ListInvoviesRequest_PaymentStatus,oneof" json:"payment_status,omitempty"`
+	PaymentStatus *ListInvoicesRequest_PaymentStatus `protobuf:"varint,5,opt,name=payment_status,json=paymentStatus,proto3,enum=api.operator.service.v1.ListInvoicesRequest_PaymentStatus,oneof" json:"payment_status,omitempty"`
 	// Pagination
 	Page          *int32 `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int32 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -1270,20 +1270,20 @@ type ListInvoviesRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListInvoviesRequest) Reset() {
-	*x = ListInvoviesRequest{}
+func (x *ListInvoicesRequest) Reset() {
+	*x = ListInvoicesRequest{}
 	mi := &file_operator_service_v1_operator_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListInvoviesRequest) String() string {
+func (x *ListInvoicesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListInvoviesRequest) ProtoMessage() {}
+func (*ListInvoicesRequest) ProtoMessage() {}
 
-func (x *ListInvoviesRequest) ProtoReflect() protoreflect.Message {
+func (x *ListInvoicesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_operator_service_v1_operator_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1295,63 +1295,63 @@ func (x *ListInvoviesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListInvoviesRequest.ProtoReflect.Descriptor instead.
-func (*ListInvoviesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListInvoicesRequest.ProtoReflect.Descriptor instead.
+func (*ListInvoicesRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *ListInvoviesRequest) GetRetailerId() string {
+func (x *ListInvoicesRequest) GetRetailerId() string {
 	if x != nil && x.RetailerId != nil {
 		return *x.RetailerId
 	}
 	return ""
 }
 
-func (x *ListInvoviesRequest) GetCompanyId() string {
+func (x *ListInvoicesRequest) GetCompanyId() string {
 	if x != nil && x.CompanyId != nil {
 		return *x.CompanyId
 	}
 	return ""
 }
 
-func (x *ListInvoviesRequest) GetMonth() string {
+func (x *ListInvoicesRequest) GetMonth() string {
 	if x != nil && x.Month != nil {
 		return *x.Month
 	}
 	return ""
 }
 
-func (x *ListInvoviesRequest) GetInvoiceId() int64 {
+func (x *ListInvoicesRequest) GetInvoiceId() int64 {
 	if x != nil && x.InvoiceId != nil {
 		return *x.InvoiceId
 	}
 	return 0
 }
 
-func (x *ListInvoviesRequest) GetPaymentStatus() ListInvoviesRequest_PaymentStatus {
+func (x *ListInvoicesRequest) GetPaymentStatus() ListInvoicesRequest_PaymentStatus {
 	if x != nil && x.PaymentStatus != nil {
 		return *x.PaymentStatus
 	}
-	return ListInvoviesRequest_PAYMENT_STATUS_PAID
+	return ListInvoicesRequest_PAYMENT_STATUS_PAID
 }
 
-func (x *ListInvoviesRequest) GetPage() int32 {
+func (x *ListInvoicesRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListInvoviesRequest) GetPageSize() int32 {
+func (x *ListInvoicesRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
 	return 0
 }
 
-type ListInvoviesResponse struct {
+type ListInvoicesResponse struct {
 	state             protoimpl.MessageState          `protogen:"open.v1"`
-	Invoices          []*ListInvoviesResponse_Invoice `protobuf:"bytes,1,rep,name=invoices,proto3" json:"invoices,omitempty"`
+	Invoices          []*ListInvoicesResponse_Invoice `protobuf:"bytes,1,rep,name=invoices,proto3" json:"invoices,omitempty"`
 	TotalCount        int32                           `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	Page              int32                           `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize          int32                           `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
@@ -1361,20 +1361,20 @@ type ListInvoviesResponse struct {
 	sizeCache         protoimpl.SizeCache
 }
 
-func (x *ListInvoviesResponse) Reset() {
-	*x = ListInvoviesResponse{}
+func (x *ListInvoicesResponse) Reset() {
+	*x = ListInvoicesResponse{}
 	mi := &file_operator_service_v1_operator_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListInvoviesResponse) String() string {
+func (x *ListInvoicesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListInvoviesResponse) ProtoMessage() {}
+func (*ListInvoicesResponse) ProtoMessage() {}
 
-func (x *ListInvoviesResponse) ProtoReflect() protoreflect.Message {
+func (x *ListInvoicesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_operator_service_v1_operator_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1386,47 +1386,47 @@ func (x *ListInvoviesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListInvoviesResponse.ProtoReflect.Descriptor instead.
-func (*ListInvoviesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListInvoicesResponse.ProtoReflect.Descriptor instead.
+func (*ListInvoicesResponse) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{25}
 }
 
-func (x *ListInvoviesResponse) GetInvoices() []*ListInvoviesResponse_Invoice {
+func (x *ListInvoicesResponse) GetInvoices() []*ListInvoicesResponse_Invoice {
 	if x != nil {
 		return x.Invoices
 	}
 	return nil
 }
 
-func (x *ListInvoviesResponse) GetTotalCount() int32 {
+func (x *ListInvoicesResponse) GetTotalCount() int32 {
 	if x != nil {
 		return x.TotalCount
 	}
 	return 0
 }
 
-func (x *ListInvoviesResponse) GetPage() int32 {
+func (x *ListInvoicesResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListInvoviesResponse) GetPageSize() int32 {
+func (x *ListInvoicesResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *ListInvoviesResponse) GetTotalPaidCount() int32 {
+func (x *ListInvoicesResponse) GetTotalPaidCount() int32 {
 	if x != nil {
 		return x.TotalPaidCount
 	}
 	return 0
 }
 
-func (x *ListInvoviesResponse) GetTotalNotPaidCount() int32 {
+func (x *ListInvoicesResponse) GetTotalNotPaidCount() int32 {
 	if x != nil {
 		return x.TotalNotPaidCount
 	}
@@ -2889,7 +2889,7 @@ func (x *ListOperatorsResponse_Operator) GetEnabled() bool {
 	return false
 }
 
-type ListInvoviesResponse_Invoice struct {
+type ListInvoicesResponse_Invoice struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Invoice ID
 	InvoiceId int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3" json:"invoice_id,omitempty"`
@@ -2908,7 +2908,7 @@ type ListInvoviesResponse_Invoice struct {
 	Company  string `protobuf:"bytes,10,opt,name=company,proto3" json:"company,omitempty"`
 	// Financial information
 	DueAmount     string                                     `protobuf:"bytes,11,opt,name=due_amount,json=dueAmount,proto3" json:"due_amount,omitempty"`
-	PaymentStatus ListInvoviesResponse_Invoice_PaymentStatus `protobuf:"varint,12,opt,name=payment_status,json=paymentStatus,proto3,enum=api.operator.service.v1.ListInvoviesResponse_Invoice_PaymentStatus" json:"payment_status,omitempty"`
+	PaymentStatus ListInvoicesResponse_Invoice_PaymentStatus `protobuf:"varint,12,opt,name=payment_status,json=paymentStatus,proto3,enum=api.operator.service.v1.ListInvoicesResponse_Invoice_PaymentStatus" json:"payment_status,omitempty"`
 	// Dates
 	InvoiceDate   string `protobuf:"bytes,13,opt,name=invoice_date,json=invoiceDate,proto3" json:"invoice_date,omitempty"` // Format: YYYY-MM-DD
 	DueDate       string `protobuf:"bytes,14,opt,name=due_date,json=dueDate,proto3" json:"due_date,omitempty"`             // Format: YYYY-MM-DD
@@ -2916,20 +2916,20 @@ type ListInvoviesResponse_Invoice struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListInvoviesResponse_Invoice) Reset() {
-	*x = ListInvoviesResponse_Invoice{}
+func (x *ListInvoicesResponse_Invoice) Reset() {
+	*x = ListInvoicesResponse_Invoice{}
 	mi := &file_operator_service_v1_operator_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListInvoviesResponse_Invoice) String() string {
+func (x *ListInvoicesResponse_Invoice) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListInvoviesResponse_Invoice) ProtoMessage() {}
+func (*ListInvoicesResponse_Invoice) ProtoMessage() {}
 
-func (x *ListInvoviesResponse_Invoice) ProtoReflect() protoreflect.Message {
+func (x *ListInvoicesResponse_Invoice) ProtoReflect() protoreflect.Message {
 	mi := &file_operator_service_v1_operator_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2941,103 +2941,103 @@ func (x *ListInvoviesResponse_Invoice) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListInvoviesResponse_Invoice.ProtoReflect.Descriptor instead.
-func (*ListInvoviesResponse_Invoice) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListInvoicesResponse_Invoice.ProtoReflect.Descriptor instead.
+func (*ListInvoicesResponse_Invoice) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{25, 0}
 }
 
-func (x *ListInvoviesResponse_Invoice) GetInvoiceId() int64 {
+func (x *ListInvoicesResponse_Invoice) GetInvoiceId() int64 {
 	if x != nil {
 		return x.InvoiceId
 	}
 	return 0
 }
 
-func (x *ListInvoviesResponse_Invoice) GetOperatorId() int64 {
+func (x *ListInvoicesResponse_Invoice) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
 	return 0
 }
 
-func (x *ListInvoviesResponse_Invoice) GetOperatorName() string {
+func (x *ListInvoicesResponse_Invoice) GetOperatorName() string {
 	if x != nil {
 		return x.OperatorName
 	}
 	return ""
 }
 
-func (x *ListInvoviesResponse_Invoice) GetRetailerId() string {
+func (x *ListInvoicesResponse_Invoice) GetRetailerId() string {
 	if x != nil {
 		return x.RetailerId
 	}
 	return ""
 }
 
-func (x *ListInvoviesResponse_Invoice) GetRetailerName() string {
+func (x *ListInvoicesResponse_Invoice) GetRetailerName() string {
 	if x != nil {
 		return x.RetailerName
 	}
 	return ""
 }
 
-func (x *ListInvoviesResponse_Invoice) GetCompanyId() string {
+func (x *ListInvoicesResponse_Invoice) GetCompanyId() string {
 	if x != nil {
 		return x.CompanyId
 	}
 	return ""
 }
 
-func (x *ListInvoviesResponse_Invoice) GetCompanyName() string {
+func (x *ListInvoicesResponse_Invoice) GetCompanyName() string {
 	if x != nil {
 		return x.CompanyName
 	}
 	return ""
 }
 
-func (x *ListInvoviesResponse_Invoice) GetMonth() string {
+func (x *ListInvoicesResponse_Invoice) GetMonth() string {
 	if x != nil {
 		return x.Month
 	}
 	return ""
 }
 
-func (x *ListInvoviesResponse_Invoice) GetRetailer() string {
+func (x *ListInvoicesResponse_Invoice) GetRetailer() string {
 	if x != nil {
 		return x.Retailer
 	}
 	return ""
 }
 
-func (x *ListInvoviesResponse_Invoice) GetCompany() string {
+func (x *ListInvoicesResponse_Invoice) GetCompany() string {
 	if x != nil {
 		return x.Company
 	}
 	return ""
 }
 
-func (x *ListInvoviesResponse_Invoice) GetDueAmount() string {
+func (x *ListInvoicesResponse_Invoice) GetDueAmount() string {
 	if x != nil {
 		return x.DueAmount
 	}
 	return ""
 }
 
-func (x *ListInvoviesResponse_Invoice) GetPaymentStatus() ListInvoviesResponse_Invoice_PaymentStatus {
+func (x *ListInvoicesResponse_Invoice) GetPaymentStatus() ListInvoicesResponse_Invoice_PaymentStatus {
 	if x != nil {
 		return x.PaymentStatus
 	}
-	return ListInvoviesResponse_Invoice_PAYMENT_STATUS_PAID
+	return ListInvoicesResponse_Invoice_PAYMENT_STATUS_PAID
 }
 
-func (x *ListInvoviesResponse_Invoice) GetInvoiceDate() string {
+func (x *ListInvoicesResponse_Invoice) GetInvoiceDate() string {
 	if x != nil {
 		return x.InvoiceDate
 	}
 	return ""
 }
 
-func (x *ListInvoviesResponse_Invoice) GetDueDate() string {
+func (x *ListInvoicesResponse_Invoice) GetDueDate() string {
 	if x != nil {
 		return x.DueDate
 	}
@@ -3948,7 +3948,7 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"\xea\x03\n" +
-	"\x13ListInvoviesRequest\x12$\n" +
+	"\x13ListInvoicesRequest\x12$\n" +
 	"\vretailer_id\x18\x01 \x01(\tH\x00R\n" +
 	"retailerId\x88\x01\x01\x12\"\n" +
 	"\n" +
@@ -3956,7 +3956,7 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x05month\x18\x03 \x01(\tH\x02R\x05month\x88\x01\x01\x12\"\n" +
 	"\n" +
 	"invoice_id\x18\x04 \x01(\x03H\x03R\tinvoiceId\x88\x01\x01\x12f\n" +
-	"\x0epayment_status\x18\x05 \x01(\x0e2:.api.operator.service.v1.ListInvoviesRequest.PaymentStatusH\x04R\rpaymentStatus\x88\x01\x01\x12\x17\n" +
+	"\x0epayment_status\x18\x05 \x01(\x0e2:.api.operator.service.v1.ListInvoicesRequest.PaymentStatusH\x04R\rpaymentStatus\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x06 \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\a \x01(\x05H\x06R\bpageSize\x88\x01\x01\"E\n" +
 	"\rPaymentStatus\x12\x17\n" +
@@ -3970,8 +3970,8 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xeb\x06\n" +
-	"\x14ListInvoviesResponse\x12Q\n" +
-	"\binvoices\x18\x01 \x03(\v25.api.operator.service.v1.ListInvoviesResponse.InvoiceR\binvoices\x12\x1f\n" +
+	"\x14ListInvoicesResponse\x12Q\n" +
+	"\binvoices\x18\x01 \x03(\v25.api.operator.service.v1.ListInvoicesResponse.InvoiceR\binvoices\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
@@ -3996,7 +3996,7 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	" \x01(\tR\acompany\x12\x1d\n" +
 	"\n" +
 	"due_amount\x18\v \x01(\tR\tdueAmount\x12j\n" +
-	"\x0epayment_status\x18\f \x01(\x0e2C.api.operator.service.v1.ListInvoviesResponse.Invoice.PaymentStatusR\rpaymentStatus\x12!\n" +
+	"\x0epayment_status\x18\f \x01(\x0e2C.api.operator.service.v1.ListInvoicesResponse.Invoice.PaymentStatusR\rpaymentStatus\x12!\n" +
 	"\finvoice_date\x18\r \x01(\tR\vinvoiceDate\x12\x19\n" +
 	"\bdue_date\x18\x0e \x01(\tR\adueDate\"E\n" +
 	"\rPaymentStatus\x12\x17\n" +
@@ -4253,7 +4253,7 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x16DeleteOriginOperatorId\x126.api.operator.service.v1.DeleteOriginOperatorIdRequest\x1a7.api.operator.service.v1.DeleteOriginOperatorIdResponse\"\x00\x12\x85\x01\n" +
 	"\x14GetParentOperatorIds\x124.api.operator.service.v1.GetParentOperatorIdsRequest\x1a5.api.operator.service.v1.GetParentOperatorIdsResponse\"\x00\x12p\n" +
 	"\rListOperators\x12-.api.operator.service.v1.ListOperatorsRequest\x1a..api.operator.service.v1.ListOperatorsResponse\"\x00\x12m\n" +
-	"\fListInvovies\x12,.api.operator.service.v1.ListInvoviesRequest\x1a-.api.operator.service.v1.ListInvoviesResponse\"\x00\x12y\n" +
+	"\fListInvoices\x12,.api.operator.service.v1.ListInvoicesRequest\x1a-.api.operator.service.v1.ListInvoicesResponse\"\x00\x12y\n" +
 	"\x10GetInvoiceDetail\x120.api.operator.service.v1.GetInvoiceDetailRequest\x1a1.api.operator.service.v1.GetInvoiceDetailResponse\"\x00\x12\x91\x01\n" +
 	"\x18ListOperatorRevenueShare\x128.api.operator.service.v1.ListOperatorRevenueShareRequest\x1a9.api.operator.service.v1.ListOperatorRevenueShareResponse\"\x00\x12\x7f\n" +
 	"\x12ListThirdPartyFees\x122.api.operator.service.v1.ListThirdPartyFeesRequest\x1a3.api.operator.service.v1.ListThirdPartyFeesResponse\"\x00\x12v\n" +
@@ -4280,8 +4280,8 @@ func file_operator_service_v1_operator_proto_rawDescGZIP() []byte {
 var file_operator_service_v1_operator_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_operator_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
 var file_operator_service_v1_operator_proto_goTypes = []any{
-	(ListInvoviesRequest_PaymentStatus)(0),                    // 0: api.operator.service.v1.ListInvoviesRequest.PaymentStatus
-	(ListInvoviesResponse_Invoice_PaymentStatus)(0),           // 1: api.operator.service.v1.ListInvoviesResponse.Invoice.PaymentStatus
+	(ListInvoicesRequest_PaymentStatus)(0),                    // 0: api.operator.service.v1.ListInvoicesRequest.PaymentStatus
+	(ListInvoicesResponse_Invoice_PaymentStatus)(0),           // 1: api.operator.service.v1.ListInvoicesResponse.Invoice.PaymentStatus
 	(GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus)(0), // 2: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatus
 	(*AddOperatorRequest)(nil),                                // 3: api.operator.service.v1.AddOperatorRequest
 	(*AddOperatorResponse)(nil),                               // 4: api.operator.service.v1.AddOperatorResponse
@@ -4307,8 +4307,8 @@ var file_operator_service_v1_operator_proto_goTypes = []any{
 	(*GetParentOperatorIdsResponse)(nil),                      // 24: api.operator.service.v1.GetParentOperatorIdsResponse
 	(*ListOperatorsRequest)(nil),                              // 25: api.operator.service.v1.ListOperatorsRequest
 	(*ListOperatorsResponse)(nil),                             // 26: api.operator.service.v1.ListOperatorsResponse
-	(*ListInvoviesRequest)(nil),                               // 27: api.operator.service.v1.ListInvoviesRequest
-	(*ListInvoviesResponse)(nil),                              // 28: api.operator.service.v1.ListInvoviesResponse
+	(*ListInvoicesRequest)(nil),                               // 27: api.operator.service.v1.ListInvoicesRequest
+	(*ListInvoicesResponse)(nil),                              // 28: api.operator.service.v1.ListInvoicesResponse
 	(*GetInvoiceDetailRequest)(nil),                           // 29: api.operator.service.v1.GetInvoiceDetailRequest
 	(*GetInvoiceDetailResponse)(nil),                          // 30: api.operator.service.v1.GetInvoiceDetailResponse
 	(*ListOperatorRevenueShareRequest)(nil),                   // 31: api.operator.service.v1.ListOperatorRevenueShareRequest
@@ -4331,7 +4331,7 @@ var file_operator_service_v1_operator_proto_goTypes = []any{
 	(*GetOperatorsByIdsResponse_Operator)(nil),                // 48: api.operator.service.v1.GetOperatorsByIdsResponse.Operator
 	(*GetOperatorCurrenciesResponse_Currency)(nil),            // 49: api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
 	(*ListOperatorsResponse_Operator)(nil),                    // 50: api.operator.service.v1.ListOperatorsResponse.Operator
-	(*ListInvoviesResponse_Invoice)(nil),                      // 51: api.operator.service.v1.ListInvoviesResponse.Invoice
+	(*ListInvoicesResponse_Invoice)(nil),                      // 51: api.operator.service.v1.ListInvoicesResponse.Invoice
 	(*GetInvoiceDetailResponse_InvoiceDetail)(nil),            // 52: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail
 	(*ListOperatorRevenueShareResponse_RevenueShareItem)(nil), // 53: api.operator.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
 	(*ListThirdPartyFeesResponse_ThirdPartyFeeItem)(nil),      // 54: api.operator.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
@@ -4345,8 +4345,8 @@ var file_operator_service_v1_operator_proto_depIdxs = []int32{
 	48, // 1: api.operator.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.operator.service.v1.GetOperatorsByIdsResponse.Operator
 	49, // 2: api.operator.service.v1.GetOperatorCurrenciesResponse.currencies:type_name -> api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
 	50, // 3: api.operator.service.v1.ListOperatorsResponse.operators:type_name -> api.operator.service.v1.ListOperatorsResponse.Operator
-	0,  // 4: api.operator.service.v1.ListInvoviesRequest.payment_status:type_name -> api.operator.service.v1.ListInvoviesRequest.PaymentStatus
-	51, // 5: api.operator.service.v1.ListInvoviesResponse.invoices:type_name -> api.operator.service.v1.ListInvoviesResponse.Invoice
+	0,  // 4: api.operator.service.v1.ListInvoicesRequest.payment_status:type_name -> api.operator.service.v1.ListInvoicesRequest.PaymentStatus
+	51, // 5: api.operator.service.v1.ListInvoicesResponse.invoices:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice
 	52, // 6: api.operator.service.v1.GetInvoiceDetailResponse.invoice:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail
 	53, // 7: api.operator.service.v1.ListOperatorRevenueShareResponse.items:type_name -> api.operator.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
 	54, // 8: api.operator.service.v1.ListThirdPartyFeesResponse.items:type_name -> api.operator.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
@@ -4354,7 +4354,7 @@ var file_operator_service_v1_operator_proto_depIdxs = []int32{
 	56, // 10: api.operator.service.v1.ListMonthlyRevenueShareResponse.summary:type_name -> api.operator.service.v1.ListMonthlyRevenueShareResponse.Summary
 	57, // 11: api.operator.service.v1.ListAdjustmentConfigsResponse.configs:type_name -> api.operator.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
 	58, // 12: api.operator.service.v1.ListAdjustmentsResponse.items:type_name -> api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItem
-	1,  // 13: api.operator.service.v1.ListInvoviesResponse.Invoice.payment_status:type_name -> api.operator.service.v1.ListInvoviesResponse.Invoice.PaymentStatus
+	1,  // 13: api.operator.service.v1.ListInvoicesResponse.Invoice.payment_status:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice.PaymentStatus
 	2,  // 14: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.payment_status:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatus
 	3,  // 15: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
 	5,  // 16: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
@@ -4368,7 +4368,7 @@ var file_operator_service_v1_operator_proto_depIdxs = []int32{
 	21, // 24: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
 	23, // 25: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
 	25, // 26: api.operator.service.v1.Operator.ListOperators:input_type -> api.operator.service.v1.ListOperatorsRequest
-	27, // 27: api.operator.service.v1.Operator.ListInvovies:input_type -> api.operator.service.v1.ListInvoviesRequest
+	27, // 27: api.operator.service.v1.Operator.ListInvoices:input_type -> api.operator.service.v1.ListInvoicesRequest
 	29, // 28: api.operator.service.v1.Operator.GetInvoiceDetail:input_type -> api.operator.service.v1.GetInvoiceDetailRequest
 	31, // 29: api.operator.service.v1.Operator.ListOperatorRevenueShare:input_type -> api.operator.service.v1.ListOperatorRevenueShareRequest
 	33, // 30: api.operator.service.v1.Operator.ListThirdPartyFees:input_type -> api.operator.service.v1.ListThirdPartyFeesRequest
@@ -4390,7 +4390,7 @@ var file_operator_service_v1_operator_proto_depIdxs = []int32{
 	22, // 46: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
 	24, // 47: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
 	26, // 48: api.operator.service.v1.Operator.ListOperators:output_type -> api.operator.service.v1.ListOperatorsResponse
-	28, // 49: api.operator.service.v1.Operator.ListInvovies:output_type -> api.operator.service.v1.ListInvoviesResponse
+	28, // 49: api.operator.service.v1.Operator.ListInvoices:output_type -> api.operator.service.v1.ListInvoicesResponse
 	30, // 50: api.operator.service.v1.Operator.GetInvoiceDetail:output_type -> api.operator.service.v1.GetInvoiceDetailResponse
 	32, // 51: api.operator.service.v1.Operator.ListOperatorRevenueShare:output_type -> api.operator.service.v1.ListOperatorRevenueShareResponse
 	34, // 52: api.operator.service.v1.Operator.ListThirdPartyFees:output_type -> api.operator.service.v1.ListThirdPartyFeesResponse
