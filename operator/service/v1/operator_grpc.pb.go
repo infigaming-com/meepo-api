@@ -31,7 +31,7 @@ const (
 	Operator_DeleteOriginOperatorId_FullMethodName   = "/api.operator.service.v1.Operator/DeleteOriginOperatorId"
 	Operator_GetParentOperatorIds_FullMethodName     = "/api.operator.service.v1.Operator/GetParentOperatorIds"
 	Operator_ListOperators_FullMethodName            = "/api.operator.service.v1.Operator/ListOperators"
-	Operator_ListInvovies_FullMethodName             = "/api.operator.service.v1.Operator/ListInvovies"
+	Operator_ListInvoices_FullMethodName             = "/api.operator.service.v1.Operator/ListInvoices"
 	Operator_GetInvoiceDetail_FullMethodName         = "/api.operator.service.v1.Operator/GetInvoiceDetail"
 	Operator_ListOperatorRevenueShare_FullMethodName = "/api.operator.service.v1.Operator/ListOperatorRevenueShare"
 	Operator_ListThirdPartyFees_FullMethodName       = "/api.operator.service.v1.Operator/ListThirdPartyFees"
@@ -64,7 +64,7 @@ type OperatorClient interface {
 	GetParentOperatorIds(ctx context.Context, in *GetParentOperatorIdsRequest, opts ...grpc.CallOption) (*GetParentOperatorIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
 	ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...grpc.CallOption) (*ListOperatorsResponse, error)
-	ListInvovies(ctx context.Context, in *ListInvoviesRequest, opts ...grpc.CallOption) (*ListInvoviesResponse, error)
+	ListInvoices(ctx context.Context, in *ListInvoicesRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
 	GetInvoiceDetail(ctx context.Context, in *GetInvoiceDetailRequest, opts ...grpc.CallOption) (*GetInvoiceDetailResponse, error)
 	ListOperatorRevenueShare(ctx context.Context, in *ListOperatorRevenueShareRequest, opts ...grpc.CallOption) (*ListOperatorRevenueShareResponse, error)
 	ListThirdPartyFees(ctx context.Context, in *ListThirdPartyFeesRequest, opts ...grpc.CallOption) (*ListThirdPartyFeesResponse, error)
@@ -204,10 +204,10 @@ func (c *operatorClient) ListOperators(ctx context.Context, in *ListOperatorsReq
 	return out, nil
 }
 
-func (c *operatorClient) ListInvovies(ctx context.Context, in *ListInvoviesRequest, opts ...grpc.CallOption) (*ListInvoviesResponse, error) {
+func (c *operatorClient) ListInvoices(ctx context.Context, in *ListInvoicesRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListInvoviesResponse)
-	err := c.cc.Invoke(ctx, Operator_ListInvovies_FullMethodName, in, out, cOpts...)
+	out := new(ListInvoicesResponse)
+	err := c.cc.Invoke(ctx, Operator_ListInvoices_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -325,7 +325,7 @@ type OperatorServer interface {
 	GetParentOperatorIds(context.Context, *GetParentOperatorIdsRequest) (*GetParentOperatorIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
 	ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error)
-	ListInvovies(context.Context, *ListInvoviesRequest) (*ListInvoviesResponse, error)
+	ListInvoices(context.Context, *ListInvoicesRequest) (*ListInvoicesResponse, error)
 	GetInvoiceDetail(context.Context, *GetInvoiceDetailRequest) (*GetInvoiceDetailResponse, error)
 	ListOperatorRevenueShare(context.Context, *ListOperatorRevenueShareRequest) (*ListOperatorRevenueShareResponse, error)
 	ListThirdPartyFees(context.Context, *ListThirdPartyFeesRequest) (*ListThirdPartyFeesResponse, error)
@@ -381,8 +381,8 @@ func (UnimplementedOperatorServer) GetParentOperatorIds(context.Context, *GetPar
 func (UnimplementedOperatorServer) ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperators not implemented")
 }
-func (UnimplementedOperatorServer) ListInvovies(context.Context, *ListInvoviesRequest) (*ListInvoviesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListInvovies not implemented")
+func (UnimplementedOperatorServer) ListInvoices(context.Context, *ListInvoicesRequest) (*ListInvoicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListInvoices not implemented")
 }
 func (UnimplementedOperatorServer) GetInvoiceDetail(context.Context, *GetInvoiceDetailRequest) (*GetInvoiceDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceDetail not implemented")
@@ -648,20 +648,20 @@ func _Operator_ListOperators_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Operator_ListInvovies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListInvoviesRequest)
+func _Operator_ListInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListInvoicesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OperatorServer).ListInvovies(ctx, in)
+		return srv.(OperatorServer).ListInvoices(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Operator_ListInvovies_FullMethodName,
+		FullMethod: Operator_ListInvoices_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).ListInvovies(ctx, req.(*ListInvoviesRequest))
+		return srv.(OperatorServer).ListInvoices(ctx, req.(*ListInvoicesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -884,8 +884,8 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Operator_ListOperators_Handler,
 		},
 		{
-			MethodName: "ListInvovies",
-			Handler:    _Operator_ListInvovies_Handler,
+			MethodName: "ListInvoices",
+			Handler:    _Operator_ListInvoices_Handler,
 		},
 		{
 			MethodName: "GetInvoiceDetail",

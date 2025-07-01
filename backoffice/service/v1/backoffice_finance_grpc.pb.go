@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeFinance_ListInvovies_FullMethodName             = "/api.backoffice.service.v1.BackofficeFinance/ListInvovies"
+	BackofficeFinance_ListInvoices_FullMethodName             = "/api.backoffice.service.v1.BackofficeFinance/ListInvoices"
 	BackofficeFinance_GetInvoiceDetail_FullMethodName         = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceDetail"
 	BackofficeFinance_ListOperatorRevenueShare_FullMethodName = "/api.backoffice.service.v1.BackofficeFinance/ListOperatorRevenueShare"
 	BackofficeFinance_ListThirdPartyFees_FullMethodName       = "/api.backoffice.service.v1.BackofficeFinance/ListThirdPartyFees"
@@ -35,7 +35,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeFinanceClient interface {
-	ListInvovies(ctx context.Context, in *ListInvoviesRequest, opts ...grpc.CallOption) (*ListInvoviesResponse, error)
+	ListInvoices(ctx context.Context, in *ListInvoicesRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
 	GetInvoiceDetail(ctx context.Context, in *GetInvoiceDetailRequest, opts ...grpc.CallOption) (*GetInvoiceDetailResponse, error)
 	ListOperatorRevenueShare(ctx context.Context, in *ListOperatorRevenueShareRequest, opts ...grpc.CallOption) (*ListOperatorRevenueShareResponse, error)
 	ListThirdPartyFees(ctx context.Context, in *ListThirdPartyFeesRequest, opts ...grpc.CallOption) (*ListThirdPartyFeesResponse, error)
@@ -55,10 +55,10 @@ func NewBackofficeFinanceClient(cc grpc.ClientConnInterface) BackofficeFinanceCl
 	return &backofficeFinanceClient{cc}
 }
 
-func (c *backofficeFinanceClient) ListInvovies(ctx context.Context, in *ListInvoviesRequest, opts ...grpc.CallOption) (*ListInvoviesResponse, error) {
+func (c *backofficeFinanceClient) ListInvoices(ctx context.Context, in *ListInvoicesRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListInvoviesResponse)
-	err := c.cc.Invoke(ctx, BackofficeFinance_ListInvovies_FullMethodName, in, out, cOpts...)
+	out := new(ListInvoicesResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_ListInvoices_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -159,7 +159,7 @@ func (c *backofficeFinanceClient) DeleteAdjustmentConfig(ctx context.Context, in
 // All implementations must embed UnimplementedBackofficeFinanceServer
 // for forward compatibility.
 type BackofficeFinanceServer interface {
-	ListInvovies(context.Context, *ListInvoviesRequest) (*ListInvoviesResponse, error)
+	ListInvoices(context.Context, *ListInvoicesRequest) (*ListInvoicesResponse, error)
 	GetInvoiceDetail(context.Context, *GetInvoiceDetailRequest) (*GetInvoiceDetailResponse, error)
 	ListOperatorRevenueShare(context.Context, *ListOperatorRevenueShareRequest) (*ListOperatorRevenueShareResponse, error)
 	ListThirdPartyFees(context.Context, *ListThirdPartyFeesRequest) (*ListThirdPartyFeesResponse, error)
@@ -179,8 +179,8 @@ type BackofficeFinanceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficeFinanceServer struct{}
 
-func (UnimplementedBackofficeFinanceServer) ListInvovies(context.Context, *ListInvoviesRequest) (*ListInvoviesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListInvovies not implemented")
+func (UnimplementedBackofficeFinanceServer) ListInvoices(context.Context, *ListInvoicesRequest) (*ListInvoicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListInvoices not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) GetInvoiceDetail(context.Context, *GetInvoiceDetailRequest) (*GetInvoiceDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceDetail not implemented")
@@ -230,20 +230,20 @@ func RegisterBackofficeFinanceServer(s grpc.ServiceRegistrar, srv BackofficeFina
 	s.RegisterService(&BackofficeFinance_ServiceDesc, srv)
 }
 
-func _BackofficeFinance_ListInvovies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListInvoviesRequest)
+func _BackofficeFinance_ListInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListInvoicesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeFinanceServer).ListInvovies(ctx, in)
+		return srv.(BackofficeFinanceServer).ListInvoices(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeFinance_ListInvovies_FullMethodName,
+		FullMethod: BackofficeFinance_ListInvoices_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeFinanceServer).ListInvovies(ctx, req.(*ListInvoviesRequest))
+		return srv.(BackofficeFinanceServer).ListInvoices(ctx, req.(*ListInvoicesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -418,8 +418,8 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*BackofficeFinanceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListInvovies",
-			Handler:    _BackofficeFinance_ListInvovies_Handler,
+			MethodName: "ListInvoices",
+			Handler:    _BackofficeFinance_ListInvoices_Handler,
 		},
 		{
 			MethodName: "GetInvoiceDetail",
