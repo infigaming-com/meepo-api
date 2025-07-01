@@ -277,6 +277,232 @@ var _ interface {
 	ErrorName() string
 } = ListOperatorsResponseValidationError{}
 
+// Validate checks the field values on CreateOperatorRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateOperatorRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateOperatorRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateOperatorRequestMultiError, or nil if none found.
+func (m *CreateOperatorRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateOperatorRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Mode
+
+	// no validation rules for OperatorName
+
+	// no validation rules for OperatorKey
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for BackofficeTimezone
+
+	// no validation rules for OperatorAdminEmail
+
+	// no validation rules for VerificationCode
+
+	if len(errors) > 0 {
+		return CreateOperatorRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateOperatorRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateOperatorRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateOperatorRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateOperatorRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateOperatorRequestMultiError) AllErrors() []error { return m }
+
+// CreateOperatorRequestValidationError is the validation error returned by
+// CreateOperatorRequest.Validate if the designated constraints aren't met.
+type CreateOperatorRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateOperatorRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateOperatorRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateOperatorRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateOperatorRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateOperatorRequestValidationError) ErrorName() string {
+	return "CreateOperatorRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateOperatorRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateOperatorRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateOperatorRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateOperatorRequestValidationError{}
+
+// Validate checks the field values on CreateOperatorResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateOperatorResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateOperatorResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateOperatorResponseMultiError, or nil if none found.
+func (m *CreateOperatorResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateOperatorResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Subdomain
+
+	// no validation rules for BackofficeSubdomain
+
+	// no validation rules for OperatorAdminEmail
+
+	// no validation rules for Password
+
+	if len(errors) > 0 {
+		return CreateOperatorResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateOperatorResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateOperatorResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreateOperatorResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateOperatorResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateOperatorResponseMultiError) AllErrors() []error { return m }
+
+// CreateOperatorResponseValidationError is the validation error returned by
+// CreateOperatorResponse.Validate if the designated constraints aren't met.
+type CreateOperatorResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateOperatorResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateOperatorResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateOperatorResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateOperatorResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateOperatorResponseValidationError) ErrorName() string {
+	return "CreateOperatorResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateOperatorResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateOperatorResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateOperatorResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateOperatorResponseValidationError{}
+
 // Validate checks the field values on ListOperatorsResponse_Operator with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

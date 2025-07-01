@@ -195,6 +195,10 @@ service User {
 	rpc CheckSubdomainExists(CheckSubdomainExistsRequest) returns (CheckSubdomainExistsResponse) {
 	}
 
+	// CheckOperatorKeyExists checks if the operator key exists in the operator table.
+	rpc CheckOperatorKeyExists(CheckOperatorKeyExistsRequest) returns (CheckOperatorKeyExistsResponse) {
+	}
+
 	// CreateBusiness creates a new business record.
 	rpc CreateBusiness(CreateBusinessRequest) returns (CreateBusinessResponse) {
 	}
@@ -595,15 +599,17 @@ message ListUsersResponse {
 
 message CreateUserRequest {
 	string username = 1;
-	string password = 2;
+	optional string password = 2;
 	string email = 3;
-	string mobile = 4;
+	optional string mobile = 4;
 	OperatorContext operator_context = 5;
 	int64 role_id = 6;
 }
 
 message CreateUserResponse {
 	int64 user_id = 1;
+	string email = 2;
+	string password = 3;
 }
 
 message VerifyEmailRequest {
@@ -737,10 +743,10 @@ message CreateOperatorRequest {
 	string operator_name = 1;
 	string operator_type = 2;
 	repeated int64 parent_operator_ids = 3;
-	string mode = 4;
+	optional string mode = 4;
 	string operator_key = 5;
-	string reporting_currency = 6;
-	string backoffice_timezone = 7;
+	optional string reporting_currency = 6;
+	optional string backoffice_timezone = 7;
 	repeated string supported_languages = 8;
 	repeated string supported_currencies = 9;
 }
@@ -894,13 +900,21 @@ message CheckSubdomainExistsResponse {
 	bool exists = 1;
 }
 
+message CheckOperatorKeyExistsRequest {
+	string operator_key = 1;
+}
+
+message CheckOperatorKeyExistsResponse {
+	bool exists = 1;
+}
+
 message CreateBusinessRequest {
 	string name = 1;
 	// business type: "retailer", "retailer", "operator"
 	string type = 2;
-	string contact_name = 3;
-	string contact_methods = 4;
-	string affiliate = 5;
+	optional string contact_name = 3;
+	optional string contact_methods = 4;
+	optional string affiliate = 5;
 	int64 owner_user_id = 6;
 	OperatorContext operator_context = 7;
 }

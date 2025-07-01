@@ -828,3 +828,15 @@ func IsOperatorKeyAlreadyExists(err error) bool {
 func ErrorOperatorKeyAlreadyExists(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_OPERATOR_KEY_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
 }
+
+func IsEmptyPassword(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMPTY_PASSWORD.String() && e.Code == 500
+}
+
+func ErrorEmptyPassword(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMPTY_PASSWORD.String(), fmt.Sprintf(format, args...))
+}

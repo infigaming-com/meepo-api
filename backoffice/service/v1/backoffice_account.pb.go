@@ -2114,6 +2114,94 @@ func (x *CheckSubdomainExistsResponse) GetExists() bool {
 	return false
 }
 
+type CheckOperatorKeyExistsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorKey   string                 `protobuf:"bytes,1,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckOperatorKeyExistsRequest) Reset() {
+	*x = CheckOperatorKeyExistsRequest{}
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckOperatorKeyExistsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckOperatorKeyExistsRequest) ProtoMessage() {}
+
+func (x *CheckOperatorKeyExistsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckOperatorKeyExistsRequest.ProtoReflect.Descriptor instead.
+func (*CheckOperatorKeyExistsRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *CheckOperatorKeyExistsRequest) GetOperatorKey() string {
+	if x != nil {
+		return x.OperatorKey
+	}
+	return ""
+}
+
+type CheckOperatorKeyExistsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Exists        bool                   `protobuf:"varint,1,opt,name=exists,proto3" json:"exists,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckOperatorKeyExistsResponse) Reset() {
+	*x = CheckOperatorKeyExistsResponse{}
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckOperatorKeyExistsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckOperatorKeyExistsResponse) ProtoMessage() {}
+
+func (x *CheckOperatorKeyExistsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckOperatorKeyExistsResponse.ProtoReflect.Descriptor instead.
+func (*CheckOperatorKeyExistsResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *CheckOperatorKeyExistsResponse) GetExists() bool {
+	if x != nil {
+		return x.Exists
+	}
+	return false
+}
+
 type ListAccountsResponse_Account struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -2129,7 +2217,7 @@ type ListAccountsResponse_Account struct {
 
 func (x *ListAccountsResponse_Account) Reset() {
 	*x = ListAccountsResponse_Account{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[44]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2141,7 +2229,7 @@ func (x *ListAccountsResponse_Account) String() string {
 func (*ListAccountsResponse_Account) ProtoMessage() {}
 
 func (x *ListAccountsResponse_Account) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[44]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2345,7 +2433,11 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\x1bCheckSubdomainExistsRequest\x12\x1c\n" +
 	"\tsubdomain\x18\x01 \x01(\tR\tsubdomain\"6\n" +
 	"\x1cCheckSubdomainExistsResponse\x12\x16\n" +
-	"\x06exists\x18\x01 \x01(\bR\x06exists2\xa4\x1b\n" +
+	"\x06exists\x18\x01 \x01(\bR\x06exists\"B\n" +
+	"\x1dCheckOperatorKeyExistsRequest\x12!\n" +
+	"\foperator_key\x18\x01 \x01(\tR\voperatorKey\"8\n" +
+	"\x1eCheckOperatorKeyExistsResponse\x12\x16\n" +
+	"\x06exists\x18\x01 \x01(\bR\x06exists2\xe9\x1c\n" +
 	"\x11BackofficeAccount\x12\x91\x01\n" +
 	"\n" +
 	"AddAccount\x12,.api.backoffice.service.v1.AddAccountRequest\x1a-.api.backoffice.service.v1.AddAccountResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/backoffice/accounts/add\x12\xc6\x01\n" +
@@ -2371,7 +2463,8 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\n" +
 	"DeleteRole\x12,.api.backoffice.service.v1.DeleteRoleRequest\x1a-.api.backoffice.service.v1.DeleteRoleResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/accounts/role/delete\x12\xb2\x01\n" +
 	"\x10CheckEmailExists\x122.api.backoffice.service.v1.CheckEmailExistsRequest\x1a3.api.backoffice.service.v1.CheckEmailExistsResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/accounts/email/check_exists\x12\xc2\x01\n" +
-	"\x14CheckSubdomainExists\x126.api.backoffice.service.v1.CheckSubdomainExistsRequest\x1a7.api.backoffice.service.v1.CheckSubdomainExistsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/accounts/subdomain/check_existsB[\n" +
+	"\x14CheckSubdomainExists\x126.api.backoffice.service.v1.CheckSubdomainExistsRequest\x1a7.api.backoffice.service.v1.CheckSubdomainExistsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/accounts/subdomain/check_exists\x12\xc2\x01\n" +
+	"\x16CheckOperatorKeyExists\x128.api.backoffice.service.v1.CheckOperatorKeyExistsRequest\x1a9.api.backoffice.service.v1.CheckOperatorKeyExistsResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/operator/key/check_existsB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -2386,7 +2479,7 @@ func file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_account_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_account_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
+var file_backoffice_service_v1_backoffice_account_proto_msgTypes = make([]protoimpl.MessageInfo, 47)
 var file_backoffice_service_v1_backoffice_account_proto_goTypes = []any{
 	(*AddAccountRequest)(nil),                    // 0: api.backoffice.service.v1.AddAccountRequest
 	(*AddAccountResponse)(nil),                   // 1: api.backoffice.service.v1.AddAccountResponse
@@ -2432,18 +2525,20 @@ var file_backoffice_service_v1_backoffice_account_proto_goTypes = []any{
 	(*CheckEmailExistsResponse)(nil),             // 41: api.backoffice.service.v1.CheckEmailExistsResponse
 	(*CheckSubdomainExistsRequest)(nil),          // 42: api.backoffice.service.v1.CheckSubdomainExistsRequest
 	(*CheckSubdomainExistsResponse)(nil),         // 43: api.backoffice.service.v1.CheckSubdomainExistsResponse
-	(*ListAccountsResponse_Account)(nil),         // 44: api.backoffice.service.v1.ListAccountsResponse.Account
-	(*timestamppb.Timestamp)(nil),                // 45: google.protobuf.Timestamp
+	(*CheckOperatorKeyExistsRequest)(nil),        // 44: api.backoffice.service.v1.CheckOperatorKeyExistsRequest
+	(*CheckOperatorKeyExistsResponse)(nil),       // 45: api.backoffice.service.v1.CheckOperatorKeyExistsResponse
+	(*ListAccountsResponse_Account)(nil),         // 46: api.backoffice.service.v1.ListAccountsResponse.Account
+	(*timestamppb.Timestamp)(nil),                // 47: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_account_proto_depIdxs = []int32{
 	28, // 0: api.backoffice.service.v1.AccountInfoResponse.role:type_name -> api.backoffice.service.v1.Role
 	29, // 1: api.backoffice.service.v1.Role.permissions:type_name -> api.backoffice.service.v1.Permission
-	44, // 2: api.backoffice.service.v1.ListAccountsResponse.accounts:type_name -> api.backoffice.service.v1.ListAccountsResponse.Account
+	46, // 2: api.backoffice.service.v1.ListAccountsResponse.accounts:type_name -> api.backoffice.service.v1.ListAccountsResponse.Account
 	29, // 3: api.backoffice.service.v1.CreateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
 	28, // 4: api.backoffice.service.v1.ListRolesResponse.roles:type_name -> api.backoffice.service.v1.Role
 	29, // 5: api.backoffice.service.v1.UpdateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
 	28, // 6: api.backoffice.service.v1.ListAccountsResponse.Account.role:type_name -> api.backoffice.service.v1.Role
-	45, // 7: api.backoffice.service.v1.ListAccountsResponse.Account.created_at:type_name -> google.protobuf.Timestamp
+	47, // 7: api.backoffice.service.v1.ListAccountsResponse.Account.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 8: api.backoffice.service.v1.BackofficeAccount.AddAccount:input_type -> api.backoffice.service.v1.AddAccountRequest
 	2,  // 9: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:input_type -> api.backoffice.service.v1.SendEmailVerificationRequest
 	4,  // 10: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:input_type -> api.backoffice.service.v1.VerifyEmailRequest
@@ -2465,29 +2560,31 @@ var file_backoffice_service_v1_backoffice_account_proto_depIdxs = []int32{
 	38, // 26: api.backoffice.service.v1.BackofficeAccount.DeleteRole:input_type -> api.backoffice.service.v1.DeleteRoleRequest
 	40, // 27: api.backoffice.service.v1.BackofficeAccount.CheckEmailExists:input_type -> api.backoffice.service.v1.CheckEmailExistsRequest
 	42, // 28: api.backoffice.service.v1.BackofficeAccount.CheckSubdomainExists:input_type -> api.backoffice.service.v1.CheckSubdomainExistsRequest
-	1,  // 29: api.backoffice.service.v1.BackofficeAccount.AddAccount:output_type -> api.backoffice.service.v1.AddAccountResponse
-	3,  // 30: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:output_type -> api.backoffice.service.v1.SendEmailVerificationResponse
-	5,  // 31: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:output_type -> api.backoffice.service.v1.VerifyEmailResponse
-	7,  // 32: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:output_type -> api.backoffice.service.v1.SendMobileVerificationResponse
-	9,  // 33: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:output_type -> api.backoffice.service.v1.VerifyMobileResponse
-	11, // 34: api.backoffice.service.v1.BackofficeAccount.ResetPassword:output_type -> api.backoffice.service.v1.ResetPasswordResponse
-	13, // 35: api.backoffice.service.v1.BackofficeAccount.Generate2fa:output_type -> api.backoffice.service.v1.Generate2faResponse
-	15, // 36: api.backoffice.service.v1.BackofficeAccount.Bind2fa:output_type -> api.backoffice.service.v1.Bind2faResponse
-	17, // 37: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:output_type -> api.backoffice.service.v1.Unbind2faResponse
-	19, // 38: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:output_type -> api.backoffice.service.v1.UpdateAccountResponse
-	21, // 39: api.backoffice.service.v1.BackofficeAccount.Login:output_type -> api.backoffice.service.v1.LoginResponse
-	23, // 40: api.backoffice.service.v1.BackofficeAccount.Register:output_type -> api.backoffice.service.v1.RegisterResponse
-	25, // 41: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:output_type -> api.backoffice.service.v1.SendRegisterVerificationCodeResponse
-	27, // 42: api.backoffice.service.v1.BackofficeAccount.AccountInfo:output_type -> api.backoffice.service.v1.AccountInfoResponse
-	31, // 43: api.backoffice.service.v1.BackofficeAccount.ListAccounts:output_type -> api.backoffice.service.v1.ListAccountsResponse
-	33, // 44: api.backoffice.service.v1.BackofficeAccount.CreateRole:output_type -> api.backoffice.service.v1.CreateRoleResponse
-	35, // 45: api.backoffice.service.v1.BackofficeAccount.ListRoles:output_type -> api.backoffice.service.v1.ListRolesResponse
-	37, // 46: api.backoffice.service.v1.BackofficeAccount.UpdateRole:output_type -> api.backoffice.service.v1.UpdateRoleResponse
-	39, // 47: api.backoffice.service.v1.BackofficeAccount.DeleteRole:output_type -> api.backoffice.service.v1.DeleteRoleResponse
-	41, // 48: api.backoffice.service.v1.BackofficeAccount.CheckEmailExists:output_type -> api.backoffice.service.v1.CheckEmailExistsResponse
-	43, // 49: api.backoffice.service.v1.BackofficeAccount.CheckSubdomainExists:output_type -> api.backoffice.service.v1.CheckSubdomainExistsResponse
-	29, // [29:50] is the sub-list for method output_type
-	8,  // [8:29] is the sub-list for method input_type
+	44, // 29: api.backoffice.service.v1.BackofficeAccount.CheckOperatorKeyExists:input_type -> api.backoffice.service.v1.CheckOperatorKeyExistsRequest
+	1,  // 30: api.backoffice.service.v1.BackofficeAccount.AddAccount:output_type -> api.backoffice.service.v1.AddAccountResponse
+	3,  // 31: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:output_type -> api.backoffice.service.v1.SendEmailVerificationResponse
+	5,  // 32: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:output_type -> api.backoffice.service.v1.VerifyEmailResponse
+	7,  // 33: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:output_type -> api.backoffice.service.v1.SendMobileVerificationResponse
+	9,  // 34: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:output_type -> api.backoffice.service.v1.VerifyMobileResponse
+	11, // 35: api.backoffice.service.v1.BackofficeAccount.ResetPassword:output_type -> api.backoffice.service.v1.ResetPasswordResponse
+	13, // 36: api.backoffice.service.v1.BackofficeAccount.Generate2fa:output_type -> api.backoffice.service.v1.Generate2faResponse
+	15, // 37: api.backoffice.service.v1.BackofficeAccount.Bind2fa:output_type -> api.backoffice.service.v1.Bind2faResponse
+	17, // 38: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:output_type -> api.backoffice.service.v1.Unbind2faResponse
+	19, // 39: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:output_type -> api.backoffice.service.v1.UpdateAccountResponse
+	21, // 40: api.backoffice.service.v1.BackofficeAccount.Login:output_type -> api.backoffice.service.v1.LoginResponse
+	23, // 41: api.backoffice.service.v1.BackofficeAccount.Register:output_type -> api.backoffice.service.v1.RegisterResponse
+	25, // 42: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:output_type -> api.backoffice.service.v1.SendRegisterVerificationCodeResponse
+	27, // 43: api.backoffice.service.v1.BackofficeAccount.AccountInfo:output_type -> api.backoffice.service.v1.AccountInfoResponse
+	31, // 44: api.backoffice.service.v1.BackofficeAccount.ListAccounts:output_type -> api.backoffice.service.v1.ListAccountsResponse
+	33, // 45: api.backoffice.service.v1.BackofficeAccount.CreateRole:output_type -> api.backoffice.service.v1.CreateRoleResponse
+	35, // 46: api.backoffice.service.v1.BackofficeAccount.ListRoles:output_type -> api.backoffice.service.v1.ListRolesResponse
+	37, // 47: api.backoffice.service.v1.BackofficeAccount.UpdateRole:output_type -> api.backoffice.service.v1.UpdateRoleResponse
+	39, // 48: api.backoffice.service.v1.BackofficeAccount.DeleteRole:output_type -> api.backoffice.service.v1.DeleteRoleResponse
+	41, // 49: api.backoffice.service.v1.BackofficeAccount.CheckEmailExists:output_type -> api.backoffice.service.v1.CheckEmailExistsResponse
+	43, // 50: api.backoffice.service.v1.BackofficeAccount.CheckSubdomainExists:output_type -> api.backoffice.service.v1.CheckSubdomainExistsResponse
+	45, // 51: api.backoffice.service.v1.BackofficeAccount.CheckOperatorKeyExists:output_type -> api.backoffice.service.v1.CheckOperatorKeyExistsResponse
+	30, // [30:52] is the sub-list for method output_type
+	8,  // [8:30] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name
 	8,  // [8:8] is the sub-list for extension extendee
 	0,  // [0:8] is the sub-list for field type_name
@@ -2507,7 +2604,7 @@ func file_backoffice_service_v1_backoffice_account_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_account_proto_rawDesc), len(file_backoffice_service_v1_backoffice_account_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   45,
+			NumMessages:   47,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -15,6 +15,13 @@ service BackofficeOperator {
 			body: "*"
 		};
 	}
+
+	rpc CreateOperator(CreateOperatorRequest) returns (CreateOperatorResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/create"
+			body: "*"
+		};
+	}
 }
 
 message ListOperatorsRequest {
@@ -27,4 +34,23 @@ message ListOperatorsResponse {
 		string operator_name = 2;
 	}
 	repeated Operator operators = 1;
+}
+
+message CreateOperatorRequest {
+	string mode = 1;
+	string operator_name = 2;
+	string operator_key = 3;
+	string reporting_currency = 4;
+	string backoffice_timezone = 5;
+	string operator_admin_email = 6;
+	string verification_code = 7;
+	repeated string supported_languages = 8;
+	repeated string supported_currencies = 9; // Contains Fiat and Crypto currencies
+}
+
+message CreateOperatorResponse {
+	string subdomain = 1;
+	string backoffice_subdomain = 2;
+	string operator_admin_email = 3;
+	string password = 4;
 }
