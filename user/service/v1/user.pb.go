@@ -3810,13 +3810,18 @@ func (x *ListRolesResponse) GetTotal() int32 {
 }
 
 type CreateOperatorRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	OperatorName      string                 `protobuf:"bytes,1,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	OperatorType      string                 `protobuf:"bytes,2,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
-	ParentOperatorIds []int64                `protobuf:"varint,3,rep,packed,name=parent_operator_ids,json=parentOperatorIds,proto3" json:"parent_operator_ids,omitempty"`
-	Subdomain         string                 `protobuf:"bytes,4,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	OperatorName        string                 `protobuf:"bytes,1,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	OperatorType        string                 `protobuf:"bytes,2,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	ParentOperatorIds   []int64                `protobuf:"varint,3,rep,packed,name=parent_operator_ids,json=parentOperatorIds,proto3" json:"parent_operator_ids,omitempty"`
+	Mode                string                 `protobuf:"bytes,4,opt,name=mode,proto3" json:"mode,omitempty"`
+	OperatorKey         string                 `protobuf:"bytes,5,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
+	ReportingCurrency   string                 `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	BackofficeTimezone  string                 `protobuf:"bytes,7,opt,name=backoffice_timezone,json=backofficeTimezone,proto3" json:"backoffice_timezone,omitempty"`
+	SupportedLanguages  []string               `protobuf:"bytes,8,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
+	SupportedCurrencies []string               `protobuf:"bytes,9,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *CreateOperatorRequest) Reset() {
@@ -3870,18 +3875,55 @@ func (x *CreateOperatorRequest) GetParentOperatorIds() []int64 {
 	return nil
 }
 
-func (x *CreateOperatorRequest) GetSubdomain() string {
+func (x *CreateOperatorRequest) GetMode() string {
 	if x != nil {
-		return x.Subdomain
+		return x.Mode
 	}
 	return ""
 }
 
+func (x *CreateOperatorRequest) GetOperatorKey() string {
+	if x != nil {
+		return x.OperatorKey
+	}
+	return ""
+}
+
+func (x *CreateOperatorRequest) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
+func (x *CreateOperatorRequest) GetBackofficeTimezone() string {
+	if x != nil {
+		return x.BackofficeTimezone
+	}
+	return ""
+}
+
+func (x *CreateOperatorRequest) GetSupportedLanguages() []string {
+	if x != nil {
+		return x.SupportedLanguages
+	}
+	return nil
+}
+
+func (x *CreateOperatorRequest) GetSupportedCurrencies() []string {
+	if x != nil {
+		return x.SupportedCurrencies
+	}
+	return nil
+}
+
 type CreateOperatorResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId          int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Subdomain           string                 `protobuf:"bytes,2,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	BackofficeSubdomain string                 `protobuf:"bytes,3,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *CreateOperatorResponse) Reset() {
@@ -3919,6 +3961,20 @@ func (x *CreateOperatorResponse) GetOperatorId() int64 {
 		return x.OperatorId
 	}
 	return 0
+}
+
+func (x *CreateOperatorResponse) GetSubdomain() string {
+	if x != nil {
+		return x.Subdomain
+	}
+	return ""
+}
+
+func (x *CreateOperatorResponse) GetBackofficeSubdomain() string {
+	if x != nil {
+		return x.BackofficeSubdomain
+	}
+	return ""
 }
 
 type UpdateRoleRequest struct {
@@ -6666,15 +6722,22 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x05roles\x18\x01 \x03(\v2\x19.api.user.service.v1.RoleR\x05roles\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\"\xaf\x01\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\x8c\x03\n" +
 	"\x15CreateOperatorRequest\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x12#\n" +
 	"\roperator_type\x18\x02 \x01(\tR\foperatorType\x12.\n" +
-	"\x13parent_operator_ids\x18\x03 \x03(\x03R\x11parentOperatorIds\x12\x1c\n" +
-	"\tsubdomain\x18\x04 \x01(\tR\tsubdomain\"9\n" +
+	"\x13parent_operator_ids\x18\x03 \x03(\x03R\x11parentOperatorIds\x12\x12\n" +
+	"\x04mode\x18\x04 \x01(\tR\x04mode\x12!\n" +
+	"\foperator_key\x18\x05 \x01(\tR\voperatorKey\x12-\n" +
+	"\x12reporting_currency\x18\x06 \x01(\tR\x11reportingCurrency\x12/\n" +
+	"\x13backoffice_timezone\x18\a \x01(\tR\x12backofficeTimezone\x12/\n" +
+	"\x13supported_languages\x18\b \x03(\tR\x12supportedLanguages\x121\n" +
+	"\x14supported_currencies\x18\t \x03(\tR\x13supportedCurrencies\"\x8a\x01\n" +
 	"\x16CreateOperatorResponse\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
-	"operatorId\"\x83\x01\n" +
+	"operatorId\x12\x1c\n" +
+	"\tsubdomain\x18\x02 \x01(\tR\tsubdomain\x121\n" +
+	"\x14backoffice_subdomain\x18\x03 \x01(\tR\x13backofficeSubdomain\"\x83\x01\n" +
 	"\x11UpdateRoleRequest\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12A\n" +

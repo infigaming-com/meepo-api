@@ -7042,7 +7042,13 @@ func (m *CreateOperatorRequest) validate(all bool) error {
 
 	// no validation rules for OperatorType
 
-	// no validation rules for Subdomain
+	// no validation rules for Mode
+
+	// no validation rules for OperatorKey
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for BackofficeTimezone
 
 	if len(errors) > 0 {
 		return CreateOperatorRequestMultiError(errors)
@@ -7147,6 +7153,10 @@ func (m *CreateOperatorResponse) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for OperatorId
+
+	// no validation rules for Subdomain
+
+	// no validation rules for BackofficeSubdomain
 
 	if len(errors) > 0 {
 		return CreateOperatorResponseMultiError(errors)
