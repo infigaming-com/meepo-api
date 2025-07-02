@@ -10798,6 +10798,669 @@ var _ interface {
 	ErrorName() string
 } = CreateBusinessResponseValidationError{}
 
+// Validate checks the field values on OperatorDetails with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *OperatorDetails) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OperatorDetails with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OperatorDetailsMultiError, or nil if none found.
+func (m *OperatorDetails) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OperatorDetails) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for OperatorName
+
+	// no validation rules for ParentOperatorId
+
+	// no validation rules for ParentOperatorName
+
+	// no validation rules for OperatorType
+
+	// no validation rules for ExternalId
+
+	// no validation rules for ApiKey
+
+	// no validation rules for Subdomain
+
+	// no validation rules for BackofficeSubdomain
+
+	// no validation rules for ChildDomain
+
+	// no validation rules for Enabled
+
+	// no validation rules for Mode
+
+	// no validation rules for OperatorKey
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for BackofficeTimezone
+
+	// no validation rules for Status
+
+	// no validation rules for IsMaintenance
+
+	// no validation rules for MaintenanceStartTime
+
+	// no validation rules for MaintenanceEndTime
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorId
+
+	// no validation rules for SystemOperatorName
+
+	if len(errors) > 0 {
+		return OperatorDetailsMultiError(errors)
+	}
+
+	return nil
+}
+
+// OperatorDetailsMultiError is an error wrapping multiple validation errors
+// returned by OperatorDetails.ValidateAll() if the designated constraints
+// aren't met.
+type OperatorDetailsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OperatorDetailsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OperatorDetailsMultiError) AllErrors() []error { return m }
+
+// OperatorDetailsValidationError is the validation error returned by
+// OperatorDetails.Validate if the designated constraints aren't met.
+type OperatorDetailsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OperatorDetailsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OperatorDetailsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OperatorDetailsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OperatorDetailsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OperatorDetailsValidationError) ErrorName() string { return "OperatorDetailsValidationError" }
+
+// Error satisfies the builtin error interface
+func (e OperatorDetailsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOperatorDetails.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OperatorDetailsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OperatorDetailsValidationError{}
+
+// Validate checks the field values on GetOperatorDetailsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetOperatorDetailsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorDetailsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetOperatorDetailsRequestMultiError, or nil if none found.
+func (m *GetOperatorDetailsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorDetailsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	if len(errors) > 0 {
+		return GetOperatorDetailsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorDetailsRequestMultiError is an error wrapping multiple validation
+// errors returned by GetOperatorDetailsRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetOperatorDetailsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorDetailsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorDetailsRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorDetailsRequestValidationError is the validation error returned by
+// GetOperatorDetailsRequest.Validate if the designated constraints aren't met.
+type GetOperatorDetailsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorDetailsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorDetailsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorDetailsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorDetailsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorDetailsRequestValidationError) ErrorName() string {
+	return "GetOperatorDetailsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorDetailsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorDetailsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorDetailsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorDetailsRequestValidationError{}
+
+// Validate checks the field values on GetOperatorDetailsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetOperatorDetailsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorDetailsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetOperatorDetailsResponseMultiError, or nil if none found.
+func (m *GetOperatorDetailsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorDetailsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorDetails()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorDetailsResponseValidationError{
+					field:  "OperatorDetails",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorDetailsResponseValidationError{
+					field:  "OperatorDetails",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorDetails()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorDetailsResponseValidationError{
+				field:  "OperatorDetails",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorDetailsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorDetailsResponseMultiError is an error wrapping multiple
+// validation errors returned by GetOperatorDetailsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetOperatorDetailsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorDetailsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorDetailsResponseMultiError) AllErrors() []error { return m }
+
+// GetOperatorDetailsResponseValidationError is the validation error returned
+// by GetOperatorDetailsResponse.Validate if the designated constraints aren't met.
+type GetOperatorDetailsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorDetailsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorDetailsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorDetailsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorDetailsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorDetailsResponseValidationError) ErrorName() string {
+	return "GetOperatorDetailsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorDetailsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorDetailsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorDetailsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorDetailsResponseValidationError{}
+
+// Validate checks the field values on ListOperatorsByParentOperatorIdRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListOperatorsByParentOperatorIdRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListOperatorsByParentOperatorIdRequest with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ListOperatorsByParentOperatorIdRequestMultiError, or nil if none found.
+func (m *ListOperatorsByParentOperatorIdRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOperatorsByParentOperatorIdRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ParentOperatorId
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListOperatorsByParentOperatorIdRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOperatorsByParentOperatorIdRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// ListOperatorsByParentOperatorIdRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListOperatorsByParentOperatorIdRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOperatorsByParentOperatorIdRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOperatorsByParentOperatorIdRequestMultiError) AllErrors() []error { return m }
+
+// ListOperatorsByParentOperatorIdRequestValidationError is the validation
+// error returned by ListOperatorsByParentOperatorIdRequest.Validate if the
+// designated constraints aren't met.
+type ListOperatorsByParentOperatorIdRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOperatorsByParentOperatorIdRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOperatorsByParentOperatorIdRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOperatorsByParentOperatorIdRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOperatorsByParentOperatorIdRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOperatorsByParentOperatorIdRequestValidationError) ErrorName() string {
+	return "ListOperatorsByParentOperatorIdRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListOperatorsByParentOperatorIdRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOperatorsByParentOperatorIdRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOperatorsByParentOperatorIdRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOperatorsByParentOperatorIdRequestValidationError{}
+
+// Validate checks the field values on ListOperatorsByParentOperatorIdResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListOperatorsByParentOperatorIdResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListOperatorsByParentOperatorIdResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ListOperatorsByParentOperatorIdResponseMultiError, or nil if none found.
+func (m *ListOperatorsByParentOperatorIdResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOperatorsByParentOperatorIdResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetOperatorDetailsList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListOperatorsByParentOperatorIdResponseValidationError{
+						field:  fmt.Sprintf("OperatorDetailsList[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListOperatorsByParentOperatorIdResponseValidationError{
+						field:  fmt.Sprintf("OperatorDetailsList[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListOperatorsByParentOperatorIdResponseValidationError{
+					field:  fmt.Sprintf("OperatorDetailsList[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for LiveCount
+
+	// no validation rules for ClosedCount
+
+	// no validation rules for PendingCount
+
+	// no validation rules for RequestToCloseCount
+
+	// no validation rules for SuspendedCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListOperatorsByParentOperatorIdResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOperatorsByParentOperatorIdResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// ListOperatorsByParentOperatorIdResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListOperatorsByParentOperatorIdResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOperatorsByParentOperatorIdResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOperatorsByParentOperatorIdResponseMultiError) AllErrors() []error { return m }
+
+// ListOperatorsByParentOperatorIdResponseValidationError is the validation
+// error returned by ListOperatorsByParentOperatorIdResponse.Validate if the
+// designated constraints aren't met.
+type ListOperatorsByParentOperatorIdResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOperatorsByParentOperatorIdResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOperatorsByParentOperatorIdResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOperatorsByParentOperatorIdResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOperatorsByParentOperatorIdResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOperatorsByParentOperatorIdResponseValidationError) ErrorName() string {
+	return "ListOperatorsByParentOperatorIdResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListOperatorsByParentOperatorIdResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOperatorsByParentOperatorIdResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOperatorsByParentOperatorIdResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOperatorsByParentOperatorIdResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

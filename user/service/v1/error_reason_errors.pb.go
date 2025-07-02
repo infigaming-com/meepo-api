@@ -852,3 +852,15 @@ func IsEmailAlreadyExists(err error) bool {
 func ErrorEmailAlreadyExists(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_EMAIL_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidOperatorStatus(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_STATUS.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorStatus(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_STATUS.String(), fmt.Sprintf(format, args...))
+}
