@@ -95,6 +95,7 @@ const (
 	ErrorReason_OPERATOR_KEY_ALREADY_EXISTS              ErrorReason = 10068
 	ErrorReason_EMPTY_PASSWORD                           ErrorReason = 10069
 	ErrorReason_EMAIL_ALREADY_EXISTS                     ErrorReason = 10070
+	ErrorReason_INVALID_OPERATOR_STATUS                  ErrorReason = 10071
 )
 
 // Enum value maps for ErrorReason.
@@ -170,6 +171,7 @@ var (
 		10068: "OPERATOR_KEY_ALREADY_EXISTS",
 		10069: "EMPTY_PASSWORD",
 		10070: "EMAIL_ALREADY_EXISTS",
+		10071: "INVALID_OPERATOR_STATUS",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                              0,
@@ -242,6 +244,7 @@ var (
 		"OPERATOR_KEY_ALREADY_EXISTS":              10068,
 		"EMPTY_PASSWORD":                           10069,
 		"EMAIL_ALREADY_EXISTS":                     10070,
+		"INVALID_OPERATOR_STATUS":                  10071,
 	}
 )
 
@@ -276,7 +279,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xae\x11\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xcc\x11\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -347,7 +350,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1aGET_OPERATOR_BY_KEY_FAILED\x10\xd3N\x12 \n" +
 	"\x1bOPERATOR_KEY_ALREADY_EXISTS\x10\xd4N\x12\x13\n" +
 	"\x0eEMPTY_PASSWORD\x10\xd5N\x12\x19\n" +
-	"\x14EMAIL_ALREADY_EXISTS\x10\xd6N\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x14EMAIL_ALREADY_EXISTS\x10\xd6N\x12\x1c\n" +
+	"\x17INVALID_OPERATOR_STATUS\x10\xd7N\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (

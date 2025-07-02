@@ -1007,6 +1007,19 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.CreateOperatorResponse'
+    /v1/backoffice/operator/current:
+        get:
+            tags:
+                - BackofficeOperator
+            description: GetCurrentOperatorDetails returns the current operator details.
+            operationId: BackofficeOperator_GetCurrentOperatorDetails
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetCurrentOperatorDetailsResponse'
     /v1/backoffice/operator/key/check_exists:
         post:
             tags:
@@ -1044,6 +1057,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsResponse'
+    /v1/backoffice/operator/list/by-parent:
+        post:
+            tags:
+                - BackofficeOperator
+            description: ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
+            operationId: BackofficeOperator_ListOperatorsByParentOperatorId
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsByParentOperatorIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse'
     /v1/backoffice/payment/transaction/detail:
         post:
             tags:
@@ -3061,6 +3093,11 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetBetByIdResponse_Action'
+        api.backoffice.service.v1.GetCurrentOperatorDetailsResponse:
+            type: object
+            properties:
+                operatorDetails:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.OperatorDetails'
         api.backoffice.service.v1.GetDepositSummariesRequest:
             type: object
             properties:
@@ -5527,6 +5564,48 @@ components:
                     type: string
                 amountUsd:
                     type: string
+        api.backoffice.service.v1.ListOperatorsByParentOperatorIdRequest:
+            type: object
+            properties:
+                status:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse:
+            type: object
+            properties:
+                operatorDetailsList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorDetails'
+                total:
+                    type: integer
+                    format: int32
+                liveCount:
+                    type: integer
+                    format: int32
+                closedCount:
+                    type: integer
+                    format: int32
+                pendingCount:
+                    type: integer
+                    format: int32
+                requestToCloseCount:
+                    type: integer
+                    format: int32
+                suspendedCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListOperatorsRequest:
             type: object
             properties:
@@ -6701,6 +6780,69 @@ components:
             type: object
             properties:
                 token:
+                    type: string
+        api.backoffice.service.v1.OperatorDetails:
+            type: object
+            properties:
+                id:
+                    type: string
+                operatorName:
+                    type: string
+                parentOperatorId:
+                    type: string
+                parentOperatorName:
+                    type: string
+                operatorType:
+                    type: string
+                externalId:
+                    type: string
+                apiKey:
+                    type: string
+                subdomain:
+                    type: string
+                backofficeSubdomain:
+                    type: string
+                childDomain:
+                    type: string
+                enabled:
+                    type: boolean
+                mode:
+                    type: string
+                operatorKey:
+                    type: string
+                reportingCurrency:
+                    type: string
+                backofficeTimezone:
+                    type: string
+                supportedLanguages:
+                    type: array
+                    items:
+                        type: string
+                supportedCurrencies:
+                    type: array
+                    items:
+                        type: string
+                status:
+                    type: string
+                isMaintenance:
+                    type: boolean
+                maintenanceStartTime:
+                    type: string
+                maintenanceEndTime:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorId:
+                    type: string
+                systemOperatorName:
                     type: string
         api.backoffice.service.v1.PaymentChannelInfo:
             type: object

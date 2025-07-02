@@ -19,52 +19,54 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	User_Register_FullMethodName                     = "/api.user.service.v1.User/Register"
-	User_Login_FullMethodName                        = "/api.user.service.v1.User/Login"
-	User_LoginWithInfo_FullMethodName                = "/api.user.service.v1.User/LoginWithInfo"
-	User_RegisterOrLoginWithOAuth_FullMethodName     = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
-	User_RegisterOrLoginWithTelegram_FullMethodName  = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
-	User_RefreshToken_FullMethodName                 = "/api.user.service.v1.User/RefreshToken"
-	User_GetUser_FullMethodName                      = "/api.user.service.v1.User/GetUser"
-	User_GetUsersByIds_FullMethodName                = "/api.user.service.v1.User/GetUsersByIds"
-	User_GetUserIdsByOperatorIds_FullMethodName      = "/api.user.service.v1.User/GetUserIdsByOperatorIds"
-	User_Logout_FullMethodName                       = "/api.user.service.v1.User/Logout"
-	User_IsTokenRevoked_FullMethodName               = "/api.user.service.v1.User/IsTokenRevoked"
-	User_SetOperatorTagsConfig_FullMethodName        = "/api.user.service.v1.User/SetOperatorTagsConfig"
-	User_SetOperatorTags_FullMethodName              = "/api.user.service.v1.User/SetOperatorTags"
-	User_GetOperatorTagsConfig_FullMethodName        = "/api.user.service.v1.User/GetOperatorTagsConfig"
-	User_GetOperatorTags_FullMethodName              = "/api.user.service.v1.User/GetOperatorTags"
-	User_GetUserTags_FullMethodName                  = "/api.user.service.v1.User/GetUserTags"
-	User_GetUserTagsById_FullMethodName              = "/api.user.service.v1.User/GetUserTagsById"
-	User_SetUserTagsById_FullMethodName              = "/api.user.service.v1.User/SetUserTagsById"
-	User_CheckPermission_FullMethodName              = "/api.user.service.v1.User/CheckPermission"
-	User_AddOperator_FullMethodName                  = "/api.user.service.v1.User/AddOperator"
-	User_SendEmailVerificationCode_FullMethodName    = "/api.user.service.v1.User/SendEmailVerificationCode"
-	User_UpdateUser_FullMethodName                   = "/api.user.service.v1.User/UpdateUser"
-	User_ListUsers_FullMethodName                    = "/api.user.service.v1.User/ListUsers"
-	User_CreateUser_FullMethodName                   = "/api.user.service.v1.User/CreateUser"
-	User_VerifyEmail_FullMethodName                  = "/api.user.service.v1.User/VerifyEmail"
-	User_AddComment_FullMethodName                   = "/api.user.service.v1.User/AddComment"
-	User_GetCommentsByUserId_FullMethodName          = "/api.user.service.v1.User/GetCommentsByUserId"
-	User_GetUserProfile_FullMethodName               = "/api.user.service.v1.User/GetUserProfile"
-	User_CreateRole_FullMethodName                   = "/api.user.service.v1.User/CreateRole"
-	User_ListRoles_FullMethodName                    = "/api.user.service.v1.User/ListRoles"
-	User_CreateOperator_FullMethodName               = "/api.user.service.v1.User/CreateOperator"
-	User_UpdateRole_FullMethodName                   = "/api.user.service.v1.User/UpdateRole"
-	User_GetRole_FullMethodName                      = "/api.user.service.v1.User/GetRole"
-	User_DeleteRole_FullMethodName                   = "/api.user.service.v1.User/DeleteRole"
-	User_GetOverviewDashboardFromUser_FullMethodName = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
-	User_GetOperatorIdByOrigin_FullMethodName        = "/api.user.service.v1.User/GetOperatorIdByOrigin"
-	User_GetOperatorIdsByOrigin_FullMethodName       = "/api.user.service.v1.User/GetOperatorIdsByOrigin"
-	User_GetOperator_FullMethodName                  = "/api.user.service.v1.User/GetOperator"
-	User_GetOperatorsByIds_FullMethodName            = "/api.user.service.v1.User/GetOperatorsByIds"
-	User_ListOperators_FullMethodName                = "/api.user.service.v1.User/ListOperators"
-	User_GetParentOperatorIds_FullMethodName         = "/api.user.service.v1.User/GetParentOperatorIds"
-	User_GetChildOperatorIds_FullMethodName          = "/api.user.service.v1.User/GetChildOperatorIds"
-	User_CheckEmailExists_FullMethodName             = "/api.user.service.v1.User/CheckEmailExists"
-	User_CheckSubdomainExists_FullMethodName         = "/api.user.service.v1.User/CheckSubdomainExists"
-	User_CheckOperatorKeyExists_FullMethodName       = "/api.user.service.v1.User/CheckOperatorKeyExists"
-	User_CreateBusiness_FullMethodName               = "/api.user.service.v1.User/CreateBusiness"
+	User_Register_FullMethodName                        = "/api.user.service.v1.User/Register"
+	User_Login_FullMethodName                           = "/api.user.service.v1.User/Login"
+	User_LoginWithInfo_FullMethodName                   = "/api.user.service.v1.User/LoginWithInfo"
+	User_RegisterOrLoginWithOAuth_FullMethodName        = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
+	User_RegisterOrLoginWithTelegram_FullMethodName     = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
+	User_RefreshToken_FullMethodName                    = "/api.user.service.v1.User/RefreshToken"
+	User_GetUser_FullMethodName                         = "/api.user.service.v1.User/GetUser"
+	User_GetUsersByIds_FullMethodName                   = "/api.user.service.v1.User/GetUsersByIds"
+	User_GetUserIdsByOperatorIds_FullMethodName         = "/api.user.service.v1.User/GetUserIdsByOperatorIds"
+	User_Logout_FullMethodName                          = "/api.user.service.v1.User/Logout"
+	User_IsTokenRevoked_FullMethodName                  = "/api.user.service.v1.User/IsTokenRevoked"
+	User_SetOperatorTagsConfig_FullMethodName           = "/api.user.service.v1.User/SetOperatorTagsConfig"
+	User_SetOperatorTags_FullMethodName                 = "/api.user.service.v1.User/SetOperatorTags"
+	User_GetOperatorTagsConfig_FullMethodName           = "/api.user.service.v1.User/GetOperatorTagsConfig"
+	User_GetOperatorTags_FullMethodName                 = "/api.user.service.v1.User/GetOperatorTags"
+	User_GetUserTags_FullMethodName                     = "/api.user.service.v1.User/GetUserTags"
+	User_GetUserTagsById_FullMethodName                 = "/api.user.service.v1.User/GetUserTagsById"
+	User_SetUserTagsById_FullMethodName                 = "/api.user.service.v1.User/SetUserTagsById"
+	User_CheckPermission_FullMethodName                 = "/api.user.service.v1.User/CheckPermission"
+	User_AddOperator_FullMethodName                     = "/api.user.service.v1.User/AddOperator"
+	User_SendEmailVerificationCode_FullMethodName       = "/api.user.service.v1.User/SendEmailVerificationCode"
+	User_UpdateUser_FullMethodName                      = "/api.user.service.v1.User/UpdateUser"
+	User_ListUsers_FullMethodName                       = "/api.user.service.v1.User/ListUsers"
+	User_CreateUser_FullMethodName                      = "/api.user.service.v1.User/CreateUser"
+	User_VerifyEmail_FullMethodName                     = "/api.user.service.v1.User/VerifyEmail"
+	User_AddComment_FullMethodName                      = "/api.user.service.v1.User/AddComment"
+	User_GetCommentsByUserId_FullMethodName             = "/api.user.service.v1.User/GetCommentsByUserId"
+	User_GetUserProfile_FullMethodName                  = "/api.user.service.v1.User/GetUserProfile"
+	User_CreateRole_FullMethodName                      = "/api.user.service.v1.User/CreateRole"
+	User_ListRoles_FullMethodName                       = "/api.user.service.v1.User/ListRoles"
+	User_CreateOperator_FullMethodName                  = "/api.user.service.v1.User/CreateOperator"
+	User_UpdateRole_FullMethodName                      = "/api.user.service.v1.User/UpdateRole"
+	User_GetRole_FullMethodName                         = "/api.user.service.v1.User/GetRole"
+	User_DeleteRole_FullMethodName                      = "/api.user.service.v1.User/DeleteRole"
+	User_GetOverviewDashboardFromUser_FullMethodName    = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
+	User_GetOperatorIdByOrigin_FullMethodName           = "/api.user.service.v1.User/GetOperatorIdByOrigin"
+	User_GetOperatorIdsByOrigin_FullMethodName          = "/api.user.service.v1.User/GetOperatorIdsByOrigin"
+	User_GetOperator_FullMethodName                     = "/api.user.service.v1.User/GetOperator"
+	User_GetOperatorsByIds_FullMethodName               = "/api.user.service.v1.User/GetOperatorsByIds"
+	User_ListOperators_FullMethodName                   = "/api.user.service.v1.User/ListOperators"
+	User_GetParentOperatorIds_FullMethodName            = "/api.user.service.v1.User/GetParentOperatorIds"
+	User_GetChildOperatorIds_FullMethodName             = "/api.user.service.v1.User/GetChildOperatorIds"
+	User_CheckEmailExists_FullMethodName                = "/api.user.service.v1.User/CheckEmailExists"
+	User_CheckSubdomainExists_FullMethodName            = "/api.user.service.v1.User/CheckSubdomainExists"
+	User_CheckOperatorKeyExists_FullMethodName          = "/api.user.service.v1.User/CheckOperatorKeyExists"
+	User_CreateBusiness_FullMethodName                  = "/api.user.service.v1.User/CreateBusiness"
+	User_GetOperatorDetails_FullMethodName              = "/api.user.service.v1.User/GetOperatorDetails"
+	User_ListOperatorsByParentOperatorId_FullMethodName = "/api.user.service.v1.User/ListOperatorsByParentOperatorId"
 )
 
 // UserClient is the client API for User service.
@@ -157,6 +159,10 @@ type UserClient interface {
 	CheckOperatorKeyExists(ctx context.Context, in *CheckOperatorKeyExistsRequest, opts ...grpc.CallOption) (*CheckOperatorKeyExistsResponse, error)
 	// CreateBusiness creates a new business record.
 	CreateBusiness(ctx context.Context, in *CreateBusinessRequest, opts ...grpc.CallOption) (*CreateBusinessResponse, error)
+	// GetOperatorDetails returns the operator details.
+	GetOperatorDetails(ctx context.Context, in *GetOperatorDetailsRequest, opts ...grpc.CallOption) (*GetOperatorDetailsResponse, error)
+	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
+	ListOperatorsByParentOperatorId(ctx context.Context, in *ListOperatorsByParentOperatorIdRequest, opts ...grpc.CallOption) (*ListOperatorsByParentOperatorIdResponse, error)
 }
 
 type userClient struct {
@@ -627,6 +633,26 @@ func (c *userClient) CreateBusiness(ctx context.Context, in *CreateBusinessReque
 	return out, nil
 }
 
+func (c *userClient) GetOperatorDetails(ctx context.Context, in *GetOperatorDetailsRequest, opts ...grpc.CallOption) (*GetOperatorDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorDetailsResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListOperatorsByParentOperatorId(ctx context.Context, in *ListOperatorsByParentOperatorIdRequest, opts ...grpc.CallOption) (*ListOperatorsByParentOperatorIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorsByParentOperatorIdResponse)
+	err := c.cc.Invoke(ctx, User_ListOperatorsByParentOperatorId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -717,6 +743,10 @@ type UserServer interface {
 	CheckOperatorKeyExists(context.Context, *CheckOperatorKeyExistsRequest) (*CheckOperatorKeyExistsResponse, error)
 	// CreateBusiness creates a new business record.
 	CreateBusiness(context.Context, *CreateBusinessRequest) (*CreateBusinessResponse, error)
+	// GetOperatorDetails returns the operator details.
+	GetOperatorDetails(context.Context, *GetOperatorDetailsRequest) (*GetOperatorDetailsResponse, error)
+	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
+	ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -864,6 +894,12 @@ func (UnimplementedUserServer) CheckOperatorKeyExists(context.Context, *CheckOpe
 }
 func (UnimplementedUserServer) CreateBusiness(context.Context, *CreateBusinessRequest) (*CreateBusinessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateBusiness not implemented")
+}
+func (UnimplementedUserServer) GetOperatorDetails(context.Context, *GetOperatorDetailsRequest) (*GetOperatorDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorDetails not implemented")
+}
+func (UnimplementedUserServer) ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorsByParentOperatorId not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1714,6 +1750,42 @@ func _User_CreateBusiness_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperatorDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorDetails(ctx, req.(*GetOperatorDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListOperatorsByParentOperatorId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorsByParentOperatorIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListOperatorsByParentOperatorId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListOperatorsByParentOperatorId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListOperatorsByParentOperatorId(ctx, req.(*ListOperatorsByParentOperatorIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1904,6 +1976,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateBusiness",
 			Handler:    _User_CreateBusiness_Handler,
+		},
+		{
+			MethodName: "GetOperatorDetails",
+			Handler:    _User_GetOperatorDetails_Handler,
+		},
+		{
+			MethodName: "ListOperatorsByParentOperatorId",
+			Handler:    _User_ListOperatorsByParentOperatorId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
