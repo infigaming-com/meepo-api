@@ -83,10 +83,10 @@ service BackofficeFinance {
 
 message ListInvoicesRequest {
 	// Filter by retailer
-	optional string retailer_id = 1;
+	optional int64 retailer_id = 1;
 	
 	// Filter by company
-	optional string company_id = 2;
+	optional int64 company_id = 2;
 	
 	// Filter by month (format: YYYY-MM)
 	optional string month = 3;
@@ -116,11 +116,11 @@ message ListInvoicesResponse {
 		string operator_name = 3;
 
 		// Retailer information
-		string retailer_id = 4;
+		int64 retailer_id = 4;
 		string retailer_name = 5;
 
 		// Company information
-		string company_id = 6;
+		int64 company_id = 6;
 		string company_name = 7;
 		
 		// Invoice details
@@ -187,11 +187,11 @@ message GetInvoiceDetailResponse {
 		string due_amount = 14; // Remaining amount due
 
 		// Retailer information
-		string retailer_id = 15;
+		int64 retailer_id = 15;
 		string retailer_name = 16;
 
 		// Company information
-		string company_id = 17;
+		int64 company_id = 17;
 		string company_name = 18;
 		
 		// Operator information
@@ -207,13 +207,13 @@ message ListOperatorRevenueShareRequest {
 	optional int64 invoice_id = 1;
 	
 	// Filter by retailer
-	optional string retailer_id = 2;
+	optional int64 retailer_id = 2;
 	
 	// Filter by company
-	optional string company_id = 3;
+	optional int64 company_id = 3;
 	
 	// Filter by operator
-	optional string operator_id = 4;
+	optional int64 operator_id = 4;
 	
 	// Pagination
 	optional int32 page = 5;
@@ -223,7 +223,7 @@ message ListOperatorRevenueShareRequest {
 message ListOperatorRevenueShareResponse {
 	message RevenueShareItem {
 		// Basic information
-		string operator_id = 1;
+		int64 operator_id = 1;
 		string operator_name = 2;
 		string game_provider_id = 3;
 		string game_provider_name = 4;
@@ -261,13 +261,13 @@ message ListThirdPartyFeesRequest {
 	optional int64 invoice_id = 1;
 	
 	// Filter by retailer
-	optional string retailer_id = 2;
+	optional int64 retailer_id = 2;
 	
 	// Filter by company
-	optional string company_id = 3;
+	optional int64 company_id = 3;
 	
 	// Filter by operator
-	optional string operator_id = 4;
+	optional int64 operator_id = 4;
 	
 	// Pagination
 	optional int32 page = 5;
@@ -277,7 +277,7 @@ message ListThirdPartyFeesRequest {
 message ListThirdPartyFeesResponse {
 	message ThirdPartyFeeItem {
 		// Basic information
-		string operator_id = 1;
+		int64 operator_id = 1;
 		string operator_name = 2;
 		string service = 3;
 		
@@ -303,13 +303,13 @@ message ListMonthlyRevenueShareRequest {
 	optional int64 invoice_id = 1;
 	
 	// Filter by retailer
-	optional string retailer_id = 2;
+	optional int64 retailer_id = 2;
 	
 	// Filter by company
-	optional string company_id = 3;
+	optional int64 company_id = 3;
 	
 	// Filter by operator
-	optional string operator_id = 4;
+	optional int64 operator_id = 4;
 	
 	// Pagination
 	optional int32 page = 5;
@@ -319,7 +319,7 @@ message ListMonthlyRevenueShareRequest {
 message ListMonthlyRevenueShareResponse {
 	message RevenueShareItem{
 		// Basic information
-		string operator_id = 1;
+		int64 operator_id = 1;
 		string operator_name = 2;
 		string operator_mode = 3; // Individual, Co-Operation, Co-Operation (Self-Managed Payment)
 		
@@ -361,9 +361,9 @@ message ListMonthlyRevenueShareResponse {
 message AddAdjustmentRequest {
 	// Basic information
 	string item = 1; // Adjustment item type
-	string retailer_id = 2; // Retailer ID
-	string company_id = 3; // Company ID
-	string operator_id = 4; // Operator ID
+	int64 retailer_id = 2; // Retailer ID
+	int64 company_id = 3; // Company ID
+	int64 operator_id = 4; // Operator ID
 	
 	// Financial information
 	string currency = 5; // Currency code (e.g., "USDT", "USD")
@@ -372,8 +372,6 @@ message AddAdjustmentRequest {
 }
 
 message AddAdjustmentResponse {
-	// Created adjustment ID
-	int64 adjustment_id = 1;
 }
 
 message ListAdjustmentConfigsRequest {
@@ -384,7 +382,7 @@ message ListAdjustmentConfigsRequest {
 
 message ListAdjustmentConfigsResponse {
 	message AdjustmentConfig {
-		string id = 1;
+		int64 id = 1;
 		string item = 2; // Adjustment item name
 		string description = 3; // Description of the adjustment item
 	}
@@ -405,7 +403,6 @@ message UpdateAdjustmentConfigRequest {
 }
 
 message UpdateAdjustmentConfigResponse {
-	int64 id = 1; // Updated configuration ID
 }
 
 message DeleteAdjustmentConfigRequest {
@@ -420,13 +417,13 @@ message ListAdjustmentsRequest {
 	optional int64 invoice_id = 1;
 	
 	// Filter by retailer
-	optional string retailer_id = 2;
+	optional int64 retailer_id = 2;
 	
 	// Filter by company
-	optional string company_id = 3;
+	optional int64 company_id = 3;
 	
 	// Filter by operator
-	optional string operator_id = 4;
+	optional int64 operator_id = 4;
 	
 	// Pagination
 	optional int32 page = 5;
@@ -437,7 +434,7 @@ message ListAdjustmentsResponse {
 	message AdjustmentItem {
 		// Basic information
 		string item = 1; // Item type (e.g., "JP Provisions", "Correction", "Custom Fee")
-		string operator_id = 2;
+		int64 operator_id = 2;
 		string operator_name = 3;
 		string currency = 4;
 		
