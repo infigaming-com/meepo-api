@@ -1557,24 +1557,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListUserCommentsResponse'
-    /v1/backoffice/user/create:
-        post:
-            tags:
-                - BackofficeUser
-            operationId: BackofficeUser_CreateUser
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateUserRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.CreateUserResponse'
     /v1/backoffice/user/list:
         post:
             tags:
@@ -2871,22 +2853,6 @@ components:
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.Permission'
         api.backoffice.service.v1.CreateRoleResponse:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.CreateUserRequest:
-            type: object
-            properties:
-                username:
-                    type: string
-                email:
-                    type: string
-                password:
-                    type: string
-                mobile:
-                    type: string
-                verificationCode:
-                    type: string
-        api.backoffice.service.v1.CreateUserResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.DeleteAdjustmentConfigRequest:
