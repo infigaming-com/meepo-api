@@ -8197,7 +8197,16 @@ components:
                     description: Unique identifier for the user.
                 operatorId:
                     type: string
-                    description: OperatorId.
+                    description: OperatorId in the operator hierarchy.
+                companyOperatorId:
+                    type: string
+                    description: Company OperatorId in the operator hierarchy.
+                retailerOperatorId:
+                    type: string
+                    description: Retailer OperatorId in the operator hierarchy.
+                systemOperatorId:
+                    type: string
+                    description: System OperatorId in the operator hierarchy.
                 username:
                     type: string
                     description: Username.

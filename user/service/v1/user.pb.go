@@ -251,30 +251,36 @@ type UserInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier for the user.
 	UserId int64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// OperatorId.
+	// OperatorId in the operator hierarchy.
 	OperatorId int64 `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	// Company OperatorId in the operator hierarchy.
+	CompanyOperatorId int64 `protobuf:"varint,3,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	// Retailer OperatorId in the operator hierarchy.
+	RetailerOperatorId int64 `protobuf:"varint,4,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	// System OperatorId in the operator hierarchy.
+	SystemOperatorId int64 `protobuf:"varint,5,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
 	// Username.
-	Username string `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
+	Username string `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
 	// Email.
-	Email string `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
+	Email string `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
 	// Mobile.
-	Mobile string `protobuf:"bytes,5,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Mobile string `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
 	// Whether the user is enabled.
-	Enabled bool `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Enabled bool `protobuf:"varint,9,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// First name.
-	Firstname string `protobuf:"bytes,7,opt,name=firstname,proto3" json:"firstname,omitempty"`
+	Firstname string `protobuf:"bytes,10,opt,name=firstname,proto3" json:"firstname,omitempty"`
 	// Last name.
-	Lastname string `protobuf:"bytes,8,opt,name=lastname,proto3" json:"lastname,omitempty"`
+	Lastname string `protobuf:"bytes,11,opt,name=lastname,proto3" json:"lastname,omitempty"`
 	// Nickname
-	Nickname string `protobuf:"bytes,9,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	Nickname string `protobuf:"bytes,12,opt,name=nickname,proto3" json:"nickname,omitempty"`
 	// Avatar
-	Avatar string `protobuf:"bytes,10,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Avatar string `protobuf:"bytes,13,opt,name=avatar,proto3" json:"avatar,omitempty"`
 	// BanGame
-	BanGame bool `protobuf:"varint,11,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
+	BanGame bool `protobuf:"varint,14,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
 	// BanWithdraw
-	BanWithdraw bool `protobuf:"varint,12,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
+	BanWithdraw bool `protobuf:"varint,15,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
 	// role id
-	RoleId        int64 `protobuf:"varint,13,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	RoleId        int64 `protobuf:"varint,16,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -319,6 +325,27 @@ func (x *UserInfo) GetUserId() int64 {
 func (x *UserInfo) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *UserInfo) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *UserInfo) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *UserInfo) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
 	}
 	return 0
 }
@@ -6983,23 +7010,26 @@ var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xed\x02\n" +
+	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfd\x03\n" +
 	"\bUserInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
-	"operatorId\x12\x1a\n" +
-	"\busername\x18\x03 \x01(\tR\busername\x12\x14\n" +
-	"\x05email\x18\x04 \x01(\tR\x05email\x12\x16\n" +
-	"\x06mobile\x18\x05 \x01(\tR\x06mobile\x12\x18\n" +
-	"\aenabled\x18\x06 \x01(\bR\aenabled\x12\x1c\n" +
-	"\tfirstname\x18\a \x01(\tR\tfirstname\x12\x1a\n" +
-	"\blastname\x18\b \x01(\tR\blastname\x12\x1a\n" +
-	"\bnickname\x18\t \x01(\tR\bnickname\x12\x16\n" +
-	"\x06avatar\x18\n" +
-	" \x01(\tR\x06avatar\x12\x19\n" +
-	"\bban_game\x18\v \x01(\bR\abanGame\x12!\n" +
-	"\fban_withdraw\x18\f \x01(\bR\vbanWithdraw\x12\x17\n" +
-	"\arole_id\x18\r \x01(\x03R\x06roleId\"\x9a\x01\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\x03 \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x04 \x01(\x03R\x12retailerOperatorId\x12,\n" +
+	"\x12system_operator_id\x18\x05 \x01(\x03R\x10systemOperatorId\x12\x1a\n" +
+	"\busername\x18\x06 \x01(\tR\busername\x12\x14\n" +
+	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
+	"\x06mobile\x18\b \x01(\tR\x06mobile\x12\x18\n" +
+	"\aenabled\x18\t \x01(\bR\aenabled\x12\x1c\n" +
+	"\tfirstname\x18\n" +
+	" \x01(\tR\tfirstname\x12\x1a\n" +
+	"\blastname\x18\v \x01(\tR\blastname\x12\x1a\n" +
+	"\bnickname\x18\f \x01(\tR\bnickname\x12\x16\n" +
+	"\x06avatar\x18\r \x01(\tR\x06avatar\x12\x19\n" +
+	"\bban_game\x18\x0e \x01(\bR\abanGame\x12!\n" +
+	"\fban_withdraw\x18\x0f \x01(\bR\vbanWithdraw\x12\x17\n" +
+	"\arole_id\x18\x10 \x01(\x03R\x06roleId\"\x9a\x01\n" +
 	"\x0fRegisterRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
