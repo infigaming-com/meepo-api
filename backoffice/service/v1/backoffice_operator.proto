@@ -26,7 +26,8 @@ service BackofficeOperator {
 	// GetCurrentOperatorDetails returns the current operator details.
 	rpc GetCurrentOperatorDetails(GetCurrentOperatorDetailsRequest) returns (GetCurrentOperatorDetailsResponse) {
 		option (google.api.http) = {
-			get: "/v1/backoffice/operator/current"
+			post: "/v1/backoffice/operator/current"
+			body: "*"
 		};
 	}
 
