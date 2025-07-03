@@ -2569,10 +2569,7 @@ components:
                     type: string
         api.backoffice.service.v1.AddAdjustmentResponse:
             type: object
-            properties:
-                adjustmentId:
-                    type: string
-                    description: Created adjustment ID
+            properties: {}
         api.backoffice.service.v1.AddCommentRequest:
             type: object
             properties:
@@ -7162,9 +7159,7 @@ components:
                     type: boolean
         api.backoffice.service.v1.UpdateAdjustmentConfigResponse:
             type: object
-            properties:
-                id:
-                    type: string
+            properties: {}
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:

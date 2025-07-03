@@ -167,9 +167,9 @@ func (GetInvoiceDetailResponse_InvoiceDetail_PaymentStatus) EnumDescriptor() ([]
 type ListInvoicesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Filter by retailer
-	RetailerId *string `protobuf:"bytes,1,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	RetailerId *int64 `protobuf:"varint,1,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
 	// Filter by company
-	CompanyId *string `protobuf:"bytes,2,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	CompanyId *int64 `protobuf:"varint,2,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
 	// Filter by month (format: YYYY-MM)
 	Month *string `protobuf:"bytes,3,opt,name=month,proto3,oneof" json:"month,omitempty"`
 	// Search by invoice id
@@ -212,18 +212,18 @@ func (*ListInvoicesRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ListInvoicesRequest) GetRetailerId() string {
+func (x *ListInvoicesRequest) GetRetailerId() int64 {
 	if x != nil && x.RetailerId != nil {
 		return *x.RetailerId
 	}
-	return ""
+	return 0
 }
 
-func (x *ListInvoicesRequest) GetCompanyId() string {
+func (x *ListInvoicesRequest) GetCompanyId() int64 {
 	if x != nil && x.CompanyId != nil {
 		return *x.CompanyId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListInvoicesRequest) GetMonth() string {
@@ -438,11 +438,11 @@ type ListOperatorRevenueShareRequest struct {
 	// Filter by invoice ID
 	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	// Filter by retailer
-	RetailerId *string `protobuf:"bytes,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	RetailerId *int64 `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
 	// Filter by company
-	CompanyId *string `protobuf:"bytes,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	CompanyId *int64 `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
 	// Filter by operator
-	OperatorId *string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	OperatorId *int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
 	// Pagination
 	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -487,25 +487,25 @@ func (x *ListOperatorRevenueShareRequest) GetInvoiceId() int64 {
 	return 0
 }
 
-func (x *ListOperatorRevenueShareRequest) GetRetailerId() string {
+func (x *ListOperatorRevenueShareRequest) GetRetailerId() int64 {
 	if x != nil && x.RetailerId != nil {
 		return *x.RetailerId
 	}
-	return ""
+	return 0
 }
 
-func (x *ListOperatorRevenueShareRequest) GetCompanyId() string {
+func (x *ListOperatorRevenueShareRequest) GetCompanyId() int64 {
 	if x != nil && x.CompanyId != nil {
 		return *x.CompanyId
 	}
-	return ""
+	return 0
 }
 
-func (x *ListOperatorRevenueShareRequest) GetOperatorId() string {
+func (x *ListOperatorRevenueShareRequest) GetOperatorId() int64 {
 	if x != nil && x.OperatorId != nil {
 		return *x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListOperatorRevenueShareRequest) GetPage() int32 {
@@ -613,11 +613,11 @@ type ListThirdPartyFeesRequest struct {
 	// Filter by invoice ID
 	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	// Filter by retailer
-	RetailerId *string `protobuf:"bytes,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	RetailerId *int64 `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
 	// Filter by company
-	CompanyId *string `protobuf:"bytes,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	CompanyId *int64 `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
 	// Filter by operator
-	OperatorId *string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	OperatorId *int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
 	// Pagination
 	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -662,25 +662,25 @@ func (x *ListThirdPartyFeesRequest) GetInvoiceId() int64 {
 	return 0
 }
 
-func (x *ListThirdPartyFeesRequest) GetRetailerId() string {
+func (x *ListThirdPartyFeesRequest) GetRetailerId() int64 {
 	if x != nil && x.RetailerId != nil {
 		return *x.RetailerId
 	}
-	return ""
+	return 0
 }
 
-func (x *ListThirdPartyFeesRequest) GetCompanyId() string {
+func (x *ListThirdPartyFeesRequest) GetCompanyId() int64 {
 	if x != nil && x.CompanyId != nil {
 		return *x.CompanyId
 	}
-	return ""
+	return 0
 }
 
-func (x *ListThirdPartyFeesRequest) GetOperatorId() string {
+func (x *ListThirdPartyFeesRequest) GetOperatorId() int64 {
 	if x != nil && x.OperatorId != nil {
 		return *x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListThirdPartyFeesRequest) GetPage() int32 {
@@ -780,11 +780,11 @@ type ListMonthlyRevenueShareRequest struct {
 	// Filter by invoice ID
 	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	// Filter by retailer
-	RetailerId *string `protobuf:"bytes,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	RetailerId *int64 `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
 	// Filter by company
-	CompanyId *string `protobuf:"bytes,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	CompanyId *int64 `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
 	// Filter by operator
-	OperatorId *string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	OperatorId *int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
 	// Pagination
 	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -829,25 +829,25 @@ func (x *ListMonthlyRevenueShareRequest) GetInvoiceId() int64 {
 	return 0
 }
 
-func (x *ListMonthlyRevenueShareRequest) GetRetailerId() string {
+func (x *ListMonthlyRevenueShareRequest) GetRetailerId() int64 {
 	if x != nil && x.RetailerId != nil {
 		return *x.RetailerId
 	}
-	return ""
+	return 0
 }
 
-func (x *ListMonthlyRevenueShareRequest) GetCompanyId() string {
+func (x *ListMonthlyRevenueShareRequest) GetCompanyId() int64 {
 	if x != nil && x.CompanyId != nil {
 		return *x.CompanyId
 	}
-	return ""
+	return 0
 }
 
-func (x *ListMonthlyRevenueShareRequest) GetOperatorId() string {
+func (x *ListMonthlyRevenueShareRequest) GetOperatorId() int64 {
 	if x != nil && x.OperatorId != nil {
 		return *x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListMonthlyRevenueShareRequest) GetPage() int32 {
@@ -944,10 +944,10 @@ func (x *ListMonthlyRevenueShareResponse) GetPageSize() int32 {
 type AddAdjustmentRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Basic information
-	Item       string `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`                               // Adjustment item type
-	RetailerId string `protobuf:"bytes,2,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"` // Retailer ID
-	CompanyId  string `protobuf:"bytes,3,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`    // Company ID
-	OperatorId string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"` // Operator ID
+	Item       string `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`                                // Adjustment item type
+	RetailerId int64  `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"` // Retailer ID
+	CompanyId  int64  `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`    // Company ID
+	OperatorId int64  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"` // Operator ID
 	// Financial information
 	Currency      string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`       // Currency code (e.g., "USDT", "USD")
 	Amount        string `protobuf:"bytes,6,opt,name=amount,proto3" json:"amount,omitempty"`           // Adjustment amount as string to preserve precision
@@ -993,25 +993,25 @@ func (x *AddAdjustmentRequest) GetItem() string {
 	return ""
 }
 
-func (x *AddAdjustmentRequest) GetRetailerId() string {
+func (x *AddAdjustmentRequest) GetRetailerId() int64 {
 	if x != nil {
 		return x.RetailerId
 	}
-	return ""
+	return 0
 }
 
-func (x *AddAdjustmentRequest) GetCompanyId() string {
+func (x *AddAdjustmentRequest) GetCompanyId() int64 {
 	if x != nil {
 		return x.CompanyId
 	}
-	return ""
+	return 0
 }
 
-func (x *AddAdjustmentRequest) GetOperatorId() string {
+func (x *AddAdjustmentRequest) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *AddAdjustmentRequest) GetCurrency() string {
@@ -1036,9 +1036,7 @@ func (x *AddAdjustmentRequest) GetDescription() string {
 }
 
 type AddAdjustmentResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Created adjustment ID
-	AdjustmentId  int64 `protobuf:"varint,1,opt,name=adjustment_id,json=adjustmentId,proto3" json:"adjustment_id,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1071,13 +1069,6 @@ func (x *AddAdjustmentResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AddAdjustmentResponse.ProtoReflect.Descriptor instead.
 func (*AddAdjustmentResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *AddAdjustmentResponse) GetAdjustmentId() int64 {
-	if x != nil {
-		return x.AdjustmentId
-	}
-	return 0
 }
 
 type ListAdjustmentConfigsRequest struct {
@@ -1272,7 +1263,6 @@ func (x *UpdateAdjustmentConfigRequest) GetEnabled() bool {
 
 type UpdateAdjustmentConfigResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // Updated configuration ID
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1305,13 +1295,6 @@ func (x *UpdateAdjustmentConfigResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use UpdateAdjustmentConfigResponse.ProtoReflect.Descriptor instead.
 func (*UpdateAdjustmentConfigResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *UpdateAdjustmentConfigResponse) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
 }
 
 type DeleteAdjustmentConfigRequest struct {
@@ -1399,11 +1382,11 @@ type ListAdjustmentsRequest struct {
 	// Filter by invoice ID
 	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	// Filter by retailer
-	RetailerId *string `protobuf:"bytes,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	RetailerId *int64 `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
 	// Filter by company
-	CompanyId *string `protobuf:"bytes,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	CompanyId *int64 `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
 	// Filter by operator
-	OperatorId *string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	OperatorId *int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
 	// Pagination
 	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -1448,25 +1431,25 @@ func (x *ListAdjustmentsRequest) GetInvoiceId() int64 {
 	return 0
 }
 
-func (x *ListAdjustmentsRequest) GetRetailerId() string {
+func (x *ListAdjustmentsRequest) GetRetailerId() int64 {
 	if x != nil && x.RetailerId != nil {
 		return *x.RetailerId
 	}
-	return ""
+	return 0
 }
 
-func (x *ListAdjustmentsRequest) GetCompanyId() string {
+func (x *ListAdjustmentsRequest) GetCompanyId() int64 {
 	if x != nil && x.CompanyId != nil {
 		return *x.CompanyId
 	}
-	return ""
+	return 0
 }
 
-func (x *ListAdjustmentsRequest) GetOperatorId() string {
+func (x *ListAdjustmentsRequest) GetOperatorId() int64 {
 	if x != nil && x.OperatorId != nil {
 		return *x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListAdjustmentsRequest) GetPage() int32 {
@@ -1569,10 +1552,10 @@ type ListInvoicesResponse_Invoice struct {
 	OperatorId   int64  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	OperatorName string `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	// Retailer information
-	RetailerId   string `protobuf:"bytes,4,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
+	RetailerId   int64  `protobuf:"varint,4,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
 	RetailerName string `protobuf:"bytes,5,opt,name=retailer_name,json=retailerName,proto3" json:"retailer_name,omitempty"`
 	// Company information
-	CompanyId   string `protobuf:"bytes,6,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
+	CompanyId   int64  `protobuf:"varint,6,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
 	CompanyName string `protobuf:"bytes,7,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
 	// Invoice details
 	Month    string `protobuf:"bytes,8,opt,name=month,proto3" json:"month,omitempty"`
@@ -1639,11 +1622,11 @@ func (x *ListInvoicesResponse_Invoice) GetOperatorName() string {
 	return ""
 }
 
-func (x *ListInvoicesResponse_Invoice) GetRetailerId() string {
+func (x *ListInvoicesResponse_Invoice) GetRetailerId() int64 {
 	if x != nil {
 		return x.RetailerId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListInvoicesResponse_Invoice) GetRetailerName() string {
@@ -1653,11 +1636,11 @@ func (x *ListInvoicesResponse_Invoice) GetRetailerName() string {
 	return ""
 }
 
-func (x *ListInvoicesResponse_Invoice) GetCompanyId() string {
+func (x *ListInvoicesResponse_Invoice) GetCompanyId() int64 {
 	if x != nil {
 		return x.CompanyId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListInvoicesResponse_Invoice) GetCompanyName() string {
@@ -1737,10 +1720,10 @@ type GetInvoiceDetailResponse_InvoiceDetail struct {
 	AmountPaid  string `protobuf:"bytes,13,opt,name=amount_paid,json=amountPaid,proto3" json:"amount_paid,omitempty"`    // Amount already paid
 	DueAmount   string `protobuf:"bytes,14,opt,name=due_amount,json=dueAmount,proto3" json:"due_amount,omitempty"`       // Remaining amount due
 	// Retailer information
-	RetailerId   string `protobuf:"bytes,15,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
+	RetailerId   int64  `protobuf:"varint,15,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
 	RetailerName string `protobuf:"bytes,16,opt,name=retailer_name,json=retailerName,proto3" json:"retailer_name,omitempty"`
 	// Company information
-	CompanyId   string `protobuf:"bytes,17,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
+	CompanyId   int64  `protobuf:"varint,17,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
 	CompanyName string `protobuf:"bytes,18,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
 	// Operator information
 	OperatorId    int64  `protobuf:"varint,19,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
@@ -1877,11 +1860,11 @@ func (x *GetInvoiceDetailResponse_InvoiceDetail) GetDueAmount() string {
 	return ""
 }
 
-func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRetailerId() string {
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRetailerId() int64 {
 	if x != nil {
 		return x.RetailerId
 	}
-	return ""
+	return 0
 }
 
 func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRetailerName() string {
@@ -1891,11 +1874,11 @@ func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRetailerName() string {
 	return ""
 }
 
-func (x *GetInvoiceDetailResponse_InvoiceDetail) GetCompanyId() string {
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetCompanyId() int64 {
 	if x != nil {
 		return x.CompanyId
 	}
-	return ""
+	return 0
 }
 
 func (x *GetInvoiceDetailResponse_InvoiceDetail) GetCompanyName() string {
@@ -1922,7 +1905,7 @@ func (x *GetInvoiceDetailResponse_InvoiceDetail) GetOperatorName() string {
 type ListOperatorRevenueShareResponse_RevenueShareItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Basic information
-	OperatorId       string `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId       int64  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	OperatorName     string `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	GameProviderId   string `protobuf:"bytes,3,opt,name=game_provider_id,json=gameProviderId,proto3" json:"game_provider_id,omitempty"`
 	GameProviderName string `protobuf:"bytes,4,opt,name=game_provider_name,json=gameProviderName,proto3" json:"game_provider_name,omitempty"`
@@ -1973,11 +1956,11 @@ func (*ListOperatorRevenueShareResponse_RevenueShareItem) Descriptor() ([]byte, 
 	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{5, 0}
 }
 
-func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetOperatorId() string {
+func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetOperatorName() string {
@@ -2081,7 +2064,7 @@ func (x *ListOperatorRevenueShareResponse_RevenueShareItem) GetAmountUsd() strin
 type ListThirdPartyFeesResponse_ThirdPartyFeeItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Basic information
-	OperatorId   string `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId   int64  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	OperatorName string `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	Service      string `protobuf:"bytes,3,opt,name=service,proto3" json:"service,omitempty"`
 	// Fee details
@@ -2122,11 +2105,11 @@ func (*ListThirdPartyFeesResponse_ThirdPartyFeeItem) Descriptor() ([]byte, []int
 	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{7, 0}
 }
 
-func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetOperatorId() string {
+func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetOperatorName() string {
@@ -2167,7 +2150,7 @@ func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetDescription() string {
 type ListMonthlyRevenueShareResponse_RevenueShareItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Basic information
-	OperatorId   string `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId   int64  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	OperatorName string `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	OperatorMode string `protobuf:"bytes,3,opt,name=operator_mode,json=operatorMode,proto3" json:"operator_mode,omitempty"` // Individual, Co-Operation, Co-Operation (Self-Managed Payment)
 	// Financial data
@@ -2219,11 +2202,11 @@ func (*ListMonthlyRevenueShareResponse_RevenueShareItem) Descriptor() ([]byte, [
 	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{9, 0}
 }
 
-func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetOperatorId() string {
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetOperatorName() string {
@@ -2387,7 +2370,7 @@ func (x *ListMonthlyRevenueShareResponse_Summary) GetRevenueShareCollectTotal() 
 
 type ListAdjustmentConfigsResponse_AdjustmentConfig struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Item          string                 `protobuf:"bytes,2,opt,name=item,proto3" json:"item,omitempty"`               // Adjustment item name
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"` // Description of the adjustment item
 	unknownFields protoimpl.UnknownFields
@@ -2424,11 +2407,11 @@ func (*ListAdjustmentConfigsResponse_AdjustmentConfig) Descriptor() ([]byte, []i
 	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{13, 0}
 }
 
-func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) GetId() string {
+func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
 func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) GetItem() string {
@@ -2449,7 +2432,7 @@ type ListAdjustmentsResponse_AdjustmentItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Basic information
 	Item         string `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"` // Item type (e.g., "JP Provisions", "Correction", "Custom Fee")
-	OperatorId   string `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId   int64  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	OperatorName string `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	Currency     string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Amount information
@@ -2496,11 +2479,11 @@ func (x *ListAdjustmentsResponse_AdjustmentItem) GetItem() string {
 	return ""
 }
 
-func (x *ListAdjustmentsResponse_AdjustmentItem) GetOperatorId() string {
+func (x *ListAdjustmentsResponse_AdjustmentItem) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListAdjustmentsResponse_AdjustmentItem) GetOperatorName() string {
@@ -2537,10 +2520,10 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\n" +
 	".backoffice/service/v1/backoffice_finance.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xec\x03\n" +
 	"\x13ListInvoicesRequest\x12$\n" +
-	"\vretailer_id\x18\x01 \x01(\tH\x00R\n" +
+	"\vretailer_id\x18\x01 \x01(\x03H\x00R\n" +
 	"retailerId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"company_id\x18\x02 \x01(\tH\x01R\tcompanyId\x88\x01\x01\x12\x19\n" +
+	"company_id\x18\x02 \x01(\x03H\x01R\tcompanyId\x88\x01\x01\x12\x19\n" +
 	"\x05month\x18\x03 \x01(\tH\x02R\x05month\x88\x01\x01\x12\"\n" +
 	"\n" +
 	"invoice_id\x18\x04 \x01(\x03H\x03R\tinvoiceId\x88\x01\x01\x12h\n" +
@@ -2572,11 +2555,11 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x12\x1f\n" +
-	"\vretailer_id\x18\x04 \x01(\tR\n" +
+	"\vretailer_id\x18\x04 \x01(\x03R\n" +
 	"retailerId\x12#\n" +
 	"\rretailer_name\x18\x05 \x01(\tR\fretailerName\x12\x1d\n" +
 	"\n" +
-	"company_id\x18\x06 \x01(\tR\tcompanyId\x12!\n" +
+	"company_id\x18\x06 \x01(\x03R\tcompanyId\x12!\n" +
 	"\fcompany_name\x18\a \x01(\tR\vcompanyName\x12\x14\n" +
 	"\x05month\x18\b \x01(\tR\x05month\x12\x1a\n" +
 	"\bretailer\x18\t \x01(\tR\bretailer\x12\x18\n" +
@@ -2614,11 +2597,11 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"amountPaid\x12\x1d\n" +
 	"\n" +
 	"due_amount\x18\x0e \x01(\tR\tdueAmount\x12\x1f\n" +
-	"\vretailer_id\x18\x0f \x01(\tR\n" +
+	"\vretailer_id\x18\x0f \x01(\x03R\n" +
 	"retailerId\x12#\n" +
 	"\rretailer_name\x18\x10 \x01(\tR\fretailerName\x12\x1d\n" +
 	"\n" +
-	"company_id\x18\x11 \x01(\tR\tcompanyId\x12!\n" +
+	"company_id\x18\x11 \x01(\x03R\tcompanyId\x12!\n" +
 	"\fcompany_name\x18\x12 \x01(\tR\vcompanyName\x12\x1f\n" +
 	"\voperator_id\x18\x13 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
@@ -2629,11 +2612,11 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x1fListOperatorRevenueShareRequest\x12\"\n" +
 	"\n" +
 	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x02 \x01(\tH\x01R\n" +
+	"\vretailer_id\x18\x02 \x01(\x03H\x01R\n" +
 	"retailerId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"company_id\x18\x03 \x01(\tH\x02R\tcompanyId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x04 \x01(\tH\x03R\n" +
+	"company_id\x18\x03 \x01(\x03H\x02R\tcompanyId\x88\x01\x01\x12$\n" +
+	"\voperator_id\x18\x04 \x01(\x03H\x03R\n" +
 	"operatorId\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
@@ -2654,7 +2637,7 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\vtotal_pages\x18\x06 \x01(\x05R\n" +
 	"totalPages\x1a\xd0\x03\n" +
 	"\x10RevenueShareItem\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12(\n" +
 	"\x10game_provider_id\x18\x03 \x01(\tR\x0egameProviderId\x12,\n" +
@@ -2676,11 +2659,11 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x19ListThirdPartyFeesRequest\x12\"\n" +
 	"\n" +
 	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x02 \x01(\tH\x01R\n" +
+	"\vretailer_id\x18\x02 \x01(\x03H\x01R\n" +
 	"retailerId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"company_id\x18\x03 \x01(\tH\x02R\tcompanyId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x04 \x01(\tH\x03R\n" +
+	"company_id\x18\x03 \x01(\x03H\x02R\tcompanyId\x88\x01\x01\x12$\n" +
+	"\voperator_id\x18\x04 \x01(\x03H\x03R\n" +
 	"operatorId\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
@@ -2699,7 +2682,7 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xc9\x01\n" +
 	"\x11ThirdPartyFeeItem\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
 	"\aservice\x18\x03 \x01(\tR\aservice\x12\x1a\n" +
@@ -2709,11 +2692,11 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x1eListMonthlyRevenueShareRequest\x12\"\n" +
 	"\n" +
 	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x02 \x01(\tH\x01R\n" +
+	"\vretailer_id\x18\x02 \x01(\x03H\x01R\n" +
 	"retailerId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"company_id\x18\x03 \x01(\tH\x02R\tcompanyId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x04 \x01(\tH\x03R\n" +
+	"company_id\x18\x03 \x01(\x03H\x02R\tcompanyId\x88\x01\x01\x12$\n" +
+	"\voperator_id\x18\x04 \x01(\x03H\x03R\n" +
 	"operatorId\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
@@ -2732,7 +2715,7 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\x91\x04\n" +
 	"\x10RevenueShareItem\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\tR\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12#\n" +
 	"\roperator_mode\x18\x03 \x01(\tR\foperatorMode\x12\x1a\n" +
@@ -2756,17 +2739,16 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x1brevenue_share_collect_total\x18\x03 \x01(\tR\x18revenueShareCollectTotal\"\xe1\x01\n" +
 	"\x14AddAdjustmentRequest\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x12\x1f\n" +
-	"\vretailer_id\x18\x02 \x01(\tR\n" +
+	"\vretailer_id\x18\x02 \x01(\x03R\n" +
 	"retailerId\x12\x1d\n" +
 	"\n" +
-	"company_id\x18\x03 \x01(\tR\tcompanyId\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\tR\n" +
+	"company_id\x18\x03 \x01(\x03R\tcompanyId\x12\x1f\n" +
+	"\voperator_id\x18\x04 \x01(\x03R\n" +
 	"operatorId\x12\x1a\n" +
 	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06amount\x18\x06 \x01(\tR\x06amount\x12 \n" +
-	"\vdescription\x18\a \x01(\tR\vdescription\"<\n" +
-	"\x15AddAdjustmentResponse\x12#\n" +
-	"\radjustment_id\x18\x01 \x01(\x03R\fadjustmentId\"p\n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\"\x17\n" +
+	"\x15AddAdjustmentResponse\"p\n" +
 	"\x1cListAdjustmentConfigsRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
@@ -2780,7 +2762,7 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1aX\n" +
 	"\x10AdjustmentConfig\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04item\x18\x02 \x01(\tR\x04item\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\"\x90\x01\n" +
 	"\x1dUpdateAdjustmentConfigRequest\x12\x0e\n" +
@@ -2789,20 +2771,19 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1d\n" +
 	"\aenabled\x18\x04 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
 	"\n" +
-	"\b_enabled\"0\n" +
-	"\x1eUpdateAdjustmentConfigResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"/\n" +
+	"\b_enabled\" \n" +
+	"\x1eUpdateAdjustmentConfigResponse\"/\n" +
 	"\x1dDeleteAdjustmentConfigRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\" \n" +
 	"\x1eDeleteAdjustmentConfigResponse\"\xbc\x02\n" +
 	"\x16ListAdjustmentsRequest\x12\"\n" +
 	"\n" +
 	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x02 \x01(\tH\x01R\n" +
+	"\vretailer_id\x18\x02 \x01(\x03H\x01R\n" +
 	"retailerId\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"company_id\x18\x03 \x01(\tH\x02R\tcompanyId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x04 \x01(\tH\x03R\n" +
+	"company_id\x18\x03 \x01(\x03H\x02R\tcompanyId\x88\x01\x01\x12$\n" +
+	"\voperator_id\x18\x04 \x01(\x03H\x03R\n" +
 	"operatorId\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
@@ -2822,7 +2803,7 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xc0\x01\n" +
 	"\x0eAdjustmentItem\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x12\x1f\n" +
-	"\voperator_id\x18\x02 \x01(\tR\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x12\x1a\n" +
 	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12\x16\n" +
