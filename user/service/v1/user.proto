@@ -216,13 +216,13 @@ service User {
 message UserInfo {
 	// Unique identifier for the user.
 	int64 user_id = 1;
-	// OperatorId.
+	// OperatorId in the operator hierarchy.
 	int64 operator_id = 2;
-	// Company OperatorId.
+	// Company OperatorId in the operator hierarchy.
 	int64 company_operator_id = 3;
-	// Retailer OperatorId.
+	// Retailer OperatorId in the operator hierarchy.
 	int64 retailer_operator_id = 4;
-	// System OperatorId.
+	// System OperatorId in the operator hierarchy.
 	int64 system_operator_id = 5;
 	// Username.
 	string username = 6;

@@ -251,13 +251,13 @@ type UserInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier for the user.
 	UserId int64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// OperatorId.
+	// OperatorId in the operator hierarchy.
 	OperatorId int64 `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	// Company OperatorId.
+	// Company OperatorId in the operator hierarchy.
 	CompanyOperatorId int64 `protobuf:"varint,3,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
-	// Retailer OperatorId.
+	// Retailer OperatorId in the operator hierarchy.
 	RetailerOperatorId int64 `protobuf:"varint,4,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
-	// System OperatorId.
+	// System OperatorId in the operator hierarchy.
 	SystemOperatorId int64 `protobuf:"varint,5,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
 	// Username.
 	Username string `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
