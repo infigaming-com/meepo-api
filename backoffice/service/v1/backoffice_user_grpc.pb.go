@@ -24,7 +24,6 @@ const (
 	BackofficeUser_GetUserProfile_FullMethodName            = "/api.backoffice.service.v1.BackofficeUser/GetUserProfile"
 	BackofficeUser_AddUserComment_FullMethodName            = "/api.backoffice.service.v1.BackofficeUser/AddUserComment"
 	BackofficeUser_ListUserComments_FullMethodName          = "/api.backoffice.service.v1.BackofficeUser/ListUserComments"
-	BackofficeUser_CreateUser_FullMethodName                = "/api.backoffice.service.v1.BackofficeUser/CreateUser"
 	BackofficeUser_SendEmailVerificationCode_FullMethodName = "/api.backoffice.service.v1.BackofficeUser/SendEmailVerificationCode"
 	BackofficeUser_UpdateUser_FullMethodName                = "/api.backoffice.service.v1.BackofficeUser/UpdateUser"
 	BackofficeUser_SetOperatorTagsConfig_FullMethodName     = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTagsConfig"
@@ -44,7 +43,6 @@ type BackofficeUserClient interface {
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
 	AddUserComment(ctx context.Context, in *AddUserCommentRequest, opts ...grpc.CallOption) (*AddUserCommentResponse, error)
 	ListUserComments(ctx context.Context, in *ListUserCommentsRequest, opts ...grpc.CallOption) (*ListUserCommentsResponse, error)
-	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	// SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
@@ -114,16 +112,6 @@ func (c *backofficeUserClient) ListUserComments(ctx context.Context, in *ListUse
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUserCommentsResponse)
 	err := c.cc.Invoke(ctx, BackofficeUser_ListUserComments_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeUserClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateUserResponse)
-	err := c.cc.Invoke(ctx, BackofficeUser_CreateUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -219,7 +207,6 @@ type BackofficeUserServer interface {
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
 	AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error)
 	ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error)
-	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	// SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
@@ -259,9 +246,6 @@ func (UnimplementedBackofficeUserServer) AddUserComment(context.Context, *AddUse
 }
 func (UnimplementedBackofficeUserServer) ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUserComments not implemented")
-}
-func (UnimplementedBackofficeUserServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 }
 func (UnimplementedBackofficeUserServer) SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendEmailVerificationCode not implemented")
@@ -394,24 +378,6 @@ func _BackofficeUser_ListUserComments_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeUserServer).ListUserComments(ctx, req.(*ListUserCommentsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeUser_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateUserRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeUserServer).CreateUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeUser_CreateUser_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeUserServer).CreateUser(ctx, req.(*CreateUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -586,10 +552,6 @@ var BackofficeUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUserComments",
 			Handler:    _BackofficeUser_ListUserComments_Handler,
-		},
-		{
-			MethodName: "CreateUser",
-			Handler:    _BackofficeUser_CreateUser_Handler,
 		},
 		{
 			MethodName: "SendEmailVerificationCode",

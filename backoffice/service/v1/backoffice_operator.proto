@@ -15,6 +15,29 @@ service BackofficeOperator {
 			body: "*"
 		};
 	}
+
+	rpc CreateOperator(CreateOperatorRequest) returns (CreateOperatorResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/create"
+			body: "*"
+		};
+	}
+
+	// GetCurrentOperatorDetails returns the current operator details.
+	rpc GetCurrentOperatorDetails(GetCurrentOperatorDetailsRequest) returns (GetCurrentOperatorDetailsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/current"
+			body: "*"
+		};
+	}
+
+	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
+	rpc ListOperatorsByParentOperatorId(ListOperatorsByParentOperatorIdRequest) returns (ListOperatorsByParentOperatorIdResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/list/by-parent"
+			body: "*"
+		};
+	}
 }
 
 message ListOperatorsRequest {
@@ -27,4 +50,79 @@ message ListOperatorsResponse {
 		string operator_name = 2;
 	}
 	repeated Operator operators = 1;
+}
+
+message CreateOperatorRequest {
+	string mode = 1;
+	string operator_name = 2;
+	string operator_key = 3;
+	string reporting_currency = 4;
+	string backoffice_timezone = 5;
+	string operator_admin_email = 6;
+	string verification_code = 7;
+	repeated string supported_languages = 8;
+	repeated string supported_currencies = 9; // Contains Fiat and Crypto currencies
+}
+
+message CreateOperatorResponse {
+	string subdomain = 1;
+	string backoffice_subdomain = 2;
+	string operator_admin_email = 3;
+	string password = 4;
+}
+
+message OperatorDetails {
+	int64 id = 1; // real operator id
+	string operator_name = 2;
+	int64 parent_operator_id = 3;
+	string parent_operator_name = 4;
+	string operator_type = 5;
+	string external_id = 6;
+	string api_key = 7;
+	string subdomain = 8;
+	string backoffice_subdomain = 9;
+	string child_domain = 10;
+	bool enabled = 11;
+	string mode = 12;
+	string operator_key = 13;
+	string reporting_currency = 14;
+	string backoffice_timezone = 15;
+	repeated string supported_languages = 16;
+	repeated string supported_currencies = 17;
+	string status = 18;
+	bool is_maintenance = 19;
+	int64 maintenance_start_time = 20;
+	int64 maintenance_end_time = 21;
+	int64 operator_id = 22; // operator id in the operator hierarchy
+	int64 company_operator_id = 23; // company operator id in the operator hierarchy
+	string company_operator_name = 24; // company operator name in the operator hierarchy, or empty string if not exists
+	int64 retailer_operator_id = 25; // retailer operator id in the operator hierarchy
+	string retailer_operator_name = 26; // retailer operator name in the operator hierarchy, or empty string if not exists
+	int64 system_operator_id = 27; // system operator id in the operator hierarchy
+	string system_operator_name = 28; // system operator name in the operator hierarchy, or empty string if not exists
+}
+
+message GetCurrentOperatorDetailsRequest {
+}
+
+message GetCurrentOperatorDetailsResponse {
+	OperatorDetails operator_details = 1;
+}
+
+message ListOperatorsByParentOperatorIdRequest {
+	optional string status = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+}
+
+message ListOperatorsByParentOperatorIdResponse {
+	repeated OperatorDetails operator_details_list = 1;
+	int32 total = 2;
+	int32 live_count = 3;
+	int32 closed_count = 4;
+	int32 pending_count = 5;
+	int32 request_to_close_count = 6;
+	int32 suspended_count = 7;
+	int32 page = 8;
+	int32 page_size = 9;
 }

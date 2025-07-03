@@ -19,7 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeOperator_ListOperators_FullMethodName = "/api.backoffice.service.v1.BackofficeOperator/ListOperators"
+	BackofficeOperator_ListOperators_FullMethodName                   = "/api.backoffice.service.v1.BackofficeOperator/ListOperators"
+	BackofficeOperator_CreateOperator_FullMethodName                  = "/api.backoffice.service.v1.BackofficeOperator/CreateOperator"
+	BackofficeOperator_GetCurrentOperatorDetails_FullMethodName       = "/api.backoffice.service.v1.BackofficeOperator/GetCurrentOperatorDetails"
+	BackofficeOperator_ListOperatorsByParentOperatorId_FullMethodName = "/api.backoffice.service.v1.BackofficeOperator/ListOperatorsByParentOperatorId"
 )
 
 // BackofficeOperatorClient is the client API for BackofficeOperator service.
@@ -27,6 +30,11 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeOperatorClient interface {
 	ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...grpc.CallOption) (*ListOperatorsResponse, error)
+	CreateOperator(ctx context.Context, in *CreateOperatorRequest, opts ...grpc.CallOption) (*CreateOperatorResponse, error)
+	// GetCurrentOperatorDetails returns the current operator details.
+	GetCurrentOperatorDetails(ctx context.Context, in *GetCurrentOperatorDetailsRequest, opts ...grpc.CallOption) (*GetCurrentOperatorDetailsResponse, error)
+	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
+	ListOperatorsByParentOperatorId(ctx context.Context, in *ListOperatorsByParentOperatorIdRequest, opts ...grpc.CallOption) (*ListOperatorsByParentOperatorIdResponse, error)
 }
 
 type backofficeOperatorClient struct {
@@ -47,11 +55,46 @@ func (c *backofficeOperatorClient) ListOperators(ctx context.Context, in *ListOp
 	return out, nil
 }
 
+func (c *backofficeOperatorClient) CreateOperator(ctx context.Context, in *CreateOperatorRequest, opts ...grpc.CallOption) (*CreateOperatorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateOperatorResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_CreateOperator_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) GetCurrentOperatorDetails(ctx context.Context, in *GetCurrentOperatorDetailsRequest, opts ...grpc.CallOption) (*GetCurrentOperatorDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCurrentOperatorDetailsResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_GetCurrentOperatorDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) ListOperatorsByParentOperatorId(ctx context.Context, in *ListOperatorsByParentOperatorIdRequest, opts ...grpc.CallOption) (*ListOperatorsByParentOperatorIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorsByParentOperatorIdResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_ListOperatorsByParentOperatorId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeOperatorServer is the server API for BackofficeOperator service.
 // All implementations must embed UnimplementedBackofficeOperatorServer
 // for forward compatibility.
 type BackofficeOperatorServer interface {
 	ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error)
+	CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error)
+	// GetCurrentOperatorDetails returns the current operator details.
+	GetCurrentOperatorDetails(context.Context, *GetCurrentOperatorDetailsRequest) (*GetCurrentOperatorDetailsResponse, error)
+	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
+	ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error)
 	mustEmbedUnimplementedBackofficeOperatorServer()
 }
 
@@ -64,6 +107,15 @@ type UnimplementedBackofficeOperatorServer struct{}
 
 func (UnimplementedBackofficeOperatorServer) ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperators not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateOperator not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) GetCurrentOperatorDetails(context.Context, *GetCurrentOperatorDetailsRequest) (*GetCurrentOperatorDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentOperatorDetails not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorsByParentOperatorId not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) mustEmbedUnimplementedBackofficeOperatorServer() {}
 func (UnimplementedBackofficeOperatorServer) testEmbeddedByValue()                            {}
@@ -104,6 +156,60 @@ func _BackofficeOperator_ListOperators_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeOperator_CreateOperator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOperatorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).CreateOperator(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_CreateOperator_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).CreateOperator(ctx, req.(*CreateOperatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_GetCurrentOperatorDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCurrentOperatorDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).GetCurrentOperatorDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_GetCurrentOperatorDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).GetCurrentOperatorDetails(ctx, req.(*GetCurrentOperatorDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_ListOperatorsByParentOperatorId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorsByParentOperatorIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).ListOperatorsByParentOperatorId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_ListOperatorsByParentOperatorId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).ListOperatorsByParentOperatorId(ctx, req.(*ListOperatorsByParentOperatorIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeOperator_ServiceDesc is the grpc.ServiceDesc for BackofficeOperator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +220,18 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperators",
 			Handler:    _BackofficeOperator_ListOperators_Handler,
+		},
+		{
+			MethodName: "CreateOperator",
+			Handler:    _BackofficeOperator_CreateOperator_Handler,
+		},
+		{
+			MethodName: "GetCurrentOperatorDetails",
+			Handler:    _BackofficeOperator_GetCurrentOperatorDetails_Handler,
+		},
+		{
+			MethodName: "ListOperatorsByParentOperatorId",
+			Handler:    _BackofficeOperator_ListOperatorsByParentOperatorId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

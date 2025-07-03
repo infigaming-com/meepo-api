@@ -40,6 +40,7 @@ const (
 	BackofficeAccount_DeleteRole_FullMethodName                   = "/api.backoffice.service.v1.BackofficeAccount/DeleteRole"
 	BackofficeAccount_CheckEmailExists_FullMethodName             = "/api.backoffice.service.v1.BackofficeAccount/CheckEmailExists"
 	BackofficeAccount_CheckSubdomainExists_FullMethodName         = "/api.backoffice.service.v1.BackofficeAccount/CheckSubdomainExists"
+	BackofficeAccount_CheckOperatorKeyExists_FullMethodName       = "/api.backoffice.service.v1.BackofficeAccount/CheckOperatorKeyExists"
 )
 
 // BackofficeAccountClient is the client API for BackofficeAccount service.
@@ -69,6 +70,8 @@ type BackofficeAccountClient interface {
 	CheckEmailExists(ctx context.Context, in *CheckEmailExistsRequest, opts ...grpc.CallOption) (*CheckEmailExistsResponse, error)
 	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
 	CheckSubdomainExists(ctx context.Context, in *CheckSubdomainExistsRequest, opts ...grpc.CallOption) (*CheckSubdomainExistsResponse, error)
+	// CheckOperatorKeyExists checks if the operator key exists in the operator table.
+	CheckOperatorKeyExists(ctx context.Context, in *CheckOperatorKeyExistsRequest, opts ...grpc.CallOption) (*CheckOperatorKeyExistsResponse, error)
 }
 
 type backofficeAccountClient struct {
@@ -289,6 +292,16 @@ func (c *backofficeAccountClient) CheckSubdomainExists(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *backofficeAccountClient) CheckOperatorKeyExists(ctx context.Context, in *CheckOperatorKeyExistsRequest, opts ...grpc.CallOption) (*CheckOperatorKeyExistsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckOperatorKeyExistsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_CheckOperatorKeyExists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeAccountServer is the server API for BackofficeAccount service.
 // All implementations must embed UnimplementedBackofficeAccountServer
 // for forward compatibility.
@@ -316,6 +329,8 @@ type BackofficeAccountServer interface {
 	CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error)
 	// CheckSubdomainExists checks if the subdomain exists in the origin_to_operator table.
 	CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error)
+	// CheckOperatorKeyExists checks if the operator key exists in the operator table.
+	CheckOperatorKeyExists(context.Context, *CheckOperatorKeyExistsRequest) (*CheckOperatorKeyExistsResponse, error)
 	mustEmbedUnimplementedBackofficeAccountServer()
 }
 
@@ -388,6 +403,9 @@ func (UnimplementedBackofficeAccountServer) CheckEmailExists(context.Context, *C
 }
 func (UnimplementedBackofficeAccountServer) CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckSubdomainExists not implemented")
+}
+func (UnimplementedBackofficeAccountServer) CheckOperatorKeyExists(context.Context, *CheckOperatorKeyExistsRequest) (*CheckOperatorKeyExistsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckOperatorKeyExists not implemented")
 }
 func (UnimplementedBackofficeAccountServer) mustEmbedUnimplementedBackofficeAccountServer() {}
 func (UnimplementedBackofficeAccountServer) testEmbeddedByValue()                           {}
@@ -788,6 +806,24 @@ func _BackofficeAccount_CheckSubdomainExists_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAccount_CheckOperatorKeyExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckOperatorKeyExistsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).CheckOperatorKeyExists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_CheckOperatorKeyExists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).CheckOperatorKeyExists(ctx, req.(*CheckOperatorKeyExistsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeAccount_ServiceDesc is the grpc.ServiceDesc for BackofficeAccount service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -878,6 +914,10 @@ var BackofficeAccount_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckSubdomainExists",
 			Handler:    _BackofficeAccount_CheckSubdomainExists_Handler,
+		},
+		{
+			MethodName: "CheckOperatorKeyExists",
+			Handler:    _BackofficeAccount_CheckOperatorKeyExists_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -993,118 +993,6 @@ func (x *ListUserCommentsResponse) GetComments() []*ListUserCommentsResponse_Com
 	return nil
 }
 
-type CreateUserRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Username         string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
-	Email            string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Password         string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	Mobile           string                 `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	VerificationCode string                 `protobuf:"bytes,5,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *CreateUserRequest) Reset() {
-	*x = CreateUserRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateUserRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateUserRequest) ProtoMessage() {}
-
-func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateUserRequest.ProtoReflect.Descriptor instead.
-func (*CreateUserRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *CreateUserRequest) GetUsername() string {
-	if x != nil {
-		return x.Username
-	}
-	return ""
-}
-
-func (x *CreateUserRequest) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-func (x *CreateUserRequest) GetPassword() string {
-	if x != nil {
-		return x.Password
-	}
-	return ""
-}
-
-func (x *CreateUserRequest) GetMobile() string {
-	if x != nil {
-		return x.Mobile
-	}
-	return ""
-}
-
-func (x *CreateUserRequest) GetVerificationCode() string {
-	if x != nil {
-		return x.VerificationCode
-	}
-	return ""
-}
-
-type CreateUserResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateUserResponse) Reset() {
-	*x = CreateUserResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateUserResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateUserResponse) ProtoMessage() {}
-
-func (x *CreateUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateUserResponse.ProtoReflect.Descriptor instead.
-func (*CreateUserResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{11}
-}
-
 type SendEmailVerificationCodeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
@@ -1114,7 +1002,7 @@ type SendEmailVerificationCodeRequest struct {
 
 func (x *SendEmailVerificationCodeRequest) Reset() {
 	*x = SendEmailVerificationCodeRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1126,7 +1014,7 @@ func (x *SendEmailVerificationCodeRequest) String() string {
 func (*SendEmailVerificationCodeRequest) ProtoMessage() {}
 
 func (x *SendEmailVerificationCodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1139,7 +1027,7 @@ func (x *SendEmailVerificationCodeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendEmailVerificationCodeRequest.ProtoReflect.Descriptor instead.
 func (*SendEmailVerificationCodeRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{12}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SendEmailVerificationCodeRequest) GetEmail() string {
@@ -1157,7 +1045,7 @@ type SendEmailVerificationCodeResponse struct {
 
 func (x *SendEmailVerificationCodeResponse) Reset() {
 	*x = SendEmailVerificationCodeResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1169,7 +1057,7 @@ func (x *SendEmailVerificationCodeResponse) String() string {
 func (*SendEmailVerificationCodeResponse) ProtoMessage() {}
 
 func (x *SendEmailVerificationCodeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1182,7 +1070,7 @@ func (x *SendEmailVerificationCodeResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use SendEmailVerificationCodeResponse.ProtoReflect.Descriptor instead.
 func (*SendEmailVerificationCodeResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{13}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{11}
 }
 
 type UpdateUserRequest struct {
@@ -1197,7 +1085,7 @@ type UpdateUserRequest struct {
 
 func (x *UpdateUserRequest) Reset() {
 	*x = UpdateUserRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1209,7 +1097,7 @@ func (x *UpdateUserRequest) String() string {
 func (*UpdateUserRequest) ProtoMessage() {}
 
 func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1222,7 +1110,7 @@ func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{14}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UpdateUserRequest) GetUserId() int64 {
@@ -1261,7 +1149,7 @@ type UpdateUserResponse struct {
 
 func (x *UpdateUserResponse) Reset() {
 	*x = UpdateUserResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1273,7 +1161,7 @@ func (x *UpdateUserResponse) String() string {
 func (*UpdateUserResponse) ProtoMessage() {}
 
 func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1286,7 +1174,7 @@ func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserResponse.ProtoReflect.Descriptor instead.
 func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{15}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{13}
 }
 
 // SetOperatorTagsConfigRequest contains the operator ID.
@@ -1302,7 +1190,7 @@ type SetOperatorTagsConfigRequest struct {
 
 func (x *SetOperatorTagsConfigRequest) Reset() {
 	*x = SetOperatorTagsConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[16]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1314,7 +1202,7 @@ func (x *SetOperatorTagsConfigRequest) String() string {
 func (*SetOperatorTagsConfigRequest) ProtoMessage() {}
 
 func (x *SetOperatorTagsConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[16]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1327,7 +1215,7 @@ func (x *SetOperatorTagsConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOperatorTagsConfigRequest.ProtoReflect.Descriptor instead.
 func (*SetOperatorTagsConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{16}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *SetOperatorTagsConfigRequest) GetOperatorId() int64 {
@@ -1353,7 +1241,7 @@ type SetOperatorTagsConfigResponse struct {
 
 func (x *SetOperatorTagsConfigResponse) Reset() {
 	*x = SetOperatorTagsConfigResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[17]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1365,7 +1253,7 @@ func (x *SetOperatorTagsConfigResponse) String() string {
 func (*SetOperatorTagsConfigResponse) ProtoMessage() {}
 
 func (x *SetOperatorTagsConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[17]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1378,7 +1266,7 @@ func (x *SetOperatorTagsConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOperatorTagsConfigResponse.ProtoReflect.Descriptor instead.
 func (*SetOperatorTagsConfigResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{17}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{15}
 }
 
 // SetOperatorTagsRequest contains the operator ID and tag to add.
@@ -1394,7 +1282,7 @@ type SetOperatorTagsRequest struct {
 
 func (x *SetOperatorTagsRequest) Reset() {
 	*x = SetOperatorTagsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1406,7 +1294,7 @@ func (x *SetOperatorTagsRequest) String() string {
 func (*SetOperatorTagsRequest) ProtoMessage() {}
 
 func (x *SetOperatorTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1419,7 +1307,7 @@ func (x *SetOperatorTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOperatorTagsRequest.ProtoReflect.Descriptor instead.
 func (*SetOperatorTagsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{18}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SetOperatorTagsRequest) GetOperatorId() int64 {
@@ -1445,7 +1333,7 @@ type SetOperatorTagsResponse struct {
 
 func (x *SetOperatorTagsResponse) Reset() {
 	*x = SetOperatorTagsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1457,7 +1345,7 @@ func (x *SetOperatorTagsResponse) String() string {
 func (*SetOperatorTagsResponse) ProtoMessage() {}
 
 func (x *SetOperatorTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1470,7 +1358,7 @@ func (x *SetOperatorTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOperatorTagsResponse.ProtoReflect.Descriptor instead.
 func (*SetOperatorTagsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{19}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{17}
 }
 
 // GetOperatorTagsConfigRequest contains the operator ID to retrieve tag configuration.
@@ -1484,7 +1372,7 @@ type GetOperatorTagsConfigRequest struct {
 
 func (x *GetOperatorTagsConfigRequest) Reset() {
 	*x = GetOperatorTagsConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1496,7 +1384,7 @@ func (x *GetOperatorTagsConfigRequest) String() string {
 func (*GetOperatorTagsConfigRequest) ProtoMessage() {}
 
 func (x *GetOperatorTagsConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1509,7 +1397,7 @@ func (x *GetOperatorTagsConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorTagsConfigRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagsConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{20}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetOperatorTagsConfigRequest) GetOperatorId() int64 {
@@ -1530,7 +1418,7 @@ type GetOperatorTagsConfigResponse struct {
 
 func (x *GetOperatorTagsConfigResponse) Reset() {
 	*x = GetOperatorTagsConfigResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1542,7 +1430,7 @@ func (x *GetOperatorTagsConfigResponse) String() string {
 func (*GetOperatorTagsConfigResponse) ProtoMessage() {}
 
 func (x *GetOperatorTagsConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1555,7 +1443,7 @@ func (x *GetOperatorTagsConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorTagsConfigResponse.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagsConfigResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{21}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetOperatorTagsConfigResponse) GetFollowParent() bool {
@@ -1574,7 +1462,7 @@ type GetOperatorTagsRequest struct {
 
 func (x *GetOperatorTagsRequest) Reset() {
 	*x = GetOperatorTagsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1586,7 +1474,7 @@ func (x *GetOperatorTagsRequest) String() string {
 func (*GetOperatorTagsRequest) ProtoMessage() {}
 
 func (x *GetOperatorTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1599,7 +1487,7 @@ func (x *GetOperatorTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorTagsRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{22}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{20}
 }
 
 // GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
@@ -1613,7 +1501,7 @@ type GetOperatorTagsResponse struct {
 
 func (x *GetOperatorTagsResponse) Reset() {
 	*x = GetOperatorTagsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[23]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1625,7 +1513,7 @@ func (x *GetOperatorTagsResponse) String() string {
 func (*GetOperatorTagsResponse) ProtoMessage() {}
 
 func (x *GetOperatorTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[23]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1638,7 +1526,7 @@ func (x *GetOperatorTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorTagsResponse.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{23}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetOperatorTagsResponse) GetTags() []string {
@@ -1659,7 +1547,7 @@ type GetUserTagsRequest struct {
 
 func (x *GetUserTagsRequest) Reset() {
 	*x = GetUserTagsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1671,7 +1559,7 @@ func (x *GetUserTagsRequest) String() string {
 func (*GetUserTagsRequest) ProtoMessage() {}
 
 func (x *GetUserTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1684,7 +1572,7 @@ func (x *GetUserTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserTagsRequest.ProtoReflect.Descriptor instead.
 func (*GetUserTagsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{24}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetUserTagsRequest) GetUserId() int64 {
@@ -1705,7 +1593,7 @@ type GetUserTagsResponse struct {
 
 func (x *GetUserTagsResponse) Reset() {
 	*x = GetUserTagsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1717,7 +1605,7 @@ func (x *GetUserTagsResponse) String() string {
 func (*GetUserTagsResponse) ProtoMessage() {}
 
 func (x *GetUserTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1730,7 +1618,7 @@ func (x *GetUserTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserTagsResponse.ProtoReflect.Descriptor instead.
 func (*GetUserTagsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{25}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *GetUserTagsResponse) GetTags() []string {
@@ -1750,7 +1638,7 @@ type SetUserTagsRequest struct {
 
 func (x *SetUserTagsRequest) Reset() {
 	*x = SetUserTagsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1762,7 +1650,7 @@ func (x *SetUserTagsRequest) String() string {
 func (*SetUserTagsRequest) ProtoMessage() {}
 
 func (x *SetUserTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1775,7 +1663,7 @@ func (x *SetUserTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetUserTagsRequest.ProtoReflect.Descriptor instead.
 func (*SetUserTagsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{26}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *SetUserTagsRequest) GetUserId() int64 {
@@ -1800,7 +1688,7 @@ type SetUserTagsResponse struct {
 
 func (x *SetUserTagsResponse) Reset() {
 	*x = SetUserTagsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1812,7 +1700,7 @@ func (x *SetUserTagsResponse) String() string {
 func (*SetUserTagsResponse) ProtoMessage() {}
 
 func (x *SetUserTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1825,7 +1713,7 @@ func (x *SetUserTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetUserTagsResponse.ProtoReflect.Descriptor instead.
 func (*SetUserTagsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{27}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{25}
 }
 
 type ListUsersResponse_User struct {
@@ -1861,7 +1749,7 @@ type ListUsersResponse_User struct {
 
 func (x *ListUsersResponse_User) Reset() {
 	*x = ListUsersResponse_User{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1873,7 +1761,7 @@ func (x *ListUsersResponse_User) String() string {
 func (*ListUsersResponse_User) ProtoMessage() {}
 
 func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2041,7 +1929,7 @@ type GetUserOverviewResponse_GameData struct {
 
 func (x *GetUserOverviewResponse_GameData) Reset() {
 	*x = GetUserOverviewResponse_GameData{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2053,7 +1941,7 @@ func (x *GetUserOverviewResponse_GameData) String() string {
 func (*GetUserOverviewResponse_GameData) ProtoMessage() {}
 
 func (x *GetUserOverviewResponse_GameData) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2108,7 +1996,7 @@ type GetUserProfileResponse_IpInfo struct {
 
 func (x *GetUserProfileResponse_IpInfo) Reset() {
 	*x = GetUserProfileResponse_IpInfo{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2120,7 +2008,7 @@ func (x *GetUserProfileResponse_IpInfo) String() string {
 func (*GetUserProfileResponse_IpInfo) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_IpInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2175,7 +2063,7 @@ type GetUserProfileResponse_RegistrationRecord struct {
 
 func (x *GetUserProfileResponse_RegistrationRecord) Reset() {
 	*x = GetUserProfileResponse_RegistrationRecord{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2187,7 +2075,7 @@ func (x *GetUserProfileResponse_RegistrationRecord) String() string {
 func (*GetUserProfileResponse_RegistrationRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_RegistrationRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2290,7 +2178,7 @@ type GetUserProfileResponse_LoginRecord struct {
 
 func (x *GetUserProfileResponse_LoginRecord) Reset() {
 	*x = GetUserProfileResponse_LoginRecord{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2302,7 +2190,7 @@ func (x *GetUserProfileResponse_LoginRecord) String() string {
 func (*GetUserProfileResponse_LoginRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_LoginRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2394,7 +2282,7 @@ type GetUserProfileResponse_Comment struct {
 
 func (x *GetUserProfileResponse_Comment) Reset() {
 	*x = GetUserProfileResponse_Comment{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2406,7 +2294,7 @@ func (x *GetUserProfileResponse_Comment) String() string {
 func (*GetUserProfileResponse_Comment) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2468,7 +2356,7 @@ type ListUserCommentsResponse_Comment struct {
 
 func (x *ListUserCommentsResponse_Comment) Reset() {
 	*x = ListUserCommentsResponse_Comment{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2480,7 +2368,7 @@ func (x *ListUserCommentsResponse_Comment) String() string {
 func (*ListUserCommentsResponse_Comment) ProtoMessage() {}
 
 func (x *ListUserCommentsResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2713,14 +2601,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x06author\x18\x01 \x01(\tR\x06author\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x129\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xa6\x01\n" +
-	"\x11CreateUserRequest\x12\x1a\n" +
-	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x16\n" +
-	"\x06mobile\x18\x04 \x01(\tR\x06mobile\x12+\n" +
-	"\x11verification_code\x18\x05 \x01(\tR\x10verificationCode\"\x14\n" +
-	"\x12CreateUserResponse\"8\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"8\n" +
 	" SendEmailVerificationCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"#\n" +
 	"!SendEmailVerificationCodeResponse\"\xc2\x01\n" +
@@ -2759,15 +2640,13 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x12SetUserTagsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\"\x15\n" +
-	"\x13SetUserTagsResponse2\xcd\x12\n" +
+	"\x13SetUserTagsResponse2\xba\x11\n" +
 	"\x0eBackofficeUser\x12\x8b\x01\n" +
 	"\tListUsers\x12+.api.backoffice.service.v1.ListUsersRequest\x1a,.api.backoffice.service.v1.ListUsersResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/backoffice/user/list\x12\xa5\x01\n" +
 	"\x0fGetUserOverview\x121.api.backoffice.service.v1.GetUserOverviewRequest\x1a2.api.backoffice.service.v1.GetUserOverviewResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/overview/get\x12\xa1\x01\n" +
 	"\x0eGetUserProfile\x120.api.backoffice.service.v1.GetUserProfileRequest\x1a1.api.backoffice.service.v1.GetUserProfileResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/user/profile/get\x12\xa2\x01\n" +
 	"\x0eAddUserComment\x120.api.backoffice.service.v1.AddUserCommentRequest\x1a1.api.backoffice.service.v1.AddUserCommentResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/comments/add\x12\xa9\x01\n" +
-	"\x10ListUserComments\x122.api.backoffice.service.v1.ListUserCommentsRequest\x1a3.api.backoffice.service.v1.ListUserCommentsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/user/comments/list\x12\x90\x01\n" +
-	"\n" +
-	"CreateUser\x12,.api.backoffice.service.v1.CreateUserRequest\x1a-.api.backoffice.service.v1.CreateUserResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/backoffice/user/create\x12\xd3\x01\n" +
+	"\x10ListUserComments\x122.api.backoffice.service.v1.ListUserCommentsRequest\x1a3.api.backoffice.service.v1.ListUserCommentsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/user/comments/list\x12\xd3\x01\n" +
 	"\x19SendEmailVerificationCode\x12;.api.backoffice.service.v1.SendEmailVerificationCodeRequest\x1a<.api.backoffice.service.v1.SendEmailVerificationCodeResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/user/send-email-verification-code\x12\x90\x01\n" +
 	"\n" +
 	"UpdateUser\x12,.api.backoffice.service.v1.UpdateUserRequest\x1a-.api.backoffice.service.v1.UpdateUserResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/backoffice/user/update\x12\xc3\x01\n" +
@@ -2791,7 +2670,7 @@ func file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_user_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
+var file_backoffice_service_v1_backoffice_user_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*ListUsersRequest)(nil),                          // 0: api.backoffice.service.v1.ListUsersRequest
 	(*ListUsersResponse)(nil),                         // 1: api.backoffice.service.v1.ListUsersResponse
@@ -2803,80 +2682,76 @@ var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*AddUserCommentResponse)(nil),                    // 7: api.backoffice.service.v1.AddUserCommentResponse
 	(*ListUserCommentsRequest)(nil),                   // 8: api.backoffice.service.v1.ListUserCommentsRequest
 	(*ListUserCommentsResponse)(nil),                  // 9: api.backoffice.service.v1.ListUserCommentsResponse
-	(*CreateUserRequest)(nil),                         // 10: api.backoffice.service.v1.CreateUserRequest
-	(*CreateUserResponse)(nil),                        // 11: api.backoffice.service.v1.CreateUserResponse
-	(*SendEmailVerificationCodeRequest)(nil),          // 12: api.backoffice.service.v1.SendEmailVerificationCodeRequest
-	(*SendEmailVerificationCodeResponse)(nil),         // 13: api.backoffice.service.v1.SendEmailVerificationCodeResponse
-	(*UpdateUserRequest)(nil),                         // 14: api.backoffice.service.v1.UpdateUserRequest
-	(*UpdateUserResponse)(nil),                        // 15: api.backoffice.service.v1.UpdateUserResponse
-	(*SetOperatorTagsConfigRequest)(nil),              // 16: api.backoffice.service.v1.SetOperatorTagsConfigRequest
-	(*SetOperatorTagsConfigResponse)(nil),             // 17: api.backoffice.service.v1.SetOperatorTagsConfigResponse
-	(*SetOperatorTagsRequest)(nil),                    // 18: api.backoffice.service.v1.SetOperatorTagsRequest
-	(*SetOperatorTagsResponse)(nil),                   // 19: api.backoffice.service.v1.SetOperatorTagsResponse
-	(*GetOperatorTagsConfigRequest)(nil),              // 20: api.backoffice.service.v1.GetOperatorTagsConfigRequest
-	(*GetOperatorTagsConfigResponse)(nil),             // 21: api.backoffice.service.v1.GetOperatorTagsConfigResponse
-	(*GetOperatorTagsRequest)(nil),                    // 22: api.backoffice.service.v1.GetOperatorTagsRequest
-	(*GetOperatorTagsResponse)(nil),                   // 23: api.backoffice.service.v1.GetOperatorTagsResponse
-	(*GetUserTagsRequest)(nil),                        // 24: api.backoffice.service.v1.GetUserTagsRequest
-	(*GetUserTagsResponse)(nil),                       // 25: api.backoffice.service.v1.GetUserTagsResponse
-	(*SetUserTagsRequest)(nil),                        // 26: api.backoffice.service.v1.SetUserTagsRequest
-	(*SetUserTagsResponse)(nil),                       // 27: api.backoffice.service.v1.SetUserTagsResponse
-	(*ListUsersResponse_User)(nil),                    // 28: api.backoffice.service.v1.ListUsersResponse.User
-	(*GetUserOverviewResponse_GameData)(nil),          // 29: api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	(*GetUserProfileResponse_IpInfo)(nil),             // 30: api.backoffice.service.v1.GetUserProfileResponse.IpInfo
-	(*GetUserProfileResponse_RegistrationRecord)(nil), // 31: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	(*GetUserProfileResponse_LoginRecord)(nil),        // 32: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	(*GetUserProfileResponse_Comment)(nil),            // 33: api.backoffice.service.v1.GetUserProfileResponse.Comment
-	(*ListUserCommentsResponse_Comment)(nil),          // 34: api.backoffice.service.v1.ListUserCommentsResponse.Comment
-	(*timestamppb.Timestamp)(nil),                     // 35: google.protobuf.Timestamp
+	(*SendEmailVerificationCodeRequest)(nil),          // 10: api.backoffice.service.v1.SendEmailVerificationCodeRequest
+	(*SendEmailVerificationCodeResponse)(nil),         // 11: api.backoffice.service.v1.SendEmailVerificationCodeResponse
+	(*UpdateUserRequest)(nil),                         // 12: api.backoffice.service.v1.UpdateUserRequest
+	(*UpdateUserResponse)(nil),                        // 13: api.backoffice.service.v1.UpdateUserResponse
+	(*SetOperatorTagsConfigRequest)(nil),              // 14: api.backoffice.service.v1.SetOperatorTagsConfigRequest
+	(*SetOperatorTagsConfigResponse)(nil),             // 15: api.backoffice.service.v1.SetOperatorTagsConfigResponse
+	(*SetOperatorTagsRequest)(nil),                    // 16: api.backoffice.service.v1.SetOperatorTagsRequest
+	(*SetOperatorTagsResponse)(nil),                   // 17: api.backoffice.service.v1.SetOperatorTagsResponse
+	(*GetOperatorTagsConfigRequest)(nil),              // 18: api.backoffice.service.v1.GetOperatorTagsConfigRequest
+	(*GetOperatorTagsConfigResponse)(nil),             // 19: api.backoffice.service.v1.GetOperatorTagsConfigResponse
+	(*GetOperatorTagsRequest)(nil),                    // 20: api.backoffice.service.v1.GetOperatorTagsRequest
+	(*GetOperatorTagsResponse)(nil),                   // 21: api.backoffice.service.v1.GetOperatorTagsResponse
+	(*GetUserTagsRequest)(nil),                        // 22: api.backoffice.service.v1.GetUserTagsRequest
+	(*GetUserTagsResponse)(nil),                       // 23: api.backoffice.service.v1.GetUserTagsResponse
+	(*SetUserTagsRequest)(nil),                        // 24: api.backoffice.service.v1.SetUserTagsRequest
+	(*SetUserTagsResponse)(nil),                       // 25: api.backoffice.service.v1.SetUserTagsResponse
+	(*ListUsersResponse_User)(nil),                    // 26: api.backoffice.service.v1.ListUsersResponse.User
+	(*GetUserOverviewResponse_GameData)(nil),          // 27: api.backoffice.service.v1.GetUserOverviewResponse.GameData
+	(*GetUserProfileResponse_IpInfo)(nil),             // 28: api.backoffice.service.v1.GetUserProfileResponse.IpInfo
+	(*GetUserProfileResponse_RegistrationRecord)(nil), // 29: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
+	(*GetUserProfileResponse_LoginRecord)(nil),        // 30: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
+	(*GetUserProfileResponse_Comment)(nil),            // 31: api.backoffice.service.v1.GetUserProfileResponse.Comment
+	(*ListUserCommentsResponse_Comment)(nil),          // 32: api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	(*timestamppb.Timestamp)(nil),                     // 33: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
-	35, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	35, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	28, // 2: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
-	29, // 3: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	31, // 4: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	32, // 5: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	33, // 6: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
-	34, // 7: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
-	35, // 8: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	35, // 9: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	35, // 10: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	30, // 11: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
-	35, // 12: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	30, // 13: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
-	35, // 14: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	35, // 15: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	33, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	33, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	26, // 2: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
+	27, // 3: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
+	29, // 4: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
+	30, // 5: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
+	31, // 6: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
+	32, // 7: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	33, // 8: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	33, // 9: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	33, // 10: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
+	28, // 11: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
+	33, // 12: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
+	28, // 13: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
+	33, // 14: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	33, // 15: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 16: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
 	2,  // 17: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
 	4,  // 18: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
 	6,  // 19: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
 	8,  // 20: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
-	10, // 21: api.backoffice.service.v1.BackofficeUser.CreateUser:input_type -> api.backoffice.service.v1.CreateUserRequest
-	12, // 22: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
-	14, // 23: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
-	16, // 24: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:input_type -> api.backoffice.service.v1.SetOperatorTagsConfigRequest
-	18, // 25: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:input_type -> api.backoffice.service.v1.SetOperatorTagsRequest
-	20, // 26: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:input_type -> api.backoffice.service.v1.GetOperatorTagsConfigRequest
-	22, // 27: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:input_type -> api.backoffice.service.v1.GetOperatorTagsRequest
-	24, // 28: api.backoffice.service.v1.BackofficeUser.GetUserTags:input_type -> api.backoffice.service.v1.GetUserTagsRequest
-	26, // 29: api.backoffice.service.v1.BackofficeUser.SetUserTags:input_type -> api.backoffice.service.v1.SetUserTagsRequest
-	1,  // 30: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
-	3,  // 31: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
-	5,  // 32: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
-	7,  // 33: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
-	9,  // 34: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
-	11, // 35: api.backoffice.service.v1.BackofficeUser.CreateUser:output_type -> api.backoffice.service.v1.CreateUserResponse
-	13, // 36: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
-	15, // 37: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
-	17, // 38: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:output_type -> api.backoffice.service.v1.SetOperatorTagsConfigResponse
-	19, // 39: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:output_type -> api.backoffice.service.v1.SetOperatorTagsResponse
-	21, // 40: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:output_type -> api.backoffice.service.v1.GetOperatorTagsConfigResponse
-	23, // 41: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:output_type -> api.backoffice.service.v1.GetOperatorTagsResponse
-	25, // 42: api.backoffice.service.v1.BackofficeUser.GetUserTags:output_type -> api.backoffice.service.v1.GetUserTagsResponse
-	27, // 43: api.backoffice.service.v1.BackofficeUser.SetUserTags:output_type -> api.backoffice.service.v1.SetUserTagsResponse
-	30, // [30:44] is the sub-list for method output_type
-	16, // [16:30] is the sub-list for method input_type
+	10, // 21: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
+	12, // 22: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
+	14, // 23: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:input_type -> api.backoffice.service.v1.SetOperatorTagsConfigRequest
+	16, // 24: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:input_type -> api.backoffice.service.v1.SetOperatorTagsRequest
+	18, // 25: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:input_type -> api.backoffice.service.v1.GetOperatorTagsConfigRequest
+	20, // 26: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:input_type -> api.backoffice.service.v1.GetOperatorTagsRequest
+	22, // 27: api.backoffice.service.v1.BackofficeUser.GetUserTags:input_type -> api.backoffice.service.v1.GetUserTagsRequest
+	24, // 28: api.backoffice.service.v1.BackofficeUser.SetUserTags:input_type -> api.backoffice.service.v1.SetUserTagsRequest
+	1,  // 29: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
+	3,  // 30: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
+	5,  // 31: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
+	7,  // 32: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
+	9,  // 33: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
+	11, // 34: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
+	13, // 35: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
+	15, // 36: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:output_type -> api.backoffice.service.v1.SetOperatorTagsConfigResponse
+	17, // 37: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:output_type -> api.backoffice.service.v1.SetOperatorTagsResponse
+	19, // 38: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:output_type -> api.backoffice.service.v1.GetOperatorTagsConfigResponse
+	21, // 39: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:output_type -> api.backoffice.service.v1.GetOperatorTagsResponse
+	23, // 40: api.backoffice.service.v1.BackofficeUser.GetUserTags:output_type -> api.backoffice.service.v1.GetUserTagsResponse
+	25, // 41: api.backoffice.service.v1.BackofficeUser.SetUserTags:output_type -> api.backoffice.service.v1.SetUserTagsResponse
+	29, // [29:42] is the sub-list for method output_type
+	16, // [16:29] is the sub-list for method input_type
 	16, // [16:16] is the sub-list for extension type_name
 	16, // [16:16] is the sub-list for extension extendee
 	0,  // [0:16] is the sub-list for field type_name
@@ -2890,14 +2765,14 @@ func file_backoffice_service_v1_backoffice_user_proto_init() {
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[0].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[2].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[4].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_user_proto_msgTypes[14].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_user_proto_msgTypes[12].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_user_proto_rawDesc), len(file_backoffice_service_v1_backoffice_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   35,
+			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

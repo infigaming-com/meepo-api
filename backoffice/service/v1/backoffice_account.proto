@@ -140,6 +140,14 @@ service BackofficeAccount {
             body: "*"
         };
     }
+
+    // CheckOperatorKeyExists checks if the operator key exists in the operator table.
+    rpc CheckOperatorKeyExists(CheckOperatorKeyExistsRequest) returns (CheckOperatorKeyExistsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/key/check_exists"
+			body: "*"
+		};
+	}
 }
 
 // Account related messages
@@ -328,5 +336,13 @@ message CheckSubdomainExistsRequest {
 }
 
 message CheckSubdomainExistsResponse {
+	bool exists = 1;
+}
+
+message CheckOperatorKeyExistsRequest {
+	string operator_key = 1;
+}
+
+message CheckOperatorKeyExistsResponse {
 	bool exists = 1;
 }
