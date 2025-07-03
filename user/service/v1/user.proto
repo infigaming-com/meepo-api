@@ -218,28 +218,34 @@ message UserInfo {
 	int64 user_id = 1;
 	// OperatorId.
 	int64 operator_id = 2;
+	// Company OperatorId.
+	int64 company_operator_id = 3;
+	// Retailer OperatorId.
+	int64 retailer_operator_id = 4;
+	// System OperatorId.
+	int64 system_operator_id = 5;
 	// Username.
-	string username = 3;
+	string username = 6;
 	// Email.
-	string email = 4;
+	string email = 7;
 	// Mobile.
-	string mobile = 5;
+	string mobile = 8;
 	// Whether the user is enabled.
-	bool enabled = 6;
+	bool enabled = 9;
 	// First name.
-	string firstname = 7;
+	string firstname = 10;
 	// Last name.
-	string lastname = 8;
+	string lastname = 11;
 	// Nickname
-	string nickname = 9;
+	string nickname = 12;
 	// Avatar
-	string avatar = 10;
+	string avatar = 13;
 	// BanGame
-	bool ban_game = 11;
+	bool ban_game = 14;
 	// BanWithdraw
-	bool ban_withdraw = 12;
+	bool ban_withdraw = 15;
 	// role id
-	int64 role_id = 13;
+	int64 role_id = 16;
 }
 
 // AuthType defines the type of authentication method.

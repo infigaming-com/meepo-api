@@ -8198,6 +8198,15 @@ components:
                 operatorId:
                     type: string
                     description: OperatorId.
+                companyOperatorId:
+                    type: string
+                    description: Company OperatorId.
+                retailerOperatorId:
+                    type: string
+                    description: Retailer OperatorId.
+                systemOperatorId:
+                    type: string
+                    description: System OperatorId.
                 username:
                     type: string
                     description: Username.
