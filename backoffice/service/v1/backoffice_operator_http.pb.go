@@ -37,7 +37,7 @@ func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperator
 	r := s.Route("/")
 	r.POST("/v1/backoffice/operator/list", _BackofficeOperator_ListOperators0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/create", _BackofficeOperator_CreateOperator0_HTTP_Handler(srv))
-	r.GET("/v1/backoffice/operator/current", _BackofficeOperator_GetCurrentOperatorDetails0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/current", _BackofficeOperator_GetCurrentOperatorDetails0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/list/by-parent", _BackofficeOperator_ListOperatorsByParentOperatorId0_HTTP_Handler(srv))
 }
 
@@ -88,6 +88,9 @@ func _BackofficeOperator_CreateOperator0_HTTP_Handler(srv BackofficeOperatorHTTP
 func _BackofficeOperator_GetCurrentOperatorDetails0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetCurrentOperatorDetailsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
@@ -157,10 +160,10 @@ func (c *BackofficeOperatorHTTPClientImpl) CreateOperator(ctx context.Context, i
 func (c *BackofficeOperatorHTTPClientImpl) GetCurrentOperatorDetails(ctx context.Context, in *GetCurrentOperatorDetailsRequest, opts ...http.CallOption) (*GetCurrentOperatorDetailsResponse, error) {
 	var out GetCurrentOperatorDetailsResponse
 	pattern := "/v1/backoffice/operator/current"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorGetCurrentOperatorDetails))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

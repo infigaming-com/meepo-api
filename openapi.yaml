@@ -1008,11 +1008,17 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.CreateOperatorResponse'
     /v1/backoffice/operator/current:
-        get:
+        post:
             tags:
                 - BackofficeOperator
             description: GetCurrentOperatorDetails returns the current operator details.
             operationId: BackofficeOperator_GetCurrentOperatorDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetCurrentOperatorDetailsRequest'
+                required: true
             responses:
                 "200":
                     description: OK
@@ -3093,6 +3099,9 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetBetByIdResponse_Action'
+        api.backoffice.service.v1.GetCurrentOperatorDetailsRequest:
+            type: object
+            properties: {}
         api.backoffice.service.v1.GetCurrentOperatorDetailsResponse:
             type: object
             properties:

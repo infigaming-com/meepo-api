@@ -929,11 +929,11 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\x16request_to_close_count\x18\x06 \x01(\x05R\x13requestToCloseCount\x12'\n" +
 	"\x0fsuspended_count\x18\a \x01(\x05R\x0esuspendedCount\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\t \x01(\x05R\bpageSize2\xf5\x05\n" +
+	"\tpage_size\x18\t \x01(\x05R\bpageSize2\xf8\x05\n" +
 	"\x12BackofficeOperator\x12\x9b\x01\n" +
 	"\rListOperators\x12/.api.backoffice.service.v1.ListOperatorsRequest\x1a0.api.backoffice.service.v1.ListOperatorsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/operator/list\x12\xa0\x01\n" +
-	"\x0eCreateOperator\x120.api.backoffice.service.v1.CreateOperatorRequest\x1a1.api.backoffice.service.v1.CreateOperatorResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/operator/create\x12\xbf\x01\n" +
-	"\x19GetCurrentOperatorDetails\x12;.api.backoffice.service.v1.GetCurrentOperatorDetailsRequest\x1a<.api.backoffice.service.v1.GetCurrentOperatorDetailsResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/v1/backoffice/operator/current\x12\xdb\x01\n" +
+	"\x0eCreateOperator\x120.api.backoffice.service.v1.CreateOperatorRequest\x1a1.api.backoffice.service.v1.CreateOperatorResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/operator/create\x12\xc2\x01\n" +
+	"\x19GetCurrentOperatorDetails\x12;.api.backoffice.service.v1.GetCurrentOperatorDetailsRequest\x1a<.api.backoffice.service.v1.GetCurrentOperatorDetailsResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/operator/current\x12\xdb\x01\n" +
 	"\x1fListOperatorsByParentOperatorId\x12A.api.backoffice.service.v1.ListOperatorsByParentOperatorIdRequest\x1aB.api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/operator/list/by-parentB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
