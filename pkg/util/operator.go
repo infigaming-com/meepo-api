@@ -17,12 +17,11 @@ const (
 	OperatorModeInternalCoOpearation = "internal-co-opearation"
 
 	// Operator status: pending, live, suspended, request_to_close, closed
-	OperatorStatusPending          = "pending"
-	OperatorStatusLive             = "live"
-	OperatorStatusSuspended        = "suspended"
-	OperatorStatusRequestToClose   = "request_to_close"
-	OperatorStatusClosed           = "closed"
-	OperatorStatusRequestToSuspend = "request_to_suspend"
+	OperatorStatusPending        = "pending"
+	OperatorStatusLive           = "live"
+	OperatorStatusSuspended      = "suspended"
+	OperatorStatusRequestToClose = "request_to_close"
+	OperatorStatusClosed         = "closed"
 )
 
 // BuildOperatorHierarchy builds a complete operator hierarchy path based on operatorId and parentIds
