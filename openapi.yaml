@@ -513,6 +513,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardResponse'
+    /v1/backoffice/filestore/operator-static-files/upload:
+        post:
+            tags:
+                - BackofficeFileStore
+            operationId: BackofficeFileStore_UploadOperatorStaticFile
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UploadOperatorStaticFileRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UploadOperatorStaticFileResponse'
     /v1/backoffice/finance/adjustment-configs/delete:
         post:
             tags:
@@ -1575,24 +1593,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListUsersResponse'
-    /v1/backoffice/user/operator-static-files/upload:
-        post:
-            tags:
-                - BackofficeFileStore
-            operationId: BackofficeFileStore_UploadOperatorStaticFile
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UploadOperatorStaticFileRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UploadOperatorStaticFileResponse'
     /v1/backoffice/user/operator-tags/config/get:
         post:
             tags:
