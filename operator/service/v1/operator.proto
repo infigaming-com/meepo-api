@@ -71,6 +71,9 @@ service Operator {
 	rpc ListAdjustmentConfigs(ListAdjustmentConfigsRequest) returns (ListAdjustmentConfigsResponse) {
 	}
 
+	rpc CreateAdjustmentConfig(CreateAdjustmentConfigRequest) returns (CreateAdjustmentConfigResponse) {
+	}
+
 	rpc UpdateAdjustmentConfig(UpdateAdjustmentConfigRequest) returns (UpdateAdjustmentConfigResponse) {
 	}
 
@@ -574,3 +577,10 @@ message ListAdjustmentsResponse {
 	int32 page_size = 5;
 }
 
+message CreateAdjustmentConfigRequest {
+	string item = 1; // Adjustment item name
+	string description = 2; // Description of the adjustment item
+}
+
+message CreateAdjustmentConfigResponse {
+}
