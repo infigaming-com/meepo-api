@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package api.payment.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/payment/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.payment.service.v1";
+
+service PaymentEvent {
+	rpc Event (EventRequest) returns (EventResponse) {}
+}
+
+message EventRequest {
+	string subscription_id = 1;
+	bytes event_data = 2;
+}
+
+message EventResponse {}
+
+message UpdateOperatorBalanceEvent {
+	int64 transaction_id = 1;
+	string transaction_type = 2;
+	int64 real_operator_id = 3;
+	int64 operator_id = 4;
+	int64 company_operator_id = 5;
+	int64 retailer_operator_id = 6;
+	int64 system_operator_id = 7;
+	string operator_type = 8;
+	string currency = 9;
+	string settlement_currency = 10;
+	string reporting_currency = 11;
+	string exchange_rate = 12; // exchange rate of the currency to the settlement currency
+	string amount = 13; // cash amount of the currency
+}
