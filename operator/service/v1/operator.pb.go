@@ -7,7 +7,6 @@
 package v1
 
 import (
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -3846,7 +3845,7 @@ var File_operator_service_v1_operator_proto protoreflect.FileDescriptor
 
 const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\n" +
-	"\"operator/service/v1/operator.proto\x12\x17api.operator.service.v1\x1a\x1cgoogle/api/annotations.proto\"A\n" +
+	"\"operator/service/v1/operator.proto\x12\x17api.operator.service.v1\"A\n" +
 	"\x12AddOperatorRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\"6\n" +

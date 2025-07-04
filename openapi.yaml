@@ -513,6 +513,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardResponse'
+    /v1/backoffice/filestore/operator-static-files/upload:
+        post:
+            tags:
+                - BackofficeFileStore
+            operationId: BackofficeFileStore_UploadOperatorStaticFile
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UploadOperatorStaticFileRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UploadOperatorStaticFileResponse'
     /v1/backoffice/finance/adjustment-configs/create:
         post:
             tags:
@@ -7300,6 +7318,21 @@ components:
         api.backoffice.service.v1.UpdateWalletResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UploadOperatorStaticFileRequest:
+            type: object
+            properties:
+                data:
+                    type: string
+                    format: bytes
+                contentType:
+                    type: string
+                domain:
+                    type: string
+                filePath:
+                    type: string
+        api.backoffice.service.v1.UploadOperatorStaticFileResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.VerifyEmailRequest:
             type: object
             properties:
@@ -8912,6 +8945,7 @@ tags:
     - name: BackofficeAudit
     - name: BackofficeCompany
     - name: BackofficeDashboard
+    - name: BackofficeFileStore
     - name: BackofficeFinance
     - name: BackofficeGame
     - name: BackofficeOperator

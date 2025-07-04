@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+service BackofficeFileStore {
+    rpc UploadOperatorStaticFile(UploadOperatorStaticFileRequest) returns (UploadOperatorStaticFileResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/filestore/operator-static-files/upload"
+			body: "*"
+		};
+	}
+}
+
+message UploadOperatorStaticFileRequest {
+	bytes data = 1;
+	string content_type = 2;
+	string domain = 3;
+	string file_path = 4;
+}
+
+message UploadOperatorStaticFileResponse {}
