@@ -543,7 +543,7 @@ func (m *OperatorDetails) validate(all bool) error {
 
 	// no validation rules for BackofficeSubdomain
 
-	// no validation rules for ChildDomain
+	// no validation rules for BackofficeChildDomain
 
 	// no validation rules for Enabled
 

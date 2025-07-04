@@ -6820,8 +6820,12 @@ components:
                     type: string
                 backofficeSubdomain:
                     type: string
-                childDomain:
+                backofficeChildDomain:
                     type: string
+                domainPool:
+                    type: array
+                    items:
+                        type: string
                 enabled:
                     type: boolean
                 mode:
