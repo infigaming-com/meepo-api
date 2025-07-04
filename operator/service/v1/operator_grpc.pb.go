@@ -39,6 +39,7 @@ const (
 	Operator_ListMonthlyRevenueShare_FullMethodName  = "/api.operator.service.v1.Operator/ListMonthlyRevenueShare"
 	Operator_AddAdjustment_FullMethodName            = "/api.operator.service.v1.Operator/AddAdjustment"
 	Operator_ListAdjustmentConfigs_FullMethodName    = "/api.operator.service.v1.Operator/ListAdjustmentConfigs"
+	Operator_CreateAdjustmentConfig_FullMethodName   = "/api.operator.service.v1.Operator/CreateAdjustmentConfig"
 	Operator_UpdateAdjustmentConfig_FullMethodName   = "/api.operator.service.v1.Operator/UpdateAdjustmentConfig"
 	Operator_DeleteAdjustmentConfig_FullMethodName   = "/api.operator.service.v1.Operator/DeleteAdjustmentConfig"
 )
@@ -72,6 +73,7 @@ type OperatorClient interface {
 	ListMonthlyRevenueShare(ctx context.Context, in *ListMonthlyRevenueShareRequest, opts ...grpc.CallOption) (*ListMonthlyRevenueShareResponse, error)
 	AddAdjustment(ctx context.Context, in *AddAdjustmentRequest, opts ...grpc.CallOption) (*AddAdjustmentResponse, error)
 	ListAdjustmentConfigs(ctx context.Context, in *ListAdjustmentConfigsRequest, opts ...grpc.CallOption) (*ListAdjustmentConfigsResponse, error)
+	CreateAdjustmentConfig(ctx context.Context, in *CreateAdjustmentConfigRequest, opts ...grpc.CallOption) (*CreateAdjustmentConfigResponse, error)
 	UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*UpdateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*DeleteAdjustmentConfigResponse, error)
 }
@@ -284,6 +286,16 @@ func (c *operatorClient) ListAdjustmentConfigs(ctx context.Context, in *ListAdju
 	return out, nil
 }
 
+func (c *operatorClient) CreateAdjustmentConfig(ctx context.Context, in *CreateAdjustmentConfigRequest, opts ...grpc.CallOption) (*CreateAdjustmentConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAdjustmentConfigResponse)
+	err := c.cc.Invoke(ctx, Operator_CreateAdjustmentConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *operatorClient) UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*UpdateAdjustmentConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateAdjustmentConfigResponse)
@@ -333,6 +345,7 @@ type OperatorServer interface {
 	ListMonthlyRevenueShare(context.Context, *ListMonthlyRevenueShareRequest) (*ListMonthlyRevenueShareResponse, error)
 	AddAdjustment(context.Context, *AddAdjustmentRequest) (*AddAdjustmentResponse, error)
 	ListAdjustmentConfigs(context.Context, *ListAdjustmentConfigsRequest) (*ListAdjustmentConfigsResponse, error)
+	CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*CreateAdjustmentConfigResponse, error)
 	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*UpdateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
 	mustEmbedUnimplementedOperatorServer()
@@ -404,6 +417,9 @@ func (UnimplementedOperatorServer) AddAdjustment(context.Context, *AddAdjustment
 }
 func (UnimplementedOperatorServer) ListAdjustmentConfigs(context.Context, *ListAdjustmentConfigsRequest) (*ListAdjustmentConfigsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAdjustmentConfigs not implemented")
+}
+func (UnimplementedOperatorServer) CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*CreateAdjustmentConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAdjustmentConfig not implemented")
 }
 func (UnimplementedOperatorServer) UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*UpdateAdjustmentConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAdjustmentConfig not implemented")
@@ -792,6 +808,24 @@ func _Operator_ListAdjustmentConfigs_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_CreateAdjustmentConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAdjustmentConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).CreateAdjustmentConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_CreateAdjustmentConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).CreateAdjustmentConfig(ctx, req.(*CreateAdjustmentConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Operator_UpdateAdjustmentConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateAdjustmentConfigRequest)
 	if err := dec(in); err != nil {
@@ -914,6 +948,10 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAdjustmentConfigs",
 			Handler:    _Operator_ListAdjustmentConfigs_Handler,
+		},
+		{
+			MethodName: "CreateAdjustmentConfig",
+			Handler:    _Operator_CreateAdjustmentConfig_Handler,
 		},
 		{
 			MethodName: "UpdateAdjustmentConfig",
