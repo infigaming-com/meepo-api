@@ -109,7 +109,7 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_event_proto_rawDescGZIP(), []int{1}
 }
 
-type UpdateOperatorBalanceEvent struct {
+type OperatorPaymentTransactionEvent struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId      int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	TransactionType    string                 `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
@@ -128,20 +128,20 @@ type UpdateOperatorBalanceEvent struct {
 	sizeCache          protoimpl.SizeCache
 }
 
-func (x *UpdateOperatorBalanceEvent) Reset() {
-	*x = UpdateOperatorBalanceEvent{}
+func (x *OperatorPaymentTransactionEvent) Reset() {
+	*x = OperatorPaymentTransactionEvent{}
 	mi := &file_payment_service_v1_payment_event_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateOperatorBalanceEvent) String() string {
+func (x *OperatorPaymentTransactionEvent) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateOperatorBalanceEvent) ProtoMessage() {}
+func (*OperatorPaymentTransactionEvent) ProtoMessage() {}
 
-func (x *UpdateOperatorBalanceEvent) ProtoReflect() protoreflect.Message {
+func (x *OperatorPaymentTransactionEvent) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_service_v1_payment_event_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -153,96 +153,96 @@ func (x *UpdateOperatorBalanceEvent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateOperatorBalanceEvent.ProtoReflect.Descriptor instead.
-func (*UpdateOperatorBalanceEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use OperatorPaymentTransactionEvent.ProtoReflect.Descriptor instead.
+func (*OperatorPaymentTransactionEvent) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_event_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *UpdateOperatorBalanceEvent) GetTransactionId() int64 {
+func (x *OperatorPaymentTransactionEvent) GetTransactionId() int64 {
 	if x != nil {
 		return x.TransactionId
 	}
 	return 0
 }
 
-func (x *UpdateOperatorBalanceEvent) GetTransactionType() string {
+func (x *OperatorPaymentTransactionEvent) GetTransactionType() string {
 	if x != nil {
 		return x.TransactionType
 	}
 	return ""
 }
 
-func (x *UpdateOperatorBalanceEvent) GetRealOperatorId() int64 {
+func (x *OperatorPaymentTransactionEvent) GetRealOperatorId() int64 {
 	if x != nil {
 		return x.RealOperatorId
 	}
 	return 0
 }
 
-func (x *UpdateOperatorBalanceEvent) GetOperatorId() int64 {
+func (x *OperatorPaymentTransactionEvent) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
 	return 0
 }
 
-func (x *UpdateOperatorBalanceEvent) GetCompanyOperatorId() int64 {
+func (x *OperatorPaymentTransactionEvent) GetCompanyOperatorId() int64 {
 	if x != nil {
 		return x.CompanyOperatorId
 	}
 	return 0
 }
 
-func (x *UpdateOperatorBalanceEvent) GetRetailerOperatorId() int64 {
+func (x *OperatorPaymentTransactionEvent) GetRetailerOperatorId() int64 {
 	if x != nil {
 		return x.RetailerOperatorId
 	}
 	return 0
 }
 
-func (x *UpdateOperatorBalanceEvent) GetSystemOperatorId() int64 {
+func (x *OperatorPaymentTransactionEvent) GetSystemOperatorId() int64 {
 	if x != nil {
 		return x.SystemOperatorId
 	}
 	return 0
 }
 
-func (x *UpdateOperatorBalanceEvent) GetOperatorType() string {
+func (x *OperatorPaymentTransactionEvent) GetOperatorType() string {
 	if x != nil {
 		return x.OperatorType
 	}
 	return ""
 }
 
-func (x *UpdateOperatorBalanceEvent) GetCurrency() string {
+func (x *OperatorPaymentTransactionEvent) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *UpdateOperatorBalanceEvent) GetSettlementCurrency() string {
+func (x *OperatorPaymentTransactionEvent) GetSettlementCurrency() string {
 	if x != nil {
 		return x.SettlementCurrency
 	}
 	return ""
 }
 
-func (x *UpdateOperatorBalanceEvent) GetReportingCurrency() string {
+func (x *OperatorPaymentTransactionEvent) GetReportingCurrency() string {
 	if x != nil {
 		return x.ReportingCurrency
 	}
 	return ""
 }
 
-func (x *UpdateOperatorBalanceEvent) GetExchangeRate() string {
+func (x *OperatorPaymentTransactionEvent) GetExchangeRate() string {
 	if x != nil {
 		return x.ExchangeRate
 	}
 	return ""
 }
 
-func (x *UpdateOperatorBalanceEvent) GetAmount() string {
+func (x *OperatorPaymentTransactionEvent) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
@@ -258,8 +258,8 @@ const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse\"\xa7\x04\n" +
-	"\x1aUpdateOperatorBalanceEvent\x12%\n" +
+	"\rEventResponse\"\xac\x04\n" +
+	"\x1fOperatorPaymentTransactionEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
 	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12(\n" +
 	"\x10real_operator_id\x18\x03 \x01(\x03R\x0erealOperatorId\x12\x1f\n" +
@@ -293,9 +293,9 @@ func file_payment_service_v1_payment_event_proto_rawDescGZIP() []byte {
 
 var file_payment_service_v1_payment_event_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_payment_service_v1_payment_event_proto_goTypes = []any{
-	(*EventRequest)(nil),               // 0: api.payment.service.v1.EventRequest
-	(*EventResponse)(nil),              // 1: api.payment.service.v1.EventResponse
-	(*UpdateOperatorBalanceEvent)(nil), // 2: api.payment.service.v1.UpdateOperatorBalanceEvent
+	(*EventRequest)(nil),                    // 0: api.payment.service.v1.EventRequest
+	(*EventResponse)(nil),                   // 1: api.payment.service.v1.EventResponse
+	(*OperatorPaymentTransactionEvent)(nil), // 2: api.payment.service.v1.OperatorPaymentTransactionEvent
 }
 var file_payment_service_v1_payment_event_proto_depIdxs = []int32{
 	0, // 0: api.payment.service.v1.PaymentEvent.Event:input_type -> api.payment.service.v1.EventRequest

@@ -17,7 +17,7 @@ message EventRequest {
 
 message EventResponse {}
 
-message UpdateOperatorBalanceEvent {
+message OperatorPaymentTransactionEvent {
 	int64 transaction_id = 1;
 	string transaction_type = 2;
 	int64 real_operator_id = 3;
