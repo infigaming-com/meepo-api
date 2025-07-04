@@ -31,7 +31,12 @@ message AddUserEvent {
 
 // AddOperatorEvent is emitted when a operator is created.
 message AddOperatorEvent {
-	int64 operator_id = 1;
-	string operator_type = 2;
-	string operator_name = 3;
+	int64 real_operator_id = 1;
+	int64 operator_id = 2;
+	int64 company_operator_id = 3;
+	int64 retailer_operator_id = 4;
+	int64 system_operator_id = 5;
+	string operator_type = 6;
+	string operator_name = 7;
+	string reporting_currency = 8;
 }
