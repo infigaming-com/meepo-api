@@ -27,6 +27,7 @@ const (
 	BackofficeFinance_ListMonthlyRevenueShare_FullMethodName  = "/api.backoffice.service.v1.BackofficeFinance/ListMonthlyRevenueShare"
 	BackofficeFinance_AddAdjustment_FullMethodName            = "/api.backoffice.service.v1.BackofficeFinance/AddAdjustment"
 	BackofficeFinance_ListAdjustmentConfigs_FullMethodName    = "/api.backoffice.service.v1.BackofficeFinance/ListAdjustmentConfigs"
+	BackofficeFinance_CreateAdjustmentConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeFinance/CreateAdjustmentConfig"
 	BackofficeFinance_UpdateAdjustmentConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeFinance/UpdateAdjustmentConfig"
 	BackofficeFinance_DeleteAdjustmentConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeFinance/DeleteAdjustmentConfig"
 )
@@ -43,6 +44,7 @@ type BackofficeFinanceClient interface {
 	ListMonthlyRevenueShare(ctx context.Context, in *ListMonthlyRevenueShareRequest, opts ...grpc.CallOption) (*ListMonthlyRevenueShareResponse, error)
 	AddAdjustment(ctx context.Context, in *AddAdjustmentRequest, opts ...grpc.CallOption) (*AddAdjustmentResponse, error)
 	ListAdjustmentConfigs(ctx context.Context, in *ListAdjustmentConfigsRequest, opts ...grpc.CallOption) (*ListAdjustmentConfigsResponse, error)
+	CreateAdjustmentConfig(ctx context.Context, in *CreateAdjustmentConfigRequest, opts ...grpc.CallOption) (*CreateAdjustmentConfigResponse, error)
 	UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*UpdateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*DeleteAdjustmentConfigResponse, error)
 }
@@ -135,6 +137,16 @@ func (c *backofficeFinanceClient) ListAdjustmentConfigs(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *backofficeFinanceClient) CreateAdjustmentConfig(ctx context.Context, in *CreateAdjustmentConfigRequest, opts ...grpc.CallOption) (*CreateAdjustmentConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAdjustmentConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_CreateAdjustmentConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeFinanceClient) UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*UpdateAdjustmentConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateAdjustmentConfigResponse)
@@ -167,6 +179,7 @@ type BackofficeFinanceServer interface {
 	ListMonthlyRevenueShare(context.Context, *ListMonthlyRevenueShareRequest) (*ListMonthlyRevenueShareResponse, error)
 	AddAdjustment(context.Context, *AddAdjustmentRequest) (*AddAdjustmentResponse, error)
 	ListAdjustmentConfigs(context.Context, *ListAdjustmentConfigsRequest) (*ListAdjustmentConfigsResponse, error)
+	CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*CreateAdjustmentConfigResponse, error)
 	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*UpdateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
 	mustEmbedUnimplementedBackofficeFinanceServer()
@@ -202,6 +215,9 @@ func (UnimplementedBackofficeFinanceServer) AddAdjustment(context.Context, *AddA
 }
 func (UnimplementedBackofficeFinanceServer) ListAdjustmentConfigs(context.Context, *ListAdjustmentConfigsRequest) (*ListAdjustmentConfigsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAdjustmentConfigs not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*CreateAdjustmentConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAdjustmentConfig not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*UpdateAdjustmentConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAdjustmentConfig not implemented")
@@ -374,6 +390,24 @@ func _BackofficeFinance_ListAdjustmentConfigs_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeFinance_CreateAdjustmentConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAdjustmentConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).CreateAdjustmentConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_CreateAdjustmentConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).CreateAdjustmentConfig(ctx, req.(*CreateAdjustmentConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeFinance_UpdateAdjustmentConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateAdjustmentConfigRequest)
 	if err := dec(in); err != nil {
@@ -448,6 +482,10 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAdjustmentConfigs",
 			Handler:    _BackofficeFinance_ListAdjustmentConfigs_Handler,
+		},
+		{
+			MethodName: "CreateAdjustmentConfig",
+			Handler:    _BackofficeFinance_CreateAdjustmentConfig_Handler,
 		},
 		{
 			MethodName: "UpdateAdjustmentConfig",

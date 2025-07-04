@@ -2557,6 +2557,216 @@ var _ interface {
 	ErrorName() string
 } = ListAdjustmentsResponseValidationError{}
 
+// Validate checks the field values on CreateAdjustmentConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateAdjustmentConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateAdjustmentConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CreateAdjustmentConfigRequestMultiError, or nil if none found.
+func (m *CreateAdjustmentConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateAdjustmentConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Item
+
+	// no validation rules for Description
+
+	if len(errors) > 0 {
+		return CreateAdjustmentConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateAdjustmentConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by CreateAdjustmentConfigRequest.ValidateAll()
+// if the designated constraints aren't met.
+type CreateAdjustmentConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateAdjustmentConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateAdjustmentConfigRequestMultiError) AllErrors() []error { return m }
+
+// CreateAdjustmentConfigRequestValidationError is the validation error
+// returned by CreateAdjustmentConfigRequest.Validate if the designated
+// constraints aren't met.
+type CreateAdjustmentConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateAdjustmentConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateAdjustmentConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateAdjustmentConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateAdjustmentConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateAdjustmentConfigRequestValidationError) ErrorName() string {
+	return "CreateAdjustmentConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateAdjustmentConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateAdjustmentConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateAdjustmentConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateAdjustmentConfigRequestValidationError{}
+
+// Validate checks the field values on CreateAdjustmentConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateAdjustmentConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateAdjustmentConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CreateAdjustmentConfigResponseMultiError, or nil if none found.
+func (m *CreateAdjustmentConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateAdjustmentConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return CreateAdjustmentConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateAdjustmentConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by CreateAdjustmentConfigResponse.ValidateAll()
+// if the designated constraints aren't met.
+type CreateAdjustmentConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateAdjustmentConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateAdjustmentConfigResponseMultiError) AllErrors() []error { return m }
+
+// CreateAdjustmentConfigResponseValidationError is the validation error
+// returned by CreateAdjustmentConfigResponse.Validate if the designated
+// constraints aren't met.
+type CreateAdjustmentConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateAdjustmentConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateAdjustmentConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateAdjustmentConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateAdjustmentConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateAdjustmentConfigResponseValidationError) ErrorName() string {
+	return "CreateAdjustmentConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateAdjustmentConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateAdjustmentConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateAdjustmentConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateAdjustmentConfigResponseValidationError{}
+
 // Validate checks the field values on ListInvoicesResponse_Invoice with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

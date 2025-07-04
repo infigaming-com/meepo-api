@@ -66,6 +66,13 @@ service BackofficeFinance {
 		};
 	}
 
+	rpc CreateAdjustmentConfig(CreateAdjustmentConfigRequest) returns (CreateAdjustmentConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/adjustment-configs/create"
+			body: "*"
+		};
+	}
+
 	rpc UpdateAdjustmentConfig(UpdateAdjustmentConfigRequest) returns (UpdateAdjustmentConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/finance/adjustment-configs/update"
@@ -452,4 +459,12 @@ message ListAdjustmentsResponse {
 	int32 total_count = 3;
 	int32 page = 4;
 	int32 page_size = 5;
+}
+
+message CreateAdjustmentConfigRequest {
+	string item = 1; // Adjustment item name
+	string description = 2; // Description of the adjustment item
+}
+
+message CreateAdjustmentConfigResponse {
 }
