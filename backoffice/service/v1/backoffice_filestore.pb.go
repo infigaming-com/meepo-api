@@ -136,9 +136,9 @@ const file_backoffice_service_v1_backoffice_filestore_proto_rawDesc = "" +
 	"\fcontent_type\x18\x02 \x01(\tR\vcontentType\x12\x16\n" +
 	"\x06domain\x18\x03 \x01(\tR\x06domain\x12\x1b\n" +
 	"\tfile_path\x18\x04 \x01(\tR\bfilePath\"\"\n" +
-	" UploadOperatorStaticFileResponse2\xe8\x01\n" +
-	"\x13BackofficeFileStore\x12\xd0\x01\n" +
-	"\x18UploadOperatorStaticFile\x12:.api.backoffice.service.v1.UploadOperatorStaticFileRequest\x1a;.api.backoffice.service.v1.UploadOperatorStaticFileResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/user/operator-static-files/uploadB[\n" +
+	" UploadOperatorStaticFileResponse2\xed\x01\n" +
+	"\x13BackofficeFileStore\x12\xd5\x01\n" +
+	"\x18UploadOperatorStaticFile\x12:.api.backoffice.service.v1.UploadOperatorStaticFileRequest\x1a;.api.backoffice.service.v1.UploadOperatorStaticFileResponse\"@\x82\xd3\xe4\x93\x02::\x01*\"5/v1/backoffice/filestore/operator-static-files/uploadB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

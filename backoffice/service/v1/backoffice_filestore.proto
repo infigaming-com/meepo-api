@@ -11,7 +11,7 @@ option java_package = "api.backoffice.service.v1";
 service BackofficeFileStore {
     rpc UploadOperatorStaticFile(UploadOperatorStaticFileRequest) returns (UploadOperatorStaticFileResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/user/operator-static-files/upload"
+			post: "/v1/backoffice/filestore/operator-static-files/upload"
 			body: "*"
 		};
 	}
