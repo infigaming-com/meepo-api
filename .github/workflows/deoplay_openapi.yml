@@ -1,28 +1,19 @@
 name: Deploy API Documentation to GCS
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'openapi.yaml'
-      - 'openapi.yml'
-      - 'docs/**'
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
     paths:
       - 'openapi.yaml'
       - 'openapi.yml'
       - 'docs/**'
-  workflow_dispatch:
-    inputs:
-      openapi_file:
-        description: 'OpenAPI specification file path'
-        required: false
-        default: 'openapi.yaml'
+  push:
+    branches:
+      - main
 
 env:
   BUCKET_NAME: 'speedix-meepo-api-docs'
-  OPENAPI_FILE: ${{ github.event.inputs.openapi_file || 'openapi.yaml' }}
 
 jobs:
   deploy-docs:
@@ -40,12 +31,11 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20'
-        cache: 'npm'
     
     - name: Generate Redoc documentation
       run: |
         echo "生成Redoc文档..."
-        npx @redocly/cli build-docs "$OPENAPI_FILE" --output index.html
+        npx @redocly/cli build-docs "openapi.yaml" --output index.html
         
         # 验证生成的文件
         if [ ! -f "index.html" ]; then
@@ -56,10 +46,16 @@ jobs:
         echo "成功生成文档: index.html"
         echo "文件大小: $(du -h index.html)"
     
-    - name: Authenticate to Google Cloud
-      uses: google-github-actions/auth@v2
+    - name: "Login to GKE"
+      uses: "google-github-actions/auth@v2"
       with:
-        credentials_json: "${{ secrets.GCR_SA_KEY }}"
+        credentials_json: "${{ secrets.GKE_SA_KEY }}"
+
+    - name: "Get GKE Credentials"
+      uses: "google-github-actions/get-gke-credentials@v2"
+      with:
+        cluster_name: "aggregator-dev"
+        location: "europe-west1"
 
     - name: Setup Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v2
@@ -100,25 +96,5 @@ jobs:
     
     - name: Output deployment info
       run: |
-        echo "## 🚀 部署完成!" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "- **存储桶**: gs://$BUCKET_NAME" >> $GITHUB_STEP_SUMMARY
-        echo "- **访问链接**: https://storage.googleapis.com/$BUCKET_NAME/index.html" >> $GITHUB_STEP_SUMMARY
-        echo "- **OpenAPI文件**: $OPENAPI_FILE" >> $GITHUB_STEP_SUMMARY
-        echo "- **部署时间**: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "---" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "部署完成!"
-        echo "访问链接: https://storage.googleapis.com/$BUCKET_NAME/index.html"
-    
-    # 可选: 通知部署结果
-    - name: Notify deployment status
-      if: always()
-      run: |
-        if [ "${{ job.status }}" == "success" ]; then
-          echo "✅ API文档部署成功"
-          echo "📖 访问地址: https://storage.googleapis.com/$BUCKET_NAME/index.html"
-        else
-          echo "❌ API文档部署失败"
-        fi
+        echo "✅ API文档部署成功"
+        echo "📖 访问地址: https://storage.googleapis.com/$BUCKET_NAME/index.html"
