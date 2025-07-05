@@ -3380,11 +3380,13 @@ func (x *OperatorTransferRequest) GetCashAmount() string {
 }
 
 type OperatorTransferResponse struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	OperatorCash       string                 `protobuf:"bytes,1,opt,name=operator_cash,json=operatorCash,proto3" json:"operator_cash,omitempty"`
-	TargetOperatorCash string                 `protobuf:"bytes,2,opt,name=target_operator_cash,json=targetOperatorCash,proto3" json:"target_operator_cash,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorCash                  string                 `protobuf:"bytes,1,opt,name=operator_cash,json=operatorCash,proto3" json:"operator_cash,omitempty"`
+	OperatorBalanceCurrency       string                 `protobuf:"bytes,2,opt,name=operator_balance_currency,json=operatorBalanceCurrency,proto3" json:"operator_balance_currency,omitempty"`
+	TargetOperatorCash            string                 `protobuf:"bytes,3,opt,name=target_operator_cash,json=targetOperatorCash,proto3" json:"target_operator_cash,omitempty"`
+	TargetOperatorBalanceCurrency string                 `protobuf:"bytes,4,opt,name=target_operator_balance_currency,json=targetOperatorBalanceCurrency,proto3" json:"target_operator_balance_currency,omitempty"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *OperatorTransferResponse) Reset() {
@@ -3424,9 +3426,23 @@ func (x *OperatorTransferResponse) GetOperatorCash() string {
 	return ""
 }
 
+func (x *OperatorTransferResponse) GetOperatorBalanceCurrency() string {
+	if x != nil {
+		return x.OperatorBalanceCurrency
+	}
+	return ""
+}
+
 func (x *OperatorTransferResponse) GetTargetOperatorCash() string {
 	if x != nil {
 		return x.TargetOperatorCash
+	}
+	return ""
+}
+
+func (x *OperatorTransferResponse) GetTargetOperatorBalanceCurrency() string {
+	if x != nil {
+		return x.TargetOperatorBalanceCurrency
 	}
 	return ""
 }
@@ -5006,10 +5022,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\rexchange_rate\x18\v \x01(\tR\fexchangeRate\x12)\n" +
 	"\x10transaction_type\x18\f \x01(\tR\x0ftransactionType\x12\x1f\n" +
 	"\vcash_amount\x18\r \x01(\tR\n" +
-	"cashAmount\"q\n" +
+	"cashAmount\"\xf6\x01\n" +
 	"\x18OperatorTransferResponse\x12#\n" +
-	"\roperator_cash\x18\x01 \x01(\tR\foperatorCash\x120\n" +
-	"\x14target_operator_cash\x18\x02 \x01(\tR\x12targetOperatorCash2\x98\x17\n" +
+	"\roperator_cash\x18\x01 \x01(\tR\foperatorCash\x12:\n" +
+	"\x19operator_balance_currency\x18\x02 \x01(\tR\x17operatorBalanceCurrency\x120\n" +
+	"\x14target_operator_cash\x18\x03 \x01(\tR\x12targetOperatorCash\x12G\n" +
+	" target_operator_balance_currency\x18\x04 \x01(\tR\x1dtargetOperatorBalanceCurrency2\x98\x17\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12W\n" +

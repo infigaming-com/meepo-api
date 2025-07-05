@@ -606,5 +606,7 @@ message OperatorTransferRequest {
 
 message OperatorTransferResponse {
 	string operator_cash = 1;
-	string target_operator_cash = 2;
+	string operator_balance_currency = 2;
+	string target_operator_cash = 3;
+	string target_operator_balance_currency = 4;
 }

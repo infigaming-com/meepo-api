@@ -82,6 +82,7 @@ type WalletClient interface {
 	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
 	UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error)
 	UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error)
+	// Transfer cash from operator to company operator
 	OperatorTransfer(ctx context.Context, in *OperatorTransferRequest, opts ...grpc.CallOption) (*OperatorTransferResponse, error)
 }
 
@@ -370,6 +371,7 @@ type WalletServer interface {
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
 	UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error)
+	// Transfer cash from operator to company operator
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }

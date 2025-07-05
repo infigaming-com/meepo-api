@@ -6055,7 +6055,11 @@ func (m *OperatorTransferResponse) validate(all bool) error {
 
 	// no validation rules for OperatorCash
 
+	// no validation rules for OperatorBalanceCurrency
+
 	// no validation rules for TargetOperatorCash
+
+	// no validation rules for TargetOperatorBalanceCurrency
 
 	if len(errors) > 0 {
 		return OperatorTransferResponseMultiError(errors)
