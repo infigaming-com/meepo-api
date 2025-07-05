@@ -42,6 +42,7 @@ const (
 	Wallet_ListCurrencies_FullMethodName                      = "/api.wallet.service.v1.Wallet/ListCurrencies"
 	Wallet_UpdateOperatorCurrency_FullMethodName              = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrency"
 	Wallet_UpdateUserCurrency_FullMethodName                  = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
+	Wallet_OperatorTransfer_FullMethodName                    = "/api.wallet.service.v1.Wallet/OperatorTransfer"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -81,6 +82,7 @@ type WalletClient interface {
 	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
 	UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error)
 	UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error)
+	OperatorTransfer(ctx context.Context, in *OperatorTransferRequest, opts ...grpc.CallOption) (*OperatorTransferResponse, error)
 }
 
 type walletClient struct {
@@ -321,6 +323,16 @@ func (c *walletClient) UpdateUserCurrency(ctx context.Context, in *UpdateUserCur
 	return out, nil
 }
 
+func (c *walletClient) OperatorTransfer(ctx context.Context, in *OperatorTransferRequest, opts ...grpc.CallOption) (*OperatorTransferResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OperatorTransferResponse)
+	err := c.cc.Invoke(ctx, Wallet_OperatorTransfer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -358,6 +370,7 @@ type WalletServer interface {
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
 	UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error)
+	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -436,6 +449,9 @@ func (UnimplementedWalletServer) UpdateOperatorCurrency(context.Context, *Update
 }
 func (UnimplementedWalletServer) UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserCurrency not implemented")
+}
+func (UnimplementedWalletServer) OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OperatorTransfer not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -872,6 +888,24 @@ func _Wallet_UpdateUserCurrency_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_OperatorTransfer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OperatorTransferRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).OperatorTransfer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_OperatorTransfer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).OperatorTransfer(ctx, req.(*OperatorTransferRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -970,6 +1004,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUserCurrency",
 			Handler:    _Wallet_UpdateUserCurrency_Handler,
+		},
+		{
+			MethodName: "OperatorTransfer",
+			Handler:    _Wallet_OperatorTransfer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

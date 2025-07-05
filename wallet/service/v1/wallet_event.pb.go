@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -110,20 +111,17 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 }
 
 type OperatorBalanceUpdateEvent struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId      int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	TransactionType    string                 `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	RealOperatorId     int64                  `protobuf:"varint,3,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
-	OperatorId         int64                  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	CompanyOperatorId  int64                  `protobuf:"varint,5,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
-	RetailerOperatorId int64                  `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
-	SystemOperatorId   int64                  `protobuf:"varint,7,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
-	OperatorType       string                 `protobuf:"bytes,8,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
-	SettlementCurrency string                 `protobuf:"bytes,9,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
-	BeforeBalance      string                 `protobuf:"bytes,10,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	AfterBalance       string                 `protobuf:"bytes,11,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	Amount             string                 `protobuf:"bytes,12,opt,name=amount,proto3" json:"amount,omitempty"`
-	CreatedAt          int64                  `protobuf:"varint,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	state              protoimpl.MessageState  `protogen:"open.v1"`
+	TransactionId      int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	TransactionType    string                  `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	RealOperatorId     int64                   `protobuf:"varint,3,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
+	OperatorContext    *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorType       string                  `protobuf:"bytes,5,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	SettlementCurrency string                  `protobuf:"bytes,6,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	BeforeBalance      string                  `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	AfterBalance       string                  `protobuf:"bytes,8,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	Amount             string                  `protobuf:"bytes,9,opt,name=amount,proto3" json:"amount,omitempty"`
+	CreatedAt          int64                   `protobuf:"varint,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -179,32 +177,11 @@ func (x *OperatorBalanceUpdateEvent) GetRealOperatorId() int64 {
 	return 0
 }
 
-func (x *OperatorBalanceUpdateEvent) GetOperatorId() int64 {
+func (x *OperatorBalanceUpdateEvent) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorId
+		return x.OperatorContext
 	}
-	return 0
-}
-
-func (x *OperatorBalanceUpdateEvent) GetCompanyOperatorId() int64 {
-	if x != nil {
-		return x.CompanyOperatorId
-	}
-	return 0
-}
-
-func (x *OperatorBalanceUpdateEvent) GetRetailerOperatorId() int64 {
-	if x != nil {
-		return x.RetailerOperatorId
-	}
-	return 0
-}
-
-func (x *OperatorBalanceUpdateEvent) GetSystemOperatorId() int64 {
-	if x != nil {
-		return x.SystemOperatorId
-	}
-	return 0
+	return nil
 }
 
 func (x *OperatorBalanceUpdateEvent) GetOperatorType() string {
@@ -253,29 +230,25 @@ var File_wallet_service_v1_wallet_event_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/wallet_event.proto\x12\x15api.wallet.service.v1\"V\n" +
+	"$wallet/service/v1/wallet_event.proto\x12\x15api.wallet.service.v1\x1a\x13common/common.proto\"V\n" +
 	"\fEventRequest\x12'\n" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse\"\xa2\x04\n" +
+	"\rEventResponse\"\xb9\x03\n" +
 	"\x1aOperatorBalanceUpdateEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
 	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12(\n" +
-	"\x10real_operator_id\x18\x03 \x01(\x03R\x0erealOperatorId\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\x03R\n" +
-	"operatorId\x12.\n" +
-	"\x13company_operator_id\x18\x05 \x01(\x03R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18\x06 \x01(\x03R\x12retailerOperatorId\x12,\n" +
-	"\x12system_operator_id\x18\a \x01(\x03R\x10systemOperatorId\x12#\n" +
-	"\roperator_type\x18\b \x01(\tR\foperatorType\x12/\n" +
-	"\x13settlement_currency\x18\t \x01(\tR\x12settlementCurrency\x12%\n" +
-	"\x0ebefore_balance\x18\n" +
-	" \x01(\tR\rbeforeBalance\x12#\n" +
-	"\rafter_balance\x18\v \x01(\tR\fafterBalance\x12\x16\n" +
-	"\x06amount\x18\f \x01(\tR\x06amount\x12\x1d\n" +
+	"\x10real_operator_id\x18\x03 \x01(\x03R\x0erealOperatorId\x12F\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12#\n" +
+	"\roperator_type\x18\x05 \x01(\tR\foperatorType\x12/\n" +
+	"\x13settlement_currency\x18\x06 \x01(\tR\x12settlementCurrency\x12%\n" +
+	"\x0ebefore_balance\x18\a \x01(\tR\rbeforeBalance\x12#\n" +
+	"\rafter_balance\x18\b \x01(\tR\fafterBalance\x12\x16\n" +
+	"\x06amount\x18\t \x01(\tR\x06amount\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\r \x01(\x03R\tcreatedAt2c\n" +
+	"created_at\x18\n" +
+	" \x01(\x03R\tcreatedAt2c\n" +
 	"\vWalletEvent\x12T\n" +
 	"\x05Event\x12#.api.wallet.service.v1.EventRequest\x1a$.api.wallet.service.v1.EventResponse\"\x00BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
@@ -297,15 +270,17 @@ var file_wallet_service_v1_wallet_event_proto_goTypes = []any{
 	(*EventRequest)(nil),               // 0: api.wallet.service.v1.EventRequest
 	(*EventResponse)(nil),              // 1: api.wallet.service.v1.EventResponse
 	(*OperatorBalanceUpdateEvent)(nil), // 2: api.wallet.service.v1.OperatorBalanceUpdateEvent
+	(*common.OperatorContext)(nil),     // 3: api.common.OperatorContext
 }
 var file_wallet_service_v1_wallet_event_proto_depIdxs = []int32{
-	0, // 0: api.wallet.service.v1.WalletEvent.Event:input_type -> api.wallet.service.v1.EventRequest
-	1, // 1: api.wallet.service.v1.WalletEvent.Event:output_type -> api.wallet.service.v1.EventResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: api.wallet.service.v1.OperatorBalanceUpdateEvent.operator_context:type_name -> api.common.OperatorContext
+	0, // 1: api.wallet.service.v1.WalletEvent.Event:input_type -> api.wallet.service.v1.EventRequest
+	1, // 2: api.wallet.service.v1.WalletEvent.Event:output_type -> api.wallet.service.v1.EventResponse
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_wallet_event_proto_init() }

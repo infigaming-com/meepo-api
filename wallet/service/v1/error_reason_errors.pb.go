@@ -742,3 +742,27 @@ func IsCheckBalanceTransactionIdempotencyFailed(err error) bool {
 func ErrorCheckBalanceTransactionIdempotencyFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInsufficientOperatorBalance(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INSUFFICIENT_OPERATOR_BALANCE.String() && e.Code == 500
+}
+
+func ErrorInsufficientOperatorBalance(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INSUFFICIENT_OPERATOR_BALANCE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPublishOperatorBalanceUpdateEventFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PUBLISH_OPERATOR_BALANCE_UPDATE_EVENT_FAILED.String() && e.Code == 500
+}
+
+func ErrorPublishOperatorBalanceUpdateEventFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PUBLISH_OPERATOR_BALANCE_UPDATE_EVENT_FAILED.String(), fmt.Sprintf(format, args...))
+}

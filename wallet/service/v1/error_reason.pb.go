@@ -86,6 +86,8 @@ const (
 	ErrorReason_ADD_OPERATOR_BALANCE_TRANSACTION_FAILED                         ErrorReason = 30058
 	ErrorReason_UPDATE_OPERATOR_BALANCE_FAILED                                  ErrorReason = 30059
 	ErrorReason_CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED                    ErrorReason = 30060
+	ErrorReason_INSUFFICIENT_OPERATOR_BALANCE                                   ErrorReason = 30061
+	ErrorReason_PUBLISH_OPERATOR_BALANCE_UPDATE_EVENT_FAILED                    ErrorReason = 30062
 )
 
 // Enum value maps for ErrorReason.
@@ -152,6 +154,8 @@ var (
 		30058: "ADD_OPERATOR_BALANCE_TRANSACTION_FAILED",
 		30059: "UPDATE_OPERATOR_BALANCE_FAILED",
 		30060: "CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED",
+		30061: "INSUFFICIENT_OPERATOR_BALANCE",
+		30062: "PUBLISH_OPERATOR_BALANCE_UPDATE_EVENT_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -215,6 +219,8 @@ var (
 		"ADD_OPERATOR_BALANCE_TRANSACTION_FAILED":                         30058,
 		"UPDATE_OPERATOR_BALANCE_FAILED":                                  30059,
 		"CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED":                    30060,
+		"INSUFFICIENT_OPERATOR_BALANCE":                                   30061,
+		"PUBLISH_OPERATOR_BALANCE_UPDATE_EVENT_FAILED":                    30062,
 	}
 )
 
@@ -249,7 +255,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x85\x12\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xde\x12\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -311,7 +317,9 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"/GENERATE_OPERATOR_BALANCE_TRANSACTION_ID_FAILED\x10\xe9\xea\x01\x12-\n" +
 	"'ADD_OPERATOR_BALANCE_TRANSACTION_FAILED\x10\xea\xea\x01\x12$\n" +
 	"\x1eUPDATE_OPERATOR_BALANCE_FAILED\x10\xeb\xea\x01\x122\n" +
-	",CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED\x10\xec\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	",CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED\x10\xec\xea\x01\x12#\n" +
+	"\x1dINSUFFICIENT_OPERATOR_BALANCE\x10\xed\xea\x01\x122\n" +
+	",PUBLISH_OPERATOR_BALANCE_UPDATE_EVENT_FAILED\x10\xee\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
