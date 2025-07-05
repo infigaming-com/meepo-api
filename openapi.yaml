@@ -7415,6 +7415,17 @@ components:
                 decimalPlaces:
                     type: integer
                     format: int32
+        api.common.OperatorContext:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
         api.game.service.v1.Action:
             type: object
             properties:
@@ -8181,17 +8192,6 @@ components:
                     type: string
                     description: The OAuth token received from the provider.
             description: OAuthRequest contains the information needed for OAuth authentication.
-        api.user.service.v1.OperatorContext:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                systemOperatorId:
-                    type: string
         api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
@@ -8237,7 +8237,7 @@ components:
                 email:
                     type: string
                 operatorContext:
-                    $ref: '#/components/schemas/api.user.service.v1.OperatorContext'
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 userId:
                     type: string
         api.user.service.v1.SendEmailVerificationCodeResponse:

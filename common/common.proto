@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package api.common;
+
+option go_package = "github.com/infigaming-com/meepo-api/common;common";
+option java_multiple_files = true;
+option java_package = "api.common";
+
+message OperatorContext {
+	int64 operator_id = 1;
+	int64 company_operator_id = 2;
+	int64 retailer_operator_id = 3;
+	int64 system_operator_id = 4;
+}

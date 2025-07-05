@@ -4,6 +4,8 @@ package api.user.service.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "common/common.proto";
+
 option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.user.service.v1";
@@ -521,7 +523,7 @@ message AddOperatorResponse {
 
 message SendEmailVerificationCodeRequest {
 	string email = 1;
-	OperatorContext operator_context = 2;
+	api.common.OperatorContext operator_context = 2;
 	optional int64 user_id = 3;
 }
 
@@ -616,7 +618,7 @@ message CreateUserRequest {
 	optional string password = 2;
 	string email = 3;
 	optional string mobile = 4;
-	OperatorContext operator_context = 5;
+	api.common.OperatorContext operator_context = 5;
 	int64 role_id = 6;
 }
 
@@ -629,7 +631,7 @@ message CreateUserResponse {
 message VerifyEmailRequest {
 	string email = 1;
 	string verification_code = 2;
-	OperatorContext operator_context = 3;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message VerifyEmailResponse {}
@@ -827,7 +829,7 @@ message GetOperatorIdsByOriginRequest {
 }
 
 message GetOperatorIdsByOriginResponse {
-	OperatorContext operator_context = 1;
+	api.common.OperatorContext operator_context = 1;
 }
 
 message GetOperatorRequest {
@@ -889,13 +891,6 @@ message GetChildOperatorIdsResponse {
 	repeated int64 child_operator_ids = 1;
 }
 
-message OperatorContext {
-	int64 operator_id = 1;
-	int64 company_operator_id = 2;
-	int64 retailer_operator_id = 3;
-	int64 system_operator_id = 4;
-}
-
 message CheckEmailExistsRequest {
 	string email = 1;
 	int64 operator_id = 2;
@@ -931,7 +926,7 @@ message CreateBusinessRequest {
 	optional string contact_methods = 4;
 	optional string affiliate = 5;
 	int64 owner_user_id = 6;
-	OperatorContext operator_context = 7;
+	api.common.OperatorContext operator_context = 7;
 }
 
 message CreateBusinessResponse {
