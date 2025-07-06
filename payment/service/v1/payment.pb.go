@@ -594,36 +594,32 @@ func (x *GetPaymentMethodListResponse) GetPaymentMethods() []*PaymentMethodInfo 
 // Used to create a new payment channel with specified merchant and method
 type CreatePaymentMethodRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the merchant creating this channel
-	MerchantId string `protobuf:"bytes,1,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
 	// ID of the Operator connect with this channel
-	OperatorId string `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId string `protobuf:"bytes,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// ID of the payment method to be used
-	PaymentMethodId string `protobuf:"bytes,3,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
-	// Type of channel (e.g., deposit, withdrawal)
-	Type string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	PaymentMethodId string `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	// Currency Type
-	CurrencyType string `protobuf:"bytes,5,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
+	CurrencyType string `protobuf:"bytes,3,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
 	// Contact Info email
-	Contact string `protobuf:"bytes,6,opt,name=contact,proto3" json:"contact,omitempty"`
+	Contact string `protobuf:"bytes,4,opt,name=contact,proto3" json:"contact,omitempty"`
 	// Fixed Fee on the Amount
-	FixedFee string `protobuf:"bytes,7,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
+	FixedFee string `protobuf:"bytes,5,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
 	// Rate Fee
-	FeeRate string `protobuf:"bytes,8,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	FeeRate string `protobuf:"bytes,6,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
 	// Min Amount
-	MinAmount string `protobuf:"bytes,9,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	MinAmount string `protobuf:"bytes,7,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Max Amount
-	MaxAmount string `protobuf:"bytes,10,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	MaxAmount string `protobuf:"bytes,8,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	// PSP Fixed Fee on the Amount
-	PspFixedFee string `protobuf:"bytes,11,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
+	PspFixedFee string `protobuf:"bytes,9,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
 	// PSP Rate Fee
-	PspFeeRate string `protobuf:"bytes,12,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
+	PspFeeRate string `protobuf:"bytes,10,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
 	// PSP Min Amount
-	PspMinAmount string `protobuf:"bytes,13,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
+	PspMinAmount string `protobuf:"bytes,11,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
 	// PSP Max Amount
-	PspMaxAmount string `protobuf:"bytes,14,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
+	PspMaxAmount string `protobuf:"bytes,12,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
 	// JSON schema defining the required fields for this payment method
-	Key           *structpb.Struct `protobuf:"bytes,16,opt,name=key,proto3" json:"key,omitempty"`
+	Key           *structpb.Struct `protobuf:"bytes,13,opt,name=key,proto3" json:"key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -658,13 +654,6 @@ func (*CreatePaymentMethodRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *CreatePaymentMethodRequest) GetMerchantId() string {
-	if x != nil {
-		return x.MerchantId
-	}
-	return ""
-}
-
 func (x *CreatePaymentMethodRequest) GetOperatorId() string {
 	if x != nil {
 		return x.OperatorId
@@ -675,13 +664,6 @@ func (x *CreatePaymentMethodRequest) GetOperatorId() string {
 func (x *CreatePaymentMethodRequest) GetPaymentMethodId() string {
 	if x != nil {
 		return x.PaymentMethodId
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetType() string {
-	if x != nil {
-		return x.Type
 	}
 	return ""
 }
@@ -764,10 +746,10 @@ func (x *CreatePaymentMethodRequest) GetKey() *structpb.Struct {
 }
 
 type CreatePaymentMethodResponse struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	PaymentMethods *PaymentMethodInfo     `protobuf:"bytes,1,opt,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PaymentMethod *PaymentMethodInfo     `protobuf:"bytes,1,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreatePaymentMethodResponse) Reset() {
@@ -800,9 +782,9 @@ func (*CreatePaymentMethodResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *CreatePaymentMethodResponse) GetPaymentMethods() *PaymentMethodInfo {
+func (x *CreatePaymentMethodResponse) GetPaymentMethod() *PaymentMethodInfo {
 	if x != nil {
-		return x.PaymentMethods
+		return x.PaymentMethod
 	}
 	return nil
 }
@@ -3329,31 +3311,28 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"%GetSupportedPaymentMethodListResponse\x12N\n" +
 	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"n\n" +
 	"\x1cGetPaymentMethodListResponse\x12N\n" +
-	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\x90\x04\n" +
+	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xdb\x03\n" +
 	"\x1aCreatePaymentMethodRequest\x12\x1f\n" +
-	"\vmerchant_id\x18\x01 \x01(\tR\n" +
-	"merchantId\x12\x1f\n" +
-	"\voperator_id\x18\x02 \x01(\tR\n" +
+	"\voperator_id\x18\x01 \x01(\tR\n" +
 	"operatorId\x12*\n" +
-	"\x11payment_method_id\x18\x03 \x01(\tR\x0fpaymentMethodId\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\tR\x04type\x12#\n" +
-	"\rcurrency_type\x18\x05 \x01(\tR\fcurrencyType\x12\x18\n" +
-	"\acontact\x18\x06 \x01(\tR\acontact\x12\x1b\n" +
-	"\tfixed_fee\x18\a \x01(\tR\bfixedFee\x12\x19\n" +
-	"\bfee_rate\x18\b \x01(\tR\afeeRate\x12\x1d\n" +
+	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\x12#\n" +
+	"\rcurrency_type\x18\x03 \x01(\tR\fcurrencyType\x12\x18\n" +
+	"\acontact\x18\x04 \x01(\tR\acontact\x12\x1b\n" +
+	"\tfixed_fee\x18\x05 \x01(\tR\bfixedFee\x12\x19\n" +
+	"\bfee_rate\x18\x06 \x01(\tR\afeeRate\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\t \x01(\tR\tminAmount\x12\x1d\n" +
+	"min_amount\x18\a \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\n" +
-	" \x01(\tR\tmaxAmount\x12\"\n" +
-	"\rpsp_fixed_fee\x18\v \x01(\tR\vpspFixedFee\x12 \n" +
-	"\fpsp_fee_rate\x18\f \x01(\tR\n" +
+	"max_amount\x18\b \x01(\tR\tmaxAmount\x12\"\n" +
+	"\rpsp_fixed_fee\x18\t \x01(\tR\vpspFixedFee\x12 \n" +
+	"\fpsp_fee_rate\x18\n" +
+	" \x01(\tR\n" +
 	"pspFeeRate\x12$\n" +
-	"\x0epsp_min_amount\x18\r \x01(\tR\fpspMinAmount\x12$\n" +
-	"\x0epsp_max_amount\x18\x0e \x01(\tR\fpspMaxAmount\x12)\n" +
-	"\x03key\x18\x10 \x01(\v2\x17.google.protobuf.StructR\x03key\"m\n" +
-	"\x1bCreatePaymentMethodResponse\x12N\n" +
-	"\x0fpayment_methods\x18\x01 \x01(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"o\n" +
+	"\x0epsp_min_amount\x18\v \x01(\tR\fpspMinAmount\x12$\n" +
+	"\x0epsp_max_amount\x18\f \x01(\tR\fpspMaxAmount\x12)\n" +
+	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"k\n" +
+	"\x1bCreatePaymentMethodResponse\x12L\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2%.payment.service.v1.PaymentMethodInfoR\rpaymentMethod\"o\n" +
 	"\x1dDisablePaymentChannelResponse\x12N\n" +
 	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xb2\x03\n" +
 	"\x1bCreatePaymentChannelRequest\x12\x1f\n" +
@@ -3683,7 +3662,7 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	7,  // 1: payment.service.v1.GetSupportedPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
 	7,  // 2: payment.service.v1.GetPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
 	39, // 3: payment.service.v1.CreatePaymentMethodRequest.key:type_name -> google.protobuf.Struct
-	7,  // 4: payment.service.v1.CreatePaymentMethodResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
+	7,  // 4: payment.service.v1.CreatePaymentMethodResponse.payment_method:type_name -> payment.service.v1.PaymentMethodInfo
 	7,  // 5: payment.service.v1.DisablePaymentChannelResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
 	39, // 6: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
 	39, // 7: payment.service.v1.PaymentChannelInfo.deposit_schema:type_name -> google.protobuf.Struct

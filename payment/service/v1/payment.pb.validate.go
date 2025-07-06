@@ -690,13 +690,9 @@ func (m *CreatePaymentMethodRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for MerchantId
-
 	// no validation rules for OperatorId
 
 	// no validation rules for PaymentMethodId
-
-	// no validation rules for Type
 
 	// no validation rules for CurrencyType
 
@@ -850,11 +846,11 @@ func (m *CreatePaymentMethodResponse) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetPaymentMethods()).(type) {
+		switch v := interface{}(m.GetPaymentMethod()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, CreatePaymentMethodResponseValidationError{
-					field:  "PaymentMethods",
+					field:  "PaymentMethod",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -862,16 +858,16 @@ func (m *CreatePaymentMethodResponse) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, CreatePaymentMethodResponseValidationError{
-					field:  "PaymentMethods",
+					field:  "PaymentMethod",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetPaymentMethods()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetPaymentMethod()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return CreatePaymentMethodResponseValidationError{
-				field:  "PaymentMethods",
+				field:  "PaymentMethod",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
