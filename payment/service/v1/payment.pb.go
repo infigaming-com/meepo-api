@@ -765,7 +765,7 @@ func (x *CreatePaymentMethodRequest) GetKey() *structpb.Struct {
 
 type CreatePaymentMethodResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	PaymentMethods []*PaymentMethodInfo   `protobuf:"bytes,1,rep,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
+	PaymentMethods *PaymentMethodInfo     `protobuf:"bytes,1,opt,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -800,7 +800,7 @@ func (*CreatePaymentMethodResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *CreatePaymentMethodResponse) GetPaymentMethods() []*PaymentMethodInfo {
+func (x *CreatePaymentMethodResponse) GetPaymentMethods() *PaymentMethodInfo {
 	if x != nil {
 		return x.PaymentMethods
 	}
@@ -3353,7 +3353,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x0epsp_max_amount\x18\x0e \x01(\tR\fpspMaxAmount\x12)\n" +
 	"\x03key\x18\x10 \x01(\v2\x17.google.protobuf.StructR\x03key\"m\n" +
 	"\x1bCreatePaymentMethodResponse\x12N\n" +
-	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"o\n" +
+	"\x0fpayment_methods\x18\x01 \x01(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"o\n" +
 	"\x1dDisablePaymentChannelResponse\x12N\n" +
 	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xb2\x03\n" +
 	"\x1bCreatePaymentChannelRequest\x12\x1f\n" +

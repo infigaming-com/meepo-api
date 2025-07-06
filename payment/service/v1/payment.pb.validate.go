@@ -849,38 +849,33 @@ func (m *CreatePaymentMethodResponse) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetPaymentMethods() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, CreatePaymentMethodResponseValidationError{
-						field:  fmt.Sprintf("PaymentMethods[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, CreatePaymentMethodResponseValidationError{
-						field:  fmt.Sprintf("PaymentMethods[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return CreatePaymentMethodResponseValidationError{
-					field:  fmt.Sprintf("PaymentMethods[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetPaymentMethods()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreatePaymentMethodResponseValidationError{
+					field:  "PaymentMethods",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreatePaymentMethodResponseValidationError{
+					field:  "PaymentMethods",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetPaymentMethods()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreatePaymentMethodResponseValidationError{
+				field:  "PaymentMethods",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	if len(errors) > 0 {

@@ -8481,9 +8481,7 @@ components:
             type: object
             properties:
                 paymentMethods:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
+                    $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
         payment.service.v1.DepositCallbackRequest:
             type: object
             properties:

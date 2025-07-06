@@ -94,7 +94,7 @@ message CreatePaymentMethodRequest {
 }
 
 message CreatePaymentMethodResponse {
-  repeated PaymentMethodInfo payment_methods = 1;
+  PaymentMethodInfo payment_methods = 1;
 }
 
 message DisablePaymentChannelResponse {
