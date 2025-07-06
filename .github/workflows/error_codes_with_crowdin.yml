@@ -14,7 +14,7 @@ on:
 
 jobs:
   generate-error-codes:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     
     # 只有当PR被合并时才执行
     if: github.event_name != 'pull_request' || github.event.pull_request.merged == true

@@ -1,0 +1,100 @@
+name: Deploy API Documentation to GCS
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'openapi.yaml'
+      - 'openapi.yml'
+      - 'docs/**'
+  push:
+    branches:
+      - main
+
+env:
+  BUCKET_NAME: 'speedix-meepo-api-docs'
+
+jobs:
+  deploy-docs:
+    runs-on: self-hosted
+    
+    permissions:
+      contents: read
+      id-token: write  # 用于Workload Identity Federation
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Generate Redoc documentation
+      run: |
+        echo "生成Redoc文档..."
+        npx @redocly/cli build-docs "openapi.yaml" --output index.html
+        
+        # 验证生成的文件
+        if [ ! -f "index.html" ]; then
+          echo "错误: 未能生成index.html文件"
+          exit 1
+        fi
+        
+        echo "成功生成文档: index.html"
+        echo "文件大小: $(du -h index.html)"
+    
+    - name: "Login to GKE"
+      uses: "google-github-actions/auth@v2"
+      with:
+        credentials_json: "${{ secrets.GKE_SA_KEY }}"
+
+    - name: "Get GKE Credentials"
+      uses: "google-github-actions/get-gke-credentials@v2"
+      with:
+        cluster_name: "aggregator-dev"
+        location: "europe-west1"
+
+    - name: Setup Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        version: 'latest'
+    
+    - name: Ensure GCS bucket exists
+      run: |
+        echo "确保存储桶存在: gs://$BUCKET_NAME"
+        if ! gsutil ls -b "gs://$BUCKET_NAME" &>/dev/null; then
+          echo "创建存储桶: gs://$BUCKET_NAME"
+          gsutil mb "gs://$BUCKET_NAME"
+          
+          # 设置存储桶为公共可读
+          gsutil iam ch allUsers:objectViewer "gs://$BUCKET_NAME"
+        else
+          echo "存储桶已存在: gs://$BUCKET_NAME"
+        fi
+    
+    - name: Deploy to Google Cloud Storage
+      run: |
+        echo "上传文档到GCS..."
+        
+        # 上传主文档文件
+        gsutil -h "Cache-Control:public,max-age=3600" \
+               -h "Content-Type:text/html" \
+               cp index.html "gs://$BUCKET_NAME/index.html"
+        
+        # 如果有其他静态资源，也可以上传
+        if [ -d "assets" ]; then
+          echo "上传资源文件..."
+          gsutil -h "Cache-Control:public,max-age=86400" \
+                 cp -r assets "gs://$BUCKET_NAME/"
+        fi
+        
+        echo "设置公共访问权限..."
+        gsutil acl ch -u AllUsers:R "gs://$BUCKET_NAME/index.html"
+    
+    - name: Output deployment info
+      run: |
+        echo "✅ API文档部署成功"
+        echo "📖 访问地址: https://storage.googleapis.com/$BUCKET_NAME/index.html"
