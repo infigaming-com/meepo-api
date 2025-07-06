@@ -6044,9 +6044,6 @@ components:
                 uniqueVisits:
                     type: integer
                     format: int32
-                activeUsers:
-                    type: integer
-                    format: int32
                 registeredUsers:
                     type: integer
                     format: int32
