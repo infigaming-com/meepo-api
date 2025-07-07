@@ -79,6 +79,9 @@ service Operator {
 
 	rpc DeleteAdjustmentConfig(DeleteAdjustmentConfigRequest) returns (DeleteAdjustmentConfigResponse) {
 	}
+
+	rpc SendInvoices(SendInvoicesRequest) returns (SendInvoicesResponse) {
+	}
 }
 
 message AddOperatorRequest {
@@ -583,4 +586,10 @@ message CreateAdjustmentConfigRequest {
 }
 
 message CreateAdjustmentConfigResponse {
+}
+
+message SendInvoicesRequest {
+}
+
+message SendInvoicesResponse {
 }

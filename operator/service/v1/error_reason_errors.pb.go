@@ -94,3 +94,27 @@ func IsGetOperatorIdByOriginFailed(err error) bool {
 func ErrorGetOperatorIdByOriginFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsAdjustmentConfigNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADJUSTMENT_CONFIG_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorAdjustmentConfigNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADJUSTMENT_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAdjustmentConfigAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADJUSTMENT_CONFIG_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorAdjustmentConfigAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADJUSTMENT_CONFIG_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
