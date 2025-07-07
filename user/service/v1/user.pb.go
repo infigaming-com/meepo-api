@@ -7305,7 +7305,7 @@ type ListAllOperatorsResponse_Operator struct {
 	RealOperatorId   int64                   `protobuf:"varint,1,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
 	OperatorName     string                  `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	Enabled          bool                    `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	OperatorType     int64                   `protobuf:"varint,4,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	OperatorType     string                  `protobuf:"bytes,4,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
 	ParentOperatorId int64                   `protobuf:"varint,5,opt,name=parent_operator_id,json=parentOperatorId,proto3" json:"parent_operator_id,omitempty"`
 	OperatorContext  *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -7363,11 +7363,11 @@ func (x *ListAllOperatorsResponse_Operator) GetEnabled() bool {
 	return false
 }
 
-func (x *ListAllOperatorsResponse_Operator) GetOperatorType() int64 {
+func (x *ListAllOperatorsResponse_Operator) GetOperatorType() string {
 	if x != nil {
 		return x.OperatorType
 	}
-	return 0
+	return ""
 }
 
 func (x *ListAllOperatorsResponse_Operator) GetParentOperatorId() int64 {
@@ -7847,7 +7847,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x10real_operator_id\x18\x01 \x01(\x03R\x0erealOperatorId\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\x12#\n" +
-	"\roperator_type\x18\x04 \x01(\x03R\foperatorType\x12,\n" +
+	"\roperator_type\x18\x04 \x01(\tR\foperatorType\x12,\n" +
 	"\x12parent_operator_id\x18\x05 \x01(\x03R\x10parentOperatorId\x12F\n" +
 	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\">\n" +
 	"\x1bGetParentOperatorIdsRequest\x12\x1f\n" +
