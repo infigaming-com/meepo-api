@@ -268,6 +268,8 @@ func (m *AddUserEvent) validate(all bool) error {
 
 	// no validation rules for RetailerOperatorId
 
+	// no validation rules for SystemOperatorId
+
 	// no validation rules for Username
 
 	// no validation rules for Email
