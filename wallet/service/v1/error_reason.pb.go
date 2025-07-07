@@ -95,6 +95,7 @@ const (
 	ErrorReason_INVALID_OPERATOR_TRANSFER                                       ErrorReason = 30067
 	ErrorReason_INVALID_OPERATOR_SWAP                                           ErrorReason = 30068
 	ErrorReason_QUERY_OPERATOR_BALANCES_FAILED                                  ErrorReason = 30069
+	ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT                                  ErrorReason = 30070
 )
 
 // Enum value maps for ErrorReason.
@@ -170,6 +171,7 @@ var (
 		30067: "INVALID_OPERATOR_TRANSFER",
 		30068: "INVALID_OPERATOR_SWAP",
 		30069: "QUERY_OPERATOR_BALANCES_FAILED",
+		30070: "USER_INFO_NOT_FOUND_IN_CONTEXT",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -242,6 +244,7 @@ var (
 		"INVALID_OPERATOR_TRANSFER":                                       30067,
 		"INVALID_OPERATOR_SWAP":                                           30068,
 		"QUERY_OPERATOR_BALANCES_FAILED":                                  30069,
+		"USER_INFO_NOT_FOUND_IN_CONTEXT":                                  30070,
 	}
 )
 
@@ -276,7 +279,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x8c\x15\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xb2\x15\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -347,7 +350,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"*UPDATE_OPERATOR_BALANCE_TRANSACTION_FAILED\x10\xf2\xea\x01\x12\x1f\n" +
 	"\x19INVALID_OPERATOR_TRANSFER\x10\xf3\xea\x01\x12\x1b\n" +
 	"\x15INVALID_OPERATOR_SWAP\x10\xf4\xea\x01\x12$\n" +
-	"\x1eQUERY_OPERATOR_BALANCES_FAILED\x10\xf5\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x1eQUERY_OPERATOR_BALANCES_FAILED\x10\xf5\xea\x01\x12$\n" +
+	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\xf6\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
