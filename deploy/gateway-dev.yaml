@@ -30,6 +30,18 @@ spec:
       certificateRefs:
       - name: meepoapi-xyz-tls
         namespace: meepo-dev
+  - name: hicasino-xyz-dev-https
+    protocol: HTTPS
+    port: 443
+    hostname: "dev.hicasino.xyz"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: hicasino-xyz-tls
+        namespace: meepo-dev
   addresses:
   - type: NamedAddress
     value: gke-meepo-dev-ingress-ip
@@ -44,6 +56,21 @@ spec:
   - group: gateway.networking.k8s.io
     kind: HTTPRoute
     namespace: meepo-stg
+  to:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: meepo-gateway
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: allow-invoker-to-dev-gateway
+  namespace: meepo-dev
+spec:
+  from:
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    namespace: invoker-dev
   to:
   - group: gateway.networking.k8s.io
     kind: Gateway
