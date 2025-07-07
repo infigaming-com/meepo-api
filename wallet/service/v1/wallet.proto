@@ -4,6 +4,7 @@ package api.wallet.service.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/wallet/service/v1;v1";
 option java_multiple_files = true;
@@ -76,10 +77,17 @@ service Wallet {
 	rpc UpdateOperatorCurrency (UpdateOperatorCurrencyRequest) returns (UpdateOperatorCurrencyResponse) {}
 
 	rpc UpdateUserCurrency (UpdateUserCurrencyRequest) returns (UpdateUserCurrencyResponse) {}
+
+	// Transfer cash from operator to company operator
+	rpc OperatorTransfer (OperatorTransferRequest) returns (OperatorTransferResponse) {}
+
+	// List Operator Balances based on filter
+	rpc ListOperatorBalances (ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {}
 }
 
 message GetUserBalancesRequest {
 	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
 }
 
 message GetUserBalancesResponse {
@@ -97,6 +105,7 @@ message GetUserBalanceRequest {
 	string currency = 2;
 	// optional target currency
 	string settlement_currency = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message GetUserBalanceResponse {
@@ -139,6 +148,7 @@ message CreditRequest {
 	string transaction_type = 3;
 	int64 transaction_id = 4;
 	string cash = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 message CreditResponse {
@@ -153,6 +163,7 @@ message DebitRequest {
 	string transaction_type = 3;
 	int64 transaction_id = 4;
 	string cash = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 message DebitResponse {
@@ -170,6 +181,7 @@ message GameDebitRequest {
 	int64 transaction_id = 6;
 	string amount = 7;
 	string turnover = 8;
+	api.common.OperatorContext operator_context = 9;
 }
 
 message GameDebitResponse {
@@ -195,6 +207,7 @@ message GameCreditRequest {
 	int64 transaction_id = 6;
 	int64 original_transaction_id = 7;
 	string amount = 8;
+	api.common.OperatorContext operator_context = 9;
 }
 
 message GameCreditResponse {
@@ -219,6 +232,7 @@ message FreezeRequest {
 	string transaction_type = 3;
 	int64 transaction_id = 4;
 	string cash = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 message FreezeResponse {
@@ -231,6 +245,7 @@ message SettleRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message SettleResponse {
@@ -245,6 +260,7 @@ message RollbackRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message RollbackResponse {
@@ -263,6 +279,7 @@ message RollbackResponse {
 message GetWalletsRequest {
 	int64 user_id = 1;
 	repeated string currencies = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message GetWalletsResponse {
@@ -329,6 +346,7 @@ message ListWalletBalanceTransactionsRequest {
 	optional google.protobuf.Timestamp end_time = 5;
 	optional int32 page = 6;
 	optional int32 page_size = 7;
+	api.common.OperatorContext operator_context = 8;
 }
 
 message ListWalletBalanceTransactionsResponse {
@@ -455,6 +473,7 @@ message GetBackofficeUserOverviewFromWalletRequest {
 	int64 user_id = 1;
 	optional google.protobuf.Timestamp start_time = 2;
 	optional google.protobuf.Timestamp end_time = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message GetBackofficeUserOverviewFromWalletResponse {
@@ -484,6 +503,7 @@ message GetBackofficeUserOverviewFromWalletResponse {
 }
 
 message GetOverviewDashboardFromWalletRequest {
+	api.common.OperatorContext operator_context = 1;
 }
 
 message GetOverviewDashboardFromWalletResponse {
@@ -572,6 +592,7 @@ message UpdateOperatorCurrencyRequest {
 	optional string symbol = 6;
 	optional string icon = 7;
 	optional int32 decimal_places = 8;
+	api.common.OperatorContext operator_context = 9;
 }
 
 message UpdateOperatorCurrencyResponse {}
@@ -580,6 +601,61 @@ message UpdateUserCurrencyRequest {
 	int64 user_id = 1;
 	string currency = 2;
 	bool enabled = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message UpdateUserCurrencyResponse {}
+
+message OperatorTransferRequest {
+	int64 real_operator_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	int64 target_real_operator_id = 3;
+	api.common.OperatorContext target_operator_context = 4;
+	string operator_type = 5;
+	string target_operator_type = 6;
+	string currency = 7;
+	string reporting_currency = 8;
+	string target_currency = 9;
+	string target_reporting_currency = 10;
+	string exchange_rate = 11; // exchange rate of the currency to the reporting currency
+	string transaction_type = 12;
+	string cash_amount = 13;
+}
+
+message OperatorTransferResponse {
+	string operator_cash = 1;
+	string operator_balance_currency = 2;
+	string target_operator_cash = 3;
+	string target_operator_balance_currency = 4;
+}
+
+message ListOperatorBalancesRequest {
+	repeated int64 retailer_operator_ids = 1;
+	repeated int64 company_operator_ids = 2;
+	repeated int64 operator_ids = 3;
+	repeated string currencies = 4;
+	int64 real_operator_id = 5;
+	string operator_type = 6;
+	api.common.OperatorContext operator_context = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9; // default 20
+}
+
+message OperatorBalance {
+	int64 real_operator_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string retailer_operator_name = 3;
+	string company_operator_name = 4;
+	string operator_name = 5;
+	string currency = 6;
+	string protocol = 7; // placeholder for future use
+	string cash = 8;
+	bool enabled = 9;
+}
+
+message ListOperatorBalancesResponse {
+	repeated OperatorBalance operator_balances = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}

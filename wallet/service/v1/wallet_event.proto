@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package api.wallet.service.v1;
 
+import "common/common.proto";
+
 option go_package = "github.com/infigaming-com/meepo-api/wallet/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.wallet.service.v1";
@@ -21,14 +23,11 @@ message OperatorBalanceUpdateEvent {
 	int64 transaction_id = 1;
 	string transaction_type = 2;
 	int64 real_operator_id = 3;
-	int64 operator_id = 4;
-	int64 company_operator_id = 5;
-	int64 retailer_operator_id = 6;
-	int64 system_operator_id = 7;
-	string operator_type = 8;
-	string settlement_currency = 9;
-	string before_balance = 10;
-	string after_balance = 11;
-	string amount = 12;
-	int64 created_at = 13;
+	common.OperatorContext operator_context = 4;
+	string operator_type = 5;
+	string settlement_currency = 6;
+	string before_balance = 7;
+	string after_balance = 8;
+	string amount = 9;
+	int64 created_at = 10;
 }

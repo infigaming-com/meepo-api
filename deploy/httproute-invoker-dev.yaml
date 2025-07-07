@@ -1,0 +1,31 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: invoker-routes
+  namespace: invoker-dev
+spec:
+  parentRefs:
+  - name: meepo-gateway
+    namespace: meepo-dev
+  hostnames:
+  - "dev.hicasino.xyz"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/ws"
+    backendRefs:
+    - name: invoker-server-svc
+      port: 8001
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1"
+    backendRefs:
+    - name: invoker-server-svc
+      port: 8000
+      weight: 1
+    - name: invoker-server-svc
+      port: 8002
+      weight: 1
