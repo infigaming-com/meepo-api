@@ -8378,6 +8378,8 @@ components:
             properties:
                 userId:
                     type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.wallet.service.v1.GetUserBalancesResponse:
             type: object
             properties:
