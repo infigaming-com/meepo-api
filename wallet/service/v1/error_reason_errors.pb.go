@@ -622,3 +622,123 @@ func IsGetParentOperatorIdsFailed(err error) bool {
 func ErrorGetParentOperatorIdsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_PARENT_OPERATOR_IDS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsReportingCurrencyNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REPORTING_CURRENCY_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorReportingCurrencyNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_REPORTING_CURRENCY_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddOperatorBalancesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_OPERATOR_BALANCES_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddOperatorBalancesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_OPERATOR_BALANCES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsLockOperatorBalanceWithRealOperatorIdAndCurrencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LOCK_OPERATOR_BALANCE_WITH_REAL_OPERATOR_ID_AND_CURRENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorLockOperatorBalanceWithRealOperatorIdAndCurrencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LOCK_OPERATOR_BALANCE_WITH_REAL_OPERATOR_ID_AND_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCheckOperatorBalanceTransactionIdempotencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CHECK_OPERATOR_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorCheckOperatorBalanceTransactionIdempotencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CHECK_OPERATOR_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorBalanceFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_BALANCE_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorBalanceFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_BALANCE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorBalanceDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_BALANCE_DISABLED.String() && e.Code == 500
+}
+
+func ErrorOperatorBalanceDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_BALANCE_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGenerateOperatorBalanceTransactionIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_OPERATOR_BALANCE_TRANSACTION_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGenerateOperatorBalanceTransactionIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_OPERATOR_BALANCE_TRANSACTION_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddOperatorBalanceTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_OPERATOR_BALANCE_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddOperatorBalanceTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_OPERATOR_BALANCE_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorBalanceFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_BALANCE_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorBalanceFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_BALANCE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCheckBalanceTransactionIdempotencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorCheckBalanceTransactionIdempotencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -204,12 +204,17 @@ func (x *AddUserEvent) GetMobile() string {
 
 // AddOperatorEvent is emitted when a operator is created.
 type AddOperatorEvent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	OperatorType  string                 `protobuf:"bytes,2,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
-	OperatorName  string                 `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	RealOperatorId     int64                  `protobuf:"varint,1,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
+	OperatorId         int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId  int64                  `protobuf:"varint,3,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64                  `protobuf:"varint,4,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	SystemOperatorId   int64                  `protobuf:"varint,5,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	OperatorType       string                 `protobuf:"bytes,6,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	OperatorName       string                 `protobuf:"bytes,7,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	ReportingCurrency  string                 `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *AddOperatorEvent) Reset() {
@@ -242,9 +247,37 @@ func (*AddOperatorEvent) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{3}
 }
 
+func (x *AddOperatorEvent) GetRealOperatorId() int64 {
+	if x != nil {
+		return x.RealOperatorId
+	}
+	return 0
+}
+
 func (x *AddOperatorEvent) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *AddOperatorEvent) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *AddOperatorEvent) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *AddOperatorEvent) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
 	}
 	return 0
 }
@@ -259,6 +292,13 @@ func (x *AddOperatorEvent) GetOperatorType() string {
 func (x *AddOperatorEvent) GetOperatorName() string {
 	if x != nil {
 		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *AddOperatorEvent) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
 	}
 	return ""
 }
@@ -281,12 +321,17 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\x14retailer_operator_id\x18\x04 \x01(\x03R\x12retailerOperatorId\x12\x1a\n" +
 	"\busername\x18\x06 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
-	"\x06mobile\x18\b \x01(\tR\x06mobile\"}\n" +
-	"\x10AddOperatorEvent\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\x03R\n" +
-	"operatorId\x12#\n" +
-	"\roperator_type\x18\x02 \x01(\tR\foperatorType\x12#\n" +
-	"\roperator_name\x18\x03 \x01(\tR\foperatorName2]\n" +
+	"\x06mobile\x18\b \x01(\tR\x06mobile\"\xe6\x02\n" +
+	"\x10AddOperatorEvent\x12(\n" +
+	"\x10real_operator_id\x18\x01 \x01(\x03R\x0erealOperatorId\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\x03 \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x04 \x01(\x03R\x12retailerOperatorId\x12,\n" +
+	"\x12system_operator_id\x18\x05 \x01(\x03R\x10systemOperatorId\x12#\n" +
+	"\roperator_type\x18\x06 \x01(\tR\foperatorType\x12#\n" +
+	"\roperator_name\x18\a \x01(\tR\foperatorName\x12-\n" +
+	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency2]\n" +
 	"\tUserEvent\x12P\n" +
 	"\x05Event\x12!.api.user.service.v1.EventRequest\x1a\".api.user.service.v1.EventResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"

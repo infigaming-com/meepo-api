@@ -2186,6 +2186,28 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageResponse'
+    /v1/payment/channel/update:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Create payment channel
+                 Creates a new payment channel with specified configuration
+                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
+            operationId: Payment_DisablePaymentChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.DisablePaymentChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.DisablePaymentChannelResponse'
     /v1/payment/deposit/callback:
         post:
             tags:
@@ -2253,6 +2275,28 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /v1/payment/supportedmethod/list:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Get list of payment methods
+                 Retrieves all available payment methods supported by the system
+                 Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
+            operationId: Payment_GetSupportedPaymentMethodList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetSupportedPaymentMethodListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetSupportedPaymentMethodListResponse'
     /v1/payment/transaction/page:
         post:
             tags:
@@ -6000,9 +6044,6 @@ components:
                 uniqueVisits:
                     type: integer
                     format: int32
-                activeUsers:
-                    type: integer
-                    format: int32
                 registeredUsers:
                     type: integer
                     format: int32
@@ -6820,8 +6861,12 @@ components:
                     type: string
                 backofficeSubdomain:
                     type: string
-                childDomain:
+                backofficeChildDomain:
                     type: string
+                domainPool:
+                    type: array
+                    items:
+                        type: string
                 enabled:
                     type: boolean
                 mode:
@@ -7367,6 +7412,17 @@ components:
                 decimalPlaces:
                     type: integer
                     format: int32
+        api.common.OperatorContext:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
         api.game.service.v1.Action:
             type: object
             properties:
@@ -8133,17 +8189,6 @@ components:
                     type: string
                     description: The OAuth token received from the provider.
             description: OAuthRequest contains the information needed for OAuth authentication.
-        api.user.service.v1.OperatorContext:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                systemOperatorId:
-                    type: string
         api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
@@ -8189,7 +8234,7 @@ components:
                 email:
                     type: string
                 operatorContext:
-                    $ref: '#/components/schemas/api.user.service.v1.OperatorContext'
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 userId:
                     type: string
         api.user.service.v1.SendEmailVerificationCodeResponse:
@@ -8342,6 +8387,27 @@ components:
                 type:
                     type: string
                     description: Type of channel (e.g., deposit, withdrawal)
+                contact:
+                    type: string
+                    description: Contact Info email
+                pspFixedFee:
+                    type: string
+                    description: PSP Fixed Fee on the Amount
+                pspFeeRate:
+                    type: string
+                    description: PSP Rate Fee
+                userFixedFee:
+                    type: string
+                    description: User Fixed Fee on the Amount
+                userFeeRate:
+                    type: string
+                    description: User Rate Fee
+                minAmount:
+                    type: string
+                    description: Min Amount
+                maxAmount:
+                    type: string
+                    description: Max Amount
                 key:
                     type: object
                     description: Configuration fields for the payment channel in JSON format
@@ -8357,6 +8423,56 @@ components:
             description: |-
                 Response for channel creation
                  Returns the ID of the newly created payment channel
+        payment.service.v1.CreatePaymentMethodRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                    description: ID of the Operator connect with this channel
+                paymentMethodId:
+                    type: string
+                    description: ID of the payment method to be used
+                currencyType:
+                    type: string
+                    description: Currency Type
+                contact:
+                    type: string
+                    description: Contact Info email
+                fixedFee:
+                    type: string
+                    description: Fixed Fee on the Amount
+                feeRate:
+                    type: string
+                    description: Rate Fee
+                minAmount:
+                    type: string
+                    description: Min Amount
+                maxAmount:
+                    type: string
+                    description: Max Amount
+                pspFixedFee:
+                    type: string
+                    description: PSP Fixed Fee on the Amount
+                pspFeeRate:
+                    type: string
+                    description: PSP Rate Fee
+                pspMinAmount:
+                    type: string
+                    description: PSP Min Amount
+                pspMaxAmount:
+                    type: string
+                    description: PSP Max Amount
+                key:
+                    type: object
+                    description: JSON schema defining the required fields for this payment method
+            description: |-
+                Request to create a payment channel
+                 Used to create a new payment channel with specified merchant and method
+        payment.service.v1.CreatePaymentMethodResponse:
+            type: object
+            properties:
+                paymentMethod:
+                    $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
         payment.service.v1.DepositCallbackRequest:
             type: object
             properties:
@@ -8411,6 +8527,22 @@ components:
             description: |-
                 Response for deposit callback
                  Confirms receipt of callback notification
+        payment.service.v1.DisablePaymentChannelRequest:
+            type: object
+            properties:
+                merchantId:
+                    type: string
+                    description: ID of the merchant creating this channel
+            description: |-
+                Request to create a payment channel
+                 Used to create a new payment channel with specified merchant and method
+        payment.service.v1.DisablePaymentChannelResponse:
+            type: object
+            properties:
+                paymentMethods:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
         payment.service.v1.GetAddressRequest:
             type: object
             properties:
@@ -8527,10 +8659,29 @@ components:
         payment.service.v1.GetPaymentMethodListRequest:
             type: object
             properties: {}
+        payment.service.v1.GetPaymentMethodListResponse:
+            type: object
+            properties:
+                paymentMethods:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
+                    description: List of payment methods available
+            description: |-
+                Response for payment method list
+                 Contains a list of all available payment methods
+        payment.service.v1.GetSupportedPaymentMethodListRequest:
+            type: object
+            properties:
+                currency:
+                    type: array
+                    items:
+                        type: string
+                    description: Currency code supported by this payment method (e.g., USD, EUR, CNY)
             description: |-
                 Request to get payment method list
                  This message is used to retrieve all available payment methods
-        payment.service.v1.GetPaymentMethodListResponse:
+        payment.service.v1.GetSupportedPaymentMethodListResponse:
             type: object
             properties:
                 paymentMethods:
@@ -8800,15 +8951,29 @@ components:
                 id:
                     type: string
                     description: Unique identifier for the payment method
-                currency:
+                psp:
                     type: string
                     description: Currency code supported by this payment method (e.g., USD, EUR, CNY)
+                currency:
+                    type: string
                 country:
                     type: string
                     description: Country code where this payment method is available
                 paymentMethod:
                     type: string
                     description: Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
+                fixedFee:
+                    type: string
+                    description: Fixed Fee on the Amount
+                feeRate:
+                    type: string
+                    description: Rate Fee
+                minAmount:
+                    type: string
+                    description: Min Amount
+                maxAmount:
+                    type: string
+                    description: Max Amount
                 keySchema:
                     type: object
                     description: JSON schema defining the required fields for this payment method

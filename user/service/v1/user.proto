@@ -4,6 +4,8 @@ package api.user.service.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "common/common.proto";
+
 option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.user.service.v1";
@@ -521,7 +523,7 @@ message AddOperatorResponse {
 
 message SendEmailVerificationCodeRequest {
 	string email = 1;
-	OperatorContext operator_context = 2;
+	api.common.OperatorContext operator_context = 2;
 	optional int64 user_id = 3;
 }
 
@@ -616,7 +618,7 @@ message CreateUserRequest {
 	optional string password = 2;
 	string email = 3;
 	optional string mobile = 4;
-	OperatorContext operator_context = 5;
+	api.common.OperatorContext operator_context = 5;
 	int64 role_id = 6;
 }
 
@@ -629,7 +631,7 @@ message CreateUserResponse {
 message VerifyEmailRequest {
 	string email = 1;
 	string verification_code = 2;
-	OperatorContext operator_context = 3;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message VerifyEmailResponse {}
@@ -827,7 +829,7 @@ message GetOperatorIdsByOriginRequest {
 }
 
 message GetOperatorIdsByOriginResponse {
-	OperatorContext operator_context = 1;
+	api.common.OperatorContext operator_context = 1;
 }
 
 message GetOperatorRequest {
@@ -889,13 +891,6 @@ message GetChildOperatorIdsResponse {
 	repeated int64 child_operator_ids = 1;
 }
 
-message OperatorContext {
-	int64 operator_id = 1;
-	int64 company_operator_id = 2;
-	int64 retailer_operator_id = 3;
-	int64 system_operator_id = 4;
-}
-
 message CheckEmailExistsRequest {
 	string email = 1;
 	int64 operator_id = 2;
@@ -916,6 +911,7 @@ message CheckSubdomainExistsResponse {
 
 message CheckOperatorKeyExistsRequest {
 	string operator_key = 1;
+	int64 retailer_operator_id = 2;
 }
 
 message CheckOperatorKeyExistsResponse {
@@ -930,7 +926,7 @@ message CreateBusinessRequest {
 	optional string contact_methods = 4;
 	optional string affiliate = 5;
 	int64 owner_user_id = 6;
-	OperatorContext operator_context = 7;
+	api.common.OperatorContext operator_context = 7;
 }
 
 message CreateBusinessResponse {
@@ -947,25 +943,26 @@ message OperatorDetails {
 	string api_key = 7;
 	string subdomain = 8;
 	string backoffice_subdomain = 9;
-	string child_domain = 10;
-	bool enabled = 11;
-	string mode = 12;
-	string operator_key = 13;
-	string reporting_currency = 14;
-	string backoffice_timezone = 15;
-	repeated string supported_languages = 16;
-	repeated string supported_currencies = 17;
-	string status = 18;
-	bool is_maintenance = 19;
-	int64 maintenance_start_time = 20;
-	int64 maintenance_end_time = 21;
-	int64 operator_id = 22; // operator id in the operator hierarchy
-	int64 company_operator_id = 23; // company operator id in the operator hierarchy
-	string company_operator_name = 24; // company operator name in the operator hierarchy, or empty string if not exists
-	int64 retailer_operator_id = 25; // retailer operator id in the operator hierarchy
-	string retailer_operator_name = 26; // retailer operator name in the operator hierarchy, or empty string if not exists
-	int64 system_operator_id = 27; // system operator id in the operator hierarchy
-	string system_operator_name = 28; // system operator name in the operator hierarchy, or empty string if not exists
+	string backoffice_child_domain = 10;
+	repeated string domain_pool = 11;
+	bool enabled = 12;
+	string mode = 13;
+	string operator_key = 14;
+	string reporting_currency = 15;
+	string backoffice_timezone = 16;
+	repeated string supported_languages = 17;
+	repeated string supported_currencies = 18;
+	string status = 19;
+	bool is_maintenance = 20;
+	int64 maintenance_start_time = 21;
+	int64 maintenance_end_time = 22;
+	int64 operator_id = 23; // operator id in the operator hierarchy
+	int64 company_operator_id = 24; // company operator id in the operator hierarchy
+	string company_operator_name = 25; // company operator name in the operator hierarchy, or empty string if not exists
+	int64 retailer_operator_id = 26; // retailer operator id in the operator hierarchy
+	string retailer_operator_name = 27; // retailer operator name in the operator hierarchy, or empty string if not exists
+	int64 system_operator_id = 28; // system operator id in the operator hierarchy
+	string system_operator_name = 29; // system operator name in the operator hierarchy, or empty string if not exists
 }
 
 message GetOperatorDetailsRequest {

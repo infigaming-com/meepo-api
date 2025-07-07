@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -2330,10 +2331,10 @@ func (*AddOperatorResponse) Descriptor() ([]byte, []int) {
 }
 
 type SendEmailVerificationCodeRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Email           string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	OperatorContext *OperatorContext       `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	UserId          *int64                 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	Email           string                  `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	UserId          *int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2375,7 +2376,7 @@ func (x *SendEmailVerificationCodeRequest) GetEmail() string {
 	return ""
 }
 
-func (x *SendEmailVerificationCodeRequest) GetOperatorContext() *OperatorContext {
+func (x *SendEmailVerificationCodeRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
@@ -2885,13 +2886,13 @@ func (x *ListUsersResponse) GetTotalDisabled() int32 {
 }
 
 type CreateUserRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Username        string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
-	Password        *string                `protobuf:"bytes,2,opt,name=password,proto3,oneof" json:"password,omitempty"`
-	Email           string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile          *string                `protobuf:"bytes,4,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
-	OperatorContext *OperatorContext       `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	RoleId          int64                  `protobuf:"varint,6,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	Username        string                  `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Password        *string                 `protobuf:"bytes,2,opt,name=password,proto3,oneof" json:"password,omitempty"`
+	Email           string                  `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile          *string                 `protobuf:"bytes,4,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	RoleId          int64                   `protobuf:"varint,6,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2954,7 +2955,7 @@ func (x *CreateUserRequest) GetMobile() string {
 	return ""
 }
 
-func (x *CreateUserRequest) GetOperatorContext() *OperatorContext {
+func (x *CreateUserRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
@@ -3029,10 +3030,10 @@ func (x *CreateUserResponse) GetPassword() string {
 }
 
 type VerifyEmailRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Email            string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	VerificationCode string                 `protobuf:"bytes,2,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"`
-	OperatorContext  *OperatorContext       `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	state            protoimpl.MessageState  `protogen:"open.v1"`
+	Email            string                  `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	VerificationCode string                  `protobuf:"bytes,2,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"`
+	OperatorContext  *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -3081,7 +3082,7 @@ func (x *VerifyEmailRequest) GetVerificationCode() string {
 	return ""
 }
 
-func (x *VerifyEmailRequest) GetOperatorContext() *OperatorContext {
+func (x *VerifyEmailRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
@@ -4513,8 +4514,8 @@ func (x *GetOperatorIdsByOriginRequest) GetOrigin() string {
 }
 
 type GetOperatorIdsByOriginResponse struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	OperatorContext *OperatorContext       `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -4549,7 +4550,7 @@ func (*GetOperatorIdsByOriginResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{73}
 }
 
-func (x *GetOperatorIdsByOriginResponse) GetOperatorContext() *OperatorContext {
+func (x *GetOperatorIdsByOriginResponse) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
@@ -5000,74 +5001,6 @@ func (x *GetChildOperatorIdsResponse) GetChildOperatorIds() []int64 {
 	return nil
 }
 
-type OperatorContext struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId         int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	CompanyOperatorId  int64                  `protobuf:"varint,2,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
-	RetailerOperatorId int64                  `protobuf:"varint,3,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
-	SystemOperatorId   int64                  `protobuf:"varint,4,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *OperatorContext) Reset() {
-	*x = OperatorContext{}
-	mi := &file_user_service_v1_user_proto_msgTypes[84]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OperatorContext) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OperatorContext) ProtoMessage() {}
-
-func (x *OperatorContext) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[84]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OperatorContext.ProtoReflect.Descriptor instead.
-func (*OperatorContext) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{84}
-}
-
-func (x *OperatorContext) GetOperatorId() int64 {
-	if x != nil {
-		return x.OperatorId
-	}
-	return 0
-}
-
-func (x *OperatorContext) GetCompanyOperatorId() int64 {
-	if x != nil {
-		return x.CompanyOperatorId
-	}
-	return 0
-}
-
-func (x *OperatorContext) GetRetailerOperatorId() int64 {
-	if x != nil {
-		return x.RetailerOperatorId
-	}
-	return 0
-}
-
-func (x *OperatorContext) GetSystemOperatorId() int64 {
-	if x != nil {
-		return x.SystemOperatorId
-	}
-	return 0
-}
-
 type CheckEmailExistsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
@@ -5079,7 +5012,7 @@ type CheckEmailExistsRequest struct {
 
 func (x *CheckEmailExistsRequest) Reset() {
 	*x = CheckEmailExistsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[85]
+	mi := &file_user_service_v1_user_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5091,7 +5024,7 @@ func (x *CheckEmailExistsRequest) String() string {
 func (*CheckEmailExistsRequest) ProtoMessage() {}
 
 func (x *CheckEmailExistsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[85]
+	mi := &file_user_service_v1_user_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5104,7 +5037,7 @@ func (x *CheckEmailExistsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckEmailExistsRequest.ProtoReflect.Descriptor instead.
 func (*CheckEmailExistsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{85}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *CheckEmailExistsRequest) GetEmail() string {
@@ -5137,7 +5070,7 @@ type CheckEmailExistsResponse struct {
 
 func (x *CheckEmailExistsResponse) Reset() {
 	*x = CheckEmailExistsResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[86]
+	mi := &file_user_service_v1_user_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5149,7 +5082,7 @@ func (x *CheckEmailExistsResponse) String() string {
 func (*CheckEmailExistsResponse) ProtoMessage() {}
 
 func (x *CheckEmailExistsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[86]
+	mi := &file_user_service_v1_user_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5162,7 +5095,7 @@ func (x *CheckEmailExistsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckEmailExistsResponse.ProtoReflect.Descriptor instead.
 func (*CheckEmailExistsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{86}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *CheckEmailExistsResponse) GetExists() bool {
@@ -5181,7 +5114,7 @@ type CheckSubdomainExistsRequest struct {
 
 func (x *CheckSubdomainExistsRequest) Reset() {
 	*x = CheckSubdomainExistsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[87]
+	mi := &file_user_service_v1_user_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5193,7 +5126,7 @@ func (x *CheckSubdomainExistsRequest) String() string {
 func (*CheckSubdomainExistsRequest) ProtoMessage() {}
 
 func (x *CheckSubdomainExistsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[87]
+	mi := &file_user_service_v1_user_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5206,7 +5139,7 @@ func (x *CheckSubdomainExistsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckSubdomainExistsRequest.ProtoReflect.Descriptor instead.
 func (*CheckSubdomainExistsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{87}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *CheckSubdomainExistsRequest) GetSubdomain() string {
@@ -5225,7 +5158,7 @@ type CheckSubdomainExistsResponse struct {
 
 func (x *CheckSubdomainExistsResponse) Reset() {
 	*x = CheckSubdomainExistsResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[88]
+	mi := &file_user_service_v1_user_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5237,7 +5170,7 @@ func (x *CheckSubdomainExistsResponse) String() string {
 func (*CheckSubdomainExistsResponse) ProtoMessage() {}
 
 func (x *CheckSubdomainExistsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[88]
+	mi := &file_user_service_v1_user_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5250,7 +5183,7 @@ func (x *CheckSubdomainExistsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckSubdomainExistsResponse.ProtoReflect.Descriptor instead.
 func (*CheckSubdomainExistsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{88}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *CheckSubdomainExistsResponse) GetExists() bool {
@@ -5261,15 +5194,16 @@ func (x *CheckSubdomainExistsResponse) GetExists() bool {
 }
 
 type CheckOperatorKeyExistsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorKey   string                 `protobuf:"bytes,1,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	OperatorKey        string                 `protobuf:"bytes,1,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
+	RetailerOperatorId int64                  `protobuf:"varint,2,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *CheckOperatorKeyExistsRequest) Reset() {
 	*x = CheckOperatorKeyExistsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[89]
+	mi := &file_user_service_v1_user_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5281,7 +5215,7 @@ func (x *CheckOperatorKeyExistsRequest) String() string {
 func (*CheckOperatorKeyExistsRequest) ProtoMessage() {}
 
 func (x *CheckOperatorKeyExistsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[89]
+	mi := &file_user_service_v1_user_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5294,7 +5228,7 @@ func (x *CheckOperatorKeyExistsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckOperatorKeyExistsRequest.ProtoReflect.Descriptor instead.
 func (*CheckOperatorKeyExistsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{89}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{88}
 }
 
 func (x *CheckOperatorKeyExistsRequest) GetOperatorKey() string {
@@ -5302,6 +5236,13 @@ func (x *CheckOperatorKeyExistsRequest) GetOperatorKey() string {
 		return x.OperatorKey
 	}
 	return ""
+}
+
+func (x *CheckOperatorKeyExistsRequest) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
 }
 
 type CheckOperatorKeyExistsResponse struct {
@@ -5313,7 +5254,7 @@ type CheckOperatorKeyExistsResponse struct {
 
 func (x *CheckOperatorKeyExistsResponse) Reset() {
 	*x = CheckOperatorKeyExistsResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[90]
+	mi := &file_user_service_v1_user_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5325,7 +5266,7 @@ func (x *CheckOperatorKeyExistsResponse) String() string {
 func (*CheckOperatorKeyExistsResponse) ProtoMessage() {}
 
 func (x *CheckOperatorKeyExistsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[90]
+	mi := &file_user_service_v1_user_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5338,7 +5279,7 @@ func (x *CheckOperatorKeyExistsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckOperatorKeyExistsResponse.ProtoReflect.Descriptor instead.
 func (*CheckOperatorKeyExistsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{90}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{89}
 }
 
 func (x *CheckOperatorKeyExistsResponse) GetExists() bool {
@@ -5352,19 +5293,19 @@ type CreateBusinessRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Name  string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// business type: "retailer", "retailer", "operator"
-	Type            string           `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	ContactName     *string          `protobuf:"bytes,3,opt,name=contact_name,json=contactName,proto3,oneof" json:"contact_name,omitempty"`
-	ContactMethods  *string          `protobuf:"bytes,4,opt,name=contact_methods,json=contactMethods,proto3,oneof" json:"contact_methods,omitempty"`
-	Affiliate       *string          `protobuf:"bytes,5,opt,name=affiliate,proto3,oneof" json:"affiliate,omitempty"`
-	OwnerUserId     int64            `protobuf:"varint,6,opt,name=owner_user_id,json=ownerUserId,proto3" json:"owner_user_id,omitempty"`
-	OperatorContext *OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Type            string                  `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	ContactName     *string                 `protobuf:"bytes,3,opt,name=contact_name,json=contactName,proto3,oneof" json:"contact_name,omitempty"`
+	ContactMethods  *string                 `protobuf:"bytes,4,opt,name=contact_methods,json=contactMethods,proto3,oneof" json:"contact_methods,omitempty"`
+	Affiliate       *string                 `protobuf:"bytes,5,opt,name=affiliate,proto3,oneof" json:"affiliate,omitempty"`
+	OwnerUserId     int64                   `protobuf:"varint,6,opt,name=owner_user_id,json=ownerUserId,proto3" json:"owner_user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *CreateBusinessRequest) Reset() {
 	*x = CreateBusinessRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[91]
+	mi := &file_user_service_v1_user_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5376,7 +5317,7 @@ func (x *CreateBusinessRequest) String() string {
 func (*CreateBusinessRequest) ProtoMessage() {}
 
 func (x *CreateBusinessRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[91]
+	mi := &file_user_service_v1_user_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5389,7 +5330,7 @@ func (x *CreateBusinessRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBusinessRequest.ProtoReflect.Descriptor instead.
 func (*CreateBusinessRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{91}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *CreateBusinessRequest) GetName() string {
@@ -5434,7 +5375,7 @@ func (x *CreateBusinessRequest) GetOwnerUserId() int64 {
 	return 0
 }
 
-func (x *CreateBusinessRequest) GetOperatorContext() *OperatorContext {
+func (x *CreateBusinessRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
@@ -5450,7 +5391,7 @@ type CreateBusinessResponse struct {
 
 func (x *CreateBusinessResponse) Reset() {
 	*x = CreateBusinessResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[92]
+	mi := &file_user_service_v1_user_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5462,7 +5403,7 @@ func (x *CreateBusinessResponse) String() string {
 func (*CreateBusinessResponse) ProtoMessage() {}
 
 func (x *CreateBusinessResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[92]
+	mi := &file_user_service_v1_user_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5475,7 +5416,7 @@ func (x *CreateBusinessResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBusinessResponse.ProtoReflect.Descriptor instead.
 func (*CreateBusinessResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{92}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{91}
 }
 
 func (x *CreateBusinessResponse) GetBusinessId() int64 {
@@ -5486,42 +5427,43 @@ func (x *CreateBusinessResponse) GetBusinessId() int64 {
 }
 
 type OperatorDetails struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	Id                   int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // real operator id
-	OperatorName         string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	ParentOperatorId     int64                  `protobuf:"varint,3,opt,name=parent_operator_id,json=parentOperatorId,proto3" json:"parent_operator_id,omitempty"`
-	ParentOperatorName   string                 `protobuf:"bytes,4,opt,name=parent_operator_name,json=parentOperatorName,proto3" json:"parent_operator_name,omitempty"`
-	OperatorType         string                 `protobuf:"bytes,5,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
-	ExternalId           string                 `protobuf:"bytes,6,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	ApiKey               string                 `protobuf:"bytes,7,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
-	Subdomain            string                 `protobuf:"bytes,8,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
-	BackofficeSubdomain  string                 `protobuf:"bytes,9,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
-	ChildDomain          string                 `protobuf:"bytes,10,opt,name=child_domain,json=childDomain,proto3" json:"child_domain,omitempty"`
-	Enabled              bool                   `protobuf:"varint,11,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Mode                 string                 `protobuf:"bytes,12,opt,name=mode,proto3" json:"mode,omitempty"`
-	OperatorKey          string                 `protobuf:"bytes,13,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
-	ReportingCurrency    string                 `protobuf:"bytes,14,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	BackofficeTimezone   string                 `protobuf:"bytes,15,opt,name=backoffice_timezone,json=backofficeTimezone,proto3" json:"backoffice_timezone,omitempty"`
-	SupportedLanguages   []string               `protobuf:"bytes,16,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
-	SupportedCurrencies  []string               `protobuf:"bytes,17,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"`
-	Status               string                 `protobuf:"bytes,18,opt,name=status,proto3" json:"status,omitempty"`
-	IsMaintenance        bool                   `protobuf:"varint,19,opt,name=is_maintenance,json=isMaintenance,proto3" json:"is_maintenance,omitempty"`
-	MaintenanceStartTime int64                  `protobuf:"varint,20,opt,name=maintenance_start_time,json=maintenanceStartTime,proto3" json:"maintenance_start_time,omitempty"`
-	MaintenanceEndTime   int64                  `protobuf:"varint,21,opt,name=maintenance_end_time,json=maintenanceEndTime,proto3" json:"maintenance_end_time,omitempty"`
-	OperatorId           int64                  `protobuf:"varint,22,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                                // operator id in the operator hierarchy
-	CompanyOperatorId    int64                  `protobuf:"varint,23,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`         // company operator id in the operator hierarchy
-	CompanyOperatorName  string                 `protobuf:"bytes,24,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`    // company operator name in the operator hierarchy, or empty string if not exists
-	RetailerOperatorId   int64                  `protobuf:"varint,25,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`      // retailer operator id in the operator hierarchy
-	RetailerOperatorName string                 `protobuf:"bytes,26,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"` // retailer operator name in the operator hierarchy, or empty string if not exists
-	SystemOperatorId     int64                  `protobuf:"varint,27,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`            // system operator id in the operator hierarchy
-	SystemOperatorName   string                 `protobuf:"bytes,28,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`       // system operator name in the operator hierarchy, or empty string if not exists
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Id                    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // real operator id
+	OperatorName          string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	ParentOperatorId      int64                  `protobuf:"varint,3,opt,name=parent_operator_id,json=parentOperatorId,proto3" json:"parent_operator_id,omitempty"`
+	ParentOperatorName    string                 `protobuf:"bytes,4,opt,name=parent_operator_name,json=parentOperatorName,proto3" json:"parent_operator_name,omitempty"`
+	OperatorType          string                 `protobuf:"bytes,5,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	ExternalId            string                 `protobuf:"bytes,6,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	ApiKey                string                 `protobuf:"bytes,7,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	Subdomain             string                 `protobuf:"bytes,8,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	BackofficeSubdomain   string                 `protobuf:"bytes,9,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
+	BackofficeChildDomain string                 `protobuf:"bytes,10,opt,name=backoffice_child_domain,json=backofficeChildDomain,proto3" json:"backoffice_child_domain,omitempty"`
+	DomainPool            []string               `protobuf:"bytes,11,rep,name=domain_pool,json=domainPool,proto3" json:"domain_pool,omitempty"`
+	Enabled               bool                   `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Mode                  string                 `protobuf:"bytes,13,opt,name=mode,proto3" json:"mode,omitempty"`
+	OperatorKey           string                 `protobuf:"bytes,14,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
+	ReportingCurrency     string                 `protobuf:"bytes,15,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	BackofficeTimezone    string                 `protobuf:"bytes,16,opt,name=backoffice_timezone,json=backofficeTimezone,proto3" json:"backoffice_timezone,omitempty"`
+	SupportedLanguages    []string               `protobuf:"bytes,17,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
+	SupportedCurrencies   []string               `protobuf:"bytes,18,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"`
+	Status                string                 `protobuf:"bytes,19,opt,name=status,proto3" json:"status,omitempty"`
+	IsMaintenance         bool                   `protobuf:"varint,20,opt,name=is_maintenance,json=isMaintenance,proto3" json:"is_maintenance,omitempty"`
+	MaintenanceStartTime  int64                  `protobuf:"varint,21,opt,name=maintenance_start_time,json=maintenanceStartTime,proto3" json:"maintenance_start_time,omitempty"`
+	MaintenanceEndTime    int64                  `protobuf:"varint,22,opt,name=maintenance_end_time,json=maintenanceEndTime,proto3" json:"maintenance_end_time,omitempty"`
+	OperatorId            int64                  `protobuf:"varint,23,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                                // operator id in the operator hierarchy
+	CompanyOperatorId     int64                  `protobuf:"varint,24,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`         // company operator id in the operator hierarchy
+	CompanyOperatorName   string                 `protobuf:"bytes,25,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`    // company operator name in the operator hierarchy, or empty string if not exists
+	RetailerOperatorId    int64                  `protobuf:"varint,26,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`      // retailer operator id in the operator hierarchy
+	RetailerOperatorName  string                 `protobuf:"bytes,27,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"` // retailer operator name in the operator hierarchy, or empty string if not exists
+	SystemOperatorId      int64                  `protobuf:"varint,28,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`            // system operator id in the operator hierarchy
+	SystemOperatorName    string                 `protobuf:"bytes,29,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`       // system operator name in the operator hierarchy, or empty string if not exists
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *OperatorDetails) Reset() {
 	*x = OperatorDetails{}
-	mi := &file_user_service_v1_user_proto_msgTypes[93]
+	mi := &file_user_service_v1_user_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5533,7 +5475,7 @@ func (x *OperatorDetails) String() string {
 func (*OperatorDetails) ProtoMessage() {}
 
 func (x *OperatorDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[93]
+	mi := &file_user_service_v1_user_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5546,7 +5488,7 @@ func (x *OperatorDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OperatorDetails.ProtoReflect.Descriptor instead.
 func (*OperatorDetails) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{93}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{92}
 }
 
 func (x *OperatorDetails) GetId() int64 {
@@ -5612,11 +5554,18 @@ func (x *OperatorDetails) GetBackofficeSubdomain() string {
 	return ""
 }
 
-func (x *OperatorDetails) GetChildDomain() string {
+func (x *OperatorDetails) GetBackofficeChildDomain() string {
 	if x != nil {
-		return x.ChildDomain
+		return x.BackofficeChildDomain
 	}
 	return ""
+}
+
+func (x *OperatorDetails) GetDomainPool() []string {
+	if x != nil {
+		return x.DomainPool
+	}
+	return nil
 }
 
 func (x *OperatorDetails) GetEnabled() bool {
@@ -5754,7 +5703,7 @@ type GetOperatorDetailsRequest struct {
 
 func (x *GetOperatorDetailsRequest) Reset() {
 	*x = GetOperatorDetailsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[94]
+	mi := &file_user_service_v1_user_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5766,7 +5715,7 @@ func (x *GetOperatorDetailsRequest) String() string {
 func (*GetOperatorDetailsRequest) ProtoMessage() {}
 
 func (x *GetOperatorDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[94]
+	mi := &file_user_service_v1_user_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5779,7 +5728,7 @@ func (x *GetOperatorDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorDetailsRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{94}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{93}
 }
 
 func (x *GetOperatorDetailsRequest) GetOperatorId() int64 {
@@ -5798,7 +5747,7 @@ type GetOperatorDetailsResponse struct {
 
 func (x *GetOperatorDetailsResponse) Reset() {
 	*x = GetOperatorDetailsResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[95]
+	mi := &file_user_service_v1_user_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5810,7 +5759,7 @@ func (x *GetOperatorDetailsResponse) String() string {
 func (*GetOperatorDetailsResponse) ProtoMessage() {}
 
 func (x *GetOperatorDetailsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[95]
+	mi := &file_user_service_v1_user_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5823,7 +5772,7 @@ func (x *GetOperatorDetailsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorDetailsResponse.ProtoReflect.Descriptor instead.
 func (*GetOperatorDetailsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{95}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{94}
 }
 
 func (x *GetOperatorDetailsResponse) GetOperatorDetails() *OperatorDetails {
@@ -5845,7 +5794,7 @@ type ListOperatorsByParentOperatorIdRequest struct {
 
 func (x *ListOperatorsByParentOperatorIdRequest) Reset() {
 	*x = ListOperatorsByParentOperatorIdRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[96]
+	mi := &file_user_service_v1_user_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5857,7 +5806,7 @@ func (x *ListOperatorsByParentOperatorIdRequest) String() string {
 func (*ListOperatorsByParentOperatorIdRequest) ProtoMessage() {}
 
 func (x *ListOperatorsByParentOperatorIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[96]
+	mi := &file_user_service_v1_user_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5870,7 +5819,7 @@ func (x *ListOperatorsByParentOperatorIdRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ListOperatorsByParentOperatorIdRequest.ProtoReflect.Descriptor instead.
 func (*ListOperatorsByParentOperatorIdRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{96}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{95}
 }
 
 func (x *ListOperatorsByParentOperatorIdRequest) GetParentOperatorId() int64 {
@@ -5918,7 +5867,7 @@ type ListOperatorsByParentOperatorIdResponse struct {
 
 func (x *ListOperatorsByParentOperatorIdResponse) Reset() {
 	*x = ListOperatorsByParentOperatorIdResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[97]
+	mi := &file_user_service_v1_user_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5930,7 +5879,7 @@ func (x *ListOperatorsByParentOperatorIdResponse) String() string {
 func (*ListOperatorsByParentOperatorIdResponse) ProtoMessage() {}
 
 func (x *ListOperatorsByParentOperatorIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[97]
+	mi := &file_user_service_v1_user_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5943,7 +5892,7 @@ func (x *ListOperatorsByParentOperatorIdResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use ListOperatorsByParentOperatorIdResponse.ProtoReflect.Descriptor instead.
 func (*ListOperatorsByParentOperatorIdResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{97}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *ListOperatorsByParentOperatorIdResponse) GetOperatorDetailsList() []*OperatorDetails {
@@ -6045,7 +5994,7 @@ type ListUsersResponse_User struct {
 
 func (x *ListUsersResponse_User) Reset() {
 	*x = ListUsersResponse_User{}
-	mi := &file_user_service_v1_user_proto_msgTypes[98]
+	mi := &file_user_service_v1_user_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6057,7 +6006,7 @@ func (x *ListUsersResponse_User) String() string {
 func (*ListUsersResponse_User) ProtoMessage() {}
 
 func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[98]
+	mi := &file_user_service_v1_user_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6247,7 +6196,7 @@ type GetCommentsByUserIdResponse_Comment struct {
 
 func (x *GetCommentsByUserIdResponse_Comment) Reset() {
 	*x = GetCommentsByUserIdResponse_Comment{}
-	mi := &file_user_service_v1_user_proto_msgTypes[99]
+	mi := &file_user_service_v1_user_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6259,7 +6208,7 @@ func (x *GetCommentsByUserIdResponse_Comment) String() string {
 func (*GetCommentsByUserIdResponse_Comment) ProtoMessage() {}
 
 func (x *GetCommentsByUserIdResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[99]
+	mi := &file_user_service_v1_user_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6321,7 +6270,7 @@ type GetUserProfileResponse_IpInfo struct {
 
 func (x *GetUserProfileResponse_IpInfo) Reset() {
 	*x = GetUserProfileResponse_IpInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[100]
+	mi := &file_user_service_v1_user_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6333,7 +6282,7 @@ func (x *GetUserProfileResponse_IpInfo) String() string {
 func (*GetUserProfileResponse_IpInfo) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_IpInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[100]
+	mi := &file_user_service_v1_user_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6388,7 +6337,7 @@ type GetUserProfileResponse_RegistrationRecord struct {
 
 func (x *GetUserProfileResponse_RegistrationRecord) Reset() {
 	*x = GetUserProfileResponse_RegistrationRecord{}
-	mi := &file_user_service_v1_user_proto_msgTypes[101]
+	mi := &file_user_service_v1_user_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6400,7 +6349,7 @@ func (x *GetUserProfileResponse_RegistrationRecord) String() string {
 func (*GetUserProfileResponse_RegistrationRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_RegistrationRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[101]
+	mi := &file_user_service_v1_user_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6503,7 +6452,7 @@ type GetUserProfileResponse_LoginRecord struct {
 
 func (x *GetUserProfileResponse_LoginRecord) Reset() {
 	*x = GetUserProfileResponse_LoginRecord{}
-	mi := &file_user_service_v1_user_proto_msgTypes[102]
+	mi := &file_user_service_v1_user_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6515,7 +6464,7 @@ func (x *GetUserProfileResponse_LoginRecord) String() string {
 func (*GetUserProfileResponse_LoginRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_LoginRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[102]
+	mi := &file_user_service_v1_user_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6607,7 +6556,7 @@ type GetUserProfileResponse_Comment struct {
 
 func (x *GetUserProfileResponse_Comment) Reset() {
 	*x = GetUserProfileResponse_Comment{}
-	mi := &file_user_service_v1_user_proto_msgTypes[103]
+	mi := &file_user_service_v1_user_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6619,7 +6568,7 @@ func (x *GetUserProfileResponse_Comment) String() string {
 func (*GetUserProfileResponse_Comment) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[103]
+	mi := &file_user_service_v1_user_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6680,7 +6629,7 @@ type GetOverviewDashboardFromUserResponse_RegisteredUsers struct {
 
 func (x *GetOverviewDashboardFromUserResponse_RegisteredUsers) Reset() {
 	*x = GetOverviewDashboardFromUserResponse_RegisteredUsers{}
-	mi := &file_user_service_v1_user_proto_msgTypes[104]
+	mi := &file_user_service_v1_user_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6692,7 +6641,7 @@ func (x *GetOverviewDashboardFromUserResponse_RegisteredUsers) String() string {
 func (*GetOverviewDashboardFromUserResponse_RegisteredUsers) ProtoMessage() {}
 
 func (x *GetOverviewDashboardFromUserResponse_RegisteredUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[104]
+	mi := &file_user_service_v1_user_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6732,7 +6681,7 @@ type GetOverviewDashboardFromUserResponse_FirstDepositUsers struct {
 
 func (x *GetOverviewDashboardFromUserResponse_FirstDepositUsers) Reset() {
 	*x = GetOverviewDashboardFromUserResponse_FirstDepositUsers{}
-	mi := &file_user_service_v1_user_proto_msgTypes[105]
+	mi := &file_user_service_v1_user_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6744,7 +6693,7 @@ func (x *GetOverviewDashboardFromUserResponse_FirstDepositUsers) String() string
 func (*GetOverviewDashboardFromUserResponse_FirstDepositUsers) ProtoMessage() {}
 
 func (x *GetOverviewDashboardFromUserResponse_FirstDepositUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[105]
+	mi := &file_user_service_v1_user_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6784,7 +6733,7 @@ type GetOverviewDashboardFromUserResponse_ActiveUsers struct {
 
 func (x *GetOverviewDashboardFromUserResponse_ActiveUsers) Reset() {
 	*x = GetOverviewDashboardFromUserResponse_ActiveUsers{}
-	mi := &file_user_service_v1_user_proto_msgTypes[106]
+	mi := &file_user_service_v1_user_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6796,7 +6745,7 @@ func (x *GetOverviewDashboardFromUserResponse_ActiveUsers) String() string {
 func (*GetOverviewDashboardFromUserResponse_ActiveUsers) ProtoMessage() {}
 
 func (x *GetOverviewDashboardFromUserResponse_ActiveUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[106]
+	mi := &file_user_service_v1_user_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6837,7 +6786,7 @@ type GetOperatorResponse_Operator struct {
 
 func (x *GetOperatorResponse_Operator) Reset() {
 	*x = GetOperatorResponse_Operator{}
-	mi := &file_user_service_v1_user_proto_msgTypes[107]
+	mi := &file_user_service_v1_user_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6849,7 +6798,7 @@ func (x *GetOperatorResponse_Operator) String() string {
 func (*GetOperatorResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[107]
+	mi := &file_user_service_v1_user_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6897,7 +6846,7 @@ type GetOperatorsByIdsResponse_Operator struct {
 
 func (x *GetOperatorsByIdsResponse_Operator) Reset() {
 	*x = GetOperatorsByIdsResponse_Operator{}
-	mi := &file_user_service_v1_user_proto_msgTypes[108]
+	mi := &file_user_service_v1_user_proto_msgTypes[107]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6909,7 +6858,7 @@ func (x *GetOperatorsByIdsResponse_Operator) String() string {
 func (*GetOperatorsByIdsResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorsByIdsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[108]
+	mi := &file_user_service_v1_user_proto_msgTypes[107]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6957,7 +6906,7 @@ type ListOperatorsResponse_Operator struct {
 
 func (x *ListOperatorsResponse_Operator) Reset() {
 	*x = ListOperatorsResponse_Operator{}
-	mi := &file_user_service_v1_user_proto_msgTypes[109]
+	mi := &file_user_service_v1_user_proto_msgTypes[108]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6969,7 +6918,7 @@ func (x *ListOperatorsResponse_Operator) String() string {
 func (*ListOperatorsResponse_Operator) ProtoMessage() {}
 
 func (x *ListOperatorsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[109]
+	mi := &file_user_service_v1_user_proto_msgTypes[108]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7010,7 +6959,7 @@ var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfd\x03\n" +
+	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\xfd\x03\n" +
 	"\bUserInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -7141,10 +7090,10 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x12AddOperatorRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\tR\n" +
 	"operatorId\"\x15\n" +
-	"\x13AddOperatorResponse\"\xb3\x01\n" +
+	"\x13AddOperatorResponse\"\xaa\x01\n" +
 	" SendEmailVerificationCodeRequest\x12\x14\n" +
-	"\x05email\x18\x01 \x01(\tR\x05email\x12O\n" +
-	"\x10operator_context\x18\x02 \x01(\v2$.api.user.service.v1.OperatorContextR\x0foperatorContext\x12\x1c\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1c\n" +
 	"\auser_id\x18\x03 \x01(\x03H\x00R\x06userId\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_id\"#\n" +
@@ -7265,24 +7214,24 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aenabled\x18\x1a \x01(\bR\aenabled\x129\n" +
 	"\n" +
 	"created_at\x18\x1b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
-	"\x04role\x18\x1c \x01(\v2\x19.api.user.service.v1.RoleR\x04role\"\x85\x02\n" +
+	"\x04role\x18\x1c \x01(\v2\x19.api.user.service.v1.RoleR\x04role\"\xfc\x01\n" +
 	"\x11CreateUserRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1f\n" +
 	"\bpassword\x18\x02 \x01(\tH\x00R\bpassword\x88\x01\x01\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12\x1b\n" +
-	"\x06mobile\x18\x04 \x01(\tH\x01R\x06mobile\x88\x01\x01\x12O\n" +
-	"\x10operator_context\x18\x05 \x01(\v2$.api.user.service.v1.OperatorContextR\x0foperatorContext\x12\x17\n" +
+	"\x06mobile\x18\x04 \x01(\tH\x01R\x06mobile\x88\x01\x01\x12F\n" +
+	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
 	"\arole_id\x18\x06 \x01(\x03R\x06roleIdB\v\n" +
 	"\t_passwordB\t\n" +
 	"\a_mobile\"_\n" +
 	"\x12CreateUserResponse\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\"\xa8\x01\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\"\x9f\x01\n" +
 	"\x12VerifyEmailRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12+\n" +
-	"\x11verification_code\x18\x02 \x01(\tR\x10verificationCode\x12O\n" +
-	"\x10operator_context\x18\x03 \x01(\v2$.api.user.service.v1.OperatorContextR\x0foperatorContext\"\x15\n" +
+	"\x11verification_code\x18\x02 \x01(\tR\x10verificationCode\x12F\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x15\n" +
 	"\x13VerifyEmailResponse\"l\n" +
 	"\x11AddCommentRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12$\n" +
@@ -7435,9 +7384,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"7\n" +
 	"\x1dGetOperatorIdsByOriginRequest\x12\x16\n" +
-	"\x06origin\x18\x01 \x01(\tR\x06origin\"q\n" +
-	"\x1eGetOperatorIdsByOriginResponse\x12O\n" +
-	"\x10operator_context\x18\x01 \x01(\v2$.api.user.service.v1.OperatorContextR\x0foperatorContext\"5\n" +
+	"\x06origin\x18\x01 \x01(\tR\x06origin\"h\n" +
+	"\x1eGetOperatorIdsByOriginResponse\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"5\n" +
 	"\x12GetOperatorRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"\xbf\x01\n" +
@@ -7477,13 +7426,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"K\n" +
 	"\x1bGetChildOperatorIdsResponse\x12,\n" +
-	"\x12child_operator_ids\x18\x01 \x03(\x03R\x10childOperatorIds\"\xc2\x01\n" +
-	"\x0fOperatorContext\x12\x1f\n" +
-	"\voperator_id\x18\x01 \x01(\x03R\n" +
-	"operatorId\x12.\n" +
-	"\x13company_operator_id\x18\x02 \x01(\x03R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18\x03 \x01(\x03R\x12retailerOperatorId\x12,\n" +
-	"\x12system_operator_id\x18\x04 \x01(\x03R\x10systemOperatorId\"u\n" +
+	"\x12child_operator_ids\x18\x01 \x03(\x03R\x10childOperatorIds\"u\n" +
 	"\x17CheckEmailExistsRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -7494,26 +7437,27 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1bCheckSubdomainExistsRequest\x12\x1c\n" +
 	"\tsubdomain\x18\x01 \x01(\tR\tsubdomain\"6\n" +
 	"\x1cCheckSubdomainExistsResponse\x12\x16\n" +
-	"\x06exists\x18\x01 \x01(\bR\x06exists\"B\n" +
+	"\x06exists\x18\x01 \x01(\bR\x06exists\"t\n" +
 	"\x1dCheckOperatorKeyExistsRequest\x12!\n" +
-	"\foperator_key\x18\x01 \x01(\tR\voperatorKey\"8\n" +
+	"\foperator_key\x18\x01 \x01(\tR\voperatorKey\x120\n" +
+	"\x14retailer_operator_id\x18\x02 \x01(\x03R\x12retailerOperatorId\"8\n" +
 	"\x1eCheckOperatorKeyExistsResponse\x12\x16\n" +
-	"\x06exists\x18\x01 \x01(\bR\x06exists\"\xe0\x02\n" +
+	"\x06exists\x18\x01 \x01(\bR\x06exists\"\xd7\x02\n" +
 	"\x15CreateBusinessRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12&\n" +
 	"\fcontact_name\x18\x03 \x01(\tH\x00R\vcontactName\x88\x01\x01\x12,\n" +
 	"\x0fcontact_methods\x18\x04 \x01(\tH\x01R\x0econtactMethods\x88\x01\x01\x12!\n" +
 	"\taffiliate\x18\x05 \x01(\tH\x02R\taffiliate\x88\x01\x01\x12\"\n" +
-	"\rowner_user_id\x18\x06 \x01(\x03R\vownerUserId\x12O\n" +
-	"\x10operator_context\x18\a \x01(\v2$.api.user.service.v1.OperatorContextR\x0foperatorContextB\x0f\n" +
+	"\rowner_user_id\x18\x06 \x01(\x03R\vownerUserId\x12F\n" +
+	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x0f\n" +
 	"\r_contact_nameB\x12\n" +
 	"\x10_contact_methodsB\f\n" +
 	"\n" +
 	"_affiliate\"9\n" +
 	"\x16CreateBusinessResponse\x12\x1f\n" +
 	"\vbusiness_id\x18\x01 \x01(\x03R\n" +
-	"businessId\"\x82\t\n" +
+	"businessId\"\xb8\t\n" +
 	"\x0fOperatorDetails\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12,\n" +
@@ -7524,28 +7468,30 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"externalId\x12\x17\n" +
 	"\aapi_key\x18\a \x01(\tR\x06apiKey\x12\x1c\n" +
 	"\tsubdomain\x18\b \x01(\tR\tsubdomain\x121\n" +
-	"\x14backoffice_subdomain\x18\t \x01(\tR\x13backofficeSubdomain\x12!\n" +
-	"\fchild_domain\x18\n" +
-	" \x01(\tR\vchildDomain\x12\x18\n" +
-	"\aenabled\x18\v \x01(\bR\aenabled\x12\x12\n" +
-	"\x04mode\x18\f \x01(\tR\x04mode\x12!\n" +
-	"\foperator_key\x18\r \x01(\tR\voperatorKey\x12-\n" +
-	"\x12reporting_currency\x18\x0e \x01(\tR\x11reportingCurrency\x12/\n" +
-	"\x13backoffice_timezone\x18\x0f \x01(\tR\x12backofficeTimezone\x12/\n" +
-	"\x13supported_languages\x18\x10 \x03(\tR\x12supportedLanguages\x121\n" +
-	"\x14supported_currencies\x18\x11 \x03(\tR\x13supportedCurrencies\x12\x16\n" +
-	"\x06status\x18\x12 \x01(\tR\x06status\x12%\n" +
-	"\x0eis_maintenance\x18\x13 \x01(\bR\risMaintenance\x124\n" +
-	"\x16maintenance_start_time\x18\x14 \x01(\x03R\x14maintenanceStartTime\x120\n" +
-	"\x14maintenance_end_time\x18\x15 \x01(\x03R\x12maintenanceEndTime\x12\x1f\n" +
-	"\voperator_id\x18\x16 \x01(\x03R\n" +
+	"\x14backoffice_subdomain\x18\t \x01(\tR\x13backofficeSubdomain\x126\n" +
+	"\x17backoffice_child_domain\x18\n" +
+	" \x01(\tR\x15backofficeChildDomain\x12\x1f\n" +
+	"\vdomain_pool\x18\v \x03(\tR\n" +
+	"domainPool\x12\x18\n" +
+	"\aenabled\x18\f \x01(\bR\aenabled\x12\x12\n" +
+	"\x04mode\x18\r \x01(\tR\x04mode\x12!\n" +
+	"\foperator_key\x18\x0e \x01(\tR\voperatorKey\x12-\n" +
+	"\x12reporting_currency\x18\x0f \x01(\tR\x11reportingCurrency\x12/\n" +
+	"\x13backoffice_timezone\x18\x10 \x01(\tR\x12backofficeTimezone\x12/\n" +
+	"\x13supported_languages\x18\x11 \x03(\tR\x12supportedLanguages\x121\n" +
+	"\x14supported_currencies\x18\x12 \x03(\tR\x13supportedCurrencies\x12\x16\n" +
+	"\x06status\x18\x13 \x01(\tR\x06status\x12%\n" +
+	"\x0eis_maintenance\x18\x14 \x01(\bR\risMaintenance\x124\n" +
+	"\x16maintenance_start_time\x18\x15 \x01(\x03R\x14maintenanceStartTime\x120\n" +
+	"\x14maintenance_end_time\x18\x16 \x01(\x03R\x12maintenanceEndTime\x12\x1f\n" +
+	"\voperator_id\x18\x17 \x01(\x03R\n" +
 	"operatorId\x12.\n" +
-	"\x13company_operator_id\x18\x17 \x01(\x03R\x11companyOperatorId\x122\n" +
-	"\x15company_operator_name\x18\x18 \x01(\tR\x13companyOperatorName\x120\n" +
-	"\x14retailer_operator_id\x18\x19 \x01(\x03R\x12retailerOperatorId\x124\n" +
-	"\x16retailer_operator_name\x18\x1a \x01(\tR\x14retailerOperatorName\x12,\n" +
-	"\x12system_operator_id\x18\x1b \x01(\x03R\x10systemOperatorId\x120\n" +
-	"\x14system_operator_name\x18\x1c \x01(\tR\x12systemOperatorName\"<\n" +
+	"\x13company_operator_id\x18\x18 \x01(\x03R\x11companyOperatorId\x122\n" +
+	"\x15company_operator_name\x18\x19 \x01(\tR\x13companyOperatorName\x120\n" +
+	"\x14retailer_operator_id\x18\x1a \x01(\x03R\x12retailerOperatorId\x124\n" +
+	"\x16retailer_operator_name\x18\x1b \x01(\tR\x14retailerOperatorName\x12,\n" +
+	"\x12system_operator_id\x18\x1c \x01(\x03R\x10systemOperatorId\x120\n" +
+	"\x14system_operator_name\x18\x1d \x01(\tR\x12systemOperatorName\"<\n" +
 	"\x19GetOperatorDetailsRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"m\n" +
@@ -7661,7 +7607,7 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 110)
+var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 109)
 var file_user_service_v1_user_proto_goTypes = []any{
 	(AuthType)(0),                                                  // 0: api.user.service.v1.AuthType
 	(PasswordProvider)(0),                                          // 1: api.user.service.v1.PasswordProvider
@@ -7751,32 +7697,32 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*GetParentOperatorIdsResponse)(nil),                           // 85: api.user.service.v1.GetParentOperatorIdsResponse
 	(*GetChildOperatorIdsRequest)(nil),                             // 86: api.user.service.v1.GetChildOperatorIdsRequest
 	(*GetChildOperatorIdsResponse)(nil),                            // 87: api.user.service.v1.GetChildOperatorIdsResponse
-	(*OperatorContext)(nil),                                        // 88: api.user.service.v1.OperatorContext
-	(*CheckEmailExistsRequest)(nil),                                // 89: api.user.service.v1.CheckEmailExistsRequest
-	(*CheckEmailExistsResponse)(nil),                               // 90: api.user.service.v1.CheckEmailExistsResponse
-	(*CheckSubdomainExistsRequest)(nil),                            // 91: api.user.service.v1.CheckSubdomainExistsRequest
-	(*CheckSubdomainExistsResponse)(nil),                           // 92: api.user.service.v1.CheckSubdomainExistsResponse
-	(*CheckOperatorKeyExistsRequest)(nil),                          // 93: api.user.service.v1.CheckOperatorKeyExistsRequest
-	(*CheckOperatorKeyExistsResponse)(nil),                         // 94: api.user.service.v1.CheckOperatorKeyExistsResponse
-	(*CreateBusinessRequest)(nil),                                  // 95: api.user.service.v1.CreateBusinessRequest
-	(*CreateBusinessResponse)(nil),                                 // 96: api.user.service.v1.CreateBusinessResponse
-	(*OperatorDetails)(nil),                                        // 97: api.user.service.v1.OperatorDetails
-	(*GetOperatorDetailsRequest)(nil),                              // 98: api.user.service.v1.GetOperatorDetailsRequest
-	(*GetOperatorDetailsResponse)(nil),                             // 99: api.user.service.v1.GetOperatorDetailsResponse
-	(*ListOperatorsByParentOperatorIdRequest)(nil),                 // 100: api.user.service.v1.ListOperatorsByParentOperatorIdRequest
-	(*ListOperatorsByParentOperatorIdResponse)(nil),                // 101: api.user.service.v1.ListOperatorsByParentOperatorIdResponse
-	(*ListUsersResponse_User)(nil),                                 // 102: api.user.service.v1.ListUsersResponse.User
-	(*GetCommentsByUserIdResponse_Comment)(nil),                    // 103: api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	(*GetUserProfileResponse_IpInfo)(nil),                          // 104: api.user.service.v1.GetUserProfileResponse.IpInfo
-	(*GetUserProfileResponse_RegistrationRecord)(nil),              // 105: api.user.service.v1.GetUserProfileResponse.RegistrationRecord
-	(*GetUserProfileResponse_LoginRecord)(nil),                     // 106: api.user.service.v1.GetUserProfileResponse.LoginRecord
-	(*GetUserProfileResponse_Comment)(nil),                         // 107: api.user.service.v1.GetUserProfileResponse.Comment
-	(*GetOverviewDashboardFromUserResponse_RegisteredUsers)(nil),   // 108: api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
-	(*GetOverviewDashboardFromUserResponse_FirstDepositUsers)(nil), // 109: api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
-	(*GetOverviewDashboardFromUserResponse_ActiveUsers)(nil),       // 110: api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
-	(*GetOperatorResponse_Operator)(nil),                           // 111: api.user.service.v1.GetOperatorResponse.Operator
-	(*GetOperatorsByIdsResponse_Operator)(nil),                     // 112: api.user.service.v1.GetOperatorsByIdsResponse.Operator
-	(*ListOperatorsResponse_Operator)(nil),                         // 113: api.user.service.v1.ListOperatorsResponse.Operator
+	(*CheckEmailExistsRequest)(nil),                                // 88: api.user.service.v1.CheckEmailExistsRequest
+	(*CheckEmailExistsResponse)(nil),                               // 89: api.user.service.v1.CheckEmailExistsResponse
+	(*CheckSubdomainExistsRequest)(nil),                            // 90: api.user.service.v1.CheckSubdomainExistsRequest
+	(*CheckSubdomainExistsResponse)(nil),                           // 91: api.user.service.v1.CheckSubdomainExistsResponse
+	(*CheckOperatorKeyExistsRequest)(nil),                          // 92: api.user.service.v1.CheckOperatorKeyExistsRequest
+	(*CheckOperatorKeyExistsResponse)(nil),                         // 93: api.user.service.v1.CheckOperatorKeyExistsResponse
+	(*CreateBusinessRequest)(nil),                                  // 94: api.user.service.v1.CreateBusinessRequest
+	(*CreateBusinessResponse)(nil),                                 // 95: api.user.service.v1.CreateBusinessResponse
+	(*OperatorDetails)(nil),                                        // 96: api.user.service.v1.OperatorDetails
+	(*GetOperatorDetailsRequest)(nil),                              // 97: api.user.service.v1.GetOperatorDetailsRequest
+	(*GetOperatorDetailsResponse)(nil),                             // 98: api.user.service.v1.GetOperatorDetailsResponse
+	(*ListOperatorsByParentOperatorIdRequest)(nil),                 // 99: api.user.service.v1.ListOperatorsByParentOperatorIdRequest
+	(*ListOperatorsByParentOperatorIdResponse)(nil),                // 100: api.user.service.v1.ListOperatorsByParentOperatorIdResponse
+	(*ListUsersResponse_User)(nil),                                 // 101: api.user.service.v1.ListUsersResponse.User
+	(*GetCommentsByUserIdResponse_Comment)(nil),                    // 102: api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	(*GetUserProfileResponse_IpInfo)(nil),                          // 103: api.user.service.v1.GetUserProfileResponse.IpInfo
+	(*GetUserProfileResponse_RegistrationRecord)(nil),              // 104: api.user.service.v1.GetUserProfileResponse.RegistrationRecord
+	(*GetUserProfileResponse_LoginRecord)(nil),                     // 105: api.user.service.v1.GetUserProfileResponse.LoginRecord
+	(*GetUserProfileResponse_Comment)(nil),                         // 106: api.user.service.v1.GetUserProfileResponse.Comment
+	(*GetOverviewDashboardFromUserResponse_RegisteredUsers)(nil),   // 107: api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
+	(*GetOverviewDashboardFromUserResponse_FirstDepositUsers)(nil), // 108: api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
+	(*GetOverviewDashboardFromUserResponse_ActiveUsers)(nil),       // 109: api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
+	(*GetOperatorResponse_Operator)(nil),                           // 110: api.user.service.v1.GetOperatorResponse.Operator
+	(*GetOperatorsByIdsResponse_Operator)(nil),                     // 111: api.user.service.v1.GetOperatorsByIdsResponse.Operator
+	(*ListOperatorsResponse_Operator)(nil),                         // 112: api.user.service.v1.ListOperatorsResponse.Operator
+	(*common.OperatorContext)(nil),                                 // 113: api.common.OperatorContext
 	(*timestamppb.Timestamp)(nil),                                  // 114: google.protobuf.Timestamp
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
@@ -7788,39 +7734,39 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	4,   // 5: api.user.service.v1.AuthResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	4,   // 6: api.user.service.v1.GetUserResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	4,   // 7: api.user.service.v1.GetUsersByIdsResponse.users:type_name -> api.user.service.v1.UserInfo
-	88,  // 8: api.user.service.v1.SendEmailVerificationCodeRequest.operator_context:type_name -> api.user.service.v1.OperatorContext
+	113, // 8: api.user.service.v1.SendEmailVerificationCodeRequest.operator_context:type_name -> api.common.OperatorContext
 	114, // 9: api.user.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
 	114, // 10: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	102, // 11: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
-	88,  // 12: api.user.service.v1.CreateUserRequest.operator_context:type_name -> api.user.service.v1.OperatorContext
-	88,  // 13: api.user.service.v1.VerifyEmailRequest.operator_context:type_name -> api.user.service.v1.OperatorContext
-	103, // 14: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	105, // 15: api.user.service.v1.GetUserProfileResponse.registration_record:type_name -> api.user.service.v1.GetUserProfileResponse.RegistrationRecord
-	106, // 16: api.user.service.v1.GetUserProfileResponse.login_records:type_name -> api.user.service.v1.GetUserProfileResponse.LoginRecord
-	107, // 17: api.user.service.v1.GetUserProfileResponse.comments:type_name -> api.user.service.v1.GetUserProfileResponse.Comment
+	101, // 11: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
+	113, // 12: api.user.service.v1.CreateUserRequest.operator_context:type_name -> api.common.OperatorContext
+	113, // 13: api.user.service.v1.VerifyEmailRequest.operator_context:type_name -> api.common.OperatorContext
+	102, // 14: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	104, // 15: api.user.service.v1.GetUserProfileResponse.registration_record:type_name -> api.user.service.v1.GetUserProfileResponse.RegistrationRecord
+	105, // 16: api.user.service.v1.GetUserProfileResponse.login_records:type_name -> api.user.service.v1.GetUserProfileResponse.LoginRecord
+	106, // 17: api.user.service.v1.GetUserProfileResponse.comments:type_name -> api.user.service.v1.GetUserProfileResponse.Comment
 	59,  // 18: api.user.service.v1.CreateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
 	59,  // 19: api.user.service.v1.Role.permissions:type_name -> api.user.service.v1.Permission
 	62,  // 20: api.user.service.v1.ListRolesResponse.roles:type_name -> api.user.service.v1.Role
 	59,  // 21: api.user.service.v1.UpdateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
 	62,  // 22: api.user.service.v1.GetRoleResponse.role:type_name -> api.user.service.v1.Role
-	108, // 23: api.user.service.v1.GetOverviewDashboardFromUserResponse.registered_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
-	109, // 24: api.user.service.v1.GetOverviewDashboardFromUserResponse.first_deposit_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
-	110, // 25: api.user.service.v1.GetOverviewDashboardFromUserResponse.active_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
-	88,  // 26: api.user.service.v1.GetOperatorIdsByOriginResponse.operator_context:type_name -> api.user.service.v1.OperatorContext
-	111, // 27: api.user.service.v1.GetOperatorResponse.operator:type_name -> api.user.service.v1.GetOperatorResponse.Operator
-	112, // 28: api.user.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.user.service.v1.GetOperatorsByIdsResponse.Operator
-	113, // 29: api.user.service.v1.ListOperatorsResponse.operators:type_name -> api.user.service.v1.ListOperatorsResponse.Operator
-	88,  // 30: api.user.service.v1.CreateBusinessRequest.operator_context:type_name -> api.user.service.v1.OperatorContext
-	97,  // 31: api.user.service.v1.GetOperatorDetailsResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
-	97,  // 32: api.user.service.v1.ListOperatorsByParentOperatorIdResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
+	107, // 23: api.user.service.v1.GetOverviewDashboardFromUserResponse.registered_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
+	108, // 24: api.user.service.v1.GetOverviewDashboardFromUserResponse.first_deposit_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
+	109, // 25: api.user.service.v1.GetOverviewDashboardFromUserResponse.active_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
+	113, // 26: api.user.service.v1.GetOperatorIdsByOriginResponse.operator_context:type_name -> api.common.OperatorContext
+	110, // 27: api.user.service.v1.GetOperatorResponse.operator:type_name -> api.user.service.v1.GetOperatorResponse.Operator
+	111, // 28: api.user.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.user.service.v1.GetOperatorsByIdsResponse.Operator
+	112, // 29: api.user.service.v1.ListOperatorsResponse.operators:type_name -> api.user.service.v1.ListOperatorsResponse.Operator
+	113, // 30: api.user.service.v1.CreateBusinessRequest.operator_context:type_name -> api.common.OperatorContext
+	96,  // 31: api.user.service.v1.GetOperatorDetailsResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
+	96,  // 32: api.user.service.v1.ListOperatorsByParentOperatorIdResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	114, // 33: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
 	114, // 34: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
 	114, // 35: api.user.service.v1.ListUsersResponse.User.created_at:type_name -> google.protobuf.Timestamp
 	62,  // 36: api.user.service.v1.ListUsersResponse.User.role:type_name -> api.user.service.v1.Role
 	114, // 37: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	104, // 38: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	103, // 38: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
 	114, // 39: api.user.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	104, // 40: api.user.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	103, // 40: api.user.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
 	114, // 41: api.user.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
 	5,   // 42: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
 	6,   // 43: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
@@ -7864,12 +7810,12 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	82,  // 81: api.user.service.v1.User.ListOperators:input_type -> api.user.service.v1.ListOperatorsRequest
 	84,  // 82: api.user.service.v1.User.GetParentOperatorIds:input_type -> api.user.service.v1.GetParentOperatorIdsRequest
 	86,  // 83: api.user.service.v1.User.GetChildOperatorIds:input_type -> api.user.service.v1.GetChildOperatorIdsRequest
-	89,  // 84: api.user.service.v1.User.CheckEmailExists:input_type -> api.user.service.v1.CheckEmailExistsRequest
-	91,  // 85: api.user.service.v1.User.CheckSubdomainExists:input_type -> api.user.service.v1.CheckSubdomainExistsRequest
-	93,  // 86: api.user.service.v1.User.CheckOperatorKeyExists:input_type -> api.user.service.v1.CheckOperatorKeyExistsRequest
-	95,  // 87: api.user.service.v1.User.CreateBusiness:input_type -> api.user.service.v1.CreateBusinessRequest
-	98,  // 88: api.user.service.v1.User.GetOperatorDetails:input_type -> api.user.service.v1.GetOperatorDetailsRequest
-	100, // 89: api.user.service.v1.User.ListOperatorsByParentOperatorId:input_type -> api.user.service.v1.ListOperatorsByParentOperatorIdRequest
+	88,  // 84: api.user.service.v1.User.CheckEmailExists:input_type -> api.user.service.v1.CheckEmailExistsRequest
+	90,  // 85: api.user.service.v1.User.CheckSubdomainExists:input_type -> api.user.service.v1.CheckSubdomainExistsRequest
+	92,  // 86: api.user.service.v1.User.CheckOperatorKeyExists:input_type -> api.user.service.v1.CheckOperatorKeyExistsRequest
+	94,  // 87: api.user.service.v1.User.CreateBusiness:input_type -> api.user.service.v1.CreateBusinessRequest
+	97,  // 88: api.user.service.v1.User.GetOperatorDetails:input_type -> api.user.service.v1.GetOperatorDetailsRequest
+	99,  // 89: api.user.service.v1.User.ListOperatorsByParentOperatorId:input_type -> api.user.service.v1.ListOperatorsByParentOperatorIdRequest
 	12,  // 90: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
 	12,  // 91: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
 	12,  // 92: api.user.service.v1.User.LoginWithInfo:output_type -> api.user.service.v1.AuthResponse
@@ -7912,12 +7858,12 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	83,  // 129: api.user.service.v1.User.ListOperators:output_type -> api.user.service.v1.ListOperatorsResponse
 	85,  // 130: api.user.service.v1.User.GetParentOperatorIds:output_type -> api.user.service.v1.GetParentOperatorIdsResponse
 	87,  // 131: api.user.service.v1.User.GetChildOperatorIds:output_type -> api.user.service.v1.GetChildOperatorIdsResponse
-	90,  // 132: api.user.service.v1.User.CheckEmailExists:output_type -> api.user.service.v1.CheckEmailExistsResponse
-	92,  // 133: api.user.service.v1.User.CheckSubdomainExists:output_type -> api.user.service.v1.CheckSubdomainExistsResponse
-	94,  // 134: api.user.service.v1.User.CheckOperatorKeyExists:output_type -> api.user.service.v1.CheckOperatorKeyExistsResponse
-	96,  // 135: api.user.service.v1.User.CreateBusiness:output_type -> api.user.service.v1.CreateBusinessResponse
-	99,  // 136: api.user.service.v1.User.GetOperatorDetails:output_type -> api.user.service.v1.GetOperatorDetailsResponse
-	101, // 137: api.user.service.v1.User.ListOperatorsByParentOperatorId:output_type -> api.user.service.v1.ListOperatorsByParentOperatorIdResponse
+	89,  // 132: api.user.service.v1.User.CheckEmailExists:output_type -> api.user.service.v1.CheckEmailExistsResponse
+	91,  // 133: api.user.service.v1.User.CheckSubdomainExists:output_type -> api.user.service.v1.CheckSubdomainExistsResponse
+	93,  // 134: api.user.service.v1.User.CheckOperatorKeyExists:output_type -> api.user.service.v1.CheckOperatorKeyExistsResponse
+	95,  // 135: api.user.service.v1.User.CreateBusiness:output_type -> api.user.service.v1.CreateBusinessResponse
+	98,  // 136: api.user.service.v1.User.GetOperatorDetails:output_type -> api.user.service.v1.GetOperatorDetailsResponse
+	100, // 137: api.user.service.v1.User.ListOperatorsByParentOperatorId:output_type -> api.user.service.v1.ListOperatorsByParentOperatorIdResponse
 	90,  // [90:138] is the sub-list for method output_type
 	42,  // [42:90] is the sub-list for method input_type
 	42,  // [42:42] is the sub-list for extension type_name
@@ -7938,15 +7884,15 @@ func file_user_service_v1_user_proto_init() {
 	file_user_service_v1_user_proto_msgTypes[57].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[60].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[78].OneofWrappers = []any{}
-	file_user_service_v1_user_proto_msgTypes[91].OneofWrappers = []any{}
-	file_user_service_v1_user_proto_msgTypes[96].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[90].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[95].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   110,
+			NumMessages:   109,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
