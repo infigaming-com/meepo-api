@@ -879,6 +879,8 @@ message ListOperatorsResponse {
 		int64 operator_id = 1;
 		string operator_name = 2;
 		bool enabled = 3;
+		string operator_type = 4;
+		api.common.OperatorContext operator_context = 5;
 	}
 	repeated Operator operators = 1;
 }
