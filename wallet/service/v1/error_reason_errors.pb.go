@@ -766,3 +766,87 @@ func IsPublishOperatorBalanceUpdateEventFailed(err error) bool {
 func ErrorPublishOperatorBalanceUpdateEventFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PUBLISH_OPERATOR_BALANCE_UPDATE_EVENT_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetOperatorBalanceTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_BALANCE_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorBalanceTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_BALANCE_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorBalanceTransactionNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_BALANCE_TRANSACTION_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorOperatorBalanceTransactionNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_BALANCE_TRANSACTION_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsRelatedOperatorBalanceTransactionAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_RELATED_OPERATOR_BALANCE_TRANSACTION_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorRelatedOperatorBalanceTransactionAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_RELATED_OPERATOR_BALANCE_TRANSACTION_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorBalanceTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_BALANCE_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorBalanceTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_BALANCE_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidOperatorTransfer(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_TRANSFER.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorTransfer(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_TRANSFER.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidOperatorSwap(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_SWAP.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorSwap(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_SWAP.String(), fmt.Sprintf(format, args...))
+}
+
+func IsQueryOperatorBalancesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_QUERY_OPERATOR_BALANCES_FAILED.String() && e.Code == 500
+}
+
+func ErrorQueryOperatorBalancesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_QUERY_OPERATOR_BALANCES_FAILED.String(), fmt.Sprintf(format, args...))
+}

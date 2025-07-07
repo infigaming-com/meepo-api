@@ -80,6 +80,9 @@ service Wallet {
 
 	// Transfer cash from operator to company operator
 	rpc OperatorTransfer (OperatorTransferRequest) returns (OperatorTransferResponse) {}
+
+	// List Operator Balances based on filter
+	rpc ListOperatorBalances (ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -590,9 +593,9 @@ message UpdateUserCurrencyResponse {}
 
 message OperatorTransferRequest {
 	int64 real_operator_id = 1;
-	common.OperatorContext operator_context = 2;
+	api.common.OperatorContext operator_context = 2;
 	int64 target_real_operator_id = 3;
-	common.OperatorContext target_operator_context = 4;
+	api.common.OperatorContext target_operator_context = 4;
 	string operator_type = 5;
 	string target_operator_type = 6;
 	string currency = 7;
@@ -609,4 +612,32 @@ message OperatorTransferResponse {
 	string operator_balance_currency = 2;
 	string target_operator_cash = 3;
 	string target_operator_balance_currency = 4;
+}
+
+message ListOperatorBalancesRequest {
+	repeated int64 retail_operator_ids = 1;
+	repeated int64 company_operator_ids = 2;
+	repeated int64 operator_ids = 3;
+	repeated string currencies = 4;
+	optional int32 page = 5; // default 1
+	optional int32 page_size = 6; // default 20
+}
+
+message OperatorBalance {
+	int64 real_operator_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string retailer_operator_name = 3;
+	string company_operator_name = 4;
+	string operator_name = 5;
+	string currency = 6;
+	string protocol = 7; // placeholder for future use
+	string cash = 8;
+	bool enabled = 9;
+}
+
+message ListOperatorBalancesResponse {
+	repeated OperatorBalance operator_balances = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }

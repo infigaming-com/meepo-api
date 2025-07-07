@@ -38,6 +38,30 @@ service BackofficeOperator {
 			body: "*"
 		};
 	}
+
+	// ListRetailers returns a list of retailers by operator context in the middleware
+	rpc ListRetailerOperators(ListRetailerOperatorsRequest) returns (ListRetailerOperatorsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/list/retailer"
+			body: "*"
+		};
+	}
+
+	// ListCompanies returns a list of companies by operator context in the middleware
+	rpc ListCompanyOperators(ListCompanyOperatorsRequest) returns (ListCompanyOperatorsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/list/company"
+			body: "*"
+		};
+	}
+
+	// ListBottomOperators returns a list of bottom operators by operator context in the middleware
+	rpc ListBottomOperators(ListBottomOperatorsRequest) returns (ListBottomOperatorsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/list/bottom"
+			body: "*"
+		};
+	}
 }
 
 message ListOperatorsRequest {
@@ -126,4 +150,35 @@ message ListOperatorsByParentOperatorIdResponse {
 	int32 suspended_count = 7;
 	int32 page = 8;
 	int32 page_size = 9;
+}
+
+message OperatorInfo {
+	int64 operator_id = 1;
+	string operator_name = 2;
+	string status = 3;
+}
+
+message ListRetailerOperatorsRequest {
+}
+
+message ListRetailerOperatorsResponse {
+	repeated OperatorInfo retailer_operators = 1;
+}
+
+message ListCompanyOperatorsRequest {
+	repeated int64 retailer_operator_ids = 1;
+}
+
+message ListCompanyOperatorsResponse {
+	repeated OperatorInfo company_operators = 1;
+}
+
+
+message ListBottomOperatorsRequest {
+	repeated int64 retailer_operator_ids = 1;
+	repeated int64 company_operator_ids = 2;
+}
+
+message ListBottomOperatorsResponse {
+	repeated OperatorInfo operators = 1;
 }
