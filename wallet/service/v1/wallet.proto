@@ -104,7 +104,6 @@ message GetUserBalanceRequest {
 	string currency = 2;
 	// optional target currency
 	string settlement_currency = 3;
-	api.common.OperatorContext operator_context = 4;
 }
 
 message GetUserBalanceResponse {
@@ -244,7 +243,6 @@ message SettleRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
-	api.common.OperatorContext operator_context = 4;
 }
 
 message SettleResponse {
@@ -259,7 +257,6 @@ message RollbackRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
-	api.common.OperatorContext operator_context = 4;
 }
 
 message RollbackResponse {
