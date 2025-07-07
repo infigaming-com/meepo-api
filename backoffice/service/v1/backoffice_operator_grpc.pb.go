@@ -23,6 +23,9 @@ const (
 	BackofficeOperator_CreateOperator_FullMethodName                  = "/api.backoffice.service.v1.BackofficeOperator/CreateOperator"
 	BackofficeOperator_GetCurrentOperatorDetails_FullMethodName       = "/api.backoffice.service.v1.BackofficeOperator/GetCurrentOperatorDetails"
 	BackofficeOperator_ListOperatorsByParentOperatorId_FullMethodName = "/api.backoffice.service.v1.BackofficeOperator/ListOperatorsByParentOperatorId"
+	BackofficeOperator_ListRetailerOperators_FullMethodName           = "/api.backoffice.service.v1.BackofficeOperator/ListRetailerOperators"
+	BackofficeOperator_ListCompanyOperators_FullMethodName            = "/api.backoffice.service.v1.BackofficeOperator/ListCompanyOperators"
+	BackofficeOperator_ListBottomOperators_FullMethodName             = "/api.backoffice.service.v1.BackofficeOperator/ListBottomOperators"
 )
 
 // BackofficeOperatorClient is the client API for BackofficeOperator service.
@@ -35,6 +38,12 @@ type BackofficeOperatorClient interface {
 	GetCurrentOperatorDetails(ctx context.Context, in *GetCurrentOperatorDetailsRequest, opts ...grpc.CallOption) (*GetCurrentOperatorDetailsResponse, error)
 	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
 	ListOperatorsByParentOperatorId(ctx context.Context, in *ListOperatorsByParentOperatorIdRequest, opts ...grpc.CallOption) (*ListOperatorsByParentOperatorIdResponse, error)
+	// ListRetailers returns a list of retailers by operator context in the middleware
+	ListRetailerOperators(ctx context.Context, in *ListRetailerOperatorsRequest, opts ...grpc.CallOption) (*ListRetailerOperatorsResponse, error)
+	// ListCompanies returns a list of companies by operator context in the middleware
+	ListCompanyOperators(ctx context.Context, in *ListCompanyOperatorsRequest, opts ...grpc.CallOption) (*ListCompanyOperatorsResponse, error)
+	// ListBottomOperators returns a list of bottom operators by operator context in the middleware
+	ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error)
 }
 
 type backofficeOperatorClient struct {
@@ -85,6 +94,36 @@ func (c *backofficeOperatorClient) ListOperatorsByParentOperatorId(ctx context.C
 	return out, nil
 }
 
+func (c *backofficeOperatorClient) ListRetailerOperators(ctx context.Context, in *ListRetailerOperatorsRequest, opts ...grpc.CallOption) (*ListRetailerOperatorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListRetailerOperatorsResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_ListRetailerOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) ListCompanyOperators(ctx context.Context, in *ListCompanyOperatorsRequest, opts ...grpc.CallOption) (*ListCompanyOperatorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCompanyOperatorsResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_ListCompanyOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBottomOperatorsResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_ListBottomOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeOperatorServer is the server API for BackofficeOperator service.
 // All implementations must embed UnimplementedBackofficeOperatorServer
 // for forward compatibility.
@@ -95,6 +134,12 @@ type BackofficeOperatorServer interface {
 	GetCurrentOperatorDetails(context.Context, *GetCurrentOperatorDetailsRequest) (*GetCurrentOperatorDetailsResponse, error)
 	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
 	ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error)
+	// ListRetailers returns a list of retailers by operator context in the middleware
+	ListRetailerOperators(context.Context, *ListRetailerOperatorsRequest) (*ListRetailerOperatorsResponse, error)
+	// ListCompanies returns a list of companies by operator context in the middleware
+	ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*ListCompanyOperatorsResponse, error)
+	// ListBottomOperators returns a list of bottom operators by operator context in the middleware
+	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
 	mustEmbedUnimplementedBackofficeOperatorServer()
 }
 
@@ -116,6 +161,15 @@ func (UnimplementedBackofficeOperatorServer) GetCurrentOperatorDetails(context.C
 }
 func (UnimplementedBackofficeOperatorServer) ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorsByParentOperatorId not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) ListRetailerOperators(context.Context, *ListRetailerOperatorsRequest) (*ListRetailerOperatorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRetailerOperators not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*ListCompanyOperatorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCompanyOperators not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBottomOperators not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) mustEmbedUnimplementedBackofficeOperatorServer() {}
 func (UnimplementedBackofficeOperatorServer) testEmbeddedByValue()                            {}
@@ -210,6 +264,60 @@ func _BackofficeOperator_ListOperatorsByParentOperatorId_Handler(srv interface{}
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeOperator_ListRetailerOperators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRetailerOperatorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).ListRetailerOperators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_ListRetailerOperators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).ListRetailerOperators(ctx, req.(*ListRetailerOperatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_ListCompanyOperators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCompanyOperatorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).ListCompanyOperators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_ListCompanyOperators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).ListCompanyOperators(ctx, req.(*ListCompanyOperatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_ListBottomOperators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBottomOperatorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).ListBottomOperators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_ListBottomOperators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).ListBottomOperators(ctx, req.(*ListBottomOperatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeOperator_ServiceDesc is the grpc.ServiceDesc for BackofficeOperator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -232,6 +340,18 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperatorsByParentOperatorId",
 			Handler:    _BackofficeOperator_ListOperatorsByParentOperatorId_Handler,
+		},
+		{
+			MethodName: "ListRetailerOperators",
+			Handler:    _BackofficeOperator_ListRetailerOperators_Handler,
+		},
+		{
+			MethodName: "ListCompanyOperators",
+			Handler:    _BackofficeOperator_ListCompanyOperators_Handler,
+		},
+		{
+			MethodName: "ListBottomOperators",
+			Handler:    _BackofficeOperator_ListBottomOperators_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -67,6 +67,9 @@ const (
 	User_CreateBusiness_FullMethodName                  = "/api.user.service.v1.User/CreateBusiness"
 	User_GetOperatorDetails_FullMethodName              = "/api.user.service.v1.User/GetOperatorDetails"
 	User_ListOperatorsByParentOperatorId_FullMethodName = "/api.user.service.v1.User/ListOperatorsByParentOperatorId"
+	User_ListRetailerOperators_FullMethodName           = "/api.user.service.v1.User/ListRetailerOperators"
+	User_ListCompanyOperators_FullMethodName            = "/api.user.service.v1.User/ListCompanyOperators"
+	User_ListBottomOperators_FullMethodName             = "/api.user.service.v1.User/ListBottomOperators"
 )
 
 // UserClient is the client API for User service.
@@ -163,6 +166,12 @@ type UserClient interface {
 	GetOperatorDetails(ctx context.Context, in *GetOperatorDetailsRequest, opts ...grpc.CallOption) (*GetOperatorDetailsResponse, error)
 	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
 	ListOperatorsByParentOperatorId(ctx context.Context, in *ListOperatorsByParentOperatorIdRequest, opts ...grpc.CallOption) (*ListOperatorsByParentOperatorIdResponse, error)
+	// ListRetailers returns a list of retailers by operator context
+	ListRetailerOperators(ctx context.Context, in *ListRetailerOperatorsRequest, opts ...grpc.CallOption) (*ListRetailerOperatorsResponse, error)
+	// ListCompanies returns a list of companies by operator context
+	ListCompanyOperators(ctx context.Context, in *ListCompanyOperatorsRequest, opts ...grpc.CallOption) (*ListCompanyOperatorsResponse, error)
+	// ListBottomOperators returns a list of bottom operators by operator context
+	ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error)
 }
 
 type userClient struct {
@@ -653,6 +662,36 @@ func (c *userClient) ListOperatorsByParentOperatorId(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *userClient) ListRetailerOperators(ctx context.Context, in *ListRetailerOperatorsRequest, opts ...grpc.CallOption) (*ListRetailerOperatorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListRetailerOperatorsResponse)
+	err := c.cc.Invoke(ctx, User_ListRetailerOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListCompanyOperators(ctx context.Context, in *ListCompanyOperatorsRequest, opts ...grpc.CallOption) (*ListCompanyOperatorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCompanyOperatorsResponse)
+	err := c.cc.Invoke(ctx, User_ListCompanyOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBottomOperatorsResponse)
+	err := c.cc.Invoke(ctx, User_ListBottomOperators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -747,6 +786,12 @@ type UserServer interface {
 	GetOperatorDetails(context.Context, *GetOperatorDetailsRequest) (*GetOperatorDetailsResponse, error)
 	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
 	ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error)
+	// ListRetailers returns a list of retailers by operator context
+	ListRetailerOperators(context.Context, *ListRetailerOperatorsRequest) (*ListRetailerOperatorsResponse, error)
+	// ListCompanies returns a list of companies by operator context
+	ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*ListCompanyOperatorsResponse, error)
+	// ListBottomOperators returns a list of bottom operators by operator context
+	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -900,6 +945,15 @@ func (UnimplementedUserServer) GetOperatorDetails(context.Context, *GetOperatorD
 }
 func (UnimplementedUserServer) ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorsByParentOperatorId not implemented")
+}
+func (UnimplementedUserServer) ListRetailerOperators(context.Context, *ListRetailerOperatorsRequest) (*ListRetailerOperatorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRetailerOperators not implemented")
+}
+func (UnimplementedUserServer) ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*ListCompanyOperatorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCompanyOperators not implemented")
+}
+func (UnimplementedUserServer) ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBottomOperators not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1786,6 +1840,60 @@ func _User_ListOperatorsByParentOperatorId_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_ListRetailerOperators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRetailerOperatorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListRetailerOperators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListRetailerOperators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListRetailerOperators(ctx, req.(*ListRetailerOperatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListCompanyOperators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCompanyOperatorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListCompanyOperators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListCompanyOperators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListCompanyOperators(ctx, req.(*ListCompanyOperatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListBottomOperators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBottomOperatorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListBottomOperators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListBottomOperators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListBottomOperators(ctx, req.(*ListBottomOperatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1984,6 +2092,18 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperatorsByParentOperatorId",
 			Handler:    _User_ListOperatorsByParentOperatorId_Handler,
+		},
+		{
+			MethodName: "ListRetailerOperators",
+			Handler:    _User_ListRetailerOperators_Handler,
+		},
+		{
+			MethodName: "ListCompanyOperators",
+			Handler:    _User_ListCompanyOperators_Handler,
+		},
+		{
+			MethodName: "ListBottomOperators",
+			Handler:    _User_ListBottomOperators_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

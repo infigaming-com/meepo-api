@@ -86,6 +86,15 @@ const (
 	ErrorReason_ADD_OPERATOR_BALANCE_TRANSACTION_FAILED                         ErrorReason = 30058
 	ErrorReason_UPDATE_OPERATOR_BALANCE_FAILED                                  ErrorReason = 30059
 	ErrorReason_CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED                    ErrorReason = 30060
+	ErrorReason_INSUFFICIENT_OPERATOR_BALANCE                                   ErrorReason = 30061
+	ErrorReason_PUBLISH_OPERATOR_BALANCE_UPDATE_EVENT_FAILED                    ErrorReason = 30062
+	ErrorReason_GET_OPERATOR_BALANCE_TRANSACTION_FAILED                         ErrorReason = 30063
+	ErrorReason_OPERATOR_BALANCE_TRANSACTION_NOT_FOUND                          ErrorReason = 30064
+	ErrorReason_RELATED_OPERATOR_BALANCE_TRANSACTION_ALREADY_EXISTS             ErrorReason = 30065
+	ErrorReason_UPDATE_OPERATOR_BALANCE_TRANSACTION_FAILED                      ErrorReason = 30066
+	ErrorReason_INVALID_OPERATOR_TRANSFER                                       ErrorReason = 30067
+	ErrorReason_INVALID_OPERATOR_SWAP                                           ErrorReason = 30068
+	ErrorReason_QUERY_OPERATOR_BALANCES_FAILED                                  ErrorReason = 30069
 )
 
 // Enum value maps for ErrorReason.
@@ -152,6 +161,15 @@ var (
 		30058: "ADD_OPERATOR_BALANCE_TRANSACTION_FAILED",
 		30059: "UPDATE_OPERATOR_BALANCE_FAILED",
 		30060: "CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED",
+		30061: "INSUFFICIENT_OPERATOR_BALANCE",
+		30062: "PUBLISH_OPERATOR_BALANCE_UPDATE_EVENT_FAILED",
+		30063: "GET_OPERATOR_BALANCE_TRANSACTION_FAILED",
+		30064: "OPERATOR_BALANCE_TRANSACTION_NOT_FOUND",
+		30065: "RELATED_OPERATOR_BALANCE_TRANSACTION_ALREADY_EXISTS",
+		30066: "UPDATE_OPERATOR_BALANCE_TRANSACTION_FAILED",
+		30067: "INVALID_OPERATOR_TRANSFER",
+		30068: "INVALID_OPERATOR_SWAP",
+		30069: "QUERY_OPERATOR_BALANCES_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -215,6 +233,15 @@ var (
 		"ADD_OPERATOR_BALANCE_TRANSACTION_FAILED":                         30058,
 		"UPDATE_OPERATOR_BALANCE_FAILED":                                  30059,
 		"CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED":                    30060,
+		"INSUFFICIENT_OPERATOR_BALANCE":                                   30061,
+		"PUBLISH_OPERATOR_BALANCE_UPDATE_EVENT_FAILED":                    30062,
+		"GET_OPERATOR_BALANCE_TRANSACTION_FAILED":                         30063,
+		"OPERATOR_BALANCE_TRANSACTION_NOT_FOUND":                          30064,
+		"RELATED_OPERATOR_BALANCE_TRANSACTION_ALREADY_EXISTS":             30065,
+		"UPDATE_OPERATOR_BALANCE_TRANSACTION_FAILED":                      30066,
+		"INVALID_OPERATOR_TRANSFER":                                       30067,
+		"INVALID_OPERATOR_SWAP":                                           30068,
+		"QUERY_OPERATOR_BALANCES_FAILED":                                  30069,
 	}
 )
 
@@ -249,7 +276,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x85\x12\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x8c\x15\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -311,7 +338,16 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"/GENERATE_OPERATOR_BALANCE_TRANSACTION_ID_FAILED\x10\xe9\xea\x01\x12-\n" +
 	"'ADD_OPERATOR_BALANCE_TRANSACTION_FAILED\x10\xea\xea\x01\x12$\n" +
 	"\x1eUPDATE_OPERATOR_BALANCE_FAILED\x10\xeb\xea\x01\x122\n" +
-	",CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED\x10\xec\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	",CHECK_BALANCE_TRANSACTION_IDEMPOTENCY_FAILED\x10\xec\xea\x01\x12#\n" +
+	"\x1dINSUFFICIENT_OPERATOR_BALANCE\x10\xed\xea\x01\x122\n" +
+	",PUBLISH_OPERATOR_BALANCE_UPDATE_EVENT_FAILED\x10\xee\xea\x01\x12-\n" +
+	"'GET_OPERATOR_BALANCE_TRANSACTION_FAILED\x10\xef\xea\x01\x12,\n" +
+	"&OPERATOR_BALANCE_TRANSACTION_NOT_FOUND\x10\xf0\xea\x01\x129\n" +
+	"3RELATED_OPERATOR_BALANCE_TRANSACTION_ALREADY_EXISTS\x10\xf1\xea\x01\x120\n" +
+	"*UPDATE_OPERATOR_BALANCE_TRANSACTION_FAILED\x10\xf2\xea\x01\x12\x1f\n" +
+	"\x19INVALID_OPERATOR_TRANSFER\x10\xf3\xea\x01\x12\x1b\n" +
+	"\x15INVALID_OPERATOR_SWAP\x10\xf4\xea\x01\x12$\n" +
+	"\x1eQUERY_OPERATOR_BALANCES_FAILED\x10\xf5\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

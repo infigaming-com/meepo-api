@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package api.payment.service.v1;
 
+import "common/common.proto";
+
 option go_package = "github.com/infigaming-com/meepo-api/payment/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.payment.service.v1";
@@ -21,14 +23,11 @@ message OperatorPaymentTransactionEvent {
 	int64 transaction_id = 1;
 	string transaction_type = 2;
 	int64 real_operator_id = 3;
-	int64 operator_id = 4;
-	int64 company_operator_id = 5;
-	int64 retailer_operator_id = 6;
-	int64 system_operator_id = 7;
-	string operator_type = 8;
-	string currency = 9;
-	string settlement_currency = 10;
-	string reporting_currency = 11;
-	string exchange_rate = 12; // exchange rate of the currency to the settlement currency
-	string amount = 13; // cash amount of the currency
+	api.common.OperatorContext operator_context = 4;
+	string operator_type = 5;
+	string currency = 6;
+	string settlement_currency = 7;
+	string reporting_currency = 8;
+	string exchange_rate = 9; // exchange rate of the currency to the settlement currency
+	string amount = 10; // cash amount of the currency
 }

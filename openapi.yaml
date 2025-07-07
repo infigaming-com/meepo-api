@@ -1117,6 +1117,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsResponse'
+    /v1/backoffice/operator/list/bottom:
+        post:
+            tags:
+                - BackofficeOperator
+            description: ListBottomOperators returns a list of bottom operators by operator context in the middleware
+            operationId: BackofficeOperator_ListBottomOperators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListBottomOperatorsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListBottomOperatorsResponse'
     /v1/backoffice/operator/list/by-parent:
         post:
             tags:
@@ -1136,6 +1155,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse'
+    /v1/backoffice/operator/list/company:
+        post:
+            tags:
+                - BackofficeOperator
+            description: ListCompanies returns a list of companies by operator context in the middleware
+            operationId: BackofficeOperator_ListCompanyOperators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCompanyOperatorsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListCompanyOperatorsResponse'
+    /v1/backoffice/operator/list/retailer:
+        post:
+            tags:
+                - BackofficeOperator
+            description: ListRetailers returns a list of retailers by operator context in the middleware
+            operationId: BackofficeOperator_ListRetailerOperators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse'
     /v1/backoffice/payment/channel/create:
         post:
             tags:
@@ -5468,6 +5525,24 @@ components:
                 total:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListBottomOperatorsRequest:
+            type: object
+            properties:
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                companyOperatorIds:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.ListBottomOperatorsResponse:
+            type: object
+            properties:
+                operators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorInfo'
         api.backoffice.service.v1.ListCategoriesRequest:
             type: object
             properties:
@@ -5480,6 +5555,20 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListCompanyOperatorsRequest:
+            type: object
+            properties:
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.ListCompanyOperatorsResponse:
+            type: object
+            properties:
+                companyOperators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorInfo'
         api.backoffice.service.v1.ListCurrenciesRequest:
             type: object
             properties:
@@ -6392,6 +6481,16 @@ components:
                     type: string
                 d120PaidAmt:
                     type: string
+        api.backoffice.service.v1.ListRetailerOperatorsRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.ListRetailerOperatorsResponse:
+            type: object
+            properties:
+                retailerOperators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorInfo'
         api.backoffice.service.v1.ListRolesRequest:
             type: object
             properties:
@@ -7345,6 +7444,15 @@ components:
                 systemOperatorId:
                     type: string
                 systemOperatorName:
+                    type: string
+        api.backoffice.service.v1.OperatorInfo:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                status:
                     type: string
         api.backoffice.service.v1.PaymentChannelInfo:
             type: object
