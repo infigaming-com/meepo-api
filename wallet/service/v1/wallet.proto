@@ -630,12 +630,15 @@ message OperatorTransferResponse {
 }
 
 message ListOperatorBalancesRequest {
-	repeated int64 retail_operator_ids = 1;
+	repeated int64 retailer_operator_ids = 1;
 	repeated int64 company_operator_ids = 2;
 	repeated int64 operator_ids = 3;
 	repeated string currencies = 4;
-	optional int32 page = 5; // default 1
-	optional int32 page_size = 6; // default 20
+	int64 real_operator_id = 5;
+	string operator_type = 6;
+	api.common.OperatorContext operator_context = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9; // default 20
 }
 
 message OperatorBalance {
