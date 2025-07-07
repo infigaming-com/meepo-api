@@ -3,6 +3,7 @@ syntax = "proto3";
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
+import "common/common.proto";
 
 package payment.service.v1;
 
@@ -264,9 +265,11 @@ message InitiateWithdrawRequest {
   int64 operator_id = 4 [json_name="operatorId"];
   // ID of the channel to use for withdrawal
   string channel_id = 5 [json_name="channelId"];
+  // ID of the operator who owns this channel
+	api.common.OperatorContext operator_context = 6;
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
-  google.protobuf.Struct extra = 6;
+  google.protobuf.Struct extra = 7;
 }
 
 // Response for withdrawal initiation
