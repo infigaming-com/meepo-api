@@ -87,6 +87,7 @@ service Wallet {
 
 message GetUserBalancesRequest {
 	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
 }
 
 message GetUserBalancesResponse {
@@ -104,6 +105,7 @@ message GetUserBalanceRequest {
 	string currency = 2;
 	// optional target currency
 	string settlement_currency = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message GetUserBalanceResponse {
@@ -146,6 +148,7 @@ message CreditRequest {
 	string transaction_type = 3;
 	int64 transaction_id = 4;
 	string cash = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 message CreditResponse {
@@ -160,6 +163,7 @@ message DebitRequest {
 	string transaction_type = 3;
 	int64 transaction_id = 4;
 	string cash = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 message DebitResponse {
@@ -177,6 +181,7 @@ message GameDebitRequest {
 	int64 transaction_id = 6;
 	string amount = 7;
 	string turnover = 8;
+	api.common.OperatorContext operator_context = 9;
 }
 
 message GameDebitResponse {
@@ -202,6 +207,7 @@ message GameCreditRequest {
 	int64 transaction_id = 6;
 	int64 original_transaction_id = 7;
 	string amount = 8;
+	api.common.OperatorContext operator_context = 9;
 }
 
 message GameCreditResponse {
@@ -226,6 +232,7 @@ message FreezeRequest {
 	string transaction_type = 3;
 	int64 transaction_id = 4;
 	string cash = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 message FreezeResponse {
@@ -238,6 +245,7 @@ message SettleRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message SettleResponse {
@@ -252,6 +260,7 @@ message RollbackRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message RollbackResponse {
@@ -270,6 +279,7 @@ message RollbackResponse {
 message GetWalletsRequest {
 	int64 user_id = 1;
 	repeated string currencies = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message GetWalletsResponse {
@@ -336,6 +346,7 @@ message ListWalletBalanceTransactionsRequest {
 	optional google.protobuf.Timestamp end_time = 5;
 	optional int32 page = 6;
 	optional int32 page_size = 7;
+	api.common.OperatorContext operator_context = 8;
 }
 
 message ListWalletBalanceTransactionsResponse {
@@ -462,6 +473,7 @@ message GetBackofficeUserOverviewFromWalletRequest {
 	int64 user_id = 1;
 	optional google.protobuf.Timestamp start_time = 2;
 	optional google.protobuf.Timestamp end_time = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message GetBackofficeUserOverviewFromWalletResponse {
@@ -491,6 +503,7 @@ message GetBackofficeUserOverviewFromWalletResponse {
 }
 
 message GetOverviewDashboardFromWalletRequest {
+	api.common.OperatorContext operator_context = 1;
 }
 
 message GetOverviewDashboardFromWalletResponse {
@@ -579,6 +592,7 @@ message UpdateOperatorCurrencyRequest {
 	optional string symbol = 6;
 	optional string icon = 7;
 	optional int32 decimal_places = 8;
+	api.common.OperatorContext operator_context = 9;
 }
 
 message UpdateOperatorCurrencyResponse {}
@@ -587,6 +601,7 @@ message UpdateUserCurrencyRequest {
 	int64 user_id = 1;
 	string currency = 2;
 	bool enabled = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message UpdateUserCurrencyResponse {}
