@@ -4,6 +4,7 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -61,6 +62,12 @@ service BackofficeWallet {
             body: "*"
         };
     }
+	rpc ListOperatorBalances(ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/balances/list"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -268,4 +275,32 @@ message UpdateWalletCurrencyRequest {
 
 message UpdateWalletCurrencyResponse {
 	WalletCurrency currency = 1;
+}
+
+message ListOperatorBalancesRequest {
+	repeated int64 retailer_operator_ids = 1;
+	repeated int64 company_operator_ids = 2;
+	repeated int64 operator_ids = 3;
+	repeated string currencies = 4;
+	optional int32 page = 5; // default 1
+	optional int32 page_size = 6; // default 20
+}
+
+message OperatorBalance {
+	int64 real_operator_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string retailer_operator_name = 3;
+	string company_operator_name = 4;
+	string operator_name = 5;
+	string currency = 6;
+	string protocol = 7; // placeholder for future use
+	string cash = 8;
+	bool enabled = 9;
+}
+
+message ListOperatorBalancesResponse {
+	repeated OperatorBalance operator_balances = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }

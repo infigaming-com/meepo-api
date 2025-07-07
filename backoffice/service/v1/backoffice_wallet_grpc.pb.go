@@ -27,6 +27,7 @@ const (
 	BackofficeWallet_AddWalletCurrency_FullMethodName             = "/api.backoffice.service.v1.BackofficeWallet/AddWalletCurrency"
 	BackofficeWallet_ListWalletCurrencies_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/ListWalletCurrencies"
 	BackofficeWallet_UpdateWalletCurrency_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/UpdateWalletCurrency"
+	BackofficeWallet_ListOperatorBalances_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -42,6 +43,7 @@ type BackofficeWalletClient interface {
 	AddWalletCurrency(ctx context.Context, in *AddWalletCurrencyRequest, opts ...grpc.CallOption) (*AddWalletCurrencyResponse, error)
 	ListWalletCurrencies(ctx context.Context, in *ListWalletCurrenciesRequest, opts ...grpc.CallOption) (*ListWalletCurrenciesResponse, error)
 	UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...grpc.CallOption) (*UpdateWalletCurrencyResponse, error)
+	ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*ListOperatorBalancesResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -132,6 +134,16 @@ func (c *backofficeWalletClient) UpdateWalletCurrency(ctx context.Context, in *U
 	return out, nil
 }
 
+func (c *backofficeWalletClient) ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*ListOperatorBalancesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorBalancesResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListOperatorBalances_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -145,6 +157,7 @@ type BackofficeWalletServer interface {
 	AddWalletCurrency(context.Context, *AddWalletCurrencyRequest) (*AddWalletCurrencyResponse, error)
 	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*ListWalletCurrenciesResponse, error)
 	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*UpdateWalletCurrencyResponse, error)
+	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -178,6 +191,9 @@ func (UnimplementedBackofficeWalletServer) ListWalletCurrencies(context.Context,
 }
 func (UnimplementedBackofficeWalletServer) UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*UpdateWalletCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateWalletCurrency not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorBalances not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -344,6 +360,24 @@ func _BackofficeWallet_UpdateWalletCurrency_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_ListOperatorBalances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorBalancesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListOperatorBalances(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListOperatorBalances_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListOperatorBalances(ctx, req.(*ListOperatorBalancesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -382,6 +416,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateWalletCurrency",
 			Handler:    _BackofficeWallet_UpdateWalletCurrency_Handler,
+		},
+		{
+			MethodName: "ListOperatorBalances",
+			Handler:    _BackofficeWallet_ListOperatorBalances_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
