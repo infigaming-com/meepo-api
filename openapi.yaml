@@ -675,6 +675,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListInvoicesResponse'
+    /v1/backoffice/finance/invoices/send:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_SendInvoices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SendInvoicesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SendInvoicesResponse'
     /v1/backoffice/finance/monthly-revenue-shares/list:
         post:
             tags:
@@ -7050,6 +7068,12 @@ components:
             type: object
             properties: {}
         api.backoffice.service.v1.SendEmailVerificationResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.SendInvoicesRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.SendInvoicesResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.SendMobileVerificationRequest:

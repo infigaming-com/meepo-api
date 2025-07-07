@@ -2767,6 +2767,210 @@ var _ interface {
 	ErrorName() string
 } = CreateAdjustmentConfigResponseValidationError{}
 
+// Validate checks the field values on SendInvoicesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SendInvoicesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendInvoicesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SendInvoicesRequestMultiError, or nil if none found.
+func (m *SendInvoicesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendInvoicesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SendInvoicesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendInvoicesRequestMultiError is an error wrapping multiple validation
+// errors returned by SendInvoicesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SendInvoicesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendInvoicesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendInvoicesRequestMultiError) AllErrors() []error { return m }
+
+// SendInvoicesRequestValidationError is the validation error returned by
+// SendInvoicesRequest.Validate if the designated constraints aren't met.
+type SendInvoicesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendInvoicesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendInvoicesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendInvoicesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendInvoicesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendInvoicesRequestValidationError) ErrorName() string {
+	return "SendInvoicesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendInvoicesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendInvoicesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendInvoicesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendInvoicesRequestValidationError{}
+
+// Validate checks the field values on SendInvoicesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SendInvoicesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendInvoicesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SendInvoicesResponseMultiError, or nil if none found.
+func (m *SendInvoicesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendInvoicesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SendInvoicesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendInvoicesResponseMultiError is an error wrapping multiple validation
+// errors returned by SendInvoicesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SendInvoicesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendInvoicesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendInvoicesResponseMultiError) AllErrors() []error { return m }
+
+// SendInvoicesResponseValidationError is the validation error returned by
+// SendInvoicesResponse.Validate if the designated constraints aren't met.
+type SendInvoicesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendInvoicesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendInvoicesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendInvoicesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendInvoicesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendInvoicesResponseValidationError) ErrorName() string {
+	return "SendInvoicesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendInvoicesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendInvoicesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendInvoicesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendInvoicesResponseValidationError{}
+
 // Validate checks the field values on ListInvoicesResponse_Invoice with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
