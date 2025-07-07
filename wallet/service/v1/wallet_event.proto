@@ -17,6 +17,21 @@ message EventRequest {
 
 message EventResponse {}
 
+message BalanceUpdateEvent {
+	int64 transaction_id = 1;
+	string transaction_type = 2;
+	int64 user_id = 3;
+	int64 operator_id = 4;
+	int64 company_operator_id = 5;
+	int64 retailer_operator_id = 6;
+	int64 system_operator_id = 7;
+	string currency = 8;
+	string before_balance = 9;
+	string after_balance = 10;
+	string amount = 11;
+	int64 created_at = 12;
+}
+
 message OperatorBalanceUpdateEvent {
 	int64 transaction_id = 1;
 	string transaction_type = 2;

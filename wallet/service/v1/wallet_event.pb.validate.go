@@ -238,6 +238,132 @@ var _ interface {
 	ErrorName() string
 } = EventResponseValidationError{}
 
+// Validate checks the field values on BalanceUpdateEvent with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BalanceUpdateEvent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BalanceUpdateEvent with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BalanceUpdateEventMultiError, or nil if none found.
+func (m *BalanceUpdateEvent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BalanceUpdateEvent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	// no validation rules for TransactionType
+
+	// no validation rules for UserId
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for SystemOperatorId
+
+	// no validation rules for Currency
+
+	// no validation rules for BeforeBalance
+
+	// no validation rules for AfterBalance
+
+	// no validation rules for Amount
+
+	// no validation rules for CreatedAt
+
+	if len(errors) > 0 {
+		return BalanceUpdateEventMultiError(errors)
+	}
+
+	return nil
+}
+
+// BalanceUpdateEventMultiError is an error wrapping multiple validation errors
+// returned by BalanceUpdateEvent.ValidateAll() if the designated constraints
+// aren't met.
+type BalanceUpdateEventMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BalanceUpdateEventMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BalanceUpdateEventMultiError) AllErrors() []error { return m }
+
+// BalanceUpdateEventValidationError is the validation error returned by
+// BalanceUpdateEvent.Validate if the designated constraints aren't met.
+type BalanceUpdateEventValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BalanceUpdateEventValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BalanceUpdateEventValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BalanceUpdateEventValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BalanceUpdateEventValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BalanceUpdateEventValidationError) ErrorName() string {
+	return "BalanceUpdateEventValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BalanceUpdateEventValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBalanceUpdateEvent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BalanceUpdateEventValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BalanceUpdateEventValidationError{}
+
 // Validate checks the field values on OperatorBalanceUpdateEvent with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

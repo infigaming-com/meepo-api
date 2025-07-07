@@ -109,6 +109,138 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_event_proto_rawDescGZIP(), []int{1}
 }
 
+type BalanceUpdateEvent struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId      int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	TransactionType    string                 `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	UserId             int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorId         int64                  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId  int64                  `protobuf:"varint,5,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64                  `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	SystemOperatorId   int64                  `protobuf:"varint,7,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	Currency           string                 `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
+	BeforeBalance      string                 `protobuf:"bytes,9,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	AfterBalance       string                 `protobuf:"bytes,10,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	Amount             string                 `protobuf:"bytes,11,opt,name=amount,proto3" json:"amount,omitempty"`
+	CreatedAt          int64                  `protobuf:"varint,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *BalanceUpdateEvent) Reset() {
+	*x = BalanceUpdateEvent{}
+	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BalanceUpdateEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BalanceUpdateEvent) ProtoMessage() {}
+
+func (x *BalanceUpdateEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BalanceUpdateEvent.ProtoReflect.Descriptor instead.
+func (*BalanceUpdateEvent) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_event_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *BalanceUpdateEvent) GetTransactionId() int64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
+}
+
+func (x *BalanceUpdateEvent) GetTransactionType() string {
+	if x != nil {
+		return x.TransactionType
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *BalanceUpdateEvent) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *BalanceUpdateEvent) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *BalanceUpdateEvent) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *BalanceUpdateEvent) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *BalanceUpdateEvent) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetBeforeBalance() string {
+	if x != nil {
+		return x.BeforeBalance
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetAfterBalance() string {
+	if x != nil {
+		return x.AfterBalance
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
 type OperatorBalanceUpdateEvent struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId      int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
@@ -130,7 +262,7 @@ type OperatorBalanceUpdateEvent struct {
 
 func (x *OperatorBalanceUpdateEvent) Reset() {
 	*x = OperatorBalanceUpdateEvent{}
-	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[2]
+	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -142,7 +274,7 @@ func (x *OperatorBalanceUpdateEvent) String() string {
 func (*OperatorBalanceUpdateEvent) ProtoMessage() {}
 
 func (x *OperatorBalanceUpdateEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[2]
+	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -155,7 +287,7 @@ func (x *OperatorBalanceUpdateEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OperatorBalanceUpdateEvent.ProtoReflect.Descriptor instead.
 func (*OperatorBalanceUpdateEvent) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_wallet_event_proto_rawDescGZIP(), []int{2}
+	return file_wallet_service_v1_wallet_event_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *OperatorBalanceUpdateEvent) GetTransactionId() int64 {
@@ -258,7 +390,23 @@ const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse\"\xa2\x04\n" +
+	"\rEventResponse\"\xcf\x03\n" +
+	"\x12BalanceUpdateEvent\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
+	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1f\n" +
+	"\voperator_id\x18\x04 \x01(\x03R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\x05 \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x06 \x01(\x03R\x12retailerOperatorId\x12,\n" +
+	"\x12system_operator_id\x18\a \x01(\x03R\x10systemOperatorId\x12\x1a\n" +
+	"\bcurrency\x18\b \x01(\tR\bcurrency\x12%\n" +
+	"\x0ebefore_balance\x18\t \x01(\tR\rbeforeBalance\x12#\n" +
+	"\rafter_balance\x18\n" +
+	" \x01(\tR\fafterBalance\x12\x16\n" +
+	"\x06amount\x18\v \x01(\tR\x06amount\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\f \x01(\x03R\tcreatedAt\"\xa2\x04\n" +
 	"\x1aOperatorBalanceUpdateEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
 	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12(\n" +
@@ -292,11 +440,12 @@ func file_wallet_service_v1_wallet_event_proto_rawDescGZIP() []byte {
 	return file_wallet_service_v1_wallet_event_proto_rawDescData
 }
 
-var file_wallet_service_v1_wallet_event_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_wallet_service_v1_wallet_event_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_wallet_service_v1_wallet_event_proto_goTypes = []any{
 	(*EventRequest)(nil),               // 0: api.wallet.service.v1.EventRequest
 	(*EventResponse)(nil),              // 1: api.wallet.service.v1.EventResponse
-	(*OperatorBalanceUpdateEvent)(nil), // 2: api.wallet.service.v1.OperatorBalanceUpdateEvent
+	(*BalanceUpdateEvent)(nil),         // 2: api.wallet.service.v1.BalanceUpdateEvent
+	(*OperatorBalanceUpdateEvent)(nil), // 3: api.wallet.service.v1.OperatorBalanceUpdateEvent
 }
 var file_wallet_service_v1_wallet_event_proto_depIdxs = []int32{
 	0, // 0: api.wallet.service.v1.WalletEvent.Event:input_type -> api.wallet.service.v1.EventRequest
@@ -319,7 +468,7 @@ func file_wallet_service_v1_wallet_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wallet_service_v1_wallet_event_proto_rawDesc), len(file_wallet_service_v1_wallet_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
