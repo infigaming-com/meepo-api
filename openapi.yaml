@@ -8426,18 +8426,12 @@ components:
         payment.service.v1.CreatePaymentMethodRequest:
             type: object
             properties:
-                merchantId:
-                    type: string
-                    description: ID of the merchant creating this channel
                 operatorId:
                     type: string
                     description: ID of the Operator connect with this channel
                 paymentMethodId:
                     type: string
                     description: ID of the payment method to be used
-                type:
-                    type: string
-                    description: Type of channel (e.g., deposit, withdrawal)
                 currencyType:
                     type: string
                     description: Currency Type
@@ -8477,10 +8471,8 @@ components:
         payment.service.v1.CreatePaymentMethodResponse:
             type: object
             properties:
-                paymentMethods:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
+                paymentMethod:
+                    $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
         payment.service.v1.DepositCallbackRequest:
             type: object
             properties:
