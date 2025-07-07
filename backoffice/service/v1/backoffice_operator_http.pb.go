@@ -21,9 +21,9 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeOperatorCreateOperator = "/api.backoffice.service.v1.BackofficeOperator/CreateOperator"
 const OperationBackofficeOperatorGetCurrentOperatorDetails = "/api.backoffice.service.v1.BackofficeOperator/GetCurrentOperatorDetails"
+const OperationBackofficeOperatorListAllOperators = "/api.backoffice.service.v1.BackofficeOperator/ListAllOperators"
 const OperationBackofficeOperatorListBottomOperators = "/api.backoffice.service.v1.BackofficeOperator/ListBottomOperators"
 const OperationBackofficeOperatorListCompanyOperators = "/api.backoffice.service.v1.BackofficeOperator/ListCompanyOperators"
-const OperationBackofficeOperatorListOperators = "/api.backoffice.service.v1.BackofficeOperator/ListOperators"
 const OperationBackofficeOperatorListOperatorsByParentOperatorId = "/api.backoffice.service.v1.BackofficeOperator/ListOperatorsByParentOperatorId"
 const OperationBackofficeOperatorListRetailerOperators = "/api.backoffice.service.v1.BackofficeOperator/ListRetailerOperators"
 
@@ -31,11 +31,11 @@ type BackofficeOperatorHTTPServer interface {
 	CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error)
 	// GetCurrentOperatorDetails GetCurrentOperatorDetails returns the current operator details.
 	GetCurrentOperatorDetails(context.Context, *GetCurrentOperatorDetailsRequest) (*GetCurrentOperatorDetailsResponse, error)
+	ListAllOperators(context.Context, *ListAllOperatorsRequest) (*ListAllOperatorsResponse, error)
 	// ListBottomOperators ListBottomOperators returns a list of bottom operators by operator context in the middleware
 	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
 	// ListCompanyOperators ListCompanies returns a list of companies by operator context in the middleware
 	ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*ListCompanyOperatorsResponse, error)
-	ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error)
 	// ListOperatorsByParentOperatorId ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
 	ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error)
 	// ListRetailerOperators ListRetailers returns a list of retailers by operator context in the middleware
@@ -44,7 +44,7 @@ type BackofficeOperatorHTTPServer interface {
 
 func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperatorHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/operator/list", _BackofficeOperator_ListOperators0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/list/all", _BackofficeOperator_ListAllOperators0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/create", _BackofficeOperator_CreateOperator0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/current", _BackofficeOperator_GetCurrentOperatorDetails0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/list/by-parent", _BackofficeOperator_ListOperatorsByParentOperatorId0_HTTP_Handler(srv))
@@ -53,24 +53,24 @@ func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperator
 	r.POST("/v1/backoffice/operator/list/bottom", _BackofficeOperator_ListBottomOperators0_HTTP_Handler(srv))
 }
 
-func _BackofficeOperator_ListOperators0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+func _BackofficeOperator_ListAllOperators0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in ListOperatorsRequest
+		var in ListAllOperatorsRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeOperatorListOperators)
+		http.SetOperation(ctx, OperationBackofficeOperatorListAllOperators)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListOperators(ctx, req.(*ListOperatorsRequest))
+			return srv.ListAllOperators(ctx, req.(*ListAllOperatorsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListOperatorsResponse)
+		reply := out.(*ListAllOperatorsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -210,9 +210,9 @@ func _BackofficeOperator_ListBottomOperators0_HTTP_Handler(srv BackofficeOperato
 type BackofficeOperatorHTTPClient interface {
 	CreateOperator(ctx context.Context, req *CreateOperatorRequest, opts ...http.CallOption) (rsp *CreateOperatorResponse, err error)
 	GetCurrentOperatorDetails(ctx context.Context, req *GetCurrentOperatorDetailsRequest, opts ...http.CallOption) (rsp *GetCurrentOperatorDetailsResponse, err error)
+	ListAllOperators(ctx context.Context, req *ListAllOperatorsRequest, opts ...http.CallOption) (rsp *ListAllOperatorsResponse, err error)
 	ListBottomOperators(ctx context.Context, req *ListBottomOperatorsRequest, opts ...http.CallOption) (rsp *ListBottomOperatorsResponse, err error)
 	ListCompanyOperators(ctx context.Context, req *ListCompanyOperatorsRequest, opts ...http.CallOption) (rsp *ListCompanyOperatorsResponse, err error)
-	ListOperators(ctx context.Context, req *ListOperatorsRequest, opts ...http.CallOption) (rsp *ListOperatorsResponse, err error)
 	ListOperatorsByParentOperatorId(ctx context.Context, req *ListOperatorsByParentOperatorIdRequest, opts ...http.CallOption) (rsp *ListOperatorsByParentOperatorIdResponse, err error)
 	ListRetailerOperators(ctx context.Context, req *ListRetailerOperatorsRequest, opts ...http.CallOption) (rsp *ListRetailerOperatorsResponse, err error)
 }
@@ -251,6 +251,19 @@ func (c *BackofficeOperatorHTTPClientImpl) GetCurrentOperatorDetails(ctx context
 	return &out, nil
 }
 
+func (c *BackofficeOperatorHTTPClientImpl) ListAllOperators(ctx context.Context, in *ListAllOperatorsRequest, opts ...http.CallOption) (*ListAllOperatorsResponse, error) {
+	var out ListAllOperatorsResponse
+	pattern := "/v1/backoffice/operator/list/all"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorListAllOperators))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeOperatorHTTPClientImpl) ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...http.CallOption) (*ListBottomOperatorsResponse, error) {
 	var out ListBottomOperatorsResponse
 	pattern := "/v1/backoffice/operator/list/bottom"
@@ -269,19 +282,6 @@ func (c *BackofficeOperatorHTTPClientImpl) ListCompanyOperators(ctx context.Cont
 	pattern := "/v1/backoffice/operator/list/company"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorListCompanyOperators))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeOperatorHTTPClientImpl) ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...http.CallOption) (*ListOperatorsResponse, error) {
-	var out ListOperatorsResponse
-	pattern := "/v1/backoffice/operator/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeOperatorListOperators))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
