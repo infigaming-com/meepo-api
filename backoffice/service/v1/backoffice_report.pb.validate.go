@@ -3695,8 +3695,6 @@ func (m *ListSummariesResponse_List) validate(all bool) error {
 
 	// no validation rules for UniqueVisits
 
-	// no validation rules for ActiveUsers
-
 	// no validation rules for RegisteredUsers
 
 	// no validation rules for DepositedUsers

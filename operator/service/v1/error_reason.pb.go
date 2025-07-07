@@ -32,6 +32,8 @@ const (
 	ErrorReason_ADD_OPERATOR_FAILED                                ErrorReason = 20003
 	ErrorReason_ADD_ORIGIN_OPERATOR_ID_FAILED_WITH_EXISTING_ORIGIN ErrorReason = 20004
 	ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED                   ErrorReason = 20005
+	ErrorReason_ADJUSTMENT_CONFIG_NOT_FOUND                        ErrorReason = 20006
+	ErrorReason_ADJUSTMENT_CONFIG_ALREADY_EXISTS                   ErrorReason = 20007
 )
 
 // Enum value maps for ErrorReason.
@@ -44,6 +46,8 @@ var (
 		20003: "ADD_OPERATOR_FAILED",
 		20004: "ADD_ORIGIN_OPERATOR_ID_FAILED_WITH_EXISTING_ORIGIN",
 		20005: "GET_OPERATOR_ID_BY_ORIGIN_FAILED",
+		20006: "ADJUSTMENT_CONFIG_NOT_FOUND",
+		20007: "ADJUSTMENT_CONFIG_ALREADY_EXISTS",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":             0,
@@ -53,6 +57,8 @@ var (
 		"ADD_OPERATOR_FAILED":     20003,
 		"ADD_ORIGIN_OPERATOR_ID_FAILED_WITH_EXISTING_ORIGIN": 20004,
 		"GET_OPERATOR_ID_BY_ORIGIN_FAILED":                   20005,
+		"ADJUSTMENT_CONFIG_NOT_FOUND":                        20006,
+		"ADJUSTMENT_CONFIG_ALREADY_EXISTS":                   20007,
 	}
 )
 
@@ -87,7 +93,7 @@ var File_operator_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_operator_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"&operator/service/v1/error_reason.proto\x12\x17api.operator.service.v1\x1a\x13errors/errors.proto*\xf6\x01\n" +
+	"&operator/service/v1/error_reason.proto\x12\x17api.operator.service.v1\x1a\x13errors/errors.proto*\xc1\x02\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x12OPERATOR_NOT_FOUND\x10\xa0\x9c\x01\x12\x1d\n" +
@@ -95,7 +101,9 @@ const file_operator_service_v1_error_reason_proto_rawDesc = "" +
 	"\x14LOCK_OPERATOR_FAILED\x10\xa2\x9c\x01\x12\x19\n" +
 	"\x13ADD_OPERATOR_FAILED\x10\xa3\x9c\x01\x128\n" +
 	"2ADD_ORIGIN_OPERATOR_ID_FAILED_WITH_EXISTING_ORIGIN\x10\xa4\x9c\x01\x12&\n" +
-	" GET_OPERATOR_ID_BY_ORIGIN_FAILED\x10\xa5\x9c\x01\x1a\x04\xa0E\xf4\x03BW\n" +
+	" GET_OPERATOR_ID_BY_ORIGIN_FAILED\x10\xa5\x9c\x01\x12!\n" +
+	"\x1bADJUSTMENT_CONFIG_NOT_FOUND\x10\xa6\x9c\x01\x12&\n" +
+	" ADJUSTMENT_CONFIG_ALREADY_EXISTS\x10\xa7\x9c\x01\x1a\x04\xa0E\xf4\x03BW\n" +
 	"\x17api.operator.service.v1P\x01Z:github.com/infigaming-com/meepo-api/operator/service/v1;v1b\x06proto3"
 
 var (

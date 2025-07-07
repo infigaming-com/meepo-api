@@ -85,6 +85,13 @@ service BackofficeFinance {
 			body: "*"
 		};
 	}
+
+	rpc SendInvoices(SendInvoicesRequest) returns (SendInvoicesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/invoices/send"
+			body: "*"
+		};
+	}
 }
 
 message ListInvoicesRequest {
@@ -466,4 +473,10 @@ message CreateAdjustmentConfigRequest {
 }
 
 message CreateAdjustmentConfigResponse {
+}
+
+message SendInvoicesRequest {
+}
+
+message SendInvoicesResponse {
 }

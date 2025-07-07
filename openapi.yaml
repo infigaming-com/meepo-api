@@ -675,6 +675,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListInvoicesResponse'
+    /v1/backoffice/finance/invoices/send:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_SendInvoices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SendInvoicesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SendInvoicesResponse'
     /v1/backoffice/finance/monthly-revenue-shares/list:
         post:
             tags:
@@ -6044,9 +6062,6 @@ components:
                 uniqueVisits:
                     type: integer
                     format: int32
-                activeUsers:
-                    type: integer
-                    format: int32
                 registeredUsers:
                     type: integer
                     format: int32
@@ -7053,6 +7068,12 @@ components:
             type: object
             properties: {}
         api.backoffice.service.v1.SendEmailVerificationResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.SendInvoicesRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.SendInvoicesResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.SendMobileVerificationRequest:
@@ -8429,18 +8450,12 @@ components:
         payment.service.v1.CreatePaymentMethodRequest:
             type: object
             properties:
-                merchantId:
-                    type: string
-                    description: ID of the merchant creating this channel
                 operatorId:
                     type: string
                     description: ID of the Operator connect with this channel
                 paymentMethodId:
                     type: string
                     description: ID of the payment method to be used
-                type:
-                    type: string
-                    description: Type of channel (e.g., deposit, withdrawal)
                 currencyType:
                     type: string
                     description: Currency Type
@@ -8480,10 +8495,8 @@ components:
         payment.service.v1.CreatePaymentMethodResponse:
             type: object
             properties:
-                paymentMethods:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
+                paymentMethod:
+                    $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
         payment.service.v1.DepositCallbackRequest:
             type: object
             properties:
