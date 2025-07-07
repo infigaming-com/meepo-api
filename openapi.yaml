@@ -693,6 +693,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.SendInvoicesResponse'
+    /v1/backoffice/finance/invoices/summary:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_GetInvoiceSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetInvoiceSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetInvoiceSummaryResponse'
     /v1/backoffice/finance/monthly-revenue-shares/list:
         post:
             tags:
@@ -4016,6 +4034,18 @@ components:
                     type: string
                     description: Operator information
                 operatorName:
+                    type: string
+        api.backoffice.service.v1.GetInvoiceSummaryRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.GetInvoiceSummaryResponse:
+            type: object
+            properties:
+                totalIncome:
+                    type: string
+                totalOutcome:
+                    type: string
+                billingPeriod:
                     type: string
         api.backoffice.service.v1.GetOperatorTagsConfigRequest:
             type: object
