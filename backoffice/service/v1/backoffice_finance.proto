@@ -386,7 +386,7 @@ message AddAdjustmentRequest {
 	int64 operator_id = 4; // Operator ID
 	
 	// Financial information
-	string appied_date = 5; // Applied date
+	string applied_date = 5; // Applied date
 	string currency = 6; // Currency code (e.g., "USDT", "USD")
 	string amount = 7; // Adjustment amount as string to preserve precision
 	string description = 8; // Description of the adjustment
