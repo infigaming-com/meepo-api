@@ -874,3 +874,15 @@ func IsOperatorPermissionDenied(err error) bool {
 func ErrorOperatorPermissionDenied(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_OPERATOR_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUserNotInOperatorContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_NOT_IN_OPERATOR_CONTEXT.String() && e.Code == 500
+}
+
+func ErrorUserNotInOperatorContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_NOT_IN_OPERATOR_CONTEXT.String(), fmt.Sprintf(format, args...))
+}
