@@ -69,7 +69,7 @@ func RegisterBackofficePaymentHTTPServer(s *http.Server, srv BackofficePaymentHT
 	r.POST("/v1/backoffice/payment/method/create", _BackofficePayment_CreatePaymentMethod1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/channel/update", _BackofficePayment_DisablePaymentChannel1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/channel/create", _BackofficePayment_CreatePaymentChannel1_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/payment/custody/address/get", _BackofficePayment_GetCustodyAddress1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/custody/address/get", _BackofficePayment_GetCustodyAddress0_HTTP_Handler(srv))
 }
 
 func _BackofficePayment_GetPaymentTransactionPage0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
@@ -226,7 +226,7 @@ func _BackofficePayment_CreatePaymentChannel1_HTTP_Handler(srv BackofficePayment
 	}
 }
 
-func _BackofficePayment_GetCustodyAddress1_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
+func _BackofficePayment_GetCustodyAddress0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetCustodyAddressRequest
 		if err := ctx.Bind(&in); err != nil {

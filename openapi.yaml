@@ -2336,24 +2336,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.DisablePaymentChannelResponse'
-    /v1/payment/custody/address/get:
-        post:
-            tags:
-                - Payment
-            operationId: Payment_GetCustodyAddress
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetCustodyAddressRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetCustodyAddressResponse'
     /v1/payment/custody/deposit/callback:
         post:
             tags:
@@ -7411,6 +7393,8 @@ components:
                 psp:
                     type: string
                     description: Currency code supported by this payment method (e.g., USD, EUR, CNY)
+                type:
+                    type: string
                 currency:
                     type: string
                 country:
@@ -8885,8 +8869,9 @@ components:
         payment.service.v1.CreatePaymentMethodRequest:
             type: object
             properties:
-                operatorId:
-                    type: string
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
                     description: ID of the Operator connect with this channel
                 paymentMethodId:
                     type: string
@@ -9028,47 +9013,6 @@ components:
                 currency:
                     type: string
                     description: Crypto like btc, eth...
-                protocol:
-                    type: string
-                    description: Crypto protocol
-                network:
-                    type: string
-                    description: Crypto chain
-                address:
-                    type: string
-                    description: Digital Currency address
-        payment.service.v1.GetCustodyAddressRequest:
-            type: object
-            properties:
-                channelId:
-                    type: string
-                    description: ID of the channel to use for this deposit
-                targetCurrency:
-                    type: string
-                extra:
-                    type: object
-                    description: |-
-                        Additional information needed for the deposit
-                         May include clientOrderId, productId, userInfo, etc.
-            description: |-
-                Request to get address
-                 Used to get DC address
-        payment.service.v1.GetCustodyAddressResponse:
-            type: object
-            properties:
-                data:
-                    $ref: '#/components/schemas/payment.service.v1.GetCustodyAddressResponse_Data'
-            description: |-
-                Response for deposit initiation
-                 Contains details about the initiated deposit transaction
-        payment.service.v1.GetCustodyAddressResponse_Data:
-            type: object
-            properties:
-                currency:
-                    type: string
-                    description: Crypto like btc, eth...
-                targetCurrency:
-                    type: string
                 protocol:
                     type: string
                     description: Crypto protocol
@@ -9452,6 +9396,8 @@ components:
                 psp:
                     type: string
                     description: Currency code supported by this payment method (e.g., USD, EUR, CNY)
+                type:
+                    type: string
                 currency:
                     type: string
                 country:

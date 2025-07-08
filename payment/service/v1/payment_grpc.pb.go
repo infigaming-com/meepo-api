@@ -89,7 +89,7 @@ type PaymentClient interface {
 	// Initiate a withdrawal transaction
 	// Starts a new withdrawal process
 	// Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
-	InitiateCustodyWithdraw(ctx context.Context, in *InitiateWithdrawRequest, opts ...grpc.CallOption) (*InitiateWithdrawResponse, error)
+	InitiateCustodyWithdraw(ctx context.Context, in *InitiateCustodyWithdrawRequest, opts ...grpc.CallOption) (*InitiateCustodyWithdrawResponse, error)
 	// Deposit callback
 	// Handles callbacks from payment gateways for deposit status updates
 	// This endpoint is called by payment providers to notify of completed or failed deposits
@@ -233,9 +233,9 @@ func (c *paymentClient) GetCustodyAddress(ctx context.Context, in *GetCustodyAdd
 	return out, nil
 }
 
-func (c *paymentClient) InitiateCustodyWithdraw(ctx context.Context, in *InitiateWithdrawRequest, opts ...grpc.CallOption) (*InitiateWithdrawResponse, error) {
+func (c *paymentClient) InitiateCustodyWithdraw(ctx context.Context, in *InitiateCustodyWithdrawRequest, opts ...grpc.CallOption) (*InitiateCustodyWithdrawResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(InitiateWithdrawResponse)
+	out := new(InitiateCustodyWithdrawResponse)
 	err := c.cc.Invoke(ctx, Payment_InitiateCustodyWithdraw_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -353,7 +353,7 @@ type PaymentServer interface {
 	// Initiate a withdrawal transaction
 	// Starts a new withdrawal process
 	// Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
-	InitiateCustodyWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error)
+	InitiateCustodyWithdraw(context.Context, *InitiateCustodyWithdrawRequest) (*InitiateCustodyWithdrawResponse, error)
 	// Deposit callback
 	// Handles callbacks from payment gateways for deposit status updates
 	// This endpoint is called by payment providers to notify of completed or failed deposits
@@ -420,7 +420,7 @@ func (UnimplementedPaymentServer) WithdrawCallback(context.Context, *WithdrawCal
 func (UnimplementedPaymentServer) GetCustodyAddress(context.Context, *GetCustodyAddressRequest) (*GetCustodyAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCustodyAddress not implemented")
 }
-func (UnimplementedPaymentServer) InitiateCustodyWithdraw(context.Context, *InitiateWithdrawRequest) (*InitiateWithdrawResponse, error) {
+func (UnimplementedPaymentServer) InitiateCustodyWithdraw(context.Context, *InitiateCustodyWithdrawRequest) (*InitiateCustodyWithdrawResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InitiateCustodyWithdraw not implemented")
 }
 func (UnimplementedPaymentServer) CustodyDepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error) {
@@ -661,7 +661,7 @@ func _Payment_GetCustodyAddress_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _Payment_InitiateCustodyWithdraw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InitiateWithdrawRequest)
+	in := new(InitiateCustodyWithdrawRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -673,7 +673,7 @@ func _Payment_InitiateCustodyWithdraw_Handler(srv interface{}, ctx context.Conte
 		FullMethod: Payment_InitiateCustodyWithdraw_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServer).InitiateCustodyWithdraw(ctx, req.(*InitiateWithdrawRequest))
+		return srv.(PaymentServer).InitiateCustodyWithdraw(ctx, req.(*InitiateCustodyWithdrawRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

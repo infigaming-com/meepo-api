@@ -269,6 +269,8 @@ func (m *PaymentMethodInfo) validate(all bool) error {
 
 	// no validation rules for Psp
 
+	// no validation rules for Type
+
 	// no validation rules for Currency
 
 	// no validation rules for Country
@@ -690,7 +692,34 @@ func (m *CreatePaymentMethodRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for OperatorId
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreatePaymentMethodRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreatePaymentMethodRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreatePaymentMethodRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for PaymentMethodId
 
@@ -2253,6 +2282,35 @@ func (m *GetCustodyAddressRequest) validate(all bool) error {
 	// no validation rules for TargetCurrency
 
 	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetCustodyAddressRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetCustodyAddressRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetCustodyAddressRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
 		switch v := interface{}(m.GetExtra()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
@@ -2800,6 +2858,315 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = InitiateWithdrawResponseValidationError{}
+
+// Validate checks the field values on InitiateCustodyWithdrawRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InitiateCustodyWithdrawRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InitiateCustodyWithdrawRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// InitiateCustodyWithdrawRequestMultiError, or nil if none found.
+func (m *InitiateCustodyWithdrawRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InitiateCustodyWithdrawRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Amount
+
+	// no validation rules for Currency
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, InitiateCustodyWithdrawRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, InitiateCustodyWithdrawRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return InitiateCustodyWithdrawRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for ChannelId
+
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, InitiateCustodyWithdrawRequestValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, InitiateCustodyWithdrawRequestValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return InitiateCustodyWithdrawRequestValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return InitiateCustodyWithdrawRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// InitiateCustodyWithdrawRequestMultiError is an error wrapping multiple
+// validation errors returned by InitiateCustodyWithdrawRequest.ValidateAll()
+// if the designated constraints aren't met.
+type InitiateCustodyWithdrawRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InitiateCustodyWithdrawRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InitiateCustodyWithdrawRequestMultiError) AllErrors() []error { return m }
+
+// InitiateCustodyWithdrawRequestValidationError is the validation error
+// returned by InitiateCustodyWithdrawRequest.Validate if the designated
+// constraints aren't met.
+type InitiateCustodyWithdrawRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InitiateCustodyWithdrawRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InitiateCustodyWithdrawRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InitiateCustodyWithdrawRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InitiateCustodyWithdrawRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InitiateCustodyWithdrawRequestValidationError) ErrorName() string {
+	return "InitiateCustodyWithdrawRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InitiateCustodyWithdrawRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInitiateCustodyWithdrawRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InitiateCustodyWithdrawRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InitiateCustodyWithdrawRequestValidationError{}
+
+// Validate checks the field values on InitiateCustodyWithdrawResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InitiateCustodyWithdrawResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InitiateCustodyWithdrawResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// InitiateCustodyWithdrawResponseMultiError, or nil if none found.
+func (m *InitiateCustodyWithdrawResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InitiateCustodyWithdrawResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	// no validation rules for OperatorOrderNo
+
+	// no validation rules for Amount
+
+	// no validation rules for Status
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, InitiateCustodyWithdrawResponseValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, InitiateCustodyWithdrawResponseValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return InitiateCustodyWithdrawResponseValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return InitiateCustodyWithdrawResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// InitiateCustodyWithdrawResponseMultiError is an error wrapping multiple
+// validation errors returned by InitiateCustodyWithdrawResponse.ValidateAll()
+// if the designated constraints aren't met.
+type InitiateCustodyWithdrawResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InitiateCustodyWithdrawResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InitiateCustodyWithdrawResponseMultiError) AllErrors() []error { return m }
+
+// InitiateCustodyWithdrawResponseValidationError is the validation error
+// returned by InitiateCustodyWithdrawResponse.Validate if the designated
+// constraints aren't met.
+type InitiateCustodyWithdrawResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InitiateCustodyWithdrawResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InitiateCustodyWithdrawResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InitiateCustodyWithdrawResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InitiateCustodyWithdrawResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InitiateCustodyWithdrawResponseValidationError) ErrorName() string {
+	return "InitiateCustodyWithdrawResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InitiateCustodyWithdrawResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInitiateCustodyWithdrawResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InitiateCustodyWithdrawResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InitiateCustodyWithdrawResponseValidationError{}
 
 // Validate checks the field values on DepositCallbackRequest with the rules
 // defined in the proto definition for this message. If any rules are

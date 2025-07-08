@@ -903,21 +903,22 @@ type PaymentMethodInfo struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Currency code supported by this payment method (e.g., USD, EUR, CNY)
 	Psp      string `protobuf:"bytes,2,opt,name=psp,proto3" json:"psp,omitempty"`
-	Currency string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	Type     string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Country code where this payment method is available
-	Country string `protobuf:"bytes,4,opt,name=country,proto3" json:"country,omitempty"`
+	Country string `protobuf:"bytes,5,opt,name=country,proto3" json:"country,omitempty"`
 	// Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
-	PaymentMethod string `protobuf:"bytes,5,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	PaymentMethod string `protobuf:"bytes,6,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Fixed Fee on the Amount
-	FixedFee string `protobuf:"bytes,6,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
+	FixedFee string `protobuf:"bytes,7,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
 	// Rate Fee
-	FeeRate string `protobuf:"bytes,7,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	FeeRate string `protobuf:"bytes,8,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
 	// Min Amount
-	MinAmount string `protobuf:"bytes,8,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	MinAmount string `protobuf:"bytes,9,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Max Amount
-	MaxAmount string `protobuf:"bytes,9,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	MaxAmount string `protobuf:"bytes,10,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	// JSON schema defining the required fields for this payment method
-	KeySchema     *structpb.Struct `protobuf:"bytes,10,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
+	KeySchema     *structpb.Struct `protobuf:"bytes,11,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -962,6 +963,13 @@ func (x *PaymentMethodInfo) GetId() string {
 func (x *PaymentMethodInfo) GetPsp() string {
 	if x != nil {
 		return x.Psp
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetType() string {
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
@@ -1995,22 +2003,23 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xc0\x02\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xd4\x02\n" +
 	"\x11PaymentMethodInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
-	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x1a\n" +
-	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x18\n" +
-	"\acountry\x18\x04 \x01(\tR\acountry\x12%\n" +
-	"\x0epayment_method\x18\x05 \x01(\tR\rpaymentMethod\x12\x1b\n" +
-	"\tfixed_fee\x18\x06 \x01(\tR\bfixedFee\x12\x19\n" +
-	"\bfee_rate\x18\a \x01(\tR\afeeRate\x12\x1d\n" +
+	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1a\n" +
+	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12\x18\n" +
+	"\acountry\x18\x05 \x01(\tR\acountry\x12%\n" +
+	"\x0epayment_method\x18\x06 \x01(\tR\rpaymentMethod\x12\x1b\n" +
+	"\tfixed_fee\x18\a \x01(\tR\bfixedFee\x12\x19\n" +
+	"\bfee_rate\x18\b \x01(\tR\afeeRate\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\b \x01(\tR\tminAmount\x12\x1d\n" +
+	"min_amount\x18\t \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\t \x01(\tR\tmaxAmount\x126\n" +
+	"max_amount\x18\n" +
+	" \x01(\tR\tmaxAmount\x126\n" +
 	"\n" +
-	"key_schema\x18\n" +
-	" \x01(\v2\x17.google.protobuf.StructR\tkeySchema\"B\n" +
+	"key_schema\x18\v \x01(\v2\x17.google.protobuf.StructR\tkeySchema\"B\n" +
 	"$GetSupportedPaymentMethodListRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x03(\tR\bcurrency\"\xd0\x01\n" +
 	"%GetSupportedPaymentMethodListResponse\x12U\n" +

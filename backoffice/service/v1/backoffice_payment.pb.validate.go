@@ -1170,6 +1170,8 @@ func (m *PaymentMethodInfo) validate(all bool) error {
 
 	// no validation rules for Psp
 
+	// no validation rules for Type
+
 	// no validation rules for Currency
 
 	// no validation rules for Country
