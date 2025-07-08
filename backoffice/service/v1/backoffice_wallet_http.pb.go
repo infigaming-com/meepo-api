@@ -20,6 +20,7 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeWalletAddWalletCurrency = "/api.backoffice.service.v1.BackofficeWallet/AddWalletCurrency"
+const OperationBackofficeWalletGetExchangeRates = "/api.backoffice.service.v1.BackofficeWallet/GetExchangeRates"
 const OperationBackofficeWalletGetWalletCreditTransactions = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
 const OperationBackofficeWalletGetWalletCredits = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCredits"
 const OperationBackofficeWalletGetWallets = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
@@ -31,6 +32,7 @@ const OperationBackofficeWalletUpdateWalletCurrency = "/api.backoffice.service.v
 
 type BackofficeWalletHTTPServer interface {
 	AddWalletCurrency(context.Context, *AddWalletCurrencyRequest) (*AddWalletCurrencyResponse, error)
+	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
 	GetWalletCredits(context.Context, *GetWalletCreditsRequest) (*GetWalletCreditsResponse, error)
 	GetWallets(context.Context, *GetWalletsRequest) (*GetWalletsResponse, error)
@@ -53,6 +55,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/currencies/list", _BackofficeWallet_ListWalletCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/currencies/update", _BackofficeWallet_UpdateWalletCurrency0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balances/list", _BackofficeWallet_ListOperatorBalances0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/exchange-rates/get", _BackofficeWallet_GetExchangeRates0_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -253,8 +256,31 @@ func _BackofficeWallet_ListOperatorBalances0_HTTP_Handler(srv BackofficeWalletHT
 	}
 }
 
+func _BackofficeWallet_GetExchangeRates0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetExchangeRatesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletGetExchangeRates)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetExchangeRates(ctx, req.(*GetExchangeRatesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetExchangeRatesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeWalletHTTPClient interface {
 	AddWalletCurrency(ctx context.Context, req *AddWalletCurrencyRequest, opts ...http.CallOption) (rsp *AddWalletCurrencyResponse, err error)
+	GetExchangeRates(ctx context.Context, req *GetExchangeRatesRequest, opts ...http.CallOption) (rsp *GetExchangeRatesResponse, err error)
 	GetWalletCreditTransactions(ctx context.Context, req *GetWalletCreditTransactionsRequest, opts ...http.CallOption) (rsp *GetWalletCreditTransactionsResponse, err error)
 	GetWalletCredits(ctx context.Context, req *GetWalletCreditsRequest, opts ...http.CallOption) (rsp *GetWalletCreditsResponse, err error)
 	GetWallets(ctx context.Context, req *GetWalletsRequest, opts ...http.CallOption) (rsp *GetWalletsResponse, err error)
@@ -278,6 +304,19 @@ func (c *BackofficeWalletHTTPClientImpl) AddWalletCurrency(ctx context.Context, 
 	pattern := "/v1/backoffice/wallet/currencies/add"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletAddWalletCurrency))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeWalletHTTPClientImpl) GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...http.CallOption) (*GetExchangeRatesResponse, error) {
+	var out GetExchangeRatesResponse
+	pattern := "/v1/backoffice/wallet/exchange-rates/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletGetExchangeRates))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
