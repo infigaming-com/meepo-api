@@ -97,6 +97,12 @@ const (
 	ErrorReason_EMAIL_ALREADY_EXISTS                     ErrorReason = 10070
 	ErrorReason_INVALID_OPERATOR_STATUS                  ErrorReason = 10071
 	ErrorReason_DOMAIN_POOL_EMPTY                        ErrorReason = 10072
+	ErrorReason_TARGET_OPERATOR_NOT_BELONG_TO_OPERATOR   ErrorReason = 10073
+	ErrorReason_OPERATOR_NOT_FOUND_BY_ID                 ErrorReason = 10074
+	ErrorReason_GET_OPERATOR_BY_ID_FAILED                ErrorReason = 10075
+	ErrorReason_INVALID_OPERATOR_TRANSITION_ACTION       ErrorReason = 10076
+	ErrorReason_UPDATE_OPERATOR_STATUS_FAILED            ErrorReason = 10077
+	ErrorReason_INVALID_OPERATOR_CONTEXT                 ErrorReason = 10078
 )
 
 // Enum value maps for ErrorReason.
@@ -174,6 +180,12 @@ var (
 		10070: "EMAIL_ALREADY_EXISTS",
 		10071: "INVALID_OPERATOR_STATUS",
 		10072: "DOMAIN_POOL_EMPTY",
+		10073: "TARGET_OPERATOR_NOT_BELONG_TO_OPERATOR",
+		10074: "OPERATOR_NOT_FOUND_BY_ID",
+		10075: "GET_OPERATOR_BY_ID_FAILED",
+		10076: "INVALID_OPERATOR_TRANSITION_ACTION",
+		10077: "UPDATE_OPERATOR_STATUS_FAILED",
+		10078: "INVALID_OPERATOR_CONTEXT",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                              0,
@@ -248,6 +260,12 @@ var (
 		"EMAIL_ALREADY_EXISTS":                     10070,
 		"INVALID_OPERATOR_STATUS":                  10071,
 		"DOMAIN_POOL_EMPTY":                        10072,
+		"TARGET_OPERATOR_NOT_BELONG_TO_OPERATOR":   10073,
+		"OPERATOR_NOT_FOUND_BY_ID":                 10074,
+		"GET_OPERATOR_BY_ID_FAILED":                10075,
+		"INVALID_OPERATOR_TRANSITION_ACTION":       10076,
+		"UPDATE_OPERATOR_STATUS_FAILED":            10077,
+		"INVALID_OPERATOR_CONTEXT":                 10078,
 	}
 )
 
@@ -282,7 +300,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xe4\x11\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xbc\x13\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -355,7 +373,13 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x0eEMPTY_PASSWORD\x10\xd5N\x12\x19\n" +
 	"\x14EMAIL_ALREADY_EXISTS\x10\xd6N\x12\x1c\n" +
 	"\x17INVALID_OPERATOR_STATUS\x10\xd7N\x12\x16\n" +
-	"\x11DOMAIN_POOL_EMPTY\x10\xd8N\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x11DOMAIN_POOL_EMPTY\x10\xd8N\x12+\n" +
+	"&TARGET_OPERATOR_NOT_BELONG_TO_OPERATOR\x10\xd9N\x12\x1d\n" +
+	"\x18OPERATOR_NOT_FOUND_BY_ID\x10\xdaN\x12\x1e\n" +
+	"\x19GET_OPERATOR_BY_ID_FAILED\x10\xdbN\x12'\n" +
+	"\"INVALID_OPERATOR_TRANSITION_ACTION\x10\xdcN\x12\"\n" +
+	"\x1dUPDATE_OPERATOR_STATUS_FAILED\x10\xddN\x12\x1d\n" +
+	"\x18INVALID_OPERATOR_CONTEXT\x10\xdeN\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
