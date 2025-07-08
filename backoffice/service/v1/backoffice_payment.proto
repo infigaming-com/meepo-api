@@ -84,9 +84,9 @@ service BackofficePayment {
     };
   }
 
-  rpc GetCustodyAddress(GetCustodyAddressRequest) returns (GetCustodyAddressResponse) {
+  rpc GetOperatorAddress(GetOperatorAddressRequest) returns (GetOperatorAddressResponse) {
     option (google.api.http) = {
-      post: "/v1/backoffice/payment/custody/address/get"
+      post: "/v1/backoffice/payment/operator/address/get"
       body: "*"
     };
   }
@@ -382,7 +382,7 @@ message CreatePaymentChannelResponse {
 
 // Request to get address
 // Used to get DC address
-message GetCustodyAddressRequest {
+message GetOperatorAddressRequest {
   // ID of the channel to use for this deposit
   string channel_id = 1 [json_name="channelId"];
 
@@ -395,7 +395,7 @@ message GetCustodyAddressRequest {
 
 // Response for deposit initiation
 // Contains details about the initiated deposit transaction
-message GetCustodyAddressResponse {
+message GetOperatorAddressResponse {
   message Data {
     // Crypto like btc, eth...
     string currency = 1;

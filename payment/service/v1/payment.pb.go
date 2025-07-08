@@ -1616,7 +1616,7 @@ func (x *GetAddressResponse) GetData() *GetAddressResponse_Data {
 
 // Request to get address
 // Used to get DC address
-type GetCustodyAddressRequest struct {
+type GetOperatorAddressRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the channel to use for this deposit
 	ChannelId       string                  `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
@@ -1629,20 +1629,20 @@ type GetCustodyAddressRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetCustodyAddressRequest) Reset() {
-	*x = GetCustodyAddressRequest{}
+func (x *GetOperatorAddressRequest) Reset() {
+	*x = GetOperatorAddressRequest{}
 	mi := &file_payment_service_v1_payment_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetCustodyAddressRequest) String() string {
+func (x *GetOperatorAddressRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetCustodyAddressRequest) ProtoMessage() {}
+func (*GetOperatorAddressRequest) ProtoMessage() {}
 
-func (x *GetCustodyAddressRequest) ProtoReflect() protoreflect.Message {
+func (x *GetOperatorAddressRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_service_v1_payment_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1654,33 +1654,33 @@ func (x *GetCustodyAddressRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetCustodyAddressRequest.ProtoReflect.Descriptor instead.
-func (*GetCustodyAddressRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOperatorAddressRequest.ProtoReflect.Descriptor instead.
+func (*GetOperatorAddressRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *GetCustodyAddressRequest) GetChannelId() string {
+func (x *GetOperatorAddressRequest) GetChannelId() string {
 	if x != nil {
 		return x.ChannelId
 	}
 	return ""
 }
 
-func (x *GetCustodyAddressRequest) GetTargetCurrency() string {
+func (x *GetOperatorAddressRequest) GetTargetCurrency() string {
 	if x != nil {
 		return x.TargetCurrency
 	}
 	return ""
 }
 
-func (x *GetCustodyAddressRequest) GetOperatorContext() *common.OperatorContext {
+func (x *GetOperatorAddressRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *GetCustodyAddressRequest) GetExtra() *structpb.Struct {
+func (x *GetOperatorAddressRequest) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -1689,27 +1689,27 @@ func (x *GetCustodyAddressRequest) GetExtra() *structpb.Struct {
 
 // Response for deposit initiation
 // Contains details about the initiated deposit transaction
-type GetCustodyAddressResponse struct {
-	state         protoimpl.MessageState          `protogen:"open.v1"`
-	Data          *GetCustodyAddressResponse_Data `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+type GetOperatorAddressResponse struct {
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	Data          *GetOperatorAddressResponse_Data `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetCustodyAddressResponse) Reset() {
-	*x = GetCustodyAddressResponse{}
+func (x *GetOperatorAddressResponse) Reset() {
+	*x = GetOperatorAddressResponse{}
 	mi := &file_payment_service_v1_payment_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetCustodyAddressResponse) String() string {
+func (x *GetOperatorAddressResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetCustodyAddressResponse) ProtoMessage() {}
+func (*GetOperatorAddressResponse) ProtoMessage() {}
 
-func (x *GetCustodyAddressResponse) ProtoReflect() protoreflect.Message {
+func (x *GetOperatorAddressResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_service_v1_payment_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1721,12 +1721,12 @@ func (x *GetCustodyAddressResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetCustodyAddressResponse.ProtoReflect.Descriptor instead.
-func (*GetCustodyAddressResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOperatorAddressResponse.ProtoReflect.Descriptor instead.
+func (*GetOperatorAddressResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *GetCustodyAddressResponse) GetData() *GetCustodyAddressResponse_Data {
+func (x *GetOperatorAddressResponse) GetData() *GetOperatorAddressResponse_Data {
 	if x != nil {
 		return x.Data
 	}
@@ -1920,14 +1920,13 @@ func (x *InitiateWithdrawResponse) GetCreatedAt() *timestamppb.Timestamp {
 
 // Request to initiate a withdrawal
 // Used to start a withdrawal transaction
-type InitiateCustodyWithdrawRequest struct {
+type InitiateOperatorWithdrawRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Amount to withdraw in smallest currency unit (e.g., cents)
 	Amount string `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Currency code for the transaction
-	Currency string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	// ID of the user who initiated the withdrawal
-	UserId int64 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency       string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	SourceCurrency string `protobuf:"bytes,3,opt,name=source_currency,json=sourceCurrency,proto3" json:"source_currency,omitempty"`
 	// ID of the operator who owns this channel
 	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// ID of the channel to use for withdrawal
@@ -1939,20 +1938,20 @@ type InitiateCustodyWithdrawRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *InitiateCustodyWithdrawRequest) Reset() {
-	*x = InitiateCustodyWithdrawRequest{}
+func (x *InitiateOperatorWithdrawRequest) Reset() {
+	*x = InitiateOperatorWithdrawRequest{}
 	mi := &file_payment_service_v1_payment_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *InitiateCustodyWithdrawRequest) String() string {
+func (x *InitiateOperatorWithdrawRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*InitiateCustodyWithdrawRequest) ProtoMessage() {}
+func (*InitiateOperatorWithdrawRequest) ProtoMessage() {}
 
-func (x *InitiateCustodyWithdrawRequest) ProtoReflect() protoreflect.Message {
+func (x *InitiateOperatorWithdrawRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_service_v1_payment_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1964,47 +1963,47 @@ func (x *InitiateCustodyWithdrawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use InitiateCustodyWithdrawRequest.ProtoReflect.Descriptor instead.
-func (*InitiateCustodyWithdrawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use InitiateOperatorWithdrawRequest.ProtoReflect.Descriptor instead.
+func (*InitiateOperatorWithdrawRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *InitiateCustodyWithdrawRequest) GetAmount() string {
+func (x *InitiateOperatorWithdrawRequest) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
 	return ""
 }
 
-func (x *InitiateCustodyWithdrawRequest) GetCurrency() string {
+func (x *InitiateOperatorWithdrawRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *InitiateCustodyWithdrawRequest) GetUserId() int64 {
+func (x *InitiateOperatorWithdrawRequest) GetSourceCurrency() string {
 	if x != nil {
-		return x.UserId
+		return x.SourceCurrency
 	}
-	return 0
+	return ""
 }
 
-func (x *InitiateCustodyWithdrawRequest) GetOperatorContext() *common.OperatorContext {
+func (x *InitiateOperatorWithdrawRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *InitiateCustodyWithdrawRequest) GetChannelId() string {
+func (x *InitiateOperatorWithdrawRequest) GetChannelId() string {
 	if x != nil {
 		return x.ChannelId
 	}
 	return ""
 }
 
-func (x *InitiateCustodyWithdrawRequest) GetExtra() *structpb.Struct {
+func (x *InitiateOperatorWithdrawRequest) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -2013,7 +2012,7 @@ func (x *InitiateCustodyWithdrawRequest) GetExtra() *structpb.Struct {
 
 // Response for withdrawal initiation
 // Contains details about the initiated withdrawal transaction
-type InitiateCustodyWithdrawResponse struct {
+type InitiateOperatorWithdrawResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier for the transaction
 	TransactionId int64 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
@@ -2029,20 +2028,20 @@ type InitiateCustodyWithdrawResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *InitiateCustodyWithdrawResponse) Reset() {
-	*x = InitiateCustodyWithdrawResponse{}
+func (x *InitiateOperatorWithdrawResponse) Reset() {
+	*x = InitiateOperatorWithdrawResponse{}
 	mi := &file_payment_service_v1_payment_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *InitiateCustodyWithdrawResponse) String() string {
+func (x *InitiateOperatorWithdrawResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*InitiateCustodyWithdrawResponse) ProtoMessage() {}
+func (*InitiateOperatorWithdrawResponse) ProtoMessage() {}
 
-func (x *InitiateCustodyWithdrawResponse) ProtoReflect() protoreflect.Message {
+func (x *InitiateOperatorWithdrawResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_service_v1_payment_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2054,40 +2053,40 @@ func (x *InitiateCustodyWithdrawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use InitiateCustodyWithdrawResponse.ProtoReflect.Descriptor instead.
-func (*InitiateCustodyWithdrawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use InitiateOperatorWithdrawResponse.ProtoReflect.Descriptor instead.
+func (*InitiateOperatorWithdrawResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *InitiateCustodyWithdrawResponse) GetTransactionId() int64 {
+func (x *InitiateOperatorWithdrawResponse) GetTransactionId() int64 {
 	if x != nil {
 		return x.TransactionId
 	}
 	return 0
 }
 
-func (x *InitiateCustodyWithdrawResponse) GetOperatorOrderNo() string {
+func (x *InitiateOperatorWithdrawResponse) GetOperatorOrderNo() string {
 	if x != nil {
 		return x.OperatorOrderNo
 	}
 	return ""
 }
 
-func (x *InitiateCustodyWithdrawResponse) GetAmount() string {
+func (x *InitiateOperatorWithdrawResponse) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
 	return ""
 }
 
-func (x *InitiateCustodyWithdrawResponse) GetStatus() string {
+func (x *InitiateOperatorWithdrawResponse) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
 	return ""
 }
 
-func (x *InitiateCustodyWithdrawResponse) GetCreatedAt() *timestamppb.Timestamp {
+func (x *InitiateOperatorWithdrawResponse) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
@@ -3546,10 +3545,11 @@ func (x *GetAddressResponse_Data) GetAddress() string {
 	return ""
 }
 
-type GetCustodyAddressResponse_Data struct {
+type GetOperatorAddressResponse_Data struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Crypto like btc, eth...
-	Currency       string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Currency string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Target Currency
 	TargetCurrency string `protobuf:"bytes,2,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
 	// Crypto protocol
 	Protocol string `protobuf:"bytes,3,opt,name=protocol,proto3" json:"protocol,omitempty"`
@@ -3561,20 +3561,20 @@ type GetCustodyAddressResponse_Data struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetCustodyAddressResponse_Data) Reset() {
-	*x = GetCustodyAddressResponse_Data{}
+func (x *GetOperatorAddressResponse_Data) Reset() {
+	*x = GetOperatorAddressResponse_Data{}
 	mi := &file_payment_service_v1_payment_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetCustodyAddressResponse_Data) String() string {
+func (x *GetOperatorAddressResponse_Data) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetCustodyAddressResponse_Data) ProtoMessage() {}
+func (*GetOperatorAddressResponse_Data) ProtoMessage() {}
 
-func (x *GetCustodyAddressResponse_Data) ProtoReflect() protoreflect.Message {
+func (x *GetOperatorAddressResponse_Data) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_service_v1_payment_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3586,40 +3586,40 @@ func (x *GetCustodyAddressResponse_Data) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetCustodyAddressResponse_Data.ProtoReflect.Descriptor instead.
-func (*GetCustodyAddressResponse_Data) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOperatorAddressResponse_Data.ProtoReflect.Descriptor instead.
+func (*GetOperatorAddressResponse_Data) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{17, 0}
 }
 
-func (x *GetCustodyAddressResponse_Data) GetCurrency() string {
+func (x *GetOperatorAddressResponse_Data) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *GetCustodyAddressResponse_Data) GetTargetCurrency() string {
+func (x *GetOperatorAddressResponse_Data) GetTargetCurrency() string {
 	if x != nil {
 		return x.TargetCurrency
 	}
 	return ""
 }
 
-func (x *GetCustodyAddressResponse_Data) GetProtocol() string {
+func (x *GetOperatorAddressResponse_Data) GetProtocol() string {
 	if x != nil {
 		return x.Protocol
 	}
 	return ""
 }
 
-func (x *GetCustodyAddressResponse_Data) GetNetwork() string {
+func (x *GetOperatorAddressResponse_Data) GetNetwork() string {
 	if x != nil {
 		return x.Network
 	}
 	return ""
 }
 
-func (x *GetCustodyAddressResponse_Data) GetAddress() string {
+func (x *GetOperatorAddressResponse_Data) GetAddress() string {
 	if x != nil {
 		return x.Address
 	}
@@ -3806,15 +3806,15 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1a\n" +
 	"\bprotocol\x18\x02 \x01(\tR\bprotocol\x12\x18\n" +
 	"\anetwork\x18\x03 \x01(\tR\anetwork\x12\x18\n" +
-	"\aaddress\x18\x04 \x01(\tR\aaddress\"\xd9\x01\n" +
-	"\x18GetCustodyAddressRequest\x12\x1d\n" +
+	"\aaddress\x18\x04 \x01(\tR\aaddress\"\xda\x01\n" +
+	"\x19GetOperatorAddressRequest\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12'\n" +
 	"\x0ftarget_currency\x18\x02 \x01(\tR\x0etargetCurrency\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12-\n" +
-	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x81\x02\n" +
-	"\x19GetCustodyAddressResponse\x12F\n" +
-	"\x04data\x18\x01 \x01(\v22.payment.service.v1.GetCustodyAddressResponse.DataR\x04data\x1a\x9b\x01\n" +
+	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x83\x02\n" +
+	"\x1aGetOperatorAddressResponse\x12G\n" +
+	"\x04data\x18\x01 \x01(\v23.payment.service.v1.GetOperatorAddressResponse.DataR\x04data\x1a\x9b\x01\n" +
 	"\x04Data\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12'\n" +
 	"\x0ftarget_currency\x18\x02 \x01(\tR\x0etargetCurrency\x12\x1a\n" +
@@ -3837,16 +3837,16 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x83\x02\n" +
-	"\x1eInitiateCustodyWithdrawRequest\x12\x16\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x94\x02\n" +
+	"\x1fInitiateOperatorWithdrawRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12F\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
+	"\x0fsource_currency\x18\x03 \x01(\tR\x0esourceCurrency\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x05 \x01(\tR\tchannelId\x12-\n" +
-	"\x05extra\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xdf\x01\n" +
-	"\x1fInitiateCustodyWithdrawResponse\x12%\n" +
+	"\x05extra\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xe0\x01\n" +
+	" InitiateOperatorWithdrawResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11operator_order_no\x18\x02 \x01(\tR\x0foperatorOrderNo\x12\x16\n" +
 	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x16\n" +
@@ -4004,7 +4004,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x14REQUEST_SOURCE_ADMIN\x10\x01*B\n" +
 	"\vChannelType\x12\x18\n" +
 	"\x14CHANNEL_TYPE_DEPOSIT\x10\x00\x12\x19\n" +
-	"\x15CHANNEL_TYPE_WITHDRAW\x10\x012\x94\x15\n" +
+	"\x15CHANNEL_TYPE_WITHDRAW\x10\x012\x9e\x15\n" +
 	"\aPayment\x12\xc1\x01\n" +
 	"\x1dGetSupportedPaymentMethodList\x128.payment.service.v1.GetSupportedPaymentMethodListRequest\x1a9.payment.service.v1.GetSupportedPaymentMethodListResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/payment/supportedmethod/list\x12\x9c\x01\n" +
 	"\x13CreatePaymentMethod\x12..payment.service.v1.CreatePaymentMethodRequest\x1a/.payment.service.v1.CreatePaymentMethodResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/payment/method/create\x12\x9d\x01\n" +
@@ -4016,11 +4016,11 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x0fInitiateDeposit\x12*.payment.service.v1.InitiateDepositRequest\x1a+.payment.service.v1.InitiateDepositResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/deposit/initiate\x12o\n" +
 	"\x10InitiateWithdraw\x12+.payment.service.v1.InitiateWithdrawRequest\x1a,.payment.service.v1.InitiateWithdrawResponse\"\x00\x12\x93\x01\n" +
 	"\x0fDepositCallback\x12*.payment.service.v1.DepositCallbackRequest\x1a+.payment.service.v1.DepositCallbackResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/deposit/callback\x12\x97\x01\n" +
-	"\x10WithdrawCallback\x12+.payment.service.v1.WithdrawCallbackRequest\x1a,.payment.service.v1.WithdrawCallbackResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/payment/withdraw/callback\x12r\n" +
-	"\x11GetCustodyAddress\x12,.payment.service.v1.GetCustodyAddressRequest\x1a-.payment.service.v1.GetCustodyAddressResponse\"\x00\x12\x84\x01\n" +
-	"\x17InitiateCustodyWithdraw\x122.payment.service.v1.InitiateCustodyWithdrawRequest\x1a3.payment.service.v1.InitiateCustodyWithdrawResponse\"\x00\x12\xa2\x01\n" +
-	"\x16CustodyDepositCallback\x12*.payment.service.v1.DepositCallbackRequest\x1a+.payment.service.v1.DepositCallbackResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/payment/custody/deposit/callback\x12\xa6\x01\n" +
-	"\x17CustodyWithdrawCallback\x12+.payment.service.v1.WithdrawCallbackRequest\x1a,.payment.service.v1.WithdrawCallbackResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/payment/custody/withdraw/callback\x12\x9c\x01\n" +
+	"\x10WithdrawCallback\x12+.payment.service.v1.WithdrawCallbackRequest\x1a,.payment.service.v1.WithdrawCallbackResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/payment/withdraw/callback\x12u\n" +
+	"\x12GetOperatorAddress\x12-.payment.service.v1.GetOperatorAddressRequest\x1a..payment.service.v1.GetOperatorAddressResponse\"\x00\x12\x87\x01\n" +
+	"\x18InitiateOperatorWithdraw\x123.payment.service.v1.InitiateOperatorWithdrawRequest\x1a4.payment.service.v1.InitiateOperatorWithdrawResponse\"\x00\x12\xa4\x01\n" +
+	"\x17OperatorDepositCallback\x12*.payment.service.v1.DepositCallbackRequest\x1a+.payment.service.v1.DepositCallbackResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/payment/operator/deposit/callback\x12\xa8\x01\n" +
+	"\x18OperatorWithdrawCallback\x12+.payment.service.v1.WithdrawCallbackRequest\x1a,.payment.service.v1.WithdrawCallbackResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/payment/operator/withdraw/callback\x12\x9c\x01\n" +
 	"\x12GetTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/transaction/page\x12\xa1\x01\n" +
 	"\x15GetPaymentChannelPage\x120.payment.service.v1.GetPaymentChannelPageRequest\x1a1.payment.service.v1.GetPaymentChannelPageResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/payment/channel/page\x12\x87\x01\n" +
 	"\x18GetTransactionDetailById\x123.payment.service.v1.GetTransactionDetailByIdRequest\x1a4.payment.service.v1.GetTransactionDetailByIdResponse\"\x00\x12o\n" +
@@ -4063,12 +4063,12 @@ var file_payment_service_v1_payment_proto_goTypes = []any{
 	(*InitiateDepositResponse)(nil),               // 18: payment.service.v1.InitiateDepositResponse
 	(*GetAddressRequest)(nil),                     // 19: payment.service.v1.GetAddressRequest
 	(*GetAddressResponse)(nil),                    // 20: payment.service.v1.GetAddressResponse
-	(*GetCustodyAddressRequest)(nil),              // 21: payment.service.v1.GetCustodyAddressRequest
-	(*GetCustodyAddressResponse)(nil),             // 22: payment.service.v1.GetCustodyAddressResponse
+	(*GetOperatorAddressRequest)(nil),             // 21: payment.service.v1.GetOperatorAddressRequest
+	(*GetOperatorAddressResponse)(nil),            // 22: payment.service.v1.GetOperatorAddressResponse
 	(*InitiateWithdrawRequest)(nil),               // 23: payment.service.v1.InitiateWithdrawRequest
 	(*InitiateWithdrawResponse)(nil),              // 24: payment.service.v1.InitiateWithdrawResponse
-	(*InitiateCustodyWithdrawRequest)(nil),        // 25: payment.service.v1.InitiateCustodyWithdrawRequest
-	(*InitiateCustodyWithdrawResponse)(nil),       // 26: payment.service.v1.InitiateCustodyWithdrawResponse
+	(*InitiateOperatorWithdrawRequest)(nil),       // 25: payment.service.v1.InitiateOperatorWithdrawRequest
+	(*InitiateOperatorWithdrawResponse)(nil),      // 26: payment.service.v1.InitiateOperatorWithdrawResponse
 	(*DepositCallbackRequest)(nil),                // 27: payment.service.v1.DepositCallbackRequest
 	(*DepositCallbackResponse)(nil),               // 28: payment.service.v1.DepositCallbackResponse
 	(*WithdrawCallbackRequest)(nil),               // 29: payment.service.v1.WithdrawCallbackRequest
@@ -4084,7 +4084,7 @@ var file_payment_service_v1_payment_proto_goTypes = []any{
 	(*GetChannelsByIdsRequest)(nil),               // 39: payment.service.v1.GetChannelsByIdsRequest
 	(*GetChannelsByIdsResponse)(nil),              // 40: payment.service.v1.GetChannelsByIdsResponse
 	(*GetAddressResponse_Data)(nil),               // 41: payment.service.v1.GetAddressResponse.Data
-	(*GetCustodyAddressResponse_Data)(nil),        // 42: payment.service.v1.GetCustodyAddressResponse.Data
+	(*GetOperatorAddressResponse_Data)(nil),       // 42: payment.service.v1.GetOperatorAddressResponse.Data
 	(*GetChannelsByIdsResponse_Channel)(nil),      // 43: payment.service.v1.GetChannelsByIdsResponse.Channel
 	(*structpb.Struct)(nil),                       // 44: google.protobuf.Struct
 	(*common.OperatorContext)(nil),                // 45: api.common.OperatorContext
@@ -4106,15 +4106,15 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	44, // 12: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
 	44, // 13: payment.service.v1.GetAddressRequest.extra:type_name -> google.protobuf.Struct
 	41, // 14: payment.service.v1.GetAddressResponse.data:type_name -> payment.service.v1.GetAddressResponse.Data
-	45, // 15: payment.service.v1.GetCustodyAddressRequest.operator_context:type_name -> api.common.OperatorContext
-	44, // 16: payment.service.v1.GetCustodyAddressRequest.extra:type_name -> google.protobuf.Struct
-	42, // 17: payment.service.v1.GetCustodyAddressResponse.data:type_name -> payment.service.v1.GetCustodyAddressResponse.Data
+	45, // 15: payment.service.v1.GetOperatorAddressRequest.operator_context:type_name -> api.common.OperatorContext
+	44, // 16: payment.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
+	42, // 17: payment.service.v1.GetOperatorAddressResponse.data:type_name -> payment.service.v1.GetOperatorAddressResponse.Data
 	45, // 18: payment.service.v1.InitiateWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
 	44, // 19: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
 	46, // 20: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
-	45, // 21: payment.service.v1.InitiateCustodyWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
-	44, // 22: payment.service.v1.InitiateCustodyWithdrawRequest.extra:type_name -> google.protobuf.Struct
-	46, // 23: payment.service.v1.InitiateCustodyWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
+	45, // 21: payment.service.v1.InitiateOperatorWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
+	44, // 22: payment.service.v1.InitiateOperatorWithdrawRequest.extra:type_name -> google.protobuf.Struct
+	46, // 23: payment.service.v1.InitiateOperatorWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 24: payment.service.v1.TransactionInfo.type:type_name -> payment.service.v1.TransactionType
 	1,  // 25: payment.service.v1.TransactionInfo.status:type_name -> payment.service.v1.TransactionStatus
 	46, // 26: payment.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
@@ -4144,10 +4144,10 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	23, // 50: payment.service.v1.Payment.InitiateWithdraw:input_type -> payment.service.v1.InitiateWithdrawRequest
 	27, // 51: payment.service.v1.Payment.DepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
 	29, // 52: payment.service.v1.Payment.WithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
-	21, // 53: payment.service.v1.Payment.GetCustodyAddress:input_type -> payment.service.v1.GetCustodyAddressRequest
-	25, // 54: payment.service.v1.Payment.InitiateCustodyWithdraw:input_type -> payment.service.v1.InitiateCustodyWithdrawRequest
-	27, // 55: payment.service.v1.Payment.CustodyDepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
-	29, // 56: payment.service.v1.Payment.CustodyWithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
+	21, // 53: payment.service.v1.Payment.GetOperatorAddress:input_type -> payment.service.v1.GetOperatorAddressRequest
+	25, // 54: payment.service.v1.Payment.InitiateOperatorWithdraw:input_type -> payment.service.v1.InitiateOperatorWithdrawRequest
+	27, // 55: payment.service.v1.Payment.OperatorDepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
+	29, // 56: payment.service.v1.Payment.OperatorWithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
 	33, // 57: payment.service.v1.Payment.GetTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
 	35, // 58: payment.service.v1.Payment.GetPaymentChannelPage:input_type -> payment.service.v1.GetPaymentChannelPageRequest
 	37, // 59: payment.service.v1.Payment.GetTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
@@ -4162,10 +4162,10 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	24, // 68: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
 	28, // 69: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
 	30, // 70: payment.service.v1.Payment.WithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
-	22, // 71: payment.service.v1.Payment.GetCustodyAddress:output_type -> payment.service.v1.GetCustodyAddressResponse
-	26, // 72: payment.service.v1.Payment.InitiateCustodyWithdraw:output_type -> payment.service.v1.InitiateCustodyWithdrawResponse
-	28, // 73: payment.service.v1.Payment.CustodyDepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
-	30, // 74: payment.service.v1.Payment.CustodyWithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
+	22, // 71: payment.service.v1.Payment.GetOperatorAddress:output_type -> payment.service.v1.GetOperatorAddressResponse
+	26, // 72: payment.service.v1.Payment.InitiateOperatorWithdraw:output_type -> payment.service.v1.InitiateOperatorWithdrawResponse
+	28, // 73: payment.service.v1.Payment.OperatorDepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
+	30, // 74: payment.service.v1.Payment.OperatorWithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
 	34, // 75: payment.service.v1.Payment.GetTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
 	36, // 76: payment.service.v1.Payment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
 	38, // 77: payment.service.v1.Payment.GetTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse

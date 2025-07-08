@@ -1738,7 +1738,7 @@ func (x *CreatePaymentChannelResponse) GetChannelId() string {
 
 // Request to get address
 // Used to get DC address
-type GetCustodyAddressRequest struct {
+type GetOperatorAddressRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the channel to use for this deposit
 	ChannelId      string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
@@ -1750,20 +1750,20 @@ type GetCustodyAddressRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetCustodyAddressRequest) Reset() {
-	*x = GetCustodyAddressRequest{}
+func (x *GetOperatorAddressRequest) Reset() {
+	*x = GetOperatorAddressRequest{}
 	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetCustodyAddressRequest) String() string {
+func (x *GetOperatorAddressRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetCustodyAddressRequest) ProtoMessage() {}
+func (*GetOperatorAddressRequest) ProtoMessage() {}
 
-func (x *GetCustodyAddressRequest) ProtoReflect() protoreflect.Message {
+func (x *GetOperatorAddressRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1775,26 +1775,26 @@ func (x *GetCustodyAddressRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetCustodyAddressRequest.ProtoReflect.Descriptor instead.
-func (*GetCustodyAddressRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOperatorAddressRequest.ProtoReflect.Descriptor instead.
+func (*GetOperatorAddressRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *GetCustodyAddressRequest) GetChannelId() string {
+func (x *GetOperatorAddressRequest) GetChannelId() string {
 	if x != nil {
 		return x.ChannelId
 	}
 	return ""
 }
 
-func (x *GetCustodyAddressRequest) GetTargetCurrency() string {
+func (x *GetOperatorAddressRequest) GetTargetCurrency() string {
 	if x != nil {
 		return x.TargetCurrency
 	}
 	return ""
 }
 
-func (x *GetCustodyAddressRequest) GetExtra() *structpb.Struct {
+func (x *GetOperatorAddressRequest) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
 	}
@@ -1803,27 +1803,27 @@ func (x *GetCustodyAddressRequest) GetExtra() *structpb.Struct {
 
 // Response for deposit initiation
 // Contains details about the initiated deposit transaction
-type GetCustodyAddressResponse struct {
-	state         protoimpl.MessageState          `protogen:"open.v1"`
-	Data          *GetCustodyAddressResponse_Data `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+type GetOperatorAddressResponse struct {
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	Data          *GetOperatorAddressResponse_Data `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetCustodyAddressResponse) Reset() {
-	*x = GetCustodyAddressResponse{}
+func (x *GetOperatorAddressResponse) Reset() {
+	*x = GetOperatorAddressResponse{}
 	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetCustodyAddressResponse) String() string {
+func (x *GetOperatorAddressResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetCustodyAddressResponse) ProtoMessage() {}
+func (*GetOperatorAddressResponse) ProtoMessage() {}
 
-func (x *GetCustodyAddressResponse) ProtoReflect() protoreflect.Message {
+func (x *GetOperatorAddressResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1835,19 +1835,19 @@ func (x *GetCustodyAddressResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetCustodyAddressResponse.ProtoReflect.Descriptor instead.
-func (*GetCustodyAddressResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOperatorAddressResponse.ProtoReflect.Descriptor instead.
+func (*GetOperatorAddressResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *GetCustodyAddressResponse) GetData() *GetCustodyAddressResponse_Data {
+func (x *GetOperatorAddressResponse) GetData() *GetOperatorAddressResponse_Data {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-type GetCustodyAddressResponse_Data struct {
+type GetOperatorAddressResponse_Data struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Crypto like btc, eth...
 	Currency       string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
@@ -1862,20 +1862,20 @@ type GetCustodyAddressResponse_Data struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetCustodyAddressResponse_Data) Reset() {
-	*x = GetCustodyAddressResponse_Data{}
+func (x *GetOperatorAddressResponse_Data) Reset() {
+	*x = GetOperatorAddressResponse_Data{}
 	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetCustodyAddressResponse_Data) String() string {
+func (x *GetOperatorAddressResponse_Data) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetCustodyAddressResponse_Data) ProtoMessage() {}
+func (*GetOperatorAddressResponse_Data) ProtoMessage() {}
 
-func (x *GetCustodyAddressResponse_Data) ProtoReflect() protoreflect.Message {
+func (x *GetOperatorAddressResponse_Data) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1887,40 +1887,40 @@ func (x *GetCustodyAddressResponse_Data) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetCustodyAddressResponse_Data.ProtoReflect.Descriptor instead.
-func (*GetCustodyAddressResponse_Data) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOperatorAddressResponse_Data.ProtoReflect.Descriptor instead.
+func (*GetOperatorAddressResponse_Data) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{19, 0}
 }
 
-func (x *GetCustodyAddressResponse_Data) GetCurrency() string {
+func (x *GetOperatorAddressResponse_Data) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *GetCustodyAddressResponse_Data) GetTargetCurrency() string {
+func (x *GetOperatorAddressResponse_Data) GetTargetCurrency() string {
 	if x != nil {
 		return x.TargetCurrency
 	}
 	return ""
 }
 
-func (x *GetCustodyAddressResponse_Data) GetProtocol() string {
+func (x *GetOperatorAddressResponse_Data) GetProtocol() string {
 	if x != nil {
 		return x.Protocol
 	}
 	return ""
 }
 
-func (x *GetCustodyAddressResponse_Data) GetNetwork() string {
+func (x *GetOperatorAddressResponse_Data) GetNetwork() string {
 	if x != nil {
 		return x.Network
 	}
 	return ""
 }
 
-func (x *GetCustodyAddressResponse_Data) GetAddress() string {
+func (x *GetOperatorAddressResponse_Data) GetAddress() string {
 	if x != nil {
 		return x.Address
 	}
@@ -2082,14 +2082,14 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\x91\x01\n" +
-	"\x18GetCustodyAddressRequest\x12\x1d\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\x92\x01\n" +
+	"\x19GetOperatorAddressRequest\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12'\n" +
 	"\x0ftarget_currency\x18\x02 \x01(\tR\x0etargetCurrency\x12-\n" +
-	"\x05extra\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x88\x02\n" +
-	"\x19GetCustodyAddressResponse\x12M\n" +
-	"\x04data\x18\x01 \x01(\v29.api.backoffice.service.v1.GetCustodyAddressResponse.DataR\x04data\x1a\x9b\x01\n" +
+	"\x05extra\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x8a\x02\n" +
+	"\x1aGetOperatorAddressResponse\x12N\n" +
+	"\x04data\x18\x01 \x01(\v2:.api.backoffice.service.v1.GetOperatorAddressResponse.DataR\x04data\x1a\x9b\x01\n" +
 	"\x04Data\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12'\n" +
 	"\x0ftarget_currency\x18\x02 \x01(\tR\x0etargetCurrency\x12\x1a\n" +
@@ -2107,7 +2107,7 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\x1eTRANSACTION_STATUS_UNSPECIFIED\x10\x00\x12!\n" +
 	"\x1dTRANSACTION_STATUS_PROCESSING\x10\x01\x12!\n" +
 	"\x1dTRANSACTION_STATUS_SUCCESSFUL\x10\x02\x12\x1d\n" +
-	"\x19TRANSACTION_STATUS_FAILED\x10\x032\x94\f\n" +
+	"\x19TRANSACTION_STATUS_FAILED\x10\x032\x98\f\n" +
 	"\x11BackofficePayment\x12\xae\x01\n" +
 	"\x19GetPaymentTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/payment/transaction/page\x12\xcc\x01\n" +
 	"\x19GetPaymentTransactionById\x12;.api.backoffice.service.v1.GetPaymentTransactionByIdRequest\x1a<.api.backoffice.service.v1.GetPaymentTransactionByIdResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/payment/transaction/detail\x12\xda\x01\n" +
@@ -2115,8 +2115,8 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\x14GetPaymentMethodList\x126.api.backoffice.service.v1.GetPaymentMethodListRequest\x1a7.api.backoffice.service.v1.GetPaymentMethodListResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/payment/method/list\x12\xb5\x01\n" +
 	"\x13CreatePaymentMethod\x125.api.backoffice.service.v1.CreatePaymentMethodRequest\x1a6.api.backoffice.service.v1.CreatePaymentMethodResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/payment/method/create\x12\xbc\x01\n" +
 	"\x15DisablePaymentChannel\x127.api.backoffice.service.v1.DisablePaymentChannelRequest\x1a8.api.backoffice.service.v1.DisablePaymentChannelResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/payment/channel/update\x12\xb9\x01\n" +
-	"\x14CreatePaymentChannel\x126.api.backoffice.service.v1.CreatePaymentChannelRequest\x1a7.api.backoffice.service.v1.CreatePaymentChannelResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/payment/channel/create\x12\xb5\x01\n" +
-	"\x11GetCustodyAddress\x123.api.backoffice.service.v1.GetCustodyAddressRequest\x1a4.api.backoffice.service.v1.GetCustodyAddressResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/payment/custody/address/getB[\n" +
+	"\x14CreatePaymentChannel\x126.api.backoffice.service.v1.CreatePaymentChannelRequest\x1a7.api.backoffice.service.v1.CreatePaymentChannelResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/payment/channel/create\x12\xb9\x01\n" +
+	"\x12GetOperatorAddress\x124.api.backoffice.service.v1.GetOperatorAddressRequest\x1a5.api.backoffice.service.v1.GetOperatorAddressResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/payment/operator/address/getB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -2155,9 +2155,9 @@ var file_backoffice_service_v1_backoffice_payment_proto_goTypes = []any{
 	(*DisablePaymentChannelResponse)(nil),         // 18: api.backoffice.service.v1.DisablePaymentChannelResponse
 	(*CreatePaymentChannelRequest)(nil),           // 19: api.backoffice.service.v1.CreatePaymentChannelRequest
 	(*CreatePaymentChannelResponse)(nil),          // 20: api.backoffice.service.v1.CreatePaymentChannelResponse
-	(*GetCustodyAddressRequest)(nil),              // 21: api.backoffice.service.v1.GetCustodyAddressRequest
-	(*GetCustodyAddressResponse)(nil),             // 22: api.backoffice.service.v1.GetCustodyAddressResponse
-	(*GetCustodyAddressResponse_Data)(nil),        // 23: api.backoffice.service.v1.GetCustodyAddressResponse.Data
+	(*GetOperatorAddressRequest)(nil),             // 21: api.backoffice.service.v1.GetOperatorAddressRequest
+	(*GetOperatorAddressResponse)(nil),            // 22: api.backoffice.service.v1.GetOperatorAddressResponse
+	(*GetOperatorAddressResponse_Data)(nil),       // 23: api.backoffice.service.v1.GetOperatorAddressResponse.Data
 	(*timestamppb.Timestamp)(nil),                 // 24: google.protobuf.Timestamp
 	(*structpb.Struct)(nil),                       // 25: google.protobuf.Struct
 	(*v1.GetTransactionPageRequest)(nil),          // 26: payment.service.v1.GetTransactionPageRequest
@@ -2186,8 +2186,8 @@ var file_backoffice_service_v1_backoffice_payment_proto_depIdxs = []int32{
 	10, // 19: api.backoffice.service.v1.GetPaymentMethodListResponse.payment_methods:type_name -> api.backoffice.service.v1.PaymentMethodInfo
 	10, // 20: api.backoffice.service.v1.DisablePaymentChannelResponse.payment_methods:type_name -> api.backoffice.service.v1.PaymentMethodInfo
 	25, // 21: api.backoffice.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
-	25, // 22: api.backoffice.service.v1.GetCustodyAddressRequest.extra:type_name -> google.protobuf.Struct
-	23, // 23: api.backoffice.service.v1.GetCustodyAddressResponse.data:type_name -> api.backoffice.service.v1.GetCustodyAddressResponse.Data
+	25, // 22: api.backoffice.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
+	23, // 23: api.backoffice.service.v1.GetOperatorAddressResponse.data:type_name -> api.backoffice.service.v1.GetOperatorAddressResponse.Data
 	26, // 24: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
 	6,  // 25: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:input_type -> api.backoffice.service.v1.GetPaymentTransactionByIdRequest
 	11, // 26: api.backoffice.service.v1.BackofficePayment.GetSupportedPaymentMethodList:input_type -> api.backoffice.service.v1.GetSupportedPaymentMethodListRequest
@@ -2195,7 +2195,7 @@ var file_backoffice_service_v1_backoffice_payment_proto_depIdxs = []int32{
 	13, // 28: api.backoffice.service.v1.BackofficePayment.CreatePaymentMethod:input_type -> api.backoffice.service.v1.CreatePaymentMethodRequest
 	17, // 29: api.backoffice.service.v1.BackofficePayment.DisablePaymentChannel:input_type -> api.backoffice.service.v1.DisablePaymentChannelRequest
 	19, // 30: api.backoffice.service.v1.BackofficePayment.CreatePaymentChannel:input_type -> api.backoffice.service.v1.CreatePaymentChannelRequest
-	21, // 31: api.backoffice.service.v1.BackofficePayment.GetCustodyAddress:input_type -> api.backoffice.service.v1.GetCustodyAddressRequest
+	21, // 31: api.backoffice.service.v1.BackofficePayment.GetOperatorAddress:input_type -> api.backoffice.service.v1.GetOperatorAddressRequest
 	27, // 32: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
 	7,  // 33: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:output_type -> api.backoffice.service.v1.GetPaymentTransactionByIdResponse
 	12, // 34: api.backoffice.service.v1.BackofficePayment.GetSupportedPaymentMethodList:output_type -> api.backoffice.service.v1.GetSupportedPaymentMethodListResponse
@@ -2203,7 +2203,7 @@ var file_backoffice_service_v1_backoffice_payment_proto_depIdxs = []int32{
 	14, // 36: api.backoffice.service.v1.BackofficePayment.CreatePaymentMethod:output_type -> api.backoffice.service.v1.CreatePaymentMethodResponse
 	18, // 37: api.backoffice.service.v1.BackofficePayment.DisablePaymentChannel:output_type -> api.backoffice.service.v1.DisablePaymentChannelResponse
 	20, // 38: api.backoffice.service.v1.BackofficePayment.CreatePaymentChannel:output_type -> api.backoffice.service.v1.CreatePaymentChannelResponse
-	22, // 39: api.backoffice.service.v1.BackofficePayment.GetCustodyAddress:output_type -> api.backoffice.service.v1.GetCustodyAddressResponse
+	22, // 39: api.backoffice.service.v1.BackofficePayment.GetOperatorAddress:output_type -> api.backoffice.service.v1.GetOperatorAddressResponse
 	32, // [32:40] is the sub-list for method output_type
 	24, // [24:32] is the sub-list for method input_type
 	24, // [24:24] is the sub-list for extension type_name
