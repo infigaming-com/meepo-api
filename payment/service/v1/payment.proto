@@ -190,6 +190,8 @@ message PaymentChannelInfo {
   google.protobuf.Struct deposit_schema = 22 [json_name="depositSchema"];
   // JSON schema defining withdrawal form fields required by this channel
   google.protobuf.Struct withdraw_schema = 23 [json_name="withdrawSchema"];
+  string source_type = 24;
+  bool enable = 25;
 }
 
 // Request to initiate a deposit

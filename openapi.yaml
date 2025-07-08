@@ -2425,17 +2425,17 @@ paths:
     /v1/payment/channel/page:
         post:
             tags:
-                - Payment
+                - BackofficePayment
             description: |-
                 Get payment channel page with pagination and filters
                  Retrieves a paginated list of payment channels with optional filtering
                  Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
-            operationId: Payment_GetPaymentChannelPage
+            operationId: BackofficePayment_GetPaymentChannelPage
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentChannelPageRequest'
                 required: true
             responses:
                 "200":
@@ -2443,7 +2443,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentChannelPageResponse'
     /v1/payment/channel/update:
         post:
             tags:
@@ -4173,6 +4173,82 @@ components:
                     type: string
                 yesterday:
                     type: string
+        api.backoffice.service.v1.GetPaymentChannelPageRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                operatorId:
+                    type: string
+                    description: Optional operator ID filter
+                type:
+                    enum:
+                        - CHANNEL_TYPE_DEPOSIT
+                        - CHANNEL_TYPE_WITHDRAW
+                    type: string
+                    description: Optional channel type filter
+                    format: enum
+                category:
+                    type: string
+                    description: Optional category filter
+                paymentMethod:
+                    type: string
+                    description: Optional payment method filter
+                currency:
+                    type: string
+                    description: Optional currency filter
+                protocol:
+                    type: string
+                    description: Optional crypto protocol
+                network:
+                    type: string
+                    description: Optional crypto network filter
+                country:
+                    type: string
+                    description: Optional country filter
+                sort:
+                    enum:
+                        - DESC
+                        - ASC
+                    type: string
+                    description: Optional sort direction
+                    format: enum
+            description: |-
+                Request to get payment channel page
+                 Used to retrieve a paginated list of payment channels with optional filters
+        api.backoffice.service.v1.GetPaymentChannelPageResponse:
+            type: object
+            properties:
+                paymentChannels:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.PaymentChannelInfo'
+                    description: List of payment channels matching the filter criteria
+                totalCount:
+                    type: integer
+                    description: Total number of channels matching the filter criteria
+                    format: int32
+                page:
+                    type: integer
+                    description: Current page number
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                totalPages:
+                    type: integer
+                    description: Total number of pages available
+                    format: int32
+            description: |-
+                Response for payment channel page
+                 Contains paginated list of payment channels and pagination metadata
         api.backoffice.service.v1.GetPaymentMethodListRequest:
             type: object
             properties: {}
@@ -7609,6 +7685,12 @@ components:
                 currency:
                     type: string
                     description: Currency supported by this channel
+                protocol:
+                    type: string
+                    description: Crypto protocol supported by this channel
+                network:
+                    type: string
+                    description: Crypto chian supported by this channel
                 country:
                     type: string
                     description: Country where this channel is available
@@ -7634,12 +7716,21 @@ components:
                     type: integer
                     description: Estimated arrival time in minutes
                     format: int32
+                fixFee:
+                    type: string
+                    description: Fee
+                rateFee:
+                    type: string
                 depositSchema:
                     type: object
                     description: JSON schema defining deposit form fields required by this channel
                 withdrawSchema:
                     type: object
                     description: JSON schema defining withdrawal form fields required by this channel
+                sourceType:
+                    type: string
+                enable:
+                    type: boolean
             description: |-
                 Payment channel information
                  Detailed information about a specific payment channel
@@ -9672,6 +9763,10 @@ components:
                 withdrawSchema:
                     type: object
                     description: JSON schema defining withdrawal form fields required by this channel
+                sourceType:
+                    type: string
+                enable:
+                    type: boolean
             description: |-
                 Payment channel information
                  Detailed information about a specific payment channel

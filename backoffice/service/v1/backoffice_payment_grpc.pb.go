@@ -28,6 +28,7 @@ const (
 	BackofficePayment_DisablePaymentChannel_FullMethodName         = "/api.backoffice.service.v1.BackofficePayment/DisablePaymentChannel"
 	BackofficePayment_CreatePaymentChannel_FullMethodName          = "/api.backoffice.service.v1.BackofficePayment/CreatePaymentChannel"
 	BackofficePayment_GetOperatorAddress_FullMethodName            = "/api.backoffice.service.v1.BackofficePayment/GetOperatorAddress"
+	BackofficePayment_GetPaymentChannelPage_FullMethodName         = "/api.backoffice.service.v1.BackofficePayment/GetPaymentChannelPage"
 )
 
 // BackofficePaymentClient is the client API for BackofficePayment service.
@@ -65,6 +66,10 @@ type BackofficePaymentClient interface {
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
 	CreatePaymentChannel(ctx context.Context, in *CreatePaymentChannelRequest, opts ...grpc.CallOption) (*CreatePaymentChannelResponse, error)
 	GetOperatorAddress(ctx context.Context, in *GetOperatorAddressRequest, opts ...grpc.CallOption) (*GetOperatorAddressResponse, error)
+	// Get payment channel page with pagination and filters
+	// Retrieves a paginated list of payment channels with optional filtering
+	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
+	GetPaymentChannelPage(ctx context.Context, in *GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*GetPaymentChannelPageResponse, error)
 }
 
 type backofficePaymentClient struct {
@@ -155,6 +160,16 @@ func (c *backofficePaymentClient) GetOperatorAddress(ctx context.Context, in *Ge
 	return out, nil
 }
 
+func (c *backofficePaymentClient) GetPaymentChannelPage(ctx context.Context, in *GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*GetPaymentChannelPageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPaymentChannelPageResponse)
+	err := c.cc.Invoke(ctx, BackofficePayment_GetPaymentChannelPage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficePaymentServer is the server API for BackofficePayment service.
 // All implementations must embed UnimplementedBackofficePaymentServer
 // for forward compatibility.
@@ -190,6 +205,10 @@ type BackofficePaymentServer interface {
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
 	CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error)
 	GetOperatorAddress(context.Context, *GetOperatorAddressRequest) (*GetOperatorAddressResponse, error)
+	// Get payment channel page with pagination and filters
+	// Retrieves a paginated list of payment channels with optional filtering
+	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
+	GetPaymentChannelPage(context.Context, *GetPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error)
 	mustEmbedUnimplementedBackofficePaymentServer()
 }
 
@@ -223,6 +242,9 @@ func (UnimplementedBackofficePaymentServer) CreatePaymentChannel(context.Context
 }
 func (UnimplementedBackofficePaymentServer) GetOperatorAddress(context.Context, *GetOperatorAddressRequest) (*GetOperatorAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorAddress not implemented")
+}
+func (UnimplementedBackofficePaymentServer) GetPaymentChannelPage(context.Context, *GetPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentChannelPage not implemented")
 }
 func (UnimplementedBackofficePaymentServer) mustEmbedUnimplementedBackofficePaymentServer() {}
 func (UnimplementedBackofficePaymentServer) testEmbeddedByValue()                           {}
@@ -389,6 +411,24 @@ func _BackofficePayment_GetOperatorAddress_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficePayment_GetPaymentChannelPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPaymentChannelPageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficePaymentServer).GetPaymentChannelPage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficePayment_GetPaymentChannelPage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficePaymentServer).GetPaymentChannelPage(ctx, req.(*GetPaymentChannelPageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficePayment_ServiceDesc is the grpc.ServiceDesc for BackofficePayment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -427,6 +467,10 @@ var BackofficePayment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorAddress",
 			Handler:    _BackofficePayment_GetOperatorAddress_Handler,
+		},
+		{
+			MethodName: "GetPaymentChannelPage",
+			Handler:    _BackofficePayment_GetPaymentChannelPage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

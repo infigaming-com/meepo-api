@@ -1131,6 +1131,8 @@ type PaymentChannelInfo struct {
 	DepositSchema *structpb.Struct `protobuf:"bytes,22,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
 	// JSON schema defining withdrawal form fields required by this channel
 	WithdrawSchema *structpb.Struct `protobuf:"bytes,23,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
+	SourceType     string           `protobuf:"bytes,24,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
+	Enable         bool             `protobuf:"varint,25,opt,name=enable,proto3" json:"enable,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1324,6 +1326,20 @@ func (x *PaymentChannelInfo) GetWithdrawSchema() *structpb.Struct {
 		return x.WithdrawSchema
 	}
 	return nil
+}
+
+func (x *PaymentChannelInfo) GetSourceType() string {
+	if x != nil {
+		return x.SourceType
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
 }
 
 // Request to initiate a deposit
@@ -3752,7 +3768,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"merchantId\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\x99\x06\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xd2\x06\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x12\n" +
@@ -3779,7 +3795,10 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\afix_fee\x18\x14 \x01(\tR\x06fixFee\x12\x19\n" +
 	"\brate_fee\x18\x15 \x01(\tR\arateFee\x12>\n" +
 	"\x0edeposit_schema\x18\x16 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
-	"\x0fwithdraw_schema\x18\x17 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\"\x9a\x01\n" +
+	"\x0fwithdraw_schema\x18\x17 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\x12\x1f\n" +
+	"\vsource_type\x18\x18 \x01(\tR\n" +
+	"sourceType\x12\x16\n" +
+	"\x06enable\x18\x19 \x01(\bR\x06enable\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
