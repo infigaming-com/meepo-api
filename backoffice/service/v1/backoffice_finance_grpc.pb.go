@@ -30,6 +30,8 @@ const (
 	BackofficeFinance_CreateAdjustmentConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeFinance/CreateAdjustmentConfig"
 	BackofficeFinance_UpdateAdjustmentConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeFinance/UpdateAdjustmentConfig"
 	BackofficeFinance_DeleteAdjustmentConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeFinance/DeleteAdjustmentConfig"
+	BackofficeFinance_SendInvoices_FullMethodName             = "/api.backoffice.service.v1.BackofficeFinance/SendInvoices"
+	BackofficeFinance_GetInvoiceSummary_FullMethodName        = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceSummary"
 )
 
 // BackofficeFinanceClient is the client API for BackofficeFinance service.
@@ -47,6 +49,8 @@ type BackofficeFinanceClient interface {
 	CreateAdjustmentConfig(ctx context.Context, in *CreateAdjustmentConfigRequest, opts ...grpc.CallOption) (*CreateAdjustmentConfigResponse, error)
 	UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*UpdateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*DeleteAdjustmentConfigResponse, error)
+	SendInvoices(ctx context.Context, in *SendInvoicesRequest, opts ...grpc.CallOption) (*SendInvoicesResponse, error)
+	GetInvoiceSummary(ctx context.Context, in *GetInvoiceSummaryRequest, opts ...grpc.CallOption) (*GetInvoiceSummaryResponse, error)
 }
 
 type backofficeFinanceClient struct {
@@ -167,6 +171,26 @@ func (c *backofficeFinanceClient) DeleteAdjustmentConfig(ctx context.Context, in
 	return out, nil
 }
 
+func (c *backofficeFinanceClient) SendInvoices(ctx context.Context, in *SendInvoicesRequest, opts ...grpc.CallOption) (*SendInvoicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendInvoicesResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_SendInvoices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) GetInvoiceSummary(ctx context.Context, in *GetInvoiceSummaryRequest, opts ...grpc.CallOption) (*GetInvoiceSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInvoiceSummaryResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_GetInvoiceSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeFinanceServer is the server API for BackofficeFinance service.
 // All implementations must embed UnimplementedBackofficeFinanceServer
 // for forward compatibility.
@@ -182,6 +206,8 @@ type BackofficeFinanceServer interface {
 	CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*CreateAdjustmentConfigResponse, error)
 	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*UpdateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
+	SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error)
+	GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error)
 	mustEmbedUnimplementedBackofficeFinanceServer()
 }
 
@@ -224,6 +250,12 @@ func (UnimplementedBackofficeFinanceServer) UpdateAdjustmentConfig(context.Conte
 }
 func (UnimplementedBackofficeFinanceServer) DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAdjustmentConfig not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendInvoices not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceSummary not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) mustEmbedUnimplementedBackofficeFinanceServer() {}
 func (UnimplementedBackofficeFinanceServer) testEmbeddedByValue()                           {}
@@ -444,6 +476,42 @@ func _BackofficeFinance_DeleteAdjustmentConfig_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeFinance_SendInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendInvoicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).SendInvoices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_SendInvoices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).SendInvoices(ctx, req.(*SendInvoicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_GetInvoiceSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInvoiceSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).GetInvoiceSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_GetInvoiceSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).GetInvoiceSummary(ctx, req.(*GetInvoiceSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeFinance_ServiceDesc is the grpc.ServiceDesc for BackofficeFinance service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -494,6 +562,14 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAdjustmentConfig",
 			Handler:    _BackofficeFinance_DeleteAdjustmentConfig_Handler,
+		},
+		{
+			MethodName: "SendInvoices",
+			Handler:    _BackofficeFinance_SendInvoices_Handler,
+		},
+		{
+			MethodName: "GetInvoiceSummary",
+			Handler:    _BackofficeFinance_GetInvoiceSummary_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

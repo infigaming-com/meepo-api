@@ -675,6 +675,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListInvoicesResponse'
+    /v1/backoffice/finance/invoices/send:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_SendInvoices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SendInvoicesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SendInvoicesResponse'
+    /v1/backoffice/finance/invoices/summary:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_GetInvoiceSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetInvoiceSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetInvoiceSummaryResponse'
     /v1/backoffice/finance/monthly-revenue-shares/list:
         post:
             tags:
@@ -1081,16 +1117,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.CheckOperatorKeyExistsResponse'
-    /v1/backoffice/operator/list:
+    /v1/backoffice/operator/list/all:
         post:
             tags:
                 - BackofficeOperator
-            operationId: BackofficeOperator_ListOperators
+            operationId: BackofficeOperator_ListAllOperators
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAllOperatorsRequest'
                 required: true
             responses:
                 "200":
@@ -1098,7 +1134,26 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListAllOperatorsResponse'
+    /v1/backoffice/operator/list/bottom:
+        post:
+            tags:
+                - BackofficeOperator
+            description: ListBottomOperators returns a list of bottom operators by operator context in the middleware
+            operationId: BackofficeOperator_ListBottomOperators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListBottomOperatorsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListBottomOperatorsResponse'
     /v1/backoffice/operator/list/by-parent:
         post:
             tags:
@@ -1118,6 +1173,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse'
+    /v1/backoffice/operator/list/company:
+        post:
+            tags:
+                - BackofficeOperator
+            description: ListCompanies returns a list of companies by operator context in the middleware
+            operationId: BackofficeOperator_ListCompanyOperators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCompanyOperatorsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListCompanyOperatorsResponse'
+    /v1/backoffice/operator/list/retailer:
+        post:
+            tags:
+                - BackofficeOperator
+            description: ListRetailers returns a list of retailers by operator context in the middleware
+            operationId: BackofficeOperator_ListRetailerOperators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse'
     /v1/backoffice/payment/channel/create:
         post:
             tags:
@@ -2054,6 +2147,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse'
+    /v1/backoffice/wallet/operator/balances/list:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_ListOperatorBalances
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorBalancesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorBalancesResponse'
     /v1/backoffice/wallet/update:
         post:
             tags:
@@ -3865,48 +3976,21 @@ components:
                     description: Operator information
                 operatorName:
                     type: string
-        api.backoffice.service.v1.GetOperatorAddressRequest:
+
+        api.backoffice.service.v1.GetInvoiceSummaryRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.GetInvoiceSummaryResponse:
             type: object
             properties:
-                channelId:
+                totalIncome:
                     type: string
-                    description: ID of the channel to use for this deposit
-                targetCurrency:
+                totalOutcome:
                     type: string
-                extra:
-                    type: object
-                    description: |-
-                        Additional information needed for the deposit
-                         May include clientOrderId, productId, userInfo, etc.
-            description: |-
-                Request to get address
-                 Used to get DC address
-        api.backoffice.service.v1.GetOperatorAddressResponse:
-            type: object
-            properties:
-                data:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorAddressResponse_Data'
-            description: |-
-                Response for deposit initiation
-                 Contains details about the initiated deposit transaction
-        api.backoffice.service.v1.GetOperatorAddressResponse_Data:
-            type: object
-            properties:
-                currency:
+                billingPeriod:
                     type: string
-                    description: Crypto like btc, eth...
-                targetCurrency:
-                    type: string
-                protocol:
-                    type: string
-                    description: Crypto protocol
-                network:
-                    type: string
-                    description: Crypto chain
-                address:
-                    type: string
-                    description: Digital Currency address
-        api.backoffice.service.v1.GetOperatorTagsConfigRequest:
+
+api.backoffice.service.v1.GetOperatorTagsConfigRequest:
             type: object
             properties:
                 operatorId:
@@ -5294,6 +5378,33 @@ components:
                     description: Amount information
                 description:
                     type: string
+        api.backoffice.service.v1.ListAllOperatorsRequest:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+        api.backoffice.service.v1.ListAllOperatorsResponse:
+            type: object
+            properties:
+                operators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListAllOperatorsResponse_Operator'
+        api.backoffice.service.v1.ListAllOperatorsResponse_Operator:
+            type: object
+            properties:
+                realOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                enabled:
+                    type: boolean
+                operatorType:
+                    type: string
+                parentOperatorId:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListAuditActionsRequest:
             type: object
             properties: {}
@@ -5432,6 +5543,24 @@ components:
                 total:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListBottomOperatorsRequest:
+            type: object
+            properties:
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                companyOperatorIds:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.ListBottomOperatorsResponse:
+            type: object
+            properties:
+                operators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorInfo'
         api.backoffice.service.v1.ListCategoriesRequest:
             type: object
             properties:
@@ -5444,6 +5573,20 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListCompanyOperatorsRequest:
+            type: object
+            properties:
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.ListCompanyOperatorsResponse:
+            type: object
+            properties:
+                companyOperators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorInfo'
         api.backoffice.service.v1.ListCurrenciesRequest:
             type: object
             properties:
@@ -5947,6 +6090,49 @@ components:
                 revenueShareCollectTotal:
                     type: string
             description: Summary totals
+        api.backoffice.service.v1.ListOperatorBalancesRequest:
+            type: object
+            properties:
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                companyOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListOperatorBalancesResponse:
+            type: object
+            properties:
+                operatorBalances:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalance'
+                totalCashUsd:
+                    type: string
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListOperatorRevenueShareRequest:
             type: object
             properties:
@@ -6071,25 +6257,6 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListOperatorsRequest:
-            type: object
-            properties:
-                enabled:
-                    type: boolean
-        api.backoffice.service.v1.ListOperatorsResponse:
-            type: object
-            properties:
-                operators:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsResponse_Operator'
-        api.backoffice.service.v1.ListOperatorsResponse_Operator:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                operatorName:
-                    type: string
         api.backoffice.service.v1.ListProviderRatesRequest:
             type: object
             properties:
@@ -6356,6 +6523,16 @@ components:
                     type: string
                 d120PaidAmt:
                     type: string
+        api.backoffice.service.v1.ListRetailerOperatorsRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.ListRetailerOperatorsResponse:
+            type: object
+            properties:
+                retailerOperators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorInfo'
         api.backoffice.service.v1.ListRolesRequest:
             type: object
             properties:
@@ -6445,9 +6622,6 @@ components:
                     type: integer
                     format: int32
                 uniqueVisits:
-                    type: integer
-                    format: int32
-                activeUsers:
                     type: integer
                     format: int32
                 registeredUsers:
@@ -7246,6 +7420,29 @@ components:
             properties:
                 token:
                     type: string
+        api.backoffice.service.v1.OperatorBalance:
+            type: object
+            properties:
+                realOperatorId:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                retailerOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                operatorName:
+                    type: string
+                currency:
+                    type: string
+                protocol:
+                    type: string
+                cash:
+                    type: string
+                cashUsd:
+                    type: string
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.OperatorDetails:
             type: object
             properties:
@@ -7312,6 +7509,15 @@ components:
                 systemOperatorId:
                     type: string
                 systemOperatorName:
+                    type: string
+        api.backoffice.service.v1.OperatorInfo:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                status:
                     type: string
         api.backoffice.service.v1.PaymentChannelInfo:
             type: object
@@ -7493,6 +7699,12 @@ components:
             type: object
             properties: {}
         api.backoffice.service.v1.SendEmailVerificationResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.SendInvoicesRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.SendInvoicesResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.SendMobileVerificationRequest:

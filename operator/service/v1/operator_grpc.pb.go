@@ -42,6 +42,8 @@ const (
 	Operator_CreateAdjustmentConfig_FullMethodName   = "/api.operator.service.v1.Operator/CreateAdjustmentConfig"
 	Operator_UpdateAdjustmentConfig_FullMethodName   = "/api.operator.service.v1.Operator/UpdateAdjustmentConfig"
 	Operator_DeleteAdjustmentConfig_FullMethodName   = "/api.operator.service.v1.Operator/DeleteAdjustmentConfig"
+	Operator_SendInvoices_FullMethodName             = "/api.operator.service.v1.Operator/SendInvoices"
+	Operator_GetInvoiceSummary_FullMethodName        = "/api.operator.service.v1.Operator/GetInvoiceSummary"
 )
 
 // OperatorClient is the client API for Operator service.
@@ -76,6 +78,8 @@ type OperatorClient interface {
 	CreateAdjustmentConfig(ctx context.Context, in *CreateAdjustmentConfigRequest, opts ...grpc.CallOption) (*CreateAdjustmentConfigResponse, error)
 	UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*UpdateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*DeleteAdjustmentConfigResponse, error)
+	SendInvoices(ctx context.Context, in *SendInvoicesRequest, opts ...grpc.CallOption) (*SendInvoicesResponse, error)
+	GetInvoiceSummary(ctx context.Context, in *GetInvoiceSummaryRequest, opts ...grpc.CallOption) (*GetInvoiceSummaryResponse, error)
 }
 
 type operatorClient struct {
@@ -316,6 +320,26 @@ func (c *operatorClient) DeleteAdjustmentConfig(ctx context.Context, in *DeleteA
 	return out, nil
 }
 
+func (c *operatorClient) SendInvoices(ctx context.Context, in *SendInvoicesRequest, opts ...grpc.CallOption) (*SendInvoicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendInvoicesResponse)
+	err := c.cc.Invoke(ctx, Operator_SendInvoices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operatorClient) GetInvoiceSummary(ctx context.Context, in *GetInvoiceSummaryRequest, opts ...grpc.CallOption) (*GetInvoiceSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInvoiceSummaryResponse)
+	err := c.cc.Invoke(ctx, Operator_GetInvoiceSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OperatorServer is the server API for Operator service.
 // All implementations must embed UnimplementedOperatorServer
 // for forward compatibility.
@@ -348,6 +372,8 @@ type OperatorServer interface {
 	CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*CreateAdjustmentConfigResponse, error)
 	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*UpdateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
+	SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error)
+	GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error)
 	mustEmbedUnimplementedOperatorServer()
 }
 
@@ -426,6 +452,12 @@ func (UnimplementedOperatorServer) UpdateAdjustmentConfig(context.Context, *Upda
 }
 func (UnimplementedOperatorServer) DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAdjustmentConfig not implemented")
+}
+func (UnimplementedOperatorServer) SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendInvoices not implemented")
+}
+func (UnimplementedOperatorServer) GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceSummary not implemented")
 }
 func (UnimplementedOperatorServer) mustEmbedUnimplementedOperatorServer() {}
 func (UnimplementedOperatorServer) testEmbeddedByValue()                  {}
@@ -862,6 +894,42 @@ func _Operator_DeleteAdjustmentConfig_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_SendInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendInvoicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).SendInvoices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_SendInvoices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).SendInvoices(ctx, req.(*SendInvoicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Operator_GetInvoiceSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInvoiceSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).GetInvoiceSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_GetInvoiceSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).GetInvoiceSummary(ctx, req.(*GetInvoiceSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Operator_ServiceDesc is the grpc.ServiceDesc for Operator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -960,6 +1028,14 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAdjustmentConfig",
 			Handler:    _Operator_DeleteAdjustmentConfig_Handler,
+		},
+		{
+			MethodName: "SendInvoices",
+			Handler:    _Operator_SendInvoices_Handler,
+		},
+		{
+			MethodName: "GetInvoiceSummary",
+			Handler:    _Operator_GetInvoiceSummary_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

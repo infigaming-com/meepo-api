@@ -1,16 +1,21 @@
 name: Deploy API Documentation to GCS
 
 on:
-  pull_request:
+  # pull_request:
+  #   types: [closed]
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'openapi.yaml'
+  #     - 'openapi.yml'
+  #     - 'docs/**'
+  push:
     branches:
       - main
     paths:
       - 'openapi.yaml'
       - 'openapi.yml'
       - 'docs/**'
-  push:
-    branches:
-      - main
 
 env:
   BUCKET_NAME: 'speedix-meepo-api-docs'

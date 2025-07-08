@@ -85,6 +85,20 @@ service BackofficeFinance {
 			body: "*"
 		};
 	}
+
+	rpc SendInvoices(SendInvoicesRequest) returns (SendInvoicesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/invoices/send"
+			body: "*"
+		};
+	}
+
+	rpc GetInvoiceSummary(GetInvoiceSummaryRequest) returns (GetInvoiceSummaryResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/invoices/summary"
+			body: "*"
+		};
+	}
 }
 
 message ListInvoicesRequest {
@@ -466,4 +480,19 @@ message CreateAdjustmentConfigRequest {
 }
 
 message CreateAdjustmentConfigResponse {
+}
+
+message SendInvoicesRequest {
+}
+
+message SendInvoicesResponse {
+}
+
+message GetInvoiceSummaryRequest {
+}
+
+message GetInvoiceSummaryResponse {
+	string total_income = 1;
+	string total_outcome = 2;
+	string billing_period = 3;
 }
