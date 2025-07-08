@@ -111,21 +111,18 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 }
 
 type BalanceUpdateEvent struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId      int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	TransactionType    string                 `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	UserId             int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorId         int64                  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	CompanyOperatorId  int64                  `protobuf:"varint,5,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
-	RetailerOperatorId int64                  `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
-	SystemOperatorId   int64                  `protobuf:"varint,7,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
-	Currency           string                 `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
-	BeforeBalance      string                 `protobuf:"bytes,9,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	AfterBalance       string                 `protobuf:"bytes,10,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	Amount             string                 `protobuf:"bytes,11,opt,name=amount,proto3" json:"amount,omitempty"`
-	CreatedAt          int64                  `protobuf:"varint,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	TransactionId   int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	TransactionType string                  `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	UserId          int64                   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Currency        string                  `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	BeforeBalance   string                  `protobuf:"bytes,6,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	AfterBalance    string                  `protobuf:"bytes,7,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	Amount          string                  `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"`
+	CreatedAt       int64                   `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *BalanceUpdateEvent) Reset() {
@@ -179,32 +176,11 @@ func (x *BalanceUpdateEvent) GetUserId() int64 {
 	return 0
 }
 
-func (x *BalanceUpdateEvent) GetOperatorId() int64 {
+func (x *BalanceUpdateEvent) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorId
+		return x.OperatorContext
 	}
-	return 0
-}
-
-func (x *BalanceUpdateEvent) GetCompanyOperatorId() int64 {
-	if x != nil {
-		return x.CompanyOperatorId
-	}
-	return 0
-}
-
-func (x *BalanceUpdateEvent) GetRetailerOperatorId() int64 {
-	if x != nil {
-		return x.RetailerOperatorId
-	}
-	return 0
-}
-
-func (x *BalanceUpdateEvent) GetSystemOperatorId() int64 {
-	if x != nil {
-		return x.SystemOperatorId
-	}
-	return 0
+	return nil
 }
 
 func (x *BalanceUpdateEvent) GetCurrency() string {
@@ -367,23 +343,18 @@ const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse\"\xcf\x03\n" +
+	"\rEventResponse\"\xe6\x02\n" +
 	"\x12BalanceUpdateEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
 	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\x03R\n" +
-	"operatorId\x12.\n" +
-	"\x13company_operator_id\x18\x05 \x01(\x03R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18\x06 \x01(\x03R\x12retailerOperatorId\x12,\n" +
-	"\x12system_operator_id\x18\a \x01(\x03R\x10systemOperatorId\x12\x1a\n" +
-	"\bcurrency\x18\b \x01(\tR\bcurrency\x12%\n" +
-	"\x0ebefore_balance\x18\t \x01(\tR\rbeforeBalance\x12#\n" +
-	"\rafter_balance\x18\n" +
-	" \x01(\tR\fafterBalance\x12\x16\n" +
-	"\x06amount\x18\v \x01(\tR\x06amount\x12\x1d\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12F\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12%\n" +
+	"\x0ebefore_balance\x18\x06 \x01(\tR\rbeforeBalance\x12#\n" +
+	"\rafter_balance\x18\a \x01(\tR\fafterBalance\x12\x16\n" +
+	"\x06amount\x18\b \x01(\tR\x06amount\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\f \x01(\x03R\tcreatedAt\"\xb9\x03\n" +
+	"created_at\x18\t \x01(\x03R\tcreatedAt\"\xb9\x03\n" +
 	"\x1aOperatorBalanceUpdateEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
 	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12(\n" +
@@ -422,14 +393,15 @@ var file_wallet_service_v1_wallet_event_proto_goTypes = []any{
 	(*common.OperatorContext)(nil),     // 4: api.common.OperatorContext
 }
 var file_wallet_service_v1_wallet_event_proto_depIdxs = []int32{
-	4, // 0: api.wallet.service.v1.OperatorBalanceUpdateEvent.operator_context:type_name -> api.common.OperatorContext
-	0, // 1: api.wallet.service.v1.WalletEvent.Event:input_type -> api.wallet.service.v1.EventRequest
-	1, // 2: api.wallet.service.v1.WalletEvent.Event:output_type -> api.wallet.service.v1.EventResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	4, // 0: api.wallet.service.v1.BalanceUpdateEvent.operator_context:type_name -> api.common.OperatorContext
+	4, // 1: api.wallet.service.v1.OperatorBalanceUpdateEvent.operator_context:type_name -> api.common.OperatorContext
+	0, // 2: api.wallet.service.v1.WalletEvent.Event:input_type -> api.wallet.service.v1.EventRequest
+	1, // 3: api.wallet.service.v1.WalletEvent.Event:output_type -> api.wallet.service.v1.EventResponse
+	3, // [3:4] is the sub-list for method output_type
+	2, // [2:3] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_wallet_event_proto_init() }
