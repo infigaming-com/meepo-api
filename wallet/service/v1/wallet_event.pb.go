@@ -110,6 +110,114 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_event_proto_rawDescGZIP(), []int{1}
 }
 
+type BalanceUpdateEvent struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	TransactionId   int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	TransactionType string                  `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	UserId          int64                   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Currency        string                  `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	BeforeBalance   string                  `protobuf:"bytes,6,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	AfterBalance    string                  `protobuf:"bytes,7,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	Amount          string                  `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"`
+	CreatedAt       int64                   `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *BalanceUpdateEvent) Reset() {
+	*x = BalanceUpdateEvent{}
+	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BalanceUpdateEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BalanceUpdateEvent) ProtoMessage() {}
+
+func (x *BalanceUpdateEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BalanceUpdateEvent.ProtoReflect.Descriptor instead.
+func (*BalanceUpdateEvent) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_wallet_event_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *BalanceUpdateEvent) GetTransactionId() int64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
+}
+
+func (x *BalanceUpdateEvent) GetTransactionType() string {
+	if x != nil {
+		return x.TransactionType
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *BalanceUpdateEvent) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *BalanceUpdateEvent) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetBeforeBalance() string {
+	if x != nil {
+		return x.BeforeBalance
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetAfterBalance() string {
+	if x != nil {
+		return x.AfterBalance
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
 type OperatorBalanceUpdateEvent struct {
 	state              protoimpl.MessageState  `protogen:"open.v1"`
 	TransactionId      int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
@@ -128,7 +236,7 @@ type OperatorBalanceUpdateEvent struct {
 
 func (x *OperatorBalanceUpdateEvent) Reset() {
 	*x = OperatorBalanceUpdateEvent{}
-	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[2]
+	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -140,7 +248,7 @@ func (x *OperatorBalanceUpdateEvent) String() string {
 func (*OperatorBalanceUpdateEvent) ProtoMessage() {}
 
 func (x *OperatorBalanceUpdateEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[2]
+	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -153,7 +261,7 @@ func (x *OperatorBalanceUpdateEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OperatorBalanceUpdateEvent.ProtoReflect.Descriptor instead.
 func (*OperatorBalanceUpdateEvent) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_wallet_event_proto_rawDescGZIP(), []int{2}
+	return file_wallet_service_v1_wallet_event_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *OperatorBalanceUpdateEvent) GetTransactionId() int64 {
@@ -235,7 +343,18 @@ const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse\"\xb9\x03\n" +
+	"\rEventResponse\"\xe6\x02\n" +
+	"\x12BalanceUpdateEvent\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
+	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12F\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12%\n" +
+	"\x0ebefore_balance\x18\x06 \x01(\tR\rbeforeBalance\x12#\n" +
+	"\rafter_balance\x18\a \x01(\tR\fafterBalance\x12\x16\n" +
+	"\x06amount\x18\b \x01(\tR\x06amount\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\t \x01(\x03R\tcreatedAt\"\xb9\x03\n" +
 	"\x1aOperatorBalanceUpdateEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
 	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12(\n" +
@@ -265,22 +384,24 @@ func file_wallet_service_v1_wallet_event_proto_rawDescGZIP() []byte {
 	return file_wallet_service_v1_wallet_event_proto_rawDescData
 }
 
-var file_wallet_service_v1_wallet_event_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_wallet_service_v1_wallet_event_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_wallet_service_v1_wallet_event_proto_goTypes = []any{
 	(*EventRequest)(nil),               // 0: api.wallet.service.v1.EventRequest
 	(*EventResponse)(nil),              // 1: api.wallet.service.v1.EventResponse
-	(*OperatorBalanceUpdateEvent)(nil), // 2: api.wallet.service.v1.OperatorBalanceUpdateEvent
-	(*common.OperatorContext)(nil),     // 3: api.common.OperatorContext
+	(*BalanceUpdateEvent)(nil),         // 2: api.wallet.service.v1.BalanceUpdateEvent
+	(*OperatorBalanceUpdateEvent)(nil), // 3: api.wallet.service.v1.OperatorBalanceUpdateEvent
+	(*common.OperatorContext)(nil),     // 4: api.common.OperatorContext
 }
 var file_wallet_service_v1_wallet_event_proto_depIdxs = []int32{
-	3, // 0: api.wallet.service.v1.OperatorBalanceUpdateEvent.operator_context:type_name -> api.common.OperatorContext
-	0, // 1: api.wallet.service.v1.WalletEvent.Event:input_type -> api.wallet.service.v1.EventRequest
-	1, // 2: api.wallet.service.v1.WalletEvent.Event:output_type -> api.wallet.service.v1.EventResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	4, // 0: api.wallet.service.v1.BalanceUpdateEvent.operator_context:type_name -> api.common.OperatorContext
+	4, // 1: api.wallet.service.v1.OperatorBalanceUpdateEvent.operator_context:type_name -> api.common.OperatorContext
+	0, // 2: api.wallet.service.v1.WalletEvent.Event:input_type -> api.wallet.service.v1.EventRequest
+	1, // 3: api.wallet.service.v1.WalletEvent.Event:output_type -> api.wallet.service.v1.EventResponse
+	3, // [3:4] is the sub-list for method output_type
+	2, // [2:3] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_wallet_event_proto_init() }
@@ -294,7 +415,7 @@ func file_wallet_service_v1_wallet_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wallet_service_v1_wallet_event_proto_rawDesc), len(file_wallet_service_v1_wallet_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

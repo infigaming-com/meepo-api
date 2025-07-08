@@ -1211,6 +1211,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse'
+    /v1/backoffice/operator/status/update:
+        post:
+            tags:
+                - BackofficeOperator
+            description: UpdateOperatorStatus updates the status of an operator
+            operationId: BackofficeOperator_UpdateOperatorStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorStatusResponse'
     /v1/backoffice/payment/channel/create:
         post:
             tags:
@@ -1255,24 +1274,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.DisablePaymentChannelResponse'
-    /v1/backoffice/payment/custody/address/get:
-        post:
-            tags:
-                - BackofficePayment
-            operationId: BackofficePayment_GetCustodyAddress
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetCustodyAddressRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetCustodyAddressResponse'
     /v1/backoffice/payment/method/create:
         post:
             tags:
@@ -1317,6 +1318,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentMethodListResponse'
+    /v1/backoffice/payment/operator/address/get:
+        post:
+            tags:
+                - BackofficePayment
+            operationId: BackofficePayment_GetOperatorAddress
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorAddressRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorAddressResponse'
     /v1/backoffice/payment/supportedmethod/list:
         post:
             tags:
@@ -2447,70 +2466,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.DisablePaymentChannelResponse'
-    /v1/payment/custody/address/get:
-        post:
-            tags:
-                - Payment
-            operationId: Payment_GetCustodyAddress
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetCustodyAddressRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetCustodyAddressResponse'
-    /v1/payment/custody/deposit/callback:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Deposit callback
-                 Handles callbacks from payment gateways for deposit status updates
-                 This endpoint is called by payment providers to notify of completed or failed deposits
-                 Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
-            operationId: Payment_CustodyDepositCallback
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.DepositCallbackRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.DepositCallbackResponse'
-    /v1/payment/custody/withdraw/callback:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Withdraw callback
-                 Handles callbacks from payment gateways for withdrawal status updates
-                 This endpoint is called by payment providers to notify of completed or failed withdrawals
-                 Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
-            operationId: Payment_CustodyWithdrawCallback
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
     /v1/payment/deposit/callback:
         post:
             tags:
@@ -2600,6 +2555,52 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /v1/payment/operator/deposit/callback:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Deposit callback
+                 Handles callbacks from payment gateways for deposit status updates
+                 This endpoint is called by payment providers to notify of completed or failed deposits
+                 Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
+            operationId: Payment_OperatorDepositCallback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.DepositCallbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.DepositCallbackResponse'
+    /v1/payment/operator/withdraw/callback:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Withdraw callback
+                 Handles callbacks from payment gateways for withdrawal status updates
+                 This endpoint is called by payment providers to notify of completed or failed withdrawals
+                 Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
+            operationId: Payment_OperatorWithdrawCallback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
     /v1/payment/supportedmethod/list:
         post:
             tags:
@@ -3600,47 +3601,6 @@ components:
             properties:
                 operatorDetails:
                     $ref: '#/components/schemas/api.backoffice.service.v1.OperatorDetails'
-        api.backoffice.service.v1.GetCustodyAddressRequest:
-            type: object
-            properties:
-                channelId:
-                    type: string
-                    description: ID of the channel to use for this deposit
-                targetCurrency:
-                    type: string
-                extra:
-                    type: object
-                    description: |-
-                        Additional information needed for the deposit
-                         May include clientOrderId, productId, userInfo, etc.
-            description: |-
-                Request to get address
-                 Used to get DC address
-        api.backoffice.service.v1.GetCustodyAddressResponse:
-            type: object
-            properties:
-                data:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetCustodyAddressResponse_Data'
-            description: |-
-                Response for deposit initiation
-                 Contains details about the initiated deposit transaction
-        api.backoffice.service.v1.GetCustodyAddressResponse_Data:
-            type: object
-            properties:
-                currency:
-                    type: string
-                    description: Crypto like btc, eth...
-                targetCurrency:
-                    type: string
-                protocol:
-                    type: string
-                    description: Crypto protocol
-                network:
-                    type: string
-                    description: Crypto chain
-                address:
-                    type: string
-                    description: Digital Currency address
         api.backoffice.service.v1.GetDepositSummariesRequest:
             type: object
             properties:
@@ -4047,6 +4007,47 @@ components:
                     type: string
                 billingPeriod:
                     type: string
+        api.backoffice.service.v1.GetOperatorAddressRequest:
+            type: object
+            properties:
+                channelId:
+                    type: string
+                    description: ID of the channel to use for this deposit
+                targetCurrency:
+                    type: string
+                extra:
+                    type: object
+                    description: |-
+                        Additional information needed for the deposit
+                         May include clientOrderId, productId, userInfo, etc.
+            description: |-
+                Request to get address
+                 Used to get DC address
+        api.backoffice.service.v1.GetOperatorAddressResponse:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorAddressResponse_Data'
+            description: |-
+                Response for deposit initiation
+                 Contains details about the initiated deposit transaction
+        api.backoffice.service.v1.GetOperatorAddressResponse_Data:
+            type: object
+            properties:
+                currency:
+                    type: string
+                    description: Crypto like btc, eth...
+                targetCurrency:
+                    type: string
+                protocol:
+                    type: string
+                    description: Crypto protocol
+                network:
+                    type: string
+                    description: Crypto chain
+                address:
+                    type: string
+                    description: Digital Currency address
         api.backoffice.service.v1.GetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -6179,6 +6180,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalance'
+                totalCashUsd:
+                    type: string
                 total:
                     type: integer
                     format: int32
@@ -7494,6 +7497,8 @@ components:
                     type: string
                 cash:
                     type: string
+                cashUsd:
+                    type: string
                 enabled:
                     type: boolean
         api.backoffice.service.v1.OperatorDetails:
@@ -7652,6 +7657,8 @@ components:
                 psp:
                     type: string
                     description: Currency code supported by this payment method (e.g., USD, EUR, CNY)
+                type:
+                    type: string
                 currency:
                     type: string
                 country:
@@ -7967,6 +7974,22 @@ components:
         api.backoffice.service.v1.UpdateGameResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateOperatorStatusRequest:
+            type: object
+            properties:
+                targetOperatorId:
+                    type: string
+                targetOperatorType:
+                    type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                action:
+                    type: string
+        api.backoffice.service.v1.UpdateOperatorStatusResponse:
+            type: object
+            properties:
+                status:
+                    type: string
         api.backoffice.service.v1.UpdateProviderRequest:
             type: object
             properties:
@@ -9060,8 +9083,6 @@ components:
             properties:
                 userId:
                     type: string
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.wallet.service.v1.GetUserBalancesResponse:
             type: object
             properties:
@@ -9134,8 +9155,9 @@ components:
         payment.service.v1.CreatePaymentMethodRequest:
             type: object
             properties:
-                operatorId:
-                    type: string
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
                     description: ID of the Operator connect with this channel
                 paymentMethodId:
                     type: string
@@ -9277,47 +9299,6 @@ components:
                 currency:
                     type: string
                     description: Crypto like btc, eth...
-                protocol:
-                    type: string
-                    description: Crypto protocol
-                network:
-                    type: string
-                    description: Crypto chain
-                address:
-                    type: string
-                    description: Digital Currency address
-        payment.service.v1.GetCustodyAddressRequest:
-            type: object
-            properties:
-                channelId:
-                    type: string
-                    description: ID of the channel to use for this deposit
-                targetCurrency:
-                    type: string
-                extra:
-                    type: object
-                    description: |-
-                        Additional information needed for the deposit
-                         May include clientOrderId, productId, userInfo, etc.
-            description: |-
-                Request to get address
-                 Used to get DC address
-        payment.service.v1.GetCustodyAddressResponse:
-            type: object
-            properties:
-                data:
-                    $ref: '#/components/schemas/payment.service.v1.GetCustodyAddressResponse_Data'
-            description: |-
-                Response for deposit initiation
-                 Contains details about the initiated deposit transaction
-        payment.service.v1.GetCustodyAddressResponse_Data:
-            type: object
-            properties:
-                currency:
-                    type: string
-                    description: Crypto like btc, eth...
-                targetCurrency:
-                    type: string
                 protocol:
                     type: string
                     description: Crypto protocol
@@ -9701,6 +9682,8 @@ components:
                 psp:
                     type: string
                     description: Currency code supported by this payment method (e.g., USD, EUR, CNY)
+                type:
+                    type: string
                 currency:
                     type: string
                 country:

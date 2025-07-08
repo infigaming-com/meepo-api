@@ -3,6 +3,7 @@ package context
 import (
 	"context"
 
+	"github.com/infigaming-com/meepo-api/common"
 	"github.com/infigaming-com/meepo-api/pkg/jwt"
 	"github.com/infigaming-com/meepo-api/pkg/util"
 )
@@ -97,5 +98,14 @@ func (o *OperatorIds) GetActualOperatorIdAndType() (int64, string) {
 	} else {
 		// System level
 		return o.SystemOperatorId, util.OperatorTypeSystem
+	}
+}
+
+func OperatorIdsFromOperatorContext(oc *common.OperatorContext) OperatorIds {
+	return OperatorIds{
+		OperatorId:         oc.OperatorId,
+		CompanyOperatorId:  oc.CompanyOperatorId,
+		RetailerOperatorId: oc.RetailerOperatorId,
+		SystemOperatorId:   oc.SystemOperatorId,
 	}
 }

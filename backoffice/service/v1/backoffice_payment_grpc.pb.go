@@ -27,7 +27,7 @@ const (
 	BackofficePayment_CreatePaymentMethod_FullMethodName           = "/api.backoffice.service.v1.BackofficePayment/CreatePaymentMethod"
 	BackofficePayment_DisablePaymentChannel_FullMethodName         = "/api.backoffice.service.v1.BackofficePayment/DisablePaymentChannel"
 	BackofficePayment_CreatePaymentChannel_FullMethodName          = "/api.backoffice.service.v1.BackofficePayment/CreatePaymentChannel"
-	BackofficePayment_GetCustodyAddress_FullMethodName             = "/api.backoffice.service.v1.BackofficePayment/GetCustodyAddress"
+	BackofficePayment_GetOperatorAddress_FullMethodName            = "/api.backoffice.service.v1.BackofficePayment/GetOperatorAddress"
 )
 
 // BackofficePaymentClient is the client API for BackofficePayment service.
@@ -64,7 +64,7 @@ type BackofficePaymentClient interface {
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
 	CreatePaymentChannel(ctx context.Context, in *CreatePaymentChannelRequest, opts ...grpc.CallOption) (*CreatePaymentChannelResponse, error)
-	GetCustodyAddress(ctx context.Context, in *GetCustodyAddressRequest, opts ...grpc.CallOption) (*GetCustodyAddressResponse, error)
+	GetOperatorAddress(ctx context.Context, in *GetOperatorAddressRequest, opts ...grpc.CallOption) (*GetOperatorAddressResponse, error)
 }
 
 type backofficePaymentClient struct {
@@ -145,10 +145,10 @@ func (c *backofficePaymentClient) CreatePaymentChannel(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *backofficePaymentClient) GetCustodyAddress(ctx context.Context, in *GetCustodyAddressRequest, opts ...grpc.CallOption) (*GetCustodyAddressResponse, error) {
+func (c *backofficePaymentClient) GetOperatorAddress(ctx context.Context, in *GetOperatorAddressRequest, opts ...grpc.CallOption) (*GetOperatorAddressResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCustodyAddressResponse)
-	err := c.cc.Invoke(ctx, BackofficePayment_GetCustodyAddress_FullMethodName, in, out, cOpts...)
+	out := new(GetOperatorAddressResponse)
+	err := c.cc.Invoke(ctx, BackofficePayment_GetOperatorAddress_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -189,7 +189,7 @@ type BackofficePaymentServer interface {
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
 	CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error)
-	GetCustodyAddress(context.Context, *GetCustodyAddressRequest) (*GetCustodyAddressResponse, error)
+	GetOperatorAddress(context.Context, *GetOperatorAddressRequest) (*GetOperatorAddressResponse, error)
 	mustEmbedUnimplementedBackofficePaymentServer()
 }
 
@@ -221,8 +221,8 @@ func (UnimplementedBackofficePaymentServer) DisablePaymentChannel(context.Contex
 func (UnimplementedBackofficePaymentServer) CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentChannel not implemented")
 }
-func (UnimplementedBackofficePaymentServer) GetCustodyAddress(context.Context, *GetCustodyAddressRequest) (*GetCustodyAddressResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCustodyAddress not implemented")
+func (UnimplementedBackofficePaymentServer) GetOperatorAddress(context.Context, *GetOperatorAddressRequest) (*GetOperatorAddressResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorAddress not implemented")
 }
 func (UnimplementedBackofficePaymentServer) mustEmbedUnimplementedBackofficePaymentServer() {}
 func (UnimplementedBackofficePaymentServer) testEmbeddedByValue()                           {}
@@ -371,20 +371,20 @@ func _BackofficePayment_CreatePaymentChannel_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficePayment_GetCustodyAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCustodyAddressRequest)
+func _BackofficePayment_GetOperatorAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorAddressRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficePaymentServer).GetCustodyAddress(ctx, in)
+		return srv.(BackofficePaymentServer).GetOperatorAddress(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficePayment_GetCustodyAddress_FullMethodName,
+		FullMethod: BackofficePayment_GetOperatorAddress_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).GetCustodyAddress(ctx, req.(*GetCustodyAddressRequest))
+		return srv.(BackofficePaymentServer).GetOperatorAddress(ctx, req.(*GetOperatorAddressRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -425,8 +425,8 @@ var BackofficePayment_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficePayment_CreatePaymentChannel_Handler,
 		},
 		{
-			MethodName: "GetCustodyAddress",
-			Handler:    _BackofficePayment_GetCustodyAddress_Handler,
+			MethodName: "GetOperatorAddress",
+			Handler:    _BackofficePayment_GetOperatorAddress_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

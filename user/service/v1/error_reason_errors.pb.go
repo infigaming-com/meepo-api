@@ -876,3 +876,75 @@ func IsDomainPoolEmpty(err error) bool {
 func ErrorDomainPoolEmpty(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_DOMAIN_POOL_EMPTY.String(), fmt.Sprintf(format, args...))
 }
+
+func IsTargetOperatorNotBelongToOperator(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TARGET_OPERATOR_NOT_BELONG_TO_OPERATOR.String() && e.Code == 500
+}
+
+func ErrorTargetOperatorNotBelongToOperator(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_TARGET_OPERATOR_NOT_BELONG_TO_OPERATOR.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorNotFoundById(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_NOT_FOUND_BY_ID.String() && e.Code == 500
+}
+
+func ErrorOperatorNotFoundById(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_NOT_FOUND_BY_ID.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorByIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_BY_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorByIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_BY_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidOperatorTransitionAction(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_TRANSITION_ACTION.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorTransitionAction(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_TRANSITION_ACTION.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorStatusFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_STATUS_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorStatusFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_STATUS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidOperatorContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_CONTEXT.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_CONTEXT.String(), fmt.Sprintf(format, args...))
+}

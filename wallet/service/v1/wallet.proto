@@ -87,7 +87,6 @@ service Wallet {
 
 message GetUserBalancesRequest {
 	int64 user_id = 1;
-	api.common.OperatorContext operator_context = 2;
 }
 
 message GetUserBalancesResponse {
@@ -105,7 +104,6 @@ message GetUserBalanceRequest {
 	string currency = 2;
 	// optional target currency
 	string settlement_currency = 3;
-	api.common.OperatorContext operator_context = 4;
 }
 
 message GetUserBalanceResponse {
@@ -245,7 +243,6 @@ message SettleRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
-	api.common.OperatorContext operator_context = 4;
 }
 
 message SettleResponse {
@@ -260,7 +257,6 @@ message RollbackRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
-	api.common.OperatorContext operator_context = 4;
 }
 
 message RollbackResponse {
@@ -387,6 +383,7 @@ message ListWalletBalanceTransactionsResponse {
 
 message GetWalletBalanceTransactionsByIdsRequest {
 	repeated int64 transaction_ids = 1;
+	api.common.OperatorContext operator_context = 2;
 }
 
 message GetWalletBalanceTransactionsByIdsResponse {
@@ -427,6 +424,7 @@ message GetWalletCreditTransactionsRequest {
 	int64 credit_id = 1;
 	optional int64 page = 2;
 	optional int64 page_size = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message GetWalletCreditTransactionsResponse {
@@ -456,6 +454,7 @@ message GetUserTransactionSummaryRequest {
 	optional string currency = 2;
 	optional google.protobuf.Timestamp start_time = 3;
 	optional google.protobuf.Timestamp end_time = 4;
+	api.common.OperatorContext operator_context = 5;
 }
 
 message GetUserTransactionSummaryResponse {
@@ -650,12 +649,14 @@ message OperatorBalance {
 	string currency = 6;
 	string protocol = 7; // placeholder for future use
 	string cash = 8;
-	bool enabled = 9;
+	string cash_usd = 9;
+	bool enabled = 10;
 }
 
 message ListOperatorBalancesResponse {
 	repeated OperatorBalance operator_balances = 1;
-	int32 total = 2;
-	int32 page = 3;
-	int32 page_size = 4;
+	string total_cash_usd = 2;
+	int32 total = 3;
+	int32 page = 4;
+	int32 page_size = 5;
 }

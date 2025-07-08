@@ -19,6 +19,18 @@ message EventRequest {
 
 message EventResponse {}
 
+message BalanceUpdateEvent {
+	int64 transaction_id = 1;
+	string transaction_type = 2;
+	int64 user_id = 3;
+	common.OperatorContext operator_context = 4;
+	string currency = 5;
+	string before_balance = 6;
+	string after_balance = 7;
+	string amount = 8;
+	int64 created_at = 9;
+}
+
 message OperatorBalanceUpdateEvent {
 	int64 transaction_id = 1;
 	string transaction_type = 2;

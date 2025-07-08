@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "payment/service/v1/payment.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
+// import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -83,9 +84,9 @@ service BackofficePayment {
     };
   }
 
-  rpc GetCustodyAddress(GetCustodyAddressRequest) returns (GetCustodyAddressResponse) {
+  rpc GetOperatorAddress(GetOperatorAddressRequest) returns (GetOperatorAddressResponse) {
     option (google.api.http) = {
-      post: "/v1/backoffice/payment/custody/address/get"
+      post: "/v1/backoffice/payment/operator/address/get"
       body: "*"
     };
   }
@@ -251,21 +252,22 @@ message PaymentMethodInfo {
   string id = 1;
   // Currency code supported by this payment method (e.g., USD, EUR, CNY)
   string psp = 2;
-  string currency = 3;
+  string type = 3;
+  string currency = 4;
   // Country code where this payment method is available
-  string country = 4;
+  string country = 5;
   // Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
-  string payment_method = 5 [json_name="paymentMethod"];
+  string payment_method = 6 [json_name="paymentMethod"];
   // Fixed Fee on the Amount
-  string fixed_fee = 6;
+  string fixed_fee = 7;
   // Rate Fee 
-  string fee_rate = 7;
+  string fee_rate = 8;
   // Min Amount
-  string min_amount = 8;
+  string min_amount = 9;
   // Max Amount
-  string max_amount = 9;
+  string max_amount = 10;
   // JSON schema defining the required fields for this payment method
-  google.protobuf.Struct key_schema = 10 [json_name="keySchema"]; 
+  google.protobuf.Struct key_schema = 11 [json_name="keySchema"]; 
 }
 
 message GetSupportedPaymentMethodListRequest {
@@ -380,7 +382,7 @@ message CreatePaymentChannelResponse {
 
 // Request to get address
 // Used to get DC address
-message GetCustodyAddressRequest {
+message GetOperatorAddressRequest {
   // ID of the channel to use for this deposit
   string channel_id = 1 [json_name="channelId"];
 
@@ -393,7 +395,7 @@ message GetCustodyAddressRequest {
 
 // Response for deposit initiation
 // Contains details about the initiated deposit transaction
-message GetCustodyAddressResponse {
+message GetOperatorAddressResponse {
   message Data {
     // Crypto like btc, eth...
     string currency = 1;
