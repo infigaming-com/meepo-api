@@ -1421,6 +1421,8 @@ func (m *AddAdjustmentRequest) validate(all bool) error {
 
 	// no validation rules for OperatorId
 
+	// no validation rules for AppliedDate
+
 	// no validation rules for Currency
 
 	// no validation rules for Amount

@@ -2966,9 +2966,11 @@ components:
                     type: string
                 operatorId:
                     type: string
-                currency:
+                appliedDate:
                     type: string
                     description: Financial information
+                currency:
+                    type: string
                 amount:
                     type: string
                 description:
