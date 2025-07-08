@@ -1602,6 +1602,10 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for SourceType
+
+	// no validation rules for Enable
+
 	if len(errors) > 0 {
 		return PaymentChannelInfoMultiError(errors)
 	}

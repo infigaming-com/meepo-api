@@ -90,6 +90,16 @@ service BackofficePayment {
       body: "*"
     };
   }
+
+  // Get payment channel page with pagination and filters
+  // Retrieves a paginated list of payment channels with optional filtering
+  // Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
+  rpc GetPaymentChannelPage(GetPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/channel/page"
+      body: "*"
+    };
+  }
 }
 
 // Request source enum
@@ -123,6 +133,24 @@ enum TransactionStatus {
 	TRANSACTION_STATUS_SUCCESSFUL = 2;
 	// Transaction failed to complete
 	TRANSACTION_STATUS_FAILED = 3;
+}
+
+// Channel type enum
+// Defines the purpose of a payment channel
+enum ChannelType {
+  // Channel for depositing funds
+  CHANNEL_TYPE_DEPOSIT = 0;
+  // Channel for withdrawing funds
+  CHANNEL_TYPE_WITHDRAW = 1;
+}
+
+// Sort enum
+// Defines sort direction for queries
+enum Sort {
+  // Sort in descending order (newest first)
+  DESC = 0;
+  // Sort in ascending order (oldest first)
+  ASC = 1;
 }
 
 // Transaction information
@@ -165,45 +193,55 @@ message TransactionInfo {
 // Payment channel information
 // Detailed information about a specific payment channel
 message PaymentChannelInfo {
-	// Unique identifier for the channel
-	string channel_id = 1 [json_name="channelId"];
-	// Type of the channel (e.g., online, offline)
-	string type = 2;
-	// Category of the channel (e.g., bank, e-wallet)
-	string category = 3;
-	// ID of the operator who owns this channel
-	string operator_id = 4 [json_name="operatorId"];
-	// Payment method used in this channel
-	string payment_method = 5 [json_name="paymentMethod"];
-	// Tag for categorization or filtering
-	string tag = 6;
-	// Display name of the channel
-	string name = 7;
-	// ID of the payment method used
-	string payment_method_id = 8 [json_name="paymentMethodId"];
-	// Currency supported by this channel
-	string currency = 9;
-	// Country where this channel is available
-	string country = 10;
-	// Specific method used (might be more detailed than payment_method)
-	string method = 11;
-	// URL to the logo image for this payment channel
-	string logo = 12;
-	// Minimum amount allowed for deposit transactions
-	string min_deposit_amount = 13 [json_name="minDepositAmount"];
-	// Maximum amount allowed for deposit transactions
-	string max_deposit_amount = 14 [json_name="maxDepositAmount"];
-	// Minimum amount allowed for withdrawal transactions
-	string min_withdraw_amount = 15 [json_name="minWithdrawAmount"];
-	// Maximum amount allowed for withdrawal transactions
-	string max_withdraw_amount = 16 [json_name="maxWithdrawAmount"];
-	// Estimated arrival time in minutes
-	int32 eat = 17;
-	// JSON schema defining deposit form fields required by this channel
-	google.protobuf.Struct deposit_schema = 18 [json_name="depositSchema"];
-	// JSON schema defining withdrawal form fields required by this channel
-	google.protobuf.Struct withdraw_schema = 19 [json_name="withdrawSchema"];
+  // Unique identifier for the channel
+  string channel_id = 1 [json_name="channelId"];
+  // Type of the channel (e.g., online, offline)
+  string type = 2;
+  // Category of the channel (e.g., bank, e-wallet)
+  string category = 3;
+  // ID of the operator who owns this channel
+  string operator_id = 4 [json_name="operatorId"];
+  // Payment method used in this channel
+  string payment_method = 5 [json_name="paymentMethod"];
+  // Tag for categorization or filtering
+  string tag = 6;
+  // Display name of the channel
+  string name = 7;
+  // ID of the payment method used
+  string payment_method_id = 8 [json_name="paymentMethodId"];
+  // Currency supported by this channel
+  string currency = 9;
+  // Crypto protocol supported by this channel
+  string protocol = 10;
+  // Crypto chian supported by this channel
+  string network = 11;
+  // Country where this channel is available
+  string country = 12;
+  // Specific method used (might be more detailed than payment_method)
+  string method = 13;
+  // URL to the logo image for this payment channel
+  string logo = 14;
+  // Minimum amount allowed for deposit transactions
+  string min_deposit_amount = 15 [json_name="minDepositAmount"];
+  // Maximum amount allowed for deposit transactions
+  string max_deposit_amount = 16 [json_name="maxDepositAmount"];
+  // Minimum amount allowed for withdrawal transactions
+  string min_withdraw_amount = 17 [json_name="minWithdrawAmount"];
+  // Maximum amount allowed for withdrawal transactions
+  string max_withdraw_amount = 18 [json_name="maxWithdrawAmount"];
+  // Estimated arrival time in minutes
+  int32 eat = 19;
+  // Fee
+  string fix_fee = 20;
+  string rate_fee = 21;
+  // JSON schema defining deposit form fields required by this channel
+  google.protobuf.Struct deposit_schema = 22 [json_name="depositSchema"];
+  // JSON schema defining withdrawal form fields required by this channel
+  google.protobuf.Struct withdraw_schema = 23 [json_name="withdrawSchema"];
+  string source_type = 24;
+  bool enable = 25;
 }
+
 
 message TransactionDetail {
 	// Transaction information
@@ -408,4 +446,47 @@ message GetOperatorAddressResponse {
     string address = 5;
   }
   Data data = 1;
+}
+
+// Request to get payment channel page
+// Used to retrieve a paginated list of payment channels with optional filters
+message GetPaymentChannelPageRequest {
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2 [json_name="pageSize"];
+  
+  // Optional operator ID filter
+  string operator_id = 3 [json_name="operatorId"];
+  // Optional channel type filter
+  ChannelType type = 4;
+  // Optional category filter
+  string category = 5;
+  // Optional payment method filter
+  string payment_method = 6 [json_name="paymentMethod"];
+  // Optional currency filter
+  string currency = 7;
+  // Optional crypto protocol
+  string protocol = 8;
+  // Optional crypto network filter
+  string network = 9;
+  // Optional country filter
+  string country = 10;
+  // Optional sort direction
+  Sort sort = 11 [json_name="sort"];
+}
+
+// Response for payment channel page
+// Contains paginated list of payment channels and pagination metadata
+message GetPaymentChannelPageResponse {
+  // List of payment channels matching the filter criteria
+  repeated PaymentChannelInfo payment_channels = 1 [json_name="paymentChannels"];
+  // Total number of channels matching the filter criteria
+  int32 total_count = 2 [json_name="totalCount"];
+  // Current page number
+  int32 page = 3;
+  // Number of items per page
+  int32 page_size = 4 [json_name="pageSize"];
+  // Total number of pages available
+  int32 total_pages = 5 [json_name="totalPages"];
 }
