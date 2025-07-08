@@ -6756,6 +6756,8 @@ func (m *OperatorBalance) validate(all bool) error {
 
 	// no validation rules for Cash
 
+	// no validation rules for CashUsd
+
 	// no validation rules for Enabled
 
 	if len(errors) > 0 {
@@ -6891,6 +6893,8 @@ func (m *ListOperatorBalancesResponse) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for TotalCashUsd
 
 	// no validation rules for Total
 

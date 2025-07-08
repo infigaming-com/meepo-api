@@ -6179,6 +6179,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalance'
+                totalCashUsd:
+                    type: string
                 total:
                     type: integer
                     format: int32
@@ -7493,6 +7495,8 @@ components:
                 protocol:
                     type: string
                 cash:
+                    type: string
+                cashUsd:
                     type: string
                 enabled:
                     type: boolean

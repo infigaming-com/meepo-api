@@ -649,12 +649,14 @@ message OperatorBalance {
 	string currency = 6;
 	string protocol = 7; // placeholder for future use
 	string cash = 8;
-	bool enabled = 9;
+	string cash_usd = 9;
+	bool enabled = 10;
 }
 
 message ListOperatorBalancesResponse {
 	repeated OperatorBalance operator_balances = 1;
-	int32 total = 2;
-	int32 page = 3;
-	int32 page_size = 4;
+	string total_cash_usd = 2;
+	int32 total = 3;
+	int32 page = 4;
+	int32 page_size = 5;
 }

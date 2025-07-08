@@ -3677,7 +3677,8 @@ type OperatorBalance struct {
 	Currency             string                  `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
 	Protocol             string                  `protobuf:"bytes,7,opt,name=protocol,proto3" json:"protocol,omitempty"` // placeholder for future use
 	Cash                 string                  `protobuf:"bytes,8,opt,name=cash,proto3" json:"cash,omitempty"`
-	Enabled              bool                    `protobuf:"varint,9,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	CashUsd              string                  `protobuf:"bytes,9,opt,name=cash_usd,json=cashUsd,proto3" json:"cash_usd,omitempty"`
+	Enabled              bool                    `protobuf:"varint,10,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -3768,6 +3769,13 @@ func (x *OperatorBalance) GetCash() string {
 	return ""
 }
 
+func (x *OperatorBalance) GetCashUsd() string {
+	if x != nil {
+		return x.CashUsd
+	}
+	return ""
+}
+
 func (x *OperatorBalance) GetEnabled() bool {
 	if x != nil {
 		return x.Enabled
@@ -3778,9 +3786,10 @@ func (x *OperatorBalance) GetEnabled() bool {
 type ListOperatorBalancesResponse struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	OperatorBalances []*OperatorBalance     `protobuf:"bytes,1,rep,name=operator_balances,json=operatorBalances,proto3" json:"operator_balances,omitempty"`
-	Total            int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	Page             int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize         int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	TotalCashUsd     string                 `protobuf:"bytes,2,opt,name=total_cash_usd,json=totalCashUsd,proto3" json:"total_cash_usd,omitempty"`
+	Total            int32                  `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
+	Page             int32                  `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize         int32                  `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -3820,6 +3829,13 @@ func (x *ListOperatorBalancesResponse) GetOperatorBalances() []*OperatorBalance 
 		return x.OperatorBalances
 	}
 	return nil
+}
+
+func (x *ListOperatorBalancesResponse) GetTotalCashUsd() string {
+	if x != nil {
+		return x.TotalCashUsd
+	}
+	return ""
 }
 
 func (x *ListOperatorBalancesResponse) GetTotal() int32 {
@@ -5452,7 +5468,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\tpage_size\x18\t \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf8\x02\n" +
+	"_page_size\"\x93\x03\n" +
 	"\x0fOperatorBalance\x12(\n" +
 	"\x10real_operator_id\x18\x01 \x01(\x03R\x0erealOperatorId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x124\n" +
@@ -5461,13 +5477,16 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\roperator_name\x18\x05 \x01(\tR\foperatorName\x12\x1a\n" +
 	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12\x1a\n" +
 	"\bprotocol\x18\a \x01(\tR\bprotocol\x12\x12\n" +
-	"\x04cash\x18\b \x01(\tR\x04cash\x12\x18\n" +
-	"\aenabled\x18\t \x01(\bR\aenabled\"\xba\x01\n" +
+	"\x04cash\x18\b \x01(\tR\x04cash\x12\x19\n" +
+	"\bcash_usd\x18\t \x01(\tR\acashUsd\x12\x18\n" +
+	"\aenabled\x18\n" +
+	" \x01(\bR\aenabled\"\xe0\x01\n" +
 	"\x1cListOperatorBalancesResponse\x12S\n" +
-	"\x11operator_balances\x18\x01 \x03(\v2&.api.wallet.service.v1.OperatorBalanceR\x10operatorBalances\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
-	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize2\x9c\x18\n" +
+	"\x11operator_balances\x18\x01 \x03(\v2&.api.wallet.service.v1.OperatorBalanceR\x10operatorBalances\x12$\n" +
+	"\x0etotal_cash_usd\x18\x02 \x01(\tR\ftotalCashUsd\x12\x14\n" +
+	"\x05total\x18\x03 \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize2\x9c\x18\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12W\n" +
