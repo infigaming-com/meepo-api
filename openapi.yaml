@@ -2148,6 +2148,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletCurrencyResponse'
+    /v1/backoffice/wallet/exchange-rates/get:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_GetExchangeRates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetExchangeRatesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetExchangeRatesResponse'
     /v1/backoffice/wallet/get:
         post:
             tags:
@@ -3527,6 +3545,21 @@ components:
                     type: string
                 depositAmount:
                     type: string
+        api.backoffice.service.v1.GetExchangeRatesRequest:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.GetExchangeRatesResponse:
+            type: object
+            properties:
+                exchangeRates:
+                    type: object
+                    additionalProperties:
+                        type: string
+                    description: map key is source currency, value is target currency rate
         api.backoffice.service.v1.GetGameDataRequest:
             type: object
             properties:
