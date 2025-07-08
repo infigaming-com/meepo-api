@@ -48,28 +48,28 @@ type BackofficePaymentClient interface {
 	// Get list of payment methods
 	// Retrieves all available payment methods supported by the system
 	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-	GetSupportedPaymentMethodList(ctx context.Context, in *GetSupportedPaymentMethodListRequest, opts ...grpc.CallOption) (*GetSupportedPaymentMethodListResponse, error)
+	GetSupportedPaymentMethodList(ctx context.Context, in *v1.GetSupportedPaymentMethodListRequest, opts ...grpc.CallOption) (*v1.GetSupportedPaymentMethodListResponse, error)
 	// Get list of payment methods
 	// Retrieves all available payment methods supported by the system
 	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-	GetPaymentMethodList(ctx context.Context, in *GetPaymentMethodListRequest, opts ...grpc.CallOption) (*GetPaymentMethodListResponse, error)
+	GetPaymentMethodList(ctx context.Context, in *v1.GetPaymentMethodListRequest, opts ...grpc.CallOption) (*v1.GetPaymentMethodListResponse, error)
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	CreatePaymentMethod(ctx context.Context, in *CreatePaymentMethodRequest, opts ...grpc.CallOption) (*CreatePaymentMethodResponse, error)
+	CreatePaymentMethod(ctx context.Context, in *v1.CreatePaymentMethodRequest, opts ...grpc.CallOption) (*v1.CreatePaymentMethodResponse, error)
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	DisablePaymentChannel(ctx context.Context, in *DisablePaymentChannelRequest, opts ...grpc.CallOption) (*DisablePaymentChannelResponse, error)
+	DisablePaymentChannel(ctx context.Context, in *v1.DisablePaymentChannelRequest, opts ...grpc.CallOption) (*v1.DisablePaymentChannelResponse, error)
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	CreatePaymentChannel(ctx context.Context, in *CreatePaymentChannelRequest, opts ...grpc.CallOption) (*CreatePaymentChannelResponse, error)
-	GetOperatorAddress(ctx context.Context, in *GetOperatorAddressRequest, opts ...grpc.CallOption) (*GetOperatorAddressResponse, error)
+	CreatePaymentChannel(ctx context.Context, in *v1.CreatePaymentChannelRequest, opts ...grpc.CallOption) (*v1.CreatePaymentChannelResponse, error)
+	GetOperatorAddress(ctx context.Context, in *GetOperatorAddressRequest, opts ...grpc.CallOption) (*v1.GetOperatorAddressResponse, error)
 	// Get payment channel page with pagination and filters
 	// Retrieves a paginated list of payment channels with optional filtering
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
-	GetPaymentChannelPage(ctx context.Context, in *GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*GetPaymentChannelPageResponse, error)
+	GetPaymentChannelPage(ctx context.Context, in *v1.GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*v1.GetPaymentChannelPageResponse, error)
 }
 
 type backofficePaymentClient struct {
@@ -100,9 +100,9 @@ func (c *backofficePaymentClient) GetPaymentTransactionById(ctx context.Context,
 	return out, nil
 }
 
-func (c *backofficePaymentClient) GetSupportedPaymentMethodList(ctx context.Context, in *GetSupportedPaymentMethodListRequest, opts ...grpc.CallOption) (*GetSupportedPaymentMethodListResponse, error) {
+func (c *backofficePaymentClient) GetSupportedPaymentMethodList(ctx context.Context, in *v1.GetSupportedPaymentMethodListRequest, opts ...grpc.CallOption) (*v1.GetSupportedPaymentMethodListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetSupportedPaymentMethodListResponse)
+	out := new(v1.GetSupportedPaymentMethodListResponse)
 	err := c.cc.Invoke(ctx, BackofficePayment_GetSupportedPaymentMethodList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -110,9 +110,9 @@ func (c *backofficePaymentClient) GetSupportedPaymentMethodList(ctx context.Cont
 	return out, nil
 }
 
-func (c *backofficePaymentClient) GetPaymentMethodList(ctx context.Context, in *GetPaymentMethodListRequest, opts ...grpc.CallOption) (*GetPaymentMethodListResponse, error) {
+func (c *backofficePaymentClient) GetPaymentMethodList(ctx context.Context, in *v1.GetPaymentMethodListRequest, opts ...grpc.CallOption) (*v1.GetPaymentMethodListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPaymentMethodListResponse)
+	out := new(v1.GetPaymentMethodListResponse)
 	err := c.cc.Invoke(ctx, BackofficePayment_GetPaymentMethodList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -120,9 +120,9 @@ func (c *backofficePaymentClient) GetPaymentMethodList(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *backofficePaymentClient) CreatePaymentMethod(ctx context.Context, in *CreatePaymentMethodRequest, opts ...grpc.CallOption) (*CreatePaymentMethodResponse, error) {
+func (c *backofficePaymentClient) CreatePaymentMethod(ctx context.Context, in *v1.CreatePaymentMethodRequest, opts ...grpc.CallOption) (*v1.CreatePaymentMethodResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreatePaymentMethodResponse)
+	out := new(v1.CreatePaymentMethodResponse)
 	err := c.cc.Invoke(ctx, BackofficePayment_CreatePaymentMethod_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -130,9 +130,9 @@ func (c *backofficePaymentClient) CreatePaymentMethod(ctx context.Context, in *C
 	return out, nil
 }
 
-func (c *backofficePaymentClient) DisablePaymentChannel(ctx context.Context, in *DisablePaymentChannelRequest, opts ...grpc.CallOption) (*DisablePaymentChannelResponse, error) {
+func (c *backofficePaymentClient) DisablePaymentChannel(ctx context.Context, in *v1.DisablePaymentChannelRequest, opts ...grpc.CallOption) (*v1.DisablePaymentChannelResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DisablePaymentChannelResponse)
+	out := new(v1.DisablePaymentChannelResponse)
 	err := c.cc.Invoke(ctx, BackofficePayment_DisablePaymentChannel_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -140,9 +140,9 @@ func (c *backofficePaymentClient) DisablePaymentChannel(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *backofficePaymentClient) CreatePaymentChannel(ctx context.Context, in *CreatePaymentChannelRequest, opts ...grpc.CallOption) (*CreatePaymentChannelResponse, error) {
+func (c *backofficePaymentClient) CreatePaymentChannel(ctx context.Context, in *v1.CreatePaymentChannelRequest, opts ...grpc.CallOption) (*v1.CreatePaymentChannelResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreatePaymentChannelResponse)
+	out := new(v1.CreatePaymentChannelResponse)
 	err := c.cc.Invoke(ctx, BackofficePayment_CreatePaymentChannel_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -150,9 +150,9 @@ func (c *backofficePaymentClient) CreatePaymentChannel(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *backofficePaymentClient) GetOperatorAddress(ctx context.Context, in *GetOperatorAddressRequest, opts ...grpc.CallOption) (*GetOperatorAddressResponse, error) {
+func (c *backofficePaymentClient) GetOperatorAddress(ctx context.Context, in *GetOperatorAddressRequest, opts ...grpc.CallOption) (*v1.GetOperatorAddressResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOperatorAddressResponse)
+	out := new(v1.GetOperatorAddressResponse)
 	err := c.cc.Invoke(ctx, BackofficePayment_GetOperatorAddress_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -160,9 +160,9 @@ func (c *backofficePaymentClient) GetOperatorAddress(ctx context.Context, in *Ge
 	return out, nil
 }
 
-func (c *backofficePaymentClient) GetPaymentChannelPage(ctx context.Context, in *GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*GetPaymentChannelPageResponse, error) {
+func (c *backofficePaymentClient) GetPaymentChannelPage(ctx context.Context, in *v1.GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*v1.GetPaymentChannelPageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPaymentChannelPageResponse)
+	out := new(v1.GetPaymentChannelPageResponse)
 	err := c.cc.Invoke(ctx, BackofficePayment_GetPaymentChannelPage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -187,28 +187,28 @@ type BackofficePaymentServer interface {
 	// Get list of payment methods
 	// Retrieves all available payment methods supported by the system
 	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-	GetSupportedPaymentMethodList(context.Context, *GetSupportedPaymentMethodListRequest) (*GetSupportedPaymentMethodListResponse, error)
+	GetSupportedPaymentMethodList(context.Context, *v1.GetSupportedPaymentMethodListRequest) (*v1.GetSupportedPaymentMethodListResponse, error)
 	// Get list of payment methods
 	// Retrieves all available payment methods supported by the system
 	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-	GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*GetPaymentMethodListResponse, error)
+	GetPaymentMethodList(context.Context, *v1.GetPaymentMethodListRequest) (*v1.GetPaymentMethodListResponse, error)
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	CreatePaymentMethod(context.Context, *CreatePaymentMethodRequest) (*CreatePaymentMethodResponse, error)
+	CreatePaymentMethod(context.Context, *v1.CreatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error)
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	DisablePaymentChannel(context.Context, *DisablePaymentChannelRequest) (*DisablePaymentChannelResponse, error)
+	DisablePaymentChannel(context.Context, *v1.DisablePaymentChannelRequest) (*v1.DisablePaymentChannelResponse, error)
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error)
-	GetOperatorAddress(context.Context, *GetOperatorAddressRequest) (*GetOperatorAddressResponse, error)
+	CreatePaymentChannel(context.Context, *v1.CreatePaymentChannelRequest) (*v1.CreatePaymentChannelResponse, error)
+	GetOperatorAddress(context.Context, *GetOperatorAddressRequest) (*v1.GetOperatorAddressResponse, error)
 	// Get payment channel page with pagination and filters
 	// Retrieves a paginated list of payment channels with optional filtering
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
-	GetPaymentChannelPage(context.Context, *GetPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error)
+	GetPaymentChannelPage(context.Context, *v1.GetPaymentChannelPageRequest) (*v1.GetPaymentChannelPageResponse, error)
 	mustEmbedUnimplementedBackofficePaymentServer()
 }
 
@@ -225,25 +225,25 @@ func (UnimplementedBackofficePaymentServer) GetPaymentTransactionPage(context.Co
 func (UnimplementedBackofficePaymentServer) GetPaymentTransactionById(context.Context, *GetPaymentTransactionByIdRequest) (*GetPaymentTransactionByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentTransactionById not implemented")
 }
-func (UnimplementedBackofficePaymentServer) GetSupportedPaymentMethodList(context.Context, *GetSupportedPaymentMethodListRequest) (*GetSupportedPaymentMethodListResponse, error) {
+func (UnimplementedBackofficePaymentServer) GetSupportedPaymentMethodList(context.Context, *v1.GetSupportedPaymentMethodListRequest) (*v1.GetSupportedPaymentMethodListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSupportedPaymentMethodList not implemented")
 }
-func (UnimplementedBackofficePaymentServer) GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*GetPaymentMethodListResponse, error) {
+func (UnimplementedBackofficePaymentServer) GetPaymentMethodList(context.Context, *v1.GetPaymentMethodListRequest) (*v1.GetPaymentMethodListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentMethodList not implemented")
 }
-func (UnimplementedBackofficePaymentServer) CreatePaymentMethod(context.Context, *CreatePaymentMethodRequest) (*CreatePaymentMethodResponse, error) {
+func (UnimplementedBackofficePaymentServer) CreatePaymentMethod(context.Context, *v1.CreatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentMethod not implemented")
 }
-func (UnimplementedBackofficePaymentServer) DisablePaymentChannel(context.Context, *DisablePaymentChannelRequest) (*DisablePaymentChannelResponse, error) {
+func (UnimplementedBackofficePaymentServer) DisablePaymentChannel(context.Context, *v1.DisablePaymentChannelRequest) (*v1.DisablePaymentChannelResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DisablePaymentChannel not implemented")
 }
-func (UnimplementedBackofficePaymentServer) CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error) {
+func (UnimplementedBackofficePaymentServer) CreatePaymentChannel(context.Context, *v1.CreatePaymentChannelRequest) (*v1.CreatePaymentChannelResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentChannel not implemented")
 }
-func (UnimplementedBackofficePaymentServer) GetOperatorAddress(context.Context, *GetOperatorAddressRequest) (*GetOperatorAddressResponse, error) {
+func (UnimplementedBackofficePaymentServer) GetOperatorAddress(context.Context, *GetOperatorAddressRequest) (*v1.GetOperatorAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorAddress not implemented")
 }
-func (UnimplementedBackofficePaymentServer) GetPaymentChannelPage(context.Context, *GetPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error) {
+func (UnimplementedBackofficePaymentServer) GetPaymentChannelPage(context.Context, *v1.GetPaymentChannelPageRequest) (*v1.GetPaymentChannelPageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentChannelPage not implemented")
 }
 func (UnimplementedBackofficePaymentServer) mustEmbedUnimplementedBackofficePaymentServer() {}
@@ -304,7 +304,7 @@ func _BackofficePayment_GetPaymentTransactionById_Handler(srv interface{}, ctx c
 }
 
 func _BackofficePayment_GetSupportedPaymentMethodList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSupportedPaymentMethodListRequest)
+	in := new(v1.GetSupportedPaymentMethodListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -316,13 +316,13 @@ func _BackofficePayment_GetSupportedPaymentMethodList_Handler(srv interface{}, c
 		FullMethod: BackofficePayment_GetSupportedPaymentMethodList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).GetSupportedPaymentMethodList(ctx, req.(*GetSupportedPaymentMethodListRequest))
+		return srv.(BackofficePaymentServer).GetSupportedPaymentMethodList(ctx, req.(*v1.GetSupportedPaymentMethodListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficePayment_GetPaymentMethodList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPaymentMethodListRequest)
+	in := new(v1.GetPaymentMethodListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -334,13 +334,13 @@ func _BackofficePayment_GetPaymentMethodList_Handler(srv interface{}, ctx contex
 		FullMethod: BackofficePayment_GetPaymentMethodList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).GetPaymentMethodList(ctx, req.(*GetPaymentMethodListRequest))
+		return srv.(BackofficePaymentServer).GetPaymentMethodList(ctx, req.(*v1.GetPaymentMethodListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficePayment_CreatePaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreatePaymentMethodRequest)
+	in := new(v1.CreatePaymentMethodRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -352,13 +352,13 @@ func _BackofficePayment_CreatePaymentMethod_Handler(srv interface{}, ctx context
 		FullMethod: BackofficePayment_CreatePaymentMethod_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).CreatePaymentMethod(ctx, req.(*CreatePaymentMethodRequest))
+		return srv.(BackofficePaymentServer).CreatePaymentMethod(ctx, req.(*v1.CreatePaymentMethodRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficePayment_DisablePaymentChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DisablePaymentChannelRequest)
+	in := new(v1.DisablePaymentChannelRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -370,13 +370,13 @@ func _BackofficePayment_DisablePaymentChannel_Handler(srv interface{}, ctx conte
 		FullMethod: BackofficePayment_DisablePaymentChannel_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).DisablePaymentChannel(ctx, req.(*DisablePaymentChannelRequest))
+		return srv.(BackofficePaymentServer).DisablePaymentChannel(ctx, req.(*v1.DisablePaymentChannelRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficePayment_CreatePaymentChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreatePaymentChannelRequest)
+	in := new(v1.CreatePaymentChannelRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -388,7 +388,7 @@ func _BackofficePayment_CreatePaymentChannel_Handler(srv interface{}, ctx contex
 		FullMethod: BackofficePayment_CreatePaymentChannel_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).CreatePaymentChannel(ctx, req.(*CreatePaymentChannelRequest))
+		return srv.(BackofficePaymentServer).CreatePaymentChannel(ctx, req.(*v1.CreatePaymentChannelRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -412,7 +412,7 @@ func _BackofficePayment_GetOperatorAddress_Handler(srv interface{}, ctx context.
 }
 
 func _BackofficePayment_GetPaymentChannelPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPaymentChannelPageRequest)
+	in := new(v1.GetPaymentChannelPageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -424,7 +424,7 @@ func _BackofficePayment_GetPaymentChannelPage_Handler(srv interface{}, ctx conte
 		FullMethod: BackofficePayment_GetPaymentChannelPage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).GetPaymentChannelPage(ctx, req.(*GetPaymentChannelPageRequest))
+		return srv.(BackofficePaymentServer).GetPaymentChannelPage(ctx, req.(*v1.GetPaymentChannelPageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

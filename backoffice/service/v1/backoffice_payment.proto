@@ -37,7 +37,7 @@ service BackofficePayment {
   // Get list of payment methods
   // Retrieves all available payment methods supported by the system
   // Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-  rpc GetSupportedPaymentMethodList(GetSupportedPaymentMethodListRequest) returns (GetSupportedPaymentMethodListResponse) {
+  rpc GetSupportedPaymentMethodList(payment.service.v1.GetSupportedPaymentMethodListRequest) returns (payment.service.v1.GetSupportedPaymentMethodListResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/payment/supportedmethod/list"
       body: "*"
@@ -47,7 +47,7 @@ service BackofficePayment {
   // Get list of payment methods
   // Retrieves all available payment methods supported by the system
   // Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-  rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
+  rpc GetPaymentMethodList(payment.service.v1.GetPaymentMethodListRequest) returns (payment.service.v1.GetPaymentMethodListResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/payment/method/list"
       body: "*"
@@ -57,7 +57,7 @@ service BackofficePayment {
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc CreatePaymentMethod(CreatePaymentMethodRequest) returns (CreatePaymentMethodResponse) {
+  rpc CreatePaymentMethod(payment.service.v1.CreatePaymentMethodRequest) returns (payment.service.v1.CreatePaymentMethodResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/payment/method/create"
       body: "*"
@@ -67,7 +67,7 @@ service BackofficePayment {
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc DisablePaymentChannel(DisablePaymentChannelRequest) returns (DisablePaymentChannelResponse) {
+  rpc DisablePaymentChannel(payment.service.v1.DisablePaymentChannelRequest) returns (payment.service.v1.DisablePaymentChannelResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/payment/channel/update"
       body: "*"
@@ -77,14 +77,14 @@ service BackofficePayment {
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (CreatePaymentChannelResponse) {
+  rpc CreatePaymentChannel(payment.service.v1.CreatePaymentChannelRequest) returns (payment.service.v1.CreatePaymentChannelResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/payment/channel/create"
       body: "*"
     };
   }
 
-  rpc GetOperatorAddress(GetOperatorAddressRequest) returns (GetOperatorAddressResponse) {
+  rpc GetOperatorAddress(GetOperatorAddressRequest) returns (payment.service.v1.GetOperatorAddressResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/payment/operator/address/get"
       body: "*"
@@ -94,7 +94,7 @@ service BackofficePayment {
   // Get payment channel page with pagination and filters
   // Retrieves a paginated list of payment channels with optional filtering
   // Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
-  rpc GetPaymentChannelPage(GetPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) {
+  rpc GetPaymentChannelPage(payment.service.v1.GetPaymentChannelPageRequest) returns (payment.service.v1.GetPaymentChannelPageResponse) {
     option (google.api.http) = {
       post: "/v1/payment/channel/page"
       body: "*"
@@ -266,23 +266,6 @@ message GetPaymentTransactionByIdResponse {
 	TransactionDetail detail = 1;
 }
 
-message GetTransactionPageRequest {
-	int32 page = 1;
-	int32 page_size = 2;
-	optional string currency = 3;
-	optional TransactionType type = 4;
-	optional TransactionStatus status = 5;
-	optional google.protobuf.Timestamp start_time = 6;
-	optional google.protobuf.Timestamp end_time = 7;
-}
-
-message GetTransactionPageResponse {
-	repeated TransactionInfo transactions = 1;
-	int32 total_count = 2;
-	int32 page = 3;
-	int32 page_size = 4;
-}
-
 // Details of a single payment method
 // Contains information about a specific payment method including its ID, currency, and required fields schema
 message PaymentMethodInfo {
@@ -308,116 +291,6 @@ message PaymentMethodInfo {
   google.protobuf.Struct key_schema = 11 [json_name="keySchema"]; 
 }
 
-message GetSupportedPaymentMethodListRequest {
-  // Currency code supported by this payment method (e.g., USD, EUR, CNY)
-  repeated string currency = 1;
-}
-
-// Response for payment method list
-// Contains a list of all available payment methods
-message GetSupportedPaymentMethodListResponse {
-  // List of payment methods available
-  repeated PaymentMethodInfo payment_methods = 1 [json_name="paymentMethods"];
-	int32 total_count = 2;
-	int32 page = 3;
-	int32 page_size = 4;
-}
-
-// Request to create a payment channel
-// Used to create a new payment channel with specified merchant and method
-message CreatePaymentMethodRequest {
-  // ID of the Operator connect with this channel
-  string operator_id = 1;
-  // ID of the payment method to be used
-  string payment_method_id = 2 [json_name="paymentMethodId"];
-  // Currency Type
-  string currency_type = 3;
-  // Contact Info email
-  string contact = 4;
-  // Fixed Fee on the Amount
-  string fixed_fee = 5;
-  // Rate Fee 
-  string fee_rate = 6;
-  // Min Amount
-  string min_amount = 7;
-  // Max Amount
-  string max_amount = 8;
-  // PSP Fixed Fee on the Amount
-  string psp_fixed_fee = 9;
-  // PSP Rate Fee 
-  string psp_fee_rate = 10;
-  // PSP Min Amount
-  string psp_min_amount = 11;
-  // PSP Max Amount
-  string psp_max_amount = 12;
-  // JSON schema defining the required fields for this payment method
-  google.protobuf.Struct key = 13;
-}
-
-message CreatePaymentMethodResponse {
-  PaymentMethodInfo payment_method = 1;
-}
-
-message GetPaymentMethodListRequest {
-}
-
-// Response for payment method list
-// Contains a list of all available payment methods
-message GetPaymentMethodListResponse {
-  // List of payment methods available
-  repeated PaymentMethodInfo payment_methods = 1 [json_name="paymentMethods"];
-	int32 total_count = 2;
-	int32 page = 3;
-	int32 page_size = 4;
-}
-
-// Request to create a payment channel
-// Used to create a new payment channel with specified merchant and method
-message DisablePaymentChannelRequest {
-  // ID of the merchant creating this channel
-  string id = 1 [json_name="merchantId"];
-}
-
-message DisablePaymentChannelResponse {
-  PaymentMethodInfo payment_methods = 1;
-}
-
-// Request to create a payment channel
-// Used to create a new payment channel with specified merchant and method
-message CreatePaymentChannelRequest {
-  // ID of the merchant creating this channel
-  string merchant_id = 1 [json_name="merchantId"];
-  // ID of the Operator connect with this channel
-  string operator_id = 2;
-  // ID of the payment method to be used
-  string payment_method_id = 3 [json_name="paymentMethodId"];
-  // Type of channel (e.g., deposit, withdrawal)
-  string type = 4;
-  // Contact Info email
-  string contact = 5;
-  // PSP Fixed Fee on the Amount
-  string psp_fixed_fee = 6;
-  // PSP Rate Fee 
-  string psp_fee_rate = 7;
-  // User Fixed Fee on the Amount
-  string user_fixed_fee = 8;
-  // User Rate Fee 
-  string user_fee_rate = 9;
-  // Min Amount
-  string min_amount = 10;
-  // Max Amount
-  string max_amount = 11;
-  // Configuration fields for the payment channel in JSON format
-  google.protobuf.Struct key = 12;
-}
-
-// Response for channel creation
-// Returns the ID of the newly created payment channel
-message CreatePaymentChannelResponse {
-  // Unique identifier for the created channel
-  string channel_id = 1 [json_name="channelId"];
-}
-
 // Request to get address
 // Used to get DC address
 message GetOperatorAddressRequest {
@@ -429,64 +302,4 @@ message GetOperatorAddressRequest {
   // May include clientOrderId, productId, userInfo, etc.
   google.protobuf.Struct extra = 3;
 
-}
-
-// Response for deposit initiation
-// Contains details about the initiated deposit transaction
-message GetOperatorAddressResponse {
-  message Data {
-    // Crypto like btc, eth...
-    string currency = 1;
-    string target_currency = 2;
-    // Crypto protocol
-    string protocol = 3;
-    // Crypto chain
-    string network = 4;
-    // Digital Currency address
-    string address = 5;
-  }
-  Data data = 1;
-}
-
-// Request to get payment channel page
-// Used to retrieve a paginated list of payment channels with optional filters
-message GetPaymentChannelPageRequest {
-  // Page number to retrieve (1-based)
-  int32 page = 1;
-  // Number of items per page
-  int32 page_size = 2 [json_name="pageSize"];
-  
-  // Optional operator ID filter
-  string operator_id = 3 [json_name="operatorId"];
-  // Optional channel type filter
-  ChannelType type = 4;
-  // Optional category filter
-  string category = 5;
-  // Optional payment method filter
-  string payment_method = 6 [json_name="paymentMethod"];
-  // Optional currency filter
-  string currency = 7;
-  // Optional crypto protocol
-  string protocol = 8;
-  // Optional crypto network filter
-  string network = 9;
-  // Optional country filter
-  string country = 10;
-  // Optional sort direction
-  Sort sort = 11 [json_name="sort"];
-}
-
-// Response for payment channel page
-// Contains paginated list of payment channels and pagination metadata
-message GetPaymentChannelPageResponse {
-  // List of payment channels matching the filter criteria
-  repeated PaymentChannelInfo payment_channels = 1 [json_name="paymentChannels"];
-  // Total number of channels matching the filter criteria
-  int32 total_count = 2 [json_name="totalCount"];
-  // Current page number
-  int32 page = 3;
-  // Number of items per page
-  int32 page_size = 4 [json_name="pageSize"];
-  // Total number of pages available
-  int32 total_pages = 5 [json_name="totalPages"];
 }
