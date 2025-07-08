@@ -109,3 +109,21 @@ func OperatorIdsFromOperatorContext(oc *common.OperatorContext) OperatorIds {
 		SystemOperatorId:   oc.SystemOperatorId,
 	}
 }
+
+// IsOperatorIdsInContext checks if the operatorIds are in the operatorContext.
+// It can be used to check if the user or operatorIds specified is in the operatorContext.
+func IsOperatorIdsInContext(operatorIds OperatorIds, operatorContext *common.OperatorContext) bool {
+	operatorIdsFromContext := OperatorIdsFromOperatorContext(operatorContext)
+	_, operatorType := operatorIdsFromContext.GetActualOperatorIdAndType()
+	switch operatorType {
+	case util.OperatorTypeOperator:
+		return operatorIds.OperatorId == operatorContext.OperatorId && operatorIds.CompanyOperatorId == operatorContext.CompanyOperatorId && operatorIds.RetailerOperatorId == operatorContext.RetailerOperatorId && operatorIds.SystemOperatorId == operatorContext.SystemOperatorId
+	case util.OperatorTypeCompany:
+		return operatorIds.CompanyOperatorId == operatorContext.CompanyOperatorId && operatorIds.RetailerOperatorId == operatorContext.RetailerOperatorId && operatorIds.SystemOperatorId == operatorContext.SystemOperatorId
+	case util.OperatorTypeRetailer:
+		return operatorIds.RetailerOperatorId == operatorContext.RetailerOperatorId && operatorIds.SystemOperatorId == operatorContext.SystemOperatorId
+	case util.OperatorTypeSystem:
+		return operatorIds.SystemOperatorId == operatorContext.SystemOperatorId
+	}
+	return false
+}
