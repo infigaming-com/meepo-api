@@ -63,6 +63,14 @@ service BackofficeOperator {
 			body: "*"
 		};
 	}
+
+	// UpdateOperatorStatus updates the status of an operator
+	rpc UpdateOperatorStatus(UpdateOperatorStatusRequest) returns (UpdateOperatorStatusResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/status/update"
+			body: "*"
+		};
+	}
 }
 
 message ListAllOperatorsRequest {
@@ -186,4 +194,15 @@ message ListBottomOperatorsRequest {
 
 message ListBottomOperatorsResponse {
 	repeated OperatorInfo operators = 1;
+}
+
+message UpdateOperatorStatusRequest {
+	int64 target_operator_id = 1; // target operator id
+	string target_operator_type = 2; // target operator type
+	api.common.OperatorContext target_operator_context = 3; // target operator context
+	string action = 4; // action to update the status of target operator
+}
+
+message UpdateOperatorStatusResponse {
+	string status = 1; // status of target operator after update
 }

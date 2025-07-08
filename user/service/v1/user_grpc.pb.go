@@ -70,6 +70,7 @@ const (
 	User_ListRetailerOperators_FullMethodName           = "/api.user.service.v1.User/ListRetailerOperators"
 	User_ListCompanyOperators_FullMethodName            = "/api.user.service.v1.User/ListCompanyOperators"
 	User_ListBottomOperators_FullMethodName             = "/api.user.service.v1.User/ListBottomOperators"
+	User_UpdateOperatorStatus_FullMethodName            = "/api.user.service.v1.User/UpdateOperatorStatus"
 )
 
 // UserClient is the client API for User service.
@@ -172,6 +173,8 @@ type UserClient interface {
 	ListCompanyOperators(ctx context.Context, in *ListCompanyOperatorsRequest, opts ...grpc.CallOption) (*ListCompanyOperatorsResponse, error)
 	// ListBottomOperators returns a list of bottom operators by operator context
 	ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error)
+	// UpdateOperatorStatus updates the status of an operator
+	UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...grpc.CallOption) (*UpdateOperatorStatusResponse, error)
 }
 
 type userClient struct {
@@ -692,6 +695,16 @@ func (c *userClient) ListBottomOperators(ctx context.Context, in *ListBottomOper
 	return out, nil
 }
 
+func (c *userClient) UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...grpc.CallOption) (*UpdateOperatorStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorStatusResponse)
+	err := c.cc.Invoke(ctx, User_UpdateOperatorStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -792,6 +805,8 @@ type UserServer interface {
 	ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*ListCompanyOperatorsResponse, error)
 	// ListBottomOperators returns a list of bottom operators by operator context
 	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
+	// UpdateOperatorStatus updates the status of an operator
+	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -954,6 +969,9 @@ func (UnimplementedUserServer) ListCompanyOperators(context.Context, *ListCompan
 }
 func (UnimplementedUserServer) ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBottomOperators not implemented")
+}
+func (UnimplementedUserServer) UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorStatus not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1894,6 +1912,24 @@ func _User_ListBottomOperators_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_UpdateOperatorStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateOperatorStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateOperatorStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateOperatorStatus(ctx, req.(*UpdateOperatorStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2104,6 +2140,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBottomOperators",
 			Handler:    _User_ListBottomOperators_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorStatus",
+			Handler:    _User_UpdateOperatorStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

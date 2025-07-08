@@ -224,6 +224,10 @@ service User {
 	// ListBottomOperators returns a list of bottom operators by operator context
 	rpc ListBottomOperators(ListBottomOperatorsRequest) returns (ListBottomOperatorsResponse) {
 	}
+
+	// UpdateOperatorStatus updates the status of an operator
+	rpc UpdateOperatorStatus(UpdateOperatorStatusRequest) returns (UpdateOperatorStatusResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -1046,4 +1050,18 @@ message ListBottomOperatorsRequest {
 
 message ListBottomOperatorsResponse {
 	repeated OperatorInfo operators = 1;
+}
+
+message UpdateOperatorStatusRequest {
+	int64 target_operator_id = 1; // target operator id
+	string target_operator_type = 2; // target operator type
+	api.common.OperatorContext target_operator_context = 3; // target operator context
+	string action = 4; // action to update the status of target operator
+	int64 operator_id = 5; // operator id of the backoffice operator
+	string operator_type = 6; // operator type of the backoffice operator
+	api.common.OperatorContext operator_context = 7; // operator context of the backoffice operator
+}
+
+message UpdateOperatorStatusResponse {
+	string status = 1; // status of target operator after update
 }
