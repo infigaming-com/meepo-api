@@ -21,7 +21,7 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: "/v1"
+        value: "/"
     backendRefs:
     - name: invoker-server-svc
       port: 8000
