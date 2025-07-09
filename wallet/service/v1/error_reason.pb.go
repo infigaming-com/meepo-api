@@ -97,6 +97,7 @@ const (
 	ErrorReason_QUERY_OPERATOR_BALANCES_FAILED                                  ErrorReason = 30069
 	ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT                                  ErrorReason = 30070
 	ErrorReason_OPERATOR_PERMISSION_DENIED                                      ErrorReason = 30071
+	ErrorReason_USER_NOT_IN_OPERATOR_CONTEXT                                    ErrorReason = 30072
 )
 
 // Enum value maps for ErrorReason.
@@ -174,6 +175,7 @@ var (
 		30069: "QUERY_OPERATOR_BALANCES_FAILED",
 		30070: "USER_INFO_NOT_FOUND_IN_CONTEXT",
 		30071: "OPERATOR_PERMISSION_DENIED",
+		30072: "USER_NOT_IN_OPERATOR_CONTEXT",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -248,6 +250,7 @@ var (
 		"QUERY_OPERATOR_BALANCES_FAILED":                                  30069,
 		"USER_INFO_NOT_FOUND_IN_CONTEXT":                                  30070,
 		"OPERATOR_PERMISSION_DENIED":                                      30071,
+		"USER_NOT_IN_OPERATOR_CONTEXT":                                    30072,
 	}
 )
 
@@ -282,7 +285,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xd4\x15\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xf8\x15\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -355,7 +358,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x15INVALID_OPERATOR_SWAP\x10\xf4\xea\x01\x12$\n" +
 	"\x1eQUERY_OPERATOR_BALANCES_FAILED\x10\xf5\xea\x01\x12$\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\xf6\xea\x01\x12 \n" +
-	"\x1aOPERATOR_PERMISSION_DENIED\x10\xf7\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x1aOPERATOR_PERMISSION_DENIED\x10\xf7\xea\x01\x12\"\n" +
+	"\x1cUSER_NOT_IN_OPERATOR_CONTEXT\x10\xf8\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
