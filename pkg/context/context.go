@@ -121,9 +121,10 @@ func OperatorIdsFromOperatorContext(oc *common.OperatorContext) OperatorIds {
 func IsOperatorIdsInOperatorContext(operatorIds OperatorIds, operatorContext *common.OperatorContext) bool {
 	operatorType := operatorContext.OperatorType
 	if operatorType == "" {
-		operatorType = OperatorIdsFromOperatorContext(operatorContext).OperatorType
+		contextOperatorIds := OperatorIdsFromOperatorContext(operatorContext)
+		_, operatorType = contextOperatorIds.GetRealOperatorIdAndType()
 	}
-	switch operatorContext.OperatorType {
+	switch operatorType {
 	case util.OperatorTypeOperator:
 		return operatorIds.OperatorId == operatorContext.OperatorId && operatorIds.CompanyOperatorId == operatorContext.CompanyOperatorId && operatorIds.RetailerOperatorId == operatorContext.RetailerOperatorId && operatorIds.SystemOperatorId == operatorContext.SystemOperatorId
 	case util.OperatorTypeCompany:
