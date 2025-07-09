@@ -269,6 +269,8 @@ func (m *PaymentMethodInfo) validate(all bool) error {
 
 	// no validation rules for Psp
 
+	// no validation rules for Type
+
 	// no validation rules for Currency
 
 	// no validation rules for Country
@@ -690,7 +692,34 @@ func (m *CreatePaymentMethodRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for OperatorId
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreatePaymentMethodRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreatePaymentMethodRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreatePaymentMethodRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for PaymentMethodId
 
@@ -1573,6 +1602,10 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for SourceType
+
+	// no validation rules for Enable
+
 	if len(errors) > 0 {
 		return PaymentChannelInfoMultiError(errors)
 	}
@@ -2226,22 +2259,22 @@ var _ interface {
 	ErrorName() string
 } = GetAddressResponseValidationError{}
 
-// Validate checks the field values on GetCustodyAddressRequest with the rules
+// Validate checks the field values on GetOperatorAddressRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetCustodyAddressRequest) Validate() error {
+func (m *GetOperatorAddressRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetCustodyAddressRequest with the
+// ValidateAll checks the field values on GetOperatorAddressRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetCustodyAddressRequestMultiError, or nil if none found.
-func (m *GetCustodyAddressRequest) ValidateAll() error {
+// GetOperatorAddressRequestMultiError, or nil if none found.
+func (m *GetOperatorAddressRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetCustodyAddressRequest) validate(all bool) error {
+func (m *GetOperatorAddressRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2253,10 +2286,39 @@ func (m *GetCustodyAddressRequest) validate(all bool) error {
 	// no validation rules for TargetCurrency
 
 	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorAddressRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorAddressRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorAddressRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
 		switch v := interface{}(m.GetExtra()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetCustodyAddressRequestValidationError{
+				errors = append(errors, GetOperatorAddressRequestValidationError{
 					field:  "Extra",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2264,7 +2326,7 @@ func (m *GetCustodyAddressRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetCustodyAddressRequestValidationError{
+				errors = append(errors, GetOperatorAddressRequestValidationError{
 					field:  "Extra",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2273,7 +2335,7 @@ func (m *GetCustodyAddressRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetCustodyAddressRequestValidationError{
+			return GetOperatorAddressRequestValidationError{
 				field:  "Extra",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -2282,19 +2344,19 @@ func (m *GetCustodyAddressRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetCustodyAddressRequestMultiError(errors)
+		return GetOperatorAddressRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetCustodyAddressRequestMultiError is an error wrapping multiple validation
-// errors returned by GetCustodyAddressRequest.ValidateAll() if the designated
-// constraints aren't met.
-type GetCustodyAddressRequestMultiError []error
+// GetOperatorAddressRequestMultiError is an error wrapping multiple validation
+// errors returned by GetOperatorAddressRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetOperatorAddressRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetCustodyAddressRequestMultiError) Error() string {
+func (m GetOperatorAddressRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2303,11 +2365,11 @@ func (m GetCustodyAddressRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetCustodyAddressRequestMultiError) AllErrors() []error { return m }
+func (m GetOperatorAddressRequestMultiError) AllErrors() []error { return m }
 
-// GetCustodyAddressRequestValidationError is the validation error returned by
-// GetCustodyAddressRequest.Validate if the designated constraints aren't met.
-type GetCustodyAddressRequestValidationError struct {
+// GetOperatorAddressRequestValidationError is the validation error returned by
+// GetOperatorAddressRequest.Validate if the designated constraints aren't met.
+type GetOperatorAddressRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2315,24 +2377,24 @@ type GetCustodyAddressRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetCustodyAddressRequestValidationError) Field() string { return e.field }
+func (e GetOperatorAddressRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetCustodyAddressRequestValidationError) Reason() string { return e.reason }
+func (e GetOperatorAddressRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetCustodyAddressRequestValidationError) Cause() error { return e.cause }
+func (e GetOperatorAddressRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetCustodyAddressRequestValidationError) Key() bool { return e.key }
+func (e GetOperatorAddressRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetCustodyAddressRequestValidationError) ErrorName() string {
-	return "GetCustodyAddressRequestValidationError"
+func (e GetOperatorAddressRequestValidationError) ErrorName() string {
+	return "GetOperatorAddressRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetCustodyAddressRequestValidationError) Error() string {
+func (e GetOperatorAddressRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2344,14 +2406,14 @@ func (e GetCustodyAddressRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetCustodyAddressRequest.%s: %s%s",
+		"invalid %sGetOperatorAddressRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetCustodyAddressRequestValidationError{}
+var _ error = GetOperatorAddressRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -2359,24 +2421,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetCustodyAddressRequestValidationError{}
+} = GetOperatorAddressRequestValidationError{}
 
-// Validate checks the field values on GetCustodyAddressResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on GetOperatorAddressResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetCustodyAddressResponse) Validate() error {
+func (m *GetOperatorAddressResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetCustodyAddressResponse with the
+// ValidateAll checks the field values on GetOperatorAddressResponse with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetCustodyAddressResponseMultiError, or nil if none found.
-func (m *GetCustodyAddressResponse) ValidateAll() error {
+// GetOperatorAddressResponseMultiError, or nil if none found.
+func (m *GetOperatorAddressResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetCustodyAddressResponse) validate(all bool) error {
+func (m *GetOperatorAddressResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2387,7 +2449,7 @@ func (m *GetCustodyAddressResponse) validate(all bool) error {
 		switch v := interface{}(m.GetData()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetCustodyAddressResponseValidationError{
+				errors = append(errors, GetOperatorAddressResponseValidationError{
 					field:  "Data",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2395,7 +2457,7 @@ func (m *GetCustodyAddressResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetCustodyAddressResponseValidationError{
+				errors = append(errors, GetOperatorAddressResponseValidationError{
 					field:  "Data",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2404,7 +2466,7 @@ func (m *GetCustodyAddressResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetCustodyAddressResponseValidationError{
+			return GetOperatorAddressResponseValidationError{
 				field:  "Data",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -2413,19 +2475,19 @@ func (m *GetCustodyAddressResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetCustodyAddressResponseMultiError(errors)
+		return GetOperatorAddressResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetCustodyAddressResponseMultiError is an error wrapping multiple validation
-// errors returned by GetCustodyAddressResponse.ValidateAll() if the
-// designated constraints aren't met.
-type GetCustodyAddressResponseMultiError []error
+// GetOperatorAddressResponseMultiError is an error wrapping multiple
+// validation errors returned by GetOperatorAddressResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetOperatorAddressResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetCustodyAddressResponseMultiError) Error() string {
+func (m GetOperatorAddressResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2434,11 +2496,11 @@ func (m GetCustodyAddressResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetCustodyAddressResponseMultiError) AllErrors() []error { return m }
+func (m GetOperatorAddressResponseMultiError) AllErrors() []error { return m }
 
-// GetCustodyAddressResponseValidationError is the validation error returned by
-// GetCustodyAddressResponse.Validate if the designated constraints aren't met.
-type GetCustodyAddressResponseValidationError struct {
+// GetOperatorAddressResponseValidationError is the validation error returned
+// by GetOperatorAddressResponse.Validate if the designated constraints aren't met.
+type GetOperatorAddressResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2446,24 +2508,24 @@ type GetCustodyAddressResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetCustodyAddressResponseValidationError) Field() string { return e.field }
+func (e GetOperatorAddressResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetCustodyAddressResponseValidationError) Reason() string { return e.reason }
+func (e GetOperatorAddressResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetCustodyAddressResponseValidationError) Cause() error { return e.cause }
+func (e GetOperatorAddressResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetCustodyAddressResponseValidationError) Key() bool { return e.key }
+func (e GetOperatorAddressResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetCustodyAddressResponseValidationError) ErrorName() string {
-	return "GetCustodyAddressResponseValidationError"
+func (e GetOperatorAddressResponseValidationError) ErrorName() string {
+	return "GetOperatorAddressResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetCustodyAddressResponseValidationError) Error() string {
+func (e GetOperatorAddressResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2475,14 +2537,14 @@ func (e GetCustodyAddressResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetCustodyAddressResponse.%s: %s%s",
+		"invalid %sGetOperatorAddressResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetCustodyAddressResponseValidationError{}
+var _ error = GetOperatorAddressResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -2490,7 +2552,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetCustodyAddressResponseValidationError{}
+} = GetOperatorAddressResponseValidationError{}
 
 // Validate checks the field values on InitiateWithdrawRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -2800,6 +2862,317 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = InitiateWithdrawResponseValidationError{}
+
+// Validate checks the field values on InitiateOperatorWithdrawRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InitiateOperatorWithdrawRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InitiateOperatorWithdrawRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// InitiateOperatorWithdrawRequestMultiError, or nil if none found.
+func (m *InitiateOperatorWithdrawRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InitiateOperatorWithdrawRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Amount
+
+	// no validation rules for Currency
+
+	// no validation rules for SourceCurrency
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, InitiateOperatorWithdrawRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, InitiateOperatorWithdrawRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return InitiateOperatorWithdrawRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for ChannelId
+
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, InitiateOperatorWithdrawRequestValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, InitiateOperatorWithdrawRequestValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return InitiateOperatorWithdrawRequestValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return InitiateOperatorWithdrawRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// InitiateOperatorWithdrawRequestMultiError is an error wrapping multiple
+// validation errors returned by InitiateOperatorWithdrawRequest.ValidateAll()
+// if the designated constraints aren't met.
+type InitiateOperatorWithdrawRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InitiateOperatorWithdrawRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InitiateOperatorWithdrawRequestMultiError) AllErrors() []error { return m }
+
+// InitiateOperatorWithdrawRequestValidationError is the validation error
+// returned by InitiateOperatorWithdrawRequest.Validate if the designated
+// constraints aren't met.
+type InitiateOperatorWithdrawRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InitiateOperatorWithdrawRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InitiateOperatorWithdrawRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InitiateOperatorWithdrawRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InitiateOperatorWithdrawRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InitiateOperatorWithdrawRequestValidationError) ErrorName() string {
+	return "InitiateOperatorWithdrawRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InitiateOperatorWithdrawRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInitiateOperatorWithdrawRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InitiateOperatorWithdrawRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InitiateOperatorWithdrawRequestValidationError{}
+
+// Validate checks the field values on InitiateOperatorWithdrawResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *InitiateOperatorWithdrawResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InitiateOperatorWithdrawResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// InitiateOperatorWithdrawResponseMultiError, or nil if none found.
+func (m *InitiateOperatorWithdrawResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InitiateOperatorWithdrawResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	// no validation rules for OperatorOrderNo
+
+	// no validation rules for Amount
+
+	// no validation rules for Status
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, InitiateOperatorWithdrawResponseValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, InitiateOperatorWithdrawResponseValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return InitiateOperatorWithdrawResponseValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return InitiateOperatorWithdrawResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// InitiateOperatorWithdrawResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// InitiateOperatorWithdrawResponse.ValidateAll() if the designated
+// constraints aren't met.
+type InitiateOperatorWithdrawResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InitiateOperatorWithdrawResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InitiateOperatorWithdrawResponseMultiError) AllErrors() []error { return m }
+
+// InitiateOperatorWithdrawResponseValidationError is the validation error
+// returned by InitiateOperatorWithdrawResponse.Validate if the designated
+// constraints aren't met.
+type InitiateOperatorWithdrawResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InitiateOperatorWithdrawResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InitiateOperatorWithdrawResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InitiateOperatorWithdrawResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InitiateOperatorWithdrawResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InitiateOperatorWithdrawResponseValidationError) ErrorName() string {
+	return "InitiateOperatorWithdrawResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InitiateOperatorWithdrawResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInitiateOperatorWithdrawResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InitiateOperatorWithdrawResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InitiateOperatorWithdrawResponseValidationError{}
 
 // Validate checks the field values on DepositCallbackRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -4816,22 +5189,22 @@ var _ interface {
 	ErrorName() string
 } = GetAddressResponse_DataValidationError{}
 
-// Validate checks the field values on GetCustodyAddressResponse_Data with the
+// Validate checks the field values on GetOperatorAddressResponse_Data with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetCustodyAddressResponse_Data) Validate() error {
+func (m *GetOperatorAddressResponse_Data) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetCustodyAddressResponse_Data with
+// ValidateAll checks the field values on GetOperatorAddressResponse_Data with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the result is a list of violation errors wrapped in
-// GetCustodyAddressResponse_DataMultiError, or nil if none found.
-func (m *GetCustodyAddressResponse_Data) ValidateAll() error {
+// GetOperatorAddressResponse_DataMultiError, or nil if none found.
+func (m *GetOperatorAddressResponse_Data) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetCustodyAddressResponse_Data) validate(all bool) error {
+func (m *GetOperatorAddressResponse_Data) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4849,19 +5222,19 @@ func (m *GetCustodyAddressResponse_Data) validate(all bool) error {
 	// no validation rules for Address
 
 	if len(errors) > 0 {
-		return GetCustodyAddressResponse_DataMultiError(errors)
+		return GetOperatorAddressResponse_DataMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetCustodyAddressResponse_DataMultiError is an error wrapping multiple
-// validation errors returned by GetCustodyAddressResponse_Data.ValidateAll()
+// GetOperatorAddressResponse_DataMultiError is an error wrapping multiple
+// validation errors returned by GetOperatorAddressResponse_Data.ValidateAll()
 // if the designated constraints aren't met.
-type GetCustodyAddressResponse_DataMultiError []error
+type GetOperatorAddressResponse_DataMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetCustodyAddressResponse_DataMultiError) Error() string {
+func (m GetOperatorAddressResponse_DataMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4870,12 +5243,12 @@ func (m GetCustodyAddressResponse_DataMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetCustodyAddressResponse_DataMultiError) AllErrors() []error { return m }
+func (m GetOperatorAddressResponse_DataMultiError) AllErrors() []error { return m }
 
-// GetCustodyAddressResponse_DataValidationError is the validation error
-// returned by GetCustodyAddressResponse_Data.Validate if the designated
+// GetOperatorAddressResponse_DataValidationError is the validation error
+// returned by GetOperatorAddressResponse_Data.Validate if the designated
 // constraints aren't met.
-type GetCustodyAddressResponse_DataValidationError struct {
+type GetOperatorAddressResponse_DataValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4883,24 +5256,24 @@ type GetCustodyAddressResponse_DataValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetCustodyAddressResponse_DataValidationError) Field() string { return e.field }
+func (e GetOperatorAddressResponse_DataValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetCustodyAddressResponse_DataValidationError) Reason() string { return e.reason }
+func (e GetOperatorAddressResponse_DataValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetCustodyAddressResponse_DataValidationError) Cause() error { return e.cause }
+func (e GetOperatorAddressResponse_DataValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetCustodyAddressResponse_DataValidationError) Key() bool { return e.key }
+func (e GetOperatorAddressResponse_DataValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetCustodyAddressResponse_DataValidationError) ErrorName() string {
-	return "GetCustodyAddressResponse_DataValidationError"
+func (e GetOperatorAddressResponse_DataValidationError) ErrorName() string {
+	return "GetOperatorAddressResponse_DataValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetCustodyAddressResponse_DataValidationError) Error() string {
+func (e GetOperatorAddressResponse_DataValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4912,14 +5285,14 @@ func (e GetCustodyAddressResponse_DataValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetCustodyAddressResponse_Data.%s: %s%s",
+		"invalid %sGetOperatorAddressResponse_Data.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetCustodyAddressResponse_DataValidationError{}
+var _ error = GetOperatorAddressResponse_DataValidationError{}
 
 var _ interface {
 	Field() string
@@ -4927,7 +5300,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetCustodyAddressResponse_DataValidationError{}
+} = GetOperatorAddressResponse_DataValidationError{}
 
 // Validate checks the field values on GetChannelsByIdsResponse_Channel with
 // the rules defined in the proto definition for this message. If any rules

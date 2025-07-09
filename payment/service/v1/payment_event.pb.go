@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -110,20 +111,17 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 }
 
 type OperatorPaymentTransactionEvent struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId      int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	TransactionType    string                 `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	RealOperatorId     int64                  `protobuf:"varint,3,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
-	OperatorId         int64                  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	CompanyOperatorId  int64                  `protobuf:"varint,5,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
-	RetailerOperatorId int64                  `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
-	SystemOperatorId   int64                  `protobuf:"varint,7,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
-	OperatorType       string                 `protobuf:"bytes,8,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
-	Currency           string                 `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency,omitempty"`
-	SettlementCurrency string                 `protobuf:"bytes,10,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
-	ReportingCurrency  string                 `protobuf:"bytes,11,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	ExchangeRate       string                 `protobuf:"bytes,12,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"` // exchange rate of the currency to the settlement currency
-	Amount             string                 `protobuf:"bytes,13,opt,name=amount,proto3" json:"amount,omitempty"`                                 // cash amount of the currency
+	state              protoimpl.MessageState  `protogen:"open.v1"`
+	TransactionId      int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	TransactionType    string                  `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	RealOperatorId     int64                   `protobuf:"varint,3,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
+	OperatorContext    *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorType       string                  `protobuf:"bytes,5,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	Currency           string                  `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
+	SettlementCurrency string                  `protobuf:"bytes,7,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	ReportingCurrency  string                  `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	ExchangeRate       string                  `protobuf:"bytes,9,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"` // exchange rate of the currency to the settlement currency
+	Amount             string                  `protobuf:"bytes,10,opt,name=amount,proto3" json:"amount,omitempty"`                                // cash amount of the currency
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -179,32 +177,11 @@ func (x *OperatorPaymentTransactionEvent) GetRealOperatorId() int64 {
 	return 0
 }
 
-func (x *OperatorPaymentTransactionEvent) GetOperatorId() int64 {
+func (x *OperatorPaymentTransactionEvent) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorId
+		return x.OperatorContext
 	}
-	return 0
-}
-
-func (x *OperatorPaymentTransactionEvent) GetCompanyOperatorId() int64 {
-	if x != nil {
-		return x.CompanyOperatorId
-	}
-	return 0
-}
-
-func (x *OperatorPaymentTransactionEvent) GetRetailerOperatorId() int64 {
-	if x != nil {
-		return x.RetailerOperatorId
-	}
-	return 0
-}
-
-func (x *OperatorPaymentTransactionEvent) GetSystemOperatorId() int64 {
-	if x != nil {
-		return x.SystemOperatorId
-	}
-	return 0
+	return nil
 }
 
 func (x *OperatorPaymentTransactionEvent) GetOperatorType() string {
@@ -253,28 +230,24 @@ var File_payment_service_v1_payment_event_proto protoreflect.FileDescriptor
 
 const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"\n" +
-	"&payment/service/v1/payment_event.proto\x12\x16api.payment.service.v1\"V\n" +
+	"&payment/service/v1/payment_event.proto\x12\x16api.payment.service.v1\x1a\x13common/common.proto\"V\n" +
 	"\fEventRequest\x12'\n" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse\"\xac\x04\n" +
+	"\rEventResponse\"\xc3\x03\n" +
 	"\x1fOperatorPaymentTransactionEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
 	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12(\n" +
-	"\x10real_operator_id\x18\x03 \x01(\x03R\x0erealOperatorId\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\x03R\n" +
-	"operatorId\x12.\n" +
-	"\x13company_operator_id\x18\x05 \x01(\x03R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18\x06 \x01(\x03R\x12retailerOperatorId\x12,\n" +
-	"\x12system_operator_id\x18\a \x01(\x03R\x10systemOperatorId\x12#\n" +
-	"\roperator_type\x18\b \x01(\tR\foperatorType\x12\x1a\n" +
-	"\bcurrency\x18\t \x01(\tR\bcurrency\x12/\n" +
-	"\x13settlement_currency\x18\n" +
-	" \x01(\tR\x12settlementCurrency\x12-\n" +
-	"\x12reporting_currency\x18\v \x01(\tR\x11reportingCurrency\x12#\n" +
-	"\rexchange_rate\x18\f \x01(\tR\fexchangeRate\x12\x16\n" +
-	"\x06amount\x18\r \x01(\tR\x06amount2f\n" +
+	"\x10real_operator_id\x18\x03 \x01(\x03R\x0erealOperatorId\x12F\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12#\n" +
+	"\roperator_type\x18\x05 \x01(\tR\foperatorType\x12\x1a\n" +
+	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12/\n" +
+	"\x13settlement_currency\x18\a \x01(\tR\x12settlementCurrency\x12-\n" +
+	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency\x12#\n" +
+	"\rexchange_rate\x18\t \x01(\tR\fexchangeRate\x12\x16\n" +
+	"\x06amount\x18\n" +
+	" \x01(\tR\x06amount2f\n" +
 	"\fPaymentEvent\x12V\n" +
 	"\x05Event\x12$.api.payment.service.v1.EventRequest\x1a%.api.payment.service.v1.EventResponse\"\x00BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
@@ -296,15 +269,17 @@ var file_payment_service_v1_payment_event_proto_goTypes = []any{
 	(*EventRequest)(nil),                    // 0: api.payment.service.v1.EventRequest
 	(*EventResponse)(nil),                   // 1: api.payment.service.v1.EventResponse
 	(*OperatorPaymentTransactionEvent)(nil), // 2: api.payment.service.v1.OperatorPaymentTransactionEvent
+	(*common.OperatorContext)(nil),          // 3: api.common.OperatorContext
 }
 var file_payment_service_v1_payment_event_proto_depIdxs = []int32{
-	0, // 0: api.payment.service.v1.PaymentEvent.Event:input_type -> api.payment.service.v1.EventRequest
-	1, // 1: api.payment.service.v1.PaymentEvent.Event:output_type -> api.payment.service.v1.EventResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: api.payment.service.v1.OperatorPaymentTransactionEvent.operator_context:type_name -> api.common.OperatorContext
+	0, // 1: api.payment.service.v1.PaymentEvent.Event:input_type -> api.payment.service.v1.EventRequest
+	1, // 2: api.payment.service.v1.PaymentEvent.Event:output_type -> api.payment.service.v1.EventResponse
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_payment_service_v1_payment_event_proto_init() }

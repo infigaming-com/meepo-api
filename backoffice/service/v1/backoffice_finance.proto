@@ -92,6 +92,13 @@ service BackofficeFinance {
 			body: "*"
 		};
 	}
+
+	rpc GetInvoiceSummary(GetInvoiceSummaryRequest) returns (GetInvoiceSummaryResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/invoices/summary"
+			body: "*"
+		};
+	}
 }
 
 message ListInvoicesRequest {
@@ -379,9 +386,10 @@ message AddAdjustmentRequest {
 	int64 operator_id = 4; // Operator ID
 	
 	// Financial information
-	string currency = 5; // Currency code (e.g., "USDT", "USD")
-	string amount = 6; // Adjustment amount as string to preserve precision
-	string description = 7; // Description of the adjustment
+	string applied_date = 5; // Applied date
+	string currency = 6; // Currency code (e.g., "USDT", "USD")
+	string amount = 7; // Adjustment amount as string to preserve precision
+	string description = 8; // Description of the adjustment
 }
 
 message AddAdjustmentResponse {
@@ -479,4 +487,13 @@ message SendInvoicesRequest {
 }
 
 message SendInvoicesResponse {
+}
+
+message GetInvoiceSummaryRequest {
+}
+
+message GetInvoiceSummaryResponse {
+	string total_income = 1;
+	string total_outcome = 2;
+	string billing_period = 3;
 }

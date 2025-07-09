@@ -28,21 +28,22 @@ message PaymentMethodInfo {
   string id = 1;
   // Currency code supported by this payment method (e.g., USD, EUR, CNY)
   string psp = 2;
-  string currency = 3;
+  string type = 3;
+  string currency = 4;
   // Country code where this payment method is available
-  string country = 4;
+  string country = 5;
   // Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
-  string payment_method = 5 [json_name="paymentMethod"];
+  string payment_method = 6 [json_name="paymentMethod"];
   // Fixed Fee on the Amount
-  string fixed_fee = 6;
+  string fixed_fee = 7;
   // Rate Fee 
-  string fee_rate = 7;
+  string fee_rate = 8;
   // Min Amount
-  string min_amount = 8;
+  string min_amount = 9;
   // Max Amount
-  string max_amount = 9;
+  string max_amount = 10;
   // JSON schema defining the required fields for this payment method
-  google.protobuf.Struct key_schema = 10 [json_name="keySchema"]; 
+  google.protobuf.Struct key_schema = 11 [json_name="keySchema"]; 
 }
 
 // Response for payment method list
@@ -63,7 +64,7 @@ message GetPaymentMethodListResponse {
 // Used to create a new payment channel with specified merchant and method
 message CreatePaymentMethodRequest {
   // ID of the Operator connect with this channel
-  string operator_id = 1;
+	api.common.OperatorContext operator_context = 1;
   // ID of the payment method to be used
   string payment_method_id = 2 [json_name="paymentMethodId"];
   // Currency Type
@@ -189,6 +190,8 @@ message PaymentChannelInfo {
   google.protobuf.Struct deposit_schema = 22 [json_name="depositSchema"];
   // JSON schema defining withdrawal form fields required by this channel
   google.protobuf.Struct withdraw_schema = 23 [json_name="withdrawSchema"];
+  string source_type = 24;
+  bool enable = 25;
 }
 
 // Request to initiate a deposit
@@ -254,23 +257,26 @@ message GetAddressResponse {
 
 // Request to get address
 // Used to get DC address
-message GetCustodyAddressRequest {
+message GetOperatorAddressRequest {
   // ID of the channel to use for this deposit
   string channel_id = 1 [json_name="channelId"];
 
   string target_currency = 2;
+
+  api.common.OperatorContext operator_context = 3;
   // Additional information needed for the deposit
   // May include clientOrderId, productId, userInfo, etc.
-  google.protobuf.Struct extra = 3;
+  google.protobuf.Struct extra = 4;
 
 }
 
 // Response for deposit initiation
 // Contains details about the initiated deposit transaction
-message GetCustodyAddressResponse {
+message GetOperatorAddressResponse {
   message Data {
     // Crypto like btc, eth...
     string currency = 1;
+    // Target Currency
     string target_currency = 2;
     // Crypto protocol
     string protocol = 3;
@@ -296,7 +302,7 @@ message InitiateWithdrawRequest {
   // ID of the channel to use for withdrawal
   string channel_id = 5 [json_name="channelId"];
   // ID of the operator who owns this channel
-	api.common.OperatorContext operator_context = 6;
+  api.common.OperatorContext operator_context = 6;
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
   google.protobuf.Struct extra = 7;
@@ -305,6 +311,38 @@ message InitiateWithdrawRequest {
 // Response for withdrawal initiation
 // Contains details about the initiated withdrawal transaction
 message InitiateWithdrawResponse {
+  // Unique identifier for the transaction
+  int64 transaction_id = 1 [json_name="transactionId"];
+  // Order number from the operator's system
+  string operator_order_no = 2 [json_name="operatorOrderNo"];
+  // Amount to be withdrawn in smallest currency unit
+  string amount = 3;
+  // Current status of the transaction
+  string status = 4;
+  // Timestamp when the transaction was created
+  google.protobuf.Timestamp created_at = 5 [json_name="createdAt"];
+}
+
+// Request to initiate a withdrawal
+// Used to start a withdrawal transaction
+message InitiateOperatorWithdrawRequest {
+  // Amount to withdraw in smallest currency unit (e.g., cents)
+  string amount = 1;
+  // Currency code for the transaction
+  string currency = 2;
+  string source_currency = 3;
+  // ID of the operator who owns this channel
+	api.common.OperatorContext operator_context = 4;
+  // ID of the channel to use for withdrawal
+  string channel_id = 5;
+  // Additional information needed for the withdrawal
+  // May include account details, clientId, note, etc.
+  google.protobuf.Struct extra = 6;
+}
+
+// Response for withdrawal initiation
+// Contains details about the initiated withdrawal transaction
+message InitiateOperatorWithdrawResponse {
   // Unique identifier for the transaction
   int64 transaction_id = 1 [json_name="transactionId"];
   // Order number from the operator's system
@@ -700,8 +738,7 @@ service Payment {
   // Initiate a withdrawal transaction
   // Starts a new withdrawal process
   // Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
-  rpc InitiateWithdraw(InitiateWithdrawRequest) returns (InitiateWithdrawResponse) {
-  }
+  rpc InitiateWithdraw(InitiateWithdrawRequest) returns (InitiateWithdrawResponse) { }
 
   // Deposit callback
   // Handles callbacks from payment gateways for deposit status updates
@@ -725,27 +762,21 @@ service Payment {
     };
   }
 
-  rpc GetCustodyAddress(GetCustodyAddressRequest) returns (GetCustodyAddressResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/custody/address/get"
-      body: "*"
-    };
-  }
+  rpc GetOperatorAddress(GetOperatorAddressRequest) returns (GetOperatorAddressResponse) { }
 
   // Initiate a withdrawal transaction
   // Starts a new withdrawal process
   // Error code: INITIATE_WITHDRAW_FAILED(50005) - Failed to initiate withdrawal transaction
-  rpc InitiateCustodyWithdraw(InitiateWithdrawRequest) returns (InitiateWithdrawResponse) {
-  }
+  rpc InitiateOperatorWithdraw(InitiateOperatorWithdrawRequest) returns (InitiateOperatorWithdrawResponse) { }
 
 
   // Deposit callback
   // Handles callbacks from payment gateways for deposit status updates
   // This endpoint is called by payment providers to notify of completed or failed deposits
   // Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
-  rpc CustodyDepositCallback(DepositCallbackRequest) returns (DepositCallbackResponse) {
+  rpc OperatorDepositCallback(DepositCallbackRequest) returns (DepositCallbackResponse) {
     option (google.api.http) = {
-      post: "/v1/payment/custody/deposit/callback"
+      post: "/v1/payment/operator/deposit/callback"
       body: "*"
     };
   }
@@ -754,9 +785,9 @@ service Payment {
   // Handles callbacks from payment gateways for withdrawal status updates
   // This endpoint is called by payment providers to notify of completed or failed withdrawals
   // Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
-  rpc CustodyWithdrawCallback(WithdrawCallbackRequest) returns (WithdrawCallbackResponse) {
+  rpc OperatorWithdrawCallback(WithdrawCallbackRequest) returns (WithdrawCallbackResponse) {
     option (google.api.http) = {
-      post: "/v1/payment/custody/withdraw/callback"
+      post: "/v1/payment/operator/withdraw/callback"
       body: "*"
     };
   }

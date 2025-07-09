@@ -3,15 +3,16 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficeOperator {
-	rpc ListOperators(ListOperatorsRequest) returns (ListOperatorsResponse) {
+	rpc ListAllOperators(ListAllOperatorsRequest) returns (ListAllOperatorsResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/operator/list"
+			post: "/v1/backoffice/operator/list/all"
 			body: "*"
 		};
 	}
@@ -38,16 +39,52 @@ service BackofficeOperator {
 			body: "*"
 		};
 	}
+
+	// ListRetailers returns a list of retailers by operator context in the middleware
+	rpc ListRetailerOperators(ListRetailerOperatorsRequest) returns (ListRetailerOperatorsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/list/retailer"
+			body: "*"
+		};
+	}
+
+	// ListCompanies returns a list of companies by operator context in the middleware
+	rpc ListCompanyOperators(ListCompanyOperatorsRequest) returns (ListCompanyOperatorsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/list/company"
+			body: "*"
+		};
+	}
+
+	// ListBottomOperators returns a list of bottom operators by operator context in the middleware
+	rpc ListBottomOperators(ListBottomOperatorsRequest) returns (ListBottomOperatorsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/list/bottom"
+			body: "*"
+		};
+	}
+
+	// UpdateOperatorStatus updates the status of an operator
+	rpc UpdateOperatorStatus(UpdateOperatorStatusRequest) returns (UpdateOperatorStatusResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/status/update"
+			body: "*"
+		};
+	}
 }
 
-message ListOperatorsRequest {
+message ListAllOperatorsRequest {
 	optional bool enabled = 1;
 }
 
-message ListOperatorsResponse {
+message ListAllOperatorsResponse {
 	message Operator {
-		int64 operator_id = 1;
+		int64 real_operator_id = 1;
 		string operator_name = 2;
+		bool enabled = 3;
+		string operator_type = 4;
+		int64 parent_operator_id = 5;
+		api.common.OperatorContext operator_context = 6;
 	}
 	repeated Operator operators = 1;
 }
@@ -126,4 +163,46 @@ message ListOperatorsByParentOperatorIdResponse {
 	int32 suspended_count = 7;
 	int32 page = 8;
 	int32 page_size = 9;
+}
+
+message OperatorInfo {
+	int64 operator_id = 1;
+	string operator_name = 2;
+	string status = 3;
+}
+
+message ListRetailerOperatorsRequest {
+}
+
+message ListRetailerOperatorsResponse {
+	repeated OperatorInfo retailer_operators = 1;
+}
+
+message ListCompanyOperatorsRequest {
+	repeated int64 retailer_operator_ids = 1;
+}
+
+message ListCompanyOperatorsResponse {
+	repeated OperatorInfo company_operators = 1;
+}
+
+
+message ListBottomOperatorsRequest {
+	repeated int64 retailer_operator_ids = 1;
+	repeated int64 company_operator_ids = 2;
+}
+
+message ListBottomOperatorsResponse {
+	repeated OperatorInfo operators = 1;
+}
+
+message UpdateOperatorStatusRequest {
+	int64 target_operator_id = 1; // target operator id
+	string target_operator_type = 2; // target operator type
+	api.common.OperatorContext target_operator_context = 3; // target operator context
+	string action = 4; // action to update the status of target operator
+}
+
+message UpdateOperatorStatusResponse {
+	string status = 1; // status of target operator after update
 }

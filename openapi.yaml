@@ -693,6 +693,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.SendInvoicesResponse'
+    /v1/backoffice/finance/invoices/summary:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_GetInvoiceSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetInvoiceSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetInvoiceSummaryResponse'
     /v1/backoffice/finance/monthly-revenue-shares/list:
         post:
             tags:
@@ -1099,16 +1117,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.CheckOperatorKeyExistsResponse'
-    /v1/backoffice/operator/list:
+    /v1/backoffice/operator/list/all:
         post:
             tags:
                 - BackofficeOperator
-            operationId: BackofficeOperator_ListOperators
+            operationId: BackofficeOperator_ListAllOperators
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAllOperatorsRequest'
                 required: true
             responses:
                 "200":
@@ -1116,7 +1134,26 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListAllOperatorsResponse'
+    /v1/backoffice/operator/list/bottom:
+        post:
+            tags:
+                - BackofficeOperator
+            description: ListBottomOperators returns a list of bottom operators by operator context in the middleware
+            operationId: BackofficeOperator_ListBottomOperators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListBottomOperatorsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListBottomOperatorsResponse'
     /v1/backoffice/operator/list/by-parent:
         post:
             tags:
@@ -1136,6 +1173,63 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse'
+    /v1/backoffice/operator/list/company:
+        post:
+            tags:
+                - BackofficeOperator
+            description: ListCompanies returns a list of companies by operator context in the middleware
+            operationId: BackofficeOperator_ListCompanyOperators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCompanyOperatorsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListCompanyOperatorsResponse'
+    /v1/backoffice/operator/list/retailer:
+        post:
+            tags:
+                - BackofficeOperator
+            description: ListRetailers returns a list of retailers by operator context in the middleware
+            operationId: BackofficeOperator_ListRetailerOperators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse'
+    /v1/backoffice/operator/status/update:
+        post:
+            tags:
+                - BackofficeOperator
+            description: UpdateOperatorStatus updates the status of an operator
+            operationId: BackofficeOperator_UpdateOperatorStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorStatusResponse'
     /v1/backoffice/payment/channel/create:
         post:
             tags:
@@ -1149,7 +1243,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.CreatePaymentChannelRequest'
+                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelRequest'
                 required: true
             responses:
                 "200":
@@ -1157,7 +1251,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.CreatePaymentChannelResponse'
+                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
     /v1/backoffice/payment/channel/update:
         post:
             tags:
@@ -1171,7 +1265,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.DisablePaymentChannelRequest'
+                            $ref: '#/components/schemas/payment.service.v1.DisablePaymentChannelRequest'
                 required: true
             responses:
                 "200":
@@ -1179,25 +1273,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.DisablePaymentChannelResponse'
-    /v1/backoffice/payment/custody/address/get:
-        post:
-            tags:
-                - BackofficePayment
-            operationId: BackofficePayment_GetCustodyAddress
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetCustodyAddressRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetCustodyAddressResponse'
+                                $ref: '#/components/schemas/payment.service.v1.DisablePaymentChannelResponse'
     /v1/backoffice/payment/method/create:
         post:
             tags:
@@ -1211,7 +1287,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.CreatePaymentMethodRequest'
+                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentMethodRequest'
                 required: true
             responses:
                 "200":
@@ -1219,7 +1295,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.CreatePaymentMethodResponse'
+                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentMethodResponse'
     /v1/backoffice/payment/method/list:
         post:
             tags:
@@ -1233,7 +1309,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentMethodListRequest'
+                            $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListRequest'
                 required: true
             responses:
                 "200":
@@ -1241,7 +1317,25 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentMethodListResponse'
+                                $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /v1/backoffice/payment/operator/address/get:
+        post:
+            tags:
+                - BackofficePayment
+            operationId: BackofficePayment_GetOperatorAddress
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorAddressRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetOperatorAddressResponse'
     /v1/backoffice/payment/supportedmethod/list:
         post:
             tags:
@@ -1255,7 +1349,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSupportedPaymentMethodListRequest'
+                            $ref: '#/components/schemas/payment.service.v1.GetSupportedPaymentMethodListRequest'
                 required: true
             responses:
                 "200":
@@ -1263,7 +1357,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetSupportedPaymentMethodListResponse'
+                                $ref: '#/components/schemas/payment.service.v1.GetSupportedPaymentMethodListResponse'
     /v1/backoffice/payment/transaction/detail:
         post:
             tags:
@@ -2054,6 +2148,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletCurrencyResponse'
+    /v1/backoffice/wallet/exchange-rates/get:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_GetExchangeRates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetExchangeRatesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetExchangeRatesResponse'
     /v1/backoffice/wallet/get:
         post:
             tags:
@@ -2072,6 +2184,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse'
+    /v1/backoffice/wallet/operator/balances/list:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_ListOperatorBalances
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorBalancesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorBalancesResponse'
     /v1/backoffice/wallet/update:
         post:
             tags:
@@ -2313,12 +2443,12 @@ paths:
     /v1/payment/channel/page:
         post:
             tags:
-                - Payment
+                - BackofficePayment
             description: |-
                 Get payment channel page with pagination and filters
                  Retrieves a paginated list of payment channels with optional filtering
                  Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
-            operationId: Payment_GetPaymentChannelPage
+            operationId: BackofficePayment_GetPaymentChannelPage
             requestBody:
                 content:
                     application/json:
@@ -2354,70 +2484,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.DisablePaymentChannelResponse'
-    /v1/payment/custody/address/get:
-        post:
-            tags:
-                - Payment
-            operationId: Payment_GetCustodyAddress
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetCustodyAddressRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetCustodyAddressResponse'
-    /v1/payment/custody/deposit/callback:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Deposit callback
-                 Handles callbacks from payment gateways for deposit status updates
-                 This endpoint is called by payment providers to notify of completed or failed deposits
-                 Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
-            operationId: Payment_CustodyDepositCallback
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.DepositCallbackRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.DepositCallbackResponse'
-    /v1/payment/custody/withdraw/callback:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Withdraw callback
-                 Handles callbacks from payment gateways for withdrawal status updates
-                 This endpoint is called by payment providers to notify of completed or failed withdrawals
-                 Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
-            operationId: Payment_CustodyWithdrawCallback
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
     /v1/payment/deposit/callback:
         post:
             tags:
@@ -2507,6 +2573,52 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /v1/payment/operator/deposit/callback:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Deposit callback
+                 Handles callbacks from payment gateways for deposit status updates
+                 This endpoint is called by payment providers to notify of completed or failed deposits
+                 Error code: DEPOSIT_CALLBACK_FAILED(50006) - Failed to process deposit callback
+            operationId: Payment_OperatorDepositCallback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.DepositCallbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.DepositCallbackResponse'
+    /v1/payment/operator/withdraw/callback:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Withdraw callback
+                 Handles callbacks from payment gateways for withdrawal status updates
+                 This endpoint is called by payment providers to notify of completed or failed withdrawals
+                 Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
+            operationId: Payment_OperatorWithdrawCallback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
     /v1/payment/supportedmethod/list:
         post:
             tags:
@@ -2872,9 +2984,11 @@ components:
                     type: string
                 operatorId:
                     type: string
-                currency:
+                appliedDate:
                     type: string
                     description: Financial information
+                currency:
+                    type: string
                 amount:
                     type: string
                 description:
@@ -3162,107 +3276,6 @@ components:
                     type: string
                 password:
                     type: string
-        api.backoffice.service.v1.CreatePaymentChannelRequest:
-            type: object
-            properties:
-                merchantId:
-                    type: string
-                    description: ID of the merchant creating this channel
-                operatorId:
-                    type: string
-                    description: ID of the Operator connect with this channel
-                paymentMethodId:
-                    type: string
-                    description: ID of the payment method to be used
-                type:
-                    type: string
-                    description: Type of channel (e.g., deposit, withdrawal)
-                contact:
-                    type: string
-                    description: Contact Info email
-                pspFixedFee:
-                    type: string
-                    description: PSP Fixed Fee on the Amount
-                pspFeeRate:
-                    type: string
-                    description: PSP Rate Fee
-                userFixedFee:
-                    type: string
-                    description: User Fixed Fee on the Amount
-                userFeeRate:
-                    type: string
-                    description: User Rate Fee
-                minAmount:
-                    type: string
-                    description: Min Amount
-                maxAmount:
-                    type: string
-                    description: Max Amount
-                key:
-                    type: object
-                    description: Configuration fields for the payment channel in JSON format
-            description: |-
-                Request to create a payment channel
-                 Used to create a new payment channel with specified merchant and method
-        api.backoffice.service.v1.CreatePaymentChannelResponse:
-            type: object
-            properties:
-                channelId:
-                    type: string
-                    description: Unique identifier for the created channel
-            description: |-
-                Response for channel creation
-                 Returns the ID of the newly created payment channel
-        api.backoffice.service.v1.CreatePaymentMethodRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                    description: ID of the Operator connect with this channel
-                paymentMethodId:
-                    type: string
-                    description: ID of the payment method to be used
-                currencyType:
-                    type: string
-                    description: Currency Type
-                contact:
-                    type: string
-                    description: Contact Info email
-                fixedFee:
-                    type: string
-                    description: Fixed Fee on the Amount
-                feeRate:
-                    type: string
-                    description: Rate Fee
-                minAmount:
-                    type: string
-                    description: Min Amount
-                maxAmount:
-                    type: string
-                    description: Max Amount
-                pspFixedFee:
-                    type: string
-                    description: PSP Fixed Fee on the Amount
-                pspFeeRate:
-                    type: string
-                    description: PSP Rate Fee
-                pspMinAmount:
-                    type: string
-                    description: PSP Min Amount
-                pspMaxAmount:
-                    type: string
-                    description: PSP Max Amount
-                key:
-                    type: object
-                    description: JSON schema defining the required fields for this payment method
-            description: |-
-                Request to create a payment channel
-                 Used to create a new payment channel with specified merchant and method
-        api.backoffice.service.v1.CreatePaymentMethodResponse:
-            type: object
-            properties:
-                paymentMethod:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.PaymentMethodInfo'
         api.backoffice.service.v1.CreateRoleRequest:
             type: object
             properties:
@@ -3291,20 +3304,6 @@ components:
         api.backoffice.service.v1.DeleteRoleResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.DisablePaymentChannelRequest:
-            type: object
-            properties:
-                merchantId:
-                    type: string
-                    description: ID of the merchant creating this channel
-            description: |-
-                Request to create a payment channel
-                 Used to create a new payment channel with specified merchant and method
-        api.backoffice.service.v1.DisablePaymentChannelResponse:
-            type: object
-            properties:
-                paymentMethods:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.PaymentMethodInfo'
         api.backoffice.service.v1.GameData_Data:
             type: object
             properties:
@@ -3507,47 +3506,6 @@ components:
             properties:
                 operatorDetails:
                     $ref: '#/components/schemas/api.backoffice.service.v1.OperatorDetails'
-        api.backoffice.service.v1.GetCustodyAddressRequest:
-            type: object
-            properties:
-                channelId:
-                    type: string
-                    description: ID of the channel to use for this deposit
-                targetCurrency:
-                    type: string
-                extra:
-                    type: object
-                    description: |-
-                        Additional information needed for the deposit
-                         May include clientOrderId, productId, userInfo, etc.
-            description: |-
-                Request to get address
-                 Used to get DC address
-        api.backoffice.service.v1.GetCustodyAddressResponse:
-            type: object
-            properties:
-                data:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetCustodyAddressResponse_Data'
-            description: |-
-                Response for deposit initiation
-                 Contains details about the initiated deposit transaction
-        api.backoffice.service.v1.GetCustodyAddressResponse_Data:
-            type: object
-            properties:
-                currency:
-                    type: string
-                    description: Crypto like btc, eth...
-                targetCurrency:
-                    type: string
-                protocol:
-                    type: string
-                    description: Crypto protocol
-                network:
-                    type: string
-                    description: Crypto chain
-                address:
-                    type: string
-                    description: Digital Currency address
         api.backoffice.service.v1.GetDepositSummariesRequest:
             type: object
             properties:
@@ -3587,6 +3545,21 @@ components:
                     type: string
                 depositAmount:
                     type: string
+        api.backoffice.service.v1.GetExchangeRatesRequest:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.GetExchangeRatesResponse:
+            type: object
+            properties:
+                exchangeRates:
+                    type: object
+                    additionalProperties:
+                        type: string
+                    description: map key is source currency, value is target currency rate
         api.backoffice.service.v1.GetGameDataRequest:
             type: object
             properties:
@@ -3942,6 +3915,34 @@ components:
                     description: Operator information
                 operatorName:
                     type: string
+        api.backoffice.service.v1.GetInvoiceSummaryRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.GetInvoiceSummaryResponse:
+            type: object
+            properties:
+                totalIncome:
+                    type: string
+                totalOutcome:
+                    type: string
+                billingPeriod:
+                    type: string
+        api.backoffice.service.v1.GetOperatorAddressRequest:
+            type: object
+            properties:
+                channelId:
+                    type: string
+                    description: ID of the channel to use for this deposit
+                targetCurrency:
+                    type: string
+                extra:
+                    type: object
+                    description: |-
+                        Additional information needed for the deposit
+                         May include clientOrderId, productId, userInfo, etc.
+            description: |-
+                Request to get address
+                 Used to get DC address
         api.backoffice.service.v1.GetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -4065,29 +4066,6 @@ components:
                     type: string
                 yesterday:
                     type: string
-        api.backoffice.service.v1.GetPaymentMethodListRequest:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.GetPaymentMethodListResponse:
-            type: object
-            properties:
-                paymentMethods:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.PaymentMethodInfo'
-                    description: List of payment methods available
-                totalCount:
-                    type: integer
-                    format: int32
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-            description: |-
-                Response for payment method list
-                 Contains a list of all available payment methods
         api.backoffice.service.v1.GetPaymentTransactionByIdRequest:
             type: object
             properties:
@@ -4344,34 +4322,6 @@ components:
                     type: string
                 arppu:
                     type: string
-        api.backoffice.service.v1.GetSupportedPaymentMethodListRequest:
-            type: object
-            properties:
-                currency:
-                    type: array
-                    items:
-                        type: string
-                    description: Currency code supported by this payment method (e.g., USD, EUR, CNY)
-        api.backoffice.service.v1.GetSupportedPaymentMethodListResponse:
-            type: object
-            properties:
-                paymentMethods:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.PaymentMethodInfo'
-                    description: List of payment methods available
-                totalCount:
-                    type: integer
-                    format: int32
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-            description: |-
-                Response for payment method list
-                 Contains a list of all available payment methods
         api.backoffice.service.v1.GetTicketByIdRequest:
             type: object
             properties:
@@ -5330,6 +5280,33 @@ components:
                     description: Amount information
                 description:
                     type: string
+        api.backoffice.service.v1.ListAllOperatorsRequest:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+        api.backoffice.service.v1.ListAllOperatorsResponse:
+            type: object
+            properties:
+                operators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListAllOperatorsResponse_Operator'
+        api.backoffice.service.v1.ListAllOperatorsResponse_Operator:
+            type: object
+            properties:
+                realOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                enabled:
+                    type: boolean
+                operatorType:
+                    type: string
+                parentOperatorId:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListAuditActionsRequest:
             type: object
             properties: {}
@@ -5468,6 +5445,24 @@ components:
                 total:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListBottomOperatorsRequest:
+            type: object
+            properties:
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                companyOperatorIds:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.ListBottomOperatorsResponse:
+            type: object
+            properties:
+                operators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorInfo'
         api.backoffice.service.v1.ListCategoriesRequest:
             type: object
             properties:
@@ -5480,6 +5475,20 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListCompanyOperatorsRequest:
+            type: object
+            properties:
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.ListCompanyOperatorsResponse:
+            type: object
+            properties:
+                companyOperators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorInfo'
         api.backoffice.service.v1.ListCurrenciesRequest:
             type: object
             properties:
@@ -5983,6 +5992,49 @@ components:
                 revenueShareCollectTotal:
                     type: string
             description: Summary totals
+        api.backoffice.service.v1.ListOperatorBalancesRequest:
+            type: object
+            properties:
+                retailerOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                companyOperatorIds:
+                    type: array
+                    items:
+                        type: string
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListOperatorBalancesResponse:
+            type: object
+            properties:
+                operatorBalances:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalance'
+                totalCashUsd:
+                    type: string
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListOperatorRevenueShareRequest:
             type: object
             properties:
@@ -6107,25 +6159,6 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListOperatorsRequest:
-            type: object
-            properties:
-                enabled:
-                    type: boolean
-        api.backoffice.service.v1.ListOperatorsResponse:
-            type: object
-            properties:
-                operators:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsResponse_Operator'
-        api.backoffice.service.v1.ListOperatorsResponse_Operator:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                operatorName:
-                    type: string
         api.backoffice.service.v1.ListProviderRatesRequest:
             type: object
             properties:
@@ -6392,6 +6425,16 @@ components:
                     type: string
                 d120PaidAmt:
                     type: string
+        api.backoffice.service.v1.ListRetailerOperatorsRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.ListRetailerOperatorsResponse:
+            type: object
+            properties:
+                retailerOperators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorInfo'
         api.backoffice.service.v1.ListRolesRequest:
             type: object
             properties:
@@ -7279,6 +7322,29 @@ components:
             properties:
                 token:
                     type: string
+        api.backoffice.service.v1.OperatorBalance:
+            type: object
+            properties:
+                realOperatorId:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                retailerOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                operatorName:
+                    type: string
+                currency:
+                    type: string
+                protocol:
+                    type: string
+                cash:
+                    type: string
+                cashUsd:
+                    type: string
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.OperatorDetails:
             type: object
             properties:
@@ -7346,6 +7412,15 @@ components:
                     type: string
                 systemOperatorName:
                     type: string
+        api.backoffice.service.v1.OperatorInfo:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                status:
+                    type: string
         api.backoffice.service.v1.PaymentChannelInfo:
             type: object
             properties:
@@ -7376,6 +7451,12 @@ components:
                 currency:
                     type: string
                     description: Currency supported by this channel
+                protocol:
+                    type: string
+                    description: Crypto protocol supported by this channel
+                network:
+                    type: string
+                    description: Crypto chian supported by this channel
                 country:
                     type: string
                     description: Country where this channel is available
@@ -7401,12 +7482,21 @@ components:
                     type: integer
                     description: Estimated arrival time in minutes
                     format: int32
+                fixFee:
+                    type: string
+                    description: Fee
+                rateFee:
+                    type: string
                 depositSchema:
                     type: object
                     description: JSON schema defining deposit form fields required by this channel
                 withdrawSchema:
                     type: object
                     description: JSON schema defining withdrawal form fields required by this channel
+                sourceType:
+                    type: string
+                enable:
+                    type: boolean
             description: |-
                 Payment channel information
                  Detailed information about a specific payment channel
@@ -7417,41 +7507,6 @@ components:
                     type: string
                 withdrawal:
                     type: string
-        api.backoffice.service.v1.PaymentMethodInfo:
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: Unique identifier for the payment method
-                psp:
-                    type: string
-                    description: Currency code supported by this payment method (e.g., USD, EUR, CNY)
-                currency:
-                    type: string
-                country:
-                    type: string
-                    description: Country code where this payment method is available
-                paymentMethod:
-                    type: string
-                    description: Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
-                fixedFee:
-                    type: string
-                    description: Fixed Fee on the Amount
-                feeRate:
-                    type: string
-                    description: Rate Fee
-                minAmount:
-                    type: string
-                    description: Min Amount
-                maxAmount:
-                    type: string
-                    description: Max Amount
-                keySchema:
-                    type: object
-                    description: JSON schema defining the required fields for this payment method
-            description: |-
-                Details of a single payment method
-                 Contains information about a specific payment method including its ID, currency, and required fields schema
         api.backoffice.service.v1.Permission:
             type: object
             properties:
@@ -7741,6 +7796,22 @@ components:
         api.backoffice.service.v1.UpdateGameResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateOperatorStatusRequest:
+            type: object
+            properties:
+                targetOperatorId:
+                    type: string
+                targetOperatorType:
+                    type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                action:
+                    type: string
+        api.backoffice.service.v1.UpdateOperatorStatusResponse:
+            type: object
+            properties:
+                status:
+                    type: string
         api.backoffice.service.v1.UpdateProviderRequest:
             type: object
             properties:
@@ -8834,8 +8905,6 @@ components:
             properties:
                 userId:
                     type: string
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.wallet.service.v1.GetUserBalancesResponse:
             type: object
             properties:
@@ -8908,8 +8977,9 @@ components:
         payment.service.v1.CreatePaymentMethodRequest:
             type: object
             properties:
-                operatorId:
-                    type: string
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
                     description: ID of the Operator connect with this channel
                 paymentMethodId:
                     type: string
@@ -9060,31 +9130,15 @@ components:
                 address:
                     type: string
                     description: Digital Currency address
-        payment.service.v1.GetCustodyAddressRequest:
-            type: object
-            properties:
-                channelId:
-                    type: string
-                    description: ID of the channel to use for this deposit
-                targetCurrency:
-                    type: string
-                extra:
-                    type: object
-                    description: |-
-                        Additional information needed for the deposit
-                         May include clientOrderId, productId, userInfo, etc.
-            description: |-
-                Request to get address
-                 Used to get DC address
-        payment.service.v1.GetCustodyAddressResponse:
+        payment.service.v1.GetOperatorAddressResponse:
             type: object
             properties:
                 data:
-                    $ref: '#/components/schemas/payment.service.v1.GetCustodyAddressResponse_Data'
+                    $ref: '#/components/schemas/payment.service.v1.GetOperatorAddressResponse_Data'
             description: |-
                 Response for deposit initiation
                  Contains details about the initiated deposit transaction
-        payment.service.v1.GetCustodyAddressResponse_Data:
+        payment.service.v1.GetOperatorAddressResponse_Data:
             type: object
             properties:
                 currency:
@@ -9092,6 +9146,7 @@ components:
                     description: Crypto like btc, eth...
                 targetCurrency:
                     type: string
+                    description: Target Currency
                 protocol:
                     type: string
                     description: Crypto protocol
@@ -9463,6 +9518,10 @@ components:
                 withdrawSchema:
                     type: object
                     description: JSON schema defining withdrawal form fields required by this channel
+                sourceType:
+                    type: string
+                enable:
+                    type: boolean
             description: |-
                 Payment channel information
                  Detailed information about a specific payment channel
@@ -9475,6 +9534,8 @@ components:
                 psp:
                     type: string
                     description: Currency code supported by this payment method (e.g., USD, EUR, CNY)
+                type:
+                    type: string
                 currency:
                     type: string
                 country:

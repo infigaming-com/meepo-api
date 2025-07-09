@@ -4054,6 +4054,8 @@ func (m *AddAdjustmentRequest) validate(all bool) error {
 
 	// no validation rules for OperatorId
 
+	// no validation rules for AppliedDate
+
 	// no validation rules for Currency
 
 	// no validation rules for Amount
@@ -5603,6 +5605,216 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SendInvoicesResponseValidationError{}
+
+// Validate checks the field values on GetInvoiceSummaryRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetInvoiceSummaryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetInvoiceSummaryRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetInvoiceSummaryRequestMultiError, or nil if none found.
+func (m *GetInvoiceSummaryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetInvoiceSummaryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetInvoiceSummaryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetInvoiceSummaryRequestMultiError is an error wrapping multiple validation
+// errors returned by GetInvoiceSummaryRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetInvoiceSummaryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetInvoiceSummaryRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetInvoiceSummaryRequestMultiError) AllErrors() []error { return m }
+
+// GetInvoiceSummaryRequestValidationError is the validation error returned by
+// GetInvoiceSummaryRequest.Validate if the designated constraints aren't met.
+type GetInvoiceSummaryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetInvoiceSummaryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetInvoiceSummaryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetInvoiceSummaryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetInvoiceSummaryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetInvoiceSummaryRequestValidationError) ErrorName() string {
+	return "GetInvoiceSummaryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetInvoiceSummaryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetInvoiceSummaryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetInvoiceSummaryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetInvoiceSummaryRequestValidationError{}
+
+// Validate checks the field values on GetInvoiceSummaryResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetInvoiceSummaryResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetInvoiceSummaryResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetInvoiceSummaryResponseMultiError, or nil if none found.
+func (m *GetInvoiceSummaryResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetInvoiceSummaryResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalIncome
+
+	// no validation rules for TotalOutcome
+
+	// no validation rules for BillingPeriod
+
+	if len(errors) > 0 {
+		return GetInvoiceSummaryResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetInvoiceSummaryResponseMultiError is an error wrapping multiple validation
+// errors returned by GetInvoiceSummaryResponse.ValidateAll() if the
+// designated constraints aren't met.
+type GetInvoiceSummaryResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetInvoiceSummaryResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetInvoiceSummaryResponseMultiError) AllErrors() []error { return m }
+
+// GetInvoiceSummaryResponseValidationError is the validation error returned by
+// GetInvoiceSummaryResponse.Validate if the designated constraints aren't met.
+type GetInvoiceSummaryResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetInvoiceSummaryResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetInvoiceSummaryResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetInvoiceSummaryResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetInvoiceSummaryResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetInvoiceSummaryResponseValidationError) ErrorName() string {
+	return "GetInvoiceSummaryResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetInvoiceSummaryResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetInvoiceSummaryResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetInvoiceSummaryResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetInvoiceSummaryResponseValidationError{}
 
 // Validate checks the field values on GetOperatorResponse_Operator with the
 // rules defined in the proto definition for this message. If any rules are

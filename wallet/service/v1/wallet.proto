@@ -77,11 +77,16 @@ service Wallet {
 	rpc UpdateOperatorCurrency (UpdateOperatorCurrencyRequest) returns (UpdateOperatorCurrencyResponse) {}
 
 	rpc UpdateUserCurrency (UpdateUserCurrencyRequest) returns (UpdateUserCurrencyResponse) {}
+
+	// Transfer cash from operator to company operator
+	rpc OperatorTransfer (OperatorTransferRequest) returns (OperatorTransferResponse) {}
+
+	// List Operator Balances based on filter
+	rpc ListOperatorBalances (ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {}
 }
 
 message GetUserBalancesRequest {
 	int64 user_id = 1;
-	api.common.OperatorContext operator_context = 2;
 }
 
 message GetUserBalancesResponse {
@@ -99,7 +104,6 @@ message GetUserBalanceRequest {
 	string currency = 2;
 	// optional target currency
 	string settlement_currency = 3;
-	api.common.OperatorContext operator_context = 4;
 }
 
 message GetUserBalanceResponse {
@@ -239,7 +243,6 @@ message SettleRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
-	api.common.OperatorContext operator_context = 4;
 }
 
 message SettleResponse {
@@ -254,7 +257,6 @@ message RollbackRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
-	api.common.OperatorContext operator_context = 4;
 }
 
 message RollbackResponse {
@@ -381,6 +383,7 @@ message ListWalletBalanceTransactionsResponse {
 
 message GetWalletBalanceTransactionsByIdsRequest {
 	repeated int64 transaction_ids = 1;
+	api.common.OperatorContext operator_context = 2;
 }
 
 message GetWalletBalanceTransactionsByIdsResponse {
@@ -421,6 +424,7 @@ message GetWalletCreditTransactionsRequest {
 	int64 credit_id = 1;
 	optional int64 page = 2;
 	optional int64 page_size = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message GetWalletCreditTransactionsResponse {
@@ -450,6 +454,7 @@ message GetUserTransactionSummaryRequest {
 	optional string currency = 2;
 	optional google.protobuf.Timestamp start_time = 3;
 	optional google.protobuf.Timestamp end_time = 4;
+	api.common.OperatorContext operator_context = 5;
 }
 
 message GetUserTransactionSummaryResponse {
@@ -599,3 +604,59 @@ message UpdateUserCurrencyRequest {
 }
 
 message UpdateUserCurrencyResponse {}
+
+message OperatorTransferRequest {
+	int64 real_operator_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	int64 target_real_operator_id = 3;
+	api.common.OperatorContext target_operator_context = 4;
+	string operator_type = 5;
+	string target_operator_type = 6;
+	string currency = 7;
+	string reporting_currency = 8;
+	string target_currency = 9;
+	string target_reporting_currency = 10;
+	string exchange_rate = 11; // exchange rate of the currency to the reporting currency
+	string transaction_type = 12;
+	string cash_amount = 13;
+}
+
+message OperatorTransferResponse {
+	string operator_cash = 1;
+	string operator_balance_currency = 2;
+	string target_operator_cash = 3;
+	string target_operator_balance_currency = 4;
+}
+
+message ListOperatorBalancesRequest {
+	repeated int64 retailer_operator_ids = 1;
+	repeated int64 company_operator_ids = 2;
+	repeated int64 operator_ids = 3;
+	repeated string currencies = 4;
+	int64 real_operator_id = 5;
+	string operator_type = 6;
+	api.common.OperatorContext operator_context = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9; // default 20
+}
+
+message OperatorBalance {
+	int64 real_operator_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string retailer_operator_name = 3;
+	string company_operator_name = 4;
+	string operator_name = 5;
+	string currency = 6;
+	string protocol = 7; // placeholder for future use
+	string cash = 8;
+	string cash_usd = 9;
+	bool enabled = 10;
+}
+
+message ListOperatorBalancesResponse {
+	repeated OperatorBalance operator_balances = 1;
+	string total_cash_usd = 2;
+	int32 total = 3;
+	int32 page = 4;
+	int32 page_size = 5;
+}
