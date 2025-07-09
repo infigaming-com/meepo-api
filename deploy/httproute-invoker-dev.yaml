@@ -26,6 +26,3 @@ spec:
     - name: invoker-server-svc
       port: 8000
       weight: 1
-    - name: invoker-server-svc
-      port: 8002
-      weight: 1
