@@ -7974,6 +7974,10 @@ components:
                     type: string
                 systemOperatorId:
                     type: string
+                realOperatorId:
+                    type: string
+                operatorType:
+                    type: string
         api.game.service.v1.Action:
             type: object
             properties:
