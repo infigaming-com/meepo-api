@@ -96,7 +96,7 @@ service BackofficePayment {
   // Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
   rpc GetPaymentChannelPage(payment.service.v1.GetPaymentChannelPageRequest) returns (payment.service.v1.GetPaymentChannelPageResponse) {
     option (google.api.http) = {
-      post: "/v1/payment/channel/page"
+      post: "/v1/backoffice/payment/channel/page"
       body: "*"
     };
   }

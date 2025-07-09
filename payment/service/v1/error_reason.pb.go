@@ -25,18 +25,19 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED                     ErrorReason = 0
-	ErrorReason_GET_PAYMENT_METHOD_LIST_FAILED  ErrorReason = 50001
-	ErrorReason_CREATE_PAYMENT_CHANNEL_FAILED   ErrorReason = 50002
-	ErrorReason_GET_PAYMENT_CHANNEL_PAGE_FAILED ErrorReason = 50003
-	ErrorReason_INITIATE_DEPOSIT_FAILED         ErrorReason = 50004
-	ErrorReason_INITIATE_WITHDRAW_FAILED        ErrorReason = 50005
-	ErrorReason_DEPOSIT_CALLBACK_FAILED         ErrorReason = 50006
-	ErrorReason_WITHDRAW_CALLBACK_FAILED        ErrorReason = 50007
-	ErrorReason_GET_TRANSACTION_PAGE_FAILED     ErrorReason = 50008
-	ErrorReason_GET_TRANSACTION_DETAIL_FAILED   ErrorReason = 50009
-	ErrorReason_GET_CHANNEL_LIST_FAILED         ErrorReason = 50010
-	ErrorReason_GET_ADDRESS_FAILED              ErrorReason = 50011
+	ErrorReason_UNSPECIFIED                      ErrorReason = 0
+	ErrorReason_GET_PAYMENT_METHOD_LIST_FAILED   ErrorReason = 50001
+	ErrorReason_CREATE_PAYMENT_CHANNEL_FAILED    ErrorReason = 50002
+	ErrorReason_GET_PAYMENT_CHANNEL_PAGE_FAILED  ErrorReason = 50003
+	ErrorReason_INITIATE_DEPOSIT_FAILED          ErrorReason = 50004
+	ErrorReason_INITIATE_WITHDRAW_FAILED         ErrorReason = 50005
+	ErrorReason_DEPOSIT_CALLBACK_FAILED          ErrorReason = 50006
+	ErrorReason_WITHDRAW_CALLBACK_FAILED         ErrorReason = 50007
+	ErrorReason_GET_TRANSACTION_PAGE_FAILED      ErrorReason = 50008
+	ErrorReason_GET_TRANSACTION_DETAIL_FAILED    ErrorReason = 50009
+	ErrorReason_GET_CHANNEL_LIST_FAILED          ErrorReason = 50010
+	ErrorReason_GET_ADDRESS_FAILED               ErrorReason = 50011
+	ErrorReason_OPERATOR_ID_NOT_FOUND_IN_CONTEXT ErrorReason = 50012
 )
 
 // Enum value maps for ErrorReason.
@@ -54,20 +55,22 @@ var (
 		50009: "GET_TRANSACTION_DETAIL_FAILED",
 		50010: "GET_CHANNEL_LIST_FAILED",
 		50011: "GET_ADDRESS_FAILED",
+		50012: "OPERATOR_ID_NOT_FOUND_IN_CONTEXT",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED":                     0,
-		"GET_PAYMENT_METHOD_LIST_FAILED":  50001,
-		"CREATE_PAYMENT_CHANNEL_FAILED":   50002,
-		"GET_PAYMENT_CHANNEL_PAGE_FAILED": 50003,
-		"INITIATE_DEPOSIT_FAILED":         50004,
-		"INITIATE_WITHDRAW_FAILED":        50005,
-		"DEPOSIT_CALLBACK_FAILED":         50006,
-		"WITHDRAW_CALLBACK_FAILED":        50007,
-		"GET_TRANSACTION_PAGE_FAILED":     50008,
-		"GET_TRANSACTION_DETAIL_FAILED":   50009,
-		"GET_CHANNEL_LIST_FAILED":         50010,
-		"GET_ADDRESS_FAILED":              50011,
+		"UNSPECIFIED":                      0,
+		"GET_PAYMENT_METHOD_LIST_FAILED":   50001,
+		"CREATE_PAYMENT_CHANNEL_FAILED":    50002,
+		"GET_PAYMENT_CHANNEL_PAGE_FAILED":  50003,
+		"INITIATE_DEPOSIT_FAILED":          50004,
+		"INITIATE_WITHDRAW_FAILED":         50005,
+		"DEPOSIT_CALLBACK_FAILED":          50006,
+		"WITHDRAW_CALLBACK_FAILED":         50007,
+		"GET_TRANSACTION_PAGE_FAILED":      50008,
+		"GET_TRANSACTION_DETAIL_FAILED":    50009,
+		"GET_CHANNEL_LIST_FAILED":          50010,
+		"GET_ADDRESS_FAILED":               50011,
+		"OPERATOR_ID_NOT_FOUND_IN_CONTEXT": 50012,
 	}
 )
 
@@ -102,7 +105,7 @@ var File_payment_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_payment_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"%payment/service/v1/error_reason.proto\x12\x16api.payment.service.v1\x1a\x13errors/errors.proto*\x95\x03\n" +
+	"%payment/service/v1/error_reason.proto\x12\x16api.payment.service.v1\x1a\x13errors/errors.proto*\xbd\x03\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12$\n" +
 	"\x1eGET_PAYMENT_METHOD_LIST_FAILED\x10ц\x03\x12#\n" +
@@ -115,7 +118,8 @@ const file_payment_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1bGET_TRANSACTION_PAGE_FAILED\x10؆\x03\x12#\n" +
 	"\x1dGET_TRANSACTION_DETAIL_FAILED\x10ن\x03\x12\x1d\n" +
 	"\x17GET_CHANNEL_LIST_FAILED\x10چ\x03\x12\x18\n" +
-	"\x12GET_ADDRESS_FAILED\x10ۆ\x03\x1a\x04\xa0E\xf4\x03BU\n" +
+	"\x12GET_ADDRESS_FAILED\x10ۆ\x03\x12&\n" +
+	" OPERATOR_ID_NOT_FOUND_IN_CONTEXT\x10܆\x03\x1a\x04\xa0E\xf4\x03BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
 
 var (

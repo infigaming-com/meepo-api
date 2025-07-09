@@ -1188,7 +1188,7 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\x15CHANNEL_TYPE_WITHDRAW\x10\x01*\x19\n" +
 	"\x04Sort\x12\b\n" +
 	"\x04DESC\x10\x00\x12\a\n" +
-	"\x03ASC\x10\x012\xef\f\n" +
+	"\x03ASC\x10\x012\xfa\f\n" +
 	"\x11BackofficePayment\x12\xae\x01\n" +
 	"\x19GetPaymentTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/payment/transaction/page\x12\xcc\x01\n" +
 	"\x19GetPaymentTransactionById\x12;.api.backoffice.service.v1.GetPaymentTransactionByIdRequest\x1a<.api.backoffice.service.v1.GetPaymentTransactionByIdResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/payment/transaction/detail\x12\xcc\x01\n" +
@@ -1197,8 +1197,8 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\x13CreatePaymentMethod\x12..payment.service.v1.CreatePaymentMethodRequest\x1a/.payment.service.v1.CreatePaymentMethodResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/payment/method/create\x12\xae\x01\n" +
 	"\x15DisablePaymentChannel\x120.payment.service.v1.DisablePaymentChannelRequest\x1a1.payment.service.v1.DisablePaymentChannelResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/payment/channel/update\x12\xab\x01\n" +
 	"\x14CreatePaymentChannel\x12/.payment.service.v1.CreatePaymentChannelRequest\x1a0.payment.service.v1.CreatePaymentChannelResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/payment/channel/create\x12\xb2\x01\n" +
-	"\x12GetOperatorAddress\x124.api.backoffice.service.v1.GetOperatorAddressRequest\x1a..payment.service.v1.GetOperatorAddressResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/payment/operator/address/get\x12\xa1\x01\n" +
-	"\x15GetPaymentChannelPage\x120.payment.service.v1.GetPaymentChannelPageRequest\x1a1.payment.service.v1.GetPaymentChannelPageResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/payment/channel/pageB[\n" +
+	"\x12GetOperatorAddress\x124.api.backoffice.service.v1.GetOperatorAddressRequest\x1a..payment.service.v1.GetOperatorAddressResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/payment/operator/address/get\x12\xac\x01\n" +
+	"\x15GetPaymentChannelPage\x120.payment.service.v1.GetPaymentChannelPageRequest\x1a1.payment.service.v1.GetPaymentChannelPageResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/payment/channel/pageB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

@@ -1252,6 +1252,28 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
+    /v1/backoffice/payment/channel/page:
+        post:
+            tags:
+                - BackofficePayment
+            description: |-
+                Get payment channel page with pagination and filters
+                 Retrieves a paginated list of payment channels with optional filtering
+                 Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
+            operationId: BackofficePayment_GetPaymentChannelPage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageResponse'
     /v1/backoffice/payment/channel/update:
         post:
             tags:
@@ -2443,12 +2465,12 @@ paths:
     /v1/payment/channel/page:
         post:
             tags:
-                - BackofficePayment
+                - Payment
             description: |-
                 Get payment channel page with pagination and filters
                  Retrieves a paginated list of payment channels with optional filtering
                  Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
-            operationId: BackofficePayment_GetPaymentChannelPage
+            operationId: Payment_GetPaymentChannelPage
             requestBody:
                 content:
                     application/json:

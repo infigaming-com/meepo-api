@@ -154,3 +154,15 @@ func IsGetAddressFailed(err error) bool {
 func ErrorGetAddressFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_ADDRESS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorIdNotFoundInContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_ID_NOT_FOUND_IN_CONTEXT.String() && e.Code == 500
+}
+
+func ErrorOperatorIdNotFoundInContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_ID_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+}
