@@ -3,6 +3,7 @@ package context
 import (
 	"context"
 
+	"github.com/infigaming-com/meepo-api/common"
 	"github.com/infigaming-com/meepo-api/pkg/jwt"
 	"github.com/infigaming-com/meepo-api/pkg/util"
 )
@@ -26,6 +27,8 @@ type OperatorIds struct {
 	CompanyOperatorId  int64
 	RetailerOperatorId int64
 	SystemOperatorId   int64
+	RealOperatorId     int64
+	OperatorType       string
 }
 
 func WithValue[T any](ctx context.Context, key string, value T) context.Context {
@@ -76,15 +79,7 @@ func GetRequestInfo(ctx context.Context) (RequestInfo, bool) {
 	return Value[RequestInfo](ctx, "requestInfo")
 }
 
-func GetActualOperatorIdAndType(ctx context.Context) (int64, string, bool) {
-	if operatorIds, ok := GetOperatorIds(ctx); ok {
-		actualOperatorId, actualOperatorType := operatorIds.GetActualOperatorIdAndType()
-		return actualOperatorId, actualOperatorType, true
-	}
-	return 0, "", false
-}
-
-func (o *OperatorIds) GetActualOperatorIdAndType() (int64, string) {
+func (o *OperatorIds) GetRealOperatorIdAndType() (int64, string) {
 	if o.OperatorId != 0 {
 		// Operator level
 		return o.OperatorId, util.OperatorTypeOperator
@@ -97,5 +92,27 @@ func (o *OperatorIds) GetActualOperatorIdAndType() (int64, string) {
 	} else {
 		// System level
 		return o.SystemOperatorId, util.OperatorTypeSystem
+	}
+}
+
+func (o *OperatorIds) GetOperatorContext() common.OperatorContext {
+	return common.OperatorContext{
+		OperatorId:         o.OperatorId,
+		CompanyOperatorId:  o.CompanyOperatorId,
+		RetailerOperatorId: o.RetailerOperatorId,
+		SystemOperatorId:   o.SystemOperatorId,
+		RealOperatorId:     o.RealOperatorId,
+		OperatorType:       o.OperatorType,
+	}
+}
+
+func OperatorIdsFromOperatorContext(oc *common.OperatorContext) OperatorIds {
+	return OperatorIds{
+		OperatorId:         oc.OperatorId,
+		CompanyOperatorId:  oc.CompanyOperatorId,
+		RetailerOperatorId: oc.RetailerOperatorId,
+		SystemOperatorId:   oc.SystemOperatorId,
+		RealOperatorId:     oc.RealOperatorId,
+		OperatorType:       oc.OperatorType,
 	}
 }

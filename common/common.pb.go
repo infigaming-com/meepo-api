@@ -27,6 +27,8 @@ type OperatorContext struct {
 	CompanyOperatorId  int64                  `protobuf:"varint,2,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
 	RetailerOperatorId int64                  `protobuf:"varint,3,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
 	SystemOperatorId   int64                  `protobuf:"varint,4,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	RealOperatorId     int64                  `protobuf:"varint,5,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
+	OperatorType       string                 `protobuf:"bytes,6,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -89,18 +91,34 @@ func (x *OperatorContext) GetSystemOperatorId() int64 {
 	return 0
 }
 
+func (x *OperatorContext) GetRealOperatorId() int64 {
+	if x != nil {
+		return x.RealOperatorId
+	}
+	return 0
+}
+
+func (x *OperatorContext) GetOperatorType() string {
+	if x != nil {
+		return x.OperatorType
+	}
+	return ""
+}
+
 var File_common_common_proto protoreflect.FileDescriptor
 
 const file_common_common_proto_rawDesc = "" +
 	"\n" +
 	"\x13common/common.proto\x12\n" +
-	"api.common\"\xc2\x01\n" +
+	"api.common\"\x91\x02\n" +
 	"\x0fOperatorContext\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12.\n" +
 	"\x13company_operator_id\x18\x02 \x01(\x03R\x11companyOperatorId\x120\n" +
 	"\x14retailer_operator_id\x18\x03 \x01(\x03R\x12retailerOperatorId\x12,\n" +
-	"\x12system_operator_id\x18\x04 \x01(\x03R\x10systemOperatorIdBA\n" +
+	"\x12system_operator_id\x18\x04 \x01(\x03R\x10systemOperatorId\x12(\n" +
+	"\x10real_operator_id\x18\x05 \x01(\x03R\x0erealOperatorId\x12#\n" +
+	"\roperator_type\x18\x06 \x01(\tR\foperatorTypeBA\n" +
 	"\n" +
 	"api.commonP\x01Z1github.com/infigaming-com/meepo-api/common;commonb\x06proto3"
 

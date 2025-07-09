@@ -1211,6 +1211,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse'
+    /v1/backoffice/operator/status/update:
+        post:
+            tags:
+                - BackofficeOperator
+            description: UpdateOperatorStatus updates the status of an operator
+            operationId: BackofficeOperator_UpdateOperatorStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorStatusResponse'
     /v1/backoffice/payment/channel/create:
         post:
             tags:
@@ -2151,6 +2170,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletCurrencyResponse'
+    /v1/backoffice/wallet/exchange-rates/get:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_GetExchangeRates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetExchangeRatesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetExchangeRatesResponse'
     /v1/backoffice/wallet/get:
         post:
             tags:
@@ -2969,9 +3006,11 @@ components:
                     type: string
                 operatorId:
                     type: string
-                currency:
+                appliedDate:
                     type: string
                     description: Financial information
+                currency:
+                    type: string
                 amount:
                     type: string
                 description:
@@ -3528,6 +3567,21 @@ components:
                     type: string
                 depositAmount:
                     type: string
+        api.backoffice.service.v1.GetExchangeRatesRequest:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.GetExchangeRatesResponse:
+            type: object
+            properties:
+                exchangeRates:
+                    type: object
+                    additionalProperties:
+                        type: string
+                    description: map key is source currency, value is target currency rate
         api.backoffice.service.v1.GetGameDataRequest:
             type: object
             properties:
@@ -7764,6 +7818,22 @@ components:
         api.backoffice.service.v1.UpdateGameResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateOperatorStatusRequest:
+            type: object
+            properties:
+                targetOperatorId:
+                    type: string
+                targetOperatorType:
+                    type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                action:
+                    type: string
+        api.backoffice.service.v1.UpdateOperatorStatusResponse:
+            type: object
+            properties:
+                status:
+                    type: string
         api.backoffice.service.v1.UpdateProviderRequest:
             type: object
             properties:
@@ -7925,6 +7995,10 @@ components:
                 retailerOperatorId:
                     type: string
                 systemOperatorId:
+                    type: string
+                realOperatorId:
+                    type: string
+                operatorType:
                     type: string
         api.game.service.v1.Action:
             type: object

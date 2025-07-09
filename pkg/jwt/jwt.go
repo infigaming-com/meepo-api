@@ -19,12 +19,14 @@ var (
 )
 
 type UserInfo struct {
-	UserId             int64 `json:"userId"`
-	OperatorId         int64 `json:"operatorId"`
-	CompanyOperatorId  int64 `json:"companyOperatorId"`
-	RetailerOperatorId int64 `json:"retailerOperatorId"`
-	SystemOperatorId   int64 `json:"systemOperatorId"`
-	RoleId             int64 `json:"roleId"`
+	UserId             int64  `json:"userId"`
+	OperatorId         int64  `json:"operatorId"`
+	CompanyOperatorId  int64  `json:"companyOperatorId"`
+	RetailerOperatorId int64  `json:"retailerOperatorId"`
+	SystemOperatorId   int64  `json:"systemOperatorId"`
+	RealOperatorId     int64  `json:"realOperatorId,omitempty"`
+	OperatorType       string `json:"operatorType,omitempty"`
+	RoleId             int64  `json:"roleId"`
 }
 
 type Claims struct {

@@ -65,6 +65,10 @@ func (m *OperatorContext) validate(all bool) error {
 
 	// no validation rules for SystemOperatorId
 
+	// no validation rules for RealOperatorId
+
+	// no validation rules for OperatorType
+
 	if len(errors) > 0 {
 		return OperatorContextMultiError(errors)
 	}

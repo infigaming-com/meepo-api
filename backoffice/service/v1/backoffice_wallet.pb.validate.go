@@ -2686,6 +2686,212 @@ var _ interface {
 	ErrorName() string
 } = ListOperatorBalancesResponseValidationError{}
 
+// Validate checks the field values on GetExchangeRatesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetExchangeRatesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetExchangeRatesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetExchangeRatesRequestMultiError, or nil if none found.
+func (m *GetExchangeRatesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetExchangeRatesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetExchangeRatesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetExchangeRatesRequestMultiError is an error wrapping multiple validation
+// errors returned by GetExchangeRatesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetExchangeRatesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetExchangeRatesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetExchangeRatesRequestMultiError) AllErrors() []error { return m }
+
+// GetExchangeRatesRequestValidationError is the validation error returned by
+// GetExchangeRatesRequest.Validate if the designated constraints aren't met.
+type GetExchangeRatesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetExchangeRatesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetExchangeRatesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetExchangeRatesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetExchangeRatesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetExchangeRatesRequestValidationError) ErrorName() string {
+	return "GetExchangeRatesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetExchangeRatesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetExchangeRatesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetExchangeRatesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetExchangeRatesRequestValidationError{}
+
+// Validate checks the field values on GetExchangeRatesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetExchangeRatesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetExchangeRatesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetExchangeRatesResponseMultiError, or nil if none found.
+func (m *GetExchangeRatesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetExchangeRatesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ExchangeRates
+
+	if len(errors) > 0 {
+		return GetExchangeRatesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetExchangeRatesResponseMultiError is an error wrapping multiple validation
+// errors returned by GetExchangeRatesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetExchangeRatesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetExchangeRatesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetExchangeRatesResponseMultiError) AllErrors() []error { return m }
+
+// GetExchangeRatesResponseValidationError is the validation error returned by
+// GetExchangeRatesResponse.Validate if the designated constraints aren't met.
+type GetExchangeRatesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetExchangeRatesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetExchangeRatesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetExchangeRatesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetExchangeRatesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetExchangeRatesResponseValidationError) ErrorName() string {
+	return "GetExchangeRatesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetExchangeRatesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetExchangeRatesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetExchangeRatesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetExchangeRatesResponseValidationError{}
+
 // Validate checks the field values on GetWalletsResponse_TotalAssets with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

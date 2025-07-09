@@ -68,6 +68,13 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+
+	rpc GetExchangeRates(GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/exchange-rates/get"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -305,4 +312,13 @@ message ListOperatorBalancesResponse {
 	int32 total = 4;
 	int32 page = 5;
 	int32 page_size = 6;
+}
+
+message GetExchangeRatesRequest {
+	repeated string currencies = 1;
+}
+
+message GetExchangeRatesResponse {
+	// map key is source currency, value is target currency rate
+	map<string, string> exchange_rates = 1;
 }
