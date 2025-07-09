@@ -62,6 +62,7 @@ service BackofficeWallet {
             body: "*"
         };
     }
+	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	rpc ListOperatorBalances(ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/balances/list"
@@ -72,6 +73,41 @@ service BackofficeWallet {
 	rpc GetExchangeRates(GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/exchange-rates/get"
+			body: "*"
+		};
+	}
+	// OperatorTransfer transfers cash from one operator to its company operator
+	rpc OperatorTransfer(OperatorTransferRequest) returns (OperatorTransferResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/transfer"
+			body: "*"
+		};
+	}
+	// OperatorSwap swaps cash between two balances of the same operator
+	rpc OperatorSwap(OperatorSwapRequest) returns (OperatorSwapResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/swap"
+			body: "*"
+		};
+	}
+	// OperatorBalanceFreeze freezes cash of an operator
+	rpc OperatorBalanceFreeze(OperatorBalanceFreezeRequest) returns (OperatorBalanceFreezeResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/freeze"
+			body: "*"
+		};
+	}
+	// OperatorRollback rolls back frozen cash of an operator
+	rpc OperatorBalanceRollback(OperatorBalanceRollbackRequest) returns (OperatorBalanceRollbackResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/rollback"
+			body: "*"
+		};
+	}
+	// OperatorSettle settles frozen cash of an operator
+	rpc OperatorBalanceSettle(OperatorBalanceSettleRequest) returns (OperatorBalanceSettleResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/settle"
 			body: "*"
 		};
 	}
@@ -294,16 +330,15 @@ message ListOperatorBalancesRequest {
 }
 
 message OperatorBalance {
-	int64 real_operator_id = 1;
-	api.common.OperatorContext operator_context = 2;
-	string retailer_operator_name = 3;
-	string company_operator_name = 4;
-	string operator_name = 5;
-	string currency = 6;
-	string protocol = 7; // placeholder for future use
-	string cash = 8;
-	string cash_usd = 9;
-	bool enabled = 10;
+	api.common.OperatorContext operator_context = 1;
+	string retailer_operator_name = 2;
+	string company_operator_name = 3;
+	string operator_name = 4;
+	string currency = 5;
+	string protocol = 6; // placeholder for future use
+	string cash = 7;
+	string cash_usd = 8;
+	bool enabled = 9;
 }
 
 message ListOperatorBalancesResponse {
@@ -321,4 +356,77 @@ message GetExchangeRatesRequest {
 message GetExchangeRatesResponse {
 	// map key is source currency, value is target currency rate
 	map<string, string> exchange_rates = 1;
+}
+
+message OperatorTransferRequest {
+	api.common.OperatorContext operator_context = 1;
+	string currency = 2;
+	string target_currency = 3;
+	string exchange_rate = 4; // exchange rate of the currency to the target currency
+	string cash_amount = 5;
+}
+
+message OperatorTransferResponse {
+	string operator_cash = 1;
+	string operator_balance_currency = 2;
+	string target_operator_cash = 3;
+	string target_operator_balance_currency = 4;
+}
+
+message OperatorSwapRequest {
+	api.common.OperatorContext operator_context = 1;
+	string currency = 2;
+	string target_currency = 3;
+	string exchange_rate = 4;
+	string cash_amount = 5;
+}
+
+message OperatorSwapResponse {
+	string currency_balance_cash = 1;
+	string currency_balance_cash_usd = 2;
+	string currency_balance_cash_reporting_currency = 3;
+	string target_currency_balance_cash = 4;
+	string target_currency_balance_cash_usd = 5;
+	string target_currency_balance_cash_reporting_currency = 6;
+}
+
+message OperatorBalanceFreezeRequest {
+	api.common.OperatorContext operator_context = 1;
+	string currency = 2;
+	string cash_amount = 3;
+	string memo = 4;
+}
+
+message OperatorBalanceFreezeResponse {
+	int64 transaction_id = 1;
+	string cash = 2;
+}
+
+message OperatorBalanceRollbackRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 original_transaction_id = 2;
+	string memo = 3;
+}
+
+message OperatorBalanceRollbackResponse {
+	int64 transaction_id = 1;
+	string cash = 2;
+	string cash_amount = 3;
+	string cash_amount_usd = 4;
+	string cash_amount_reporting_currency = 5;
+}
+
+message OperatorBalanceSettleRequest {
+	api.common.OperatorContext operator_context = 1;
+	string currency = 2;
+	int64 original_transaction_id = 3;
+	string memo = 5;
+}
+
+message OperatorBalanceSettleResponse {
+	int64 transaction_id = 1;
+	string cash = 2;
+	string cash_amount = 3;
+	string cash_amount_usd = 4;
+	string cash_amount_reporting_currency = 5;
 }

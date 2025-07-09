@@ -948,3 +948,15 @@ func IsInvalidOperatorContext(err error) bool {
 func ErrorInvalidOperatorContext(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_OPERATOR_CONTEXT.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidOperatorId(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_ID.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorId(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_ID.String(), fmt.Sprintf(format, args...))
+}
