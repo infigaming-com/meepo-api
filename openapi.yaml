@@ -9465,6 +9465,12 @@ components:
                     type: integer
                     description: Total number of pages available
                     format: int32
+                totalEnableColnt:
+                    type: integer
+                    format: int32
+                totalDisableCount:
+                    type: integer
+                    format: int32
             description: |-
                 Response for payment channel page
                  Contains paginated list of payment channels and pagination metadata
@@ -9691,6 +9697,12 @@ components:
                 type:
                     type: string
                     description: Type of the channel (e.g., online, offline)
+                currencyType:
+                    type: string
+                    description: Currency type (e.g., Crypto, Fiat)
+                psp:
+                    type: string
+                    description: Services Prvider
                 category:
                     type: string
                     description: Category of the channel (e.g., bank, e-wallet)
@@ -9774,6 +9786,10 @@ components:
                     type: string
                 currency:
                     type: string
+                currencyType:
+                    type: string
+                contact:
+                    type: string
                 country:
                     type: string
                     description: Country code where this payment method is available
@@ -9792,6 +9808,20 @@ components:
                 maxAmount:
                     type: string
                     description: Max Amount
+                pspFixedFee:
+                    type: string
+                    description: Fixed Fee on the Amount
+                pspFeeRate:
+                    type: string
+                    description: Rate Fee
+                pspMinAmount:
+                    type: string
+                    description: Min Amount
+                pspMaxAmount:
+                    type: string
+                    description: Max Amount
+                enable:
+                    type: boolean
                 keySchema:
                     type: object
                     description: JSON schema defining the required fields for this payment method
