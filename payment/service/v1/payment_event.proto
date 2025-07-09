@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.payment.service.v1;
 
 import "common/common.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/payment/service/v1;v1";
 option java_multiple_files = true;
@@ -19,15 +20,35 @@ message EventRequest {
 
 message EventResponse {}
 
-message OperatorPaymentTransactionEvent {
-	int64 transaction_id = 1;
-	string transaction_type = 2;
-	int64 real_operator_id = 3;
-	api.common.OperatorContext operator_context = 4;
-	string operator_type = 5;
-	string currency = 6;
-	string settlement_currency = 7;
-	string reporting_currency = 8;
-	string exchange_rate = 9; // exchange rate of the currency to the settlement currency
+message ChannelInfo {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message PaymentTransactionEvent {
+	int64 transaction_id = 1; // payment transaction id
+	string pa_transaction_id = 2;
+	string transaction_type = 3;
+	int64 user_id = 4;
+	api.common.OperatorContext operator_context = 6;
+	string currency = 8; // payment currency
+	string reporting_currency = 9;
 	string amount = 10; // cash amount of the currency
+	string status = 11; // payment status
+	google.protobuf.Struct extra = 12;
+	ChannelInfo channel_info = 13;
+}
+
+message OperatorPaymentTransactionEvent {
+	int64 transaction_id = 1; // payment transaction id
+	string pa_transaction_id = 2;
+	string transaction_type = 3;
+	api.common.OperatorContext operator_context = 5;
+	string currency = 7; // payment currency
+	string settlement_currency = 8; // wallet currency
+	string reporting_currency = 9;
+	string exchange_rate = 10; // exchange rate of the currency to the settlement currency
+	string amount = 11; // cash amount of the currency
+	string status = 12; // payment status
+	google.protobuf.Struct extra = 13;
+	ChannelInfo channel_info = 14;
 }

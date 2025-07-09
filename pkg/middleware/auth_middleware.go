@@ -71,6 +71,14 @@ func AuthMiddleware(authPaths []string, secret string, uc user.UserClient) middl
 				return nil, errors.New(401, "UNAUTHORIZED", "invalid token")
 			}
 
+			userOperatorIds := &mctx.OperatorIds{
+				OperatorId:         claims.UserInfo.OperatorId,
+				CompanyOperatorId:  claims.UserInfo.CompanyOperatorId,
+				RetailerOperatorId: claims.UserInfo.RetailerOperatorId,
+				SystemOperatorId:   claims.UserInfo.SystemOperatorId,
+			}
+			claims.UserInfo.RealOperatorId, claims.UserInfo.OperatorType = userOperatorIds.GetRealOperatorIdAndType()
+
 			ctx = mctx.WithUserInfo(ctx, claims.UserInfo)
 
 			return handler(ctx, req)

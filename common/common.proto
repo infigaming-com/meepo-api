@@ -11,4 +11,6 @@ message OperatorContext {
 	int64 company_operator_id = 2;
 	int64 retailer_operator_id = 3;
 	int64 system_operator_id = 4;
+	int64 real_operator_id = 5;
+	string operator_type = 6;
 }
