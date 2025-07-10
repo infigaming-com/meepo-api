@@ -222,9 +222,7 @@ type OperatorBalanceUpdateEvent struct {
 	state              protoimpl.MessageState  `protogen:"open.v1"`
 	TransactionId      int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	TransactionType    string                  `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	RealOperatorId     int64                   `protobuf:"varint,3,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
 	OperatorContext    *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorType       string                  `protobuf:"bytes,5,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
 	SettlementCurrency string                  `protobuf:"bytes,6,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
 	BeforeBalance      string                  `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
 	AfterBalance       string                  `protobuf:"bytes,8,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
@@ -278,25 +276,11 @@ func (x *OperatorBalanceUpdateEvent) GetTransactionType() string {
 	return ""
 }
 
-func (x *OperatorBalanceUpdateEvent) GetRealOperatorId() int64 {
-	if x != nil {
-		return x.RealOperatorId
-	}
-	return 0
-}
-
 func (x *OperatorBalanceUpdateEvent) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
-}
-
-func (x *OperatorBalanceUpdateEvent) GetOperatorType() string {
-	if x != nil {
-		return x.OperatorType
-	}
-	return ""
 }
 
 func (x *OperatorBalanceUpdateEvent) GetSettlementCurrency() string {
@@ -354,13 +338,11 @@ const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"\rafter_balance\x18\a \x01(\tR\fafterBalance\x12\x16\n" +
 	"\x06amount\x18\b \x01(\tR\x06amount\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\t \x01(\x03R\tcreatedAt\"\xb9\x03\n" +
+	"created_at\x18\t \x01(\x03R\tcreatedAt\"\xea\x02\n" +
 	"\x1aOperatorBalanceUpdateEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
-	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12(\n" +
-	"\x10real_operator_id\x18\x03 \x01(\x03R\x0erealOperatorId\x12F\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12#\n" +
-	"\roperator_type\x18\x05 \x01(\tR\foperatorType\x12/\n" +
+	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12F\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12/\n" +
 	"\x13settlement_currency\x18\x06 \x01(\tR\x12settlementCurrency\x12%\n" +
 	"\x0ebefore_balance\x18\a \x01(\tR\rbeforeBalance\x12#\n" +
 	"\rafter_balance\x18\b \x01(\tR\fafterBalance\x12\x16\n" +

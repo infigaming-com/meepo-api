@@ -411,8 +411,6 @@ func (m *OperatorBalanceUpdateEvent) validate(all bool) error {
 
 	// no validation rules for TransactionType
 
-	// no validation rules for RealOperatorId
-
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -441,8 +439,6 @@ func (m *OperatorBalanceUpdateEvent) validate(all bool) error {
 			}
 		}
 	}
-
-	// no validation rules for OperatorType
 
 	// no validation rules for SettlementCurrency
 
