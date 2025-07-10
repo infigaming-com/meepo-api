@@ -1243,7 +1243,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreatePaymentChannelRequest'
                 required: true
             responses:
                 "200":
@@ -3451,6 +3451,45 @@ components:
                     type: string
                 password:
                     type: string
+        api.backoffice.service.v1.CreatePaymentChannelRequest:
+            type: object
+            properties:
+                merchantId:
+                    type: string
+                    description: ID of the merchant creating this channel
+                paymentMethodId:
+                    type: string
+                    description: ID of the payment method to be used
+                type:
+                    type: string
+                    description: Type of channel (e.g., deposit, withdrawal)
+                contact:
+                    type: string
+                    description: Contact Info email
+                pspFixedFee:
+                    type: string
+                    description: PSP Fixed Fee on the Amount
+                pspFeeRate:
+                    type: string
+                    description: PSP Rate Fee
+                userFixedFee:
+                    type: string
+                    description: User Fixed Fee on the Amount
+                userFeeRate:
+                    type: string
+                    description: User Rate Fee
+                minAmount:
+                    type: string
+                    description: Min Amount
+                maxAmount:
+                    type: string
+                    description: Max Amount
+                key:
+                    type: object
+                    description: Configuration fields for the payment channel in JSON format
+            description: |-
+                Request to create a payment channel
+                 Used to create a new payment channel with specified merchant and method
         api.backoffice.service.v1.CreatePaymentMethodRequest:
             type: object
             properties:
@@ -9381,8 +9420,9 @@ components:
                 merchantId:
                     type: string
                     description: ID of the merchant creating this channel
-                operatorId:
-                    type: string
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
                     description: ID of the Operator connect with this channel
                 paymentMethodId:
                     type: string

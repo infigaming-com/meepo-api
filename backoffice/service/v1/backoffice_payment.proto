@@ -77,7 +77,7 @@ service BackofficePayment {
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc CreatePaymentChannel(payment.service.v1.CreatePaymentChannelRequest) returns (payment.service.v1.CreatePaymentChannelResponse) {
+  rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (payment.service.v1.CreatePaymentChannelResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/payment/channel/create"
       body: "*"
@@ -331,4 +331,31 @@ message CreatePaymentMethodRequest {
   string psp_max_amount = 11;
   // JSON schema defining the required fields for this payment method
   google.protobuf.Struct key = 12;
+}
+
+// Request to create a payment channel
+// Used to create a new payment channel with specified merchant and method
+message CreatePaymentChannelRequest {
+  // ID of the merchant creating this channel
+  string merchant_id = 1 [json_name="merchantId"];
+  // ID of the payment method to be used
+  string payment_method_id = 2 [json_name="paymentMethodId"];
+  // Type of channel (e.g., deposit, withdrawal)
+  string type = 3;
+  // Contact Info email
+  string contact = 4;
+  // PSP Fixed Fee on the Amount
+  string psp_fixed_fee = 5;
+  // PSP Rate Fee 
+  string psp_fee_rate = 6;
+  // User Fixed Fee on the Amount
+  string user_fixed_fee = 7;
+  // User Rate Fee 
+  string user_fee_rate = 8;
+  // Min Amount
+  string min_amount = 9;
+  // Max Amount
+  string max_amount = 10;
+  // Configuration fields for the payment channel in JSON format
+  google.protobuf.Struct key = 11;
 }
