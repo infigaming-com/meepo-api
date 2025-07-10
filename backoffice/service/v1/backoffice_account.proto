@@ -4,6 +4,7 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -248,6 +249,7 @@ message AccountInfoResponse {
 	bool mobile_verified = 5;
 	bool enabled = 6;
 	Role role = 7;
+    api.common.OperatorContext operator_context = 8;
 }
 
 message Role {
