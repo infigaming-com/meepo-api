@@ -19,21 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeWallet_GetWallets_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
-	BackofficeWallet_GetWalletCredits_FullMethodName              = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCredits"
-	BackofficeWallet_ListWalletBalanceTransactions_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/ListWalletBalanceTransactions"
-	BackofficeWallet_GetWalletCreditTransactions_FullMethodName   = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
-	BackofficeWallet_UpdateWallet_FullMethodName                  = "/api.backoffice.service.v1.BackofficeWallet/UpdateWallet"
-	BackofficeWallet_AddWalletCurrency_FullMethodName             = "/api.backoffice.service.v1.BackofficeWallet/AddWalletCurrency"
-	BackofficeWallet_ListWalletCurrencies_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/ListWalletCurrencies"
-	BackofficeWallet_UpdateWalletCurrency_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/UpdateWalletCurrency"
-	BackofficeWallet_ListOperatorBalances_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
-	BackofficeWallet_GetExchangeRates_FullMethodName              = "/api.backoffice.service.v1.BackofficeWallet/GetExchangeRates"
-	BackofficeWallet_OperatorTransfer_FullMethodName              = "/api.backoffice.service.v1.BackofficeWallet/OperatorTransfer"
-	BackofficeWallet_OperatorSwap_FullMethodName                  = "/api.backoffice.service.v1.BackofficeWallet/OperatorSwap"
-	BackofficeWallet_OperatorBalanceFreeze_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceFreeze"
-	BackofficeWallet_OperatorBalanceRollback_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceRollback"
-	BackofficeWallet_OperatorBalanceSettle_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceSettle"
+	BackofficeWallet_GetWallets_FullMethodName                      = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
+	BackofficeWallet_GetWalletCredits_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCredits"
+	BackofficeWallet_ListWalletBalanceTransactions_FullMethodName   = "/api.backoffice.service.v1.BackofficeWallet/ListWalletBalanceTransactions"
+	BackofficeWallet_GetWalletCreditTransactions_FullMethodName     = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
+	BackofficeWallet_UpdateWallet_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/UpdateWallet"
+	BackofficeWallet_AddWalletCurrency_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/AddWalletCurrency"
+	BackofficeWallet_ListWalletCurrencies_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/ListWalletCurrencies"
+	BackofficeWallet_UpdateWalletCurrency_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/UpdateWalletCurrency"
+	BackofficeWallet_ListOperatorBalances_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
+	BackofficeWallet_GetExchangeRates_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetExchangeRates"
+	BackofficeWallet_OperatorTransfer_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/OperatorTransfer"
+	BackofficeWallet_OperatorSwap_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/OperatorSwap"
+	BackofficeWallet_OperatorBalanceFreeze_FullMethodName           = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceFreeze"
+	BackofficeWallet_OperatorBalanceRollback_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceRollback"
+	BackofficeWallet_OperatorBalanceSettle_FullMethodName           = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceSettle"
+	BackofficeWallet_ListOperatorBalanceTransactions_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -62,6 +63,8 @@ type BackofficeWalletClient interface {
 	OperatorBalanceRollback(ctx context.Context, in *OperatorBalanceRollbackRequest, opts ...grpc.CallOption) (*OperatorBalanceRollbackResponse, error)
 	// OperatorSettle settles frozen cash of an operator
 	OperatorBalanceSettle(ctx context.Context, in *OperatorBalanceSettleRequest, opts ...grpc.CallOption) (*OperatorBalanceSettleResponse, error)
+	// ListOperatorBalanceTransactions lists the balance transactions of an operator
+	ListOperatorBalanceTransactions(ctx context.Context, in *ListOperatorBalanceTransactionsRequest, opts ...grpc.CallOption) (*ListOperatorBalanceTransactionsResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -222,6 +225,16 @@ func (c *backofficeWalletClient) OperatorBalanceSettle(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *backofficeWalletClient) ListOperatorBalanceTransactions(ctx context.Context, in *ListOperatorBalanceTransactionsRequest, opts ...grpc.CallOption) (*ListOperatorBalanceTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorBalanceTransactionsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListOperatorBalanceTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -248,6 +261,8 @@ type BackofficeWalletServer interface {
 	OperatorBalanceRollback(context.Context, *OperatorBalanceRollbackRequest) (*OperatorBalanceRollbackResponse, error)
 	// OperatorSettle settles frozen cash of an operator
 	OperatorBalanceSettle(context.Context, *OperatorBalanceSettleRequest) (*OperatorBalanceSettleResponse, error)
+	// ListOperatorBalanceTransactions lists the balance transactions of an operator
+	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -302,6 +317,9 @@ func (UnimplementedBackofficeWalletServer) OperatorBalanceRollback(context.Conte
 }
 func (UnimplementedBackofficeWalletServer) OperatorBalanceSettle(context.Context, *OperatorBalanceSettleRequest) (*OperatorBalanceSettleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OperatorBalanceSettle not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorBalanceTransactions not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -594,6 +612,24 @@ func _BackofficeWallet_OperatorBalanceSettle_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_ListOperatorBalanceTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorBalanceTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListOperatorBalanceTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListOperatorBalanceTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListOperatorBalanceTransactions(ctx, req.(*ListOperatorBalanceTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -660,6 +696,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OperatorBalanceSettle",
 			Handler:    _BackofficeWallet_OperatorBalanceSettle_Handler,
+		},
+		{
+			MethodName: "ListOperatorBalanceTransactions",
+			Handler:    _BackofficeWallet_ListOperatorBalanceTransactions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

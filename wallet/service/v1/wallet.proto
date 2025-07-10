@@ -78,6 +78,9 @@ service Wallet {
 
 	rpc UpdateUserCurrency (UpdateUserCurrencyRequest) returns (UpdateUserCurrencyResponse) {}
 
+	// List Operator Balances based on filter
+	rpc ListOperatorBalances (ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {}
+	
 	// Transfer cash from operator to its company operator
 	rpc OperatorTransfer (OperatorTransferRequest) returns (OperatorTransferResponse) {}
 
@@ -93,8 +96,11 @@ service Wallet {
 	// Settle frozen cash of an operator
 	rpc OperatorSettle (OperatorSettleRequest) returns (OperatorSettleResponse) {}
 
-	// List Operator Balances based on filter
-	rpc ListOperatorBalances (ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {}
+	// GetOperatorBalances gets the balances of an operator
+	rpc GetOperatorBalances(GetOperatorBalancesRequest) returns (GetOperatorBalancesResponse) {}
+
+	// List Operator Balance Transactions based on filter
+	rpc ListOperatorBalanceTransactions (ListOperatorBalanceTransactionsRequest) returns (ListOperatorBalanceTransactionsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -731,6 +737,53 @@ message OperatorSettleResponse {
 	string cash_amount = 3;
 	string cash_amount_usd = 4;
 	string cash_amount_reporting_currency = 5;
+}
+
+message GetOperatorBalancesRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message GetOperatorBalancesResponse {
+	repeated OperatorBalance operator_balances = 1;
+	string total_cash_usd = 2;
+}
+
+message ListOperatorBalanceTransactionsRequest {
+	repeated int64 retailer_operator_ids = 1;
+	repeated int64 company_operator_ids = 2;
+	repeated int64 operator_ids = 3;
+	repeated string currencies = 4;
+	repeated string transaction_types = 5;
+	optional int64 transaction_id = 6;
+	optional google.protobuf.Timestamp start_time = 7;
+	optional google.protobuf.Timestamp end_time = 8;
+	api.common.OperatorContext operator_context = 9;
+	optional int32 page = 10;
+	optional int32 page_size = 11;
+}
+
+message OperatorBalanceTransaction {
+	int64 transaction_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string retailer_operator_name = 3;
+	string company_operator_name = 4;
+	string operator_name = 5;
+	string currency = 6;
+	string before_balance = 7;
+	string after_balance = 8;
+	string cash_amount = 9;
+	string transaction_type = 10;
+	string memo = 11;
+	string fee_amount = 12;
+	int64 created_at = 13;
+	int64 updated_at = 14;
+}
+
+message ListOperatorBalanceTransactionsResponse {
+	repeated OperatorBalanceTransaction transactions = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }
 
 

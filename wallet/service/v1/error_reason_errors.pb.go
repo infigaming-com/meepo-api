@@ -898,3 +898,15 @@ func IsInvalidTransferCurrency(err error) bool {
 func ErrorInvalidTransferCurrency(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_TRANSFER_CURRENCY.String(), fmt.Sprintf(format, args...))
 }
+
+func IsQueryOperatorBalanceTransactionsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_QUERY_OPERATOR_BALANCE_TRANSACTIONS_FAILED.String() && e.Code == 500
+}
+
+func ErrorQueryOperatorBalanceTransactionsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_QUERY_OPERATOR_BALANCE_TRANSACTIONS_FAILED.String(), fmt.Sprintf(format, args...))
+}
