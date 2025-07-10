@@ -22,7 +22,7 @@ const (
 	Payment_GetSupportedPaymentMethodList_FullMethodName = "/payment.service.v1.Payment/GetSupportedPaymentMethodList"
 	Payment_CreatePaymentMethod_FullMethodName           = "/payment.service.v1.Payment/CreatePaymentMethod"
 	Payment_GetPaymentMethodList_FullMethodName          = "/payment.service.v1.Payment/GetPaymentMethodList"
-	Payment_DisablePaymentChannel_FullMethodName         = "/payment.service.v1.Payment/DisablePaymentChannel"
+	Payment_UpdatePaymentChannel_FullMethodName          = "/payment.service.v1.Payment/UpdatePaymentChannel"
 	Payment_CreatePaymentChannel_FullMethodName          = "/payment.service.v1.Payment/CreatePaymentChannel"
 	Payment_GetAddress_FullMethodName                    = "/payment.service.v1.Payment/GetAddress"
 	Payment_InitiateDeposit_FullMethodName               = "/payment.service.v1.Payment/InitiateDeposit"
@@ -61,7 +61,7 @@ type PaymentClient interface {
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	DisablePaymentChannel(ctx context.Context, in *DisablePaymentChannelRequest, opts ...grpc.CallOption) (*DisablePaymentChannelResponse, error)
+	UpdatePaymentChannel(ctx context.Context, in *UpdatePaymentChannelRequest, opts ...grpc.CallOption) (*UpdatePaymentChannelResponse, error)
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
@@ -153,10 +153,10 @@ func (c *paymentClient) GetPaymentMethodList(ctx context.Context, in *GetPayment
 	return out, nil
 }
 
-func (c *paymentClient) DisablePaymentChannel(ctx context.Context, in *DisablePaymentChannelRequest, opts ...grpc.CallOption) (*DisablePaymentChannelResponse, error) {
+func (c *paymentClient) UpdatePaymentChannel(ctx context.Context, in *UpdatePaymentChannelRequest, opts ...grpc.CallOption) (*UpdatePaymentChannelResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DisablePaymentChannelResponse)
-	err := c.cc.Invoke(ctx, Payment_DisablePaymentChannel_FullMethodName, in, out, cOpts...)
+	out := new(UpdatePaymentChannelResponse)
+	err := c.cc.Invoke(ctx, Payment_UpdatePaymentChannel_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -325,7 +325,7 @@ type PaymentServer interface {
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	DisablePaymentChannel(context.Context, *DisablePaymentChannelRequest) (*DisablePaymentChannelResponse, error)
+	UpdatePaymentChannel(context.Context, *UpdatePaymentChannelRequest) (*UpdatePaymentChannelResponse, error)
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
@@ -396,8 +396,8 @@ func (UnimplementedPaymentServer) CreatePaymentMethod(context.Context, *CreatePa
 func (UnimplementedPaymentServer) GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*GetPaymentMethodListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentMethodList not implemented")
 }
-func (UnimplementedPaymentServer) DisablePaymentChannel(context.Context, *DisablePaymentChannelRequest) (*DisablePaymentChannelResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DisablePaymentChannel not implemented")
+func (UnimplementedPaymentServer) UpdatePaymentChannel(context.Context, *UpdatePaymentChannelRequest) (*UpdatePaymentChannelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentChannel not implemented")
 }
 func (UnimplementedPaymentServer) CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentChannel not implemented")
@@ -516,20 +516,20 @@ func _Payment_GetPaymentMethodList_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Payment_DisablePaymentChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DisablePaymentChannelRequest)
+func _Payment_UpdatePaymentChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePaymentChannelRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServer).DisablePaymentChannel(ctx, in)
+		return srv.(PaymentServer).UpdatePaymentChannel(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Payment_DisablePaymentChannel_FullMethodName,
+		FullMethod: Payment_UpdatePaymentChannel_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServer).DisablePaymentChannel(ctx, req.(*DisablePaymentChannelRequest))
+		return srv.(PaymentServer).UpdatePaymentChannel(ctx, req.(*UpdatePaymentChannelRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -806,8 +806,8 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Payment_GetPaymentMethodList_Handler,
 		},
 		{
-			MethodName: "DisablePaymentChannel",
-			Handler:    _Payment_DisablePaymentChannel_Handler,
+			MethodName: "UpdatePaymentChannel",
+			Handler:    _Payment_UpdatePaymentChannel_Handler,
 		},
 		{
 			MethodName: "CreatePaymentChannel",

@@ -22,13 +22,13 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficePaymentCreatePaymentChannel = "/api.backoffice.service.v1.BackofficePayment/CreatePaymentChannel"
 const OperationBackofficePaymentCreatePaymentMethod = "/api.backoffice.service.v1.BackofficePayment/CreatePaymentMethod"
-const OperationBackofficePaymentDisablePaymentChannel = "/api.backoffice.service.v1.BackofficePayment/DisablePaymentChannel"
 const OperationBackofficePaymentGetOperatorAddress = "/api.backoffice.service.v1.BackofficePayment/GetOperatorAddress"
 const OperationBackofficePaymentGetPaymentChannelPage = "/api.backoffice.service.v1.BackofficePayment/GetPaymentChannelPage"
 const OperationBackofficePaymentGetPaymentMethodList = "/api.backoffice.service.v1.BackofficePayment/GetPaymentMethodList"
 const OperationBackofficePaymentGetPaymentTransactionById = "/api.backoffice.service.v1.BackofficePayment/GetPaymentTransactionById"
 const OperationBackofficePaymentGetPaymentTransactionPage = "/api.backoffice.service.v1.BackofficePayment/GetPaymentTransactionPage"
 const OperationBackofficePaymentGetSupportedPaymentMethodList = "/api.backoffice.service.v1.BackofficePayment/GetSupportedPaymentMethodList"
+const OperationBackofficePaymentUpdatePaymentChannel = "/api.backoffice.service.v1.BackofficePayment/UpdatePaymentChannel"
 
 type BackofficePaymentHTTPServer interface {
 	// CreatePaymentChannel Create payment channel
@@ -38,11 +38,7 @@ type BackofficePaymentHTTPServer interface {
 	// CreatePaymentMethod Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	CreatePaymentMethod(context.Context, *v1.CreatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error)
-	// DisablePaymentChannel Create payment channel
-	// Creates a new payment channel with specified configuration
-	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	DisablePaymentChannel(context.Context, *v1.DisablePaymentChannelRequest) (*v1.DisablePaymentChannelResponse, error)
+	CreatePaymentMethod(context.Context, *CreatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error)
 	GetOperatorAddress(context.Context, *GetOperatorAddressRequest) (*v1.GetOperatorAddressResponse, error)
 	// GetPaymentChannelPage Get payment channel page with pagination and filters
 	// Retrieves a paginated list of payment channels with optional filtering
@@ -63,6 +59,10 @@ type BackofficePaymentHTTPServer interface {
 	// Retrieves all available payment methods supported by the system
 	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
 	GetSupportedPaymentMethodList(context.Context, *v1.GetSupportedPaymentMethodListRequest) (*v1.GetSupportedPaymentMethodListResponse, error)
+	// UpdatePaymentChannel Create payment channel
+	// Creates a new payment channel with specified configuration
+	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
+	UpdatePaymentChannel(context.Context, *v1.UpdatePaymentChannelRequest) (*v1.UpdatePaymentChannelResponse, error)
 }
 
 func RegisterBackofficePaymentHTTPServer(s *http.Server, srv BackofficePaymentHTTPServer) {
@@ -72,7 +72,7 @@ func RegisterBackofficePaymentHTTPServer(s *http.Server, srv BackofficePaymentHT
 	r.POST("/v1/backoffice/payment/supportedmethod/list", _BackofficePayment_GetSupportedPaymentMethodList1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/method/list", _BackofficePayment_GetPaymentMethodList1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/method/create", _BackofficePayment_CreatePaymentMethod1_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/payment/channel/update", _BackofficePayment_DisablePaymentChannel1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/channel/update", _BackofficePayment_UpdatePaymentChannel1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/channel/create", _BackofficePayment_CreatePaymentChannel1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/operator/address/get", _BackofficePayment_GetOperatorAddress0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/channel/page", _BackofficePayment_GetPaymentChannelPage1_HTTP_Handler(srv))
@@ -168,7 +168,7 @@ func _BackofficePayment_GetPaymentMethodList1_HTTP_Handler(srv BackofficePayment
 
 func _BackofficePayment_CreatePaymentMethod1_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.CreatePaymentMethodRequest
+		var in CreatePaymentMethodRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -177,7 +177,7 @@ func _BackofficePayment_CreatePaymentMethod1_HTTP_Handler(srv BackofficePaymentH
 		}
 		http.SetOperation(ctx, OperationBackofficePaymentCreatePaymentMethod)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreatePaymentMethod(ctx, req.(*v1.CreatePaymentMethodRequest))
+			return srv.CreatePaymentMethod(ctx, req.(*CreatePaymentMethodRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -188,24 +188,24 @@ func _BackofficePayment_CreatePaymentMethod1_HTTP_Handler(srv BackofficePaymentH
 	}
 }
 
-func _BackofficePayment_DisablePaymentChannel1_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
+func _BackofficePayment_UpdatePaymentChannel1_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.DisablePaymentChannelRequest
+		var in v1.UpdatePaymentChannelRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficePaymentDisablePaymentChannel)
+		http.SetOperation(ctx, OperationBackofficePaymentUpdatePaymentChannel)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DisablePaymentChannel(ctx, req.(*v1.DisablePaymentChannelRequest))
+			return srv.UpdatePaymentChannel(ctx, req.(*v1.UpdatePaymentChannelRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.DisablePaymentChannelResponse)
+		reply := out.(*v1.UpdatePaymentChannelResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -278,14 +278,14 @@ func _BackofficePayment_GetPaymentChannelPage1_HTTP_Handler(srv BackofficePaymen
 
 type BackofficePaymentHTTPClient interface {
 	CreatePaymentChannel(ctx context.Context, req *v1.CreatePaymentChannelRequest, opts ...http.CallOption) (rsp *v1.CreatePaymentChannelResponse, err error)
-	CreatePaymentMethod(ctx context.Context, req *v1.CreatePaymentMethodRequest, opts ...http.CallOption) (rsp *v1.CreatePaymentMethodResponse, err error)
-	DisablePaymentChannel(ctx context.Context, req *v1.DisablePaymentChannelRequest, opts ...http.CallOption) (rsp *v1.DisablePaymentChannelResponse, err error)
+	CreatePaymentMethod(ctx context.Context, req *CreatePaymentMethodRequest, opts ...http.CallOption) (rsp *v1.CreatePaymentMethodResponse, err error)
 	GetOperatorAddress(ctx context.Context, req *GetOperatorAddressRequest, opts ...http.CallOption) (rsp *v1.GetOperatorAddressResponse, err error)
 	GetPaymentChannelPage(ctx context.Context, req *v1.GetPaymentChannelPageRequest, opts ...http.CallOption) (rsp *v1.GetPaymentChannelPageResponse, err error)
 	GetPaymentMethodList(ctx context.Context, req *v1.GetPaymentMethodListRequest, opts ...http.CallOption) (rsp *v1.GetPaymentMethodListResponse, err error)
 	GetPaymentTransactionById(ctx context.Context, req *GetPaymentTransactionByIdRequest, opts ...http.CallOption) (rsp *GetPaymentTransactionByIdResponse, err error)
 	GetPaymentTransactionPage(ctx context.Context, req *v1.GetTransactionPageRequest, opts ...http.CallOption) (rsp *v1.GetTransactionPageResponse, err error)
 	GetSupportedPaymentMethodList(ctx context.Context, req *v1.GetSupportedPaymentMethodListRequest, opts ...http.CallOption) (rsp *v1.GetSupportedPaymentMethodListResponse, err error)
+	UpdatePaymentChannel(ctx context.Context, req *v1.UpdatePaymentChannelRequest, opts ...http.CallOption) (rsp *v1.UpdatePaymentChannelResponse, err error)
 }
 
 type BackofficePaymentHTTPClientImpl struct {
@@ -309,24 +309,11 @@ func (c *BackofficePaymentHTTPClientImpl) CreatePaymentChannel(ctx context.Conte
 	return &out, nil
 }
 
-func (c *BackofficePaymentHTTPClientImpl) CreatePaymentMethod(ctx context.Context, in *v1.CreatePaymentMethodRequest, opts ...http.CallOption) (*v1.CreatePaymentMethodResponse, error) {
+func (c *BackofficePaymentHTTPClientImpl) CreatePaymentMethod(ctx context.Context, in *CreatePaymentMethodRequest, opts ...http.CallOption) (*v1.CreatePaymentMethodResponse, error) {
 	var out v1.CreatePaymentMethodResponse
 	pattern := "/v1/backoffice/payment/method/create"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficePaymentCreatePaymentMethod))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficePaymentHTTPClientImpl) DisablePaymentChannel(ctx context.Context, in *v1.DisablePaymentChannelRequest, opts ...http.CallOption) (*v1.DisablePaymentChannelResponse, error) {
-	var out v1.DisablePaymentChannelResponse
-	pattern := "/v1/backoffice/payment/channel/update"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficePaymentDisablePaymentChannel))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -405,6 +392,19 @@ func (c *BackofficePaymentHTTPClientImpl) GetSupportedPaymentMethodList(ctx cont
 	pattern := "/v1/backoffice/payment/supportedmethod/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficePaymentGetSupportedPaymentMethodList))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficePaymentHTTPClientImpl) UpdatePaymentChannel(ctx context.Context, in *v1.UpdatePaymentChannelRequest, opts ...http.CallOption) (*v1.UpdatePaymentChannelResponse, error) {
+	var out v1.UpdatePaymentChannelResponse
+	pattern := "/v1/backoffice/payment/channel/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficePaymentUpdatePaymentChannel))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

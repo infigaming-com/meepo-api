@@ -19,6 +19,9 @@ message GetSupportedPaymentMethodListRequest {
 }
 
 message GetPaymentMethodListRequest {
+  string currency = 1;
+  string psp = 2;
+  string search = 3;
 }
 
 // Details of a single payment method
@@ -106,7 +109,7 @@ message CreatePaymentMethodResponse {
   PaymentMethodInfo payment_method = 1;
 }
 
-message DisablePaymentChannelResponse {
+message UpdatePaymentChannelResponse {
   PaymentMethodInfo payment_methods = 1;
 }
 
@@ -141,9 +144,29 @@ message CreatePaymentChannelRequest {
 
 // Request to create a payment channel
 // Used to create a new payment channel with specified merchant and method
-message DisablePaymentChannelRequest {
+message UpdatePaymentChannelRequest {
   // ID of the merchant creating this channel
-  string id = 1 [json_name="merchantId"];
+  string merchant_id = 1;
+  // ID of the payment method to be used
+  string payment_method_id = 2;
+  // Contact Info email
+  string contact = 4;
+  // PSP Fixed Fee on the Amount
+  string psp_fixed_fee = 5;
+  // PSP Rate Fee 
+  string psp_fee_rate = 6;
+  // User Fixed Fee on the Amount
+  string user_fixed_fee = 7;
+  // User Rate Fee 
+  string user_fee_rate = 8;
+  // Min Amount
+  string min_amount = 9;
+  // Max Amount
+  string max_amount = 10;
+  // enable status
+  string status = 11;
+  // Configuration fields for the payment channel in JSON format
+  google.protobuf.Struct key = 12;
 }
 
 // Response for channel creation
@@ -167,7 +190,7 @@ message PaymentChannelInfo {
   // Category of the channel (e.g., bank, e-wallet)
   string category = 5;
   // ID of the operator who owns this channel
-  string operator_id = 6 [json_name="operatorId"];
+  int64 operator_id = 6 [json_name="operatorId"];
   // Payment method used in this channel
   string payment_method = 7 [json_name="paymentMethod"];
   // Tag for categorization or filtering
@@ -276,8 +299,6 @@ message GetOperatorAddressRequest {
   // ID of the channel to use for this deposit
   string channel_id = 1 [json_name="channelId"];
 
-  string target_currency = 2;
-
   api.common.OperatorContext operator_context = 3;
   // Additional information needed for the deposit
   // May include clientOrderId, productId, userInfo, etc.
@@ -291,8 +312,6 @@ message GetOperatorAddressResponse {
   message Data {
     // Crypto like btc, eth...
     string currency = 1;
-    // Target Currency
-    string target_currency = 2;
     // Crypto protocol
     string protocol = 3;
     // Crypto chain
@@ -345,14 +364,13 @@ message InitiateOperatorWithdrawRequest {
   string amount = 1;
   // Currency code for the transaction
   string currency = 2;
-  string source_currency = 3;
   // ID of the operator who owns this channel
-	api.common.OperatorContext operator_context = 4;
+	api.common.OperatorContext operator_context = 3;
   // ID of the channel to use for withdrawal
-  string channel_id = 5;
+  string channel_id = 4;
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
-  google.protobuf.Struct extra = 6;
+  google.protobuf.Struct extra = 5;
 }
 
 // Response for withdrawal initiation
@@ -507,7 +525,7 @@ message TransactionInfo {
   // Transaction ID from the payment gateway
   string gateway_transaction_id = 3 [json_name="gatewayTransactionId"];
   // Operator ID associated with the transaction
-  string operator_id = 4 [json_name="operatorId"];
+  int64 operator_id = 4 [json_name="operatorId"];
   // ID of the user who initiated the transaction
   int64 user_id = 5 [json_name="userId"];
   // VIP level of the user
@@ -717,7 +735,7 @@ service Payment {
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc DisablePaymentChannel(DisablePaymentChannelRequest) returns (DisablePaymentChannelResponse) {
+  rpc UpdatePaymentChannel(UpdatePaymentChannelRequest) returns (UpdatePaymentChannelResponse) {
     option (google.api.http) = {
       post: "/v1/payment/channel/update"
       body: "*"
