@@ -162,6 +162,12 @@ func (m *GetPaymentMethodListRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Currency
+
+	// no validation rules for Psp
+
+	// no validation rules for Search
+
 	if len(errors) > 0 {
 		return GetPaymentMethodListRequestMultiError(errors)
 	}
@@ -998,22 +1004,22 @@ var _ interface {
 	ErrorName() string
 } = CreatePaymentMethodResponseValidationError{}
 
-// Validate checks the field values on DisablePaymentChannelResponse with the
+// Validate checks the field values on UpdatePaymentChannelResponse with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *DisablePaymentChannelResponse) Validate() error {
+func (m *UpdatePaymentChannelResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on DisablePaymentChannelResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// DisablePaymentChannelResponseMultiError, or nil if none found.
-func (m *DisablePaymentChannelResponse) ValidateAll() error {
+// ValidateAll checks the field values on UpdatePaymentChannelResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdatePaymentChannelResponseMultiError, or nil if none found.
+func (m *UpdatePaymentChannelResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *DisablePaymentChannelResponse) validate(all bool) error {
+func (m *UpdatePaymentChannelResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1024,7 +1030,7 @@ func (m *DisablePaymentChannelResponse) validate(all bool) error {
 		switch v := interface{}(m.GetPaymentMethods()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, DisablePaymentChannelResponseValidationError{
+				errors = append(errors, UpdatePaymentChannelResponseValidationError{
 					field:  "PaymentMethods",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1032,7 +1038,7 @@ func (m *DisablePaymentChannelResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, DisablePaymentChannelResponseValidationError{
+				errors = append(errors, UpdatePaymentChannelResponseValidationError{
 					field:  "PaymentMethods",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1041,7 +1047,7 @@ func (m *DisablePaymentChannelResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetPaymentMethods()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return DisablePaymentChannelResponseValidationError{
+			return UpdatePaymentChannelResponseValidationError{
 				field:  "PaymentMethods",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -1050,19 +1056,19 @@ func (m *DisablePaymentChannelResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return DisablePaymentChannelResponseMultiError(errors)
+		return UpdatePaymentChannelResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// DisablePaymentChannelResponseMultiError is an error wrapping multiple
-// validation errors returned by DisablePaymentChannelResponse.ValidateAll()
-// if the designated constraints aren't met.
-type DisablePaymentChannelResponseMultiError []error
+// UpdatePaymentChannelResponseMultiError is an error wrapping multiple
+// validation errors returned by UpdatePaymentChannelResponse.ValidateAll() if
+// the designated constraints aren't met.
+type UpdatePaymentChannelResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m DisablePaymentChannelResponseMultiError) Error() string {
+func (m UpdatePaymentChannelResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1071,12 +1077,12 @@ func (m DisablePaymentChannelResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m DisablePaymentChannelResponseMultiError) AllErrors() []error { return m }
+func (m UpdatePaymentChannelResponseMultiError) AllErrors() []error { return m }
 
-// DisablePaymentChannelResponseValidationError is the validation error
-// returned by DisablePaymentChannelResponse.Validate if the designated
-// constraints aren't met.
-type DisablePaymentChannelResponseValidationError struct {
+// UpdatePaymentChannelResponseValidationError is the validation error returned
+// by UpdatePaymentChannelResponse.Validate if the designated constraints
+// aren't met.
+type UpdatePaymentChannelResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1084,24 +1090,24 @@ type DisablePaymentChannelResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e DisablePaymentChannelResponseValidationError) Field() string { return e.field }
+func (e UpdatePaymentChannelResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DisablePaymentChannelResponseValidationError) Reason() string { return e.reason }
+func (e UpdatePaymentChannelResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DisablePaymentChannelResponseValidationError) Cause() error { return e.cause }
+func (e UpdatePaymentChannelResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DisablePaymentChannelResponseValidationError) Key() bool { return e.key }
+func (e UpdatePaymentChannelResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DisablePaymentChannelResponseValidationError) ErrorName() string {
-	return "DisablePaymentChannelResponseValidationError"
+func (e UpdatePaymentChannelResponseValidationError) ErrorName() string {
+	return "UpdatePaymentChannelResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e DisablePaymentChannelResponseValidationError) Error() string {
+func (e UpdatePaymentChannelResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1113,14 +1119,14 @@ func (e DisablePaymentChannelResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDisablePaymentChannelResponse.%s: %s%s",
+		"invalid %sUpdatePaymentChannelResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DisablePaymentChannelResponseValidationError{}
+var _ error = UpdatePaymentChannelResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1128,7 +1134,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DisablePaymentChannelResponseValidationError{}
+} = UpdatePaymentChannelResponseValidationError{}
 
 // Validate checks the field values on CreatePaymentChannelRequest with the
 // rules defined in the proto definition for this message. If any rules are
@@ -1284,44 +1290,91 @@ var _ interface {
 	ErrorName() string
 } = CreatePaymentChannelRequestValidationError{}
 
-// Validate checks the field values on DisablePaymentChannelRequest with the
+// Validate checks the field values on UpdatePaymentChannelRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *DisablePaymentChannelRequest) Validate() error {
+func (m *UpdatePaymentChannelRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on DisablePaymentChannelRequest with the
+// ValidateAll checks the field values on UpdatePaymentChannelRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// DisablePaymentChannelRequestMultiError, or nil if none found.
-func (m *DisablePaymentChannelRequest) ValidateAll() error {
+// UpdatePaymentChannelRequestMultiError, or nil if none found.
+func (m *UpdatePaymentChannelRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *DisablePaymentChannelRequest) validate(all bool) error {
+func (m *UpdatePaymentChannelRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Id
+	// no validation rules for MerchantId
+
+	// no validation rules for PaymentMethodId
+
+	// no validation rules for Contact
+
+	// no validation rules for PspFixedFee
+
+	// no validation rules for PspFeeRate
+
+	// no validation rules for UserFixedFee
+
+	// no validation rules for UserFeeRate
+
+	// no validation rules for MinAmount
+
+	// no validation rules for MaxAmount
+
+	// no validation rules for Status
+
+	if all {
+		switch v := interface{}(m.GetKey()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdatePaymentChannelRequestValidationError{
+					field:  "Key",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdatePaymentChannelRequestValidationError{
+					field:  "Key",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdatePaymentChannelRequestValidationError{
+				field:  "Key",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
-		return DisablePaymentChannelRequestMultiError(errors)
+		return UpdatePaymentChannelRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// DisablePaymentChannelRequestMultiError is an error wrapping multiple
-// validation errors returned by DisablePaymentChannelRequest.ValidateAll() if
+// UpdatePaymentChannelRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdatePaymentChannelRequest.ValidateAll() if
 // the designated constraints aren't met.
-type DisablePaymentChannelRequestMultiError []error
+type UpdatePaymentChannelRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m DisablePaymentChannelRequestMultiError) Error() string {
+func (m UpdatePaymentChannelRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1330,12 +1383,12 @@ func (m DisablePaymentChannelRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m DisablePaymentChannelRequestMultiError) AllErrors() []error { return m }
+func (m UpdatePaymentChannelRequestMultiError) AllErrors() []error { return m }
 
-// DisablePaymentChannelRequestValidationError is the validation error returned
-// by DisablePaymentChannelRequest.Validate if the designated constraints
+// UpdatePaymentChannelRequestValidationError is the validation error returned
+// by UpdatePaymentChannelRequest.Validate if the designated constraints
 // aren't met.
-type DisablePaymentChannelRequestValidationError struct {
+type UpdatePaymentChannelRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1343,24 +1396,24 @@ type DisablePaymentChannelRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e DisablePaymentChannelRequestValidationError) Field() string { return e.field }
+func (e UpdatePaymentChannelRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DisablePaymentChannelRequestValidationError) Reason() string { return e.reason }
+func (e UpdatePaymentChannelRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DisablePaymentChannelRequestValidationError) Cause() error { return e.cause }
+func (e UpdatePaymentChannelRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DisablePaymentChannelRequestValidationError) Key() bool { return e.key }
+func (e UpdatePaymentChannelRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DisablePaymentChannelRequestValidationError) ErrorName() string {
-	return "DisablePaymentChannelRequestValidationError"
+func (e UpdatePaymentChannelRequestValidationError) ErrorName() string {
+	return "UpdatePaymentChannelRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e DisablePaymentChannelRequestValidationError) Error() string {
+func (e UpdatePaymentChannelRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1372,14 +1425,14 @@ func (e DisablePaymentChannelRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDisablePaymentChannelRequest.%s: %s%s",
+		"invalid %sUpdatePaymentChannelRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DisablePaymentChannelRequestValidationError{}
+var _ error = UpdatePaymentChannelRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1387,7 +1440,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DisablePaymentChannelRequestValidationError{}
+} = UpdatePaymentChannelRequestValidationError{}
 
 // Validate checks the field values on CreatePaymentChannelResponse with the
 // rules defined in the proto definition for this message. If any rules are
@@ -2301,8 +2354,6 @@ func (m *GetOperatorAddressRequest) validate(all bool) error {
 
 	// no validation rules for ChannelId
 
-	// no validation rules for TargetCurrency
-
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -2906,8 +2957,6 @@ func (m *InitiateOperatorWithdrawRequest) validate(all bool) error {
 	// no validation rules for Amount
 
 	// no validation rules for Currency
-
-	// no validation rules for SourceCurrency
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
@@ -5234,8 +5283,6 @@ func (m *GetOperatorAddressResponse_Data) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for Currency
-
-	// no validation rules for TargetCurrency
 
 	// no validation rules for Protocol
 

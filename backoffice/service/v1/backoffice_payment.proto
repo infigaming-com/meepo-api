@@ -57,7 +57,7 @@ service BackofficePayment {
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc CreatePaymentMethod(payment.service.v1.CreatePaymentMethodRequest) returns (payment.service.v1.CreatePaymentMethodResponse) {
+  rpc CreatePaymentMethod(CreatePaymentMethodRequest) returns (payment.service.v1.CreatePaymentMethodResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/payment/method/create"
       body: "*"
@@ -67,7 +67,7 @@ service BackofficePayment {
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc DisablePaymentChannel(payment.service.v1.DisablePaymentChannelRequest) returns (payment.service.v1.DisablePaymentChannelResponse) {
+  rpc UpdatePaymentChannel(payment.service.v1.UpdatePaymentChannelRequest) returns (payment.service.v1.UpdatePaymentChannelResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/payment/channel/update"
       body: "*"
@@ -302,4 +302,33 @@ message GetOperatorAddressRequest {
   // May include clientOrderId, productId, userInfo, etc.
   google.protobuf.Struct extra = 3;
 
+}
+
+// Request to create a payment channel
+// Used to create a new payment channel with specified merchant and method
+message CreatePaymentMethodRequest {
+  // ID of the payment method to be used
+  string payment_method_id = 1 [json_name="paymentMethodId"];
+  // Currency Type
+  string currency_type = 2;
+  // Contact Info email
+  string contact = 3;
+  // Fixed Fee on the Amount
+  string fixed_fee = 4;
+  // Rate Fee 
+  string fee_rate = 5;
+  // Min Amount
+  string min_amount = 6;
+  // Max Amount
+  string max_amount = 7;
+  // PSP Fixed Fee on the Amount
+  string psp_fixed_fee = 8;
+  // PSP Rate Fee 
+  string psp_fee_rate = 9;
+  // PSP Min Amount
+  string psp_min_amount = 10;
+  // PSP Max Amount
+  string psp_max_amount = 11;
+  // JSON schema defining the required fields for this payment method
+  google.protobuf.Struct key = 12;
 }
