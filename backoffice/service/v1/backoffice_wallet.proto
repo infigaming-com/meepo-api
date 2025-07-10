@@ -90,22 +90,22 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
-	// OperatorBalanceFreeze freezes cash of an operator
-	rpc OperatorBalanceFreeze(OperatorBalanceFreezeRequest) returns (OperatorBalanceFreezeResponse) {
+	// OperatorFreeze freezes cash of an operator
+	rpc OperatorFreeze(OperatorFreezeRequest) returns (OperatorFreezeResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/freeze"
 			body: "*"
 		};
 	}
 	// OperatorRollback rolls back frozen cash of an operator
-	rpc OperatorBalanceRollback(OperatorBalanceRollbackRequest) returns (OperatorBalanceRollbackResponse) {
+	rpc OperatorRollback(OperatorRollbackRequest) returns (OperatorRollbackResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/rollback"
 			body: "*"
 		};
 	}
 	// OperatorSettle settles frozen cash of an operator
-	rpc OperatorBalanceSettle(OperatorBalanceSettleRequest) returns (OperatorBalanceSettleResponse) {
+	rpc OperatorSettle(OperatorSettleRequest) returns (OperatorSettleResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/settle"
 			body: "*"
@@ -390,25 +390,25 @@ message OperatorSwapResponse {
 	string target_currency_balance_cash_reporting_currency = 6;
 }
 
-message OperatorBalanceFreezeRequest {
+message OperatorFreezeRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
 	string cash_amount = 3;
 	string memo = 4;
 }
 
-message OperatorBalanceFreezeResponse {
+message OperatorFreezeResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
 }
 
-message OperatorBalanceRollbackRequest {
+message OperatorRollbackRequest {
 	api.common.OperatorContext operator_context = 1;
 	int64 original_transaction_id = 2;
 	string memo = 3;
 }
 
-message OperatorBalanceRollbackResponse {
+message OperatorRollbackResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
 	string cash_amount = 3;
@@ -416,14 +416,14 @@ message OperatorBalanceRollbackResponse {
 	string cash_amount_reporting_currency = 5;
 }
 
-message OperatorBalanceSettleRequest {
+message OperatorSettleRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
 	int64 original_transaction_id = 3;
 	string memo = 5;
 }
 
-message OperatorBalanceSettleResponse {
+message OperatorSettleResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
 	string cash_amount = 3;

@@ -85,13 +85,13 @@ service Wallet {
 	rpc OperatorSwap (OperatorSwapRequest) returns (OperatorSwapResponse) {}
 
 	// Freeze cash of a balance of an operator
-	rpc OperatorBalanceFreeze (OperatorBalanceFreezeRequest) returns (OperatorBalanceFreezeResponse) {}
+	rpc OperatorFreeze (OperatorFreezeRequest) returns (OperatorFreezeResponse) {}
 	
 	// Rollback frozen cash of an operator
-	rpc OperatorBalanceRollback (OperatorBalanceRollbackRequest) returns (OperatorBalanceRollbackResponse) {}
+	rpc OperatorRollback (OperatorRollbackRequest) returns (OperatorRollbackResponse) {}
 
 	// Settle frozen cash of an operator
-	rpc OperatorBalanceSettle (OperatorBalanceSettleRequest) returns (OperatorBalanceSettleResponse) {}
+	rpc OperatorSettle (OperatorSettleRequest) returns (OperatorSettleResponse) {}
 
 	// List Operator Balances based on filter
 	rpc ListOperatorBalances (ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {}
@@ -686,7 +686,7 @@ message OperatorSwapResponse {
 	string target_currency_balance_cash_reporting_currency = 6;
 }
 
-message OperatorBalanceFreezeRequest {
+message OperatorFreezeRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
 	string reporting_currency = 3;
@@ -696,12 +696,12 @@ message OperatorBalanceFreezeRequest {
 	string memo = 7;
 }
 
-message OperatorBalanceFreezeResponse {
+message OperatorFreezeResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
 }
 
-message OperatorBalanceRollbackRequest {
+message OperatorRollbackRequest {
 	api.common.OperatorContext operator_context = 1;
 	optional int64 external_transaction_id = 2;
 	int64 original_transaction_id = 3;
@@ -709,7 +709,7 @@ message OperatorBalanceRollbackRequest {
 	string memo = 5;
 }
 
-message OperatorBalanceRollbackResponse {
+message OperatorRollbackResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
 	string cash_amount = 3;
@@ -717,7 +717,7 @@ message OperatorBalanceRollbackResponse {
 	string cash_amount_reporting_currency = 5;
 }
 
-message OperatorBalanceSettleRequest {
+message OperatorSettleRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
 	string reporting_currency = 3;
@@ -727,7 +727,7 @@ message OperatorBalanceSettleRequest {
 	string memo = 7;
 }
 
-message OperatorBalanceSettleResponse {
+message OperatorSettleResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
 	string cash_amount = 3;
