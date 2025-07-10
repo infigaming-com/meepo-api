@@ -76,7 +76,7 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
-	// OperatorTransfer transfers cash from one operator to its company operator
+	// OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	rpc OperatorTransfer(OperatorTransferRequest) returns (OperatorTransferResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/transfer"
@@ -362,8 +362,7 @@ message OperatorTransferRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
 	string target_currency = 3;
-	string exchange_rate = 4; // exchange rate of the currency to the target currency
-	string cash_amount = 5;
+	string cash_amount = 4;
 }
 
 message OperatorTransferResponse {
@@ -377,8 +376,7 @@ message OperatorSwapRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
 	string target_currency = 3;
-	string exchange_rate = 4;
-	string cash_amount = 5;
+	string cash_amount = 4;
 }
 
 message OperatorSwapResponse {

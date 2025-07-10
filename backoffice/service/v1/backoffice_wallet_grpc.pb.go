@@ -52,7 +52,7 @@ type BackofficeWalletClient interface {
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*ListOperatorBalancesResponse, error)
 	GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error)
-	// OperatorTransfer transfers cash from one operator to its company operator
+	// OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(ctx context.Context, in *OperatorTransferRequest, opts ...grpc.CallOption) (*OperatorTransferResponse, error)
 	// OperatorSwap swaps cash between two balances of the same operator
 	OperatorSwap(ctx context.Context, in *OperatorSwapRequest, opts ...grpc.CallOption) (*OperatorSwapResponse, error)
@@ -238,7 +238,7 @@ type BackofficeWalletServer interface {
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
-	// OperatorTransfer transfers cash from one operator to its company operator
+	// OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
 	// OperatorSwap swaps cash between two balances of the same operator
 	OperatorSwap(context.Context, *OperatorSwapRequest) (*OperatorSwapResponse, error)
