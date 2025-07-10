@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -411,18 +412,19 @@ func (*CancelTicketResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListTicketsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        *int64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	OperatorId    *int64                 `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
-	TicketId      *int64                 `protobuf:"varint,4,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
-	Currency      *string                `protobuf:"bytes,5,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	Status        *string                `protobuf:"bytes,6,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime       *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page          *int32                 `protobuf:"varint,9,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                 `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	UserId          *int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorId      *int64                  `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	TicketId        *int64                  `protobuf:"varint,4,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
+	Currency        *string                 `protobuf:"bytes,5,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Status          *string                 `protobuf:"bytes,6,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	StartTime       *timestamppb.Timestamp  `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime         *timestamppb.Timestamp  `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page            *int32                  `protobuf:"varint,9,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize        *int32                  `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ListTicketsRequest) Reset() {
@@ -460,6 +462,13 @@ func (x *ListTicketsRequest) GetUserId() int64 {
 		return *x.UserId
 	}
 	return 0
+}
+
+func (x *ListTicketsRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
 }
 
 func (x *ListTicketsRequest) GetOperatorId() int64 {
@@ -518,6 +527,114 @@ func (x *ListTicketsRequest) GetPageSize() int32 {
 	return 0
 }
 
+type ListOperatorTicketsRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorId      *int64                  `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	TicketId        *int64                  `protobuf:"varint,4,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
+	Currency        *string                 `protobuf:"bytes,5,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Status          *string                 `protobuf:"bytes,6,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	StartTime       *timestamppb.Timestamp  `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime         *timestamppb.Timestamp  `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page            *int32                  `protobuf:"varint,9,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize        *int32                  `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ListOperatorTicketsRequest) Reset() {
+	*x = ListOperatorTicketsRequest{}
+	mi := &file_review_service_v1_review_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorTicketsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorTicketsRequest) ProtoMessage() {}
+
+func (x *ListOperatorTicketsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorTicketsRequest.ProtoReflect.Descriptor instead.
+func (*ListOperatorTicketsRequest) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListOperatorTicketsRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *ListOperatorTicketsRequest) GetOperatorId() int64 {
+	if x != nil && x.OperatorId != nil {
+		return *x.OperatorId
+	}
+	return 0
+}
+
+func (x *ListOperatorTicketsRequest) GetTicketId() int64 {
+	if x != nil && x.TicketId != nil {
+		return *x.TicketId
+	}
+	return 0
+}
+
+func (x *ListOperatorTicketsRequest) GetCurrency() string {
+	if x != nil && x.Currency != nil {
+		return *x.Currency
+	}
+	return ""
+}
+
+func (x *ListOperatorTicketsRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+func (x *ListOperatorTicketsRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *ListOperatorTicketsRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *ListOperatorTicketsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorTicketsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
 type ListTicketsResponse struct {
 	state               protoimpl.MessageState        `protogen:"open.v1"`
 	Tickets             []*ListTicketsResponse_Ticket `protobuf:"bytes,1,rep,name=tickets,proto3" json:"tickets,omitempty"`
@@ -542,7 +659,7 @@ type ListTicketsResponse struct {
 
 func (x *ListTicketsResponse) Reset() {
 	*x = ListTicketsResponse{}
-	mi := &file_review_service_v1_review_proto_msgTypes[9]
+	mi := &file_review_service_v1_review_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -554,7 +671,7 @@ func (x *ListTicketsResponse) String() string {
 func (*ListTicketsResponse) ProtoMessage() {}
 
 func (x *ListTicketsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[9]
+	mi := &file_review_service_v1_review_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -567,7 +684,7 @@ func (x *ListTicketsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTicketsResponse.ProtoReflect.Descriptor instead.
 func (*ListTicketsResponse) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListTicketsResponse) GetTickets() []*ListTicketsResponse_Ticket {
@@ -687,14 +804,15 @@ type GetTicketRequest struct {
 	TicketId int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
 	// Optional flag for including comments in the response or not.
 	// If not provided, the comments will not be included in the response.
-	IncludeComments *bool `protobuf:"varint,2,opt,name=include_comments,json=includeComments,proto3,oneof" json:"include_comments,omitempty"`
+	IncludeComments *bool                   `protobuf:"varint,2,opt,name=include_comments,json=includeComments,proto3,oneof" json:"include_comments,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetTicketRequest) Reset() {
 	*x = GetTicketRequest{}
-	mi := &file_review_service_v1_review_proto_msgTypes[10]
+	mi := &file_review_service_v1_review_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -706,7 +824,7 @@ func (x *GetTicketRequest) String() string {
 func (*GetTicketRequest) ProtoMessage() {}
 
 func (x *GetTicketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[10]
+	mi := &file_review_service_v1_review_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -719,7 +837,7 @@ func (x *GetTicketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketRequest.ProtoReflect.Descriptor instead.
 func (*GetTicketRequest) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{10}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetTicketRequest) GetTicketId() int64 {
@@ -736,6 +854,13 @@ func (x *GetTicketRequest) GetIncludeComments() bool {
 	return false
 }
 
+func (x *GetTicketRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 type GetTicketResponse struct {
 	state         protoimpl.MessageState       `protogen:"open.v1"`
 	Ticket        *GetTicketResponse_Ticket    `protobuf:"bytes,1,opt,name=ticket,proto3" json:"ticket,omitempty"`
@@ -746,7 +871,7 @@ type GetTicketResponse struct {
 
 func (x *GetTicketResponse) Reset() {
 	*x = GetTicketResponse{}
-	mi := &file_review_service_v1_review_proto_msgTypes[11]
+	mi := &file_review_service_v1_review_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -758,7 +883,7 @@ func (x *GetTicketResponse) String() string {
 func (*GetTicketResponse) ProtoMessage() {}
 
 func (x *GetTicketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[11]
+	mi := &file_review_service_v1_review_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -771,7 +896,7 @@ func (x *GetTicketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketResponse.ProtoReflect.Descriptor instead.
 func (*GetTicketResponse) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{11}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetTicketResponse) GetTicket() *GetTicketResponse_Ticket {
@@ -815,7 +940,7 @@ type ListTicketsResponse_Ticket struct {
 
 func (x *ListTicketsResponse_Ticket) Reset() {
 	*x = ListTicketsResponse_Ticket{}
-	mi := &file_review_service_v1_review_proto_msgTypes[12]
+	mi := &file_review_service_v1_review_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -827,7 +952,7 @@ func (x *ListTicketsResponse_Ticket) String() string {
 func (*ListTicketsResponse_Ticket) ProtoMessage() {}
 
 func (x *ListTicketsResponse_Ticket) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[12]
+	mi := &file_review_service_v1_review_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -840,7 +965,7 @@ func (x *ListTicketsResponse_Ticket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTicketsResponse_Ticket.ProtoReflect.Descriptor instead.
 func (*ListTicketsResponse_Ticket) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9, 0}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{10, 0}
 }
 
 func (x *ListTicketsResponse_Ticket) GetCreatedAt() *timestamppb.Timestamp {
@@ -1008,7 +1133,7 @@ type GetTicketResponse_Ticket struct {
 
 func (x *GetTicketResponse_Ticket) Reset() {
 	*x = GetTicketResponse_Ticket{}
-	mi := &file_review_service_v1_review_proto_msgTypes[13]
+	mi := &file_review_service_v1_review_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1020,7 +1145,7 @@ func (x *GetTicketResponse_Ticket) String() string {
 func (*GetTicketResponse_Ticket) ProtoMessage() {}
 
 func (x *GetTicketResponse_Ticket) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[13]
+	mi := &file_review_service_v1_review_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1033,7 +1158,7 @@ func (x *GetTicketResponse_Ticket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketResponse_Ticket.ProtoReflect.Descriptor instead.
 func (*GetTicketResponse_Ticket) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{11, 0}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{12, 0}
 }
 
 func (x *GetTicketResponse_Ticket) GetId() int64 {
@@ -1217,7 +1342,7 @@ type GetTicketResponse_Comment struct {
 
 func (x *GetTicketResponse_Comment) Reset() {
 	*x = GetTicketResponse_Comment{}
-	mi := &file_review_service_v1_review_proto_msgTypes[14]
+	mi := &file_review_service_v1_review_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1229,7 +1354,7 @@ func (x *GetTicketResponse_Comment) String() string {
 func (*GetTicketResponse_Comment) ProtoMessage() {}
 
 func (x *GetTicketResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[14]
+	mi := &file_review_service_v1_review_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1242,7 +1367,7 @@ func (x *GetTicketResponse_Comment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketResponse_Comment.ProtoReflect.Descriptor instead.
 func (*GetTicketResponse_Comment) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{11, 1}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{12, 1}
 }
 
 func (x *GetTicketResponse_Comment) GetId() int64 {
@@ -1284,7 +1409,7 @@ var File_review_service_v1_review_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_review_proto_rawDesc = "" +
 	"\n" +
-	"\x1ereview/service/v1/review.proto\x12\x15api.review.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"J\n" +
+	"\x1ereview/service/v1/review.proto\x12\x15api.review.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"J\n" +
 	"\x15CreateWithdrawRequest\x121\n" +
 	"\arequest\x18\x01 \x01(\v2\x17.google.protobuf.StructR\arequest\"5\n" +
 	"\x16CreateWithdrawResponse\x12\x1b\n" +
@@ -1305,9 +1430,10 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x13CancelTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12*\n" +
 	"\x11canceller_user_id\x18\x02 \x01(\x03R\x0fcancellerUserId\"\x16\n" +
-	"\x14CancelTicketResponse\"\xe4\x03\n" +
+	"\x14CancelTicketResponse\"\xac\x04\n" +
 	"\x12ListTicketsRequest\x12\x1c\n" +
-	"\auser_id\x18\x02 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12$\n" +
+	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12$\n" +
 	"\voperator_id\x18\x03 \x01(\x03H\x01R\n" +
 	"operatorId\x88\x01\x01\x12 \n" +
 	"\tticket_id\x18\x04 \x01(\x03H\x02R\bticketId\x88\x01\x01\x12\x1f\n" +
@@ -1321,6 +1447,29 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	" \x01(\x05H\bR\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x0e\n" +
+	"\f_operator_idB\f\n" +
+	"\n" +
+	"_ticket_idB\v\n" +
+	"\t_currencyB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_timeB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\x8a\x04\n" +
+	"\x1aListOperatorTicketsRequest\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12$\n" +
+	"\voperator_id\x18\x03 \x01(\x03H\x00R\n" +
+	"operatorId\x88\x01\x01\x12 \n" +
+	"\tticket_id\x18\x04 \x01(\x03H\x01R\bticketId\x88\x01\x01\x12\x1f\n" +
+	"\bcurrency\x18\x05 \x01(\tH\x02R\bcurrency\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x06 \x01(\tH\x03R\x06status\x88\x01\x01\x12>\n" +
+	"\n" +
+	"start_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\t \x01(\x05H\x06R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\n" +
+	" \x01(\x05H\aR\bpageSize\x88\x01\x01B\x0e\n" +
 	"\f_operator_idB\f\n" +
 	"\n" +
 	"_ticket_idB\v\n" +
@@ -1373,10 +1522,11 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x03fee\x18\x10 \x01(\tR\x03fee\x12\x16\n" +
 	"\x06status\x18\x11 \x01(\tR\x06status\x12+\n" +
 	"\x11reviewer_username\x18\x12 \x01(\tR\x10reviewerUsername\x12'\n" +
-	"\x0freview_duration\x18\x13 \x01(\x05R\x0ereviewDuration\"t\n" +
+	"\x0freview_duration\x18\x13 \x01(\x05R\x0ereviewDuration\"\xbc\x01\n" +
 	"\x10GetTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
-	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01B\x13\n" +
+	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01\x12F\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x13\n" +
 	"\x11_include_comments\"\x9f\n" +
 	"\n" +
 	"\x11GetTicketResponse\x12G\n" +
@@ -1418,7 +1568,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x0eauthor_user_id\x18\x03 \x01(\x03R\fauthorUserId\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\xbe\x06\n" +
+	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\xb6\a\n" +
 	"\x06Review\x12\x8d\x01\n" +
 	"\x0eCreateWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/review/withdraw\x12\x9e\x01\n" +
 	"\x16CreateOperatorWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/review/operator/withdraw\x12i\n" +
@@ -1426,7 +1576,8 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\n" +
 	"AddComment\x12(.api.review.service.v1.AddCommentRequest\x1a).api.review.service.v1.AddCommentResponse\"\x00\x12i\n" +
 	"\fCancelTicket\x12*.api.review.service.v1.CancelTicketRequest\x1a+.api.review.service.v1.CancelTicketResponse\"\x00\x12f\n" +
-	"\vListTickets\x12).api.review.service.v1.ListTicketsRequest\x1a*.api.review.service.v1.ListTicketsResponse\"\x00\x12`\n" +
+	"\vListTickets\x12).api.review.service.v1.ListTicketsRequest\x1a*.api.review.service.v1.ListTicketsResponse\"\x00\x12v\n" +
+	"\x13ListOperatorTickets\x121.api.review.service.v1.ListOperatorTicketsRequest\x1a*.api.review.service.v1.ListTicketsResponse\"\x00\x12`\n" +
 	"\tGetTicket\x12'.api.review.service.v1.GetTicketRequest\x1a(.api.review.service.v1.GetTicketResponse\"\x00BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"
 
@@ -1442,7 +1593,7 @@ func file_review_service_v1_review_proto_rawDescGZIP() []byte {
 	return file_review_service_v1_review_proto_rawDescData
 }
 
-var file_review_service_v1_review_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_review_service_v1_review_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_review_service_v1_review_proto_goTypes = []any{
 	(*CreateWithdrawRequest)(nil),      // 0: api.review.service.v1.CreateWithdrawRequest
 	(*CreateWithdrawResponse)(nil),     // 1: api.review.service.v1.CreateWithdrawResponse
@@ -1453,42 +1604,51 @@ var file_review_service_v1_review_proto_goTypes = []any{
 	(*CancelTicketRequest)(nil),        // 6: api.review.service.v1.CancelTicketRequest
 	(*CancelTicketResponse)(nil),       // 7: api.review.service.v1.CancelTicketResponse
 	(*ListTicketsRequest)(nil),         // 8: api.review.service.v1.ListTicketsRequest
-	(*ListTicketsResponse)(nil),        // 9: api.review.service.v1.ListTicketsResponse
-	(*GetTicketRequest)(nil),           // 10: api.review.service.v1.GetTicketRequest
-	(*GetTicketResponse)(nil),          // 11: api.review.service.v1.GetTicketResponse
-	(*ListTicketsResponse_Ticket)(nil), // 12: api.review.service.v1.ListTicketsResponse.Ticket
-	(*GetTicketResponse_Ticket)(nil),   // 13: api.review.service.v1.GetTicketResponse.Ticket
-	(*GetTicketResponse_Comment)(nil),  // 14: api.review.service.v1.GetTicketResponse.Comment
-	(*structpb.Struct)(nil),            // 15: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),      // 16: google.protobuf.Timestamp
+	(*ListOperatorTicketsRequest)(nil), // 9: api.review.service.v1.ListOperatorTicketsRequest
+	(*ListTicketsResponse)(nil),        // 10: api.review.service.v1.ListTicketsResponse
+	(*GetTicketRequest)(nil),           // 11: api.review.service.v1.GetTicketRequest
+	(*GetTicketResponse)(nil),          // 12: api.review.service.v1.GetTicketResponse
+	(*ListTicketsResponse_Ticket)(nil), // 13: api.review.service.v1.ListTicketsResponse.Ticket
+	(*GetTicketResponse_Ticket)(nil),   // 14: api.review.service.v1.GetTicketResponse.Ticket
+	(*GetTicketResponse_Comment)(nil),  // 15: api.review.service.v1.GetTicketResponse.Comment
+	(*structpb.Struct)(nil),            // 16: google.protobuf.Struct
+	(*common.OperatorContext)(nil),     // 17: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),      // 18: google.protobuf.Timestamp
 }
 var file_review_service_v1_review_proto_depIdxs = []int32{
-	15, // 0: api.review.service.v1.CreateWithdrawRequest.request:type_name -> google.protobuf.Struct
-	16, // 1: api.review.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	16, // 2: api.review.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
-	12, // 3: api.review.service.v1.ListTicketsResponse.tickets:type_name -> api.review.service.v1.ListTicketsResponse.Ticket
-	13, // 4: api.review.service.v1.GetTicketResponse.ticket:type_name -> api.review.service.v1.GetTicketResponse.Ticket
-	14, // 5: api.review.service.v1.GetTicketResponse.comments:type_name -> api.review.service.v1.GetTicketResponse.Comment
-	16, // 6: api.review.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 7: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
-	0,  // 8: api.review.service.v1.Review.CreateOperatorWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
-	2,  // 9: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
-	4,  // 10: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
-	6,  // 11: api.review.service.v1.Review.CancelTicket:input_type -> api.review.service.v1.CancelTicketRequest
-	8,  // 12: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
-	10, // 13: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
-	1,  // 14: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	1,  // 15: api.review.service.v1.Review.CreateOperatorWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	3,  // 16: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
-	5,  // 17: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
-	7,  // 18: api.review.service.v1.Review.CancelTicket:output_type -> api.review.service.v1.CancelTicketResponse
-	9,  // 19: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	11, // 20: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
-	14, // [14:21] is the sub-list for method output_type
-	7,  // [7:14] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	16, // 0: api.review.service.v1.CreateWithdrawRequest.request:type_name -> google.protobuf.Struct
+	17, // 1: api.review.service.v1.ListTicketsRequest.operator_context:type_name -> api.common.OperatorContext
+	18, // 2: api.review.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	18, // 3: api.review.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	17, // 4: api.review.service.v1.ListOperatorTicketsRequest.operator_context:type_name -> api.common.OperatorContext
+	18, // 5: api.review.service.v1.ListOperatorTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	18, // 6: api.review.service.v1.ListOperatorTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	13, // 7: api.review.service.v1.ListTicketsResponse.tickets:type_name -> api.review.service.v1.ListTicketsResponse.Ticket
+	17, // 8: api.review.service.v1.GetTicketRequest.operator_context:type_name -> api.common.OperatorContext
+	14, // 9: api.review.service.v1.GetTicketResponse.ticket:type_name -> api.review.service.v1.GetTicketResponse.Ticket
+	15, // 10: api.review.service.v1.GetTicketResponse.comments:type_name -> api.review.service.v1.GetTicketResponse.Comment
+	18, // 11: api.review.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 12: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
+	0,  // 13: api.review.service.v1.Review.CreateOperatorWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
+	2,  // 14: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
+	4,  // 15: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
+	6,  // 16: api.review.service.v1.Review.CancelTicket:input_type -> api.review.service.v1.CancelTicketRequest
+	8,  // 17: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
+	9,  // 18: api.review.service.v1.Review.ListOperatorTickets:input_type -> api.review.service.v1.ListOperatorTicketsRequest
+	11, // 19: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
+	1,  // 20: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	1,  // 21: api.review.service.v1.Review.CreateOperatorWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	3,  // 22: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
+	5,  // 23: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
+	7,  // 24: api.review.service.v1.Review.CancelTicket:output_type -> api.review.service.v1.CancelTicketResponse
+	10, // 25: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	10, // 26: api.review.service.v1.Review.ListOperatorTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	12, // 27: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
+	20, // [20:28] is the sub-list for method output_type
+	12, // [12:20] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_review_service_v1_review_proto_init() }
@@ -1497,14 +1657,15 @@ func file_review_service_v1_review_proto_init() {
 		return
 	}
 	file_review_service_v1_review_proto_msgTypes[8].OneofWrappers = []any{}
-	file_review_service_v1_review_proto_msgTypes[10].OneofWrappers = []any{}
+	file_review_service_v1_review_proto_msgTypes[9].OneofWrappers = []any{}
+	file_review_service_v1_review_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_review_service_v1_review_proto_rawDesc), len(file_review_service_v1_review_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
