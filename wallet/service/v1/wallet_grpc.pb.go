@@ -44,9 +44,9 @@ const (
 	Wallet_UpdateUserCurrency_FullMethodName                  = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
 	Wallet_OperatorTransfer_FullMethodName                    = "/api.wallet.service.v1.Wallet/OperatorTransfer"
 	Wallet_OperatorSwap_FullMethodName                        = "/api.wallet.service.v1.Wallet/OperatorSwap"
-	Wallet_OperatorBalanceFreeze_FullMethodName               = "/api.wallet.service.v1.Wallet/OperatorBalanceFreeze"
-	Wallet_OperatorBalanceRollback_FullMethodName             = "/api.wallet.service.v1.Wallet/OperatorBalanceRollback"
-	Wallet_OperatorBalanceSettle_FullMethodName               = "/api.wallet.service.v1.Wallet/OperatorBalanceSettle"
+	Wallet_OperatorFreeze_FullMethodName                      = "/api.wallet.service.v1.Wallet/OperatorFreeze"
+	Wallet_OperatorRollback_FullMethodName                    = "/api.wallet.service.v1.Wallet/OperatorRollback"
+	Wallet_OperatorSettle_FullMethodName                      = "/api.wallet.service.v1.Wallet/OperatorSettle"
 	Wallet_ListOperatorBalances_FullMethodName                = "/api.wallet.service.v1.Wallet/ListOperatorBalances"
 )
 
@@ -92,11 +92,11 @@ type WalletClient interface {
 	// Swap cash between two balances of the same operator
 	OperatorSwap(ctx context.Context, in *OperatorSwapRequest, opts ...grpc.CallOption) (*OperatorSwapResponse, error)
 	// Freeze cash of a balance of an operator
-	OperatorBalanceFreeze(ctx context.Context, in *OperatorBalanceFreezeRequest, opts ...grpc.CallOption) (*OperatorBalanceFreezeResponse, error)
+	OperatorFreeze(ctx context.Context, in *OperatorFreezeRequest, opts ...grpc.CallOption) (*OperatorFreezeResponse, error)
 	// Rollback frozen cash of an operator
-	OperatorBalanceRollback(ctx context.Context, in *OperatorBalanceRollbackRequest, opts ...grpc.CallOption) (*OperatorBalanceRollbackResponse, error)
+	OperatorRollback(ctx context.Context, in *OperatorRollbackRequest, opts ...grpc.CallOption) (*OperatorRollbackResponse, error)
 	// Settle frozen cash of an operator
-	OperatorBalanceSettle(ctx context.Context, in *OperatorBalanceSettleRequest, opts ...grpc.CallOption) (*OperatorBalanceSettleResponse, error)
+	OperatorSettle(ctx context.Context, in *OperatorSettleRequest, opts ...grpc.CallOption) (*OperatorSettleResponse, error)
 	// List Operator Balances based on filter
 	ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*ListOperatorBalancesResponse, error)
 }
@@ -359,30 +359,30 @@ func (c *walletClient) OperatorSwap(ctx context.Context, in *OperatorSwapRequest
 	return out, nil
 }
 
-func (c *walletClient) OperatorBalanceFreeze(ctx context.Context, in *OperatorBalanceFreezeRequest, opts ...grpc.CallOption) (*OperatorBalanceFreezeResponse, error) {
+func (c *walletClient) OperatorFreeze(ctx context.Context, in *OperatorFreezeRequest, opts ...grpc.CallOption) (*OperatorFreezeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OperatorBalanceFreezeResponse)
-	err := c.cc.Invoke(ctx, Wallet_OperatorBalanceFreeze_FullMethodName, in, out, cOpts...)
+	out := new(OperatorFreezeResponse)
+	err := c.cc.Invoke(ctx, Wallet_OperatorFreeze_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *walletClient) OperatorBalanceRollback(ctx context.Context, in *OperatorBalanceRollbackRequest, opts ...grpc.CallOption) (*OperatorBalanceRollbackResponse, error) {
+func (c *walletClient) OperatorRollback(ctx context.Context, in *OperatorRollbackRequest, opts ...grpc.CallOption) (*OperatorRollbackResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OperatorBalanceRollbackResponse)
-	err := c.cc.Invoke(ctx, Wallet_OperatorBalanceRollback_FullMethodName, in, out, cOpts...)
+	out := new(OperatorRollbackResponse)
+	err := c.cc.Invoke(ctx, Wallet_OperatorRollback_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *walletClient) OperatorBalanceSettle(ctx context.Context, in *OperatorBalanceSettleRequest, opts ...grpc.CallOption) (*OperatorBalanceSettleResponse, error) {
+func (c *walletClient) OperatorSettle(ctx context.Context, in *OperatorSettleRequest, opts ...grpc.CallOption) (*OperatorSettleResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OperatorBalanceSettleResponse)
-	err := c.cc.Invoke(ctx, Wallet_OperatorBalanceSettle_FullMethodName, in, out, cOpts...)
+	out := new(OperatorSettleResponse)
+	err := c.cc.Invoke(ctx, Wallet_OperatorSettle_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -441,11 +441,11 @@ type WalletServer interface {
 	// Swap cash between two balances of the same operator
 	OperatorSwap(context.Context, *OperatorSwapRequest) (*OperatorSwapResponse, error)
 	// Freeze cash of a balance of an operator
-	OperatorBalanceFreeze(context.Context, *OperatorBalanceFreezeRequest) (*OperatorBalanceFreezeResponse, error)
+	OperatorFreeze(context.Context, *OperatorFreezeRequest) (*OperatorFreezeResponse, error)
 	// Rollback frozen cash of an operator
-	OperatorBalanceRollback(context.Context, *OperatorBalanceRollbackRequest) (*OperatorBalanceRollbackResponse, error)
+	OperatorRollback(context.Context, *OperatorRollbackRequest) (*OperatorRollbackResponse, error)
 	// Settle frozen cash of an operator
-	OperatorBalanceSettle(context.Context, *OperatorBalanceSettleRequest) (*OperatorBalanceSettleResponse, error)
+	OperatorSettle(context.Context, *OperatorSettleRequest) (*OperatorSettleResponse, error)
 	// List Operator Balances based on filter
 	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error)
 	mustEmbedUnimplementedWalletServer()
@@ -533,14 +533,14 @@ func (UnimplementedWalletServer) OperatorTransfer(context.Context, *OperatorTran
 func (UnimplementedWalletServer) OperatorSwap(context.Context, *OperatorSwapRequest) (*OperatorSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OperatorSwap not implemented")
 }
-func (UnimplementedWalletServer) OperatorBalanceFreeze(context.Context, *OperatorBalanceFreezeRequest) (*OperatorBalanceFreezeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OperatorBalanceFreeze not implemented")
+func (UnimplementedWalletServer) OperatorFreeze(context.Context, *OperatorFreezeRequest) (*OperatorFreezeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OperatorFreeze not implemented")
 }
-func (UnimplementedWalletServer) OperatorBalanceRollback(context.Context, *OperatorBalanceRollbackRequest) (*OperatorBalanceRollbackResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OperatorBalanceRollback not implemented")
+func (UnimplementedWalletServer) OperatorRollback(context.Context, *OperatorRollbackRequest) (*OperatorRollbackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OperatorRollback not implemented")
 }
-func (UnimplementedWalletServer) OperatorBalanceSettle(context.Context, *OperatorBalanceSettleRequest) (*OperatorBalanceSettleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OperatorBalanceSettle not implemented")
+func (UnimplementedWalletServer) OperatorSettle(context.Context, *OperatorSettleRequest) (*OperatorSettleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OperatorSettle not implemented")
 }
 func (UnimplementedWalletServer) ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorBalances not implemented")
@@ -1016,56 +1016,56 @@ func _Wallet_OperatorSwap_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_OperatorBalanceFreeze_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OperatorBalanceFreezeRequest)
+func _Wallet_OperatorFreeze_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OperatorFreezeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).OperatorBalanceFreeze(ctx, in)
+		return srv.(WalletServer).OperatorFreeze(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_OperatorBalanceFreeze_FullMethodName,
+		FullMethod: Wallet_OperatorFreeze_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).OperatorBalanceFreeze(ctx, req.(*OperatorBalanceFreezeRequest))
+		return srv.(WalletServer).OperatorFreeze(ctx, req.(*OperatorFreezeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_OperatorBalanceRollback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OperatorBalanceRollbackRequest)
+func _Wallet_OperatorRollback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OperatorRollbackRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).OperatorBalanceRollback(ctx, in)
+		return srv.(WalletServer).OperatorRollback(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_OperatorBalanceRollback_FullMethodName,
+		FullMethod: Wallet_OperatorRollback_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).OperatorBalanceRollback(ctx, req.(*OperatorBalanceRollbackRequest))
+		return srv.(WalletServer).OperatorRollback(ctx, req.(*OperatorRollbackRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_OperatorBalanceSettle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OperatorBalanceSettleRequest)
+func _Wallet_OperatorSettle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OperatorSettleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).OperatorBalanceSettle(ctx, in)
+		return srv.(WalletServer).OperatorSettle(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_OperatorBalanceSettle_FullMethodName,
+		FullMethod: Wallet_OperatorSettle_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).OperatorBalanceSettle(ctx, req.(*OperatorBalanceSettleRequest))
+		return srv.(WalletServer).OperatorSettle(ctx, req.(*OperatorSettleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1196,16 +1196,16 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Wallet_OperatorSwap_Handler,
 		},
 		{
-			MethodName: "OperatorBalanceFreeze",
-			Handler:    _Wallet_OperatorBalanceFreeze_Handler,
+			MethodName: "OperatorFreeze",
+			Handler:    _Wallet_OperatorFreeze_Handler,
 		},
 		{
-			MethodName: "OperatorBalanceRollback",
-			Handler:    _Wallet_OperatorBalanceRollback_Handler,
+			MethodName: "OperatorRollback",
+			Handler:    _Wallet_OperatorRollback_Handler,
 		},
 		{
-			MethodName: "OperatorBalanceSettle",
-			Handler:    _Wallet_OperatorBalanceSettle_Handler,
+			MethodName: "OperatorSettle",
+			Handler:    _Wallet_OperatorSettle_Handler,
 		},
 		{
 			MethodName: "ListOperatorBalances",

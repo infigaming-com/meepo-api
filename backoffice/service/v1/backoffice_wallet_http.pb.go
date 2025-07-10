@@ -27,9 +27,9 @@ const OperationBackofficeWalletGetWallets = "/api.backoffice.service.v1.Backoffi
 const OperationBackofficeWalletListOperatorBalances = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
 const OperationBackofficeWalletListWalletBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListWalletBalanceTransactions"
 const OperationBackofficeWalletListWalletCurrencies = "/api.backoffice.service.v1.BackofficeWallet/ListWalletCurrencies"
-const OperationBackofficeWalletOperatorBalanceFreeze = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceFreeze"
-const OperationBackofficeWalletOperatorBalanceRollback = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceRollback"
-const OperationBackofficeWalletOperatorBalanceSettle = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceSettle"
+const OperationBackofficeWalletOperatorFreeze = "/api.backoffice.service.v1.BackofficeWallet/OperatorFreeze"
+const OperationBackofficeWalletOperatorRollback = "/api.backoffice.service.v1.BackofficeWallet/OperatorRollback"
+const OperationBackofficeWalletOperatorSettle = "/api.backoffice.service.v1.BackofficeWallet/OperatorSettle"
 const OperationBackofficeWalletOperatorSwap = "/api.backoffice.service.v1.BackofficeWallet/OperatorSwap"
 const OperationBackofficeWalletOperatorTransfer = "/api.backoffice.service.v1.BackofficeWallet/OperatorTransfer"
 const OperationBackofficeWalletUpdateWallet = "/api.backoffice.service.v1.BackofficeWallet/UpdateWallet"
@@ -46,12 +46,12 @@ type BackofficeWalletHTTPServer interface {
 	// ListWalletBalanceTransactions ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
 	ListWalletBalanceTransactions(context.Context, *ListWalletBalanceTransactionsRequest) (*ListWalletBalanceTransactionsResponse, error)
 	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*ListWalletCurrenciesResponse, error)
-	// OperatorBalanceFreeze OperatorBalanceFreeze freezes cash of an operator
-	OperatorBalanceFreeze(context.Context, *OperatorBalanceFreezeRequest) (*OperatorBalanceFreezeResponse, error)
-	// OperatorBalanceRollback OperatorRollback rolls back frozen cash of an operator
-	OperatorBalanceRollback(context.Context, *OperatorBalanceRollbackRequest) (*OperatorBalanceRollbackResponse, error)
-	// OperatorBalanceSettle OperatorSettle settles frozen cash of an operator
-	OperatorBalanceSettle(context.Context, *OperatorBalanceSettleRequest) (*OperatorBalanceSettleResponse, error)
+	// OperatorFreeze OperatorFreeze freezes cash of an operator
+	OperatorFreeze(context.Context, *OperatorFreezeRequest) (*OperatorFreezeResponse, error)
+	// OperatorRollback OperatorRollback rolls back frozen cash of an operator
+	OperatorRollback(context.Context, *OperatorRollbackRequest) (*OperatorRollbackResponse, error)
+	// OperatorSettle OperatorSettle settles frozen cash of an operator
+	OperatorSettle(context.Context, *OperatorSettleRequest) (*OperatorSettleResponse, error)
 	// OperatorSwap OperatorSwap swaps cash between two balances of the same operator
 	OperatorSwap(context.Context, *OperatorSwapRequest) (*OperatorSwapResponse, error)
 	// OperatorTransfer OperatorTransfer transfers cash from one operator to its company operator
@@ -74,9 +74,9 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/exchange-rates/get", _BackofficeWallet_GetExchangeRates0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/transfer", _BackofficeWallet_OperatorTransfer0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/swap", _BackofficeWallet_OperatorSwap0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/operator/freeze", _BackofficeWallet_OperatorBalanceFreeze0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/operator/rollback", _BackofficeWallet_OperatorBalanceRollback0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/operator/settle", _BackofficeWallet_OperatorBalanceSettle0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/operator/freeze", _BackofficeWallet_OperatorFreeze0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/operator/rollback", _BackofficeWallet_OperatorRollback0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/operator/settle", _BackofficeWallet_OperatorSettle0_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -343,68 +343,68 @@ func _BackofficeWallet_OperatorSwap0_HTTP_Handler(srv BackofficeWalletHTTPServer
 	}
 }
 
-func _BackofficeWallet_OperatorBalanceFreeze0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_OperatorFreeze0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in OperatorBalanceFreezeRequest
+		var in OperatorFreezeRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeWalletOperatorBalanceFreeze)
+		http.SetOperation(ctx, OperationBackofficeWalletOperatorFreeze)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.OperatorBalanceFreeze(ctx, req.(*OperatorBalanceFreezeRequest))
+			return srv.OperatorFreeze(ctx, req.(*OperatorFreezeRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*OperatorBalanceFreezeResponse)
+		reply := out.(*OperatorFreezeResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _BackofficeWallet_OperatorBalanceRollback0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_OperatorRollback0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in OperatorBalanceRollbackRequest
+		var in OperatorRollbackRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeWalletOperatorBalanceRollback)
+		http.SetOperation(ctx, OperationBackofficeWalletOperatorRollback)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.OperatorBalanceRollback(ctx, req.(*OperatorBalanceRollbackRequest))
+			return srv.OperatorRollback(ctx, req.(*OperatorRollbackRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*OperatorBalanceRollbackResponse)
+		reply := out.(*OperatorRollbackResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _BackofficeWallet_OperatorBalanceSettle0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_OperatorSettle0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in OperatorBalanceSettleRequest
+		var in OperatorSettleRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeWalletOperatorBalanceSettle)
+		http.SetOperation(ctx, OperationBackofficeWalletOperatorSettle)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.OperatorBalanceSettle(ctx, req.(*OperatorBalanceSettleRequest))
+			return srv.OperatorSettle(ctx, req.(*OperatorSettleRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*OperatorBalanceSettleResponse)
+		reply := out.(*OperatorSettleResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -418,9 +418,9 @@ type BackofficeWalletHTTPClient interface {
 	ListOperatorBalances(ctx context.Context, req *ListOperatorBalancesRequest, opts ...http.CallOption) (rsp *ListOperatorBalancesResponse, err error)
 	ListWalletBalanceTransactions(ctx context.Context, req *ListWalletBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListWalletBalanceTransactionsResponse, err error)
 	ListWalletCurrencies(ctx context.Context, req *ListWalletCurrenciesRequest, opts ...http.CallOption) (rsp *ListWalletCurrenciesResponse, err error)
-	OperatorBalanceFreeze(ctx context.Context, req *OperatorBalanceFreezeRequest, opts ...http.CallOption) (rsp *OperatorBalanceFreezeResponse, err error)
-	OperatorBalanceRollback(ctx context.Context, req *OperatorBalanceRollbackRequest, opts ...http.CallOption) (rsp *OperatorBalanceRollbackResponse, err error)
-	OperatorBalanceSettle(ctx context.Context, req *OperatorBalanceSettleRequest, opts ...http.CallOption) (rsp *OperatorBalanceSettleResponse, err error)
+	OperatorFreeze(ctx context.Context, req *OperatorFreezeRequest, opts ...http.CallOption) (rsp *OperatorFreezeResponse, err error)
+	OperatorRollback(ctx context.Context, req *OperatorRollbackRequest, opts ...http.CallOption) (rsp *OperatorRollbackResponse, err error)
+	OperatorSettle(ctx context.Context, req *OperatorSettleRequest, opts ...http.CallOption) (rsp *OperatorSettleResponse, err error)
 	OperatorSwap(ctx context.Context, req *OperatorSwapRequest, opts ...http.CallOption) (rsp *OperatorSwapResponse, err error)
 	OperatorTransfer(ctx context.Context, req *OperatorTransferRequest, opts ...http.CallOption) (rsp *OperatorTransferResponse, err error)
 	UpdateWallet(ctx context.Context, req *UpdateWalletRequest, opts ...http.CallOption) (rsp *UpdateWalletResponse, err error)
@@ -539,11 +539,11 @@ func (c *BackofficeWalletHTTPClientImpl) ListWalletCurrencies(ctx context.Contex
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) OperatorBalanceFreeze(ctx context.Context, in *OperatorBalanceFreezeRequest, opts ...http.CallOption) (*OperatorBalanceFreezeResponse, error) {
-	var out OperatorBalanceFreezeResponse
+func (c *BackofficeWalletHTTPClientImpl) OperatorFreeze(ctx context.Context, in *OperatorFreezeRequest, opts ...http.CallOption) (*OperatorFreezeResponse, error) {
+	var out OperatorFreezeResponse
 	pattern := "/v1/backoffice/wallet/operator/freeze"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletOperatorBalanceFreeze))
+	opts = append(opts, http.Operation(OperationBackofficeWalletOperatorFreeze))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -552,11 +552,11 @@ func (c *BackofficeWalletHTTPClientImpl) OperatorBalanceFreeze(ctx context.Conte
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) OperatorBalanceRollback(ctx context.Context, in *OperatorBalanceRollbackRequest, opts ...http.CallOption) (*OperatorBalanceRollbackResponse, error) {
-	var out OperatorBalanceRollbackResponse
+func (c *BackofficeWalletHTTPClientImpl) OperatorRollback(ctx context.Context, in *OperatorRollbackRequest, opts ...http.CallOption) (*OperatorRollbackResponse, error) {
+	var out OperatorRollbackResponse
 	pattern := "/v1/backoffice/wallet/operator/rollback"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletOperatorBalanceRollback))
+	opts = append(opts, http.Operation(OperationBackofficeWalletOperatorRollback))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -565,11 +565,11 @@ func (c *BackofficeWalletHTTPClientImpl) OperatorBalanceRollback(ctx context.Con
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) OperatorBalanceSettle(ctx context.Context, in *OperatorBalanceSettleRequest, opts ...http.CallOption) (*OperatorBalanceSettleResponse, error) {
-	var out OperatorBalanceSettleResponse
+func (c *BackofficeWalletHTTPClientImpl) OperatorSettle(ctx context.Context, in *OperatorSettleRequest, opts ...http.CallOption) (*OperatorSettleResponse, error) {
+	var out OperatorSettleResponse
 	pattern := "/v1/backoffice/wallet/operator/settle"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletOperatorBalanceSettle))
+	opts = append(opts, http.Operation(OperationBackofficeWalletOperatorSettle))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
