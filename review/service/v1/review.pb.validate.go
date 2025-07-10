@@ -961,6 +961,18 @@ func (m *ListTicketsRequest) validate(all bool) error {
 		// no validation rules for OperatorId
 	}
 
+	if m.CompanyOperatorId != nil {
+		// no validation rules for CompanyOperatorId
+	}
+
+	if m.RetailerOperatorId != nil {
+		// no validation rules for RetailerOperatorId
+	}
+
+	if m.SystemOperatorId != nil {
+		// no validation rules for SystemOperatorId
+	}
+
 	if m.TicketId != nil {
 		// no validation rules for TicketId
 	}
@@ -1180,6 +1192,18 @@ func (m *ListOperatorTicketsRequest) validate(all bool) error {
 
 	if m.OperatorId != nil {
 		// no validation rules for OperatorId
+	}
+
+	if m.CompanyOperatorId != nil {
+		// no validation rules for CompanyOperatorId
+	}
+
+	if m.RetailerOperatorId != nil {
+		// no validation rules for RetailerOperatorId
+	}
+
+	if m.SystemOperatorId != nil {
+		// no validation rules for SystemOperatorId
 	}
 
 	if m.TicketId != nil {

@@ -19,12 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeReview_ListTickets_FullMethodName   = "/api.backoffice.service.v1.BackofficeReview/ListTickets"
-	BackofficeReview_GetTicket_FullMethodName     = "/api.backoffice.service.v1.BackofficeReview/GetTicket"
-	BackofficeReview_ReviewTicket_FullMethodName  = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
-	BackofficeReview_AddComment_FullMethodName    = "/api.backoffice.service.v1.BackofficeReview/AddComment"
-	BackofficeReview_CancelTicket_FullMethodName  = "/api.backoffice.service.v1.BackofficeReview/CancelTicket"
-	BackofficeReview_GetTicketById_FullMethodName = "/api.backoffice.service.v1.BackofficeReview/GetTicketById"
+	BackofficeReview_ListTickets_FullMethodName         = "/api.backoffice.service.v1.BackofficeReview/ListTickets"
+	BackofficeReview_ListOperatorTickets_FullMethodName = "/api.backoffice.service.v1.BackofficeReview/ListOperatorTickets"
+	BackofficeReview_GetTicket_FullMethodName           = "/api.backoffice.service.v1.BackofficeReview/GetTicket"
+	BackofficeReview_ReviewTicket_FullMethodName        = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
+	BackofficeReview_AddComment_FullMethodName          = "/api.backoffice.service.v1.BackofficeReview/AddComment"
+	BackofficeReview_CancelTicket_FullMethodName        = "/api.backoffice.service.v1.BackofficeReview/CancelTicket"
+	BackofficeReview_GetTicketById_FullMethodName       = "/api.backoffice.service.v1.BackofficeReview/GetTicketById"
 )
 
 // BackofficeReviewClient is the client API for BackofficeReview service.
@@ -32,6 +33,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeReviewClient interface {
 	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
+	ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
 	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error)
 	ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error)
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
@@ -51,6 +53,16 @@ func (c *backofficeReviewClient) ListTickets(ctx context.Context, in *ListTicket
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListTicketsResponse)
 	err := c.cc.Invoke(ctx, BackofficeReview_ListTickets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeReviewClient) ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTicketsResponse)
+	err := c.cc.Invoke(ctx, BackofficeReview_ListOperatorTickets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -112,6 +124,7 @@ func (c *backofficeReviewClient) GetTicketById(ctx context.Context, in *GetTicke
 // for forward compatibility.
 type BackofficeReviewServer interface {
 	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
+	ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*ListTicketsResponse, error)
 	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
@@ -129,6 +142,9 @@ type UnimplementedBackofficeReviewServer struct{}
 
 func (UnimplementedBackofficeReviewServer) ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTickets not implemented")
+}
+func (UnimplementedBackofficeReviewServer) ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*ListTicketsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorTickets not implemented")
 }
 func (UnimplementedBackofficeReviewServer) GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTicket not implemented")
@@ -180,6 +196,24 @@ func _BackofficeReview_ListTickets_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeReviewServer).ListTickets(ctx, req.(*ListTicketsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeReview_ListOperatorTickets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorTicketsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReviewServer).ListOperatorTickets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReview_ListOperatorTickets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReviewServer).ListOperatorTickets(ctx, req.(*ListOperatorTicketsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -284,6 +318,10 @@ var BackofficeReview_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListTickets",
 			Handler:    _BackofficeReview_ListTickets_Handler,
+		},
+		{
+			MethodName: "ListOperatorTickets",
+			Handler:    _BackofficeReview_ListOperatorTickets_Handler,
 		},
 		{
 			MethodName: "GetTicket",
