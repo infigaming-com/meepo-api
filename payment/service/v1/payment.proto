@@ -30,20 +30,31 @@ message PaymentMethodInfo {
   string psp = 2;
   string type = 3;
   string currency = 4;
+  string currency_type = 5;
+  string contact = 6;
   // Country code where this payment method is available
-  string country = 5;
+  string country = 7;
   // Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
-  string payment_method = 6 [json_name="paymentMethod"];
+  string payment_method = 8 [json_name="paymentMethod"];
   // Fixed Fee on the Amount
-  string fixed_fee = 7;
+  string fixed_fee = 9;
   // Rate Fee 
-  string fee_rate = 8;
+  string fee_rate = 10;
   // Min Amount
-  string min_amount = 9;
+  string min_amount = 11;
   // Max Amount
-  string max_amount = 10;
+  string max_amount = 12;
+  // Fixed Fee on the Amount
+  string psp_fixed_fee = 13;
+  // Rate Fee 
+  string psp_fee_rate = 14;
+  // Min Amount
+  string psp_min_amount = 15;
+  // Max Amount
+  string psp_max_amount = 16;
+  bool enable = 17;
   // JSON schema defining the required fields for this payment method
-  google.protobuf.Struct key_schema = 11 [json_name="keySchema"]; 
+  google.protobuf.Struct key_schema = 18 [json_name="keySchema"]; 
 }
 
 // Response for payment method list
@@ -149,49 +160,53 @@ message PaymentChannelInfo {
   string channel_id = 1 [json_name="channelId"];
   // Type of the channel (e.g., online, offline)
   string type = 2;
+  // Currency type (e.g., Crypto, Fiat)
+  string currency_type = 3;
+  // Services Prvider
+  string psp = 4;
   // Category of the channel (e.g., bank, e-wallet)
-  string category = 3;
+  string category = 5;
   // ID of the operator who owns this channel
-  string operator_id = 4 [json_name="operatorId"];
+  string operator_id = 6 [json_name="operatorId"];
   // Payment method used in this channel
-  string payment_method = 5 [json_name="paymentMethod"];
+  string payment_method = 7 [json_name="paymentMethod"];
   // Tag for categorization or filtering
-  string tag = 6;
+  string tag = 8;
   // Display name of the channel
-  string name = 7;
+  string name = 9;
   // ID of the payment method used
-  string payment_method_id = 8 [json_name="paymentMethodId"];
+  string payment_method_id = 10 [json_name="paymentMethodId"];
   // Currency supported by this channel
-  string currency = 9;
+  string currency = 11;
   // Crypto protocol supported by this channel
-  string protocol = 10;
+  string protocol = 12;
   // Crypto chian supported by this channel
-  string network = 11;
+  string network = 13;
   // Country where this channel is available
-  string country = 12;
+  string country = 14;
   // Specific method used (might be more detailed than payment_method)
-  string method = 13;
+  string method = 15;
   // URL to the logo image for this payment channel
-  string logo = 14;
+  string logo = 16;
   // Minimum amount allowed for deposit transactions
-  string min_deposit_amount = 15 [json_name="minDepositAmount"];
+  string min_deposit_amount = 17 [json_name="minDepositAmount"];
   // Maximum amount allowed for deposit transactions
-  string max_deposit_amount = 16 [json_name="maxDepositAmount"];
+  string max_deposit_amount = 18 [json_name="maxDepositAmount"];
   // Minimum amount allowed for withdrawal transactions
-  string min_withdraw_amount = 17 [json_name="minWithdrawAmount"];
+  string min_withdraw_amount = 19 [json_name="minWithdrawAmount"];
   // Maximum amount allowed for withdrawal transactions
-  string max_withdraw_amount = 18 [json_name="maxWithdrawAmount"];
+  string max_withdraw_amount = 20 [json_name="maxWithdrawAmount"];
   // Estimated arrival time in minutes
-  int32 eat = 19;
+  int32 eat = 21;
   // Fee
-  string fix_fee = 20;
-  string rate_fee = 21;
+  string fix_fee = 22;
+  string rate_fee = 23;
   // JSON schema defining deposit form fields required by this channel
-  google.protobuf.Struct deposit_schema = 22 [json_name="depositSchema"];
+  google.protobuf.Struct deposit_schema = 24 [json_name="depositSchema"];
   // JSON schema defining withdrawal form fields required by this channel
-  google.protobuf.Struct withdraw_schema = 23 [json_name="withdrawSchema"];
-  string source_type = 24;
-  bool enable = 25;
+  google.protobuf.Struct withdraw_schema = 25 [json_name="withdrawSchema"];
+  string source_type = 26;
+  bool enable = 27;
 }
 
 // Request to initiate a deposit
@@ -601,8 +616,7 @@ message GetPaymentChannelPageRequest {
   int32 page = 1;
   // Number of items per page
   int32 page_size = 2 [json_name="pageSize"];
-  
-  // Optional operator ID filter
+    // Optional operator ID filter
   string operator_id = 3 [json_name="operatorId"];
   // Optional channel type filter
   ChannelType type = 4;
@@ -635,6 +649,8 @@ message GetPaymentChannelPageResponse {
   int32 page_size = 4 [json_name="pageSize"];
   // Total number of pages available
   int32 total_pages = 5 [json_name="totalPages"];
+  int32 total_enable_colnt = 6;
+  int32 total_disable_count = 7;
 }
 
 // Request to get transaction detail by ID

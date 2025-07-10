@@ -273,6 +273,10 @@ func (m *PaymentMethodInfo) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for CurrencyType
+
+	// no validation rules for Contact
+
 	// no validation rules for Country
 
 	// no validation rules for PaymentMethod
@@ -284,6 +288,16 @@ func (m *PaymentMethodInfo) validate(all bool) error {
 	// no validation rules for MinAmount
 
 	// no validation rules for MaxAmount
+
+	// no validation rules for PspFixedFee
+
+	// no validation rules for PspFeeRate
+
+	// no validation rules for PspMinAmount
+
+	// no validation rules for PspMaxAmount
+
+	// no validation rules for Enable
 
 	if all {
 		switch v := interface{}(m.GetKeySchema()).(type) {
@@ -1505,6 +1519,10 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 	// no validation rules for ChannelId
 
 	// no validation rules for Type
+
+	// no validation rules for CurrencyType
+
+	// no validation rules for Psp
 
 	// no validation rules for Category
 
@@ -4518,6 +4536,10 @@ func (m *GetPaymentChannelPageResponse) validate(all bool) error {
 	// no validation rules for PageSize
 
 	// no validation rules for TotalPages
+
+	// no validation rules for TotalEnableColnt
+
+	// no validation rules for TotalDisableCount
 
 	if len(errors) > 0 {
 		return GetPaymentChannelPageResponseMultiError(errors)

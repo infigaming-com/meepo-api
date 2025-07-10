@@ -377,23 +377,34 @@ type PaymentMethodInfo struct {
 	// Unique identifier for the payment method
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Currency code supported by this payment method (e.g., USD, EUR, CNY)
-	Psp      string `protobuf:"bytes,2,opt,name=psp,proto3" json:"psp,omitempty"`
-	Type     string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	Psp          string `protobuf:"bytes,2,opt,name=psp,proto3" json:"psp,omitempty"`
+	Type         string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Currency     string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	CurrencyType string `protobuf:"bytes,5,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
+	Contact      string `protobuf:"bytes,6,opt,name=contact,proto3" json:"contact,omitempty"`
 	// Country code where this payment method is available
-	Country string `protobuf:"bytes,5,opt,name=country,proto3" json:"country,omitempty"`
+	Country string `protobuf:"bytes,7,opt,name=country,proto3" json:"country,omitempty"`
 	// Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
-	PaymentMethod string `protobuf:"bytes,6,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	PaymentMethod string `protobuf:"bytes,8,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Fixed Fee on the Amount
-	FixedFee string `protobuf:"bytes,7,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
+	FixedFee string `protobuf:"bytes,9,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
 	// Rate Fee
-	FeeRate string `protobuf:"bytes,8,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	FeeRate string `protobuf:"bytes,10,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
 	// Min Amount
-	MinAmount string `protobuf:"bytes,9,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	MinAmount string `protobuf:"bytes,11,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Max Amount
-	MaxAmount string `protobuf:"bytes,10,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	MaxAmount string `protobuf:"bytes,12,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	// Fixed Fee on the Amount
+	PspFixedFee string `protobuf:"bytes,13,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
+	// Rate Fee
+	PspFeeRate string `protobuf:"bytes,14,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
+	// Min Amount
+	PspMinAmount string `protobuf:"bytes,15,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
+	// Max Amount
+	PspMaxAmount string `protobuf:"bytes,16,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
+	Enable       bool   `protobuf:"varint,17,opt,name=enable,proto3" json:"enable,omitempty"`
 	// JSON schema defining the required fields for this payment method
-	KeySchema     *structpb.Struct `protobuf:"bytes,11,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
+	KeySchema     *structpb.Struct `protobuf:"bytes,18,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -456,6 +467,20 @@ func (x *PaymentMethodInfo) GetCurrency() string {
 	return ""
 }
 
+func (x *PaymentMethodInfo) GetCurrencyType() string {
+	if x != nil {
+		return x.CurrencyType
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetContact() string {
+	if x != nil {
+		return x.Contact
+	}
+	return ""
+}
+
 func (x *PaymentMethodInfo) GetCountry() string {
 	if x != nil {
 		return x.Country
@@ -496,6 +521,41 @@ func (x *PaymentMethodInfo) GetMaxAmount() string {
 		return x.MaxAmount
 	}
 	return ""
+}
+
+func (x *PaymentMethodInfo) GetPspFixedFee() string {
+	if x != nil {
+		return x.PspFixedFee
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetPspFeeRate() string {
+	if x != nil {
+		return x.PspFeeRate
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetPspMinAmount() string {
+	if x != nil {
+		return x.PspMinAmount
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetPspMaxAmount() string {
+	if x != nil {
+		return x.PspMaxAmount
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
 }
 
 func (x *PaymentMethodInfo) GetKeySchema() *structpb.Struct {
@@ -1090,49 +1150,53 @@ type PaymentChannelInfo struct {
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Type of the channel (e.g., online, offline)
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	// Currency type (e.g., Crypto, Fiat)
+	CurrencyType string `protobuf:"bytes,3,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
+	// Services Prvider
+	Psp string `protobuf:"bytes,4,opt,name=psp,proto3" json:"psp,omitempty"`
 	// Category of the channel (e.g., bank, e-wallet)
-	Category string `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
+	Category string `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
 	// ID of the operator who owns this channel
-	OperatorId string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId string `protobuf:"bytes,6,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// Payment method used in this channel
-	PaymentMethod string `protobuf:"bytes,5,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	PaymentMethod string `protobuf:"bytes,7,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Tag for categorization or filtering
-	Tag string `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag,omitempty"`
+	Tag string `protobuf:"bytes,8,opt,name=tag,proto3" json:"tag,omitempty"`
 	// Display name of the channel
-	Name string `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the payment method used
-	PaymentMethodId string `protobuf:"bytes,8,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	PaymentMethodId string `protobuf:"bytes,10,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	// Currency supported by this channel
-	Currency string `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency,omitempty"`
+	Currency string `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Crypto protocol supported by this channel
-	Protocol string `protobuf:"bytes,10,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Protocol string `protobuf:"bytes,12,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Crypto chian supported by this channel
-	Network string `protobuf:"bytes,11,opt,name=network,proto3" json:"network,omitempty"`
+	Network string `protobuf:"bytes,13,opt,name=network,proto3" json:"network,omitempty"`
 	// Country where this channel is available
-	Country string `protobuf:"bytes,12,opt,name=country,proto3" json:"country,omitempty"`
+	Country string `protobuf:"bytes,14,opt,name=country,proto3" json:"country,omitempty"`
 	// Specific method used (might be more detailed than payment_method)
-	Method string `protobuf:"bytes,13,opt,name=method,proto3" json:"method,omitempty"`
+	Method string `protobuf:"bytes,15,opt,name=method,proto3" json:"method,omitempty"`
 	// URL to the logo image for this payment channel
-	Logo string `protobuf:"bytes,14,opt,name=logo,proto3" json:"logo,omitempty"`
+	Logo string `protobuf:"bytes,16,opt,name=logo,proto3" json:"logo,omitempty"`
 	// Minimum amount allowed for deposit transactions
-	MinDepositAmount string `protobuf:"bytes,15,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
+	MinDepositAmount string `protobuf:"bytes,17,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
 	// Maximum amount allowed for deposit transactions
-	MaxDepositAmount string `protobuf:"bytes,16,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
+	MaxDepositAmount string `protobuf:"bytes,18,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
 	// Minimum amount allowed for withdrawal transactions
-	MinWithdrawAmount string `protobuf:"bytes,17,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
+	MinWithdrawAmount string `protobuf:"bytes,19,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
 	// Maximum amount allowed for withdrawal transactions
-	MaxWithdrawAmount string `protobuf:"bytes,18,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
+	MaxWithdrawAmount string `protobuf:"bytes,20,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
 	// Estimated arrival time in minutes
-	Eat int32 `protobuf:"varint,19,opt,name=eat,proto3" json:"eat,omitempty"`
+	Eat int32 `protobuf:"varint,21,opt,name=eat,proto3" json:"eat,omitempty"`
 	// Fee
-	FixFee  string `protobuf:"bytes,20,opt,name=fix_fee,json=fixFee,proto3" json:"fix_fee,omitempty"`
-	RateFee string `protobuf:"bytes,21,opt,name=rate_fee,json=rateFee,proto3" json:"rate_fee,omitempty"`
+	FixFee  string `protobuf:"bytes,22,opt,name=fix_fee,json=fixFee,proto3" json:"fix_fee,omitempty"`
+	RateFee string `protobuf:"bytes,23,opt,name=rate_fee,json=rateFee,proto3" json:"rate_fee,omitempty"`
 	// JSON schema defining deposit form fields required by this channel
-	DepositSchema *structpb.Struct `protobuf:"bytes,22,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
+	DepositSchema *structpb.Struct `protobuf:"bytes,24,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
 	// JSON schema defining withdrawal form fields required by this channel
-	WithdrawSchema *structpb.Struct `protobuf:"bytes,23,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
-	SourceType     string           `protobuf:"bytes,24,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
-	Enable         bool             `protobuf:"varint,25,opt,name=enable,proto3" json:"enable,omitempty"`
+	WithdrawSchema *structpb.Struct `protobuf:"bytes,25,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
+	SourceType     string           `protobuf:"bytes,26,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
+	Enable         bool             `protobuf:"varint,27,opt,name=enable,proto3" json:"enable,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1177,6 +1241,20 @@ func (x *PaymentChannelInfo) GetChannelId() string {
 func (x *PaymentChannelInfo) GetType() string {
 	if x != nil {
 		return x.Type
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetCurrencyType() string {
+	if x != nil {
+		return x.CurrencyType
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetPsp() string {
+	if x != nil {
+		return x.Psp
 	}
 	return ""
 }
@@ -3228,9 +3306,11 @@ type GetPaymentChannelPageResponse struct {
 	// Number of items per page
 	PageSize int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Total number of pages available
-	TotalPages    int32 `protobuf:"varint,5,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	TotalPages        int32 `protobuf:"varint,5,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	TotalEnableColnt  int32 `protobuf:"varint,6,opt,name=total_enable_colnt,json=totalEnableColnt,proto3" json:"total_enable_colnt,omitempty"`
+	TotalDisableCount int32 `protobuf:"varint,7,opt,name=total_disable_count,json=totalDisableCount,proto3" json:"total_disable_count,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *GetPaymentChannelPageResponse) Reset() {
@@ -3294,6 +3374,20 @@ func (x *GetPaymentChannelPageResponse) GetPageSize() int32 {
 func (x *GetPaymentChannelPageResponse) GetTotalPages() int32 {
 	if x != nil {
 		return x.TotalPages
+	}
+	return 0
+}
+
+func (x *GetPaymentChannelPageResponse) GetTotalEnableColnt() int32 {
+	if x != nil {
+		return x.TotalEnableColnt
+	}
+	return 0
+}
+
+func (x *GetPaymentChannelPageResponse) GetTotalDisableCount() int32 {
+	if x != nil {
+		return x.TotalDisableCount
 	}
 	return 0
 }
@@ -3701,23 +3795,31 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	" payment/service/v1/payment.proto\x12\x12payment.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"B\n" +
 	"$GetSupportedPaymentMethodListRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x03(\tR\bcurrency\"\x1d\n" +
-	"\x1bGetPaymentMethodListRequest\"\xd4\x02\n" +
+	"\x1bGetPaymentMethodListRequest\"\xbd\x04\n" +
 	"\x11PaymentMethodInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
 	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1a\n" +
-	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12\x18\n" +
-	"\acountry\x18\x05 \x01(\tR\acountry\x12%\n" +
-	"\x0epayment_method\x18\x06 \x01(\tR\rpaymentMethod\x12\x1b\n" +
-	"\tfixed_fee\x18\a \x01(\tR\bfixedFee\x12\x19\n" +
-	"\bfee_rate\x18\b \x01(\tR\afeeRate\x12\x1d\n" +
+	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12#\n" +
+	"\rcurrency_type\x18\x05 \x01(\tR\fcurrencyType\x12\x18\n" +
+	"\acontact\x18\x06 \x01(\tR\acontact\x12\x18\n" +
+	"\acountry\x18\a \x01(\tR\acountry\x12%\n" +
+	"\x0epayment_method\x18\b \x01(\tR\rpaymentMethod\x12\x1b\n" +
+	"\tfixed_fee\x18\t \x01(\tR\bfixedFee\x12\x19\n" +
+	"\bfee_rate\x18\n" +
+	" \x01(\tR\afeeRate\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\t \x01(\tR\tminAmount\x12\x1d\n" +
+	"min_amount\x18\v \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\n" +
-	" \x01(\tR\tmaxAmount\x126\n" +
+	"max_amount\x18\f \x01(\tR\tmaxAmount\x12\"\n" +
+	"\rpsp_fixed_fee\x18\r \x01(\tR\vpspFixedFee\x12 \n" +
+	"\fpsp_fee_rate\x18\x0e \x01(\tR\n" +
+	"pspFeeRate\x12$\n" +
+	"\x0epsp_min_amount\x18\x0f \x01(\tR\fpspMinAmount\x12$\n" +
+	"\x0epsp_max_amount\x18\x10 \x01(\tR\fpspMaxAmount\x12\x16\n" +
+	"\x06enable\x18\x11 \x01(\bR\x06enable\x126\n" +
 	"\n" +
-	"key_schema\x18\v \x01(\v2\x17.google.protobuf.StructR\tkeySchema\"w\n" +
+	"key_schema\x18\x12 \x01(\v2\x17.google.protobuf.StructR\tkeySchema\"w\n" +
 	"%GetSupportedPaymentMethodListResponse\x12N\n" +
 	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"n\n" +
 	"\x1cGetPaymentMethodListResponse\x12N\n" +
@@ -3768,37 +3870,39 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"merchantId\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xd2\x06\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\x89\a\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04type\x12\x1a\n" +
-	"\bcategory\x18\x03 \x01(\tR\bcategory\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\tR\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12#\n" +
+	"\rcurrency_type\x18\x03 \x01(\tR\fcurrencyType\x12\x10\n" +
+	"\x03psp\x18\x04 \x01(\tR\x03psp\x12\x1a\n" +
+	"\bcategory\x18\x05 \x01(\tR\bcategory\x12\x1f\n" +
+	"\voperator_id\x18\x06 \x01(\tR\n" +
 	"operatorId\x12%\n" +
-	"\x0epayment_method\x18\x05 \x01(\tR\rpaymentMethod\x12\x10\n" +
-	"\x03tag\x18\x06 \x01(\tR\x03tag\x12\x12\n" +
-	"\x04name\x18\a \x01(\tR\x04name\x12*\n" +
-	"\x11payment_method_id\x18\b \x01(\tR\x0fpaymentMethodId\x12\x1a\n" +
-	"\bcurrency\x18\t \x01(\tR\bcurrency\x12\x1a\n" +
-	"\bprotocol\x18\n" +
-	" \x01(\tR\bprotocol\x12\x18\n" +
-	"\anetwork\x18\v \x01(\tR\anetwork\x12\x18\n" +
-	"\acountry\x18\f \x01(\tR\acountry\x12\x16\n" +
-	"\x06method\x18\r \x01(\tR\x06method\x12\x12\n" +
-	"\x04logo\x18\x0e \x01(\tR\x04logo\x12,\n" +
-	"\x12min_deposit_amount\x18\x0f \x01(\tR\x10minDepositAmount\x12,\n" +
-	"\x12max_deposit_amount\x18\x10 \x01(\tR\x10maxDepositAmount\x12.\n" +
-	"\x13min_withdraw_amount\x18\x11 \x01(\tR\x11minWithdrawAmount\x12.\n" +
-	"\x13max_withdraw_amount\x18\x12 \x01(\tR\x11maxWithdrawAmount\x12\x10\n" +
-	"\x03eat\x18\x13 \x01(\x05R\x03eat\x12\x17\n" +
-	"\afix_fee\x18\x14 \x01(\tR\x06fixFee\x12\x19\n" +
-	"\brate_fee\x18\x15 \x01(\tR\arateFee\x12>\n" +
-	"\x0edeposit_schema\x18\x16 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
-	"\x0fwithdraw_schema\x18\x17 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\x12\x1f\n" +
-	"\vsource_type\x18\x18 \x01(\tR\n" +
+	"\x0epayment_method\x18\a \x01(\tR\rpaymentMethod\x12\x10\n" +
+	"\x03tag\x18\b \x01(\tR\x03tag\x12\x12\n" +
+	"\x04name\x18\t \x01(\tR\x04name\x12*\n" +
+	"\x11payment_method_id\x18\n" +
+	" \x01(\tR\x0fpaymentMethodId\x12\x1a\n" +
+	"\bcurrency\x18\v \x01(\tR\bcurrency\x12\x1a\n" +
+	"\bprotocol\x18\f \x01(\tR\bprotocol\x12\x18\n" +
+	"\anetwork\x18\r \x01(\tR\anetwork\x12\x18\n" +
+	"\acountry\x18\x0e \x01(\tR\acountry\x12\x16\n" +
+	"\x06method\x18\x0f \x01(\tR\x06method\x12\x12\n" +
+	"\x04logo\x18\x10 \x01(\tR\x04logo\x12,\n" +
+	"\x12min_deposit_amount\x18\x11 \x01(\tR\x10minDepositAmount\x12,\n" +
+	"\x12max_deposit_amount\x18\x12 \x01(\tR\x10maxDepositAmount\x12.\n" +
+	"\x13min_withdraw_amount\x18\x13 \x01(\tR\x11minWithdrawAmount\x12.\n" +
+	"\x13max_withdraw_amount\x18\x14 \x01(\tR\x11maxWithdrawAmount\x12\x10\n" +
+	"\x03eat\x18\x15 \x01(\x05R\x03eat\x12\x17\n" +
+	"\afix_fee\x18\x16 \x01(\tR\x06fixFee\x12\x19\n" +
+	"\brate_fee\x18\x17 \x01(\tR\arateFee\x12>\n" +
+	"\x0edeposit_schema\x18\x18 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
+	"\x0fwithdraw_schema\x18\x19 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\x12\x1f\n" +
+	"\vsource_type\x18\x1a \x01(\tR\n" +
 	"sourceType\x12\x16\n" +
-	"\x06enable\x18\x19 \x01(\bR\x06enable\"\x9a\x01\n" +
+	"\x06enable\x18\x1b \x01(\bR\x06enable\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
@@ -3983,7 +4087,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\anetwork\x18\t \x01(\tR\anetwork\x12\x18\n" +
 	"\acountry\x18\n" +
 	" \x01(\tR\acountry\x12,\n" +
-	"\x04sort\x18\v \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\"\xe5\x01\n" +
+	"\x04sort\x18\v \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\"\xc3\x02\n" +
 	"\x1dGetPaymentChannelPageResponse\x12Q\n" +
 	"\x10payment_channels\x18\x01 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x0fpaymentChannels\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
@@ -3991,7 +4095,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12\x1f\n" +
 	"\vtotal_pages\x18\x05 \x01(\x05R\n" +
-	"totalPages\"\x83\x01\n" +
+	"totalPages\x12,\n" +
+	"\x12total_enable_colnt\x18\x06 \x01(\x05R\x10totalEnableColnt\x12.\n" +
+	"\x13total_disable_count\x18\a \x01(\x05R\x11totalDisableCount\"\x83\x01\n" +
 	"\x1fGetTransactionDetailByIdRequest\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x129\n" +
 	"\x06source\x18\x02 \x01(\x0e2!.payment.service.v1.RequestSourceR\x06source\"a\n" +

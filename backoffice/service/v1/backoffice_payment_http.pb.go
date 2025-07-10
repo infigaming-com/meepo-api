@@ -75,7 +75,7 @@ func RegisterBackofficePaymentHTTPServer(s *http.Server, srv BackofficePaymentHT
 	r.POST("/v1/backoffice/payment/channel/update", _BackofficePayment_DisablePaymentChannel1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/channel/create", _BackofficePayment_CreatePaymentChannel1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/operator/address/get", _BackofficePayment_GetOperatorAddress0_HTTP_Handler(srv))
-	r.POST("/v1/payment/channel/page", _BackofficePayment_GetPaymentChannelPage1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/channel/page", _BackofficePayment_GetPaymentChannelPage1_HTTP_Handler(srv))
 }
 
 func _BackofficePayment_GetPaymentTransactionPage0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
@@ -350,7 +350,7 @@ func (c *BackofficePaymentHTTPClientImpl) GetOperatorAddress(ctx context.Context
 
 func (c *BackofficePaymentHTTPClientImpl) GetPaymentChannelPage(ctx context.Context, in *v1.GetPaymentChannelPageRequest, opts ...http.CallOption) (*v1.GetPaymentChannelPageResponse, error) {
 	var out v1.GetPaymentChannelPageResponse
-	pattern := "/v1/payment/channel/page"
+	pattern := "/v1/backoffice/payment/channel/page"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficePaymentGetPaymentChannelPage))
 	opts = append(opts, http.PathTemplate(pattern))
