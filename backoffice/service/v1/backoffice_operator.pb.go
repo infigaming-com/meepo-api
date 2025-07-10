@@ -318,6 +318,7 @@ type OperatorDetails struct {
 	RetailerOperatorName  string                 `protobuf:"bytes,27,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"` // retailer operator name in the operator hierarchy, or empty string if not exists
 	SystemOperatorId      int64                  `protobuf:"varint,28,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`            // system operator id in the operator hierarchy
 	SystemOperatorName    string                 `protobuf:"bytes,29,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`       // system operator name in the operator hierarchy, or empty string if not exists
+	Config                string                 `protobuf:"bytes,30,opt,name=config,proto3" json:"config,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -551,6 +552,13 @@ func (x *OperatorDetails) GetSystemOperatorId() int64 {
 func (x *OperatorDetails) GetSystemOperatorName() string {
 	if x != nil {
 		return x.SystemOperatorName
+	}
+	return ""
+}
+
+func (x *OperatorDetails) GetConfig() string {
+	if x != nil {
+		return x.Config
 	}
 	return ""
 }
@@ -1355,7 +1363,7 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\tsubdomain\x18\x01 \x01(\tR\tsubdomain\x121\n" +
 	"\x14backoffice_subdomain\x18\x02 \x01(\tR\x13backofficeSubdomain\x120\n" +
 	"\x14operator_admin_email\x18\x03 \x01(\tR\x12operatorAdminEmail\x12\x1a\n" +
-	"\bpassword\x18\x04 \x01(\tR\bpassword\"\xb8\t\n" +
+	"\bpassword\x18\x04 \x01(\tR\bpassword\"\xd0\t\n" +
 	"\x0fOperatorDetails\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12,\n" +
@@ -1389,7 +1397,8 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\x14retailer_operator_id\x18\x1a \x01(\x03R\x12retailerOperatorId\x124\n" +
 	"\x16retailer_operator_name\x18\x1b \x01(\tR\x14retailerOperatorName\x12,\n" +
 	"\x12system_operator_id\x18\x1c \x01(\x03R\x10systemOperatorId\x120\n" +
-	"\x14system_operator_name\x18\x1d \x01(\tR\x12systemOperatorName\"\"\n" +
+	"\x14system_operator_name\x18\x1d \x01(\tR\x12systemOperatorName\x12\x16\n" +
+	"\x06config\x18\x1e \x01(\tR\x06config\"\"\n" +
 	" GetCurrentOperatorDetailsRequest\"z\n" +
 	"!GetCurrentOperatorDetailsResponse\x12U\n" +
 	"\x10operator_details\x18\x01 \x01(\v2*.api.backoffice.service.v1.OperatorDetailsR\x0foperatorDetails\"\xa2\x01\n" +
