@@ -334,3 +334,27 @@ func IsGetPaymentChannelFailed(err error) bool {
 func ErrorGetPaymentChannelFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_PAYMENT_CHANNEL_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorIdsNotInContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_IDS_NOT_IN_CONTEXT.String() && e.Code == 500
+}
+
+func ErrorOperatorIdsNotInContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_IDS_NOT_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorIdsNotInOperatorContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_IDS_NOT_IN_OPERATOR_CONTEXT.String() && e.Code == 500
+}
+
+func ErrorOperatorIdsNotInOperatorContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_IDS_NOT_IN_OPERATOR_CONTEXT.String(), fmt.Sprintf(format, args...))
+}

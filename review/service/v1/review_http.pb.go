@@ -19,15 +19,18 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationReviewCreateOperatorWithdraw = "/api.review.service.v1.Review/CreateOperatorWithdraw"
 const OperationReviewCreateWithdraw = "/api.review.service.v1.Review/CreateWithdraw"
 
 type ReviewHTTPServer interface {
+	CreateOperatorWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
 	CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
 }
 
 func RegisterReviewHTTPServer(s *http.Server, srv ReviewHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/review/withdraw", _Review_CreateWithdraw0_HTTP_Handler(srv))
+	r.POST("/v1/review/operator/withdraw", _Review_CreateOperatorWithdraw0_HTTP_Handler(srv))
 }
 
 func _Review_CreateWithdraw0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
@@ -52,7 +55,30 @@ func _Review_CreateWithdraw0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Co
 	}
 }
 
+func _Review_CreateOperatorWithdraw0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateWithdrawRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationReviewCreateOperatorWithdraw)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateOperatorWithdraw(ctx, req.(*CreateWithdrawRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateWithdrawResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ReviewHTTPClient interface {
+	CreateOperatorWithdraw(ctx context.Context, req *CreateWithdrawRequest, opts ...http.CallOption) (rsp *CreateWithdrawResponse, err error)
 	CreateWithdraw(ctx context.Context, req *CreateWithdrawRequest, opts ...http.CallOption) (rsp *CreateWithdrawResponse, err error)
 }
 
@@ -62,6 +88,19 @@ type ReviewHTTPClientImpl struct {
 
 func NewReviewHTTPClient(client *http.Client) ReviewHTTPClient {
 	return &ReviewHTTPClientImpl{client}
+}
+
+func (c *ReviewHTTPClientImpl) CreateOperatorWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...http.CallOption) (*CreateWithdrawResponse, error) {
+	var out CreateWithdrawResponse
+	pattern := "/v1/review/operator/withdraw"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationReviewCreateOperatorWithdraw))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *ReviewHTTPClientImpl) CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...http.CallOption) (*CreateWithdrawResponse, error) {

@@ -19,12 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Review_CreateWithdraw_FullMethodName = "/api.review.service.v1.Review/CreateWithdraw"
-	Review_ReviewTicket_FullMethodName   = "/api.review.service.v1.Review/ReviewTicket"
-	Review_AddComment_FullMethodName     = "/api.review.service.v1.Review/AddComment"
-	Review_CancelTicket_FullMethodName   = "/api.review.service.v1.Review/CancelTicket"
-	Review_ListTickets_FullMethodName    = "/api.review.service.v1.Review/ListTickets"
-	Review_GetTicket_FullMethodName      = "/api.review.service.v1.Review/GetTicket"
+	Review_CreateWithdraw_FullMethodName         = "/api.review.service.v1.Review/CreateWithdraw"
+	Review_CreateOperatorWithdraw_FullMethodName = "/api.review.service.v1.Review/CreateOperatorWithdraw"
+	Review_ReviewTicket_FullMethodName           = "/api.review.service.v1.Review/ReviewTicket"
+	Review_AddComment_FullMethodName             = "/api.review.service.v1.Review/AddComment"
+	Review_CancelTicket_FullMethodName           = "/api.review.service.v1.Review/CancelTicket"
+	Review_ListTickets_FullMethodName            = "/api.review.service.v1.Review/ListTickets"
+	Review_ListOperatorTickets_FullMethodName    = "/api.review.service.v1.Review/ListOperatorTickets"
+	Review_GetTicket_FullMethodName              = "/api.review.service.v1.Review/GetTicket"
 )
 
 // ReviewClient is the client API for Review service.
@@ -34,12 +36,14 @@ const (
 // Review service provides review functionality.
 type ReviewClient interface {
 	CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
+	CreateOperatorWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
 	ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error)
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
 	// CancelTicket is used to manually cancel a ticket.
 	// Ticket is cancellable only in paying status.
 	CancelTicket(ctx context.Context, in *CancelTicketRequest, opts ...grpc.CallOption) (*CancelTicketResponse, error)
 	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
+	ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
 	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error)
 }
 
@@ -55,6 +59,16 @@ func (c *reviewClient) CreateWithdraw(ctx context.Context, in *CreateWithdrawReq
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateWithdrawResponse)
 	err := c.cc.Invoke(ctx, Review_CreateWithdraw_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *reviewClient) CreateOperatorWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateWithdrawResponse)
+	err := c.cc.Invoke(ctx, Review_CreateOperatorWithdraw_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -101,6 +115,16 @@ func (c *reviewClient) ListTickets(ctx context.Context, in *ListTicketsRequest, 
 	return out, nil
 }
 
+func (c *reviewClient) ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTicketsResponse)
+	err := c.cc.Invoke(ctx, Review_ListOperatorTickets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *reviewClient) GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTicketResponse)
@@ -118,12 +142,14 @@ func (c *reviewClient) GetTicket(ctx context.Context, in *GetTicketRequest, opts
 // Review service provides review functionality.
 type ReviewServer interface {
 	CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
+	CreateOperatorWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
 	// CancelTicket is used to manually cancel a ticket.
 	// Ticket is cancellable only in paying status.
 	CancelTicket(context.Context, *CancelTicketRequest) (*CancelTicketResponse, error)
 	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
+	ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*ListTicketsResponse, error)
 	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
 	mustEmbedUnimplementedReviewServer()
 }
@@ -138,6 +164,9 @@ type UnimplementedReviewServer struct{}
 func (UnimplementedReviewServer) CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateWithdraw not implemented")
 }
+func (UnimplementedReviewServer) CreateOperatorWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateOperatorWithdraw not implemented")
+}
 func (UnimplementedReviewServer) ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReviewTicket not implemented")
 }
@@ -149,6 +178,9 @@ func (UnimplementedReviewServer) CancelTicket(context.Context, *CancelTicketRequ
 }
 func (UnimplementedReviewServer) ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTickets not implemented")
+}
+func (UnimplementedReviewServer) ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*ListTicketsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorTickets not implemented")
 }
 func (UnimplementedReviewServer) GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTicket not implemented")
@@ -188,6 +220,24 @@ func _Review_CreateWithdraw_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ReviewServer).CreateWithdraw(ctx, req.(*CreateWithdrawRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Review_CreateOperatorWithdraw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWithdrawRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewServer).CreateOperatorWithdraw(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Review_CreateOperatorWithdraw_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewServer).CreateOperatorWithdraw(ctx, req.(*CreateWithdrawRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -264,6 +314,24 @@ func _Review_ListTickets_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Review_ListOperatorTickets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorTicketsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewServer).ListOperatorTickets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Review_ListOperatorTickets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewServer).ListOperatorTickets(ctx, req.(*ListOperatorTicketsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Review_GetTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTicketRequest)
 	if err := dec(in); err != nil {
@@ -294,6 +362,10 @@ var Review_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Review_CreateWithdraw_Handler,
 		},
 		{
+			MethodName: "CreateOperatorWithdraw",
+			Handler:    _Review_CreateOperatorWithdraw_Handler,
+		},
+		{
 			MethodName: "ReviewTicket",
 			Handler:    _Review_ReviewTicket_Handler,
 		},
@@ -308,6 +380,10 @@ var Review_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListTickets",
 			Handler:    _Review_ListTickets_Handler,
+		},
+		{
+			MethodName: "ListOperatorTickets",
+			Handler:    _Review_ListOperatorTickets_Handler,
 		},
 		{
 			MethodName: "GetTicket",

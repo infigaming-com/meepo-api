@@ -5,6 +5,7 @@ package api.review.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/review/service/v1;v1";
 option java_multiple_files = true;
@@ -18,12 +19,19 @@ service Review {
 			body: "*"
 		};
 	}
+	rpc CreateOperatorWithdraw(CreateWithdrawRequest) returns (CreateWithdrawResponse) {
+		option (google.api.http) = {
+			post: "/v1/review/operator/withdraw"
+			body: "*"
+		};
+	}
 	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {}
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
 	// CancelTicket is used to manually cancel a ticket.
 	// Ticket is cancellable only in paying status.
 	rpc CancelTicket(CancelTicketRequest) returns (CancelTicketResponse) {}
 	rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {}
+	rpc ListOperatorTickets(ListOperatorTicketsRequest) returns (ListTicketsResponse) {}
 	rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {}
 }
 
@@ -64,7 +72,20 @@ message CancelTicketRequest {
 message CancelTicketResponse {}
 
 message ListTicketsRequest {
-	optional int64 user_id = 2;
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	optional int64 operator_id = 3;
+	optional int64 ticket_id = 4;
+	optional string currency = 5;
+	optional string status = 6;
+	optional google.protobuf.Timestamp start_time = 7;
+	optional google.protobuf.Timestamp end_time = 8;
+	optional int32 page = 9;
+	optional int32 page_size = 10;
+}
+
+message ListOperatorTicketsRequest {
+	api.common.OperatorContext operator_context = 2;
 	optional int64 operator_id = 3;
 	optional int64 ticket_id = 4;
 	optional string currency = 5;
@@ -120,6 +141,7 @@ message GetTicketRequest {
 	// Optional flag for including comments in the response or not.
 	// If not provided, the comments will not be included in the response.
 	optional bool include_comments = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message GetTicketResponse {
