@@ -3067,6 +3067,8 @@ components:
                     type: boolean
                 role:
                     $ref: '#/components/schemas/api.backoffice.service.v1.Role'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ActiveUsersData_Data:
             type: object
             properties:
