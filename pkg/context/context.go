@@ -119,7 +119,12 @@ func OperatorIdsFromOperatorContext(oc *common.OperatorContext) OperatorIds {
 
 // IsOperatorIdsInOperatorContext checks if the operatorIds are in the operatorContext.
 func IsOperatorIdsInOperatorContext(operatorIds OperatorIds, operatorContext *common.OperatorContext) bool {
-	switch operatorContext.OperatorType {
+	operatorType := operatorContext.OperatorType
+	if operatorType == "" {
+		contextOperatorIds := OperatorIdsFromOperatorContext(operatorContext)
+		_, operatorType = contextOperatorIds.GetRealOperatorIdAndType()
+	}
+	switch operatorType {
 	case util.OperatorTypeOperator:
 		return operatorIds.OperatorId == operatorContext.OperatorId && operatorIds.CompanyOperatorId == operatorContext.CompanyOperatorId && operatorIds.RetailerOperatorId == operatorContext.RetailerOperatorId && operatorIds.SystemOperatorId == operatorContext.SystemOperatorId
 	case util.OperatorTypeCompany:
