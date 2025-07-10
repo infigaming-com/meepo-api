@@ -2206,6 +2206,63 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse'
+    /v1/backoffice/wallet/operator/balance-freeze:
+        post:
+            tags:
+                - BackofficeWallet
+            description: OperatorFreeze freezes cash of an operator
+            operationId: BackofficeWallet_OperatorBalanceFreeze
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalanceFreezeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalanceFreezeResponse'
+    /v1/backoffice/wallet/operator/balance-rollback:
+        post:
+            tags:
+                - BackofficeWallet
+            description: OperatorRollback rolls back frozen cash of an operator
+            operationId: BackofficeWallet_OperatorBalanceRollback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalanceRollbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalanceRollbackResponse'
+    /v1/backoffice/wallet/operator/balance-settle:
+        post:
+            tags:
+                - BackofficeWallet
+            description: OperatorSettle settles frozen cash of an operator
+            operationId: BackofficeWallet_OperatorBalanceSettle
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalanceSettleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalanceSettleResponse'
     /v1/backoffice/wallet/operator/balances/list:
         post:
             tags:
@@ -2225,63 +2282,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorBalancesResponse'
-    /v1/backoffice/wallet/operator/freeze:
-        post:
-            tags:
-                - BackofficeWallet
-            description: OperatorFreeze freezes cash of an operator
-            operationId: BackofficeWallet_OperatorFreeze
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.OperatorFreezeRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.OperatorFreezeResponse'
-    /v1/backoffice/wallet/operator/rollback:
-        post:
-            tags:
-                - BackofficeWallet
-            description: OperatorRollback rolls back frozen cash of an operator
-            operationId: BackofficeWallet_OperatorRollback
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.OperatorRollbackRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.OperatorRollbackResponse'
-    /v1/backoffice/wallet/operator/settle:
-        post:
-            tags:
-                - BackofficeWallet
-            description: OperatorSettle settles frozen cash of an operator
-            operationId: BackofficeWallet_OperatorSettle
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.OperatorSettleRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.OperatorSettleResponse'
     /v1/backoffice/wallet/operator/swap:
         post:
             tags:
@@ -7461,6 +7461,70 @@ components:
                     type: string
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.OperatorBalanceFreezeRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
+                cashAmount:
+                    type: string
+                memo:
+                    type: string
+        api.backoffice.service.v1.OperatorBalanceFreezeResponse:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                cash:
+                    type: string
+        api.backoffice.service.v1.OperatorBalanceRollbackRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                originalTransactionId:
+                    type: string
+                memo:
+                    type: string
+        api.backoffice.service.v1.OperatorBalanceRollbackResponse:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                cash:
+                    type: string
+                cashAmount:
+                    type: string
+                cashAmountUsd:
+                    type: string
+                cashAmountReportingCurrency:
+                    type: string
+        api.backoffice.service.v1.OperatorBalanceSettleRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
+                originalTransactionId:
+                    type: string
+                memo:
+                    type: string
+        api.backoffice.service.v1.OperatorBalanceSettleResponse:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                cash:
+                    type: string
+                cashAmount:
+                    type: string
+                cashAmountUsd:
+                    type: string
+                cashAmountReportingCurrency:
+                    type: string
         api.backoffice.service.v1.OperatorDetails:
             type: object
             properties:
@@ -7528,24 +7592,6 @@ components:
                     type: string
                 systemOperatorName:
                     type: string
-        api.backoffice.service.v1.OperatorFreezeRequest:
-            type: object
-            properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                currency:
-                    type: string
-                cashAmount:
-                    type: string
-                memo:
-                    type: string
-        api.backoffice.service.v1.OperatorFreezeResponse:
-            type: object
-            properties:
-                transactionId:
-                    type: string
-                cash:
-                    type: string
         api.backoffice.service.v1.OperatorInfo:
             type: object
             properties:
@@ -7554,52 +7600,6 @@ components:
                 operatorName:
                     type: string
                 status:
-                    type: string
-        api.backoffice.service.v1.OperatorRollbackRequest:
-            type: object
-            properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                originalTransactionId:
-                    type: string
-                memo:
-                    type: string
-        api.backoffice.service.v1.OperatorRollbackResponse:
-            type: object
-            properties:
-                transactionId:
-                    type: string
-                cash:
-                    type: string
-                cashAmount:
-                    type: string
-                cashAmountUsd:
-                    type: string
-                cashAmountReportingCurrency:
-                    type: string
-        api.backoffice.service.v1.OperatorSettleRequest:
-            type: object
-            properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                currency:
-                    type: string
-                originalTransactionId:
-                    type: string
-                memo:
-                    type: string
-        api.backoffice.service.v1.OperatorSettleResponse:
-            type: object
-            properties:
-                transactionId:
-                    type: string
-                cash:
-                    type: string
-                cashAmount:
-                    type: string
-                cashAmountUsd:
-                    type: string
-                cashAmountReportingCurrency:
                     type: string
         api.backoffice.service.v1.OperatorSwapRequest:
             type: object

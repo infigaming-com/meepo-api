@@ -91,23 +91,23 @@ service BackofficeWallet {
 		};
 	}
 	// OperatorFreeze freezes cash of an operator
-	rpc OperatorFreeze(OperatorFreezeRequest) returns (OperatorFreezeResponse) {
+	rpc OperatorBalanceFreeze(OperatorBalanceFreezeRequest) returns (OperatorBalanceFreezeResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/operator/freeze"
+			post: "/v1/backoffice/wallet/operator/balance-freeze"
 			body: "*"
 		};
 	}
 	// OperatorRollback rolls back frozen cash of an operator
-	rpc OperatorRollback(OperatorRollbackRequest) returns (OperatorRollbackResponse) {
+	rpc OperatorBalanceRollback(OperatorBalanceRollbackRequest) returns (OperatorBalanceRollbackResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/operator/rollback"
+			post: "/v1/backoffice/wallet/operator/balance-rollback"
 			body: "*"
 		};
 	}
 	// OperatorSettle settles frozen cash of an operator
-	rpc OperatorSettle(OperatorSettleRequest) returns (OperatorSettleResponse) {
+	rpc OperatorBalanceSettle(OperatorBalanceSettleRequest) returns (OperatorBalanceSettleResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/operator/settle"
+			post: "/v1/backoffice/wallet/operator/balance-settle"
 			body: "*"
 		};
 	}
@@ -390,25 +390,25 @@ message OperatorSwapResponse {
 	string target_currency_balance_cash_reporting_currency = 6;
 }
 
-message OperatorFreezeRequest {
+message OperatorBalanceFreezeRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
 	string cash_amount = 3;
 	string memo = 4;
 }
 
-message OperatorFreezeResponse {
+message OperatorBalanceFreezeResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
 }
 
-message OperatorRollbackRequest {
+message OperatorBalanceRollbackRequest {
 	api.common.OperatorContext operator_context = 1;
 	int64 original_transaction_id = 2;
 	string memo = 3;
 }
 
-message OperatorRollbackResponse {
+message OperatorBalanceRollbackResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
 	string cash_amount = 3;
@@ -416,14 +416,14 @@ message OperatorRollbackResponse {
 	string cash_amount_reporting_currency = 5;
 }
 
-message OperatorSettleRequest {
+message OperatorBalanceSettleRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
 	int64 original_transaction_id = 3;
 	string memo = 5;
 }
 
-message OperatorSettleResponse {
+message OperatorBalanceSettleResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
 	string cash_amount = 3;
