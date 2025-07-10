@@ -3635,9 +3635,8 @@ type OperatorTransferRequest struct {
 	ReportingCurrency       string                  `protobuf:"bytes,4,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	TargetCurrency          string                  `protobuf:"bytes,5,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
 	TargetReportingCurrency string                  `protobuf:"bytes,6,opt,name=target_reporting_currency,json=targetReportingCurrency,proto3" json:"target_reporting_currency,omitempty"`
-	ExchangeRate            string                  `protobuf:"bytes,7,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"` // exchange rate of the currency to the target currency
-	TransactionType         string                  `protobuf:"bytes,8,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	CashAmount              string                  `protobuf:"bytes,9,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	TransactionType         string                  `protobuf:"bytes,7,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	CashAmount              string                  `protobuf:"bytes,8,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -3710,13 +3709,6 @@ func (x *OperatorTransferRequest) GetTargetCurrency() string {
 func (x *OperatorTransferRequest) GetTargetReportingCurrency() string {
 	if x != nil {
 		return x.TargetReportingCurrency
-	}
-	return ""
-}
-
-func (x *OperatorTransferRequest) GetExchangeRate() string {
-	if x != nil {
-		return x.ExchangeRate
 	}
 	return ""
 }
@@ -3810,9 +3802,8 @@ type OperatorSwapRequest struct {
 	ReportingCurrency       string                  `protobuf:"bytes,3,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	TargetCurrency          string                  `protobuf:"bytes,4,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
 	TargetReportingCurrency string                  `protobuf:"bytes,5,opt,name=target_reporting_currency,json=targetReportingCurrency,proto3" json:"target_reporting_currency,omitempty"`
-	ExchangeRate            string                  `protobuf:"bytes,6,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
-	TransactionType         string                  `protobuf:"bytes,7,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	CashAmount              string                  `protobuf:"bytes,8,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	TransactionType         string                  `protobuf:"bytes,6,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	CashAmount              string                  `protobuf:"bytes,7,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -3878,13 +3869,6 @@ func (x *OperatorSwapRequest) GetTargetCurrency() string {
 func (x *OperatorSwapRequest) GetTargetReportingCurrency() string {
 	if x != nil {
 		return x.TargetReportingCurrency
-	}
-	return ""
-}
-
-func (x *OperatorSwapRequest) GetExchangeRate() string {
-	if x != nil {
-		return x.ExchangeRate
 	}
 	return ""
 }
@@ -6053,32 +6037,30 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etotal_cash_usd\x18\x02 \x01(\tR\ftotalCashUsd\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\"\xd7\x03\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\"\xb2\x03\n" +
 	"\x17OperatorTransferRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12-\n" +
 	"\x12reporting_currency\x18\x04 \x01(\tR\x11reportingCurrency\x12'\n" +
 	"\x0ftarget_currency\x18\x05 \x01(\tR\x0etargetCurrency\x12:\n" +
-	"\x19target_reporting_currency\x18\x06 \x01(\tR\x17targetReportingCurrency\x12#\n" +
-	"\rexchange_rate\x18\a \x01(\tR\fexchangeRate\x12)\n" +
-	"\x10transaction_type\x18\b \x01(\tR\x0ftransactionType\x12\x1f\n" +
-	"\vcash_amount\x18\t \x01(\tR\n" +
+	"\x19target_reporting_currency\x18\x06 \x01(\tR\x17targetReportingCurrency\x12)\n" +
+	"\x10transaction_type\x18\a \x01(\tR\x0ftransactionType\x12\x1f\n" +
+	"\vcash_amount\x18\b \x01(\tR\n" +
 	"cashAmount\"\xf6\x01\n" +
 	"\x18OperatorTransferResponse\x12#\n" +
 	"\roperator_cash\x18\x01 \x01(\tR\foperatorCash\x12:\n" +
 	"\x19operator_balance_currency\x18\x02 \x01(\tR\x17operatorBalanceCurrency\x120\n" +
 	"\x14target_operator_cash\x18\x03 \x01(\tR\x12targetOperatorCash\x12G\n" +
-	" target_operator_balance_currency\x18\x04 \x01(\tR\x1dtargetOperatorBalanceCurrency\"\xfe\x02\n" +
+	" target_operator_balance_currency\x18\x04 \x01(\tR\x1dtargetOperatorBalanceCurrency\"\xd9\x02\n" +
 	"\x13OperatorSwapRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
 	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12'\n" +
 	"\x0ftarget_currency\x18\x04 \x01(\tR\x0etargetCurrency\x12:\n" +
-	"\x19target_reporting_currency\x18\x05 \x01(\tR\x17targetReportingCurrency\x12#\n" +
-	"\rexchange_rate\x18\x06 \x01(\tR\fexchangeRate\x12)\n" +
-	"\x10transaction_type\x18\a \x01(\tR\x0ftransactionType\x12\x1f\n" +
-	"\vcash_amount\x18\b \x01(\tR\n" +
+	"\x19target_reporting_currency\x18\x05 \x01(\tR\x17targetReportingCurrency\x12)\n" +
+	"\x10transaction_type\x18\x06 \x01(\tR\x0ftransactionType\x12\x1f\n" +
+	"\vcash_amount\x18\a \x01(\tR\n" +
 	"cashAmount\"\xcb\x03\n" +
 	"\x14OperatorSwapResponse\x122\n" +
 	"\x15currency_balance_cash\x18\x01 \x01(\tR\x13currencyBalanceCash\x129\n" +

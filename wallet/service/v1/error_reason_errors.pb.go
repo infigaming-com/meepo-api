@@ -886,3 +886,15 @@ func IsUserNotInOperatorContext(err error) bool {
 func ErrorUserNotInOperatorContext(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_USER_NOT_IN_OPERATOR_CONTEXT.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidTransferCurrency(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_TRANSFER_CURRENCY.String() && e.Code == 500
+}
+
+func ErrorInvalidTransferCurrency(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_TRANSFER_CURRENCY.String(), fmt.Sprintf(format, args...))
+}

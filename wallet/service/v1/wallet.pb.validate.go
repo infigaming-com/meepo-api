@@ -6773,8 +6773,6 @@ func (m *OperatorTransferRequest) validate(all bool) error {
 
 	// no validation rules for TargetReportingCurrency
 
-	// no validation rules for ExchangeRate
-
 	// no validation rules for TransactionType
 
 	// no validation rules for CashAmount
@@ -7027,8 +7025,6 @@ func (m *OperatorSwapRequest) validate(all bool) error {
 	// no validation rules for TargetCurrency
 
 	// no validation rules for TargetReportingCurrency
-
-	// no validation rules for ExchangeRate
 
 	// no validation rules for TransactionType
 

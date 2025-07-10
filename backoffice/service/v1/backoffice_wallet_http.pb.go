@@ -54,7 +54,7 @@ type BackofficeWalletHTTPServer interface {
 	OperatorBalanceSettle(context.Context, *OperatorBalanceSettleRequest) (*OperatorBalanceSettleResponse, error)
 	// OperatorSwap OperatorSwap swaps cash between two balances of the same operator
 	OperatorSwap(context.Context, *OperatorSwapRequest) (*OperatorSwapResponse, error)
-	// OperatorTransfer OperatorTransfer transfers cash from one operator to its company operator
+	// OperatorTransfer OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
 	UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error)
 	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*UpdateWalletCurrencyResponse, error)

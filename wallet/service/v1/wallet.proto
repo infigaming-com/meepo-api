@@ -654,9 +654,8 @@ message OperatorTransferRequest {
 	string reporting_currency = 4;
 	string target_currency = 5;
 	string target_reporting_currency = 6;
-	string exchange_rate = 7; // exchange rate of the currency to the target currency
-	string transaction_type = 8;
-	string cash_amount = 9;
+	string transaction_type = 7;
+	string cash_amount = 8;
 }
 
 message OperatorTransferResponse {
@@ -672,9 +671,8 @@ message OperatorSwapRequest {
 	string reporting_currency = 3;
 	string target_currency = 4;
 	string target_reporting_currency = 5;
-	string exchange_rate = 6;
-	string transaction_type = 7;
-	string cash_amount = 8;
+	string transaction_type = 6;
+	string cash_amount = 7;
 }
 
 message OperatorSwapResponse {
