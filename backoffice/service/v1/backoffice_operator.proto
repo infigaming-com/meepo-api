@@ -138,6 +138,7 @@ message OperatorDetails {
 	string retailer_operator_name = 27; // retailer operator name in the operator hierarchy, or empty string if not exists
 	int64 system_operator_id = 28; // system operator id in the operator hierarchy
 	string system_operator_name = 29; // system operator name in the operator hierarchy, or empty string if not exists
+	string config = 30;
 }
 
 message GetCurrentOperatorDetailsRequest {
