@@ -18,6 +18,12 @@ service Review {
 			body: "*"
 		};
 	}
+	rpc CreateOperatorWithdraw(CreateWithdrawRequest) returns (CreateWithdrawResponse) {
+		option (google.api.http) = {
+			post: "/v1/review/operator/withdraw"
+			body: "*"
+		};
+	}
 	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {}
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
 	// CancelTicket is used to manually cancel a ticket.

@@ -1418,9 +1418,10 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x0eauthor_user_id\x18\x03 \x01(\x03R\fauthorUserId\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\x9d\x05\n" +
+	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\xbe\x06\n" +
 	"\x06Review\x12\x8d\x01\n" +
-	"\x0eCreateWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/review/withdraw\x12i\n" +
+	"\x0eCreateWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/review/withdraw\x12\x9e\x01\n" +
+	"\x16CreateOperatorWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/review/operator/withdraw\x12i\n" +
 	"\fReviewTicket\x12*.api.review.service.v1.ReviewTicketRequest\x1a+.api.review.service.v1.ReviewTicketResponse\"\x00\x12c\n" +
 	"\n" +
 	"AddComment\x12(.api.review.service.v1.AddCommentRequest\x1a).api.review.service.v1.AddCommentResponse\"\x00\x12i\n" +
@@ -1470,19 +1471,21 @@ var file_review_service_v1_review_proto_depIdxs = []int32{
 	14, // 5: api.review.service.v1.GetTicketResponse.comments:type_name -> api.review.service.v1.GetTicketResponse.Comment
 	16, // 6: api.review.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 7: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
-	2,  // 8: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
-	4,  // 9: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
-	6,  // 10: api.review.service.v1.Review.CancelTicket:input_type -> api.review.service.v1.CancelTicketRequest
-	8,  // 11: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
-	10, // 12: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
-	1,  // 13: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	3,  // 14: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
-	5,  // 15: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
-	7,  // 16: api.review.service.v1.Review.CancelTicket:output_type -> api.review.service.v1.CancelTicketResponse
-	9,  // 17: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	11, // 18: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
-	13, // [13:19] is the sub-list for method output_type
-	7,  // [7:13] is the sub-list for method input_type
+	0,  // 8: api.review.service.v1.Review.CreateOperatorWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
+	2,  // 9: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
+	4,  // 10: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
+	6,  // 11: api.review.service.v1.Review.CancelTicket:input_type -> api.review.service.v1.CancelTicketRequest
+	8,  // 12: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
+	10, // 13: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
+	1,  // 14: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	1,  // 15: api.review.service.v1.Review.CreateOperatorWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	3,  // 16: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
+	5,  // 17: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
+	7,  // 18: api.review.service.v1.Review.CancelTicket:output_type -> api.review.service.v1.CancelTicketResponse
+	9,  // 19: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	11, // 20: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
+	14, // [14:21] is the sub-list for method output_type
+	7,  // [7:14] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
 	7,  // [7:7] is the sub-list for extension extendee
 	0,  // [0:7] is the sub-list for field type_name

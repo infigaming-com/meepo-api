@@ -2804,6 +2804,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
+    /v1/review/operator/withdraw:
+        post:
+            tags:
+                - Review
+            operationId: Review_CreateOperatorWithdraw
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawResponse'
     /v1/review/withdraw:
         post:
             tags:
