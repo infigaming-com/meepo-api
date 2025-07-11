@@ -2678,6 +2678,8 @@ func (m *InitiateWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for ReportCurrency
+
 	// no validation rules for UserId
 
 	// no validation rules for ChannelId

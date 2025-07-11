@@ -330,15 +330,17 @@ message InitiateWithdrawRequest {
   string amount = 1;
   // Currency code for the transaction
   string currency = 2;
+  // Currency code for the transaction report
+  string report_currency = 3;
   // ID of the user who initiated the withdrawal
-  int64 user_id = 3 [json_name="userId"];
+  int64 user_id = 4;
   // ID of the channel to use for withdrawal
-  string channel_id = 4 [json_name="channelId"];
+  string channel_id = 5;
   // ID of the operator who owns this channel
-  api.common.OperatorContext operator_context = 5;
+  api.common.OperatorContext operator_context = 6;
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
-  google.protobuf.Struct extra = 6;
+  google.protobuf.Struct extra = 7;
 }
 
 // Response for withdrawal initiation
