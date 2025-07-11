@@ -19,19 +19,21 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeReview_ListTickets_FullMethodName         = "/api.backoffice.service.v1.BackofficeReview/ListTickets"
-	BackofficeReview_ListOperatorTickets_FullMethodName = "/api.backoffice.service.v1.BackofficeReview/ListOperatorTickets"
-	BackofficeReview_GetTicket_FullMethodName           = "/api.backoffice.service.v1.BackofficeReview/GetTicket"
-	BackofficeReview_ReviewTicket_FullMethodName        = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
-	BackofficeReview_AddComment_FullMethodName          = "/api.backoffice.service.v1.BackofficeReview/AddComment"
-	BackofficeReview_CancelTicket_FullMethodName        = "/api.backoffice.service.v1.BackofficeReview/CancelTicket"
-	BackofficeReview_GetTicketById_FullMethodName       = "/api.backoffice.service.v1.BackofficeReview/GetTicketById"
+	BackofficeReview_CreateOperatorWithdraw_FullMethodName = "/api.backoffice.service.v1.BackofficeReview/CreateOperatorWithdraw"
+	BackofficeReview_ListTickets_FullMethodName            = "/api.backoffice.service.v1.BackofficeReview/ListTickets"
+	BackofficeReview_ListOperatorTickets_FullMethodName    = "/api.backoffice.service.v1.BackofficeReview/ListOperatorTickets"
+	BackofficeReview_GetTicket_FullMethodName              = "/api.backoffice.service.v1.BackofficeReview/GetTicket"
+	BackofficeReview_ReviewTicket_FullMethodName           = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
+	BackofficeReview_AddComment_FullMethodName             = "/api.backoffice.service.v1.BackofficeReview/AddComment"
+	BackofficeReview_CancelTicket_FullMethodName           = "/api.backoffice.service.v1.BackofficeReview/CancelTicket"
+	BackofficeReview_GetTicketById_FullMethodName          = "/api.backoffice.service.v1.BackofficeReview/GetTicketById"
 )
 
 // BackofficeReviewClient is the client API for BackofficeReview service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeReviewClient interface {
+	CreateOperatorWithdraw(ctx context.Context, in *CreateOperatorWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
 	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
 	ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
 	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error)
@@ -47,6 +49,16 @@ type backofficeReviewClient struct {
 
 func NewBackofficeReviewClient(cc grpc.ClientConnInterface) BackofficeReviewClient {
 	return &backofficeReviewClient{cc}
+}
+
+func (c *backofficeReviewClient) CreateOperatorWithdraw(ctx context.Context, in *CreateOperatorWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateWithdrawResponse)
+	err := c.cc.Invoke(ctx, BackofficeReview_CreateOperatorWithdraw_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *backofficeReviewClient) ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error) {
@@ -123,6 +135,7 @@ func (c *backofficeReviewClient) GetTicketById(ctx context.Context, in *GetTicke
 // All implementations must embed UnimplementedBackofficeReviewServer
 // for forward compatibility.
 type BackofficeReviewServer interface {
+	CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error)
 	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
 	ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*ListTicketsResponse, error)
 	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
@@ -140,6 +153,9 @@ type BackofficeReviewServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficeReviewServer struct{}
 
+func (UnimplementedBackofficeReviewServer) CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateOperatorWithdraw not implemented")
+}
 func (UnimplementedBackofficeReviewServer) ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTickets not implemented")
 }
@@ -180,6 +196,24 @@ func RegisterBackofficeReviewServer(s grpc.ServiceRegistrar, srv BackofficeRevie
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&BackofficeReview_ServiceDesc, srv)
+}
+
+func _BackofficeReview_CreateOperatorWithdraw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOperatorWithdrawRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReviewServer).CreateOperatorWithdraw(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReview_CreateOperatorWithdraw_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReviewServer).CreateOperatorWithdraw(ctx, req.(*CreateOperatorWithdrawRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeReview_ListTickets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -315,6 +349,10 @@ var BackofficeReview_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.backoffice.service.v1.BackofficeReview",
 	HandlerType: (*BackofficeReviewServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateOperatorWithdraw",
+			Handler:    _BackofficeReview_CreateOperatorWithdraw_Handler,
+		},
 		{
 			MethodName: "ListTickets",
 			Handler:    _BackofficeReview_ListTickets_Handler,

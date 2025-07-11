@@ -19,12 +19,7 @@ service Review {
 			body: "*"
 		};
 	}
-	rpc CreateOperatorWithdraw(CreateWithdrawRequest) returns (CreateWithdrawResponse) {
-		option (google.api.http) = {
-			post: "/v1/review/operator/withdraw"
-			body: "*"
-		};
-	}
+	rpc CreateOperatorWithdraw(CreateOperatorWithdrawRequest) returns (CreateWithdrawResponse) {}
 	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {}
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
 	// CancelTicket is used to manually cancel a ticket.
@@ -37,6 +32,12 @@ service Review {
 
 message CreateWithdrawRequest {
 	google.protobuf.Struct request = 1;  // JSON data for REST API
+}
+
+message CreateOperatorWithdrawRequest {
+	int64 admin_user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	google.protobuf.Struct request = 3;  // JSON data for REST API
 }
 
 message CreateWithdrawResponse {

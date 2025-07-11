@@ -36,7 +36,7 @@ const (
 // Review service provides review functionality.
 type ReviewClient interface {
 	CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
-	CreateOperatorWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
+	CreateOperatorWithdraw(ctx context.Context, in *CreateOperatorWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
 	ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error)
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
 	// CancelTicket is used to manually cancel a ticket.
@@ -65,7 +65,7 @@ func (c *reviewClient) CreateWithdraw(ctx context.Context, in *CreateWithdrawReq
 	return out, nil
 }
 
-func (c *reviewClient) CreateOperatorWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error) {
+func (c *reviewClient) CreateOperatorWithdraw(ctx context.Context, in *CreateOperatorWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateWithdrawResponse)
 	err := c.cc.Invoke(ctx, Review_CreateOperatorWithdraw_FullMethodName, in, out, cOpts...)
@@ -142,7 +142,7 @@ func (c *reviewClient) GetTicket(ctx context.Context, in *GetTicketRequest, opts
 // Review service provides review functionality.
 type ReviewServer interface {
 	CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
-	CreateOperatorWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
+	CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
 	// CancelTicket is used to manually cancel a ticket.
@@ -164,7 +164,7 @@ type UnimplementedReviewServer struct{}
 func (UnimplementedReviewServer) CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateWithdraw not implemented")
 }
-func (UnimplementedReviewServer) CreateOperatorWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error) {
+func (UnimplementedReviewServer) CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOperatorWithdraw not implemented")
 }
 func (UnimplementedReviewServer) ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error) {
@@ -225,7 +225,7 @@ func _Review_CreateWithdraw_Handler(srv interface{}, ctx context.Context, dec fu
 }
 
 func _Review_CreateOperatorWithdraw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateWithdrawRequest)
+	in := new(CreateOperatorWithdrawRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -237,7 +237,7 @@ func _Review_CreateOperatorWithdraw_Handler(srv interface{}, ctx context.Context
 		FullMethod: Review_CreateOperatorWithdraw_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReviewServer).CreateOperatorWithdraw(ctx, req.(*CreateWithdrawRequest))
+		return srv.(ReviewServer).CreateOperatorWithdraw(ctx, req.(*CreateOperatorWithdrawRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
