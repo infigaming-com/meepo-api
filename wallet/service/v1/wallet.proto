@@ -84,7 +84,7 @@ service Wallet {
 	// Transfer cash from operator to its company operator
 	rpc OperatorTransfer (OperatorTransferRequest) returns (OperatorTransferResponse) {}
 
-	// Swap cash between two balances of the same operator
+	// Swap cash between two balances of the same company's operator
 	rpc OperatorSwap (OperatorSwapRequest) returns (OperatorSwapResponse) {}
 
 	// Freeze cash of a balance of an operator

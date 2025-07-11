@@ -94,7 +94,7 @@ type WalletClient interface {
 	ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*ListOperatorBalancesResponse, error)
 	// Transfer cash from operator to its company operator
 	OperatorTransfer(ctx context.Context, in *OperatorTransferRequest, opts ...grpc.CallOption) (*OperatorTransferResponse, error)
-	// Swap cash between two balances of the same operator
+	// Swap cash between two balances of the same company's operator
 	OperatorSwap(ctx context.Context, in *OperatorSwapRequest, opts ...grpc.CallOption) (*OperatorSwapResponse, error)
 	// Freeze cash of a balance of an operator
 	OperatorFreeze(ctx context.Context, in *OperatorFreezeRequest, opts ...grpc.CallOption) (*OperatorFreezeResponse, error)
@@ -479,7 +479,7 @@ type WalletServer interface {
 	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error)
 	// Transfer cash from operator to its company operator
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
-	// Swap cash between two balances of the same operator
+	// Swap cash between two balances of the same company's operator
 	OperatorSwap(context.Context, *OperatorSwapRequest) (*OperatorSwapResponse, error)
 	// Freeze cash of a balance of an operator
 	OperatorFreeze(context.Context, *OperatorFreezeRequest) (*OperatorFreezeResponse, error)

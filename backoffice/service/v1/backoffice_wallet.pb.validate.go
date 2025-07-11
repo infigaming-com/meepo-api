@@ -2943,8 +2943,6 @@ func (m *OperatorTransferRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for TargetCurrency
-
 	// no validation rules for CashAmount
 
 	if len(errors) > 0 {

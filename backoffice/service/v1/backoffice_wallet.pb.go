@@ -1535,8 +1535,7 @@ type OperatorTransferRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Currency        string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	TargetCurrency  string                  `protobuf:"bytes,3,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
-	CashAmount      string                  `protobuf:"bytes,4,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	CashAmount      string                  `protobuf:"bytes,3,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1581,13 +1580,6 @@ func (x *OperatorTransferRequest) GetOperatorContext() *common.OperatorContext {
 func (x *OperatorTransferRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
-	}
-	return ""
-}
-
-func (x *OperatorTransferRequest) GetTargetCurrency() string {
-	if x != nil {
-		return x.TargetCurrency
 	}
 	return ""
 }
@@ -3368,12 +3360,11 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x0eexchange_rates\x18\x01 \x03(\v2F.api.backoffice.service.v1.GetExchangeRatesResponse.ExchangeRatesEntryR\rexchangeRates\x1a@\n" +
 	"\x12ExchangeRatesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc7\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9e\x01\n" +
 	"\x17OperatorTransferRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
-	"\x0ftarget_currency\x18\x03 \x01(\tR\x0etargetCurrency\x12\x1f\n" +
-	"\vcash_amount\x18\x04 \x01(\tR\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1f\n" +
+	"\vcash_amount\x18\x03 \x01(\tR\n" +
 	"cashAmount\"\xf6\x01\n" +
 	"\x18OperatorTransferResponse\x12#\n" +
 	"\roperator_cash\x18\x01 \x01(\tR\foperatorCash\x12:\n" +
