@@ -35,6 +35,242 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on CreateOperatorWithdrawRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateOperatorWithdrawRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateOperatorWithdrawRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CreateOperatorWithdrawRequestMultiError, or nil if none found.
+func (m *CreateOperatorWithdrawRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateOperatorWithdrawRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetRequest()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateOperatorWithdrawRequestValidationError{
+					field:  "Request",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateOperatorWithdrawRequestValidationError{
+					field:  "Request",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRequest()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateOperatorWithdrawRequestValidationError{
+				field:  "Request",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreateOperatorWithdrawRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateOperatorWithdrawRequestMultiError is an error wrapping multiple
+// validation errors returned by CreateOperatorWithdrawRequest.ValidateAll()
+// if the designated constraints aren't met.
+type CreateOperatorWithdrawRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateOperatorWithdrawRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateOperatorWithdrawRequestMultiError) AllErrors() []error { return m }
+
+// CreateOperatorWithdrawRequestValidationError is the validation error
+// returned by CreateOperatorWithdrawRequest.Validate if the designated
+// constraints aren't met.
+type CreateOperatorWithdrawRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateOperatorWithdrawRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateOperatorWithdrawRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateOperatorWithdrawRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateOperatorWithdrawRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateOperatorWithdrawRequestValidationError) ErrorName() string {
+	return "CreateOperatorWithdrawRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateOperatorWithdrawRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateOperatorWithdrawRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateOperatorWithdrawRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateOperatorWithdrawRequestValidationError{}
+
+// Validate checks the field values on CreateWithdrawResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateWithdrawResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateWithdrawResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateWithdrawResponseMultiError, or nil if none found.
+func (m *CreateWithdrawResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateWithdrawResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TicketId
+
+	if len(errors) > 0 {
+		return CreateWithdrawResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateWithdrawResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateWithdrawResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreateWithdrawResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateWithdrawResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateWithdrawResponseMultiError) AllErrors() []error { return m }
+
+// CreateWithdrawResponseValidationError is the validation error returned by
+// CreateWithdrawResponse.Validate if the designated constraints aren't met.
+type CreateWithdrawResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateWithdrawResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateWithdrawResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateWithdrawResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateWithdrawResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateWithdrawResponseValidationError) ErrorName() string {
+	return "CreateWithdrawResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateWithdrawResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateWithdrawResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateWithdrawResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateWithdrawResponseValidationError{}
+
 // Validate checks the field values on ListTicketsRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

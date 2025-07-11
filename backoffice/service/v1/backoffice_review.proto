@@ -5,13 +5,19 @@ package api.backoffice.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
-import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficeReview {
+	rpc CreateOperatorWithdraw(CreateOperatorWithdrawRequest) returns (CreateWithdrawResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/review/operator/withdraw"
+			body: "*"
+		};
+	}
+
 	rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/review/tickets/list"
@@ -54,6 +60,14 @@ service BackofficeReview {
 			body: "*"
 		};
 	}
+}
+
+message CreateOperatorWithdrawRequest {
+	google.protobuf.Struct request = 2;  // JSON data for REST API
+}
+
+message CreateWithdrawResponse {
+	int64 ticket_id = 1;
 }
 
 message ListTicketsRequest {

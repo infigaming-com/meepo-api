@@ -1675,6 +1675,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse'
+    /v1/backoffice/review/operator/withdraw:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_CreateOperatorWithdraw
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateOperatorWithdrawRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CreateWithdrawResponse'
     /v1/backoffice/review/tickets/cancel:
         post:
             tags:
@@ -2841,24 +2859,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
-    /v1/review/operator/withdraw:
-        post:
-            tags:
-                - Review
-            operationId: Review_CreateOperatorWithdraw
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawResponse'
     /v1/review/withdraw:
         post:
             tags:
@@ -3451,6 +3451,11 @@ components:
                     type: string
                 password:
                     type: string
+        api.backoffice.service.v1.CreateOperatorWithdrawRequest:
+            type: object
+            properties:
+                request:
+                    type: object
         api.backoffice.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
@@ -3544,6 +3549,11 @@ components:
         api.backoffice.service.v1.CreateRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.CreateWithdrawResponse:
+            type: object
+            properties:
+                ticketId:
+                    type: string
         api.backoffice.service.v1.DeleteAdjustmentConfigRequest:
             type: object
             properties:
