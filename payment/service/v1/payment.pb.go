@@ -1309,8 +1309,9 @@ type PaymentChannelInfo struct {
 	DepositSchema *structpb.Struct `protobuf:"bytes,24,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
 	// JSON schema defining withdrawal form fields required by this channel
 	WithdrawSchema *structpb.Struct `protobuf:"bytes,25,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
-	SourceType     string           `protobuf:"bytes,26,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
-	Enable         bool             `protobuf:"varint,27,opt,name=enable,proto3" json:"enable,omitempty"`
+	Source         string           `protobuf:"bytes,26,opt,name=source,proto3" json:"source,omitempty"`
+	SourceType     string           `protobuf:"bytes,27,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
+	Enable         bool             `protobuf:"varint,28,opt,name=enable,proto3" json:"enable,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1518,6 +1519,13 @@ func (x *PaymentChannelInfo) GetWithdrawSchema() *structpb.Struct {
 		return x.WithdrawSchema
 	}
 	return nil
+}
+
+func (x *PaymentChannelInfo) GetSource() string {
+	if x != nil {
+		return x.Source
+	}
+	return ""
 }
 
 func (x *PaymentChannelInfo) GetSourceType() string {
@@ -1943,15 +1951,13 @@ type InitiateWithdrawRequest struct {
 	Currency string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	// ID of the user who initiated the withdrawal
 	UserId int64 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// ID of the operator who owns this channel
-	OperatorId int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// ID of the channel to use for withdrawal
-	ChannelId string `protobuf:"bytes,5,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	ChannelId string `protobuf:"bytes,4,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// ID of the operator who owns this channel
-	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// Additional information needed for the withdrawal
 	// May include account details, clientId, note, etc.
-	Extra         *structpb.Struct `protobuf:"bytes,7,opt,name=extra,proto3" json:"extra,omitempty"`
+	Extra         *structpb.Struct `protobuf:"bytes,6,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2003,13 +2009,6 @@ func (x *InitiateWithdrawRequest) GetCurrency() string {
 func (x *InitiateWithdrawRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
-	}
-	return 0
-}
-
-func (x *InitiateWithdrawRequest) GetOperatorId() int64 {
-	if x != nil {
-		return x.OperatorId
 	}
 	return 0
 }
@@ -3975,7 +3974,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\x89\a\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xa1\a\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x12\n" +
@@ -4004,10 +4003,11 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\afix_fee\x18\x16 \x01(\tR\x06fixFee\x12\x19\n" +
 	"\brate_fee\x18\x17 \x01(\tR\arateFee\x12>\n" +
 	"\x0edeposit_schema\x18\x18 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
-	"\x0fwithdraw_schema\x18\x19 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\x12\x1f\n" +
-	"\vsource_type\x18\x1a \x01(\tR\n" +
+	"\x0fwithdraw_schema\x18\x19 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\x12\x16\n" +
+	"\x06source\x18\x1a \x01(\tR\x06source\x12\x1f\n" +
+	"\vsource_type\x18\x1b \x01(\tR\n" +
 	"sourceType\x12\x16\n" +
-	"\x06enable\x18\x1b \x01(\bR\x06enable\"\x9a\x01\n" +
+	"\x06enable\x18\x1c \x01(\bR\x06enable\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
@@ -4046,17 +4046,15 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1a\n" +
 	"\bprotocol\x18\x03 \x01(\tR\bprotocol\x12\x18\n" +
 	"\anetwork\x18\x04 \x01(\tR\anetwork\x12\x18\n" +
-	"\aaddress\x18\x05 \x01(\tR\aaddress\"\x9d\x02\n" +
+	"\aaddress\x18\x05 \x01(\tR\aaddress\"\xfc\x01\n" +
 	"\x17InitiateWithdrawRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\x03R\n" +
-	"operatorId\x12\x1d\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x05 \x01(\tR\tchannelId\x12F\n" +
-	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12-\n" +
-	"\x05extra\x18\a \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xd8\x01\n" +
+	"channel_id\x18\x04 \x01(\tR\tchannelId\x12F\n" +
+	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12-\n" +
+	"\x05extra\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xd8\x01\n" +
 	"\x18InitiateWithdrawResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11operator_order_no\x18\x02 \x01(\tR\x0foperatorOrderNo\x12\x16\n" +

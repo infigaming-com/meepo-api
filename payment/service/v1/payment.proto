@@ -228,8 +228,9 @@ message PaymentChannelInfo {
   google.protobuf.Struct deposit_schema = 24 [json_name="depositSchema"];
   // JSON schema defining withdrawal form fields required by this channel
   google.protobuf.Struct withdraw_schema = 25 [json_name="withdrawSchema"];
-  string source_type = 26;
-  bool enable = 27;
+  string source = 26;
+  string source_type = 27;
+  bool enable = 28;
 }
 
 // Request to initiate a deposit
@@ -331,15 +332,13 @@ message InitiateWithdrawRequest {
   string currency = 2;
   // ID of the user who initiated the withdrawal
   int64 user_id = 3 [json_name="userId"];
-  // ID of the operator who owns this channel
-  int64 operator_id = 4 [json_name="operatorId"];
   // ID of the channel to use for withdrawal
-  string channel_id = 5 [json_name="channelId"];
+  string channel_id = 4 [json_name="channelId"];
   // ID of the operator who owns this channel
-  api.common.OperatorContext operator_context = 6;
+  api.common.OperatorContext operator_context = 5;
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
-  google.protobuf.Struct extra = 7;
+  google.protobuf.Struct extra = 6;
 }
 
 // Response for withdrawal initiation
