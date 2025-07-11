@@ -8570,9 +8570,63 @@ func (m *OperatorBalanceTransaction) validate(all bool) error {
 
 	// no validation rules for FeeAmount
 
-	// no validation rules for CreatedAt
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, OperatorBalanceTransactionValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, OperatorBalanceTransactionValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return OperatorBalanceTransactionValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
-	// no validation rules for UpdatedAt
+	if all {
+		switch v := interface{}(m.GetUpdatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, OperatorBalanceTransactionValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, OperatorBalanceTransactionValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return OperatorBalanceTransactionValidationError{
+				field:  "UpdatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return OperatorBalanceTransactionMultiError(errors)
@@ -8799,6 +8853,255 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListOperatorBalanceTransactionsResponseValidationError{}
+
+// Validate checks the field values on OperatorDebitRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *OperatorDebitRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OperatorDebitRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OperatorDebitRequestMultiError, or nil if none found.
+func (m *OperatorDebitRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OperatorDebitRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, OperatorDebitRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, OperatorDebitRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return OperatorDebitRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Currency
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for TransactionType
+
+	// no validation rules for CashAmount
+
+	if m.ExternalTransactionId != nil {
+		// no validation rules for ExternalTransactionId
+	}
+
+	if len(errors) > 0 {
+		return OperatorDebitRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// OperatorDebitRequestMultiError is an error wrapping multiple validation
+// errors returned by OperatorDebitRequest.ValidateAll() if the designated
+// constraints aren't met.
+type OperatorDebitRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OperatorDebitRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OperatorDebitRequestMultiError) AllErrors() []error { return m }
+
+// OperatorDebitRequestValidationError is the validation error returned by
+// OperatorDebitRequest.Validate if the designated constraints aren't met.
+type OperatorDebitRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OperatorDebitRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OperatorDebitRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OperatorDebitRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OperatorDebitRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OperatorDebitRequestValidationError) ErrorName() string {
+	return "OperatorDebitRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e OperatorDebitRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOperatorDebitRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OperatorDebitRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OperatorDebitRequestValidationError{}
+
+// Validate checks the field values on OperatorDebitResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *OperatorDebitResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OperatorDebitResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OperatorDebitResponseMultiError, or nil if none found.
+func (m *OperatorDebitResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OperatorDebitResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	// no validation rules for Cash
+
+	if len(errors) > 0 {
+		return OperatorDebitResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// OperatorDebitResponseMultiError is an error wrapping multiple validation
+// errors returned by OperatorDebitResponse.ValidateAll() if the designated
+// constraints aren't met.
+type OperatorDebitResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OperatorDebitResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OperatorDebitResponseMultiError) AllErrors() []error { return m }
+
+// OperatorDebitResponseValidationError is the validation error returned by
+// OperatorDebitResponse.Validate if the designated constraints aren't met.
+type OperatorDebitResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OperatorDebitResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OperatorDebitResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OperatorDebitResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OperatorDebitResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OperatorDebitResponseValidationError) ErrorName() string {
+	return "OperatorDebitResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e OperatorDebitResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOperatorDebitResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OperatorDebitResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OperatorDebitResponseValidationError{}
 
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are

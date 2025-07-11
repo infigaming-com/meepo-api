@@ -462,8 +462,8 @@ message OperatorBalanceTransaction {
 	string transaction_type = 10;
 	string memo = 11;
 	string fee_amount = 12;
-	int64 created_at = 13;
-	int64 updated_at = 14;
+	google.protobuf.Timestamp created_at = 13;
+	google.protobuf.Timestamp updated_at = 14;
 }
 
 message ListOperatorBalanceTransactionsResponse {
