@@ -188,6 +188,8 @@ func (m *CreateOperatorWithdrawRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for AdminUserId
+
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:

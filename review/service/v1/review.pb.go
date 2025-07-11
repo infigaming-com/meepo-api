@@ -71,8 +71,9 @@ func (x *CreateWithdrawRequest) GetRequest() *structpb.Struct {
 
 type CreateOperatorWithdrawRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Request         *structpb.Struct        `protobuf:"bytes,2,opt,name=request,proto3" json:"request,omitempty"` // JSON data for REST API
+	AdminUserId     int64                   `protobuf:"varint,1,opt,name=admin_user_id,json=adminUserId,proto3" json:"admin_user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Request         *structpb.Struct        `protobuf:"bytes,3,opt,name=request,proto3" json:"request,omitempty"` // JSON data for REST API
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -105,6 +106,13 @@ func (x *CreateOperatorWithdrawRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateOperatorWithdrawRequest.ProtoReflect.Descriptor instead.
 func (*CreateOperatorWithdrawRequest) Descriptor() ([]byte, []int) {
 	return file_review_service_v1_review_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateOperatorWithdrawRequest) GetAdminUserId() int64 {
+	if x != nil {
+		return x.AdminUserId
+	}
+	return 0
 }
 
 func (x *CreateOperatorWithdrawRequest) GetOperatorContext() *common.OperatorContext {
@@ -1511,10 +1519,11 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\n" +
 	"\x1ereview/service/v1/review.proto\x12\x15api.review.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"J\n" +
 	"\x15CreateWithdrawRequest\x121\n" +
-	"\arequest\x18\x01 \x01(\v2\x17.google.protobuf.StructR\arequest\"\x9a\x01\n" +
-	"\x1dCreateOperatorWithdrawRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x121\n" +
-	"\arequest\x18\x02 \x01(\v2\x17.google.protobuf.StructR\arequest\"5\n" +
+	"\arequest\x18\x01 \x01(\v2\x17.google.protobuf.StructR\arequest\"\xbe\x01\n" +
+	"\x1dCreateOperatorWithdrawRequest\x12\"\n" +
+	"\radmin_user_id\x18\x01 \x01(\x03R\vadminUserId\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x121\n" +
+	"\arequest\x18\x03 \x01(\v2\x17.google.protobuf.StructR\arequest\"5\n" +
 	"\x16CreateWithdrawResponse\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x9b\x01\n" +
 	"\x13ReviewTicketRequest\x12\x1b\n" +
