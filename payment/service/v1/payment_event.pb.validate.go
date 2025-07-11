@@ -433,6 +433,8 @@ func (m *PaymentTransactionEvent) validate(all bool) error {
 
 	// no validation rules for Status
 
+	// no validation rules for Timestamp
+
 	if all {
 		switch v := interface{}(m.GetExtra()).(type) {
 		case interface{ ValidateAll() error }:
@@ -639,6 +641,8 @@ func (m *OperatorPaymentTransactionEvent) validate(all bool) error {
 	// no validation rules for Amount
 
 	// no validation rules for Status
+
+	// no validation rules for Timestamp
 
 	if all {
 		switch v := interface{}(m.GetExtra()).(type) {

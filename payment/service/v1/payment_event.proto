@@ -34,8 +34,9 @@ message PaymentTransactionEvent {
 	string reporting_currency = 9;
 	string amount = 10; // cash amount of the currency
 	string status = 11; // payment status
-	google.protobuf.Struct extra = 12;
-	ChannelInfo channel_info = 13;
+	int64 timestamp = 12;
+	google.protobuf.Struct extra = 13;
+	ChannelInfo channel_info = 14;
 }
 
 message OperatorPaymentTransactionEvent {
@@ -49,6 +50,7 @@ message OperatorPaymentTransactionEvent {
 	string exchange_rate = 10; // exchange rate of the currency to the settlement currency
 	string amount = 11; // cash amount of the currency
 	string status = 12; // payment status
-	google.protobuf.Struct extra = 13;
-	ChannelInfo channel_info = 14;
+	int64 timestamp = 13;
+	google.protobuf.Struct extra = 14;
+	ChannelInfo channel_info = 15;
 }

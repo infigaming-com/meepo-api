@@ -10011,6 +10011,8 @@ components:
                 withdrawSchema:
                     type: object
                     description: JSON schema defining withdrawal form fields required by this channel
+                source:
+                    type: string
                 sourceType:
                     type: string
                 enable:

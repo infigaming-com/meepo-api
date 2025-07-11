@@ -1700,6 +1700,8 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Source
+
 	// no validation rules for SourceType
 
 	// no validation rules for Enable
@@ -2676,9 +2678,9 @@ func (m *InitiateWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for UserId
+	// no validation rules for ReportCurrency
 
-	// no validation rules for OperatorId
+	// no validation rules for UserId
 
 	// no validation rules for ChannelId
 
@@ -2984,6 +2986,8 @@ func (m *InitiateOperatorWithdrawRequest) validate(all bool) error {
 	// no validation rules for Amount
 
 	// no validation rules for Currency
+
+	// no validation rules for ReportCurrency
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
