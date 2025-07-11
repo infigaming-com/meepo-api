@@ -677,12 +677,13 @@ message OperatorTransferResponse {
 
 message OperatorSwapRequest {
 	api.common.OperatorContext operator_context = 1;
-	string currency = 2;
-	string reporting_currency = 3;
-	string target_currency = 4;
-	string target_reporting_currency = 5;
-	string transaction_type = 6;
-	string cash_amount = 7;
+	api.common.OperatorContext target_operator_context = 2;
+	string currency = 3;
+	string reporting_currency = 4;
+	string target_currency = 5;
+	string target_reporting_currency = 6;
+	string transaction_type = 7;
+	string cash_amount = 8;
 }
 
 message OperatorSwapResponse {

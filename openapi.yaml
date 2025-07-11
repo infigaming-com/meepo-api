@@ -7867,6 +7867,8 @@ components:
             properties:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 currency:
                     type: string
                 targetCurrency:
