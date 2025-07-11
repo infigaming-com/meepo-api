@@ -451,6 +451,8 @@ message SetOperatorTagsConfigRequest {
 	int64 operator_id = 1;
 	// Whether to follow parent operator's tags.
 	bool follow_parent = 2;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 3;
 }
 
 // SetOperatorTagsConfigResponse is an empty message indicating successful tag configuration.
@@ -462,6 +464,8 @@ message SetOperatorTagsRequest {
 	int64 operator_id = 1;
 	// The tag to add to the operator.
 	repeated string tags = 2;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 3;
 }
 
 // SetOperatorTagsResponse is an empty message indicating successful tag addition.
@@ -471,6 +475,8 @@ message SetOperatorTagsResponse {}
 message GetOperatorTagsConfigRequest {
 	// The ID of the operator to get tag configuration for.
 	int64 operator_id = 1;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 2;
 }
 
 // GetOperatorTagsConfigResponse contains the tag configuration settings, now only follow_parent flag.
@@ -483,6 +489,8 @@ message GetOperatorTagsConfigResponse {
 message GetOperatorTagsRequest {
 	// The ID of the operator to get tags for.
 	int64 operator_id = 1;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 2;
 }	
 
 // GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
@@ -505,6 +513,8 @@ message GetUserTagsResponse {
 message GetUserTagsByIdRequest {
 	// The ID of the user to get tags for.
 	int64 user_id = 1;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 2;
 }
 
 // GetUserTagsByIdResponse contains the list of active tags associated with the user.
@@ -516,6 +526,8 @@ message GetUserTagsByIdResponse {
 message SetUserTagsByIdRequest {
 	int64 user_id = 1;
 	repeated string tags = 2;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 3;
 }
 
 message SetUserTagsByIdResponse {}
@@ -554,6 +566,8 @@ message UpdateUserRequest {
 	optional bool ban_withdraw = 6;
 	optional bool enabled = 7;
 	optional int64 role_id = 8;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 9;
 }
 
 message UpdateUserResponse {
@@ -588,6 +602,8 @@ message ListUsersRequest {
 	optional string mobile = 26;
 	optional int32 page = 27;
 	optional int32 page_size = 28;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 29;
 }
 
 message ListUsersResponse {
@@ -655,6 +671,8 @@ message AddCommentRequest {
 	int64 user_id = 1;
 	int64 author_user_id = 2;
 	string content = 3;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 4;
 }
 
 message AddCommentResponse {
@@ -680,6 +698,8 @@ message GetUserProfileRequest {
 	int64 user_id = 1;
 	optional int32 login_page = 2;
 	optional int32 login_page_size = 3;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 4;
 }
 
 message GetUserProfileResponse {

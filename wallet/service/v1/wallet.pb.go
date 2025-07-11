@@ -2680,10 +2680,11 @@ func (x *Currency) GetDecimalPlaces() int32 {
 }
 
 type AddCurrencyRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currency      *Currency              `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	Currency        *Currency               `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *AddCurrencyRequest) Reset() {
@@ -2719,6 +2720,13 @@ func (*AddCurrencyRequest) Descriptor() ([]byte, []int) {
 func (x *AddCurrencyRequest) GetCurrency() *Currency {
 	if x != nil {
 		return x.Currency
+	}
+	return nil
+}
+
+func (x *AddCurrencyRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
 	}
 	return nil
 }
@@ -6376,9 +6384,10 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12\x16\n" +
 	"\x06symbol\x18\x05 \x01(\tR\x06symbol\x12\x12\n" +
 	"\x04icon\x18\x06 \x01(\tR\x04icon\x12%\n" +
-	"\x0edecimal_places\x18\a \x01(\x05R\rdecimalPlaces\"Q\n" +
+	"\x0edecimal_places\x18\a \x01(\x05R\rdecimalPlaces\"\x99\x01\n" +
 	"\x12AddCurrencyRequest\x12;\n" +
-	"\bcurrency\x18\x01 \x01(\v2\x1f.api.wallet.service.v1.CurrencyR\bcurrency\"\x15\n" +
+	"\bcurrency\x18\x01 \x01(\v2\x1f.api.wallet.service.v1.CurrencyR\bcurrency\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x15\n" +
 	"\x13AddCurrencyResponse\"\xb1\x02\n" +
 	"\x15UpdateCurrencyRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1d\n" +
@@ -6764,99 +6773,100 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	77, // 28: api.wallet.service.v1.GetOverviewDashboardFromWalletResponse.withdraw:type_name -> api.wallet.service.v1.GetOverviewDashboardFromWalletResponse.Withdraw
 	78, // 29: api.wallet.service.v1.GetOverviewDashboardFromWalletResponse.deposit_minus_withdraw:type_name -> api.wallet.service.v1.GetOverviewDashboardFromWalletResponse.DepositMinusWithdraw
 	34, // 30: api.wallet.service.v1.AddCurrencyRequest.currency:type_name -> api.wallet.service.v1.Currency
-	34, // 31: api.wallet.service.v1.GetCurrenciesResponse.currencies:type_name -> api.wallet.service.v1.Currency
-	34, // 32: api.wallet.service.v1.ListCurrenciesResponse.currencies:type_name -> api.wallet.service.v1.Currency
-	79, // 33: api.wallet.service.v1.UpdateOperatorCurrencyRequest.operator_context:type_name -> api.common.OperatorContext
-	79, // 34: api.wallet.service.v1.UpdateUserCurrencyRequest.operator_context:type_name -> api.common.OperatorContext
-	79, // 35: api.wallet.service.v1.ListOperatorBalancesRequest.operator_context:type_name -> api.common.OperatorContext
-	79, // 36: api.wallet.service.v1.OperatorBalance.operator_context:type_name -> api.common.OperatorContext
-	48, // 37: api.wallet.service.v1.ListOperatorBalancesResponse.operator_balances:type_name -> api.wallet.service.v1.OperatorBalance
-	79, // 38: api.wallet.service.v1.OperatorTransferRequest.operator_context:type_name -> api.common.OperatorContext
-	79, // 39: api.wallet.service.v1.OperatorTransferRequest.target_operator_context:type_name -> api.common.OperatorContext
-	79, // 40: api.wallet.service.v1.OperatorSwapRequest.operator_context:type_name -> api.common.OperatorContext
-	79, // 41: api.wallet.service.v1.OperatorFreezeRequest.operator_context:type_name -> api.common.OperatorContext
-	79, // 42: api.wallet.service.v1.OperatorRollbackRequest.operator_context:type_name -> api.common.OperatorContext
-	79, // 43: api.wallet.service.v1.OperatorSettleRequest.operator_context:type_name -> api.common.OperatorContext
-	79, // 44: api.wallet.service.v1.GetOperatorBalancesRequest.operator_context:type_name -> api.common.OperatorContext
-	48, // 45: api.wallet.service.v1.GetOperatorBalancesResponse.operator_balances:type_name -> api.wallet.service.v1.OperatorBalance
-	80, // 46: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	80, // 47: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	79, // 48: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
-	79, // 49: api.wallet.service.v1.OperatorBalanceTransaction.operator_context:type_name -> api.common.OperatorContext
-	63, // 50: api.wallet.service.v1.ListOperatorBalanceTransactionsResponse.transactions:type_name -> api.wallet.service.v1.OperatorBalanceTransaction
-	80, // 51: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
-	68, // 52: api.wallet.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.wallet.service.v1.GetWalletsResponse.Credit
-	80, // 53: api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
-	80, // 54: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
-	80, // 55: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction.updated_at:type_name -> google.protobuf.Timestamp
-	80, // 56: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 57: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
-	2,  // 58: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
-	4,  // 59: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
-	6,  // 60: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
-	8,  // 61: api.wallet.service.v1.Wallet.GameDebit:input_type -> api.wallet.service.v1.GameDebitRequest
-	10, // 62: api.wallet.service.v1.Wallet.GameCredit:input_type -> api.wallet.service.v1.GameCreditRequest
-	12, // 63: api.wallet.service.v1.Wallet.Freeze:input_type -> api.wallet.service.v1.FreezeRequest
-	14, // 64: api.wallet.service.v1.Wallet.Settle:input_type -> api.wallet.service.v1.SettleRequest
-	16, // 65: api.wallet.service.v1.Wallet.Rollback:input_type -> api.wallet.service.v1.RollbackRequest
-	18, // 66: api.wallet.service.v1.Wallet.GetWallets:input_type -> api.wallet.service.v1.GetWalletsRequest
-	20, // 67: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:input_type -> api.wallet.service.v1.ListWalletBalanceTransactionsRequest
-	22, // 68: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:input_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsRequest
-	24, // 69: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:input_type -> api.wallet.service.v1.GetWalletCreditTransactionsRequest
-	26, // 70: api.wallet.service.v1.Wallet.GetExchangeRates:input_type -> api.wallet.service.v1.GetExchangeRatesRequest
-	28, // 71: api.wallet.service.v1.Wallet.GetUserTransactionSummary:input_type -> api.wallet.service.v1.GetUserTransactionSummaryRequest
-	30, // 72: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:input_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest
-	32, // 73: api.wallet.service.v1.Wallet.GetOverviewDashboardFromWallet:input_type -> api.wallet.service.v1.GetOverviewDashboardFromWalletRequest
-	35, // 74: api.wallet.service.v1.Wallet.AddCurrency:input_type -> api.wallet.service.v1.AddCurrencyRequest
-	37, // 75: api.wallet.service.v1.Wallet.UpdateCurrency:input_type -> api.wallet.service.v1.UpdateCurrencyRequest
-	39, // 76: api.wallet.service.v1.Wallet.GetCurrencies:input_type -> api.wallet.service.v1.GetCurrenciesRequest
-	41, // 77: api.wallet.service.v1.Wallet.ListCurrencies:input_type -> api.wallet.service.v1.ListCurrenciesRequest
-	43, // 78: api.wallet.service.v1.Wallet.UpdateOperatorCurrency:input_type -> api.wallet.service.v1.UpdateOperatorCurrencyRequest
-	45, // 79: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
-	47, // 80: api.wallet.service.v1.Wallet.ListOperatorBalances:input_type -> api.wallet.service.v1.ListOperatorBalancesRequest
-	50, // 81: api.wallet.service.v1.Wallet.OperatorTransfer:input_type -> api.wallet.service.v1.OperatorTransferRequest
-	52, // 82: api.wallet.service.v1.Wallet.OperatorSwap:input_type -> api.wallet.service.v1.OperatorSwapRequest
-	54, // 83: api.wallet.service.v1.Wallet.OperatorFreeze:input_type -> api.wallet.service.v1.OperatorFreezeRequest
-	56, // 84: api.wallet.service.v1.Wallet.OperatorRollback:input_type -> api.wallet.service.v1.OperatorRollbackRequest
-	58, // 85: api.wallet.service.v1.Wallet.OperatorSettle:input_type -> api.wallet.service.v1.OperatorSettleRequest
-	60, // 86: api.wallet.service.v1.Wallet.GetOperatorBalances:input_type -> api.wallet.service.v1.GetOperatorBalancesRequest
-	62, // 87: api.wallet.service.v1.Wallet.ListOperatorBalanceTransactions:input_type -> api.wallet.service.v1.ListOperatorBalanceTransactionsRequest
-	1,  // 88: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
-	3,  // 89: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
-	5,  // 90: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
-	7,  // 91: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
-	9,  // 92: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
-	11, // 93: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
-	13, // 94: api.wallet.service.v1.Wallet.Freeze:output_type -> api.wallet.service.v1.FreezeResponse
-	15, // 95: api.wallet.service.v1.Wallet.Settle:output_type -> api.wallet.service.v1.SettleResponse
-	17, // 96: api.wallet.service.v1.Wallet.Rollback:output_type -> api.wallet.service.v1.RollbackResponse
-	19, // 97: api.wallet.service.v1.Wallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
-	21, // 98: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:output_type -> api.wallet.service.v1.ListWalletBalanceTransactionsResponse
-	23, // 99: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:output_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse
-	25, // 100: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:output_type -> api.wallet.service.v1.GetWalletCreditTransactionsResponse
-	27, // 101: api.wallet.service.v1.Wallet.GetExchangeRates:output_type -> api.wallet.service.v1.GetExchangeRatesResponse
-	29, // 102: api.wallet.service.v1.Wallet.GetUserTransactionSummary:output_type -> api.wallet.service.v1.GetUserTransactionSummaryResponse
-	31, // 103: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:output_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletResponse
-	33, // 104: api.wallet.service.v1.Wallet.GetOverviewDashboardFromWallet:output_type -> api.wallet.service.v1.GetOverviewDashboardFromWalletResponse
-	36, // 105: api.wallet.service.v1.Wallet.AddCurrency:output_type -> api.wallet.service.v1.AddCurrencyResponse
-	38, // 106: api.wallet.service.v1.Wallet.UpdateCurrency:output_type -> api.wallet.service.v1.UpdateCurrencyResponse
-	40, // 107: api.wallet.service.v1.Wallet.GetCurrencies:output_type -> api.wallet.service.v1.GetCurrenciesResponse
-	42, // 108: api.wallet.service.v1.Wallet.ListCurrencies:output_type -> api.wallet.service.v1.ListCurrenciesResponse
-	44, // 109: api.wallet.service.v1.Wallet.UpdateOperatorCurrency:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyResponse
-	46, // 110: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
-	49, // 111: api.wallet.service.v1.Wallet.ListOperatorBalances:output_type -> api.wallet.service.v1.ListOperatorBalancesResponse
-	51, // 112: api.wallet.service.v1.Wallet.OperatorTransfer:output_type -> api.wallet.service.v1.OperatorTransferResponse
-	53, // 113: api.wallet.service.v1.Wallet.OperatorSwap:output_type -> api.wallet.service.v1.OperatorSwapResponse
-	55, // 114: api.wallet.service.v1.Wallet.OperatorFreeze:output_type -> api.wallet.service.v1.OperatorFreezeResponse
-	57, // 115: api.wallet.service.v1.Wallet.OperatorRollback:output_type -> api.wallet.service.v1.OperatorRollbackResponse
-	59, // 116: api.wallet.service.v1.Wallet.OperatorSettle:output_type -> api.wallet.service.v1.OperatorSettleResponse
-	61, // 117: api.wallet.service.v1.Wallet.GetOperatorBalances:output_type -> api.wallet.service.v1.GetOperatorBalancesResponse
-	64, // 118: api.wallet.service.v1.Wallet.ListOperatorBalanceTransactions:output_type -> api.wallet.service.v1.ListOperatorBalanceTransactionsResponse
-	88, // [88:119] is the sub-list for method output_type
-	57, // [57:88] is the sub-list for method input_type
-	57, // [57:57] is the sub-list for extension type_name
-	57, // [57:57] is the sub-list for extension extendee
-	0,  // [0:57] is the sub-list for field type_name
+	79, // 31: api.wallet.service.v1.AddCurrencyRequest.operator_context:type_name -> api.common.OperatorContext
+	34, // 32: api.wallet.service.v1.GetCurrenciesResponse.currencies:type_name -> api.wallet.service.v1.Currency
+	34, // 33: api.wallet.service.v1.ListCurrenciesResponse.currencies:type_name -> api.wallet.service.v1.Currency
+	79, // 34: api.wallet.service.v1.UpdateOperatorCurrencyRequest.operator_context:type_name -> api.common.OperatorContext
+	79, // 35: api.wallet.service.v1.UpdateUserCurrencyRequest.operator_context:type_name -> api.common.OperatorContext
+	79, // 36: api.wallet.service.v1.ListOperatorBalancesRequest.operator_context:type_name -> api.common.OperatorContext
+	79, // 37: api.wallet.service.v1.OperatorBalance.operator_context:type_name -> api.common.OperatorContext
+	48, // 38: api.wallet.service.v1.ListOperatorBalancesResponse.operator_balances:type_name -> api.wallet.service.v1.OperatorBalance
+	79, // 39: api.wallet.service.v1.OperatorTransferRequest.operator_context:type_name -> api.common.OperatorContext
+	79, // 40: api.wallet.service.v1.OperatorTransferRequest.target_operator_context:type_name -> api.common.OperatorContext
+	79, // 41: api.wallet.service.v1.OperatorSwapRequest.operator_context:type_name -> api.common.OperatorContext
+	79, // 42: api.wallet.service.v1.OperatorFreezeRequest.operator_context:type_name -> api.common.OperatorContext
+	79, // 43: api.wallet.service.v1.OperatorRollbackRequest.operator_context:type_name -> api.common.OperatorContext
+	79, // 44: api.wallet.service.v1.OperatorSettleRequest.operator_context:type_name -> api.common.OperatorContext
+	79, // 45: api.wallet.service.v1.GetOperatorBalancesRequest.operator_context:type_name -> api.common.OperatorContext
+	48, // 46: api.wallet.service.v1.GetOperatorBalancesResponse.operator_balances:type_name -> api.wallet.service.v1.OperatorBalance
+	80, // 47: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	80, // 48: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	79, // 49: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
+	79, // 50: api.wallet.service.v1.OperatorBalanceTransaction.operator_context:type_name -> api.common.OperatorContext
+	63, // 51: api.wallet.service.v1.ListOperatorBalanceTransactionsResponse.transactions:type_name -> api.wallet.service.v1.OperatorBalanceTransaction
+	80, // 52: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
+	68, // 53: api.wallet.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.wallet.service.v1.GetWalletsResponse.Credit
+	80, // 54: api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
+	80, // 55: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
+	80, // 56: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction.updated_at:type_name -> google.protobuf.Timestamp
+	80, // 57: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 58: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
+	2,  // 59: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
+	4,  // 60: api.wallet.service.v1.Wallet.Credit:input_type -> api.wallet.service.v1.CreditRequest
+	6,  // 61: api.wallet.service.v1.Wallet.Debit:input_type -> api.wallet.service.v1.DebitRequest
+	8,  // 62: api.wallet.service.v1.Wallet.GameDebit:input_type -> api.wallet.service.v1.GameDebitRequest
+	10, // 63: api.wallet.service.v1.Wallet.GameCredit:input_type -> api.wallet.service.v1.GameCreditRequest
+	12, // 64: api.wallet.service.v1.Wallet.Freeze:input_type -> api.wallet.service.v1.FreezeRequest
+	14, // 65: api.wallet.service.v1.Wallet.Settle:input_type -> api.wallet.service.v1.SettleRequest
+	16, // 66: api.wallet.service.v1.Wallet.Rollback:input_type -> api.wallet.service.v1.RollbackRequest
+	18, // 67: api.wallet.service.v1.Wallet.GetWallets:input_type -> api.wallet.service.v1.GetWalletsRequest
+	20, // 68: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:input_type -> api.wallet.service.v1.ListWalletBalanceTransactionsRequest
+	22, // 69: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:input_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsRequest
+	24, // 70: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:input_type -> api.wallet.service.v1.GetWalletCreditTransactionsRequest
+	26, // 71: api.wallet.service.v1.Wallet.GetExchangeRates:input_type -> api.wallet.service.v1.GetExchangeRatesRequest
+	28, // 72: api.wallet.service.v1.Wallet.GetUserTransactionSummary:input_type -> api.wallet.service.v1.GetUserTransactionSummaryRequest
+	30, // 73: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:input_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest
+	32, // 74: api.wallet.service.v1.Wallet.GetOverviewDashboardFromWallet:input_type -> api.wallet.service.v1.GetOverviewDashboardFromWalletRequest
+	35, // 75: api.wallet.service.v1.Wallet.AddCurrency:input_type -> api.wallet.service.v1.AddCurrencyRequest
+	37, // 76: api.wallet.service.v1.Wallet.UpdateCurrency:input_type -> api.wallet.service.v1.UpdateCurrencyRequest
+	39, // 77: api.wallet.service.v1.Wallet.GetCurrencies:input_type -> api.wallet.service.v1.GetCurrenciesRequest
+	41, // 78: api.wallet.service.v1.Wallet.ListCurrencies:input_type -> api.wallet.service.v1.ListCurrenciesRequest
+	43, // 79: api.wallet.service.v1.Wallet.UpdateOperatorCurrency:input_type -> api.wallet.service.v1.UpdateOperatorCurrencyRequest
+	45, // 80: api.wallet.service.v1.Wallet.UpdateUserCurrency:input_type -> api.wallet.service.v1.UpdateUserCurrencyRequest
+	47, // 81: api.wallet.service.v1.Wallet.ListOperatorBalances:input_type -> api.wallet.service.v1.ListOperatorBalancesRequest
+	50, // 82: api.wallet.service.v1.Wallet.OperatorTransfer:input_type -> api.wallet.service.v1.OperatorTransferRequest
+	52, // 83: api.wallet.service.v1.Wallet.OperatorSwap:input_type -> api.wallet.service.v1.OperatorSwapRequest
+	54, // 84: api.wallet.service.v1.Wallet.OperatorFreeze:input_type -> api.wallet.service.v1.OperatorFreezeRequest
+	56, // 85: api.wallet.service.v1.Wallet.OperatorRollback:input_type -> api.wallet.service.v1.OperatorRollbackRequest
+	58, // 86: api.wallet.service.v1.Wallet.OperatorSettle:input_type -> api.wallet.service.v1.OperatorSettleRequest
+	60, // 87: api.wallet.service.v1.Wallet.GetOperatorBalances:input_type -> api.wallet.service.v1.GetOperatorBalancesRequest
+	62, // 88: api.wallet.service.v1.Wallet.ListOperatorBalanceTransactions:input_type -> api.wallet.service.v1.ListOperatorBalanceTransactionsRequest
+	1,  // 89: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
+	3,  // 90: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
+	5,  // 91: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
+	7,  // 92: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
+	9,  // 93: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
+	11, // 94: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
+	13, // 95: api.wallet.service.v1.Wallet.Freeze:output_type -> api.wallet.service.v1.FreezeResponse
+	15, // 96: api.wallet.service.v1.Wallet.Settle:output_type -> api.wallet.service.v1.SettleResponse
+	17, // 97: api.wallet.service.v1.Wallet.Rollback:output_type -> api.wallet.service.v1.RollbackResponse
+	19, // 98: api.wallet.service.v1.Wallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
+	21, // 99: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:output_type -> api.wallet.service.v1.ListWalletBalanceTransactionsResponse
+	23, // 100: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:output_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse
+	25, // 101: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:output_type -> api.wallet.service.v1.GetWalletCreditTransactionsResponse
+	27, // 102: api.wallet.service.v1.Wallet.GetExchangeRates:output_type -> api.wallet.service.v1.GetExchangeRatesResponse
+	29, // 103: api.wallet.service.v1.Wallet.GetUserTransactionSummary:output_type -> api.wallet.service.v1.GetUserTransactionSummaryResponse
+	31, // 104: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:output_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletResponse
+	33, // 105: api.wallet.service.v1.Wallet.GetOverviewDashboardFromWallet:output_type -> api.wallet.service.v1.GetOverviewDashboardFromWalletResponse
+	36, // 106: api.wallet.service.v1.Wallet.AddCurrency:output_type -> api.wallet.service.v1.AddCurrencyResponse
+	38, // 107: api.wallet.service.v1.Wallet.UpdateCurrency:output_type -> api.wallet.service.v1.UpdateCurrencyResponse
+	40, // 108: api.wallet.service.v1.Wallet.GetCurrencies:output_type -> api.wallet.service.v1.GetCurrenciesResponse
+	42, // 109: api.wallet.service.v1.Wallet.ListCurrencies:output_type -> api.wallet.service.v1.ListCurrenciesResponse
+	44, // 110: api.wallet.service.v1.Wallet.UpdateOperatorCurrency:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyResponse
+	46, // 111: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
+	49, // 112: api.wallet.service.v1.Wallet.ListOperatorBalances:output_type -> api.wallet.service.v1.ListOperatorBalancesResponse
+	51, // 113: api.wallet.service.v1.Wallet.OperatorTransfer:output_type -> api.wallet.service.v1.OperatorTransferResponse
+	53, // 114: api.wallet.service.v1.Wallet.OperatorSwap:output_type -> api.wallet.service.v1.OperatorSwapResponse
+	55, // 115: api.wallet.service.v1.Wallet.OperatorFreeze:output_type -> api.wallet.service.v1.OperatorFreezeResponse
+	57, // 116: api.wallet.service.v1.Wallet.OperatorRollback:output_type -> api.wallet.service.v1.OperatorRollbackResponse
+	59, // 117: api.wallet.service.v1.Wallet.OperatorSettle:output_type -> api.wallet.service.v1.OperatorSettleResponse
+	61, // 118: api.wallet.service.v1.Wallet.GetOperatorBalances:output_type -> api.wallet.service.v1.GetOperatorBalancesResponse
+	64, // 119: api.wallet.service.v1.Wallet.ListOperatorBalanceTransactions:output_type -> api.wallet.service.v1.ListOperatorBalanceTransactionsResponse
+	89, // [89:120] is the sub-list for method output_type
+	58, // [58:89] is the sub-list for method input_type
+	58, // [58:58] is the sub-list for extension type_name
+	58, // [58:58] is the sub-list for extension extendee
+	0,  // [0:58] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_wallet_proto_init() }
