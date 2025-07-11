@@ -1950,7 +1950,7 @@ type InitiateWithdrawRequest struct {
 	// Currency code for the transaction
 	Currency string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Currency code for the transaction report
-	ReportCurrency string `protobuf:"bytes,3,opt,name=report_currency,json=reportCurrency,proto3" json:"report_currency,omitempty"`
+	ReportingCurrency string `protobuf:"bytes,3,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	// ID of the user who initiated the withdrawal
 	UserId int64 `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	// ID of the channel to use for withdrawal
@@ -2008,9 +2008,9 @@ func (x *InitiateWithdrawRequest) GetCurrency() string {
 	return ""
 }
 
-func (x *InitiateWithdrawRequest) GetReportCurrency() string {
+func (x *InitiateWithdrawRequest) GetReportingCurrency() string {
 	if x != nil {
-		return x.ReportCurrency
+		return x.ReportingCurrency
 	}
 	return ""
 }
@@ -2134,10 +2134,10 @@ type InitiateOperatorWithdrawRequest struct {
 	Amount string `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Currency code for the transaction
 	Currency string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	// Target Operator ID
-	AdminUserId string `protobuf:"bytes,3,opt,name=admin_user_id,json=adminUserId,proto3" json:"admin_user_id,omitempty"`
 	// Currency code for the transaction report
-	ReportCurrency string `protobuf:"bytes,4,opt,name=report_currency,json=reportCurrency,proto3" json:"report_currency,omitempty"`
+	ReportingCurrency string `protobuf:"bytes,3,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	// admin user id
+	AdminUserId int64 `protobuf:"varint,4,opt,name=admin_user_id,json=adminUserId,proto3" json:"admin_user_id,omitempty"`
 	// Operator ids
 	OperatorId         int64 `protobuf:"varint,5,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	CompanyOperatorId  int64 `protobuf:"varint,6,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
@@ -2201,18 +2201,18 @@ func (x *InitiateOperatorWithdrawRequest) GetCurrency() string {
 	return ""
 }
 
-func (x *InitiateOperatorWithdrawRequest) GetAdminUserId() string {
+func (x *InitiateOperatorWithdrawRequest) GetReportingCurrency() string {
 	if x != nil {
-		return x.AdminUserId
+		return x.ReportingCurrency
 	}
 	return ""
 }
 
-func (x *InitiateOperatorWithdrawRequest) GetReportCurrency() string {
+func (x *InitiateOperatorWithdrawRequest) GetAdminUserId() int64 {
 	if x != nil {
-		return x.ReportCurrency
+		return x.AdminUserId
 	}
-	return ""
+	return 0
 }
 
 func (x *InitiateOperatorWithdrawRequest) GetOperatorId() int64 {
@@ -4130,11 +4130,11 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1a\n" +
 	"\bprotocol\x18\x03 \x01(\tR\bprotocol\x12\x18\n" +
 	"\anetwork\x18\x04 \x01(\tR\anetwork\x12\x18\n" +
-	"\aaddress\x18\x05 \x01(\tR\aaddress\"\xa5\x02\n" +
+	"\aaddress\x18\x05 \x01(\tR\aaddress\"\xab\x02\n" +
 	"\x17InitiateWithdrawRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
-	"\x0freport_currency\x18\x03 \x01(\tR\x0ereportCurrency\x12\x17\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
+	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x05 \x01(\tR\tchannelId\x12F\n" +
@@ -4146,12 +4146,12 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x86\x05\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x8c\x05\n" +
 	"\x1fInitiateOperatorWithdrawRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\"\n" +
-	"\radmin_user_id\x18\x03 \x01(\tR\vadminUserId\x12'\n" +
-	"\x0freport_currency\x18\x04 \x01(\tR\x0ereportCurrency\x12\x1f\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
+	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12\"\n" +
+	"\radmin_user_id\x18\x04 \x01(\x03R\vadminUserId\x12\x1f\n" +
 	"\voperator_id\x18\x05 \x01(\x03R\n" +
 	"operatorId\x12.\n" +
 	"\x13company_operator_id\x18\x06 \x01(\x03R\x11companyOperatorId\x120\n" +

@@ -2678,7 +2678,7 @@ func (m *InitiateWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for ReportCurrency
+	// no validation rules for ReportingCurrency
 
 	// no validation rules for UserId
 
@@ -2987,9 +2987,9 @@ func (m *InitiateOperatorWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for AdminUserId
+	// no validation rules for ReportingCurrency
 
-	// no validation rules for ReportCurrency
+	// no validation rules for AdminUserId
 
 	// no validation rules for OperatorId
 
