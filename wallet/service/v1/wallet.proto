@@ -101,6 +101,9 @@ service Wallet {
 
 	// List Operator Balance Transactions based on filter
 	rpc ListOperatorBalanceTransactions (ListOperatorBalanceTransactionsRequest) returns (ListOperatorBalanceTransactionsResponse) {}
+
+	// OperatorDebit is used to debit cash from an operator's balance
+	rpc OperatorDebit (OperatorDebitRequest) returns (OperatorDebitResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -776,8 +779,8 @@ message OperatorBalanceTransaction {
 	string transaction_type = 10;
 	string memo = 11;
 	string fee_amount = 12;
-	int64 created_at = 13;
-	int64 updated_at = 14;
+	google.protobuf.Timestamp created_at = 13;
+	google.protobuf.Timestamp updated_at = 14;
 }
 
 message ListOperatorBalanceTransactionsResponse {
@@ -787,5 +790,16 @@ message ListOperatorBalanceTransactionsResponse {
 	int32 page_size = 4;
 }
 
+message OperatorDebitRequest {
+	api.common.OperatorContext operator_context = 1;
+	string currency = 2;
+	string reporting_currency = 3;
+	string transaction_type = 4;
+	optional int64 external_transaction_id = 5;
+	string cash_amount = 6;
+}
 
-
+message OperatorDebitResponse {
+	int64 transaction_id = 1;
+	string cash = 2;
+}

@@ -7780,8 +7780,10 @@ components:
                     type: string
                 createdAt:
                     type: string
+                    format: date-time
                 updatedAt:
                     type: string
+                    format: date-time
         api.backoffice.service.v1.OperatorDetails:
             type: object
             properties:
