@@ -365,13 +365,15 @@ message InitiateOperatorWithdrawRequest {
   string amount = 1;
   // Currency code for the transaction
   string currency = 2;
+  // Currency code for the transaction report
+  string report_currency = 3;
   // ID of the operator who owns this channel
-	api.common.OperatorContext operator_context = 3;
+	api.common.OperatorContext operator_context = 4;
   // ID of the channel to use for withdrawal
-  string channel_id = 4;
+  string channel_id = 5;
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
-  google.protobuf.Struct extra = 5;
+  google.protobuf.Struct extra = 6;
 }
 
 // Response for withdrawal initiation
