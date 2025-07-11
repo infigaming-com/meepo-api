@@ -563,6 +563,7 @@ message Currency {
 
 message AddCurrencyRequest {
 	Currency currency = 1;
+	api.common.OperatorContext operator_context = 2;
 }
 
 message AddCurrencyResponse {}
