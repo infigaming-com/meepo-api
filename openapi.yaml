@@ -2322,7 +2322,7 @@ paths:
         post:
             tags:
                 - BackofficeWallet
-            description: OperatorSwap swaps cash between two balances of the same operator
+            description: OperatorSwap swaps cash between two balances of the same company's operator
             operationId: BackofficeWallet_OperatorSwap
             requestBody:
                 content:
@@ -7906,8 +7906,6 @@ components:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 currency:
-                    type: string
-                targetCurrency:
                     type: string
                 cashAmount:
                     type: string
