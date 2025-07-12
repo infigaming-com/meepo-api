@@ -12,7 +12,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
-	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -25,1019 +24,22 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Request source enum
-// Defines the source of the request
-type RequestSource int32
-
-const (
-	// Request from frontend user
-	RequestSource_REQUEST_SOURCE_FRONTEND RequestSource = 0
-	// Request from admin backend
-	RequestSource_REQUEST_SOURCE_ADMIN RequestSource = 1
-)
-
-// Enum value maps for RequestSource.
-var (
-	RequestSource_name = map[int32]string{
-		0: "REQUEST_SOURCE_FRONTEND",
-		1: "REQUEST_SOURCE_ADMIN",
-	}
-	RequestSource_value = map[string]int32{
-		"REQUEST_SOURCE_FRONTEND": 0,
-		"REQUEST_SOURCE_ADMIN":    1,
-	}
-)
-
-func (x RequestSource) Enum() *RequestSource {
-	p := new(RequestSource)
-	*p = x
-	return p
-}
-
-func (x RequestSource) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (RequestSource) Descriptor() protoreflect.EnumDescriptor {
-	return file_backoffice_service_v1_backoffice_payment_proto_enumTypes[0].Descriptor()
-}
-
-func (RequestSource) Type() protoreflect.EnumType {
-	return &file_backoffice_service_v1_backoffice_payment_proto_enumTypes[0]
-}
-
-func (x RequestSource) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use RequestSource.Descriptor instead.
-func (RequestSource) EnumDescriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{0}
-}
-
-// Transaction type enum
-// Defines possible types of financial transactions
-type TransactionType int32
-
-const (
-	// Default unspecified value
-	TransactionType_TRANSACTION_TYPE_UNSPECIFIED TransactionType = 0
-	// Money incoming to platform
-	TransactionType_TRANSACTION_TYPE_DEPOSIT TransactionType = 1
-	// Money outgoing from platform
-	TransactionType_TRANSACTION_TYPE_WITHDRAW TransactionType = 2
-)
-
-// Enum value maps for TransactionType.
-var (
-	TransactionType_name = map[int32]string{
-		0: "TRANSACTION_TYPE_UNSPECIFIED",
-		1: "TRANSACTION_TYPE_DEPOSIT",
-		2: "TRANSACTION_TYPE_WITHDRAW",
-	}
-	TransactionType_value = map[string]int32{
-		"TRANSACTION_TYPE_UNSPECIFIED": 0,
-		"TRANSACTION_TYPE_DEPOSIT":     1,
-		"TRANSACTION_TYPE_WITHDRAW":    2,
-	}
-)
-
-func (x TransactionType) Enum() *TransactionType {
-	p := new(TransactionType)
-	*p = x
-	return p
-}
-
-func (x TransactionType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (TransactionType) Descriptor() protoreflect.EnumDescriptor {
-	return file_backoffice_service_v1_backoffice_payment_proto_enumTypes[1].Descriptor()
-}
-
-func (TransactionType) Type() protoreflect.EnumType {
-	return &file_backoffice_service_v1_backoffice_payment_proto_enumTypes[1]
-}
-
-func (x TransactionType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use TransactionType.Descriptor instead.
-func (TransactionType) EnumDescriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{1}
-}
-
-// Transaction status enum
-// Defines possible states of a transaction
-type TransactionStatus int32
-
-const (
-	// Default unspecified value
-	TransactionStatus_TRANSACTION_STATUS_UNSPECIFIED TransactionStatus = 0
-	// Transaction is in progress
-	TransactionStatus_TRANSACTION_STATUS_PROCESSING TransactionStatus = 1
-	// Transaction completed successfully
-	TransactionStatus_TRANSACTION_STATUS_SUCCESSFUL TransactionStatus = 2
-	// Transaction failed to complete
-	TransactionStatus_TRANSACTION_STATUS_FAILED TransactionStatus = 3
-)
-
-// Enum value maps for TransactionStatus.
-var (
-	TransactionStatus_name = map[int32]string{
-		0: "TRANSACTION_STATUS_UNSPECIFIED",
-		1: "TRANSACTION_STATUS_PROCESSING",
-		2: "TRANSACTION_STATUS_SUCCESSFUL",
-		3: "TRANSACTION_STATUS_FAILED",
-	}
-	TransactionStatus_value = map[string]int32{
-		"TRANSACTION_STATUS_UNSPECIFIED": 0,
-		"TRANSACTION_STATUS_PROCESSING":  1,
-		"TRANSACTION_STATUS_SUCCESSFUL":  2,
-		"TRANSACTION_STATUS_FAILED":      3,
-	}
-)
-
-func (x TransactionStatus) Enum() *TransactionStatus {
-	p := new(TransactionStatus)
-	*p = x
-	return p
-}
-
-func (x TransactionStatus) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (TransactionStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_backoffice_service_v1_backoffice_payment_proto_enumTypes[2].Descriptor()
-}
-
-func (TransactionStatus) Type() protoreflect.EnumType {
-	return &file_backoffice_service_v1_backoffice_payment_proto_enumTypes[2]
-}
-
-func (x TransactionStatus) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use TransactionStatus.Descriptor instead.
-func (TransactionStatus) EnumDescriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{2}
-}
-
-// Channel type enum
-// Defines the purpose of a payment channel
-type ChannelType int32
-
-const (
-	// Channel for depositing funds
-	ChannelType_CHANNEL_TYPE_DEPOSIT ChannelType = 0
-	// Channel for withdrawing funds
-	ChannelType_CHANNEL_TYPE_WITHDRAW ChannelType = 1
-)
-
-// Enum value maps for ChannelType.
-var (
-	ChannelType_name = map[int32]string{
-		0: "CHANNEL_TYPE_DEPOSIT",
-		1: "CHANNEL_TYPE_WITHDRAW",
-	}
-	ChannelType_value = map[string]int32{
-		"CHANNEL_TYPE_DEPOSIT":  0,
-		"CHANNEL_TYPE_WITHDRAW": 1,
-	}
-)
-
-func (x ChannelType) Enum() *ChannelType {
-	p := new(ChannelType)
-	*p = x
-	return p
-}
-
-func (x ChannelType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ChannelType) Descriptor() protoreflect.EnumDescriptor {
-	return file_backoffice_service_v1_backoffice_payment_proto_enumTypes[3].Descriptor()
-}
-
-func (ChannelType) Type() protoreflect.EnumType {
-	return &file_backoffice_service_v1_backoffice_payment_proto_enumTypes[3]
-}
-
-func (x ChannelType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ChannelType.Descriptor instead.
-func (ChannelType) EnumDescriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{3}
-}
-
-// Sort enum
-// Defines sort direction for queries
-type Sort int32
-
-const (
-	// Sort in descending order (newest first)
-	Sort_DESC Sort = 0
-	// Sort in ascending order (oldest first)
-	Sort_ASC Sort = 1
-)
-
-// Enum value maps for Sort.
-var (
-	Sort_name = map[int32]string{
-		0: "DESC",
-		1: "ASC",
-	}
-	Sort_value = map[string]int32{
-		"DESC": 0,
-		"ASC":  1,
-	}
-)
-
-func (x Sort) Enum() *Sort {
-	p := new(Sort)
-	*p = x
-	return p
-}
-
-func (x Sort) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Sort) Descriptor() protoreflect.EnumDescriptor {
-	return file_backoffice_service_v1_backoffice_payment_proto_enumTypes[4].Descriptor()
-}
-
-func (Sort) Type() protoreflect.EnumType {
-	return &file_backoffice_service_v1_backoffice_payment_proto_enumTypes[4]
-}
-
-func (x Sort) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use Sort.Descriptor instead.
-func (Sort) EnumDescriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{4}
-}
-
-// Transaction information
-// Detailed information about a specific transaction
-type TransactionInfo struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the transaction
-	TransactionId int64 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	// Transaction ID from the operator's system
-	PaTransactionId string `protobuf:"bytes,2,opt,name=pa_transaction_id,json=paTransactionId,proto3" json:"pa_transaction_id,omitempty"`
-	// Transaction ID from the payment gateway
-	GatewayTransactionId string `protobuf:"bytes,3,opt,name=gateway_transaction_id,json=gatewayTransactionId,proto3" json:"gateway_transaction_id,omitempty"`
-	// Operator ID associated with the transaction
-	OperatorId string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	// ID of the user who initiated the transaction
-	UserId int64 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// VIP level of the user
-	Vip int32 `protobuf:"varint,6,opt,name=vip,proto3" json:"vip,omitempty"`
-	// Real amount of the transaction
-	Amount string `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`
-	// Currency code for the transaction
-	Currency string `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
-	// Transaction fee in smallest currency unit
-	Fee string `protobuf:"bytes,9,opt,name=fee,proto3" json:"fee,omitempty"`
-	// Payment method used for the transaction
-	PaymentMethod string `protobuf:"bytes,10,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
-	// Payment channel used for the transaction
-	PaymentChannel string `protobuf:"bytes,11,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
-	// Protocol used for the transaction
-	Protocol string `protobuf:"bytes,12,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	// Type of transaction (deposit or withdrawal)
-	Type TransactionType `protobuf:"varint,13,opt,name=type,proto3,enum=api.backoffice.service.v1.TransactionType" json:"type,omitempty"`
-	// Current status of the transaction
-	Status TransactionStatus `protobuf:"varint,14,opt,name=status,proto3,enum=api.backoffice.service.v1.TransactionStatus" json:"status,omitempty"`
-	// Timestamp when the transaction was created
-	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Timestamp when the transaction was last updated
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TransactionInfo) Reset() {
-	*x = TransactionInfo{}
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TransactionInfo) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TransactionInfo) ProtoMessage() {}
-
-func (x *TransactionInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TransactionInfo.ProtoReflect.Descriptor instead.
-func (*TransactionInfo) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *TransactionInfo) GetTransactionId() int64 {
-	if x != nil {
-		return x.TransactionId
-	}
-	return 0
-}
-
-func (x *TransactionInfo) GetPaTransactionId() string {
-	if x != nil {
-		return x.PaTransactionId
-	}
-	return ""
-}
-
-func (x *TransactionInfo) GetGatewayTransactionId() string {
-	if x != nil {
-		return x.GatewayTransactionId
-	}
-	return ""
-}
-
-func (x *TransactionInfo) GetOperatorId() string {
-	if x != nil {
-		return x.OperatorId
-	}
-	return ""
-}
-
-func (x *TransactionInfo) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *TransactionInfo) GetVip() int32 {
-	if x != nil {
-		return x.Vip
-	}
-	return 0
-}
-
-func (x *TransactionInfo) GetAmount() string {
-	if x != nil {
-		return x.Amount
-	}
-	return ""
-}
-
-func (x *TransactionInfo) GetCurrency() string {
-	if x != nil {
-		return x.Currency
-	}
-	return ""
-}
-
-func (x *TransactionInfo) GetFee() string {
-	if x != nil {
-		return x.Fee
-	}
-	return ""
-}
-
-func (x *TransactionInfo) GetPaymentMethod() string {
-	if x != nil {
-		return x.PaymentMethod
-	}
-	return ""
-}
-
-func (x *TransactionInfo) GetPaymentChannel() string {
-	if x != nil {
-		return x.PaymentChannel
-	}
-	return ""
-}
-
-func (x *TransactionInfo) GetProtocol() string {
-	if x != nil {
-		return x.Protocol
-	}
-	return ""
-}
-
-func (x *TransactionInfo) GetType() TransactionType {
-	if x != nil {
-		return x.Type
-	}
-	return TransactionType_TRANSACTION_TYPE_UNSPECIFIED
-}
-
-func (x *TransactionInfo) GetStatus() TransactionStatus {
-	if x != nil {
-		return x.Status
-	}
-	return TransactionStatus_TRANSACTION_STATUS_UNSPECIFIED
-}
-
-func (x *TransactionInfo) GetCreatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return nil
-}
-
-func (x *TransactionInfo) GetUpdatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.UpdatedAt
-	}
-	return nil
-}
-
-// Payment channel information
-// Detailed information about a specific payment channel
-type PaymentChannelInfo struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the channel
-	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// Type of the channel (e.g., online, offline)
-	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	// Category of the channel (e.g., bank, e-wallet)
-	Category string `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
-	// ID of the operator who owns this channel
-	OperatorId string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	// Payment method used in this channel
-	PaymentMethod string `protobuf:"bytes,5,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
-	// Tag for categorization or filtering
-	Tag string `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag,omitempty"`
-	// Display name of the channel
-	Name string `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the payment method used
-	PaymentMethodId string `protobuf:"bytes,8,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
-	// Currency supported by this channel
-	Currency string `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency,omitempty"`
-	// Crypto protocol supported by this channel
-	Protocol string `protobuf:"bytes,10,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	// Crypto chian supported by this channel
-	Network string `protobuf:"bytes,11,opt,name=network,proto3" json:"network,omitempty"`
-	// Country where this channel is available
-	Country string `protobuf:"bytes,12,opt,name=country,proto3" json:"country,omitempty"`
-	// Specific method used (might be more detailed than payment_method)
-	Method string `protobuf:"bytes,13,opt,name=method,proto3" json:"method,omitempty"`
-	// URL to the logo image for this payment channel
-	Logo string `protobuf:"bytes,14,opt,name=logo,proto3" json:"logo,omitempty"`
-	// Minimum amount allowed for deposit transactions
-	MinDepositAmount string `protobuf:"bytes,15,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
-	// Maximum amount allowed for deposit transactions
-	MaxDepositAmount string `protobuf:"bytes,16,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
-	// Minimum amount allowed for withdrawal transactions
-	MinWithdrawAmount string `protobuf:"bytes,17,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
-	// Maximum amount allowed for withdrawal transactions
-	MaxWithdrawAmount string `protobuf:"bytes,18,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
-	// Estimated arrival time in minutes
-	Eat int32 `protobuf:"varint,19,opt,name=eat,proto3" json:"eat,omitempty"`
-	// Fee
-	FixFee  string `protobuf:"bytes,20,opt,name=fix_fee,json=fixFee,proto3" json:"fix_fee,omitempty"`
-	RateFee string `protobuf:"bytes,21,opt,name=rate_fee,json=rateFee,proto3" json:"rate_fee,omitempty"`
-	// JSON schema defining deposit form fields required by this channel
-	DepositSchema *structpb.Struct `protobuf:"bytes,22,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
-	// JSON schema defining withdrawal form fields required by this channel
-	WithdrawSchema *structpb.Struct `protobuf:"bytes,23,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
-	SourceType     string           `protobuf:"bytes,24,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
-	Enable         bool             `protobuf:"varint,25,opt,name=enable,proto3" json:"enable,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *PaymentChannelInfo) Reset() {
-	*x = PaymentChannelInfo{}
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PaymentChannelInfo) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PaymentChannelInfo) ProtoMessage() {}
-
-func (x *PaymentChannelInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PaymentChannelInfo.ProtoReflect.Descriptor instead.
-func (*PaymentChannelInfo) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *PaymentChannelInfo) GetChannelId() string {
-	if x != nil {
-		return x.ChannelId
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetCategory() string {
-	if x != nil {
-		return x.Category
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetOperatorId() string {
-	if x != nil {
-		return x.OperatorId
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetPaymentMethod() string {
-	if x != nil {
-		return x.PaymentMethod
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetTag() string {
-	if x != nil {
-		return x.Tag
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetPaymentMethodId() string {
-	if x != nil {
-		return x.PaymentMethodId
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetCurrency() string {
-	if x != nil {
-		return x.Currency
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetProtocol() string {
-	if x != nil {
-		return x.Protocol
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetNetwork() string {
-	if x != nil {
-		return x.Network
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetCountry() string {
-	if x != nil {
-		return x.Country
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetMethod() string {
-	if x != nil {
-		return x.Method
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetLogo() string {
-	if x != nil {
-		return x.Logo
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetMinDepositAmount() string {
-	if x != nil {
-		return x.MinDepositAmount
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetMaxDepositAmount() string {
-	if x != nil {
-		return x.MaxDepositAmount
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetMinWithdrawAmount() string {
-	if x != nil {
-		return x.MinWithdrawAmount
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetMaxWithdrawAmount() string {
-	if x != nil {
-		return x.MaxWithdrawAmount
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetEat() int32 {
-	if x != nil {
-		return x.Eat
-	}
-	return 0
-}
-
-func (x *PaymentChannelInfo) GetFixFee() string {
-	if x != nil {
-		return x.FixFee
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetRateFee() string {
-	if x != nil {
-		return x.RateFee
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetDepositSchema() *structpb.Struct {
-	if x != nil {
-		return x.DepositSchema
-	}
-	return nil
-}
-
-func (x *PaymentChannelInfo) GetWithdrawSchema() *structpb.Struct {
-	if x != nil {
-		return x.WithdrawSchema
-	}
-	return nil
-}
-
-func (x *PaymentChannelInfo) GetSourceType() string {
-	if x != nil {
-		return x.SourceType
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetEnable() bool {
-	if x != nil {
-		return x.Enable
-	}
-	return false
-}
-
-type TransactionDetail struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Transaction information
-	Transaction *TransactionInfo `protobuf:"bytes,1,opt,name=transaction,proto3" json:"transaction,omitempty"`
-	// Channel information
-	Channel       *PaymentChannelInfo `protobuf:"bytes,2,opt,name=channel,proto3" json:"channel,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TransactionDetail) Reset() {
-	*x = TransactionDetail{}
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TransactionDetail) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TransactionDetail) ProtoMessage() {}
-
-func (x *TransactionDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TransactionDetail.ProtoReflect.Descriptor instead.
-func (*TransactionDetail) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *TransactionDetail) GetTransaction() *TransactionInfo {
-	if x != nil {
-		return x.Transaction
-	}
-	return nil
-}
-
-func (x *TransactionDetail) GetChannel() *PaymentChannelInfo {
-	if x != nil {
-		return x.Channel
-	}
-	return nil
-}
-
-// Request to get transaction detail by ID
-// Used to retrieve detailed information about a specific transaction
-type GetPaymentTransactionByIdRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the transaction
-	TransactionId int64 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	// Source of the request (frontend or admin)
-	Source        RequestSource `protobuf:"varint,2,opt,name=source,proto3,enum=api.backoffice.service.v1.RequestSource" json:"source,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetPaymentTransactionByIdRequest) Reset() {
-	*x = GetPaymentTransactionByIdRequest{}
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetPaymentTransactionByIdRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetPaymentTransactionByIdRequest) ProtoMessage() {}
-
-func (x *GetPaymentTransactionByIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetPaymentTransactionByIdRequest.ProtoReflect.Descriptor instead.
-func (*GetPaymentTransactionByIdRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *GetPaymentTransactionByIdRequest) GetTransactionId() int64 {
-	if x != nil {
-		return x.TransactionId
-	}
-	return 0
-}
-
-func (x *GetPaymentTransactionByIdRequest) GetSource() RequestSource {
-	if x != nil {
-		return x.Source
-	}
-	return RequestSource_REQUEST_SOURCE_FRONTEND
-}
-
-// Response for transaction detail
-// Contains detailed information about the requested transaction
-type GetPaymentTransactionByIdResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Detailed transaction information including channel data
-	Detail        *TransactionDetail `protobuf:"bytes,1,opt,name=detail,proto3" json:"detail,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetPaymentTransactionByIdResponse) Reset() {
-	*x = GetPaymentTransactionByIdResponse{}
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetPaymentTransactionByIdResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetPaymentTransactionByIdResponse) ProtoMessage() {}
-
-func (x *GetPaymentTransactionByIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetPaymentTransactionByIdResponse.ProtoReflect.Descriptor instead.
-func (*GetPaymentTransactionByIdResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *GetPaymentTransactionByIdResponse) GetDetail() *TransactionDetail {
-	if x != nil {
-		return x.Detail
-	}
-	return nil
-}
-
-// Details of a single payment method
-// Contains information about a specific payment method including its ID, currency, and required fields schema
-type PaymentMethodInfo struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the payment method
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Currency code supported by this payment method (e.g., USD, EUR, CNY)
-	Psp      string `protobuf:"bytes,2,opt,name=psp,proto3" json:"psp,omitempty"`
-	Type     string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	// Country code where this payment method is available
-	Country string `protobuf:"bytes,5,opt,name=country,proto3" json:"country,omitempty"`
-	// Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
-	PaymentMethod string `protobuf:"bytes,6,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
-	// Fixed Fee on the Amount
-	FixedFee string `protobuf:"bytes,7,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
-	// Rate Fee
-	FeeRate string `protobuf:"bytes,8,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
-	// Min Amount
-	MinAmount string `protobuf:"bytes,9,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
-	// Max Amount
-	MaxAmount string `protobuf:"bytes,10,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	// JSON schema defining the required fields for this payment method
-	KeySchema     *structpb.Struct `protobuf:"bytes,11,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PaymentMethodInfo) Reset() {
-	*x = PaymentMethodInfo{}
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PaymentMethodInfo) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PaymentMethodInfo) ProtoMessage() {}
-
-func (x *PaymentMethodInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PaymentMethodInfo.ProtoReflect.Descriptor instead.
-func (*PaymentMethodInfo) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *PaymentMethodInfo) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *PaymentMethodInfo) GetPsp() string {
-	if x != nil {
-		return x.Psp
-	}
-	return ""
-}
-
-func (x *PaymentMethodInfo) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
-func (x *PaymentMethodInfo) GetCurrency() string {
-	if x != nil {
-		return x.Currency
-	}
-	return ""
-}
-
-func (x *PaymentMethodInfo) GetCountry() string {
-	if x != nil {
-		return x.Country
-	}
-	return ""
-}
-
-func (x *PaymentMethodInfo) GetPaymentMethod() string {
-	if x != nil {
-		return x.PaymentMethod
-	}
-	return ""
-}
-
-func (x *PaymentMethodInfo) GetFixedFee() string {
-	if x != nil {
-		return x.FixedFee
-	}
-	return ""
-}
-
-func (x *PaymentMethodInfo) GetFeeRate() string {
-	if x != nil {
-		return x.FeeRate
-	}
-	return ""
-}
-
-func (x *PaymentMethodInfo) GetMinAmount() string {
-	if x != nil {
-		return x.MinAmount
-	}
-	return ""
-}
-
-func (x *PaymentMethodInfo) GetMaxAmount() string {
-	if x != nil {
-		return x.MaxAmount
-	}
-	return ""
-}
-
-func (x *PaymentMethodInfo) GetKeySchema() *structpb.Struct {
-	if x != nil {
-		return x.KeySchema
-	}
-	return nil
-}
-
 // Request to get address
 // Used to get DC address
 type GetOperatorAddressRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the channel to use for this deposit
-	ChannelId      string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	TargetCurrency string `protobuf:"bytes,2,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
+	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Additional information needed for the deposit
 	// May include clientOrderId, productId, userInfo, etc.
-	Extra         *structpb.Struct `protobuf:"bytes,3,opt,name=extra,proto3" json:"extra,omitempty"`
+	Extra         *structpb.Struct `protobuf:"bytes,2,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetOperatorAddressRequest) Reset() {
 	*x = GetOperatorAddressRequest{}
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[6]
+	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1049,7 +51,7 @@ func (x *GetOperatorAddressRequest) String() string {
 func (*GetOperatorAddressRequest) ProtoMessage() {}
 
 func (x *GetOperatorAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[6]
+	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1062,19 +64,12 @@ func (x *GetOperatorAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorAddressRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorAddressRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{6}
+	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *GetOperatorAddressRequest) GetChannelId() string {
 	if x != nil {
 		return x.ChannelId
-	}
-	return ""
-}
-
-func (x *GetOperatorAddressRequest) GetTargetCurrency() string {
-	if x != nil {
-		return x.TargetCurrency
 	}
 	return ""
 }
@@ -1120,7 +115,7 @@ type CreatePaymentMethodRequest struct {
 
 func (x *CreatePaymentMethodRequest) Reset() {
 	*x = CreatePaymentMethodRequest{}
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[7]
+	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1132,7 +127,7 @@ func (x *CreatePaymentMethodRequest) String() string {
 func (*CreatePaymentMethodRequest) ProtoMessage() {}
 
 func (x *CreatePaymentMethodRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[7]
+	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1145,7 +140,7 @@ func (x *CreatePaymentMethodRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePaymentMethodRequest.ProtoReflect.Descriptor instead.
 func (*CreatePaymentMethodRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{7}
+	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CreatePaymentMethodRequest) GetPaymentMethodId() string {
@@ -1264,7 +259,7 @@ type CreatePaymentChannelRequest struct {
 
 func (x *CreatePaymentChannelRequest) Reset() {
 	*x = CreatePaymentChannelRequest{}
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1276,7 +271,7 @@ func (x *CreatePaymentChannelRequest) String() string {
 func (*CreatePaymentChannelRequest) ProtoMessage() {}
 
 func (x *CreatePaymentChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_payment_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1289,7 +284,7 @@ func (x *CreatePaymentChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePaymentChannelRequest.ProtoReflect.Descriptor instead.
 func (*CreatePaymentChannelRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{8}
+	return file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CreatePaymentChannelRequest) GetMerchantId() string {
@@ -1373,87 +368,11 @@ var File_backoffice_service_v1_backoffice_payment_proto protoreflect.FileDescrip
 
 const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a payment/service/v1/payment.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"\x94\x05\n" +
-	"\x0fTransactionInfo\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
-	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x124\n" +
-	"\x16gateway_transaction_id\x18\x03 \x01(\tR\x14gatewayTransactionId\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\tR\n" +
-	"operatorId\x12\x17\n" +
-	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12\x10\n" +
-	"\x03vip\x18\x06 \x01(\x05R\x03vip\x12\x16\n" +
-	"\x06amount\x18\a \x01(\tR\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\b \x01(\tR\bcurrency\x12\x10\n" +
-	"\x03fee\x18\t \x01(\tR\x03fee\x12%\n" +
-	"\x0epayment_method\x18\n" +
-	" \x01(\tR\rpaymentMethod\x12'\n" +
-	"\x0fpayment_channel\x18\v \x01(\tR\x0epaymentChannel\x12\x1a\n" +
-	"\bprotocol\x18\f \x01(\tR\bprotocol\x12>\n" +
-	"\x04type\x18\r \x01(\x0e2*.api.backoffice.service.v1.TransactionTypeR\x04type\x12D\n" +
-	"\x06status\x18\x0e \x01(\x0e2,.api.backoffice.service.v1.TransactionStatusR\x06status\x129\n" +
-	"\n" +
-	"created_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
-	"\n" +
-	"updated_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xd2\x06\n" +
-	"\x12PaymentChannelInfo\x12\x1d\n" +
-	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04type\x12\x1a\n" +
-	"\bcategory\x18\x03 \x01(\tR\bcategory\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\tR\n" +
-	"operatorId\x12%\n" +
-	"\x0epayment_method\x18\x05 \x01(\tR\rpaymentMethod\x12\x10\n" +
-	"\x03tag\x18\x06 \x01(\tR\x03tag\x12\x12\n" +
-	"\x04name\x18\a \x01(\tR\x04name\x12*\n" +
-	"\x11payment_method_id\x18\b \x01(\tR\x0fpaymentMethodId\x12\x1a\n" +
-	"\bcurrency\x18\t \x01(\tR\bcurrency\x12\x1a\n" +
-	"\bprotocol\x18\n" +
-	" \x01(\tR\bprotocol\x12\x18\n" +
-	"\anetwork\x18\v \x01(\tR\anetwork\x12\x18\n" +
-	"\acountry\x18\f \x01(\tR\acountry\x12\x16\n" +
-	"\x06method\x18\r \x01(\tR\x06method\x12\x12\n" +
-	"\x04logo\x18\x0e \x01(\tR\x04logo\x12,\n" +
-	"\x12min_deposit_amount\x18\x0f \x01(\tR\x10minDepositAmount\x12,\n" +
-	"\x12max_deposit_amount\x18\x10 \x01(\tR\x10maxDepositAmount\x12.\n" +
-	"\x13min_withdraw_amount\x18\x11 \x01(\tR\x11minWithdrawAmount\x12.\n" +
-	"\x13max_withdraw_amount\x18\x12 \x01(\tR\x11maxWithdrawAmount\x12\x10\n" +
-	"\x03eat\x18\x13 \x01(\x05R\x03eat\x12\x17\n" +
-	"\afix_fee\x18\x14 \x01(\tR\x06fixFee\x12\x19\n" +
-	"\brate_fee\x18\x15 \x01(\tR\arateFee\x12>\n" +
-	"\x0edeposit_schema\x18\x16 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
-	"\x0fwithdraw_schema\x18\x17 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\x12\x1f\n" +
-	"\vsource_type\x18\x18 \x01(\tR\n" +
-	"sourceType\x12\x16\n" +
-	"\x06enable\x18\x19 \x01(\bR\x06enable\"\xaa\x01\n" +
-	"\x11TransactionDetail\x12L\n" +
-	"\vtransaction\x18\x01 \x01(\v2*.api.backoffice.service.v1.TransactionInfoR\vtransaction\x12G\n" +
-	"\achannel\x18\x02 \x01(\v2-.api.backoffice.service.v1.PaymentChannelInfoR\achannel\"\x8b\x01\n" +
-	" GetPaymentTransactionByIdRequest\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12@\n" +
-	"\x06source\x18\x02 \x01(\x0e2(.api.backoffice.service.v1.RequestSourceR\x06source\"i\n" +
-	"!GetPaymentTransactionByIdResponse\x12D\n" +
-	"\x06detail\x18\x01 \x01(\v2,.api.backoffice.service.v1.TransactionDetailR\x06detail\"\xd4\x02\n" +
-	"\x11PaymentMethodInfo\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
-	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1a\n" +
-	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12\x18\n" +
-	"\acountry\x18\x05 \x01(\tR\acountry\x12%\n" +
-	"\x0epayment_method\x18\x06 \x01(\tR\rpaymentMethod\x12\x1b\n" +
-	"\tfixed_fee\x18\a \x01(\tR\bfixedFee\x12\x19\n" +
-	"\bfee_rate\x18\b \x01(\tR\afeeRate\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\t \x01(\tR\tminAmount\x12\x1d\n" +
-	"\n" +
-	"max_amount\x18\n" +
-	" \x01(\tR\tmaxAmount\x126\n" +
-	"\n" +
-	"key_schema\x18\v \x01(\v2\x17.google.protobuf.StructR\tkeySchema\"\x92\x01\n" +
+	".backoffice/service/v1/backoffice_payment.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a payment/service/v1/payment.proto\x1a\x1cgoogle/protobuf/struct.proto\"i\n" +
 	"\x19GetOperatorAddressRequest\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\x12'\n" +
-	"\x0ftarget_currency\x18\x02 \x01(\tR\x0etargetCurrency\x12-\n" +
-	"\x05extra\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xba\x03\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\x12-\n" +
+	"\x05extra\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xba\x03\n" +
 	"\x1aCreatePaymentMethodRequest\x12*\n" +
 	"\x11payment_method_id\x18\x01 \x01(\tR\x0fpaymentMethodId\x12#\n" +
 	"\rcurrency_type\x18\x02 \x01(\tR\fcurrencyType\x12\x18\n" +
@@ -1487,28 +406,10 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
 	"max_amount\x18\n" +
 	" \x01(\tR\tmaxAmount\x12)\n" +
-	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructR\x03key*F\n" +
-	"\rRequestSource\x12\x1b\n" +
-	"\x17REQUEST_SOURCE_FRONTEND\x10\x00\x12\x18\n" +
-	"\x14REQUEST_SOURCE_ADMIN\x10\x01*p\n" +
-	"\x0fTransactionType\x12 \n" +
-	"\x1cTRANSACTION_TYPE_UNSPECIFIED\x10\x00\x12\x1c\n" +
-	"\x18TRANSACTION_TYPE_DEPOSIT\x10\x01\x12\x1d\n" +
-	"\x19TRANSACTION_TYPE_WITHDRAW\x10\x02*\x9c\x01\n" +
-	"\x11TransactionStatus\x12\"\n" +
-	"\x1eTRANSACTION_STATUS_UNSPECIFIED\x10\x00\x12!\n" +
-	"\x1dTRANSACTION_STATUS_PROCESSING\x10\x01\x12!\n" +
-	"\x1dTRANSACTION_STATUS_SUCCESSFUL\x10\x02\x12\x1d\n" +
-	"\x19TRANSACTION_STATUS_FAILED\x10\x03*B\n" +
-	"\vChannelType\x12\x18\n" +
-	"\x14CHANNEL_TYPE_DEPOSIT\x10\x00\x12\x19\n" +
-	"\x15CHANNEL_TYPE_WITHDRAW\x10\x01*\x19\n" +
-	"\x04Sort\x12\b\n" +
-	"\x04DESC\x10\x00\x12\a\n" +
-	"\x03ASC\x10\x012\x85\r\n" +
+	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructR\x03key2\xf2\f\n" +
 	"\x11BackofficePayment\x12\xae\x01\n" +
-	"\x19GetPaymentTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/payment/transaction/page\x12\xcc\x01\n" +
-	"\x19GetPaymentTransactionById\x12;.api.backoffice.service.v1.GetPaymentTransactionByIdRequest\x1a<.api.backoffice.service.v1.GetPaymentTransactionByIdResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/payment/transaction/detail\x12\xcc\x01\n" +
+	"\x19GetPaymentTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/payment/transaction/page\x12\xb9\x01\n" +
+	"\x19GetPaymentTransactionById\x123.payment.service.v1.GetTransactionDetailByIdRequest\x1a1.payment.service.v1.GetPaymentChannelPageResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/payment/transaction/detail\x12\xcc\x01\n" +
 	"\x1dGetSupportedPaymentMethodList\x128.payment.service.v1.GetSupportedPaymentMethodListRequest\x1a9.payment.service.v1.GetSupportedPaymentMethodListResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/payment/supportedmethod/list\x12\xa8\x01\n" +
 	"\x14GetPaymentMethodList\x12/.payment.service.v1.GetPaymentMethodListRequest\x1a0.payment.service.v1.GetPaymentMethodListResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/payment/method/list\x12\xae\x01\n" +
 	"\x13CreatePaymentMethod\x125.api.backoffice.service.v1.CreatePaymentMethodRequest\x1a/.payment.service.v1.CreatePaymentMethodResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/payment/method/create\x12\xab\x01\n" +
@@ -1530,77 +431,54 @@ func file_backoffice_service_v1_backoffice_payment_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_payment_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_backoffice_service_v1_backoffice_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_backoffice_service_v1_backoffice_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_backoffice_service_v1_backoffice_payment_proto_goTypes = []any{
-	(RequestSource)(0),                               // 0: api.backoffice.service.v1.RequestSource
-	(TransactionType)(0),                             // 1: api.backoffice.service.v1.TransactionType
-	(TransactionStatus)(0),                           // 2: api.backoffice.service.v1.TransactionStatus
-	(ChannelType)(0),                                 // 3: api.backoffice.service.v1.ChannelType
-	(Sort)(0),                                        // 4: api.backoffice.service.v1.Sort
-	(*TransactionInfo)(nil),                          // 5: api.backoffice.service.v1.TransactionInfo
-	(*PaymentChannelInfo)(nil),                       // 6: api.backoffice.service.v1.PaymentChannelInfo
-	(*TransactionDetail)(nil),                        // 7: api.backoffice.service.v1.TransactionDetail
-	(*GetPaymentTransactionByIdRequest)(nil),         // 8: api.backoffice.service.v1.GetPaymentTransactionByIdRequest
-	(*GetPaymentTransactionByIdResponse)(nil),        // 9: api.backoffice.service.v1.GetPaymentTransactionByIdResponse
-	(*PaymentMethodInfo)(nil),                        // 10: api.backoffice.service.v1.PaymentMethodInfo
-	(*GetOperatorAddressRequest)(nil),                // 11: api.backoffice.service.v1.GetOperatorAddressRequest
-	(*CreatePaymentMethodRequest)(nil),               // 12: api.backoffice.service.v1.CreatePaymentMethodRequest
-	(*CreatePaymentChannelRequest)(nil),              // 13: api.backoffice.service.v1.CreatePaymentChannelRequest
-	(*timestamppb.Timestamp)(nil),                    // 14: google.protobuf.Timestamp
-	(*structpb.Struct)(nil),                          // 15: google.protobuf.Struct
-	(*v1.GetTransactionPageRequest)(nil),             // 16: payment.service.v1.GetTransactionPageRequest
-	(*v1.GetSupportedPaymentMethodListRequest)(nil),  // 17: payment.service.v1.GetSupportedPaymentMethodListRequest
-	(*v1.GetPaymentMethodListRequest)(nil),           // 18: payment.service.v1.GetPaymentMethodListRequest
-	(*v1.UpdatePaymentChannelRequest)(nil),           // 19: payment.service.v1.UpdatePaymentChannelRequest
-	(*v1.GetPaymentChannelPageRequest)(nil),          // 20: payment.service.v1.GetPaymentChannelPageRequest
-	(*v1.GetTransactionPageResponse)(nil),            // 21: payment.service.v1.GetTransactionPageResponse
-	(*v1.GetSupportedPaymentMethodListResponse)(nil), // 22: payment.service.v1.GetSupportedPaymentMethodListResponse
-	(*v1.GetPaymentMethodListResponse)(nil),          // 23: payment.service.v1.GetPaymentMethodListResponse
-	(*v1.CreatePaymentMethodResponse)(nil),           // 24: payment.service.v1.CreatePaymentMethodResponse
-	(*v1.UpdatePaymentChannelResponse)(nil),          // 25: payment.service.v1.UpdatePaymentChannelResponse
-	(*v1.CreatePaymentChannelResponse)(nil),          // 26: payment.service.v1.CreatePaymentChannelResponse
-	(*v1.GetOperatorAddressResponse)(nil),            // 27: payment.service.v1.GetOperatorAddressResponse
-	(*v1.GetPaymentChannelPageResponse)(nil),         // 28: payment.service.v1.GetPaymentChannelPageResponse
+	(*GetOperatorAddressRequest)(nil),                // 0: api.backoffice.service.v1.GetOperatorAddressRequest
+	(*CreatePaymentMethodRequest)(nil),               // 1: api.backoffice.service.v1.CreatePaymentMethodRequest
+	(*CreatePaymentChannelRequest)(nil),              // 2: api.backoffice.service.v1.CreatePaymentChannelRequest
+	(*structpb.Struct)(nil),                          // 3: google.protobuf.Struct
+	(*v1.GetTransactionPageRequest)(nil),             // 4: payment.service.v1.GetTransactionPageRequest
+	(*v1.GetTransactionDetailByIdRequest)(nil),       // 5: payment.service.v1.GetTransactionDetailByIdRequest
+	(*v1.GetSupportedPaymentMethodListRequest)(nil),  // 6: payment.service.v1.GetSupportedPaymentMethodListRequest
+	(*v1.GetPaymentMethodListRequest)(nil),           // 7: payment.service.v1.GetPaymentMethodListRequest
+	(*v1.UpdatePaymentChannelRequest)(nil),           // 8: payment.service.v1.UpdatePaymentChannelRequest
+	(*v1.GetPaymentChannelPageRequest)(nil),          // 9: payment.service.v1.GetPaymentChannelPageRequest
+	(*v1.GetTransactionPageResponse)(nil),            // 10: payment.service.v1.GetTransactionPageResponse
+	(*v1.GetPaymentChannelPageResponse)(nil),         // 11: payment.service.v1.GetPaymentChannelPageResponse
+	(*v1.GetSupportedPaymentMethodListResponse)(nil), // 12: payment.service.v1.GetSupportedPaymentMethodListResponse
+	(*v1.GetPaymentMethodListResponse)(nil),          // 13: payment.service.v1.GetPaymentMethodListResponse
+	(*v1.CreatePaymentMethodResponse)(nil),           // 14: payment.service.v1.CreatePaymentMethodResponse
+	(*v1.UpdatePaymentChannelResponse)(nil),          // 15: payment.service.v1.UpdatePaymentChannelResponse
+	(*v1.CreatePaymentChannelResponse)(nil),          // 16: payment.service.v1.CreatePaymentChannelResponse
+	(*v1.GetOperatorAddressResponse)(nil),            // 17: payment.service.v1.GetOperatorAddressResponse
 }
 var file_backoffice_service_v1_backoffice_payment_proto_depIdxs = []int32{
-	1,  // 0: api.backoffice.service.v1.TransactionInfo.type:type_name -> api.backoffice.service.v1.TransactionType
-	2,  // 1: api.backoffice.service.v1.TransactionInfo.status:type_name -> api.backoffice.service.v1.TransactionStatus
-	14, // 2: api.backoffice.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
-	14, // 3: api.backoffice.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
-	15, // 4: api.backoffice.service.v1.PaymentChannelInfo.deposit_schema:type_name -> google.protobuf.Struct
-	15, // 5: api.backoffice.service.v1.PaymentChannelInfo.withdraw_schema:type_name -> google.protobuf.Struct
-	5,  // 6: api.backoffice.service.v1.TransactionDetail.transaction:type_name -> api.backoffice.service.v1.TransactionInfo
-	6,  // 7: api.backoffice.service.v1.TransactionDetail.channel:type_name -> api.backoffice.service.v1.PaymentChannelInfo
-	0,  // 8: api.backoffice.service.v1.GetPaymentTransactionByIdRequest.source:type_name -> api.backoffice.service.v1.RequestSource
-	7,  // 9: api.backoffice.service.v1.GetPaymentTransactionByIdResponse.detail:type_name -> api.backoffice.service.v1.TransactionDetail
-	15, // 10: api.backoffice.service.v1.PaymentMethodInfo.key_schema:type_name -> google.protobuf.Struct
-	15, // 11: api.backoffice.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
-	15, // 12: api.backoffice.service.v1.CreatePaymentMethodRequest.key:type_name -> google.protobuf.Struct
-	15, // 13: api.backoffice.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
-	16, // 14: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
-	8,  // 15: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:input_type -> api.backoffice.service.v1.GetPaymentTransactionByIdRequest
-	17, // 16: api.backoffice.service.v1.BackofficePayment.GetSupportedPaymentMethodList:input_type -> payment.service.v1.GetSupportedPaymentMethodListRequest
-	18, // 17: api.backoffice.service.v1.BackofficePayment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
-	12, // 18: api.backoffice.service.v1.BackofficePayment.CreatePaymentMethod:input_type -> api.backoffice.service.v1.CreatePaymentMethodRequest
-	19, // 19: api.backoffice.service.v1.BackofficePayment.UpdatePaymentChannel:input_type -> payment.service.v1.UpdatePaymentChannelRequest
-	13, // 20: api.backoffice.service.v1.BackofficePayment.CreatePaymentChannel:input_type -> api.backoffice.service.v1.CreatePaymentChannelRequest
-	11, // 21: api.backoffice.service.v1.BackofficePayment.GetOperatorAddress:input_type -> api.backoffice.service.v1.GetOperatorAddressRequest
-	20, // 22: api.backoffice.service.v1.BackofficePayment.GetPaymentChannelPage:input_type -> payment.service.v1.GetPaymentChannelPageRequest
-	21, // 23: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
-	9,  // 24: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:output_type -> api.backoffice.service.v1.GetPaymentTransactionByIdResponse
-	22, // 25: api.backoffice.service.v1.BackofficePayment.GetSupportedPaymentMethodList:output_type -> payment.service.v1.GetSupportedPaymentMethodListResponse
-	23, // 26: api.backoffice.service.v1.BackofficePayment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
-	24, // 27: api.backoffice.service.v1.BackofficePayment.CreatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
-	25, // 28: api.backoffice.service.v1.BackofficePayment.UpdatePaymentChannel:output_type -> payment.service.v1.UpdatePaymentChannelResponse
-	26, // 29: api.backoffice.service.v1.BackofficePayment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
-	27, // 30: api.backoffice.service.v1.BackofficePayment.GetOperatorAddress:output_type -> payment.service.v1.GetOperatorAddressResponse
-	28, // 31: api.backoffice.service.v1.BackofficePayment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
-	23, // [23:32] is the sub-list for method output_type
-	14, // [14:23] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	3,  // 0: api.backoffice.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
+	3,  // 1: api.backoffice.service.v1.CreatePaymentMethodRequest.key:type_name -> google.protobuf.Struct
+	3,  // 2: api.backoffice.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
+	4,  // 3: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
+	5,  // 4: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
+	6,  // 5: api.backoffice.service.v1.BackofficePayment.GetSupportedPaymentMethodList:input_type -> payment.service.v1.GetSupportedPaymentMethodListRequest
+	7,  // 6: api.backoffice.service.v1.BackofficePayment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
+	1,  // 7: api.backoffice.service.v1.BackofficePayment.CreatePaymentMethod:input_type -> api.backoffice.service.v1.CreatePaymentMethodRequest
+	8,  // 8: api.backoffice.service.v1.BackofficePayment.UpdatePaymentChannel:input_type -> payment.service.v1.UpdatePaymentChannelRequest
+	2,  // 9: api.backoffice.service.v1.BackofficePayment.CreatePaymentChannel:input_type -> api.backoffice.service.v1.CreatePaymentChannelRequest
+	0,  // 10: api.backoffice.service.v1.BackofficePayment.GetOperatorAddress:input_type -> api.backoffice.service.v1.GetOperatorAddressRequest
+	9,  // 11: api.backoffice.service.v1.BackofficePayment.GetPaymentChannelPage:input_type -> payment.service.v1.GetPaymentChannelPageRequest
+	10, // 12: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
+	11, // 13: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:output_type -> payment.service.v1.GetPaymentChannelPageResponse
+	12, // 14: api.backoffice.service.v1.BackofficePayment.GetSupportedPaymentMethodList:output_type -> payment.service.v1.GetSupportedPaymentMethodListResponse
+	13, // 15: api.backoffice.service.v1.BackofficePayment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
+	14, // 16: api.backoffice.service.v1.BackofficePayment.CreatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
+	15, // 17: api.backoffice.service.v1.BackofficePayment.UpdatePaymentChannel:output_type -> payment.service.v1.UpdatePaymentChannelResponse
+	16, // 18: api.backoffice.service.v1.BackofficePayment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
+	17, // 19: api.backoffice.service.v1.BackofficePayment.GetOperatorAddress:output_type -> payment.service.v1.GetOperatorAddressResponse
+	11, // 20: api.backoffice.service.v1.BackofficePayment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
+	12, // [12:21] is the sub-list for method output_type
+	3,  // [3:12] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_payment_proto_init() }
@@ -1613,14 +491,13 @@ func file_backoffice_service_v1_backoffice_payment_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_payment_proto_rawDesc), len(file_backoffice_service_v1_backoffice_payment_proto_rawDesc)),
-			NumEnums:      5,
-			NumMessages:   9,
+			NumEnums:      0,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_backoffice_service_v1_backoffice_payment_proto_goTypes,
 		DependencyIndexes: file_backoffice_service_v1_backoffice_payment_proto_depIdxs,
-		EnumInfos:         file_backoffice_service_v1_backoffice_payment_proto_enumTypes,
 		MessageInfos:      file_backoffice_service_v1_backoffice_payment_proto_msgTypes,
 	}.Build()
 	File_backoffice_service_v1_backoffice_payment_proto = out.File
