@@ -647,15 +647,15 @@ message GetPaymentChannelPageRequest {
   // Page number to retrieve (1-based)
   int32 page = 1;
   // Number of items per page
-  int32 page_size = 2 [json_name="pageSize"];
+  int32 page_size = 2;
     // Optional operator ID filter
-  string operator_id = 3 [json_name="operatorId"];
+  string operator_id = 3;
   // Optional channel type filter
   ChannelType type = 4;
   // Optional category filter
   string category = 5;
   // Optional payment method filter
-  string payment_method = 6 [json_name="paymentMethod"];
+  string payment_method = 6;
   // Optional currency filter
   string currency = 7;
   // Optional crypto protocol
@@ -664,8 +664,10 @@ message GetPaymentChannelPageRequest {
   string network = 9;
   // Optional country filter
   string country = 10;
+  // Source of operator type
+  string source = 11;
   // Optional sort direction
-  Sort sort = 11 [json_name="sort"];
+  Sort sort = 12;
 }
 
 // Response for payment channel page
