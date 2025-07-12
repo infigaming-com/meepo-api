@@ -1,0 +1,184 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nginx-sa
+  namespace: meepo-dev
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: nginx-reloader-role
+  namespace: meepo-dev
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["create"]
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: nginx-reloader-rolebinding
+  namespace: meepo-dev
+subjects:
+- kind: ServiceAccount
+  name: nginx-sa
+  namespace: meepo-dev
+roleRef:
+  kind: Role
+  name: nginx-reloader-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-certs-pvc
+  namespace: meepo-dev
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: standard-rwo
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-challenge-pvc
+  namespace: meepo-dev
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: standard
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  namespace: meepo-dev
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      serviceAccountName: nginx-sa
+      initContainers:
+      - name: init-acme-dir
+        image: busybox:1.35
+        command: ['sh', '-c', 'mkdir -p /var/www/acme-challenge && chmod 755 /var/www/acme-challenge']
+        volumeMounts:
+        - name: nginx-challenge
+          mountPath: /var/www/acme-challenge
+      - name: remove-default-conf
+        image: busybox:1.35
+        command: ['sh', '-c', 'rm -f /etc/nginx/conf.d/default.conf']
+        volumeMounts:
+        - name: nginx-default-config
+          mountPath: /etc/nginx/conf.d
+      containers:
+      - name: nginx
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d/meepo.conf
+          subPath: meepo.conf
+        - name: nginx-config-bo
+          mountPath: /etc/nginx/conf.d/meepo-bo.conf
+          subPath: meepo-bo.conf
+        - name: nginx-certs-meepo
+          mountPath: /etc/nginx/cert/meepo
+          readOnly: true
+        - name: nginx-certs-byo
+          mountPath: /etc/nginx/cert/byo
+          readOnly: true
+        - name: nginx-challenge
+          mountPath: /var/www/acme-challenge
+        - name: nginx-default-config
+          mountPath: /etc/nginx/conf.d
+      - name: nginx-reloader
+        image: alpine/k8s:1.29.0
+        command: ['sh', '-c', 'apk add --no-cache inotify-tools && while true; do inotifywait -e modify,create,delete -r /etc/nginx/cert && echo "Certificate change detected, reloading nginx..." && kubectl exec -n $POD_NAMESPACE deployment/nginx-deploy -c nginx -- nginx -s reload; sleep 2; done']
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        volumeMounts:
+        - name: nginx-certs-byo
+          mountPath: /etc/nginx/cert/byo
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d/meepo.conf
+          subPath: meepo.conf
+        - name: nginx-config-bo
+          mountPath: /etc/nginx/conf.d/meepo-bo.conf
+          subPath: meepo-bo.conf
+        - name: nginx-default-config
+          mountPath: /etc/nginx/conf.d
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+      - name: nginx-config-bo
+        configMap:
+          name: nginx-config-bo
+      - name: nginx-certs-meepo
+        secret:
+          secretName: nginx-certs-meepo-secret
+      - name: nginx-certs-byo
+        persistentVolumeClaim:
+          claimName: nginx-certs-pvc
+      - name: nginx-challenge
+        persistentVolumeClaim:
+          claimName: nginx-challenge-pvc
+      - name: nginx-default-config
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+  namespace: meepo-dev
+  labels:
+    app: nginx
+  annotations:
+    cloud.google.com/load-balancer-type: "External"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: "34.76.0.26"
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  - name: https
+    port: 443
+    targetPort: 443
+    protocol: TCP
+  selector:
+    app: nginx
