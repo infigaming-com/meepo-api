@@ -1340,6 +1340,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
+    /v1/backoffice/payment/method/update:
+        post:
+            tags:
+                - BackofficePayment
+            description: Update payment channel
+            operationId: BackofficePayment_UpdatePaymentMethod
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.UpdatePaymentMethodRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentMethodResponse'
     /v1/backoffice/payment/operator/address/get:
         post:
             tags:
@@ -10018,12 +10037,12 @@ components:
         payment.service.v1.UpdatePaymentChannelRequest:
             type: object
             properties:
+                paymentChannelId:
+                    type: string
+                    description: ID of the payment channel to be used
                 merchantId:
                     type: string
                     description: ID of the merchant creating this channel
-                paymentMethodId:
-                    type: string
-                    description: ID of the payment method to be used
                 contact:
                     type: string
                     description: Contact Info email
@@ -10059,6 +10078,13 @@ components:
             properties:
                 paymentMethods:
                     $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
+        payment.service.v1.UpdatePaymentMethodRequest:
+            type: object
+            properties:
+                paymentMethodId:
+                    type: string
+                status:
+                    type: boolean
         payment.service.v1.WithdrawCallbackRequest:
             type: object
             properties:

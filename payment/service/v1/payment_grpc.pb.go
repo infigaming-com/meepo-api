@@ -37,6 +37,7 @@ const (
 	Payment_GetPaymentChannelPage_FullMethodName         = "/payment.service.v1.Payment/GetPaymentChannelPage"
 	Payment_GetTransactionDetailById_FullMethodName      = "/payment.service.v1.Payment/GetTransactionDetailById"
 	Payment_GetChannelsByIds_FullMethodName              = "/payment.service.v1.Payment/GetChannelsByIds"
+	Payment_UpdatePaymentMethod_FullMethodName           = "/payment.service.v1.Payment/UpdatePaymentMethod"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -113,6 +114,7 @@ type PaymentClient interface {
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
 	GetTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error)
 	GetChannelsByIds(ctx context.Context, in *GetChannelsByIdsRequest, opts ...grpc.CallOption) (*GetChannelsByIdsResponse, error)
+	UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*CreatePaymentMethodResponse, error)
 }
 
 type paymentClient struct {
@@ -303,6 +305,16 @@ func (c *paymentClient) GetChannelsByIds(ctx context.Context, in *GetChannelsByI
 	return out, nil
 }
 
+func (c *paymentClient) UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*CreatePaymentMethodResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreatePaymentMethodResponse)
+	err := c.cc.Invoke(ctx, Payment_UpdatePaymentMethod_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentServer is the server API for Payment service.
 // All implementations must embed UnimplementedPaymentServer
 // for forward compatibility.
@@ -377,6 +389,7 @@ type PaymentServer interface {
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
 	GetTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error)
 	GetChannelsByIds(context.Context, *GetChannelsByIdsRequest) (*GetChannelsByIdsResponse, error)
+	UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*CreatePaymentMethodResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -440,6 +453,9 @@ func (UnimplementedPaymentServer) GetTransactionDetailById(context.Context, *Get
 }
 func (UnimplementedPaymentServer) GetChannelsByIds(context.Context, *GetChannelsByIdsRequest) (*GetChannelsByIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChannelsByIds not implemented")
+}
+func (UnimplementedPaymentServer) UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*CreatePaymentMethodResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentMethod not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -786,6 +802,24 @@ func _Payment_GetChannelsByIds_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_UpdatePaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePaymentMethodRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).UpdatePaymentMethod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_UpdatePaymentMethod_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).UpdatePaymentMethod(ctx, req.(*UpdatePaymentMethodRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Payment_ServiceDesc is the grpc.ServiceDesc for Payment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -864,6 +898,10 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetChannelsByIds",
 			Handler:    _Payment_GetChannelsByIds_Handler,
+		},
+		{
+			MethodName: "UpdatePaymentMethod",
+			Handler:    _Payment_UpdatePaymentMethod_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

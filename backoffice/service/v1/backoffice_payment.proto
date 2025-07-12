@@ -100,6 +100,14 @@ service BackofficePayment {
       body: "*"
     };
   }
+
+  // Update payment channel
+	rpc UpdatePaymentMethod(payment.service.v1.UpdatePaymentMethodRequest) returns (payment.service.v1.CreatePaymentMethodResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/payment/method/update"
+      body: "*"
+    };
+	}
 }
 
 // Request source enum
