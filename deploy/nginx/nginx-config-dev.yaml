@@ -1,0 +1,97 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: nginx
+data:
+  meepo.conf: |
+    map $ssl_server_name $target_domain {
+        default meepo-app-dev.chris-dda.workers.dev;
+        meepo.site meepo-backoffice-dev.chris-dda.workers.dev;
+    }
+
+    map $ssl_server_name $ssl_base {
+        default meepo.site;
+
+        ~^(.*\.)?a9game\.site$ a9game.site;
+        ~^(.*\.)?ngambling\.tech$ ngambling.tech;
+
+        ~^(.*\.)?meepo\.site$ meepo.site;
+    }
+
+    server {
+        listen 443 ssl;
+        server_name
+            a9game.site www.a9game.site *.a9game.site
+            ngambling.tech www.ngambling.tech *.ngambling.tech;
+
+        ssl_certificate     /etc/nginx/cert/$ssl_base.pem;
+        ssl_certificate_key /etc/nginx/cert/$ssl_base.key;
+
+        access_log /var/log/nginx/meepo.access.log;
+        error_log  /var/log/nginx/meepo.error.log debug;
+
+        resolver 1.1.1.1 8.8.8.8 ipv6=off;
+
+        location ~* ^/(favicon\.ico|robots\.txt|sitemap\.xml|\.well-known/|site/.*) {
+            proxy_pass https://resources.speedix.io/static/$ssl_server_name$request_uri;
+            proxy_set_header Host resources.speedix.io;
+            proxy_ssl_server_name on;
+            proxy_ssl_protocols TLSv1.2 TLSv1.3;
+
+            proxy_intercept_errors on;
+            error_page 404 = @fallback_static;
+
+            add_header Cache-Control "public, max-age=3600";
+        }
+
+        location ^~ /static/ {
+        #proxy_pass https://resources.speedix.io$request_uri;
+        #proxy_set_header Host resources.speedix.io;
+        proxy_pass https://gares.cc$request_uri;
+        proxy_set_header Host gares.cc;
+            proxy_ssl_server_name on;
+            proxy_ssl_protocols TLSv1.2 TLSv1.3;
+
+            add_header Cache-Control "public, max-age=300";
+        }
+
+        location / {
+            proxy_pass https://$target_domain;
+            proxy_set_header Host $target_domain;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_ssl_server_name on;
+            proxy_ssl_protocols TLSv1.2 TLSv1.3;
+        }
+
+        location @fallback_static {
+            proxy_pass https://$target_domain$request_uri;
+            proxy_set_header Host $target_domain;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_ssl_server_name on;
+            proxy_ssl_protocols TLSv1.2 TLSv1.3;
+        }
+    }
+
+    server {
+        listen 443 ssl;
+        server_name
+            meepo.site www.meepo.site *.meepo.site;
+        
+        ssl_certificate     /etc/nginx/cert/$ssl_base.pem;
+        ssl_certificate_key /etc/nginx/cert/$ssl_base.key;
+
+        access_log /var/log/nginx/meepo-bo.access.log;
+        error_log  /var/log/nginx/meepo-bo.error.log debug;
+
+        location / {
+            proxy_pass https://meepo-backoffice-dev.chris-dda.workers.dev;
+            proxy_set_header Host meepo-backoffice-dev.chris-dda.workers.dev;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_ssl_server_name on;
+            proxy_ssl_protocols TLSv1.2 TLSv1.3;
+        }
+    }
