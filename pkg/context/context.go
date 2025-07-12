@@ -95,6 +95,19 @@ func (o *OperatorIds) GetRealOperatorIdAndType() (int64, string) {
 	}
 }
 
+func NewOperatorIds(operatorId, companyOperatorId, retailerOperatorId, systemOperatorId int64) *OperatorIds {
+	operatorIds := &OperatorIds{
+		OperatorId:         operatorId,
+		CompanyOperatorId:  companyOperatorId,
+		RetailerOperatorId: retailerOperatorId,
+		SystemOperatorId:   systemOperatorId,
+	}
+	realOperatorId, operatorType := operatorIds.GetRealOperatorIdAndType()
+	operatorIds.RealOperatorId = realOperatorId
+	operatorIds.OperatorType = operatorType
+	return operatorIds
+}
+
 func (o *OperatorIds) GetOperatorContext() common.OperatorContext {
 	return common.OperatorContext{
 		OperatorId:         o.OperatorId,
