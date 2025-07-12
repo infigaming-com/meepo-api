@@ -12936,6 +12936,10 @@ func (m *ListAllUsersRequest) validate(all bool) error {
 		}
 	}
 
+	if m.RoleId != nil {
+		// no validation rules for RoleId
+	}
+
 	if len(errors) > 0 {
 		return ListAllUsersRequestMultiError(errors)
 	}
