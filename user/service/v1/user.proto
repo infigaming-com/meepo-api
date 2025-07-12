@@ -1093,6 +1093,7 @@ message UpdateOperatorStatusResponse {
 
 message ListAllUsersRequest {
 	api.common.OperatorContext operator_context = 1;
+	optional int64 role_id = 2;
 }
 
 message ListAllUsersResponse {

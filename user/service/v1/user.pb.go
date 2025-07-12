@@ -6600,6 +6600,7 @@ func (x *UpdateOperatorStatusResponse) GetStatus() string {
 type ListAllUsersRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	RoleId          *int64                  `protobuf:"varint,2,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -6639,6 +6640,13 @@ func (x *ListAllUsersRequest) GetOperatorContext() *common.OperatorContext {
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *ListAllUsersRequest) GetRoleId() int64 {
+	if x != nil && x.RoleId != nil {
+		return *x.RoleId
+	}
+	return 0
 }
 
 type ListAllUsersResponse struct {
@@ -8318,9 +8326,12 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\roperator_type\x18\x06 \x01(\tR\foperatorType\x12F\n" +
 	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"6\n" +
 	"\x1cUpdateOperatorStatusResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status\"]\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\"\x87\x01\n" +
 	"\x13ListAllUsersRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"K\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1c\n" +
+	"\arole_id\x18\x02 \x01(\x03H\x00R\x06roleId\x88\x01\x01B\n" +
+	"\n" +
+	"\b_role_id\"K\n" +
 	"\x14ListAllUsersResponse\x123\n" +
 	"\x05users\x18\x01 \x03(\v2\x1d.api.user.service.v1.UserInfoR\x05users*j\n" +
 	"\bAuthType\x12\x19\n" +
@@ -8740,6 +8751,7 @@ func file_user_service_v1_user_proto_init() {
 	file_user_service_v1_user_proto_msgTypes[78].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[90].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[95].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[106].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
