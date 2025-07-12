@@ -406,10 +406,10 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
 	"max_amount\x18\n" +
 	" \x01(\tR\tmaxAmount\x12)\n" +
-	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructR\x03key2\xf2\f\n" +
+	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructR\x03key2\xf5\f\n" +
 	"\x11BackofficePayment\x12\xae\x01\n" +
-	"\x19GetPaymentTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/payment/transaction/page\x12\xb9\x01\n" +
-	"\x19GetPaymentTransactionById\x123.payment.service.v1.GetTransactionDetailByIdRequest\x1a1.payment.service.v1.GetPaymentChannelPageResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/payment/transaction/detail\x12\xcc\x01\n" +
+	"\x19GetPaymentTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/payment/transaction/page\x12\xbc\x01\n" +
+	"\x19GetPaymentTransactionById\x123.payment.service.v1.GetTransactionDetailByIdRequest\x1a4.payment.service.v1.GetTransactionDetailByIdResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/payment/transaction/detail\x12\xcc\x01\n" +
 	"\x1dGetSupportedPaymentMethodList\x128.payment.service.v1.GetSupportedPaymentMethodListRequest\x1a9.payment.service.v1.GetSupportedPaymentMethodListResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/payment/supportedmethod/list\x12\xa8\x01\n" +
 	"\x14GetPaymentMethodList\x12/.payment.service.v1.GetPaymentMethodListRequest\x1a0.payment.service.v1.GetPaymentMethodListResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/payment/method/list\x12\xae\x01\n" +
 	"\x13CreatePaymentMethod\x125.api.backoffice.service.v1.CreatePaymentMethodRequest\x1a/.payment.service.v1.CreatePaymentMethodResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/payment/method/create\x12\xab\x01\n" +
@@ -444,13 +444,14 @@ var file_backoffice_service_v1_backoffice_payment_proto_goTypes = []any{
 	(*v1.UpdatePaymentChannelRequest)(nil),           // 8: payment.service.v1.UpdatePaymentChannelRequest
 	(*v1.GetPaymentChannelPageRequest)(nil),          // 9: payment.service.v1.GetPaymentChannelPageRequest
 	(*v1.GetTransactionPageResponse)(nil),            // 10: payment.service.v1.GetTransactionPageResponse
-	(*v1.GetPaymentChannelPageResponse)(nil),         // 11: payment.service.v1.GetPaymentChannelPageResponse
+	(*v1.GetTransactionDetailByIdResponse)(nil),      // 11: payment.service.v1.GetTransactionDetailByIdResponse
 	(*v1.GetSupportedPaymentMethodListResponse)(nil), // 12: payment.service.v1.GetSupportedPaymentMethodListResponse
 	(*v1.GetPaymentMethodListResponse)(nil),          // 13: payment.service.v1.GetPaymentMethodListResponse
 	(*v1.CreatePaymentMethodResponse)(nil),           // 14: payment.service.v1.CreatePaymentMethodResponse
 	(*v1.UpdatePaymentChannelResponse)(nil),          // 15: payment.service.v1.UpdatePaymentChannelResponse
 	(*v1.CreatePaymentChannelResponse)(nil),          // 16: payment.service.v1.CreatePaymentChannelResponse
 	(*v1.GetOperatorAddressResponse)(nil),            // 17: payment.service.v1.GetOperatorAddressResponse
+	(*v1.GetPaymentChannelPageResponse)(nil),         // 18: payment.service.v1.GetPaymentChannelPageResponse
 }
 var file_backoffice_service_v1_backoffice_payment_proto_depIdxs = []int32{
 	3,  // 0: api.backoffice.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
@@ -466,14 +467,14 @@ var file_backoffice_service_v1_backoffice_payment_proto_depIdxs = []int32{
 	0,  // 10: api.backoffice.service.v1.BackofficePayment.GetOperatorAddress:input_type -> api.backoffice.service.v1.GetOperatorAddressRequest
 	9,  // 11: api.backoffice.service.v1.BackofficePayment.GetPaymentChannelPage:input_type -> payment.service.v1.GetPaymentChannelPageRequest
 	10, // 12: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
-	11, // 13: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:output_type -> payment.service.v1.GetPaymentChannelPageResponse
+	11, // 13: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
 	12, // 14: api.backoffice.service.v1.BackofficePayment.GetSupportedPaymentMethodList:output_type -> payment.service.v1.GetSupportedPaymentMethodListResponse
 	13, // 15: api.backoffice.service.v1.BackofficePayment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
 	14, // 16: api.backoffice.service.v1.BackofficePayment.CreatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
 	15, // 17: api.backoffice.service.v1.BackofficePayment.UpdatePaymentChannel:output_type -> payment.service.v1.UpdatePaymentChannelResponse
 	16, // 18: api.backoffice.service.v1.BackofficePayment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
 	17, // 19: api.backoffice.service.v1.BackofficePayment.GetOperatorAddress:output_type -> payment.service.v1.GetOperatorAddressResponse
-	11, // 20: api.backoffice.service.v1.BackofficePayment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
+	18, // 20: api.backoffice.service.v1.BackofficePayment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
 	12, // [12:21] is the sub-list for method output_type
 	3,  // [3:12] is the sub-list for method input_type
 	3,  // [3:3] is the sub-list for extension type_name

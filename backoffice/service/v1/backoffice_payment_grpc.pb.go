@@ -44,7 +44,7 @@ type BackofficePaymentClient interface {
 	// Get transaction detail
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
-	GetPaymentTransactionById(ctx context.Context, in *v1.GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*v1.GetPaymentChannelPageResponse, error)
+	GetPaymentTransactionById(ctx context.Context, in *v1.GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*v1.GetTransactionDetailByIdResponse, error)
 	// Get list of payment methods
 	// Retrieves all available payment methods supported by the system
 	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
@@ -90,9 +90,9 @@ func (c *backofficePaymentClient) GetPaymentTransactionPage(ctx context.Context,
 	return out, nil
 }
 
-func (c *backofficePaymentClient) GetPaymentTransactionById(ctx context.Context, in *v1.GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*v1.GetPaymentChannelPageResponse, error) {
+func (c *backofficePaymentClient) GetPaymentTransactionById(ctx context.Context, in *v1.GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*v1.GetTransactionDetailByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.GetPaymentChannelPageResponse)
+	out := new(v1.GetTransactionDetailByIdResponse)
 	err := c.cc.Invoke(ctx, BackofficePayment_GetPaymentTransactionById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -183,7 +183,7 @@ type BackofficePaymentServer interface {
 	// Get transaction detail
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
-	GetPaymentTransactionById(context.Context, *v1.GetTransactionDetailByIdRequest) (*v1.GetPaymentChannelPageResponse, error)
+	GetPaymentTransactionById(context.Context, *v1.GetTransactionDetailByIdRequest) (*v1.GetTransactionDetailByIdResponse, error)
 	// Get list of payment methods
 	// Retrieves all available payment methods supported by the system
 	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
@@ -222,7 +222,7 @@ type UnimplementedBackofficePaymentServer struct{}
 func (UnimplementedBackofficePaymentServer) GetPaymentTransactionPage(context.Context, *v1.GetTransactionPageRequest) (*v1.GetTransactionPageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentTransactionPage not implemented")
 }
-func (UnimplementedBackofficePaymentServer) GetPaymentTransactionById(context.Context, *v1.GetTransactionDetailByIdRequest) (*v1.GetPaymentChannelPageResponse, error) {
+func (UnimplementedBackofficePaymentServer) GetPaymentTransactionById(context.Context, *v1.GetTransactionDetailByIdRequest) (*v1.GetTransactionDetailByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentTransactionById not implemented")
 }
 func (UnimplementedBackofficePaymentServer) GetSupportedPaymentMethodList(context.Context, *v1.GetSupportedPaymentMethodListRequest) (*v1.GetSupportedPaymentMethodListResponse, error) {
