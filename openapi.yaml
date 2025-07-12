@@ -9996,33 +9996,28 @@ components:
                 logo:
                     type: string
                     description: URL to the logo image for this payment channel
-                minDepositAmount:
+                minAmount:
                     type: string
                     description: Minimum amount allowed for deposit transactions
-                maxDepositAmount:
+                maxAmount:
                     type: string
                     description: Maximum amount allowed for deposit transactions
-                minWithdrawAmount:
+                fixedFee:
                     type: string
-                    description: Minimum amount allowed for withdrawal transactions
-                maxWithdrawAmount:
+                    description: Fixed Fee on the Amount
+                feeRate:
                     type: string
-                    description: Maximum amount allowed for withdrawal transactions
+                    description: Rate Fee
+                minFee:
+                    type: string
+                    description: Minimum Fee
                 eat:
                     type: integer
                     description: Estimated arrival time in minutes
                     format: int32
-                fixFee:
-                    type: string
-                    description: Fee
-                rateFee:
-                    type: string
-                depositSchema:
+                schema:
                     type: object
                     description: JSON schema defining deposit form fields required by this channel
-                withdrawSchema:
-                    type: object
-                    description: JSON schema defining withdrawal form fields required by this channel
                 source:
                     type: string
                 sourceType:
@@ -10081,6 +10076,14 @@ components:
                     description: Max Amount
                 enable:
                     type: boolean
+                network:
+                    type: string
+                protocol:
+                    type: string
+                minFee:
+                    type: string
+                source:
+                    type: string
                 keySchema:
                     type: object
                     description: JSON schema defining the required fields for this payment method

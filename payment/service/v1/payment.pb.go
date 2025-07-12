@@ -427,8 +427,12 @@ type PaymentMethodInfo struct {
 	// Max Amount
 	PspMaxAmount string `protobuf:"bytes,16,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
 	Enable       bool   `protobuf:"varint,17,opt,name=enable,proto3" json:"enable,omitempty"`
+	Network      string `protobuf:"bytes,18,opt,name=network,proto3" json:"network,omitempty"`
+	Protocol     string `protobuf:"bytes,19,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	MinFee       string `protobuf:"bytes,20,opt,name=minFee,proto3" json:"minFee,omitempty"`
+	Source       string `protobuf:"bytes,21,opt,name=source,proto3" json:"source,omitempty"`
 	// JSON schema defining the required fields for this payment method
-	KeySchema     *structpb.Struct `protobuf:"bytes,18,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
+	KeySchema     *structpb.Struct `protobuf:"bytes,22,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -580,6 +584,34 @@ func (x *PaymentMethodInfo) GetEnable() bool {
 		return x.Enable
 	}
 	return false
+}
+
+func (x *PaymentMethodInfo) GetNetwork() string {
+	if x != nil {
+		return x.Network
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetProtocol() string {
+	if x != nil {
+		return x.Protocol
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetMinFee() string {
+	if x != nil {
+		return x.MinFee
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetSource() string {
+	if x != nil {
+		return x.Source
+	}
+	return ""
 }
 
 func (x *PaymentMethodInfo) GetKeySchema() *structpb.Struct {
@@ -1293,27 +1325,24 @@ type PaymentChannelInfo struct {
 	// URL to the logo image for this payment channel
 	Logo string `protobuf:"bytes,16,opt,name=logo,proto3" json:"logo,omitempty"`
 	// Minimum amount allowed for deposit transactions
-	MinDepositAmount string `protobuf:"bytes,17,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
+	MinAmount string `protobuf:"bytes,17,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Maximum amount allowed for deposit transactions
-	MaxDepositAmount string `protobuf:"bytes,18,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
-	// Minimum amount allowed for withdrawal transactions
-	MinWithdrawAmount string `protobuf:"bytes,19,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
-	// Maximum amount allowed for withdrawal transactions
-	MaxWithdrawAmount string `protobuf:"bytes,20,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
+	MaxAmount string `protobuf:"bytes,18,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	// Fixed Fee on the Amount
+	FixedFee string `protobuf:"bytes,19,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
+	// Rate Fee
+	FeeRate string `protobuf:"bytes,20,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	// Minimum Fee
+	MinFee string `protobuf:"bytes,21,opt,name=min_fee,json=minFee,proto3" json:"min_fee,omitempty"`
 	// Estimated arrival time in minutes
-	Eat int32 `protobuf:"varint,21,opt,name=eat,proto3" json:"eat,omitempty"`
-	// Fee
-	FixFee  string `protobuf:"bytes,22,opt,name=fix_fee,json=fixFee,proto3" json:"fix_fee,omitempty"`
-	RateFee string `protobuf:"bytes,23,opt,name=rate_fee,json=rateFee,proto3" json:"rate_fee,omitempty"`
+	Eat int32 `protobuf:"varint,22,opt,name=eat,proto3" json:"eat,omitempty"`
 	// JSON schema defining deposit form fields required by this channel
-	DepositSchema *structpb.Struct `protobuf:"bytes,24,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
-	// JSON schema defining withdrawal form fields required by this channel
-	WithdrawSchema *structpb.Struct `protobuf:"bytes,25,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
-	Source         string           `protobuf:"bytes,26,opt,name=source,proto3" json:"source,omitempty"`
-	SourceType     string           `protobuf:"bytes,27,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
-	Enable         bool             `protobuf:"varint,28,opt,name=enable,proto3" json:"enable,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	Schema        *structpb.Struct `protobuf:"bytes,23,opt,name=schema,proto3" json:"schema,omitempty"`
+	Source        string           `protobuf:"bytes,24,opt,name=source,proto3" json:"source,omitempty"`
+	SourceType    string           `protobuf:"bytes,25,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
+	Enable        bool             `protobuf:"varint,26,opt,name=enable,proto3" json:"enable,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PaymentChannelInfo) Reset() {
@@ -1458,30 +1487,37 @@ func (x *PaymentChannelInfo) GetLogo() string {
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetMinDepositAmount() string {
+func (x *PaymentChannelInfo) GetMinAmount() string {
 	if x != nil {
-		return x.MinDepositAmount
+		return x.MinAmount
 	}
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetMaxDepositAmount() string {
+func (x *PaymentChannelInfo) GetMaxAmount() string {
 	if x != nil {
-		return x.MaxDepositAmount
+		return x.MaxAmount
 	}
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetMinWithdrawAmount() string {
+func (x *PaymentChannelInfo) GetFixedFee() string {
 	if x != nil {
-		return x.MinWithdrawAmount
+		return x.FixedFee
 	}
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetMaxWithdrawAmount() string {
+func (x *PaymentChannelInfo) GetFeeRate() string {
 	if x != nil {
-		return x.MaxWithdrawAmount
+		return x.FeeRate
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetMinFee() string {
+	if x != nil {
+		return x.MinFee
 	}
 	return ""
 }
@@ -1493,30 +1529,9 @@ func (x *PaymentChannelInfo) GetEat() int32 {
 	return 0
 }
 
-func (x *PaymentChannelInfo) GetFixFee() string {
+func (x *PaymentChannelInfo) GetSchema() *structpb.Struct {
 	if x != nil {
-		return x.FixFee
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetRateFee() string {
-	if x != nil {
-		return x.RateFee
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetDepositSchema() *structpb.Struct {
-	if x != nil {
-		return x.DepositSchema
-	}
-	return nil
-}
-
-func (x *PaymentChannelInfo) GetWithdrawSchema() *structpb.Struct {
-	if x != nil {
-		return x.WithdrawSchema
+		return x.Schema
 	}
 	return nil
 }
@@ -3970,7 +3985,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x1bGetPaymentMethodListRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x10\n" +
 	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x16\n" +
-	"\x06search\x18\x03 \x01(\tR\x06search\"\xbd\x04\n" +
+	"\x06search\x18\x03 \x01(\tR\x06search\"\xa3\x05\n" +
 	"\x11PaymentMethodInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
 	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x12\n" +
@@ -3992,9 +4007,13 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"pspFeeRate\x12$\n" +
 	"\x0epsp_min_amount\x18\x0f \x01(\tR\fpspMinAmount\x12$\n" +
 	"\x0epsp_max_amount\x18\x10 \x01(\tR\fpspMaxAmount\x12\x16\n" +
-	"\x06enable\x18\x11 \x01(\bR\x06enable\x126\n" +
+	"\x06enable\x18\x11 \x01(\bR\x06enable\x12\x18\n" +
+	"\anetwork\x18\x12 \x01(\tR\anetwork\x12\x1a\n" +
+	"\bprotocol\x18\x13 \x01(\tR\bprotocol\x12\x16\n" +
+	"\x06minFee\x18\x14 \x01(\tR\x06minFee\x12\x16\n" +
+	"\x06source\x18\x15 \x01(\tR\x06source\x126\n" +
 	"\n" +
-	"key_schema\x18\x12 \x01(\v2\x17.google.protobuf.StructR\tkeySchema\"w\n" +
+	"key_schema\x18\x16 \x01(\v2\x17.google.protobuf.StructR\tkeySchema\"w\n" +
 	"%GetSupportedPaymentMethodListResponse\x12N\n" +
 	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"n\n" +
 	"\x1cGetPaymentMethodListResponse\x12N\n" +
@@ -4058,7 +4077,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xa1\a\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xef\x05\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x12\n" +
@@ -4078,20 +4097,20 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\anetwork\x18\r \x01(\tR\anetwork\x12\x18\n" +
 	"\acountry\x18\x0e \x01(\tR\acountry\x12\x16\n" +
 	"\x06method\x18\x0f \x01(\tR\x06method\x12\x12\n" +
-	"\x04logo\x18\x10 \x01(\tR\x04logo\x12,\n" +
-	"\x12min_deposit_amount\x18\x11 \x01(\tR\x10minDepositAmount\x12,\n" +
-	"\x12max_deposit_amount\x18\x12 \x01(\tR\x10maxDepositAmount\x12.\n" +
-	"\x13min_withdraw_amount\x18\x13 \x01(\tR\x11minWithdrawAmount\x12.\n" +
-	"\x13max_withdraw_amount\x18\x14 \x01(\tR\x11maxWithdrawAmount\x12\x10\n" +
-	"\x03eat\x18\x15 \x01(\x05R\x03eat\x12\x17\n" +
-	"\afix_fee\x18\x16 \x01(\tR\x06fixFee\x12\x19\n" +
-	"\brate_fee\x18\x17 \x01(\tR\arateFee\x12>\n" +
-	"\x0edeposit_schema\x18\x18 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
-	"\x0fwithdraw_schema\x18\x19 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\x12\x16\n" +
-	"\x06source\x18\x1a \x01(\tR\x06source\x12\x1f\n" +
-	"\vsource_type\x18\x1b \x01(\tR\n" +
+	"\x04logo\x18\x10 \x01(\tR\x04logo\x12\x1d\n" +
+	"\n" +
+	"min_amount\x18\x11 \x01(\tR\tminAmount\x12\x1d\n" +
+	"\n" +
+	"max_amount\x18\x12 \x01(\tR\tmaxAmount\x12\x1b\n" +
+	"\tfixed_fee\x18\x13 \x01(\tR\bfixedFee\x12\x19\n" +
+	"\bfee_rate\x18\x14 \x01(\tR\afeeRate\x12\x17\n" +
+	"\amin_fee\x18\x15 \x01(\tR\x06minFee\x12\x10\n" +
+	"\x03eat\x18\x16 \x01(\x05R\x03eat\x12/\n" +
+	"\x06schema\x18\x17 \x01(\v2\x17.google.protobuf.StructR\x06schema\x12\x16\n" +
+	"\x06source\x18\x18 \x01(\tR\x06source\x12\x1f\n" +
+	"\vsource_type\x18\x19 \x01(\tR\n" +
 	"sourceType\x12\x16\n" +
-	"\x06enable\x18\x1c \x01(\bR\x06enable\"\x9a\x01\n" +
+	"\x06enable\x18\x1a \x01(\bR\x06enable\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
@@ -4422,81 +4441,80 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	45, // 7: payment.service.v1.CreatePaymentChannelRequest.operator_context:type_name -> api.common.OperatorContext
 	44, // 8: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
 	44, // 9: payment.service.v1.UpdatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
-	44, // 10: payment.service.v1.PaymentChannelInfo.deposit_schema:type_name -> google.protobuf.Struct
-	44, // 11: payment.service.v1.PaymentChannelInfo.withdraw_schema:type_name -> google.protobuf.Struct
-	44, // 12: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
-	46, // 13: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
-	44, // 14: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
-	44, // 15: payment.service.v1.GetAddressRequest.extra:type_name -> google.protobuf.Struct
-	41, // 16: payment.service.v1.GetAddressResponse.data:type_name -> payment.service.v1.GetAddressResponse.Data
-	45, // 17: payment.service.v1.GetOperatorAddressRequest.operator_context:type_name -> api.common.OperatorContext
-	44, // 18: payment.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
-	42, // 19: payment.service.v1.GetOperatorAddressResponse.data:type_name -> payment.service.v1.GetOperatorAddressResponse.Data
-	45, // 20: payment.service.v1.InitiateWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
-	44, // 21: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
-	46, // 22: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
-	44, // 23: payment.service.v1.InitiateOperatorWithdrawRequest.extra:type_name -> google.protobuf.Struct
-	46, // 24: payment.service.v1.InitiateOperatorWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 25: payment.service.v1.TransactionInfo.type:type_name -> payment.service.v1.TransactionType
-	1,  // 26: payment.service.v1.TransactionInfo.status:type_name -> payment.service.v1.TransactionStatus
-	46, // 27: payment.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
-	46, // 28: payment.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
-	31, // 29: payment.service.v1.TransactionDetail.transaction:type_name -> payment.service.v1.TransactionInfo
-	16, // 30: payment.service.v1.TransactionDetail.channel:type_name -> payment.service.v1.PaymentChannelInfo
-	0,  // 31: payment.service.v1.GetTransactionPageRequest.type:type_name -> payment.service.v1.TransactionType
-	1,  // 32: payment.service.v1.GetTransactionPageRequest.status:type_name -> payment.service.v1.TransactionStatus
-	46, // 33: payment.service.v1.GetTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
-	46, // 34: payment.service.v1.GetTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
-	2,  // 35: payment.service.v1.GetTransactionPageRequest.sort:type_name -> payment.service.v1.Sort
-	3,  // 36: payment.service.v1.GetTransactionPageRequest.source:type_name -> payment.service.v1.RequestSource
-	31, // 37: payment.service.v1.GetTransactionPageResponse.transactions:type_name -> payment.service.v1.TransactionInfo
-	4,  // 38: payment.service.v1.GetPaymentChannelPageRequest.type:type_name -> payment.service.v1.ChannelType
-	2,  // 39: payment.service.v1.GetPaymentChannelPageRequest.sort:type_name -> payment.service.v1.Sort
-	16, // 40: payment.service.v1.GetPaymentChannelPageResponse.payment_channels:type_name -> payment.service.v1.PaymentChannelInfo
-	3,  // 41: payment.service.v1.GetTransactionDetailByIdRequest.source:type_name -> payment.service.v1.RequestSource
-	32, // 42: payment.service.v1.GetTransactionDetailByIdResponse.detail:type_name -> payment.service.v1.TransactionDetail
-	43, // 43: payment.service.v1.GetChannelsByIdsResponse.channels:type_name -> payment.service.v1.GetChannelsByIdsResponse.Channel
-	5,  // 44: payment.service.v1.Payment.GetSupportedPaymentMethodList:input_type -> payment.service.v1.GetSupportedPaymentMethodListRequest
-	10, // 45: payment.service.v1.Payment.CreatePaymentMethod:input_type -> payment.service.v1.CreatePaymentMethodRequest
-	6,  // 46: payment.service.v1.Payment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
-	14, // 47: payment.service.v1.Payment.UpdatePaymentChannel:input_type -> payment.service.v1.UpdatePaymentChannelRequest
-	13, // 48: payment.service.v1.Payment.CreatePaymentChannel:input_type -> payment.service.v1.CreatePaymentChannelRequest
-	19, // 49: payment.service.v1.Payment.GetAddress:input_type -> payment.service.v1.GetAddressRequest
-	17, // 50: payment.service.v1.Payment.InitiateDeposit:input_type -> payment.service.v1.InitiateDepositRequest
-	23, // 51: payment.service.v1.Payment.InitiateWithdraw:input_type -> payment.service.v1.InitiateWithdrawRequest
-	27, // 52: payment.service.v1.Payment.DepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
-	29, // 53: payment.service.v1.Payment.WithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
-	21, // 54: payment.service.v1.Payment.GetOperatorAddress:input_type -> payment.service.v1.GetOperatorAddressRequest
-	25, // 55: payment.service.v1.Payment.InitiateOperatorWithdraw:input_type -> payment.service.v1.InitiateOperatorWithdrawRequest
-	27, // 56: payment.service.v1.Payment.OperatorDepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
-	29, // 57: payment.service.v1.Payment.OperatorWithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
-	33, // 58: payment.service.v1.Payment.GetTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
-	35, // 59: payment.service.v1.Payment.GetPaymentChannelPage:input_type -> payment.service.v1.GetPaymentChannelPageRequest
-	37, // 60: payment.service.v1.Payment.GetTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
-	39, // 61: payment.service.v1.Payment.GetChannelsByIds:input_type -> payment.service.v1.GetChannelsByIdsRequest
-	8,  // 62: payment.service.v1.Payment.GetSupportedPaymentMethodList:output_type -> payment.service.v1.GetSupportedPaymentMethodListResponse
-	11, // 63: payment.service.v1.Payment.CreatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
-	9,  // 64: payment.service.v1.Payment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
-	12, // 65: payment.service.v1.Payment.UpdatePaymentChannel:output_type -> payment.service.v1.UpdatePaymentChannelResponse
-	15, // 66: payment.service.v1.Payment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
-	20, // 67: payment.service.v1.Payment.GetAddress:output_type -> payment.service.v1.GetAddressResponse
-	18, // 68: payment.service.v1.Payment.InitiateDeposit:output_type -> payment.service.v1.InitiateDepositResponse
-	24, // 69: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
-	28, // 70: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
-	30, // 71: payment.service.v1.Payment.WithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
-	22, // 72: payment.service.v1.Payment.GetOperatorAddress:output_type -> payment.service.v1.GetOperatorAddressResponse
-	26, // 73: payment.service.v1.Payment.InitiateOperatorWithdraw:output_type -> payment.service.v1.InitiateOperatorWithdrawResponse
-	28, // 74: payment.service.v1.Payment.OperatorDepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
-	30, // 75: payment.service.v1.Payment.OperatorWithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
-	34, // 76: payment.service.v1.Payment.GetTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
-	36, // 77: payment.service.v1.Payment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
-	38, // 78: payment.service.v1.Payment.GetTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
-	40, // 79: payment.service.v1.Payment.GetChannelsByIds:output_type -> payment.service.v1.GetChannelsByIdsResponse
-	62, // [62:80] is the sub-list for method output_type
-	44, // [44:62] is the sub-list for method input_type
-	44, // [44:44] is the sub-list for extension type_name
-	44, // [44:44] is the sub-list for extension extendee
-	0,  // [0:44] is the sub-list for field type_name
+	44, // 10: payment.service.v1.PaymentChannelInfo.schema:type_name -> google.protobuf.Struct
+	44, // 11: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
+	46, // 12: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
+	44, // 13: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
+	44, // 14: payment.service.v1.GetAddressRequest.extra:type_name -> google.protobuf.Struct
+	41, // 15: payment.service.v1.GetAddressResponse.data:type_name -> payment.service.v1.GetAddressResponse.Data
+	45, // 16: payment.service.v1.GetOperatorAddressRequest.operator_context:type_name -> api.common.OperatorContext
+	44, // 17: payment.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
+	42, // 18: payment.service.v1.GetOperatorAddressResponse.data:type_name -> payment.service.v1.GetOperatorAddressResponse.Data
+	45, // 19: payment.service.v1.InitiateWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
+	44, // 20: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
+	46, // 21: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
+	44, // 22: payment.service.v1.InitiateOperatorWithdrawRequest.extra:type_name -> google.protobuf.Struct
+	46, // 23: payment.service.v1.InitiateOperatorWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 24: payment.service.v1.TransactionInfo.type:type_name -> payment.service.v1.TransactionType
+	1,  // 25: payment.service.v1.TransactionInfo.status:type_name -> payment.service.v1.TransactionStatus
+	46, // 26: payment.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	46, // 27: payment.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
+	31, // 28: payment.service.v1.TransactionDetail.transaction:type_name -> payment.service.v1.TransactionInfo
+	16, // 29: payment.service.v1.TransactionDetail.channel:type_name -> payment.service.v1.PaymentChannelInfo
+	0,  // 30: payment.service.v1.GetTransactionPageRequest.type:type_name -> payment.service.v1.TransactionType
+	1,  // 31: payment.service.v1.GetTransactionPageRequest.status:type_name -> payment.service.v1.TransactionStatus
+	46, // 32: payment.service.v1.GetTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
+	46, // 33: payment.service.v1.GetTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
+	2,  // 34: payment.service.v1.GetTransactionPageRequest.sort:type_name -> payment.service.v1.Sort
+	3,  // 35: payment.service.v1.GetTransactionPageRequest.source:type_name -> payment.service.v1.RequestSource
+	31, // 36: payment.service.v1.GetTransactionPageResponse.transactions:type_name -> payment.service.v1.TransactionInfo
+	4,  // 37: payment.service.v1.GetPaymentChannelPageRequest.type:type_name -> payment.service.v1.ChannelType
+	2,  // 38: payment.service.v1.GetPaymentChannelPageRequest.sort:type_name -> payment.service.v1.Sort
+	16, // 39: payment.service.v1.GetPaymentChannelPageResponse.payment_channels:type_name -> payment.service.v1.PaymentChannelInfo
+	3,  // 40: payment.service.v1.GetTransactionDetailByIdRequest.source:type_name -> payment.service.v1.RequestSource
+	32, // 41: payment.service.v1.GetTransactionDetailByIdResponse.detail:type_name -> payment.service.v1.TransactionDetail
+	43, // 42: payment.service.v1.GetChannelsByIdsResponse.channels:type_name -> payment.service.v1.GetChannelsByIdsResponse.Channel
+	5,  // 43: payment.service.v1.Payment.GetSupportedPaymentMethodList:input_type -> payment.service.v1.GetSupportedPaymentMethodListRequest
+	10, // 44: payment.service.v1.Payment.CreatePaymentMethod:input_type -> payment.service.v1.CreatePaymentMethodRequest
+	6,  // 45: payment.service.v1.Payment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
+	14, // 46: payment.service.v1.Payment.UpdatePaymentChannel:input_type -> payment.service.v1.UpdatePaymentChannelRequest
+	13, // 47: payment.service.v1.Payment.CreatePaymentChannel:input_type -> payment.service.v1.CreatePaymentChannelRequest
+	19, // 48: payment.service.v1.Payment.GetAddress:input_type -> payment.service.v1.GetAddressRequest
+	17, // 49: payment.service.v1.Payment.InitiateDeposit:input_type -> payment.service.v1.InitiateDepositRequest
+	23, // 50: payment.service.v1.Payment.InitiateWithdraw:input_type -> payment.service.v1.InitiateWithdrawRequest
+	27, // 51: payment.service.v1.Payment.DepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
+	29, // 52: payment.service.v1.Payment.WithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
+	21, // 53: payment.service.v1.Payment.GetOperatorAddress:input_type -> payment.service.v1.GetOperatorAddressRequest
+	25, // 54: payment.service.v1.Payment.InitiateOperatorWithdraw:input_type -> payment.service.v1.InitiateOperatorWithdrawRequest
+	27, // 55: payment.service.v1.Payment.OperatorDepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
+	29, // 56: payment.service.v1.Payment.OperatorWithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
+	33, // 57: payment.service.v1.Payment.GetTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
+	35, // 58: payment.service.v1.Payment.GetPaymentChannelPage:input_type -> payment.service.v1.GetPaymentChannelPageRequest
+	37, // 59: payment.service.v1.Payment.GetTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
+	39, // 60: payment.service.v1.Payment.GetChannelsByIds:input_type -> payment.service.v1.GetChannelsByIdsRequest
+	8,  // 61: payment.service.v1.Payment.GetSupportedPaymentMethodList:output_type -> payment.service.v1.GetSupportedPaymentMethodListResponse
+	11, // 62: payment.service.v1.Payment.CreatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
+	9,  // 63: payment.service.v1.Payment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
+	12, // 64: payment.service.v1.Payment.UpdatePaymentChannel:output_type -> payment.service.v1.UpdatePaymentChannelResponse
+	15, // 65: payment.service.v1.Payment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
+	20, // 66: payment.service.v1.Payment.GetAddress:output_type -> payment.service.v1.GetAddressResponse
+	18, // 67: payment.service.v1.Payment.InitiateDeposit:output_type -> payment.service.v1.InitiateDepositResponse
+	24, // 68: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
+	28, // 69: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
+	30, // 70: payment.service.v1.Payment.WithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
+	22, // 71: payment.service.v1.Payment.GetOperatorAddress:output_type -> payment.service.v1.GetOperatorAddressResponse
+	26, // 72: payment.service.v1.Payment.InitiateOperatorWithdraw:output_type -> payment.service.v1.InitiateOperatorWithdrawResponse
+	28, // 73: payment.service.v1.Payment.OperatorDepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
+	30, // 74: payment.service.v1.Payment.OperatorWithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
+	34, // 75: payment.service.v1.Payment.GetTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
+	36, // 76: payment.service.v1.Payment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
+	38, // 77: payment.service.v1.Payment.GetTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
+	40, // 78: payment.service.v1.Payment.GetChannelsByIds:output_type -> payment.service.v1.GetChannelsByIdsResponse
+	61, // [61:79] is the sub-list for method output_type
+	43, // [43:61] is the sub-list for method input_type
+	43, // [43:43] is the sub-list for extension type_name
+	43, // [43:43] is the sub-list for extension extendee
+	0,  // [0:43] is the sub-list for field type_name
 }
 
 func init() { file_payment_service_v1_payment_proto_init() }

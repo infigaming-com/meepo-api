@@ -38,7 +38,7 @@ message PaymentMethodInfo {
   // Country code where this payment method is available
   string country = 7;
   // Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
-  string payment_method = 8 [json_name="paymentMethod"];
+  string payment_method = 8;
   // Fixed Fee on the Amount
   string fixed_fee = 9;
   // Rate Fee 
@@ -56,8 +56,12 @@ message PaymentMethodInfo {
   // Max Amount
   string psp_max_amount = 16;
   bool enable = 17;
+  string network = 18;
+  string protocol = 19;
+  string minFee = 20;
+  string source = 21;
   // JSON schema defining the required fields for this payment method
-  google.protobuf.Struct key_schema = 18 [json_name="keySchema"]; 
+  google.protobuf.Struct key_schema = 22; 
 }
 
 // Response for payment method list
@@ -212,25 +216,22 @@ message PaymentChannelInfo {
   // URL to the logo image for this payment channel
   string logo = 16;
   // Minimum amount allowed for deposit transactions
-  string min_deposit_amount = 17 [json_name="minDepositAmount"];
+  string min_amount = 17;
   // Maximum amount allowed for deposit transactions
-  string max_deposit_amount = 18 [json_name="maxDepositAmount"];
-  // Minimum amount allowed for withdrawal transactions
-  string min_withdraw_amount = 19 [json_name="minWithdrawAmount"];
-  // Maximum amount allowed for withdrawal transactions
-  string max_withdraw_amount = 20 [json_name="maxWithdrawAmount"];
+  string max_amount = 18;
+  // Fixed Fee on the Amount
+  string fixed_fee = 19;
+  // Rate Fee 
+  string fee_rate = 20;
+  // Minimum Fee 
+  string min_fee = 21;
   // Estimated arrival time in minutes
-  int32 eat = 21;
-  // Fee
-  string fix_fee = 22;
-  string rate_fee = 23;
+  int32 eat = 22;
   // JSON schema defining deposit form fields required by this channel
-  google.protobuf.Struct deposit_schema = 24 [json_name="depositSchema"];
-  // JSON schema defining withdrawal form fields required by this channel
-  google.protobuf.Struct withdraw_schema = 25 [json_name="withdrawSchema"];
-  string source = 26;
-  string source_type = 27;
-  bool enable = 28;
+  google.protobuf.Struct schema = 23;
+  string source = 24;
+  string source_type = 25;
+  bool enable = 26;
 }
 
 // Request to initiate a deposit

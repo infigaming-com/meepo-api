@@ -305,6 +305,14 @@ func (m *PaymentMethodInfo) validate(all bool) error {
 
 	// no validation rules for Enable
 
+	// no validation rules for Network
+
+	// no validation rules for Protocol
+
+	// no validation rules for MinFee
+
+	// no validation rules for Source
+
 	if all {
 		switch v := interface{}(m.GetKeySchema()).(type) {
 		case interface{ ValidateAll() error }:
@@ -1628,26 +1636,24 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for Logo
 
-	// no validation rules for MinDepositAmount
+	// no validation rules for MinAmount
 
-	// no validation rules for MaxDepositAmount
+	// no validation rules for MaxAmount
 
-	// no validation rules for MinWithdrawAmount
+	// no validation rules for FixedFee
 
-	// no validation rules for MaxWithdrawAmount
+	// no validation rules for FeeRate
+
+	// no validation rules for MinFee
 
 	// no validation rules for Eat
 
-	// no validation rules for FixFee
-
-	// no validation rules for RateFee
-
 	if all {
-		switch v := interface{}(m.GetDepositSchema()).(type) {
+		switch v := interface{}(m.GetSchema()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, PaymentChannelInfoValidationError{
-					field:  "DepositSchema",
+					field:  "Schema",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1655,45 +1661,16 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, PaymentChannelInfoValidationError{
-					field:  "DepositSchema",
+					field:  "Schema",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetDepositSchema()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetSchema()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return PaymentChannelInfoValidationError{
-				field:  "DepositSchema",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetWithdrawSchema()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, PaymentChannelInfoValidationError{
-					field:  "WithdrawSchema",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, PaymentChannelInfoValidationError{
-					field:  "WithdrawSchema",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetWithdrawSchema()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return PaymentChannelInfoValidationError{
-				field:  "WithdrawSchema",
+				field:  "Schema",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
