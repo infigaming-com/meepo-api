@@ -27,7 +27,7 @@ service BackofficePayment {
 	// Get transaction detail
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
-	rpc GetPaymentTransactionById(payment.service.v1.GetTransactionDetailByIdRequest) returns (payment.service.v1.GetPaymentChannelPageResponse) {
+	rpc GetPaymentTransactionById(payment.service.v1.GetTransactionDetailByIdRequest) returns (payment.service.v1.GetTransactionDetailByIdResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/payment/transaction/detail"
 			body: "*"
