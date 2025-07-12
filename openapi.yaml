@@ -9682,6 +9682,9 @@ components:
                 country:
                     type: string
                     description: Optional country filter
+                source:
+                    type: string
+                    description: Source of operator type
                 sort:
                     enum:
                         - DESC

@@ -3376,8 +3376,10 @@ type GetPaymentChannelPageRequest struct {
 	Network string `protobuf:"bytes,9,opt,name=network,proto3" json:"network,omitempty"`
 	// Optional country filter
 	Country string `protobuf:"bytes,10,opt,name=country,proto3" json:"country,omitempty"`
+	// Source of operator type
+	Source string `protobuf:"bytes,11,opt,name=source,proto3" json:"source,omitempty"`
 	// Optional sort direction
-	Sort          Sort `protobuf:"varint,11,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
+	Sort          Sort `protobuf:"varint,12,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3478,6 +3480,13 @@ func (x *GetPaymentChannelPageRequest) GetNetwork() string {
 func (x *GetPaymentChannelPageRequest) GetCountry() string {
 	if x != nil {
 		return x.Country
+	}
+	return ""
+}
+
+func (x *GetPaymentChannelPageRequest) GetSource() string {
+	if x != nil {
+		return x.Source
 	}
 	return ""
 }
@@ -4288,7 +4297,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"totalPages\x12)\n" +
 	"\x10total_successful\x18\x06 \x01(\x05R\x0ftotalSuccessful\x12)\n" +
 	"\x10total_processing\x18\a \x01(\x05R\x0ftotalProcessing\x12!\n" +
-	"\ftotal_failed\x18\b \x01(\x05R\vtotalFailed\"\x82\x03\n" +
+	"\ftotal_failed\x18\b \x01(\x05R\vtotalFailed\"\x9a\x03\n" +
 	"\x1cGetPaymentChannelPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1f\n" +
@@ -4301,8 +4310,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bprotocol\x18\b \x01(\tR\bprotocol\x12\x18\n" +
 	"\anetwork\x18\t \x01(\tR\anetwork\x12\x18\n" +
 	"\acountry\x18\n" +
-	" \x01(\tR\acountry\x12,\n" +
-	"\x04sort\x18\v \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\"\xc3\x02\n" +
+	" \x01(\tR\acountry\x12\x16\n" +
+	"\x06source\x18\v \x01(\tR\x06source\x12,\n" +
+	"\x04sort\x18\f \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\"\xc3\x02\n" +
 	"\x1dGetPaymentChannelPageResponse\x12Q\n" +
 	"\x10payment_channels\x18\x01 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x0fpaymentChannels\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +

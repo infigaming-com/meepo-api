@@ -4436,6 +4436,8 @@ func (m *GetPaymentChannelPageRequest) validate(all bool) error {
 
 	// no validation rules for Country
 
+	// no validation rules for Source
+
 	// no validation rules for Sort
 
 	if len(errors) > 0 {
