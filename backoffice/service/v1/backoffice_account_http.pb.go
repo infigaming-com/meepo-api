@@ -82,8 +82,8 @@ func RegisterBackofficeAccountHTTPServer(s *http.Server, srv BackofficeAccountHT
 	r.POST("/v1/backoffice/accounts/2fa/bind", _BackofficeAccount_Bind2Fa0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/2fa/unbind", _BackofficeAccount_Unbind2Fa0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/update", _BackofficeAccount_UpdateAccount0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/login", _BackofficeAccount_Login1_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/register", _BackofficeAccount_Register1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/login", _BackofficeAccount_Login0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/register", _BackofficeAccount_Register0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/register/verification/send", _BackofficeAccount_SendRegisterVerificationCode0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/info", _BackofficeAccount_AccountInfo0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/list", _BackofficeAccount_ListAccounts0_HTTP_Handler(srv))
@@ -316,7 +316,7 @@ func _BackofficeAccount_UpdateAccount0_HTTP_Handler(srv BackofficeAccountHTTPSer
 	}
 }
 
-func _BackofficeAccount_Login1_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _BackofficeAccount_Login0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LoginRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -338,7 +338,7 @@ func _BackofficeAccount_Login1_HTTP_Handler(srv BackofficeAccountHTTPServer) fun
 	}
 }
 
-func _BackofficeAccount_Register1_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _BackofficeAccount_Register0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in RegisterRequest
 		if err := ctx.Bind(&in); err != nil {
