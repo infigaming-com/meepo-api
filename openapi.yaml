@@ -9492,9 +9492,9 @@ components:
                     description: Optional operator ID filter
                 type:
                     enum:
+                        - CHANNEL_TYPE_ALL
                         - CHANNEL_TYPE_DEPOSIT
                         - CHANNEL_TYPE_WITHDRAW
-                        - CHANNEL_TYPE_ALL
                     type: string
                     description: Optional channel type filter
                     format: enum
