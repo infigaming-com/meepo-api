@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.game.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/game/service/v1;v1";
 option java_multiple_files = true;
@@ -120,6 +121,7 @@ message CreateOperatorRequest {
 	string api_key = 3;
 	string api_secret = 4;
 	bool enabled = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 message CreateOperatorResponse {
@@ -131,6 +133,7 @@ message UpdateOperatorRequest {
 	string api_key = 3;
 	string api_secret = 4;
 	bool enabled = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 message UpdateOperatorResponse {
@@ -143,6 +146,7 @@ message UpdateOperatorResponse {
 
 message DeleteOperatorRequest {
 	int64 operator_id = 1;
+	api.common.OperatorContext operator_context = 2;
 }
 
 message DeleteOperatorResponse {
@@ -438,6 +442,7 @@ message ListBetsRequest {
 	optional string status = 14;
 	optional int32 page = 15;
 	optional int32 page_size = 16;
+	api.common.OperatorContext operator_context = 17;
 }
 
 message Bet {
@@ -694,6 +699,7 @@ message ListProviderRatesRequest {
 	optional string provider_id = 3;
 	int32 page = 4;
 	int32 page_size = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 message ListProviderRatesResponse {
