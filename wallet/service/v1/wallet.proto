@@ -763,8 +763,9 @@ message ListOperatorBalanceTransactionsRequest {
 	optional google.protobuf.Timestamp start_time = 7;
 	optional google.protobuf.Timestamp end_time = 8;
 	api.common.OperatorContext operator_context = 9;
-	optional int32 page = 10;
-	optional int32 page_size = 11;
+	string target_operator_type = 10;
+	optional int32 page = 11;
+	optional int32 page_size = 12;
 }
 
 message OperatorBalanceTransaction {
