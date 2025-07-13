@@ -83,7 +83,7 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
-	// OperatorSwap swaps cash between two balances of the same operator
+	// OperatorSwap swaps cash between two balances of the same company's operator
 	rpc OperatorSwap(OperatorSwapRequest) returns (OperatorSwapResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/swap"
@@ -368,8 +368,7 @@ message GetExchangeRatesResponse {
 message OperatorTransferRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
-	string target_currency = 3;
-	string cash_amount = 4;
+	string cash_amount = 3;
 }
 
 message OperatorTransferResponse {
@@ -381,9 +380,10 @@ message OperatorTransferResponse {
 
 message OperatorSwapRequest {
 	api.common.OperatorContext operator_context = 1;
-	string currency = 2;
-	string target_currency = 3;
-	string cash_amount = 4;
+	api.common.OperatorContext target_operator_context = 2;
+	string currency = 3;
+	string target_currency = 4;
+	string cash_amount = 5; // cash amount of the operator's balance currency
 }
 
 message OperatorSwapResponse {

@@ -228,6 +228,10 @@ service User {
 	// UpdateOperatorStatus updates the status of an operator
 	rpc UpdateOperatorStatus(UpdateOperatorStatusRequest) returns (UpdateOperatorStatusResponse) {
 	}
+
+	// ListAllUsers returns a list of all users which belong to the operator context
+	rpc ListAllUsers(ListAllUsersRequest) returns (ListAllUsersResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -1085,4 +1089,13 @@ message UpdateOperatorStatusRequest {
 
 message UpdateOperatorStatusResponse {
 	string status = 1; // status of target operator after update
+}
+
+message ListAllUsersRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional int64 role_id = 2;
+}
+
+message ListAllUsersResponse {
+	repeated UserInfo users = 1;
 }

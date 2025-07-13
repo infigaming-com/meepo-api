@@ -99,6 +99,20 @@ service BackofficeFinance {
 			body: "*"
 		};
 	}
+
+	rpc GetBalanceSummary(GetBalanceSummaryRequest) returns (GetBalanceSummaryResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/balance/summary"
+			body: "*"
+		};
+	}
+
+	rpc GetBalancesSummary(GetBalancesSummaryRequest) returns (GetBalancesSummaryResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/balances/summary"
+			body: "*"
+		};
+	}
 }
 
 message ListInvoicesRequest {
@@ -496,4 +510,30 @@ message GetInvoiceSummaryResponse {
 	string total_income = 1;
 	string total_outcome = 2;
 	string billing_period = 3;
+}
+
+message GetBalanceSummaryRequest {
+}
+
+message GetBalanceSummaryResponse {
+	string balance = 1;
+	string est_net_share = 2;
+	string est_net_cost = 3;
+}
+
+message GetBalancesSummaryRequest {
+}
+
+message GetBalancesSummaryResponse {
+	string deposits = 1;
+	string withdrawals = 2;
+	string balance = 3;
+	string ngr = 4;
+	string game_provider_rs = 5;
+	string third_party_fees = 6;
+	string adjustments = 7;
+	string est_net_profit = 8;
+	string revenue_share_disburse = 9;
+	string revenue_share_collect = 10;
+	string est_net_costs = 11;
 }

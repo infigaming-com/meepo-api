@@ -12885,6 +12885,277 @@ var _ interface {
 	ErrorName() string
 } = UpdateOperatorStatusResponseValidationError{}
 
+// Validate checks the field values on ListAllUsersRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListAllUsersRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListAllUsersRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListAllUsersRequestMultiError, or nil if none found.
+func (m *ListAllUsersRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAllUsersRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListAllUsersRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListAllUsersRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListAllUsersRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.RoleId != nil {
+		// no validation rules for RoleId
+	}
+
+	if len(errors) > 0 {
+		return ListAllUsersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListAllUsersRequestMultiError is an error wrapping multiple validation
+// errors returned by ListAllUsersRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListAllUsersRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListAllUsersRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListAllUsersRequestMultiError) AllErrors() []error { return m }
+
+// ListAllUsersRequestValidationError is the validation error returned by
+// ListAllUsersRequest.Validate if the designated constraints aren't met.
+type ListAllUsersRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListAllUsersRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListAllUsersRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListAllUsersRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListAllUsersRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListAllUsersRequestValidationError) ErrorName() string {
+	return "ListAllUsersRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListAllUsersRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListAllUsersRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListAllUsersRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListAllUsersRequestValidationError{}
+
+// Validate checks the field values on ListAllUsersResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListAllUsersResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListAllUsersResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListAllUsersResponseMultiError, or nil if none found.
+func (m *ListAllUsersResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAllUsersResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetUsers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListAllUsersResponseValidationError{
+						field:  fmt.Sprintf("Users[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListAllUsersResponseValidationError{
+						field:  fmt.Sprintf("Users[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListAllUsersResponseValidationError{
+					field:  fmt.Sprintf("Users[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListAllUsersResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListAllUsersResponseMultiError is an error wrapping multiple validation
+// errors returned by ListAllUsersResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListAllUsersResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListAllUsersResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListAllUsersResponseMultiError) AllErrors() []error { return m }
+
+// ListAllUsersResponseValidationError is the validation error returned by
+// ListAllUsersResponse.Validate if the designated constraints aren't met.
+type ListAllUsersResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListAllUsersResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListAllUsersResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListAllUsersResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListAllUsersResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListAllUsersResponseValidationError) ErrorName() string {
+	return "ListAllUsersResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListAllUsersResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListAllUsersResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListAllUsersResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListAllUsersResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

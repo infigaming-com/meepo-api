@@ -71,6 +71,7 @@ const (
 	User_ListCompanyOperators_FullMethodName            = "/api.user.service.v1.User/ListCompanyOperators"
 	User_ListBottomOperators_FullMethodName             = "/api.user.service.v1.User/ListBottomOperators"
 	User_UpdateOperatorStatus_FullMethodName            = "/api.user.service.v1.User/UpdateOperatorStatus"
+	User_ListAllUsers_FullMethodName                    = "/api.user.service.v1.User/ListAllUsers"
 )
 
 // UserClient is the client API for User service.
@@ -175,6 +176,8 @@ type UserClient interface {
 	ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...grpc.CallOption) (*UpdateOperatorStatusResponse, error)
+	// ListAllUsers returns a list of all users which belong to the operator context
+	ListAllUsers(ctx context.Context, in *ListAllUsersRequest, opts ...grpc.CallOption) (*ListAllUsersResponse, error)
 }
 
 type userClient struct {
@@ -705,6 +708,16 @@ func (c *userClient) UpdateOperatorStatus(ctx context.Context, in *UpdateOperato
 	return out, nil
 }
 
+func (c *userClient) ListAllUsers(ctx context.Context, in *ListAllUsersRequest, opts ...grpc.CallOption) (*ListAllUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAllUsersResponse)
+	err := c.cc.Invoke(ctx, User_ListAllUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -807,6 +820,8 @@ type UserServer interface {
 	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error)
+	// ListAllUsers returns a list of all users which belong to the operator context
+	ListAllUsers(context.Context, *ListAllUsersRequest) (*ListAllUsersResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -972,6 +987,9 @@ func (UnimplementedUserServer) ListBottomOperators(context.Context, *ListBottomO
 }
 func (UnimplementedUserServer) UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorStatus not implemented")
+}
+func (UnimplementedUserServer) ListAllUsers(context.Context, *ListAllUsersRequest) (*ListAllUsersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAllUsers not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1930,6 +1948,24 @@ func _User_UpdateOperatorStatus_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_ListAllUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAllUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListAllUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListAllUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListAllUsers(ctx, req.(*ListAllUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2144,6 +2180,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperatorStatus",
 			Handler:    _User_UpdateOperatorStatus_Handler,
+		},
+		{
+			MethodName: "ListAllUsers",
+			Handler:    _User_ListAllUsers_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -29,6 +29,7 @@ const (
 	BackofficePayment_CreatePaymentChannel_FullMethodName          = "/api.backoffice.service.v1.BackofficePayment/CreatePaymentChannel"
 	BackofficePayment_GetOperatorAddress_FullMethodName            = "/api.backoffice.service.v1.BackofficePayment/GetOperatorAddress"
 	BackofficePayment_GetPaymentChannelPage_FullMethodName         = "/api.backoffice.service.v1.BackofficePayment/GetPaymentChannelPage"
+	BackofficePayment_UpdatePaymentMethod_FullMethodName           = "/api.backoffice.service.v1.BackofficePayment/UpdatePaymentMethod"
 )
 
 // BackofficePaymentClient is the client API for BackofficePayment service.
@@ -44,7 +45,7 @@ type BackofficePaymentClient interface {
 	// Get transaction detail
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
-	GetPaymentTransactionById(ctx context.Context, in *GetPaymentTransactionByIdRequest, opts ...grpc.CallOption) (*GetPaymentTransactionByIdResponse, error)
+	GetPaymentTransactionById(ctx context.Context, in *v1.GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*v1.GetTransactionDetailByIdResponse, error)
 	// Get list of payment methods
 	// Retrieves all available payment methods supported by the system
 	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
@@ -70,6 +71,8 @@ type BackofficePaymentClient interface {
 	// Retrieves a paginated list of payment channels with optional filtering
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
 	GetPaymentChannelPage(ctx context.Context, in *v1.GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*v1.GetPaymentChannelPageResponse, error)
+	// Update payment channel
+	UpdatePaymentMethod(ctx context.Context, in *v1.UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*v1.CreatePaymentMethodResponse, error)
 }
 
 type backofficePaymentClient struct {
@@ -90,9 +93,9 @@ func (c *backofficePaymentClient) GetPaymentTransactionPage(ctx context.Context,
 	return out, nil
 }
 
-func (c *backofficePaymentClient) GetPaymentTransactionById(ctx context.Context, in *GetPaymentTransactionByIdRequest, opts ...grpc.CallOption) (*GetPaymentTransactionByIdResponse, error) {
+func (c *backofficePaymentClient) GetPaymentTransactionById(ctx context.Context, in *v1.GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*v1.GetTransactionDetailByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPaymentTransactionByIdResponse)
+	out := new(v1.GetTransactionDetailByIdResponse)
 	err := c.cc.Invoke(ctx, BackofficePayment_GetPaymentTransactionById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -170,6 +173,16 @@ func (c *backofficePaymentClient) GetPaymentChannelPage(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *backofficePaymentClient) UpdatePaymentMethod(ctx context.Context, in *v1.UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*v1.CreatePaymentMethodResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.CreatePaymentMethodResponse)
+	err := c.cc.Invoke(ctx, BackofficePayment_UpdatePaymentMethod_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficePaymentServer is the server API for BackofficePayment service.
 // All implementations must embed UnimplementedBackofficePaymentServer
 // for forward compatibility.
@@ -183,7 +196,7 @@ type BackofficePaymentServer interface {
 	// Get transaction detail
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
-	GetPaymentTransactionById(context.Context, *GetPaymentTransactionByIdRequest) (*GetPaymentTransactionByIdResponse, error)
+	GetPaymentTransactionById(context.Context, *v1.GetTransactionDetailByIdRequest) (*v1.GetTransactionDetailByIdResponse, error)
 	// Get list of payment methods
 	// Retrieves all available payment methods supported by the system
 	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
@@ -209,6 +222,8 @@ type BackofficePaymentServer interface {
 	// Retrieves a paginated list of payment channels with optional filtering
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
 	GetPaymentChannelPage(context.Context, *v1.GetPaymentChannelPageRequest) (*v1.GetPaymentChannelPageResponse, error)
+	// Update payment channel
+	UpdatePaymentMethod(context.Context, *v1.UpdatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error)
 	mustEmbedUnimplementedBackofficePaymentServer()
 }
 
@@ -222,7 +237,7 @@ type UnimplementedBackofficePaymentServer struct{}
 func (UnimplementedBackofficePaymentServer) GetPaymentTransactionPage(context.Context, *v1.GetTransactionPageRequest) (*v1.GetTransactionPageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentTransactionPage not implemented")
 }
-func (UnimplementedBackofficePaymentServer) GetPaymentTransactionById(context.Context, *GetPaymentTransactionByIdRequest) (*GetPaymentTransactionByIdResponse, error) {
+func (UnimplementedBackofficePaymentServer) GetPaymentTransactionById(context.Context, *v1.GetTransactionDetailByIdRequest) (*v1.GetTransactionDetailByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentTransactionById not implemented")
 }
 func (UnimplementedBackofficePaymentServer) GetSupportedPaymentMethodList(context.Context, *v1.GetSupportedPaymentMethodListRequest) (*v1.GetSupportedPaymentMethodListResponse, error) {
@@ -245,6 +260,9 @@ func (UnimplementedBackofficePaymentServer) GetOperatorAddress(context.Context, 
 }
 func (UnimplementedBackofficePaymentServer) GetPaymentChannelPage(context.Context, *v1.GetPaymentChannelPageRequest) (*v1.GetPaymentChannelPageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentChannelPage not implemented")
+}
+func (UnimplementedBackofficePaymentServer) UpdatePaymentMethod(context.Context, *v1.UpdatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentMethod not implemented")
 }
 func (UnimplementedBackofficePaymentServer) mustEmbedUnimplementedBackofficePaymentServer() {}
 func (UnimplementedBackofficePaymentServer) testEmbeddedByValue()                           {}
@@ -286,7 +304,7 @@ func _BackofficePayment_GetPaymentTransactionPage_Handler(srv interface{}, ctx c
 }
 
 func _BackofficePayment_GetPaymentTransactionById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPaymentTransactionByIdRequest)
+	in := new(v1.GetTransactionDetailByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -298,7 +316,7 @@ func _BackofficePayment_GetPaymentTransactionById_Handler(srv interface{}, ctx c
 		FullMethod: BackofficePayment_GetPaymentTransactionById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).GetPaymentTransactionById(ctx, req.(*GetPaymentTransactionByIdRequest))
+		return srv.(BackofficePaymentServer).GetPaymentTransactionById(ctx, req.(*v1.GetTransactionDetailByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -429,6 +447,24 @@ func _BackofficePayment_GetPaymentChannelPage_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficePayment_UpdatePaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.UpdatePaymentMethodRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficePaymentServer).UpdatePaymentMethod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficePayment_UpdatePaymentMethod_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficePaymentServer).UpdatePaymentMethod(ctx, req.(*v1.UpdatePaymentMethodRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficePayment_ServiceDesc is the grpc.ServiceDesc for BackofficePayment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -471,6 +507,10 @@ var BackofficePayment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPaymentChannelPage",
 			Handler:    _BackofficePayment_GetPaymentChannelPage_Handler,
+		},
+		{
+			MethodName: "UpdatePaymentMethod",
+			Handler:    _BackofficePayment_UpdatePaymentMethod_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

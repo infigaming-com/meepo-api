@@ -84,7 +84,7 @@ service Wallet {
 	// Transfer cash from operator to its company operator
 	rpc OperatorTransfer (OperatorTransferRequest) returns (OperatorTransferResponse) {}
 
-	// Swap cash between two balances of the same operator
+	// Swap cash between two balances of the same company's operator
 	rpc OperatorSwap (OperatorSwapRequest) returns (OperatorSwapResponse) {}
 
 	// Freeze cash of a balance of an operator
@@ -677,12 +677,13 @@ message OperatorTransferResponse {
 
 message OperatorSwapRequest {
 	api.common.OperatorContext operator_context = 1;
-	string currency = 2;
-	string reporting_currency = 3;
-	string target_currency = 4;
-	string target_reporting_currency = 5;
-	string transaction_type = 6;
-	string cash_amount = 7;
+	api.common.OperatorContext target_operator_context = 2;
+	string currency = 3;
+	string reporting_currency = 4;
+	string target_currency = 5;
+	string target_reporting_currency = 6;
+	string transaction_type = 7;
+	string cash_amount = 8;
 }
 
 message OperatorSwapResponse {
@@ -762,8 +763,9 @@ message ListOperatorBalanceTransactionsRequest {
 	optional google.protobuf.Timestamp start_time = 7;
 	optional google.protobuf.Timestamp end_time = 8;
 	api.common.OperatorContext operator_context = 9;
-	optional int32 page = 10;
-	optional int32 page_size = 11;
+	string target_operator_type = 10;
+	optional int32 page = 11;
+	optional int32 page_size = 12;
 }
 
 message OperatorBalanceTransaction {

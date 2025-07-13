@@ -44,6 +44,8 @@ const (
 	Operator_DeleteAdjustmentConfig_FullMethodName   = "/api.operator.service.v1.Operator/DeleteAdjustmentConfig"
 	Operator_SendInvoices_FullMethodName             = "/api.operator.service.v1.Operator/SendInvoices"
 	Operator_GetInvoiceSummary_FullMethodName        = "/api.operator.service.v1.Operator/GetInvoiceSummary"
+	Operator_GetBalanceSummary_FullMethodName        = "/api.operator.service.v1.Operator/GetBalanceSummary"
+	Operator_GetBalancesSummary_FullMethodName       = "/api.operator.service.v1.Operator/GetBalancesSummary"
 )
 
 // OperatorClient is the client API for Operator service.
@@ -80,6 +82,8 @@ type OperatorClient interface {
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*DeleteAdjustmentConfigResponse, error)
 	SendInvoices(ctx context.Context, in *SendInvoicesRequest, opts ...grpc.CallOption) (*SendInvoicesResponse, error)
 	GetInvoiceSummary(ctx context.Context, in *GetInvoiceSummaryRequest, opts ...grpc.CallOption) (*GetInvoiceSummaryResponse, error)
+	GetBalanceSummary(ctx context.Context, in *GetBalanceSummaryRequest, opts ...grpc.CallOption) (*GetBalanceSummaryResponse, error)
+	GetBalancesSummary(ctx context.Context, in *GetBalancesSummaryRequest, opts ...grpc.CallOption) (*GetBalancesSummaryResponse, error)
 }
 
 type operatorClient struct {
@@ -340,6 +344,26 @@ func (c *operatorClient) GetInvoiceSummary(ctx context.Context, in *GetInvoiceSu
 	return out, nil
 }
 
+func (c *operatorClient) GetBalanceSummary(ctx context.Context, in *GetBalanceSummaryRequest, opts ...grpc.CallOption) (*GetBalanceSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBalanceSummaryResponse)
+	err := c.cc.Invoke(ctx, Operator_GetBalanceSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operatorClient) GetBalancesSummary(ctx context.Context, in *GetBalancesSummaryRequest, opts ...grpc.CallOption) (*GetBalancesSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBalancesSummaryResponse)
+	err := c.cc.Invoke(ctx, Operator_GetBalancesSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OperatorServer is the server API for Operator service.
 // All implementations must embed UnimplementedOperatorServer
 // for forward compatibility.
@@ -374,6 +398,8 @@ type OperatorServer interface {
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
 	SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error)
 	GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error)
+	GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error)
+	GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error)
 	mustEmbedUnimplementedOperatorServer()
 }
 
@@ -458,6 +484,12 @@ func (UnimplementedOperatorServer) SendInvoices(context.Context, *SendInvoicesRe
 }
 func (UnimplementedOperatorServer) GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceSummary not implemented")
+}
+func (UnimplementedOperatorServer) GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBalanceSummary not implemented")
+}
+func (UnimplementedOperatorServer) GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBalancesSummary not implemented")
 }
 func (UnimplementedOperatorServer) mustEmbedUnimplementedOperatorServer() {}
 func (UnimplementedOperatorServer) testEmbeddedByValue()                  {}
@@ -930,6 +962,42 @@ func _Operator_GetInvoiceSummary_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_GetBalanceSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBalanceSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).GetBalanceSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_GetBalanceSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).GetBalanceSummary(ctx, req.(*GetBalanceSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Operator_GetBalancesSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBalancesSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).GetBalancesSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_GetBalancesSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).GetBalancesSummary(ctx, req.(*GetBalancesSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Operator_ServiceDesc is the grpc.ServiceDesc for Operator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1036,6 +1104,14 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetInvoiceSummary",
 			Handler:    _Operator_GetInvoiceSummary_Handler,
+		},
+		{
+			MethodName: "GetBalanceSummary",
+			Handler:    _Operator_GetBalanceSummary_Handler,
+		},
+		{
+			MethodName: "GetBalancesSummary",
+			Handler:    _Operator_GetBalancesSummary_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
