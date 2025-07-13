@@ -4558,8 +4558,9 @@ type ListOperatorBalanceTransactionsRequest struct {
 	StartTime           *timestamppb.Timestamp  `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime             *timestamppb.Timestamp  `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	OperatorContext     *common.OperatorContext `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Page                *int32                  `protobuf:"varint,10,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize            *int32                  `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	TargetOperatorType  string                  `protobuf:"bytes,10,opt,name=target_operator_type,json=targetOperatorType,proto3" json:"target_operator_type,omitempty"`
+	Page                *int32                  `protobuf:"varint,11,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize            *int32                  `protobuf:"varint,12,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -4655,6 +4656,13 @@ func (x *ListOperatorBalanceTransactionsRequest) GetOperatorContext() *common.Op
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *ListOperatorBalanceTransactionsRequest) GetTargetOperatorType() string {
+	if x != nil {
+		return x.TargetOperatorType
+	}
+	return ""
 }
 
 func (x *ListOperatorBalanceTransactionsRequest) GetPage() int32 {
@@ -6706,7 +6714,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x98\x01\n" +
 	"\x1bGetOperatorBalancesResponse\x12S\n" +
 	"\x11operator_balances\x18\x01 \x03(\v2&.api.wallet.service.v1.OperatorBalanceR\x10operatorBalances\x12$\n" +
-	"\x0etotal_cash_usd\x18\x02 \x01(\tR\ftotalCashUsd\"\xef\x04\n" +
+	"\x0etotal_cash_usd\x18\x02 \x01(\tR\ftotalCashUsd\"\xa1\x05\n" +
 	"&ListOperatorBalanceTransactionsRequest\x122\n" +
 	"\x15retailer_operator_ids\x18\x01 \x03(\x03R\x13retailerOperatorIds\x120\n" +
 	"\x14company_operator_ids\x18\x02 \x03(\x03R\x12companyOperatorIds\x12!\n" +
@@ -6719,10 +6727,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
 	"start_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x01R\tstartTime\x88\x01\x01\x12:\n" +
 	"\bend_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x02R\aendTime\x88\x01\x01\x12F\n" +
-	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
-	"\x04page\x18\n" +
-	" \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\v \x01(\x05H\x04R\bpageSize\x88\x01\x01B\x11\n" +
+	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x120\n" +
+	"\x14target_operator_type\x18\n" +
+	" \x01(\tR\x12targetOperatorType\x12\x17\n" +
+	"\x04page\x18\v \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\f \x01(\x05H\x04R\bpageSize\x88\x01\x01B\x11\n" +
 	"\x0f_transaction_idB\r\n" +
 	"\v_start_timeB\v\n" +
 	"\t_end_timeB\a\n" +

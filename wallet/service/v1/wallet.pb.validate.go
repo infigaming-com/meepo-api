@@ -8366,6 +8366,8 @@ func (m *ListOperatorBalanceTransactionsRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for TargetOperatorType
+
 	if m.TransactionId != nil {
 		// no validation rules for TransactionId
 	}
