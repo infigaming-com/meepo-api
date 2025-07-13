@@ -8770,6 +8770,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.game.service.v1.ListBetsRequest_Currencies:
             type: object
             properties:
