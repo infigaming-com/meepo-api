@@ -527,6 +527,8 @@ enum ChannelType {
   CHANNEL_TYPE_DEPOSIT = 0;
   // Channel for withdrawing funds
   CHANNEL_TYPE_WITHDRAW = 1;
+  // All Channel
+  CHANNEL_TYPE_ALL = 2;
 }
 
 // Transaction information
