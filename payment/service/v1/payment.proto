@@ -370,21 +370,17 @@ message InitiateOperatorWithdrawRequest {
   string reporting_currency = 3;
   // admin user id
   int64 admin_user_id = 4;  
-  // Operator ids
-	int64 operator_id = 5;
-	int64 company_operator_id = 6;
-	int64 retailer_operator_id = 7;
-	int64 system_operator_id = 8;
   // Target Operator ids
-	int64 target_operator_id = 9;
-	int64 target_company_operator_id = 10;
-	int64 target_retailer_operator_id = 11;
-	int64 target_system_operator_id = 12;
+  api.common.OperatorContext target_operator_context = 5;
+  // Operator ids
+  api.common.OperatorContext operator_context = 6;
   // ID of the channel to use for withdrawal
-  string channel_id = 13;
+  string channel_id = 7;
+  // momo of crypto
+  string momo = 8;
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
-  google.protobuf.Struct extra = 14;
+  google.protobuf.Struct extra = 9;
 }
 
 // Response for withdrawal initiation
