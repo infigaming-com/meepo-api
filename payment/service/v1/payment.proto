@@ -523,12 +523,12 @@ enum RequestSource {
 // Channel type enum
 // Defines the purpose of a payment channel
 enum ChannelType {
-  // Channel for depositing funds
-  CHANNEL_TYPE_DEPOSIT = 0;
-  // Channel for withdrawing funds
-  CHANNEL_TYPE_WITHDRAW = 1;
   // All Channel
-  CHANNEL_TYPE_ALL = 2;
+  CHANNEL_TYPE_ALL = 0;
+  // Channel for depositing funds
+  CHANNEL_TYPE_DEPOSIT = 1;
+  // Channel for withdrawing funds
+  CHANNEL_TYPE_WITHDRAW = 2;
 }
 
 // Transaction information

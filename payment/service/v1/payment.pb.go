@@ -242,25 +242,25 @@ func (RequestSource) EnumDescriptor() ([]byte, []int) {
 type ChannelType int32
 
 const (
-	// Channel for depositing funds
-	ChannelType_CHANNEL_TYPE_DEPOSIT ChannelType = 0
-	// Channel for withdrawing funds
-	ChannelType_CHANNEL_TYPE_WITHDRAW ChannelType = 1
 	// All Channel
-	ChannelType_CHANNEL_TYPE_ALL ChannelType = 2
+	ChannelType_CHANNEL_TYPE_ALL ChannelType = 0
+	// Channel for depositing funds
+	ChannelType_CHANNEL_TYPE_DEPOSIT ChannelType = 1
+	// Channel for withdrawing funds
+	ChannelType_CHANNEL_TYPE_WITHDRAW ChannelType = 2
 )
 
 // Enum value maps for ChannelType.
 var (
 	ChannelType_name = map[int32]string{
-		0: "CHANNEL_TYPE_DEPOSIT",
-		1: "CHANNEL_TYPE_WITHDRAW",
-		2: "CHANNEL_TYPE_ALL",
+		0: "CHANNEL_TYPE_ALL",
+		1: "CHANNEL_TYPE_DEPOSIT",
+		2: "CHANNEL_TYPE_WITHDRAW",
 	}
 	ChannelType_value = map[string]int32{
-		"CHANNEL_TYPE_DEPOSIT":  0,
-		"CHANNEL_TYPE_WITHDRAW": 1,
-		"CHANNEL_TYPE_ALL":      2,
+		"CHANNEL_TYPE_ALL":      0,
+		"CHANNEL_TYPE_DEPOSIT":  1,
+		"CHANNEL_TYPE_WITHDRAW": 2,
 	}
 )
 
@@ -3443,7 +3443,7 @@ func (x *GetPaymentChannelPageRequest) GetType() ChannelType {
 	if x != nil {
 		return x.Type
 	}
-	return ChannelType_CHANNEL_TYPE_DEPOSIT
+	return ChannelType_CHANNEL_TYPE_ALL
 }
 
 func (x *GetPaymentChannelPageRequest) GetCategory() string {
@@ -4458,10 +4458,10 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\rRequestSource\x12\x1b\n" +
 	"\x17REQUEST_SOURCE_FRONTEND\x10\x00\x12\x18\n" +
 	"\x14REQUEST_SOURCE_ADMIN\x10\x01*X\n" +
-	"\vChannelType\x12\x18\n" +
-	"\x14CHANNEL_TYPE_DEPOSIT\x10\x00\x12\x19\n" +
-	"\x15CHANNEL_TYPE_WITHDRAW\x10\x01\x12\x14\n" +
-	"\x10CHANNEL_TYPE_ALL\x10\x022\x95\x16\n" +
+	"\vChannelType\x12\x14\n" +
+	"\x10CHANNEL_TYPE_ALL\x10\x00\x12\x18\n" +
+	"\x14CHANNEL_TYPE_DEPOSIT\x10\x01\x12\x19\n" +
+	"\x15CHANNEL_TYPE_WITHDRAW\x10\x022\x95\x16\n" +
 	"\aPayment\x12\xc1\x01\n" +
 	"\x1dGetSupportedPaymentMethodList\x128.payment.service.v1.GetSupportedPaymentMethodListRequest\x1a9.payment.service.v1.GetSupportedPaymentMethodListResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/payment/supportedmethod/list\x12\x9c\x01\n" +
 	"\x13CreatePaymentMethod\x12..payment.service.v1.CreatePaymentMethodRequest\x1a/.payment.service.v1.CreatePaymentMethodResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/payment/method/create\x12\x9d\x01\n" +
