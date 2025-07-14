@@ -8597,6 +8597,8 @@ func (m *OperatorBalanceTransaction) validate(all bool) error {
 
 	// no validation rules for TransactionType
 
+	// no validation rules for Status
+
 	// no validation rules for Memo
 
 	// no validation rules for FeeAmount

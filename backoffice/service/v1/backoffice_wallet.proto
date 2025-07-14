@@ -460,10 +460,11 @@ message OperatorBalanceTransaction {
 	string after_balance = 8;
 	string cash_amount = 9;
 	string transaction_type = 10;
-	string memo = 11;
-	string fee_amount = 12;
-	google.protobuf.Timestamp created_at = 13;
-	google.protobuf.Timestamp updated_at = 14;
+	string status = 11;
+	string memo = 12;
+	string fee_amount = 13;
+	google.protobuf.Timestamp created_at = 14;
+	google.protobuf.Timestamp updated_at = 15;
 }
 
 message ListOperatorBalanceTransactionsResponse {

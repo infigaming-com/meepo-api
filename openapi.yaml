@@ -7853,6 +7853,8 @@ components:
                     type: string
                 transactionType:
                     type: string
+                status:
+                    type: string
                 memo:
                     type: string
                 feeAmount:
