@@ -6352,6 +6352,8 @@ components:
                         type: string
                 transactionId:
                     type: string
+                targetOperatorType:
+                    type: string
                 startTime:
                     type: string
                     format: date-time
