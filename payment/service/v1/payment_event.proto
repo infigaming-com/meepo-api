@@ -29,28 +29,29 @@ message PaymentTransactionEvent {
 	string pa_transaction_id = 2;
 	string transaction_type = 3;
 	int64 user_id = 4;
-	api.common.OperatorContext operator_context = 6;
-	string currency = 8; // payment currency
-	string reporting_currency = 9;
-	string amount = 10; // cash amount of the currency
-	string status = 11; // payment status
-	int64 timestamp = 12;
-	google.protobuf.Struct extra = 13;
-	ChannelInfo channel_info = 14;
+	api.common.OperatorContext operator_context = 5;
+	string currency = 6; // payment currency
+	string reporting_currency = 7;
+	string amount = 8; // cash amount of the currency
+	string status = 9; // payment status
+	int64 timestamp = 10;
+	google.protobuf.Struct extra = 11;
+	ChannelInfo channel_info = 12;
 }
 
 message OperatorPaymentTransactionEvent {
 	int64 transaction_id = 1; // payment transaction id
 	string pa_transaction_id = 2;
 	string transaction_type = 3;
-	api.common.OperatorContext operator_context = 5;
-	string currency = 7; // payment currency
-	string settlement_currency = 8; // wallet currency
-	string reporting_currency = 9;
-	string exchange_rate = 10; // exchange rate of the currency to the settlement currency
-	string amount = 11; // cash amount of the currency
-	string status = 12; // payment status
-	int64 timestamp = 13;
-	google.protobuf.Struct extra = 14;
-	ChannelInfo channel_info = 15;
+	api.common.OperatorContext target_operator_context = 4;
+	api.common.OperatorContext source_operator_context = 5;
+	string currency = 6; // payment currency
+	string settlement_currency = 7; // wallet currency
+	string reporting_currency = 8;
+	string exchange_rate = 9; // exchange rate of the currency to the settlement currency
+	string amount = 10; // cash amount of the currency
+	string status = 11; // payment status
+	int64 timestamp = 12;
+	google.protobuf.Struct extra = 13;
+	ChannelInfo channel_info = 14;
 }

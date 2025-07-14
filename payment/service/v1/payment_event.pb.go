@@ -161,14 +161,14 @@ type PaymentTransactionEvent struct {
 	PaTransactionId   string                  `protobuf:"bytes,2,opt,name=pa_transaction_id,json=paTransactionId,proto3" json:"pa_transaction_id,omitempty"`
 	TransactionType   string                  `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
 	UserId            int64                   `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorContext   *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Currency          string                  `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"` // payment currency
-	ReportingCurrency string                  `protobuf:"bytes,9,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	Amount            string                  `protobuf:"bytes,10,opt,name=amount,proto3" json:"amount,omitempty"` // cash amount of the currency
-	Status            string                  `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"` // payment status
-	Timestamp         int64                   `protobuf:"varint,12,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	Extra             *structpb.Struct        `protobuf:"bytes,13,opt,name=extra,proto3" json:"extra,omitempty"`
-	ChannelInfo       *ChannelInfo            `protobuf:"bytes,14,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
+	OperatorContext   *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Currency          string                  `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"` // payment currency
+	ReportingCurrency string                  `protobuf:"bytes,7,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	Amount            string                  `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"` // cash amount of the currency
+	Status            string                  `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"` // payment status
+	Timestamp         int64                   `protobuf:"varint,10,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Extra             *structpb.Struct        `protobuf:"bytes,11,opt,name=extra,proto3" json:"extra,omitempty"`
+	ChannelInfo       *ChannelInfo            `protobuf:"bytes,12,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -288,22 +288,23 @@ func (x *PaymentTransactionEvent) GetChannelInfo() *ChannelInfo {
 }
 
 type OperatorPaymentTransactionEvent struct {
-	state              protoimpl.MessageState  `protogen:"open.v1"`
-	TransactionId      int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"` // payment transaction id
-	PaTransactionId    string                  `protobuf:"bytes,2,opt,name=pa_transaction_id,json=paTransactionId,proto3" json:"pa_transaction_id,omitempty"`
-	TransactionType    string                  `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	OperatorContext    *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Currency           string                  `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`                                               // payment currency
-	SettlementCurrency string                  `protobuf:"bytes,8,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"` // wallet currency
-	ReportingCurrency  string                  `protobuf:"bytes,9,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	ExchangeRate       string                  `protobuf:"bytes,10,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"` // exchange rate of the currency to the settlement currency
-	Amount             string                  `protobuf:"bytes,11,opt,name=amount,proto3" json:"amount,omitempty"`                                 // cash amount of the currency
-	Status             string                  `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"`                                 // payment status
-	Timestamp          int64                   `protobuf:"varint,13,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	Extra              *structpb.Struct        `protobuf:"bytes,14,opt,name=extra,proto3" json:"extra,omitempty"`
-	ChannelInfo        *ChannelInfo            `protobuf:"bytes,15,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TransactionId         int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"` // payment transaction id
+	PaTransactionId       string                  `protobuf:"bytes,2,opt,name=pa_transaction_id,json=paTransactionId,proto3" json:"pa_transaction_id,omitempty"`
+	TransactionType       string                  `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	SourceOperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=source_operator_context,json=sourceOperatorContext,proto3" json:"source_operator_context,omitempty"`
+	Currency              string                  `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                                               // payment currency
+	SettlementCurrency    string                  `protobuf:"bytes,7,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"` // wallet currency
+	ReportingCurrency     string                  `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	ExchangeRate          string                  `protobuf:"bytes,9,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"` // exchange rate of the currency to the settlement currency
+	Amount                string                  `protobuf:"bytes,10,opt,name=amount,proto3" json:"amount,omitempty"`                                // cash amount of the currency
+	Status                string                  `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`                                // payment status
+	Timestamp             int64                   `protobuf:"varint,12,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Extra                 *structpb.Struct        `protobuf:"bytes,13,opt,name=extra,proto3" json:"extra,omitempty"`
+	ChannelInfo           *ChannelInfo            `protobuf:"bytes,14,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *OperatorPaymentTransactionEvent) Reset() {
@@ -357,9 +358,16 @@ func (x *OperatorPaymentTransactionEvent) GetTransactionType() string {
 	return ""
 }
 
-func (x *OperatorPaymentTransactionEvent) GetOperatorContext() *common.OperatorContext {
+func (x *OperatorPaymentTransactionEvent) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContext
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *OperatorPaymentTransactionEvent) GetSourceOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.SourceOperatorContext
 	}
 	return nil
 }
@@ -444,30 +452,31 @@ const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +
 	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12F\n" +
-	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\b \x01(\tR\bcurrency\x12-\n" +
-	"\x12reporting_currency\x18\t \x01(\tR\x11reportingCurrency\x12\x16\n" +
+	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
+	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12-\n" +
+	"\x12reporting_currency\x18\a \x01(\tR\x11reportingCurrency\x12\x16\n" +
+	"\x06amount\x18\b \x01(\tR\x06amount\x12\x16\n" +
+	"\x06status\x18\t \x01(\tR\x06status\x12\x1c\n" +
+	"\ttimestamp\x18\n" +
+	" \x01(\x03R\ttimestamp\x12-\n" +
+	"\x05extra\x18\v \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
+	"\fchannel_info\x18\f \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo\"\xaf\x05\n" +
+	"\x1fOperatorPaymentTransactionEvent\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
+	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +
+	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12S\n" +
+	"\x17target_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12S\n" +
+	"\x17source_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x15sourceOperatorContext\x12\x1a\n" +
+	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12/\n" +
+	"\x13settlement_currency\x18\a \x01(\tR\x12settlementCurrency\x12-\n" +
+	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency\x12#\n" +
+	"\rexchange_rate\x18\t \x01(\tR\fexchangeRate\x12\x16\n" +
 	"\x06amount\x18\n" +
 	" \x01(\tR\x06amount\x12\x16\n" +
 	"\x06status\x18\v \x01(\tR\x06status\x12\x1c\n" +
 	"\ttimestamp\x18\f \x01(\x03R\ttimestamp\x12-\n" +
 	"\x05extra\x18\r \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
-	"\fchannel_info\x18\x0e \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo\"\xcd\x04\n" +
-	"\x1fOperatorPaymentTransactionEvent\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
-	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +
-	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12F\n" +
-	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\a \x01(\tR\bcurrency\x12/\n" +
-	"\x13settlement_currency\x18\b \x01(\tR\x12settlementCurrency\x12-\n" +
-	"\x12reporting_currency\x18\t \x01(\tR\x11reportingCurrency\x12#\n" +
-	"\rexchange_rate\x18\n" +
-	" \x01(\tR\fexchangeRate\x12\x16\n" +
-	"\x06amount\x18\v \x01(\tR\x06amount\x12\x16\n" +
-	"\x06status\x18\f \x01(\tR\x06status\x12\x1c\n" +
-	"\ttimestamp\x18\r \x01(\x03R\ttimestamp\x12-\n" +
-	"\x05extra\x18\x0e \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
-	"\fchannel_info\x18\x0f \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo2f\n" +
+	"\fchannel_info\x18\x0e \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo2f\n" +
 	"\fPaymentEvent\x12V\n" +
 	"\x05Event\x12$.api.payment.service.v1.EventRequest\x1a%.api.payment.service.v1.EventResponse\"\x00BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
@@ -499,16 +508,17 @@ var file_payment_service_v1_payment_event_proto_depIdxs = []int32{
 	5, // 1: api.payment.service.v1.PaymentTransactionEvent.operator_context:type_name -> api.common.OperatorContext
 	6, // 2: api.payment.service.v1.PaymentTransactionEvent.extra:type_name -> google.protobuf.Struct
 	2, // 3: api.payment.service.v1.PaymentTransactionEvent.channel_info:type_name -> api.payment.service.v1.ChannelInfo
-	5, // 4: api.payment.service.v1.OperatorPaymentTransactionEvent.operator_context:type_name -> api.common.OperatorContext
-	6, // 5: api.payment.service.v1.OperatorPaymentTransactionEvent.extra:type_name -> google.protobuf.Struct
-	2, // 6: api.payment.service.v1.OperatorPaymentTransactionEvent.channel_info:type_name -> api.payment.service.v1.ChannelInfo
-	0, // 7: api.payment.service.v1.PaymentEvent.Event:input_type -> api.payment.service.v1.EventRequest
-	1, // 8: api.payment.service.v1.PaymentEvent.Event:output_type -> api.payment.service.v1.EventResponse
-	8, // [8:9] is the sub-list for method output_type
-	7, // [7:8] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	5, // 4: api.payment.service.v1.OperatorPaymentTransactionEvent.target_operator_context:type_name -> api.common.OperatorContext
+	5, // 5: api.payment.service.v1.OperatorPaymentTransactionEvent.source_operator_context:type_name -> api.common.OperatorContext
+	6, // 6: api.payment.service.v1.OperatorPaymentTransactionEvent.extra:type_name -> google.protobuf.Struct
+	2, // 7: api.payment.service.v1.OperatorPaymentTransactionEvent.channel_info:type_name -> api.payment.service.v1.ChannelInfo
+	0, // 8: api.payment.service.v1.PaymentEvent.Event:input_type -> api.payment.service.v1.EventRequest
+	1, // 9: api.payment.service.v1.PaymentEvent.Event:output_type -> api.payment.service.v1.EventResponse
+	9, // [9:10] is the sub-list for method output_type
+	8, // [8:9] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_payment_service_v1_payment_event_proto_init() }
