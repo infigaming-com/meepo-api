@@ -4294,6 +4294,8 @@ components:
                 channelId:
                     type: string
                     description: ID of the channel to use for this deposit
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 extra:
                     type: object
                     description: |-

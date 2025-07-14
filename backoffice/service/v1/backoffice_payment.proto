@@ -6,7 +6,7 @@ import "google/api/annotations.proto";
 import "payment/service/v1/payment.proto";
 // import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
-// import "common/common.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -298,9 +298,10 @@ service BackofficePayment {
 message GetOperatorAddressRequest {
   // ID of the channel to use for this deposit
   string channel_id = 1 [json_name="channelId"];
+  api.common.OperatorContext target_operator_context = 2;
   // Additional information needed for the deposit
   // May include clientOrderId, productId, userInfo, etc.
-  google.protobuf.Struct extra = 2;
+  google.protobuf.Struct extra = 3;
 
 }
 
