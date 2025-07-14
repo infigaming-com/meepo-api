@@ -6352,6 +6352,8 @@ components:
                         type: string
                 transactionId:
                     type: string
+                targetOperatorType:
+                    type: string
                 startTime:
                     type: string
                     format: date-time
@@ -7852,6 +7854,8 @@ components:
                 cashAmount:
                     type: string
                 transactionType:
+                    type: string
+                status:
                     type: string
                 memo:
                     type: string

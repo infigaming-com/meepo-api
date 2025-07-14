@@ -4184,6 +4184,8 @@ func (m *ListOperatorBalanceTransactionsRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for TargetOperatorType
+
 	if m.TransactionId != nil {
 		// no validation rules for TransactionId
 	}
@@ -4412,6 +4414,8 @@ func (m *OperatorBalanceTransaction) validate(all bool) error {
 	// no validation rules for CashAmount
 
 	// no validation rules for TransactionType
+
+	// no validation rules for Status
 
 	// no validation rules for Memo
 

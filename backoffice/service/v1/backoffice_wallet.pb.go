@@ -2227,10 +2227,11 @@ type ListOperatorBalanceTransactionsRequest struct {
 	Currencies          []string               `protobuf:"bytes,4,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	TransactionTypes    []string               `protobuf:"bytes,5,rep,name=transaction_types,json=transactionTypes,proto3" json:"transaction_types,omitempty"`
 	TransactionId       *int64                 `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
-	StartTime           *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime             *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page                *int32                 `protobuf:"varint,9,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize            *int32                 `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	TargetOperatorType  string                 `protobuf:"bytes,7,opt,name=target_operator_type,json=targetOperatorType,proto3" json:"target_operator_type,omitempty"`
+	StartTime           *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime             *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page                *int32                 `protobuf:"varint,10,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize            *int32                 `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -2307,6 +2308,13 @@ func (x *ListOperatorBalanceTransactionsRequest) GetTransactionId() int64 {
 	return 0
 }
 
+func (x *ListOperatorBalanceTransactionsRequest) GetTargetOperatorType() string {
+	if x != nil {
+		return x.TargetOperatorType
+	}
+	return ""
+}
+
 func (x *ListOperatorBalanceTransactionsRequest) GetStartTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.StartTime
@@ -2347,10 +2355,11 @@ type OperatorBalanceTransaction struct {
 	AfterBalance         string                  `protobuf:"bytes,8,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
 	CashAmount           string                  `protobuf:"bytes,9,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
 	TransactionType      string                  `protobuf:"bytes,10,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	Memo                 string                  `protobuf:"bytes,11,opt,name=memo,proto3" json:"memo,omitempty"`
-	FeeAmount            string                  `protobuf:"bytes,12,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
-	CreatedAt            *timestamppb.Timestamp  `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            *timestamppb.Timestamp  `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Status               string                  `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
+	Memo                 string                  `protobuf:"bytes,12,opt,name=memo,proto3" json:"memo,omitempty"`
+	FeeAmount            string                  `protobuf:"bytes,13,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
+	CreatedAt            *timestamppb.Timestamp  `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            *timestamppb.Timestamp  `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -2451,6 +2460,13 @@ func (x *OperatorBalanceTransaction) GetCashAmount() string {
 func (x *OperatorBalanceTransaction) GetTransactionType() string {
 	if x != nil {
 		return x.TransactionType
+	}
+	return ""
+}
+
+func (x *OperatorBalanceTransaction) GetStatus() string {
+	if x != nil {
+		return x.Status
 	}
 	return ""
 }
@@ -3416,7 +3432,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\vcash_amount\x18\x03 \x01(\tR\n" +
 	"cashAmount\x12&\n" +
 	"\x0fcash_amount_usd\x18\x04 \x01(\tR\rcashAmountUsd\x12C\n" +
-	"\x1ecash_amount_reporting_currency\x18\x05 \x01(\tR\x1bcashAmountReportingCurrency\"\xa7\x04\n" +
+	"\x1ecash_amount_reporting_currency\x18\x05 \x01(\tR\x1bcashAmountReportingCurrency\"\xd9\x04\n" +
 	"&ListOperatorBalanceTransactionsRequest\x122\n" +
 	"\x15retailer_operator_ids\x18\x01 \x03(\x03R\x13retailerOperatorIds\x120\n" +
 	"\x14company_operator_ids\x18\x02 \x03(\x03R\x12companyOperatorIds\x12!\n" +
@@ -3425,19 +3441,20 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"currencies\x18\x04 \x03(\tR\n" +
 	"currencies\x12+\n" +
 	"\x11transaction_types\x18\x05 \x03(\tR\x10transactionTypes\x12*\n" +
-	"\x0etransaction_id\x18\x06 \x01(\x03H\x00R\rtransactionId\x88\x01\x01\x12>\n" +
+	"\x0etransaction_id\x18\x06 \x01(\x03H\x00R\rtransactionId\x88\x01\x01\x120\n" +
+	"\x14target_operator_type\x18\a \x01(\tR\x12targetOperatorType\x12>\n" +
 	"\n" +
-	"start_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x01R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x02R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\t \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\n" +
-	" \x01(\x05H\x04R\bpageSize\x88\x01\x01B\x11\n" +
+	"start_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x01R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\x02R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\n" +
+	" \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\v \x01(\x05H\x04R\bpageSize\x88\x01\x01B\x11\n" +
 	"\x0f_transaction_idB\r\n" +
 	"\v_start_timeB\v\n" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf7\x04\n" +
+	"_page_size\"\x8f\x05\n" +
 	"\x1aOperatorBalanceTransaction\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x124\n" +
@@ -3450,14 +3467,15 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\vcash_amount\x18\t \x01(\tR\n" +
 	"cashAmount\x12)\n" +
 	"\x10transaction_type\x18\n" +
-	" \x01(\tR\x0ftransactionType\x12\x12\n" +
-	"\x04memo\x18\v \x01(\tR\x04memo\x12\x1d\n" +
+	" \x01(\tR\x0ftransactionType\x12\x16\n" +
+	"\x06status\x18\v \x01(\tR\x06status\x12\x12\n" +
+	"\x04memo\x18\f \x01(\tR\x04memo\x12\x1d\n" +
 	"\n" +
-	"fee_amount\x18\f \x01(\tR\tfeeAmount\x129\n" +
+	"fee_amount\x18\r \x01(\tR\tfeeAmount\x129\n" +
 	"\n" +
-	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xcb\x01\n" +
+	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xcb\x01\n" +
 	"'ListOperatorBalanceTransactionsResponse\x12Y\n" +
 	"\ftransactions\x18\x01 \x03(\v25.api.backoffice.service.v1.OperatorBalanceTransactionR\ftransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +

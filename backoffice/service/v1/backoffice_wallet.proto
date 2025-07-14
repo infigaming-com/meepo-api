@@ -443,10 +443,11 @@ message ListOperatorBalanceTransactionsRequest {
 	repeated string currencies = 4;
 	repeated string transaction_types = 5;
 	optional int64 transaction_id = 6;
-	optional google.protobuf.Timestamp start_time = 7;
-	optional google.protobuf.Timestamp end_time = 8;
-	optional int32 page = 9;
-	optional int32 page_size = 10;
+	string target_operator_type = 7;
+	optional google.protobuf.Timestamp start_time = 8;
+	optional google.protobuf.Timestamp end_time = 9;
+	optional int32 page = 10;
+	optional int32 page_size = 11;
 }
 
 message OperatorBalanceTransaction {
@@ -460,10 +461,11 @@ message OperatorBalanceTransaction {
 	string after_balance = 8;
 	string cash_amount = 9;
 	string transaction_type = 10;
-	string memo = 11;
-	string fee_amount = 12;
-	google.protobuf.Timestamp created_at = 13;
-	google.protobuf.Timestamp updated_at = 14;
+	string status = 11;
+	string memo = 12;
+	string fee_amount = 13;
+	google.protobuf.Timestamp created_at = 14;
+	google.protobuf.Timestamp updated_at = 15;
 }
 
 message ListOperatorBalanceTransactionsResponse {
