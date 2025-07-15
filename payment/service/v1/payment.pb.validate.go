@@ -1365,7 +1365,7 @@ func (m *UpdatePaymentChannelRequest) validate(all bool) error {
 
 	// no validation rules for MaxAmount
 
-	// no validation rules for Status
+	// no validation rules for Enable
 
 	if all {
 		switch v := interface{}(m.GetKey()).(type) {
@@ -1682,6 +1682,8 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 	// no validation rules for SourceType
 
 	// no validation rules for Enable
+
+	// no validation rules for Contact
 
 	if len(errors) > 0 {
 		return PaymentChannelInfoMultiError(errors)
@@ -3822,6 +3824,8 @@ func (m *TransactionInfo) validate(all bool) error {
 	// no validation rules for Protocol
 
 	// no validation rules for Network
+
+	// no validation rules for Address
 
 	// no validation rules for Type
 

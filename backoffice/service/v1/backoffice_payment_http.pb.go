@@ -25,6 +25,8 @@ const OperationBackofficePaymentCreatePaymentMethod = "/api.backoffice.service.v
 const OperationBackofficePaymentGetOperatorAddress = "/api.backoffice.service.v1.BackofficePayment/GetOperatorAddress"
 const OperationBackofficePaymentGetPaymentChannelPage = "/api.backoffice.service.v1.BackofficePayment/GetPaymentChannelPage"
 const OperationBackofficePaymentGetPaymentMethodList = "/api.backoffice.service.v1.BackofficePayment/GetPaymentMethodList"
+const OperationBackofficePaymentGetPaymentOperatorTransactionById = "/api.backoffice.service.v1.BackofficePayment/GetPaymentOperatorTransactionById"
+const OperationBackofficePaymentGetPaymentOperatorTransactionPage = "/api.backoffice.service.v1.BackofficePayment/GetPaymentOperatorTransactionPage"
 const OperationBackofficePaymentGetPaymentTransactionById = "/api.backoffice.service.v1.BackofficePayment/GetPaymentTransactionById"
 const OperationBackofficePaymentGetPaymentTransactionPage = "/api.backoffice.service.v1.BackofficePayment/GetPaymentTransactionPage"
 const OperationBackofficePaymentGetSupportedPaymentMethodList = "/api.backoffice.service.v1.BackofficePayment/GetSupportedPaymentMethodList"
@@ -49,6 +51,11 @@ type BackofficePaymentHTTPServer interface {
 	// Retrieves all available payment methods supported by the system
 	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
 	GetPaymentMethodList(context.Context, *v1.GetPaymentMethodListRequest) (*v1.GetPaymentMethodListResponse, error)
+	// GetPaymentOperatorTransactionById Get transaction detail
+	// Retrieves detailed information about a specific transaction
+	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+	GetPaymentOperatorTransactionById(context.Context, *v1.GetTransactionDetailByIdRequest) (*v1.GetTransactionDetailByIdResponse, error)
+	GetPaymentOperatorTransactionPage(context.Context, *v1.GetTransactionPageRequest) (*v1.GetTransactionPageResponse, error)
 	// GetPaymentTransactionById Get transaction detail
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
@@ -72,6 +79,8 @@ func RegisterBackofficePaymentHTTPServer(s *http.Server, srv BackofficePaymentHT
 	r := s.Route("/")
 	r.POST("/v1/backoffice/payment/transaction/page", _BackofficePayment_GetPaymentTransactionPage0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/transaction/detail", _BackofficePayment_GetPaymentTransactionById0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/operator/transaction/page", _BackofficePayment_GetPaymentOperatorTransactionPage0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/operator/transaction/detail", _BackofficePayment_GetPaymentOperatorTransactionById0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/supportedmethod/list", _BackofficePayment_GetSupportedPaymentMethodList1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/method/list", _BackofficePayment_GetPaymentMethodList1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/method/create", _BackofficePayment_CreatePaymentMethod1_HTTP_Handler(srv))
@@ -116,6 +125,50 @@ func _BackofficePayment_GetPaymentTransactionById0_HTTP_Handler(srv BackofficePa
 		http.SetOperation(ctx, OperationBackofficePaymentGetPaymentTransactionById)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetPaymentTransactionById(ctx, req.(*v1.GetTransactionDetailByIdRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetTransactionDetailByIdResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficePayment_GetPaymentOperatorTransactionPage0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in v1.GetTransactionPageRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficePaymentGetPaymentOperatorTransactionPage)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetPaymentOperatorTransactionPage(ctx, req.(*v1.GetTransactionPageRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetTransactionPageResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficePayment_GetPaymentOperatorTransactionById0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in v1.GetTransactionDetailByIdRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficePaymentGetPaymentOperatorTransactionById)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetPaymentOperatorTransactionById(ctx, req.(*v1.GetTransactionDetailByIdRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -308,6 +361,8 @@ type BackofficePaymentHTTPClient interface {
 	GetOperatorAddress(ctx context.Context, req *GetOperatorAddressRequest, opts ...http.CallOption) (rsp *v1.GetOperatorAddressResponse, err error)
 	GetPaymentChannelPage(ctx context.Context, req *v1.GetPaymentChannelPageRequest, opts ...http.CallOption) (rsp *v1.GetPaymentChannelPageResponse, err error)
 	GetPaymentMethodList(ctx context.Context, req *v1.GetPaymentMethodListRequest, opts ...http.CallOption) (rsp *v1.GetPaymentMethodListResponse, err error)
+	GetPaymentOperatorTransactionById(ctx context.Context, req *v1.GetTransactionDetailByIdRequest, opts ...http.CallOption) (rsp *v1.GetTransactionDetailByIdResponse, err error)
+	GetPaymentOperatorTransactionPage(ctx context.Context, req *v1.GetTransactionPageRequest, opts ...http.CallOption) (rsp *v1.GetTransactionPageResponse, err error)
 	GetPaymentTransactionById(ctx context.Context, req *v1.GetTransactionDetailByIdRequest, opts ...http.CallOption) (rsp *v1.GetTransactionDetailByIdResponse, err error)
 	GetPaymentTransactionPage(ctx context.Context, req *v1.GetTransactionPageRequest, opts ...http.CallOption) (rsp *v1.GetTransactionPageResponse, err error)
 	GetSupportedPaymentMethodList(ctx context.Context, req *v1.GetSupportedPaymentMethodListRequest, opts ...http.CallOption) (rsp *v1.GetSupportedPaymentMethodListResponse, err error)
@@ -380,6 +435,32 @@ func (c *BackofficePaymentHTTPClientImpl) GetPaymentMethodList(ctx context.Conte
 	pattern := "/v1/backoffice/payment/method/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficePaymentGetPaymentMethodList))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficePaymentHTTPClientImpl) GetPaymentOperatorTransactionById(ctx context.Context, in *v1.GetTransactionDetailByIdRequest, opts ...http.CallOption) (*v1.GetTransactionDetailByIdResponse, error) {
+	var out v1.GetTransactionDetailByIdResponse
+	pattern := "/v1/backoffice/payment/operator/transaction/detail"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficePaymentGetPaymentOperatorTransactionById))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficePaymentHTTPClientImpl) GetPaymentOperatorTransactionPage(ctx context.Context, in *v1.GetTransactionPageRequest, opts ...http.CallOption) (*v1.GetTransactionPageResponse, error) {
+	var out v1.GetTransactionPageResponse
+	pattern := "/v1/backoffice/payment/operator/transaction/page"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficePaymentGetPaymentOperatorTransactionPage))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

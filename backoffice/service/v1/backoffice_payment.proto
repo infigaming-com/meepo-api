@@ -34,6 +34,23 @@ service BackofficePayment {
 		};
 	}
 
+	rpc GetPaymentOperatorTransactionPage(payment.service.v1.GetTransactionPageRequest) returns (payment.service.v1.GetTransactionPageResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/payment/operator/transaction/page"
+			body: "*"
+		};
+	}
+
+	// Get transaction detail
+	// Retrieves detailed information about a specific transaction
+	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+	rpc GetPaymentOperatorTransactionById(payment.service.v1.GetTransactionDetailByIdRequest) returns (payment.service.v1.GetTransactionDetailByIdResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/payment/operator/transaction/detail"
+			body: "*"
+		};
+	}
+
   // Get list of payment methods
   // Retrieves all available payment methods supported by the system
   // Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
@@ -338,9 +355,9 @@ message CreatePaymentMethodRequest {
 // Used to create a new payment channel with specified merchant and method
 message CreatePaymentChannelRequest {
   // ID of the merchant creating this channel
-  string merchant_id = 1 [json_name="merchantId"];
+  string merchant_id = 1;
   // ID of the payment method to be used
-  string payment_method_id = 2 [json_name="paymentMethodId"];
+  string payment_method_id = 2;
   // Type of channel (e.g., deposit, withdrawal)
   string type = 3;
   // Contact Info email
