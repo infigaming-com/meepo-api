@@ -19,25 +19,27 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Payment_GetSupportedPaymentMethodList_FullMethodName = "/payment.service.v1.Payment/GetSupportedPaymentMethodList"
-	Payment_CreatePaymentMethod_FullMethodName           = "/payment.service.v1.Payment/CreatePaymentMethod"
-	Payment_GetPaymentMethodList_FullMethodName          = "/payment.service.v1.Payment/GetPaymentMethodList"
-	Payment_UpdatePaymentChannel_FullMethodName          = "/payment.service.v1.Payment/UpdatePaymentChannel"
-	Payment_CreatePaymentChannel_FullMethodName          = "/payment.service.v1.Payment/CreatePaymentChannel"
-	Payment_GetAddress_FullMethodName                    = "/payment.service.v1.Payment/GetAddress"
-	Payment_InitiateDeposit_FullMethodName               = "/payment.service.v1.Payment/InitiateDeposit"
-	Payment_InitiateWithdraw_FullMethodName              = "/payment.service.v1.Payment/InitiateWithdraw"
-	Payment_DepositCallback_FullMethodName               = "/payment.service.v1.Payment/DepositCallback"
-	Payment_WithdrawCallback_FullMethodName              = "/payment.service.v1.Payment/WithdrawCallback"
-	Payment_GetOperatorAddress_FullMethodName            = "/payment.service.v1.Payment/GetOperatorAddress"
-	Payment_InitiateOperatorWithdraw_FullMethodName      = "/payment.service.v1.Payment/InitiateOperatorWithdraw"
-	Payment_OperatorDepositCallback_FullMethodName       = "/payment.service.v1.Payment/OperatorDepositCallback"
-	Payment_OperatorWithdrawCallback_FullMethodName      = "/payment.service.v1.Payment/OperatorWithdrawCallback"
-	Payment_GetTransactionPage_FullMethodName            = "/payment.service.v1.Payment/GetTransactionPage"
-	Payment_GetPaymentChannelPage_FullMethodName         = "/payment.service.v1.Payment/GetPaymentChannelPage"
-	Payment_GetTransactionDetailById_FullMethodName      = "/payment.service.v1.Payment/GetTransactionDetailById"
-	Payment_GetChannelsByIds_FullMethodName              = "/payment.service.v1.Payment/GetChannelsByIds"
-	Payment_UpdatePaymentMethod_FullMethodName           = "/payment.service.v1.Payment/UpdatePaymentMethod"
+	Payment_GetSupportedPaymentMethodList_FullMethodName    = "/payment.service.v1.Payment/GetSupportedPaymentMethodList"
+	Payment_CreatePaymentMethod_FullMethodName              = "/payment.service.v1.Payment/CreatePaymentMethod"
+	Payment_GetPaymentMethodList_FullMethodName             = "/payment.service.v1.Payment/GetPaymentMethodList"
+	Payment_UpdatePaymentChannel_FullMethodName             = "/payment.service.v1.Payment/UpdatePaymentChannel"
+	Payment_CreatePaymentChannel_FullMethodName             = "/payment.service.v1.Payment/CreatePaymentChannel"
+	Payment_GetAddress_FullMethodName                       = "/payment.service.v1.Payment/GetAddress"
+	Payment_InitiateDeposit_FullMethodName                  = "/payment.service.v1.Payment/InitiateDeposit"
+	Payment_InitiateWithdraw_FullMethodName                 = "/payment.service.v1.Payment/InitiateWithdraw"
+	Payment_DepositCallback_FullMethodName                  = "/payment.service.v1.Payment/DepositCallback"
+	Payment_WithdrawCallback_FullMethodName                 = "/payment.service.v1.Payment/WithdrawCallback"
+	Payment_GetOperatorAddress_FullMethodName               = "/payment.service.v1.Payment/GetOperatorAddress"
+	Payment_InitiateOperatorWithdraw_FullMethodName         = "/payment.service.v1.Payment/InitiateOperatorWithdraw"
+	Payment_OperatorDepositCallback_FullMethodName          = "/payment.service.v1.Payment/OperatorDepositCallback"
+	Payment_OperatorWithdrawCallback_FullMethodName         = "/payment.service.v1.Payment/OperatorWithdrawCallback"
+	Payment_GetTransactionPage_FullMethodName               = "/payment.service.v1.Payment/GetTransactionPage"
+	Payment_GetPaymentChannelPage_FullMethodName            = "/payment.service.v1.Payment/GetPaymentChannelPage"
+	Payment_GetTransactionDetailById_FullMethodName         = "/payment.service.v1.Payment/GetTransactionDetailById"
+	Payment_GetOperatorTransactionPage_FullMethodName       = "/payment.service.v1.Payment/GetOperatorTransactionPage"
+	Payment_GetOperatorTransactionDetailById_FullMethodName = "/payment.service.v1.Payment/GetOperatorTransactionDetailById"
+	Payment_GetChannelsByIds_FullMethodName                 = "/payment.service.v1.Payment/GetChannelsByIds"
+	Payment_UpdatePaymentMethod_FullMethodName              = "/payment.service.v1.Payment/UpdatePaymentMethod"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -113,6 +115,8 @@ type PaymentClient interface {
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
 	GetTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error)
+	GetOperatorTransactionPage(ctx context.Context, in *GetTransactionPageRequest, opts ...grpc.CallOption) (*GetTransactionPageResponse, error)
+	GetOperatorTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error)
 	GetChannelsByIds(ctx context.Context, in *GetChannelsByIdsRequest, opts ...grpc.CallOption) (*GetChannelsByIdsResponse, error)
 	UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*CreatePaymentMethodResponse, error)
 }
@@ -295,6 +299,26 @@ func (c *paymentClient) GetTransactionDetailById(ctx context.Context, in *GetTra
 	return out, nil
 }
 
+func (c *paymentClient) GetOperatorTransactionPage(ctx context.Context, in *GetTransactionPageRequest, opts ...grpc.CallOption) (*GetTransactionPageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTransactionPageResponse)
+	err := c.cc.Invoke(ctx, Payment_GetOperatorTransactionPage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetOperatorTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTransactionDetailByIdResponse)
+	err := c.cc.Invoke(ctx, Payment_GetOperatorTransactionDetailById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *paymentClient) GetChannelsByIds(ctx context.Context, in *GetChannelsByIdsRequest, opts ...grpc.CallOption) (*GetChannelsByIdsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetChannelsByIdsResponse)
@@ -388,6 +412,8 @@ type PaymentServer interface {
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
 	GetTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error)
+	GetOperatorTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error)
+	GetOperatorTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error)
 	GetChannelsByIds(context.Context, *GetChannelsByIdsRequest) (*GetChannelsByIdsResponse, error)
 	UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*CreatePaymentMethodResponse, error)
 	mustEmbedUnimplementedPaymentServer()
@@ -450,6 +476,12 @@ func (UnimplementedPaymentServer) GetPaymentChannelPage(context.Context, *GetPay
 }
 func (UnimplementedPaymentServer) GetTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionDetailById not implemented")
+}
+func (UnimplementedPaymentServer) GetOperatorTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorTransactionPage not implemented")
+}
+func (UnimplementedPaymentServer) GetOperatorTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorTransactionDetailById not implemented")
 }
 func (UnimplementedPaymentServer) GetChannelsByIds(context.Context, *GetChannelsByIdsRequest) (*GetChannelsByIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChannelsByIds not implemented")
@@ -784,6 +816,42 @@ func _Payment_GetTransactionDetailById_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_GetOperatorTransactionPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionPageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetOperatorTransactionPage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetOperatorTransactionPage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetOperatorTransactionPage(ctx, req.(*GetTransactionPageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetOperatorTransactionDetailById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionDetailByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetOperatorTransactionDetailById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetOperatorTransactionDetailById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetOperatorTransactionDetailById(ctx, req.(*GetTransactionDetailByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Payment_GetChannelsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetChannelsByIdsRequest)
 	if err := dec(in); err != nil {
@@ -894,6 +962,14 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTransactionDetailById",
 			Handler:    _Payment_GetTransactionDetailById_Handler,
+		},
+		{
+			MethodName: "GetOperatorTransactionPage",
+			Handler:    _Payment_GetOperatorTransactionPage_Handler,
+		},
+		{
+			MethodName: "GetOperatorTransactionDetailById",
+			Handler:    _Payment_GetOperatorTransactionDetailById_Handler,
 		},
 		{
 			MethodName: "GetChannelsByIds",

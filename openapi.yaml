@@ -1413,6 +1413,46 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetOperatorAddressResponse'
+    /v1/backoffice/payment/operator/transaction/detail:
+        post:
+            tags:
+                - BackofficePayment
+            description: |-
+                Get transaction detail
+                 Retrieves detailed information about a specific transaction
+                 Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
+            operationId: BackofficePayment_GetPaymentOperatorTransactionById
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetTransactionDetailByIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetTransactionDetailByIdResponse'
+    /v1/backoffice/payment/operator/transaction/page:
+        post:
+            tags:
+                - BackofficePayment
+            operationId: BackofficePayment_GetPaymentOperatorTransactionPage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
     /v1/backoffice/payment/supportedmethod/list:
         post:
             tags:
@@ -9967,6 +10007,8 @@ components:
                     type: string
                 enable:
                     type: boolean
+                contact:
+                    type: string
             description: |-
                 Payment channel information
                  Detailed information about a specific payment channel
@@ -10087,6 +10129,9 @@ components:
                 network:
                     type: string
                     description: Crypto Network used for the transaction
+                address:
+                    type: string
+                    description: Crypto Address
                 type:
                     enum:
                         - TRANSACTION_TYPE_UNSPECIFIED
@@ -10145,8 +10190,8 @@ components:
                 maxAmount:
                     type: string
                     description: Max Amount
-                status:
-                    type: string
+                enable:
+                    type: boolean
                     description: enable status
                 key:
                     type: object
