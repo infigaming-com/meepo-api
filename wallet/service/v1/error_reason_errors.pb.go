@@ -910,3 +910,15 @@ func IsQueryOperatorBalanceTransactionsFailed(err error) bool {
 func ErrorQueryOperatorBalanceTransactionsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_QUERY_OPERATOR_BALANCE_TRANSACTIONS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorBalanceNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_BALANCE_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorOperatorBalanceNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_BALANCE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}

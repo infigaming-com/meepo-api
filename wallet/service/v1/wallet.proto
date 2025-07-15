@@ -104,6 +104,12 @@ service Wallet {
 
 	// OperatorDebit is used to debit cash from an operator's balance
 	rpc OperatorDebit (OperatorDebitRequest) returns (OperatorDebitResponse) {}
+
+	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
+	rpc UpdateOperatorBalance(UpdateOperatorBalanceRequest) returns (UpdateOperatorBalanceResponse) {}
+
+	// GetOperatorTransactionSummary returns the summary of operator's transactions 
+	rpc GetOperatorTransactionSummary(GetOperatorTransactionSummaryRequest) returns (GetOperatorTransactionSummaryResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -805,4 +811,33 @@ message OperatorDebitRequest {
 message OperatorDebitResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
+}
+
+message UpdateOperatorBalanceRequest {
+	api.common.OperatorContext initial_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	string currency = 3;
+	bool enabled = 4;
+}
+
+message UpdateOperatorBalanceResponse {
+	bool enabled = 1;
+}
+
+message GetOperatorTransactionSummaryRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional string currency = 2;
+	optional int64 start_time = 3;
+	optional int64 end_time = 4;	
+}
+
+message GetOperatorTransactionSummaryResponse {
+	string total_withdraw_usd = 1;
+	string total_deposit_usd = 2;
+	string total_transfer_out_usd = 3;
+	string total_transfer_in_usd = 4;
+	string total_swap_out_usd = 5;
+	string total_swap_in_usd = 6;
+	string total_freeze_usd = 7;
+	string total_rollback_usd = 8;
 }

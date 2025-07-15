@@ -118,6 +118,13 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
+	rpc UpdateOperatorBalance(UpdateOperatorBalanceRequest) returns (UpdateOperatorBalanceResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/balance/update"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -473,4 +480,14 @@ message ListOperatorBalanceTransactionsResponse {
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message UpdateOperatorBalanceRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
+	bool enabled = 3;
+}
+
+message UpdateOperatorBalanceResponse {
+	bool enabled = 1;
 }
