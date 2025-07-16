@@ -381,6 +381,7 @@ message ListMonthlyRevenueShareResponse {
 		string rs_rate = 14; // Revenue Share Rate (e.g., "80%")
 		string revenue_share_disburse = 15; // Revenue Share (Disburse)
 		string revenue_share_collect = 16; // Revenue Share (Collect)
+		string est_costs = 17; // Est. Costs
 	}
 	
 	repeated RevenueShareItem items = 1;
@@ -390,6 +391,7 @@ message ListMonthlyRevenueShareResponse {
 		string subtotal = 1;
 		string revenue_share_disburse_total = 2;
 		string revenue_share_collect_total = 3;
+		string est_costs_total = 4;
 	}
 	Summary summary = 2;
 	

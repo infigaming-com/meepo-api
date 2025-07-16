@@ -2742,6 +2742,7 @@ type ListMonthlyRevenueShareResponse_RevenueShareItem struct {
 	RsRate               string `protobuf:"bytes,14,opt,name=rs_rate,json=rsRate,proto3" json:"rs_rate,omitempty"`                                             // Revenue Share Rate (e.g., "80%")
 	RevenueShareDisburse string `protobuf:"bytes,15,opt,name=revenue_share_disburse,json=revenueShareDisburse,proto3" json:"revenue_share_disburse,omitempty"` // Revenue Share (Disburse)
 	RevenueShareCollect  string `protobuf:"bytes,16,opt,name=revenue_share_collect,json=revenueShareCollect,proto3" json:"revenue_share_collect,omitempty"`    // Revenue Share (Collect)
+	EstCosts             string `protobuf:"bytes,17,opt,name=est_costs,json=estCosts,proto3" json:"est_costs,omitempty"`                                       // Est. Costs
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -2881,12 +2882,20 @@ func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetRevenueShareCollec
 	return ""
 }
 
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetEstCosts() string {
+	if x != nil {
+		return x.EstCosts
+	}
+	return ""
+}
+
 // Summary totals
 type ListMonthlyRevenueShareResponse_Summary struct {
 	state                     protoimpl.MessageState `protogen:"open.v1"`
 	Subtotal                  string                 `protobuf:"bytes,1,opt,name=subtotal,proto3" json:"subtotal,omitempty"`
 	RevenueShareDisburseTotal string                 `protobuf:"bytes,2,opt,name=revenue_share_disburse_total,json=revenueShareDisburseTotal,proto3" json:"revenue_share_disburse_total,omitempty"`
 	RevenueShareCollectTotal  string                 `protobuf:"bytes,3,opt,name=revenue_share_collect_total,json=revenueShareCollectTotal,proto3" json:"revenue_share_collect_total,omitempty"`
+	EstCostsTotal             string                 `protobuf:"bytes,4,opt,name=est_costs_total,json=estCostsTotal,proto3" json:"est_costs_total,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -2938,6 +2947,13 @@ func (x *ListMonthlyRevenueShareResponse_Summary) GetRevenueShareDisburseTotal()
 func (x *ListMonthlyRevenueShareResponse_Summary) GetRevenueShareCollectTotal() string {
 	if x != nil {
 		return x.RevenueShareCollectTotal
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_Summary) GetEstCostsTotal() string {
+	if x != nil {
+		return x.EstCostsTotal
 	}
 	return ""
 }
@@ -3285,14 +3301,14 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\a\n" +
-	"\x05_type\"\xf0\a\n" +
+	"\x05_type\"\xb5\b\n" +
 	"\x1fListMonthlyRevenueShareResponse\x12a\n" +
 	"\x05items\x18\x01 \x03(\v2K.api.backoffice.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItemR\x05items\x12\\\n" +
 	"\asummary\x18\x02 \x01(\v2B.api.backoffice.service.v1.ListMonthlyRevenueShareResponse.SummaryR\asummary\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\x91\x04\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xae\x04\n" +
 	"\x10RevenueShareItem\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
@@ -3311,11 +3327,13 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"net_profit\x18\r \x01(\tR\tnetProfit\x12\x17\n" +
 	"\ars_rate\x18\x0e \x01(\tR\x06rsRate\x124\n" +
 	"\x16revenue_share_disburse\x18\x0f \x01(\tR\x14revenueShareDisburse\x122\n" +
-	"\x15revenue_share_collect\x18\x10 \x01(\tR\x13revenueShareCollect\x1a\xa5\x01\n" +
+	"\x15revenue_share_collect\x18\x10 \x01(\tR\x13revenueShareCollect\x12\x1b\n" +
+	"\test_costs\x18\x11 \x01(\tR\bestCosts\x1a\xcd\x01\n" +
 	"\aSummary\x12\x1a\n" +
 	"\bsubtotal\x18\x01 \x01(\tR\bsubtotal\x12?\n" +
 	"\x1crevenue_share_disburse_total\x18\x02 \x01(\tR\x19revenueShareDisburseTotal\x12=\n" +
-	"\x1brevenue_share_collect_total\x18\x03 \x01(\tR\x18revenueShareCollectTotal\"\x84\x02\n" +
+	"\x1brevenue_share_collect_total\x18\x03 \x01(\tR\x18revenueShareCollectTotal\x12&\n" +
+	"\x0fest_costs_total\x18\x04 \x01(\tR\restCostsTotal\"\x84\x02\n" +
 	"\x14AddAdjustmentRequest\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x12\x1f\n" +
 	"\vretailer_id\x18\x02 \x01(\x03R\n" +
