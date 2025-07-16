@@ -111,24 +111,28 @@ message ListOperatorTicketsRequest {
 message ListTicketsResponse {
 	message Ticket {
 		google.protobuf.Timestamp created_at = 1;
-		string operator_name = 2;
-		int64 ticket_id = 3;
-		int64 user_id = 4;
-		int32 vip_level = 5;
-		repeated string user_tags = 6;
-		string before_balance = 7;
-		string before_balance_usd = 8;
-		string amount = 9;
-		string amount_usd = 10;
-		string after_balance = 11;
-		string after_balance_usd = 12;
-		string currency = 13;
-		string payment_channel = 14;
-		string protocol = 15;
-		string fee = 16;
-		string status = 17;	// pending, approved, rejected, manual_payout, paying, paid, failed
-		string reviewer_username = 18;
-		int32 review_duration = 19;
+		int64 ticket_id = 2;
+		int64 user_id = 3;
+		string operator_name = 4;
+		string company_operator_name = 5;
+		string retailer_operator_name = 6;
+		string system_operator_name = 7;
+		string real_operator_name = 8;
+		int32 vip_level = 9;
+		repeated string user_tags = 10;
+		string before_balance = 11;
+		string before_balance_usd = 12;
+		string amount = 13;
+		string amount_usd = 14;
+		string after_balance = 15;
+		string after_balance_usd = 16;
+		string currency = 17;
+		string payment_channel = 18;
+		string protocol = 19;
+		string fee = 20;
+		string status = 21;	// pending, approved, rejected, manual_payout, paying, paid, failed
+		string reviewer_username = 22;
+		int32 review_duration = 23;
 	}
 	repeated Ticket tickets = 1;
 	int32 page = 2;

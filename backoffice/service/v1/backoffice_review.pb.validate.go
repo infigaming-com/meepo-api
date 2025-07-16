@@ -2544,11 +2544,19 @@ func (m *ListTicketsResponse_Ticket) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for OperatorName
-
 	// no validation rules for TicketId
 
 	// no validation rules for UserId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
+	// no validation rules for RealOperatorName
 
 	// no validation rules for VipLevel
 

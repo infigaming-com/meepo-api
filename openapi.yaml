@@ -7415,11 +7415,19 @@ components:
                 createdAt:
                     type: string
                     format: date-time
-                operatorName:
-                    type: string
                 ticketId:
                     type: string
                 userId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                realOperatorName:
                     type: string
                 vipLevel:
                     type: integer
