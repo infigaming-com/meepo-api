@@ -6320,6 +6320,12 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                type:
+                    enum:
+                        - TYPE_CURRENT_MONTH
+                        - TYPE_ALL
+                    type: string
+                    format: enum
         api.backoffice.service.v1.ListMonthlyRevenueShareResponse:
             type: object
             properties:

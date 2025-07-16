@@ -1138,6 +1138,10 @@ func (m *ListMonthlyRevenueShareRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.Type != nil {
+		// no validation rules for Type
+	}
+
 	if len(errors) > 0 {
 		return ListMonthlyRevenueShareRequestMultiError(errors)
 	}
