@@ -166,24 +166,39 @@ message ListOperatorsByParentOperatorIdResponse {
 	int32 page_size = 9;
 }
 
-message OperatorInfo {
-	int64 operator_id = 1;
-	string operator_name = 2;
-	string status = 3;
-}
-
 message ListRetailerOperatorsRequest {
+	bool include_count = 1;
 }
 
 message ListRetailerOperatorsResponse {
+	// OperatorInfo is the simplified information of a retailer operator, used for list retailer operators
+	message OperatorInfo {
+		api.common.OperatorContext operator_context = 1;
+		string retailer_operator_name = 2;
+		int32 company_operator_count = 3;
+		int32 bottom_operator_count = 4;
+		int32 bottom_live_operator_count = 5;
+		bool status = 6;
+		bool self_co_operation_enabled = 7;
+	}
 	repeated OperatorInfo retailer_operators = 1;
 }
 
 message ListCompanyOperatorsRequest {
 	repeated int64 retailer_operator_ids = 1;
+	bool include_count = 2;
 }
 
 message ListCompanyOperatorsResponse {
+	// OperatorInfo is the simplified information of a company operator, used for list company operators
+	message OperatorInfo {
+		api.common.OperatorContext operator_context = 1;
+		string company_operator_name = 2;
+		string retailer_operator_name = 3;
+		int32 bottom_operator_count = 4;
+		int32 bottom_live_operator_count = 5;
+		bool status = 6;
+	}
 	repeated OperatorInfo company_operators = 1;
 }
 
@@ -194,6 +209,15 @@ message ListBottomOperatorsRequest {
 }
 
 message ListBottomOperatorsResponse {
+	// OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
+	message OperatorInfo {
+		api.common.OperatorContext operator_context = 1;
+		string bottom_operator_name = 2;
+		string retailer_operator_name = 3;
+		string company_operator_name = 4;
+		string mode = 5;
+		string status = 6;
+	}
 	repeated OperatorInfo operators = 1;
 }
 
