@@ -1037,44 +1037,61 @@ message ListOperatorsByParentOperatorIdResponse {
 	int32 page_size = 9;
 }
 
-// OperatorInfo is the simplified information of an operator, used for list operators
-message OperatorInfo {
-	int64 operator_id = 1;
-	string operator_name = 2;
-	string status = 3;
-}
-
 message ListRetailerOperatorsRequest {
-	string operator_type = 1;
-	int64 actual_operator_id = 2;
-	api.common.OperatorContext operator_context = 3;
+	api.common.OperatorContext operator_context = 1;
+	bool include_count = 2;
 }
 
 message ListRetailerOperatorsResponse {
+	// OperatorInfo is the simplified information of a retailer operator, used for list retailer operators
+	message OperatorInfo {
+		api.common.OperatorContext operator_context = 1;
+		string retailer_operator_name = 2;
+		int32 company_operator_count = 3;
+		int32 bottom_operator_count = 4;
+		int32 bottom_live_operator_count = 5;
+		bool status = 6;
+		bool self_co_operation_enabled = 7;
+	}
 	repeated OperatorInfo retailer_operators = 1;
 }
 
 message ListCompanyOperatorsRequest {
-	string operator_type = 1;
-	int64 actual_operator_id = 2;
-	repeated int64 retailer_operator_ids = 3;
-	api.common.OperatorContext operator_context = 4;
+	repeated int64 retailer_operator_ids = 1;
+	api.common.OperatorContext operator_context = 2;
+	bool include_count = 3;
 }
 
 message ListCompanyOperatorsResponse {
+	// OperatorInfo is the simplified information of a company operator, used for list company operators
+	message OperatorInfo {
+		api.common.OperatorContext operator_context = 1;
+		string company_operator_name = 2;
+		string retailer_operator_name = 3;
+		int32 bottom_operator_count = 4;
+		int32 bottom_live_operator_count = 5;
+		bool status = 6;
+	}
 	repeated OperatorInfo company_operators = 1;
 }
 
 message ListBottomOperatorsRequest {
-	string operator_type = 1;
-	int64 actual_operator_id = 2;
-	repeated int64 retailer_operator_ids = 3;
-	repeated int64 company_operator_ids = 4;
-	api.common.OperatorContext operator_context = 5;
+	repeated int64 retailer_operator_ids = 1;
+	repeated int64 company_operator_ids = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message ListBottomOperatorsResponse {
-	repeated OperatorInfo operators = 1;
+	// OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
+	message OperatorInfo {
+		api.common.OperatorContext operator_context = 1;
+		string bottom_operator_name = 2;
+		string retailer_operator_name = 3;
+		string company_operator_name = 4;
+		string mode = 5;
+		string status = 6;
+	}
+	repeated OperatorInfo bottom_operators = 1;
 }
 
 message UpdateOperatorStatusRequest {
