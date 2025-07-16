@@ -37,6 +37,12 @@ service BackofficeReview {
 			body: "*"
 		};
 	}
+	rpc GetOperatorTicket(GetOperatorTicketRequest) returns (GetOperatorTicketResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/review/operator/tickets/get"
+			body: "*"
+		};
+	}
 	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/review/tickets/review"
@@ -184,6 +190,64 @@ message GetTicketResponse {
 	repeated string linked_accounts = 8;
 	UserWalletData user_wallet_data = 9;
 	repeated Comment comments = 10;
+}
+
+message GetOperatorTicketRequest {
+	int64 ticket_id = 1;
+}
+
+message GetOperatorTicketResponse {
+	message Ticket {
+		int64 id = 1;
+		string type = 2;
+		string operator_name = 3;
+		string company_operator_name = 4;
+		string retailer_operator_name = 5;
+		string system_operator_name = 6;
+		google.protobuf.Timestamp created_at = 7;
+	}
+	message Comment {
+		int64 id = 1;
+		int64 ticket_id = 2;
+		string author_username = 3;
+		string content = 4;
+		google.protobuf.Timestamp created_at = 5;
+	}
+	message PaymentWithdrawTransactionInfo {
+		string currency = 1;
+		string protocol = 2;
+		string address = 3;
+		string psp = 4;
+		string amount = 5;
+		string amount_sent = 6;
+		string gas = 7;
+		string fee = 8;
+		google.protobuf.Timestamp created_at = 9;
+	}
+	message WalletBalanceInfo {
+		string balance = 2;
+	}
+	message WalletTransactionInfo {
+		string before_balance = 1;
+		string after_balance = 2;
+		string amount = 3;
+	}
+	message WalletTransactionSummary {
+		string total_withdraw_usd = 1;
+		string total_deposit_usd = 2;
+		string total_transfer_usd = 3;
+		string total_swap_out_usd = 4;
+		string total_swap_in_usd = 5;
+		string total_freeze_usd = 6;
+		string total_write_off_usd = 7;
+		string total_pending_usd = 8;
+	}
+	Ticket ticket = 1;
+	repeated Comment comments = 2;
+	PaymentWithdrawTransactionInfo payment_withdraw_transaction_info = 3;
+	WalletBalanceInfo wallet_balance_info = 4;
+	WalletTransactionInfo wallet_transaction_info = 5;
+	WalletTransactionSummary wallet_transaction_summary = 6;
 }
 
 message ReviewTicketRequest {

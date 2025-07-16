@@ -1752,6 +1752,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse'
+    /v1/backoffice/review/operator/tickets/get:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_GetOperatorTicket
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse'
     /v1/backoffice/review/operator/tickets/list:
         post:
             tags:
@@ -4390,6 +4408,115 @@ components:
                         type: string
                     description: List of tags associated with the operator.
             description: GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
+        api.backoffice.service.v1.GetOperatorTicketRequest:
+            type: object
+            properties:
+                ticketId:
+                    type: string
+        api.backoffice.service.v1.GetOperatorTicketResponse:
+            type: object
+            properties:
+                ticket:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse_Ticket'
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse_Comment'
+                paymentWithdrawTransactionInfo:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse_PaymentWithdrawTransactionInfo'
+                walletBalanceInfo:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse_WalletBalanceInfo'
+                walletTransactionInfo:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse_WalletTransactionInfo'
+                walletTransactionSummary:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse_WalletTransactionSummary'
+        api.backoffice.service.v1.GetOperatorTicketResponse_Comment:
+            type: object
+            properties:
+                id:
+                    type: string
+                ticketId:
+                    type: string
+                authorUsername:
+                    type: string
+                content:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+        api.backoffice.service.v1.GetOperatorTicketResponse_PaymentWithdrawTransactionInfo:
+            type: object
+            properties:
+                currency:
+                    type: string
+                protocol:
+                    type: string
+                address:
+                    type: string
+                psp:
+                    type: string
+                amount:
+                    type: string
+                amountSent:
+                    type: string
+                gas:
+                    type: string
+                fee:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+        api.backoffice.service.v1.GetOperatorTicketResponse_Ticket:
+            type: object
+            properties:
+                id:
+                    type: string
+                type:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+        api.backoffice.service.v1.GetOperatorTicketResponse_WalletBalanceInfo:
+            type: object
+            properties:
+                balance:
+                    type: string
+        api.backoffice.service.v1.GetOperatorTicketResponse_WalletTransactionInfo:
+            type: object
+            properties:
+                beforeBalance:
+                    type: string
+                afterBalance:
+                    type: string
+                amount:
+                    type: string
+        api.backoffice.service.v1.GetOperatorTicketResponse_WalletTransactionSummary:
+            type: object
+            properties:
+                totalWithdrawUsd:
+                    type: string
+                totalDepositUsd:
+                    type: string
+                totalTransferUsd:
+                    type: string
+                totalSwapOutUsd:
+                    type: string
+                totalSwapInUsd:
+                    type: string
+                totalFreezeUsd:
+                    type: string
+                totalWriteOffUsd:
+                    type: string
+                totalPendingUsd:
+                    type: string
         api.backoffice.service.v1.GetOverviewDashboardRequest:
             type: object
             properties: {}
