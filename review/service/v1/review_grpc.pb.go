@@ -27,6 +27,7 @@ const (
 	Review_ListTickets_FullMethodName            = "/api.review.service.v1.Review/ListTickets"
 	Review_ListOperatorTickets_FullMethodName    = "/api.review.service.v1.Review/ListOperatorTickets"
 	Review_GetTicket_FullMethodName              = "/api.review.service.v1.Review/GetTicket"
+	Review_GetOperatorTicket_FullMethodName      = "/api.review.service.v1.Review/GetOperatorTicket"
 )
 
 // ReviewClient is the client API for Review service.
@@ -45,6 +46,7 @@ type ReviewClient interface {
 	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
 	ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
 	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error)
+	GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...grpc.CallOption) (*GetOperatorTicketResponse, error)
 }
 
 type reviewClient struct {
@@ -135,6 +137,16 @@ func (c *reviewClient) GetTicket(ctx context.Context, in *GetTicketRequest, opts
 	return out, nil
 }
 
+func (c *reviewClient) GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...grpc.CallOption) (*GetOperatorTicketResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorTicketResponse)
+	err := c.cc.Invoke(ctx, Review_GetOperatorTicket_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ReviewServer is the server API for Review service.
 // All implementations must embed UnimplementedReviewServer
 // for forward compatibility.
@@ -151,6 +163,7 @@ type ReviewServer interface {
 	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
 	ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*ListTicketsResponse, error)
 	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
+	GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*GetOperatorTicketResponse, error)
 	mustEmbedUnimplementedReviewServer()
 }
 
@@ -184,6 +197,9 @@ func (UnimplementedReviewServer) ListOperatorTickets(context.Context, *ListOpera
 }
 func (UnimplementedReviewServer) GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTicket not implemented")
+}
+func (UnimplementedReviewServer) GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*GetOperatorTicketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorTicket not implemented")
 }
 func (UnimplementedReviewServer) mustEmbedUnimplementedReviewServer() {}
 func (UnimplementedReviewServer) testEmbeddedByValue()                {}
@@ -350,6 +366,24 @@ func _Review_GetTicket_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Review_GetOperatorTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorTicketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewServer).GetOperatorTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Review_GetOperatorTicket_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewServer).GetOperatorTicket(ctx, req.(*GetOperatorTicketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Review_ServiceDesc is the grpc.ServiceDesc for Review service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -388,6 +422,10 @@ var Review_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTicket",
 			Handler:    _Review_GetTicket_Handler,
+		},
+		{
+			MethodName: "GetOperatorTicket",
+			Handler:    _Review_GetOperatorTicket_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
