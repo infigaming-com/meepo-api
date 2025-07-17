@@ -80,32 +80,30 @@ message CreateWithdrawResponse {
 message ListTicketsRequest {
 	optional int64 user_id = 1;
 	api.common.OperatorContext operator_context = 2;
-	optional int64 operator_id = 3;
-	optional int64 company_operator_id = 4;
-	optional int64 retailer_operator_id = 5;
-	optional int64 system_operator_id = 6;
-	optional int64 ticket_id = 7;
-	optional string currency = 8;
-	optional string status = 9;
-	optional google.protobuf.Timestamp start_time = 10;
-	optional google.protobuf.Timestamp end_time = 11;
-	optional int32 page = 12;
-	optional int32 page_size = 13;
+	repeated api.common.OperatorContext operator_contexts = 3;
+	repeated api.common.OperatorContext company_operator_contexts = 4;
+	repeated api.common.OperatorContext retailer_operator_contexts = 5;
+	optional int64 ticket_id = 6;
+	optional string currency = 7;
+	optional string status = 8;
+	optional google.protobuf.Timestamp start_time = 9;
+	optional google.protobuf.Timestamp end_time = 10;
+	optional int32 page = 11;
+	optional int32 page_size = 12;
 }
 
 message ListOperatorTicketsRequest {
-	api.common.OperatorContext operator_context = 2;
-	optional int64 operator_id = 3;
-	optional int64 company_operator_id = 4;
-	optional int64 retailer_operator_id = 5;
-	optional int64 system_operator_id = 6;
-	optional int64 ticket_id = 7;
-	optional string currency = 8;
-	optional string status = 9;
-	optional google.protobuf.Timestamp start_time = 10;
-	optional google.protobuf.Timestamp end_time = 11;
-	optional int32 page = 12;
-	optional int32 page_size = 13;
+	api.common.OperatorContext operator_context = 1;
+	repeated api.common.OperatorContext operator_contexts = 2;
+	repeated api.common.OperatorContext company_operator_contexts = 3;
+	repeated api.common.OperatorContext retailer_operator_contexts = 4;
+	optional int64 ticket_id = 5;
+	optional string currency = 6;
+	optional string status = 7;
+	optional google.protobuf.Timestamp start_time = 8;
+	optional google.protobuf.Timestamp end_time = 9;
+	optional int32 page = 10;
+	optional int32 page_size = 11;
 }
 
 message ListTicketsResponse {
