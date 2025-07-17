@@ -80,30 +80,26 @@ message CreateWithdrawResponse {
 message ListTicketsRequest {
 	optional int64 user_id = 1;
 	api.common.OperatorContext operator_context = 2;
-	repeated api.common.OperatorContext operator_contexts = 3;
-	repeated api.common.OperatorContext company_operator_contexts = 4;
-	repeated api.common.OperatorContext retailer_operator_contexts = 5;
-	optional int64 ticket_id = 6;
-	optional string currency = 7;
-	optional string status = 8;
-	optional google.protobuf.Timestamp start_time = 9;
-	optional google.protobuf.Timestamp end_time = 10;
-	optional int32 page = 11;
-	optional int32 page_size = 12;
+	api.common.OperatorContextFilters operator_context_filters = 3;
+	optional int64 ticket_id = 4;
+	optional string currency = 5;
+	optional string status = 6;
+	optional google.protobuf.Timestamp start_time = 7;
+	optional google.protobuf.Timestamp end_time = 8;
+	optional int32 page = 9;
+	optional int32 page_size = 10;
 }
 
 message ListOperatorTicketsRequest {
 	api.common.OperatorContext operator_context = 1;
-	repeated api.common.OperatorContext operator_contexts = 2;
-	repeated api.common.OperatorContext company_operator_contexts = 3;
-	repeated api.common.OperatorContext retailer_operator_contexts = 4;
-	optional int64 ticket_id = 5;
-	optional string currency = 6;
-	optional string status = 7;
-	optional google.protobuf.Timestamp start_time = 8;
-	optional google.protobuf.Timestamp end_time = 9;
-	optional int32 page = 10;
-	optional int32 page_size = 11;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	optional int64 ticket_id = 3;
+	optional string currency = 4;
+	optional string status = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9;
 }
 
 message ListTicketsResponse {
