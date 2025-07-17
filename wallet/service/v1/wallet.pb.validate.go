@@ -8589,11 +8589,27 @@ func (m *OperatorBalanceTransaction) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for SettlementCurrency
+
+	// no validation rules for ReportingCurrency
+
 	// no validation rules for BeforeBalance
+
+	// no validation rules for BeforeBalanceUsd
+
+	// no validation rules for BeforeBalanceReportingCurrency
 
 	// no validation rules for AfterBalance
 
+	// no validation rules for AfterBalanceUsd
+
+	// no validation rules for AfterBalanceReportingCurrency
+
 	// no validation rules for CashAmount
+
+	// no validation rules for CashAmountUsd
+
+	// no validation rules for CashAmountReportingCurrency
 
 	// no validation rules for TransactionType
 
