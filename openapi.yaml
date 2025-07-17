@@ -3953,7 +3953,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.common.OperatorContext'
-                groupOperatorContexts:
+                companyOperatorContexts:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.common.OperatorContext'
@@ -6067,7 +6067,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.common.OperatorContext'
-                groupOperatorContexts:
+                companyOperatorContexts:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.common.OperatorContext'
