@@ -4680,24 +4680,32 @@ func (x *ListOperatorBalanceTransactionsRequest) GetPageSize() int32 {
 }
 
 type OperatorBalanceTransaction struct {
-	state                protoimpl.MessageState  `protogen:"open.v1"`
-	TransactionId        int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	OperatorContext      *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	RetailerOperatorName string                  `protobuf:"bytes,3,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	CompanyOperatorName  string                  `protobuf:"bytes,4,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	OperatorName         string                  `protobuf:"bytes,5,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	Currency             string                  `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
-	BeforeBalance        string                  `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	AfterBalance         string                  `protobuf:"bytes,8,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	CashAmount           string                  `protobuf:"bytes,9,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	TransactionType      string                  `protobuf:"bytes,10,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	Status               string                  `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
-	Memo                 string                  `protobuf:"bytes,12,opt,name=memo,proto3" json:"memo,omitempty"`
-	FeeAmount            string                  `protobuf:"bytes,13,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
-	CreatedAt            *timestamppb.Timestamp  `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            *timestamppb.Timestamp  `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                          protoimpl.MessageState  `protogen:"open.v1"`
+	TransactionId                  int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OperatorContext                *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	RetailerOperatorName           string                  `protobuf:"bytes,3,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	CompanyOperatorName            string                  `protobuf:"bytes,4,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	OperatorName                   string                  `protobuf:"bytes,5,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	Currency                       string                  `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
+	SettlementCurrency             string                  `protobuf:"bytes,7,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	ReportingCurrency              string                  `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	BeforeBalance                  string                  `protobuf:"bytes,9,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	BeforeBalanceUsd               string                  `protobuf:"bytes,10,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
+	BeforeBalanceReportingCurrency string                  `protobuf:"bytes,11,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
+	AfterBalance                   string                  `protobuf:"bytes,12,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	AfterBalanceUsd                string                  `protobuf:"bytes,13,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
+	AfterBalanceReportingCurrency  string                  `protobuf:"bytes,14,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
+	CashAmount                     string                  `protobuf:"bytes,15,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	CashAmountUsd                  string                  `protobuf:"bytes,16,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
+	CashAmountReportingCurrency    string                  `protobuf:"bytes,17,opt,name=cash_amount_reporting_currency,json=cashAmountReportingCurrency,proto3" json:"cash_amount_reporting_currency,omitempty"`
+	TransactionType                string                  `protobuf:"bytes,18,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	Status                         string                  `protobuf:"bytes,19,opt,name=status,proto3" json:"status,omitempty"`
+	Memo                           string                  `protobuf:"bytes,20,opt,name=memo,proto3" json:"memo,omitempty"`
+	FeeAmount                      string                  `protobuf:"bytes,21,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
+	CreatedAt                      *timestamppb.Timestamp  `protobuf:"bytes,22,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                      *timestamppb.Timestamp  `protobuf:"bytes,23,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *OperatorBalanceTransaction) Reset() {
@@ -4772,9 +4780,37 @@ func (x *OperatorBalanceTransaction) GetCurrency() string {
 	return ""
 }
 
+func (x *OperatorBalanceTransaction) GetSettlementCurrency() string {
+	if x != nil {
+		return x.SettlementCurrency
+	}
+	return ""
+}
+
+func (x *OperatorBalanceTransaction) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
 func (x *OperatorBalanceTransaction) GetBeforeBalance() string {
 	if x != nil {
 		return x.BeforeBalance
+	}
+	return ""
+}
+
+func (x *OperatorBalanceTransaction) GetBeforeBalanceUsd() string {
+	if x != nil {
+		return x.BeforeBalanceUsd
+	}
+	return ""
+}
+
+func (x *OperatorBalanceTransaction) GetBeforeBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BeforeBalanceReportingCurrency
 	}
 	return ""
 }
@@ -4786,9 +4822,37 @@ func (x *OperatorBalanceTransaction) GetAfterBalance() string {
 	return ""
 }
 
+func (x *OperatorBalanceTransaction) GetAfterBalanceUsd() string {
+	if x != nil {
+		return x.AfterBalanceUsd
+	}
+	return ""
+}
+
+func (x *OperatorBalanceTransaction) GetAfterBalanceReportingCurrency() string {
+	if x != nil {
+		return x.AfterBalanceReportingCurrency
+	}
+	return ""
+}
+
 func (x *OperatorBalanceTransaction) GetCashAmount() string {
 	if x != nil {
 		return x.CashAmount
+	}
+	return ""
+}
+
+func (x *OperatorBalanceTransaction) GetCashAmountUsd() string {
+	if x != nil {
+		return x.CashAmountUsd
+	}
+	return ""
+}
+
+func (x *OperatorBalanceTransaction) GetCashAmountReportingCurrency() string {
+	if x != nil {
+		return x.CashAmountReportingCurrency
 	}
 	return ""
 }
@@ -7121,28 +7185,36 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x8f\x05\n" +
+	"_page_size\"\xca\b\n" +
 	"\x1aOperatorBalanceTransaction\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x124\n" +
 	"\x16retailer_operator_name\x18\x03 \x01(\tR\x14retailerOperatorName\x122\n" +
 	"\x15company_operator_name\x18\x04 \x01(\tR\x13companyOperatorName\x12#\n" +
 	"\roperator_name\x18\x05 \x01(\tR\foperatorName\x12\x1a\n" +
-	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12%\n" +
-	"\x0ebefore_balance\x18\a \x01(\tR\rbeforeBalance\x12#\n" +
-	"\rafter_balance\x18\b \x01(\tR\fafterBalance\x12\x1f\n" +
-	"\vcash_amount\x18\t \x01(\tR\n" +
-	"cashAmount\x12)\n" +
-	"\x10transaction_type\x18\n" +
-	" \x01(\tR\x0ftransactionType\x12\x16\n" +
-	"\x06status\x18\v \x01(\tR\x06status\x12\x12\n" +
-	"\x04memo\x18\f \x01(\tR\x04memo\x12\x1d\n" +
+	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12/\n" +
+	"\x13settlement_currency\x18\a \x01(\tR\x12settlementCurrency\x12-\n" +
+	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency\x12%\n" +
+	"\x0ebefore_balance\x18\t \x01(\tR\rbeforeBalance\x12,\n" +
+	"\x12before_balance_usd\x18\n" +
+	" \x01(\tR\x10beforeBalanceUsd\x12I\n" +
+	"!before_balance_reporting_currency\x18\v \x01(\tR\x1ebeforeBalanceReportingCurrency\x12#\n" +
+	"\rafter_balance\x18\f \x01(\tR\fafterBalance\x12*\n" +
+	"\x11after_balance_usd\x18\r \x01(\tR\x0fafterBalanceUsd\x12G\n" +
+	" after_balance_reporting_currency\x18\x0e \x01(\tR\x1dafterBalanceReportingCurrency\x12\x1f\n" +
+	"\vcash_amount\x18\x0f \x01(\tR\n" +
+	"cashAmount\x12&\n" +
+	"\x0fcash_amount_usd\x18\x10 \x01(\tR\rcashAmountUsd\x12C\n" +
+	"\x1ecash_amount_reporting_currency\x18\x11 \x01(\tR\x1bcashAmountReportingCurrency\x12)\n" +
+	"\x10transaction_type\x18\x12 \x01(\tR\x0ftransactionType\x12\x16\n" +
+	"\x06status\x18\x13 \x01(\tR\x06status\x12\x12\n" +
+	"\x04memo\x18\x14 \x01(\tR\x04memo\x12\x1d\n" +
 	"\n" +
-	"fee_amount\x18\r \x01(\tR\tfeeAmount\x129\n" +
+	"fee_amount\x18\x15 \x01(\tR\tfeeAmount\x129\n" +
 	"\n" +
-	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\x16 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xc7\x01\n" +
+	"updated_at\x18\x17 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xc7\x01\n" +
 	"'ListOperatorBalanceTransactionsResponse\x12U\n" +
 	"\ftransactions\x18\x01 \x03(\v21.api.wallet.service.v1.OperatorBalanceTransactionR\ftransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
