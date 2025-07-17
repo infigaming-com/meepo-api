@@ -2220,20 +2220,20 @@ func (x *OperatorBalanceSettleResponse) GetCashAmountReportingCurrency() string 
 }
 
 type ListOperatorBalanceTransactionsRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	RetailerOperatorIds []int64                `protobuf:"varint,1,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
-	CompanyOperatorIds  []int64                `protobuf:"varint,2,rep,packed,name=company_operator_ids,json=companyOperatorIds,proto3" json:"company_operator_ids,omitempty"`
-	OperatorIds         []int64                `protobuf:"varint,3,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	Currencies          []string               `protobuf:"bytes,4,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	TransactionTypes    []string               `protobuf:"bytes,5,rep,name=transaction_types,json=transactionTypes,proto3" json:"transaction_types,omitempty"`
-	TransactionId       *int64                 `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
-	TargetOperatorType  string                 `protobuf:"bytes,7,opt,name=target_operator_type,json=targetOperatorType,proto3" json:"target_operator_type,omitempty"`
-	StartTime           *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime             *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page                *int32                 `protobuf:"varint,10,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize            *int32                 `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	RetailerOperatorIds  []int64                `protobuf:"varint,1,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
+	CompanyOperatorIds   []int64                `protobuf:"varint,2,rep,packed,name=company_operator_ids,json=companyOperatorIds,proto3" json:"company_operator_ids,omitempty"`
+	OperatorIds          []int64                `protobuf:"varint,3,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
+	SettlementCurrencies []string               `protobuf:"bytes,4,rep,name=settlement_currencies,json=settlementCurrencies,proto3" json:"settlement_currencies,omitempty"`
+	TransactionTypes     []string               `protobuf:"bytes,5,rep,name=transaction_types,json=transactionTypes,proto3" json:"transaction_types,omitempty"`
+	TransactionId        *int64                 `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
+	TargetOperatorType   string                 `protobuf:"bytes,7,opt,name=target_operator_type,json=targetOperatorType,proto3" json:"target_operator_type,omitempty"`
+	StartTime            *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime              *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page                 *int32                 `protobuf:"varint,10,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize             *int32                 `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListOperatorBalanceTransactionsRequest) Reset() {
@@ -2287,9 +2287,9 @@ func (x *ListOperatorBalanceTransactionsRequest) GetOperatorIds() []int64 {
 	return nil
 }
 
-func (x *ListOperatorBalanceTransactionsRequest) GetCurrencies() []string {
+func (x *ListOperatorBalanceTransactionsRequest) GetSettlementCurrencies() []string {
 	if x != nil {
-		return x.Currencies
+		return x.SettlementCurrencies
 	}
 	return nil
 }
@@ -3536,14 +3536,12 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\vcash_amount\x18\x03 \x01(\tR\n" +
 	"cashAmount\x12&\n" +
 	"\x0fcash_amount_usd\x18\x04 \x01(\tR\rcashAmountUsd\x12C\n" +
-	"\x1ecash_amount_reporting_currency\x18\x05 \x01(\tR\x1bcashAmountReportingCurrency\"\xd9\x04\n" +
+	"\x1ecash_amount_reporting_currency\x18\x05 \x01(\tR\x1bcashAmountReportingCurrency\"\xee\x04\n" +
 	"&ListOperatorBalanceTransactionsRequest\x122\n" +
 	"\x15retailer_operator_ids\x18\x01 \x03(\x03R\x13retailerOperatorIds\x120\n" +
 	"\x14company_operator_ids\x18\x02 \x03(\x03R\x12companyOperatorIds\x12!\n" +
-	"\foperator_ids\x18\x03 \x03(\x03R\voperatorIds\x12\x1e\n" +
-	"\n" +
-	"currencies\x18\x04 \x03(\tR\n" +
-	"currencies\x12+\n" +
+	"\foperator_ids\x18\x03 \x03(\x03R\voperatorIds\x123\n" +
+	"\x15settlement_currencies\x18\x04 \x03(\tR\x14settlementCurrencies\x12+\n" +
 	"\x11transaction_types\x18\x05 \x03(\tR\x10transactionTypes\x12*\n" +
 	"\x0etransaction_id\x18\x06 \x01(\x03H\x00R\rtransactionId\x88\x01\x01\x120\n" +
 	"\x14target_operator_type\x18\a \x01(\tR\x12targetOperatorType\x12>\n" +
