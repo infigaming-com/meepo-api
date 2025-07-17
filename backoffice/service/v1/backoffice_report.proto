@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -317,9 +318,9 @@ message GetPlayerGameDataResponse {
 
 message GetDepositSummariesRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
+	repeated api.common.OperatorContext retailer_operator_contexts = 2;
+	repeated api.common.OperatorContext company_operator_contexts = 3;
+	repeated api.common.OperatorContext operator_contexts = 4;
 	repeated string currencies = 5;
 }
 
@@ -335,9 +336,9 @@ message GetDepositSummariesResponse {
 
 message ListDepositDetailsRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
+	repeated api.common.OperatorContext retailer_operator_contexts = 2;
+	repeated api.common.OperatorContext company_operator_contexts = 3;
+	repeated api.common.OperatorContext operator_contexts = 4;
 	repeated string currencies = 5;
 	int32 page = 6;
 	int32 page_size = 7;
