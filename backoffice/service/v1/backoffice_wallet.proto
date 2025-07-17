@@ -335,12 +335,10 @@ message UpdateWalletCurrencyResponse {
 }
 
 message ListOperatorBalancesRequest {
-	repeated api.common.OperatorContext retailer_operator_contexts = 1;
-	repeated api.common.OperatorContext company_operator_contexts = 2;
-	repeated api.common.OperatorContext operator_contexts = 3;
-	repeated string currencies = 4;
-	optional int32 page = 5; // default 1
-	optional int32 page_size = 6; // default 20
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	repeated string currencies = 2;
+	optional int32 page = 3; // default 1
+	optional int32 page_size = 4; // default 20
 }
 
 message OperatorBalance {
@@ -444,17 +442,15 @@ message OperatorBalanceSettleResponse {
 }
 
 message ListOperatorBalanceTransactionsRequest {
-	repeated api.common.OperatorContext retailer_operator_contexts = 1;
-	repeated api.common.OperatorContext company_operator_contexts = 2;
-	repeated api.common.OperatorContext operator_contexts = 3;
-	repeated string settlement_currencies = 4;
-	repeated string transaction_types = 5;
-	optional int64 transaction_id = 6;
-	string target_operator_type = 7;
-	optional google.protobuf.Timestamp start_time = 8;
-	optional google.protobuf.Timestamp end_time = 9;
-	optional int32 page = 10;
-	optional int32 page_size = 11;
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	repeated string settlement_currencies = 2;
+	repeated string transaction_types = 3;
+	optional int64 transaction_id = 4;
+	string target_operator_type = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9;
 }
 
 message OperatorBalanceTransaction {

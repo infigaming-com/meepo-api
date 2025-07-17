@@ -1785,106 +1785,33 @@ func (m *GetDepositSummariesRequest) validate(all bool) error {
 		}
 	}
 
-	for idx, item := range m.GetRetailerOperatorContexts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetDepositSummariesRequestValidationError{
-						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GetDepositSummariesRequestValidationError{
-						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GetDepositSummariesRequestValidationError{
-					field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetDepositSummariesRequestValidationError{
+					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
 			}
-		}
-
-	}
-
-	for idx, item := range m.GetCompanyOperatorContexts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetDepositSummariesRequestValidationError{
-						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GetDepositSummariesRequestValidationError{
-						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				return GetDepositSummariesRequestValidationError{
-					field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+				errors = append(errors, GetDepositSummariesRequestValidationError{
+					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
 			}
 		}
-
-	}
-
-	for idx, item := range m.GetOperatorContexts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetDepositSummariesRequestValidationError{
-						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GetDepositSummariesRequestValidationError{
-						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GetDepositSummariesRequestValidationError{
-					field:  fmt.Sprintf("OperatorContexts[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetDepositSummariesRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
 			}
 		}
-
 	}
 
 	if len(errors) > 0 {
@@ -2155,111 +2082,42 @@ func (m *ListDepositDetailsRequest) validate(all bool) error {
 		}
 	}
 
-	for idx, item := range m.GetRetailerOperatorContexts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListDepositDetailsRequestValidationError{
-						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListDepositDetailsRequestValidationError{
-						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListDepositDetailsRequestValidationError{
-					field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListDepositDetailsRequestValidationError{
+					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
 			}
-		}
-
-	}
-
-	for idx, item := range m.GetCompanyOperatorContexts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListDepositDetailsRequestValidationError{
-						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListDepositDetailsRequestValidationError{
-						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				return ListDepositDetailsRequestValidationError{
-					field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+				errors = append(errors, ListDepositDetailsRequestValidationError{
+					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
 			}
 		}
-
-	}
-
-	for idx, item := range m.GetOperatorContexts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListDepositDetailsRequestValidationError{
-						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListDepositDetailsRequestValidationError{
-						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListDepositDetailsRequestValidationError{
-					field:  fmt.Sprintf("OperatorContexts[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListDepositDetailsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
 			}
 		}
-
 	}
 
-	// no validation rules for Page
+	if m.Page != nil {
+		// no validation rules for Page
+	}
 
-	// no validation rules for PageSize
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
 
 	if len(errors) > 0 {
 		return ListDepositDetailsRequestMultiError(errors)
@@ -4471,11 +4329,19 @@ func (m *ListDepositDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
 	// no validation rules for Currency
 
 	// no validation rules for DepositAmount
 
 	// no validation rules for DepositAmountUsd
+
+	// no validation rules for DepositAmountReportingCurrency
 
 	// no validation rules for DepositUsers
 
@@ -4483,17 +4349,23 @@ func (m *ListDepositDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for FtdAmountUsd
 
+	// no validation rules for FtdAmountReportingCurrency
+
 	// no validation rules for FtdUsers
 
 	// no validation rules for SameDayFtdAmount
 
 	// no validation rules for SameDayFtdAmountUsd
 
+	// no validation rules for SameDayFtdAmountReportingCurrency
+
 	// no validation rules for SameDayFtdUsers
 
 	// no validation rules for RepeatedDepositAmount
 
 	// no validation rules for RepeatedDepositAmountUsd
+
+	// no validation rules for RepeatedDepositAmountReportingCurrency
 
 	// no validation rules for RepeatedDepositUsers
 
@@ -4505,9 +4377,13 @@ func (m *ListDepositDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for AverageFtdAmountUsdForSameDayRegistredUsers
 
+	// no validation rules for AverageFtdAmountReportingCurrencyForSameDayRegistredUsers
+
 	// no validation rules for AverageFtdAmountForNonSameDayRegistredUsers
 
 	// no validation rules for AverageFtdAmountUsdForNonSameDayRegistredUsers
+
+	// no validation rules for AverageFtdAmountReportingCurrencyForNonSameDayRegistredUsers
 
 	// no validation rules for SuccessRate
 
