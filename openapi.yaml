@@ -6720,8 +6720,6 @@ components:
         api.backoffice.service.v1.ListOperatorTicketsRequest:
             type: object
             properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 ticketId:
@@ -7366,8 +7364,6 @@ components:
             properties:
                 userId:
                     type: string
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 ticketId:

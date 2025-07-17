@@ -79,19 +79,6 @@ message CreateWithdrawResponse {
 
 message ListTicketsRequest {
 	optional int64 user_id = 1;
-	api.common.OperatorContext operator_context = 2;
-	api.common.OperatorContextFilters operator_context_filters = 3;
-	optional int64 ticket_id = 4;
-	optional string currency = 5;
-	optional string status = 6;
-	optional google.protobuf.Timestamp start_time = 7;
-	optional google.protobuf.Timestamp end_time = 8;
-	optional int32 page = 9;
-	optional int32 page_size = 10;
-}
-
-message ListOperatorTicketsRequest {
-	api.common.OperatorContext operator_context = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
 	optional int64 ticket_id = 3;
 	optional string currency = 4;
@@ -100,6 +87,17 @@ message ListOperatorTicketsRequest {
 	optional google.protobuf.Timestamp end_time = 7;
 	optional int32 page = 8;
 	optional int32 page_size = 9;
+}
+
+message ListOperatorTicketsRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional int64 ticket_id = 2;
+	optional string currency = 3;
+	optional string status = 4;
+	optional google.protobuf.Timestamp start_time = 5;
+	optional google.protobuf.Timestamp end_time = 6;
+	optional int32 page = 7;
+	optional int32 page_size = 8;
 }
 
 message ListTicketsResponse {

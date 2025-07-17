@@ -116,15 +116,14 @@ func (x *CreateWithdrawResponse) GetTicketId() int64 {
 type ListTicketsRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	UserId                 *int64                         `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,3,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	TicketId               *int64                         `protobuf:"varint,4,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
-	Currency               *string                        `protobuf:"bytes,5,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	Status                 *string                        `protobuf:"bytes,6,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page                   *int32                         `protobuf:"varint,9,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	TicketId               *int64                         `protobuf:"varint,3,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
+	Currency               *string                        `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Status                 *string                        `protobuf:"bytes,5,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page                   *int32                         `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -164,13 +163,6 @@ func (x *ListTicketsRequest) GetUserId() int64 {
 		return *x.UserId
 	}
 	return 0
-}
-
-func (x *ListTicketsRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
 }
 
 func (x *ListTicketsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
@@ -231,15 +223,14 @@ func (x *ListTicketsRequest) GetPageSize() int32 {
 
 type ListOperatorTicketsRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	TicketId               *int64                         `protobuf:"varint,3,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
-	Currency               *string                        `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	Status                 *string                        `protobuf:"bytes,5,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page                   *int32                         `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	TicketId               *int64                         `protobuf:"varint,2,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
+	Currency               *string                        `protobuf:"bytes,3,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Status                 *string                        `protobuf:"bytes,4,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page                   *int32                         `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -272,13 +263,6 @@ func (x *ListOperatorTicketsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListOperatorTicketsRequest.ProtoReflect.Descriptor instead.
 func (*ListOperatorTicketsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_review_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *ListOperatorTicketsRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
 }
 
 func (x *ListOperatorTicketsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
@@ -2445,20 +2429,18 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\x1dCreateOperatorWithdrawRequest\x121\n" +
 	"\arequest\x18\x02 \x01(\v2\x17.google.protobuf.StructR\arequest\"5\n" +
 	"\x16CreateWithdrawResponse\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\xd4\x04\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x8c\x04\n" +
 	"\x12ListTicketsRequest\x12\x1c\n" +
-	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x03 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12 \n" +
-	"\tticket_id\x18\x04 \x01(\x03H\x01R\bticketId\x88\x01\x01\x12\x1f\n" +
-	"\bcurrency\x18\x05 \x01(\tH\x02R\bcurrency\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\x06 \x01(\tH\x03R\x06status\x88\x01\x01\x12>\n" +
+	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12 \n" +
+	"\tticket_id\x18\x03 \x01(\x03H\x01R\bticketId\x88\x01\x01\x12\x1f\n" +
+	"\bcurrency\x18\x04 \x01(\tH\x02R\bcurrency\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x05 \x01(\tH\x03R\x06status\x88\x01\x01\x12>\n" +
 	"\n" +
-	"start_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\t \x01(\x05H\x06R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\n" +
-	" \x01(\x05H\aR\bpageSize\x88\x01\x01B\n" +
+	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\b \x01(\x05H\x06R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\t \x01(\x05H\aR\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\f\n" +
 	"\n" +
@@ -2469,18 +2451,17 @@ const file_backoffice_service_v1_backoffice_review_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xb2\x04\n" +
-	"\x1aListOperatorTicketsRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12 \n" +
-	"\tticket_id\x18\x03 \x01(\x03H\x00R\bticketId\x88\x01\x01\x12\x1f\n" +
-	"\bcurrency\x18\x04 \x01(\tH\x01R\bcurrency\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\x05 \x01(\tH\x02R\x06status\x88\x01\x01\x12>\n" +
+	"_page_size\"\xea\x03\n" +
+	"\x1aListOperatorTicketsRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12 \n" +
+	"\tticket_id\x18\x02 \x01(\x03H\x00R\bticketId\x88\x01\x01\x12\x1f\n" +
+	"\bcurrency\x18\x03 \x01(\tH\x01R\bcurrency\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x04 \x01(\tH\x02R\x06status\x88\x01\x01\x12>\n" +
 	"\n" +
-	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\b \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\t \x01(\x05H\x06R\bpageSize\x88\x01\x01B\f\n" +
+	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\a \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\b \x01(\x05H\x06R\bpageSize\x88\x01\x01B\f\n" +
 	"\n" +
 	"_ticket_idB\v\n" +
 	"\t_currencyB\t\n" +
@@ -2745,63 +2726,60 @@ var file_backoffice_service_v1_backoffice_review_proto_goTypes = []any{
 	(*GetTicketByIdResponse_Ticket)(nil),                             // 27: api.backoffice.service.v1.GetTicketByIdResponse.Ticket
 	(*GetTicketByIdResponse_Comment)(nil),                            // 28: api.backoffice.service.v1.GetTicketByIdResponse.Comment
 	(*structpb.Struct)(nil),                                          // 29: google.protobuf.Struct
-	(*common.OperatorContext)(nil),                                   // 30: api.common.OperatorContext
-	(*common.OperatorContextFilters)(nil),                            // 31: api.common.OperatorContextFilters
-	(*timestamppb.Timestamp)(nil),                                    // 32: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),                            // 30: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),                                    // 31: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_review_proto_depIdxs = []int32{
 	29, // 0: api.backoffice.service.v1.CreateOperatorWithdrawRequest.request:type_name -> google.protobuf.Struct
-	30, // 1: api.backoffice.service.v1.ListTicketsRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 2: api.backoffice.service.v1.ListTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	32, // 3: api.backoffice.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	32, // 4: api.backoffice.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
-	30, // 5: api.backoffice.service.v1.ListOperatorTicketsRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 6: api.backoffice.service.v1.ListOperatorTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	32, // 7: api.backoffice.service.v1.ListOperatorTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	32, // 8: api.backoffice.service.v1.ListOperatorTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
-	17, // 9: api.backoffice.service.v1.ListTicketsResponse.tickets:type_name -> api.backoffice.service.v1.ListTicketsResponse.Ticket
-	18, // 10: api.backoffice.service.v1.GetTicketResponse.withdraw_payment_info:type_name -> api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo
-	19, // 11: api.backoffice.service.v1.GetTicketResponse.user_wallet_data:type_name -> api.backoffice.service.v1.GetTicketResponse.UserWalletData
-	20, // 12: api.backoffice.service.v1.GetTicketResponse.comments:type_name -> api.backoffice.service.v1.GetTicketResponse.Comment
-	21, // 13: api.backoffice.service.v1.GetOperatorTicketResponse.ticket:type_name -> api.backoffice.service.v1.GetOperatorTicketResponse.Ticket
-	22, // 14: api.backoffice.service.v1.GetOperatorTicketResponse.comments:type_name -> api.backoffice.service.v1.GetOperatorTicketResponse.Comment
-	23, // 15: api.backoffice.service.v1.GetOperatorTicketResponse.payment_withdraw_transaction_info:type_name -> api.backoffice.service.v1.GetOperatorTicketResponse.PaymentWithdrawTransactionInfo
-	24, // 16: api.backoffice.service.v1.GetOperatorTicketResponse.wallet_balance_info:type_name -> api.backoffice.service.v1.GetOperatorTicketResponse.WalletBalanceInfo
-	25, // 17: api.backoffice.service.v1.GetOperatorTicketResponse.wallet_transaction_info:type_name -> api.backoffice.service.v1.GetOperatorTicketResponse.WalletTransactionInfo
-	26, // 18: api.backoffice.service.v1.GetOperatorTicketResponse.wallet_transaction_summary:type_name -> api.backoffice.service.v1.GetOperatorTicketResponse.WalletTransactionSummary
-	27, // 19: api.backoffice.service.v1.GetTicketByIdResponse.ticket:type_name -> api.backoffice.service.v1.GetTicketByIdResponse.Ticket
-	28, // 20: api.backoffice.service.v1.GetTicketByIdResponse.comments:type_name -> api.backoffice.service.v1.GetTicketByIdResponse.Comment
-	32, // 21: api.backoffice.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
-	32, // 22: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.created_at:type_name -> google.protobuf.Timestamp
-	29, // 23: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.extra:type_name -> google.protobuf.Struct
-	29, // 24: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.schema:type_name -> google.protobuf.Struct
-	32, // 25: api.backoffice.service.v1.GetTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	32, // 26: api.backoffice.service.v1.GetOperatorTicketResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
-	32, // 27: api.backoffice.service.v1.GetOperatorTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	32, // 28: api.backoffice.service.v1.GetOperatorTicketResponse.PaymentWithdrawTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 29: api.backoffice.service.v1.BackofficeReview.CreateOperatorWithdraw:input_type -> api.backoffice.service.v1.CreateOperatorWithdrawRequest
-	2,  // 30: api.backoffice.service.v1.BackofficeReview.ListTickets:input_type -> api.backoffice.service.v1.ListTicketsRequest
-	3,  // 31: api.backoffice.service.v1.BackofficeReview.ListOperatorTickets:input_type -> api.backoffice.service.v1.ListOperatorTicketsRequest
-	5,  // 32: api.backoffice.service.v1.BackofficeReview.GetTicket:input_type -> api.backoffice.service.v1.GetTicketRequest
-	7,  // 33: api.backoffice.service.v1.BackofficeReview.GetOperatorTicket:input_type -> api.backoffice.service.v1.GetOperatorTicketRequest
-	9,  // 34: api.backoffice.service.v1.BackofficeReview.ReviewTicket:input_type -> api.backoffice.service.v1.ReviewTicketRequest
-	11, // 35: api.backoffice.service.v1.BackofficeReview.AddComment:input_type -> api.backoffice.service.v1.AddCommentRequest
-	13, // 36: api.backoffice.service.v1.BackofficeReview.CancelTicket:input_type -> api.backoffice.service.v1.CancelTicketRequest
-	15, // 37: api.backoffice.service.v1.BackofficeReview.GetTicketById:input_type -> api.backoffice.service.v1.GetTicketByIdRequest
-	1,  // 38: api.backoffice.service.v1.BackofficeReview.CreateOperatorWithdraw:output_type -> api.backoffice.service.v1.CreateWithdrawResponse
-	4,  // 39: api.backoffice.service.v1.BackofficeReview.ListTickets:output_type -> api.backoffice.service.v1.ListTicketsResponse
-	4,  // 40: api.backoffice.service.v1.BackofficeReview.ListOperatorTickets:output_type -> api.backoffice.service.v1.ListTicketsResponse
-	6,  // 41: api.backoffice.service.v1.BackofficeReview.GetTicket:output_type -> api.backoffice.service.v1.GetTicketResponse
-	8,  // 42: api.backoffice.service.v1.BackofficeReview.GetOperatorTicket:output_type -> api.backoffice.service.v1.GetOperatorTicketResponse
-	10, // 43: api.backoffice.service.v1.BackofficeReview.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
-	12, // 44: api.backoffice.service.v1.BackofficeReview.AddComment:output_type -> api.backoffice.service.v1.AddCommentResponse
-	14, // 45: api.backoffice.service.v1.BackofficeReview.CancelTicket:output_type -> api.backoffice.service.v1.CancelTicketResponse
-	16, // 46: api.backoffice.service.v1.BackofficeReview.GetTicketById:output_type -> api.backoffice.service.v1.GetTicketByIdResponse
-	38, // [38:47] is the sub-list for method output_type
-	29, // [29:38] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	30, // 1: api.backoffice.service.v1.ListTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	31, // 2: api.backoffice.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	31, // 3: api.backoffice.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	30, // 4: api.backoffice.service.v1.ListOperatorTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	31, // 5: api.backoffice.service.v1.ListOperatorTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	31, // 6: api.backoffice.service.v1.ListOperatorTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	17, // 7: api.backoffice.service.v1.ListTicketsResponse.tickets:type_name -> api.backoffice.service.v1.ListTicketsResponse.Ticket
+	18, // 8: api.backoffice.service.v1.GetTicketResponse.withdraw_payment_info:type_name -> api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo
+	19, // 9: api.backoffice.service.v1.GetTicketResponse.user_wallet_data:type_name -> api.backoffice.service.v1.GetTicketResponse.UserWalletData
+	20, // 10: api.backoffice.service.v1.GetTicketResponse.comments:type_name -> api.backoffice.service.v1.GetTicketResponse.Comment
+	21, // 11: api.backoffice.service.v1.GetOperatorTicketResponse.ticket:type_name -> api.backoffice.service.v1.GetOperatorTicketResponse.Ticket
+	22, // 12: api.backoffice.service.v1.GetOperatorTicketResponse.comments:type_name -> api.backoffice.service.v1.GetOperatorTicketResponse.Comment
+	23, // 13: api.backoffice.service.v1.GetOperatorTicketResponse.payment_withdraw_transaction_info:type_name -> api.backoffice.service.v1.GetOperatorTicketResponse.PaymentWithdrawTransactionInfo
+	24, // 14: api.backoffice.service.v1.GetOperatorTicketResponse.wallet_balance_info:type_name -> api.backoffice.service.v1.GetOperatorTicketResponse.WalletBalanceInfo
+	25, // 15: api.backoffice.service.v1.GetOperatorTicketResponse.wallet_transaction_info:type_name -> api.backoffice.service.v1.GetOperatorTicketResponse.WalletTransactionInfo
+	26, // 16: api.backoffice.service.v1.GetOperatorTicketResponse.wallet_transaction_summary:type_name -> api.backoffice.service.v1.GetOperatorTicketResponse.WalletTransactionSummary
+	27, // 17: api.backoffice.service.v1.GetTicketByIdResponse.ticket:type_name -> api.backoffice.service.v1.GetTicketByIdResponse.Ticket
+	28, // 18: api.backoffice.service.v1.GetTicketByIdResponse.comments:type_name -> api.backoffice.service.v1.GetTicketByIdResponse.Comment
+	31, // 19: api.backoffice.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	31, // 20: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.created_at:type_name -> google.protobuf.Timestamp
+	29, // 21: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.extra:type_name -> google.protobuf.Struct
+	29, // 22: api.backoffice.service.v1.GetTicketResponse.WithdrawPaymentInfo.schema:type_name -> google.protobuf.Struct
+	31, // 23: api.backoffice.service.v1.GetTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	31, // 24: api.backoffice.service.v1.GetOperatorTicketResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	31, // 25: api.backoffice.service.v1.GetOperatorTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	31, // 26: api.backoffice.service.v1.GetOperatorTicketResponse.PaymentWithdrawTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 27: api.backoffice.service.v1.BackofficeReview.CreateOperatorWithdraw:input_type -> api.backoffice.service.v1.CreateOperatorWithdrawRequest
+	2,  // 28: api.backoffice.service.v1.BackofficeReview.ListTickets:input_type -> api.backoffice.service.v1.ListTicketsRequest
+	3,  // 29: api.backoffice.service.v1.BackofficeReview.ListOperatorTickets:input_type -> api.backoffice.service.v1.ListOperatorTicketsRequest
+	5,  // 30: api.backoffice.service.v1.BackofficeReview.GetTicket:input_type -> api.backoffice.service.v1.GetTicketRequest
+	7,  // 31: api.backoffice.service.v1.BackofficeReview.GetOperatorTicket:input_type -> api.backoffice.service.v1.GetOperatorTicketRequest
+	9,  // 32: api.backoffice.service.v1.BackofficeReview.ReviewTicket:input_type -> api.backoffice.service.v1.ReviewTicketRequest
+	11, // 33: api.backoffice.service.v1.BackofficeReview.AddComment:input_type -> api.backoffice.service.v1.AddCommentRequest
+	13, // 34: api.backoffice.service.v1.BackofficeReview.CancelTicket:input_type -> api.backoffice.service.v1.CancelTicketRequest
+	15, // 35: api.backoffice.service.v1.BackofficeReview.GetTicketById:input_type -> api.backoffice.service.v1.GetTicketByIdRequest
+	1,  // 36: api.backoffice.service.v1.BackofficeReview.CreateOperatorWithdraw:output_type -> api.backoffice.service.v1.CreateWithdrawResponse
+	4,  // 37: api.backoffice.service.v1.BackofficeReview.ListTickets:output_type -> api.backoffice.service.v1.ListTicketsResponse
+	4,  // 38: api.backoffice.service.v1.BackofficeReview.ListOperatorTickets:output_type -> api.backoffice.service.v1.ListTicketsResponse
+	6,  // 39: api.backoffice.service.v1.BackofficeReview.GetTicket:output_type -> api.backoffice.service.v1.GetTicketResponse
+	8,  // 40: api.backoffice.service.v1.BackofficeReview.GetOperatorTicket:output_type -> api.backoffice.service.v1.GetOperatorTicketResponse
+	10, // 41: api.backoffice.service.v1.BackofficeReview.ReviewTicket:output_type -> api.backoffice.service.v1.ReviewTicketResponse
+	12, // 42: api.backoffice.service.v1.BackofficeReview.AddComment:output_type -> api.backoffice.service.v1.AddCommentResponse
+	14, // 43: api.backoffice.service.v1.BackofficeReview.CancelTicket:output_type -> api.backoffice.service.v1.CancelTicketResponse
+	16, // 44: api.backoffice.service.v1.BackofficeReview.GetTicketById:output_type -> api.backoffice.service.v1.GetTicketByIdResponse
+	36, // [36:45] is the sub-list for method output_type
+	27, // [27:36] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_review_proto_init() }
