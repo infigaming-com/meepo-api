@@ -8112,7 +8112,7 @@ components:
                     type: string
                 operatorName:
                     type: string
-                currency:
+                settlementCurrency:
                     type: string
                 beforeBalance:
                     type: string

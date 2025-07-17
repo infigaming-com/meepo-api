@@ -2350,7 +2350,7 @@ type OperatorBalanceTransaction struct {
 	RetailerOperatorName string                  `protobuf:"bytes,3,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
 	CompanyOperatorName  string                  `protobuf:"bytes,4,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
 	OperatorName         string                  `protobuf:"bytes,5,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	Currency             string                  `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
+	SettlementCurrency   string                  `protobuf:"bytes,6,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
 	BeforeBalance        string                  `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
 	AfterBalance         string                  `protobuf:"bytes,8,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
 	CashAmount           string                  `protobuf:"bytes,9,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
@@ -2429,9 +2429,9 @@ func (x *OperatorBalanceTransaction) GetOperatorName() string {
 	return ""
 }
 
-func (x *OperatorBalanceTransaction) GetCurrency() string {
+func (x *OperatorBalanceTransaction) GetSettlementCurrency() string {
 	if x != nil {
-		return x.Currency
+		return x.SettlementCurrency
 	}
 	return ""
 }
@@ -3556,14 +3556,14 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x8f\x05\n" +
+	"_page_size\"\xa4\x05\n" +
 	"\x1aOperatorBalanceTransaction\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x124\n" +
 	"\x16retailer_operator_name\x18\x03 \x01(\tR\x14retailerOperatorName\x122\n" +
 	"\x15company_operator_name\x18\x04 \x01(\tR\x13companyOperatorName\x12#\n" +
-	"\roperator_name\x18\x05 \x01(\tR\foperatorName\x12\x1a\n" +
-	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12%\n" +
+	"\roperator_name\x18\x05 \x01(\tR\foperatorName\x12/\n" +
+	"\x13settlement_currency\x18\x06 \x01(\tR\x12settlementCurrency\x12%\n" +
 	"\x0ebefore_balance\x18\a \x01(\tR\rbeforeBalance\x12#\n" +
 	"\rafter_balance\x18\b \x01(\tR\fafterBalance\x12\x1f\n" +
 	"\vcash_amount\x18\t \x01(\tR\n" +
