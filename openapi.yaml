@@ -3949,18 +3949,18 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
+                retailerOperatorContexts:
                     type: array
                     items:
-                        type: string
-                groupOperatorIds:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                groupOperatorContexts:
                     type: array
                     items:
-                        type: string
-                operatorIds:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContexts:
                     type: array
                     items:
-                        type: string
+                        $ref: '#/components/schemas/api.common.OperatorContext'
                 currencies:
                     type: array
                     items:
@@ -6063,18 +6063,18 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
+                retailerOperatorContexts:
                     type: array
                     items:
-                        type: string
-                groupOperatorIds:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                groupOperatorContexts:
                     type: array
                     items:
-                        type: string
-                operatorIds:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContexts:
                     type: array
                     items:
-                        type: string
+                        $ref: '#/components/schemas/api.common.OperatorContext'
                 currencies:
                     type: array
                     items:
@@ -6562,18 +6562,18 @@ components:
         api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest:
             type: object
             properties:
-                retailerOperatorIds:
+                retailerOperatorContexts:
                     type: array
                     items:
-                        type: string
-                companyOperatorIds:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                companyOperatorContexts:
                     type: array
                     items:
-                        type: string
-                operatorIds:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContexts:
                     type: array
                     items:
-                        type: string
+                        $ref: '#/components/schemas/api.common.OperatorContext'
                 settlementCurrencies:
                     type: array
                     items:
@@ -6617,18 +6617,18 @@ components:
         api.backoffice.service.v1.ListOperatorBalancesRequest:
             type: object
             properties:
-                retailerOperatorIds:
+                retailerOperatorContexts:
                     type: array
                     items:
-                        type: string
-                companyOperatorIds:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                companyOperatorContexts:
                     type: array
                     items:
-                        type: string
-                operatorIds:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContexts:
                     type: array
                     items:
-                        type: string
+                        $ref: '#/components/schemas/api.common.OperatorContext'
                 currencies:
                     type: array
                     items:
