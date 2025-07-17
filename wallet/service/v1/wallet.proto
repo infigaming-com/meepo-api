@@ -110,6 +110,9 @@ service Wallet {
 
 	// GetOperatorTransactionSummary returns the summary of operator's transactions 
 	rpc GetOperatorTransactionSummary(GetOperatorTransactionSummaryRequest) returns (GetOperatorTransactionSummaryResponse) {}
+
+	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
+	rpc GetOperatorBalanceTransactionsByIds(GetOperatorBalanceTransactionsByIdsRequest) returns (GetOperatorBalanceTransactionsByIdsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -840,4 +843,13 @@ message GetOperatorTransactionSummaryResponse {
 	string total_swap_in_usd = 6;
 	string total_freeze_usd = 7;
 	string total_rollback_usd = 8;
+}
+
+message GetOperatorBalanceTransactionsByIdsRequest {
+	repeated int64 transaction_ids = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message GetOperatorBalanceTransactionsByIdsResponse {
+	repeated OperatorBalanceTransaction transactions = 1;
 }

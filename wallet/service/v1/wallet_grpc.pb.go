@@ -53,6 +53,7 @@ const (
 	Wallet_OperatorDebit_FullMethodName                       = "/api.wallet.service.v1.Wallet/OperatorDebit"
 	Wallet_UpdateOperatorBalance_FullMethodName               = "/api.wallet.service.v1.Wallet/UpdateOperatorBalance"
 	Wallet_GetOperatorTransactionSummary_FullMethodName       = "/api.wallet.service.v1.Wallet/GetOperatorTransactionSummary"
+	Wallet_GetOperatorBalanceTransactionsByIds_FullMethodName = "/api.wallet.service.v1.Wallet/GetOperatorBalanceTransactionsByIds"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -114,6 +115,8 @@ type WalletClient interface {
 	UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorTransactionSummary returns the summary of operator's transactions
 	GetOperatorTransactionSummary(ctx context.Context, in *GetOperatorTransactionSummaryRequest, opts ...grpc.CallOption) (*GetOperatorTransactionSummaryResponse, error)
+	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
+	GetOperatorBalanceTransactionsByIds(ctx context.Context, in *GetOperatorBalanceTransactionsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorBalanceTransactionsByIdsResponse, error)
 }
 
 type walletClient struct {
@@ -464,6 +467,16 @@ func (c *walletClient) GetOperatorTransactionSummary(ctx context.Context, in *Ge
 	return out, nil
 }
 
+func (c *walletClient) GetOperatorBalanceTransactionsByIds(ctx context.Context, in *GetOperatorBalanceTransactionsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorBalanceTransactionsByIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorBalanceTransactionsByIdsResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetOperatorBalanceTransactionsByIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -523,6 +536,8 @@ type WalletServer interface {
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorTransactionSummary returns the summary of operator's transactions
 	GetOperatorTransactionSummary(context.Context, *GetOperatorTransactionSummaryRequest) (*GetOperatorTransactionSummaryResponse, error)
+	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
+	GetOperatorBalanceTransactionsByIds(context.Context, *GetOperatorBalanceTransactionsByIdsRequest) (*GetOperatorBalanceTransactionsByIdsResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -634,6 +649,9 @@ func (UnimplementedWalletServer) UpdateOperatorBalance(context.Context, *UpdateO
 }
 func (UnimplementedWalletServer) GetOperatorTransactionSummary(context.Context, *GetOperatorTransactionSummaryRequest) (*GetOperatorTransactionSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorTransactionSummary not implemented")
+}
+func (UnimplementedWalletServer) GetOperatorBalanceTransactionsByIds(context.Context, *GetOperatorBalanceTransactionsByIdsRequest) (*GetOperatorBalanceTransactionsByIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorBalanceTransactionsByIds not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -1268,6 +1286,24 @@ func _Wallet_GetOperatorTransactionSummary_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_GetOperatorBalanceTransactionsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorBalanceTransactionsByIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetOperatorBalanceTransactionsByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetOperatorBalanceTransactionsByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetOperatorBalanceTransactionsByIds(ctx, req.(*GetOperatorBalanceTransactionsByIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1410,6 +1446,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorTransactionSummary",
 			Handler:    _Wallet_GetOperatorTransactionSummary_Handler,
+		},
+		{
+			MethodName: "GetOperatorBalanceTransactionsByIds",
+			Handler:    _Wallet_GetOperatorBalanceTransactionsByIds_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
