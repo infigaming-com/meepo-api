@@ -6574,7 +6574,7 @@ components:
                     type: array
                     items:
                         type: string
-                currencies:
+                settlementCurrencies:
                     type: array
                     items:
                         type: string

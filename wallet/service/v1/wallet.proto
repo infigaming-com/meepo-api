@@ -766,7 +766,7 @@ message ListOperatorBalanceTransactionsRequest {
 	repeated int64 retailer_operator_ids = 1;
 	repeated int64 company_operator_ids = 2;
 	repeated int64 operator_ids = 3;
-	repeated string currencies = 4;
+	repeated string settlement_currencies = 4;
 	repeated string transaction_types = 5;
 	optional int64 transaction_id = 6;
 	optional google.protobuf.Timestamp start_time = 7;
