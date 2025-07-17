@@ -8581,6 +8581,8 @@ func (m *OperatorBalanceTransaction) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for SystemOperatorName
+
 	// no validation rules for RetailerOperatorName
 
 	// no validation rules for CompanyOperatorName
