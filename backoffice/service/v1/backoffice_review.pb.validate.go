@@ -322,24 +322,110 @@ func (m *ListTicketsRequest) validate(all bool) error {
 		}
 	}
 
+	for idx, item := range m.GetOperatorContexts() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListTicketsRequestValidationError{
+						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListTicketsRequestValidationError{
+						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListTicketsRequestValidationError{
+					field:  fmt.Sprintf("OperatorContexts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetCompanyOperatorContexts() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListTicketsRequestValidationError{
+						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListTicketsRequestValidationError{
+						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListTicketsRequestValidationError{
+					field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetRetailerOperatorContexts() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListTicketsRequestValidationError{
+						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListTicketsRequestValidationError{
+						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListTicketsRequestValidationError{
+					field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if m.UserId != nil {
 		// no validation rules for UserId
-	}
-
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
-	}
-
-	if m.CompanyOperatorId != nil {
-		// no validation rules for CompanyOperatorId
-	}
-
-	if m.RetailerOperatorId != nil {
-		// no validation rules for RetailerOperatorId
-	}
-
-	if m.SystemOperatorId != nil {
-		// no validation rules for SystemOperatorId
 	}
 
 	if m.TicketId != nil {
@@ -559,20 +645,106 @@ func (m *ListOperatorTicketsRequest) validate(all bool) error {
 		}
 	}
 
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
+	for idx, item := range m.GetOperatorContexts() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListOperatorTicketsRequestValidationError{
+						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListOperatorTicketsRequestValidationError{
+						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListOperatorTicketsRequestValidationError{
+					field:  fmt.Sprintf("OperatorContexts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
-	if m.CompanyOperatorId != nil {
-		// no validation rules for CompanyOperatorId
+	for idx, item := range m.GetCompanyOperatorContexts() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListOperatorTicketsRequestValidationError{
+						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListOperatorTicketsRequestValidationError{
+						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListOperatorTicketsRequestValidationError{
+					field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
-	if m.RetailerOperatorId != nil {
-		// no validation rules for RetailerOperatorId
-	}
+	for idx, item := range m.GetRetailerOperatorContexts() {
+		_, _ = idx, item
 
-	if m.SystemOperatorId != nil {
-		// no validation rules for SystemOperatorId
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListOperatorTicketsRequestValidationError{
+						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListOperatorTicketsRequestValidationError{
+						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListOperatorTicketsRequestValidationError{
+					field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if m.TicketId != nil {

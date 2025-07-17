@@ -472,22 +472,19 @@ func (*CancelTicketResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListTicketsRequest struct {
-	state              protoimpl.MessageState  `protogen:"open.v1"`
-	UserId             *int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	OperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorId         *int64                  `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
-	CompanyOperatorId  *int64                  `protobuf:"varint,4,opt,name=company_operator_id,json=companyOperatorId,proto3,oneof" json:"company_operator_id,omitempty"`
-	RetailerOperatorId *int64                  `protobuf:"varint,5,opt,name=retailer_operator_id,json=retailerOperatorId,proto3,oneof" json:"retailer_operator_id,omitempty"`
-	SystemOperatorId   *int64                  `protobuf:"varint,6,opt,name=system_operator_id,json=systemOperatorId,proto3,oneof" json:"system_operator_id,omitempty"`
-	TicketId           *int64                  `protobuf:"varint,7,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
-	Currency           *string                 `protobuf:"bytes,8,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	Status             *string                 `protobuf:"bytes,9,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	StartTime          *timestamppb.Timestamp  `protobuf:"bytes,10,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime            *timestamppb.Timestamp  `protobuf:"bytes,11,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page               *int32                  `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize           *int32                  `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	UserId                 *int64                         `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,3,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	TicketId               *int64                         `protobuf:"varint,4,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
+	Currency               *string                        `protobuf:"bytes,5,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Status                 *string                        `protobuf:"bytes,6,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page                   *int32                         `protobuf:"varint,9,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListTicketsRequest) Reset() {
@@ -534,32 +531,11 @@ func (x *ListTicketsRequest) GetOperatorContext() *common.OperatorContext {
 	return nil
 }
 
-func (x *ListTicketsRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
+func (x *ListTicketsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
 	}
-	return 0
-}
-
-func (x *ListTicketsRequest) GetCompanyOperatorId() int64 {
-	if x != nil && x.CompanyOperatorId != nil {
-		return *x.CompanyOperatorId
-	}
-	return 0
-}
-
-func (x *ListTicketsRequest) GetRetailerOperatorId() int64 {
-	if x != nil && x.RetailerOperatorId != nil {
-		return *x.RetailerOperatorId
-	}
-	return 0
-}
-
-func (x *ListTicketsRequest) GetSystemOperatorId() int64 {
-	if x != nil && x.SystemOperatorId != nil {
-		return *x.SystemOperatorId
-	}
-	return 0
+	return nil
 }
 
 func (x *ListTicketsRequest) GetTicketId() int64 {
@@ -612,21 +588,18 @@ func (x *ListTicketsRequest) GetPageSize() int32 {
 }
 
 type ListOperatorTicketsRequest struct {
-	state              protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorId         *int64                  `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
-	CompanyOperatorId  *int64                  `protobuf:"varint,4,opt,name=company_operator_id,json=companyOperatorId,proto3,oneof" json:"company_operator_id,omitempty"`
-	RetailerOperatorId *int64                  `protobuf:"varint,5,opt,name=retailer_operator_id,json=retailerOperatorId,proto3,oneof" json:"retailer_operator_id,omitempty"`
-	SystemOperatorId   *int64                  `protobuf:"varint,6,opt,name=system_operator_id,json=systemOperatorId,proto3,oneof" json:"system_operator_id,omitempty"`
-	TicketId           *int64                  `protobuf:"varint,7,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
-	Currency           *string                 `protobuf:"bytes,8,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	Status             *string                 `protobuf:"bytes,9,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	StartTime          *timestamppb.Timestamp  `protobuf:"bytes,10,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime            *timestamppb.Timestamp  `protobuf:"bytes,11,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page               *int32                  `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize           *int32                  `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	TicketId               *int64                         `protobuf:"varint,3,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
+	Currency               *string                        `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Status                 *string                        `protobuf:"bytes,5,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page                   *int32                         `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListOperatorTicketsRequest) Reset() {
@@ -666,32 +639,11 @@ func (x *ListOperatorTicketsRequest) GetOperatorContext() *common.OperatorContex
 	return nil
 }
 
-func (x *ListOperatorTicketsRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
+func (x *ListOperatorTicketsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
 	}
-	return 0
-}
-
-func (x *ListOperatorTicketsRequest) GetCompanyOperatorId() int64 {
-	if x != nil && x.CompanyOperatorId != nil {
-		return *x.CompanyOperatorId
-	}
-	return 0
-}
-
-func (x *ListOperatorTicketsRequest) GetRetailerOperatorId() int64 {
-	if x != nil && x.RetailerOperatorId != nil {
-		return *x.RetailerOperatorId
-	}
-	return 0
-}
-
-func (x *ListOperatorTicketsRequest) GetSystemOperatorId() int64 {
-	if x != nil && x.SystemOperatorId != nil {
-		return *x.SystemOperatorId
-	}
-	return 0
+	return nil
 }
 
 func (x *ListOperatorTicketsRequest) GetTicketId() int64 {
@@ -2200,31 +2152,22 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x13CancelTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12*\n" +
 	"\x11canceller_user_id\x18\x02 \x01(\x03R\x0fcancellerUserId\"\x16\n" +
-	"\x14CancelTicketResponse\"\x93\x06\n" +
+	"\x14CancelTicketResponse\"\xd4\x04\n" +
 	"\x12ListTicketsRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12$\n" +
-	"\voperator_id\x18\x03 \x01(\x03H\x01R\n" +
-	"operatorId\x88\x01\x01\x123\n" +
-	"\x13company_operator_id\x18\x04 \x01(\x03H\x02R\x11companyOperatorId\x88\x01\x01\x125\n" +
-	"\x14retailer_operator_id\x18\x05 \x01(\x03H\x03R\x12retailerOperatorId\x88\x01\x01\x121\n" +
-	"\x12system_operator_id\x18\x06 \x01(\x03H\x04R\x10systemOperatorId\x88\x01\x01\x12 \n" +
-	"\tticket_id\x18\a \x01(\x03H\x05R\bticketId\x88\x01\x01\x12\x1f\n" +
-	"\bcurrency\x18\b \x01(\tH\x06R\bcurrency\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\t \x01(\tH\aR\x06status\x88\x01\x01\x12>\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
+	"\x18operator_context_filters\x18\x03 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12 \n" +
+	"\tticket_id\x18\x04 \x01(\x03H\x01R\bticketId\x88\x01\x01\x12\x1f\n" +
+	"\bcurrency\x18\x05 \x01(\tH\x02R\bcurrency\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x06 \x01(\tH\x03R\x06status\x88\x01\x01\x12>\n" +
 	"\n" +
-	"start_time\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampH\bR\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampH\tR\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\f \x01(\x05H\n" +
-	"R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\r \x01(\x05H\vR\bpageSize\x88\x01\x01B\n" +
+	"start_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\t \x01(\x05H\x06R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\n" +
+	" \x01(\x05H\aR\bpageSize\x88\x01\x01B\n" +
 	"\n" +
-	"\b_user_idB\x0e\n" +
-	"\f_operator_idB\x16\n" +
-	"\x14_company_operator_idB\x17\n" +
-	"\x15_retailer_operator_idB\x15\n" +
-	"\x13_system_operator_idB\f\n" +
+	"\b_user_idB\f\n" +
 	"\n" +
 	"_ticket_idB\v\n" +
 	"\t_currencyB\t\n" +
@@ -2233,28 +2176,18 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf1\x05\n" +
+	"_page_size\"\xb2\x04\n" +
 	"\x1aListOperatorTicketsRequest\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12$\n" +
-	"\voperator_id\x18\x03 \x01(\x03H\x00R\n" +
-	"operatorId\x88\x01\x01\x123\n" +
-	"\x13company_operator_id\x18\x04 \x01(\x03H\x01R\x11companyOperatorId\x88\x01\x01\x125\n" +
-	"\x14retailer_operator_id\x18\x05 \x01(\x03H\x02R\x12retailerOperatorId\x88\x01\x01\x121\n" +
-	"\x12system_operator_id\x18\x06 \x01(\x03H\x03R\x10systemOperatorId\x88\x01\x01\x12 \n" +
-	"\tticket_id\x18\a \x01(\x03H\x04R\bticketId\x88\x01\x01\x12\x1f\n" +
-	"\bcurrency\x18\b \x01(\tH\x05R\bcurrency\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\t \x01(\tH\x06R\x06status\x88\x01\x01\x12>\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12 \n" +
+	"\tticket_id\x18\x03 \x01(\x03H\x00R\bticketId\x88\x01\x01\x12\x1f\n" +
+	"\bcurrency\x18\x04 \x01(\tH\x01R\bcurrency\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x05 \x01(\tH\x02R\x06status\x88\x01\x01\x12>\n" +
 	"\n" +
-	"start_time\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampH\aR\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampH\bR\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\f \x01(\x05H\tR\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\r \x01(\x05H\n" +
-	"R\bpageSize\x88\x01\x01B\x0e\n" +
-	"\f_operator_idB\x16\n" +
-	"\x14_company_operator_idB\x17\n" +
-	"\x15_retailer_operator_idB\x15\n" +
-	"\x13_system_operator_idB\f\n" +
+	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\b \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\t \x01(\x05H\x06R\bpageSize\x88\x01\x01B\f\n" +
 	"\n" +
 	"_ticket_idB\v\n" +
 	"\t_currencyB\t\n" +
@@ -2465,56 +2398,59 @@ var file_review_service_v1_review_proto_goTypes = []any{
 	(*GetOperatorTicketResponse_WalletTransactionSummary)(nil),       // 24: api.review.service.v1.GetOperatorTicketResponse.WalletTransactionSummary
 	(*structpb.Struct)(nil),                                          // 25: google.protobuf.Struct
 	(*common.OperatorContext)(nil),                                   // 26: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),                                    // 27: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),                            // 27: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),                                    // 28: google.protobuf.Timestamp
 }
 var file_review_service_v1_review_proto_depIdxs = []int32{
 	25, // 0: api.review.service.v1.CreateWithdrawRequest.request:type_name -> google.protobuf.Struct
 	26, // 1: api.review.service.v1.CreateOperatorWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
 	25, // 2: api.review.service.v1.CreateOperatorWithdrawRequest.request:type_name -> google.protobuf.Struct
 	26, // 3: api.review.service.v1.ListTicketsRequest.operator_context:type_name -> api.common.OperatorContext
-	27, // 4: api.review.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	27, // 5: api.review.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
-	26, // 6: api.review.service.v1.ListOperatorTicketsRequest.operator_context:type_name -> api.common.OperatorContext
-	27, // 7: api.review.service.v1.ListOperatorTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	27, // 8: api.review.service.v1.ListOperatorTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
-	16, // 9: api.review.service.v1.ListTicketsResponse.tickets:type_name -> api.review.service.v1.ListTicketsResponse.Ticket
-	26, // 10: api.review.service.v1.GetTicketRequest.operator_context:type_name -> api.common.OperatorContext
-	17, // 11: api.review.service.v1.GetTicketResponse.ticket:type_name -> api.review.service.v1.GetTicketResponse.Ticket
-	18, // 12: api.review.service.v1.GetTicketResponse.comments:type_name -> api.review.service.v1.GetTicketResponse.Comment
-	26, // 13: api.review.service.v1.GetOperatorTicketRequest.operator_context:type_name -> api.common.OperatorContext
-	19, // 14: api.review.service.v1.GetOperatorTicketResponse.ticket:type_name -> api.review.service.v1.GetOperatorTicketResponse.Ticket
-	20, // 15: api.review.service.v1.GetOperatorTicketResponse.comments:type_name -> api.review.service.v1.GetOperatorTicketResponse.Comment
-	21, // 16: api.review.service.v1.GetOperatorTicketResponse.payment_withdraw_transaction_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.PaymentWithdrawTransactionInfo
-	22, // 17: api.review.service.v1.GetOperatorTicketResponse.wallet_balance_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletBalanceInfo
-	23, // 18: api.review.service.v1.GetOperatorTicketResponse.wallet_transaction_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletTransactionInfo
-	24, // 19: api.review.service.v1.GetOperatorTicketResponse.wallet_transaction_summary:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletTransactionSummary
-	27, // 20: api.review.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
-	27, // 21: api.review.service.v1.GetOperatorTicketResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
-	27, // 22: api.review.service.v1.GetOperatorTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	27, // 23: api.review.service.v1.GetOperatorTicketResponse.PaymentWithdrawTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 24: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
-	1,  // 25: api.review.service.v1.Review.CreateOperatorWithdraw:input_type -> api.review.service.v1.CreateOperatorWithdrawRequest
-	3,  // 26: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
-	5,  // 27: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
-	7,  // 28: api.review.service.v1.Review.CancelTicket:input_type -> api.review.service.v1.CancelTicketRequest
-	9,  // 29: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
-	10, // 30: api.review.service.v1.Review.ListOperatorTickets:input_type -> api.review.service.v1.ListOperatorTicketsRequest
-	12, // 31: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
-	14, // 32: api.review.service.v1.Review.GetOperatorTicket:input_type -> api.review.service.v1.GetOperatorTicketRequest
-	2,  // 33: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	2,  // 34: api.review.service.v1.Review.CreateOperatorWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	4,  // 35: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
-	6,  // 36: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
-	8,  // 37: api.review.service.v1.Review.CancelTicket:output_type -> api.review.service.v1.CancelTicketResponse
-	11, // 38: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	11, // 39: api.review.service.v1.Review.ListOperatorTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	13, // 40: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
-	15, // 41: api.review.service.v1.Review.GetOperatorTicket:output_type -> api.review.service.v1.GetOperatorTicketResponse
-	33, // [33:42] is the sub-list for method output_type
-	24, // [24:33] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	27, // 4: api.review.service.v1.ListTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	28, // 5: api.review.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	28, // 6: api.review.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	26, // 7: api.review.service.v1.ListOperatorTicketsRequest.operator_context:type_name -> api.common.OperatorContext
+	27, // 8: api.review.service.v1.ListOperatorTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	28, // 9: api.review.service.v1.ListOperatorTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	28, // 10: api.review.service.v1.ListOperatorTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	16, // 11: api.review.service.v1.ListTicketsResponse.tickets:type_name -> api.review.service.v1.ListTicketsResponse.Ticket
+	26, // 12: api.review.service.v1.GetTicketRequest.operator_context:type_name -> api.common.OperatorContext
+	17, // 13: api.review.service.v1.GetTicketResponse.ticket:type_name -> api.review.service.v1.GetTicketResponse.Ticket
+	18, // 14: api.review.service.v1.GetTicketResponse.comments:type_name -> api.review.service.v1.GetTicketResponse.Comment
+	26, // 15: api.review.service.v1.GetOperatorTicketRequest.operator_context:type_name -> api.common.OperatorContext
+	19, // 16: api.review.service.v1.GetOperatorTicketResponse.ticket:type_name -> api.review.service.v1.GetOperatorTicketResponse.Ticket
+	20, // 17: api.review.service.v1.GetOperatorTicketResponse.comments:type_name -> api.review.service.v1.GetOperatorTicketResponse.Comment
+	21, // 18: api.review.service.v1.GetOperatorTicketResponse.payment_withdraw_transaction_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.PaymentWithdrawTransactionInfo
+	22, // 19: api.review.service.v1.GetOperatorTicketResponse.wallet_balance_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletBalanceInfo
+	23, // 20: api.review.service.v1.GetOperatorTicketResponse.wallet_transaction_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletTransactionInfo
+	24, // 21: api.review.service.v1.GetOperatorTicketResponse.wallet_transaction_summary:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletTransactionSummary
+	28, // 22: api.review.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	28, // 23: api.review.service.v1.GetOperatorTicketResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	28, // 24: api.review.service.v1.GetOperatorTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	28, // 25: api.review.service.v1.GetOperatorTicketResponse.PaymentWithdrawTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 26: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
+	1,  // 27: api.review.service.v1.Review.CreateOperatorWithdraw:input_type -> api.review.service.v1.CreateOperatorWithdrawRequest
+	3,  // 28: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
+	5,  // 29: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
+	7,  // 30: api.review.service.v1.Review.CancelTicket:input_type -> api.review.service.v1.CancelTicketRequest
+	9,  // 31: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
+	10, // 32: api.review.service.v1.Review.ListOperatorTickets:input_type -> api.review.service.v1.ListOperatorTicketsRequest
+	12, // 33: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
+	14, // 34: api.review.service.v1.Review.GetOperatorTicket:input_type -> api.review.service.v1.GetOperatorTicketRequest
+	2,  // 35: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	2,  // 36: api.review.service.v1.Review.CreateOperatorWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	4,  // 37: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
+	6,  // 38: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
+	8,  // 39: api.review.service.v1.Review.CancelTicket:output_type -> api.review.service.v1.CancelTicketResponse
+	11, // 40: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	11, // 41: api.review.service.v1.Review.ListOperatorTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	13, // 42: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
+	15, // 43: api.review.service.v1.Review.GetOperatorTicket:output_type -> api.review.service.v1.GetOperatorTicketResponse
+	35, // [35:44] is the sub-list for method output_type
+	26, // [26:35] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_review_service_v1_review_proto_init() }
