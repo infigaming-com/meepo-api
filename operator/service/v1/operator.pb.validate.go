@@ -2690,14 +2690,6 @@ func (m *ListInvoicesRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.RetailerId != nil {
-		// no validation rules for RetailerId
-	}
-
-	if m.CompanyId != nil {
-		// no validation rules for CompanyId
-	}
-
 	if m.Month != nil {
 		// no validation rules for Month
 	}
@@ -3205,18 +3197,6 @@ func (m *ListOperatorRevenueShareRequest) validate(all bool) error {
 		// no validation rules for InvoiceId
 	}
 
-	if m.RetailerId != nil {
-		// no validation rules for RetailerId
-	}
-
-	if m.CompanyId != nil {
-		// no validation rules for CompanyId
-	}
-
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
-	}
-
 	if m.Page != nil {
 		// no validation rules for Page
 	}
@@ -3481,18 +3461,6 @@ func (m *ListThirdPartyFeesRequest) validate(all bool) error {
 		// no validation rules for InvoiceId
 	}
 
-	if m.RetailerId != nil {
-		// no validation rules for RetailerId
-	}
-
-	if m.CompanyId != nil {
-		// no validation rules for CompanyId
-	}
-
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
-	}
-
 	if m.Page != nil {
 		// no validation rules for Page
 	}
@@ -3749,18 +3717,6 @@ func (m *ListMonthlyRevenueShareRequest) validate(all bool) error {
 
 	if m.InvoiceId != nil {
 		// no validation rules for InvoiceId
-	}
-
-	if m.RetailerId != nil {
-		// no validation rules for RetailerId
-	}
-
-	if m.CompanyId != nil {
-		// no validation rules for CompanyId
-	}
-
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
 	}
 
 	if m.Page != nil {
@@ -4946,14 +4902,6 @@ func (m *ListAdjustmentsRequest) validate(all bool) error {
 
 	if m.InvoiceId != nil {
 		// no validation rules for InvoiceId
-	}
-
-	if m.RetailerId != nil {
-		// no validation rules for RetailerId
-	}
-
-	if m.CompanyId != nil {
-		// no validation rules for CompanyId
 	}
 
 	if m.OperatorId != nil {

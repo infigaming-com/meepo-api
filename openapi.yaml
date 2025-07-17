@@ -5621,14 +5621,20 @@ components:
                 invoiceId:
                     type: string
                     description: Filter by invoice ID
-                retailerId:
-                    type: string
+                retailerIds:
+                    type: array
+                    items:
+                        type: string
                     description: Filter by retailer
-                companyId:
-                    type: string
+                companyIds:
+                    type: array
+                    items:
+                        type: string
                     description: Filter by company
-                operatorId:
-                    type: string
+                operatorIds:
+                    type: array
+                    items:
+                        type: string
                     description: Filter by operator
                 page:
                     type: integer
@@ -6210,10 +6216,14 @@ components:
             type: object
             properties:
                 retailerId:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: Filter by retailer
                 companyId:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: Filter by company
                 month:
                     type: string
@@ -6305,13 +6315,19 @@ components:
                     type: string
                     description: Filter by invoice ID
                 retailerId:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: Filter by retailer
                 companyId:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: Filter by company
                 operatorId:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: Filter by operator
                 page:
                     type: integer
@@ -6501,13 +6517,19 @@ components:
                     type: string
                     description: Filter by invoice ID
                 retailerId:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: Filter by retailer
                 companyId:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: Filter by company
                 operatorId:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: Filter by operator
                 page:
                     type: integer
@@ -7149,13 +7171,19 @@ components:
                     type: string
                     description: Filter by invoice ID
                 retailerId:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: Filter by retailer
                 companyId:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: Filter by company
                 operatorId:
-                    type: string
+                    type: array
+                    items:
+                        type: string
                     description: Filter by operator
                 page:
                     type: integer

@@ -1255,9 +1255,9 @@ func (x *ListOperatorsResponse) GetOperators() []*ListOperatorsResponse_Operator
 type ListInvoicesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Filter by retailer
-	RetailerId *int64 `protobuf:"varint,1,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	RetailerId []int64 `protobuf:"varint,1,rep,packed,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
 	// Filter by company
-	CompanyId *int64 `protobuf:"varint,2,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	CompanyId []int64 `protobuf:"varint,2,rep,packed,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
 	// Filter by month (format: YYYY-MM)
 	Month *string `protobuf:"bytes,3,opt,name=month,proto3,oneof" json:"month,omitempty"`
 	// Search by invoice id
@@ -1300,18 +1300,18 @@ func (*ListInvoicesRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *ListInvoicesRequest) GetRetailerId() int64 {
-	if x != nil && x.RetailerId != nil {
-		return *x.RetailerId
+func (x *ListInvoicesRequest) GetRetailerId() []int64 {
+	if x != nil {
+		return x.RetailerId
 	}
-	return 0
+	return nil
 }
 
-func (x *ListInvoicesRequest) GetCompanyId() int64 {
-	if x != nil && x.CompanyId != nil {
-		return *x.CompanyId
+func (x *ListInvoicesRequest) GetCompanyId() []int64 {
+	if x != nil {
+		return x.CompanyId
 	}
-	return 0
+	return nil
 }
 
 func (x *ListInvoicesRequest) GetMonth() string {
@@ -1526,11 +1526,11 @@ type ListOperatorRevenueShareRequest struct {
 	// Filter by invoice ID
 	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	// Filter by retailer
-	RetailerId *int64 `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	RetailerId []int64 `protobuf:"varint,2,rep,packed,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
 	// Filter by company
-	CompanyId *int64 `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	CompanyId []int64 `protobuf:"varint,3,rep,packed,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
 	// Filter by operator
-	OperatorId *int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	OperatorId []int64 `protobuf:"varint,4,rep,packed,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// Pagination
 	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -1575,25 +1575,25 @@ func (x *ListOperatorRevenueShareRequest) GetInvoiceId() int64 {
 	return 0
 }
 
-func (x *ListOperatorRevenueShareRequest) GetRetailerId() int64 {
-	if x != nil && x.RetailerId != nil {
-		return *x.RetailerId
+func (x *ListOperatorRevenueShareRequest) GetRetailerId() []int64 {
+	if x != nil {
+		return x.RetailerId
 	}
-	return 0
+	return nil
 }
 
-func (x *ListOperatorRevenueShareRequest) GetCompanyId() int64 {
-	if x != nil && x.CompanyId != nil {
-		return *x.CompanyId
+func (x *ListOperatorRevenueShareRequest) GetCompanyId() []int64 {
+	if x != nil {
+		return x.CompanyId
 	}
-	return 0
+	return nil
 }
 
-func (x *ListOperatorRevenueShareRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
+func (x *ListOperatorRevenueShareRequest) GetOperatorId() []int64 {
+	if x != nil {
+		return x.OperatorId
 	}
-	return 0
+	return nil
 }
 
 func (x *ListOperatorRevenueShareRequest) GetPage() int32 {
@@ -1701,11 +1701,11 @@ type ListThirdPartyFeesRequest struct {
 	// Filter by invoice ID
 	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	// Filter by retailer
-	RetailerId *int64 `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	RetailerId []int64 `protobuf:"varint,2,rep,packed,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
 	// Filter by company
-	CompanyId *int64 `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	CompanyId []int64 `protobuf:"varint,3,rep,packed,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
 	// Filter by operator
-	OperatorId *int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	OperatorId []int64 `protobuf:"varint,4,rep,packed,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// Pagination
 	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -1750,25 +1750,25 @@ func (x *ListThirdPartyFeesRequest) GetInvoiceId() int64 {
 	return 0
 }
 
-func (x *ListThirdPartyFeesRequest) GetRetailerId() int64 {
-	if x != nil && x.RetailerId != nil {
-		return *x.RetailerId
+func (x *ListThirdPartyFeesRequest) GetRetailerId() []int64 {
+	if x != nil {
+		return x.RetailerId
 	}
-	return 0
+	return nil
 }
 
-func (x *ListThirdPartyFeesRequest) GetCompanyId() int64 {
-	if x != nil && x.CompanyId != nil {
-		return *x.CompanyId
+func (x *ListThirdPartyFeesRequest) GetCompanyId() []int64 {
+	if x != nil {
+		return x.CompanyId
 	}
-	return 0
+	return nil
 }
 
-func (x *ListThirdPartyFeesRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
+func (x *ListThirdPartyFeesRequest) GetOperatorId() []int64 {
+	if x != nil {
+		return x.OperatorId
 	}
-	return 0
+	return nil
 }
 
 func (x *ListThirdPartyFeesRequest) GetPage() int32 {
@@ -1868,11 +1868,11 @@ type ListMonthlyRevenueShareRequest struct {
 	// Filter by invoice ID
 	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	// Filter by retailer
-	RetailerId *int64 `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	RetailerId []int64 `protobuf:"varint,2,rep,packed,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
 	// Filter by company
-	CompanyId *int64 `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	CompanyId []int64 `protobuf:"varint,3,rep,packed,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
 	// Filter by operator
-	OperatorId *int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	OperatorId []int64 `protobuf:"varint,4,rep,packed,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// Pagination
 	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
@@ -1917,25 +1917,25 @@ func (x *ListMonthlyRevenueShareRequest) GetInvoiceId() int64 {
 	return 0
 }
 
-func (x *ListMonthlyRevenueShareRequest) GetRetailerId() int64 {
-	if x != nil && x.RetailerId != nil {
-		return *x.RetailerId
+func (x *ListMonthlyRevenueShareRequest) GetRetailerId() []int64 {
+	if x != nil {
+		return x.RetailerId
 	}
-	return 0
+	return nil
 }
 
-func (x *ListMonthlyRevenueShareRequest) GetCompanyId() int64 {
-	if x != nil && x.CompanyId != nil {
-		return *x.CompanyId
+func (x *ListMonthlyRevenueShareRequest) GetCompanyId() []int64 {
+	if x != nil {
+		return x.CompanyId
 	}
-	return 0
+	return nil
 }
 
-func (x *ListMonthlyRevenueShareRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
+func (x *ListMonthlyRevenueShareRequest) GetOperatorId() []int64 {
+	if x != nil {
+		return x.OperatorId
 	}
-	return 0
+	return nil
 }
 
 func (x *ListMonthlyRevenueShareRequest) GetPage() int32 {
@@ -2478,9 +2478,9 @@ type ListAdjustmentsRequest struct {
 	// Filter by invoice ID
 	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	// Filter by retailer
-	RetailerId *int64 `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
+	RetailerId []int64 `protobuf:"varint,2,rep,packed,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
 	// Filter by company
-	CompanyId *int64 `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	CompanyId []int64 `protobuf:"varint,3,rep,packed,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
 	// Filter by operator
 	OperatorId *int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
 	// Pagination
@@ -2527,18 +2527,18 @@ func (x *ListAdjustmentsRequest) GetInvoiceId() int64 {
 	return 0
 }
 
-func (x *ListAdjustmentsRequest) GetRetailerId() int64 {
-	if x != nil && x.RetailerId != nil {
-		return *x.RetailerId
+func (x *ListAdjustmentsRequest) GetRetailerId() []int64 {
+	if x != nil {
+		return x.RetailerId
 	}
-	return 0
+	return nil
 }
 
-func (x *ListAdjustmentsRequest) GetCompanyId() int64 {
-	if x != nil && x.CompanyId != nil {
-		return *x.CompanyId
+func (x *ListAdjustmentsRequest) GetCompanyId() []int64 {
+	if x != nil {
+		return x.CompanyId
 	}
-	return 0
+	return nil
 }
 
 func (x *ListAdjustmentsRequest) GetOperatorId() int64 {
@@ -4466,23 +4466,21 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
-	"\aenabled\x18\x03 \x01(\bR\aenabled\"\xea\x03\n" +
-	"\x13ListInvoicesRequest\x12$\n" +
-	"\vretailer_id\x18\x01 \x01(\x03H\x00R\n" +
-	"retailerId\x88\x01\x01\x12\"\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled\"\xc1\x03\n" +
+	"\x13ListInvoicesRequest\x12\x1f\n" +
+	"\vretailer_id\x18\x01 \x03(\x03R\n" +
+	"retailerId\x12\x1d\n" +
 	"\n" +
-	"company_id\x18\x02 \x01(\x03H\x01R\tcompanyId\x88\x01\x01\x12\x19\n" +
-	"\x05month\x18\x03 \x01(\tH\x02R\x05month\x88\x01\x01\x12\"\n" +
+	"company_id\x18\x02 \x03(\x03R\tcompanyId\x12\x19\n" +
+	"\x05month\x18\x03 \x01(\tH\x00R\x05month\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"invoice_id\x18\x04 \x01(\x03H\x03R\tinvoiceId\x88\x01\x01\x12f\n" +
-	"\x0epayment_status\x18\x05 \x01(\x0e2:.api.operator.service.v1.ListInvoicesRequest.PaymentStatusH\x04R\rpaymentStatus\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x06 \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\a \x01(\x05H\x06R\bpageSize\x88\x01\x01\"E\n" +
+	"invoice_id\x18\x04 \x01(\x03H\x01R\tinvoiceId\x88\x01\x01\x12f\n" +
+	"\x0epayment_status\x18\x05 \x01(\x0e2:.api.operator.service.v1.ListInvoicesRequest.PaymentStatusH\x02R\rpaymentStatus\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x06 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\a \x01(\x05H\x04R\bpageSize\x88\x01\x01\"E\n" +
 	"\rPaymentStatus\x12\x17\n" +
 	"\x13PAYMENT_STATUS_PAID\x10\x00\x12\x1b\n" +
-	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01B\x0e\n" +
-	"\f_retailer_idB\r\n" +
-	"\v_company_idB\b\n" +
+	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01B\b\n" +
 	"\x06_monthB\r\n" +
 	"\v_invoice_idB\x11\n" +
 	"\x0f_payment_statusB\a\n" +
@@ -4556,22 +4554,19 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\roperator_name\x18\x14 \x01(\tR\foperatorName\"E\n" +
 	"\rPaymentStatus\x12\x17\n" +
 	"\x13PAYMENT_STATUS_PAID\x10\x00\x12\x1b\n" +
-	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01\"\xc5\x02\n" +
+	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01\"\x87\x02\n" +
 	"\x1fListOperatorRevenueShareRequest\x12\"\n" +
 	"\n" +
-	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x02 \x01(\x03H\x01R\n" +
-	"retailerId\x88\x01\x01\x12\"\n" +
+	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12\x1f\n" +
+	"\vretailer_id\x18\x02 \x03(\x03R\n" +
+	"retailerId\x12\x1d\n" +
 	"\n" +
-	"company_id\x18\x03 \x01(\x03H\x02R\tcompanyId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x04 \x01(\x03H\x03R\n" +
-	"operatorId\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
-	"\v_invoice_idB\x0e\n" +
-	"\f_retailer_idB\r\n" +
-	"\v_company_idB\x0e\n" +
-	"\f_operator_idB\a\n" +
+	"company_id\x18\x03 \x03(\x03R\tcompanyId\x12\x1f\n" +
+	"\voperator_id\x18\x04 \x03(\x03R\n" +
+	"operatorId\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x02R\bpageSize\x88\x01\x01B\r\n" +
+	"\v_invoice_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xe6\x05\n" +
@@ -4603,22 +4598,19 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x06amount\x18\r \x01(\tR\x06amount\x12\x17\n" +
 	"\afx_rate\x18\x0e \x01(\tR\x06fxRate\x12\x1d\n" +
 	"\n" +
-	"amount_usd\x18\x0f \x01(\tR\tamountUsd\"\xbf\x02\n" +
+	"amount_usd\x18\x0f \x01(\tR\tamountUsd\"\x81\x02\n" +
 	"\x19ListThirdPartyFeesRequest\x12\"\n" +
 	"\n" +
-	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x02 \x01(\x03H\x01R\n" +
-	"retailerId\x88\x01\x01\x12\"\n" +
+	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12\x1f\n" +
+	"\vretailer_id\x18\x02 \x03(\x03R\n" +
+	"retailerId\x12\x1d\n" +
 	"\n" +
-	"company_id\x18\x03 \x01(\x03H\x02R\tcompanyId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x04 \x01(\x03H\x03R\n" +
-	"operatorId\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
-	"\v_invoice_idB\x0e\n" +
-	"\f_retailer_idB\r\n" +
-	"\v_company_idB\x0e\n" +
-	"\f_operator_idB\a\n" +
+	"company_id\x18\x03 \x03(\x03R\tcompanyId\x12\x1f\n" +
+	"\voperator_id\x18\x04 \x03(\x03R\n" +
+	"operatorId\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x02R\bpageSize\x88\x01\x01B\r\n" +
+	"\v_invoice_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xb3\x03\n" +
@@ -4636,22 +4628,19 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\aservice\x18\x03 \x01(\tR\aservice\x12\x1a\n" +
 	"\bquantity\x18\x04 \x01(\tR\bquantity\x12\x16\n" +
 	"\x06amount\x18\x05 \x01(\tR\x06amount\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\"\xc4\x02\n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\"\x86\x02\n" +
 	"\x1eListMonthlyRevenueShareRequest\x12\"\n" +
 	"\n" +
-	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x02 \x01(\x03H\x01R\n" +
-	"retailerId\x88\x01\x01\x12\"\n" +
+	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12\x1f\n" +
+	"\vretailer_id\x18\x02 \x03(\x03R\n" +
+	"retailerId\x12\x1d\n" +
 	"\n" +
-	"company_id\x18\x03 \x01(\x03H\x02R\tcompanyId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x04 \x01(\x03H\x03R\n" +
-	"operatorId\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
-	"\v_invoice_idB\x0e\n" +
-	"\f_retailer_idB\r\n" +
-	"\v_company_idB\x0e\n" +
-	"\f_operator_idB\a\n" +
+	"company_id\x18\x03 \x03(\x03R\tcompanyId\x12\x1f\n" +
+	"\voperator_id\x18\x04 \x03(\x03R\n" +
+	"operatorId\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x02R\bpageSize\x88\x01\x01B\r\n" +
+	"\v_invoice_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xec\a\n" +
@@ -4724,21 +4713,19 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x1eUpdateAdjustmentConfigResponse\"/\n" +
 	"\x1dDeleteAdjustmentConfigRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\" \n" +
-	"\x1eDeleteAdjustmentConfigResponse\"\xbc\x02\n" +
+	"\x1eDeleteAdjustmentConfigResponse\"\x93\x02\n" +
 	"\x16ListAdjustmentsRequest\x12\"\n" +
 	"\n" +
-	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x02 \x01(\x03H\x01R\n" +
-	"retailerId\x88\x01\x01\x12\"\n" +
+	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12\x1f\n" +
+	"\vretailer_id\x18\x02 \x03(\x03R\n" +
+	"retailerId\x12\x1d\n" +
 	"\n" +
-	"company_id\x18\x03 \x01(\x03H\x02R\tcompanyId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x04 \x01(\x03H\x03R\n" +
+	"company_id\x18\x03 \x03(\x03R\tcompanyId\x12$\n" +
+	"\voperator_id\x18\x04 \x01(\x03H\x01R\n" +
 	"operatorId\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
+	"\x04page\x18\x05 \x01(\x05H\x02R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x03R\bpageSize\x88\x01\x01B\r\n" +
 	"\v_invoice_idB\x0e\n" +
-	"\f_retailer_idB\r\n" +
-	"\v_company_idB\x0e\n" +
 	"\f_operator_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +

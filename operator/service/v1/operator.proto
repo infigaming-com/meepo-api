@@ -219,10 +219,10 @@ message ListOperatorsResponse {
 
 message ListInvoicesRequest {
 	// Filter by retailer
-	optional int64 retailer_id = 1;
+	repeated int64 retailer_id = 1;
 	
 	// Filter by company
-	optional int64 company_id = 2;
+	repeated int64 company_id = 2;
 	
 	// Filter by month (format: YYYY-MM)
 	optional string month = 3;
@@ -343,13 +343,13 @@ message ListOperatorRevenueShareRequest {
 	optional int64 invoice_id = 1;
 	
 	// Filter by retailer
-	optional int64 retailer_id = 2;
+	repeated int64 retailer_id = 2;
 	
 	// Filter by company
-	optional int64 company_id = 3;
+	repeated int64 company_id = 3;
 	
 	// Filter by operator
-	optional int64 operator_id = 4;
+	repeated int64 operator_id = 4;
 	
 	// Pagination
 	optional int32 page = 5;
@@ -397,13 +397,13 @@ message ListThirdPartyFeesRequest {
 	optional int64 invoice_id = 1;
 	
 	// Filter by retailer
-	optional int64 retailer_id = 2;
+	repeated int64 retailer_id = 2;
 	
 	// Filter by company
-	optional int64 company_id = 3;
+	repeated int64 company_id = 3;
 	
 	// Filter by operator
-	optional int64 operator_id = 4;
+	repeated int64 operator_id = 4;
 	
 	// Pagination
 	optional int32 page = 5;
@@ -439,13 +439,13 @@ message ListMonthlyRevenueShareRequest {
 	optional int64 invoice_id = 1;
 	
 	// Filter by retailer
-	optional int64 retailer_id = 2;
+	repeated int64 retailer_id = 2;
 	
 	// Filter by company
-	optional int64 company_id = 3;
+	repeated int64 company_id = 3;
 	
 	// Filter by operator
-	optional int64 operator_id = 4;
+	repeated int64 operator_id = 4;
 	
 	// Pagination
 	optional int32 page = 5;
@@ -554,10 +554,10 @@ message ListAdjustmentsRequest {
 	optional int64 invoice_id = 1;
 	
 	// Filter by retailer
-	optional int64 retailer_id = 2;
+	repeated int64 retailer_id = 2;
 	
 	// Filter by company
-	optional int64 company_id = 3;
+	repeated int64 company_id = 3;
 	
 	// Filter by operator
 	optional int64 operator_id = 4;
