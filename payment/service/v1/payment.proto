@@ -105,8 +105,9 @@ message CreatePaymentMethodRequest {
   string psp_min_amount = 11;
   // PSP Max Amount
   string psp_max_amount = 12;
+  string mininal_fee = 13;
   // JSON schema defining the required fields for this payment method
-  google.protobuf.Struct key = 13;
+  // google.protobuf.Struct key = 14;
 }
 
 message CreatePaymentMethodResponse {
@@ -186,7 +187,7 @@ message PaymentChannelInfo {
   // Unique identifier for the channel
   string channel_id = 1;
   // Type of the channel (e.g., online, offline)
-  string type = 2;
+  string support_type = 2;
   // Currency type (e.g., Crypto, Fiat)
   string currency_type = 3;
   // Services Prvider
@@ -224,7 +225,7 @@ message PaymentChannelInfo {
   // Rate Fee 
   string fee_rate = 20;
   // Minimum Fee 
-  string min_fee = 21;
+  string mininal_fee = 21;
   // Estimated arrival time in minutes
   int32 eat = 22;
   // JSON schema defining deposit form fields required by this channel
