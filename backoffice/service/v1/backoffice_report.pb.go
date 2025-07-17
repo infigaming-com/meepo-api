@@ -1311,7 +1311,7 @@ type GetDepositSummariesRequest struct {
 	state                    protoimpl.MessageState    `protogen:"open.v1"`
 	TimeRange                *TimeRange                `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	RetailerOperatorContexts []*common.OperatorContext `protobuf:"bytes,2,rep,name=retailer_operator_contexts,json=retailerOperatorContexts,proto3" json:"retailer_operator_contexts,omitempty"`
-	GroupOperatorContexts    []*common.OperatorContext `protobuf:"bytes,3,rep,name=group_operator_contexts,json=groupOperatorContexts,proto3" json:"group_operator_contexts,omitempty"`
+	CompanyOperatorContexts  []*common.OperatorContext `protobuf:"bytes,3,rep,name=company_operator_contexts,json=companyOperatorContexts,proto3" json:"company_operator_contexts,omitempty"`
 	OperatorContexts         []*common.OperatorContext `protobuf:"bytes,4,rep,name=operator_contexts,json=operatorContexts,proto3" json:"operator_contexts,omitempty"`
 	Currencies               []string                  `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	unknownFields            protoimpl.UnknownFields
@@ -1362,9 +1362,9 @@ func (x *GetDepositSummariesRequest) GetRetailerOperatorContexts() []*common.Ope
 	return nil
 }
 
-func (x *GetDepositSummariesRequest) GetGroupOperatorContexts() []*common.OperatorContext {
+func (x *GetDepositSummariesRequest) GetCompanyOperatorContexts() []*common.OperatorContext {
 	if x != nil {
-		return x.GroupOperatorContexts
+		return x.CompanyOperatorContexts
 	}
 	return nil
 }
@@ -1431,7 +1431,7 @@ type ListDepositDetailsRequest struct {
 	state                    protoimpl.MessageState    `protogen:"open.v1"`
 	TimeRange                *TimeRange                `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	RetailerOperatorContexts []*common.OperatorContext `protobuf:"bytes,2,rep,name=retailer_operator_contexts,json=retailerOperatorContexts,proto3" json:"retailer_operator_contexts,omitempty"`
-	GroupOperatorContexts    []*common.OperatorContext `protobuf:"bytes,3,rep,name=group_operator_contexts,json=groupOperatorContexts,proto3" json:"group_operator_contexts,omitempty"`
+	CompanyOperatorContexts  []*common.OperatorContext `protobuf:"bytes,3,rep,name=company_operator_contexts,json=companyOperatorContexts,proto3" json:"company_operator_contexts,omitempty"`
 	OperatorContexts         []*common.OperatorContext `protobuf:"bytes,4,rep,name=operator_contexts,json=operatorContexts,proto3" json:"operator_contexts,omitempty"`
 	Currencies               []string                  `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	Page                     int32                     `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
@@ -1484,9 +1484,9 @@ func (x *ListDepositDetailsRequest) GetRetailerOperatorContexts() []*common.Oper
 	return nil
 }
 
-func (x *ListDepositDetailsRequest) GetGroupOperatorContexts() []*common.OperatorContext {
+func (x *ListDepositDetailsRequest) GetCompanyOperatorContexts() []*common.OperatorContext {
 	if x != nil {
-		return x.GroupOperatorContexts
+		return x.CompanyOperatorContexts
 	}
 	return nil
 }
@@ -4707,12 +4707,12 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x0ertp_percentage\x18\x0e \x01(\tR\rrtpPercentage\x12\x1b\n" +
 	"\tbet_count\x18\x0f \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x10 \x01(\tR\x10averageBetAmount\x12/\n" +
-	"\x13settlement_currency\x18\x11 \x01(\tR\x12settlementCurrency\"\xfb\x02\n" +
+	"\x13settlement_currency\x18\x11 \x01(\tR\x12settlementCurrency\"\xff\x02\n" +
 	"\x1aGetDepositSummariesRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12Y\n" +
-	"\x1aretailer_operator_contexts\x18\x02 \x03(\v2\x1b.api.common.OperatorContextR\x18retailerOperatorContexts\x12S\n" +
-	"\x17group_operator_contexts\x18\x03 \x03(\v2\x1b.api.common.OperatorContextR\x15groupOperatorContexts\x12H\n" +
+	"\x1aretailer_operator_contexts\x18\x02 \x03(\v2\x1b.api.common.OperatorContextR\x18retailerOperatorContexts\x12W\n" +
+	"\x19company_operator_contexts\x18\x03 \x03(\v2\x1b.api.common.OperatorContextR\x17companyOperatorContexts\x12H\n" +
 	"\x11operator_contexts\x18\x04 \x03(\v2\x1b.api.common.OperatorContextR\x10operatorContexts\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
@@ -4723,12 +4723,12 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x120\n" +
 	"\x14deposit_success_rate\x18\x03 \x01(\tR\x12depositSuccessRate\x12%\n" +
-	"\x0edeposit_amount\x18\x04 \x01(\tR\rdepositAmount\"\xab\x03\n" +
+	"\x0edeposit_amount\x18\x04 \x01(\tR\rdepositAmount\"\xaf\x03\n" +
 	"\x19ListDepositDetailsRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12Y\n" +
-	"\x1aretailer_operator_contexts\x18\x02 \x03(\v2\x1b.api.common.OperatorContextR\x18retailerOperatorContexts\x12S\n" +
-	"\x17group_operator_contexts\x18\x03 \x03(\v2\x1b.api.common.OperatorContextR\x15groupOperatorContexts\x12H\n" +
+	"\x1aretailer_operator_contexts\x18\x02 \x03(\v2\x1b.api.common.OperatorContextR\x18retailerOperatorContexts\x12W\n" +
+	"\x19company_operator_contexts\x18\x03 \x03(\v2\x1b.api.common.OperatorContextR\x17companyOperatorContexts\x12H\n" +
 	"\x11operator_contexts\x18\x04 \x03(\v2\x1b.api.common.OperatorContextR\x10operatorContexts\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
@@ -5061,12 +5061,12 @@ var file_backoffice_service_v1_backoffice_report_proto_depIdxs = []int32{
 	29, // 8: api.backoffice.service.v1.GetPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.GetPlayerGameDataResponse.List
 	0,  // 9: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
 	37, // 10: api.backoffice.service.v1.GetDepositSummariesRequest.retailer_operator_contexts:type_name -> api.common.OperatorContext
-	37, // 11: api.backoffice.service.v1.GetDepositSummariesRequest.group_operator_contexts:type_name -> api.common.OperatorContext
+	37, // 11: api.backoffice.service.v1.GetDepositSummariesRequest.company_operator_contexts:type_name -> api.common.OperatorContext
 	37, // 12: api.backoffice.service.v1.GetDepositSummariesRequest.operator_contexts:type_name -> api.common.OperatorContext
 	30, // 13: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
 	0,  // 14: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
 	37, // 15: api.backoffice.service.v1.ListDepositDetailsRequest.retailer_operator_contexts:type_name -> api.common.OperatorContext
-	37, // 16: api.backoffice.service.v1.ListDepositDetailsRequest.group_operator_contexts:type_name -> api.common.OperatorContext
+	37, // 16: api.backoffice.service.v1.ListDepositDetailsRequest.company_operator_contexts:type_name -> api.common.OperatorContext
 	37, // 17: api.backoffice.service.v1.ListDepositDetailsRequest.operator_contexts:type_name -> api.common.OperatorContext
 	31, // 18: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
 	0,  // 19: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange

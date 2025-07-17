@@ -3953,7 +3953,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.common.OperatorContext'
-                groupOperatorContexts:
+                companyOperatorContexts:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.common.OperatorContext'
@@ -6067,7 +6067,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.common.OperatorContext'
-                groupOperatorContexts:
+                companyOperatorContexts:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.common.OperatorContext'
@@ -6744,14 +6744,22 @@ components:
             properties:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
-                operatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                systemOperatorId:
-                    type: string
+                operatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                companyOperatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                retailerOperatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                systemOperatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
                 ticketId:
                     type: string
                 currency:
@@ -7396,14 +7404,22 @@ components:
                     type: string
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
-                operatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                systemOperatorId:
-                    type: string
+                operatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                companyOperatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                retailerOperatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                systemOperatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
                 ticketId:
                     type: string
                 currency:
