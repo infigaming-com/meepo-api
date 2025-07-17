@@ -8552,6 +8552,10 @@ func (m *OperatorBalanceTransaction) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
+	// no validation rules for ExternalTransactionId
+
+	// no validation rules for RelatedTransactionId
+
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -8580,6 +8584,8 @@ func (m *OperatorBalanceTransaction) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for SystemOperatorName
 
 	// no validation rules for RetailerOperatorName
 
@@ -8618,6 +8624,10 @@ func (m *OperatorBalanceTransaction) validate(all bool) error {
 	// no validation rules for Memo
 
 	// no validation rules for FeeAmount
+
+	// no validation rules for FeeAmountUsd
+
+	// no validation rules for FeeAmountReportingCurrency
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
