@@ -6744,18 +6744,8 @@ components:
             properties:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
-                operatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
-                companyOperatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
-                retailerOperatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 ticketId:
                     type: string
                 currency:
@@ -7400,18 +7390,8 @@ components:
                     type: string
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
-                operatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
-                companyOperatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
-                retailerOperatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 ticketId:
                     type: string
                 currency:
@@ -8672,6 +8652,21 @@ components:
                     type: string
                 operatorType:
                     type: string
+        api.common.OperatorContextFilters:
+            type: object
+            properties:
+                operatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                companyOperatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                retailerOperatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
         api.game.service.v1.Action:
             type: object
             properties:
