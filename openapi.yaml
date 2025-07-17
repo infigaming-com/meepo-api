@@ -3949,18 +3949,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
-                companyOperatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
-                operatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 currencies:
                     type: array
                     items:
@@ -6063,18 +6053,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
-                companyOperatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
-                operatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 currencies:
                     type: array
                     items:
@@ -6108,11 +6088,19 @@ components:
                     type: string
                 operatorName:
                     type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
                 currency:
                     type: string
                 depositAmount:
                     type: string
                 depositAmountUsd:
+                    type: string
+                depositAmountReportingCurrency:
                     type: string
                 depositUsers:
                     type: integer
@@ -6121,6 +6109,8 @@ components:
                     type: string
                 ftdAmountUsd:
                     type: string
+                ftdAmountReportingCurrency:
+                    type: string
                 ftdUsers:
                     type: integer
                     format: int32
@@ -6128,12 +6118,16 @@ components:
                     type: string
                 sameDayFtdAmountUsd:
                     type: string
+                sameDayFtdAmountReportingCurrency:
+                    type: string
                 sameDayFtdUsers:
                     type: integer
                     format: int32
                 repeatedDepositAmount:
                     type: string
                 repeatedDepositAmountUsd:
+                    type: string
+                repeatedDepositAmountReportingCurrency:
                     type: string
                 repeatedDepositUsers:
                     type: integer
@@ -6148,9 +6142,13 @@ components:
                     type: string
                 averageFtdAmountUsdForSameDayRegistredUsers:
                     type: string
+                averageFtdAmountReportingCurrencyForSameDayRegistredUsers:
+                    type: string
                 averageFtdAmountForNonSameDayRegistredUsers:
                     type: string
                 averageFtdAmountUsdForNonSameDayRegistredUsers:
+                    type: string
+                averageFtdAmountReportingCurrencyForNonSameDayRegistredUsers:
                     type: string
                 successRate:
                     type: string
@@ -6562,18 +6560,8 @@ components:
         api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest:
             type: object
             properties:
-                retailerOperatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
-                companyOperatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
-                operatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 settlementCurrencies:
                     type: array
                     items:
@@ -6617,18 +6605,8 @@ components:
         api.backoffice.service.v1.ListOperatorBalancesRequest:
             type: object
             properties:
-                retailerOperatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
-                companyOperatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
-                operatorContexts:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 currencies:
                     type: array
                     items:
@@ -8672,6 +8650,21 @@ components:
                     type: string
                 operatorType:
                     type: string
+        api.common.OperatorContextFilters:
+            type: object
+            properties:
+                operatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                companyOperatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                retailerOperatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
         api.game.service.v1.Action:
             type: object
             properties:

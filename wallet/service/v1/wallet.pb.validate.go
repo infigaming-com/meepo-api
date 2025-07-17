@@ -6306,106 +6306,33 @@ func (m *ListOperatorBalancesRequest) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetRetailerOperatorContexts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListOperatorBalancesRequestValidationError{
-						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListOperatorBalancesRequestValidationError{
-						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListOperatorBalancesRequestValidationError{
-					field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOperatorBalancesRequestValidationError{
+					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
 			}
-		}
-
-	}
-
-	for idx, item := range m.GetCompanyOperatorContexts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListOperatorBalancesRequestValidationError{
-						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListOperatorBalancesRequestValidationError{
-						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				return ListOperatorBalancesRequestValidationError{
-					field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+				errors = append(errors, ListOperatorBalancesRequestValidationError{
+					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
 			}
 		}
-
-	}
-
-	for idx, item := range m.GetOperatorContexts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListOperatorBalancesRequestValidationError{
-						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListOperatorBalancesRequestValidationError{
-						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListOperatorBalancesRequestValidationError{
-					field:  fmt.Sprintf("OperatorContexts[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOperatorBalancesRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
 			}
 		}
-
 	}
 
 	if all {
@@ -8439,106 +8366,33 @@ func (m *ListOperatorBalanceTransactionsRequest) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetRetailerOperatorContexts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListOperatorBalanceTransactionsRequestValidationError{
-						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListOperatorBalanceTransactionsRequestValidationError{
-						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListOperatorBalanceTransactionsRequestValidationError{
-					field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOperatorBalanceTransactionsRequestValidationError{
+					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
 			}
-		}
-
-	}
-
-	for idx, item := range m.GetCompanyOperatorContexts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListOperatorBalanceTransactionsRequestValidationError{
-						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListOperatorBalanceTransactionsRequestValidationError{
-						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				return ListOperatorBalanceTransactionsRequestValidationError{
-					field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+				errors = append(errors, ListOperatorBalanceTransactionsRequestValidationError{
+					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
 			}
 		}
-
-	}
-
-	for idx, item := range m.GetOperatorContexts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListOperatorBalanceTransactionsRequestValidationError{
-						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListOperatorBalanceTransactionsRequestValidationError{
-						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListOperatorBalanceTransactionsRequestValidationError{
-					field:  fmt.Sprintf("OperatorContexts[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOperatorBalanceTransactionsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
 			}
 		}
-
 	}
 
 	if all {
