@@ -3663,8 +3663,8 @@ components:
                 pspMaxAmount:
                     type: string
                     description: PSP Max Amount
-                key:
-                    type: object
+                mininalFee:
+                    type: string
                     description: JSON schema defining the required fields for this payment method
             description: |-
                 Request to create a payment channel
@@ -9707,9 +9707,8 @@ components:
                 pspMaxAmount:
                     type: string
                     description: PSP Max Amount
-                key:
-                    type: object
-                    description: JSON schema defining the required fields for this payment method
+                mininalFee:
+                    type: string
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method
@@ -10170,7 +10169,7 @@ components:
                 channelId:
                     type: string
                     description: Unique identifier for the channel
-                type:
+                supportType:
                     type: string
                     description: Type of the channel (e.g., online, offline)
                 currencyType:
@@ -10227,7 +10226,7 @@ components:
                 feeRate:
                     type: string
                     description: Rate Fee
-                minFee:
+                mininalFee:
                     type: string
                     description: Minimum Fee
                 eat:

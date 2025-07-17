@@ -348,7 +348,7 @@ message CreatePaymentMethodRequest {
   // PSP Max Amount
   string psp_max_amount = 11;
   // JSON schema defining the required fields for this payment method
-  google.protobuf.Struct key = 12;
+  string mininal_fee = 12;
 }
 
 // Request to create a payment channel

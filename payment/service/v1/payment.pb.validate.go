@@ -771,34 +771,7 @@ func (m *CreatePaymentMethodRequest) validate(all bool) error {
 
 	// no validation rules for PspMaxAmount
 
-	if all {
-		switch v := interface{}(m.GetKey()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, CreatePaymentMethodRequestValidationError{
-					field:  "Key",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, CreatePaymentMethodRequestValidationError{
-					field:  "Key",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetKey()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return CreatePaymentMethodRequestValidationError{
-				field:  "Key",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for MininalFee
 
 	if len(errors) > 0 {
 		return CreatePaymentMethodRequestMultiError(errors)
@@ -1606,7 +1579,7 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for ChannelId
 
-	// no validation rules for Type
+	// no validation rules for SupportType
 
 	// no validation rules for CurrencyType
 
@@ -1644,7 +1617,7 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for FeeRate
 
-	// no validation rules for MinFee
+	// no validation rules for MininalFee
 
 	// no validation rules for Eat
 
