@@ -4405,7 +4405,7 @@ func (m *OperatorBalanceTransaction) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
-	// no validation rules for Currency
+	// no validation rules for SettlementCurrency
 
 	// no validation rules for BeforeBalance
 

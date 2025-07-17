@@ -463,7 +463,7 @@ message OperatorBalanceTransaction {
 	string retailer_operator_name = 3;
 	string company_operator_name = 4;
 	string operator_name = 5;
-	string currency = 6;
+	string settlement_currency = 6;
 	string before_balance = 7;
 	string after_balance = 8;
 	string cash_amount = 9;
