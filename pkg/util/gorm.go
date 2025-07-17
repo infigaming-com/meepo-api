@@ -6,7 +6,26 @@ import (
 	"gorm.io/gorm"
 )
 
-func BuildOperatorContextQuery(query *gorm.DB, RetailerOperatorContexts []*common.OperatorContext, CompanyOperatorContexts []*common.OperatorContext, OperatorContexts []*common.OperatorContext) *gorm.DB {
+func BuildOperatorContextQuery(query *gorm.DB, operatorContext *common.OperatorContext) *gorm.DB {
+	if operatorContext == nil {
+		return query
+	}
+	if operatorContext.OperatorId != 0 {
+		query = query.Where("operator_id = ?", operatorContext.OperatorId)
+	}
+	if operatorContext.CompanyOperatorId != 0 {
+		query = query.Where("company_operator_id = ?", operatorContext.CompanyOperatorId)
+	}
+	if operatorContext.RetailerOperatorId != 0 {
+		query = query.Where("retailer_operator_id = ?", operatorContext.RetailerOperatorId)
+	}
+	if operatorContext.SystemOperatorId != 0 {
+		query = query.Where("system_operator_id = ?", operatorContext.SystemOperatorId)
+	}
+	return query
+}
+
+func BuildOperatorContextsFilterQuery(query *gorm.DB, RetailerOperatorContexts []*common.OperatorContext, CompanyOperatorContexts []*common.OperatorContext, OperatorContexts []*common.OperatorContext) *gorm.DB {
 	if len(OperatorContexts) > 0 {
 		// build a list of operatorIdsList
 		operatorIdsList := lo.Map(OperatorContexts, func(context *common.OperatorContext, _ int) []int64 {
