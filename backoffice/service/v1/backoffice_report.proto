@@ -445,11 +445,9 @@ message ListWithdrawDetailsResponse {
 
 message ListRegisterRetentionRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
-	int32 page = 5;
-	int32 page_size = 6;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }
 
 message ListRegisterRetentionResponse {
