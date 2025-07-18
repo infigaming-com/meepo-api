@@ -13140,11 +13140,13 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Retailer
-
-	// no validation rules for Group
-
 	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
 
 	// no validation rules for UserId
 

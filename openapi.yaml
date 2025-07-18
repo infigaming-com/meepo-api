@@ -7598,11 +7598,13 @@ components:
         api.backoffice.service.v1.ListUsersResponse_User:
             type: object
             properties:
-                retailer:
-                    type: string
-                group:
-                    type: string
                 operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
                 userId:
                     type: string
