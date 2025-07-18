@@ -508,18 +508,16 @@ func (x *ListSummariesResponse) GetTotal() int32 {
 }
 
 type GetGameSummaryRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	TimeRange           *TimeRange             `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
-	OperatorIds         []int64                `protobuf:"varint,2,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	RetailerOperatorIds []int64                `protobuf:"varint,3,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
-	GroupOperatorIds    []int64                `protobuf:"varint,4,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
-	ProviderIds         []string               `protobuf:"bytes,5,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
-	GameCategories      []string               `protobuf:"bytes,6,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
-	GameNames           []string               `protobuf:"bytes,7,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
-	GameIds             []string               `protobuf:"bytes,8,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
-	Currencies          []string               `protobuf:"bytes,9,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	ProviderIds            []string                       `protobuf:"bytes,3,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
+	GameCategories         []string                       `protobuf:"bytes,4,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
+	GameNames              []string                       `protobuf:"bytes,5,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
+	GameIds                []string                       `protobuf:"bytes,6,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	Currencies             []string                       `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetGameSummaryRequest) Reset() {
@@ -559,23 +557,9 @@ func (x *GetGameSummaryRequest) GetTimeRange() *TimeRange {
 	return nil
 }
 
-func (x *GetGameSummaryRequest) GetOperatorIds() []int64 {
+func (x *GetGameSummaryRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
-		return x.OperatorIds
-	}
-	return nil
-}
-
-func (x *GetGameSummaryRequest) GetRetailerOperatorIds() []int64 {
-	if x != nil {
-		return x.RetailerOperatorIds
-	}
-	return nil
-}
-
-func (x *GetGameSummaryRequest) GetGroupOperatorIds() []int64 {
-	if x != nil {
-		return x.GroupOperatorIds
+		return x.OperatorContextFilters
 	}
 	return nil
 }
@@ -700,20 +684,18 @@ func (x *GetGameSummaryResponse) GetRtpPercentage() string {
 }
 
 type GetGameDataRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	TimeRange           *TimeRange             `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
-	OperatorIds         []int64                `protobuf:"varint,2,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	RetailerOperatorIds []int64                `protobuf:"varint,3,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
-	GroupOperatorIds    []int64                `protobuf:"varint,4,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
-	ProviderIds         []string               `protobuf:"bytes,5,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
-	GameCategories      []string               `protobuf:"bytes,6,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
-	GameNames           []string               `protobuf:"bytes,7,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
-	GameIds             []string               `protobuf:"bytes,8,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
-	Currencies          []string               `protobuf:"bytes,9,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Page                int32                  `protobuf:"varint,10,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize            int32                  `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	ProviderIds            []string                       `protobuf:"bytes,3,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
+	GameCategories         []string                       `protobuf:"bytes,4,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
+	GameNames              []string                       `protobuf:"bytes,5,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
+	GameIds                []string                       `protobuf:"bytes,6,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	Currencies             []string                       `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Page                   int32                          `protobuf:"varint,8,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize               int32                          `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetGameDataRequest) Reset() {
@@ -753,23 +735,9 @@ func (x *GetGameDataRequest) GetTimeRange() *TimeRange {
 	return nil
 }
 
-func (x *GetGameDataRequest) GetOperatorIds() []int64 {
+func (x *GetGameDataRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
-		return x.OperatorIds
-	}
-	return nil
-}
-
-func (x *GetGameDataRequest) GetRetailerOperatorIds() []int64 {
-	if x != nil {
-		return x.RetailerOperatorIds
-	}
-	return nil
-}
-
-func (x *GetGameDataRequest) GetGroupOperatorIds() []int64 {
-	if x != nil {
-		return x.GroupOperatorIds
+		return x.OperatorContextFilters
 	}
 	return nil
 }
@@ -892,20 +860,18 @@ func (x *GetGameDataResponse) GetTotal() int32 {
 }
 
 type GetPlayerGameSummaryRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	TimeRange           *TimeRange             `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
-	RetailerOperatorIds []int64                `protobuf:"varint,2,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
-	GroupOperatorIds    []int64                `protobuf:"varint,3,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
-	OperatorIds         []int64                `protobuf:"varint,4,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	ProviderIds         []string               `protobuf:"bytes,5,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
-	GameCategories      []string               `protobuf:"bytes,6,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
-	GameTags            []string               `protobuf:"bytes,7,rep,name=game_tags,json=gameTags,proto3" json:"game_tags,omitempty"`
-	GameNames           []string               `protobuf:"bytes,8,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
-	GameIds             []string               `protobuf:"bytes,9,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
-	Currencies          []string               `protobuf:"bytes,10,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	UserIds             []int64                `protobuf:"varint,11,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	ProviderIds            []string                       `protobuf:"bytes,3,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
+	GameCategories         []string                       `protobuf:"bytes,4,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
+	GameTags               []string                       `protobuf:"bytes,5,rep,name=game_tags,json=gameTags,proto3" json:"game_tags,omitempty"`
+	GameNames              []string                       `protobuf:"bytes,6,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
+	GameIds                []string                       `protobuf:"bytes,7,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	Currencies             []string                       `protobuf:"bytes,8,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	UserIds                []int64                        `protobuf:"varint,9,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetPlayerGameSummaryRequest) Reset() {
@@ -945,23 +911,9 @@ func (x *GetPlayerGameSummaryRequest) GetTimeRange() *TimeRange {
 	return nil
 }
 
-func (x *GetPlayerGameSummaryRequest) GetRetailerOperatorIds() []int64 {
+func (x *GetPlayerGameSummaryRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
-		return x.RetailerOperatorIds
-	}
-	return nil
-}
-
-func (x *GetPlayerGameSummaryRequest) GetGroupOperatorIds() []int64 {
-	if x != nil {
-		return x.GroupOperatorIds
-	}
-	return nil
-}
-
-func (x *GetPlayerGameSummaryRequest) GetOperatorIds() []int64 {
-	if x != nil {
-		return x.OperatorIds
+		return x.OperatorContextFilters
 	}
 	return nil
 }
@@ -1100,22 +1052,20 @@ func (x *GetPlayerGameSummaryResponse) GetRtpPercentage() string {
 }
 
 type GetPlayerGameDataRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	TimeRange           *TimeRange             `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
-	RetailerOperatorIds []int64                `protobuf:"varint,2,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
-	GroupOperatorIds    []int64                `protobuf:"varint,3,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
-	OperatorIds         []int64                `protobuf:"varint,4,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	ProviderIds         []string               `protobuf:"bytes,5,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
-	GameCategories      []string               `protobuf:"bytes,6,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
-	GameTags            []string               `protobuf:"bytes,7,rep,name=game_tags,json=gameTags,proto3" json:"game_tags,omitempty"`
-	GameNames           []string               `protobuf:"bytes,8,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
-	GameIds             []string               `protobuf:"bytes,9,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
-	Currencies          []string               `protobuf:"bytes,10,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	UserIds             []int64                `protobuf:"varint,11,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
-	Page                int32                  `protobuf:"varint,12,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize            int32                  `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	ProviderIds            []string                       `protobuf:"bytes,3,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
+	GameCategories         []string                       `protobuf:"bytes,4,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
+	GameTags               []string                       `protobuf:"bytes,5,rep,name=game_tags,json=gameTags,proto3" json:"game_tags,omitempty"`
+	GameNames              []string                       `protobuf:"bytes,6,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
+	GameIds                []string                       `protobuf:"bytes,7,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	Currencies             []string                       `protobuf:"bytes,8,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	UserIds                []int64                        `protobuf:"varint,9,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
+	Page                   int32                          `protobuf:"varint,10,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize               int32                          `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetPlayerGameDataRequest) Reset() {
@@ -1155,23 +1105,9 @@ func (x *GetPlayerGameDataRequest) GetTimeRange() *TimeRange {
 	return nil
 }
 
-func (x *GetPlayerGameDataRequest) GetRetailerOperatorIds() []int64 {
+func (x *GetPlayerGameDataRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
-		return x.RetailerOperatorIds
-	}
-	return nil
-}
-
-func (x *GetPlayerGameDataRequest) GetGroupOperatorIds() []int64 {
-	if x != nil {
-		return x.GroupOperatorIds
-	}
-	return nil
-}
-
-func (x *GetPlayerGameDataRequest) GetOperatorIds() []int64 {
-	if x != nil {
-		return x.OperatorIds
+		return x.OperatorContextFilters
 	}
 	return nil
 }
@@ -4562,20 +4498,18 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18' \x01(\tR\x03ggr\x12\x10\n" +
 	"\x03ngr\x18( \x01(\tR\x03ngr\x121\n" +
 	"\x15ggr_to_ngr_percentage\x18) \x01(\tR\x12ggrToNgrPercentage\x122\n" +
-	"\x15house_edge_percentage\x18* \x01(\tR\x13houseEdgePercentage\"\x87\x03\n" +
+	"\x15house_edge_percentage\x18* \x01(\tR\x13houseEdgePercentage\"\xe0\x02\n" +
 	"\x15GetGameSummaryRequest\x12C\n" +
 	"\n" +
-	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12!\n" +
-	"\foperator_ids\x18\x02 \x03(\x03R\voperatorIds\x122\n" +
-	"\x15retailer_operator_ids\x18\x03 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
-	"\x12group_operator_ids\x18\x04 \x03(\x03R\x10groupOperatorIds\x12!\n" +
-	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12'\n" +
-	"\x0fgame_categories\x18\x06 \x03(\tR\x0egameCategories\x12\x1d\n" +
+	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12!\n" +
+	"\fprovider_ids\x18\x03 \x03(\tR\vproviderIds\x12'\n" +
+	"\x0fgame_categories\x18\x04 \x03(\tR\x0egameCategories\x12\x1d\n" +
 	"\n" +
-	"game_names\x18\a \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\b \x03(\tR\agameIds\x12\x1e\n" +
+	"game_names\x18\x05 \x03(\tR\tgameNames\x12\x19\n" +
+	"\bgame_ids\x18\x06 \x03(\tR\agameIds\x12\x1e\n" +
 	"\n" +
-	"currencies\x18\t \x03(\tR\n" +
+	"currencies\x18\a \x03(\tR\n" +
 	"currencies\"\xd7\x01\n" +
 	"\x16GetGameSummaryResponse\x12\x1a\n" +
 	"\bturnover\x18\x01 \x01(\tR\bturnover\x12\x1d\n" +
@@ -4584,24 +4518,21 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
 	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\xb5\x03\n" +
+	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\x8e\x03\n" +
 	"\x12GetGameDataRequest\x12C\n" +
 	"\n" +
-	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12!\n" +
-	"\foperator_ids\x18\x02 \x03(\x03R\voperatorIds\x122\n" +
-	"\x15retailer_operator_ids\x18\x03 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
-	"\x12group_operator_ids\x18\x04 \x03(\x03R\x10groupOperatorIds\x12!\n" +
-	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12'\n" +
-	"\x0fgame_categories\x18\x06 \x03(\tR\x0egameCategories\x12\x1d\n" +
+	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12!\n" +
+	"\fprovider_ids\x18\x03 \x03(\tR\vproviderIds\x12'\n" +
+	"\x0fgame_categories\x18\x04 \x03(\tR\x0egameCategories\x12\x1d\n" +
 	"\n" +
-	"game_names\x18\a \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\b \x03(\tR\agameIds\x12\x1e\n" +
+	"game_names\x18\x05 \x03(\tR\tgameNames\x12\x19\n" +
+	"\bgame_ids\x18\x06 \x03(\tR\agameIds\x12\x1e\n" +
 	"\n" +
-	"currencies\x18\t \x03(\tR\n" +
+	"currencies\x18\a \x03(\tR\n" +
 	"currencies\x12\x12\n" +
-	"\x04page\x18\n" +
-	" \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\v \x01(\x05R\bpageSize\"\x9a\x06\n" +
+	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\t \x01(\x05R\bpageSize\"\x9a\x06\n" +
 	"\x13GetGameDataResponse\x12G\n" +
 	"\x04list\x18\a \x03(\v23.api.backoffice.service.v1.GetGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
@@ -4629,24 +4560,21 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tbet_count\x18\x10 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x11 \x01(\tR\x10averageBetAmount\x12%\n" +
 	"\x0ertp_percentage\x18\x12 \x01(\tR\rrtpPercentage\x12/\n" +
-	"\x13settlement_currency\x18\x13 \x01(\tR\x12settlementCurrency\"\xc5\x03\n" +
+	"\x13settlement_currency\x18\x13 \x01(\tR\x12settlementCurrency\"\x9e\x03\n" +
 	"\x1bGetPlayerGameSummaryRequest\x12C\n" +
 	"\n" +
-	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
-	"\x15retailer_operator_ids\x18\x02 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
-	"\x12group_operator_ids\x18\x03 \x03(\x03R\x10groupOperatorIds\x12!\n" +
-	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12!\n" +
-	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12'\n" +
-	"\x0fgame_categories\x18\x06 \x03(\tR\x0egameCategories\x12\x1b\n" +
-	"\tgame_tags\x18\a \x03(\tR\bgameTags\x12\x1d\n" +
+	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12!\n" +
+	"\fprovider_ids\x18\x03 \x03(\tR\vproviderIds\x12'\n" +
+	"\x0fgame_categories\x18\x04 \x03(\tR\x0egameCategories\x12\x1b\n" +
+	"\tgame_tags\x18\x05 \x03(\tR\bgameTags\x12\x1d\n" +
 	"\n" +
-	"game_names\x18\b \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\t \x03(\tR\agameIds\x12\x1e\n" +
+	"game_names\x18\x06 \x03(\tR\tgameNames\x12\x19\n" +
+	"\bgame_ids\x18\a \x03(\tR\agameIds\x12\x1e\n" +
 	"\n" +
-	"currencies\x18\n" +
-	" \x03(\tR\n" +
+	"currencies\x18\b \x03(\tR\n" +
 	"currencies\x12\x19\n" +
-	"\buser_ids\x18\v \x03(\x03R\auserIds\"\xdd\x01\n" +
+	"\buser_ids\x18\t \x03(\x03R\auserIds\"\xdd\x01\n" +
 	"\x1cGetPlayerGameSummaryResponse\x12\x1a\n" +
 	"\bturnover\x18\x01 \x01(\tR\bturnover\x12\x1d\n" +
 	"\n" +
@@ -4654,26 +4582,24 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18\x03 \x01(\tR\x03ggr\x12\x1b\n" +
 	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12,\n" +
 	"\x12average_bet_amount\x18\x05 \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\xf3\x03\n" +
+	"\x0ertp_percentage\x18\x06 \x01(\tR\rrtpPercentage\"\xcc\x03\n" +
 	"\x18GetPlayerGameDataRequest\x12C\n" +
 	"\n" +
-	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
-	"\x15retailer_operator_ids\x18\x02 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
-	"\x12group_operator_ids\x18\x03 \x03(\x03R\x10groupOperatorIds\x12!\n" +
-	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12!\n" +
-	"\fprovider_ids\x18\x05 \x03(\tR\vproviderIds\x12'\n" +
-	"\x0fgame_categories\x18\x06 \x03(\tR\x0egameCategories\x12\x1b\n" +
-	"\tgame_tags\x18\a \x03(\tR\bgameTags\x12\x1d\n" +
+	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12!\n" +
+	"\fprovider_ids\x18\x03 \x03(\tR\vproviderIds\x12'\n" +
+	"\x0fgame_categories\x18\x04 \x03(\tR\x0egameCategories\x12\x1b\n" +
+	"\tgame_tags\x18\x05 \x03(\tR\bgameTags\x12\x1d\n" +
 	"\n" +
-	"game_names\x18\b \x03(\tR\tgameNames\x12\x19\n" +
-	"\bgame_ids\x18\t \x03(\tR\agameIds\x12\x1e\n" +
+	"game_names\x18\x06 \x03(\tR\tgameNames\x12\x19\n" +
+	"\bgame_ids\x18\a \x03(\tR\agameIds\x12\x1e\n" +
 	"\n" +
-	"currencies\x18\n" +
-	" \x03(\tR\n" +
+	"currencies\x18\b \x03(\tR\n" +
 	"currencies\x12\x19\n" +
-	"\buser_ids\x18\v \x03(\x03R\auserIds\x12\x12\n" +
-	"\x04page\x18\f \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\r \x01(\x05R\bpageSize\"\xc4\x05\n" +
+	"\buser_ids\x18\t \x03(\x03R\auserIds\x12\x12\n" +
+	"\x04page\x18\n" +
+	" \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\v \x01(\x05R\bpageSize\"\xc4\x05\n" +
 	"\x19GetPlayerGameDataResponse\x12M\n" +
 	"\x04list\x18\a \x03(\v29.api.backoffice.service.v1.GetPlayerGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
@@ -5047,61 +4973,65 @@ var file_backoffice_service_v1_backoffice_report_proto_depIdxs = []int32{
 	0,  // 1: api.backoffice.service.v1.ListSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
 	27, // 2: api.backoffice.service.v1.ListSummariesResponse.list:type_name -> api.backoffice.service.v1.ListSummariesResponse.List
 	0,  // 3: api.backoffice.service.v1.GetGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	0,  // 4: api.backoffice.service.v1.GetGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	28, // 5: api.backoffice.service.v1.GetGameDataResponse.list:type_name -> api.backoffice.service.v1.GetGameDataResponse.List
-	0,  // 6: api.backoffice.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	0,  // 7: api.backoffice.service.v1.GetPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	29, // 8: api.backoffice.service.v1.GetPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.GetPlayerGameDataResponse.List
-	0,  // 9: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 10: api.backoffice.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	30, // 11: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
-	0,  // 12: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 13: api.backoffice.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	31, // 14: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
-	0,  // 15: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	32, // 16: api.backoffice.service.v1.GetWithdrawSummariesResponse.withdraw_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
-	0,  // 17: api.backoffice.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	33, // 18: api.backoffice.service.v1.ListWithdrawDetailsResponse.details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
-	0,  // 19: api.backoffice.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 20: api.backoffice.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 21: api.backoffice.service.v1.ListRegisterRetentionResponse.details:type_name -> api.backoffice.service.v1.ListRegisterRetentionResponse.List
-	0,  // 22: api.backoffice.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 23: api.backoffice.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	35, // 24: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
-	0,  // 25: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 26: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	36, // 27: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
-	1,  // 28: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
-	3,  // 29: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
-	5,  // 30: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
-	7,  // 31: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.GetGameDataRequest
-	9,  // 32: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
-	11, // 33: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.GetPlayerGameDataRequest
-	13, // 34: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
-	15, // 35: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
-	17, // 36: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
-	19, // 37: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
-	21, // 38: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
-	23, // 39: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
-	25, // 40: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
-	2,  // 41: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	4,  // 42: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
-	6,  // 43: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
-	8,  // 44: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.GetGameDataResponse
-	10, // 45: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	12, // 46: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.GetPlayerGameDataResponse
-	14, // 47: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
-	16, // 48: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
-	18, // 49: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
-	20, // 50: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
-	22, // 51: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
-	24, // 52: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	26, // 53: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	41, // [41:54] is the sub-list for method output_type
-	28, // [28:41] is the sub-list for method input_type
-	28, // [28:28] is the sub-list for extension type_name
-	28, // [28:28] is the sub-list for extension extendee
-	0,  // [0:28] is the sub-list for field type_name
+	37, // 4: api.backoffice.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0,  // 5: api.backoffice.service.v1.GetGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 6: api.backoffice.service.v1.GetGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	28, // 7: api.backoffice.service.v1.GetGameDataResponse.list:type_name -> api.backoffice.service.v1.GetGameDataResponse.List
+	0,  // 8: api.backoffice.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 9: api.backoffice.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0,  // 10: api.backoffice.service.v1.GetPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 11: api.backoffice.service.v1.GetPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	29, // 12: api.backoffice.service.v1.GetPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.GetPlayerGameDataResponse.List
+	0,  // 13: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 14: api.backoffice.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	30, // 15: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
+	0,  // 16: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 17: api.backoffice.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	31, // 18: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
+	0,  // 19: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	32, // 20: api.backoffice.service.v1.GetWithdrawSummariesResponse.withdraw_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
+	0,  // 21: api.backoffice.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	33, // 22: api.backoffice.service.v1.ListWithdrawDetailsResponse.details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
+	0,  // 23: api.backoffice.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 24: api.backoffice.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	34, // 25: api.backoffice.service.v1.ListRegisterRetentionResponse.details:type_name -> api.backoffice.service.v1.ListRegisterRetentionResponse.List
+	0,  // 26: api.backoffice.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 27: api.backoffice.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	35, // 28: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
+	0,  // 29: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 30: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	36, // 31: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
+	1,  // 32: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
+	3,  // 33: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
+	5,  // 34: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
+	7,  // 35: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.GetGameDataRequest
+	9,  // 36: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
+	11, // 37: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.GetPlayerGameDataRequest
+	13, // 38: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
+	15, // 39: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
+	17, // 40: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
+	19, // 41: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
+	21, // 42: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
+	23, // 43: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
+	25, // 44: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
+	2,  // 45: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	4,  // 46: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
+	6,  // 47: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
+	8,  // 48: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.GetGameDataResponse
+	10, // 49: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	12, // 50: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.GetPlayerGameDataResponse
+	14, // 51: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
+	16, // 52: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
+	18, // 53: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
+	20, // 54: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
+	22, // 55: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
+	24, // 56: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	26, // 57: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	45, // [45:58] is the sub-list for method output_type
+	32, // [32:45] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_report_proto_init() }
