@@ -4463,6 +4463,8 @@ components:
                     type: string
                 type:
                     type: string
+                status:
+                    type: string
                 operatorName:
                     type: string
                 companyOperatorName:
