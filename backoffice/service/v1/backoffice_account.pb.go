@@ -1396,15 +1396,15 @@ func (x *Permission) GetActions() []string {
 }
 
 type ListAccountsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	RoleId        *int64                 `protobuf:"varint,2,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
-	OperatorId    *int64                 `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
-	Enabled       *bool                  `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Page          *int32                 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	UserId                 *int64                         `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	RoleId                 *int64                         `protobuf:"varint,3,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
+	Enabled                *bool                          `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Page                   *int32                         `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListAccountsRequest) Reset() {
@@ -1437,6 +1437,13 @@ func (*ListAccountsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{30}
 }
 
+func (x *ListAccountsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
 func (x *ListAccountsRequest) GetUserId() int64 {
 	if x != nil && x.UserId != nil {
 		return *x.UserId
@@ -1447,13 +1454,6 @@ func (x *ListAccountsRequest) GetUserId() int64 {
 func (x *ListAccountsRequest) GetRoleId() int64 {
 	if x != nil && x.RoleId != nil {
 		return *x.RoleId
-	}
-	return 0
-}
-
-func (x *ListAccountsRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
 	}
 	return 0
 }
@@ -2378,20 +2378,18 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\n" +
 	"Permission\x12\x16\n" +
 	"\x06module\x18\x01 \x01(\tR\x06module\x12\x18\n" +
-	"\aactions\x18\x02 \x03(\tR\aactions\"\x9c\x02\n" +
-	"\x13ListAccountsRequest\x12\x1c\n" +
-	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1c\n" +
-	"\arole_id\x18\x02 \x01(\x03H\x01R\x06roleId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x03 \x01(\x03H\x02R\n" +
-	"operatorId\x88\x01\x01\x12\x1d\n" +
-	"\aenabled\x18\x04 \x01(\bH\x03R\aenabled\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\n" +
+	"\aactions\x18\x02 \x03(\tR\aactions\"\xc4\x02\n" +
+	"\x13ListAccountsRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1c\n" +
+	"\auser_id\x18\x02 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1c\n" +
+	"\arole_id\x18\x03 \x01(\x03H\x01R\x06roleId\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x04 \x01(\bH\x02R\aenabled\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x04R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\n" +
 	"\n" +
-	"\b_role_idB\x0e\n" +
-	"\f_operator_idB\n" +
+	"\b_role_idB\n" +
 	"\n" +
 	"\b_enabledB\a\n" +
 	"\x05_pageB\f\n" +
@@ -2539,67 +2537,69 @@ var file_backoffice_service_v1_backoffice_account_proto_goTypes = []any{
 	(*CheckOperatorKeyExistsResponse)(nil),       // 45: api.backoffice.service.v1.CheckOperatorKeyExistsResponse
 	(*ListAccountsResponse_Account)(nil),         // 46: api.backoffice.service.v1.ListAccountsResponse.Account
 	(*common.OperatorContext)(nil),               // 47: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),                // 48: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),        // 48: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),                // 49: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_account_proto_depIdxs = []int32{
 	28, // 0: api.backoffice.service.v1.AccountInfoResponse.role:type_name -> api.backoffice.service.v1.Role
 	47, // 1: api.backoffice.service.v1.AccountInfoResponse.operator_context:type_name -> api.common.OperatorContext
 	29, // 2: api.backoffice.service.v1.Role.permissions:type_name -> api.backoffice.service.v1.Permission
-	46, // 3: api.backoffice.service.v1.ListAccountsResponse.accounts:type_name -> api.backoffice.service.v1.ListAccountsResponse.Account
-	29, // 4: api.backoffice.service.v1.CreateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
-	28, // 5: api.backoffice.service.v1.ListRolesResponse.roles:type_name -> api.backoffice.service.v1.Role
-	29, // 6: api.backoffice.service.v1.UpdateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
-	28, // 7: api.backoffice.service.v1.ListAccountsResponse.Account.role:type_name -> api.backoffice.service.v1.Role
-	48, // 8: api.backoffice.service.v1.ListAccountsResponse.Account.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 9: api.backoffice.service.v1.BackofficeAccount.AddAccount:input_type -> api.backoffice.service.v1.AddAccountRequest
-	2,  // 10: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:input_type -> api.backoffice.service.v1.SendEmailVerificationRequest
-	4,  // 11: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:input_type -> api.backoffice.service.v1.VerifyEmailRequest
-	6,  // 12: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:input_type -> api.backoffice.service.v1.SendMobileVerificationRequest
-	8,  // 13: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:input_type -> api.backoffice.service.v1.VerifyMobileRequest
-	10, // 14: api.backoffice.service.v1.BackofficeAccount.ResetPassword:input_type -> api.backoffice.service.v1.ResetPasswordRequest
-	12, // 15: api.backoffice.service.v1.BackofficeAccount.Generate2fa:input_type -> api.backoffice.service.v1.Generate2faRequest
-	14, // 16: api.backoffice.service.v1.BackofficeAccount.Bind2fa:input_type -> api.backoffice.service.v1.Bind2faRequest
-	16, // 17: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:input_type -> api.backoffice.service.v1.Unbind2faRequest
-	18, // 18: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:input_type -> api.backoffice.service.v1.UpdateAccountRequest
-	20, // 19: api.backoffice.service.v1.BackofficeAccount.Login:input_type -> api.backoffice.service.v1.LoginRequest
-	22, // 20: api.backoffice.service.v1.BackofficeAccount.Register:input_type -> api.backoffice.service.v1.RegisterRequest
-	24, // 21: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:input_type -> api.backoffice.service.v1.SendRegisterVerificationCodeRequest
-	26, // 22: api.backoffice.service.v1.BackofficeAccount.AccountInfo:input_type -> api.backoffice.service.v1.AccountInfoRequest
-	30, // 23: api.backoffice.service.v1.BackofficeAccount.ListAccounts:input_type -> api.backoffice.service.v1.ListAccountsRequest
-	32, // 24: api.backoffice.service.v1.BackofficeAccount.CreateRole:input_type -> api.backoffice.service.v1.CreateRoleRequest
-	34, // 25: api.backoffice.service.v1.BackofficeAccount.ListRoles:input_type -> api.backoffice.service.v1.ListRolesRequest
-	36, // 26: api.backoffice.service.v1.BackofficeAccount.UpdateRole:input_type -> api.backoffice.service.v1.UpdateRoleRequest
-	38, // 27: api.backoffice.service.v1.BackofficeAccount.DeleteRole:input_type -> api.backoffice.service.v1.DeleteRoleRequest
-	40, // 28: api.backoffice.service.v1.BackofficeAccount.CheckEmailExists:input_type -> api.backoffice.service.v1.CheckEmailExistsRequest
-	42, // 29: api.backoffice.service.v1.BackofficeAccount.CheckSubdomainExists:input_type -> api.backoffice.service.v1.CheckSubdomainExistsRequest
-	44, // 30: api.backoffice.service.v1.BackofficeAccount.CheckOperatorKeyExists:input_type -> api.backoffice.service.v1.CheckOperatorKeyExistsRequest
-	1,  // 31: api.backoffice.service.v1.BackofficeAccount.AddAccount:output_type -> api.backoffice.service.v1.AddAccountResponse
-	3,  // 32: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:output_type -> api.backoffice.service.v1.SendEmailVerificationResponse
-	5,  // 33: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:output_type -> api.backoffice.service.v1.VerifyEmailResponse
-	7,  // 34: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:output_type -> api.backoffice.service.v1.SendMobileVerificationResponse
-	9,  // 35: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:output_type -> api.backoffice.service.v1.VerifyMobileResponse
-	11, // 36: api.backoffice.service.v1.BackofficeAccount.ResetPassword:output_type -> api.backoffice.service.v1.ResetPasswordResponse
-	13, // 37: api.backoffice.service.v1.BackofficeAccount.Generate2fa:output_type -> api.backoffice.service.v1.Generate2faResponse
-	15, // 38: api.backoffice.service.v1.BackofficeAccount.Bind2fa:output_type -> api.backoffice.service.v1.Bind2faResponse
-	17, // 39: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:output_type -> api.backoffice.service.v1.Unbind2faResponse
-	19, // 40: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:output_type -> api.backoffice.service.v1.UpdateAccountResponse
-	21, // 41: api.backoffice.service.v1.BackofficeAccount.Login:output_type -> api.backoffice.service.v1.LoginResponse
-	23, // 42: api.backoffice.service.v1.BackofficeAccount.Register:output_type -> api.backoffice.service.v1.RegisterResponse
-	25, // 43: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:output_type -> api.backoffice.service.v1.SendRegisterVerificationCodeResponse
-	27, // 44: api.backoffice.service.v1.BackofficeAccount.AccountInfo:output_type -> api.backoffice.service.v1.AccountInfoResponse
-	31, // 45: api.backoffice.service.v1.BackofficeAccount.ListAccounts:output_type -> api.backoffice.service.v1.ListAccountsResponse
-	33, // 46: api.backoffice.service.v1.BackofficeAccount.CreateRole:output_type -> api.backoffice.service.v1.CreateRoleResponse
-	35, // 47: api.backoffice.service.v1.BackofficeAccount.ListRoles:output_type -> api.backoffice.service.v1.ListRolesResponse
-	37, // 48: api.backoffice.service.v1.BackofficeAccount.UpdateRole:output_type -> api.backoffice.service.v1.UpdateRoleResponse
-	39, // 49: api.backoffice.service.v1.BackofficeAccount.DeleteRole:output_type -> api.backoffice.service.v1.DeleteRoleResponse
-	41, // 50: api.backoffice.service.v1.BackofficeAccount.CheckEmailExists:output_type -> api.backoffice.service.v1.CheckEmailExistsResponse
-	43, // 51: api.backoffice.service.v1.BackofficeAccount.CheckSubdomainExists:output_type -> api.backoffice.service.v1.CheckSubdomainExistsResponse
-	45, // 52: api.backoffice.service.v1.BackofficeAccount.CheckOperatorKeyExists:output_type -> api.backoffice.service.v1.CheckOperatorKeyExistsResponse
-	31, // [31:53] is the sub-list for method output_type
-	9,  // [9:31] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	48, // 3: api.backoffice.service.v1.ListAccountsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	46, // 4: api.backoffice.service.v1.ListAccountsResponse.accounts:type_name -> api.backoffice.service.v1.ListAccountsResponse.Account
+	29, // 5: api.backoffice.service.v1.CreateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
+	28, // 6: api.backoffice.service.v1.ListRolesResponse.roles:type_name -> api.backoffice.service.v1.Role
+	29, // 7: api.backoffice.service.v1.UpdateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
+	28, // 8: api.backoffice.service.v1.ListAccountsResponse.Account.role:type_name -> api.backoffice.service.v1.Role
+	49, // 9: api.backoffice.service.v1.ListAccountsResponse.Account.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 10: api.backoffice.service.v1.BackofficeAccount.AddAccount:input_type -> api.backoffice.service.v1.AddAccountRequest
+	2,  // 11: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:input_type -> api.backoffice.service.v1.SendEmailVerificationRequest
+	4,  // 12: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:input_type -> api.backoffice.service.v1.VerifyEmailRequest
+	6,  // 13: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:input_type -> api.backoffice.service.v1.SendMobileVerificationRequest
+	8,  // 14: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:input_type -> api.backoffice.service.v1.VerifyMobileRequest
+	10, // 15: api.backoffice.service.v1.BackofficeAccount.ResetPassword:input_type -> api.backoffice.service.v1.ResetPasswordRequest
+	12, // 16: api.backoffice.service.v1.BackofficeAccount.Generate2fa:input_type -> api.backoffice.service.v1.Generate2faRequest
+	14, // 17: api.backoffice.service.v1.BackofficeAccount.Bind2fa:input_type -> api.backoffice.service.v1.Bind2faRequest
+	16, // 18: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:input_type -> api.backoffice.service.v1.Unbind2faRequest
+	18, // 19: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:input_type -> api.backoffice.service.v1.UpdateAccountRequest
+	20, // 20: api.backoffice.service.v1.BackofficeAccount.Login:input_type -> api.backoffice.service.v1.LoginRequest
+	22, // 21: api.backoffice.service.v1.BackofficeAccount.Register:input_type -> api.backoffice.service.v1.RegisterRequest
+	24, // 22: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:input_type -> api.backoffice.service.v1.SendRegisterVerificationCodeRequest
+	26, // 23: api.backoffice.service.v1.BackofficeAccount.AccountInfo:input_type -> api.backoffice.service.v1.AccountInfoRequest
+	30, // 24: api.backoffice.service.v1.BackofficeAccount.ListAccounts:input_type -> api.backoffice.service.v1.ListAccountsRequest
+	32, // 25: api.backoffice.service.v1.BackofficeAccount.CreateRole:input_type -> api.backoffice.service.v1.CreateRoleRequest
+	34, // 26: api.backoffice.service.v1.BackofficeAccount.ListRoles:input_type -> api.backoffice.service.v1.ListRolesRequest
+	36, // 27: api.backoffice.service.v1.BackofficeAccount.UpdateRole:input_type -> api.backoffice.service.v1.UpdateRoleRequest
+	38, // 28: api.backoffice.service.v1.BackofficeAccount.DeleteRole:input_type -> api.backoffice.service.v1.DeleteRoleRequest
+	40, // 29: api.backoffice.service.v1.BackofficeAccount.CheckEmailExists:input_type -> api.backoffice.service.v1.CheckEmailExistsRequest
+	42, // 30: api.backoffice.service.v1.BackofficeAccount.CheckSubdomainExists:input_type -> api.backoffice.service.v1.CheckSubdomainExistsRequest
+	44, // 31: api.backoffice.service.v1.BackofficeAccount.CheckOperatorKeyExists:input_type -> api.backoffice.service.v1.CheckOperatorKeyExistsRequest
+	1,  // 32: api.backoffice.service.v1.BackofficeAccount.AddAccount:output_type -> api.backoffice.service.v1.AddAccountResponse
+	3,  // 33: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:output_type -> api.backoffice.service.v1.SendEmailVerificationResponse
+	5,  // 34: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:output_type -> api.backoffice.service.v1.VerifyEmailResponse
+	7,  // 35: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:output_type -> api.backoffice.service.v1.SendMobileVerificationResponse
+	9,  // 36: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:output_type -> api.backoffice.service.v1.VerifyMobileResponse
+	11, // 37: api.backoffice.service.v1.BackofficeAccount.ResetPassword:output_type -> api.backoffice.service.v1.ResetPasswordResponse
+	13, // 38: api.backoffice.service.v1.BackofficeAccount.Generate2fa:output_type -> api.backoffice.service.v1.Generate2faResponse
+	15, // 39: api.backoffice.service.v1.BackofficeAccount.Bind2fa:output_type -> api.backoffice.service.v1.Bind2faResponse
+	17, // 40: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:output_type -> api.backoffice.service.v1.Unbind2faResponse
+	19, // 41: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:output_type -> api.backoffice.service.v1.UpdateAccountResponse
+	21, // 42: api.backoffice.service.v1.BackofficeAccount.Login:output_type -> api.backoffice.service.v1.LoginResponse
+	23, // 43: api.backoffice.service.v1.BackofficeAccount.Register:output_type -> api.backoffice.service.v1.RegisterResponse
+	25, // 44: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:output_type -> api.backoffice.service.v1.SendRegisterVerificationCodeResponse
+	27, // 45: api.backoffice.service.v1.BackofficeAccount.AccountInfo:output_type -> api.backoffice.service.v1.AccountInfoResponse
+	31, // 46: api.backoffice.service.v1.BackofficeAccount.ListAccounts:output_type -> api.backoffice.service.v1.ListAccountsResponse
+	33, // 47: api.backoffice.service.v1.BackofficeAccount.CreateRole:output_type -> api.backoffice.service.v1.CreateRoleResponse
+	35, // 48: api.backoffice.service.v1.BackofficeAccount.ListRoles:output_type -> api.backoffice.service.v1.ListRolesResponse
+	37, // 49: api.backoffice.service.v1.BackofficeAccount.UpdateRole:output_type -> api.backoffice.service.v1.UpdateRoleResponse
+	39, // 50: api.backoffice.service.v1.BackofficeAccount.DeleteRole:output_type -> api.backoffice.service.v1.DeleteRoleResponse
+	41, // 51: api.backoffice.service.v1.BackofficeAccount.CheckEmailExists:output_type -> api.backoffice.service.v1.CheckEmailExistsResponse
+	43, // 52: api.backoffice.service.v1.BackofficeAccount.CheckSubdomainExists:output_type -> api.backoffice.service.v1.CheckSubdomainExistsResponse
+	45, // 53: api.backoffice.service.v1.BackofficeAccount.CheckOperatorKeyExists:output_type -> api.backoffice.service.v1.CheckOperatorKeyExistsResponse
+	32, // [32:54] is the sub-list for method output_type
+	10, // [10:32] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_account_proto_init() }
