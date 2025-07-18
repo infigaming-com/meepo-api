@@ -1444,7 +1444,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionPageRequest'
                 required: true
             responses:
                 "200":
@@ -1509,7 +1509,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionPageRequest'
                 required: true
             responses:
                 "200":
@@ -5135,6 +5135,88 @@ components:
                     type: string
                 operatorName:
                     type: string
+        api.backoffice.service.v1.GetTransactionPageRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                transactionId:
+                    type: string
+                    description: Optional transaction ID filter
+                currency:
+                    type: string
+                    description: Optional currency filter
+                paymentMethod:
+                    type: string
+                    description: Optional payment method filter
+                paymentChannel:
+                    type: string
+                    description: Optional payment channel filter
+                protocol:
+                    type: string
+                    description: Optional crypto protocol filter
+                network:
+                    type: string
+                    description: Optional crypto network filter
+                type:
+                    enum:
+                        - TRANSACTION_TYPE_UNSPECIFIED
+                        - TRANSACTION_TYPE_DEPOSIT
+                        - TRANSACTION_TYPE_WITHDRAW
+                    type: string
+                    description: Optional transaction type filter
+                    format: enum
+                status:
+                    enum:
+                        - TRANSACTION_STATUS_UNSPECIFIED
+                        - TRANSACTION_STATUS_PROCESSING
+                        - TRANSACTION_STATUS_SUCCESSFUL
+                        - TRANSACTION_STATUS_FAILED
+                    type: string
+                    description: Optional status filter
+                    format: enum
+                agent:
+                    type: string
+                    description: Optional agent filter
+                startTime:
+                    type: string
+                    description: Optional start time for date range filter
+                    format: date-time
+                endTime:
+                    type: string
+                    description: Optional end time for date range filter
+                    format: date-time
+                sort:
+                    enum:
+                        - DESC
+                        - ASC
+                    type: string
+                    description: Optional sort direction
+                    format: enum
+                source:
+                    enum:
+                        - REQUEST_SOURCE_FRONTEND
+                        - REQUEST_SOURCE_ADMIN
+                    type: string
+                    description: Source of the request (frontend or admin)
+                    format: enum
+                userId:
+                    type: string
+                    description: Optional user ID filter
+                minAmount:
+                    type: string
+                    description: Optional minimum amount filter
+                maxAmount:
+                    type: string
+                    description: Optional maximum amount filter
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.GetUserBetsOverviewRequest:
             type: object
             properties:
@@ -9952,9 +10034,6 @@ components:
                 transactionId:
                     type: string
                     description: Optional transaction ID filter
-                operatorId:
-                    type: string
-                    description: Optional operator ID filter
                 currency:
                     type: string
                     description: Optional currency filter
@@ -10021,6 +10100,10 @@ components:
                 maxAmount:
                     type: string
                     description: Optional maximum amount filter
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
             description: |-
                 Request to get transaction page
                  Used to retrieve a paginated list of transactions with optional filters
