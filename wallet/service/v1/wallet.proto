@@ -78,8 +78,8 @@ service Wallet {
 
 	rpc UpdateUserCurrency (UpdateUserCurrencyRequest) returns (UpdateUserCurrencyResponse) {}
 
-	// List Operator Balances based on filter
-	rpc ListOperatorBalances (ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {}
+	// List Bottom Operator Balances based on filter
+	rpc ListBottomOperatorBalances (ListBottomOperatorBalancesRequest) returns (ListBottomOperatorBalancesResponse) {}
 	
 	// Transfer cash from operator to its company operator
 	rpc OperatorTransfer (OperatorTransferRequest) returns (OperatorTransferResponse) {}
@@ -532,7 +532,8 @@ message GetBackofficeUserOverviewFromWalletResponse {
 }
 
 message GetOverviewDashboardFromWalletRequest {
-	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext operator_context = 2; // define the basic range of operators
 }
 
 message GetOverviewDashboardFromWalletResponse {
@@ -636,11 +637,11 @@ message UpdateUserCurrencyRequest {
 
 message UpdateUserCurrencyResponse {}
 
-message ListOperatorBalancesRequest {
+message ListBottomOperatorBalancesRequest {
 	api.common.OperatorContextFilters operator_context_filters = 1;
 	repeated string currencies = 2;
-	api.common.OperatorContext operator_context = 3;
-	optional int32 page = 4;
+	api.common.OperatorContext operator_context = 3; // define the basic range of operators
+	optional int32 page = 4; // default 1
 	optional int32 page_size = 5; // default 20
 }
 
@@ -656,7 +657,7 @@ message OperatorBalance {
 	bool enabled = 9;
 }
 
-message ListOperatorBalancesResponse {
+message ListBottomOperatorBalancesResponse {
 	repeated OperatorBalance operator_balances = 1;
 	string total_cash_usd = 2;
 	int32 total = 3;
@@ -767,10 +768,10 @@ message ListOperatorBalanceTransactionsRequest {
 	optional int64 transaction_id = 4;
 	optional google.protobuf.Timestamp start_time = 5;
 	optional google.protobuf.Timestamp end_time = 6;
-	api.common.OperatorContext operator_context = 7;
+	api.common.OperatorContext operator_context = 7; // define the basic range of operators
 	string target_operator_type = 8;
-	optional int32 page = 9;
-	optional int32 page_size = 10;
+	optional int32 page = 9; // default 1
+	optional int32 page_size = 10; // default 20
 }
 
 message OperatorBalanceTransaction {

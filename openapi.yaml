@@ -4530,28 +4530,6 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardResponse_WithdrawalAmount'
                 depositMinusWithdrawalAmount:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardResponse_DepositMinusWithdrawalAmount'
-                activeUsers:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardResponse_ActiveUsers'
-                activeDevices:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardResponse_ActiveDevices'
-        api.backoffice.service.v1.GetOverviewDashboardResponse_ActiveDevices:
-            type: object
-            properties:
-                today:
-                    type: integer
-                    format: int32
-                yesterday:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.GetOverviewDashboardResponse_ActiveUsers:
-            type: object
-            properties:
-                today:
-                    type: integer
-                    format: int32
-                yesterday:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.GetOverviewDashboardResponse_DepositAmount:
             type: object
             properties:
