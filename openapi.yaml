@@ -5644,11 +5644,11 @@ components:
         api.backoffice.service.v1.ListAccountsRequest:
             type: object
             properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 userId:
                     type: string
                 roleId:
-                    type: string
-                operatorId:
                     type: string
                 enabled:
                     type: boolean
