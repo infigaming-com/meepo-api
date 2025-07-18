@@ -19,8 +19,20 @@ func BuildOperatorContextQuery(query *gorm.DB, operatorContext *common.OperatorC
 	if operatorContext.RetailerOperatorId != 0 {
 		query = query.Where("retailer_operator_id = ?", operatorContext.RetailerOperatorId)
 	}
-	if operatorContext.SystemOperatorId != 0 {
-		query = query.Where("system_operator_id = ?", operatorContext.SystemOperatorId)
+	query = query.Where("system_operator_id = ?", operatorContext.SystemOperatorId)
+	return query
+}
+
+func BuildQueryForTargetOperatorType(query *gorm.DB, targetOperatorType string) *gorm.DB {
+	switch targetOperatorType {
+	case OperatorTypeOperator:
+		query = query.Where("operator_id != 0")
+	case OperatorTypeCompany:
+		query = query.Where("operator_id = 0").Where("company_operator_id != 0")
+	case OperatorTypeRetailer:
+		query = query.Where("operator_id = 0").Where("company_operator_id = 0").Where("retailer_operator_id != 0")
+	case OperatorTypeSystem:
+		query = query.Where("operator_id = 0").Where("company_operator_id = 0").Where("retailer_operator_id = 0")
 	}
 	return query
 }
