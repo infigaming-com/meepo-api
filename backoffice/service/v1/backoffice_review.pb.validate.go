@@ -3123,6 +3123,8 @@ func (m *GetOperatorTicketResponse_Ticket) validate(all bool) error {
 
 	// no validation rules for Type
 
+	// no validation rules for Status
+
 	// no validation rules for OperatorName
 
 	// no validation rules for CompanyOperatorName

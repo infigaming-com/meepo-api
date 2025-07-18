@@ -1647,11 +1647,12 @@ type GetOperatorTicketResponse_Ticket struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	Id                   int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Type                 string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	OperatorName         string                 `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	CompanyOperatorName  string                 `protobuf:"bytes,4,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	RetailerOperatorName string                 `protobuf:"bytes,5,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	SystemOperatorName   string                 `protobuf:"bytes,6,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
-	CreatedAt            *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Status               string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,4,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,5,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,6,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string                 `protobuf:"bytes,7,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	CreatedAt            *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -1696,6 +1697,13 @@ func (x *GetOperatorTicketResponse_Ticket) GetId() int64 {
 func (x *GetOperatorTicketResponse_Ticket) GetType() string {
 	if x != nil {
 		return x.Type
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_Ticket) GetStatus() string {
+	if x != nil {
+		return x.Status
 	}
 	return ""
 }
@@ -2293,23 +2301,24 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
 	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x13\n" +
-	"\x11_include_comments\"\x8c\x10\n" +
+	"\x11_include_comments\"\xa4\x10\n" +
 	"\x19GetOperatorTicketResponse\x12O\n" +
 	"\x06ticket\x18\x01 \x01(\v27.api.review.service.v1.GetOperatorTicketResponse.TicketR\x06ticket\x12T\n" +
 	"\bcomments\x18\x02 \x03(\v28.api.review.service.v1.GetOperatorTicketResponse.CommentR\bcomments\x12\x9a\x01\n" +
 	"!payment_withdraw_transaction_info\x18\x03 \x01(\v2O.api.review.service.v1.GetOperatorTicketResponse.PaymentWithdrawTransactionInfoR\x1epaymentWithdrawTransactionInfo\x12r\n" +
 	"\x13wallet_balance_info\x18\x04 \x01(\v2B.api.review.service.v1.GetOperatorTicketResponse.WalletBalanceInfoR\x11walletBalanceInfo\x12~\n" +
 	"\x17wallet_transaction_info\x18\x05 \x01(\v2F.api.review.service.v1.GetOperatorTicketResponse.WalletTransactionInfoR\x15walletTransactionInfo\x12\x87\x01\n" +
-	"\x1awallet_transaction_summary\x18\x06 \x01(\v2I.api.review.service.v1.GetOperatorTicketResponse.WalletTransactionSummaryR\x18walletTransactionSummary\x1a\xa8\x02\n" +
+	"\x1awallet_transaction_summary\x18\x06 \x01(\v2I.api.review.service.v1.GetOperatorTicketResponse.WalletTransactionSummaryR\x18walletTransactionSummary\x1a\xc0\x02\n" +
 	"\x06Ticket\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04type\x12#\n" +
-	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x122\n" +
-	"\x15company_operator_name\x18\x04 \x01(\tR\x13companyOperatorName\x124\n" +
-	"\x16retailer_operator_name\x18\x05 \x01(\tR\x14retailerOperatorName\x120\n" +
-	"\x14system_operator_name\x18\x06 \x01(\tR\x12systemOperatorName\x129\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12#\n" +
+	"\roperator_name\x18\x04 \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\x05 \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\x06 \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\a \x01(\tR\x12systemOperatorName\x129\n" +
 	"\n" +
-	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xb4\x01\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xb4\x01\n" +
 	"\aComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tticket_id\x18\x02 \x01(\x03R\bticketId\x12'\n" +
