@@ -71,6 +71,15 @@ func GetOperatorIds(ctx context.Context) (OperatorIds, bool) {
 	return Value[OperatorIds](ctx, "operatorIds")
 }
 
+func GetOperatorContext(ctx context.Context) (*common.OperatorContext, bool) {
+	operatorIds, ok := GetOperatorIds(ctx)
+	if !ok {
+		return nil, false
+	}
+	operatorContext := operatorIds.GetOperatorContext()
+	return &operatorContext, true
+}
+
 func WithRequestInfo(ctx context.Context, requestInfo RequestInfo) context.Context {
 	return WithValue(ctx, "requestInfo", requestInfo)
 }

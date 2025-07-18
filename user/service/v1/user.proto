@@ -583,31 +583,29 @@ message ListUsersRequest {
 	optional google.protobuf.Timestamp registration_start_time = 3;
 	optional google.protobuf.Timestamp registration_end_time = 4;
 	optional int32 vip_level = 5;
-	optional int64 retailer_operator_id = 6;
-	optional int64 group_operator_id = 7;
-	optional int64 operator_id = 8;
-	optional string country = 9;
+	optional string country = 6;
 	// optional int32 risk_level_min = 10;
 	// optional int32 risk_level_max = 11;
-	optional int32 kyc_level = 12;
+	optional int32 kyc_level = 7;
 	// optional bool has_made_deposit = 13;
-	optional string deposit_min = 14;
-	optional string deposit_max = 15;
-	optional string withdrawal_min = 16;
-	optional string withdrawal_max = 17;
-	optional bool ban_withdraw = 18;
-	optional bool ban_game = 19;
-	optional bool ban_login = 20;
-	optional string user_type = 21;
-	optional int64 role_id = 22;
-	optional bool online = 23;
-	optional bool enabled = 24;
-	optional string email = 25;
-	optional string mobile = 26;
-	optional int32 page = 27;
-	optional int32 page_size = 28;
+	optional string deposit_min = 8;
+	optional string deposit_max = 9;
+	optional string withdrawal_min = 10;
+	optional string withdrawal_max = 11;
+	optional bool ban_withdraw = 12;
+	optional bool ban_game = 13;
+	optional bool ban_login = 14;
+	optional string user_type = 15;
+	optional int64 role_id = 16;
+	optional bool online = 17;
+	optional bool enabled = 18;
+	optional string email = 19;
+	optional string mobile = 20;
+	optional int32 page = 21;
+	optional int32 page_size = 22;
 	// The initial operator context.
-	api.common.OperatorContext operator_context = 29;
+	api.common.OperatorContext operator_context = 23;
+	api.common.OperatorContextFilters operator_context_filters = 24;
 }
 
 message ListUsersResponse {
@@ -830,6 +828,8 @@ message GetRoleResponse {
 }
 
 message GetOverviewDashboardFromUserRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 }
 
 message GetOverviewDashboardFromUserResponse {

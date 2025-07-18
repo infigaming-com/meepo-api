@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -36,7 +37,9 @@ service BackofficeDashboard {
 }
 
 // System related messages
-message GetOverviewDashboardRequest {}
+message GetOverviewDashboardRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+}
 
 message GetOverviewDashboardResponse {
 	message RegisteredUsers {

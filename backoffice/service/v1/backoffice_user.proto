@@ -4,6 +4,7 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -111,27 +112,25 @@ message ListUsersRequest {
 	optional google.protobuf.Timestamp registration_start_time = 3;
 	optional google.protobuf.Timestamp registration_end_time = 4;
 	optional int32 vip_level = 5;
-	optional int64 retailer_operator_id = 6;
-	optional int64 group_operator_id = 7;
-	optional int64 operator_id = 8;
-	optional string country = 9;
+	optional string country = 6;
 	// optional int32 risk_level_min = 10;
 	// optional int32 risk_level_max = 11;
-	optional int32 kyc_level = 12;
+	optional int32 kyc_level = 7;
 	// optional bool has_made_deposit = 13;
-	optional string deposit_min = 14;
-	optional string deposit_max = 15;
-	optional string withdrawal_min = 16;
-	optional string withdrawal_max = 17;
-	optional bool ban_withdraw = 18;
-	optional bool ban_game = 19;
-	optional bool ban_login = 20;
-	optional bool online = 23;
-	optional bool enabled = 24;
-	optional string email = 25;
-	optional string mobile = 26;
-	optional int32 page = 27;
-	optional int32 page_size = 28;
+	optional string deposit_min = 8;
+	optional string deposit_max = 9;
+	optional string withdrawal_min = 10;
+	optional string withdrawal_max = 11;
+	optional bool ban_withdraw = 12;
+	optional bool ban_game = 13;
+	optional bool ban_login = 14;
+	optional bool online = 17;
+	optional bool enabled = 18;
+	optional string email = 19;
+	optional string mobile = 20;
+	optional int32 page = 21;
+	optional int32 page_size = 22;
+	api.common.OperatorContextFilters operator_context_filters = 23;
 }
 
 message ListUsersResponse {
