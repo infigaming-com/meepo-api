@@ -42,7 +42,7 @@ const (
 	Wallet_ListCurrencies_FullMethodName                      = "/api.wallet.service.v1.Wallet/ListCurrencies"
 	Wallet_UpdateOperatorCurrency_FullMethodName              = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrency"
 	Wallet_UpdateUserCurrency_FullMethodName                  = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
-	Wallet_ListOperatorBalances_FullMethodName                = "/api.wallet.service.v1.Wallet/ListOperatorBalances"
+	Wallet_ListBottomOperatorBalances_FullMethodName          = "/api.wallet.service.v1.Wallet/ListBottomOperatorBalances"
 	Wallet_OperatorTransfer_FullMethodName                    = "/api.wallet.service.v1.Wallet/OperatorTransfer"
 	Wallet_OperatorSwap_FullMethodName                        = "/api.wallet.service.v1.Wallet/OperatorSwap"
 	Wallet_OperatorFreeze_FullMethodName                      = "/api.wallet.service.v1.Wallet/OperatorFreeze"
@@ -93,8 +93,8 @@ type WalletClient interface {
 	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
 	UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error)
 	UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error)
-	// List Operator Balances based on filter
-	ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*ListOperatorBalancesResponse, error)
+	// List Bottom Operator Balances based on filter
+	ListBottomOperatorBalances(ctx context.Context, in *ListBottomOperatorBalancesRequest, opts ...grpc.CallOption) (*ListBottomOperatorBalancesResponse, error)
 	// Transfer cash from operator to its company operator
 	OperatorTransfer(ctx context.Context, in *OperatorTransferRequest, opts ...grpc.CallOption) (*OperatorTransferResponse, error)
 	// Swap cash between two balances of the same company's operator
@@ -357,10 +357,10 @@ func (c *walletClient) UpdateUserCurrency(ctx context.Context, in *UpdateUserCur
 	return out, nil
 }
 
-func (c *walletClient) ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*ListOperatorBalancesResponse, error) {
+func (c *walletClient) ListBottomOperatorBalances(ctx context.Context, in *ListBottomOperatorBalancesRequest, opts ...grpc.CallOption) (*ListBottomOperatorBalancesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListOperatorBalancesResponse)
-	err := c.cc.Invoke(ctx, Wallet_ListOperatorBalances_FullMethodName, in, out, cOpts...)
+	out := new(ListBottomOperatorBalancesResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListBottomOperatorBalances_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -514,8 +514,8 @@ type WalletServer interface {
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
 	UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error)
-	// List Operator Balances based on filter
-	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error)
+	// List Bottom Operator Balances based on filter
+	ListBottomOperatorBalances(context.Context, *ListBottomOperatorBalancesRequest) (*ListBottomOperatorBalancesResponse, error)
 	// Transfer cash from operator to its company operator
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
 	// Swap cash between two balances of the same company's operator
@@ -617,8 +617,8 @@ func (UnimplementedWalletServer) UpdateOperatorCurrency(context.Context, *Update
 func (UnimplementedWalletServer) UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserCurrency not implemented")
 }
-func (UnimplementedWalletServer) ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorBalances not implemented")
+func (UnimplementedWalletServer) ListBottomOperatorBalances(context.Context, *ListBottomOperatorBalancesRequest) (*ListBottomOperatorBalancesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBottomOperatorBalances not implemented")
 }
 func (UnimplementedWalletServer) OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OperatorTransfer not implemented")
@@ -1088,20 +1088,20 @@ func _Wallet_UpdateUserCurrency_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_ListOperatorBalances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListOperatorBalancesRequest)
+func _Wallet_ListBottomOperatorBalances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBottomOperatorBalancesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).ListOperatorBalances(ctx, in)
+		return srv.(WalletServer).ListBottomOperatorBalances(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_ListOperatorBalances_FullMethodName,
+		FullMethod: Wallet_ListBottomOperatorBalances_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).ListOperatorBalances(ctx, req.(*ListOperatorBalancesRequest))
+		return srv.(WalletServer).ListBottomOperatorBalances(ctx, req.(*ListBottomOperatorBalancesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1404,8 +1404,8 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Wallet_UpdateUserCurrency_Handler,
 		},
 		{
-			MethodName: "ListOperatorBalances",
-			Handler:    _Wallet_ListOperatorBalances_Handler,
+			MethodName: "ListBottomOperatorBalances",
+			Handler:    _Wallet_ListBottomOperatorBalances_Handler,
 		},
 		{
 			MethodName: "OperatorTransfer",

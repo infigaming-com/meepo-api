@@ -70,14 +70,6 @@ message GetOverviewDashboardResponse {
 		string today = 1;
 		string yesterday = 2;
 	}
-	message ActiveUsers {
-		int32 today = 1;
-		int32 yesterday = 2;
-	}
-	message ActiveDevices {
-		int32 today = 1;
-		int32 yesterday = 2;
-	}
 	RegisteredUsers registered_users = 1;
 	FirstDepositUsers first_deposit_users = 2;
 	GGR ggr = 3; // USD
@@ -85,8 +77,6 @@ message GetOverviewDashboardResponse {
 	DepositAmount deposit_amount = 5; // USD
 	WithdrawalAmount withdrawal_amount = 6; // USD
 	DepositMinusWithdrawalAmount deposit_minus_withdrawal_amount = 7; // USD
-	ActiveUsers active_users = 8;
-	ActiveDevices active_devices = 9; // Not available For now
 }
 
 message GetTimeRangedDashboardRequest {
