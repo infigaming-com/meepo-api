@@ -545,12 +545,10 @@ message ListDepositVtgDetailsResponse {
 
 message ListWithdrawVtgDetailsRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
-	repeated string currencies = 5;
-	int32 page = 6;
-	int32 page_size = 7;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	repeated string currencies = 3;
+	int32 page = 4;
+	int32 page_size = 5;
 }
 
 message ListWithdrawVtgDetailsResponse {
