@@ -2568,28 +2568,31 @@ func (x *ListSummariesResponse_List) GetHouseEdgePercentage() string {
 }
 
 type GetGameDataResponse_List struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Date               string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Operator           string                 `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
-	Provider           string                 `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
-	GameType           string                 `protobuf:"bytes,4,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"`
-	GameName           string                 `protobuf:"bytes,5,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
-	GameId             string                 `protobuf:"bytes,6,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	PlayerCount        int32                  `protobuf:"varint,7,opt,name=player_count,json=playerCount,proto3" json:"player_count,omitempty"`
-	Turnover           string                 `protobuf:"bytes,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	TurnoverUsd        string                 `protobuf:"bytes,9,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
-	TurnoverPercentage string                 `protobuf:"bytes,10,opt,name=turnover_percentage,json=turnoverPercentage,proto3" json:"turnover_percentage,omitempty"`
-	WinAmount          string                 `protobuf:"bytes,11,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
-	WinAmountUsd       string                 `protobuf:"bytes,12,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
-	Ggr                string                 `protobuf:"bytes,13,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	GgrUsd             string                 `protobuf:"bytes,14,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	GgrPercentage      string                 `protobuf:"bytes,15,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
-	BetCount           int32                  `protobuf:"varint,16,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	AverageBetAmount   string                 `protobuf:"bytes,17,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
-	RtpPercentage      string                 `protobuf:"bytes,18,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
-	SettlementCurrency string                 `protobuf:"bytes,19,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Date                 string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,3,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,4,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string                 `protobuf:"bytes,5,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	Provider             string                 `protobuf:"bytes,6,opt,name=provider,proto3" json:"provider,omitempty"`
+	GameType             string                 `protobuf:"bytes,7,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"`
+	GameName             string                 `protobuf:"bytes,8,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
+	GameId               string                 `protobuf:"bytes,9,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	PlayerCount          int32                  `protobuf:"varint,10,opt,name=player_count,json=playerCount,proto3" json:"player_count,omitempty"`
+	Turnover             string                 `protobuf:"bytes,11,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	TurnoverUsd          string                 `protobuf:"bytes,12,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	TurnoverPercentage   string                 `protobuf:"bytes,13,opt,name=turnover_percentage,json=turnoverPercentage,proto3" json:"turnover_percentage,omitempty"`
+	WinAmount            string                 `protobuf:"bytes,14,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	WinAmountUsd         string                 `protobuf:"bytes,15,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
+	Ggr                  string                 `protobuf:"bytes,16,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	GgrUsd               string                 `protobuf:"bytes,17,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	GgrPercentage        string                 `protobuf:"bytes,18,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`
+	BetCount             int32                  `protobuf:"varint,19,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	AverageBetAmount     string                 `protobuf:"bytes,20,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
+	RtpPercentage        string                 `protobuf:"bytes,21,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
+	SettlementCurrency   string                 `protobuf:"bytes,22,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetGameDataResponse_List) Reset() {
@@ -2629,9 +2632,30 @@ func (x *GetGameDataResponse_List) GetDate() string {
 	return ""
 }
 
-func (x *GetGameDataResponse_List) GetOperator() string {
+func (x *GetGameDataResponse_List) GetOperatorName() string {
 	if x != nil {
-		return x.Operator
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *GetGameDataResponse_List) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *GetGameDataResponse_List) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *GetGameDataResponse_List) GetSystemOperatorName() string {
+	if x != nil {
+		return x.SystemOperatorName
 	}
 	return ""
 }
@@ -2756,26 +2780,29 @@ func (x *GetGameDataResponse_List) GetSettlementCurrency() string {
 }
 
 type GetPlayerGameDataResponse_List struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Date               string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Operator           string                 `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
-	Provider           string                 `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
-	GameType           string                 `protobuf:"bytes,4,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"`
-	GameId             string                 `protobuf:"bytes,5,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	GameName           string                 `protobuf:"bytes,6,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
-	UserId             int64                  `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Turnover           string                 `protobuf:"bytes,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	TurnoverUsd        string                 `protobuf:"bytes,9,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
-	WinAmount          string                 `protobuf:"bytes,10,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
-	WinAmountUsd       string                 `protobuf:"bytes,11,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
-	Ggr                string                 `protobuf:"bytes,12,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	GgrUsd             string                 `protobuf:"bytes,13,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	RtpPercentage      string                 `protobuf:"bytes,14,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
-	BetCount           int32                  `protobuf:"varint,15,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	AverageBetAmount   string                 `protobuf:"bytes,16,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
-	SettlementCurrency string                 `protobuf:"bytes,17,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Date                 string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,3,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,4,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string                 `protobuf:"bytes,5,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	Provider             string                 `protobuf:"bytes,6,opt,name=provider,proto3" json:"provider,omitempty"`
+	GameType             string                 `protobuf:"bytes,7,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"`
+	GameId               string                 `protobuf:"bytes,8,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	GameName             string                 `protobuf:"bytes,9,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
+	UserId               int64                  `protobuf:"varint,10,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Turnover             string                 `protobuf:"bytes,11,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	TurnoverUsd          string                 `protobuf:"bytes,12,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	WinAmount            string                 `protobuf:"bytes,13,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	WinAmountUsd         string                 `protobuf:"bytes,14,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
+	Ggr                  string                 `protobuf:"bytes,15,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	GgrUsd               string                 `protobuf:"bytes,16,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	RtpPercentage        string                 `protobuf:"bytes,17,opt,name=rtp_percentage,json=rtpPercentage,proto3" json:"rtp_percentage,omitempty"`
+	BetCount             int32                  `protobuf:"varint,18,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	AverageBetAmount     string                 `protobuf:"bytes,19,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
+	SettlementCurrency   string                 `protobuf:"bytes,20,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetPlayerGameDataResponse_List) Reset() {
@@ -2815,9 +2842,30 @@ func (x *GetPlayerGameDataResponse_List) GetDate() string {
 	return ""
 }
 
-func (x *GetPlayerGameDataResponse_List) GetOperator() string {
+func (x *GetPlayerGameDataResponse_List) GetOperatorName() string {
 	if x != nil {
-		return x.Operator
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *GetPlayerGameDataResponse_List) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *GetPlayerGameDataResponse_List) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *GetPlayerGameDataResponse_List) GetSystemOperatorName() string {
+	if x != nil {
+		return x.SystemOperatorName
 	}
 	return ""
 }
@@ -4532,35 +4580,38 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"currencies\x18\a \x03(\tR\n" +
 	"currencies\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\t \x01(\x05R\bpageSize\"\x9a\x06\n" +
+	"\tpage_size\x18\t \x01(\x05R\bpageSize\"\xbf\a\n" +
 	"\x13GetGameDataResponse\x12G\n" +
 	"\x04list\x18\a \x03(\v23.api.backoffice.service.v1.GetGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\t \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\n" +
-	" \x01(\x05R\x05total\x1a\xf2\x04\n" +
+	" \x01(\x05R\x05total\x1a\x97\x06\n" +
 	"\x04List\x12\x12\n" +
-	"\x04date\x18\x01 \x01(\tR\x04date\x12\x1a\n" +
-	"\boperator\x18\x02 \x01(\tR\boperator\x12\x1a\n" +
-	"\bprovider\x18\x03 \x01(\tR\bprovider\x12\x1b\n" +
-	"\tgame_type\x18\x04 \x01(\tR\bgameType\x12\x1b\n" +
-	"\tgame_name\x18\x05 \x01(\tR\bgameName\x12\x17\n" +
-	"\agame_id\x18\x06 \x01(\tR\x06gameId\x12!\n" +
-	"\fplayer_count\x18\a \x01(\x05R\vplayerCount\x12\x1a\n" +
-	"\bturnover\x18\b \x01(\tR\bturnover\x12!\n" +
-	"\fturnover_usd\x18\t \x01(\tR\vturnoverUsd\x12/\n" +
-	"\x13turnover_percentage\x18\n" +
-	" \x01(\tR\x12turnoverPercentage\x12\x1d\n" +
+	"\x04date\x18\x01 \x01(\tR\x04date\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\x03 \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\x04 \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\x05 \x01(\tR\x12systemOperatorName\x12\x1a\n" +
+	"\bprovider\x18\x06 \x01(\tR\bprovider\x12\x1b\n" +
+	"\tgame_type\x18\a \x01(\tR\bgameType\x12\x1b\n" +
+	"\tgame_name\x18\b \x01(\tR\bgameName\x12\x17\n" +
+	"\agame_id\x18\t \x01(\tR\x06gameId\x12!\n" +
+	"\fplayer_count\x18\n" +
+	" \x01(\x05R\vplayerCount\x12\x1a\n" +
+	"\bturnover\x18\v \x01(\tR\bturnover\x12!\n" +
+	"\fturnover_usd\x18\f \x01(\tR\vturnoverUsd\x12/\n" +
+	"\x13turnover_percentage\x18\r \x01(\tR\x12turnoverPercentage\x12\x1d\n" +
 	"\n" +
-	"win_amount\x18\v \x01(\tR\twinAmount\x12$\n" +
-	"\x0ewin_amount_usd\x18\f \x01(\tR\fwinAmountUsd\x12\x10\n" +
-	"\x03ggr\x18\r \x01(\tR\x03ggr\x12\x17\n" +
-	"\aggr_usd\x18\x0e \x01(\tR\x06ggrUsd\x12%\n" +
-	"\x0eggr_percentage\x18\x0f \x01(\tR\rggrPercentage\x12\x1b\n" +
-	"\tbet_count\x18\x10 \x01(\x05R\bbetCount\x12,\n" +
-	"\x12average_bet_amount\x18\x11 \x01(\tR\x10averageBetAmount\x12%\n" +
-	"\x0ertp_percentage\x18\x12 \x01(\tR\rrtpPercentage\x12/\n" +
-	"\x13settlement_currency\x18\x13 \x01(\tR\x12settlementCurrency\"\x9e\x03\n" +
+	"win_amount\x18\x0e \x01(\tR\twinAmount\x12$\n" +
+	"\x0ewin_amount_usd\x18\x0f \x01(\tR\fwinAmountUsd\x12\x10\n" +
+	"\x03ggr\x18\x10 \x01(\tR\x03ggr\x12\x17\n" +
+	"\aggr_usd\x18\x11 \x01(\tR\x06ggrUsd\x12%\n" +
+	"\x0eggr_percentage\x18\x12 \x01(\tR\rggrPercentage\x12\x1b\n" +
+	"\tbet_count\x18\x13 \x01(\x05R\bbetCount\x12,\n" +
+	"\x12average_bet_amount\x18\x14 \x01(\tR\x10averageBetAmount\x12%\n" +
+	"\x0ertp_percentage\x18\x15 \x01(\tR\rrtpPercentage\x12/\n" +
+	"\x13settlement_currency\x18\x16 \x01(\tR\x12settlementCurrency\"\x9e\x03\n" +
 	"\x1bGetPlayerGameSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
@@ -4599,33 +4650,36 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\buser_ids\x18\t \x03(\x03R\auserIds\x12\x12\n" +
 	"\x04page\x18\n" +
 	" \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\v \x01(\x05R\bpageSize\"\xc4\x05\n" +
+	"\tpage_size\x18\v \x01(\x05R\bpageSize\"\xe9\x06\n" +
 	"\x19GetPlayerGameDataResponse\x12M\n" +
 	"\x04list\x18\a \x03(\v29.api.backoffice.service.v1.GetPlayerGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\t \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\n" +
-	" \x01(\x05R\x05total\x1a\x90\x04\n" +
+	" \x01(\x05R\x05total\x1a\xb5\x05\n" +
 	"\x04List\x12\x12\n" +
-	"\x04date\x18\x01 \x01(\tR\x04date\x12\x1a\n" +
-	"\boperator\x18\x02 \x01(\tR\boperator\x12\x1a\n" +
-	"\bprovider\x18\x03 \x01(\tR\bprovider\x12\x1b\n" +
-	"\tgame_type\x18\x04 \x01(\tR\bgameType\x12\x17\n" +
-	"\agame_id\x18\x05 \x01(\tR\x06gameId\x12\x1b\n" +
-	"\tgame_name\x18\x06 \x01(\tR\bgameName\x12\x17\n" +
-	"\auser_id\x18\a \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bturnover\x18\b \x01(\tR\bturnover\x12!\n" +
-	"\fturnover_usd\x18\t \x01(\tR\vturnoverUsd\x12\x1d\n" +
+	"\x04date\x18\x01 \x01(\tR\x04date\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\x03 \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\x04 \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\x05 \x01(\tR\x12systemOperatorName\x12\x1a\n" +
+	"\bprovider\x18\x06 \x01(\tR\bprovider\x12\x1b\n" +
+	"\tgame_type\x18\a \x01(\tR\bgameType\x12\x17\n" +
+	"\agame_id\x18\b \x01(\tR\x06gameId\x12\x1b\n" +
+	"\tgame_name\x18\t \x01(\tR\bgameName\x12\x17\n" +
+	"\auser_id\x18\n" +
+	" \x01(\x03R\x06userId\x12\x1a\n" +
+	"\bturnover\x18\v \x01(\tR\bturnover\x12!\n" +
+	"\fturnover_usd\x18\f \x01(\tR\vturnoverUsd\x12\x1d\n" +
 	"\n" +
-	"win_amount\x18\n" +
-	" \x01(\tR\twinAmount\x12$\n" +
-	"\x0ewin_amount_usd\x18\v \x01(\tR\fwinAmountUsd\x12\x10\n" +
-	"\x03ggr\x18\f \x01(\tR\x03ggr\x12\x17\n" +
-	"\aggr_usd\x18\r \x01(\tR\x06ggrUsd\x12%\n" +
-	"\x0ertp_percentage\x18\x0e \x01(\tR\rrtpPercentage\x12\x1b\n" +
-	"\tbet_count\x18\x0f \x01(\x05R\bbetCount\x12,\n" +
-	"\x12average_bet_amount\x18\x10 \x01(\tR\x10averageBetAmount\x12/\n" +
-	"\x13settlement_currency\x18\x11 \x01(\tR\x12settlementCurrency\"\xdf\x01\n" +
+	"win_amount\x18\r \x01(\tR\twinAmount\x12$\n" +
+	"\x0ewin_amount_usd\x18\x0e \x01(\tR\fwinAmountUsd\x12\x10\n" +
+	"\x03ggr\x18\x0f \x01(\tR\x03ggr\x12\x17\n" +
+	"\aggr_usd\x18\x10 \x01(\tR\x06ggrUsd\x12%\n" +
+	"\x0ertp_percentage\x18\x11 \x01(\tR\rrtpPercentage\x12\x1b\n" +
+	"\tbet_count\x18\x12 \x01(\x05R\bbetCount\x12,\n" +
+	"\x12average_bet_amount\x18\x13 \x01(\tR\x10averageBetAmount\x12/\n" +
+	"\x13settlement_currency\x18\x14 \x01(\tR\x12settlementCurrency\"\xdf\x01\n" +
 	"\x1aGetDepositSummariesRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +

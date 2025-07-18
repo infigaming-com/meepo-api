@@ -4042,7 +4042,13 @@ components:
             properties:
                 date:
                     type: string
-                operator:
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
                 provider:
                     type: string
@@ -4627,7 +4633,13 @@ components:
             properties:
                 date:
                     type: string
-                operator:
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
                 provider:
                     type: string

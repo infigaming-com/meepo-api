@@ -222,24 +222,27 @@ message GetGameDataRequest {
 message GetGameDataResponse {
 	message List {
 		string date = 1;
-		string operator = 2;
-		string provider = 3;
-		string game_type = 4;
-		string game_name = 5;
-		string game_id = 6;
-		int32 player_count = 7;
-		string turnover = 8;
-		string turnover_usd = 9;
-		string turnover_percentage = 10;
-		string win_amount = 11;
-		string win_amount_usd = 12;
-		string ggr = 13;
-		string ggr_usd = 14;
-		string ggr_percentage = 15;
-		int32 bet_count = 16;
-		string average_bet_amount = 17;
-		string rtp_percentage = 18;
-		string settlement_currency = 19;
+		string operator_name = 2;
+		string company_operator_name = 3;
+		string retailer_operator_name = 4;
+		string system_operator_name = 5;
+		string provider = 6;
+		string game_type = 7;
+		string game_name = 8;
+		string game_id = 9;
+		int32 player_count = 10;
+		string turnover = 11;
+		string turnover_usd = 12;
+		string turnover_percentage = 13;
+		string win_amount = 14;
+		string win_amount_usd = 15;
+		string ggr = 16;
+		string ggr_usd = 17;
+		string ggr_percentage = 18;
+		int32 bet_count = 19;
+		string average_bet_amount = 20;
+		string rtp_percentage = 21;
+		string settlement_currency = 22;
 	}
 	repeated List list = 7;
 	int32 page = 8;
@@ -285,22 +288,25 @@ message GetPlayerGameDataRequest {
 message GetPlayerGameDataResponse {
 	message List {
 		string date = 1;
-		string operator = 2;
-		string provider = 3;
-		string game_type = 4;
-		string game_id = 5;
-		string game_name = 6;
-		int64 user_id = 7;
-		string turnover = 8;
-		string turnover_usd = 9;
-		string win_amount = 10;
-		string win_amount_usd = 11;
-		string ggr = 12;
-		string ggr_usd = 13;
-		string rtp_percentage = 14;
-		int32 bet_count = 15;
-		string average_bet_amount = 16;
-		string settlement_currency = 17;
+		string operator_name = 2;
+		string company_operator_name = 3;
+		string retailer_operator_name = 4;
+		string system_operator_name = 5;
+		string provider = 6;
+		string game_type = 7;
+		string game_id = 8;
+		string game_name = 9;
+		int64 user_id = 10;
+		string turnover = 11;
+		string turnover_usd = 12;
+		string win_amount = 13;
+		string win_amount_usd = 14;
+		string ggr = 15;
+		string ggr_usd = 16;
+		string rtp_percentage = 17;
+		int32 bet_count = 18;
+		string average_bet_amount = 19;
+		string settlement_currency = 20;
 	}
 	repeated List list = 7;
 	int32 page = 8;
