@@ -4138,7 +4138,13 @@ func (m *GetGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for Date
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
 
 	// no validation rules for Provider
 
@@ -4278,7 +4284,13 @@ func (m *GetPlayerGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for Date
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
 
 	// no validation rules for Provider
 
