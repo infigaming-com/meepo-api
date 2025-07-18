@@ -190,14 +190,12 @@ message ListSummariesResponse {
 
 message GetGameSummaryRequest {
 	TimeRange time_range = 1;
-	repeated int64 operator_ids = 2;
-	repeated int64 retailer_operator_ids = 3;
-	repeated int64 group_operator_ids = 4;
-	repeated string provider_ids = 5;
-	repeated string game_categories = 6;
-	repeated string game_names = 7;
-	repeated string game_ids = 8;
-	repeated string currencies = 9;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	repeated string provider_ids = 3;
+	repeated string game_categories = 4;
+	repeated string game_names = 5;
+	repeated string game_ids = 6;
+	repeated string currencies = 7;
 }
 
 message GetGameSummaryResponse {
@@ -211,16 +209,14 @@ message GetGameSummaryResponse {
 
 message GetGameDataRequest {
 	TimeRange time_range = 1;
-	repeated int64 operator_ids = 2;
-	repeated int64 retailer_operator_ids = 3;
-	repeated int64 group_operator_ids = 4;
-	repeated string provider_ids = 5;
-	repeated string game_categories = 6;
-	repeated string game_names = 7;
-	repeated string game_ids = 8;
-	repeated string currencies = 9;
-	int32 page = 10;
-	int32 page_size = 11;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	repeated string provider_ids = 3;
+	repeated string game_categories = 4;
+	repeated string game_names = 5;
+	repeated string game_ids = 6;
+	repeated string currencies = 7;
+	int32 page = 8;
+	int32 page_size = 9;
 }
 
 message GetGameDataResponse {
@@ -253,16 +249,14 @@ message GetGameDataResponse {
 
 message GetPlayerGameSummaryRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
-	repeated string provider_ids = 5;
-	repeated string game_categories = 6;
-	repeated string game_tags = 7;
-	repeated string game_names = 8;
-	repeated string game_ids = 9;
-	repeated string currencies = 10;
-	repeated int64 user_ids = 11;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	repeated string provider_ids = 3;
+	repeated string game_categories = 4;
+	repeated string game_tags = 5;
+	repeated string game_names = 6;
+	repeated string game_ids = 7;
+	repeated string currencies = 8;
+	repeated int64 user_ids = 9;
 }
 
 message GetPlayerGameSummaryResponse {
@@ -276,18 +270,16 @@ message GetPlayerGameSummaryResponse {
 
 message GetPlayerGameDataRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
-	repeated string provider_ids = 5;
-	repeated string game_categories = 6;
-	repeated string game_tags = 7;
-	repeated string game_names = 8;
-	repeated string game_ids = 9;
-	repeated string currencies = 10;
-	repeated int64 user_ids = 11;
-	int32 page = 12;
-	int32 page_size = 13;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	repeated string provider_ids = 3;
+	repeated string game_categories = 4;
+	repeated string game_tags = 5;
+	repeated string game_names = 6;
+	repeated string game_ids = 7;
+	repeated string currencies = 8;
+	repeated int64 user_ids = 9;
+	int32 page = 10;
+	int32 page_size = 11;
 }
 
 message GetPlayerGameDataResponse {
