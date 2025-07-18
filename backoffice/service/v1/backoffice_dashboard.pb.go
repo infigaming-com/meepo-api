@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -180,9 +181,10 @@ func (GetTopOperatorsDashboardRequest_TimeRangeType) EnumDescriptor() ([]byte, [
 
 // System related messages
 type GetOverviewDashboardRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetOverviewDashboardRequest) Reset() {
@@ -213,6 +215,13 @@ func (x *GetOverviewDashboardRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetOverviewDashboardRequest.ProtoReflect.Descriptor instead.
 func (*GetOverviewDashboardRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dashboard_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetOverviewDashboardRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type GetOverviewDashboardResponse struct {
@@ -1619,8 +1628,9 @@ var File_backoffice_service_v1_backoffice_dashboard_proto protoreflect.FileDescr
 
 const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"\n" +
-	"0backoffice/service/v1/backoffice_dashboard.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x1d\n" +
-	"\x1bGetOverviewDashboardRequest\"\xf3\f\n" +
+	"0backoffice/service/v1/backoffice_dashboard.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\"{\n" +
+	"\x1bGetOverviewDashboardRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xf3\f\n" +
 	"\x1cGetOverviewDashboardResponse\x12r\n" +
 	"\x10registered_users\x18\x01 \x01(\v2G.api.backoffice.service.v1.GetOverviewDashboardResponse.RegisteredUsersR\x0fregisteredUsers\x12y\n" +
 	"\x13first_deposit_users\x18\x02 \x01(\v2I.api.backoffice.service.v1.GetOverviewDashboardResponse.FirstDepositUsersR\x11firstDepositUsers\x12M\n" +
@@ -1781,50 +1791,52 @@ var file_backoffice_service_v1_backoffice_dashboard_proto_goTypes = []any{
 	(*GetTimeRangedDashboardResponse_ActiveUsersData_Data)(nil),       // 25: api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData.Data
 	(*GetTopUsersDashboardResponse_User)(nil),                         // 26: api.backoffice.service.v1.GetTopUsersDashboardResponse.User
 	(*GetTopOperatorsDashboardResponse_OperatorData)(nil),             // 27: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	(*common.OperatorContextFilters)(nil),                             // 28: api.common.OperatorContextFilters
 }
 var file_backoffice_service_v1_backoffice_dashboard_proto_depIdxs = []int32{
-	11, // 0: api.backoffice.service.v1.GetOverviewDashboardResponse.registered_users:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.RegisteredUsers
-	12, // 1: api.backoffice.service.v1.GetOverviewDashboardResponse.first_deposit_users:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.FirstDepositUsers
-	13, // 2: api.backoffice.service.v1.GetOverviewDashboardResponse.ggr:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.GGR
-	14, // 3: api.backoffice.service.v1.GetOverviewDashboardResponse.ngr:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.NGR
-	15, // 4: api.backoffice.service.v1.GetOverviewDashboardResponse.deposit_amount:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.DepositAmount
-	16, // 5: api.backoffice.service.v1.GetOverviewDashboardResponse.withdrawal_amount:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.WithdrawalAmount
-	17, // 6: api.backoffice.service.v1.GetOverviewDashboardResponse.deposit_minus_withdrawal_amount:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.DepositMinusWithdrawalAmount
-	18, // 7: api.backoffice.service.v1.GetOverviewDashboardResponse.active_users:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.ActiveUsers
-	19, // 8: api.backoffice.service.v1.GetOverviewDashboardResponse.active_devices:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.ActiveDevices
-	0,  // 9: api.backoffice.service.v1.GetTimeRangedDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
-	20, // 10: api.backoffice.service.v1.GetTimeRangedDashboardResponse.game_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData
-	21, // 11: api.backoffice.service.v1.GetTimeRangedDashboardResponse.payment_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData
-	22, // 12: api.backoffice.service.v1.GetTimeRangedDashboardResponse.active_users_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData
-	1,  // 13: api.backoffice.service.v1.GetTopUsersDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
-	26, // 14: api.backoffice.service.v1.GetTopUsersDashboardResponse.top_deposit_users:type_name -> api.backoffice.service.v1.GetTopUsersDashboardResponse.User
-	26, // 15: api.backoffice.service.v1.GetTopUsersDashboardResponse.top_withdrawal_users:type_name -> api.backoffice.service.v1.GetTopUsersDashboardResponse.User
-	2,  // 16: api.backoffice.service.v1.GetTopOperatorsDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
-	27, // 17: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ggr_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	27, // 18: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ngr_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	27, // 19: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_deposit_minus_withdraw_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	27, // 20: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ggr_group_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	27, // 21: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ngr_group_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	27, // 22: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_deposit_minus_withdraw_group_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	27, // 23: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ggr_retailer_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	27, // 24: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ngr_retailer_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	27, // 25: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_deposit_minus_withdraw_retailer_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
-	23, // 26: api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData.data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData.Data
-	24, // 27: api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData.data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData.Data
-	25, // 28: api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData.data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData.Data
-	3,  // 29: api.backoffice.service.v1.BackofficeDashboard.GetOverviewDashboard:input_type -> api.backoffice.service.v1.GetOverviewDashboardRequest
-	5,  // 30: api.backoffice.service.v1.BackofficeDashboard.GetTimeRangedDashboard:input_type -> api.backoffice.service.v1.GetTimeRangedDashboardRequest
-	7,  // 31: api.backoffice.service.v1.BackofficeDashboard.GetTopUsersDashboard:input_type -> api.backoffice.service.v1.GetTopUsersDashboardRequest
-	9,  // 32: api.backoffice.service.v1.BackofficeDashboard.GetTopOperatorsDashboard:input_type -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest
-	4,  // 33: api.backoffice.service.v1.BackofficeDashboard.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
-	6,  // 34: api.backoffice.service.v1.BackofficeDashboard.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	8,  // 35: api.backoffice.service.v1.BackofficeDashboard.GetTopUsersDashboard:output_type -> api.backoffice.service.v1.GetTopUsersDashboardResponse
-	10, // 36: api.backoffice.service.v1.BackofficeDashboard.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
-	33, // [33:37] is the sub-list for method output_type
-	29, // [29:33] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	28, // 0: api.backoffice.service.v1.GetOverviewDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	11, // 1: api.backoffice.service.v1.GetOverviewDashboardResponse.registered_users:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.RegisteredUsers
+	12, // 2: api.backoffice.service.v1.GetOverviewDashboardResponse.first_deposit_users:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.FirstDepositUsers
+	13, // 3: api.backoffice.service.v1.GetOverviewDashboardResponse.ggr:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.GGR
+	14, // 4: api.backoffice.service.v1.GetOverviewDashboardResponse.ngr:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.NGR
+	15, // 5: api.backoffice.service.v1.GetOverviewDashboardResponse.deposit_amount:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.DepositAmount
+	16, // 6: api.backoffice.service.v1.GetOverviewDashboardResponse.withdrawal_amount:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.WithdrawalAmount
+	17, // 7: api.backoffice.service.v1.GetOverviewDashboardResponse.deposit_minus_withdrawal_amount:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.DepositMinusWithdrawalAmount
+	18, // 8: api.backoffice.service.v1.GetOverviewDashboardResponse.active_users:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.ActiveUsers
+	19, // 9: api.backoffice.service.v1.GetOverviewDashboardResponse.active_devices:type_name -> api.backoffice.service.v1.GetOverviewDashboardResponse.ActiveDevices
+	0,  // 10: api.backoffice.service.v1.GetTimeRangedDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
+	20, // 11: api.backoffice.service.v1.GetTimeRangedDashboardResponse.game_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData
+	21, // 12: api.backoffice.service.v1.GetTimeRangedDashboardResponse.payment_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData
+	22, // 13: api.backoffice.service.v1.GetTimeRangedDashboardResponse.active_users_data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData
+	1,  // 14: api.backoffice.service.v1.GetTopUsersDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
+	26, // 15: api.backoffice.service.v1.GetTopUsersDashboardResponse.top_deposit_users:type_name -> api.backoffice.service.v1.GetTopUsersDashboardResponse.User
+	26, // 16: api.backoffice.service.v1.GetTopUsersDashboardResponse.top_withdrawal_users:type_name -> api.backoffice.service.v1.GetTopUsersDashboardResponse.User
+	2,  // 17: api.backoffice.service.v1.GetTopOperatorsDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
+	27, // 18: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ggr_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 19: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ngr_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 20: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_deposit_minus_withdraw_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 21: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ggr_group_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 22: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ngr_group_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 23: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_deposit_minus_withdraw_group_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 24: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ggr_retailer_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 25: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_ngr_retailer_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	27, // 26: api.backoffice.service.v1.GetTopOperatorsDashboardResponse.top_deposit_minus_withdraw_retailer_operators:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorData
+	23, // 27: api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData.data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.GameData.Data
+	24, // 28: api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData.data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.PaymentData.Data
+	25, // 29: api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData.data:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardResponse.ActiveUsersData.Data
+	3,  // 30: api.backoffice.service.v1.BackofficeDashboard.GetOverviewDashboard:input_type -> api.backoffice.service.v1.GetOverviewDashboardRequest
+	5,  // 31: api.backoffice.service.v1.BackofficeDashboard.GetTimeRangedDashboard:input_type -> api.backoffice.service.v1.GetTimeRangedDashboardRequest
+	7,  // 32: api.backoffice.service.v1.BackofficeDashboard.GetTopUsersDashboard:input_type -> api.backoffice.service.v1.GetTopUsersDashboardRequest
+	9,  // 33: api.backoffice.service.v1.BackofficeDashboard.GetTopOperatorsDashboard:input_type -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest
+	4,  // 34: api.backoffice.service.v1.BackofficeDashboard.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
+	6,  // 35: api.backoffice.service.v1.BackofficeDashboard.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
+	8,  // 36: api.backoffice.service.v1.BackofficeDashboard.GetTopUsersDashboard:output_type -> api.backoffice.service.v1.GetTopUsersDashboardResponse
+	10, // 37: api.backoffice.service.v1.BackofficeDashboard.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
+	34, // [34:38] is the sub-list for method output_type
+	30, // [30:34] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_dashboard_proto_init() }

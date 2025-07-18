@@ -4509,7 +4509,9 @@ components:
                     type: string
         api.backoffice.service.v1.GetOverviewDashboardRequest:
             type: object
-            properties: {}
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
             description: System related messages
         api.backoffice.service.v1.GetOverviewDashboardResponse:
             type: object
@@ -7524,12 +7526,6 @@ components:
                 vipLevel:
                     type: integer
                     format: int32
-                retailerOperatorId:
-                    type: string
-                groupOperatorId:
-                    type: string
-                operatorId:
-                    type: string
                 country:
                     type: string
                 kycLevel:
@@ -7567,6 +7563,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListUsersResponse:
             type: object
             properties:
