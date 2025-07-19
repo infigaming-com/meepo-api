@@ -499,6 +499,35 @@ func (m *GetTimeRangedDashboardRequest) validate(all bool) error {
 
 	// no validation rules for CustomDays
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTimeRangedDashboardRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetTimeRangedDashboardRequestMultiError(errors)
 	}
@@ -809,6 +838,35 @@ func (m *GetTopUsersDashboardRequest) validate(all bool) error {
 
 	// no validation rules for TimeRangeType
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTopUsersDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTopUsersDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTopUsersDashboardRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetTopUsersDashboardRequestMultiError(errors)
 	}
@@ -1085,6 +1143,35 @@ func (m *GetTopOperatorsDashboardRequest) validate(all bool) error {
 
 	// no validation rules for TimeRangeType
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTopOperatorsDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTopOperatorsDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTopOperatorsDashboardRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetTopOperatorsDashboardRequestMultiError(errors)
 	}
@@ -1291,7 +1378,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 
 	}
 
-	for idx, item := range m.GetTopGgrGroupOperators() {
+	for idx, item := range m.GetTopGgrCompanyOperators() {
 		_, _ = idx, item
 
 		if all {
@@ -1299,7 +1386,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GetTopOperatorsDashboardResponseValidationError{
-						field:  fmt.Sprintf("TopGgrGroupOperators[%v]", idx),
+						field:  fmt.Sprintf("TopGgrCompanyOperators[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1307,7 +1394,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GetTopOperatorsDashboardResponseValidationError{
-						field:  fmt.Sprintf("TopGgrGroupOperators[%v]", idx),
+						field:  fmt.Sprintf("TopGgrCompanyOperators[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1316,7 +1403,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GetTopOperatorsDashboardResponseValidationError{
-					field:  fmt.Sprintf("TopGgrGroupOperators[%v]", idx),
+					field:  fmt.Sprintf("TopGgrCompanyOperators[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1325,7 +1412,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 
 	}
 
-	for idx, item := range m.GetTopNgrGroupOperators() {
+	for idx, item := range m.GetTopNgrCompanyOperators() {
 		_, _ = idx, item
 
 		if all {
@@ -1333,7 +1420,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GetTopOperatorsDashboardResponseValidationError{
-						field:  fmt.Sprintf("TopNgrGroupOperators[%v]", idx),
+						field:  fmt.Sprintf("TopNgrCompanyOperators[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1341,7 +1428,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GetTopOperatorsDashboardResponseValidationError{
-						field:  fmt.Sprintf("TopNgrGroupOperators[%v]", idx),
+						field:  fmt.Sprintf("TopNgrCompanyOperators[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1350,7 +1437,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GetTopOperatorsDashboardResponseValidationError{
-					field:  fmt.Sprintf("TopNgrGroupOperators[%v]", idx),
+					field:  fmt.Sprintf("TopNgrCompanyOperators[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1359,7 +1446,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 
 	}
 
-	for idx, item := range m.GetTopDepositMinusWithdrawGroupOperators() {
+	for idx, item := range m.GetTopDepositMinusWithdrawCompanyOperators() {
 		_, _ = idx, item
 
 		if all {
@@ -1367,7 +1454,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GetTopOperatorsDashboardResponseValidationError{
-						field:  fmt.Sprintf("TopDepositMinusWithdrawGroupOperators[%v]", idx),
+						field:  fmt.Sprintf("TopDepositMinusWithdrawCompanyOperators[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1375,7 +1462,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GetTopOperatorsDashboardResponseValidationError{
-						field:  fmt.Sprintf("TopDepositMinusWithdrawGroupOperators[%v]", idx),
+						field:  fmt.Sprintf("TopDepositMinusWithdrawCompanyOperators[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1384,7 +1471,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GetTopOperatorsDashboardResponseValidationError{
-					field:  fmt.Sprintf("TopDepositMinusWithdrawGroupOperators[%v]", idx),
+					field:  fmt.Sprintf("TopDepositMinusWithdrawCompanyOperators[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -3153,9 +3240,17 @@ func (m *GetTopUsersDashboardResponse_User) validate(all bool) error {
 
 	// no validation rules for VipLevel
 
-	// no validation rules for Amount
+	// no validation rules for AmountUsd
+
+	// no validation rules for AmountReportingCurrency
 
 	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
 
 	if len(errors) > 0 {
 		return GetTopUsersDashboardResponse_UserMultiError(errors)
@@ -3265,11 +3360,17 @@ func (m *GetTopOperatorsDashboardResponse_OperatorData) validate(all bool) error
 
 	// no validation rules for Rank
 
-	// no validation rules for OperatorId
-
 	// no validation rules for OperatorName
 
-	// no validation rules for Amount
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
+	// no validation rules for AmountUsd
+
+	// no validation rules for AmountReportingCurrency
 
 	if len(errors) > 0 {
 		return GetTopOperatorsDashboardResponse_OperatorDataMultiError(errors)
