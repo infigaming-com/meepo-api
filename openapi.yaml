@@ -4970,6 +4970,8 @@ components:
                 customDays:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.GetTimeRangedDashboardResponse:
             type: object
             properties:
@@ -5017,6 +5019,8 @@ components:
                         - TIME_RANGE_TYPE_THIS_MONTH
                     type: string
                     format: enum
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.GetTopOperatorsDashboardResponse:
             type: object
             properties:
@@ -5032,15 +5036,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardResponse_OperatorData'
-                topGgrGroupOperators:
+                topGgrCompanyOperators:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardResponse_OperatorData'
-                topNgrGroupOperators:
+                topNgrCompanyOperators:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardResponse_OperatorData'
-                topDepositMinusWithdrawGroupOperators:
+                topDepositMinusWithdrawCompanyOperators:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardResponse_OperatorData'
@@ -5062,11 +5066,17 @@ components:
                 rank:
                     type: integer
                     format: int32
-                operatorId:
-                    type: string
                 operatorName:
                     type: string
-                amount:
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetTopUsersDashboardRequest:
             type: object
@@ -5079,6 +5089,8 @@ components:
                         - TIME_RANGE_TYPE_THIS_MONTH
                     type: string
                     format: enum
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.GetTopUsersDashboardResponse:
             type: object
             properties:
@@ -5105,9 +5117,17 @@ components:
                 vipLevel:
                     type: integer
                     format: int32
-                amount:
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
                     type: string
                 operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
         api.backoffice.service.v1.GetTransactionPageRequest:
             type: object
@@ -5641,18 +5661,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 currencies:
                     type: array
                     items:
@@ -7783,18 +7793,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 currencies:
                     type: array
                     items:
@@ -7828,11 +7828,21 @@ components:
                     type: string
                 operatorName:
                     type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
                 currency:
+                    type: string
+                reportingCurrency:
                     type: string
                 withdrawAmount:
                     type: string
                 withdrawAmountUsd:
+                    type: string
+                withdrawAmountReportingCurrency:
                     type: string
                 withdrawUsers:
                     type: integer
@@ -7841,6 +7851,8 @@ components:
                     type: string
                 ftwAmountUsd:
                     type: string
+                ftwAmountReportingCurrency:
+                    type: string
                 ftwUsers:
                     type: integer
                     format: int32
@@ -7848,12 +7860,16 @@ components:
                     type: string
                 sameDayFtwAmountUsd:
                     type: string
+                sameDayFtwAmountReportingCurrency:
+                    type: string
                 sameDayFtwUsers:
                     type: integer
                     format: int32
                 repeatedWithdrawAmount:
                     type: string
                 repeatedWithdrawAmountUsd:
+                    type: string
+                repeatedWithdrawAmountReportingCurrency:
                     type: string
                 repeatedWithdrawUsers:
                     type: integer
@@ -7868,15 +7884,21 @@ components:
                     type: string
                 averageFtwAmountUsdForSameDayRegistredUsers:
                     type: string
+                averageFtwAmountReportingCurrencyForSameDayRegistredUsers:
+                    type: string
                 averageFtwAmountForNonSameDayRegistredUsers:
                     type: string
                 averageFtwAmountUsdForNonSameDayRegistredUsers:
+                    type: string
+                averageFtwAmountReportingCurrencyForNonSameDayRegistredUsers:
                     type: string
                 successRate:
                     type: string
                 depositMinusWithdrawAmount:
                     type: string
                 depositMinusWithdrawAmountUsd:
+                    type: string
+                depositMinusWithdrawAmountReportingCurrency:
                     type: string
                 amountProportion:
                     type: string

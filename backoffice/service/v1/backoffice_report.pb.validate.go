@@ -2508,6 +2508,35 @@ func (m *GetWithdrawSummariesRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetWithdrawSummariesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetWithdrawSummariesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetWithdrawSummariesRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetWithdrawSummariesRequestMultiError(errors)
 	}
@@ -2777,9 +2806,42 @@ func (m *ListWithdrawDetailsRequest) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Page
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListWithdrawDetailsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListWithdrawDetailsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListWithdrawDetailsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
-	// no validation rules for PageSize
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
 
 	if len(errors) > 0 {
 		return ListWithdrawDetailsRequestMultiError(errors)
@@ -4828,11 +4890,21 @@ func (m *ListWithdrawDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
 	// no validation rules for Currency
+
+	// no validation rules for ReportingCurrency
 
 	// no validation rules for WithdrawAmount
 
 	// no validation rules for WithdrawAmountUsd
+
+	// no validation rules for WithdrawAmountReportingCurrency
 
 	// no validation rules for WithdrawUsers
 
@@ -4840,17 +4912,23 @@ func (m *ListWithdrawDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for FtwAmountUsd
 
+	// no validation rules for FtwAmountReportingCurrency
+
 	// no validation rules for FtwUsers
 
 	// no validation rules for SameDayFtwAmount
 
 	// no validation rules for SameDayFtwAmountUsd
 
+	// no validation rules for SameDayFtwAmountReportingCurrency
+
 	// no validation rules for SameDayFtwUsers
 
 	// no validation rules for RepeatedWithdrawAmount
 
 	// no validation rules for RepeatedWithdrawAmountUsd
+
+	// no validation rules for RepeatedWithdrawAmountReportingCurrency
 
 	// no validation rules for RepeatedWithdrawUsers
 
@@ -4862,15 +4940,21 @@ func (m *ListWithdrawDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for AverageFtwAmountUsdForSameDayRegistredUsers
 
+	// no validation rules for AverageFtwAmountReportingCurrencyForSameDayRegistredUsers
+
 	// no validation rules for AverageFtwAmountForNonSameDayRegistredUsers
 
 	// no validation rules for AverageFtwAmountUsdForNonSameDayRegistredUsers
+
+	// no validation rules for AverageFtwAmountReportingCurrencyForNonSameDayRegistredUsers
 
 	// no validation rules for SuccessRate
 
 	// no validation rules for DepositMinusWithdrawAmount
 
 	// no validation rules for DepositMinusWithdrawAmountUsd
+
+	// no validation rules for DepositMinusWithdrawAmountReportingCurrency
 
 	// no validation rules for AmountProportion
 
