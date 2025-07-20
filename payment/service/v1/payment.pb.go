@@ -2778,35 +2778,42 @@ type TransactionInfo struct {
 	// Transaction ID from the payment gateway
 	GatewayTransactionId string `protobuf:"bytes,3,opt,name=gateway_transaction_id,json=gatewayTransactionId,proto3" json:"gateway_transaction_id,omitempty"`
 	// Operator ID associated with the transaction
-	OperatorId int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId           int64  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId    int64  `protobuf:"varint,5,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId   int64  `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	SystemOperatorId     int64  `protobuf:"varint,7,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	OperatorName         string `protobuf:"bytes,8,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string `protobuf:"bytes,9,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string `protobuf:"bytes,10,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string `protobuf:"bytes,11,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
 	// ID of the user who initiated the transaction
-	UserId int64 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId int64 `protobuf:"varint,12,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	// VIP level of the user
-	Vip int32 `protobuf:"varint,6,opt,name=vip,proto3" json:"vip,omitempty"`
+	Vip int32 `protobuf:"varint,13,opt,name=vip,proto3" json:"vip,omitempty"`
 	// Transaction amount in smallest currency unit
-	Amount string `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount string `protobuf:"bytes,14,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Currency code for the transaction
-	Currency string `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
+	Currency string `protobuf:"bytes,15,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Transaction fee in smallest currency unit
-	Fee string `protobuf:"bytes,9,opt,name=fee,proto3" json:"fee,omitempty"`
+	Fee string `protobuf:"bytes,16,opt,name=fee,proto3" json:"fee,omitempty"`
 	// Payment method used for the transaction
-	PaymentMethod string `protobuf:"bytes,10,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	PaymentMethod string `protobuf:"bytes,17,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Payment channel used for the transaction
-	PaymentChannel string `protobuf:"bytes,11,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	PaymentChannel string `protobuf:"bytes,18,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
 	// Crypto Protocol used for the transaction
-	Protocol string `protobuf:"bytes,12,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Protocol string `protobuf:"bytes,19,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Crypto Network used for the transaction
-	Network string `protobuf:"bytes,13,opt,name=network,proto3" json:"network,omitempty"`
+	Network string `protobuf:"bytes,20,opt,name=network,proto3" json:"network,omitempty"`
 	// Crypto Address
-	Address string `protobuf:"bytes,14,opt,name=address,proto3" json:"address,omitempty"`
+	Address string `protobuf:"bytes,21,opt,name=address,proto3" json:"address,omitempty"`
 	// Type of transaction (deposit or withdrawal)
-	Type TransactionType `protobuf:"varint,15,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
+	Type TransactionType `protobuf:"varint,22,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
 	// Current status of the transaction
-	Status TransactionStatus `protobuf:"varint,16,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
+	Status TransactionStatus `protobuf:"varint,23,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
 	// Timestamp when the transaction was created
-	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,24,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Timestamp when the transaction was last updated
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,25,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2867,6 +2874,55 @@ func (x *TransactionInfo) GetOperatorId() int64 {
 		return x.OperatorId
 	}
 	return 0
+}
+
+func (x *TransactionInfo) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *TransactionInfo) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *TransactionInfo) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *TransactionInfo) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetSystemOperatorName() string {
+	if x != nil {
+		return x.SystemOperatorName
+	}
+	return ""
 }
 
 func (x *TransactionInfo) GetUserId() int64 {
@@ -4325,30 +4381,37 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05nonce\x18\f \x01(\tR\x05nonce\"N\n" +
 	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xba\x05\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\x8b\b\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x124\n" +
 	"\x16gateway_transaction_id\x18\x03 \x01(\tR\x14gatewayTransactionId\x12\x1f\n" +
 	"\voperator_id\x18\x04 \x01(\x03R\n" +
-	"operatorId\x12\x17\n" +
-	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12\x10\n" +
-	"\x03vip\x18\x06 \x01(\x05R\x03vip\x12\x16\n" +
-	"\x06amount\x18\a \x01(\tR\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\b \x01(\tR\bcurrency\x12\x10\n" +
-	"\x03fee\x18\t \x01(\tR\x03fee\x12%\n" +
-	"\x0epayment_method\x18\n" +
-	" \x01(\tR\rpaymentMethod\x12'\n" +
-	"\x0fpayment_channel\x18\v \x01(\tR\x0epaymentChannel\x12\x1a\n" +
-	"\bprotocol\x18\f \x01(\tR\bprotocol\x12\x18\n" +
-	"\anetwork\x18\r \x01(\tR\anetwork\x12\x18\n" +
-	"\aaddress\x18\x0e \x01(\tR\aaddress\x127\n" +
-	"\x04type\x18\x0f \x01(\x0e2#.payment.service.v1.TransactionTypeR\x04type\x12=\n" +
-	"\x06status\x18\x10 \x01(\x0e2%.payment.service.v1.TransactionStatusR\x06status\x129\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\x05 \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x06 \x01(\x03R\x12retailerOperatorId\x12,\n" +
+	"\x12system_operator_id\x18\a \x01(\x03R\x10systemOperatorId\x12#\n" +
+	"\roperator_name\x18\b \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\t \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\n" +
+	" \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\v \x01(\tR\x12systemOperatorName\x12\x17\n" +
+	"\auser_id\x18\f \x01(\x03R\x06userId\x12\x10\n" +
+	"\x03vip\x18\r \x01(\x05R\x03vip\x12\x16\n" +
+	"\x06amount\x18\x0e \x01(\tR\x06amount\x12\x1a\n" +
+	"\bcurrency\x18\x0f \x01(\tR\bcurrency\x12\x10\n" +
+	"\x03fee\x18\x10 \x01(\tR\x03fee\x12%\n" +
+	"\x0epayment_method\x18\x11 \x01(\tR\rpaymentMethod\x12'\n" +
+	"\x0fpayment_channel\x18\x12 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bprotocol\x18\x13 \x01(\tR\bprotocol\x12\x18\n" +
+	"\anetwork\x18\x14 \x01(\tR\anetwork\x12\x18\n" +
+	"\aaddress\x18\x15 \x01(\tR\aaddress\x127\n" +
+	"\x04type\x18\x16 \x01(\x0e2#.payment.service.v1.TransactionTypeR\x04type\x12=\n" +
+	"\x06status\x18\x17 \x01(\x0e2%.payment.service.v1.TransactionStatusR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\x18 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x9c\x01\n" +
+	"updated_at\x18\x19 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x9c\x01\n" +
 	"\x11TransactionDetail\x12E\n" +
 	"\vtransaction\x18\x01 \x01(\v2#.payment.service.v1.TransactionInfoR\vtransaction\x12@\n" +
 	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xfb\x06\n" +

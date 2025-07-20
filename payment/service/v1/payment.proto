@@ -540,34 +540,41 @@ message TransactionInfo {
   string gateway_transaction_id = 3;
   // Operator ID associated with the transaction
   int64 operator_id = 4;
+  int64 company_operator_id = 5;
+  int64 retailer_operator_id = 6;
+  int64 system_operator_id = 7;
+  string operator_name = 8;
+  string company_operator_name = 9;
+  string retailer_operator_name = 10;
+  string system_operator_name = 11;
   // ID of the user who initiated the transaction
-  int64 user_id = 5;
+  int64 user_id = 12;
   // VIP level of the user
-  int32 vip = 6;
+  int32 vip = 13;
   // Transaction amount in smallest currency unit
-  string amount = 7;
+  string amount = 14;
   // Currency code for the transaction
-  string currency = 8;
+  string currency = 15;
   // Transaction fee in smallest currency unit
-  string fee = 9;
+  string fee = 16;
   // Payment method used for the transaction
-  string payment_method = 10;
+  string payment_method = 17;
   // Payment channel used for the transaction
-  string payment_channel = 11;
+  string payment_channel = 18;
   // Crypto Protocol used for the transaction
-  string protocol = 12;
+  string protocol = 19;
   // Crypto Network used for the transaction
-  string network = 13;
+  string network = 20;
   // Crypto Address
-  string address = 14;
+  string address = 21;
   // Type of transaction (deposit or withdrawal)
-  TransactionType type = 15;
+  TransactionType type = 22;
   // Current status of the transaction
-  TransactionStatus status = 16;
+  TransactionStatus status = 23;
   // Timestamp when the transaction was created
-  google.protobuf.Timestamp created_at = 17;
+  google.protobuf.Timestamp created_at = 24;
   // Timestamp when the transaction was last updated
-  google.protobuf.Timestamp updated_at = 18;
+  google.protobuf.Timestamp updated_at = 25;
 }
 
 message TransactionDetail {
