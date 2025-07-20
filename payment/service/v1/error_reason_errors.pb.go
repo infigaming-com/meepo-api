@@ -166,3 +166,27 @@ func IsOperatorIdNotFoundInContext(err error) bool {
 func ErrorOperatorIdNotFoundInContext(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_OPERATOR_ID_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUpdatePaymentMethodFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_PAYMENT_METHOD_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdatePaymentMethodFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_PAYMENT_METHOD_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdatePaymentChannelFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_PAYMENT_CHANNEL_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdatePaymentChannelFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_PAYMENT_CHANNEL_FAILED.String(), fmt.Sprintf(format, args...))
+}
