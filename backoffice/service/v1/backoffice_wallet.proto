@@ -335,12 +335,10 @@ message UpdateWalletCurrencyResponse {
 }
 
 message ListOperatorBalancesRequest {
-	repeated int64 retailer_operator_ids = 1;
-	repeated int64 company_operator_ids = 2;
-	repeated int64 operator_ids = 3;
-	repeated string currencies = 4;
-	optional int32 page = 5; // default 1
-	optional int32 page_size = 6; // default 20
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	repeated string currencies = 2;
+	optional int32 page = 3; // default 1
+	optional int32 page_size = 4; // default 20
 }
 
 message OperatorBalance {
@@ -444,17 +442,15 @@ message OperatorBalanceSettleResponse {
 }
 
 message ListOperatorBalanceTransactionsRequest {
-	repeated int64 retailer_operator_ids = 1;
-	repeated int64 company_operator_ids = 2;
-	repeated int64 operator_ids = 3;
-	repeated string currencies = 4;
-	repeated string transaction_types = 5;
-	optional int64 transaction_id = 6;
-	string target_operator_type = 7;
-	optional google.protobuf.Timestamp start_time = 8;
-	optional google.protobuf.Timestamp end_time = 9;
-	optional int32 page = 10;
-	optional int32 page_size = 11;
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	repeated string settlement_currencies = 2;
+	repeated string transaction_types = 3;
+	optional int64 transaction_id = 4;
+	string target_operator_type = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9;
 }
 
 message OperatorBalanceTransaction {
@@ -463,7 +459,7 @@ message OperatorBalanceTransaction {
 	string retailer_operator_name = 3;
 	string company_operator_name = 4;
 	string operator_name = 5;
-	string currency = 6;
+	string settlement_currency = 6;
 	string before_balance = 7;
 	string after_balance = 8;
 	string cash_amount = 9;

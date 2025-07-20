@@ -1138,6 +1138,10 @@ func (m *ListMonthlyRevenueShareRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.Type != nil {
+		// no validation rules for Type
+	}
+
 	if len(errors) > 0 {
 		return ListMonthlyRevenueShareRequestMultiError(errors)
 	}
@@ -4212,6 +4216,8 @@ func (m *ListMonthlyRevenueShareResponse_RevenueShareItem) validate(all bool) er
 
 	// no validation rules for RevenueShareCollect
 
+	// no validation rules for EstCosts
+
 	if len(errors) > 0 {
 		return ListMonthlyRevenueShareResponse_RevenueShareItemMultiError(errors)
 	}
@@ -4330,6 +4336,8 @@ func (m *ListMonthlyRevenueShareResponse_Summary) validate(all bool) error {
 	// no validation rules for RevenueShareDisburseTotal
 
 	// no validation rules for RevenueShareCollectTotal
+
+	// no validation rules for EstCostsTotal
 
 	if len(errors) > 0 {
 		return ListMonthlyRevenueShareResponse_SummaryMultiError(errors)

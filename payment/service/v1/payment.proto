@@ -540,34 +540,41 @@ message TransactionInfo {
   string gateway_transaction_id = 3;
   // Operator ID associated with the transaction
   int64 operator_id = 4;
+  int64 company_operator_id = 5;
+  int64 retailer_operator_id = 6;
+  int64 system_operator_id = 7;
+  string operator_name = 8;
+  string company_operator_name = 9;
+  string retailer_operator_name = 10;
+  string system_operator_name = 11;
   // ID of the user who initiated the transaction
-  int64 user_id = 5;
+  int64 user_id = 12;
   // VIP level of the user
-  int32 vip = 6;
+  int32 vip = 13;
   // Transaction amount in smallest currency unit
-  string amount = 7;
+  string amount = 14;
   // Currency code for the transaction
-  string currency = 8;
+  string currency = 15;
   // Transaction fee in smallest currency unit
-  string fee = 9;
+  string fee = 16;
   // Payment method used for the transaction
-  string payment_method = 10;
+  string payment_method = 17;
   // Payment channel used for the transaction
-  string payment_channel = 11;
+  string payment_channel = 18;
   // Crypto Protocol used for the transaction
-  string protocol = 12;
+  string protocol = 19;
   // Crypto Network used for the transaction
-  string network = 13;
+  string network = 20;
   // Crypto Address
-  string address = 14;
+  string address = 21;
   // Type of transaction (deposit or withdrawal)
-  TransactionType type = 15;
+  TransactionType type = 22;
   // Current status of the transaction
-  TransactionStatus status = 16;
+  TransactionStatus status = 23;
   // Timestamp when the transaction was created
-  google.protobuf.Timestamp created_at = 17;
+  google.protobuf.Timestamp created_at = 24;
   // Timestamp when the transaction was last updated
-  google.protobuf.Timestamp updated_at = 18;
+  google.protobuf.Timestamp updated_at = 25;
 }
 
 message TransactionDetail {
@@ -587,38 +594,38 @@ message GetTransactionPageRequest {
   
   // Optional transaction ID filter
   int64 transaction_id = 3 [json_name="transactionId"];
-  // Optional operator ID filter
-  string operator_id = 4 [json_name="operatorId"];
   // Optional currency filter
-  string currency = 5;
+  string currency = 4;
   // Optional payment method filter
-  string payment_method = 6 [json_name="paymentMethod"];
+  string payment_method = 5 [json_name="paymentMethod"];
   // Optional payment channel filter
-  string payment_channel = 7 [json_name="paymentChannel"];
+  string payment_channel = 6 [json_name="paymentChannel"];
   // Optional crypto protocol filter
-  string protocol = 8;
+  string protocol = 7;
   // Optional crypto network filter
-  string network = 9;
+  string network = 8;
   // Optional transaction type filter
-  TransactionType type = 10;
+  TransactionType type = 9;
   // Optional status filter
-  TransactionStatus status = 11;
+  TransactionStatus status = 10;
   // Optional agent filter
-  string agent = 12;
+  string agent = 11;
   // Optional start time for date range filter
-  google.protobuf.Timestamp start_time = 13 [json_name="startTime"];
+  google.protobuf.Timestamp start_time = 12 [json_name="startTime"];
   // Optional end time for date range filter
-  google.protobuf.Timestamp end_time = 14 [json_name="endTime"];
+  google.protobuf.Timestamp end_time = 13 [json_name="endTime"];
   // Optional sort direction
-  Sort sort = 15 [json_name="sort"];
+  Sort sort = 14 [json_name="sort"];
   // Source of the request (frontend or admin)
-  RequestSource source = 16 [json_name="source"];
+  RequestSource source = 15 [json_name="source"];
   // Optional user ID filter
-  int64 user_id = 17 [json_name="userId"];
+  int64 user_id = 16 [json_name="userId"];
   // Optional minimum amount filter
-  string min_amount = 18 [json_name="minAmount"];
+  string min_amount = 17 [json_name="minAmount"];
   // Optional maximum amount filter
-  string max_amount = 19 [json_name="maxAmount"];
+  string max_amount = 18 [json_name="maxAmount"];
+  api.common.OperatorContext operator_context = 19;
+  api.common.OperatorContextFilters operator_context_filters = 20;
 }
 
 // Response for transaction page
