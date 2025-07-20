@@ -2394,6 +2394,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalanceSettleResponse'
+    /v1/backoffice/wallet/operator/balance/update:
+        post:
+            tags:
+                - BackofficeWallet
+            description: UpdateOperatorBalance updates an operator balance， now only support update the enabled status
+            operationId: BackofficeWallet_UpdateOperatorBalance
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorBalanceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorBalanceResponse'
     /v1/backoffice/wallet/operator/balances/list:
         post:
             tags:
@@ -6392,6 +6411,8 @@ components:
                         type: string
                 transactionId:
                     type: string
+                targetOperatorType:
+                    type: string
                 startTime:
                     type: string
                     format: date-time
@@ -7893,6 +7914,8 @@ components:
                     type: string
                 transactionType:
                     type: string
+                status:
+                    type: string
                 memo:
                     type: string
                 feeAmount:
@@ -8246,6 +8269,20 @@ components:
         api.backoffice.service.v1.UpdateGameResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateOperatorBalanceRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
+                enabled:
+                    type: boolean
+        api.backoffice.service.v1.UpdateOperatorBalanceResponse:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.UpdateOperatorStatusRequest:
             type: object
             properties:

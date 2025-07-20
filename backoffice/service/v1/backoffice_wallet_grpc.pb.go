@@ -35,6 +35,7 @@ const (
 	BackofficeWallet_OperatorBalanceRollback_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceRollback"
 	BackofficeWallet_OperatorBalanceSettle_FullMethodName           = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceSettle"
 	BackofficeWallet_ListOperatorBalanceTransactions_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
+	BackofficeWallet_UpdateOperatorBalance_FullMethodName           = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -65,6 +66,8 @@ type BackofficeWalletClient interface {
 	OperatorBalanceSettle(ctx context.Context, in *OperatorBalanceSettleRequest, opts ...grpc.CallOption) (*OperatorBalanceSettleResponse, error)
 	// ListOperatorBalanceTransactions lists the balance transactions of an operator
 	ListOperatorBalanceTransactions(ctx context.Context, in *ListOperatorBalanceTransactionsRequest, opts ...grpc.CallOption) (*ListOperatorBalanceTransactionsResponse, error)
+	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
+	UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -235,6 +238,16 @@ func (c *backofficeWalletClient) ListOperatorBalanceTransactions(ctx context.Con
 	return out, nil
 }
 
+func (c *backofficeWalletClient) UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorBalanceResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_UpdateOperatorBalance_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -263,6 +276,8 @@ type BackofficeWalletServer interface {
 	OperatorBalanceSettle(context.Context, *OperatorBalanceSettleRequest) (*OperatorBalanceSettleResponse, error)
 	// ListOperatorBalanceTransactions lists the balance transactions of an operator
 	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
+	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
+	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -320,6 +335,9 @@ func (UnimplementedBackofficeWalletServer) OperatorBalanceSettle(context.Context
 }
 func (UnimplementedBackofficeWalletServer) ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorBalanceTransactions not implemented")
+}
+func (UnimplementedBackofficeWalletServer) UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorBalance not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -630,6 +648,24 @@ func _BackofficeWallet_ListOperatorBalanceTransactions_Handler(srv interface{}, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_UpdateOperatorBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorBalanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).UpdateOperatorBalance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_UpdateOperatorBalance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).UpdateOperatorBalance(ctx, req.(*UpdateOperatorBalanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -700,6 +736,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperatorBalanceTransactions",
 			Handler:    _BackofficeWallet_ListOperatorBalanceTransactions_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorBalance",
+			Handler:    _BackofficeWallet_UpdateOperatorBalance_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

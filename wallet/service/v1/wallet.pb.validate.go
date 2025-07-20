@@ -8597,6 +8597,8 @@ func (m *OperatorBalanceTransaction) validate(all bool) error {
 
 	// no validation rules for TransactionType
 
+	// no validation rules for Status
+
 	// no validation rules for Memo
 
 	// no validation rules for FeeAmount
@@ -9133,6 +9135,543 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = OperatorDebitResponseValidationError{}
+
+// Validate checks the field values on UpdateOperatorBalanceRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateOperatorBalanceRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateOperatorBalanceRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateOperatorBalanceRequestMultiError, or nil if none found.
+func (m *UpdateOperatorBalanceRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateOperatorBalanceRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetInitialOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateOperatorBalanceRequestValidationError{
+					field:  "InitialOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateOperatorBalanceRequestValidationError{
+					field:  "InitialOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitialOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateOperatorBalanceRequestValidationError{
+				field:  "InitialOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateOperatorBalanceRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateOperatorBalanceRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateOperatorBalanceRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Currency
+
+	// no validation rules for Enabled
+
+	if len(errors) > 0 {
+		return UpdateOperatorBalanceRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateOperatorBalanceRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateOperatorBalanceRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateOperatorBalanceRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateOperatorBalanceRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateOperatorBalanceRequestMultiError) AllErrors() []error { return m }
+
+// UpdateOperatorBalanceRequestValidationError is the validation error returned
+// by UpdateOperatorBalanceRequest.Validate if the designated constraints
+// aren't met.
+type UpdateOperatorBalanceRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateOperatorBalanceRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateOperatorBalanceRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateOperatorBalanceRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateOperatorBalanceRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateOperatorBalanceRequestValidationError) ErrorName() string {
+	return "UpdateOperatorBalanceRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateOperatorBalanceRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateOperatorBalanceRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateOperatorBalanceRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateOperatorBalanceRequestValidationError{}
+
+// Validate checks the field values on UpdateOperatorBalanceResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateOperatorBalanceResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateOperatorBalanceResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateOperatorBalanceResponseMultiError, or nil if none found.
+func (m *UpdateOperatorBalanceResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateOperatorBalanceResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Enabled
+
+	if len(errors) > 0 {
+		return UpdateOperatorBalanceResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateOperatorBalanceResponseMultiError is an error wrapping multiple
+// validation errors returned by UpdateOperatorBalanceResponse.ValidateAll()
+// if the designated constraints aren't met.
+type UpdateOperatorBalanceResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateOperatorBalanceResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateOperatorBalanceResponseMultiError) AllErrors() []error { return m }
+
+// UpdateOperatorBalanceResponseValidationError is the validation error
+// returned by UpdateOperatorBalanceResponse.Validate if the designated
+// constraints aren't met.
+type UpdateOperatorBalanceResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateOperatorBalanceResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateOperatorBalanceResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateOperatorBalanceResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateOperatorBalanceResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateOperatorBalanceResponseValidationError) ErrorName() string {
+	return "UpdateOperatorBalanceResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateOperatorBalanceResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateOperatorBalanceResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateOperatorBalanceResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateOperatorBalanceResponseValidationError{}
+
+// Validate checks the field values on GetOperatorTransactionSummaryRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOperatorTransactionSummaryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorTransactionSummaryRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOperatorTransactionSummaryRequestMultiError, or nil if none found.
+func (m *GetOperatorTransactionSummaryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorTransactionSummaryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorTransactionSummaryRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorTransactionSummaryRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorTransactionSummaryRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.StartTime != nil {
+		// no validation rules for StartTime
+	}
+
+	if m.EndTime != nil {
+		// no validation rules for EndTime
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorTransactionSummaryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorTransactionSummaryRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetOperatorTransactionSummaryRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorTransactionSummaryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorTransactionSummaryRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorTransactionSummaryRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorTransactionSummaryRequestValidationError is the validation error
+// returned by GetOperatorTransactionSummaryRequest.Validate if the designated
+// constraints aren't met.
+type GetOperatorTransactionSummaryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorTransactionSummaryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorTransactionSummaryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorTransactionSummaryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorTransactionSummaryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorTransactionSummaryRequestValidationError) ErrorName() string {
+	return "GetOperatorTransactionSummaryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorTransactionSummaryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorTransactionSummaryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorTransactionSummaryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorTransactionSummaryRequestValidationError{}
+
+// Validate checks the field values on GetOperatorTransactionSummaryResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOperatorTransactionSummaryResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorTransactionSummaryResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOperatorTransactionSummaryResponseMultiError, or nil if none found.
+func (m *GetOperatorTransactionSummaryResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorTransactionSummaryResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalWithdrawUsd
+
+	// no validation rules for TotalDepositUsd
+
+	// no validation rules for TotalTransferOutUsd
+
+	// no validation rules for TotalTransferInUsd
+
+	// no validation rules for TotalSwapOutUsd
+
+	// no validation rules for TotalSwapInUsd
+
+	// no validation rules for TotalFreezeUsd
+
+	// no validation rules for TotalRollbackUsd
+
+	if len(errors) > 0 {
+		return GetOperatorTransactionSummaryResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorTransactionSummaryResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// GetOperatorTransactionSummaryResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorTransactionSummaryResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorTransactionSummaryResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorTransactionSummaryResponseMultiError) AllErrors() []error { return m }
+
+// GetOperatorTransactionSummaryResponseValidationError is the validation error
+// returned by GetOperatorTransactionSummaryResponse.Validate if the
+// designated constraints aren't met.
+type GetOperatorTransactionSummaryResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorTransactionSummaryResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorTransactionSummaryResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorTransactionSummaryResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorTransactionSummaryResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorTransactionSummaryResponseValidationError) ErrorName() string {
+	return "GetOperatorTransactionSummaryResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorTransactionSummaryResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorTransactionSummaryResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorTransactionSummaryResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorTransactionSummaryResponseValidationError{}
 
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
