@@ -61,7 +61,7 @@ message PaymentMethodInfo {
   string minFee = 20;
   string source = 21;
   // JSON schema defining the required fields for this payment method
-  google.protobuf.Struct key_schema = 22; 
+  google.protobuf.ListValue key_schema = 22; 
 }
 
 // Response for payment method list

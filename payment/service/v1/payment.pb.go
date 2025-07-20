@@ -436,7 +436,7 @@ type PaymentMethodInfo struct {
 	MinFee       string `protobuf:"bytes,20,opt,name=minFee,proto3" json:"minFee,omitempty"`
 	Source       string `protobuf:"bytes,21,opt,name=source,proto3" json:"source,omitempty"`
 	// JSON schema defining the required fields for this payment method
-	KeySchema     *structpb.Struct `protobuf:"bytes,22,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
+	KeySchema     *structpb.ListValue `protobuf:"bytes,22,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -618,7 +618,7 @@ func (x *PaymentMethodInfo) GetSource() string {
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetKeySchema() *structpb.Struct {
+func (x *PaymentMethodInfo) GetKeySchema() *structpb.ListValue {
 	if x != nil {
 		return x.KeySchema
 	}
@@ -4142,7 +4142,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x1bGetPaymentMethodListRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x10\n" +
 	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x16\n" +
-	"\x06search\x18\x03 \x01(\tR\x06search\"\xa3\x05\n" +
+	"\x06search\x18\x03 \x01(\tR\x06search\"\xa6\x05\n" +
 	"\x11PaymentMethodInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
 	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x12\n" +
@@ -4168,9 +4168,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\anetwork\x18\x12 \x01(\tR\anetwork\x12\x1a\n" +
 	"\bprotocol\x18\x13 \x01(\tR\bprotocol\x12\x16\n" +
 	"\x06minFee\x18\x14 \x01(\tR\x06minFee\x12\x16\n" +
-	"\x06source\x18\x15 \x01(\tR\x06source\x126\n" +
+	"\x06source\x18\x15 \x01(\tR\x06source\x129\n" +
 	"\n" +
-	"key_schema\x18\x16 \x01(\v2\x17.google.protobuf.StructR\tkeySchema\"w\n" +
+	"key_schema\x18\x16 \x01(\v2\x1a.google.protobuf.ListValueR\tkeySchema\"w\n" +
 	"%GetSupportedPaymentMethodListResponse\x12N\n" +
 	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"n\n" +
 	"\x1cGetPaymentMethodListResponse\x12N\n" +
@@ -4601,52 +4601,53 @@ var file_payment_service_v1_payment_proto_goTypes = []any{
 	(*GetAddressResponse_Data)(nil),               // 43: payment.service.v1.GetAddressResponse.Data
 	(*GetOperatorAddressResponse_Data)(nil),       // 44: payment.service.v1.GetOperatorAddressResponse.Data
 	(*GetChannelsByIdsResponse_Channel)(nil),      // 45: payment.service.v1.GetChannelsByIdsResponse.Channel
-	(*structpb.Struct)(nil),                       // 46: google.protobuf.Struct
+	(*structpb.ListValue)(nil),                    // 46: google.protobuf.ListValue
 	(*common.OperatorContext)(nil),                // 47: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),                 // 48: google.protobuf.Timestamp
-	(*common.OperatorContextFilters)(nil),         // 49: api.common.OperatorContextFilters
+	(*structpb.Struct)(nil),                       // 48: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),                 // 49: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),         // 50: api.common.OperatorContextFilters
 }
 var file_payment_service_v1_payment_proto_depIdxs = []int32{
-	46, // 0: payment.service.v1.PaymentMethodInfo.key_schema:type_name -> google.protobuf.Struct
+	46, // 0: payment.service.v1.PaymentMethodInfo.key_schema:type_name -> google.protobuf.ListValue
 	7,  // 1: payment.service.v1.GetSupportedPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
 	7,  // 2: payment.service.v1.GetPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
 	47, // 3: payment.service.v1.CreatePaymentMethodRequest.operator_context:type_name -> api.common.OperatorContext
 	7,  // 4: payment.service.v1.CreatePaymentMethodResponse.payment_method:type_name -> payment.service.v1.PaymentMethodInfo
 	7,  // 5: payment.service.v1.UpdatePaymentChannelResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
 	47, // 6: payment.service.v1.CreatePaymentChannelRequest.operator_context:type_name -> api.common.OperatorContext
-	46, // 7: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
-	46, // 8: payment.service.v1.UpdatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
-	46, // 9: payment.service.v1.PaymentChannelInfo.schema:type_name -> google.protobuf.Struct
-	46, // 10: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
-	48, // 11: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
-	46, // 12: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
-	46, // 13: payment.service.v1.GetAddressRequest.extra:type_name -> google.protobuf.Struct
+	48, // 7: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
+	48, // 8: payment.service.v1.UpdatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
+	48, // 9: payment.service.v1.PaymentChannelInfo.schema:type_name -> google.protobuf.Struct
+	48, // 10: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
+	49, // 11: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
+	48, // 12: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
+	48, // 13: payment.service.v1.GetAddressRequest.extra:type_name -> google.protobuf.Struct
 	43, // 14: payment.service.v1.GetAddressResponse.data:type_name -> payment.service.v1.GetAddressResponse.Data
 	47, // 15: payment.service.v1.GetOperatorAddressRequest.target_operator_context:type_name -> api.common.OperatorContext
 	47, // 16: payment.service.v1.GetOperatorAddressRequest.operator_context:type_name -> api.common.OperatorContext
-	46, // 17: payment.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
+	48, // 17: payment.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
 	44, // 18: payment.service.v1.GetOperatorAddressResponse.data:type_name -> payment.service.v1.GetOperatorAddressResponse.Data
 	47, // 19: payment.service.v1.InitiateWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
-	46, // 20: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
-	48, // 21: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
+	48, // 20: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
+	49, // 21: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
 	47, // 22: payment.service.v1.InitiateOperatorWithdrawRequest.target_operator_context:type_name -> api.common.OperatorContext
 	47, // 23: payment.service.v1.InitiateOperatorWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
-	46, // 24: payment.service.v1.InitiateOperatorWithdrawRequest.extra:type_name -> google.protobuf.Struct
-	48, // 25: payment.service.v1.InitiateOperatorWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
+	48, // 24: payment.service.v1.InitiateOperatorWithdrawRequest.extra:type_name -> google.protobuf.Struct
+	49, // 25: payment.service.v1.InitiateOperatorWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 26: payment.service.v1.TransactionInfo.type:type_name -> payment.service.v1.TransactionType
 	1,  // 27: payment.service.v1.TransactionInfo.status:type_name -> payment.service.v1.TransactionStatus
-	48, // 28: payment.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
-	48, // 29: payment.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
+	49, // 28: payment.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	49, // 29: payment.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
 	31, // 30: payment.service.v1.TransactionDetail.transaction:type_name -> payment.service.v1.TransactionInfo
 	16, // 31: payment.service.v1.TransactionDetail.channel:type_name -> payment.service.v1.PaymentChannelInfo
 	0,  // 32: payment.service.v1.GetTransactionPageRequest.type:type_name -> payment.service.v1.TransactionType
 	1,  // 33: payment.service.v1.GetTransactionPageRequest.status:type_name -> payment.service.v1.TransactionStatus
-	48, // 34: payment.service.v1.GetTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
-	48, // 35: payment.service.v1.GetTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
+	49, // 34: payment.service.v1.GetTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
+	49, // 35: payment.service.v1.GetTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
 	2,  // 36: payment.service.v1.GetTransactionPageRequest.sort:type_name -> payment.service.v1.Sort
 	3,  // 37: payment.service.v1.GetTransactionPageRequest.source:type_name -> payment.service.v1.RequestSource
 	47, // 38: payment.service.v1.GetTransactionPageRequest.operator_context:type_name -> api.common.OperatorContext
-	49, // 39: payment.service.v1.GetTransactionPageRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	50, // 39: payment.service.v1.GetTransactionPageRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	31, // 40: payment.service.v1.GetTransactionPageResponse.transactions:type_name -> payment.service.v1.TransactionInfo
 	4,  // 41: payment.service.v1.GetPaymentChannelPageRequest.type:type_name -> payment.service.v1.ChannelType
 	2,  // 42: payment.service.v1.GetPaymentChannelPageRequest.sort:type_name -> payment.service.v1.Sort

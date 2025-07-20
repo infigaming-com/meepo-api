@@ -9618,6 +9618,20 @@ components:
                     type: string
                 providerBonus:
                     type: string
+        google.protobuf.ListValue:
+            type: object
+            properties:
+                values:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/google.protobuf.Value'
+                    description: Repeated field of dynamically typed values.
+            description: |-
+                `ListValue` is a wrapper around a repeated field of values.
+
+                 The JSON representation for `ListValue` is JSON array.
+        google.protobuf.Value:
+            description: Represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values.
         payment.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
@@ -10309,7 +10323,8 @@ components:
                 source:
                     type: string
                 keySchema:
-                    type: object
+                    allOf:
+                        - $ref: '#/components/schemas/google.protobuf.ListValue'
                     description: JSON schema defining the required fields for this payment method
             description: |-
                 Details of a single payment method
