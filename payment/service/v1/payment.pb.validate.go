@@ -5155,38 +5155,50 @@ func (m *GetChannelsByIdsResponse) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetChannels() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetChannelsByIdsResponseValidationError{
-						field:  fmt.Sprintf("Channels[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GetChannelsByIdsResponseValidationError{
-						field:  fmt.Sprintf("Channels[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GetChannelsByIdsResponseValidationError{
-					field:  fmt.Sprintf("Channels[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
+	{
+		sorted_keys := make([]string, len(m.GetChannels()))
+		i := 0
+		for key := range m.GetChannels() {
+			sorted_keys[i] = key
+			i++
 		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetChannels()[key]
+			_ = val
 
+			// no validation rules for Channels[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, GetChannelsByIdsResponseValidationError{
+							field:  fmt.Sprintf("Channels[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, GetChannelsByIdsResponseValidationError{
+							field:  fmt.Sprintf("Channels[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return GetChannelsByIdsResponseValidationError{
+						field:  fmt.Sprintf("Channels[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
 	}
 
 	if len(errors) > 0 {
@@ -5722,9 +5734,71 @@ func (m *GetChannelsByIdsResponse_Channel) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for ChannelId
+	// no validation rules for Id
+
+	// no validation rules for OperatorType
+
+	// no validation rules for OperatorId
+
+	// no validation rules for RealOperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for SystemOperatorId
+
+	// no validation rules for Psp
+
+	// no validation rules for Contact
+
+	// no validation rules for Gateway
+
+	// no validation rules for Category
 
 	// no validation rules for Name
+
+	// no validation rules for PaymentMethodId
+
+	// no validation rules for MerchantId
+
+	// no validation rules for Currency
+
+	// no validation rules for Protocol
+
+	// no validation rules for Network
+
+	// no validation rules for Country
+
+	// no validation rules for Method
+
+	// no validation rules for MinAmount
+
+	// no validation rules for MaxAmount
+
+	// no validation rules for FixFee
+
+	// no validation rules for RateFee
+
+	// no validation rules for PspMinAmount
+
+	// no validation rules for PspMaxAmount
+
+	// no validation rules for PspFixFee
+
+	// no validation rules for PspRateFee
+
+	// no validation rules for Eat
+
+	// no validation rules for Schema
+
+	// no validation rules for Enable
+
+	// no validation rules for MethodEnable
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for UpdatedAt
 
 	if len(errors) > 0 {
 		return GetChannelsByIdsResponse_ChannelMultiError(errors)
