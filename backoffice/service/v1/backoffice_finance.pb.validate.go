@@ -57,6 +57,35 @@ func (m *ListInvoicesRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListInvoicesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListInvoicesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListInvoicesRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.Month != nil {
 		// no validation rules for Month
 	}
@@ -560,6 +589,35 @@ func (m *ListOperatorRevenueShareRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOperatorRevenueShareRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListOperatorRevenueShareRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOperatorRevenueShareRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.InvoiceId != nil {
 		// no validation rules for InvoiceId
 	}
@@ -824,6 +882,35 @@ func (m *ListThirdPartyFeesRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListThirdPartyFeesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListThirdPartyFeesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListThirdPartyFeesRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.InvoiceId != nil {
 		// no validation rules for InvoiceId
 	}
@@ -1081,6 +1168,35 @@ func (m *ListMonthlyRevenueShareRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListMonthlyRevenueShareRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListMonthlyRevenueShareRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListMonthlyRevenueShareRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.InvoiceId != nil {
 		// no validation rules for InvoiceId
@@ -2270,6 +2386,35 @@ func (m *ListAdjustmentsRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListAdjustmentsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListAdjustmentsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListAdjustmentsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.InvoiceId != nil {
 		// no validation rules for InvoiceId
