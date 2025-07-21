@@ -30,7 +30,7 @@ const (
 	BackofficePayment_UpdatePaymentChannel_FullMethodName              = "/api.backoffice.service.v1.BackofficePayment/UpdatePaymentChannel"
 	BackofficePayment_CreatePaymentChannel_FullMethodName              = "/api.backoffice.service.v1.BackofficePayment/CreatePaymentChannel"
 	BackofficePayment_GetOperatorAddress_FullMethodName                = "/api.backoffice.service.v1.BackofficePayment/GetOperatorAddress"
-	BackofficePayment_GetPaymentChannelPage_FullMethodName             = "/api.backoffice.service.v1.BackofficePayment/GetPaymentChannelPage"
+	BackofficePayment_GetOperatorPaymentChannelPage_FullMethodName     = "/api.backoffice.service.v1.BackofficePayment/GetOperatorPaymentChannelPage"
 	BackofficePayment_UpdatePaymentMethod_FullMethodName               = "/api.backoffice.service.v1.BackofficePayment/UpdatePaymentMethod"
 )
 
@@ -77,7 +77,7 @@ type BackofficePaymentClient interface {
 	// Get payment channel page with pagination and filters
 	// Retrieves a paginated list of payment channels with optional filtering
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
-	GetPaymentChannelPage(ctx context.Context, in *v1.GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*v1.GetPaymentChannelPageResponse, error)
+	GetOperatorPaymentChannelPage(ctx context.Context, in *GetOperatorPaymentChannelPageRequest, opts ...grpc.CallOption) (*v1.GetPaymentChannelPageResponse, error)
 	// Update payment channel
 	UpdatePaymentMethod(ctx context.Context, in *v1.UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*v1.CreatePaymentMethodResponse, error)
 }
@@ -190,10 +190,10 @@ func (c *backofficePaymentClient) GetOperatorAddress(ctx context.Context, in *Ge
 	return out, nil
 }
 
-func (c *backofficePaymentClient) GetPaymentChannelPage(ctx context.Context, in *v1.GetPaymentChannelPageRequest, opts ...grpc.CallOption) (*v1.GetPaymentChannelPageResponse, error) {
+func (c *backofficePaymentClient) GetOperatorPaymentChannelPage(ctx context.Context, in *GetOperatorPaymentChannelPageRequest, opts ...grpc.CallOption) (*v1.GetPaymentChannelPageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetPaymentChannelPageResponse)
-	err := c.cc.Invoke(ctx, BackofficePayment_GetPaymentChannelPage_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficePayment_GetOperatorPaymentChannelPage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -253,7 +253,7 @@ type BackofficePaymentServer interface {
 	// Get payment channel page with pagination and filters
 	// Retrieves a paginated list of payment channels with optional filtering
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
-	GetPaymentChannelPage(context.Context, *v1.GetPaymentChannelPageRequest) (*v1.GetPaymentChannelPageResponse, error)
+	GetOperatorPaymentChannelPage(context.Context, *GetOperatorPaymentChannelPageRequest) (*v1.GetPaymentChannelPageResponse, error)
 	// Update payment channel
 	UpdatePaymentMethod(context.Context, *v1.UpdatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error)
 	mustEmbedUnimplementedBackofficePaymentServer()
@@ -296,8 +296,8 @@ func (UnimplementedBackofficePaymentServer) CreatePaymentChannel(context.Context
 func (UnimplementedBackofficePaymentServer) GetOperatorAddress(context.Context, *GetOperatorAddressRequest) (*v1.GetOperatorAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorAddress not implemented")
 }
-func (UnimplementedBackofficePaymentServer) GetPaymentChannelPage(context.Context, *v1.GetPaymentChannelPageRequest) (*v1.GetPaymentChannelPageResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentChannelPage not implemented")
+func (UnimplementedBackofficePaymentServer) GetOperatorPaymentChannelPage(context.Context, *GetOperatorPaymentChannelPageRequest) (*v1.GetPaymentChannelPageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorPaymentChannelPage not implemented")
 }
 func (UnimplementedBackofficePaymentServer) UpdatePaymentMethod(context.Context, *v1.UpdatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentMethod not implemented")
@@ -503,20 +503,20 @@ func _BackofficePayment_GetOperatorAddress_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficePayment_GetPaymentChannelPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetPaymentChannelPageRequest)
+func _BackofficePayment_GetOperatorPaymentChannelPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorPaymentChannelPageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficePaymentServer).GetPaymentChannelPage(ctx, in)
+		return srv.(BackofficePaymentServer).GetOperatorPaymentChannelPage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficePayment_GetPaymentChannelPage_FullMethodName,
+		FullMethod: BackofficePayment_GetOperatorPaymentChannelPage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).GetPaymentChannelPage(ctx, req.(*v1.GetPaymentChannelPageRequest))
+		return srv.(BackofficePaymentServer).GetOperatorPaymentChannelPage(ctx, req.(*GetOperatorPaymentChannelPageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -587,8 +587,8 @@ var BackofficePayment_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficePayment_GetOperatorAddress_Handler,
 		},
 		{
-			MethodName: "GetPaymentChannelPage",
-			Handler:    _BackofficePayment_GetPaymentChannelPage_Handler,
+			MethodName: "GetOperatorPaymentChannelPage",
+			Handler:    _BackofficePayment_GetOperatorPaymentChannelPage_Handler,
 		},
 		{
 			MethodName: "UpdatePaymentMethod",

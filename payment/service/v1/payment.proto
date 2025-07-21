@@ -131,24 +131,26 @@ message CreatePaymentChannelRequest {
 	api.common.OperatorContext operator_context = 2;
   // ID of the payment method to be used
   string payment_method_id = 3;
-  // Type of channel (e.g., deposit, withdrawal)
-  string type = 4;
   // Contact Info email
-  string contact = 5;
+  string contact = 4;
   // PSP Fixed Fee on the Amount
-  string psp_fixed_fee = 6;
+  string fixed_fee = 5;
   // PSP Rate Fee 
-  string psp_fee_rate = 7;
+  string fee_rate = 6;
+  // Minimum Fee 
+  string min_fee = 7;
   // User Fixed Fee on the Amount
   string user_fixed_fee = 8;
   // User Rate Fee 
   string user_fee_rate = 9;
+  // Minimum Fee 
+  string user_min_fee = 10;
   // Min Amount
-  string min_amount = 10;
+  string min_amount = 11;
   // Max Amount
-  string max_amount = 11;
+  string max_amount = 12;
   // Configuration fields for the payment channel in JSON format
-  google.protobuf.Struct key = 12;
+  google.protobuf.Struct key = 13;
 }
 
 // Request to create a payment channel
@@ -703,6 +705,37 @@ message GetPaymentChannelPageRequest {
   // Optional sort direction
   Sort sort = 12;
 }
+// Operator to retrieve a paginated list of payment channels with optional filters
+message GetOperatorPaymentChannelPageRequest {
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2;
+    // Optional operator ID filter
+  string operator_id = 3;
+  // Optional channel type filter
+  ChannelType type = 4;
+  // Optional category filter
+  string category = 5;
+  // Optional payment method filter
+  string payment_method = 6;
+  // Optional currency filter
+  string currency = 7;
+  // Optional crypto protocol
+  string protocol = 8;
+  // Optional crypto network filter
+  string network = 9;
+  // Optional country filter
+  string country = 10;
+  // Source of operator type
+  string source = 11;
+  // Optional sort direction
+  Sort sort = 12;
+  // ID of the Operator connect with this channel
+  api.common.OperatorContextFilters operator_context_filters = 13;
+  // ID of the Operator connect with this channel
+	api.common.OperatorContext operator_context = 14;
+}
 
 // Response for payment channel page
 // Contains paginated list of payment channels and pagination metadata
@@ -924,4 +957,7 @@ service Payment {
 
 	rpc UpdatePaymentMethod(UpdatePaymentMethodRequest) returns (CreatePaymentMethodResponse) {
 	}
+
+  rpc GetOperatorPaymentChannelPage(GetOperatorPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) {
+  }
 }

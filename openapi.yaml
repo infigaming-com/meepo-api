@@ -1296,12 +1296,12 @@ paths:
                 Get payment channel page with pagination and filters
                  Retrieves a paginated list of payment channels with optional filtering
                  Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
-            operationId: BackofficePayment_GetPaymentChannelPage
+            operationId: BackofficePayment_GetOperatorPaymentChannelPage
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest'
                 required: true
             responses:
                 "200":
@@ -4367,6 +4367,61 @@ components:
             description: |-
                 Request to get address
                  Used to get DC address
+        api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                operatorId:
+                    type: string
+                    description: Optional operator ID filter
+                type:
+                    enum:
+                        - CHANNEL_TYPE_ALL
+                        - CHANNEL_TYPE_DEPOSIT
+                        - CHANNEL_TYPE_WITHDRAW
+                    type: string
+                    description: Optional channel type filter
+                    format: enum
+                category:
+                    type: string
+                    description: Optional category filter
+                paymentMethod:
+                    type: string
+                    description: Optional payment method filter
+                currency:
+                    type: string
+                    description: Optional currency filter
+                protocol:
+                    type: string
+                    description: Optional crypto protocol
+                network:
+                    type: string
+                    description: Optional crypto network filter
+                country:
+                    type: string
+                    description: Optional country filter
+                source:
+                    type: string
+                    description: Source of operator type
+                sort:
+                    enum:
+                        - DESC
+                        - ASC
+                    type: string
+                    description: Optional sort direction
+                    format: enum
+                operatorContextFilters:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                    description: ID of the Operator connect with this channel
+            description: Used to retrieve a paginated list of payment channels with optional filters
         api.backoffice.service.v1.GetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -9667,24 +9722,27 @@ components:
                 paymentMethodId:
                     type: string
                     description: ID of the payment method to be used
-                type:
-                    type: string
-                    description: Type of channel (e.g., deposit, withdrawal)
                 contact:
                     type: string
                     description: Contact Info email
-                pspFixedFee:
+                fixedFee:
                     type: string
                     description: PSP Fixed Fee on the Amount
-                pspFeeRate:
+                feeRate:
                     type: string
                     description: PSP Rate Fee
+                minFee:
+                    type: string
+                    description: Minimum Fee
                 userFixedFee:
                     type: string
                     description: User Fixed Fee on the Amount
                 userFeeRate:
                     type: string
                     description: User Rate Fee
+                userMinFee:
+                    type: string
+                    description: Minimum Fee
                 minAmount:
                     type: string
                     description: Min Amount

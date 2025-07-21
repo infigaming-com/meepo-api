@@ -699,3 +699,161 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetTransactionPageRequestValidationError{}
+
+// Validate checks the field values on GetOperatorPaymentChannelPageRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOperatorPaymentChannelPageRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorPaymentChannelPageRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOperatorPaymentChannelPageRequestMultiError, or nil if none found.
+func (m *GetOperatorPaymentChannelPageRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorPaymentChannelPageRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for OperatorId
+
+	// no validation rules for Type
+
+	// no validation rules for Category
+
+	// no validation rules for PaymentMethod
+
+	// no validation rules for Currency
+
+	// no validation rules for Protocol
+
+	// no validation rules for Network
+
+	// no validation rules for Country
+
+	// no validation rules for Source
+
+	// no validation rules for Sort
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorPaymentChannelPageRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorPaymentChannelPageRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorPaymentChannelPageRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorPaymentChannelPageRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorPaymentChannelPageRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetOperatorPaymentChannelPageRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorPaymentChannelPageRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorPaymentChannelPageRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorPaymentChannelPageRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorPaymentChannelPageRequestValidationError is the validation error
+// returned by GetOperatorPaymentChannelPageRequest.Validate if the designated
+// constraints aren't met.
+type GetOperatorPaymentChannelPageRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorPaymentChannelPageRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorPaymentChannelPageRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorPaymentChannelPageRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorPaymentChannelPageRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorPaymentChannelPageRequestValidationError) ErrorName() string {
+	return "GetOperatorPaymentChannelPageRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorPaymentChannelPageRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorPaymentChannelPageRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorPaymentChannelPageRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorPaymentChannelPageRequestValidationError{}
