@@ -97,28 +97,18 @@ type CreatePaymentMethodRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the payment method to be used
 	PaymentMethodId string `protobuf:"bytes,1,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
-	// Currency Type
-	CurrencyType string `protobuf:"bytes,2,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
 	// Contact Info email
-	Contact string `protobuf:"bytes,3,opt,name=contact,proto3" json:"contact,omitempty"`
+	Contact string `protobuf:"bytes,2,opt,name=contact,proto3" json:"contact,omitempty"`
 	// Fixed Fee on the Amount
-	FixedFee string `protobuf:"bytes,4,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
+	SysFixedFee string `protobuf:"bytes,3,opt,name=sys_fixed_fee,json=sysFixedFee,proto3" json:"sys_fixed_fee,omitempty"`
 	// Rate Fee
-	FeeRate string `protobuf:"bytes,5,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	SysFeeRate string `protobuf:"bytes,4,opt,name=sys_fee_rate,json=sysFeeRate,proto3" json:"sys_fee_rate,omitempty"`
 	// Min Amount
-	MinAmount string `protobuf:"bytes,6,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	SysMinAmount string `protobuf:"bytes,5,opt,name=sys_min_amount,json=sysMinAmount,proto3" json:"sys_min_amount,omitempty"`
 	// Max Amount
-	MaxAmount string `protobuf:"bytes,7,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	// PSP Fixed Fee on the Amount
-	PspFixedFee string `protobuf:"bytes,8,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
-	// PSP Rate Fee
-	PspFeeRate string `protobuf:"bytes,9,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
-	// PSP Min Amount
-	PspMinAmount string `protobuf:"bytes,10,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
-	// PSP Max Amount
-	PspMaxAmount string `protobuf:"bytes,11,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
-	// JSON schema defining the required fields for this payment method
-	MininalFee    string `protobuf:"bytes,12,opt,name=mininal_fee,json=mininalFee,proto3" json:"mininal_fee,omitempty"`
+	SysMaxAmount string `protobuf:"bytes,6,opt,name=sys_max_amount,json=sysMaxAmount,proto3" json:"sys_max_amount,omitempty"`
+	// Minmum Fee
+	SysMinFee     string `protobuf:"bytes,7,opt,name=sys_min_fee,json=sysMinFee,proto3" json:"sys_min_fee,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -160,13 +150,6 @@ func (x *CreatePaymentMethodRequest) GetPaymentMethodId() string {
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetCurrencyType() string {
-	if x != nil {
-		return x.CurrencyType
-	}
-	return ""
-}
-
 func (x *CreatePaymentMethodRequest) GetContact() string {
 	if x != nil {
 		return x.Contact
@@ -174,65 +157,37 @@ func (x *CreatePaymentMethodRequest) GetContact() string {
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetFixedFee() string {
+func (x *CreatePaymentMethodRequest) GetSysFixedFee() string {
 	if x != nil {
-		return x.FixedFee
+		return x.SysFixedFee
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetFeeRate() string {
+func (x *CreatePaymentMethodRequest) GetSysFeeRate() string {
 	if x != nil {
-		return x.FeeRate
+		return x.SysFeeRate
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetMinAmount() string {
+func (x *CreatePaymentMethodRequest) GetSysMinAmount() string {
 	if x != nil {
-		return x.MinAmount
+		return x.SysMinAmount
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetMaxAmount() string {
+func (x *CreatePaymentMethodRequest) GetSysMaxAmount() string {
 	if x != nil {
-		return x.MaxAmount
+		return x.SysMaxAmount
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetPspFixedFee() string {
+func (x *CreatePaymentMethodRequest) GetSysMinFee() string {
 	if x != nil {
-		return x.PspFixedFee
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetPspFeeRate() string {
-	if x != nil {
-		return x.PspFeeRate
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetPspMinAmount() string {
-	if x != nil {
-		return x.PspMinAmount
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetPspMaxAmount() string {
-	if x != nil {
-		return x.PspMaxAmount
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetMininalFee() string {
-	if x != nil {
-		return x.MininalFee
+		return x.SysMinFee
 	}
 	return ""
 }
@@ -743,25 +698,16 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12-\n" +
-	"\x05extra\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xb0\x03\n" +
+	"\x05extra\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x94\x02\n" +
 	"\x1aCreatePaymentMethodRequest\x12*\n" +
-	"\x11payment_method_id\x18\x01 \x01(\tR\x0fpaymentMethodId\x12#\n" +
-	"\rcurrency_type\x18\x02 \x01(\tR\fcurrencyType\x12\x18\n" +
-	"\acontact\x18\x03 \x01(\tR\acontact\x12\x1b\n" +
-	"\tfixed_fee\x18\x04 \x01(\tR\bfixedFee\x12\x19\n" +
-	"\bfee_rate\x18\x05 \x01(\tR\afeeRate\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\x06 \x01(\tR\tminAmount\x12\x1d\n" +
-	"\n" +
-	"max_amount\x18\a \x01(\tR\tmaxAmount\x12\"\n" +
-	"\rpsp_fixed_fee\x18\b \x01(\tR\vpspFixedFee\x12 \n" +
-	"\fpsp_fee_rate\x18\t \x01(\tR\n" +
-	"pspFeeRate\x12$\n" +
-	"\x0epsp_min_amount\x18\n" +
-	" \x01(\tR\fpspMinAmount\x12$\n" +
-	"\x0epsp_max_amount\x18\v \x01(\tR\fpspMaxAmount\x12\x1f\n" +
-	"\vmininal_fee\x18\f \x01(\tR\n" +
-	"mininalFee\"\x91\x03\n" +
+	"\x11payment_method_id\x18\x01 \x01(\tR\x0fpaymentMethodId\x12\x18\n" +
+	"\acontact\x18\x02 \x01(\tR\acontact\x12\"\n" +
+	"\rsys_fixed_fee\x18\x03 \x01(\tR\vsysFixedFee\x12 \n" +
+	"\fsys_fee_rate\x18\x04 \x01(\tR\n" +
+	"sysFeeRate\x12$\n" +
+	"\x0esys_min_amount\x18\x05 \x01(\tR\fsysMinAmount\x12$\n" +
+	"\x0esys_max_amount\x18\x06 \x01(\tR\fsysMaxAmount\x12\x1e\n" +
+	"\vsys_min_fee\x18\a \x01(\tR\tsysMinFee\"\x91\x03\n" +
 	"\x1bCreatePaymentChannelRequest\x12\x1f\n" +
 	"\vmerchant_id\x18\x01 \x01(\tR\n" +
 	"merchantId\x12*\n" +

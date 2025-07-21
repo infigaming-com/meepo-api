@@ -225,27 +225,17 @@ func (m *CreatePaymentMethodRequest) validate(all bool) error {
 
 	// no validation rules for PaymentMethodId
 
-	// no validation rules for CurrencyType
-
 	// no validation rules for Contact
 
-	// no validation rules for FixedFee
+	// no validation rules for SysFixedFee
 
-	// no validation rules for FeeRate
+	// no validation rules for SysFeeRate
 
-	// no validation rules for MinAmount
+	// no validation rules for SysMinAmount
 
-	// no validation rules for MaxAmount
+	// no validation rules for SysMaxAmount
 
-	// no validation rules for PspFixedFee
-
-	// no validation rules for PspFeeRate
-
-	// no validation rules for PspMinAmount
-
-	// no validation rules for PspMaxAmount
-
-	// no validation rules for MininalFee
+	// no validation rules for SysMinFee
 
 	if len(errors) > 0 {
 		return CreatePaymentMethodRequestMultiError(errors)

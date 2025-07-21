@@ -726,6 +726,20 @@ func (m *CreatePaymentMethodRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for PaymentMethodId
+
+	// no validation rules for Contact
+
+	// no validation rules for SysFixedFee
+
+	// no validation rules for SysFeeRate
+
+	// no validation rules for SysMinAmount
+
+	// no validation rules for SysMaxAmount
+
+	// no validation rules for SysMinFee
+
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -754,20 +768,6 @@ func (m *CreatePaymentMethodRequest) validate(all bool) error {
 			}
 		}
 	}
-
-	// no validation rules for PaymentMethodId
-
-	// no validation rules for Contact
-
-	// no validation rules for SysFixedFee
-
-	// no validation rules for SysFeeRate
-
-	// no validation rules for SysMinAmount
-
-	// no validation rules for SysMaxAmount
-
-	// no validation rules for SysMinFee
 
 	if len(errors) > 0 {
 		return CreatePaymentMethodRequestMultiError(errors)
@@ -5901,116 +5901,3 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetOperatorAddressResponse_DataValidationError{}
-
-// Validate checks the field values on GetChannelsByIdsResponse_Channel with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *GetChannelsByIdsResponse_Channel) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GetChannelsByIdsResponse_Channel with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// GetChannelsByIdsResponse_ChannelMultiError, or nil if none found.
-func (m *GetChannelsByIdsResponse_Channel) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetChannelsByIdsResponse_Channel) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for ChannelId
-
-	// no validation rules for Name
-
-	// no validation rules for Psp
-
-	// no validation rules for Protocol
-
-	if len(errors) > 0 {
-		return GetChannelsByIdsResponse_ChannelMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetChannelsByIdsResponse_ChannelMultiError is an error wrapping multiple
-// validation errors returned by
-// GetChannelsByIdsResponse_Channel.ValidateAll() if the designated
-// constraints aren't met.
-type GetChannelsByIdsResponse_ChannelMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetChannelsByIdsResponse_ChannelMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetChannelsByIdsResponse_ChannelMultiError) AllErrors() []error { return m }
-
-// GetChannelsByIdsResponse_ChannelValidationError is the validation error
-// returned by GetChannelsByIdsResponse_Channel.Validate if the designated
-// constraints aren't met.
-type GetChannelsByIdsResponse_ChannelValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetChannelsByIdsResponse_ChannelValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetChannelsByIdsResponse_ChannelValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetChannelsByIdsResponse_ChannelValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetChannelsByIdsResponse_ChannelValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetChannelsByIdsResponse_ChannelValidationError) ErrorName() string {
-	return "GetChannelsByIdsResponse_ChannelValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetChannelsByIdsResponse_ChannelValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetChannelsByIdsResponse_Channel.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetChannelsByIdsResponse_ChannelValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetChannelsByIdsResponse_ChannelValidationError{}

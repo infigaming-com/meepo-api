@@ -3432,6 +3432,18 @@ components:
                     type: string
                 operatorName:
                     type: string
+                companyOperatorId:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorId:
+                    type: string
+                systemOperatorName:
+                    type: string
                 currency:
                     type: string
                 settlementCurrency:
@@ -3643,39 +3655,24 @@ components:
                 paymentMethodId:
                     type: string
                     description: ID of the payment method to be used
-                currencyType:
-                    type: string
-                    description: Currency Type
                 contact:
                     type: string
                     description: Contact Info email
-                fixedFee:
+                sysFixedFee:
                     type: string
                     description: Fixed Fee on the Amount
-                feeRate:
+                sysFeeRate:
                     type: string
                     description: Rate Fee
-                minAmount:
+                sysMinAmount:
                     type: string
                     description: Min Amount
-                maxAmount:
+                sysMaxAmount:
                     type: string
                     description: Max Amount
-                pspFixedFee:
+                sysMinFee:
                     type: string
-                    description: PSP Fixed Fee on the Amount
-                pspFeeRate:
-                    type: string
-                    description: PSP Rate Fee
-                pspMinAmount:
-                    type: string
-                    description: PSP Min Amount
-                pspMaxAmount:
-                    type: string
-                    description: PSP Max Amount
-                mininalFee:
-                    type: string
-                    description: JSON schema defining the required fields for this payment method
+                    description: Minmum Fee
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method
@@ -5981,10 +5978,6 @@ components:
         api.backoffice.service.v1.ListBetsRequest:
             type: object
             properties:
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
                 providerIds:
                     type: array
                     items:
@@ -6023,6 +6016,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListBetsRequest_Currencies:
             type: object
             properties:
@@ -9767,10 +9762,6 @@ components:
         payment.service.v1.CreatePaymentMethodRequest:
             type: object
             properties:
-                operatorContext:
-                    allOf:
-                        - $ref: '#/components/schemas/api.common.OperatorContext'
-                    description: ID of the Operator connect with this channel
                 paymentMethodId:
                     type: string
                     description: ID of the payment method to be used
@@ -9792,6 +9783,10 @@ components:
                 sysMinFee:
                     type: string
                     description: Minmum Fee
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: ID of the Operator connect with this channel
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method

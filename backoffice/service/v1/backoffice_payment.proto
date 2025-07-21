@@ -143,29 +143,19 @@ message GetOperatorAddressRequest {
 // Used to create a new payment channel with specified merchant and method
 message CreatePaymentMethodRequest {
   // ID of the payment method to be used
-  string payment_method_id = 1 [json_name="paymentMethodId"];
-  // Currency Type
-  string currency_type = 2;
+  string payment_method_id = 1;
   // Contact Info email
-  string contact = 3;
+  string contact = 2;
   // Fixed Fee on the Amount
-  string fixed_fee = 4;
+  string sys_fixed_fee = 3;
   // Rate Fee 
-  string fee_rate = 5;
+  string sys_fee_rate = 4;
   // Min Amount
-  string min_amount = 6;
+  string sys_min_amount = 5;
   // Max Amount
-  string max_amount = 7;
-  // PSP Fixed Fee on the Amount
-  string psp_fixed_fee = 8;
-  // PSP Rate Fee 
-  string psp_fee_rate = 9;
-  // PSP Min Amount
-  string psp_min_amount = 10;
-  // PSP Max Amount
-  string psp_max_amount = 11;
-  // JSON schema defining the required fields for this payment method
-  string mininal_fee = 12;
+  string sys_max_amount = 6;
+  // Minmum Fee
+  string sys_min_fee = 7;
 }
 
 // Request to create a payment channel

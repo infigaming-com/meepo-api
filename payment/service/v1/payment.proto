@@ -96,22 +96,22 @@ message GetPaymentMethodListResponse {
 // Request to create a payment channel
 // Used to create a new payment channel with specified merchant and method
 message CreatePaymentMethodRequest {
-  // ID of the Operator connect with this channel
-	api.common.OperatorContext operator_context = 1;
   // ID of the payment method to be used
-  string payment_method_id = 2;
+  string payment_method_id = 1;
   // Currency Type
-  string contact = 4;
+  string contact = 2;
   // Fixed Fee on the Amount
-  string sys_fixed_fee = 5;
+  string sys_fixed_fee = 3;
   // Rate Fee 
-  string sys_fee_rate = 6;
+  string sys_fee_rate = 4;
   // Min Amount
-  string sys_min_amount = 7;
+  string sys_min_amount = 5;
   // Max Amount
-  string sys_max_amount = 8;
+  string sys_max_amount = 6;
   // Minmum Fee
-  string sys_min_fee = 13;
+  string sys_min_fee = 7;
+  // ID of the Operator connect with this channel
+	api.common.OperatorContext operator_context = 8;
 }
 
 message CreatePaymentMethodResponse {
@@ -775,13 +775,7 @@ message GetChannelsByIdsRequest {
 }
 
 message GetChannelsByIdsResponse {
-	message Channel {
-		string channel_id = 1;
-		string name = 2;
-		string psp = 3;
-		string protocol = 4;
-	}
-	repeated Channel channels = 1;
+  repeated PaymentChannelInfo channels = 1;
 }
 
 message UpdatePaymentMethodRequest {
