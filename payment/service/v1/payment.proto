@@ -718,10 +718,41 @@ message GetChannelsByIdsRequest {
 
 message GetChannelsByIdsResponse {
 	message Channel {
-		string channel_id = 1;
-		string name = 2;
+		string id = 1;
+		string operator_type = 2;
+		int64 operator_id = 3;
+		int64 real_operator_id = 4;
+		int64 company_operator_id = 5;
+		int64 retailer_operator_id = 6;
+		int64 system_operator_id = 7;
+		string psp = 8;
+		string contact = 9;
+		string gateway = 10;
+		string category = 11;
+		string name = 12;
+		string payment_method_id = 13;
+		string merchant_id = 14;
+		string currency = 15;
+		string protocol = 16;
+		string network = 17;
+		string country = 18;
+		string method = 19;
+		string min_amount = 20;
+		string max_amount = 21;
+		string fix_fee = 22;
+		string rate_fee = 23;
+		string psp_min_amount = 24;
+		string psp_max_amount = 25;
+		string psp_fix_fee = 26;
+		string psp_rate_fee = 27;
+		int32 eat = 28;
+		string schema = 29;
+		bool enable = 30;
+		bool method_enable = 31;
+		int64 created_at = 32;
+		int64 updated_at = 33;
 	}
-	repeated Channel channels = 1;
+	map<string, Channel> channels = 1;
 }
 
 message UpdatePaymentMethodRequest {
