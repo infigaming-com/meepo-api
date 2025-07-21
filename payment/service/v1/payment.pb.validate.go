@@ -275,7 +275,7 @@ func (m *PaymentMethodInfo) validate(all bool) error {
 
 	// no validation rules for Psp
 
-	// no validation rules for Type
+	// no validation rules for SupportedType
 
 	// no validation rules for Currency
 
@@ -287,13 +287,15 @@ func (m *PaymentMethodInfo) validate(all bool) error {
 
 	// no validation rules for PaymentMethod
 
-	// no validation rules for FixedFee
+	// no validation rules for SysFixedFee
 
-	// no validation rules for FeeRate
+	// no validation rules for SysFeeRate
 
-	// no validation rules for MinAmount
+	// no validation rules for SysMinAmount
 
-	// no validation rules for MaxAmount
+	// no validation rules for SysMaxAmount
+
+	// no validation rules for SysMinFee
 
 	// no validation rules for PspFixedFee
 
@@ -303,15 +305,19 @@ func (m *PaymentMethodInfo) validate(all bool) error {
 
 	// no validation rules for PspMaxAmount
 
+	// no validation rules for PspMinFee
+
 	// no validation rules for Enable
 
 	// no validation rules for Network
 
 	// no validation rules for Protocol
 
-	// no validation rules for MinFee
-
 	// no validation rules for Source
+
+	// no validation rules for AverageTime
+
+	// no validation rules for SuccessRate
 
 	if all {
 		switch v := interface{}(m.GetKeySchema()).(type) {
@@ -751,27 +757,17 @@ func (m *CreatePaymentMethodRequest) validate(all bool) error {
 
 	// no validation rules for PaymentMethodId
 
-	// no validation rules for CurrencyType
-
 	// no validation rules for Contact
 
-	// no validation rules for FixedFee
+	// no validation rules for SysFixedFee
 
-	// no validation rules for FeeRate
+	// no validation rules for SysFeeRate
 
-	// no validation rules for MinAmount
+	// no validation rules for SysMinAmount
 
-	// no validation rules for MaxAmount
+	// no validation rules for SysMaxAmount
 
-	// no validation rules for PspFixedFee
-
-	// no validation rules for PspFeeRate
-
-	// no validation rules for PspMinAmount
-
-	// no validation rules for PspMaxAmount
-
-	// no validation rules for MininalFee
+	// no validation rules for SysMinFee
 
 	if len(errors) > 0 {
 		return CreatePaymentMethodRequestMultiError(errors)
@@ -1581,8 +1577,6 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for SupportType
 
-	// no validation rules for CurrencyType
-
 	// no validation rules for Psp
 
 	// no validation rules for Category
@@ -1598,6 +1592,8 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 	// no validation rules for PaymentMethodId
 
 	// no validation rules for Currency
+
+	// no validation rules for CurrencyType
 
 	// no validation rules for Protocol
 
@@ -1617,9 +1613,27 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for FeeRate
 
-	// no validation rules for MininalFee
+	// no validation rules for MinFee
 
-	// no validation rules for Eat
+	// no validation rules for PspMinAmount
+
+	// no validation rules for PspMaxAmount
+
+	// no validation rules for PspFixedFee
+
+	// no validation rules for PspFeeRate
+
+	// no validation rules for PspMinFee
+
+	// no validation rules for SysMinAmount
+
+	// no validation rules for SysMaxAmount
+
+	// no validation rules for SysFixedFee
+
+	// no validation rules for SysFeeRate
+
+	// no validation rules for SysMinFee
 
 	if all {
 		switch v := interface{}(m.GetSchema()).(type) {
@@ -3802,7 +3816,7 @@ func (m *TransactionInfo) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for Fee
+	// no validation rules for ProcessingFee
 
 	// no validation rules for PaymentMethod
 
@@ -5725,6 +5739,10 @@ func (m *GetChannelsByIdsResponse_Channel) validate(all bool) error {
 	// no validation rules for ChannelId
 
 	// no validation rules for Name
+
+	// no validation rules for Psp
+
+	// no validation rules for Protocol
 
 	if len(errors) > 0 {
 		return GetChannelsByIdsResponse_ChannelMultiError(errors)

@@ -405,38 +405,53 @@ type PaymentMethodInfo struct {
 	// Unique identifier for the payment method
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Currency code supported by this payment method (e.g., USD, EUR, CNY)
-	Psp          string `protobuf:"bytes,2,opt,name=psp,proto3" json:"psp,omitempty"`
-	Type         string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	Currency     string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	Psp string `protobuf:"bytes,2,opt,name=psp,proto3" json:"psp,omitempty"`
+	// Payin or Payout
+	SupportedType string `protobuf:"bytes,3,opt,name=supported_type,json=supportedType,proto3" json:"supported_type,omitempty"`
+	// Currency like USD, VND
+	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Currency type (e.g., Crypto, Fiat)
 	CurrencyType string `protobuf:"bytes,5,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
-	Contact      string `protobuf:"bytes,6,opt,name=contact,proto3" json:"contact,omitempty"`
+	// Contact
+	Contact string `protobuf:"bytes,6,opt,name=contact,proto3" json:"contact,omitempty"`
 	// Country code where this payment method is available
 	Country string `protobuf:"bytes,7,opt,name=country,proto3" json:"country,omitempty"`
 	// Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
 	PaymentMethod string `protobuf:"bytes,8,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Fixed Fee on the Amount
-	FixedFee string `protobuf:"bytes,9,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
+	SysFixedFee string `protobuf:"bytes,9,opt,name=sys_fixed_fee,json=sysFixedFee,proto3" json:"sys_fixed_fee,omitempty"`
 	// Rate Fee
-	FeeRate string `protobuf:"bytes,10,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	SysFeeRate string `protobuf:"bytes,10,opt,name=sys_fee_rate,json=sysFeeRate,proto3" json:"sys_fee_rate,omitempty"`
 	// Min Amount
-	MinAmount string `protobuf:"bytes,11,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	SysMinAmount string `protobuf:"bytes,11,opt,name=sys_min_amount,json=sysMinAmount,proto3" json:"sys_min_amount,omitempty"`
 	// Max Amount
-	MaxAmount string `protobuf:"bytes,12,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	SysMaxAmount string `protobuf:"bytes,12,opt,name=sys_max_amount,json=sysMaxAmount,proto3" json:"sys_max_amount,omitempty"`
+	// Minmum Fee
+	SysMinFee string `protobuf:"bytes,13,opt,name=sys_min_fee,json=sysMinFee,proto3" json:"sys_min_fee,omitempty"`
 	// Fixed Fee on the Amount
-	PspFixedFee string `protobuf:"bytes,13,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
+	PspFixedFee string `protobuf:"bytes,14,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
 	// Rate Fee
-	PspFeeRate string `protobuf:"bytes,14,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
+	PspFeeRate string `protobuf:"bytes,15,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
 	// Min Amount
-	PspMinAmount string `protobuf:"bytes,15,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
+	PspMinAmount string `protobuf:"bytes,16,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
 	// Max Amount
-	PspMaxAmount string `protobuf:"bytes,16,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
-	Enable       bool   `protobuf:"varint,17,opt,name=enable,proto3" json:"enable,omitempty"`
-	Network      string `protobuf:"bytes,18,opt,name=network,proto3" json:"network,omitempty"`
-	Protocol     string `protobuf:"bytes,19,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	MinFee       string `protobuf:"bytes,20,opt,name=minFee,proto3" json:"minFee,omitempty"`
-	Source       string `protobuf:"bytes,21,opt,name=source,proto3" json:"source,omitempty"`
+	PspMaxAmount string `protobuf:"bytes,17,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
+	// Minmum Fee
+	PspMinFee string `protobuf:"bytes,18,opt,name=psp_min_fee,json=pspMinFee,proto3" json:"psp_min_fee,omitempty"`
+	// Status bool
+	Enable bool `protobuf:"varint,19,opt,name=enable,proto3" json:"enable,omitempty"`
+	// Crypto network
+	Network string `protobuf:"bytes,20,opt,name=network,proto3" json:"network,omitempty"`
+	// Crypto protocol
+	Protocol string `protobuf:"bytes,21,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	// Source operator
+	Source string `protobuf:"bytes,22,opt,name=source,proto3" json:"source,omitempty"`
+	// Average Time
+	AverageTime int32 `protobuf:"varint,23,opt,name=average_time,json=averageTime,proto3" json:"average_time,omitempty"`
+	// Success Rate
+	SuccessRate string `protobuf:"bytes,24,opt,name=success_rate,json=successRate,proto3" json:"success_rate,omitempty"`
 	// JSON schema defining the required fields for this payment method
-	KeySchema     *structpb.ListValue `protobuf:"bytes,22,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
+	KeySchema     *structpb.ListValue `protobuf:"bytes,25,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -485,9 +500,9 @@ func (x *PaymentMethodInfo) GetPsp() string {
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetType() string {
+func (x *PaymentMethodInfo) GetSupportedType() string {
 	if x != nil {
-		return x.Type
+		return x.SupportedType
 	}
 	return ""
 }
@@ -527,30 +542,37 @@ func (x *PaymentMethodInfo) GetPaymentMethod() string {
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetFixedFee() string {
+func (x *PaymentMethodInfo) GetSysFixedFee() string {
 	if x != nil {
-		return x.FixedFee
+		return x.SysFixedFee
 	}
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetFeeRate() string {
+func (x *PaymentMethodInfo) GetSysFeeRate() string {
 	if x != nil {
-		return x.FeeRate
+		return x.SysFeeRate
 	}
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetMinAmount() string {
+func (x *PaymentMethodInfo) GetSysMinAmount() string {
 	if x != nil {
-		return x.MinAmount
+		return x.SysMinAmount
 	}
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetMaxAmount() string {
+func (x *PaymentMethodInfo) GetSysMaxAmount() string {
 	if x != nil {
-		return x.MaxAmount
+		return x.SysMaxAmount
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetSysMinFee() string {
+	if x != nil {
+		return x.SysMinFee
 	}
 	return ""
 }
@@ -583,6 +605,13 @@ func (x *PaymentMethodInfo) GetPspMaxAmount() string {
 	return ""
 }
 
+func (x *PaymentMethodInfo) GetPspMinFee() string {
+	if x != nil {
+		return x.PspMinFee
+	}
+	return ""
+}
+
 func (x *PaymentMethodInfo) GetEnable() bool {
 	if x != nil {
 		return x.Enable
@@ -604,16 +633,23 @@ func (x *PaymentMethodInfo) GetProtocol() string {
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetMinFee() string {
+func (x *PaymentMethodInfo) GetSource() string {
 	if x != nil {
-		return x.MinFee
+		return x.Source
 	}
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetSource() string {
+func (x *PaymentMethodInfo) GetAverageTime() int32 {
 	if x != nil {
-		return x.Source
+		return x.AverageTime
+	}
+	return 0
+}
+
+func (x *PaymentMethodInfo) GetSuccessRate() string {
+	if x != nil {
+		return x.SuccessRate
 	}
 	return ""
 }
@@ -728,26 +764,17 @@ type CreatePaymentMethodRequest struct {
 	// ID of the payment method to be used
 	PaymentMethodId string `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	// Currency Type
-	CurrencyType string `protobuf:"bytes,3,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
-	// Contact Info email
 	Contact string `protobuf:"bytes,4,opt,name=contact,proto3" json:"contact,omitempty"`
 	// Fixed Fee on the Amount
-	FixedFee string `protobuf:"bytes,5,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
+	SysFixedFee string `protobuf:"bytes,5,opt,name=sys_fixed_fee,json=sysFixedFee,proto3" json:"sys_fixed_fee,omitempty"`
 	// Rate Fee
-	FeeRate string `protobuf:"bytes,6,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	SysFeeRate string `protobuf:"bytes,6,opt,name=sys_fee_rate,json=sysFeeRate,proto3" json:"sys_fee_rate,omitempty"`
 	// Min Amount
-	MinAmount string `protobuf:"bytes,7,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	SysMinAmount string `protobuf:"bytes,7,opt,name=sys_min_amount,json=sysMinAmount,proto3" json:"sys_min_amount,omitempty"`
 	// Max Amount
-	MaxAmount string `protobuf:"bytes,8,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	// PSP Fixed Fee on the Amount
-	PspFixedFee string `protobuf:"bytes,9,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
-	// PSP Rate Fee
-	PspFeeRate string `protobuf:"bytes,10,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
-	// PSP Min Amount
-	PspMinAmount string `protobuf:"bytes,11,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
-	// PSP Max Amount
-	PspMaxAmount  string `protobuf:"bytes,12,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
-	MininalFee    string `protobuf:"bytes,13,opt,name=mininal_fee,json=mininalFee,proto3" json:"mininal_fee,omitempty"`
+	SysMaxAmount string `protobuf:"bytes,8,opt,name=sys_max_amount,json=sysMaxAmount,proto3" json:"sys_max_amount,omitempty"`
+	// Minmum Fee
+	SysMinFee     string `protobuf:"bytes,13,opt,name=sys_min_fee,json=sysMinFee,proto3" json:"sys_min_fee,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -796,13 +823,6 @@ func (x *CreatePaymentMethodRequest) GetPaymentMethodId() string {
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetCurrencyType() string {
-	if x != nil {
-		return x.CurrencyType
-	}
-	return ""
-}
-
 func (x *CreatePaymentMethodRequest) GetContact() string {
 	if x != nil {
 		return x.Contact
@@ -810,65 +830,37 @@ func (x *CreatePaymentMethodRequest) GetContact() string {
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetFixedFee() string {
+func (x *CreatePaymentMethodRequest) GetSysFixedFee() string {
 	if x != nil {
-		return x.FixedFee
+		return x.SysFixedFee
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetFeeRate() string {
+func (x *CreatePaymentMethodRequest) GetSysFeeRate() string {
 	if x != nil {
-		return x.FeeRate
+		return x.SysFeeRate
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetMinAmount() string {
+func (x *CreatePaymentMethodRequest) GetSysMinAmount() string {
 	if x != nil {
-		return x.MinAmount
+		return x.SysMinAmount
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetMaxAmount() string {
+func (x *CreatePaymentMethodRequest) GetSysMaxAmount() string {
 	if x != nil {
-		return x.MaxAmount
+		return x.SysMaxAmount
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetPspFixedFee() string {
+func (x *CreatePaymentMethodRequest) GetSysMinFee() string {
 	if x != nil {
-		return x.PspFixedFee
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetPspFeeRate() string {
-	if x != nil {
-		return x.PspFeeRate
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetPspMinAmount() string {
-	if x != nil {
-		return x.PspMinAmount
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetPspMaxAmount() string {
-	if x != nil {
-		return x.PspMaxAmount
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetMininalFee() string {
-	if x != nil {
-		return x.MininalFee
+		return x.SysMinFee
 	}
 	return ""
 }
@@ -919,7 +911,7 @@ func (x *CreatePaymentMethodResponse) GetPaymentMethod() *PaymentMethodInfo {
 
 type UpdatePaymentChannelResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	PaymentMethods *PaymentMethodInfo     `protobuf:"bytes,1,opt,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
+	PaymentMethods *PaymentChannelInfo    `protobuf:"bytes,1,opt,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -954,7 +946,7 @@ func (*UpdatePaymentChannelResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *UpdatePaymentChannelResponse) GetPaymentMethods() *PaymentMethodInfo {
+func (x *UpdatePaymentChannelResponse) GetPaymentMethods() *PaymentChannelInfo {
 	if x != nil {
 		return x.PaymentMethods
 	}
@@ -1299,24 +1291,24 @@ type PaymentChannelInfo struct {
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Type of the channel (e.g., online, offline)
 	SupportType string `protobuf:"bytes,2,opt,name=support_type,json=supportType,proto3" json:"support_type,omitempty"`
-	// Currency type (e.g., Crypto, Fiat)
-	CurrencyType string `protobuf:"bytes,3,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
 	// Services Prvider
-	Psp string `protobuf:"bytes,4,opt,name=psp,proto3" json:"psp,omitempty"`
+	Psp string `protobuf:"bytes,3,opt,name=psp,proto3" json:"psp,omitempty"`
 	// Category of the channel (e.g., bank, e-wallet)
-	Category string `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
+	Category string `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
 	// ID of the operator who owns this channel
-	OperatorId int64 `protobuf:"varint,6,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId int64 `protobuf:"varint,5,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// Payment method used in this channel
-	PaymentMethod string `protobuf:"bytes,7,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	PaymentMethod string `protobuf:"bytes,6,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Tag for categorization or filtering
-	Tag string `protobuf:"bytes,8,opt,name=tag,proto3" json:"tag,omitempty"`
+	Tag string `protobuf:"bytes,7,opt,name=tag,proto3" json:"tag,omitempty"`
 	// Display name of the channel
-	Name string `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the payment method used
-	PaymentMethodId string `protobuf:"bytes,10,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	PaymentMethodId string `protobuf:"bytes,9,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	// Currency supported by this channel
-	Currency string `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
+	Currency string `protobuf:"bytes,10,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Currency type (e.g., Crypto, Fiat)
+	CurrencyType string `protobuf:"bytes,11,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
 	// Crypto protocol supported by this channel
 	Protocol string `protobuf:"bytes,12,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Crypto chian supported by this channel
@@ -1336,15 +1328,36 @@ type PaymentChannelInfo struct {
 	// Rate Fee
 	FeeRate string `protobuf:"bytes,20,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
 	// Minimum Fee
-	MininalFee string `protobuf:"bytes,21,opt,name=mininal_fee,json=mininalFee,proto3" json:"mininal_fee,omitempty"`
-	// Estimated arrival time in minutes
-	Eat int32 `protobuf:"varint,22,opt,name=eat,proto3" json:"eat,omitempty"`
+	MinFee string `protobuf:"bytes,21,opt,name=min_fee,json=minFee,proto3" json:"min_fee,omitempty"`
+	// Minimum amount allowed for deposit transactions
+	PspMinAmount string `protobuf:"bytes,22,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
+	// Maximum amount allowed for deposit transactions
+	PspMaxAmount string `protobuf:"bytes,23,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
+	// Fixed Fee on the Amount
+	PspFixedFee string `protobuf:"bytes,24,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
+	// Rate Fee
+	PspFeeRate string `protobuf:"bytes,25,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
+	// Minimum Fee
+	PspMinFee string `protobuf:"bytes,26,opt,name=psp_min_fee,json=pspMinFee,proto3" json:"psp_min_fee,omitempty"`
+	// Minimum amount allowed for deposit transactions
+	SysMinAmount string `protobuf:"bytes,27,opt,name=sys_min_amount,json=sysMinAmount,proto3" json:"sys_min_amount,omitempty"`
+	// Maximum amount allowed for deposit transactions
+	SysMaxAmount string `protobuf:"bytes,28,opt,name=sys_max_amount,json=sysMaxAmount,proto3" json:"sys_max_amount,omitempty"`
+	// Fixed Fee on the Amount
+	SysFixedFee string `protobuf:"bytes,29,opt,name=sys_fixed_fee,json=sysFixedFee,proto3" json:"sys_fixed_fee,omitempty"`
+	// Rate Fee
+	SysFeeRate string `protobuf:"bytes,30,opt,name=sys_fee_rate,json=sysFeeRate,proto3" json:"sys_fee_rate,omitempty"`
+	// Minimum Fee
+	SysMinFee string `protobuf:"bytes,31,opt,name=sys_min_fee,json=sysMinFee,proto3" json:"sys_min_fee,omitempty"`
 	// JSON schema defining deposit form fields required by this channel
-	Schema        *structpb.Struct `protobuf:"bytes,23,opt,name=schema,proto3" json:"schema,omitempty"`
-	Source        string           `protobuf:"bytes,24,opt,name=source,proto3" json:"source,omitempty"`
-	SourceType    string           `protobuf:"bytes,25,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
-	Enable        bool             `protobuf:"varint,26,opt,name=enable,proto3" json:"enable,omitempty"`
-	Contact       string           `protobuf:"bytes,27,opt,name=contact,proto3" json:"contact,omitempty"`
+	Schema *structpb.Struct `protobuf:"bytes,32,opt,name=schema,proto3" json:"schema,omitempty"`
+	// Source operator
+	Source     string `protobuf:"bytes,33,opt,name=source,proto3" json:"source,omitempty"`
+	SourceType string `protobuf:"bytes,34,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
+	// Status bool
+	Enable bool `protobuf:"varint,35,opt,name=enable,proto3" json:"enable,omitempty"`
+	// Contact
+	Contact       string `protobuf:"bytes,36,opt,name=contact,proto3" json:"contact,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1389,13 +1402,6 @@ func (x *PaymentChannelInfo) GetChannelId() string {
 func (x *PaymentChannelInfo) GetSupportType() string {
 	if x != nil {
 		return x.SupportType
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetCurrencyType() string {
-	if x != nil {
-		return x.CurrencyType
 	}
 	return ""
 }
@@ -1452,6 +1458,13 @@ func (x *PaymentChannelInfo) GetPaymentMethodId() string {
 func (x *PaymentChannelInfo) GetCurrency() string {
 	if x != nil {
 		return x.Currency
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetCurrencyType() string {
+	if x != nil {
+		return x.CurrencyType
 	}
 	return ""
 }
@@ -1519,18 +1532,81 @@ func (x *PaymentChannelInfo) GetFeeRate() string {
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetMininalFee() string {
+func (x *PaymentChannelInfo) GetMinFee() string {
 	if x != nil {
-		return x.MininalFee
+		return x.MinFee
 	}
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetEat() int32 {
+func (x *PaymentChannelInfo) GetPspMinAmount() string {
 	if x != nil {
-		return x.Eat
+		return x.PspMinAmount
 	}
-	return 0
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetPspMaxAmount() string {
+	if x != nil {
+		return x.PspMaxAmount
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetPspFixedFee() string {
+	if x != nil {
+		return x.PspFixedFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetPspFeeRate() string {
+	if x != nil {
+		return x.PspFeeRate
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetPspMinFee() string {
+	if x != nil {
+		return x.PspMinFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSysMinAmount() string {
+	if x != nil {
+		return x.SysMinAmount
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSysMaxAmount() string {
+	if x != nil {
+		return x.SysMaxAmount
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSysFixedFee() string {
+	if x != nil {
+		return x.SysFixedFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSysFeeRate() string {
+	if x != nil {
+		return x.SysFeeRate
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSysMinFee() string {
+	if x != nil {
+		return x.SysMinFee
+	}
+	return ""
 }
 
 func (x *PaymentChannelInfo) GetSchema() *structpb.Struct {
@@ -2795,7 +2871,7 @@ type TransactionInfo struct {
 	// Currency code for the transaction
 	Currency string `protobuf:"bytes,15,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Transaction fee in smallest currency unit
-	Fee string `protobuf:"bytes,16,opt,name=fee,proto3" json:"fee,omitempty"`
+	ProcessingFee string `protobuf:"bytes,16,opt,name=processing_fee,json=processingFee,proto3" json:"processing_fee,omitempty"`
 	// Payment method used for the transaction
 	PaymentMethod string `protobuf:"bytes,17,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Payment channel used for the transaction
@@ -2953,9 +3029,9 @@ func (x *TransactionInfo) GetCurrency() string {
 	return ""
 }
 
-func (x *TransactionInfo) GetFee() string {
+func (x *TransactionInfo) GetProcessingFee() string {
 	if x != nil {
-		return x.Fee
+		return x.ProcessingFee
 	}
 	return ""
 }
@@ -4084,6 +4160,8 @@ type GetChannelsByIdsResponse_Channel struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ChannelId     string                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Psp           string                 `protobuf:"bytes,3,opt,name=psp,proto3" json:"psp,omitempty"`
+	Protocol      string                 `protobuf:"bytes,4,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4132,6 +4210,20 @@ func (x *GetChannelsByIdsResponse_Channel) GetName() string {
 	return ""
 }
 
+func (x *GetChannelsByIdsResponse_Channel) GetPsp() string {
+	if x != nil {
+		return x.Psp
+	}
+	return ""
+}
+
+func (x *GetChannelsByIdsResponse_Channel) GetProtocol() string {
+	if x != nil {
+		return x.Protocol
+	}
+	return ""
+}
+
 var File_payment_service_v1_payment_proto protoreflect.FileDescriptor
 
 const file_payment_service_v1_payment_proto_rawDesc = "" +
@@ -4142,62 +4234,55 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x1bGetPaymentMethodListRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x10\n" +
 	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x16\n" +
-	"\x06search\x18\x03 \x01(\tR\x06search\"\xa6\x05\n" +
+	"\x06search\x18\x03 \x01(\tR\x06search\"\xc3\x06\n" +
 	"\x11PaymentMethodInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
-	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1a\n" +
+	"\x03psp\x18\x02 \x01(\tR\x03psp\x12%\n" +
+	"\x0esupported_type\x18\x03 \x01(\tR\rsupportedType\x12\x1a\n" +
 	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12#\n" +
 	"\rcurrency_type\x18\x05 \x01(\tR\fcurrencyType\x12\x18\n" +
 	"\acontact\x18\x06 \x01(\tR\acontact\x12\x18\n" +
 	"\acountry\x18\a \x01(\tR\acountry\x12%\n" +
-	"\x0epayment_method\x18\b \x01(\tR\rpaymentMethod\x12\x1b\n" +
-	"\tfixed_fee\x18\t \x01(\tR\bfixedFee\x12\x19\n" +
-	"\bfee_rate\x18\n" +
-	" \x01(\tR\afeeRate\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\v \x01(\tR\tminAmount\x12\x1d\n" +
-	"\n" +
-	"max_amount\x18\f \x01(\tR\tmaxAmount\x12\"\n" +
-	"\rpsp_fixed_fee\x18\r \x01(\tR\vpspFixedFee\x12 \n" +
-	"\fpsp_fee_rate\x18\x0e \x01(\tR\n" +
+	"\x0epayment_method\x18\b \x01(\tR\rpaymentMethod\x12\"\n" +
+	"\rsys_fixed_fee\x18\t \x01(\tR\vsysFixedFee\x12 \n" +
+	"\fsys_fee_rate\x18\n" +
+	" \x01(\tR\n" +
+	"sysFeeRate\x12$\n" +
+	"\x0esys_min_amount\x18\v \x01(\tR\fsysMinAmount\x12$\n" +
+	"\x0esys_max_amount\x18\f \x01(\tR\fsysMaxAmount\x12\x1e\n" +
+	"\vsys_min_fee\x18\r \x01(\tR\tsysMinFee\x12\"\n" +
+	"\rpsp_fixed_fee\x18\x0e \x01(\tR\vpspFixedFee\x12 \n" +
+	"\fpsp_fee_rate\x18\x0f \x01(\tR\n" +
 	"pspFeeRate\x12$\n" +
-	"\x0epsp_min_amount\x18\x0f \x01(\tR\fpspMinAmount\x12$\n" +
-	"\x0epsp_max_amount\x18\x10 \x01(\tR\fpspMaxAmount\x12\x16\n" +
-	"\x06enable\x18\x11 \x01(\bR\x06enable\x12\x18\n" +
-	"\anetwork\x18\x12 \x01(\tR\anetwork\x12\x1a\n" +
-	"\bprotocol\x18\x13 \x01(\tR\bprotocol\x12\x16\n" +
-	"\x06minFee\x18\x14 \x01(\tR\x06minFee\x12\x16\n" +
-	"\x06source\x18\x15 \x01(\tR\x06source\x129\n" +
+	"\x0epsp_min_amount\x18\x10 \x01(\tR\fpspMinAmount\x12$\n" +
+	"\x0epsp_max_amount\x18\x11 \x01(\tR\fpspMaxAmount\x12\x1e\n" +
+	"\vpsp_min_fee\x18\x12 \x01(\tR\tpspMinFee\x12\x16\n" +
+	"\x06enable\x18\x13 \x01(\bR\x06enable\x12\x18\n" +
+	"\anetwork\x18\x14 \x01(\tR\anetwork\x12\x1a\n" +
+	"\bprotocol\x18\x15 \x01(\tR\bprotocol\x12\x16\n" +
+	"\x06source\x18\x16 \x01(\tR\x06source\x12!\n" +
+	"\faverage_time\x18\x17 \x01(\x05R\vaverageTime\x12!\n" +
+	"\fsuccess_rate\x18\x18 \x01(\tR\vsuccessRate\x129\n" +
 	"\n" +
-	"key_schema\x18\x16 \x01(\v2\x1a.google.protobuf.ListValueR\tkeySchema\"w\n" +
+	"key_schema\x18\x19 \x01(\v2\x1a.google.protobuf.ListValueR\tkeySchema\"w\n" +
 	"%GetSupportedPaymentMethodListResponse\x12N\n" +
 	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"n\n" +
 	"\x1cGetPaymentMethodListResponse\x12N\n" +
-	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xf8\x03\n" +
+	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xdc\x02\n" +
 	"\x1aCreatePaymentMethodRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12*\n" +
-	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\x12#\n" +
-	"\rcurrency_type\x18\x03 \x01(\tR\fcurrencyType\x12\x18\n" +
-	"\acontact\x18\x04 \x01(\tR\acontact\x12\x1b\n" +
-	"\tfixed_fee\x18\x05 \x01(\tR\bfixedFee\x12\x19\n" +
-	"\bfee_rate\x18\x06 \x01(\tR\afeeRate\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\a \x01(\tR\tminAmount\x12\x1d\n" +
-	"\n" +
-	"max_amount\x18\b \x01(\tR\tmaxAmount\x12\"\n" +
-	"\rpsp_fixed_fee\x18\t \x01(\tR\vpspFixedFee\x12 \n" +
-	"\fpsp_fee_rate\x18\n" +
-	" \x01(\tR\n" +
-	"pspFeeRate\x12$\n" +
-	"\x0epsp_min_amount\x18\v \x01(\tR\fpspMinAmount\x12$\n" +
-	"\x0epsp_max_amount\x18\f \x01(\tR\fpspMaxAmount\x12\x1f\n" +
-	"\vmininal_fee\x18\r \x01(\tR\n" +
-	"mininalFee\"k\n" +
+	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\x12\x18\n" +
+	"\acontact\x18\x04 \x01(\tR\acontact\x12\"\n" +
+	"\rsys_fixed_fee\x18\x05 \x01(\tR\vsysFixedFee\x12 \n" +
+	"\fsys_fee_rate\x18\x06 \x01(\tR\n" +
+	"sysFeeRate\x12$\n" +
+	"\x0esys_min_amount\x18\a \x01(\tR\fsysMinAmount\x12$\n" +
+	"\x0esys_max_amount\x18\b \x01(\tR\fsysMaxAmount\x12\x1e\n" +
+	"\vsys_min_fee\x18\r \x01(\tR\tsysMinFee\"k\n" +
 	"\x1bCreatePaymentMethodResponse\x12L\n" +
-	"\x0epayment_method\x18\x01 \x01(\v2%.payment.service.v1.PaymentMethodInfoR\rpaymentMethod\"n\n" +
-	"\x1cUpdatePaymentChannelResponse\x12N\n" +
-	"\x0fpayment_methods\x18\x01 \x01(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xd9\x03\n" +
+	"\x0epayment_method\x18\x01 \x01(\v2%.payment.service.v1.PaymentMethodInfoR\rpaymentMethod\"o\n" +
+	"\x1cUpdatePaymentChannelResponse\x12O\n" +
+	"\x0fpayment_methods\x18\x01 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\x0epaymentMethods\"\xd9\x03\n" +
 	"\x1bCreatePaymentChannelRequest\x12\x1f\n" +
 	"\vmerchant_id\x18\x01 \x01(\tR\n" +
 	"merchantId\x12F\n" +
@@ -4235,22 +4320,22 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xa0\x06\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xea\b\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12!\n" +
-	"\fsupport_type\x18\x02 \x01(\tR\vsupportType\x12#\n" +
-	"\rcurrency_type\x18\x03 \x01(\tR\fcurrencyType\x12\x10\n" +
-	"\x03psp\x18\x04 \x01(\tR\x03psp\x12\x1a\n" +
-	"\bcategory\x18\x05 \x01(\tR\bcategory\x12\x1f\n" +
-	"\voperator_id\x18\x06 \x01(\x03R\n" +
+	"\fsupport_type\x18\x02 \x01(\tR\vsupportType\x12\x10\n" +
+	"\x03psp\x18\x03 \x01(\tR\x03psp\x12\x1a\n" +
+	"\bcategory\x18\x04 \x01(\tR\bcategory\x12\x1f\n" +
+	"\voperator_id\x18\x05 \x01(\x03R\n" +
 	"operatorId\x12%\n" +
-	"\x0epayment_method\x18\a \x01(\tR\rpaymentMethod\x12\x10\n" +
-	"\x03tag\x18\b \x01(\tR\x03tag\x12\x12\n" +
-	"\x04name\x18\t \x01(\tR\x04name\x12*\n" +
-	"\x11payment_method_id\x18\n" +
-	" \x01(\tR\x0fpaymentMethodId\x12\x1a\n" +
-	"\bcurrency\x18\v \x01(\tR\bcurrency\x12\x1a\n" +
+	"\x0epayment_method\x18\x06 \x01(\tR\rpaymentMethod\x12\x10\n" +
+	"\x03tag\x18\a \x01(\tR\x03tag\x12\x12\n" +
+	"\x04name\x18\b \x01(\tR\x04name\x12*\n" +
+	"\x11payment_method_id\x18\t \x01(\tR\x0fpaymentMethodId\x12\x1a\n" +
+	"\bcurrency\x18\n" +
+	" \x01(\tR\bcurrency\x12#\n" +
+	"\rcurrency_type\x18\v \x01(\tR\fcurrencyType\x12\x1a\n" +
 	"\bprotocol\x18\f \x01(\tR\bprotocol\x12\x18\n" +
 	"\anetwork\x18\r \x01(\tR\anetwork\x12\x18\n" +
 	"\acountry\x18\x0e \x01(\tR\acountry\x12\x16\n" +
@@ -4261,16 +4346,26 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	"max_amount\x18\x12 \x01(\tR\tmaxAmount\x12\x1b\n" +
 	"\tfixed_fee\x18\x13 \x01(\tR\bfixedFee\x12\x19\n" +
-	"\bfee_rate\x18\x14 \x01(\tR\afeeRate\x12\x1f\n" +
-	"\vmininal_fee\x18\x15 \x01(\tR\n" +
-	"mininalFee\x12\x10\n" +
-	"\x03eat\x18\x16 \x01(\x05R\x03eat\x12/\n" +
-	"\x06schema\x18\x17 \x01(\v2\x17.google.protobuf.StructR\x06schema\x12\x16\n" +
-	"\x06source\x18\x18 \x01(\tR\x06source\x12\x1f\n" +
-	"\vsource_type\x18\x19 \x01(\tR\n" +
+	"\bfee_rate\x18\x14 \x01(\tR\afeeRate\x12\x17\n" +
+	"\amin_fee\x18\x15 \x01(\tR\x06minFee\x12$\n" +
+	"\x0epsp_min_amount\x18\x16 \x01(\tR\fpspMinAmount\x12$\n" +
+	"\x0epsp_max_amount\x18\x17 \x01(\tR\fpspMaxAmount\x12\"\n" +
+	"\rpsp_fixed_fee\x18\x18 \x01(\tR\vpspFixedFee\x12 \n" +
+	"\fpsp_fee_rate\x18\x19 \x01(\tR\n" +
+	"pspFeeRate\x12\x1e\n" +
+	"\vpsp_min_fee\x18\x1a \x01(\tR\tpspMinFee\x12$\n" +
+	"\x0esys_min_amount\x18\x1b \x01(\tR\fsysMinAmount\x12$\n" +
+	"\x0esys_max_amount\x18\x1c \x01(\tR\fsysMaxAmount\x12\"\n" +
+	"\rsys_fixed_fee\x18\x1d \x01(\tR\vsysFixedFee\x12 \n" +
+	"\fsys_fee_rate\x18\x1e \x01(\tR\n" +
+	"sysFeeRate\x12\x1e\n" +
+	"\vsys_min_fee\x18\x1f \x01(\tR\tsysMinFee\x12/\n" +
+	"\x06schema\x18  \x01(\v2\x17.google.protobuf.StructR\x06schema\x12\x16\n" +
+	"\x06source\x18! \x01(\tR\x06source\x12\x1f\n" +
+	"\vsource_type\x18\" \x01(\tR\n" +
 	"sourceType\x12\x16\n" +
-	"\x06enable\x18\x1a \x01(\bR\x06enable\x12\x18\n" +
-	"\acontact\x18\x1b \x01(\tR\acontact\"\x9a\x01\n" +
+	"\x06enable\x18# \x01(\bR\x06enable\x12\x18\n" +
+	"\acontact\x18$ \x01(\tR\acontact\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
@@ -4381,7 +4476,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05nonce\x18\f \x01(\tR\x05nonce\"N\n" +
 	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\x8b\b\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xa0\b\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x124\n" +
@@ -4399,8 +4494,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\auser_id\x18\f \x01(\x03R\x06userId\x12\x10\n" +
 	"\x03vip\x18\r \x01(\x05R\x03vip\x12\x16\n" +
 	"\x06amount\x18\x0e \x01(\tR\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\x0f \x01(\tR\bcurrency\x12\x10\n" +
-	"\x03fee\x18\x10 \x01(\tR\x03fee\x12%\n" +
+	"\bcurrency\x18\x0f \x01(\tR\bcurrency\x12%\n" +
+	"\x0eprocessing_fee\x18\x10 \x01(\tR\rprocessingFee\x12%\n" +
 	"\x0epayment_method\x18\x11 \x01(\tR\rpaymentMethod\x12'\n" +
 	"\x0fpayment_channel\x18\x12 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
 	"\bprotocol\x18\x13 \x01(\tR\bprotocol\x12\x18\n" +
@@ -4483,13 +4578,15 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x06detail\x18\x01 \x01(\v2%.payment.service.v1.TransactionDetailR\x06detail\":\n" +
 	"\x17GetChannelsByIdsRequest\x12\x1f\n" +
 	"\vchannel_ids\x18\x01 \x03(\tR\n" +
-	"channelIds\"\xaa\x01\n" +
+	"channelIds\"\xd8\x01\n" +
 	"\x18GetChannelsByIdsResponse\x12P\n" +
-	"\bchannels\x18\x01 \x03(\v24.payment.service.v1.GetChannelsByIdsResponse.ChannelR\bchannels\x1a<\n" +
+	"\bchannels\x18\x01 \x03(\v24.payment.service.v1.GetChannelsByIdsResponse.ChannelR\bchannels\x1aj\n" +
 	"\aChannel\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"`\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x10\n" +
+	"\x03psp\x18\x03 \x01(\tR\x03psp\x12\x1a\n" +
+	"\bprotocol\x18\x04 \x01(\tR\bprotocol\"`\n" +
 	"\x1aUpdatePaymentMethodRequest\x12*\n" +
 	"\x11payment_method_id\x18\x01 \x01(\x03R\x0fpaymentMethodId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\bR\x06status\">\n" +
@@ -4613,7 +4710,7 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	7,  // 2: payment.service.v1.GetPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
 	47, // 3: payment.service.v1.CreatePaymentMethodRequest.operator_context:type_name -> api.common.OperatorContext
 	7,  // 4: payment.service.v1.CreatePaymentMethodResponse.payment_method:type_name -> payment.service.v1.PaymentMethodInfo
-	7,  // 5: payment.service.v1.UpdatePaymentChannelResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
+	16, // 5: payment.service.v1.UpdatePaymentChannelResponse.payment_methods:type_name -> payment.service.v1.PaymentChannelInfo
 	47, // 6: payment.service.v1.CreatePaymentChannelRequest.operator_context:type_name -> api.common.OperatorContext
 	48, // 7: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
 	48, // 8: payment.service.v1.UpdatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
