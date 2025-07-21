@@ -57,6 +57,35 @@ func (m *ListUsersRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUsersRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.UserId != nil {
 		// no validation rules for UserId
 	}
@@ -129,18 +158,6 @@ func (m *ListUsersRequest) validate(all bool) error {
 
 	if m.VipLevel != nil {
 		// no validation rules for VipLevel
-	}
-
-	if m.RetailerOperatorId != nil {
-		// no validation rules for RetailerOperatorId
-	}
-
-	if m.GroupOperatorId != nil {
-		// no validation rules for GroupOperatorId
-	}
-
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
 	}
 
 	if m.Country != nil {
@@ -3188,11 +3205,13 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Retailer
-
-	// no validation rules for Group
-
 	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
 
 	// no validation rules for UserId
 

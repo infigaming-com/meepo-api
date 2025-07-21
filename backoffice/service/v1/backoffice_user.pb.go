@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -30,29 +31,27 @@ type ListUsersRequest struct {
 	RegistrationStartTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=registration_start_time,json=registrationStartTime,proto3,oneof" json:"registration_start_time,omitempty"`
 	RegistrationEndTime   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=registration_end_time,json=registrationEndTime,proto3,oneof" json:"registration_end_time,omitempty"`
 	VipLevel              *int32                 `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3,oneof" json:"vip_level,omitempty"`
-	RetailerOperatorId    *int64                 `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3,oneof" json:"retailer_operator_id,omitempty"`
-	GroupOperatorId       *int64                 `protobuf:"varint,7,opt,name=group_operator_id,json=groupOperatorId,proto3,oneof" json:"group_operator_id,omitempty"`
-	OperatorId            *int64                 `protobuf:"varint,8,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
-	Country               *string                `protobuf:"bytes,9,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	Country               *string                `protobuf:"bytes,6,opt,name=country,proto3,oneof" json:"country,omitempty"`
 	// optional int32 risk_level_min = 10;
 	// optional int32 risk_level_max = 11;
-	KycLevel *int32 `protobuf:"varint,12,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
+	KycLevel *int32 `protobuf:"varint,7,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
 	// optional bool has_made_deposit = 13;
-	DepositMin    *string `protobuf:"bytes,14,opt,name=deposit_min,json=depositMin,proto3,oneof" json:"deposit_min,omitempty"`
-	DepositMax    *string `protobuf:"bytes,15,opt,name=deposit_max,json=depositMax,proto3,oneof" json:"deposit_max,omitempty"`
-	WithdrawalMin *string `protobuf:"bytes,16,opt,name=withdrawal_min,json=withdrawalMin,proto3,oneof" json:"withdrawal_min,omitempty"`
-	WithdrawalMax *string `protobuf:"bytes,17,opt,name=withdrawal_max,json=withdrawalMax,proto3,oneof" json:"withdrawal_max,omitempty"`
-	BanWithdraw   *bool   `protobuf:"varint,18,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
-	BanGame       *bool   `protobuf:"varint,19,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
-	BanLogin      *bool   `protobuf:"varint,20,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
-	Online        *bool   `protobuf:"varint,23,opt,name=online,proto3,oneof" json:"online,omitempty"`
-	Enabled       *bool   `protobuf:"varint,24,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Email         *string `protobuf:"bytes,25,opt,name=email,proto3,oneof" json:"email,omitempty"`
-	Mobile        *string `protobuf:"bytes,26,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
-	Page          *int32  `protobuf:"varint,27,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32  `protobuf:"varint,28,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	DepositMin             *string                        `protobuf:"bytes,8,opt,name=deposit_min,json=depositMin,proto3,oneof" json:"deposit_min,omitempty"`
+	DepositMax             *string                        `protobuf:"bytes,9,opt,name=deposit_max,json=depositMax,proto3,oneof" json:"deposit_max,omitempty"`
+	WithdrawalMin          *string                        `protobuf:"bytes,10,opt,name=withdrawal_min,json=withdrawalMin,proto3,oneof" json:"withdrawal_min,omitempty"`
+	WithdrawalMax          *string                        `protobuf:"bytes,11,opt,name=withdrawal_max,json=withdrawalMax,proto3,oneof" json:"withdrawal_max,omitempty"`
+	BanWithdraw            *bool                          `protobuf:"varint,12,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
+	BanGame                *bool                          `protobuf:"varint,13,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
+	BanLogin               *bool                          `protobuf:"varint,14,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
+	Online                 *bool                          `protobuf:"varint,17,opt,name=online,proto3,oneof" json:"online,omitempty"`
+	Enabled                *bool                          `protobuf:"varint,18,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Email                  *string                        `protobuf:"bytes,19,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	Mobile                 *string                        `protobuf:"bytes,20,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
+	Page                   *int32                         `protobuf:"varint,21,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,22,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,23,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListUsersRequest) Reset() {
@@ -116,27 +115,6 @@ func (x *ListUsersRequest) GetRegistrationEndTime() *timestamppb.Timestamp {
 func (x *ListUsersRequest) GetVipLevel() int32 {
 	if x != nil && x.VipLevel != nil {
 		return *x.VipLevel
-	}
-	return 0
-}
-
-func (x *ListUsersRequest) GetRetailerOperatorId() int64 {
-	if x != nil && x.RetailerOperatorId != nil {
-		return *x.RetailerOperatorId
-	}
-	return 0
-}
-
-func (x *ListUsersRequest) GetGroupOperatorId() int64 {
-	if x != nil && x.GroupOperatorId != nil {
-		return *x.GroupOperatorId
-	}
-	return 0
-}
-
-func (x *ListUsersRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
 	}
 	return 0
 }
@@ -244,6 +222,13 @@ func (x *ListUsersRequest) GetPageSize() int32 {
 		return *x.PageSize
 	}
 	return 0
+}
+
+func (x *ListUsersRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type ListUsersResponse struct {
@@ -1717,32 +1702,33 @@ func (*SetUserTagsResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListUsersResponse_User struct {
-	state        protoimpl.MessageState `protogen:"open.v1"`
-	Retailer     string                 `protobuf:"bytes,1,opt,name=retailer,proto3" json:"retailer,omitempty"`
-	Group        string                 `protobuf:"bytes,2,opt,name=group,proto3" json:"group,omitempty"`
-	OperatorName string                 `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	UserId       int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Username     string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
-	Email        string                 `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile       string                 `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	VipLevel     int32                  `protobuf:"varint,8,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	KycLevel     int32                  `protobuf:"varint,9,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
-	Deposit      string                 `protobuf:"bytes,10,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	Withdraw     string                 `protobuf:"bytes,11,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
-	Tags         []string               `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
-	BanWithdraw  bool                   `protobuf:"varint,13,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
-	BanGame      bool                   `protobuf:"varint,14,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
-	BanLogin     bool                   `protobuf:"varint,15,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
-	Online       bool                   `protobuf:"varint,16,opt,name=online,proto3" json:"online,omitempty"`
-	LastLoginAt  *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
-	RegisteredAt *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	OperatorName         string                 `protobuf:"bytes,1,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,2,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,3,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string                 `protobuf:"bytes,4,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	UserId               int64                  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Username             string                 `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
+	Email                string                 `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile               string                 `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	VipLevel             int32                  `protobuf:"varint,9,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	KycLevel             int32                  `protobuf:"varint,10,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
+	Deposit              string                 `protobuf:"bytes,11,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	Withdraw             string                 `protobuf:"bytes,12,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
+	Tags                 []string               `protobuf:"bytes,13,rep,name=tags,proto3" json:"tags,omitempty"`
+	BanWithdraw          bool                   `protobuf:"varint,14,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
+	BanGame              bool                   `protobuf:"varint,15,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
+	BanLogin             bool                   `protobuf:"varint,16,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
+	Online               bool                   `protobuf:"varint,17,opt,name=online,proto3" json:"online,omitempty"`
+	LastLoginAt          *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
+	RegisteredAt         *timestamppb.Timestamp `protobuf:"bytes,19,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
 	// int32 risk_level = 19;
 	// string referral_code = 20;
 	// string affiliate_code = 21;
-	Country string `protobuf:"bytes,22,opt,name=country,proto3" json:"country,omitempty"`
+	Country string `protobuf:"bytes,20,opt,name=country,proto3" json:"country,omitempty"`
 	// string device = 23;
 	// string source = 24;
-	RegistrationIp string `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
+	RegistrationIp string `protobuf:"bytes,21,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1777,23 +1763,30 @@ func (*ListUsersResponse_User) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{1, 0}
 }
 
-func (x *ListUsersResponse_User) GetRetailer() string {
-	if x != nil {
-		return x.Retailer
-	}
-	return ""
-}
-
-func (x *ListUsersResponse_User) GetGroup() string {
-	if x != nil {
-		return x.Group
-	}
-	return ""
-}
-
 func (x *ListUsersResponse_User) GetOperatorName() string {
 	if x != nil {
 		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetSystemOperatorName() string {
+	if x != nil {
+		return x.SystemOperatorName
 	}
 	return ""
 }
@@ -2409,44 +2402,39 @@ var File_backoffice_service_v1_backoffice_user_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfe\t\n" +
+	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\x8f\t\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
 	"\x17registration_start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x15registrationStartTime\x88\x01\x01\x12S\n" +
 	"\x15registration_end_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x13registrationEndTime\x88\x01\x01\x12 \n" +
-	"\tvip_level\x18\x05 \x01(\x05H\x03R\bvipLevel\x88\x01\x01\x125\n" +
-	"\x14retailer_operator_id\x18\x06 \x01(\x03H\x04R\x12retailerOperatorId\x88\x01\x01\x12/\n" +
-	"\x11group_operator_id\x18\a \x01(\x03H\x05R\x0fgroupOperatorId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\b \x01(\x03H\x06R\n" +
-	"operatorId\x88\x01\x01\x12\x1d\n" +
-	"\acountry\x18\t \x01(\tH\aR\acountry\x88\x01\x01\x12 \n" +
-	"\tkyc_level\x18\f \x01(\x05H\bR\bkycLevel\x88\x01\x01\x12$\n" +
-	"\vdeposit_min\x18\x0e \x01(\tH\tR\n" +
+	"\tvip_level\x18\x05 \x01(\x05H\x03R\bvipLevel\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\x06 \x01(\tH\x04R\acountry\x88\x01\x01\x12 \n" +
+	"\tkyc_level\x18\a \x01(\x05H\x05R\bkycLevel\x88\x01\x01\x12$\n" +
+	"\vdeposit_min\x18\b \x01(\tH\x06R\n" +
 	"depositMin\x88\x01\x01\x12$\n" +
-	"\vdeposit_max\x18\x0f \x01(\tH\n" +
-	"R\n" +
+	"\vdeposit_max\x18\t \x01(\tH\aR\n" +
 	"depositMax\x88\x01\x01\x12*\n" +
-	"\x0ewithdrawal_min\x18\x10 \x01(\tH\vR\rwithdrawalMin\x88\x01\x01\x12*\n" +
-	"\x0ewithdrawal_max\x18\x11 \x01(\tH\fR\rwithdrawalMax\x88\x01\x01\x12&\n" +
-	"\fban_withdraw\x18\x12 \x01(\bH\rR\vbanWithdraw\x88\x01\x01\x12\x1e\n" +
-	"\bban_game\x18\x13 \x01(\bH\x0eR\abanGame\x88\x01\x01\x12 \n" +
-	"\tban_login\x18\x14 \x01(\bH\x0fR\bbanLogin\x88\x01\x01\x12\x1b\n" +
-	"\x06online\x18\x17 \x01(\bH\x10R\x06online\x88\x01\x01\x12\x1d\n" +
-	"\aenabled\x18\x18 \x01(\bH\x11R\aenabled\x88\x01\x01\x12\x19\n" +
-	"\x05email\x18\x19 \x01(\tH\x12R\x05email\x88\x01\x01\x12\x1b\n" +
-	"\x06mobile\x18\x1a \x01(\tH\x13R\x06mobile\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x1b \x01(\x05H\x14R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x1c \x01(\x05H\x15R\bpageSize\x88\x01\x01B\n" +
+	"\x0ewithdrawal_min\x18\n" +
+	" \x01(\tH\bR\rwithdrawalMin\x88\x01\x01\x12*\n" +
+	"\x0ewithdrawal_max\x18\v \x01(\tH\tR\rwithdrawalMax\x88\x01\x01\x12&\n" +
+	"\fban_withdraw\x18\f \x01(\bH\n" +
+	"R\vbanWithdraw\x88\x01\x01\x12\x1e\n" +
+	"\bban_game\x18\r \x01(\bH\vR\abanGame\x88\x01\x01\x12 \n" +
+	"\tban_login\x18\x0e \x01(\bH\fR\bbanLogin\x88\x01\x01\x12\x1b\n" +
+	"\x06online\x18\x11 \x01(\bH\rR\x06online\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x12 \x01(\bH\x0eR\aenabled\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x13 \x01(\tH\x0fR\x05email\x88\x01\x01\x12\x1b\n" +
+	"\x06mobile\x18\x14 \x01(\tH\x10R\x06mobile\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x15 \x01(\x05H\x11R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x16 \x01(\x05H\x12R\bpageSize\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\x17 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
 	"\x16_registration_end_timeB\f\n" +
 	"\n" +
-	"_vip_levelB\x17\n" +
-	"\x15_retailer_operator_idB\x14\n" +
-	"\x12_group_operator_idB\x0e\n" +
-	"\f_operator_idB\n" +
+	"_vip_levelB\n" +
 	"\n" +
 	"\b_countryB\f\n" +
 	"\n" +
@@ -2466,34 +2454,35 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\a_mobileB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xa1\x06\n" +
+	"_page_size\"\x8b\a\n" +
 	"\x11ListUsersResponse\x12G\n" +
 	"\x05users\x18\x01 \x03(\v21.api.backoffice.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xfb\x04\n" +
-	"\x04User\x12\x1a\n" +
-	"\bretailer\x18\x01 \x01(\tR\bretailer\x12\x14\n" +
-	"\x05group\x18\x02 \x01(\tR\x05group\x12#\n" +
-	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x12\x17\n" +
-	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\busername\x18\x05 \x01(\tR\busername\x12\x14\n" +
-	"\x05email\x18\x06 \x01(\tR\x05email\x12\x16\n" +
-	"\x06mobile\x18\a \x01(\tR\x06mobile\x12\x1b\n" +
-	"\tvip_level\x18\b \x01(\x05R\bvipLevel\x12\x1b\n" +
-	"\tkyc_level\x18\t \x01(\x05R\bkycLevel\x12\x18\n" +
-	"\adeposit\x18\n" +
-	" \x01(\tR\adeposit\x12\x1a\n" +
-	"\bwithdraw\x18\v \x01(\tR\bwithdraw\x12\x12\n" +
-	"\x04tags\x18\f \x03(\tR\x04tags\x12!\n" +
-	"\fban_withdraw\x18\r \x01(\bR\vbanWithdraw\x12\x19\n" +
-	"\bban_game\x18\x0e \x01(\bR\abanGame\x12\x1b\n" +
-	"\tban_login\x18\x0f \x01(\bR\bbanLogin\x12\x16\n" +
-	"\x06online\x18\x10 \x01(\bR\x06online\x12>\n" +
-	"\rlast_login_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
-	"\rregistered_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
-	"\acountry\x18\x16 \x01(\tR\acountry\x12'\n" +
-	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\"Y\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xe5\x05\n" +
+	"\x04User\x12#\n" +
+	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\x02 \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\x03 \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\x04 \x01(\tR\x12systemOperatorName\x12\x17\n" +
+	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12\x1a\n" +
+	"\busername\x18\x06 \x01(\tR\busername\x12\x14\n" +
+	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
+	"\x06mobile\x18\b \x01(\tR\x06mobile\x12\x1b\n" +
+	"\tvip_level\x18\t \x01(\x05R\bvipLevel\x12\x1b\n" +
+	"\tkyc_level\x18\n" +
+	" \x01(\x05R\bkycLevel\x12\x18\n" +
+	"\adeposit\x18\v \x01(\tR\adeposit\x12\x1a\n" +
+	"\bwithdraw\x18\f \x01(\tR\bwithdraw\x12\x12\n" +
+	"\x04tags\x18\r \x03(\tR\x04tags\x12!\n" +
+	"\fban_withdraw\x18\x0e \x01(\bR\vbanWithdraw\x12\x19\n" +
+	"\bban_game\x18\x0f \x01(\bR\abanGame\x12\x1b\n" +
+	"\tban_login\x18\x10 \x01(\bR\bbanLogin\x12\x16\n" +
+	"\x06online\x18\x11 \x01(\bR\x06online\x12>\n" +
+	"\rlast_login_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
+	"\rregistered_at\x18\x13 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
+	"\acountry\x18\x14 \x01(\tR\acountry\x12'\n" +
+	"\x0fregistration_ip\x18\x15 \x01(\tR\x0eregistrationIp\"Y\n" +
 	"\x16GetUserOverviewRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\x06filter\x18\x02 \x01(\tH\x00R\x06filter\x88\x01\x01B\t\n" +
@@ -2706,55 +2695,57 @@ var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*GetUserProfileResponse_Comment)(nil),            // 31: api.backoffice.service.v1.GetUserProfileResponse.Comment
 	(*ListUserCommentsResponse_Comment)(nil),          // 32: api.backoffice.service.v1.ListUserCommentsResponse.Comment
 	(*timestamppb.Timestamp)(nil),                     // 33: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),             // 34: api.common.OperatorContextFilters
 }
 var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
 	33, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
 	33, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	26, // 2: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
-	27, // 3: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	29, // 4: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	30, // 5: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	31, // 6: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
-	32, // 7: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
-	33, // 8: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	33, // 9: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	33, // 10: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	28, // 11: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
-	33, // 12: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	28, // 13: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
-	33, // 14: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	33, // 15: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 16: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
-	2,  // 17: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
-	4,  // 18: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
-	6,  // 19: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
-	8,  // 20: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
-	10, // 21: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
-	12, // 22: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
-	14, // 23: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:input_type -> api.backoffice.service.v1.SetOperatorTagsConfigRequest
-	16, // 24: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:input_type -> api.backoffice.service.v1.SetOperatorTagsRequest
-	18, // 25: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:input_type -> api.backoffice.service.v1.GetOperatorTagsConfigRequest
-	20, // 26: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:input_type -> api.backoffice.service.v1.GetOperatorTagsRequest
-	22, // 27: api.backoffice.service.v1.BackofficeUser.GetUserTags:input_type -> api.backoffice.service.v1.GetUserTagsRequest
-	24, // 28: api.backoffice.service.v1.BackofficeUser.SetUserTags:input_type -> api.backoffice.service.v1.SetUserTagsRequest
-	1,  // 29: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
-	3,  // 30: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
-	5,  // 31: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
-	7,  // 32: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
-	9,  // 33: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
-	11, // 34: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
-	13, // 35: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
-	15, // 36: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:output_type -> api.backoffice.service.v1.SetOperatorTagsConfigResponse
-	17, // 37: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:output_type -> api.backoffice.service.v1.SetOperatorTagsResponse
-	19, // 38: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:output_type -> api.backoffice.service.v1.GetOperatorTagsConfigResponse
-	21, // 39: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:output_type -> api.backoffice.service.v1.GetOperatorTagsResponse
-	23, // 40: api.backoffice.service.v1.BackofficeUser.GetUserTags:output_type -> api.backoffice.service.v1.GetUserTagsResponse
-	25, // 41: api.backoffice.service.v1.BackofficeUser.SetUserTags:output_type -> api.backoffice.service.v1.SetUserTagsResponse
-	29, // [29:42] is the sub-list for method output_type
-	16, // [16:29] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	34, // 2: api.backoffice.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	26, // 3: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
+	27, // 4: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
+	29, // 5: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
+	30, // 6: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
+	31, // 7: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
+	32, // 8: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	33, // 9: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	33, // 10: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	33, // 11: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
+	28, // 12: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
+	33, // 13: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
+	28, // 14: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
+	33, // 15: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	33, // 16: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 17: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
+	2,  // 18: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
+	4,  // 19: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
+	6,  // 20: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
+	8,  // 21: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
+	10, // 22: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
+	12, // 23: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
+	14, // 24: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:input_type -> api.backoffice.service.v1.SetOperatorTagsConfigRequest
+	16, // 25: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:input_type -> api.backoffice.service.v1.SetOperatorTagsRequest
+	18, // 26: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:input_type -> api.backoffice.service.v1.GetOperatorTagsConfigRequest
+	20, // 27: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:input_type -> api.backoffice.service.v1.GetOperatorTagsRequest
+	22, // 28: api.backoffice.service.v1.BackofficeUser.GetUserTags:input_type -> api.backoffice.service.v1.GetUserTagsRequest
+	24, // 29: api.backoffice.service.v1.BackofficeUser.SetUserTags:input_type -> api.backoffice.service.v1.SetUserTagsRequest
+	1,  // 30: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
+	3,  // 31: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
+	5,  // 32: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
+	7,  // 33: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
+	9,  // 34: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
+	11, // 35: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
+	13, // 36: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
+	15, // 37: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:output_type -> api.backoffice.service.v1.SetOperatorTagsConfigResponse
+	17, // 38: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:output_type -> api.backoffice.service.v1.SetOperatorTagsResponse
+	19, // 39: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:output_type -> api.backoffice.service.v1.GetOperatorTagsConfigResponse
+	21, // 40: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:output_type -> api.backoffice.service.v1.GetOperatorTagsResponse
+	23, // 41: api.backoffice.service.v1.BackofficeUser.GetUserTags:output_type -> api.backoffice.service.v1.GetUserTagsResponse
+	25, // 42: api.backoffice.service.v1.BackofficeUser.SetUserTags:output_type -> api.backoffice.service.v1.SetUserTagsResponse
+	30, // [30:43] is the sub-list for method output_type
+	17, // [17:30] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_user_proto_init() }

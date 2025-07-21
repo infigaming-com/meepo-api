@@ -38,6 +38,8 @@ const (
 	ErrorReason_GET_CHANNEL_LIST_FAILED          ErrorReason = 50010
 	ErrorReason_GET_ADDRESS_FAILED               ErrorReason = 50011
 	ErrorReason_OPERATOR_ID_NOT_FOUND_IN_CONTEXT ErrorReason = 50012
+	ErrorReason_UPDATE_PAYMENT_METHOD_FAILED     ErrorReason = 50013
+	ErrorReason_UPDATE_PAYMENT_CHANNEL_FAILED    ErrorReason = 50014
 )
 
 // Enum value maps for ErrorReason.
@@ -56,6 +58,8 @@ var (
 		50010: "GET_CHANNEL_LIST_FAILED",
 		50011: "GET_ADDRESS_FAILED",
 		50012: "OPERATOR_ID_NOT_FOUND_IN_CONTEXT",
+		50013: "UPDATE_PAYMENT_METHOD_FAILED",
+		50014: "UPDATE_PAYMENT_CHANNEL_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                      0,
@@ -71,6 +75,8 @@ var (
 		"GET_CHANNEL_LIST_FAILED":          50010,
 		"GET_ADDRESS_FAILED":               50011,
 		"OPERATOR_ID_NOT_FOUND_IN_CONTEXT": 50012,
+		"UPDATE_PAYMENT_METHOD_FAILED":     50013,
+		"UPDATE_PAYMENT_CHANNEL_FAILED":    50014,
 	}
 )
 
@@ -105,7 +111,7 @@ var File_payment_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_payment_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"%payment/service/v1/error_reason.proto\x12\x16api.payment.service.v1\x1a\x13errors/errors.proto*\xbd\x03\n" +
+	"%payment/service/v1/error_reason.proto\x12\x16api.payment.service.v1\x1a\x13errors/errors.proto*\x86\x04\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12$\n" +
 	"\x1eGET_PAYMENT_METHOD_LIST_FAILED\x10ц\x03\x12#\n" +
@@ -119,7 +125,9 @@ const file_payment_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1dGET_TRANSACTION_DETAIL_FAILED\x10ن\x03\x12\x1d\n" +
 	"\x17GET_CHANNEL_LIST_FAILED\x10چ\x03\x12\x18\n" +
 	"\x12GET_ADDRESS_FAILED\x10ۆ\x03\x12&\n" +
-	" OPERATOR_ID_NOT_FOUND_IN_CONTEXT\x10܆\x03\x1a\x04\xa0E\xf4\x03BU\n" +
+	" OPERATOR_ID_NOT_FOUND_IN_CONTEXT\x10܆\x03\x12\"\n" +
+	"\x1cUPDATE_PAYMENT_METHOD_FAILED\x10݆\x03\x12#\n" +
+	"\x1dUPDATE_PAYMENT_CHANNEL_FAILED\x10ކ\x03\x1a\x04\xa0E\xf4\x03BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
 
 var (

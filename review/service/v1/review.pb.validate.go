@@ -1116,24 +1116,37 @@ func (m *ListTicketsRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListTicketsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListTicketsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListTicketsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.UserId != nil {
 		// no validation rules for UserId
-	}
-
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
-	}
-
-	if m.CompanyOperatorId != nil {
-		// no validation rules for CompanyOperatorId
-	}
-
-	if m.RetailerOperatorId != nil {
-		// no validation rules for RetailerOperatorId
-	}
-
-	if m.SystemOperatorId != nil {
-		// no validation rules for SystemOperatorId
 	}
 
 	if m.TicketId != nil {
@@ -1353,20 +1366,33 @@ func (m *ListOperatorTicketsRequest) validate(all bool) error {
 		}
 	}
 
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
-	}
-
-	if m.CompanyOperatorId != nil {
-		// no validation rules for CompanyOperatorId
-	}
-
-	if m.RetailerOperatorId != nil {
-		// no validation rules for RetailerOperatorId
-	}
-
-	if m.SystemOperatorId != nil {
-		// no validation rules for SystemOperatorId
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOperatorTicketsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListOperatorTicketsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOperatorTicketsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	if m.TicketId != nil {
@@ -2470,11 +2496,19 @@ func (m *ListTicketsResponse_Ticket) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for OperatorName
-
 	// no validation rules for TicketId
 
 	// no validation rules for UserId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
+	// no validation rules for RealOperatorName
 
 	// no validation rules for VipLevel
 
@@ -2872,6 +2906,8 @@ func (m *GetOperatorTicketResponse_Ticket) validate(all bool) error {
 	// no validation rules for Id
 
 	// no validation rules for Type
+
+	// no validation rules for Status
 
 	// no validation rules for OperatorName
 

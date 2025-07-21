@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -24,16 +25,17 @@ const (
 )
 
 type ListAuditLogsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserName      *string                `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3,oneof" json:"user_name,omitempty"`
-	Action        *string                `protobuf:"bytes,2,opt,name=action,proto3,oneof" json:"action,omitempty"`
-	UserEmail     *string                `protobuf:"bytes,3,opt,name=user_email,json=userEmail,proto3,oneof" json:"user_email,omitempty"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page          *int32                 `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`                         // default 1
-	PageSize      *int32                 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"` // default 20
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	UserName               *string                        `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3,oneof" json:"user_name,omitempty"`
+	Action                 *string                        `protobuf:"bytes,3,opt,name=action,proto3,oneof" json:"action,omitempty"`
+	UserEmail              *string                        `protobuf:"bytes,4,opt,name=user_email,json=userEmail,proto3,oneof" json:"user_email,omitempty"`
+	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page                   *int32                         `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`                         // default 1
+	PageSize               *int32                         `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"` // default 20
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListAuditLogsRequest) Reset() {
@@ -64,6 +66,13 @@ func (x *ListAuditLogsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListAuditLogsRequest.ProtoReflect.Descriptor instead.
 func (*ListAuditLogsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_audit_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ListAuditLogsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 func (x *ListAuditLogsRequest) GetUserName() string {
@@ -116,21 +125,26 @@ func (x *ListAuditLogsRequest) GetPageSize() int32 {
 }
 
 type AuditLog struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	AuditId       int64                  `protobuf:"varint,1,opt,name=audit_id,json=auditId,proto3" json:"audit_id,omitempty"`
-	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	UserName      string                 `protobuf:"bytes,3,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	UserEmail     string                 `protobuf:"bytes,4,opt,name=user_email,json=userEmail,proto3" json:"user_email,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	RequestInfo   string                 `protobuf:"bytes,6,opt,name=request_info,json=requestInfo,proto3" json:"request_info,omitempty"`    // JSON string
-	RequestBody   string                 `protobuf:"bytes,7,opt,name=request_body,json=requestBody,proto3" json:"request_body,omitempty"`    // JSON string
-	ResponseBody  string                 `protobuf:"bytes,8,opt,name=response_body,json=responseBody,proto3" json:"response_body,omitempty"` // JSON string
-	ClientIp      string                 `protobuf:"bytes,9,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
-	ApiPath       string                 `protobuf:"bytes,10,opt,name=api_path,json=apiPath,proto3" json:"api_path,omitempty"`
-	Action        string                 `protobuf:"bytes,11,opt,name=action,proto3" json:"action,omitempty"`
-	ErrorMessage  string                 `protobuf:"bytes,12,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState  `protogen:"open.v1"`
+	AuditId              int64                   `protobuf:"varint,1,opt,name=audit_id,json=auditId,proto3" json:"audit_id,omitempty"`
+	UserId               int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserName             string                  `protobuf:"bytes,3,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	UserEmail            string                  `protobuf:"bytes,4,opt,name=user_email,json=userEmail,proto3" json:"user_email,omitempty"`
+	CreatedAt            *timestamppb.Timestamp  `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	RequestInfo          string                  `protobuf:"bytes,6,opt,name=request_info,json=requestInfo,proto3" json:"request_info,omitempty"`    // JSON string
+	RequestBody          string                  `protobuf:"bytes,7,opt,name=request_body,json=requestBody,proto3" json:"request_body,omitempty"`    // JSON string
+	ResponseBody         string                  `protobuf:"bytes,8,opt,name=response_body,json=responseBody,proto3" json:"response_body,omitempty"` // JSON string
+	ClientIp             string                  `protobuf:"bytes,9,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	ApiPath              string                  `protobuf:"bytes,10,opt,name=api_path,json=apiPath,proto3" json:"api_path,omitempty"`
+	Action               string                  `protobuf:"bytes,11,opt,name=action,proto3" json:"action,omitempty"`
+	OperatorContext      *common.OperatorContext `protobuf:"bytes,12,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorName         string                  `protobuf:"bytes,13,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string                  `protobuf:"bytes,14,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string                  `protobuf:"bytes,15,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string                  `protobuf:"bytes,16,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	ErrorMessage         string                  `protobuf:"bytes,17,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AuditLog) Reset() {
@@ -236,6 +250,41 @@ func (x *AuditLog) GetApiPath() string {
 func (x *AuditLog) GetAction() string {
 	if x != nil {
 		return x.Action
+	}
+	return ""
+}
+
+func (x *AuditLog) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *AuditLog) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *AuditLog) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *AuditLog) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *AuditLog) GetSystemOperatorName() string {
+	if x != nil {
+		return x.SystemOperatorName
 	}
 	return ""
 }
@@ -399,17 +448,18 @@ var File_backoffice_service_v1_backoffice_audit_proto protoreflect.FileDescripto
 
 const file_backoffice_service_v1_backoffice_audit_proto_rawDesc = "" +
 	"\n" +
-	",backoffice/service/v1/backoffice_audit.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8b\x03\n" +
-	"\x14ListAuditLogsRequest\x12 \n" +
-	"\tuser_name\x18\x01 \x01(\tH\x00R\buserName\x88\x01\x01\x12\x1b\n" +
-	"\x06action\x18\x02 \x01(\tH\x01R\x06action\x88\x01\x01\x12\"\n" +
+	",backoffice/service/v1/backoffice_audit.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\xe9\x03\n" +
+	"\x14ListAuditLogsRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12 \n" +
+	"\tuser_name\x18\x02 \x01(\tH\x00R\buserName\x88\x01\x01\x12\x1b\n" +
+	"\x06action\x18\x03 \x01(\tH\x01R\x06action\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"user_email\x18\x03 \x01(\tH\x02R\tuserEmail\x88\x01\x01\x12>\n" +
+	"user_email\x18\x04 \x01(\tH\x02R\tuserEmail\x88\x01\x01\x12>\n" +
 	"\n" +
-	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x06 \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\a \x01(\x05H\x06R\bpageSize\x88\x01\x01B\f\n" +
+	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\a \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\b \x01(\x05H\x06R\bpageSize\x88\x01\x01B\f\n" +
 	"\n" +
 	"_user_nameB\t\n" +
 	"\a_actionB\r\n" +
@@ -418,7 +468,7 @@ const file_backoffice_service_v1_backoffice_audit_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x95\x03\n" +
+	"_page_size\"\x9e\x05\n" +
 	"\bAuditLog\x12\x19\n" +
 	"\baudit_id\x18\x01 \x01(\x03R\aauditId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -433,8 +483,13 @@ const file_backoffice_service_v1_backoffice_audit_proto_rawDesc = "" +
 	"\tclient_ip\x18\t \x01(\tR\bclientIp\x12\x19\n" +
 	"\bapi_path\x18\n" +
 	" \x01(\tR\aapiPath\x12\x16\n" +
-	"\x06action\x18\v \x01(\tR\x06action\x12#\n" +
-	"\rerror_message\x18\f \x01(\tR\ferrorMessage\"\xa2\x01\n" +
+	"\x06action\x18\v \x01(\tR\x06action\x12F\n" +
+	"\x10operator_context\x18\f \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12#\n" +
+	"\roperator_name\x18\r \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\x0e \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\x0f \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\x10 \x01(\tR\x12systemOperatorName\x12#\n" +
+	"\rerror_message\x18\x11 \x01(\tR\ferrorMessage\"\xa2\x01\n" +
 	"\x15ListAuditLogsResponse\x12B\n" +
 	"\n" +
 	"audit_logs\x18\x01 \x03(\v2#.api.backoffice.service.v1.AuditLogR\tauditLogs\x12\x14\n" +
@@ -463,27 +518,31 @@ func file_backoffice_service_v1_backoffice_audit_proto_rawDescGZIP() []byte {
 
 var file_backoffice_service_v1_backoffice_audit_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_backoffice_service_v1_backoffice_audit_proto_goTypes = []any{
-	(*ListAuditLogsRequest)(nil),     // 0: api.backoffice.service.v1.ListAuditLogsRequest
-	(*AuditLog)(nil),                 // 1: api.backoffice.service.v1.AuditLog
-	(*ListAuditLogsResponse)(nil),    // 2: api.backoffice.service.v1.ListAuditLogsResponse
-	(*ListAuditActionsRequest)(nil),  // 3: api.backoffice.service.v1.ListAuditActionsRequest
-	(*ListAuditActionsResponse)(nil), // 4: api.backoffice.service.v1.ListAuditActionsResponse
-	(*timestamppb.Timestamp)(nil),    // 5: google.protobuf.Timestamp
+	(*ListAuditLogsRequest)(nil),          // 0: api.backoffice.service.v1.ListAuditLogsRequest
+	(*AuditLog)(nil),                      // 1: api.backoffice.service.v1.AuditLog
+	(*ListAuditLogsResponse)(nil),         // 2: api.backoffice.service.v1.ListAuditLogsResponse
+	(*ListAuditActionsRequest)(nil),       // 3: api.backoffice.service.v1.ListAuditActionsRequest
+	(*ListAuditActionsResponse)(nil),      // 4: api.backoffice.service.v1.ListAuditActionsResponse
+	(*common.OperatorContextFilters)(nil), // 5: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),         // 6: google.protobuf.Timestamp
+	(*common.OperatorContext)(nil),        // 7: api.common.OperatorContext
 }
 var file_backoffice_service_v1_backoffice_audit_proto_depIdxs = []int32{
-	5, // 0: api.backoffice.service.v1.ListAuditLogsRequest.start_time:type_name -> google.protobuf.Timestamp
-	5, // 1: api.backoffice.service.v1.ListAuditLogsRequest.end_time:type_name -> google.protobuf.Timestamp
-	5, // 2: api.backoffice.service.v1.AuditLog.created_at:type_name -> google.protobuf.Timestamp
-	1, // 3: api.backoffice.service.v1.ListAuditLogsResponse.audit_logs:type_name -> api.backoffice.service.v1.AuditLog
-	0, // 4: api.backoffice.service.v1.BackofficeAudit.ListAuditLogs:input_type -> api.backoffice.service.v1.ListAuditLogsRequest
-	3, // 5: api.backoffice.service.v1.BackofficeAudit.ListAuditActions:input_type -> api.backoffice.service.v1.ListAuditActionsRequest
-	2, // 6: api.backoffice.service.v1.BackofficeAudit.ListAuditLogs:output_type -> api.backoffice.service.v1.ListAuditLogsResponse
-	4, // 7: api.backoffice.service.v1.BackofficeAudit.ListAuditActions:output_type -> api.backoffice.service.v1.ListAuditActionsResponse
-	6, // [6:8] is the sub-list for method output_type
-	4, // [4:6] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	5, // 0: api.backoffice.service.v1.ListAuditLogsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	6, // 1: api.backoffice.service.v1.ListAuditLogsRequest.start_time:type_name -> google.protobuf.Timestamp
+	6, // 2: api.backoffice.service.v1.ListAuditLogsRequest.end_time:type_name -> google.protobuf.Timestamp
+	6, // 3: api.backoffice.service.v1.AuditLog.created_at:type_name -> google.protobuf.Timestamp
+	7, // 4: api.backoffice.service.v1.AuditLog.operator_context:type_name -> api.common.OperatorContext
+	1, // 5: api.backoffice.service.v1.ListAuditLogsResponse.audit_logs:type_name -> api.backoffice.service.v1.AuditLog
+	0, // 6: api.backoffice.service.v1.BackofficeAudit.ListAuditLogs:input_type -> api.backoffice.service.v1.ListAuditLogsRequest
+	3, // 7: api.backoffice.service.v1.BackofficeAudit.ListAuditActions:input_type -> api.backoffice.service.v1.ListAuditActionsRequest
+	2, // 8: api.backoffice.service.v1.BackofficeAudit.ListAuditLogs:output_type -> api.backoffice.service.v1.ListAuditLogsResponse
+	4, // 9: api.backoffice.service.v1.BackofficeAudit.ListAuditActions:output_type -> api.backoffice.service.v1.ListAuditActionsResponse
+	8, // [8:10] is the sub-list for method output_type
+	6, // [6:8] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_audit_proto_init() }

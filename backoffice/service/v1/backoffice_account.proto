@@ -266,9 +266,9 @@ message Permission {
 }
 
 message ListAccountsRequest {
-    optional int64 user_id = 1;
-    optional int64 role_id = 2;
-    optional int64 operator_id = 3;
+    api.common.OperatorContextFilters operator_context_filters = 1;
+    optional int64 user_id = 2;
+    optional int64 role_id = 3;
     optional bool enabled = 4;
     optional int32 page = 5;
     optional int32 page_size = 6;

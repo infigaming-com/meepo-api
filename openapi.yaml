@@ -1444,7 +1444,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionPageRequest'
                 required: true
             responses:
                 "200":
@@ -1509,7 +1509,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetTransactionPageRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionPageRequest'
                 required: true
             responses:
                 "200":
@@ -1752,6 +1752,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse'
+    /v1/backoffice/review/operator/tickets/get:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_GetOperatorTicket
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse'
     /v1/backoffice/review/operator/tickets/list:
         post:
             tags:
@@ -3383,6 +3401,16 @@ components:
                     type: string
                 action:
                     type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
                 errorMessage:
                     type: string
         api.backoffice.service.v1.Bet:
@@ -3645,8 +3673,8 @@ components:
                 pspMaxAmount:
                     type: string
                     description: PSP Max Amount
-                key:
-                    type: object
+                mininalFee:
+                    type: string
                     description: JSON schema defining the required fields for this payment method
             description: |-
                 Request to create a payment channel
@@ -3931,18 +3959,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 currencies:
                     type: array
                     items:
@@ -3985,18 +4003,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 providerIds:
                     type: array
                     items:
@@ -4044,7 +4052,13 @@ components:
             properties:
                 date:
                     type: string
-                operator:
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
                 provider:
                     type: string
@@ -4087,18 +4101,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 providerIds:
                     type: array
                     items:
@@ -4390,9 +4394,122 @@ components:
                         type: string
                     description: List of tags associated with the operator.
             description: GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
+        api.backoffice.service.v1.GetOperatorTicketRequest:
+            type: object
+            properties:
+                ticketId:
+                    type: string
+        api.backoffice.service.v1.GetOperatorTicketResponse:
+            type: object
+            properties:
+                ticket:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse_Ticket'
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse_Comment'
+                paymentWithdrawTransactionInfo:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse_PaymentWithdrawTransactionInfo'
+                walletBalanceInfo:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse_WalletBalanceInfo'
+                walletTransactionInfo:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse_WalletTransactionInfo'
+                walletTransactionSummary:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorTicketResponse_WalletTransactionSummary'
+        api.backoffice.service.v1.GetOperatorTicketResponse_Comment:
+            type: object
+            properties:
+                id:
+                    type: string
+                ticketId:
+                    type: string
+                authorUsername:
+                    type: string
+                content:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+        api.backoffice.service.v1.GetOperatorTicketResponse_PaymentWithdrawTransactionInfo:
+            type: object
+            properties:
+                currency:
+                    type: string
+                protocol:
+                    type: string
+                address:
+                    type: string
+                psp:
+                    type: string
+                amount:
+                    type: string
+                amountSent:
+                    type: string
+                gas:
+                    type: string
+                fee:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+        api.backoffice.service.v1.GetOperatorTicketResponse_Ticket:
+            type: object
+            properties:
+                id:
+                    type: string
+                type:
+                    type: string
+                status:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+        api.backoffice.service.v1.GetOperatorTicketResponse_WalletBalanceInfo:
+            type: object
+            properties:
+                balance:
+                    type: string
+        api.backoffice.service.v1.GetOperatorTicketResponse_WalletTransactionInfo:
+            type: object
+            properties:
+                beforeBalance:
+                    type: string
+                afterBalance:
+                    type: string
+                amount:
+                    type: string
+        api.backoffice.service.v1.GetOperatorTicketResponse_WalletTransactionSummary:
+            type: object
+            properties:
+                totalWithdrawUsd:
+                    type: string
+                totalDepositUsd:
+                    type: string
+                totalTransferUsd:
+                    type: string
+                totalSwapOutUsd:
+                    type: string
+                totalSwapInUsd:
+                    type: string
+                totalFreezeUsd:
+                    type: string
+                totalWriteOffUsd:
+                    type: string
+                totalPendingUsd:
+                    type: string
         api.backoffice.service.v1.GetOverviewDashboardRequest:
             type: object
-            properties: {}
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
             description: System related messages
         api.backoffice.service.v1.GetOverviewDashboardResponse:
             type: object
@@ -4411,28 +4528,6 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardResponse_WithdrawalAmount'
                 depositMinusWithdrawalAmount:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardResponse_DepositMinusWithdrawalAmount'
-                activeUsers:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardResponse_ActiveUsers'
-                activeDevices:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardResponse_ActiveDevices'
-        api.backoffice.service.v1.GetOverviewDashboardResponse_ActiveDevices:
-            type: object
-            properties:
-                today:
-                    type: integer
-                    format: int32
-                yesterday:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.GetOverviewDashboardResponse_ActiveUsers:
-            type: object
-            properties:
-                today:
-                    type: integer
-                    format: int32
-                yesterday:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.GetOverviewDashboardResponse_DepositAmount:
             type: object
             properties:
@@ -4491,18 +4586,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 providerIds:
                     type: array
                     items:
@@ -4558,7 +4643,13 @@ components:
             properties:
                 date:
                     type: string
-                operator:
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
                 provider:
                     type: string
@@ -4596,18 +4687,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 providerIds:
                     type: array
                     items:
@@ -4899,6 +4980,8 @@ components:
                 customDays:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.GetTimeRangedDashboardResponse:
             type: object
             properties:
@@ -4946,6 +5029,8 @@ components:
                         - TIME_RANGE_TYPE_THIS_MONTH
                     type: string
                     format: enum
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.GetTopOperatorsDashboardResponse:
             type: object
             properties:
@@ -4961,15 +5046,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardResponse_OperatorData'
-                topGgrGroupOperators:
+                topGgrCompanyOperators:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardResponse_OperatorData'
-                topNgrGroupOperators:
+                topNgrCompanyOperators:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardResponse_OperatorData'
-                topDepositMinusWithdrawGroupOperators:
+                topDepositMinusWithdrawCompanyOperators:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardResponse_OperatorData'
@@ -4991,11 +5076,17 @@ components:
                 rank:
                     type: integer
                     format: int32
-                operatorId:
-                    type: string
                 operatorName:
                     type: string
-                amount:
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetTopUsersDashboardRequest:
             type: object
@@ -5008,6 +5099,8 @@ components:
                         - TIME_RANGE_TYPE_THIS_MONTH
                     type: string
                     format: enum
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.GetTopUsersDashboardResponse:
             type: object
             properties:
@@ -5034,10 +5127,100 @@ components:
                 vipLevel:
                     type: integer
                     format: int32
-                amount:
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
                     type: string
                 operatorName:
                     type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+        api.backoffice.service.v1.GetTransactionPageRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                transactionId:
+                    type: string
+                    description: Optional transaction ID filter
+                currency:
+                    type: string
+                    description: Optional currency filter
+                paymentMethod:
+                    type: string
+                    description: Optional payment method filter
+                paymentChannel:
+                    type: string
+                    description: Optional payment channel filter
+                protocol:
+                    type: string
+                    description: Optional crypto protocol filter
+                network:
+                    type: string
+                    description: Optional crypto network filter
+                type:
+                    enum:
+                        - TRANSACTION_TYPE_UNSPECIFIED
+                        - TRANSACTION_TYPE_DEPOSIT
+                        - TRANSACTION_TYPE_WITHDRAW
+                    type: string
+                    description: Optional transaction type filter
+                    format: enum
+                status:
+                    enum:
+                        - TRANSACTION_STATUS_UNSPECIFIED
+                        - TRANSACTION_STATUS_PROCESSING
+                        - TRANSACTION_STATUS_SUCCESSFUL
+                        - TRANSACTION_STATUS_FAILED
+                    type: string
+                    description: Optional status filter
+                    format: enum
+                agent:
+                    type: string
+                    description: Optional agent filter
+                startTime:
+                    type: string
+                    description: Optional start time for date range filter
+                    format: date-time
+                endTime:
+                    type: string
+                    description: Optional end time for date range filter
+                    format: date-time
+                sort:
+                    enum:
+                        - DESC
+                        - ASC
+                    type: string
+                    description: Optional sort direction
+                    format: enum
+                source:
+                    enum:
+                        - REQUEST_SOURCE_FRONTEND
+                        - REQUEST_SOURCE_ADMIN
+                    type: string
+                    description: Source of the request (frontend or admin)
+                    format: enum
+                userId:
+                    type: string
+                    description: Optional user ID filter
+                minAmount:
+                    type: string
+                    description: Optional minimum amount filter
+                maxAmount:
+                    type: string
+                    description: Optional maximum amount filter
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.GetUserBetsOverviewRequest:
             type: object
             properties:
@@ -5488,18 +5671,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 currencies:
                     type: array
                     items:
@@ -5525,11 +5698,11 @@ components:
         api.backoffice.service.v1.ListAccountsRequest:
             type: object
             properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 userId:
                     type: string
                 roleId:
-                    type: string
-                operatorId:
                     type: string
                 enabled:
                     type: boolean
@@ -5720,6 +5893,8 @@ components:
         api.backoffice.service.v1.ListAuditLogsRequest:
             type: object
             properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 userName:
                     type: string
                 action:
@@ -5862,7 +6037,23 @@ components:
                 operators:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorInfo'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListBottomOperatorsResponse_OperatorInfo'
+        api.backoffice.service.v1.ListBottomOperatorsResponse_OperatorInfo:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                bottomOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                mode:
+                    type: string
+                status:
+                    type: string
+            description: OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
         api.backoffice.service.v1.ListCategoriesRequest:
             type: object
             properties:
@@ -5882,13 +6073,33 @@ components:
                     type: array
                     items:
                         type: string
+                includeCount:
+                    type: boolean
         api.backoffice.service.v1.ListCompanyOperatorsResponse:
             type: object
             properties:
                 companyOperators:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorInfo'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListCompanyOperatorsResponse_OperatorInfo'
+        api.backoffice.service.v1.ListCompanyOperatorsResponse_OperatorInfo:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                bottomOperatorCount:
+                    type: integer
+                    format: int32
+                bottomLiveOperatorCount:
+                    type: integer
+                    format: int32
+                status:
+                    type: boolean
+            description: OperatorInfo is the simplified information of a company operator, used for list company operators
         api.backoffice.service.v1.ListCurrenciesRequest:
             type: object
             properties:
@@ -5906,18 +6117,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 currencies:
                     type: array
                     items:
@@ -5951,11 +6152,19 @@ components:
                     type: string
                 operatorName:
                     type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
                 currency:
                     type: string
                 depositAmount:
                     type: string
                 depositAmountUsd:
+                    type: string
+                depositAmountReportingCurrency:
                     type: string
                 depositUsers:
                     type: integer
@@ -5964,6 +6173,8 @@ components:
                     type: string
                 ftdAmountUsd:
                     type: string
+                ftdAmountReportingCurrency:
+                    type: string
                 ftdUsers:
                     type: integer
                     format: int32
@@ -5971,12 +6182,16 @@ components:
                     type: string
                 sameDayFtdAmountUsd:
                     type: string
+                sameDayFtdAmountReportingCurrency:
+                    type: string
                 sameDayFtdUsers:
                     type: integer
                     format: int32
                 repeatedDepositAmount:
                     type: string
                 repeatedDepositAmountUsd:
+                    type: string
+                repeatedDepositAmountReportingCurrency:
                     type: string
                 repeatedDepositUsers:
                     type: integer
@@ -5991,9 +6206,13 @@ components:
                     type: string
                 averageFtdAmountUsdForSameDayRegistredUsers:
                     type: string
+                averageFtdAmountReportingCurrencyForSameDayRegistredUsers:
+                    type: string
                 averageFtdAmountForNonSameDayRegistredUsers:
                     type: string
                 averageFtdAmountUsdForNonSameDayRegistredUsers:
+                    type: string
+                averageFtdAmountReportingCurrencyForNonSameDayRegistredUsers:
                     type: string
                 successRate:
                     type: string
@@ -6004,18 +6223,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 currencies:
                     type: array
                     items:
@@ -6415,19 +6624,9 @@ components:
         api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest:
             type: object
             properties:
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                companyOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
-                currencies:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                settlementCurrencies:
                     type: array
                     items:
                         type: string
@@ -6470,18 +6669,8 @@ components:
         api.backoffice.service.v1.ListOperatorBalancesRequest:
             type: object
             properties:
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                companyOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 currencies:
                     type: array
                     items:
@@ -6601,14 +6790,8 @@ components:
         api.backoffice.service.v1.ListOperatorTicketsRequest:
             type: object
             properties:
-                operatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                systemOperatorId:
-                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 ticketId:
                     type: string
                 currency:
@@ -6784,18 +6967,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 page:
                     type: integer
                     format: int32
@@ -6937,14 +7110,37 @@ components:
                     type: string
         api.backoffice.service.v1.ListRetailerOperatorsRequest:
             type: object
-            properties: {}
+            properties:
+                includeCount:
+                    type: boolean
         api.backoffice.service.v1.ListRetailerOperatorsResponse:
             type: object
             properties:
                 retailerOperators:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorInfo'
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse_OperatorInfo'
+        api.backoffice.service.v1.ListRetailerOperatorsResponse_OperatorInfo:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                retailerOperatorName:
+                    type: string
+                companyOperatorCount:
+                    type: integer
+                    format: int32
+                bottomOperatorCount:
+                    type: integer
+                    format: int32
+                bottomLiveOperatorCount:
+                    type: integer
+                    format: int32
+                status:
+                    type: boolean
+                selfCoOperationEnabled:
+                    type: boolean
+            description: OperatorInfo is the simplified information of a retailer operator, used for list retailer operators
         api.backoffice.service.v1.ListRolesRequest:
             type: object
             properties:
@@ -7234,14 +7430,8 @@ components:
             properties:
                 userId:
                     type: string
-                operatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                systemOperatorId:
-                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 ticketId:
                     type: string
                 currency:
@@ -7312,11 +7502,19 @@ components:
                 createdAt:
                     type: string
                     format: date-time
-                operatorName:
-                    type: string
                 ticketId:
                     type: string
                 userId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                realOperatorName:
                     type: string
                 vipLevel:
                     type: integer
@@ -7392,12 +7590,6 @@ components:
                 vipLevel:
                     type: integer
                     format: int32
-                retailerOperatorId:
-                    type: string
-                groupOperatorId:
-                    type: string
-                operatorId:
-                    type: string
                 country:
                     type: string
                 kycLevel:
@@ -7435,6 +7627,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListUsersResponse:
             type: object
             properties:
@@ -7454,11 +7648,13 @@ components:
         api.backoffice.service.v1.ListUsersResponse_User:
             type: object
             properties:
-                retailer:
-                    type: string
-                group:
-                    type: string
                 operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
                 userId:
                     type: string
@@ -7637,18 +7833,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 currencies:
                     type: array
                     items:
@@ -7682,11 +7868,21 @@ components:
                     type: string
                 operatorName:
                     type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
                 currency:
+                    type: string
+                reportingCurrency:
                     type: string
                 withdrawAmount:
                     type: string
                 withdrawAmountUsd:
+                    type: string
+                withdrawAmountReportingCurrency:
                     type: string
                 withdrawUsers:
                     type: integer
@@ -7695,6 +7891,8 @@ components:
                     type: string
                 ftwAmountUsd:
                     type: string
+                ftwAmountReportingCurrency:
+                    type: string
                 ftwUsers:
                     type: integer
                     format: int32
@@ -7702,12 +7900,16 @@ components:
                     type: string
                 sameDayFtwAmountUsd:
                     type: string
+                sameDayFtwAmountReportingCurrency:
+                    type: string
                 sameDayFtwUsers:
                     type: integer
                     format: int32
                 repeatedWithdrawAmount:
                     type: string
                 repeatedWithdrawAmountUsd:
+                    type: string
+                repeatedWithdrawAmountReportingCurrency:
                     type: string
                 repeatedWithdrawUsers:
                     type: integer
@@ -7722,15 +7924,21 @@ components:
                     type: string
                 averageFtwAmountUsdForSameDayRegistredUsers:
                     type: string
+                averageFtwAmountReportingCurrencyForSameDayRegistredUsers:
+                    type: string
                 averageFtwAmountForNonSameDayRegistredUsers:
                     type: string
                 averageFtwAmountUsdForNonSameDayRegistredUsers:
+                    type: string
+                averageFtwAmountReportingCurrencyForNonSameDayRegistredUsers:
                     type: string
                 successRate:
                     type: string
                 depositMinusWithdrawAmount:
                     type: string
                 depositMinusWithdrawAmountUsd:
+                    type: string
+                depositMinusWithdrawAmountReportingCurrency:
                     type: string
                 amountProportion:
                     type: string
@@ -7739,18 +7947,8 @@ components:
             properties:
                 timeRange:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                retailerOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                groupOperatorIds:
-                    type: array
-                    items:
-                        type: string
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 currencies:
                     type: array
                     items:
@@ -7942,7 +8140,7 @@ components:
                     type: string
                 operatorName:
                     type: string
-                currency:
+                settlementCurrency:
                     type: string
                 beforeBalance:
                     type: string
@@ -8032,15 +8230,6 @@ components:
                 systemOperatorName:
                     type: string
                 config:
-                    type: string
-        api.backoffice.service.v1.OperatorInfo:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                operatorName:
-                    type: string
-                status:
                     type: string
         api.backoffice.service.v1.OperatorSwapRequest:
             type: object
@@ -8503,6 +8692,21 @@ components:
                     type: string
                 operatorType:
                     type: string
+        api.common.OperatorContextFilters:
+            type: object
+            properties:
+                operatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                companyOperatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
+                retailerOperatorContexts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.common.OperatorContext'
         api.game.service.v1.Action:
             type: object
             properties:
@@ -8690,6 +8894,18 @@ components:
                     type: string
                 operatorName:
                     type: string
+                companyOperatorId:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorId:
+                    type: string
+                systemOperatorName:
+                    type: string
                 currency:
                     type: string
                 settlementCurrency:
@@ -8845,10 +9061,6 @@ components:
         api.game.service.v1.ListBetsRequest:
             type: object
             properties:
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
                 providerIds:
                     type: array
                     items:
@@ -8889,6 +9101,8 @@ components:
                     format: int32
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.game.service.v1.ListBetsRequest_Currencies:
             type: object
             properties:
@@ -9454,6 +9668,20 @@ components:
                     type: string
                 providerBonus:
                     type: string
+        google.protobuf.ListValue:
+            type: object
+            properties:
+                values:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/google.protobuf.Value'
+                    description: Repeated field of dynamically typed values.
+            description: |-
+                `ListValue` is a wrapper around a repeated field of values.
+
+                 The JSON representation for `ListValue` is JSON array.
+        google.protobuf.Value:
+            description: Represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values.
         payment.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
@@ -9546,9 +9774,8 @@ components:
                 pspMaxAmount:
                     type: string
                     description: PSP Max Amount
-                key:
-                    type: object
-                    description: JSON schema defining the required fields for this payment method
+                mininalFee:
+                    type: string
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method
@@ -9839,9 +10066,6 @@ components:
                 transactionId:
                     type: string
                     description: Optional transaction ID filter
-                operatorId:
-                    type: string
-                    description: Optional operator ID filter
                 currency:
                     type: string
                     description: Optional currency filter
@@ -9908,6 +10132,10 @@ components:
                 maxAmount:
                     type: string
                     description: Optional maximum amount filter
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
             description: |-
                 Request to get transaction page
                  Used to retrieve a paginated list of transactions with optional filters
@@ -10009,7 +10237,7 @@ components:
                 channelId:
                     type: string
                     description: Unique identifier for the channel
-                type:
+                supportType:
                     type: string
                     description: Type of the channel (e.g., online, offline)
                 currencyType:
@@ -10066,7 +10294,7 @@ components:
                 feeRate:
                     type: string
                     description: Rate Fee
-                minFee:
+                mininalFee:
                     type: string
                     description: Minimum Fee
                 eat:
@@ -10145,7 +10373,8 @@ components:
                 source:
                     type: string
                 keySchema:
-                    type: object
+                    allOf:
+                        - $ref: '#/components/schemas/google.protobuf.ListValue'
                     description: JSON schema defining the required fields for this payment method
             description: |-
                 Details of a single payment method
@@ -10176,6 +10405,20 @@ components:
                 operatorId:
                     type: string
                     description: Operator ID associated with the transaction
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
                 userId:
                     type: string
                     description: ID of the user who initiated the transaction
