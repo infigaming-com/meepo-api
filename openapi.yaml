@@ -3432,6 +3432,18 @@ components:
                     type: string
                 operatorName:
                     type: string
+                companyOperatorId:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorId:
+                    type: string
+                systemOperatorName:
+                    type: string
                 currency:
                     type: string
                 settlementCurrency:
@@ -5926,10 +5938,6 @@ components:
         api.backoffice.service.v1.ListBetsRequest:
             type: object
             properties:
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
                 providerIds:
                     type: array
                     items:
@@ -5968,6 +5976,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListBetsRequest_Currencies:
             type: object
             properties:
