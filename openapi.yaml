@@ -8854,6 +8854,18 @@ components:
                     type: string
                 operatorName:
                     type: string
+                companyOperatorId:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorId:
+                    type: string
+                systemOperatorName:
+                    type: string
                 currency:
                     type: string
                 settlementCurrency:
@@ -9009,10 +9021,6 @@ components:
         api.game.service.v1.ListBetsRequest:
             type: object
             properties:
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
                 providerIds:
                     type: array
                     items:
@@ -9053,6 +9061,8 @@ components:
                     format: int32
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.game.service.v1.ListBetsRequest_Currencies:
             type: object
             properties:
