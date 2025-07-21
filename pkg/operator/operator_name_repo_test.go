@@ -31,23 +31,12 @@ func NewUserClient() user.UserClient {
 	return user.NewUserClient(conn)
 }
 
-func TestOperatorNameRepoWithInitialOperatorIds(t *testing.T) {
-	userClient := NewUserClient()
-
-	operatorNameRepo, err := NewOperatorNameRepo(userClient, []int64{0, 1234567891, 133510782607425537})
-	require.NoError(t, err)
-
-	assert.Equal(t, operatorNameRepo.GetOperatorName(1234567891, false), "Speedix")
-	assert.Equal(t, operatorNameRepo.GetOperatorName(0, true), "system")
-}
-
 func TestOperatorNameRepoWithSetOperatorIds(t *testing.T) {
 	userClient := NewUserClient()
 
-	operatorNameRepo, err := NewOperatorNameRepo(userClient, []int64{})
-	require.NoError(t, err)
+	operatorNameRepo := NewOperatorNameRepo(userClient)
 
-	err = operatorNameRepo.SetOperatorIds(context.Background(), []int64{0, 1234567891, 133510782607425537})
+	err := operatorNameRepo.SetOperatorIds(context.Background(), []int64{0, 1234567891, 133510782607425537})
 	require.NoError(t, err)
 
 	assert.Equal(t, operatorNameRepo.GetOperatorName(1234567891, false), "Speedix")
