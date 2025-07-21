@@ -47,7 +47,7 @@ func TestOperatorNameRepoWithSetOperatorIds(t *testing.T) {
 	operatorNameRepo, err := NewOperatorNameRepo(userClient, []int64{})
 	require.NoError(t, err)
 
-	err = operatorNameRepo.SetOperatorIds([]int64{0, 1234567891, 133510782607425537})
+	err = operatorNameRepo.SetOperatorIds(context.Background(), []int64{0, 1234567891, 133510782607425537})
 	require.NoError(t, err)
 
 	assert.Equal(t, operatorNameRepo.GetOperatorName(1234567891, false), "Speedix")
