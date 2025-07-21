@@ -105,6 +105,7 @@ const (
 	ErrorReason_INVALID_OPERATOR_CONTEXT                 ErrorReason = 10078
 	ErrorReason_INVALID_OPERATOR_ID                      ErrorReason = 10079
 	ErrorReason_OPERATOR_CONTEXT_PERMISSION_DENIED       ErrorReason = 10080
+	ErrorReason_OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT    ErrorReason = 10081
 )
 
 // Enum value maps for ErrorReason.
@@ -190,6 +191,7 @@ var (
 		10078: "INVALID_OPERATOR_CONTEXT",
 		10079: "INVALID_OPERATOR_ID",
 		10080: "OPERATOR_CONTEXT_PERMISSION_DENIED",
+		10081: "OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                              0,
@@ -272,6 +274,7 @@ var (
 		"INVALID_OPERATOR_CONTEXT":                 10078,
 		"INVALID_OPERATOR_ID":                      10079,
 		"OPERATOR_CONTEXT_PERMISSION_DENIED":       10080,
+		"OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT":    10081,
 	}
 )
 
@@ -306,7 +309,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xff\x13\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xab\x14\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -387,7 +390,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1dUPDATE_OPERATOR_STATUS_FAILED\x10\xddN\x12\x1d\n" +
 	"\x18INVALID_OPERATOR_CONTEXT\x10\xdeN\x12\x18\n" +
 	"\x13INVALID_OPERATOR_ID\x10\xdfN\x12'\n" +
-	"\"OPERATOR_CONTEXT_PERMISSION_DENIED\x10\xe0N\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\"OPERATOR_CONTEXT_PERMISSION_DENIED\x10\xe0N\x12*\n" +
+	"%OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT\x10\xe1N\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
