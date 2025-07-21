@@ -10,7 +10,7 @@ import (
 )
 
 type OperatorNameRepo interface {
-	SetOperatorIds(operatorIds []int64) error
+	SetOperatorIds(ctx context.Context, operatorIds []int64) error
 	GetOperatorName(operatorId int64, isSystemOperator bool) string
 }
 
@@ -45,12 +45,12 @@ func NewOperatorNameRepo(userClient user.UserClient, operatorIds []int64) (Opera
 	}, nil
 }
 
-func (o *operatorNameRepo) SetOperatorIds(operatorIds []int64) error {
+func (o *operatorNameRepo) SetOperatorIds(ctx context.Context, operatorIds []int64) error {
 	o.operatorNameMapLock.Lock()
 	defer o.operatorNameMapLock.Unlock()
 
 	resp, err := o.userClient.GetOperatorsByIds(
-		context.Background(),
+		ctx,
 		&user.GetOperatorsByIdsRequest{
 			OperatorIds: operatorIds,
 		},
