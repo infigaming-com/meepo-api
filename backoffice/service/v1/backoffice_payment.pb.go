@@ -200,24 +200,26 @@ type CreatePaymentChannelRequest struct {
 	MerchantId string `protobuf:"bytes,1,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
 	// ID of the payment method to be used
 	PaymentMethodId string `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
-	// Type of channel (e.g., deposit, withdrawal)
-	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	// Contact Info email
-	Contact string `protobuf:"bytes,4,opt,name=contact,proto3" json:"contact,omitempty"`
+	Contact string `protobuf:"bytes,3,opt,name=contact,proto3" json:"contact,omitempty"`
 	// PSP Fixed Fee on the Amount
-	PspFixedFee string `protobuf:"bytes,5,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
+	FixedFee string `protobuf:"bytes,4,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
 	// PSP Rate Fee
-	PspFeeRate string `protobuf:"bytes,6,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
+	FeeRate string `protobuf:"bytes,5,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	// Minimum Fee
+	MinFee string `protobuf:"bytes,6,opt,name=min_fee,json=minFee,proto3" json:"min_fee,omitempty"`
 	// User Fixed Fee on the Amount
 	UserFixedFee string `protobuf:"bytes,7,opt,name=user_fixed_fee,json=userFixedFee,proto3" json:"user_fixed_fee,omitempty"`
 	// User Rate Fee
 	UserFeeRate string `protobuf:"bytes,8,opt,name=user_fee_rate,json=userFeeRate,proto3" json:"user_fee_rate,omitempty"`
+	// Minimum Fee
+	UserMinFee string `protobuf:"bytes,9,opt,name=user_min_fee,json=userMinFee,proto3" json:"user_min_fee,omitempty"`
 	// Min Amount
-	MinAmount string `protobuf:"bytes,9,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	MinAmount string `protobuf:"bytes,10,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Max Amount
-	MaxAmount string `protobuf:"bytes,10,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	MaxAmount string `protobuf:"bytes,11,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	// Configuration fields for the payment channel in JSON format
-	Key           *structpb.Struct `protobuf:"bytes,11,opt,name=key,proto3" json:"key,omitempty"`
+	Key           *structpb.Struct `protobuf:"bytes,12,opt,name=key,proto3" json:"key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -266,13 +268,6 @@ func (x *CreatePaymentChannelRequest) GetPaymentMethodId() string {
 	return ""
 }
 
-func (x *CreatePaymentChannelRequest) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
 func (x *CreatePaymentChannelRequest) GetContact() string {
 	if x != nil {
 		return x.Contact
@@ -280,16 +275,23 @@ func (x *CreatePaymentChannelRequest) GetContact() string {
 	return ""
 }
 
-func (x *CreatePaymentChannelRequest) GetPspFixedFee() string {
+func (x *CreatePaymentChannelRequest) GetFixedFee() string {
 	if x != nil {
-		return x.PspFixedFee
+		return x.FixedFee
 	}
 	return ""
 }
 
-func (x *CreatePaymentChannelRequest) GetPspFeeRate() string {
+func (x *CreatePaymentChannelRequest) GetFeeRate() string {
 	if x != nil {
-		return x.PspFeeRate
+		return x.FeeRate
+	}
+	return ""
+}
+
+func (x *CreatePaymentChannelRequest) GetMinFee() string {
+	if x != nil {
+		return x.MinFee
 	}
 	return ""
 }
@@ -304,6 +306,13 @@ func (x *CreatePaymentChannelRequest) GetUserFixedFee() string {
 func (x *CreatePaymentChannelRequest) GetUserFeeRate() string {
 	if x != nil {
 		return x.UserFeeRate
+	}
+	return ""
+}
+
+func (x *CreatePaymentChannelRequest) GetUserMinFee() string {
+	if x != nil {
+		return x.UserMinFee
 	}
 	return ""
 }
@@ -707,24 +716,25 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"sysFeeRate\x12$\n" +
 	"\x0esys_min_amount\x18\x05 \x01(\tR\fsysMinAmount\x12$\n" +
 	"\x0esys_max_amount\x18\x06 \x01(\tR\fsysMaxAmount\x12\x1e\n" +
-	"\vsys_min_fee\x18\a \x01(\tR\tsysMinFee\"\x91\x03\n" +
+	"\vsys_min_fee\x18\a \x01(\tR\tsysMinFee\"\xaa\x03\n" +
 	"\x1bCreatePaymentChannelRequest\x12\x1f\n" +
 	"\vmerchant_id\x18\x01 \x01(\tR\n" +
 	"merchantId\x12*\n" +
-	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12\x18\n" +
-	"\acontact\x18\x04 \x01(\tR\acontact\x12\"\n" +
-	"\rpsp_fixed_fee\x18\x05 \x01(\tR\vpspFixedFee\x12 \n" +
-	"\fpsp_fee_rate\x18\x06 \x01(\tR\n" +
-	"pspFeeRate\x12$\n" +
+	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\x12\x18\n" +
+	"\acontact\x18\x03 \x01(\tR\acontact\x12\x1b\n" +
+	"\tfixed_fee\x18\x04 \x01(\tR\bfixedFee\x12\x19\n" +
+	"\bfee_rate\x18\x05 \x01(\tR\afeeRate\x12\x17\n" +
+	"\amin_fee\x18\x06 \x01(\tR\x06minFee\x12$\n" +
 	"\x0euser_fixed_fee\x18\a \x01(\tR\fuserFixedFee\x12\"\n" +
-	"\ruser_fee_rate\x18\b \x01(\tR\vuserFeeRate\x12\x1d\n" +
+	"\ruser_fee_rate\x18\b \x01(\tR\vuserFeeRate\x12 \n" +
+	"\fuser_min_fee\x18\t \x01(\tR\n" +
+	"userMinFee\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\t \x01(\tR\tminAmount\x12\x1d\n" +
+	"min_amount\x18\n" +
+	" \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\n" +
-	" \x01(\tR\tmaxAmount\x12)\n" +
-	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructR\x03key\"\xb3\x06\n" +
+	"max_amount\x18\v \x01(\tR\tmaxAmount\x12)\n" +
+	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"\xb3\x06\n" +
 	"\x19GetTransactionPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12%\n" +
