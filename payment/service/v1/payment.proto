@@ -330,10 +330,10 @@ message GetOperatorAddressRequest {
   // ID of the channel to use for this deposit
   string channel_id = 1;
   api.common.OperatorContext target_operator_context = 2;
-  api.common.OperatorContext operator_context = 3;
   // Additional information needed for the deposit
   // May include clientOrderId, productId, userInfo, etc.
-  google.protobuf.Struct extra = 4;
+  google.protobuf.Struct extra = 3;
+  api.common.OperatorContext operator_context = 4;
 
 }
 

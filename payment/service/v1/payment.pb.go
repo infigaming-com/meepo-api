@@ -1948,12 +1948,12 @@ type GetOperatorAddressRequest struct {
 	// ID of the channel to use for this deposit
 	ChannelId             string                  `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	OperatorContext       *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// Additional information needed for the deposit
 	// May include clientOrderId, productId, userInfo, etc.
-	Extra         *structpb.Struct `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Extra           *structpb.Struct        `protobuf:"bytes,3,opt,name=extra,proto3" json:"extra,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetOperatorAddressRequest) Reset() {
@@ -2000,16 +2000,16 @@ func (x *GetOperatorAddressRequest) GetTargetOperatorContext() *common.OperatorC
 	return nil
 }
 
-func (x *GetOperatorAddressRequest) GetOperatorContext() *common.OperatorContext {
+func (x *GetOperatorAddressRequest) GetExtra() *structpb.Struct {
 	if x != nil {
-		return x.OperatorContext
+		return x.Extra
 	}
 	return nil
 }
 
-func (x *GetOperatorAddressRequest) GetExtra() *structpb.Struct {
+func (x *GetOperatorAddressRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.Extra
+		return x.OperatorContext
 	}
 	return nil
 }
@@ -4501,9 +4501,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x19GetOperatorAddressRequest\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12S\n" +
-	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12-\n" +
-	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xd9\x01\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12-\n" +
+	"\x05extra\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd9\x01\n" +
 	"\x1aGetOperatorAddressResponse\x12G\n" +
 	"\x04data\x18\x01 \x01(\v23.payment.service.v1.GetOperatorAddressResponse.DataR\x04data\x1ar\n" +
 	"\x04Data\x12\x1a\n" +
@@ -4838,8 +4838,8 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	48, // 13: payment.service.v1.GetAddressRequest.extra:type_name -> google.protobuf.Struct
 	44, // 14: payment.service.v1.GetAddressResponse.data:type_name -> payment.service.v1.GetAddressResponse.Data
 	47, // 15: payment.service.v1.GetOperatorAddressRequest.target_operator_context:type_name -> api.common.OperatorContext
-	47, // 16: payment.service.v1.GetOperatorAddressRequest.operator_context:type_name -> api.common.OperatorContext
-	48, // 17: payment.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
+	48, // 16: payment.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
+	47, // 17: payment.service.v1.GetOperatorAddressRequest.operator_context:type_name -> api.common.OperatorContext
 	45, // 18: payment.service.v1.GetOperatorAddressResponse.data:type_name -> payment.service.v1.GetOperatorAddressResponse.Data
 	47, // 19: payment.service.v1.InitiateWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
 	48, // 20: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct

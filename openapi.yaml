@@ -3619,24 +3619,27 @@ components:
                 paymentMethodId:
                     type: string
                     description: ID of the payment method to be used
-                type:
-                    type: string
-                    description: Type of channel (e.g., deposit, withdrawal)
                 contact:
                     type: string
                     description: Contact Info email
-                pspFixedFee:
+                fixedFee:
                     type: string
                     description: PSP Fixed Fee on the Amount
-                pspFeeRate:
+                feeRate:
                     type: string
                     description: PSP Rate Fee
+                minFee:
+                    type: string
+                    description: Minimum Fee
                 userFixedFee:
                     type: string
                     description: User Fixed Fee on the Amount
                 userFeeRate:
                     type: string
                     description: User Rate Fee
+                userMinFee:
+                    type: string
+                    description: Minimum Fee
                 minAmount:
                     type: string
                     description: Min Amount

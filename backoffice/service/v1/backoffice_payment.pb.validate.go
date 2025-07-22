@@ -343,17 +343,19 @@ func (m *CreatePaymentChannelRequest) validate(all bool) error {
 
 	// no validation rules for PaymentMethodId
 
-	// no validation rules for Type
-
 	// no validation rules for Contact
 
-	// no validation rules for PspFixedFee
+	// no validation rules for FixedFee
 
-	// no validation rules for PspFeeRate
+	// no validation rules for FeeRate
+
+	// no validation rules for MinFee
 
 	// no validation rules for UserFixedFee
 
 	// no validation rules for UserFeeRate
+
+	// no validation rules for UserMinFee
 
 	// no validation rules for MinAmount
 

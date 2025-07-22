@@ -131,7 +131,7 @@ service BackofficePayment {
 // Used to get DC address
 message GetOperatorAddressRequest {
   // ID of the channel to use for this deposit
-  string channel_id = 1 [json_name="channelId"];
+  string channel_id = 1;
   api.common.OperatorContext target_operator_context = 2;
   // Additional information needed for the deposit
   // May include clientOrderId, productId, userInfo, etc.
@@ -165,24 +165,26 @@ message CreatePaymentChannelRequest {
   string merchant_id = 1;
   // ID of the payment method to be used
   string payment_method_id = 2;
-  // Type of channel (e.g., deposit, withdrawal)
-  string type = 3;
   // Contact Info email
-  string contact = 4;
+  string contact = 3;
   // PSP Fixed Fee on the Amount
-  string psp_fixed_fee = 5;
+  string fixed_fee = 4;
   // PSP Rate Fee 
-  string psp_fee_rate = 6;
+  string fee_rate = 5;
+  // Minimum Fee 
+  string min_fee = 6;
   // User Fixed Fee on the Amount
   string user_fixed_fee = 7;
   // User Rate Fee 
   string user_fee_rate = 8;
+  // Minimum Fee 
+  string user_min_fee = 9;
   // Min Amount
-  string min_amount = 9;
+  string min_amount = 10;
   // Max Amount
-  string max_amount = 10;
+  string max_amount = 11;
   // Configuration fields for the payment channel in JSON format
-  google.protobuf.Struct key = 11;
+  google.protobuf.Struct key = 12;
 }
 
 message GetTransactionPageRequest {
