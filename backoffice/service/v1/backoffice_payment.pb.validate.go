@@ -719,8 +719,6 @@ func (m *GetOperatorPaymentChannelPageRequest) validate(all bool) error {
 
 	// no validation rules for PageSize
 
-	// no validation rules for OperatorId
-
 	// no validation rules for Type
 
 	// no validation rules for Category

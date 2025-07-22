@@ -551,28 +551,26 @@ type GetOperatorPaymentChannelPageRequest struct {
 	Page int32 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	// Number of items per page
 	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Optional operator ID filter
-	OperatorId string `protobuf:"bytes,3,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// Optional channel type filter
-	Type v1.ChannelType `protobuf:"varint,4,opt,name=type,proto3,enum=payment.service.v1.ChannelType" json:"type,omitempty"`
+	Type v1.ChannelType `protobuf:"varint,3,opt,name=type,proto3,enum=payment.service.v1.ChannelType" json:"type,omitempty"`
 	// Optional category filter
-	Category string `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
+	Category string `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
 	// Optional payment method filter
-	PaymentMethod string `protobuf:"bytes,6,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	PaymentMethod string `protobuf:"bytes,5,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Optional currency filter
-	Currency string `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
+	Currency string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Optional crypto protocol
-	Protocol string `protobuf:"bytes,8,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Protocol string `protobuf:"bytes,7,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Optional crypto network filter
-	Network string `protobuf:"bytes,9,opt,name=network,proto3" json:"network,omitempty"`
+	Network string `protobuf:"bytes,8,opt,name=network,proto3" json:"network,omitempty"`
 	// Optional country filter
-	Country string `protobuf:"bytes,10,opt,name=country,proto3" json:"country,omitempty"`
+	Country string `protobuf:"bytes,9,opt,name=country,proto3" json:"country,omitempty"`
 	// Source of operator type
-	Source string `protobuf:"bytes,11,opt,name=source,proto3" json:"source,omitempty"`
+	Source string `protobuf:"bytes,10,opt,name=source,proto3" json:"source,omitempty"`
 	// Optional sort direction
-	Sort v1.Sort `protobuf:"varint,12,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
+	Sort v1.Sort `protobuf:"varint,11,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
 	// ID of the Operator connect with this channel
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,13,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,12,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -619,13 +617,6 @@ func (x *GetOperatorPaymentChannelPageRequest) GetPageSize() int32 {
 		return x.PageSize
 	}
 	return 0
-}
-
-func (x *GetOperatorPaymentChannelPageRequest) GetOperatorId() string {
-	if x != nil {
-		return x.OperatorId
-	}
-	return ""
 }
 
 func (x *GetOperatorPaymentChannelPageRequest) GetType() v1.ChannelType {
@@ -758,23 +749,21 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"min_amount\x18\x11 \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\x12 \x01(\tR\tmaxAmount\x12\\\n" +
-	"\x18operator_context_filters\x18\x13 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\x80\x04\n" +
+	"\x18operator_context_filters\x18\x13 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xdf\x03\n" +
 	"$GetOperatorPaymentChannelPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1f\n" +
-	"\voperator_id\x18\x03 \x01(\tR\n" +
-	"operatorId\x123\n" +
-	"\x04type\x18\x04 \x01(\x0e2\x1f.payment.service.v1.ChannelTypeR\x04type\x12\x1a\n" +
-	"\bcategory\x18\x05 \x01(\tR\bcategory\x12%\n" +
-	"\x0epayment_method\x18\x06 \x01(\tR\rpaymentMethod\x12\x1a\n" +
-	"\bcurrency\x18\a \x01(\tR\bcurrency\x12\x1a\n" +
-	"\bprotocol\x18\b \x01(\tR\bprotocol\x12\x18\n" +
-	"\anetwork\x18\t \x01(\tR\anetwork\x12\x18\n" +
-	"\acountry\x18\n" +
-	" \x01(\tR\acountry\x12\x16\n" +
-	"\x06source\x18\v \x01(\tR\x06source\x12,\n" +
-	"\x04sort\x18\f \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x12\\\n" +
-	"\x18operator_context_filters\x18\r \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters2\xd6\x11\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x123\n" +
+	"\x04type\x18\x03 \x01(\x0e2\x1f.payment.service.v1.ChannelTypeR\x04type\x12\x1a\n" +
+	"\bcategory\x18\x04 \x01(\tR\bcategory\x12%\n" +
+	"\x0epayment_method\x18\x05 \x01(\tR\rpaymentMethod\x12\x1a\n" +
+	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12\x1a\n" +
+	"\bprotocol\x18\a \x01(\tR\bprotocol\x12\x18\n" +
+	"\anetwork\x18\b \x01(\tR\anetwork\x12\x18\n" +
+	"\acountry\x18\t \x01(\tR\acountry\x12\x16\n" +
+	"\x06source\x18\n" +
+	" \x01(\tR\x06source\x12,\n" +
+	"\x04sort\x18\v \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x12\\\n" +
+	"\x18operator_context_filters\x18\f \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters2\xd6\x11\n" +
 	"\x11BackofficePayment\x12\xb5\x01\n" +
 	"\x19GetPaymentTransactionPage\x124.api.backoffice.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/payment/transaction/page\x12\xbc\x01\n" +
 	"\x19GetPaymentTransactionById\x123.payment.service.v1.GetTransactionDetailByIdRequest\x1a4.payment.service.v1.GetTransactionDetailByIdResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/payment/transaction/detail\x12\xc6\x01\n" +

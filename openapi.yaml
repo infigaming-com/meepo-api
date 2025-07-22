@@ -4378,9 +4378,6 @@ components:
                     type: integer
                     description: Number of items per page
                     format: int32
-                operatorId:
-                    type: string
-                    description: Optional operator ID filter
                 type:
                     enum:
                         - CHANNEL_TYPE_ALL
