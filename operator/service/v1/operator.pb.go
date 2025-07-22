@@ -1253,11 +1253,9 @@ func (x *ListOperatorsResponse) GetOperators() []*ListOperatorsResponse_Operator
 }
 
 type ListInvoicesRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Filter by retailer
-	RetailerId *int64 `protobuf:"varint,1,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
-	// Filter by company
-	CompanyId *int64 `protobuf:"varint,2,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// Filter by month (format: YYYY-MM)
 	Month *string `protobuf:"bytes,3,opt,name=month,proto3,oneof" json:"month,omitempty"`
 	// Search by invoice id
@@ -1300,18 +1298,18 @@ func (*ListInvoicesRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *ListInvoicesRequest) GetRetailerId() int64 {
-	if x != nil && x.RetailerId != nil {
-		return *x.RetailerId
+func (x *ListInvoicesRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
 	}
-	return 0
+	return nil
 }
 
-func (x *ListInvoicesRequest) GetCompanyId() int64 {
-	if x != nil && x.CompanyId != nil {
-		return *x.CompanyId
+func (x *ListInvoicesRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
 	}
-	return 0
+	return nil
 }
 
 func (x *ListInvoicesRequest) GetMonth() string {
@@ -1522,18 +1520,14 @@ func (x *GetInvoiceDetailResponse) GetInvoice() *GetInvoiceDetailResponse_Invoic
 }
 
 type ListOperatorRevenueShareRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// Filter by invoice ID
-	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
-	// Filter by retailer
-	RetailerId *int64 `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
-	// Filter by company
-	CompanyId *int64 `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
-	// Filter by operator
-	OperatorId *int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	InvoiceId *int64 `protobuf:"varint,3,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	// Pagination
-	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page          *int32 `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1568,30 +1562,23 @@ func (*ListOperatorRevenueShareRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{28}
 }
 
+func (x *ListOperatorRevenueShareRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListOperatorRevenueShareRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 func (x *ListOperatorRevenueShareRequest) GetInvoiceId() int64 {
 	if x != nil && x.InvoiceId != nil {
 		return *x.InvoiceId
-	}
-	return 0
-}
-
-func (x *ListOperatorRevenueShareRequest) GetRetailerId() int64 {
-	if x != nil && x.RetailerId != nil {
-		return *x.RetailerId
-	}
-	return 0
-}
-
-func (x *ListOperatorRevenueShareRequest) GetCompanyId() int64 {
-	if x != nil && x.CompanyId != nil {
-		return *x.CompanyId
-	}
-	return 0
-}
-
-func (x *ListOperatorRevenueShareRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
 	}
 	return 0
 }
@@ -1697,18 +1684,14 @@ func (x *ListOperatorRevenueShareResponse) GetTotalPages() int32 {
 }
 
 type ListThirdPartyFeesRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// Filter by invoice ID
-	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
-	// Filter by retailer
-	RetailerId *int64 `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
-	// Filter by company
-	CompanyId *int64 `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
-	// Filter by operator
-	OperatorId *int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	InvoiceId *int64 `protobuf:"varint,3,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	// Pagination
-	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page          *int32 `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1743,30 +1726,23 @@ func (*ListThirdPartyFeesRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{30}
 }
 
+func (x *ListThirdPartyFeesRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListThirdPartyFeesRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 func (x *ListThirdPartyFeesRequest) GetInvoiceId() int64 {
 	if x != nil && x.InvoiceId != nil {
 		return *x.InvoiceId
-	}
-	return 0
-}
-
-func (x *ListThirdPartyFeesRequest) GetRetailerId() int64 {
-	if x != nil && x.RetailerId != nil {
-		return *x.RetailerId
-	}
-	return 0
-}
-
-func (x *ListThirdPartyFeesRequest) GetCompanyId() int64 {
-	if x != nil && x.CompanyId != nil {
-		return *x.CompanyId
-	}
-	return 0
-}
-
-func (x *ListThirdPartyFeesRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
 	}
 	return 0
 }
@@ -1864,18 +1840,14 @@ func (x *ListThirdPartyFeesResponse) GetPageSize() int32 {
 }
 
 type ListMonthlyRevenueShareRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// Filter by invoice ID
-	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
-	// Filter by retailer
-	RetailerId *int64 `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
-	// Filter by company
-	CompanyId *int64 `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
-	// Filter by operator
-	OperatorId *int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	InvoiceId *int64 `protobuf:"varint,3,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	// Pagination
-	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page          *int32 `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1910,30 +1882,23 @@ func (*ListMonthlyRevenueShareRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{32}
 }
 
+func (x *ListMonthlyRevenueShareRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListMonthlyRevenueShareRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 func (x *ListMonthlyRevenueShareRequest) GetInvoiceId() int64 {
 	if x != nil && x.InvoiceId != nil {
 		return *x.InvoiceId
-	}
-	return 0
-}
-
-func (x *ListMonthlyRevenueShareRequest) GetRetailerId() int64 {
-	if x != nil && x.RetailerId != nil {
-		return *x.RetailerId
-	}
-	return 0
-}
-
-func (x *ListMonthlyRevenueShareRequest) GetCompanyId() int64 {
-	if x != nil && x.CompanyId != nil {
-		return *x.CompanyId
-	}
-	return 0
-}
-
-func (x *ListMonthlyRevenueShareRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
 	}
 	return 0
 }
@@ -2474,18 +2439,14 @@ func (*DeleteAdjustmentConfigResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListAdjustmentsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// Filter by invoice ID
-	InvoiceId *int64 `protobuf:"varint,1,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
-	// Filter by retailer
-	RetailerId *int64 `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3,oneof" json:"retailer_id,omitempty"`
-	// Filter by company
-	CompanyId *int64 `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3,oneof" json:"company_id,omitempty"`
-	// Filter by operator
-	OperatorId *int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	InvoiceId *int64 `protobuf:"varint,3,opt,name=invoice_id,json=invoiceId,proto3,oneof" json:"invoice_id,omitempty"`
 	// Pagination
-	Page          *int32 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page          *int32 `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2520,30 +2481,23 @@ func (*ListAdjustmentsRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{42}
 }
 
+func (x *ListAdjustmentsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListAdjustmentsRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 func (x *ListAdjustmentsRequest) GetInvoiceId() int64 {
 	if x != nil && x.InvoiceId != nil {
 		return *x.InvoiceId
-	}
-	return 0
-}
-
-func (x *ListAdjustmentsRequest) GetRetailerId() int64 {
-	if x != nil && x.RetailerId != nil {
-		return *x.RetailerId
-	}
-	return 0
-}
-
-func (x *ListAdjustmentsRequest) GetCompanyId() int64 {
-	if x != nil && x.CompanyId != nil {
-		return *x.CompanyId
-	}
-	return 0
-}
-
-func (x *ListAdjustmentsRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
 	}
 	return 0
 }
@@ -4466,23 +4420,19 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
-	"\aenabled\x18\x03 \x01(\bR\aenabled\"\xea\x03\n" +
-	"\x13ListInvoicesRequest\x12$\n" +
-	"\vretailer_id\x18\x01 \x01(\x03H\x00R\n" +
-	"retailerId\x88\x01\x01\x12\"\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled\"\xa7\x04\n" +
+	"\x13ListInvoicesRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x19\n" +
+	"\x05month\x18\x03 \x01(\tH\x00R\x05month\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"company_id\x18\x02 \x01(\x03H\x01R\tcompanyId\x88\x01\x01\x12\x19\n" +
-	"\x05month\x18\x03 \x01(\tH\x02R\x05month\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"invoice_id\x18\x04 \x01(\x03H\x03R\tinvoiceId\x88\x01\x01\x12f\n" +
-	"\x0epayment_status\x18\x05 \x01(\x0e2:.api.operator.service.v1.ListInvoicesRequest.PaymentStatusH\x04R\rpaymentStatus\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x06 \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\a \x01(\x05H\x06R\bpageSize\x88\x01\x01\"E\n" +
+	"invoice_id\x18\x04 \x01(\x03H\x01R\tinvoiceId\x88\x01\x01\x12f\n" +
+	"\x0epayment_status\x18\x05 \x01(\x0e2:.api.operator.service.v1.ListInvoicesRequest.PaymentStatusH\x02R\rpaymentStatus\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x06 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\a \x01(\x05H\x04R\bpageSize\x88\x01\x01\"E\n" +
 	"\rPaymentStatus\x12\x17\n" +
 	"\x13PAYMENT_STATUS_PAID\x10\x00\x12\x1b\n" +
-	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01B\x0e\n" +
-	"\f_retailer_idB\r\n" +
-	"\v_company_idB\b\n" +
+	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01B\b\n" +
 	"\x06_monthB\r\n" +
 	"\v_invoice_idB\x11\n" +
 	"\x0f_payment_statusB\a\n" +
@@ -4556,22 +4506,15 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\roperator_name\x18\x14 \x01(\tR\foperatorName\"E\n" +
 	"\rPaymentStatus\x12\x17\n" +
 	"\x13PAYMENT_STATUS_PAID\x10\x00\x12\x1b\n" +
-	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01\"\xc5\x02\n" +
-	"\x1fListOperatorRevenueShareRequest\x12\"\n" +
+	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01\"\xcc\x02\n" +
+	"\x1fListOperatorRevenueShareRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\"\n" +
 	"\n" +
-	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x02 \x01(\x03H\x01R\n" +
-	"retailerId\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"company_id\x18\x03 \x01(\x03H\x02R\tcompanyId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x04 \x01(\x03H\x03R\n" +
-	"operatorId\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
-	"\v_invoice_idB\x0e\n" +
-	"\f_retailer_idB\r\n" +
-	"\v_company_idB\x0e\n" +
-	"\f_operator_idB\a\n" +
+	"invoice_id\x18\x03 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x04 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x05 \x01(\x05H\x02R\bpageSize\x88\x01\x01B\r\n" +
+	"\v_invoice_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xe6\x05\n" +
@@ -4603,22 +4546,15 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x06amount\x18\r \x01(\tR\x06amount\x12\x17\n" +
 	"\afx_rate\x18\x0e \x01(\tR\x06fxRate\x12\x1d\n" +
 	"\n" +
-	"amount_usd\x18\x0f \x01(\tR\tamountUsd\"\xbf\x02\n" +
-	"\x19ListThirdPartyFeesRequest\x12\"\n" +
+	"amount_usd\x18\x0f \x01(\tR\tamountUsd\"\xc6\x02\n" +
+	"\x19ListThirdPartyFeesRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\"\n" +
 	"\n" +
-	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x02 \x01(\x03H\x01R\n" +
-	"retailerId\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"company_id\x18\x03 \x01(\x03H\x02R\tcompanyId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x04 \x01(\x03H\x03R\n" +
-	"operatorId\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
-	"\v_invoice_idB\x0e\n" +
-	"\f_retailer_idB\r\n" +
-	"\v_company_idB\x0e\n" +
-	"\f_operator_idB\a\n" +
+	"invoice_id\x18\x03 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x04 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x05 \x01(\x05H\x02R\bpageSize\x88\x01\x01B\r\n" +
+	"\v_invoice_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xb3\x03\n" +
@@ -4636,22 +4572,15 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\aservice\x18\x03 \x01(\tR\aservice\x12\x1a\n" +
 	"\bquantity\x18\x04 \x01(\tR\bquantity\x12\x16\n" +
 	"\x06amount\x18\x05 \x01(\tR\x06amount\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\"\xc4\x02\n" +
-	"\x1eListMonthlyRevenueShareRequest\x12\"\n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\"\xcb\x02\n" +
+	"\x1eListMonthlyRevenueShareRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\"\n" +
 	"\n" +
-	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x02 \x01(\x03H\x01R\n" +
-	"retailerId\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"company_id\x18\x03 \x01(\x03H\x02R\tcompanyId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x04 \x01(\x03H\x03R\n" +
-	"operatorId\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
-	"\v_invoice_idB\x0e\n" +
-	"\f_retailer_idB\r\n" +
-	"\v_company_idB\x0e\n" +
-	"\f_operator_idB\a\n" +
+	"invoice_id\x18\x03 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x04 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x05 \x01(\x05H\x02R\bpageSize\x88\x01\x01B\r\n" +
+	"\v_invoice_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xec\a\n" +
@@ -4724,22 +4653,15 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x1eUpdateAdjustmentConfigResponse\"/\n" +
 	"\x1dDeleteAdjustmentConfigRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\" \n" +
-	"\x1eDeleteAdjustmentConfigResponse\"\xbc\x02\n" +
-	"\x16ListAdjustmentsRequest\x12\"\n" +
+	"\x1eDeleteAdjustmentConfigResponse\"\xc3\x02\n" +
+	"\x16ListAdjustmentsRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\"\n" +
 	"\n" +
-	"invoice_id\x18\x01 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12$\n" +
-	"\vretailer_id\x18\x02 \x01(\x03H\x01R\n" +
-	"retailerId\x88\x01\x01\x12\"\n" +
-	"\n" +
-	"company_id\x18\x03 \x01(\x03H\x02R\tcompanyId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x04 \x01(\x03H\x03R\n" +
-	"operatorId\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\r\n" +
-	"\v_invoice_idB\x0e\n" +
-	"\f_retailer_idB\r\n" +
-	"\v_company_idB\x0e\n" +
-	"\f_operator_idB\a\n" +
+	"invoice_id\x18\x03 \x01(\x03H\x00R\tinvoiceId\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x04 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x05 \x01(\x05H\x02R\bpageSize\x88\x01\x01B\r\n" +
+	"\v_invoice_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xa1\x03\n" +
@@ -4905,85 +4827,96 @@ var file_operator_service_v1_operator_proto_goTypes = []any{
 	(*ListMonthlyRevenueShareResponse_Summary)(nil),           // 66: api.operator.service.v1.ListMonthlyRevenueShareResponse.Summary
 	(*ListAdjustmentConfigsResponse_AdjustmentConfig)(nil),    // 67: api.operator.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
 	(*ListAdjustmentsResponse_AdjustmentItem)(nil),            // 68: api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItem
-	(*common.OperatorContext)(nil),                            // 69: api.common.OperatorContext
+	(*common.OperatorContextFilters)(nil),                     // 69: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),                            // 70: api.common.OperatorContext
 }
 var file_operator_service_v1_operator_proto_depIdxs = []int32{
 	57, // 0: api.operator.service.v1.GetOperatorResponse.operator:type_name -> api.operator.service.v1.GetOperatorResponse.Operator
 	58, // 1: api.operator.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.operator.service.v1.GetOperatorsByIdsResponse.Operator
 	59, // 2: api.operator.service.v1.GetOperatorCurrenciesResponse.currencies:type_name -> api.operator.service.v1.GetOperatorCurrenciesResponse.Currency
 	60, // 3: api.operator.service.v1.ListOperatorsResponse.operators:type_name -> api.operator.service.v1.ListOperatorsResponse.Operator
-	0,  // 4: api.operator.service.v1.ListInvoicesRequest.payment_status:type_name -> api.operator.service.v1.ListInvoicesRequest.PaymentStatus
-	61, // 5: api.operator.service.v1.ListInvoicesResponse.invoices:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice
-	62, // 6: api.operator.service.v1.GetInvoiceDetailResponse.invoice:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail
-	63, // 7: api.operator.service.v1.ListOperatorRevenueShareResponse.items:type_name -> api.operator.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
-	64, // 8: api.operator.service.v1.ListThirdPartyFeesResponse.items:type_name -> api.operator.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
-	65, // 9: api.operator.service.v1.ListMonthlyRevenueShareResponse.items:type_name -> api.operator.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItem
-	66, // 10: api.operator.service.v1.ListMonthlyRevenueShareResponse.summary:type_name -> api.operator.service.v1.ListMonthlyRevenueShareResponse.Summary
-	67, // 11: api.operator.service.v1.ListAdjustmentConfigsResponse.configs:type_name -> api.operator.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
-	68, // 12: api.operator.service.v1.ListAdjustmentsResponse.items:type_name -> api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItem
-	69, // 13: api.operator.service.v1.GetBalanceSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	69, // 14: api.operator.service.v1.GetBalancesSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	1,  // 15: api.operator.service.v1.ListInvoicesResponse.Invoice.payment_status:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice.PaymentStatus
-	2,  // 16: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.payment_status:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatus
-	3,  // 17: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
-	5,  // 18: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
-	7,  // 19: api.operator.service.v1.Operator.GetOperator:input_type -> api.operator.service.v1.GetOperatorRequest
-	9,  // 20: api.operator.service.v1.Operator.GetOperatorsByIds:input_type -> api.operator.service.v1.GetOperatorsByIdsRequest
-	11, // 21: api.operator.service.v1.Operator.AddOrUpdateCurrency:input_type -> api.operator.service.v1.AddOrUpdateCurrencyRequest
-	13, // 22: api.operator.service.v1.Operator.UpdateOperatorCurrency:input_type -> api.operator.service.v1.UpdateOperatorCurrencyRequest
-	15, // 23: api.operator.service.v1.Operator.GetOperatorCurrencies:input_type -> api.operator.service.v1.GetOperatorCurrenciesRequest
-	17, // 24: api.operator.service.v1.Operator.AddOriginOperatorId:input_type -> api.operator.service.v1.AddOriginOperatorIdRequest
-	19, // 25: api.operator.service.v1.Operator.GetOperatorIdByOrigin:input_type -> api.operator.service.v1.GetOperatorIdByOriginRequest
-	21, // 26: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
-	23, // 27: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
-	25, // 28: api.operator.service.v1.Operator.ListOperators:input_type -> api.operator.service.v1.ListOperatorsRequest
-	27, // 29: api.operator.service.v1.Operator.ListInvoices:input_type -> api.operator.service.v1.ListInvoicesRequest
-	29, // 30: api.operator.service.v1.Operator.GetInvoiceDetail:input_type -> api.operator.service.v1.GetInvoiceDetailRequest
-	31, // 31: api.operator.service.v1.Operator.ListOperatorRevenueShare:input_type -> api.operator.service.v1.ListOperatorRevenueShareRequest
-	33, // 32: api.operator.service.v1.Operator.ListThirdPartyFees:input_type -> api.operator.service.v1.ListThirdPartyFeesRequest
-	45, // 33: api.operator.service.v1.Operator.ListAdjustments:input_type -> api.operator.service.v1.ListAdjustmentsRequest
-	35, // 34: api.operator.service.v1.Operator.ListMonthlyRevenueShare:input_type -> api.operator.service.v1.ListMonthlyRevenueShareRequest
-	37, // 35: api.operator.service.v1.Operator.AddAdjustment:input_type -> api.operator.service.v1.AddAdjustmentRequest
-	39, // 36: api.operator.service.v1.Operator.ListAdjustmentConfigs:input_type -> api.operator.service.v1.ListAdjustmentConfigsRequest
-	47, // 37: api.operator.service.v1.Operator.CreateAdjustmentConfig:input_type -> api.operator.service.v1.CreateAdjustmentConfigRequest
-	41, // 38: api.operator.service.v1.Operator.UpdateAdjustmentConfig:input_type -> api.operator.service.v1.UpdateAdjustmentConfigRequest
-	43, // 39: api.operator.service.v1.Operator.DeleteAdjustmentConfig:input_type -> api.operator.service.v1.DeleteAdjustmentConfigRequest
-	49, // 40: api.operator.service.v1.Operator.SendInvoices:input_type -> api.operator.service.v1.SendInvoicesRequest
-	51, // 41: api.operator.service.v1.Operator.GetInvoiceSummary:input_type -> api.operator.service.v1.GetInvoiceSummaryRequest
-	53, // 42: api.operator.service.v1.Operator.GetBalanceSummary:input_type -> api.operator.service.v1.GetBalanceSummaryRequest
-	55, // 43: api.operator.service.v1.Operator.GetBalancesSummary:input_type -> api.operator.service.v1.GetBalancesSummaryRequest
-	4,  // 44: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
-	6,  // 45: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
-	8,  // 46: api.operator.service.v1.Operator.GetOperator:output_type -> api.operator.service.v1.GetOperatorResponse
-	10, // 47: api.operator.service.v1.Operator.GetOperatorsByIds:output_type -> api.operator.service.v1.GetOperatorsByIdsResponse
-	12, // 48: api.operator.service.v1.Operator.AddOrUpdateCurrency:output_type -> api.operator.service.v1.AddOrUpdateCurrencyResponse
-	14, // 49: api.operator.service.v1.Operator.UpdateOperatorCurrency:output_type -> api.operator.service.v1.UpdateOperatorCurrencyResponse
-	16, // 50: api.operator.service.v1.Operator.GetOperatorCurrencies:output_type -> api.operator.service.v1.GetOperatorCurrenciesResponse
-	18, // 51: api.operator.service.v1.Operator.AddOriginOperatorId:output_type -> api.operator.service.v1.AddOriginOperatorIdResponse
-	20, // 52: api.operator.service.v1.Operator.GetOperatorIdByOrigin:output_type -> api.operator.service.v1.GetOperatorIdByOriginResponse
-	22, // 53: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
-	24, // 54: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
-	26, // 55: api.operator.service.v1.Operator.ListOperators:output_type -> api.operator.service.v1.ListOperatorsResponse
-	28, // 56: api.operator.service.v1.Operator.ListInvoices:output_type -> api.operator.service.v1.ListInvoicesResponse
-	30, // 57: api.operator.service.v1.Operator.GetInvoiceDetail:output_type -> api.operator.service.v1.GetInvoiceDetailResponse
-	32, // 58: api.operator.service.v1.Operator.ListOperatorRevenueShare:output_type -> api.operator.service.v1.ListOperatorRevenueShareResponse
-	34, // 59: api.operator.service.v1.Operator.ListThirdPartyFees:output_type -> api.operator.service.v1.ListThirdPartyFeesResponse
-	46, // 60: api.operator.service.v1.Operator.ListAdjustments:output_type -> api.operator.service.v1.ListAdjustmentsResponse
-	36, // 61: api.operator.service.v1.Operator.ListMonthlyRevenueShare:output_type -> api.operator.service.v1.ListMonthlyRevenueShareResponse
-	38, // 62: api.operator.service.v1.Operator.AddAdjustment:output_type -> api.operator.service.v1.AddAdjustmentResponse
-	40, // 63: api.operator.service.v1.Operator.ListAdjustmentConfigs:output_type -> api.operator.service.v1.ListAdjustmentConfigsResponse
-	48, // 64: api.operator.service.v1.Operator.CreateAdjustmentConfig:output_type -> api.operator.service.v1.CreateAdjustmentConfigResponse
-	42, // 65: api.operator.service.v1.Operator.UpdateAdjustmentConfig:output_type -> api.operator.service.v1.UpdateAdjustmentConfigResponse
-	44, // 66: api.operator.service.v1.Operator.DeleteAdjustmentConfig:output_type -> api.operator.service.v1.DeleteAdjustmentConfigResponse
-	50, // 67: api.operator.service.v1.Operator.SendInvoices:output_type -> api.operator.service.v1.SendInvoicesResponse
-	52, // 68: api.operator.service.v1.Operator.GetInvoiceSummary:output_type -> api.operator.service.v1.GetInvoiceSummaryResponse
-	54, // 69: api.operator.service.v1.Operator.GetBalanceSummary:output_type -> api.operator.service.v1.GetBalanceSummaryResponse
-	56, // 70: api.operator.service.v1.Operator.GetBalancesSummary:output_type -> api.operator.service.v1.GetBalancesSummaryResponse
-	44, // [44:71] is the sub-list for method output_type
-	17, // [17:44] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	69, // 4: api.operator.service.v1.ListInvoicesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	70, // 5: api.operator.service.v1.ListInvoicesRequest.operator_context:type_name -> api.common.OperatorContext
+	0,  // 6: api.operator.service.v1.ListInvoicesRequest.payment_status:type_name -> api.operator.service.v1.ListInvoicesRequest.PaymentStatus
+	61, // 7: api.operator.service.v1.ListInvoicesResponse.invoices:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice
+	62, // 8: api.operator.service.v1.GetInvoiceDetailResponse.invoice:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail
+	69, // 9: api.operator.service.v1.ListOperatorRevenueShareRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	70, // 10: api.operator.service.v1.ListOperatorRevenueShareRequest.operator_context:type_name -> api.common.OperatorContext
+	63, // 11: api.operator.service.v1.ListOperatorRevenueShareResponse.items:type_name -> api.operator.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
+	69, // 12: api.operator.service.v1.ListThirdPartyFeesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	70, // 13: api.operator.service.v1.ListThirdPartyFeesRequest.operator_context:type_name -> api.common.OperatorContext
+	64, // 14: api.operator.service.v1.ListThirdPartyFeesResponse.items:type_name -> api.operator.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
+	69, // 15: api.operator.service.v1.ListMonthlyRevenueShareRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	70, // 16: api.operator.service.v1.ListMonthlyRevenueShareRequest.operator_context:type_name -> api.common.OperatorContext
+	65, // 17: api.operator.service.v1.ListMonthlyRevenueShareResponse.items:type_name -> api.operator.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItem
+	66, // 18: api.operator.service.v1.ListMonthlyRevenueShareResponse.summary:type_name -> api.operator.service.v1.ListMonthlyRevenueShareResponse.Summary
+	67, // 19: api.operator.service.v1.ListAdjustmentConfigsResponse.configs:type_name -> api.operator.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
+	69, // 20: api.operator.service.v1.ListAdjustmentsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	70, // 21: api.operator.service.v1.ListAdjustmentsRequest.operator_context:type_name -> api.common.OperatorContext
+	68, // 22: api.operator.service.v1.ListAdjustmentsResponse.items:type_name -> api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItem
+	70, // 23: api.operator.service.v1.GetBalanceSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	70, // 24: api.operator.service.v1.GetBalancesSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	1,  // 25: api.operator.service.v1.ListInvoicesResponse.Invoice.payment_status:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice.PaymentStatus
+	2,  // 26: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.payment_status:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatus
+	3,  // 27: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
+	5,  // 28: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
+	7,  // 29: api.operator.service.v1.Operator.GetOperator:input_type -> api.operator.service.v1.GetOperatorRequest
+	9,  // 30: api.operator.service.v1.Operator.GetOperatorsByIds:input_type -> api.operator.service.v1.GetOperatorsByIdsRequest
+	11, // 31: api.operator.service.v1.Operator.AddOrUpdateCurrency:input_type -> api.operator.service.v1.AddOrUpdateCurrencyRequest
+	13, // 32: api.operator.service.v1.Operator.UpdateOperatorCurrency:input_type -> api.operator.service.v1.UpdateOperatorCurrencyRequest
+	15, // 33: api.operator.service.v1.Operator.GetOperatorCurrencies:input_type -> api.operator.service.v1.GetOperatorCurrenciesRequest
+	17, // 34: api.operator.service.v1.Operator.AddOriginOperatorId:input_type -> api.operator.service.v1.AddOriginOperatorIdRequest
+	19, // 35: api.operator.service.v1.Operator.GetOperatorIdByOrigin:input_type -> api.operator.service.v1.GetOperatorIdByOriginRequest
+	21, // 36: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
+	23, // 37: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
+	25, // 38: api.operator.service.v1.Operator.ListOperators:input_type -> api.operator.service.v1.ListOperatorsRequest
+	27, // 39: api.operator.service.v1.Operator.ListInvoices:input_type -> api.operator.service.v1.ListInvoicesRequest
+	29, // 40: api.operator.service.v1.Operator.GetInvoiceDetail:input_type -> api.operator.service.v1.GetInvoiceDetailRequest
+	31, // 41: api.operator.service.v1.Operator.ListOperatorRevenueShare:input_type -> api.operator.service.v1.ListOperatorRevenueShareRequest
+	33, // 42: api.operator.service.v1.Operator.ListThirdPartyFees:input_type -> api.operator.service.v1.ListThirdPartyFeesRequest
+	45, // 43: api.operator.service.v1.Operator.ListAdjustments:input_type -> api.operator.service.v1.ListAdjustmentsRequest
+	35, // 44: api.operator.service.v1.Operator.ListMonthlyRevenueShare:input_type -> api.operator.service.v1.ListMonthlyRevenueShareRequest
+	37, // 45: api.operator.service.v1.Operator.AddAdjustment:input_type -> api.operator.service.v1.AddAdjustmentRequest
+	39, // 46: api.operator.service.v1.Operator.ListAdjustmentConfigs:input_type -> api.operator.service.v1.ListAdjustmentConfigsRequest
+	47, // 47: api.operator.service.v1.Operator.CreateAdjustmentConfig:input_type -> api.operator.service.v1.CreateAdjustmentConfigRequest
+	41, // 48: api.operator.service.v1.Operator.UpdateAdjustmentConfig:input_type -> api.operator.service.v1.UpdateAdjustmentConfigRequest
+	43, // 49: api.operator.service.v1.Operator.DeleteAdjustmentConfig:input_type -> api.operator.service.v1.DeleteAdjustmentConfigRequest
+	49, // 50: api.operator.service.v1.Operator.SendInvoices:input_type -> api.operator.service.v1.SendInvoicesRequest
+	51, // 51: api.operator.service.v1.Operator.GetInvoiceSummary:input_type -> api.operator.service.v1.GetInvoiceSummaryRequest
+	53, // 52: api.operator.service.v1.Operator.GetBalanceSummary:input_type -> api.operator.service.v1.GetBalanceSummaryRequest
+	55, // 53: api.operator.service.v1.Operator.GetBalancesSummary:input_type -> api.operator.service.v1.GetBalancesSummaryRequest
+	4,  // 54: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
+	6,  // 55: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
+	8,  // 56: api.operator.service.v1.Operator.GetOperator:output_type -> api.operator.service.v1.GetOperatorResponse
+	10, // 57: api.operator.service.v1.Operator.GetOperatorsByIds:output_type -> api.operator.service.v1.GetOperatorsByIdsResponse
+	12, // 58: api.operator.service.v1.Operator.AddOrUpdateCurrency:output_type -> api.operator.service.v1.AddOrUpdateCurrencyResponse
+	14, // 59: api.operator.service.v1.Operator.UpdateOperatorCurrency:output_type -> api.operator.service.v1.UpdateOperatorCurrencyResponse
+	16, // 60: api.operator.service.v1.Operator.GetOperatorCurrencies:output_type -> api.operator.service.v1.GetOperatorCurrenciesResponse
+	18, // 61: api.operator.service.v1.Operator.AddOriginOperatorId:output_type -> api.operator.service.v1.AddOriginOperatorIdResponse
+	20, // 62: api.operator.service.v1.Operator.GetOperatorIdByOrigin:output_type -> api.operator.service.v1.GetOperatorIdByOriginResponse
+	22, // 63: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
+	24, // 64: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
+	26, // 65: api.operator.service.v1.Operator.ListOperators:output_type -> api.operator.service.v1.ListOperatorsResponse
+	28, // 66: api.operator.service.v1.Operator.ListInvoices:output_type -> api.operator.service.v1.ListInvoicesResponse
+	30, // 67: api.operator.service.v1.Operator.GetInvoiceDetail:output_type -> api.operator.service.v1.GetInvoiceDetailResponse
+	32, // 68: api.operator.service.v1.Operator.ListOperatorRevenueShare:output_type -> api.operator.service.v1.ListOperatorRevenueShareResponse
+	34, // 69: api.operator.service.v1.Operator.ListThirdPartyFees:output_type -> api.operator.service.v1.ListThirdPartyFeesResponse
+	46, // 70: api.operator.service.v1.Operator.ListAdjustments:output_type -> api.operator.service.v1.ListAdjustmentsResponse
+	36, // 71: api.operator.service.v1.Operator.ListMonthlyRevenueShare:output_type -> api.operator.service.v1.ListMonthlyRevenueShareResponse
+	38, // 72: api.operator.service.v1.Operator.AddAdjustment:output_type -> api.operator.service.v1.AddAdjustmentResponse
+	40, // 73: api.operator.service.v1.Operator.ListAdjustmentConfigs:output_type -> api.operator.service.v1.ListAdjustmentConfigsResponse
+	48, // 74: api.operator.service.v1.Operator.CreateAdjustmentConfig:output_type -> api.operator.service.v1.CreateAdjustmentConfigResponse
+	42, // 75: api.operator.service.v1.Operator.UpdateAdjustmentConfig:output_type -> api.operator.service.v1.UpdateAdjustmentConfigResponse
+	44, // 76: api.operator.service.v1.Operator.DeleteAdjustmentConfig:output_type -> api.operator.service.v1.DeleteAdjustmentConfigResponse
+	50, // 77: api.operator.service.v1.Operator.SendInvoices:output_type -> api.operator.service.v1.SendInvoicesResponse
+	52, // 78: api.operator.service.v1.Operator.GetInvoiceSummary:output_type -> api.operator.service.v1.GetInvoiceSummaryResponse
+	54, // 79: api.operator.service.v1.Operator.GetBalanceSummary:output_type -> api.operator.service.v1.GetBalanceSummaryResponse
+	56, // 80: api.operator.service.v1.Operator.GetBalancesSummary:output_type -> api.operator.service.v1.GetBalancesSummaryResponse
+	54, // [54:81] is the sub-list for method output_type
+	27, // [27:54] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_operator_service_v1_operator_proto_init() }

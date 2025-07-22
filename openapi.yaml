@@ -5843,18 +5843,10 @@ components:
         api.backoffice.service.v1.ListAdjustmentsRequest:
             type: object
             properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 invoiceId:
                     type: string
-                    description: Filter by invoice ID
-                retailerId:
-                    type: string
-                    description: Filter by retailer
-                companyId:
-                    type: string
-                    description: Filter by company
-                operatorId:
-                    type: string
-                    description: Filter by operator
                 page:
                     type: integer
                     description: Pagination
@@ -6468,18 +6460,12 @@ components:
         api.backoffice.service.v1.ListInvoicesRequest:
             type: object
             properties:
-                retailerId:
-                    type: string
-                    description: Filter by retailer
-                companyId:
-                    type: string
-                    description: Filter by company
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 month:
                     type: string
-                    description: 'Filter by month (format: YYYY-MM)'
                 invoiceId:
                     type: string
-                    description: Search by invoice id
                 paymentStatus:
                     enum:
                         - PAYMENT_STATUS_PAID
@@ -6560,18 +6546,10 @@ components:
         api.backoffice.service.v1.ListMonthlyRevenueShareRequest:
             type: object
             properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 invoiceId:
                     type: string
-                    description: Filter by invoice ID
-                retailerId:
-                    type: string
-                    description: Filter by retailer
-                companyId:
-                    type: string
-                    description: Filter by company
-                operatorId:
-                    type: string
-                    description: Filter by operator
                 page:
                     type: integer
                     description: Pagination
@@ -6736,18 +6714,10 @@ components:
         api.backoffice.service.v1.ListOperatorRevenueShareRequest:
             type: object
             properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 invoiceId:
                     type: string
-                    description: Filter by invoice ID
-                retailerId:
-                    type: string
-                    description: Filter by retailer
-                companyId:
-                    type: string
-                    description: Filter by company
-                operatorId:
-                    type: string
-                    description: Filter by operator
                 page:
                     type: integer
                     description: Pagination
@@ -7391,18 +7361,10 @@ components:
         api.backoffice.service.v1.ListThirdPartyFeesRequest:
             type: object
             properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 invoiceId:
                     type: string
-                    description: Filter by invoice ID
-                retailerId:
-                    type: string
-                    description: Filter by retailer
-                companyId:
-                    type: string
-                    description: Filter by company
-                operatorId:
-                    type: string
-                    description: Filter by operator
                 page:
                     type: integer
                     description: Pagination

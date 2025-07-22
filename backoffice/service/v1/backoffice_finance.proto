@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package api.backoffice.service.v1;
+import "common/common.proto";
 
 import "google/api/annotations.proto";
 
@@ -116,28 +117,20 @@ service BackofficeFinance {
 }
 
 message ListInvoicesRequest {
-	// Filter by retailer
-	optional int64 retailer_id = 1;
-	
-	// Filter by company
-	optional int64 company_id = 2;
-	
-	// Filter by month (format: YYYY-MM)
-	optional string month = 3;
-	
-	// Search by invoice id
-	optional int64 invoice_id = 4;
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional string month = 2;
+	optional int64 invoice_id = 3;
 	
 	// Filter by payment status
 	enum PaymentStatus {
 		PAYMENT_STATUS_PAID = 0;
 		PAYMENT_STATUS_NOT_PAID = 1;
 	}
-	optional PaymentStatus payment_status = 5;
+	optional PaymentStatus payment_status = 4;
 	
 	// Pagination
-	optional int32 page = 6;
-	optional int32 page_size = 7;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
 }
 
 message ListInvoicesResponse {
@@ -237,21 +230,12 @@ message GetInvoiceDetailResponse {
 }
 
 message ListOperatorRevenueShareRequest {
-	// Filter by invoice ID
-	optional int64 invoice_id = 1;
-	
-	// Filter by retailer
-	optional int64 retailer_id = 2;
-	
-	// Filter by company
-	optional int64 company_id = 3;
-	
-	// Filter by operator
-	optional int64 operator_id = 4;
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional int64 invoice_id = 2;
 	
 	// Pagination
-	optional int32 page = 5;
-	optional int32 page_size = 6;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
 }
 
 message ListOperatorRevenueShareResponse {
@@ -291,21 +275,12 @@ message ListOperatorRevenueShareResponse {
 }
 
 message ListThirdPartyFeesRequest {
-	// Filter by invoice ID
-	optional int64 invoice_id = 1;
-	
-	// Filter by retailer
-	optional int64 retailer_id = 2;
-	
-	// Filter by company
-	optional int64 company_id = 3;
-	
-	// Filter by operator
-	optional int64 operator_id = 4;
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional int64 invoice_id = 2;
 	
 	// Pagination
-	optional int32 page = 5;
-	optional int32 page_size = 6;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
 }
 
 message ListThirdPartyFeesResponse {
@@ -333,28 +308,19 @@ message ListThirdPartyFeesResponse {
 }
 
 message ListMonthlyRevenueShareRequest {
-	// Filter by invoice ID
-	optional int64 invoice_id = 1;
-	
-	// Filter by retailer
-	optional int64 retailer_id = 2;
-	
-	// Filter by company
-	optional int64 company_id = 3;
-	
-	// Filter by operator
-	optional int64 operator_id = 4;
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional int64 invoice_id = 2;
 	
 	// Pagination
-	optional int32 page = 5;
-	optional int32 page_size = 6;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
 	
 	// Type of data to return
 	enum Type {
 		TYPE_CURRENT_MONTH = 0; // Default: return current month's data
 		TYPE_ALL = 1; // Return all data
 	}
-	optional Type type = 7;
+	optional Type type = 5;
 }
 
 message ListMonthlyRevenueShareResponse {
@@ -457,21 +423,12 @@ message DeleteAdjustmentConfigResponse {
 }
 
 message ListAdjustmentsRequest {
-	// Filter by invoice ID
-	optional int64 invoice_id = 1;
-	
-	// Filter by retailer
-	optional int64 retailer_id = 2;
-	
-	// Filter by company
-	optional int64 company_id = 3;
-	
-	// Filter by operator
-	optional int64 operator_id = 4;
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional int64 invoice_id = 2;
 	
 	// Pagination
-	optional int32 page = 5;
-	optional int32 page_size = 6;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
 }
 
 message ListAdjustmentsResponse {
