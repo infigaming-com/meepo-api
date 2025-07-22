@@ -1296,12 +1296,12 @@ paths:
                 Get payment channel page with pagination and filters
                  Retrieves a paginated list of payment channels with optional filtering
                  Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
-            operationId: BackofficePayment_GetPaymentChannelPage
+            operationId: BackofficePayment_GetOperatorPaymentChannelPage
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest'
                 required: true
             responses:
                 "200":
@@ -3655,39 +3655,24 @@ components:
                 paymentMethodId:
                     type: string
                     description: ID of the payment method to be used
-                currencyType:
-                    type: string
-                    description: Currency Type
                 contact:
                     type: string
                     description: Contact Info email
-                fixedFee:
+                sysFixedFee:
                     type: string
                     description: Fixed Fee on the Amount
-                feeRate:
+                sysFeeRate:
                     type: string
                     description: Rate Fee
-                minAmount:
+                sysMinAmount:
                     type: string
                     description: Min Amount
-                maxAmount:
+                sysMaxAmount:
                     type: string
                     description: Max Amount
-                pspFixedFee:
+                sysMinFee:
                     type: string
-                    description: PSP Fixed Fee on the Amount
-                pspFeeRate:
-                    type: string
-                    description: PSP Rate Fee
-                pspMinAmount:
-                    type: string
-                    description: PSP Min Amount
-                pspMaxAmount:
-                    type: string
-                    description: PSP Max Amount
-                mininalFee:
-                    type: string
-                    description: JSON schema defining the required fields for this payment method
+                    description: Minmum Fee
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method
@@ -4379,6 +4364,61 @@ components:
             description: |-
                 Request to get address
                  Used to get DC address
+        api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                operatorId:
+                    type: string
+                    description: Optional operator ID filter
+                type:
+                    enum:
+                        - CHANNEL_TYPE_ALL
+                        - CHANNEL_TYPE_DEPOSIT
+                        - CHANNEL_TYPE_WITHDRAW
+                    type: string
+                    description: Optional channel type filter
+                    format: enum
+                category:
+                    type: string
+                    description: Optional category filter
+                paymentMethod:
+                    type: string
+                    description: Optional payment method filter
+                currency:
+                    type: string
+                    description: Optional currency filter
+                protocol:
+                    type: string
+                    description: Optional crypto protocol
+                network:
+                    type: string
+                    description: Optional crypto network filter
+                country:
+                    type: string
+                    description: Optional country filter
+                source:
+                    type: string
+                    description: Source of operator type
+                sort:
+                    enum:
+                        - DESC
+                        - ASC
+                    type: string
+                    description: Optional sort direction
+                    format: enum
+                operatorContextFilters:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                    description: ID of the Operator connect with this channel
+            description: Used to retrieve a paginated list of payment channels with optional filters
         api.backoffice.service.v1.GetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -9677,24 +9717,27 @@ components:
                 paymentMethodId:
                     type: string
                     description: ID of the payment method to be used
-                type:
-                    type: string
-                    description: Type of channel (e.g., deposit, withdrawal)
                 contact:
                     type: string
                     description: Contact Info email
-                pspFixedFee:
+                fixedFee:
                     type: string
                     description: PSP Fixed Fee on the Amount
-                pspFeeRate:
+                feeRate:
                     type: string
                     description: PSP Rate Fee
+                minFee:
+                    type: string
+                    description: Minimum Fee
                 userFixedFee:
                     type: string
                     description: User Fixed Fee on the Amount
                 userFeeRate:
                     type: string
                     description: User Rate Fee
+                userMinFee:
+                    type: string
+                    description: Minimum Fee
                 minAmount:
                     type: string
                     description: Min Amount
@@ -9719,45 +9762,31 @@ components:
         payment.service.v1.CreatePaymentMethodRequest:
             type: object
             properties:
+                paymentMethodId:
+                    type: string
+                    description: ID of the payment method to be used
+                contact:
+                    type: string
+                    description: Currency Type
+                sysFixedFee:
+                    type: string
+                    description: Fixed Fee on the Amount
+                sysFeeRate:
+                    type: string
+                    description: Rate Fee
+                sysMinAmount:
+                    type: string
+                    description: Min Amount
+                sysMaxAmount:
+                    type: string
+                    description: Max Amount
+                sysMinFee:
+                    type: string
+                    description: Minmum Fee
                 operatorContext:
                     allOf:
                         - $ref: '#/components/schemas/api.common.OperatorContext'
                     description: ID of the Operator connect with this channel
-                paymentMethodId:
-                    type: string
-                    description: ID of the payment method to be used
-                currencyType:
-                    type: string
-                    description: Currency Type
-                contact:
-                    type: string
-                    description: Contact Info email
-                fixedFee:
-                    type: string
-                    description: Fixed Fee on the Amount
-                feeRate:
-                    type: string
-                    description: Rate Fee
-                minAmount:
-                    type: string
-                    description: Min Amount
-                maxAmount:
-                    type: string
-                    description: Max Amount
-                pspFixedFee:
-                    type: string
-                    description: PSP Fixed Fee on the Amount
-                pspFeeRate:
-                    type: string
-                    description: PSP Rate Fee
-                pspMinAmount:
-                    type: string
-                    description: PSP Min Amount
-                pspMaxAmount:
-                    type: string
-                    description: PSP Max Amount
-                mininalFee:
-                    type: string
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method
@@ -10222,9 +10251,6 @@ components:
                 supportType:
                     type: string
                     description: Type of the channel (e.g., online, offline)
-                currencyType:
-                    type: string
-                    description: Currency type (e.g., Crypto, Fiat)
                 psp:
                     type: string
                     description: Services Prvider
@@ -10249,6 +10275,9 @@ components:
                 currency:
                     type: string
                     description: Currency supported by this channel
+                currencyType:
+                    type: string
+                    description: Currency type (e.g., Crypto, Fiat)
                 protocol:
                     type: string
                     description: Crypto protocol supported by this channel
@@ -10276,24 +10305,53 @@ components:
                 feeRate:
                     type: string
                     description: Rate Fee
-                mininalFee:
+                minFee:
                     type: string
                     description: Minimum Fee
-                eat:
-                    type: integer
-                    description: Estimated arrival time in minutes
-                    format: int32
+                pspMinAmount:
+                    type: string
+                    description: Minimum amount allowed for deposit transactions
+                pspMaxAmount:
+                    type: string
+                    description: Maximum amount allowed for deposit transactions
+                pspFixedFee:
+                    type: string
+                    description: Fixed Fee on the Amount
+                pspFeeRate:
+                    type: string
+                    description: Rate Fee
+                pspMinFee:
+                    type: string
+                    description: Minimum Fee
+                sysMinAmount:
+                    type: string
+                    description: Minimum amount allowed for deposit transactions
+                sysMaxAmount:
+                    type: string
+                    description: Maximum amount allowed for deposit transactions
+                sysFixedFee:
+                    type: string
+                    description: Fixed Fee on the Amount
+                sysFeeRate:
+                    type: string
+                    description: Rate Fee
+                sysMinFee:
+                    type: string
+                    description: Minimum Fee
                 schema:
                     type: object
                     description: JSON schema defining deposit form fields required by this channel
                 source:
                     type: string
+                    description: Source operator
                 sourceType:
                     type: string
                 enable:
                     type: boolean
+                    description: Status bool
                 contact:
                     type: string
+                    description: Contact
             description: |-
                 Payment channel information
                  Detailed information about a specific payment channel
@@ -10306,32 +10364,39 @@ components:
                 psp:
                     type: string
                     description: Currency code supported by this payment method (e.g., USD, EUR, CNY)
-                type:
+                supportedType:
                     type: string
+                    description: Payin or Payout
                 currency:
                     type: string
+                    description: Currency like USD, VND
                 currencyType:
                     type: string
+                    description: Currency type (e.g., Crypto, Fiat)
                 contact:
                     type: string
+                    description: Contact
                 country:
                     type: string
                     description: Country code where this payment method is available
                 paymentMethod:
                     type: string
                     description: Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
-                fixedFee:
+                sysFixedFee:
                     type: string
                     description: Fixed Fee on the Amount
-                feeRate:
+                sysFeeRate:
                     type: string
                     description: Rate Fee
-                minAmount:
+                sysMinAmount:
                     type: string
                     description: Min Amount
-                maxAmount:
+                sysMaxAmount:
                     type: string
                     description: Max Amount
+                sysMinFee:
+                    type: string
+                    description: Minmum Fee
                 pspFixedFee:
                     type: string
                     description: Fixed Fee on the Amount
@@ -10344,16 +10409,28 @@ components:
                 pspMaxAmount:
                     type: string
                     description: Max Amount
+                pspMinFee:
+                    type: string
+                    description: Minmum Fee
                 enable:
                     type: boolean
+                    description: Status bool
                 network:
                     type: string
+                    description: Crypto network
                 protocol:
                     type: string
-                minFee:
-                    type: string
+                    description: Crypto protocol
                 source:
                     type: string
+                    description: Source operator
+                averageTime:
+                    type: integer
+                    description: Average Time
+                    format: int32
+                successRate:
+                    type: string
+                    description: Success Rate
                 keySchema:
                     allOf:
                         - $ref: '#/components/schemas/google.protobuf.ListValue'
@@ -10414,7 +10491,7 @@ components:
                 currency:
                     type: string
                     description: Currency code for the transaction
-                fee:
+                processingFee:
                     type: string
                     description: Transaction fee in smallest currency unit
                 paymentMethod:
@@ -10503,7 +10580,7 @@ components:
             type: object
             properties:
                 paymentMethods:
-                    $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
+                    $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
         payment.service.v1.UpdatePaymentMethodRequest:
             type: object
             properties:
