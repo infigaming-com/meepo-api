@@ -711,30 +711,28 @@ message GetOperatorPaymentChannelPageRequest {
   int32 page = 1;
   // Number of items per page
   int32 page_size = 2;
-    // Optional operator ID filter
-  string operator_id = 3;
   // Optional channel type filter
-  ChannelType type = 4;
+  ChannelType type = 3;
   // Optional category filter
-  string category = 5;
+  string category = 4;
   // Optional payment method filter
-  string payment_method = 6;
+  string payment_method = 5;
   // Optional currency filter
-  string currency = 7;
+  string currency = 6;
   // Optional crypto protocol
-  string protocol = 8;
+  string protocol = 7;
   // Optional crypto network filter
-  string network = 9;
+  string network = 8;
   // Optional country filter
-  string country = 10;
+  string country = 9;
   // Source of operator type
-  string source = 11;
+  string source = 10;
   // Optional sort direction
-  Sort sort = 12;
+  Sort sort = 11;
   // ID of the Operator connect with this channel
-  api.common.OperatorContextFilters operator_context_filters = 13;
+  api.common.OperatorContextFilters operator_context_filters = 12;
   // ID of the Operator connect with this channel
-	api.common.OperatorContext operator_context = 14;
+	api.common.OperatorContext operator_context = 13;
 }
 
 // Response for payment channel page
