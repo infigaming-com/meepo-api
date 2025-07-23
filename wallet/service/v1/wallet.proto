@@ -171,12 +171,13 @@ message CreditRequest {
 
 	int64 user_id = 1;
 	string currency = 2;
+	string reporting_currency = 3;
 	// Valid credit transaction types:
 	//   - "payment_deposit"    - Payment deposit transaction
-	string transaction_type = 3;
-	int64 transaction_id = 4;
-	string cash = 5;
-	api.common.OperatorContext operator_context = 6;
+	string transaction_type = 4;
+	int64 transaction_id = 5;
+	string cash = 6;
+	api.common.OperatorContext operator_context = 7;
 }
 
 message CreditResponse {
@@ -186,12 +187,13 @@ message CreditResponse {
 message DebitRequest {
 	int64 user_id = 1;
 	string currency = 2;
+	string reporting_currency = 3;
 	// Valid debit transaction types:
 	//   - "payment_withdraw"   - Payment withdraw transaction
-	string transaction_type = 3;
-	int64 transaction_id = 4;
-	string cash = 5;
-	api.common.OperatorContext operator_context = 6;
+	string transaction_type = 4;
+	int64 transaction_id = 5;
+	string cash = 6;
+	api.common.OperatorContext operator_context = 7;
 }
 
 message DebitResponse {
@@ -202,14 +204,15 @@ message GameDebitRequest {
 	int64 user_id = 1;
 	string currency = 2;
 	string settlement_currency = 3;
-	string exchange_rate = 4;
+	string reporting_currency = 4;
+	string exchange_rate = 5;
 	// Valid game debit transaction types:
 	//   - "game_bet"          - Game bet transaction
-	string transaction_type = 5;
-	int64 transaction_id = 6;
-	string amount = 7;
-	string turnover = 8;
-	api.common.OperatorContext operator_context = 9;
+	string transaction_type = 6;
+	int64 transaction_id = 7;
+	string amount = 8;
+	string turnover = 9;
+	api.common.OperatorContext operator_context = 10;
 }
 
 message GameDebitResponse {
@@ -224,18 +227,22 @@ message GameDebitResponse {
 	string cash_amount_usd = 9;
 	string operator_bonus_amount_usd = 10;
 	string provider_bonus_amount_usd = 11;
+	string cash_amount_reporting_currency = 12;
+	string operator_bonus_amount_reporting_currency = 13;
+	string provider_bonus_amount_reporting_currency = 14;
 }
 
 message GameCreditRequest {
 	int64 user_id = 1;
 	string currency = 2;
 	string settlement_currency = 3;
-	string exchange_rate = 4;
-	string transaction_type = 5;
-	int64 transaction_id = 6;
-	int64 original_transaction_id = 7;
-	string amount = 8;
-	api.common.OperatorContext operator_context = 9;
+	string reporting_currency = 4;
+	string exchange_rate = 5;
+	string transaction_type = 6;
+	int64 transaction_id = 7;
+	int64 original_transaction_id = 8;
+	string amount = 9;
+	api.common.OperatorContext operator_context = 10;
 }
 
 message GameCreditResponse {
@@ -250,17 +257,21 @@ message GameCreditResponse {
 	string cash_amount_usd = 9;
 	string operator_bonus_amount_usd = 10;
 	string provider_bonus_amount_usd = 11;
+	string cash_amount_reporting_currency = 12;
+	string operator_bonus_amount_reporting_currency = 13;
+	string provider_bonus_amount_reporting_currency = 14;
 }
 
 message FreezeRequest {
 	int64 user_id = 1;
 	string currency = 2;
+	string reporting_currency = 3;
 	// Valid freeze transaction types:
 	//   - "payment_withdraw_freeze"   - Payment withdraw freeze transaction
-	string transaction_type = 3;
-	int64 transaction_id = 4;
-	string cash = 5;
-	api.common.OperatorContext operator_context = 6;
+	string transaction_type = 4;
+	int64 transaction_id = 5;
+	string cash = 6;
+	api.common.OperatorContext operator_context = 7;
 }
 
 message FreezeResponse {
@@ -300,6 +311,9 @@ message RollbackResponse {
 	string cash_amount_usd = 8;
 	string operator_bonus_amount_usd = 9;
 	string provider_bonus_amount_usd = 10;
+	string cash_amount_reporting_currency = 11;
+	string operator_bonus_amount_reporting_currency = 12;
+	string provider_bonus_amount_reporting_currency = 13;
 }
 
 message GetWalletsRequest {
@@ -428,24 +442,33 @@ message GetWalletBalanceTransactionsByIdsResponse {
 		int64 related_transaction_id = 8;
 		string original_cash = 9;
 		string original_cash_usd = 10;
-		string cash = 11;
-		string cash_usd = 12;
-		string cash_amount = 13;
-		string cash_amount_usd = 14;
-		string original_operator_bonus = 15;
-		string original_operator_bonus_usd = 16;
-		string operator_bonus = 17;
-		string operator_bonus_usd = 18;
-		string operator_bonus_amount = 19;
-		string operator_bonus_amount_usd = 20;
-		string original_provider_bonus = 21;
-		string original_provider_bonus_usd = 22;
-		string provider_bonus = 23;
-		string provider_bonus_usd = 24;
-		string provider_bonus_amount = 25;
-		string provider_bonus_amount_usd = 26;
-		google.protobuf.Timestamp created_at = 27;
-		google.protobuf.Timestamp updated_at = 28;
+		string original_cash_reporting_currency = 11;
+		string cash = 12;
+		string cash_usd = 13;
+		string cash_reporting_currency = 14;
+		string cash_amount = 15;
+		string cash_amount_usd = 16;
+		string cash_amount_reporting_currency = 17;
+		string original_operator_bonus = 18;
+		string original_operator_bonus_usd = 19;
+		string original_operator_bonus_reporting_currency = 20;
+		string operator_bonus = 21;
+		string operator_bonus_usd = 22;
+		string operator_bonus_reporting_currency = 23;
+		string operator_bonus_amount = 24;
+		string operator_bonus_amount_usd = 25;
+		string operator_bonus_amount_reporting_currency = 26;
+		string original_provider_bonus = 27;
+		string original_provider_bonus_usd = 28;
+		string original_provider_bonus_reporting_currency = 29;
+		string provider_bonus = 30;
+		string provider_bonus_usd = 31;
+		string provider_bonus_reporting_currency = 32;
+		string provider_bonus_amount = 33;
+		string provider_bonus_amount_usd = 34;
+		string provider_bonus_amount_reporting_currency = 35;
+		google.protobuf.Timestamp created_at = 36;
+		google.protobuf.Timestamp updated_at = 37;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 }
@@ -737,11 +760,10 @@ message OperatorRollbackResponse {
 message OperatorSettleRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
-	string reporting_currency = 3;
-	optional int64 external_transaction_id = 4;
-	int64 original_transaction_id = 5;
-	string transaction_type = 6;
-	string memo = 7;
+	optional int64 external_transaction_id = 3;
+	int64 original_transaction_id = 4;
+	string transaction_type = 5;
+	string memo = 6;
 }
 
 message OperatorSettleResponse {

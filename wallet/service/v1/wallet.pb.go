@@ -243,15 +243,16 @@ func (x *GetUserBalanceResponse) GetProviderBonus() string {
 }
 
 type CreditRequest struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	UserId   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	UserId            int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency          string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	ReportingCurrency string                 `protobuf:"bytes,3,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	// Valid credit transaction types:
 	//   - "payment_deposit"    - Payment deposit transaction
-	TransactionType string                  `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	TransactionId   int64                   `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash            string                  `protobuf:"bytes,5,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	TransactionType string                  `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionId   int64                   `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Cash            string                  `protobuf:"bytes,6,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -296,6 +297,13 @@ func (x *CreditRequest) GetUserId() int64 {
 func (x *CreditRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
+	}
+	return ""
+}
+
+func (x *CreditRequest) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
 	}
 	return ""
 }
@@ -373,15 +381,16 @@ func (x *CreditResponse) GetTransactionId() int64 {
 }
 
 type DebitRequest struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	UserId   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	UserId            int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency          string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	ReportingCurrency string                 `protobuf:"bytes,3,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	// Valid debit transaction types:
 	//   - "payment_withdraw"   - Payment withdraw transaction
-	TransactionType string                  `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	TransactionId   int64                   `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash            string                  `protobuf:"bytes,5,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	TransactionType string                  `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionId   int64                   `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Cash            string                  `protobuf:"bytes,6,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -426,6 +435,13 @@ func (x *DebitRequest) GetUserId() int64 {
 func (x *DebitRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
+	}
+	return ""
+}
+
+func (x *DebitRequest) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
 	}
 	return ""
 }
@@ -507,14 +523,15 @@ type GameDebitRequest struct {
 	UserId             int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Currency           string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	SettlementCurrency string                 `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
-	ExchangeRate       string                 `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	ReportingCurrency  string                 `protobuf:"bytes,4,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	ExchangeRate       string                 `protobuf:"bytes,5,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
 	// Valid game debit transaction types:
 	//   - "game_bet"          - Game bet transaction
-	TransactionType string                  `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	TransactionId   int64                   `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Amount          string                  `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`
-	Turnover        string                  `protobuf:"bytes,8,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	TransactionType string                  `protobuf:"bytes,6,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionId   int64                   `protobuf:"varint,7,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Amount          string                  `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"`
+	Turnover        string                  `protobuf:"bytes,9,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -570,6 +587,13 @@ func (x *GameDebitRequest) GetSettlementCurrency() string {
 	return ""
 }
 
+func (x *GameDebitRequest) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
 func (x *GameDebitRequest) GetExchangeRate() string {
 	if x != nil {
 		return x.ExchangeRate
@@ -613,20 +637,23 @@ func (x *GameDebitRequest) GetOperatorContext() *common.OperatorContext {
 }
 
 type GameDebitResponse struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId          int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	ExchangeRate           string                 `protobuf:"bytes,2,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
-	Cash                   string                 `protobuf:"bytes,3,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus          string                 `protobuf:"bytes,4,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus          string                 `protobuf:"bytes,5,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
-	CashAmount             string                 `protobuf:"bytes,6,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	OperatorBonusAmount    string                 `protobuf:"bytes,7,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
-	ProviderBonusAmount    string                 `protobuf:"bytes,8,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
-	CashAmountUsd          string                 `protobuf:"bytes,9,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
-	OperatorBonusAmountUsd string                 `protobuf:"bytes,10,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
-	ProviderBonusAmountUsd string                 `protobuf:"bytes,11,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                                protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId                        int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	ExchangeRate                         string                 `protobuf:"bytes,2,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	Cash                                 string                 `protobuf:"bytes,3,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus                        string                 `protobuf:"bytes,4,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus                        string                 `protobuf:"bytes,5,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	CashAmount                           string                 `protobuf:"bytes,6,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	OperatorBonusAmount                  string                 `protobuf:"bytes,7,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
+	ProviderBonusAmount                  string                 `protobuf:"bytes,8,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
+	CashAmountUsd                        string                 `protobuf:"bytes,9,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
+	OperatorBonusAmountUsd               string                 `protobuf:"bytes,10,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
+	ProviderBonusAmountUsd               string                 `protobuf:"bytes,11,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
+	CashAmountReportingCurrency          string                 `protobuf:"bytes,12,opt,name=cash_amount_reporting_currency,json=cashAmountReportingCurrency,proto3" json:"cash_amount_reporting_currency,omitempty"`
+	OperatorBonusAmountReportingCurrency string                 `protobuf:"bytes,13,opt,name=operator_bonus_amount_reporting_currency,json=operatorBonusAmountReportingCurrency,proto3" json:"operator_bonus_amount_reporting_currency,omitempty"`
+	ProviderBonusAmountReportingCurrency string                 `protobuf:"bytes,14,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *GameDebitResponse) Reset() {
@@ -736,17 +763,39 @@ func (x *GameDebitResponse) GetProviderBonusAmountUsd() string {
 	return ""
 }
 
+func (x *GameDebitResponse) GetCashAmountReportingCurrency() string {
+	if x != nil {
+		return x.CashAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GameDebitResponse) GetOperatorBonusAmountReportingCurrency() string {
+	if x != nil {
+		return x.OperatorBonusAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GameDebitResponse) GetProviderBonusAmountReportingCurrency() string {
+	if x != nil {
+		return x.ProviderBonusAmountReportingCurrency
+	}
+	return ""
+}
+
 type GameCreditRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	UserId                int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Currency              string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	SettlementCurrency    string                  `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
-	ExchangeRate          string                  `protobuf:"bytes,4,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
-	TransactionType       string                  `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	TransactionId         int64                   `protobuf:"varint,6,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	OriginalTransactionId int64                   `protobuf:"varint,7,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
-	Amount                string                  `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"`
-	OperatorContext       *common.OperatorContext `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	ReportingCurrency     string                  `protobuf:"bytes,4,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	ExchangeRate          string                  `protobuf:"bytes,5,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	TransactionType       string                  `protobuf:"bytes,6,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionId         int64                   `protobuf:"varint,7,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OriginalTransactionId int64                   `protobuf:"varint,8,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
+	Amount                string                  `protobuf:"bytes,9,opt,name=amount,proto3" json:"amount,omitempty"`
+	OperatorContext       *common.OperatorContext `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -802,6 +851,13 @@ func (x *GameCreditRequest) GetSettlementCurrency() string {
 	return ""
 }
 
+func (x *GameCreditRequest) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
 func (x *GameCreditRequest) GetExchangeRate() string {
 	if x != nil {
 		return x.ExchangeRate
@@ -845,20 +901,23 @@ func (x *GameCreditRequest) GetOperatorContext() *common.OperatorContext {
 }
 
 type GameCreditResponse struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId          int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	ExchangeRate           string                 `protobuf:"bytes,2,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
-	Cash                   string                 `protobuf:"bytes,3,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus          string                 `protobuf:"bytes,4,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus          string                 `protobuf:"bytes,5,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
-	CashAmount             string                 `protobuf:"bytes,6,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	OperatorBonusAmount    string                 `protobuf:"bytes,7,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
-	ProviderBonusAmount    string                 `protobuf:"bytes,8,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
-	CashAmountUsd          string                 `protobuf:"bytes,9,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
-	OperatorBonusAmountUsd string                 `protobuf:"bytes,10,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
-	ProviderBonusAmountUsd string                 `protobuf:"bytes,11,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                                protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId                        int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	ExchangeRate                         string                 `protobuf:"bytes,2,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	Cash                                 string                 `protobuf:"bytes,3,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus                        string                 `protobuf:"bytes,4,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus                        string                 `protobuf:"bytes,5,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	CashAmount                           string                 `protobuf:"bytes,6,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	OperatorBonusAmount                  string                 `protobuf:"bytes,7,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
+	ProviderBonusAmount                  string                 `protobuf:"bytes,8,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
+	CashAmountUsd                        string                 `protobuf:"bytes,9,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
+	OperatorBonusAmountUsd               string                 `protobuf:"bytes,10,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
+	ProviderBonusAmountUsd               string                 `protobuf:"bytes,11,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
+	CashAmountReportingCurrency          string                 `protobuf:"bytes,12,opt,name=cash_amount_reporting_currency,json=cashAmountReportingCurrency,proto3" json:"cash_amount_reporting_currency,omitempty"`
+	OperatorBonusAmountReportingCurrency string                 `protobuf:"bytes,13,opt,name=operator_bonus_amount_reporting_currency,json=operatorBonusAmountReportingCurrency,proto3" json:"operator_bonus_amount_reporting_currency,omitempty"`
+	ProviderBonusAmountReportingCurrency string                 `protobuf:"bytes,14,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *GameCreditResponse) Reset() {
@@ -968,16 +1027,38 @@ func (x *GameCreditResponse) GetProviderBonusAmountUsd() string {
 	return ""
 }
 
+func (x *GameCreditResponse) GetCashAmountReportingCurrency() string {
+	if x != nil {
+		return x.CashAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GameCreditResponse) GetOperatorBonusAmountReportingCurrency() string {
+	if x != nil {
+		return x.OperatorBonusAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GameCreditResponse) GetProviderBonusAmountReportingCurrency() string {
+	if x != nil {
+		return x.ProviderBonusAmountReportingCurrency
+	}
+	return ""
+}
+
 type FreezeRequest struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	UserId   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	UserId            int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency          string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	ReportingCurrency string                 `protobuf:"bytes,3,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	// Valid freeze transaction types:
 	//   - "payment_withdraw_freeze"   - Payment withdraw freeze transaction
-	TransactionType string                  `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	TransactionId   int64                   `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash            string                  `protobuf:"bytes,5,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	TransactionType string                  `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionId   int64                   `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Cash            string                  `protobuf:"bytes,6,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1022,6 +1103,13 @@ func (x *FreezeRequest) GetUserId() int64 {
 func (x *FreezeRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
+	}
+	return ""
+}
+
+func (x *FreezeRequest) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
 	}
 	return ""
 }
@@ -1269,19 +1357,22 @@ func (x *RollbackRequest) GetOriginalTransactionId() int64 {
 }
 
 type RollbackResponse struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId          int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash                   string                 `protobuf:"bytes,2,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus          string                 `protobuf:"bytes,3,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus          string                 `protobuf:"bytes,4,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
-	CashAmount             string                 `protobuf:"bytes,5,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	OperatorBonusAmount    string                 `protobuf:"bytes,6,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
-	ProviderBonusAmount    string                 `protobuf:"bytes,7,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
-	CashAmountUsd          string                 `protobuf:"bytes,8,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
-	OperatorBonusAmountUsd string                 `protobuf:"bytes,9,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
-	ProviderBonusAmountUsd string                 `protobuf:"bytes,10,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                                protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId                        int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Cash                                 string                 `protobuf:"bytes,2,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus                        string                 `protobuf:"bytes,3,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus                        string                 `protobuf:"bytes,4,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	CashAmount                           string                 `protobuf:"bytes,5,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	OperatorBonusAmount                  string                 `protobuf:"bytes,6,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
+	ProviderBonusAmount                  string                 `protobuf:"bytes,7,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
+	CashAmountUsd                        string                 `protobuf:"bytes,8,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
+	OperatorBonusAmountUsd               string                 `protobuf:"bytes,9,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
+	ProviderBonusAmountUsd               string                 `protobuf:"bytes,10,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
+	CashAmountReportingCurrency          string                 `protobuf:"bytes,11,opt,name=cash_amount_reporting_currency,json=cashAmountReportingCurrency,proto3" json:"cash_amount_reporting_currency,omitempty"`
+	OperatorBonusAmountReportingCurrency string                 `protobuf:"bytes,12,opt,name=operator_bonus_amount_reporting_currency,json=operatorBonusAmountReportingCurrency,proto3" json:"operator_bonus_amount_reporting_currency,omitempty"`
+	ProviderBonusAmountReportingCurrency string                 `protobuf:"bytes,13,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *RollbackResponse) Reset() {
@@ -1380,6 +1471,27 @@ func (x *RollbackResponse) GetOperatorBonusAmountUsd() string {
 func (x *RollbackResponse) GetProviderBonusAmountUsd() string {
 	if x != nil {
 		return x.ProviderBonusAmountUsd
+	}
+	return ""
+}
+
+func (x *RollbackResponse) GetCashAmountReportingCurrency() string {
+	if x != nil {
+		return x.CashAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *RollbackResponse) GetOperatorBonusAmountReportingCurrency() string {
+	if x != nil {
+		return x.OperatorBonusAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *RollbackResponse) GetProviderBonusAmountReportingCurrency() string {
+	if x != nil {
+		return x.ProviderBonusAmountReportingCurrency
 	}
 	return ""
 }
@@ -4279,11 +4391,10 @@ type OperatorSettleRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Currency              string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	ReportingCurrency     string                  `protobuf:"bytes,3,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	ExternalTransactionId *int64                  `protobuf:"varint,4,opt,name=external_transaction_id,json=externalTransactionId,proto3,oneof" json:"external_transaction_id,omitempty"`
-	OriginalTransactionId int64                   `protobuf:"varint,5,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
-	TransactionType       string                  `protobuf:"bytes,6,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	Memo                  string                  `protobuf:"bytes,7,opt,name=memo,proto3" json:"memo,omitempty"`
+	ExternalTransactionId *int64                  `protobuf:"varint,3,opt,name=external_transaction_id,json=externalTransactionId,proto3,oneof" json:"external_transaction_id,omitempty"`
+	OriginalTransactionId int64                   `protobuf:"varint,4,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
+	TransactionType       string                  `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	Memo                  string                  `protobuf:"bytes,6,opt,name=memo,proto3" json:"memo,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -4328,13 +4439,6 @@ func (x *OperatorSettleRequest) GetOperatorContext() *common.OperatorContext {
 func (x *OperatorSettleRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
-	}
-	return ""
-}
-
-func (x *OperatorSettleRequest) GetReportingCurrency() string {
-	if x != nil {
-		return x.ReportingCurrency
 	}
 	return ""
 }
@@ -6066,37 +6170,46 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetRelatedTra
 }
 
 type GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction struct {
-	state                    protoimpl.MessageState `protogen:"open.v1"`
-	Id                       int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserId                   int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	SettlementCurrency       string                 `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
-	Currency                 string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	ExchangeRate             string                 `protobuf:"bytes,5,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
-	TransactionType          string                 `protobuf:"bytes,6,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	ExternalTransactionId    int64                  `protobuf:"varint,7,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`
-	RelatedTransactionId     int64                  `protobuf:"varint,8,opt,name=related_transaction_id,json=relatedTransactionId,proto3" json:"related_transaction_id,omitempty"`
-	OriginalCash             string                 `protobuf:"bytes,9,opt,name=original_cash,json=originalCash,proto3" json:"original_cash,omitempty"`
-	OriginalCashUsd          string                 `protobuf:"bytes,10,opt,name=original_cash_usd,json=originalCashUsd,proto3" json:"original_cash_usd,omitempty"`
-	Cash                     string                 `protobuf:"bytes,11,opt,name=cash,proto3" json:"cash,omitempty"`
-	CashUsd                  string                 `protobuf:"bytes,12,opt,name=cash_usd,json=cashUsd,proto3" json:"cash_usd,omitempty"`
-	CashAmount               string                 `protobuf:"bytes,13,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	CashAmountUsd            string                 `protobuf:"bytes,14,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
-	OriginalOperatorBonus    string                 `protobuf:"bytes,15,opt,name=original_operator_bonus,json=originalOperatorBonus,proto3" json:"original_operator_bonus,omitempty"`
-	OriginalOperatorBonusUsd string                 `protobuf:"bytes,16,opt,name=original_operator_bonus_usd,json=originalOperatorBonusUsd,proto3" json:"original_operator_bonus_usd,omitempty"`
-	OperatorBonus            string                 `protobuf:"bytes,17,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	OperatorBonusUsd         string                 `protobuf:"bytes,18,opt,name=operator_bonus_usd,json=operatorBonusUsd,proto3" json:"operator_bonus_usd,omitempty"`
-	OperatorBonusAmount      string                 `protobuf:"bytes,19,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
-	OperatorBonusAmountUsd   string                 `protobuf:"bytes,20,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
-	OriginalProviderBonus    string                 `protobuf:"bytes,21,opt,name=original_provider_bonus,json=originalProviderBonus,proto3" json:"original_provider_bonus,omitempty"`
-	OriginalProviderBonusUsd string                 `protobuf:"bytes,22,opt,name=original_provider_bonus_usd,json=originalProviderBonusUsd,proto3" json:"original_provider_bonus_usd,omitempty"`
-	ProviderBonus            string                 `protobuf:"bytes,23,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
-	ProviderBonusUsd         string                 `protobuf:"bytes,24,opt,name=provider_bonus_usd,json=providerBonusUsd,proto3" json:"provider_bonus_usd,omitempty"`
-	ProviderBonusAmount      string                 `protobuf:"bytes,25,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
-	ProviderBonusAmountUsd   string                 `protobuf:"bytes,26,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
-	CreatedAt                *timestamppb.Timestamp `protobuf:"bytes,27,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt                *timestamppb.Timestamp `protobuf:"bytes,28,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                                  protoimpl.MessageState `protogen:"open.v1"`
+	Id                                     int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId                                 int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	SettlementCurrency                     string                 `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	Currency                               string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	ExchangeRate                           string                 `protobuf:"bytes,5,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	TransactionType                        string                 `protobuf:"bytes,6,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	ExternalTransactionId                  int64                  `protobuf:"varint,7,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`
+	RelatedTransactionId                   int64                  `protobuf:"varint,8,opt,name=related_transaction_id,json=relatedTransactionId,proto3" json:"related_transaction_id,omitempty"`
+	OriginalCash                           string                 `protobuf:"bytes,9,opt,name=original_cash,json=originalCash,proto3" json:"original_cash,omitempty"`
+	OriginalCashUsd                        string                 `protobuf:"bytes,10,opt,name=original_cash_usd,json=originalCashUsd,proto3" json:"original_cash_usd,omitempty"`
+	OriginalCashReportingCurrency          string                 `protobuf:"bytes,11,opt,name=original_cash_reporting_currency,json=originalCashReportingCurrency,proto3" json:"original_cash_reporting_currency,omitempty"`
+	Cash                                   string                 `protobuf:"bytes,12,opt,name=cash,proto3" json:"cash,omitempty"`
+	CashUsd                                string                 `protobuf:"bytes,13,opt,name=cash_usd,json=cashUsd,proto3" json:"cash_usd,omitempty"`
+	CashReportingCurrency                  string                 `protobuf:"bytes,14,opt,name=cash_reporting_currency,json=cashReportingCurrency,proto3" json:"cash_reporting_currency,omitempty"`
+	CashAmount                             string                 `protobuf:"bytes,15,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	CashAmountUsd                          string                 `protobuf:"bytes,16,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
+	CashAmountReportingCurrency            string                 `protobuf:"bytes,17,opt,name=cash_amount_reporting_currency,json=cashAmountReportingCurrency,proto3" json:"cash_amount_reporting_currency,omitempty"`
+	OriginalOperatorBonus                  string                 `protobuf:"bytes,18,opt,name=original_operator_bonus,json=originalOperatorBonus,proto3" json:"original_operator_bonus,omitempty"`
+	OriginalOperatorBonusUsd               string                 `protobuf:"bytes,19,opt,name=original_operator_bonus_usd,json=originalOperatorBonusUsd,proto3" json:"original_operator_bonus_usd,omitempty"`
+	OriginalOperatorBonusReportingCurrency string                 `protobuf:"bytes,20,opt,name=original_operator_bonus_reporting_currency,json=originalOperatorBonusReportingCurrency,proto3" json:"original_operator_bonus_reporting_currency,omitempty"`
+	OperatorBonus                          string                 `protobuf:"bytes,21,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	OperatorBonusUsd                       string                 `protobuf:"bytes,22,opt,name=operator_bonus_usd,json=operatorBonusUsd,proto3" json:"operator_bonus_usd,omitempty"`
+	OperatorBonusReportingCurrency         string                 `protobuf:"bytes,23,opt,name=operator_bonus_reporting_currency,json=operatorBonusReportingCurrency,proto3" json:"operator_bonus_reporting_currency,omitempty"`
+	OperatorBonusAmount                    string                 `protobuf:"bytes,24,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
+	OperatorBonusAmountUsd                 string                 `protobuf:"bytes,25,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
+	OperatorBonusAmountReportingCurrency   string                 `protobuf:"bytes,26,opt,name=operator_bonus_amount_reporting_currency,json=operatorBonusAmountReportingCurrency,proto3" json:"operator_bonus_amount_reporting_currency,omitempty"`
+	OriginalProviderBonus                  string                 `protobuf:"bytes,27,opt,name=original_provider_bonus,json=originalProviderBonus,proto3" json:"original_provider_bonus,omitempty"`
+	OriginalProviderBonusUsd               string                 `protobuf:"bytes,28,opt,name=original_provider_bonus_usd,json=originalProviderBonusUsd,proto3" json:"original_provider_bonus_usd,omitempty"`
+	OriginalProviderBonusReportingCurrency string                 `protobuf:"bytes,29,opt,name=original_provider_bonus_reporting_currency,json=originalProviderBonusReportingCurrency,proto3" json:"original_provider_bonus_reporting_currency,omitempty"`
+	ProviderBonus                          string                 `protobuf:"bytes,30,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	ProviderBonusUsd                       string                 `protobuf:"bytes,31,opt,name=provider_bonus_usd,json=providerBonusUsd,proto3" json:"provider_bonus_usd,omitempty"`
+	ProviderBonusReportingCurrency         string                 `protobuf:"bytes,32,opt,name=provider_bonus_reporting_currency,json=providerBonusReportingCurrency,proto3" json:"provider_bonus_reporting_currency,omitempty"`
+	ProviderBonusAmount                    string                 `protobuf:"bytes,33,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
+	ProviderBonusAmountUsd                 string                 `protobuf:"bytes,34,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
+	ProviderBonusAmountReportingCurrency   string                 `protobuf:"bytes,35,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
+	CreatedAt                              *timestamppb.Timestamp `protobuf:"bytes,36,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                              *timestamppb.Timestamp `protobuf:"bytes,37,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields                          protoimpl.UnknownFields
+	sizeCache                              protoimpl.SizeCache
 }
 
 func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) Reset() {
@@ -6199,6 +6312,13 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOrigin
 	return ""
 }
 
+func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOriginalCashReportingCurrency() string {
+	if x != nil {
+		return x.OriginalCashReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetCash() string {
 	if x != nil {
 		return x.Cash
@@ -6209,6 +6329,13 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetCash()
 func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetCashUsd() string {
 	if x != nil {
 		return x.CashUsd
+	}
+	return ""
+}
+
+func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetCashReportingCurrency() string {
+	if x != nil {
+		return x.CashReportingCurrency
 	}
 	return ""
 }
@@ -6227,6 +6354,13 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetCashAm
 	return ""
 }
 
+func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetCashAmountReportingCurrency() string {
+	if x != nil {
+		return x.CashAmountReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOriginalOperatorBonus() string {
 	if x != nil {
 		return x.OriginalOperatorBonus
@@ -6237,6 +6371,13 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOrigin
 func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOriginalOperatorBonusUsd() string {
 	if x != nil {
 		return x.OriginalOperatorBonusUsd
+	}
+	return ""
+}
+
+func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOriginalOperatorBonusReportingCurrency() string {
+	if x != nil {
+		return x.OriginalOperatorBonusReportingCurrency
 	}
 	return ""
 }
@@ -6255,6 +6396,13 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOperat
 	return ""
 }
 
+func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOperatorBonusReportingCurrency() string {
+	if x != nil {
+		return x.OperatorBonusReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOperatorBonusAmount() string {
 	if x != nil {
 		return x.OperatorBonusAmount
@@ -6265,6 +6413,13 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOperat
 func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOperatorBonusAmountUsd() string {
 	if x != nil {
 		return x.OperatorBonusAmountUsd
+	}
+	return ""
+}
+
+func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOperatorBonusAmountReportingCurrency() string {
+	if x != nil {
+		return x.OperatorBonusAmountReportingCurrency
 	}
 	return ""
 }
@@ -6283,6 +6438,13 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOrigin
 	return ""
 }
 
+func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetOriginalProviderBonusReportingCurrency() string {
+	if x != nil {
+		return x.OriginalProviderBonusReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetProviderBonus() string {
 	if x != nil {
 		return x.ProviderBonus
@@ -6297,6 +6459,13 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetProvid
 	return ""
 }
 
+func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetProviderBonusReportingCurrency() string {
+	if x != nil {
+		return x.ProviderBonusReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetProviderBonusAmount() string {
 	if x != nil {
 		return x.ProviderBonusAmount
@@ -6307,6 +6476,13 @@ func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetProvid
 func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetProviderBonusAmountUsd() string {
 	if x != nil {
 		return x.ProviderBonusAmountUsd
+	}
+	return ""
+}
+
+func (x *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) GetProviderBonusAmountReportingCurrency() string {
+	if x != nil {
+		return x.ProviderBonusAmountReportingCurrency
 	}
 	return ""
 }
@@ -6675,38 +6851,42 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\rexchange_rate\x18\x01 \x01(\tR\fexchangeRate\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\tR\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\"\xb6\x02\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\"\xe5\x02\n" +
 	"\rCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
-	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12%\n" +
-	"\x0etransaction_id\x18\x04 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x05 \x01(\tR\x04cash\x12F\n" +
-	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x1aB\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
+	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12)\n" +
+	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12%\n" +
+	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12\x12\n" +
+	"\x04cash\x18\x06 \x01(\tR\x04cash\x12F\n" +
+	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x1aB\n" +
 	"\x05Ratio\x12\x12\n" +
 	"\x04cash\x18\x01 \x01(\tR\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x02 \x01(\tR\roperatorBonus\"7\n" +
 	"\x0eCreditResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xf1\x01\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xa0\x02\n" +
 	"\fDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
-	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12%\n" +
-	"\x0etransaction_id\x18\x04 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x05 \x01(\tR\x04cash\x12F\n" +
-	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"6\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
+	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12)\n" +
+	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12%\n" +
+	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12\x12\n" +
+	"\x04cash\x18\x06 \x01(\tR\x04cash\x12F\n" +
+	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"6\n" +
 	"\rDebitResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xeb\x02\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\x9a\x03\n" +
 	"\x10GameDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
-	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\x12#\n" +
-	"\rexchange_rate\x18\x04 \x01(\tR\fexchangeRate\x12)\n" +
-	"\x10transaction_type\x18\x05 \x01(\tR\x0ftransactionType\x12%\n" +
-	"\x0etransaction_id\x18\x06 \x01(\x03R\rtransactionId\x12\x16\n" +
-	"\x06amount\x18\a \x01(\tR\x06amount\x12\x1a\n" +
-	"\bturnover\x18\b \x01(\tR\bturnover\x12F\n" +
-	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xe8\x03\n" +
+	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\x12-\n" +
+	"\x12reporting_currency\x18\x04 \x01(\tR\x11reportingCurrency\x12#\n" +
+	"\rexchange_rate\x18\x05 \x01(\tR\fexchangeRate\x12)\n" +
+	"\x10transaction_type\x18\x06 \x01(\tR\x0ftransactionType\x12%\n" +
+	"\x0etransaction_id\x18\a \x01(\x03R\rtransactionId\x12\x16\n" +
+	"\x06amount\x18\b \x01(\tR\x06amount\x12\x1a\n" +
+	"\bturnover\x18\t \x01(\tR\bturnover\x12F\n" +
+	"\x10operator_context\x18\n" +
+	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xdd\x05\n" +
 	"\x11GameDebitResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12#\n" +
 	"\rexchange_rate\x18\x02 \x01(\tR\fexchangeRate\x12\x12\n" +
@@ -6720,17 +6900,22 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0fcash_amount_usd\x18\t \x01(\tR\rcashAmountUsd\x129\n" +
 	"\x19operator_bonus_amount_usd\x18\n" +
 	" \x01(\tR\x16operatorBonusAmountUsd\x129\n" +
-	"\x19provider_bonus_amount_usd\x18\v \x01(\tR\x16providerBonusAmountUsd\"\x88\x03\n" +
+	"\x19provider_bonus_amount_usd\x18\v \x01(\tR\x16providerBonusAmountUsd\x12C\n" +
+	"\x1ecash_amount_reporting_currency\x18\f \x01(\tR\x1bcashAmountReportingCurrency\x12V\n" +
+	"(operator_bonus_amount_reporting_currency\x18\r \x01(\tR$operatorBonusAmountReportingCurrency\x12V\n" +
+	"(provider_bonus_amount_reporting_currency\x18\x0e \x01(\tR$providerBonusAmountReportingCurrency\"\xb7\x03\n" +
 	"\x11GameCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
-	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\x12#\n" +
-	"\rexchange_rate\x18\x04 \x01(\tR\fexchangeRate\x12)\n" +
-	"\x10transaction_type\x18\x05 \x01(\tR\x0ftransactionType\x12%\n" +
-	"\x0etransaction_id\x18\x06 \x01(\x03R\rtransactionId\x126\n" +
-	"\x17original_transaction_id\x18\a \x01(\x03R\x15originalTransactionId\x12\x16\n" +
-	"\x06amount\x18\b \x01(\tR\x06amount\x12F\n" +
-	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xe9\x03\n" +
+	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\x12-\n" +
+	"\x12reporting_currency\x18\x04 \x01(\tR\x11reportingCurrency\x12#\n" +
+	"\rexchange_rate\x18\x05 \x01(\tR\fexchangeRate\x12)\n" +
+	"\x10transaction_type\x18\x06 \x01(\tR\x0ftransactionType\x12%\n" +
+	"\x0etransaction_id\x18\a \x01(\x03R\rtransactionId\x126\n" +
+	"\x17original_transaction_id\x18\b \x01(\x03R\x15originalTransactionId\x12\x16\n" +
+	"\x06amount\x18\t \x01(\tR\x06amount\x12F\n" +
+	"\x10operator_context\x18\n" +
+	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xde\x05\n" +
 	"\x12GameCreditResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12#\n" +
 	"\rexchange_rate\x18\x02 \x01(\tR\fexchangeRate\x12\x12\n" +
@@ -6744,14 +6929,18 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0fcash_amount_usd\x18\t \x01(\tR\rcashAmountUsd\x129\n" +
 	"\x19operator_bonus_amount_usd\x18\n" +
 	" \x01(\tR\x16operatorBonusAmountUsd\x129\n" +
-	"\x19provider_bonus_amount_usd\x18\v \x01(\tR\x16providerBonusAmountUsd\"\xf2\x01\n" +
+	"\x19provider_bonus_amount_usd\x18\v \x01(\tR\x16providerBonusAmountUsd\x12C\n" +
+	"\x1ecash_amount_reporting_currency\x18\f \x01(\tR\x1bcashAmountReportingCurrency\x12V\n" +
+	"(operator_bonus_amount_reporting_currency\x18\r \x01(\tR$operatorBonusAmountReportingCurrency\x12V\n" +
+	"(provider_bonus_amount_reporting_currency\x18\x0e \x01(\tR$providerBonusAmountReportingCurrency\"\xa1\x02\n" +
 	"\rFreezeRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
-	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12%\n" +
-	"\x0etransaction_id\x18\x04 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x05 \x01(\tR\x04cash\x12F\n" +
-	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"7\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
+	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12)\n" +
+	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12%\n" +
+	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12\x12\n" +
+	"\x04cash\x18\x06 \x01(\tR\x04cash\x12F\n" +
+	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"7\n" +
 	"\x0eFreezeResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\x99\x01\n" +
 	"\rSettleRequest\x12)\n" +
@@ -6763,7 +6952,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0fRollbackRequest\x12)\n" +
 	"\x10transaction_type\x18\x01 \x01(\tR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x02 \x01(\x03R\rtransactionId\x126\n" +
-	"\x17original_transaction_id\x18\x03 \x01(\x03R\x15originalTransactionId\"\xc2\x03\n" +
+	"\x17original_transaction_id\x18\x03 \x01(\x03R\x15originalTransactionId\"\xb7\x05\n" +
 	"\x10RollbackResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12%\n" +
@@ -6776,7 +6965,10 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0fcash_amount_usd\x18\b \x01(\tR\rcashAmountUsd\x129\n" +
 	"\x19operator_bonus_amount_usd\x18\t \x01(\tR\x16operatorBonusAmountUsd\x129\n" +
 	"\x19provider_bonus_amount_usd\x18\n" +
-	" \x01(\tR\x16providerBonusAmountUsd\"\x94\x01\n" +
+	" \x01(\tR\x16providerBonusAmountUsd\x12C\n" +
+	"\x1ecash_amount_reporting_currency\x18\v \x01(\tR\x1bcashAmountReportingCurrency\x12V\n" +
+	"(operator_bonus_amount_reporting_currency\x18\f \x01(\tR$operatorBonusAmountReportingCurrency\x12V\n" +
+	"(provider_bonus_amount_reporting_currency\x18\r \x01(\tR$providerBonusAmountReportingCurrency\"\x94\x01\n" +
 	"\x11GetWalletsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1e\n" +
 	"\n" +
@@ -6854,9 +7046,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x16related_transaction_id\x18\t \x01(\x03R\x14relatedTransactionId\"\x9b\x01\n" +
 	"(GetWalletBalanceTransactionsByIdsRequest\x12'\n" +
 	"\x0ftransaction_ids\x18\x01 \x03(\x03R\x0etransactionIds\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xb4\v\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf8\x10\n" +
 	")GetWalletBalanceTransactionsByIdsResponse\x12\x86\x01\n" +
-	"\x14balance_transactions\x18\x01 \x03(\v2S.api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransactionR\x13balanceTransactions\x1a\xfd\t\n" +
+	"\x14balance_transactions\x18\x01 \x03(\v2S.api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransactionR\x13balanceTransactions\x1a\xc1\x0f\n" +
 	"\x12BalanceTransaction\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12/\n" +
@@ -6868,28 +7060,37 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x16related_transaction_id\x18\b \x01(\x03R\x14relatedTransactionId\x12#\n" +
 	"\roriginal_cash\x18\t \x01(\tR\foriginalCash\x12*\n" +
 	"\x11original_cash_usd\x18\n" +
-	" \x01(\tR\x0foriginalCashUsd\x12\x12\n" +
-	"\x04cash\x18\v \x01(\tR\x04cash\x12\x19\n" +
-	"\bcash_usd\x18\f \x01(\tR\acashUsd\x12\x1f\n" +
-	"\vcash_amount\x18\r \x01(\tR\n" +
+	" \x01(\tR\x0foriginalCashUsd\x12G\n" +
+	" original_cash_reporting_currency\x18\v \x01(\tR\x1doriginalCashReportingCurrency\x12\x12\n" +
+	"\x04cash\x18\f \x01(\tR\x04cash\x12\x19\n" +
+	"\bcash_usd\x18\r \x01(\tR\acashUsd\x126\n" +
+	"\x17cash_reporting_currency\x18\x0e \x01(\tR\x15cashReportingCurrency\x12\x1f\n" +
+	"\vcash_amount\x18\x0f \x01(\tR\n" +
 	"cashAmount\x12&\n" +
-	"\x0fcash_amount_usd\x18\x0e \x01(\tR\rcashAmountUsd\x126\n" +
-	"\x17original_operator_bonus\x18\x0f \x01(\tR\x15originalOperatorBonus\x12=\n" +
-	"\x1boriginal_operator_bonus_usd\x18\x10 \x01(\tR\x18originalOperatorBonusUsd\x12%\n" +
-	"\x0eoperator_bonus\x18\x11 \x01(\tR\roperatorBonus\x12,\n" +
-	"\x12operator_bonus_usd\x18\x12 \x01(\tR\x10operatorBonusUsd\x122\n" +
-	"\x15operator_bonus_amount\x18\x13 \x01(\tR\x13operatorBonusAmount\x129\n" +
-	"\x19operator_bonus_amount_usd\x18\x14 \x01(\tR\x16operatorBonusAmountUsd\x126\n" +
-	"\x17original_provider_bonus\x18\x15 \x01(\tR\x15originalProviderBonus\x12=\n" +
-	"\x1boriginal_provider_bonus_usd\x18\x16 \x01(\tR\x18originalProviderBonusUsd\x12%\n" +
-	"\x0eprovider_bonus\x18\x17 \x01(\tR\rproviderBonus\x12,\n" +
-	"\x12provider_bonus_usd\x18\x18 \x01(\tR\x10providerBonusUsd\x122\n" +
-	"\x15provider_bonus_amount\x18\x19 \x01(\tR\x13providerBonusAmount\x129\n" +
-	"\x19provider_bonus_amount_usd\x18\x1a \x01(\tR\x16providerBonusAmountUsd\x129\n" +
+	"\x0fcash_amount_usd\x18\x10 \x01(\tR\rcashAmountUsd\x12C\n" +
+	"\x1ecash_amount_reporting_currency\x18\x11 \x01(\tR\x1bcashAmountReportingCurrency\x126\n" +
+	"\x17original_operator_bonus\x18\x12 \x01(\tR\x15originalOperatorBonus\x12=\n" +
+	"\x1boriginal_operator_bonus_usd\x18\x13 \x01(\tR\x18originalOperatorBonusUsd\x12Z\n" +
+	"*original_operator_bonus_reporting_currency\x18\x14 \x01(\tR&originalOperatorBonusReportingCurrency\x12%\n" +
+	"\x0eoperator_bonus\x18\x15 \x01(\tR\roperatorBonus\x12,\n" +
+	"\x12operator_bonus_usd\x18\x16 \x01(\tR\x10operatorBonusUsd\x12I\n" +
+	"!operator_bonus_reporting_currency\x18\x17 \x01(\tR\x1eoperatorBonusReportingCurrency\x122\n" +
+	"\x15operator_bonus_amount\x18\x18 \x01(\tR\x13operatorBonusAmount\x129\n" +
+	"\x19operator_bonus_amount_usd\x18\x19 \x01(\tR\x16operatorBonusAmountUsd\x12V\n" +
+	"(operator_bonus_amount_reporting_currency\x18\x1a \x01(\tR$operatorBonusAmountReportingCurrency\x126\n" +
+	"\x17original_provider_bonus\x18\x1b \x01(\tR\x15originalProviderBonus\x12=\n" +
+	"\x1boriginal_provider_bonus_usd\x18\x1c \x01(\tR\x18originalProviderBonusUsd\x12Z\n" +
+	"*original_provider_bonus_reporting_currency\x18\x1d \x01(\tR&originalProviderBonusReportingCurrency\x12%\n" +
+	"\x0eprovider_bonus\x18\x1e \x01(\tR\rproviderBonus\x12,\n" +
+	"\x12provider_bonus_usd\x18\x1f \x01(\tR\x10providerBonusUsd\x12I\n" +
+	"!provider_bonus_reporting_currency\x18  \x01(\tR\x1eproviderBonusReportingCurrency\x122\n" +
+	"\x15provider_bonus_amount\x18! \x01(\tR\x13providerBonusAmount\x129\n" +
+	"\x19provider_bonus_amount_usd\x18\" \x01(\tR\x16providerBonusAmountUsd\x12V\n" +
+	"(provider_bonus_amount_reporting_currency\x18# \x01(\tR$providerBonusAmountReportingCurrency\x129\n" +
 	"\n" +
-	"created_at\x18\x1b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18$ \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x1c \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xdb\x01\n" +
+	"updated_at\x18% \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xdb\x01\n" +
 	"\"GetWalletCreditTransactionsRequest\x12\x1b\n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\bcreditId\x12\x17\n" +
 	"\x04page\x18\x02 \x01(\x03H\x00R\x04page\x88\x01\x01\x12 \n" +
@@ -7156,15 +7357,14 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\vcash_amount\x18\x03 \x01(\tR\n" +
 	"cashAmount\x12&\n" +
 	"\x0fcash_amount_usd\x18\x04 \x01(\tR\rcashAmountUsd\x12C\n" +
-	"\x1ecash_amount_reporting_currency\x18\x05 \x01(\tR\x1bcashAmountReportingCurrency\"\xfa\x02\n" +
+	"\x1ecash_amount_reporting_currency\x18\x05 \x01(\tR\x1bcashAmountReportingCurrency\"\xcb\x02\n" +
 	"\x15OperatorSettleRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
-	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12;\n" +
-	"\x17external_transaction_id\x18\x04 \x01(\x03H\x00R\x15externalTransactionId\x88\x01\x01\x126\n" +
-	"\x17original_transaction_id\x18\x05 \x01(\x03R\x15originalTransactionId\x12)\n" +
-	"\x10transaction_type\x18\x06 \x01(\tR\x0ftransactionType\x12\x12\n" +
-	"\x04memo\x18\a \x01(\tR\x04memoB\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12;\n" +
+	"\x17external_transaction_id\x18\x03 \x01(\x03H\x00R\x15externalTransactionId\x88\x01\x01\x126\n" +
+	"\x17original_transaction_id\x18\x04 \x01(\x03R\x15originalTransactionId\x12)\n" +
+	"\x10transaction_type\x18\x05 \x01(\tR\x0ftransactionType\x12\x12\n" +
+	"\x04memo\x18\x06 \x01(\tR\x04memoB\x1a\n" +
 	"\x18_external_transaction_id\"\xe1\x01\n" +
 	"\x16OperatorSettleResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +

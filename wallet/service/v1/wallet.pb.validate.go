@@ -519,6 +519,8 @@ func (m *CreditRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for ReportingCurrency
+
 	// no validation rules for TransactionType
 
 	// no validation rules for TransactionId
@@ -759,6 +761,8 @@ func (m *DebitRequest) validate(all bool) error {
 	// no validation rules for UserId
 
 	// no validation rules for Currency
+
+	// no validation rules for ReportingCurrency
 
 	// no validation rules for TransactionType
 
@@ -1002,6 +1006,8 @@ func (m *GameDebitRequest) validate(all bool) error {
 
 	// no validation rules for SettlementCurrency
 
+	// no validation rules for ReportingCurrency
+
 	// no validation rules for ExchangeRate
 
 	// no validation rules for TransactionType
@@ -1163,6 +1169,12 @@ func (m *GameDebitResponse) validate(all bool) error {
 
 	// no validation rules for ProviderBonusAmountUsd
 
+	// no validation rules for CashAmountReportingCurrency
+
+	// no validation rules for OperatorBonusAmountReportingCurrency
+
+	// no validation rules for ProviderBonusAmountReportingCurrency
+
 	if len(errors) > 0 {
 		return GameDebitResponseMultiError(errors)
 	}
@@ -1270,6 +1282,8 @@ func (m *GameCreditRequest) validate(all bool) error {
 	// no validation rules for Currency
 
 	// no validation rules for SettlementCurrency
+
+	// no validation rules for ReportingCurrency
 
 	// no validation rules for ExchangeRate
 
@@ -1434,6 +1448,12 @@ func (m *GameCreditResponse) validate(all bool) error {
 
 	// no validation rules for ProviderBonusAmountUsd
 
+	// no validation rules for CashAmountReportingCurrency
+
+	// no validation rules for OperatorBonusAmountReportingCurrency
+
+	// no validation rules for ProviderBonusAmountReportingCurrency
+
 	if len(errors) > 0 {
 		return GameCreditResponseMultiError(errors)
 	}
@@ -1539,6 +1559,8 @@ func (m *FreezeRequest) validate(all bool) error {
 	// no validation rules for UserId
 
 	// no validation rules for Currency
+
+	// no validation rules for ReportingCurrency
 
 	// no validation rules for TransactionType
 
@@ -2110,6 +2132,12 @@ func (m *RollbackResponse) validate(all bool) error {
 	// no validation rules for OperatorBonusAmountUsd
 
 	// no validation rules for ProviderBonusAmountUsd
+
+	// no validation rules for CashAmountReportingCurrency
+
+	// no validation rules for OperatorBonusAmountReportingCurrency
+
+	// no validation rules for ProviderBonusAmountReportingCurrency
 
 	if len(errors) > 0 {
 		return RollbackResponseMultiError(errors)
@@ -7901,8 +7929,6 @@ func (m *OperatorSettleRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for ReportingCurrency
-
 	// no validation rules for OriginalTransactionId
 
 	// no validation rules for TransactionType
@@ -10910,37 +10936,55 @@ func (m *GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction) validate(
 
 	// no validation rules for OriginalCashUsd
 
+	// no validation rules for OriginalCashReportingCurrency
+
 	// no validation rules for Cash
 
 	// no validation rules for CashUsd
+
+	// no validation rules for CashReportingCurrency
 
 	// no validation rules for CashAmount
 
 	// no validation rules for CashAmountUsd
 
+	// no validation rules for CashAmountReportingCurrency
+
 	// no validation rules for OriginalOperatorBonus
 
 	// no validation rules for OriginalOperatorBonusUsd
+
+	// no validation rules for OriginalOperatorBonusReportingCurrency
 
 	// no validation rules for OperatorBonus
 
 	// no validation rules for OperatorBonusUsd
 
+	// no validation rules for OperatorBonusReportingCurrency
+
 	// no validation rules for OperatorBonusAmount
 
 	// no validation rules for OperatorBonusAmountUsd
+
+	// no validation rules for OperatorBonusAmountReportingCurrency
 
 	// no validation rules for OriginalProviderBonus
 
 	// no validation rules for OriginalProviderBonusUsd
 
+	// no validation rules for OriginalProviderBonusReportingCurrency
+
 	// no validation rules for ProviderBonus
 
 	// no validation rules for ProviderBonusUsd
 
+	// no validation rules for ProviderBonusReportingCurrency
+
 	// no validation rules for ProviderBonusAmount
 
 	// no validation rules for ProviderBonusAmountUsd
+
+	// no validation rules for ProviderBonusAmountReportingCurrency
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
