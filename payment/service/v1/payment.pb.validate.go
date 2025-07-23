@@ -3048,7 +3048,7 @@ func (m *InitiateOperatorWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for ChannelId
 
-	// no validation rules for Momo
+	// no validation rules for Memo
 
 	if all {
 		switch v := interface{}(m.GetExtra()).(type) {
