@@ -1947,6 +1947,122 @@ func (m *GetTicketResponse) validate(all bool) error {
 
 	}
 
+	if all {
+		switch v := interface{}(m.GetUserInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTicketResponseValidationError{
+					field:  "UserInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTicketResponseValidationError{
+					field:  "UserInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUserInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTicketResponseValidationError{
+				field:  "UserInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetPaymentTransactionInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTicketResponseValidationError{
+					field:  "PaymentTransactionInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTicketResponseValidationError{
+					field:  "PaymentTransactionInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPaymentTransactionInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTicketResponseValidationError{
+				field:  "PaymentTransactionInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetWalletTransactionInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTicketResponseValidationError{
+					field:  "WalletTransactionInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTicketResponseValidationError{
+					field:  "WalletTransactionInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWalletTransactionInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTicketResponseValidationError{
+				field:  "WalletTransactionInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetWalletTransactionSummary()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTicketResponseValidationError{
+					field:  "WalletTransactionSummary",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTicketResponseValidationError{
+					field:  "WalletTransactionSummary",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWalletTransactionSummary()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTicketResponseValidationError{
+				field:  "WalletTransactionSummary",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetTicketResponseMultiError(errors)
 	}
@@ -2250,11 +2366,11 @@ func (m *GetOperatorTicketResponse) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetPaymentWithdrawTransactionInfo()).(type) {
+		switch v := interface{}(m.GetPaymentTransactionInfo()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, GetOperatorTicketResponseValidationError{
-					field:  "PaymentWithdrawTransactionInfo",
+					field:  "PaymentTransactionInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -2262,16 +2378,16 @@ func (m *GetOperatorTicketResponse) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, GetOperatorTicketResponseValidationError{
-					field:  "PaymentWithdrawTransactionInfo",
+					field:  "PaymentTransactionInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetPaymentWithdrawTransactionInfo()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetPaymentTransactionInfo()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return GetOperatorTicketResponseValidationError{
-				field:  "PaymentWithdrawTransactionInfo",
+				field:  "PaymentTransactionInfo",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -2644,49 +2760,44 @@ func (m *GetTicketResponse_Ticket) validate(all bool) error {
 
 	// no validation rules for Type
 
-	// no validation rules for Request
+	// no validation rules for Status
 
-	// no validation rules for Response
+	// no validation rules for OperatorName
 
-	// no validation rules for UserId
+	// no validation rules for CompanyOperatorName
 
-	// no validation rules for OperatorId
+	// no validation rules for RetailerOperatorName
 
-	// no validation rules for Currency
+	// no validation rules for SystemOperatorName
 
-	// no validation rules for TicketStatus
-
-	// no validation rules for ReviewerUserId
-
-	// no validation rules for ReviewerComment
-
-	// no validation rules for PaymentChannelId
-
-	// no validation rules for PaymentChannelName
-
-	// no validation rules for PaymentStatus
-
-	// no validation rules for PaymentTransactionId
-
-	// no validation rules for PaymentTransactionError
-
-	// no validation rules for WalletStatus
-
-	// no validation rules for WalletFreezeTransactionId
-
-	// no validation rules for WalletSettleTransactionId
-
-	// no validation rules for WalletSettleError
-
-	// no validation rules for WalletRollbackTransactionId
-
-	// no validation rules for WalletRollbackError
-
-	// no validation rules for CreatedAt
-
-	// no validation rules for UpdatedAt
-
-	// no validation rules for ReviewedAt
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTicketResponse_TicketValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTicketResponse_TicketValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTicketResponse_TicketValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return GetTicketResponse_TicketMultiError(errors)
@@ -2794,11 +2905,38 @@ func (m *GetTicketResponse_Comment) validate(all bool) error {
 
 	// no validation rules for TicketId
 
-	// no validation rules for AuthorUserId
+	// no validation rules for AuthorUsername
 
 	// no validation rules for Content
 
-	// no validation rules for CreatedAt
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTicketResponse_CommentValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTicketResponse_CommentValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTicketResponse_CommentValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return GetTicketResponse_CommentMultiError(errors)
@@ -2879,6 +3017,580 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetTicketResponse_CommentValidationError{}
+
+// Validate checks the field values on GetTicketResponse_UserInfo with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetTicketResponse_UserInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetTicketResponse_UserInfo with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetTicketResponse_UserInfoMultiError, or nil if none found.
+func (m *GetTicketResponse_UserInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTicketResponse_UserInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for VipLevel
+
+	if len(errors) > 0 {
+		return GetTicketResponse_UserInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTicketResponse_UserInfoMultiError is an error wrapping multiple
+// validation errors returned by GetTicketResponse_UserInfo.ValidateAll() if
+// the designated constraints aren't met.
+type GetTicketResponse_UserInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTicketResponse_UserInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTicketResponse_UserInfoMultiError) AllErrors() []error { return m }
+
+// GetTicketResponse_UserInfoValidationError is the validation error returned
+// by GetTicketResponse_UserInfo.Validate if the designated constraints aren't met.
+type GetTicketResponse_UserInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTicketResponse_UserInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTicketResponse_UserInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTicketResponse_UserInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTicketResponse_UserInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTicketResponse_UserInfoValidationError) ErrorName() string {
+	return "GetTicketResponse_UserInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTicketResponse_UserInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTicketResponse_UserInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTicketResponse_UserInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTicketResponse_UserInfoValidationError{}
+
+// Validate checks the field values on GetTicketResponse_PaymentTransactionInfo
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetTicketResponse_PaymentTransactionInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetTicketResponse_PaymentTransactionInfo with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetTicketResponse_PaymentTransactionInfoMultiError, or nil if none found.
+func (m *GetTicketResponse_PaymentTransactionInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTicketResponse_PaymentTransactionInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	// no validation rules for Amount
+
+	// no validation rules for AmountUsd
+
+	// no validation rules for PaymentChannel
+
+	// no validation rules for Protocol
+
+	// no validation rules for Fee
+
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTicketResponse_PaymentTransactionInfoValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTicketResponse_PaymentTransactionInfoValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTicketResponse_PaymentTransactionInfoValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetSchema()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTicketResponse_PaymentTransactionInfoValidationError{
+					field:  "Schema",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTicketResponse_PaymentTransactionInfoValidationError{
+					field:  "Schema",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSchema()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTicketResponse_PaymentTransactionInfoValidationError{
+				field:  "Schema",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTicketResponse_PaymentTransactionInfoValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTicketResponse_PaymentTransactionInfoValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTicketResponse_PaymentTransactionInfoValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetTicketResponse_PaymentTransactionInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTicketResponse_PaymentTransactionInfoMultiError is an error wrapping
+// multiple validation errors returned by
+// GetTicketResponse_PaymentTransactionInfo.ValidateAll() if the designated
+// constraints aren't met.
+type GetTicketResponse_PaymentTransactionInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTicketResponse_PaymentTransactionInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTicketResponse_PaymentTransactionInfoMultiError) AllErrors() []error { return m }
+
+// GetTicketResponse_PaymentTransactionInfoValidationError is the validation
+// error returned by GetTicketResponse_PaymentTransactionInfo.Validate if the
+// designated constraints aren't met.
+type GetTicketResponse_PaymentTransactionInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTicketResponse_PaymentTransactionInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTicketResponse_PaymentTransactionInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTicketResponse_PaymentTransactionInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTicketResponse_PaymentTransactionInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTicketResponse_PaymentTransactionInfoValidationError) ErrorName() string {
+	return "GetTicketResponse_PaymentTransactionInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTicketResponse_PaymentTransactionInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTicketResponse_PaymentTransactionInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTicketResponse_PaymentTransactionInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTicketResponse_PaymentTransactionInfoValidationError{}
+
+// Validate checks the field values on GetTicketResponse_WalletTransactionInfo
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetTicketResponse_WalletTransactionInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetTicketResponse_WalletTransactionInfo with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// GetTicketResponse_WalletTransactionInfoMultiError, or nil if none found.
+func (m *GetTicketResponse_WalletTransactionInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTicketResponse_WalletTransactionInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	// no validation rules for Amount
+
+	// no validation rules for BeforeBalance
+
+	// no validation rules for AfterBalance
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTicketResponse_WalletTransactionInfoValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTicketResponse_WalletTransactionInfoValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTicketResponse_WalletTransactionInfoValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetTicketResponse_WalletTransactionInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTicketResponse_WalletTransactionInfoMultiError is an error wrapping
+// multiple validation errors returned by
+// GetTicketResponse_WalletTransactionInfo.ValidateAll() if the designated
+// constraints aren't met.
+type GetTicketResponse_WalletTransactionInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTicketResponse_WalletTransactionInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTicketResponse_WalletTransactionInfoMultiError) AllErrors() []error { return m }
+
+// GetTicketResponse_WalletTransactionInfoValidationError is the validation
+// error returned by GetTicketResponse_WalletTransactionInfo.Validate if the
+// designated constraints aren't met.
+type GetTicketResponse_WalletTransactionInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTicketResponse_WalletTransactionInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTicketResponse_WalletTransactionInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTicketResponse_WalletTransactionInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTicketResponse_WalletTransactionInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTicketResponse_WalletTransactionInfoValidationError) ErrorName() string {
+	return "GetTicketResponse_WalletTransactionInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTicketResponse_WalletTransactionInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTicketResponse_WalletTransactionInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTicketResponse_WalletTransactionInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTicketResponse_WalletTransactionInfoValidationError{}
+
+// Validate checks the field values on
+// GetTicketResponse_WalletTransactionSummary with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetTicketResponse_WalletTransactionSummary) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetTicketResponse_WalletTransactionSummary with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetTicketResponse_WalletTransactionSummaryMultiError, or nil if none found.
+func (m *GetTicketResponse_WalletTransactionSummary) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTicketResponse_WalletTransactionSummary) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalDepositUsd
+
+	// no validation rules for TotalWithdrawUsd
+
+	// no validation rules for TotalDepositMinusWithdrawUsd
+
+	// no validation rules for ValidTurnoverUsd
+
+	// no validation rules for TotalDepositCount
+
+	// no validation rules for TotalWithdrawCount
+
+	// no validation rules for TodayWithdrawCount
+
+	if len(errors) > 0 {
+		return GetTicketResponse_WalletTransactionSummaryMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTicketResponse_WalletTransactionSummaryMultiError is an error wrapping
+// multiple validation errors returned by
+// GetTicketResponse_WalletTransactionSummary.ValidateAll() if the designated
+// constraints aren't met.
+type GetTicketResponse_WalletTransactionSummaryMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTicketResponse_WalletTransactionSummaryMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTicketResponse_WalletTransactionSummaryMultiError) AllErrors() []error { return m }
+
+// GetTicketResponse_WalletTransactionSummaryValidationError is the validation
+// error returned by GetTicketResponse_WalletTransactionSummary.Validate if
+// the designated constraints aren't met.
+type GetTicketResponse_WalletTransactionSummaryValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTicketResponse_WalletTransactionSummaryValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTicketResponse_WalletTransactionSummaryValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTicketResponse_WalletTransactionSummaryValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTicketResponse_WalletTransactionSummaryValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTicketResponse_WalletTransactionSummaryValidationError) ErrorName() string {
+	return "GetTicketResponse_WalletTransactionSummaryValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTicketResponse_WalletTransactionSummaryValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTicketResponse_WalletTransactionSummary.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTicketResponse_WalletTransactionSummaryValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTicketResponse_WalletTransactionSummaryValidationError{}
 
 // Validate checks the field values on GetOperatorTicketResponse_Ticket with
 // the rules defined in the proto definition for this message. If any rules
@@ -3171,24 +3883,23 @@ var _ interface {
 } = GetOperatorTicketResponse_CommentValidationError{}
 
 // Validate checks the field values on
-// GetOperatorTicketResponse_PaymentWithdrawTransactionInfo with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetOperatorTicketResponse_PaymentWithdrawTransactionInfo) Validate() error {
+// GetOperatorTicketResponse_PaymentTransactionInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetOperatorTicketResponse_PaymentTransactionInfo) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// GetOperatorTicketResponse_PaymentWithdrawTransactionInfo with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GetOperatorTicketResponse_PaymentWithdrawTransactionInfoMultiError, or nil
-// if none found.
-func (m *GetOperatorTicketResponse_PaymentWithdrawTransactionInfo) ValidateAll() error {
+// GetOperatorTicketResponse_PaymentTransactionInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// GetOperatorTicketResponse_PaymentTransactionInfoMultiError, or nil if none found.
+func (m *GetOperatorTicketResponse_PaymentTransactionInfo) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetOperatorTicketResponse_PaymentWithdrawTransactionInfo) validate(all bool) error {
+func (m *GetOperatorTicketResponse_PaymentTransactionInfo) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3215,7 +3926,7 @@ func (m *GetOperatorTicketResponse_PaymentWithdrawTransactionInfo) validate(all 
 		switch v := interface{}(m.GetCreatedAt()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError{
+				errors = append(errors, GetOperatorTicketResponse_PaymentTransactionInfoValidationError{
 					field:  "CreatedAt",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3223,7 +3934,7 @@ func (m *GetOperatorTicketResponse_PaymentWithdrawTransactionInfo) validate(all 
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError{
+				errors = append(errors, GetOperatorTicketResponse_PaymentTransactionInfoValidationError{
 					field:  "CreatedAt",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3232,7 +3943,7 @@ func (m *GetOperatorTicketResponse_PaymentWithdrawTransactionInfo) validate(all 
 		}
 	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError{
+			return GetOperatorTicketResponse_PaymentTransactionInfoValidationError{
 				field:  "CreatedAt",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -3241,20 +3952,20 @@ func (m *GetOperatorTicketResponse_PaymentWithdrawTransactionInfo) validate(all 
 	}
 
 	if len(errors) > 0 {
-		return GetOperatorTicketResponse_PaymentWithdrawTransactionInfoMultiError(errors)
+		return GetOperatorTicketResponse_PaymentTransactionInfoMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetOperatorTicketResponse_PaymentWithdrawTransactionInfoMultiError is an
-// error wrapping multiple validation errors returned by
-// GetOperatorTicketResponse_PaymentWithdrawTransactionInfo.ValidateAll() if
-// the designated constraints aren't met.
-type GetOperatorTicketResponse_PaymentWithdrawTransactionInfoMultiError []error
+// GetOperatorTicketResponse_PaymentTransactionInfoMultiError is an error
+// wrapping multiple validation errors returned by
+// GetOperatorTicketResponse_PaymentTransactionInfo.ValidateAll() if the
+// designated constraints aren't met.
+type GetOperatorTicketResponse_PaymentTransactionInfoMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetOperatorTicketResponse_PaymentWithdrawTransactionInfoMultiError) Error() string {
+func (m GetOperatorTicketResponse_PaymentTransactionInfoMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3263,15 +3974,13 @@ func (m GetOperatorTicketResponse_PaymentWithdrawTransactionInfoMultiError) Erro
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetOperatorTicketResponse_PaymentWithdrawTransactionInfoMultiError) AllErrors() []error {
-	return m
-}
+func (m GetOperatorTicketResponse_PaymentTransactionInfoMultiError) AllErrors() []error { return m }
 
-// GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError is
-// the validation error returned by
-// GetOperatorTicketResponse_PaymentWithdrawTransactionInfo.Validate if the
-// designated constraints aren't met.
-type GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError struct {
+// GetOperatorTicketResponse_PaymentTransactionInfoValidationError is the
+// validation error returned by
+// GetOperatorTicketResponse_PaymentTransactionInfo.Validate if the designated
+// constraints aren't met.
+type GetOperatorTicketResponse_PaymentTransactionInfoValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3279,32 +3988,30 @@ type GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError str
 }
 
 // Field function returns field value.
-func (e GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError) Field() string {
+func (e GetOperatorTicketResponse_PaymentTransactionInfoValidationError) Field() string {
 	return e.field
 }
 
 // Reason function returns reason value.
-func (e GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError) Reason() string {
+func (e GetOperatorTicketResponse_PaymentTransactionInfoValidationError) Reason() string {
 	return e.reason
 }
 
 // Cause function returns cause value.
-func (e GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError) Cause() error {
+func (e GetOperatorTicketResponse_PaymentTransactionInfoValidationError) Cause() error {
 	return e.cause
 }
 
 // Key function returns key value.
-func (e GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError) Key() bool {
-	return e.key
-}
+func (e GetOperatorTicketResponse_PaymentTransactionInfoValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError) ErrorName() string {
-	return "GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError"
+func (e GetOperatorTicketResponse_PaymentTransactionInfoValidationError) ErrorName() string {
+	return "GetOperatorTicketResponse_PaymentTransactionInfoValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError) Error() string {
+func (e GetOperatorTicketResponse_PaymentTransactionInfoValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3316,14 +4023,14 @@ func (e GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError)
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetOperatorTicketResponse_PaymentWithdrawTransactionInfo.%s: %s%s",
+		"invalid %sGetOperatorTicketResponse_PaymentTransactionInfo.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError{}
+var _ error = GetOperatorTicketResponse_PaymentTransactionInfoValidationError{}
 
 var _ interface {
 	Field() string
@@ -3331,7 +4038,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetOperatorTicketResponse_PaymentWithdrawTransactionInfoValidationError{}
+} = GetOperatorTicketResponse_PaymentTransactionInfoValidationError{}
 
 // Validate checks the field values on
 // GetOperatorTicketResponse_WalletBalanceInfo with the rules defined in the

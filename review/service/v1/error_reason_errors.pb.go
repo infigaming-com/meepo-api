@@ -335,26 +335,38 @@ func ErrorGetPaymentChannelFailed(format string, args ...interface{}) *errors.Er
 	return errors.New(500, ErrorReason_GET_PAYMENT_CHANNEL_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsOperatorIdsNotInContext(err error) bool {
+func IsOperatorPermissionDenied(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_OPERATOR_IDS_NOT_IN_CONTEXT.String() && e.Code == 500
+	return e.Reason == ErrorReason_OPERATOR_PERMISSION_DENIED.String() && e.Code == 500
 }
 
-func ErrorOperatorIdsNotInContext(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_OPERATOR_IDS_NOT_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+func ErrorOperatorPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsOperatorIdsNotInOperatorContext(err error) bool {
+func IsGetOperatorNameFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_OPERATOR_IDS_NOT_IN_OPERATOR_CONTEXT.String() && e.Code == 500
+	return e.Reason == ErrorReason_GET_OPERATOR_NAME_FAILED.String() && e.Code == 500
 }
 
-func ErrorOperatorIdsNotInOperatorContext(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_OPERATOR_IDS_NOT_IN_OPERATOR_CONTEXT.String(), fmt.Sprintf(format, args...))
+func ErrorGetOperatorNameFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_NAME_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetWalletTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_WALLET_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetWalletTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_WALLET_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
 }
