@@ -922,3 +922,15 @@ func IsOperatorBalanceNotFound(err error) bool {
 func ErrorOperatorBalanceNotFound(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_OPERATOR_BALANCE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetReportingCurrencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_REPORTING_CURRENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetReportingCurrencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_REPORTING_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
+}
