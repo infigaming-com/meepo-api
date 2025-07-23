@@ -10340,7 +10340,8 @@ components:
                     type: string
                     description: Minimum Fee
                 schema:
-                    type: object
+                    allOf:
+                        - $ref: '#/components/schemas/google.protobuf.ListValue'
                     description: JSON schema defining deposit form fields required by this channel
                 source:
                     type: string
