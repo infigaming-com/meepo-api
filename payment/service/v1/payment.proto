@@ -253,7 +253,7 @@ message PaymentChannelInfo {
   // Minimum Fee 
   string sys_min_fee = 31;
   // JSON schema defining deposit form fields required by this channel
-  google.protobuf.Struct schema = 32;
+  google.protobuf.ListValue schema = 32;
   // Source operator
   string source = 33;
   string source_type = 34;

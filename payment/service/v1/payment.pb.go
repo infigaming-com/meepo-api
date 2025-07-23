@@ -1359,7 +1359,7 @@ type PaymentChannelInfo struct {
 	// Minimum Fee
 	SysMinFee string `protobuf:"bytes,31,opt,name=sys_min_fee,json=sysMinFee,proto3" json:"sys_min_fee,omitempty"`
 	// JSON schema defining deposit form fields required by this channel
-	Schema *structpb.Struct `protobuf:"bytes,32,opt,name=schema,proto3" json:"schema,omitempty"`
+	Schema *structpb.ListValue `protobuf:"bytes,32,opt,name=schema,proto3" json:"schema,omitempty"`
 	// Source operator
 	Source     string `protobuf:"bytes,33,opt,name=source,proto3" json:"source,omitempty"`
 	SourceType string `protobuf:"bytes,34,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
@@ -1618,7 +1618,7 @@ func (x *PaymentChannelInfo) GetSysMinFee() string {
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetSchema() *structpb.Struct {
+func (x *PaymentChannelInfo) GetSchema() *structpb.ListValue {
 	if x != nil {
 		return x.Schema
 	}
@@ -4416,7 +4416,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xea\b\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xed\b\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12!\n" +
@@ -4455,8 +4455,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\rsys_fixed_fee\x18\x1d \x01(\tR\vsysFixedFee\x12 \n" +
 	"\fsys_fee_rate\x18\x1e \x01(\tR\n" +
 	"sysFeeRate\x12\x1e\n" +
-	"\vsys_min_fee\x18\x1f \x01(\tR\tsysMinFee\x12/\n" +
-	"\x06schema\x18  \x01(\v2\x17.google.protobuf.StructR\x06schema\x12\x16\n" +
+	"\vsys_min_fee\x18\x1f \x01(\tR\tsysMinFee\x122\n" +
+	"\x06schema\x18  \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\x12\x16\n" +
 	"\x06source\x18! \x01(\tR\x06source\x12\x1f\n" +
 	"\vsource_type\x18\" \x01(\tR\n" +
 	"sourceType\x12\x16\n" +
@@ -4820,7 +4820,7 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	47, // 6: payment.service.v1.CreatePaymentChannelRequest.operator_context:type_name -> api.common.OperatorContext
 	48, // 7: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
 	48, // 8: payment.service.v1.UpdatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
-	48, // 9: payment.service.v1.PaymentChannelInfo.schema:type_name -> google.protobuf.Struct
+	46, // 9: payment.service.v1.PaymentChannelInfo.schema:type_name -> google.protobuf.ListValue
 	48, // 10: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
 	49, // 11: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
 	48, // 12: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
