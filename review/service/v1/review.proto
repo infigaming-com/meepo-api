@@ -154,38 +154,59 @@ message GetTicketResponse {
 	message Ticket {
 		int64 id = 1;
 		string type = 2;
-		string request = 3;
-		string response = 4;
-		int64 user_id = 5;
-		int64 operator_id = 6;
-		string currency = 7;
-		string ticket_status = 8;
-		int64 reviewer_user_id = 9;
-		string reviewer_comment = 10;
-		string payment_channel_id = 11;
-		string payment_channel_name = 12;
-		string payment_status = 13;
-		int64 payment_transaction_id = 14;
-		string payment_transaction_error = 15;
-		string wallet_status = 16;
-		int64 wallet_freeze_transaction_id = 17;
-		int64 wallet_settle_transaction_id = 18;
-		string wallet_settle_error = 19;
-		int64 wallet_rollback_transaction_id = 20;
-		string wallet_rollback_error = 21;
-		int64 created_at = 22;
-		int64 updated_at = 23;
-		int64 reviewed_at = 24;
+		string status = 3;
+		string operator_name = 4;
+		string company_operator_name = 5;
+		string retailer_operator_name = 6;
+		string system_operator_name = 7;
+		google.protobuf.Timestamp created_at = 8;
 	}
 	message Comment {
 		int64 id = 1;
 		int64 ticket_id = 2;
-		int64 author_user_id = 3;
+		string author_username = 3;
 		string content = 4;
-		int64 created_at = 5;
+		google.protobuf.Timestamp created_at = 5;
+	}
+	message UserInfo {
+		int64 user_id = 1;
+		int32 vip_level = 2;
+		repeated string user_tags = 3;
+		repeated string linked_accounts = 4;
+	}
+	message PaymentTransactionInfo {
+		string currency = 1;
+		string amount = 2;
+		string amount_usd = 3;
+		string payment_channel = 4;
+		string protocol = 5;
+		string fee = 6;
+		google.protobuf.Struct extra = 7;
+		google.protobuf.Struct schema = 8;
+		google.protobuf.Timestamp created_at = 9;
+	}
+	message WalletTransactionInfo{
+		int64 transaction_id = 1;
+		string amount = 2;
+		string before_balance = 3;
+		string after_balance = 4;
+		google.protobuf.Timestamp created_at = 6;
+	}
+	message WalletTransactionSummary {
+		string total_deposit_usd = 1;
+		string total_withdraw_usd = 2;
+		string total_deposit_minus_withdraw_usd = 3;
+		string valid_turnover_usd = 4;
+		int32 total_deposit_count = 5;
+		int32 total_withdraw_count = 6;
+		int32 today_withdraw_count = 7;
 	}
 	Ticket ticket = 1;
 	repeated Comment comments = 2;
+	UserInfo user_info = 3;
+	PaymentTransactionInfo payment_transaction_info = 4;
+	WalletTransactionInfo wallet_transaction_info = 5;
+	WalletTransactionSummary wallet_transaction_summary = 6;
 }
 
 message GetOperatorTicketRequest {
@@ -214,7 +235,7 @@ message GetOperatorTicketResponse {
 		string content = 4;
 		google.protobuf.Timestamp created_at = 5;
 	}
-	message PaymentWithdrawTransactionInfo {
+	message PaymentTransactionInfo {
 		string currency = 1;
 		string protocol = 2;
 		string address = 3;
@@ -245,7 +266,7 @@ message GetOperatorTicketResponse {
 	}
 	Ticket ticket = 1;
 	repeated Comment comments = 2;
-	PaymentWithdrawTransactionInfo payment_withdraw_transaction_info = 3;
+	PaymentTransactionInfo payment_transaction_info = 3;
 	WalletBalanceInfo wallet_balance_info = 4;
 	WalletTransactionInfo wallet_transaction_info = 5;
 	WalletTransactionSummary wallet_transaction_summary = 6;

@@ -158,3 +158,9 @@ func IsOperatorIdsInOperatorContext(operatorIds OperatorIds, operatorContext *co
 	}
 	return false
 }
+
+func NewOperatorContextWithIds(operatorId, companyOperatorId, retailerOperatorId, systemOperatorId int64) *common.OperatorContext {
+	operatorIds := NewOperatorIds(operatorId, companyOperatorId, retailerOperatorId, systemOperatorId)
+	operatorContext := operatorIds.GetOperatorContext()
+	return &operatorContext
+}

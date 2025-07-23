@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/review/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -37,8 +38,8 @@ type BackofficeReviewClient interface {
 	CreateOperatorWithdraw(ctx context.Context, in *CreateOperatorWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
 	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
 	ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
-	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error)
-	GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...grpc.CallOption) (*GetOperatorTicketResponse, error)
+	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*v1.GetTicketResponse, error)
+	GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...grpc.CallOption) (*v1.GetOperatorTicketResponse, error)
 	ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error)
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
 	CancelTicket(ctx context.Context, in *CancelTicketRequest, opts ...grpc.CallOption) (*CancelTicketResponse, error)
@@ -83,9 +84,9 @@ func (c *backofficeReviewClient) ListOperatorTickets(ctx context.Context, in *Li
 	return out, nil
 }
 
-func (c *backofficeReviewClient) GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error) {
+func (c *backofficeReviewClient) GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*v1.GetTicketResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTicketResponse)
+	out := new(v1.GetTicketResponse)
 	err := c.cc.Invoke(ctx, BackofficeReview_GetTicket_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -93,9 +94,9 @@ func (c *backofficeReviewClient) GetTicket(ctx context.Context, in *GetTicketReq
 	return out, nil
 }
 
-func (c *backofficeReviewClient) GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...grpc.CallOption) (*GetOperatorTicketResponse, error) {
+func (c *backofficeReviewClient) GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...grpc.CallOption) (*v1.GetOperatorTicketResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOperatorTicketResponse)
+	out := new(v1.GetOperatorTicketResponse)
 	err := c.cc.Invoke(ctx, BackofficeReview_GetOperatorTicket_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -150,8 +151,8 @@ type BackofficeReviewServer interface {
 	CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error)
 	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
 	ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*ListTicketsResponse, error)
-	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
-	GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*GetOperatorTicketResponse, error)
+	GetTicket(context.Context, *GetTicketRequest) (*v1.GetTicketResponse, error)
+	GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*v1.GetOperatorTicketResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
 	CancelTicket(context.Context, *CancelTicketRequest) (*CancelTicketResponse, error)
@@ -175,10 +176,10 @@ func (UnimplementedBackofficeReviewServer) ListTickets(context.Context, *ListTic
 func (UnimplementedBackofficeReviewServer) ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*ListTicketsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorTickets not implemented")
 }
-func (UnimplementedBackofficeReviewServer) GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error) {
+func (UnimplementedBackofficeReviewServer) GetTicket(context.Context, *GetTicketRequest) (*v1.GetTicketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTicket not implemented")
 }
-func (UnimplementedBackofficeReviewServer) GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*GetOperatorTicketResponse, error) {
+func (UnimplementedBackofficeReviewServer) GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*v1.GetOperatorTicketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorTicket not implemented")
 }
 func (UnimplementedBackofficeReviewServer) ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error) {

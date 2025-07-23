@@ -10,6 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	v1 "github.com/infigaming-com/meepo-api/review/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -33,8 +34,8 @@ type BackofficeReviewHTTPServer interface {
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
 	CancelTicket(context.Context, *CancelTicketRequest) (*CancelTicketResponse, error)
 	CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error)
-	GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*GetOperatorTicketResponse, error)
-	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
+	GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*v1.GetOperatorTicketResponse, error)
+	GetTicket(context.Context, *GetTicketRequest) (*v1.GetTicketResponse, error)
 	GetTicketById(context.Context, *GetTicketByIdRequest) (*GetTicketByIdResponse, error)
 	ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*ListTicketsResponse, error)
 	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
@@ -137,7 +138,7 @@ func _BackofficeReview_GetTicket0_HTTP_Handler(srv BackofficeReviewHTTPServer) f
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetTicketResponse)
+		reply := out.(*v1.GetTicketResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -159,7 +160,7 @@ func _BackofficeReview_GetOperatorTicket0_HTTP_Handler(srv BackofficeReviewHTTPS
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetOperatorTicketResponse)
+		reply := out.(*v1.GetOperatorTicketResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -256,8 +257,8 @@ type BackofficeReviewHTTPClient interface {
 	AddComment(ctx context.Context, req *AddCommentRequest, opts ...http.CallOption) (rsp *AddCommentResponse, err error)
 	CancelTicket(ctx context.Context, req *CancelTicketRequest, opts ...http.CallOption) (rsp *CancelTicketResponse, err error)
 	CreateOperatorWithdraw(ctx context.Context, req *CreateOperatorWithdrawRequest, opts ...http.CallOption) (rsp *CreateWithdrawResponse, err error)
-	GetOperatorTicket(ctx context.Context, req *GetOperatorTicketRequest, opts ...http.CallOption) (rsp *GetOperatorTicketResponse, err error)
-	GetTicket(ctx context.Context, req *GetTicketRequest, opts ...http.CallOption) (rsp *GetTicketResponse, err error)
+	GetOperatorTicket(ctx context.Context, req *GetOperatorTicketRequest, opts ...http.CallOption) (rsp *v1.GetOperatorTicketResponse, err error)
+	GetTicket(ctx context.Context, req *GetTicketRequest, opts ...http.CallOption) (rsp *v1.GetTicketResponse, err error)
 	GetTicketById(ctx context.Context, req *GetTicketByIdRequest, opts ...http.CallOption) (rsp *GetTicketByIdResponse, err error)
 	ListOperatorTickets(ctx context.Context, req *ListOperatorTicketsRequest, opts ...http.CallOption) (rsp *ListTicketsResponse, err error)
 	ListTickets(ctx context.Context, req *ListTicketsRequest, opts ...http.CallOption) (rsp *ListTicketsResponse, err error)
@@ -311,8 +312,8 @@ func (c *BackofficeReviewHTTPClientImpl) CreateOperatorWithdraw(ctx context.Cont
 	return &out, nil
 }
 
-func (c *BackofficeReviewHTTPClientImpl) GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...http.CallOption) (*GetOperatorTicketResponse, error) {
-	var out GetOperatorTicketResponse
+func (c *BackofficeReviewHTTPClientImpl) GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...http.CallOption) (*v1.GetOperatorTicketResponse, error) {
+	var out v1.GetOperatorTicketResponse
 	pattern := "/v1/backoffice/review/operator/tickets/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReviewGetOperatorTicket))
@@ -324,8 +325,8 @@ func (c *BackofficeReviewHTTPClientImpl) GetOperatorTicket(ctx context.Context, 
 	return &out, nil
 }
 
-func (c *BackofficeReviewHTTPClientImpl) GetTicket(ctx context.Context, in *GetTicketRequest, opts ...http.CallOption) (*GetTicketResponse, error) {
-	var out GetTicketResponse
+func (c *BackofficeReviewHTTPClientImpl) GetTicket(ctx context.Context, in *GetTicketRequest, opts ...http.CallOption) (*v1.GetTicketResponse, error) {
+	var out v1.GetTicketResponse
 	pattern := "/v1/backoffice/review/tickets/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReviewGetTicket))
