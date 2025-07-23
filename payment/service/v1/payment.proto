@@ -405,8 +405,8 @@ message InitiateOperatorWithdrawRequest {
   api.common.OperatorContext operator_context = 6;
   // ID of the channel to use for withdrawal
   string channel_id = 7;
-  // momo of crypto
-  string momo = 8;
+  // memo of crypto
+  string memo = 8;
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
   google.protobuf.Struct extra = 9;

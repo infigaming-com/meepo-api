@@ -2263,8 +2263,8 @@ type InitiateOperatorWithdrawRequest struct {
 	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// ID of the channel to use for withdrawal
 	ChannelId string `protobuf:"bytes,7,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// momo of crypto
-	Momo string `protobuf:"bytes,8,opt,name=momo,proto3" json:"momo,omitempty"`
+	// memo of crypto
+	Memo string `protobuf:"bytes,8,opt,name=memo,proto3" json:"memo,omitempty"`
 	// Additional information needed for the withdrawal
 	// May include account details, clientId, note, etc.
 	Extra         *structpb.Struct `protobuf:"bytes,9,opt,name=extra,proto3" json:"extra,omitempty"`
@@ -2351,9 +2351,9 @@ func (x *InitiateOperatorWithdrawRequest) GetChannelId() string {
 	return ""
 }
 
-func (x *InitiateOperatorWithdrawRequest) GetMomo() string {
+func (x *InitiateOperatorWithdrawRequest) GetMemo() string {
 	if x != nil {
-		return x.Momo
+		return x.Memo
 	}
 	return ""
 }
@@ -4527,7 +4527,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\a \x01(\tR\tchannelId\x12\x12\n" +
-	"\x04momo\x18\b \x01(\tR\x04momo\x12-\n" +
+	"\x04memo\x18\b \x01(\tR\x04memo\x12-\n" +
 	"\x05extra\x18\t \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xe0\x01\n" +
 	" InitiateOperatorWithdrawResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
