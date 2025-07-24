@@ -532,6 +532,7 @@ type GameDebitRequest struct {
 	Amount          string                  `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"`
 	Turnover        string                  `protobuf:"bytes,9,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	AllowOverdraft  *bool                   `protobuf:"varint,11,opt,name=allow_overdraft,json=allowOverdraft,proto3,oneof" json:"allow_overdraft,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -634,6 +635,13 @@ func (x *GameDebitRequest) GetOperatorContext() *common.OperatorContext {
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *GameDebitRequest) GetAllowOverdraft() bool {
+	if x != nil && x.AllowOverdraft != nil {
+		return *x.AllowOverdraft
+	}
+	return false
 }
 
 type GameDebitResponse struct {
@@ -6874,7 +6882,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x04cash\x18\x06 \x01(\tR\x04cash\x12F\n" +
 	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"6\n" +
 	"\rDebitResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\x9a\x03\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xdc\x03\n" +
 	"\x10GameDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
@@ -6886,7 +6894,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x06amount\x18\b \x01(\tR\x06amount\x12\x1a\n" +
 	"\bturnover\x18\t \x01(\tR\bturnover\x12F\n" +
 	"\x10operator_context\x18\n" +
-	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xdd\x05\n" +
+	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12,\n" +
+	"\x0fallow_overdraft\x18\v \x01(\bH\x00R\x0eallowOverdraft\x88\x01\x01B\x12\n" +
+	"\x10_allow_overdraft\"\xdd\x05\n" +
 	"\x11GameDebitResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12#\n" +
 	"\rexchange_rate\x18\x02 \x01(\tR\fexchangeRate\x12\x12\n" +
@@ -7777,6 +7787,7 @@ func file_wallet_service_v1_wallet_proto_init() {
 	if File_wallet_service_v1_wallet_proto != nil {
 		return
 	}
+	file_wallet_service_v1_wallet_proto_msgTypes[8].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[20].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[24].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[28].OneofWrappers = []any{}
