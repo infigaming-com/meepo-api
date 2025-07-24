@@ -182,7 +182,7 @@ message GetTicketResponse {
 		string protocol = 5;
 		string fee = 6;
 		google.protobuf.Struct extra = 7;
-		google.protobuf.Struct schema = 8;
+		google.protobuf.ListValue schema = 8;
 		google.protobuf.Timestamp created_at = 9;
 	}
 	message WalletTransactionInfo{

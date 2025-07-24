@@ -9346,7 +9346,7 @@ components:
                 extra:
                     type: object
                 schema:
-                    type: object
+                    $ref: '#/components/schemas/google.protobuf.ListValue'
                 createdAt:
                     type: string
                     format: date-time

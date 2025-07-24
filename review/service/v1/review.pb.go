@@ -1624,7 +1624,7 @@ type GetTicketResponse_PaymentTransactionInfo struct {
 	Protocol       string                 `protobuf:"bytes,5,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	Fee            string                 `protobuf:"bytes,6,opt,name=fee,proto3" json:"fee,omitempty"`
 	Extra          *structpb.Struct       `protobuf:"bytes,7,opt,name=extra,proto3" json:"extra,omitempty"`
-	Schema         *structpb.Struct       `protobuf:"bytes,8,opt,name=schema,proto3" json:"schema,omitempty"`
+	Schema         *structpb.ListValue    `protobuf:"bytes,8,opt,name=schema,proto3" json:"schema,omitempty"`
 	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -1709,7 +1709,7 @@ func (x *GetTicketResponse_PaymentTransactionInfo) GetExtra() *structpb.Struct {
 	return nil
 }
 
-func (x *GetTicketResponse_PaymentTransactionInfo) GetSchema() *structpb.Struct {
+func (x *GetTicketResponse_PaymentTransactionInfo) GetSchema() *structpb.ListValue {
 	if x != nil {
 		return x.Schema
 	}
@@ -2503,7 +2503,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
 	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x13\n" +
-	"\x11_include_comments\"\xb2\x11\n" +
+	"\x11_include_comments\"\xb5\x11\n" +
 	"\x11GetTicketResponse\x12G\n" +
 	"\x06ticket\x18\x01 \x01(\v2/.api.review.service.v1.GetTicketResponse.TicketR\x06ticket\x12L\n" +
 	"\bcomments\x18\x02 \x03(\v20.api.review.service.v1.GetTicketResponse.CommentR\bcomments\x12N\n" +
@@ -2532,7 +2532,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tvip_level\x18\x02 \x01(\x05R\bvipLevel\x12\x1b\n" +
 	"\tuser_tags\x18\x03 \x03(\tR\buserTags\x12'\n" +
-	"\x0flinked_accounts\x18\x04 \x03(\tR\x0elinkedAccounts\x1a\xdd\x02\n" +
+	"\x0flinked_accounts\x18\x04 \x03(\tR\x0elinkedAccounts\x1a\xe0\x02\n" +
 	"\x16PaymentTransactionInfo\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\tR\x06amount\x12\x1d\n" +
@@ -2541,8 +2541,8 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x0fpayment_channel\x18\x04 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
 	"\bprotocol\x18\x05 \x01(\tR\bprotocol\x12\x10\n" +
 	"\x03fee\x18\x06 \x01(\tR\x03fee\x12-\n" +
-	"\x05extra\x18\a \x01(\v2\x17.google.protobuf.StructR\x05extra\x12/\n" +
-	"\x06schema\x18\b \x01(\v2\x17.google.protobuf.StructR\x06schema\x129\n" +
+	"\x05extra\x18\a \x01(\v2\x17.google.protobuf.StructR\x05extra\x122\n" +
+	"\x06schema\x18\b \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\x129\n" +
 	"\n" +
 	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xdd\x01\n" +
 	"\x15WalletTransactionInfo\x12%\n" +
@@ -2676,6 +2676,7 @@ var file_review_service_v1_review_proto_goTypes = []any{
 	(*common.OperatorContext)(nil),                             // 30: api.common.OperatorContext
 	(*common.OperatorContextFilters)(nil),                      // 31: api.common.OperatorContextFilters
 	(*timestamppb.Timestamp)(nil),                              // 32: google.protobuf.Timestamp
+	(*structpb.ListValue)(nil),                                 // 33: google.protobuf.ListValue
 }
 var file_review_service_v1_review_proto_depIdxs = []int32{
 	29, // 0: api.review.service.v1.CreateWithdrawRequest.request:type_name -> google.protobuf.Struct
@@ -2708,7 +2709,7 @@ var file_review_service_v1_review_proto_depIdxs = []int32{
 	32, // 27: api.review.service.v1.GetTicketResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
 	32, // 28: api.review.service.v1.GetTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
 	29, // 29: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.extra:type_name -> google.protobuf.Struct
-	29, // 30: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.schema:type_name -> google.protobuf.Struct
+	33, // 30: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.schema:type_name -> google.protobuf.ListValue
 	32, // 31: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
 	32, // 32: api.review.service.v1.GetTicketResponse.WalletTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
 	32, // 33: api.review.service.v1.GetOperatorTicketResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
