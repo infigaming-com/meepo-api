@@ -10354,6 +10354,9 @@ components:
                 contact:
                     type: string
                     description: Contact
+                eat:
+                    type: integer
+                    format: int32
             description: |-
                 Payment channel information
                  Detailed information about a specific payment channel
@@ -10536,6 +10539,14 @@ components:
                     type: string
                     description: Timestamp when the transaction was last updated
                     format: date-time
+                amountUsd:
+                    type: string
+                    description: Transaction amount in USD
+                amountSent:
+                    type: string
+                    description: Transaction amount actually sent through
+                gas:
+                    type: string
             description: |-
                 Transaction information
                  Detailed information about a specific transaction

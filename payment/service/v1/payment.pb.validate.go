@@ -1674,6 +1674,8 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for Contact
 
+	// no validation rules for Eat
+
 	if len(errors) > 0 {
 		return PaymentChannelInfoMultiError(errors)
 	}
@@ -3891,6 +3893,12 @@ func (m *TransactionInfo) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for AmountUsd
+
+	// no validation rules for AmountSent
+
+	// no validation rules for Gas
 
 	if len(errors) > 0 {
 		return TransactionInfoMultiError(errors)

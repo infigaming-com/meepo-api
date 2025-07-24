@@ -261,6 +261,7 @@ message PaymentChannelInfo {
   bool enable = 35;
   // Contact
   string contact = 36;
+  int32 eat = 37;
 }
 
 // Request to initiate a deposit
@@ -602,6 +603,11 @@ message TransactionInfo {
   google.protobuf.Timestamp created_at = 24;
   // Timestamp when the transaction was last updated
   google.protobuf.Timestamp updated_at = 25;
+  // Transaction amount in USD
+  string amount_usd = 26;
+  // Transaction amount actually sent through
+  string amount_sent = 27;
+  string gas = 28;
 }
 
 message TransactionDetail {
