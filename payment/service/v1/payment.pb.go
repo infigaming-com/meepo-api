@@ -1367,6 +1367,7 @@ type PaymentChannelInfo struct {
 	Enable bool `protobuf:"varint,35,opt,name=enable,proto3" json:"enable,omitempty"`
 	// Contact
 	Contact       string `protobuf:"bytes,36,opt,name=contact,proto3" json:"contact,omitempty"`
+	Eat           int32  `protobuf:"varint,37,opt,name=eat,proto3" json:"eat,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1651,6 +1652,13 @@ func (x *PaymentChannelInfo) GetContact() string {
 		return x.Contact
 	}
 	return ""
+}
+
+func (x *PaymentChannelInfo) GetEat() int32 {
+	if x != nil {
+		return x.Eat
+	}
+	return 0
 }
 
 // Request to initiate a deposit
@@ -2898,7 +2906,11 @@ type TransactionInfo struct {
 	// Timestamp when the transaction was created
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,24,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Timestamp when the transaction was last updated
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,25,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,25,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Transaction amount in USD
+	AmountUsd string `protobuf:"bytes,26,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	// Transaction amount actually sent through
+	AmountSent    string `protobuf:"bytes,27,opt,name=amount_sent,json=amountSent,proto3" json:"amount_sent,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3106,6 +3118,20 @@ func (x *TransactionInfo) GetUpdatedAt() *timestamppb.Timestamp {
 		return x.UpdatedAt
 	}
 	return nil
+}
+
+func (x *TransactionInfo) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetAmountSent() string {
+	if x != nil {
+		return x.AmountSent
+	}
+	return ""
 }
 
 type TransactionDetail struct {
@@ -4416,7 +4442,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xed\b\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xff\b\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12!\n" +
@@ -4461,7 +4487,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\vsource_type\x18\" \x01(\tR\n" +
 	"sourceType\x12\x16\n" +
 	"\x06enable\x18# \x01(\bR\x06enable\x12\x18\n" +
-	"\acontact\x18$ \x01(\tR\acontact\"\x9a\x01\n" +
+	"\acontact\x18$ \x01(\tR\acontact\x12\x10\n" +
+	"\x03eat\x18% \x01(\x05R\x03eat\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
@@ -4572,7 +4599,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05nonce\x18\f \x01(\tR\x05nonce\"N\n" +
 	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xa0\b\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xe0\b\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x124\n" +
@@ -4602,7 +4629,11 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x18 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x19 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x9c\x01\n" +
+	"updated_at\x18\x19 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x1d\n" +
+	"\n" +
+	"amount_usd\x18\x1a \x01(\tR\tamountUsd\x12\x1f\n" +
+	"\vamount_sent\x18\x1b \x01(\tR\n" +
+	"amountSent\"\x9c\x01\n" +
 	"\x11TransactionDetail\x12E\n" +
 	"\vtransaction\x18\x01 \x01(\v2#.payment.service.v1.TransactionInfoR\vtransaction\x12@\n" +
 	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xfb\x06\n" +
