@@ -3898,6 +3898,8 @@ func (m *TransactionInfo) validate(all bool) error {
 
 	// no validation rules for AmountSent
 
+	// no validation rules for Gas
+
 	if len(errors) > 0 {
 		return TransactionInfoMultiError(errors)
 	}

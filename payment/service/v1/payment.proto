@@ -607,6 +607,7 @@ message TransactionInfo {
   string amount_usd = 26;
   // Transaction amount actually sent through
   string amount_sent = 27;
+  string gas = 28;
 }
 
 message TransactionDetail {

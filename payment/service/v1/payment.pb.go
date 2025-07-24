@@ -2911,6 +2911,7 @@ type TransactionInfo struct {
 	AmountUsd string `protobuf:"bytes,26,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
 	// Transaction amount actually sent through
 	AmountSent    string `protobuf:"bytes,27,opt,name=amount_sent,json=amountSent,proto3" json:"amount_sent,omitempty"`
+	Gas           string `protobuf:"bytes,28,opt,name=gas,proto3" json:"gas,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3130,6 +3131,13 @@ func (x *TransactionInfo) GetAmountUsd() string {
 func (x *TransactionInfo) GetAmountSent() string {
 	if x != nil {
 		return x.AmountSent
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetGas() string {
+	if x != nil {
+		return x.Gas
 	}
 	return ""
 }
@@ -4599,7 +4607,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05nonce\x18\f \x01(\tR\x05nonce\"N\n" +
 	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xe0\b\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xf2\b\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x124\n" +
@@ -4633,7 +4641,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	"amount_usd\x18\x1a \x01(\tR\tamountUsd\x12\x1f\n" +
 	"\vamount_sent\x18\x1b \x01(\tR\n" +
-	"amountSent\"\x9c\x01\n" +
+	"amountSent\x12\x10\n" +
+	"\x03gas\x18\x1c \x01(\tR\x03gas\"\x9c\x01\n" +
 	"\x11TransactionDetail\x12E\n" +
 	"\vtransaction\x18\x01 \x01(\v2#.payment.service.v1.TransactionInfoR\vtransaction\x12@\n" +
 	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xfb\x06\n" +

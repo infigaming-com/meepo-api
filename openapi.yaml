@@ -10545,6 +10545,8 @@ components:
                 amountSent:
                     type: string
                     description: Transaction amount actually sent through
+                gas:
+                    type: string
             description: |-
                 Transaction information
                  Detailed information about a specific transaction
