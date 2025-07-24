@@ -84,16 +84,14 @@ func (x *TimeRange) GetEndTime() string {
 }
 
 type GetSummaryRequest struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	TimeRange             *TimeRange             `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
-	RetailerOperatorIds   []int64                `protobuf:"varint,2,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
-	GroupOperatorIds      []int64                `protobuf:"varint,3,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
-	OperatorIds           []int64                `protobuf:"varint,4,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	AffiliateCodes        []string               `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
-	ReferralCodes         []string               `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
-	RegistrationCountries []string               `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	AffiliateCodes         []string                       `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
+	ReferralCodes          []string                       `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
+	RegistrationCountries  []string                       `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetSummaryRequest) Reset() {
@@ -133,23 +131,9 @@ func (x *GetSummaryRequest) GetTimeRange() *TimeRange {
 	return nil
 }
 
-func (x *GetSummaryRequest) GetRetailerOperatorIds() []int64 {
+func (x *GetSummaryRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
-		return x.RetailerOperatorIds
-	}
-	return nil
-}
-
-func (x *GetSummaryRequest) GetGroupOperatorIds() []int64 {
-	if x != nil {
-		return x.GroupOperatorIds
-	}
-	return nil
-}
-
-func (x *GetSummaryRequest) GetOperatorIds() []int64 {
-	if x != nil {
-		return x.OperatorIds
+		return x.OperatorContextFilters
 	}
 	return nil
 }
@@ -332,18 +316,16 @@ func (x *GetSummaryResponse) GetArppu() string {
 }
 
 type ListSummariesRequest struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	TimeRange             *TimeRange             `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
-	RetailerOperatorIds   []int64                `protobuf:"varint,2,rep,packed,name=retailer_operator_ids,json=retailerOperatorIds,proto3" json:"retailer_operator_ids,omitempty"`
-	GroupOperatorIds      []int64                `protobuf:"varint,3,rep,packed,name=group_operator_ids,json=groupOperatorIds,proto3" json:"group_operator_ids,omitempty"`
-	OperatorIds           []int64                `protobuf:"varint,4,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
-	AffiliateCodes        []string               `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
-	ReferralCodes         []string               `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
-	RegistrationCountries []string               `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
-	Page                  *int32                 `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize              *int32                 `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	AffiliateCodes         []string                       `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
+	ReferralCodes          []string                       `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
+	RegistrationCountries  []string                       `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
+	Page                   *int32                         `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListSummariesRequest) Reset() {
@@ -383,23 +365,9 @@ func (x *ListSummariesRequest) GetTimeRange() *TimeRange {
 	return nil
 }
 
-func (x *ListSummariesRequest) GetRetailerOperatorIds() []int64 {
+func (x *ListSummariesRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
-		return x.RetailerOperatorIds
-	}
-	return nil
-}
-
-func (x *ListSummariesRequest) GetGroupOperatorIds() []int64 {
-	if x != nil {
-		return x.GroupOperatorIds
-	}
-	return nil
-}
-
-func (x *ListSummariesRequest) GetOperatorIds() []int64 {
-	if x != nil {
-		return x.OperatorIds
+		return x.OperatorContextFilters
 	}
 	return nil
 }
@@ -2167,46 +2135,49 @@ type ListSummariesResponse_List struct {
 	state                      protoimpl.MessageState `protogen:"open.v1"`
 	Date                       string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
 	OperatorName               string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	Country                    string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	Visits                     int32                  `protobuf:"varint,4,opt,name=visits,proto3" json:"visits,omitempty"`
-	UniqueVisits               int32                  `protobuf:"varint,5,opt,name=unique_visits,json=uniqueVisits,proto3" json:"unique_visits,omitempty"`
-	RegisteredUsers            int32                  `protobuf:"varint,6,opt,name=registered_users,json=registeredUsers,proto3" json:"registered_users,omitempty"`
-	DepositedUsers             int32                  `protobuf:"varint,7,opt,name=deposited_users,json=depositedUsers,proto3" json:"deposited_users,omitempty"`
-	FtdUsers                   int32                  `protobuf:"varint,8,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
-	RepeatedDepositedUsers     int32                  `protobuf:"varint,9,opt,name=repeated_deposited_users,json=repeatedDepositedUsers,proto3" json:"repeated_deposited_users,omitempty"`
-	DepositConversionRate      string                 `protobuf:"bytes,10,opt,name=deposit_conversion_rate,json=depositConversionRate,proto3" json:"deposit_conversion_rate,omitempty"`
-	DepositCount               int32                  `protobuf:"varint,11,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
-	DepositAmount              string                 `protobuf:"bytes,12,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
-	Arpu                       string                 `protobuf:"bytes,13,opt,name=arpu,proto3" json:"arpu,omitempty"`
-	Arppu                      string                 `protobuf:"bytes,14,opt,name=arppu,proto3" json:"arppu,omitempty"`
-	AverageFtdAmount           string                 `protobuf:"bytes,15,opt,name=average_ftd_amount,json=averageFtdAmount,proto3" json:"average_ftd_amount,omitempty"`
-	WithdrawAmount             string                 `protobuf:"bytes,16,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
-	WithdrawedUsers            int32                  `protobuf:"varint,17,opt,name=withdrawed_users,json=withdrawedUsers,proto3" json:"withdrawed_users,omitempty"`
-	FtwUsers                   int32                  `protobuf:"varint,18,opt,name=ftw_users,json=ftwUsers,proto3" json:"ftw_users,omitempty"`
-	AverageWithdrawAmount      string                 `protobuf:"bytes,19,opt,name=average_withdraw_amount,json=averageWithdrawAmount,proto3" json:"average_withdraw_amount,omitempty"`
-	FtwAmount                  string                 `protobuf:"bytes,20,opt,name=ftw_amount,json=ftwAmount,proto3" json:"ftw_amount,omitempty"`
-	AverageFtwAmount           string                 `protobuf:"bytes,21,opt,name=average_ftw_amount,json=averageFtwAmount,proto3" json:"average_ftw_amount,omitempty"`
-	WuToAuPercentage           string                 `protobuf:"bytes,22,opt,name=wu_to_au_percentage,json=wuToAuPercentage,proto3" json:"wu_to_au_percentage,omitempty"`
-	WuToDuPercentage           string                 `protobuf:"bytes,23,opt,name=wu_to_du_percentage,json=wuToDuPercentage,proto3" json:"wu_to_du_percentage,omitempty"`
-	DepositMinusWithdrawAmount string                 `protobuf:"bytes,24,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
-	WToDPercentage             string                 `protobuf:"bytes,25,opt,name=w_to_d_percentage,json=wToDPercentage,proto3" json:"w_to_d_percentage,omitempty"`
-	Turnover                   string                 `protobuf:"bytes,26,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	DepositBonus               string                 `protobuf:"bytes,27,opt,name=deposit_bonus,json=depositBonus,proto3" json:"deposit_bonus,omitempty"`
-	RebateBonus                string                 `protobuf:"bytes,28,opt,name=rebate_bonus,json=rebateBonus,proto3" json:"rebate_bonus,omitempty"`
-	LossRebate                 string                 `protobuf:"bytes,29,opt,name=loss_rebate,json=lossRebate,proto3" json:"loss_rebate,omitempty"`
-	VipBonus                   string                 `protobuf:"bytes,30,opt,name=vip_bonus,json=vipBonus,proto3" json:"vip_bonus,omitempty"`
-	OtherBonus                 string                 `protobuf:"bytes,31,opt,name=other_bonus,json=otherBonus,proto3" json:"other_bonus,omitempty"`
-	ReferralCommission         string                 `protobuf:"bytes,32,opt,name=referral_commission,json=referralCommission,proto3" json:"referral_commission,omitempty"`
-	DepositFeeSubsidyAmount    string                 `protobuf:"bytes,33,opt,name=deposit_fee_subsidy_amount,json=depositFeeSubsidyAmount,proto3" json:"deposit_fee_subsidy_amount,omitempty"`
-	PlayerWithdrawFee          string                 `protobuf:"bytes,34,opt,name=player_withdraw_fee,json=playerWithdrawFee,proto3" json:"player_withdraw_fee,omitempty"`
-	OperatorWithdrawFee        string                 `protobuf:"bytes,35,opt,name=operator_withdraw_fee,json=operatorWithdrawFee,proto3" json:"operator_withdraw_fee,omitempty"`
-	CashBalance                string                 `protobuf:"bytes,36,opt,name=cash_balance,json=cashBalance,proto3" json:"cash_balance,omitempty"`
-	BonusBalance               string                 `protobuf:"bytes,37,opt,name=bonus_balance,json=bonusBalance,proto3" json:"bonus_balance,omitempty"`
-	LockedBalance              string                 `protobuf:"bytes,38,opt,name=locked_balance,json=lockedBalance,proto3" json:"locked_balance,omitempty"`
-	Ggr                        string                 `protobuf:"bytes,39,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	Ngr                        string                 `protobuf:"bytes,40,opt,name=ngr,proto3" json:"ngr,omitempty"`
-	GgrToNgrPercentage         string                 `protobuf:"bytes,41,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`
-	HouseEdgePercentage        string                 `protobuf:"bytes,42,opt,name=house_edge_percentage,json=houseEdgePercentage,proto3" json:"house_edge_percentage,omitempty"`
+	CompanyOperatorName        string                 `protobuf:"bytes,3,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName       string                 `protobuf:"bytes,4,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName         string                 `protobuf:"bytes,5,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	Country                    string                 `protobuf:"bytes,6,opt,name=country,proto3" json:"country,omitempty"`
+	Visits                     int32                  `protobuf:"varint,7,opt,name=visits,proto3" json:"visits,omitempty"`
+	UniqueVisits               int32                  `protobuf:"varint,8,opt,name=unique_visits,json=uniqueVisits,proto3" json:"unique_visits,omitempty"`
+	RegisteredUsers            int32                  `protobuf:"varint,9,opt,name=registered_users,json=registeredUsers,proto3" json:"registered_users,omitempty"`
+	DepositedUsers             int32                  `protobuf:"varint,10,opt,name=deposited_users,json=depositedUsers,proto3" json:"deposited_users,omitempty"`
+	FtdUsers                   int32                  `protobuf:"varint,11,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
+	RepeatedDepositedUsers     int32                  `protobuf:"varint,12,opt,name=repeated_deposited_users,json=repeatedDepositedUsers,proto3" json:"repeated_deposited_users,omitempty"`
+	DepositConversionRate      string                 `protobuf:"bytes,13,opt,name=deposit_conversion_rate,json=depositConversionRate,proto3" json:"deposit_conversion_rate,omitempty"`
+	DepositCount               int32                  `protobuf:"varint,14,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	DepositAmount              string                 `protobuf:"bytes,15,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
+	Arpu                       string                 `protobuf:"bytes,16,opt,name=arpu,proto3" json:"arpu,omitempty"`
+	Arppu                      string                 `protobuf:"bytes,17,opt,name=arppu,proto3" json:"arppu,omitempty"`
+	AverageFtdAmount           string                 `protobuf:"bytes,18,opt,name=average_ftd_amount,json=averageFtdAmount,proto3" json:"average_ftd_amount,omitempty"`
+	WithdrawAmount             string                 `protobuf:"bytes,19,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
+	WithdrawedUsers            int32                  `protobuf:"varint,20,opt,name=withdrawed_users,json=withdrawedUsers,proto3" json:"withdrawed_users,omitempty"`
+	FtwUsers                   int32                  `protobuf:"varint,21,opt,name=ftw_users,json=ftwUsers,proto3" json:"ftw_users,omitempty"`
+	AverageWithdrawAmount      string                 `protobuf:"bytes,22,opt,name=average_withdraw_amount,json=averageWithdrawAmount,proto3" json:"average_withdraw_amount,omitempty"`
+	FtwAmount                  string                 `protobuf:"bytes,23,opt,name=ftw_amount,json=ftwAmount,proto3" json:"ftw_amount,omitempty"`
+	AverageFtwAmount           string                 `protobuf:"bytes,24,opt,name=average_ftw_amount,json=averageFtwAmount,proto3" json:"average_ftw_amount,omitempty"`
+	WuToAuPercentage           string                 `protobuf:"bytes,25,opt,name=wu_to_au_percentage,json=wuToAuPercentage,proto3" json:"wu_to_au_percentage,omitempty"`
+	WuToDuPercentage           string                 `protobuf:"bytes,26,opt,name=wu_to_du_percentage,json=wuToDuPercentage,proto3" json:"wu_to_du_percentage,omitempty"`
+	DepositMinusWithdrawAmount string                 `protobuf:"bytes,27,opt,name=deposit_minus_withdraw_amount,json=depositMinusWithdrawAmount,proto3" json:"deposit_minus_withdraw_amount,omitempty"`
+	WToDPercentage             string                 `protobuf:"bytes,28,opt,name=w_to_d_percentage,json=wToDPercentage,proto3" json:"w_to_d_percentage,omitempty"`
+	Turnover                   string                 `protobuf:"bytes,29,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	DepositBonus               string                 `protobuf:"bytes,30,opt,name=deposit_bonus,json=depositBonus,proto3" json:"deposit_bonus,omitempty"`
+	RebateBonus                string                 `protobuf:"bytes,31,opt,name=rebate_bonus,json=rebateBonus,proto3" json:"rebate_bonus,omitempty"`
+	LossRebate                 string                 `protobuf:"bytes,32,opt,name=loss_rebate,json=lossRebate,proto3" json:"loss_rebate,omitempty"`
+	VipBonus                   string                 `protobuf:"bytes,33,opt,name=vip_bonus,json=vipBonus,proto3" json:"vip_bonus,omitempty"`
+	OtherBonus                 string                 `protobuf:"bytes,34,opt,name=other_bonus,json=otherBonus,proto3" json:"other_bonus,omitempty"`
+	ReferralCommission         string                 `protobuf:"bytes,35,opt,name=referral_commission,json=referralCommission,proto3" json:"referral_commission,omitempty"`
+	DepositFeeSubsidyAmount    string                 `protobuf:"bytes,36,opt,name=deposit_fee_subsidy_amount,json=depositFeeSubsidyAmount,proto3" json:"deposit_fee_subsidy_amount,omitempty"`
+	PlayerWithdrawFee          string                 `protobuf:"bytes,37,opt,name=player_withdraw_fee,json=playerWithdrawFee,proto3" json:"player_withdraw_fee,omitempty"`
+	OperatorWithdrawFee        string                 `protobuf:"bytes,38,opt,name=operator_withdraw_fee,json=operatorWithdrawFee,proto3" json:"operator_withdraw_fee,omitempty"`
+	CashBalance                string                 `protobuf:"bytes,39,opt,name=cash_balance,json=cashBalance,proto3" json:"cash_balance,omitempty"`
+	BonusBalance               string                 `protobuf:"bytes,40,opt,name=bonus_balance,json=bonusBalance,proto3" json:"bonus_balance,omitempty"`
+	LockedBalance              string                 `protobuf:"bytes,41,opt,name=locked_balance,json=lockedBalance,proto3" json:"locked_balance,omitempty"`
+	Ggr                        string                 `protobuf:"bytes,42,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	Ngr                        string                 `protobuf:"bytes,43,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	GgrToNgrPercentage         string                 `protobuf:"bytes,44,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`
+	HouseEdgePercentage        string                 `protobuf:"bytes,45,opt,name=house_edge_percentage,json=houseEdgePercentage,proto3" json:"house_edge_percentage,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -2251,6 +2222,27 @@ func (x *ListSummariesResponse_List) GetDate() string {
 func (x *ListSummariesResponse_List) GetOperatorName() string {
 	if x != nil {
 		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *ListSummariesResponse_List) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *ListSummariesResponse_List) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *ListSummariesResponse_List) GetSystemOperatorName() string {
+	if x != nil {
+		return x.SystemOperatorName
 	}
 	return ""
 }
@@ -4510,13 +4502,11 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"start_time\x18\x02 \x01(\tH\x00R\tstartTime\x88\x01\x01\x12\x1e\n" +
 	"\bend_time\x18\x03 \x01(\tH\x01R\aendTime\x88\x01\x01B\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\xe4\x02\n" +
+	"\t_end_time\"\xbd\x02\n" +
 	"\x11GetSummaryRequest\x12C\n" +
 	"\n" +
-	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
-	"\x15retailer_operator_ids\x18\x02 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
-	"\x12group_operator_ids\x18\x03 \x03(\x03R\x10groupOperatorIds\x12!\n" +
-	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12'\n" +
+	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12'\n" +
 	"\x0faffiliate_codes\x18\x05 \x03(\tR\x0eaffiliateCodes\x12%\n" +
 	"\x0ereferral_codes\x18\x06 \x03(\tR\rreferralCodes\x125\n" +
 	"\x16registration_countries\x18\a \x03(\tR\x15registrationCountries\"\x93\x04\n" +
@@ -4536,13 +4526,11 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x03ggr\x18\f \x01(\tR\x03ggr\x12\x10\n" +
 	"\x03ngr\x18\r \x01(\tR\x03ngr\x12\x12\n" +
 	"\x04arpu\x18\x0e \x01(\tR\x04arpu\x12\x14\n" +
-	"\x05arppu\x18\x0f \x01(\tR\x05arppu\"\xb9\x03\n" +
+	"\x05arppu\x18\x0f \x01(\tR\x05arppu\"\x92\x03\n" +
 	"\x14ListSummariesRequest\x12C\n" +
 	"\n" +
-	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x122\n" +
-	"\x15retailer_operator_ids\x18\x02 \x03(\x03R\x13retailerOperatorIds\x12,\n" +
-	"\x12group_operator_ids\x18\x03 \x03(\x03R\x10groupOperatorIds\x12!\n" +
-	"\foperator_ids\x18\x04 \x03(\x03R\voperatorIds\x12'\n" +
+	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12'\n" +
 	"\x0faffiliate_codes\x18\x05 \x03(\tR\x0eaffiliateCodes\x12%\n" +
 	"\x0ereferral_codes\x18\x06 \x03(\tR\rreferralCodes\x125\n" +
 	"\x16registration_countries\x18\a \x03(\tR\x15registrationCountries\x12\x17\n" +
@@ -4550,59 +4538,62 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tpage_size\x18\t \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x9a\x0e\n" +
+	"_page_size\"\xb6\x0f\n" +
 	"\x15ListSummariesResponse\x12I\n" +
 	"\x04list\x18\x01 \x03(\v25.api.backoffice.service.v1.ListSummariesResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xee\f\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x8a\x0e\n" +
 	"\x04List\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12#\n" +
-	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x18\n" +
-	"\acountry\x18\x03 \x01(\tR\acountry\x12\x16\n" +
-	"\x06visits\x18\x04 \x01(\x05R\x06visits\x12#\n" +
-	"\runique_visits\x18\x05 \x01(\x05R\funiqueVisits\x12)\n" +
-	"\x10registered_users\x18\x06 \x01(\x05R\x0fregisteredUsers\x12'\n" +
-	"\x0fdeposited_users\x18\a \x01(\x05R\x0edepositedUsers\x12\x1b\n" +
-	"\tftd_users\x18\b \x01(\x05R\bftdUsers\x128\n" +
-	"\x18repeated_deposited_users\x18\t \x01(\x05R\x16repeatedDepositedUsers\x126\n" +
-	"\x17deposit_conversion_rate\x18\n" +
-	" \x01(\tR\x15depositConversionRate\x12#\n" +
-	"\rdeposit_count\x18\v \x01(\x05R\fdepositCount\x12%\n" +
-	"\x0edeposit_amount\x18\f \x01(\tR\rdepositAmount\x12\x12\n" +
-	"\x04arpu\x18\r \x01(\tR\x04arpu\x12\x14\n" +
-	"\x05arppu\x18\x0e \x01(\tR\x05arppu\x12,\n" +
-	"\x12average_ftd_amount\x18\x0f \x01(\tR\x10averageFtdAmount\x12'\n" +
-	"\x0fwithdraw_amount\x18\x10 \x01(\tR\x0ewithdrawAmount\x12)\n" +
-	"\x10withdrawed_users\x18\x11 \x01(\x05R\x0fwithdrawedUsers\x12\x1b\n" +
-	"\tftw_users\x18\x12 \x01(\x05R\bftwUsers\x126\n" +
-	"\x17average_withdraw_amount\x18\x13 \x01(\tR\x15averageWithdrawAmount\x12\x1d\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\x03 \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\x04 \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\x05 \x01(\tR\x12systemOperatorName\x12\x18\n" +
+	"\acountry\x18\x06 \x01(\tR\acountry\x12\x16\n" +
+	"\x06visits\x18\a \x01(\x05R\x06visits\x12#\n" +
+	"\runique_visits\x18\b \x01(\x05R\funiqueVisits\x12)\n" +
+	"\x10registered_users\x18\t \x01(\x05R\x0fregisteredUsers\x12'\n" +
+	"\x0fdeposited_users\x18\n" +
+	" \x01(\x05R\x0edepositedUsers\x12\x1b\n" +
+	"\tftd_users\x18\v \x01(\x05R\bftdUsers\x128\n" +
+	"\x18repeated_deposited_users\x18\f \x01(\x05R\x16repeatedDepositedUsers\x126\n" +
+	"\x17deposit_conversion_rate\x18\r \x01(\tR\x15depositConversionRate\x12#\n" +
+	"\rdeposit_count\x18\x0e \x01(\x05R\fdepositCount\x12%\n" +
+	"\x0edeposit_amount\x18\x0f \x01(\tR\rdepositAmount\x12\x12\n" +
+	"\x04arpu\x18\x10 \x01(\tR\x04arpu\x12\x14\n" +
+	"\x05arppu\x18\x11 \x01(\tR\x05arppu\x12,\n" +
+	"\x12average_ftd_amount\x18\x12 \x01(\tR\x10averageFtdAmount\x12'\n" +
+	"\x0fwithdraw_amount\x18\x13 \x01(\tR\x0ewithdrawAmount\x12)\n" +
+	"\x10withdrawed_users\x18\x14 \x01(\x05R\x0fwithdrawedUsers\x12\x1b\n" +
+	"\tftw_users\x18\x15 \x01(\x05R\bftwUsers\x126\n" +
+	"\x17average_withdraw_amount\x18\x16 \x01(\tR\x15averageWithdrawAmount\x12\x1d\n" +
 	"\n" +
-	"ftw_amount\x18\x14 \x01(\tR\tftwAmount\x12,\n" +
-	"\x12average_ftw_amount\x18\x15 \x01(\tR\x10averageFtwAmount\x12-\n" +
-	"\x13wu_to_au_percentage\x18\x16 \x01(\tR\x10wuToAuPercentage\x12-\n" +
-	"\x13wu_to_du_percentage\x18\x17 \x01(\tR\x10wuToDuPercentage\x12A\n" +
-	"\x1ddeposit_minus_withdraw_amount\x18\x18 \x01(\tR\x1adepositMinusWithdrawAmount\x12)\n" +
-	"\x11w_to_d_percentage\x18\x19 \x01(\tR\x0ewToDPercentage\x12\x1a\n" +
-	"\bturnover\x18\x1a \x01(\tR\bturnover\x12#\n" +
-	"\rdeposit_bonus\x18\x1b \x01(\tR\fdepositBonus\x12!\n" +
-	"\frebate_bonus\x18\x1c \x01(\tR\vrebateBonus\x12\x1f\n" +
-	"\vloss_rebate\x18\x1d \x01(\tR\n" +
+	"ftw_amount\x18\x17 \x01(\tR\tftwAmount\x12,\n" +
+	"\x12average_ftw_amount\x18\x18 \x01(\tR\x10averageFtwAmount\x12-\n" +
+	"\x13wu_to_au_percentage\x18\x19 \x01(\tR\x10wuToAuPercentage\x12-\n" +
+	"\x13wu_to_du_percentage\x18\x1a \x01(\tR\x10wuToDuPercentage\x12A\n" +
+	"\x1ddeposit_minus_withdraw_amount\x18\x1b \x01(\tR\x1adepositMinusWithdrawAmount\x12)\n" +
+	"\x11w_to_d_percentage\x18\x1c \x01(\tR\x0ewToDPercentage\x12\x1a\n" +
+	"\bturnover\x18\x1d \x01(\tR\bturnover\x12#\n" +
+	"\rdeposit_bonus\x18\x1e \x01(\tR\fdepositBonus\x12!\n" +
+	"\frebate_bonus\x18\x1f \x01(\tR\vrebateBonus\x12\x1f\n" +
+	"\vloss_rebate\x18  \x01(\tR\n" +
 	"lossRebate\x12\x1b\n" +
-	"\tvip_bonus\x18\x1e \x01(\tR\bvipBonus\x12\x1f\n" +
-	"\vother_bonus\x18\x1f \x01(\tR\n" +
+	"\tvip_bonus\x18! \x01(\tR\bvipBonus\x12\x1f\n" +
+	"\vother_bonus\x18\" \x01(\tR\n" +
 	"otherBonus\x12/\n" +
-	"\x13referral_commission\x18  \x01(\tR\x12referralCommission\x12;\n" +
-	"\x1adeposit_fee_subsidy_amount\x18! \x01(\tR\x17depositFeeSubsidyAmount\x12.\n" +
-	"\x13player_withdraw_fee\x18\" \x01(\tR\x11playerWithdrawFee\x122\n" +
-	"\x15operator_withdraw_fee\x18# \x01(\tR\x13operatorWithdrawFee\x12!\n" +
-	"\fcash_balance\x18$ \x01(\tR\vcashBalance\x12#\n" +
-	"\rbonus_balance\x18% \x01(\tR\fbonusBalance\x12%\n" +
-	"\x0elocked_balance\x18& \x01(\tR\rlockedBalance\x12\x10\n" +
-	"\x03ggr\x18' \x01(\tR\x03ggr\x12\x10\n" +
-	"\x03ngr\x18( \x01(\tR\x03ngr\x121\n" +
-	"\x15ggr_to_ngr_percentage\x18) \x01(\tR\x12ggrToNgrPercentage\x122\n" +
-	"\x15house_edge_percentage\x18* \x01(\tR\x13houseEdgePercentage\"\xe0\x02\n" +
+	"\x13referral_commission\x18# \x01(\tR\x12referralCommission\x12;\n" +
+	"\x1adeposit_fee_subsidy_amount\x18$ \x01(\tR\x17depositFeeSubsidyAmount\x12.\n" +
+	"\x13player_withdraw_fee\x18% \x01(\tR\x11playerWithdrawFee\x122\n" +
+	"\x15operator_withdraw_fee\x18& \x01(\tR\x13operatorWithdrawFee\x12!\n" +
+	"\fcash_balance\x18' \x01(\tR\vcashBalance\x12#\n" +
+	"\rbonus_balance\x18( \x01(\tR\fbonusBalance\x12%\n" +
+	"\x0elocked_balance\x18) \x01(\tR\rlockedBalance\x12\x10\n" +
+	"\x03ggr\x18* \x01(\tR\x03ggr\x12\x10\n" +
+	"\x03ngr\x18+ \x01(\tR\x03ngr\x121\n" +
+	"\x15ggr_to_ngr_percentage\x18, \x01(\tR\x12ggrToNgrPercentage\x122\n" +
+	"\x15house_edge_percentage\x18- \x01(\tR\x13houseEdgePercentage\"\xe0\x02\n" +
 	"\x15GetGameSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
@@ -5089,70 +5080,72 @@ var file_backoffice_service_v1_backoffice_report_proto_goTypes = []any{
 }
 var file_backoffice_service_v1_backoffice_report_proto_depIdxs = []int32{
 	0,  // 0: api.backoffice.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	0,  // 1: api.backoffice.service.v1.ListSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	27, // 2: api.backoffice.service.v1.ListSummariesResponse.list:type_name -> api.backoffice.service.v1.ListSummariesResponse.List
-	0,  // 3: api.backoffice.service.v1.GetGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 4: api.backoffice.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	0,  // 5: api.backoffice.service.v1.GetGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 6: api.backoffice.service.v1.GetGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	28, // 7: api.backoffice.service.v1.GetGameDataResponse.list:type_name -> api.backoffice.service.v1.GetGameDataResponse.List
-	0,  // 8: api.backoffice.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 9: api.backoffice.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	0,  // 10: api.backoffice.service.v1.GetPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 11: api.backoffice.service.v1.GetPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	29, // 12: api.backoffice.service.v1.GetPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.GetPlayerGameDataResponse.List
-	0,  // 13: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 14: api.backoffice.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	30, // 15: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
-	0,  // 16: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 17: api.backoffice.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	31, // 18: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
-	0,  // 19: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 20: api.backoffice.service.v1.GetWithdrawSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	32, // 21: api.backoffice.service.v1.GetWithdrawSummariesResponse.withdraw_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
-	0,  // 22: api.backoffice.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 23: api.backoffice.service.v1.ListWithdrawDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	33, // 24: api.backoffice.service.v1.ListWithdrawDetailsResponse.details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
-	0,  // 25: api.backoffice.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 26: api.backoffice.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 27: api.backoffice.service.v1.ListRegisterRetentionResponse.details:type_name -> api.backoffice.service.v1.ListRegisterRetentionResponse.List
-	0,  // 28: api.backoffice.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 29: api.backoffice.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	35, // 30: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
-	0,  // 31: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	37, // 32: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	36, // 33: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
-	1,  // 34: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
-	3,  // 35: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
-	5,  // 36: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
-	7,  // 37: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.GetGameDataRequest
-	9,  // 38: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
-	11, // 39: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.GetPlayerGameDataRequest
-	13, // 40: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
-	15, // 41: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
-	17, // 42: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
-	19, // 43: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
-	21, // 44: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
-	23, // 45: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
-	25, // 46: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
-	2,  // 47: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	4,  // 48: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
-	6,  // 49: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
-	8,  // 50: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.GetGameDataResponse
-	10, // 51: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	12, // 52: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.GetPlayerGameDataResponse
-	14, // 53: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
-	16, // 54: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
-	18, // 55: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
-	20, // 56: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
-	22, // 57: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
-	24, // 58: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	26, // 59: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	47, // [47:60] is the sub-list for method output_type
-	34, // [34:47] is the sub-list for method input_type
-	34, // [34:34] is the sub-list for extension type_name
-	34, // [34:34] is the sub-list for extension extendee
-	0,  // [0:34] is the sub-list for field type_name
+	37, // 1: api.backoffice.service.v1.GetSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0,  // 2: api.backoffice.service.v1.ListSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 3: api.backoffice.service.v1.ListSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	27, // 4: api.backoffice.service.v1.ListSummariesResponse.list:type_name -> api.backoffice.service.v1.ListSummariesResponse.List
+	0,  // 5: api.backoffice.service.v1.GetGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 6: api.backoffice.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0,  // 7: api.backoffice.service.v1.GetGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 8: api.backoffice.service.v1.GetGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	28, // 9: api.backoffice.service.v1.GetGameDataResponse.list:type_name -> api.backoffice.service.v1.GetGameDataResponse.List
+	0,  // 10: api.backoffice.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 11: api.backoffice.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0,  // 12: api.backoffice.service.v1.GetPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 13: api.backoffice.service.v1.GetPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	29, // 14: api.backoffice.service.v1.GetPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.GetPlayerGameDataResponse.List
+	0,  // 15: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 16: api.backoffice.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	30, // 17: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
+	0,  // 18: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 19: api.backoffice.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	31, // 20: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
+	0,  // 21: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 22: api.backoffice.service.v1.GetWithdrawSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	32, // 23: api.backoffice.service.v1.GetWithdrawSummariesResponse.withdraw_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
+	0,  // 24: api.backoffice.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 25: api.backoffice.service.v1.ListWithdrawDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	33, // 26: api.backoffice.service.v1.ListWithdrawDetailsResponse.details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
+	0,  // 27: api.backoffice.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 28: api.backoffice.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	34, // 29: api.backoffice.service.v1.ListRegisterRetentionResponse.details:type_name -> api.backoffice.service.v1.ListRegisterRetentionResponse.List
+	0,  // 30: api.backoffice.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 31: api.backoffice.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	35, // 32: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
+	0,  // 33: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	37, // 34: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	36, // 35: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
+	1,  // 36: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
+	3,  // 37: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
+	5,  // 38: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
+	7,  // 39: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.GetGameDataRequest
+	9,  // 40: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
+	11, // 41: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.GetPlayerGameDataRequest
+	13, // 42: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
+	15, // 43: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
+	17, // 44: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
+	19, // 45: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
+	21, // 46: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
+	23, // 47: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
+	25, // 48: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
+	2,  // 49: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	4,  // 50: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
+	6,  // 51: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
+	8,  // 52: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.GetGameDataResponse
+	10, // 53: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	12, // 54: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.GetPlayerGameDataResponse
+	14, // 55: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
+	16, // 56: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
+	18, // 57: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
+	20, // 58: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
+	22, // 59: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
+	24, // 60: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	26, // 61: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	49, // [49:62] is the sub-list for method output_type
+	36, // [36:49] is the sub-list for method input_type
+	36, // [36:36] is the sub-list for extension type_name
+	36, // [36:36] is the sub-list for extension extendee
+	0,  // [0:36] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_report_proto_init() }
