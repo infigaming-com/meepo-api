@@ -1047,6 +1047,10 @@ func (m *GameDebitRequest) validate(all bool) error {
 		}
 	}
 
+	if m.AllowOverdraft != nil {
+		// no validation rules for AllowOverdraft
+	}
+
 	if len(errors) > 0 {
 		return GameDebitRequestMultiError(errors)
 	}

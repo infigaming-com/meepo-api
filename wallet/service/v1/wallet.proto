@@ -213,6 +213,7 @@ message GameDebitRequest {
 	string amount = 8;
 	string turnover = 9;
 	api.common.OperatorContext operator_context = 10;
+	optional bool allow_overdraft = 11;
 }
 
 message GameDebitResponse {
