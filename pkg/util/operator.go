@@ -22,6 +22,12 @@ const (
 	OperatorStatusSuspended      = "suspended"
 	OperatorStatusRequestToClose = "request_to_close"
 	OperatorStatusClosed         = "closed"
+
+	// Operator Admin Role
+	OperatorAdminRoleId         = 4
+	CompanyOperatorAdminRoleId  = 3
+	RetailerOperatorAdminRoleId = 2
+	SystemOperatorAdminRoleId   = 1
 )
 
 // BuildOperatorHierarchy builds a complete operator hierarchy path based on operatorId and parentIds
