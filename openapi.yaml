@@ -10359,6 +10359,8 @@ components:
                     type: string
                 systemOperatorName:
                     type: string
+                operatorType:
+                    type: string
             description: |-
                 Payment channel information
                  Detailed information about a specific payment channel

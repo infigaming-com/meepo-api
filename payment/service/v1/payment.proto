@@ -265,6 +265,7 @@ message PaymentChannelInfo {
   string company_operator_name = 40;
   string retailer_operator_name = 41;
   string system_operator_name = 42;
+  string operator_type = 43;
 }
 
 // Request to initiate a deposit

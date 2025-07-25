@@ -1371,6 +1371,7 @@ type PaymentChannelInfo struct {
 	CompanyOperatorName  string `protobuf:"bytes,40,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
 	RetailerOperatorName string `protobuf:"bytes,41,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
 	SystemOperatorName   string `protobuf:"bytes,42,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	OperatorType         string `protobuf:"bytes,43,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -1695,6 +1696,13 @@ func (x *PaymentChannelInfo) GetRetailerOperatorName() string {
 func (x *PaymentChannelInfo) GetSystemOperatorName() string {
 	if x != nil {
 		return x.SystemOperatorName
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetOperatorType() string {
+	if x != nil {
+		return x.OperatorType
 	}
 	return ""
 }
@@ -4488,7 +4496,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\x97\v\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xbc\v\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12!\n" +
@@ -4538,7 +4546,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\roperator_name\x18' \x01(\tR\foperatorName\x122\n" +
 	"\x15company_operator_name\x18( \x01(\tR\x13companyOperatorName\x124\n" +
 	"\x16retailer_operator_name\x18) \x01(\tR\x14retailerOperatorName\x120\n" +
-	"\x14system_operator_name\x18* \x01(\tR\x12systemOperatorName\"\x9a\x01\n" +
+	"\x14system_operator_name\x18* \x01(\tR\x12systemOperatorName\x12#\n" +
+	"\roperator_type\x18+ \x01(\tR\foperatorType\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
