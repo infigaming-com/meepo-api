@@ -10219,6 +10219,14 @@ components:
                     type: string
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
         payment.service.v1.GetPaymentMethodListResponse:
             type: object
             properties:
@@ -10227,6 +10235,28 @@ components:
                     items:
                         $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
                     description: List of payment methods available
+                page:
+                    type: integer
+                    description: Current page number
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                totalPages:
+                    type: integer
+                    description: Total number of pages available
+                    format: int32
+                totalOn:
+                    type: integer
+                    description: |-
+                        The following fields are only populated for admin requests
+                         Total number of successful transactions
+                    format: int32
+                totalOff:
+                    type: integer
+                    description: Total number of processing transactions
+                    format: int32
             description: |-
                 Response for payment method list
                  Contains a list of all available payment methods
@@ -10548,6 +10578,15 @@ components:
                     type: string
                     description: Rate Fee
                 sysMinFee:
+                    type: string
+                    description: Minimum Fee
+                userFixedFee:
+                    type: string
+                    description: Fixed Fee on the Amount
+                userFeeRate:
+                    type: string
+                    description: Rate Fee
+                userMinFee:
                     type: string
                     description: Minimum Fee
                 schema:
