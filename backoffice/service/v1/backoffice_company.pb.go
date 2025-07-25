@@ -7,6 +7,7 @@
 package v1
 
 import (
+	v1 "github.com/infigaming-com/meepo-api/user/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -182,11 +183,55 @@ func (x *CreateCompanyResponse) GetBackofficeSubdomain() string {
 	return ""
 }
 
+type ListCompanyOperatorsByAdminEmailRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCompanyOperatorsByAdminEmailRequest) Reset() {
+	*x = ListCompanyOperatorsByAdminEmailRequest{}
+	mi := &file_backoffice_service_v1_backoffice_company_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCompanyOperatorsByAdminEmailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCompanyOperatorsByAdminEmailRequest) ProtoMessage() {}
+
+func (x *ListCompanyOperatorsByAdminEmailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_company_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCompanyOperatorsByAdminEmailRequest.ProtoReflect.Descriptor instead.
+func (*ListCompanyOperatorsByAdminEmailRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_company_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListCompanyOperatorsByAdminEmailRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
 var File_backoffice_service_v1_backoffice_company_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_company_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_company.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xb4\x02\n" +
+	".backoffice/service/v1/backoffice_company.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1auser/service/v1/user.proto\"\xb4\x02\n" +
 	"\x14CreateCompanyRequest\x12!\n" +
 	"\fcompany_name\x18\x01 \x01(\tR\vcompanyName\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
@@ -199,9 +244,12 @@ const file_backoffice_service_v1_backoffice_company_proto_rawDesc = "" +
 	"\x11verification_code\x18\t \x01(\tR\x10verificationCode\"`\n" +
 	"\x15CreateCompanyResponse\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x121\n" +
-	"\x14backoffice_subdomain\x18\x02 \x01(\tR\x13backofficeSubdomain2\xb4\x01\n" +
+	"\x14backoffice_subdomain\x18\x02 \x01(\tR\x13backofficeSubdomain\"?\n" +
+	"'ListCompanyOperatorsByAdminEmailRequest\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email2\x93\x03\n" +
 	"\x11BackofficeCompany\x12\x9e\x01\n" +
-	"\rCreateCompany\x12/.api.backoffice.service.v1.CreateCompanyRequest\x1a0.api.backoffice.service.v1.CreateCompanyResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/company/registerB[\n" +
+	"\rCreateCompany\x12/.api.backoffice.service.v1.CreateCompanyRequest\x1a0.api.backoffice.service.v1.CreateCompanyResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/company/register\x12\xdc\x01\n" +
+	" ListCompanyOperatorsByAdminEmail\x12B.api.backoffice.service.v1.ListCompanyOperatorsByAdminEmailRequest\x1a=.api.user.service.v1.ListCompanyOperatorsByAdminEmailResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/company/list-by-admin-emailB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -216,16 +264,20 @@ func file_backoffice_service_v1_backoffice_company_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_company_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_company_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_backoffice_service_v1_backoffice_company_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_backoffice_service_v1_backoffice_company_proto_goTypes = []any{
-	(*CreateCompanyRequest)(nil),  // 0: api.backoffice.service.v1.CreateCompanyRequest
-	(*CreateCompanyResponse)(nil), // 1: api.backoffice.service.v1.CreateCompanyResponse
+	(*CreateCompanyRequest)(nil),                        // 0: api.backoffice.service.v1.CreateCompanyRequest
+	(*CreateCompanyResponse)(nil),                       // 1: api.backoffice.service.v1.CreateCompanyResponse
+	(*ListCompanyOperatorsByAdminEmailRequest)(nil),     // 2: api.backoffice.service.v1.ListCompanyOperatorsByAdminEmailRequest
+	(*v1.ListCompanyOperatorsByAdminEmailResponse)(nil), // 3: api.user.service.v1.ListCompanyOperatorsByAdminEmailResponse
 }
 var file_backoffice_service_v1_backoffice_company_proto_depIdxs = []int32{
 	0, // 0: api.backoffice.service.v1.BackofficeCompany.CreateCompany:input_type -> api.backoffice.service.v1.CreateCompanyRequest
-	1, // 1: api.backoffice.service.v1.BackofficeCompany.CreateCompany:output_type -> api.backoffice.service.v1.CreateCompanyResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 1: api.backoffice.service.v1.BackofficeCompany.ListCompanyOperatorsByAdminEmail:input_type -> api.backoffice.service.v1.ListCompanyOperatorsByAdminEmailRequest
+	1, // 2: api.backoffice.service.v1.BackofficeCompany.CreateCompany:output_type -> api.backoffice.service.v1.CreateCompanyResponse
+	3, // 3: api.backoffice.service.v1.BackofficeCompany.ListCompanyOperatorsByAdminEmail:output_type -> api.user.service.v1.ListCompanyOperatorsByAdminEmailResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -242,7 +294,7 @@ func file_backoffice_service_v1_backoffice_company_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_company_proto_rawDesc), len(file_backoffice_service_v1_backoffice_company_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
