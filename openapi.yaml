@@ -10831,12 +10831,18 @@ components:
                 pspFeeRate:
                     type: string
                     description: PSP Rate Fee
+                pspMinFee:
+                    type: string
+                    description: PSP Min Fee
                 userFixedFee:
                     type: string
                     description: User Fixed Fee on the Amount
                 userFeeRate:
                     type: string
                     description: User Rate Fee
+                userMinFee:
+                    type: string
+                    description: User Min Fee
                 minAmount:
                     type: string
                     description: Min Amount

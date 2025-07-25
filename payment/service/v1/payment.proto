@@ -181,18 +181,22 @@ message UpdatePaymentChannelRequest {
   string psp_fixed_fee = 4;
   // PSP Rate Fee 
   string psp_fee_rate = 5;
+  // PSP Min Fee 
+  string psp_min_fee = 6;
   // User Fixed Fee on the Amount
-  string user_fixed_fee = 6;
+  string user_fixed_fee = 7;
   // User Rate Fee 
-  string user_fee_rate = 7;
+  string user_fee_rate = 8;
+  // User Min Fee 
+  string user_min_fee = 9;
   // Min Amount
-  string min_amount = 8;
+  string min_amount = 10;
   // Max Amount
-  string max_amount = 9;
+  string max_amount = 11;
   // enable status
-  bool enable = 10;
+  bool enable = 12;
   // Configuration fields for the payment channel in JSON format
-  google.protobuf.Struct key = 11;
+  google.protobuf.Struct key = 13;
 }
 
 // Response for channel creation
