@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/user/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,7 +20,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeCompany_CreateCompany_FullMethodName = "/api.backoffice.service.v1.BackofficeCompany/CreateCompany"
+	BackofficeCompany_CreateCompany_FullMethodName                    = "/api.backoffice.service.v1.BackofficeCompany/CreateCompany"
+	BackofficeCompany_ListCompanyOperatorsByAdminEmail_FullMethodName = "/api.backoffice.service.v1.BackofficeCompany/ListCompanyOperatorsByAdminEmail"
 )
 
 // BackofficeCompanyClient is the client API for BackofficeCompany service.
@@ -28,6 +30,8 @@ const (
 type BackofficeCompanyClient interface {
 	// Create a company's owner account and related data
 	CreateCompany(ctx context.Context, in *CreateCompanyRequest, opts ...grpc.CallOption) (*CreateCompanyResponse, error)
+	// List company operators by admin email under specific retailer operator
+	ListCompanyOperatorsByAdminEmail(ctx context.Context, in *ListCompanyOperatorsByAdminEmailRequest, opts ...grpc.CallOption) (*v1.ListCompanyOperatorsByAdminEmailResponse, error)
 }
 
 type backofficeCompanyClient struct {
@@ -48,12 +52,24 @@ func (c *backofficeCompanyClient) CreateCompany(ctx context.Context, in *CreateC
 	return out, nil
 }
 
+func (c *backofficeCompanyClient) ListCompanyOperatorsByAdminEmail(ctx context.Context, in *ListCompanyOperatorsByAdminEmailRequest, opts ...grpc.CallOption) (*v1.ListCompanyOperatorsByAdminEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListCompanyOperatorsByAdminEmailResponse)
+	err := c.cc.Invoke(ctx, BackofficeCompany_ListCompanyOperatorsByAdminEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeCompanyServer is the server API for BackofficeCompany service.
 // All implementations must embed UnimplementedBackofficeCompanyServer
 // for forward compatibility.
 type BackofficeCompanyServer interface {
 	// Create a company's owner account and related data
 	CreateCompany(context.Context, *CreateCompanyRequest) (*CreateCompanyResponse, error)
+	// List company operators by admin email under specific retailer operator
+	ListCompanyOperatorsByAdminEmail(context.Context, *ListCompanyOperatorsByAdminEmailRequest) (*v1.ListCompanyOperatorsByAdminEmailResponse, error)
 	mustEmbedUnimplementedBackofficeCompanyServer()
 }
 
@@ -66,6 +82,9 @@ type UnimplementedBackofficeCompanyServer struct{}
 
 func (UnimplementedBackofficeCompanyServer) CreateCompany(context.Context, *CreateCompanyRequest) (*CreateCompanyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCompany not implemented")
+}
+func (UnimplementedBackofficeCompanyServer) ListCompanyOperatorsByAdminEmail(context.Context, *ListCompanyOperatorsByAdminEmailRequest) (*v1.ListCompanyOperatorsByAdminEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCompanyOperatorsByAdminEmail not implemented")
 }
 func (UnimplementedBackofficeCompanyServer) mustEmbedUnimplementedBackofficeCompanyServer() {}
 func (UnimplementedBackofficeCompanyServer) testEmbeddedByValue()                           {}
@@ -106,6 +125,24 @@ func _BackofficeCompany_CreateCompany_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeCompany_ListCompanyOperatorsByAdminEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCompanyOperatorsByAdminEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeCompanyServer).ListCompanyOperatorsByAdminEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeCompany_ListCompanyOperatorsByAdminEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeCompanyServer).ListCompanyOperatorsByAdminEmail(ctx, req.(*ListCompanyOperatorsByAdminEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeCompany_ServiceDesc is the grpc.ServiceDesc for BackofficeCompany service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -116,6 +153,10 @@ var BackofficeCompany_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateCompany",
 			Handler:    _BackofficeCompany_CreateCompany_Handler,
+		},
+		{
+			MethodName: "ListCompanyOperatorsByAdminEmail",
+			Handler:    _BackofficeCompany_ListCompanyOperatorsByAdminEmail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

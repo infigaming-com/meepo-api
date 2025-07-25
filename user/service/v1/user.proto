@@ -232,6 +232,10 @@ service User {
 	// ListAllUsers returns a list of all users which belong to the operator context
 	rpc ListAllUsers(ListAllUsersRequest) returns (ListAllUsersResponse) {
 	}
+
+	// ListCompanyOperatorsByAdminEmail returns a list of company operators by admin email
+	rpc ListCompanyOperatorsByAdminEmail(ListCompanyOperatorsByAdminEmailRequest) returns (ListCompanyOperatorsByAdminEmailResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -1116,4 +1120,13 @@ message ListAllUsersRequest {
 
 message ListAllUsersResponse {
 	repeated UserInfo users = 1;
+}
+
+message ListCompanyOperatorsByAdminEmailRequest {
+	string email = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ListCompanyOperatorsByAdminEmailResponse {
+	repeated OperatorDetails operator_details_list = 1;
 }
