@@ -191,7 +191,6 @@ message GetPaymentMethodListRequest {
   // Currency like USD, VND
   string currency = 1;
   string psp = 2;
-  string search = 3;
 }
 
 message GetTransactionPageRequest {

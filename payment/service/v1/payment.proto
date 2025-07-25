@@ -21,8 +21,7 @@ message GetSupportedPaymentMethodListRequest {
 message GetPaymentMethodListRequest {
   string currency = 1;
   string psp = 2;
-  string search = 3;
-	api.common.OperatorContext operator_context = 4;
+	api.common.OperatorContext operator_context = 3;
 }
 
 // Details of a single payment method
@@ -199,71 +198,73 @@ message PaymentChannelInfo {
   string psp = 3;
   // Category of the channel (e.g., bank, e-wallet)
   string category = 4;
-  // ID of the operator who owns this channel
-  int64 operator_id = 5;
   // Payment method used in this channel
-  string payment_method = 6;
+  string payment_method = 5;
   // Tag for categorization or filtering
-  string tag = 7;
+  string tag = 6;
   // Display name of the channel
-  string name = 8;
+  string name = 7;
   // ID of the payment method used
-  string payment_method_id = 9;
+  string payment_method_id = 8;
   // Currency supported by this channel
-  string currency = 10;
+  string currency = 9;
   // Currency type (e.g., Crypto, Fiat)
-  string currency_type = 11;
+  string currency_type = 10;
   // Crypto protocol supported by this channel
-  string protocol = 12;
+  string protocol = 11;
   // Crypto chian supported by this channel
-  string network = 13;
+  string network = 12;
   // Country where this channel is available
-  string country = 14;
+  string country = 13;
   // Specific method used (might be more detailed than payment_method)
-  string method = 15;
+  string method = 14;
   // URL to the logo image for this payment channel
-  string logo = 16;
+  string logo = 15;
   // Minimum amount allowed for deposit transactions
-  string min_amount = 17;
+  string min_amount = 16;
   // Maximum amount allowed for deposit transactions
-  string max_amount = 18;
+  string max_amount = 17;
   // Fixed Fee on the Amount
-  string fixed_fee = 19;
+  string fixed_fee = 18;
   // Rate Fee 
-  string fee_rate = 20;
+  string fee_rate = 19;
   // Minimum Fee 
-  string min_fee = 21;
+  string min_fee = 20;
   // Minimum amount allowed for deposit transactions
-  string psp_min_amount = 22;
+  string psp_min_amount = 21;
   // Maximum amount allowed for deposit transactions
-  string psp_max_amount = 23;
+  string psp_max_amount = 22;
   // Fixed Fee on the Amount
-  string psp_fixed_fee = 24;
+  string psp_fixed_fee = 23;
   // Rate Fee 
-  string psp_fee_rate = 25;
+  string psp_fee_rate = 24;
   // Minimum Fee 
-  string psp_min_fee = 26;
+  string psp_min_fee = 25;
   // Minimum amount allowed for deposit transactions
-  string sys_min_amount = 27;
+  string sys_min_amount = 26;
   // Maximum amount allowed for deposit transactions
-  string sys_max_amount = 28;
+  string sys_max_amount = 27;
   // Fixed Fee on the Amount
-  string sys_fixed_fee = 29;
+  string sys_fixed_fee = 28;
   // Rate Fee 
-  string sys_fee_rate = 30;
+  string sys_fee_rate = 29;
   // Minimum Fee 
-  string sys_min_fee = 31;
+  string sys_min_fee = 30;
   // JSON schema defining deposit form fields required by this channel
-  google.protobuf.ListValue schema = 32;
-  // Source operator
-  string source = 33;
-  string source_type = 34;
+  google.protobuf.ListValue schema = 31;
   // Status bool
-  bool enable = 35;
+  bool enable = 32;
   // Contact
-  string contact = 36;
-  int32 eat = 37;
-  string operator_name = 38;
+  string contact = 33;
+  int32 eat = 34;
+  int64 operator_id = 35;
+  int64 company_operator_id = 36;
+  int64 retailer_operator_id = 37;
+  int64 system_operator_id = 38;
+  string operator_name = 39;
+  string company_operator_name = 40;
+  string retailer_operator_name = 41;
+  string system_operator_name = 42;
 }
 
 // Request to initiate a deposit

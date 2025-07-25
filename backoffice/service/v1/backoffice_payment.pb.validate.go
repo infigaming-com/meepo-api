@@ -497,8 +497,6 @@ func (m *GetPaymentMethodListRequest) validate(all bool) error {
 
 	// no validation rules for Psp
 
-	// no validation rules for Search
-
 	if len(errors) > 0 {
 		return GetPaymentMethodListRequestMultiError(errors)
 	}

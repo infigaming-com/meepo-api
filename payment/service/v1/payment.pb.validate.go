@@ -166,8 +166,6 @@ func (m *GetPaymentMethodListRequest) validate(all bool) error {
 
 	// no validation rules for Psp
 
-	// no validation rules for Search
-
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -1612,8 +1610,6 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for Category
 
-	// no validation rules for OperatorId
-
 	// no validation rules for PaymentMethod
 
 	// no validation rules for Tag
@@ -1695,17 +1691,27 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Source
-
-	// no validation rules for SourceType
-
 	// no validation rules for Enable
 
 	// no validation rules for Contact
 
 	// no validation rules for Eat
 
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for SystemOperatorId
+
 	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
 
 	if len(errors) > 0 {
 		return PaymentChannelInfoMultiError(errors)

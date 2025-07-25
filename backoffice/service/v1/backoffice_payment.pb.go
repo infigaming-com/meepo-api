@@ -343,7 +343,6 @@ type GetPaymentMethodListRequest struct {
 	// Currency like USD, VND
 	Currency      string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
 	Psp           string `protobuf:"bytes,2,opt,name=psp,proto3" json:"psp,omitempty"`
-	Search        string `protobuf:"bytes,3,opt,name=search,proto3" json:"search,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -388,13 +387,6 @@ func (x *GetPaymentMethodListRequest) GetCurrency() string {
 func (x *GetPaymentMethodListRequest) GetPsp() string {
 	if x != nil {
 		return x.Psp
-	}
-	return ""
-}
-
-func (x *GetPaymentMethodListRequest) GetSearch() string {
-	if x != nil {
-		return x.Search
 	}
 	return ""
 }
@@ -786,11 +778,10 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	" \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\v \x01(\tR\tmaxAmount\x12)\n" +
-	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"c\n" +
+	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"K\n" +
 	"\x1bGetPaymentMethodListRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x10\n" +
-	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x16\n" +
-	"\x06search\x18\x03 \x01(\tR\x06search\"\xb3\x06\n" +
+	"\x03psp\x18\x02 \x01(\tR\x03psp\"\xb3\x06\n" +
 	"\x19GetTransactionPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12%\n" +

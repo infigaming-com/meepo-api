@@ -342,8 +342,7 @@ type GetPaymentMethodListRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	Currency        string                  `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
 	Psp             string                  `protobuf:"bytes,2,opt,name=psp,proto3" json:"psp,omitempty"`
-	Search          string                  `protobuf:"bytes,3,opt,name=search,proto3" json:"search,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -388,13 +387,6 @@ func (x *GetPaymentMethodListRequest) GetCurrency() string {
 func (x *GetPaymentMethodListRequest) GetPsp() string {
 	if x != nil {
 		return x.Psp
-	}
-	return ""
-}
-
-func (x *GetPaymentMethodListRequest) GetSearch() string {
-	if x != nil {
-		return x.Search
 	}
 	return ""
 }
@@ -1312,73 +1304,75 @@ type PaymentChannelInfo struct {
 	Psp string `protobuf:"bytes,3,opt,name=psp,proto3" json:"psp,omitempty"`
 	// Category of the channel (e.g., bank, e-wallet)
 	Category string `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
-	// ID of the operator who owns this channel
-	OperatorId int64 `protobuf:"varint,5,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// Payment method used in this channel
-	PaymentMethod string `protobuf:"bytes,6,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	PaymentMethod string `protobuf:"bytes,5,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Tag for categorization or filtering
-	Tag string `protobuf:"bytes,7,opt,name=tag,proto3" json:"tag,omitempty"`
+	Tag string `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag,omitempty"`
 	// Display name of the channel
-	Name string `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the payment method used
-	PaymentMethodId string `protobuf:"bytes,9,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	PaymentMethodId string `protobuf:"bytes,8,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	// Currency supported by this channel
-	Currency string `protobuf:"bytes,10,opt,name=currency,proto3" json:"currency,omitempty"`
+	Currency string `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Currency type (e.g., Crypto, Fiat)
-	CurrencyType string `protobuf:"bytes,11,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
+	CurrencyType string `protobuf:"bytes,10,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
 	// Crypto protocol supported by this channel
-	Protocol string `protobuf:"bytes,12,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Protocol string `protobuf:"bytes,11,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Crypto chian supported by this channel
-	Network string `protobuf:"bytes,13,opt,name=network,proto3" json:"network,omitempty"`
+	Network string `protobuf:"bytes,12,opt,name=network,proto3" json:"network,omitempty"`
 	// Country where this channel is available
-	Country string `protobuf:"bytes,14,opt,name=country,proto3" json:"country,omitempty"`
+	Country string `protobuf:"bytes,13,opt,name=country,proto3" json:"country,omitempty"`
 	// Specific method used (might be more detailed than payment_method)
-	Method string `protobuf:"bytes,15,opt,name=method,proto3" json:"method,omitempty"`
+	Method string `protobuf:"bytes,14,opt,name=method,proto3" json:"method,omitempty"`
 	// URL to the logo image for this payment channel
-	Logo string `protobuf:"bytes,16,opt,name=logo,proto3" json:"logo,omitempty"`
+	Logo string `protobuf:"bytes,15,opt,name=logo,proto3" json:"logo,omitempty"`
 	// Minimum amount allowed for deposit transactions
-	MinAmount string `protobuf:"bytes,17,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	MinAmount string `protobuf:"bytes,16,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Maximum amount allowed for deposit transactions
-	MaxAmount string `protobuf:"bytes,18,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	MaxAmount string `protobuf:"bytes,17,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	// Fixed Fee on the Amount
-	FixedFee string `protobuf:"bytes,19,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
+	FixedFee string `protobuf:"bytes,18,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
 	// Rate Fee
-	FeeRate string `protobuf:"bytes,20,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	FeeRate string `protobuf:"bytes,19,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
 	// Minimum Fee
-	MinFee string `protobuf:"bytes,21,opt,name=min_fee,json=minFee,proto3" json:"min_fee,omitempty"`
+	MinFee string `protobuf:"bytes,20,opt,name=min_fee,json=minFee,proto3" json:"min_fee,omitempty"`
 	// Minimum amount allowed for deposit transactions
-	PspMinAmount string `protobuf:"bytes,22,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
+	PspMinAmount string `protobuf:"bytes,21,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
 	// Maximum amount allowed for deposit transactions
-	PspMaxAmount string `protobuf:"bytes,23,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
+	PspMaxAmount string `protobuf:"bytes,22,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
 	// Fixed Fee on the Amount
-	PspFixedFee string `protobuf:"bytes,24,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
+	PspFixedFee string `protobuf:"bytes,23,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
 	// Rate Fee
-	PspFeeRate string `protobuf:"bytes,25,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
+	PspFeeRate string `protobuf:"bytes,24,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
 	// Minimum Fee
-	PspMinFee string `protobuf:"bytes,26,opt,name=psp_min_fee,json=pspMinFee,proto3" json:"psp_min_fee,omitempty"`
+	PspMinFee string `protobuf:"bytes,25,opt,name=psp_min_fee,json=pspMinFee,proto3" json:"psp_min_fee,omitempty"`
 	// Minimum amount allowed for deposit transactions
-	SysMinAmount string `protobuf:"bytes,27,opt,name=sys_min_amount,json=sysMinAmount,proto3" json:"sys_min_amount,omitempty"`
+	SysMinAmount string `protobuf:"bytes,26,opt,name=sys_min_amount,json=sysMinAmount,proto3" json:"sys_min_amount,omitempty"`
 	// Maximum amount allowed for deposit transactions
-	SysMaxAmount string `protobuf:"bytes,28,opt,name=sys_max_amount,json=sysMaxAmount,proto3" json:"sys_max_amount,omitempty"`
+	SysMaxAmount string `protobuf:"bytes,27,opt,name=sys_max_amount,json=sysMaxAmount,proto3" json:"sys_max_amount,omitempty"`
 	// Fixed Fee on the Amount
-	SysFixedFee string `protobuf:"bytes,29,opt,name=sys_fixed_fee,json=sysFixedFee,proto3" json:"sys_fixed_fee,omitempty"`
+	SysFixedFee string `protobuf:"bytes,28,opt,name=sys_fixed_fee,json=sysFixedFee,proto3" json:"sys_fixed_fee,omitempty"`
 	// Rate Fee
-	SysFeeRate string `protobuf:"bytes,30,opt,name=sys_fee_rate,json=sysFeeRate,proto3" json:"sys_fee_rate,omitempty"`
+	SysFeeRate string `protobuf:"bytes,29,opt,name=sys_fee_rate,json=sysFeeRate,proto3" json:"sys_fee_rate,omitempty"`
 	// Minimum Fee
-	SysMinFee string `protobuf:"bytes,31,opt,name=sys_min_fee,json=sysMinFee,proto3" json:"sys_min_fee,omitempty"`
+	SysMinFee string `protobuf:"bytes,30,opt,name=sys_min_fee,json=sysMinFee,proto3" json:"sys_min_fee,omitempty"`
 	// JSON schema defining deposit form fields required by this channel
-	Schema *structpb.ListValue `protobuf:"bytes,32,opt,name=schema,proto3" json:"schema,omitempty"`
-	// Source operator
-	Source     string `protobuf:"bytes,33,opt,name=source,proto3" json:"source,omitempty"`
-	SourceType string `protobuf:"bytes,34,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
+	Schema *structpb.ListValue `protobuf:"bytes,31,opt,name=schema,proto3" json:"schema,omitempty"`
 	// Status bool
-	Enable bool `protobuf:"varint,35,opt,name=enable,proto3" json:"enable,omitempty"`
+	Enable bool `protobuf:"varint,32,opt,name=enable,proto3" json:"enable,omitempty"`
 	// Contact
-	Contact       string `protobuf:"bytes,36,opt,name=contact,proto3" json:"contact,omitempty"`
-	Eat           int32  `protobuf:"varint,37,opt,name=eat,proto3" json:"eat,omitempty"`
-	OperatorName  string `protobuf:"bytes,38,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Contact              string `protobuf:"bytes,33,opt,name=contact,proto3" json:"contact,omitempty"`
+	Eat                  int32  `protobuf:"varint,34,opt,name=eat,proto3" json:"eat,omitempty"`
+	OperatorId           int64  `protobuf:"varint,35,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId    int64  `protobuf:"varint,36,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId   int64  `protobuf:"varint,37,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	SystemOperatorId     int64  `protobuf:"varint,38,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	OperatorName         string `protobuf:"bytes,39,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string `protobuf:"bytes,40,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string `protobuf:"bytes,41,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string `protobuf:"bytes,42,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *PaymentChannelInfo) Reset() {
@@ -1437,13 +1431,6 @@ func (x *PaymentChannelInfo) GetCategory() string {
 		return x.Category
 	}
 	return ""
-}
-
-func (x *PaymentChannelInfo) GetOperatorId() int64 {
-	if x != nil {
-		return x.OperatorId
-	}
-	return 0
 }
 
 func (x *PaymentChannelInfo) GetPaymentMethod() string {
@@ -1635,20 +1622,6 @@ func (x *PaymentChannelInfo) GetSchema() *structpb.ListValue {
 	return nil
 }
 
-func (x *PaymentChannelInfo) GetSource() string {
-	if x != nil {
-		return x.Source
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetSourceType() string {
-	if x != nil {
-		return x.SourceType
-	}
-	return ""
-}
-
 func (x *PaymentChannelInfo) GetEnable() bool {
 	if x != nil {
 		return x.Enable
@@ -1670,9 +1643,58 @@ func (x *PaymentChannelInfo) GetEat() int32 {
 	return 0
 }
 
+func (x *PaymentChannelInfo) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *PaymentChannelInfo) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *PaymentChannelInfo) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *PaymentChannelInfo) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
 func (x *PaymentChannelInfo) GetOperatorName() string {
 	if x != nil {
 		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSystemOperatorName() string {
+	if x != nil {
+		return x.SystemOperatorName
 	}
 	return ""
 }
@@ -4375,12 +4397,11 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	" payment/service/v1/payment.proto\x12\x12payment.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"B\n" +
 	"$GetSupportedPaymentMethodListRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x03(\tR\bcurrency\"\xab\x01\n" +
+	"\bcurrency\x18\x01 \x03(\tR\bcurrency\"\x93\x01\n" +
 	"\x1bGetPaymentMethodListRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x10\n" +
-	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x16\n" +
-	"\x06search\x18\x03 \x01(\tR\x06search\x12F\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xc3\x06\n" +
+	"\x03psp\x18\x02 \x01(\tR\x03psp\x12F\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xc3\x06\n" +
 	"\x11PaymentMethodInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
 	"\x03psp\x18\x02 \x01(\tR\x03psp\x12%\n" +
@@ -4467,54 +4488,57 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xa4\t\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\x97\v\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12!\n" +
 	"\fsupport_type\x18\x02 \x01(\tR\vsupportType\x12\x10\n" +
 	"\x03psp\x18\x03 \x01(\tR\x03psp\x12\x1a\n" +
-	"\bcategory\x18\x04 \x01(\tR\bcategory\x12\x1f\n" +
-	"\voperator_id\x18\x05 \x01(\x03R\n" +
-	"operatorId\x12%\n" +
-	"\x0epayment_method\x18\x06 \x01(\tR\rpaymentMethod\x12\x10\n" +
-	"\x03tag\x18\a \x01(\tR\x03tag\x12\x12\n" +
-	"\x04name\x18\b \x01(\tR\x04name\x12*\n" +
-	"\x11payment_method_id\x18\t \x01(\tR\x0fpaymentMethodId\x12\x1a\n" +
-	"\bcurrency\x18\n" +
-	" \x01(\tR\bcurrency\x12#\n" +
-	"\rcurrency_type\x18\v \x01(\tR\fcurrencyType\x12\x1a\n" +
-	"\bprotocol\x18\f \x01(\tR\bprotocol\x12\x18\n" +
-	"\anetwork\x18\r \x01(\tR\anetwork\x12\x18\n" +
-	"\acountry\x18\x0e \x01(\tR\acountry\x12\x16\n" +
-	"\x06method\x18\x0f \x01(\tR\x06method\x12\x12\n" +
-	"\x04logo\x18\x10 \x01(\tR\x04logo\x12\x1d\n" +
+	"\bcategory\x18\x04 \x01(\tR\bcategory\x12%\n" +
+	"\x0epayment_method\x18\x05 \x01(\tR\rpaymentMethod\x12\x10\n" +
+	"\x03tag\x18\x06 \x01(\tR\x03tag\x12\x12\n" +
+	"\x04name\x18\a \x01(\tR\x04name\x12*\n" +
+	"\x11payment_method_id\x18\b \x01(\tR\x0fpaymentMethodId\x12\x1a\n" +
+	"\bcurrency\x18\t \x01(\tR\bcurrency\x12#\n" +
+	"\rcurrency_type\x18\n" +
+	" \x01(\tR\fcurrencyType\x12\x1a\n" +
+	"\bprotocol\x18\v \x01(\tR\bprotocol\x12\x18\n" +
+	"\anetwork\x18\f \x01(\tR\anetwork\x12\x18\n" +
+	"\acountry\x18\r \x01(\tR\acountry\x12\x16\n" +
+	"\x06method\x18\x0e \x01(\tR\x06method\x12\x12\n" +
+	"\x04logo\x18\x0f \x01(\tR\x04logo\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\x11 \x01(\tR\tminAmount\x12\x1d\n" +
+	"min_amount\x18\x10 \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\x12 \x01(\tR\tmaxAmount\x12\x1b\n" +
-	"\tfixed_fee\x18\x13 \x01(\tR\bfixedFee\x12\x19\n" +
-	"\bfee_rate\x18\x14 \x01(\tR\afeeRate\x12\x17\n" +
-	"\amin_fee\x18\x15 \x01(\tR\x06minFee\x12$\n" +
-	"\x0epsp_min_amount\x18\x16 \x01(\tR\fpspMinAmount\x12$\n" +
-	"\x0epsp_max_amount\x18\x17 \x01(\tR\fpspMaxAmount\x12\"\n" +
-	"\rpsp_fixed_fee\x18\x18 \x01(\tR\vpspFixedFee\x12 \n" +
-	"\fpsp_fee_rate\x18\x19 \x01(\tR\n" +
+	"max_amount\x18\x11 \x01(\tR\tmaxAmount\x12\x1b\n" +
+	"\tfixed_fee\x18\x12 \x01(\tR\bfixedFee\x12\x19\n" +
+	"\bfee_rate\x18\x13 \x01(\tR\afeeRate\x12\x17\n" +
+	"\amin_fee\x18\x14 \x01(\tR\x06minFee\x12$\n" +
+	"\x0epsp_min_amount\x18\x15 \x01(\tR\fpspMinAmount\x12$\n" +
+	"\x0epsp_max_amount\x18\x16 \x01(\tR\fpspMaxAmount\x12\"\n" +
+	"\rpsp_fixed_fee\x18\x17 \x01(\tR\vpspFixedFee\x12 \n" +
+	"\fpsp_fee_rate\x18\x18 \x01(\tR\n" +
 	"pspFeeRate\x12\x1e\n" +
-	"\vpsp_min_fee\x18\x1a \x01(\tR\tpspMinFee\x12$\n" +
-	"\x0esys_min_amount\x18\x1b \x01(\tR\fsysMinAmount\x12$\n" +
-	"\x0esys_max_amount\x18\x1c \x01(\tR\fsysMaxAmount\x12\"\n" +
-	"\rsys_fixed_fee\x18\x1d \x01(\tR\vsysFixedFee\x12 \n" +
-	"\fsys_fee_rate\x18\x1e \x01(\tR\n" +
+	"\vpsp_min_fee\x18\x19 \x01(\tR\tpspMinFee\x12$\n" +
+	"\x0esys_min_amount\x18\x1a \x01(\tR\fsysMinAmount\x12$\n" +
+	"\x0esys_max_amount\x18\x1b \x01(\tR\fsysMaxAmount\x12\"\n" +
+	"\rsys_fixed_fee\x18\x1c \x01(\tR\vsysFixedFee\x12 \n" +
+	"\fsys_fee_rate\x18\x1d \x01(\tR\n" +
 	"sysFeeRate\x12\x1e\n" +
-	"\vsys_min_fee\x18\x1f \x01(\tR\tsysMinFee\x122\n" +
-	"\x06schema\x18  \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\x12\x16\n" +
-	"\x06source\x18! \x01(\tR\x06source\x12\x1f\n" +
-	"\vsource_type\x18\" \x01(\tR\n" +
-	"sourceType\x12\x16\n" +
-	"\x06enable\x18# \x01(\bR\x06enable\x12\x18\n" +
-	"\acontact\x18$ \x01(\tR\acontact\x12\x10\n" +
-	"\x03eat\x18% \x01(\x05R\x03eat\x12#\n" +
-	"\roperator_name\x18& \x01(\tR\foperatorName\"\x9a\x01\n" +
+	"\vsys_min_fee\x18\x1e \x01(\tR\tsysMinFee\x122\n" +
+	"\x06schema\x18\x1f \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\x12\x16\n" +
+	"\x06enable\x18  \x01(\bR\x06enable\x12\x18\n" +
+	"\acontact\x18! \x01(\tR\acontact\x12\x10\n" +
+	"\x03eat\x18\" \x01(\x05R\x03eat\x12\x1f\n" +
+	"\voperator_id\x18# \x01(\x03R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18$ \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18% \x01(\x03R\x12retailerOperatorId\x12,\n" +
+	"\x12system_operator_id\x18& \x01(\x03R\x10systemOperatorId\x12#\n" +
+	"\roperator_name\x18' \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18( \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18) \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18* \x01(\tR\x12systemOperatorName\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +

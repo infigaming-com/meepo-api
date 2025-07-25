@@ -4537,8 +4537,6 @@ components:
                     description: Currency like USD, VND
                 psp:
                     type: string
-                search:
-                    type: string
         api.backoffice.service.v1.GetPlayerGameDataRequest:
             type: object
             properties:
@@ -9999,8 +9997,6 @@ components:
                     type: string
                 psp:
                     type: string
-                search:
-                    type: string
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         payment.service.v1.GetPaymentMethodListResponse:
@@ -10256,9 +10252,6 @@ components:
                 category:
                     type: string
                     description: Category of the channel (e.g., bank, e-wallet)
-                operatorId:
-                    type: string
-                    description: ID of the operator who owns this channel
                 paymentMethod:
                     type: string
                     description: Payment method used in this channel
@@ -10341,11 +10334,6 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/google.protobuf.ListValue'
                     description: JSON schema defining deposit form fields required by this channel
-                source:
-                    type: string
-                    description: Source operator
-                sourceType:
-                    type: string
                 enable:
                     type: boolean
                     description: Status bool
@@ -10355,7 +10343,21 @@ components:
                 eat:
                     type: integer
                     format: int32
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
                 operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
             description: |-
                 Payment channel information
