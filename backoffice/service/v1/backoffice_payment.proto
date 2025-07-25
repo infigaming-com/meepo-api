@@ -64,7 +64,7 @@ service BackofficePayment {
   // Get list of payment methods
   // Retrieves all available payment methods supported by the system
   // Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-  rpc GetPaymentMethodList(payment.service.v1.GetPaymentMethodListRequest) returns (payment.service.v1.GetPaymentMethodListResponse) {
+  rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (payment.service.v1.GetPaymentMethodListResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/payment/method/list"
       body: "*"
@@ -185,6 +185,13 @@ message CreatePaymentChannelRequest {
   string max_amount = 11;
   // Configuration fields for the payment channel in JSON format
   google.protobuf.Struct key = 12;
+}
+
+message GetPaymentMethodListRequest {
+  // Currency like USD, VND
+  string currency = 1;
+  string psp = 2;
+  string search = 3;
 }
 
 message GetTransactionPageRequest {

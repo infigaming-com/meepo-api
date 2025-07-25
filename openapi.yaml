@@ -1367,7 +1367,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentMethodListRequest'
                 required: true
             responses:
                 "200":
@@ -4528,6 +4528,16 @@ components:
                 today:
                     type: string
                 yesterday:
+                    type: string
+        api.backoffice.service.v1.GetPaymentMethodListRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                    description: Currency like USD, VND
+                psp:
+                    type: string
+                search:
                     type: string
         api.backoffice.service.v1.GetPlayerGameDataRequest:
             type: object
@@ -9991,6 +10001,8 @@ components:
                     type: string
                 search:
                     type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         payment.service.v1.GetPaymentMethodListResponse:
             type: object
             properties:
@@ -10343,6 +10355,8 @@ components:
                 eat:
                     type: integer
                     format: int32
+                operatorName:
+                    type: string
             description: |-
                 Payment channel information
                  Detailed information about a specific payment channel

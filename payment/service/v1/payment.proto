@@ -22,6 +22,7 @@ message GetPaymentMethodListRequest {
   string currency = 1;
   string psp = 2;
   string search = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 // Details of a single payment method
@@ -262,6 +263,7 @@ message PaymentChannelInfo {
   // Contact
   string contact = 36;
   int32 eat = 37;
+  string operator_name = 38;
 }
 
 // Request to initiate a deposit

@@ -168,6 +168,35 @@ func (m *GetPaymentMethodListRequest) validate(all bool) error {
 
 	// no validation rules for Search
 
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetPaymentMethodListRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetPaymentMethodListRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetPaymentMethodListRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetPaymentMethodListRequestMultiError(errors)
 	}
@@ -1675,6 +1704,8 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 	// no validation rules for Contact
 
 	// no validation rules for Eat
+
+	// no validation rules for OperatorName
 
 	if len(errors) > 0 {
 		return PaymentChannelInfoMultiError(errors)
