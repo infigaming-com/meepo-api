@@ -1386,7 +1386,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPaymentMethodListRequest'
                 required: true
             responses:
                 "200":
@@ -4547,6 +4547,14 @@ components:
                 today:
                     type: string
                 yesterday:
+                    type: string
+        api.backoffice.service.v1.GetPaymentMethodListRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                    description: Currency like USD, VND
+                psp:
                     type: string
         api.backoffice.service.v1.GetPlayerGameDataRequest:
             type: object
@@ -10089,8 +10097,8 @@ components:
                     type: string
                 psp:
                     type: string
-                search:
-                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         payment.service.v1.GetPaymentMethodListResponse:
             type: object
             properties:
@@ -10344,9 +10352,6 @@ components:
                 category:
                     type: string
                     description: Category of the channel (e.g., bank, e-wallet)
-                operatorId:
-                    type: string
-                    description: ID of the operator who owns this channel
                 paymentMethod:
                     type: string
                     description: Payment method used in this channel
@@ -10429,11 +10434,6 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/google.protobuf.ListValue'
                     description: JSON schema defining deposit form fields required by this channel
-                source:
-                    type: string
-                    description: Source operator
-                sourceType:
-                    type: string
                 enable:
                     type: boolean
                     description: Status bool
@@ -10443,6 +10443,24 @@ components:
                 eat:
                     type: integer
                     format: int32
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                operatorType:
+                    type: string
             description: |-
                 Payment channel information
                  Detailed information about a specific payment channel

@@ -166,7 +166,34 @@ func (m *GetPaymentMethodListRequest) validate(all bool) error {
 
 	// no validation rules for Psp
 
-	// no validation rules for Search
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetPaymentMethodListRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetPaymentMethodListRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetPaymentMethodListRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return GetPaymentMethodListRequestMultiError(errors)
@@ -1583,8 +1610,6 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for Category
 
-	// no validation rules for OperatorId
-
 	// no validation rules for PaymentMethod
 
 	// no validation rules for Tag
@@ -1666,15 +1691,29 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Source
-
-	// no validation rules for SourceType
-
 	// no validation rules for Enable
 
 	// no validation rules for Contact
 
 	// no validation rules for Eat
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for SystemOperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
+	// no validation rules for OperatorType
 
 	if len(errors) > 0 {
 		return PaymentChannelInfoMultiError(errors)

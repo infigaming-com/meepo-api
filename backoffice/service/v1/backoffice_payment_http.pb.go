@@ -50,7 +50,7 @@ type BackofficePaymentHTTPServer interface {
 	// GetPaymentMethodList Get list of payment methods
 	// Retrieves all available payment methods supported by the system
 	// Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-	GetPaymentMethodList(context.Context, *v1.GetPaymentMethodListRequest) (*v1.GetPaymentMethodListResponse, error)
+	GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*v1.GetPaymentMethodListResponse, error)
 	// GetPaymentOperatorTransactionById Get transaction detail
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
@@ -203,7 +203,7 @@ func _BackofficePayment_GetSupportedPaymentMethodList1_HTTP_Handler(srv Backoffi
 
 func _BackofficePayment_GetPaymentMethodList1_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.GetPaymentMethodListRequest
+		var in GetPaymentMethodListRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -212,7 +212,7 @@ func _BackofficePayment_GetPaymentMethodList1_HTTP_Handler(srv BackofficePayment
 		}
 		http.SetOperation(ctx, OperationBackofficePaymentGetPaymentMethodList)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetPaymentMethodList(ctx, req.(*v1.GetPaymentMethodListRequest))
+			return srv.GetPaymentMethodList(ctx, req.(*GetPaymentMethodListRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -360,7 +360,7 @@ type BackofficePaymentHTTPClient interface {
 	CreatePaymentMethod(ctx context.Context, req *CreatePaymentMethodRequest, opts ...http.CallOption) (rsp *v1.CreatePaymentMethodResponse, err error)
 	GetOperatorAddress(ctx context.Context, req *GetOperatorAddressRequest, opts ...http.CallOption) (rsp *v1.GetOperatorAddressResponse, err error)
 	GetOperatorPaymentChannelPage(ctx context.Context, req *GetOperatorPaymentChannelPageRequest, opts ...http.CallOption) (rsp *v1.GetPaymentChannelPageResponse, err error)
-	GetPaymentMethodList(ctx context.Context, req *v1.GetPaymentMethodListRequest, opts ...http.CallOption) (rsp *v1.GetPaymentMethodListResponse, err error)
+	GetPaymentMethodList(ctx context.Context, req *GetPaymentMethodListRequest, opts ...http.CallOption) (rsp *v1.GetPaymentMethodListResponse, err error)
 	GetPaymentOperatorTransactionById(ctx context.Context, req *v1.GetTransactionDetailByIdRequest, opts ...http.CallOption) (rsp *v1.GetTransactionDetailByIdResponse, err error)
 	GetPaymentOperatorTransactionPage(ctx context.Context, req *GetTransactionPageRequest, opts ...http.CallOption) (rsp *v1.GetTransactionPageResponse, err error)
 	GetPaymentTransactionById(ctx context.Context, req *v1.GetTransactionDetailByIdRequest, opts ...http.CallOption) (rsp *v1.GetTransactionDetailByIdResponse, err error)
@@ -430,7 +430,7 @@ func (c *BackofficePaymentHTTPClientImpl) GetOperatorPaymentChannelPage(ctx cont
 	return &out, nil
 }
 
-func (c *BackofficePaymentHTTPClientImpl) GetPaymentMethodList(ctx context.Context, in *v1.GetPaymentMethodListRequest, opts ...http.CallOption) (*v1.GetPaymentMethodListResponse, error) {
+func (c *BackofficePaymentHTTPClientImpl) GetPaymentMethodList(ctx context.Context, in *GetPaymentMethodListRequest, opts ...http.CallOption) (*v1.GetPaymentMethodListResponse, error) {
 	var out v1.GetPaymentMethodListResponse
 	pattern := "/v1/backoffice/payment/method/list"
 	path := binding.EncodeURL(pattern, in, false)
