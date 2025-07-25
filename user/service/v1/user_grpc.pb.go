@@ -40,6 +40,8 @@ const (
 	User_CheckPermission_FullMethodName                  = "/api.user.service.v1.User/CheckPermission"
 	User_AddOperator_FullMethodName                      = "/api.user.service.v1.User/AddOperator"
 	User_SendEmailVerificationCode_FullMethodName        = "/api.user.service.v1.User/SendEmailVerificationCode"
+	User_SendPasswordResetCode_FullMethodName            = "/api.user.service.v1.User/SendPasswordResetCode"
+	User_ResetPasswordWithCode_FullMethodName            = "/api.user.service.v1.User/ResetPasswordWithCode"
 	User_UpdateUser_FullMethodName                       = "/api.user.service.v1.User/UpdateUser"
 	User_ListUsers_FullMethodName                        = "/api.user.service.v1.User/ListUsers"
 	User_CreateUser_FullMethodName                       = "/api.user.service.v1.User/CreateUser"
@@ -132,6 +134,10 @@ type UserClient interface {
 	CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error)
 	AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...grpc.CallOption) (*AddOperatorResponse, error)
 	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
+	// Send password reset verification code to email
+	SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error)
+	// Reset password using verification code
+	ResetPasswordWithCode(ctx context.Context, in *ResetPasswordWithCodeRequest, opts ...grpc.CallOption) (*ResetPasswordWithCodeResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
@@ -395,6 +401,26 @@ func (c *userClient) SendEmailVerificationCode(ctx context.Context, in *SendEmai
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SendEmailVerificationCodeResponse)
 	err := c.cc.Invoke(ctx, User_SendEmailVerificationCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendPasswordResetCodeResponse)
+	err := c.cc.Invoke(ctx, User_SendPasswordResetCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ResetPasswordWithCode(ctx context.Context, in *ResetPasswordWithCodeRequest, opts ...grpc.CallOption) (*ResetPasswordWithCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResetPasswordWithCodeResponse)
+	err := c.cc.Invoke(ctx, User_ResetPasswordWithCode_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -788,6 +814,10 @@ type UserServer interface {
 	CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error)
 	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
+	// Send password reset verification code to email
+	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
+	// Reset password using verification code
+	ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
@@ -909,6 +939,12 @@ func (UnimplementedUserServer) AddOperator(context.Context, *AddOperatorRequest)
 }
 func (UnimplementedUserServer) SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendEmailVerificationCode not implemented")
+}
+func (UnimplementedUserServer) SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendPasswordResetCode not implemented")
+}
+func (UnimplementedUserServer) ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetPasswordWithCode not implemented")
 }
 func (UnimplementedUserServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
@@ -1404,6 +1440,42 @@ func _User_SendEmailVerificationCode_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).SendEmailVerificationCode(ctx, req.(*SendEmailVerificationCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SendPasswordResetCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendPasswordResetCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SendPasswordResetCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SendPasswordResetCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SendPasswordResetCode(ctx, req.(*SendPasswordResetCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ResetPasswordWithCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetPasswordWithCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ResetPasswordWithCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ResetPasswordWithCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ResetPasswordWithCode(ctx, req.(*ResetPasswordWithCodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2092,6 +2164,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendEmailVerificationCode",
 			Handler:    _User_SendEmailVerificationCode_Handler,
+		},
+		{
+			MethodName: "SendPasswordResetCode",
+			Handler:    _User_SendPasswordResetCode_Handler,
+		},
+		{
+			MethodName: "ResetPasswordWithCode",
+			Handler:    _User_ResetPasswordWithCode_Handler,
 		},
 		{
 			MethodName: "UpdateUser",
