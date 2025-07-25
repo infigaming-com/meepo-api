@@ -4161,7 +4161,7 @@ func (x *GetChannelsByIdsResponse) GetChannels() []*PaymentChannelInfo {
 
 type UpdatePaymentMethodRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	PaymentMethodId int64                  `protobuf:"varint,1,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	PaymentMethodId string                 `protobuf:"bytes,1,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	Status          bool                   `protobuf:"varint,2,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -4197,11 +4197,11 @@ func (*UpdatePaymentMethodRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{37}
 }
 
-func (x *UpdatePaymentMethodRequest) GetPaymentMethodId() int64 {
+func (x *UpdatePaymentMethodRequest) GetPaymentMethodId() string {
 	if x != nil {
 		return x.PaymentMethodId
 	}
-	return 0
+	return ""
 }
 
 func (x *UpdatePaymentMethodRequest) GetStatus() bool {
@@ -4784,7 +4784,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x18GetChannelsByIdsResponse\x12B\n" +
 	"\bchannels\x18\x01 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\bchannels\"`\n" +
 	"\x1aUpdatePaymentMethodRequest\x12*\n" +
-	"\x11payment_method_id\x18\x01 \x01(\x03R\x0fpaymentMethodId\x12\x16\n" +
+	"\x11payment_method_id\x18\x01 \x01(\tR\x0fpaymentMethodId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\bR\x06status\">\n" +
 	"\x1bUpdatePaymentMethodResponse\x12\x1f\n" +
 	"\vchannel_ids\x18\x01 \x03(\tR\n" +
