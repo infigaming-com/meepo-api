@@ -787,7 +787,7 @@ message GetChannelsByIdsResponse {
 }
 
 message UpdatePaymentMethodRequest {
-	int64 payment_method_id = 1;
+	string payment_method_id = 1;
 	bool status = 2;
 }
 
