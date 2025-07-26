@@ -195,6 +195,10 @@ func (m *GetPaymentMethodListRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
 	if len(errors) > 0 {
 		return GetPaymentMethodListRequestMultiError(errors)
 	}
@@ -649,6 +653,16 @@ func (m *GetPaymentMethodListResponse) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for TotalPages
+
+	// no validation rules for TotalOn
+
+	// no validation rules for TotalOff
 
 	if len(errors) > 0 {
 		return GetPaymentMethodListResponseMultiError(errors)
@@ -1355,9 +1369,13 @@ func (m *UpdatePaymentChannelRequest) validate(all bool) error {
 
 	// no validation rules for PspFeeRate
 
+	// no validation rules for PspMinFee
+
 	// no validation rules for UserFixedFee
 
 	// no validation rules for UserFeeRate
+
+	// no validation rules for UserMinFee
 
 	// no validation rules for MinAmount
 
@@ -1661,6 +1679,12 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 	// no validation rules for SysFeeRate
 
 	// no validation rules for SysMinFee
+
+	// no validation rules for UserFixedFee
+
+	// no validation rules for UserFeeRate
+
+	// no validation rules for UserMinFee
 
 	if all {
 		switch v := interface{}(m.GetSchema()).(type) {

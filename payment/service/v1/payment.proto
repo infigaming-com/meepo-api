@@ -22,6 +22,10 @@ message GetPaymentMethodListRequest {
   string currency = 1;
   string psp = 2;
 	api.common.OperatorContext operator_context = 3;
+  // Page number to retrieve (1-based)
+  int32 page = 4;
+  // Number of items per page
+  int32 page_size = 5;
 }
 
 // Details of a single payment method
@@ -83,14 +87,25 @@ message PaymentMethodInfo {
 // Contains a list of all available payment methods
 message GetSupportedPaymentMethodListResponse {
   // List of payment methods available
-  repeated PaymentMethodInfo payment_methods = 1 [json_name="paymentMethods"];
+  repeated PaymentMethodInfo payment_methods = 1;
 }
 
 // Response for payment method list
 // Contains a list of all available payment methods
 message GetPaymentMethodListResponse {
   // List of payment methods available
-  repeated PaymentMethodInfo payment_methods = 1 [json_name="paymentMethods"];
+  repeated PaymentMethodInfo payment_methods = 1;
+  // Current page number
+  int32 page = 2;
+  // Number of items per page
+  int32 page_size = 3;
+  // Total number of pages available
+  int32 total_pages = 4;
+  // The following fields are only populated for admin requests
+  // Total number of successful transactions
+  int32 total_on = 5;
+  // Total number of processing transactions
+  int32 total_off = 6;
 }
 
 // Request to create a payment channel
@@ -166,18 +181,22 @@ message UpdatePaymentChannelRequest {
   string psp_fixed_fee = 4;
   // PSP Rate Fee 
   string psp_fee_rate = 5;
+  // PSP Min Fee 
+  string psp_min_fee = 6;
   // User Fixed Fee on the Amount
-  string user_fixed_fee = 6;
+  string user_fixed_fee = 7;
   // User Rate Fee 
-  string user_fee_rate = 7;
+  string user_fee_rate = 8;
+  // User Min Fee 
+  string user_min_fee = 9;
   // Min Amount
-  string min_amount = 8;
+  string min_amount = 10;
   // Max Amount
-  string max_amount = 9;
+  string max_amount = 11;
   // enable status
-  bool enable = 10;
+  bool enable = 12;
   // Configuration fields for the payment channel in JSON format
-  google.protobuf.Struct key = 11;
+  google.protobuf.Struct key = 13;
 }
 
 // Response for channel creation
@@ -250,22 +269,28 @@ message PaymentChannelInfo {
   string sys_fee_rate = 29;
   // Minimum Fee 
   string sys_min_fee = 30;
+  // Fixed Fee on the Amount
+  string user_fixed_fee = 31;
+  // Rate Fee 
+  string user_fee_rate = 32;
+  // Minimum Fee 
+  string user_min_fee = 33;
   // JSON schema defining deposit form fields required by this channel
-  google.protobuf.ListValue schema = 31;
+  google.protobuf.ListValue schema = 34;
   // Status bool
-  bool enable = 32;
+  bool enable = 35;
   // Contact
-  string contact = 33;
-  int32 eat = 34;
-  int64 operator_id = 35;
-  int64 company_operator_id = 36;
-  int64 retailer_operator_id = 37;
-  int64 system_operator_id = 38;
-  string operator_name = 39;
-  string company_operator_name = 40;
-  string retailer_operator_name = 41;
-  string system_operator_name = 42;
-  string operator_type = 43;
+  string contact = 36;
+  int32 eat = 37;
+  int64 operator_id = 38;
+  int64 company_operator_id = 39;
+  int64 retailer_operator_id = 40;
+  int64 system_operator_id = 41;
+  string operator_name = 42;
+  string company_operator_name = 43;
+  string retailer_operator_name = 44;
+  string system_operator_name = 46;
+  string operator_type = 47;
 }
 
 // Request to initiate a deposit
@@ -671,20 +696,20 @@ message GetTransactionPageResponse {
   // List of transactions matching the filter criteria
   repeated TransactionInfo transactions = 1;
   // Total number of transactions matching the filter criteria
-  int32 total_count = 2 [json_name="totalCount"];
+  int32 total_count = 2;
   // Current page number
   int32 page = 3;
   // Number of items per page
-  int32 page_size = 4 [json_name="pageSize"];
+  int32 page_size = 4;
   // Total number of pages available
-  int32 total_pages = 5 [json_name="totalPages"];
+  int32 total_pages = 5;
   // The following fields are only populated for admin requests
   // Total number of successful transactions
-  int32 total_successful = 6 [json_name="totalSuccessful"];
+  int32 total_successful = 6;
   // Total number of processing transactions
-  int32 total_processing = 7 [json_name="totalProcessing"];
+  int32 total_processing = 7;
   // Total number of failed transactions
-  int32 total_failed = 8 [json_name="totalFailed"];
+  int32 total_failed = 8;
 }
 
 // Request to get payment channel page

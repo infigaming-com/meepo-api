@@ -343,8 +343,12 @@ type GetPaymentMethodListRequest struct {
 	Currency        string                  `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
 	Psp             string                  `protobuf:"bytes,2,opt,name=psp,proto3" json:"psp,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Page number to retrieve (1-based)
+	Page int32 `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize      int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetPaymentMethodListRequest) Reset() {
@@ -396,6 +400,20 @@ func (x *GetPaymentMethodListRequest) GetOperatorContext() *common.OperatorConte
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *GetPaymentMethodListRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetPaymentMethodListRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
 }
 
 // Details of a single payment method
@@ -714,8 +732,19 @@ type GetPaymentMethodListResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of payment methods available
 	PaymentMethods []*PaymentMethodInfo `protobuf:"bytes,1,rep,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Current page number
+	Page int32 `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize int32 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Total number of pages available
+	TotalPages int32 `protobuf:"varint,4,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	// The following fields are only populated for admin requests
+	// Total number of successful transactions
+	TotalOn int32 `protobuf:"varint,5,opt,name=total_on,json=totalOn,proto3" json:"total_on,omitempty"`
+	// Total number of processing transactions
+	TotalOff      int32 `protobuf:"varint,6,opt,name=total_off,json=totalOff,proto3" json:"total_off,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetPaymentMethodListResponse) Reset() {
@@ -753,6 +782,41 @@ func (x *GetPaymentMethodListResponse) GetPaymentMethods() []*PaymentMethodInfo 
 		return x.PaymentMethods
 	}
 	return nil
+}
+
+func (x *GetPaymentMethodListResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetPaymentMethodListResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *GetPaymentMethodListResponse) GetTotalPages() int32 {
+	if x != nil {
+		return x.TotalPages
+	}
+	return 0
+}
+
+func (x *GetPaymentMethodListResponse) GetTotalOn() int32 {
+	if x != nil {
+		return x.TotalOn
+	}
+	return 0
+}
+
+func (x *GetPaymentMethodListResponse) GetTotalOff() int32 {
+	if x != nil {
+		return x.TotalOff
+	}
+	return 0
 }
 
 // Request to create a payment channel
@@ -1122,18 +1186,22 @@ type UpdatePaymentChannelRequest struct {
 	PspFixedFee string `protobuf:"bytes,4,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
 	// PSP Rate Fee
 	PspFeeRate string `protobuf:"bytes,5,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
+	// PSP Min Fee
+	PspMinFee string `protobuf:"bytes,6,opt,name=psp_min_fee,json=pspMinFee,proto3" json:"psp_min_fee,omitempty"`
 	// User Fixed Fee on the Amount
-	UserFixedFee string `protobuf:"bytes,6,opt,name=user_fixed_fee,json=userFixedFee,proto3" json:"user_fixed_fee,omitempty"`
+	UserFixedFee string `protobuf:"bytes,7,opt,name=user_fixed_fee,json=userFixedFee,proto3" json:"user_fixed_fee,omitempty"`
 	// User Rate Fee
-	UserFeeRate string `protobuf:"bytes,7,opt,name=user_fee_rate,json=userFeeRate,proto3" json:"user_fee_rate,omitempty"`
+	UserFeeRate string `protobuf:"bytes,8,opt,name=user_fee_rate,json=userFeeRate,proto3" json:"user_fee_rate,omitempty"`
+	// User Min Fee
+	UserMinFee string `protobuf:"bytes,9,opt,name=user_min_fee,json=userMinFee,proto3" json:"user_min_fee,omitempty"`
 	// Min Amount
-	MinAmount string `protobuf:"bytes,8,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	MinAmount string `protobuf:"bytes,10,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Max Amount
-	MaxAmount string `protobuf:"bytes,9,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	MaxAmount string `protobuf:"bytes,11,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	// enable status
-	Enable bool `protobuf:"varint,10,opt,name=enable,proto3" json:"enable,omitempty"`
+	Enable bool `protobuf:"varint,12,opt,name=enable,proto3" json:"enable,omitempty"`
 	// Configuration fields for the payment channel in JSON format
-	Key           *structpb.Struct `protobuf:"bytes,11,opt,name=key,proto3" json:"key,omitempty"`
+	Key           *structpb.Struct `protobuf:"bytes,13,opt,name=key,proto3" json:"key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1203,6 +1271,13 @@ func (x *UpdatePaymentChannelRequest) GetPspFeeRate() string {
 	return ""
 }
 
+func (x *UpdatePaymentChannelRequest) GetPspMinFee() string {
+	if x != nil {
+		return x.PspMinFee
+	}
+	return ""
+}
+
 func (x *UpdatePaymentChannelRequest) GetUserFixedFee() string {
 	if x != nil {
 		return x.UserFixedFee
@@ -1213,6 +1288,13 @@ func (x *UpdatePaymentChannelRequest) GetUserFixedFee() string {
 func (x *UpdatePaymentChannelRequest) GetUserFeeRate() string {
 	if x != nil {
 		return x.UserFeeRate
+	}
+	return ""
+}
+
+func (x *UpdatePaymentChannelRequest) GetUserMinFee() string {
+	if x != nil {
+		return x.UserMinFee
 	}
 	return ""
 }
@@ -1356,22 +1438,28 @@ type PaymentChannelInfo struct {
 	SysFeeRate string `protobuf:"bytes,29,opt,name=sys_fee_rate,json=sysFeeRate,proto3" json:"sys_fee_rate,omitempty"`
 	// Minimum Fee
 	SysMinFee string `protobuf:"bytes,30,opt,name=sys_min_fee,json=sysMinFee,proto3" json:"sys_min_fee,omitempty"`
+	// Fixed Fee on the Amount
+	UserFixedFee string `protobuf:"bytes,31,opt,name=user_fixed_fee,json=userFixedFee,proto3" json:"user_fixed_fee,omitempty"`
+	// Rate Fee
+	UserFeeRate string `protobuf:"bytes,32,opt,name=user_fee_rate,json=userFeeRate,proto3" json:"user_fee_rate,omitempty"`
+	// Minimum Fee
+	UserMinFee string `protobuf:"bytes,33,opt,name=user_min_fee,json=userMinFee,proto3" json:"user_min_fee,omitempty"`
 	// JSON schema defining deposit form fields required by this channel
-	Schema *structpb.ListValue `protobuf:"bytes,31,opt,name=schema,proto3" json:"schema,omitempty"`
+	Schema *structpb.ListValue `protobuf:"bytes,34,opt,name=schema,proto3" json:"schema,omitempty"`
 	// Status bool
-	Enable bool `protobuf:"varint,32,opt,name=enable,proto3" json:"enable,omitempty"`
+	Enable bool `protobuf:"varint,35,opt,name=enable,proto3" json:"enable,omitempty"`
 	// Contact
-	Contact              string `protobuf:"bytes,33,opt,name=contact,proto3" json:"contact,omitempty"`
-	Eat                  int32  `protobuf:"varint,34,opt,name=eat,proto3" json:"eat,omitempty"`
-	OperatorId           int64  `protobuf:"varint,35,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	CompanyOperatorId    int64  `protobuf:"varint,36,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
-	RetailerOperatorId   int64  `protobuf:"varint,37,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
-	SystemOperatorId     int64  `protobuf:"varint,38,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
-	OperatorName         string `protobuf:"bytes,39,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	CompanyOperatorName  string `protobuf:"bytes,40,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	RetailerOperatorName string `protobuf:"bytes,41,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	SystemOperatorName   string `protobuf:"bytes,42,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
-	OperatorType         string `protobuf:"bytes,43,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	Contact              string `protobuf:"bytes,36,opt,name=contact,proto3" json:"contact,omitempty"`
+	Eat                  int32  `protobuf:"varint,37,opt,name=eat,proto3" json:"eat,omitempty"`
+	OperatorId           int64  `protobuf:"varint,38,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId    int64  `protobuf:"varint,39,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId   int64  `protobuf:"varint,40,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	SystemOperatorId     int64  `protobuf:"varint,41,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	OperatorName         string `protobuf:"bytes,42,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string `protobuf:"bytes,43,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string `protobuf:"bytes,44,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string `protobuf:"bytes,46,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	OperatorType         string `protobuf:"bytes,47,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -1612,6 +1700,27 @@ func (x *PaymentChannelInfo) GetSysFeeRate() string {
 func (x *PaymentChannelInfo) GetSysMinFee() string {
 	if x != nil {
 		return x.SysMinFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetUserFixedFee() string {
+	if x != nil {
+		return x.UserFixedFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetUserFeeRate() string {
+	if x != nil {
+		return x.UserFeeRate
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetUserMinFee() string {
+	if x != nil {
+		return x.UserMinFee
 	}
 	return ""
 }
@@ -4405,11 +4514,13 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	" payment/service/v1/payment.proto\x12\x12payment.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"B\n" +
 	"$GetSupportedPaymentMethodListRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x03(\tR\bcurrency\"\x93\x01\n" +
+	"\bcurrency\x18\x01 \x03(\tR\bcurrency\"\xc4\x01\n" +
 	"\x1bGetPaymentMethodListRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x10\n" +
 	"\x03psp\x18\x02 \x01(\tR\x03psp\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xc3\x06\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x12\n" +
+	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\"\xc3\x06\n" +
 	"\x11PaymentMethodInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
 	"\x03psp\x18\x02 \x01(\tR\x03psp\x12%\n" +
@@ -4441,9 +4552,15 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	"key_schema\x18\x19 \x01(\v2\x1a.google.protobuf.ListValueR\tkeySchema\"w\n" +
 	"%GetSupportedPaymentMethodListResponse\x12N\n" +
-	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"n\n" +
+	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xf8\x01\n" +
 	"\x1cGetPaymentMethodListResponse\x12N\n" +
-	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xdc\x02\n" +
+	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1f\n" +
+	"\vtotal_pages\x18\x04 \x01(\x05R\n" +
+	"totalPages\x12\x19\n" +
+	"\btotal_on\x18\x05 \x01(\x05R\atotalOn\x12\x1b\n" +
+	"\ttotal_off\x18\x06 \x01(\x05R\btotalOff\"\xdc\x02\n" +
 	"\x1aCreatePaymentMethodRequest\x12*\n" +
 	"\x11payment_method_id\x18\x01 \x01(\tR\x0fpaymentMethodId\x12\x18\n" +
 	"\acontact\x18\x02 \x01(\tR\acontact\x12\"\n" +
@@ -4476,7 +4593,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"min_amount\x18\v \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\f \x01(\tR\tmaxAmount\x12)\n" +
-	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"\x97\x03\n" +
+	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"\xd9\x03\n" +
 	"\x1bUpdatePaymentChannelRequest\x12,\n" +
 	"\x12payment_channel_id\x18\x01 \x01(\tR\x10paymentChannelId\x12\x1f\n" +
 	"\vmerchant_id\x18\x02 \x01(\tR\n" +
@@ -4484,19 +4601,22 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\acontact\x18\x03 \x01(\tR\acontact\x12\"\n" +
 	"\rpsp_fixed_fee\x18\x04 \x01(\tR\vpspFixedFee\x12 \n" +
 	"\fpsp_fee_rate\x18\x05 \x01(\tR\n" +
-	"pspFeeRate\x12$\n" +
-	"\x0euser_fixed_fee\x18\x06 \x01(\tR\fuserFixedFee\x12\"\n" +
-	"\ruser_fee_rate\x18\a \x01(\tR\vuserFeeRate\x12\x1d\n" +
+	"pspFeeRate\x12\x1e\n" +
+	"\vpsp_min_fee\x18\x06 \x01(\tR\tpspMinFee\x12$\n" +
+	"\x0euser_fixed_fee\x18\a \x01(\tR\fuserFixedFee\x12\"\n" +
+	"\ruser_fee_rate\x18\b \x01(\tR\vuserFeeRate\x12 \n" +
+	"\fuser_min_fee\x18\t \x01(\tR\n" +
+	"userMinFee\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\b \x01(\tR\tminAmount\x12\x1d\n" +
+	"min_amount\x18\n" +
+	" \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\t \x01(\tR\tmaxAmount\x12\x16\n" +
-	"\x06enable\x18\n" +
-	" \x01(\bR\x06enable\x12)\n" +
-	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
+	"max_amount\x18\v \x01(\tR\tmaxAmount\x12\x16\n" +
+	"\x06enable\x18\f \x01(\bR\x06enable\x12)\n" +
+	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xbc\v\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xa8\f\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12!\n" +
@@ -4533,21 +4653,25 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\rsys_fixed_fee\x18\x1c \x01(\tR\vsysFixedFee\x12 \n" +
 	"\fsys_fee_rate\x18\x1d \x01(\tR\n" +
 	"sysFeeRate\x12\x1e\n" +
-	"\vsys_min_fee\x18\x1e \x01(\tR\tsysMinFee\x122\n" +
-	"\x06schema\x18\x1f \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\x12\x16\n" +
-	"\x06enable\x18  \x01(\bR\x06enable\x12\x18\n" +
-	"\acontact\x18! \x01(\tR\acontact\x12\x10\n" +
-	"\x03eat\x18\" \x01(\x05R\x03eat\x12\x1f\n" +
-	"\voperator_id\x18# \x01(\x03R\n" +
+	"\vsys_min_fee\x18\x1e \x01(\tR\tsysMinFee\x12$\n" +
+	"\x0euser_fixed_fee\x18\x1f \x01(\tR\fuserFixedFee\x12\"\n" +
+	"\ruser_fee_rate\x18  \x01(\tR\vuserFeeRate\x12 \n" +
+	"\fuser_min_fee\x18! \x01(\tR\n" +
+	"userMinFee\x122\n" +
+	"\x06schema\x18\" \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\x12\x16\n" +
+	"\x06enable\x18# \x01(\bR\x06enable\x12\x18\n" +
+	"\acontact\x18$ \x01(\tR\acontact\x12\x10\n" +
+	"\x03eat\x18% \x01(\x05R\x03eat\x12\x1f\n" +
+	"\voperator_id\x18& \x01(\x03R\n" +
 	"operatorId\x12.\n" +
-	"\x13company_operator_id\x18$ \x01(\x03R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18% \x01(\x03R\x12retailerOperatorId\x12,\n" +
-	"\x12system_operator_id\x18& \x01(\x03R\x10systemOperatorId\x12#\n" +
-	"\roperator_name\x18' \x01(\tR\foperatorName\x122\n" +
-	"\x15company_operator_name\x18( \x01(\tR\x13companyOperatorName\x124\n" +
-	"\x16retailer_operator_name\x18) \x01(\tR\x14retailerOperatorName\x120\n" +
-	"\x14system_operator_name\x18* \x01(\tR\x12systemOperatorName\x12#\n" +
-	"\roperator_type\x18+ \x01(\tR\foperatorType\"\x9a\x01\n" +
+	"\x13company_operator_id\x18' \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18( \x01(\x03R\x12retailerOperatorId\x12,\n" +
+	"\x12system_operator_id\x18) \x01(\x03R\x10systemOperatorId\x12#\n" +
+	"\roperator_name\x18* \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18+ \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18, \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18. \x01(\tR\x12systemOperatorName\x12#\n" +
+	"\roperator_type\x18/ \x01(\tR\foperatorType\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
