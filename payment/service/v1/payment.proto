@@ -173,30 +173,28 @@ message CreatePaymentChannelRequest {
 message UpdatePaymentChannelRequest {
   // ID of the payment channel to be used
   string payment_channel_id = 1;
-  // ID of the merchant creating this channel
-  string merchant_id = 2;
   // Contact Info email
-  string contact = 3;
+  string contact = 2;
   // PSP Fixed Fee on the Amount
-  string psp_fixed_fee = 4;
+  string fixed_fee = 3;
   // PSP Rate Fee 
-  string psp_fee_rate = 5;
+  string fee_rate = 4;
   // PSP Min Fee 
-  string psp_min_fee = 6;
+  string min_fee = 5;
   // User Fixed Fee on the Amount
-  string user_fixed_fee = 7;
+  string user_fixed_fee = 6;
   // User Rate Fee 
-  string user_fee_rate = 8;
+  string user_fee_rate = 7;
   // User Min Fee 
-  string user_min_fee = 9;
+  string user_min_fee = 8;
   // Min Amount
-  string min_amount = 10;
+  string min_amount = 9;
   // Max Amount
-  string max_amount = 11;
+  string max_amount = 10;
   // enable status
-  bool enable = 12;
+  bool enable = 11;
   // Configuration fields for the payment channel in JSON format
-  google.protobuf.Struct key = 13;
+  google.protobuf.Struct key = 12;
 }
 
 // Response for channel creation

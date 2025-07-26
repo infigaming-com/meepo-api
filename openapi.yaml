@@ -10800,19 +10800,16 @@ components:
                 paymentChannelId:
                     type: string
                     description: ID of the payment channel to be used
-                merchantId:
-                    type: string
-                    description: ID of the merchant creating this channel
                 contact:
                     type: string
                     description: Contact Info email
-                pspFixedFee:
+                fixedFee:
                     type: string
                     description: PSP Fixed Fee on the Amount
-                pspFeeRate:
+                feeRate:
                     type: string
                     description: PSP Rate Fee
-                pspMinFee:
+                minFee:
                     type: string
                     description: PSP Min Fee
                 userFixedFee:
