@@ -1361,15 +1361,13 @@ func (m *UpdatePaymentChannelRequest) validate(all bool) error {
 
 	// no validation rules for PaymentChannelId
 
-	// no validation rules for MerchantId
-
 	// no validation rules for Contact
 
-	// no validation rules for PspFixedFee
+	// no validation rules for FixedFee
 
-	// no validation rules for PspFeeRate
+	// no validation rules for FeeRate
 
-	// no validation rules for PspMinFee
+	// no validation rules for MinFee
 
 	// no validation rules for UserFixedFee
 
