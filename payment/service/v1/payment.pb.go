@@ -1128,30 +1128,28 @@ type UpdatePaymentChannelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the payment channel to be used
 	PaymentChannelId string `protobuf:"bytes,1,opt,name=payment_channel_id,json=paymentChannelId,proto3" json:"payment_channel_id,omitempty"`
-	// ID of the merchant creating this channel
-	MerchantId string `protobuf:"bytes,2,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
 	// Contact Info email
-	Contact string `protobuf:"bytes,3,opt,name=contact,proto3" json:"contact,omitempty"`
+	Contact string `protobuf:"bytes,2,opt,name=contact,proto3" json:"contact,omitempty"`
 	// PSP Fixed Fee on the Amount
-	PspFixedFee string `protobuf:"bytes,4,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
+	FixedFee string `protobuf:"bytes,3,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
 	// PSP Rate Fee
-	PspFeeRate string `protobuf:"bytes,5,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
+	FeeRate string `protobuf:"bytes,4,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
 	// PSP Min Fee
-	PspMinFee string `protobuf:"bytes,6,opt,name=psp_min_fee,json=pspMinFee,proto3" json:"psp_min_fee,omitempty"`
+	MinFee string `protobuf:"bytes,5,opt,name=min_fee,json=minFee,proto3" json:"min_fee,omitempty"`
 	// User Fixed Fee on the Amount
-	UserFixedFee string `protobuf:"bytes,7,opt,name=user_fixed_fee,json=userFixedFee,proto3" json:"user_fixed_fee,omitempty"`
+	UserFixedFee string `protobuf:"bytes,6,opt,name=user_fixed_fee,json=userFixedFee,proto3" json:"user_fixed_fee,omitempty"`
 	// User Rate Fee
-	UserFeeRate string `protobuf:"bytes,8,opt,name=user_fee_rate,json=userFeeRate,proto3" json:"user_fee_rate,omitempty"`
+	UserFeeRate string `protobuf:"bytes,7,opt,name=user_fee_rate,json=userFeeRate,proto3" json:"user_fee_rate,omitempty"`
 	// User Min Fee
-	UserMinFee string `protobuf:"bytes,9,opt,name=user_min_fee,json=userMinFee,proto3" json:"user_min_fee,omitempty"`
+	UserMinFee string `protobuf:"bytes,8,opt,name=user_min_fee,json=userMinFee,proto3" json:"user_min_fee,omitempty"`
 	// Min Amount
-	MinAmount string `protobuf:"bytes,10,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	MinAmount string `protobuf:"bytes,9,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Max Amount
-	MaxAmount string `protobuf:"bytes,11,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	MaxAmount string `protobuf:"bytes,10,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	// enable status
-	Enable bool `protobuf:"varint,12,opt,name=enable,proto3" json:"enable,omitempty"`
+	Enable bool `protobuf:"varint,11,opt,name=enable,proto3" json:"enable,omitempty"`
 	// Configuration fields for the payment channel in JSON format
-	Key           *structpb.Struct `protobuf:"bytes,13,opt,name=key,proto3" json:"key,omitempty"`
+	Key           *structpb.Struct `protobuf:"bytes,12,opt,name=key,proto3" json:"key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1193,13 +1191,6 @@ func (x *UpdatePaymentChannelRequest) GetPaymentChannelId() string {
 	return ""
 }
 
-func (x *UpdatePaymentChannelRequest) GetMerchantId() string {
-	if x != nil {
-		return x.MerchantId
-	}
-	return ""
-}
-
 func (x *UpdatePaymentChannelRequest) GetContact() string {
 	if x != nil {
 		return x.Contact
@@ -1207,23 +1198,23 @@ func (x *UpdatePaymentChannelRequest) GetContact() string {
 	return ""
 }
 
-func (x *UpdatePaymentChannelRequest) GetPspFixedFee() string {
+func (x *UpdatePaymentChannelRequest) GetFixedFee() string {
 	if x != nil {
-		return x.PspFixedFee
+		return x.FixedFee
 	}
 	return ""
 }
 
-func (x *UpdatePaymentChannelRequest) GetPspFeeRate() string {
+func (x *UpdatePaymentChannelRequest) GetFeeRate() string {
 	if x != nil {
-		return x.PspFeeRate
+		return x.FeeRate
 	}
 	return ""
 }
 
-func (x *UpdatePaymentChannelRequest) GetPspMinFee() string {
+func (x *UpdatePaymentChannelRequest) GetMinFee() string {
 	if x != nil {
-		return x.PspMinFee
+		return x.MinFee
 	}
 	return ""
 }
@@ -4516,27 +4507,24 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"min_amount\x18\v \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\f \x01(\tR\tmaxAmount\x12)\n" +
-	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"\xd9\x03\n" +
+	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"\xa3\x03\n" +
 	"\x1bUpdatePaymentChannelRequest\x12,\n" +
-	"\x12payment_channel_id\x18\x01 \x01(\tR\x10paymentChannelId\x12\x1f\n" +
-	"\vmerchant_id\x18\x02 \x01(\tR\n" +
-	"merchantId\x12\x18\n" +
-	"\acontact\x18\x03 \x01(\tR\acontact\x12\"\n" +
-	"\rpsp_fixed_fee\x18\x04 \x01(\tR\vpspFixedFee\x12 \n" +
-	"\fpsp_fee_rate\x18\x05 \x01(\tR\n" +
-	"pspFeeRate\x12\x1e\n" +
-	"\vpsp_min_fee\x18\x06 \x01(\tR\tpspMinFee\x12$\n" +
-	"\x0euser_fixed_fee\x18\a \x01(\tR\fuserFixedFee\x12\"\n" +
-	"\ruser_fee_rate\x18\b \x01(\tR\vuserFeeRate\x12 \n" +
-	"\fuser_min_fee\x18\t \x01(\tR\n" +
+	"\x12payment_channel_id\x18\x01 \x01(\tR\x10paymentChannelId\x12\x18\n" +
+	"\acontact\x18\x02 \x01(\tR\acontact\x12\x1b\n" +
+	"\tfixed_fee\x18\x03 \x01(\tR\bfixedFee\x12\x19\n" +
+	"\bfee_rate\x18\x04 \x01(\tR\afeeRate\x12\x17\n" +
+	"\amin_fee\x18\x05 \x01(\tR\x06minFee\x12$\n" +
+	"\x0euser_fixed_fee\x18\x06 \x01(\tR\fuserFixedFee\x12\"\n" +
+	"\ruser_fee_rate\x18\a \x01(\tR\vuserFeeRate\x12 \n" +
+	"\fuser_min_fee\x18\b \x01(\tR\n" +
 	"userMinFee\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\n" +
-	" \x01(\tR\tminAmount\x12\x1d\n" +
+	"min_amount\x18\t \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\v \x01(\tR\tmaxAmount\x12\x16\n" +
-	"\x06enable\x18\f \x01(\bR\x06enable\x12)\n" +
-	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
+	"max_amount\x18\n" +
+	" \x01(\tR\tmaxAmount\x12\x16\n" +
+	"\x06enable\x18\v \x01(\bR\x06enable\x12)\n" +
+	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xa8\f\n" +
