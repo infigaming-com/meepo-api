@@ -166,6 +166,10 @@ func (m *GetPaymentMethodListRequest) validate(all bool) error {
 
 	// no validation rules for Psp
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -194,10 +198,6 @@ func (m *GetPaymentMethodListRequest) validate(all bool) error {
 			}
 		}
 	}
-
-	// no validation rules for Page
-
-	// no validation rules for PageSize
 
 	if len(errors) > 0 {
 		return GetPaymentMethodListRequestMultiError(errors)
@@ -4305,10 +4305,6 @@ func (m *GetTransactionPageRequest) validate(all bool) error {
 
 	// no validation rules for Sort
 
-	// no validation rules for Source
-
-	// no validation rules for UserId
-
 	// no validation rules for MinAmount
 
 	// no validation rules for MaxAmount
@@ -5085,8 +5081,6 @@ func (m *GetTransactionDetailByIdRequest) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for TransactionId
-
-	// no validation rules for Source
 
 	if len(errors) > 0 {
 		return GetTransactionDetailByIdRequestMultiError(errors)

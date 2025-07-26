@@ -497,6 +497,10 @@ func (m *GetPaymentMethodListRequest) validate(all bool) error {
 
 	// no validation rules for Psp
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
 	if len(errors) > 0 {
 		return GetPaymentMethodListRequestMultiError(errors)
 	}
@@ -681,10 +685,6 @@ func (m *GetTransactionPageRequest) validate(all bool) error {
 	}
 
 	// no validation rules for Sort
-
-	// no validation rules for Source
-
-	// no validation rules for UserId
 
 	// no validation rules for MinAmount
 

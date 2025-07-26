@@ -21,11 +21,11 @@ message GetSupportedPaymentMethodListRequest {
 message GetPaymentMethodListRequest {
   string currency = 1;
   string psp = 2;
-	api.common.OperatorContext operator_context = 3;
   // Page number to retrieve (1-based)
-  int32 page = 4;
+  int32 page = 3;
   // Number of items per page
-  int32 page_size = 5;
+  int32 page_size = 4;
+	api.common.OperatorContext operator_context = 5;
 }
 
 // Details of a single payment method
@@ -568,12 +568,12 @@ enum Sort {
 
 // Request source enum
 // Defines the source of the request
-enum RequestSource {
-  // Request from frontend user
-  REQUEST_SOURCE_FRONTEND = 0;
-  // Request from admin backend
-  REQUEST_SOURCE_ADMIN = 1;
-}
+// enum RequestSource {
+//   // Request from frontend user
+//   REQUEST_SOURCE_FRONTEND = 0;
+//   // Request from admin backend
+//   REQUEST_SOURCE_ADMIN = 1;
+// }
 
 // Channel type enum
 // Defines the purpose of a payment channel
@@ -653,8 +653,7 @@ message GetTransactionPageRequest {
   int32 page = 1;
   // Number of items per page
   int32 page_size = 2;
-  
-  // Optional transaction ID filter
+    // Optional transaction ID filter
   int64 transaction_id = 3;
   // Optional currency filter
   string currency = 4;
@@ -673,21 +672,17 @@ message GetTransactionPageRequest {
   // Optional agent filter
   string agent = 11;
   // Optional start time for date range filter
-  google.protobuf.Timestamp start_time = 12 [json_name="startTime"];
+  google.protobuf.Timestamp start_time = 12;
   // Optional end time for date range filter
-  google.protobuf.Timestamp end_time = 13 [json_name="endTime"];
+  google.protobuf.Timestamp end_time = 13;
   // Optional sort direction
-  Sort sort = 14 [json_name="sort"];
-  // Source of the request (frontend or admin)
-  RequestSource source = 15 [json_name="source"];
-  // Optional user ID filter
-  int64 user_id = 16 [json_name="userId"];
+  Sort sort = 14;
   // Optional minimum amount filter
-  string min_amount = 17 [json_name="minAmount"];
+  string min_amount = 15;
   // Optional maximum amount filter
-  string max_amount = 18 [json_name="maxAmount"];
-  api.common.OperatorContext operator_context = 19;
-  api.common.OperatorContextFilters operator_context_filters = 20;
+  string max_amount = 16;
+  api.common.OperatorContext operator_context = 17;
+  api.common.OperatorContextFilters operator_context_filters = 18;
 }
 
 // Response for transaction page
@@ -791,9 +786,9 @@ message GetPaymentChannelPageResponse {
 // Used to retrieve detailed information about a specific transaction
 message GetTransactionDetailByIdRequest {
   // Unique identifier for the transaction
-  int64 transaction_id = 1 [json_name="transactionId"];
-  // Source of the request (frontend or admin)
-  RequestSource source = 2 [json_name="source"];
+  int64 transaction_id = 1;
+  // // Source of the request (frontend or admin)
+  // RequestSource source = 2 [json_name="source"];
 }
 
 // Response for transaction detail
