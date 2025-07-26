@@ -4632,6 +4632,14 @@ components:
                     description: Currency like USD, VND
                 psp:
                     type: string
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
         api.backoffice.service.v1.GetPlayerGameDataRequest:
             type: object
             properties:
@@ -5158,16 +5166,6 @@ components:
                     type: string
                     description: Optional sort direction
                     format: enum
-                source:
-                    enum:
-                        - REQUEST_SOURCE_FRONTEND
-                        - REQUEST_SOURCE_ADMIN
-                    type: string
-                    description: Source of the request (frontend or admin)
-                    format: enum
-                userId:
-                    type: string
-                    description: Optional user ID filter
                 minAmount:
                     type: string
                     description: Optional minimum amount filter
@@ -10217,8 +10215,6 @@ components:
                     type: string
                 psp:
                     type: string
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 page:
                     type: integer
                     description: Page number to retrieve (1-based)
@@ -10227,6 +10223,8 @@ components:
                     type: integer
                     description: Number of items per page
                     format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         payment.service.v1.GetPaymentMethodListResponse:
             type: object
             properties:
@@ -10288,13 +10286,6 @@ components:
                 transactionId:
                     type: string
                     description: Unique identifier for the transaction
-                source:
-                    enum:
-                        - REQUEST_SOURCE_FRONTEND
-                        - REQUEST_SOURCE_ADMIN
-                    type: string
-                    description: Source of the request (frontend or admin)
-                    format: enum
             description: |-
                 Request to get transaction detail by ID
                  Used to retrieve detailed information about a specific transaction
@@ -10372,16 +10363,6 @@ components:
                     type: string
                     description: Optional sort direction
                     format: enum
-                source:
-                    enum:
-                        - REQUEST_SOURCE_FRONTEND
-                        - REQUEST_SOURCE_ADMIN
-                    type: string
-                    description: Source of the request (frontend or admin)
-                    format: enum
-                userId:
-                    type: string
-                    description: Optional user ID filter
                 minAmount:
                     type: string
                     description: Optional minimum amount filter
