@@ -842,6 +842,8 @@ func (m *GetOperatorPaymentChannelPageRequest) validate(all bool) error {
 
 	// no validation rules for Source
 
+	// no validation rules for Enabled
+
 	// no validation rules for Sort
 
 	if all {

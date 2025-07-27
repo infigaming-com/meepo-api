@@ -4639,6 +4639,8 @@ func (m *GetPaymentChannelPageRequest) validate(all bool) error {
 
 	// no validation rules for Source
 
+	// no validation rules for Enabled
+
 	// no validation rules for Sort
 
 	if len(errors) > 0 {
@@ -4766,6 +4768,8 @@ func (m *GetOperatorPaymentChannelPageRequest) validate(all bool) error {
 	// no validation rules for Source
 
 	// no validation rules for Sort
+
+	// no validation rules for Enabled
 
 	if all {
 		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
