@@ -4502,6 +4502,9 @@ components:
                 source:
                     type: string
                     description: Source of operator type
+                enabled:
+                    type: boolean
+                    description: Status ture or false
                 sort:
                     enum:
                         - DESC
@@ -10165,6 +10168,9 @@ components:
                 source:
                     type: string
                     description: Source of operator type
+                enabled:
+                    type: boolean
+                    description: Status ture or false
                 sort:
                     enum:
                         - DESC

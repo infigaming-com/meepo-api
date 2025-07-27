@@ -255,8 +255,10 @@ message GetOperatorPaymentChannelPageRequest {
   string country = 9;
   // Source of operator type
   string source = 10;
+  // Status ture or false
+  bool enabled = 11;
   // Optional sort direction
-  payment.service.v1.Sort sort = 11;
+  payment.service.v1.Sort sort = 12;
   // ID of the Operator connect with this channel
-  api.common.OperatorContextFilters operator_context_filters = 12;
+  api.common.OperatorContextFilters operator_context_filters = 13;
 }

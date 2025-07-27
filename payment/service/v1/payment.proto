@@ -730,8 +730,10 @@ message GetPaymentChannelPageRequest {
   string country = 10;
   // Source of operator type
   string source = 11;
+  // Status ture or false
+  bool enabled = 12;
   // Optional sort direction
-  Sort sort = 12;
+  Sort sort = 13;
 }
 // Operator to retrieve a paginated list of payment channels with optional filters
 message GetOperatorPaymentChannelPageRequest {
@@ -757,10 +759,12 @@ message GetOperatorPaymentChannelPageRequest {
   string source = 10;
   // Optional sort direction
   Sort sort = 11;
+  // Status ture or false
+  bool enabled = 12;
   // ID of the Operator connect with this channel
-  api.common.OperatorContextFilters operator_context_filters = 12;
+  api.common.OperatorContextFilters operator_context_filters = 13;
   // ID of the Operator connect with this channel
-	api.common.OperatorContext operator_context = 13;
+	api.common.OperatorContext operator_context = 14;
 }
 
 // Response for payment channel page
