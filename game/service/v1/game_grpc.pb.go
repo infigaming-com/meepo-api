@@ -42,6 +42,7 @@ const (
 	Game_GetBackofficeUserOverviewFromGame_FullMethodName = "/api.game.service.v1.Game/GetBackofficeUserOverviewFromGame"
 	Game_ListProviderRates_FullMethodName                 = "/api.game.service.v1.Game/ListProviderRates"
 	Game_GetGameTransactionById_FullMethodName            = "/api.game.service.v1.Game/GetGameTransactionById"
+	Game_GetDailyGameTransactionData_FullMethodName       = "/api.game.service.v1.Game/GetDailyGameTransactionData"
 )
 
 // GameClient is the client API for Game service.
@@ -71,6 +72,7 @@ type GameClient interface {
 	GetBackofficeUserOverviewFromGame(ctx context.Context, in *GetBackofficeUserOverviewFromGameRequest, opts ...grpc.CallOption) (*GetBackofficeUserOverviewFromGameResponse, error)
 	ListProviderRates(ctx context.Context, in *ListProviderRatesRequest, opts ...grpc.CallOption) (*ListProviderRatesResponse, error)
 	GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*GetGameTransactionByIdResponse, error)
+	GetDailyGameTransactionData(ctx context.Context, in *GetDailyGameTransactionDataRequest, opts ...grpc.CallOption) (*GetDailyGameTransactionDataResponse, error)
 }
 
 type gameClient struct {
@@ -311,6 +313,16 @@ func (c *gameClient) GetGameTransactionById(ctx context.Context, in *GetGameTran
 	return out, nil
 }
 
+func (c *gameClient) GetDailyGameTransactionData(ctx context.Context, in *GetDailyGameTransactionDataRequest, opts ...grpc.CallOption) (*GetDailyGameTransactionDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDailyGameTransactionDataResponse)
+	err := c.cc.Invoke(ctx, Game_GetDailyGameTransactionData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -338,6 +350,7 @@ type GameServer interface {
 	GetBackofficeUserOverviewFromGame(context.Context, *GetBackofficeUserOverviewFromGameRequest) (*GetBackofficeUserOverviewFromGameResponse, error)
 	ListProviderRates(context.Context, *ListProviderRatesRequest) (*ListProviderRatesResponse, error)
 	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*GetGameTransactionByIdResponse, error)
+	GetDailyGameTransactionData(context.Context, *GetDailyGameTransactionDataRequest) (*GetDailyGameTransactionDataResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -416,6 +429,9 @@ func (UnimplementedGameServer) ListProviderRates(context.Context, *ListProviderR
 }
 func (UnimplementedGameServer) GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*GetGameTransactionByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGameTransactionById not implemented")
+}
+func (UnimplementedGameServer) GetDailyGameTransactionData(context.Context, *GetDailyGameTransactionDataRequest) (*GetDailyGameTransactionDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDailyGameTransactionData not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -852,6 +868,24 @@ func _Game_GetGameTransactionById_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_GetDailyGameTransactionData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDailyGameTransactionDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetDailyGameTransactionData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetDailyGameTransactionData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetDailyGameTransactionData(ctx, req.(*GetDailyGameTransactionDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -950,6 +984,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGameTransactionById",
 			Handler:    _Game_GetGameTransactionById_Handler,
+		},
+		{
+			MethodName: "GetDailyGameTransactionData",
+			Handler:    _Game_GetDailyGameTransactionData_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
