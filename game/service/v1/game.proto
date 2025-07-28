@@ -748,7 +748,7 @@ message GetDailyGameTransactionDataResponse {
 		string total_bet_usd = 10;
 		string total_payout = 11;
 		string total_payout_usd = 12;
-		int64 bets_count = 13;
+		int32 bets_count = 13;
 	}
 	repeated GameTransactionData game_transaction_data = 1;
 }

@@ -5809,7 +5809,7 @@ type GetDailyGameTransactionDataResponse_GameTransactionData struct {
 	TotalBetUsd        string                 `protobuf:"bytes,10,opt,name=total_bet_usd,json=totalBetUsd,proto3" json:"total_bet_usd,omitempty"`
 	TotalPayout        string                 `protobuf:"bytes,11,opt,name=total_payout,json=totalPayout,proto3" json:"total_payout,omitempty"`
 	TotalPayoutUsd     string                 `protobuf:"bytes,12,opt,name=total_payout_usd,json=totalPayoutUsd,proto3" json:"total_payout_usd,omitempty"`
-	BetsCount          int64                  `protobuf:"varint,13,opt,name=bets_count,json=betsCount,proto3" json:"bets_count,omitempty"`
+	BetsCount          int32                  `protobuf:"varint,13,opt,name=bets_count,json=betsCount,proto3" json:"bets_count,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -5928,7 +5928,7 @@ func (x *GetDailyGameTransactionDataResponse_GameTransactionData) GetTotalPayout
 	return ""
 }
 
-func (x *GetDailyGameTransactionDataResponse_GameTransactionData) GetBetsCount() int64 {
+func (x *GetDailyGameTransactionDataResponse_GameTransactionData) GetBetsCount() int32 {
 	if x != nil {
 		return x.BetsCount
 	}
@@ -6583,7 +6583,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\ftotal_payout\x18\v \x01(\tR\vtotalPayout\x12(\n" +
 	"\x10total_payout_usd\x18\f \x01(\tR\x0etotalPayoutUsd\x12\x1d\n" +
 	"\n" +
-	"bets_count\x18\r \x01(\x03R\tbetsCount2\xc6\x16\n" +
+	"bets_count\x18\r \x01(\x05R\tbetsCount2\xc6\x16\n" +
 	"\x04Game\x12k\n" +
 	"\x0eCreateOperator\x12*.api.game.service.v1.CreateOperatorRequest\x1a+.api.game.service.v1.CreateOperatorResponse\"\x00\x12k\n" +
 	"\x0eUpdateOperator\x12*.api.game.service.v1.UpdateOperatorRequest\x1a+.api.game.service.v1.UpdateOperatorResponse\"\x00\x12k\n" +
