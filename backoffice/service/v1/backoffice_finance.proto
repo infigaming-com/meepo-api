@@ -143,20 +143,20 @@ message ListInvoicesResponse {
 		string operator_name = 3;
 
 		// Retailer information
-		int64 retailer_id = 4;
-		string retailer_name = 5;
+		int64 retailer_operator_id = 4;
+		string retailer_operator_name = 5;
 
 		// Company information
-		int64 company_id = 6;
-		string company_name = 7;
+		int64 company_operator_id = 6;
+		string company_operator_name = 7;
 		
 		// Invoice details
 		string month = 8;
-		string retailer = 9;
-		string company = 10;
 		
 		// Financial information
-		string due_amount = 11;
+		string due_amount = 9;
+		string total_amount = 10;
+		string amount_paid = 11;
 		
 		// Payment status
 		enum PaymentStatus {
@@ -214,12 +214,12 @@ message GetInvoiceDetailResponse {
 		string due_amount = 14; // Remaining amount due
 
 		// Retailer information
-		int64 retailer_id = 15;
-		string retailer_name = 16;
+		int64 retailer_operator_id = 15;
+		string retailer_operator_name = 16;
 
 		// Company information
-		int64 company_id = 17;
-		string company_name = 18;
+		int64 company_operator_id = 17;
+		string company_operator_name = 18;
 		
 		// Operator information
 		int64 operator_id = 19;
@@ -370,8 +370,8 @@ message ListMonthlyRevenueShareResponse {
 message AddAdjustmentRequest {
 	// Basic information
 	string item = 1; // Adjustment item type
-	int64 retailer_id = 2; // Retailer ID
-	int64 company_id = 3; // Company ID
+	int64 retailer_operator_id = 2; // Retailer ID
+	int64 company_operator_id = 3; // Company ID
 	int64 operator_id = 4; // Operator ID
 	
 	// Financial information
