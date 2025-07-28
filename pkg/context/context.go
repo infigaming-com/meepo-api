@@ -27,6 +27,8 @@ type OperatorIds struct {
 	CompanyOperatorId  int64
 	RetailerOperatorId int64
 	SystemOperatorId   int64
+	RealOperatorId     int64
+	OperatorType       string
 }
 
 func WithValue[T any](ctx context.Context, key string, value T) context.Context {
@@ -69,6 +71,15 @@ func GetOperatorIds(ctx context.Context) (OperatorIds, bool) {
 	return Value[OperatorIds](ctx, "operatorIds")
 }
 
+func GetOperatorContext(ctx context.Context) (*common.OperatorContext, bool) {
+	operatorIds, ok := GetOperatorIds(ctx)
+	if !ok {
+		return nil, false
+	}
+	operatorContext := operatorIds.GetOperatorContext()
+	return &operatorContext, true
+}
+
 func WithRequestInfo(ctx context.Context, requestInfo RequestInfo) context.Context {
 	return WithValue(ctx, "requestInfo", requestInfo)
 }
@@ -77,15 +88,7 @@ func GetRequestInfo(ctx context.Context) (RequestInfo, bool) {
 	return Value[RequestInfo](ctx, "requestInfo")
 }
 
-func GetActualOperatorIdAndType(ctx context.Context) (int64, string, bool) {
-	if operatorIds, ok := GetOperatorIds(ctx); ok {
-		actualOperatorId, actualOperatorType := operatorIds.GetActualOperatorIdAndType()
-		return actualOperatorId, actualOperatorType, true
-	}
-	return 0, "", false
-}
-
-func (o *OperatorIds) GetActualOperatorIdAndType() (int64, string) {
+func (o *OperatorIds) GetRealOperatorIdAndType() (int64, string) {
 	if o.OperatorId != 0 {
 		// Operator level
 		return o.OperatorId, util.OperatorTypeOperator
@@ -101,11 +104,63 @@ func (o *OperatorIds) GetActualOperatorIdAndType() (int64, string) {
 	}
 }
 
+func NewOperatorIds(operatorId, companyOperatorId, retailerOperatorId, systemOperatorId int64) *OperatorIds {
+	operatorIds := &OperatorIds{
+		OperatorId:         operatorId,
+		CompanyOperatorId:  companyOperatorId,
+		RetailerOperatorId: retailerOperatorId,
+		SystemOperatorId:   systemOperatorId,
+	}
+	realOperatorId, operatorType := operatorIds.GetRealOperatorIdAndType()
+	operatorIds.RealOperatorId = realOperatorId
+	operatorIds.OperatorType = operatorType
+	return operatorIds
+}
+
+func (o *OperatorIds) GetOperatorContext() common.OperatorContext {
+	return common.OperatorContext{
+		OperatorId:         o.OperatorId,
+		CompanyOperatorId:  o.CompanyOperatorId,
+		RetailerOperatorId: o.RetailerOperatorId,
+		SystemOperatorId:   o.SystemOperatorId,
+		RealOperatorId:     o.RealOperatorId,
+		OperatorType:       o.OperatorType,
+	}
+}
+
 func OperatorIdsFromOperatorContext(oc *common.OperatorContext) OperatorIds {
 	return OperatorIds{
 		OperatorId:         oc.OperatorId,
 		CompanyOperatorId:  oc.CompanyOperatorId,
 		RetailerOperatorId: oc.RetailerOperatorId,
 		SystemOperatorId:   oc.SystemOperatorId,
+		RealOperatorId:     oc.RealOperatorId,
+		OperatorType:       oc.OperatorType,
 	}
+}
+
+// IsOperatorIdsInOperatorContext checks if the operatorIds are in the operatorContext.
+func IsOperatorIdsInOperatorContext(operatorIds OperatorIds, operatorContext *common.OperatorContext) bool {
+	operatorType := operatorContext.OperatorType
+	if operatorType == "" {
+		contextOperatorIds := OperatorIdsFromOperatorContext(operatorContext)
+		_, operatorType = contextOperatorIds.GetRealOperatorIdAndType()
+	}
+	switch operatorType {
+	case util.OperatorTypeOperator:
+		return operatorIds.OperatorId == operatorContext.OperatorId && operatorIds.CompanyOperatorId == operatorContext.CompanyOperatorId && operatorIds.RetailerOperatorId == operatorContext.RetailerOperatorId && operatorIds.SystemOperatorId == operatorContext.SystemOperatorId
+	case util.OperatorTypeCompany:
+		return operatorIds.CompanyOperatorId == operatorContext.CompanyOperatorId && operatorIds.RetailerOperatorId == operatorContext.RetailerOperatorId && operatorIds.SystemOperatorId == operatorContext.SystemOperatorId
+	case util.OperatorTypeRetailer:
+		return operatorIds.RetailerOperatorId == operatorContext.RetailerOperatorId && operatorIds.SystemOperatorId == operatorContext.SystemOperatorId
+	case util.OperatorTypeSystem:
+		return operatorIds.SystemOperatorId == operatorContext.SystemOperatorId
+	}
+	return false
+}
+
+func NewOperatorContextWithIds(operatorId, companyOperatorId, retailerOperatorId, systemOperatorId int64) *common.OperatorContext {
+	operatorIds := NewOperatorIds(operatorId, companyOperatorId, retailerOperatorId, systemOperatorId)
+	operatorContext := operatorIds.GetOperatorContext()
+	return &operatorContext
 }

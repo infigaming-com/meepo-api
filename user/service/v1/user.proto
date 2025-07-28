@@ -137,6 +137,22 @@ service User {
 			body: "*"
 		};
 	}
+
+	// Send password reset verification code to email
+	rpc SendPasswordResetCode(SendPasswordResetCodeRequest) returns (SendPasswordResetCodeResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/password/reset-code/send"
+			body: "*"
+		};
+	}
+
+	// Reset password using verification code
+	rpc ResetPasswordWithCode(ResetPasswordWithCodeRequest) returns (ResetPasswordWithCodeResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/password/reset"
+			body: "*"
+		};
+	}
 	
 	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
 
@@ -227,6 +243,14 @@ service User {
 
 	// UpdateOperatorStatus updates the status of an operator
 	rpc UpdateOperatorStatus(UpdateOperatorStatusRequest) returns (UpdateOperatorStatusResponse) {
+	}
+
+	// ListAllUsers returns a list of all users which belong to the operator context
+	rpc ListAllUsers(ListAllUsersRequest) returns (ListAllUsersResponse) {
+	}
+
+	// ListCompanyOperatorsByAdminEmail returns a list of company operators by admin email
+	rpc ListCompanyOperatorsByAdminEmail(ListCompanyOperatorsByAdminEmailRequest) returns (ListCompanyOperatorsByAdminEmailResponse) {
 	}
 }
 
@@ -451,6 +475,8 @@ message SetOperatorTagsConfigRequest {
 	int64 operator_id = 1;
 	// Whether to follow parent operator's tags.
 	bool follow_parent = 2;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 3;
 }
 
 // SetOperatorTagsConfigResponse is an empty message indicating successful tag configuration.
@@ -462,6 +488,8 @@ message SetOperatorTagsRequest {
 	int64 operator_id = 1;
 	// The tag to add to the operator.
 	repeated string tags = 2;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 3;
 }
 
 // SetOperatorTagsResponse is an empty message indicating successful tag addition.
@@ -471,6 +499,8 @@ message SetOperatorTagsResponse {}
 message GetOperatorTagsConfigRequest {
 	// The ID of the operator to get tag configuration for.
 	int64 operator_id = 1;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 2;
 }
 
 // GetOperatorTagsConfigResponse contains the tag configuration settings, now only follow_parent flag.
@@ -483,6 +513,8 @@ message GetOperatorTagsConfigResponse {
 message GetOperatorTagsRequest {
 	// The ID of the operator to get tags for.
 	int64 operator_id = 1;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 2;
 }	
 
 // GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
@@ -505,6 +537,8 @@ message GetUserTagsResponse {
 message GetUserTagsByIdRequest {
 	// The ID of the user to get tags for.
 	int64 user_id = 1;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 2;
 }
 
 // GetUserTagsByIdResponse contains the list of active tags associated with the user.
@@ -516,6 +550,8 @@ message GetUserTagsByIdResponse {
 message SetUserTagsByIdRequest {
 	int64 user_id = 1;
 	repeated string tags = 2;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 3;
 }
 
 message SetUserTagsByIdResponse {}
@@ -545,6 +581,25 @@ message SendEmailVerificationCodeRequest {
 
 message SendEmailVerificationCodeResponse {
 }
+
+message SendPasswordResetCodeRequest {
+	string email = 1;  // User's email address
+	api.common.OperatorContext operator_context = 2;  // Operator context
+}
+
+message SendPasswordResetCodeResponse {
+}
+
+message ResetPasswordWithCodeRequest {
+	string email = 1;           // User's email address
+	string verification_code = 2;  // Verification code received via email
+	string new_password = 3;    // New password
+	api.common.OperatorContext operator_context = 4;  // Operator context
+}
+
+message ResetPasswordWithCodeResponse {
+}
+
 message UpdateUserRequest {
 	int64 user_id = 1;
 	optional string nickname = 2;
@@ -554,6 +609,8 @@ message UpdateUserRequest {
 	optional bool ban_withdraw = 6;
 	optional bool enabled = 7;
 	optional int64 role_id = 8;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 9;
 }
 
 message UpdateUserResponse {
@@ -565,61 +622,62 @@ message ListUsersRequest {
 	optional google.protobuf.Timestamp registration_start_time = 3;
 	optional google.protobuf.Timestamp registration_end_time = 4;
 	optional int32 vip_level = 5;
-	optional int64 retailer_operator_id = 6;
-	optional int64 group_operator_id = 7;
-	optional int64 operator_id = 8;
-	optional string country = 9;
+	optional string country = 6;
 	// optional int32 risk_level_min = 10;
 	// optional int32 risk_level_max = 11;
-	optional int32 kyc_level = 12;
+	optional int32 kyc_level = 7;
 	// optional bool has_made_deposit = 13;
-	optional string deposit_min = 14;
-	optional string deposit_max = 15;
-	optional string withdrawal_min = 16;
-	optional string withdrawal_max = 17;
-	optional bool ban_withdraw = 18;
-	optional bool ban_game = 19;
-	optional bool ban_login = 20;
-	optional string user_type = 21;
-	optional int64 role_id = 22;
-	optional bool online = 23;
-	optional bool enabled = 24;
-	optional string email = 25;
-	optional string mobile = 26;
-	optional int32 page = 27;
-	optional int32 page_size = 28;
+	optional string deposit_min = 8;
+	optional string deposit_max = 9;
+	optional string withdrawal_min = 10;
+	optional string withdrawal_max = 11;
+	optional bool ban_withdraw = 12;
+	optional bool ban_game = 13;
+	optional bool ban_login = 14;
+	optional string user_type = 15;
+	optional int64 role_id = 16;
+	optional bool online = 17;
+	optional bool enabled = 18;
+	optional string email = 19;
+	optional string mobile = 20;
+	optional int32 page = 21;
+	optional int32 page_size = 22;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 23;
+	api.common.OperatorContextFilters operator_context_filters = 24;
 }
 
 message ListUsersResponse {
 	message User {
-		string retailer = 1;
-		string group = 2;
-		string operator_name = 3;
-		int64 user_id = 4;
-		string username = 5;
-		string email = 6;
-		string mobile = 7;
-		int32 vip_level = 8;
-		int32 kyc_level = 9;
-		string deposit = 10;
-		string withdraw = 11;
-		repeated string tags = 12;
-		bool ban_withdraw = 13;
-		bool ban_game = 14;
-		bool ban_login = 15;
-		bool online = 16;
-		google.protobuf.Timestamp last_login_at = 17;
-		google.protobuf.Timestamp registered_at = 18;
+		string operator_name = 1;
+		string company_operator_name = 2;
+		string retailer_operator_name = 3;
+		string system_operator_name = 4;
+		int64 user_id = 5;
+		string username = 6;
+		string email = 7;
+		string mobile = 8;
+		int32 vip_level = 9;
+		int32 kyc_level = 10;
+		string deposit = 11;
+		string withdraw = 12;
+		repeated string tags = 13;
+		bool ban_withdraw = 14;
+		bool ban_game = 15;
+		bool ban_login = 16;
+		bool online = 17;
+		google.protobuf.Timestamp last_login_at = 18;
+		google.protobuf.Timestamp registered_at = 19;
 		// int32 risk_level = 19;
 		// string referral_code = 20;
 		// string affiliate_code = 21;
-		string country = 22;
+		string country = 20;
 		// string device = 23;
 		// string source = 24;
-		string registration_ip = 25;
-		bool enabled = 26;
-		google.protobuf.Timestamp created_at = 27;
-		Role role = 28;
+		string registration_ip = 21;
+		bool enabled = 22;
+		google.protobuf.Timestamp created_at = 23;
+		Role role = 24;
 	}
 	repeated User users = 1;
 	int32 page = 2;
@@ -655,6 +713,8 @@ message AddCommentRequest {
 	int64 user_id = 1;
 	int64 author_user_id = 2;
 	string content = 3;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 4;
 }
 
 message AddCommentResponse {
@@ -680,6 +740,8 @@ message GetUserProfileRequest {
 	int64 user_id = 1;
 	optional int32 login_page = 2;
 	optional int32 login_page_size = 3;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 4;
 }
 
 message GetUserProfileResponse {
@@ -806,6 +868,8 @@ message GetRoleResponse {
 }
 
 message GetOverviewDashboardFromUserRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 }
 
 message GetOverviewDashboardFromUserResponse {
@@ -983,6 +1047,7 @@ message OperatorDetails {
 	string retailer_operator_name = 27; // retailer operator name in the operator hierarchy, or empty string if not exists
 	int64 system_operator_id = 28; // system operator id in the operator hierarchy
 	string system_operator_name = 29; // system operator name in the operator hierarchy, or empty string if not exists
+	string config = 30;
 }
 
 message GetOperatorDetailsRequest {
@@ -1012,44 +1077,61 @@ message ListOperatorsByParentOperatorIdResponse {
 	int32 page_size = 9;
 }
 
-// OperatorInfo is the simplified information of an operator, used for list operators
-message OperatorInfo {
-	int64 operator_id = 1;
-	string operator_name = 2;
-	string status = 3;
-}
-
 message ListRetailerOperatorsRequest {
-	string operator_type = 1;
-	int64 actual_operator_id = 2;
-	api.common.OperatorContext operator_context = 3;
+	api.common.OperatorContext operator_context = 1;
+	bool include_count = 2;
 }
 
 message ListRetailerOperatorsResponse {
+	// OperatorInfo is the simplified information of a retailer operator, used for list retailer operators
+	message OperatorInfo {
+		api.common.OperatorContext operator_context = 1;
+		string retailer_operator_name = 2;
+		int32 company_operator_count = 3;
+		int32 bottom_operator_count = 4;
+		int32 bottom_live_operator_count = 5;
+		bool status = 6;
+		bool self_co_operation_enabled = 7;
+	}
 	repeated OperatorInfo retailer_operators = 1;
 }
 
 message ListCompanyOperatorsRequest {
-	string operator_type = 1;
-	int64 actual_operator_id = 2;
-	repeated int64 retailer_operator_ids = 3;
-	api.common.OperatorContext operator_context = 4;
+	repeated int64 retailer_operator_ids = 1;
+	api.common.OperatorContext operator_context = 2;
+	bool include_count = 3;
 }
 
 message ListCompanyOperatorsResponse {
+	// OperatorInfo is the simplified information of a company operator, used for list company operators
+	message OperatorInfo {
+		api.common.OperatorContext operator_context = 1;
+		string company_operator_name = 2;
+		string retailer_operator_name = 3;
+		int32 bottom_operator_count = 4;
+		int32 bottom_live_operator_count = 5;
+		bool status = 6;
+	}
 	repeated OperatorInfo company_operators = 1;
 }
 
 message ListBottomOperatorsRequest {
-	string operator_type = 1;
-	int64 actual_operator_id = 2;
-	repeated int64 retailer_operator_ids = 3;
-	repeated int64 company_operator_ids = 4;
-	api.common.OperatorContext operator_context = 5;
+	repeated int64 retailer_operator_ids = 1;
+	repeated int64 company_operator_ids = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message ListBottomOperatorsResponse {
-	repeated OperatorInfo operators = 1;
+	// OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
+	message OperatorInfo {
+		api.common.OperatorContext operator_context = 1;
+		string bottom_operator_name = 2;
+		string retailer_operator_name = 3;
+		string company_operator_name = 4;
+		string mode = 5;
+		string status = 6;
+	}
+	repeated OperatorInfo bottom_operators = 1;
 }
 
 message UpdateOperatorStatusRequest {
@@ -1064,4 +1146,22 @@ message UpdateOperatorStatusRequest {
 
 message UpdateOperatorStatusResponse {
 	string status = 1; // status of target operator after update
+}
+
+message ListAllUsersRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional int64 role_id = 2;
+}
+
+message ListAllUsersResponse {
+	repeated UserInfo users = 1;
+}
+
+message ListCompanyOperatorsByAdminEmailRequest {
+	string email = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ListCompanyOperatorsByAdminEmailResponse {
+	repeated OperatorDetails operator_details_list = 1;
 }

@@ -948,3 +948,51 @@ func IsInvalidOperatorContext(err error) bool {
 func ErrorInvalidOperatorContext(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_OPERATOR_CONTEXT.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidOperatorId(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_ID.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorId(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_ID.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorContextPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_CONTEXT_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorOperatorContextPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_CONTEXT_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorContextNotFoundInContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT.String() && e.Code == 500
+}
+
+func ErrorOperatorContextNotFoundInContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCompanyAdminUsersByEmailFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_COMPANY_ADMIN_USERS_BY_EMAIL_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCompanyAdminUsersByEmailFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_COMPANY_ADMIN_USERS_BY_EMAIL_FAILED.String(), fmt.Sprintf(format, args...))
+}

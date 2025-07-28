@@ -19,58 +19,62 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	User_Register_FullMethodName                        = "/api.user.service.v1.User/Register"
-	User_Login_FullMethodName                           = "/api.user.service.v1.User/Login"
-	User_LoginWithInfo_FullMethodName                   = "/api.user.service.v1.User/LoginWithInfo"
-	User_RegisterOrLoginWithOAuth_FullMethodName        = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
-	User_RegisterOrLoginWithTelegram_FullMethodName     = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
-	User_RefreshToken_FullMethodName                    = "/api.user.service.v1.User/RefreshToken"
-	User_GetUser_FullMethodName                         = "/api.user.service.v1.User/GetUser"
-	User_GetUsersByIds_FullMethodName                   = "/api.user.service.v1.User/GetUsersByIds"
-	User_GetUserIdsByOperatorIds_FullMethodName         = "/api.user.service.v1.User/GetUserIdsByOperatorIds"
-	User_Logout_FullMethodName                          = "/api.user.service.v1.User/Logout"
-	User_IsTokenRevoked_FullMethodName                  = "/api.user.service.v1.User/IsTokenRevoked"
-	User_SetOperatorTagsConfig_FullMethodName           = "/api.user.service.v1.User/SetOperatorTagsConfig"
-	User_SetOperatorTags_FullMethodName                 = "/api.user.service.v1.User/SetOperatorTags"
-	User_GetOperatorTagsConfig_FullMethodName           = "/api.user.service.v1.User/GetOperatorTagsConfig"
-	User_GetOperatorTags_FullMethodName                 = "/api.user.service.v1.User/GetOperatorTags"
-	User_GetUserTags_FullMethodName                     = "/api.user.service.v1.User/GetUserTags"
-	User_GetUserTagsById_FullMethodName                 = "/api.user.service.v1.User/GetUserTagsById"
-	User_SetUserTagsById_FullMethodName                 = "/api.user.service.v1.User/SetUserTagsById"
-	User_CheckPermission_FullMethodName                 = "/api.user.service.v1.User/CheckPermission"
-	User_AddOperator_FullMethodName                     = "/api.user.service.v1.User/AddOperator"
-	User_SendEmailVerificationCode_FullMethodName       = "/api.user.service.v1.User/SendEmailVerificationCode"
-	User_UpdateUser_FullMethodName                      = "/api.user.service.v1.User/UpdateUser"
-	User_ListUsers_FullMethodName                       = "/api.user.service.v1.User/ListUsers"
-	User_CreateUser_FullMethodName                      = "/api.user.service.v1.User/CreateUser"
-	User_VerifyEmail_FullMethodName                     = "/api.user.service.v1.User/VerifyEmail"
-	User_AddComment_FullMethodName                      = "/api.user.service.v1.User/AddComment"
-	User_GetCommentsByUserId_FullMethodName             = "/api.user.service.v1.User/GetCommentsByUserId"
-	User_GetUserProfile_FullMethodName                  = "/api.user.service.v1.User/GetUserProfile"
-	User_CreateRole_FullMethodName                      = "/api.user.service.v1.User/CreateRole"
-	User_ListRoles_FullMethodName                       = "/api.user.service.v1.User/ListRoles"
-	User_CreateOperator_FullMethodName                  = "/api.user.service.v1.User/CreateOperator"
-	User_UpdateRole_FullMethodName                      = "/api.user.service.v1.User/UpdateRole"
-	User_GetRole_FullMethodName                         = "/api.user.service.v1.User/GetRole"
-	User_DeleteRole_FullMethodName                      = "/api.user.service.v1.User/DeleteRole"
-	User_GetOverviewDashboardFromUser_FullMethodName    = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
-	User_GetOperatorIdByOrigin_FullMethodName           = "/api.user.service.v1.User/GetOperatorIdByOrigin"
-	User_GetOperatorIdsByOrigin_FullMethodName          = "/api.user.service.v1.User/GetOperatorIdsByOrigin"
-	User_GetOperator_FullMethodName                     = "/api.user.service.v1.User/GetOperator"
-	User_GetOperatorsByIds_FullMethodName               = "/api.user.service.v1.User/GetOperatorsByIds"
-	User_ListAllOperators_FullMethodName                = "/api.user.service.v1.User/ListAllOperators"
-	User_GetParentOperatorIds_FullMethodName            = "/api.user.service.v1.User/GetParentOperatorIds"
-	User_GetChildOperatorIds_FullMethodName             = "/api.user.service.v1.User/GetChildOperatorIds"
-	User_CheckEmailExists_FullMethodName                = "/api.user.service.v1.User/CheckEmailExists"
-	User_CheckSubdomainExists_FullMethodName            = "/api.user.service.v1.User/CheckSubdomainExists"
-	User_CheckOperatorKeyExists_FullMethodName          = "/api.user.service.v1.User/CheckOperatorKeyExists"
-	User_CreateBusiness_FullMethodName                  = "/api.user.service.v1.User/CreateBusiness"
-	User_GetOperatorDetails_FullMethodName              = "/api.user.service.v1.User/GetOperatorDetails"
-	User_ListOperatorsByParentOperatorId_FullMethodName = "/api.user.service.v1.User/ListOperatorsByParentOperatorId"
-	User_ListRetailerOperators_FullMethodName           = "/api.user.service.v1.User/ListRetailerOperators"
-	User_ListCompanyOperators_FullMethodName            = "/api.user.service.v1.User/ListCompanyOperators"
-	User_ListBottomOperators_FullMethodName             = "/api.user.service.v1.User/ListBottomOperators"
-	User_UpdateOperatorStatus_FullMethodName            = "/api.user.service.v1.User/UpdateOperatorStatus"
+	User_Register_FullMethodName                         = "/api.user.service.v1.User/Register"
+	User_Login_FullMethodName                            = "/api.user.service.v1.User/Login"
+	User_LoginWithInfo_FullMethodName                    = "/api.user.service.v1.User/LoginWithInfo"
+	User_RegisterOrLoginWithOAuth_FullMethodName         = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
+	User_RegisterOrLoginWithTelegram_FullMethodName      = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
+	User_RefreshToken_FullMethodName                     = "/api.user.service.v1.User/RefreshToken"
+	User_GetUser_FullMethodName                          = "/api.user.service.v1.User/GetUser"
+	User_GetUsersByIds_FullMethodName                    = "/api.user.service.v1.User/GetUsersByIds"
+	User_GetUserIdsByOperatorIds_FullMethodName          = "/api.user.service.v1.User/GetUserIdsByOperatorIds"
+	User_Logout_FullMethodName                           = "/api.user.service.v1.User/Logout"
+	User_IsTokenRevoked_FullMethodName                   = "/api.user.service.v1.User/IsTokenRevoked"
+	User_SetOperatorTagsConfig_FullMethodName            = "/api.user.service.v1.User/SetOperatorTagsConfig"
+	User_SetOperatorTags_FullMethodName                  = "/api.user.service.v1.User/SetOperatorTags"
+	User_GetOperatorTagsConfig_FullMethodName            = "/api.user.service.v1.User/GetOperatorTagsConfig"
+	User_GetOperatorTags_FullMethodName                  = "/api.user.service.v1.User/GetOperatorTags"
+	User_GetUserTags_FullMethodName                      = "/api.user.service.v1.User/GetUserTags"
+	User_GetUserTagsById_FullMethodName                  = "/api.user.service.v1.User/GetUserTagsById"
+	User_SetUserTagsById_FullMethodName                  = "/api.user.service.v1.User/SetUserTagsById"
+	User_CheckPermission_FullMethodName                  = "/api.user.service.v1.User/CheckPermission"
+	User_AddOperator_FullMethodName                      = "/api.user.service.v1.User/AddOperator"
+	User_SendEmailVerificationCode_FullMethodName        = "/api.user.service.v1.User/SendEmailVerificationCode"
+	User_SendPasswordResetCode_FullMethodName            = "/api.user.service.v1.User/SendPasswordResetCode"
+	User_ResetPasswordWithCode_FullMethodName            = "/api.user.service.v1.User/ResetPasswordWithCode"
+	User_UpdateUser_FullMethodName                       = "/api.user.service.v1.User/UpdateUser"
+	User_ListUsers_FullMethodName                        = "/api.user.service.v1.User/ListUsers"
+	User_CreateUser_FullMethodName                       = "/api.user.service.v1.User/CreateUser"
+	User_VerifyEmail_FullMethodName                      = "/api.user.service.v1.User/VerifyEmail"
+	User_AddComment_FullMethodName                       = "/api.user.service.v1.User/AddComment"
+	User_GetCommentsByUserId_FullMethodName              = "/api.user.service.v1.User/GetCommentsByUserId"
+	User_GetUserProfile_FullMethodName                   = "/api.user.service.v1.User/GetUserProfile"
+	User_CreateRole_FullMethodName                       = "/api.user.service.v1.User/CreateRole"
+	User_ListRoles_FullMethodName                        = "/api.user.service.v1.User/ListRoles"
+	User_CreateOperator_FullMethodName                   = "/api.user.service.v1.User/CreateOperator"
+	User_UpdateRole_FullMethodName                       = "/api.user.service.v1.User/UpdateRole"
+	User_GetRole_FullMethodName                          = "/api.user.service.v1.User/GetRole"
+	User_DeleteRole_FullMethodName                       = "/api.user.service.v1.User/DeleteRole"
+	User_GetOverviewDashboardFromUser_FullMethodName     = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
+	User_GetOperatorIdByOrigin_FullMethodName            = "/api.user.service.v1.User/GetOperatorIdByOrigin"
+	User_GetOperatorIdsByOrigin_FullMethodName           = "/api.user.service.v1.User/GetOperatorIdsByOrigin"
+	User_GetOperator_FullMethodName                      = "/api.user.service.v1.User/GetOperator"
+	User_GetOperatorsByIds_FullMethodName                = "/api.user.service.v1.User/GetOperatorsByIds"
+	User_ListAllOperators_FullMethodName                 = "/api.user.service.v1.User/ListAllOperators"
+	User_GetParentOperatorIds_FullMethodName             = "/api.user.service.v1.User/GetParentOperatorIds"
+	User_GetChildOperatorIds_FullMethodName              = "/api.user.service.v1.User/GetChildOperatorIds"
+	User_CheckEmailExists_FullMethodName                 = "/api.user.service.v1.User/CheckEmailExists"
+	User_CheckSubdomainExists_FullMethodName             = "/api.user.service.v1.User/CheckSubdomainExists"
+	User_CheckOperatorKeyExists_FullMethodName           = "/api.user.service.v1.User/CheckOperatorKeyExists"
+	User_CreateBusiness_FullMethodName                   = "/api.user.service.v1.User/CreateBusiness"
+	User_GetOperatorDetails_FullMethodName               = "/api.user.service.v1.User/GetOperatorDetails"
+	User_ListOperatorsByParentOperatorId_FullMethodName  = "/api.user.service.v1.User/ListOperatorsByParentOperatorId"
+	User_ListRetailerOperators_FullMethodName            = "/api.user.service.v1.User/ListRetailerOperators"
+	User_ListCompanyOperators_FullMethodName             = "/api.user.service.v1.User/ListCompanyOperators"
+	User_ListBottomOperators_FullMethodName              = "/api.user.service.v1.User/ListBottomOperators"
+	User_UpdateOperatorStatus_FullMethodName             = "/api.user.service.v1.User/UpdateOperatorStatus"
+	User_ListAllUsers_FullMethodName                     = "/api.user.service.v1.User/ListAllUsers"
+	User_ListCompanyOperatorsByAdminEmail_FullMethodName = "/api.user.service.v1.User/ListCompanyOperatorsByAdminEmail"
 )
 
 // UserClient is the client API for User service.
@@ -130,6 +134,10 @@ type UserClient interface {
 	CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error)
 	AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...grpc.CallOption) (*AddOperatorResponse, error)
 	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
+	// Send password reset verification code to email
+	SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error)
+	// Reset password using verification code
+	ResetPasswordWithCode(ctx context.Context, in *ResetPasswordWithCodeRequest, opts ...grpc.CallOption) (*ResetPasswordWithCodeResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
@@ -175,6 +183,10 @@ type UserClient interface {
 	ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...grpc.CallOption) (*UpdateOperatorStatusResponse, error)
+	// ListAllUsers returns a list of all users which belong to the operator context
+	ListAllUsers(ctx context.Context, in *ListAllUsersRequest, opts ...grpc.CallOption) (*ListAllUsersResponse, error)
+	// ListCompanyOperatorsByAdminEmail returns a list of company operators by admin email
+	ListCompanyOperatorsByAdminEmail(ctx context.Context, in *ListCompanyOperatorsByAdminEmailRequest, opts ...grpc.CallOption) (*ListCompanyOperatorsByAdminEmailResponse, error)
 }
 
 type userClient struct {
@@ -389,6 +401,26 @@ func (c *userClient) SendEmailVerificationCode(ctx context.Context, in *SendEmai
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SendEmailVerificationCodeResponse)
 	err := c.cc.Invoke(ctx, User_SendEmailVerificationCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendPasswordResetCodeResponse)
+	err := c.cc.Invoke(ctx, User_SendPasswordResetCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ResetPasswordWithCode(ctx context.Context, in *ResetPasswordWithCodeRequest, opts ...grpc.CallOption) (*ResetPasswordWithCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResetPasswordWithCodeResponse)
+	err := c.cc.Invoke(ctx, User_ResetPasswordWithCode_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -705,6 +737,26 @@ func (c *userClient) UpdateOperatorStatus(ctx context.Context, in *UpdateOperato
 	return out, nil
 }
 
+func (c *userClient) ListAllUsers(ctx context.Context, in *ListAllUsersRequest, opts ...grpc.CallOption) (*ListAllUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAllUsersResponse)
+	err := c.cc.Invoke(ctx, User_ListAllUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListCompanyOperatorsByAdminEmail(ctx context.Context, in *ListCompanyOperatorsByAdminEmailRequest, opts ...grpc.CallOption) (*ListCompanyOperatorsByAdminEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCompanyOperatorsByAdminEmailResponse)
+	err := c.cc.Invoke(ctx, User_ListCompanyOperatorsByAdminEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -762,6 +814,10 @@ type UserServer interface {
 	CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error)
 	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
+	// Send password reset verification code to email
+	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
+	// Reset password using verification code
+	ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
@@ -807,6 +863,10 @@ type UserServer interface {
 	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error)
+	// ListAllUsers returns a list of all users which belong to the operator context
+	ListAllUsers(context.Context, *ListAllUsersRequest) (*ListAllUsersResponse, error)
+	// ListCompanyOperatorsByAdminEmail returns a list of company operators by admin email
+	ListCompanyOperatorsByAdminEmail(context.Context, *ListCompanyOperatorsByAdminEmailRequest) (*ListCompanyOperatorsByAdminEmailResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -879,6 +939,12 @@ func (UnimplementedUserServer) AddOperator(context.Context, *AddOperatorRequest)
 }
 func (UnimplementedUserServer) SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendEmailVerificationCode not implemented")
+}
+func (UnimplementedUserServer) SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendPasswordResetCode not implemented")
+}
+func (UnimplementedUserServer) ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetPasswordWithCode not implemented")
 }
 func (UnimplementedUserServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
@@ -972,6 +1038,12 @@ func (UnimplementedUserServer) ListBottomOperators(context.Context, *ListBottomO
 }
 func (UnimplementedUserServer) UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorStatus not implemented")
+}
+func (UnimplementedUserServer) ListAllUsers(context.Context, *ListAllUsersRequest) (*ListAllUsersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAllUsers not implemented")
+}
+func (UnimplementedUserServer) ListCompanyOperatorsByAdminEmail(context.Context, *ListCompanyOperatorsByAdminEmailRequest) (*ListCompanyOperatorsByAdminEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCompanyOperatorsByAdminEmail not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1368,6 +1440,42 @@ func _User_SendEmailVerificationCode_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).SendEmailVerificationCode(ctx, req.(*SendEmailVerificationCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SendPasswordResetCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendPasswordResetCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SendPasswordResetCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SendPasswordResetCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SendPasswordResetCode(ctx, req.(*SendPasswordResetCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ResetPasswordWithCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetPasswordWithCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ResetPasswordWithCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ResetPasswordWithCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ResetPasswordWithCode(ctx, req.(*ResetPasswordWithCodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1930,6 +2038,42 @@ func _User_UpdateOperatorStatus_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_ListAllUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAllUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListAllUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListAllUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListAllUsers(ctx, req.(*ListAllUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListCompanyOperatorsByAdminEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCompanyOperatorsByAdminEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListCompanyOperatorsByAdminEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListCompanyOperatorsByAdminEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListCompanyOperatorsByAdminEmail(ctx, req.(*ListCompanyOperatorsByAdminEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2020,6 +2164,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendEmailVerificationCode",
 			Handler:    _User_SendEmailVerificationCode_Handler,
+		},
+		{
+			MethodName: "SendPasswordResetCode",
+			Handler:    _User_SendPasswordResetCode_Handler,
+		},
+		{
+			MethodName: "ResetPasswordWithCode",
+			Handler:    _User_ResetPasswordWithCode_Handler,
 		},
 		{
 			MethodName: "UpdateUser",
@@ -2144,6 +2296,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperatorStatus",
 			Handler:    _User_UpdateOperatorStatus_Handler,
+		},
+		{
+			MethodName: "ListAllUsers",
+			Handler:    _User_ListAllUsers_Handler,
+		},
+		{
+			MethodName: "ListCompanyOperatorsByAdminEmail",
+			Handler:    _User_ListCompanyOperatorsByAdminEmail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -862,3 +862,75 @@ func IsUserInfoNotFoundInContext(err error) bool {
 func ErrorUserInfoNotFoundInContext(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorOperatorPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserNotInOperatorContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_NOT_IN_OPERATOR_CONTEXT.String() && e.Code == 500
+}
+
+func ErrorUserNotInOperatorContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_NOT_IN_OPERATOR_CONTEXT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidTransferCurrency(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_TRANSFER_CURRENCY.String() && e.Code == 500
+}
+
+func ErrorInvalidTransferCurrency(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_TRANSFER_CURRENCY.String(), fmt.Sprintf(format, args...))
+}
+
+func IsQueryOperatorBalanceTransactionsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_QUERY_OPERATOR_BALANCE_TRANSACTIONS_FAILED.String() && e.Code == 500
+}
+
+func ErrorQueryOperatorBalanceTransactionsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_QUERY_OPERATOR_BALANCE_TRANSACTIONS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorBalanceNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_BALANCE_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorOperatorBalanceNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_BALANCE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetReportingCurrencyFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_REPORTING_CURRENCY_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetReportingCurrencyFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_REPORTING_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
+}

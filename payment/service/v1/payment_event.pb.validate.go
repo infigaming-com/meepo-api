@@ -238,6 +238,341 @@ var _ interface {
 	ErrorName() string
 } = EventResponseValidationError{}
 
+// Validate checks the field values on ChannelInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ChannelInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ChannelInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ChannelInfoMultiError, or
+// nil if none found.
+func (m *ChannelInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ChannelInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ChannelInfoValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ChannelInfoValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ChannelInfoValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ChannelInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// ChannelInfoMultiError is an error wrapping multiple validation errors
+// returned by ChannelInfo.ValidateAll() if the designated constraints aren't met.
+type ChannelInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ChannelInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ChannelInfoMultiError) AllErrors() []error { return m }
+
+// ChannelInfoValidationError is the validation error returned by
+// ChannelInfo.Validate if the designated constraints aren't met.
+type ChannelInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ChannelInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ChannelInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ChannelInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ChannelInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ChannelInfoValidationError) ErrorName() string { return "ChannelInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ChannelInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sChannelInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ChannelInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ChannelInfoValidationError{}
+
+// Validate checks the field values on PaymentTransactionEvent with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PaymentTransactionEvent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PaymentTransactionEvent with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PaymentTransactionEventMultiError, or nil if none found.
+func (m *PaymentTransactionEvent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PaymentTransactionEvent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	// no validation rules for PaTransactionId
+
+	// no validation rules for TransactionType
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PaymentTransactionEventValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PaymentTransactionEventValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PaymentTransactionEventValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Currency
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for Amount
+
+	// no validation rules for Status
+
+	// no validation rules for Timestamp
+
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PaymentTransactionEventValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PaymentTransactionEventValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PaymentTransactionEventValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetChannelInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PaymentTransactionEventValidationError{
+					field:  "ChannelInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PaymentTransactionEventValidationError{
+					field:  "ChannelInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChannelInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PaymentTransactionEventValidationError{
+				field:  "ChannelInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return PaymentTransactionEventMultiError(errors)
+	}
+
+	return nil
+}
+
+// PaymentTransactionEventMultiError is an error wrapping multiple validation
+// errors returned by PaymentTransactionEvent.ValidateAll() if the designated
+// constraints aren't met.
+type PaymentTransactionEventMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PaymentTransactionEventMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PaymentTransactionEventMultiError) AllErrors() []error { return m }
+
+// PaymentTransactionEventValidationError is the validation error returned by
+// PaymentTransactionEvent.Validate if the designated constraints aren't met.
+type PaymentTransactionEventValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PaymentTransactionEventValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PaymentTransactionEventValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PaymentTransactionEventValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PaymentTransactionEventValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PaymentTransactionEventValidationError) ErrorName() string {
+	return "PaymentTransactionEventValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PaymentTransactionEventValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPaymentTransactionEvent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PaymentTransactionEventValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PaymentTransactionEventValidationError{}
+
 // Validate checks the field values on OperatorPaymentTransactionEvent with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -262,16 +597,16 @@ func (m *OperatorPaymentTransactionEvent) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
+	// no validation rules for PaTransactionId
+
 	// no validation rules for TransactionType
 
-	// no validation rules for RealOperatorId
-
 	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, OperatorPaymentTransactionEventValidationError{
-					field:  "OperatorContext",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -279,23 +614,50 @@ func (m *OperatorPaymentTransactionEvent) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, OperatorPaymentTransactionEventValidationError{
-					field:  "OperatorContext",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return OperatorPaymentTransactionEventValidationError{
-				field:  "OperatorContext",
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
 		}
 	}
 
-	// no validation rules for OperatorType
+	if all {
+		switch v := interface{}(m.GetSourceOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, OperatorPaymentTransactionEventValidationError{
+					field:  "SourceOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, OperatorPaymentTransactionEventValidationError{
+					field:  "SourceOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSourceOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return OperatorPaymentTransactionEventValidationError{
+				field:  "SourceOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for Currency
 
@@ -306,6 +668,68 @@ func (m *OperatorPaymentTransactionEvent) validate(all bool) error {
 	// no validation rules for ExchangeRate
 
 	// no validation rules for Amount
+
+	// no validation rules for Status
+
+	// no validation rules for Timestamp
+
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, OperatorPaymentTransactionEventValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, OperatorPaymentTransactionEventValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return OperatorPaymentTransactionEventValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetChannelInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, OperatorPaymentTransactionEventValidationError{
+					field:  "ChannelInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, OperatorPaymentTransactionEventValidationError{
+					field:  "ChannelInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChannelInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return OperatorPaymentTransactionEventValidationError{
+				field:  "ChannelInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return OperatorPaymentTransactionEventMultiError(errors)

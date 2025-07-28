@@ -57,6 +57,35 @@ func (m *GetOverviewDashboardRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOverviewDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOverviewDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOverviewDashboardRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetOverviewDashboardRequestMultiError(errors)
 	}
@@ -363,64 +392,6 @@ func (m *GetOverviewDashboardResponse) validate(all bool) error {
 		}
 	}
 
-	if all {
-		switch v := interface{}(m.GetActiveUsers()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetOverviewDashboardResponseValidationError{
-					field:  "ActiveUsers",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetOverviewDashboardResponseValidationError{
-					field:  "ActiveUsers",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetActiveUsers()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetOverviewDashboardResponseValidationError{
-				field:  "ActiveUsers",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetActiveDevices()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetOverviewDashboardResponseValidationError{
-					field:  "ActiveDevices",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetOverviewDashboardResponseValidationError{
-					field:  "ActiveDevices",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetActiveDevices()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetOverviewDashboardResponseValidationError{
-				field:  "ActiveDevices",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return GetOverviewDashboardResponseMultiError(errors)
 	}
@@ -527,6 +498,35 @@ func (m *GetTimeRangedDashboardRequest) validate(all bool) error {
 	// no validation rules for TimeRangeType
 
 	// no validation rules for CustomDays
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTimeRangedDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTimeRangedDashboardRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return GetTimeRangedDashboardRequestMultiError(errors)
@@ -838,6 +838,35 @@ func (m *GetTopUsersDashboardRequest) validate(all bool) error {
 
 	// no validation rules for TimeRangeType
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTopUsersDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTopUsersDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTopUsersDashboardRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetTopUsersDashboardRequestMultiError(errors)
 	}
@@ -1114,6 +1143,35 @@ func (m *GetTopOperatorsDashboardRequest) validate(all bool) error {
 
 	// no validation rules for TimeRangeType
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTopOperatorsDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTopOperatorsDashboardRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTopOperatorsDashboardRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetTopOperatorsDashboardRequestMultiError(errors)
 	}
@@ -1320,7 +1378,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 
 	}
 
-	for idx, item := range m.GetTopGgrGroupOperators() {
+	for idx, item := range m.GetTopGgrCompanyOperators() {
 		_, _ = idx, item
 
 		if all {
@@ -1328,7 +1386,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GetTopOperatorsDashboardResponseValidationError{
-						field:  fmt.Sprintf("TopGgrGroupOperators[%v]", idx),
+						field:  fmt.Sprintf("TopGgrCompanyOperators[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1336,7 +1394,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GetTopOperatorsDashboardResponseValidationError{
-						field:  fmt.Sprintf("TopGgrGroupOperators[%v]", idx),
+						field:  fmt.Sprintf("TopGgrCompanyOperators[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1345,7 +1403,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GetTopOperatorsDashboardResponseValidationError{
-					field:  fmt.Sprintf("TopGgrGroupOperators[%v]", idx),
+					field:  fmt.Sprintf("TopGgrCompanyOperators[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1354,7 +1412,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 
 	}
 
-	for idx, item := range m.GetTopNgrGroupOperators() {
+	for idx, item := range m.GetTopNgrCompanyOperators() {
 		_, _ = idx, item
 
 		if all {
@@ -1362,7 +1420,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GetTopOperatorsDashboardResponseValidationError{
-						field:  fmt.Sprintf("TopNgrGroupOperators[%v]", idx),
+						field:  fmt.Sprintf("TopNgrCompanyOperators[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1370,7 +1428,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GetTopOperatorsDashboardResponseValidationError{
-						field:  fmt.Sprintf("TopNgrGroupOperators[%v]", idx),
+						field:  fmt.Sprintf("TopNgrCompanyOperators[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1379,7 +1437,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GetTopOperatorsDashboardResponseValidationError{
-					field:  fmt.Sprintf("TopNgrGroupOperators[%v]", idx),
+					field:  fmt.Sprintf("TopNgrCompanyOperators[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1388,7 +1446,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 
 	}
 
-	for idx, item := range m.GetTopDepositMinusWithdrawGroupOperators() {
+	for idx, item := range m.GetTopDepositMinusWithdrawCompanyOperators() {
 		_, _ = idx, item
 
 		if all {
@@ -1396,7 +1454,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GetTopOperatorsDashboardResponseValidationError{
-						field:  fmt.Sprintf("TopDepositMinusWithdrawGroupOperators[%v]", idx),
+						field:  fmt.Sprintf("TopDepositMinusWithdrawCompanyOperators[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1404,7 +1462,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GetTopOperatorsDashboardResponseValidationError{
-						field:  fmt.Sprintf("TopDepositMinusWithdrawGroupOperators[%v]", idx),
+						field:  fmt.Sprintf("TopDepositMinusWithdrawCompanyOperators[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1413,7 +1471,7 @@ func (m *GetTopOperatorsDashboardResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GetTopOperatorsDashboardResponseValidationError{
-					field:  fmt.Sprintf("TopDepositMinusWithdrawGroupOperators[%v]", idx),
+					field:  fmt.Sprintf("TopDepositMinusWithdrawCompanyOperators[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -2393,226 +2451,6 @@ var _ interface {
 	ErrorName() string
 } = GetOverviewDashboardResponse_DepositMinusWithdrawalAmountValidationError{}
 
-// Validate checks the field values on GetOverviewDashboardResponse_ActiveUsers
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *GetOverviewDashboardResponse_ActiveUsers) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// GetOverviewDashboardResponse_ActiveUsers with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// GetOverviewDashboardResponse_ActiveUsersMultiError, or nil if none found.
-func (m *GetOverviewDashboardResponse_ActiveUsers) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetOverviewDashboardResponse_ActiveUsers) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Today
-
-	// no validation rules for Yesterday
-
-	if len(errors) > 0 {
-		return GetOverviewDashboardResponse_ActiveUsersMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetOverviewDashboardResponse_ActiveUsersMultiError is an error wrapping
-// multiple validation errors returned by
-// GetOverviewDashboardResponse_ActiveUsers.ValidateAll() if the designated
-// constraints aren't met.
-type GetOverviewDashboardResponse_ActiveUsersMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetOverviewDashboardResponse_ActiveUsersMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetOverviewDashboardResponse_ActiveUsersMultiError) AllErrors() []error { return m }
-
-// GetOverviewDashboardResponse_ActiveUsersValidationError is the validation
-// error returned by GetOverviewDashboardResponse_ActiveUsers.Validate if the
-// designated constraints aren't met.
-type GetOverviewDashboardResponse_ActiveUsersValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetOverviewDashboardResponse_ActiveUsersValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetOverviewDashboardResponse_ActiveUsersValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetOverviewDashboardResponse_ActiveUsersValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetOverviewDashboardResponse_ActiveUsersValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetOverviewDashboardResponse_ActiveUsersValidationError) ErrorName() string {
-	return "GetOverviewDashboardResponse_ActiveUsersValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetOverviewDashboardResponse_ActiveUsersValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetOverviewDashboardResponse_ActiveUsers.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetOverviewDashboardResponse_ActiveUsersValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetOverviewDashboardResponse_ActiveUsersValidationError{}
-
-// Validate checks the field values on
-// GetOverviewDashboardResponse_ActiveDevices with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *GetOverviewDashboardResponse_ActiveDevices) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// GetOverviewDashboardResponse_ActiveDevices with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// GetOverviewDashboardResponse_ActiveDevicesMultiError, or nil if none found.
-func (m *GetOverviewDashboardResponse_ActiveDevices) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetOverviewDashboardResponse_ActiveDevices) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Today
-
-	// no validation rules for Yesterday
-
-	if len(errors) > 0 {
-		return GetOverviewDashboardResponse_ActiveDevicesMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetOverviewDashboardResponse_ActiveDevicesMultiError is an error wrapping
-// multiple validation errors returned by
-// GetOverviewDashboardResponse_ActiveDevices.ValidateAll() if the designated
-// constraints aren't met.
-type GetOverviewDashboardResponse_ActiveDevicesMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetOverviewDashboardResponse_ActiveDevicesMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetOverviewDashboardResponse_ActiveDevicesMultiError) AllErrors() []error { return m }
-
-// GetOverviewDashboardResponse_ActiveDevicesValidationError is the validation
-// error returned by GetOverviewDashboardResponse_ActiveDevices.Validate if
-// the designated constraints aren't met.
-type GetOverviewDashboardResponse_ActiveDevicesValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetOverviewDashboardResponse_ActiveDevicesValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetOverviewDashboardResponse_ActiveDevicesValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetOverviewDashboardResponse_ActiveDevicesValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetOverviewDashboardResponse_ActiveDevicesValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetOverviewDashboardResponse_ActiveDevicesValidationError) ErrorName() string {
-	return "GetOverviewDashboardResponse_ActiveDevicesValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetOverviewDashboardResponse_ActiveDevicesValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetOverviewDashboardResponse_ActiveDevices.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetOverviewDashboardResponse_ActiveDevicesValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetOverviewDashboardResponse_ActiveDevicesValidationError{}
-
 // Validate checks the field values on GetTimeRangedDashboardResponse_GameData
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
@@ -3402,9 +3240,17 @@ func (m *GetTopUsersDashboardResponse_User) validate(all bool) error {
 
 	// no validation rules for VipLevel
 
-	// no validation rules for Amount
+	// no validation rules for AmountUsd
+
+	// no validation rules for AmountReportingCurrency
 
 	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
 
 	if len(errors) > 0 {
 		return GetTopUsersDashboardResponse_UserMultiError(errors)
@@ -3514,11 +3360,17 @@ func (m *GetTopOperatorsDashboardResponse_OperatorData) validate(all bool) error
 
 	// no validation rules for Rank
 
-	// no validation rules for OperatorId
-
 	// no validation rules for OperatorName
 
-	// no validation rules for Amount
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
+	// no validation rules for AmountUsd
+
+	// no validation rules for AmountReportingCurrency
 
 	if len(errors) > 0 {
 		return GetTopOperatorsDashboardResponse_OperatorDataMultiError(errors)

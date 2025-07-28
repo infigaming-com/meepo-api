@@ -42,8 +42,18 @@ const (
 	Wallet_ListCurrencies_FullMethodName                      = "/api.wallet.service.v1.Wallet/ListCurrencies"
 	Wallet_UpdateOperatorCurrency_FullMethodName              = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrency"
 	Wallet_UpdateUserCurrency_FullMethodName                  = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
+	Wallet_ListBottomOperatorBalances_FullMethodName          = "/api.wallet.service.v1.Wallet/ListBottomOperatorBalances"
 	Wallet_OperatorTransfer_FullMethodName                    = "/api.wallet.service.v1.Wallet/OperatorTransfer"
-	Wallet_ListOperatorBalances_FullMethodName                = "/api.wallet.service.v1.Wallet/ListOperatorBalances"
+	Wallet_OperatorSwap_FullMethodName                        = "/api.wallet.service.v1.Wallet/OperatorSwap"
+	Wallet_OperatorFreeze_FullMethodName                      = "/api.wallet.service.v1.Wallet/OperatorFreeze"
+	Wallet_OperatorRollback_FullMethodName                    = "/api.wallet.service.v1.Wallet/OperatorRollback"
+	Wallet_OperatorSettle_FullMethodName                      = "/api.wallet.service.v1.Wallet/OperatorSettle"
+	Wallet_GetOperatorBalances_FullMethodName                 = "/api.wallet.service.v1.Wallet/GetOperatorBalances"
+	Wallet_ListOperatorBalanceTransactions_FullMethodName     = "/api.wallet.service.v1.Wallet/ListOperatorBalanceTransactions"
+	Wallet_OperatorDebit_FullMethodName                       = "/api.wallet.service.v1.Wallet/OperatorDebit"
+	Wallet_UpdateOperatorBalance_FullMethodName               = "/api.wallet.service.v1.Wallet/UpdateOperatorBalance"
+	Wallet_GetOperatorTransactionSummary_FullMethodName       = "/api.wallet.service.v1.Wallet/GetOperatorTransactionSummary"
+	Wallet_GetOperatorBalanceTransactionsByIds_FullMethodName = "/api.wallet.service.v1.Wallet/GetOperatorBalanceTransactionsByIds"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -83,10 +93,30 @@ type WalletClient interface {
 	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
 	UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error)
 	UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error)
-	// Transfer cash from operator to company operator
+	// List Bottom Operator Balances based on filter
+	ListBottomOperatorBalances(ctx context.Context, in *ListBottomOperatorBalancesRequest, opts ...grpc.CallOption) (*ListBottomOperatorBalancesResponse, error)
+	// Transfer cash from operator to its company operator
 	OperatorTransfer(ctx context.Context, in *OperatorTransferRequest, opts ...grpc.CallOption) (*OperatorTransferResponse, error)
-	// List Operator Balances based on filter
-	ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*ListOperatorBalancesResponse, error)
+	// Swap cash between two balances of the same company's operator
+	OperatorSwap(ctx context.Context, in *OperatorSwapRequest, opts ...grpc.CallOption) (*OperatorSwapResponse, error)
+	// Freeze cash of a balance of an operator
+	OperatorFreeze(ctx context.Context, in *OperatorFreezeRequest, opts ...grpc.CallOption) (*OperatorFreezeResponse, error)
+	// Rollback frozen cash of an operator
+	OperatorRollback(ctx context.Context, in *OperatorRollbackRequest, opts ...grpc.CallOption) (*OperatorRollbackResponse, error)
+	// Settle frozen cash of an operator
+	OperatorSettle(ctx context.Context, in *OperatorSettleRequest, opts ...grpc.CallOption) (*OperatorSettleResponse, error)
+	// GetOperatorBalances gets the balances of an operator
+	GetOperatorBalances(ctx context.Context, in *GetOperatorBalancesRequest, opts ...grpc.CallOption) (*GetOperatorBalancesResponse, error)
+	// List Operator Balance Transactions based on filter
+	ListOperatorBalanceTransactions(ctx context.Context, in *ListOperatorBalanceTransactionsRequest, opts ...grpc.CallOption) (*ListOperatorBalanceTransactionsResponse, error)
+	// OperatorDebit is used to debit cash from an operator's balance
+	OperatorDebit(ctx context.Context, in *OperatorDebitRequest, opts ...grpc.CallOption) (*OperatorDebitResponse, error)
+	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
+	UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error)
+	// GetOperatorTransactionSummary returns the summary of operator's transactions
+	GetOperatorTransactionSummary(ctx context.Context, in *GetOperatorTransactionSummaryRequest, opts ...grpc.CallOption) (*GetOperatorTransactionSummaryResponse, error)
+	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
+	GetOperatorBalanceTransactionsByIds(ctx context.Context, in *GetOperatorBalanceTransactionsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorBalanceTransactionsByIdsResponse, error)
 }
 
 type walletClient struct {
@@ -327,6 +357,16 @@ func (c *walletClient) UpdateUserCurrency(ctx context.Context, in *UpdateUserCur
 	return out, nil
 }
 
+func (c *walletClient) ListBottomOperatorBalances(ctx context.Context, in *ListBottomOperatorBalancesRequest, opts ...grpc.CallOption) (*ListBottomOperatorBalancesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBottomOperatorBalancesResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListBottomOperatorBalances_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) OperatorTransfer(ctx context.Context, in *OperatorTransferRequest, opts ...grpc.CallOption) (*OperatorTransferResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(OperatorTransferResponse)
@@ -337,10 +377,100 @@ func (c *walletClient) OperatorTransfer(ctx context.Context, in *OperatorTransfe
 	return out, nil
 }
 
-func (c *walletClient) ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*ListOperatorBalancesResponse, error) {
+func (c *walletClient) OperatorSwap(ctx context.Context, in *OperatorSwapRequest, opts ...grpc.CallOption) (*OperatorSwapResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListOperatorBalancesResponse)
-	err := c.cc.Invoke(ctx, Wallet_ListOperatorBalances_FullMethodName, in, out, cOpts...)
+	out := new(OperatorSwapResponse)
+	err := c.cc.Invoke(ctx, Wallet_OperatorSwap_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) OperatorFreeze(ctx context.Context, in *OperatorFreezeRequest, opts ...grpc.CallOption) (*OperatorFreezeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OperatorFreezeResponse)
+	err := c.cc.Invoke(ctx, Wallet_OperatorFreeze_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) OperatorRollback(ctx context.Context, in *OperatorRollbackRequest, opts ...grpc.CallOption) (*OperatorRollbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OperatorRollbackResponse)
+	err := c.cc.Invoke(ctx, Wallet_OperatorRollback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) OperatorSettle(ctx context.Context, in *OperatorSettleRequest, opts ...grpc.CallOption) (*OperatorSettleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OperatorSettleResponse)
+	err := c.cc.Invoke(ctx, Wallet_OperatorSettle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetOperatorBalances(ctx context.Context, in *GetOperatorBalancesRequest, opts ...grpc.CallOption) (*GetOperatorBalancesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorBalancesResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetOperatorBalances_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) ListOperatorBalanceTransactions(ctx context.Context, in *ListOperatorBalanceTransactionsRequest, opts ...grpc.CallOption) (*ListOperatorBalanceTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorBalanceTransactionsResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListOperatorBalanceTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) OperatorDebit(ctx context.Context, in *OperatorDebitRequest, opts ...grpc.CallOption) (*OperatorDebitResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OperatorDebitResponse)
+	err := c.cc.Invoke(ctx, Wallet_OperatorDebit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorBalanceResponse)
+	err := c.cc.Invoke(ctx, Wallet_UpdateOperatorBalance_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetOperatorTransactionSummary(ctx context.Context, in *GetOperatorTransactionSummaryRequest, opts ...grpc.CallOption) (*GetOperatorTransactionSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorTransactionSummaryResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetOperatorTransactionSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetOperatorBalanceTransactionsByIds(ctx context.Context, in *GetOperatorBalanceTransactionsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorBalanceTransactionsByIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorBalanceTransactionsByIdsResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetOperatorBalanceTransactionsByIds_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -384,10 +514,30 @@ type WalletServer interface {
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
 	UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error)
-	// Transfer cash from operator to company operator
+	// List Bottom Operator Balances based on filter
+	ListBottomOperatorBalances(context.Context, *ListBottomOperatorBalancesRequest) (*ListBottomOperatorBalancesResponse, error)
+	// Transfer cash from operator to its company operator
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
-	// List Operator Balances based on filter
-	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error)
+	// Swap cash between two balances of the same company's operator
+	OperatorSwap(context.Context, *OperatorSwapRequest) (*OperatorSwapResponse, error)
+	// Freeze cash of a balance of an operator
+	OperatorFreeze(context.Context, *OperatorFreezeRequest) (*OperatorFreezeResponse, error)
+	// Rollback frozen cash of an operator
+	OperatorRollback(context.Context, *OperatorRollbackRequest) (*OperatorRollbackResponse, error)
+	// Settle frozen cash of an operator
+	OperatorSettle(context.Context, *OperatorSettleRequest) (*OperatorSettleResponse, error)
+	// GetOperatorBalances gets the balances of an operator
+	GetOperatorBalances(context.Context, *GetOperatorBalancesRequest) (*GetOperatorBalancesResponse, error)
+	// List Operator Balance Transactions based on filter
+	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
+	// OperatorDebit is used to debit cash from an operator's balance
+	OperatorDebit(context.Context, *OperatorDebitRequest) (*OperatorDebitResponse, error)
+	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
+	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
+	// GetOperatorTransactionSummary returns the summary of operator's transactions
+	GetOperatorTransactionSummary(context.Context, *GetOperatorTransactionSummaryRequest) (*GetOperatorTransactionSummaryResponse, error)
+	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
+	GetOperatorBalanceTransactionsByIds(context.Context, *GetOperatorBalanceTransactionsByIdsRequest) (*GetOperatorBalanceTransactionsByIdsResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -467,11 +617,41 @@ func (UnimplementedWalletServer) UpdateOperatorCurrency(context.Context, *Update
 func (UnimplementedWalletServer) UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserCurrency not implemented")
 }
+func (UnimplementedWalletServer) ListBottomOperatorBalances(context.Context, *ListBottomOperatorBalancesRequest) (*ListBottomOperatorBalancesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBottomOperatorBalances not implemented")
+}
 func (UnimplementedWalletServer) OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OperatorTransfer not implemented")
 }
-func (UnimplementedWalletServer) ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorBalances not implemented")
+func (UnimplementedWalletServer) OperatorSwap(context.Context, *OperatorSwapRequest) (*OperatorSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OperatorSwap not implemented")
+}
+func (UnimplementedWalletServer) OperatorFreeze(context.Context, *OperatorFreezeRequest) (*OperatorFreezeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OperatorFreeze not implemented")
+}
+func (UnimplementedWalletServer) OperatorRollback(context.Context, *OperatorRollbackRequest) (*OperatorRollbackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OperatorRollback not implemented")
+}
+func (UnimplementedWalletServer) OperatorSettle(context.Context, *OperatorSettleRequest) (*OperatorSettleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OperatorSettle not implemented")
+}
+func (UnimplementedWalletServer) GetOperatorBalances(context.Context, *GetOperatorBalancesRequest) (*GetOperatorBalancesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorBalances not implemented")
+}
+func (UnimplementedWalletServer) ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorBalanceTransactions not implemented")
+}
+func (UnimplementedWalletServer) OperatorDebit(context.Context, *OperatorDebitRequest) (*OperatorDebitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OperatorDebit not implemented")
+}
+func (UnimplementedWalletServer) UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorBalance not implemented")
+}
+func (UnimplementedWalletServer) GetOperatorTransactionSummary(context.Context, *GetOperatorTransactionSummaryRequest) (*GetOperatorTransactionSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorTransactionSummary not implemented")
+}
+func (UnimplementedWalletServer) GetOperatorBalanceTransactionsByIds(context.Context, *GetOperatorBalanceTransactionsByIdsRequest) (*GetOperatorBalanceTransactionsByIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorBalanceTransactionsByIds not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -908,6 +1088,24 @@ func _Wallet_UpdateUserCurrency_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_ListBottomOperatorBalances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBottomOperatorBalancesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListBottomOperatorBalances(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListBottomOperatorBalances_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListBottomOperatorBalances(ctx, req.(*ListBottomOperatorBalancesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_OperatorTransfer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OperatorTransferRequest)
 	if err := dec(in); err != nil {
@@ -926,20 +1124,182 @@ func _Wallet_OperatorTransfer_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_ListOperatorBalances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListOperatorBalancesRequest)
+func _Wallet_OperatorSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OperatorSwapRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).ListOperatorBalances(ctx, in)
+		return srv.(WalletServer).OperatorSwap(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_ListOperatorBalances_FullMethodName,
+		FullMethod: Wallet_OperatorSwap_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).ListOperatorBalances(ctx, req.(*ListOperatorBalancesRequest))
+		return srv.(WalletServer).OperatorSwap(ctx, req.(*OperatorSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_OperatorFreeze_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OperatorFreezeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).OperatorFreeze(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_OperatorFreeze_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).OperatorFreeze(ctx, req.(*OperatorFreezeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_OperatorRollback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OperatorRollbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).OperatorRollback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_OperatorRollback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).OperatorRollback(ctx, req.(*OperatorRollbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_OperatorSettle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OperatorSettleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).OperatorSettle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_OperatorSettle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).OperatorSettle(ctx, req.(*OperatorSettleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetOperatorBalances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorBalancesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetOperatorBalances(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetOperatorBalances_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetOperatorBalances(ctx, req.(*GetOperatorBalancesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_ListOperatorBalanceTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorBalanceTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListOperatorBalanceTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListOperatorBalanceTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListOperatorBalanceTransactions(ctx, req.(*ListOperatorBalanceTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_OperatorDebit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OperatorDebitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).OperatorDebit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_OperatorDebit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).OperatorDebit(ctx, req.(*OperatorDebitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_UpdateOperatorBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorBalanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).UpdateOperatorBalance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_UpdateOperatorBalance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).UpdateOperatorBalance(ctx, req.(*UpdateOperatorBalanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetOperatorTransactionSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorTransactionSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetOperatorTransactionSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetOperatorTransactionSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetOperatorTransactionSummary(ctx, req.(*GetOperatorTransactionSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetOperatorBalanceTransactionsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorBalanceTransactionsByIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetOperatorBalanceTransactionsByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetOperatorBalanceTransactionsByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetOperatorBalanceTransactionsByIds(ctx, req.(*GetOperatorBalanceTransactionsByIdsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1044,12 +1404,52 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Wallet_UpdateUserCurrency_Handler,
 		},
 		{
+			MethodName: "ListBottomOperatorBalances",
+			Handler:    _Wallet_ListBottomOperatorBalances_Handler,
+		},
+		{
 			MethodName: "OperatorTransfer",
 			Handler:    _Wallet_OperatorTransfer_Handler,
 		},
 		{
-			MethodName: "ListOperatorBalances",
-			Handler:    _Wallet_ListOperatorBalances_Handler,
+			MethodName: "OperatorSwap",
+			Handler:    _Wallet_OperatorSwap_Handler,
+		},
+		{
+			MethodName: "OperatorFreeze",
+			Handler:    _Wallet_OperatorFreeze_Handler,
+		},
+		{
+			MethodName: "OperatorRollback",
+			Handler:    _Wallet_OperatorRollback_Handler,
+		},
+		{
+			MethodName: "OperatorSettle",
+			Handler:    _Wallet_OperatorSettle_Handler,
+		},
+		{
+			MethodName: "GetOperatorBalances",
+			Handler:    _Wallet_GetOperatorBalances_Handler,
+		},
+		{
+			MethodName: "ListOperatorBalanceTransactions",
+			Handler:    _Wallet_ListOperatorBalanceTransactions_Handler,
+		},
+		{
+			MethodName: "OperatorDebit",
+			Handler:    _Wallet_OperatorDebit_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorBalance",
+			Handler:    _Wallet_UpdateOperatorBalance_Handler,
+		},
+		{
+			MethodName: "GetOperatorTransactionSummary",
+			Handler:    _Wallet_GetOperatorTransactionSummary_Handler,
+		},
+		{
+			MethodName: "GetOperatorBalanceTransactionsByIds",
+			Handler:    _Wallet_GetOperatorBalanceTransactionsByIds_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

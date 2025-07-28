@@ -52,6 +52,9 @@ const (
 	ErrorReason_USER_NOT_FOUND                            ErrorReason = 70023
 	ErrorReason_WITHDRAW_BANNED_ON_USER                   ErrorReason = 70024
 	ErrorReason_GET_PAYMENT_CHANNEL_FAILED                ErrorReason = 70025
+	ErrorReason_OPERATOR_PERMISSION_DENIED                ErrorReason = 70026
+	ErrorReason_GET_OPERATOR_NAME_FAILED                  ErrorReason = 70027
+	ErrorReason_GET_WALLET_TRANSACTION_FAILED             ErrorReason = 70028
 )
 
 // Enum value maps for ErrorReason.
@@ -84,6 +87,9 @@ var (
 		70023: "USER_NOT_FOUND",
 		70024: "WITHDRAW_BANNED_ON_USER",
 		70025: "GET_PAYMENT_CHANNEL_FAILED",
+		70026: "OPERATOR_PERMISSION_DENIED",
+		70027: "GET_OPERATOR_NAME_FAILED",
+		70028: "GET_WALLET_TRANSACTION_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                               0,
@@ -113,6 +119,9 @@ var (
 		"USER_NOT_FOUND":                            70023,
 		"WITHDRAW_BANNED_ON_USER":                   70024,
 		"GET_PAYMENT_CHANNEL_FAILED":                70025,
+		"OPERATOR_PERMISSION_DENIED":                70026,
+		"GET_OPERATOR_NAME_FAILED":                  70027,
+		"GET_WALLET_TRANSACTION_FAILED":             70028,
 	}
 )
 
@@ -147,7 +156,7 @@ var File_review_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\xcf\x06\n" +
+	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\xb6\a\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCONVERT_STRUCT_TO_JSON_FAILED\x10\xf0\xa2\x04\x12#\n" +
@@ -175,7 +184,10 @@ const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\x10GET_USERS_FAILED\x10\x86\xa3\x04\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\x87\xa3\x04\x12\x1d\n" +
 	"\x17WITHDRAW_BANNED_ON_USER\x10\x88\xa3\x04\x12 \n" +
-	"\x1aGET_PAYMENT_CHANNEL_FAILED\x10\x89\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x1aGET_PAYMENT_CHANNEL_FAILED\x10\x89\xa3\x04\x12 \n" +
+	"\x1aOPERATOR_PERMISSION_DENIED\x10\x8a\xa3\x04\x12\x1e\n" +
+	"\x18GET_OPERATOR_NAME_FAILED\x10\x8b\xa3\x04\x12#\n" +
+	"\x1dGET_WALLET_TRANSACTION_FAILED\x10\x8c\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"
 
 var (

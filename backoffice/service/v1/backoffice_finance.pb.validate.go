@@ -57,12 +57,33 @@ func (m *ListInvoicesRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.RetailerId != nil {
-		// no validation rules for RetailerId
-	}
-
-	if m.CompanyId != nil {
-		// no validation rules for CompanyId
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListInvoicesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListInvoicesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListInvoicesRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	if m.Month != nil {
@@ -568,20 +589,37 @@ func (m *ListOperatorRevenueShareRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOperatorRevenueShareRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListOperatorRevenueShareRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOperatorRevenueShareRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.InvoiceId != nil {
 		// no validation rules for InvoiceId
-	}
-
-	if m.RetailerId != nil {
-		// no validation rules for RetailerId
-	}
-
-	if m.CompanyId != nil {
-		// no validation rules for CompanyId
-	}
-
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
 	}
 
 	if m.Page != nil {
@@ -844,20 +882,37 @@ func (m *ListThirdPartyFeesRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListThirdPartyFeesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListThirdPartyFeesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListThirdPartyFeesRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.InvoiceId != nil {
 		// no validation rules for InvoiceId
-	}
-
-	if m.RetailerId != nil {
-		// no validation rules for RetailerId
-	}
-
-	if m.CompanyId != nil {
-		// no validation rules for CompanyId
-	}
-
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
 	}
 
 	if m.Page != nil {
@@ -1114,20 +1169,37 @@ func (m *ListMonthlyRevenueShareRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListMonthlyRevenueShareRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListMonthlyRevenueShareRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListMonthlyRevenueShareRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.InvoiceId != nil {
 		// no validation rules for InvoiceId
-	}
-
-	if m.RetailerId != nil {
-		// no validation rules for RetailerId
-	}
-
-	if m.CompanyId != nil {
-		// no validation rules for CompanyId
-	}
-
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
 	}
 
 	if m.Page != nil {
@@ -1136,6 +1208,10 @@ func (m *ListMonthlyRevenueShareRequest) validate(all bool) error {
 
 	if m.PageSize != nil {
 		// no validation rules for PageSize
+	}
+
+	if m.Type != nil {
+		// no validation rules for Type
 	}
 
 	if len(errors) > 0 {
@@ -2311,20 +2387,37 @@ func (m *ListAdjustmentsRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListAdjustmentsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListAdjustmentsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListAdjustmentsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.InvoiceId != nil {
 		// no validation rules for InvoiceId
-	}
-
-	if m.RetailerId != nil {
-		// no validation rules for RetailerId
-	}
-
-	if m.CompanyId != nil {
-		// no validation rules for CompanyId
-	}
-
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
 	}
 
 	if m.Page != nil {
@@ -3183,6 +3276,442 @@ var _ interface {
 	ErrorName() string
 } = GetInvoiceSummaryResponseValidationError{}
 
+// Validate checks the field values on GetBalanceSummaryRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetBalanceSummaryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetBalanceSummaryRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetBalanceSummaryRequestMultiError, or nil if none found.
+func (m *GetBalanceSummaryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBalanceSummaryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetBalanceSummaryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBalanceSummaryRequestMultiError is an error wrapping multiple validation
+// errors returned by GetBalanceSummaryRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetBalanceSummaryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBalanceSummaryRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBalanceSummaryRequestMultiError) AllErrors() []error { return m }
+
+// GetBalanceSummaryRequestValidationError is the validation error returned by
+// GetBalanceSummaryRequest.Validate if the designated constraints aren't met.
+type GetBalanceSummaryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBalanceSummaryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBalanceSummaryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBalanceSummaryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBalanceSummaryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBalanceSummaryRequestValidationError) ErrorName() string {
+	return "GetBalanceSummaryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBalanceSummaryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBalanceSummaryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBalanceSummaryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBalanceSummaryRequestValidationError{}
+
+// Validate checks the field values on GetBalanceSummaryResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetBalanceSummaryResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetBalanceSummaryResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetBalanceSummaryResponseMultiError, or nil if none found.
+func (m *GetBalanceSummaryResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBalanceSummaryResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Balance
+
+	// no validation rules for EstNetShare
+
+	// no validation rules for EstNetCost
+
+	if len(errors) > 0 {
+		return GetBalanceSummaryResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBalanceSummaryResponseMultiError is an error wrapping multiple validation
+// errors returned by GetBalanceSummaryResponse.ValidateAll() if the
+// designated constraints aren't met.
+type GetBalanceSummaryResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBalanceSummaryResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBalanceSummaryResponseMultiError) AllErrors() []error { return m }
+
+// GetBalanceSummaryResponseValidationError is the validation error returned by
+// GetBalanceSummaryResponse.Validate if the designated constraints aren't met.
+type GetBalanceSummaryResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBalanceSummaryResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBalanceSummaryResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBalanceSummaryResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBalanceSummaryResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBalanceSummaryResponseValidationError) ErrorName() string {
+	return "GetBalanceSummaryResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBalanceSummaryResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBalanceSummaryResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBalanceSummaryResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBalanceSummaryResponseValidationError{}
+
+// Validate checks the field values on GetBalancesSummaryRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetBalancesSummaryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetBalancesSummaryRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetBalancesSummaryRequestMultiError, or nil if none found.
+func (m *GetBalancesSummaryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBalancesSummaryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetBalancesSummaryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBalancesSummaryRequestMultiError is an error wrapping multiple validation
+// errors returned by GetBalancesSummaryRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetBalancesSummaryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBalancesSummaryRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBalancesSummaryRequestMultiError) AllErrors() []error { return m }
+
+// GetBalancesSummaryRequestValidationError is the validation error returned by
+// GetBalancesSummaryRequest.Validate if the designated constraints aren't met.
+type GetBalancesSummaryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBalancesSummaryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBalancesSummaryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBalancesSummaryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBalancesSummaryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBalancesSummaryRequestValidationError) ErrorName() string {
+	return "GetBalancesSummaryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBalancesSummaryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBalancesSummaryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBalancesSummaryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBalancesSummaryRequestValidationError{}
+
+// Validate checks the field values on GetBalancesSummaryResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetBalancesSummaryResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetBalancesSummaryResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetBalancesSummaryResponseMultiError, or nil if none found.
+func (m *GetBalancesSummaryResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBalancesSummaryResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Deposits
+
+	// no validation rules for Withdrawals
+
+	// no validation rules for Balance
+
+	// no validation rules for Ngr
+
+	// no validation rules for GameProviderRs
+
+	// no validation rules for ThirdPartyFees
+
+	// no validation rules for Adjustments
+
+	// no validation rules for EstNetProfit
+
+	// no validation rules for RevenueShareDisburse
+
+	// no validation rules for RevenueShareCollect
+
+	// no validation rules for EstNetCosts
+
+	if len(errors) > 0 {
+		return GetBalancesSummaryResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBalancesSummaryResponseMultiError is an error wrapping multiple
+// validation errors returned by GetBalancesSummaryResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetBalancesSummaryResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBalancesSummaryResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBalancesSummaryResponseMultiError) AllErrors() []error { return m }
+
+// GetBalancesSummaryResponseValidationError is the validation error returned
+// by GetBalancesSummaryResponse.Validate if the designated constraints aren't met.
+type GetBalancesSummaryResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBalancesSummaryResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBalancesSummaryResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBalancesSummaryResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBalancesSummaryResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBalancesSummaryResponseValidationError) ErrorName() string {
+	return "GetBalancesSummaryResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBalancesSummaryResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBalancesSummaryResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBalancesSummaryResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBalancesSummaryResponseValidationError{}
+
 // Validate checks the field values on ListInvoicesResponse_Invoice with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -3776,6 +4305,8 @@ func (m *ListMonthlyRevenueShareResponse_RevenueShareItem) validate(all bool) er
 
 	// no validation rules for RevenueShareCollect
 
+	// no validation rules for EstCosts
+
 	if len(errors) > 0 {
 		return ListMonthlyRevenueShareResponse_RevenueShareItemMultiError(errors)
 	}
@@ -3894,6 +4425,8 @@ func (m *ListMonthlyRevenueShareResponse_Summary) validate(all bool) error {
 	// no validation rules for RevenueShareDisburseTotal
 
 	// no validation rules for RevenueShareCollectTotal
+
+	// no validation rules for EstCostsTotal
 
 	if len(errors) > 0 {
 		return ListMonthlyRevenueShareResponse_SummaryMultiError(errors)

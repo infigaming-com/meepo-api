@@ -34,9 +34,7 @@ message BalanceUpdateEvent {
 message OperatorBalanceUpdateEvent {
 	int64 transaction_id = 1;
 	string transaction_type = 2;
-	int64 real_operator_id = 3;
 	common.OperatorContext operator_context = 4;
-	string operator_type = 5;
 	string settlement_currency = 6;
 	string before_balance = 7;
 	string after_balance = 8;

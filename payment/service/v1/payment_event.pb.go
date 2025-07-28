@@ -10,6 +10,7 @@ import (
 	common "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -110,25 +111,205 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_event_proto_rawDescGZIP(), []int{1}
 }
 
+type ChannelInfo struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ChannelInfo) Reset() {
+	*x = ChannelInfo{}
+	mi := &file_payment_service_v1_payment_event_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChannelInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChannelInfo) ProtoMessage() {}
+
+func (x *ChannelInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_event_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChannelInfo.ProtoReflect.Descriptor instead.
+func (*ChannelInfo) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_event_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ChannelInfo) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type PaymentTransactionEvent struct {
+	state             protoimpl.MessageState  `protogen:"open.v1"`
+	TransactionId     int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"` // payment transaction id
+	PaTransactionId   string                  `protobuf:"bytes,2,opt,name=pa_transaction_id,json=paTransactionId,proto3" json:"pa_transaction_id,omitempty"`
+	TransactionType   string                  `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	UserId            int64                   `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext   *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Currency          string                  `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"` // payment currency
+	ReportingCurrency string                  `protobuf:"bytes,7,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	Amount            string                  `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"` // cash amount of the currency
+	Status            string                  `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"` // payment status
+	Timestamp         int64                   `protobuf:"varint,10,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Extra             *structpb.Struct        `protobuf:"bytes,11,opt,name=extra,proto3" json:"extra,omitempty"`
+	ChannelInfo       *ChannelInfo            `protobuf:"bytes,12,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *PaymentTransactionEvent) Reset() {
+	*x = PaymentTransactionEvent{}
+	mi := &file_payment_service_v1_payment_event_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PaymentTransactionEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PaymentTransactionEvent) ProtoMessage() {}
+
+func (x *PaymentTransactionEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_event_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PaymentTransactionEvent.ProtoReflect.Descriptor instead.
+func (*PaymentTransactionEvent) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_event_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *PaymentTransactionEvent) GetTransactionId() int64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
+}
+
+func (x *PaymentTransactionEvent) GetPaTransactionId() string {
+	if x != nil {
+		return x.PaTransactionId
+	}
+	return ""
+}
+
+func (x *PaymentTransactionEvent) GetTransactionType() string {
+	if x != nil {
+		return x.TransactionType
+	}
+	return ""
+}
+
+func (x *PaymentTransactionEvent) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *PaymentTransactionEvent) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *PaymentTransactionEvent) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *PaymentTransactionEvent) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
+func (x *PaymentTransactionEvent) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *PaymentTransactionEvent) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *PaymentTransactionEvent) GetTimestamp() int64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
+}
+
+func (x *PaymentTransactionEvent) GetExtra() *structpb.Struct {
+	if x != nil {
+		return x.Extra
+	}
+	return nil
+}
+
+func (x *PaymentTransactionEvent) GetChannelInfo() *ChannelInfo {
+	if x != nil {
+		return x.ChannelInfo
+	}
+	return nil
+}
+
 type OperatorPaymentTransactionEvent struct {
-	state              protoimpl.MessageState  `protogen:"open.v1"`
-	TransactionId      int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	TransactionType    string                  `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	RealOperatorId     int64                   `protobuf:"varint,3,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
-	OperatorContext    *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorType       string                  `protobuf:"bytes,5,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
-	Currency           string                  `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
-	SettlementCurrency string                  `protobuf:"bytes,7,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
-	ReportingCurrency  string                  `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	ExchangeRate       string                  `protobuf:"bytes,9,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"` // exchange rate of the currency to the settlement currency
-	Amount             string                  `protobuf:"bytes,10,opt,name=amount,proto3" json:"amount,omitempty"`                                // cash amount of the currency
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TransactionId         int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"` // payment transaction id
+	PaTransactionId       string                  `protobuf:"bytes,2,opt,name=pa_transaction_id,json=paTransactionId,proto3" json:"pa_transaction_id,omitempty"`
+	TransactionType       string                  `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	SourceOperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=source_operator_context,json=sourceOperatorContext,proto3" json:"source_operator_context,omitempty"`
+	Currency              string                  `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                                               // payment currency
+	SettlementCurrency    string                  `protobuf:"bytes,7,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"` // wallet currency
+	ReportingCurrency     string                  `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	ExchangeRate          string                  `protobuf:"bytes,9,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"` // exchange rate of the currency to the settlement currency
+	Amount                string                  `protobuf:"bytes,10,opt,name=amount,proto3" json:"amount,omitempty"`                                // cash amount of the currency
+	Status                string                  `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`                                // payment status
+	Timestamp             int64                   `protobuf:"varint,12,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Extra                 *structpb.Struct        `protobuf:"bytes,13,opt,name=extra,proto3" json:"extra,omitempty"`
+	ChannelInfo           *ChannelInfo            `protobuf:"bytes,14,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *OperatorPaymentTransactionEvent) Reset() {
 	*x = OperatorPaymentTransactionEvent{}
-	mi := &file_payment_service_v1_payment_event_proto_msgTypes[2]
+	mi := &file_payment_service_v1_payment_event_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -140,7 +321,7 @@ func (x *OperatorPaymentTransactionEvent) String() string {
 func (*OperatorPaymentTransactionEvent) ProtoMessage() {}
 
 func (x *OperatorPaymentTransactionEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_event_proto_msgTypes[2]
+	mi := &file_payment_service_v1_payment_event_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -153,7 +334,7 @@ func (x *OperatorPaymentTransactionEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OperatorPaymentTransactionEvent.ProtoReflect.Descriptor instead.
 func (*OperatorPaymentTransactionEvent) Descriptor() ([]byte, []int) {
-	return file_payment_service_v1_payment_event_proto_rawDescGZIP(), []int{2}
+	return file_payment_service_v1_payment_event_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *OperatorPaymentTransactionEvent) GetTransactionId() int64 {
@@ -163,6 +344,13 @@ func (x *OperatorPaymentTransactionEvent) GetTransactionId() int64 {
 	return 0
 }
 
+func (x *OperatorPaymentTransactionEvent) GetPaTransactionId() string {
+	if x != nil {
+		return x.PaTransactionId
+	}
+	return ""
+}
+
 func (x *OperatorPaymentTransactionEvent) GetTransactionType() string {
 	if x != nil {
 		return x.TransactionType
@@ -170,25 +358,18 @@ func (x *OperatorPaymentTransactionEvent) GetTransactionType() string {
 	return ""
 }
 
-func (x *OperatorPaymentTransactionEvent) GetRealOperatorId() int64 {
+func (x *OperatorPaymentTransactionEvent) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.RealOperatorId
-	}
-	return 0
-}
-
-func (x *OperatorPaymentTransactionEvent) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
+		return x.TargetOperatorContext
 	}
 	return nil
 }
 
-func (x *OperatorPaymentTransactionEvent) GetOperatorType() string {
+func (x *OperatorPaymentTransactionEvent) GetSourceOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorType
+		return x.SourceOperatorContext
 	}
-	return ""
+	return nil
 }
 
 func (x *OperatorPaymentTransactionEvent) GetCurrency() string {
@@ -226,28 +407,76 @@ func (x *OperatorPaymentTransactionEvent) GetAmount() string {
 	return ""
 }
 
+func (x *OperatorPaymentTransactionEvent) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *OperatorPaymentTransactionEvent) GetTimestamp() int64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
+}
+
+func (x *OperatorPaymentTransactionEvent) GetExtra() *structpb.Struct {
+	if x != nil {
+		return x.Extra
+	}
+	return nil
+}
+
+func (x *OperatorPaymentTransactionEvent) GetChannelInfo() *ChannelInfo {
+	if x != nil {
+		return x.ChannelInfo
+	}
+	return nil
+}
+
 var File_payment_service_v1_payment_event_proto protoreflect.FileDescriptor
 
 const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"\n" +
-	"&payment/service/v1/payment_event.proto\x12\x16api.payment.service.v1\x1a\x13common/common.proto\"V\n" +
+	"&payment/service/v1/payment_event.proto\x12\x16api.payment.service.v1\x1a\x13common/common.proto\x1a\x1cgoogle/protobuf/struct.proto\"V\n" +
 	"\fEventRequest\x12'\n" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse\"\xc3\x03\n" +
+	"\rEventResponse\"U\n" +
+	"\vChannelInfo\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x88\x04\n" +
+	"\x17PaymentTransactionEvent\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
+	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +
+	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12F\n" +
+	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
+	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12-\n" +
+	"\x12reporting_currency\x18\a \x01(\tR\x11reportingCurrency\x12\x16\n" +
+	"\x06amount\x18\b \x01(\tR\x06amount\x12\x16\n" +
+	"\x06status\x18\t \x01(\tR\x06status\x12\x1c\n" +
+	"\ttimestamp\x18\n" +
+	" \x01(\x03R\ttimestamp\x12-\n" +
+	"\x05extra\x18\v \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
+	"\fchannel_info\x18\f \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo\"\xaf\x05\n" +
 	"\x1fOperatorPaymentTransactionEvent\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
-	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12(\n" +
-	"\x10real_operator_id\x18\x03 \x01(\x03R\x0erealOperatorId\x12F\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12#\n" +
-	"\roperator_type\x18\x05 \x01(\tR\foperatorType\x12\x1a\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
+	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +
+	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12S\n" +
+	"\x17target_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12S\n" +
+	"\x17source_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x15sourceOperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12/\n" +
 	"\x13settlement_currency\x18\a \x01(\tR\x12settlementCurrency\x12-\n" +
 	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency\x12#\n" +
 	"\rexchange_rate\x18\t \x01(\tR\fexchangeRate\x12\x16\n" +
 	"\x06amount\x18\n" +
-	" \x01(\tR\x06amount2f\n" +
+	" \x01(\tR\x06amount\x12\x16\n" +
+	"\x06status\x18\v \x01(\tR\x06status\x12\x1c\n" +
+	"\ttimestamp\x18\f \x01(\x03R\ttimestamp\x12-\n" +
+	"\x05extra\x18\r \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
+	"\fchannel_info\x18\x0e \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo2f\n" +
 	"\fPaymentEvent\x12V\n" +
 	"\x05Event\x12$.api.payment.service.v1.EventRequest\x1a%.api.payment.service.v1.EventResponse\"\x00BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
@@ -264,22 +493,32 @@ func file_payment_service_v1_payment_event_proto_rawDescGZIP() []byte {
 	return file_payment_service_v1_payment_event_proto_rawDescData
 }
 
-var file_payment_service_v1_payment_event_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_payment_service_v1_payment_event_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_payment_service_v1_payment_event_proto_goTypes = []any{
 	(*EventRequest)(nil),                    // 0: api.payment.service.v1.EventRequest
 	(*EventResponse)(nil),                   // 1: api.payment.service.v1.EventResponse
-	(*OperatorPaymentTransactionEvent)(nil), // 2: api.payment.service.v1.OperatorPaymentTransactionEvent
-	(*common.OperatorContext)(nil),          // 3: api.common.OperatorContext
+	(*ChannelInfo)(nil),                     // 2: api.payment.service.v1.ChannelInfo
+	(*PaymentTransactionEvent)(nil),         // 3: api.payment.service.v1.PaymentTransactionEvent
+	(*OperatorPaymentTransactionEvent)(nil), // 4: api.payment.service.v1.OperatorPaymentTransactionEvent
+	(*common.OperatorContext)(nil),          // 5: api.common.OperatorContext
+	(*structpb.Struct)(nil),                 // 6: google.protobuf.Struct
 }
 var file_payment_service_v1_payment_event_proto_depIdxs = []int32{
-	3, // 0: api.payment.service.v1.OperatorPaymentTransactionEvent.operator_context:type_name -> api.common.OperatorContext
-	0, // 1: api.payment.service.v1.PaymentEvent.Event:input_type -> api.payment.service.v1.EventRequest
-	1, // 2: api.payment.service.v1.PaymentEvent.Event:output_type -> api.payment.service.v1.EventResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	5, // 0: api.payment.service.v1.ChannelInfo.operator_context:type_name -> api.common.OperatorContext
+	5, // 1: api.payment.service.v1.PaymentTransactionEvent.operator_context:type_name -> api.common.OperatorContext
+	6, // 2: api.payment.service.v1.PaymentTransactionEvent.extra:type_name -> google.protobuf.Struct
+	2, // 3: api.payment.service.v1.PaymentTransactionEvent.channel_info:type_name -> api.payment.service.v1.ChannelInfo
+	5, // 4: api.payment.service.v1.OperatorPaymentTransactionEvent.target_operator_context:type_name -> api.common.OperatorContext
+	5, // 5: api.payment.service.v1.OperatorPaymentTransactionEvent.source_operator_context:type_name -> api.common.OperatorContext
+	6, // 6: api.payment.service.v1.OperatorPaymentTransactionEvent.extra:type_name -> google.protobuf.Struct
+	2, // 7: api.payment.service.v1.OperatorPaymentTransactionEvent.channel_info:type_name -> api.payment.service.v1.ChannelInfo
+	0, // 8: api.payment.service.v1.PaymentEvent.Event:input_type -> api.payment.service.v1.EventRequest
+	1, // 9: api.payment.service.v1.PaymentEvent.Event:output_type -> api.payment.service.v1.EventResponse
+	9, // [9:10] is the sub-list for method output_type
+	8, // [8:9] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_payment_service_v1_payment_event_proto_init() }
@@ -293,7 +532,7 @@ func file_payment_service_v1_payment_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_payment_service_v1_payment_event_proto_rawDesc), len(file_payment_service_v1_payment_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

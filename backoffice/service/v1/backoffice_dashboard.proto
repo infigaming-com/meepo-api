@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -36,7 +37,9 @@ service BackofficeDashboard {
 }
 
 // System related messages
-message GetOverviewDashboardRequest {}
+message GetOverviewDashboardRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+}
 
 message GetOverviewDashboardResponse {
 	message RegisteredUsers {
@@ -67,14 +70,6 @@ message GetOverviewDashboardResponse {
 		string today = 1;
 		string yesterday = 2;
 	}
-	message ActiveUsers {
-		int32 today = 1;
-		int32 yesterday = 2;
-	}
-	message ActiveDevices {
-		int32 today = 1;
-		int32 yesterday = 2;
-	}
 	RegisteredUsers registered_users = 1;
 	FirstDepositUsers first_deposit_users = 2;
 	GGR ggr = 3; // USD
@@ -82,8 +77,6 @@ message GetOverviewDashboardResponse {
 	DepositAmount deposit_amount = 5; // USD
 	WithdrawalAmount withdrawal_amount = 6; // USD
 	DepositMinusWithdrawalAmount deposit_minus_withdrawal_amount = 7; // USD
-	ActiveUsers active_users = 8;
-	ActiveDevices active_devices = 9; // Not available For now
 }
 
 message GetTimeRangedDashboardRequest {
@@ -96,6 +89,7 @@ message GetTimeRangedDashboardRequest {
 
 	TimeRangeType time_range_type = 1;
 	int32 custom_days = 2;
+	api.common.OperatorContextFilters operator_context_filters = 3;
 }
 
 message GetTimeRangedDashboardResponse {
@@ -135,6 +129,7 @@ message GetTopUsersDashboardRequest {
 		TIME_RANGE_TYPE_THIS_MONTH = 3;
 	}
 	TimeRangeType time_range_type = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 }
 
 message GetTopUsersDashboardResponse {
@@ -144,8 +139,12 @@ message GetTopUsersDashboardResponse {
 		string avatar = 3;
 		string country = 4;
 		int32 vip_level = 5;
-		string amount = 6; // USD
-		string operator_name = 7;
+		string amount_usd = 6; // USD
+		string amount_reporting_currency = 7;
+		string operator_name = 8;
+		string company_operator_name = 9;
+		string retailer_operator_name = 10;
+		string system_operator_name = 11;
 	}
 	repeated User top_deposit_users = 1;
 	repeated User top_withdrawal_users = 2;
@@ -159,22 +158,26 @@ message GetTopOperatorsDashboardRequest {
 		TIME_RANGE_TYPE_THIS_MONTH = 3;
 	}
 	TimeRangeType time_range_type = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 }
 
 message GetTopOperatorsDashboardResponse {
 	message OperatorData {
 		int32 rank = 1;
-		string operator_id = 2;
-		string operator_name = 3;
-		string amount = 4; // USD
+		string operator_name = 2;
+		string company_operator_name = 3;
+		string retailer_operator_name = 4;
+		string system_operator_name = 5;
+		string amount_usd = 6; // USD
+		string amount_reporting_currency = 7;
 	}
 	repeated OperatorData top_ggr_operators = 1;
 	repeated OperatorData top_ngr_operators = 2; // Now only returns the same rank as ggr
 	repeated OperatorData top_deposit_minus_withdraw_operators = 3;
-	repeated OperatorData top_ggr_group_operators = 4; // Not available For now
-	repeated OperatorData top_ngr_group_operators = 5; // Not available For now
-	repeated OperatorData top_deposit_minus_withdraw_group_operators = 6; // Not available For now
-	repeated OperatorData top_ggr_retailer_operators = 7; // Not available For now
-	repeated OperatorData top_ngr_retailer_operators = 8; // Not available For now
-	repeated OperatorData top_deposit_minus_withdraw_retailer_operators = 9; // Not available For now
+	repeated OperatorData top_ggr_company_operators = 4;
+	repeated OperatorData top_ngr_company_operators = 5; // Now only returns the same rank as ggr
+	repeated OperatorData top_deposit_minus_withdraw_company_operators = 6;
+	repeated OperatorData top_ggr_retailer_operators = 7;
+	repeated OperatorData top_ngr_retailer_operators = 8; // Now only returns the same rank as ggr
+	repeated OperatorData top_deposit_minus_withdraw_retailer_operators = 9;
 }

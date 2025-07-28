@@ -25,6 +25,8 @@ const (
 	BackofficeAccount_SendMobileVerification_FullMethodName       = "/api.backoffice.service.v1.BackofficeAccount/SendMobileVerification"
 	BackofficeAccount_VerifyMobile_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAccount/VerifyMobile"
 	BackofficeAccount_ResetPassword_FullMethodName                = "/api.backoffice.service.v1.BackofficeAccount/ResetPassword"
+	BackofficeAccount_SendPasswordResetCode_FullMethodName        = "/api.backoffice.service.v1.BackofficeAccount/SendPasswordResetCode"
+	BackofficeAccount_ResetPasswordWithCode_FullMethodName        = "/api.backoffice.service.v1.BackofficeAccount/ResetPasswordWithCode"
 	BackofficeAccount_Generate2Fa_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAccount/Generate2fa"
 	BackofficeAccount_Bind2Fa_FullMethodName                      = "/api.backoffice.service.v1.BackofficeAccount/Bind2fa"
 	BackofficeAccount_Unbind2Fa_FullMethodName                    = "/api.backoffice.service.v1.BackofficeAccount/Unbind2fa"
@@ -53,6 +55,10 @@ type BackofficeAccountClient interface {
 	SendMobileVerification(ctx context.Context, in *SendMobileVerificationRequest, opts ...grpc.CallOption) (*SendMobileVerificationResponse, error)
 	VerifyMobile(ctx context.Context, in *VerifyMobileRequest, opts ...grpc.CallOption) (*VerifyMobileResponse, error)
 	ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error)
+	// Send password reset verification code to email
+	SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error)
+	// Reset password using verification code
+	ResetPasswordWithCode(ctx context.Context, in *ResetPasswordWithCodeRequest, opts ...grpc.CallOption) (*ResetPasswordWithCodeResponse, error)
 	Generate2Fa(ctx context.Context, in *Generate2FaRequest, opts ...grpc.CallOption) (*Generate2FaResponse, error)
 	Bind2Fa(ctx context.Context, in *Bind2FaRequest, opts ...grpc.CallOption) (*Bind2FaResponse, error)
 	Unbind2Fa(ctx context.Context, in *Unbind2FaRequest, opts ...grpc.CallOption) (*Unbind2FaResponse, error)
@@ -136,6 +142,26 @@ func (c *backofficeAccountClient) ResetPassword(ctx context.Context, in *ResetPa
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ResetPasswordResponse)
 	err := c.cc.Invoke(ctx, BackofficeAccount_ResetPassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAccountClient) SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendPasswordResetCodeResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_SendPasswordResetCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAccountClient) ResetPasswordWithCode(ctx context.Context, in *ResetPasswordWithCodeRequest, opts ...grpc.CallOption) (*ResetPasswordWithCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResetPasswordWithCodeResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_ResetPasswordWithCode_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -312,6 +338,10 @@ type BackofficeAccountServer interface {
 	SendMobileVerification(context.Context, *SendMobileVerificationRequest) (*SendMobileVerificationResponse, error)
 	VerifyMobile(context.Context, *VerifyMobileRequest) (*VerifyMobileResponse, error)
 	ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error)
+	// Send password reset verification code to email
+	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
+	// Reset password using verification code
+	ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error)
 	Generate2Fa(context.Context, *Generate2FaRequest) (*Generate2FaResponse, error)
 	Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error)
 	Unbind2Fa(context.Context, *Unbind2FaRequest) (*Unbind2FaResponse, error)
@@ -358,6 +388,12 @@ func (UnimplementedBackofficeAccountServer) VerifyMobile(context.Context, *Verif
 }
 func (UnimplementedBackofficeAccountServer) ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetPassword not implemented")
+}
+func (UnimplementedBackofficeAccountServer) SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendPasswordResetCode not implemented")
+}
+func (UnimplementedBackofficeAccountServer) ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetPasswordWithCode not implemented")
 }
 func (UnimplementedBackofficeAccountServer) Generate2Fa(context.Context, *Generate2FaRequest) (*Generate2FaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Generate2Fa not implemented")
@@ -532,6 +568,42 @@ func _BackofficeAccount_ResetPassword_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeAccountServer).ResetPassword(ctx, req.(*ResetPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAccount_SendPasswordResetCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendPasswordResetCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).SendPasswordResetCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_SendPasswordResetCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).SendPasswordResetCode(ctx, req.(*SendPasswordResetCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAccount_ResetPasswordWithCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetPasswordWithCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).ResetPasswordWithCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_ResetPasswordWithCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).ResetPasswordWithCode(ctx, req.(*ResetPasswordWithCodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -854,6 +926,14 @@ var BackofficeAccount_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResetPassword",
 			Handler:    _BackofficeAccount_ResetPassword_Handler,
+		},
+		{
+			MethodName: "SendPasswordResetCode",
+			Handler:    _BackofficeAccount_SendPasswordResetCode_Handler,
+		},
+		{
+			MethodName: "ResetPasswordWithCode",
+			Handler:    _BackofficeAccount_ResetPasswordWithCode_Handler,
 		},
 		{
 			MethodName: "Generate2fa",
