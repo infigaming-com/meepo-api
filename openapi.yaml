@@ -4502,9 +4502,6 @@ components:
                 source:
                     type: string
                     description: Source of operator type
-                enabled:
-                    type: boolean
-                    description: Status ture or false
                 sort:
                     enum:
                         - DESC
@@ -4512,6 +4509,9 @@ components:
                     type: string
                     description: Optional sort direction
                     format: enum
+                enabled:
+                    type: boolean
+                    description: Status ture or false
                 operatorContextFilters:
                     allOf:
                         - $ref: '#/components/schemas/api.common.OperatorContextFilters'
@@ -4643,6 +4643,8 @@ components:
                     type: integer
                     description: Number of items per page
                     format: int32
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.GetPlayerGameDataRequest:
             type: object
             properties:
@@ -10229,6 +10231,8 @@ components:
                     type: integer
                     description: Number of items per page
                     format: int32
+                enabled:
+                    type: boolean
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         payment.service.v1.GetPaymentMethodListResponse:

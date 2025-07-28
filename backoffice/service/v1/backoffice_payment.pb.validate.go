@@ -501,6 +501,10 @@ func (m *GetPaymentMethodListRequest) validate(all bool) error {
 
 	// no validation rules for PageSize
 
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
 	if len(errors) > 0 {
 		return GetPaymentMethodListRequestMultiError(errors)
 	}
@@ -842,8 +846,6 @@ func (m *GetOperatorPaymentChannelPageRequest) validate(all bool) error {
 
 	// no validation rules for Source
 
-	// no validation rules for Enabled
-
 	// no validation rules for Sort
 
 	if all {
@@ -873,6 +875,10 @@ func (m *GetOperatorPaymentChannelPageRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if len(errors) > 0 {
