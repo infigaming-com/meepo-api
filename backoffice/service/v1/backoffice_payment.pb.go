@@ -347,6 +347,7 @@ type GetPaymentMethodListRequest struct {
 	Page int32 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
 	// Number of items per page
 	PageSize      int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Enabled       *bool `protobuf:"varint,5,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -407,6 +408,13 @@ func (x *GetPaymentMethodListRequest) GetPageSize() int32 {
 		return x.PageSize
 	}
 	return 0
+}
+
+func (x *GetPaymentMethodListRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
 }
 
 type GetTransactionPageRequest struct {
@@ -620,10 +628,10 @@ type GetOperatorPaymentChannelPageRequest struct {
 	Country string `protobuf:"bytes,9,opt,name=country,proto3" json:"country,omitempty"`
 	// Source of operator type
 	Source string `protobuf:"bytes,10,opt,name=source,proto3" json:"source,omitempty"`
-	// Status ture or false
-	Enabled bool `protobuf:"varint,11,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Optional sort direction
-	Sort v1.Sort `protobuf:"varint,12,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
+	Sort v1.Sort `protobuf:"varint,11,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
+	// Status ture or false
+	Enabled *bool `protobuf:"varint,12,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	// ID of the Operator connect with this channel
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,13,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	unknownFields          protoimpl.UnknownFields
@@ -730,18 +738,18 @@ func (x *GetOperatorPaymentChannelPageRequest) GetSource() string {
 	return ""
 }
 
-func (x *GetOperatorPaymentChannelPageRequest) GetEnabled() bool {
-	if x != nil {
-		return x.Enabled
-	}
-	return false
-}
-
 func (x *GetOperatorPaymentChannelPageRequest) GetSort() v1.Sort {
 	if x != nil {
 		return x.Sort
 	}
 	return v1.Sort(0)
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
 }
 
 func (x *GetOperatorPaymentChannelPageRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
@@ -787,12 +795,15 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	" \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\v \x01(\tR\tmaxAmount\x12)\n" +
-	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"|\n" +
+	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"\xa7\x01\n" +
 	"\x1bGetPaymentMethodListRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x10\n" +
 	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xdf\x05\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\aenabled\x18\x05 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
+	"\n" +
+	"\b_enabled\"\xdf\x05\n" +
 	"\x19GetTransactionPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12%\n" +
@@ -814,7 +825,7 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"min_amount\x18\x0f \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\x10 \x01(\tR\tmaxAmount\x12\\\n" +
-	"\x18operator_context_filters\x18\x11 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xf9\x03\n" +
+	"\x18operator_context_filters\x18\x11 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\x8a\x04\n" +
 	"$GetOperatorPaymentChannelPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x123\n" +
@@ -826,10 +837,12 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\anetwork\x18\b \x01(\tR\anetwork\x12\x18\n" +
 	"\acountry\x18\t \x01(\tR\acountry\x12\x16\n" +
 	"\x06source\x18\n" +
-	" \x01(\tR\x06source\x12\x18\n" +
-	"\aenabled\x18\v \x01(\bR\aenabled\x12,\n" +
-	"\x04sort\x18\f \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x12\\\n" +
-	"\x18operator_context_filters\x18\r \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters2\xdd\x11\n" +
+	" \x01(\tR\x06source\x12,\n" +
+	"\x04sort\x18\v \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x12\x1d\n" +
+	"\aenabled\x18\f \x01(\bH\x00R\aenabled\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\r \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
+	"\n" +
+	"\b_enabled2\xdd\x11\n" +
 	"\x11BackofficePayment\x12\xb5\x01\n" +
 	"\x19GetPaymentTransactionPage\x124.api.backoffice.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/payment/transaction/page\x12\xbc\x01\n" +
 	"\x19GetPaymentTransactionById\x123.payment.service.v1.GetTransactionDetailByIdRequest\x1a4.payment.service.v1.GetTransactionDetailByIdResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/payment/transaction/detail\x12\xc6\x01\n" +
@@ -936,6 +949,8 @@ func file_backoffice_service_v1_backoffice_payment_proto_init() {
 	if File_backoffice_service_v1_backoffice_payment_proto != nil {
 		return
 	}
+	file_backoffice_service_v1_backoffice_payment_proto_msgTypes[3].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_payment_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

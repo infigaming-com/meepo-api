@@ -25,7 +25,8 @@ message GetPaymentMethodListRequest {
   int32 page = 3;
   // Number of items per page
   int32 page_size = 4;
-	api.common.OperatorContext operator_context = 5;
+  optional bool enabled = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 // Details of a single payment method
@@ -760,7 +761,7 @@ message GetOperatorPaymentChannelPageRequest {
   // Optional sort direction
   Sort sort = 11;
   // Status ture or false
-  bool enabled = 12;
+  optional bool enabled = 12;
   // ID of the Operator connect with this channel
   api.common.OperatorContextFilters operator_context_filters = 13;
   // ID of the Operator connect with this channel
