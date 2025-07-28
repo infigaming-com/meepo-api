@@ -3380,9 +3380,9 @@ components:
                 item:
                     type: string
                     description: Basic information
-                retailerId:
+                retailerOperatorId:
                     type: string
-                companyId:
+                companyOperatorId:
                     type: string
                 operatorId:
                     type: string
@@ -4419,15 +4419,15 @@ components:
                     type: string
                 dueAmount:
                     type: string
-                retailerId:
+                retailerOperatorId:
                     type: string
                     description: Retailer information
-                retailerName:
+                retailerOperatorName:
                     type: string
-                companyId:
+                companyOperatorId:
                     type: string
                     description: Company information
-                companyName:
+                companyOperatorName:
                     type: string
                 operatorId:
                     type: string
@@ -6421,26 +6421,26 @@ components:
                     description: Operator information
                 operatorName:
                     type: string
-                retailerId:
+                retailerOperatorId:
                     type: string
                     description: Retailer information
-                retailerName:
+                retailerOperatorName:
                     type: string
-                companyId:
+                companyOperatorId:
                     type: string
                     description: Company information
-                companyName:
+                companyOperatorName:
                     type: string
                 month:
                     type: string
                     description: Invoice details
-                retailer:
-                    type: string
-                company:
-                    type: string
                 dueAmount:
                     type: string
                     description: Financial information
+                totalAmount:
+                    type: string
+                amountPaid:
+                    type: string
                 paymentStatus:
                     enum:
                         - PAYMENT_STATUS_PAID

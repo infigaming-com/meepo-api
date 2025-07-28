@@ -4236,9 +4236,9 @@ func (m *AddAdjustmentRequest) validate(all bool) error {
 
 	// no validation rules for Item
 
-	// no validation rules for RetailerId
+	// no validation rules for RetailerOperatorId
 
-	// no validation rules for CompanyId
+	// no validation rules for CompanyOperatorId
 
 	// no validation rules for OperatorId
 
@@ -7013,21 +7013,21 @@ func (m *ListInvoicesResponse_Invoice) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
-	// no validation rules for RetailerId
+	// no validation rules for RetailerOperatorId
 
-	// no validation rules for RetailerName
+	// no validation rules for RetailerOperatorName
 
-	// no validation rules for CompanyId
+	// no validation rules for CompanyOperatorId
 
-	// no validation rules for CompanyName
+	// no validation rules for CompanyOperatorName
 
 	// no validation rules for Month
 
-	// no validation rules for Retailer
-
-	// no validation rules for Company
-
 	// no validation rules for DueAmount
+
+	// no validation rules for TotalAmount
+
+	// no validation rules for AmountPaid
 
 	// no validation rules for PaymentStatus
 
@@ -7168,13 +7168,13 @@ func (m *GetInvoiceDetailResponse_InvoiceDetail) validate(all bool) error {
 
 	// no validation rules for DueAmount
 
-	// no validation rules for RetailerId
+	// no validation rules for RetailerOperatorId
 
-	// no validation rules for RetailerName
+	// no validation rules for RetailerOperatorName
 
-	// no validation rules for CompanyId
+	// no validation rules for CompanyOperatorId
 
-	// no validation rules for CompanyName
+	// no validation rules for CompanyOperatorName
 
 	// no validation rules for OperatorId
 

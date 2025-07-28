@@ -927,10 +927,10 @@ func (x *ListMonthlyRevenueShareResponse) GetPageSize() int32 {
 type AddAdjustmentRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Basic information
-	Item       string `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`                                // Adjustment item type
-	RetailerId int64  `protobuf:"varint,2,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"` // Retailer ID
-	CompanyId  int64  `protobuf:"varint,3,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`    // Company ID
-	OperatorId int64  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"` // Operator ID
+	Item               string `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`                                                          // Adjustment item type
+	RetailerOperatorId int64  `protobuf:"varint,2,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"` // Retailer ID
+	CompanyOperatorId  int64  `protobuf:"varint,3,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`    // Company ID
+	OperatorId         int64  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                           // Operator ID
 	// Financial information
 	AppliedDate   string `protobuf:"bytes,5,opt,name=applied_date,json=appliedDate,proto3" json:"applied_date,omitempty"` // Applied date
 	Currency      string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                          // Currency code (e.g., "USDT", "USD")
@@ -977,16 +977,16 @@ func (x *AddAdjustmentRequest) GetItem() string {
 	return ""
 }
 
-func (x *AddAdjustmentRequest) GetRetailerId() int64 {
+func (x *AddAdjustmentRequest) GetRetailerOperatorId() int64 {
 	if x != nil {
-		return x.RetailerId
+		return x.RetailerOperatorId
 	}
 	return 0
 }
 
-func (x *AddAdjustmentRequest) GetCompanyId() int64 {
+func (x *AddAdjustmentRequest) GetCompanyOperatorId() int64 {
 	if x != nil {
-		return x.CompanyId
+		return x.CompanyOperatorId
 	}
 	return 0
 }
@@ -2035,17 +2035,17 @@ type ListInvoicesResponse_Invoice struct {
 	OperatorId   int64  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	OperatorName string `protobuf:"bytes,3,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	// Retailer information
-	RetailerId   int64  `protobuf:"varint,4,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
-	RetailerName string `protobuf:"bytes,5,opt,name=retailer_name,json=retailerName,proto3" json:"retailer_name,omitempty"`
+	RetailerOperatorId   int64  `protobuf:"varint,4,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	RetailerOperatorName string `protobuf:"bytes,5,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
 	// Company information
-	CompanyId   int64  `protobuf:"varint,6,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
-	CompanyName string `protobuf:"bytes,7,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
+	CompanyOperatorId   int64  `protobuf:"varint,6,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	CompanyOperatorName string `protobuf:"bytes,7,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
 	// Invoice details
-	Month    string `protobuf:"bytes,8,opt,name=month,proto3" json:"month,omitempty"`
-	Retailer string `protobuf:"bytes,9,opt,name=retailer,proto3" json:"retailer,omitempty"`
-	Company  string `protobuf:"bytes,10,opt,name=company,proto3" json:"company,omitempty"`
+	Month string `protobuf:"bytes,8,opt,name=month,proto3" json:"month,omitempty"`
 	// Financial information
-	DueAmount     string                                     `protobuf:"bytes,11,opt,name=due_amount,json=dueAmount,proto3" json:"due_amount,omitempty"`
+	DueAmount     string                                     `protobuf:"bytes,9,opt,name=due_amount,json=dueAmount,proto3" json:"due_amount,omitempty"`
+	TotalAmount   string                                     `protobuf:"bytes,10,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	AmountPaid    string                                     `protobuf:"bytes,11,opt,name=amount_paid,json=amountPaid,proto3" json:"amount_paid,omitempty"`
 	PaymentStatus ListInvoicesResponse_Invoice_PaymentStatus `protobuf:"varint,12,opt,name=payment_status,json=paymentStatus,proto3,enum=api.backoffice.service.v1.ListInvoicesResponse_Invoice_PaymentStatus" json:"payment_status,omitempty"`
 	// Dates
 	InvoiceDate   string `protobuf:"bytes,13,opt,name=invoice_date,json=invoiceDate,proto3" json:"invoice_date,omitempty"` // Format: YYYY-MM-DD
@@ -2105,30 +2105,30 @@ func (x *ListInvoicesResponse_Invoice) GetOperatorName() string {
 	return ""
 }
 
-func (x *ListInvoicesResponse_Invoice) GetRetailerId() int64 {
+func (x *ListInvoicesResponse_Invoice) GetRetailerOperatorId() int64 {
 	if x != nil {
-		return x.RetailerId
+		return x.RetailerOperatorId
 	}
 	return 0
 }
 
-func (x *ListInvoicesResponse_Invoice) GetRetailerName() string {
+func (x *ListInvoicesResponse_Invoice) GetRetailerOperatorName() string {
 	if x != nil {
-		return x.RetailerName
+		return x.RetailerOperatorName
 	}
 	return ""
 }
 
-func (x *ListInvoicesResponse_Invoice) GetCompanyId() int64 {
+func (x *ListInvoicesResponse_Invoice) GetCompanyOperatorId() int64 {
 	if x != nil {
-		return x.CompanyId
+		return x.CompanyOperatorId
 	}
 	return 0
 }
 
-func (x *ListInvoicesResponse_Invoice) GetCompanyName() string {
+func (x *ListInvoicesResponse_Invoice) GetCompanyOperatorName() string {
 	if x != nil {
-		return x.CompanyName
+		return x.CompanyOperatorName
 	}
 	return ""
 }
@@ -2140,23 +2140,23 @@ func (x *ListInvoicesResponse_Invoice) GetMonth() string {
 	return ""
 }
 
-func (x *ListInvoicesResponse_Invoice) GetRetailer() string {
-	if x != nil {
-		return x.Retailer
-	}
-	return ""
-}
-
-func (x *ListInvoicesResponse_Invoice) GetCompany() string {
-	if x != nil {
-		return x.Company
-	}
-	return ""
-}
-
 func (x *ListInvoicesResponse_Invoice) GetDueAmount() string {
 	if x != nil {
 		return x.DueAmount
+	}
+	return ""
+}
+
+func (x *ListInvoicesResponse_Invoice) GetTotalAmount() string {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return ""
+}
+
+func (x *ListInvoicesResponse_Invoice) GetAmountPaid() string {
+	if x != nil {
+		return x.AmountPaid
 	}
 	return ""
 }
@@ -2203,11 +2203,11 @@ type GetInvoiceDetailResponse_InvoiceDetail struct {
 	AmountPaid  string `protobuf:"bytes,13,opt,name=amount_paid,json=amountPaid,proto3" json:"amount_paid,omitempty"`    // Amount already paid
 	DueAmount   string `protobuf:"bytes,14,opt,name=due_amount,json=dueAmount,proto3" json:"due_amount,omitempty"`       // Remaining amount due
 	// Retailer information
-	RetailerId   int64  `protobuf:"varint,15,opt,name=retailer_id,json=retailerId,proto3" json:"retailer_id,omitempty"`
-	RetailerName string `protobuf:"bytes,16,opt,name=retailer_name,json=retailerName,proto3" json:"retailer_name,omitempty"`
+	RetailerOperatorId   int64  `protobuf:"varint,15,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	RetailerOperatorName string `protobuf:"bytes,16,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
 	// Company information
-	CompanyId   int64  `protobuf:"varint,17,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
-	CompanyName string `protobuf:"bytes,18,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
+	CompanyOperatorId   int64  `protobuf:"varint,17,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	CompanyOperatorName string `protobuf:"bytes,18,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
 	// Operator information
 	OperatorId    int64  `protobuf:"varint,19,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	OperatorName  string `protobuf:"bytes,20,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
@@ -2343,30 +2343,30 @@ func (x *GetInvoiceDetailResponse_InvoiceDetail) GetDueAmount() string {
 	return ""
 }
 
-func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRetailerId() int64 {
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRetailerOperatorId() int64 {
 	if x != nil {
-		return x.RetailerId
+		return x.RetailerOperatorId
 	}
 	return 0
 }
 
-func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRetailerName() string {
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRetailerOperatorName() string {
 	if x != nil {
-		return x.RetailerName
+		return x.RetailerOperatorName
 	}
 	return ""
 }
 
-func (x *GetInvoiceDetailResponse_InvoiceDetail) GetCompanyId() int64 {
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetCompanyOperatorId() int64 {
 	if x != nil {
-		return x.CompanyId
+		return x.CompanyOperatorId
 	}
 	return 0
 }
 
-func (x *GetInvoiceDetailResponse_InvoiceDetail) GetCompanyName() string {
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetCompanyOperatorName() string {
 	if x != nil {
-		return x.CompanyName
+		return x.CompanyOperatorName
 	}
 	return ""
 }
@@ -3034,7 +3034,7 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x0f_payment_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xef\x06\n" +
+	"_page_size\"\xc1\a\n" +
 	"\x14ListInvoicesResponse\x12S\n" +
 	"\binvoices\x18\x01 \x03(\v27.api.backoffice.service.v1.ListInvoicesResponse.InvoiceR\binvoices\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
@@ -3042,25 +3042,24 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12(\n" +
 	"\x10total_paid_count\x18\x05 \x01(\x05R\x0etotalPaidCount\x12/\n" +
-	"\x14total_not_paid_count\x18\x06 \x01(\x05R\x11totalNotPaidCount\x1a\xd4\x04\n" +
+	"\x14total_not_paid_count\x18\x06 \x01(\x05R\x11totalNotPaidCount\x1a\xa6\x05\n" +
 	"\aInvoice\x12\x1d\n" +
 	"\n" +
 	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
-	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x12\x1f\n" +
-	"\vretailer_id\x18\x04 \x01(\x03R\n" +
-	"retailerId\x12#\n" +
-	"\rretailer_name\x18\x05 \x01(\tR\fretailerName\x12\x1d\n" +
+	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x120\n" +
+	"\x14retailer_operator_id\x18\x04 \x01(\x03R\x12retailerOperatorId\x124\n" +
+	"\x16retailer_operator_name\x18\x05 \x01(\tR\x14retailerOperatorName\x12.\n" +
+	"\x13company_operator_id\x18\x06 \x01(\x03R\x11companyOperatorId\x122\n" +
+	"\x15company_operator_name\x18\a \x01(\tR\x13companyOperatorName\x12\x14\n" +
+	"\x05month\x18\b \x01(\tR\x05month\x12\x1d\n" +
 	"\n" +
-	"company_id\x18\x06 \x01(\x03R\tcompanyId\x12!\n" +
-	"\fcompany_name\x18\a \x01(\tR\vcompanyName\x12\x14\n" +
-	"\x05month\x18\b \x01(\tR\x05month\x12\x1a\n" +
-	"\bretailer\x18\t \x01(\tR\bretailer\x12\x18\n" +
-	"\acompany\x18\n" +
-	" \x01(\tR\acompany\x12\x1d\n" +
-	"\n" +
-	"due_amount\x18\v \x01(\tR\tdueAmount\x12l\n" +
+	"due_amount\x18\t \x01(\tR\tdueAmount\x12!\n" +
+	"\ftotal_amount\x18\n" +
+	" \x01(\tR\vtotalAmount\x12\x1f\n" +
+	"\vamount_paid\x18\v \x01(\tR\n" +
+	"amountPaid\x12l\n" +
 	"\x0epayment_status\x18\f \x01(\x0e2E.api.backoffice.service.v1.ListInvoicesResponse.Invoice.PaymentStatusR\rpaymentStatus\x12!\n" +
 	"\finvoice_date\x18\r \x01(\tR\vinvoiceDate\x12\x19\n" +
 	"\bdue_date\x18\x0e \x01(\tR\adueDate\"E\n" +
@@ -3069,9 +3068,9 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x17PAYMENT_STATUS_NOT_PAID\x10\x01\"8\n" +
 	"\x17GetInvoiceDetailRequest\x12\x1d\n" +
 	"\n" +
-	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\"\x92\b\n" +
+	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\"\xd6\b\n" +
 	"\x18GetInvoiceDetailResponse\x12[\n" +
-	"\ainvoice\x18\x01 \x01(\v2A.api.backoffice.service.v1.GetInvoiceDetailResponse.InvoiceDetailR\ainvoice\x1a\x98\a\n" +
+	"\ainvoice\x18\x01 \x01(\v2A.api.backoffice.service.v1.GetInvoiceDetailResponse.InvoiceDetailR\ainvoice\x1a\xdc\a\n" +
 	"\rInvoiceDetail\x12\x1d\n" +
 	"\n" +
 	"invoice_id\x18\x01 \x01(\x03R\tinvoiceId\x12v\n" +
@@ -3090,13 +3089,11 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\vamount_paid\x18\r \x01(\tR\n" +
 	"amountPaid\x12\x1d\n" +
 	"\n" +
-	"due_amount\x18\x0e \x01(\tR\tdueAmount\x12\x1f\n" +
-	"\vretailer_id\x18\x0f \x01(\x03R\n" +
-	"retailerId\x12#\n" +
-	"\rretailer_name\x18\x10 \x01(\tR\fretailerName\x12\x1d\n" +
-	"\n" +
-	"company_id\x18\x11 \x01(\x03R\tcompanyId\x12!\n" +
-	"\fcompany_name\x18\x12 \x01(\tR\vcompanyName\x12\x1f\n" +
+	"due_amount\x18\x0e \x01(\tR\tdueAmount\x120\n" +
+	"\x14retailer_operator_id\x18\x0f \x01(\x03R\x12retailerOperatorId\x124\n" +
+	"\x16retailer_operator_name\x18\x10 \x01(\tR\x14retailerOperatorName\x12.\n" +
+	"\x13company_operator_id\x18\x11 \x01(\x03R\x11companyOperatorId\x122\n" +
+	"\x15company_operator_name\x18\x12 \x01(\tR\x13companyOperatorName\x12\x1f\n" +
 	"\voperator_id\x18\x13 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x14 \x01(\tR\foperatorName\"E\n" +
@@ -3213,13 +3210,11 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\bsubtotal\x18\x01 \x01(\tR\bsubtotal\x12?\n" +
 	"\x1crevenue_share_disburse_total\x18\x02 \x01(\tR\x19revenueShareDisburseTotal\x12=\n" +
 	"\x1brevenue_share_collect_total\x18\x03 \x01(\tR\x18revenueShareCollectTotal\x12&\n" +
-	"\x0fest_costs_total\x18\x04 \x01(\tR\restCostsTotal\"\x84\x02\n" +
+	"\x0fest_costs_total\x18\x04 \x01(\tR\restCostsTotal\"\xa6\x02\n" +
 	"\x14AddAdjustmentRequest\x12\x12\n" +
-	"\x04item\x18\x01 \x01(\tR\x04item\x12\x1f\n" +
-	"\vretailer_id\x18\x02 \x01(\x03R\n" +
-	"retailerId\x12\x1d\n" +
-	"\n" +
-	"company_id\x18\x03 \x01(\x03R\tcompanyId\x12\x1f\n" +
+	"\x04item\x18\x01 \x01(\tR\x04item\x120\n" +
+	"\x14retailer_operator_id\x18\x02 \x01(\x03R\x12retailerOperatorId\x12.\n" +
+	"\x13company_operator_id\x18\x03 \x01(\x03R\x11companyOperatorId\x12\x1f\n" +
 	"\voperator_id\x18\x04 \x01(\x03R\n" +
 	"operatorId\x12!\n" +
 	"\fapplied_date\x18\x05 \x01(\tR\vappliedDate\x12\x1a\n" +
