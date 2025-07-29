@@ -252,6 +252,10 @@ service User {
 	// ListCompanyOperatorsByAdminEmail returns a list of company operators by admin email
 	rpc ListCompanyOperatorsByAdminEmail(ListCompanyOperatorsByAdminEmailRequest) returns (ListCompanyOperatorsByAdminEmailResponse) {
 	}
+
+	// ListOperatorDetails returns a list of operator details
+	rpc ListOperatorDetails(ListOperatorDetailsRequest) returns (ListOperatorDetailsResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -1163,5 +1167,13 @@ message ListCompanyOperatorsByAdminEmailRequest {
 }
 
 message ListCompanyOperatorsByAdminEmailResponse {
+	repeated OperatorDetails operator_details_list = 1;
+}
+
+message ListOperatorDetailsRequest {
+	repeated int64 operator_ids = 1; // real operator ids list
+}
+
+message ListOperatorDetailsResponse {
 	repeated OperatorDetails operator_details_list = 1;
 }
