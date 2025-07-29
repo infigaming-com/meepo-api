@@ -13596,24 +13596,23 @@ var _ interface {
 	ErrorName() string
 } = ListAllUsersResponseValidationError{}
 
-// Validate checks the field values on ListCompanyOperatorsByAdminEmailRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *ListCompanyOperatorsByAdminEmailRequest) Validate() error {
+// Validate checks the field values on ListOperatorsByAdminEmailRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListOperatorsByAdminEmailRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on
-// ListCompanyOperatorsByAdminEmailRequest with the rules defined in the proto
-// definition for this message. If any rules are violated, the result is a
-// list of violation errors wrapped in
-// ListCompanyOperatorsByAdminEmailRequestMultiError, or nil if none found.
-func (m *ListCompanyOperatorsByAdminEmailRequest) ValidateAll() error {
+// ValidateAll checks the field values on ListOperatorsByAdminEmailRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListOperatorsByAdminEmailRequestMultiError, or nil if none found.
+func (m *ListOperatorsByAdminEmailRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListCompanyOperatorsByAdminEmailRequest) validate(all bool) error {
+func (m *ListOperatorsByAdminEmailRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -13626,7 +13625,7 @@ func (m *ListCompanyOperatorsByAdminEmailRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListCompanyOperatorsByAdminEmailRequestValidationError{
+				errors = append(errors, ListOperatorsByAdminEmailRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -13634,7 +13633,7 @@ func (m *ListCompanyOperatorsByAdminEmailRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListCompanyOperatorsByAdminEmailRequestValidationError{
+				errors = append(errors, ListOperatorsByAdminEmailRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -13643,7 +13642,7 @@ func (m *ListCompanyOperatorsByAdminEmailRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListCompanyOperatorsByAdminEmailRequestValidationError{
+			return ListOperatorsByAdminEmailRequestValidationError{
 				field:  "OperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -13652,20 +13651,20 @@ func (m *ListCompanyOperatorsByAdminEmailRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListCompanyOperatorsByAdminEmailRequestMultiError(errors)
+		return ListOperatorsByAdminEmailRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListCompanyOperatorsByAdminEmailRequestMultiError is an error wrapping
-// multiple validation errors returned by
-// ListCompanyOperatorsByAdminEmailRequest.ValidateAll() if the designated
+// ListOperatorsByAdminEmailRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// ListOperatorsByAdminEmailRequest.ValidateAll() if the designated
 // constraints aren't met.
-type ListCompanyOperatorsByAdminEmailRequestMultiError []error
+type ListOperatorsByAdminEmailRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListCompanyOperatorsByAdminEmailRequestMultiError) Error() string {
+func (m ListOperatorsByAdminEmailRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -13674,12 +13673,12 @@ func (m ListCompanyOperatorsByAdminEmailRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListCompanyOperatorsByAdminEmailRequestMultiError) AllErrors() []error { return m }
+func (m ListOperatorsByAdminEmailRequestMultiError) AllErrors() []error { return m }
 
-// ListCompanyOperatorsByAdminEmailRequestValidationError is the validation
-// error returned by ListCompanyOperatorsByAdminEmailRequest.Validate if the
-// designated constraints aren't met.
-type ListCompanyOperatorsByAdminEmailRequestValidationError struct {
+// ListOperatorsByAdminEmailRequestValidationError is the validation error
+// returned by ListOperatorsByAdminEmailRequest.Validate if the designated
+// constraints aren't met.
+type ListOperatorsByAdminEmailRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -13687,24 +13686,24 @@ type ListCompanyOperatorsByAdminEmailRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListCompanyOperatorsByAdminEmailRequestValidationError) Field() string { return e.field }
+func (e ListOperatorsByAdminEmailRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListCompanyOperatorsByAdminEmailRequestValidationError) Reason() string { return e.reason }
+func (e ListOperatorsByAdminEmailRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListCompanyOperatorsByAdminEmailRequestValidationError) Cause() error { return e.cause }
+func (e ListOperatorsByAdminEmailRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListCompanyOperatorsByAdminEmailRequestValidationError) Key() bool { return e.key }
+func (e ListOperatorsByAdminEmailRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListCompanyOperatorsByAdminEmailRequestValidationError) ErrorName() string {
-	return "ListCompanyOperatorsByAdminEmailRequestValidationError"
+func (e ListOperatorsByAdminEmailRequestValidationError) ErrorName() string {
+	return "ListOperatorsByAdminEmailRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListCompanyOperatorsByAdminEmailRequestValidationError) Error() string {
+func (e ListOperatorsByAdminEmailRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -13716,14 +13715,14 @@ func (e ListCompanyOperatorsByAdminEmailRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListCompanyOperatorsByAdminEmailRequest.%s: %s%s",
+		"invalid %sListOperatorsByAdminEmailRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListCompanyOperatorsByAdminEmailRequestValidationError{}
+var _ error = ListOperatorsByAdminEmailRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -13731,49 +13730,48 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListCompanyOperatorsByAdminEmailRequestValidationError{}
+} = ListOperatorsByAdminEmailRequestValidationError{}
 
-// Validate checks the field values on ListCompanyOperatorsByAdminEmailResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *ListCompanyOperatorsByAdminEmailResponse) Validate() error {
+// Validate checks the field values on ListOperatorsByAdminEmailResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListOperatorsByAdminEmailResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on
-// ListCompanyOperatorsByAdminEmailResponse with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// ListCompanyOperatorsByAdminEmailResponseMultiError, or nil if none found.
-func (m *ListCompanyOperatorsByAdminEmailResponse) ValidateAll() error {
+// ValidateAll checks the field values on ListOperatorsByAdminEmailResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListOperatorsByAdminEmailResponseMultiError, or nil if none found.
+func (m *ListOperatorsByAdminEmailResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListCompanyOperatorsByAdminEmailResponse) validate(all bool) error {
+func (m *ListOperatorsByAdminEmailResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	for idx, item := range m.GetOperatorDetailsList() {
+	for idx, item := range m.GetRetailerOperatorDetailsList() {
 		_, _ = idx, item
 
 		if all {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListCompanyOperatorsByAdminEmailResponseValidationError{
-						field:  fmt.Sprintf("OperatorDetailsList[%v]", idx),
+					errors = append(errors, ListOperatorsByAdminEmailResponseValidationError{
+						field:  fmt.Sprintf("RetailerOperatorDetailsList[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListCompanyOperatorsByAdminEmailResponseValidationError{
-						field:  fmt.Sprintf("OperatorDetailsList[%v]", idx),
+					errors = append(errors, ListOperatorsByAdminEmailResponseValidationError{
+						field:  fmt.Sprintf("RetailerOperatorDetailsList[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -13781,8 +13779,76 @@ func (m *ListCompanyOperatorsByAdminEmailResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListCompanyOperatorsByAdminEmailResponseValidationError{
-					field:  fmt.Sprintf("OperatorDetailsList[%v]", idx),
+				return ListOperatorsByAdminEmailResponseValidationError{
+					field:  fmt.Sprintf("RetailerOperatorDetailsList[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetCompanyOperatorDetailsList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListOperatorsByAdminEmailResponseValidationError{
+						field:  fmt.Sprintf("CompanyOperatorDetailsList[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListOperatorsByAdminEmailResponseValidationError{
+						field:  fmt.Sprintf("CompanyOperatorDetailsList[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListOperatorsByAdminEmailResponseValidationError{
+					field:  fmt.Sprintf("CompanyOperatorDetailsList[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetBottomOperatorDetailsList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListOperatorsByAdminEmailResponseValidationError{
+						field:  fmt.Sprintf("BottomOperatorDetailsList[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListOperatorsByAdminEmailResponseValidationError{
+						field:  fmt.Sprintf("BottomOperatorDetailsList[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListOperatorsByAdminEmailResponseValidationError{
+					field:  fmt.Sprintf("BottomOperatorDetailsList[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -13792,20 +13858,20 @@ func (m *ListCompanyOperatorsByAdminEmailResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListCompanyOperatorsByAdminEmailResponseMultiError(errors)
+		return ListOperatorsByAdminEmailResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListCompanyOperatorsByAdminEmailResponseMultiError is an error wrapping
-// multiple validation errors returned by
-// ListCompanyOperatorsByAdminEmailResponse.ValidateAll() if the designated
+// ListOperatorsByAdminEmailResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// ListOperatorsByAdminEmailResponse.ValidateAll() if the designated
 // constraints aren't met.
-type ListCompanyOperatorsByAdminEmailResponseMultiError []error
+type ListOperatorsByAdminEmailResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListCompanyOperatorsByAdminEmailResponseMultiError) Error() string {
+func (m ListOperatorsByAdminEmailResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -13814,12 +13880,12 @@ func (m ListCompanyOperatorsByAdminEmailResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListCompanyOperatorsByAdminEmailResponseMultiError) AllErrors() []error { return m }
+func (m ListOperatorsByAdminEmailResponseMultiError) AllErrors() []error { return m }
 
-// ListCompanyOperatorsByAdminEmailResponseValidationError is the validation
-// error returned by ListCompanyOperatorsByAdminEmailResponse.Validate if the
-// designated constraints aren't met.
-type ListCompanyOperatorsByAdminEmailResponseValidationError struct {
+// ListOperatorsByAdminEmailResponseValidationError is the validation error
+// returned by ListOperatorsByAdminEmailResponse.Validate if the designated
+// constraints aren't met.
+type ListOperatorsByAdminEmailResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -13827,24 +13893,24 @@ type ListCompanyOperatorsByAdminEmailResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListCompanyOperatorsByAdminEmailResponseValidationError) Field() string { return e.field }
+func (e ListOperatorsByAdminEmailResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListCompanyOperatorsByAdminEmailResponseValidationError) Reason() string { return e.reason }
+func (e ListOperatorsByAdminEmailResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListCompanyOperatorsByAdminEmailResponseValidationError) Cause() error { return e.cause }
+func (e ListOperatorsByAdminEmailResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListCompanyOperatorsByAdminEmailResponseValidationError) Key() bool { return e.key }
+func (e ListOperatorsByAdminEmailResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListCompanyOperatorsByAdminEmailResponseValidationError) ErrorName() string {
-	return "ListCompanyOperatorsByAdminEmailResponseValidationError"
+func (e ListOperatorsByAdminEmailResponseValidationError) ErrorName() string {
+	return "ListOperatorsByAdminEmailResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListCompanyOperatorsByAdminEmailResponseValidationError) Error() string {
+func (e ListOperatorsByAdminEmailResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -13856,14 +13922,14 @@ func (e ListCompanyOperatorsByAdminEmailResponseValidationError) Error() string 
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListCompanyOperatorsByAdminEmailResponse.%s: %s%s",
+		"invalid %sListOperatorsByAdminEmailResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListCompanyOperatorsByAdminEmailResponseValidationError{}
+var _ error = ListOperatorsByAdminEmailResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -13871,7 +13937,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListCompanyOperatorsByAdminEmailResponseValidationError{}
+} = ListOperatorsByAdminEmailResponseValidationError{}
 
 // Validate checks the field values on ListOperatorDetailsRequest with the
 // rules defined in the proto definition for this message. If any rules are

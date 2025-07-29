@@ -985,14 +985,14 @@ func ErrorOperatorContextNotFoundInContext(format string, args ...interface{}) *
 	return errors.New(500, ErrorReason_OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
 }
 
-func IsGetCompanyAdminUsersByEmailFailed(err error) bool {
+func IsGetAdminUsersByEmailFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_GET_COMPANY_ADMIN_USERS_BY_EMAIL_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_GET_ADMIN_USERS_BY_EMAIL_FAILED.String() && e.Code == 500
 }
 
-func ErrorGetCompanyAdminUsersByEmailFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_GET_COMPANY_ADMIN_USERS_BY_EMAIL_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorGetAdminUsersByEmailFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_ADMIN_USERS_BY_EMAIL_FAILED.String(), fmt.Sprintf(format, args...))
 }
