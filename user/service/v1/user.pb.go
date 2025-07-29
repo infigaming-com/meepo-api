@@ -6848,7 +6848,7 @@ type ListOperatorsByAdminEmailResponse struct {
 	state                       protoimpl.MessageState `protogen:"open.v1"`
 	RetailerOperatorDetailsList []*OperatorDetails     `protobuf:"bytes,1,rep,name=retailer_operator_details_list,json=retailerOperatorDetailsList,proto3" json:"retailer_operator_details_list,omitempty"`
 	CompanyOperatorDetailsList  []*OperatorDetails     `protobuf:"bytes,2,rep,name=company_operator_details_list,json=companyOperatorDetailsList,proto3" json:"company_operator_details_list,omitempty"`
-	BottomOperatorDetailsList   []*OperatorDetails     `protobuf:"bytes,3,rep,name=bottom_operator_details_list,json=bottomOperatorDetailsList,proto3" json:"bottom_operator_details_list,omitempty"`
+	OperatorDetailsList         []*OperatorDetails     `protobuf:"bytes,3,rep,name=operator_details_list,json=operatorDetailsList,proto3" json:"operator_details_list,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -6897,9 +6897,9 @@ func (x *ListOperatorsByAdminEmailResponse) GetCompanyOperatorDetailsList() []*O
 	return nil
 }
 
-func (x *ListOperatorsByAdminEmailResponse) GetBottomOperatorDetailsList() []*OperatorDetails {
+func (x *ListOperatorsByAdminEmailResponse) GetOperatorDetailsList() []*OperatorDetails {
 	if x != nil {
-		return x.BottomOperatorDetailsList
+		return x.OperatorDetailsList
 	}
 	return nil
 }
@@ -8928,11 +8928,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x05users\x18\x01 \x03(\v2\x1d.api.user.service.v1.UserInfoR\x05users\"\x80\x01\n" +
 	" ListOperatorsByAdminEmailRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xde\x02\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd1\x02\n" +
 	"!ListOperatorsByAdminEmailResponse\x12i\n" +
 	"\x1eretailer_operator_details_list\x18\x01 \x03(\v2$.api.user.service.v1.OperatorDetailsR\x1bretailerOperatorDetailsList\x12g\n" +
-	"\x1dcompany_operator_details_list\x18\x02 \x03(\v2$.api.user.service.v1.OperatorDetailsR\x1acompanyOperatorDetailsList\x12e\n" +
-	"\x1cbottom_operator_details_list\x18\x03 \x03(\v2$.api.user.service.v1.OperatorDetailsR\x19bottomOperatorDetailsList\"?\n" +
+	"\x1dcompany_operator_details_list\x18\x02 \x03(\v2$.api.user.service.v1.OperatorDetailsR\x1acompanyOperatorDetailsList\x12X\n" +
+	"\x15operator_details_list\x18\x03 \x03(\v2$.api.user.service.v1.OperatorDetailsR\x13operatorDetailsList\"?\n" +
 	"\x1aListOperatorDetailsRequest\x12!\n" +
 	"\foperator_ids\x18\x01 \x03(\x03R\voperatorIds\"w\n" +
 	"\x1bListOperatorDetailsResponse\x12X\n" +
@@ -9239,7 +9239,7 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	134, // 59: api.user.service.v1.ListOperatorsByAdminEmailRequest.operator_context:type_name -> api.common.OperatorContext
 	100, // 60: api.user.service.v1.ListOperatorsByAdminEmailResponse.retailer_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	100, // 61: api.user.service.v1.ListOperatorsByAdminEmailResponse.company_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
-	100, // 62: api.user.service.v1.ListOperatorsByAdminEmailResponse.bottom_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
+	100, // 62: api.user.service.v1.ListOperatorsByAdminEmailResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	100, // 63: api.user.service.v1.ListOperatorDetailsResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	135, // 64: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
 	135, // 65: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp

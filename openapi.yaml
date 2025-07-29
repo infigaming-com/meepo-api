@@ -9593,7 +9593,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.OperatorDetails'
-                bottomOperatorDetailsList:
+                operatorDetailsList:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.OperatorDetails'

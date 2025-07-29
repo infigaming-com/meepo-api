@@ -1169,7 +1169,7 @@ message ListOperatorsByAdminEmailRequest {
 message ListOperatorsByAdminEmailResponse {
 	repeated OperatorDetails retailer_operator_details_list = 1;
 	repeated OperatorDetails company_operator_details_list = 2;
-	repeated OperatorDetails bottom_operator_details_list = 3;
+	repeated OperatorDetails operator_details_list = 3;
 }
 
 message ListOperatorDetailsRequest {

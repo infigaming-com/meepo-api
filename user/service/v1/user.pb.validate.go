@@ -13823,7 +13823,7 @@ func (m *ListOperatorsByAdminEmailResponse) validate(all bool) error {
 
 	}
 
-	for idx, item := range m.GetBottomOperatorDetailsList() {
+	for idx, item := range m.GetOperatorDetailsList() {
 		_, _ = idx, item
 
 		if all {
@@ -13831,7 +13831,7 @@ func (m *ListOperatorsByAdminEmailResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, ListOperatorsByAdminEmailResponseValidationError{
-						field:  fmt.Sprintf("BottomOperatorDetailsList[%v]", idx),
+						field:  fmt.Sprintf("OperatorDetailsList[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -13839,7 +13839,7 @@ func (m *ListOperatorsByAdminEmailResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, ListOperatorsByAdminEmailResponseValidationError{
-						field:  fmt.Sprintf("BottomOperatorDetailsList[%v]", idx),
+						field:  fmt.Sprintf("OperatorDetailsList[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -13848,7 +13848,7 @@ func (m *ListOperatorsByAdminEmailResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return ListOperatorsByAdminEmailResponseValidationError{
-					field:  fmt.Sprintf("BottomOperatorDetailsList[%v]", idx),
+					field:  fmt.Sprintf("OperatorDetailsList[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
