@@ -10,7 +10,6 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
-	v1 "github.com/infigaming-com/meepo-api/user/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -21,19 +20,15 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeCompanyCreateCompany = "/api.backoffice.service.v1.BackofficeCompany/CreateCompany"
-const OperationBackofficeCompanyListCompanyOperatorsByAdminEmail = "/api.backoffice.service.v1.BackofficeCompany/ListCompanyOperatorsByAdminEmail"
 
 type BackofficeCompanyHTTPServer interface {
 	// CreateCompany Create a company's owner account and related data
 	CreateCompany(context.Context, *CreateCompanyRequest) (*CreateCompanyResponse, error)
-	// ListCompanyOperatorsByAdminEmail List company operators by admin email under specific retailer operator
-	ListCompanyOperatorsByAdminEmail(context.Context, *ListCompanyOperatorsByAdminEmailRequest) (*v1.ListCompanyOperatorsByAdminEmailResponse, error)
 }
 
 func RegisterBackofficeCompanyHTTPServer(s *http.Server, srv BackofficeCompanyHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/backoffice/company/register", _BackofficeCompany_CreateCompany0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/company/list-by-admin-email", _BackofficeCompany_ListCompanyOperatorsByAdminEmail0_HTTP_Handler(srv))
 }
 
 func _BackofficeCompany_CreateCompany0_HTTP_Handler(srv BackofficeCompanyHTTPServer) func(ctx http.Context) error {
@@ -58,31 +53,8 @@ func _BackofficeCompany_CreateCompany0_HTTP_Handler(srv BackofficeCompanyHTTPSer
 	}
 }
 
-func _BackofficeCompany_ListCompanyOperatorsByAdminEmail0_HTTP_Handler(srv BackofficeCompanyHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListCompanyOperatorsByAdminEmailRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeCompanyListCompanyOperatorsByAdminEmail)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListCompanyOperatorsByAdminEmail(ctx, req.(*ListCompanyOperatorsByAdminEmailRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*v1.ListCompanyOperatorsByAdminEmailResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type BackofficeCompanyHTTPClient interface {
 	CreateCompany(ctx context.Context, req *CreateCompanyRequest, opts ...http.CallOption) (rsp *CreateCompanyResponse, err error)
-	ListCompanyOperatorsByAdminEmail(ctx context.Context, req *ListCompanyOperatorsByAdminEmailRequest, opts ...http.CallOption) (rsp *v1.ListCompanyOperatorsByAdminEmailResponse, err error)
 }
 
 type BackofficeCompanyHTTPClientImpl struct {
@@ -98,19 +70,6 @@ func (c *BackofficeCompanyHTTPClientImpl) CreateCompany(ctx context.Context, in 
 	pattern := "/v1/backoffice/company/register"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeCompanyCreateCompany))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeCompanyHTTPClientImpl) ListCompanyOperatorsByAdminEmail(ctx context.Context, in *ListCompanyOperatorsByAdminEmailRequest, opts ...http.CallOption) (*v1.ListCompanyOperatorsByAdminEmailResponse, error) {
-	var out v1.ListCompanyOperatorsByAdminEmailResponse
-	pattern := "/v1/backoffice/company/list-by-admin-email"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeCompanyListCompanyOperatorsByAdminEmail))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

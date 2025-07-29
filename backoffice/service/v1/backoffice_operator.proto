@@ -4,6 +4,7 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "common/common.proto";
+import "user/service/v1/user.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -68,6 +69,14 @@ service BackofficeOperator {
 	rpc UpdateOperatorStatus(UpdateOperatorStatusRequest) returns (UpdateOperatorStatusResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/status/update"
+			body: "*"
+		};
+	}
+
+	// List operators by admin email under specific operator
+	rpc ListOperatorsByAdminEmail(ListOperatorsByAdminEmailRequest) returns (user.service.v1.ListOperatorsByAdminEmailResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/list-by-admin-email"
 			body: "*"
 		};
 	}
@@ -230,4 +239,8 @@ message UpdateOperatorStatusRequest {
 
 message UpdateOperatorStatusResponse {
 	string status = 1; // status of target operator after update
+}
+
+message ListOperatorsByAdminEmailRequest {
+	string email = 1;
 }
