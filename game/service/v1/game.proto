@@ -91,10 +91,6 @@ service Game {
 	};
 
 	rpc BackofficeListGames(BackofficeListGamesRequest) returns (BackofficeListGamesResponse) {
-		option (google.api.http) = {
-			post: "/v1/game/backoffice/games/list"
-			body: "*"
-		};
 	};
 
 	rpc UpdateGame(UpdateGameRequest) returns (UpdateGameResponse) {
