@@ -6200,6 +6200,12 @@ components:
                     type: string
                 operatorName:
                     type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
                 currency:
                     type: string
                 depositAmount:
@@ -6906,6 +6912,12 @@ components:
                 date:
                     type: string
                 operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
                 regUsers:
                     type: integer
@@ -7872,6 +7884,12 @@ components:
                 date:
                     type: string
                 operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
                 currency:
                     type: string
