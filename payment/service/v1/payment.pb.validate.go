@@ -1260,6 +1260,10 @@ func (m *CreatePaymentChannelRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Protocol
+
+	// no validation rules for Network
+
 	if len(errors) > 0 {
 		return CreatePaymentChannelRequestMultiError(errors)
 	}
