@@ -19,7 +19,6 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationGameBackofficeListGames = "/api.game.service.v1.Game/BackofficeListGames"
 const OperationGameBalance = "/api.game.service.v1.Game/Balance"
 const OperationGameCreateSession = "/api.game.service.v1.Game/CreateSession"
 const OperationGameGetGame = "/api.game.service.v1.Game/GetGame"
@@ -31,7 +30,6 @@ const OperationGamePlay = "/api.game.service.v1.Game/Play"
 const OperationGameRollback = "/api.game.service.v1.Game/Rollback"
 
 type GameHTTPServer interface {
-	BackofficeListGames(context.Context, *BackofficeListGamesRequest) (*BackofficeListGamesResponse, error)
 	Balance(context.Context, *BalanceRequest) (*BalanceResponse, error)
 	CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error)
 	GetGame(context.Context, *GetGameRequest) (*GetGameResponse, error)
@@ -54,7 +52,6 @@ func RegisterGameHTTPServer(s *http.Server, srv GameHTTPServer) {
 	r.POST("/v1/game/play", _Game_Play0_HTTP_Handler(srv))
 	r.POST("/v1/game/rollback", _Game_Rollback0_HTTP_Handler(srv))
 	r.POST("/v1/game/bets/list", _Game_ListBets0_HTTP_Handler(srv))
-	r.POST("/v1/game/backoffice/games/list", _Game_BackofficeListGames0_HTTP_Handler(srv))
 }
 
 func _Game_ListProviders0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
@@ -255,30 +252,7 @@ func _Game_ListBets0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) err
 	}
 }
 
-func _Game_BackofficeListGames0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in BackofficeListGamesRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationGameBackofficeListGames)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.BackofficeListGames(ctx, req.(*BackofficeListGamesRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*BackofficeListGamesResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type GameHTTPClient interface {
-	BackofficeListGames(ctx context.Context, req *BackofficeListGamesRequest, opts ...http.CallOption) (rsp *BackofficeListGamesResponse, err error)
 	Balance(ctx context.Context, req *BalanceRequest, opts ...http.CallOption) (rsp *BalanceResponse, err error)
 	CreateSession(ctx context.Context, req *CreateSessionRequest, opts ...http.CallOption) (rsp *CreateSessionResponse, err error)
 	GetGame(ctx context.Context, req *GetGameRequest, opts ...http.CallOption) (rsp *GetGameResponse, err error)
@@ -296,19 +270,6 @@ type GameHTTPClientImpl struct {
 
 func NewGameHTTPClient(client *http.Client) GameHTTPClient {
 	return &GameHTTPClientImpl{client}
-}
-
-func (c *GameHTTPClientImpl) BackofficeListGames(ctx context.Context, in *BackofficeListGamesRequest, opts ...http.CallOption) (*BackofficeListGamesResponse, error) {
-	var out BackofficeListGamesResponse
-	pattern := "/v1/game/backoffice/games/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationGameBackofficeListGames))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
 }
 
 func (c *GameHTTPClientImpl) Balance(ctx context.Context, in *BalanceRequest, opts ...http.CallOption) (*BalanceResponse, error) {
