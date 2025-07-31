@@ -5131,6 +5131,12 @@ func (m *ListRegisterRetentionResponse_List) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
 	// no validation rules for RegUsers
 
 	// no validation rules for PaidUsers
@@ -5322,6 +5328,12 @@ func (m *ListDepositVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
 	// no validation rules for Currency
 
 	// no validation rules for DepositAmount
@@ -5468,6 +5480,12 @@ func (m *ListWithdrawVtgDetailsResponse_Detail) validate(all bool) error {
 	// no validation rules for Date
 
 	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
 
 	// no validation rules for Currency
 

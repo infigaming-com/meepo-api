@@ -3,7 +3,6 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
-import "user/service/v1/user.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -14,13 +13,6 @@ service BackofficeCompany {
 	rpc CreateCompany(CreateCompanyRequest) returns (CreateCompanyResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/company/register"
-			body: "*"
-		};
-	}
-	// List company operators by admin email under specific retailer operator
-	rpc ListCompanyOperatorsByAdminEmail(ListCompanyOperatorsByAdminEmailRequest) returns (user.service.v1.ListCompanyOperatorsByAdminEmailResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/company/list-by-admin-email"
 			body: "*"
 		};
 	}
@@ -43,6 +35,3 @@ message CreateCompanyResponse {
 	string backoffice_subdomain = 2;
 }
 
-message ListCompanyOperatorsByAdminEmailRequest {
-	string email = 1;
-}

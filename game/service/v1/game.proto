@@ -91,10 +91,6 @@ service Game {
 	};
 
 	rpc BackofficeListGames(BackofficeListGamesRequest) returns (BackofficeListGamesResponse) {
-		option (google.api.http) = {
-			post: "/v1/game/backoffice/games/list"
-			body: "*"
-		};
 	};
 
 	rpc UpdateGame(UpdateGameRequest) returns (UpdateGameResponse) {
@@ -112,6 +108,9 @@ service Game {
 	rpc ListProviderRates(ListProviderRatesRequest) returns (ListProviderRatesResponse) {}
 
 	rpc GetGameTransactionById(GetGameTransactionByIdRequest) returns (GetGameTransactionByIdResponse) {
+	}
+
+	rpc GetDailyGameTransactionData(GetDailyGameTransactionDataRequest) returns (GetDailyGameTransactionDataResponse) {
 	}
 }
 
@@ -720,4 +719,32 @@ message ListProviderRatesResponse {
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;
+}
+
+message GetDailyGameTransactionDataRequest {
+	message TimeRange {
+		google.protobuf.Timestamp start_time = 1; // more than or equal to start_time
+		google.protobuf.Timestamp end_time = 2; // less than end_time
+	}
+	TimeRange time_range = 1;
+	repeated int64 operator_ids = 2;
+}
+
+message GetDailyGameTransactionDataResponse {
+	message GameTransactionData {
+		int64 operator_id = 1; // key
+		int64 company_operator_id = 2;
+		int64 retailer_operator_id = 3;
+		string provider_id = 4; // key
+		string fee_group = 5; // key
+		string currency = 6; // key
+		string amount = 7; // total bet - total payout
+		string amount_usd = 8;
+		string total_bet = 9;
+		string total_bet_usd = 10;
+		string total_payout = 11;
+		string total_payout_usd = 12;
+		int32 bets_count = 13;
+	}
+	repeated GameTransactionData game_transaction_data = 1;
 }

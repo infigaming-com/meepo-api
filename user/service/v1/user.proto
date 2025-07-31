@@ -249,8 +249,12 @@ service User {
 	rpc ListAllUsers(ListAllUsersRequest) returns (ListAllUsersResponse) {
 	}
 
-	// ListCompanyOperatorsByAdminEmail returns a list of company operators by admin email
-	rpc ListCompanyOperatorsByAdminEmail(ListCompanyOperatorsByAdminEmailRequest) returns (ListCompanyOperatorsByAdminEmailResponse) {
+	// ListOperatorsByAdminEmail returns a list of (retailer, company, bottom) operators by admin email based on the operator context
+	rpc ListOperatorsByAdminEmail(ListOperatorsByAdminEmailRequest) returns (ListOperatorsByAdminEmailResponse) {
+	}
+
+	// ListOperatorDetails returns a list of operator details
+	rpc ListOperatorDetails(ListOperatorDetailsRequest) returns (ListOperatorDetailsResponse) {
 	}
 }
 
@@ -1157,11 +1161,21 @@ message ListAllUsersResponse {
 	repeated UserInfo users = 1;
 }
 
-message ListCompanyOperatorsByAdminEmailRequest {
+message ListOperatorsByAdminEmailRequest {
 	string email = 1;
 	api.common.OperatorContext operator_context = 2;
 }
 
-message ListCompanyOperatorsByAdminEmailResponse {
+message ListOperatorsByAdminEmailResponse {
+	repeated OperatorDetails retailer_operator_details_list = 1;
+	repeated OperatorDetails company_operator_details_list = 2;
+	repeated OperatorDetails operator_details_list = 3;
+}
+
+message ListOperatorDetailsRequest {
+	repeated int64 operator_ids = 1; // real operator ids list
+}
+
+message ListOperatorDetailsResponse {
 	repeated OperatorDetails operator_details_list = 1;
 }

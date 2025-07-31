@@ -199,6 +199,10 @@ func (m *GetPaymentMethodListRequest) validate(all bool) error {
 		}
 	}
 
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
 	if len(errors) > 0 {
 		return GetPaymentMethodListRequestMultiError(errors)
 	}
@@ -1255,6 +1259,10 @@ func (m *CreatePaymentChannelRequest) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for Protocol
+
+	// no validation rules for Network
 
 	if len(errors) > 0 {
 		return CreatePaymentChannelRequestMultiError(errors)
@@ -4769,8 +4777,6 @@ func (m *GetOperatorPaymentChannelPageRequest) validate(all bool) error {
 
 	// no validation rules for Sort
 
-	// no validation rules for Enabled
-
 	if all {
 		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
 		case interface{ ValidateAll() error }:
@@ -4827,6 +4833,10 @@ func (m *GetOperatorPaymentChannelPageRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if len(errors) > 0 {

@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/user/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -27,6 +28,7 @@ const (
 	BackofficeOperator_ListCompanyOperators_FullMethodName            = "/api.backoffice.service.v1.BackofficeOperator/ListCompanyOperators"
 	BackofficeOperator_ListBottomOperators_FullMethodName             = "/api.backoffice.service.v1.BackofficeOperator/ListBottomOperators"
 	BackofficeOperator_UpdateOperatorStatus_FullMethodName            = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorStatus"
+	BackofficeOperator_ListOperatorsByAdminEmail_FullMethodName       = "/api.backoffice.service.v1.BackofficeOperator/ListOperatorsByAdminEmail"
 )
 
 // BackofficeOperatorClient is the client API for BackofficeOperator service.
@@ -47,6 +49,8 @@ type BackofficeOperatorClient interface {
 	ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...grpc.CallOption) (*UpdateOperatorStatusResponse, error)
+	// List operators by admin email under specific operator
+	ListOperatorsByAdminEmail(ctx context.Context, in *ListOperatorsByAdminEmailRequest, opts ...grpc.CallOption) (*v1.ListOperatorsByAdminEmailResponse, error)
 }
 
 type backofficeOperatorClient struct {
@@ -137,6 +141,16 @@ func (c *backofficeOperatorClient) UpdateOperatorStatus(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *backofficeOperatorClient) ListOperatorsByAdminEmail(ctx context.Context, in *ListOperatorsByAdminEmailRequest, opts ...grpc.CallOption) (*v1.ListOperatorsByAdminEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListOperatorsByAdminEmailResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_ListOperatorsByAdminEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeOperatorServer is the server API for BackofficeOperator service.
 // All implementations must embed UnimplementedBackofficeOperatorServer
 // for forward compatibility.
@@ -155,6 +169,8 @@ type BackofficeOperatorServer interface {
 	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error)
+	// List operators by admin email under specific operator
+	ListOperatorsByAdminEmail(context.Context, *ListOperatorsByAdminEmailRequest) (*v1.ListOperatorsByAdminEmailResponse, error)
 	mustEmbedUnimplementedBackofficeOperatorServer()
 }
 
@@ -188,6 +204,9 @@ func (UnimplementedBackofficeOperatorServer) ListBottomOperators(context.Context
 }
 func (UnimplementedBackofficeOperatorServer) UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorStatus not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) ListOperatorsByAdminEmail(context.Context, *ListOperatorsByAdminEmailRequest) (*v1.ListOperatorsByAdminEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorsByAdminEmail not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) mustEmbedUnimplementedBackofficeOperatorServer() {}
 func (UnimplementedBackofficeOperatorServer) testEmbeddedByValue()                            {}
@@ -354,6 +373,24 @@ func _BackofficeOperator_UpdateOperatorStatus_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeOperator_ListOperatorsByAdminEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorsByAdminEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).ListOperatorsByAdminEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_ListOperatorsByAdminEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).ListOperatorsByAdminEmail(ctx, req.(*ListOperatorsByAdminEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeOperator_ServiceDesc is the grpc.ServiceDesc for BackofficeOperator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -392,6 +429,10 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperatorStatus",
 			Handler:    _BackofficeOperator_UpdateOperatorStatus_Handler,
+		},
+		{
+			MethodName: "ListOperatorsByAdminEmail",
+			Handler:    _BackofficeOperator_ListOperatorsByAdminEmail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

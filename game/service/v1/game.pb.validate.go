@@ -7281,6 +7281,279 @@ var _ interface {
 	ErrorName() string
 } = ListProviderRatesResponseValidationError{}
 
+// Validate checks the field values on GetDailyGameTransactionDataRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetDailyGameTransactionDataRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetDailyGameTransactionDataRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetDailyGameTransactionDataRequestMultiError, or nil if none found.
+func (m *GetDailyGameTransactionDataRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetDailyGameTransactionDataRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetDailyGameTransactionDataRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetDailyGameTransactionDataRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetDailyGameTransactionDataRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetDailyGameTransactionDataRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetDailyGameTransactionDataRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetDailyGameTransactionDataRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetDailyGameTransactionDataRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetDailyGameTransactionDataRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetDailyGameTransactionDataRequestMultiError) AllErrors() []error { return m }
+
+// GetDailyGameTransactionDataRequestValidationError is the validation error
+// returned by GetDailyGameTransactionDataRequest.Validate if the designated
+// constraints aren't met.
+type GetDailyGameTransactionDataRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetDailyGameTransactionDataRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetDailyGameTransactionDataRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetDailyGameTransactionDataRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetDailyGameTransactionDataRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetDailyGameTransactionDataRequestValidationError) ErrorName() string {
+	return "GetDailyGameTransactionDataRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetDailyGameTransactionDataRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetDailyGameTransactionDataRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetDailyGameTransactionDataRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetDailyGameTransactionDataRequestValidationError{}
+
+// Validate checks the field values on GetDailyGameTransactionDataResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetDailyGameTransactionDataResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetDailyGameTransactionDataResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetDailyGameTransactionDataResponseMultiError, or nil if none found.
+func (m *GetDailyGameTransactionDataResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetDailyGameTransactionDataResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetGameTransactionData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetDailyGameTransactionDataResponseValidationError{
+						field:  fmt.Sprintf("GameTransactionData[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetDailyGameTransactionDataResponseValidationError{
+						field:  fmt.Sprintf("GameTransactionData[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetDailyGameTransactionDataResponseValidationError{
+					field:  fmt.Sprintf("GameTransactionData[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetDailyGameTransactionDataResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetDailyGameTransactionDataResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetDailyGameTransactionDataResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetDailyGameTransactionDataResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetDailyGameTransactionDataResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetDailyGameTransactionDataResponseMultiError) AllErrors() []error { return m }
+
+// GetDailyGameTransactionDataResponseValidationError is the validation error
+// returned by GetDailyGameTransactionDataResponse.Validate if the designated
+// constraints aren't met.
+type GetDailyGameTransactionDataResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetDailyGameTransactionDataResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetDailyGameTransactionDataResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetDailyGameTransactionDataResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetDailyGameTransactionDataResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetDailyGameTransactionDataResponseValidationError) ErrorName() string {
+	return "GetDailyGameTransactionDataResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetDailyGameTransactionDataResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetDailyGameTransactionDataResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetDailyGameTransactionDataResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetDailyGameTransactionDataResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -8996,3 +9269,312 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListProviderRatesResponse_ProviderRateValidationError{}
+
+// Validate checks the field values on
+// GetDailyGameTransactionDataRequest_TimeRange with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetDailyGameTransactionDataRequest_TimeRange) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetDailyGameTransactionDataRequest_TimeRange with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetDailyGameTransactionDataRequest_TimeRangeMultiError, or nil if none found.
+func (m *GetDailyGameTransactionDataRequest_TimeRange) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetDailyGameTransactionDataRequest_TimeRange) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetDailyGameTransactionDataRequest_TimeRangeValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetDailyGameTransactionDataRequest_TimeRangeValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetDailyGameTransactionDataRequest_TimeRangeValidationError{
+				field:  "StartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetDailyGameTransactionDataRequest_TimeRangeValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetDailyGameTransactionDataRequest_TimeRangeValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetDailyGameTransactionDataRequest_TimeRangeValidationError{
+				field:  "EndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetDailyGameTransactionDataRequest_TimeRangeMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetDailyGameTransactionDataRequest_TimeRangeMultiError is an error wrapping
+// multiple validation errors returned by
+// GetDailyGameTransactionDataRequest_TimeRange.ValidateAll() if the
+// designated constraints aren't met.
+type GetDailyGameTransactionDataRequest_TimeRangeMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetDailyGameTransactionDataRequest_TimeRangeMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetDailyGameTransactionDataRequest_TimeRangeMultiError) AllErrors() []error { return m }
+
+// GetDailyGameTransactionDataRequest_TimeRangeValidationError is the
+// validation error returned by
+// GetDailyGameTransactionDataRequest_TimeRange.Validate if the designated
+// constraints aren't met.
+type GetDailyGameTransactionDataRequest_TimeRangeValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetDailyGameTransactionDataRequest_TimeRangeValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetDailyGameTransactionDataRequest_TimeRangeValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetDailyGameTransactionDataRequest_TimeRangeValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetDailyGameTransactionDataRequest_TimeRangeValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetDailyGameTransactionDataRequest_TimeRangeValidationError) ErrorName() string {
+	return "GetDailyGameTransactionDataRequest_TimeRangeValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetDailyGameTransactionDataRequest_TimeRangeValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetDailyGameTransactionDataRequest_TimeRange.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetDailyGameTransactionDataRequest_TimeRangeValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetDailyGameTransactionDataRequest_TimeRangeValidationError{}
+
+// Validate checks the field values on
+// GetDailyGameTransactionDataResponse_GameTransactionData with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetDailyGameTransactionDataResponse_GameTransactionData) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetDailyGameTransactionDataResponse_GameTransactionData with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetDailyGameTransactionDataResponse_GameTransactionDataMultiError, or nil
+// if none found.
+func (m *GetDailyGameTransactionDataResponse_GameTransactionData) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetDailyGameTransactionDataResponse_GameTransactionData) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for ProviderId
+
+	// no validation rules for FeeGroup
+
+	// no validation rules for Currency
+
+	// no validation rules for Amount
+
+	// no validation rules for AmountUsd
+
+	// no validation rules for TotalBet
+
+	// no validation rules for TotalBetUsd
+
+	// no validation rules for TotalPayout
+
+	// no validation rules for TotalPayoutUsd
+
+	// no validation rules for BetsCount
+
+	if len(errors) > 0 {
+		return GetDailyGameTransactionDataResponse_GameTransactionDataMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetDailyGameTransactionDataResponse_GameTransactionDataMultiError is an
+// error wrapping multiple validation errors returned by
+// GetDailyGameTransactionDataResponse_GameTransactionData.ValidateAll() if
+// the designated constraints aren't met.
+type GetDailyGameTransactionDataResponse_GameTransactionDataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetDailyGameTransactionDataResponse_GameTransactionDataMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetDailyGameTransactionDataResponse_GameTransactionDataMultiError) AllErrors() []error {
+	return m
+}
+
+// GetDailyGameTransactionDataResponse_GameTransactionDataValidationError is
+// the validation error returned by
+// GetDailyGameTransactionDataResponse_GameTransactionData.Validate if the
+// designated constraints aren't met.
+type GetDailyGameTransactionDataResponse_GameTransactionDataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetDailyGameTransactionDataResponse_GameTransactionDataValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetDailyGameTransactionDataResponse_GameTransactionDataValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetDailyGameTransactionDataResponse_GameTransactionDataValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e GetDailyGameTransactionDataResponse_GameTransactionDataValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e GetDailyGameTransactionDataResponse_GameTransactionDataValidationError) ErrorName() string {
+	return "GetDailyGameTransactionDataResponse_GameTransactionDataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetDailyGameTransactionDataResponse_GameTransactionDataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetDailyGameTransactionDataResponse_GameTransactionData.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetDailyGameTransactionDataResponse_GameTransactionDataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetDailyGameTransactionDataResponse_GameTransactionDataValidationError{}
