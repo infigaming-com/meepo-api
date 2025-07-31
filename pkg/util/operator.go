@@ -28,6 +28,9 @@ const (
 	CompanyOperatorAdminRoleId  = 3
 	RetailerOperatorAdminRoleId = 2
 	SystemOperatorAdminRoleId   = 1
+
+	// Operator Player Role
+	PlayerRoleId = 0
 )
 
 // BuildOperatorHierarchy builds a complete operator hierarchy path based on operatorId and parentIds
