@@ -9863,12 +9863,6 @@ components:
                 key:
                     type: object
                     description: Configuration fields for the payment channel in JSON format
-                protocol:
-                    type: string
-                    description: Crypto protocol supported by this channel
-                network:
-                    type: string
-                    description: Crypto chian supported by this channel
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method

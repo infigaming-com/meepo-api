@@ -1004,11 +1004,7 @@ type CreatePaymentChannelRequest struct {
 	// Max Amount
 	MaxAmount string `protobuf:"bytes,12,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	// Configuration fields for the payment channel in JSON format
-	Key *structpb.Struct `protobuf:"bytes,13,opt,name=key,proto3" json:"key,omitempty"`
-	// Crypto protocol supported by this channel
-	Protocol string `protobuf:"bytes,14,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	// Crypto chian supported by this channel
-	Network       string `protobuf:"bytes,15,opt,name=network,proto3" json:"network,omitempty"`
+	Key           *structpb.Struct `protobuf:"bytes,13,opt,name=key,proto3" json:"key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1132,20 +1128,6 @@ func (x *CreatePaymentChannelRequest) GetKey() *structpb.Struct {
 		return x.Key
 	}
 	return nil
-}
-
-func (x *CreatePaymentChannelRequest) GetProtocol() string {
-	if x != nil {
-		return x.Protocol
-	}
-	return ""
-}
-
-func (x *CreatePaymentChannelRequest) GetNetwork() string {
-	if x != nil {
-		return x.Network
-	}
-	return ""
 }
 
 // Request to create a payment channel
@@ -4535,7 +4517,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x1bCreatePaymentMethodResponse\x12L\n" +
 	"\x0epayment_method\x18\x01 \x01(\v2%.payment.service.v1.PaymentMethodInfoR\rpaymentMethod\"o\n" +
 	"\x1cUpdatePaymentChannelResponse\x12O\n" +
-	"\x0fpayment_methods\x18\x01 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\x0epaymentMethods\"\xa8\x04\n" +
+	"\x0fpayment_methods\x18\x01 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\x0epaymentMethods\"\xf2\x03\n" +
 	"\x1bCreatePaymentChannelRequest\x12\x1f\n" +
 	"\vmerchant_id\x18\x01 \x01(\tR\n" +
 	"merchantId\x12F\n" +
@@ -4554,9 +4536,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"min_amount\x18\v \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\f \x01(\tR\tmaxAmount\x12)\n" +
-	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\x12\x1a\n" +
-	"\bprotocol\x18\x0e \x01(\tR\bprotocol\x12\x18\n" +
-	"\anetwork\x18\x0f \x01(\tR\anetwork\"\xa3\x03\n" +
+	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"\xa3\x03\n" +
 	"\x1bUpdatePaymentChannelRequest\x12,\n" +
 	"\x12payment_channel_id\x18\x01 \x01(\tR\x10paymentChannelId\x12\x18\n" +
 	"\acontact\x18\x02 \x01(\tR\acontact\x12\x1b\n" +

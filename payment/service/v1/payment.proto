@@ -167,10 +167,6 @@ message CreatePaymentChannelRequest {
   string max_amount = 12;
   // Configuration fields for the payment channel in JSON format
   google.protobuf.Struct key = 13;
-  // Crypto protocol supported by this channel
-  string protocol = 14;
-  // Crypto chian supported by this channel
-  string network = 15;
 }
 
 // Request to create a payment channel
