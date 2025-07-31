@@ -71,6 +71,10 @@ func AuthMiddleware(authPaths []string, secret string, uc user.UserClient) middl
 				return nil, errors.New(401, "UNAUTHORIZED", "invalid token")
 			}
 
+			if claims.UserInfo.NeedResetPassword {
+				return nil, errors.New(403, "NEED_RESET_PASSWORD", "password reset required before access")
+			}
+
 			userOperatorIds := &mctx.OperatorIds{
 				OperatorId:         claims.UserInfo.OperatorId,
 				CompanyOperatorId:  claims.UserInfo.CompanyOperatorId,
