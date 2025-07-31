@@ -112,6 +112,9 @@ service Game {
 
 	rpc GetDailyGameTransactionData(GetDailyGameTransactionDataRequest) returns (GetDailyGameTransactionDataResponse) {
 	}
+
+	rpc ListProviderByIDs(ListProviderByIDsRequest) returns (ListProviderByIDsResponse) {
+	}
 }
 
 message CreateOperatorRequest {
@@ -747,4 +750,17 @@ message GetDailyGameTransactionDataResponse {
 		int32 bets_count = 13;
 	}
 	repeated GameTransactionData game_transaction_data = 1;
+}
+
+message ListProviderByIDsRequest {
+	repeated string provider_ids = 1;
+}
+
+message ListProviderByIDsResponse {
+	message Provider {
+		string provider_id = 1;
+		string provider_name = 2;
+		bool enabled = 3;
+	}
+	repeated Provider providers = 1;
 }
