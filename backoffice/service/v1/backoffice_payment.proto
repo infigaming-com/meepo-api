@@ -231,7 +231,8 @@ message GetTransactionPageRequest {
   string min_amount = 15;
   // Optional maximum amount filter
   string max_amount = 16;
-  api.common.OperatorContextFilters operator_context_filters = 17;
+  int64 user_id = 17;
+  api.common.OperatorContextFilters operator_context_filters = 18;
 }
 
 // Used to retrieve a paginated list of payment channels with optional filters

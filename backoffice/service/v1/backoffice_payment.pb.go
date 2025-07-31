@@ -451,7 +451,8 @@ type GetTransactionPageRequest struct {
 	MinAmount string `protobuf:"bytes,15,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Optional maximum amount filter
 	MaxAmount              string                         `protobuf:"bytes,16,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,17,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	UserId                 int64                          `protobuf:"varint,17,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,18,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -596,6 +597,13 @@ func (x *GetTransactionPageRequest) GetMaxAmount() string {
 		return x.MaxAmount
 	}
 	return ""
+}
+
+func (x *GetTransactionPageRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
 }
 
 func (x *GetTransactionPageRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
@@ -803,7 +811,7 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\aenabled\x18\x05 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
 	"\n" +
-	"\b_enabled\"\xdf\x05\n" +
+	"\b_enabled\"\xf8\x05\n" +
 	"\x19GetTransactionPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12%\n" +
@@ -824,8 +832,9 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
 	"min_amount\x18\x0f \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\x10 \x01(\tR\tmaxAmount\x12\\\n" +
-	"\x18operator_context_filters\x18\x11 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\x8a\x04\n" +
+	"max_amount\x18\x10 \x01(\tR\tmaxAmount\x12\x17\n" +
+	"\auser_id\x18\x11 \x01(\x03R\x06userId\x12\\\n" +
+	"\x18operator_context_filters\x18\x12 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\x8a\x04\n" +
 	"$GetOperatorPaymentChannelPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x123\n" +

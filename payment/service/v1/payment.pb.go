@@ -3335,9 +3335,9 @@ type GetTransactionPageRequest struct {
 	// Optional minimum amount filter
 	MinAmount string `protobuf:"bytes,15,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Optional maximum amount filter
-	MaxAmount              string                         `protobuf:"bytes,16,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,17,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	UserId                 int64                          `protobuf:"varint,17,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,18,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,19,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -3477,23 +3477,23 @@ func (x *GetTransactionPageRequest) GetMinAmount() string {
 	return ""
 }
 
-func (x *GetTransactionPageRequest) GetMaxAmount() string {
+func (x *GetTransactionPageRequest) GetUserId() int64 {
 	if x != nil {
-		return x.MaxAmount
+		return x.UserId
 	}
-	return ""
-}
-
-func (x *GetTransactionPageRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
+	return 0
 }
 
 func (x *GetTransactionPageRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *GetTransactionPageRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
 	}
 	return nil
 }
@@ -4760,7 +4760,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03gas\x18\x1c \x01(\tR\x03gas\"\x9c\x01\n" +
 	"\x11TransactionDetail\x12E\n" +
 	"\vtransaction\x18\x01 \x01(\v2#.payment.service.v1.TransactionInfoR\vtransaction\x12@\n" +
-	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xa7\x06\n" +
+	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xa1\x06\n" +
 	"\x19GetTransactionPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12%\n" +
@@ -4779,11 +4779,10 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bend_time\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12,\n" +
 	"\x04sort\x18\x0e \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\x0f \x01(\tR\tminAmount\x12\x1d\n" +
-	"\n" +
-	"max_amount\x18\x10 \x01(\tR\tmaxAmount\x12F\n" +
-	"\x10operator_context\x18\x11 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x12 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xd1\x02\n" +
+	"min_amount\x18\x0f \x01(\tR\tminAmount\x12\x17\n" +
+	"\auser_id\x18\x11 \x01(\x03R\x06userId\x12\\\n" +
+	"\x18operator_context_filters\x18\x12 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x13 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd1\x02\n" +
 	"\x1aGetTransactionPageResponse\x12G\n" +
 	"\ftransactions\x18\x01 \x03(\v2#.payment.service.v1.TransactionInfoR\ftransactions\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
@@ -5001,8 +5000,8 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	48, // 35: payment.service.v1.GetTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
 	48, // 36: payment.service.v1.GetTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
 	2,  // 37: payment.service.v1.GetTransactionPageRequest.sort:type_name -> payment.service.v1.Sort
-	45, // 38: payment.service.v1.GetTransactionPageRequest.operator_context:type_name -> api.common.OperatorContext
-	49, // 39: payment.service.v1.GetTransactionPageRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	49, // 38: payment.service.v1.GetTransactionPageRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	45, // 39: payment.service.v1.GetTransactionPageRequest.operator_context:type_name -> api.common.OperatorContext
 	30, // 40: payment.service.v1.GetTransactionPageResponse.transactions:type_name -> payment.service.v1.TransactionInfo
 	3,  // 41: payment.service.v1.GetPaymentChannelPageRequest.type:type_name -> payment.service.v1.ChannelType
 	2,  // 42: payment.service.v1.GetPaymentChannelPageRequest.sort:type_name -> payment.service.v1.Sort

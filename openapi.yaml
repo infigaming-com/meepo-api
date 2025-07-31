@@ -5159,6 +5159,8 @@ components:
                 maxAmount:
                     type: string
                     description: Optional maximum amount filter
+                userId:
+                    type: string
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.GetUserBetsOverviewRequest:
@@ -10274,13 +10276,13 @@ components:
                 minAmount:
                     type: string
                     description: Optional minimum amount filter
-                maxAmount:
+                userId:
                     type: string
                     description: Optional maximum amount filter
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
             description: |-
                 Request to get transaction page
                  Used to retrieve a paginated list of transactions with optional filters
