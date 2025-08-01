@@ -8,6 +8,7 @@ package v1
 
 import (
 	common "github.com/infigaming-com/meepo-api/common"
+	v1 "github.com/infigaming-com/meepo-api/wallet/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -3237,7 +3238,7 @@ var File_backoffice_service_v1_backoffice_wallet_proto protoreflect.FileDescript
 
 const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\n" +
-	"-backoffice/service/v1/backoffice_wallet.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"L\n" +
+	"-backoffice/service/v1/backoffice_wallet.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1ewallet/service/v1/wallet.proto\"L\n" +
 	"\x11GetWalletsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1e\n" +
 	"\n" +
@@ -3551,7 +3552,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"9\n" +
 	"\x1dUpdateOperatorBalanceResponse\x12\x18\n" +
-	"\aenabled\x18\x01 \x01(\bR\aenabled2\xa7\x19\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled2\xdd\x1a\n" +
 	"\x10BackofficeWallet\x12\x8f\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a-.api.backoffice.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -3570,7 +3571,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x17OperatorBalanceRollback\x129.api.backoffice.service.v1.OperatorBalanceRollbackRequest\x1a:.api.backoffice.service.v1.OperatorBalanceRollbackResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/wallet/operator/balance-rollback\x12\xc4\x01\n" +
 	"\x15OperatorBalanceSettle\x127.api.backoffice.service.v1.OperatorBalanceSettleRequest\x1a8.api.backoffice.service.v1.OperatorBalanceSettleResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/operator/balance-settle\x12\xe5\x01\n" +
 	"\x1fListOperatorBalanceTransactions\x12A.api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest\x1aB.api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/wallet/operator/transactions/list\x12\xc4\x01\n" +
-	"\x15UpdateOperatorBalance\x127.api.backoffice.service.v1.UpdateOperatorBalanceRequest\x1a8.api.backoffice.service.v1.UpdateOperatorBalanceResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/operator/balance/updateB[\n" +
+	"\x15UpdateOperatorBalance\x127.api.backoffice.service.v1.UpdateOperatorBalanceRequest\x1a8.api.backoffice.service.v1.UpdateOperatorBalanceResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/operator/balance/update\x12\xb3\x01\n" +
+	"\x13GetOperatorBalances\x121.api.wallet.service.v1.GetOperatorBalancesRequest\x1a2.api.wallet.service.v1.GetOperatorBalancesResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/wallet/operator/balance/getB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -3630,10 +3632,12 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*GetWalletCreditsResponse_Credit)(nil),                          // 40: api.backoffice.service.v1.GetWalletCreditsResponse.Credit
 	(*ListWalletBalanceTransactionsResponse_BalanceTransaction)(nil), // 41: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
 	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil),    // 42: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
-	nil,                                   // 43: api.backoffice.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
-	(*timestamppb.Timestamp)(nil),         // 44: google.protobuf.Timestamp
-	(*common.OperatorContextFilters)(nil), // 45: api.common.OperatorContextFilters
-	(*common.OperatorContext)(nil),        // 46: api.common.OperatorContext
+	nil,                                    // 43: api.backoffice.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
+	(*timestamppb.Timestamp)(nil),          // 44: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),  // 45: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),         // 46: api.common.OperatorContext
+	(*v1.GetOperatorBalancesRequest)(nil),  // 47: api.wallet.service.v1.GetOperatorBalancesRequest
+	(*v1.GetOperatorBalancesResponse)(nil), // 48: api.wallet.service.v1.GetOperatorBalancesResponse
 }
 var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	37, // 0: api.backoffice.service.v1.GetWalletsResponse.total_assets:type_name -> api.backoffice.service.v1.GetWalletsResponse.TotalAssets
@@ -3687,25 +3691,27 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	30, // 48: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:input_type -> api.backoffice.service.v1.OperatorBalanceSettleRequest
 	32, // 49: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:input_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest
 	35, // 50: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:input_type -> api.backoffice.service.v1.UpdateOperatorBalanceRequest
-	1,  // 51: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.backoffice.service.v1.GetWalletsResponse
-	3,  // 52: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:output_type -> api.backoffice.service.v1.GetWalletCreditsResponse
-	5,  // 53: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:output_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse
-	7,  // 54: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:output_type -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse
-	9,  // 55: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
-	12, // 56: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:output_type -> api.backoffice.service.v1.AddWalletCurrencyResponse
-	14, // 57: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:output_type -> api.backoffice.service.v1.ListWalletCurrenciesResponse
-	16, // 58: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:output_type -> api.backoffice.service.v1.UpdateWalletCurrencyResponse
-	19, // 59: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:output_type -> api.backoffice.service.v1.ListOperatorBalancesResponse
-	21, // 60: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:output_type -> api.backoffice.service.v1.GetExchangeRatesResponse
-	23, // 61: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:output_type -> api.backoffice.service.v1.OperatorTransferResponse
-	25, // 62: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:output_type -> api.backoffice.service.v1.OperatorSwapResponse
-	27, // 63: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:output_type -> api.backoffice.service.v1.OperatorBalanceFreezeResponse
-	29, // 64: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:output_type -> api.backoffice.service.v1.OperatorBalanceRollbackResponse
-	31, // 65: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:output_type -> api.backoffice.service.v1.OperatorBalanceSettleResponse
-	34, // 66: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:output_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse
-	36, // 67: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:output_type -> api.backoffice.service.v1.UpdateOperatorBalanceResponse
-	51, // [51:68] is the sub-list for method output_type
-	34, // [34:51] is the sub-list for method input_type
+	47, // 51: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalances:input_type -> api.wallet.service.v1.GetOperatorBalancesRequest
+	1,  // 52: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.backoffice.service.v1.GetWalletsResponse
+	3,  // 53: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:output_type -> api.backoffice.service.v1.GetWalletCreditsResponse
+	5,  // 54: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:output_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse
+	7,  // 55: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:output_type -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse
+	9,  // 56: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
+	12, // 57: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:output_type -> api.backoffice.service.v1.AddWalletCurrencyResponse
+	14, // 58: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:output_type -> api.backoffice.service.v1.ListWalletCurrenciesResponse
+	16, // 59: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:output_type -> api.backoffice.service.v1.UpdateWalletCurrencyResponse
+	19, // 60: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:output_type -> api.backoffice.service.v1.ListOperatorBalancesResponse
+	21, // 61: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:output_type -> api.backoffice.service.v1.GetExchangeRatesResponse
+	23, // 62: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:output_type -> api.backoffice.service.v1.OperatorTransferResponse
+	25, // 63: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:output_type -> api.backoffice.service.v1.OperatorSwapResponse
+	27, // 64: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:output_type -> api.backoffice.service.v1.OperatorBalanceFreezeResponse
+	29, // 65: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:output_type -> api.backoffice.service.v1.OperatorBalanceRollbackResponse
+	31, // 66: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:output_type -> api.backoffice.service.v1.OperatorBalanceSettleResponse
+	34, // 67: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:output_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse
+	36, // 68: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:output_type -> api.backoffice.service.v1.UpdateOperatorBalanceResponse
+	48, // 69: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalances:output_type -> api.wallet.service.v1.GetOperatorBalancesResponse
+	52, // [52:70] is the sub-list for method output_type
+	34, // [34:52] is the sub-list for method input_type
 	34, // [34:34] is the sub-list for extension type_name
 	34, // [34:34] is the sub-list for extension extendee
 	0,  // [0:34] is the sub-list for field type_name

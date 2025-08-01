@@ -2487,6 +2487,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalanceSettleResponse'
+    /v1/backoffice/wallet/operator/balance/get:
+        post:
+            tags:
+                - BackofficeWallet
+            description: GetOperatorBalances gets the balances of an operator
+            operationId: BackofficeWallet_GetOperatorBalances
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalancesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalancesResponse'
     /v1/backoffice/wallet/operator/balance/update:
         post:
             tags:
@@ -9849,6 +9868,20 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.Currency'
+        api.wallet.service.v1.GetOperatorBalancesRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.wallet.service.v1.GetOperatorBalancesResponse:
+            type: object
+            properties:
+                operatorBalances:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.OperatorBalance'
+                totalCashUsd:
+                    type: string
         api.wallet.service.v1.GetUserBalancesRequest:
             type: object
             properties:
@@ -9872,6 +9905,27 @@ components:
                     type: string
                 providerBonus:
                     type: string
+        api.wallet.service.v1.OperatorBalance:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                retailerOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                operatorName:
+                    type: string
+                currency:
+                    type: string
+                protocol:
+                    type: string
+                cash:
+                    type: string
+                cashUsd:
+                    type: string
+                enabled:
+                    type: boolean
         google.protobuf.ListValue:
             type: object
             properties:
