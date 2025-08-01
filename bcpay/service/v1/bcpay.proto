@@ -3,10 +3,10 @@ package api.bcpay.service.v1;
 
 option go_package = "github.com/infigaming-com/meepo-api/bcpay/service/v1;v1";
 option java_multiple_files = true;
-option java_package = "api.operator.service.v1";
+option java_package = "api.bcpay.service.v1";
 
 // User service provides authentication and user management functionality.
-service Operator {
+service Bcpay {
 	rpc GetBankAccount(GetBankAccountRequest) returns (GetBankAccountResponse) {
 	}
 

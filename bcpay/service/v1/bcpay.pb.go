@@ -1242,8 +1242,8 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x14\n" +
 	"\x05audit\x18\x02 \x01(\tR\x05audit\"_\n" +
 	"\x18AuditTransactionResponse\x12C\n" +
-	"\vtransaction\x18\x01 \x01(\v2!.api.bcpay.service.v1.TransactionR\vtransaction2\x97\a\n" +
-	"\bOperator\x12m\n" +
+	"\vtransaction\x18\x01 \x01(\v2!.api.bcpay.service.v1.TransactionR\vtransaction2\x94\a\n" +
+	"\x05Bcpay\x12m\n" +
 	"\x0eGetBankAccount\x12+.api.bcpay.service.v1.GetBankAccountRequest\x1a,.api.bcpay.service.v1.GetBankAccountResponse\"\x00\x12m\n" +
 	"\x0eCreateWithdraw\x12+.api.bcpay.service.v1.CreateWithdrawRequest\x1a,.api.bcpay.service.v1.CreateWithdrawResponse\"\x00\x12m\n" +
 	"\x0eCreateMerchant\x12+.api.bcpay.service.v1.CreateMerchantRequest\x1a,.api.bcpay.service.v1.CreateMerchantResponse\"\x00\x12p\n" +
@@ -1251,8 +1251,8 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\x0eAddBankAccount\x12+.api.bcpay.service.v1.AddBankAccountRequest\x1a,.api.bcpay.service.v1.AddBankAccountResponse\"\x00\x12v\n" +
 	"\x11UpdateBankAccount\x12..api.bcpay.service.v1.UpdateBankAccountRequest\x1a/.api.bcpay.service.v1.UpdateBankAccountResponse\"\x00\x12p\n" +
 	"\x0fTransactionList\x12,.api.bcpay.service.v1.TransactionListRequest\x1a-.api.bcpay.service.v1.TransactionListResponse\"\x00\x12s\n" +
-	"\x10AuditTransaction\x12-.api.bcpay.service.v1.AuditTransactionRequest\x1a..api.bcpay.service.v1.AuditTransactionResponse\"\x00BT\n" +
-	"\x17api.operator.service.v1P\x01Z7github.com/infigaming-com/meepo-api/bcpay/service/v1;v1b\x06proto3"
+	"\x10AuditTransaction\x12-.api.bcpay.service.v1.AuditTransactionRequest\x1a..api.bcpay.service.v1.AuditTransactionResponse\"\x00BQ\n" +
+	"\x14api.bcpay.service.v1P\x01Z7github.com/infigaming-com/meepo-api/bcpay/service/v1;v1b\x06proto3"
 
 var (
 	file_bcpay_service_v1_bcpay_proto_rawDescOnce sync.Once
@@ -1295,22 +1295,22 @@ var file_bcpay_service_v1_bcpay_proto_depIdxs = []int32{
 	6,  // 4: api.bcpay.service.v1.UpdateBankAccountResponse.bank_account:type_name -> api.bcpay.service.v1.BankAccount
 	14, // 5: api.bcpay.service.v1.TransactionListResponse.transaction:type_name -> api.bcpay.service.v1.Transaction
 	14, // 6: api.bcpay.service.v1.AuditTransactionResponse.transaction:type_name -> api.bcpay.service.v1.Transaction
-	0,  // 7: api.bcpay.service.v1.Operator.GetBankAccount:input_type -> api.bcpay.service.v1.GetBankAccountRequest
-	2,  // 8: api.bcpay.service.v1.Operator.CreateWithdraw:input_type -> api.bcpay.service.v1.CreateWithdrawRequest
-	4,  // 9: api.bcpay.service.v1.Operator.CreateMerchant:input_type -> api.bcpay.service.v1.CreateMerchantRequest
-	7,  // 10: api.bcpay.service.v1.Operator.BankAccountList:input_type -> api.bcpay.service.v1.BankAccountListRequest
-	9,  // 11: api.bcpay.service.v1.Operator.AddBankAccount:input_type -> api.bcpay.service.v1.AddBankAccountRequest
-	11, // 12: api.bcpay.service.v1.Operator.UpdateBankAccount:input_type -> api.bcpay.service.v1.UpdateBankAccountRequest
-	13, // 13: api.bcpay.service.v1.Operator.TransactionList:input_type -> api.bcpay.service.v1.TransactionListRequest
-	16, // 14: api.bcpay.service.v1.Operator.AuditTransaction:input_type -> api.bcpay.service.v1.AuditTransactionRequest
-	1,  // 15: api.bcpay.service.v1.Operator.GetBankAccount:output_type -> api.bcpay.service.v1.GetBankAccountResponse
-	3,  // 16: api.bcpay.service.v1.Operator.CreateWithdraw:output_type -> api.bcpay.service.v1.CreateWithdrawResponse
-	5,  // 17: api.bcpay.service.v1.Operator.CreateMerchant:output_type -> api.bcpay.service.v1.CreateMerchantResponse
-	8,  // 18: api.bcpay.service.v1.Operator.BankAccountList:output_type -> api.bcpay.service.v1.BankAccountListResponse
-	10, // 19: api.bcpay.service.v1.Operator.AddBankAccount:output_type -> api.bcpay.service.v1.AddBankAccountResponse
-	12, // 20: api.bcpay.service.v1.Operator.UpdateBankAccount:output_type -> api.bcpay.service.v1.UpdateBankAccountResponse
-	15, // 21: api.bcpay.service.v1.Operator.TransactionList:output_type -> api.bcpay.service.v1.TransactionListResponse
-	17, // 22: api.bcpay.service.v1.Operator.AuditTransaction:output_type -> api.bcpay.service.v1.AuditTransactionResponse
+	0,  // 7: api.bcpay.service.v1.Bcpay.GetBankAccount:input_type -> api.bcpay.service.v1.GetBankAccountRequest
+	2,  // 8: api.bcpay.service.v1.Bcpay.CreateWithdraw:input_type -> api.bcpay.service.v1.CreateWithdrawRequest
+	4,  // 9: api.bcpay.service.v1.Bcpay.CreateMerchant:input_type -> api.bcpay.service.v1.CreateMerchantRequest
+	7,  // 10: api.bcpay.service.v1.Bcpay.BankAccountList:input_type -> api.bcpay.service.v1.BankAccountListRequest
+	9,  // 11: api.bcpay.service.v1.Bcpay.AddBankAccount:input_type -> api.bcpay.service.v1.AddBankAccountRequest
+	11, // 12: api.bcpay.service.v1.Bcpay.UpdateBankAccount:input_type -> api.bcpay.service.v1.UpdateBankAccountRequest
+	13, // 13: api.bcpay.service.v1.Bcpay.TransactionList:input_type -> api.bcpay.service.v1.TransactionListRequest
+	16, // 14: api.bcpay.service.v1.Bcpay.AuditTransaction:input_type -> api.bcpay.service.v1.AuditTransactionRequest
+	1,  // 15: api.bcpay.service.v1.Bcpay.GetBankAccount:output_type -> api.bcpay.service.v1.GetBankAccountResponse
+	3,  // 16: api.bcpay.service.v1.Bcpay.CreateWithdraw:output_type -> api.bcpay.service.v1.CreateWithdrawResponse
+	5,  // 17: api.bcpay.service.v1.Bcpay.CreateMerchant:output_type -> api.bcpay.service.v1.CreateMerchantResponse
+	8,  // 18: api.bcpay.service.v1.Bcpay.BankAccountList:output_type -> api.bcpay.service.v1.BankAccountListResponse
+	10, // 19: api.bcpay.service.v1.Bcpay.AddBankAccount:output_type -> api.bcpay.service.v1.AddBankAccountResponse
+	12, // 20: api.bcpay.service.v1.Bcpay.UpdateBankAccount:output_type -> api.bcpay.service.v1.UpdateBankAccountResponse
+	15, // 21: api.bcpay.service.v1.Bcpay.TransactionList:output_type -> api.bcpay.service.v1.TransactionListResponse
+	17, // 22: api.bcpay.service.v1.Bcpay.AuditTransaction:output_type -> api.bcpay.service.v1.AuditTransactionResponse
 	15, // [15:23] is the sub-list for method output_type
 	7,  // [7:15] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
