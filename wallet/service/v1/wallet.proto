@@ -263,6 +263,10 @@ message GameCreditResponse {
 	string provider_bonus_amount_reporting_currency = 14;
 }
 
+message ChannelInfo {
+	api.common.OperatorContext operator_context = 1;
+}
+
 message FreezeRequest {
 	int64 user_id = 1;
 	string currency = 2;
@@ -273,6 +277,7 @@ message FreezeRequest {
 	int64 transaction_id = 5;
 	string cash = 6;
 	api.common.OperatorContext operator_context = 7;
+	ChannelInfo channel_info = 8;
 }
 
 message FreezeResponse {
@@ -285,6 +290,7 @@ message SettleRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
+	ChannelInfo channel_info = 4;
 }
 
 message SettleResponse {
@@ -299,6 +305,7 @@ message RollbackRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
+	ChannelInfo channel_info = 4;
 }
 
 message RollbackResponse {
