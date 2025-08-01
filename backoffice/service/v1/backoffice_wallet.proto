@@ -401,10 +401,10 @@ message OperatorSwapResponse {
 }
 
 message OperatorBalanceFreezeRequest {
-	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 1;
 	string currency = 2;
 	string cash_amount = 3;
-	string memo = 4;
+	string memo = 5;
 }
 
 message OperatorBalanceFreezeResponse {
@@ -413,9 +413,9 @@ message OperatorBalanceFreezeResponse {
 }
 
 message OperatorBalanceRollbackRequest {
-	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 1;
 	int64 original_transaction_id = 2;
-	string memo = 3;
+	string memo = 4;
 }
 
 message OperatorBalanceRollbackResponse {
@@ -427,10 +427,10 @@ message OperatorBalanceRollbackResponse {
 }
 
 message OperatorBalanceSettleRequest {
-	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 1;
 	string currency = 2;
 	int64 original_transaction_id = 3;
-	string memo = 5;
+	string memo = 6;
 }
 
 message OperatorBalanceSettleResponse {

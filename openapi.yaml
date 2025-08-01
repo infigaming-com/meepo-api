@@ -7957,7 +7957,7 @@ components:
         api.backoffice.service.v1.OperatorBalanceFreezeRequest:
             type: object
             properties:
-                operatorContext:
+                targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 currency:
                     type: string
@@ -7975,7 +7975,7 @@ components:
         api.backoffice.service.v1.OperatorBalanceRollbackRequest:
             type: object
             properties:
-                operatorContext:
+                targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 originalTransactionId:
                     type: string
@@ -7997,7 +7997,7 @@ components:
         api.backoffice.service.v1.OperatorBalanceSettleRequest:
             type: object
             properties:
-                operatorContext:
+                targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 currency:
                     type: string
