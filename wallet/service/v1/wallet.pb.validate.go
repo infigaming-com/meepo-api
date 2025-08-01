@@ -1538,6 +1538,134 @@ var _ interface {
 	ErrorName() string
 } = GameCreditResponseValidationError{}
 
+// Validate checks the field values on ChannelInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ChannelInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ChannelInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ChannelInfoMultiError, or
+// nil if none found.
+func (m *ChannelInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ChannelInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ChannelInfoValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ChannelInfoValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ChannelInfoValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ChannelInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// ChannelInfoMultiError is an error wrapping multiple validation errors
+// returned by ChannelInfo.ValidateAll() if the designated constraints aren't met.
+type ChannelInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ChannelInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ChannelInfoMultiError) AllErrors() []error { return m }
+
+// ChannelInfoValidationError is the validation error returned by
+// ChannelInfo.Validate if the designated constraints aren't met.
+type ChannelInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ChannelInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ChannelInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ChannelInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ChannelInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ChannelInfoValidationError) ErrorName() string { return "ChannelInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ChannelInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sChannelInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ChannelInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ChannelInfoValidationError{}
+
 // Validate checks the field values on FreezeRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -1595,6 +1723,35 @@ func (m *FreezeRequest) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return FreezeRequestValidationError{
 				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetChannelInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, FreezeRequestValidationError{
+					field:  "ChannelInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, FreezeRequestValidationError{
+					field:  "ChannelInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChannelInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return FreezeRequestValidationError{
+				field:  "ChannelInfo",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1809,6 +1966,35 @@ func (m *SettleRequest) validate(all bool) error {
 
 	// no validation rules for OriginalTransactionId
 
+	if all {
+		switch v := interface{}(m.GetChannelInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SettleRequestValidationError{
+					field:  "ChannelInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SettleRequestValidationError{
+					field:  "ChannelInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChannelInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SettleRequestValidationError{
+				field:  "ChannelInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return SettleRequestMultiError(errors)
 	}
@@ -2016,6 +2202,35 @@ func (m *RollbackRequest) validate(all bool) error {
 	// no validation rules for TransactionId
 
 	// no validation rules for OriginalTransactionId
+
+	if all {
+		switch v := interface{}(m.GetChannelInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RollbackRequestValidationError{
+					field:  "ChannelInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RollbackRequestValidationError{
+					field:  "ChannelInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChannelInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RollbackRequestValidationError{
+				field:  "ChannelInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return RollbackRequestMultiError(errors)
