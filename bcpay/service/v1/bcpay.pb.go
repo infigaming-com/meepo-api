@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1148,7 +1149,7 @@ var File_bcpay_service_v1_bcpay_proto protoreflect.FileDescriptor
 
 const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\n" +
-	"\x1cbcpay/service/v1/bcpay.proto\x12\x14api.bcpay.service.v1\"\x93\x01\n" +
+	"\x1cbcpay/service/v1/bcpay.proto\x12\x14api.bcpay.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x93\x01\n" +
 	"\x15GetBankAccountRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\tR\n" +
 	"operatorId\x12\x1f\n" +
@@ -1242,10 +1243,10 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x14\n" +
 	"\x05audit\x18\x02 \x01(\tR\x05audit\"_\n" +
 	"\x18AuditTransactionResponse\x12C\n" +
-	"\vtransaction\x18\x01 \x01(\v2!.api.bcpay.service.v1.TransactionR\vtransaction2\x94\a\n" +
-	"\x05Bcpay\x12m\n" +
-	"\x0eGetBankAccount\x12+.api.bcpay.service.v1.GetBankAccountRequest\x1a,.api.bcpay.service.v1.GetBankAccountResponse\"\x00\x12m\n" +
-	"\x0eCreateWithdraw\x12+.api.bcpay.service.v1.CreateWithdrawRequest\x1a,.api.bcpay.service.v1.CreateWithdrawResponse\"\x00\x12m\n" +
+	"\vtransaction\x18\x01 \x01(\v2!.api.bcpay.service.v1.TransactionR\vtransaction2\xdb\a\n" +
+	"\x05Bcpay\x12\x91\x01\n" +
+	"\x0eGetBankAccount\x12+.api.bcpay.service.v1.GetBankAccountRequest\x1a,.api.bcpay.service.v1.GetBankAccountResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/bcpay/bankaccount/get\x12\x8e\x01\n" +
+	"\x0eCreateWithdraw\x12+.api.bcpay.service.v1.CreateWithdrawRequest\x1a,.api.bcpay.service.v1.CreateWithdrawResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/bcpay/withdraw/add\x12m\n" +
 	"\x0eCreateMerchant\x12+.api.bcpay.service.v1.CreateMerchantRequest\x1a,.api.bcpay.service.v1.CreateMerchantResponse\"\x00\x12p\n" +
 	"\x0fBankAccountList\x12,.api.bcpay.service.v1.BankAccountListRequest\x1a-.api.bcpay.service.v1.BankAccountListResponse\"\x00\x12m\n" +
 	"\x0eAddBankAccount\x12+.api.bcpay.service.v1.AddBankAccountRequest\x1a,.api.bcpay.service.v1.AddBankAccountResponse\"\x00\x12v\n" +

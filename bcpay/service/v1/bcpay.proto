@@ -1,4 +1,7 @@
 syntax = "proto3";
+
+import "google/api/annotations.proto";
+
 package api.bcpay.service.v1;
 
 option go_package = "github.com/infigaming-com/meepo-api/bcpay/service/v1;v1";
@@ -8,9 +11,17 @@ option java_package = "api.bcpay.service.v1";
 // User service provides authentication and user management functionality.
 service Bcpay {
 	rpc GetBankAccount(GetBankAccountRequest) returns (GetBankAccountResponse) {
+    option (google.api.http) = {
+      post: "/v1/bcpay/bankaccount/get"
+      body: "*"
+    };
 	}
 
 	rpc CreateWithdraw(CreateWithdrawRequest) returns (CreateWithdrawResponse) {
+    option (google.api.http) = {
+      post: "/v1/bcpay/withdraw/add"
+      body: "*"
+    };
 	}
 	
 
