@@ -5159,6 +5159,8 @@ components:
                 maxAmount:
                     type: string
                     description: Optional maximum amount filter
+                userId:
+                    type: string
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.GetUserBetsOverviewRequest:
@@ -9863,12 +9865,6 @@ components:
                 key:
                     type: object
                     description: Configuration fields for the payment channel in JSON format
-                protocol:
-                    type: string
-                    description: Crypto protocol supported by this channel
-                network:
-                    type: string
-                    description: Crypto chian supported by this channel
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method
@@ -10280,13 +10276,13 @@ components:
                 minAmount:
                     type: string
                     description: Optional minimum amount filter
-                maxAmount:
+                userId:
                     type: string
                     description: Optional maximum amount filter
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
             description: |-
                 Request to get transaction page
                  Used to retrieve a paginated list of transactions with optional filters
