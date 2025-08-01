@@ -5,6 +5,7 @@ package api.backoffice.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
+import "wallet/service/v1/wallet.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -122,6 +123,13 @@ service BackofficeWallet {
 	rpc UpdateOperatorBalance(UpdateOperatorBalanceRequest) returns (UpdateOperatorBalanceResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/balance/update"
+			body: "*"
+		};
+	}
+	// GetOperatorBalances gets the balances of an operator
+	rpc GetOperatorBalances(wallet.service.v1.GetOperatorBalancesRequest) returns (wallet.service.v1.GetOperatorBalancesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/balance/get"
 			body: "*"
 		};
 	}

@@ -65,8 +65,8 @@ type UserHTTPServer interface {
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/user/auth/register", _User_Register1_HTTP_Handler(srv))
-	r.POST("/v1/user/auth/login", _User_Login1_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/register", _User_Register0_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/login", _User_Login0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/oauth", _User_RegisterOrLoginWithOAuth0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/telegram", _User_RegisterOrLoginWithTelegram0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/refresh", _User_RefreshToken0_HTTP_Handler(srv))
@@ -74,11 +74,11 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/auth/logout", _User_Logout0_HTTP_Handler(srv))
 	r.POST("/v1/user/tags/get", _User_GetUserTags0_HTTP_Handler(srv))
 	r.POST("/v1/user/email/verification-code/send", _User_SendEmailVerificationCode0_HTTP_Handler(srv))
-	r.POST("/v1/user/auth/password/reset-code/send", _User_SendPasswordResetCode1_HTTP_Handler(srv))
-	r.POST("/v1/user/auth/password/reset", _User_ResetPasswordWithCode1_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/password/reset-code/send", _User_SendPasswordResetCode0_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/password/reset", _User_ResetPasswordWithCode0_HTTP_Handler(srv))
 }
 
-func _User_Register1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in RegisterRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -100,7 +100,7 @@ func _User_Register1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) err
 	}
 }
 
-func _User_Login1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Login0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LoginRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -276,7 +276,7 @@ func _User_SendEmailVerificationCode0_HTTP_Handler(srv UserHTTPServer) func(ctx 
 	}
 }
 
-func _User_SendPasswordResetCode1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_SendPasswordResetCode0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SendPasswordResetCodeRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -298,7 +298,7 @@ func _User_SendPasswordResetCode1_HTTP_Handler(srv UserHTTPServer) func(ctx http
 	}
 }
 
-func _User_ResetPasswordWithCode1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_ResetPasswordWithCode0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ResetPasswordWithCodeRequest
 		if err := ctx.Bind(&in); err != nil {
