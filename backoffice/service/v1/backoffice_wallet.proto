@@ -430,7 +430,7 @@ message OperatorBalanceSettleRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
 	int64 original_transaction_id = 3;
-	string memo = 5;
+	string memo = 4;
 }
 
 message OperatorBalanceSettleResponse {

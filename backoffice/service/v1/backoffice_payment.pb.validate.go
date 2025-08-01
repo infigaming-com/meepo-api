@@ -694,6 +694,8 @@ func (m *GetTransactionPageRequest) validate(all bool) error {
 
 	// no validation rules for MaxAmount
 
+	// no validation rules for UserId
+
 	if all {
 		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
 		case interface{ ValidateAll() error }:
