@@ -5674,6 +5674,8 @@ func (m *SendInvoicesRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for PeriodKey
+
 	if len(errors) > 0 {
 		return SendInvoicesRequestMultiError(errors)
 	}

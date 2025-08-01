@@ -1582,6 +1582,7 @@ func (*CreateAdjustmentConfigResponse) Descriptor() ([]byte, []int) {
 
 type SendInvoicesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	PeriodKey     string                 `protobuf:"bytes,1,opt,name=period_key,json=periodKey,proto3" json:"period_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1614,6 +1615,13 @@ func (x *SendInvoicesRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SendInvoicesRequest.ProtoReflect.Descriptor instead.
 func (*SendInvoicesRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *SendInvoicesRequest) GetPeriodKey() string {
+	if x != nil {
+		return x.PeriodKey
+	}
+	return ""
 }
 
 type SendInvoicesResponse struct {
@@ -3481,8 +3489,10 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x1dCreateAdjustmentConfigRequest\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\" \n" +
-	"\x1eCreateAdjustmentConfigResponse\"\x15\n" +
-	"\x13SendInvoicesRequest\"\x16\n" +
+	"\x1eCreateAdjustmentConfigResponse\"4\n" +
+	"\x13SendInvoicesRequest\x12\x1d\n" +
+	"\n" +
+	"period_key\x18\x01 \x01(\tR\tperiodKey\"\x16\n" +
 	"\x14SendInvoicesResponse\"\x1a\n" +
 	"\x18GetInvoiceSummaryRequest\"\x8a\x01\n" +
 	"\x19GetInvoiceSummaryResponse\x12!\n" +
