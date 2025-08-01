@@ -34,7 +34,7 @@ const (
 	BackofficeFinance_GetInvoiceSummary_FullMethodName        = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceSummary"
 	BackofficeFinance_GetBalanceSummary_FullMethodName        = "/api.backoffice.service.v1.BackofficeFinance/GetBalanceSummary"
 	BackofficeFinance_GetBalancesSummary_FullMethodName       = "/api.backoffice.service.v1.BackofficeFinance/GetBalancesSummary"
-	BackofficeFinance_ListBillingPeriod_FullMethodName        = "/api.backoffice.service.v1.BackofficeFinance/ListBillingPeriod"
+	BackofficeFinance_ListBillingPeriods_FullMethodName       = "/api.backoffice.service.v1.BackofficeFinance/ListBillingPeriods"
 )
 
 // BackofficeFinanceClient is the client API for BackofficeFinance service.
@@ -56,7 +56,7 @@ type BackofficeFinanceClient interface {
 	GetInvoiceSummary(ctx context.Context, in *GetInvoiceSummaryRequest, opts ...grpc.CallOption) (*GetInvoiceSummaryResponse, error)
 	GetBalanceSummary(ctx context.Context, in *GetBalanceSummaryRequest, opts ...grpc.CallOption) (*GetBalanceSummaryResponse, error)
 	GetBalancesSummary(ctx context.Context, in *GetBalancesSummaryRequest, opts ...grpc.CallOption) (*GetBalancesSummaryResponse, error)
-	ListBillingPeriod(ctx context.Context, in *ListBillingPeriodRequest, opts ...grpc.CallOption) (*ListBillingPeriodResponse, error)
+	ListBillingPeriods(ctx context.Context, in *ListBillingPeriodsRequest, opts ...grpc.CallOption) (*ListBillingPeriodsResponse, error)
 }
 
 type backofficeFinanceClient struct {
@@ -217,10 +217,10 @@ func (c *backofficeFinanceClient) GetBalancesSummary(ctx context.Context, in *Ge
 	return out, nil
 }
 
-func (c *backofficeFinanceClient) ListBillingPeriod(ctx context.Context, in *ListBillingPeriodRequest, opts ...grpc.CallOption) (*ListBillingPeriodResponse, error) {
+func (c *backofficeFinanceClient) ListBillingPeriods(ctx context.Context, in *ListBillingPeriodsRequest, opts ...grpc.CallOption) (*ListBillingPeriodsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListBillingPeriodResponse)
-	err := c.cc.Invoke(ctx, BackofficeFinance_ListBillingPeriod_FullMethodName, in, out, cOpts...)
+	out := new(ListBillingPeriodsResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_ListBillingPeriods_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -246,7 +246,7 @@ type BackofficeFinanceServer interface {
 	GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error)
 	GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error)
 	GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error)
-	ListBillingPeriod(context.Context, *ListBillingPeriodRequest) (*ListBillingPeriodResponse, error)
+	ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error)
 	mustEmbedUnimplementedBackofficeFinanceServer()
 }
 
@@ -302,8 +302,8 @@ func (UnimplementedBackofficeFinanceServer) GetBalanceSummary(context.Context, *
 func (UnimplementedBackofficeFinanceServer) GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBalancesSummary not implemented")
 }
-func (UnimplementedBackofficeFinanceServer) ListBillingPeriod(context.Context, *ListBillingPeriodRequest) (*ListBillingPeriodResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListBillingPeriod not implemented")
+func (UnimplementedBackofficeFinanceServer) ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBillingPeriods not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) mustEmbedUnimplementedBackofficeFinanceServer() {}
 func (UnimplementedBackofficeFinanceServer) testEmbeddedByValue()                           {}
@@ -596,20 +596,20 @@ func _BackofficeFinance_GetBalancesSummary_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeFinance_ListBillingPeriod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListBillingPeriodRequest)
+func _BackofficeFinance_ListBillingPeriods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBillingPeriodsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeFinanceServer).ListBillingPeriod(ctx, in)
+		return srv.(BackofficeFinanceServer).ListBillingPeriods(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeFinance_ListBillingPeriod_FullMethodName,
+		FullMethod: BackofficeFinance_ListBillingPeriods_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeFinanceServer).ListBillingPeriod(ctx, req.(*ListBillingPeriodRequest))
+		return srv.(BackofficeFinanceServer).ListBillingPeriods(ctx, req.(*ListBillingPeriodsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -682,8 +682,8 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeFinance_GetBalancesSummary_Handler,
 		},
 		{
-			MethodName: "ListBillingPeriod",
-			Handler:    _BackofficeFinance_ListBillingPeriod_Handler,
+			MethodName: "ListBillingPeriods",
+			Handler:    _BackofficeFinance_ListBillingPeriods_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

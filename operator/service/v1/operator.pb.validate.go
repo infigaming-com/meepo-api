@@ -3321,6 +3321,10 @@ func (m *ListOperatorRevenueShareRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.PeriodKey != nil {
+		// no validation rules for PeriodKey
+	}
+
 	if len(errors) > 0 {
 		return ListOperatorRevenueShareRequestMultiError(errors)
 	}
@@ -3643,6 +3647,10 @@ func (m *ListThirdPartyFeesRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.PeriodKey != nil {
+		// no validation rules for PeriodKey
+	}
+
 	if len(errors) > 0 {
 		return ListThirdPartyFeesRequestMultiError(errors)
 	}
@@ -3957,6 +3965,10 @@ func (m *ListMonthlyRevenueShareRequest) validate(all bool) error {
 
 	if m.PageSize != nil {
 		// no validation rules for PageSize
+	}
+
+	if m.PeriodKey != nil {
+		// no validation rules for PeriodKey
 	}
 
 	if len(errors) > 0 {
@@ -5202,6 +5214,10 @@ func (m *ListAdjustmentsRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.PeriodKey != nil {
+		// no validation rules for PeriodKey
+	}
+
 	if len(errors) > 0 {
 		return ListAdjustmentsRequestMultiError(errors)
 	}
@@ -6101,6 +6117,35 @@ func (m *GetBalanceSummaryRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetBalanceSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetBalanceSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetBalanceSummaryRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetBalanceSummaryRequestMultiError(errors)
 	}
@@ -6340,6 +6385,35 @@ func (m *GetBalancesSummaryRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetBalancesSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetBalancesSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetBalancesSummaryRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetBalancesSummaryRequestMultiError(errors)
 	}
@@ -6544,22 +6618,22 @@ var _ interface {
 	ErrorName() string
 } = GetBalancesSummaryResponseValidationError{}
 
-// Validate checks the field values on ListBillingPeriodRequest with the rules
+// Validate checks the field values on ListBillingPeriodsRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListBillingPeriodRequest) Validate() error {
+func (m *ListBillingPeriodsRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListBillingPeriodRequest with the
+// ValidateAll checks the field values on ListBillingPeriodsRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListBillingPeriodRequestMultiError, or nil if none found.
-func (m *ListBillingPeriodRequest) ValidateAll() error {
+// ListBillingPeriodsRequestMultiError, or nil if none found.
+func (m *ListBillingPeriodsRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListBillingPeriodRequest) validate(all bool) error {
+func (m *ListBillingPeriodsRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -6575,19 +6649,19 @@ func (m *ListBillingPeriodRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListBillingPeriodRequestMultiError(errors)
+		return ListBillingPeriodsRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListBillingPeriodRequestMultiError is an error wrapping multiple validation
-// errors returned by ListBillingPeriodRequest.ValidateAll() if the designated
-// constraints aren't met.
-type ListBillingPeriodRequestMultiError []error
+// ListBillingPeriodsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListBillingPeriodsRequest.ValidateAll() if the
+// designated constraints aren't met.
+type ListBillingPeriodsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListBillingPeriodRequestMultiError) Error() string {
+func (m ListBillingPeriodsRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -6596,11 +6670,11 @@ func (m ListBillingPeriodRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListBillingPeriodRequestMultiError) AllErrors() []error { return m }
+func (m ListBillingPeriodsRequestMultiError) AllErrors() []error { return m }
 
-// ListBillingPeriodRequestValidationError is the validation error returned by
-// ListBillingPeriodRequest.Validate if the designated constraints aren't met.
-type ListBillingPeriodRequestValidationError struct {
+// ListBillingPeriodsRequestValidationError is the validation error returned by
+// ListBillingPeriodsRequest.Validate if the designated constraints aren't met.
+type ListBillingPeriodsRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -6608,24 +6682,24 @@ type ListBillingPeriodRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListBillingPeriodRequestValidationError) Field() string { return e.field }
+func (e ListBillingPeriodsRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListBillingPeriodRequestValidationError) Reason() string { return e.reason }
+func (e ListBillingPeriodsRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListBillingPeriodRequestValidationError) Cause() error { return e.cause }
+func (e ListBillingPeriodsRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListBillingPeriodRequestValidationError) Key() bool { return e.key }
+func (e ListBillingPeriodsRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListBillingPeriodRequestValidationError) ErrorName() string {
-	return "ListBillingPeriodRequestValidationError"
+func (e ListBillingPeriodsRequestValidationError) ErrorName() string {
+	return "ListBillingPeriodsRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListBillingPeriodRequestValidationError) Error() string {
+func (e ListBillingPeriodsRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -6637,14 +6711,14 @@ func (e ListBillingPeriodRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListBillingPeriodRequest.%s: %s%s",
+		"invalid %sListBillingPeriodsRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListBillingPeriodRequestValidationError{}
+var _ error = ListBillingPeriodsRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -6652,24 +6726,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListBillingPeriodRequestValidationError{}
+} = ListBillingPeriodsRequestValidationError{}
 
-// Validate checks the field values on ListBillingPeriodResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on ListBillingPeriodsResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListBillingPeriodResponse) Validate() error {
+func (m *ListBillingPeriodsResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListBillingPeriodResponse with the
+// ValidateAll checks the field values on ListBillingPeriodsResponse with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListBillingPeriodResponseMultiError, or nil if none found.
-func (m *ListBillingPeriodResponse) ValidateAll() error {
+// ListBillingPeriodsResponseMultiError, or nil if none found.
+func (m *ListBillingPeriodsResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListBillingPeriodResponse) validate(all bool) error {
+func (m *ListBillingPeriodsResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -6683,7 +6757,7 @@ func (m *ListBillingPeriodResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListBillingPeriodResponseValidationError{
+					errors = append(errors, ListBillingPeriodsResponseValidationError{
 						field:  fmt.Sprintf("BillingPeriods[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -6691,7 +6765,7 @@ func (m *ListBillingPeriodResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListBillingPeriodResponseValidationError{
+					errors = append(errors, ListBillingPeriodsResponseValidationError{
 						field:  fmt.Sprintf("BillingPeriods[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -6700,7 +6774,7 @@ func (m *ListBillingPeriodResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListBillingPeriodResponseValidationError{
+				return ListBillingPeriodsResponseValidationError{
 					field:  fmt.Sprintf("BillingPeriods[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -6717,19 +6791,19 @@ func (m *ListBillingPeriodResponse) validate(all bool) error {
 	// no validation rules for PageSize
 
 	if len(errors) > 0 {
-		return ListBillingPeriodResponseMultiError(errors)
+		return ListBillingPeriodsResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListBillingPeriodResponseMultiError is an error wrapping multiple validation
-// errors returned by ListBillingPeriodResponse.ValidateAll() if the
-// designated constraints aren't met.
-type ListBillingPeriodResponseMultiError []error
+// ListBillingPeriodsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListBillingPeriodsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListBillingPeriodsResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListBillingPeriodResponseMultiError) Error() string {
+func (m ListBillingPeriodsResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -6738,11 +6812,11 @@ func (m ListBillingPeriodResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListBillingPeriodResponseMultiError) AllErrors() []error { return m }
+func (m ListBillingPeriodsResponseMultiError) AllErrors() []error { return m }
 
-// ListBillingPeriodResponseValidationError is the validation error returned by
-// ListBillingPeriodResponse.Validate if the designated constraints aren't met.
-type ListBillingPeriodResponseValidationError struct {
+// ListBillingPeriodsResponseValidationError is the validation error returned
+// by ListBillingPeriodsResponse.Validate if the designated constraints aren't met.
+type ListBillingPeriodsResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -6750,24 +6824,24 @@ type ListBillingPeriodResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListBillingPeriodResponseValidationError) Field() string { return e.field }
+func (e ListBillingPeriodsResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListBillingPeriodResponseValidationError) Reason() string { return e.reason }
+func (e ListBillingPeriodsResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListBillingPeriodResponseValidationError) Cause() error { return e.cause }
+func (e ListBillingPeriodsResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListBillingPeriodResponseValidationError) Key() bool { return e.key }
+func (e ListBillingPeriodsResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListBillingPeriodResponseValidationError) ErrorName() string {
-	return "ListBillingPeriodResponseValidationError"
+func (e ListBillingPeriodsResponseValidationError) ErrorName() string {
+	return "ListBillingPeriodsResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListBillingPeriodResponseValidationError) Error() string {
+func (e ListBillingPeriodsResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -6779,14 +6853,14 @@ func (e ListBillingPeriodResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListBillingPeriodResponse.%s: %s%s",
+		"invalid %sListBillingPeriodsResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListBillingPeriodResponseValidationError{}
+var _ error = ListBillingPeriodsResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -6794,7 +6868,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListBillingPeriodResponseValidationError{}
+} = ListBillingPeriodsResponseValidationError{}
 
 // Validate checks the field values on GetOperatorResponse_Operator with the
 // rules defined in the proto definition for this message. If any rules are
@@ -8264,24 +8338,24 @@ var _ interface {
 	ErrorName() string
 } = ListAdjustmentsResponse_AdjustmentItemValidationError{}
 
-// Validate checks the field values on ListBillingPeriodResponse_BillingPeriod
+// Validate checks the field values on ListBillingPeriodsResponse_BillingPeriod
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
 // there are no violations.
-func (m *ListBillingPeriodResponse_BillingPeriod) Validate() error {
+func (m *ListBillingPeriodsResponse_BillingPeriod) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// ListBillingPeriodResponse_BillingPeriod with the rules defined in the proto
-// definition for this message. If any rules are violated, the result is a
-// list of violation errors wrapped in
-// ListBillingPeriodResponse_BillingPeriodMultiError, or nil if none found.
-func (m *ListBillingPeriodResponse_BillingPeriod) ValidateAll() error {
+// ListBillingPeriodsResponse_BillingPeriod with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// ListBillingPeriodsResponse_BillingPeriodMultiError, or nil if none found.
+func (m *ListBillingPeriodsResponse_BillingPeriod) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListBillingPeriodResponse_BillingPeriod) validate(all bool) error {
+func (m *ListBillingPeriodsResponse_BillingPeriod) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -8298,21 +8372,23 @@ func (m *ListBillingPeriodResponse_BillingPeriod) validate(all bool) error {
 
 	// no validation rules for UpdatedAt
 
+	// no validation rules for PeriodKey
+
 	if len(errors) > 0 {
-		return ListBillingPeriodResponse_BillingPeriodMultiError(errors)
+		return ListBillingPeriodsResponse_BillingPeriodMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListBillingPeriodResponse_BillingPeriodMultiError is an error wrapping
+// ListBillingPeriodsResponse_BillingPeriodMultiError is an error wrapping
 // multiple validation errors returned by
-// ListBillingPeriodResponse_BillingPeriod.ValidateAll() if the designated
+// ListBillingPeriodsResponse_BillingPeriod.ValidateAll() if the designated
 // constraints aren't met.
-type ListBillingPeriodResponse_BillingPeriodMultiError []error
+type ListBillingPeriodsResponse_BillingPeriodMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListBillingPeriodResponse_BillingPeriodMultiError) Error() string {
+func (m ListBillingPeriodsResponse_BillingPeriodMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -8321,12 +8397,12 @@ func (m ListBillingPeriodResponse_BillingPeriodMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListBillingPeriodResponse_BillingPeriodMultiError) AllErrors() []error { return m }
+func (m ListBillingPeriodsResponse_BillingPeriodMultiError) AllErrors() []error { return m }
 
-// ListBillingPeriodResponse_BillingPeriodValidationError is the validation
-// error returned by ListBillingPeriodResponse_BillingPeriod.Validate if the
+// ListBillingPeriodsResponse_BillingPeriodValidationError is the validation
+// error returned by ListBillingPeriodsResponse_BillingPeriod.Validate if the
 // designated constraints aren't met.
-type ListBillingPeriodResponse_BillingPeriodValidationError struct {
+type ListBillingPeriodsResponse_BillingPeriodValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -8334,24 +8410,24 @@ type ListBillingPeriodResponse_BillingPeriodValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListBillingPeriodResponse_BillingPeriodValidationError) Field() string { return e.field }
+func (e ListBillingPeriodsResponse_BillingPeriodValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListBillingPeriodResponse_BillingPeriodValidationError) Reason() string { return e.reason }
+func (e ListBillingPeriodsResponse_BillingPeriodValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListBillingPeriodResponse_BillingPeriodValidationError) Cause() error { return e.cause }
+func (e ListBillingPeriodsResponse_BillingPeriodValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListBillingPeriodResponse_BillingPeriodValidationError) Key() bool { return e.key }
+func (e ListBillingPeriodsResponse_BillingPeriodValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListBillingPeriodResponse_BillingPeriodValidationError) ErrorName() string {
-	return "ListBillingPeriodResponse_BillingPeriodValidationError"
+func (e ListBillingPeriodsResponse_BillingPeriodValidationError) ErrorName() string {
+	return "ListBillingPeriodsResponse_BillingPeriodValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListBillingPeriodResponse_BillingPeriodValidationError) Error() string {
+func (e ListBillingPeriodsResponse_BillingPeriodValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -8363,14 +8439,14 @@ func (e ListBillingPeriodResponse_BillingPeriodValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListBillingPeriodResponse_BillingPeriod.%s: %s%s",
+		"invalid %sListBillingPeriodsResponse_BillingPeriod.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListBillingPeriodResponse_BillingPeriodValidationError{}
+var _ error = ListBillingPeriodsResponse_BillingPeriodValidationError{}
 
 var _ interface {
 	Field() string
@@ -8378,4 +8454,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListBillingPeriodResponse_BillingPeriodValidationError{}
+} = ListBillingPeriodsResponse_BillingPeriodValidationError{}

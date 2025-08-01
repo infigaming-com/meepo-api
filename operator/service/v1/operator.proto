@@ -93,7 +93,7 @@ service Operator {
 	rpc GetBalancesSummary(GetBalancesSummaryRequest) returns (GetBalancesSummaryResponse) {
 	}
 
-	rpc ListBillingPeriod(ListBillingPeriodRequest) returns (ListBillingPeriodResponse) {
+	rpc ListBillingPeriods(ListBillingPeriodsRequest) returns (ListBillingPeriodsResponse) {
 	}
 }
 
@@ -347,6 +347,7 @@ message ListOperatorRevenueShareRequest {
 // Pagination
 	optional int32 page = 4;
 	optional int32 page_size = 5;
+	optional string period_key = 6;
 }
 
 message ListOperatorRevenueShareResponse {
@@ -394,6 +395,7 @@ message ListThirdPartyFeesRequest {
 	// Pagination
 	optional int32 page = 4;
 	optional int32 page_size = 5;
+	optional string period_key = 6;
 }
 
 message ListThirdPartyFeesResponse {
@@ -429,6 +431,7 @@ message ListMonthlyRevenueShareRequest {
 	// Pagination
 	optional int32 page = 4;
 	optional int32 page_size = 5;
+	optional string period_key = 6;
 }
 
 message ListMonthlyRevenueShareResponse {
@@ -537,6 +540,7 @@ message ListAdjustmentsRequest {
 	// Pagination
 	optional int32 page = 4;
 	optional int32 page_size = 5;
+	optional string period_key = 6;
 }
 
 message ListAdjustmentsResponse {
@@ -588,6 +592,7 @@ message GetInvoiceSummaryResponse {
 
 message GetBalanceSummaryRequest {
 	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 }
 
 message GetBalanceSummaryResponse {
@@ -598,6 +603,7 @@ message GetBalanceSummaryResponse {
 
 message GetBalancesSummaryRequest {
 	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 }
 
 message GetBalancesSummaryResponse {
@@ -614,18 +620,19 @@ message GetBalancesSummaryResponse {
 	string est_net_costs = 11;
 }
 
-message ListBillingPeriodRequest {
+message ListBillingPeriodsRequest {
 	optional int32 page = 1;
 	optional int32 page_size = 2;
 }
 
-message ListBillingPeriodResponse {
+message ListBillingPeriodsResponse {
 	message BillingPeriod {
 		string start_time = 1;
 		string end_time = 2;
 		string status = 3;
 		string created_at = 4;
 		string updated_at = 5;
+		string period_key = 6;
 	}
 	repeated BillingPeriod billing_periods = 1;
 	int32 total_count = 2;
