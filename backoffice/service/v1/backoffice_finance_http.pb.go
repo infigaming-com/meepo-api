@@ -24,11 +24,11 @@ const OperationBackofficeFinanceCreateAdjustmentConfig = "/api.backoffice.servic
 const OperationBackofficeFinanceDeleteAdjustmentConfig = "/api.backoffice.service.v1.BackofficeFinance/DeleteAdjustmentConfig"
 const OperationBackofficeFinanceGetBalanceSummary = "/api.backoffice.service.v1.BackofficeFinance/GetBalanceSummary"
 const OperationBackofficeFinanceGetBalancesSummary = "/api.backoffice.service.v1.BackofficeFinance/GetBalancesSummary"
-const OperationBackofficeFinanceGetBillingPeriod = "/api.backoffice.service.v1.BackofficeFinance/GetBillingPeriod"
 const OperationBackofficeFinanceGetInvoiceDetail = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceDetail"
 const OperationBackofficeFinanceGetInvoiceSummary = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceSummary"
 const OperationBackofficeFinanceListAdjustmentConfigs = "/api.backoffice.service.v1.BackofficeFinance/ListAdjustmentConfigs"
 const OperationBackofficeFinanceListAdjustments = "/api.backoffice.service.v1.BackofficeFinance/ListAdjustments"
+const OperationBackofficeFinanceListBillingPeriod = "/api.backoffice.service.v1.BackofficeFinance/ListBillingPeriod"
 const OperationBackofficeFinanceListInvoices = "/api.backoffice.service.v1.BackofficeFinance/ListInvoices"
 const OperationBackofficeFinanceListMonthlyRevenueShare = "/api.backoffice.service.v1.BackofficeFinance/ListMonthlyRevenueShare"
 const OperationBackofficeFinanceListOperatorRevenueShare = "/api.backoffice.service.v1.BackofficeFinance/ListOperatorRevenueShare"
@@ -42,11 +42,11 @@ type BackofficeFinanceHTTPServer interface {
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
 	GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error)
 	GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error)
-	GetBillingPeriod(context.Context, *GetBillingPeriodRequest) (*GetBillingPeriodResponse, error)
 	GetInvoiceDetail(context.Context, *GetInvoiceDetailRequest) (*GetInvoiceDetailResponse, error)
 	GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error)
 	ListAdjustmentConfigs(context.Context, *ListAdjustmentConfigsRequest) (*ListAdjustmentConfigsResponse, error)
 	ListAdjustments(context.Context, *ListAdjustmentsRequest) (*ListAdjustmentsResponse, error)
+	ListBillingPeriod(context.Context, *ListBillingPeriodRequest) (*ListBillingPeriodResponse, error)
 	ListInvoices(context.Context, *ListInvoicesRequest) (*ListInvoicesResponse, error)
 	ListMonthlyRevenueShare(context.Context, *ListMonthlyRevenueShareRequest) (*ListMonthlyRevenueShareResponse, error)
 	ListOperatorRevenueShare(context.Context, *ListOperatorRevenueShareRequest) (*ListOperatorRevenueShareResponse, error)
@@ -72,7 +72,7 @@ func RegisterBackofficeFinanceHTTPServer(s *http.Server, srv BackofficeFinanceHT
 	r.POST("/v1/backoffice/finance/invoices/summary", _BackofficeFinance_GetInvoiceSummary0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/balance/summary", _BackofficeFinance_GetBalanceSummary0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/balances/summary", _BackofficeFinance_GetBalancesSummary0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/finance/billing-period", _BackofficeFinance_GetBillingPeriod0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/billing-periods/list", _BackofficeFinance_ListBillingPeriod0_HTTP_Handler(srv))
 }
 
 func _BackofficeFinance_ListInvoices0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
@@ -405,24 +405,24 @@ func _BackofficeFinance_GetBalancesSummary0_HTTP_Handler(srv BackofficeFinanceHT
 	}
 }
 
-func _BackofficeFinance_GetBillingPeriod0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+func _BackofficeFinance_ListBillingPeriod0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetBillingPeriodRequest
+		var in ListBillingPeriodRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeFinanceGetBillingPeriod)
+		http.SetOperation(ctx, OperationBackofficeFinanceListBillingPeriod)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetBillingPeriod(ctx, req.(*GetBillingPeriodRequest))
+			return srv.ListBillingPeriod(ctx, req.(*ListBillingPeriodRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetBillingPeriodResponse)
+		reply := out.(*ListBillingPeriodResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -433,11 +433,11 @@ type BackofficeFinanceHTTPClient interface {
 	DeleteAdjustmentConfig(ctx context.Context, req *DeleteAdjustmentConfigRequest, opts ...http.CallOption) (rsp *DeleteAdjustmentConfigResponse, err error)
 	GetBalanceSummary(ctx context.Context, req *GetBalanceSummaryRequest, opts ...http.CallOption) (rsp *GetBalanceSummaryResponse, err error)
 	GetBalancesSummary(ctx context.Context, req *GetBalancesSummaryRequest, opts ...http.CallOption) (rsp *GetBalancesSummaryResponse, err error)
-	GetBillingPeriod(ctx context.Context, req *GetBillingPeriodRequest, opts ...http.CallOption) (rsp *GetBillingPeriodResponse, err error)
 	GetInvoiceDetail(ctx context.Context, req *GetInvoiceDetailRequest, opts ...http.CallOption) (rsp *GetInvoiceDetailResponse, err error)
 	GetInvoiceSummary(ctx context.Context, req *GetInvoiceSummaryRequest, opts ...http.CallOption) (rsp *GetInvoiceSummaryResponse, err error)
 	ListAdjustmentConfigs(ctx context.Context, req *ListAdjustmentConfigsRequest, opts ...http.CallOption) (rsp *ListAdjustmentConfigsResponse, err error)
 	ListAdjustments(ctx context.Context, req *ListAdjustmentsRequest, opts ...http.CallOption) (rsp *ListAdjustmentsResponse, err error)
+	ListBillingPeriod(ctx context.Context, req *ListBillingPeriodRequest, opts ...http.CallOption) (rsp *ListBillingPeriodResponse, err error)
 	ListInvoices(ctx context.Context, req *ListInvoicesRequest, opts ...http.CallOption) (rsp *ListInvoicesResponse, err error)
 	ListMonthlyRevenueShare(ctx context.Context, req *ListMonthlyRevenueShareRequest, opts ...http.CallOption) (rsp *ListMonthlyRevenueShareResponse, err error)
 	ListOperatorRevenueShare(ctx context.Context, req *ListOperatorRevenueShareRequest, opts ...http.CallOption) (rsp *ListOperatorRevenueShareResponse, err error)
@@ -519,19 +519,6 @@ func (c *BackofficeFinanceHTTPClientImpl) GetBalancesSummary(ctx context.Context
 	return &out, nil
 }
 
-func (c *BackofficeFinanceHTTPClientImpl) GetBillingPeriod(ctx context.Context, in *GetBillingPeriodRequest, opts ...http.CallOption) (*GetBillingPeriodResponse, error) {
-	var out GetBillingPeriodResponse
-	pattern := "/v1/backoffice/finance/billing-period"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeFinanceGetBillingPeriod))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 func (c *BackofficeFinanceHTTPClientImpl) GetInvoiceDetail(ctx context.Context, in *GetInvoiceDetailRequest, opts ...http.CallOption) (*GetInvoiceDetailResponse, error) {
 	var out GetInvoiceDetailResponse
 	pattern := "/v1/backoffice/finance/invoice/detail"
@@ -576,6 +563,19 @@ func (c *BackofficeFinanceHTTPClientImpl) ListAdjustments(ctx context.Context, i
 	pattern := "/v1/backoffice/finance/adjustments/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeFinanceListAdjustments))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFinanceHTTPClientImpl) ListBillingPeriod(ctx context.Context, in *ListBillingPeriodRequest, opts ...http.CallOption) (*ListBillingPeriodResponse, error) {
+	var out ListBillingPeriodResponse
+	pattern := "/v1/backoffice/finance/billing-periods/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceListBillingPeriod))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

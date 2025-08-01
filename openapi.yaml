@@ -713,16 +713,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetBalancesSummaryResponse'
-    /v1/backoffice/finance/billing-period:
+    /v1/backoffice/finance/billing-periods/list:
         post:
             tags:
                 - BackofficeFinance
-            operationId: BackofficeFinance_GetBillingPeriod
+            operationId: BackofficeFinance_ListBillingPeriod
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetBillingPeriodRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListBillingPeriodRequest'
                 required: true
             responses:
                 "200":
@@ -730,7 +730,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetBillingPeriodResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListBillingPeriodResponse'
     /v1/backoffice/finance/invoice/detail:
         post:
             tags:
@@ -4041,22 +4041,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetBetByIdResponse_Action'
-        api.backoffice.service.v1.GetBillingPeriodRequest:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.GetBillingPeriodResponse:
-            type: object
-            properties:
-                startTime:
-                    type: string
-                endTime:
-                    type: string
-                status:
-                    type: string
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
         api.backoffice.service.v1.GetCurrentOperatorDetailsRequest:
             type: object
             properties: {}
@@ -5978,6 +5962,44 @@ components:
                 total:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListBillingPeriodRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListBillingPeriodResponse:
+            type: object
+            properties:
+                billingPeriods:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListBillingPeriodResponse_BillingPeriod'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListBillingPeriodResponse_BillingPeriod:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                endTime:
+                    type: string
+                status:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
         api.backoffice.service.v1.ListBottomOperatorsRequest:
             type: object
             properties:

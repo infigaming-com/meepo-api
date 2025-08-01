@@ -115,9 +115,9 @@ service BackofficeFinance {
 		};
 	}
 
-	rpc GetBillingPeriod(GetBillingPeriodRequest) returns (GetBillingPeriodResponse) {
+	rpc ListBillingPeriod(ListBillingPeriodRequest) returns (ListBillingPeriodResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/finance/billing-period"
+			post: "/v1/backoffice/finance/billing-periods/list"
 			body: "*"
 		};
 	}
@@ -511,13 +511,21 @@ message GetBalancesSummaryResponse {
 	string est_net_costs = 11;
 }
 
-message GetBillingPeriodRequest {
+message ListBillingPeriodRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
 }
 
-message GetBillingPeriodResponse {
-	string start_time = 1;
-	string end_time = 2;
-	string status = 3;
-	string created_at = 4;
-	string updated_at = 5;
+message ListBillingPeriodResponse {
+	message BillingPeriod {
+		string start_time = 1;
+		string end_time = 2;
+		string status = 3;
+		string created_at = 4;
+		string updated_at = 5;
+	}
+	repeated BillingPeriod billing_periods = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }
