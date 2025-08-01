@@ -468,6 +468,7 @@ message CreateAdjustmentConfigResponse {
 }
 
 message SendInvoicesRequest {
+	string period_key = 1;
 }
 
 message SendInvoicesResponse {
