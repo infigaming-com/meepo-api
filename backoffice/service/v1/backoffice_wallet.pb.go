@@ -1804,13 +1804,13 @@ func (x *OperatorSwapResponse) GetTargetCurrencyBalanceCashReportingCurrency() s
 }
 
 type OperatorBalanceFreezeRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Currency              string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	CashAmount            string                  `protobuf:"bytes,3,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
-	Memo                  string                  `protobuf:"bytes,5,opt,name=memo,proto3" json:"memo,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Currency        string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	CashAmount      string                  `protobuf:"bytes,3,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	Memo            string                  `protobuf:"bytes,4,opt,name=memo,proto3" json:"memo,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *OperatorBalanceFreezeRequest) Reset() {
@@ -1843,9 +1843,9 @@ func (*OperatorBalanceFreezeRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{26}
 }
 
-func (x *OperatorBalanceFreezeRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *OperatorBalanceFreezeRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.TargetOperatorContext
+		return x.OperatorContext
 	}
 	return nil
 }
@@ -1925,9 +1925,9 @@ func (x *OperatorBalanceFreezeResponse) GetCash() string {
 
 type OperatorBalanceRollbackRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	OriginalTransactionId int64                   `protobuf:"varint,2,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
-	Memo                  string                  `protobuf:"bytes,4,opt,name=memo,proto3" json:"memo,omitempty"`
+	Memo                  string                  `protobuf:"bytes,3,opt,name=memo,proto3" json:"memo,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -1962,9 +1962,9 @@ func (*OperatorBalanceRollbackRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *OperatorBalanceRollbackRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *OperatorBalanceRollbackRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.TargetOperatorContext
+		return x.OperatorContext
 	}
 	return nil
 }
@@ -2061,10 +2061,10 @@ func (x *OperatorBalanceRollbackResponse) GetCashAmountReportingCurrency() strin
 
 type OperatorBalanceSettleRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Currency              string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	OriginalTransactionId int64                   `protobuf:"varint,3,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
-	Memo                  string                  `protobuf:"bytes,6,opt,name=memo,proto3" json:"memo,omitempty"`
+	Memo                  string                  `protobuf:"bytes,4,opt,name=memo,proto3" json:"memo,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -2099,9 +2099,9 @@ func (*OperatorBalanceSettleRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *OperatorBalanceSettleRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *OperatorBalanceSettleRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.TargetOperatorContext
+		return x.OperatorContext
 	}
 	return nil
 }
@@ -3470,32 +3470,32 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"(currency_balance_cash_reporting_currency\x18\x03 \x01(\tR$currencyBalanceCashReportingCurrency\x12?\n" +
 	"\x1ctarget_currency_balance_cash\x18\x04 \x01(\tR\x19targetCurrencyBalanceCash\x12F\n" +
 	" target_currency_balance_cash_usd\x18\x05 \x01(\tR\x1ctargetCurrencyBalanceCashUsd\x12c\n" +
-	"/target_currency_balance_cash_reporting_currency\x18\x06 \x01(\tR*targetCurrencyBalanceCashReportingCurrency\"\xc4\x01\n" +
-	"\x1cOperatorBalanceFreezeRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
+	"/target_currency_balance_cash_reporting_currency\x18\x06 \x01(\tR*targetCurrencyBalanceCashReportingCurrency\"\xb7\x01\n" +
+	"\x1cOperatorBalanceFreezeRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1f\n" +
 	"\vcash_amount\x18\x03 \x01(\tR\n" +
 	"cashAmount\x12\x12\n" +
-	"\x04memo\x18\x05 \x01(\tR\x04memo\"Z\n" +
+	"\x04memo\x18\x04 \x01(\tR\x04memo\"Z\n" +
 	"\x1dOperatorBalanceFreezeResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x02 \x01(\tR\x04cash\"\xc1\x01\n" +
-	"\x1eOperatorBalanceRollbackRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x126\n" +
+	"\x04cash\x18\x02 \x01(\tR\x04cash\"\xb4\x01\n" +
+	"\x1eOperatorBalanceRollbackRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x126\n" +
 	"\x17original_transaction_id\x18\x02 \x01(\x03R\x15originalTransactionId\x12\x12\n" +
-	"\x04memo\x18\x04 \x01(\tR\x04memo\"\xea\x01\n" +
+	"\x04memo\x18\x03 \x01(\tR\x04memo\"\xea\x01\n" +
 	"\x1fOperatorBalanceRollbackResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12\x1f\n" +
 	"\vcash_amount\x18\x03 \x01(\tR\n" +
 	"cashAmount\x12&\n" +
 	"\x0fcash_amount_usd\x18\x04 \x01(\tR\rcashAmountUsd\x12C\n" +
-	"\x1ecash_amount_reporting_currency\x18\x05 \x01(\tR\x1bcashAmountReportingCurrency\"\xdb\x01\n" +
-	"\x1cOperatorBalanceSettleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
+	"\x1ecash_amount_reporting_currency\x18\x05 \x01(\tR\x1bcashAmountReportingCurrency\"\xce\x01\n" +
+	"\x1cOperatorBalanceSettleRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x126\n" +
 	"\x17original_transaction_id\x18\x03 \x01(\x03R\x15originalTransactionId\x12\x12\n" +
-	"\x04memo\x18\x06 \x01(\tR\x04memo\"\xe8\x01\n" +
+	"\x04memo\x18\x04 \x01(\tR\x04memo\"\xe8\x01\n" +
 	"\x1dOperatorBalanceSettleResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12\x1f\n" +
@@ -3654,9 +3654,9 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	46, // 15: api.backoffice.service.v1.OperatorTransferRequest.operator_context:type_name -> api.common.OperatorContext
 	46, // 16: api.backoffice.service.v1.OperatorSwapRequest.operator_context:type_name -> api.common.OperatorContext
 	46, // 17: api.backoffice.service.v1.OperatorSwapRequest.target_operator_context:type_name -> api.common.OperatorContext
-	46, // 18: api.backoffice.service.v1.OperatorBalanceFreezeRequest.target_operator_context:type_name -> api.common.OperatorContext
-	46, // 19: api.backoffice.service.v1.OperatorBalanceRollbackRequest.target_operator_context:type_name -> api.common.OperatorContext
-	46, // 20: api.backoffice.service.v1.OperatorBalanceSettleRequest.target_operator_context:type_name -> api.common.OperatorContext
+	46, // 18: api.backoffice.service.v1.OperatorBalanceFreezeRequest.operator_context:type_name -> api.common.OperatorContext
+	46, // 19: api.backoffice.service.v1.OperatorBalanceRollbackRequest.operator_context:type_name -> api.common.OperatorContext
+	46, // 20: api.backoffice.service.v1.OperatorBalanceSettleRequest.operator_context:type_name -> api.common.OperatorContext
 	45, // 21: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	44, // 22: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
 	44, // 23: api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp

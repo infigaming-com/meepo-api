@@ -4101,8 +4101,8 @@ func (x *OperatorSwapResponse) GetTargetCurrencyBalanceCashReportingCurrency() s
 
 type OperatorFreezeRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`                     // initiator operator context
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"` // target operator context
 	Currency              string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	ReportingCurrency     string                  `protobuf:"bytes,4,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	TransactionType       string                  `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
@@ -4253,8 +4253,8 @@ func (x *OperatorFreezeResponse) GetCash() string {
 
 type OperatorRollbackRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`                     // initiator operator context
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"` // target operator context
 	ExternalTransactionId *int64                  `protobuf:"varint,3,opt,name=external_transaction_id,json=externalTransactionId,proto3,oneof" json:"external_transaction_id,omitempty"`
 	OriginalTransactionId int64                   `protobuf:"varint,4,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
 	TransactionType       string                  `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
@@ -4413,8 +4413,8 @@ func (x *OperatorRollbackResponse) GetCashAmountReportingCurrency() string {
 
 type OperatorSettleRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`                     // initiator operator context
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"` // target operator context
 	Currency              string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	ExternalTransactionId *int64                  `protobuf:"varint,4,opt,name=external_transaction_id,json=externalTransactionId,proto3,oneof" json:"external_transaction_id,omitempty"`
 	OriginalTransactionId int64                   `protobuf:"varint,5,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`

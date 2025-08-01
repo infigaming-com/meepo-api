@@ -728,8 +728,8 @@ message OperatorSwapResponse {
 }
 
 message OperatorFreezeRequest {
-	api.common.OperatorContext operator_context = 1;
-	api.common.OperatorContext target_operator_context = 2;
+	api.common.OperatorContext operator_context = 1; // initiator operator context
+	api.common.OperatorContext target_operator_context = 2; // target operator context
 	string currency = 3;
 	string reporting_currency = 4;
 	string transaction_type = 5;
@@ -744,8 +744,8 @@ message OperatorFreezeResponse {
 }
 
 message OperatorRollbackRequest {
-	api.common.OperatorContext operator_context = 1;
-	api.common.OperatorContext target_operator_context = 2;
+	api.common.OperatorContext operator_context = 1; // initiator operator context
+	api.common.OperatorContext target_operator_context = 2; // target operator context
 	optional int64 external_transaction_id = 3;
 	int64 original_transaction_id = 4;
 	string transaction_type = 5;
@@ -761,8 +761,8 @@ message OperatorRollbackResponse {
 }
 
 message OperatorSettleRequest {
-	api.common.OperatorContext operator_context = 1;
-	api.common.OperatorContext target_operator_context = 2;
+	api.common.OperatorContext operator_context = 1; // initiator operator context
+	api.common.OperatorContext target_operator_context = 2; // target operator context
 	string currency = 3;
 	optional int64 external_transaction_id = 4;
 	int64 original_transaction_id = 5;
