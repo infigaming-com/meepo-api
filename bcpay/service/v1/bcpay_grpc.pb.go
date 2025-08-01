@@ -19,22 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Operator_GetBankAccount_FullMethodName    = "/api.bcpay.service.v1.Operator/GetBankAccount"
-	Operator_CreateWithdraw_FullMethodName    = "/api.bcpay.service.v1.Operator/CreateWithdraw"
-	Operator_CreateMerchant_FullMethodName    = "/api.bcpay.service.v1.Operator/CreateMerchant"
-	Operator_BankAccountList_FullMethodName   = "/api.bcpay.service.v1.Operator/BankAccountList"
-	Operator_AddBankAccount_FullMethodName    = "/api.bcpay.service.v1.Operator/AddBankAccount"
-	Operator_UpdateBankAccount_FullMethodName = "/api.bcpay.service.v1.Operator/UpdateBankAccount"
-	Operator_TransactionList_FullMethodName   = "/api.bcpay.service.v1.Operator/TransactionList"
-	Operator_AuditTransaction_FullMethodName  = "/api.bcpay.service.v1.Operator/AuditTransaction"
+	Bcpay_GetBankAccount_FullMethodName    = "/api.bcpay.service.v1.Bcpay/GetBankAccount"
+	Bcpay_CreateWithdraw_FullMethodName    = "/api.bcpay.service.v1.Bcpay/CreateWithdraw"
+	Bcpay_CreateMerchant_FullMethodName    = "/api.bcpay.service.v1.Bcpay/CreateMerchant"
+	Bcpay_BankAccountList_FullMethodName   = "/api.bcpay.service.v1.Bcpay/BankAccountList"
+	Bcpay_AddBankAccount_FullMethodName    = "/api.bcpay.service.v1.Bcpay/AddBankAccount"
+	Bcpay_UpdateBankAccount_FullMethodName = "/api.bcpay.service.v1.Bcpay/UpdateBankAccount"
+	Bcpay_TransactionList_FullMethodName   = "/api.bcpay.service.v1.Bcpay/TransactionList"
+	Bcpay_AuditTransaction_FullMethodName  = "/api.bcpay.service.v1.Bcpay/AuditTransaction"
 )
 
-// OperatorClient is the client API for Operator service.
+// BcpayClient is the client API for Bcpay service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // User service provides authentication and user management functionality.
-type OperatorClient interface {
+type BcpayClient interface {
 	GetBankAccount(ctx context.Context, in *GetBankAccountRequest, opts ...grpc.CallOption) (*GetBankAccountResponse, error)
 	CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
 	CreateMerchant(ctx context.Context, in *CreateMerchantRequest, opts ...grpc.CallOption) (*CreateMerchantResponse, error)
@@ -45,100 +45,100 @@ type OperatorClient interface {
 	AuditTransaction(ctx context.Context, in *AuditTransactionRequest, opts ...grpc.CallOption) (*AuditTransactionResponse, error)
 }
 
-type operatorClient struct {
+type bcpayClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewOperatorClient(cc grpc.ClientConnInterface) OperatorClient {
-	return &operatorClient{cc}
+func NewBcpayClient(cc grpc.ClientConnInterface) BcpayClient {
+	return &bcpayClient{cc}
 }
 
-func (c *operatorClient) GetBankAccount(ctx context.Context, in *GetBankAccountRequest, opts ...grpc.CallOption) (*GetBankAccountResponse, error) {
+func (c *bcpayClient) GetBankAccount(ctx context.Context, in *GetBankAccountRequest, opts ...grpc.CallOption) (*GetBankAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetBankAccountResponse)
-	err := c.cc.Invoke(ctx, Operator_GetBankAccount_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Bcpay_GetBankAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *operatorClient) CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error) {
+func (c *bcpayClient) CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateWithdrawResponse)
-	err := c.cc.Invoke(ctx, Operator_CreateWithdraw_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Bcpay_CreateWithdraw_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *operatorClient) CreateMerchant(ctx context.Context, in *CreateMerchantRequest, opts ...grpc.CallOption) (*CreateMerchantResponse, error) {
+func (c *bcpayClient) CreateMerchant(ctx context.Context, in *CreateMerchantRequest, opts ...grpc.CallOption) (*CreateMerchantResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateMerchantResponse)
-	err := c.cc.Invoke(ctx, Operator_CreateMerchant_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Bcpay_CreateMerchant_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *operatorClient) BankAccountList(ctx context.Context, in *BankAccountListRequest, opts ...grpc.CallOption) (*BankAccountListResponse, error) {
+func (c *bcpayClient) BankAccountList(ctx context.Context, in *BankAccountListRequest, opts ...grpc.CallOption) (*BankAccountListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(BankAccountListResponse)
-	err := c.cc.Invoke(ctx, Operator_BankAccountList_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Bcpay_BankAccountList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *operatorClient) AddBankAccount(ctx context.Context, in *AddBankAccountRequest, opts ...grpc.CallOption) (*AddBankAccountResponse, error) {
+func (c *bcpayClient) AddBankAccount(ctx context.Context, in *AddBankAccountRequest, opts ...grpc.CallOption) (*AddBankAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddBankAccountResponse)
-	err := c.cc.Invoke(ctx, Operator_AddBankAccount_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Bcpay_AddBankAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *operatorClient) UpdateBankAccount(ctx context.Context, in *UpdateBankAccountRequest, opts ...grpc.CallOption) (*UpdateBankAccountResponse, error) {
+func (c *bcpayClient) UpdateBankAccount(ctx context.Context, in *UpdateBankAccountRequest, opts ...grpc.CallOption) (*UpdateBankAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateBankAccountResponse)
-	err := c.cc.Invoke(ctx, Operator_UpdateBankAccount_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Bcpay_UpdateBankAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *operatorClient) TransactionList(ctx context.Context, in *TransactionListRequest, opts ...grpc.CallOption) (*TransactionListResponse, error) {
+func (c *bcpayClient) TransactionList(ctx context.Context, in *TransactionListRequest, opts ...grpc.CallOption) (*TransactionListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TransactionListResponse)
-	err := c.cc.Invoke(ctx, Operator_TransactionList_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Bcpay_TransactionList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *operatorClient) AuditTransaction(ctx context.Context, in *AuditTransactionRequest, opts ...grpc.CallOption) (*AuditTransactionResponse, error) {
+func (c *bcpayClient) AuditTransaction(ctx context.Context, in *AuditTransactionRequest, opts ...grpc.CallOption) (*AuditTransactionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuditTransactionResponse)
-	err := c.cc.Invoke(ctx, Operator_AuditTransaction_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Bcpay_AuditTransaction_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// OperatorServer is the server API for Operator service.
-// All implementations must embed UnimplementedOperatorServer
+// BcpayServer is the server API for Bcpay service.
+// All implementations must embed UnimplementedBcpayServer
 // for forward compatibility.
 //
 // User service provides authentication and user management functionality.
-type OperatorServer interface {
+type BcpayServer interface {
 	GetBankAccount(context.Context, *GetBankAccountRequest) (*GetBankAccountResponse, error)
 	CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
 	CreateMerchant(context.Context, *CreateMerchantRequest) (*CreateMerchantResponse, error)
@@ -147,243 +147,243 @@ type OperatorServer interface {
 	UpdateBankAccount(context.Context, *UpdateBankAccountRequest) (*UpdateBankAccountResponse, error)
 	TransactionList(context.Context, *TransactionListRequest) (*TransactionListResponse, error)
 	AuditTransaction(context.Context, *AuditTransactionRequest) (*AuditTransactionResponse, error)
-	mustEmbedUnimplementedOperatorServer()
+	mustEmbedUnimplementedBcpayServer()
 }
 
-// UnimplementedOperatorServer must be embedded to have
+// UnimplementedBcpayServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedOperatorServer struct{}
+type UnimplementedBcpayServer struct{}
 
-func (UnimplementedOperatorServer) GetBankAccount(context.Context, *GetBankAccountRequest) (*GetBankAccountResponse, error) {
+func (UnimplementedBcpayServer) GetBankAccount(context.Context, *GetBankAccountRequest) (*GetBankAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBankAccount not implemented")
 }
-func (UnimplementedOperatorServer) CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error) {
+func (UnimplementedBcpayServer) CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateWithdraw not implemented")
 }
-func (UnimplementedOperatorServer) CreateMerchant(context.Context, *CreateMerchantRequest) (*CreateMerchantResponse, error) {
+func (UnimplementedBcpayServer) CreateMerchant(context.Context, *CreateMerchantRequest) (*CreateMerchantResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMerchant not implemented")
 }
-func (UnimplementedOperatorServer) BankAccountList(context.Context, *BankAccountListRequest) (*BankAccountListResponse, error) {
+func (UnimplementedBcpayServer) BankAccountList(context.Context, *BankAccountListRequest) (*BankAccountListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BankAccountList not implemented")
 }
-func (UnimplementedOperatorServer) AddBankAccount(context.Context, *AddBankAccountRequest) (*AddBankAccountResponse, error) {
+func (UnimplementedBcpayServer) AddBankAccount(context.Context, *AddBankAccountRequest) (*AddBankAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddBankAccount not implemented")
 }
-func (UnimplementedOperatorServer) UpdateBankAccount(context.Context, *UpdateBankAccountRequest) (*UpdateBankAccountResponse, error) {
+func (UnimplementedBcpayServer) UpdateBankAccount(context.Context, *UpdateBankAccountRequest) (*UpdateBankAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBankAccount not implemented")
 }
-func (UnimplementedOperatorServer) TransactionList(context.Context, *TransactionListRequest) (*TransactionListResponse, error) {
+func (UnimplementedBcpayServer) TransactionList(context.Context, *TransactionListRequest) (*TransactionListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransactionList not implemented")
 }
-func (UnimplementedOperatorServer) AuditTransaction(context.Context, *AuditTransactionRequest) (*AuditTransactionResponse, error) {
+func (UnimplementedBcpayServer) AuditTransaction(context.Context, *AuditTransactionRequest) (*AuditTransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AuditTransaction not implemented")
 }
-func (UnimplementedOperatorServer) mustEmbedUnimplementedOperatorServer() {}
-func (UnimplementedOperatorServer) testEmbeddedByValue()                  {}
+func (UnimplementedBcpayServer) mustEmbedUnimplementedBcpayServer() {}
+func (UnimplementedBcpayServer) testEmbeddedByValue()               {}
 
-// UnsafeOperatorServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to OperatorServer will
+// UnsafeBcpayServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BcpayServer will
 // result in compilation errors.
-type UnsafeOperatorServer interface {
-	mustEmbedUnimplementedOperatorServer()
+type UnsafeBcpayServer interface {
+	mustEmbedUnimplementedBcpayServer()
 }
 
-func RegisterOperatorServer(s grpc.ServiceRegistrar, srv OperatorServer) {
-	// If the following call pancis, it indicates UnimplementedOperatorServer was
+func RegisterBcpayServer(s grpc.ServiceRegistrar, srv BcpayServer) {
+	// If the following call pancis, it indicates UnimplementedBcpayServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Operator_ServiceDesc, srv)
+	s.RegisterService(&Bcpay_ServiceDesc, srv)
 }
 
-func _Operator_GetBankAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bcpay_GetBankAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetBankAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OperatorServer).GetBankAccount(ctx, in)
+		return srv.(BcpayServer).GetBankAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Operator_GetBankAccount_FullMethodName,
+		FullMethod: Bcpay_GetBankAccount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).GetBankAccount(ctx, req.(*GetBankAccountRequest))
+		return srv.(BcpayServer).GetBankAccount(ctx, req.(*GetBankAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Operator_CreateWithdraw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bcpay_CreateWithdraw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateWithdrawRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OperatorServer).CreateWithdraw(ctx, in)
+		return srv.(BcpayServer).CreateWithdraw(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Operator_CreateWithdraw_FullMethodName,
+		FullMethod: Bcpay_CreateWithdraw_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).CreateWithdraw(ctx, req.(*CreateWithdrawRequest))
+		return srv.(BcpayServer).CreateWithdraw(ctx, req.(*CreateWithdrawRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Operator_CreateMerchant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bcpay_CreateMerchant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateMerchantRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OperatorServer).CreateMerchant(ctx, in)
+		return srv.(BcpayServer).CreateMerchant(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Operator_CreateMerchant_FullMethodName,
+		FullMethod: Bcpay_CreateMerchant_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).CreateMerchant(ctx, req.(*CreateMerchantRequest))
+		return srv.(BcpayServer).CreateMerchant(ctx, req.(*CreateMerchantRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Operator_BankAccountList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bcpay_BankAccountList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BankAccountListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OperatorServer).BankAccountList(ctx, in)
+		return srv.(BcpayServer).BankAccountList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Operator_BankAccountList_FullMethodName,
+		FullMethod: Bcpay_BankAccountList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).BankAccountList(ctx, req.(*BankAccountListRequest))
+		return srv.(BcpayServer).BankAccountList(ctx, req.(*BankAccountListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Operator_AddBankAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bcpay_AddBankAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddBankAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OperatorServer).AddBankAccount(ctx, in)
+		return srv.(BcpayServer).AddBankAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Operator_AddBankAccount_FullMethodName,
+		FullMethod: Bcpay_AddBankAccount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).AddBankAccount(ctx, req.(*AddBankAccountRequest))
+		return srv.(BcpayServer).AddBankAccount(ctx, req.(*AddBankAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Operator_UpdateBankAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bcpay_UpdateBankAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateBankAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OperatorServer).UpdateBankAccount(ctx, in)
+		return srv.(BcpayServer).UpdateBankAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Operator_UpdateBankAccount_FullMethodName,
+		FullMethod: Bcpay_UpdateBankAccount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).UpdateBankAccount(ctx, req.(*UpdateBankAccountRequest))
+		return srv.(BcpayServer).UpdateBankAccount(ctx, req.(*UpdateBankAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Operator_TransactionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bcpay_TransactionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TransactionListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OperatorServer).TransactionList(ctx, in)
+		return srv.(BcpayServer).TransactionList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Operator_TransactionList_FullMethodName,
+		FullMethod: Bcpay_TransactionList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).TransactionList(ctx, req.(*TransactionListRequest))
+		return srv.(BcpayServer).TransactionList(ctx, req.(*TransactionListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Operator_AuditTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bcpay_AuditTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AuditTransactionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OperatorServer).AuditTransaction(ctx, in)
+		return srv.(BcpayServer).AuditTransaction(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Operator_AuditTransaction_FullMethodName,
+		FullMethod: Bcpay_AuditTransaction_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).AuditTransaction(ctx, req.(*AuditTransactionRequest))
+		return srv.(BcpayServer).AuditTransaction(ctx, req.(*AuditTransactionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Operator_ServiceDesc is the grpc.ServiceDesc for Operator service.
+// Bcpay_ServiceDesc is the grpc.ServiceDesc for Bcpay service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Operator_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.bcpay.service.v1.Operator",
-	HandlerType: (*OperatorServer)(nil),
+var Bcpay_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.bcpay.service.v1.Bcpay",
+	HandlerType: (*BcpayServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetBankAccount",
-			Handler:    _Operator_GetBankAccount_Handler,
+			Handler:    _Bcpay_GetBankAccount_Handler,
 		},
 		{
 			MethodName: "CreateWithdraw",
-			Handler:    _Operator_CreateWithdraw_Handler,
+			Handler:    _Bcpay_CreateWithdraw_Handler,
 		},
 		{
 			MethodName: "CreateMerchant",
-			Handler:    _Operator_CreateMerchant_Handler,
+			Handler:    _Bcpay_CreateMerchant_Handler,
 		},
 		{
 			MethodName: "BankAccountList",
-			Handler:    _Operator_BankAccountList_Handler,
+			Handler:    _Bcpay_BankAccountList_Handler,
 		},
 		{
 			MethodName: "AddBankAccount",
-			Handler:    _Operator_AddBankAccount_Handler,
+			Handler:    _Bcpay_AddBankAccount_Handler,
 		},
 		{
 			MethodName: "UpdateBankAccount",
-			Handler:    _Operator_UpdateBankAccount_Handler,
+			Handler:    _Bcpay_UpdateBankAccount_Handler,
 		},
 		{
 			MethodName: "TransactionList",
-			Handler:    _Operator_TransactionList_Handler,
+			Handler:    _Bcpay_TransactionList_Handler,
 		},
 		{
 			MethodName: "AuditTransaction",
-			Handler:    _Operator_AuditTransaction_Handler,
+			Handler:    _Bcpay_AuditTransaction_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
