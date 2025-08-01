@@ -92,6 +92,9 @@ service Operator {
 
 	rpc GetBalancesSummary(GetBalancesSummaryRequest) returns (GetBalancesSummaryResponse) {
 	}
+
+	rpc ListBillingPeriod(ListBillingPeriodRequest) returns (ListBillingPeriodResponse) {
+	}
 }
 
 message AddOperatorRequest {
@@ -609,4 +612,23 @@ message GetBalancesSummaryResponse {
 	string revenue_share_disburse = 9;
 	string revenue_share_collect = 10;
 	string est_net_costs = 11;
+}
+
+message ListBillingPeriodRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+}
+
+message ListBillingPeriodResponse {
+	message BillingPeriod {
+		string start_time = 1;
+		string end_time = 2;
+		string status = 3;
+		string created_at = 4;
+		string updated_at = 5;
+	}
+	repeated BillingPeriod billing_periods = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }
