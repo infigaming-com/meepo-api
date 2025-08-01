@@ -713,6 +713,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetBalancesSummaryResponse'
+    /v1/backoffice/finance/billing-period:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_GetBillingPeriod
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetBillingPeriodRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetBillingPeriodResponse'
     /v1/backoffice/finance/invoice/detail:
         post:
             tags:
@@ -4023,6 +4041,22 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.GetBetByIdResponse_Action'
+        api.backoffice.service.v1.GetBillingPeriodRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.GetBillingPeriodResponse:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                endTime:
+                    type: string
+                status:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
         api.backoffice.service.v1.GetCurrentOperatorDetailsRequest:
             type: object
             properties: {}

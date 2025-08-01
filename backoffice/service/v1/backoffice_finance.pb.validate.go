@@ -3712,6 +3712,220 @@ var _ interface {
 	ErrorName() string
 } = GetBalancesSummaryResponseValidationError{}
 
+// Validate checks the field values on GetBillingPeriodRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetBillingPeriodRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetBillingPeriodRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetBillingPeriodRequestMultiError, or nil if none found.
+func (m *GetBillingPeriodRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBillingPeriodRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetBillingPeriodRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBillingPeriodRequestMultiError is an error wrapping multiple validation
+// errors returned by GetBillingPeriodRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetBillingPeriodRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBillingPeriodRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBillingPeriodRequestMultiError) AllErrors() []error { return m }
+
+// GetBillingPeriodRequestValidationError is the validation error returned by
+// GetBillingPeriodRequest.Validate if the designated constraints aren't met.
+type GetBillingPeriodRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBillingPeriodRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBillingPeriodRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBillingPeriodRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBillingPeriodRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBillingPeriodRequestValidationError) ErrorName() string {
+	return "GetBillingPeriodRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBillingPeriodRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBillingPeriodRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBillingPeriodRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBillingPeriodRequestValidationError{}
+
+// Validate checks the field values on GetBillingPeriodResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetBillingPeriodResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetBillingPeriodResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetBillingPeriodResponseMultiError, or nil if none found.
+func (m *GetBillingPeriodResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBillingPeriodResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for StartTime
+
+	// no validation rules for EndTime
+
+	// no validation rules for Status
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for UpdatedAt
+
+	if len(errors) > 0 {
+		return GetBillingPeriodResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBillingPeriodResponseMultiError is an error wrapping multiple validation
+// errors returned by GetBillingPeriodResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetBillingPeriodResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBillingPeriodResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBillingPeriodResponseMultiError) AllErrors() []error { return m }
+
+// GetBillingPeriodResponseValidationError is the validation error returned by
+// GetBillingPeriodResponse.Validate if the designated constraints aren't met.
+type GetBillingPeriodResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBillingPeriodResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBillingPeriodResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBillingPeriodResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBillingPeriodResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBillingPeriodResponseValidationError) ErrorName() string {
+	return "GetBillingPeriodResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBillingPeriodResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBillingPeriodResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBillingPeriodResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBillingPeriodResponseValidationError{}
+
 // Validate checks the field values on ListInvoicesResponse_Invoice with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

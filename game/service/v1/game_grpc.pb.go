@@ -43,6 +43,7 @@ const (
 	Game_ListProviderRates_FullMethodName                 = "/api.game.service.v1.Game/ListProviderRates"
 	Game_GetGameTransactionById_FullMethodName            = "/api.game.service.v1.Game/GetGameTransactionById"
 	Game_GetDailyGameTransactionData_FullMethodName       = "/api.game.service.v1.Game/GetDailyGameTransactionData"
+	Game_ListProviderByIDs_FullMethodName                 = "/api.game.service.v1.Game/ListProviderByIDs"
 )
 
 // GameClient is the client API for Game service.
@@ -73,6 +74,7 @@ type GameClient interface {
 	ListProviderRates(ctx context.Context, in *ListProviderRatesRequest, opts ...grpc.CallOption) (*ListProviderRatesResponse, error)
 	GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*GetGameTransactionByIdResponse, error)
 	GetDailyGameTransactionData(ctx context.Context, in *GetDailyGameTransactionDataRequest, opts ...grpc.CallOption) (*GetDailyGameTransactionDataResponse, error)
+	ListProviderByIDs(ctx context.Context, in *ListProviderByIDsRequest, opts ...grpc.CallOption) (*ListProviderByIDsResponse, error)
 }
 
 type gameClient struct {
@@ -323,6 +325,16 @@ func (c *gameClient) GetDailyGameTransactionData(ctx context.Context, in *GetDai
 	return out, nil
 }
 
+func (c *gameClient) ListProviderByIDs(ctx context.Context, in *ListProviderByIDsRequest, opts ...grpc.CallOption) (*ListProviderByIDsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListProviderByIDsResponse)
+	err := c.cc.Invoke(ctx, Game_ListProviderByIDs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -351,6 +363,7 @@ type GameServer interface {
 	ListProviderRates(context.Context, *ListProviderRatesRequest) (*ListProviderRatesResponse, error)
 	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*GetGameTransactionByIdResponse, error)
 	GetDailyGameTransactionData(context.Context, *GetDailyGameTransactionDataRequest) (*GetDailyGameTransactionDataResponse, error)
+	ListProviderByIDs(context.Context, *ListProviderByIDsRequest) (*ListProviderByIDsResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -432,6 +445,9 @@ func (UnimplementedGameServer) GetGameTransactionById(context.Context, *GetGameT
 }
 func (UnimplementedGameServer) GetDailyGameTransactionData(context.Context, *GetDailyGameTransactionDataRequest) (*GetDailyGameTransactionDataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDailyGameTransactionData not implemented")
+}
+func (UnimplementedGameServer) ListProviderByIDs(context.Context, *ListProviderByIDsRequest) (*ListProviderByIDsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProviderByIDs not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -886,6 +902,24 @@ func _Game_GetDailyGameTransactionData_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_ListProviderByIDs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProviderByIDsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListProviderByIDs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListProviderByIDs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListProviderByIDs(ctx, req.(*ListProviderByIDsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -988,6 +1022,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDailyGameTransactionData",
 			Handler:    _Game_GetDailyGameTransactionData_Handler,
+		},
+		{
+			MethodName: "ListProviderByIDs",
+			Handler:    _Game_ListProviderByIDs_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
