@@ -2064,7 +2064,7 @@ type OperatorBalanceSettleRequest struct {
 	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Currency              string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	OriginalTransactionId int64                   `protobuf:"varint,3,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
-	Memo                  string                  `protobuf:"bytes,5,opt,name=memo,proto3" json:"memo,omitempty"`
+	Memo                  string                  `protobuf:"bytes,4,opt,name=memo,proto3" json:"memo,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -3495,7 +3495,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x126\n" +
 	"\x17original_transaction_id\x18\x03 \x01(\x03R\x15originalTransactionId\x12\x12\n" +
-	"\x04memo\x18\x05 \x01(\tR\x04memo\"\xe8\x01\n" +
+	"\x04memo\x18\x04 \x01(\tR\x04memo\"\xe8\x01\n" +
 	"\x1dOperatorBalanceSettleResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12\x1f\n" +
